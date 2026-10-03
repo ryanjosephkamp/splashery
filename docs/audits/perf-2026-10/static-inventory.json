@@ -1,0 +1,5426 @@
+[
+  {
+    "id": "cactus",
+    "toyLine": 45,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cactus/thumb.webp",
+      "exists": true,
+      "bytes": 9872
+    },
+    "full": {
+      "path": "assets/toys/cactus/cactus.sog",
+      "exists": true,
+      "bytes": 5869356,
+      "splats": 450000
+    },
+    "lite": {
+      "path": "assets/toys/cactus/cactus-lite.sog",
+      "exists": true,
+      "bytes": 1612777,
+      "splats": 120000
+    },
+    "rigAddonSplats": 8100
+  },
+  {
+    "id": "strawberry",
+    "toyLine": 62,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/strawberry/thumb.webp",
+      "exists": true,
+      "bytes": 11586
+    },
+    "full": {
+      "path": "assets/toys/strawberry/strawberry.sog",
+      "exists": true,
+      "bytes": 5878587,
+      "splats": 450000
+    },
+    "lite": {
+      "path": "assets/toys/strawberry/strawberry-lite.sog",
+      "exists": true,
+      "bytes": 1594433,
+      "splats": 120000
+    }
+  },
+  {
+    "id": "cookie",
+    "toyLine": 80,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cookie/thumb.webp",
+      "exists": true,
+      "bytes": 10846
+    },
+    "full": {
+      "path": "assets/toys/cookie/cookie.sog",
+      "exists": true,
+      "bytes": 5249600,
+      "splats": 419948
+    },
+    "lite": {
+      "path": "assets/toys/cookie/cookie-lite.sog",
+      "exists": true,
+      "bytes": 1615095,
+      "splats": 120000
+    }
+  },
+  {
+    "id": "bee",
+    "toyLine": 97,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bee/thumb.webp",
+      "exists": true,
+      "bytes": 11922
+    },
+    "full": {
+      "path": "assets/toys/bee/bee.sog",
+      "exists": true,
+      "bytes": 5867600,
+      "splats": 450000
+    },
+    "lite": {
+      "path": "assets/toys/bee/bee-lite.sog",
+      "exists": true,
+      "bytes": 1612064,
+      "splats": 120000
+    }
+  },
+  {
+    "id": "torus",
+    "toyLine": 115,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/torus/thumb.webp",
+      "exists": true,
+      "bytes": 2420
+    },
+    "packSource": "src/packs/shapes-torus.js",
+    "recipeMappingLine": 272,
+    "recipeMapping": "{",
+    "packBytes": 11503
+  },
+  {
+    "id": "blob",
+    "toyLine": 124,
+    "kind": "procedural",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/blob/thumb.webp",
+      "exists": true,
+      "bytes": 5400
+    }
+  },
+  {
+    "id": "knot",
+    "toyLine": 139,
+    "kind": "procedural",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/knot/thumb.webp",
+      "exists": true,
+      "bytes": 6560
+    }
+  },
+  {
+    "id": "cluster-fly",
+    "toyLine": 155,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cluster-fly/thumb.webp",
+      "exists": true,
+      "bytes": 13314
+    },
+    "full": {
+      "path": "assets/toys/cluster-fly/cluster-fly.sog",
+      "exists": true,
+      "bytes": 3809628,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/cluster-fly/cluster-fly-lite.sog",
+      "exists": true,
+      "bytes": 1305674,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "may-beetle",
+    "toyLine": 172,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/may-beetle/thumb.webp",
+      "exists": true,
+      "bytes": 9856
+    },
+    "full": {
+      "path": "assets/toys/may-beetle/may-beetle.sog",
+      "exists": true,
+      "bytes": 3874798,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/may-beetle/may-beetle-lite.sog",
+      "exists": true,
+      "bytes": 1320862,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "millipede",
+    "toyLine": 189,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/millipede/thumb.webp",
+      "exists": true,
+      "bytes": 6578
+    },
+    "full": {
+      "path": "assets/toys/millipede/millipede.sog",
+      "exists": true,
+      "bytes": 1559929,
+      "splats": 116374
+    },
+    "lite": {
+      "path": "assets/toys/millipede/millipede-lite.sog",
+      "exists": true,
+      "bytes": 1352085,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "bumblebee",
+    "toyLine": 206,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bumblebee/thumb.webp",
+      "exists": true,
+      "bytes": 13314
+    },
+    "full": {
+      "path": "assets/toys/bumblebee/bumblebee.sog",
+      "exists": true,
+      "bytes": 3915129,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/bumblebee/bumblebee-lite.sog",
+      "exists": true,
+      "bytes": 1342259,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "raspberry",
+    "toyLine": 223,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/raspberry/thumb.webp",
+      "exists": true,
+      "bytes": 11614
+    },
+    "full": {
+      "path": "assets/toys/raspberry/raspberry.sog",
+      "exists": true,
+      "bytes": 3783085,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/raspberry/raspberry-lite.sog",
+      "exists": true,
+      "bytes": 1298343,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "blackberry",
+    "toyLine": 240,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/blackberry/thumb.webp",
+      "exists": true,
+      "bytes": 6704
+    },
+    "full": {
+      "path": "assets/toys/blackberry/blackberry.sog",
+      "exists": true,
+      "bytes": 3885331,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/blackberry/blackberry-lite.sog",
+      "exists": true,
+      "bytes": 1316488,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "blueberry",
+    "toyLine": 257,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/blueberry/thumb.webp",
+      "exists": true,
+      "bytes": 11212
+    },
+    "full": {
+      "path": "assets/toys/blueberry/blueberry.sog",
+      "exists": true,
+      "bytes": 3482628,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/blueberry/blueberry-lite.sog",
+      "exists": true,
+      "bytes": 1236355,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "grape",
+    "toyLine": 274,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/grape/thumb.webp",
+      "exists": true,
+      "bytes": 5934
+    },
+    "full": {
+      "path": "assets/toys/grape/grape.sog",
+      "exists": true,
+      "bytes": 3612713,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/grape/grape-lite.sog",
+      "exists": true,
+      "bytes": 1287339,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "star-cookie",
+    "toyLine": 291,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/star-cookie/thumb.webp",
+      "exists": true,
+      "bytes": 8384
+    },
+    "full": {
+      "path": "assets/toys/star-cookie/star-cookie.sog",
+      "exists": true,
+      "bytes": 3882907,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/star-cookie/star-cookie-lite.sog",
+      "exists": true,
+      "bytes": 1349720,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "tomatoes",
+    "toyLine": 309,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tomatoes/thumb.webp",
+      "exists": true,
+      "bytes": 7696
+    },
+    "full": {
+      "path": "assets/toys/tomatoes/tomatoes.sog",
+      "exists": true,
+      "bytes": 2842254,
+      "splats": 217965
+    },
+    "lite": {
+      "path": "assets/toys/tomatoes/tomatoes-lite.sog",
+      "exists": true,
+      "bytes": 1344843,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "mandeltorus",
+    "toyLine": 326,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/mandeltorus/thumb.webp",
+      "exists": true,
+      "bytes": 21016
+    },
+    "full": {
+      "path": "assets/toys/mandeltorus/mandeltorus.sog",
+      "exists": true,
+      "bytes": 4006791,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/mandeltorus/mandeltorus-lite.sog",
+      "exists": true,
+      "bytes": 1371686,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "basket",
+    "toyLine": 343,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/basket/thumb.webp",
+      "exists": true,
+      "bytes": 27572
+    },
+    "full": {
+      "path": "assets/toys/basket/basket.sog",
+      "exists": true,
+      "bytes": 3955098,
+      "splats": 300000
+    },
+    "lite": {
+      "path": "assets/toys/basket/basket-lite.sog",
+      "exists": true,
+      "bytes": 1338207,
+      "splats": 100000
+    }
+  },
+  {
+    "id": "rubber-duck-real",
+    "toyLine": 363,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rubber-duck-real/thumb.webp",
+      "exists": true,
+      "bytes": 4170
+    },
+    "full": {
+      "path": "assets/toys/rubber-duck-real/rubber-duck-real.sog",
+      "exists": true,
+      "bytes": 2045335,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/rubber-duck-real/rubber-duck-real-lite.sog",
+      "exists": true,
+      "bytes": 857439,
+      "splats": 80000
+    }
+  },
+  {
+    "id": "garden-gnome",
+    "toyLine": 381,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/garden-gnome/thumb.webp",
+      "exists": true,
+      "bytes": 4336
+    },
+    "full": {
+      "path": "assets/toys/garden-gnome/garden-gnome.sog",
+      "exists": true,
+      "bytes": 2193385,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/garden-gnome/garden-gnome-lite.sog",
+      "exists": true,
+      "bytes": 919134,
+      "splats": 80000
+    },
+    "rigAddonSplats": 3120
+  },
+  {
+    "id": "wooden-elephant",
+    "toyLine": 399,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/wooden-elephant/thumb.webp",
+      "exists": true,
+      "bytes": 4546
+    },
+    "full": {
+      "path": "assets/toys/wooden-elephant/wooden-elephant.sog",
+      "exists": true,
+      "bytes": 2189411,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/wooden-elephant/wooden-elephant-lite.sog",
+      "exists": true,
+      "bytes": 917077,
+      "splats": 80000
+    },
+    "rigAddonSplats": 24978
+  },
+  {
+    "id": "marble-bust",
+    "toyLine": 417,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/marble-bust/thumb.webp",
+      "exists": true,
+      "bytes": 3864
+    },
+    "full": {
+      "path": "assets/toys/marble-bust/marble-bust.sog",
+      "exists": true,
+      "bytes": 2265783,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/marble-bust/marble-bust-lite.sog",
+      "exists": true,
+      "bytes": 945313,
+      "splats": 80000
+    },
+    "rigAddonSplats": 10574
+  },
+  {
+    "id": "ukulele",
+    "toyLine": 435,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ukulele/thumb.webp",
+      "exists": true,
+      "bytes": 3574
+    },
+    "full": {
+      "path": "assets/toys/ukulele/ukulele.sog",
+      "exists": true,
+      "bytes": 2057509,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/ukulele/ukulele-lite.sog",
+      "exists": true,
+      "bytes": 854823,
+      "splats": 80000
+    },
+    "rigAddonSplats": 1977
+  },
+  {
+    "id": "alarm-clock",
+    "toyLine": 453,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/alarm-clock/thumb.webp",
+      "exists": true,
+      "bytes": 8126
+    },
+    "full": {
+      "path": "assets/toys/alarm-clock/alarm-clock.sog",
+      "exists": true,
+      "bytes": 2072377,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/alarm-clock/alarm-clock-lite.sog",
+      "exists": true,
+      "bytes": 870310,
+      "splats": 80000
+    },
+    "rigAddonSplats": 2000
+  },
+  {
+    "id": "vintage-camera",
+    "toyLine": 471,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/vintage-camera/thumb.webp",
+      "exists": true,
+      "bytes": 3792
+    },
+    "full": {
+      "path": "assets/toys/vintage-camera/vintage-camera.sog",
+      "exists": true,
+      "bytes": 2100750,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/vintage-camera/vintage-camera-lite.sog",
+      "exists": true,
+      "bytes": 883402,
+      "splats": 80000
+    },
+    "rigAddonSplats": 3500
+  },
+  {
+    "id": "boombox",
+    "toyLine": 489,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/boombox/thumb.webp",
+      "exists": true,
+      "bytes": 3736
+    },
+    "full": {
+      "path": "assets/toys/boombox/boombox.sog",
+      "exists": true,
+      "bytes": 1779080,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/boombox/boombox-lite.sog",
+      "exists": true,
+      "bytes": 753179,
+      "splats": 80000
+    }
+  },
+  {
+    "id": "croissant-real",
+    "toyLine": 507,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/croissant-real/thumb.webp",
+      "exists": true,
+      "bytes": 3400
+    },
+    "full": {
+      "path": "assets/toys/croissant-real/croissant-real.sog",
+      "exists": true,
+      "bytes": 2257674,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/croissant-real/croissant-real-lite.sog",
+      "exists": true,
+      "bytes": 940584,
+      "splats": 80000
+    },
+    "rigAddonSplats": 7020
+  },
+  {
+    "id": "carrot-cake",
+    "toyLine": 525,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/carrot-cake/thumb.webp",
+      "exists": true,
+      "bytes": 5454
+    },
+    "full": {
+      "path": "assets/toys/carrot-cake/carrot-cake.sog",
+      "exists": true,
+      "bytes": 2295550,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/carrot-cake/carrot-cake-lite.sog",
+      "exists": true,
+      "bytes": 950003,
+      "splats": 80000
+    },
+    "rigAddonSplats": 12000
+  },
+  {
+    "id": "pomegranate",
+    "toyLine": 543,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pomegranate/thumb.webp",
+      "exists": true,
+      "bytes": 7394
+    },
+    "full": {
+      "path": "assets/toys/pomegranate/pomegranate.sog",
+      "exists": true,
+      "bytes": 2312484,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/pomegranate/pomegranate-lite.sog",
+      "exists": true,
+      "bytes": 967796,
+      "splats": 80000
+    },
+    "rigAddonSplats": 14000
+  },
+  {
+    "id": "lantern",
+    "toyLine": 561,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lantern/thumb.webp",
+      "exists": true,
+      "bytes": 6250
+    },
+    "full": {
+      "path": "assets/toys/lantern/lantern.sog",
+      "exists": true,
+      "bytes": 2315868,
+      "splats": 199481
+    },
+    "lite": {
+      "path": "assets/toys/lantern/lantern-lite.sog",
+      "exists": true,
+      "bytes": 961698,
+      "splats": 80000
+    },
+    "rigAddonSplats": 4150
+  },
+  {
+    "id": "cat-statue",
+    "toyLine": 579,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cat-statue/thumb.webp",
+      "exists": true,
+      "bytes": 6210
+    },
+    "full": {
+      "path": "assets/toys/cat-statue/cat-statue.sog",
+      "exists": true,
+      "bytes": 2294489,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/cat-statue/cat-statue-lite.sog",
+      "exists": true,
+      "bytes": 959309,
+      "splats": 80000
+    },
+    "rigAddonSplats": 9000
+  },
+  {
+    "id": "horse-statue",
+    "toyLine": 597,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/horse-statue/thumb.webp",
+      "exists": true,
+      "bytes": 4640
+    },
+    "full": {
+      "path": "assets/toys/horse-statue/horse-statue.sog",
+      "exists": true,
+      "bytes": 2110783,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/horse-statue/horse-statue-lite.sog",
+      "exists": true,
+      "bytes": 884285,
+      "splats": 80000
+    }
+  },
+  {
+    "id": "pencil-real",
+    "toyLine": 616,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pencil-real/thumb.webp",
+      "exists": true,
+      "bytes": 3600
+    },
+    "full": {
+      "path": "assets/toys/pencil-real/pencil-real.sog",
+      "exists": true,
+      "bytes": 1005540,
+      "splats": 87392
+    },
+    "lite": {
+      "path": "assets/toys/pencil-real/pencil-real-lite.sog",
+      "exists": true,
+      "bytes": 932222,
+      "splats": 80000
+    }
+  },
+  {
+    "id": "tin-can-real",
+    "toyLine": 674,
+    "kind": "captured",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tin-can-real/thumb.webp",
+      "exists": true,
+      "bytes": 9640
+    },
+    "full": {
+      "path": "assets/toys/tin-can-real/tin-can-real.sog",
+      "exists": true,
+      "bytes": 2369896,
+      "splats": 200000
+    },
+    "lite": {
+      "path": "assets/toys/tin-can-real/tin-can-real-lite.sog",
+      "exists": true,
+      "bytes": 1921805,
+      "splats": 160000
+    }
+  },
+  {
+    "id": "basketball",
+    "toyLine": 715,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/basketball/thumb.webp",
+      "exists": true,
+      "bytes": 7778
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1530,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "soccer-ball",
+    "toyLine": 723,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/soccer-ball/thumb.webp",
+      "exists": true,
+      "bytes": 4836
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1558,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "american-football",
+    "toyLine": 731,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/american-football/thumb.webp",
+      "exists": true,
+      "bytes": 3310
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1594,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "tennis-ball",
+    "toyLine": 740,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tennis-ball/thumb.webp",
+      "exists": true,
+      "bytes": 5968
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1681,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "baseball",
+    "toyLine": 748,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/baseball/thumb.webp",
+      "exists": true,
+      "bytes": 4406
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1741,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "softball",
+    "toyLine": 756,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/softball/thumb.webp",
+      "exists": true,
+      "bytes": 4884
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1755,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "beach-ball",
+    "toyLine": 764,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/beach-ball/thumb.webp",
+      "exists": true,
+      "bytes": 3734
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1769,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "golf-ball",
+    "toyLine": 772,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/golf-ball/thumb.webp",
+      "exists": true,
+      "bytes": 3786
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1796,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "rugby-ball",
+    "toyLine": 780,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rugby-ball/thumb.webp",
+      "exists": true,
+      "bytes": 4334
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1855,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "volleyball",
+    "toyLine": 788,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/volleyball/thumb.webp",
+      "exists": true,
+      "bytes": 5090
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1899,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "water-polo-ball",
+    "toyLine": 796,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/water-polo-ball/thumb.webp",
+      "exists": true,
+      "bytes": 5646
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1918,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "ping-pong-ball",
+    "toyLine": 804,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ping-pong-ball/thumb.webp",
+      "exists": true,
+      "bytes": 1970
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 1979,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "cricket-ball",
+    "toyLine": 812,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cricket-ball/thumb.webp",
+      "exists": true,
+      "bytes": 4834
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2004,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "bowling-ball",
+    "toyLine": 820,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bowling-ball/thumb.webp",
+      "exists": true,
+      "bytes": 8014
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2041,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "pool-ball",
+    "toyLine": 828,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pool-ball/thumb.webp",
+      "exists": true,
+      "bytes": 2896
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2072,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "pickleball",
+    "toyLine": 836,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pickleball/thumb.webp",
+      "exists": true,
+      "bytes": 4418
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2122,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "dodgeball",
+    "toyLine": 844,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/dodgeball/thumb.webp",
+      "exists": true,
+      "bytes": 3834
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2150,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "medicine-ball",
+    "toyLine": 852,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/medicine-ball/thumb.webp",
+      "exists": true,
+      "bytes": 6554
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2160,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "lacrosse-ball",
+    "toyLine": 860,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lacrosse-ball/thumb.webp",
+      "exists": true,
+      "bytes": 2912
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2202,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "squash-ball",
+    "toyLine": 868,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/squash-ball/thumb.webp",
+      "exists": true,
+      "bytes": 5322
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2212,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "bouncy-ball",
+    "toyLine": 876,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bouncy-ball/thumb.webp",
+      "exists": true,
+      "bytes": 9422
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2243,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "marble",
+    "toyLine": 884,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/marble/thumb.webp",
+      "exists": true,
+      "bytes": 13242
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2257,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "hockey-puck",
+    "toyLine": 892,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/hockey-puck/thumb.webp",
+      "exists": true,
+      "bytes": 2082
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2373,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "shuttlecock",
+    "toyLine": 900,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/shuttlecock/thumb.webp",
+      "exists": true,
+      "bytes": 4168
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2455,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "flying-disc",
+    "toyLine": 908,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/flying-disc/thumb.webp",
+      "exists": true,
+      "bytes": 2458
+    },
+    "packSource": "src/packs/balls.js",
+    "recipeMappingLine": 2523,
+    "recipeMapping": "{",
+    "packBytes": 97250
+  },
+  {
+    "id": "heart",
+    "toyLine": 916,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/heart/thumb.webp",
+      "exists": true,
+      "bytes": 4598
+    },
+    "packSource": "src/packs/anatomy.js",
+    "recipeMappingLine": 194,
+    "recipeMapping": "{",
+    "packBytes": 50426
+  },
+  {
+    "id": "campfire",
+    "toyLine": 924,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/campfire/thumb.webp",
+      "exists": true,
+      "bytes": 12876
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 1127,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "chest",
+    "toyLine": 933,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/chest/thumb.webp",
+      "exists": true,
+      "bytes": 6286
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 586,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "sun",
+    "toyLine": 943,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sun/thumb.webp",
+      "exists": true,
+      "bytes": 13206
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 1584,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "solar-system",
+    "toyLine": 951,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/solar-system/thumb.webp",
+      "exists": true,
+      "bytes": 13724
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 2966,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "mercury",
+    "toyLine": 960,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/mercury/thumb.webp",
+      "exists": true,
+      "bytes": 7614
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3080,
+    "recipeMapping": "(c",
+    "packBytes": 176427
+  },
+  {
+    "id": "venus",
+    "toyLine": 968,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/venus/thumb.webp",
+      "exists": true,
+      "bytes": 9564
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3081,
+    "recipeMapping": "(c",
+    "packBytes": 176427
+  },
+  {
+    "id": "earth",
+    "toyLine": 976,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/earth/thumb.webp",
+      "exists": true,
+      "bytes": 12470
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3082,
+    "recipeMapping": "earthSurface(noise)",
+    "packBytes": 176427
+  },
+  {
+    "id": "moon",
+    "toyLine": 984,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/moon/thumb.webp",
+      "exists": true,
+      "bytes": 6484
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 2020,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "mars",
+    "toyLine": 992,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/mars/thumb.webp",
+      "exists": true,
+      "bytes": 10660
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3083,
+    "recipeMapping": "(c",
+    "packBytes": 176427
+  },
+  {
+    "id": "jupiter",
+    "toyLine": 1000,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/jupiter/thumb.webp",
+      "exists": true,
+      "bytes": 6628
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3087,
+    "recipeMapping": "jupiterSurface(noise",
+    "packBytes": 176427
+  },
+  {
+    "id": "saturn",
+    "toyLine": 1008,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/saturn/thumb.webp",
+      "exists": true,
+      "bytes": 9740
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3088,
+    "recipeMapping": "saturnSurface(noise)",
+    "packBytes": 176427
+  },
+  {
+    "id": "uranus",
+    "toyLine": 1017,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/uranus/thumb.webp",
+      "exists": true,
+      "bytes": 12908
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3089,
+    "recipeMapping": "(c",
+    "packBytes": 176427
+  },
+  {
+    "id": "neptune",
+    "toyLine": 1026,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/neptune/thumb.webp",
+      "exists": true,
+      "bytes": 9064
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3090,
+    "recipeMapping": "(c",
+    "packBytes": 176427
+  },
+  {
+    "id": "planet",
+    "toyLine": 1034,
+    "kind": "procedural",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/planet/thumb.webp",
+      "exists": true,
+      "bytes": 11818
+    }
+  },
+  {
+    "id": "aurora-planet",
+    "toyLine": 1060,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/aurora-planet/thumb.webp",
+      "exists": true,
+      "bytes": 11940
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 4278,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "asteroid",
+    "toyLine": 1068,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/asteroid/thumb.webp",
+      "exists": true,
+      "bytes": 4614
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 2431,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "comet",
+    "toyLine": 1076,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/comet/thumb.webp",
+      "exists": true,
+      "bytes": 10370
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3153,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "meteor",
+    "toyLine": 1084,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/meteor/thumb.webp",
+      "exists": true,
+      "bytes": 17060
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 4392,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "star",
+    "toyLine": 1092,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/star/thumb.webp",
+      "exists": true,
+      "bytes": 10084
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3331,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "pulsar",
+    "toyLine": 1100,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pulsar/thumb.webp",
+      "exists": true,
+      "bytes": 5522
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3559,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "black-hole",
+    "toyLine": 1108,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/black-hole/thumb.webp",
+      "exists": true,
+      "bytes": 7322
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3713,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "star-cluster",
+    "toyLine": 1117,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/star-cluster/thumb.webp",
+      "exists": true,
+      "bytes": 23416
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 4184,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "planetary-nebula",
+    "toyLine": 1125,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/planetary-nebula/thumb.webp",
+      "exists": true,
+      "bytes": 14758
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 3887,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "nebula",
+    "toyLine": 1134,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/nebula/thumb.webp",
+      "exists": true,
+      "bytes": 17642
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 2745,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "supernova",
+    "toyLine": 1143,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/supernova/thumb.webp",
+      "exists": true,
+      "bytes": 21474
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 4007,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "spiral-galaxy",
+    "toyLine": 1151,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/spiral-galaxy/thumb.webp",
+      "exists": true,
+      "bytes": 16570
+    },
+    "packSource": "src/packs/space.js",
+    "recipeMappingLine": 2555,
+    "recipeMapping": "{",
+    "packBytes": 176427
+  },
+  {
+    "id": "virus",
+    "toyLine": 1163,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/virus/thumb.webp",
+      "exists": true,
+      "bytes": 8916
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 272,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "bacteriophage",
+    "toyLine": 1171,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bacteriophage/thumb.webp",
+      "exists": true,
+      "bytes": 5342
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 421,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "bacterium",
+    "toyLine": 1180,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bacterium/thumb.webp",
+      "exists": true,
+      "bytes": 5722
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1657,
+    "recipeMapping": "built where it ends up (inside the cell)",
+    "packBytes": 120392
+  },
+  {
+    "id": "red-blood-cell",
+    "toyLine": 1188,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/red-blood-cell/thumb.webp",
+      "exists": true,
+      "bytes": 3898
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 780,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "neuron",
+    "toyLine": 1196,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/neuron/thumb.webp",
+      "exists": true,
+      "bytes": 5292
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 856,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "astrocyte",
+    "toyLine": 1205,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/astrocyte/thumb.webp",
+      "exists": true,
+      "bytes": 7440
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1047,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "animal-cell",
+    "toyLine": 1213,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/animal-cell/thumb.webp",
+      "exists": true,
+      "bytes": 12094
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1177,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "dna",
+    "toyLine": 1221,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/dna/thumb.webp",
+      "exists": true,
+      "bytes": 5512
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1440,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "white-blood-cell",
+    "toyLine": 1230,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/white-blood-cell/thumb.webp",
+      "exists": true,
+      "bytes": 10210
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1546,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "microglia",
+    "toyLine": 1238,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/microglia/thumb.webp",
+      "exists": true,
+      "bytes": 6206
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1689,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "diatom",
+    "toyLine": 1246,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/diatom/thumb.webp",
+      "exists": true,
+      "bytes": 8942
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1783,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "tardigrade",
+    "toyLine": 1255,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tardigrade/thumb.webp",
+      "exists": true,
+      "bytes": 3342
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 1897,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "pollen",
+    "toyLine": 1263,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pollen/thumb.webp",
+      "exists": true,
+      "bytes": 7826
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 2019,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "snowflake",
+    "toyLine": 1271,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/snowflake/thumb.webp",
+      "exists": true,
+      "bytes": 11816
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 2173,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "chromosome",
+    "toyLine": 1280,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/chromosome/thumb.webp",
+      "exists": true,
+      "bytes": 4122
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 2218,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "mitochondrion",
+    "toyLine": 1288,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/mitochondrion/thumb.webp",
+      "exists": true,
+      "bytes": 4638
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 2335,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "paramecium",
+    "toyLine": 1296,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/paramecium/thumb.webp",
+      "exists": true,
+      "bytes": 9880
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 2479,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "amoeba",
+    "toyLine": 1304,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/amoeba/thumb.webp",
+      "exists": true,
+      "bytes": 8414
+    },
+    "packSource": "src/packs/tiny.js",
+    "recipeMappingLine": 2635,
+    "recipeMapping": "{",
+    "packBytes": 120392
+  },
+  {
+    "id": "orbital",
+    "toyLine": 1316,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/orbital/thumb.webp",
+      "exists": true,
+      "bytes": 13136
+    },
+    "packSource": "src/packs/atoms.js",
+    "recipeMappingLine": 1496,
+    "recipeMapping": "{",
+    "packBytes": 81755
+  },
+  {
+    "id": "atom",
+    "toyLine": 1324,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/atom/thumb.webp",
+      "exists": true,
+      "bytes": 7236
+    },
+    "packSource": "src/packs/atoms.js",
+    "recipeMappingLine": 1651,
+    "recipeMapping": "the electrons whirl faster and faster until",
+    "packBytes": 81755
+  },
+  {
+    "id": "molecule",
+    "toyLine": 1332,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/molecule/thumb.webp",
+      "exists": true,
+      "bytes": 4740
+    },
+    "packSource": "src/packs/atoms.js",
+    "recipeMappingLine": 1841,
+    "recipeMapping": "every bond stretches and squeezes hard at its own pace",
+    "packBytes": 81755
+  },
+  {
+    "id": "protein",
+    "toyLine": 1340,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/protein/thumb.webp",
+      "exists": true,
+      "bytes": 5630
+    },
+    "packSource": "src/packs/atoms.js",
+    "recipeMappingLine": 2096,
+    "recipeMapping": "{",
+    "packBytes": 81755
+  },
+  {
+    "id": "crystal-lattice",
+    "toyLine": 1348,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/crystal-lattice/thumb.webp",
+      "exists": true,
+      "bytes": 17068
+    },
+    "packSource": "src/packs/atoms.js",
+    "recipeMappingLine": 1964,
+    "recipeMapping": "{",
+    "packBytes": 81755
+  },
+  {
+    "id": "periodic-table",
+    "toyLine": 1358,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/periodic-table/thumb.webp",
+      "exists": true,
+      "bytes": 15372
+    },
+    "packSource": "src/packs/chemistry.js",
+    "recipeMappingLine": 347,
+    "recipeMapping": "{",
+    "packBytes": 34334
+  },
+  {
+    "id": "diamond",
+    "toyLine": 1370,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/diamond/thumb.webp",
+      "exists": true,
+      "bytes": 4042
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 504,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "ruby",
+    "toyLine": 1378,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ruby/thumb.webp",
+      "exists": true,
+      "bytes": 4910
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 550,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "emerald",
+    "toyLine": 1386,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/emerald/thumb.webp",
+      "exists": true,
+      "bytes": 3884
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 613,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "amethyst-geode",
+    "toyLine": 1394,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/amethyst-geode/thumb.webp",
+      "exists": true,
+      "bytes": 6988
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 764,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "sapphire",
+    "toyLine": 1402,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sapphire/thumb.webp",
+      "exists": true,
+      "bytes": 4356
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 653,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "quartz-cluster",
+    "toyLine": 1410,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/quartz-cluster/thumb.webp",
+      "exists": true,
+      "bytes": 5014
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 948,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "opal",
+    "toyLine": 1418,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/opal/thumb.webp",
+      "exists": true,
+      "bytes": 5510
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 1069,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "pearl",
+    "toyLine": 1426,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pearl/thumb.webp",
+      "exists": true,
+      "bytes": 4324
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 1186,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "brain",
+    "toyLine": 1437,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/brain/thumb.webp",
+      "exists": true,
+      "bytes": 6906
+    },
+    "packSource": "src/packs/anatomy.js",
+    "recipeMappingLine": 391,
+    "recipeMapping": "{",
+    "packBytes": 50426
+  },
+  {
+    "id": "eye",
+    "toyLine": 1445,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/eye/thumb.webp",
+      "exists": true,
+      "bytes": 3472
+    },
+    "packSource": "src/packs/anatomy.js",
+    "recipeMappingLine": 644,
+    "recipeMapping": "{",
+    "packBytes": 50426
+  },
+  {
+    "id": "lungs",
+    "toyLine": 1453,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lungs/thumb.webp",
+      "exists": true,
+      "bytes": 3762
+    },
+    "packSource": "src/packs/anatomy.js",
+    "recipeMappingLine": 889,
+    "recipeMapping": "{",
+    "packBytes": 50426
+  },
+  {
+    "id": "tooth",
+    "toyLine": 1462,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tooth/thumb.webp",
+      "exists": true,
+      "bytes": 2908
+    },
+    "packSource": "src/packs/anatomy.js",
+    "recipeMappingLine": 1022,
+    "recipeMapping": "{",
+    "packBytes": 50426
+  },
+  {
+    "id": "kidney",
+    "toyLine": 1470,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/kidney/thumb.webp",
+      "exists": true,
+      "bytes": 2904
+    },
+    "packSource": "src/packs/anatomy.js",
+    "recipeMappingLine": 1223,
+    "recipeMapping": "{",
+    "packBytes": 50426
+  },
+  {
+    "id": "anatomy-atlas",
+    "toyLine": 1479,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/anatomy-atlas/thumb.webp",
+      "exists": true,
+      "bytes": 4306
+    },
+    "packSource": "src/packs/anatomy-atlas.js",
+    "recipeMappingLine": 1148,
+    "recipeMapping": "{",
+    "packBytes": 60775
+  },
+  {
+    "id": "oak",
+    "toyLine": 1492,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/oak/thumb.webp",
+      "exists": true,
+      "bytes": 10756
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 913,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "pine",
+    "toyLine": 1501,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pine/thumb.webp",
+      "exists": true,
+      "bytes": 4648
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 5226,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "palm",
+    "toyLine": 1510,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/palm/thumb.webp",
+      "exists": true,
+      "bytes": 9530
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 1055,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "cherry-blossom",
+    "toyLine": 1519,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cherry-blossom/thumb.webp",
+      "exists": true,
+      "bytes": 15580
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 1221,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "maple",
+    "toyLine": 1528,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/maple/thumb.webp",
+      "exists": true,
+      "bytes": 20382
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 1336,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "bonsai",
+    "toyLine": 1537,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bonsai/thumb.webp",
+      "exists": true,
+      "bytes": 10586
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 1492,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "willow",
+    "toyLine": 1546,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/willow/thumb.webp",
+      "exists": true,
+      "bytes": 12826
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 1753,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "sunflower",
+    "toyLine": 1555,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sunflower/thumb.webp",
+      "exists": true,
+      "bytes": 9716
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 1893,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "rose",
+    "toyLine": 1564,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rose/thumb.webp",
+      "exists": true,
+      "bytes": 6618
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 2115,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "dandelion",
+    "toyLine": 1573,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/dandelion/thumb.webp",
+      "exists": true,
+      "bytes": 10706
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 2318,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "tulip",
+    "toyLine": 1582,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tulip/thumb.webp",
+      "exists": true,
+      "bytes": 8526
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 2509,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "daisy",
+    "toyLine": 1591,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/daisy/thumb.webp",
+      "exists": true,
+      "bytes": 14894
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 2655,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "lotus",
+    "toyLine": 1600,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lotus/thumb.webp",
+      "exists": true,
+      "bytes": 9980
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 2820,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "mushroom",
+    "toyLine": 1609,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/mushroom/thumb.webp",
+      "exists": true,
+      "bytes": 10558
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 3045,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "fern",
+    "toyLine": 1618,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/fern/thumb.webp",
+      "exists": true,
+      "bytes": 9644
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 3230,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "saguaro",
+    "toyLine": 1627,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/saguaro/thumb.webp",
+      "exists": true,
+      "bytes": 9744
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 3399,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "coral",
+    "toyLine": 1636,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/coral/thumb.webp",
+      "exists": true,
+      "bytes": 21572
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 3748,
+    "recipeMapping": "orange branches with pale growing tips.",
+    "packBytes": 204895
+  },
+  {
+    "id": "pinecone",
+    "toyLine": 1645,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pinecone/thumb.webp",
+      "exists": true,
+      "bytes": 7318
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 4021,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "acorn",
+    "toyLine": 1654,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/acorn/thumb.webp",
+      "exists": true,
+      "bytes": 7144
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 4211,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "succulent",
+    "toyLine": 1663,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/succulent/thumb.webp",
+      "exists": true,
+      "bytes": 8774
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 4448,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "bamboo",
+    "toyLine": 1672,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bamboo/thumb.webp",
+      "exists": true,
+      "bytes": 9838
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 4585,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "rocks",
+    "toyLine": 1681,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rocks/thumb.webp",
+      "exists": true,
+      "bytes": 8806
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 4787,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "kelp",
+    "toyLine": 1690,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/kelp/thumb.webp",
+      "exists": true,
+      "bytes": 10844
+    },
+    "packSource": "src/packs/nature.js",
+    "recipeMappingLine": 4981,
+    "recipeMapping": "{",
+    "packBytes": 204895
+  },
+  {
+    "id": "storm-cloud",
+    "toyLine": 1702,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/storm-cloud/thumb.webp",
+      "exists": true,
+      "bytes": 18098
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 1232,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "lava-lamp",
+    "toyLine": 1711,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lava-lamp/thumb.webp",
+      "exists": true,
+      "bytes": 5170
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 1369,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "snow-globe",
+    "toyLine": 1720,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/snow-globe/thumb.webp",
+      "exists": true,
+      "bytes": 15438
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 1597,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "volcano",
+    "toyLine": 1729,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/volcano/thumb.webp",
+      "exists": true,
+      "bytes": 12410
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 1821,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "ice-statue",
+    "toyLine": 1738,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ice-statue/thumb.webp",
+      "exists": true,
+      "bytes": 9158
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 1933,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "candle",
+    "toyLine": 1747,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/candle/thumb.webp",
+      "exists": true,
+      "bytes": 6694
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 2184,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "tornado",
+    "toyLine": 1756,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tornado/thumb.webp",
+      "exists": true,
+      "bytes": 12314
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 2345,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "rainbow",
+    "toyLine": 1765,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rainbow/thumb.webp",
+      "exists": true,
+      "bytes": 10832
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 2533,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "iceberg",
+    "toyLine": 1774,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/iceberg/thumb.webp",
+      "exists": true,
+      "bytes": 6560
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 2687,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "waterfall",
+    "toyLine": 1783,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/waterfall/thumb.webp",
+      "exists": true,
+      "bytes": 7718
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 2903,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "ocean-wave",
+    "toyLine": 1792,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ocean-wave/thumb.webp",
+      "exists": true,
+      "bytes": 9748
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 3127,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "geyser",
+    "toyLine": 1801,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/geyser/thumb.webp",
+      "exists": true,
+      "bytes": 12304
+    },
+    "packSource": "src/packs/elements.js",
+    "recipeMappingLine": 3361,
+    "recipeMapping": "{",
+    "packBytes": 122508
+  },
+  {
+    "id": "ice-cream",
+    "toyLine": 1812,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ice-cream/thumb.webp",
+      "exists": true,
+      "bytes": 5564
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 538,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "watermelon",
+    "toyLine": 1821,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/watermelon/thumb.webp",
+      "exists": true,
+      "bytes": 5406
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 736,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "birthday-cake",
+    "toyLine": 1830,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/birthday-cake/thumb.webp",
+      "exists": true,
+      "bytes": 8400
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 1053,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "popcorn",
+    "toyLine": 1839,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/popcorn/thumb.webp",
+      "exists": true,
+      "bytes": 11674
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 1269,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "jelly",
+    "toyLine": 1848,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/jelly/thumb.webp",
+      "exists": true,
+      "bytes": 10690
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 1441,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "pancakes",
+    "toyLine": 1857,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pancakes/thumb.webp",
+      "exists": true,
+      "bytes": 7992
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 1601,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "cupcake",
+    "toyLine": 1866,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cupcake/thumb.webp",
+      "exists": true,
+      "bytes": 4562
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 1792,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "lollipop",
+    "toyLine": 1875,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lollipop/thumb.webp",
+      "exists": true,
+      "bytes": 8550
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 1972,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "candy-cane",
+    "toyLine": 1884,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/candy-cane/thumb.webp",
+      "exists": true,
+      "bytes": 8264
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 2081,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "macarons",
+    "toyLine": 1893,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/macarons/thumb.webp",
+      "exists": true,
+      "bytes": 7306
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 2372,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "donut",
+    "toyLine": 1902,
+    "kind": "procedural",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/donut/thumb.webp",
+      "exists": true,
+      "bytes": 5770
+    }
+  },
+  {
+    "id": "gummy-bear",
+    "toyLine": 1918,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/gummy-bear/thumb.webp",
+      "exists": true,
+      "bytes": 7774
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 2546,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "pretzel",
+    "toyLine": 1927,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pretzel/thumb.webp",
+      "exists": true,
+      "bytes": 6960
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 2653,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "croissant",
+    "toyLine": 1936,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/croissant/thumb.webp",
+      "exists": true,
+      "bytes": 6242
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 2757,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "pizza",
+    "toyLine": 1945,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pizza/thumb.webp",
+      "exists": true,
+      "bytes": 9178
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 2936,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "burger",
+    "toyLine": 1954,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/burger/thumb.webp",
+      "exists": true,
+      "bytes": 10938
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 3246,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "sushi",
+    "toyLine": 1963,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sushi/thumb.webp",
+      "exists": true,
+      "bytes": 6966
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 3424,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "taco",
+    "toyLine": 1972,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/taco/thumb.webp",
+      "exists": true,
+      "bytes": 6002
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 3689,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "egg",
+    "toyLine": 1981,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/egg/thumb.webp",
+      "exists": true,
+      "bytes": 8904
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 3947,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "coffee",
+    "toyLine": 1990,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/coffee/thumb.webp",
+      "exists": true,
+      "bytes": 10882
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 4132,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "apple",
+    "toyLine": 1999,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/apple/thumb.webp",
+      "exists": true,
+      "bytes": 5098
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 4328,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "banana",
+    "toyLine": 2008,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/banana/thumb.webp",
+      "exists": true,
+      "bytes": 5588
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 4679,
+    "recipeMapping": "a smiling arc from its neck (t = 0) to its tip.",
+    "packBytes": 216263
+  },
+  {
+    "id": "orange",
+    "toyLine": 2017,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/orange/thumb.webp",
+      "exists": true,
+      "bytes": 9236
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 4822,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "kiwi",
+    "toyLine": 2026,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/kiwi/thumb.webp",
+      "exists": true,
+      "bytes": 6308
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 5062,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "pineapple",
+    "toyLine": 2035,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pineapple/thumb.webp",
+      "exists": true,
+      "bytes": 6914
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 5234,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "cherries",
+    "toyLine": 2044,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cherries/thumb.webp",
+      "exists": true,
+      "bytes": 4258
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 5394,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "grapes",
+    "toyLine": 2053,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/grapes/thumb.webp",
+      "exists": true,
+      "bytes": 5972
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 5519,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "avocado",
+    "toyLine": 2062,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/avocado/thumb.webp",
+      "exists": true,
+      "bytes": 5472
+    },
+    "packSource": "src/packs/food.js",
+    "recipeMappingLine": 5697,
+    "recipeMapping": "{",
+    "packBytes": 216263
+  },
+  {
+    "id": "bricks",
+    "toyLine": 2073,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bricks/thumb.webp",
+      "exists": true,
+      "bytes": 7924
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1157,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "rubber-duck",
+    "toyLine": 2082,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rubber-duck/thumb.webp",
+      "exists": true,
+      "bytes": 4434
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1224,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "spinning-top",
+    "toyLine": 2091,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/spinning-top/thumb.webp",
+      "exists": true,
+      "bytes": 9792
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1315,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "dice",
+    "toyLine": 2100,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/dice/thumb.webp",
+      "exists": true,
+      "bytes": 4526
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1439,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "newtons-cradle",
+    "toyLine": 2109,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/newtons-cradle/thumb.webp",
+      "exists": true,
+      "bytes": 8780
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1596,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "teddy-bear",
+    "toyLine": 2118,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/teddy-bear/thumb.webp",
+      "exists": true,
+      "bytes": 6708
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1760,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "yo-yo",
+    "toyLine": 2127,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/yo-yo/thumb.webp",
+      "exists": true,
+      "bytes": 5166
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1895,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "puzzle-cube",
+    "toyLine": 2136,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/puzzle-cube/thumb.webp",
+      "exists": true,
+      "bytes": 7246
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 1979,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "spring-toy",
+    "toyLine": 2145,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/spring-toy/thumb.webp",
+      "exists": true,
+      "bytes": 8198
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 2037,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "kite",
+    "toyLine": 2154,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/kite/thumb.webp",
+      "exists": true,
+      "bytes": 6356
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 2090,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "paper-plane",
+    "toyLine": 2163,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/paper-plane/thumb.webp",
+      "exists": true,
+      "bytes": 4276
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 2246,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "origami-crane",
+    "toyLine": 2172,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/origami-crane/thumb.webp",
+      "exists": true,
+      "bytes": 3856
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 2313,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "balloon-dog",
+    "toyLine": 2181,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/balloon-dog/thumb.webp",
+      "exists": true,
+      "bytes": 4080
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 2381,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "soap-bubbles",
+    "toyLine": 2190,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/soap-bubbles/thumb.webp",
+      "exists": true,
+      "bytes": 6180
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 2473,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "robot",
+    "toyLine": 2199,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/robot/thumb.webp",
+      "exists": true,
+      "bytes": 5072
+    },
+    "packSource": "src/packs/playthings.js",
+    "recipeMappingLine": 2579,
+    "recipeMapping": "{",
+    "packBytes": 95618
+  },
+  {
+    "id": "chess-set",
+    "toyLine": 2208,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/chess-set/thumb.webp",
+      "exists": true,
+      "bytes": 12182
+    },
+    "packSource": "src/packs/games.js",
+    "recipeMappingLine": 466,
+    "recipeMapping": "{",
+    "packBytes": 32662
+  },
+  {
+    "id": "lorenz",
+    "toyLine": 2219,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lorenz/thumb.webp",
+      "exists": true,
+      "bytes": 8370
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1168,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "mobius",
+    "toyLine": 2228,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/mobius/thumb.webp",
+      "exists": true,
+      "bytes": 8856
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1241,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "klein-bottle",
+    "toyLine": 2237,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/klein-bottle/thumb.webp",
+      "exists": true,
+      "bytes": 10178
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1384,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "menger-sponge",
+    "toyLine": 2246,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/menger-sponge/thumb.webp",
+      "exists": true,
+      "bytes": 10964
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1495,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "hypercube",
+    "toyLine": 2255,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/hypercube/thumb.webp",
+      "exists": true,
+      "bytes": 9578
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1561,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "torus-knot",
+    "toyLine": 2264,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/torus-knot/thumb.webp",
+      "exists": true,
+      "bytes": 8250
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1614,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "gyroid",
+    "toyLine": 2273,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/gyroid/thumb.webp",
+      "exists": true,
+      "bytes": 8550
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1723,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "mandelbulb",
+    "toyLine": 2282,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/mandelbulb/thumb.webp",
+      "exists": true,
+      "bytes": 16870
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1772,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "sierpinski",
+    "toyLine": 2291,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sierpinski/thumb.webp",
+      "exists": true,
+      "bytes": 9272
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1811,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "platonic",
+    "toyLine": 2300,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/platonic/thumb.webp",
+      "exists": true,
+      "bytes": 4726
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1851,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "seashell-spiral",
+    "toyLine": 2309,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/seashell-spiral/thumb.webp",
+      "exists": true,
+      "bytes": 6928
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 1912,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "graph-plotter",
+    "toyLine": 2318,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/graph-plotter/thumb.webp",
+      "exists": true,
+      "bytes": 13644
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 2615,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "surface-plotter",
+    "toyLine": 2327,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/surface-plotter/thumb.webp",
+      "exists": true,
+      "bytes": 15644
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 2903,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "unit-circle",
+    "toyLine": 2336,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/unit-circle/thumb.webp",
+      "exists": true,
+      "bytes": 11614
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 3217,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "fourier-circles",
+    "toyLine": 2345,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/fourier-circles/thumb.webp",
+      "exists": true,
+      "bytes": 16044
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 4026,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "pythagoras-proof",
+    "toyLine": 2354,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pythagoras-proof/thumb.webp",
+      "exists": true,
+      "bytes": 8896
+    },
+    "packSource": "src/packs/maths.js",
+    "recipeMappingLine": 4260,
+    "recipeMapping": "{",
+    "packBytes": 166104
+  },
+  {
+    "id": "splat-equation",
+    "toyLine": 2364,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/splat-equation/thumb.webp",
+      "exists": true,
+      "bytes": 5402
+    },
+    "packSource": "src/packs/splat-equation.js",
+    "recipeMappingLine": 397,
+    "recipeMapping": "{",
+    "packBytes": 22526
+  },
+  {
+    "id": "book",
+    "toyLine": 2376,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/book/thumb.webp",
+      "exists": true,
+      "bytes": 11762
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 714,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "laptop",
+    "toyLine": 2385,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/laptop/thumb.webp",
+      "exists": true,
+      "bytes": 10644
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 978,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "music-box",
+    "toyLine": 2394,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/music-box/thumb.webp",
+      "exists": true,
+      "bytes": 7230
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 1248,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "clock",
+    "toyLine": 2403,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/clock/thumb.webp",
+      "exists": true,
+      "bytes": 8116
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 1468,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "gift-box",
+    "toyLine": 2412,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/gift-box/thumb.webp",
+      "exists": true,
+      "bytes": 5626
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 1727,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "umbrella",
+    "toyLine": 2421,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/umbrella/thumb.webp",
+      "exists": true,
+      "bytes": 4432
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 1874,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "desk-fan",
+    "toyLine": 2430,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/desk-fan/thumb.webp",
+      "exists": true,
+      "bytes": 13628
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 2010,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "lamp",
+    "toyLine": 2439,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lamp/thumb.webp",
+      "exists": true,
+      "bytes": 11244
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 2204,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "potion-bottle",
+    "toyLine": 2448,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/potion-bottle/thumb.webp",
+      "exists": true,
+      "bytes": 5516
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 2362,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "telescope",
+    "toyLine": 2457,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/telescope/thumb.webp",
+      "exists": true,
+      "bytes": 5156
+    },
+    "packSource": "src/packs/objects.js",
+    "recipeMappingLine": 2477,
+    "recipeMapping": "{",
+    "packBytes": 86278
+  },
+  {
+    "id": "fountain-pen",
+    "toyLine": 2468,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/fountain-pen/thumb.webp",
+      "exists": true,
+      "bytes": 6396
+    },
+    "packSource": "src/packs/real-objects.js",
+    "recipeMappingLine": 1467,
+    "recipeMapping": "FOUNTAIN_PEN",
+    "packBytes": 64218,
+    "baked": {
+      "path": "assets/toys/fountain-pen/fountain-pen.splats",
+      "bytes": 3861664,
+      "splats": 275830,
+      "magic": "ROS1"
+    }
+  },
+  {
+    "id": "water-bottle",
+    "toyLine": 2477,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/water-bottle/thumb.webp",
+      "exists": true,
+      "bytes": 5712
+    },
+    "packSource": "src/packs/real-objects.js",
+    "recipeMappingLine": 1464,
+    "recipeMapping": "WATER_BOTTLE",
+    "packBytes": 64218,
+    "baked": {
+      "path": "assets/toys/water-bottle/water-bottle.splats",
+      "bytes": 3619114,
+      "splats": 258505,
+      "magic": "ROS1"
+    }
+  },
+  {
+    "id": "soda-can",
+    "toyLine": 2487,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/soda-can/thumb.webp",
+      "exists": true,
+      "bytes": 6876
+    },
+    "packSource": "src/packs/real-objects.js",
+    "recipeMappingLine": 1468,
+    "recipeMapping": "SODA_CAN",
+    "packBytes": 64218,
+    "baked": {
+      "path": "assets/toys/soda-can/soda-can.splats",
+      "bytes": 3862924,
+      "splats": 275920,
+      "magic": "ROS1"
+    }
+  },
+  {
+    "id": "running-shoe",
+    "toyLine": 2497,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/running-shoe/thumb.webp",
+      "exists": true,
+      "bytes": 4656
+    },
+    "packSource": "src/packs/real-objects.js",
+    "recipeMappingLine": 1469,
+    "recipeMapping": "RUNNING_SHOE",
+    "packBytes": 64218,
+    "baked": {
+      "path": "assets/toys/running-shoe/running-shoe.splats",
+      "bytes": 3861860,
+      "splats": 275844,
+      "magic": "ROS1"
+    }
+  },
+  {
+    "id": "hoodie",
+    "toyLine": 2506,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/hoodie/thumb.webp",
+      "exists": true,
+      "bytes": 4248
+    },
+    "packSource": "src/packs/real-objects.js",
+    "recipeMappingLine": 1470,
+    "recipeMapping": "HOODIE",
+    "packBytes": 64218,
+    "baked": {
+      "path": "assets/toys/hoodie/hoodie.splats",
+      "bytes": 3861454,
+      "splats": 275815,
+      "magic": "ROS1"
+    }
+  },
+  {
+    "id": "sunglasses",
+    "toyLine": 2515,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sunglasses/thumb.webp",
+      "exists": true,
+      "bytes": 7020
+    },
+    "packSource": "src/packs/real-objects.js",
+    "recipeMappingLine": 1465,
+    "recipeMapping": "SUNGLASSES",
+    "packBytes": 64218,
+    "baked": {
+      "path": "assets/toys/sunglasses/sunglasses.splats",
+      "bytes": 3861706,
+      "splats": 275833,
+      "magic": "ROS1"
+    }
+  },
+  {
+    "id": "baseball-cap",
+    "toyLine": 2524,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/baseball-cap/thumb.webp",
+      "exists": true,
+      "bytes": 2474
+    },
+    "packSource": "src/packs/real-objects.js",
+    "recipeMappingLine": 1466,
+    "recipeMapping": "BASEBALL_CAP",
+    "packBytes": 64218,
+    "baked": {
+      "path": "assets/toys/baseball-cap/baseball-cap.splats",
+      "bytes": 3861944,
+      "splats": 275850,
+      "magic": "ROS1"
+    }
+  },
+  {
+    "id": "sword-in-stone",
+    "toyLine": 2534,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sword-in-stone/thumb.webp",
+      "exists": true,
+      "bytes": 6044
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 218,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "shield",
+    "toyLine": 2543,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/shield/thumb.webp",
+      "exists": true,
+      "bytes": 4702
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 401,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "bow-and-target",
+    "toyLine": 2552,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bow-and-target/thumb.webp",
+      "exists": true,
+      "bytes": 8814
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 606,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "trebuchet",
+    "toyLine": 2561,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/trebuchet/thumb.webp",
+      "exists": true,
+      "bytes": 6322
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 814,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "crossbow",
+    "toyLine": 2570,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/crossbow/thumb.webp",
+      "exists": true,
+      "bytes": 5334
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 967,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "knights-helmet",
+    "toyLine": 2579,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/knights-helmet/thumb.webp",
+      "exists": true,
+      "bytes": 5712
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 1129,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "crown",
+    "toyLine": 2587,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/crown/thumb.webp",
+      "exists": true,
+      "bytes": 9250
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 1331,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "dragon-egg",
+    "toyLine": 2596,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/dragon-egg/thumb.webp",
+      "exists": true,
+      "bytes": 6974
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 1539,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "wizards-orb",
+    "toyLine": 2605,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/wizards-orb/thumb.webp",
+      "exists": true,
+      "bytes": 13294
+    },
+    "packSource": "src/packs/medieval.js",
+    "recipeMappingLine": 1754,
+    "recipeMapping": "{",
+    "packBytes": 71280
+  },
+  {
+    "id": "crystal-ball",
+    "toyLine": 2614,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/crystal-ball/thumb.webp",
+      "exists": true,
+      "bytes": 16628
+    },
+    "packSource": "src/packs/gems.js",
+    "recipeMappingLine": 1294,
+    "recipeMapping": "{",
+    "packBytes": 57482
+  },
+  {
+    "id": "jellyfish",
+    "toyLine": 2624,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/jellyfish/thumb.webp",
+      "exists": true,
+      "bytes": 8024
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 220,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "fish-school",
+    "toyLine": 2632,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/fish-school/thumb.webp",
+      "exists": true,
+      "bytes": 17354
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 401,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "butterfly",
+    "toyLine": 2641,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/butterfly/thumb.webp",
+      "exists": true,
+      "bytes": 17252
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 570,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "pufferfish",
+    "toyLine": 2650,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pufferfish/thumb.webp",
+      "exists": true,
+      "bytes": 5090
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 750,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "nautilus",
+    "toyLine": 2658,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/nautilus/thumb.webp",
+      "exists": true,
+      "bytes": 7648
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 896,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "ladybug",
+    "toyLine": 2667,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ladybug/thumb.webp",
+      "exists": true,
+      "bytes": 3512
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 1087,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "snail",
+    "toyLine": 2676,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/snail/thumb.webp",
+      "exists": true,
+      "bytes": 4504
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 1454,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "octopus",
+    "toyLine": 2685,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/octopus/thumb.webp",
+      "exists": true,
+      "bytes": 5898
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 1530,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "starfish",
+    "toyLine": 2694,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/starfish/thumb.webp",
+      "exists": true,
+      "bytes": 5452
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 1688,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "sea-urchin",
+    "toyLine": 2703,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sea-urchin/thumb.webp",
+      "exists": true,
+      "bytes": 9640
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 1785,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "frog",
+    "toyLine": 2711,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/frog/thumb.webp",
+      "exists": true,
+      "bytes": 7422
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 1900,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "penguin",
+    "toyLine": 2719,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/penguin/thumb.webp",
+      "exists": true,
+      "bytes": 3738
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 2119,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "owl",
+    "toyLine": 2727,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/owl/thumb.webp",
+      "exists": true,
+      "bytes": 6244
+    },
+    "packSource": "src/packs/animals.js",
+    "recipeMappingLine": 2225,
+    "recipeMapping": "{",
+    "packBytes": 85943
+  },
+  {
+    "id": "jack-o-lantern",
+    "toyLine": 2737,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/jack-o-lantern/thumb.webp",
+      "exists": true,
+      "bytes": 4822
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 145,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "snowman",
+    "toyLine": 2746,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/snowman/thumb.webp",
+      "exists": true,
+      "bytes": 7156
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 309,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "fireworks",
+    "toyLine": 2755,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/fireworks/thumb.webp",
+      "exists": true,
+      "bytes": 13682
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 587,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "decorated-tree",
+    "toyLine": 2764,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/decorated-tree/thumb.webp",
+      "exists": true,
+      "bytes": 7784
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 798,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "patterned-egg",
+    "toyLine": 2772,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/patterned-egg/thumb.webp",
+      "exists": true,
+      "bytes": 6406
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 1054,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "paper-lantern",
+    "toyLine": 2780,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/paper-lantern/thumb.webp",
+      "exists": true,
+      "bytes": 4122
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 1181,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "diya",
+    "toyLine": 2788,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/diya/thumb.webp",
+      "exists": true,
+      "bytes": 8948
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 1312,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "menorah",
+    "toyLine": 2797,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/menorah/thumb.webp",
+      "exists": true,
+      "bytes": 8602
+    },
+    "packSource": "src/packs/holidays.js",
+    "recipeMappingLine": 1551,
+    "recipeMapping": "{",
+    "packBytes": 59441
+  },
+  {
+    "id": "guitar",
+    "toyLine": 2808,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/guitar/thumb.webp",
+      "exists": true,
+      "bytes": 5518
+    },
+    "packSource": "src/packs/music.js",
+    "recipeMappingLine": 341,
+    "recipeMapping": "{",
+    "packBytes": 44018
+  },
+  {
+    "id": "drum",
+    "toyLine": 2817,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/drum/thumb.webp",
+      "exists": true,
+      "bytes": 4344
+    },
+    "packSource": "src/packs/music.js",
+    "recipeMappingLine": 608,
+    "recipeMapping": "{",
+    "packBytes": 44018
+  },
+  {
+    "id": "xylophone",
+    "toyLine": 2826,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/xylophone/thumb.webp",
+      "exists": true,
+      "bytes": 5264
+    },
+    "packSource": "src/packs/music.js",
+    "recipeMappingLine": 755,
+    "recipeMapping": "{",
+    "packBytes": 44018
+  },
+  {
+    "id": "toy-piano",
+    "toyLine": 2835,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/toy-piano/thumb.webp",
+      "exists": true,
+      "bytes": 12520
+    },
+    "packSource": "src/packs/music.js",
+    "recipeMappingLine": 919,
+    "recipeMapping": "{",
+    "packBytes": 44018
+  },
+  {
+    "id": "grand-piano",
+    "toyLine": 2846,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/grand-piano/thumb.webp",
+      "exists": true,
+      "bytes": 7170
+    },
+    "packSource": "src/packs/pianos.js",
+    "recipeMappingLine": 1907,
+    "recipeMapping": "keyboardRecipe({",
+    "packBytes": 81823
+  },
+  {
+    "id": "upright-piano",
+    "toyLine": 2855,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/upright-piano/thumb.webp",
+      "exists": true,
+      "bytes": 7814
+    },
+    "packSource": "src/packs/pianos.js",
+    "recipeMappingLine": 1913,
+    "recipeMapping": "keyboardRecipe({",
+    "packBytes": 81823
+  },
+  {
+    "id": "harpsichord",
+    "toyLine": 2864,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/harpsichord/thumb.webp",
+      "exists": true,
+      "bytes": 8286
+    },
+    "packSource": "src/packs/pianos.js",
+    "recipeMappingLine": 1919,
+    "recipeMapping": "keyboardRecipe({",
+    "packBytes": 81823
+  },
+  {
+    "id": "electronic-keyboard",
+    "toyLine": 2873,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/electronic-keyboard/thumb.webp",
+      "exists": true,
+      "bytes": 6620
+    },
+    "packSource": "src/packs/pianos.js",
+    "recipeMappingLine": 1925,
+    "recipeMapping": "{",
+    "packBytes": 81823
+  },
+  {
+    "id": "rocket",
+    "toyLine": 2884,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rocket/thumb.webp",
+      "exists": true,
+      "bytes": 7228
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3047,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "helicopter",
+    "toyLine": 2893,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/helicopter/thumb.webp",
+      "exists": true,
+      "bytes": 5704
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3076,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "hot-air-balloon",
+    "toyLine": 2902,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/hot-air-balloon/thumb.webp",
+      "exists": true,
+      "bytes": 5170
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3105,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "steam-train",
+    "toyLine": 2911,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/steam-train/thumb.webp",
+      "exists": true,
+      "bytes": 11062
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3141,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "ocean-liner",
+    "toyLine": 2920,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ocean-liner/thumb.webp",
+      "exists": true,
+      "bytes": 12658
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3161,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "sports-car",
+    "toyLine": 2930,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sports-car/thumb.webp",
+      "exists": true,
+      "bytes": 9782
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3175,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "bus",
+    "toyLine": 2939,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bus/thumb.webp",
+      "exists": true,
+      "bytes": 7560
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3195,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "propeller-plane",
+    "toyLine": 2948,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/propeller-plane/thumb.webp",
+      "exists": true,
+      "bytes": 6014
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3231,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "jet",
+    "toyLine": 2957,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/jet/thumb.webp",
+      "exists": true,
+      "bytes": 4150
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3254,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "sailboat",
+    "toyLine": 2966,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sailboat/thumb.webp",
+      "exists": true,
+      "bytes": 8574
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3275,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "submarine",
+    "toyLine": 2975,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/submarine/thumb.webp",
+      "exists": true,
+      "bytes": 14368
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3297,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "bicycle",
+    "toyLine": 2984,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bicycle/thumb.webp",
+      "exists": true,
+      "bytes": 10292
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3323,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "tractor",
+    "toyLine": 2993,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/tractor/thumb.webp",
+      "exists": true,
+      "bytes": 13674
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3345,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "ufo",
+    "toyLine": 3002,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/ufo/thumb.webp",
+      "exists": true,
+      "bytes": 13916
+    },
+    "packSource": "src/packs/vehicles.js",
+    "recipeMappingLine": 3359,
+    "recipeMapping": "{",
+    "packBytes": 104725
+  },
+  {
+    "id": "eiffel-tower",
+    "toyLine": 3013,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/eiffel-tower/thumb.webp",
+      "exists": true,
+      "bytes": 5418
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4234,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "washington-monument",
+    "toyLine": 3022,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/washington-monument/thumb.webp",
+      "exists": true,
+      "bytes": 6726
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4261,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "pyramids",
+    "toyLine": 3031,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pyramids/thumb.webp",
+      "exists": true,
+      "bytes": 7288
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4281,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "supertall",
+    "toyLine": 3040,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/supertall/thumb.webp",
+      "exists": true,
+      "bytes": 5896
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4317,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "lighthouse",
+    "toyLine": 3049,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/lighthouse/thumb.webp",
+      "exists": true,
+      "bytes": 10920
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4342,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "statue-of-liberty",
+    "toyLine": 3058,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/statue-of-liberty/thumb.webp",
+      "exists": true,
+      "bytes": 9808
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4353,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "white-house",
+    "toyLine": 3067,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/white-house/thumb.webp",
+      "exists": true,
+      "bytes": 7688
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4376,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "leaning-tower",
+    "toyLine": 3076,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/leaning-tower/thumb.webp",
+      "exists": true,
+      "bytes": 6926
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4397,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "colosseum",
+    "toyLine": 3085,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/colosseum/thumb.webp",
+      "exists": true,
+      "bytes": 9668
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4445,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "parthenon",
+    "toyLine": 3094,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/parthenon/thumb.webp",
+      "exists": true,
+      "bytes": 7900
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4484,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "stonehenge",
+    "toyLine": 3103,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/stonehenge/thumb.webp",
+      "exists": true,
+      "bytes": 9266
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4526,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "big-ben",
+    "toyLine": 3112,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/big-ben/thumb.webp",
+      "exists": true,
+      "bytes": 4404
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4548,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "taj-mahal",
+    "toyLine": 3121,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/taj-mahal/thumb.webp",
+      "exists": true,
+      "bytes": 7712
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4573,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "castle",
+    "toyLine": 3130,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/castle/thumb.webp",
+      "exists": true,
+      "bytes": 11290
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4596,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "pagoda",
+    "toyLine": 3139,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/pagoda/thumb.webp",
+      "exists": true,
+      "bytes": 9850
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4615,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "windmill",
+    "toyLine": 3148,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/windmill/thumb.webp",
+      "exists": true,
+      "bytes": 9408
+    },
+    "packSource": "src/packs/landmarks.js",
+    "recipeMappingLine": 4638,
+    "recipeMapping": "{",
+    "packBytes": 152663
+  },
+  {
+    "id": "perceptron",
+    "toyLine": 3158,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/perceptron/thumb.webp",
+      "exists": true,
+      "bytes": 7962
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 2323,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "multilayer-perceptron",
+    "toyLine": 3167,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/multilayer-perceptron/thumb.webp",
+      "exists": true,
+      "bytes": 8060
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 2462,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "neural-network",
+    "toyLine": 3176,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/neural-network/thumb.webp",
+      "exists": true,
+      "bytes": 10112
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 2618,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "cnn",
+    "toyLine": 3185,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/cnn/thumb.webp",
+      "exists": true,
+      "bytes": 8304
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 2696,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "rnn",
+    "toyLine": 3194,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/rnn/thumb.webp",
+      "exists": true,
+      "bytes": 11150
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 2893,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "transformer",
+    "toyLine": 3203,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/transformer/thumb.webp",
+      "exists": true,
+      "bytes": 7934
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 3073,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "looped-transformer",
+    "toyLine": 3212,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/looped-transformer/thumb.webp",
+      "exists": true,
+      "bytes": 8994
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 3196,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "diffusion-model",
+    "toyLine": 3221,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/diffusion-model/thumb.webp",
+      "exists": true,
+      "bytes": 18900
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 3309,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "gradient-descent",
+    "toyLine": 3230,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/gradient-descent/thumb.webp",
+      "exists": true,
+      "bytes": 9296
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 3433,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "gaussian-splatting",
+    "toyLine": 3240,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/gaussian-splatting/thumb.webp",
+      "exists": true,
+      "bytes": 22422
+    },
+    "packSource": "src/packs/splatting.js",
+    "recipeMappingLine": 168,
+    "recipeMapping": "{",
+    "packBytes": 28671
+  },
+  {
+    "id": "word-vectors",
+    "toyLine": 3251,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/word-vectors/thumb.webp",
+      "exists": true,
+      "bytes": 9962
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 3552,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "sorting-machine",
+    "toyLine": 3260,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/sorting-machine/thumb.webp",
+      "exists": true,
+      "bytes": 12840
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 3700,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "half-adder",
+    "toyLine": 3269,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/half-adder/thumb.webp",
+      "exists": true,
+      "bytes": 8368
+    },
+    "packSource": "src/packs/computing.js",
+    "recipeMappingLine": 3811,
+    "recipeMapping": "{",
+    "packBytes": 156660
+  },
+  {
+    "id": "turing-machine",
+    "toyLine": 3279,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/turing-machine/thumb.webp",
+      "exists": true,
+      "bytes": 10602
+    },
+    "packSource": "src/packs/computing-history.js",
+    "recipeMappingLine": 1853,
+    "recipeMapping": "{",
+    "packBytes": 91332
+  },
+  {
+    "id": "difference-engine",
+    "toyLine": 3288,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/difference-engine/thumb.webp",
+      "exists": true,
+      "bytes": 12230
+    },
+    "packSource": "src/packs/computing-history.js",
+    "recipeMappingLine": 1871,
+    "recipeMapping": "{",
+    "packBytes": 91332
+  },
+  {
+    "id": "enigma-machine",
+    "toyLine": 3297,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/enigma-machine/thumb.webp",
+      "exists": true,
+      "bytes": 18874
+    },
+    "packSource": "src/packs/computing-history.js",
+    "recipeMappingLine": 1890,
+    "recipeMapping": "{",
+    "packBytes": 91332
+  },
+  {
+    "id": "bombe",
+    "toyLine": 3306,
+    "kind": "kit",
+    "labs": false,
+    "thumbnail": {
+      "path": "assets/toys/bombe/thumb.webp",
+      "exists": true,
+      "bytes": 14566
+    },
+    "packSource": "src/packs/computing-history.js",
+    "recipeMappingLine": 1965,
+    "recipeMapping": "{",
+    "packBytes": 91332
+  },
+  {
+    "id": "picture-lab",
+    "toyLine": 3317,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/picture-lab/thumb.webp",
+      "exists": true,
+      "bytes": 20436
+    },
+    "packSource": "src/packs/pictures.js",
+    "recipeMappingLine": 1784,
+    "recipeMapping": "{",
+    "packBytes": 80363
+  },
+  {
+    "id": "your-book",
+    "toyLine": 3327,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/your-book/thumb.webp",
+      "exists": true,
+      "bytes": 5588
+    },
+    "packSource": "src/packs/pictures.js",
+    "recipeMappingLine": 1858,
+    "recipeMapping": "BOOK_RECIPE",
+    "packBytes": 80363
+  },
+  {
+    "id": "photo-album",
+    "toyLine": 3337,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/photo-album/thumb.webp",
+      "exists": true,
+      "bytes": 4150
+    },
+    "packSource": "src/packs/pictures.js",
+    "recipeMappingLine": 1859,
+    "recipeMapping": "ALBUM_RECIPE",
+    "packBytes": 80363
+  },
+  {
+    "id": "picture-frame",
+    "toyLine": 3347,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/picture-frame/thumb.webp",
+      "exists": true,
+      "bytes": 17506
+    },
+    "packSource": "src/packs/pictures.js",
+    "recipeMappingLine": 1860,
+    "recipeMapping": "FRAME_RECIPE",
+    "packBytes": 80363
+  },
+  {
+    "id": "song-landscape",
+    "toyLine": 3358,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/song-landscape/thumb.webp",
+      "exists": true,
+      "bytes": 11056
+    },
+    "packSource": "src/packs/studio.js",
+    "recipeMappingLine": 1266,
+    "recipeMapping": "SONG_LANDSCAPE",
+    "packBytes": 52866
+  },
+  {
+    "id": "chladni-plate",
+    "toyLine": 3368,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/chladni-plate/thumb.webp",
+      "exists": true,
+      "bytes": 16820
+    },
+    "packSource": "src/packs/studio.js",
+    "recipeMappingLine": 1267,
+    "recipeMapping": "CHLADNI",
+    "packBytes": 52866
+  },
+  {
+    "id": "room-echo",
+    "toyLine": 3379,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/room-echo/thumb.webp",
+      "exists": true,
+      "bytes": 6354
+    },
+    "packSource": "src/packs/live.js",
+    "recipeMappingLine": 434,
+    "recipeMapping": "ROOM_ECHO",
+    "packBytes": 18799
+  },
+  {
+    "id": "splat-mirror",
+    "toyLine": 3389,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/splat-mirror/thumb.webp",
+      "exists": true,
+      "bytes": 9892
+    },
+    "packSource": "src/packs/live.js",
+    "recipeMappingLine": 435,
+    "recipeMapping": "SPLAT_MIRROR",
+    "packBytes": 18799
+  },
+  {
+    "id": "model-splats",
+    "toyLine": 3400,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/model-splats/thumb.webp",
+      "exists": true,
+      "bytes": 5564
+    },
+    "packSource": "src/packs/studio-models.js",
+    "recipeMappingLine": 353,
+    "recipeMapping": "MODEL_SPLATS",
+    "packBytes": 12806
+  },
+  {
+    "id": "photo-3d",
+    "toyLine": 3411,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/photo-3d/thumb.webp",
+      "exists": true,
+      "bytes": 19724
+    },
+    "packSource": "src/packs/photo-3d.js",
+    "recipeMappingLine": 349,
+    "recipeMapping": "PHOTO_3D",
+    "packBytes": 14243
+  },
+  {
+    "id": "moving-photo-3d",
+    "toyLine": 3422,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/moving-photo-3d/thumb.webp",
+      "exists": true,
+      "bytes": 8392
+    },
+    "packSource": "src/packs/live.js",
+    "recipeMappingLine": 436,
+    "recipeMapping": "MOVING_PHOTO",
+    "packBytes": 18799
+  },
+  {
+    "id": "video-3d",
+    "toyLine": 3433,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/video-3d/thumb.webp",
+      "exists": true,
+      "bytes": 32068
+    },
+    "packSource": "src/packs/video3d.js",
+    "recipeMappingLine": 351,
+    "recipeMapping": "VIDEO_3D",
+    "packBytes": 14099
+  },
+  {
+    "id": "splat-field",
+    "toyLine": 3444,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/splat-field/thumb.webp",
+      "exists": true,
+      "bytes": 22000
+    },
+    "packSource": "src/packs/lab.js",
+    "recipeMappingLine": 481,
+    "recipeMapping": "{",
+    "packBytes": 21374
+  },
+  {
+    "id": "thermal-ellipsoids",
+    "toyLine": 3455,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/thermal-ellipsoids/thumb.webp",
+      "exists": true,
+      "bytes": 7450
+    },
+    "packSource": "src/packs/science.js",
+    "recipeMappingLine": 1033,
+    "recipeMapping": "THERMAL",
+    "packBytes": 39721
+  },
+  {
+    "id": "smlm-microscope",
+    "toyLine": 3465,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/smlm-microscope/thumb.webp",
+      "exists": true,
+      "bytes": 39402
+    },
+    "packSource": "src/packs/science.js",
+    "recipeMappingLine": 1034,
+    "recipeMapping": "MICROSCOPE",
+    "packBytes": 39721
+  },
+  {
+    "id": "galaxy-box",
+    "toyLine": 3475,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/galaxy-box/thumb.webp",
+      "exists": true,
+      "bytes": 23928
+    },
+    "packSource": "src/packs/science.js",
+    "recipeMappingLine": 1035,
+    "recipeMapping": "GALAXY",
+    "packBytes": 39721
+  },
+  {
+    "id": "fluid-lab",
+    "toyLine": 3486,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/fluid-lab/thumb.webp",
+      "exists": true,
+      "bytes": 12004
+    },
+    "packSource": "src/packs/fluid-lab.js",
+    "recipeMappingLine": 303,
+    "recipeMapping": "{",
+    "packBytes": 15984
+  },
+  {
+    "id": "screen",
+    "toyLine": 3497,
+    "kind": "kit",
+    "labs": true,
+    "thumbnail": {
+      "path": "assets/toys/screen/thumb.webp",
+      "exists": true,
+      "bytes": 6638
+    },
+    "packSource": "src/packs/screens.js",
+    "recipeMappingLine": 1081,
+    "recipeMapping": "dark maroon fabric panels.",
+    "packBytes": 53038
+  }
+]
