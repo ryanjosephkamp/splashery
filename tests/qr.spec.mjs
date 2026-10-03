@@ -11,7 +11,7 @@ import { GifReader } from "../vendor/omggif/omggif.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 const URL0 = "https://ryanjosephkamp.github.io/splashery/";
-const STYLES = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"];
+const STYLES = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon", "neon-light"];
 
 // jsQR, from the same file the toy loads.
 const jsQR = (() => {
@@ -184,6 +184,41 @@ test("the GIF ends on the code held still, and its last frame scans", async ({ p
   const p = PNG.sync.read(Buffer.from(png, "base64"));
   expect(p.width).toBe(1024);
   expect(read(p.data, p.width, p.height)).toBe(URL0);
+});
+
+// ---- Alive ------------------------------------------------------------------------------
+
+test("Alive: every frame of each style's looping GIF scans", async ({ page }) => {
+  test.setTimeout(900_000);
+  await open(page);
+  const failed = [];
+  for (const style of STYLES) {
+    const gif = await page.evaluate(async (style) => {
+      const qr = window.__splashery.qr;
+      await qr.set({ style });
+      const a = new Uint8Array(await (await qr.gif({ motion: "alive", size: 360 })).arrayBuffer());
+      let s = "";
+      for (let i = 0; i < a.length; i += 8192) s += String.fromCharCode(...a.subarray(i, i + 8192));
+      return btoa(s);
+    }, style);
+    const reader = new GifReader(Buffer.from(gif, "base64"));
+    const n = reader.numFrames();
+    expect(n, style).toBe(44);
+    const px = new Uint8Array(reader.width * reader.height * 4);
+    for (let i = 0; i < n; i++) {
+      reader.decodeAndBlitFrameRGBA(i, px);
+      if (read(px, reader.width, reader.height) !== URL0) failed.push(`${style}: frame ${i}`);
+    }
+    // The wave moves: the first frame and the middle one differ.
+    const a = new Uint8Array(px.length);
+    reader.decodeAndBlitFrameRGBA(0, a);
+    reader.decodeAndBlitFrameRGBA(22, px);
+    let diff = 0;
+    for (let i = 0; i < a.length; i += 4)
+      diff += Math.abs(a[i] - px[i]) + Math.abs(a[i + 2] - px[i + 2]);
+    expect(diff / (a.length / 4), `${style}: the wave shows`).toBeGreaterThan(0.5);
+  }
+  expect(failed).toEqual([]);
 });
 
 // ---- Links --------------------------------------------------------------------------------

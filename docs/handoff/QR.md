@@ -202,7 +202,7 @@ qr.screenRect(); // the code's square with its quiet zone on the page (CSS pixel
 await qr.check(); // renders the scan view at 720 px and reads it back:
 // { ok, read, reader, inverted, text }
 await qr.png(size); // the scan view as a PNG blob (default 1024 px; not downloaded)
-await qr.gif({ motion, size }); // the GIF as a blob ("burst" | "flip" | "assemble")
+await qr.gif({ motion, size }); // the GIF as a blob ("burst" | "flip" | "assemble" | "alive")
 qr.info(); // { text, version, size, ecc, style, options, check, warnings, error }
 ```
 
@@ -221,6 +221,29 @@ qr.info(); // { text, version, size, ecc, style, options, check, warnings, error
 
 - On screen, Scan view leaves 3 modules past the quiet zone; the toy opens in that view (camera
   distance 3.1 radii, the same for any screen, since the field of view spans the narrower side).
+
+### Round 2 (October 3, 2026, from the Operator's notes on the clips)
+
+- **Gems**: the glint passes only when the code is seen at an angle (the GPU program reads the
+  camera's position, `uSpCam`); front on, in Scan view, in the PNG and in a GIF's still frames, no
+  module ever goes pale. It is compiled into the program only for Gems.
+- **Neon** is now connected tubes (each module draws half a tube to each dark neighbor) with a
+  bright core and a faint halo on the dark wall; the finder and alignment patterns are solid glowing
+  pieces. Measured at module centers in the check's 720 px render (default link): tubes 0.80 to 0.88
+  gray, gaps 0.03 (halo included), so a margin of 0.76.
+- **Neon on a pale wall** (`style: "neon-light"` in the hook; one button in the panel when Neon is
+  picked): deep blue tubes and magenta eyes on a pale wall, dark on light, so every reader takes it.
+  Measured: tubes 0.26 to 0.37, wall 0.94 (margin 0.58).
+- **Alive** (a toggle in the Toy tab, and "Save a looping GIF"): a color wave rolls across the code.
+  Each splat's hue moves toward the style's wave color (`wave`, set by each preset) while its gray,
+  what a reader sees, stays the same, so every frame scans; the pieces also breathe in depth, which
+  shows when the code is turned. The looping GIF is one whole period (44 frames). Every frame of
+  every style's loop reads back with jsQR (`tests/qr.spec.mjs`). The eyes don't turn: a finder
+  turned partway is no longer a finder, and jsQR lost the code on those frames.
+- The check could hand back an earlier check's result (one still running for the code before a
+  change); now a check counts only for the code built last.
+- The GIF's frame times grew with each frame (each `renderAt` read back the time the last one set);
+  they are fixed steps from the start now.
 
 ### Clips and cards
 

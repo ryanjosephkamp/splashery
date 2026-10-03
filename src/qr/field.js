@@ -9,7 +9,13 @@
 //      they turn, show their other color, then turn back.
 //   z  Burst and return: the pieces burst off, tumble and fall under gravity
 //      to a floor, then fly back to their places in a wave.
-//   w  1 while the gems' glint may pass (the Gems style).
+//   w  Alive (0..1): a color wave rolls across the code. Each splat's hue
+//      moves toward the style's wave color while its gray (what a reader
+//      sees) stays the same, so every frame scans; the pieces also breathe
+//      in depth, which shows only when the code is turned.
+//
+// The Gems style's glint passes only when the code is seen at an angle: in
+// Scan view (front on) it never pales a module.
 //
 // Each runs from 0 to 1 (uSpMorph, set by the recipe's drive) and is exactly
 // the rest pose at 0 and at 1, so the code always ends back on its grid.
@@ -21,17 +27,20 @@ const num = (x) => {
 const vec3 = (c) => c.map(num).join(", ");
 
 // The shared parts, written once for GLSL; the WGSL below says the same.
-const GLSL = ({ N, C, S, back, glint }) => `
+const GLSL = ({ N, C, S, back, glint, wave }) => `
 uniform vec4 uSpClock;   // y splat scale, z exposure
 uniform vec4 uSpKit;     // x the toy's clock
-uniform vec4 uSpMorph;   // x assemble, y flip, z burst (0..1), w glint on
+uniform vec4 uSpMorph;   // x assemble, y flip, z burst (0..1), w alive
+uniform vec4 uSpCam;     // xyz the camera's position
 const float QN = ${num(N)};
 const vec3 QC = vec3(${vec3(C)});
 const float QS = ${num(S)};
 const vec3 QBACK = vec3(${vec3(back)});
+const vec3 QWAVE = vec3(${vec3(wave)});
 vec4 qrQ = vec4(0.0, 0.0, 0.0, 1.0);
 float qrBack = 0.0;
 float qrGlint = 0.0;
+float qrWave = 0.0;
 float qrHash(float n) { return fract(sin(n * 12.9898 + 4.1414) * 43758.5453); }
 vec3 qrRot(vec4 q, vec3 v) { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 vec4 qrAxis(vec3 a, float t) { return vec4(normalize(a) * sin(t * 0.5), cos(t * 0.5)); }
@@ -105,37 +114,55 @@ void modifySplatCenter(inout vec3 center) {
     off += p * (1.0 - s) + vec3(0.0, 0.0, 0.25 * edge * sin(3.1415927 * s));
     q = qrMul(qrAxis(ax, spin * (1.0 - s)), q);
   }
+  // Alive: the color wave, and a breath in depth.
+  float L = uSpMorph.w;
+  if (L > 0.0) {
+    float ph = uSpKit.x * 1.8 - (g.x + g.y) * 5.0;
+    qrWave = L * (0.5 + 0.5 * sin(ph));
+    off.z += L * 0.2 * QS * wide * (0.5 + 0.5 * sin(ph + 1.2)); // only forward: never into the sheet
+  }
   qrQ = q;
   center = piv + qrRot(q, rel) + off;
-  // The gems' glint: a narrow band of light that passes now and then.
-  if (${glint ? "uSpMorph.w > 0.5" : "false"}) {
+  // The gems' glint: a narrow band of light that passes now and then, only
+  // when the code is seen at an angle (none front on, in Scan view).
+  if (${glint ? "true" : "false"}) {
+    float tilt = 1.0 - abs(normalize(uSpCam.xyz + vec3(0.0, 0.0, 1e-4)).z);
     float band = fract(uSpKit.x * 0.16) * 3.2 - 1.1;
     float x = (g.x + (1.0 - g.y)) * 0.5;
-    qrGlint = exp(-pow((x - band) / 0.035, 2.0)) * step(0.55, h2);
+    qrGlint = exp(-pow((x - band) / 0.035, 2.0)) * step(0.55, h2) * smoothstep(0.03, 0.12, tilt);
   }
 }
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
   rotation = qrMul(qrQ, rotation);
   scale *= uSpClock.y;
 }
+// The wave color at the gray of c (Rec. 709 weights, as readers see it).
+vec3 qrSameGray(vec3 c) {
+  vec3 W = vec3(0.2126, 0.7152, 0.0722);
+  return clamp(QWAVE * (dot(c, W) / max(dot(QWAVE, W), 0.02)), 0.0, 1.0);
+}
 void modifySplatColor(vec3 center, inout vec4 color) {
   vec3 c = mix(color.rgb, QBACK * (0.6 + 0.4 * color.rgb / max(max(color.r, color.g), max(color.b, 0.05))), qrBack);
+  c = mix(c, qrSameGray(c), qrWave * 0.85);
   c += vec3(0.55) * qrGlint;
   color = vec4(c * uSpClock.z, color.a);
 }
 `;
 
-const WGSL = ({ N, C, S, back, glint }) => `
+const WGSL = ({ N, C, S, back, glint, wave }) => `
 uniform uSpClock: vec4f;
 uniform uSpKit: vec4f;
 uniform uSpMorph: vec4f;
+uniform uSpCam: vec4f;
 const QN: f32 = ${num(N)};
 const QC = vec3f(${vec3(C)});
 const QS: f32 = ${num(S)};
 const QBACK = vec3f(${vec3(back)});
+const QWAVE = vec3f(${vec3(wave)});
 var<private> qrQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> qrBack: f32 = 0.0;
 var<private> qrGlint: f32 = 0.0;
+var<private> qrWave: f32 = 0.0;
 fn qrHash(n: f32) -> f32 { return fract(sin(n * 12.9898 + 4.1414) * 43758.5453); }
 fn qrRot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 fn qrAxis(a: vec3f, t: f32) -> vec4f { return vec4f(normalize(a) * sin(t * 0.5), cos(t * 0.5)); }
@@ -207,21 +234,33 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
     off += p * (1.0 - s) + vec3f(0.0, 0.0, 0.25 * edge * sin(3.1415927 * s));
     q = qrMul(qrAxis(ax, spin * (1.0 - s)), q);
   }
+  let L = uniform.uSpMorph.w;
+  if (L > 0.0) {
+    let ph = uniform.uSpKit.x * 1.8 - (g.x + g.y) * 5.0;
+    qrWave = L * (0.5 + 0.5 * sin(ph));
+    off.z += L * 0.2 * QS * wide * (0.5 + 0.5 * sin(ph + 1.2)); // only forward: never into the sheet
+  }
   qrQ = q;
   *center = piv + qrRot(q, rel) + off;
-  if (${glint ? "uniform.uSpMorph.w > 0.5" : "false"}) {
+  if (${glint ? "true" : "false"}) {
+    let tilt = 1.0 - abs(normalize(uniform.uSpCam.xyz + vec3f(0.0, 0.0, 1e-4)).z);
     let band = fract(uniform.uSpKit.x * 0.16) * 3.2 - 1.1;
     let x = (g.x + (1.0 - g.y)) * 0.5;
-    qrGlint = exp(-pow((x - band) / 0.035, 2.0)) * step(0.55, h2);
+    qrGlint = exp(-pow((x - band) / 0.035, 2.0)) * step(0.55, h2) * smoothstep(0.03, 0.12, tilt);
   }
 }
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
   *rotation = qrMul(qrQ, *rotation);
   *scale = *scale * uniform.uSpClock.y;
 }
+fn qrSameGray(c: vec3f) -> vec3f {
+  let W = vec3f(0.2126, 0.7152, 0.0722);
+  return clamp(QWAVE * (dot(c, W) / max(dot(QWAVE, W), 0.02)), vec3f(0.0), vec3f(1.0));
+}
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   let k = (*color).rgb / max(max((*color).r, (*color).g), max((*color).b, 0.05));
   var c = mix((*color).rgb, QBACK * (0.6 + 0.4 * k), qrBack);
+  c = mix(c, qrSameGray(c), qrWave * 0.85);
   c += vec3f(0.55) * qrGlint;
   *color = vec4f(c * uniform.uSpClock.z, (*color).a);
 }
@@ -230,8 +269,9 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 // size: the code's modules across; fit: the kit's { center, scale }; back: the
 // flip's back color [r, g, b]; glint: the gems' glint is in the program
 // (only for Gems, so no other style can ever catch it).
-export function qrModifier(size, fit, back, glint = false) {
-  const args = { N: size, C: fit.center, S: fit.scale, back, glint };
+// wave: Alive's wave color [r, g, b].
+export function qrModifier(size, fit, back, glint = false, wave = [0.11, 0.31, 0.61]) {
+  const args = { N: size, C: fit.center, S: fit.scale, back, glint, wave };
   return { glsl: GLSL(args), wgsl: WGSL(args) };
 }
 

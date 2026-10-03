@@ -137,10 +137,17 @@ const idle = (app) => {
 // { ok, text, reader, inverted, at } (ok: it read back the very text).
 export async function checkScan() {
   clearTimeout(QR.timer); // a check asked for now replaces the automatic one
-  // One check at a time: a second call waits for the one running.
-  if (QR.running) return QR.running;
-  QR.running = runCheck().finally(() => (QR.running = null));
-  return QR.running;
+  // One check at a time: a second call waits for the one running, and
+  // takes its result only if it was for the code built last.
+  while (QR.running) {
+    const { promise, kit } = QR.running;
+    const r = await promise;
+    if (kit === QR.kit) return r;
+  }
+  const kit = QR.kit;
+  const promise = runCheck().finally(() => (QR.running = null));
+  QR.running = { promise, kit };
+  return promise;
 }
 
 // True once the code built last is the one on the stage (the player swaps
@@ -204,7 +211,8 @@ async function savePNG(size = 1600) {
 }
 
 // An animated GIF of the tap's motion, seen in scan view, ending on the
-// code held still for 1.6 seconds (long enough to scan from the GIF).
+// code held still for 1.6 seconds (long enough to scan from the GIF); or,
+// with motion "alive", one seamless loop of the Alive wave.
 export async function makeGIF({
   motion = "burst",
   size = 480,
@@ -215,30 +223,39 @@ export async function makeGIF({
   const app = globalThis.__splashery?.app;
   if (!app?.player) return null;
   const player = app.player;
-  const moving = Math.round(MOTION_SECS[motion] * fps);
-  const frames = moving + Math.round(hold * fps);
+  // Alive: one whole loop of the wave (it repeats every 2π / 1.8 s of the
+  // toy's clock), every frame live, so the GIF loops seamlessly.
+  const loop = motion === "alive";
+  const moving = loop ? 44 : Math.round(MOTION_SECS[motion] * fps);
+  const frames = loop ? moving : moving + Math.round(hold * fps);
+  const dt = loop ? (2 * Math.PI) / 1.8 / moving : 1 / fps;
   const { encodeGIF, downloadBlob, timestampName } = await exportsJS();
   return app.withBusy("Making a GIF…", (progress) =>
-    app.withCapture([size, size], async () => {
+    // Rendered at 1.5 times the size and scaled down smoothly: the GIF's
+    // palette then rounds fewer fine shades into speckle.
+    app.withCapture([Math.round(size * 1.5), Math.round(size * 1.5)], async () => {
+      const t0 = player.time;
       try {
         const blob = await encodeGIF({
           frames,
           size,
-          loopMs: (frames / fps) * 1000,
+          loopMs: frames * dt * 1000,
           onProgress: (f) => progress(f, "Making a GIF…"),
           renderFrame: async (i) => {
             QR.gif = i < moving ? { key: motion, q: i / moving } : { key: motion, q: 0 };
-            QR.still = i >= moving;
-            const shot = await player.renderAt(player.time + i / fps, scanPose());
+            QR.still = !loop && i >= moving;
+            const shot = await player.renderAt(t0 + i * dt, scanPose());
             const out = document.createElement("canvas");
             out.width = out.height = size;
-            out.getContext("2d").drawImage(shot, 0, 0, size, size);
+            const g = out.getContext("2d");
+            g.imageSmoothingQuality = "high";
+            g.drawImage(shot, 0, 0, size, size);
             return out;
           },
         });
         if (save) {
           downloadBlob(blob, timestampName("gif", "splashery-qr"));
-          app.ui.toast("GIF saved: it ends on the code, held still to scan.");
+          app.ui.toast(loop ? "Looping GIF saved: every frame of it scans." : "GIF saved: it ends on the code, held still to scan."); // prettier-ignore
         }
         return blob;
       } finally {
@@ -328,6 +345,15 @@ function renderPanel() {
     styleRow.append(b);
     return [st.id, b];
   });
+  // Neon: one tap between the dark wall (glowing, an inverted code) and a
+  // pale wall (dark on light, which every reader takes).
+  const wallRow = document.createElement("div");
+  wallRow.className = "button-row";
+  const wall = button("qr-neon-wall", "", () => {
+    const light = palette(QR.options || {}).neonLight;
+    app?.setToyOptions(light ? { ...PRESETS.neon } : { ...PRESETS["neon-light"] });
+  });
+  wallRow.append(wall);
   const info = document.createElement("p");
   info.className = "note";
   info.id = "qr-info";
@@ -351,6 +377,7 @@ function renderPanel() {
   row3.append(
     button("qr-png", "Save a PNG", () => savePNG()),
     button("qr-gif", "Save a GIF", () => makeGIF()),
+    button("qr-gif-alive", "Save a looping GIF", () => makeGIF({ motion: "alive" })),
   );
   const note = document.createElement("p");
   note.className = "note";
@@ -358,7 +385,7 @@ function renderPanel() {
   const styleLabel = document.createElement("p");
   styleLabel.className = "note";
   styleLabel.textContent = "Style (each comes with its own colors; change them below)";
-  box.append(label, text, row, styleLabel, styleRow, info, warn, result, row2, row3, note);
+  box.append(label, text, row, styleLabel, styleRow, wallRow, info, warn, result, row2, row3, note);
   panel = {
     refresh() {
       const o = QR.options || {};
@@ -366,6 +393,10 @@ function renderPanel() {
         b.setAttribute("aria-pressed", String(id === (o.style || "classic")));
         b.classList.toggle("primary", id === (o.style || "classic"));
       }
+      wallRow.hidden = o.style !== "neon";
+      wall.textContent = palette(o).neonLight
+        ? "Glow on a dark wall (inverted)"
+        : "Put it on a pale wall (every reader)";
       info.textContent = QR.error ? `${QR.error} The code shows the start of it.` : describe(o);
       const w = colorWarnings(o);
       warn.textContent = w.join(" ");
@@ -451,11 +482,14 @@ export const RECIPES = {
       { key: "eye", label: "Eye color", type: "color", default: "#b3261e" },
       { key: "plate", label: "Plate", type: "select", default: "paper", choices: choices(PLATES) },
       { key: "back", label: "Back of the tiles", type: "color", default: "#e8743b" },
+      { key: "wave", label: "Alive wave color", type: "color", default: "#1d4f9c" },
     ],
     controls: [
       { key: "assemble", label: "Assemble", type: "pulse", ease: MOTION_SECS.assemble },
       { key: "flip", label: "Flip", type: "pulse", ease: MOTION_SECS.flip },
       { key: "burst", label: "Burst and return", type: "pulse", ease: MOTION_SECS.burst },
+      // Alive: an idle loop in which every frame still scans (src/qr/field.js).
+      { key: "alive", label: "Alive", type: "toggle", default: 0, ease: 0.8 },
     ],
     action: { key: "burst", label: "Burst and return", quiet: MOTIONS },
     sounds: () => Object.values(SOUNDS).flat(),
@@ -476,8 +510,8 @@ export const RECIPES = {
         m.fill(0);
         m[MOTIONS.indexOf(QR.gif.key)] = QR.gif.q;
       }
-      const gems = info?.data?.style === "gems" && !QR.still;
-      out.morph = [m[0], m[1], m[2], gems ? 1 : 0];
+      const alive = QR.gif ? (QR.gif.key === "alive" ? 1 : 0) : (c.alive ?? 0);
+      out.morph = [m[0], m[1], m[2], alive];
       for (const k of MOTIONS) {
         const v = c[k] ?? 0;
         if (v > (TAP.last[k] ?? 0) + 0.5 && !QR.gif) out.cues.push(...SOUNDS[k]);
@@ -486,7 +520,8 @@ export const RECIPES = {
     },
     gpuField(o, fit) {
       if (!fit || !Number.isFinite(fit.scale) || !QR.code) return null;
-      return qrModifier(QR.code.size, fit, palette(o).back, o.style === "gems");
+      const pal = palette(o);
+      return qrModifier(QR.code.size, fit, pal.back, o.style === "gems", pal.wave);
     },
     build(k, o) {
       const { code, error } = codeFor(o);
@@ -532,8 +567,9 @@ if (typeof window !== "undefined" && window.__splashery) {
       const a = app();
       if (a.player.scene.toy?.id !== "qr-code") throw new Error("Open the QR code toy first.");
       // A style alone brings its preset colors; colors given win over them.
+      // "neon-light" is Neon on a pale wall.
       const preset = partial.style && PRESETS[partial.style] ? PRESETS[partial.style] : {};
-      await a.setToyOptions({ ...preset, ...partial });
+      await a.setToyOptions({ ...preset, ...partial, style: preset.style || partial.style || QR.options?.style }); // prettier-ignore
       snapScanView();
       return this.info();
     },

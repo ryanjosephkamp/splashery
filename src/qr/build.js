@@ -31,13 +31,15 @@ export const STYLES = [
 // Each style's own colors and plate, set when the style is picked (the colors
 // can be changed after). Every one keeps a strong contrast.
 export const PRESETS = {
-  classic: { fg: "#14161c", bg: "#ffffff", gradient: "none", eyes: "same", plate: "paper" },
-  dots: { fg: "#1b2a4a", bg: "#ffffff", gradient: "none", eyes: "own", eye: "#c2372b", plate: "paper" }, // prettier-ignore
-  rounded: { fg: "#0f5c4d", bg: "#f7f4ec", gradient: "linear", fg2: "#1d3f73", eyes: "same", plate: "paper" }, // prettier-ignore
-  bricks: { fg: "#8f2d1f", bg: "#fbf7f0", gradient: "none", eyes: "own", eye: "#3a3f47", plate: "wood" }, // prettier-ignore
-  gems: { fg: "#173f9a", bg: "#ffffff", gradient: "radial", fg2: "#5b1d8c", eyes: "same", plate: "metal" }, // prettier-ignore
-  bubbles: { fg: "#7a1f6e", bg: "#fff8f2", gradient: "none", eyes: "same", plate: "paper" },
-  neon: { fg: "#38e8ff", bg: "#07080d", gradient: "none", eyes: "own", eye: "#ffd23f", plate: "metal" }, // prettier-ignore
+  classic: { fg: "#14161c", bg: "#ffffff", gradient: "none", eyes: "same", plate: "paper", wave: "#1d4f9c" }, // prettier-ignore
+  dots: { fg: "#1b2a4a", bg: "#ffffff", gradient: "none", eyes: "own", eye: "#c2372b", plate: "paper", wave: "#8a2d9c" }, // prettier-ignore
+  rounded: { fg: "#0f5c4d", bg: "#f7f4ec", gradient: "linear", fg2: "#1d3f73", eyes: "same", plate: "paper", wave: "#b8562a" }, // prettier-ignore
+  bricks: { fg: "#8f2d1f", bg: "#fbf7f0", gradient: "none", eyes: "own", eye: "#3a3f47", plate: "wood", wave: "#c47a12" }, // prettier-ignore
+  gems: { fg: "#173f9a", bg: "#ffffff", gradient: "radial", fg2: "#5b1d8c", eyes: "same", plate: "metal", wave: "#0f8f86" }, // prettier-ignore
+  bubbles: { fg: "#7a1f6e", bg: "#fff8f2", gradient: "none", eyes: "same", plate: "paper", wave: "#c2306f" }, // prettier-ignore
+  // Neon on a pale wall: dark on light, which every reader takes.
+  "neon-light": { style: "neon", fg: "#0d5fb0", bg: "#eef1f4", gradient: "none", eyes: "own", eye: "#b0125f", plate: "metal", wave: "#7a1fa8" }, // prettier-ignore
+  neon: { fg: "#38e8ff", bg: "#07080d", gradient: "none", eyes: "own", eye: "#ffd23f", plate: "metal", wave: "#ff4fd8" }, // prettier-ignore
 };
 
 export const PLATES = [
@@ -56,6 +58,7 @@ export function hexRGB(hex, fallback = [0, 0, 0]) {
   return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
 }
 const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const smoothstep01 = (t) => t * t * (3 - 2 * t);
 const mixc = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
 const mulc = (a, f) => [clamp01(a[0] * f), clamp01(a[1] * f), clamp01(a[2] * f)];
 const addc = (a, f) => [clamp01(a[0] + f), clamp01(a[1] + f), clamp01(a[2] + f)];
@@ -79,14 +82,21 @@ export function palette(o) {
   let fg2 = hexRGB(o.fg2, [0.1, 0.25, 0.55]);
   let bg = hexRGB(o.bg, [1, 1, 1]);
   let eye = o.eyes === "own" ? hexRGB(o.eye, fg) : null;
+  // Neon on a dark wall glows in the code color (a dark code color glows
+  // cyan); on a pale wall (neonLight) its tubes are deep colored glass (a
+  // pale code color turns deep blue), dark on light like any code.
+  let neonLight = false;
   if (style === "neon") {
-    const glow = (c) => (luminance(c) < 0.18 ? [0.22, 0.91, 1] : c);
-    fg = glow(fg);
-    fg2 = glow(fg2);
-    if (eye) eye = glow(eye);
-    bg = luminance(bg) > 0.1 ? [0.03, 0.035, 0.06] : bg;
+    neonLight = luminance(bg) > 0.3;
+    const fix = neonLight
+      ? (c) => (luminance(c) > 0.2 ? [0.04, 0.32, 0.62] : c)
+      : (c) => (luminance(c) < 0.18 ? [0.22, 0.91, 1] : c);
+    fg = fix(fg);
+    fg2 = fix(fg2);
+    if (eye) eye = fix(eye);
   }
-  return { fg, fg2, bg, eye, back: hexRGB(o.back, [0.93, 0.45, 0.2]) };
+  return {
+    neonLight, fg, fg2, bg, eye, back: hexRGB(o.back, [0.93, 0.45, 0.2]), wave: hexRGB(o.wave, [0.11, 0.31, 0.61]) }; // prettier-ignore
 }
 
 // The worst contrast between the code's dark modules and its light ones, over
@@ -527,10 +537,17 @@ export function buildCode(code, o, budget = 120000) {
         }
     },
     neon() {
-      // Glowing tubes on a dark plate: a tube from each dark module's center
-      // to each dark neighbor (half the way: the neighbor draws the rest),
-      // a bright core, and a faint glow around it.
-      const w = 0.34; // half the tube's width
+      // Neon tubes. Each dark module carries a tube from its center to each
+      // dark neighbor (half the way: the neighbor draws the rest), so runs
+      // of modules are one connected tube with round ends. Across the tube
+      // the color runs from the glass at its edge to a bright core. On the
+      // dark wall a faint halo glows around it; its brightness in the gaps
+      // is measured (tests/qr.spec.mjs). On a pale wall (the code dark on
+      // light, which every reader takes) the tubes are deep colored glass
+      // with a lighter core. The finder and alignment patterns are solid
+      // glowing pieces: readers find a code by their even runs.
+      const light = pal.neonLight;
+      const w = 0.31; // half the tube's width
       for (let r = 0; r < N; r++)
         for (let c = 0; c < N; c++) {
           if (!dark(r, c)) continue;
@@ -538,55 +555,48 @@ export function buildCode(code, o, budget = 120000) {
           const y = cy(r);
           const eye = isEye(r, c);
           const params = pieceOf(r, c);
-          const glow = codeColor(x, y, eye);
-          const core = mixc(glow, [1, 1, 1], 0.6);
-          if (inPattern(r, c)) {
-            // The finders and alignment patterns: solid glowing pieces, one
-            // even color with a brighter rim, and no halo in their gaps.
-            const [x0, y0, x1, y1] = cell(r, c);
-            flat(x0, y0, x1, y1, 0.14, sp, roundCell(r, c, 0.3), steady(glow, mixc(glow, core, 0.5), 0.06), params); // prettier-ignore
-            continue;
-          }
+          const glass = codeColor(x, y, eye);
+          const core = light ? mixc(glass, [1, 1, 1], 0.1) : mixc(glass, [1, 1, 1], 0.62);
           const across = (d) => {
             const f = clamp01(1 - d / w);
-            return steady(glow, mixc(glow, core, f * f));
+            return mixc(glass, core, f * f * f);
           };
+          if (inPattern(r, c)) {
+            // Solid, with the core's light inset from the outer edges.
+            const [x0, y0, x1, y1] = cell(r, c);
+            const open = { l: !dark(r, c - 1), r: !dark(r, c + 1), t: !dark(r - 1, c), b: !dark(r + 1, c) }; // prettier-ignore
+            flat(x0, y0, x1, y1, 0.14, sp, roundCell(r, c, 0.3), (px, py) => {
+              const dx = px - x;
+              const dy = py - y;
+              let e = 1;
+              if (open.l) e = Math.min(e, dx + 0.5);
+              if (open.r) e = Math.min(e, 0.5 - dx);
+              if (open.t) e = Math.min(e, 0.5 - dy);
+              if (open.b) e = Math.min(e, dy + 0.5);
+              return mixc(glass, core, 0.55 * smoothstep01(clamp01((e - 0.08) / 0.3)));
+            }, params); // prettier-ignore
+            continue;
+          }
           const links = [
             [dark(r, c + 1), 1, 0],
             [dark(r, c - 1), -1, 0],
             [dark(r - 1, c), 0, 1],
             [dark(r + 1, c), 0, -1],
           ];
-          // A corner whose three neighbors are dark too is filled, so a
-          // solid block (a finder's center) stays solid, not a grid of tubes.
-          const full = (sx, sy) => dark(r, c + sx) && dark(r - sy, c) && dark(r - sy, c + sx);
-          const quad = { "1,1": full(1, 1), "1,-1": full(1, -1), "-1,1": full(-1, 1), "-1,-1": full(-1, -1) }; // prettier-ignore
-          // The node: a round end where nothing joins, square where it does.
-          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.14, sp * 0.8, (px, py) => {
+          const dist = (px, py) => {
             const dx = px - x;
             const dy = py - y;
-            if (Math.hypot(dx, dy) <= w) return true;
-            if (quad[`${dx < 0 ? -1 : 1},${dy < 0 ? -1 : 1}`]) return true;
-            for (const [on, lx, ly] of links) {
-              if (!on) continue;
-              if (lx && Math.sign(dx) === lx && Math.abs(dy) <= w) return true;
-              if (ly && Math.sign(dy) === ly && Math.abs(dx) <= w) return true;
-            }
-            return false;
-          }, (px, py) => {
-            const dx = px - x;
-            const dy = py - y;
-            if (quad[`${dx < 0 ? -1 : 1},${dy < 0 ? -1 : 1}`]) return across(Math.min(0.5 - Math.abs(dx), 0.5 - Math.abs(dy), Math.hypot(dx, dy)) * 0.5); // prettier-ignore
             let d = Math.hypot(dx, dy);
             for (const [on, lx, ly] of links) {
               if (!on) continue;
               if (lx && Math.sign(dx) === lx) d = Math.min(d, Math.abs(dy));
               if (ly && Math.sign(dy) === ly) d = Math.min(d, Math.abs(dx));
             }
-            return across(d);
-          }, params); // prettier-ignore
-          // The glow: faint, wider splats behind the tube.
-          out.push({ p: [x, y, 0.1], scales: [0.32, 0.32, 0.01], quat: Q_FLAT, color: glow, opacity: 0.22, params, pattern: false }); // prettier-ignore
+            return d;
+          };
+          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.14, sp * 0.8, (px, py) => dist(px, py) <= w, (px, py) => across(dist(px, py)), params); // prettier-ignore
+          // The halo on the dark wall: faint, wide splats behind the tube.
+          if (!light) out.push({ p: [x, y, 0.1], scales: [0.3, 0.3, 0.01], quat: Q_FLAT, color: glass, opacity: 0.16, params, pattern: false }); // prettier-ignore
         }
     },
   };
