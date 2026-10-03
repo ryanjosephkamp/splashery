@@ -413,7 +413,10 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
    screenshots back, and `npx prettier --check .` is clean.
 5. Your handoff file says what was done, the known issues, and anything for the Operator.
 6. The PR is ready for the owner. Finish with "READY:" for the Operator. Keep the PR mergeable, and
-   fix whatever the owner marks "Needs work" in the same PR.
+   fix whatever the owner marks "Needs work" in the same PR. Since October 3, 2026 a "fix" mark on
+   Effect review page 2 is stored only when the owner sends it with its note, so every "fix" a lane
+   reads carries his note; act on the note, and if a "fix" ever comes without one, ask the Operator
+   instead of guessing.
 
 ## Upkeep after a merge (the Operator)
 
