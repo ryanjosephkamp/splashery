@@ -870,9 +870,12 @@ export class Player {
   // the media this build will show (the scene's address, the file opened on
   // this device, or the recipe's sample) and resolves with it, or with null
   // when it can't be read; the build then shows the same media, opened once.
+  // Every recipe's help also carries the device's profile (lane Fidelity: a
+  // toy made of trained files loads their lite versions on "low").
   prepareHelp(toy, recipe, options) {
-    if (!recipe.pictures) return {};
+    if (!recipe.pictures) return { profile: this.profile };
     return {
+      profile: this.profile,
       media: () => {
         const src = this.mediaSource(toy, recipe, options);
         if (!src) return Promise.resolve(null);
