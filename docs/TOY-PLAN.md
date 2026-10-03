@@ -600,6 +600,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap spins the tornado up: the funnel widens (most at the foot), whirls round
     faster and kicks up dust, and the planks, clods and leaves on the field lift one by one, spiral
     up round the funnel and fall back where they lay as it weakens (about 5 s). Power still works.
+    Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: Rising roar of wind.
 - **Rainbow** (`rainbow`). Now: tap: Draw the rainbow. Plan: keep.
   - Owner: Pick an effect.
@@ -896,7 +897,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Idle: slow rotation. Tap: arms swirl faster and the core flares.
   - Improved: E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep
     their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the
-    core flares (4.6 s).
+    core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm
+    glow, and finer dust lanes.
   - Sound: Deep swirling hum.
 
 ## Tiny (18)
@@ -1106,19 +1108,22 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Really cool.
   - Effect: The geode opens wider and the crystals glow violet.
   - Improved: C2: each time it opens, the halves swing wider and the crystals glow violet with
-    twinkling tips, then settle (about 4 s).
+    twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even,
+    solid splats and calmer textures).
   - Sound: Stone crack and a chime.
 - **Sapphire** (`sapphire`). Now: tap: Catch the star. Plan: keep.
   - Effect: A star shimmer (asterism) glides across it.
   - Improved: E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from
     a bright centre, lying on the stone and ending at its edge; it glides across the top with its
-    rays keeping their directions, and the rays draw back in at the far side (3.6 s).
+    rays keeping their directions, and the rays draw back in at the far side (3.6 s). Sharpness A
+    (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: The crisp gem tap alone, without the wind and sandy shuffle (Sound C, October 2, 2026).
 - **Quartz cluster** (`quartz-cluster`). Now: tap: Light the points. Plan: keep.
   - Effect: Points light up one by one.
   - Improved: E2: a tap lights the ten points one by one from left to right, each glowing from
     within with a glint at its tip (a long and a short spike, each point's turned its own way), with
-    a rising chime for each (4.4 s).
+    a rising chime for each (4.4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats
+    and calmer textures).
   - Sound: Tinkling chimes.
 - **Opal** (`opal`). Now: tap: Tilt it in the light. Plan: keep.
   - Effect: Colour play: flashes of colour roll across it.
@@ -1743,7 +1748,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped
     for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift
     and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
-    denser scan, thinner braided laces.
+    denser scan, thinner braided laces. Sharpness A (October 2, 2026): exact splat sizes for a
+    crisper outline and a calmer fabric texture.
   - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
 - **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -1817,7 +1823,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Jewels light up in turn and it rises with a glow.
   - Improved: E6: the crown lifts and hovers; its eight jewels light up one after another round the
     band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it
-    settles (about 4 s).
+    settles (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer
+    textures).
   - Sound: The fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of
     synthetic brass; the jewels' pings stay.
 - **Dragon egg** (`dragon-egg`). Now: tap: Hatch. Plan: keep.
@@ -1934,7 +1941,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the
     rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the
     show; rapid taps launch more shells, up to three at once (one per tube), each with its own
-    rocket and its own clock; the burst now flies out from its middle (about 3.4 s each).
+    rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness
+    A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: A real firework, the launch's thump and rush (no whistle), a deep boom and the stars'
     soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a
     fallback.
@@ -2061,7 +2069,8 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Could be more dramatic; maybe inflate more.
   - Effect: Burner roars, the envelope swells and it rises higher.
   - Improved: C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon
-    climbs well up, then drifts back down (4 s).
+    climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even,
+    solid splats and calmer textures).
   - Sound: Burner roar.
 - **Steam train** (`steam-train`). Now: tap: Blow the whistle. Plan: keep.
   - Owner: Basically perfect.
@@ -2127,6 +2136,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white
     lights climbs the tower, and four fireworks burst round it one after another (blue, white, red
     and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s).
+    Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: Real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0
     recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.
 - **Washington Monument** (`washington-monument`). Now: tap: Sun and shadow. Plan: keep.
@@ -2143,7 +2153,8 @@ Proposals below are suggestions; the owner may change them.
     cloud of sand.
   - Improved: E6: a tiny flying saucer glides in by the Great Pyramid and switches on its beam; sand
     streams up out of the desert into the shape of a camel, which floats up into the saucer; the
-    saucer wobbles happily and zips away (about 5 s).
+    saucer wobbles happily and zips away (about 5 s). Sharpness A (October 2, 2026): sharper (even,
+    solid faces with clean stone steps) and a clearer, larger Sphinx.
   - Sound: Theremin warble, sand hiss and a zip away.
 - **Twisting supertall** (`supertall`). Now: tap: Twist and light up. Plan: keep.
   - Owner: Make it twist or glow.
@@ -2177,7 +2188,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Two balls of different sizes drop from the top and land together.
   - Improved: E6: Galileo's drop: the tower leans a little further, a big iron ball and a small
     bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs
-    of dust; they bounce, settle and fade, and the tower eases back (about 4 s).
+    of dust; they bounce, settle and fade, and the tower eases back (about 4 s). Sharpness A
+    (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: The tower grinds, then two thuds at the same moment.
 - **Colosseum** (`colosseum`). Now: tap: A chariot race. Plan: keep.
   - Owner: Gladiators fighting inside?
@@ -2185,7 +2197,8 @@ Proposals below are suggestions; the owner may change them.
     per the no-gore rule).
   - Improved: E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the
     team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes,
-    swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s).
+    swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s). Sharpness
+    A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: A real crowd in the stands and horses' hooves trotting; real CC0 recordings now
     (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.
 - **Parthenon** (`parthenon`). Now: tap: A procession. Plan: keep.
@@ -2193,14 +2206,16 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Tiny robed figures walk between the columns in procession.
   - Improved: E6: a procession: eight robed figures, some with baskets and jars on their heads, walk
     in single file along the temple, round the corner and across the front of its steps, then fade
-    away (about 5.5 s).
+    away (about 5.5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer
+    textures).
   - Sound: A lyre plays a walking tune.
 - **Stonehenge** (`stonehenge`). Now: tap: Solstice sunrise. Plan: keep.
   - Owner: No idea.
   - Effect: Solstice sunrise: the sun rises through the stones and lights them gold.
   - Improved: E6: solstice sunrise: the sun comes up over the far bank, framed by the great
     trilithon, a golden beam shines through the stones along the monument's axis, and the stones
-    glow gold; then it fades back (about 5 s).
+    glow gold; then it fades back (about 5 s). Sharpness A (October 2, 2026): sharper look (even,
+    solid splats and calmer textures).
   - Sound: A low drone and a bell as the stones light.
 - **Big Ben** (`big-ben`). Now: tap: Chime the bell. Plan: keep.
   - Owner: No visible effect; make it pronounced or pick something better.
@@ -2213,25 +2228,28 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Moonlight: the dome glows and the reflecting pool ripples.
   - Improved: E6: moonlight: night falls on the garden and the buildings, the moon rises behind the
     Taj, the great dome stays bright white and glows against the night, and moonlight shimmers on
-    the rippling pool; then day comes back (about 5 s).
+    the rippling pool; then day comes back (about 5 s). Sharpness A (October 2, 2026): sharper look
+    (even, solid splats and calmer textures).
   - Sound: A slow sitar phrase.
 - **Castle** (`castle`). Now: tap: Raise or lower the drawbridge. Plan: keep.
   - Owner: Pretty good but underwhelming. Knights come out when the drawbridge opens.
   - Effect: The drawbridge drops and tiny knights march out with a banner.
   - Improved: C2: the drawbridge now starts up. A tap lowers it and five small knights march out,
-    the leader with a banner; a second tap marches them back in and raises it.
+    the leader with a banner; a second tap marches them back in and raises it. Sharpness A (October
+    2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: Chain rattle and a trumpet.
 - **Pagoda** (`pagoda`). Now: tap: Ring the bells. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Wind chimes swing on every roof tier and lanterns light up.
   - Improved: C2: wind chimes at every roof corner swing, one tier after another, and two stone
-    lanterns by the path light up, with the doors glowing (4 s).
+    lanterns by the path light up, with the doors glowing (4 s). Sharpness A (October 2, 2026):
+    sharper look (even, solid splats and calmer textures).
   - Sound: Wind chimes.
 - **Windmill** (`windmill`). Now: tap: A gust of wind. Plan: keep.
   - Owner: Pretty good, but move a little faster.
   - Effect: Faster sails; the gust spins them up hard.
   - Improved: C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns
-    (4 s).
+    (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: Creaking sails and wind.
 
 ## Computing (17)

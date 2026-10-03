@@ -3,7 +3,7 @@
 // lantern, a diya and a menorah.
 
 import { mix, shade, smoothstep, clamp, spline, quatAxisAngle, quatMul, vec } from "../kit.js";
-import { evenTorus } from "./even.js";
+import { evenCylinder, evenRoundBox, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -646,7 +646,13 @@ export const RECIPES = {
     build(k) {
       const ground = FW.ground;
       // A crate of launch tubes.
-      k.add(k.roundedBox(0.5, 0.2, 0.34, 6), {
+      // (Lane Sharpness A: an even, solid crate with a calm grain, and even
+      // tubes with broad, clean paper bands.)
+      k.add(evenRoundBox(0.5, 0.2, 0.34, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
+        weight: 1.5,
         pos: [0, ground + 0.1, 0],
         flat: 0.2,
         color: (c) =>
@@ -655,17 +661,23 @@ export const RECIPES = {
             mix(
               "#9a6a3a",
               "#7a4e28",
-              0.5 + 0.5 * Math.sin(c.p[1] * 60 + c.noise(c.p[0] * 8, 0, c.p[2] * 8) * 3),
+              0.5 + 0.35 * Math.sin(c.p[1] * 40 + c.noise(c.p[0] * 4, 0, c.p[2] * 4) * 2),
             ),
             0.35,
           ),
       });
       for (const { x, z, col } of FW.tubes)
-        k.add(k.cylinder(0.05, 0.22, { caps: false }), {
+        k.add(evenCylinder(0.05, 0.05, 0.22, "top"), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [x, ground + 0.3, z],
           flat: 0.2,
-          weight: 1.5,
-          color: (c) => lit(c, fract(c.p[1] * 14) < 0.5 ? col : "#f4efe4", 0.3),
+          weight: 2.5,
+          color: (c) =>
+            c.s.cap
+              ? lit(c, "#2a2420", 0.2)
+              : lit(c, fract(c.p[1] * 10) < 0.5 ? col : "#f4efe4", 0.3),
         });
       // Bursts in the sky: rays of sparks, twinkling tips and drooping embers.
       const bursts = [
