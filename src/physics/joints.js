@@ -55,7 +55,7 @@ const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 // parts to use (default all); o: { solid (a function of the part's first
 // region { at, r } giving a solid), mass, friction, restitution, ... } is
 // copied onto every piece. Each piece's middle is its first region's
-// centre, and it turns about that.
+// center, and it turns about that.
 export function rigPieces(rig, names = null, o = {}) {
   const out = [];
   for (const p of rig.parts || []) {
