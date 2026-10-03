@@ -218,3 +218,21 @@ test("the soft parts' step time stays small with each demo toy in play", async (
   console.log(`hands-on step (ms per frame): ${JSON.stringify(out)}`);
   for (const ms of Object.values(out)) expect(ms).toBeLessThan(2);
 });
+
+test("screenshots: the octopus held up, its arms trailing (390x844 and 1440x900)", async ({
+  page,
+}) => {
+  for (const [w, hgt] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: hgt });
+    await open(page, "octopus");
+    await page.evaluate(() => {
+      const h = window.__hec;
+      h.drag([0, 0.3, 0], h.line([0, 0.3, 0], [0.5, 0.3, 0.3], 12), false);
+    });
+    await page.waitForTimeout(400);
+    await page.screenshot({ path: `tests/screenshots/hec-octopus-${w}x${hgt}.png` });
+  }
+});
