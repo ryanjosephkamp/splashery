@@ -299,6 +299,8 @@ const PHOTO_3D = {
     }
     MIRROR.cam?.close(); // lane Live input: the live view ends
     MIRROR.cam = null;
+    MIRROR.back = false; // (r5: the splat mirror's background layer isn't this toy's)
+    MIRROR.stillBack = null;
     const src = P3D.want;
     if (!src) throw new Error("There is no photo to show.");
     const budget = Math.max(100, Math.floor(k.count * 0.98));
