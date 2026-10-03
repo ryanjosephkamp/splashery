@@ -135,6 +135,22 @@ test.describe("links and pop-out (no browser)", () => {
     expect(pics.opened.length).toBe(1);
   });
 
+  test("seen a page at a time, a page link lands on that page", async () => {
+    const { BOOKS_R5 } = await import("../src/packs/pictures.js");
+    const pics = fakePics(9);
+    const b = await play("your-book", { reading: "one" }, pics);
+    b.tap([0.4, 0, 0.02]);
+    b.run(1.6);
+    expect(b.out.view.key).toBe("R");
+    await b.settle();
+    b.run(0.1);
+    // Page 5 (0-based) is the right page of spread 3; the view lands there, not on page 4.
+    b.tap(BOOKS_R5.point(1, [0.3, 0.225]));
+    b.run(2);
+    expect(pics.page).toBe(5);
+    expect(b.out.view.key).toBe("R");
+  });
+
   test("Pop out lifts the page's figure as one piece and lays it back; the page shows its place empty", async () => {
     const { BOOKS_R5 } = await import("../src/packs/pictures.js");
     const { POP } = BOOKS_R5;

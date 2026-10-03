@@ -611,7 +611,11 @@ function bookView(st, out) {
   if (K !== BOOK.viewK) {
     const fwd = K > BOOK.viewK;
     BOOK.viewK = K;
-    if (BOOK.focus || BOOK.one) BOOK.focus = landSide(K, fwd);
+    // (A link lands on the page it points to: lane Books r5.)
+    const to = BOOK.linkSide;
+    BOOK.linkSide = null;
+    if (BOOK.focus || BOOK.one)
+      BOOK.focus = to && st.bound === "side" && K >= 1 ? to : landSide(K, fwd);
   }
   const f = BOOK.focus;
   if (!f) {
@@ -817,7 +821,14 @@ function bk5Pick(pk, pics, N) {
   if (!pk || typeof pk !== "object") return false;
   if (pk.link) {
     if (pk.link.url) pics?.openLink?.(pk.link.url);
-    else if (Number.isInteger(pk.link.page) && pics) pics.go(pk.link.page);
+    else if (Number.isInteger(pk.link.page) && pics) {
+      // Seen a page at a time, the view lands on the page itself (odd pages lie on the right).
+      const side = BOOK.style?.bound === "side" ? (pk.link.page % 2 ? "R" : "L") : null;
+      if (side && pageSpread(BOOK.style, pk.link.page) === BOOK.K) {
+        if (BOOK.focus) BOOK.focus = side; // the other page of this spread
+      } else BOOK.linkSide = side;
+      pics.go(pk.link.page);
+    }
   } else if (pk.fig) {
     POP.next = pk.fig;
     if (POP.phase === "up" || POP.phase === "rise") bk5Fall(BOOK.time);
@@ -965,7 +976,13 @@ function bk5Drive(c, out, pics, N, time) {
     POP.next = null;
     BK5.lastK = BOOK.K;
   }
-  if (pics?.kind === "pdf" && !moving)
+  if (
+    pics?.kind === "pdf" &&
+    typeof pics.links === "function" &&
+    typeof pics.figures === "function" &&
+    !moving
+  )
+    // prettier-ignore
     for (const s of bk5Sides(N)) {
       for (const [map, what] of [
         [BK5.links, "links"],
@@ -1050,7 +1067,7 @@ function bk5Drive(c, out, pics, N, time) {
   }
   // Frames keep coming while it moves, waits for its pictures or its depth,
   // or waits for the page's figures to be found.
-  const waiting = want && ph === "idle" && pics?.kind === "pdf" && bk5Sides(N).some((s) => !BK5.figs.get(s)); // prettier-ignore
+  const waiting = want && ph === "idle" && pics?.kind === "pdf" && typeof pics.figures === "function" && bk5Sides(N).some((s) => !BK5.figs.get(s)); // prettier-ignore
   POP.busy = waiting || (ph !== "idle" && ph !== "up") || (ph === "up" && (time - POP.tUp < POP_SWAY || (POP.kind === "photo" && !POP.relief))); // prettier-ignore
   // A box being drawn: its four corners.
   const D = BK5.drawing;
