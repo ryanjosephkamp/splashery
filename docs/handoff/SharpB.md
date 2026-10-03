@@ -123,6 +123,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - October 3, 2026, 04:14 UTC: the owner marked 12 of the 13 new cards good. The one fix (the surface
   plotter's knob drew under the slider's track while dragged) is fixed by sorting the knob where it
   stands as it moves (`sortKnob` in `src/packs/maths.js`), card `shb-surface-plotter-drag-r2`.
+- October 3, 2026, 07:13 UTC: the knob card came back good. The Operator's combined run found
+  `tests/unit.spec.mjs:213` failing on #185 alone: the tomatoes' rig had 13 regions (cap 12). The
+  red-stain band and the needles band are now one region (anything but the plate's white, inside the
+  dark rim); card `shb-base-tomatoes-r4` shows the small change from below.
 - On hold (the owner's call of October 3, 2026: no new Sharpness rounds until the Fidelity lane's
   Stage 1 reports): jelly, bricks and sushi (sharper) and the pebbles' base (they waited on Physics
   #184), and the quartz cluster's and the tornado's bases (they waited on Sharpness A #172). This
