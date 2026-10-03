@@ -74,10 +74,14 @@ pinned), and this handoff file.
 - Language: every new text is in American English.
 - Read first: CLAUDE.md, docs/OPERATING.md ("Steps for a lane"), docs/handoff/QR.md (lane QR's
   brief, and the test hook once it's documented), `tools/effect-clip.mjs` (how tools drive the toy).
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+October 3, 2026, in progress.
 
-Starting, October 3, 2026.
+- Harness built against reference codes (`tools/qr-scan-lab.mjs`, `tools/qr-scan-lab/`): a pinned
+  encoder (`qrcode-generator`) draws five stand-in styles (classic, dots, rounded, bricks, glow) in
+  six color schemes; `sim.mjs` makes the phone captures (yaw, pitch, roll, module size, blur, JPEG
+  and noise, uneven light) in plain Node; `readers.mjs` decodes with jsQR and zxing-js. A capture
+  counts as decoded only when the reader returns the exact text.
+- Waiting for `origin/claude/lane-qr` (not pushed yet). The toy source
+  (`tools/qr-scan-lab/toy-source.mjs`) needs its test hook, documented in docs/handoff/QR.md.
