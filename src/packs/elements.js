@@ -1102,6 +1102,40 @@ function owPose(s) {
   return { pts: owSpline(a, b, c, d, f), w: K[k].w + (K[k + 1].w - K[k].w) * f };
 }
 const owZ = (v) => OW_Z0 + (OW_Z1 - OW_Z0) * v;
+// Lane Fix7: the lip stays joined to the face. The lip's root rests on the
+// main sheet at one place along it (OW_ROOT, found at rest); in every pose
+// its first control points are drawn back to that place (fading along the
+// lip), so the two sheets never part at the curl as a dark strip.
+const OW_ROOT = (() => {
+  const m = OW_CTL[0];
+  const p = m[OW_NM];
+  let best = { d: Infinity, j: 0 };
+  for (let i = 0; i < OW_NM - 1; i++)
+    for (let k = 0; k <= 20; k++) {
+      const f = k / 20;
+      const q = [m[i][0] + (m[i + 1][0] - m[i][0]) * f, m[i][1] + (m[i + 1][1] - m[i][1]) * f];
+      const d = Math.hypot(q[0] - p[0], q[1] - p[1]);
+      if (d < best.d) best = { d, j: i + f, off: [p[0] - q[0], p[1] - q[1]] };
+    }
+  return best;
+})();
+function owJoin(pts) {
+  const i = Math.floor(OW_ROOT.j);
+  const f = OW_ROOT.j - i;
+  const a = pts[i];
+  const b = pts[Math.min(OW_NM - 1, i + 1)];
+  const root = [
+    a[0] + (b[0] - a[0]) * f + OW_ROOT.off[0],
+    a[1] + (b[1] - a[1]) * f + OW_ROOT.off[1],
+  ];
+  const lip0 = pts[OW_NM];
+  const d = [root[0] - lip0[0], root[1] - lip0[1]];
+  for (let k = 0; k < 4; k++) {
+    const w = 1 - k / 4;
+    const p = pts[OW_NM + k];
+    pts[OW_NM + k] = [p[0] + d[0] * w, p[1] + d[1] * w, ...p.slice(2)];
+  }
+}
 // Spray: clumps of drops (tokens) thrown up from along the line where the
 // lip lands, each on its own path, falling back into the foam.
 const OW_G = 5.5;
@@ -3157,6 +3191,7 @@ export const RECIPES = {
     drive(t, c, out) {
       const s = since(c.crash, OW_SECS);
       const pose = owPose(s === null ? 0 : Math.min(s, OW_KEYS[OW_KEYS.length - 1].at));
+      owJoin(pose.pts);
       const rest = OW_CTL[0];
       const ctl = pose.pts.map((p, i) => ({
         base: [rest[i][0], rest[i][1], 0],
