@@ -74,10 +74,22 @@ pinned), and this handoff file.
 - Language: every new text is in American English.
 - Read first: CLAUDE.md, docs/OPERATING.md ("Steps for a lane"), docs/handoff/QR.md (lane QR's
   brief, and the test hook once it's documented), `tools/effect-clip.mjs` (how tools drive the toy).
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+October 3, 2026 (Sonnet 5.5). Round 2 done against lane QR's `7839a25b` (round 1 was `f86e0880`).
 
-Starting, October 3, 2026.
+- Scorecard `docs/audits/qr-scan-lab-2026-10.md`: a "Round 2" section (headline numbers, round 1
+  against round 2, the Alive loop table, the pale-wall Neon) above round 1's measured tables.
+- Tools in `tools/qr-scan-lab/`: `toy-source.mjs`, `report.mjs`, `compare.mjs` (round 1 in `data/r1`
+  against round 2 in `data/`), `alive.mjs` (samples 12 of the loop's 44 frames per style, front-on
+  and at 10° and 20° yaw; Alive is a motion control, `player.motion.setControl("alive", 1)`, not a
+  style option) and `cards.mjs`. Data in `tools/qr-scan-lab/data/`.
+- `tests/qrl.spec.mjs` (eight styles, four captures each) passes against `7839a25b` (44 s); it skips
+  itself where `src/packs/qr.js` is missing.
+- Effect review page 2, lane `QRL`: cards `qrl-<style>-r2` replace the first seven (`replacedBy`),
+  and `qrl-neon-light` is new.
+- Rerun: serve a tree with the toy on port 4173, `node tools/qr-scan-lab.mjs --source=toy --tag=<n>`
+  (about 25 minutes as three shards), `report.mjs toy`, `compare.mjs`, `alive.mjs`, `cards.mjs`.
+- Open: the full-size (1,024 px) camera captures put about 15 px on each module, where the readers
+  themselves lose codes; read the shrunk (8 px) rows for phone-like results. Each 3D cell is 3
+  captures at one level.
