@@ -722,7 +722,9 @@ that turn with the wheels (a steam train's rods).
 
 **Shake detection** (`hands.shake`): a quick back-and-forth drag on the toy (holding it, or on a
 tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds; `info.hands.shake`
-(0 to 1) is how hard it is being shaken, to make the effect grow.
+(0 to 1) is how hard it is being shaken, to make the effect grow. `hands.slosh: 0.05` makes contents
+lag behind the moving toy: `info.hands.slosh` is a sideways offset (recipe units, at most that much)
+for a part (the snow globe's snow; keep the part inside its glass by that margin).
 
 ```js
 hands: { shake: true },
