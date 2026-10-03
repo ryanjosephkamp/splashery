@@ -21,3 +21,21 @@ merges.
 | 09-supersplat-compare.md | Splashery and SuperSplat compared, with evidence             | report and data            | yes           |
 | 11-hands-on-materials.md | Real physical properties for the hands-on toys, with sources | data and report            | yes           |
 | 12-hands-l1-sweep.md     | Every toy picks up, lands, settles and goes home on Reset    | one new test file, report  | no            |
+
+## Dot jobs
+
+The [October 2026 report](../audits/dot-jobs-2026-10.md) has capability and usage findings,
+ownership prerequisites, and eight ready-to-paste briefs. These are proposals, not dispatched lanes.
+Dot conversations avoid ChatGPT limits; delegated Work/Codex tasks use their normal allowances.
+Provision the tools and reserve the paths before assigning a brief.
+
+| Brief                                                                                            | Task                                                       | Changes                                            | Needs the web |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------------------------- | ------------- |
+| [J01 — Knot inspector](../audits/dot-jobs-2026-10.md#j01--knot-inspector)                        | A labs kit toy with a tracer following a solid knot        | new pack/test/thumb, own registry entries, handoff | yes           |
+| [J02 — Material renders](../audits/dot-jobs-2026-10.md#j02--cpu-material-reference-renders)      | Original CPU Blender references and reproducibility data   | isolated script, audit and previews                | yes           |
+| [J03 — Impact sounds](../audits/dot-jobs-2026-10.md#j03--impact-sound-candidates)                | Twelve CC0 contact-sound candidates with audition evidence | manifest, checker and report; no shipped audio     | yes           |
+| [J04 — Earthquake data](../audits/dot-jobs-2026-10.md#j04--frozen-earthquake-data)               | A dated USGS sample with provenance and unit checks        | static audit data, checker and report              | yes           |
+| [J05 — Model CLI tests](../audits/dot-jobs-2026-10.md#j05--model-cli-tests-one-file)             | Synthetic converter CLI regression cases                   | one new test file                                  | no            |
+| [J06 — NC checker tests](../audits/dot-jobs-2026-10.md#j06--nc-checker-tests-one-file)           | Negative cases for the NC asset checker                    | one new test file                                  | no            |
+| [J07 — License graph](../audits/dot-jobs-2026-10.md#j07--license-evidence-graph-proposal)        | A bounded source and rights review template proposal       | two audit proposals; Grooph read-only              | yes           |
+| [J08 — Effect review graph](../audits/dot-jobs-2026-10.md#j08--toy-effect-review-graph-proposal) | Separate tests, motion critique and owner acceptance       | two audit proposals; Grooph read-only              | yes           |
