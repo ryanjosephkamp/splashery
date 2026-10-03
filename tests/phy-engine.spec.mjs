@@ -207,3 +207,71 @@ test("a soft toy squishes when it lands; a link and a saved scene don't change",
   const after = await page.evaluate(() => JSON.stringify(window.__splashery.app.sceneJSON?.() ?? window.__splashery.player.scene)); // prettier-ignore
   expect(after).toBe(before);
 });
+
+// The grab (October 3, 2026): a nudge never throws, a still hold lets go
+// still, a flick throws (capped), and frame rate doesn't change the result.
+test("a nudge moves the toy no further than the finger; a still hold lets go still", async ({
+  page,
+}) => {
+  await ready(page, "cactus");
+  await page.evaluate(() => window.__splashery.app.toggleHands());
+  const r = await page.evaluate(async () => {
+    const { player } = window.__splashery;
+    const h = player.handsOn;
+    const settle = (dt = 1 / 60) => {
+      for (let i = 0; i < 4 / dt && !(h.state().asleep && !h.holding); i++) player.update(dt);
+    };
+    // Drags from the toy's middle by (dx, dy) CSS pixels over `n` frames of
+    // `dt`, holds still for `hold` seconds, lets go and settles.
+    const drag = async (dx, dy, n, dt, hold = 0) => {
+      h.reset();
+      for (let i = 0; i < 60; i++) player.update(1 / 60);
+      const c = player.stage.toScreen(player.toyInfo.center);
+      player.pickDirty = true;
+      const hit = await player.pickAt(c[0], c[1]);
+      if (!hit || !h.pressAt(hit, c[0], c[1])) return null;
+      const home = h.body ? h.body.pos.slice() : null;
+      for (let i = 1; i <= n; i++) {
+        h.moveTo(c[0] + (dx * i) / n, c[1] + (dy * i) / n);
+        player.update(dt);
+      }
+      for (let t = 0; t < hold; t += dt) player.update(dt);
+      const finger = h.hold ? Math.hypot(h.hold.target[0] - hit[0], h.hold.target[2] - hit[2]) : 0;
+      const b = h.body;
+      const start = home ?? b.pos.slice();
+      h.release();
+      const v = Math.hypot(b.vel[0], b.vel[2]);
+      settle(dt);
+      const R = h.R();
+      return {
+        R,
+        finger,
+        v,
+        moved: Math.hypot(b.pos[0] - start[0], b.pos[2] - start[2]),
+        pos: b.pos.slice(),
+      };
+    };
+    return {
+      nudge: await drag(18, 0, 6, 1 / 60),
+      down: await drag(0, 70, 6, 1 / 60),
+      still: await drag(120, -60, 10, 1 / 60, 0.6),
+      flick: await drag(160, 0, 4, 1 / 60),
+      slow: await drag(18, 0, 3, 1 / 30),
+      fast: await drag(18, 0, 12, 1 / 120),
+    };
+  });
+  const R = r.nudge.R;
+  // A nudge: no throw, and the toy moves no further than the finger did.
+  expect(r.nudge.v).toBe(0);
+  expect(r.nudge.moved).toBeLessThanOrEqual(r.nudge.finger + 0.02 * R);
+  // Pressed toward the floor: it isn't flung.
+  expect(r.down.moved).toBeLessThan(0.3 * R);
+  // A drag, a still hold, a let-go: it lets go still and only drops.
+  expect(r.still.v).toBe(0);
+  // A flick throws, but never faster than 4 toy radii a second.
+  expect(r.flick.v).toBeGreaterThan(0.5 * R);
+  expect(r.flick.v).toBeLessThanOrEqual(4 * R + 1e-6);
+  // The same nudge at 30 and at 120 frames a second ends in the same place.
+  const d = Math.hypot(...r.slow.pos.map((v, i) => v - r.fast.pos[i]));
+  expect(d).toBeLessThan(0.05 * R);
+});
