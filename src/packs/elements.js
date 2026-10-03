@@ -1646,13 +1646,17 @@ export const RECIPES = {
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 3.5 }],
     action: { key: "shake", label: "Shake the globe" },
     // Hands-on (lane Hands engine A): pick it up and shake it; the harder the
-    // shake, the more snow swirls.
-    hands: { shake: true },
+    // shake, the more snow swirls, and the snow sloshes behind the globe as
+    // it moves (always inside the glass: the swirl is drawn in a little and
+    // sloshes only across, at most 0.05).
+    hands: { shake: true, slosh: 0.05 },
     drive(t, c, out, info) {
       const s = Math.max(c.shake, info.hands?.shake ?? 0);
+      const sl = info.hands?.slosh || [0, 0, 0];
       out.parts.swirl = {
         quat: quatAxisAngle([0, 1, 0], t * 2.4),
-        offset: [0, 0.03 * Math.sin(t * 3), 0],
+        offset: [sl[0], 0.03 * Math.sin(t * 3), sl[2]],
+        scale: 0.92,
         visible: smoothstep(0, 0.25, s),
       };
       const wob = s * s * Math.sin(t * 22);
@@ -1842,8 +1846,10 @@ export const RECIPES = {
       });
       // Snow swirling about after a shake.
       const swirl = k.part("swirl", { pivot: G });
+      const flakes = [];
+      k.data = { flakes, G, RG, floor }; // (for the Hands-on test)
       k.cloud({ share: 0.035, size: 0.55, pattern: false }, (r) => ({
-        p: inside(r),
+        p: flakes[flakes.push(inside(r)) - 1],
         color: "#ffffff",
         opacity: 0.95,
         kind: "twinkle",

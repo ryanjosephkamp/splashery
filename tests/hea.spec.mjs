@@ -142,15 +142,43 @@ test("snow globe: shaking it swirls the snow", async ({ page }) => {
     h.moveTo(c[0], c[1] - 40);
     player.update(1 / 60);
     const still = player.motion.out?.parts?.swirl?.visible ?? 0;
+    // Every swirling flake, every frame, in the globe's own frame: inside
+    // the glass and above the snow on its floor.
+    const { flakes, G, RG, floor } = player.motion.ctx.kit.data;
+    const rot = (q, v) => {
+      const [x, y, z, w] = q;
+      const cx = y * v[2] - z * v[1] + w * v[0];
+      const cy = z * v[0] - x * v[2] + w * v[1];
+      const cz = x * v[1] - y * v[0] + w * v[2];
+      return [v[0] + 2 * (y * cz - z * cy), v[1] + 2 * (z * cx - x * cz), v[2] + 2 * (x * cy - y * cx)]; // prettier-ignore
+    };
+    let far = 0;
+    let low = Infinity;
+    let slosh = 0;
     for (let k = 1; k <= 60; k++) {
       h.moveTo(c[0] + 70 * Math.sin((k / 60) * 4 * Math.PI), c[1] - 40);
       player.update(1 / 60);
+      const sw = player.motion.out.parts.swirl;
+      slosh = Math.max(slosh, Math.hypot(sw.offset[0], sw.offset[2]));
+      for (const f of flakes) {
+        const d = rot(
+          sw.quat,
+          f.map((v, i) => (v - G[i]) * sw.scale),
+        );
+        const p = d.map((v, i) => v + G[i] + sw.offset[i]);
+        far = Math.max(far, Math.hypot(p[0] - G[0], p[1] - G[1], p[2] - G[2]));
+        low = Math.min(low, p[1]);
+      }
     }
     const level = player.motion.hands.shake;
     const swirl = player.motion.out?.parts?.swirl?.visible ?? null;
     h.release();
-    return { still, level, swirl, key: player.motion.tap?.key };
+    return { still, level, swirl, key: player.motion.tap?.key, far, low, RG, floor, slosh, n: flakes.length }; // prettier-ignore
   });
+  expect(s.n).toBeGreaterThan(1000);
+  expect(s.far).toBeLessThan(s.RG * 0.99); // inside the glass
+  expect(s.low).toBeGreaterThan(s.floor + 0.04); // above the snow floor
+  expect(s.slosh).toBeGreaterThan(0.01); // the snow lags behind the shake
   expect(s.still).toBe(0);
   expect(s.level).toBeGreaterThan(0.4);
   expect(s.key).toBe("shake");
