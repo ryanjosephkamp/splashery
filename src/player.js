@@ -487,7 +487,9 @@ export class Player {
     const options = resolveOptions(recipe, toy.options);
     // A recipe may read a data file first (the protein toy's structure).
     if (recipe.prepare) {
-      await recipe.prepare(options, this.prepareHelp(toy, recipe, options)); // Pictures
+      // The third argument tells it the device's profile (lane Fidelity: a
+      // toy made of trained files loads its lite files on "low").
+      await recipe.prepare(options, this.prepareHelp(toy, recipe, options), { profile: this.profile }); // prettier-ignore
       if (token !== this.loadToken) return null;
     }
     // Pictures (lane Books): a picture toy's media opens first, so the
@@ -870,12 +872,9 @@ export class Player {
   // the media this build will show (the scene's address, the file opened on
   // this device, or the recipe's sample) and resolves with it, or with null
   // when it can't be read; the build then shows the same media, opened once.
-  // Every recipe's help also carries the device's profile (lane Fidelity: a
-  // toy made of trained files loads their lite versions on "low").
   prepareHelp(toy, recipe, options) {
-    if (!recipe.pictures) return { profile: this.profile };
+    if (!recipe.pictures) return {};
     return {
-      profile: this.profile,
       media: () => {
         const src = this.mediaSource(toy, recipe, options);
         if (!src) return Promise.resolve(null);
