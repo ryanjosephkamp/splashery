@@ -20,7 +20,7 @@ import {
   quatEuler,
   vec,
 } from "../kit.js";
-import { evenCylinder, evenDisc, evenEllipsoid } from "./even.js";
+import { evenBox, evenCylinder, evenDisc, evenEllipsoid, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const OAK_SECS = 6.6;
@@ -348,6 +348,9 @@ function grassMound(k, r, y, o = {}) {
       { thick: d },
     ),
     {
+      // o.even (lane Sharpness B): laid evenly and solid, so the mound is
+      // closed from below (random placement shows the far side through).
+      ...(o.even ? { even: true, opacity: 1 } : {}),
       flat: 0.3,
       color: (c) => {
         const g = c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9);
@@ -1546,7 +1549,13 @@ export const RECIPES = {
         const hi = Math.pow(Math.max(0, dot(c.n, unit([-0.3, 0.45, 0.85]))), 10);
         return mix(lit(col, c.n, 0.4), "#ffffff", 0.25 * hi);
       };
-      k.add(k.box(1.6, 0.28, 1.0), {
+      // (Evenly laid, solid splats: a random box let the inside show
+      // through the pot's walls and floor from below.)
+      k.add(evenBox(1.6, 0.28, 1.0), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
+        size: 1.08,
         pos: [0, -0.16, 0],
         color: (c) => (c.s.face === 2 ? null : glaze(c)),
       });
@@ -1556,7 +1565,10 @@ export const RECIPES = {
         [0.06, 1.0, 0.81, 0],
         [0.06, 1.0, -0.81, 0],
       ]) {
-        k.add(k.box(sx, 0.05, sz), {
+        k.add(evenBox(sx, 0.05, sz), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, -0.02, z],
           weight: 1.5,
           color: (c) => glaze(c, c.s.face === 3 ? 0.6 : 1.05),
@@ -1568,7 +1580,10 @@ export const RECIPES = {
         [-0.62, 0.36],
         [0.62, 0.36],
       ]) {
-        k.add(k.box(0.16, 0.08, 0.12), {
+        k.add(evenBox(0.16, 0.08, 0.12), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, -0.32, z],
           weight: 2,
           color: (c) => lit(shade(potCol, 0.7), c.n, 0.4),
@@ -1578,6 +1593,8 @@ export const RECIPES = {
       k.add(
         k.param((u, v) => [(u - 0.5) * 1.52, -0.015, (v - 0.5) * 0.92], { grid: 8, flip: true }),
         {
+          even: true,
+          opacity: 1,
           color: (c) => {
             const m = c.fbm(c.p[0] * 6, 0, c.p[2] * 6);
             return m > -0.3
@@ -3718,15 +3735,22 @@ export const RECIPES = {
       const rand = k.rand;
       const polypSites = [];
       // The reef: a lumpy dark base crusted with pink and green.
-      k.add(k.ellipsoid(0.95, 0.22, 0.72), {
+      // (A whole, closed rock: its underside is plain dark stone, so
+      // nothing inside shows from below.)
+      k.add(evenEllipsoid(k, 0.95, 0.22, 0.72, 96), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
+        size: 1.08,
         pos: [0, 0, 0],
         color: (c) => {
-          if (c.n[1] < -0.2) return null;
           const n = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5);
           let col = mix("#4a4250", "#6f6470", 0.5 + 0.5 * n);
+          if (c.n[1] < -0.2) return lit(shade(col, 0.8), c.n, 0.45);
+          // Soft-edged crusts of pink and green.
           const crust = c.noise(c.p[0] * 9 + 3, c.p[1] * 9, c.p[2] * 9);
-          if (crust > 0.35) col = mix(col, "#d86a8a", 0.5);
-          else if (crust < -0.4) col = mix(col, "#6a8a3a", 0.5);
+          col = mix(col, "#d86a8a", 0.5 * smoothstep(0.3, 0.42, crust));
+          col = mix(col, "#6a8a3a", 0.5 * smoothstep(-0.35, -0.47, crust));
           return lit(col, c.n, 0.45);
         },
       });
@@ -3734,7 +3758,10 @@ export const RECIPES = {
         const a = rand() * TAU;
         const rr = 0.3 + 0.5 * rand();
         const s = 0.1 + 0.1 * rand();
-        k.add(k.ellipsoid(s * 1.3, s * 0.8, s), {
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.8, s, 32), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [Math.sin(a) * rr * 0.95, 0.1, Math.cos(a) * rr * 0.72],
           color: (c) =>
             lit(
@@ -3786,19 +3813,24 @@ export const RECIPES = {
             }
           }
           k.add(
-            k.tube(spline(b.pts), (t) => lerp(b.r0, b.r1, t), {
+            evenTube(k, spline(b.pts), (t) => lerp(b.r0, b.r1, t), {
               samples: 16,
               grid: 10,
               caps: last,
             }),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.012,
+              size: 1.08,
               flat: 0.35,
               color: (c) => {
                 const tip = last ? smoothstep(0.55, 1, c.t) : 0;
+                // Broad, soft mottling (fine noise read as grain).
                 let col = mix(
                   "#d8702a",
                   "#f09a4a",
-                  c.noise(c.p[0] * 60, c.p[1] * 60, c.p[2] * 60) * 0.5 + 0.5,
+                  c.noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 14) * 0.5 + 0.5,
                 );
                 col = mix(col, "#fbe0c0", tip);
                 return lit(col, c.n, 0.35);
@@ -3827,16 +3859,18 @@ export const RECIPES = {
         };
       });
       // Brain coral.
-      k.add(k.sphere(0.3), {
+      k.add(evenEllipsoid(k, 0.3, 0.3, 0.3, 72), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [-0.32, 0.12, 0.22],
         scale: [1, 0.72, 1],
-        interior: 0.08,
-        core: "#c8b070",
         color: (c) => {
           if (c.ln[1] < -0.1) return null;
           const g = c.fbm(c.lp[0] * 7, c.lp[1] * 7, c.lp[2] * 7, 3);
           const groove = Math.abs(g) < 0.07;
-          return lit(groove ? "#6a6a28" : mix("#b8b850", "#e0dc80", c.rand() * 0.4), c.n, 0.45);
+          const ridge = c.noise(c.lp[0] * 10, c.lp[1] * 10, c.lp[2] * 10) * 0.5 + 0.5;
+          return lit(groove ? "#6a6a28" : mix("#b8b850", "#e0dc80", ridge * 0.4), c.n, 0.45);
         },
       });
       // A purple sea fan at the back: a lattice of fine branches.
@@ -3869,9 +3903,12 @@ export const RECIPES = {
       );
       // A sea anemone: a pink column crowned with swaying tentacles.
       const an = [0.1, 0.22, 0.4];
-      k.add(k.cylinder(0.09, 0.14, { caps: false }), {
+      k.add(evenCylinder(0.09, 0.09, 0.14, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [an[0], an[1], an[2]],
-        color: (c) => lit(mix("#e06080", "#f08aa0", c.rand() * 0.5), c.n, 0.4),
+        color: (c) => lit(mix("#e06080", "#f08aa0", 0.25 + 0.2 * Math.sin(c.u * TAU * 9)), c.n, 0.4), // prettier-ignore
       });
       k.cloud({ share: 0.08, size: 0.7, pattern: false }, (r) => {
         const a = r() * TAU;
@@ -3898,14 +3935,20 @@ export const RECIPES = {
         [-0.5, -0.28, 0.26, 0.05],
         [-0.72, 0.02, 0.22, 0.045],
       ]) {
-        k.add(k.cylinder(r, h, { caps: false }), {
+        k.add(evenCylinder(r, r, h, false), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, 0.14 + h / 2, z],
           color: (c) => {
             const inner = dot(c.n, [x, 0, z]) < -0.9 * Math.hypot(x, z) ? 1 : 0;
-            return lit(mix("#e8b020", "#f7d040", c.rand() * 0.4), c.n, 0.4 + 0.1 * inner);
+            const n = c.noise(c.p[0] * 16, c.p[1] * 16, c.p[2] * 16) * 0.5 + 0.5;
+            return lit(mix("#e8b020", "#f7d040", n * 0.4), c.n, 0.4 + 0.1 * inner);
           },
         });
-        k.add(k.disc(r * 0.85), {
+        k.add(evenDisc(k, r * 0.85, 0, 16), {
+          even: true,
+          opacity: 1,
           pos: [x, 0.14 + h - 0.02, z],
           color: "#5a3a10",
         });
@@ -3918,7 +3961,9 @@ export const RECIPES = {
         const tangent = [Math.cos(a), 0, -Math.sin(a)];
         const q = quatFromTo([1, 0, 0], tangent);
         const fish = { kind: "orbit", params: [0.45, 0], pattern: false };
-        k.add(k.ellipsoid(0.075, 0.045, 0.025), {
+        k.add(evenEllipsoid(k, 0.075, 0.045, 0.025, 32), {
+          even: true,
+          opacity: 1,
           pos: p,
           quat: q,
           weight: 3,
@@ -3931,7 +3976,9 @@ export const RECIPES = {
             return band ? "#ffffff" : lit("#f2701a", c.n, 0.3);
           },
         });
-        k.add(k.ellipsoid(0.03, 0.035, 0.008), {
+        k.add(evenEllipsoid(k, 0.03, 0.035, 0.008, 20), {
+          even: true,
+          opacity: 1,
           pos: add(p, quatRotate(q, [-0.085, 0, 0])),
           quat: q,
           weight: 3,
@@ -3988,7 +4035,9 @@ export const RECIPES = {
       ];
       FISH.forEach((f, i) => {
         const fishy = { kind: "token", params: [i, 0], pattern: false, fit: false, weight: 3 };
-        k.add(k.ellipsoid(0.06, 0.036, 0.018), {
+        k.add(evenEllipsoid(k, 0.06, 0.036, 0.018, 32), {
+          even: true,
+          opacity: 1,
           ...fishy,
           pos: f.out,
           color: (c) => {
@@ -3998,7 +4047,9 @@ export const RECIPES = {
             return lit(f.body, c.n, 0.3);
           },
         });
-        k.add(k.ellipsoid(0.022, 0.028, 0.006), {
+        k.add(evenEllipsoid(k, 0.022, 0.028, 0.006, 20), {
+          even: true,
+          opacity: 1,
           ...fishy,
           pos: add(f.out, [-0.07, 0, 0]),
           color: f.fin,
@@ -4482,6 +4533,9 @@ export const RECIPES = {
           [0.38, 0.0],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.25,
           color: (c) => {
             const g = c.fbm(c.p[0] * 10, c.p[1] * 10, c.p[2] * 10);
@@ -4491,6 +4545,19 @@ export const RECIPES = {
           },
         },
       );
+      // The pot's floor, closed underneath like a real clay pot.
+      k.add(evenDisc(k, 0.272, 0, 40), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, -0.5, 0],
+        rot: [180, 0, 0],
+        flat: 0.25,
+        color: (c) => {
+          const g = c.fbm(c.p[0] * 10, c.p[1] * 10, c.p[2] * 10);
+          return shade(mix("#b85a32", "#d8804a", 0.5 + 0.4 * g), 0.62);
+        },
+      });
       k.add(k.disc(0.39), {
         pos: [0, -0.02, 0],
         color: (c) =>
@@ -5038,6 +5105,7 @@ export const RECIPES = {
       };
       // Sandy sea floor with rocks.
       grassMound(k, 0.85, 0, {
+        even: true,
         h: 0.06,
         colors: ["#b8a070", "#d0bc8c", "#e2d4aa"],
         soil: "#7a6444",
@@ -5045,7 +5113,9 @@ export const RECIPES = {
       for (let i = 0; i < 7; i++) {
         const a = rand() * TAU;
         const s = 0.07 + rand() * 0.08;
-        k.add(k.ellipsoid(s * 1.3, s * 0.7, s), {
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.7, s, 32), {
+          even: true,
+          opacity: 1,
           pos: [Math.sin(a) * (0.25 + rand() * 0.45), 0.04, Math.cos(a) * (0.25 + rand() * 0.45)],
           rot: [0, rand() * 180, 0],
           color: (c) => {

@@ -146,6 +146,8 @@ class App {
     player.on("paint", (n) => ui.setPaintCount(n));
     player.on("toy", (info) => this.onToy(info));
     player.on("action", (r) => this.onAction(r));
+    // A toy's slider dragged on the toy itself: the panel's slider follows.
+    player.on("controls", (targets) => ui.setMotion(player.scene.motion, targets));
     // A tap that switches the toy's options rebuilds it the way the Toy tab does.
     // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
