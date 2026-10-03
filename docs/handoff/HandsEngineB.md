@@ -93,20 +93,35 @@ files go only through your engine PR.
   owner approved in full, especially "Engine pieces this plan needs"); docs/handoff/Physics.md (how
   the engine works: units, stacking, picking and placing, known issues); `src/physics/world.js` and
   `src/physics/hands-on.js`; `tools/phy-clip.mjs` (phone-size clips with a finger dot).
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 
-Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
+- October 3, 2026: lane started.
+- Engine (`claude/lane-hands-engine-b`, draft PR #224, "Engine: hands-on joints"):
+  `src/physics/joints.js` (hinges, sliders, dials, sockets, breaks, `parent`, `start`, `upright`,
+  `rigPieces`), marked hook lines in `src/physics/hands-on.js`, `hard: true` for scan rigs (two
+  shader lines in `src/rig.js`: each splat wholly in one part), `tests/heb-engine.spec.mjs` (12
+  tests) and docs/PACKS.md, "5f. Hands-on: joints".
+- Demo toys (`claude/lane-hands-engine-b-toys`): chest (lid hinge), music box (lid hinge, crank dial
+  playing the tune note by note, dancer and notes ride on them), sword in the stone (slider, stuck
+  then free, friction), orange (eight wedge sockets), candy cane (breaks; ↺ mends) and tomatoes
+  (`rigPieces`, a hard rig). Help lines, plan entries, `tests/heb.spec.mjs` (6 tests),
+  `heb-music-box` screenshots. Clips posted on Effect review page 2 (lane HandsEngineB, six cards).
+- Step time (Hands-on's whole step, world and joints, desktop CPU in the sandbox), mean per 60 fps
+  frame while moving: sword 0.01 ms, music box 0.04, chest 0.06, candy cane 0.2, orange 0.8,
+  tomatoes 1.3 ms; worst single frame 17 ms (tomatoes, likely a collection pause or the first step
+  after a pick). A mid-range phone is perhaps 3 to 4 times slower: well inside a frame on average.
 
-- October 3, 2026: lane started. The engine on `claude/lane-hands-engine-b` ("Engine: hands-on
-  joints"): `src/physics/joints.js` (hinges, sliders, dials, sockets, breaks, upright, and
-  `rigPieces` for scan rigs), a few hook lines in `src/physics/hands-on.js`,
-  `tests/heb-engine.spec.mjs` (each piece measured: angles, positions and clicks over time) and
-  docs/PACKS.md, "5f. Hands-on: joints". Draft PR #224, pushed for the category lanes. The demo toys
-  follow on `claude/lane-hands-engine-b-toys`.
+## Known issues
+
+- Tomatoes: where a tomato is lifted off, the sides the capture never saw (where they touched) show
+  as pale fuzz; that can't be fixed from the scan.
+- The music box's dancer jumps to the crank's turn the first time anything is moved by hand (the
+  tap's dancer spins by the clock).
+- Chest and music box: a press on the box's front can pick the lid (the nearest piece); fine in
+  practice, but a press on the box body is not a no-op.
+- Hands-on starts off for the demo toys (they are public): turn on ✋ first.
 
 ## Plan lines my pieces cover (for the category lanes)
 
