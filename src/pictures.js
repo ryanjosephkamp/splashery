@@ -20,9 +20,18 @@
 // drive(): out.sheets[id] = { page, visible }. The pictures API is
 // info.data.pictures in drive (page, count, kind, next(), prev(), go(n),
 // togglePlay(), playing, and hold(on) and held for a GIF held on its frame).
+//
+// Lane Books r5: pics.links(n) and pics.figures(n) give a PDF page's links
+// and picture boxes, pics.crop(n, box, size) draws part of a page or a
+// picture, and pics.openLink(url) asks the visitor before a web link opens.
+// A sheet may show part of its page (out.sheets[id].crop, placed where that
+// part lies on the page), raised off the sheet by a relief map
+// (out.sheets[id].relief), and a page may be drawn another way by the
+// recipe's decorate (out.sheets[id].variant).
 
 import * as pc from "./pc.js";
 import { buildSheet } from "./picture-splats.js";
+import { safeLinkURL, clampRegion } from "./media.js";
 
 // Per device tier, for one sheet: the most splats a photo or a frame gets
 // ("pixels", and "screen" for video, whose texture uploads every frame),
@@ -235,7 +244,48 @@ export class Pictures {
       },
       reorder: (order) => self.reorder(order),
       thumb: (n, size = 48) => self.thumb(n, size),
+      // Lane Books r5: page n's links ([{ box, url } or { box, page }]) and
+      // picture boxes ([{ box }]), boxes in fractions of the page from its
+      // top-left corner; [] for media without them. crop(n, box, size) is a
+      // promise of a canvas of that part of page n, `size` pixels on its
+      // longer side (null for a GIF or a video). openLink(url) shows the
+      // visitor the address and opens it only if they say so: true when the
+      // address may open at all (http:, https: or mailto:).
+      links: (n = this.page) => self.pageList("links", n),
+      figures: (n = this.page) => self.pageList("figures", n),
+      crop: (n, box, size = 512) => self.crop(n, box, size),
+      openLink: (url) => self.openLink(url),
     };
+  }
+
+  // A PDF page's links or picture boxes (lane Books r5).
+  pageList(what, n) {
+    const m = this.media;
+    const i = Math.round(n);
+    if (!m?.[what] || !(i >= 0 && i < m.count)) return Promise.resolve([]);
+    return m[what](i).catch(() => []);
+  }
+
+  async crop(n, box, size) {
+    const m = this.media;
+    const i = Math.round(n);
+    if (!m?.draw || (m.kind !== "pdf" && m.kind !== "image") || !(i >= 0 && i < m.count)) return null; // prettier-ignore
+    const r = clampRegion(box);
+    const a = (m.aspect(i) * (r[2] - r[0])) / (r[3] - r[1]);
+    const s = Math.max(8, Math.min(4096, Math.round(size)));
+    const w = Math.max(1, Math.round(a >= 1 ? s : s * a));
+    const h = Math.max(1, Math.round(a >= 1 ? s / a : s));
+    return m.draw(i, w, h, r);
+  }
+
+  // Asks the app to confirm a web link (src/ui.js shows the address and an
+  // Open button that is a real link, opened in a new tab without access to
+  // this page). Unsafe addresses never get that far.
+  openLink(url) {
+    const safe = safeLinkURL(url);
+    if (!safe) return false;
+    this.player.emit("link", { url: safe });
+    return true;
   }
 
   // Puts a set's pictures in a new order (lane Books): the pages built for
@@ -380,13 +430,13 @@ export class Pictures {
   }
 
   // The picture width to build at for a sheet shown `px` pixels wide.
-  levelFor(sheet, aspect, px, page = 0) {
-    const method = this.methodFor(sheet);
+  // (`share`: the share of the picture's width a cropped sheet shows.)
+  levelFor(sheet, aspect, px, page = 0, share = 1, method = this.methodFor(sheet)) {
     const b = this.budget;
     let cap;
     if (method === "ink") cap = b.width;
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
-    if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width);
+    if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
     const target = Math.min(cap, Math.max(64, px));
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
@@ -419,9 +469,20 @@ export class Pictures {
         sh.want = null;
         continue;
       }
-      const aspect = m.aspect(page);
-      const px = this.screenWidth(sh, aspect);
-      const level = this.levelFor(sh, aspect, px, page);
+      // Lane Books r5: part of the page (crop), raised (relief), or drawn
+      // another way by decorate (variant). Only pictures and PDFs crop.
+      const crop = o?.crop && (m.kind === "pdf" || m.kind === "image") ? clampRegion(o.crop) : null; // prettier-ignore
+      const relief = crop && o?.relief?.d ? o.relief : null;
+      const variant = o?.variant ? String(o.variant) : "";
+      const pageAspect = m.aspect(page);
+      const cw = crop ? crop[2] - crop[0] : 1;
+      const ch = crop ? crop[3] - crop[1] : 1;
+      const aspect = (pageAspect * cw) / ch;
+      const px = this.screenWidth(sh, pageAspect) * cw;
+      // (A cropped part is built as pixels: a figure as a card, unless the
+      // sheet asks for ink.)
+      const method = crop && sh.def.method !== "ink" ? "pixels" : this.methodFor(sh);
+      const level = this.levelFor(sh, aspect, px, page, cw, method);
       // A new level must hold for a moment (a pinch passes through many).
       if (level !== sh.wantLevel) {
         sh.wantLevel = level;
@@ -429,23 +490,29 @@ export class Pictures {
       }
       const shown = sh.shown;
       const settled = now - sh.levelSince > 250;
-      let useLevel = shown && shown.page === page ? shown.level : level;
-      if (shown && shown.page === page && settled) {
+      // (The same page, or the same part of it.)
+      const same = !!shown && shown.page === page && String(shown.crop) === String(crop);
+      let useLevel = same ? shown.level : level;
+      if (same && settled) {
         const r = level / shown.level;
         // Rebuild when the view is much closer (sharper) or much further
         // (splats would fall under a pixel).
         if (r > 1.3 || r < 0.6) useLevel = level;
       }
-      if (!shown || shown.page !== page) useLevel = level;
-      const method = this.methodFor(sh);
+      if (!same) useLevel = level;
       // Frames keep coming while a new level waits to settle.
-      if (level !== (shown?.level ?? 0) && shown?.page === page) this.stage.requestRender(300);
+      if (level !== (shown?.level ?? 0) && same) this.stage.requestRender(300);
+      // (The key is unchanged for a plain sheet.)
+      const extra = (crop ? `|c${crop.map((v) => v.toFixed(4)).join(",")}` : "") + (relief ? `|r${relief.key ?? ""}` : "") + (variant ? `|v${variant}` : ""); // prettier-ignore
       sh.want = {
         sheet: sh.i,
         page,
         level: useLevel,
         method,
-        key: `${page}|${useLevel}|${method}|${this.order}`,
+        crop,
+        relief,
+        variant,
+        key: `${page}|${useLevel}|${method}|${this.order}${extra}`,
       };
     }
     this.pump();
@@ -509,7 +576,14 @@ export class Pictures {
     }
     // Prefetch the page after the first sheet's (PDFs only).
     const first = this.sheets[0];
-    if (this.media.kind === "pdf" && first?.want && first.shown?.key === first.want.key) {
+    if (
+      this.media.kind === "pdf" &&
+      first?.want &&
+      !first.want.crop &&
+      !first.want.variant &&
+      first.shown?.key === first.want.key
+    ) {
+      // prettier-ignore
       const p = first.want.page + this.sheets.length;
       if (p < this.media.count) {
         const w = { ...first.want, page: p, key: `${p}|${first.want.level}|${first.want.method}|${this.order}` }; // prettier-ignore
@@ -527,6 +601,7 @@ export class Pictures {
     this.busy = true;
     const media = this.media;
     try {
+      if (want.crop) return await this.buildCrop(sheet, want, media);
       const aspect = media.aspect(want.page);
       let w = want.level;
       let h = Math.max(8, Math.round(w / aspect));
@@ -539,7 +614,9 @@ export class Pictures {
         h = Math.max(8, Math.round(w / a2));
         canvas = await media.draw(want.page, w, h);
       }
-      this.decorateCanvas(canvas, sheet, want.page, media);
+      const links = this.decorate && media.links ? await media.links(want.page).catch(() => []) : null; // prettier-ignore
+      if (this.destroyed || media !== this.media) return null;
+      this.decorateCanvas(canvas, sheet, want.page, media, want.variant, links);
       const t1 = performance.now();
       const pixels = canvas
         ? canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h).data
@@ -553,7 +630,7 @@ export class Pictures {
         const h2 = Math.max(8, Math.round(w2 / media.aspect(want.page)));
         const c2 = await media.draw(want.page, w2, h2);
         if (this.destroyed || media !== this.media) return null;
-        this.decorateCanvas(c2, sheet, want.page, media);
+        this.decorateCanvas(c2, sheet, want.page, media, want.variant, links);
         const px2 = c2.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w2, h2).data; // prettier-ignore
         data = await buildOffThread({ pixels: px2, w: w2, h: h2, method: want.method, ...this.geometry(sheet, media.aspect(want.page), w2, h2) }); // prettier-ignore
         w = w2;
@@ -583,14 +660,46 @@ export class Pictures {
 
   // Lane Books: the recipe's pictures.decorate(canvas, { page, name, sheet,
   // kind, options }) draws on a page or picture (a copy the media made for
-  // this build) before it becomes splats; errors in it are ignored.
-  decorateCanvas(canvas, sheet, page, media) {
+  // this build) before it becomes splats; errors in it are ignored. Lane
+  // Books r5 adds `variant` (the sheet's, "" for none) and, for a PDF,
+  // `links` (the page's, as pics.links gives them).
+  decorateCanvas(canvas, sheet, page, media, variant = "", links = null) {
     if (!this.decorate || !canvas) return;
     try {
-      this.decorate(canvas, { page, sheet: sheet.def.id, kind: media.kind, name: media.names?.[page] ?? media.name ?? "" }); // prettier-ignore
+      this.decorate(canvas, { page, sheet: sheet.def.id, kind: media.kind, name: media.names?.[page] ?? media.name ?? "", variant, links: links || [] }); // prettier-ignore
     } catch (err) {
       console.warn("pictures.decorate:", err);
     }
+  }
+
+  // Lane Books r5: a sheet that shows part of its page: that part drawn at
+  // the sheet's level, built as pixels where it lies on the page, raised by
+  // the relief map. Never decorated (a figure lifted off a page is clean).
+  async buildCrop(sheet, want, media) {
+    const r = want.crop;
+    const pageAspect = media.aspect(want.page);
+    const a = (pageAspect * (r[2] - r[0])) / (r[3] - r[1]);
+    const w = Math.max(8, want.level);
+    const h = Math.max(8, Math.round(w / a));
+    const t0 = performance.now();
+    const canvas = await media.draw(want.page, w, h, r);
+    if (this.destroyed || media !== this.media) return null;
+    const t1 = performance.now();
+    const pixels = canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h).data; // prettier-ignore
+    const geom = this.geometry(sheet, media.aspect(want.page), w, h, r);
+    const rel = want.relief;
+    const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale } : null; // prettier-ignore
+    const data = await buildOffThread({ pixels, w, h, method: want.method, relief, ...geom }); // prettier-ignore
+    if (this.destroyed || media !== this.media) return null;
+    data.w = w;
+    data.h = h;
+    data.drawMs = t1 - t0;
+    data.totalMs = performance.now() - t0;
+    this.stats.builds++;
+    this.stats.lastMs = data.totalMs;
+    this.stats.lastCount = data.count;
+    this.remember(this.cacheKey(want), data);
+    return data;
   }
 
   // Keeps built pages up to about 600,000 splats (68 bytes each, about
@@ -609,12 +718,14 @@ export class Pictures {
     }
   }
 
-  // The sheet's corner, pixel steps and facing for a w x h picture.
-  geometry(sheet, aspect, w, h) {
+  // The sheet's corner, pixel steps and facing for a w x h picture (lane
+  // Books r5: for `crop`, the part of the page's rectangle it shows).
+  geometry(sheet, aspect, w, h, crop = null) {
     const { c, hw, hh } = this.rect(sheet, aspect);
-    const origin = addv(c, addv(mul(sheet.x, -hw), mul(sheet.y, hh)));
-    const right = mul(sheet.x, (2 * hw) / w);
-    const down = mul(sheet.y, (-2 * hh) / h);
+    const [x0, y0, x1, y1] = crop || [0, 0, 1, 1];
+    const origin = addv(c, addv(mul(sheet.x, hw * (2 * x0 - 1)), mul(sheet.y, hh * (1 - 2 * y0))));
+    const right = mul(sheet.x, (2 * hw * (x1 - x0)) / w);
+    const down = mul(sheet.y, (-2 * hh * (y1 - y0)) / h);
     const leaf =
       sheet.def.leaf !== null && sheet.def.leaf !== undefined && this.spine
         ? { slot: sheet.def.leaf, spine: this.spine.at, dir: this.spine.dir }

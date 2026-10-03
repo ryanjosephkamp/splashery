@@ -141,6 +141,7 @@ class App {
       ui.setLook(player.scene.look, theme);
     });
     player.on("message", (m) => ui.toast(m));
+    player.on("link", (l) => ui.confirmLink(l.url)); // lane Books r5: a link in a page
     player.on("effects", (fx) => ui.setEffects(fx));
     player.on("paint", (n) => ui.setPaintCount(n));
     player.on("toy", (info) => this.onToy(info));

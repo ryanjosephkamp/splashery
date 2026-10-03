@@ -79,10 +79,25 @@ book; check its diff so you don't collide.
   endings, dates like "October 3, 2026").
 - Read first: CLAUDE.md, docs/OPERATING.md ("Steps for a lane"), docs/PACKS.md (the picture and book
   sections, and "Effect quality"), and the earlier Books handoff files in `docs/handoff/`.
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+October 3, 2026 (Opus 5.5).
 
-Starting, October 3, 2026.
+- **Engine PR** (`claude/lane-books-r5-engine`, "Engine: links and figure boxes from PDF pages"),
+  small and additive, with `tests/bk5-engine.spec.mjs`:
+  - `src/media.js`: a PDF's `m.links(i)` (web links, only `http:`, `https:` and `mailto:` through
+    `safeLinkURL`; links to another page: explicit and named destinations and the first, last, next
+    and previous page) and `m.figures(i)` (the boxes its pictures are painted in, from the operator
+    list's image paints and transforms; touching boxes joined, tiny ones and full-page scans
+    dropped). `m.draw(i, w, h, region)` draws part of a PDF page or a picture.
+  - `src/pictures.js`: `pics.links(n)`, `pics.figures(n)`, `pics.crop(n, box, size)` and
+    `pics.openLink(url)`. A sheet may show part of its page (`out.sheets[id].crop`, placed where
+    that part lies), raised by a relief map (`out.sheets[id].relief = { key, w, h, d, depth }`), and
+    a page may be drawn another way by the recipe's decorate (`out.sheets[id].variant`; decorate
+    also gets the page's `links`). Plain sheets keep their keys, so nothing else changes.
+  - `src/picture-splats.js`: `job.relief` raises each splat toward the sheet's facing; the base
+    takes the lowest relief round it, so it never stands in front of the detail.
+  - `src/ui.js`, `src/app.js`, `styles.css`: a link asks first ("Open example.org?" with the full
+    address); Open is a real link with `target="_blank"` and `rel="noopener noreferrer"`.
+  - The test PDF is made by `tests/fixtures/bk5/make-pdf.mjs` (no outside files).
+- **Toy PR** (`claude/lane-books-r5`): next.
