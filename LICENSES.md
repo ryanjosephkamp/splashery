@@ -155,6 +155,10 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   the captured toys to SOG (`tools/prepare-assets.mjs`).
 - `@playwright/test` 1.56.1 (Apache-2.0): the smoke test and the thumbnail tool.
 - `prettier` 3.8.1 (MIT): formatting.
+- grooph 0.2.4 (MIT), https://github.com/ryanjosephkamp/grooph: its two hook scripts in
+  `.grooph/hooks/`, run by `.claude/settings.json` in the Claude Code sessions that work on this
+  repository. They record each session's start, turns, subagents and tool names (never prompts,
+  inputs or outputs) and push them to `grooph-events/*` branches. Nothing of it is served.
 - `@gltf-transform/core` 4.5.0 (MIT), https://github.com/donmccurdy/glTF-Transform: reads the glTF
   models that `tools/mesh-to-splats.mjs` turns into splats.
 - `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
