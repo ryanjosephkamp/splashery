@@ -933,7 +933,8 @@ export const MOVING_PHOTO = {
       // four frames a second played a GIF at half speed). In Node (the
       // tests' builds) it is the player's clock, as before.
       const pl = globalThis.window?.__splashery?.player;
-      const now = pl ? performance.now() / 1000 : time;
+      // (tools/live-clip.mjs steps a clock of its own, __clipT.)
+      const now = pl ? (globalThis.window.__clipT ?? performance.now() / 1000) : time;
       if (pl?.frozen) MOVING.anchor = null;
       else {
         if (!MOVING.anchor || now < MOVING.anchor.at) MOVING.anchor = { t: MOVING.t, at: now };
