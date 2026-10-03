@@ -70,6 +70,12 @@ const THROW_WINDOW = 0.1; // seconds of finger motion a let-go takes its speed f
 const THROW_MAX = 4; // toy radii per second
 const THROW_MIN = 0.4; // toy radii per second: slower than this is a still hold
 const AIR_DRAG = 0.6; // per second, on a thrown thing
+// Held, a thing hangs from the finger: it tilts and swings as the hand
+// speeds up and slows down, and a gentle pull (per second) brings it back
+// toward the way it stood. Picked up, it lifts this far (toy radii).
+const HOLD_UPRIGHT = 3;
+const HOLD_SWING_DAMPING = 2.5;
+const PICK_LIFT = 0.15;
 
 export class HandsOn {
   // player: the Player (stage, camera, toyInfo, ray, proc).
@@ -417,14 +423,15 @@ export class HandsOn {
     body.held = true;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     body.holdQ = place ? yawOnly(body.q) : def?.joint ? null : body.q.slice();
-    body.holdK = 10;
+    // A piece being placed stays level; anything else hangs and swings.
+    body.holdK = place ? 10 : HOLD_UPRIGHT;
     body.angDampingFree ??= body.angDamping;
-    body.angDamping = 7; // held, it hangs calmly from the finger
+    body.angDamping = place ? 7 : HOLD_SWING_DAMPING;
     // The held point follows the finger on a critically damped spring
     // (`follow`, `followV`); `trail` is the finger's recent path, for the
     // let-go's speed; `travel` how far (CSS pixels) the finger went.
     const minY = this.mode === "toy" ? hit[1] - (body.pos[1] - body.home.pos[1]) : -Infinity;
-    this.hold = { body, joint, place, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: at.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: x, y0: y, travel: 0, minY }; // prettier-ignore
+    this.hold = { body, joint, place, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: at.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: x, y0: y, travel: 0, minY, raise: this.mode === "toy" ? PICK_LIFT * this.R() : 0 }; // prettier-ignore
     if (place) {
       // Lifted first, then it follows the finger.
       this.hold.lift = this.time;
@@ -569,8 +576,10 @@ export class HandsOn {
     // A thrown thing turns a little the way it flies (a hanging piece, the
     // cherries, keeps its own swing).
     const fwd = v3.cross([0, 1, 0], h.body.vel);
+    // It keeps the swing it had in the hand.
     const hung = this.pieces.find((pc) => pc.body === h.body)?.def?.joint;
-    if (!hung) h.body.omega = v3.scale(fwd, 0.25 / Math.max(h.body.bound, 0.2 * R));
+    if (!hung)
+      h.body.omega = v3.add(h.body.omega, v3.scale(fwd, 0.25 / Math.max(h.body.bound, 0.2 * R)));
     const wmax = 14;
     const ws = v3.len(h.body.omega);
     if (ws > wmax) h.body.omega = v3.scale(h.body.omega, wmax / ws);
@@ -691,7 +700,8 @@ export class HandsOn {
   followStep(h) {
     const w2 = FOLLOW * FOLLOW;
     for (let i = 0; i < 3; i++) {
-      const a = w2 * (h.target[i] - h.follow[i]) - 2 * FOLLOW * h.followV[i];
+      const to = h.target[i] + (i === 1 && !h.place ? h.raise : 0); // lifted as it's picked up
+      const a = w2 * (to - h.follow[i]) - 2 * FOLLOW * h.followV[i];
       h.followV[i] += a * STEP;
       h.follow[i] += h.followV[i] * STEP;
     }
