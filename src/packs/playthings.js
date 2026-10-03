@@ -2386,19 +2386,16 @@ export const RECIPES = {
       // The line down to the flyer, aimed at the bridle as the kite moves.
       const line = k.part("line", { pivot: KITE.flyer });
       const lineSkin = ropeSkin(KITE_LINE.nodes, KITE_LINE.tokens);
-      k.add(
-        k.tube(KITE_LINE.at, 0.006, { samples: 64, grid: 24 }),
-        {
-          opacity: 1,
-          jitter: 0.015,
-          part: line,
-          skin: (c) => lineSkin(c.p),
-          share: 0.02,
-          flat: 0.5,
-          pattern: false,
-          color: "#9a8f7e",
-        },
-      );
+      k.add(k.tube(KITE_LINE.at, 0.006, { samples: 64, grid: 24 }), {
+        opacity: 1,
+        jitter: 0.015,
+        part: line,
+        skin: (c) => lineSkin(c.p),
+        share: 0.02,
+        flat: 0.5,
+        pattern: false,
+        color: "#9a8f7e",
+      });
       // Spars behind the sail.
       for (const [p0, p1] of [
         [T, B],

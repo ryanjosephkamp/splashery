@@ -155,7 +155,7 @@ test("pizza: pull the slice away and the cheese strings stretch and snap; Reset 
   const r = await page.evaluate(() => {
     const h = window.__hec;
     const from = [0.27, 0.06, 0.44];
-    h.drag(from, h.line(from, [0.75, 0.1, 1.15], 30), false);
+    h.drag(from, h.line(from, [1.1, 0.06, 0.1], 30), false);
     const mid = h.run(0.8).soft; // still held, the slice catches up with the finger
     const shown = window.__splashery.player.motion.handsTokens.filter((e) => e.token.visible > 0.5).length; // prettier-ignore
     window.__splashery.player.handsOn.release();
@@ -191,4 +191,30 @@ test("hoodie: pull the hood and it flops like cloth, then springs back up", asyn
   expect(r.moved).toBeGreaterThan(0.15);
   expect(r.moved).toBeLessThan(0.45); // never torn off (maxPull)
   expect(r.back).toBeLessThan(0.02);
+});
+
+test("the soft parts' step time stays small with each demo toy in play", async ({ page }) => {
+  const out = {};
+  for (const [id, from, to] of [
+    ["octopus", [0.8, -0.35, 0.35], [1.1, -0.1, 0.6]],
+    ["kite", [-0.03, 0.12, 0.1], [-0.5, -0.4, 0.2]],
+    ["hoodie", [0, 0.8, 0.05], [0.2, 0.55, 0.5]],
+    ["pizza", [0.27, 0.06, 0.44], [1.1, 0.06, 0.1]],
+    ["yo-yo", [0, 0.38, 0], [0, 0.05, 0]],
+  ]) {
+    await open(page, id);
+    out[id] = await page.evaluate(
+      ({ from, to }) => {
+        const h = window.__hec;
+        const ho = window.__splashery.player.handsOn;
+        h.drag(from, h.line(from, to, 10), false);
+        const t0 = performance.now();
+        for (let i = 0; i < 120; i++) ho.step(1 / 60);
+        return (performance.now() - t0) / 120;
+      },
+      { from, to },
+    );
+  }
+  console.log(`hands-on step (ms per frame): ${JSON.stringify(out)}`);
+  for (const ms of Object.values(out)) expect(ms).toBeLessThan(2);
 });
