@@ -99,4 +99,54 @@ files go only through your engine PR.
 
 ## State
 
-Starting, October 3, 2026.
+Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
+
+- October 3, 2026: lane started. The engine on `claude/lane-hands-engine-b` ("Engine: hands-on
+  joints"): `src/physics/joints.js` (hinges, sliders, dials, sockets, breaks, upright, and
+  `rigPieces` for scan rigs), a few hook lines in `src/physics/hands-on.js`,
+  `tests/heb-engine.spec.mjs` (each piece measured: angles, positions and clicks over time) and
+  docs/PACKS.md, "5f. Hands-on: joints". Draft PR #224, pushed for the category lanes. The demo toys
+  follow on `claude/lane-hands-engine-b-toys`.
+
+## Plan lines my pieces cover (for the category lanes)
+
+Keys are in docs/PACKS.md, "5f. Hands-on: joints".
+
+- **hinge**: chest, book (cover), music box (lid), knight's helmet (visor), ladybug (wing cases),
+  sunglasses (arms), pearl (oyster shell), desk lamp (arms, with `parent`), desk fan (head tilt),
+  picture frame (on its nail: a hinge with `spring` and `damping`), paper lantern (on its string,
+  likewise), castle (drawbridge), origami crane, half adder (levers), Big Ben's bell, pagoda chimes
+  (one hinge each), decorated tree's ornaments (hinges on hooks).
+- **slider**: sword in the stone, telescope (tubes, each with `parent`), fountain pen (cap),
+  umbrella (runner), potion bottle (cork, with `stick`), crossbow string, Turing machine (tape),
+  Pythagoras proof (triangles along their tracks), birthday cake candles (or sockets).
+- **dial**: music-box crank, difference engine (crank; wheels with `also`), Enigma rotors (with
+  `detents: 26`), Mandelbulb discs, wind-up robot key (`min`/`max`), water bottle cap (then a
+  socket), alarm clock and Big Ben hands (`also` turns the hour hand), windmill sails, propeller
+  plane, helicopter rotor, bicycle pedals, Earth and pulsar (a dial on the globe, `drag` low),
+  spinning top and patterned egg (a dial, until the category lane wants real tops).
+- **socket**: orange wedges, watermelon slices, anatomy-atlas organs, periodic-table tiles, platonic
+  faces, diatom lid, geode top half, birthday candles, acorn caps, gift-box lid, jack-o'-lantern
+  lid, croissant top, boiled egg cap, kiwi, avocado, croissant-real and pomegranate halves (with
+  `rigPieces`).
+- **break**: candy cane, quartz points, daisy and rose petals, pinecone scales, bananas, dragon egg
+  shell, Menger cubes, dandelion seeds (ground breaks with a low `pull`), protein (a break whose
+  piece is then a socket: use both, the socket's `snap` after it is broken off).
+- **upright**: sailboat, penguin.
+- **rigPieces**: tomatoes, basket (shells), pomegranate and real croissant halves.
+
+## Notes
+
+- Driven parts (hinge, slider, dial) are one number each and posed exactly from it; they are fixed
+  bodies in the world, so loose pieces bump into them but never push them. Loose pieces (sockets,
+  broken pieces) are ordinary bodies.
+- A joint is asleep from ↺ until first touched, so a part built off its resting place stays as
+  built.
+- Sounds go out through the player's "cue" event (`src/app.js` plays them), so no app.js lines.
+
+## For the Operator
+
+- Engine lines (all additive, in `src/physics/hands-on.js`, each marked "lane Hands engine B"): an
+  import; `this.joints = null` in `clear`; `ensure` builds pieces for `hands.joints` too; one
+  `makeJoints` line at the end of each world build; `hands.pieces?.()`; a nudge never on a joints
+  toy; and hooks in `moveTo`, `pickUp`, `release`, the ↺ glide, `step`, `onHit` and `apply`.
