@@ -336,3 +336,32 @@ test("soft parts are cheap: eight arms and a cloth step in well under a millisec
   console.log(`soft step: ${ms.toFixed(3)} ms (84 nodes, 10 substeps)`);
   expect(ms).toBeLessThan(1);
 });
+
+test("a toy on its side or upside down: ropes hang toward the world's down, wind follows the world", () => {
+  // The toy turned a quarter turn about z: the world's up is +x in its own coordinates.
+  const turned = (q) => {
+    const h = host();
+    const back = quat.conj(q);
+    h.player.toRecipe = (p) => quat.rotate(back, p);
+    h.player.fromRecipe = (p) => quat.rotate(q, p);
+    return h;
+  };
+  for (const [q, down] of [
+    [quat.axisAngle([0, 0, 1], Math.PI / 2), [-1, 0, 0]],
+    [quat.axisAngle([1, 0, 0], Math.PI), [0, 1, 0]],
+  ]) {
+    const pts = line([0, 0, 0], [0, -1, 0], 1, 6);
+    const sp = new SoftParts(turned(q)).build({ floor: -0.5, ropes: () => [{ points: pts }] });
+    sp.grab(sp.pick(pts[5]));
+    sp.release();
+    run(sp, 6);
+    const n = sp.state().strands[0].nodes;
+    const dir = v3.norm(v3.sub(n[5], n[0]));
+    expect(v3.dot(dir, down)).toBeGreaterThan(0.97); // hangs toward the world's down
+    for (const p of n) expect(p.every(Number.isFinite)).toBe(true);
+    // Reset still takes it home (in the toy's own frame).
+    sp.reset();
+    run(sp, 0.6, 6);
+    sp.state().strands[0].nodes.forEach((p, i) => expect(dist(p, pts[i])).toBeLessThan(1e-6));
+  }
+});

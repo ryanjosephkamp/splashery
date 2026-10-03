@@ -395,6 +395,7 @@ export class SoftParts {
   // true while anything moves.
   step(dt, time) {
     this.t = time;
+    this.pose();
     let busy = this.stepStretch(dt);
     if (this.homing) {
       this.homing.el += dt;
@@ -453,6 +454,21 @@ export class SoftParts {
     return true;
   }
 
+  // The toy's pose: gravity, wind and lift act along the world's own axes
+  // even when the toy lies on its side or upside down (`turn`: the world's
+  // up taken into recipe coordinates, as a turn from the recipe's own up).
+  // The floor holds only while the toy stands upright.
+  pose() {
+    const p = this.host.player;
+    let up = [0, 1, 0];
+    if (p?.toRecipe) {
+      const a = p.toRecipe([0, 0, 0]);
+      up = v3.norm(v3.sub(p.toRecipe([0, 1, 0]), a));
+    }
+    this.turn = fromTo([0, 1, 0], up);
+    this.upright = up[1] > 0.985;
+  }
+
   rideAt(nd) {
     const r = nd.ride;
     if (r.strand) {
@@ -493,6 +509,8 @@ export class SoftParts {
       const def = nd.strand.def;
       const a = [0, -g * (def.weight ?? 1), 0];
       if (nd.lift) for (let i = 0; i < 3; i++) a[i] += nd.lift[i];
+      const turned = !this.upright;
+      if (turned) a.splice(0, 3, ...quat.rotate(this.turn, a));
       const keep = def.keep ?? 0;
       if (keep) {
         const b = nd.strand.body;
@@ -507,6 +525,7 @@ export class SoftParts {
         const W = (wd.vel || [1, 0, 0]).map((v) => v * R * (1 + (wd.gust ?? 0.4) * f));
         const side = wd.flap ?? 0.5;
         W[1] += side * R * flutter(t * 1.3 + 5, nd.i + 3);
+        if (turned) W.splice(0, 3, ...quat.rotate(this.turn, W));
         const k = wd.k ?? 3;
         for (let i = 0; i < 3; i++) a[i] += k * (W[i] - nd.v[i]);
       }
@@ -548,7 +567,7 @@ export class SoftParts {
     for (const nd of this.nodes) {
       if (nd.w === 0) continue;
       const def = nd.strand.def;
-      if (nd.x[1] < fl + nd.r) {
+      if (this.upright && nd.x[1] < fl + nd.r) {
         const depth = fl + nd.r - nd.x[1];
         nd.x[1] = fl + nd.r;
         // Friction (as in PBD): the slide along the floor this substep is
