@@ -12,7 +12,7 @@ import { readers, invertedReaders } from "../tools/qr-scan-lab/readers.mjs";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 const TEXT = "https://ryanjosephkamp.github.io/splashery/";
-const STYLES = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"];
+const STYLES = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon", "neon-light"]; // prettier-ignore
 // Front-on and at 20°, small modules and large (px per module in the capture).
 const CHECKS = [
   { id: "front-small", yaw: 0, modulePx: 4 },

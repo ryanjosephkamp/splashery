@@ -23,14 +23,15 @@ const out = ["style,yaw,frame,aliveMoved,jsqr,zxing,jsqr_inv,zxing_inv,jsqr_8px,
 for (const style of styles) {
   const info = await page.evaluate(
     async ({ style, text }) => {
-      await window.__splashery.qr.set({ style, text, ecc: "auto", alive: 1 });
+      await window.__splashery.qr.set({ style, text, ecc: "auto" });
       await window.__splashery.qr.check();
+      // Alive is a motion control of the toy, not a style option.
+      window.__splashery.app.player.motion.setControl("alive", 1, { snap: true });
       const i = window.__splashery.qr.info();
       return { size: i.size, options: i.options };
     },
     { style, text: TEXT },
   );
-  await page.waitForTimeout(2500); // the Alive switch eases in over a moment
   for (const yaw of [0, 10, 20]) {
     let prev = null;
     for (let k = 0; k < frames; k++) {

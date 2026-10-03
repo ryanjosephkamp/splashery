@@ -26,5 +26,9 @@
   "neon": {
     "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
     "failed": ["mod2"]
+  },
+  "neon-light": {
+    "shown": ["tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp", "mod4"],
+    "failed": ["hard", "mod2"]
   }
 }

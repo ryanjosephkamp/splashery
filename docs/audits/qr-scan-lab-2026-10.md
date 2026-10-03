@@ -1,7 +1,8 @@
 # QR scan lab scorecard (October 2026)
 
-**Status: measured, October 3, 2026,** against lane QR's toy at `f86e0880` (`origin/claude/lane-qr`,
-draft PR #216). Rerun with `node tools/qr-scan-lab.mjs --source=toy` and
+**Status: measured, October 3, 2026,** against lane QR's toy at `f86e0880` (round 1) and `7839a25b`
+(round 2; both on `origin/claude/lane-qr`, draft PR #216). The sections below the round 2 section
+are round 1's. Rerun with `node tools/qr-scan-lab.mjs --source=toy` and
 `node tools/qr-scan-lab/report.mjs toy` whenever the toy changes.
 
 ## Summary
@@ -23,6 +24,104 @@ draft PR #216). Rerun with `node tools/qr-scan-lab.mjs --source=toy` and
   even with inverted-aware readers.
 - Not tested: real phone camera apps, glare, moiré from a screen, a damaged or covered code (error
   correction's own job). A pass here is evidence, not a guarantee.
+
+## Round 2: the toy at `7839a25b` against round 1 (`f86e0880`)
+
+Lane QR applied the scorecard's defaults and warnings (Auto error correction = M, the contrast,
+module-size, density, inverted and angle warnings), redid Neon as connected tubes, added **Neon on a
+pale wall** (`neon-light`: deep blue tubes on a pale wall, dark on light), took the Gems glint out
+of Scan view and added the **Alive** color-wave loop. Rerun: 1,622 captures (1,298 2D-warped, 324
+from the toy's own camera) over all eight styles at Auto (M), all 22 capture conditions (round 1 ran
+12 of them), three texts on the preset colors and the 43-character text on the other schemes; then
+288 frames of the Alive loop. Round 1's rows are kept in `tools/qr-scan-lab/data/r1/`.
+
+**Headline numbers**
+
+- **Pale-wall Neon** reads like any dark-on-light style: **100%** on phone-like captures with the
+  plain readers (92% pooled over all 22 conditions, 3 texts; the misses are 2 px modules, 3 px
+  modules and the combined `hard` capture). In the toy's own camera it reads 100% at 10° and 20°
+  shrunk to phone size (8 px per module), and 100% at yaw 20° at full size; 33% at 35°. Plain
+  readers read the original Neon 0% of the time, as before.
+- **Alive**, every frame of the loop (12 of the 44 frames per style, each in front-on and turned 10°
+  and 20°; both readers). At phone size (8 px per module): **front-on 12/12 for every style** except
+  Bricks (11/12); **at 10° 12/12 for every style**; at 20° Classic, Dots and Gems 12/12, Rounded
+  10/12, Bubbles 8/12, Bricks 3/12, Neon 2/12, pale-wall Neon 3/12. Every frame did change between
+  samples (the wave is moving), so these are different pictures.
+- **Round 1 against round 2** (same conditions, level M against Auto): the numbers did not change
+  for any style on the flat 2D captures. Auto = M gives the same codes the round-1 sweep read at M,
+  and the new Neon reads the same with inverted-aware readers (94% over the shared conditions). The
+  phone-like captures stay 100% for every style. The only 3D cells that moved are Bricks at 10°
+  pitch (67% to 100%) and Gems at 10° and 20° pitch (67% to 100%); each cell is only 3 captures.
+- **Neon with pale or gray colors now draws dark on light** (pastel and gray read 95% with plain
+  readers, up from 0), so the "light on dark" row for Neon now applies only to its own glowing
+  preset, gradient and own-eye colors (0% plain, 91–95% with inverted-aware readers).
+- Gems read 100% at 10° and 20° yaw at full size (3 captures each), but 0% at 35°, as every depth
+  style.
+
+**Caution about "full size" cells** (round 1 and 2): the camera captures are 1,024 px wide, which
+puts about 15 px on each module. At that size the readers themselves lose some codes (the 2D 12 px
+row shows it, and so do the full-size Bubbles cells: yaw 10° 67%, 20° 33%, then 100% and 67% shrunk
+to 8 px). The shrunk rows are the phone-like ones; a loss only at full size is the readers' limit
+with huge modules, not a flaw of the code. The same is true of the Alive table: Bubbles read 1 of 12
+front-on at full size and 12 of 12 at 8 px per module; pale-wall Neon read 0 of 12 at 10° at full
+size and 12 of 12 at 8 px.
+
+#### 2D phone captures, preset colors, level M
+
+Round 1 is the toy at `f86e0880`; round 2 is `7839a25b` at Auto error correction (M). Neon is read
+by the inverted-aware readers; `neon-light` (Neon on a pale wall, dark on light) by the plain ones.
+
+| Style      | All shared conditions | Phone-like conditions | Harder: tilt35, mod3, hard |
+| ---------- | --------------------- | --------------------- | -------------------------- |
+| classic    | 92% → 92%             | 100% → 100%           | 67% → 67%                  |
+| dots       | 97% → 97%             | 100% → 100%           | 89% → 89%                  |
+| rounded    | 97% → 97%             | 100% → 100%           | 89% → 89%                  |
+| bricks     | 97% → 97%             | 100% → 100%           | 89% → 89%                  |
+| gems       | 94% → 94%             | 100% → 100%           | 78% → 78%                  |
+| bubbles    | 97% → 97%             | 100% → 100%           | 89% → 89%                  |
+| neon       | 94% → 94%             | 100% → 100%           | 78% → 78%                  |
+| neon-light | new                   | new                   | new                        |
+
+#### The toy's own camera turned in 3D (full size), preset colors, level M
+
+Each cell is 3 captures (one per text), so single cells swing by 33 points; read the pattern, not
+the cell.
+
+| View    | classic     | dots | rounded | bricks      | gems        | bubbles   | neon        | neon-light (round 2) |
+| ------- | ----------- | ---- | ------- | ----------- | ----------- | --------- | ----------- | -------------------- |
+| yaw10   | 100% → 100% | new  | new     | 100% → 100% | 100% → 100% | 67% → 67% | 100% → 100% | 0%                   |
+| yaw20   | 100% → 100% | new  | new     | 67% → 67%   | 100% → 100% | 33% → 33% | 100% → 100% | 100%                 |
+| yaw35   | 33% → 33%   | new  | new     | 0% → 0%     | 0% → 0%     | 33% → 33% | 100% → 100% | 33%                  |
+| pitch10 | 100% → 100% | new  | new     | 67% → 100%  | 67% → 100%  | 67% → 67% | 100% → 100% | 67%                  |
+| pitch20 | 67% → 67%   | new  | new     | 33% → 33%   | 67% → 100%  | 67% → 67% | 100% → 100% | 100%                 |
+| pitch35 | 67% → 67%   | new  | new     | 0% → 0%     | 0% → 0%     | 0% → 0%   | 100% → 100% | 33%                  |
+
+#### Alive loop: frames out of 12 read by both readers
+
+Sampled at 8 px per module (phone size) and at the full 1,024 px render. Neon is read by the
+inverted-aware readers; the other styles by the plain ones.
+
+| Style      | Front-on, 8 px | 10° yaw, 8 px | 20° yaw, 8 px | Front-on, full size | 10°, full | 20°, full |
+| ---------- | -------------- | ------------- | ------------- | ------------------- | --------- | --------- |
+| classic    | 12/12          | 12/12         | 12/12         | 12/12               | 12/12     | 12/12     |
+| dots       | 12/12          | 12/12         | 12/12         | 12/12               | 12/12     | 12/12     |
+| rounded    | 12/12          | 12/12         | 10/12         | 12/12               | 12/12     | 12/12     |
+| bricks     | 11/12          | 12/12         | 3/12          | 12/12               | 7/12      | 5/12      |
+| gems       | 12/12          | 12/12         | 12/12         | 12/12               | 12/12     | 11/12     |
+| bubbles    | 12/12          | 12/12         | 8/12          | 1/12                | 8/12      | 1/12      |
+| neon       | 12/12          | 12/12         | 2/12          | 12/12               | 11/12     | 5/12      |
+| neon-light | 12/12          | 12/12         | 3/12          | 9/12                | 0/12      | 6/12      |
+
+**What round 2 changes in the recommendations**
+
+- Nothing in the defaults moved: M, 4:1 contrast and 4 px per module (6 px for depth styles) still
+  hold, and all eight styles read 100% of the phone-like captures.
+- Pale-wall Neon is the safe way to offer the Neon look: offer it as the default when the code will
+  be printed or shared, and keep the glowing Neon for on-screen use with the "some scanner apps
+  don't" warning.
+- Alive is safe front-on and at 10° for every style. Past about 15° the depth styles (Bricks, Neon,
+  pale-wall Neon) lose most frames (3 of 12 or fewer at 20°), so Alive should come with the same
+  "hold the phone flat" hint as the depth styles, and the Alive loop's GIF is fine (it is front-on).
 
 ## Recommended defaults and warnings for lane QR
 

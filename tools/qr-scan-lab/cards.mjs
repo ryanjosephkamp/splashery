@@ -18,7 +18,7 @@ const src = await toySource({ opt: (n, d) => ({ "cam-styles": "none" })[n] ?? d 
 const byId = Object.fromEntries(conditions().map((c) => [c.id, c]));
 const summary = {};
 for (const style of TOY_STYLES) {
-  const r = await src.render({ style, ec: "M", scheme: "preset" }, TEXT);
+  const r = await src.render({ style, ec: "auto", scheme: "preset" }, TEXT);
   const set = style === "neon" ? invertedReaders : readers;
   const passed = [];
   for (const id of HARDEST_FIRST) {
