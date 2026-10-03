@@ -1,0 +1,620 @@
+{
+  "startedAt": "2026-10-03T23:30:25.700Z",
+  "baseline": "aba77089cd935f20358302a8ba8c7b39215b7f2d",
+  "browser": "154.0.8037.95",
+  "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "args": [
+    "--use-angle=metal",
+    "--enable-webgl",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--disable-background-timer-throttling",
+    "--disable-renderer-backgrounding",
+    "--disable-backgrounding-occluded-windows",
+    "--enable-precise-memory-info"
+  ],
+  "host": {
+    "platform": "darwin",
+    "release": "25.3.0",
+    "cpu": "Apple M3 Pro",
+    "totalMemory": 19327352832
+  },
+  "cells": [
+    {
+      "id": "water-bottle",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "water-bottle",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "water-bottle",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "water-bottle",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "water-bottle",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "water-bottle",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "soda-can",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "soda-can",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "soda-can",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "soda-can",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "soda-can",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "soda-can",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "lava-lamp",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "lava-lamp",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "lava-lamp",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "lava-lamp",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "lava-lamp",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "lava-lamp",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "waterfall",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "waterfall",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "waterfall",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "waterfall",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "waterfall",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "waterfall",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "ocean-wave",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "ocean-wave",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "ocean-wave",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "ocean-wave",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "ocean-wave",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "ocean-wave",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "candle",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "candle",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "candle",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "candle",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "candle",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "candle",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "coffee",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "coffee",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "coffee",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "coffee",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "coffee",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "coffee",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "birthday-cake",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "birthday-cake",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "birthday-cake",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "birthday-cake",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "birthday-cake",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "birthday-cake",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "campfire",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "campfire",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "campfire",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "campfire",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "campfire",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "campfire",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "volcano",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "volcano",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "volcano",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "volcano",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "volcano",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "volcano",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "geyser",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "geyser",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "geyser",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "geyser",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "geyser",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "geyser",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "storm-cloud",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "storm-cloud",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "storm-cloud",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "storm-cloud",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "storm-cloud",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "storm-cloud",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "tornado",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "tornado",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "tornado",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "tornado",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "tornado",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "tornado",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fireworks",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fireworks",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fireworks",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fireworks",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fireworks",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fireworks",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    }
+  ],
+  "windowMs": {
+    "idle": 5000,
+    "action": 6000
+  },
+  "seed": 424242,
+  "workerMode": "explicit fluids=worker",
+  "modifications": "worker exposes a read-only snapshot getter; lower settings alter module responses, never checkout source",
+  "gpuMemory": "engine texture accounting plus named storage-buffer byte sizes; excludes driver, framebuffer and process memory"
+}

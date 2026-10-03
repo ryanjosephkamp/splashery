@@ -1,0 +1,6436 @@
+{
+  "browser": "154.0.8037.95",
+  "renderer": "webgpu",
+  "rate": 6,
+  "cycles": [
+    {
+      "cycle": 0,
+      "snapshot": {
+        "at": 9831.199999988079,
+        "toy": "fluid-lab",
+        "profile": "mid",
+        "deviceType": "webgpu",
+        "graveyard": 0,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 822272,
+          "sb": 31295012
+        },
+        "buffers": [
+          {
+            "identity": 1,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 2,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 3,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 6144,
+            "uniformNames": []
+          },
+          {
+            "identity": 4,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 1536,
+            "uniformNames": []
+          },
+          {
+            "identity": 5,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4605316,
+            "uniformNames": []
+          },
+          {
+            "identity": 6,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 64,
+            "uniformNames": []
+          },
+          {
+            "identity": 7,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 96,
+            "uniformNames": []
+          },
+          {
+            "identity": 8,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 256,
+            "uniformNames": []
+          },
+          {
+            "identity": 9,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 10,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+          },
+          {
+            "identity": 11,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 12,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 13,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+          },
+          {
+            "identity": 14,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": [
+              "drawSlot",
+              "indexCount",
+              "dispatchSlotBase",
+              "totalSplats",
+              "sortIndirectInfo"
+            ]
+          },
+          {
+            "identity": 15,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 16,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 17,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 18,
+            "className": "er",
+            "persistent": true,
+            "bytes": 112,
+            "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+          },
+          {
+            "identity": 19,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 20,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 21,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 20480,
+            "uniformNames": []
+          },
+          {
+            "identity": 22,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 3072,
+            "uniformNames": []
+          },
+          {
+            "identity": 23,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14816000,
+            "uniformNames": []
+          },
+          {
+            "identity": 24,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 25,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 26,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 27,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 28,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 29,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14528,
+            "uniformNames": []
+          },
+          {
+            "identity": 30,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 31,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 32,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 33,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 34,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 35,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 36,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 37,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 38,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 39,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 40,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 41,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 42,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 43,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 44,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 45,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 46,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 47,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 48,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 49,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 50,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 51,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 52,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 53,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 63,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 64,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 65,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1120000,
+            "uniformNames": []
+          },
+          {
+            "identity": 66,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 67,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 68,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 69,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 70,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 71,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 72,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 73,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          }
+        ],
+        "fluid": {
+          "mode": "gpu",
+          "cap": 14000
+        }
+      },
+      "heap": {
+        "usedSize": 15680056,
+        "totalSize": 17203200,
+        "embedderHeapUsedSize": 7248368,
+        "backingStorageSize": 23429131
+      }
+    },
+    {
+      "cycle": 1,
+      "snapshot": {
+        "at": 15646.300000011921,
+        "toy": "fluid-lab",
+        "profile": "mid",
+        "deviceType": "webgpu",
+        "graveyard": 0,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 822720,
+          "sb": 31295012
+        },
+        "buffers": [
+          {
+            "identity": 1,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 2,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 3,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 6144,
+            "uniformNames": []
+          },
+          {
+            "identity": 4,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 1536,
+            "uniformNames": []
+          },
+          {
+            "identity": 5,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4605316,
+            "uniformNames": []
+          },
+          {
+            "identity": 6,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 64,
+            "uniformNames": []
+          },
+          {
+            "identity": 7,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 96,
+            "uniformNames": []
+          },
+          {
+            "identity": 8,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 256,
+            "uniformNames": []
+          },
+          {
+            "identity": 9,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 10,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+          },
+          {
+            "identity": 11,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 12,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 13,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+          },
+          {
+            "identity": 14,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": [
+              "drawSlot",
+              "indexCount",
+              "dispatchSlotBase",
+              "totalSplats",
+              "sortIndirectInfo"
+            ]
+          },
+          {
+            "identity": 15,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 16,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 17,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 18,
+            "className": "er",
+            "persistent": true,
+            "bytes": 112,
+            "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+          },
+          {
+            "identity": 19,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 20,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 21,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 20480,
+            "uniformNames": []
+          },
+          {
+            "identity": 22,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 3072,
+            "uniformNames": []
+          },
+          {
+            "identity": 23,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14816000,
+            "uniformNames": []
+          },
+          {
+            "identity": 24,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 25,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 26,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 27,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 28,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 29,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14528,
+            "uniformNames": []
+          },
+          {
+            "identity": 30,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 31,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 32,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 33,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 34,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 35,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 36,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 37,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 38,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 39,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 40,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 41,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 42,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 43,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 44,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 45,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 46,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 47,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 48,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 49,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 50,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 51,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 52,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 53,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 63,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 64,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 74,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 75,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 76,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1120000,
+            "uniformNames": []
+          },
+          {
+            "identity": 77,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 78,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 79,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 80,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 81,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 82,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 83,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 84,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          }
+        ],
+        "fluid": {
+          "mode": "gpu",
+          "cap": 14000
+        }
+      },
+      "heap": {
+        "usedSize": 17784156,
+        "totalSize": 19300352,
+        "embedderHeapUsedSize": 7236016,
+        "backingStorageSize": 23429579
+      }
+    },
+    {
+      "cycle": 2,
+      "snapshot": {
+        "at": 21346.69999998808,
+        "toy": "fluid-lab",
+        "profile": "mid",
+        "deviceType": "webgpu",
+        "graveyard": 0,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 823168,
+          "sb": 31295012
+        },
+        "buffers": [
+          {
+            "identity": 1,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 2,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 3,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 6144,
+            "uniformNames": []
+          },
+          {
+            "identity": 4,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 1536,
+            "uniformNames": []
+          },
+          {
+            "identity": 5,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4605316,
+            "uniformNames": []
+          },
+          {
+            "identity": 6,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 64,
+            "uniformNames": []
+          },
+          {
+            "identity": 7,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 96,
+            "uniformNames": []
+          },
+          {
+            "identity": 8,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 256,
+            "uniformNames": []
+          },
+          {
+            "identity": 9,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 10,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+          },
+          {
+            "identity": 11,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 12,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 13,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+          },
+          {
+            "identity": 14,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": [
+              "drawSlot",
+              "indexCount",
+              "dispatchSlotBase",
+              "totalSplats",
+              "sortIndirectInfo"
+            ]
+          },
+          {
+            "identity": 15,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 16,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 17,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 18,
+            "className": "er",
+            "persistent": true,
+            "bytes": 112,
+            "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+          },
+          {
+            "identity": 19,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 20,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 21,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 20480,
+            "uniformNames": []
+          },
+          {
+            "identity": 22,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 3072,
+            "uniformNames": []
+          },
+          {
+            "identity": 23,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14816000,
+            "uniformNames": []
+          },
+          {
+            "identity": 24,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 25,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 26,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 27,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 28,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 29,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14528,
+            "uniformNames": []
+          },
+          {
+            "identity": 30,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 31,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 32,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 33,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 34,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 35,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 36,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 37,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 38,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 39,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 40,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 41,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 42,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 43,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 44,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 45,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 46,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 47,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 48,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 49,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 50,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 51,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 52,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 53,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 63,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 64,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 74,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 75,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 85,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 86,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 87,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1120000,
+            "uniformNames": []
+          },
+          {
+            "identity": 88,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 89,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 90,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 91,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 92,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 93,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 94,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 95,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          }
+        ],
+        "fluid": {
+          "mode": "gpu",
+          "cap": 14000
+        }
+      },
+      "heap": {
+        "usedSize": 19226652,
+        "totalSize": 23232512,
+        "embedderHeapUsedSize": 7220880,
+        "backingStorageSize": 24543347
+      }
+    },
+    {
+      "cycle": 3,
+      "snapshot": {
+        "at": 26969,
+        "toy": "fluid-lab",
+        "profile": "mid",
+        "deviceType": "webgpu",
+        "graveyard": 0,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 823616,
+          "sb": 31295012
+        },
+        "buffers": [
+          {
+            "identity": 1,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 2,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 3,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 6144,
+            "uniformNames": []
+          },
+          {
+            "identity": 4,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 1536,
+            "uniformNames": []
+          },
+          {
+            "identity": 5,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4605316,
+            "uniformNames": []
+          },
+          {
+            "identity": 6,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 64,
+            "uniformNames": []
+          },
+          {
+            "identity": 7,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 96,
+            "uniformNames": []
+          },
+          {
+            "identity": 8,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 256,
+            "uniformNames": []
+          },
+          {
+            "identity": 9,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 10,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+          },
+          {
+            "identity": 11,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 12,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 13,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+          },
+          {
+            "identity": 14,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": [
+              "drawSlot",
+              "indexCount",
+              "dispatchSlotBase",
+              "totalSplats",
+              "sortIndirectInfo"
+            ]
+          },
+          {
+            "identity": 15,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 16,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 17,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 18,
+            "className": "er",
+            "persistent": true,
+            "bytes": 112,
+            "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+          },
+          {
+            "identity": 19,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 20,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 21,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 20480,
+            "uniformNames": []
+          },
+          {
+            "identity": 22,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 3072,
+            "uniformNames": []
+          },
+          {
+            "identity": 23,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14816000,
+            "uniformNames": []
+          },
+          {
+            "identity": 24,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 25,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 26,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 27,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 28,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 29,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14528,
+            "uniformNames": []
+          },
+          {
+            "identity": 30,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 31,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 32,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 33,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 34,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 35,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 36,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 37,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 38,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 39,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 40,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 41,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 42,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 43,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 44,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 45,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 46,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 47,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 48,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 49,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 50,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 51,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 52,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 53,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 63,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 64,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 74,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 75,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 85,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 86,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 96,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 97,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 98,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1120000,
+            "uniformNames": []
+          },
+          {
+            "identity": 99,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 100,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 101,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 102,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 103,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 104,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 105,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 106,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          }
+        ],
+        "fluid": {
+          "mode": "gpu",
+          "cap": 14000
+        }
+      },
+      "heap": {
+        "usedSize": 20441260,
+        "totalSize": 22183936,
+        "embedderHeapUsedSize": 7276152,
+        "backingStorageSize": 23430475
+      }
+    },
+    {
+      "cycle": 4,
+      "snapshot": {
+        "at": 32523.80000001192,
+        "toy": "fluid-lab",
+        "profile": "mid",
+        "deviceType": "webgpu",
+        "graveyard": 0,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 824064,
+          "sb": 31295012
+        },
+        "buffers": [
+          {
+            "identity": 1,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 2,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 3,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 6144,
+            "uniformNames": []
+          },
+          {
+            "identity": 4,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 1536,
+            "uniformNames": []
+          },
+          {
+            "identity": 5,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4605316,
+            "uniformNames": []
+          },
+          {
+            "identity": 6,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 64,
+            "uniformNames": []
+          },
+          {
+            "identity": 7,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 96,
+            "uniformNames": []
+          },
+          {
+            "identity": 8,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 256,
+            "uniformNames": []
+          },
+          {
+            "identity": 9,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 10,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+          },
+          {
+            "identity": 11,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 12,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 13,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+          },
+          {
+            "identity": 14,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": [
+              "drawSlot",
+              "indexCount",
+              "dispatchSlotBase",
+              "totalSplats",
+              "sortIndirectInfo"
+            ]
+          },
+          {
+            "identity": 15,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 16,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 17,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 18,
+            "className": "er",
+            "persistent": true,
+            "bytes": 112,
+            "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+          },
+          {
+            "identity": 19,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 20,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 21,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 20480,
+            "uniformNames": []
+          },
+          {
+            "identity": 22,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 3072,
+            "uniformNames": []
+          },
+          {
+            "identity": 23,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14816000,
+            "uniformNames": []
+          },
+          {
+            "identity": 24,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 25,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 26,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 27,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 28,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 29,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14528,
+            "uniformNames": []
+          },
+          {
+            "identity": 30,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 31,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 32,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 33,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 34,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 35,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 36,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 37,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 38,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 39,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 40,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 41,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 42,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 43,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 44,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 45,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 46,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 47,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 48,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 49,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 50,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 51,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 52,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 53,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 63,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 64,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 74,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 75,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 85,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 86,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 96,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 97,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 107,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 108,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 109,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1120000,
+            "uniformNames": []
+          },
+          {
+            "identity": 110,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 111,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 112,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 113,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 114,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 115,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 116,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 117,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          }
+        ],
+        "fluid": {
+          "mode": "gpu",
+          "cap": 14000
+        }
+      },
+      "heap": {
+        "usedSize": 21712084,
+        "totalSize": 23494656,
+        "embedderHeapUsedSize": 7219232,
+        "backingStorageSize": 23430923
+      }
+    },
+    {
+      "cycle": 5,
+      "snapshot": {
+        "at": 38110.39999997616,
+        "toy": "fluid-lab",
+        "profile": "mid",
+        "deviceType": "webgpu",
+        "graveyard": 0,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 926912,
+          "sb": 31295012
+        },
+        "buffers": [
+          {
+            "identity": 1,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 2,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 3,
+            "className": "rt",
+            "persistent": null,
+            "bytes": 6144,
+            "uniformNames": []
+          },
+          {
+            "identity": 4,
+            "className": "ds",
+            "persistent": null,
+            "bytes": 1536,
+            "uniformNames": []
+          },
+          {
+            "identity": 5,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4605316,
+            "uniformNames": []
+          },
+          {
+            "identity": 6,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 64,
+            "uniformNames": []
+          },
+          {
+            "identity": 7,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 96,
+            "uniformNames": []
+          },
+          {
+            "identity": 8,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 256,
+            "uniformNames": []
+          },
+          {
+            "identity": 9,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 10,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+          },
+          {
+            "identity": 11,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 12,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 13,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+          },
+          {
+            "identity": 14,
+            "className": "er",
+            "persistent": true,
+            "bytes": 32,
+            "uniformNames": [
+              "drawSlot",
+              "indexCount",
+              "dispatchSlotBase",
+              "totalSplats",
+              "sortIndirectInfo"
+            ]
+          },
+          {
+            "identity": 15,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 16,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 17,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 12,
+            "uniformNames": []
+          },
+          {
+            "identity": 18,
+            "className": "er",
+            "persistent": true,
+            "bytes": 112,
+            "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+          },
+          {
+            "identity": 19,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 20,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 21,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 20480,
+            "uniformNames": []
+          },
+          {
+            "identity": 22,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 3072,
+            "uniformNames": []
+          },
+          {
+            "identity": 23,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14816000,
+            "uniformNames": []
+          },
+          {
+            "identity": 24,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 25,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 26,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 27,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 28,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1852000,
+            "uniformNames": []
+          },
+          {
+            "identity": 29,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 14528,
+            "uniformNames": []
+          },
+          {
+            "identity": 30,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 32,
+            "uniformNames": []
+          },
+          {
+            "identity": 31,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 32,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 4,
+            "uniformNames": []
+          },
+          {
+            "identity": 33,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 34,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["elementCount"]
+          },
+          {
+            "identity": 35,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 36,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 37,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 38,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 39,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 40,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 41,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 42,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 43,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 44,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 45,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 46,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 47,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 48,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 49,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 50,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 51,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 52,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 53,
+            "className": "er",
+            "persistent": true,
+            "bytes": 16,
+            "uniformNames": ["workgroupCount", "elementCount"]
+          },
+          {
+            "identity": 63,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 64,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 74,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 75,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 85,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 86,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 96,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 97,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 107,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 108,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 118,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 119,
+            "className": "er",
+            "persistent": true,
+            "bytes": 224,
+            "uniformNames": [
+              "splatTextureSize",
+              "numBins",
+              "isOrtho",
+              "pad0",
+              "viewProj",
+              "viewMatrix",
+              "cameraPosition",
+              "minPixelSize",
+              "cameraDirection",
+              "focal",
+              "viewportWidth",
+              "viewportHeight",
+              "nearClip",
+              "farClip",
+              "alphaClip",
+              "minContribution",
+              "minDist",
+              "invRange",
+              "foveationStrength",
+              "foveationCenter"
+            ]
+          },
+          {
+            "identity": 120,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 1120000,
+            "uniformNames": []
+          },
+          {
+            "identity": 121,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 122,
+            "className": "Ue",
+            "persistent": null,
+            "bytes": 727552,
+            "uniformNames": []
+          },
+          {
+            "identity": 123,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 124,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 125,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 126,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 127,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          },
+          {
+            "identity": 128,
+            "className": "er",
+            "persistent": true,
+            "bytes": 272,
+            "uniformNames": [
+              "count",
+              "gx",
+              "gy",
+              "gz",
+              "dt",
+              "rho0",
+              "stiffness",
+              "viscosity",
+              "gravity",
+              "friction",
+              "texWidth",
+              "ncol",
+              "pad",
+              "tension",
+              "pad1",
+              "pad2",
+              "pad3",
+              "cols[0]"
+            ]
+          }
+        ],
+        "fluid": {
+          "mode": "gpu",
+          "cap": 14000
+        }
+      },
+      "heap": {
+        "usedSize": 23020212,
+        "totalSize": 25067520,
+        "embedderHeapUsedSize": 7196480,
+        "backingStorageSize": 23431371
+      }
+    }
+  ],
+  "errors": [],
+  "before": {
+    "snapshot": {
+      "at": 3915.199999988079,
+      "toy": "fluid-lab",
+      "profile": "mid",
+      "deviceType": "webgpu",
+      "graveyard": 0,
+      "tracked": {
+        "tex": 53459620,
+        "vb": 6176,
+        "ib": 1548,
+        "ub": 514624,
+        "sb": 31295012
+      },
+      "buffers": [
+        {
+          "identity": 1,
+          "className": "rt",
+          "persistent": null,
+          "bytes": 32,
+          "uniformNames": []
+        },
+        {
+          "identity": 2,
+          "className": "ds",
+          "persistent": null,
+          "bytes": 12,
+          "uniformNames": []
+        },
+        {
+          "identity": 3,
+          "className": "rt",
+          "persistent": null,
+          "bytes": 6144,
+          "uniformNames": []
+        },
+        {
+          "identity": 4,
+          "className": "ds",
+          "persistent": null,
+          "bytes": 1536,
+          "uniformNames": []
+        },
+        {
+          "identity": 5,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4605316,
+          "uniformNames": []
+        },
+        {
+          "identity": 6,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 64,
+          "uniformNames": []
+        },
+        {
+          "identity": 7,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 96,
+          "uniformNames": []
+        },
+        {
+          "identity": 8,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 256,
+          "uniformNames": []
+        },
+        {
+          "identity": 9,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 10,
+          "className": "er",
+          "persistent": true,
+          "bytes": 32,
+          "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+        },
+        {
+          "identity": 11,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 12,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 13,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+        },
+        {
+          "identity": 14,
+          "className": "er",
+          "persistent": true,
+          "bytes": 32,
+          "uniformNames": [
+            "drawSlot",
+            "indexCount",
+            "dispatchSlotBase",
+            "totalSplats",
+            "sortIndirectInfo"
+          ]
+        },
+        {
+          "identity": 15,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 32,
+          "uniformNames": []
+        },
+        {
+          "identity": 16,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 17,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 12,
+          "uniformNames": []
+        },
+        {
+          "identity": 18,
+          "className": "er",
+          "persistent": true,
+          "bytes": 112,
+          "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+        },
+        {
+          "identity": 19,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 20,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 21,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 20480,
+          "uniformNames": []
+        },
+        {
+          "identity": 22,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 3072,
+          "uniformNames": []
+        },
+        {
+          "identity": 23,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 14816000,
+          "uniformNames": []
+        },
+        {
+          "identity": 24,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 25,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 26,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 27,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 28,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 29,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 14528,
+          "uniformNames": []
+        },
+        {
+          "identity": 30,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 32,
+          "uniformNames": []
+        },
+        {
+          "identity": 31,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 32,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 33,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 34,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 35,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 36,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 37,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 38,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 39,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 40,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 41,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 42,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 43,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 44,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 45,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 46,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 47,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 48,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 49,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 50,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 51,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 52,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 53,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 54,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1120000,
+          "uniformNames": []
+        },
+        {
+          "identity": 55,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 727552,
+          "uniformNames": []
+        },
+        {
+          "identity": 56,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 727552,
+          "uniformNames": []
+        },
+        {
+          "identity": 57,
+          "className": "er",
+          "persistent": true,
+          "bytes": 272,
+          "uniformNames": [
+            "count",
+            "gx",
+            "gy",
+            "gz",
+            "dt",
+            "rho0",
+            "stiffness",
+            "viscosity",
+            "gravity",
+            "friction",
+            "texWidth",
+            "ncol",
+            "pad",
+            "tension",
+            "pad1",
+            "pad2",
+            "pad3",
+            "cols[0]"
+          ]
+        },
+        {
+          "identity": 58,
+          "className": "er",
+          "persistent": true,
+          "bytes": 272,
+          "uniformNames": [
+            "count",
+            "gx",
+            "gy",
+            "gz",
+            "dt",
+            "rho0",
+            "stiffness",
+            "viscosity",
+            "gravity",
+            "friction",
+            "texWidth",
+            "ncol",
+            "pad",
+            "tension",
+            "pad1",
+            "pad2",
+            "pad3",
+            "cols[0]"
+          ]
+        },
+        {
+          "identity": 59,
+          "className": "er",
+          "persistent": true,
+          "bytes": 272,
+          "uniformNames": [
+            "count",
+            "gx",
+            "gy",
+            "gz",
+            "dt",
+            "rho0",
+            "stiffness",
+            "viscosity",
+            "gravity",
+            "friction",
+            "texWidth",
+            "ncol",
+            "pad",
+            "tension",
+            "pad1",
+            "pad2",
+            "pad3",
+            "cols[0]"
+          ]
+        },
+        {
+          "identity": 60,
+          "className": "er",
+          "persistent": true,
+          "bytes": 272,
+          "uniformNames": [
+            "count",
+            "gx",
+            "gy",
+            "gz",
+            "dt",
+            "rho0",
+            "stiffness",
+            "viscosity",
+            "gravity",
+            "friction",
+            "texWidth",
+            "ncol",
+            "pad",
+            "tension",
+            "pad1",
+            "pad2",
+            "pad3",
+            "cols[0]"
+          ]
+        },
+        {
+          "identity": 61,
+          "className": "er",
+          "persistent": true,
+          "bytes": 272,
+          "uniformNames": [
+            "count",
+            "gx",
+            "gy",
+            "gz",
+            "dt",
+            "rho0",
+            "stiffness",
+            "viscosity",
+            "gravity",
+            "friction",
+            "texWidth",
+            "ncol",
+            "pad",
+            "tension",
+            "pad1",
+            "pad2",
+            "pad3",
+            "cols[0]"
+          ]
+        },
+        {
+          "identity": 62,
+          "className": "er",
+          "persistent": true,
+          "bytes": 272,
+          "uniformNames": [
+            "count",
+            "gx",
+            "gy",
+            "gz",
+            "dt",
+            "rho0",
+            "stiffness",
+            "viscosity",
+            "gravity",
+            "friction",
+            "texWidth",
+            "ncol",
+            "pad",
+            "tension",
+            "pad1",
+            "pad2",
+            "pad3",
+            "cols[0]"
+          ]
+        }
+      ],
+      "fluid": {
+        "mode": "gpu",
+        "cap": 14000
+      }
+    },
+    "heap": {
+      "usedSize": 14297784,
+      "totalSize": 15892480,
+      "embedderHeapUsedSize": 7167400,
+      "backingStorageSize": 23428666
+    }
+  },
+  "afterLeaving": {
+    "snapshot": {
+      "at": 40814.30000001192,
+      "toy": "cactus",
+      "profile": "mid",
+      "deviceType": "webgpu",
+      "graveyard": 0,
+      "tracked": {
+        "tex": 42004840,
+        "vb": 6176,
+        "ib": 1548,
+        "ub": 925664,
+        "sb": 28719908
+      },
+      "buffers": [
+        {
+          "identity": 1,
+          "className": "rt",
+          "persistent": null,
+          "bytes": 32,
+          "uniformNames": []
+        },
+        {
+          "identity": 2,
+          "className": "ds",
+          "persistent": null,
+          "bytes": 12,
+          "uniformNames": []
+        },
+        {
+          "identity": 3,
+          "className": "rt",
+          "persistent": null,
+          "bytes": 6144,
+          "uniformNames": []
+        },
+        {
+          "identity": 4,
+          "className": "ds",
+          "persistent": null,
+          "bytes": 1536,
+          "uniformNames": []
+        },
+        {
+          "identity": 5,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4605316,
+          "uniformNames": []
+        },
+        {
+          "identity": 6,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 64,
+          "uniformNames": []
+        },
+        {
+          "identity": 7,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 96,
+          "uniformNames": []
+        },
+        {
+          "identity": 8,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 256,
+          "uniformNames": []
+        },
+        {
+          "identity": 9,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 10,
+          "className": "er",
+          "persistent": true,
+          "bytes": 32,
+          "uniformNames": ["drawSlot", "indexCount", "sortSlotBase", "pad0", "sortIndirectInfo"]
+        },
+        {
+          "identity": 11,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 12,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 13,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["numIntervals", "pad0", "pad1", "pad2"]
+        },
+        {
+          "identity": 14,
+          "className": "er",
+          "persistent": true,
+          "bytes": 32,
+          "uniformNames": [
+            "drawSlot",
+            "indexCount",
+            "dispatchSlotBase",
+            "totalSplats",
+            "sortIndirectInfo"
+          ]
+        },
+        {
+          "identity": 15,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 32,
+          "uniformNames": []
+        },
+        {
+          "identity": 16,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 17,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 12,
+          "uniformNames": []
+        },
+        {
+          "identity": 18,
+          "className": "er",
+          "persistent": true,
+          "bytes": 112,
+          "uniformNames": ["frustumPlanes[0]", "numIntervals"]
+        },
+        {
+          "identity": 19,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 20,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 21,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 20480,
+          "uniformNames": []
+        },
+        {
+          "identity": 22,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 3072,
+          "uniformNames": []
+        },
+        {
+          "identity": 23,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 14816000,
+          "uniformNames": []
+        },
+        {
+          "identity": 24,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 25,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 26,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 27,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 28,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 1852000,
+          "uniformNames": []
+        },
+        {
+          "identity": 29,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 14528,
+          "uniformNames": []
+        },
+        {
+          "identity": 30,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 32,
+          "uniformNames": []
+        },
+        {
+          "identity": 31,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 32,
+          "className": "Ue",
+          "persistent": null,
+          "bytes": 4,
+          "uniformNames": []
+        },
+        {
+          "identity": 33,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 34,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["elementCount"]
+        },
+        {
+          "identity": 35,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 36,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 37,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 38,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 39,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 40,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 41,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 42,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 43,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 44,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 45,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 46,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 47,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 48,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 49,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 50,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 51,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 52,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 53,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 63,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 64,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 74,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 75,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 85,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 86,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 96,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 97,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 107,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 108,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 118,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 119,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 129,
+          "className": "er",
+          "persistent": true,
+          "bytes": 224,
+          "uniformNames": [
+            "splatTextureSize",
+            "numBins",
+            "isOrtho",
+            "pad0",
+            "viewProj",
+            "viewMatrix",
+            "cameraPosition",
+            "minPixelSize",
+            "cameraDirection",
+            "focal",
+            "viewportWidth",
+            "viewportHeight",
+            "nearClip",
+            "farClip",
+            "alphaClip",
+            "minContribution",
+            "minDist",
+            "invRange",
+            "foveationStrength",
+            "foveationCenter"
+          ]
+        },
+        {
+          "identity": 130,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 131,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 132,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 133,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 134,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 135,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 136,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 137,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 138,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        },
+        {
+          "identity": 139,
+          "className": "er",
+          "persistent": true,
+          "bytes": 16,
+          "uniformNames": ["workgroupCount", "elementCount"]
+        }
+      ],
+      "fluid": null
+    },
+    "heap": {
+      "usedSize": 22546676,
+      "totalSize": 24543232,
+      "embedderHeapUsedSize": 7015392,
+      "backingStorageSize": 15479149
+    }
+  }
+}
