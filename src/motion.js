@@ -80,6 +80,7 @@ export class MotionDriver {
     this.handsTokens = null; // lane Physics: [{ index, token }] from Hands-on
     this.handsParts = null; // and { name: { quat, offset } }
     this.handsResort = false;
+    this.handsAddon = null; // lane Hands engine B: { name: part } for a rig's add-on
   }
 
   // Attaches a kit toy (recipe + build context) or clears it.
@@ -325,6 +326,8 @@ export class MotionDriver {
       for (const { index, token } of this.handsTokens) list[index] = token;
     }
     if (this.handsParts) Object.assign(drive.parts, this.handsParts);
+    if (this.handsAddon)
+      drive.addon = { ...drive.addon, parts: { ...drive.addon?.parts, ...this.handsAddon } }; // lane Hands engine B
     if (this.handsResort) {
       drive.resort = true;
       this.handsResort = false;

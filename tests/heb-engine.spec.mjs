@@ -266,6 +266,23 @@ test("upright: a whole toy rights itself after a tip, keeping its turn", () => {
   expect(up[1]).toBeGreaterThan(0.99);
 });
 
+test("swap: a piece off its place shows its kit-built stand-in and a fill; home, the scan's own", () => {
+  const s = play({ hands: { floor: 0, area: 2, pieces: () => [{ ...piece(0, [0.5, 0.1, 0], [0.1, 0.1, 0.1]), part: "t0", token: undefined }], swap: { t0: { kit: "kt0", fill: "kf0" } } } }); // prettier-ignore
+  s.run(0.1);
+  expect(s.player.motion.handsAddon ?? null).toBe(null);
+  s.drag(0.5, 0.1, -0.6, 0.4, 0.6);
+  s.up();
+  s.run(1);
+  const a = s.player.motion.handsAddon;
+  expect(a.kt0.visible).toBe(1);
+  expect(a.kt0.offset[0]).toBeLessThan(-0.5); // rides with the piece
+  expect(a.kf0).toEqual({ visible: 1 });
+  expect(s.player.motion.handsParts.t0.visible).toBe(0); // the scan's part hides
+  s.h.reset();
+  s.run(0.6);
+  expect(s.player.motion.handsAddon).toBe(null);
+});
+
 test("toys without joints have none", () => {
   const s = play({ hands: { floor: 0, pieces: () => [piece(0, [0, 0.1, 0], [0.1, 0.1, 0.1])] } });
   expect(s.h.joints).toBe(null);

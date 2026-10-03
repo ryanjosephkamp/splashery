@@ -82,7 +82,7 @@ export function rigPieces(rig, names = null, o = {}) {
 // when it builds its world (pieces mode, or Level 1 for `upright`).
 export function makeJoints(hands, world) {
   const def = hands.info?.recipe?.hands;
-  if (!def?.joints && !def?.upright) return null;
+  if (!def?.joints && !def?.upright && !def?.swap) return null;
   return new Joints(hands, world, def);
 }
 
@@ -818,13 +818,39 @@ export class Joints {
   // adds them to the parts Hands-on sends (an aura that rises with the
   // sword, a dancer turned by the crank).
   parts(parts) {
-    let out = parts;
+    let out = this.swap(parts);
     for (const j of this.list) {
       if (!j.d.also || j.v === undefined) continue;
       out ||= {};
       j.d.also(j.v, out, this.hands.info);
     }
     return out;
+  }
+
+  // A scan's piece that can't move cleanly (a tomato whose hidden sides
+  // the capture never saw) is swapped, while it is off its place, for a
+  // kit-built stand-in in the rig's add-on (`hands.swap`: { part: { kit,
+  // fill } }): the scan's part hides, the add-on part `kit` rides where the
+  // piece is, and `fill` (optional) shows in the place it left. Off: none.
+  swap(parts) {
+    const sw = this.def.swap;
+    const motion = this.hands.player.motion;
+    if (!sw) return parts;
+    let addon = null;
+    for (const pc of this.hands.pieces) {
+      const s = sw[pc.part];
+      if (!s) continue;
+      const b = pc.body;
+      if (b.pinned) continue; // in its place (a moved piece is pinned again once home)
+      const dq = quat.mul(b.q, quat.conj(pc.home.q));
+      const off = v3.sub(b.pos, pc.home.pos);
+      (parts ||= {})[pc.part] = { visible: 0 };
+      addon ||= {};
+      addon[s.kit] = { visible: 1, quat: dq, offset: off };
+      if (s.fill) addon[s.fill] = { visible: 1 };
+    }
+    motion.handsAddon = addon;
+    return parts;
   }
 
   // ---- Sounds ----
