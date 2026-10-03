@@ -7,7 +7,7 @@ import { resize } from "./sim.mjs";
 import { readJsqr } from "./readers.mjs";
 import { contrastRatio } from "./reference.mjs";
 
-export const TOY_STYLES = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"];
+export const TOY_STYLES = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon", "neon-light"]; // prettier-ignore
 
 // Color schemes beyond each style's own preset (a style alone brings its preset colors).
 export const TOY_SCHEMES = {
@@ -48,7 +48,7 @@ export async function toySource({ opt }) {
   const poses = opt("poses", "yaw10,yaw20,yaw35,pitch10,pitch20,pitch35")
     .split(",")
     .filter(Boolean);
-  const camStyles = opt("cam-styles", "classic,bricks,gems,bubbles,neon").split(",");
+  const camStyles = opt("cam-styles", "classic,bricks,gems,bubbles,neon,neon-light").split(",");
   const camSchemes = opt("cam-schemes", "preset").split(",");
 
   const set = async (job, text) => {
@@ -94,6 +94,7 @@ export async function toySource({ opt }) {
     );
 
   return {
+    page,
     styles: opt("styles", TOY_STYLES.join(",")).split(","),
     async render(job, text) {
       // The picture is checked against the text it should hold: a read that returns some other

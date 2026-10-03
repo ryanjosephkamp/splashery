@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const source = process.argv[2] || "toy";
-const dir = "tools/qr-scan-lab/data";
+const dir = process.argv[3] || "tools/qr-scan-lab/data";
 export const rows = [];
 for (const f of fs
   .readdirSync(dir)
@@ -44,7 +44,7 @@ const table = (title, head, body, note = "") =>
     "",
   ].join("\n");
 
-const STYLE_ORDER = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"];
+const STYLE_ORDER = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon", "neon-light"]; // prettier-ignore
 const styles = uniq((r) => r.style).sort((a, b) => STYLE_ORDER.indexOf(a) - STYLE_ORDER.indexOf(b));
 const warp = rows.filter((r) => r.kind === "warp");
 const cam = rows.filter((r) => r.kind === "cam");
@@ -146,7 +146,7 @@ out.push(
     "Plain readers. Contrast is the WCAG ratio of the style's dark and light colors.",
   ),
 );
-const ecs = ["L", "M", "Q", "H"].filter((e) => rows.some((r) => r.ec === e));
+const ecs = ["L", "M", "Q", "H", "auto"].filter((e) => rows.some((r) => r.ec === e));
 out.push(
   table(
     "Decode rate per error correction level",
@@ -167,7 +167,7 @@ out.push(
       t,
       uniq(
         (r) => r.version,
-        rows.filter((r) => r.text === t && r.ec === "M"),
+        rows.filter((r) => r.text === t && (r.ec === "M" || r.ec === "auto")),
       ).join("/"),
       ...styles.map((s) => pct(rate(sub(warp, s, (r) => r.text === t && r.scheme !== "inverted")))),
     ]),

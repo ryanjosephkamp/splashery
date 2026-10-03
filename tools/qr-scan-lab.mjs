@@ -40,7 +40,7 @@ const TEXTS = {
 const textIds = opt("texts", "url").split(",");
 const outDir = opt("out", "tools/qr-scan-lab/data");
 const tag = opt("tag", "all");
-const ecs = opt("ec", "L,M,Q,H").split(",");
+const ecs = opt("ec", "auto").split(",");
 const defaultSchemes =
   source === "toy"
     ? "preset,pastel,gray,gradient,eyes,inverted"
