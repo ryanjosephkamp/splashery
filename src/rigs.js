@@ -17,6 +17,7 @@
 import { quatAxisAngle, quatMul, quatFromTo, quatRotate, mix, shade } from "./kit.js";
 import { inked } from "./font.js";
 import { evenBox, evenDisc, evenEllipsoid } from "./packs/even.js";
+import { rigPieces } from "./physics/joints.js"; // lane Hands engine B
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -899,6 +900,28 @@ export const RIGS = {
     ],
     controls: [pulse("roll", "Roll", 2.6)],
     action: { key: "roll", label: "Roll" },
+    // Hands-on (lane Hands engine B): pick up each tomato on its own (its
+    // rig part, moved whole) and set it down on the plate or on another;
+    // one set down hard knocks its neighbors loose. Held level, so the
+    // side the capture never saw stays underneath.
+    hard: true, // each splat wholly in one tomato (lane Hands engine B)
+    hands: {
+      floor: PLATE_Y,
+      area: 0.82,
+      center: 0.4,
+      pieces: () =>
+        rigPieces(
+          RIGS.tomatoes,
+          TOMATOES.map((t) => t[0]),
+          {
+            solid: (reg) => ({ type: "ellipsoid", r: [reg.r[0] / 1.15, reg.r[0] / 1.15, reg.r[0] / 1.15] }), // prettier-ignore
+            mass: 1,
+            friction: 0.9,
+            restitution: 0.2,
+          },
+        ),
+      sound: (hit, vol) => ({ voice: "thud", f: hit.other ? 150 : 110, bright: 0.2, vol: vol * 0.8 }), // prettier-ignore
+    },
     drive(t, c, out, info) {
       out.parts.fringe = { visible: 0 };
       const e = since(c, "roll", 2.6);

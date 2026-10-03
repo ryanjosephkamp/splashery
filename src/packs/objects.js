@@ -36,6 +36,10 @@ const len = (a) => Math.hypot(a[0], a[1], a[2]);
 const unit = (a) => mul(a, 1 / (len(a) || 1));
 const keep = (c, size) => ({ c, keep: true, size });
 const ease3 = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+// The music box's tune by hand (lane Hands engine B): one note for each
+// click of the crank (12 a turn), as the tap plays it ("-" a rest).
+const MUSIC_TUNE = "E6 D6 C6 D6 E6 E6 E6 - D6 D6 D6 - E6 G6 G6 -".split(" ");
+const MUSIC_CLICKS = 12;
 const easeOutBack = (x) => {
   const k = 1.70158;
   return 1 + (k + 1) * Math.pow(x - 1, 3) + k * Math.pow(x - 1, 2);
@@ -594,6 +598,28 @@ export const RECIPES = {
     options: [{ key: "wood", label: "Wood", type: "color", default: "#8a5a2b" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 0, ease: 1.1 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands engine B): lift the lid on its hinge. Let go
+    // past upright and it stays open; lower, it drops shut with a thud.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "lid",
+          pivot: [0, 0.1, -0.37],
+          axis: [-1, 0, 0],
+          min: 0,
+          max: 1.95,
+          bounce: 0.15,
+          start: (c) => 1.95 * easeInOut(c.open),
+          pos: [0, 0.24, 0],
+          pick: [0.66, 0.24, 0.44],
+          sound: (ev, vol) =>
+            ev.v < 1
+              ? [{ voice: "thud", f: 90, vol }, { voice: "wood", f: 220, decay: 0.5, vol: vol * 0.6 }] // prettier-ignore
+              : { voice: "wood", f: 300, decay: 0.4, vol: vol * 0.5 },
+        },
+      ],
+    },
     drive(t, c, out) {
       const o = easeInOut(c.open);
       out.parts.lid = { angle: -1.95 * o };
@@ -1332,6 +1358,51 @@ export const RECIPES = {
     options: [{ key: "wood", label: "Wood", type: "color", default: "#8a4526" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.4 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands engine B): lift the lid on its hinge, and turn
+    // the crank by dragging round it: each click of the crank plays the
+    // tune's next note, and the dancer turns with it.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "lid",
+          pivot: [0, 0.5, -0.38],
+          axis: [-1, 0, 0],
+          min: 0,
+          max: 1.95,
+          bounce: 0.15,
+          start: (c) => 1.95 * ease3(c.open),
+          pos: [0, 0.55, 0],
+          pick: [0.6, 0.12, 0.42],
+          sound: (ev, vol) => (ev.v < 1 ? { voice: "wood", f: 450, decay: 1.1, vol: vol * 0.9 } : { voice: "wood", f: 600, decay: 0.4, vol: vol * 0.4 }), // prettier-ignore
+          // The lid's top hides once it stands open (the mirror shows), and
+          // the dancer rises out of the box as it opens.
+          also: (a, parts) => {
+            if (parts.lid) parts.lidTop = { ...parts.lid, visible: 1 - smoothstep(1.15, 1.6, a) };
+            parts.dancer = { ...parts.dancer, offset: [0, -0.34 * (1 - smoothstep(0.7, 1.95, a)), 0] }; // prettier-ignore
+            // The floating notes only while it stands open.
+            if (a < 1.3) NOTE_PATHS.forEach((n, i) => (parts["note" + i] = { visible: 0 }));
+          },
+        },
+        {
+          type: "dial",
+          part: "crank",
+          pivot: [0.58, 0.25, 0],
+          axis: [1, 0, 0],
+          detents: MUSIC_CLICKS,
+          drag: 2.5,
+          // (Small on a phone: a press on the box's side near it finds it.)
+          pos: [0.6, 0.3, 0],
+          pick: [0.12, 0.22, 0.24],
+          sound: (ev) => {
+            if (ev.kind !== "detent") return null;
+            const n = MUSIC_TUNE[((ev.n % MUSIC_TUNE.length) + MUSIC_TUNE.length) % MUSIC_TUNE.length]; // prettier-ignore
+            return n === "-" ? null : { voice: "tine", f: n, vol: 0.7 };
+          },
+          also: (a, parts) => (parts.dancer = { ...parts.dancer, angle: 0.5 * a }),
+        },
+      ],
+    },
     drive(t, c, out) {
       const m = mem(c);
       const o = ease3(c.open);
