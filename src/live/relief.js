@@ -198,9 +198,19 @@ export class CameraDepth {
       for (let i = 0; i < cols; i++) {
         const u = this.mirror ? 1 - (i + 0.5) / cols : (i + 0.5) / cols;
         const [cx, cy, cw, ch] = this.crop;
-        const sx = Math.min(m.w - 1, Math.floor((cx + u * cw) * m.w));
-        const sy = Math.min(m.h - 1, Math.floor((cy + ((j + 0.5) / rows) * ch) * m.h));
-        t[j * cols + i] = m.d[sy * m.w + sx];
+        // r5: bilinear (the depth is smaller than the grid; nearest
+        // sampling left its edges in steps).
+        const fx = Math.max(0, Math.min(m.w - 1, (cx + u * cw) * m.w - 0.5));
+        const fy = Math.max(0, Math.min(m.h - 1, (cy + ((j + 0.5) / rows) * ch) * m.h - 0.5));
+        const x0 = Math.floor(fx);
+        const y0 = Math.floor(fy);
+        const x1 = Math.min(m.w - 1, x0 + 1);
+        const y1 = Math.min(m.h - 1, y0 + 1);
+        const ax = fx - x0;
+        const ay = fy - y0;
+        const top = m.d[y0 * m.w + x0] * (1 - ax) + m.d[y0 * m.w + x1] * ax;
+        const bot = m.d[y1 * m.w + x0] * (1 - ax) + m.d[y1 * m.w + x1] * ax;
+        t[j * cols + i] = top * (1 - ay) + bot * ay;
       }
     const sorted = Float32Array.from(t).sort();
     const lo = sorted[Math.floor(sorted.length * 0.02)];
@@ -209,6 +219,11 @@ export class CameraDepth {
     this.hi = this.hi === null ? hi : this.hi + (hi - this.hi) * 0.3;
     const span = Math.max(1e-6, this.hi - this.lo);
     for (let i = 0; i < t.length; i++) t[i] = Math.max(0, Math.min(1, (t[i] - this.lo) / span));
+    // r5: where a near person stands before a far wall, the depth ramps
+    // across a few cells, and those cells hung as stretched splats between
+    // the two (the owner's "detaching" of October 3): each goes with the near
+    // or the far side, whichever it is closer to.
+    t.set(snapEdges(t, cols, rows));
     if (!this.have) this.heights.set(t);
     this.have = true;
   }
@@ -244,7 +259,10 @@ export class CameraDepth {
     const img = g.createImageData(cols, rows);
     const px = img.data;
     for (let i = 0; i < hts.length; i++) {
-      if (this.have) hts[i] += (t[i] - hts[i]) * k;
+      // r5: a big jump (a person's edge moving) cuts over at once, so no
+      // splat glides through the gap between near and far; small changes
+      // ease, which keeps the depth from shimmering.
+      if (this.have) hts[i] = Math.abs(t[i] - hts[i]) > 0.3 ? t[i] : hts[i] + (t[i] - hts[i]) * k;
       const o = i * 4;
       px[o] = Math.round(255 * (this.have ? hts[i] * gain : 0));
       px[o + 3] = 255;
@@ -257,6 +275,45 @@ export class CameraDepth {
     this.worker?.terminate();
     this.worker = null;
   }
+}
+
+// Where the depth jumps by more than EDGE within a 9 by 9 neighborhood (the
+// model's depth ramps over several cells once it is scaled up to the grid),
+// each cell takes the nearer or the farther value, whichever it is closer
+// to, so the jump is a clean cut instead of a ramp of hanging splats (r5).
+const EDGE = 0.15;
+const REACH = 4;
+export function snapEdges(d, w, h) {
+  const out = new Float32Array(d.length);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      let lo = Infinity;
+      let hi = -Infinity;
+      for (let j = Math.max(0, y - REACH); j <= Math.min(h - 1, y + REACH); j++)
+        for (let i = Math.max(0, x - REACH); i <= Math.min(w - 1, x + REACH); i++) {
+          const v = d[j * w + i];
+          if (v < lo) lo = v;
+          if (v > hi) hi = v;
+        }
+      const v = d[y * w + x];
+      out[y * w + x] = hi - lo > EDGE ? (v - lo < hi - v ? lo : hi) : v;
+    }
+  return out;
+}
+
+// A backing of splats behind the picture, at its plane, in the picture's own
+// colors (r5): turned to the side, what a near part uncovers (no splats
+// were there) shows color, not holes. Every other cell, a little larger. It
+// reads the same canvas as the picture, as a 3D offset of a thousandth.
+function backing(k, { cols, rows, width, height, z, part }) {
+  const items = [];
+  for (let j = 0; j < rows; j += 2)
+    for (let i = 0; i < cols; i += 2) {
+      const u = (i + 1) / cols;
+      const v = (j + 1) / rows;
+      items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, z], n: [0, 0, 1], size: ((width / cols) * 2.8) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, 0.001], part, pattern: false }); // prettier-ignore
+    }
+  k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
 }
 
 // ---- The live view (the splat mirror, Photo to 3D's live view) -------------------------
@@ -329,6 +386,7 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain"
         items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
       }
     k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
+    backing(k, { cols, rows, width, height, z: -0.02, part }); // r5
     MIRROR.cam?.close();
     MIRROR.cam = null;
     return { cols, rows, height };
@@ -343,6 +401,7 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain"
     size: width / cols,
     part,
   });
+  backing(k, { cols, rows, width, height, z: -0.02, part }); // r5
   // Start (or stop) the camera's depth with this build.
   MIRROR.cam?.close();
   MIRROR.cam = null;

@@ -84,3 +84,42 @@ test("a video plays with its own sound: the frames follow its clock, pause and s
   expect(Math.abs(c.sound - 1.5)).toBeLessThan(0.2);
   expect(errors).toEqual([]);
 });
+
+// ---- The splat mirror's depth edges (r5) -------------------------------------------
+test("the mirror's depth edges cut clean: no cell hangs between the near and far sides", async () => {
+  const { snapEdges } = await import("../src/live/relief.js");
+  // A person (near, 0.9) before a wall (0.1), the edge ramping over 6 cells
+  // as the depth model's smooth guess does.
+  const w = 40;
+  const h = 10;
+  const d = new Float32Array(w * h);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) d[y * w + x] = 0.1 + 0.8 * Math.min(1, Math.max(0, (x - 17) / 6));
+  const out = snapEdges(d, w, h);
+  let hang = 0;
+  for (const v of out) if (v > 0.15 && v < 0.85) hang++;
+  expect(hang).toBe(0);
+  // Away from the edge nothing changes.
+  expect(out[5 * w + 2]).toBeCloseTo(0.1, 6);
+  expect(out[5 * w + 37]).toBeCloseTo(0.9, 6);
+});
+
+test("the mirror has a backing behind its picture, and a gentler default depth", async ({
+  page,
+}) => {
+  await page.goto(APP("mid"));
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate(() => window.__splashery.app.chooseToy("splat-mirror"));
+  await page.waitForFunction(() => window.__splashery.player.scene.toy.id === "splat-mirror" && window.__splashery.player.motion.recipe && document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
+  const r = await page.evaluate(async () => {
+    const { MIRROR } = await import("/src/live/relief.js");
+    const ctx = window.__splashery.player.proc.ctx;
+    const b = ctx.buf;
+    // Relief splats behind the picture's plane (the backing).
+    let behind = 0;
+    for (let i = 0; i < b.count; i++) if (b.anim[i * 4 + 1] === 24 && b.pos[i * 3 + 2] < -0.005) behind++; // prettier-ignore
+    return { depth: MIRROR.depth, behind, cells: MIRROR.cols * MIRROR.rows };
+  });
+  expect(r.depth).toBe(0.5);
+  expect(r.behind).toBeGreaterThan(r.cells / 5);
+});

@@ -359,7 +359,9 @@ const SPLAT_MIRROR = {
   density: 1,
   turntable: false,
   options: [
-    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.6 },
+    // r5: a gentler default depth (was 0.6), so a person stands out from the
+    // wall without looking cut out.
+    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
     {
       // r3: a hologram look beside the plain one.
       key: "look",
@@ -408,7 +410,7 @@ const SPLAT_MIRROR = {
     MIRROR.gain = clamp(MIRROR.depth * (1 - (c.flat ?? 0)), 0, 1);
   },
   build(k, o) {
-    MIRROR.depth = o.depth ?? 0.6;
+    MIRROR.depth = o.depth ?? 0.5;
     const { height } = buildMirror(k, { width: 2, lift: 0.9, look: o.look ?? "plain" });
     // A dark frame round the picture, like a mirror's.
     const f = 0.07;
