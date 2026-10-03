@@ -316,10 +316,11 @@ export class Joints {
       return true;
     }
     // Hinge and dial: the angle that brings the grabbed point nearest the
-    // finger. Across the turning plane when it faces the view enough, else
+    // finger. Across the turning plane unless it is seen almost edge-on (a
+    // crank on a box's side: a circle drawn round it still turns it), else
     // on the plane facing the view through the grabbed point.
     const a = j.axis;
-    const n = Math.abs(v3.dot(dir, a)) > 0.3 ? a : dir;
+    const n = Math.abs(v3.dot(dir, a)) > 0.12 ? a : dir;
     const den = v3.dot(dir, n);
     if (Math.abs(den) < 1e-4) return true;
     const t = v3.dot(v3.sub(cur, o), n) / den;
@@ -603,7 +604,7 @@ export class Joints {
       const lim = j.v < j.min ? j.min : j.max;
       const speed = Math.abs(j.w) * this.reach(j);
       j.v = lim;
-      if (!j.held && speed > 0.5 * R) this.cue(j, "stop", speed / R);
+      if (speed > 0.5 * R) this.cue(j, "stop", speed / R);
       j.w = j.held ? 0 : -j.w * (d.bounce ?? 0.2);
       if (Math.abs(j.w) * this.reach(j) < 0.3 * R) j.w = 0;
     }
