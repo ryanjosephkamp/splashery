@@ -11,6 +11,8 @@
 // "Look" choice, and only the chosen look's id is saved (scene option `look`).
 
 // Shelf categories, in shelf order. A category only shows once it has toys.
+import { PHOTOREAL_R2_TOYS } from "./packs/photoreal-r2.js";
+
 export const CATEGORIES = [
   { id: "scans", label: "Photoreal" },
   { id: "shapes", label: "Shapes" },
@@ -358,6 +360,9 @@ export const TOYS = [
       changes: "Converted, decimated, spherical harmonics removed, recentred and scaled.",
     },
   },
+  // ---- Photoreal r2: more captures from SuperSplat (labs) ----
+  ...PHOTOREAL_R2_TOYS,
+
   // ---- Photoreal models (CC0 3D models turned into splats) ----
   {
     id: "rubber-duck-real",
@@ -2380,6 +2385,7 @@ export const TOYS = [
     pack: "objects",
     tags: "book pages read story hardcover open close flip",
     camera: { yaw: 0.25, pitch: 0.78, roll: 0, distance: 3.9 },
+    tilt: "free", // UI r5: no tilt lock (the owner's review of October 2, 2026)
   },
   {
     id: "laptop",
@@ -2425,6 +2431,7 @@ export const TOYS = [
     pack: "objects",
     tags: "rain parasol canopy open close",
     camera: { yaw: 0.4, pitch: 0.3, roll: 0, distance: 4.3 },
+    tilt: "free", // UI r5: turns any way (the owner's review of October 2, 2026)
   },
   {
     id: "desk-fan",
@@ -2829,7 +2836,9 @@ export const TOYS = [
     kind: "kit",
     pack: "music",
     tags: "instrument rainbow bars mallet toy glockenspiel",
-    camera: { yaw: 0.45, pitch: 0.5, roll: 0, distance: 4.1 },
+    // UI r5: a little more from above, and the tilt free (the owner's review of October 2, 2026).
+    camera: { yaw: 0.45, pitch: 0.62, roll: 0, distance: 4.1 },
+    tilt: "free",
   },
   {
     id: "toy-piano",
@@ -2859,6 +2868,7 @@ export const TOYS = [
     pack: "pianos",
     tags: "instrument piano keys hammers strings ragtime saloon honky-tonk song midi joplin",
     camera: { yaw: 0.42, pitch: 0.22, roll: 0, distance: 4.3 },
+    tilt: "free", // UI r5: look at it from above too (the owner's review of October 2, 2026)
   },
   {
     id: "harpsichord",
@@ -3405,6 +3415,19 @@ export const TOYS = [
     labs: true,
     tags: "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
     camera: { yaw: 0.5, pitch: 0.28, roll: 0, distance: 4.5 },
+  },
+  // ---- Pack: qr (lane QR) ----
+  {
+    id: "qr-code",
+    label: "QR code",
+    category: "studio",
+    kind: "kit",
+    pack: "qr",
+    labs: true,
+    tags: "qr code generator barcode link url scan camera phone print gif share",
+    // Opens in scan view: flat and square, the quiet zone clear of the
+    // stage's buttons on any screen (the field of view spans the narrower side).
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.1 },
   },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {

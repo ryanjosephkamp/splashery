@@ -147,6 +147,49 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 ```
 
+## QR Code generator library (lane QR)
+
+- Source: Project Nayuki, https://www.nayuki.io/page/qr-code-generator-library, from
+  https://github.com/nayuki/QR-Code-generator at commit `3c6d0b3cefb4e049dc337e82237c9644399716a8`
+  (`typescript-javascript/qrcodegen.ts`), compiled to JavaScript with TypeScript 5.6.3
+  (`tsc --target ES2020 --module none`). File: `vendor/qrcodegen/qrcodegen.js`, the compiled library
+  with a header comment and one `export default qrcodegen;` line added at the end, so it loads as an
+  ES module. Nothing else was changed.
+- Loaded only when the QR code toy opens (labs only).
+- License: MIT (checked on the live project page on October 3, 2026; the notice is in
+  `vendor/qrcodegen/LICENSE`):
+
+```
+Copyright (c) Project Nayuki. (MIT License)
+https://www.nayuki.io/page/qr-code-generator-library
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+- The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+- The Software is provided "as is", without warranty of any kind, express or
+  implied, including but not limited to the warranties of merchantability,
+  fitness for a particular purpose and noninfringement. In no event shall the
+  authors or copyright holders be liable for any claim, damages or other
+  liability, whether in an action of contract, tort or otherwise, arising from,
+  out of or in connection with the Software or the use or other dealings in the
+  Software.
+```
+
+## jsQR 1.4.0 (lane QR)
+
+- Package: `jsqr@1.4.0` (file: `vendor/jsqr/jsQR.js`, the package's `dist/jsQR.js`, unchanged; the
+  license is copied to `vendor/jsqr/LICENSE`).
+- Source: https://github.com/cozmo/jsQR (Cosmo Wolfe).
+- Loaded only when the QR code toy checks that a code scans, in a browser whose own
+  `BarcodeDetector` doesn't read QR codes. The QR tests (`tests/qr.spec.mjs`) read the same copy.
+- License: Apache License 2.0 (checked on the npm package and the live repository page on October 3,
+  2026; the full text is in `vendor/jsqr/LICENSE`).
+
 ## Development tools (not shipped)
 
 These are `devDependencies` used to prepare assets and run tests; nothing from them is served.
@@ -155,11 +198,20 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   the captured toys to SOG (`tools/prepare-assets.mjs`).
 - `@playwright/test` 1.56.1 (Apache-2.0): the smoke test and the thumbnail tool.
 - `prettier` 3.8.1 (MIT): formatting.
+- grooph 0.2.4 (MIT), https://github.com/ryanjosephkamp/grooph: its two hook scripts in
+  `.grooph/hooks/`, run by `.claude/settings.json` in the Claude Code sessions that work on this
+  repository. They record each session's start, turns, subagents and tool names (never prompts,
+  inputs or outputs) and push them to `grooph-events/*` branches. Nothing of it is served.
 - `@gltf-transform/core` 4.5.0 (MIT), https://github.com/donmccurdy/glTF-Transform: reads the glTF
   models that `tools/mesh-to-splats.mjs` turns into splats.
 - `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
   https://github.com/pngjs/pngjs: decode those models' textures in `tools/mesh-to-splats.mjs`, and
   put the before-and-after sharpness crops side by side in `tools/sharpness-pairs.mjs`.
+- `jsqr` 1.4.0 (Apache-2.0), https://github.com/cozmo/jsQR, and `@zxing/library` 0.21.3
+  (Apache-2.0), https://github.com/zxing-js/library: the two independent QR readers in the QR scan
+  lab (`tools/qr-scan-lab.mjs`, `tests/qrl.spec.mjs`). `qrcode-generator` 2.0.4 (MIT),
+  https://github.com/kazuhikoarase/qrcode-generator: draws its reference codes. Nothing of them is
+  served.
 - `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
   the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
   Chromium at build time. Nothing of three.js is served.
@@ -180,3 +232,19 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   https://github.com/nodeca/pako: reads the FIRE-2 simulation's HDF5 snapshot in
   `tools/sci-galaxy.mjs` (lane Science). The site never loads them. `pngjs` (above) also writes that
   tool's picture of the source data (`--map`).
+
+## Build tools outside npm (not shipped)
+
+Programs that run on a build machine to make splats for the Splat Fidelity Plan (lane Fidelity,
+approved October 3, 2026). None of them is served; what they make (our renders and the splats
+trained from them) is ours, and the models and textures they use keep their own credits
+(CREDITS.md).
+
+- Blender 4.5 LTS (GPL-3.0-or-later), https://www.blender.org/: builds and renders the brass orrery
+  (`tools/fidelity/orrery.py`) and renders the boombox for Stage 1 (Codex task 08). Tested in the
+  cloud sandbox with 4.5.14 LTS for Linux from https://download.blender.org/release/Blender4.5/; the
+  owner's Mac runs the macOS build of the same series.
+- Brush (Apache-2.0), https://github.com/ArthurBrussee/brush: trains a splat from the renders
+  (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
+- msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
+  Silicon, if Brush can't run.
