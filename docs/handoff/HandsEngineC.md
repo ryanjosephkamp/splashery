@@ -84,10 +84,40 @@ files go only through your engine PR.
   owner approved in full, especially "Engine pieces this plan needs"); docs/handoff/Physics.md (how
   the engine works: units, stacking, picking and placing, known issues); `src/physics/world.js` and
   `src/physics/hands-on.js`; `tools/phy-clip.mjs` (phone-size clips with a finger dot).
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
 
-Starting, October 3, 2026.
+- October 3, 2026: lane started. Engine PR on `claude/lane-hands-engine-c` ("Engine: hands-on soft
+  parts: ropes, cloth and stretch"); demo toys next on `claude/lane-hands-engine-c-toys`.
+- Engine: `src/physics/soft.js` (new): ropes and chains, cloth and soft stretch, with their own
+  small XPBD particle solver (the rigid world in `world.js` is untouched). A recipe asks for them
+  with `hands.ropes`, `hands.cloth` and `hands.stretch`; docs/PACKS.md, section 5f, "Hands-on: soft
+  parts", has every key with an example. `tests/hec-engine.spec.mjs` measures each piece (a rope
+  hangs and keeps its length; a pulled chain swings and goes home; cloth drapes and streams in wind;
+  a string snaps and Reset mends it; arms ride a body, trail and curl back; riders turn with the
+  rope; stretch wobbles back through rest; the skin helpers; the full finger flow through Hands-on;
+  the step time: about 0.5 ms for 84 nodes at 10 substeps on this machine).
+
+## Notes
+
+- Shared-file lines (all additive): `src/physics/hands-on.js` (import; build the soft parts with the
+  pieces; a press takes a node or the stretch before the pieces; drag, let go, reset, step, sounds,
+  output, state: each a line or two marked "lane Hands engine C"); `src/effects.js` (kind `skin4` =
+  25 in KINDS, GLSL and WGSL: a splat follows four tokens, for cloth); `src/kit.js` (a `skin` that
+  returns six values packs as `skin4`); `src/player.js` (resortTokens sorts skin splats at their
+  blended place; a `skinOffset` helper at the end).
+- What moves on screen: skin splats follow node tokens (translation only, so a rope or a sheet bends
+  smoothly and nothing is warped by a falloff), and rigid riders (a token or a part per node) turn
+  with the rope. Stretch drives the existing grab uniforms (`driver.grab`) from a spring.
+- Toys with soft parts play in pieces mode (no Level 1 toss for the whole toy); their pieces still
+  work beside them.
+
+## Plan lines these pieces cover
+
+- Ropes and chains: DNA, willow, kelp, jellyfish, octopus, yo-yo, kite line, running-shoe laces,
+  pagoda chimes, the decorated tree's ornaments, the teddy bear's loose limbs; also the cherries'
+  stems if a lane wants them springier.
+- Cloth: the kite's tail, the hoodie's hood, the Moon's flag and other flags.
+- Soft stretch: jelly, amoeba, jelly blob, bacterium, chromosome, red blood cell, pretzel, torus
+  knot, lungs, cupcake icing, pufferfish; the pizza's cheese strings use breakable ropes.

@@ -773,6 +773,11 @@ export const KINDS = {
   // w = v + 2 * lift at full height (thousandths of a toy unit; see
   // Kit.encodeReliefs). A live spectrogram, a camera picture with depth.
   relief: 24,
+  // Lane Hands engine C: a splat on a sheet of cloth follows four tokens
+  // (the corners of its cell), blended across and down: z = a + 64 b +
+  // 4096 c + 262144 d (tokens 0..47), w = 1024 s + t (each 0..1023 for
+  // 0..1), moving by mix(mix(a, b, s), mix(c, d, s), t).
+  skin4: 25,
 };
 
 // Levers: 96 amounts (three 8-bit channels each) and 6 groups.
@@ -894,6 +899,25 @@ vec3 spKitCenter(vec3 p) {
     }
   }
   if (kind == 15) spScreenUV = vec3(an.z, an.w, 1.0);
+  if (kind == 25) {
+    float z4 = an.z;
+    float d4 = floor(z4 / 262144.0);
+    z4 -= d4 * 262144.0;
+    float c4 = floor(z4 / 4096.0);
+    z4 -= c4 * 4096.0;
+    float b4 = floor(z4 / 64.0);
+    float a4 = z4 - b4 * 64.0;
+    float s4 = floor(an.w / 1024.0);
+    float t4 = (an.w - s4 * 1024.0) / 1023.0;
+    s4 /= 1023.0;
+    vec4 k0 = uSpTokens[clamp(int(a4 + 0.5), 0, 47) * 2];
+    vec4 k1 = uSpTokens[clamp(int(b4 + 0.5), 0, 47) * 2];
+    vec4 k2 = uSpTokens[clamp(int(c4 + 0.5), 0, 47) * 2];
+    vec4 k3 = uSpTokens[clamp(int(d4 + 0.5), 0, 47) * 2];
+    vec4 m4 = mix(mix(k0, k1, s4), mix(k2, k3, s4), t4);
+    p += m4.xyz;
+    spKitScale *= m4.w;
+  }
   if (kind == 24) {
     float rax = floor(an.z * 0.5);
     float rlq = floor(an.w * 0.5);
@@ -1116,6 +1140,25 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     }
   }
   if (kind == 15) { spScreenUV = vec3f(an.z, an.w, 1.0); }
+  if (kind == 25) {
+    var z4 = an.z;
+    let d4 = floor(z4 / 262144.0);
+    z4 = z4 - d4 * 262144.0;
+    let c4 = floor(z4 / 4096.0);
+    z4 = z4 - c4 * 4096.0;
+    let b4 = floor(z4 / 64.0);
+    let a4 = z4 - b4 * 64.0;
+    let s4w = floor(an.w / 1024.0);
+    let t4 = (an.w - s4w * 1024.0) / 1023.0;
+    let s4 = s4w / 1023.0;
+    let k0 = uniform.uSpTokens[clamp(i32(a4 + 0.5), 0, 47) * 2];
+    let k1 = uniform.uSpTokens[clamp(i32(b4 + 0.5), 0, 47) * 2];
+    let k2 = uniform.uSpTokens[clamp(i32(c4 + 0.5), 0, 47) * 2];
+    let k3 = uniform.uSpTokens[clamp(i32(d4 + 0.5), 0, 47) * 2];
+    let m4 = mix(mix(k0, k1, vec4f(s4)), mix(k2, k3, vec4f(s4)), vec4f(t4));
+    p = p + m4.xyz;
+    spKitScale = spKitScale * m4.w;
+  }
   if (kind == 24) {
     let rax = floor(an.z * 0.5);
     let rlq = floor(an.w * 0.5);
