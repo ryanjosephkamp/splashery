@@ -106,12 +106,16 @@ export const clock = (sec) => {
 };
 
 // The transport. `t` gives: state() → { pos, length, playing, live, mic,
-// recorded, recording }, and toStart(), toggle(), seek(sec), setLive(on),
-// playRecording(), saveRecording().
+// recorded, recording, hidden }, and toStart(), toggle(), seek(sec),
+// setLive(on), playRecording(), saveRecording(). r4 (the Chladni plate):
+// `t.prefix` names its elements (default "landscape"); without setLive
+// there is no view button; `t.close` adds "Close the audio"; `t.gone` is
+// called once the panel is gone (another toy, or a rebuild).
 export function songTransport(t) {
+  const P = t.prefix || "landscape";
   const box = document.createElement("div");
   box.className = "song-transport";
-  box.id = "landscape-transport";
+  box.id = `${P}-transport`;
   const row = document.createElement("div");
   row.className = "button-row";
   const button = (id, label, fn) => {
@@ -126,14 +130,16 @@ export function songTransport(t) {
     row.append(b);
     return b;
   };
-  const start = button("landscape-start", "Start over", () => t.toStart());
-  const play = button("landscape-play", "Play", () => t.toggle());
-  const view = button("landscape-view", "Whole song", () => t.setLive(!t.state().live));
+  const start = button(`${P}-start`, "Start over", () => t.toStart());
+  const play = button(`${P}-play`, "Play", () => t.toggle());
+  const view = button(`${P}-view`, "Whole song", () => t.setLive(!t.state().live));
+  view.hidden = !t.setLive;
+  if (t.close) button(`${P}-close`, "Close the audio", () => t.close());
   const seekRow = document.createElement("label");
   seekRow.className = "row song-seek-row";
   const seek = document.createElement("input");
   seek.type = "range";
-  seek.id = "landscape-seek";
+  seek.id = `${P}-seek`;
   seek.min = "0";
   seek.max = "1000";
   seek.step = "1";
@@ -157,12 +163,12 @@ export function songTransport(t) {
   rec.className = "button-row";
   const again = document.createElement("button");
   again.type = "button";
-  again.id = "landscape-recording-play";
+  again.id = `${P}-recording-play`;
   again.textContent = "Play back the recording";
   again.addEventListener("click", () => t.playRecording());
   const save = document.createElement("button");
   save.type = "button";
-  save.id = "landscape-recording-save";
+  save.id = `${P}-recording-save`;
   save.textContent = "Save the recording";
   save.addEventListener("click", () => t.saveRecording());
   rec.append(again, save);
@@ -172,6 +178,7 @@ export function songTransport(t) {
 
   function sync() {
     const s = t.state();
+    box.hidden = !!s.hidden;
     row.hidden = seekRow.hidden = s.mic;
     play.textContent = s.playing ? "Pause" : "Play";
     play.setAttribute("aria-pressed", String(s.playing));
@@ -192,7 +199,10 @@ export function songTransport(t) {
   }
   sync();
   const timer = setInterval(() => {
-    if (!box.isConnected) return clearInterval(timer);
+    if (!box.isConnected) {
+      clearInterval(timer);
+      return t.gone?.();
+    }
     if (!document.hidden) sync();
   }, 250);
   return box;
