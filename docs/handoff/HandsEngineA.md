@@ -109,6 +109,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
   pushes; it rolls on, wheels turning), snow globe (pick it up and shake it), school of fish (a drag
   through it: the fish dart away and swim back). Help lines and plan entries updated;
   `tests/hea.spec.mjs`.
+- Lane PR #232 (draft). Clips posted on Effect review page 2 as cards `hea-*` under lane
+  "HandsEngineA". Full suite green on the lane branch (run in two parts: 567 tests, then the
+  remaining 300; the 2-hour background limit stopped the first); check-packs passes for the six
+  toys. Waiting on the Operator to merge #226, and on the owner's marks for #232.
 - Step time with the demo toys moving (headless Chromium, this container): median under 0.1 ms, 95th
   percentile 0.2 ms per frame; the one-time hull build on the first touch takes 2 to 8 ms.
 - Real numbers: `tools/hands-on-materials.json` (Codex task 11) had not landed, so the presets use
