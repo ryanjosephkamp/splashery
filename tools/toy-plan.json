@@ -492,7 +492,8 @@
     "storm-cloud": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Thunder rumble."
+      "sound": "Thunder rumble.",
+      "improved": "Fix7: a tap's bolt strikes straight down from the cloud under the finger (from its tapped place), not in a fixed spot."
     },
     "lava-lamp": {
       "v": "keep",
@@ -1362,7 +1363,7 @@
       "owner": "Only the top row twists (very cool). Move more than the top row; ideally swipe any row or column to solve it; add a shuffle.",
       "effect": "Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.",
       "sound": "Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0 recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.",
-      "improved": "F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes."
+      "improved": "F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes. Fix7: a tap during a scramble or solve pauses it once the turn in progress lands, so the cube can be turned by hand; a move of your own ends the automatic one, and the next tap starts a new one from there (a tap without a move carries on)."
     },
     "spring-toy": {
       "v": "keep",
@@ -1526,7 +1527,7 @@
       "owner": "Only bounces; find a better effect.",
       "effect": "Blocks an invisible hit: it jolts, sparks and the emblem gleams.",
       "sound": "The clang and the gleam's shimmer, no crackling clicks.",
-      "improved": "E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across the emblem (about 2 s)."
+      "improved": "E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across the emblem (about 2 s). Fix7: the blow lands where you tap on the shield's face: the flash and sparks start there, the sparks spray away from the middle, and the shield rocks away from that spot (about 2 s)."
     },
     "bow-and-target": {
       "v": "keep",
@@ -1665,7 +1666,7 @@
       "owner": "Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.",
       "effect": "Random shell types each tap; burst colour matches its tube.",
       "sound": "A real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
-      "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour."
+      "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the show; rapid taps launch more shells, up to three at once (one per tube), each with its own rocket and its own clock; the burst now flies out from its middle (about 3.4 s each)."
     },
     "decorated-tree": {
       "v": "keep",
@@ -1683,7 +1684,8 @@
     "paper-lantern": {
       "v": "keep",
       "owner": "Perfect; the physics are really good.",
-      "sound": "Paper rustle."
+      "sound": "Paper rustle.",
+      "improved": "Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing grows smoothly (no jump)."
     },
     "diya": {
       "v": "keep",
@@ -2016,7 +2018,7 @@
       "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
       "effect": "Training: a cloud of random splats slides, stretches and recolors, step by step, into a photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s). Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.",
       "sound": "Training, a soft tone falling as the loss curve draws (no chord or notes); one splat, a soft airy swell; many splats, a fainter twinkle; sorting, a pebble's click for each splat as it is placed, in sync, each a little different (Sound C, October 2, 2026).",
-      "improved": "Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13 keyframes as each splat slides to its next place; views One splat (sizes, opacity and color sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats appear far to near from a camera)."
+      "improved": "Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13 keyframes as each splat slides to its next place; views One splat (sizes, opacity and color sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats appear far to near from a camera). Fix7: the one-splat view starts from a tap anywhere on it, and its tap trains the splat: from a wrong guess, 24 gradient steps move its place, turn, sizes, color and opacity toward the target (a dashed outline), each closing a share of the error at its own rate (about 7 s)."
     },
     "word-vectors": {
       "v": "keep",
@@ -2198,7 +2200,7 @@
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The arms fold in on their hinges one after the other, the glasses flip to face you and the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).",
       "sound": "Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no electronic clicks or shimmer).",
-      "improved": "Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold in one after the other, both behind the lenses and the second behind the first, the glasses turn head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses."
+      "improved": "Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold in one after the other, both behind the lenses and the second behind the first, the glasses turn head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a lens starts the effect too (faint pick splats over the glass)."
     },
     "baseball-cap": {
       "v": "keep",
@@ -2212,7 +2214,7 @@
       "owner": "The owner's note \"big new Splashery ideas\" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.",
       "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
       "sound": "Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).",
-      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it)."
+      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it). Fix7: a tap never pauses it; each tap adds its own pulse (another stone where you tap the sea, with rings that cross, another ring through the galaxy, another lap of the knot), up to eight at once (3 s each)."
     },
     "video-3d": {
       "v": "new",
