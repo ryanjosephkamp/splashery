@@ -9,11 +9,13 @@ Each task works on its own `codex/<name>` branch and opens one draft pull reques
 (`AGENTS.md` has the rules). The Operator and the Claude lanes check every point before anything
 merges.
 
-| File                | Task                                                        | Changes                    | Needs the web |
-| ------------------- | ----------------------------------------------------------- | -------------------------- | ------------- |
-| 01-about-audit.md   | Check every toy's how-to and About text; element facts      | `src/toy-help.js`, reports | yes           |
-| 02-credits-audit.md | Every shipped asset's license, checked on its source page   | report only                | yes           |
-| 03-test-health.md   | Flaky and slow tests, with causes and proposed fixes        | report only                | no            |
-| 04-phone-a11y.md    | Phone, keyboard and screen-reader audit of the public site  | report and screenshots     | no            |
-| 05-compat-tests.md  | Old `#s=` links and saved scenes: a corpus and a test file  | one new test file          | no            |
-| 06-perf-audit.md    | Load size and frame time per toy, and what would lighten it | report and data            | no            |
+| File                     | Task                                                         | Changes                    | Needs the web |
+| ------------------------ | ------------------------------------------------------------ | -------------------------- | ------------- |
+| 01-about-audit.md        | Check every toy's how-to and About text; element facts       | `src/toy-help.js`, reports | yes           |
+| 02-credits-audit.md      | Every shipped asset's license, checked on its source page    | report only                | yes           |
+| 03-test-health.md        | Flaky and slow tests, with causes and proposed fixes         | report only                | no            |
+| 04-phone-a11y.md         | Phone, keyboard and screen-reader audit of the public site   | report and screenshots     | no            |
+| 05-compat-tests.md       | Old `#s=` links and saved scenes: a corpus and a test file   | one new test file          | no            |
+| 06-perf-audit.md         | Load size and frame time per toy, and what would lighten it  | report and data            | no            |
+| 08-fidelity-stage1.md    | The boombox trained from Blender renders, on the owner's Mac | scripts, two SOGs, report  | yes           |
+| 09-supersplat-compare.md | Splashery and SuperSplat compared, with evidence             | report and data            | yes           |
