@@ -8,6 +8,7 @@
  * nothing else, so another machine can read them and no pull request ever sees them.
  *
  *   node .grooph/hooks/grooph-events-push.mjs [--branch <name>] [--remote <name>] [--since <time> [--session <id>]] [--no-push]
+ *   node .grooph/hooks/grooph-events-push.mjs --status
  *
  *   --branch <name>   the branch to write. Default: grooph-events/<the branch checked out here>,
  *                     and grooph-events-detached when no branch is checked out (a cloud session
@@ -20,9 +21,15 @@
  *                     already holds them (the hook gives its session's first line: files an
  *                     earlier session left in the sandbox are not sent to a branch that never had them)
  *   --session <id>    with --since: this session's own files always go, whatever their times say
- *   --hook            run as a harness hook at the end of a turn (grooph hooks install --push):
- *                     wait a moment for the event hook's own line, then push; print nothing
- *                     and exit 0 whatever happens; give way if another push is under way.
+ *   --hook            run as a harness hook (grooph hooks install --push), at a turn's start and
+ *                     end: wait a moment for the event hook's own line, then push; print nothing
+ *                     and exit 0 whatever happens; wait its turn if another push is under way.
+ *   --every <seconds> with --hook, on a finished tool call: do nothing unless the last push was
+ *                     longer ago than this, and give way to a push under way. A turn that runs
+ *                     long is heard from this often, and costs one short process a tool call.
+ *   --status          print what is here, and send nothing: whether the hooks are in the harness's
+ *                     settings, whether the event hook runs, what this session has recorded, and
+ *                     how the last push went. For a sandbox with no grooph in it.
  *                     How it went is left in .grooph/events/.last-push.json, which
  *                     `grooph hooks status` reads: a push that fails says so there.
  *
@@ -51,7 +58,8 @@
  */
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { closeSync, existsSync, lstatSync, mkdirSync, openSync, readFileSync, readSync, readdirSync, realpathSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { closeSync, existsSync, lstatSync, mkdirSync, mkdtempSync, openSync, readFileSync, readSync, readdirSync, realpathSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -618,8 +626,9 @@ export function main(argv, project, out = console.log, err = console.error, by =
  * It is not the event hook, and it is installed only when asked for (--push).
  *
  * A harness runs the hooks of one event side by side, so the turn's own last line may not be written yet:
- * `settle` waits for it. One push at a time: a lock folder beside the events; a lock more than two minutes
- * from now, either way, was left by a push that died or by a wrong clock, and is taken over.
+ * `settle` waits for it. One push at a time: a lock folder beside the events. A push at a turn's start or end
+ * waits up to twenty seconds for the one under way and then sends; a lock more than two minutes from now,
+ * either way, was left by a push that died or by a wrong clock, and is taken over.
  *
  * Unattended: git is told never to ask anything of a terminal, and every call has a limit, so a remote that
  * wants a password or never answers costs a turn's end some seconds and never hangs it. A push that is stopped
@@ -634,6 +643,31 @@ export function main(argv, project, out = console.log, err = console.error, by =
  * from a hook that never ran.
  */
 export async function hookMain(argv, project, settle = Number(process.env.GROOPH_PUSH_SETTLE_MS ?? 1500)) {
+  // In passing, on a finished tool call: only when the last push was long enough ago. Decided before anything else
+  // is done, since this runs after every tool call and nearly always has nothing to do.
+  const at = argv.indexOf("--every");
+  const every = at >= 0 ? Number(argv[at + 1]) : undefined;
+  // Said twice, the first counts and none is passed on.
+  for (let i = argv.indexOf("--every"); i >= 0; i = argv.indexOf("--every")) argv = argv.filter((_, k) => k !== i && k !== i + 1);
+  /** How long ago the record was last written: undefined with no record; a time in the future counts as long ago. */
+  const sinceLastPush = () => {
+    try {
+      const age = Date.now() - statSync(join(project, EVENTS, RECORD)).mtimeMs;
+      return age < 0 ? Infinity : age;
+    } catch {
+      return undefined;
+    }
+  };
+  if (at >= 0) {
+    const age = sinceLastPush();
+    // Nothing to do: not a number of seconds, no events folder here, or a push made lately. The harness is still
+    // writing the tool call's details to this process; they are read to the end, so it is not left writing to
+    // a closed pipe, and then this is over.
+    if (!(every > 0) || !existsSync(join(project, EVENTS)) || (age !== undefined && age < every * 1000)) {
+      await drained(300);
+      return 0;
+    }
+  }
   const lock = join(project, EVENTS, ".pushing");
   let mine = false;
   const release = () => {
@@ -654,14 +688,15 @@ export async function hookMain(argv, project, settle = Number(process.env.GROOPH
     });
   }
   try {
-    // Everything together stays well inside the hook's own limit of sixty seconds, retries included.
+    // The limit is this script's own. Claude Code does not enforce a hook's time limit on one it runs in the
+    // background, so nothing else would end a push that a remote keeps waiting: forty-five seconds, retries included.
     how.limits = { fetch: 12_000, push: 20_000, other: 8_000 };
     how.deadline = Date.now() + 45_000;
     how.env = { ...process.env, GIT_TERMINAL_PROMPT: "0", GIT_ASKPASS: "", SSH_ASKPASS: "", GCM_INTERACTIVE: "never" };
     // ssh asks on the terminal by itself; batch mode stops it. A project's or a person's own ssh command is left alone.
     if (!process.env.GIT_SSH_COMMAND && !git(project, ["config", "core.sshCommand"])) how.env.GIT_SSH_COMMAND = "ssh -oBatchMode=yes -oConnectTimeout=10";
     const told = await hookInput(1000);
-    // A moment, and never more than ten seconds whatever it is set to: the whole run must end inside the hook's limit.
+    // A moment, and never more than ten seconds whatever it is set to: the whole run must end inside its limit.
     await new Promise((done) => setTimeout(done, Number.isFinite(settle) && settle >= 0 ? Math.min(settle, 10_000) : 1500));
     if (!existsSync(join(project, EVENTS))) return 0;
     try {
@@ -670,21 +705,37 @@ export async function hookMain(argv, project, settle = Number(process.env.GROOPH
     } catch (taken) {
       // Only a lock that is there means another push. A folder that cannot be written is a failure, and is said.
       if (taken?.code !== "EEXIST") throw new Error(`${EVENTS}/ could not be written: ${taken?.code ?? taken?.message ?? taken}`);
-      let age;
-      try {
-        age = Math.abs(Date.now() - statSync(lock).mtimeMs);
-      } catch {
-        age = undefined; // it went between the two looks: the push that held it has finished
+      // A push at a turn's start or end waits for the one under way and then sends: its lines must not wait for
+      // the next turn. One made in passing gives way: the one under way carries the same lines.
+      const wait = Number(process.env.GROOPH_PUSH_PATIENCE_MS ?? 20_000);
+      const patience = every === undefined ? Date.now() + (Number.isFinite(wait) && wait >= 0 ? Math.min(wait, 20_000) : 20_000) : 0;
+      for (;;) {
+        let age;
+        try {
+          age = Math.abs(Date.now() - statSync(lock).mtimeMs);
+        } catch {
+          age = undefined; // it went between the two looks: the push that held it has finished
+        }
+        if (age === undefined || age >= 120_000) {
+          // Free, or left by a push that died or by a wrong clock: taken over.
+          if (age !== undefined) rmSync(lock, { recursive: true, force: true });
+          try {
+            mkdirSync(lock);
+            mine = true;
+            break;
+          } catch (again) {
+            if (again?.code !== "EEXIST") throw new Error(`${EVENTS}/ could not be written: ${again?.code ?? again?.message ?? again}`);
+            // another push took it first
+          }
+        }
+        // Given up: the push that holds the lock says how it went, and this turn's lines go with the next one.
+        if (Date.now() >= patience) return 0;
+        await new Promise((done) => setTimeout(done, 250));
       }
-      if (age !== undefined && age < 120_000) return 0; // another push is under way; the next turn's will carry this one's lines
-      rmSync(lock, { recursive: true, force: true });
-      try {
-        mkdirSync(lock);
-      } catch {
-        return 0; // a third push took it first
-      }
-      mine = true;
     }
+    // In passing, look once more now that the lock is held: of several tool calls that ended in the same moment,
+    // the first has pushed by now, and the rest have nothing left to do.
+    if (every !== undefined && (sinceLastPush() ?? Infinity) < every * 1000) return 0;
     record(project, "hook", "started");
     const told_ = argv.includes("--since") ? undefined : thisSession(project, told);
     main([...argv.filter((arg) => arg !== "--hook"), ...(told_ ? ["--since", told_.since, "--session", told_.name] : [])], project, () => {}, () => {}, "hook");
@@ -695,6 +746,24 @@ export async function hookMain(argv, project, settle = Number(process.env.GROOPH
     release();
   }
   return 0;
+}
+
+/** Read standard input to its end and throw it away, for at most `ms`: so whoever is writing it can finish. */
+function drained(ms) {
+  return new Promise((done) => {
+    if (process.stdin.isTTY) return done();
+    const finish = () => {
+      clearTimeout(timer);
+      process.stdin.pause();
+      process.stdin.unref?.();
+      done();
+    };
+    const timer = setTimeout(finish, ms);
+    process.stdin.on("data", () => {});
+    process.stdin.on("end", finish);
+    process.stdin.on("error", finish);
+    process.stdin.resume();
+  });
 }
 
 /**
@@ -759,6 +828,117 @@ function thisSession(project, told) {
   }
 }
 
+/**
+ * What is here, said aloud: for a sandbox with no grooph in it, where a session that records nothing looks, from
+ * outside, like one that is not running. It reads, runs the event hook once into a scratch folder, and sends nothing.
+ * @returns {number} the exit code
+ */
+export function status(project, out = console.log, env = process.env, cwd = undefined) {
+  const entries = (file) => {
+    try {
+      const json = JSON.parse(readFileSync(join(project, file), "utf8"));
+      const all = Object.values(json?.hooks ?? {}).flatMap((list) => (Array.isArray(list) ? list : []));
+      const has = (name) => all.filter((e) => Array.isArray(e?.hooks) && e.hooks.some((h) => typeof h?.command === "string" && h.command.includes(name))).length;
+      return { record: has("grooph-event.mjs"), send: has("grooph-events-push.mjs") };
+    } catch (e) {
+      return e?.code === "ENOENT" ? undefined : { broken: true };
+    }
+  };
+  out(`grooph's hooks in ${project}`);
+  let any = false;
+  for (const file of [".claude/settings.json", ".claude/settings.local.json", ".codex/hooks.json"]) {
+    const found = entries(file);
+    if (found === undefined) continue;
+    if (found.broken) out(`  ${file}: could not be read`);
+    else if (found.record + found.send > 0) {
+      any = true;
+      out(`  ${file}: ${found.record} ${found.record === 1 ? "entry records" : "entries record"}, ${found.send === 0 ? "none sends" : found.send === 1 ? "1 sends" : `${found.send} send`}`);
+    } else out(`  ${file}: no grooph entries`);
+  }
+  if (!any) out("  no harness settings here hold grooph's hooks: nothing is recorded (grooph hooks install, where grooph is)");
+
+  // The event hook, run once as a harness would run it, into a folder of its own that is then removed.
+  const hook = join(project, ".grooph", "hooks", "grooph-event.mjs");
+  let runs = "is not here";
+  if (existsSync(hook)) {
+    let scratch;
+    try {
+      scratch = mkdtempSync(join(tmpdir(), "grooph-status-"));
+      execFileSync(process.execPath, [hook, "claude-code"], { input: JSON.stringify({ hook_event_name: "SessionStart", session_id: "grooph-status", cwd: project }), env: { ...env, GROOPH_EVENTS_DIR: scratch, CLAUDE_PROJECT_DIR: project }, stdio: ["pipe", "ignore", "ignore"], timeout: 10_000, killSignal: "SIGKILL" });
+      runs = existsSync(join(scratch, "grooph-status.jsonl")) ? "runs here: a test line was written to a scratch folder" : "ran and wrote NOTHING";
+    } catch (e) {
+      runs = scratch === undefined ? `could not be tried: no scratch folder (${e?.code ?? e?.message ?? e})` : `did NOT run: ${e?.code ?? e?.message ?? e}`;
+    } finally {
+      try {
+        if (scratch) rmSync(scratch, { recursive: true, force: true });
+      } catch {
+        // left for the system to clear
+      }
+    }
+  }
+  out(`the event hook (.grooph/hooks/grooph-event.mjs) ${runs}`);
+  if (env.GROOPH_EVENTS_DIR) out(`  GROOPH_EVENTS_DIR is set: sessions here write their events to ${plain(env.GROOPH_EVENTS_DIR)}, not to ${EVENTS}/, and what follows is about ${EVENTS}/`);
+
+  const dir = join(project, EVENTS);
+  let files = [];
+  try {
+    files = readdirSync(dir).filter((name) => name.endsWith(".jsonl"));
+  } catch {
+    // no folder, or not one that can be read: no files
+  }
+  out(`${files.length} session file${files.length === 1 ? "" : "s"} in ${EVENTS}/`);
+  // Which session this is, when the harness says, and only when that session is working in this project: asked
+  // from another project's session, "nothing recorded" would be about the wrong session.
+  const session = env.CLAUDE_CODE_SESSION_ID || env.CODEX_SESSION_ID;
+  const real = (path) => {
+    try {
+      return realpathSync(path);
+    } catch {
+      return resolve(path);
+    }
+  };
+  const inside = cwd !== undefined && (real(cwd) === real(project) || real(cwd).startsWith(`${real(project)}/`) || real(cwd).startsWith(`${real(project)}\\`));
+  if (session && inside) {
+    const name = /^[A-Za-z0-9._-]{1,128}$/.test(session) ? session : Buffer.from(session).toString("hex").slice(0, 64);
+    let lines;
+    try {
+      lines = readFileSync(join(dir, `${name}.jsonl`), "utf8").split("\n").filter((line) => line.trim() !== "");
+    } catch {
+      lines = undefined;
+    }
+    if (lines && lines.length > 0) {
+      let t;
+      try {
+        t = JSON.parse(lines[lines.length - 1]).t;
+      } catch {
+        t = undefined;
+      }
+      out(`this session (${plain(session)}): ${lines.length} line${lines.length === 1 ? "" : "s"} recorded${isTime(t) ? `, the last at ${t}` : ""}`);
+    } else {
+      out(`this session (${plain(session)}): NOTHING recorded. The harness has not run the hooks in this session.`);
+      if (any) out("  A session takes up its hooks when it starts. Hooks that arrive later (a merge that brings the settings) are taken up by most sessions and not by all: a session started after they arrived records.");
+    }
+  } else if (session) out("this session is working in another folder: run this from inside the session whose record you want to see");
+  else out("this session: the harness did not say which session this is (run it from inside the session to see what that session has recorded)");
+
+  let r;
+  try {
+    const is = statSync(join(dir, RECORD));
+    r = is.isFile() && is.size < 100_000 ? JSON.parse(readFileSync(join(dir, RECORD), "utf8")) : undefined;
+  } catch {
+    r = undefined;
+  }
+  const began = r && typeof r === "object" && !Array.isArray(r) && isTime(r.started) ? r.started : undefined;
+  const ended = r && typeof r === "object" && !Array.isArray(r) && isTime(r.at) && typeof r.ok === "boolean" ? r : undefined;
+  if (began) out(Date.now() - Date.parse(began) < 60_000 ? `a push began at ${began} and is under way` : `a push began at ${began} and NEVER said how it ended: it was stopped`);
+  if (ended) out(`last push: ${ended.ok ? "arrived" : "FAILED"} at ${ended.at}${typeof ended.branch === "string" ? `, to ${plain(ended.branch)}` : ""}${ended.ok ? "" : `: ${plain(ended.message)}`}${!ended.ok && Number.isSafeInteger(ended.failures) && ended.failures > 1 ? ` (${ended.failures} in a row)` : ""}`);
+  if (!began && !ended) out("no push on record");
+  return 0;
+}
+
+/** A time as the record writes one: short, and a date. Anything else in its place is not printed. */
+const isTime = (v) => typeof v === "string" && v.length < 40 && !Number.isNaN(Date.parse(v));
+
 const invoked = process.argv[1] ? realpathSync(process.argv[1]) : "";
 if (invoked === realpathSync(fileURLToPath(import.meta.url))) {
   const argv = process.argv.slice(2);
@@ -770,5 +950,5 @@ if (invoked === realpathSync(fileURLToPath(import.meta.url))) {
     cwd = dirname(invoked);
   }
   const project = projectOf(invoked, cwd);
-  process.exitCode = argv.includes("--hook") ? await hookMain(argv, project) : main(argv, project);
+  process.exitCode = argv.includes("--hook") ? await hookMain(argv, project) : argv.includes("--status") ? status(project, console.log, process.env, cwd) : main(argv, project);
 }
