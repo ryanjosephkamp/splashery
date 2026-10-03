@@ -149,8 +149,9 @@ October 3, 2026 (Opus 5.5).
 - Links on the first page don't work: a side-bound book shows it only on its cover, where a tap
   opens the book (stapled paper shows it as a page, and its links work).
 - The figures found are pictures (images in the PDF). Vector plots and diagrams need Draw a box.
-- A photo's depth swaps in as one step if the card has already risen (on the first pop, while the
-  model loads).
+- A photo waits at rest (it looks just like the page) up to 2.5 s for its depth, so it rises with
+  it; on the first pop, while the 27 MB model loads, it can rise flat and gain its depth in one
+  step.
 
 ## For the Operator
 

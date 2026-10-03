@@ -184,14 +184,24 @@ async function record(scene) {
     await play(0.25);
   };
   const popState = () => run(async () => { const { POP } = (await import("/src/packs/pictures.js")).BOOKS_R5; return { phase: POP.phase, relief: POP.relief?.key || "" }; }); // prettier-ignore
-  // Waits in real time (the clock held) until the figure is ready to rise:
-  // its pictures built and, for a photo, its depth worked out.
+  // Steps the clock (unrecorded) until the figure starts to rise: while it
+  // waits it lies exactly where it was. For a photo, waits in real time at
+  // rest until its depth is worked out, so it rises with it.
   const ready = async (depth) => {
-    for (let i = 0; i < 600; i++) {
-      await draw();
+    for (let i = 0; i < 3000; i++) {
       const s = await popState();
-      if ((s.phase === "rise" || s.phase === "up") && (!depth || s.relief.startsWith("d"))) return;
-      await page.waitForTimeout(200);
+      if (s.phase === "rise" || s.phase === "up") return;
+      if (depth && s.phase === "rest" && !s.relief.startsWith("d")) {
+        await draw();
+        await page.waitForTimeout(250);
+        continue;
+      }
+      await run((dt) => {
+        const pl = window.__splashery.player;
+        pl.time += dt;
+        pl.stage.requestRender();
+      }, STEP);
+      await draw();
     }
     throw new Error("The figure never got ready.");
   };

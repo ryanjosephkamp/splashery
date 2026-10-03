@@ -1018,14 +1018,18 @@ function bk5Drive(c, out, pics, N, time) {
         POP.asked = time;
       }
       break;
-    case "rest":
+    case "rest": {
+      // (It lies where it was, so it can wait unseen: for the page under it,
+      // and up to 2.5 s for a photo's depth, so it rises with it.)
+      const depthWait = POP.kind === "photo" && !(POP.relief && pics.ready("pop")) && time - POP.asked < 2.5; // prettier-ignore
       if (!want || POP.next) POP.phase = "unhole";
-      else if (pics.ready(T.sheet) || time - POP.asked > 1.5) {
+      else if ((pics.ready(T.sheet) && !depthWait) || time - POP.asked > 4) {
         POP.phase = "rise";
         POP.t0 = time;
         out.cues.push(POP_SOUNDS.rise);
       }
       break;
+    }
     case "rise":
     case "up":
       if (!want || POP.next) bk5Fall(time);

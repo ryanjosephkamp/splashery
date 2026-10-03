@@ -245,7 +245,8 @@ test.describe("links and pop-out (no browser)", () => {
     b.run(1.8);
     b.set("pop", 1);
     await b.settle();
-    b.run(1.6);
+    // (No depth model here: it waits its 2.5 s at rest, then rises flat.)
+    b.run(4.2);
     expect(POP.kind).toBe("photo");
     expect(POP.phase).toBe("up");
     expect(POP.target.page).toBe(0);
@@ -255,7 +256,7 @@ test.describe("links and pop-out (no browser)", () => {
     // The other photo (below it) is tapped: the first lies back, then it rises.
     const other = BOOKS_R5.point(1, [0.5, 0.5]);
     b.tap(other);
-    b.run(3);
+    b.run(5.5);
     expect(POP.phase).toBe("up");
     expect(POP.target.page).toBe(1);
     b.set("pop", 0);
