@@ -549,11 +549,17 @@ export class SoftParts {
       if (nd.w === 0) continue;
       const def = nd.strand.def;
       if (nd.x[1] < fl + nd.r) {
+        const depth = fl + nd.r - nd.x[1];
         nd.x[1] = fl + nd.r;
-        // Friction: most of the slide along the floor is undone.
-        const fr = def.friction ?? 0.6;
-        nd.x[0] -= (nd.x[0] - nd.p[0]) * fr;
-        nd.x[2] -= (nd.x[2] - nd.p[2]) * fr;
+        // Friction (as in PBD): the slide along the floor this substep is
+        // undone up to `friction` times how far the floor pushed it out.
+        const fr = (def.friction ?? 0.6) * depth;
+        const dx = nd.x[0] - nd.p[0];
+        const dz = nd.x[2] - nd.p[2];
+        const slide = Math.hypot(dx, dz);
+        const k = slide > 1e-12 ? Math.min(1, fr / slide) : 0;
+        nd.x[0] -= dx * k;
+        nd.x[2] -= dz * k;
       }
       for (const sp of def.avoid || []) {
         const c = sp.piece !== undefined ? this.host.pieces[sp.piece]?.body?.toWorld(sp.at) ?? sp.at : sp.at; // prettier-ignore
