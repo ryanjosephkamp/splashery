@@ -231,15 +231,20 @@ function triShape(a, b, c) {
 }
 
 // Pushes samples out along the normal a little: fur and fuzz.
-function fuzz(shape, amount) {
+// A soft pile of fur (lane Sharpness B, after the old random fuzz()): an
+// evenly sampled surface, each splat lifted by a fixed hash of where it
+// sits instead of a random draw, so the plush stays smooth and solid.
+function evenFuzz(shape, amount) {
+  const lift = (s, a, b) => {
+    const h = Math.abs(Math.sin(a * 127.1 + b * 311.7) * 43758.5453) % 1;
+    s.p = add(s.p, mul(s.n, amount * h * h));
+    return s;
+  };
   return {
     area: shape.area,
     thick: shape.thick,
-    sample(rand) {
-      const s = shape.sample(rand);
-      s.p = add(s.p, mul(s.n, amount * rand() * rand()));
-      return s;
-    },
+    sample: (rand) => lift(shape.sample(rand), rand(), rand()),
+    sampleEven: (a, b) => lift(shape.sampleEven(a, b), a, b),
   };
 }
 
@@ -1169,7 +1174,8 @@ function cubeReset() {
   });
 }
 cubeReset();
-const cubeBusy = () => !!(cube.seq || cube.snap || cube.live) || cube.lastTime - cube.cheer < 1.2;
+// A paused scramble or solve (lane Fix7) lets the cube be turned by hand.
+const cubeBusy = () => !!((cube.seq && !cube.seq.paused) || cube.snap || cube.live) || cube.lastTime - cube.cheer < 1.2; // prettier-ignore
 const roundV = (v) => v.map((x) => Math.round(x));
 // The cubies in a layer.
 const layerOf = (axis, layer) => CUBIES.map((_, i) => i).filter((i) => cube.pos[i][axis] === layer); // prettier-ignore
@@ -1234,6 +1240,9 @@ function cubeDragMove(p) {
     const b = Math.abs(dv[b1]) >= Math.abs(dv[b2]) ? b1 : b2;
     if (Math.abs(dv[b]) < 0.2) return;
     const axis = 3 - d.a - b;
+    // A move of one's own ends a paused scramble or solve; the next tap
+    // starts a new one from here.
+    if (cube.seq?.paused) cube.seq = null;
     // Which way round the axis moves the face's surface along +b.
     const k = cross(AXES[axis], d.n)[b];
     cube.live = { axis, b, k, layer: clamp(Math.round(d.p0[axis]), -1, 1), angle: 0 };
@@ -1259,9 +1268,20 @@ function cubeDrive(c, out, info) {
   const now = info.time;
   cube.lastTime = now;
   const click = (vol = 1) => out.cues.push({ voice: "sample", file: "puzzle-cube-turn.mp3", pitch: 0.92 + 0.16 * Math.random(), vol: 1.4 * vol, fallback: { voice: "twist", f: 1600 + 300 * Math.random(), vol } }); // prettier-ignore
-  // A tap: scramble a solved cube, or play its turns back to solved.
-  if (fired(m, "twist", c.twist)) {
-    if (cube.seq) for (const t of cube.seq.turns.slice(cube.seq.done)) cubeApply(t);
+  // A tap: scramble a solved cube, or play its turns back to solved. A tap
+  // while one plays pauses it once the turn in progress lands (so the cube
+  // can be turned by hand), and the next tap carries on (lane Fix7).
+  const seq = cube.seq;
+  const tapped = fired(m, "twist", c.twist);
+  if (tapped && seq && !seq.paused && seq.hold === null) {
+    const slot = (now - seq.at) / seq.per;
+    seq.hold = Math.min(seq.turns.length, slot - seq.done < 0.05 ? seq.done : seq.done + 1);
+  } else if (tapped && seq) {
+    // Carry on: from where it paused, or as it was if it hadn't yet.
+    if (seq.paused) seq.at = now - seq.done * seq.per;
+    seq.hold = null;
+    seq.paused = false;
+  } else if (tapped) {
     cube.live = cube.drag = cube.snap = null;
     let turns;
     if (!cube.history.length || cubeSolved()) {
@@ -1283,19 +1303,28 @@ function cubeDrive(c, out, info) {
         for (let j = 0; j < n; j++) turns.push({ axis: h.axis, layer: h.layer, q: -Math.sign(h.q) }); // prettier-ignore
       }
     }
-    cube.seq = { turns, done: 0, solving: !!cube.history.length };
+    // Its own clock: the whole scramble or solve takes CUBE_TAP seconds.
+    const per = CUBE_TAP / Math.max(1, turns.length);
+    cube.seq = { turns, done: 0, solving: !!cube.history.length, at: now, per, hold: null, paused: false }; // prettier-ignore
   }
   let anim = null;
-  if (cube.seq) {
+  if (cube.seq?.paused) {
+    // Paused between turns: nothing moves until a tap or a hand turn.
+  } else if (cube.seq) {
     const { turns } = cube.seq;
-    const slot = c.twist > 0 ? (1 - c.twist) * turns.length : turns.length;
-    while (cube.seq.done < Math.min(turns.length, Math.floor(slot))) {
-      cubeApply(turns[cube.seq.done++], !cube.seq.solving);
+    const end = cube.seq.hold ?? turns.length;
+    const slot = Math.min(end, Math.max(0, (now - cube.seq.at) / cube.seq.per));
+    // Every turn is recorded (a solve's turns cancel the history as they
+    // go), so a solve stopped part way leaves the history right.
+    while (cube.seq.done < Math.floor(slot)) {
+      cubeApply(turns[cube.seq.done++]);
       click(0.8);
     }
     if (cube.seq.done >= turns.length) {
       if (cube.seq.solving) cube.history = [];
       cube.seq = null;
+    } else if (cube.seq.done >= end) {
+      cube.seq.paused = true;
     } else {
       const t = turns[cube.seq.done];
       anim = { axis: t.axis, layer: t.layer, angle: easeInOut(slot - cube.seq.done) * t.q * (Math.PI / 2) }; // prettier-ignore
@@ -1866,7 +1895,10 @@ export const RECIPES = {
       const yb = -0.16;
       const wood = "#5b3a24";
       // Base.
-      k.add(roundBox(2.1, 0.13, 0.98, 0.04, { bottom: false }), {
+      // (Closed and evenly laid underneath, lane Sharpness B: from below
+      // the open box showed its top through.)
+      k.add(roundBox(2.1, 0.13, 0.98, 0.04), {
+        even: true,
         opacity: 1,
         jitter: 0.015,
         pos: [0, yb - 0.065, 0],
@@ -1979,16 +2011,26 @@ export const RECIPES = {
       const light = mix(fur, "#f6e2c6", 0.6);
       const dark = "#2a1a12";
       const furCol = (c, base) => {
-        const n = c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9);
-        const col = shade(base, 0.86 + 0.18 * c.rand() + 0.12 * n);
+        // Soft plush mottling, no per-splat noise (it read as grain).
+        const n = c.fbm(c.p[0] * 7, c.p[1] * 7, c.p[2] * 7);
+        const col = shade(base, 0.93 + 0.04 * c.rand() + 0.1 * n);
         return lit(col, c.n, { amb: 0.66, dif: 0.45, spec: 0 });
       };
-      const soft = { flat: 0.55, jitter: 0.07, interior: 0.08, core: "#e9dcc3" };
+      const soft = {
+        even: true,
+        opacity: 1,
+        flat: 0.45,
+        jitter: 0.025,
+        size: 1.1,
+        interior: 0.06,
+        core: shade(fur, 0.8),
+      };
+      const plush = (a, b, c, amt, grid = 64) => evenFuzz(evenEllipsoid(k, a, b, c, grid), amt);
       const head = k.part("head", { pivot: [0, 0.42, 0], axis: [0, 0, 1] });
       const armR = k.part("armR", { pivot: [0.33, 0.3, 0.04], axis: [0, 0, 1] });
       const armL = k.part("armL", { pivot: [-0.33, 0.3, 0.04], axis: [0, 0, 1] });
       // Body with a lighter tummy.
-      k.add(fuzz(k.ellipsoid(0.42, 0.47, 0.37), 0.035), {
+      k.add(plush(0.42, 0.47, 0.37, 0.014), {
         ...soft,
         pos: [0, 0, 0],
         color: (c) => {
@@ -1997,14 +2039,14 @@ export const RECIPES = {
         },
       });
       // Head, ears, snout, eyes and nose.
-      k.add(fuzz(k.sphere(0.35), 0.035), {
+      k.add(plush(0.35, 0.35, 0.35, 0.014), {
         ...soft,
         pos: [0, 0.7, 0.02],
         part: head,
         color: (c) => furCol(c, fur),
       });
       for (const s of [-1, 1]) {
-        k.add(fuzz(k.ellipsoid(0.13, 0.13, 0.075), 0.03), {
+        k.add(plush(0.13, 0.13, 0.075, 0.01, 40), {
           ...soft,
           pos: [s * 0.27, 0.97, -0.02],
           rot: [0, 0, s * -18],
@@ -2014,7 +2056,10 @@ export const RECIPES = {
             return furCol(c, inner ? light : fur);
           },
         });
-        k.add(k.sphere(0.045), {
+        k.add(evenEllipsoid(k, 0.045, 0.045, 0.045, 28), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.13, 0.79, 0.31],
           part: head,
           flat: 0.3,
@@ -2028,7 +2073,7 @@ export const RECIPES = {
         [0, 0.56, -0.06, 0.525],
         [0, 0.56, 0.06, 0.525],
       ];
-      k.add(fuzz(k.ellipsoid(0.17, 0.13, 0.13), 0.012), {
+      k.add(plush(0.17, 0.13, 0.13, 0.006, 48), {
         ...soft,
         pos: [0, 0.6, 0.29],
         part: head,
@@ -2047,7 +2092,10 @@ export const RECIPES = {
           return furCol(c, light);
         },
       });
-      k.add(k.ellipsoid(0.07, 0.05, 0.045), {
+      k.add(evenEllipsoid(k, 0.07, 0.05, 0.045, 32), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, 0.665, 0.415],
         part: head,
         flat: 0.25,
@@ -2057,7 +2105,10 @@ export const RECIPES = {
       });
       // A ribbon bow.
       for (const s of [-1, 1])
-        k.add(k.ellipsoid(0.1, 0.065, 0.03), {
+        k.add(evenEllipsoid(k, 0.1, 0.065, 0.03, 32), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.09, 0.4, 0.33],
           rot: [0, s * -20, s * 18],
           flat: 0.2,
@@ -2065,7 +2116,10 @@ export const RECIPES = {
           pattern: false,
           color: (c) => lit("#d62839", c.n, { spec: 0.4 }),
         });
-      k.add(k.sphere(0.04), {
+      k.add(evenEllipsoid(k, 0.04, 0.04, 0.04, 24), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, 0.4, 0.35],
         flat: 0.2,
         weight: 2,
@@ -2077,7 +2131,7 @@ export const RECIPES = {
         [1, armR],
         [-1, armL],
       ])
-        k.add(fuzz(k.ellipsoid(0.12, 0.27, 0.12), 0.03), {
+        k.add(plush(0.12, 0.27, 0.12, 0.012, 48), {
           ...soft,
           pos: [s * 0.44, 0.1, 0.09],
           rot: [18, 0, s * 26],
@@ -2086,7 +2140,7 @@ export const RECIPES = {
         });
       // Legs with foot pads.
       for (const s of [-1, 1])
-        k.add(fuzz(k.ellipsoid(0.15, 0.15, 0.27), 0.03), {
+        k.add(plush(0.15, 0.15, 0.27, 0.012, 48), {
           ...soft,
           pos: [s * 0.22, -0.38, 0.2],
           rot: [0, s * 10, 0],
@@ -2129,6 +2183,10 @@ export const RECIPES = {
       );
       for (const s of [1, -1]) {
         k.add(half, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          size: 1.06,
           pos: [0, cy, 0],
           rot: [s * 90, 0, 0],
           part: yoyo,
@@ -2141,23 +2199,32 @@ export const RECIPES = {
             else if (face && r < 0.13) base = shade(col, 0.7);
             else if (face && Math.abs(r - 0.25) < 0.02) base = "#fdfbf5";
             else if (!face && c.lp[1] > 0.06 && c.lp[1] < 0.085) base = "#fdfbf5";
-            return lit(base, c.n, { amb: 0.64, dif: 0.45, spec: 0.5, pow: 26 });
+            // Smaller splats along the rings' edges keep them crisp.
+            const edge =
+              face && (Math.abs(r - 0.1) < 0.008 || Math.abs(r - 0.13) < 0.008 || Math.abs(Math.abs(r - 0.25) - 0.02) < 0.008); // prettier-ignore
+            const out = lit(base, c.n, { amb: 0.64, dif: 0.45, spec: 0.3, pow: 26 });
+            return edge ? { c: out, size: 0.75 } : out;
           },
         });
       }
       // The string wound on the axle.
-      k.add(k.torus(0.075, 0.02), {
+      k.add(evenTorus(k, 0.075, 0.02, 64), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, cy, 0],
         rot: [90, 0, 0],
         part: yoyo,
         flat: 0.4,
         weight: 1.5,
-        color: (c) => shade("#efe9dc", 0.8 + 0.2 * Math.sin(c.u * 80)),
+        color: (c) => shade("#efe9dc", 0.85 + 0.15 * Math.sin(c.u * 36)),
       });
       // The string: segments that slide over each other as it pays out.
       for (let j = 0; j < YO.K; j++) {
         const part = j ? k.part("s" + j, { pivot: [0, 0, 0] }) : 0;
-        k.add(k.cylinder(0.008, YO.seg * 1.08, { caps: false }), {
+        k.add(evenCylinder(0.008, 0.008, YO.seg * 1.08, false), {
+          even: true,
+          opacity: 1,
           pos: [0, top - (j + 0.5) * YO.seg, 0],
           part,
           share: 0.004,
@@ -2169,7 +2236,9 @@ export const RECIPES = {
       // Room for most of the throw.
       k.reach([0, top - YO.max - 0.1, 0]);
       // A loop for the finger.
-      k.add(k.torus(0.055, 0.011), {
+      k.add(evenTorus(k, 0.055, 0.011, 48), {
+        even: true,
+        opacity: 1,
         pos: [0, top + 0.05, 0],
         rot: [90, 0, 0],
         share: 0.006,
@@ -2189,7 +2258,8 @@ export const RECIPES = {
     alive: () => cubeBusy(),
     // More splats: 26 cubies spend half theirs on faces hidden inside.
     density: 1.8,
-    controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP }],
+    // The cube pauses itself (between turns), so the site's pause is off.
+    controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP, pausable: false }],
     action: { key: "twist", label: "Scramble or solve" },
     // For tests: whether each face shows one colour, and the turns since.
     cube: { solved: () => cubeSolved(), turns: () => cube.history.length },
@@ -2994,7 +3064,8 @@ export const RECIPES = {
           flat: 0.15,
           color: tin(metal),
         });
-        k.add(roundBox(0.24, 0.09, 0.34, 0.035, { bottom: false }), {
+        // (Soles closed underneath, lane Sharpness B: they were open boxes.)
+        k.add(roundBox(0.24, 0.09, 0.34, 0.035), {
           even: true,
           opacity: 1,
           jitter: 0.015,

@@ -67,27 +67,73 @@ const BASE = 0.01;
 
 // Adds the scan's splats as a cloud: `share` of the toy's budget (the file's first splats, an
 // even sample, grown to close the surface when fewer are used). `parts[i]` is the kit part for
-// the file's part i; `color(c, i, filePart)` may recolor a splat.
-export function addScan(k, scan, { share = 0.86, parts = [], color, keep } = {}) {
+// the file's part i; `color(c, i, filePart)` may recolor a splat. `pattern` (true, or
+// (filePart) => true) lets the flag and pattern layer reach those splats (lane Fix7: the clothes'
+// cloth); by default the scan keeps its own colors under any flag.
+// Lane Sharpness A's options (off unless a toy asks): `sizeMul` scales every splat, `exact` keeps
+// each splat's own size (no random size jitter, which frays the outline), and `smooth` (0..1)
+// blends each splat's color toward the mean of its neighbors within `cell` model units, to calm a
+// scan's speckled texture.
+export function addScan(
+  k,
+  scan,
+  {
+    share = 0.86,
+    parts = [],
+    color,
+    keep,
+    pattern = false,
+    sizeMul = 1,
+    exact = false,
+    smooth = 0,
+    cell = 0.012,
+  } = {},
+) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
   const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * share)));
   const grow = Math.sqrt(scan.n / m);
   const list = [];
   for (let i = 0; i < m; i++) if (!keep || keep(scan.part[i], i)) list.push(i);
+  let mean = null;
+  if (smooth > 0) {
+    // Mean color per grid cell (and part), over every splat in the file.
+    const sums = new Map();
+    const key = (i) =>
+      `${Math.floor(scan.pos[i * 3] / cell)},${Math.floor(scan.pos[i * 3 + 1] / cell)},${Math.floor(scan.pos[i * 3 + 2] / cell)},${scan.part[i]}`;
+    for (let i = 0; i < scan.n; i++) {
+      const kk = key(i);
+      let e = sums.get(kk);
+      if (!e) sums.set(kk, (e = [0, 0, 0, 0]));
+      e[0] += scan.rgb[i * 3];
+      e[1] += scan.rgb[i * 3 + 1];
+      e[2] += scan.rgb[i * 3 + 2];
+      e[3]++;
+    }
+    mean = (i) => {
+      const e = sums.get(key(i));
+      return [e[0] / e[3], e[1] / e[3], e[2] / e[3]];
+    };
+  }
   const item = k.cloud({ count: (list.length * 160000) / k.count, pattern: false }, (_r, j) => {
     const i = list[j];
     if (i === undefined) return null;
     const fp = scan.part[i];
     let c = [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]];
+    if (mean) {
+      const a = mean(i);
+      c = c.map((v, j) => v + (a[j] - v) * smooth);
+    }
     if (color) c = color(c, i, fp) || c;
     return {
       p: [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]],
       n: [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]],
-      size: (scan.sig[i] * grow) / BASE,
+      size: (scan.sig[i] * grow * sizeMul) / BASE,
+      ...(exact ? { jitter: 0 } : {}),
       flat: 0.14,
       color: c,
       opacity: 1,
       part: parts[fp] ?? 0,
+      pattern: typeof pattern === "function" ? !!pattern(fp) : pattern,
     };
   });
   // The tests find the model's splats in the buffer through this (item.start, item.end).
@@ -502,6 +548,9 @@ function childOf(qF, o, h, qH) {
 const SUNGLASSES = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
+  // The clear lenses are faint (0.1 to 0.4): a tap finds them at a lower
+  // alpha than the pick pass's usual, so a tap on a lens starts it (lane Fix7).
+  pickAlpha: 0.06,
   controls: [{ key: "flip", label: "Fold and flip", type: "pulse", ease: SG.T }],
   action: { key: "flip", label: "Fold, flip and darken" },
   credits: [
@@ -545,7 +594,8 @@ const SUNGLASSES = {
     const front = k.part("front", { pivot: SG.center });
     const armL = k.part("armL", { pivot: SG.hingeL });
     const armR = k.part("armR", { pivot: SG.hingeR });
-    addScan(k, scan, { share: 0.78, parts: [front, armL, armR] });
+    // The frame takes flag colors (lane Fix7); the lenses keep theirs.
+    addScan(k, scan, { share: 0.78, parts: [front, armL, armR], pattern: true });
     const L = SG.lens;
     const nLens = Math.round(k.count * 0.05);
     for (const side of [-1, 1]) {
@@ -568,6 +618,14 @@ const SUNGLASSES = {
       };
       addCloud(k, nLens, (i, n) => lens(i, n, false));
       addCloud(k, nLens, (i, n) => lens(i, n, true));
+      // A few bigger, faint splats over the lens, so a tap on the glass finds
+      // it (the lens's own splats are too small and faint for the pick pass).
+      addCloud(k, 37, (i, n) => {
+        const r = L.r * 0.9 * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.39996323;
+        const z = L.z + 0.03 * (1 - (r / L.r) ** 2) - 0.002;
+        return { p: [side * L.x + r * Math.cos(a), r * Math.sin(a), z], n: [0, 0, 1], size: L.r * 0.3, color: [0.78, 0.82, 0.86], opacity: 0.08, part: front }; // prettier-ignore
+      });
     }
     k.reach([0, 0.55, 0.7]);
     k.reach([0, -0.45, -0.2]);
@@ -658,7 +716,8 @@ const BASEBALL_CAP = {
   build(k) {
     const scan = SCANS.get("baseball-cap");
     const cap = k.part("cap", { pivot: BC.pivot });
-    addScan(k, scan, { share: 0.78, parts: [cap] });
+    // The cap takes flag colors (lane Fix7); its stand keeps its walnut.
+    addScan(k, scan, { share: 0.78, parts: [cap], pattern: true });
     // The stand: one turned walnut profile (a round foot, a slim post and a dome that fills the
     // crown), placed evenly (a golden-angle spiral) so its edges stay crisp.
     const zc = -0.2;
@@ -1229,7 +1288,17 @@ const RUNNING_SHOE = {
   build(k) {
     const scan = SCANS.get("running-shoe");
     const shoe = k.part("shoe", { pivot: RS.heel, axis: [0, 0, 1] });
-    addScan(k, scan, { share: 0.82, parts: [shoe, shoe], keep: (fp) => fp === 0 });
+    // The shoe takes flag colors (lane Fix7); its laces keep theirs. (Lane Sharpness A: exact,
+    // slightly smaller splats for a crisp outline, and a calmer fabric texture.)
+    addScan(k, scan, {
+      share: 0.82,
+      parts: [shoe, shoe],
+      keep: (fp) => fp === 0,
+      pattern: true,
+      exact: true,
+      sizeMul: 0.9,
+      smooth: 0.45,
+    });
     // The laces: round splats along each chain, each following the two joints it lies between.
     const n = RS.joints;
     const per = Math.max(30, Math.round((k.count * 0.05) / (2 * (n - 1))));
@@ -1349,7 +1418,8 @@ const HOODIE = {
     const sleeveR = k.part("sleeveR", { pivot: HD.shoulderR });
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
-    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4 });
+    // The cloth takes flag colors (lane Fix7); the drawstrings keep theirs.
+    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true }); // prettier-ignore
     // The armholes: each is closed with fabric that follows the opening's own outline (the
     // sleeve's splats that touch the body, above the armpit, laid flat on the plane that fits
     // them best), one patch on the body and one on the sleeve's top, so a raised sleeve shows
@@ -1431,7 +1501,7 @@ const HOODIE = {
           const r = f * rad[Math.floor(((t / (2 * Math.PI)) % 1) * bins)] * 0.97;
           const [u, v] = [r * Math.cos(t), r * Math.sin(t)];
           const p = [0, 1, 2].map((q) => c[q] + u * e1[q] + v * e2[q] + off * nrm[q]);
-          return { p, n: nrm.map((q) => q * face), size, color: col.map((q) => q * (0.86 + 0.1 * f)), part }; // prettier-ignore
+          return { p, n: nrm.map((q) => q * face), size, color: col.map((q) => q * (0.86 + 0.1 * f)), part, pattern: true }; // prettier-ignore
         });
       }
     }
@@ -1452,6 +1522,81 @@ const HOODIE = {
         const sh = 0.8 + 0.35 * Math.max(0, Math.cos(g - 0.8));
         const col = tip ? [0.12, 0.12, 0.13] : [0.8, 0.76, 0.64];
         return { p, size: 0.006, color: col.map((v) => Math.min(1, v * sh)), part };
+      });
+    }
+    // Lane Fix7: the cuffs, gathered shut. A raised sleeve points its cuff
+    // toward the viewer, and its open end read as a hole: a disc of the
+    // cuff's own cloth closes it, a little inside the rim, darker toward the
+    // middle and creased where the rib gathers.
+    for (const [fp, sleeve] of [
+      [2, sleeveL],
+      [3, sleeveR],
+    ]) {
+      const ids = [];
+      for (let i = 0; i < scan.n; i++) if (scan.part[i] === fp) ids.push(i);
+      if (ids.length < 50) continue;
+      let ymin = Infinity;
+      for (const i of ids) ymin = Math.min(ymin, scan.pos[i * 3 + 1]);
+      const P = (i) => [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]];
+      const avg = (list, f) => [0, 1, 2].map((q) => list.reduce((t, i) => t + f(i)[q], 0) / list.length); // prettier-ignore
+      const end = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.025);
+      const near = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.15);
+      if (end.length < 10) continue;
+      const c = avg(end, P);
+      const axis = (() => {
+        const a = c.map((v, q) => v - avg(near, P)[q]);
+        const l = Math.hypot(...a) || 1;
+        return a.map((v) => v / l);
+      })();
+      const dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      let rad = 0;
+      for (const i of end) {
+        const d = P(i).map((v, q) => v - c[q]);
+        const along = dot3(d, axis);
+        rad = Math.max(rad, Math.hypot(...d.map((v, q) => v - along * axis[q])));
+      }
+      const col = avg(end, (i) => [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]]);
+      const t1 = (() => {
+        const a = Math.abs(axis[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0];
+        const x = [axis[1] * a[2] - axis[2] * a[1], axis[2] * a[0] - axis[0] * a[2], axis[0] * a[1] - axis[1] * a[0]]; // prettier-ignore
+        const l = Math.hypot(...x) || 1;
+        return x.map((v) => v / l);
+      })();
+      const t2 = [axis[1] * t1[2] - axis[2] * t1[1], axis[2] * t1[0] - axis[0] * t1[2], axis[0] * t1[1] - axis[1] * t1[0]]; // prettier-ignore
+      const n = Math.round(k.count * 0.004);
+      const size = Math.sqrt((Math.PI * rad * rad) / (n * Math.PI)) * 1.4;
+      addCloud(k, n, (i) => {
+        const f = Math.sqrt((i + 0.5) / n);
+        const a = i * 2.39996323;
+        const r = f * rad * 0.96;
+        const p = [0, 1, 2].map((q) => c[q] - axis[q] * (0.012 * (1 - f * f)) + r * (Math.cos(a) * t1[q] + Math.sin(a) * t2[q])); // prettier-ignore
+        const crease = 0.9 + 0.1 * Math.cos(a * 9);
+        return { p, n: axis, size, color: col.map((v) => v * (0.62 + 0.3 * f) * crease), part: sleeve, pattern: true }; // prettier-ignore
+      });
+    }
+    // Lane Fix7: when the hood nods forward its back edge lifts off the
+    // neck; a band of the hood's own cloth stays on the body under that
+    // edge, so the gap shows cloth, not the inside of the garment.
+    {
+      const ids = [];
+      let ymin = Infinity;
+      for (let i = 0; i < scan.n; i++) {
+        // (The back half of the hood: its low edge there is what lifts.)
+        if (scan.part[i] !== 1 || scan.pos[i * 3 + 2] > HD.neck[2] - 0.02) continue;
+        ids.push(i);
+        ymin = Math.min(ymin, scan.pos[i * 3 + 1]);
+      }
+      const band = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.1);
+      const step = Math.max(1, Math.floor(band.length / Math.round(k.count * 0.006)));
+      const pick = band.filter((_, j) => j % step === 0);
+      addCloud(k, pick.length, (j) => {
+        const i = pick[j];
+        const nrm = [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]];
+        const p = [0, 1, 2].map((q) => scan.pos[i * 3 + q] - nrm[q] * 0.006);
+        const col = [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]].map(
+          (v) => v * 0.85,
+        );
+        return { p, n: nrm, size: scan.sig[i] * 1.3, color: col, part: 0, pattern: true };
       });
     }
     k.reach([0, 0.62, -0.6]);

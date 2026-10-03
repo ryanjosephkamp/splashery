@@ -1430,7 +1430,8 @@ function enDrawPad(g, view) {
   });
   g.fillStyle = "#9c825f";
   g.font = "italic 21px sans-serif";
-  g.fillText("Tap the keys to type. Tap this pad for a clean sheet.", 26, H - 34);
+  g.fillText("Tap the keys to type. Tap this pad for a clean sheet.", 26, H - 40);
+  g.fillText("Tap the rotors to take the last letter back.", 26, H - 14);
 }
 
 // Keys tapped on the machine or typed on a keyboard, waiting their turn.
@@ -1459,6 +1460,10 @@ function driveEnigma(t, c, out, info) {
   const cl = since(c.clear, 0.3);
   if (cl >= 0 && (m.clS === undefined || m.clS < 0 || cl < m.clS)) enClear(data, t, out);
   m.clS = cl;
+  // Step back (lane Fix7): the last letter off the pad, the rotors back one.
+  const bk = since(c.back, 0.3);
+  if (bk >= 0 && (m.bkS === undefined || m.bkS < 0 || bk < m.bkS)) enStepBack(data, t, out);
+  m.bkS = bk;
   // A tap anywhere else: type the stored message, or decode what is on the
   // pad (the stored message's code, or the letters you typed).
   const s = since(c.go, EN.E);
@@ -1496,7 +1501,7 @@ function driveEnigma(t, c, out, info) {
   if (!pose && data.home) {
     const f = ease(band(t - data.home.t0, 0, 0.6));
     if (f >= 1) data.home = null;
-    else pose = { key: -1, down: 0, lamp: -1, rotors: enTurn(data.home.from, [0, 0, 0], f) };
+    else pose = { key: -1, down: 0, lamp: -1, rotors: enTurn(data.home.from, data.home.to || [0, 0, 0], f) }; // prettier-ignore
   }
   // The pad's lines: a running message shows its letters as they light.
   const pad = data.pad;
@@ -1597,6 +1602,9 @@ function enKeyStart(data, k, t, out) {
     start = [0, 0, 0];
   }
   const to = data.mach.step(start);
+  // Where the rotors stood before each letter, so a step back can return them.
+  data.hist = data.pad.plain ? data.hist || [] : [];
+  data.hist.push(start.slice());
   data.pad.plain += AZ[k];
   const dt = EN_KEYS.length ? 0.22 : EN_KEY_T;
   data.key = { k, lamp: data.mach.letter(k, to), from: data.rest.slice(), to, t0: t, dt, lit: false }; // prettier-ignore
@@ -1619,6 +1627,24 @@ function enFlushKeys(data) {
     enKeyStart(data, EN_KEYS.shift(), 0, out);
     enKeyDone(data);
   }
+}
+// Step back (lane Fix7): the real machine had no delete key. An operator who
+// pressed a wrong key turned the rotors back by hand, with the thumb wheels,
+// to where they stood before it, and crossed the letter out. Here the last
+// letter you typed leaves the pad (and its coded letter), and the rotors turn
+// back to where they were before it. A stored message or a decoded one has
+// nothing typed to take back.
+function enStepBack(data, t, out) {
+  enFlushKeys(data);
+  const pad = data.pad;
+  const hist = data.hist || [];
+  if (data.run || !pad.typed || pad.dec || !pad.plain || !hist.length) return;
+  const prev = hist.pop();
+  pad.plain = pad.plain.slice(0, -1);
+  pad.coded = pad.coded.slice(0, -1);
+  data.home = { from: data.rest.slice(), to: prev.slice(), t0: t };
+  data.rest = prev.slice();
+  out.cues.push({ voice: "ratchet", f: 1300, n: 1, vol: 0.4 });
 }
 function enClear(data, t, out) {
   EN_KEYS.length = 0;
@@ -1912,12 +1938,15 @@ export const RECIPES = {
       { key: "go", label: "Type it", type: "pulse", ease: EN.E, pausable: false },
       { key: "type", label: "Key", type: "pulse", ease: 0.2 },
       { key: "clear", label: "Clean sheet", type: "pulse", ease: 0.3 },
+      // Lane Fix7: step back one letter (a tap on the rotors' thumb wheels,
+      // the Backspace key, or this button).
+      { key: "back", label: "Step back", type: "pulse", ease: 0.3 },
     ],
     action: {
       key: "go",
       label: "Type the message",
       // A key makes its own clack (cues), and so does a clean sheet.
-      quiet: ["type", "clear"],
+      quiet: ["type", "clear", "back"],
       at(p) {
         // A key of the keyboard (its cap or letter, above the top plate).
         if (p[1] > 0.015 && p[2] > 0.08 && p[2] < 0.58) {
@@ -1933,6 +1962,10 @@ export const RECIPES = {
             return { key: "type", pick: best };
           }
         }
+        // The rotors' thumb wheels: step back a letter, as an operator
+        // turned the rotors back by hand to correct a mistake.
+        const [, rcy, rcz] = EN_ROTOR_C;
+        if (Math.abs(p[0]) < 0.34 && Math.abs(p[2] - rcz) < EN.rotorR + 0.04 && p[1] > rcy - 0.02) return { key: "back" }; // prettier-ignore
         // The operator's pad on the lid: a clean sheet.
         if (
           Math.abs(p[0]) < 0.66 &&
@@ -1948,6 +1981,7 @@ export const RECIPES = {
     // A keyboard's letters type on the machine too. Plain p and r stay the
     // site's shortcuts (poke, reset the view): hold Shift for those two.
     typeKey(ch) {
+      if (ch === "Backspace") return { key: "back" };
       if (!/^[a-z]$/i.test(ch) || ch === "p" || ch === "r") return null;
       const k = idx(ch.toUpperCase());
       EN_KEYS.push(k);
