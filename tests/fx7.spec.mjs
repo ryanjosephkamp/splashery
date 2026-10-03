@@ -304,6 +304,7 @@ import { RECIPES as FOOD } from "../src/packs/food.js";
 import { RECIPES as CHEMISTRY } from "../src/packs/chemistry.js";
 import { RECIPES as EQUATION } from "../src/packs/splat-equation.js";
 import { RECIPES as PICTURES } from "../src/packs/pictures.js";
+import { RECIPES as BALLS } from "../src/packs/balls.js";
 
 const build = (r, options = {}, count = 12000) => {
   const opts = { ...Object.fromEntries((r.options || []).map((o) => [o.key, o.default])), ...options }; // prettier-ignore
@@ -331,6 +332,11 @@ test("molecule and crystal: bonds stretch between their atoms (skinned), so atom
   expect(out.tokens).toHaveLength(slabs);
   for (let i = 0; i < slabs; i++)
     expect(out.tokens[i].offset).toEqual(out.parts[`slab${i}`].offset);
+});
+
+test("marble: its glass tint is a rim shell, clearer face on than at the edge", () => {
+  const { buf } = build(BALLS.marble);
+  expect(kindCount(buf, KINDS.rim)).toBeGreaterThan(300);
 });
 
 test("protein: a tap while it is apart brings it back at once", () => {

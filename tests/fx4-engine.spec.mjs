@@ -77,7 +77,9 @@ for (const renderer of ["webgl2", "webgpu"]) {
   // held to the same page's own load-to-load difference: a load with the rim
   // blocks taken out, then two loads of the shader as it is now.
   test(`toys without the rim kind draw as before (${renderer})`, async ({ browser }) => {
-    const ids = ["marble", "bouncy-ball", "gift-box"];
+    // (The marble left this list in lane Fix7: its glass tint now uses the
+    // rim kind on purpose; tests/fx7.spec.mjs checks it.)
+    const ids = ["beach-ball", "bouncy-ball", "gift-box"];
     const shots = [];
     for (const before of [true, false, false]) {
       const { ctx, page, errors, dev } = await open(browser, renderer, { before });

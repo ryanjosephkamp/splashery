@@ -207,12 +207,13 @@ Part 2 (`claude/lane-fix7-2`, stacked on part 1): all seventeen items built and 
 
 - No engine changes in part 1 or part 2.
 - The Enigma "step back" question is answered (yes, 11:08 UTC) and built in part 2.
-- Two finished lanes' tests break on part 2 by a count or a list (not edited, per the rules):
-  `tests/fix3.spec.mjs:25` caps the bananas' token index at `bananas.length * 7`; each banana now
-  has 14 tokens (its fruit and inner peel are their own pieces, shown only while peeled), so the cap
-  would be `* 14`. `tests/fx4-engine.spec.mjs:79` lists the marble among "toys without the rim
-  kind"; its glass now uses the rim kind, so another toy without it (say the beach ball) would
-  replace it there.
+- Two finished lanes' tests broke on part 2 by a count or a list. At the Operator's request
+  (October 3, 2026, after combo E), part 2 updates them: `tests/fix3.spec.mjs` now checks that
+  every banana splat rides on one of the pieces each banana lists (14 each: its fruit and inner
+  peel are their own pieces, shown only while peeled), so no crown is left behind;
+  `tests/fx4-engine.spec.mjs` uses the beach ball in place of the marble among "toys without the
+  rim kind" (the marble's glass now uses it on purpose), and `tests/fx7.spec.mjs` checks the
+  marble's rim shell.
 - In the full run of part 1, `tests/chs-engine.spec.mjs` ("a tap that returns options rebuilds the
   toy…", the atom toy) failed once while clips rendered alongside; part 1 doesn't touch it. I rerun
   it alone below.
