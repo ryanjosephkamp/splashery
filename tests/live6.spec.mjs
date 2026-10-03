@@ -146,3 +146,26 @@ test("a clip plays at its source's speed: a video's frame rate and length, a GIF
   expect(off).toBeLessThan(0.45);
   expect(errors).toEqual([]);
 });
+
+test("the splat mirror's background layer shows only behind and beside the person, never over the rest of the picture", async () => {
+  const { BackPlate } = await import("../src/live/relief.js");
+  // The picture: 40 by 20, a person (near) in the middle 8 by 8.
+  const cols = 40;
+  const rows = 20;
+  const hts = new Float32Array(cols * rows);
+  for (let y = 6; y < 14; y++) for (let x = 16; x < 24; x++) hts[y * cols + x] = 0.9;
+  const bp = new BackPlate(20, 10);
+  let img = null;
+  const g = {
+    createImageData: (w, h) => ({ width: w, height: h, data: new Uint8ClampedArray(w * h * 4) }),
+    putImageData: (i) => (img = i),
+  };
+  bp.draw(g, cols, rows, 0.5, hts);
+  const alpha = (x, y) => img.data[(y * cols * 2 + cols + x) * 4 + 3];
+  expect(alpha(20, 10)).toBe(255); // behind the person
+  expect(alpha(13, 10)).toBe(255); // just beside
+  expect(alpha(3, 3)).toBe(0); // the wall, away from the person
+  expect(alpha(36, 17)).toBe(0);
+  // It sits behind the wall: its offset never brings it forward of it.
+  for (let i = 0; i < cols * rows; i++) expect(img.data[(Math.floor(i / cols) * cols * 2 + cols + (i % cols)) * 4 + 2]).toBeGreaterThanOrEqual(127); // prettier-ignore
+});
