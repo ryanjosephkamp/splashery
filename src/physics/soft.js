@@ -477,7 +477,7 @@ export class SoftParts {
       }
       if (nd.w === 0) continue;
       const def = nd.strand.def;
-      const a = [0, -g, 0];
+      const a = [0, -g * (def.weight ?? 1), 0];
       if (nd.lift) for (let i = 0; i < 3; i++) a[i] += nd.lift[i];
       const keep = def.keep ?? 0;
       if (keep) {
