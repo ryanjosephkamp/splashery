@@ -253,6 +253,26 @@ function scheduleCheck() {
 
 // ---- Exports ------------------------------------------------------------------------------
 
+// After a PNG, a GIF or a copied link of glowing (dark-wall) Neon: a tip
+// that a pale wall scans in every reader, with a one-tap switch in the panel.
+const NEON_TIP = "For printing or sharing, Neon on a pale wall scans in every reader.";
+function neonTip() {
+  const o = QR.options || {};
+  if (o.style !== "neon" || palette(o).neonLight) return;
+  QR.neonTip = true;
+  refreshPanel();
+  globalThis.__splashery?.app?.ui?.toast?.(`${NEON_TIP} The switch is in the Toy tab.`, 5000);
+}
+if (typeof document !== "undefined")
+  document.addEventListener(
+    "click",
+    (e) => {
+      const toy = globalThis.__splashery?.app?.player?.toyInfo?.id;
+      if (toy === "qr-code" && e.target?.closest?.("#share-link")) setTimeout(neonTip, 50);
+    },
+    true,
+  );
+
 async function savePNG(size = 1600) {
   const app = globalThis.__splashery?.app;
   if (!app) return null;
@@ -262,6 +282,7 @@ async function savePNG(size = 1600) {
     const blob = await canvasToBlob(canvas);
     downloadBlob(blob, timestampName("png", "splashery-qr"));
     app.ui.toast("Picture saved, with its quiet zone.");
+    setTimeout(neonTip, 1500);
     return blob;
   });
 }
@@ -312,6 +333,7 @@ export async function makeGIF({
         if (save) {
           downloadBlob(blob, timestampName("gif", "splashery-qr"));
           app.ui.toast(loop ? "Looping GIF saved: every frame of it scans." : "GIF saved: it ends on the code, held still to scan."); // prettier-ignore
+          setTimeout(neonTip, 1500);
         }
         return blob;
       } finally {
@@ -514,6 +536,17 @@ function renderPanel() {
     app?.setToyOptions(light ? { ...PRESETS.neon } : { ...PRESETS["neon-light"] });
   });
   wallRow.append(wall);
+  const tipRow = document.createElement("div");
+  tipRow.id = "qr-neon-tip";
+  tipRow.className = "note";
+  tipRow.hidden = true;
+  const tipText = document.createElement("span");
+  tipText.textContent = `${NEON_TIP} `;
+  const tipGo = button("qr-neon-tip-go", "Switch to a pale wall", () => {
+    QR.neonTip = false;
+    app?.setToyOptions({ ...PRESETS["neon-light"] });
+  });
+  tipRow.append(tipText, tipGo);
   const info = document.createElement("p");
   info.className = "note";
   info.id = "qr-info";
@@ -553,6 +586,7 @@ function renderPanel() {
     styleLabel,
     styleRow,
     wallRow,
+    tipRow,
     info,
     warn,
     result,
@@ -568,11 +602,16 @@ function renderPanel() {
         b.classList.toggle("primary", id === (o.style || "classic"));
       }
       wallRow.hidden = o.style !== "neon";
+      tipRow.hidden = !(QR.neonTip && o.style === "neon" && !palette(o).neonLight);
       wall.textContent = palette(o).neonLight
         ? "Glow on a dark wall (inverted)"
         : "Put it on a pale wall (every reader)";
       info.textContent = QR.error ? `${QR.error} The code shows the start of it.` : describe(o);
       const w = colorWarnings(o);
+      // Alive moves the code: the scan lab's loops read front on and at 10°,
+      // but some styles fell to 2 or 3 frames in 12 at 20°.
+      if (QR.aliveOn && !w.some((x) => x.startsWith("Hold the phone flat")))
+        w.push("Hold the phone flat to the code while Alive is on: a moving code reads less well from an angle."); // prettier-ignore
       const px = modulePx();
       if (px && px < minModulePx(o))
         w.push(`On this screen the code is drawn at about ${px.toFixed(1)} pixels per module; readers need about ${minModulePx(o)} for this style. Use Full screen, a bigger window, or a shorter text (a smaller code).`); // prettier-ignore
@@ -697,6 +736,11 @@ export const RECIPES = {
       }
       const alive = QR.gif ? (QR.gif.key === "alive" ? 1 : 0) : (c.alive ?? 0);
       out.morph = [m[0], m[1], m[2], alive];
+      const aliveOn = (c.alive ?? 0) > 0.5;
+      if (aliveOn !== !!QR.aliveOn) {
+        QR.aliveOn = aliveOn;
+        Promise.resolve().then(refreshPanel);
+      }
       for (const k of MOTIONS) {
         const v = c[k] ?? 0;
         if (v > (TAP.last[k] ?? 0) + 0.5 && !QR.gif) out.cues.push(...SOUNDS[k]);

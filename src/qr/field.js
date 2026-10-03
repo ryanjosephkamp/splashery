@@ -11,8 +11,8 @@
 //      to a floor, then fly back to their places in a wave.
 //   w  Alive (0..1): a color wave rolls across the code. Each splat's hue
 //      moves toward the style's wave color while its gray (what a reader
-//      sees) stays the same, so every frame scans; the pieces also breathe
-//      in depth, which shows only when the code is turned.
+//      sees) stays the same, so every frame scans. (A breath in depth was
+//      dropped on October 3: it made Bubbles' loop miss a frame now and then.)
 //
 // The Gems style's glint passes only when the code is seen at an angle: in
 // Scan view (front on) it never pales a module.
@@ -114,12 +114,11 @@ void modifySplatCenter(inout vec3 center) {
     off += p * (1.0 - s) + vec3(0.0, 0.0, 0.25 * edge * sin(3.1415927 * s));
     q = qrMul(qrAxis(ax, spin * (1.0 - s)), q);
   }
-  // Alive: the color wave, and a breath in depth.
+  // Alive: the color wave.
   float L = uSpMorph.w;
   if (L > 0.0) {
     float ph = uSpKit.x * 1.8 - (g.x + g.y) * 5.0;
     qrWave = L * (0.5 + 0.5 * sin(ph));
-    off.z += L * 0.2 * QS * wide * (0.5 + 0.5 * sin(ph + 1.2)); // only forward: never into the sheet
   }
   qrQ = q;
   center = piv + qrRot(q, rel) + off;
@@ -238,7 +237,6 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   if (L > 0.0) {
     let ph = uniform.uSpKit.x * 1.8 - (g.x + g.y) * 5.0;
     qrWave = L * (0.5 + 0.5 * sin(ph));
-    off.z += L * 0.2 * QS * wide * (0.5 + 0.5 * sin(ph + 1.2)); // only forward: never into the sheet
   }
   qrQ = q;
   *center = piv + qrRot(q, rel) + off;

@@ -242,10 +242,10 @@ screen.
   Measured: tubes 0.26 to 0.37, wall 0.94 (margin 0.58).
 - **Alive** (a toggle in the Toy tab, and "Save a looping GIF"): a color wave rolls across the code.
   Each splat's hue moves toward the style's wave color (`wave`, set by each preset) while its gray,
-  what a reader sees, stays the same, so every frame scans; the pieces also breathe in depth, which
-  shows when the code is turned. The looping GIF is one whole period (44 frames). Every frame of
-  every style's loop reads back with jsQR (`tests/qr.spec.mjs`). The eyes don't turn: a finder
-  turned partway is no longer a finder, and jsQR lost the code on those frames.
+  what a reader sees, stays the same, so every frame scans. (Round 3 dropped a breath in depth,
+  which made Bubbles' loop miss a frame now and then.) The looping GIF is one whole period (44
+  frames). Every frame of every style's loop reads back with jsQR (`tests/qr.spec.mjs`). The eyes
+  don't turn: a finder turned partway is no longer a finder, and jsQR lost the code on those frames.
 - The check could hand back an earlier check's result (one still running for the code before a
   change); now a check counts only for the code built last.
 - The GIF's frame times grew with each frame (each `renderAt` read back the time the last one set);
@@ -271,6 +271,16 @@ screen.
   Bricks and Gems show a "hold the phone flat" hint. The advice after a failed check suggests a
   shorter text, not a higher level, for depth styles. (For a few hours before the measured
   scorecard, the provisional one set H for shaped styles; that is gone.)
+
+### Round 3 (October 3, 2026, 14:30 UTC: the owner marked all 20 cards good)
+
+Two small follow-ups from the scan lab's round 2 sweep:
+
+- After a PNG, a GIF or a copied link (the Share tab's Copy link) of glowing, dark-wall Neon, a tip
+  in the panel (and a toast): "For printing or sharing, Neon on a pale wall scans in every reader",
+  with a one-tap switch.
+- While Alive is on, the panel shows "hold the phone flat" (the lab's loops read 12 of 12 frames
+  front on and at 10°, but Bricks, Neon and pale-wall Neon fell to 2 or 3 of 12 at 20°).
 
 ### Clips and cards
 

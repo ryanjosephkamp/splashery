@@ -148,6 +148,24 @@ test("Full screen shows the code alone, and it scans; Esc closes it", async ({ p
   await expect(page.locator("#qr-fullscreen")).toHaveCount(0);
 });
 
+test("glowing Neon tips a pale wall after a copied link, and Alive asks to hold the phone flat", async ({
+  page,
+}) => {
+  test.setTimeout(240_000);
+  await open(page);
+  await page.evaluate(() => window.__splashery.qr.set({ style: "neon" }));
+  await expect(page.locator("#qr-neon-tip")).toBeHidden();
+  await page.evaluate(() => document.getElementById("share-link").click());
+  await expect(page.locator("#qr-neon-tip")).toBeVisible();
+  await page.evaluate(() => document.getElementById("qr-neon-tip-go").click());
+  await page.waitForFunction(() => window.__splashery.qr.info().options.bg === "#eef1f4");
+  await expect(page.locator("#qr-neon-tip")).toBeHidden();
+  await page.evaluate(() => window.__splashery.player.setControl("alive", 1));
+  await expect(page.locator("#qr-warning")).toContainText("Hold the phone flat");
+  await page.evaluate(() => window.__splashery.player.setControl("alive", 0));
+  await expect(page.locator("#qr-warning")).not.toContainText("Alive is on");
+});
+
 // ---- Loading ------------------------------------------------------------------------------
 
 test("nothing QR-related loads until the toy opens", async ({ page }) => {
