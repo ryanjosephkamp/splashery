@@ -260,8 +260,10 @@ const CHLADNI = {
     const j = Math.min(KEYS - 1, Math.floor(pos));
     for (let i = 0; i < KEYS; i++) out.parts[`sand${i}`] = { visible: i === j ? 1 : 0 };
     out.morph = [pos - j, 0, 0, 0];
-    // The bow is drawn along the front edge while the sand moves.
-    const bowing = !sung && !played && p > 0.001 && p < 0.999;
+    // The bow is drawn along the front edge while it moves the sand: never
+    // while your voice or audio drives the plate, nor while the sand they
+    // left holds after they stop.
+    const bowing = !sung && !played && !keep && p > 0.001 && p < 0.999;
     const ramp =
       sung || played ? SING.r : Math.min(smoothstep(0, 0.06, p), 1 - smoothstep(0.94, 1, p));
     out.parts.bow = {
