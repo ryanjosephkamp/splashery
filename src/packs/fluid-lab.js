@@ -119,6 +119,12 @@ function glassScene(k, o) {
     budget: 1200,
     colliders: [GLASS, { type: "floor", y: 0 }],
     fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.3 } },
+    // (r6, the GPU's lava: a thin cooled floor, so what pours piles up on top
+    // of it, glowing, and crusts over, rather than sinking into a deep pool)
+    gpu:
+      look.preset === "lava"
+        ? { fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.08 } } }
+        : undefined,
     emitter: { at: NOZZLE, dir: [0, -1, 0], ...look.nozzle },
   });
   k.reach([0.9, 2.1, 0.5]);
