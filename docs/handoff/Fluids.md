@@ -212,6 +212,14 @@ State (see docs/FLUIDS.md, "r4"):
   plume in perfectly still air stands straight, and a room's faint drafts make it meander. WebGPU in
   this container is SwiftShader (software), so GPU frame times here are not a phone's.
 
+## r6 (October 2, 2026): the owner's marks on r4 and r5
+
+Brief (the Operator, from the owner's marks): a thin meniscus instead of a white ring (the pours and
+the soda), a tap-thin stream at the spout, lava as one material from spout to pool (the same colors,
+cooling on one curve), splash drops less round. Branch `claude/lane-fluids-r6` from main 4e55c9f; PR
+"Phase Fluids r6: …". Cards fl-r6-\* on Effect review page 2, with `replacedBy` on the r4 and r5
+ones. See docs/FLUIDS.md, "r6".
+
 ## r5 (October 2, 2026): the owner's phone review
 
 Brief (the Operator, from the owner's review of October 2): 1) tap the faucet's handle to pour; 2)

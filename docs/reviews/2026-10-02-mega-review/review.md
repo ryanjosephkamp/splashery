@@ -1050,11 +1050,11 @@ the private alignment page; the sound notes are in `tools/sound-review.json` (ro
 > specified, maybe fix any of the problems with things like the flags or colors. Any really new
 > ideas for toys that I added, you can kind of, like, list those and give me your thoughts on them
 > and kind of tell me when you think the best time to add them in would be. I'm okay if we postpone
-> Matterhorn for a few days while we clean all this stuff up and close what's on the current site.
-> If that's how long it takes, that's not a problem at all. What I might have you do after you have
-> processed this document or whatever, maybe you've given me an artifact or something that shows
-> that you have captured all the notes that I have. I may ask you to go back over what you've done
-> in processing this document just to make sure that you didn't miss anything, because there's a lot
-> of stuff in this. And so maybe doing, like, a review or, like, a second pass over it would be
-> wise. I think I am going to ask you to do that in the next prompt. Anyways, thanks again for all
-> your help. Really appreciate it.
+> [the other project] for a few days while we clean all this stuff up and close what's on the
+> current site. If that's how long it takes, that's not a problem at all. What I might have you do
+> after you have processed this document or whatever, maybe you've given me an artifact or something
+> that shows that you have captured all the notes that I have. I may ask you to go back over what
+> you've done in processing this document just to make sure that you didn't miss anything, because
+> there's a lot of stuff in this. And so maybe doing, like, a review or, like, a second pass over it
+> would be wise. I think I am going to ask you to do that in the next prompt. Anyways, thanks again
+> for all your help. Really appreciate it.

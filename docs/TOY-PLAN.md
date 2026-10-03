@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 342 toys. 342 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 338.
+- 372 toys. 342 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 4.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -70,7 +70,7 @@ Proposals below are suggestions; the owner may change them.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Video to 3D
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
-## Scans (32)
+## Scans (62)
 
 - **Cactus** (`cactus`). Now: tap: Bloom (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
@@ -175,6 +175,156 @@ Proposals below are suggestions; the owner may change them.
     shells (urchins, sand dollars, starfish, a scallop) bounce up in turn, spinning, and drop back.
     The blurry fringe under the basket is hidden (2.6 s).
   - Sound: Clattering shells.
+- **Heart donut** (`heart-donut`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Sushi boat** (`sushi-boat`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Seeded bread loaf** (`seeded-loaf`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cowboy steak** (`steak`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Stollen** (`stollen`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Orange (photo)** (`orange-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Physalis** (`physalis`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Crystal** (`crystal-gem`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Alum crystal** (`alum-crystal`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Puffin** (`puffin`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Toy T. rex** (`toy-trex`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Monkey doll** (`monkey-doll`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Souvenir elephant** (`elephant-souvenir`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Souvenir turtle** (`turtle-souvenir`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cave lioness** (`cave-lioness`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Dog plush** (`dog-plush`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **BMX bicycle** (`bmx-bike`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Murex shell** (`murex-shell`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Sunflower (photo)** (`sunflower-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **White roses** (`white-roses`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Bonsai tree (photo)** (`bonsai-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Mushroom (photo)** (`mushroom-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cactus (photo 2)** (`cactus-real`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Crochet Earth** (`crochet-earth`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Desk globe** (`desk-globe`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cherry blossom (photo)** (`cherry-blossom-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Golden maple** (`maple-tree`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Peonies in a vase** (`peony`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Money tree** (`money-tree`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Knight on a horse** (`knight-horse`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
 - **Real rubber duck** (`rubber-duck-real`). Now: tap: Squeeze (rig). Plan: keep.
   - Owner: Squeeze and quack. It must differ from the other rubber duck.
   - Effect: Squeezes flat and springs back.

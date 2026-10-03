@@ -62,6 +62,21 @@ export function canPlay(info) {
 const PRESS_MOVE = 7; // CSS pixels before a press becomes a pick-up
 const GRAVITY = 26; // toy radii per second squared
 const HOME_SECS = 0.45;
+// The grab (the owner's note of October 3, 2026: a touch must never fling).
+const STEP = 1 / 60; // the world always steps this long, whatever the frame rate
+const FOLLOW = 14; // the held point's spring (per second), critically damped
+const NUDGE = 24; // CSS pixels: a drag shorter than this pushes the toy, never picks it up
+const THROW_WINDOW = 0.1; // seconds of finger motion a let-go takes its speed from
+const THROW_MAX = 4; // toy radii per second
+const THROW_MIN = 0.4; // toy radii per second: slower than this is a still hold
+const AIR_DRAG = 0.6; // per second, on a thrown thing
+// Held, a thing hangs from the finger: it tilts and swings as the hand
+// speeds up and slows down, and a gentle pull (per second) brings it back
+// toward the way it stood. Picked up, it lifts this far (toy radii).
+const HOLD_UPRIGHT = 1;
+const HOLD_SWING_DAMPING = 1.2;
+const PUSH_MAX = 2; // toy radii per second: the fastest a nudge pushes
+const PICK_LIFT = 0.15;
 
 export class HandsOn {
   // player: the Player (stage, camera, toyInfo, ray, proc).
@@ -78,6 +93,8 @@ export class HandsOn {
     this.homing = null; // { t0, from: [{ body, pos, q }] }
     this.moved = false; // anything off home
     this.time = 0;
+    this.acc = 0; // time not yet stepped (less than one STEP)
+    this.simTime = 0; // the world's clock (whole STEPs)
     this.lastResort = 0;
     this.sounds = []; // hits for the app to play: { speed, soft, piece }
   }
@@ -348,11 +365,22 @@ export class HandsOn {
   moveTo(x, y) {
     const pr = this.press;
     if (pr && !this.hold) {
-      if (Math.hypot(x - pr.x, y - pr.y) < PRESS_MOVE) return;
-      this.pickUp(pr.hit, pr.x, pr.y);
+      const d = Math.hypot(x - pr.x, y - pr.y);
+      if (d < PRESS_MOVE) return;
+      // A short drag on a whole toy is a nudge: the finger pushes it where
+      // it touched, so it slides and turns a little. Further, it's picked
+      // up (by the same spot, wherever the push left it).
+      const pieces = !!this.info?.recipe?.hands?.pieces;
+      if (!pieces && d < NUDGE) {
+        this.pushTo(pr, x, y);
+        return;
+      }
+      const hit = pr.local && this.body ? this.body.toWorld(pr.local) : pr.hit;
+      this.pickUp(hit, pr.x, pr.y);
     }
     const h = this.hold;
     if (!h) return;
+    h.travel = Math.max(h.travel, Math.hypot(x - h.x0, y - h.y0));
     const ray = this.ray(x, y);
     if (h.place) {
       this.placeAt(h, ray);
@@ -368,7 +396,9 @@ export class HandsOn {
     // Keep the finger's point inside the play area, above the floor.
     const R = this.R();
     const fl = this.world.planes[0].d;
-    p[1] = Math.max(p[1], fl + 0.05 * R);
+    // A toy resting on the floor can't be pressed into it: the finger's
+    // point stays as high as it was when the toy stood there.
+    p[1] = Math.max(p[1], fl + 0.05 * R, h.minY);
     p[1] = Math.min(p[1], fl + 5 * R);
     const lim = this.mode === "pieces" ? (this.info.recipe.hands.area ?? 1.6) * R : 1.6 * R;
     const c = this.body ? this.body.home.pos : [0, 0, 0];
@@ -376,6 +406,52 @@ export class HandsOn {
     p[2] = Math.max(c[2] - lim, Math.min(c[2] + lim, p[2]));
     h.target = p;
     this.world.wake();
+  }
+
+  // A nudge: the finger's move (on the plane facing the view, through where
+  // it pressed) is kept along the floor, for step() to push with.
+  pushTo(pr, x, y) {
+    const w = this.ensure();
+    const b = this.body;
+    if (!pr.local) {
+      this.homing = null;
+      pr.local = b.toLocal(pr.hit);
+      pr.last = [pr.x, pr.y];
+      pr.normal = this.ray(pr.x, pr.y).dir.slice();
+    }
+    const onPlane = (sx, sy) => {
+      const ray = this.ray(sx, sy);
+      const den = v3.dot(ray.dir, pr.normal);
+      if (Math.abs(den) < 1e-4) return null;
+      const t = v3.dot(v3.sub(pr.hit, ray.origin), pr.normal) / den;
+      return t > 0 ? v3.add(ray.origin, v3.scale(ray.dir, t)) : null;
+    };
+    const a = onPlane(...pr.last);
+    const c = onPlane(x, y);
+    pr.last = [x, y];
+    if (!a || !c) return;
+    const d = v3.sub(c, a);
+    d[1] = 0;
+    pr.push = v3.add(pr.push ?? [0, 0, 0], d);
+    this.moved = true;
+    w.wake();
+  }
+
+  // The push: the touched point is pushed along the finger's way as fast as
+  // the finger went (only pushed, never pulled), so where the finger is off
+  // the middle the toy turns and tips a little too.
+  pushStep(pr, dt) {
+    const b = this.body;
+    const d = pr.push;
+    pr.push = null;
+    const len = v3.len(d);
+    if (!b || len < 1e-9) return;
+    const n = v3.scale(d, 1 / len);
+    const r = v3.sub(b.toWorld(pr.local), b.pos);
+    const speed = Math.min(len / Math.max(dt, STEP), PUSH_MAX * this.R());
+    const dv = speed - v3.dot(b.velAt(r), n);
+    if (dv <= 0) return;
+    b.applyVel(v3.scale(n, dv / b.weight(r, n)), r, 1);
   }
 
   pickUp(hit, x, y) {
@@ -398,14 +474,21 @@ export class HandsOn {
     const place = this.mode === "pieces" && this.info.recipe.hands.place !== false;
     const la = place ? [0, 0, 0] : body.toLocal(hit);
     const at = place ? body.pos.slice() : hit;
-    const joint = w.joint(body, la, null, at, { compliance: 0, damping: 0 });
+    // A little give, so a wall or the floor wins over the finger instead
+    // of the two fighting.
+    const joint = w.joint(body, la, null, at, { compliance: 2e-6, damping: 0 });
     body.held = true;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     body.holdQ = place ? yawOnly(body.q) : def?.joint ? null : body.q.slice();
-    body.holdK = 10;
+    // A piece being placed stays level; anything else hangs and swings.
+    body.holdK = place ? 10 : HOLD_UPRIGHT;
     body.angDampingFree ??= body.angDamping;
-    body.angDamping = 7; // held, it hangs calmly from the finger
-    this.hold = { body, joint, place, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: at.slice(), follow: at.slice() }; // prettier-ignore
+    body.angDamping = place ? 7 : HOLD_SWING_DAMPING;
+    // The held point follows the finger on a critically damped spring
+    // (`follow`, `followV`); `trail` is the finger's recent path, for the
+    // let-go's speed; `travel` how far (CSS pixels) the finger went.
+    const minY = this.mode === "toy" ? hit[1] - (body.pos[1] - body.home.pos[1]) : -Infinity;
+    this.hold = { body, joint, place, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: at.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: x, y0: y, travel: 0, minY, raise: this.mode === "toy" ? PICK_LIFT * this.R() : 0 }; // prettier-ignore
     if (place) {
       // Lifted first, then it follows the finger.
       this.hold.lift = this.time;
@@ -534,28 +617,55 @@ export class HandsOn {
     h.body.held = false;
     h.body.holdQ = null;
     h.body.angDamping = h.body.angDampingFree ?? h.body.angDamping;
-    // Not too wild a throw.
+    // It flies on with the finger's speed over the last moment, not with
+    // whatever the body's own speed was in the last step.
     const R = this.R();
-    const max = 9 * R;
-    const sp = v3.len(h.body.vel);
-    if (sp > max) h.body.vel = v3.scale(h.body.vel, max / sp);
+    h.body.vel = this.throwSpeed(h);
+    h.body.damping = Math.max(h.body.damping, AIR_DRAG);
     // A piece being placed is set down, not thrown.
     if (h.place) {
-      h.body.vel = [0, Math.min(0, h.body.vel[1]), 0];
+      h.body.vel = [0, 0, 0];
       h.body.omega = [0, 0, 0];
       this.hold = null;
       this.world.wake();
       return true;
     }
-    // A thrown thing turns a little the way it flies.
+    // A thrown thing turns a little the way it flies (a hanging piece, the
+    // cherries, keeps its own swing).
     const fwd = v3.cross([0, 1, 0], h.body.vel);
-    h.body.omega = v3.add(h.body.omega, v3.scale(fwd, 0.25 / Math.max(h.body.bound, 0.2 * R)));
+    // It keeps the swing it had in the hand.
+    const hung = this.pieces.find((pc) => pc.body === h.body)?.def?.joint;
+    if (!hung)
+      h.body.omega = v3.add(h.body.omega, v3.scale(fwd, 0.25 / Math.max(h.body.bound, 0.2 * R)));
     const wmax = 14;
     const ws = v3.len(h.body.omega);
     if (ws > wmax) h.body.omega = v3.scale(h.body.omega, wmax / ws);
     this.hold = null;
     this.world.wake();
     return true;
+  }
+
+  // The let-go's speed: the finger's over the last THROW_WINDOW (a line fit
+  // through its samples, so one jittery sample doesn't count), nothing for
+  // a nudge or a still hold, and never faster than THROW_MAX.
+  throwSpeed(h) {
+    const R = this.R();
+    const s = h.trail.filter((e) => e.t >= this.simTime - THROW_WINDOW - 1e-9);
+    if (h.travel < NUDGE || s.length < 3) return [0, 0, 0];
+    const n = s.length;
+    const tm = s.reduce((a, e) => a + e.t, 0) / n;
+    let den = 0;
+    for (const e of s) den += (e.t - tm) ** 2;
+    if (den < 1e-12) return [0, 0, 0];
+    const v = [0, 1, 2].map((i) => {
+      const pm = s.reduce((a, e) => a + e.p[i], 0) / n;
+      let num = 0;
+      for (const e of s) num += (e.t - tm) * (e.p[i] - pm);
+      return num / den;
+    });
+    const sp = v3.len(v);
+    if (sp < THROW_MIN * R) return [0, 0, 0];
+    return sp > THROW_MAX * R ? v3.scale(v, (THROW_MAX * R) / sp) : v;
   }
 
   get holding() {
@@ -583,11 +693,9 @@ export class HandsOn {
     if (!w) return false;
     let busy = false;
     const h = this.hold;
-    if (h) {
-      // The held point eases after the finger (a smooth throw).
-      const k = 1 - Math.exp(-dt / 0.03);
-      h.follow = h.follow.map((v, i) => v + (h.target[i] - v) * k);
-      h.joint.lb = h.follow.slice();
+    if (h) busy = true;
+    if (this.press?.push) {
+      this.pushStep(this.press, dt);
       busy = true;
     }
     if (this.homing) {
@@ -620,13 +728,14 @@ export class HandsOn {
         w.asleep = true;
       }
     } else {
-      // Slow frames catch up in steps of at most 1/60 s (up to 0.1 s a
-      // frame), so a toss plays at its real speed on a slow phone too.
-      let left = Math.min(dt, 0.1);
-      while (left > 1e-6) {
-        const d = Math.min(left, 1 / 60);
-        if (w.step(d)) busy = true;
-        left -= d;
+      // Fixed steps of STEP (a slow frame catches up, up to 0.1 s), so the
+      // same drag does the same thing at any frame rate.
+      this.acc = Math.min(this.acc + dt, 0.1);
+      while (this.acc >= STEP - 1e-9) {
+        this.acc -= STEP;
+        this.simTime += STEP;
+        if (h) this.followStep(h);
+        if (w.step(STEP)) busy = true;
       }
     }
     if (this.passing?.size) {
@@ -645,6 +754,21 @@ export class HandsOn {
     }
     this.apply();
     return busy || !w.asleep;
+  }
+
+  // One STEP of the held point after the finger: a critically damped
+  // spring (no overshoot), and a sample of the finger's path.
+  followStep(h) {
+    const w2 = FOLLOW * FOLLOW;
+    for (let i = 0; i < 3; i++) {
+      const to = h.target[i] + (i === 1 && !h.place ? h.raise : 0); // lifted as it's picked up
+      const a = w2 * (to - h.follow[i]) - 2 * FOLLOW * h.followV[i];
+      h.followV[i] += a * STEP;
+      h.follow[i] += h.followV[i] * STEP;
+    }
+    h.joint.lb = h.follow.slice();
+    h.trail.push({ t: this.simTime, p: h.target.slice() });
+    while (h.trail.length && h.trail[0].t < this.simTime - 2 * THROW_WINDOW) h.trail.shift();
   }
 
   onHit(hit) {
