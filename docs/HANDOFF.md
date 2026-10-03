@@ -298,6 +298,12 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-03, morning: the owner accepts every line of docs/HANDS-ON-PLAN.md (336 toys:
+Level 1 for all, and 183 toys with more). Three engine lanes build the plan's engine pieces at once
+(Hands-on engine A: bodies and fields; B: joints; C: soft parts), each with a few demo toys; five
+category lanes build the other toys as each engine PR merges. Codex adds the real physical
+properties (task 11) and a Level 1 sweep of every toy (task 12).
+
 Settled on 2026-10-03, the owner's "go" on the Splat Fidelity Plan (the Operator's private page of
 that night: why our placed splats look like cartoons beside SuperSplat's trained ones, and how to
 train our own):
