@@ -1380,6 +1380,8 @@ export const RECIPES = {
           also: (a, parts) => {
             if (parts.lid) parts.lidTop = { ...parts.lid, visible: 1 - smoothstep(1.15, 1.6, a) };
             parts.dancer = { ...parts.dancer, offset: [0, -0.34 * (1 - smoothstep(0.7, 1.95, a)), 0] }; // prettier-ignore
+            // The floating notes only while it stands open.
+            if (a < 1.3) NOTE_PATHS.forEach((n, i) => (parts["note" + i] = { visible: 0 }));
           },
         },
         {
