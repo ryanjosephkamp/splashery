@@ -1645,8 +1645,11 @@ export const RECIPES = {
     options: [{ key: "base", label: "Base", type: "color", default: "#8a2a1e" }],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 3.5 }],
     action: { key: "shake", label: "Shake the globe" },
-    drive(t, c, out) {
-      const s = c.shake;
+    // Hands-on (lane Hands engine A): pick it up and shake it; the harder the
+    // shake, the more snow swirls.
+    hands: { shake: true },
+    drive(t, c, out, info) {
+      const s = Math.max(c.shake, info.hands?.shake ?? 0);
       out.parts.swirl = {
         quat: quatAxisAngle([0, 1, 0], t * 2.4),
         offset: [0, 0.03 * Math.sin(t * 3), 0],
