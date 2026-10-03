@@ -2628,11 +2628,13 @@ export const RECIPES = {
       // The arms, their dust and knots turn together as one pattern.
       const armCloud = (share, fn) => k.cloud({ share, pattern: false, part: armPart }, fn);
 
-      // Unresolved starlight: a soft glow over the disc and bulge.
-      cloud(andro ? 0.1 : 0.07, 1, (rand) => {
-        const r = Math.min(1.05, -(andro ? 0.3 : 0.26) * Math.log(1 - rand() * 0.97));
+      // Unresolved starlight: a soft glow over the disc and bulge, laid out
+      // evenly (a sunflower spiral in the same falloff) so it reads as one
+      // smooth light, not as blotches (lane Sharpness A).
+      cloud(andro ? 0.1 : 0.07, 1, (rand, i, n) => {
+        const r = Math.min(1.05, -(andro ? 0.3 : 0.26) * Math.log(1 - ((i + 0.5) / n) * 0.97));
         return {
-          p: at(r, rand() * TAU, gauss(rand) * 0.02),
+          p: at(r, i * 2.399963229728653, gauss(rand) * 0.02),
           n: [0, 1, 0],
           flat: 0.4,
           color: mix("#ffe2b0", andro ? "#d8d4f0" : "#b8c8ff", smoothstep(0.1, 0.6, r)),
@@ -2646,8 +2648,9 @@ export const RECIPES = {
         return {
           p: at(r, rand() * TAU, gauss(rand) * 0.02),
           color: mix("#ffe9c4", "#d6dcff", smoothstep(0.1, 0.7, r) * rand()),
-          opacity: 0.55,
-          size: (0.6 + 0.6 * rand()) * s2,
+          opacity: 0.6,
+          size: (0.35 + 0.25 * rand()) * s2,
+          jitter: 0.2,
         };
       });
       // The bulge: warm old stars, brightest in the middle.
@@ -2681,14 +2684,26 @@ export const RECIPES = {
           };
         });
       }
-      // Blue-white stars along the arms.
-      armCloud(andro ? 0.26 : 0.36, (rand) => {
+      // The arms' own glow: big, faint splats that join into smooth
+      // bands of light under the stars (lane Sharpness A).
+      armCloud(andro ? 0.08 : 0.11, (rand) => ({
+        p: onArm(rand, andro ? 0.03 : 0.034),
+        n: [0, 1, 0],
+        flat: 0.4,
+        color: mix("#9db8ff", "#dfe8ff", rand() * 0.5),
+        opacity: 0.1,
+        size: 2.6 * S,
+        jitter: 0.2,
+      }));
+      // Blue-white stars along the arms: crisp points.
+      armCloud(andro ? 0.18 : 0.25, (rand) => {
         const x = rand();
         return {
-          p: onArm(rand, andro ? 0.035 : 0.04),
+          p: onArm(rand, andro ? 0.03 : 0.034),
           color: x < 0.55 ? mix("#7fa4ff", "#b0c8ff", rand()) : x < 0.85 ? "#e8eeff" : "#ffe0b0",
-          opacity: 0.8,
-          size: (0.7 + 0.8 * rand()) * s2,
+          opacity: 0.95,
+          size: (0.38 + 0.3 * rand()) * s2,
+          jitter: 0.2,
         };
       });
       // Dark dust lanes along the inner edges of the arms.
@@ -2697,8 +2712,9 @@ export const RECIPES = {
         n: [0, 1, 0],
         flat: 0.25,
         color: mix("#3a2214", "#5a3a24", rand()),
-        opacity: andro ? 0.4 : 0.32,
-        size: (1 + 0.8 * rand()) * S,
+        opacity: andro ? 0.45 : 0.4,
+        size: (0.75 + 0.4 * rand()) * S,
+        jitter: 0.2,
       }));
       // Pink star-forming knots and young blue clusters on the arms.
       const knots = [];

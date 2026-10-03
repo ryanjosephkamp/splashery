@@ -92,10 +92,12 @@ function lungEmpty(p) {
   return [-side * 0.3 * outer * (0.55 + 0.45 * low), 0.3 * low * Math.sqrt(low), -0.34 * p[2]];
 }
 // The deep breath: in over 1.7 s, hold, out past rest by 3.7 s, hold, and back.
+// Lane Fix7: the breath in goes further (the owner: "inflate even bigger").
+const LUNG_IN = -1.7;
 const LUNG_KEYS = [
   [0, 0],
-  [1.7, -1],
-  [2.2, -1],
+  [1.7, LUNG_IN],
+  [2.2, LUNG_IN],
   [3.7, 0.32],
   [4.1, 0.32],
   [LUNG_BREATH, 0],

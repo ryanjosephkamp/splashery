@@ -184,6 +184,38 @@ function polytope(planes, { thick } = {}) {
       }
       return { p, n: f.n, u: r1, v: r2, face: f.id, tag: f.tag, edge };
     },
+    // An even layout for even: true (lane Sharpness A): a walks the facets
+    // laid end to end by area, b runs across each one.
+    sampleEven(a, b) {
+      const x = Math.min(a, 1 - 1e-9) * total;
+      let lo = 0;
+      let hi = cum.length - 1;
+      while (lo < hi) {
+        const m = (lo + hi) >> 1;
+        if (cum[m] < x) lo = m + 1;
+        else hi = m;
+      }
+      const f = faces[lo];
+      let y = (x - (cum[lo] - f.area)) * 1;
+      let tri = f.tris[f.tris.length - 1];
+      for (const t of f.tris) {
+        if (y < t.A) {
+          tri = t;
+          break;
+        }
+        y -= t.A;
+      }
+      const q = Math.sqrt(Math.min(1, Math.max(0, y / tri.A)));
+      const r1 = 1 - q;
+      const r2 = q * b;
+      const p = add(tri.a, add(mul(sub(tri.b, tri.a), r1), mul(sub(tri.c, tri.a), r2)));
+      let edge = Infinity;
+      for (const e of f.edges) {
+        const d = dot(sub(p, e.a), e.m);
+        if (d < edge) edge = d;
+      }
+      return { p, n: f.n, u: r1, v: r2, face: f.id, tag: f.tag, edge };
+    },
   };
 }
 
@@ -334,8 +366,9 @@ function addGem(k, planes, base, opts = {}) {
     pos: opts.pos,
     flat: 0.12,
     weight: opts.weight ?? 1,
-    interior: 0.06,
-    core: mix(base, "#ffffff", 0.25),
+    interior: opts.interior ?? 0.06,
+    core: opts.core ?? mix(base, "#ffffff", 0.25),
+    even: opts.even,
     // (opts.size, glint, opacity and jitter: lane Fidelity B's calmer stones.)
     size: opts.size,
     opacity: opts.opacity,
@@ -457,8 +490,10 @@ function crystalCloud(k, crystals, share, color, extra = {}) {
       faces.push({ a, b, tip, n, cum: total, cr });
     }
   }
-  k.cloud({ share, size: 0.9, flat: 0.15, ...extra }, (rand) => {
-    const x = rand() * total;
+  // extra.even (lane Sharpness A): the splats spread evenly over the faces.
+  const { even, ...more } = extra;
+  k.cloud({ share, size: 0.9, flat: 0.15, ...more }, (rand, i, nn) => {
+    const x = even ? ((i + 0.5) / nn) * total : rand() * total;
     let lo = 0;
     let hi = faces.length - 1;
     while (lo < hi) {
@@ -467,11 +502,21 @@ function crystalCloud(k, crystals, share, color, extra = {}) {
       else hi = m;
     }
     const f = faces[lo];
-    let r1 = rand();
-    let r2 = rand();
-    if (r1 + r2 > 1) {
-      r1 = 1 - r1;
-      r2 = 1 - r2;
+    let r1;
+    let r2;
+    if (even) {
+      // Where x falls within this face (0..1), then across it.
+      const fa = (x - (lo ? faces[lo - 1].cum : 0)) / (f.cum - (lo ? faces[lo - 1].cum : 0));
+      const q = Math.sqrt(Math.min(1, Math.max(0, fa)));
+      r1 = q * ((i * 0.6180339887498949 + 0.5) % 1);
+      r2 = 1 - q;
+    } else {
+      r1 = rand();
+      r2 = rand();
+      if (r1 + r2 > 1) {
+        r1 = 1 - r1;
+        r2 = 1 - r2;
+      }
     }
     // r2 runs towards the tip.
     const p = add(f.a, add(mul(sub(f.b, f.a), r1), mul(sub(f.tip, f.a), r2)));
@@ -491,6 +536,11 @@ function crystalCloud(k, crystals, share, color, extra = {}) {
 
 // ---- Rocks -------------------------------------------------------------------------------
 
+// A calm rock (lane Sharpness A): broad mottling only, no flecks.
+const calmRock = (c, a = "#8a8178", b = "#4f4943") => {
+  const n = c.fbm(c.p[0] * 3, c.p[1] * 3, c.p[2] * 3);
+  return lit(mix(a, b, 0.5 + 0.4 * n), c.n, 0.6, 0.45);
+};
 const rockColor = (c, a = "#8a8178", b = "#4f4943") => {
   const n = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5);
   const speck = c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40) > 0.62;
@@ -688,10 +738,11 @@ export const RECIPES = {
       const table = 0.55;
       const crown = 35 * DEG;
       addGem(k, brilliant(cushion, { table, crown: 35, pavilion: 42 }), o.color, {
-        size: 1.3,
-        glint: 0.25,
+        size: 1.4,
+        glint: 0.06,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.01,
+        interior: 0,
         quat: SAPPHIRE_Q,
         fire: 0.08,
         dark: 0.22,
@@ -827,12 +878,15 @@ export const RECIPES = {
           { grid: 64, thick: 0.35, flip: side > 0 },
         );
         k.add(shell, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           part,
           flat: 0.2,
           // (Only the back half is solid: the front one closes over it.)
           interior: side > 0 ? 0 : 0.1,
           core: "#cfd3dc",
-          color: (c) => rockColor(c),
+          color: (c) => calmRock(c),
         });
         // The cut face: bands of agate round the cavity.
         const ring = k.param(
@@ -847,6 +901,9 @@ export const RECIPES = {
           { grid: 64, thick: 0.02, flip: side < 0 },
         );
         k.add(ring, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           part: inPart,
           flat: 0.15,
           color: (c) => {
@@ -855,12 +912,12 @@ export const RECIPES = {
             const x = v + wob;
             let col;
             if (x > 0.9) col = "#6b6259";
-            else if (x > 0.72) col = mix("#f4f1ec", "#d8d2ca", c.rand() * 0.4);
+            else if (x > 0.72) col = mix("#f4f1ec", "#d8d2ca", 0.2 + 0.2 * Math.sin(x * 90));
             else if (x > 0.55) col = "#9fb3c8";
             else if (x > 0.42) col = "#ece8f2";
             else if (x > 0.2) col = mix("#b9a8cf", "#d9cfe6", 0.5 + 0.5 * Math.sin(x * 60));
             else col = shade(purple, 0.8);
-            return keep(shade(col, 0.95 + 0.1 * c.rand()));
+            return keep(col);
           },
         });
         // The cavity wall, deep purple, and crystal points growing inwards.
@@ -878,6 +935,9 @@ export const RECIPES = {
           { grid: 48, thick: 0.02, flip: side < 0 },
         );
         k.add(wall, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           part: inPart,
           flat: 0.2,
           color: (c) => lit(shade(purple, 0.45), c.n, 0.7, 0.3),
@@ -905,15 +965,21 @@ export const RECIPES = {
             part: inPart,
           });
         }
-        crystalCloud(k, crystals, 0.22, (n, t, rand) => {
-          const col = mix(shade(purple, 0.55), mix(purple, "#f3e3ff", 0.6), Math.pow(t, 1.3));
-          const b = 0.55 + 0.5 * studio(n);
-          return {
-            color: shade(col, clamp(b, 0.4, 1.3)),
-            kind: "glint",
-            params: [rand() < 0.3 ? 1 : 0.2, 0],
-          };
-        });
+        crystalCloud(
+          k,
+          crystals,
+          0.22,
+          (n, t, rand) => {
+            const col = mix(shade(purple, 0.55), mix(purple, "#f3e3ff", 0.6), Math.pow(t, 1.3));
+            const b = 0.55 + 0.5 * studio(n);
+            return {
+              color: shade(col, clamp(b, 0.4, 1.3)),
+              kind: "glint",
+              params: [rand() < 0.3 ? 0.35 : 0.05, 0],
+            };
+          },
+          { even: true },
+        );
         // The glow (hidden until it opens): a violet haze in the cavity and
         // bright points on the crystal tips.
         const gp = glowParts[half.open ? 1 : 0];
@@ -969,12 +1035,15 @@ export const RECIPES = {
       k.add(
         k.radial((d) => 1 + 0.12 * k.noise.fbm(d[0] * 2, d[1] * 2 + 3, d[2] * 2, 3), { grid: 48 }),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           scale: [1, 0.36, 0.85],
           pos: [0, -0.62, 0],
           flat: 0.2,
           interior: 0.1,
           core: "#6d655c",
-          color: (c) => rockColor(c, "#8d8274", "#5d544b"),
+          color: (c) => calmRock(c, "#8d8274", "#5d544b"),
         },
       );
       // Crystals: long six-sided prisms with points, leaning out from the rock.
@@ -1046,9 +1115,12 @@ export const RECIPES = {
           rot,
           flat: 0.12,
           weight: 1.3,
-          opacity: 0.9,
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          size: 1.1,
           kind: "glint",
-          params: (c) => [c.rand() < 0.15 ? 0.9 : 0.05, 0],
+          params: (c) => [c.rand() < 0.15 ? 0.25 : 0.03, 0],
           pattern: false,
           color: (c) => {
             const t = clamp((c.lp[1] + 0) / L, 0, 1);
@@ -1056,7 +1128,7 @@ export const RECIPES = {
             let col = gemColor(c, base, { fire: 0.06, dark: 0.45, edgeW: 0.01 });
             if (c.s.tag === "side") {
               // Fine growth lines across the prism faces.
-              if (Math.abs(Math.sin(c.lp[1] * 90)) > 0.93) col = shade(col, 0.9);
+              if (Math.abs(Math.sin(c.lp[1] * 40)) > 0.9) col = shade(col, 0.94);
             }
             return col;
           },

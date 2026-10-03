@@ -417,7 +417,7 @@
       "owner": "Super neat.",
       "effect": "Rolls around a little circle; the swirl inside turns.",
       "sound": "The same real marble roll, about 6 dB quieter (Sound C, October 2, 2026).",
-      "improved": "E6a: it rolls round a little circle, turning the way it rolls, and after one lap is back exactly as it was; the swirl inside turns as it goes (2.4 s)."
+      "improved": "E6a: it rolls round a little circle, turning the way it rolls, and after one lap is back exactly as it was; the swirl inside turns as it goes (2.4 s). Fix7: the glass shell reads as polished glass: a faint tint that is clear face on and denser toward the rim, reflecting a light sky above and a darker floor below (no added highlights)."
     },
     "hockey-puck": {
       "v": "keep",
@@ -468,7 +468,7 @@
       "owner": "Expand and contract like lungs.",
       "effect": "A deep breath in and out.",
       "sound": "A real person's slow deep breath in, then out.",
-      "improved": "E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s). After the owner's review the breath is about twice as big."
+      "improved": "E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s). After the owner's review the breath is about twice as big. Fix7: the deep breath fills the lungs about 70% further out than before."
     },
     "tooth": {
       "v": "keep",
@@ -492,7 +492,8 @@
     "storm-cloud": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Thunder rumble."
+      "sound": "Thunder rumble.",
+      "improved": "Fix7: a tap's bolt strikes straight down from the cloud under the finger (from its tapped place), not in a fixed spot."
     },
     "lava-lamp": {
       "v": "keep",
@@ -529,7 +530,7 @@
       "owner": "Becomes bigger or more intense.",
       "effect": "Spins up bigger and faster, pulling debris, then weakens.",
       "sound": "Rising roar of wind.",
-      "improved": "E4: a tap spins the tornado up: the funnel widens (most at the foot), whirls round faster and kicks up dust, and the planks, clods and leaves on the field lift one by one, spiral up round the funnel and fall back where they lay as it weakens (about 5 s). Power still works."
+      "improved": "E4: a tap spins the tornado up: the funnel widens (most at the foot), whirls round faster and kicks up dust, and the planks, clods and leaves on the field lift one by one, spiral up round the funnel and fall back where they lay as it weakens (about 5 s). Power still works. Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "rainbow": {
       "v": "keep",
@@ -554,7 +555,7 @@
       "v": "keep",
       "effect": "The wave curls and breaks into foam.",
       "sound": "Wave crash.",
-      "improved": "E4, redone after the owner's review (\"the waves themselves should curl, not just the end\"): the whole wave moves as one sheet: a tap pitches the lip out and the face leans over after it until the lip crashes into the water in front; white water falls flat, spray bursts up and foam spreads; the wave collapses and flattens, then a new swell rises behind, steepens, throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters. Fix3 (the owner's note: \"the collapse happens awkwardly; it should be smooth\"): the lip plunges without stopping, the barrel it closes shrinks as it rolls forward, white water froths up out of the plunge and climbs over it as a foaming wall, then sinks into lace as the water flattens, all on one smooth clock; the rebuild is unchanged."
+      "improved": "E4, redone after the owner's review (\"the waves themselves should curl, not just the end\"): the whole wave moves as one sheet: a tap pitches the lip out and the face leans over after it until the lip crashes into the water in front; white water falls flat, spray bursts up and foam spreads; the wave collapses and flattens, then a new swell rises behind, steepens, throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters. Fix3 (the owner's note: \"the collapse happens awkwardly; it should be smooth\"): the lip plunges without stopping, the barrel it closes shrinks as it rolls forward, white water froths up out of the plunge and climbs over it as a foaming wall, then sinks into lace as the water flattens, all on one smooth clock; the rebuild is unchanged. Fix7: the lip stays joined to the face as the wave throws and rolls, so no dark strip opens at the curl."
     },
     "geyser": {
       "v": "keep",
@@ -569,6 +570,7 @@
     "book": {
       "v": "keep",
       "fixed": "C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages, a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and page lines splats can show.",
+      "improved": "Sharpness A (October 2, 2026): the words on the two open pages are ink dots laid on the font's pixels. Round 2 (October 3, 2026): the turned leaves are sorted where they lie, so the left page's paper no longer covers its words and the cover's inside no longer shows through; a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.",
       "owner": "Blurry; try to make it more detailed so the writing looks like something.",
       "sound": "Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback."
     },
@@ -767,7 +769,7 @@
       "owner": "No clear effect; it should rotate like a spiral galaxy.",
       "effect": "Idle: slow rotation. Tap: arms swirl faster and the core flares.",
       "sound": "Deep swirling hum.",
-      "improved": "E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the core flares (4.6 s)."
+      "improved": "E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm glow, and finer dust lanes."
     },
     "virus": {
       "v": "keep",
@@ -907,27 +909,27 @@
       "v": "keep",
       "effect": "Bonds vibrate and stretch (like heat), then calm.",
       "sound": "Soft little ticks of the atoms jostling as it heats, thinning out as it settles; no wind, no building blocks (Sound C, October 2, 2026).",
-      "improved": "E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe). Your own molecule (after the E2 review): type a name (about sixty well-known ones), a formula that names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES are embedded with a small force field) and heats up the same way."
+      "improved": "E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe). Your own molecule (after the E2 review): type a name (about sixty well-known ones), a formula that names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES are embedded with a small force field) and heats up the same way. Fix7: each bond stretches and squeezes between its two atoms (its splats follow both atoms, by how far along the bond they are), so an atom never leaves its bond when it is heated."
     },
     "protein": {
       "v": "keep",
       "owner": "(Asked for in the E2 review: a protein toy that can take a PDB file.)",
       "effect": "The protein pulls apart into its helices, strands and loops, then locks back together.",
       "sound": "A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft thud as it reassembles (no building blocks).",
-      "improved": "New after the E2 review: a cartoon of a real structure from the Protein Data Bank (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows, loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green while the barrel is open."
+      "improved": "New after the E2 review: a cartoon of a real structure from the Protein Data Bank (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows, loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s), instead of pausing; the next tap pulls it apart again."
     },
     "crystal-lattice": {
       "v": "keep",
       "effect": "A wave of vibration travels through the lattice.",
       "sound": "One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C, October 2, 2026).",
-      "improved": "E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8 s)."
+      "improved": "E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8 s). Fix7: the bonds between slices stretch and bend with the wave (their two ends follow their slices), so atoms never leave their bonds."
     },
     "periodic-table": {
       "v": "keep",
       "owner": "Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).",
       "effect": "Tap an element's tile and its atom rises out of the table and builds itself: every proton and neutron of its commonest isotope, then the electrons filling their shells in order. Tap the atom and an electron jumps up a shell and falls back with a flash in the element's strongest visible line (NIST).",
       "sound": "The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it packs into the nucleus, in sync (Sound C, October 2, 2026).",
-      "improved": "Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it. Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic number or shuffled), and any tap stops it."
+      "improved": "Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it. Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic number or shuffled), and any tap stops it. Fix7: a tap on the 57-71 or 89-103 cell lights its row of lanthanides or actinides (3.5 s); a Wide table option shows the f-block in its periods (32 columns)."
     },
     "diamond": {
       "v": "keep",
@@ -953,19 +955,19 @@
       "owner": "Really cool.",
       "effect": "The geode opens wider and the crystals glow violet.",
       "sound": "Stone crack and a chime.",
-      "improved": "C2: each time it opens, the halves swing wider and the crystals glow violet with twinkling tips, then settle (about 4 s)."
+      "improved": "C2: each time it opens, the halves swing wider and the crystals glow violet with twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "sapphire": {
       "v": "keep",
       "effect": "A star shimmer (asterism) glides across it.",
       "sound": "The crisp gem tap alone, without the wind and sandy shuffle (Sound C, October 2, 2026).",
-      "improved": "E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from a bright centre, lying on the stone and ending at its edge; it glides across the top with its rays keeping their directions, and the rays draw back in at the far side (3.6 s)."
+      "improved": "E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from a bright centre, lying on the stone and ending at its edge; it glides across the top with its rays keeping their directions, and the rays draw back in at the far side (3.6 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "quartz-cluster": {
       "v": "keep",
       "effect": "Points light up one by one.",
       "sound": "Tinkling chimes.",
-      "improved": "E2: a tap lights the ten points one by one from left to right, each glowing from within with a glint at its tip (a long and a short spike, each point's turned its own way), with a rising chime for each (4.4 s)."
+      "improved": "E2: a tap lights the ten points one by one from left to right, each glowing from within with a glint at its tip (a long and a short spike, each point's turned its own way), with a rising chime for each (4.4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "opal": {
       "v": "keep",
@@ -1169,7 +1171,8 @@
     "pancakes": {
       "v": "keep",
       "owner": "Really neat.",
-      "sound": "A smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks)."
+      "sound": "A smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks).",
+      "improved": "Fix7: the syrup on the top pancake, and the drips down its side, flip with it; the syrup that ran onto the pancakes below stays."
     },
     "cupcake": {
       "v": "keep",
@@ -1190,7 +1193,7 @@
       "owner": "Pick something.",
       "effect": "The stripes wind around like a barber pole, then it snaps in two and rejoins.",
       "sound": "The sugar strains as it twists (no whistle); the snaps and the mends stay.",
-      "improved": "E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then the halves come back together and mend with a glint (about 2.9 s)."
+      "improved": "E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then the halves come back together and mend with a glint (about 2.9 s). Fix7: the bow has both ribbon tails, hanging in front of the canes."
     },
     "macarons": {
       "v": "keep",
@@ -1229,7 +1232,8 @@
     "burger": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "The patty's smooth sizzle, no clicking."
+      "sound": "The patty's smooth sizzle, no clicking.",
+      "improved": "Fix7: about 160 real sesame seeds on the bun, and no pale crumb showing through the crust close up (the white flash); the lettuce is whole, with no hole in its middle."
     },
     "sushi": {
       "v": "keep",
@@ -1243,7 +1247,7 @@
       "owner": "Break in half to show what is inside. Really cool taco.",
       "effect": "Shell cracks in half and the filling spills out, then it reassembles.",
       "sound": "A hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings now (taco-crack.mp3), with the synthesized sound as a fallback.",
-      "improved": "E5: the shell snaps across the middle with a crunch; the halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto a new plate and bounce; then they hop back in and the halves close (about 3.1 s)."
+      "improved": "E5: the shell snaps across the middle with a crunch; the halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto a new plate and bounce; then they hop back in and the halves close (about 3.1 s). Fix7: the meat stays inside the shell; the bits drop out of the opened break onto the plate, bounce a little and slide to a stop."
     },
     "egg": {
       "v": "keep",
@@ -1262,14 +1266,14 @@
       "owner": "A bite taken out of it, or a worm comes out.",
       "effect": "A bite appears (crunch); a second tap, a worm peeks out.",
       "sound": "A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper; real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.",
-      "improved": "E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about, ducks back in, and the apple grows whole (about 2.9 s)."
+      "improved": "E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about, ducks back in, and the apple grows whole (about 2.9 s). Fix7: the bite's edge is clean: no pale flesh specks on the skin round it."
     },
     "banana": {
       "v": "keep",
       "owner": "Peel open.",
       "effect": "One banana peels open.",
       "sound": "A soft rustle as the bunch comes apart, and a quiet real banana peel as each one peels (no zipper) (Sound C, October 2, 2026).",
-      "improved": "E5 (r2, after the owner's note): the three bananas pull apart off their crown, then each is peeled from its tip, front first: its skin splits into three strips that curl back, each bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they pull apart."
+      "improved": "E5 (r2, after the owner's note): the three bananas pull apart off their crown, then each is peeled from its tip, front first: its skin splits into three strips that curl back, each bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they pull apart. Fix7: the three bananas lie side by side, just touching (they used to cross); the fruit and the inner peel show only while a banana is peeled, so no pale specks show through the skin."
     },
     "orange": {
       "v": "keep",
@@ -1362,7 +1366,7 @@
       "owner": "Only the top row twists (very cool). Move more than the top row; ideally swipe any row or column to solve it; add a shuffle.",
       "effect": "Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.",
       "sound": "Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0 recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.",
-      "improved": "F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes."
+      "improved": "F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes. Fix7: a tap during a scramble or solve pauses it once the turn in progress lands, so the cube can be turned by hand; a move of your own ends the automatic one, and the next tap starts a new one from there (a tap without a move carries on)."
     },
     "spring-toy": {
       "v": "keep",
@@ -1507,7 +1511,7 @@
       "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",
       "effect": "One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere ripples, a galaxy turns.",
       "sound": "Changed entirely, the quiet scratch of chalk as t plays.",
-      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order. Lab r2 (the owner's review of September 29, 2026: \"really, really grainy\"): every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each programmed splat its own dot)."
+      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order. Lab r2 (the owner's review of September 29, 2026: \"really, really grainy\"): every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each programmed splat its own dot). Fix7: no seam where u wraps round (the torus, the Möbius strip and every other wrapping preset): the grid's last column was being left out."
     },
     "seashell-spiral": {
       "v": "keep",
@@ -1526,7 +1530,7 @@
       "owner": "Only bounces; find a better effect.",
       "effect": "Blocks an invisible hit: it jolts, sparks and the emblem gleams.",
       "sound": "The clang and the gleam's shimmer, no crackling clicks.",
-      "improved": "E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across the emblem (about 2 s)."
+      "improved": "E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across the emblem (about 2 s). Fix7: the blow lands where you tap on the shield's face: the flash and sparks start there, the sparks spray away from the middle, and the shield rocks away from that spot (about 2 s)."
     },
     "bow-and-target": {
       "v": "keep",
@@ -1553,7 +1557,7 @@
       "owner": "Needs an effect.",
       "effect": "Jewels light up in turn and it rises with a glow.",
       "sound": "The fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of synthetic brass; the jewels' pings stay.",
-      "improved": "E6: the crown lifts and hovers; its eight jewels light up one after another round the band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it settles (about 4 s)."
+      "improved": "E6: the crown lifts and hovers; its eight jewels light up one after another round the band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it settles (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "dragon-egg": {
       "v": "keep",
@@ -1658,14 +1662,14 @@
       "owner": "Do more than bounce; maybe it melts.",
       "effect": "Melts into a puddle, then rebuilds itself.",
       "sound": "Drips, then a crunch of snow and a twinkle as it rebuilds.",
-      "improved": "E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first), drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops back to its place (about 6 s). The Warmth slider melts it the same way."
+      "improved": "E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first), drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower)."
     },
     "fireworks": {
       "v": "keep",
       "owner": "Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.",
       "effect": "Random shell types each tap; burst colour matches its tube.",
       "sound": "A real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
-      "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour."
+      "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the show; rapid taps launch more shells, up to three at once (one per tube), each with its own rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "decorated-tree": {
       "v": "keep",
@@ -1683,7 +1687,8 @@
     "paper-lantern": {
       "v": "keep",
       "owner": "Perfect; the physics are really good.",
-      "sound": "Paper rustle."
+      "sound": "Paper rustle.",
+      "improved": "Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing grows smoothly (no jump)."
     },
     "diya": {
       "v": "keep",
@@ -1768,7 +1773,7 @@
       "owner": "Could be more dramatic; maybe inflate more.",
       "effect": "Burner roars, the envelope swells and it rises higher.",
       "sound": "Burner roar.",
-      "improved": "C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down (4 s)."
+      "improved": "C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "steam-train": {
       "v": "keep",
@@ -1842,7 +1847,7 @@
       "owner": "Fireworks burst around it.",
       "effect": "Sparkling lights run up the tower and fireworks burst around it.",
       "sound": "Real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
-      "improved": "E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white lights climbs the tower, and four fireworks burst round it one after another (blue, white, red and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s)."
+      "improved": "E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white lights climbs the tower, and four fireworks burst round it one after another (blue, white, red and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "washington-monument": {
       "v": "keep",
@@ -1856,7 +1861,7 @@
       "owner": "Neat. Maybe put a UFO there, as a joke.",
       "effect": "A tiny UFO (the Flying saucer) hovers over the Great Pyramid and beams up a camel-shaped cloud of sand.",
       "sound": "Theremin warble, sand hiss and a zip away.",
-      "improved": "E6: a tiny flying saucer glides in by the Great Pyramid and switches on its beam; sand streams up out of the desert into the shape of a camel, which floats up into the saucer; the saucer wobbles happily and zips away (about 5 s)."
+      "improved": "E6: a tiny flying saucer glides in by the Great Pyramid and switches on its beam; sand streams up out of the desert into the shape of a camel, which floats up into the saucer; the saucer wobbles happily and zips away (about 5 s). Sharpness A (October 2, 2026): sharper (even, solid faces with clean stone steps) and a clearer, larger Sphinx."
     },
     "supertall": {
       "v": "keep",
@@ -1890,28 +1895,28 @@
       "owner": "Lean further and things fall off, like Galileo dropping objects.",
       "effect": "Two balls of different sizes drop from the top and land together.",
       "sound": "The tower grinds, then two thuds at the same moment.",
-      "improved": "E6: Galileo's drop: the tower leans a little further, a big iron ball and a small bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs of dust; they bounce, settle and fade, and the tower eases back (about 4 s)."
+      "improved": "E6: Galileo's drop: the tower leans a little further, a big iron ball and a small bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs of dust; they bounce, settle and fade, and the tower eases back (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "colosseum": {
       "v": "keep",
       "owner": "Gladiators fighting inside?",
       "effect": "Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting, per the no-gore rule).",
       "sound": "A real crowd in the stands and horses' hooves trotting; real CC0 recordings now (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.",
-      "improved": "E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s)."
+      "improved": "E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "parthenon": {
       "v": "keep",
       "owner": "Little ancient people in it.",
       "effect": "Tiny robed figures walk between the columns in procession.",
       "sound": "A lyre plays a walking tune.",
-      "improved": "E6: a procession: eight robed figures, some with baskets and jars on their heads, walk in single file along the temple, round the corner and across the front of its steps, then fade away (about 5.5 s)."
+      "improved": "E6: a procession: eight robed figures, some with baskets and jars on their heads, walk in single file along the temple, round the corner and across the front of its steps, then fade away (about 5.5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "stonehenge": {
       "v": "keep",
       "owner": "No idea.",
       "effect": "Solstice sunrise: the sun rises through the stones and lights them gold.",
       "sound": "A low drone and a bell as the stones light.",
-      "improved": "E6: solstice sunrise: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones along the monument's axis, and the stones glow gold; then it fades back (about 5 s)."
+      "improved": "E6: solstice sunrise: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones along the monument's axis, and the stones glow gold; then it fades back (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "big-ben": {
       "v": "keep",
@@ -1925,28 +1930,28 @@
       "owner": "Looks good; needs an effect.",
       "effect": "Moonlight: the dome glows and the reflecting pool ripples.",
       "sound": "A slow sitar phrase.",
-      "improved": "E6: moonlight: night falls on the garden and the buildings, the moon rises behind the Taj, the great dome stays bright white and glows against the night, and moonlight shimmers on the rippling pool; then day comes back (about 5 s)."
+      "improved": "E6: moonlight: night falls on the garden and the buildings, the moon rises behind the Taj, the great dome stays bright white and glows against the night, and moonlight shimmers on the rippling pool; then day comes back (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "castle": {
       "v": "keep",
       "owner": "Pretty good but underwhelming. Knights come out when the drawbridge opens.",
       "effect": "The drawbridge drops and tiny knights march out with a banner.",
       "sound": "Chain rattle and a trumpet.",
-      "improved": "C2: the drawbridge now starts up. A tap lowers it and five small knights march out, the leader with a banner; a second tap marches them back in and raises it."
+      "improved": "C2: the drawbridge now starts up. A tap lowers it and five small knights march out, the leader with a banner; a second tap marches them back in and raises it. Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "pagoda": {
       "v": "keep",
       "owner": "Not sure what the effect is.",
       "effect": "Wind chimes swing on every roof tier and lanterns light up.",
       "sound": "Wind chimes.",
-      "improved": "C2: wind chimes at every roof corner swing, one tier after another, and two stone lanterns by the path light up, with the doors glowing (4 s)."
+      "improved": "C2: wind chimes at every roof corner swing, one tier after another, and two stone lanterns by the path light up, with the doors glowing (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "windmill": {
       "v": "keep",
       "owner": "Pretty good, but move a little faster.",
       "effect": "Faster sails; the gust spins them up hard.",
       "sound": "Creaking sails and wind.",
-      "improved": "C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns (4 s)."
+      "improved": "C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "perceptron": {
       "v": "keep",
@@ -2016,7 +2021,7 @@
       "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
       "effect": "Training: a cloud of random splats slides, stretches and recolors, step by step, into a photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s). Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.",
       "sound": "Training, a soft tone falling as the loss curve draws (no chord or notes); one splat, a soft airy swell; many splats, a fainter twinkle; sorting, a pebble's click for each splat as it is placed, in sync, each a little different (Sound C, October 2, 2026).",
-      "improved": "Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13 keyframes as each splat slides to its next place; views One splat (sizes, opacity and color sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats appear far to near from a camera)."
+      "improved": "Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13 keyframes as each splat slides to its next place; views One splat (sizes, opacity and color sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats appear far to near from a camera). Fix7: the one-splat view starts from a tap anywhere on it, and its tap trains the splat: from a wrong guess, 24 gradient steps move its place, turn, sizes, color and opacity toward the target (a dashed outline), each closing a share of the error at its own rate (about 7 s)."
     },
     "word-vectors": {
       "v": "keep",
@@ -2058,7 +2063,7 @@
       "owner": "The owner's own idea on the Toy Ideas page (lane Machines A).",
       "effect": "An Enigma cipher machine in its wooden box: tap and it types your message, each key going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard; a second tap types the coded text back and gets the message again (about 4 s).",
       "sound": "Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp lights.",
-      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture)."
+      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step back, as an operator corrected a mistake (the real machine had no delete key): a tap on the rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its coded letter) off the pad and turns the rotors back to where they stood before it."
     },
     "bombe": {
       "v": "keep",
@@ -2078,7 +2083,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C, October 2, 2026).",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s).",
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s).",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
@@ -2184,35 +2189,35 @@
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "Its laces (kit-built jointed cords over the scan's own laces) come undone, cross back through the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4 s).",
       "sound": "Laces zipping through the eyelets, a soft tug, two toe taps.",
-      "improved": "Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2: denser scan, thinner braided laces."
+      "improved": "Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2: denser scan, thinner braided laces. Sharpness A (October 2, 2026): exact splat sizes for a crisper outline and a calmer fabric texture. Fix7: flag colors reach the shoe (its laces keep theirs)."
     },
     "hoodie": {
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).",
       "sound": "The fabric's soft brushes and the zip, with much less wind (Sound C, October 2, 2026).",
-      "improved": "Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in front of the chest, clear of the body, with fabric filling the shoulders, then swing back down and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body."
+      "improved": "Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in front of the chest, clear of the body, with fabric filling the shoulders, then swing back down and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a raised sleeve shows cloth, not a hole; flag colors reach the cloth."
     },
     "sunglasses": {
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The arms fold in on their hinges one after the other, the glasses flip to face you and the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).",
       "sound": "Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no electronic clicks or shimmer).",
-      "improved": "Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold in one after the other, both behind the lenses and the second behind the first, the glasses turn head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses."
+      "improved": "Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold in one after the other, both behind the lenses and the second behind the first, the glasses turn head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a lens starts the effect too (faint pick splats over the glass). Fix7: flag colors reach the frame (the lenses keep theirs)."
     },
     "baseball-cap": {
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "It flips up off its stand, spins flat like a flying disc and lands brim backward; then a second flip turns it round the right way (3 s).",
       "sound": "Fabric rustles instead of whooshes as it flips; the flick and the soft landings are unchanged.",
-      "improved": "Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut stand. It flips up off the stand, spins flat three and a half turns round a small loop like a flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2: denser, sharper model."
+      "improved": "Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut stand. It flips up off the stand, spins flat three and a half turns round a small loop like a flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2: denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut)."
     },
     "splat-field": {
       "v": "keep",
       "owner": "The owner's note \"big new Splashery ideas\" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.",
       "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
       "sound": "Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).",
-      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it)."
+      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it). Fix7: a tap never pauses it; each tap adds its own pulse (another stone where you tap the sea, with rings that cross, another ring through the galaxy, another lap of the knot), up to eight at once (3 s each)."
     },
     "video-3d": {
       "v": "new",
