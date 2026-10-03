@@ -17,7 +17,7 @@ const PROCESS_GLSL = /* glsl */ `
 uniform vec4 uRigM0;   // model -> world, row 0
 uniform vec4 uRigM1;
 uniform vec4 uRigM2;
-uniform vec4 uRigN;    // x region count
+uniform vec4 uRigN;    // x region count, y > 0: hard (lane Hands engine B)
 uniform vec4 uRigA[${MAX_REGIONS}]; // xyz centre (world), w part index (+ 64: wins over other regions)
 uniform vec4 uRigB[${MAX_REGIONS}]; // xyz radii, w soft edge (0..1 of the radius)
 uniform vec4 uRigC[${MAX_REGIONS}]; // rgb colour the region needs, w tolerance (0 = any colour, < 0 = any but this)
@@ -61,6 +61,10 @@ void process() {
       part = uRigA[i].w - 64.0 * over;
     }
   }
+  // A hard rig (rig.hard, lane Hands engine B): each splat wholly in its
+  // part or not at all, so a part lifted right off (Hands-on) leaves no
+  // trail of half-moved splats.
+  if (uRigN.y > 0.5) wOut = step(0.5, wOut);
   vec3 s = getScale();
   writeSplatPart(vec4(part / 255.0, wOut, rigKey(p, col, s, uRigK[0], uRigK[1]), rigKey(p, col, s, uRigK[2], uRigK[3])));
 }
@@ -115,6 +119,7 @@ fn process() {
       part = a.w - 64.0 * over;
     }
   }
+  if (uniform.uRigN.y > 0.5) { wOut = step(0.5, wOut); } // a hard rig (lane Hands engine B)
   let s = getScale();
   let k0 = rigKey(p, col, s, uniform.uRigK[0], uniform.uRigK[1]);
   let k1 = rigKey(p, col, s, uniform.uRigK[2], uniform.uRigK[3]);
@@ -163,7 +168,7 @@ export function tagRig(stage, rig) {
   proc.setParameter("uRigM0", [m[0], m[4], m[8], m[12]]);
   proc.setParameter("uRigM1", [m[1], m[5], m[9], m[13]]);
   proc.setParameter("uRigM2", [m[2], m[6], m[10], m[14]]);
-  proc.setParameter("uRigN", [regions.length, 0, 0, 0]);
+  proc.setParameter("uRigN", [regions.length, rig.hard ? 1 : 0, 0, 0]); // (hard: lane Hands engine B)
   const a = new Float32Array(MAX_REGIONS * 4);
   const b = new Float32Array(MAX_REGIONS * 4).fill(1);
   regions.forEach((r, i) => {

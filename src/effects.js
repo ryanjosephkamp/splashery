@@ -168,6 +168,7 @@ vec4 spBodyQ = vec4(0.0, 0.0, 0.0, 1.0);
 vec4 spPartQ = vec4(0.0, 0.0, 0.0, 1.0);
 float spCut = 0.0;
 float spShrink = 0.0;
+float spStretch = 0.0; // lane Hands engine C: how much the grab spreads splats here
 float spLanded = 0.0;
 float spShade = 0.0;
 float spGlow = 0.0;
@@ -325,7 +326,11 @@ void modifySplatCenter(inout vec3 center) {
   if (uSpGrabD.w > 0.5) {
     vec3 d = home - uSpGrab.xyz;
     float rad = max(uSpGrab.w, 1e-3);
-    p += uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
+    float gf = exp(-dot(d, d) / (rad * rad) * 1.5);
+    p += uSpGrabD.xyz * gf;
+    // Lane Hands engine C: splats grow where the pull spreads them apart, so
+    // a stretched toy stays solid (no gaps, no speckle).
+    spStretch = min(1.5, length(uSpGrabD.xyz) * gf * 3.0 * length(d) / (rad * rad)) * 0.6;
   }
 
   if (uSpDiss.w > 0.5) {
@@ -393,7 +398,7 @@ void modifySplatCenter(inout vec3 center) {
 
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
   rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, rotation)));
-  scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded);
+  scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch);
   if (spCut > 0.5) scale = vec3(0.0);
 }
 
@@ -467,6 +472,7 @@ var<private> spBodyQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spPartQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spCut: f32 = 0.0;
 var<private> spShrink: f32 = 0.0;
+var<private> spStretch: f32 = 0.0; // lane Hands engine C
 var<private> spLanded: f32 = 0.0;
 var<private> spShade: f32 = 0.0;
 var<private> spGlow: f32 = 0.0;
@@ -616,7 +622,9 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   if (uniform.uSpGrabD.w > 0.5) {
     let d = home - uniform.uSpGrab.xyz;
     let rad = max(uniform.uSpGrab.w, 1e-3);
-    p = p + uniform.uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
+    let gf = exp(-dot(d, d) / (rad * rad) * 1.5);
+    p = p + uniform.uSpGrabD.xyz * gf;
+    spStretch = min(1.5, length(uniform.uSpGrabD.xyz) * gf * 3.0 * length(d) / (rad * rad)) * 0.6;
   }
 
   if (uniform.uSpDiss.w > 0.5) {
@@ -684,7 +692,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
 
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
   *rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, *rotation)));
-  *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded));
+  *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch));
   if (spCut > 0.5) { *scale = vec3f(0.0); }
 }
 
@@ -773,6 +781,11 @@ export const KINDS = {
   // w = v + 2 * lift at full height (thousandths of a toy unit; see
   // Kit.encodeReliefs). A live spectrogram, a camera picture with depth.
   relief: 24,
+  // Lane Hands engine C: a splat on a sheet of cloth follows four tokens
+  // (the corners of its cell), blended across and down: z = a + 64 b +
+  // 4096 c + 262144 d (tokens 0..47), w = 1024 s + t (each 0..1023 for
+  // 0..1), moving by mix(mix(a, b, s), mix(c, d, s), t).
+  skin4: 25,
 };
 
 // Levers: 96 amounts (three 8-bit channels each) and 6 groups.
@@ -894,6 +907,25 @@ vec3 spKitCenter(vec3 p) {
     }
   }
   if (kind == 15) spScreenUV = vec3(an.z, an.w, 1.0);
+  if (kind == 25) {
+    float z4 = an.z;
+    float d4 = floor(z4 / 262144.0);
+    z4 -= d4 * 262144.0;
+    float c4 = floor(z4 / 4096.0);
+    z4 -= c4 * 4096.0;
+    float b4 = floor(z4 / 64.0);
+    float a4 = z4 - b4 * 64.0;
+    float s4 = floor(an.w / 1024.0);
+    float t4 = (an.w - s4 * 1024.0) / 1023.0;
+    s4 /= 1023.0;
+    vec4 k0 = uSpTokens[clamp(int(a4 + 0.5), 0, 47) * 2];
+    vec4 k1 = uSpTokens[clamp(int(b4 + 0.5), 0, 47) * 2];
+    vec4 k2 = uSpTokens[clamp(int(c4 + 0.5), 0, 47) * 2];
+    vec4 k3 = uSpTokens[clamp(int(d4 + 0.5), 0, 47) * 2];
+    vec4 m4 = mix(mix(k0, k1, s4), mix(k2, k3, s4), t4);
+    p += m4.xyz;
+    spKitScale *= m4.w;
+  }
   if (kind == 24) {
     float rax = floor(an.z * 0.5);
     float rlq = floor(an.w * 0.5);
@@ -1116,6 +1148,25 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     }
   }
   if (kind == 15) { spScreenUV = vec3f(an.z, an.w, 1.0); }
+  if (kind == 25) {
+    var z4 = an.z;
+    let d4 = floor(z4 / 262144.0);
+    z4 = z4 - d4 * 262144.0;
+    let c4 = floor(z4 / 4096.0);
+    z4 = z4 - c4 * 4096.0;
+    let b4 = floor(z4 / 64.0);
+    let a4 = z4 - b4 * 64.0;
+    let s4w = floor(an.w / 1024.0);
+    let t4 = (an.w - s4w * 1024.0) / 1023.0;
+    let s4 = s4w / 1023.0;
+    let k0 = uniform.uSpTokens[clamp(i32(a4 + 0.5), 0, 47) * 2];
+    let k1 = uniform.uSpTokens[clamp(i32(b4 + 0.5), 0, 47) * 2];
+    let k2 = uniform.uSpTokens[clamp(i32(c4 + 0.5), 0, 47) * 2];
+    let k3 = uniform.uSpTokens[clamp(i32(d4 + 0.5), 0, 47) * 2];
+    let m4 = mix(mix(k0, k1, vec4f(s4)), mix(k2, k3, vec4f(s4)), vec4f(t4));
+    p = p + m4.xyz;
+    spKitScale = spKitScale * m4.w;
+  }
   if (kind == 24) {
     let rax = floor(an.z * 0.5);
     let rlq = floor(an.w * 0.5);
