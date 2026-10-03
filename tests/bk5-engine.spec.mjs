@@ -99,19 +99,20 @@ test.describe("links and figure boxes (in the app)", () => {
     const r = await page.evaluate(async () => {
       const { BOXES } = await import("/tests/fixtures/bk5/make-pdf.mjs");
       const api = window.__splashery.player.pictures.api;
-      return { links: await api.links(0), figures: await api.figures(0), none: await api.links(1), out: await api.links(9), BOXES }; // prettier-ignore
+      return { links: await api.links(1), figures: await api.figures(1), none: await api.links(2), title: await api.figures(0), out: await api.links(9), BOXES }; // prettier-ignore
     });
     expect(r.links.length).toBe(2);
     const web = r.links.find((l) => l.url);
     const inner = r.links.find((l) => l.page !== undefined);
     expect(web.url).toBe("https://example.org/");
     web.box.forEach((v, i) => expect(v).toBeCloseTo(r.BOXES.web[i], 3));
-    expect(inner.page).toBe(2);
-    inner.box.forEach((v, i) => expect(v).toBeCloseTo(r.BOXES.page3[i], 3));
+    expect(inner.page).toBe(3);
+    inner.box.forEach((v, i) => expect(v).toBeCloseTo(r.BOXES.page4[i], 3));
     expect(r.links.some((l) => String(l.url).startsWith("javascript"))).toBe(false);
     expect(r.figures.length).toBe(1);
     r.figures[0].box.forEach((v, i) => expect(v).toBeCloseTo(r.BOXES.figure[i], 3));
     expect(r.none).toEqual([]);
+    expect(r.title).toEqual([]);
     expect(r.out).toEqual([]);
   });
 
@@ -126,7 +127,7 @@ test.describe("links and figure boxes (in the app)", () => {
     // pics.crop: the figure's own pixels (the sky at the top, orange).
     const px = await page.evaluate(async () => {
       const { BOXES } = await import("/tests/fixtures/bk5/make-pdf.mjs");
-      const c = await window.__splashery.player.pictures.api.crop(0, BOXES.figure, 200);
+      const c = await window.__splashery.player.pictures.api.crop(1, BOXES.figure, 200);
       return { w: c.width, h: c.height, top: [...c.getContext("2d").getImageData(10, 4, 1, 1).data] }; // prettier-ignore
     });
     expect(px.w).toBe(200);
@@ -144,7 +145,7 @@ test.describe("links and figure boxes (in the app)", () => {
       const d = new Float32Array(8 * 6).fill(1);
       rec.drive = (t, c, out, info) => {
         rec.__drive(t, c, out, info);
-        out.sheets = { page: { page: 0, crop: BOXES.figure, relief: { key: "all", w: 8, h: 6, d, depth: 0.05 } } }; // prettier-ignore
+        out.sheets = { page: { page: 1, crop: BOXES.figure, relief: { key: "all", w: 8, h: 6, d, depth: 0.05 } } }; // prettier-ignore
       };
       window.__splashery.player.stage.requestRender();
       return BOXES.figure;
@@ -154,7 +155,7 @@ test.describe("links and figure boxes (in the app)", () => {
       const p = window.__splashery.player.pictures;
       const sh = p.sheets[0];
       const data = sh.shown.data;
-      const { c, hw, hh } = p.rect(sh, p.media.aspect(0));
+      const { c, hw, hh } = p.rect(sh, p.media.aspect(1));
       let lo = [Infinity, Infinity, Infinity];
       let hi = [-Infinity, -Infinity, -Infinity];
       for (let i = 0; i < data.count; i++)
@@ -192,7 +193,7 @@ test.describe("links and figure boxes (in the app)", () => {
       rec.__drive = rec.__drive || rec.drive;
       rec.drive = (t, c, out, info) => {
         rec.__drive(t, c, out, info);
-        out.sheets = { page: { page: 0, variant: "marked" } };
+        out.sheets = { page: { page: 1, variant: "marked" } };
       };
       const p = window.__splashery.player.pictures;
       window.__bk5Seen = [];
@@ -201,7 +202,7 @@ test.describe("links and figure boxes (in the app)", () => {
     });
     await waitSheets(page, "|vmarked");
     const seen = await page.evaluate(() => window.__bk5Seen);
-    expect(seen).toContainEqual({ variant: "marked", links: 2, page: 0 });
+    expect(seen).toContainEqual({ variant: "marked", links: 2, page: 1 });
     const key = await page.evaluate(() => window.__splashery.player.pictures.sheets[0].shown.key);
     expect(key.endsWith("|vmarked")).toBe(true);
     await page.evaluate(async () => {

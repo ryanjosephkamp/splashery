@@ -1,28 +1,31 @@
 // Lane Books r5: a small test PDF made here, from nothing outside the repo.
-// Page 1 has a web link (https://example.org/), a link to page 3, a
-// javascript: link (which must never open) and a picture (a 64 x 48 sunset
-// of our own pixels); pages 2 and 3 are plain text.
+// Page 1 is a title page (a book shows it on its cover). Page 2 has a web
+// link (https://example.org/), a link to page 4, a javascript: link (which
+// must never open) and a picture (a 64 x 48 sunset of our own pixels);
+// pages 3 and 4 are plain text.
 //
 // linkPDF() -> Uint8Array. The boxes, in fractions of the page from its
 // top-left corner, are in BOXES (Letter, 612 x 792 points).
 
 export const BOXES = {
   web: [72 / 612, 1 - 700 / 792, 300 / 612, 1 - 680 / 792],
-  page3: [72 / 612, 1 - 660 / 792, 300 / 612, 1 - 640 / 792],
+  page4: [72 / 612, 1 - 660 / 792, 300 / 612, 1 - 640 / 792],
   script: [72 / 612, 1 - 620 / 792, 300 / 612, 1 - 600 / 792],
   figure: [306 / 612, 1 - 560 / 792, 546 / 612, 1 - 380 / 792],
 };
 
 function picture(w, h) {
-  // A sky that fades from orange to blue, a sun and a dark hill.
+  // A sky that fades from orange to blue, a sun and a dark hill, with a
+  // little grain (as a photo has).
   const px = [];
+  const grain = (x, y, k) => (((x * 73 + y * 151 + k * 37) * 2654435761) >>> 24) / 255 - 0.5;
   for (let y = 0; y < h; y++)
     for (let x = 0; x < w; x++) {
       const t = y / (h - 1);
-      let c = [Math.round(250 - 180 * t), Math.round(150 - 40 * t), Math.round(60 + 160 * t)];
-      if ((x - 40) ** 2 + (y - 18) ** 2 < 64) c = [255, 230, 120];
+      let c = [250 - 180 * t, 150 - 40 * t, 60 + 160 * t];
+      if ((x - 40) ** 2 + (y - 18) ** 2 < 64) c = [250, 230, 120];
       if (y > 34 + 6 * Math.sin(x / 9)) c = [40, 70, 45];
-      px.push(...c);
+      px.push(...c.map((v, k) => Math.max(0, Math.min(255, Math.round(v + 16 * grain(x, y, k))))));
     }
   return String.fromCharCode(...px);
 }
@@ -48,24 +51,24 @@ export function linkPDF() {
     pageIds.push(id);
     return id;
   };
-  // The pages come first so the links can point at page 3.
+  page(text([[72, 720, "Links test"]]));
+  // The link to page 4 is filled in once page 4 has its number.
   const p1Content =
     text([
       [72, 720, "Links and a figure"],
       [76, 686, "Visit example.org"],
-      [76, 646, "Go to page 3"],
+      [76, 646, "Go to page 4"],
       [76, 606, "Do not run this"],
     ]) + " q 240 0 0 180 306 380 cm /Im1 Do Q";
   const linkWeb = add(`<< /Type /Annot /Subtype /Link /Rect [72 680 300 700] /Border [0 0 0] /A << /S /URI /URI (https://example.org/) >> >>`); // prettier-ignore
   const linkScript = add(`<< /Type /Annot /Subtype /Link /Rect [72 600 300 620] /Border [0 0 0] /A << /S /URI /URI (javascript:alert\\(1\\)) >> >>`); // prettier-ignore
-  const linkPage3 = objs.length + 1;
-  objs.push(null); // filled once page 3 has its number
-  const p1 = page(p1Content, [linkWeb, linkPage3, linkScript]);
-  page(text([[72, 720, "Page two"]]));
-  const p3 = page(text([[72, 720, "Page three"]]));
-  objs[linkPage3 - 1] = `<< /Type /Annot /Subtype /Link /Rect [72 640 300 660] /Border [0 0 0] /Dest [${p3} 0 R /XYZ 0 792 0] >>`; // prettier-ignore
+  const linkPage4 = objs.length + 1;
+  objs.push(null);
+  page(p1Content, [linkWeb, linkPage4, linkScript]);
+  page(text([[72, 720, "Page three"]]));
+  const p4 = page(text([[72, 720, "Page four"]]));
+  objs[linkPage4 - 1] = `<< /Type /Annot /Subtype /Link /Rect [72 640 300 660] /Border [0 0 0] /Dest [${p4} 0 R /XYZ 0 792 0] >>`; // prettier-ignore
   objs[pagesId - 1] = `<< /Type /Pages /Kids [${pageIds.map((n) => `${n} 0 R`).join(" ")}] /Count ${pageIds.length} >>`; // prettier-ignore
-  void p1;
   const cat = add(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
   let out = "%PDF-1.4\n";
   const offs = [];
