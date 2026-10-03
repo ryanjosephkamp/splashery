@@ -11,6 +11,8 @@
 // "Look" choice, and only the chosen look's id is saved (scene option `look`).
 
 // Shelf categories, in shelf order. A category only shows once it has toys.
+import { PHOTOREAL_R2_TOYS } from "./packs/photoreal-r2.js";
+
 export const CATEGORIES = [
   { id: "scans", label: "Photoreal" },
   { id: "shapes", label: "Shapes" },
@@ -358,6 +360,9 @@ export const TOYS = [
       changes: "Converted, decimated, spherical harmonics removed, recentred and scaled.",
     },
   },
+  // ---- Photoreal r2: more captures from SuperSplat (labs) ----
+  ...PHOTOREAL_R2_TOYS,
+
   // ---- Photoreal models (CC0 3D models turned into splats) ----
   {
     id: "rubber-duck-real",

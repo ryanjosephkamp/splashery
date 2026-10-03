@@ -12,6 +12,125 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
+  // ---- Photoreal r2 (lane Photoreal r2) ----
+  "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
+  "sushi-boat": [
+    { voice: "wood", f: 420, decay: 0.4 },
+    { voice: "pop", at: 0.2, f: 700, decay: 0.3 },
+  ],
+  "seeded-loaf": [
+    { voice: "crunch", f: 1200, n: 8, decay: 0.6 },
+    { voice: "thud", at: 0.3, f: 90, decay: 0.5 },
+  ],
+  steak: [
+    { voice: "squish", pitch: 0.8, bright: 0.2, decay: 0.6 },
+    { voice: "hiss", at: 0.05, f: 3500, decay: 0.5, vol: 0.4 },
+  ],
+  stollen: [
+    { voice: "rustle", f: 2400, decay: 0.5 },
+    { voice: "pluck", at: 0.15, notes: "G5 C6", step: 0.08, decay: 0.3 },
+  ],
+  "orange-photo": [
+    { voice: "pop", f: 900, decay: 0.4 },
+    { voice: "drip", at: 0.1, f: 1400, n: 2 },
+  ],
+  physalis: [
+    { voice: "rustle", f: 3000, decay: 0.6, vol: 0.7 },
+    { voice: "sparkle", at: 0.2, vol: 0.4 },
+  ],
+  "crystal-gem": [
+    { voice: "glass", f: 1700, decay: 0.9 },
+    { voice: "sparkle", at: 0.15, vol: 0.6 },
+  ],
+  "alum-crystal": [
+    { voice: "glass", f: 1200, decay: 0.7 },
+    { voice: "thud", at: 0.2, f: 140, decay: 0.4 },
+  ],
+  puffin: [
+    { voice: "flutter", f: 600, decay: 0.5 },
+    { voice: "pock", at: 0.25, f: 900 },
+  ],
+  "toy-trex": [
+    { voice: "roar", f: 110, decay: 0.9, vol: 0.7 },
+    { voice: "thud", at: 0.4, f: 60, decay: 0.6 },
+  ],
+  "monkey-doll": [
+    { voice: "boing", f: 500, decay: 0.5 },
+    { voice: "rustle", at: 0.15, f: 1800, decay: 0.4, vol: 0.5 },
+  ],
+  "elephant-souvenir": [
+    { voice: "roar", f: 260, to: 0.7, decay: 0.8, vol: 0.6 },
+    { voice: "thud", at: 0.5, f: 55, decay: 0.7 },
+  ],
+  "turtle-souvenir": [
+    { voice: "scrape", f: 1100, decay: 0.5, vol: 0.6 },
+    { voice: "thud", at: 0.25, f: 100, decay: 0.5 },
+  ],
+  "cave-lioness": [
+    { voice: "breath", f: 300, decay: 0.8 },
+    { voice: "roar", at: 0.3, f: 150, decay: 0.9, vol: 0.6 },
+  ],
+  "dog-plush": [
+    { voice: "boing", f: 380, decay: 0.5 },
+    { voice: "squish", at: 0.2, pitch: 0.9, vol: 0.5 },
+  ],
+  "bmx-bike": [
+    { voice: "click", f: 2200, n: 10, decay: 0.5 },
+    { voice: "bell", at: 0.3, f: 2400, decay: 0.8, vol: 0.5 },
+  ],
+  "murex-shell": [
+    { voice: "glass", f: 2100, decay: 0.4 },
+    { voice: "rattle", at: 0.1, f: 2600, n: 5, decay: 0.5 },
+  ],
+  "sunflower-photo": [
+    { voice: "rustle", f: 1500, decay: 0.7 },
+    { voice: "flutter", at: 0.2, f: 500, decay: 0.4, vol: 0.5 },
+  ],
+  "white-roses": [
+    { voice: "glass", f: 1500, decay: 0.6, vol: 0.6 },
+    { voice: "rustle", at: 0.1, f: 2800, decay: 0.5, vol: 0.5 },
+  ],
+  "bonsai-photo": [
+    { voice: "rustle", f: 2000, decay: 0.8 },
+    { voice: "wood", at: 0.25, f: 520, decay: 0.4, vol: 0.5 },
+  ],
+  "mushroom-photo": [
+    { voice: "pop", f: 420, decay: 0.6 },
+    { voice: "rustle", at: 0.15, f: 2200, decay: 0.6, vol: 0.5 },
+  ],
+  "cactus-real": [
+    { voice: "pluck", notes: "D6 A5 F6", step: 0.06, decay: 0.3, bright: 0.5 },
+    { voice: "rattle", at: 0.05, f: 2200, n: 8, decay: 0.6 },
+  ],
+  "crochet-earth": [
+    { voice: "boing", f: 300, decay: 0.7, vol: 0.6 },
+    { voice: "sparkle", at: 0.2, vol: 0.4 },
+  ],
+  "desk-globe": [
+    { voice: "click", f: 1400, n: 3, decay: 0.5 },
+    { voice: "whoosh", at: 0.1, f: 600, decay: 0.5, vol: 0.5 },
+  ],
+  "cherry-blossom-photo": [
+    { voice: "flutter", f: 800, decay: 0.7, vol: 0.6 },
+    { voice: "sparkle", at: 0.2, vol: 0.5 },
+  ],
+  "maple-tree": [
+    { voice: "rustle", f: 1700, decay: 0.9 },
+    { voice: "whoosh", at: 0.1, f: 900, decay: 0.5, vol: 0.4 },
+  ],
+  peony: [
+    { voice: "rustle", f: 2600, decay: 0.5 },
+    { voice: "glass", at: 0.15, f: 1100, decay: 0.5, vol: 0.5 },
+  ],
+  "money-tree": [
+    { voice: "rustle", f: 1300, decay: 0.6 },
+    { voice: "pock", at: 0.2, f: 700, vol: 0.5 },
+  ],
+  "knight-horse": [
+    { voice: "clack", f: 1800, n: 4, decay: 0.5 },
+    { voice: "bell", at: 0.25, f: 1500, decay: 0.7, vol: 0.5 },
+  ],
+
   // ---- Scans ------------------------------------------------------------------------
   cactus: [
     { voice: "pluck", notes: "E5 G5 B5 D6", step: 0.09, at: 0.15, decay: 0.35, bright: 0.3 },

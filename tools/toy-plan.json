@@ -2259,6 +2259,186 @@
       "effect": "A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).",
       "sound": "The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a breath on the candle and the cup.",
       "improved": "Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the glass and the bowl."
+    },
+    "heart-donut": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "sushi-boat": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "seeded-loaf": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "steak": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "stollen": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "orange-photo": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "physalis": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "crystal-gem": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "alum-crystal": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "puffin": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "toy-trex": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "monkey-doll": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "elephant-souvenir": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "turtle-souvenir": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "cave-lioness": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "dog-plush": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "bmx-bike": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "murex-shell": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "sunflower-photo": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "white-roses": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "bonsai-photo": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "mushroom-photo": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "cactus-real": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "crochet-earth": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "desk-globe": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "cherry-blossom-photo": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "maple-tree": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "peony": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "money-tree": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
+    },
+    "knight-horse": {
+      "v": "keep",
+      "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "A hop. The capture is one solid piece, so no part moves.",
+      "sound": "A short sound that suits the object."
     }
   }
 }
