@@ -714,7 +714,7 @@ hands: { wheels: { axle: [0, 0, 1], r: 0.17, parts: ["front", "rear"] } },
 ```
 
 `axle` (recipe axis), `r` (the wheels' radius, recipe units), `parts` (the wheel parts, turned about
-their own axis), `sign` (-1 turns them the other way), `grip` (14), `roll` (0.015), `yaw` (3) and
+their own axis), `sign` (-1 turns them the other way), `grip` (14), `roll` (0.015), `yaw` (6) and
 `area` (how far it may roll, toy radii, 2.4). `info.hands.rolled` is the angle rolled, for parts
 that turn with the wheels (a steam train's rods).
 
