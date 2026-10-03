@@ -2741,6 +2741,14 @@ export const TOY_SOUNDS = {
   // Sound C (his note of October 2: no robotic pulse): each field plays its own sound from the
   // recipe (src/packs/lab.js): a soft hush for the galaxy's ring, a stone's plop and a gentle wash
   // for the ocean, a warm swelling tone for the knot. This is the galaxy's.
+  // Lane QR: the tap bursts the code (a soft pop, a whoosh, pieces landing);
+  // Assemble and Flip play their own through the recipe's cues.
+  "qr-code": [
+    { voice: "thud", f: 110, decay: 0.3, vol: 0.4 },
+    { voice: "breath", f: 700, to: 0.5, decay: 0.9, vol: 0.2 },
+    { voice: "wood", at: 1.05, f: 900, decay: 0.12, vol: 0.12 },
+    { voice: "breath", at: 2.15, f: 600, to: 1.2, decay: 1.0, vol: 0.16 },
+  ],
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint

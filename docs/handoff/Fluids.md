@@ -1,11 +1,13 @@
 # Lane Fluids: liquids, smoke and flames made of splats
 
-## State on main (October 2, 2026)
+## State on main (October 3, 2026)
 
 Everything is merged: v1 (#121), r4 (#152, the GPU solver, the liquid surface, the gas grid, the
-traced props) and r5 (#180, the faucet's tap, the clear stream, the lava crust and the phone tier),
-on main since October 2, 2026, after a full run on main with four PRs that passed. The Fluid lab is
-behind the labs switch. No branch of this lane is open.
+traced props), r5 (#180, the faucet's tap, the clear stream, the lava crust and the phone tier) and
+r6 (#204, merged October 3, 2026: a flat liquid top that meets the glass, a tap-thin stream, lava as
+one material, a flattened splash drop). The Fluid lab is behind the labs switch. No branch of this
+lane is open. Latest cards on Effect review page 2: fl-r6-pour-r2, fl-r6-soda-r2, fl-r6-lava-r2 and
+fl-r6-splash (marked good).
 
 Waiting on the owner (the Operator passed the questions on October 2):
 

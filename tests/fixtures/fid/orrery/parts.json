@@ -1,0 +1,109 @@
+{
+  "model": "Brass orrery (Splashery, CC0), built by tools/fidelity/orrery.py",
+  "frame": "Splashery coordinates: y up; Blender (x, y, z) is (x, z, -y) here",
+  "blender": "4.5.14 LTS",
+  "settings": {
+    "res": 128,
+    "train": 2,
+    "test": 3,
+    "samples": 8,
+    "device": "CPU",
+    "points": 200000
+  },
+  "light": "Poly Haven HDRI studio_small_09 (CC0) at 0.9, and an 18 W point light in the sun",
+  "parts": [
+    {
+      "name": "base",
+      "label": "Base",
+      "pivot": [0, 0, 0],
+      "axis": [0, 1, 0],
+      "period": 0
+    },
+    {
+      "name": "gear-a",
+      "label": "Gear",
+      "pivot": [0, 0.065, 0],
+      "axis": [0, 1, 0],
+      "teeth": 48,
+      "radius": 0.075
+    },
+    {
+      "name": "gear-b",
+      "label": "Gear",
+      "pivot": [0.109, 0.065, 0],
+      "axis": [0, 1, 0],
+      "teeth": 22,
+      "radius": 0.034
+    },
+    {
+      "name": "sun",
+      "label": "Sun",
+      "pivot": [0, 0.36, 0],
+      "axis": [0, 1, 0],
+      "period": 30
+    },
+    {
+      "name": "mercury",
+      "label": "Mercury",
+      "pivot": [0, 0, 0],
+      "axis": [0, 1, 0],
+      "period": 2.4,
+      "planet": [0.079874, 0.36, -0.029072],
+      "size": 0.011
+    },
+    {
+      "name": "venus",
+      "label": "Venus",
+      "pivot": [0, 0, 0],
+      "axis": [0, 1, 0],
+      "period": 3.6,
+      "planet": [-0.084853, 0.36, -0.084853],
+      "size": 0.016
+    },
+    {
+      "name": "earth",
+      "label": "Earth",
+      "pivot": [0, 0, 0],
+      "axis": [0, 1, 0],
+      "period": 5,
+      "planet": [-0.054723, 0.36, 0.150351],
+      "size": 0.017
+    },
+    {
+      "name": "moon",
+      "label": "Moon",
+      "pivot": [-0.054723, 0.36, 0.150351],
+      "axis": [0, 1, 0],
+      "period": 1.6,
+      "rides": "earth"
+    },
+    {
+      "name": "mars",
+      "label": "Mars",
+      "pivot": [0, 0, 0],
+      "axis": [0, 1, 0],
+      "period": 7.2,
+      "planet": [0.153209, 0.36, 0.128558],
+      "size": 0.013
+    },
+    {
+      "name": "jupiter",
+      "label": "Jupiter",
+      "pivot": [0, 0, 0],
+      "axis": [0, 1, 0],
+      "period": 12,
+      "planet": [0.064705, 0.36, -0.241481],
+      "size": 0.032
+    },
+    {
+      "name": "saturn",
+      "label": "Saturn",
+      "pivot": [0, 0, 0],
+      "axis": [0, 1, 0],
+      "period": 18,
+      "planet": [-0.300366, 0.36, 0.052963],
+      "size": 0.026
+    }
+  ],
+  "seconds": 81.9
+}

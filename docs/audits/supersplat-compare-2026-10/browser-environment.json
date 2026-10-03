@@ -1,0 +1,22 @@
+{
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+  "platform": "MacIntel",
+  "hardwareConcurrency": 12,
+  "deviceMemory": 16,
+  "dpr": 1,
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "renderer": "webgpu",
+  "observedOn": "October 3, 2026",
+  "hardwareModel": "Mac15,7",
+  "cpu": "Apple M3 Pro",
+  "physicalMemoryBytes": 19327352832,
+  "macOS": "26.3.1 (a)",
+  "browserUserAgentIsReduced": true,
+  "physicalPhoneTested": false,
+  "networkThrottling": "none",
+  "cache": "CDP HTTP cache disabled during measurement; clean browser storage and service-worker cache not established",
+  "browserOverrideRestored": true
+}

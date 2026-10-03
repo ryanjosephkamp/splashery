@@ -92,10 +92,39 @@ Fluids, UI r5, Fix7 and the Integrators); you don't touch their files.
   endings, dates like "October 3, 2026").
 - Read first: CLAUDE.md, docs/OPERATING.md ("Steps for a lane"), docs/PACKS.md ("Effect quality"),
   `tools/models.json`, `tools/mesh-to-splats.mjs` and `tools/model-to-splats.mjs`.
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+October 3, 2026 (Opus 5.5). Codex task 08 has not pushed `codex/fidelity-stage1` yet, so the lane
+did steps 2 and 3 first.
 
-Starting, October 3, 2026.
+Done (PR "Phase Fidelity: trained splats on our rigs", branch `claude/lane-fidelity`):
+
+- `src/packs/fidelity.js`: `decodeSog` (SOG version 2, browser and Node; exact against
+  splat-transform's reader, also for faint splats, read back through WebGL), `addTrained` (a trained
+  file as a cloud on one kit part, sizes and rotations kept, the most visible splats first when the
+  budget is smaller), and the orrery recipe (`RECIPES.orrery`, not on the shelf yet): a tap spins
+  the arms up for 7 s, each at its own speed, and they coast to a stop where they are; the moon
+  rides on Earth's arm; the gears and the sun turn too.
+- `tools/fidelity/`: `orrery.py` (Blender: the model, per-part and whole datasets, parts.json),
+  `run-orrery.sh` (render, train with Brush, pack, measure), `measure.mjs` and `measure.html` (PSNR
+  and SSIM at the held-out cameras), `summary.mjs`, `stand-in.mjs` and the README with the Mac
+  steps. Tested here with Blender 4.5.14 LTS on the CPU and a stand-in for Brush.
+- `tests/fid.spec.mjs` with stand-in parts in `tests/fixtures/fid/orrery/` (272 KB).
+- `LICENSES.md`: "Build tools outside npm" (Blender, Brush, msplat).
+- `docs/audits/fidelity-2026-10.md`: the draft report (SH bands, streamed LOD, the frame checks).
+
+Engine PR (branch `claude/lane-fidelity-engine`): "Engine: a recipe's prepare learns the device
+profile" (a third argument to `prepare`, `{ profile }`, so the orrery loads its lite parts on a
+phone). Merge it first.
+
+Findings: the captured path keeps and shows SH bands (checked with a view-dependent test splat); the
+kit path keeps only the base color. PlayCanvas 2.22.3 can stream `lod-meta.json`, but our loader
+passes blob URLs, so it would need a loader change; not useful for single objects.
+
+Next:
+
+1. When `codex/fidelity-stage1` lands: check its numbers, add "Boombox, trained" (a captured labs
+   toy on the Photoreal shelf, the boombox's rig), clips and cards.
+2. The Operator writes Codex task 10 from `tools/fidelity/README.md` ("On the Mac").
+3. When task 10's parts land: put the orrery on the Science shelf (labs) with its sound, how-to,
+   About text, credits, clips and a card; fill in the report.

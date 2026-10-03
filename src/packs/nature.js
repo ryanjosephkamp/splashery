@@ -21,6 +21,7 @@ import {
   vec,
 } from "../kit.js";
 import { evenBox, evenCylinder, evenDisc, evenEllipsoid, evenTube } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Physics
 
 const TAU = Math.PI * 2;
 const OAK_SECS = 6.6;
@@ -811,7 +812,7 @@ function planStones(k, stones, cairn, reach = 0.98) {
     st.cairnQ = st.cairnAt ? quatMul(quatAxisAngle([0, 1, 0], k.rand() * TAU), conj(quatEuler(...st.rot))) : [0, 0, 0, 1]; // prettier-ignore
     st.t1 = 1.5 + 0.45 * n;
   });
-  return { stones: stones.map((st) => ({ ...st, rot: undefined })) };
+  return { stones: stones.map((st) => ({ ...st, rot: undefined, q: quatEuler(...st.rot) })) };
 }
 
 // A loose pinecone scale over the effect's clock s: it opens with the
@@ -4867,6 +4868,26 @@ export const RECIPES = {
     ],
     controls: [{ key: "stack", label: "Tumble and stack", type: "pulse", ease: STONE_SECS }],
     action: { key: "stack", label: "Tumble and stack" },
+    // Hands-on (lane Physics): every stone is a piece to pick up and stack.
+    // A stone rests on a flat patch of its underside (a puck a little
+    // smaller than the stone), so a careful stack stands and a careless one
+    // topples. Stones knock with the same clack as the tap's cairn.
+    handsOn: true,
+    hands: {
+      floor: 0,
+      area: 1.05,
+      center: 0.45,
+      pieces: (d) =>
+        (d?.stones || []).map((st, i) => {
+          const r = 0.8 * Math.min(st.size[0], st.size[2]);
+          const solid = { type: "cylinder", r, h: st.size[1] * 0.92 };
+          return { token: i, pos: st.home, quat: st.q, pick: st.size, rest: { type: "ellipsoid", r: st.size }, solid, points: surfacePoints(solid, 1), mass: st.size[0] * st.size[1] * st.size[2] * 40, friction: 0.9 }; // prettier-ignore
+        }),
+      sound: (hit, vol) =>
+        hit.other
+          ? { voice: "stone", f: 380 + 260 * Math.random(), decay: 0.6, vol: vol * 0.9 }
+          : { voice: "thud", vol: vol * 0.5 },
+    },
     // A tap tumbles the stones (the pile slumps, or the cairn's top four
     // topple off):
     // each rolls and bounces out over the sand on its own path, then five
