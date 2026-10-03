@@ -168,7 +168,10 @@ export class SoftParts {
     for (let i = 0; i < n; i++) {
       const m = mass(i);
       const w = m > 0 ? 1 / m : 0;
-      this.nodes.push({ x: pts[i].slice(), p: pts[i].slice(), v: [0, 0, 0], w, w0: w, home: pts[i].slice(), r: def.radius ?? 0.02 * R, strand: s, i, lift: null, ride: null }); // prettier-ignore
+      // `home`: as built (the skin's places); `rest`: where it starts and
+      // goes back to (def.start, else home).
+      const rest = (def.start?.[i] ?? pts[i]).slice();
+      this.nodes.push({ x: rest.slice(), p: rest.slice(), v: [0, 0, 0], w, w0: w, home: pts[i].slice(), rest, r: def.radius ?? 0.02 * R, strand: s, i, lift: null, ride: null }); // prettier-ignore
     }
     const N = (i) => this.nodes[first + i];
     for (const [i, a] of def.lift || []) N(i).lift = a.map((v) => v * R);
@@ -191,12 +194,14 @@ export class SoftParts {
       const pc = this.host.pieces[def.attach.piece];
       if (pc) {
         const b = pc.body;
-        for (const i of def.attach.nodes ?? [0]) {
+        (def.attach.nodes ?? [0]).forEach((i, k) => {
           const nd = N(i);
-          const l = quat.rotate(quat.conj(b.home.q), v3.sub(nd.home, b.home.pos));
+          // Tied to the node's rest, or to the piece's point `at[k]`.
+          const at = def.attach.at?.[k] ?? nd.rest;
+          const l = quat.rotate(quat.conj(b.home.q), v3.sub(at, b.home.pos));
           nd.ride = { body: b, local: l };
           nd.w = nd.w0 = 0;
-        }
+        });
         s.body = b;
       }
     }
@@ -389,7 +394,7 @@ export class SoftParts {
       const f = Math.min(1, this.homing.el / HOME_SECS);
       const e = f * f * (3 - 2 * f);
       this.nodes.forEach((nd, k) => {
-        const to = nd.ride ? this.rideAt(nd) : nd.home;
+        const to = nd.ride ? this.rideAt(nd) : nd.rest;
         nd.x = this.homing.from[k].map((v, i) => v + (to[i] - v) * e);
         nd.p = nd.x.slice();
         nd.v = [0, 0, 0];
@@ -397,7 +402,7 @@ export class SoftParts {
       if (f >= 1) {
         this.homing = null;
         this.mend();
-        this.moved = this.nodes.some((nd) => nd.ride && v3.len(v3.sub(nd.x, nd.home)) > 1e-4);
+        this.moved = this.nodes.some((nd) => nd.ride && v3.len(v3.sub(nd.x, nd.rest)) > 1e-4);
         this.asleep = true;
       }
       return true;
@@ -425,14 +430,14 @@ export class SoftParts {
     let off = 0;
     for (const nd of this.nodes) {
       vmax = Math.max(vmax, v3.len(nd.v));
-      off = Math.max(off, v3.len(v3.sub(nd.x, nd.home)));
+      off = Math.max(off, v3.len(v3.sub(nd.x, nd.rest)));
     }
     this.still = vmax < 0.02 * this.R && !hold && !wind && !riding ? this.still + dt : 0;
     if (this.still > 0.4) {
       this.asleep = true;
       if (off < 0.01 * this.R) {
         for (const nd of this.nodes) {
-          nd.x = nd.home.slice();
+          nd.x = nd.rest.slice();
           nd.v = [0, 0, 0];
         }
         this.moved = this.strands.some((s) => s.links.some((l) => l.broken));
