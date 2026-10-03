@@ -159,6 +159,9 @@ const LAVA = [
 ];
 const lavaY = (b, t) => b.lo + (b.hi - b.lo) * (0.5 - 0.5 * Math.cos(t * b.speed + b.phase));
 const LAVA_SECS = 4.6;
+// Where the storm cloud's tapped thunderbolt hangs at rest (x); a tap moves it
+// under the tap (lane Fix7).
+const STORM_BOLT_X = 0.1;
 // The lamp's glass: it swells in the middle and tapers into the cap.
 const lavaGlassR = (y) =>
   0.2 +
@@ -1099,6 +1102,40 @@ function owPose(s) {
   return { pts: owSpline(a, b, c, d, f), w: K[k].w + (K[k + 1].w - K[k].w) * f };
 }
 const owZ = (v) => OW_Z0 + (OW_Z1 - OW_Z0) * v;
+// Lane Fix7: the lip stays joined to the face. The lip's root rests on the
+// main sheet at one place along it (OW_ROOT, found at rest); in every pose
+// its first control points are drawn back to that place (fading along the
+// lip), so the two sheets never part at the curl as a dark strip.
+const OW_ROOT = (() => {
+  const m = OW_CTL[0];
+  const p = m[OW_NM];
+  let best = { d: Infinity, j: 0 };
+  for (let i = 0; i < OW_NM - 1; i++)
+    for (let k = 0; k <= 20; k++) {
+      const f = k / 20;
+      const q = [m[i][0] + (m[i + 1][0] - m[i][0]) * f, m[i][1] + (m[i + 1][1] - m[i][1]) * f];
+      const d = Math.hypot(q[0] - p[0], q[1] - p[1]);
+      if (d < best.d) best = { d, j: i + f, off: [p[0] - q[0], p[1] - q[1]] };
+    }
+  return best;
+})();
+function owJoin(pts) {
+  const i = Math.floor(OW_ROOT.j);
+  const f = OW_ROOT.j - i;
+  const a = pts[i];
+  const b = pts[Math.min(OW_NM - 1, i + 1)];
+  const root = [
+    a[0] + (b[0] - a[0]) * f + OW_ROOT.off[0],
+    a[1] + (b[1] - a[1]) * f + OW_ROOT.off[1],
+  ];
+  const lip0 = pts[OW_NM];
+  const d = [root[0] - lip0[0], root[1] - lip0[1]];
+  for (let k = 0; k < 4; k++) {
+    const w = 1 - k / 4;
+    const p = pts[OW_NM + k];
+    pts[OW_NM + k] = [p[0] + d[0] * w, p[1] + d[1] * w, ...p.slice(2)];
+  }
+}
 // Spray: clumps of drops (tokens) thrown up from along the line where the
 // lip lands, each on its own path, falling back into the foam.
 const OW_G = 5.5;
@@ -1236,16 +1273,22 @@ export const RECIPES = {
       { key: "thunder", label: "Thunder", type: "pulse", ease: 1.3 },
     ],
     action: { key: "thunder", label: "Thunder" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       // Lightning on a random-looking schedule: each slot of time may
-      // strike one of three bolts, with a quick double flash.
+      // strike one of three bolts, with a quick double flash. A tap's
+      // thunderbolt (bolt3) strikes straight down from the cloud under
+      // the tap (lane Fix7).
       const slot = Math.floor(t / 1.7);
       const f = t / 1.7 - slot;
       const which = slot === 0 ? 0 : Math.floor(hash1(slot) * 5);
       const on = which < 3 && (f < 0.07 || (f > 0.11 && f < 0.16));
       const big = c.thunder > 0.3 && Math.sin(c.thunder * 36) > -0.4;
       for (let b = 0; b < 3; b++) out.parts[`bolt${b}`] = { visible: on && which === b ? 1 : 0 };
-      out.parts.bolt3 = { visible: big ? 1 : 0 };
+      const tp = info?.tap?.key === "thunder" ? info.tap.point : null;
+      // The tapped point is the front-most splat under the finger, so a bolt
+      // at its x and z stands under the finger from any side.
+      const off = tp ? [clamp(tp[0], -0.85, 0.85) - STORM_BOLT_X, 0, clamp(tp[2], -0.6, 0.75) - 0.6] : [0, 0, 0]; // prettier-ignore
+      out.parts.bolt3 = { visible: big ? 1 : 0, offset: off };
       out.parts.flash = { visible: on || big ? 1 : 0 };
       out.parts.rain = { visible: 0.15 + 0.85 * c.rain };
       out.amount = 1;
@@ -1270,13 +1313,16 @@ export const RECIPES = {
       const ymin = -0.2;
       const ymax = 1.0;
       for (const pf of puffs) {
+        // (Lane Sharpness A: even, a little smaller and more solid, for
+        // crisper puffs.)
         k.add(k.sphere(pf.s), {
+          even: true,
           pos: pf.c,
           scale: [1, 0.82, 1],
-          size: 2.2,
+          size: 1.9,
           flat: 0.9,
-          opacity: 0.82,
-          jitter: 0.03,
+          opacity: 0.9,
+          jitter: 0.01,
           color: (c) => {
             const h = clamp((c.p[1] - ymin) / (ymax - ymin), 0, 1);
             const l = dot(c.n, LIGHT);
@@ -1303,7 +1349,7 @@ export const RECIPES = {
       });
       // Rain: streaks through the whole column, each falling a short way.
       const rain = k.part("rain", { pivot: [0, -0.6, 0] });
-      k.cloud({ share: 0.08, size: 0.55, pattern: false }, (r) => {
+      k.cloud({ share: 0.08, size: 0.45, pattern: false }, (r) => {
         const a = r() * TAU;
         const rr = Math.sqrt(r());
         return {
@@ -1311,7 +1357,7 @@ export const RECIPES = {
           dir: [0.08, -1, 0],
           stretch: 4.5,
           color: mix("#7a92b0", "#b4c4d8", r()),
-          opacity: 0.45,
+          opacity: 0.55,
           kind: "fall",
           params: [0.35, r()],
           part: rain,
@@ -1322,14 +1368,14 @@ export const RECIPES = {
         { x: -0.3, z: 0.56, len: 1.45 },
         { x: 0.45, z: 0.5, len: 1.25 },
         { x: 0.05, z: 0.52, len: 1.35 },
-        { x: 0.1, z: 0.6, len: 1.5 },
+        { x: STORM_BOLT_X, z: 0.6, len: 1.5, drift: 0.12 },
       ];
       bolts.forEach((b, i) => {
         const part = k.part(`bolt${i}`, { pivot: [b.x, -0.1, b.z] });
         const main = jagged(
           rand,
           [b.x, -0.05, b.z],
-          [b.x + (rand() - 0.5) * 0.5, -0.05 - b.len, b.z + (rand() - 0.5) * 0.2],
+          [b.x + (rand() - 0.5) * (b.drift ?? 0.5), -0.05 - b.len, b.z + (rand() - 0.5) * 0.2],
           5,
         );
         const paths = [main];
@@ -2392,18 +2438,20 @@ export const RECIPES = {
         const y = i === 0 ? 0 : i === TW_BANDS - 1 ? H : ((i + 0.5) / TW_BANDS) * H;
         return k.part(`band${i}`, { pivot: [0, y, 0] });
       });
-      k.cloud({ share: 0.55, size: 2.3, pattern: false }, (r) => {
-        const y = H * Math.pow(r(), 0.8);
-        const a = r() * TAU;
-        const rr = rad(y) * (0.82 + 0.22 * Math.sqrt(r()));
+      // (Lane Sharpness A: spread evenly over the funnel, in a thinner wall,
+      // so it reads as a smooth, defined column of dust.)
+      k.cloud({ share: 0.55, size: 1.9, pattern: false }, (r, i) => {
+        const y = H * Math.pow((i * 0.7548776662466927 + 0.5) % 1, 0.8);
+        const a = ((i * 0.5698402909980532 + 0.5) % 1) * TAU;
+        const rr = rad(y) * (0.88 + 0.14 * Math.sqrt(r()));
         const streak = 0.5 + 0.5 * Math.sin(a * 3 + y * 9);
-        const v = clamp(0.25 + 0.5 * (y / H) + 0.25 * streak + 0.1 * (r() - 0.5), 0, 1);
+        const v = clamp(0.25 + 0.5 * (y / H) + 0.25 * streak + 0.04 * (r() - 0.5), 0, 1);
         return {
           p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
           dir: [Math.cos(a), 0.15, -Math.sin(a)],
           stretch: 1.8,
           color: ramp(["#4a3e34", "#66584a", "#847a70", "#a09a94", "#c0bcb8"], v),
-          opacity: 0.55 + 0.3 * (1 - y / H),
+          opacity: 0.7 + 0.25 * (1 - y / H),
           kind: "orbit",
           params: [2.2, 0.6],
           part: bands[twBand(y)],
@@ -2461,7 +2509,7 @@ export const RECIPES = {
             pos,
             scale: [1.2, 0.8, 1],
             count: 60,
-            color: (c) => lit(mix("#4a3624", "#6a5238", c.rand()), c.n, 0.4),
+            color: (c) => lit("#5a4430", c.n, 0.4),
           });
         else
           k.add(k.ellipsoid(0.036, 0.005, 0.021), {
@@ -2489,11 +2537,13 @@ export const RECIPES = {
       }
       for (const pf of puffs) {
         k.add(k.sphere(pf.s), {
+          even: true,
+          jitter: 0.01,
           pos: pf.c,
           scale: [1, 0.7, 1],
-          size: 2.4,
+          size: 2,
           flat: 1,
-          opacity: 0.75,
+          opacity: 0.85,
           pattern: false,
           kind: "orbit",
           params: [0.25, 0],
@@ -2507,7 +2557,7 @@ export const RECIPES = {
               0.3 +
                 0.35 * c.n[1] +
                 0.25 * dot(c.n, LIGHT) +
-                0.12 * c.fbm(c.p[0] * 3, c.p[1] * 3, c.p[2] * 3),
+                0.08 * c.fbm(c.p[0] * 2.5, c.p[1] * 2.5, c.p[2] * 2.5),
               0,
               1,
             );
@@ -2516,16 +2566,17 @@ export const RECIPES = {
         });
       }
       // Flat fields below.
-      k.add(k.disc(1.05), {
-        pos: [0, 0, 0],
-        color: (c) => {
-          if (c.n[1] < 0) return "#3a2e20";
-          const r = Math.hypot(c.p[0], c.p[2]);
-          const g = c.fbm(c.p[0] * 5, 0, c.p[2] * 5);
-          let col = mix("#5a7a2a", "#8a9a3a", 0.5 + 0.5 * g);
-          if (Math.abs(Math.sin(c.p[0] * 14)) < 0.15) col = mix(col, "#6a5a3a", 0.4);
-          return mix(col, "#6a5a44", smoothstep(0.45, 0.1, r));
-        },
+      // (Lane Sharpness A: laid out on a sunflower spiral of solid splats,
+      // so the field is even and clean at phone size.)
+      k.cloud({ share: 0.1, size: 1.25, pattern: false, jitter: 0.15 }, (r, i, n) => {
+        const rr = 1.05 * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.399963229728653;
+        const p = [Math.sin(a) * rr, 0, Math.cos(a) * rr];
+        const g = k.noise.fbm(p[0] * 3, 0, p[2] * 3);
+        let col = mix("#5a7a2a", "#8a9a3a", 0.5 + 0.35 * g);
+        if (Math.abs(Math.sin(p[0] * 14)) < 0.15) col = mix(col, "#6a5a3a", 0.4);
+        col = mix(col, "#6a5a44", smoothstep(0.45, 0.1, rr));
+        return { p, n: [0, 1, 0], flat: 0.2, color: col, opacity: 1 };
       });
     },
   },
@@ -3140,6 +3191,7 @@ export const RECIPES = {
     drive(t, c, out) {
       const s = since(c.crash, OW_SECS);
       const pose = owPose(s === null ? 0 : Math.min(s, OW_KEYS[OW_KEYS.length - 1].at));
+      owJoin(pose.pts);
       const rest = OW_CTL[0];
       const ctl = pose.pts.map((p, i) => ({
         base: [rest[i][0], rest[i][1], 0],
