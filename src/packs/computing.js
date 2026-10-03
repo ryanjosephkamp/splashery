@@ -49,8 +49,15 @@ const BOARD_RIM = "#2a3550";
 
 // A dark display board in the XY plane, its face at z = 0, with a faint grid
 // and a lighter rim, so the glowing parts read against it on any background.
-function board(k, w, h, { depth = 0.07, color = BOARD, rim = BOARD_RIM, at = [0, 0] } = {}) {
-  k.add(k.box(w, h, depth), {
+function board(
+  k,
+  w,
+  h,
+  { depth = 0.07, color = BOARD, rim = BOARD_RIM, at = [0, 0], even = false } = {},
+) {
+  // even: laid evenly (lane Sharpness B; the CNN's poster), crisp at its rim.
+  k.add(even ? evenBox(w, h, depth) : k.box(w, h, depth), {
+    ...(even ? { even: true, opacity: 1 } : {}),
     pos: [at[0], at[1], -depth / 2],
     flat: 0.3,
     size: 1.25,
@@ -1634,7 +1641,9 @@ function buildCnn3D(k) {
   k.data = { view: "model" };
   stand(k, 1.35, A.floor);
   const cube = (p, size, depth, color, opts = {}) =>
-    k.add(k.box(size, size, depth), {
+    k.add(evenBox(size, size, depth), {
+      even: true,
+      opacity: 1,
       pos: p,
       flat: 0.25,
       weight: 1.6,
@@ -1675,7 +1684,9 @@ function buildCnn3D(k) {
       [size / 2, 0, th, size],
       [-size / 2, 0, th, size],
     ])
-      k.add(k.box(w, h, th), {
+      k.add(evenBox(w, h, th), {
+        even: true,
+        opacity: 1,
         pos: add(c, [dx, dy, 0]),
         flat: 0.3,
         weight: 3,
@@ -1719,7 +1730,9 @@ function buildCnn3D(k) {
     const x = (d - 4.5) * 0.22;
     const h = A.barH * v;
     const top = d === 7;
-    k.add(k.box(0.13, h, 0.13), {
+    k.add(evenBox(0.13, h, 0.13), {
+      even: true,
+      opacity: 1,
       pos: [x, y0 + h / 2, A.barZ],
       flat: 0.25,
       weight: 1.5,
@@ -2256,7 +2269,9 @@ function buildCnnDraw(k, o) {
   k.data = { view: "draw", digit: f.digit };
   const G = CNND;
   // A plinth along the bottom row, the digits on its front.
-  k.add(k.box(2.7, 0.2, 0.62), {
+  k.add(evenBox(2.7, 0.2, 0.62), {
+    even: true,
+    opacity: 1,
     pos: [0, G.floor - 0.1, 0.05],
     flat: 0.25,
     color: (c) => (c.n[1] > 0.5 ? keep(Math.abs(c.p[0]) > 1.31 || Math.abs(c.p[2] - 0.05) > 0.27 ? BOARD_RIM : BOARD) : lit(BOARD_RIM, c.n, { amb: 0.75, dif: 0.3, spec: 0.1 })), // prettier-ignore
@@ -2269,7 +2284,9 @@ function buildCnnDraw(k, o) {
       // A dark backing sheet behind each channel's cells.
       const w = L.S * L.cell + 0.04;
       const mid = G.sheet(L, c);
-      k.add(k.box(w, w, 0.015), {
+      k.add(evenBox(w, w, 0.015), {
+        even: true,
+        opacity: 1,
         pos: add(mid, [0, 0, -0.025]),
         flat: 0.25,
         pattern: false,
@@ -2280,7 +2297,9 @@ function buildCnnDraw(k, o) {
           const v = vals[c * L.S * L.S + y * L.S + x] / top;
           const col =
             li === 0 ? mix("#1c2542", "#f4f7ff", v) : mix("#15284a", "#7ff6ff", Math.pow(v, 0.7));
-          k.add(k.box(L.cell * 0.86, L.cell * 0.86, 0.035), {
+          k.add(evenBox(L.cell * 0.86, L.cell * 0.86, 0.035), {
+            even: true,
+            opacity: 1,
             pos: G.cellAt(L, c, y, x),
             flat: 0.25,
             weight: 1.4,
@@ -2302,7 +2321,9 @@ function buildCnnDraw(k, o) {
     const base = [-0.02 + d * 0.1, 0, 0.1];
     const h = Math.max(0.02, H * p);
     const win = d === f.digit;
-    k.add(k.box(0.085, h, 0.085), {
+    k.add(evenBox(0.085, h, 0.085), {
+      even: true,
+      opacity: 1,
       pos: [base[0], y0 + h / 2, base[2]],
       flat: 0.25,
       weight: 1.5,
@@ -2797,11 +2818,13 @@ export const RECIPES = {
       if (o.view === "draw") return buildCnnDraw(k, o);
       if (o.view === "model") return buildCnn3D(k);
       k.data = { view: "poster" };
-      board(k, 3.0, 2.1);
+      board(k, 3.0, 2.1, { even: true });
       const A = CNN_AT;
       const z = 0.012;
       const tile = (p, size, color, opts = {}) =>
-        k.add(k.box(size, size, 0.02), {
+        k.add(evenBox(size, size, 0.02), {
+          even: true,
+          opacity: 1,
           pos: add(p, [0, 0, z]),
           flat: 0.2,
           weight: 2,
@@ -2828,7 +2851,9 @@ export const RECIPES = {
         [A.cell / 2, 0, 0.008, fs],
         [-A.cell / 2, 0, 0.008, fs],
       ])
-        k.add(k.box(w, h, 0.02), {
+        k.add(evenBox(w, h, 0.02), {
+          even: true,
+          opacity: 1,
           pos: add(f0, [dx, dy, 0.05]),
           flat: 0.3,
           weight: 3,
@@ -2858,11 +2883,15 @@ export const RECIPES = {
           params: [26 + j, 0],
         }),
       );
-      text(k, "→", [(A.img[0] + A.feat[0]) / 2 + 0.07, A.img[1], 0.003], 0.024, "#6f7fa6");
-      text(k, "→", [(A.feat[0] + A.pool[0]) / 2 + 0.03, A.img[1], 0.003], 0.024, "#6f7fa6");
-      text(k, "FILTER", [A.img[0], 0.87, 0.003], 0.018, "#9fb0d6");
-      text(k, "MAP", [A.feat[0], 0.87, 0.003], 0.018, "#9fb0d6");
-      text(k, "POOL", [A.pool[0], 0.87, 0.003], 0.018, "#9fb0d6");
+      text(k, "→", [(A.img[0] + A.feat[0]) / 2 + 0.07, A.img[1], 0.003], 0.024, "#6f7fa6", {
+        weight: 14,
+      });
+      text(k, "→", [(A.feat[0] + A.pool[0]) / 2 + 0.03, A.img[1], 0.003], 0.024, "#6f7fa6", {
+        weight: 14,
+      });
+      text(k, "FILTER", [A.img[0], 0.87, 0.003], 0.018, "#9fb0d6", { weight: 14 });
+      text(k, "MAP", [A.feat[0], 0.87, 0.003], 0.018, "#9fb0d6", { weight: 14 });
+      text(k, "POOL", [A.pool[0], 0.87, 0.003], 0.018, "#9fb0d6", { weight: 14 });
       // The scores: bars that rise together as out.grow runs, each stopping
       // at its own height.
       const y0 = A.bars + 0.12;
@@ -2870,13 +2899,17 @@ export const RECIPES = {
         const x = (d - 4.5) * 0.25;
         const h = A.barH * v;
         const top = d === 7;
-        k.add(k.box(0.15, 0.012, 0.02), {
+        k.add(evenBox(0.15, 0.012, 0.02), {
+          even: true,
+          opacity: 1,
           pos: [x, y0 - 0.01, z],
           flat: 0.2,
           pattern: false,
           color: () => keep("#34405e"),
         });
-        k.add(k.box(0.15, h, 0.03), {
+        k.add(evenBox(0.15, h, 0.03), {
+          even: true,
+          opacity: 1,
           pos: [x, y0 + h / 2, z + 0.01],
           flat: 0.2,
           weight: 1.5,
@@ -2886,7 +2919,7 @@ export const RECIPES = {
           color: (c) =>
             keep(top ? mix("#ffb400", "#fff1a8", (c.p[1] - y0) / h) : mix("#2a6fd6", "#7fd0ff", (c.p[1] - y0) / A.barH)), // prettier-ignore
         });
-        text(k, String(d), [x, A.bars, 0.003], 0.022, top ? "#ffd34d" : "#9fb0d6");
+        text(k, String(d), [x, A.bars, 0.003], 0.022, top ? "#ffd34d" : "#9fb0d6", { weight: 14 });
       });
     },
   },
