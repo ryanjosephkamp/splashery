@@ -288,7 +288,8 @@ replace `qr-neon-burst` and `qr-gems-burst`), `qr-neon-light-burst`, and in the 
 `qr-classic-alive`, `qr-dots-alive`, `qr-rounded-alive`, `qr-bricks-alive`, `qr-gems-alive`,
 `qr-bubbles-alive`, `qr-neon-alive`, `qr-neon-light-alive` (filmed in Scan view throughout; 12 of 12
 sampled frames of every MP4 read back; in the Bubbles clip's GIF jsQR missed 4 of 84 frames, said on
-its card). `qr-neon-assemble` still shows the first Neon.
+its card). `qr-neon-assemble-r2` (about 11:00 UTC, at level M) replaces `qr-neon-assemble`, which
+showed the first Neon.
 
 ### Next
 
