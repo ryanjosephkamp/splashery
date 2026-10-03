@@ -2963,6 +2963,17 @@ export const RECIPES = {
         // through between them.)
         color: (c) => (c.s.face === 3 ? { c: shade("#3e3832", 0.75), size: 1.35 } : rock(c)),
       });
+      // A thin slab of dark stone under it: one layer of splats still let
+      // the moss above show through.
+      k.add(evenBox(1.6, 0.02, 0.6), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
+        pos: [0, -0.011, -0.05],
+        size: 1.3,
+        flat: 0.3,
+        color: (c) => shade(mix("#3e3832", "#2e2a26", 0.5 + 0.5 * c.noise(c.p[0] * 5, 0, c.p[2] * 5)), 0.75), // prettier-ignore
+      });
       for (let i = 0; i < 12; i++) {
         const x = (rand() - 0.5) * 1.7;
         if (Math.abs(x) < 0.35) continue;
@@ -2971,7 +2982,9 @@ export const RECIPES = {
           even: true,
           opacity: 1,
           jitter: 0.015,
-          pos: [x, rand() * TOP, 0.25 + rand() * 0.05],
+          // (Kept above the ground, lane Sharpness B: a low one poked out
+          // underneath.)
+          pos: [x, Math.max(s, rand() * TOP), 0.25 + rand() * 0.05],
           color: rock,
         });
       }
@@ -3057,18 +3070,24 @@ export const RECIPES = {
           part: streaks,
         };
       });
-      // The pool's stony bed under it, closed from below.
-      k.add(evenDisc(k, 0.75, 0, 48), {
-        even: true,
-        opacity: 1,
-        jitter: 0.015,
-        pos: [0, 0.03, 0.55],
-        scale: [1.1, 1, 0.75],
-        rot: [180, 0, 0],
-        flat: 0.2,
-        pattern: false,
-        color: (c) => shade(mix("#4a443c", "#2e2a26", 0.5 + 0.5 * c.noise(c.p[0] * 5, 0, c.p[2] * 5)), 0.85), // prettier-ignore
-      });
+      // The pool's stony bed under it, closed from below: two layers a hair
+      // apart, the upper one turned to fill the lower one's gaps.
+      for (const [dy, turn] of [
+        [0, 0],
+        [0.012, 13],
+      ])
+        k.add(evenDisc(k, 0.75, 0, 48), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [0, 0.018 + dy, 0.55],
+          scale: [1.1, 1, 0.75],
+          rot: [180, turn, 0],
+          flat: 0.2,
+          size: 1.3,
+          pattern: false,
+          color: (c) => shade(mix("#4a443c", "#2e2a26", 0.5 + 0.5 * c.noise(c.p[0] * 5, 0, c.p[2] * 5)), 0.85), // prettier-ignore
+        });
       // The pool, with foam where the water lands and drifting mist.
       k.add(k.disc(0.75), {
         pos: [0, 0.04, 0.55],
@@ -3135,16 +3154,31 @@ export const RECIPES = {
       for (let i = 0; i < 9; i++) {
         const a = -0.4 + (i / 8) * (Math.PI + 0.8);
         const s = 0.08 + 0.08 * rand();
-        k.add(k.ellipsoid(s * 1.3, s * 0.8, s), {
-          pos: [Math.cos(a) * 0.85, 0.05, 0.55 + Math.sin(a) * 0.55],
+        // (Evenly laid and solid, resting on the ground, lane Sharpness B:
+        // from below the moss on top showed through them.)
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.8, s, 32), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [Math.cos(a) * 0.85, Math.max(0.05, s * 0.8 - 0.035), 0.55 + Math.sin(a) * 0.55],
           rot: [0, rand() * 180, 0],
           color: rock,
         });
       }
-      k.add(k.box(2.0, 0.08, 1.7), {
+      // The ground, evenly laid and solid (lane Sharpness B: from below the
+      // boulders showed through it). Its grass stops at the pool's edge, so
+      // the water lies on the pool's stony bed.
+      k.add(evenBox(2.0, 0.08, 1.7), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, 0, 0.2],
-        color: (c) =>
-          c.s.face === 2 ? lit(mix("#4a6a2a", "#6a8a34", c.rand()), c.n, 0.3) : "#4a3a2a",
+        size: 1.15,
+        color: (c) => {
+          if (c.s.face !== 2) return shade("#4a3a2a", c.s.face === 3 ? 0.8 : 1);
+          if ((c.p[0] / 0.8) ** 2 + ((c.p[2] - 0.55) / 0.54) ** 2 < 1) return null;
+          return lit(mix("#4a6a2a", "#6a8a34", c.rand()), c.n, 0.3);
+        },
       });
     },
   },

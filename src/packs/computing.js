@@ -3553,15 +3553,6 @@ export const RECIPES = {
           },
         ),
       );
-      // The flat base itself, closing the block underneath (lane Sharpness B).
-      k.add(evenBox(2, 0.01, 2), {
-        even: true,
-        opacity: 1,
-        jitter: 0.01,
-        pos: [0, base - 0.005, 0],
-        flat: 0.3,
-        color: (c) => lit("#1b2438", c.n, { amb: 0.7, dif: 0.35, spec: 0 }),
-      });
       // The trail: a dot at each step, shown as the ball lands (channel 0).
       const N = pts.length - 1;
       pts.forEach((p, i) =>

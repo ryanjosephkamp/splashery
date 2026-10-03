@@ -3012,12 +3012,21 @@ export const RECIPES = {
     ],
     controls: [{ key: "serve", label: "Take a slice", type: "toggle", default: 0, ease: 1.1 }],
     action: { key: "serve", label: "Take a slice" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       // Linear in the eased value, so the cheese strings (which grow in with
       // it) always reach the slice.
       const s = c.serve;
       out.grow = s;
       out.parts.slice = { offset: [PIZZA_OUT[0] * s, PIZZA_OUT[1] * s, PIZZA_OUT[2] * s] };
+      // Splats sort where they were built, so the slice, lifted toward the
+      // viewer, drew under the board's front. Sort it where it stands as it
+      // moves (lane Sharpness B).
+      const d = info?.data;
+      const slot = Math.round(s * 12);
+      if (d && slot !== d.sortSlot) {
+        d.sortSlot = slot;
+        out.resortPose = true;
+      }
     },
     build(k, o) {
       const R = 0.9;
@@ -3027,6 +3036,7 @@ export const RECIPES = {
       const span = TAU / slices;
       const a0 = PIZZA_AZ - span / 2;
       const slice = k.part("slice");
+      k.data = {};
       const marg = o.topping === "margherita";
       const inSlice = (a) => {
         let d = a - PIZZA_AZ;

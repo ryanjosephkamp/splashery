@@ -1,8 +1,9 @@
 // Lane Sharpness B's own checks (docs/OPERATING.md): every toy the lane made
 // sharper or closed underneath still builds at the phone tier within its
 // budget with finite splats; the solids it laid out evenly are fully opaque
-// (no see-through splats left from random placement); and the coral's rock
-// and the cake stand's foot are closed underneath.
+// (no see-through splats left from random placement); the coral's rock and
+// the cake stand's foot are closed underneath; and the graph and surface
+// plotters' a sliders drag.
 
 import { test, expect } from "@playwright/test";
 import { buildRecipe } from "../src/kit.js";
@@ -86,3 +87,42 @@ test("the coral's rock and the cake stand's foot are closed underneath", async (
   expect(under(build(nature.coral).buf, 0.3)).toBeGreaterThan(200);
   expect(under(build(food["birthday-cake"]).buf, 0.08)).toBeGreaterThan(20);
 });
+
+// The graph and surface plotters' a sliders: dragging the knob along the
+// track moves the toy's a control, and the panel's slider follows.
+for (const id of ["graph-plotter", "surface-plotter"]) {
+  test(`${id}: the a slider's knob drags along its track`, async ({ page }) => {
+    test.setTimeout(300_000);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?renderer=webgl2&profile=weak&labs=1");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.evaluate((id) => window.__splashery.app.chooseToy(id), id);
+    await page.waitForFunction((id) => window.__splashery.player.toyInfo?.id === id, id, { timeout: 120_000 }); // prettier-ignore
+    await page.evaluate(() => {
+      const { player } = window.__splashery;
+      player.camera.setTurntable(false);
+      player.opts.idleDelay = 1e9;
+      player.idle.weight = 0;
+    });
+    await page.waitForTimeout(2500); // the view settles
+    // The knob (at a = 0.5) and a point 0.35 of the track to its right.
+    const [knob, right] = await page.evaluate(async (id) => {
+      const { plotSliderAt } = await import("/src/packs/maths.js");
+      const [x, y, z] = plotSliderAt(id);
+      const { player } = window.__splashery;
+      return [
+        player.screenPoint([x, y, z + 0.06]),
+        player.screenPoint([x + 0.35 * 1.1, y, z + 0.06]),
+      ];
+    }, id);
+    await page.mouse.move(knob[0], knob[1]);
+    await page.mouse.down();
+    for (let i = 1; i <= 8; i++)
+      await page.mouse.move(knob[0] + ((right[0] - knob[0]) * i) / 8, knob[1] + ((right[1] - knob[1]) * i) / 8); // prettier-ignore
+    await page.mouse.up();
+    const a = await page.evaluate(() => window.__splashery.player.motion.targets.a);
+    expect(a).toBeGreaterThan(0.75);
+    expect(a).toBeLessThan(0.95);
+    expect(Number(await page.locator("#ctl-a").inputValue())).toBe(Math.round(a * 100));
+  });
+}

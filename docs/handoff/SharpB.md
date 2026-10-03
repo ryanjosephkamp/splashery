@@ -108,6 +108,18 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   (fewer stains), the waterfall's underside, the surface plotter (and its tap) and the Lorenz
   attractor (and its tap). Not redone yet, waiting for a note: gradient descent's base and the
   pizza's tap (see "For the Operator").
+- October 3, 2026: the owner's notes on the open cards (via the Operator), fixed as "-r3" cards (and
+  "-r2" where none existed): the basket's, tomatoes' and waterfall's undersides (still see-through:
+  the floors are now two offset layers, the tomatoes' needles under the plate are hidden, and the
+  waterfall's ground and boulders are even and solid), the tin can's lid (it was off center; now
+  centered on the can's rim), gradient descent (the base taken back out, by the owner's note), the
+  pizza's tap (the slice drew under the board: it is now sorted where it stands as it moves), the
+  Lorenz attractor (r2's opaque even splats broke the strands into dashes; now small soft splats
+  drawn out along the path) and the surface plotter (its mesh lines are now thin tubes; the slider's
+  track and knob are crisper). New: the graph and surface plotters' a slider can be dragged on the
+  toy, and the panel's slider follows. That needs the small engine change in #200 ("Engine: a toy's
+  drag can set one of its sliders", branch `claude/lane-sharp-b-engine`, merged into this branch),
+  which goes in first.
 - Still to do: jelly, bricks and sushi (sharper) and the pebbles' base, after Physics (#184); the
   quartz cluster's and the tornado's bases after Sharpness A (#172).
 
@@ -129,6 +141,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
     the Menger sponge's hole edges, which `cellFaces` now marks as real edges).
   - **Soft value noise reads as blur** (the album's leather): a cell pattern (Worley noise) with
     crisp creases reads as real pebbled grain.
+- **One layer of splats is never fully opaque**: a floor seen from below lets the toy above show
+  through between its splats. Two layers a hair apart, the upper one turned so its splats fall in
+  the lower one's gaps, close it (`underDisc` in `src/rigs.js`).
+- **Splats sort where they were built**: a part moved far (the pizza's slice, lifted toward the
+  viewer) draws under what it passes; set `out.resortPose` a few times while it moves.
 - Closing a scan's base: a rig `addon` (kit-built, world coordinates, follows the body) with hard
   edges: a fruit core just inside the skin, hidden while a tap breaks or peels the fruit, or a
   kit-built underside. Placed with `tools/rig-map.mjs --views=front,bottom`.
@@ -140,8 +157,8 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 - The strawberry scan has two small dark spots underneath that are the capture's own splats; the
   core can't cover them without poking through the skin elsewhere.
-- The tomatoes' plate keeps faint pink stains from below (reflections baked into the capture just
-  above the new floor).
+- From the side, a few faint pale needles still hang just under the tomatoes' plate (the capture's
+  own, centered in the plate's glaze, so hiding them would open the plate).
 - The gyroid shows a few specks at the deepest breath, where the surface stretches thin (as before).
 - The Platonic solids changed little: the faint rings in the faces come from the even fan layout,
   and nudging it made the rims speckle, so that was left out.
@@ -149,9 +166,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## For the Operator
 
-- The owner marked `shb-base-gradient-descent` and `shb-pizza-tap` "Needs work" with no note, and
-  nothing in them stands out to me (the block is now closed and dark; the slice slides out with
-  thinner strings, as asked). What does he want changed?
+- The engine PR #200 (a recipe's `drag` may return `{ control, value }` to set a slider; the panel's
+  slider follows) must merge before #185. Its test is `tests/shb-engine.spec.mjs`. Without it the
+  plotters' sliders simply don't drag (nothing breaks).
 
 - Jelly, bricks and sushi (and the pebbles' base) wait for Physics part 2 (#184), still open.
 - Shared helpers changed additively (default off): `board()` in computing.js (`even`),

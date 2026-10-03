@@ -1236,16 +1236,18 @@ export const RECIPES = {
       const pts = lorenzPath();
       const stops = ["#1d2671", "#4b2c91", "#8f3bb3", "#d6479a", "#ff7a59", "#ffc15e"];
       k.add(polyTube(pts, 0.011), {
-        even: true,
-        opacity: 1,
-        jitter: 0.01,
-        flat: 0.45,
-        stretch: 1.4,
+        // Small splats drawn out along the path: each strand a clean line
+        // (lane Sharpness B; opaque, even ones broke it into dashes).
+        size: 0.7,
+        flat: 0.6,
+        stretch: 3,
         kind: "pulse",
         params: (c) => [(c.t * 6) % 1, 0],
+        // The tube is only a few pixels wide, so light and shade round it
+        // read as grain: a gentle shade only (lane Sharpness B).
         color: (c) => {
           const col = ramp(stops, c.t);
-          return shade(col, 0.82 + 0.3 * Math.max(0, dot(c.n, LIGHT)));
+          return shade(col, 0.92 + 0.12 * Math.max(0, dot(c.n, LIGHT)));
         },
       });
       // The racing spark and its tail, and the bright trace it draws (all
@@ -2584,15 +2586,39 @@ function gridLines(lines, width, z) {
 // The slider under a plot: a track with an "a" beside it and a knob that
 // slides with a (knob at the middle for a's rest value).
 const SLIDER_LEN = 1.1;
+// The a slider's knob can be dragged along its track (lane Sharpness B): the
+// toy's a control, and the panel's slider, follow it. Each plotter's build
+// says where its slider is (or null when its equation has no a).
+const PLOT_SLIDERS = {};
+// Where a plotter's a slider is, for the tests (null without one).
+export const plotSliderAt = (id) => PLOT_SLIDERS[id] ?? null;
+function plotSliderDrag(id) {
+  const place = (p) => {
+    const s = PLOT_SLIDERS[id];
+    return s ? { control: "a", value: clamp01((p[0] - s[0]) / SLIDER_LEN + 0.5) } : null;
+  };
+  return {
+    plane: "view",
+    at(p) {
+      const s = PLOT_SLIDERS[id];
+      return !!s && Math.abs(p[0] - s[0]) < SLIDER_LEN / 2 + 0.1 && Math.abs(p[1] - s[1]) < 0.12 && Math.abs(p[2] - s[2]) < 0.15; // prettier-ignore
+    },
+    start: place,
+    move: place,
+  };
+}
+
 function plotSlider(k, at, { part = null, exact = false } = {}) {
   const [x, y, z] = at;
+  // (Many small splats, lane Sharpness B: a few big ones read as beads.)
   k.add(evenCylinder(0.018, 0.018, SLIDER_LEN), {
     even: true,
     opacity: 1,
     jitter: 0.015,
     pos: [x, y, z],
     rot: [0, 0, 90],
-    weight: 1.5,
+    weight: 4,
+    size: 0.8,
     color: (c) => lit("#56637a", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 }),
   });
   // Tick marks at the ends and the middle.
@@ -2616,10 +2642,10 @@ color: "#8b97ad",
     pos: [x, y, z + 0.03],
     rot: [90, 0, 0],
     part: knob,
-    weight: 1.2,
-    size: 1.3,
+    weight: 4,
+    size: 0.8,
     pattern: false,
-    color: (c) => lit(c.s.cap ? "#ffd166" : "#d9a93f", c.n, { amb: 0.72, dif: 0.35, spec: 0.5 }),
+    color: (c) => lit(c.s.cap ? "#ffd166" : "#f0bf52", c.n, { amb: 0.8, dif: 0.25, spec: 0.3 }),
   });
   return knob;
 }
@@ -2707,6 +2733,7 @@ Object.assign(RECIPES, {
       { key: "eq", label: "Your curve", type: "text", default: "", hidden: true },
     ],
     input: GRAPH_INPUT,
+    drag: plotSliderDrag("graph-plotter"),
     controls: [
       { key: "a", label: "a", type: "slider", default: 0.5 },
       { key: "draw", label: "Draw", type: "pulse", ease: 4.5 },
@@ -2855,7 +2882,8 @@ Object.assign(RECIPES, {
       // The pen, built with its tip at the middle of the board (inside the
       // toy, so it doesn't change the framing) and moved to the curve.
       plotPen(k, [0, 0, PLOT_Z + 0.004], k.part("pen", { pivot: [0, 0, PLOT_Z] }));
-      if (g.usesA) plotSlider(k, [0.12, -BH / 2 - 0.16, 0.02]);
+      PLOT_SLIDERS["graph-plotter"] = g.usesA ? [0.12, -BH / 2 - 0.16, 0.02] : null;
+      if (g.usesA) plotSlider(k, PLOT_SLIDERS["graph-plotter"]);
     },
   },
 });
@@ -2994,6 +3022,7 @@ Object.assign(RECIPES, {
       { key: "eq", label: "Your surface", type: "text", default: "", hidden: true },
     ],
     input: SURFACE_INPUT,
+    drag: plotSliderDrag("surface-plotter"),
     controls: [
       { key: "a", label: "a", type: "slider", default: 0.5 },
       { key: "rise", label: "Rise", type: "pulse", ease: 5 },
@@ -3052,22 +3081,76 @@ Object.assign(RECIPES, {
       const step = niceStep(g.dx[1] - g.dx[0], 12);
       const gridStep = [step / (g.dx[1] - g.dx[0]), step / (g.dy[1] - g.dy[0])];
       const gridOff = [(-g.dx[0] / step) % 1, (-g.dy[0] / step) % 1];
-      const onLine = (U, V) => {
-        const fu = Math.abs(((((U / gridStep[0] - gridOff[0]) % 1) + 1) % 1) - 0.5);
-        const fv = Math.abs(((((V / gridStep[1] - gridOff[1]) % 1) + 1) % 1) - 0.5);
-        return Math.max(fu, fv) > 0.475;
-      };
       // Coloured by height, with a fine mesh of darker lines, two-sided. A
       // point off the plot is marked `bad` (a hole).
       const look = (c) => {
         if (c.s.p.bad) return null;
         let col = ramp(SURF_RAMP, (c.p[1] + SURF_H) / (2 * SURF_H));
-        // The mesh lines in smaller splats, so they read as thin, crisp lines
-        // rather than a dashed blur.
-        const line = onLine(c.u, c.v);
-        if (line) col = shade(col, 0.78);
-        const out = lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
-        return line ? { c: out, size: 0.6 } : out;
+        // The mesh lines darker, in full-size splats (smaller ones left
+        // pinholes that read as grain).
+        return lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
+      };
+      // The mesh lines: thin tubes along the surface, in splats drawn out
+      // along them, so each reads as one crisp, unbroken line (lane
+      // Sharpness B; as darker splats of the surface they broke into
+      // dashes). A tube is cut where the surface has a hole. `next` is the
+      // value of a it morphs to (channel 1), or null to flatten (channel 0).
+      const lineU = [];
+      const lineV = [];
+      for (let n = -1; n <= 40; n++) {
+        const U = (n + gridOff[0]) * gridStep[0];
+        const V = (n + gridOff[1]) * gridStep[1];
+        if (U > 0.002 && U < 0.998) lineU.push(U);
+        if (V > 0.002 && V < 0.998) lineV.push(V);
+      }
+      const meshLines = (a, opts, next) => {
+        const runs = [];
+        const N = 160;
+        for (const [fixed, list] of [
+          [0, lineU],
+          [1, lineV],
+        ])
+          for (const L of list) {
+            let run = [];
+            for (let i = 0; i <= N; i++) {
+              const w = i / N;
+              const [U, V] = fixed === 0 ? [L, w] : [w, L];
+              const p = g.point(U, V, a);
+              if (p) run.push({ p, U, V });
+              if ((!p || i === N) && run.length > 1) runs.push(run);
+              if (!p) run = [];
+            }
+          }
+        for (const run of runs) {
+          const at = (c) => run[Math.min(run.length - 1, Math.round(c.s.at))];
+          k.add(
+            polyTube(
+              run.map((r) => r.p),
+              0.0035,
+            ),
+            {
+              ...opts,
+              even: true,
+              opacity: 1,
+              jitter: 0.01,
+              size: 0.65,
+              flat: 0.6,
+              stretch: 2.5,
+              pattern: false,
+              to: (c) => {
+                const r = at(c);
+                const q =
+                  next === null ? [r.p[0], g.floorY, r.p[2]] : g.point(r.U, r.V, next) || r.p;
+                return add(q, sub(c.p, r.p));
+              },
+              color: (c) => {
+                const y = at(c).p[1];
+                const col = shade(ramp(SURF_RAMP, (y + SURF_H) / (2 * SURF_H)), 0.62);
+                return lit(col, c.n, { amb: 0.8, dif: 0.25, spec: 0, two: true });
+              },
+            },
+          );
+        }
       };
       // Normals from a grid of heights (cheaper than asking the equation
       // twice more for every splat).
@@ -3107,6 +3190,7 @@ Object.assign(RECIPES, {
         to: (c) => [c.p[0], g.floorY, c.p[2]],
         color: look,
       });
+      meshLines(g.A[1], { part: k.part("surface"), channel: 0, weight: 1.2 }, null);
       for (let j = 0; j < copies; j++) {
         const next = g.knots[j + 1];
         k.add(sheet(g.knots[j]), {
@@ -3120,6 +3204,7 @@ Object.assign(RECIPES, {
           to: (c) => g.point(c.u, c.v, next),
           color: look,
         });
+        meshLines(g.knots[j], { part: k.part(`sweep${j}`), channel: 1, weight: 1.1 }, next);
       }
       // A dark base plate under it, and the a slider in front.
       const baseY = -SURF_H - 0.12;
@@ -3139,7 +3224,8 @@ Object.assign(RECIPES, {
           return col;
         },
       });
-      if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22], { exact: true });
+      PLOT_SLIDERS["surface-plotter"] = g.usesA ? [0.12, baseY - 0.05, 1.22] : null;
+      if (g.usesA) plotSlider(k, PLOT_SLIDERS["surface-plotter"], { exact: true });
     },
   },
 });

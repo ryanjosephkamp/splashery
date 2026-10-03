@@ -116,17 +116,24 @@ function fruitCore(k, at, r, color, part = 0) {
 }
 
 // A flat, closed underside: a disc facing down at height y, round (cx, cz).
+// Two layers a hair apart, the upper one turned so its splats fall in the
+// lower one's gaps: one layer of splats lets the toy above show through.
 function underDisc(k, [cx, y, cz], r, color, opts = {}) {
-  k.add(evenDisc(k, r, 0, opts.grid ?? 64), {
-    even: true,
-    opacity: 1,
-    jitter: 0.01,
-    pos: [cx, y, cz],
-    rot: [180, 0, 0],
-    flat: 0.2,
-    pattern: false,
-    color: opts.color || (() => color),
-  });
+  for (const [dy, turn] of [
+    [0, 0],
+    [0.012, 13],
+  ])
+    k.add(evenDisc(k, r, 0, opts.grid ?? 64), {
+      even: true,
+      opacity: 1,
+      jitter: 0.01,
+      pos: [cx, y + dy, cz],
+      rot: [180, turn, 0],
+      flat: 0.2,
+      size: opts.size ?? 1.3,
+      pattern: false,
+      color: opts.color || (() => color),
+    });
 }
 
 // The tomatoes on their plate: name, x, z, radius (from a top view).
@@ -853,7 +860,7 @@ export const RIGS = {
     // The plate's underside: a white glazed foot and floor, so the plate
     // reads solid from below (lane Sharpness B).
     addon: {
-      count: 14000,
+      count: 30000,
       build(k) {
         k.add(
           k.param(
@@ -864,7 +871,7 @@ export const RIGS = {
             },
             { grid: 64, normal: () => [0, -1, 0] },
           ),
-          { even: true, opacity: 1, jitter: 0.01, flat: 0.2, pattern: false, color: () => "#d9d7d1" }, // prettier-ignore
+          { even: true, opacity: 1, jitter: 0.01, flat: 0.2, size: 1.3, pattern: false, color: () => "#d9d7d1" }, // prettier-ignore
         );
         underDisc(k, [-0.03, -0.225, 0.02], 0.86, "#cfccc4", { grid: 80 });
       },
@@ -881,10 +888,12 @@ export const RIGS = {
         name: "fringe",
         pivot: [0, -0.4, 0],
         regions: [
-          { at: [0, -0.43, 0], r: [2.5, 0.21, 2.5] },
+          { at: [0, -0.43, 0], r: [2.5, 0.23, 2.5] },
           // The tomatoes' reflections baked into the glaze under the plate's
           // top (red stains seen from below), in a thin band only.
           { at: [0, -0.2, 0], r: [1.2, 0.045, 1.2], color: "#9a3a34", tol: 0.5 },
+          // Dark and red needles hanging just under the plate's middle.
+          { at: [0, -0.21, 0], r: [0.8, 0.035, 0.8], notColor: "#eeeeea", tol: 0.25 },
         ],
       },
     ],
@@ -948,12 +957,12 @@ export const RIGS = {
   basket: {
     // A woven floor (lane Sharpness B): the capture is open underneath.
     addon: {
-      count: 12000,
+      count: 30000,
       build(k) {
-        underDisc(k, [0.03, -0.17, -0.02], 0.8, "#8a6338", {
+        underDisc(k, [0, -0.205, 0], 0.89, "#8a6338", {
           color: (c) => {
-            const x = c.p[0] - 0.03;
-            const z = c.p[2] + 0.02;
+            const x = c.p[0];
+            const z = c.p[2];
             const r = Math.hypot(x, z);
             const a = Math.atan2(z, x);
             // Coiled rows of cane like the basket's wall (no spokes: they
@@ -1828,14 +1837,14 @@ export const RIGS = {
     // It rides on the body, so it rocks and rolls with the can. Laid on a
     // sunflower spiral (an even grid of rings showed a ripple).
     addon: {
-      count: 9000,
+      count: 10000,
       build(k) {
-        const c0 = [-0.04, -0.905, -0.02];
-        const R = 0.57;
+        const c0 = [0, -0.905, -0.012];
+        const R = 0.6;
         k.cloud({ share: 1, pattern: false }, (rand, i, n) => {
           const r = R * Math.sqrt((i + 0.5) / n);
           const a = i * 2.399963229728653;
-          const ridge = r > 0.53 ? 0.82 : r > 0.47 ? 1 : r > 0.3 && r < 0.34 ? 0.9 : 0.95;
+          const ridge = r > 0.56 ? 0.82 : r > 0.5 ? 1 : r > 0.32 && r < 0.36 ? 0.9 : 0.95;
           return {
             p: [c0[0] + r * Math.cos(a), c0[1], c0[2] + r * Math.sin(a)],
             n: [0, -1, 0],
