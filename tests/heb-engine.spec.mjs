@@ -91,6 +91,20 @@ test("hinge: a lid swings up after the finger, falls shut by its weight, stays o
   expect(s.h.state().moved).toBe(false);
 });
 
+test("hinge: a part shown open by its controls starts open, and ↺ brings it back open", () => {
+  const s = play({ hands: { floor: -1, joints: [{ type: "hinge", part: "lid", pivot: [-0.5, 0, 0], axis: [0, 0, 1], min: 0, max: 1.95, start: (c) => 1.95 * c.open, pos: [0, 0, 0], pick: [0.5, 0.2, 0.3] }] } }); // prettier-ignore
+  s.player.motion.state = { open: 1 };
+  // The lid as shown: upright past the hinge, its middle above it.
+  s.drag(-0.6, 0.45, -0.3, 0.4, 0.4);
+  expect(s.j().v).toBeGreaterThan(1.2);
+  expect(s.j().v).toBeLessThan(1.95);
+  s.up();
+  s.h.reset();
+  s.run(0.6);
+  expect(s.j().v).toBeCloseTo(1.95, 6);
+  expect(s.h.state().moved).toBe(false);
+});
+
 test("hinge: a spring brings it home, and the stops hold", () => {
   const s = play({ hands: { floor: -1, joints: [{ type: "hinge", part: "flap", pivot: [0, 0, 0], axis: [0, 0, 1], min: -0.5, max: 0.5, spring: 60, damping: 4, gravity: false, pos: [0.4, 0, 0], pick: [0.3, 0.2, 0.2] }] } }); // prettier-ignore
   s.drag(0.4, 0, 0.1, 0.6, 0.5); // pulled far past its stop

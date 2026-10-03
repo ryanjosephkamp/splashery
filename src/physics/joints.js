@@ -102,8 +102,8 @@ export class Joints {
     const data = hands.player.proc?.ctx?.kit?.data;
     const defs = typeof def.joints === "function" ? def.joints(data, hands.info) : def.joints;
     for (const d of defs || []) this.add(d);
-    // A driven part's parent first, so it poses before its children.
-    this.list.sort((a, b) => depth(a) - depth(b));
+    this.link();
+    this.refresh();
     // Glued pieces (a piece not yet broken off, and the one it hangs on)
     // never push each other.
     const base = world.pairs;
@@ -151,6 +151,21 @@ export class Joints {
     this.byName.set(name, j);
     if (d.part !== undefined) this.byName.set(d.part, j);
     return j;
+  }
+
+  // Where each driven part is now as the recipe shows it (`start`, from
+  // its controls: a music box's lid built shut but shown open). Read
+  // whenever nothing has been moved by hand.
+  refresh() {
+    const c = this.hands.player.motion?.state || {};
+    for (const j of this.list) {
+      if (!j.d.start || j.held || j.v === undefined || j.type === "break" || j.type === "socket") continue; // prettier-ignore
+      j.homeV = j.d.start(c, this.hands.info) || 0;
+      j.v = j.homeV;
+      j.w = 0;
+      j.stuck = !!j.d.stick && Math.abs(j.v) < 1e-6;
+      this.pose(j);
+    }
   }
 
   link() {
@@ -240,6 +255,7 @@ export class Joints {
   // when a joint takes the hold (Hands-on then leaves it to us).
   grab(body, hit, x, y) {
     this.link();
+    if (!this.hands.moved) this.refresh();
     const j = this.joint(body);
     if (!j) return false;
     if (j.type === "socket") {
@@ -460,8 +476,8 @@ export class Joints {
   // One fixed step (seconds) before the world's. Returns true while
   // anything here moves.
   step(dt) {
-    this.link();
     this.time += dt;
+    if (!this.hands.moved && !this.hands.homing) this.refresh();
     let busy = false;
     if (this.upright) return this.rightStep(dt);
     const g = this.world.gravity;
@@ -685,8 +701,8 @@ export class Joints {
       if (j.homeFrom === undefined || e < (j.homeE ?? 1)) j.homeFrom = j.v;
       j.homeE = e;
       // A dial goes the short way round to a turn that looks the same.
-      let to = 0;
-      if (j.type === "dial" && !Number.isFinite(j.min)) to = TAU * Math.round(j.homeFrom / TAU);
+      let to = j.homeV ?? 0;
+      if (j.type === "dial" && !Number.isFinite(j.min)) to += TAU * Math.round((j.homeFrom - to) / TAU); // prettier-ignore
       j.v = j.homeFrom + (to - j.homeFrom) * e;
       j.w = 0;
       j.wig = 0;
@@ -717,11 +733,11 @@ export class Joints {
     for (const j of this.list) {
       j.held = null;
       if (j.type === "hinge" || j.type === "slider" || j.type === "dial") {
-        j.v = 0;
+        j.v = j.homeV ?? 0;
         j.w = 0;
         j.wig = 0;
         j.moving = false;
-        j.stuck = !!j.d.stick;
+        j.stuck = !!j.d.stick && Math.abs(j.v) < 1e-6;
         j.awake = false;
         j.homeFrom = undefined;
         j.homeE = undefined;

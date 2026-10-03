@@ -662,6 +662,9 @@ Keys every joint takes:
 - `pos`: the part's middle (where the finger finds it); `pick`: the radii `[x, y, z]` of the
   ellipsoid about `pos` a press finds it in (the part's rough size).
 - `pivot`: the part's pivot exactly as given to `k.part` (Hands-on turns the part about it).
+- `start(c, info)`: for a hinge, slider or dial, its value as the recipe's `drive` shows it now (`c`
+  the eased controls), when that differs from the part as built: a music box built shut but shown
+  open says `start: (c) => 1.95 * ease3(c.open)`. ↺ brings it back there.
 - `sound(ev, vol)`: the cue for an event (null for silence); `ev.kind` is `"stop"` (a hinge or
   slider hit a stop), `"detent"` (a dial passed a click), `"free"` (a stuck slider came loose),
   `"socket"` (clicked into place) or `"snap"` (broke off). Without it a quiet default plays (thud,
