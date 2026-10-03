@@ -76,10 +76,59 @@ UI r5, Fix7 and the Integrators); you don't touch their files.
   endings, dates like "October 3, 2026").
 - Read first: CLAUDE.md, docs/OPERATING.md ("Steps for a lane"), docs/research/PHOTOREAL.md,
   docs/handoff/Photoreal.md and CREDITS.md.
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+Model: Sonnet 5.5, default effort, no helper. Updated October 3, 2026.
 
-Starting, October 3, 2026.
+### Done
+
+- **30 toys** on the Photoreal shelf, all behind the labs switch (`labs: true`), in
+  `src/packs/photoreal-r2.js` (metadata only; spread into `src/toys.js`). Each has a full and a lite
+  SOG (`tools/pr2-prepare.mjs`, entries with `"pack": "pr2"` in `tools/assets.json`), a thumbnail, a
+  credit (author, license, link) in the app, in CREDITS.md and in `tools/assets.json`, a how-to line
+  and About text (`src/toy-help.js`), a sound (`src/toy-sounds.js`) and a plan entry
+  (`tools/toy-plan.json`, `docs/TOY-PLAN.md` regenerated).
+- **Licenses**: each read from the scene's live page on October 3, 2026 (`rel="license"` link). 27
+  are CC BY 4.0. Three are NonCommercial and tagged `"nc": true`: dog plush (CC BY-NC), desk globe
+  (CC BY-NC), cherry blossom (CC BY-NC-SA, also ShareAlike; never merged with another asset). No ND,
+  no BY-SA.
+- **`tools/nc-assets.mjs`** (list, `--json`, `--check`) and `tests/pr2.spec.mjs` (runs the check,
+  and checks files, credits, help, sounds, thumbnails).
+- Effect review cards: see the PR body.
+
+### How the toys were picked
+
+From the 77 scenes in docs/research/PHOTOREAL.md plus a few more found by search, every one rendered
+from four sides first. Left out: scenes with no license on their page (lemon, jug, cake, mug and
+others: all rights reserved, so private only), scenes that show a brand or a game character (the
+Bedford trucks, a purple plush from a horror game, Vespa, KTM, VW, Eicher, Ferguson), whole places
+and rooms (landmarks, terrain), anything with people, anatomy and skulls (they go to the owner
+first), and ones that rendered badly (acorn, helicopter, owl on its wall, the stone, the penguin and
+frogs). Three scenes made from someone else's video were not touched.
+
+### Sizing
+
+Like the first twelve scans: rotated upright, recentred, scaled to radius 0.9, decimated to at most
+350,000 splats (100,000 lite; small sources keep what they have), written as SOG. The full files are
+0.2 to 4.9 MB and the lite ones 0.1 to 1.3 MB. Spherical harmonics: the sources of 28 scenes carry
+them, but only the crystal and the desk globe (shiny things) keep one band on the full file; the
+rest drop them as the first twelve scans do (the size and a half hour of CPU per file on the SOG
+encoder; the alum crystal's source has none). No capture files go through the embed test.
+
+### Known issues
+
+- A tap only hops them: no capture here has a part that can move cleanly (effect rules), so there is
+  no tap effect.
+- A few frame small (sushi boat, cherry blossom trees, murex shell) because they are scaled by their
+  longest side; the elephant faces away at the default camera.
+- Dropped spherical harmonics make glossy faces (the puffin's head) look flatter than on SuperSplat.
+- `tests/help.spec.mjs` "the line stays clear of the toy at 1440x900" failed once while clips were
+  rendering in parallel (a timing flake; it does not touch these toys, and it passes alone).
+- SuperSplat scenes marked "streamed (LOD)" need `splat-transform -L 0 .../lod-meta.json`
+  (`"lod": 0` on the entry); the research doc said they could not be used.
+
+### Lessons
+
+- `tools/splat-views.mjs` names its work files after the input's file name, so inputs that are all
+  called `meta.json` overwrite each other when run in parallel: copy each to its own `.ply` first.
+- A SuperSplat page with no `rel="license"` link has no license stated.
