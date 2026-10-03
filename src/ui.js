@@ -2999,6 +2999,60 @@ export function createUI(app) {
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => els.toast.classList.remove("show"), ms);
     },
+    // Lane Books r5: a link in a page asks before it opens. The address
+    // shows in full; Open is a real link (a new tab, with no access back to
+    // this page), so it opens from the visitor's own tap on every browser.
+    // Only addresses Pictures.openLink let through (http:, https:, mailto:).
+    confirmLink(url) {
+      let u;
+      try {
+        u = new URL(url);
+      } catch {
+        return;
+      }
+      if (!["http:", "https:", "mailto:"].includes(u.protocol)) return;
+      let bar = document.getElementById("link-confirm");
+      if (!bar) {
+        bar = document.createElement("div");
+        bar.id = "link-confirm";
+        bar.className = "link-confirm";
+        bar.setAttribute("role", "dialog");
+        bar.setAttribute("aria-label", "Open a link");
+        const text = document.createElement("p");
+        text.className = "link-confirm-text";
+        const addr = document.createElement("p");
+        addr.className = "link-confirm-url";
+        const row = document.createElement("div");
+        row.className = "button-row";
+        const open = document.createElement("a");
+        open.className = "button primary";
+        open.id = "link-confirm-open";
+        open.target = "_blank";
+        open.rel = "noopener noreferrer";
+        open.textContent = "Open";
+        const cancel = document.createElement("button");
+        cancel.type = "button";
+        cancel.id = "link-confirm-cancel";
+        cancel.textContent = "Cancel";
+        const close = () => (bar.hidden = true);
+        open.addEventListener("click", () => setTimeout(close, 0));
+        cancel.addEventListener("click", close);
+        bar.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") close();
+        });
+        row.append(open, cancel);
+        bar.append(text, addr, row);
+        document.body.appendChild(bar);
+      }
+      const name = u.protocol === "mailto:" ? `Write to ${decodeURIComponent(u.pathname)}?` : `Open ${u.hostname.replace(/^www\./, "")}?`; // prettier-ignore
+      bar.querySelector(".link-confirm-text").textContent = name;
+      bar.querySelector(".link-confirm-url").textContent = u.href;
+      const open = bar.querySelector("#link-confirm-open");
+      open.href = u.href;
+      open.target = u.protocol === "mailto:" ? "_self" : "_blank";
+      bar.hidden = false;
+      open.focus({ preventScroll: true });
+    },
     progress: {
       show(label) {
         els.progressLabel.textContent = label || "Loading…";
