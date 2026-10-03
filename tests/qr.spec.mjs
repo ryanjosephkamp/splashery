@@ -326,7 +326,7 @@ test("low contrast and inverted codes are warned about", async ({ page }) => {
     const c = (await qr.set({ style: "classic" })).warnings;
     return { a, b, c };
   });
-  expect(w.a.join(" ")).toMatch(/Low contrast/);
+  expect(w.a.join(" ")).toMatch(/(Low|Too little) contrast/);
   expect(w.b.join(" ")).toMatch(/inverted/);
   expect(w.c).toEqual([]);
 });

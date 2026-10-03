@@ -260,11 +260,16 @@ screen.
   saved scene carry what the code holds.
 - **Full screen** (a panel button; `qr.fullScreen()` in the hook): the code alone in Scan view on
   its own background, filling the screen, so another phone can scan it. Esc or a tap closes it.
-- **Defaults from the scan lab's provisional scorecard** (reference drawings, not this toy; to be
-  replaced by its measurements of the toy): Auto error correction is M for Classic and H for the
-  shaped styles; the contrast warning is at 4.5:1 for Classic, Dots and Rounded and 7:1 for Bricks,
-  Gems, Bubbles and Neon; a warning shows when the code is drawn under about 4 pixels per module on
-  the screen.
+- **Defaults from the scan lab's measured scorecard** (`docs/audits/qr-scan-lab-2026-10.md` on
+  `claude/lane-qr-lab`, measured against this toy at `f86e088`; 3,768 captures read by jsQR and
+  zxing): Auto error correction is **M for every style** (on phone-like captures every style read
+  100% at L and M; Q and H make denser codes, and dense depth codes failed first). Contrast: a
+  warning below 4:1 and a strong one below 3:1. Module size: a warning under 4 pixels per module on
+  the screen, 6 for Bricks, Gems and Neon. Density: a warning at version 8 or more in a depth style.
+  Light on dark: "most phone cameras read it, some scanner apps don't", and Bricks or Gems light on
+  dark is called out as unreadable. Bricks and Gems show a "hold the phone flat" hint. The advice
+  after a failed check suggests a shorter text, not a higher level, for depth styles. (For a few
+  hours before the measured scorecard, the provisional one set H for shaped styles; that is gone.)
 
 ### Clips and cards
 

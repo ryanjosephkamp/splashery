@@ -27,16 +27,20 @@ import * as pc from "../pc.js";
 const exportsJS = () => import("../exports.js");
 
 export const DEFAULT_TEXT = "https://ryanjosephkamp.github.io/splashery/";
-// The scan lab's scorecard (lane QR scan lab, docs/audits/qr-scan-lab-2026-10.md
-// on its branch; provisional figures of October 3, 2026, to be replaced by
-// its measurements of this toy): styles that change the modules' shape or
-// light scan far more often at level H (30% may be lost) than at L, M or Q;
-// Classic is fine at M. Shaped styles need more contrast, and modules under
-// about 4 pixels on screen stop scanning.
-const SHAPED = new Set(["dots", "rounded", "bricks", "gems", "bubbles", "neon"]);
-export const eccFor = (o) => (o.ecc && o.ecc !== "auto" ? o.ecc : SHAPED.has(o.style) ? "H" : "M");
-const FLAT_STYLES = new Set(["classic", "dots", "rounded"]);
-export const minContrast = (o) => (FLAT_STYLES.has(o.style || "classic") ? 4.5 : 7);
+// Defaults and warnings from the QR scan lab's measured scorecard of this
+// toy (docs/audits/qr-scan-lab-2026-10.md on its branch, October 3, 2026:
+// 3,768 captures, read by jsQR and zxing):
+// - level M for every style: on phone-like captures every style read 100%
+//   at L and M, while Q and H (denser codes) were where depth styles failed;
+// - contrast: reliable from 4:1 (gray at 4.0:1 read 96-98%), poor below 3:1;
+// - at least 4 pixels per module on screen, 6 for the depth-heavy styles;
+// - version 8 or more in a depth style drops sharply (77% for a long text);
+// - light on dark: most phone cameras read it, some scanner apps don't, and
+//   Bricks or Gems light on dark never read.
+export const eccFor = (o) => (o.ecc && o.ecc !== "auto" ? o.ecc : "M");
+export const minContrast = () => 4;
+const DEPTH = new Set(["bricks", "gems", "neon", "bubbles"]);
+const minModulePx = (o) => (["bricks", "gems", "neon"].includes(o.style) ? 6 : 4);
 export const MIN_MODULE_PX = 4;
 
 const MOTIONS = ["assemble", "flip", "burst"];
@@ -384,13 +388,24 @@ function describe(o) {
 export function colorWarnings(o) {
   const { ratio, inverted } = codeContrast(o);
   const out = [];
-  const need = minContrast(o);
-  if (ratio < need)
-    out.push(`Low contrast (${ratio.toFixed(1)} : 1). Cameras read a code by telling its dark modules from its light ones; for this style, below about ${need} : 1 many can't. Make the code darker or the background lighter.`); // prettier-ignore
-  if (inverted)
-    out.push(o.style === "neon"
-      ? "Neon on a dark wall is light on dark (an inverted code). Many readers skip those: put it on a pale wall (the button above) for a code every reader takes."
-      : "The code is lighter than its background (an inverted code). Not every reader scans those: dark on light is the safe choice."); // prettier-ignore
+  if (ratio < 3)
+    out.push(`Too little contrast (${ratio.toFixed(1)} : 1): many cameras won't read it. Cameras read a code by telling its dark modules from its light ones; make the code darker or the background lighter (4 : 1 or more).`); // prettier-ignore
+  else if (ratio < 4)
+    out.push(`Low contrast (${ratio.toFixed(1)} : 1). Cameras read a code by telling its dark modules from its light ones, and below about 4 : 1 some can't. Make the code darker or the background lighter.`); // prettier-ignore
+  if (inverted) {
+    if (o.style === "bricks" || o.style === "gems")
+      out.push("Light on dark doesn't work for this style: in the scan lab no reader read light-on-dark Bricks or Gems. Use a dark code on a light background."); // prettier-ignore
+    else
+      out.push(o.style === "neon"
+        ? "Neon on a dark wall is light on dark (an inverted code): most phone cameras read it, some scanner apps don't. Put it on a pale wall (the button above) for a code every reader takes."
+        : "The code is lighter than its background (an inverted code): most phone cameras read it, some scanner apps don't. Dark on light is the safe choice."); // prettier-ignore
+  }
+  if (QR.code && DEPTH.has(o.style) && QR.code.version >= 8)
+    out.push(`This is a large code (version ${QR.code.version}) in a style with depth, and those scan less often. A shorter text or a flatter style (Classic, Dots, Rounded) scans more surely.`); // prettier-ignore
+  if (o.style === "bricks" || o.style === "gems")
+    out.push(
+      "Hold the phone flat to the code: with real depth, Bricks and Gems read less well from an angle.",
+    );
   return out;
 }
 
@@ -557,8 +572,8 @@ function renderPanel() {
       info.textContent = QR.error ? `${QR.error} The code shows the start of it.` : describe(o);
       const w = colorWarnings(o);
       const px = modulePx();
-      if (px && px < MIN_MODULE_PX)
-        w.push(`On this screen the code is drawn at about ${px.toFixed(1)} pixels per module; readers need about ${MIN_MODULE_PX}. Use Full screen, a bigger window, or a shorter text (a smaller code).`); // prettier-ignore
+      if (px && px < minModulePx(o))
+        w.push(`On this screen the code is drawn at about ${px.toFixed(1)} pixels per module; readers need about ${minModulePx(o)} for this style. Use Full screen, a bigger window, or a shorter text (a smaller code).`); // prettier-ignore
       if (missingSecret(o))
         w.unshift("This Wi-Fi code has no password yet: passwords stay out of links and saved scenes, so type it again and tap Make the code."); // prettier-ignore
       warn.textContent = w.join(" ");
@@ -583,8 +598,10 @@ const short = (s) => (s.length > 60 ? `${s.slice(0, 57)}…` : s);
 
 function advice(o) {
   const tips = [];
-  if (eccFor(o) !== "H") tips.push("raise the error correction (Q or H)");
-  if (codeContrast(o).ratio < minContrast(o) + 2) tips.push("use more contrast");
+  // Higher levels make a denser code, which hurts the depth styles (scan lab).
+  if (DEPTH.has(o.style)) tips.push("use a shorter text");
+  else if (eccFor(o) !== "H") tips.push("raise the error correction (Q or H)");
+  if (codeContrast(o).ratio < 5) tips.push("use more contrast");
   if (o.style !== "classic") tips.push("pick a flatter style (Classic or Rounded)");
   if (o.gradient && o.gradient !== "none") tips.push("drop the gradient");
   if (!tips.length) return "Try a shorter text.";
@@ -614,7 +631,7 @@ export const RECIPES = {
         type: "select",
         default: "auto",
         choices: [
-          { id: "auto", label: "Auto (M for Classic, H for the shaped styles)" },
+          { id: "auto", label: "Auto (M, which the scan lab found best)" },
           { id: "L", label: "L: 7% can be lost" },
           { id: "M", label: "M: 15%" },
           { id: "Q", label: "Q: 25%" },
