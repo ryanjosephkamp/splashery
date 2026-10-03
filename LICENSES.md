@@ -203,6 +203,11 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
 - `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
   https://github.com/pngjs/pngjs: decode those models' textures in `tools/mesh-to-splats.mjs`, and
   put the before-and-after sharpness crops side by side in `tools/sharpness-pairs.mjs`.
+- `jsqr` 1.4.0 (Apache-2.0), https://github.com/cozmo/jsQR, and `@zxing/library` 0.21.3
+  (Apache-2.0), https://github.com/zxing-js/library: the two independent QR readers in the QR scan
+  lab (`tools/qr-scan-lab.mjs`, `tests/qrl.spec.mjs`). `qrcode-generator` 2.0.4 (MIT),
+  https://github.com/kazuhikoarase/qrcode-generator: draws its reference codes. Nothing of them is
+  served.
 - `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
   the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
   Chromium at build time. Nothing of three.js is served.
