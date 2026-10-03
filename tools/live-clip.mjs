@@ -11,7 +11,7 @@
 //     [--depth] [--strip=8] [--sheet=full] [--report=<js whose result is printed after>]
 //     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value] [--turn=t0,t1,radians]
 //     [--song=<sound file>] [--clock] [--dpr=1] [--frames=<dir>]
-//     [--label=<text>] [--tilt=t0,t1,radians]
+//     [--label=<text>] [--tilt=t0,t1,radians] [--profile=mid]
 //
 // The page's clock is stepped by hand (as tools/effect-clip.mjs does), so a
 // clip shows the toy at its real speed however slow the renderer is.
@@ -174,7 +174,7 @@ if (flag("screen-demo")) {
     };
   });
 }
-await page.goto(`${base}?renderer=webgl2&profile=mid&adapt=off&labs=1`);
+await page.goto(`${base}?renderer=webgl2&profile=${opt("profile", "mid")}&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(async (toy) => {
   const { app, player } = window.__splashery;

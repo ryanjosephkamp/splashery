@@ -263,10 +263,10 @@ The Screen (a labs toy, lane Screens) opens with two samples:
 
 Moving photo to 3D (a labs toy, lane Live input r3) opens with the same Big Buck Bunny scene (©
 Blender Foundation, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), checked on
-peach.blender.org on October 2, 2026): 48 frames of it at 256 by 144, tiled into
-`assets/toys/moving-photo-3d/bunny-frames.jpg`, with each frame's depth worked out by the vendored
-depth model (`bunny.depth`, made by `tools/live3-depth.mjs`). GIFs and videos people open in it are
-read in their browser and never uploaded.
+peach.blender.org on October 2, 2026): 48 frames of it at 640 by 360, tiled into
+`assets/toys/moving-photo-3d/bunny-sheet-1.jpg` to `-4.jpg`, with each frame's depth worked out by
+the vendored depth model (`bunny.depth`, made by `tools/live3-depth.mjs`). GIFs and videos people
+open in it are read in their browser and never uploaded.
 
 The Gaussian splatting toy (a labs toy, lane Screens) learns the photo "Strawberry on white
 background" by Joselodos
