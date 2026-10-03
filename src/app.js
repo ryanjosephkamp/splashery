@@ -325,8 +325,11 @@ class App {
     const toyEntry = scene.toy.kind === "builtin" ? findToy(scene.toy.id) : null;
     // UI r5: an entry's tilt: "free" starts unlocked even on a shelf that holds still.
     const still = !!toyEntry && holdsStill(toyEntry) && toyEntry.tilt !== "free";
-    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
+    // Lane Live input r3: a recipe's own tiltLock (true or false) wins over that.
+    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : (info.recipe?.tiltLock ?? still); // prettier-ignore
     player.camera.setTiltLock(lock);
+    // Lane Live input r3: a toy's own tilt range (recipe.pitchRange), or none.
+    player.camera.setPitchRange(info.recipe?.pitchRange ?? null);
     ui.setTiltLock(lock);
     // Lane Physics: Hands-on starts on for a toy that is hands-on already,
     // or as it was left on this toy earlier in the visit.

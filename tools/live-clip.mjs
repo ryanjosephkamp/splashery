@@ -11,6 +11,7 @@
 //     [--depth] [--strip=8] [--sheet=full] [--report=<js whose result is printed after>]
 //     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value] [--turn=t0,t1,radians]
 //     [--song=<sound file>] [--clock] [--dpr=1] [--frames=<dir>]
+//     [--label=<text>] [--tilt=t0,t1,radians]
 //
 // The page's clock is stepped by hand (as tools/effect-clip.mjs does), so a
 // clip shows the toy at its real speed however slow the renderer is.
@@ -32,6 +33,10 @@
 // frame as a PNG into the folder (frame-0000.png, …) instead of the GIF, for
 // an MP4 without the GIF's 256 colors (ffmpeg -framerate <fps> -i
 // <dir>/frame-%04d.png …).
+// r3: --label puts a small badge on the page ("Built by Opus 5.5"); a dot
+// shows where a finger is: `--at` code can call __tap("<selector>") (a dot on
+// that button for half a second of the clip), and --turn and --tilt (one
+// slow, even tilt of the view, up or down) draw a dot moving as a drag would.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -313,6 +318,39 @@ if (flag("clock"))
       "position:fixed;left:50%;transform:translateX(-50%);top:92px;z-index:99;font:600 13px system-ui;background:#000a;color:#fff;padding:3px 9px;border-radius:10px";
     document.body.append(d);
   });
+// r3: the badge and the finger dot.
+await page.evaluate(
+  (label) => {
+    if (label) {
+      const b = document.createElement("div");
+      b.textContent = label;
+      b.style.cssText = "position:fixed;left:8px;top:68px;z-index:99;font:600 11px system-ui;background:#000b;color:#fff;padding:3px 8px;border-radius:9px;pointer-events:none"; // prettier-ignore
+      document.body.append(b);
+    }
+    const dot = document.createElement("div");
+    dot.id = "clip-finger";
+    dot.style.cssText = "position:fixed;z-index:100;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:#ff3b30aa;border:2px solid #fff;box-shadow:0 0 0 2px #0004;pointer-events:none;display:none"; // prettier-ignore
+    document.body.append(dot);
+    window.__clipT = 0;
+    window.__dotUntil = -1;
+    window.__dotAt = (x, y, secs = 0.5) => {
+      dot.style.left = `${x}px`;
+      dot.style.top = `${y}px`;
+      dot.style.display = "block";
+      window.__dotUntil = window.__clipT + secs;
+    };
+    window.__tap = (sel) => {
+      const el = document.querySelector(sel);
+      const r = el?.getBoundingClientRect();
+      if (r && r.width) window.__dotAt(r.left + r.width / 2, r.top + r.height / 2);
+      el?.click();
+    };
+    window.__dotTick = () => {
+      if (window.__clipT > window.__dotUntil) dot.style.display = "none";
+    };
+  },
+  opt("label", ""),
+);
 // Take over the clock.
 await page.evaluate(() => {
   const { player } = window.__splashery;
@@ -332,9 +370,38 @@ const total = Math.round((before + secs) / step);
 let depthMs = [];
 // --turn=t0,t1,radians: one slow, even turn of the view between t0 and t1.
 const turn = opt("turn", "") ? opt("turn", "").split(",").map(Number) : null;
+const tilt = opt("tilt", "") ? opt("tilt", "").split(",").map(Number) : null;
 let turned = 0;
+let tilted = 0;
 for (let n = 0; n < total; n++) {
   const t = n * step - before;
+  await page.evaluate((t) => (window.__clipT = t), t);
+  // The finger: a dot moving as the drag does (the middle of the stage).
+  for (const [move, axis] of [
+    [turn, 0],
+    [tilt, 1],
+  ]) {
+    if (!move || t < move[0] - 0.15 || t > move[1] + 0.15) continue;
+    const f = Math.max(0, Math.min(1, (t - move[0]) / (move[1] - move[0])));
+    await page.evaluate(({ f, axis, sign }) => {
+      const r = document.getElementById("stage").getBoundingClientRect();
+      const d = (f - 0.5) * 160 * sign;
+      window.__dotAt(r.left + r.width / 2 + (axis ? 0 : d), r.top + r.height * 0.4 + (axis ? d : 0), 0.1);
+    }, { f, axis, sign: Math.sign(move[2]) || 1 }); // prettier-ignore
+  }
+  if (tilt) {
+    const [t0, t1, rad] = tilt;
+    const f = Math.max(0, Math.min(1, (t - t0) / (t1 - t0)));
+    const want = rad * (0.5 - 0.5 * Math.cos(Math.PI * f));
+    if (Math.abs(want - tilted) > 1e-6) {
+      await page.evaluate((d) => {
+        const c = window.__splashery.player.camera;
+        const s = c.getState();
+        c.setState({ ...s, pitch: c.clampPitch ? c.clampPitch(s.pitch + d) : s.pitch + d }, { snap: true }); // prettier-ignore
+      }, want - tilted);
+      tilted = want;
+    }
+  }
   if (turn) {
     const [t0, t1, rad] = turn;
     const f = Math.max(0, Math.min(1, (t - t0) / (t1 - t0)));
@@ -371,6 +438,7 @@ for (let n = 0; n < total; n++) {
     async ({ step, audio }) => {
       if (audio) window.__feed(step);
       if (window.__song?.on) window.__song.t += step;
+      window.__dotTick?.();
       window.__pending = step;
       const { player } = window.__splashery;
       await player.stage.captureFrame();
