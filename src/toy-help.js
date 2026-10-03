@@ -89,7 +89,7 @@ export const TOY_HELP = {
   },
   tomatoes: {
     howTo:
-      "Tap it to make the tomatoes hop and rock. With ✋ on, drag a tomato to pick it up and set it down.",
+      "Tap it to make the tomatoes hop and rock. With ✋ on, drag a tomato to lift it and set it down.",
     about:
       "Tomatoes are the fruit of a plant that first grew wild in western South America. They are cooked and eaten like vegetables, but to a botanist a tomato is a berry: a juicy fruit that grows from a flower and holds many seeds.\n\nTap it and the plate gives a little shake: a wave of small hops runs around it, and the tomatoes land in four groups, rock outward and settle with a wobble. There are thousands of kinds of tomato, from tiny cherry tomatoes to ones bigger than a fist, in red, yellow, orange, green and purple. With ✋ Hands-on on, drag any tomato to lift it on its own and set it down on the plate or on another; reset puts them all back.",
   },
