@@ -28,7 +28,7 @@ const LOOKS = {
   syrup: { color: [0.55, 0.25, 0.06], scatter: 0.1, absorb: [2, 6, 14], glow: 0 },
   honey: { color: [0.86, 0.55, 0.1], scatter: 0.18, absorb: [0.8, 3.2, 12], glow: 0 },
   // (heat: seconds for its skin to crust over; surface.js draws the crust)
-  lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9, heat: 1.6 },
+  lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9, heat: 3.5 },
 };
 
 // A prop for the surface pass: 5 texels (type, radii, angle; a or center;

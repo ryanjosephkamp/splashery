@@ -1105,7 +1105,9 @@ fn sceneAt(uv: vec2f) -> vec3f {
       let vein = 1.0 - smoothstep(0.0, 0.05, abs(vnoise(Pt3 * 11.0) - 0.5));
       // (cooled pahoehoe: a glassy dark gray that shows the room's light)
       let crust = vec3f(0.13, 0.12, 0.12) * (0.45 + 0.55 * max(dot(n, L), 0.0)) * (0.75 + 0.5 * nz) + vec3f(spec * 0.6) + refl * (0.08 + F * 0.6);
-      let glow = lavaRamp(heat + 0.06 * (nz - 0.5));
+      // (molten lava is lit from within; its skin is a touch cooler where
+      // it curves away, and a little uneven)
+      let glow = lavaRamp(heat - 0.12 * (1.0 - abs(nV.z)) + 0.08 * (nz - 0.5)) * (0.85 + 0.15 * nz) + vec3f(spec * 0.3);
       let under = lavaRamp(min(1.0, heat * 1.6 + 0.12)) * vein * smoothstep(0.02, 0.2, heat);
       liq = mix(glow, crust + under, crustAmt);
     }

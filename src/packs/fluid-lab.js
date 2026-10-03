@@ -26,7 +26,7 @@ export const LIQUID_LOOKS = {
   // (gpuRadius: the GPU liquid's particles are small enough for a real
   // honey pour's thin thread)
   honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.04 }, pour: 3.2 },
-  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.045 }, pour: 3.2 },
+  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.055 }, pour: 3.2 },
 };
 
 // The glass (recipe units, standing on y = 0).
@@ -159,7 +159,7 @@ function splashScene(k, o) {
         at: [0.03, 0.95, 0.02],
         radius: 0.1,
         vel: [0, -2, 0],
-        shape: [1.22, 0.85, 1.12, 0.55],
+        shape: [1.4, 0.8, 1.28, 0.42],
       },
       friction: 0.025,
       tension: 0,
