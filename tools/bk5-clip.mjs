@@ -11,7 +11,8 @@
 // figure of the sample manual rising and lying back), box (a box drawn round
 // a table, rising), photo-pop (a PDF photo rising with its depth), album-pop
 // (an album photo rising with its depth, then the other photo of the page).
-// Writes <out-dir>/bk5-<scene>.gif and a strip of six frames. The test PDF
+// --dpr=1 renders at one device pixel per CSS pixel (default 2). Writes
+// <out-dir>/bk5-<scene>.gif and a strip of six frames. The test PDF
 // is made by tests/fixtures/bk5/make-pdf.mjs.
 
 import { chromium } from "@playwright/test";
@@ -66,7 +67,7 @@ function shrink(png, w) {
 
 async function record(scene) {
   const width = Number(opt("width", 360));
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); // prettier-ignore
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: Number(opt("dpr", 2)) }); // prettier-ignore
   await page.goto(`${base}?renderer=webgl2&adapt=off&profile=mid&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
@@ -178,9 +179,13 @@ async function record(scene) {
     await run(() => (window.__splashery.player.frozen = true));
   };
   const at = (n, f) => run(async ([n, f]) => (await import("/src/packs/pictures.js")).BOOKS_R5.point(n, f), [n, f]); // prettier-ignore
-  // A Toy tab switch (it eases over a few steps of the clock).
+  // A Toy tab switch. (It eases on the real frame clock, which a frozen
+  // player doesn't have, so its state is set as well.)
   const control = async (key, v) => {
-    await run(([key, v]) => window.__splashery.app.setControl(key, v), [key, v]);
+    await run(([key, v]) => {
+      window.__splashery.app.setControl(key, v);
+      window.__splashery.player.motion.state[key] = v;
+    }, [key, v]); // prettier-ignore
     await play(0.25);
   };
   const popState = () => run(async () => { const { POP } = (await import("/src/packs/pictures.js")).BOOKS_R5; return { phase: POP.phase, relief: POP.relief?.key || "" }; }); // prettier-ignore
