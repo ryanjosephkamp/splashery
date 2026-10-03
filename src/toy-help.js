@@ -689,9 +689,9 @@ export const TOY_HELP = {
       "A paramecium is a living thing made of a single cell, shaped a bit like a slipper, that lives in ponds and puddles. It is covered in thousands of tiny hairs called cilia, which beat in waves like oars to row it through the water. A groove in its side sweeps in bacteria to eat.\n\nTap it and its cilia beat hard as it swims a full loop and comes back to where it was. A paramecium is just big enough to see with a magnifying glass, as a tiny moving speck.",
   },
   amoeba: {
-    howTo: "Tap it to make it crawl over and back.",
+    howTo: "Drag it to pull out a pseudopod; let go and it oozes back. Tap it to make it crawl.",
     about:
-      'An amoeba is a living thing made of one soft cell with no fixed shape. It lives in ponds and damp soil and moves by pushing out a bulge called a pseudopod, which means "false foot," and flowing into it. It eats by wrapping its body around bits of food.\n\nTap it and it crawls: a pseudopod pushes out to one side, the grains inside stream into it and the cell oozes over; then it pushes out the other way and oozes back. Even at rest, its pods stretch a little.',
+      'An amoeba is a living thing made of one soft cell with no fixed shape. It lives in ponds and damp soil and moves by pushing out a bulge called a pseudopod, which means "false foot," and flowing into it. It eats by wrapping its body around bits of food.\n\nDrag any part of it and it stretches toward your finger like a new pseudopod; let go and it oozes back. Tap it and it crawls: a pseudopod pushes out to one side, the grains inside stream into it and the cell oozes over; then it pushes out the other way and oozes back. Even at rest, its pods stretch a little.',
   },
 
   // ---- Atoms ----------------------------------------------------------------------------
@@ -913,9 +913,9 @@ export const TOY_HELP = {
       "Bamboo is a giant grass with tall, hollow stems split into sections by rings called nodes. It is one of the fastest-growing plants in the world: some kinds can grow almost a meter in a single day. People use its strong, light stems to build houses, scaffolding and furniture.\n\nThree young shoots sit on the ground. Tap it and they shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, and a tuft of leaves opens at the top; later they sink back down.",
   },
   rocks: {
-    howTo: "Tap to tumble and stack them. Pick a pile or a cairn in the Toy tab.",
+    howTo: "Drag a pebble to pick it up and set it on another to stack them. Tap to tumble them.",
     about:
-      "Pebbles are small stones rounded smooth by water. As rivers and waves roll them over and over, knocking against sand and other stones, their sharp corners wear away, a process that can take hundreds or thousands of years. A cairn is a pile of stones stacked up by people, often to mark a trail.\n\nTap it and the pebbles roll out over the sand, then five of them hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back. Pick a pebble pile or a cairn in the Toy tab, and a Seed for different stones.",
+      "Pebbles are small stones rounded smooth by water. As rivers and waves roll them over and over, knocking against sand and other stones, their sharp corners wear away, a process that can take hundreds or thousands of years. A cairn is a pile of stones stacked up by people, often to mark a trail.\n\nDrag a pebble to lift it and set it on the sand or on another stone. A careful stack stands; one set on the edge topples. The ✋ button turns this off, and reset puts every stone back. Tap it and five pebbles hop one at a time onto a cairn, biggest at the bottom, then all hop back. Pick a pile or a cairn in the Toy tab.",
   },
   kelp: {
     howTo: "Tap it to bring fish in to nibble the kelp.",
@@ -1013,9 +1013,9 @@ export const TOY_HELP = {
       "Popcorn is a kind of corn whose kernels puff up when they are heated. Each kernel has a hard shell with a little water inside. When it gets hot, the water turns to steam, the pressure builds until the shell bursts with a pop, and the soft starch inside puffs out into a white, crunchy foam.\n\nTap it and fresh kernels pop up out of the striped bucket, tumble and land on the heap. People in the Americas were popping corn thousands of years ago, long before movie theaters.",
   },
   jelly: {
-    howTo: "Tap it to poke it and watch it wobble.",
+    howTo: "Drag it to stretch it; let go and it wobbles back. Tap it to poke it.",
     about:
-      "A jelly, or gelatin dessert, is fruit juice or sweet flavored water set with gelatin and turned out of a mold. Gelatin makes a fine, stretchy mesh that traps the water, so the jelly holds its shape but wobbles when you touch it.\n\nThis one always jiggles a little. Tap it to poke it: it squashes and wobbles hard, then settles down. In the Toy tab, pick strawberry, lime, orange, blueberry, grape or rainbow, and choose whether it has fruit set inside.",
+      "A jelly, or gelatin dessert, is fruit juice or sweet flavored water set with gelatin and turned out of a mold. Gelatin makes a fine, stretchy mesh that traps the water, so the jelly holds its shape but wobbles when you touch it.\n\nThis one always jiggles a little. Drag any part of it and it stretches toward your finger; let go and it springs back and wobbles on its plate. Tap it to poke it: it squashes and wobbles hard, then settles down. In the Toy tab, pick strawberry, lime, orange, blueberry, grape or rainbow, and choose whether it has fruit set inside.",
   },
   pancakes: {
     howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
@@ -1038,9 +1038,10 @@ export const TOY_HELP = {
       "A candy cane is a stick of hard peppermint candy bent into a hook, with red and white stripes, and it is often hung on trees in the Christmas season. The stripes are made by twisting ropes of red and white candy together while they are warm and soft.\n\nTap it and each cane twists, the hook turning and the stripes winding tighter, until it snaps with a crack. The top half springs clear, sugar chips fly, then the halves come back together and mend with a glint. Pick a pair with a bow or a single cane, and the stripe color, in the Toy tab.",
   },
   macarons: {
-    howTo: "Tap it and the two in front hop up onto the stack.",
+    howTo:
+      "Drag a macaron to pick it up and stack it. Tap and the two in front hop up onto the stack.",
     about:
-      "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nTap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
+      "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nDrag any macaron to pick it up and set it down on the plate or on top of the stack; set one down crooked and it slides off. Tap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
   },
   donut: {
     howTo: "Tap it to break it apart and put it back together.",
@@ -1073,9 +1074,9 @@ export const TOY_HELP = {
       "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame seed bun, a patty, a slice of cheese, a leaf of lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart.",
   },
   sushi: {
-    howTo: "Tap it: the chopsticks pick up a piece and dip it in soy sauce.",
+    howTo: "Tap a piece: the chopsticks pick that one up, dip it in soy sauce and put it back.",
     about:
-      "Sushi is a Japanese dish of rice mixed with a little vinegar and sugar, served with fish, vegetables or egg. This board has nigiri, a pillow of rice with a slice of fish draped on top, and maki, rice and a filling rolled up in a sheet of dried seaweed called nori and cut into rounds.\n\nTap it and the chopsticks lift off the board as if held by an invisible hand, pinch a piece with a click, carry it to a little dish of soy sauce and dip it twice, then set it back and lie down again.",
+      "Sushi is a Japanese dish of rice mixed with a little vinegar and sugar, served with fish, vegetables or egg. This board has nigiri, a pillow of rice with a slice of fish draped on top, and maki, rice and a filling rolled up in a sheet of dried seaweed called nori and cut into rounds.\n\nTap a piece and the chopsticks lift off the board as if held by an invisible hand, pinch that piece with a click, carry it to a little dish of soy sauce and dip it twice, then set it back and lie down again.",
   },
   taco: {
     howTo: "Tap it to break the shell in half; then it closes up again.",
@@ -1118,9 +1119,10 @@ export const TOY_HELP = {
       "A pineapple is a tropical fruit with a tough, scaly skin and a spiky crown of leaves. It is really many small fruits grown together: each scale on the skin comes from a single flower. Pineapples first grew in South America, and a crown twisted off and planted can grow a whole new plant.\n\nTap it for four chops, top first. With each chop, everything above lifts and leans toward you, until five rings stand apart in a leaning stack, showing their golden flesh and pale cores. Then they drop back onto each other.",
   },
   cherries: {
-    howTo: "Tap it to swing the cherries apart; they knock back together.",
+    howTo:
+      "Pull a cherry out on its stem and let go; it swings back and knocks the other. Tap to swing them.",
     about:
-      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nTap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
+      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nPull a cherry out on its stem and let go: it swings back and knocks the other one, which swings out in turn, until they settle. Tap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
   },
   grapes: {
     howTo: "Tap it: grapes drop off the bunch, bounce and hop back.",
@@ -1135,9 +1137,9 @@ export const TOY_HELP = {
 
   // ---- Toys -----------------------------------------------------------------------------
   bricks: {
-    howTo: "Tap to build a model from the bricks; tap again to build another.",
+    howTo: "Drag a brick onto another to stack it; it clicks onto the studs. Tap to build a model.",
     about:
-      "Building bricks are small plastic blocks with round studs on top that press into tubes underneath the next brick, so they hold together firmly and can be pulled apart again. With enough of them you can build almost anything, and even six ordinary bricks can be stacked together in hundreds of millions of different ways.\n\nHere eighteen bricks lie spread out on the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree. Pick a set of colors in the Toy tab.",
+      "Building bricks are small plastic blocks with round studs on top that press into tubes underneath the next brick, so they hold together firmly and can be pulled apart again. With enough of them you can build almost anything, and even six ordinary bricks can be stacked together in hundreds of millions of different ways.\n\nHere eighteen bricks lie spread out on the table. Drag one to pick it up and hold it over another: it turns square and lines up with the studs, and clicks on when you let go, so you can build your own. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree. Pick a set of colors in the Toy tab.",
   },
   "rubber-duck": {
     howTo: "Tap it to squeeze it: it squeaks, hops and bobs.",
@@ -1176,9 +1178,9 @@ export const TOY_HELP = {
       "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time. Tap while it turns and it pauses once the turn in progress lands, so you can take over by hand: your own move ends the automatic one, and the next tap starts again from there. Solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
   },
   "spring-toy": {
-    howTo: "Tap it to hurry it along; it flips end over end faster.",
+    howTo: "Pull its top coils up or sideways; let go and it springs back. Tap to hurry it along.",
     about:
-      "A spring toy is a long, loose coil of metal or plastic that can walk down stairs by itself. Set one end on a lower step and it flips over, end over end, as each coil tips across in turn and the weight moves from one end to the other. It was invented in the 1940s by an engineer who saw a spring fall off a shelf and keep moving.\n\nThis one walks by itself, its coils flipping over from one side to the other. Tap it to hurry it along. Pick a rainbow, metal or pastel coil in the Toy tab.",
+      "A spring toy is a long, loose coil of metal or plastic that can walk down stairs by itself. Set one end on a lower step and it flips over, end over end, as each coil tips across in turn and the weight moves from one end to the other. It was invented in the 1940s by an engineer who saw a spring fall off a shelf and keep moving.\n\nThis one walks by itself, its coils flipping over from one side to the other. Pull its top coils up or to the side and it gathers into a stack and stretches out, coil by coil; let go and it springs back down and wobbles, then walks on. Tap it to hurry it along. Pick a rainbow, metal or pastel coil in the Toy tab.",
   },
   kite: {
     howTo: "Tap it for a gust of wind: the kite loops and the tail whips.",
@@ -1322,9 +1324,9 @@ export const TOY_HELP = {
       "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock right where you tapped: it jolts and rocks away from the blow, sparks spray off the spot, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
   },
   "bow-and-target": {
-    howTo: "Tap to shoot an arrow; tap again to go back.",
+    howTo: "Pull the arrow back on the string and let go to shoot it. Tap to shoot too.",
     about:
-      "Archery is the sport of shooting arrows with a bow at a target. Drawing back the string bends the bow's springy limbs, which store the energy of your pull; when the string is let go, the limbs spring back and send the arrow flying. A target has rings of color, with gold in the middle, and the closer to the center, the more points.\n\nTap to shoot: the string draws back, the arrow flies across and lands in the target, and a fresh arrow waits on the string. Tap again to go back. Archery was first part of the Olympic Games in 1900.",
+      "Archery is the sport of shooting arrows with a bow at a target. Drawing back the string bends the bow's springy limbs, which store the energy of your pull; when the string is let go, the limbs spring back and send the arrow flying. A target has rings of color, with gold in the middle, and the closer to the center, the more points.\n\nPull the arrow back on the string, up or down a little to aim, and let go: the further you pull, the faster it flies, and it sticks where it lands, in the target or the grass. Tap to shoot too: the string draws back, the arrow flies across and lands in the target, and a fresh arrow waits on the string. Tap again to go back. Archery was first part of the Olympic Games in 1900.",
   },
   trebuchet: {
     howTo: "Tap it to launch: the weight drops and the long arm flings a stone.",
@@ -1617,15 +1619,15 @@ export const TOY_HELP = {
   },
   "your-book": {
     howTo:
-      "Tap the right page to turn on, the left to go back, or pull one over. Double-tap a page to read it up close.",
+      "Tap the right page to turn on, the left to go back. Tap a link to follow it; Pop out lifts a picture.",
     about:
-      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab, as long as you like, and tap to turn its pages (the right page turns forward, the left goes back), or take a page by its edge and pull it over: let go past halfway and it turns, otherwise it falls back. Each page curls as it goes over. Stapled paper flips up over the top: tap near the top of the page to go back. Double-tap a page to fill the screen with it, and again to see both; Reading: One page goes a page at a time. Only the pages you reach are made into splats, so a long book stays light. Pick hardcover, paperback, magazine, stapled paper or spiral notebook in the Toy tab. Your file stays on your device.",
+      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab and tap to turn its pages (the right page goes forward, the left back), or pull a page over by its edge. Double-tap a page to fill the screen with it; Reading: One page goes a page at a time. Only the pages you reach become splats, so a long book stays light. Pick one of five styles.\n\nLinks work: a link to a website shows its address and opens only if you say so, and a link to another page turns there. Pop out lifts the picture on the page toward you: a photo with its depth, worked out on this device; a chart or diagram as a card. Draw a box lifts anything else; a tap lays it back. Your file stays on your device.",
   },
   "photo-album": {
     howTo:
-      "Tap the right page to turn on, the left to go back, or pull one over. Double-tap a page to see it up close.",
+      "Tap the right page to turn on, the left to go back, or pull one over. Pop out lifts a photo off the page.",
     about:
-      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand (the thick pages are heavier than a book's): two wide photos share a page, one above the other, and two tall ones sit side by side. Double-tap a page to fill the screen with it, or set Reading to One page to go through a page at a time. Pick a leather, linen or scrapbook cover, and turn the file names under the photos on or off. Your photos stay on your device.",
+      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand: two wide photos share a page, one above the other, and two tall ones sit side by side. Double-tap a page to fill the screen with it, or set Reading to One page. Pick a leather, linen or scrapbook cover, and turn the file names on or off.\n\nPop out lifts the photo on the page out of its corners toward you, with its depth worked out on this device. Tap the other photo to lift it instead, or the album to lay it back. Your photos stay on your device.",
   },
   "picture-frame": {
     howTo:

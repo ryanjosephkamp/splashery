@@ -25,6 +25,29 @@ import {
 
 export { MODEL_BUDGETS };
 
+// UI r5: how big a model this device takes. A computer reads files of several
+// hundred MB; a phone less (its browser tab has less memory). Very large meshes
+// are simplified on the device to about `simplifyTo` triangles before the
+// splats are spread (more than the splats need, so no detail is lost).
+// navigator.deviceMemory (Chrome only) lowers the caps on a small device.
+export function modelLimits() {
+  const nav = typeof navigator === "undefined" ? {} : navigator;
+  const coarse = typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches;
+  const small = typeof screen === "object" && Math.min(screen.width, screen.height) < 820;
+  const phone = coarse && small;
+  const mem = Number(nav.deviceMemory) || 0; // GB, rounded down; 0 when unknown
+  if (phone) {
+    const low = mem && mem <= 3;
+    return { maxBytes: low ? 120e6 : 250e6, maxTriangles: low ? 6e6 : 12e6, simplifyTo: 400000 };
+  }
+  const low = mem && mem <= 4;
+  return { maxBytes: low ? 300e6 : 600e6, maxTriangles: low ? 15e6 : 40e6, simplifyTo: 1200000 };
+}
+
+// Lets the page draw the progress line before the next long step.
+const breathe = () => new Promise((r) => setTimeout(r, 30));
+const mb = (n) => `${Math.round(n / 1e6)} MB`;
+
 // The CC0 samples, each a single GLB in assets/toys/model-splats/ (tools/stm-samples.mjs made them).
 export const SAMPLES = [
   {
@@ -117,8 +140,11 @@ async function loadSample(id) {
 // Opens a model from its bytes (the Toy tab's file, or a test's): parses it, decodes its
 // textures and keeps it as "your model". `files` are the other files that came with it
 // (a .gltf's buffers and textures, an .obj's .mtl and pictures): a Map of name -> bytes.
-export async function openModel(bytes, fileName, files) {
-  const prep = await prepareModel(parseModel(bytes, fileName, { files }), { decodeImage });
+// UI r5: `opts` are parseModel's maxTriangles and prepareModel's simplifyTo and onStep.
+export async function openModel(bytes, fileName, files, opts = {}) {
+  const { maxTriangles, simplifyTo = 0, onStep } = opts;
+  const raw = parseModel(bytes, fileName, { files, maxTriangles });
+  const prep = await prepareModel(raw, { decodeImage, simplifyTo, onStep });
   prep.uid = ++MODEL.uid;
   MODEL.custom = prep;
   return prep;
@@ -187,8 +213,12 @@ const MODEL_SPLATS = {
     binary: true,
     multiple: true,
     fileButton: "Open a 3D model…",
-    note: "Open a .glb, .gltf, .obj or .stl file (binary or text). A .gltf or .obj that comes with other files (a .bin, a .mtl, pictures) opens when you select them all together in the file dialog. It is converted on this device; nothing is uploaded. Not read: Draco- or meshopt-compressed glTF, animation (a skinned model shows in its bind pose) and lights.",
-    async read(_text, fileName, file, files) {
+    note: "Open a .glb, .gltf, .obj or .stl file (binary or text). A .gltf or .obj that comes with other files (a .bin, a .mtl, pictures) opens when you select them all together in the file dialog. It is converted on this device; nothing is uploaded. Big files are fine (several hundred MB on a computer, a few hundred on a phone); a very detailed model is simplified on the device first. Not read: Draco- or meshopt-compressed glTF, animation (a skinned model shows in its bind pose) and lights.",
+    // UI r5: the device's cap, and what to do about a file over it.
+    maxBytes: () => modelLimits().maxBytes,
+    tooBig: (cap) =>
+      `That file is over ${mb(cap)}, the most this device can open. Try it on a computer, or open a lighter version of the model (in Blender, the Decimate modifier makes one, and glTF Binary export with textures resized keeps the file small).`,
+    async read(_text, fileName, file, files, progress = () => {}) {
       const picked = files?.length ? [...files] : file ? [file] : [];
       if (!picked.length) throw new Error("Open a 3D model file.");
       // The model is the .glb, .gltf, .obj or .stl among the files; the rest come with it.
@@ -200,12 +230,41 @@ const MODEL_SPLATS = {
           "None of those files is a 3D model this toy reads. Pick a .glb, .gltf, .obj or .stl file, with the files that come with it.",
         );
       }
-      const others = new Map();
-      for (const f of picked)
-        if (f !== main) others.set(f.name, new Uint8Array(await f.arrayBuffer()));
-      const bytes = new Uint8Array(await main.arrayBuffer());
-      const prep = await openModel(bytes, main.name || fileName, others);
-      return { source: "custom", modelName: prep.name };
+      const lim = modelLimits();
+      const total = picked.reduce((n, f) => n + (f.size || 0), 0);
+      try {
+        progress(`Reading ${main.name} (${mb(total)})…`);
+        await breathe();
+        const others = new Map();
+        for (const f of picked)
+          if (f !== main) others.set(f.name, new Uint8Array(await f.arrayBuffer()));
+        // One copy of the file in memory: the parser reads it in place.
+        const bytes = new Uint8Array(await main.arrayBuffer());
+        progress("Reading the model…");
+        await breathe();
+        const prep = await openModel(bytes, main.name || fileName, others, {
+          maxTriangles: lim.maxTriangles,
+          simplifyTo: lim.simplifyTo,
+          onStep: async (text) => {
+            progress(text);
+            await breathe();
+          },
+        });
+        progress("Spreading the splats…");
+        await breathe();
+        return { source: "custom", modelName: prep.name };
+      } catch (err) {
+        // Out of memory while reading: say so plainly.
+        if (
+          err instanceof RangeError ||
+          /memory|allocation|array length/i.test(err?.message || "")
+        ) {
+          throw new Error(
+            `This device ran out of memory reading that model (${mb(total)}). Try it on a computer, or open a lighter version of the model.`,
+          );
+        }
+        throw err;
+      }
     },
     shown: () => {
       const i = MODEL.info;

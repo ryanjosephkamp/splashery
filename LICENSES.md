@@ -232,3 +232,19 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   https://github.com/nodeca/pako: reads the FIRE-2 simulation's HDF5 snapshot in
   `tools/sci-galaxy.mjs` (lane Science). The site never loads them. `pngjs` (above) also writes that
   tool's picture of the source data (`--map`).
+
+## Build tools outside npm (not shipped)
+
+Programs that run on a build machine to make splats for the Splat Fidelity Plan (lane Fidelity,
+approved October 3, 2026). None of them is served; what they make (our renders and the splats
+trained from them) is ours, and the models and textures they use keep their own credits
+(CREDITS.md).
+
+- Blender 4.5 LTS (GPL-3.0-or-later), https://www.blender.org/: builds and renders the brass orrery
+  (`tools/fidelity/orrery.py`) and renders the boombox for Stage 1 (Codex task 08). Tested in the
+  cloud sandbox with 4.5.14 LTS for Linux from https://download.blender.org/release/Blender4.5/; the
+  owner's Mac runs the macOS build of the same series.
+- Brush (Apache-2.0), https://github.com/ArthurBrussee/brush: trains a splat from the renders
+  (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
+- msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
+  Silicon, if Brush can't run.
