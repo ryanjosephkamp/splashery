@@ -20,23 +20,75 @@ import { encodeQR, ECC_RECOVERY, QUIET } from "../qr/encode.js";
 import { buildCode, STYLES, PLATES, PRESETS, palette, codeContrast } from "../qr/build.js";
 import { qrModifier, MOTION_SECS } from "../qr/field.js";
 import { readCode } from "../qr/scan.js";
+import { KINDS, kindById, contentText, shareableFields } from "../qr/content.js";
 import * as pc from "../pc.js";
 // The site's exports (PNG, GIF), loaded when a picture is first made (they
 // need the browser's import map, so the Node tools never load them).
 const exportsJS = () => import("../exports.js");
 
 export const DEFAULT_TEXT = "https://ryanjosephkamp.github.io/splashery/";
-// Styles that change the modules' shape or light get level Q by default
-// (25% may be lost and it still scans); flat ones M.
-const FANCY = new Set(["dots", "rounded", "bricks", "gems", "bubbles", "neon"]);
-export const eccFor = (o) => (o.ecc && o.ecc !== "auto" ? o.ecc : FANCY.has(o.style) ? "Q" : "M");
+// The scan lab's scorecard (lane QR scan lab, docs/audits/qr-scan-lab-2026-10.md
+// on its branch; provisional figures of October 3, 2026, to be replaced by
+// its measurements of this toy): styles that change the modules' shape or
+// light scan far more often at level H (30% may be lost) than at L, M or Q;
+// Classic is fine at M. Shaped styles need more contrast, and modules under
+// about 4 pixels on screen stop scanning.
+const SHAPED = new Set(["dots", "rounded", "bricks", "gems", "bubbles", "neon"]);
+export const eccFor = (o) => (o.ecc && o.ecc !== "auto" ? o.ecc : SHAPED.has(o.style) ? "H" : "M");
+const FLAT_STYLES = new Set(["classic", "dots", "rounded"]);
+export const minContrast = (o) => (FLAT_STYLES.has(o.style || "classic") ? 4.5 : 7);
+export const MIN_MODULE_PX = 4;
+
 const MOTIONS = ["assemble", "flip", "burst"];
 
 // What the open code is, for the panel and the hook.
 const QR = { code: null, options: null, error: "", fit: null, kit: null, check: null, checking: false, still: false, gif: null, timer: 0 }; // prettier-ignore
 
+// ---- What the code holds ------------------------------------------------------------------
+// A link or plain text lives in the `text` option. Other kinds keep their
+// form in `fields` (JSON) and their text is made from it (src/qr/content.js).
+// The Wi-Fi password is never in the options, so never in a #s= link or a
+// saved scene: it is kept here, in this page's memory, while the page is open.
+const SECRET = {}; // kind -> { field: value }
+
+export const kindOf = (o) => (KINDS.some((k) => k.id === o.kind) ? o.kind : "link");
+
+export function fieldsOf(o, kind = kindOf(o)) {
+  if (kind === "link") return { url: o.text ?? DEFAULT_TEXT };
+  if (kind === "text") return { text: o.text ?? "" };
+  let f = {};
+  try {
+    f = kindOf(o) === kind ? JSON.parse(o.fields || "{}") : {};
+  } catch {
+    f = {};
+  }
+  return { ...f, ...(SECRET[kind] || {}) };
+}
+
+// The toy's options for a kind and its form (the secret part kept aside).
+export function optionsFor(kind, f) {
+  if (kind === "link") return { kind, text: String(f.url ?? "").trim(), fields: "" };
+  if (kind === "text") return { kind, text: String(f.text ?? ""), fields: "" };
+  const keep = shareableFields(kind, f);
+  const secret = {};
+  for (const k of Object.keys(f)) if (!(k in keep)) secret[k] = f[k];
+  SECRET[kind] = secret;
+  return { kind, fields: JSON.stringify(keep), text: "" };
+}
+
+// The text the code holds.
+export function textFor(o) {
+  const kind = kindOf(o);
+  if (kind === "link" || kind === "text") return o.text ?? DEFAULT_TEXT;
+  return contentText(kind, fieldsOf(o, kind));
+}
+
+// A Wi-Fi code opened from a link has no password until it is typed again.
+const missingSecret = (o) =>
+  kindOf(o) === "wifi" && fieldsOf(o).security !== "nopass" && !SECRET.wifi?.password;
+
 function codeFor(o) {
-  const text = o.text ?? DEFAULT_TEXT;
+  const text = textFor(o);
   try {
     return { code: encodeQR(text, eccFor(o)), error: "" };
   } catch (err) {
@@ -184,7 +236,7 @@ async function runCheck() {
 function scheduleCheck() {
   clearTimeout(QR.timer);
   QR.check = null;
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || QR.noAuto) return;
   let tries = 0;
   const go = () => {
     const app = globalThis.__splashery?.app;
@@ -266,6 +318,52 @@ export async function makeGIF({
   );
 }
 
+// About how many device pixels a module covers on screen in Scan view.
+function modulePx() {
+  const c = globalThis.__splashery?.app?.player?.stage?.canvas;
+  if (!c || !QR.code) return 0;
+  const side = Math.min(c.width, c.height); // device pixels; the view spans the narrower side
+  return side / (QR.code.size + 2 * (QUIET + 3));
+}
+
+// ---- Full screen ----------------------------------------------------------------------------
+// The code alone, in Scan view, on a plain background that fills the screen,
+// so another phone can scan it. Esc or a tap closes it.
+export async function showFullScreen() {
+  const app = globalThis.__splashery?.app;
+  if (!app?.player || document.getElementById("qr-fullscreen")) return;
+  const side = Math.min(window.innerWidth, window.innerHeight);
+  const px = Math.min(2048, Math.round(side * Math.min(2, window.devicePixelRatio || 1)));
+  const shot = await renderScan(app, px);
+  const pal = palette(QR.options || {});
+  const bg = `rgb(${pal.bg.map((v) => Math.round(v * 255)).join(",")})`;
+  const box = document.createElement("div");
+  box.id = "qr-fullscreen";
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-label", "The QR code, full screen. Tap or press Escape to close.");
+  box.tabIndex = -1;
+  box.style.cssText = `position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:${bg};cursor:pointer`; // prettier-ignore
+  shot.style.cssText = "width:min(100vw,100vh);height:min(100vw,100vh);display:block";
+  shot.setAttribute("aria-hidden", "true");
+  box.append(shot);
+  const close = () => {
+    document.removeEventListener("keydown", onKey);
+    if (document.fullscreenElement === box) document.exitFullscreen?.().catch(() => {});
+    box.remove();
+  };
+  const onKey = (e) => {
+    if (e.key === "Escape") close();
+  };
+  box.addEventListener("click", close);
+  document.addEventListener("keydown", onKey);
+  box.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement && box.isConnected) close();
+  });
+  document.body.append(box);
+  box.focus();
+  box.requestFullscreen?.().catch(() => {}); // the overlay works without it too
+}
+
 // ---- The panel ----------------------------------------------------------------------------
 
 let panel = null; // { refresh } while the panel is in the page
@@ -286,11 +384,12 @@ function describe(o) {
 export function colorWarnings(o) {
   const { ratio, inverted } = codeContrast(o);
   const out = [];
-  if (ratio < 3)
-    out.push(`Low contrast (${ratio.toFixed(1)} : 1). Cameras read a code by telling its dark modules from its light ones; below about 3 : 1 many can't. Make the code darker or the background lighter.`); // prettier-ignore
+  const need = minContrast(o);
+  if (ratio < need)
+    out.push(`Low contrast (${ratio.toFixed(1)} : 1). Cameras read a code by telling its dark modules from its light ones; for this style, below about ${need} : 1 many can't. Make the code darker or the background lighter.`); // prettier-ignore
   if (inverted)
     out.push(o.style === "neon"
-      ? "Neon is light on dark (an inverted code). Many phone cameras read it, but not every reader does; for print, Classic dark on light is the safest."
+      ? "Neon on a dark wall is light on dark (an inverted code). Many readers skip those: put it on a pale wall (the button above) for a code every reader takes."
       : "The code is lighter than its background (an inverted code). Not every reader scans those: dark on light is the safe choice."); // prettier-ignore
   return out;
 }
@@ -300,19 +399,6 @@ function renderPanel() {
   const box = document.createElement("div");
   box.className = "qr-panel";
   box.id = "qr-panel";
-  const label = document.createElement("label");
-  label.className = "note";
-  label.htmlFor = "qr-text";
-  label.textContent = "Text or link";
-  const text = document.createElement("textarea");
-  text.id = "qr-text";
-  text.rows = 3;
-  text.spellcheck = false;
-  text.style.cssText = "width:100%;box-sizing:border-box;resize:vertical;font:inherit";
-  text.value = QR.options?.text ?? DEFAULT_TEXT;
-  text.maxLength = 2900;
-  const row = document.createElement("div");
-  row.className = "button-row";
   const button = (id, label, fn, primary = false) => {
     const b = document.createElement("button");
     b.type = "button";
@@ -322,18 +408,75 @@ function renderPanel() {
     b.addEventListener("click", fn);
     return b;
   };
+  // What the code holds: a choice of kind, and that kind's small form.
+  const kindRow = document.createElement("label");
+  kindRow.className = "row";
+  const kindName = document.createElement("span");
+  kindName.textContent = "What it holds";
+  const kindPick = document.createElement("select");
+  kindPick.id = "qr-kind";
+  for (const k of KINDS) kindPick.add(new Option(k.label, k.id));
+  kindPick.value = kindOf(QR.options || {});
+  kindRow.append(kindName, kindPick);
+  const form = document.createElement("div");
+  form.className = "qr-form";
+  form.id = "qr-form";
+  let inputs = {};
+  const drawForm = () => {
+    form.textContent = "";
+    inputs = {};
+    const kind = kindById(kindPick.value);
+    const now = fieldsOf(QR.options || {}, kind.id);
+    for (const fd of kind.fields) {
+      const lab = document.createElement("label");
+      lab.className = "note";
+      lab.style.display = "block";
+      lab.textContent = fd.label;
+      let el;
+      if (fd.choices) {
+        el = document.createElement("select");
+        for (const ch of fd.choices) el.add(new Option(ch.label, ch.id));
+        el.value = now[fd.key] || fd.choices[0].id;
+      } else if (fd.check) {
+        el = document.createElement("input");
+        el.type = "checkbox";
+        el.checked = !!now[fd.key];
+      } else {
+        el = document.createElement(fd.multiline ? "textarea" : "input");
+        if (fd.multiline) el.rows = 3;
+        else el.type = fd.secret ? "password" : "text";
+        el.value = now[fd.key] ?? "";
+        el.placeholder = fd.placeholder || "";
+        el.spellcheck = false;
+        el.autocomplete = "off";
+        el.style.cssText = "width:100%;box-sizing:border-box;font:inherit";
+        if (!fd.multiline) {
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              apply();
+            }
+          });
+        }
+      }
+      el.id = `qr-field-${fd.key}`;
+      el.setAttribute("aria-label", fd.label);
+      lab.append(document.createElement("br"), el);
+      form.append(lab);
+      inputs[fd.key] = el;
+    }
+  };
+  kindPick.addEventListener("change", drawForm);
+  drawForm();
   const make = button("qr-make", "Make the code", () => apply(), true);
   const apply = () => {
-    const v = text.value;
-    if (v === (QR.options?.text ?? DEFAULT_TEXT)) return scheduleCheck();
-    app?.setToyOptions({ text: v });
+    const kind = kindPick.value;
+    const f = {};
+    for (const [k, el] of Object.entries(inputs)) f[k] = el.type === "checkbox" ? el.checked : el.value; // prettier-ignore
+    app?.setToyOptions(optionsFor(kind, f));
   };
-  text.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      apply();
-    }
-  });
+  const row = document.createElement("div");
+  row.className = "button-row";
   row.append(make);
   // The styles: each sets its own colors and plate (changed below if wanted).
   const styleRow = document.createElement("div");
@@ -371,6 +514,7 @@ function renderPanel() {
   row2.append(
     button("qr-scan-view", "Scan view", () => snapScanView()),
     button("qr-check", "Check that it scans", () => checkScan()),
+    button("qr-full", "Full screen", () => showFullScreen()),
   );
   const row3 = document.createElement("div");
   row3.className = "button-row";
@@ -381,11 +525,24 @@ function renderPanel() {
   );
   const note = document.createElement("p");
   note.className = "note";
-  note.textContent = "Your text stays on this device: nothing is sent anywhere, and no link shortener is used. The PNG and the GIF end in scan view, with the quiet zone. Record (Share tab) makes a video, and Save splats keeps the splats."; // prettier-ignore
+  note.textContent = "What the code holds stays on this device: nothing is sent anywhere, and no link shortener is used. But a #s= link to this toy, and a saved scene, carry what the code holds (the link, the text, the contact), so whoever you send them to can read it. A Wi-Fi password is left out of them: after opening a link, type it again. The PNG and the GIF end in scan view, with the quiet zone. Record (Share tab) makes a video, and Save splats keeps the splats."; // prettier-ignore
   const styleLabel = document.createElement("p");
   styleLabel.className = "note";
   styleLabel.textContent = "Style (each comes with its own colors; change them below)";
-  box.append(label, text, row, styleLabel, styleRow, wallRow, info, warn, result, row2, row3, note);
+  box.append(
+    kindRow,
+    form,
+    row,
+    styleLabel,
+    styleRow,
+    wallRow,
+    info,
+    warn,
+    result,
+    row2,
+    row3,
+    note,
+  );
   panel = {
     refresh() {
       const o = QR.options || {};
@@ -399,6 +556,11 @@ function renderPanel() {
         : "Put it on a pale wall (every reader)";
       info.textContent = QR.error ? `${QR.error} The code shows the start of it.` : describe(o);
       const w = colorWarnings(o);
+      const px = modulePx();
+      if (px && px < MIN_MODULE_PX)
+        w.push(`On this screen the code is drawn at about ${px.toFixed(1)} pixels per module; readers need about ${MIN_MODULE_PX}. Use Full screen, a bigger window, or a shorter text (a smaller code).`); // prettier-ignore
+      if (missingSecret(o))
+        w.unshift("This Wi-Fi code has no password yet: passwords stay out of links and saved scenes, so type it again and tap Make the code."); // prettier-ignore
       warn.textContent = w.join(" ");
       warn.hidden = !w.length;
       const c = QR.check;
@@ -422,7 +584,7 @@ const short = (s) => (s.length > 60 ? `${s.slice(0, 57)}…` : s);
 function advice(o) {
   const tips = [];
   if (eccFor(o) !== "H") tips.push("raise the error correction (Q or H)");
-  if (codeContrast(o).ratio < 4.5) tips.push("use more contrast");
+  if (codeContrast(o).ratio < minContrast(o) + 2) tips.push("use more contrast");
   if (o.style !== "classic") tips.push("pick a flatter style (Classic or Rounded)");
   if (o.gradient && o.gradient !== "none") tips.push("drop the gradient");
   if (!tips.length) return "Try a shorter text.";
@@ -440,6 +602,10 @@ export const RECIPES = {
     turntable: false,
     options: [
       { key: "text", label: "Text", type: "text", default: DEFAULT_TEXT, hidden: true },
+      // What it holds (the panel's choice) and, for kinds other than a link
+      // or text, its form as JSON (never the Wi-Fi password).
+      { key: "kind", label: "What it holds", type: "select", default: "link", hidden: true, choices: KINDS.map((k) => ({ id: k.id, label: k.label })) }, // prettier-ignore
+      { key: "fields", label: "Its details", type: "text", default: "", hidden: true },
       // Picked in the panel's style row, which also sets the style's colors.
       { key: "style", label: "Style", type: "select", default: "classic", choices: choices(STYLES), hidden: true }, // prettier-ignore
       {
@@ -448,7 +614,7 @@ export const RECIPES = {
         type: "select",
         default: "auto",
         choices: [
-          { id: "auto", label: "Auto (M, or Q for the fancier styles)" },
+          { id: "auto", label: "Auto (M for Classic, H for the shaped styles)" },
           { id: "L", label: "L: 7% can be lost" },
           { id: "M", label: "M: 15%" },
           { id: "Q", label: "Q: 25%" },
@@ -567,6 +733,12 @@ if (typeof window !== "undefined" && window.__splashery) {
       const a = app();
       if (a.player.scene.toy?.id !== "qr-code") throw new Error("Open the QR code toy first.");
       // A style alone brings its preset colors; colors given win over them.
+      // What it holds: { kind, fields: { … } } (a form, the password kept
+      // aside as in the panel); a plain { text } is a link or text.
+      if (partial.fields && typeof partial.fields === "object") {
+        partial = { ...partial, ...optionsFor(partial.kind || "link", partial.fields) };
+      } else if ("text" in partial && !partial.kind)
+        partial = { ...partial, kind: "link", fields: "" };
       // "neon-light" is Neon on a pale wall.
       const preset = partial.style && PRESETS[partial.style] ? PRESETS[partial.style] : {};
       await a.setToyOptions({ ...preset, ...partial, style: preset.style || partial.style || QR.options?.style }); // prettier-ignore
@@ -574,6 +746,15 @@ if (typeof window !== "undefined" && window.__splashery) {
       return this.info();
     },
     scanView: () => snapScanView(),
+    // false stops the automatic check after each change (tools that step
+    // the stage's clock themselves); true turns it back on.
+    set autoCheck(on) {
+      QR.noAuto = !on;
+      if (!on) clearTimeout(QR.timer);
+    },
+    get autoCheck() {
+      return !QR.noAuto;
+    },
     // The code's square with its quiet zone on the page (CSS pixels), as the
     // camera sees it now: { x, y, width, height }.
     screenRect() {
@@ -606,6 +787,7 @@ if (typeof window !== "undefined" && window.__splashery) {
     },
     scanPose,
     check: () => checkScan(),
+    fullScreen: () => showFullScreen(),
     async png(size = 1024) {
       const { canvasToBlob } = await exportsJS();
       return canvasToBlob(await renderScan(app(), size));

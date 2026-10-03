@@ -206,6 +206,12 @@ await qr.gif({ motion, size }); // the GIF as a blob ("burst" | "flip" | "assemb
 qr.info(); // { text, version, size, ecc, style, options, check, warnings, error }
 ```
 
+`set` also takes `{ kind, fields: { … } }` for what the code holds (kinds: link, text, wifi,
+contact, email, phone, sms, geo; field names in `src/qr/content.js`), and `style: "neon-light"` for
+Neon on a pale wall. `qr.autoCheck = false` stops the automatic check after each change (for tools
+that step the stage's clock themselves; it can deadlock with them), `qr.fullScreen()` opens Full
+screen.
+
 `set` resolves once the toy is rebuilt and in scan view. The automatic check runs after it; call
 `check()` yourself for a result you can wait on.
 
@@ -244,6 +250,21 @@ qr.info(); // { text, version, size, ecc, style, options, check, warnings, error
   change); now a check counts only for the code built last.
 - The GIF's frame times grew with each frame (each `renderAt` read back the time the last one set);
   they are fixed steps from the start now.
+
+- **What it holds** (`src/qr/content.js`): Link, Text, Wi-Fi network, Contact card (MECARD), Email
+  (`mailto:`), Phone (`tel:`), Text message (`SMSTO:`) and Place (`geo:`), each a small form in the
+  panel that builds the standard text, with Wi-Fi and MECARD escaping. The form is kept in the
+  hidden options `kind` and `fields` (JSON); the **Wi-Fi password is never in the options**, so
+  never in a `#s=` link or a saved scene. It stays in the page's memory, and a Wi-Fi code opened
+  from a link warns that its password must be typed again. The panel says plainly that a link and a
+  saved scene carry what the code holds.
+- **Full screen** (a panel button; `qr.fullScreen()` in the hook): the code alone in Scan view on
+  its own background, filling the screen, so another phone can scan it. Esc or a tap closes it.
+- **Defaults from the scan lab's provisional scorecard** (reference drawings, not this toy; to be
+  replaced by its measurements of the toy): Auto error correction is M for Classic and H for the
+  shaped styles; the contrast warning is at 4.5:1 for Classic, Dots and Rounded and 7:1 for Bricks,
+  Gems, Bubbles and Neon; a warning shows when the code is drawn under about 4 pixels per module on
+  the screen.
 
 ### Clips and cards
 

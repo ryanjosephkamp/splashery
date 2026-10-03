@@ -7,6 +7,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { PNG } from "pngjs";
 import { encodeQR, asText, alignmentPositions } from "../src/qr/encode.js";
+import { contentText } from "../src/qr/content.js";
 import { GifReader } from "../vendor/omggif/omggif.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
@@ -80,6 +81,71 @@ test("the encoder matches another encoder, and its codes read back", async () =>
   expect(v7.pieces.filter((p) => p.kind === "alignment")).toHaveLength(6);
   // Too long for a code: a clear message.
   expect(() => encodeQR("x".repeat(3000), "M")).toThrow(/too long/);
+});
+
+// ---- What it holds ------------------------------------------------------------------------
+
+const HOLDS = [
+  ["link", { url: "https://example.org/a?b=c&d=e" }, "https://example.org/a?b=c&d=e"],
+  ["text", { text: "Hello, splats ✓\nLine two" }, "Hello, splats ✓\nLine two"],
+  ["wifi", { ssid: "Café; Net", password: 'p:a\\ss"1', security: "WPA", hidden: true }, 'WIFI:T:WPA;S:Café\\; Net;P:p\\:a\\\\ss\\"1;H:true;;'], // prettier-ignore
+  ["contact", { name: "Ada Lovelace", phone: "+44 20 7946 0958", email: "ada@example.org", org: "Engines, Ltd." }, "MECARD:N:Ada Lovelace;TEL:+442079460958;EMAIL:ada@example.org;ORG:Engines\\, Ltd.;;"], // prettier-ignore
+  ["email", { to: "hi@example.org", subject: "A QR code", body: "Made of splats & light" }, "mailto:hi@example.org?subject=A%20QR%20code&body=Made%20of%20splats%20%26%20light"], // prettier-ignore
+  ["phone", { number: "+1 (555) 010-0199" }, "tel:+15550100199"],
+  ["sms", { number: "+1 555 0100", message: "On my way" }, "SMSTO:+15550100:On my way"],
+  ["geo", { lat: "40.6892", lon: "-74.0445" }, "geo:40.6892,-74.0445"],
+];
+
+test("every kind of content makes its standard text, and its code reads back", () => {
+  for (const [kind, fields, want] of HOLDS) {
+    const text = contentText(kind, fields);
+    expect(text, kind).toBe(want);
+    const code = encodeQR(text, "M");
+    const s = 5;
+    const W = (code.size + 8) * s;
+    const px = new Uint8ClampedArray(W * W * 4).fill(255);
+    for (let y = 0; y < code.size; y++)
+      for (let x = 0; x < code.size; x++)
+        if (code.dark[y * code.size + x])
+          for (let j = 0; j < s; j++)
+            for (let i = 0; i < s; i++) {
+              const k = (((y + 4) * s + j) * W + (x + 4) * s + i) * 4;
+              px[k] = px[k + 1] = px[k + 2] = 0;
+            }
+    expect(read(px, W, W), kind).toBe(text);
+  }
+});
+
+test("a Wi-Fi code scans with its password, and a link leaves the password out", async ({
+  page,
+}) => {
+  test.setTimeout(240_000);
+  await open(page);
+  const r = await page.evaluate(async () => {
+    const qr = window.__splashery.qr;
+    await qr.set({ style: "rounded", kind: "wifi", fields: { ssid: "Splash Net", password: "s3cret-Pa55", security: "WPA" } }); // prettier-ignore
+    const check = await qr.check();
+    const scene = JSON.stringify(window.__splashery.exportScene());
+    return { check, scene, text: qr.info().text };
+  });
+  expect(r.text).toBe("WIFI:T:WPA;S:Splash Net;P:s3cret-Pa55;;");
+  expect(r.check.ok).toBe(true);
+  expect(r.check.read).toBe(r.text);
+  expect(r.scene).toContain("Splash Net");
+  expect(r.scene).not.toContain("s3cret-Pa55");
+});
+
+test("Full screen shows the code alone, and it scans; Esc closes it", async ({ page }) => {
+  test.setTimeout(240_000);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await open(page);
+  await page.evaluate(() => window.__splashery.qr.fullScreen());
+  await page.waitForSelector("#qr-fullscreen canvas");
+  const box = await page.locator("#qr-fullscreen canvas").boundingBox();
+  expect(box.width).toBeGreaterThan(380);
+  expect(readPNG(await page.screenshot({ clip: box }))).toBe(URL0);
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#qr-fullscreen")).toHaveCount(0);
 });
 
 // ---- Loading ------------------------------------------------------------------------------
