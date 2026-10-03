@@ -1,107 +1,30 @@
 {
- "classic": {
-  "shown": [
-   "hard",
-   "tilt35",
-   "jpeg15",
-   "blur35",
-   "mod3",
-   "phone",
-   "light60",
-   "persp"
-  ],
-  "failed": [
-   "mod2"
-  ]
- },
- "dots": {
-  "shown": [
-   "hard",
-   "tilt35",
-   "jpeg15",
-   "blur35",
-   "mod3",
-   "phone",
-   "light60",
-   "persp"
-  ],
-  "failed": [
-   "mod2"
-  ]
- },
- "rounded": {
-  "shown": [
-   "hard",
-   "tilt35",
-   "jpeg15",
-   "blur35",
-   "mod3",
-   "phone",
-   "light60",
-   "persp"
-  ],
-  "failed": [
-   "mod2"
-  ]
- },
- "bricks": {
-  "shown": [
-   "hard",
-   "tilt35",
-   "jpeg15",
-   "blur35",
-   "mod3",
-   "phone",
-   "light60",
-   "persp"
-  ],
-  "failed": [
-   "mod2"
-  ]
- },
- "gems": {
-  "shown": [
-   "hard",
-   "tilt35",
-   "jpeg15",
-   "blur35",
-   "mod3",
-   "phone",
-   "light60",
-   "persp"
-  ],
-  "failed": [
-   "mod2"
-  ]
- },
- "bubbles": {
-  "shown": [
-   "hard",
-   "tilt35",
-   "jpeg15",
-   "blur35",
-   "mod3",
-   "phone",
-   "light60",
-   "persp"
-  ],
-  "failed": [
-   "mod2"
-  ]
- },
- "neon": {
-  "shown": [
-   "hard",
-   "tilt35",
-   "jpeg15",
-   "blur35",
-   "mod3",
-   "phone",
-   "light60",
-   "persp"
-  ],
-  "failed": [
-   "mod2"
-  ]
- }
+  "classic": {
+    "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
+    "failed": ["mod2"]
+  },
+  "dots": {
+    "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
+    "failed": ["mod2"]
+  },
+  "rounded": {
+    "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
+    "failed": ["mod2"]
+  },
+  "bricks": {
+    "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
+    "failed": ["mod2"]
+  },
+  "gems": {
+    "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
+    "failed": ["mod2"]
+  },
+  "bubbles": {
+    "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
+    "failed": ["mod2"]
+  },
+  "neon": {
+    "shown": ["hard", "tilt35", "jpeg15", "blur35", "mod3", "phone", "light60", "persp"],
+    "failed": ["mod2"]
+  }
 }
