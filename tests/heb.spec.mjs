@@ -29,7 +29,7 @@ const tick = (page, secs) =>
   );
 
 // A finger drag through recipe points (each a place on screen).
-async function drag(page, points, { steps = 20, hold = false } = {}) {
+async function drag(page, points, { steps = 20, hold = false, held = false } = {}) {
   const px = await page.evaluate((pts) => {
     const { player } = window.__splashery;
     const r = player.stage.canvas.getBoundingClientRect();
@@ -38,8 +38,10 @@ async function drag(page, points, { steps = 20, hold = false } = {}) {
       return [r.left + s[0], r.top + s[1]];
     });
   }, points);
-  await page.mouse.move(...px[0]);
-  await page.mouse.down();
+  if (!held) {
+    await page.mouse.move(...px[0]);
+    await page.mouse.down();
+  }
   for (let k = 1; k < px.length; k++)
     for (let i = 1; i <= steps; i++) {
       const f = i / steps;
@@ -177,15 +179,24 @@ test("orange: a wedge pulled out stays out; brought back, it clicks home", async
 
 test("candy cane: pulled, the hook bends, snaps off, lands; reset mends it", async ({ page }) => {
   await ready(page, "candy-cane");
-  const p = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.canes[0].pivot);
-  const a = [p[0] + 0.05, p[1] + 0.55, p[2]];
-  await drag(page, [a, [a[0] + 0.12, a[1], a[2] + 0.04]], { hold: true });
+  // A point on the front cane's shaft, above the break.
+  const a = await page.evaluate(() => {
+    const cn = window.__splashery.player.proc.ctx.kit.data.canes[1];
+    return cn.pivot.map((v, i) => v + cn.axis[i] * 0.45);
+  });
+  await drag(page, [a, [a[0] + 0.2, a[1], a[2] + 0.06]], { hold: true });
   let js = await joints(page);
-  expect(js.every((j) => !j.broken)).toBe(true);
-  await drag(page, [
-    [a[0] + 0.12, a[1], a[2] + 0.04],
-    [a[0] + 0.9, a[1] + 0.2, a[2] + 0.3],
-  ]);
+  expect(js.every((j) => !j.broken)).toBe(true); // bent, not broken yet
+  expect(js.some((j) => j.held)).toBe(true);
+  // Pulled on, further: it snaps.
+  await drag(
+    page,
+    [
+      [a[0] + 0.2, a[1], a[2] + 0.06],
+      [a[0] + 0.9, a[1] + 0.2, a[2] + 0.3],
+    ],
+    { held: true },
+  );
   await tick(page, 2);
   js = await joints(page);
   const broke = js.find((j) => j.broken);
