@@ -108,12 +108,30 @@ frogs). Three scenes made from someone else's video were not touched.
 
 ### Sizing
 
-Like the first twelve scans: rotated upright, recentred, scaled to radius 0.9, decimated to at most
-350,000 splats (100,000 lite; small sources keep what they have), written as SOG. The full files are
-0.2 to 4.9 MB and the lite ones 0.1 to 1.3 MB. Spherical harmonics: the sources of 28 scenes carry
-them, but only the crystal and the desk globe (shiny things) keep one band on the full file; the
-rest drop them as the first twelve scans do (the size and a half hour of CPU per file on the SOG
-encoder; the alum crystal's source has none). No capture files go through the embed test.
+Like the first twelve scans, but denser: rotated upright, recentred, scaled to radius 0.9, decimated
+to at most 1,000,000 splats on the full file and 300,000 on the lite file (sources with fewer keep
+every splat), written as SOG with one band of spherical harmonics on the full file when the source
+has any (28 of 30; the alum crystal and the monkey doll have none). The first round used 350,000 and
+100,000 with no harmonics. The full files are 0.2 to 15 MB, the lite files 0.1 to 4 MB, and
+`assets/` grew by about 140 MB. The lite file is used only on the low profile (`src/player.js`), so
+the full file is what mid-tier phones load.
+
+### Sharpness round (October 3, 2026)
+
+- **Why the stollen was crisper:** its source has 308,000 splats, under the first round's 350,000
+  cap, so it was the one capture kept whole (alongside others whose sources were small), and its
+  source is itself sharp. The rest were cut from 450,000 up to 3 million splats down to 350,000,
+  with the harmonics dropped.
+- **What changed:** the caps above, harmonics kept on the full files, nothing else (the same
+  rotation, scale and crop, so framing is unchanged).
+- **Result, same framing, same viewer** (old file, new file and the source scene's own splats, all
+  rendered by the app; `tools/splat-views.mjs` style): the new files are close to their sources.
+  Visible gains where the source has fine detail: the cave lioness (whiskers and fur), the cactus
+  (spines), the BMX bicycle (spokes and lettering), the murex shell (spines) and the bonsai (twigs).
+  For most of the rest the first round was already near its source, so little changes.
+- **Still soft, because the sources are:** the crystal and the elephant (blurry captures), the desk
+  globe's printed map, the money tree's and maple's leaves, the white roses and the dog plush's
+  edges. What is left is the viewer's own softness, which is not this lane's file.
 
 ### Known issues
 
@@ -121,9 +139,11 @@ encoder; the alum crystal's source has none). No capture files go through the em
   no tap effect.
 - A few frame small (sushi boat, cherry blossom trees, murex shell) because they are scaled by their
   longest side; the elephant faces away at the default camera.
-- Dropped spherical harmonics make glossy faces (the puffin's head) look flatter than on SuperSplat.
 - `tests/help.spec.mjs` "the line stays clear of the toy at 1440x900" failed once while clips were
   rendering in parallel (a timing flake; it does not touch these toys, and it passes alone).
+- Full files up to 15 MB and 1,000,000 splats are heavier for mid-tier phones, which load the full
+  file (only the low profile loads the lite one); `assets/` is about 140 MB larger. If phones
+  struggle, the fix is a mid file between the two.
 - SuperSplat scenes marked "streamed (LOD)" need `splat-transform -L 0 .../lod-meta.json`
   (`"lod": 0` on the entry); the research doc said they could not be used.
 

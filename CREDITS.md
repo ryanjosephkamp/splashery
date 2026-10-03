@@ -67,9 +67,9 @@ can all come out if the site ever earns money. The cherry blossom is also ShareA
 so what is made from it keeps that license, and it is never merged with another asset. Scenes with
 no license shown on their page, and ones that show a brand name or a character from a game, were
 left out. Each file was changed by `tools/pr2-prepare.mjs`: rotated upright, recentred, scaled to a
-radius of about 0.9, cleaned of strays and decimated (at most 350,000 splats, 100,000 for phones).
-Spherical harmonics are removed, except one band kept on the full file of the crystal and the globe
-for their shine (the alum crystal's source has none).
+radius of about 0.9, cleaned of strays and decimated (at most 1,000,000 splats, 300,000 for the lite
+files). One band of spherical harmonics is kept on the full files (the lite files have none; the
+sources of the alum crystal and the monkey doll have none).
 
 | Toy                    | Scene                                                                                     | Author            | License                                                               |
 | ---------------------- | ----------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------- |

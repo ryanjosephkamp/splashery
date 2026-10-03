@@ -23,7 +23,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/d2a622ec",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -41,7 +42,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/43ddc643",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -59,7 +61,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/e1beac1a",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -77,7 +80,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/6e60e106",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -95,7 +99,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/070d50b8",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -113,7 +118,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/633ea98d",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -131,7 +137,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/908ed1a1",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -150,7 +157,7 @@ export const PHOTOREAL_R2_TOYS = [
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
       changes:
-        "Converted, decimated, recentred and scaled. Kept one band of spherical harmonics on the full file for the shine.",
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -168,7 +175,7 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/9b0c8534",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes: "Converted, decimated, recentred and scaled. The source has no spherical harmonics.",
     },
   },
   {
@@ -186,7 +193,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/d44e63ab",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -204,7 +212,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/d281a49d",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -222,7 +231,7 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/726c5f45",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes: "Converted, decimated, recentred and scaled. The source has no spherical harmonics.",
     },
   },
   {
@@ -240,7 +249,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/b01bfc43",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -258,7 +268,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/c2051d75",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -276,7 +287,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/7e4e9bcb",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -294,7 +306,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/55d00502",
       license: "CC BY-NC 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by-nc/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -312,7 +325,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/e95011f3",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -330,7 +344,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/d55ecb52",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -348,7 +363,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/d8c22218",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -366,7 +382,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/e34ad55d",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -384,7 +401,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/4c461e7c",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -402,7 +420,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/737cf53c",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -420,7 +439,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/4e095e21",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -438,7 +458,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/8d1a69d2",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -457,7 +478,7 @@ export const PHOTOREAL_R2_TOYS = [
       license: "CC BY-NC 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by-nc/4.0/",
       changes:
-        "Converted, decimated, recentred and scaled. Kept one band of spherical harmonics on the full file for the shine.",
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -475,7 +496,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/4eec644f",
       license: "CC BY-NC-SA 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -493,7 +515,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/f233b115",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -511,7 +534,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/50c8ccf7",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -529,7 +553,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/45d3761b",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
   {
@@ -547,7 +572,8 @@ export const PHOTOREAL_R2_TOYS = [
       source: "https://superspl.at/scene/2d074d8a",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, recentred and scaled. Spherical harmonics removed.",
+      changes:
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
     },
   },
 ];

@@ -311,7 +311,8 @@
       "author": "John Splat",
       "rotate": [180, 0, 0],
       "splats": 157886,
-      "lite": 78943
+      "lite": 157886,
+      "sh": 1
     },
     {
       "id": "sushi-boat",
@@ -323,7 +324,8 @@
       "author": "leo esteves",
       "rotate": [180, 0, 0],
       "splats": 170556,
-      "lite": 85278
+      "lite": 170556,
+      "sh": 1
     },
     {
       "id": "seeded-loaf",
@@ -334,8 +336,9 @@
       "license": "CC BY 4.0",
       "author": "John Splat",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 432118,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "steak",
@@ -347,7 +350,8 @@
       "author": "Eric Cornwell",
       "rotate": [180, 0, 0],
       "splats": 139001,
-      "lite": 69501
+      "lite": 139001,
+      "sh": 1
     },
     {
       "id": "stollen",
@@ -359,7 +363,8 @@
       "author": "Dany Bittel",
       "rotate": [180, 0, 0],
       "splats": 308466,
-      "lite": 100000
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "orange-photo",
@@ -372,7 +377,8 @@
       "rotate": [180, 0, 0],
       "lod": 0,
       "splats": 82539,
-      "lite": 41270
+      "lite": 82539,
+      "sh": 1
     },
     {
       "id": "physalis",
@@ -383,8 +389,9 @@
       "license": "CC BY 4.0",
       "author": "Alfred Duemlein",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 486314,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "crystal-gem",
@@ -397,7 +404,7 @@
       "rotate": [180, 0, 0],
       "sh": 1,
       "splats": 68388,
-      "lite": 34194
+      "lite": 68388
     },
     {
       "id": "alum-crystal",
@@ -408,8 +415,9 @@
       "license": "CC BY 4.0",
       "author": "Arshad",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 451287,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "puffin",
@@ -421,7 +429,8 @@
       "author": "Dan Zeitman",
       "rotate": [180, 0, 0],
       "splats": 262381,
-      "lite": 100000
+      "lite": 262381,
+      "sh": 1
     },
     {
       "id": "toy-trex",
@@ -432,8 +441,9 @@
       "license": "CC BY 4.0",
       "author": "Alfred Duemlein",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 684274,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "monkey-doll",
@@ -444,8 +454,9 @@
       "license": "CC BY 4.0",
       "author": "Ethan",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 430038,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "elephant-souvenir",
@@ -457,7 +468,8 @@
       "author": "Aung Sann Thit",
       "rotate": [90, 0, 0],
       "splats": 30184,
-      "lite": 15092
+      "lite": 30184,
+      "sh": 1
     },
     {
       "id": "turtle-souvenir",
@@ -468,8 +480,9 @@
       "license": "CC BY 4.0",
       "author": "Tony Rose",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 1000000,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "cave-lioness",
@@ -481,8 +494,9 @@
       "author": "Spenser DIckerson",
       "rotate": [180, 0, 0],
       "lod": 0,
-      "splats": 350000,
-      "lite": 100000
+      "splats": 1000000,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "dog-plush",
@@ -494,8 +508,9 @@
       "author": "PrintedForFun",
       "nc": true,
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 478072,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "bmx-bike",
@@ -506,8 +521,9 @@
       "license": "CC BY 4.0",
       "author": "Eric Cornwell",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 495006,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "murex-shell",
@@ -518,8 +534,9 @@
       "license": "CC BY 4.0",
       "author": "Rigsters",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 1000000,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "sunflower-photo",
@@ -531,8 +548,9 @@
       "author": "Natural Ai",
       "rotate": [180, 0, 0],
       "lod": 0,
-      "splats": 350000,
-      "lite": 100000
+      "splats": 698905,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "white-roses",
@@ -544,7 +562,8 @@
       "author": "Natural Ai",
       "rotate": [180, 0, 0],
       "splats": 12181,
-      "lite": 8000
+      "lite": 12181,
+      "sh": 1
     },
     {
       "id": "bonsai-photo",
@@ -556,7 +575,8 @@
       "author": "Garrett Nelli",
       "rotate": [180, 0, 0],
       "splats": 251470,
-      "lite": 100000
+      "lite": 251470,
+      "sh": 1
     },
     {
       "id": "mushroom-photo",
@@ -567,8 +587,9 @@
       "license": "CC BY 4.0",
       "author": "Alexander Omelko",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 601475,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "cactus-real",
@@ -581,7 +602,8 @@
       "rotate": [180, 0, 0],
       "lod": 0,
       "splats": 260429,
-      "lite": 100000
+      "lite": 260429,
+      "sh": 1
     },
     {
       "id": "crochet-earth",
@@ -592,8 +614,9 @@
       "license": "CC BY 4.0",
       "author": "Wan Xi",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 452440,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "desk-globe",
@@ -607,7 +630,7 @@
       "rotate": [180, 0, 0],
       "sh": 1,
       "splats": 313696,
-      "lite": 100000
+      "lite": 300000
     },
     {
       "id": "cherry-blossom-photo",
@@ -619,8 +642,9 @@
       "author": "Todd Smith",
       "nc": true,
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 1000000,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "maple-tree",
@@ -632,8 +656,9 @@
       "author": "Joshua Trapani",
       "rotate": [180, 0, 0],
       "lod": 0,
-      "splats": 350000,
-      "lite": 100000
+      "splats": 1000000,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "peony",
@@ -644,8 +669,9 @@
       "license": "CC BY 4.0",
       "author": "Sergiu Zboras",
       "rotate": [180, 0, 0],
-      "splats": 350000,
-      "lite": 100000
+      "splats": 1000000,
+      "lite": 300000,
+      "sh": 1
     },
     {
       "id": "money-tree",
@@ -657,7 +683,8 @@
       "author": "Natural Ai",
       "rotate": [180, 0, 0],
       "splats": 163878,
-      "lite": 81939
+      "lite": 163878,
+      "sh": 1
     },
     {
       "id": "knight-horse",
@@ -669,7 +696,8 @@
       "author": "Alfred Duemlein",
       "rotate": [180, 0, 0],
       "splats": 233318,
-      "lite": 100000
+      "lite": 233318,
+      "sh": 1
     }
   ],
   "modelSamples": [
