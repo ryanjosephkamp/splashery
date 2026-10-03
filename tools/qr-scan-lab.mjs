@@ -121,9 +121,11 @@ fs.writeFileSync(path.join(outDir, `${source}-results.csv`), csv.join("\n") + "\
 // Summary: decode rate (both readers must decode the right text) by style x condition, and others.
 const rate = (list) =>
   list.length ? list.filter((r) => r.jsqr === 1 && r.zxing === 1).length / list.length : null;
-const by = (key) => {
+// Inverted codes are reported on their own (byStyleScheme): most readers don't take them.
+const notInverted = (r) => r.scheme !== "inverted";
+const by = (key, keep = () => true) => {
   const m = {};
-  for (const r of rows) (m[key(r)] ??= []).push(r);
+  for (const r of rows.filter(keep)) (m[key(r)] ??= []).push(r);
   return Object.fromEntries(
     Object.entries(m).map(([k, v]) => [
       k,
@@ -140,10 +142,10 @@ const summary = {
   text,
   source,
   conditions: conds,
-  byStyle: by((r) => r.style),
-  byStyleCondition: by((r) => `${r.style}|${r.condition}`),
+  byStyle: by((r) => r.style, notInverted),
+  byStyleCondition: by((r) => `${r.style}|${r.condition}`, notInverted),
   byStyleScheme: by((r) => `${r.style}|${r.scheme}`),
-  byStyleEc: by((r) => `${r.style}|${r.ec}`),
+  byStyleEc: by((r) => `${r.style}|${r.ec}`, notInverted),
   byStyleSchemeCondition: by((r) => `${r.style}|${r.scheme}|${r.condition}`),
 };
 fs.writeFileSync(path.join(outDir, `${source}-summary.json`), JSON.stringify(summary, null, 1));

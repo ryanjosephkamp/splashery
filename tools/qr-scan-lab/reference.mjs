@@ -56,7 +56,10 @@ export function renderReference({ text, ec, style, scheme, px = 16 }) {
       const fx = gx - c;
       const fy = gy - r;
       let inside = true;
-      if (style === "dots") inside = Math.hypot(fx - 0.5, fy - 0.5) <= 0.46;
+      // The three finder patterns stay solid squares in every style but rounded and glow's tube.
+      const finder = (r < 7 && (c < 7 || c >= n - 7)) || (r >= n - 7 && c < 7);
+      if (finder && style === "dots") inside = true;
+      else if (style === "dots") inside = Math.hypot(fx - 0.5, fy - 0.5) <= 0.46;
       else if (style === "glow") inside = Math.hypot(fx - 0.5, fy - 0.5) <= 0.34;
       else if (style === "rounded") {
         const rad = 0.38;
