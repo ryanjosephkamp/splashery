@@ -317,6 +317,13 @@ export class SoftParts {
     // breakable rope a little past its breaking point).
     const nd = h.node;
     h.target = this.reachable(nd, p);
+    // A recipe's `maxPull`: never further than that from where it rests.
+    const mp = nd.strand.def.maxPull;
+    if (mp) {
+      const d = v3.sub(h.target, nd.rest);
+      const l = v3.len(d);
+      if (l > mp) h.target = v3.add(nd.rest, v3.scale(d, mp / l));
+    }
   }
 
   reachable(nd, p) {
