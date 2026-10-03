@@ -114,7 +114,8 @@ Done (PR "Phase Fidelity: trained splats on our rigs", branch `claude/lane-fidel
 - `docs/audits/fidelity-2026-10.md`: the draft report (SH bands, streamed LOD, the frame checks).
 
 Engine PR (branch `claude/lane-fidelity-engine`): "Engine: a recipe's prepare learns the device
-profile" (`help.profile`, so the orrery loads its lite parts on a phone). Merge it first.
+profile" (a third argument to `prepare`, `{ profile }`, so the orrery loads its lite parts on a
+phone). Merge it first.
 
 Findings: the captured path keeps and shows SH bands (checked with a view-dependent test splat); the
 kit path keeps only the base color. PlayCanvas 2.22.3 can stream `lod-meta.json`, but our loader

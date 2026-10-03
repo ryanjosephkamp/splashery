@@ -266,9 +266,10 @@ const ORRERY = {
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
     },
   ],
-  async prepare(_o, help) {
+  // The app passes the device's profile third (the lite parts on "low"); the Node tools don't.
+  async prepare(_o, _help, env) {
     ORR.info ||= await readJson(`${ORR.dir}parts.json`);
-    const profile = help?.profile;
+    const profile = env?.profile;
     await Promise.all(
       ORR.info.parts.map(async (p) => {
         const url = partUrl({ url: `${ORR.dir}${p.name}.sog`, lite: `${ORR.dir}${p.name}-lite.sog` }, profile); // prettier-ignore
