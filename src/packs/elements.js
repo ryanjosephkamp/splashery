@@ -159,6 +159,9 @@ const LAVA = [
 ];
 const lavaY = (b, t) => b.lo + (b.hi - b.lo) * (0.5 - 0.5 * Math.cos(t * b.speed + b.phase));
 const LAVA_SECS = 4.6;
+// Where the storm cloud's tapped thunderbolt hangs at rest (x); a tap moves it
+// under the tap (lane Fix7).
+const STORM_BOLT_X = 0.1;
 // The lamp's glass: it swells in the middle and tapers into the cap.
 const lavaGlassR = (y) =>
   0.2 +
@@ -1236,16 +1239,22 @@ export const RECIPES = {
       { key: "thunder", label: "Thunder", type: "pulse", ease: 1.3 },
     ],
     action: { key: "thunder", label: "Thunder" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       // Lightning on a random-looking schedule: each slot of time may
-      // strike one of three bolts, with a quick double flash.
+      // strike one of three bolts, with a quick double flash. A tap's
+      // thunderbolt (bolt3) strikes straight down from the cloud under
+      // the tap (lane Fix7).
       const slot = Math.floor(t / 1.7);
       const f = t / 1.7 - slot;
       const which = slot === 0 ? 0 : Math.floor(hash1(slot) * 5);
       const on = which < 3 && (f < 0.07 || (f > 0.11 && f < 0.16));
       const big = c.thunder > 0.3 && Math.sin(c.thunder * 36) > -0.4;
       for (let b = 0; b < 3; b++) out.parts[`bolt${b}`] = { visible: on && which === b ? 1 : 0 };
-      out.parts.bolt3 = { visible: big ? 1 : 0 };
+      const tp = info?.tap?.key === "thunder" ? info.tap.point : null;
+      // The tapped point is the front-most splat under the finger, so a bolt
+      // at its x and z stands under the finger from any side.
+      const off = tp ? [clamp(tp[0], -0.85, 0.85) - STORM_BOLT_X, 0, clamp(tp[2], -0.6, 0.75) - 0.6] : [0, 0, 0]; // prettier-ignore
+      out.parts.bolt3 = { visible: big ? 1 : 0, offset: off };
       out.parts.flash = { visible: on || big ? 1 : 0 };
       out.parts.rain = { visible: 0.15 + 0.85 * c.rain };
       out.amount = 1;
@@ -1325,14 +1334,14 @@ export const RECIPES = {
         { x: -0.3, z: 0.56, len: 1.45 },
         { x: 0.45, z: 0.5, len: 1.25 },
         { x: 0.05, z: 0.52, len: 1.35 },
-        { x: 0.1, z: 0.6, len: 1.5 },
+        { x: STORM_BOLT_X, z: 0.6, len: 1.5, drift: 0.12 },
       ];
       bolts.forEach((b, i) => {
         const part = k.part(`bolt${i}`, { pivot: [b.x, -0.1, b.z] });
         const main = jagged(
           rand,
           [b.x, -0.05, b.z],
-          [b.x + (rand() - 0.5) * 0.5, -0.05 - b.len, b.z + (rand() - 0.5) * 0.2],
+          [b.x + (rand() - 0.5) * (b.drift ?? 0.5), -0.05 - b.len, b.z + (rand() - 0.5) * 0.2],
           5,
         );
         const paths = [main];

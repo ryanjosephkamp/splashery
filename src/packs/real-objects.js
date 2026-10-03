@@ -544,6 +544,9 @@ function childOf(qF, o, h, qH) {
 const SUNGLASSES = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
+  // The clear lenses are faint (0.1 to 0.4): a tap finds them at a lower
+  // alpha than the pick pass's usual, so a tap on a lens starts it (lane Fix7).
+  pickAlpha: 0.06,
   controls: [{ key: "flip", label: "Fold and flip", type: "pulse", ease: SG.T }],
   action: { key: "flip", label: "Fold, flip and darken" },
   credits: [
@@ -610,6 +613,14 @@ const SUNGLASSES = {
       };
       addCloud(k, nLens, (i, n) => lens(i, n, false));
       addCloud(k, nLens, (i, n) => lens(i, n, true));
+      // A few bigger, faint splats over the lens, so a tap on the glass finds
+      // it (the lens's own splats are too small and faint for the pick pass).
+      addCloud(k, 37, (i, n) => {
+        const r = L.r * 0.9 * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.39996323;
+        const z = L.z + 0.03 * (1 - (r / L.r) ** 2) - 0.002;
+        return { p: [side * L.x + r * Math.cos(a), r * Math.sin(a), z], n: [0, 0, 1], size: L.r * 0.3, color: [0.78, 0.82, 0.86], opacity: 0.08, part: front }; // prettier-ignore
+      });
     }
     k.reach([0, 0.55, 0.7]);
     k.reach([0, -0.45, -0.2]);

@@ -40,25 +40,25 @@ Proposals below are suggestions; the owner may change them.
   Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
   tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
   Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream,
-  Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Sushi,
-  Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
-  Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein
-  bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter,
-  Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Fountain
-  pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield,
-  Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
-  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
-  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument,
-  Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa,
-  Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Pebbles, Kelp, Storm cloud, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
+  Ice cream, Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel,
+  Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes,
+  Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz
+  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
+  Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras
+  proof, Splat equation, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses,
+  Baseball cap, Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
+  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
+  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
+  Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine,
+  Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
+  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
+  Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional
+  network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
+  Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
+  Enigma machine, Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter,
+  Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal
+  ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -559,6 +559,8 @@ Proposals below are suggestions; the owner may change them.
     clicks).
 - **Storm cloud** (`storm-cloud`). Now: tap: Thunder. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Fix7: a tap's bolt strikes straight down from the cloud under the finger (from its
+    tapped place), not in a fixed spot.
   - Sound: Thunder rumble.
 - **Lava lamp** (`lava-lamp`). Now: tap: Heat it up. Plan: keep.
   - Owner: Moves really well. On tap: blobs move faster, light up or change colours.
@@ -1532,7 +1534,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it
     follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14
     quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and
-    chimes.
+    chimes. Fix7: a tap during a scramble or solve pauses it once the turn in progress lands, so the
+    cube can be turned by hand; a move of your own ends the automatic one, and the next tap starts a
+    new one from there (a tap without a move carries on).
   - Sound: Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0
     recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.
   - Touch or drag interaction (phase F).
@@ -1768,7 +1772,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold
     in one after the other, both behind the lenses and the second behind the first, the glasses turn
     head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
-    the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses.
+    the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a
+    lens starts the effect too (faint pick splats over the glass).
   - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no
     electronic clicks or shimmer).
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
@@ -1794,7 +1799,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Blocks an invisible hit: it jolts, sparks and the emblem gleams.
   - Improved: E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks
     spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across
-    the emblem (about 2 s).
+    the emblem (about 2 s). Fix7: the blow lands where you tap on the shield's face: the flash and
+    sparks start there, the sparks spray away from the middle, and the shield rocks away from that
+    spot (about 2 s).
   - Sound: The clang and the gleam's shimmer, no crackling clicks.
 - **Bow and target** (`bow-and-target`). Now: tap: Shoot. Plan: keep.
   - Owner: Unbelievably impressive.
@@ -1932,8 +1939,10 @@ Proposals below are suggestions; the owner may change them.
     of the cannon that fires it.
   - Effect: Random shell types each tap; burst colour matches its tube.
   - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the
-    rocket rises from its tube and the burst takes that tube's colour. Sharpness A (October 2,
-    2026): sharper look (even, solid splats and calmer textures).
+    rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the
+    show; rapid taps launch more shells, up to three at once (one per tube), each with its own
+    rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness
+    A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: A real firework, the launch's thump and rush (no whistle), a deep boom and the stars'
     soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a
     fallback.
@@ -1950,6 +1959,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Painted-shell tap.
 - **Paper lantern** (`paper-lantern`). Now: tap: Swing. Plan: keep.
   - Owner: Perfect; the physics are really good.
+  - Improved: Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing
+    grows smoothly (no jump).
   - Sound: Paper rustle.
 - **Diya** (`diya`). Now: tap: Light the diyas. Plan: keep.
   - Owner: Very underwhelming.
@@ -2356,7 +2367,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13
     keyframes as each splat slides to its next place; views One splat (sizes, opacity and color
     sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats
-    appear far to near from a camera).
+    appear far to near from a camera). Fix7: the one-splat view starts from a tap anywhere on it,
+    and its tap trains the splat: from a wrong guess, 24 gradient steps move its place, turn, sizes,
+    color and opacity toward the target (a dashed outline), each closing a share of the error at its
+    own rate (about 7 s).
   - Sound: Training, a soft tone falling as the loss curve draws (no chord or notes); one splat, a
     soft airy swell; many splats, a fainter twinkle; sorting, a pebble's click for each splat as it
     is placed, in sync, each a little different (Sound C, October 2, 2026).
@@ -2611,7 +2625,10 @@ Proposals below are suggestions; the owner may change them.
     tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning
     ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
     torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
-    stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it).
+    stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it). Fix7: a tap
+    never pauses it; each tap adds its own pulse (another stone where you tap the sea, with rings
+    that cross, another ring through the galaxy, another lap of the knot), up to eight at once (3 s
+    each).
   - Sound: Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle
     wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
