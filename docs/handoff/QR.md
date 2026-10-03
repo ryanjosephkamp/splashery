@@ -267,9 +267,10 @@ screen.
   warning below 4:1 and a strong one below 3:1. Module size: a warning under 4 pixels per module on
   the screen, 6 for Bricks, Gems and Neon. Density: a warning at version 8 or more in a depth style.
   Light on dark: "most phone cameras read it, some scanner apps don't", and Bricks or Gems light on
-  dark is called out as unreadable. Bricks and Gems show a "hold the phone flat" hint. The advice
-  after a failed check suggests a shorter text, not a higher level, for depth styles. (For a few
-  hours before the measured scorecard, the provisional one set H for shaped styles; that is gone.)
+  dark is called out as unreadable, and light-on-dark Dots (46–77% in the lab) gets its own warning.
+  Bricks and Gems show a "hold the phone flat" hint. The advice after a failed check suggests a
+  shorter text, not a higher level, for depth styles. (For a few hours before the measured
+  scorecard, the provisional one set H for shaped styles; that is gone.)
 
 ### Clips and cards
 

@@ -395,6 +395,8 @@ export function colorWarnings(o) {
   if (inverted) {
     if (o.style === "bricks" || o.style === "gems")
       out.push("Light on dark doesn't work for this style: in the scan lab no reader read light-on-dark Bricks or Gems. Use a dark code on a light background."); // prettier-ignore
+    else if (o.style === "dots")
+      out.push("Light-on-dark Dots read only about half the time in the scan lab, even in readers that try inverted codes. Use a dark code on a light background."); // prettier-ignore
     else
       out.push(o.style === "neon"
         ? "Neon on a dark wall is light on dark (an inverted code): most phone cameras read it, some scanner apps don't. Put it on a pale wall (the button above) for a code every reader takes."
