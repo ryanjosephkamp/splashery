@@ -209,6 +209,19 @@ Finish each working turn with READY:/WORKING:/BLOCKED: as before.
 
 ## State
 
+October 3, 2026 (UTC): **round 4** (`claude/lane-live-input-r4`, "Phase Live input r4: the Chladni
+plate plays your audio"), from the owner's marks on r3 (5 good; `live3-chladni` "fix" with a
+question and a request). The plate already re-sorted its sand when the sung note changed (another
+mode clearly nearer, held a second, at most every two seconds, fresh sand); `live4-chladni-voice`
+shows it. New: open your own audio on the plate. It plays through the Song landscape's `Track` and
+is measured by its `SongAnalysis` worker. Each moment's strongest pitch (YIN where voiced, else the
+loudest band), folded by octaves into 60 to 400 Hz, rings the modes. The modes keep a running score
+that fades over about 1.2 s; the leader takes over with fresh sand when it leads 1.5 to 1 after 2.5
+s. The transport is the landscape's (`songTransport`, now with a prefix, "Close the audio" and a
+hidden state). Tests: `tests/live4.spec.mjs` (at the low profile: the plate's clock moves at most
+0.1 s a frame). Cards `live4-chladni-voice` and `live4-chladni-file` are in the LiveR3 record (there
+is no r4 record); `live3-chladni` has `replacedBy`.
+
 Model: **Opus 5.5** (default effort), no helpers.
 
 October 2, 2026 (UTC): **round 3 built and tested** (prefix `live3`). #144, #150, #162 and #163 are

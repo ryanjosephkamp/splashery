@@ -76,10 +76,79 @@ UI r5, Fix7 and the Integrators); you don't touch their files.
   endings, dates like "October 3, 2026").
 - Read first: CLAUDE.md, docs/OPERATING.md ("Steps for a lane"), docs/research/PHOTOREAL.md,
   docs/handoff/Photoreal.md and CREDITS.md.
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+Model: Sonnet 5.5, default effort, no helper. Updated October 3, 2026.
 
-Starting, October 3, 2026.
+### Done
+
+- **30 toys** on the Photoreal shelf, all behind the labs switch (`labs: true`), in
+  `src/packs/photoreal-r2.js` (metadata only; spread into `src/toys.js`). Each has a full and a lite
+  SOG (`tools/pr2-prepare.mjs`, entries with `"pack": "pr2"` in `tools/assets.json`), a thumbnail, a
+  credit (author, license, link) in the app, in CREDITS.md and in `tools/assets.json`, a how-to line
+  and About text (`src/toy-help.js`), a sound (`src/toy-sounds.js`) and a plan entry
+  (`tools/toy-plan.json`, `docs/TOY-PLAN.md` regenerated).
+- **Licenses**: each read from the scene's live page on October 3, 2026 (`rel="license"` link). 27
+  are CC BY 4.0. Three are NonCommercial and tagged `"nc": true`: dog plush (CC BY-NC), desk globe
+  (CC BY-NC), cherry blossom (CC BY-NC-SA, also ShareAlike; never merged with another asset). No ND,
+  no BY-SA.
+- **`tools/nc-assets.mjs`** (list, `--json`, `--check`) and `tests/pr2.spec.mjs` (runs the check,
+  and checks files, credits, help, sounds, thumbnails).
+- Effect review cards: see the PR body.
+
+### How the toys were picked
+
+From the 77 scenes in docs/research/PHOTOREAL.md plus a few more found by search, every one rendered
+from four sides first. Left out: scenes with no license on their page (lemon, jug, cake, mug and
+others: all rights reserved, so private only), scenes that show a brand or a game character (the
+Bedford trucks, a purple plush from a horror game, Vespa, KTM, VW, Eicher, Ferguson), whole places
+and rooms (landmarks, terrain), anything with people, anatomy and skulls (they go to the owner
+first), and ones that rendered badly (acorn, helicopter, owl on its wall, the stone, the penguin and
+frogs). Three scenes made from someone else's video were not touched.
+
+### Sizing
+
+Like the first twelve scans, but denser: rotated upright, recentred, scaled to radius 0.9, decimated
+to at most 1,000,000 splats on the full file and 300,000 on the lite file (sources with fewer keep
+every splat), written as SOG with one band of spherical harmonics on the full file when the source
+has any (28 of 30; the alum crystal and the monkey doll have none). The first round used 350,000 and
+100,000 with no harmonics. The full files are 0.2 to 15 MB, the lite files 0.1 to 4 MB, and
+`assets/` grew by about 140 MB. The lite file is used only on the low profile (`src/player.js`), so
+the full file is what mid-tier phones load.
+
+### Sharpness round (October 3, 2026)
+
+- **Why the stollen was crisper:** its source has 308,000 splats, under the first round's 350,000
+  cap, so it was the one capture kept whole (alongside others whose sources were small), and its
+  source is itself sharp. The rest were cut from 450,000 up to 3 million splats down to 350,000,
+  with the harmonics dropped.
+- **What changed:** the caps above, harmonics kept on the full files, nothing else (the same
+  rotation, scale and crop, so framing is unchanged).
+- **Result, same framing, same viewer** (old file, new file and the source scene's own splats, all
+  rendered by the app; `tools/splat-views.mjs` style): the new files are close to their sources.
+  Visible gains where the source has fine detail: the cave lioness (whiskers and fur), the cactus
+  (spines), the BMX bicycle (spokes and lettering), the murex shell (spines) and the bonsai (twigs).
+  For most of the rest the first round was already near its source, so little changes.
+- **Still soft, because the sources are:** the crystal and the elephant (blurry captures), the desk
+  globe's printed map, the money tree's and maple's leaves, the white roses and the dog plush's
+  edges. What is left is the viewer's own softness, which is not this lane's file.
+
+### Known issues
+
+- A tap only hops them: no capture here has a part that can move cleanly (effect rules), so there is
+  no tap effect.
+- A few frame small (sushi boat, cherry blossom trees, murex shell) because they are scaled by their
+  longest side; the elephant faces away at the default camera.
+- `tests/help.spec.mjs` "the line stays clear of the toy at 1440x900" failed once while clips were
+  rendering in parallel (a timing flake; it does not touch these toys, and it passes alone).
+- Full files up to 15 MB and 1,000,000 splats are heavier for mid-tier phones, which load the full
+  file (only the low profile loads the lite one); `assets/` is about 140 MB larger. If phones
+  struggle, the fix is a mid file between the two.
+- SuperSplat scenes marked "streamed (LOD)" need `splat-transform -L 0 .../lod-meta.json`
+  (`"lod": 0` on the entry); the research doc said they could not be used.
+
+### Lessons
+
+- `tools/splat-views.mjs` names its work files after the input's file name, so inputs that are all
+  called `meta.json` overwrite each other when run in parallel: copy each to its own `.ply` first.
+- A SuperSplat page with no `rel="license"` link has no license stated.
