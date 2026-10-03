@@ -660,11 +660,12 @@ What moves on screen, so solid things stay solid:
   `skin: clothSkin({ rows, cols, points, tokens })` (each splat follows the four corners of its
   cell, kind `skin4`). The splats move with the nodes; nothing is warped by soft falloffs.
 - **Rigid riders** (a bead, a chime, an ornament, the yo-yo):
-  `pieces: [{ token | part, from, to, at, spin, axis }]`. The piece goes where node `from` goes and
-  turns as the link `from` → `to` turns (`to` defaults to the next node; `node: i` with no `to`
-  turns with the link before it; `turn: false` keeps it upright). `spin: (strand) => angle` adds a
-  turn about `axis` (the yo-yo's spin). `at` is the built point that sits on the node when that
-  isn't the node's own place (the kite's bridle). A part's pivot is read from the kit.
+  `pieces: [{ token | part, from, to, at, turnBy, spin, axis }]`. The piece goes where node `from`
+  goes and turns as the link `from` → `to` turns (`to` defaults to the next node; `node: i` with no
+  `to` turns with the link before it; `turn: false` keeps it upright; `turnBy: 0.4` turns it only
+  that share of the way, as a kite keeps facing the wind). `spin: (strand) => angle` adds a turn
+  about `axis` (the yo-yo's spin). `at` is the built point that sits on the node when that isn't the
+  node's own place (the kite's bridle). A part's pivot is read from the kit.
 
 ### Ropes and chains: `hands.ropes`
 

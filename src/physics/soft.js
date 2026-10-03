@@ -604,6 +604,7 @@ export class SoftParts {
         const i = pc.from ?? pc.node ?? 0;
         const a = this.nodes[s.first + i];
         let q = pc.turn === false ? ID : this.turnAt(s, i, pc.to);
+        if (pc.turnBy !== undefined) q = quat.slerp(ID, q, pc.turnBy);
         const sp = pc.spin?.(s, this);
         if (sp) q = quat.mul(q, quat.axisAngle(pc.axis || [0, 0, 1], sp));
         // The built point that sits on the node (default the node's home).
