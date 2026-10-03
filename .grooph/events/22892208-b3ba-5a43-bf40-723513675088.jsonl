@@ -1,0 +1,13 @@
+{"v":1,"t":"2026-10-03T18:47:04.722Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:08.129Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:11.733Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"mcp__github__pull_request_read","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:12.399Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"mcp__github__pull_request_read","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:20.154Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__unsubscribe_pr_activity","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:20.436Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__unsubscribe_pr_activity","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:23.446Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:44.025Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:44.068Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"TaskUpdate","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:44.081Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"TaskUpdate","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:50.052Z","harness":"claude-code","event":"turn-end","session":"22892208-b3ba-5a43-bf40-723513675088","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:50.152Z","harness":"claude-code","event":"turn-start","session":"22892208-b3ba-5a43-bf40-723513675088","cwd":"splashery"}
+{"v":1,"t":"2026-10-03T18:47:51.753Z","harness":"claude-code","event":"tool","session":"22892208-b3ba-5a43-bf40-723513675088","tool":"ReadNotifications","cwd":"splashery"}
