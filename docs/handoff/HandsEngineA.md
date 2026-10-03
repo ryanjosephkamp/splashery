@@ -150,5 +150,5 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
 ## Known issues
 
 - Lift and the curve are toy-speed values, not measured ones (see above).
-- The fingertip spin needs a quick upward flick while holding the ball (about 700 CSS pixels per
+- The fingertip spin needs a quick upward flick while holding the ball (about 500 CSS pixels per
   second); slower lifts just lift it.

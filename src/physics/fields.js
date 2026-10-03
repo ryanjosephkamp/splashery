@@ -670,16 +670,22 @@ export class Extras {
     if (!h) return;
     const b = h.body;
     const s = this.samples;
-    if (!this.spin && s.length >= 3) {
-      const a = s[0];
+    if (!this.spin && s.length >= 2) {
+      // The finger's speed over its last moves (about 0.12 s).
       const z = s[s.length - 1];
+      let a = s[0];
+      for (const e of s)
+        if (z.t - e.t <= 0.12 + 1e-6) {
+          a = e;
+          break;
+        }
       const t = z.t - a.t;
       if (t > 0.02) {
         const vy = (a.y - z.y) / t; // up the screen
         const vx = (z.x - a.x) / t;
-        if (vy > 700 && vy > 1.5 * Math.abs(vx)) {
+        if (vy > 500 && vy > 1.5 * Math.abs(vx)) {
           const bottom = b.toLocal(v3.add(b.pos, [0, -(b.solid?.r ?? b.bound), 0]));
-          this.spin = { rate: Math.min(22, vy / 90), from: h.joint.la.slice(), to: bottom, t: 0, q: b.q.slice(), tilt: [0, 0, 0] }; // prettier-ignore
+          this.spin = { rate: Math.min(22, vy / 70), from: h.joint.la.slice(), to: bottom, t: 0, q: b.q.slice(), tilt: [0, 0, 0] }; // prettier-ignore
         }
       }
     }
