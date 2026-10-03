@@ -754,6 +754,121 @@ picked up again or ↺ Reset (objects only, never people or animals). `stick: fa
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 
+## 5g. Hands-on: joints
+
+From lane Hands engine B (October 3, 2026; code in `src/physics/joints.js`, proof in
+`tests/heb-engine.spec.mjs`). With the ✋ switch on, a recipe's `hands.joints` makes its parts move
+the way the real thing's do: a lid swings on its hinge, a sword slides out of its stone, a crank
+turns, a wedge clicks back into its place, a petal snaps off. Everything is in recipe coordinates (a
+kit toy's build space; a scan rig's world) and moves as a solid piece. ↺ sends every part home along
+its own way (a lid swings shut) and mends whatever broke. A recipe with `hands.joints` plays in
+pieces mode (the toy itself stays put); `hands.pieces` may add loose pieces beside the joints.
+
+`hands.joints` is a list, or a function `(data, info) => list` (`data` is the build's `k.data`).
+Each joint moves one part (`part`, a `k.part` name, or a scan rig's part) or one token (`token`, an
+index). A joint makes its own piece unless `hands.pieces` already has one with that part or token.
+Keys every joint takes:
+
+- `type`: `"hinge"`, `"slider"`, `"dial"`, `"socket"` or `"break"`.
+- `part` or `token`; `name` (defaults to the part's name, used by `parent` and in sounds).
+- `pos`: the part's middle (where the finger finds it); `pick`: the radii `[x, y, z]` of the
+  ellipsoid about `pos` a press finds it in (the part's rough size).
+- `pivot`: the part's pivot exactly as given to `k.part` (Hands-on turns the part about it).
+- `start(c, info)`: for a hinge, slider or dial, its value as the recipe's `drive` shows it now (`c`
+  the eased controls), when that differs from the part as built: a music box built shut but shown
+  open says `start: (c) => 1.95 * ease3(c.open)`. ↺ brings it back there.
+- `sound(ev, vol)`: the cue for an event (null for silence); `ev.kind` is `"stop"` (a hinge or
+  slider hit a stop), `"detent"` (a dial passed a click), `"free"` (a stuck slider came loose),
+  `"socket"` (clicked into place) or `"snap"` (broke off); `ev.v` is the joint's value then (which
+  stop), `ev.n` the detent's number and `ev.speed` how hard (toy radii per second). Without it a
+  quiet default plays (thud, click, scrape, click, crack).
+
+**Hinge**: swings about `axis` through `pivot`, from `min` to `max` radians (from the part as built;
+the sign follows the right-hand rule about `axis`). It falls by its own weight (`gravity`: `false`,
+or a multiplier), `spring` (per second squared) pulls it toward `rest` (radians, 0), and `damping`
+(per second, 3) slows it. At a stop it bounces back by `bounce` (0.2). `com` is the point its weight
+hangs from (defaults to `pos`).
+
+```js
+hands: {
+  joints: [{ type: "hinge", part: "lid", pivot: [0, 0.1, -0.37], axis: [-1, 0, 0], min: 0, max: 1.95,
+    pos: [0, 0.25, 0], pick: [0.62, 0.25, 0.4] }],
+},
+```
+
+**Slider**: moves along `axis` from `min` to `max` (recipe units, from as built). `stick` (in toy
+radii) keeps it stuck fast until the finger has pulled that far (with `wiggle`, an axis it shakes
+about while stuck); `friction` (toy radii per second squared) holds it where it is let go when it
+beats its weight; `spring`, `rest`, `damping`, `bounce` and `gravity` as for a hinge.
+
+```js
+{ type: "slider", part: "sword", pivot: [0, 0.9, 0], axis: [0, 1, 0], min: 0, max: 0.75,
+  stick: 0.1, wiggle: [0, 0, 1], friction: 40, pos: [0, 0.75, 0], pick: [0.12, 0.6, 0.12] }
+```
+
+**Dial**: turns about `axis` through `pivot`, around and around (or between `min` and `max`); the
+finger turns it as it goes round the axis, and a flick sets it coasting, slowed by `drag` (per
+second, 0.8). `detents` (clicks per turn) click as it passes each one and settle it on one. A dial
+has no weight unless `gravity` is set. `turn(angle, delta, info)` is called on every move and may
+return cues (a music box's notes); `also(angle, parts, info)` adds entries to the parts Hands-on
+sends (a dancer that the crank turns; it works for every joint type, with its value).
+
+```js
+{ type: "dial", part: "crank", pivot: [0.58, 0.25, 0], axis: [1, 0, 0], detents: 12,
+  pos: [0.62, 0.25, 0.1], pick: [0.1, 0.18, 0.18],
+  turn: (a, da) => (da > 0 && step(a) ? { voice: "tine", f: nextNote() } : null),
+  also: (a, parts) => (parts.dancer = { angle: 0.8 * a }) }
+```
+
+**Socket**: a loose piece (in `hands.pieces`, or made here with `solid`) that clicks back into the
+place it was built in: once it has been taken out, bringing it within `snap` toy radii (0.3) of its
+place, or pointing the finger at its place, glides it home and locks it there.
+
+```js
+pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
+joints: (d) => d.wedges.map((w) => ({ type: "socket", token: w.token, snap: 0.35 })),
+```
+
+**Break**: a piece held fast at `at` to the ground, or to another piece (`to`, a part, a token or a
+joint's name), until the finger pulls it `pull` toy radii (0.35): it bends as a whole about `at`, up
+to `give` radians (0.12), then snaps off into the hand. On a loose piece it rides along with that
+piece (their pair lands as one), and a landing faster than `knock` (toy radii per second) breaks it
+off. ↺ mends it.
+
+```js
+joints: [{ type: "break", part: "top", to: "low", at: [0.1, 0.4, 0], pull: 0.3, give: 0.15, knock: 4 }],
+```
+
+**Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk
+lamp's head on its arm, a clock's hands on a turning dial. Children pose after their parents.
+
+**Upright** (Level 1, a whole toy): `hands: { upright: { k: 40, damping: 3 } }` turns a tipped toy
+back upright (its tilt only; its turn about the vertical stays), so it rocks and rights itself as a
+sailboat or a roly-poly penguin does.
+
+**Scan rigs**: `rigPieces(rig, names, opts)` (from `src/physics/joints.js`) turns a scan rig's
+hard-edged parts (src/rigs.js) into loose pieces, one body each, shaped as the part's first region
+(an ellipsoid, or `opts.solid(region)`), turning about that region's center; `opts` is copied onto
+each piece (`mass`, `friction`, ...). A rig with `hands.pieces` can be picked up piece by piece.
+Give such a rig `hard: true`: each splat then belongs wholly to one part (no soft edges), so a part
+lifted right off leaves no trail of half-moved splats:
+
+```js
+tomatoes: { hard: true, hands: { floor: -0.17, area: 0.9, pieces: () => rigPieces(RIGS.tomatoes, TOMATO_NAMES, { friction: 0.9 }) }, ... }
+```
+
+When a scan's piece can't move cleanly (a tomato whose sides the capture never saw), swap it for a
+kit-built stand-in while it is off its place: build the stand-in (and, optionally, a fill for the
+gap it leaves) as parts of the rig's `addon`, hidden by `drive`
+(`out.addon.parts.kt0 = { visible: 0 }`), and name them in `hands.swap`:
+`{ t0: { kit: "kt0", fill: "kf0" } }`. While the piece is off its place, the scan's part hides,
+`kit` rides where the piece is (built about the same pivot), and `fill` shows; ↺ brings the scan's
+own part back.
+
+Check a joint with `player.handsOn.joints.state()` (each joint's value, speed, `broken`, `stuck`)
+and `player.handsOn.joints.events` (stops, clicks, snaps). Every joint follows the effect quality
+rules: parts move whole about real axes, a part stops at real stops, and nothing flies off.
+
 ## 6. Behaviours
 
 A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or
