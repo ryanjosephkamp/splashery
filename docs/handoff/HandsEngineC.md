@@ -86,18 +86,28 @@ files go only through your engine PR.
   `src/physics/hands-on.js`; `tools/phy-clip.mjs` (phone-size clips with a finger dot).
 - Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
+Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 
-- October 3, 2026: lane started. Engine PR on `claude/lane-hands-engine-c` ("Engine: hands-on soft
-  parts: ropes, cloth and stretch"); demo toys next on `claude/lane-hands-engine-c-toys`.
+- October 3, 2026: lane started.
+- Engine PR #225 (`claude/lane-hands-engine-c`, "Engine: hands-on soft parts: ropes, cloth and
+  stretch"): ready for the Operator's full test run and merge. Category lanes can start from
+  docs/PACKS.md, section 5f.
+- Lane PR #230 (`claude/lane-hands-engine-c-toys`, stacked on #225): the six demo toys are built and
+  tested (`tests/hec.spec.mjs`, 8 tests). Clips are going up on Effect review page 2 under
+  HandsEngineC; the toys wait for the owner's marks.
 - Engine: `src/physics/soft.js` (new): ropes and chains, cloth and soft stretch, with their own
-  small XPBD particle solver (the rigid world in `world.js` is untouched). A recipe asks for them
-  with `hands.ropes`, `hands.cloth` and `hands.stretch`; docs/PACKS.md, section 5f, "Hands-on: soft
-  parts", has every key with an example. `tests/hec-engine.spec.mjs` measures each piece (a rope
-  hangs and keeps its length; a pulled chain swings and goes home; cloth drapes and streams in wind;
-  a string snaps and Reset mends it; arms ride a body, trail and curl back; riders turn with the
-  rope; stretch wobbles back through rest; the skin helpers; the full finger flow through Hands-on;
-  the step time: about 0.5 ms for 84 nodes at 10 substeps on this machine).
+  small XPBD particle solver (`world.js` is untouched). A recipe asks for them with `hands.ropes`,
+  `hands.cloth` and `hands.stretch`.
+- `tests/hec-engine.spec.mjs` measures each piece (11 tests).
+- Step time: about 0.5 ms for 84 nodes at 10 substeps; with each demo toy in play, 0.16 to 0.45 ms
+  per frame.
+- Demo toys:
+  - Jelly blob: stretch.
+  - Octopus: the body is a piece and the eight arms are ropes riding it.
+  - Yo-yo: a reeling string with the yo-yo riding its end.
+  - Kite: the line is a rope, and the kite rides its end with lift; the tail is a rope in the wind.
+  - Pizza: the slice is a piece; four breakable cheese strings.
+  - Hoodie: a 9×5 cloth over the scan's hood (skin4, through a new `skin` option in `addScan`).
 
 ## Notes
 
@@ -121,3 +131,12 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
 - Cloth: the kite's tail, the hoodie's hood, the Moon's flag and other flags.
 - Soft stretch: jelly, amoeba, jelly blob, bacterium, chromosome, red blood cell, pretzel, torus
   knot, lungs, cupcake icing, pufferfish; the pizza's cheese strings use breakable ropes.
+
+## Lessons
+
+- Floor friction must scale with how far the floor pushes a node out (PBD friction). A fixed share
+  of the slide, taken every substep, compounds and glues the nodes to the floor.
+- `keep` (shape memory) works as a spring acceleration. As a position nudge every substep it acts
+  like a rigid weld.
+- A soft toy's settle tests: let the toy settle, then measure. Strong drag and keep make it settle
+  the same way every run; weak ones left the hood flopped on some runs.
