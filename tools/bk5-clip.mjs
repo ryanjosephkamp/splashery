@@ -178,7 +178,11 @@ async function record(scene) {
     await run(() => (window.__splashery.player.frozen = true));
   };
   const at = (n, f) => run(async ([n, f]) => (await import("/src/packs/pictures.js")).BOOKS_R5.point(n, f), [n, f]); // prettier-ignore
-  const control = (key, v) => run(([key, v]) => window.__splashery.app.setControl(key, v), [key, v]); // prettier-ignore
+  // A Toy tab switch (it eases over a few steps of the clock).
+  const control = async (key, v) => {
+    await run(([key, v]) => window.__splashery.app.setControl(key, v), [key, v]);
+    await play(0.25);
+  };
   const popState = () => run(async () => { const { POP } = (await import("/src/packs/pictures.js")).BOOKS_R5; return { phase: POP.phase, relief: POP.relief?.key || "" }; }); // prettier-ignore
   // Waits in real time (the clock held) until the figure is ready to rise:
   // its pictures built and, for a photo, its depth worked out.
