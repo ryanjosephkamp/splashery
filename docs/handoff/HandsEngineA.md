@@ -155,8 +155,14 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
 - Projectiles and targets: bow and target, crossbow and trebuchet (the string and arm are lane B's
   sliders and hinges; the bolt and stone are projectile pieces).
 
+- Level 1 fix (lane Physics' engine): a kit toy tossed whole kept its turning parts and tokens
+  turning about where it was built (the kit shader works in the world), so a pushed car's wheels
+  came off. `poseKitUniforms` (fields.js), set as `motion.handsFix` by `HandsOn.apply`, moves their
+  pivots, turns and offsets through the toy's pose. Kit toys only.
+
 ## Known issues
 
+- A rig toy (a scan with parts) tossed whole still turns its parts about home.
 - Lift and the curve are toy-speed values, not measured ones (see above).
 - The fingertip spin needs a quick upward flick while holding the ball (about 500 CSS pixels per
   second); slower lifts just lift it.
