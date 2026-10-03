@@ -122,6 +122,7 @@ export class HandsOn {
     this.player.stage.setToyPose?.(null);
     this.player.motion.handsTokens = null;
     this.player.motion.handsParts = null;
+    this.player.motion.handsAddon = null; // lane Hands engine B
   }
 
   // Pieces live in the recipe's own coordinates (a kit toy is centred and

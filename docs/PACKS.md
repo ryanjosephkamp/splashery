@@ -747,6 +747,14 @@ lifted right off leaves no trail of half-moved splats:
 tomatoes: { hard: true, hands: { floor: -0.17, area: 0.9, pieces: () => rigPieces(RIGS.tomatoes, TOMATO_NAMES, { friction: 0.9 }) }, ... }
 ```
 
+When a scan's piece can't move cleanly (a tomato whose sides the capture never saw), swap it for a
+kit-built stand-in while it is off its place: build the stand-in (and, optionally, a fill for the
+gap it leaves) as parts of the rig's `addon`, hidden by `drive`
+(`out.addon.parts.kt0 = { visible: 0 }`), and name them in `hands.swap`:
+`{ t0: { kit: "kt0", fill: "kf0" } }`. While the piece is off its place, the scan's part hides,
+`kit` rides where the piece is (built about the same pivot), and `fill` shows; ↺ brings the scan's
+own part back.
+
 Check a joint with `player.handsOn.joints.state()` (each joint's value, speed, `broken`, `stuck`)
 and `player.handsOn.joints.events` (stops, clicks, snaps). Every joint follows the effect quality
 rules: parts move whole about real axes, a part stops at real stops, and nothing flies off.
