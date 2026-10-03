@@ -1504,7 +1504,7 @@ const WP_RINGS = [0, 0.3, 0.9];
 const GLASS = {
   edge: 0.12,
   band: 0.08,
-  tint: 0.015,
+  tint: 0.2,
   fin: 0.02,
   size: 0.45,
   count: 30000,
@@ -2310,15 +2310,26 @@ export const RECIPES = {
       };
       fins(0.99, "#2c4452", GLASS.edge, GLASS.count);
       fins(0.965, "#f6fcff", GLASS.band, GLASS.count);
-      // A faint tint over the whole ball, face on.
+      // A faint tint over the whole ball. Lane Fix7: stronger toward the rim
+      // than face on (as glass reflects more where it turns away), and it
+      // reflects the room as polished glass does (the light sky above, a
+      // soft horizon, the darker floor below), so the shell reads as a
+      // surface without fogging what is inside.
       k.add(k.sphere(1), {
         even: true,
         jitter: 0,
         part: glass,
         flat: 0.05,
         opacity: GLASS.tint,
+        // Like real glass, clearer face on and denser where it turns away.
+        kind: "rim",
+        params: [0.22, 2.5],
         pattern: false,
-        color: "#cfe6ea",
+        color: (c) => {
+          const y = c.n[1];
+          const sky = mix("#cfe6ea", "#f2f8fb", smoothstep(0.1, 0.8, y));
+          return mix(sky, "#56656e", smoothstep(0.05, -0.35, y));
+        },
       });
       // A highlight up and to the left, crisp at its edge, and its small
       // reflection low on the right (the light coming back off the far

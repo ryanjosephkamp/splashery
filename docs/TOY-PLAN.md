@@ -41,24 +41,25 @@ Proposals below are suggestions; the owner may change them.
   tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
   Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
   Pebbles, Kelp, Storm cloud, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
-  Ice cream, Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel,
-  Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes,
-  Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz
-  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
-  Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras
-  proof, Splat equation, Storybook, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
-  Sunglasses, Baseball cap, Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of
-  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
-  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
-  piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine,
-  Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
-  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
-  Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional
-  network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
-  Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
-  Enigma machine, Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter,
-  Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal
-  ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
+  Ice cream, Watermelon, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear,
+  Pretzel, Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple,
+  Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess
+  set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid,
+  Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles,
+  Pythagoras proof, Splat equation, Storybook, Fountain pen, Water bottle, Soda can, Running shoe,
+  Hoodie, Sunglasses, Baseball cap, Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish,
+  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
+  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
+  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner,
+  Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting
+  supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
+  Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D,
+  Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid
+  lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -471,7 +472,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Super neat.
   - Effect: Rolls around a little circle; the swirl inside turns.
   - Improved: E6a: it rolls round a little circle, turning the way it rolls, and after one lap is
-    back exactly as it was; the swirl inside turns as it goes (2.4 s).
+    back exactly as it was; the swirl inside turns as it goes (2.4 s). Fix7: the glass shell reads
+    as polished glass: a faint tint that is clear face on and denser toward the rim, reflecting a
+    light sky above and a darker floor below (no added highlights).
   - Sound: The same real marble roll, about 6 dB quieter (Sound C, October 2, 2026).
 - **Hockey puck** (`hockey-puck`). Now: tap: Slap shot. Plan: keep.
   - Owner: Underwhelming.
@@ -524,7 +527,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A deep breath in and out.
   - Improved: E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the
     airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
-    After the owner's review the breath is about twice as big.
+    After the owner's review the breath is about twice as big. Fix7: the deep breath fills the lungs
+    about 70% further out than before.
   - Sound: A real person's slow deep breath in, then out.
 - **Tooth** (`tooth`). Now: tap: Polish. Plan: keep.
   - Owner: Looks good; no idea for an effect.
@@ -634,7 +638,8 @@ Proposals below are suggestions; the owner may change them.
     (the owner's note: "the collapse happens awkwardly; it should be smooth"): the lip plunges
     without stopping, the barrel it closes shrinks as it rolls forward, white water froths up out of
     the plunge and climbs over it as a foaming wall, then sinks into lace as the water flattens, all
-    on one smooth clock; the rebuild is unchanged.
+    on one smooth clock; the rebuild is unchanged. Fix7: the lip stays joined to the face as the
+    wave throws and rolls, so no dark strip opens at the curl.
   - Sound: Wave crash.
 - **Geyser** (`geyser`). Now: tap: Erupt. Plan: keep.
   - Owner: Pretty cool.
@@ -1055,7 +1060,9 @@ Proposals below are suggestions; the owner may change them.
     cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe). Your
     own molecule (after the E2 review): type a name (about sixty well-known ones), a formula that
     names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES
-    are embedded with a small force field) and heats up the same way.
+    are embedded with a small force field) and heats up the same way. Fix7: each bond stretches and
+    squeezes between its two atoms (its splats follow both atoms, by how far along the bond they
+    are), so an atom never leaves its bond when it is heated.
   - Sound: Soft little ticks of the atoms jostling as it heats, thinning out as it settles; no wind,
     no building blocks (Sound C, October 2, 2026).
 - **Protein** (`protein`). Now: tap: Pull it apart. Plan: keep.
@@ -1066,14 +1073,16 @@ Proposals below are suggestions; the owner may change them.
     loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured
     rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart
     into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green
-    while the barrel is open.
+    while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s),
+    instead of pausing; the next tap pulls it apart again.
   - Sound: A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft
     thud as it reassembles (no building blocks).
 - **Crystal lattice** (`crystal-lattice`). Now: tap: Send a wave through. Plan: keep.
   - Effect: A wave of vibration travels through the lattice.
   - Improved: E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs
     across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8
-    s).
+    s). Fix7: the bonds between slices stretch and bend with the wave (their two ends follow their
+    slices), so atoms never leave their bonds.
   - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
     October 2, 2026).
 - **Periodic table** (`periodic-table`). Now: tap: Raise or lower the atom. Plan: keep.
@@ -1086,7 +1095,9 @@ Proposals below are suggestions; the owner may change them.
     (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it.
     Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap
     on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic
-    number or shuffled), and any tap stops it.
+    number or shuffled), and any tap stops it. Fix7: a tap on the 57-71 or 89-103 cell lights its
+    row of lanthanides or actinides (3.5 s); a Wide table option shows the f-block in its periods
+    (32 columns).
   - Sound: The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it
     packs into the nucleus, in sync (Sound C, October 2, 2026).
 
@@ -1337,6 +1348,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A wet, heavy wobble instead of a cartoon boing.
 - **Pancakes** (`pancakes`). Now: tap: Flip the top one. Plan: keep.
   - Owner: Really neat.
+  - Improved: Fix7: the syrup on the top pancake, and the drips down its side, flip with it; the
+    syrup that ran onto the pancakes below stays.
   - Sound: A smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks).
 - **Cupcake** (`cupcake`). Now: tap: Flick the cherry. Plan: keep.
   - Owner: Needs an effect.
@@ -1356,7 +1369,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The stripes wind around like a barber pole, then it snaps in two and rejoins.
   - Improved: E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with
     a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then
-    the halves come back together and mend with a glint (about 2.9 s).
+    the halves come back together and mend with a glint (about 2.9 s). Fix7: the bow has both ribbon
+    tails, hanging in front of the canes.
   - Sound: The sugar strains as it twists (no whistle); the snaps and the mends stay.
 - **Macarons** (`macarons`). Now: tap: Stack up. Plan: keep.
   - Owner: Maybe they do something.
@@ -1403,6 +1417,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The bite and a softer, shorter cheese stretch; not windy (Sound C, October 2, 2026).
 - **Burger** (`burger`). Now: tap: Explode view. Plan: keep.
   - Owner: Perfect.
+  - Improved: Fix7: about 160 real sesame seeds on the bun, and no pale crumb showing through the
+    crust close up (the white flash); the lettuce is whole, with no hole in its middle.
   - Sound: The patty's smooth sizzle, no clicking.
 - **Sushi** (`sushi`). Now: tap: Pick up and dip. Plan: keep.
   - Owner: Chopsticks lifted by an invisible hand pick up the sushi.
@@ -1416,7 +1432,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Shell cracks in half and the filling spills out, then it reassembles.
   - Improved: E5: the shell snaps across the middle with a crunch; the halves pull apart and swing
     open like a book, showing the filling in each break, and bits spill onto a new plate and bounce;
-    then they hop back in and the halves close (about 3.1 s).
+    then they hop back in and the halves close (about 3.1 s). Fix7: the meat stays inside the shell;
+    the bits drop out of the opened break onto the plate, bounce a little and slide to a stop.
   - Sound: A hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings
     now (taco-crack.mp3), with the synthesized sound as a fallback.
 - **Boiled egg** (`egg`). Now: tap: Crack. Plan: keep.
@@ -1433,7 +1450,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A bite appears (crunch); a second tap, a worm peeks out.
   - Improved: E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of
     pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about,
-    ducks back in, and the apple grows whole (about 2.9 s).
+    ducks back in, and the apple grows whole (about 2.9 s). Fix7: the bite's edge is clean: no pale
+    flesh specks on the skin round it.
   - Sound: A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper;
     real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.
 - **Bananas** (`banana`). Now: tap: Peel them. Plan: keep.
@@ -1444,7 +1462,9 @@ Proposals below are suggestions; the owner may change them.
     bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes
     together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is
     gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they
-    pull apart.
+    pull apart. Fix7: the three bananas lie side by side, just touching (they used to cross); the
+    fruit and the inner peel show only while a banana is peeled, so no pale specks show through the
+    skin.
   - Sound: A soft rustle as the bunch comes apart, and a quiet real banana peel as each one peels
     (no zipper) (Sound C, October 2, 2026).
 - **Orange** (`orange`). Now: tap: Open into wedges. Plan: keep.
@@ -1738,7 +1758,8 @@ Proposals below are suggestions; the owner may change them.
     again in order. Lab r2 (the owner's review of September 29, 2026: "really, really grainy"):
     every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid
     (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each
-    programmed splat its own dot).
+    programmed splat its own dot). Fix7: no seam where u wraps round (the torus, the Möbius strip
+    and every other wrapping preset): the grid's last column was being left out.
   - Sound: Changed entirely, the quiet scratch of chalk as t plays.
 
 ## Clothing (4)
@@ -1753,7 +1774,8 @@ Proposals below are suggestions; the owner may change them.
     for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift
     and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
     denser scan, thinner braided laces. Sharpness A (October 2, 2026): exact splat sizes for a
-    crisper outline and a calmer fabric texture.
+    crisper outline and a calmer fabric texture. Fix7: flag colors reach the shoe (its laces keep
+    theirs).
   - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
 - **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -1765,7 +1787,9 @@ Proposals below are suggestions; the owner may change them.
     hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across
     the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in
     front of the chest, clear of the body, with fabric filling the shoulders, then swing back down
-    and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body.
+    and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a
+    band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a
+    raised sleeve shows cloth, not a hole; flag colors reach the cloth.
   - Sound: The fabric's soft brushes and the zip, with much less wind (Sound C, October 2, 2026).
 - **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -1777,7 +1801,8 @@ Proposals below are suggestions; the owner may change them.
     in one after the other, both behind the lenses and the second behind the first, the glasses turn
     head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
     the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a
-    lens starts the effect too (faint pick splats over the glass).
+    lens starts the effect too (faint pick splats over the glass). Fix7: flag colors reach the frame
+    (the lenses keep theirs).
   - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no
     electronic clicks or shimmer).
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
@@ -1789,7 +1814,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut
     stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
     flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
-    denser, sharper model.
+    denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut).
   - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are
     unchanged.
 
@@ -1936,7 +1961,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first),
     drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading
     puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops
-    back to its place (about 6 s). The Warmth slider melts it the same way.
+    back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a
+    real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower).
   - Sound: Drips, then a crunch of snow and a twinkle as it rebuilds.
 - **Fireworks** (`fireworks`). Now: tap: Launch. Plan: keep.
   - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour
@@ -2435,7 +2461,10 @@ Proposals below are suggestions; the owner may change them.
     and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the
     operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy
     tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the
-    keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture).
+    keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step
+    back, as an operator corrected a mistake (the real machine had no delete key): a tap on the
+    rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its
+    coded letter) off the pad and turns the rotors back to where they stood before it.
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.
@@ -2479,7 +2508,8 @@ Proposals below are suggestions; the owner may change them.
     double-tap on a page glides the view in until the page fills the screen, and again (or a zoom
     out) shows both pages; while a page is in view, forward goes from the left page to the right
     one, then turns the leaf and lands on the next left page (back the other way). Reading: One page
-    (the default on a phone held upright) keeps a page in view.
+    (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at
+    once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand.
   - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback
     (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C,
     October 2, 2026).
