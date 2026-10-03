@@ -222,7 +222,19 @@ qr.info(); // { text, version, size, ecc, style, options, check, warnings, error
 - On screen, Scan view leaves 3 modules past the quiet zone; the toy opens in that view (camera
   distance 3.1 radii, the same for any screen, since the field of view spans the narrower side).
 
+### Clips and cards
+
+Eleven cards on Effect review page 2 (lane id `QR`, ids `qr-<style>-<motion>`), posted on October 3,
+2026: Burst for all seven styles, Flip for Classic and Gems, Assemble for Dots and Neon. Each is a
+480 px MP4 seen from a little above while it moves, then a glide into Scan view and 2.5 s held
+still, so the last frame can be scanned from the screen. Every last frame (MP4 included) reads back
+with jsQR. They were made with a lane script like `tools/effect-clip.mjs` (same stepped clock) but
+with labs on (the motions are a labs GPU program, and the shared tool opens the app without labs)
+and the scan-view camera; it lives in the session's scratch space, not the repo. There is no
+`lanes/QR` record on the page yet (the Operator makes it); the cards show under the id "QR" until
+then.
+
 ### Next
 
-- Clips and cards on the Effect review page (page 2), each ending on a big, scannable still.
 - The QR scan lab's scorecard: set the defaults and warnings from it.
+- The owner's marks on the cards.
