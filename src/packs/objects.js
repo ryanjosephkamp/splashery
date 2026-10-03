@@ -745,8 +745,21 @@ export const RECIPES = {
     options: [{ key: "color", label: "Cover", type: "color", default: "#7a2432" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 2 }],
     action: { key: "open", label: "Open or close" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const o = c.open;
+      // Splats sort in the pose they were built in (the book closed), so a
+      // turned leaf would draw its paper over its words, and the turned
+      // cover and leaves over the pages they lie on. They are sorted where
+      // they stand on the first frame and every hundredth of a turn, and
+      // again on the frame after (the sort uses the pose the frame starts
+      // with) (lane Sharpness A).
+      const d = info?.data;
+      const slot = Math.round(o * 100);
+      if (d && (slot !== d.sortSlot || d.sortAgain)) {
+        d.sortAgain = slot !== d.sortSlot;
+        d.sortSlot = slot;
+        out.resortPose = true;
+      }
       const lift = [0, 0, 0, 0, 0, 0, 0, 0.012, 0.03, 0.06];
       const cover = Math.PI * ease3(window01(o, 0, 0.42));
       out.parts.cover = { angle: cover };
@@ -773,6 +786,7 @@ export const RECIPES = {
     },
     build(k, o) {
       const { W, H, ct, leaves, lt, T } = BOOK;
+      k.data = {}; // drive() keeps its sort state here
       const cover = o.color;
       const gold = "#d9b45a";
       const paper = "#f6efdf";
@@ -813,7 +827,7 @@ export const RECIPES = {
         return inked(page.lines, s, t);
       };
       const ink = "#2f2a26";
-      const pageCol = (c, x, z, seed, picture = false, flipped = false) => {
+      const pageCol = (c, x, z, seed, picture = false, flipped = false, dots = false) => {
         if (
           picture &&
           Math.abs(x) > 0.18 &&
@@ -831,7 +845,9 @@ export const RECIPES = {
           const edge = Math.min(u, 1 - u, v, 1 - v);
           return keep(edge < 0.02 ? "#5b4a3a" : col);
         }
-        if (text(x, z, seed, flipped, picture)) return keep(ink, 0.8);
+        // Pages seen only mid-turn have few, large splats: their words are a
+        // soft gray, so they read as lines of print rather than black blots.
+        if (!dots && text(x, z, seed, flipped, picture)) return keep(mix(ink, paper, 0.45), 0.8);
         // A turned page is lit as it lies once turned over.
         const n = flipped ? [-c.n[0], -c.n[1], c.n[2]] : c.n;
         return lit(shade(paper, 0.985 + 0.015 * c.noise(x * 12, z * 12, seed)), n, {
@@ -844,7 +860,7 @@ export const RECIPES = {
       k.add(roundBox(W, ct, H, 0.012), {
         pos: [W / 2, ct / 2, 0],
         flat: 0.15,
-        weight: 1.6,
+        weight: 2.4,
         even: true,
         jitter: 0.01,
         size: 0.8,
@@ -878,7 +894,7 @@ export const RECIPES = {
         pos: [W / 2, T - ct / 2, 0],
         part: coverPart,
         flat: 0.15,
-        weight: 1.6,
+        weight: 4,
         even: true,
         jitter: 0.01,
         size: 0.8,
@@ -929,10 +945,10 @@ export const RECIPES = {
       k.add(evenBox(PW, block, PH), {
         pos: [PW / 2 + 0.005, ct + block / 2, 0],
         flat: 0.15,
-        weight: 1.8,
+        weight: 2.4,
         even: true,
         jitter: 0,
-        size: 1.1,
+        size: 1,
         color: (c) => {
           if (c.s.face === 2 || c.s.face === 3) return null;
           if (c.s.face === 1) return shade(paper, 0.8);
@@ -946,8 +962,43 @@ export const RECIPES = {
         even: true,
         jitter: 0.01,
         size: 1.25,
-        color: (c) => pageCol(c, c.p[0], c.p[2], 3, true),
+        color: (c) => pageCol(c, c.p[0], c.p[2], 3, true, false, true),
       });
+      // The words on the two pages seen while the book lies open (lane
+      // Sharpness A): every font pixel is a 2 x 2 grid of small ink dots
+      // laid exactly on it, just off the paper, like the laptop's keys
+      // (random splats on the page blurred the letters).
+      const inkDots = (seed, picture, flipped, y, part) => {
+        const page = pageText(seed, picture);
+        const dots = [];
+        page.lines.forEach((line, r) => {
+          for (let s0 = 0; s0 < 6 * line.length; s0++)
+            for (let gy = 0; gy < 7; gy++) {
+              const t0 = r * 10 + gy;
+              if (!inked(page.lines, s0 + 0.5, t0 + 0.5)) continue;
+              for (let a2 = 0; a2 < 2; a2++)
+                for (let b2 = 0; b2 < 2; b2++) {
+                  const sp = (s0 + (a2 + 0.5) / 2) * PX;
+                  const ax = flipped ? W - margin - sp : margin + sp;
+                  const z = (t0 + page.skip * 10 + (b2 + 0.5) / 2) * PX - H / 2 + 0.12;
+                  dots.push([ax, y, z]);
+                }
+            }
+        });
+        const r = PX * 0.6;
+        k.cloud({ count: dots.length, pattern: false, part }, (rand, j, n) => {
+          const d = dots[Math.floor((j * dots.length) / n)];
+          const m = Math.sqrt(Math.max(1, dots.length / n));
+          return {
+            p: d,
+            scales: [r * m, r * 0.15, r * m],
+            quat: [0, 0, 0, 1],
+            color: ink,
+            opacity: 1,
+          };
+        });
+      };
+      inkDots(3, true, false, ct + block + 0.0012, undefined);
       // Leaves that flip one after another.
       for (let i = 0; i < leaves; i++) {
         const part = k.part("leaf" + i, { pivot, axis: [0, 0, 1] });
@@ -977,8 +1028,10 @@ export const RECIPES = {
             even: true,
             jitter: 0.01,
             size: 1.25,
-            color: (c) => pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0),
+            color: (c) =>
+              pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0, shown),
           });
+          if (shown) inkDots(i * 2 + 1, false, true, y + up * lt * 0.4 - 0.0012, part);
         }
       }
       // The left pile's edges, shown once the leaves under the top one hide.

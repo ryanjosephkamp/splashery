@@ -168,4 +168,43 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   faces, random clouds).
 - If a toy is better merged sooner, the landmarks are self-contained in landmarks.js and could be a
   PR of their own.
-- **The storybook** is in its own PR (`claude/lane-sharp-a-book`); its notes are there.
+- **The storybook** is in its own PR (`claude/lane-sharp-a-book`); see "The storybook" below.
+
+## The storybook (its own PR)
+
+PR "Phase Sharpness A: the storybook", branch `claude/lane-sharp-a-book`, made from #172's head once
+the book had left it (stacked: until #172 merges, its diff shows #172's changes too). Tests in
+`tests/sha-book.spec.mjs`.
+
+- Round 1 (October 2, 2026): the words on the two open pages are ink dots laid exactly on the font's
+  pixels (2 × 2 per pixel, like the laptop's keys) instead of random page splats colored as ink.
+- Round 2 (October 3, 2026; cards `sha-book-r2` and `sha-book-tap-r2`, the old ones `replacedBy`),
+  for the owner's "fix" mark on round 1 (the page blended into the book, inside and from outside
+  when closed):
+  - The cause: splats sort in the pose they were built in (the book closed). The turned last leaf
+    kept that order, so its paper drew over its own words (gray, washed out), and the cover's inside
+    drew a dark red frame over the left page (on main too). `drive()` now asks for `out.resortPose`
+    on the first frame and every hundredth of a turn, and on the frame after (the sort uses the pose
+    the frame starts with). The build sets `k.data` for that state.
+  - Closed: the cover's rim is denser (weight 4, the back cover 2.4), so the page edges no longer
+    bleed white through it; the page block's edge splats are a little smaller (size 1, weight 2.4).
+  - The pages seen only mid-turn print their words in a soft gray (they have few, large splats;
+    black read as blots).
+- Which way and why: the blending had a clear cause with a small fix in the recipe, so round 2 fixes
+  the book as it is rather than rebuilding it on the Your book (PDF) toy. That rebuild (an original
+  storybook PDF with pictures, more pages, pages that flip) stays the fallback if the owner still
+  finds it blends; it would be a new asset and a new way the toy works.
+
+### Known issues (the storybook)
+
+- Closing: for about a tenth of a second as the cover lands (about 15 to 25 degrees open), the page
+  corner draws over the cover's lower corner. Held still at those angles it shows too, so it is the
+  sort itself, not a lag: sorted where they stand, the leaves and the right page sort in front of
+  the cover's corner there, while the closed book's order draws it right. Stopping the sorts below a
+  quarter turn, or below 30 degrees, made it last longer (the order from the last sort is worse), so
+  the book sorts all the way down. A fix needs the engine's pose sort (`posePass` in src/pose.js, or
+  how the container sorts near-touching layers): an Engine PR.
+- A toy has at most 15 parts and the storybook uses all 15, so the right page's words cannot be a
+  part that hides while the leaves close over them (a few dark specks show through the closing
+  leaves for a moment).
+- The leaves seen only mid-turn keep their words as page splats (a soft gray).
