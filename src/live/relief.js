@@ -301,22 +301,6 @@ export function snapEdges(d, w, h) {
   return out;
 }
 
-// A dark board behind the picture (r5), like a mirror's back: turned to
-// the side, what a near part uncovers (no splats were there) reads as a
-// shadow on the board rather than holes. (A backing in the picture's own
-// colors showed a second copy of the person on the wall.)
-function backing(k, { cols, rows, width, height, z, part }) {
-  const items = [];
-  const step = 3;
-  for (let j = 0; j < rows; j += step)
-    for (let i = 0; i < cols; i += step) {
-      const u = (i + step / 2) / cols;
-      const v = (j + step / 2) / rows;
-      items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, z], n: [0, 0, 1], size: ((width / cols) * step * 1.4) / 0.01, flat: 0.05, opacity: 1, color: "#2b2f36", part, pattern: false }); // prettier-ignore
-    }
-  k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
-}
-
 // ---- The live view (the splat mirror, Photo to 3D's live view) -------------------------
 // A picture of relief splats facing the viewer: `cols` by `rows`, `width`
 // wide, rising toward the viewer by up to `lift` where the depth says it is
@@ -387,7 +371,6 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain"
         items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
       }
     k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
-    backing(k, { cols, rows, width, height, z: -0.02, part }); // r5
     MIRROR.cam?.close();
     MIRROR.cam = null;
     return { cols, rows, height };
@@ -402,7 +385,6 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain"
     size: width / cols,
     part,
   });
-  backing(k, { cols, rows, width, height, z: -0.02, part }); // r5
   // Start (or stop) the camera's depth with this build.
   MIRROR.cam?.close();
   MIRROR.cam = null;

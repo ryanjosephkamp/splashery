@@ -104,38 +104,11 @@ test("the mirror's depth edges cut clean: no cell hangs between the near and far
   expect(out[5 * w + 37]).toBeCloseTo(0.9, 6);
 });
 
-test("the mirror has a dark board behind its picture, and a gentler default depth", async ({
-  page,
-}) => {
+test("the mirror's default depth is gentler", async ({ page }) => {
   await page.goto(APP("mid"));
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   await page.evaluate(() => window.__splashery.app.chooseToy("splat-mirror"));
   await page.waitForFunction(() => window.__splashery.player.scene.toy.id === "splat-mirror" && window.__splashery.player.motion.recipe && document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
-  const r = await page.evaluate(async () => {
-    const { MIRROR } = await import("/src/live/relief.js");
-    const ctx = window.__splashery.player.proc.ctx;
-    const b = ctx.buf;
-    // Plain splats behind the picture's plane and inside its edges (the dark
-    // board; the frame's bars lie outside).
-    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity, z0 = Infinity; // prettier-ignore
-    for (let i = 0; i < b.count; i++) {
-      if (b.anim[i * 4 + 1] !== 24) continue;
-      x0 = Math.min(x0, b.pos[i * 3]);
-      x1 = Math.max(x1, b.pos[i * 3]);
-      y0 = Math.min(y0, b.pos[i * 3 + 1]);
-      y1 = Math.max(y1, b.pos[i * 3 + 1]);
-      z0 = Math.min(z0, b.pos[i * 3 + 2]);
-    }
-    const mx = (x1 - x0) * 0.05;
-    const my = (y1 - y0) * 0.05;
-    let behind = 0;
-    for (let i = 0; i < b.count; i++) {
-      if (b.anim[i * 4 + 1] === 24) continue;
-      const [x, y, z] = [b.pos[i * 3], b.pos[i * 3 + 1], b.pos[i * 3 + 2]];
-      if (z < z0 - 0.005 && x > x0 + mx && x < x1 - mx && y > y0 + my && y < y1 - my) behind++; // prettier-ignore
-    }
-    return { depth: MIRROR.depth, behind, cells: MIRROR.cols * MIRROR.rows };
-  });
-  expect(r.depth).toBe(0.5);
-  expect(r.behind).toBeGreaterThan(r.cells / 12);
+  const depth = await page.evaluate(async () => (await import("/src/live/relief.js")).MIRROR.depth);
+  expect(depth).toBe(0.5); // was 0.6
 });
