@@ -100,4 +100,73 @@ October 3, 2026 (Opus 5.5).
   - `src/ui.js`, `src/app.js`, `styles.css`: a link asks first ("Open example.org?" with the full
     address); Open is a real link with `target="_blank"` and `rel="noopener noreferrer"`.
   - The test PDF is made by `tests/fixtures/bk5/make-pdf.mjs` (no outside files).
-- **Toy PR** (`claude/lane-books-r5`): next.
+- **Toy PR** (`claude/lane-books-r5`, "Phase Books r5: PDF links and figures that pop out"), on top
+  of the engine PR, in `src/packs/pictures.js` (Your book and the Photo album, both labs only):
+  - **Links.** A tap on a link of a page lying open follows it: a web link shows "Open example.org?"
+    with the full address, and Open is a real link (new tab, `noopener noreferrer`); a link to
+    another page turns the book there (the next spread turns; a farther page opens at once). A
+    `javascript:` (or any other unsafe) link is no link: the tap turns the page as usual. The tap
+    test uses the page's own place at rest (fitted to its shape and aligned to the spine, as the
+    sheets are), with a little slack round each box; links are not hit while a page turns. Each
+    page's links show a faint blue tint with an underline (`bookDecorate`), not on the cover.
+  - **Pop out** (a Toy tab switch on both toys). The figure on the page in view rises toward the
+    reader as one solid piece (0.95 s, a little overshoot), grows up to 1.3 times, moves a third of
+    the way toward the middle of the view, turns toward it (up to about 18 degrees) and tilts back a
+    little, then sways a few times and holds. The page under it is drawn again with the figure's
+    place empty and a soft shadow (variant `hole:…`; the album keeps the empty photo corners). A tap
+    on the book, or the switch, lays it back (0.7 s); a tap on another figure (the album's other
+    photo) lays the first back and raises that one. A page turn puts it back at once.
+    - Which figure: the biggest picture box on the page in view (the page in focus, else the right
+      then the left) from `pics.figures`; the album's photo on the page in view; or a drawn box.
+    - **Depth**: a photo (an album photo, or a PDF picture without a plain background) gets its
+      depth from the Photo to 3D depth model (`photo-3d-depth.js`'s `estimateDepth` and
+      `photo-3d-core.js`'s `normalizeDepth`, imported unchanged), loaded on the first pop; until the
+      depth comes it rises as a flat card, then the raised version swaps in. Relief: a fifth of the
+      figure's shorter side.
+    - **Layered lift**: a graphic (a chart, a diagram, text: much of it the color of its border)
+      rises as a card with its strongest shapes (more than 70 levels from the background, grown a
+      pixel and softened) raised by about 4.5% of its shorter side.
+  - **Draw a box** (a Toy tab switch on Your book): a drag on a page draws a box (four blue corners)
+    instead of pulling the page; letting go raises what is inside it (as a graphic or a photo, by
+    the same test).
+  - Help texts (how-to and About) and plan entries updated for both toys; TOY-PLAN.md regenerated.
+  - Tests: `tests/bk5.spec.mjs` (four in Node with stand-in pictures, four in the app: the links, a
+    PDF picture and an album photo popping out with their depth and lying back, old links and a v2
+    scene). Screenshots `bk5-link-*`, `bk5-pop-*`, `bk5-album-pop-*` at both sizes.
+  - Clips: `tools/bk5-clip.mjs` (a copy of lane Books' recorder with this lane's scenes, so
+    `tools/bk-clip.mjs` is untouched).
+
+- October 3, 2026, later: the owner marked `bk5-links`, `bk5-pdf-pop` and `bk5-album-pop` good.
+  Posted since: `bk5-links-r2` (replaces `bk5-links`: the page link now lands on its own page when
+  read a page at a time), `bk5-photo-pop`. `bk5-box` follows. A photo now waits at rest, unseen, up
+  to 2.5 s for its depth, so it rises with it; seen a page at a time, a risen figure comes less far
+  and further toward the middle, so it stays on the screen. The help texts are within their limits
+  (110 characters, 180 words). Main (9f87dc02) merged into both branches;
+  `tests/bk5-engine.spec.mjs`, `tests/bk5.spec.mjs`, `tests/bk.spec.mjs` and `tests/taps.spec.mjs`
+  pass (91). The full suite is left to the Integrators (the Operator's call).
+
+## Notes
+
+- Kit splats on a part are sorted where they were built: the box's corners are built in front of the
+  page and the recipe asks for `out.resortPose` while a box is drawn (they hid behind the page at
+  the spine otherwise). The pop sheet is resorted on every second frame while it moves.
+- The depth model runs on this device in about 4 s here (SwiftShader, one thread), after its 27 MB
+  first load.
+
+## Known issues
+
+- Links on the first page don't work: a side-bound book shows it only on its cover, where a tap
+  opens the book (stapled paper shows it as a page, and its links work).
+- The figures found are pictures (images in the PDF). Vector plots and diagrams need Draw a box.
+- A photo waits at rest (it looks just like the page) up to 2.5 s for its depth, so it rises with
+  it; on the first pop, while the 27 MB model loads, it can rise flat and gain its depth in one
+  step.
+
+## For the Operator
+
+- PACKS.md (5b, picture sheets): `pics.links(n)`, `pics.figures(n)`, `pics.crop(n, box, size)`,
+  `pics.openLink(url)`; `out.sheets[id].crop`, `.relief` and `.variant`; decorate's `variant` and
+  `links`. A lesson: kit splats on a part are sorted where they were built, so marks that move over
+  a page are built in front of it and resorted while they move.
+- Sounds: the pop-out's cues are in the recipe (`POP_SOUNDS`: a light page lift as it rises, a soft
+  thud as it lies back), from the existing `pageflip` and `thud` voices.

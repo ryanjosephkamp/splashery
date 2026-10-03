@@ -2673,6 +2673,14 @@ Proposals below are suggestions; the owner may change them.
     one, then turns the leaf and lands on the next left page (back the other way). Reading: One page
     (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at
     once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand.
+    Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and
+    opens it in a new tab only when you say so (http, https and mailto only), and a link to another
+    page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture
+    on the page in view off the paper toward you as one solid piece (it rises, grows a little and
+    turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page;
+    a photo rises with its depth from the on-device depth model, a chart or diagram as a card with
+    its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift
+    it out. A tap lays it back (0.7 s).
   - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback
     (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C,
     October 2, 2026).
@@ -2688,7 +2696,10 @@ Proposals below are suggestions; the owner may change them.
     (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end
     a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
     lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
-    Books r4: page focus and Reading: One page, as the book.
+    Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop
+    out lifts the photo on the page in view out of its corners toward you as one solid piece, with
+    its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on
+    the other photo of a page lifts that one instead, and a tap lays it back.
   - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
