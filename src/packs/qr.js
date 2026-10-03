@@ -143,9 +143,17 @@ export async function checkScan() {
   return QR.running;
 }
 
+// True once the code built last is the one on the stage (the player swaps
+// the toy in after the build, so a check started in between would read the
+// code before it).
+const showing = (app) => !!QR.kit && app?.player?.proc?.ctx?.kit === QR.kit;
+
 async function runCheck() {
   const app = globalThis.__splashery?.app;
   if (!app?.player || !QR.code) return QR.check;
+  for (let i = 0; i < 120 && !showing(app); i++) await new Promise((r) => setTimeout(r, 50));
+  if (!showing(app)) return (QR.check = { ok: false, read: null, text: QR.code.text, error: "The code wasn't on the stage yet." }); // prettier-ignore
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
   QR.checking = true;
   refreshPanel();
   try {
@@ -174,7 +182,7 @@ function scheduleCheck() {
   const go = () => {
     const app = globalThis.__splashery?.app;
     const ready = app?.player?.toyInfo?.id === "qr-code" && document.body.dataset.ready === "true";
-    if (ready && idle(app) && !app.busy) return checkScan();
+    if (ready && showing(app) && idle(app) && !app.busy) return checkScan();
     if (++tries < 40) QR.timer = setTimeout(go, 250);
   };
   QR.timer = setTimeout(go, 600);
@@ -478,7 +486,7 @@ export const RECIPES = {
     },
     gpuField(o, fit) {
       if (!fit || !Number.isFinite(fit.scale) || !QR.code) return null;
-      return qrModifier(QR.code.size, fit, palette(o).back);
+      return qrModifier(QR.code.size, fit, palette(o).back, o.style === "gems");
     },
     build(k, o) {
       const { code, error } = codeFor(o);

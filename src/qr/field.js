@@ -21,7 +21,7 @@ const num = (x) => {
 const vec3 = (c) => c.map(num).join(", ");
 
 // The shared parts, written once for GLSL; the WGSL below says the same.
-const GLSL = ({ N, C, S, back }) => `
+const GLSL = ({ N, C, S, back, glint }) => `
 uniform vec4 uSpClock;   // y splat scale, z exposure
 uniform vec4 uSpKit;     // x the toy's clock
 uniform vec4 uSpMorph;   // x assemble, y flip, z burst (0..1), w glint on
@@ -108,7 +108,7 @@ void modifySplatCenter(inout vec3 center) {
   qrQ = q;
   center = piv + qrRot(q, rel) + off;
   // The gems' glint: a narrow band of light that passes now and then.
-  if (uSpMorph.w > 0.5) {
+  if (${glint ? "uSpMorph.w > 0.5" : "false"}) {
     float band = fract(uSpKit.x * 0.16) * 3.2 - 1.1;
     float x = (g.x + (1.0 - g.y)) * 0.5;
     qrGlint = exp(-pow((x - band) / 0.035, 2.0)) * step(0.55, h2);
@@ -125,7 +125,7 @@ void modifySplatColor(vec3 center, inout vec4 color) {
 }
 `;
 
-const WGSL = ({ N, C, S, back }) => `
+const WGSL = ({ N, C, S, back, glint }) => `
 uniform uSpClock: vec4f;
 uniform uSpKit: vec4f;
 uniform uSpMorph: vec4f;
@@ -209,7 +209,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   }
   qrQ = q;
   *center = piv + qrRot(q, rel) + off;
-  if (uniform.uSpMorph.w > 0.5) {
+  if (${glint ? "uniform.uSpMorph.w > 0.5" : "false"}) {
     let band = fract(uniform.uSpKit.x * 0.16) * 3.2 - 1.1;
     let x = (g.x + (1.0 - g.y)) * 0.5;
     qrGlint = exp(-pow((x - band) / 0.035, 2.0)) * step(0.55, h2);
@@ -228,9 +228,10 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 `;
 
 // size: the code's modules across; fit: the kit's { center, scale }; back: the
-// flip's back color [r, g, b].
-export function qrModifier(size, fit, back) {
-  const args = { N: size, C: fit.center, S: fit.scale, back };
+// flip's back color [r, g, b]; glint: the gems' glint is in the program
+// (only for Gems, so no other style can ever catch it).
+export function qrModifier(size, fit, back, glint = false) {
+  const args = { N: size, C: fit.center, S: fit.scale, back, glint };
   return { glsl: GLSL(args), wgsl: WGSL(args) };
 }
 

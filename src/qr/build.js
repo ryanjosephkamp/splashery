@@ -292,7 +292,7 @@ export function buildCode(code, o, budget = 120000) {
   // run of modules reads as one dark area (readers need that).
   const setting = (r, c, rad, params, eye) => {
     const [x0, y0, x1, y1] = cell(r, c);
-    flat(x0, y0, x1, y1, 0.01, sp, rad ? roundCell(r, c, rad) : null, (px, py) => { const b = codeColor(px, py, eye); return steady(b, mulc(b, 0.55)); }, params); // prettier-ignore
+    flat(x0, y0, x1, y1, 0.12, sp, rad ? roundCell(r, c, rad) : null, (px, py) => { const b = codeColor(px, py, eye); return steady(b, mulc(b, 0.55)); }, params); // prettier-ignore
   };
 
   // A finder or alignment pattern's module in a 3D style: one smooth, solid
@@ -346,7 +346,7 @@ export function buildCode(code, o, budget = 120000) {
           const y = cy(r);
           const eye = isEye(r, c);
           const [x0, y0, x1, y1] = cell(r, c);
-          flat(x0, y0, x1, y1, 0.06, sp, null, (px, py) => codeColor(px, py, eye), pieceOf(r, c)); // prettier-ignore
+          flat(x0, y0, x1, y1, 0.14, sp, null, (px, py) => codeColor(px, py, eye), pieceOf(r, c)); // prettier-ignore
         }
     },
     dots() {
@@ -358,7 +358,7 @@ export function buildCode(code, o, budget = 120000) {
           if (!dark(r, c) || code.piece[r * N + c] >= 0) continue;
           const x = cx(c);
           const y = cy(r);
-          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.06, sp * 0.85, (px, py) => Math.hypot(px - x, py - y) <= 0.44, (px, py) => codeColor(px, py, false), pieceOf(r, c)); // prettier-ignore
+          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.14, sp * 0.85, (px, py) => Math.hypot(px - x, py - y) <= 0.44, (px, py) => codeColor(px, py, false), pieceOf(r, c)); // prettier-ignore
         }
       for (const p of code.pieces) {
         const h = (p.n - 1) / 2;
@@ -377,7 +377,7 @@ export function buildCode(code, o, budget = 120000) {
         const inRing = (px, py) =>
           rbox(px, py, ring[0], ring[2]) && !rbox(px, py, ring[1], ring[3]);
         const inCore = (px, py) => rbox(px, py, inner[0], inner[1]);
-        flat(x - R, y - R, x + R, y + R, 0.06, sp * 0.85, (px, py) => inRing(px, py) || inCore(px, py), (px, py) => codeColor(px, py, eye), params); // prettier-ignore
+        flat(x - R, y - R, x + R, y + R, 0.14, sp * 0.85, (px, py) => inRing(px, py) || inCore(px, py), (px, py) => codeColor(px, py, eye), params); // prettier-ignore
       }
     },
     rounded() {
@@ -391,7 +391,7 @@ export function buildCode(code, o, budget = 120000) {
           const inside = roundCell(r, c);
           const eye = isEye(r, c);
           const [x0, y0, x1, y1] = cell(r, c);
-          flat(x0, y0, x1, y1, 0.06, sp, inside, (px, py) => codeColor(px, py, eye), pieceOf(r, c)); // prettier-ignore
+          flat(x0, y0, x1, y1, 0.14, sp, inside, (px, py) => codeColor(px, py, eye), pieceOf(r, c)); // prettier-ignore
         }
     },
     bricks() {
@@ -447,8 +447,8 @@ export function buildCode(code, o, budget = 120000) {
     gems() {
       // Faceted gems: a flat table on top and four sloping facets, each lit
       // at its own angle; the GPU program adds the passing glint.
-      const zt = 0.34;
-      const zb = 0.04;
+      const zt = 0.44;
+      const zb = 0.14;
       const t = 0.2; // half the table
       const a = 0.47; // half the girdle
       for (let r = 0; r < N; r++)
@@ -522,7 +522,7 @@ export function buildCode(code, o, budget = 120000) {
               // Splats on the steep rim are stretched by the slope: size them
               // by it so the dome stays closed.
               const tilt = 1 / Math.max(0.6, n[2]);
-              out.push({ p: [x + dx, y + dy, dz * 0.6], scales: [0.62 * s * tilt, 0.62 * s * tilt, 0.03 * s], quat: quatTo(n), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
+              out.push({ p: [x + dx, y + dy, 0.17 + dz * 0.6], scales: [0.62 * s * tilt, 0.62 * s * tilt, 0.03 * s], quat: quatTo(n), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
             }
         }
     },
@@ -544,7 +544,7 @@ export function buildCode(code, o, budget = 120000) {
             // The finders and alignment patterns: solid glowing pieces, one
             // even color with a brighter rim, and no halo in their gaps.
             const [x0, y0, x1, y1] = cell(r, c);
-            flat(x0, y0, x1, y1, 0.06, sp, roundCell(r, c, 0.3), steady(glow, mixc(glow, core, 0.5), 0.06), params); // prettier-ignore
+            flat(x0, y0, x1, y1, 0.14, sp, roundCell(r, c, 0.3), steady(glow, mixc(glow, core, 0.5), 0.06), params); // prettier-ignore
             continue;
           }
           const across = (d) => {
@@ -562,7 +562,7 @@ export function buildCode(code, o, budget = 120000) {
           const full = (sx, sy) => dark(r, c + sx) && dark(r - sy, c) && dark(r - sy, c + sx);
           const quad = { "1,1": full(1, 1), "1,-1": full(1, -1), "-1,1": full(-1, 1), "-1,-1": full(-1, -1) }; // prettier-ignore
           // The node: a round end where nothing joins, square where it does.
-          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.06, sp * 0.8, (px, py) => {
+          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.14, sp * 0.8, (px, py) => {
             const dx = px - x;
             const dy = py - y;
             if (Math.hypot(dx, dy) <= w) return true;
@@ -586,29 +586,17 @@ export function buildCode(code, o, budget = 120000) {
             return across(d);
           }, params); // prettier-ignore
           // The glow: faint, wider splats behind the tube.
-          out.push({ p: [x, y, 0.03], scales: [0.32, 0.32, 0.01], quat: Q_FLAT, color: glow, opacity: 0.22, params, pattern: false }); // prettier-ignore
+          out.push({ p: [x, y, 0.1], scales: [0.32, 0.32, 0.01], quat: Q_FLAT, color: glow, opacity: 0.22, params, pattern: false }); // prettier-ignore
         }
     },
   };
   shapes[style]();
-  // The sheet, with holes where the dark modules cover it, in splats as fine
-  // as the modules': seen at an angle, a sheet splat behind a module would
-  // otherwise sort in front of it (the module turned gray and hatched).
-  // Neon's tubes glow over an unbroken dark sheet.
-  const radius = { rounded: 0.5, gems: 0.3, bubbles: 0.5 }[style] ?? 0;
-  const covered = (x, y) => {
-    if (style === "neon") return false;
-    const c = Math.floor(x + N / 2);
-    const r = Math.floor(N / 2 - y);
-    if (!dark(r, c)) return false;
-    if (style === "dots" && code.piece[r * N + c] < 0)
-      return Math.hypot(x - cx(c), y - cy(r)) < 0.4;
-    if (style === "dots") return false; // the rounded eyes: keep the sheet under them
-    const rad = style === "bubbles" && code.piece[r * N + c] >= 0 ? 0.5 : radius;
-    return rad ? roundCell(r, c, rad)(x, y) : true;
-  };
-  flat(-H, -H, H, H, sheetZ, sp, (x, y) => !covered(x, y), pal.bg, [0, 0], { sigma: 0.6 });
-  const depth = { bricks: 0.5, gems: 0.34, bubbles: 0.3, neon: 0.06 }[style] ?? 0.06;
+  // The sheet: the light modules and the quiet zone, in splats as fine as
+  // the modules', with the flat styles' modules standing 0.14 of a module in
+  // front of it. Seen at an angle, a sheet splat that reached out from under
+  // a module sorted in front of it, and the code turned gray and hatched.
+  flat(-H, -H, H, H, sheetZ, sp, null, pal.bg, [0, 0], { sigma: 0.6 });
+  const depth = { bricks: 0.5, gems: 0.44, bubbles: 0.42, neon: 0.14 }[style] ?? 0.14;
   return { splats: out, half: H, depth, perModule: m };
 }
 
