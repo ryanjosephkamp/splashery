@@ -374,8 +374,13 @@ From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review
 
 ## r6 (October 2, 2026): the owner's marks on r4 and r5
 
-- **A thin meniscus.** The bright ring on a liquid's top read as a white ring. It is now a hairline
-  about a pixel wide, a soft highlight of the room, as a real meniscus is.
+- **A liquid's top that meets the glass.** r4 and r5 drew a bright ring on the blurred particle
+  surface, which shrinks away from the glass near its edge, so the ring sat inside the glass as a
+  separate, smaller circle from every angle. Water and soda in a glass are now topped by a flat
+  surface at the pool's level (from the read-back, smoothed) that reaches the glass's inner wall,
+  shaded as the liquid seen from above (refraction to the glass's bottom, absorption, Fresnel), with
+  a hairline meniscus where it meets the wall. Thick liquids and the splash keep their particle
+  surface (`flatTop: false`).
 - **A tap's stream.** The GPU nozzle pours a stream about a centimeter across (`gpuRadius` 0.04 for
   water and soda, 0.04 for honey and 0.045 for lava); the CPU's coarser particles keep the wider
   one.
@@ -384,7 +389,8 @@ From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review
   time since it left the spout. So the stream and the pool where it lands are the same orange, and
   the pool darkens and crusts as it cools; the crust's cracks show the hotter lava just under it, on
   the same ramp. The glass's starting pool is already old (`fillAge`, 8 s), a dark, glossy gray
-  crust like cooled pahoehoe. The CPU lava uses the same ramp.
+  crust like cooled pahoehoe. The CPU lava uses the same ramp. Its skin crusts over in about three
+  seconds (`heat` 2.4 s), so a clip of ten seconds shows the whole cooling.
 - **A drop that isn't a sphere.** The splash's falling drop starts flattened, flat underneath and
   rounder on top (`drop.shape`), as a large raindrop falls, and fast liquid is drawn a little more
   stretched along its motion.
