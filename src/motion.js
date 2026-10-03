@@ -317,6 +317,8 @@ export class MotionDriver {
     // the vertical), so a toy can tell when a drag spins it (the spinning top).
     const view = cameraPos && info?.center ? Math.atan2(cameraPos[0] - info.center[0], cameraPos[2] - info.center[2]) : null; // prettier-ignore
     const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
+    // Lane Hands engine A: Hands-on's shake, finger and wheels (src/physics/fields.js).
+    if (this.hands) about.hands = this.hands;
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     // Lane Physics: pieces picked up in Hands-on go where the physics puts
     // them (src/physics/hands-on.js), and are sorted again now and then.
@@ -391,6 +393,7 @@ export class MotionDriver {
         "uSpParts[0]": packParts(this.addon.data, this.addon.parts, a.parts || {}, 1),
       };
     }
+    this.handsFix?.(u); // lane Hands engine A: a kit toy posed whole by Hands-on
     this.out = drive;
     return u;
   }

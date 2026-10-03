@@ -419,6 +419,9 @@ export class World {
     this.maxPush = o.maxPush ?? Infinity;
     this.maxSpeed = o.maxSpeed ?? Infinity;
     this.particleDamping = o.particleDamping ?? 0; // per second
+    // Lane Hands engine A: fields and materials (src/physics/fields.js),
+    // called once per substep before anything moves: (h) => void.
+    this.force = o.force ?? null;
   }
 
   add(body) {
@@ -514,6 +517,7 @@ export class World {
 
   substep(h) {
     this.tick = (this.tick || 0) + 1;
+    if (this.force) this.force(h); // lane Hands engine A
     const g = this.gravity;
     // Integrate.
     for (const b of this.bodies) {
@@ -598,7 +602,7 @@ export class World {
     const slow = this.sleepSpeed * 10;
     const calm = Math.exp(-12 * h);
     for (const b of this.bodies) {
-      if (b.fixed || b.held || b.touchTick !== this.tick) continue;
+      if (b.fixed || b.held || b.coasts || b.touchTick !== this.tick) continue; // (coasts: lane Hands engine A's wheels)
       if (v3.len(b.vel) < slow && v3.len(b.omega) * (b.bound || 1) < slow) {
         b.vel = v3.scale(b.vel, calm);
         b.omega = v3.scale(b.omega, calm);
