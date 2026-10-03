@@ -106,9 +106,9 @@ Done (PR "Phase Fidelity: trained splats on our rigs", branch `claude/lane-fidel
   the arms up for 7 s, each at its own speed, and they coast to a stop where they are; the moon
   rides on Earth's arm; the gears and the sun turn too.
 - `tools/fidelity/`: `orrery.py` (Blender: the model, per-part and whole datasets, parts.json),
-  `run-orrery.sh` (render, train with Brush, pack, measure), `measure.mjs` and `measure.html`
-  (PSNR and SSIM at the held-out cameras), `summary.mjs`, `stand-in.mjs` and the README with the
-  Mac steps. Tested here with Blender 4.5.14 LTS on the CPU and a stand-in for Brush.
+  `run-orrery.sh` (render, train with Brush, pack, measure), `measure.mjs` and `measure.html` (PSNR
+  and SSIM at the held-out cameras), `summary.mjs`, `stand-in.mjs` and the README with the Mac
+  steps. Tested here with Blender 4.5.14 LTS on the CPU and a stand-in for Brush.
 - `tests/fid.spec.mjs` with stand-in parts in `tests/fixtures/fid/orrery/` (272 KB).
 - `LICENSES.md`: "Build tools outside npm" (Blender, Brush, msplat).
 - `docs/audits/fidelity-2026-10.md`: the draft report (SH bands, streamed LOD, the frame checks).
@@ -116,9 +116,9 @@ Done (PR "Phase Fidelity: trained splats on our rigs", branch `claude/lane-fidel
 Engine PR (branch `claude/lane-fidelity-engine`): "Engine: a recipe's prepare learns the device
 profile" (`help.profile`, so the orrery loads its lite parts on a phone). Merge it first.
 
-Findings: the captured path keeps and shows SH bands (checked with a view-dependent test splat);
-the kit path keeps only the base color. PlayCanvas 2.22.3 can stream `lod-meta.json`, but our
-loader passes blob URLs, so it would need a loader change; not useful for single objects.
+Findings: the captured path keeps and shows SH bands (checked with a view-dependent test splat); the
+kit path keeps only the base color. PlayCanvas 2.22.3 can stream `lod-meta.json`, but our loader
+passes blob URLs, so it would need a loader change; not useful for single objects.
 
 Next:
 
