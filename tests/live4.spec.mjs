@@ -89,6 +89,18 @@ async function open(page) {
   await page.waitForFunction(() => window.__splashery.player.scene.toy.id === "chladni-plate" && window.__splashery.player.motion.recipe && document.getElementById("progress").hidden, null, { timeout: 120_000 }); // prettier-ignore
 }
 
+// Counts the frames that draw the bow (it must never show while your voice
+// or audio drives the plate, nor while the sand they left holds after).
+async function watchBow(page) {
+  await page.evaluate(() => {
+    window.__bowSeen = 0;
+    setInterval(() => {
+      if ((window.__splashery.player.motion.out?.parts?.bow?.visible ?? 0) > 0) window.__bowSeen++;
+    }, 40);
+  });
+}
+const bowSeen = (page) => page.evaluate(() => window.__bowSeen);
+
 async function until(page, check, arg = null, timeout = 120_000) {
   const end = Date.now() + timeout;
   for (;;) {
@@ -110,6 +122,7 @@ test("a new sung note re-sorts the sand: the plate switches mode and the fresh s
     page.on("pageerror", (e) => errors.push(e.message));
     await open(page);
     const before = await page.evaluate(async (m) => (await import(m)).singState().builds, studio); // prettier-ignore
+    await watchBow(page);
     await page.evaluate(() => document.getElementById("live-mic").click());
     // G3: the 2, 3 plate's sand settles.
     const a = await until(page, async (m) => { const s = (await import(m)).singState(); return s.p > 0.4 ? s : null; }, studio, 60_000); // prettier-ignore
@@ -118,6 +131,11 @@ test("a new sung note re-sorts the sand: the plate switches mode and the fresh s
     // Then F♯4: a new plate (3, 4 at 375 Hz) with fresh sand, which settles too.
     const b = await until(page, async (m) => { const s = (await import(m)).singState(); return s.builds > 0 && s.p > 0.3 && window.__splashery.player.scene.toy.options?.mode?.startsWith("3-4") ? s : null; }, studio, 60_000); // prettier-ignore
     expect(b.builds).toBeGreaterThan(before);
+    // Stop the microphone: the sand it left holds, and still no bow.
+    await page.evaluate(() => document.getElementById("live-mic").click());
+    await until(page, async () => !(await import("/src/live/live.js")).live.on("mic"), null, 10_000).catch(() => {}); // prettier-ignore
+    await page.waitForTimeout(1500);
+    expect(await bowSeen(page)).toBe(0);
     expect(errors).toEqual([]);
   } finally {
     await browser.close();
@@ -135,6 +153,7 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   // The transport hides until audio is open.
   expect(await page.evaluate(() => document.getElementById("chladni-transport")?.hidden)).toBe(true); // prettier-ignore
   const before = await page.evaluate(async (m) => (await import(m)).chladniFileState().builds, studio); // prettier-ignore
+  await watchBow(page);
   await page.setInputFiles("#toy-input-file", SONG);
   await until(page, async (m) => (await import(m)).chladniFileState().name, studio, 60_000);
   // A browser that wants a tap before sound plays gets one (as a phone may).
@@ -177,5 +196,8 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   // Close the audio: the bow is back.
   await page.evaluate(() => document.getElementById("chladni-close").click());
   expect(await page.evaluate(async (m) => (await import(m)).chladniFileState().name, studio)).toBe(null); // prettier-ignore
+  // No bow while the audio played, paused or after it closed (its sand holds).
+  await page.waitForTimeout(1500);
+  expect(await bowSeen(page)).toBe(0);
   expect(errors).toEqual([]);
 });
