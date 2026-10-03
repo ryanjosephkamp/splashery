@@ -298,6 +298,18 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-03, the owner's "go" on the Splat Fidelity Plan (the Operator's private page of
+that night: why our placed splats look like cartoons beside SuperSplat's trained ones, and how to
+train our own):
+
+- Stage 1: the boombox trained from Blender renders on the owner's Mac (Codex task 08); Stage 2: a
+  brass orrery trained part by part on a kit rig (the Fidelity lane, then Codex task 10).
+- Photoreal round 2 (the Photoreal r2 lane), PDF links and pop-out figures in the books (Books r5,
+  labs first), and a Codex comparison with SuperSplat (task 09).
+- CC BY-NC and CC BY-NC-SA assets are allowed per asset on four conditions (CLAUDE.md). Adding them
+  never forces any other toy off the site: licenses apply per asset.
+- No new Sharpness rounds until Stage 1 reports.
+
 Settled on September 27, 2026 (the How Splashery Is Made page, Part 1):
 
 - The Operator runs the lanes; the owner talks only to the Operator, reviews clips and merges.

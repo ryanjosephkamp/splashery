@@ -13,6 +13,7 @@ const keep = (c, size) => ({ c, keep: true, size });
 const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const fract = (x) => x - Math.floor(x);
+const easeOut = (x) => 1 - (1 - clamp(x, 0, 1)) ** 3;
 const easeInOut = (x) => {
   const t = clamp(x, 0, 1);
   return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -131,6 +132,11 @@ const FW = {
   types: ["peony", "ring", "willow", "star"],
   r: 0.52,
 };
+
+// The fireworks' show length, and their rockets' parts (one per tube in the
+// air at once).
+const FW_SECS = 3.4;
+const FW_ROCKETS = ["rocket", "rocket1", "rocket2"];
 
 // Inside a five-pointed star of radius R (point up).
 function starRadius(a, R, ri = 0.42) {
@@ -586,37 +592,56 @@ export const RECIPES = {
   // ---- Fireworks ----------------------------------------------------------------------------
   fireworks: {
     alive: true,
-    controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 3.4 }],
+    // A tap never pauses the show (lane Fix7): rapid taps launch more
+    // shells, up to one from each tube at once.
+    controls: [{ key: "launch", label: "Launch", type: "pulse", ease: FW_SECS, pausable: false }],
     action: { key: "launch", label: "Launch" },
-    drive(t, c, out) {
-      // Each launch picks another tube and another shell type (never the
-      // same as the last), so no two in a row look alike. The burst is the
-      // colour of the tube that fired it.
+    drive(t, c, out, info) {
+      // Each launch picks another tube (a free one while others fly) and
+      // another shell type (never the same as the last), so no two in a row
+      // look alike. The burst is the colour of the tube that fired it. Each
+      // show keeps its own clock from its tap, so several fly at once; a
+      // tap while all three tubes fly starts the oldest's tube again.
       const m = mem(c);
-      if (m.tube === undefined) Object.assign(m, { tube: 1, type: 0, n: 0 });
-      if (fired(m, "launch", c.launch)) {
+      if (m.tube === undefined) Object.assign(m, { tube: 1, type: 0, n: 0, tap: null, shows: [] });
+      const now = info?.time ?? t;
+      const tapN = info?.tap?.key === "launch" ? info.tap.n : null;
+      const isNew = tapN !== null && tapN !== undefined ? tapN !== m.tap : fired(m, "launch", c.launch); // prettier-ignore
+      if (tapN !== null && tapN !== undefined) m.tap = tapN;
+      m.shows = m.shows.filter((sh) => now - sh.at < FW_SECS);
+      if (isNew && c.launch > 0) {
         m.n++;
-        m.tube = (m.tube + 1 + (hashInt(m.n * 2 + 1) % 2)) % 3;
+        const busy = new Set(m.shows.map((sh) => sh.tube));
+        let tube = (m.tube + 1 + (hashInt(m.n * 2 + 1) % 2)) % 3;
+        if (busy.has(tube)) tube = [0, 1, 2].find((i) => !busy.has(i)) ?? m.shows[0].tube;
+        m.tube = tube;
         m.type = (m.type + 1 + (hashInt(m.n * 2 + 7) % 3)) % 4;
+        m.shows = m.shows.filter((sh) => sh.tube !== tube);
+        m.shows.push({ at: info?.tap?.time ?? now, tube, type: m.type });
       }
-      const u = 1 - c.launch;
-      const on = c.launch > 0;
-      const T = FW.tubes[m.tube];
-      const from = [T.x, FW.ground + 0.4, T.z];
-      const rise = easeInOut(band(u, 0, 0.24));
-      out.parts.rocket = {
-        offset: vec.mul(vec.sub(T.c, from), rise).map((v, i) => v + [T.x, 0, T.z][i]),
-        visible: on && u < 0.24 ? 1 : 0,
-      };
-      out.grow = on ? band(u, 0.24, 0.44) : 0;
-      const droop = FW.types[m.type] === "willow" ? 0.3 : 0.16;
-      for (let i = 0; i < 3; i++)
-        for (let j = 0; j < 4; j++)
-          out.parts[`b${i}${j}`] = {
-            offset: [0, -droop * band(u, 0.24, 1) ** 2, 0],
-            visible: on && i === m.tube && j === m.type ? 1 - band(u, 0.66, 1) : 0,
-          };
-      out.amount = 0.7 + 0.4 * c.launch;
+      for (let r = 0; r < 3; r++) out.parts[FW_ROCKETS[r]] = { visible: 0 };
+      for (let i = 0; i < 3; i++) for (let j = 0; j < 4; j++) out.parts[`b${i}${j}`] = { visible: 0 }; // prettier-ignore
+      let bright = 0;
+      m.shows.forEach((sh, r) => {
+        const u = clamp((now - sh.at) / FW_SECS, 0, 1);
+        const T = FW.tubes[sh.tube];
+        const from = [T.x, FW.ground + 0.4, T.z];
+        const rise = easeInOut(band(u, 0, 0.24));
+        out.parts[FW_ROCKETS[r]] = {
+          offset: vec.mul(vec.sub(T.c, from), rise).map((v, i) => v + [T.x, 0, T.z][i]),
+          visible: u < 0.24 ? 1 : 0,
+        };
+        // The shell's stars fly out from its middle (the part's scale), then
+        // droop and fade.
+        const droop = FW.types[sh.type] === "willow" ? 0.3 : 0.16;
+        out.parts[`b${sh.tube}${sh.type}`] = {
+          offset: [0, -droop * band(u, 0.24, 1) ** 2, 0],
+          scale: 0.02 + 0.98 * easeOut(band(u, 0.24, 0.44)),
+          visible: u > 0.24 ? 1 - band(u, 0.66, 1) : 0,
+        };
+        bright = Math.max(bright, 1 - u);
+      });
+      out.amount = 0.7 + 0.4 * bright;
     },
     build(k) {
       const ground = FW.ground;
@@ -719,35 +744,41 @@ export const RECIPES = {
           };
         });
       }
-      // The launched rocket (moved to whichever tube fires).
-      const rocket = k.part("rocket", { pivot: [0, ground + 0.4, 0] });
-      k.add(k.cylinder(0.03, 0.14), {
-        pos: [0, ground + 0.45, 0],
-        part: rocket,
-        weight: 3,
-        pattern: false,
-        color: "#f4efe4",
-      });
-      k.cloud({ share: 0.01, size: 0.8, pattern: false }, (rand) => ({
-        p: [(rand() - 0.5) * 0.03, ground + 0.38 - rand() * 0.02, (rand() - 0.5) * 0.03],
-        color: "#ffd27a",
-        opacity: 0.9,
-        part: rocket,
-        kind: "flame",
-        params: [-0.25, rand()],
-      }));
-      // A bright spark trail behind it, so the launch reads at a glance.
-      k.cloud({ share: 0.006, size: 1.1, pattern: false }, (rand) => {
-        const f = rand();
-        return {
-          p: [(rand() - 0.5) * 0.02 * (1 + 2 * f), ground + 0.37 - 0.32 * f, (rand() - 0.5) * 0.02],
-          dir: [0, 1, 0],
-          stretch: 2.5,
-          color: mix("#fff6d0", "#ff9a2a", f),
-          opacity: 1 - 0.8 * f,
+      // The launched rockets (moved to whichever tube fires), one per show.
+      for (const name of FW_ROCKETS) {
+        const rocket = k.part(name, { pivot: [0, ground + 0.4, 0] });
+        k.add(k.cylinder(0.03, 0.14), {
+          pos: [0, ground + 0.45, 0],
           part: rocket,
-        };
-      });
+          weight: 3,
+          pattern: false,
+          color: "#f4efe4",
+        });
+        k.cloud({ share: 0.01, size: 0.8, pattern: false }, (rand) => ({
+          p: [(rand() - 0.5) * 0.03, ground + 0.38 - rand() * 0.02, (rand() - 0.5) * 0.03],
+          color: "#ffd27a",
+          opacity: 0.9,
+          part: rocket,
+          kind: "flame",
+          params: [-0.25, rand()],
+        }));
+        // A bright spark trail behind it, so the launch reads at a glance.
+        k.cloud({ share: 0.006, size: 1.1, pattern: false }, (rand) => {
+          const f = rand();
+          return {
+            p: [
+              (rand() - 0.5) * 0.02 * (1 + 2 * f),
+              ground + 0.37 - 0.32 * f,
+              (rand() - 0.5) * 0.02,
+            ],
+            dir: [0, 1, 0],
+            stretch: 2.5,
+            color: mix("#fff6d0", "#ff9a2a", f),
+            opacity: 1 - 0.8 * f,
+            part: rocket,
+          };
+        });
+      }
       // Its burst: one per tube colour and shell type, each revealed from the
       // centre outwards as it grows. Flat shapes face the home view.
       const e1 = vec.unit(vec.cross([0, 1, 0], VIEW));
@@ -797,8 +828,6 @@ export const RECIPES = {
               color: col,
               opacity: tip ? 1 : 0.45 + 0.5 * S.t,
               part,
-              kind: "grow",
-              params: [S.t * 0.9, 0],
             };
           });
         });
@@ -1206,10 +1235,18 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "swing", label: "Swing", type: "pulse", ease: 4 }],
+    // A tap never pauses it (lane Fix7): another tap gives it another push.
+    controls: [{ key: "swing", label: "Swing", type: "pulse", ease: 4, pausable: false }],
     action: { key: "swing", label: "Swing" },
     drive(t, c, out) {
-      const a = 0.05 + 0.25 * c.swing;
+      // The swing's size eases toward the push, so a tap (the first or one
+      // mid-swing) never makes the lantern jump.
+      const m = mem(c);
+      const dt = m.t === undefined ? 0 : clamp(t - m.t, 0, 0.1);
+      m.t = t;
+      const goal = 0.05 + 0.25 * c.swing;
+      m.a = m.a === undefined ? goal : m.a + (goal - m.a) * (1 - Math.exp(-dt / 0.3));
+      const a = m.a;
       out.parts.lantern = {
         quat: quatMul(
           quatAxisAngle([0, 0, 1], a * Math.sin(t * 1.6)),

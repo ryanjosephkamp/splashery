@@ -235,6 +235,11 @@ function gem(c, base) {
   return col;
 }
 
+// The shield's middle (y), the point a blow rocks it about (lane Fix7).
+const SHIELD_MID = -0.08;
+// The way the sparks spray at rest (up and to the right), as an angle.
+const SHIELD_SPRAY = 0.9;
+
 export const RECIPES = {
   // ---- Sword in the stone ---------------------------------------------------
   "sword-in-stone": {
@@ -454,21 +459,39 @@ export const RECIPES = {
     ],
     controls: [{ key: "block", label: "Block", type: "pulse", ease: 2.8 }],
     action: { key: "block", label: "Block a blow" },
-    drive(t, c, out) {
-      // The shield takes an unseen blow near its top corner: it jolts back
-      // and rocks, sparks spray off the iron rim (channel 0) and burn out,
-      // a flash marks the spot, and a gleam of light sweeps across the
-      // emblem (channel 1).
+    drive(t, c, out, info) {
+      // The shield takes an unseen blow where it was tapped (near its top
+      // corner from the Play button): it jolts back and rocks away from
+      // that spot, sparks spray off it (channel 0) and burn out, a flash
+      // marks the spot, and a gleam of light sweeps across the emblem
+      // (channel 1). Lane Fix7 moved the blow under the tap.
       const on = c.block > 0;
       const s = progress(c.block) * 2.8;
       const jolt = on ? Math.exp(-3.2 * s) * Math.sin(Math.min(s, 2.6) * 11 + 0.9) * (1 - band(s, 2.2, 2.6)) : 0; // prettier-ignore
+      const hit = info?.data?.hit || [0, 0, 0];
+      const tp = info?.tap?.key === "block" ? info.tap.point : null;
+      // A blow at (x, y) on the face pushes it back there: it turns about
+      // the axis (-y, x, 0) through the middle, more the further out it lands.
+      const at = tp || hit;
+      const r = Math.hypot(at[0], at[1] - SHIELD_MID);
+      const axis = r > 0.05 ? [-(at[1] - SHIELD_MID) / r, at[0] / r, 0] : [1, 0, 0];
       out.body = {
-        quat: quatAxisAngle(vec.unit([1, 0, -0.35]), -0.2 * jolt),
+        quat: quatAxisAngle(axis, 0.2 * Math.min(1, r / 0.85) * jolt),
         offset: [0, 0, -0.05 * Math.max(0, jolt)],
       };
       const fly = on ? easeOut(band(s, 0, 0.85)) : 0;
-      out.parts.sparks = { visible: on && s < 1.0 ? 1 - band(s, 0.35, 0.95) : 0 };
-      out.parts.flash = { scale: 0.3 + 1.2 * easeOut(band(s, 0, 0.2)), visible: on ? 1 - band(s, 0.05, 0.3) : 0 }; // prettier-ignore
+      const move = tp ? vec.sub(tp, hit) : [0, 0, 0];
+      // The sparks spray outward, away from the middle (up from near it),
+      // turned at most a radian so they still fall.
+      const away = r > 0.15 ? Math.atan2(at[1] - SHIELD_MID, at[0]) : Math.PI / 2;
+      const turn = Math.atan2(Math.sin(away - SHIELD_SPRAY), Math.cos(away - SHIELD_SPRAY));
+      const spin = tp ? clamp(turn, -1, 1) : 0;
+      out.parts.sparks = {
+        offset: move,
+        quat: quatAxisAngle([0, 0, 1], spin),
+        visible: on && s < 1.0 ? 1 - band(s, 0.35, 0.95) : 0,
+      };
+      out.parts.flash = { offset: move, scale: 0.3 + 1.2 * easeOut(band(s, 0, 0.2)), visible: on ? 1 - band(s, 0.05, 0.3) : 0 }; // prettier-ignore
       out.morph = [on && s < 1.0 ? fly : 0, on ? 1.2 * band(s, 0.35, 1.5) : 0];
       out.glow = [1.0, 0.95, 0.78, on ? 0.9 * band(s, 0.3, 0.45) * (1 - band(s, 1.35, 1.55)) : 0];
     },
@@ -589,6 +612,7 @@ export const RECIPES = {
       // Where the blow lands (hidden at rest): a flash, and sparks that fly
       // off the rim on channel 0, streaking along their paths.
       const hit = g.pt([W * 0.62, yt - 0.18, bow(W * 0.62, yt - 0.18) + 0.04]);
+      k.data = { ...(k.data || {}), hit };
       const fwd = g.dir([0, 0, 1]);
       const flash = k.part("flash", { pivot: hit });
       k.cloud({ share: 0.003, size: 1.8, pattern: false, part: flash }, (rand) => {
