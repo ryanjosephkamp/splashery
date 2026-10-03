@@ -113,6 +113,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
   tomatoes 1.3 ms; worst single frame 17 ms (tomatoes, likely a collection pause or the first step
   after a pick). A mid-range phone is perhaps 3 to 4 times slower: well inside a frame on average.
 
+- Full suite (in parts; each run here stops at 2 hours): every spec file covered; all pass but one
+  timeout in `smoke.spec.mjs` (desktop screenshot, the cactus scan loading slowly under load; it
+  passes alone in 22 s). Lane PR #229 (draft), stacked on #224.
+
 ## Known issues
 
 - Tomatoes: where a tomato is lifted off, the sides the capture never saw (where they touched) show
