@@ -10,19 +10,23 @@
 // with the clip's own sound.
 //
 // What it takes (r5, the owner's review of October 3, 2026: sharper):
-//   - up to MAX_FRAMES (48) frames: a GIF's own frames (evenly thinned if it
-//     has more), or a video's first MAX_SECONDS (8 s) at up to 12 a second;
-//   - each frame CLIP_SIDES[profile] pixels on its long side: 256 on a low
-//     device, 384, 512, and 640 at max (r3 took 256 everywhere, so the
-//     picture was blurry even at max: that was the main limit, not the
-//     device). The splat grid is as fine as the frame, up to the profile's
-//     splat budget;
+//   - a video's first MAX_SECONDS (8 s), or a GIF's, at its own speed and at
+//     up to CLIP_FPS[profile] frames a second (r6: 12 on a low device, 15,
+//     then 24; r3 to r5 took at most 48 frames, so 6 a second for 8 s); a
+//     GIF's own frames, evenly thinned if it has more;
+//   - each frame CLIP_AREAS[profile] pixels in all (r6: 60,000 on a low
+//     device, 140,000, 200,000, and 640 by 360 at max), never more than the
+//     source. r5 sized the long side (256, 384, 512, 640), which left a
+//     phone's portrait video 144 or 216 pixels wide: on a phone it looked
+//     grainy beside the video itself. The toy takes a quarter more splats
+//     than most (density 1.25), and the splat grid is as fine as the frame;
 //   - the depth model sees DEPTH_SIDES[profile] pixels on the long side (196,
 //     or 294 on a high or max device). Its depth is smooth (it guesses
 //     shapes, not edges), so it is sampled smoothly up to the frame's size
-//     and its edges are cut clean (sharpenEdges); a longer clip has its
-//     depth worked out on every other frame and the frames between take the
-//     mean of their neighbors (half the wait, and steadier depth);
+//     and its edges are cut clean (sharpenEdges); the depth is worked out
+//     on at most DEPTH_FRAMES[profile] frames, evenly spread, and the frames
+//     between blend their neighbors' (r6; the colors carry the motion, and
+//     the wait stays about what it was);
 //   - a video plays with its own sound, and its frames follow that sound's
 //     clock (pause and scrub with them).
 //   - each frame's colors are sharpened a little (SHARPEN), to make up for
@@ -35,14 +39,16 @@
 
 import { songTransport } from "./song-record.js";
 
-export const MAX_FRAMES = 48;
 export const MAX_SECONDS = 8;
-export const CLIP_SIDES = { low: 256, mid: 384, high: 512, max: 640 };
+export const CLIP_FPS = { low: 12, mid: 15, high: 24, max: 24 };
+export const DEPTH_FRAMES = { low: 24, mid: 32, high: 48, max: 48 };
+export const CLIP_AREAS = { low: 60000, mid: 140000, high: 200000, max: 640 * 360 };
 export const DEPTH_SIDES = { low: 196, mid: 196, high: 294, max: 294 };
 const profile = () => globalThis.window?.__splashery?.player?.profile || "mid";
-export const clipSide = () => CLIP_SIDES[profile()] || CLIP_SIDES.mid;
+export const clipArea = () => CLIP_AREAS[profile()] || CLIP_AREAS.mid;
 export const depthSide = () => DEPTH_SIDES[profile()] || DEPTH_SIDES.mid;
-export const CLIP_SIDE = CLIP_SIDES.low; // (r3's one size; Node tools)
+export const clipFps = () => CLIP_FPS[profile()] || CLIP_FPS.mid;
+export const maxFrames = () => Math.round(MAX_SECONDS * clipFps());
 export const DEPTH_SIDE = DEPTH_SIDES.low;
 const LIFT = 0.9; // recipe units at full depth
 
@@ -53,6 +59,7 @@ export const MOVING = {
   clip: null, // the clip on show
   t: 0, // seconds into the clip
   last: null,
+  anchor: null, // r6: the silent clock, { t, at } (clip and player seconds)
   frame: 0,
   full: 0, // the lift at the chosen depth
   grid: null, // { cols, rows, map } of the build
@@ -88,13 +95,15 @@ export async function gifFrames(bytes) {
     const info = r.frameInfo(i);
     saved = info.disposal === 3 ? px.slice() : null;
     r.decodeAndBlitFrameRGBA(i, px);
-    out.push({ data: px.slice(), delay: Math.max(20, (info.delay || 10) * 10) });
+    // r6: as browsers show it, a delay of 0 or 1 hundredths is a tenth of a
+    // second (it was taken as 20 ms, five times too fast).
+    out.push({ data: px.slice(), delay: info.delay > 1 ? info.delay * 10 : 100 });
   }
   return { w: width, h: height, frames: out };
 }
 
 // Every k-th frame, so there are at most `max` (their delays added up).
-export function thin(frames, max = MAX_FRAMES) {
+export function thin(frames, max = maxFrames()) {
   if (frames.length <= max) return frames;
   const out = [];
   const step = frames.length / max;
@@ -140,9 +149,9 @@ export function shrink(data, w, h, w2, h2) {
   return out;
 }
 
-// The frame's size: `side` on its long side, never larger than the source.
-const sizeFor = (w, h, side) => {
-  const s = Math.min(1, side / Math.max(w, h));
+// The frame's size: `area` pixels in all, never larger than the source.
+const sizeFor = (w, h, area) => {
+  const s = Math.min(1, Math.sqrt(area / (w * h)));
   return { w: Math.max(2, Math.round(w * s)), h: Math.max(2, Math.round(h * s)) };
 };
 const modelSize = (w, h, side = DEPTH_SIDE) => {
@@ -229,10 +238,14 @@ export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE) {
   const worker = new Worker(new URL("../live/depth-worker.js", import.meta.url), { type: "module" }); // prettier-ignore
   const ms = modelSize(w, h, side);
   const out = [];
-  // r5: a long clip's depth on every other frame (and the last); the frames
-  // between take their neighbors' mean.
-  const step = frames.length > 24 ? 2 : 1;
-  const want = frames.map((_, i) => i % step === 0 || i === frames.length - 1);
+  // r6: the depth on at most DEPTH_FRAMES[profile] frames, evenly spread
+  // (with the first and the last); the frames between blend their
+  // neighbors' (r5 took every other frame).
+  const cap = Math.max(2, DEPTH_FRAMES[profile()] || DEPTH_FRAMES.mid);
+  const want = frames.map(() => false);
+  const m = Math.min(frames.length, cap);
+  for (let k = 0; k < m; k++)
+    want[Math.round((k * (frames.length - 1)) / Math.max(1, m - 1))] = true;
   const total = want.filter(Boolean).length;
   let done = 0;
   try {
@@ -258,12 +271,18 @@ export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE) {
   } finally {
     worker.terminate();
   }
+  const done2 = out.map((d) => !!d);
   for (let i = 0; i < out.length; i++) {
-    if (out[i]) continue;
-    const a = out[i - 1];
-    const b = out[i + 1];
+    if (done2[i]) continue;
+    let ia = i - 1;
+    while (!done2[ia]) ia--;
+    let ib = i + 1;
+    while (!done2[ib]) ib++;
+    const a = out[ia];
+    const b = out[ib];
+    const f = (i - ia) / (ib - ia);
     const d = new Float32Array(a.d.length);
-    for (let j = 0; j < d.length; j++) d[j] = (a.d[j] + b.d[j]) / 2;
+    for (let j = 0; j < d.length; j++) d[j] = a.d[j] * (1 - f) + b.d[j] * f;
     out[i] = { w: a.w, h: a.h, d };
   }
   return out;
@@ -296,9 +315,18 @@ export function sharpenEdges(d, w, h) {
 }
 
 export function makeClip(name, w, h, frames, near) {
-  near = near.map((d) => sharpenEdges(d, w, h));
+  // r6: each frame's nearness kept as bytes (0..255; a quarter of the
+  // memory, for a clip at its own frame rate).
   const mean = new Float32Array(w * h);
-  for (const d of near) for (let i = 0; i < mean.length; i++) mean[i] += d[i] / near.length;
+  near = near.map((d) => {
+    const e = sharpenEdges(d, w, h);
+    const q = new Uint8Array(e.length);
+    for (let i = 0; i < e.length; i++) {
+      q[i] = Math.round(255 * e[i]);
+      mean[i] += q[i] / 255 / near.length;
+    }
+    return q;
+  });
   return {
     name,
     n: frames.length,
@@ -319,7 +347,8 @@ export async function openClip(file, name, onStatus) {
   let h;
   let frames;
   let audio = null;
-  const side = clipSide();
+  let source = 0; // the file's own length (s)
+  const side = clipArea();
   const isGif = /\.gif$/i.test(name) || file.type === "image/gif";
   if (isGif) {
     onStatus?.("Reading the GIF…");
@@ -330,20 +359,30 @@ export async function openClip(file, name, onStatus) {
       throw new Error("That GIF couldn't be read. Try another GIF, or an MP4 or WebM video.");
     }
     ({ w, h } = sizeFor(g.w, g.h, side));
-    frames = thin(g.frames).map((f) => ({ data: shrink(f.data, g.w, g.h, w, h), delay: f.delay }));
+    source = g.frames.reduce((t, f) => t + f.delay, 0) / 1000;
+    // Its first MAX_SECONDS, at up to clipFps() frames a second.
+    let kept = [];
+    let at = 0;
+    for (const f of g.frames) {
+      if (at >= MAX_SECONDS * 1000) break;
+      kept.push(f);
+      at += f.delay;
+    }
+    kept = thin(kept, Math.max(2, Math.min(maxFrames(), Math.round((at / 1000) * clipFps()))));
+    frames = kept.map((f) => ({ data: shrink(f.data, g.w, g.h, w, h), delay: f.delay }));
   } else {
     onStatus?.("Reading the video…");
-    ({ w, h, frames } = await videoFrames(file, side));
+    ({ w, h, frames, source } = await videoFrames(file, side, onStatus));
     audio = await soundOf(URL.createObjectURL(file), true);
   }
   if (frames.length < 2) throw new Error("That file has only one picture. Open a GIF or a video that moves."); // prettier-ignore
   const raw = await depthOf(frames, w, h, onStatus, depthSide());
-  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h)), audio };
+  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h)), audio, source };
 }
 
-// A video's first MAX_SECONDS, at up to 12 frames a second (at most
-// MAX_FRAMES), each drawn after a seek.
-async function videoFrames(file, side) {
+// A video's first MAX_SECONDS, at clipFps() frames a second, each drawn
+// after a seek (its length is the video's own, so it plays at its speed).
+async function videoFrames(file, side, onStatus) {
   const v = document.createElement("video");
   v.muted = true;
   v.playsInline = true;
@@ -357,13 +396,34 @@ async function videoFrames(file, side) {
     });
     const len = Math.min(MAX_SECONDS, v.duration || 0);
     if (!(len > 0.2)) throw new Error("That video is too short.");
-    const n = Math.max(2, Math.min(MAX_FRAMES, Math.round(len * 12)));
+    const n = Math.max(2, Math.min(maxFrames(), Math.round(len * clipFps())));
     const { w, h } = sizeFor(v.videoWidth, v.videoHeight, side);
     const c = document.createElement("canvas");
     c.width = w;
     c.height = h;
     const g = c.getContext("2d", { willReadFrequently: true });
     const frames = [];
+    const grab = () => frames.push({ data: g.getImageData(0, 0, w, h).data, delay: (len * 1000) / n }); // prettier-ignore
+    // r6: played through once, muted, each frame taken as it shows
+    // (requestVideoFrameCallback): about the clip's own length. A seek to
+    // each frame decodes from the last key frame every time, which took
+    // minutes for a phone's video at 24 frames a second.
+    if (
+      v.requestVideoFrameCallback &&
+      (await playedFrames(
+        v,
+        n,
+        len,
+        () => {
+          g.drawImage(v, 0, 0, w, h);
+          grab();
+        },
+        onStatus,
+      ))
+    )
+      // prettier-ignore
+      return { w, h, frames, source: v.duration || len };
+    frames.length = 0;
     for (let i = 0; i < n; i++) {
       const at = (i * len) / n;
       await new Promise((resolve) => {
@@ -371,14 +431,76 @@ async function videoFrames(file, side) {
         v.currentTime = at;
       });
       g.drawImage(v, 0, 0, w, h);
-      frames.push({ data: g.getImageData(0, 0, w, h).data, delay: (len * 1000) / n });
+      grab();
+      if (i % 12 === 11) onStatus?.(`Reading the video: frame ${i + 1} of ${n}…`);
     }
-    return { w, h, frames };
+    return { w, h, frames, source: v.duration || len };
   } finally {
     v.removeAttribute("src");
     v.load();
     URL.revokeObjectURL(url);
   }
+}
+
+// Plays v (muted) from the start and calls take() for frame i at (i * len /
+// n) seconds, as the frame on show reaches it (a frame the browser skipped
+// takes the next one shown). False if it can't play here (the caller seeks
+// instead).
+export const READ = { lead: 0, slowed: 1 }; // (how the last video read went; tests)
+async function playedFrames(v, n, len, take, onStatus) {
+  READ.lead = 0;
+  READ.slowed = 1;
+  v.currentTime = 0;
+  await new Promise((r) => v.addEventListener("seeked", r, { once: true }));
+  let i = 0;
+  const done = new Promise((resolve) => {
+    const end = () => {
+      if (i === 0) return resolve(false);
+      while (i < n) {
+        take();
+        i++;
+      }
+      v.pause();
+      resolve(true);
+    };
+    const watchdog = setInterval(() => {
+      if (v.paused || v.ended) {
+        clearInterval(watchdog);
+        end();
+      }
+    }, 500);
+    const half = len / n / 2;
+    const step = (_now, meta) => {
+      const at = meta.mediaTime;
+      // A frame the browser skipped (it couldn't decode that fast): back to
+      // it, at half the speed (a phone decodes in hardware and rarely
+      // needs this).
+      if (i < n && (i * len) / n < at - half && v.playbackRate > 1 / 16) {
+        v.playbackRate /= 2;
+        READ.slowed = v.playbackRate;
+        v.currentTime = (i * len) / n;
+        v.requestVideoFrameCallback(step);
+        return;
+      }
+      while (i < n && (i * len) / n <= at + half) {
+        READ.lead = Math.max(READ.lead, at - (i * len) / n);
+        take();
+        i++;
+      }
+      if (i % 24 < 2) onStatus?.(`Reading the video: frame ${i} of ${n}…`);
+      if (i >= n || at >= len) {
+        clearInterval(watchdog);
+        end();
+      } else v.requestVideoFrameCallback(step);
+    };
+    v.requestVideoFrameCallback(step);
+  });
+  try {
+    await v.play();
+  } catch {
+    return false;
+  }
+  return done;
 }
 
 // A video's own sound (r5): a Track (song-stream.js) playing the file,
@@ -425,57 +547,109 @@ export function clipGrid(clip, count) {
 // a little (SHARPEN times their difference from their 3 by 3 neighborhood's
 // mean), which makes up for the softening of neighboring splats overlapping.
 export const SHARPEN = 0.6;
-export function frameImage(clip, cols, rows, f, sharpen = SHARPEN) {
+// r6: built for every frame shown, so it is quick: the spans under each
+// splat worked out once per size, the grid's own pixels copied when it is
+// as fine as the frame, the 3 by 3 mean taken in two passes, and the
+// working arrays kept (it took 40 ms or more a frame at max detail on a slow
+// machine, which held the clip to a few frames a second). `out` (optional)
+// is filled instead of a new array.
+const SCRATCH = { key: "", map: null, avg: null, hs: null };
+function spans(clip, cols, rows) {
+  const key = `${clip.w}x${clip.h}>${cols}x${rows}`;
+  if (SCRATCH.key === key) return SCRATCH.map;
+  const cut = (i, n, size) => Math.floor((i * size) / n);
+  const x0 = new Int32Array(cols);
+  const x1 = new Int32Array(cols);
+  const xm = new Int32Array(cols);
+  for (let i = 0; i < cols; i++) {
+    x0[i] = cut(i, cols, clip.w);
+    x1[i] = Math.max(x0[i] + 1, cut(i + 1, cols, clip.w));
+    xm[i] = Math.min(clip.w - 1, Math.floor(((i + 0.5) / cols) * clip.w));
+  }
+  const y0 = new Int32Array(rows);
+  const y1 = new Int32Array(rows);
+  const ym = new Int32Array(rows);
+  for (let j = 0; j < rows; j++) {
+    y0[j] = cut(j, rows, clip.h);
+    y1[j] = Math.max(y0[j] + 1, cut(j + 1, rows, clip.h));
+    ym[j] = Math.min(clip.h - 1, Math.floor(((j + 0.5) / rows) * clip.h));
+  }
+  SCRATCH.key = key;
+  SCRATCH.map = { x0, x1, xm, y0, y1, ym, same: cols === clip.w && rows === clip.h };
+  SCRATCH.avg = new Float32Array(cols * rows * 3);
+  SCRATCH.hs = new Float32Array(cols * rows * 3);
+  return SCRATCH.map;
+}
+
+export function frameImage(clip, cols, rows, f, sharpen = SHARPEN, out = null) {
   const W = cols * 2;
-  const px = new Uint8ClampedArray(W * rows * 4);
-  const avg = new Float32Array(cols * rows * 3);
+  const px = out || new Uint8ClampedArray(W * rows * 4);
+  const { x0, x1, xm, y0, y1, ym, same } = spans(clip, cols, rows);
+  const avg = SCRATCH.avg;
+  const hs = SCRATCH.hs;
   const col = clip.colors[f];
   const near = clip.near[f];
-  const span = (i, n, size) => [Math.floor((i * size) / n), Math.max(Math.floor((i * size) / n) + 1, Math.floor(((i + 1) * size) / n))]; // prettier-ignore
+  const mean = clip.mean;
+  const cw = clip.w;
   for (let j = 0; j < rows; j++) {
-    const [y0, y1] = span(j, rows, clip.h);
-    const ym = Math.min(clip.h - 1, Math.floor(((j + 0.5) / rows) * clip.h));
+    const row = ym[j] * cw;
     for (let i = 0; i < cols; i++) {
-      const [x0, x1] = span(i, cols, clip.w);
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      let n = 0;
-      for (let y = y0; y < y1; y++)
-        for (let x = x0; x < x1; x++) {
-          const o = (y * clip.w + x) * 4;
-          r += col[o];
-          g += col[o + 1];
-          b += col[o + 2];
-          n++;
-        }
       const a = (j * cols + i) * 3;
-      avg[a] = r / n;
-      avg[a + 1] = g / n;
-      avg[a + 2] = b / n;
-      const s2 = ym * clip.w + Math.min(clip.w - 1, Math.floor(((i + 0.5) / cols) * clip.w));
+      if (same) {
+        const o = (j * cw + i) * 4;
+        avg[a] = col[o];
+        avg[a + 1] = col[o + 1];
+        avg[a + 2] = col[o + 2];
+      } else {
+        let r = 0;
+        let g = 0;
+        let b = 0;
+        let n = 0;
+        for (let y = y0[j]; y < y1[j]; y++)
+          for (let x = x0[i]; x < x1[i]; x++) {
+            const o = (y * cw + x) * 4;
+            r += col[o];
+            g += col[o + 1];
+            b += col[o + 2];
+            n++;
+          }
+        avg[a] = r / n;
+        avg[a + 1] = g / n;
+        avg[a + 2] = b / n;
+      }
+      const s2 = row + xm[i];
       const q = (j * W + cols + i) * 4;
       px[q] = px[q + 1] = 128;
-      px[q + 2] = Math.round(255 * (0.5 + (near[s2] - clip.mean[s2]) / 2));
+      px[q + 2] = 255 * (0.5 + (near[s2] / 255 - mean[s2]) / 2) + 0.5;
       px[q + 3] = 255;
     }
   }
+  // The 3 by 3 sums, across then down (edges repeat their last cell).
   for (let j = 0; j < rows; j++)
     for (let i = 0; i < cols; i++) {
       const a = (j * cols + i) * 3;
+      const l = i > 0 ? a - 3 : a;
+      const r = i < cols - 1 ? a + 3 : a;
+      hs[a] = avg[l] + avg[a] + avg[r];
+      hs[a + 1] = avg[l + 1] + avg[a + 1] + avg[r + 1];
+      hs[a + 2] = avg[l + 2] + avg[a + 2] + avg[r + 2];
+    }
+  const k = sharpen / 9;
+  for (let j = 0; j < rows; j++) {
+    const up = (j > 0 ? j - 1 : j) * cols * 3;
+    const dn = (j < rows - 1 ? j + 1 : j) * cols * 3;
+    const at = j * cols * 3;
+    for (let i = 0; i < cols; i++) {
+      const a = at + i * 3;
+      const u = up + i * 3;
+      const d = dn + i * 3;
       const o = (j * W + i) * 4;
-      for (let c = 0; c < 3; c++) {
-        let m = 0;
-        for (let dy = -1; dy <= 1; dy++)
-          for (let dx = -1; dx <= 1; dx++) {
-            const y = Math.min(rows - 1, Math.max(0, j + dy));
-            const x = Math.min(cols - 1, Math.max(0, i + dx));
-            m += avg[(y * cols + x) * 3 + c];
-          }
-        px[o + c] = avg[a + c] + sharpen * (avg[a + c] - m / 9);
-      }
+      px[o] = avg[a] * (1 + sharpen) - k * (hs[u] + hs[a] + hs[d]);
+      px[o + 1] = avg[a + 1] * (1 + sharpen) - k * (hs[u + 1] + hs[a + 1] + hs[d + 1]);
+      px[o + 2] = avg[a + 2] * (1 + sharpen) - k * (hs[u + 2] + hs[a + 2] + hs[d + 2]);
       px[o + 3] = 255;
     }
+  }
   return px;
 }
 
@@ -572,6 +746,14 @@ export async function loadSample() {
   return clip;
 }
 
+// r6: the clip's frames and length, and the source's own length when the
+// clip is its first MAX_SECONDS.
+export function clipLine(c) {
+  const fps = Math.round(c.n / c.duration);
+  const of = c.source > c.duration + 0.05 ? ` of ${c.source.toFixed(1)} s` : "";
+  return `${c.name}: ${c.duration.toFixed(1)} s${of}, ${c.n} frames (${fps} a second)`;
+}
+
 function setShown(text) {
   MOVING.status = text;
   if (typeof document === "undefined") return;
@@ -584,16 +766,31 @@ function setShown(text) {
 // The clip's sound (r5), if it has one.
 const track = () => MOVING.clip?.audio?.track ?? null;
 
+// r6 (the owner's note of October 3: after a pause the sound didn't come
+// back): one clock for the frames and the sound. Whether the clip plays is
+// the play control's target, set at once by a tap or the transport (its
+// eased value lagged a tap by a fifth of a second, and the drive paused the
+// sound the tap had just started, then tried to restart it outside the
+// tap, which a phone refuses). Pausing keeps the place; playing starts the
+// sound from that place, inside the tap.
+const playTarget = () => (globalThis.window?.__splashery?.player?.motion?.targets?.play ?? 1) > 0.5; // prettier-ignore
+function soundTo(on) {
+  const t = track();
+  MOVING.anchor = null;
+  if (!t) return;
+  if (on && !t.playing) {
+    if (Math.abs(t.el.currentTime - MOVING.t) > 0.03) t.el.currentTime = MOVING.t;
+    t.play(MOVING.sound);
+  } else if (!on && t.playing) {
+    MOVING.t = Math.min(MOVING.clip?.duration ?? Infinity, t.time());
+    t.pause();
+  }
+}
+
 // Plays or pauses the clip, its sound with it (from a tap, so a phone lets
 // the sound start).
 function playClip(on) {
-  const t = track();
-  if (t) {
-    if (on && !t.playing) {
-      if (Math.abs(t.el.currentTime - MOVING.t) > 0.1) t.el.currentTime = MOVING.t;
-      t.play(MOVING.sound);
-    } else if (!on && t.playing) t.pause();
-  }
+  soundTo(on);
   globalThis.window?.__splashery?.app?.setControl?.("play", on ? 1 : 0);
   liveWake();
 }
@@ -621,6 +818,7 @@ export const movingTransport = {
     const clip = MOVING.clip;
     if (!clip) return;
     MOVING.t = Math.max(0, Math.min(clip.duration - 0.01, sec));
+    MOVING.anchor = null;
     const t = track();
     if (t) {
       t.el.currentTime = MOVING.t;
@@ -639,7 +837,7 @@ export const movingTransport = {
 
 export const MOVING_PHOTO = {
   alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip,
-  density: 1,
+  density: 1.25, // r6: a quarter more splats than most, for a finer picture (see the top)
   turntable: false,
   options: [
     { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.6 },
@@ -653,15 +851,9 @@ export const MOVING_PHOTO = {
     quiet: ["play"],
     // r5: the sound starts or stops inside the tap itself (a phone wants that).
     onAct() {
-      const t = track();
-      if (!t) return;
-      // The tap turns playing off if it was on, else on.
-      const on = (globalThis.window?.__splashery?.player?.motion?.targets?.play ?? 1) > 0.5;
-      if (on) t.pause();
-      else {
-        t.el.currentTime = MOVING.t;
-        t.play(MOVING.sound);
-      }
+      // The tap turns playing off if it was on, else on (the control's
+      // target flips right after this).
+      soundTo(!playTarget());
     },
   },
   input: {
@@ -670,7 +862,7 @@ export const MOVING_PHOTO = {
     binary: true,
     maxBytes: 200e6,
     fileButton: "Open a GIF or video…",
-    note: `Open a GIF or a short video. Its first ${MAX_SECONDS} seconds (up to ${MAX_FRAMES} frames) are read on this device, the depth model (about 27 MB, loaded the first time) works out how near each part of every frame is, and the clip plays back in 3D, a video with its own sound. Nothing is uploaded. Tap to pause or play.`, // prettier-ignore
+    note: `Open a GIF or a short video. Its first ${MAX_SECONDS} seconds are read on this device, at its own speed and up to ${CLIP_FPS.high} frames a second (fewer on a phone), the depth model (about 27 MB, loaded the first time) works out how near each part of every frame is, and the clip plays back in 3D, a video with its own sound. Nothing is uploaded. Tap to pause or play.`, // prettier-ignore
     live: [{ render: () => songTransport(movingTransport) }],
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a GIF or a video.");
@@ -681,8 +873,7 @@ export const MOVING_PHOTO = {
       setShown("");
       return { clip: "custom", clipName: clip.name };
     },
-    shown: () =>
-      MOVING.status || (MOVING.clip ? `${MOVING.clip.name}: ${MOVING.clip.n} frames, ${MOVING.clip.duration.toFixed(1)} s` : ""), // prettier-ignore
+    shown: () => MOVING.status || (MOVING.clip ? clipLine(MOVING.clip) : ""),
   },
   credits: [
     {
@@ -706,7 +897,9 @@ export const MOVING_PHOTO = {
       const clip = MOVING.clip;
       if (!clip || !MOVING.grid) return;
       const { cols, rows } = MOVING.grid;
-      g.putImageData(new ImageData(frameImage(clip, cols, rows, MOVING.frame), cols * 2, rows), 0, 0); // prettier-ignore
+      const size = cols * 2 * rows * 4;
+      if (MOVING.px?.length !== size) MOVING.px = new Uint8ClampedArray(size);
+      g.putImageData(new ImageData(frameImage(clip, cols, rows, MOVING.frame, SHARPEN, MOVING.px), cols * 2, rows), 0, 0); // prettier-ignore
     },
   },
   async prepare(o) {
@@ -714,24 +907,39 @@ export const MOVING_PHOTO = {
   },
   drive(t, c, out, info) {
     const time = info?.time ?? t;
-    const dt = MOVING.last === null ? 0 : Math.max(0, Math.min(0.25, time - MOVING.last));
     MOVING.last = time;
     if (info?.sound) MOVING.sound = info.sound;
     const clip = MOVING.clip;
     if (!clip) return;
-    const on = (c.play ?? 1) > 0.5;
+    // r6: the control's target, not its eased value (see playTarget).
+    const on = globalThis.window?.__splashery?.player?.motion ? playTarget() : (c.play ?? 1) > 0.5;
     const tr = track();
-    if (tr?.playing) {
+    if (!on) {
+      if (tr?.playing) soundTo(false);
+      MOVING.anchor = null;
+    } else if (tr?.playing) {
       // r5: the frames follow the sound's clock (looping at the clip's end).
-      if (!on) tr.pause();
-      else if (tr.time() >= clip.duration - 0.02) {
+      if (tr.time() >= clip.duration - 0.02) {
         tr.el.currentTime = 0;
         tr.anchor = null;
         MOVING.t = 0;
       } else MOVING.t = tr.time();
-    } else if (on) {
-      // Silent (a GIF, or before the first tap lets the sound start).
-      MOVING.t = (MOVING.t + dt) % clip.duration;
+      MOVING.anchor = null;
+    } else {
+      // Silent (a GIF, or a browser that wants a tap before sound): real
+      // time, so the clip keeps its speed however few frames are drawn (r6:
+      // it stepped at most a quarter second a frame, and the player's own
+      // clock steps at most a tenth, the engine's cap, so a device drawing
+      // four frames a second played a GIF at half speed). In Node (the
+      // tests' builds) it is the player's clock, as before.
+      const pl = globalThis.window?.__splashery?.player;
+      // (tools/live-clip.mjs steps a clock of its own, __clipT.)
+      const now = pl ? (globalThis.window.__clipT ?? performance.now() / 1000) : time;
+      if (pl?.frozen) MOVING.anchor = null;
+      else {
+        if (!MOVING.anchor || now < MOVING.anchor.at) MOVING.anchor = { t: MOVING.t, at: now };
+        MOVING.t = (MOVING.anchor.t + (now - MOVING.anchor.at)) % clip.duration;
+      }
       if (tr && !tr.blocked && !tr.el.ended) {
         tr.el.currentTime = MOVING.t;
         tr.play(MOVING.sound);
@@ -747,6 +955,7 @@ export const MOVING_PHOTO = {
     }
     MOVING.clip = clip;
     MOVING.last = null;
+    MOVING.anchor = null;
     const { cols, rows } = clipGrid(clip, k.count);
     MOVING.grid = { cols, rows };
     MOVING.frame = frameAt(clip, MOVING.t);
