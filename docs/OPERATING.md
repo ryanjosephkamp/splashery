@@ -378,6 +378,32 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
   none.
 - The Operator starts the next lane when a slot is free, in the order in ROADMAP.md.
 
+### The save point (when an account's weekly usage is nearly gone)
+
+The owner's request of October 3, 2026: when an account is in its last 5% or so of weekly usage, all
+work on it is saved and easy to pick up after the reset (automatic or manual). The owner says "save
+point" (naming the account), or reports 95% or more.
+
+1. The Operator tells every lane on that account at once: a PR comment starting "From the Operator:
+   save point" for each cloud lane, and one paste line for the owner's local tabs: "Save point:
+   commit and push your work now, set State to PAUSED with your next step, then stop."
+2. Each lane, right away:
+   - commits its work in progress (a commit titled "WIP (save point): …" is fine) and pushes its
+     branch; it stops any test run that is going;
+   - sets its handoff file's State line to "PAUSED (save point): <the exact next step>", and lists
+     what is half done, the last test results and any clip not yet posted;
+   - pushes that, and stops: no new turns, no check-ins.
+3. The Operator:
+   - merges nothing and starts nothing;
+   - cancels its check-ins except one set for just after the reset;
+   - writes the resume list (each lane, its branch and its next step) into HANDOFF.md, or into the
+     backup kit if there's too little usage left for a PR;
+   - sends the owner a fresh backup kit.
+4. After the reset, the owner says "resume". The Operator restarts each lane with "Read
+   docs/handoff/<lane>.md and continue from its State line", oldest first, within the usual limits.
+
+If the Operator's own account is the one running out, it does steps 1 to 3 first, then stops.
+
 ## Local lanes (the second account, on the owner's Mac)
 
 Since October 3, 2026 (the owner's call that afternoon), some lanes run in Claude Code on the
