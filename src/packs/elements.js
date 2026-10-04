@@ -1684,19 +1684,24 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          // (No color noise and no inside fill: the fill showed through the
+          // wall as dark, grainy specks. Lane Hands engine A, the owner's
+          // note of October 4, 2026.)
+          jitter: 0,
           // (Slightly larger splats: the base's underside let the snow
           // inside show through faintly. Lane Sharpness B.)
           size: 1.12,
           flat: 0.2,
-          interior: 0.06,
-          core: shade(o.base, 0.6),
+          interior: 0,
           color: (c) => {
             const y = c.p[1];
+            // A splat whose normal points inward is lit as the outside is:
+            // lit from behind, those were dark, grainy specks.
+            const n = c.n[0] * c.p[0] + c.n[2] * c.p[2] < 0 ? [-c.n[0], -c.n[1], -c.n[2]] : c.n;
             if (y > -0.3 && y < -0.24)
-              return lit(mix("#c8a040", "#f0d070", Math.max(0, c.n[2])), c.n, 0.4);
-            const hi = Math.pow(Math.max(0, dot(c.n, unit([-0.3, 0.6, 0.75]))), 12);
-            return mix(lit(o.base, c.n, 0.45), "#ffffff", 0.3 * hi);
+              return lit(mix("#c8a040", "#f0d070", Math.max(0, n[2])), n, 0.4);
+            const hi = Math.pow(Math.max(0, dot(n, unit([-0.3, 0.6, 0.75]))), 12);
+            return mix(lit(o.base, n, 0.45), "#ffffff", 0.3 * hi);
           },
         },
       );
