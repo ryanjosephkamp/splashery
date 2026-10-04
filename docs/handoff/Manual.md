@@ -4,6 +4,21 @@ Prefix `man`. Branch `claude/lane-splat-manual`, PR "Phase Manual: the splat equ
 Tinkerer's Manual". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons:
 [history.md](history.md).
 
+## State
+
+**READY (October 4, 2026), Manual r2.** Done: the "What is a 3D Gaussian?" box; three SVG figures
+(light and dark, checked at 390 px); the approximation labels; the worked two-splat example; a
+runnable recipe ("Run it yourself", run in a scratch copy: the windmill loads at
+`embed/index.html?toy=little-windmill` and its sails turn on a tap); the glossary (14 terms);
+"Further reading" (all six links loaded on October 4, 2026); the chapter "What else Splashery does
+now"; the PDF regenerated (44 pages, was 33); `tests/man2.spec.mjs`; screenshots `man2-manual-*`;
+cards on Effect review page 2 (lane `ManualR2`). Not done: Your book's thumbnail was not re-rendered
+(the cover changed only by its date line). Edited outside my files: one regex in `tests/ln.spec.mjs`
+(it allowed only project links; the reading list links to the five papers' pages).
+`tests/ln.spec.mjs` "has a row for every lane" fails on main too (a Codex audit row names GPT-6).
+Proposed credit line (not added): "Written with AI assistance (Claude Sonnet 5.5) and checked by the
+owner."
+
 ## r2 (October 4, 2026): the manual for a newcomer, and a fresh PDF
 
 **Start here.** Model: **Sonnet 5.5** (docs are a Sonnet job under the owner's model split of

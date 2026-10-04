@@ -400,6 +400,84 @@ footer {
   }
 }
 
+/* Newcomer material (Manual r2): figure parts, approximation notes, the
+   glossary and the reading list. */
+.diagram svg text {
+  fill: currentColor;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+.diagram svg .sv-title {
+  font-weight: 700;
+  font-size: 13px;
+}
+.diagram svg .sv-muted {
+  fill: var(--muted);
+  font-size: 11px;
+}
+.diagram svg .sv-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.diagram svg .sv-soft {
+  fill: none;
+  stroke: var(--svg-soft);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+.diagram svg .sv-box {
+  fill: none;
+  stroke: var(--svg-soft);
+  stroke-width: 1;
+}
+.diagram svg .sv-acc {
+  fill: var(--accent);
+  fill-opacity: 0.22;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.diagram svg .sv-warm {
+  fill: #e8384f;
+  fill-opacity: 0.3;
+  stroke: #e8384f;
+  stroke-width: 1.5;
+}
+.diagram svg .sv-dot {
+  fill: currentColor;
+}
+.diagram svg .sv-on {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.approx {
+  border-left: 4px solid var(--svg-soft);
+  background: var(--code-bg);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-size: 0.95em;
+  break-inside: avoid;
+}
+.approx p {
+  margin: 4px 0;
+}
+p code,
+li code {
+  overflow-wrap: anywhere;
+}
+dl.glossary dt {
+  font-weight: 700;
+  margin-top: 14px;
+  break-after: avoid;
+}
+dl.glossary dd {
+  margin: 2px 0 0 0;
+}
+ul.reading li {
+  margin: 8px 0;
+}
+
 /* Print: letter pages; page numbers come from the PDF tool's footer. */
 @page {
   size: letter;
