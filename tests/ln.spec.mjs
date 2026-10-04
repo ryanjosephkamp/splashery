@@ -254,7 +254,7 @@ test.describe("the manual page", () => {
     }
     // Every web link goes to this project's site or its source, or a paper.
     for (const h of hrefs.filter((h) => /^https?:/.test(h)))
-      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|github\.com\/ryanjosephkamp\/splashery)/); // prettier-ignore
+      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|github\.com\/ryanjosephkamp\/splashery|repo-sam\.inria\.fr\/fungraph\/3d-gaussian-splatting\/|arxiv\.org\/pdf\/2308\.04079|www\.cs\.umd\.edu\/~zwicker\/|niujinshuchong\.github\.io\/mip-splatting\/|surfsplatting\.github\.io\/|anttwo\.github\.io\/sugar\/)/); // prettier-ignore
     const imgs = await page.locator("img").evaluateAll((is) => is.map((i) => [i.getAttribute("src"), i.complete && i.naturalWidth > 0, i.alt])); // prettier-ignore
     expect(imgs.length).toBeGreaterThan(30);
     for (const [src, ok, alt] of imgs) {
