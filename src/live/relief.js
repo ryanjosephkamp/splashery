@@ -233,6 +233,15 @@ export class CameraDepth {
     // across a few cells, and those cells hung as stretched splats between
     // the two (the owner's "detaching" of October 3): each goes with the near
     // or the far side, whichever it is closer to.
+    // r6 (the owner's "too flashy and too kind of grainy" of October 3):
+    // each answer blends with the last where they differ a little (the
+    // model's guess wanders from frame to frame), and keeps a real move
+    // (over a quarter) as it is; then the edges are cut. Cells along an
+    // outline used to flip between near and far from one answer to the next.
+    const prev = this.smooth;
+    if (prev && prev.length === t.length)
+      for (let i = 0; i < t.length; i++) if (Math.abs(t[i] - prev[i]) < 0.25) t[i] = prev[i] + (t[i] - prev[i]) * 0.4; // prettier-ignore
+    this.smooth = Float32Array.from(t);
     t.set(snapEdges(t, cols, rows));
     if (this.back && this.sent) this.back.learn(this.sent, t, cols, rows, this.mirror);
     if (!this.have) this.heights.set(t);
@@ -262,24 +271,42 @@ export class CameraDepth {
     this.crop = [(1 - sw / v.videoWidth) / 2, (1 - sh / v.videoHeight) / 2, sw / v.videoWidth, sh / v.videoHeight]; // prettier-ignore
     sg.drawImage(v, (v.videoWidth - sw) / 2, (v.videoHeight - sh) / 2, sw, sh, 0, 0, cols, rows);
     sg.restore();
-    g.drawImage(this.small, 0, 0);
+    // r6: steadier colors. A small change from the last frame (a camera's
+    // noise, which made the picture shimmer) moves only part of the way;
+    // a bigger one (something moving) shows at once.
+    const cur = sg.getImageData(0, 0, cols, rows);
+    const cp = cur.data;
+    const last = this.lastColors;
+    if (last && last.length === cp.length)
+      for (let i = 0; i < cp.length; i += 4) {
+        const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
+        if (d < 20) {
+          cp[i] = last[i] + (cp[i] - last[i]) * 0.5;
+          cp[i + 1] = last[i + 1] + (cp[i + 1] - last[i + 1]) * 0.5;
+          cp[i + 2] = last[i + 2] + (cp[i + 2] - last[i + 2]) * 0.5;
+        }
+      }
+    this.lastColors = cp.slice();
+    g.putImageData(cur, 0, 0);
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
+    const kBig = 1 - Math.exp(-dt / 0.04);
     const hts = this.heights;
     const t = this.target;
     const img = g.createImageData(cols, rows);
     const px = img.data;
     for (let i = 0; i < hts.length; i++) {
-      // r5: a big jump (a person's edge moving) cuts over at once, so no
-      // splat glides through the gap between near and far; small changes
-      // ease, which keeps the depth from shimmering.
-      if (this.have) hts[i] = Math.abs(t[i] - hts[i]) > 0.3 ? t[i] : hts[i] + (t[i] - hts[i]) * k;
+      // r5: a big jump (a person's edge moving) is quick, so no splat
+      // lingers in the gap between near and far; r6: quick rather than at
+      // once (it flashed), and small changes ease, which keeps the depth
+      // from shimmering.
+      if (this.have) hts[i] += (t[i] - hts[i]) * (Math.abs(t[i] - hts[i]) > 0.3 ? kBig : k);
       const o = i * 4;
       px[o] = Math.round(255 * (this.have ? hts[i] * gain : 0));
       px[o + 3] = 255;
     }
     g.putImageData(img, cols, 0);
-    if (this.back) this.back.draw(g, cols, rows, gain);
+    if (this.back) this.back.draw(g, cols, rows, gain, hts);
     return true;
   }
 
@@ -298,6 +325,7 @@ export class CameraDepth {
 // covered are filled from the wall around them (fillHoles), never from the
 // person's own colors, so no second copy of them shows behind.
 const FAR = 0.35; // a cell is wall below this (0 far .. 1 near)
+const BACK_GAP = 0.06; // r6: how far behind the wall it sits (recipe units)
 export class BackPlate {
   constructor(cols, rows) {
     this.cols = cols;
@@ -386,22 +414,46 @@ export class BackPlate {
   // Into the canvas's lower half: the colors on the left, the heights (a
   // hair lower than the wall's, so the picture's own wall stays in front)
   // on the right.
-  draw(g, cols, rows, gain) {
+  // r6 (the owner's review of October 3: the fill showed over the camera's
+  // picture, and as blobs when zoomed out): its splats show only within
+  // two of its cells of a near part of the picture (where the person
+  // stands and just beside), everywhere else they hide; and they sit
+  // BACK_GAP behind the wall (a signed offset, relief axis 3). hts: the
+  // picture's heights now (0 far .. 1 near).
+  draw(g, cols, rows, gain, hts) {
     const { cols: bc, rows: br, vals } = this;
     if (!this.img || this.img.width !== cols * 2 || this.img.height !== rows) this.img = g.createImageData(cols * 2, rows); // prettier-ignore
     const px = this.img.data;
+    // Which of its cells are near now, then that grown by two cells.
+    const near = (this.near ||= new Uint8Array(bc * br));
+    near.fill(0);
+    if (hts)
+      for (let j = 0; j < rows; j++) {
+        const y = Math.min(br - 1, Math.floor((j * br) / rows));
+        for (let i = 0; i < cols; i++) if (hts[j * cols + i] >= FAR) near[y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols))] = 1; // prettier-ignore
+      }
+    const show = (this.show ||= new Uint8Array(bc * br));
+    show.fill(0);
+    for (let y = 0; y < br; y++)
+      for (let x = 0; x < bc; x++) {
+        if (!near[y * bc + x]) continue;
+        for (let j = Math.max(0, y - 2); j <= Math.min(br - 1, y + 2); j++)
+          for (let i = Math.max(0, x - 2); i <= Math.min(bc - 1, x + 2); i++) show[j * bc + i] = 1;
+      }
     for (let j = 0; j < rows; j++) {
       const y = Math.min(br - 1, Math.floor((j * br) / rows));
       for (let i = 0; i < cols; i++) {
-        const c = (y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols))) * 4;
+        const b = y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols));
+        const c = b * 4;
         const o = (j * cols * 2 + i) * 4;
         px[o] = vals[c];
         px[o + 1] = vals[c + 1];
         px[o + 2] = vals[c + 2];
         px[o + 3] = 255;
         const q = o + cols * 4;
-        px[q] = Math.round(255 * Math.max(0, vals[c + 3] * gain - 0.02));
-        px[q + 3] = 255;
+        px[q] = px[q + 1] = 128;
+        px[q + 2] = Math.round(255 * (0.5 + Math.max(0, vals[c + 3] * gain) / 2));
+        px[q + 3] = show[b] ? 255 : 0;
       }
     }
     g.putImageData(this.img, 0, rows);
@@ -629,11 +681,11 @@ export function buildMirror(
     reliefGrid(k, {
       cols: back.cols,
       rows: back.rows,
-      at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, -0.006],
-      axis: 2,
+      at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, -BACK_GAP],
+      axis: 3,
       lift,
       n: [0, 0, 1],
-      size: width / back.cols,
+      size: (width / back.cols) * 0.8, // (r6: smaller; they showed as blobs)
       part,
       v0: 0.5,
       vs: 0.5,
