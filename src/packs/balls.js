@@ -1537,6 +1537,9 @@ export const RECIPES = {
     // from below, where it spins with a slight wobble, and it drops off,
     // bouncing lower each time (about 0.78 of its speed kept), still
     // spinning down.
+    // Hands-on (lane Hands engine A): a basketball's own bounce and grip; an
+    // upward flick while holding it spins it on the fingertip.
+    hands: { material: "basketball" },
     ...throwBall("dribble", "Dribble and spin", grav(0.12), BASKETBALL, {
       extra(e, pose, c, out) {
         showHand(out, e, pose);
@@ -1775,6 +1778,9 @@ export const RECIPES = {
     // Punched up, the air slows it at once; it floats down slowly, drifting
     // and turning lazily, lands soft with a wobble and bobs to a stop.
     ...throwBall("toss", "Toss it up", 2.5, BEACH),
+    // Hands-on (lane Hands engine A): light and big, the air holds it up; it
+    // drifts as it falls and lands soft.
+    hands: { material: "beach-ball" },
     build(k, o) {
       const gores = [o.c1, "#fafafa", o.c2, "#2a9d8f", o.c3, "#f77f00"];
       body(
@@ -1918,6 +1924,9 @@ export const RECIPES = {
   "water-polo-ball": {
     // Tossed up, it plunges into the water with a splash, pops back up and
     // bobs on the water line, each bob sending out a ripple.
+    // Hands-on (lane Hands engine A): it floats on a pool, a third under
+    // water; dropped in, it plunges, pops up and bobs to rest.
+    hands: { material: "water-polo-ball", water: true },
     ...throwBall("toss", "Toss it in", WP_G, WATERPOLO, {
       extra(e, pose, c, out) {
         const m = [0, 0, 0, 0];

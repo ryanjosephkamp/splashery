@@ -103,6 +103,18 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
   toy's, loaded only when a water toy has Hands-on on). Documented in docs/PACKS.md, "5f. Hands-on:
   bodies and fields". Tests: `tests/hea-engine.spec.mjs` (13 engine tests measuring heights, times,
   angles and positions; 5 in the app).
+- Engine PR #226 (draft). Demo toys on `claude/lane-hands-engine-a-toys`: basketball (an upward
+  flick while holding spins it on the fingertip), beach ball (light and big: floats down and
+  drifts), water polo ball (floats on a pool, a third under; bobs and settles), sports car (a drag
+  pushes; it rolls on, wheels turning), snow globe (pick it up and shake it), school of fish (a drag
+  through it: the fish dart away and swim back). Help lines and plan entries updated;
+  `tests/hea.spec.mjs`.
+- Lane PR #232 (draft). Clips posted on Effect review page 2 as cards `hea-*` under lane
+  "HandsEngineA". Full suite green on the lane branch (run in two parts: 567 tests, then the
+  remaining 300; the 2-hour background limit stopped the first); check-packs passes for the six
+  toys. Waiting on the Operator to merge #226, and on the owner's marks for #232.
+- Step time with the demo toys moving (headless Chromium, this container): median under 0.1 ms, 95th
+  percentile 0.2 ms per frame; the one-time hull build on the first touch takes 2 to 8 ms.
 - Real numbers: `tools/hands-on-materials.json` (Codex task 11) had not landed, so the presets use
   the governing bodies' regulation sizes and masses and the rule books' bounce tests (listed at the
   top of `materials.js`). Drag is the real thing, scaled (Fr = 2 m / (rho cd pi r^3) has no units).
@@ -147,8 +159,14 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
 - Projectiles and targets: bow and target, crossbow and trebuchet (the string and arm are lane B's
   sliders and hinges; the bolt and stone are projectile pieces).
 
+- Level 1 fix (lane Physics' engine): a kit toy tossed whole kept its turning parts and tokens
+  turning about where it was built (the kit shader works in the world), so a pushed car's wheels
+  came off. `poseKitUniforms` (fields.js), set as `motion.handsFix` by `HandsOn.apply`, moves their
+  pivots, turns and offsets through the toy's pose. Kit toys only.
+
 ## Known issues
 
+- A rig toy (a scan with parts) tossed whole still turns its parts about home.
 - Lift and the curve are toy-speed values, not measured ones (see above).
 - The fingertip spin needs a quick upward flick while holding the ball (about 500 CSS pixels per
   second); slower lifts just lift it.
