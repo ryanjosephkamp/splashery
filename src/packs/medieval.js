@@ -355,6 +355,34 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "pull", label: "Pull the sword", type: "toggle", default: 0, ease: 1.6 }],
     action: { key: "pull", label: "Pull" },
+    // Hands-on (lane Hands engine B): pull the sword up out of the stone.
+    // It sticks and wiggles at first, then slides free; it stays where it is
+    // let go, and pushes back in with a clank.
+    hands: {
+      joints: [
+        {
+          type: "slider",
+          part: "sword",
+          pivot: [0, 0.9, 0],
+          axis: [0, 1, 0],
+          min: 0,
+          max: 0.55,
+          stick: 0.07,
+          wiggle: [0, 0, 1],
+          friction: 40,
+          start: (c) => 0.5 * easeInOut(band(c.pull, 0.25, 1)),
+          pos: [0, 0.62, 0],
+          pick: [0.16, 0.75, 0.16],
+          sound: (ev, vol) => {
+            if (ev.kind === "free") return { voice: "scrape", f: 2000, rate: 60, decay: 0.5, vol: 0.5 }; // prettier-ignore
+            if (ev.v > 0.3) return { voice: "metal", f: 700, decay: 2.5, bright: 0.8, vol: 0.6 };
+            return [{ voice: "metal", f: 420, decay: 0.7, vol }, { voice: "stone", f: 160, vol: vol * 0.7 }]; // prettier-ignore
+          },
+          // The sparkles rise with it and gather once it is out.
+          also: (s, parts) => (parts.aura = { offset: [0, s, 0], visible: smoothstep(0.35, 0.55, s) }), // prettier-ignore
+        },
+      ],
+    },
     drive(t, c, out) {
       const p = easeInOut(c.pull);
       // It sticks at first, wiggles, then slides free.
