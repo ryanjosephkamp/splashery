@@ -222,8 +222,9 @@ test("tomatoes: each tomato picks up on its own and sets down on the plate", asy
   const moved = b.filter((x) => Math.hypot(x.pos[0] - x.home[0], x.pos[2] - x.home[2]) > 0.2);
   expect(moved.length).toBe(1); // one tomato, the others stay
   expect(moved[0].pos[1]).toBeGreaterThan(-0.17); // on the plate
-  const part = await page.evaluate(() => Object.keys(window.__splashery.player.motion.handsParts || {})); // prettier-ignore
-  expect(part).toContain("t1");
+  // The lifted tomato is its kit-built stand-in, and so is the pile.
+  const addon = await page.evaluate(() => window.__splashery.player.motion.handsAddon || {});
+  expect(addon.kt1?.visible).toBe(1);
   await reset(page);
   for (const x of await bodies(page)) expect(x.pos).toEqual(x.home);
 });

@@ -172,8 +172,8 @@ function kitTomato(k, [x, y, z], r, kp) {
     const lon = Math.atan2(d[2], d[0]);
     return 1 + 0.035 * Math.cos(5 * lon) * (1 - Math.abs(d[1])) - 0.08 * Math.max(0, d[1]) ** 6;
   };
-  k.add(k.radial(radius, { grid: 40 }), { pos: [x, y, z], scale: [r, r * 0.86, r], part: kp, opacity: 1, flat: 0.25, color: glossy }); // prettier-ignore
-  const top = [x, y + r * 0.8, z];
+  k.add(k.radial(radius, { grid: 40 }), { pos: [x, y - r * 0.1, z], scale: [r * 1.05, r * 0.92, r * 1.05], part: kp, opacity: 1, flat: 0.25, color: glossy }); // prettier-ignore
+  const top = [x, y + r * 0.78, z];
   for (let i = 0; i < 5; i++) {
     k.add(k.ellipsoid(r * 0.3, r * 0.025, r * 0.07), { pos: [top[0] + Math.cos((i * TAU) / 5) * r * 0.22, top[1], top[2] - Math.sin((i * TAU) / 5) * r * 0.22], rot: [0, i * 72, -12], part: kp, opacity: 1, pattern: false, color: (c) => shade("#3d6b23", 0.75 + 0.3 * Math.max(0, c.n[1])) }); // prettier-ignore
   }
@@ -922,6 +922,15 @@ export const RIGS = {
         pivot: [x, PLATE_Y + r, z],
         regions: [{ at: [x, PLATE_Y + r, z], r: [r * 1.15, r * 1.35, r * 1.15], notColor: "#eeeeea", tol: 0.2 }], // prettier-ignore
       })),
+      // Lane Hands engine B: the tomatoes' reflection and contact fuzz baked
+      // into the glaze round the foot of the pile, hidden while the pile is
+      // kit-built: anything but the plate's white, in a thin layer on the
+      // plate (it wins over the tomatoes there; a hop lifts them clear of it).
+      {
+        name: "glaze",
+        pivot: [0, PLATE_Y, 0],
+        regions: [{ at: [0, PLATE_Y + 0.012, 0.05], r: [0.95, 0.04, 0.95], notColor: "#eeeeea", tol: 0.14, over: true }], // prettier-ignore
+      },
       // The capture's smear under the plate (the table and reflections), hidden
       // (lane Sharpness B) so the plate's kit-built underside shows.
       {
@@ -948,6 +957,8 @@ export const RIGS = {
       floor: PLATE_Y,
       area: 0.82,
       center: 0.4,
+      // (The pieces carry names of their own, ht0 to ht9, so Hands-on never
+      // poses the scan's tomatoes: drive() hides them while the pile is kit.)
       pieces: () =>
         rigPieces(
           RIGS.tomatoes,
@@ -958,10 +969,10 @@ export const RIGS = {
             friction: 0.9,
             restitution: 0.2,
           },
-        ),
+        ).map((p) => ({ ...p, part: "h" + p.part })),
       sound: (hit, vol) => ({ voice: "thud", f: hit.other ? 150 : 110, bright: 0.2, vol: vol * 0.8 }), // prettier-ignore
       // A lifted tomato is a whole kit-built one (and so is the pile, below).
-      swap: Object.fromEntries(TOMATOES.map(([n]) => [n, tomatoSwap(n)])),
+      swap: Object.fromEntries(TOMATOES.map(([n]) => ["h" + n, tomatoSwap(n)])),
     },
     drive(t, c, out, info) {
       out.parts.fringe = { visible: 0 };
@@ -970,7 +981,9 @@ export const RIGS = {
       // away whole and nothing torn is left behind; otherwise the scan's own.
       const pile = performance.now() - TOMATO_HAND.at < 150;
       out.addon = { parts: Object.fromEntries(TOMATOES.map((t) => ["k" + t[0], { visible: pile ? 1 : 0 }])) }; // prettier-ignore
-      if (pile) for (const [name] of TOMATOES) out.parts[name] = { visible: 0 };
+      if (pile)
+        for (const name of [...TOMATOES.map((t) => t[0]), "glaze"])
+          out.parts[name] = { visible: 0 };
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
       const way = vary(info.tap) > 0.5 ? 1 : -1;

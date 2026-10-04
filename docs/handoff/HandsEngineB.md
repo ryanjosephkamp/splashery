@@ -127,7 +127,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
   re-sort costs about 5 ms on the desktop, too much five times a second on a phone for an idle toy.
   Tomatoes: while any tomato is off its place, the whole pile shows as kit-built tomatoes (each
   lifted one rides with Hands-on), so nothing torn is left; ↺ brings the scan back (card
-  heb-tomatoes-r3). The tomatoes' faint red reflection in the plate's glaze stays.
+  heb-tomatoes-r3). Round 4 (the Operator's note): Hands-on poses pieces named ht0 to ht9, so it
+  never overrides drive()'s hiding of the scan's tomatoes (their bottoms had peeked out under the
+  kit pile as a pale smear); a thin "glaze" part (the scan's reflections and contact fuzz on the
+  plate) hides with them; the kit tomatoes sit on the plate (card heb-tomatoes-r4).
 - Chest and music box: a press on the box's front can pick the lid (the nearest piece); fine in
   practice, but a press on the box body is not a no-op.
 - Hands-on starts off for the demo toys (they are public): turn on ✋ first.
