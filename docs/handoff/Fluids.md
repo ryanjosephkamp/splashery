@@ -19,6 +19,60 @@ Waiting on the owner (the Operator passed the questions on October 2):
 
 Later, as the owner said: a liquid vortex, a tornado and dripping syrup.
 
+## r7 (October 4, 2026): the Fluid lab on a phone
+
+**Start here.** Model: **Sonnet 5.5**, by the owner's word of October 4, 2026 ("Fluids Sonnet"), as
+a test of how far Sonnet goes on engine work. The Operator (Opus 5.5) reviews the code and the
+measurements before merge, and the owner judges the clips. Branch `claude/lane-fluids-r7`, one PR
+titled "Phase Fluids r7: the Fluid lab on a phone", prefix `fl7`, tests in `tests/fl7.spec.mjs`.
+
+Why: the Fluid lab locks up on phones. Codex measured why (docs/audits/fluid-phone-2026-10.md,
+merged as #247; its data and scripts are in docs/audits/fluid-phone-2026-10/). Read its summary,
+"Proposed phone envelope" and "Proposals, ranked by gain for effort" first.
+
+Build, in this order:
+
+1. **The hint** (the audit's proposal 1): "This lab runs best on a computer. On a phone, choose Auto
+   detail." beside Scene and Liquid on a phone, and after the first slow-down; the same sentence in
+   the toy's About text.
+2. **A phone envelope for this lab only** (proposal 2): on a phone, the lab's own canvas cap (1.5),
+   fewer prop splats (35,000), a smaller liquid budget (WebGPU cap 6,000, cell 0.05; CPU Glass cap
+   270 with spacing × ∛2; CPU Splash keeps its liquid and halves the vessel's budget) and smaller
+   gas grids (flame 20×58×20, smoke 20×65×20, hot cup 20×33×20).
+   - Use the recipe's scoped render settings, not a global change to every toy.
+   - Never overwrite the person's saved Detail choice; a deliberate High or Max still works, with
+     the hint.
+   - Keep Splash's starting pool: the audit shows that removing it was a false gain.
+3. **Recovery that works** (proposal 3): a phone check that doesn't depend on the tier; when the
+   frame time's average stays over 33 ms for 1.5 s (ignoring hidden or loading time, and counting
+   visible stalls), first lower the drawing cost, then rebuild the current scene's fluids into the
+   phone envelope with a clear restart; if it's still slow two seconds later, offer a pause and the
+   hint.
+4. **Less garbage per readback** (proposal 5): reuse the liquid readback arrays in
+   `src/fluids/gpu/mpm.js` and drop the per-particle `subarray()` views.
+5. **The WebGPU buffers** (proposal 4): never edit `vendor/`. If a small, marked hook at the app
+   boundary (`src/stage.js`) can destroy the cached projector Compute objects when their cache is
+   cleared, do it and prove it with the audit's four-scene cycle (buffers no longer grow). If it
+   can't be done safely from outside the vendored file, write down what you found and leave it.
+6. **Measure before and after** with the audit's own scripts
+   (docs/audits/fluid-phone-2026-10/\*.mjs) on this sandbox: the p95 frame times for the ten scenes
+   at phone size (mid, mid at 6×), the tracked GPU allocations and the four-scene buffer count. Put
+   a short before-and-after table in docs/FLUIDS.md and the PR. These are sandbox numbers, not a
+   real phone; say so.
+7. **Clips:** phone-size clips (390×844) of Glass water, Splash water and the Candle before and
+   after, on Effect review page 2 under a new lane record `FluidsR7` (title "Fluids r7 · The Fluid
+   lab on a phone (Sonnet 5.5)"). Each card says what the owner should try on his own phone.
+
+Rules for this round:
+
+- You own what this lane always owned (below). `src/player.js` and `src/stage.js` take only small,
+  marked, additive hooks.
+- Run `tests/fl.spec.mjs` and every Fluids spec, `tests/smoke.spec.mjs` (keep "embed transfer ≤ 30
+  MB" green) and your new `tests/fl7.spec.mjs`. Then follow CLAUDE.md's checklist before every push.
+- The Fluid lab stays behind the labs switch.
+- Usage on this account is tight this week: one careful pass, at most one helper at a time.
+- End with READY:, WORKING: or BLOCKED:, and keep "State on main" above current.
+
 ## Brief
 
 You are a Splashery worker session, started by the Operator (the coordinating session). Repo:

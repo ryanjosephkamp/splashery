@@ -33,6 +33,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.grooph/hooks/grooph-events-push.mjs\" --hook",
+            "async": true,
+            "timeout": 60
+          }
+        ]
       }
     ],
     "Stop": [
@@ -88,6 +98,16 @@
             "command": "node \"$CLAUDE_PROJECT_DIR/.grooph/hooks/grooph-event.mjs\" claude-code",
             "async": true,
             "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.grooph/hooks/grooph-events-push.mjs\" --hook --every 600",
+            "async": true,
+            "timeout": 60
           }
         ]
       }

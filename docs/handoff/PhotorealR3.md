@@ -47,6 +47,67 @@ added 30 captured toys, behind labs; a tap only hops them (docs/handoff/Photorea
 6. **Any pose.** Every effect also works with the toy on its side or upside down. Lane Any pose
    fixes the engine side; test your toys in three poses.
 
+#### The owner's review of October 3, 2026 (evening): do these first
+
+His words are in docs/reviews/2026-10-03-labs-review/review.md. They come before items 1 to 5 above
+and replace the general wording there where they are more specific.
+
+**Sounds.** His rule for all of them: if a toy just bounces, give it a subtle bounce sound; no wind,
+stretching, twinkle or clicking layers, and nothing loud or overwhelming.
+
+| Toy                                         | Sound                                                                              |
+| ------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Heart donut, souvenir turtle                | Fine as they are.                                                                  |
+| Knight on a horse                           | "Basically perfect": keep it.                                                      |
+| Sushi boat                                  | Keep the first sound; remove the second little beat.                               |
+| Seated bread loaf                           | It sounds like a zipper: something very subtle instead.                            |
+| Cowboy steak                                | Not the right sound; something fitting and not overwhelming.                       |
+| Stollen                                     | Replace it completely: realistic and quiet.                                        |
+| Orange                                      | Too loud and the wrong sound: pick a different one.                                |
+| Physalis                                    | Subtler and different; no twinkle, no stretching.                                  |
+| Crystal                                     | Far too loud; a new, gentle sound.                                                 |
+| Alum crystal                                | Better, but remove the ding.                                                       |
+| Puffin                                      | Use a real puffin's call (a CC0 or CC BY recording, credited).                     |
+| Toy T-Rex, souvenir elephant                | They sound like wind: a subtle bounce sound instead.                               |
+| Monkey doll                                 | Keep the first sound; remove the clicking; a little bounce.                        |
+| Cave lioness                                | Wind and far too loud: replace it, and a better animation if one can move cleanly. |
+| Dog plush                                   | Sounds like a rubber band: replace it.                                             |
+| BMX bicycle                                 | Remove the bell; a softer opening sound.                                           |
+| Murex shell                                 | Remove the clicking; keep the ding, more subtle.                                   |
+| Sunflower, golden maple, money tree, bonsai | Remove the stretching and the wind.                                                |
+| White roses, mushroom                       | No stretching or clicking; a subtler ding is fine.                                 |
+| Cactus photo 2                              | No clicking; softer notes, like the first cactus.                                  |
+| Crochet Earth                               | No twinkle; the bounce should match the sound it makes when picked up and dropped. |
+| Desk globe                                  | Spin it, with no wind or suction sound.                                            |
+| Cherry blossom                              | The bounce is fine; no twinkle.                                                    |
+| Peonies in a vase                           | No stretching or wind; the vase's sound softer.                                    |
+
+**Bases**, from below (item 1 above), his verdicts:
+
+- **Fine:** heart donut, seated bread loaf, souvenir turtle, murex shell, and the cave lioness's
+  underside.
+- **Fix:**
+  - the sushi boat (its bottom looks painted in, cartoonish);
+  - the cowboy steak ("terrible");
+  - the stollen (still see-through, though not badly);
+  - the orange (a hole through the middle where the core is);
+  - the physalis (a little see-through);
+  - the crystal, the alum crystal, the puffin, the toy T-Rex, the monkey doll and the souvenir
+    elephant;
+  - the dog plush (hollow from below);
+  - the BMX bicycle;
+  - the sunflower, the white roses' vase and the bonsai's base (see-through);
+  - the mushroom, cactus photo 2, crochet Earth and desk globe;
+  - the cherry blossom ("kind of close");
+  - the golden maple, peonies in a vase, money tree and knight on a horse.
+- **Also:** the cave lioness where the scan cuts off at the neck.
+
+**Also from his review:**
+
+- The **dog plush** looks broken (gaps in it): patch it with kit-built pieces, never by smearing.
+- The **real alarm clock** on the Photoreal shelf doesn't show the current time, while the kit alarm
+  clock does: make it show the current time the same way.
+
 #### You own
 
 `src/packs/photoreal-r2.js` and a new `src/packs/photoreal-r3.js`, your toys' rig add-ons in
