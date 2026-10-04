@@ -240,9 +240,10 @@ export const TOY_HELP = {
       "Cinnamon stars are small star-shaped cookies baked at Christmas, above all in Germany, Switzerland and Austria. They are made with ground almonds or hazelnuts, sugar, egg whites and cinnamon, with no flour, and are topped with a crisp white glaze of beaten egg white and sugar.\n\nTap it and it crumbles into pieces and crumbs that fall away, then puts itself back together. The glaze goes on before baking, and a low oven keeps it snowy white.",
   },
   tomatoes: {
-    howTo: "Tap it to make the tomatoes hop and rock.",
+    howTo:
+      "Tap it to make the tomatoes hop and rock. With ✋ on, drag a tomato to lift it and set it down.",
     about:
-      "Tomatoes are the fruit of a plant that first grew wild in western South America. They are cooked and eaten like vegetables, but to a botanist a tomato is a berry: a juicy fruit that grows from a flower and holds many seeds.\n\nTap it and the plate gives a little shake: a wave of small hops runs around it, and the tomatoes land in four groups, rock outward and settle with a wobble. There are thousands of kinds of tomato, from tiny cherry tomatoes to ones bigger than a fist, in red, yellow, orange, green and purple.",
+      "Tomatoes are the fruit of a plant that first grew wild in western South America. They are cooked and eaten like vegetables, but to a botanist a tomato is a berry: a juicy fruit that grows from a flower and holds many seeds.\n\nTap it and the plate gives a little shake: a wave of small hops runs around it, and the tomatoes land in four groups, rock outward and settle with a wobble. There are thousands of kinds of tomato, from tiny cherry tomatoes to ones bigger than a fist, in red, yellow, orange, green and purple. With ✋ Hands-on on, drag any tomato to lift it on its own and set it down on the plate or on another; reset puts them all back.",
   },
   mandeltorus: {
     howTo: "Tap it to spin its rings opposite ways.",
@@ -344,7 +345,7 @@ export const TOY_HELP = {
   blob: {
     howTo: "Tap it to split it into three. Make a shape of your own in the Make tab.",
     about:
-      "A wobbly jelly blob, built by the computer from a few rules rather than from photos. Thousands of splats, tiny soft blobs of color, are scattered over a lumpy round shape, and a pattern called noise gives it its bumps and swirls of candy color.\n\nTap it and it splits into three smaller blobs that wobble apart, then merge back with a jelly bounce. Real jelly wobbles because it is mostly water, held in a loose net of gelatin strands. In the Make tab you can pick a shape, a palette and a seed to build a blob of your own.",
+      "A wobbly jelly blob, built by the computer from a few rules rather than from photos. Thousands of splats, tiny soft blobs of color, are scattered over a lumpy round shape, and a pattern called noise gives it its bumps and swirls of candy color.\n\nTap it and it splits into three smaller blobs that wobble apart, then merge back with a jelly bounce. Real jelly wobbles because it is mostly water, held in a loose net of gelatin strands. In the Make tab you can pick a shape, a palette and a seed to build a blob of your own. With ✋ Hands-on on, drag it to stretch it; let go and it wobbles back.",
   },
   knot: {
     howTo: "Tap it to make it twist and writhe.",
@@ -1033,9 +1034,9 @@ export const TOY_HELP = {
       "A lollipop is a hard candy on a stick. Swirl lollipops are made by twisting long ropes of soft, warm candy in different colors together and coiling them into a flat spiral before the candy cools and sets hard.\n\nIt turns slowly by itself. Tap it and the swirl whirls up to nearly three turns a second, so the spiral seems to pour inward toward the middle, then slows again. That is a trick of the eye: a turning spiral looks as if it is moving in or out. Pick its colors in the Toy tab.",
   },
   "candy-cane": {
-    howTo: "Tap it to twist it until it snaps, then watch it mend.",
+    howTo: "Tap it to twist it until it snaps. With ✋ on, pull the hook until it snaps off.",
     about:
-      "A candy cane is a stick of hard peppermint candy bent into a hook, with red and white stripes, and it is often hung on trees in the Christmas season. The stripes are made by twisting ropes of red and white candy together while they are warm and soft.\n\nTap it and each cane twists, the hook turning and the stripes winding tighter, until it snaps with a crack. The top half springs clear, sugar chips fly, then the halves come back together and mend with a glint. Pick a pair with a bow or a single cane, and the stripe color, in the Toy tab.",
+      "A candy cane is a stick of hard peppermint candy bent into a hook, with red and white stripes, and it is often hung on trees in the Christmas season. The stripes are made by twisting ropes of red and white candy together while they are warm and soft.\n\nTap it and each cane twists, the hook turning and the stripes winding tighter, until it snaps with a crack. The top half springs clear, sugar chips fly, then the halves come back together and mend with a glint. Pick a pair with a bow or a single cane, and the stripe color, in the Toy tab. With ✋ Hands-on on, pull the hook: the cane bends a little, then snaps in two with a crack, and you can pick up the broken piece; reset mends it.",
   },
   macarons: {
     howTo:
@@ -1066,7 +1067,7 @@ export const TOY_HELP = {
   pizza: {
     howTo: "Tap to take a slice; tap again to go back.",
     about:
-      "Pizza is a flat, round bread topped with tomato sauce and cheese and baked in a very hot oven. It comes from Naples, in Italy, and is now eaten all over the world. The margherita pizza, with red tomato, white mozzarella and green basil, shows the colors of the Italian flag.\n\nTap it to take a slice: it slides out with strings of melted cheese stretching behind it. Warm mozzarella stretches because the proteins in it line up in long, stringy strands. Tap again to put the slice back. Pick pepperoni, margherita, veggie or cheese in the Toy tab.",
+      "Pizza is a flat, round bread topped with tomato sauce and cheese and baked in a very hot oven. It comes from Naples, in Italy, and is now eaten all over the world. The margherita pizza, with red tomato, white mozzarella and green basil, shows the colors of the Italian flag.\n\nTap it to take a slice: it slides out with strings of melted cheese stretching behind it. Warm mozzarella stretches because the proteins in it line up in long, stringy strands. Tap again to put the slice back. Pick pepperoni, margherita, veggie or cheese in the Toy tab. With ✋ Hands-on on, drag the slice away yourself: the cheese strings sag, stretch and snap, and you can set the slice back.",
   },
   burger: {
     howTo: "Tap to spread out the layers; tap again to stack them up.",
@@ -1104,9 +1105,10 @@ export const TOY_HELP = {
       "Bananas grow in big hanging bunches on giant plants that look like trees but are not: the trunk is made of tightly rolled leaves. A banana is picked green and turns yellow as it ripens, and then brown spots appear as its starch turns to sugar and it gets sweeter.\n\nTap it and the three bananas pull apart. Each is peeled from its tip: its skin splits into three strips that curl back, showing the pale fruit. Then the strips fold back up and the bunch comes together. Pick green, just right or spotty bananas in the Toy tab.",
   },
   orange: {
-    howTo: "Tap it to open it into eight wedges, like a flower.",
+    howTo:
+      "Tap it to open it into wedges. With ✋ on, pull a wedge out; bring it back and it clicks in.",
     about:
-      "An orange is a citrus fruit. Its bright peel is dotted with tiny pockets of fragrant oil, and inside, the fruit is divided into segments packed with little sacs of juice. Oranges are full of vitamin C, and they were first grown in southern China and Southeast Asia.\n\nTap it and the whole orange opens like a flower: eight wedges fall open outward, one just after another, showing their juicy faces, while juice squirts up out of the middle. Then it closes up again. Pick a whole orange, a half, or both in the Toy tab.",
+      "An orange is a citrus fruit. Its bright peel is dotted with tiny pockets of fragrant oil, and inside, the fruit is divided into segments packed with little sacs of juice. Oranges are full of vitamin C, and they were first grown in southern China and Southeast Asia.\n\nTap it and the whole orange opens like a flower: eight wedges fall open outward, one just after another, showing their juicy faces, while juice squirts up out of the middle. Then it closes up again. Pick a whole orange, a half, or both in the Toy tab. With ✋ Hands-on on, pull the wedges out one by one and set them down; bring a wedge back over its place and it clicks home.",
   },
   kiwi: {
     howTo: "Tap it to cut it open and show the green inside.",
@@ -1169,7 +1171,7 @@ export const TOY_HELP = {
   "yo-yo": {
     howTo: "Tap it to throw it down; it spins down the string and climbs back up.",
     about:
-      "A yo-yo is two disks joined by a short axle, with a string tied around the axle. Thrown down, it unwinds and spins fast; the spin keeps it steady, and a little tug on the string makes it wind itself back up into your hand. Children in ancient Greece played with yo-yos of wood, metal and clay.\n\nThis one bobs gently on its string. Tap it to throw it: it drops, spinning as the string unwinds, and then climbs back up the string to where it started. Pick its color in the Toy tab.",
+      "A yo-yo is two disks joined by a short axle, with a string tied around the axle. Thrown down, it unwinds and spins fast; the spin keeps it steady, and a little tug on the string makes it wind itself back up into your hand. Children in ancient Greece played with yo-yos of wood, metal and clay.\n\nThis one bobs gently on its string. Tap it to throw it: it drops, spinning as the string unwinds, and then climbs back up the string to where it started. Pick its color in the Toy tab. With ✋ Hands-on on, pull the yo-yo down and let go: it drops to the end of the string, spins there and climbs back.",
   },
   "puzzle-cube": {
     howTo:
@@ -1185,7 +1187,7 @@ export const TOY_HELP = {
   kite: {
     howTo: "Tap it for a gust of wind: the kite loops and the tail whips.",
     about:
-      "A kite is a light frame covered with paper or cloth that flies on the wind at the end of a long line. The wind pushing under the tilted kite lifts it up, and a tail helps keep it pointing the right way. Kites were first flown in China more than 2,000 years ago.\n\nTap it for a big gust: the kite climbs around a loop, turning once while it rises, and its tail whips behind it. The line stays tied on the whole time. Pick its two colors in the Toy tab.",
+      "A kite is a light frame covered with paper or cloth that flies on the wind at the end of a long line. The wind pushing under the tilted kite lifts it up, and a tail helps keep it pointing the right way. Kites were first flown in China more than 2,000 years ago.\n\nTap it for a big gust: the kite climbs around a loop, turning once while it rises, and its tail whips behind it. The line stays tied on the whole time. Pick its two colors in the Toy tab. With ✋ Hands-on on, drag the kite or its line: the kite swoops back up into the wind, its tail flapping.",
   },
   "paper-plane": {
     howTo: "Tap it to do a barrel roll.",
@@ -1219,9 +1221,10 @@ export const TOY_HELP = {
   },
   // ---- Open me --------------------------------------------------------------------------
   chest: {
-    howTo: "Tap to open the lid; tap again to close it.",
+    howTo:
+      "Tap to open or close the lid. With ✋ on, lift the lid by hand: let go high and it stays open.",
     about:
-      "A treasure chest is a strong wooden box with metal bands, a heavy lid and a lock, made to keep coins, jewels and other precious things safe. Long ago, before banks were common, people kept their valuables in chests like this, and ships carried money and goods in them.\n\nTap it to open the lid and see the heap of gold coins and bright jewels inside, and tap again to close it. Pick the color of the wood in the Toy tab.",
+      "A treasure chest is a strong wooden box with metal bands, a heavy lid and a lock, made to keep coins, jewels and other precious things safe. Long ago, before banks were common, people kept their valuables in chests like this, and ships carried money and goods in them.\n\nTap it to open the lid and see the heap of gold coins and bright jewels inside, and tap again to close it. Pick the color of the wood in the Toy tab. With ✋ Hands-on on, lift the lid on its hinge yourself: let go past upright and it stays open; lower, it drops shut with a thud.",
   },
   book: {
     howTo: "Tap to close the book; tap again to open it.",
@@ -1235,9 +1238,10 @@ export const TOY_HELP = {
       "A laptop is a computer small enough to carry and use on your lap. Its screen is in the lid, and the base holds the keyboard, a touch pad called a trackpad, and a battery. The order of the letters on the keyboard, starting Q, W, E, R, T, Y, comes from typewriters of the 1870s.\n\nTap any key, or type on your own keyboard, and the key goes down and the letter appears on the screen. Tap or drag on the trackpad to move the pointer and click. Tap anywhere else on the laptop to close the lid, and again to open it. Pick the color of the case in the Toy tab.",
   },
   "music-box": {
-    howTo: "Tap to close the lid; tap again to open it.",
+    howTo:
+      "Tap to close or open the lid. With ✋ on, turn the crank round to play the tune note by note.",
     about:
-      "A music box plays a tune all by itself. Inside, a spring turns a metal cylinder covered in tiny pins. As it turns, the pins pluck the teeth of a steel comb, and each tooth rings with its own note: the longer the tooth, the lower the note.\n\nThis music box starts open, with a little dancer twirling on its stand while the tune plays and music notes float up. Tap to close the lid and stop the music, and tap again to open it. Pick the color of the wood in the Toy tab.",
+      "A music box plays a tune all by itself. Inside, a spring turns a metal cylinder covered in tiny pins. As it turns, the pins pluck the teeth of a steel comb, and each tooth rings with its own note: the longer the tooth, the lower the note.\n\nThis music box starts open, with a little dancer twirling on its stand while the tune plays and music notes float up. Tap to close the lid and stop the music, and tap again to open it. Pick the color of the wood in the Toy tab. With ✋ Hands-on on, lift or close the lid on its hinge yourself, and turn the crank by drawing circles round it: each click plays the tune's next note and the dancer turns.",
   },
   clock: {
     howTo: "Tap it to ring the alarm.",
@@ -1299,7 +1303,7 @@ export const TOY_HELP = {
   hoodie: {
     howTo: "Tap it to flip the hood and cross the sleeves.",
     about:
-      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back. Pick a flag in the top bar and the hoodie wears its colors.",
+      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back. Pick a flag in the top bar and the hoodie wears its colors. With ✋ Hands-on on, pull the hood: it flops like cloth and springs back up.",
   },
   sunglasses: {
     howTo:
@@ -1314,9 +1318,10 @@ export const TOY_HELP = {
   },
   // ---- Medieval -------------------------------------------------------------------------
   "sword-in-stone": {
-    howTo: "Tap to pull the sword from the stone; tap again to go back.",
+    howTo:
+      "Tap to pull the sword from the stone. With ✋ on, drag it up out of the stone and back in.",
     about:
-      "The sword in the stone comes from the old legends of King Arthur of Britain. A sword was stuck fast in a great stone, and only the true king could pull it out. Many strong knights tried and failed, until the young Arthur drew it out easily and was made king.\n\nTap it to try: the sword sticks at first and wiggles, then slides free and rises in a shower of golden sparkles. Tap again to put it back in the stone. The Arthur stories have been told and retold for more than 800 years.",
+      "The sword in the stone comes from the old legends of King Arthur of Britain. A sword was stuck fast in a great stone, and only the true king could pull it out. Many strong knights tried and failed, until the young Arthur drew it out easily and was made king.\n\nTap it to try: the sword sticks at first and wiggles, then slides free and rises in a shower of golden sparkles. Tap again to put it back in the stone. The Arthur stories have been told and retold for more than 800 years. With ✋ Hands-on on, pull the sword up by hand: it sticks and wiggles at first, then slides free and stays where you let go; push it back in with a clank.",
   },
   shield: {
     howTo: "Tap it and it blocks a blow where you tap: sparks fly and the emblem gleams.",
@@ -1403,7 +1408,7 @@ export const TOY_HELP = {
   octopus: {
     howTo: "Tap it to squirt ink.",
     about:
-      "An octopus is a soft-bodied sea animal with eight arms lined with suckers. It has three hearts and blue blood, no bones at all, and it can change the color of its skin in a split second to hide or to signal.\n\nWhen something scares it, an octopus squirts a cloud of dark ink and jets away behind it. Tap this one and it does just that: the ink billows out while it shoots up and away with its arms streaming, then it drifts back as the ink thins. You can pick its color in the Toy tab.",
+      "An octopus is a soft-bodied sea animal with eight arms lined with suckers. It has three hearts and blue blood, no bones at all, and it can change the color of its skin in a split second to hide or to signal.\n\nWhen something scares it, an octopus squirts a cloud of dark ink and jets away behind it. Tap this one and it does just that: the ink billows out while it shoots up and away with its arms streaming, then it drifts back as the ink thins. You can pick its color in the Toy tab. With ✋ Hands-on on, drag its body and the arms trail behind and curl back; pull an arm and let it go.",
   },
   starfish: {
     howTo: "Tap it to wave its arms.",

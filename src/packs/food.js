@@ -30,6 +30,8 @@ import {
   evenTube,
 } from "./even.js";
 import { surfacePoints } from "../physics/world.js"; // lane Physics
+import { surfacePoints as hebPoints } from "../physics/world.js"; // lane Hands engine B
+import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -2171,6 +2173,57 @@ export const RECIPES = {
     ],
     controls: [{ key: "snap", label: "Twist and snap", type: "pulse", ease: CANE_SECS }],
     action: { key: "snap", label: "Twist and snap" },
+    // Hands-on (lane Hands engine B): pull the hook and the cane bends a
+    // little, then snaps in two with a crack; the top half (and a single
+    // cane's bottom half) can be picked up. ↺ mends it.
+    hands: {
+      floor: -1.32,
+      area: 1.4,
+      pieces: (d) => {
+        const out = [];
+        (d?.canes || []).forEach((cn, i) => {
+          // Points along the cane's middle (each a ball as thick as the
+          // candy) above the break, or below it.
+          const piece = (from, to, part, pivot) => {
+            const loc = [];
+            for (let t = from; t <= to + 1e-9; t += 0.035) loc.push(cn.path(t));
+            const lo = [0, 1, 2].map((k) => Math.min(...loc.map((p) => p[k])) - 0.1);
+            const hi = [0, 1, 2].map((k) => Math.max(...loc.map((p) => p[k])) + 0.1);
+            const half = hi.map((v, k) => (v - lo[k]) / 2);
+            const mid = lo.map((v, k) => v + half[k]);
+            return {
+              part,
+              pivot,
+              pos: add(cn.pos, quatRotate(cn.quat, mid)),
+              quat: cn.quat,
+              points: loc.map((p) => sub(p, mid)),
+              radius: 0.1,
+              solid: { type: "box", half },
+              pick: half.map((v) => v + 0.06),
+              mass: 1,
+              friction: 0.5,
+              restitution: 0.3,
+            };
+          };
+          const tb = (d.yb + 1.3) / d.total;
+          out.push(piece(tb + 0.02, 1, cn.top, cn.pivot));
+          if (d.single) out.push(piece(0, tb - 0.02, cn.low, add(cn.pos, quatRotate(cn.quat, [0, -1.3, 0])))); // prettier-ignore
+        });
+        return out;
+      },
+      joints: (d) =>
+        (d?.canes || []).map((cn) => ({
+          type: "break",
+          part: cn.top,
+          to: d.single ? cn.low : null,
+          at: cn.pivot,
+          pull: 0.3,
+          give: 0.14,
+          knock: 5,
+          sound: (ev) => (ev.kind === "snap" ? { voice: "crack", f: 3000, bright: 0.9, decay: 0.6 } : undefined), // prettier-ignore
+        })),
+      sound: (hit, vol) => ({ voice: "glass", f: hit.other ? "E6" : "C6", decay: 0.25, vol: vol * 0.6 }), // prettier-ignore
+    },
     // A tap twists each cane: the hook turns and the stripes wind tighter
     // up the shaft, until it snaps in two with a crack. The top half springs
     // back, jumps clear and leans out, showing the white candy inside the
@@ -2384,6 +2437,9 @@ export const RECIPES = {
           low,
           pivot,
           axis,
+          quat,
+          pos,
+          path,
           lean,
           out: unit([lean < 0 ? 1 : -1, 0.2, 0]),
           chips,
@@ -2395,7 +2451,7 @@ export const RECIPES = {
         cane(quatEuler(0, 0, 16), [-0.12, 0, -0.07], 1);
         cane(quatEuler(0, 180, -16), [0.12, 0, 0.07], -1);
       }
-      k.data = { canes };
+      k.data = { canes, single: o.style === "single", yb, total };
       if (o.style === "single") return;
       // A satin bow where they cross.
       const bowY = -0.62;
@@ -3051,11 +3107,64 @@ export const RECIPES = {
     ],
     controls: [{ key: "serve", label: "Take a slice", type: "toggle", default: 0, ease: 1.1 }],
     action: { key: "serve", label: "Take a slice" },
+    // Hands-on (lane Hands engine C): pull the slice away; the cheese
+    // strings sag, stretch and snap; set it back.
+    hands: {
+      floor: 0,
+      area: 1.25,
+      pieces: () => {
+        const solid = { type: "box", half: [0.2, 0.05, 0.46] };
+        return [
+          {
+            part: "slice",
+            pivot: [0, 0, 0],
+            pos: [Math.sin(PIZZA_AZ) * 0.52, 0.05, Math.cos(PIZZA_AZ) * 0.52],
+            quat: quatAxisAngle([0, 1, 0], PIZZA_AZ),
+            solid,
+            points: surfacePoints(solid, 1),
+            pick: [0.3, 0.12, 0.52],
+            mass: 1,
+            friction: 0.9,
+            restitution: 0.05,
+          },
+        ];
+      },
+      ropes: () =>
+        PIZZA_STRINGS.map((st) => ({
+          points: st.nodes,
+          start: st.nodes.map(() => st.start),
+          pin: [0],
+          attach: { piece: 0, nodes: [4] },
+          mass: 0.2,
+          stiff: 0.7,
+          breakAt: 1.08, // just past its full length
+          bend: 0,
+          drag: 2,
+          radius: st.thick * 0.6,
+          grab: false,
+          tokens: st.tokens,
+          // Seen once it is pulled out of the cut.
+          visible: (s, soft) => {
+            const a = soft.nodes[s.first].x;
+            const b = soft.nodes[s.first + 4].x;
+            return smoothstep(0.03, 0.1, Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]));
+          },
+        })),
+      sound: (hit, vol) => (hit.snap ? { voice: "slap", vol: 0.35 } : { voice: "thud", vol: vol * 0.5 }), // prettier-ignore
+    },
     drive(t, c, out, info) {
       // Linear in the eased value, so the cheese strings (which grow in with
       // it) always reach the slice.
       const s = c.serve;
       out.grow = s;
+      // The cheese strings stretch out with the slice (their splats follow
+      // these nodes; Hands-on moves the same nodes).
+      out.tokens = [];
+      for (const st of PIZZA_STRINGS)
+        st.nodes.forEach((p, j) => {
+          const at = add(st.start, mul(sub(p, st.start), s / st.reach));
+          out.tokens[st.tokens[j]] = { base: p, offset: sub(at, p), visible: s > 0.03 ? 1 : 0 };
+        });
       out.parts.slice = { offset: [PIZZA_OUT[0] * s, PIZZA_OUT[1] * s, PIZZA_OUT[2] * s] };
       // Splats sort where they were built, so the slice, lifted toward the
       // viewer, drew under the board's front. Sort it where it stands as it
@@ -3352,30 +3461,24 @@ export const RECIPES = {
           }
         }
       }
-      // Strings of melted cheese that stretch as the slice comes away.
-      for (let i = 0; i < 4; i++) {
-        const side = i % 2 ? a0 : a0 + span;
-        const r = 0.28 + i * 0.15;
-        const start = [Math.sin(side) * r, top + 0.005, Math.cos(side) * r];
-        const end = add(start, PIZZA_OUT);
-        const curve = (t) => {
-          const p = add(start, mul(sub(end, start), t));
-          return [p[0], p[1] - 0.035 * Math.sin(Math.PI * t), p[2]];
-        };
+      // Strings of melted cheese that stretch as the slice comes away (by
+      // their nodes: PIZZA_STRINGS).
+      for (const { curve, nodes, tokens, thick } of PIZZA_STRINGS) {
+        const sk = ropeSkin(nodes, tokens);
         k.add(
-          evenTube(k, curve, (t) => 0.008 * (1 - 0.55 * Math.sin(Math.PI * t)), {
-            samples: 64,
+          evenTube(k, curve, (t) => thick * (1 - 0.45 * Math.sin(Math.PI * t)), {
+            samples: 96,
             grid: 32,
           }),
           {
             even: true,
             opacity: 1,
             jitter: 0.01,
-            flat: 0.4,
-            weight: 3,
-            kind: "grow",
-            params: (c) => [0.02 + 0.97 * (c.t ?? 0), 0],
-            color: "#f9d77a",
+            flat: 0.3,
+            weight: 4,
+            skin: (c) => sk(c.p),
+            // Melted mozzarella: creamy, with a soft sheen.
+            color: (c) => glossy(c, "#fbe8a8", 0.5, 24),
           },
         );
       }
@@ -5065,6 +5168,20 @@ export const RECIPES = {
     ],
     controls: [{ key: "open", label: "Open into wedges", type: "pulse", ease: ORANGE_SECS }],
     action: { key: "open", label: "Open into wedges" },
+    // Hands-on (lane Hands engine B): pull the wedges out one by one and
+    // set them down; bring one back over its place and it clicks home.
+    hands: {
+      floor: -0.68,
+      area: 1.5,
+      pieces: (d) =>
+        (d?.wedges || []).map((w) => {
+          // A wedge: thin across, tall, and reaching from the core to the peel.
+          const solid = { type: "ellipsoid", r: [0.12, w.H * 0.9, w.R * 0.36] };
+          return { token: w.token, pos: w.mid, quat: quatAxisAngle([0, 1, 0], w.yaw), solid, points: hebPoints(solid, 1), pick: [0.2, w.H, w.R * 0.48], mass: 1, friction: 0.9, restitution: 0.05 }; // prettier-ignore
+        }),
+      joints: (d) => (d?.wedges || []).map((w) => ({ type: "socket", token: w.token, snap: 0.3 })),
+      sound: (hit, vol) => ({ voice: "squish", pitch: 1.4, decay: 0.3, vol: vol * 0.6 }),
+    },
     // A tap opens the whole orange like a flower: it is cut into eight
     // wedges from the top, and they fall open outwards on their bottoms, one
     // just after another, showing the juicy cut faces, while juice squirts
@@ -5149,7 +5266,8 @@ export const RECIPES = {
           const token = tokens++;
           const piece = { kind: "token", params: [token, 0] };
           const pivot = add(pos, add([0, -H * 0.92, 0], mul(m, 0.18)));
-          wedges.push({ token, pivot, axis: unit(cross([0, 1, 0], m)) });
+          // (mid and yaw: the wedge as a piece in Hands-on.)
+          wedges.push({ token, pivot, axis: unit(cross([0, 1, 0], m)), mid: add(pos, mul(m, R * 0.36)), yaw: am, R, H }); // prettier-ignore
           k.add(
             k.param(
               (u, v) => {
@@ -6193,6 +6311,34 @@ export const RECIPES = {
 // The pizza slice slides out towards the viewer.
 const PIZZA_AZ = 0.55;
 const PIZZA_OUT = [Math.sin(PIZZA_AZ) * 0.5, 0.16, Math.cos(PIZZA_AZ) * 0.5];
+// Hands-on (lane Hands engine C): the slice is a piece to pick up and set
+// back; the four cheese strings are ropes from the pizza to the slice's cut
+// edge, built pulled out (their splats follow their nodes), starting
+// bunched at the cut. Pulled out they sag, then stretch, then snap.
+// Two thick ropes of mozzarella and three thin strands. Each is built as
+// long as it gets before it snaps (`reach` times the slice's way out), so
+// stretched it is never thinner than built (no gaps); shorter, it sags.
+// Each snaps at its own length, so they break one after another.
+const PIZZA_STRINGS = [
+  { side: 1, r: 0.36, thick: 0.026, reach: 1.75 },
+  { side: 0, r: 0.62, thick: 0.024, reach: 1.65 },
+  { side: 0, r: 0.26, thick: 0.011, reach: 1.35 },
+  { side: 1, r: 0.55, thick: 0.012, reach: 1.45 },
+  { side: 0, r: 0.8, thick: 0.01, reach: 1.4 },
+].map(({ side: sd, r, thick, reach }, i) => {
+  const top = 0.06;
+  const span = (Math.PI * 2) / 8;
+  const a0 = PIZZA_AZ - span / 2;
+  const side = sd ? a0 + span : a0;
+  const start = [Math.sin(side) * r, top + 0.005, Math.cos(side) * r];
+  const end = add(start, mul(PIZZA_OUT, reach));
+  const curve = (t) => {
+    const p = add(start, mul(sub(end, start), t));
+    return [p[0], p[1] - 0.035 * Math.sin(Math.PI * t), p[2]];
+  };
+  const ts = [0, 0.25, 0.5, 0.75, 1];
+  return { start, curve, thick, reach, nodes: ts.map(curve), tokens: ts.map((_, j) => i * 5 + j) }; // prettier-ignore
+});
 
 const BURGER_LAYERS = ["patty", "cheese", "lettuce", "tomato", "top"];
 

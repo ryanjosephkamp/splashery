@@ -179,7 +179,8 @@ test("toys that are hands-on already start on and keep their drags", async ({ pa
 test("a soft toy squishes when it lands; a link and a saved scene don't change", async ({
   page,
 }) => {
-  await ready(page, "blob");
+  // (The beach ball: the jelly blob stretches in Hands-on since lane Hands engine C.)
+  await ready(page, "beach-ball");
   const before = await page.evaluate(() => JSON.stringify(window.__splashery.app.sceneJSON?.() ?? window.__splashery.player.scene)); // prettier-ignore
   await page.evaluate(() => window.__splashery.app.toggleHands());
   const squish = await page.evaluate(async () => {

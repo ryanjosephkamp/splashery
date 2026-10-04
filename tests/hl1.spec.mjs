@@ -15,7 +15,7 @@ const SAMPLE = [
   "marble-bust",
   "cookie",
   "heart-donut",
-  "blob",
+  "mushroom", // lane Hands engine C: the jelly blob stretches in Hands-on, so it is never lifted whole
   "knot",
   "basketball",
   "bowling-ball",
@@ -32,7 +32,7 @@ const SAMPLE = [
   "campfire",
   "cupcake",
   "teddy-bear",
-  "chest",
+  "soda-can", // lane Hands engine B: the chest's lid is a hinge now (pieces mode), so it no longer lifts whole
   "running-shoe",
   "shield",
   "jellyfish",
