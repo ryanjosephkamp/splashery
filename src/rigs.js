@@ -158,14 +158,13 @@ const TOMATO_WAVE = TOMATOES.map(([name, x, z, r]) => ({ name, x, z, r, a: Math.
 
 // Lane Hands engine B: a whole, kit-built tomato with its calyx (part kp),
 // to stand in for a scan tomato lifted off the plate (its hidden sides were
-// never captured), and darker tomatoes deep in the pile (part fp) to fill
-// the place it left. Built about the scan tomato's middle (its pivot).
+// never captured). Built about the scan tomato's middle (its pivot).
 const TOMATO_RED = "#c8301b";
 function kitTomato(k, [x, y, z], r, kp) {
   const L = unit([-0.45, 0.8, 0.55]);
   const glossy = (c) => {
     const d = Math.max(0, c.n[0] * L[0] + c.n[1] * L[1] + c.n[2] * L[2]);
-    const col = shade(mix(TOMATO_RED, "#e2552a", 0.3 + 0.3 * c.fbm(c.lp[0] * 6, c.lp[1] * 6, c.lp[2] * 6)), 0.8 + 0.22 * d); // prettier-ignore
+    const col = shade(mix(TOMATO_RED, "#e2552a", 0.35 + 0.15 * c.fbm(c.lp[0] * 2.2, c.lp[1] * 2.2, c.lp[2] * 2.2)), 0.8 + 0.22 * d); // prettier-ignore
     return mix(col, "#ffe9dc", 0.55 * Math.pow(d, 24));
   };
   // Slightly squat, with soft lobes round its shoulders.
@@ -180,11 +179,18 @@ function kitTomato(k, [x, y, z], r, kp) {
   }
   k.add(k.cylinder(r * 0.05, r * 0.2), { pos: [top[0], top[1] + r * 0.08, top[2]], part: kp, opacity: 1, pattern: false, color: "#4f7a2c" }); // prettier-ignore
 }
-function fillTomato(k, [x, y, z], r, fp) {
-  k.add(k.radial(() => 1, { grid: 28 }), { pos: [x, y - r * 0.35, z], scale: [r * 0.8, r * 0.7, r * 0.8], part: fp, opacity: 1, flat: 0.3, color: (c) => shade(TOMATO_RED, 0.45 + 0.25 * Math.max(0, c.n[1])) }); // prettier-ignore
-}
-// Each tomato's group (its fill).
-const TOMATO_GROUP = Object.fromEntries(TOMATO_WAVE.map((t) => [t.name, t.group]));
+// While any tomato is off the plate by hand, the whole pile shows as kit
+// tomatoes (the scan's own, cut from each other, show torn edges where they
+// touched): Hands-on reads each lifted tomato's stand-in name from
+// hands.swap, which marks the moment here for drive() (it runs after
+// Hands-on in each frame).
+const TOMATO_HAND = { at: -1e9 };
+const tomatoSwap = (n) => ({
+  get kit() {
+    TOMATO_HAND.at = performance.now();
+    return "k" + n;
+  },
+});
 
 // The biggest shells in the basket: name, x, z, radius (from a top view).
 const SHELLS = [
@@ -891,16 +897,11 @@ export const RIGS = {
     // The plate's underside: a white glazed foot and floor, so the plate
     // reads solid from below (lane Sharpness B).
     addon: {
-      count: 70000,
+      count: 60000,
       build(k) {
-        // Lane Hands engine B: stand-ins for tomatoes lifted off (hidden
-        // until one is), and fills for the place each leaves.
+        // Lane Hands engine B: kit-built stand-ins, one per tomato (hidden
+        // until one is lifted off by hand).
         for (const [name, x, z, r] of TOMATOES) kitTomato(k, [x, PLATE_Y + r, z], r, k.part("k" + name, { pivot: [x, PLATE_Y + r, z] })); // prettier-ignore
-        for (let g = 0; g < 4; g++) {
-          const fp = k.part("fill" + g, { pivot: [0, PLATE_Y, 0] });
-          for (const t of TOMATO_WAVE)
-            if (t.group === g) fillTomato(k, [t.x, PLATE_Y + t.r, t.z], t.r, fp);
-        }
         k.add(
           k.param(
             (u, v) => {
@@ -959,14 +960,17 @@ export const RIGS = {
           },
         ),
       sound: (hit, vol) => ({ voice: "thud", f: hit.other ? 150 : 110, bright: 0.2, vol: vol * 0.8 }), // prettier-ignore
-      // A lifted tomato is a whole kit-built one; the pile is filled behind it.
-      swap: Object.fromEntries(TOMATOES.map(([n]) => [n, { kit: "k" + n, fill: "fill" + TOMATO_GROUP[n] }])), // prettier-ignore
+      // A lifted tomato is a whole kit-built one (and so is the pile, below).
+      swap: Object.fromEntries(TOMATOES.map(([n]) => [n, tomatoSwap(n)])),
     },
     drive(t, c, out, info) {
       out.parts.fringe = { visible: 0 };
-      // The stand-ins and fills show only while a tomato is off the plate
-      // by hand (Hands-on turns them on).
-      out.addon = { parts: Object.fromEntries([...TOMATOES.map((t) => ["k" + t[0], { visible: 0 }]), ...[0, 1, 2, 3].map((g) => ["fill" + g, { visible: 0 }])]) }; // prettier-ignore
+      // While a tomato is off the plate by hand, every tomato is its
+      // kit-built stand-in (the lifted ones ride with Hands-on), so each comes
+      // away whole and nothing torn is left behind; otherwise the scan's own.
+      const pile = performance.now() - TOMATO_HAND.at < 150;
+      out.addon = { parts: Object.fromEntries(TOMATOES.map((t) => ["k" + t[0], { visible: pile ? 1 : 0 }])) }; // prettier-ignore
+      if (pile) for (const [name] of TOMATOES) out.parts[name] = { visible: 0 };
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
       const way = vary(info.tap) > 0.5 ? 1 : -1;

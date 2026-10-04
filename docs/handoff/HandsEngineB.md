@@ -120,12 +120,14 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 
 ## Known issues
 
-- Tomatoes (fixed October 3, 2026, after the Operator's note): a lifted tomato is swapped for a
-  kit-built one with its calyx (`hands.swap`, add-on parts), and the pile fills behind it; ↺ brings
-  the scan back. The kit tomato's light is baked in, so one that tumbles shows a slightly darker
-  side. Card heb-tomatoes-r2 replaces heb-tomatoes.
-- The music box's dancer jumps to the crank's turn the first time anything is moved by hand (the
-  tap's dancer spins by the clock).
+- Owner's marks (October 4, 2026): candy cane, chest, orange and sword good. Music box: the dancer
+  seemed to tip back as she turned; it was splat order (sorted in her built pose), so the recipe now
+  asks for `out.resortPose` every quarter radian she or the lid turns by hand (card
+  heb-music-box-r2). The toy's own idle spin (the tap's, unchanged) still shows it now and then: a
+  re-sort costs about 5 ms on the desktop, too much five times a second on a phone for an idle toy.
+  Tomatoes: while any tomato is off its place, the whole pile shows as kit-built tomatoes (each
+  lifted one rides with Hands-on), so nothing torn is left; ↺ brings the scan back (card
+  heb-tomatoes-r3). The tomatoes' faint red reflection in the plate's glaze stays.
 - Chest and music box: a press on the box's front can pick the lid (the nearest piece); fine in
   practice, but a press on the box body is not a no-op.
 - Hands-on starts off for the demo toys (they are public): turn on ✋ first.

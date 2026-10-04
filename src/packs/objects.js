@@ -40,6 +40,10 @@ const ease3 = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2)
 // click of the crank (12 a turn), as the tap plays it ("-" a rest).
 const MUSIC_TUNE = "E6 D6 C6 D6 E6 E6 E6 - D6 D6 D6 - E6 G6 G6 -".split(" ");
 const MUSIC_CLICKS = 12;
+// The dancer's turn by hand, and where her splats were last sorted: splats
+// sort in the pose they were built in, so a turned dancer would draw her
+// back (and her turntable's underside) over her front and seem to tip back.
+const MUSIC_HAND = { a: null, lid: 0, slot: null, again: false };
 const easeOutBack = (x) => {
   const k = 1.70158;
   return 1 + (k + 1) * Math.pow(x - 1, 3) + k * Math.pow(x - 1, 2);
@@ -1382,6 +1386,7 @@ export const RECIPES = {
             parts.dancer = { ...parts.dancer, offset: [0, -0.34 * (1 - smoothstep(0.7, 1.95, a)), 0] }; // prettier-ignore
             // The floating notes only while it stands open.
             if (a < 1.3) NOTE_PATHS.forEach((n, i) => (parts["note" + i] = { visible: 0 }));
+            MUSIC_HAND.lid = a;
           },
         },
         {
@@ -1399,12 +1404,25 @@ export const RECIPES = {
             const n = MUSIC_TUNE[((ev.n % MUSIC_TUNE.length) + MUSIC_TUNE.length) % MUSIC_TUNE.length]; // prettier-ignore
             return n === "-" ? null : { voice: "tine", f: n, vol: 0.7 };
           },
-          also: (a, parts) => (parts.dancer = { ...parts.dancer, angle: 0.5 * a }),
+          also: (a, parts) => {
+            parts.dancer = { ...parts.dancer, angle: 0.5 * a };
+            MUSIC_HAND.a = 0.5 * a;
+          },
         },
       ],
     },
     drive(t, c, out) {
       const m = mem(c);
+      // Turned by hand (Hands-on): sorted again every quarter radian she (or
+      // the lid) turns, and once more on the frame after (lane Hands engine B).
+      if (MUSIC_HAND.a !== null) {
+        const slot = Math.round(MUSIC_HAND.a / 0.25) * 64 + Math.round(MUSIC_HAND.lid / 0.25);
+        if (slot !== MUSIC_HAND.slot || MUSIC_HAND.again) {
+          MUSIC_HAND.again = slot !== MUSIC_HAND.slot;
+          MUSIC_HAND.slot = slot;
+          out.resortPose = true;
+        }
+      }
       const o = ease3(c.open);
       out.parts.lid = { angle: -1.95 * o };
       out.parts.lidTop = { angle: -1.95 * o, visible: 1 - smoothstep(0.55, 0.8, c.open) };
