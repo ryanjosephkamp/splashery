@@ -31,3 +31,13 @@
 {"v":1,"t":"2026-10-04T17:26:44.748Z","harness":"claude-code","event":"turn-start","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
 {"v":1,"t":"2026-10-04T17:26:46.477Z","harness":"claude-code","event":"tool","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","tool":"ReadNotifications","cwd":"splashery"}
 {"v":1,"t":"2026-10-04T17:26:50.694Z","harness":"claude-code","event":"turn-end","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T17:31:29.871Z","harness":"claude-code","event":"session-end","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T18:01:00.612Z","harness":"claude-code","event":"session-start","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T18:01:00.752Z","harness":"claude-code","event":"turn-start","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T18:01:07.831Z","harness":"claude-code","event":"tool","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T18:01:12.980Z","harness":"claude-code","event":"turn-end","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T18:05:59.985Z","harness":"claude-code","event":"session-end","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T23:26:04.686Z","harness":"claude-code","event":"turn-start","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T23:26:04.686Z","harness":"claude-code","event":"session-start","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T23:26:09.077Z","harness":"claude-code","event":"tool","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T23:26:13.759Z","harness":"claude-code","event":"turn-end","session":"a2257cc0-d660-5fa4-aa2d-3bca1ea09f82","cwd":"splashery"}
