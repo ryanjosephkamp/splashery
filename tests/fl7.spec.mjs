@@ -119,6 +119,7 @@ test("slow frames step down: the pixel cap, then a rebuild into the phone envelo
     const out = { steps: [] };
     // (hidden or loading time, and gaps over 2 s, count for nothing)
     let t = performance.now() + 5000;
+    rt.frame = () => {}; // (the page's own slow frames must not feed the watcher)
     rt.slow.born = 0;
     rt.slow.last = t;
     rt.watch((t += 3000));
@@ -156,6 +157,7 @@ test("one stall, or a desktop, never trips the recovery", async ({ page }) => {
   const level = await page.evaluate(() => {
     const rt = window.__splashery.player.fluids;
     let t = performance.now() + 5000;
+    rt.frame = () => {}; // (the page's own slow frames must not feed the watcher)
     rt.slow.born = 0;
     rt.slow.last = t;
     for (let i = 0; i < 200; i++) rt.watch((t += 16));
@@ -173,6 +175,7 @@ test("one stall, or a desktop, never trips the recovery", async ({ page }) => {
   const desk = await page.evaluate(() => {
     const rt = window.__splashery.player.fluids;
     let t = performance.now() + 5000;
+    rt.frame = () => {}; // (the page's own slow frames must not feed the watcher)
     rt.slow.born = 0;
     rt.slow.last = t;
     for (let i = 0; i < 300; i++) rt.watch((t += 60));
