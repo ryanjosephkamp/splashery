@@ -93,20 +93,49 @@ files go only through your engine PR.
   owner approved in full, especially "Engine pieces this plan needs"); docs/handoff/Physics.md (how
   the engine works: units, stacking, picking and placing, known issues); `src/physics/world.js` and
   `src/physics/hands-on.js`; `tools/phy-clip.mjs` (phone-size clips with a finger dot).
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 
-Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
+- October 3, 2026: lane started.
+- Engine (`claude/lane-hands-engine-b`, draft PR #224, "Engine: hands-on joints"):
+  `src/physics/joints.js` (hinges, sliders, dials, sockets, breaks, `parent`, `start`, `upright`,
+  `rigPieces`), marked hook lines in `src/physics/hands-on.js`, `hard: true` for scan rigs (two
+  shader lines in `src/rig.js`: each splat wholly in one part), `tests/heb-engine.spec.mjs` (12
+  tests) and docs/PACKS.md, "5g. Hands-on: joints".
+- Demo toys (`claude/lane-hands-engine-b-toys`): chest (lid hinge), music box (lid hinge, crank dial
+  playing the tune note by note, dancer and notes ride on them), sword in the stone (slider, stuck
+  then free, friction), orange (eight wedge sockets), candy cane (breaks; ↺ mends) and tomatoes
+  (`rigPieces`, a hard rig). Help lines, plan entries, `tests/heb.spec.mjs` (6 tests),
+  `heb-music-box` screenshots. Clips posted on Effect review page 2 (lane HandsEngineB, six cards).
+- Step time (Hands-on's whole step, world and joints, desktop CPU in the sandbox), mean per 60 fps
+  frame while moving: sword 0.01 ms, music box 0.04, chest 0.06, candy cane 0.2, orange 0.8,
+  tomatoes 1.3 ms; worst single frame 17 ms (tomatoes, likely a collection pause or the first step
+  after a pick). A mid-range phone is perhaps 3 to 4 times slower: well inside a frame on average.
 
-- October 3, 2026: lane started. The engine on `claude/lane-hands-engine-b` ("Engine: hands-on
-  joints"): `src/physics/joints.js` (hinges, sliders, dials, sockets, breaks, upright, and
-  `rigPieces` for scan rigs), a few hook lines in `src/physics/hands-on.js`,
-  `tests/heb-engine.spec.mjs` (each piece measured: angles, positions and clicks over time) and
-  docs/PACKS.md, "5g. Hands-on: joints". Draft PR #224, pushed for the category lanes. The demo toys
-  follow on `claude/lane-hands-engine-b-toys`.
+- Full suite (in parts; each run here stops at 2 hours): every spec file covered; all pass but one
+  timeout in `smoke.spec.mjs` (desktop screenshot, the cactus scan loading slowly under load; it
+  passes alone in 22 s). Lane PR #229 (draft). #224 merged October 3, 2026 (with engines A and C,
+  combo J); main merged into the toys branch.
+
+## Known issues
+
+- Owner's marks (October 4, 2026): candy cane, chest, orange and sword good. Music box: the dancer
+  seemed to tip back as she turned; it was splat order (sorted in her built pose), so the recipe now
+  asks for `out.resortPose` every quarter radian she or the lid turns by hand (card
+  heb-music-box-r2). The toy's own idle spin (the tap's, unchanged) still shows it now and then: a
+  re-sort costs about 5 ms on the desktop, too much five times a second on a phone for an idle toy.
+  Tomatoes: while any tomato is off its place, the whole pile shows as kit-built tomatoes (each
+  lifted one rides with Hands-on), so nothing torn is left; ↺ brings the scan back (card
+  heb-tomatoes-r3). Round 4 (the Operator's note): Hands-on poses pieces named ht0 to ht9, so it
+  never overrides drive()'s hiding of the scan's tomatoes (their bottoms had peeked out under the
+  kit pile as a pale smear); a thin "glaze" part (the scan's reflections and contact fuzz on the
+  plate) hides with them; the kit tomatoes sit on the plate (card heb-tomatoes-r4). Round 5: that
+  glaze is a kit-built layer in the add-on (shown with the kit pile) instead of a rig region, so the
+  rig keeps to 12 regions (card heb-tomatoes-r5).
+- Chest and music box: a press on the box's front can pick the lid (the nearest piece); fine in
+  practice, but a press on the box body is not a no-op.
+- Hands-on starts off for the demo toys (they are public): turn on ✋ first.
 
 ## Plan lines my pieces cover (for the category lanes)
 

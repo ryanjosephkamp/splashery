@@ -11,7 +11,7 @@
 //     [--depth] [--strip=8] [--sheet=full] [--report=<js whose result is printed after>]
 //     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value] [--turn=t0,t1,radians]
 //     [--song=<sound file>] [--clock] [--dpr=1] [--frames=<dir>]
-//     [--label=<text>] [--tilt=t0,t1,radians] [--profile=mid]
+//     [--label=<text>] [--tilt=t0,t1,radians] [--profile=mid] [--open=<file>]
 //
 // The page's clock is stepped by hand (as tools/effect-clip.mjs does), so a
 // clip shows the toy at its real speed however slow the renderer is.
@@ -190,6 +190,19 @@ const opts = Object.fromEntries(
 if (Object.keys(opts).length) {
   await page.evaluate((o) => window.__splashery.app.setToyOptions(o), opts);
   await page.waitForTimeout(1000);
+}
+// r6: --open=<file> opens a GIF or video in the toy (Moving photo to 3D) and
+// waits until it's read.
+if (opt("open", "")) {
+  const file = opt("open", "");
+  const name = path.basename(file).replace(/\.[^.]+$/, "");
+  await page.setInputFiles("#toy-input-file", file);
+  for (let k = 0; ; k++) {
+    if (await page.evaluate(async (n) => (await import("/src/packs/moving-photo.js")).MOVING.clip?.name === n, name)) break; // prettier-ignore
+    if (k > 2400) throw new Error(`${file} was never read`);
+    await page.waitForTimeout(500);
+  }
+  await page.waitForFunction(() => document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
 }
 if (opt("sheet", "") === "full") {
   await page.evaluate(() => document.getElementById("sheet-full")?.click());

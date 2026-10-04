@@ -3312,6 +3312,9 @@ export const RECIPES = {
     ],
     controls: [{ key: "vroom", label: "Rev", type: "pulse", ease: 1.8 }],
     action: { key: "vroom", label: "Rev the engine" },
+    // Hands-on (lane Hands engine A): push it and it rolls on its wheels,
+    // which turn by the distance rolled.
+    hands: { wheels: { axle: [0, 0, 1], r: CAR.r, parts: ["front", "rear"] } },
     drive(t, c, out) {
       const a = -(t * 2.5 + burst(c.vroom, 3));
       out.parts.front = { angle: a };
