@@ -124,6 +124,21 @@ test("materials: rolling resistance: a pool ball rolls far, a medicine ball stop
   expect(med).toBeGreaterThan(0.2);
 });
 
+test("materials: a ball twisting on the spot stops within two seconds, and sleeps", () => {
+  const { w, b } = ballWorld("basketball");
+  for (let i = 0; i < 30; i++) w.step(STEP); // resting on the floor
+  b.omega = [0, 6, 0]; // spun about the upright, as a sideways toss leaves it
+  w.wake();
+  let t = 0;
+  while (Math.abs(b.omega[1]) > 0.05 && t < 4) {
+    w.step(STEP);
+    t += STEP;
+  }
+  expect(t).toBeLessThan(2.5);
+  for (let i = 0; i < 120 && !w.asleep; i++) w.step(STEP);
+  expect(w.asleep).toBe(true);
+});
+
 test("materials: a shuttlecock flips and falls cork first", () => {
   const w = new World({ gravity: [0, -G, 0], substeps: 8 });
   w.plane([0, 1, 0], -100);
