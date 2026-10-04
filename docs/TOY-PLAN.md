@@ -31,35 +31,36 @@ Proposals below are suggestions; the owner may change them.
   Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
   ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
   Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
-  puck, Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon,
-  Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star,
-  Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage,
-  Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia,
-  Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital,
-  Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode,
-  Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
-  tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
-  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
-  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
-  Donut, Gummy bear, Pretzel, Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube,
-  Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
-  and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Fountain pen, Water
-  bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield, Bow and target,
-  Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
-  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic
-  guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic
-  keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel
-  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
-  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda,
-  Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent
-  network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting,
-  Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine,
-  Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model
-  to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids,
-  Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
+  puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar system, Mercury, Venus,
+  Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet,
+  Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
+  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
+  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba,
+  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby,
+  Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy
+  atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
+  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
+  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
+  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
+  Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
+  Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
+  Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
+  Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell
+  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
+  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
+  Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
+  orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
+  Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
+  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
+  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
+  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
+  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
+  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
+  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
+  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
+  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
+  Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
+  Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -161,7 +162,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The tomatoes roll and jostle each other, then settle.
   - Improved: E1c: the plate gives a little shake and a wave of small hops runs round it: four
     groups of tomatoes land on the four thuds, rocking outward and settling with a wobble. The big
-    ones rock instead of hopping, so no unscanned underside shows (2.6 s).
+    ones rock instead of hopping, so no unscanned underside shows (2.6 s). Hands engine B
+    (Hands-on): Pick up each of the ten tomatoes on its own (a rigid rig part) and set it down on
+    the plate or on another.
   - Sound: Soft thuds rolling on a table.
 - **Mandeltorus** (`mandeltorus`). Now: tap: Counter-spin (rig). Plan: keep.
   - Owner: Some parts should rotate clockwise and others counterclockwise.
@@ -463,7 +466,8 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Interesting; no idea for an effect. The original shapes are really good-looking.
   - Effect: Splits into three small blobs that merge back.
   - Improved: E1: splits into three smaller blobs that wobble apart, then merge back with a jelly
-    bounce (2.8 s).
+    bounce (2.8 s). Hands engine C (Hands-on): drag it to stretch it toward the finger; let go and
+    it wobbles back.
   - Sound: Gloopy wobble.
 - **Neon knot** (`knot`). Now: tap: Contort (rig). Plan: keep.
   - Effect: The neon flows along the knot and it ties tighter, then relaxes.
@@ -809,6 +813,8 @@ Proposals below are suggestions; the owner may change them.
 
 - **Treasure chest** (`chest`). Now: tap: Open or close. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands engine B (Hands-on): Lift the lid on its hinge by hand: let go past upright and
+    it stays open; lower, it drops shut with a thud.
   - Sound: Creak and a treasure chime.
 - **Storybook** (`book`). Now: tap: Open or close. Plan: keep.
   - Owner: Blurry; try to make it more detailed so the writing looks like something.
@@ -831,6 +837,9 @@ Proposals below are suggestions; the owner may change them.
     sound like a real keyboard (a tick and a thock).
 - **Music box** (`music-box`). Now: tap: Open or close. Plan: keep.
   - Owner: Animation is basically perfect; it needs music.
+  - Improved: Hands engine B (Hands-on): Lift the lid on its hinge by hand, and turn the crank by
+    drawing circles round it: each of its 12 clicks a turn plays the tune's next note, and the
+    dancer turns with it.
   - Sound: A music-box melody (plucked comb tones) while open.
 - **Alarm clock** (`clock`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Does roughly what the scan alarm clock should do; keep them slightly different.
@@ -1533,7 +1542,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with
     a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then
     the halves come back together and mend with a glint (about 2.9 s). Fix7: the bow has both ribbon
-    tails, hanging in front of the canes.
+    tails, hanging in front of the canes. Hands engine B (Hands-on): Pull the hook: it bends a
+    little, then snaps in two with a crack; pick up the broken piece; reset mends it.
   - Sound: The sugar strains as it twists (no whistle); the snaps and the mends stay.
 - **Macarons** (`macarons`). Now: tap: Stack up. Plan: keep.
   - Owner: Maybe they do something.
@@ -1578,6 +1588,8 @@ Proposals below are suggestions; the owner may change them.
     clicks).
 - **Pizza** (`pizza`). Now: tap: Take a slice. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands engine C (Hands-on): pull the slice away; the cheese strings sag, stretch and
+    snap; set it back.
   - Sound: The bite and a softer, shorter cheese stretch; not windy (Sound C, October 2, 2026).
 - **Burger** (`burger`). Now: tap: Explode view. Plan: keep.
   - Owner: Perfect.
@@ -1637,7 +1649,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Splits into segments that fan out.
   - Improved: E5: the whole orange opens like a flower: eight wedges fall open outwards on their
     bottoms, one just after another, showing their juicy cut faces, while juice squirts up out of
-    the middle; then it closes up (about 3 s).
+    the middle; then it closes up (about 3 s). Hands engine B (Hands-on): Pull the wedges out one by
+    one and set them down; bring one back over its place and it clicks home.
   - Sound: Juicy squirt.
 - **Kiwi** (`kiwi`). Now: tap: Cut open. Plan: keep.
   - Owner: Pick something.
@@ -1717,6 +1730,8 @@ Proposals below are suggestions; the owner may change them.
     2026).
 - **Yo-yo** (`yo-yo`). Now: tap: Throw. Plan: keep.
   - Owner: Fine.
+  - Improved: Hands engine C (Hands-on): pull the yo-yo down its string and let go; it drops, spins
+    at the end and climbs back.
   - Sound: The string unwinding, the whirr at the bottom and the smack back into the hand.
 - **Puzzle cube** (`puzzle-cube`). Now: tap: Scramble or solve. Plan: keep.
   - Owner: Only the top row twists (very cool). Move more than the top row; ideally swipe any row or
@@ -1741,7 +1756,8 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Underwhelming; develop the animation further.
   - Effect: A big gust: the kite loops the loop and the tail whips.
   - Improved: C2: a big gust loops the kite round while it rises, and the tail whips; the line stays
-    attached (about 3 s).
+    attached (about 3 s). Hands engine C (Hands-on): drag the kite or its line; it swoops back up
+    into the wind, its tail flapping.
   - Sound: The same, with the wind dialed back.
 - **Paper plane** (`paper-plane`). Now: tap: Barrel roll. Plan: keep.
   - Owner: Fine.
@@ -1959,7 +1975,8 @@ Proposals below are suggestions; the owner may change them.
     front of the chest, clear of the body, with fabric filling the shoulders, then swing back down
     and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a
     band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a
-    raised sleeve shows cloth, not a hole; flag colors reach the cloth.
+    raised sleeve shows cloth, not a hole; flag colors reach the cloth. Hands engine C (Hands-on):
+    pull the hood; it flops like cloth and springs back up.
   - Sound: The fabric's soft brushes and the zip, with much less wind (Sound C, October 2, 2026).
 - **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -1992,6 +2009,8 @@ Proposals below are suggestions; the owner may change them.
 
 - **Sword in the stone** (`sword-in-stone`). Now: tap: Pull. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands engine B (Hands-on): Pull the sword up out of the stone by hand: it sticks and
+    wiggles first, then slides free; it stays where it is let go and clanks back in.
   - Sound: Metal ring.
 - **Heraldic shield** (`shield`). Now: tap: Block a blow. Plan: keep.
   - Owner: Only bounces; find a better effect.
@@ -2094,7 +2113,8 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Underwhelming; the ink should be much bigger and more dramatic.
   - Effect: A big ink cloud billows out while it jets away and back.
   - Improved: C2: a big billowing ink cloud grows behind it while it jets up and away with its arms
-    streaming, then drifts back as the ink thins (about 4.5 s).
+    streaming, then drifts back as the ink thins (about 4.5 s). Hands engine C (Hands-on): drag it
+    and the arms trail and curl back; pull an arm and let it go.
   - Sound: A squirt, then the ink bubbling out as a liquid (no wind).
 - **Starfish** (`starfish`). Now: tap: Wave the arms. Plan: keep.
   - Owner: Fine.
