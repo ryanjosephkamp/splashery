@@ -249,7 +249,7 @@
       "owner": "Interesting; no idea for an effect. The original shapes are really good-looking.",
       "effect": "Splits into three small blobs that merge back.",
       "sound": "Gloopy wobble.",
-      "improved": "E1: splits into three smaller blobs that wobble apart, then merge back with a jelly bounce (2.8 s)."
+      "improved": "E1: splits into three smaller blobs that wobble apart, then merge back with a jelly bounce (2.8 s). Hands engine C (Hands-on): drag it to stretch it toward the finger; let go and it wobbles back."
     },
     "donut": {
       "v": "keep",
@@ -1231,7 +1231,8 @@
     "pizza": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "The bite and a softer, shorter cheese stretch; not windy (Sound C, October 2, 2026)."
+      "sound": "The bite and a softer, shorter cheese stretch; not windy (Sound C, October 2, 2026).",
+      "improved": "Hands engine C (Hands-on): pull the slice away; the cheese strings sag, stretch and snap; set it back."
     },
     "burger": {
       "v": "keep",
@@ -1362,7 +1363,8 @@
     "yo-yo": {
       "v": "keep",
       "owner": "Fine.",
-      "sound": "The string unwinding, the whirr at the bottom and the smack back into the hand."
+      "sound": "The string unwinding, the whirr at the bottom and the smack back into the hand.",
+      "improved": "Hands engine C (Hands-on): pull the yo-yo down its string and let go; it drops, spins at the end and climbs back."
     },
     "puzzle-cube": {
       "v": "keep",
@@ -1383,7 +1385,7 @@
       "owner": "Underwhelming; develop the animation further.",
       "effect": "A big gust: the kite loops the loop and the tail whips.",
       "sound": "The same, with the wind dialed back.",
-      "improved": "C2: a big gust loops the kite round while it rises, and the tail whips; the line stays attached (about 3 s)."
+      "improved": "C2: a big gust loops the kite round while it rises, and the tail whips; the line stays attached (about 3 s). Hands engine C (Hands-on): drag the kite or its line; it swoops back up into the wind, its tail flapping."
     },
     "paper-plane": {
       "v": "keep",
@@ -1628,7 +1630,7 @@
       "owner": "Underwhelming; the ink should be much bigger and more dramatic.",
       "effect": "A big ink cloud billows out while it jets away and back.",
       "sound": "A squirt, then the ink bubbling out as a liquid (no wind).",
-      "improved": "C2: a big billowing ink cloud grows behind it while it jets up and away with its arms streaming, then drifts back as the ink thins (about 4.5 s)."
+      "improved": "C2: a big billowing ink cloud grows behind it while it jets up and away with its arms streaming, then drifts back as the ink thins (about 4.5 s). Hands engine C (Hands-on): drag it and the arms trail and curl back; pull an arm and let it go."
     },
     "starfish": {
       "v": "keep",
@@ -2210,7 +2212,7 @@
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).",
       "sound": "The fabric's soft brushes and the zip, with much less wind (Sound C, October 2, 2026).",
-      "improved": "Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in front of the chest, clear of the body, with fabric filling the shoulders, then swing back down and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a raised sleeve shows cloth, not a hole; flag colors reach the cloth."
+      "improved": "Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in front of the chest, clear of the body, with fabric filling the shoulders, then swing back down and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a raised sleeve shows cloth, not a hole; flag colors reach the cloth. Hands engine C (Hands-on): pull the hood; it flops like cloth and springs back up."
     },
     "sunglasses": {
       "v": "keep",

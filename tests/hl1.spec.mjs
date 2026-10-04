@@ -15,7 +15,7 @@ const SAMPLE = [
   "marble-bust",
   "cookie",
   "heart-donut",
-  "blob",
+  "mushroom", // lane Hands engine C: the jelly blob stretches in Hands-on, so it is never lifted whole
   "knot",
   "basketball",
   "bowling-ball",
