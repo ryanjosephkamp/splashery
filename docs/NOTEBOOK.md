@@ -105,17 +105,29 @@ which is which) is planned for the blog.
 | October 3, 2026       | QR scan lab   | Sonnet 5.5 | A simulated-camera scan harness, two readers, a scorecard and regression checks for the QR styles ([#215]).                                                                     | Time not recorded. The handoff’s completed second round passed eight styles at four captures each in 44 s. Its full sweep took about 25 minutes. Simulated captures do not establish real-phone scan reliability.                       |
 | October 3, 2026       | Photoreal r2  | Sonnet 5.5 | 30 new captured toys in labs, full and lite files, credits, and a command that lists NonCommercial assets ([#212]).                                                             | Time not recorded. 27 CC BY and three NC assets. Full files reached 1M splats and 15 MB; lite files 300k. Mid-tier cost and the full test suite were not verified by the lane.                                                          |
 | October 3, 2026       | QR            | Opus 5.5   | A splat QR generator with eight content kinds, seven styles, scan checks, motion and exports ([#216]).                                                                          | Time not recorded. 11 lane tests passed; 44 GIF frames × 8 variants read back. M became Auto after the scan lab’s measurements. The full suite stopped at 91/845; some Bubbles clip frames failed.                                      |
-| October 3, 2026       | Codex audits  | GPT-6 / ?  | Performance, licenses, accessibility, test health, materials, viewer comparison and Hands-on audits ([#206], [#195], [#196], [#213], [#234], [#237], [#235]).                   | Time not recorded. GPT-6 is named in [#234]; other audit models are not recorded. Performance covered 342 toys; test health found 17 distinct failures; Hands-on flagged 109/373. Findings were proposals.                              |
 | October 3, 2026       | Fidelity      | Opus 5.5   | Trained-file decoding and rigged parts, an eleven-part orrery recipe, and render/train/measure tools ([#209], engine [#210]).                                                   | Time not recorded. Five tests passed with 272 KB of stand-in parts. Brush training had not run and the orrery was not on the shelf. Captured splats kept view-dependent color; kit parts kept base color only.                          |
 | October 3, 2026       | Physics       | Opus 5.5   | Hands-on play, a small physics engine, stable grabs and stacking, and nine showcase toys ([#176], [#203], [#222], [#184]).                                                      | Time not recorded. The grab’s 98 checks passed; the placement probe stacked cleanly 8/8 times, versus 1/3 before. Showcase testing covered 76 spec files; stones could remain pinned above removed stones.                              |
 | October 3, 2026       | UI r5         | Opus 5.5   | Reachable gallery controls, better piano framing and rotation, larger model files, and stage recording with sound ([#177], [#178]).                                             | Time not recorded. Three lane tests passed; a 66 MB model opened on both tiers. Recording capped takes at 60 s and 1920 px. Real-phone recording and the final full run were not verified.                                              |
 | October 3, 2026       | Books r5      | Opus 5.5   | PDF links, figures and album photos that rise from the page, plus Draw a box for other figures ([#219], engine [#218]).                                                         | Time not recorded. The handoff records 91 focused passes after main moved; the full run was left to Integrators. Vector figures needed a drawn box; cover-page links still did not work.                                                |
 
+### Codex audits (not a Claude lane)
+
+The Entries table lists Claude lanes only; its model column is always Opus 5.5 or Sonnet 5.5. Codex
+ran these on the owner's Mac (October 3, 2026):
+
+- What it built: Performance, licenses, accessibility, test health, materials, viewer comparison and
+  Hands-on audits ([#206], [#195], [#196], [#213], [#234], [#237], [#235]).
+- Model: GPT-6 where named (#234); not recorded for the others.
+- Notes: Time not recorded. GPT-6 is named in [#234]; other audit models are not recorded.
+  Performance covered 342 toys; test health found 17 distinct failures; Hands-on flagged 109/373.
+  Findings were proposals.
+
 Backfilled through October 3, 2026, on main at `aba77089`. New dates are the merge commit’s date in
 Eastern time for the round’s last substantive PR. Engine and handoff-only PRs are grouped with that
 round; their individual merge dates are in the linked source titles below. Review revisions within
 one toy PR stay in one entry. Ops PRs and Codex’s Dot jobs PR are omitted; the seven merged Codex
-audits share one entry. Earlier entries and the notes below remain as written.
+audits share one entry, under "Codex audits" below the table. Earlier entries and the notes below
+remain as written.
 
 New counts, timings, lessons and model names come from the linked PR bodies and lane handoffs. They
 are reported results, not fresh tests of those branches. No elapsed lane duration was recorded in
