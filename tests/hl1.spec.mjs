@@ -32,7 +32,7 @@ const SAMPLE = [
   "campfire",
   "cupcake",
   "teddy-bear",
-  "chest",
+  "soda-can", // lane Hands engine B: the chest's lid is a hinge now (pieces mode), so it no longer lifts whole
   "running-shoe",
   "shield",
   "jellyfish",
