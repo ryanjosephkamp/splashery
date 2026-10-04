@@ -902,6 +902,14 @@ export const RIGS = {
         // Lane Hands engine B: kit-built stand-ins, one per tomato (hidden
         // until one is lifted off by hand).
         for (const [name, x, z, r] of TOMATOES) kitTomato(k, [x, PLATE_Y + r, z], r, k.part("k" + name, { pivot: [x, PLATE_Y + r, z] })); // prettier-ignore
+        // A clean glaze over the plate's floor, shown with the kit-built pile:
+        // it covers the scan's reflections and contact fuzz round the pile's
+        // foot (the scan's own tomatoes are hidden then).
+        const dish = (rad) => PLATE_Y + 0.014 + 0.07 * Math.min(1, Math.max(0, (rad - 0.55) / 0.33)) ** 2; // prettier-ignore
+        k.add(
+          k.param((u, v) => { const a = u * TAU; const rad = 0.88 * Math.sqrt(v); return [-0.03 + Math.sin(a) * rad, dish(rad), 0.02 + Math.cos(a) * rad]; }, { grid: 96, normal: () => [0, 1, 0] }), // prettier-ignore
+          { even: true, opacity: 1, jitter: 0.006, flat: 0.2, size: 1.3, pattern: false, part: k.part("glazeTop", { pivot: [-0.03, PLATE_Y, 0.02] }), color: () => "#e2e0da" }, // prettier-ignore
+        );
         k.add(
           k.param(
             (u, v) => {
@@ -922,15 +930,6 @@ export const RIGS = {
         pivot: [x, PLATE_Y + r, z],
         regions: [{ at: [x, PLATE_Y + r, z], r: [r * 1.15, r * 1.35, r * 1.15], notColor: "#eeeeea", tol: 0.2 }], // prettier-ignore
       })),
-      // Lane Hands engine B: the tomatoes' reflection and contact fuzz baked
-      // into the glaze round the foot of the pile, hidden while the pile is
-      // kit-built: anything but the plate's white, in a thin layer on the
-      // plate (it wins over the tomatoes there; a hop lifts them clear of it).
-      {
-        name: "glaze",
-        pivot: [0, PLATE_Y, 0],
-        regions: [{ at: [0, PLATE_Y + 0.012, 0.05], r: [0.95, 0.04, 0.95], notColor: "#eeeeea", tol: 0.14, over: true }], // prettier-ignore
-      },
       // The capture's smear under the plate (the table and reflections), hidden
       // (lane Sharpness B) so the plate's kit-built underside shows.
       {
@@ -980,10 +979,8 @@ export const RIGS = {
       // kit-built stand-in (the lifted ones ride with Hands-on), so each comes
       // away whole and nothing torn is left behind; otherwise the scan's own.
       const pile = performance.now() - TOMATO_HAND.at < 150;
-      out.addon = { parts: Object.fromEntries(TOMATOES.map((t) => ["k" + t[0], { visible: pile ? 1 : 0 }])) }; // prettier-ignore
-      if (pile)
-        for (const name of [...TOMATOES.map((t) => t[0]), "glaze"])
-          out.parts[name] = { visible: 0 };
+      out.addon = { parts: Object.fromEntries([...TOMATOES.map((t) => "k" + t[0]), "glazeTop"].map((n) => [n, { visible: pile ? 1 : 0 }])) }; // prettier-ignore
+      if (pile) for (const [name] of TOMATOES) out.parts[name] = { visible: 0 };
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
       const way = vary(info.tap) > 0.5 ? 1 : -1;

@@ -130,7 +130,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
   heb-tomatoes-r3). Round 4 (the Operator's note): Hands-on poses pieces named ht0 to ht9, so it
   never overrides drive()'s hiding of the scan's tomatoes (their bottoms had peeked out under the
   kit pile as a pale smear); a thin "glaze" part (the scan's reflections and contact fuzz on the
-  plate) hides with them; the kit tomatoes sit on the plate (card heb-tomatoes-r4).
+  plate) hides with them; the kit tomatoes sit on the plate (card heb-tomatoes-r4). Round 5: that
+  glaze is a kit-built layer in the add-on (shown with the kit pile) instead of a rig region, so the
+  rig keeps to 12 regions (card heb-tomatoes-r5).
 - Chest and music box: a press on the box's front can pick the lid (the nearest piece); fine in
   practice, but a press on the box body is not a no-op.
 - Hands-on starts off for the demo toys (they are public): turn on ✋ first.

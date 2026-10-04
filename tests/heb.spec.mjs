@@ -167,7 +167,7 @@ test("orange: a wedge pulled out stays out; brought back, it clicks home", async
   expect(Math.hypot(b[out].pos[0] - b[out].home[0], b[out].pos[2] - b[out].home[2])).toBeGreaterThan(0.4); // prettier-ignore
   expect(b[out].pos[1]).toBeGreaterThan(-0.7); // on the table, not through it
   await drag(page, [
-    [b[out].pos[0], b[out].pos[1] + 0.4, b[out].pos[2]],
+    [b[out].pos[0], b[out].pos[1] + 0.05, b[out].pos[2]], // its middle, however it settled
     [w[out][0], 0.3, w[out][2]],
   ]);
   await tick(page, 0.6);
