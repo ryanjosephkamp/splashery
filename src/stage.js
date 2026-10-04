@@ -107,8 +107,10 @@ export class Stage {
       if (performance.now() < this.aliveUntil) app.renderNextFrame = true;
     });
     this.graveyard = [];
+    this.projectorTries = 0; // Fluids r7 (hookProjector)
     app.on("frameend", () => {
       this.frames++;
+      if (this.projectorTries < 600) this.hookProjector(); // Fluids r7
       if (this.graveyard.length) {
         this.buryToys();
         this.requestRender();
@@ -144,9 +146,43 @@ export class Stage {
 
   // The ratio frames render at now.
   pixelRatio() {
-    const cap = this.sharp?.dpr ?? this.pixelCap; // Sharpness (dpr is labs only)
+    const cap = Math.min(this.sharp?.dpr ?? this.pixelCap, this.fluidCap ?? Infinity); // Sharpness (dpr is labs only); Fluids r7 (fluidCap)
     const full = Math.min(window.devicePixelRatio || 1, cap);
     return this.reduced ? Math.max(1, full / 1.5) : full;
+  }
+
+  // Fluids r7: the gsplat compute projector (WebGPU) clears its cached
+  // Compute objects when the work-buffer material changes (a toy, a scene, a
+  // kernel), but it destroys only their shaders, so each one's uniform
+  // buffers stay allocated (docs/audits/fluid-phone-2026-10.md, proposal 4).
+  // vendor/ stays untouched: once the renderer exists, its clearing method is
+  // wrapped on that one instance so each Compute is destroyed first. If the
+  // engine's private layout is not as expected, nothing is wrapped.
+  hookProjector() {
+    this.projectorTries++;
+    try {
+      if (!this.device.isWebGPU) return void (this.projectorTries = Infinity);
+      for (const cb of this.device._callbacks?.get?.("devicerestored") || []) {
+        const p = cb?.scope?.renderer?.projector;
+        if (!p?._projectorComputes || typeof p._destroyProjectorComputes !== "function") continue;
+        const clear = p._destroyProjectorComputes;
+        p._destroyProjectorComputes = function () {
+          for (const c of this._projectorComputes.values()) c.destroy?.();
+          return clear.call(this);
+        };
+        this.projectorTries = Infinity;
+        return;
+      }
+    } catch {
+      this.projectorTries = Infinity;
+    }
+  }
+
+  // Fluids r7: a fluid toy that runs slowly on a phone asks for a lower cap
+  // (null lifts it, when its fluids stop).
+  setFluidPixelCap(cap) {
+    this.fluidCap = cap;
+    this.applyPixelRatio();
   }
 
   setPixelRatio(cap) {
