@@ -8,26 +8,54 @@
 4. No NonCommercial, ND, paid, personal-use-only, or unlicensed sound is recommended.
 5. Every listed sound page was opened and its license label checked on October 3, 2026, UTC.
 6. Freesound originals need a free account; public previews are not the original downloads.
-7. Wikimedia Commons offers an account-free puffin file; this environment’s file request was blocked.
+7. Wikimedia Commons offers an account-free puffin file; this environment’s file request was
+   blocked.
 8. Exact lioness/chuff identity, a second clear globe spin, and unbagged cake-on-plate remain gaps.
-9. Rankings reflect license, stated recording method, fit, and editing effort; I did not audition the audio.
-10. This is a source report only; the lane must listen, edit softly, credit, and test each chosen sound.
+9. Rankings reflect license, stated recording method, fit, and editing effort; I did not audition
+   the audio.
+10. This is a source report only; the lane must listen, edit softly, credit, and test each chosen
+    sound.
 
 ## Scope and evidence
 
-Read first on main: [CLAUDE.md, Ground rules](https://github.com/ryanjosephkamp/splashery/blob/main/CLAUDE.md#ground-rules) and [Ryan’s October 3 sound review](https://github.com/ryanjosephkamp/splashery/blob/main/docs/reviews/2026-10-03-labs-review/review.md). Main was `9b548b3456ee2da47826e31acec0be3f58c46199` when the report baseline was checked. The review also discusses visuals and other labs; those are outside this sound-source task.
+Read first on main:
+[CLAUDE.md, Ground rules](https://github.com/ryanjosephkamp/splashery/blob/main/CLAUDE.md#ground-rules)
+and
+[Ryan’s October 3 sound review](https://github.com/ryanjosephkamp/splashery/blob/main/docs/reviews/2026-10-03-labs-review/review.md).
+Main was `9b548b3456ee2da47826e31acec0be3f58c46199` when the report baseline was checked. The review
+also discusses visuals and other labs; those are outside this sound-source task.
 
-All source licenses, lengths, formats, and download labels below were read on the individual live pages on **October 3, 2026, UTC**. Lengths are for complete source files, not proposed edits. A source description is evidence of what its uploader claims, not independent proof of recording rights, species, sex, or sound quality. No listening or phone-speaker quality test was performed. “Best first” means the best candidates to audition, not an established listening winner. No sound assets are included in this PR.
+All source licenses, lengths, formats, and download labels below were read on the individual live
+pages on **October 3, 2026, UTC**. Lengths are for complete source files, not proposed edits. A
+source description is evidence of what its uploader claims, not independent proof of recording
+rights, species, sex, or sound quality. No listening or phone-speaker quality test was performed.
+“Best first” means the best candidates to audition, not an established listening winner. No sound
+assets are included in this PR.
 
-Every Freesound row has **“Login to download”** on its page. The original needs a free Freesound account; viewing the page and its compressed preview does not. No account was created or used. Do not substitute a ripped preview for a properly acquired original, or infer that a public player means anonymous original download. The Commons page offers an account-free original link, but the actual file request returned HTTP 403 here; anonymous transfer was not verified. No API key is needed for these website routes.
+Every Freesound row has **“Login to download”** on its page. The original needs a free Freesound
+account; viewing the page and its compressed preview does not. No account was created or used. Do
+not substitute a ripped preview for a properly acquired original, or infer that a public player
+means anonymous original download. The Commons page offers an account-free original link, but the
+actual file request returned HTTP 403 here; anonymous transfer was not verified. No API key is
+needed for these website routes.
 
-The quoted text is the sound’s displayed license label, linked to its deed. [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) permits reuse and edits without required attribution. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and the linked BY 3.0 files require credit, a license link, and proper notice of changes. The archive puffin uses [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), allowed by Ground rules; keep the adapted audio under that license. It is a fallback outside the preferred CC0/BY shortlist. Its audio is **not CC0** merely because Commons metadata is CC0.
+The quoted text is the sound’s displayed license label, linked to its deed.
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) permits reuse and edits without
+required attribution. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and the linked BY
+3.0 files require credit, a license link, and proper notice of changes. The archive puffin uses
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), allowed by Ground rules; keep the
+adapted audio under that license. It is a fallback outside the preferred CC0/BY shortlist. Its audio
+is **not CC0** merely because Commons metadata is CC0.
 
-Within each table, try the first row before the others. Repeated rows are deliberate reuse options, not extra unique finds. “Quiet” is an editing target; the source files are not guaranteed quiet. Details of an object or recording brand belong in provenance only, not in the toy’s name or sound.
+Within each table, try the first row before the others. Repeated rows are deliberate reuse options,
+not extra unique finds. “Quiet” is an editing target; the source files are not guaranteed quiet.
+Details of an object or recording brand belong in provenance only, not in the toy’s name or sound.
 
 ## 1. Puffin call
 
-Try the CC0 candidates first, but verify the bird against the better-documented archive recording. The two CC0 pages say only “Puffin sound”; they do not identify the species, place, or recording method. They are candidate calls, not independently confirmed field recordings.
+Try the CC0 candidates first, but verify the bird against the better-documented archive recording.
+The two CC0 pages say only “Puffin sound”; they do not identify the species, place, or recording
+method. They are candidate calls, not independently confirmed field recordings.
 
 | Name and recordist                                           | Link                                                                                                                        | License quoted from sound page                                                                                                                                          | Full length                   | Original format                  | Download                                                                                 | Notes                                                                                                                                                                                                                                         |
 | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -37,7 +65,9 @@ Try the CC0 candidates first, but verify the bird against the better-documented 
 
 ## 2. Plush and soft-surface landings
 
-For the monkey doll, dog plush, and crochet Earth. A cloth contact fits better than a rubber-band sound. Match the recorded object and landing surface to the animation; these are not all recordings of plush toys.
+For the monkey doll, dog plush, and crochet Earth. A cloth contact fits better than a rubber-band
+sound. Match the recorded object and landing surface to the animation; these are not all recordings
+of plush toys.
 
 | Name and recordist                                        | Link                                                                    | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                             |
 | --------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -57,7 +87,8 @@ For wooden bases and small objects landing on wood. Do not reuse a heavy wood cr
 
 ## 4. Ceramic set-downs
 
-For vases, pots, and ceramic souvenirs, including the peonies and white roses. These are set-down contacts, not breaking dishes.
+For vases, pots, and ceramic souvenirs, including the peonies and white roses. These are set-down
+contacts, not breaking dishes.
 
 | Name and recordist                   | Link                                                              | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                         |
 | ------------------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -67,7 +98,8 @@ For vases, pots, and ceramic souvenirs, including the peonies and white roses. T
 
 ## 5. Stone contacts and bounces
 
-For stone bases or a bouncing stone lioness. A material contact is more literal than a roar when the object only bounces.
+For stone bases or a bouncing stone lioness. A material contact is more literal than a roar when the
+object only bounces.
 
 | Name and recordist                               | Link                                                                   | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                     |
 | ------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -77,7 +109,8 @@ For stone bases or a bouncing stone lioness. A material contact is more literal 
 
 ## 6. Glass set-downs and contacts on glass
 
-For glass vessels and glass landing surfaces. A glass object on a table and an object on glass are different contacts; the notes keep them separate.
+For glass vessels and glass landing surfaces. A glass object on a table and an object on glass are
+different contacts; the notes keep them separate.
 
 | Name and recordist                                         | Link                                                                         | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                                                                                             |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -87,7 +120,9 @@ For glass vessels and glass landing surfaces. A glass object on a table and an o
 
 ## 7. Gentle crystal or glass tap
 
-For the crystal only where a tiny contact makes sense. Ryan specifically removed the alum crystal’s ding: do not add either recording to alum just because it is available. Neither source is a mineral-crystal recording.
+For the crystal only where a tiny contact makes sense. Ryan specifically removed the alum crystal’s
+ding: do not add either recording to alum just because it is available. Neither source is a
+mineral-crystal recording.
 
 | Name and recordist                                         | Link                                                                       | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                             |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -96,7 +131,9 @@ For the crystal only where a tiny contact makes sense. Ryan specifically removed
 
 ## 8. Seashell contact or soft ding
 
-For the murex shell. Keep one soft opening sound and remove the later clicks. Real shell contacts may be less bell-like than the current ding; do not describe a glass substitute as the sound of a murex.
+For the murex shell. Keep one soft opening sound and remove the later clicks. Real shell contacts
+may be less bell-like than the current ding; do not describe a glass substitute as the sound of a
+murex.
 
 | Name and recordist              | Link                                                                      | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                      |
 | ------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -106,7 +143,9 @@ For the murex shell. Keep one soft opening sound and remove the later clicks. Re
 
 ## 9. Bread or cake set on a plate
 
-No exact unbagged bread-or-cake-on-plate recording was cleared in this search. These are honest substitutes: bread weight, a small food contact, and the plate itself. Use one restrained cue; do not stack all three.
+No exact unbagged bread-or-cake-on-plate recording was cleared in this search. These are honest
+substitutes: bread weight, a small food contact, and the plate itself. Use one restrained cue; do
+not stack all three.
 
 | Name and recordist                                                                              | Link                                                                | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                                                                                                                                                |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -116,7 +155,8 @@ No exact unbagged bread-or-cake-on-plate recording was cleared in this search. T
 
 ## 10. Quiet bicycle freewheel
 
-For the BMX. Remove the bell. Play the mechanical sound only while the wheel is moving, then let it slow and stop.
+For the BMX. Remove the bell. Play the mechanical sound only while the wheel is moving, then let it
+slow and stop.
 
 | Name and recordist                                                     | Link                                                                  | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                                 |
 | ---------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -126,7 +166,9 @@ For the BMX. Remove the bell. Play the mechanical sound only while the wheel is 
 
 ## 11. Desk globe spinning on its stand
 
-The first source directly describes a small globe spun by hand. The second is a weaker globe-motion lead, not a verified stand-spin. Do not replace wind with a squeal or add a constant mechanical drone.
+The first source directly describes a small globe spun by hand. The second is a weaker globe-motion
+lead, not a verified stand-spin. Do not replace wind with a squeal or add a constant mechanical
+drone.
 
 | Name and recordist               | Link                                                                    | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                                                       |
 | -------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -135,7 +177,10 @@ The first source directly describes a small globe spun by hand. The second is a 
 
 ## 12. Lioness low growl or chuff
 
-No candidate below establishes a female lion or a chuff. These are modern-lion leads with explicit limits, not recordings of an extinct cave lion. Prefer the unprocessed source; use a short low call only if the animation warrants an animal voice. For a stone bust that simply bounces, use section 5 instead.
+No candidate below establishes a female lion or a chuff. These are modern-lion leads with explicit
+limits, not recordings of an extinct cave lion. Prefer the unprocessed source; use a short low call
+only if the animation warrants an animal voice. For a stone bust that simply bounces, use section 5
+instead.
 
 | Name and recordist      | Link                                                                | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                                                                                                           |
 | ----------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -145,7 +190,8 @@ No candidate below establishes a female lion or a chuff. These are modern-lion l
 
 ## 13. Fruit and other small food landings
 
-For the orange and physalis; a dull food contact can also be tried for the steak. These are material substitutes, not recordings of those exact foods. Remove twinkle and stretching layers.
+For the orange and physalis; a dull food contact can also be tried for the steak. These are material
+substitutes, not recordings of those exact foods. Remove twinkle and stretching layers.
 
 | Name and recordist                | Link                                                              | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                                           |
 | --------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -154,7 +200,8 @@ For the orange and physalis; a dull food contact can also be tried for the steak
 
 ## 14. Small plastic toy bounce
 
-For the toy T-Rex and plastic souvenirs. Ryan asked for a better bounce sound, not a loud fictional dinosaur roar. Confirm the souvenir elephant’s material before selecting this over wood or ceramic.
+For the toy T-Rex and plastic souvenirs. Ryan asked for a better bounce sound, not a loud fictional
+dinosaur roar. Confirm the souvenir elephant’s material before selecting this over wood or ceramic.
 
 | Name and recordist                   | Link                                                                     | License quoted from sound page                                                       | Full length | Original format   | Download                                        | Notes                                                                                                                                         |
 | ------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ----------- | ----------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -164,7 +211,9 @@ For the toy T-Rex and plastic souvenirs. Ryan asked for a better bounce sound, n
 
 ## 15. Plants, flower vases, and quiet base movement
 
-For sunflower, white roses, bonsai, mushroom, cactus photo 2, cherry blossom, golden maple, peonies, and money tree. Their motion does not require wind, stretching, or twinkle. Choose by the visible base; silence during flight is a valid choice.
+For sunflower, white roses, bonsai, mushroom, cactus photo 2, cherry blossom, golden maple, peonies,
+and money tree. Their motion does not require wind, stretching, or twinkle. Choose by the visible
+base; silence during flight is a valid choice.
 
 | Name and recordist                             | Link                                                                      | License quoted from sound page                                                       | Full length | Original format | Download                                        | Notes                                                                                                                                                                                                       |
 | ---------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -174,38 +223,92 @@ For sunflower, white roses, bonsai, mushroom, cactus photo 2, cherry blossom, go
 
 ## Review decisions that do not need a new recording
 
-- **Heart donut, souvenir turtle, knight on a horse:** keep the sounds Ryan accepted. The verbatim note says “night on the horse.” Do not replace them merely to use a new source.
-- **Sushi boat:** keep the first sound and remove the second beat. A replacement recording is unnecessary unless the lane finds a separate problem.
-- **Monkey doll:** keep the acceptable opening or use one soft bounce; remove the later clicking. **Crochet Earth:** remove twinkle and use one material family for both the tap bounce and a dropped landing, with level scaled to the contact.
-- **Crystal:** make any contact much smaller. **Alum crystal:** remove the ding; silence or a subdued physical contact is the default, not a new bell.
-- **Murex:** one soft initial ding or shell contact, without later clicks. **BMX:** no bell. **Desk globe:** no wind or suction layer.
-- **Cactus photo 2:** keep the musical character Ryan found acceptable, with softer notes and no clicks. **White roses:** a subtle pitched cue is optional, not required. Do not add a chime to every vase.
-- **Seeded bread loaf** (transcribed as “seated”), **stollen, steak, orange, and physalis:** use a tiny weight/contact cue where appropriate. A cake or loaf does not need a zipper, cooking hiss, squelch, or soundtrack.
-- **Sunflower, bonsai, mushroom, cherry blossom, golden maple, peonies, and money tree:** remove the identified stretching, wind, clicking, and twinkle layers. When only the object moves through empty space, silence can solve the complaint better than another effect.
-- **Puffin and cave lioness:** an animal voice needs suitable visible behavior. Ground rules say talking things move their mouths. Do not attach a continuous call to a rigid object that only bounces.
+- **Heart donut, souvenir turtle, knight on a horse:** keep the sounds Ryan accepted. The verbatim
+  note says “night on the horse.” Do not replace them merely to use a new source.
+- **Sushi boat:** keep the first sound and remove the second beat. A replacement recording is
+  unnecessary unless the lane finds a separate problem.
+- **Monkey doll:** keep the acceptable opening or use one soft bounce; remove the later clicking.
+  **Crochet Earth:** remove twinkle and use one material family for both the tap bounce and a
+  dropped landing, with level scaled to the contact.
+- **Crystal:** make any contact much smaller. **Alum crystal:** remove the ding; silence or a
+  subdued physical contact is the default, not a new bell.
+- **Murex:** one soft initial ding or shell contact, without later clicks. **BMX:** no bell. **Desk
+  globe:** no wind or suction layer.
+- **Cactus photo 2:** keep the musical character Ryan found acceptable, with softer notes and no
+  clicks. **White roses:** a subtle pitched cue is optional, not required. Do not add a chime to
+  every vase.
+- **Seeded bread loaf** (transcribed as “seated”), **stollen, steak, orange, and physalis:** use a
+  tiny weight/contact cue where appropriate. A cake or loaf does not need a zipper, cooking hiss,
+  squelch, or soundtrack.
+- **Sunflower, bonsai, mushroom, cherry blossom, golden maple, peonies, and money tree:** remove the
+  identified stretching, wind, clicking, and twinkle layers. When only the object moves through
+  empty space, silence can solve the complaint better than another effect.
+- **Puffin and cave lioness:** an animal voice needs suitable visible behavior. Ground rules say
+  talking things move their mouths. Do not attach a continuous call to a rigid object that only
+  bounces.
 
 ## Rejected leads and remaining gaps
 
-- The search result for the [Smithsonian puffin archive record](https://www.si.edu/object/machias-seal-island-maine-sound-recording%3Asiris_arc_318128) says **“No duplication allowed”**. Its CC0 label is for metadata, not the recording. The live page did not load in the web reader; excluded, not accepted as a cleared sound.
-- [Xeno-canto’s Atlantic puffin page](https://xeno-canto.org/species/Fratercula-arctica) returned an access-denied page. No unseen recording there is treated as license-checked. The two Freesound puffin pages provide very little provenance; the Commons archive is the better-documented fallback.
-- [Lion Growl by LilMati](https://freesound.org/people/LilMati/sounds/516829/) says the lion is **“not real of course”**. [The stratcat322 growl](https://freesound.org/people/stratcat322/sounds/270383/) adds depth and power to the first lion candidate. Both are poor answers to a quieter real-animal brief and are excluded from the candidates. No verified lioness chuff was found.
-- [Antique Globe Spinning](https://freesound.org/people/HandroMyburg/sounds/763544/) is **“Attribution NonCommercial 4.0”** and describes squeaking. [Globe Tap and Spin](https://freesound.org/people/21100449/sounds/594488/) is **“Attribution NonCommercial 3.0”**. Excluded because a direct CC0 globe recording exists. The BY rolling-globe backup still needs an action check.
-- [Dropping a slice bread](https://freesound.org/people/EthanKruger241192/sounds/763298/) is **“Attribution NonCommercial 4.0”** and lands on wood, not a plate. The [BY potato-bread recording](https://freesound.org/people/alexarje/sounds/863257/) records breaking bread, not setting it down. Neither fixes the exact cake-on-plate gap. Do not turn a packaging or plate substitute into an exact-source claim.
-- The [pillow-on-carpet original](https://freesound.org/people/lizellekleynhans/sounds/326167/) now displays **“Attribution NonCommercial 4.0”**, despite a third-party catalog showing CC0. Excluded in favor of the live-page CC0 pillow and carpet candidates. This is why aggregator license labels were not accepted as proof.
-- Custom “royalty-free” store licenses and paid globe recordings were not treated as CC licenses. AI-generated effects were not substituted for requested recordings.
+- The search result for the
+  [Smithsonian puffin archive record](https://www.si.edu/object/machias-seal-island-maine-sound-recording%3Asiris_arc_318128)
+  says **“No duplication allowed”**. Its CC0 label is for metadata, not the recording. The live page
+  did not load in the web reader; excluded, not accepted as a cleared sound.
+- [Xeno-canto’s Atlantic puffin page](https://xeno-canto.org/species/Fratercula-arctica) returned an
+  access-denied page. No unseen recording there is treated as license-checked. The two Freesound
+  puffin pages provide very little provenance; the Commons archive is the better-documented
+  fallback.
+- [Lion Growl by LilMati](https://freesound.org/people/LilMati/sounds/516829/) says the lion is
+  **“not real of course”**.
+  [The stratcat322 growl](https://freesound.org/people/stratcat322/sounds/270383/) adds depth and
+  power to the first lion candidate. Both are poor answers to a quieter real-animal brief and are
+  excluded from the candidates. No verified lioness chuff was found.
+- [Antique Globe Spinning](https://freesound.org/people/HandroMyburg/sounds/763544/) is
+  **“Attribution NonCommercial 4.0”** and describes squeaking.
+  [Globe Tap and Spin](https://freesound.org/people/21100449/sounds/594488/) is **“Attribution
+  NonCommercial 3.0”**. Excluded because a direct CC0 globe recording exists. The BY rolling-globe
+  backup still needs an action check.
+- [Dropping a slice bread](https://freesound.org/people/EthanKruger241192/sounds/763298/) is
+  **“Attribution NonCommercial 4.0”** and lands on wood, not a plate. The
+  [BY potato-bread recording](https://freesound.org/people/alexarje/sounds/863257/) records breaking
+  bread, not setting it down. Neither fixes the exact cake-on-plate gap. Do not turn a packaging or
+  plate substitute into an exact-source claim.
+- The [pillow-on-carpet original](https://freesound.org/people/lizellekleynhans/sounds/326167/) now
+  displays **“Attribution NonCommercial 4.0”**, despite a third-party catalog showing CC0. Excluded
+  in favor of the live-page CC0 pillow and carpet candidates. This is why aggregator license labels
+  were not accepted as proof.
+- Custom “royalty-free” store licenses and paid globe recordings were not treated as CC licenses.
+  AI-generated effects were not substituted for requested recordings.
 
 ## Lane handoff: make the chosen sounds quieter
 
-1. Listen to the originals and verify each proposed excerpt. Reject speech, music, wind, clipping, or an unclear animal identity. Do not invent time ranges before listening.
-2. Cut one physical contact. Give the cut a short fade so it does not click. Keep any rebound shorter and quieter; remove decorative second beats.
-3. Begin well below the old sound level. Compare at a fixed device volume against the accepted heart donut, turtle, and knight sounds. Peak-normalizing every file would erase the intended quietness.
-4. Let contact speed drive gain. Cap overlapping voices and give repeated taps a short retrigger guard so several small contacts do not become a loud burst. A spin should stop sounding when motion stops.
-5. Keep a single material identity across tap, bounce, and drop. Do not add air movement for every animation. Test both headphones and a real phone speaker before asking Ryan to accept the result.
-6. Keep the original page, recordist, license version, download date, original hash, excerpt bounds, and edits. Add the chosen asset to `CREDITS.md`, `tools/assets.json`, and the in-app credit as Ground rules require. Preserve the BY-SA license on an edited archive puffin. No NC file is selected here.
-7. Acquire and package the small edited files at build time. Ship static local assets, not Freesound players, CDN links, credentials, or API calls. Source titles may contain brands; do not carry those into toy labels.
+1. Listen to the originals and verify each proposed excerpt. Reject speech, music, wind, clipping,
+   or an unclear animal identity. Do not invent time ranges before listening.
+2. Cut one physical contact. Give the cut a short fade so it does not click. Keep any rebound
+   shorter and quieter; remove decorative second beats.
+3. Begin well below the old sound level. Compare at a fixed device volume against the accepted heart
+   donut, turtle, and knight sounds. Peak-normalizing every file would erase the intended quietness.
+4. Let contact speed drive gain. Cap overlapping voices and give repeated taps a short retrigger
+   guard so several small contacts do not become a loud burst. A spin should stop sounding when
+   motion stops.
+5. Keep a single material identity across tap, bounce, and drop. Do not add air movement for every
+   animation. Test both headphones and a real phone speaker before asking Ryan to accept the result.
+6. Keep the original page, recordist, license version, download date, original hash, excerpt bounds,
+   and edits. Add the chosen asset to `CREDITS.md`, `tools/assets.json`, and the in-app credit as
+   Ground rules require. Preserve the BY-SA license on an edited archive puffin. No NC file is
+   selected here.
+7. Acquire and package the small edited files at build time. Ship static local assets, not Freesound
+   players, CDN links, credentials, or API calls. Source titles may contain brands; do not carry
+   those into toy labels.
 
 ## Verification limits
 
-Individual pages and license labels were checked directly. The Commons page’s public original link was checked, but its file request returned HTTP 403 in this environment. A completed anonymous download was not verified. Freesound original downloads were not attempted behind login. No audio was auditioned, edited, added to Splashery, or tested in the app. Candidate rankings are a rights-and-fit shortlist for the lane, with the exact-match gaps stated above.
+Individual pages and license labels were checked directly. The Commons page’s public original link
+was checked, but its file request returned HTTP 403 in this environment. A completed anonymous
+download was not verified. Freesound original downloads were not attempted behind login. No audio
+was auditioned, edited, added to Splashery, or tested in the app. Candidate rankings are a
+rights-and-fit shortlist for the lane, with the exact-match gaps stated above.
 
-This Markdown-only report was checked for table structure, candidate counts, American English, formatting, and whitespace. The full repository Playwright suite, whole-repository formatting sweep, screenshots, and phone audio tests were not run. Those omissions are also listed in the draft PR; focused document checks are not a full repository pass.
+This Markdown-only report was checked for table structure, candidate counts, American English,
+formatting, and whitespace. The full repository Playwright suite, whole-repository formatting sweep,
+screenshots, and phone audio tests were not run. Those omissions are also listed in the draft PR;
+focused document checks are not a full repository pass.
