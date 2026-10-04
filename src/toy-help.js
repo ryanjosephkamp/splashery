@@ -354,7 +354,7 @@ export const TOY_HELP = {
 
   // ---- Balls ----------------------------------------------------------------------------
   basketball: {
-    howTo: "Tap it to dribble it, then spin it on a fingertip.",
+    howTo: "Tap it to dribble it. Hands-on: hold it and flick up to spin it on your fingertip.",
     about:
       "A basketball is a bouncy ball with a pebbled skin for grip and dark grooves, called channels, running around it. The game was invented in 1891 by James Naismith, a teacher in Springfield, Massachusetts, who nailed up two peach baskets as the first hoops.\n\nTap it for three fast, low dribbles, then a toss onto the fingertip of a robot hand, where it spins until the hand drops away and it bounces down. A full-size ball is about 75 centimeters (29.5 inches) around. Pick its color in the Toy tab.",
   },
@@ -384,7 +384,7 @@ export const TOY_HELP = {
       "A softball is bigger than a baseball, about 30 centimeters (12 inches) around, and in spite of its name it is not soft. The game was first played indoors in Chicago in 1887, and today it is played all over the world.\n\nIn softball the pitcher throws underhand, swinging the arm down and forward past the hip. Tap it and it is pitched just like that: a swing back and through, then a high, slow arc with a little backspin. It lands with a soft thud, hardly bounces, and a gentler toss brings it back.",
   },
   "beach-ball": {
-    howTo: "Tap it to toss it up and watch it float down.",
+    howTo: "Tap it to toss it up. Hands-on: toss it and it floats and drifts down.",
     about:
       "A beach ball is a thin plastic ball blown up with air, usually with bright stripes of color. It weighs so little for its size that the air slows it down almost at once, which makes it easy and safe to play with.\n\nTap it and it is punched up: it rises, slows, then floats down slowly, drifting and turning lazily, lands softly with a wobble and bobs to a stop. Pick its three colors in the Toy tab. Air pushes on every ball as it moves, but a light, big ball like this one feels it the most.",
   },
@@ -404,7 +404,7 @@ export const TOY_HELP = {
       "A volleyball is a light ball of smooth leather panels. Volleyball was invented in 1895 by William G. Morgan, a teacher in Holyoke, Massachusetts. Each team may touch the ball three times before sending it back over the net.\n\nTap it for a set and a spike, the classic attack: a soft touch sends it straight up without spin, then a spike drives it down hard with topspin, so it slams into the floor, kicks up high and bounces out. Pick its two colors in the Toy tab.",
   },
   "water-polo-ball": {
-    howTo: "Tap it to toss it into the water and watch it bob.",
+    howTo: "Tap it to toss it in. Hands-on: drop it on the water and it bobs and floats.",
     about:
       "Water polo is a team game played in a swimming pool, often in water too deep to stand in, so the players tread water the whole time. Its ball is about the size of a soccer ball, with a grippy, bumpy rubber skin so it can be held in one wet hand.\n\nTap it and it is tossed up and plunges into the water with a splash. Because it is full of air it pops straight back up, then bobs on the surface, sending out rings of ripples that spread and fade.",
   },
@@ -941,7 +941,7 @@ export const TOY_HELP = {
       "A lava lamp is a glass bottle of liquid with blobs of colored wax inside, and a lamp in its base. When the wax is cool it is a little heavier than the liquid and rests at the bottom. The lamp warms it, the wax spreads out and gets lighter, and a blob rises; at the top it cools and sinks again.\n\nTap it to heat it up: the blobs move much faster, the wax glows and shifts color, and the liquid brightens, then it all eases back. In the Toy tab, pick a color set or your own colors, how many blobs, their size and shape, how fast they flow, and a glow from within.",
   },
   "snow-globe": {
-    howTo: "Tap it to shake the globe and swirl the snow.",
+    howTo: "Tap it to swirl the snow. Hands-on: pick it up and shake it hard.",
     about:
       "A snow globe is a glass ball filled with water, with a little winter scene inside and white flakes that settle on the ground. Shake it and the flakes swirl up, then drift down slowly, because the water holds them back, like snow on a calm day.\n\nThis one holds a snowman with a hat, a scarf and a carrot nose, next to a snowy fir tree, and gentle snow falls all the time. Tap it to shake the globe: it wobbles, the snow swirls up and around, then settles. You can pick the color of the base in the Toy tab.",
   },
@@ -1371,7 +1371,7 @@ export const TOY_HELP = {
       "A jellyfish is a soft sea animal with no brain, no heart and no bones; its body is mostly water. It swims by squeezing its bell-shaped body, which pushes water out behind it, and it trails long tentacles armed with tiny stingers to catch its food. Jellyfish have drifted in the oceans for more than 500 million years.\n\nTap it and one strong stroke squeezes the bell and jets it up, trailing its glowing tentacles, then it drifts slowly back down. Pick a moon jelly, a sea nettle or a blue one in the Toy tab.",
   },
   "fish-school": {
-    howTo: "Tap it: the school swirls into a ball, bursts apart and swims back.",
+    howTo: "Tap it for a bait ball. Hands-on: drag through the school and the fish dart away.",
     about:
       "A school is a big group of fish swimming together, all turning at once. Each fish keeps pace with its neighbors by watching them and by feeling the water move along a line of special sense organs down its sides. Being one of many makes it much harder for a hunter to pick out any single fish.\n\nThese 48 fish each swim on their own. Tap it and the school tightens into a spinning bait ball, the shape small fish make when a hunter comes near, then bursts outward in every direction and swims back into place. Pick silver or tropical fish in the Toy tab.",
   },
@@ -1850,7 +1850,7 @@ export const TOY_HELP = {
       "An ocean liner is a big passenger ship that sailed on a regular route, or line, across an ocean. Before airliners, liners were the way to cross the Atlantic, and the fastest took about five days. The largest carried thousands of people, with dining rooms, lounges and decks for walking.\n\nThe liner rocks gently on the waves, smoke drifting from its funnels. Tap it to sound the horn: steam blasts from the horn and the funnels smoke harder. Pick the color of the funnels in the Toy tab. A ship's horn is deep and loud so that other ships can hear it from miles away, even in fog.",
   },
   "sports-car": {
-    howTo: "Tap it to rev the engine.",
+    howTo: "Tap it to rev the engine. Hands-on: push it and it rolls on its wheels.",
     about:
       "A sports car is a small, light car with a powerful engine, built for speed and for taking corners well. It sits low to the ground, which helps it stay steady, and the wing on its back works like an upside-down airplane wing: at speed, the air pushes the car down onto the road, so its tires grip better.\n\nTap it to rev the engine: the car rocks on its springs, the wheels spin and a puff of exhaust shoots out of the back. In the Toy tab, pick its color and turn its racing stripes on or off.",
   },

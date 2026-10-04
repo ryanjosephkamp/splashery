@@ -40,26 +40,26 @@ Proposals below are suggestions; the owner may change them.
   Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
   tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
   Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Storm cloud, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
-  Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
-  bear, Pretzel, Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple,
-  Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Spring toy,
-  Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
-  knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
-  Fourier circles, Pythagoras proof, Splat equation, Storybook, Fountain pen, Water bottle, Soda
-  can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield, Bow and target, Crown,
-  Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea
-  urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare
-  drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
-  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument,
-  Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa,
-  Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
+  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
+  Donut, Gummy bear, Pretzel, Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
+  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube,
+  Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
+  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
+  and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Fountain pen, Water
+  bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield, Bow and target,
+  Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
+  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic
+  guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic
+  keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel
+  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
+  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda,
+  Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent
+  network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting,
+  Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine,
+  Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model
+  to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -482,7 +482,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6a: a dribble: three fast, low bounces, each pushed back down by an unseen hand; then
     a toss onto the fingertip of a jointed robot hand that comes up from below, its finger
     straightening to catch it; it spins there with a slight wobble; it drops off as the hand drops
-    away and bounces lower each time, still spinning down (4.8 s).
+    away and bounces lower each time, still spinning down (4.8 s). Hands engine A: in Hands-on it
+    has a basketball's own bounce (about 0.8 of its speed kept) and grip; hold it and flick up and
+    it hops onto your fingertip and spins there with a slight wobble, and keeps spinning when you
+    let go.
   - Sound: Hollow basketball boing.
 - **Soccer ball** (`soccer-ball`). Now: tap: Keepy-uppy. Plan: keep.
   - Fixed: C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side
@@ -533,7 +536,9 @@ Proposals below are suggestions; the owner may change them.
 - **Beach ball** (`beach-ball`). Now: tap: Toss it up. Plan: keep.
   - Effect: Floats up slowly, drifts and bobs down.
   - Improved: E6a: punched up, the air slows it at once; it floats down slowly, drifting and turning
-    lazily, lands soft with a wobble and bobs to a stop (2.9 s).
+    lazily, lands soft with a wobble and bobs to a stop (2.9 s). Hands engine A: in Hands-on it is
+    light and big (a 60 cm inflatable of 60 g): the air holds it up, it drifts sideways and turns
+    lazily as it falls, and lands soft.
   - Sound: A real plastic beach-ball bounce each time it lands (no boing), and a light slap as it's
     punched up.
 - **Golf ball** (`golf-ball`). Now: tap: Chip it. Plan: keep.
@@ -556,7 +561,9 @@ Proposals below are suggestions; the owner may change them.
 - **Water polo ball** (`water-polo-ball`). Now: tap: Toss it in. Plan: keep.
   - Effect: Bobs on an invisible water line with ripples.
   - Improved: E6a: tossed up, it plunges into the water with a splash, pops back up and bobs on the
-    water line, sending out ripples that spread and fade (3.1 s).
+    water line, sending out ripples that spread and fade (3.1 s). Hands engine A: in Hands-on it
+    floats on a pool, a third under water; dropped in, it plunges, pops up and bobs two or three
+    times to rest.
   - Sound: Splash.
 - **Ping-pong ball** (`ping-pong-ball`). Now: tap: Drop it. Plan: keep.
   - Effect: Rapid tiny bounces getting faster.
@@ -730,6 +737,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Only the gloops and bubbles (the rising hum is gone).
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands engine A: in Hands-on, pick it up and shake it back and forth: each shake swirls
+    the snow, more the harder you shake.
   - Sound: The water sloshing as it is shaken, then the twinkle (no rattle of clicks).
 - **Volcano** (`volcano`). Now: tap: Erupt. Plan: keep.
   - Owner: Basically perfect.
@@ -2048,7 +2057,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The school swirls into a bait ball and scatters.
   - Improved: E6: each fish is now its own piece (48 fish). A tap: the school tightens into a
     spinning bait ball, bursts outwards head first in every direction as if something struck at it,
-    and swims back into place (5 s).
+    and swims back into place (5 s). Hands engine A: in Hands-on a drag through the school sends the
+    fish near your finger darting away head first; each swims back to its place.
   - Sound: Water swishes and bursts, with bubbles.
 - **Butterfly** (`butterfly`). Now: tap: Flutter. Plan: keep.
   - Owner: Perfect.
@@ -2275,6 +2285,8 @@ Proposals below are suggestions; the owner may change them.
 - **Sports car** (`sports-car`). Now: tap: Rev the engine. Plan: keep.
   - Owner: Looks really good.
   - Fixed: C1: the home camera comes closer.
+  - Improved: Hands engine A: in Hands-on a drag pushes it: it rolls on, gripping sideways, its
+    wheels turning by the distance rolled, and coasts to a stop; ↺ rolls it home.
   - Sound: The same real rev, now fading out with the exhaust (gone at 1.8 s) (Sound C, October 2,
     2026).
 - **Bus** (`bus`). Now: tap: Stop for passengers. Plan: keep.
