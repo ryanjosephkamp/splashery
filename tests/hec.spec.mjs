@@ -233,6 +233,11 @@ test("on its side or upside down, the soft parts hang toward the world's down an
           const s = Math.SQRT1_2;
           const q = turn === "side" ? [0, 0, s, s] : [1, 0, 0, 0];
           player.stage.setToyPose({ pivot: player.toyInfo.center, q, t: [0, 0, 0] });
+          // Where the soft parts rest before any touch (Reset brings them back there).
+          player.handsOn.ensure();
+          const rest = player.handsOn
+            .state()
+            .soft.strands.map((x) => x.nodes.map((p) => p.slice()));
           // Nudge it so the soft parts wake, then let go and watch.
           h.drag(grab, h.line(grab, to, 8));
           const st = h.run(4).soft;
@@ -249,7 +254,7 @@ test("on its side or upside down, the soft parts hang toward the world's down an
           player.handsOn.reset();
           // Right after the glide home (the kite's wind moves it on at once).
           const home = h.run(0.5).soft;
-          const back = home.strands.every((x) => x.nodes.every((p, i) => Math.hypot(...p.map((v, k) => v - x.home[i][k])) < 0.02)); // prettier-ignore
+          const back = home.strands.every((x, n) => x.nodes.every((p, i) => Math.hypot(...p.map((v, k) => v - rest[n][i][k])) < 0.02)); // prettier-ignore
           player.stage.setToyPose(null);
           return { finite, along, back };
         },

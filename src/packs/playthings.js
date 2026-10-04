@@ -917,8 +917,29 @@ YO.seg = YO.max / YO.K;
 // and the yo-yo riding the end. Pulled down, the string pays out; let go
 // below its rest, the yo-yo drops to the end of the string, spins there a
 // moment and climbs back, spinning all the while.
-const YH = { L: YO.rest, v: 0, phase: "rest", t: 0, spin: 0, touched: false, calm: -1e9 };
-const YO_NODES = Array.from({ length: YO.K + 1 }, (_, j) => [0, YO.top - (j * YO.rest) / YO.K, 0]); // prettier-ignore
+const YH = { L: YO.rest, v: 0, phase: "rest", t: 0, spin: 0, touched: false, calm: -1e9, sorted: -1 }; // prettier-ignore
+// The string's nodes: one at the top of each string segment as it was built
+// (so each segment hangs from its own node), and the last at the yo-yo's
+// middle. The string ends at the yo-yo's rim: the last link runs from just
+// above the rim (one segment's length) down to the middle, inside the
+// yo-yo, so no string ever shows across the yo-yo's face.
+YO.rim = 0.35; // just inside the yo-yo's rim (0.41): the string goes in between the halves
+YO.segLen = YO.seg * 1.08; // as built
+YO.last = YO.rim + YO.segLen;
+const YO_NODES = [...Array.from({ length: YO.K }, (_, j) => [0, YO.top - j * YO.seg, 0]), [0, YO.top - YO.rest, 0]]; // prettier-ignore
+// How far node i's line toward node j has swung in the yo-yo's own plane
+// (about z, from hanging straight down). The string and the yo-yo turn by
+// it alone: tiny links between bunched-up nodes can't point anywhere.
+const yoyoSwing = (i, j) => (strand, soft) => {
+  const a = soft.nodes[strand.first + i].x;
+  const b = soft.nodes[strand.first + j].x;
+  return Math.atan2(b[0] - a[0], a[1] - b[1]);
+};
+// Where they rest (the string at its rest length).
+const yoyoAt = (L) => {
+  const d = Math.max(0, L - YO.last) / (YO.K - 1);
+  return [...Array.from({ length: YO.K }, (_, j) => [0, YO.top - j * d, 0]), [0, YO.top - L, 0]];
+};
 function yoyoReel(strand, dt, soft) {
   const held = soft.hold?.node?.strand === strand;
   const top = YO_NODES[0];
@@ -945,7 +966,16 @@ function yoyoReel(strand, dt, soft) {
     if (e >= 1) YH.phase = "rest";
   }
   YH.spin += Math.abs(YH.L - L0) / 0.06;
-  strand.scale = YH.L / YO.rest;
+  // The links: the string's share the length above the rim; the last runs
+  // from the last segment's top to the yo-yo's middle.
+  const main = strand.links.filter((l) => l.main);
+  main.forEach((l, i) => (l.L = i < main.length - 1 ? Math.max(0, YH.L - YO.last) / (YO.K - 1) : YO.last)); // prettier-ignore
+  // The finger never pulls it further than the string reaches.
+  if (held) {
+    const d = soft.hold.target.map((v, i) => v - top[i]);
+    const l = Math.hypot(...d);
+    if (l > YH.L) soft.hold.target = top.map((v, i) => v + (d[i] * YH.L) / l);
+  }
   YH.touched = true;
 }
 
@@ -2214,24 +2244,30 @@ export const RECIPES = {
         {
           name: "string",
           points: YO_NODES,
+          start: yoyoAt(YO.rest),
           mass: YO_NODES.map((_, j) => (j === YO.K ? 2 : 0.5)),
           grab: [YO.K],
           pick: 0.45,
-          reach: 1.15,
-          bend: 0.05,
+          reach: 50, // yoyoReel keeps the finger within the string's length
+          bend: 0,
           drag: 0.8,
           update: yoyoReel,
           reset: () => Object.assign(YH, { L: YO.rest, v: 0, phase: "rest", t: 0, spin: 0 }),
           pieces: [
-            ...Array.from({ length: YO.K }, (_, j) => ({ part: "s" + j, from: j, at: [0, YO.top - j * YO.seg, 0] })), // prettier-ignore
-            { part: "yoyo", node: YO.K, spin: () => -YH.spin, axis: [0, 0, 1] },
+            ...Array.from({ length: YO.K }, (_, j) => ({ part: "s" + j, node: j, turn: false, spin: yoyoSwing(j, YO.K), axis: [0, 0, 1] })), // prettier-ignore
+            { part: "yoyo", node: YO.K, turn: false, spin: (st, sp) => yoyoSwing(YO.K - 1, YO.K)(st, sp) - YH.spin, axis: [0, 0, 1] }, // prettier-ignore
           ],
         },
       ],
     },
     drive(t, c, out, info) {
       // The idle bob eases back in after Hands-on play.
-      if (YH.touched) [YH.touched, YH.calm] = [false, info.time];
+      if (YH.touched) {
+        [YH.touched, YH.calm] = [false, info.time];
+        // The string's splats sort where they are now (they were built at
+        // full length), so it never draws over the yo-yo.
+        if (info.time - YH.sorted > 0.2) [out.resortPose, YH.sorted] = [true, info.time];
+      }
       const calm = Math.min(1, Math.max(0, (info.time - YH.calm - 0.3) / 1.5));
       const idle = YO.rest + 0.12 * calm * Math.sin(t * 2.4);
       const p = 1 - c.throw;
@@ -2299,7 +2335,7 @@ export const RECIPES = {
       // The string: segments that slide over each other as it pays out.
       for (let j = 0; j < YO.K; j++) {
         const part = k.part("s" + j, { pivot: [0, 0, 0] });
-        k.add(evenCylinder(0.008, 0.008, YO.seg * 1.3, false), {
+        k.add(evenCylinder(0.008, 0.008, YO.seg * 1.08, false), {
           even: true,
           opacity: 1,
           pos: [0, top - (j + 0.5) * YO.seg, 0],
