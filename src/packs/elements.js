@@ -1645,11 +1645,18 @@ export const RECIPES = {
     options: [{ key: "base", label: "Base", type: "color", default: "#8a2a1e" }],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 3.5 }],
     action: { key: "shake", label: "Shake the globe" },
-    drive(t, c, out) {
-      const s = c.shake;
+    // Hands-on (lane Hands engine A): pick it up and shake it; the harder the
+    // shake, the more snow swirls, and the snow sloshes behind the globe as
+    // it moves (always inside the glass: the swirl is drawn in a little and
+    // sloshes only across, at most 0.05).
+    hands: { shake: true, slosh: 0.05 },
+    drive(t, c, out, info) {
+      const s = Math.max(c.shake, info.hands?.shake ?? 0);
+      const sl = info.hands?.slosh || [0, 0, 0];
       out.parts.swirl = {
         quat: quatAxisAngle([0, 1, 0], t * 2.4),
-        offset: [0, 0.03 * Math.sin(t * 3), 0],
+        offset: [sl[0], 0.03 * Math.sin(t * 3), sl[2]],
+        scale: 0.92,
         visible: smoothstep(0, 0.25, s),
       };
       const wob = s * s * Math.sin(t * 22);
@@ -1677,19 +1684,24 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          // (No color noise and no inside fill: the fill showed through the
+          // wall as dark, grainy specks. Lane Hands engine A, the owner's
+          // note of October 4, 2026.)
+          jitter: 0,
           // (Slightly larger splats: the base's underside let the snow
           // inside show through faintly. Lane Sharpness B.)
           size: 1.12,
           flat: 0.2,
-          interior: 0.06,
-          core: shade(o.base, 0.6),
+          interior: 0,
           color: (c) => {
             const y = c.p[1];
+            // A splat whose normal points inward is lit as the outside is:
+            // lit from behind, those were dark, grainy specks.
+            const n = c.n[0] * c.p[0] + c.n[2] * c.p[2] < 0 ? [-c.n[0], -c.n[1], -c.n[2]] : c.n;
             if (y > -0.3 && y < -0.24)
-              return lit(mix("#c8a040", "#f0d070", Math.max(0, c.n[2])), c.n, 0.4);
-            const hi = Math.pow(Math.max(0, dot(c.n, unit([-0.3, 0.6, 0.75]))), 12);
-            return mix(lit(o.base, c.n, 0.45), "#ffffff", 0.3 * hi);
+              return lit(mix("#c8a040", "#f0d070", Math.max(0, n[2])), n, 0.4);
+            const hi = Math.pow(Math.max(0, dot(n, unit([-0.3, 0.6, 0.75]))), 12);
+            return mix(lit(o.base, n, 0.45), "#ffffff", 0.3 * hi);
           },
         },
       );
@@ -1839,8 +1851,10 @@ export const RECIPES = {
       });
       // Snow swirling about after a shake.
       const swirl = k.part("swirl", { pivot: G });
+      const flakes = [];
+      k.data = { flakes, G, RG, floor }; // (for the Hands-on test)
       k.cloud({ share: 0.035, size: 0.55, pattern: false }, (r) => ({
-        p: inside(r),
+        p: flakes[flakes.push(inside(r)) - 1],
         color: "#ffffff",
         opacity: 0.95,
         kind: "twinkle",

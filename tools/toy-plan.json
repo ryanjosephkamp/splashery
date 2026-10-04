@@ -276,7 +276,7 @@
       "effect": "Dribble: fast low bounces, then a spin on a fingertip.",
       "sound": "Hollow basketball boing.",
       "fixed": "C1: pebbled rubber (embossed bumps lit from one side), clean black channels in small splats, even splat placement.",
-      "improved": "E6a: a dribble: three fast, low bounces, each pushed back down by an unseen hand; then a toss onto the fingertip of a jointed robot hand that comes up from below, its finger straightening to catch it; it spins there with a slight wobble; it drops off as the hand drops away and bounces lower each time, still spinning down (4.8 s)."
+      "improved": "E6a: a dribble: three fast, low bounces, each pushed back down by an unseen hand; then a toss onto the fingertip of a jointed robot hand that comes up from below, its finger straightening to catch it; it spins there with a slight wobble; it drops off as the hand drops away and bounces lower each time, still spinning down (4.8 s). Hands engine A: in Hands-on it has a basketball's own bounce (about 0.8 of its speed kept) and grip; hold it and flick up and it hops onto your fingertip and spins there with a slight wobble, and keeps spinning when you let go."
     },
     "soccer-ball": {
       "v": "keep",
@@ -319,7 +319,7 @@
       "v": "keep",
       "effect": "Floats up slowly, drifts and bobs down.",
       "sound": "A real plastic beach-ball bounce each time it lands (no boing), and a light slap as it's punched up.",
-      "improved": "E6a: punched up, the air slows it at once; it floats down slowly, drifting and turning lazily, lands soft with a wobble and bobs to a stop (2.9 s)."
+      "improved": "E6a: punched up, the air slows it at once; it floats down slowly, drifting and turning lazily, lands soft with a wobble and bobs to a stop (2.9 s). Hands engine A: in Hands-on it is light and big (a 60 cm inflatable of 60 g): the air holds it up, it drifts sideways and turns lazily as it falls, and lands soft."
     },
     "golf-ball": {
       "v": "keep",
@@ -345,7 +345,7 @@
       "v": "keep",
       "effect": "Bobs on an invisible water line with ripples.",
       "sound": "Splash.",
-      "improved": "E6a: tossed up, it plunges into the water with a splash, pops back up and bobs on the water line, sending out ripples that spread and fade (3.1 s)."
+      "improved": "E6a: tossed up, it plunges into the water with a splash, pops back up and bobs on the water line, sending out ripples that spread and fade (3.1 s). Hands engine A: in Hands-on it floats on a pool, a third under water; dropped in, it plunges, pops up and bobs two or three times to rest."
     },
     "ping-pong-ball": {
       "v": "keep",
@@ -506,7 +506,8 @@
     "snow-globe": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "The water sloshing as it is shaken, then the twinkle (no rattle of clicks)."
+      "sound": "The water sloshing as it is shaken, then the twinkle (no rattle of clicks).",
+      "improved": "Hands engine A: in Hands-on, pick it up and shake it back and forth: each shake swirls the snow, more the harder you shake."
     },
     "volcano": {
       "v": "keep",
@@ -1586,7 +1587,7 @@
       "owner": "Swim around more dynamically, like a swarm.",
       "effect": "The school swirls into a bait ball and scatters.",
       "sound": "Water swishes and bursts, with bubbles.",
-      "improved": "E6: each fish is now its own piece (48 fish). A tap: the school tightens into a spinning bait ball, bursts outwards head first in every direction as if something struck at it, and swims back into place (5 s)."
+      "improved": "E6: each fish is now its own piece (48 fish). A tap: the school tightens into a spinning bait ball, bursts outwards head first in every direction as if something struck at it, and swims back into place (5 s). Hands engine A: in Hands-on a drag through the school sends the fish near your finger darting away head first; each swims back to its place."
     },
     "butterfly": {
       "v": "keep",
@@ -1792,7 +1793,8 @@
       "v": "keep",
       "fixed": "C1: the home camera comes closer.",
       "owner": "Looks really good.",
-      "sound": "The same real rev, now fading out with the exhaust (gone at 1.8 s) (Sound C, October 2, 2026)."
+      "sound": "The same real rev, now fading out with the exhaust (gone at 1.8 s) (Sound C, October 2, 2026).",
+      "improved": "Hands engine A: in Hands-on a drag pushes it: it rolls on, gripping sideways, its wheels turning by the distance rolled, and coasts to a stop; ↺ rolls it home."
     },
     "bus": {
       "v": "keep",
