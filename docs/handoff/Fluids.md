@@ -21,6 +21,11 @@ Later, as the owner said: a liquid vortex, a tornado and dripping syrup.
 
 ## r7 (October 4, 2026): the Fluid lab on a phone
 
+**State (October 4, 2026, Sonnet 5.5):** PR #252 (draft). Items 1 to 6 are built and measured
+(docs/FLUIDS.md, "r7"); item 7 (clips, lane record `FluidsR7`) is below. The recovery and the
+envelope are in `src/fluids/phone.js` and `FluidRuntime`; hooks in `src/stage.js`
+(`setFluidPixelCap`, `hookProjector`) and `src/player.js` (two arguments to `FluidRuntime`).
+
 **Start here.** Model: **Sonnet 5.5**, by the owner's word of October 4, 2026 ("Fluids Sonnet"), as
 a test of how far Sonnet goes on engine work. The Operator (Opus 5.5) reviews the code and the
 measurements before merge, and the owner judges the clips. Branch `claude/lane-fluids-r7`, one PR
