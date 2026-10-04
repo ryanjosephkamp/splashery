@@ -7,6 +7,7 @@ import * as pc from "../../pc.js";
 import { GpuMpm, packColliders } from "./mpm.js";
 import { LIQUIDS, unit3 } from "../sim.js";
 import { GpuDiffuse } from "./diffuse.js";
+import { PHONE_ENV } from "../phone.js";
 
 // Cell size (recipe units, for a recipe unit of 0.33 m) and the most
 // substeps a frame may take, per tier. The particle spacing is half a cell
@@ -91,12 +92,16 @@ function domainOf(spec) {
 }
 
 export class GpuLiquid {
-  constructor(recipeSpec, { device, profile = "high", gravity, seed = 1, unit = 0.1 }) {
+  constructor(
+    recipeSpec,
+    { device, profile = "high", gravity, seed = 1, unit = 0.1, phone = false },
+  ) {
     // A recipe's `gpu` settings override the rest on this solver (a pool,
     // ball or wall friction sized for its finer grid); the CPU keeps the rest.
     const spec = recipeSpec.gpu ? { ...recipeSpec, ...recipeSpec.gpu } : recipeSpec;
     const preset = LIQUIDS[spec.preset] || LIQUIDS.water;
-    const tier = GPU_TIERS[profile] || GPU_TIERS.high;
+    // (r7: the phone envelope swaps in a smaller cell count and particle cap)
+    const tier = { ...(GPU_TIERS[profile] || GPU_TIERS.high), ...(phone ? PHONE_ENV.gpu : null) };
     this.spec = spec;
     this.preset = preset;
     this.kind = "liquid";

@@ -48,7 +48,11 @@ function packProp(s, angles) {
 export class GpuFluids {
   // world: the FluidWorld (null when it runs in the worker); specs: the
   // recipe's fluid specs; glass: draw the glass (the GPU liquid path only).
-  constructor(stage, world, { transform, profile = "high", specs = [], glass = true } = {}) {
+  constructor(
+    stage,
+    world,
+    { transform, profile = "high", specs = [], glass = true, phone = false } = {},
+  ) {
     this.stage = stage;
     this.world = world;
     this.specs = specs;
@@ -60,13 +64,10 @@ export class GpuFluids {
     this.light = { want: 1, now: 0, t: 0 };
     if (this.props) this.props.drawn = true;
     this.angles = {};
-    this.gas = specs.some((s) => s.kind === "gas" || s.kind === "flame") ? new GasScene(stage.device, specs, { profile }) : null; // prettier-ignore
+    this.gas = specs.some((s) => s.kind === "gas" || s.kind === "flame") ? new GasScene(stage.device, specs, { profile, phone }) : null; // prettier-ignore
     this.transform = transform || { center: [0, 0, 0], scale: 1 };
     const scale =
       profile === "low" ? 0.35 : profile === "mid" ? 0.4 : profile === "max" ? 0.75 : 0.6;
-    // Phones step themselves down if their frames still run long (watch()).
-    this.phone = profile === "low" || profile === "mid";
-    this.watchState = { last: 0, ema: 16, slow: 0, steps: 0 };
     this.surface = new FluidSurface(stage.device, { scale });
     this.onPost = () => this.render();
     stage.app.on("postrender", this.onPost);
@@ -108,25 +109,17 @@ export class GpuFluids {
     return toy ? new pc.Mat4().mul2(toy.getWorldTransform(), fit) : fit;
   }
 
-  // On a phone, frames that keep running long (over 24 ms for a second and
-  // a half) step the fluid down: fewer substeps (it runs a little slower
-  // instead of lagging) and a coarser surface, up to three times.
-  watch() {
-    const w = this.watchState;
-    const now = performance.now();
-    const dt = w.last ? now - w.last : 16;
-    w.last = now;
-    if (!this.phone || dt > 250 || w.steps >= 3) return;
-    w.ema += (dt - w.ema) * 0.1;
-    w.slow = w.ema > 24 ? w.slow + dt : 0;
-    if (w.slow < 1500) return;
-    w.slow = 0;
-    w.ema = 16;
-    w.steps++;
-    const liq = this.liquid();
-    if (liq) liq.maxSub = Math.max(6, Math.floor(liq.maxSub * 0.75));
+  // Slow frames on a phone (r7): the runtime's watcher (runtime.js, watch())
+  // asks for a lower drawing cost: a coarser surface and fewer gas steps;
+  // `more` also takes fewer substeps (the liquid then runs a little slower
+  // instead of lagging).
+  lower(more = false) {
     this.surface.scale = Math.max(0.28, this.surface.scale * 0.85);
     if (this.gas) this.gas.steps = Math.max(12, Math.floor(this.gas.steps * 0.8));
+    if (more) {
+      const liq = this.liquid();
+      if (liq) liq.maxSub = Math.max(6, Math.floor(liq.maxSub * 0.75));
+    }
   }
 
   // A thin liquid's flat top in a glass (r6): the pool's level, smoothed
@@ -143,7 +136,6 @@ export class GpuFluids {
 
   render() {
     if (!this.enabled || !this.stage.toy) return;
-    this.watch();
     const liq = this.liquid();
     const surf = this.surface;
     const p = surf.params;

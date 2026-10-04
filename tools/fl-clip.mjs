@@ -30,6 +30,8 @@ const list = clips.length ? clips : ALL;
 const STEP = 1 / Number(opt("fps", 15));
 const WIDTH = Number(opt("width", 360));
 const PROFILE = opt("profile", "mid");
+// The small label on every frame (r7: --label="built by Sonnet 5.5 · after").
+const LABEL = opt("label", "built by Opus 5.5");
 // The canvas's pixel-ratio cap: 3, the mid tier's cap once PR #118 lands.
 const RATIO = Number(opt("ratio", 3));
 // The renderer (webgl2 or webgpu) and, for experiments, a module to install
@@ -80,12 +82,15 @@ function shrink(png, w) {
 async function record(clip) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 }); // prettier-ignore
   page.on("pageerror", (e) => console.error("page error:", e.message));
-  await page.goto(`${base}?renderer=${RENDERER}&adapt=off&profile=${PROFILE}&labs=1`);
+  await page.goto(`${base}?renderer=${RENDERER}&adapt=off&profile=${PROFILE}&labs=1&watch=off`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
   const run = (fn, arg) => page.evaluate(fn, arg);
   // The stage's update handlers run only with the time this script gives.
-  await run((ratio) => (window.__flRatio = ratio), RATIO);
+  await run(
+    ([ratio, label]) => ((window.__flRatio = ratio), (window.__flLabel = label)),
+    [RATIO, LABEL],
+  );
   await run(() => {
     const { player } = window.__splashery;
     const stage = player.stage;
@@ -101,7 +106,7 @@ async function record(clip) {
     player.idle.weight = 0;
     player.stage.setPixelRatio(window.__flRatio);
     const tag = document.createElement("div");
-    tag.textContent = "Fluid lab · built by Opus 5.5";
+    tag.textContent = `Fluid lab · ${window.__flLabel}`;
     tag.style.cssText =
       "position:fixed;left:10px;bottom:10px;z-index:99;font:600 12px system-ui;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:6px;pointer-events:none"; // prettier-ignore
     document.body.appendChild(tag);
@@ -171,6 +176,8 @@ async function record(clip) {
       const pc = await import("/src/pc.js");
       const { app, player } = window.__splashery;
       const stage = player.stage;
+      // (WebGL2 has no GPU fluids to place the handle: its tap is the app's own)
+      if (!player.fluids.fx?.toyToWorld) return void player.act(null);
       const m = player.fluids.fx.toyToWorld();
       const s = stage.cameraEntity.camera.worldToScreen(m.transformPoint(new pc.Vec3(0.14, 1.97, 0.06))); // prettier-ignore
       const r = stage.app.graphicsDevice.canvas.getBoundingClientRect();

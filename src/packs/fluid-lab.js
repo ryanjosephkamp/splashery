@@ -14,6 +14,7 @@
 // motion, not a validated scientific solver.
 
 import { mix, shade } from "../kit.js";
+import { PHONE_ENV, HINT, envelopeOn, isPhone } from "../fluids/phone.js";
 
 const UNIT = 0.33;
 const TAP_SECS = 5;
@@ -46,8 +47,8 @@ function wood(c) {
 
 // A glass, drawn by the fluid engine (kind "vessel"): clear where you look
 // straight through it and bright toward its edges, as real glass is.
-function glass(k, g, budget = 9000) {
-  k.fluid({ name: "glass", kind: "vessel", shape: g, budget, color: "#dcedf5" });
+function glass(k, g, budget = 9000, phone = undefined) {
+  k.fluid({ name: "glass", kind: "vessel", shape: g, budget, color: "#dcedf5", phone });
   k.reach([g.at[0] + g.radius + g.wall, g.at[1] + g.height, g.at[2] + g.radius + g.wall]);
   k.reach([g.at[0] - g.radius - g.wall, g.at[1], g.at[2] - g.radius - g.wall]);
 }
@@ -117,6 +118,7 @@ function glassScene(k, o) {
     unit: UNIT,
     spacing: 0.052,
     budget: 1200,
+    phone: { scale: PHONE_ENV.cpuScale }, // r7: CPU cap 270; the spacing grows by the cube root of 2
     colliders: [GLASS, { type: "floor", y: 0 }],
     fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.3 } },
     // (r6, the GPU's lava: a thin cooled floor, so what pours piles up on top
@@ -143,7 +145,7 @@ function splashScene(k, o) {
   // splats alone leave gaps)
   k.add(k.cylinder(0.82, 0.02), { pos: [0, -0.012, 0], color: wood, even: true, part: stand });
   const traced = props(k, [{ type: "cyl", a: [0, -0.06, 0], b: [0, 0, 0], r: 1.05, look: "wood" }]);
-  glass(k, BASIN, 12000);
+  glass(k, BASIN, 12000, { scale: PHONE_ENV.cpuScale }); // (r7: a phone halves the CPU vessel; the liquid keeps its pool)
   k.fluid({
     name: "liquid",
     kind: "liquid",
@@ -322,7 +324,19 @@ export const RECIPES = {
     turntable: false,
     // The props need fewer splats than a toy's whole budget; the rest is left
     // for drawing the fluid.
-    density: 0.75,
+    // (r7: a third of that on a phone)
+    get density() {
+      return envelopeOn() ? PHONE_ENV.density : 0.75;
+    },
+    // r7: the lab's own canvas cap on a phone; a deliberate High or Max
+    // Detail keeps the tier's.
+    get render() {
+      return envelopeOn() ? { dpr: PHONE_ENV.dpr } : undefined;
+    },
+    // r7: on a phone, the hint shows beside Scene and Liquid.
+    get note() {
+      return isPhone() ? HINT : "";
+    },
     // Lab: the sharper splat edge (labs only, like this toy) keeps a liquid's
     // surface crisp instead of cloudy; smoke, steam and flames keep the soft
     // Gaussian. Read after build, so it follows the scene just built.

@@ -395,6 +395,67 @@ From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review
   rounder on top (`drop.shape`), as a large raindrop falls, and fast liquid is drawn a little more
   stretched along its motion.
 
+## r7 (October 4, 2026): the Fluid lab on a phone
+
+Built by Sonnet 5.5 as a test of engine work, from the Fluid Lab phone audit
+([docs/audits/fluid-phone-2026-10.md](audits/fluid-phone-2026-10.md)). Code: `src/fluids/phone.js`
+(the envelope), `FluidRuntime.watch()` and `restart()` (the recovery), `mpm.js` (readback), and
+small, marked hooks in `src/stage.js` and `src/player.js`.
+
+- **The hint.** On a phone the Toy tab shows "This lab runs best on a computer. On a phone, choose
+  Auto detail." under Scene and Liquid (the recipe's `note`), a toast shows it after the first
+  slow-down, and the toy's About text ends with it.
+- **A phone envelope for this lab only.** A phone is a touch device with a small screen, whatever
+  tier it detected (`?phone=1` and `?phone=0` force it). It applies unless the person chose High or
+  Max Detail (or `?profile=high|max`), and it never changes the saved Detail choice. It sets the
+  lab's own canvas cap of 1.5 (the recipe's `render.dpr`), 35,000 prop splats (density 0.25 instead
+  of 0.75), the WebGPU liquid at cap 6,000 and cell 0.05, and gas grids 20 cells across (flame
+  20×58×20, smoke 20×65×20, hot cup 20×33×20). On the CPU, a spec may say `phone: { scale }`: the
+  Glass liquid asks for 0.5 (cap 270, spacing times the cube root of 2) and the Splash's vessel for
+  0.5; the Splash keeps its liquid and its starting pool.
+- **Recovery.** The runtime times every frame on a phone, whatever the tier. When the average (an
+  EMA) stays over 33 ms for 1.5 s it first lowers the drawing cost (a pixel cap of 1, a coarser
+  surface, fewer gas steps) and shows the hint; 1.5 s later, if still slow, it rebuilds this scene's
+  fluids into the phone envelope with a clear restart (already in it: fewer substeps); 2 s after
+  that, it offers a pause. Hidden pages, the first 1.5 s after the toy opens and gaps over 2 s count
+  for nothing, and a lone stall adds at most 250 ms of slow time. The old watcher (low and mid tiers
+  only, ignoring frames over 250 ms) is gone.
+- **Less garbage per readback.** The diffuse pass reads the liquid back 10 to 30 times a second;
+  `readPositions(true)` keeps its byte and float arrays and fills six values per particle directly
+  (no `subarray()` views). Tests and tools keep the fresh-array call.
+- **The WebGPU projector buffers.** The engine's gsplat projector destroys its cached Compute
+  objects' shaders but not the Computes, so each scene or toy change left two uniform buffers.
+  `vendor/` is untouched: `Stage.hookProjector()` finds the projector through the device's
+  `devicerestored` callbacks (private engine layout; nothing is wrapped if it isn't there) and wraps
+  that one instance's clearing method to destroy each Compute first.
+
+### Measured, r7 (a sandbox, not a phone)
+
+The audit's own scripts (`collect.mjs`, a batch of the ten scenes at phone size, `mid` at 4× and 6×
+page CPU throttling, WebGL2 and WebGPU; `growth.mjs`), run on `main` (e63d286f) and on this branch,
+in this container: Chromium on a CPU, with SwiftShader as WebGL2 and WebGPU. Frames here take
+hundreds of milliseconds to seconds, so **the absolute times mean nothing for a phone**. Read the
+ratios and the counts. Every "after" cell ran the recovery, which dropped most of them to a pixel
+ratio of 1 within seconds (canvas 390×645 instead of 585×967), so these are the whole change
+(envelope plus recovery), not the envelope alone. Single runs, 6 s action windows.
+
+| `mid` at 6×, action window   | Frames in 6 s, before → after | Render p95 (ms), before → after | Tracked GPU MiB, before → after |
+| ---------------------------- | ----------------------------- | ------------------------------- | ------------------------------- |
+| WebGL2 Glass (four liquids)  | 10–11 → 43–44                 | 642–686 → 157–160               | 38.5–38.7 → 34.1–34.2           |
+| WebGL2 Splash (four liquids) | 7–8 → 33–35                   | 906–1,102 → 192–215             | 38.7–38.9 → 34.1–34.3           |
+| WebGL2 Candle / Hot cup      | 3 / 4 → 14 / 21               | 2,295 / 2,390 → 490 / 314       | 61.0 / 54.6 → 37.9 / 35.8       |
+| WebGPU Glass (four liquids)  | 2–3 → 6–11                    | 3,401–4,091 → 964–1,296         | 63.8–64.0 → 39.2–39.4           |
+| WebGPU Splash (four liquids) | 2–3 → 5–6                     | 3,376–7,305 → 1,188–2,384       | 65.4–65.6 → 40.3–42.9           |
+| WebGPU Candle / Hot cup      | 3 / 1 → 7 / 5                 | 4,390 / 4,465 → 1,137 / 1,110   | 70.0 / 63.5 → 41.1 / 41.7       |
+
+The `mid` at 4× cells (in the same run) agree. Four-scene cycle on WebGPU (Candle, Cup, Splash,
+Glass; six cycles, `growth.mjs`): buffers 64, 66, 68, 70, 72, 74 before, **61 in every cycle**
+after; uniform bytes 1,129,472 to 1,438,912 before, flat at 1,436,000 from the second cycle after.
+The page heap still rises about 1.4 MB a cycle in both, so no heap fix is claimed. Not measured: a
+real phone, volume and look of the smaller liquids (the audit asked for a review on a phone), and
+the CPU solver's p95 (the audit's `solver.mjs`). Prop splats fell from 105,000 to 35,000, which can
+show holes where props are splats (WebGL2) and should be looked at on a phone.
+
 ## Limits and next steps
 
 - Colliders don't move with a part yet (a tipping jug, a stirring spoon). The runtime would need the

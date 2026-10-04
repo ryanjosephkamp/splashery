@@ -342,9 +342,10 @@ export const GAS_TIERS = {
 // [w, h, d] (recipe units) }. A system (smoke, steam or a flame with its
 // smoke) feeds it through sources().
 export class GasGrid {
-  constructor(device, { at, size, profile = "high" }) {
+  constructor(device, { at, size, profile = "high", n = 0 }) {
     this.device = device;
-    const tier = GAS_TIERS[profile] || GAS_TIERS.high;
+    // (r7: `n` is the phone envelope's coarser grid, cells along the widest side)
+    const tier = { ...(GAS_TIERS[profile] || GAS_TIERS.high), ...(n ? { n } : null) };
     this.tier = tier;
     const widest = Math.max(size[0], size[2]);
     const cell = widest / tier.n;
