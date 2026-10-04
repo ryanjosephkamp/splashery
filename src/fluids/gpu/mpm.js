@@ -524,19 +524,39 @@ export class GpuMpm {
     this.device.computeDispatch(list, "flMpm");
   }
 
-  // Reads the particles back (for tests and measurements only).
-  async readPositions() {
-    const bytes = this.count * PARTICLE_VEC4 * 16;
+  // Reads the particles back: six floats a particle (position, velocity).
+  // The diffuse pass calls it about 10 to 30 times a second with one read in
+  // flight (diffuse.js), so it passes `reuse` (r7): the byte and float arrays
+  // are kept between reads and the result is one view of the kept array, valid
+  // until the next read. Tests and tools get a fresh array each time.
+  async readPositions(reuse = false) {
+    const count = this.count;
+    const bytes = count * PARTICLE_VEC4 * 16;
     if (!bytes) return new Float32Array(0);
-    const buf = await this.particles.read(0, bytes, null, true);
-    const f = new Float32Array(buf.buffer, buf.byteOffset, bytes / 4);
-    const out = new Float32Array(this.count * 6);
-    for (let i = 0; i < this.count; i++) {
-      const o = i * PARTICLE_VEC4 * 4;
-      out.set(f.subarray(o, o + 3), i * 6);
-      out.set(f.subarray(o + 4, o + 7), i * 6 + 3);
+    let dst = null;
+    if (reuse) {
+      if (!this.rbBytes || this.rbBytes.byteLength < bytes) this.rbBytes = new Uint8Array(bytes);
+      dst = this.rbBytes;
     }
-    return out;
+    const buf = await this.particles.read(0, bytes, dst, true);
+    const f = new Float32Array(buf.buffer, buf.byteOffset, bytes / 4);
+    const n = count * 6;
+    let out;
+    if (reuse) {
+      if (!this.rbOut || this.rbOut.length < n) this.rbOut = new Float32Array(n);
+      out = this.rbOut;
+    } else out = new Float32Array(n);
+    for (let i = 0; i < count; i++) {
+      const o = i * PARTICLE_VEC4 * 4;
+      const p = i * 6;
+      out[p] = f[o];
+      out[p + 1] = f[o + 1];
+      out[p + 2] = f[o + 2];
+      out[p + 3] = f[o + 4];
+      out[p + 4] = f[o + 5];
+      out[p + 5] = f[o + 6];
+    }
+    return reuse ? out.subarray(0, n) : out;
   }
 
   destroy() {

@@ -15,6 +15,9 @@
 
 import { FluidWorld } from "./world.js";
 import { FluidLayer } from "./render.js";
+import { isPhone, envelopeOn, HINT } from "./phone.js";
+
+export { envelopeOn };
 
 function query() {
   return typeof location !== "undefined" ? new URLSearchParams(location.search).get("fluids") : null; // prettier-ignore
@@ -31,7 +34,15 @@ export class FluidRuntime {
   constructor(
     stage,
     specs,
-    { profile = "high", seed = 1, transform = null, mode = pickMode(), onCue = null } = {},
+    {
+      profile = "high",
+      seed = 1,
+      transform = null,
+      mode = pickMode(),
+      onCue = null,
+      phone = false,
+      onNotice = null,
+    } = {},
   ) {
     this.stage = stage;
     // r4: the liquid's own sounds, from what it does (sound(), below).
@@ -40,7 +51,14 @@ export class FluidRuntime {
     const d = stage.device;
     // Smoke, steam and flames on the gas grid (both WebGPU and WebGL2).
     this.gridGas = query() !== "cpu" && !!d.textureHalfFloatRenderable && specs.some((s) => s.kind === "gas" || s.kind === "flame"); // prettier-ignore
-    this.opts = { profile, seed, transform, gridGas: this.gridGas };
+    // r7: `phone` is the phone envelope (phone.js); `onNotice` hears the hint
+    // and the pause offer when frames stay slow (watch()).
+    this.opts = { profile, seed, transform, gridGas: this.gridGas, phone };
+    this.onNotice = onNotice;
+    this.isPhone = isPhone();
+    this.slow = { last: 0, ema: 16, acc: 0, level: 0, born: performance.now() };
+    this.gen = 0;
+    this.baseMode = mode;
     this.mode = mode;
     this.lastT = null;
     this.pendingDt = 0;
@@ -48,6 +66,16 @@ export class FluidRuntime {
     this.busy = false;
     this.frames = 0;
     this.stats = { mode, simMs: 0, particles: 0, slots: 0, steps: 0, uploadMs: 0 };
+    this.start();
+  }
+
+  // Picks the path and starts it (again after a restart(), r7).
+  start() {
+    const mode = this.baseMode;
+    this.mode = this.stats.mode = mode;
+    this.gen++;
+    const d = this.stage.device;
+    const specs = this.specs;
     this.layer = null;
     this.fx = null;
     if (
@@ -75,9 +103,10 @@ export class FluidRuntime {
   // The gas grid for the CPU paths (on the page, whichever path the rest takes).
   startGasFx() {
     if (!this.gridGas || this.fx) return;
+    const gen = this.gen;
     import("./gpu/index.js")
       .then((m) => {
-        if (this.destroyed || this.fx) return;
+        if (this.destroyed || this.fx || gen !== this.gen) return;
         this.fx = new m.GpuFluids(this.stage, null, { ...this.opts, specs: this.specs, glass: false }); // prettier-ignore
       })
       .catch((err) => console.warn("Fluids: the gas grid failed.", err));
@@ -92,9 +121,10 @@ export class FluidRuntime {
   }
 
   startGpu() {
+    const gen = this.gen;
     this.ready = import("./gpu/index.js")
       .then((m) => {
-        if (this.destroyed) return;
+        if (this.destroyed || gen !== this.gen) return;
         const gpu = { device: this.stage.device, GpuLiquid: m.GpuLiquid };
         this.world = new FluidWorld(this.specs, { ...this.opts, gpu, surface: true });
         this.fx = new m.GpuFluids(this.stage, this.world, { ...this.opts, specs: this.specs, glass: true }); // prettier-ignore
@@ -104,6 +134,7 @@ export class FluidRuntime {
       })
       .catch((err) => {
         // No usable GPU path: the CPU one, as before.
+        if (gen !== this.gen) return;
         console.warn("Fluids: GPU path failed, using the CPU.", err);
         this.fx?.destroy();
         this.fx = null;
@@ -165,6 +196,7 @@ export class FluidRuntime {
   // out.fluid.
   frame(t, cmds) {
     if (this.destroyed) return;
+    this.watch(performance.now());
     const dt = this.lastT === null ? 0 : Math.max(0, Math.min(0.25, t - this.lastT));
     this.lastT = t;
     this.sound(dt);
@@ -207,6 +239,71 @@ export class FluidRuntime {
     this.pendingCmds = null;
     this.busy = true;
     this.worker.postMessage(msg, bufs ? [bufs.center.buffer, bufs.anim.buffer, bufs.shape.buffer, bufs.size.buffer] : []); // prettier-ignore
+  }
+
+  // ---- Slow frames on a phone (r7) -----------------------------------------------------
+  // The audit's recovery, whatever tier the phone detected: when the frame
+  // time's average (an EMA) stays over 33 ms for 1.5 s,
+  //   1. lower the drawing cost (the canvas's pixel cap, the surface's
+  //      resolution, the gas steps);
+  //   2. still slow 1.5 s later: rebuild this scene's fluids into the phone
+  //      envelope with a clear restart (already in it: fewer substeps);
+  //   3. still slow 2 s after that: offer a pause and the hint.
+  // Time with the page hidden, the first 1.5 s after the toy opens and gaps
+  // over 2 s (the browser suspended the page) are ignored; a visible stall
+  // counts, but adds at most 250 ms of "slow" time, so one stall alone never
+  // trips a step.
+  watch(now) {
+    const w = this.slow;
+    const dt = w.last ? now - w.last : 16;
+    w.last = now;
+    if (!this.isPhone || w.level >= 3) return;
+    if (document.hidden || dt > 2000 || now - w.born < 1500) {
+      w.last = document.hidden ? 0 : now;
+      w.acc = 0;
+      return;
+    }
+    w.ema += (Math.min(dt, 1000) - w.ema) * 0.1;
+    w.acc = w.ema > 33 ? w.acc + Math.min(dt, 250) : 0;
+    if (w.acc < (w.level === 2 ? 2000 : 1500)) return;
+    w.acc = 0;
+    w.ema = 16;
+    const level = w.level++;
+    if (level === 0) {
+      this.stage.setFluidPixelCap(1);
+      this.fx?.lower();
+      this.onNotice?.(HINT);
+    } else if (level === 1) {
+      if (this.opts.phone) {
+        this.fx?.lower(true);
+      } else {
+        this.restart();
+      }
+    } else {
+      this.onNotice?.(`${HINT} Or pause it with the play button.`);
+    }
+  }
+
+  // A clear restart into the phone envelope: the scene's fluids are built
+  // again (the liquid starts over), the toy's own splats stay.
+  restart() {
+    this.worker?.terminate();
+    this.worker = null;
+    this.fx?.destroy();
+    this.fx = null;
+    this.layer?.destroy();
+    this.layer = null;
+    this.world = null;
+    this.bufs = null;
+    this.spare = [];
+    this.busy = false;
+    this.pendingDt = 0;
+    this.pendingCmds = null;
+    this.lastT = null;
+    this.frames = 0;
+    this.opts.phone = true;
+    this.slow.born = performance.now();
+    this.start();
   }
 
   // ---- Sound (r4) ----------------------------------------------------------------------
@@ -299,6 +396,7 @@ export class FluidRuntime {
 
   destroy() {
     this.destroyed = true;
+    this.stage.setFluidPixelCap(null); // r7
     this.worker?.terminate();
     this.worker = null;
     this.fx?.destroy();

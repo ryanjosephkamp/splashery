@@ -34,6 +34,7 @@ export class FluidWorld {
       gpu = null,
       surface = false,
       gridGas = false,
+      phone = false, // r7: the phone envelope (phone.js)
     } = {},
   ) {
     this.profile = TIER_SCALE[profile] ? profile : "high";
@@ -49,7 +50,10 @@ export class FluidWorld {
     this.stats = { steps: 0, simMs: 0, particles: 0 };
     specs.forEach((spec, i) => {
       const name = spec.name || `${spec.kind || "liquid"}${i}`;
-      const budget = Math.max(16, Math.round((spec.budget ?? 1500) * tier));
+      // (r7, the phone envelope on the CPU: a spec may ask for a share of its
+      // budget with `phone: { scale }`; liquid spacing follows the budget)
+      const share = phone ? (spec.phone?.scale ?? 1) : 1;
+      const budget = Math.max(16, Math.round((spec.budget ?? 1500) * tier * share));
       const unit = spec.unit ?? 0.1; // meters per recipe unit
       const gravity = spec.gravity
         ? typeof spec.gravity === "number"
@@ -62,7 +66,7 @@ export class FluidWorld {
       // (props: shapes the GPU surface pass traces, or left to the kit's splats)
       if (spec.kind === "props") return;
       if ((spec.kind || "liquid") === "liquid" && gpu) {
-        sys = new gpu.GpuLiquid(full, { device: gpu.device, profile: this.profile, gravity, seed: s, unit }); // prettier-ignore
+        sys = new gpu.GpuLiquid(full, { device: gpu.device, profile: this.profile, gravity, seed: s, unit, phone }); // prettier-ignore
       } else if (
         (spec.kind === "vessel" && surface) ||
         (gridGas && (spec.kind === "gas" || spec.kind === "flame"))

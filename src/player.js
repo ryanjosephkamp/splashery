@@ -749,7 +749,7 @@ export class Player {
   async startFluids(ctx, token) {
     const specs = ctx.kit?.fluids;
     if (!specs?.length) return;
-    const { FluidRuntime } = await import("./fluids/runtime.js");
+    const { FluidRuntime, envelopeOn } = await import("./fluids/runtime.js");
     if (token !== this.loadToken || this.proc?.ctx !== ctx) return;
     this.fluids = new FluidRuntime(this.stage, specs, {
       profile: this.profile,
@@ -757,6 +757,9 @@ export class Player {
       transform: ctx.transform,
       // Fluids r4: the liquid's sounds come from the simulation.
       onCue: (cues) => !this.frozen && this.emit("cue", cues),
+      // Fluids r7: the phone envelope, and what to tell the person when frames stay slow.
+      phone: envelopeOn(),
+      onNotice: (text) => this.emit("message", text),
     });
   }
 
