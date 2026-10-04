@@ -12,6 +12,10 @@ import { normalizeMedia, normalizeScene } from "../src/state.js";
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 const FIX = "/tests/fixtures/pic/";
 
+// The test server's origin: SPLASHERY_PORT gives each local lane its own (docs/OPERATING.md, "Local
+// lanes"); everyone else keeps 4173, as playwright.config.mjs does.
+const ORIGIN = `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}`;
+
 async function ready(page, url = `${APP}&labs=1`) {
   await page.goto(url);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
@@ -670,7 +674,7 @@ test.describe("your book, the album and the frame (no browser)", () => {
 
 test.describe("your book, the album and the frame (in the app)", () => {
   test.setTimeout(300_000);
-  const BK = "http://127.0.0.1:4173/tests/fixtures/bk/";
+  const BK = `${ORIGIN}/tests/fixtures/bk/`;
 
   // Opens a toy (and a file) and waits for its sheets. The toys play in
   // real time: the tests wait on the player's own clock (rendering here is
@@ -939,7 +943,7 @@ test.describe("your book, the album and the frame (in the app)", () => {
   });
 
   test("a frame plays a GIF on a loop and a video by itself, muted", async ({ page }) => {
-    await open(page, "picture-frame", `http://127.0.0.1:4173${FIX}anim.gif`);
+    await open(page, "picture-frame", `${ORIGIN}${FIX}anim.gif`);
     const frames = await page.evaluate(async () => {
       const p = window.__splashery.player.pictures;
       const seen = new Set();
@@ -952,10 +956,7 @@ test.describe("your book, the album and the frame (in the app)", () => {
       return seen.size;
     });
     expect(frames).toBeGreaterThan(4);
-    await page.evaluate(
-      (u) => window.__splashery.app.openMedia(u),
-      `http://127.0.0.1:4173${FIX}clip.webm`,
-    );
+    await page.evaluate((u) => window.__splashery.app.openMedia(u), `${ORIGIN}${FIX}clip.webm`);
     await waitSheets(page);
     await step(page, 0.5);
     const v = await page.evaluate(async () => {

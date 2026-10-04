@@ -12,6 +12,10 @@ import { TOYS, searchToys } from "../src/toys.js";
 import { encodeSceneHash } from "../src/codec.js";
 
 const SHOTS = path.resolve("tests/screenshots");
+
+// The test server's origin: SPLASHERY_PORT gives each local lane its own (docs/OPERATING.md, "Local
+// lanes"); everyone else keeps 4173, as playwright.config.mjs does.
+const ORIGIN = `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}`;
 const WEBGL = "/?renderer=webgl2&profile=weak";
 const NO_WEBGPU =
   "WebGPU is unavailable in this headless Chromium (no adapter from SwiftShader/Vulkan), so the WebGPU assertions are skipped. WebGL2 is covered by the other tests.";
@@ -346,7 +350,7 @@ test.describe("Splashery app (WebGL2)", () => {
     });
     await page.click("#tab-share");
     await expect(page.locator("#embed-snippet")).toHaveValue(
-      /^<iframe src="http:\/\/127\.0\.0\.1:4173\/embed\/#s=d\./,
+      /^<iframe src="http:\/\/127\.0\.0\.1:\d+\/embed\/#s=d\./,
     );
     const snippet = await page.locator("#embed-snippet").inputValue();
     const src = snippet.match(/src="([^"]+)"/)[1];
@@ -393,7 +397,7 @@ test.describe("Splashery app (WebGL2)", () => {
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.waitForTimeout(1500);
     const total = [...sizes.values()].reduce((a, b) => a + b, 0);
-    expect(sizes.has("http://127.0.0.1:4173/assets/toys/bee/bee.sog")).toBe(true);
+    expect(sizes.has(`${ORIGIN}/assets/toys/bee/bee.sog`)).toBe(true);
     expect(total).toBeLessThan(30 * 1024 * 1024);
     console.log(`embed transfer, bee at the strong profile: ${(total / 1048576).toFixed(1)} MB`);
   });
@@ -408,7 +412,7 @@ test.describe("Splashery app (WebGL2)", () => {
       return { toy: el.viewer.player.toyInfo?.id, link: el.shadowRoot.querySelector("a").href };
     });
     expect(state.toy).toBe("cactus");
-    expect(state.link).toContain("127.0.0.1:4173");
+    expect(state.link).toContain(ORIGIN.slice("http://".length));
     expect(problems).toEqual([]);
   });
 
@@ -1299,7 +1303,7 @@ test.describe("Sharpness and embeds (WebGL2)", () => {
       const page = await ctx.newPage();
       await page.setContent(
         `<!doctype html>${meta}<body style="margin:0;background:#dd2222">` +
-          `<iframe src="http://127.0.0.1:4173/embed/?bg=transparent&toy=blob&renderer=webgl2" ` +
+          `<iframe src="${ORIGIN}/embed/?bg=transparent&toy=blob&renderer=webgl2" ` +
           `style="width:400px;height:300px;border:0;color-scheme:${scheme}"></iframe></body>`,
       );
       const frame = page.frameLocator("iframe");
