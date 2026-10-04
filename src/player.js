@@ -671,7 +671,15 @@ export class Player {
     for (let i = 0; i < buf.count; i++) {
       const i3 = i * 3;
       const i4 = i * 4;
-      if (Math.round(buf.anim[i4 + 1]) !== KINDS.token) continue;
+      const kind = Math.round(buf.anim[i4 + 1]);
+      // Lane Hands engine C: skin splats (ropes, cloth) at their blend.
+      if (kind === KINDS.skin || kind === KINDS.skin4) {
+        const sk = skinOffset(td, kind, buf.anim[i4 + 2], buf.anim[i4 + 3]);
+        for (let k = 0; k < 3; k++) centers[i3 + k] = buf.pos[i3 + k] + sk[k];
+        n++;
+        continue;
+      }
+      if (kind !== KINDS.token) continue;
       const o = Math.min(47, Math.max(0, Math.round(buf.anim[i4 + 2]))) * 8;
       let [x, y, z, w] = [td[o + 4], td[o + 5], td[o + 6], td[o + 7]];
       if (!x && !y && !z && !w) w = 1;
@@ -1809,3 +1817,28 @@ function normalize3(v) {
 }
 
 export { Gestures };
+
+// Lane Hands engine C: a skin splat's offset from its tokens (as the kit
+// shader's kinds "skin" and "skin4" work it out).
+function skinOffset(td, kind, z, w) {
+  const tok = (i) => Math.min(47, Math.max(0, Math.round(i))) * 8;
+  const at = (o, k) => td[o + k];
+  if (kind === KINDS.skin) {
+    const b = Math.floor(z / 64);
+    const [oa, ob] = [tok(z - b * 64), tok(b)];
+    return [0, 1, 2].map((k) => at(oa, k) + (at(ob, k) - at(oa, k)) * w);
+  }
+  const d = Math.floor(z / 262144);
+  const c = Math.floor((z - d * 262144) / 4096);
+  const r = z - d * 262144 - c * 4096;
+  const b = Math.floor(r / 64);
+  const [o0, o1, o2, o3] = [tok(r - b * 64), tok(b), tok(c), tok(d)];
+  const sw = Math.floor(w / 1024);
+  const t = (w - sw * 1024) / 1023;
+  const s = sw / 1023;
+  return [0, 1, 2].map((k) => {
+    const top = at(o0, k) + (at(o1, k) - at(o0, k)) * s;
+    const bot = at(o2, k) + (at(o3, k) - at(o2, k)) * s;
+    return top + (bot - top) * t;
+  });
+}

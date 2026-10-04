@@ -298,6 +298,16 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-04, early (the owner's messages of October 3, evening):
+
+- Codex tasks 13 (#244, the Tinkerer's Manual audited for a newcomer), 14 (#247, the Fluid Lab on a
+  phone) and 15 (#245, the lab notebook) are merged. The manual's PDF still has the September 29
+  text; a lane regenerates it. #247's proposals (smaller phone allocations, a step-down that
+  rebuilds the fluids, the WebGPU buffers kept per scene change) wait for a Fluids round.
+- The hands-on engines are merged together as #246 (combo J); the five hands-on category lanes (H1
+  to H5) may start, locally on the second account.
+- The save point: OPERATING.md, "Concurrency and usage".
+
 Settled on 2026-10-03, evening (the owner's review, docs/reviews/2026-10-03-labs-review/):
 
 - The QR code toy: sharper modules, more motions, living colors expanded, country-flag colors on the
