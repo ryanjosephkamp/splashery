@@ -912,24 +912,25 @@ function film(p, n, c) {
 
 const YO = { top: 1.0, rest: 0.62, max: 1.1, K: 8 };
 YO.seg = YO.max / YO.K;
-// Hands-on (lane Hands engine C): the string is a rope of K + 1 nodes from
-// the finger loop down to the yo-yo, each string segment riding its link
-// and the yo-yo riding the end. Pulled down, the string pays out; let go
+// Hands-on (lane Hands engine C): the string is a rope from the finger loop
+// down to the yo-yo, and the yo-yo rides its end. Pulled down, the string pays out; let go
 // below its rest, the yo-yo drops to the end of the string, spins there a
 // moment and climbs back, spinning all the while.
 const YH = { L: YO.rest, v: 0, phase: "rest", t: 0, spin: 0, touched: false, calm: -1e9, sorted: -1 }; // prettier-ignore
-// The string's nodes: one at the top of each string segment as it was built
-// (so each segment hangs from its own node), and the last at the yo-yo's
-// middle. The string ends at the yo-yo's rim: the last link runs from just
-// above the rim (one segment's length) down to the middle, inside the
-// yo-yo, so no string ever shows across the yo-yo's face.
-YO.rim = 0.35; // just inside the yo-yo's rim (0.41): the string goes in between the halves
-YO.segLen = YO.seg * 1.08; // as built
-YO.last = YO.rim + YO.segLen;
-const YO_NODES = [...Array.from({ length: YO.K }, (_, j) => [0, YO.top - j * YO.seg, 0]), [0, YO.top - YO.rest, 0]]; // prettier-ignore
+// The string is one thin tube built at its full length, from the loop to
+// just inside the yo-yo's rim, its splats following the K + 1 nodes along
+// it (skin), so it draws as one smooth line, bunched closer (never pulled
+// apart) when shorter. One more node, the last, is the yo-yo's middle: the
+// last link runs from the rim to it, inside the yo-yo, so no string ever
+// shows across the yo-yo's face.
+YO.rim = 0.395; // at the yo-yo's rim (0.41): the string goes in between the halves
+YO.string = YO.max - YO.rim; // the string's full length, loop to rim
+YO.last = YO.rim;
+const YO_STRING = Array.from({ length: YO.K + 1 }, (_, j) => [0, YO.top - (j * YO.string) / YO.K, 0]); // prettier-ignore
+const YO_NODES = [...YO_STRING, [0, YO.top - YO.rest, 0]];
+const YO_TOKENS = YO_STRING.map((_, j) => j);
 // How far node i's line toward node j has swung in the yo-yo's own plane
-// (about z, from hanging straight down). The string and the yo-yo turn by
-// it alone: tiny links between bunched-up nodes can't point anywhere.
+// (about z, from hanging straight down): the yo-yo turns by it.
 const yoyoSwing = (i, j) => (strand, soft) => {
   const a = soft.nodes[strand.first + i].x;
   const b = soft.nodes[strand.first + j].x;
@@ -937,8 +938,11 @@ const yoyoSwing = (i, j) => (strand, soft) => {
 };
 // Where they rest (the string at its rest length).
 const yoyoAt = (L) => {
-  const d = Math.max(0, L - YO.last) / (YO.K - 1);
-  return [...Array.from({ length: YO.K }, (_, j) => [0, YO.top - j * d, 0]), [0, YO.top - L, 0]];
+  const d = Math.max(0, L - YO.last) / YO.K;
+  return [
+    ...Array.from({ length: YO.K + 1 }, (_, j) => [0, YO.top - j * d, 0]),
+    [0, YO.top - L, 0],
+  ];
 };
 function yoyoReel(strand, dt, soft) {
   const held = soft.hold?.node?.strand === strand;
@@ -969,7 +973,7 @@ function yoyoReel(strand, dt, soft) {
   // The links: the string's share the length above the rim; the last runs
   // from the last segment's top to the yo-yo's middle.
   const main = strand.links.filter((l) => l.main);
-  main.forEach((l, i) => (l.L = i < main.length - 1 ? Math.max(0, YH.L - YO.last) / (YO.K - 1) : YO.last)); // prettier-ignore
+  main.forEach((l, i) => (l.L = i < main.length - 1 ? Math.max(0, YH.L - YO.last) / YO.K : YO.last)); // prettier-ignore
   // The finger never pulls it further than the string reaches.
   if (held) {
     const d = soft.hold.target.map((v, i) => v - top[i]);
@@ -2245,17 +2249,17 @@ export const RECIPES = {
           name: "string",
           points: YO_NODES,
           start: yoyoAt(YO.rest),
-          mass: YO_NODES.map((_, j) => (j === YO.K ? 2 : 0.5)),
-          grab: [YO.K],
+          mass: YO_NODES.map((_, j) => (j === YO.K + 1 ? 2 : 0.3)),
+          grab: [YO.K + 1],
           pick: 0.45,
           reach: 50, // yoyoReel keeps the finger within the string's length
           bend: 0,
           drag: 0.8,
           update: yoyoReel,
           reset: () => Object.assign(YH, { L: YO.rest, v: 0, phase: "rest", t: 0, spin: 0 }),
+          tokens: YO_TOKENS, // the string's splats follow these (the yo-yo's node has none)
           pieces: [
-            ...Array.from({ length: YO.K }, (_, j) => ({ part: "s" + j, node: j, turn: false, spin: yoyoSwing(j, YO.K), axis: [0, 0, 1] })), // prettier-ignore
-            { part: "yoyo", node: YO.K, turn: false, spin: (st, sp) => yoyoSwing(YO.K - 1, YO.K)(st, sp) - YH.spin, axis: [0, 0, 1] }, // prettier-ignore
+            { part: "yoyo", node: YO.K + 1, turn: false, spin: (st, sp) => yoyoSwing(YO.K, YO.K + 1)(st, sp) - YH.spin, axis: [0, 0, 1] }, // prettier-ignore
           ],
         },
       ],
@@ -2272,8 +2276,9 @@ export const RECIPES = {
       const idle = YO.rest + 0.12 * calm * Math.sin(t * 2.4);
       const p = 1 - c.throw;
       const D = c.throw > 0 ? idle + (YO.max - idle) * Math.pow(bump(p), 0.7) : idle;
-      const f = (D - YO.seg) / ((YO.K - 1) * YO.seg);
-      for (let j = 1; j < YO.K; j++) out.parts["s" + j] = { offset: [0, j * YO.seg * (1 - f), 0] };
+      // The string pays out to the yo-yo's rim, its nodes evenly along it.
+      const Ls = Math.max(0, D - YO.rim);
+      out.tokens = YO_STRING.map((home, j) => ({ base: home, offset: [0, (j * (YO.string - Ls)) / YO.K, 0] })); // prettier-ignore
       out.parts.yoyo = { angle: -(D - YO.rest) / 0.06, offset: [0, -(D - YO.rest), 0] };
     },
     build(k, o) {
@@ -2332,20 +2337,20 @@ export const RECIPES = {
         weight: 1.5,
         color: (c) => shade("#efe9dc", 0.85 + 0.15 * Math.sin(c.u * 36)),
       });
-      // The string: segments that slide over each other as it pays out.
-      for (let j = 0; j < YO.K; j++) {
-        const part = k.part("s" + j, { pivot: [0, 0, 0] });
-        k.add(evenCylinder(0.008, 0.008, YO.seg * 1.08, false), {
-          even: true,
-          opacity: 1,
-          pos: [0, top - (j + 0.5) * YO.seg, 0],
-          part,
-          share: 0.004,
-          flat: 0.5,
-          pattern: false,
-          color: "#f1ede2",
-        });
-      }
+      // The string: one smooth tube at its full length, loop to rim; its
+      // splats follow the string's nodes (YO_STRING), bunching closer as
+      // it winds up.
+      const strSkin = ropeSkin(YO_STRING, YO_TOKENS);
+      k.add(evenCylinder(0.008, 0.008, YO.string, false), {
+        even: true,
+        opacity: 1,
+        pos: [0, top - YO.string / 2, 0],
+        share: 0.024,
+        flat: 0.5,
+        pattern: false,
+        color: "#f1ede2",
+        skin: (c) => strSkin(c.p),
+      });
       // Room for most of the throw.
       k.reach([0, top - YO.max - 0.1, 0]);
       // A loop for the finger.

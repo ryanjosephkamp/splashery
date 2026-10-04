@@ -117,7 +117,7 @@ test("yo-yo: pull it down, let go: it drops, spins at the end and climbs back", 
   const r = await page.evaluate(() => {
     const h = window.__hec;
     h.drag([0, 0.38, 0], h.line([0, 0.38, 0], [0, 0.05, 0], 30));
-    const len = (s) => Math.hypot(...s.nodes[8].map((v, k) => v - s.nodes[0][k]));
+    const len = (s) => Math.hypot(...s.nodes.at(-1).map((v, k) => v - s.nodes[0][k]));
     const out = [];
     for (let i = 0; i < 4 * 6; i++) out.push(len(h.run(1 / 6).soft.strands[0]));
     return out;
