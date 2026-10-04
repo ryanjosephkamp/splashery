@@ -1,0 +1,107 @@
+# Lane Site: Splashery as a real site (prefix `site`)
+
+## Brief
+
+You are a Splashery worker session, started by the Operator (the coordinating session). Repo:
+ryanjosephkamp/splashery. Your lane: Site (id `Site`, prefix `site`). Branch: `claude/lane-site`
+(and `claude/lane-site-engine` for any change to the app itself). PR title: "Phase Site: a home
+page, one menu, search and offline". Handoff file: docs/handoff/Site.md. Model: Opus 5.5.
+
+### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
+
+The owner: "I want more than just the gallery here. We will have a proper site, not just one
+webpage." On the Push Plan he said yes to W1 (a real home page), W2 (one menu everywhere and a
+search), W11 (install it and use it offline; later maybe native apps) and W12 (the finishing pass),
+and yes to the pages that come after yours (W3 a page for every toy, W4 to W8 the hubs, About,
+credits, privacy and What's new, W10 the embed guide). Read his notes,
+docs/reviews/2026-10-04-push-alignment/notes.md, "All right, next up we have the website stuff".
+
+Splashery stays static files on GitHub Pages, ES modules, no bundler, no CDN, no server, no keys.
+The gallery (`index.html`) is the site's home today, and **the home page is the owner's decision**:
+build everything under a preview path, `site/` (served at
+https://ryanjosephkamp.github.io/splashery/site/), linked from nowhere public, so he can try it and
+say when it replaces the front door.
+
+1. **The shell**: one header, menu and footer for every page (Home, Toys, Tools, Science, Studio,
+   Learn, What's new, About), phone first, light and dark, in the site's own look (the gallery's
+   fonts and colors). Pages are generated at build time (`tools/site-build.mjs`) from the data the
+   repo already has (`src/toys.js`, `src/toy-help.js`, CREDITS.md, LICENSES.md, the docs), so the
+   later lanes (toy pages, hubs) add page types, not new machinery. Write down how to add a page
+   type in your handoff file.
+2. **The home page** (W1): what Splashery is in one screen: a live toy (embedded the way the embed
+   guide says), a sentence or two on why splats and recipes make it different, and doors to Toys
+   (the gallery), Tools, Science, Studio, Worlds and Learn.
+3. **Search** (W2): a small index built at build time over toys (name, shelf, tags, how-to), tools
+   and pages, searched on the device; results link to the toy in the gallery (and later to its
+   page).
+4. **Install and offline** (W11): a web app manifest and a service worker for `site/` only during
+   the preview (its scope must not reach the gallery or the app until the owner swaps the front
+   door): the shell and the pages work offline after the first visit, and a toy opened once keeps
+   working. Write in your handoff file what the app-wide version needs at the swap, and a short note
+   on native apps later (wrapping the site for macOS, iOS and Android: the options and what each
+   costs).
+5. **The finishing pass** (W12): a sitemap, a 404 page for `site/`, fast first loads (measure them),
+   link previews (title, description, an image) and an accessibility pass (keyboard, labels,
+   contrast, reduced motion). Propose a root 404 for the swap rather than adding one now.
+
+#### Deliverables
+
+- Tests in `tests/site*.spec.mjs`: every page builds and loads, the menu works on a phone, search
+  finds a toy by its tag, the service worker's scope stays under `site/` and the page works offline
+  after one visit, no page breaks the gallery, and the "embed transfer ≤ 30 MB" test stays green.
+- Screenshots of the home page and a search at both sizes; a short walk-through clip.
+
+#### You own
+
+`site/` (new), `tools/site-build.mjs` and `tools/site-*.mjs`, `tests/site*.spec.mjs`, and this file.
+Changes to the gallery or the app (`index.html`, `src/`) only through the engine PR, small and
+additive.
+
+#### How this lane runs
+
+- The Operator session runs the lanes. The owner, Ryan, talks only to the Operator. Don't ask him
+  anything or wait for him. Put questions and blockers in your final message ("READY:", "WORKING:"
+  or "BLOCKED:"), and the Operator answers or relays them. Messages that arrive "From the Operator"
+  come from the coordinator on the owner's behalf.
+- Model: Opus 5.5 only, at the default effort. Any helper you start uses the same model. At most one
+  helper at a time.
+- This is the October push (October 5 to 7, 2026): about ten lanes build at once. Edit only the
+  files you own and your own toys' lines in the shared lists (`src/toys.js`, `src/toy-sounds.js`,
+  `src/toy-help.js`, `tools/toy-plan.json`, `tools/assets.json`, `CREDITS.md`). Merge main into your
+  branch whenever it moves (never rebase a pushed branch). Regenerate docs/TOY-PLAN.md with
+  `node tools/toy-plan.mjs`; never merge it by hand.
+- Engine changes: small, additive and tested, on `<your branch>-engine` with a draft PR titled
+  "Engine: …", merged first. Toys that don't use them behave exactly as before.
+- Merging: The preview pages are linked from nowhere public, so the Operator merges them after a
+  full test run; making them the front door is the owner's call. Never merge anything yourself.
+- Everything new is behind the labs switch (`labs: true`) unless this brief says otherwise. Old
+  `#s=` links and saved scenes (schema v2 and v3) keep loading.
+- Licenses (CLAUDE.md, "Ground rules"): read each asset's or dataset's license on its live source
+  page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's in-app
+  credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A new open-source
+  library is fine when it's needed (the owner's rule of October 4, 2026): vendor it in `vendor/`,
+  load it only when its toy opens, list it in LICENSES.md, and name it in your PR; a copyleft
+  license (GPL, AGPL), a library that calls a server, or one over 2 MB goes to the Operator first.
+- Effects follow CLAUDE.md, "Effect quality rules": real motion of solid pieces, judged as clips at
+  phone size.
+- Tests: `tests/site*.spec.mjs`; never edit `tests/taps.spec.mjs`. Before each push run your own
+  specs and the specs of the files you touch (say which in the PR); the Integrators run the full
+  suite before a merge. Prettier, `node tools/us-english.mjs --diff`, and for toys
+  `node tools/check-packs.mjs <pack>`, a contact sheet and thumbnails (CLAUDE.md, "Before every
+  push"). Screenshots `site-<name>-390x844.png` and `…-1440x900.png`, then
+  `node tools/upkeep.mjs --restore-shots`.
+- Clips: post every new or changed effect on Effect review page 2
+  (https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+  (lane record `Site`), after watching each one. After posting, check the owner's marks about once
+  an hour with a scheduled check-in (send_later); stop once your PR is merged or closed.
+- Language: American English for every new text (color, center, gray, license, toward, -ize endings,
+  dates like "October 5, 2026").
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "##
+  State", "## Notes", "## Known issues" and "## For the Operator" current.
+- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
+  What was cut), opened early and pushed after each finished item. Finish every working turn with a
+  final message that starts "READY:", "WORKING:" or "BLOCKED:".
+
+## State
+
+WORKING: not started yet (October 4, 2026).

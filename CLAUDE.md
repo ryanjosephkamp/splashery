@@ -44,9 +44,22 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   for the video-to-3D spike) may join them, behind the labs switch, loaded only when someone opens a
   video for it. Project Nayuki's QR Code generator (MIT) and jsQR (Apache-2.0) (approved October
   3, 2026) are vendored there too, loaded only when someone opens the QR code toy.
+- Libraries (the owner's rule of October 4, 2026): the Operator may approve an open-source library a
+  toy or tool needs without asking the owner each time: vendored in `vendor/`, loaded only when its
+  toy opens, listed in `LICENSES.md` and named in the PR. A copyleft license (GPL, AGPL), a library
+  that calls a server, or one over 2 MB goes to the owner first. He approved a LAZ reader for point
+  clouds and a DICOM reader for medical volumes the same day.
 - Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
   capture only when the person taps to start it. Nothing is requested or loaded before that, and
-  nothing is recorded, stored or sent anywhere.
+  nothing is recorded, stored or sent anywhere. One exception (the owner's request of October 4,
+  2026): a recorder, such as the Sound lab's, may record when the person taps Record, keeps the
+  recording on the device and saves it only to a file the person chooses.
+- Live data (the owner's calls of October 4, 2026): the earthquakes toy may read the USGS earthquake
+  feed when the person opens it or taps to refresh, and other open geographic feeds (animal
+  tracking, migration) may be read the same way when their terms allow reuse. Only keyless public
+  endpoints; the source and the time of the data show beside it; nothing is stored or sent; a dated
+  snapshot ships with the site for when the feed can't be reached. The Night sky may ask for the
+  person's location only when they tap for it, and never stores or sends it.
 - Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`. Programs
   outside npm that train splats on the owner's Mac (Blender, Brush or msplat; the Splat Fidelity
   Plan, approved October 3, 2026) are build tools too: listed in `LICENSES.md`, never shipped.
@@ -140,14 +153,24 @@ new or changed effect against them before calling it done.
 
 ## Working style
 
-- Pace (the owner's choice of October 2, 2026): up to ten Splashery workers at once for the
-  close-out of the toys, until about October 5, 2026; then back to about six (seven at most). Before
-  that (from the weekly reset of September 30, 4 p.m. ET) it was about six workers at once (seven at
-  most) plus an Integrator, paced by the 5-hour limit; the owner reports the weekly usage morning
-  and evening. (Until then it was up to 12, and 8 before the morning of September 29.) Once 6 or
-  more lanes run, an Integrator worker runs the combined test runs. A lane uses at most one helper
-  at a time. (Seven parallel builders once used up a week's usage in one go, so the Operator watches
-  the limits.)
+- The push (the owner's call of October 4, 2026): about ten to twelve busy workers on this account,
+  on his banked reset, until the weekly reset of Wednesday, October 7, 2026, 4 p.m. ET; then back to
+  about six (seven at most). The Integrators run the full suite for the lanes.
+- Shelves (the owner's call of October 4, 2026): the toy shelves are closing. Balls, food, nature,
+  gems, medieval, holidays, music (no new instruments), Open me, animals and the cartoon vehicles
+  get only their hands-on finishing; a new toy there only when the owner asks (a new animal only as
+  a photoreal capture). Landmarks, the body, weather and fire grow only with photoreal or
+  high-fidelity work (real 3D captures, volumetric data). New work goes to science, tools, the
+  Studio, Pictures and Pages, QR codes, the labs, Space, Tiny world, Atoms, Math, and AI and
+  computing. A stepping-stone lab is fine when it teaches something a planned toy needs (a wind lab
+  before a tornado).
+- Pace before the push (the owner's choice of October 2, 2026): up to ten Splashery workers at once
+  for the close-out of the toys; then back to about six (seven at most). Before that (from the
+  weekly reset of September 30, 4 p.m. ET) it was about six workers at once (seven at most) plus an
+  Integrator, paced by the 5-hour limit; the owner reports the weekly usage morning and evening.
+  (Until then it was up to 12, and 8 before the morning of September 29.) Once 6 or more lanes run,
+  an Integrator worker runs the combined test runs. A lane uses at most one helper at a time. (Seven
+  parallel builders once used up a week's usage in one go, so the Operator watches the limits.)
 - New parts of the site (Studio, Worlds, Lab and Learn) open behind the labs switch; the owner
   decides when each goes public.
 - The owner works from the phone app. Keep replies short and plain, and give step-by-step
