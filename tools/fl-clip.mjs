@@ -30,6 +30,8 @@ const list = clips.length ? clips : ALL;
 const STEP = 1 / Number(opt("fps", 15));
 const WIDTH = Number(opt("width", 360));
 const PROFILE = opt("profile", "mid");
+// The small label on every frame (r7: --label="built by Sonnet 5.5 · after").
+const LABEL = opt("label", "built by Opus 5.5");
 // The canvas's pixel-ratio cap: 3, the mid tier's cap once PR #118 lands.
 const RATIO = Number(opt("ratio", 3));
 // The renderer (webgl2 or webgpu) and, for experiments, a module to install
@@ -101,7 +103,7 @@ async function record(clip) {
     player.idle.weight = 0;
     player.stage.setPixelRatio(window.__flRatio);
     const tag = document.createElement("div");
-    tag.textContent = "Fluid lab · built by Opus 5.5";
+    tag.textContent = `Fluid lab · ${LABEL}`;
     tag.style.cssText =
       "position:fixed;left:10px;bottom:10px;z-index:99;font:600 12px system-ui;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:6px;pointer-events:none"; // prettier-ignore
     document.body.appendChild(tag);
