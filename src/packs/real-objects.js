@@ -1363,6 +1363,20 @@ const HD = {
   ],
 };
 
+// Hands-on (lane Hands engine C): the hood is the scan's own hood part, cut
+// out with hard edges, on a sprung hinge across the neck (the tap's hinge).
+// A short rope from the neck to the hood's crown takes the finger; the hood
+// turns about the hinge as far as the crown has swung forward or back, so
+// it flops as one solid piece and swings back up.
+const HOOD = { crown: [0, 0.8, 0.02], min: -0.22, max: 0.55 };
+HOOD.angle = (strand, soft) => {
+  const a = soft.nodes[strand.first].x;
+  const b = soft.nodes[strand.first + 1].x;
+  const now = Math.atan2(b[2] - a[2], b[1] - a[1]);
+  const rest = Math.atan2(HOOD.crown[2] - HD.neck[2], HOOD.crown[1] - HD.neck[1]);
+  return Math.max(HOOD.min, Math.min(HOOD.max, now - rest));
+};
+
 // A damped swing that starts at `a` and dies away by the end.
 const swing = (s, a, amp, w = 11, k = 2.2) =>
   s < a ? 0 : amp * Math.sin(w * (s - a)) * Math.exp(-k * (s - a)) * (1 - smoothstep(3.9, 4.45, s));
@@ -1372,6 +1386,26 @@ const HOODIE = {
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "flip", label: "Flip the hood", type: "pulse", ease: HD.T }],
   action: { key: "flip", label: "Hood flip and cross the sleeves" },
+  // Hands-on (lane Hands engine C): pull the hood and it flops forward or back
+  // then springs back up into its shape.
+  hands: {
+    floor: -1,
+    area: 1.4,
+    ropes: () => [
+      {
+        name: "hood",
+        points: [HD.neck, HOOD.crown],
+        grab: [1],
+        pick: 0.3,
+        reach: 1.02,
+        maxPull: 0.35,
+        weight: 0,
+        keep: 6,
+        drag: 3,
+        pieces: [{ part: "hood", node: 0, turn: false, spin: HOOD.angle, axis: [1, 0, 0] }],
+      },
+    ],
+  },
   credits: [
     {
       label: "Hoodie",

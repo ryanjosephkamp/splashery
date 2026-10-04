@@ -1976,6 +1976,9 @@ export const RIGS = {
     ],
     controls: [pulse("split", "Split", 2.8)],
     action: { key: "split", label: "Split" },
+    // Hands-on (lane Hands engine C): pull it and it stretches toward the
+    // finger; let go and it wobbles back, a soft, quick jelly.
+    hands: { stretch: { radius: 0.7, max: 0.8, hz: 3.2, damping: 0.16 } },
     drive(t, c, out) {
       const e = since(c, "split", 2.8);
       if (e < 0) return;

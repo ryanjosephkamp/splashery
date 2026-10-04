@@ -31,6 +31,7 @@ import {
 } from "./even.js";
 import { surfacePoints } from "../physics/world.js"; // lane Physics
 import { surfacePoints as hebPoints } from "../physics/world.js"; // lane Hands engine B
+import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -3106,11 +3107,64 @@ export const RECIPES = {
     ],
     controls: [{ key: "serve", label: "Take a slice", type: "toggle", default: 0, ease: 1.1 }],
     action: { key: "serve", label: "Take a slice" },
+    // Hands-on (lane Hands engine C): pull the slice away; the cheese
+    // strings sag, stretch and snap; set it back.
+    hands: {
+      floor: 0,
+      area: 1.25,
+      pieces: () => {
+        const solid = { type: "box", half: [0.2, 0.05, 0.46] };
+        return [
+          {
+            part: "slice",
+            pivot: [0, 0, 0],
+            pos: [Math.sin(PIZZA_AZ) * 0.52, 0.05, Math.cos(PIZZA_AZ) * 0.52],
+            quat: quatAxisAngle([0, 1, 0], PIZZA_AZ),
+            solid,
+            points: surfacePoints(solid, 1),
+            pick: [0.3, 0.12, 0.52],
+            mass: 1,
+            friction: 0.9,
+            restitution: 0.05,
+          },
+        ];
+      },
+      ropes: () =>
+        PIZZA_STRINGS.map((st) => ({
+          points: st.nodes,
+          start: st.nodes.map(() => st.start),
+          pin: [0],
+          attach: { piece: 0, nodes: [4] },
+          mass: 0.2,
+          stiff: 0.7,
+          breakAt: 1.08, // just past its full length
+          bend: 0,
+          drag: 2,
+          radius: st.thick * 0.6,
+          grab: false,
+          tokens: st.tokens,
+          // Seen once it is pulled out of the cut.
+          visible: (s, soft) => {
+            const a = soft.nodes[s.first].x;
+            const b = soft.nodes[s.first + 4].x;
+            return smoothstep(0.03, 0.1, Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]));
+          },
+        })),
+      sound: (hit, vol) => (hit.snap ? { voice: "slap", vol: 0.35 } : { voice: "thud", vol: vol * 0.5 }), // prettier-ignore
+    },
     drive(t, c, out, info) {
       // Linear in the eased value, so the cheese strings (which grow in with
       // it) always reach the slice.
       const s = c.serve;
       out.grow = s;
+      // The cheese strings stretch out with the slice (their splats follow
+      // these nodes; Hands-on moves the same nodes).
+      out.tokens = [];
+      for (const st of PIZZA_STRINGS)
+        st.nodes.forEach((p, j) => {
+          const at = add(st.start, mul(sub(p, st.start), s / st.reach));
+          out.tokens[st.tokens[j]] = { base: p, offset: sub(at, p), visible: s > 0.03 ? 1 : 0 };
+        });
       out.parts.slice = { offset: [PIZZA_OUT[0] * s, PIZZA_OUT[1] * s, PIZZA_OUT[2] * s] };
       // Splats sort where they were built, so the slice, lifted toward the
       // viewer, drew under the board's front. Sort it where it stands as it
@@ -3407,30 +3461,24 @@ export const RECIPES = {
           }
         }
       }
-      // Strings of melted cheese that stretch as the slice comes away.
-      for (let i = 0; i < 4; i++) {
-        const side = i % 2 ? a0 : a0 + span;
-        const r = 0.28 + i * 0.15;
-        const start = [Math.sin(side) * r, top + 0.005, Math.cos(side) * r];
-        const end = add(start, PIZZA_OUT);
-        const curve = (t) => {
-          const p = add(start, mul(sub(end, start), t));
-          return [p[0], p[1] - 0.035 * Math.sin(Math.PI * t), p[2]];
-        };
+      // Strings of melted cheese that stretch as the slice comes away (by
+      // their nodes: PIZZA_STRINGS).
+      for (const { curve, nodes, tokens, thick } of PIZZA_STRINGS) {
+        const sk = ropeSkin(nodes, tokens);
         k.add(
-          evenTube(k, curve, (t) => 0.008 * (1 - 0.55 * Math.sin(Math.PI * t)), {
-            samples: 64,
+          evenTube(k, curve, (t) => thick * (1 - 0.45 * Math.sin(Math.PI * t)), {
+            samples: 96,
             grid: 32,
           }),
           {
             even: true,
             opacity: 1,
             jitter: 0.01,
-            flat: 0.4,
-            weight: 3,
-            kind: "grow",
-            params: (c) => [0.02 + 0.97 * (c.t ?? 0), 0],
-            color: "#f9d77a",
+            flat: 0.3,
+            weight: 4,
+            skin: (c) => sk(c.p),
+            // Melted mozzarella: creamy, with a soft sheen.
+            color: (c) => glossy(c, "#fbe8a8", 0.5, 24),
           },
         );
       }
@@ -6263,6 +6311,34 @@ export const RECIPES = {
 // The pizza slice slides out towards the viewer.
 const PIZZA_AZ = 0.55;
 const PIZZA_OUT = [Math.sin(PIZZA_AZ) * 0.5, 0.16, Math.cos(PIZZA_AZ) * 0.5];
+// Hands-on (lane Hands engine C): the slice is a piece to pick up and set
+// back; the four cheese strings are ropes from the pizza to the slice's cut
+// edge, built pulled out (their splats follow their nodes), starting
+// bunched at the cut. Pulled out they sag, then stretch, then snap.
+// Two thick ropes of mozzarella and three thin strands. Each is built as
+// long as it gets before it snaps (`reach` times the slice's way out), so
+// stretched it is never thinner than built (no gaps); shorter, it sags.
+// Each snaps at its own length, so they break one after another.
+const PIZZA_STRINGS = [
+  { side: 1, r: 0.36, thick: 0.026, reach: 1.75 },
+  { side: 0, r: 0.62, thick: 0.024, reach: 1.65 },
+  { side: 0, r: 0.26, thick: 0.011, reach: 1.35 },
+  { side: 1, r: 0.55, thick: 0.012, reach: 1.45 },
+  { side: 0, r: 0.8, thick: 0.01, reach: 1.4 },
+].map(({ side: sd, r, thick, reach }, i) => {
+  const top = 0.06;
+  const span = (Math.PI * 2) / 8;
+  const a0 = PIZZA_AZ - span / 2;
+  const side = sd ? a0 + span : a0;
+  const start = [Math.sin(side) * r, top + 0.005, Math.cos(side) * r];
+  const end = add(start, mul(PIZZA_OUT, reach));
+  const curve = (t) => {
+    const p = add(start, mul(sub(end, start), t));
+    return [p[0], p[1] - 0.035 * Math.sin(Math.PI * t), p[2]];
+  };
+  const ts = [0, 0.25, 0.5, 0.75, 1];
+  return { start, curve, thick, reach, nodes: ts.map(curve), tokens: ts.map((_, j) => i * 5 + j) }; // prettier-ignore
+});
 
 const BURGER_LAYERS = ["patty", "cheese", "lettuce", "tomato", "top"];
 
