@@ -19,8 +19,8 @@ import { isPhone, envelopeOn, HINT } from "./phone.js";
 
 export { envelopeOn };
 
-function query() {
-  return typeof location !== "undefined" ? new URLSearchParams(location.search).get("fluids") : null; // prettier-ignore
+function query(name = "fluids") {
+  return typeof location !== "undefined" ? new URLSearchParams(location.search).get(name) : null; // prettier-ignore
 }
 
 function pickMode() {
@@ -55,7 +55,8 @@ export class FluidRuntime {
     // and the pause offer when frames stay slow (watch()).
     this.opts = { profile, seed, transform, gridGas: this.gridGas, phone };
     this.onNotice = onNotice;
-    this.isPhone = isPhone();
+    // (?watch=off: no recovery, for the clip tool, which steps the clock by hand)
+    this.isPhone = isPhone() && query("watch") !== "off";
     this.slow = { last: 0, ema: 16, acc: 0, level: 0, born: performance.now() };
     this.gen = 0;
     this.baseMode = mode;

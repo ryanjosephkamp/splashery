@@ -82,7 +82,7 @@ function shrink(png, w) {
 async function record(clip) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 }); // prettier-ignore
   page.on("pageerror", (e) => console.error("page error:", e.message));
-  await page.goto(`${base}?renderer=${RENDERER}&adapt=off&profile=${PROFILE}&labs=1`);
+  await page.goto(`${base}?renderer=${RENDERER}&adapt=off&profile=${PROFILE}&labs=1&watch=off`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
   const run = (fn, arg) => page.evaluate(fn, arg);
@@ -176,6 +176,8 @@ async function record(clip) {
       const pc = await import("/src/pc.js");
       const { app, player } = window.__splashery;
       const stage = player.stage;
+      // (WebGL2 has no GPU fluids to place the handle: its tap is the app's own)
+      if (!player.fluids.fx?.toyToWorld) return void player.act(null);
       const m = player.fluids.fx.toyToWorld();
       const s = stage.cameraEntity.camera.worldToScreen(m.transformPoint(new pc.Vec3(0.14, 1.97, 0.06))); // prettier-ignore
       const r = stage.app.graphicsDevice.canvas.getBoundingClientRect();
