@@ -1,6 +1,17 @@
-# Lane Earth and maps (prefix `geo`): local lane
+# Lane Earth and maps (prefix `geo`): cloud lane (moved from local, October 4, 2026)
 
 ## Brief
+
+**Moved to the cloud (October 4, 2026, the owner's push).** This lane now runs in a cloud session
+that the Operator starts, not on the owner's Mac. Everything below holds, except the local parts:
+your checkout is the session's own clone on the branch named below (no worktree), use the default
+port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Operator" (not as PR
+comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
+"BLOCKED:" (and keep the same line at the top of "## State"), and clips go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK), as docs/OPERATING.md, "Steps for a lane", says.
+About ten lanes build at once during the push: edit only the files you own, merge main into your
+branch whenever it moves, and run your own specs and those of the files you touch before each push;
+the Integrators run the full suite before a merge (say in your PR which specs you ran).
 
 Local lane. You are a Splashery worker session, started by the owner on his Mac from a brief the
 Operator wrote. Repo: ryanjosephkamp/splashery. Your lane: Earth and maps (id `Geo`, prefix `geo`).
@@ -39,6 +50,24 @@ Data are snapshots turned into splats at build time (`tools/geo-*.mjs`). The pag
 service: a live-data toy would need the owner's yes first, like the Wikipedia book. If
 docs/audits/new-sources-2026-10.md (the owner's Dot is researching sources) has landed on main, use
 it.
+
+#### Added October 4, 2026 (the owner's push notes)
+
+- **The earthquakes, live** (Push Plan S14; the owner: "I totally approve a live feed"). The
+  earthquakes toy reads the USGS earthquake feed (the GeoJSON summary feeds, for example the past
+  day or week; public domain, no key) only when the person opens the toy or taps to refresh, shows
+  when the data was fetched, and keeps a dated snapshot shipped with the site for when the feed
+  can't be reached. Nothing is stored or sent. Credit USGS beside it.
+- **More geographic data** (the owner: "flight data ... migration data ... human migration ... birds
+  or butterflies"). Research the sources and their terms first, in your handoff file: animal
+  tracking (Movebank studies; each study has its own license, and many are CC0 or CC BY), bird
+  observations (eBird's terms restrict reuse), monarch butterfly sightings, flights (OpenSky's terms
+  allow non-commercial research only; most flight feeds are paid), and human migration (the UN's
+  International Migrant Stock and UNHCR data; check each license). Build one migration toy from a
+  source the rules allow (CC0, CC BY, public domain, or CC BY-NC with `"nc": true`), animated along
+  real tracks; list the rest with their terms for the Operator.
+- Live feeds are allowed only from keyless public endpoints whose terms allow it (CLAUDE.md, "Live
+  data", added October 4, 2026).
 
 #### You own
 

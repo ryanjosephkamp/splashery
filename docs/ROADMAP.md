@@ -1,6 +1,33 @@
 # Splashery roadmap
 
-## Now: the plan from September 27, 2026
+## Now: the October push (accepted October 4, 2026)
+
+The owner's push alignment notes of October 4, 2026
+([notes](reviews/2026-10-04-push-alignment/notes.md)) turn Splashery from a toy box into a site of
+tools, science and studio work built on splats:
+
+1. **Close the toy shelves.** Finish the hands-on work on the closed shelves (CLAUDE.md, "Working
+   style", "Shelves"); new toys there only when the owner asks, or as photoreal captures at the
+   newest bar.
+2. **Pictures and Pages** is the difference: figures that rise off any page, chosen by a tap or a
+   drawn box, at the depth an author sets, in books, albums, the Picture lab and embeds.
+3. **The Studio**: more to try in every converter, the original beside the 3D, a clean splat mirror,
+   a landscape that grows with the song, and longer video-to-3D scenes.
+4. **Science and the labs**: data that already are Gaussians (crystals, microscopy, cryo-EM,
+   galaxies), imaging (X-ray, CT, MRI), the Earth with live earthquakes, viewers for people's own
+   point clouds, splats and volumes, labs for sound and light, and evidence that every science, math
+   and engineering toy is right (docs/evidence/).
+5. **QR codes** as a specialty: how they work, what survives damage (with a study), codes built from
+   real things, and other barcodes.
+6. **A real site**: a home page, one menu, search, a page for every toy with its evidence, hubs,
+   What's new, offline install, and a PDF catalog of the collection; the front door is the owner's
+   call. Later, maybe native apps.
+7. **Showing why it's special**: a showcase reel, and an honest answer to "can a toy move inside a
+   PDF?" (Codex task 21).
+
+Lanes and order: WORKSTREAMS.md, "Next", "The push".
+
+## Before the push: the plan from September 27, 2026
 
 The owner approved this plan on September 27, 2026 (Part 1 of the How Splashery Is Made page), and
 added step 3 on September 28, 2026 (the Pages into Splats report,

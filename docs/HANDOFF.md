@@ -298,6 +298,40 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-04, late evening (the owner's push alignment notes,
+[reviews/2026-10-04-push-alignment](reviews/2026-10-04-push-alignment/notes.md), and his picks on
+the Push Plan page):
+
+- **The push.** About ten to twelve busy workers on this account until the weekly reset of
+  Wednesday, October 7, 2026, 4 p.m. ET, on his banked reset. Its main areas: Pictures and Pages
+  (Splashery's difference), the Studio, Science and the labs, QR codes, and a real site. Wave 1
+  (WORKSTREAMS.md, "Next") starts on his go; the four local lanes Imaging, Earth and maps, Any pose
+  and QR r3 move to the cloud.
+- **The shelves are closing** (CLAUDE.md, "Working style"): balls, food, nature, gems, medieval,
+  holidays, music, Open me, animals and the cartoon vehicles get only their hands-on finishing;
+  landmarks, the body, weather and fire grow only with photoreal or high-fidelity work; Space, Tiny
+  world, Atoms, Math, and AI and computing stay open; Shapes only as a shape lab that teaches
+  something; clothing later as "canvas" items people print their own pictures on. Photoreal: fix the
+  sounds and bases (Photoreal r3), then add only at the newest bar. The Fluid lab continues only as
+  other work needs it (hard to run on his devices); the Splat field may continue.
+- **Rules he set** (CLAUDE.md, "Ground rules"): the Operator may approve open-source libraries (in
+  LICENSES.md; anything serious goes to him), and he approved a LAZ reader and a DICOM reader; a
+  recorder may save what the person records to a file they choose; the earthquakes toy may read the
+  USGS feed live, and other open geographic feeds on the same terms; the Night sky may ask for a
+  location on tap.
+- **Evidence for every science, math and engineering toy**: sources, tests, and plain words about
+  what is simplified; shown on each toy's page later, never inside the toy, and never naming the
+  tool that checked it (docs/evidence/README.md). Codex tasks 16 to 20 write the first files; Codex
+  task 21 finds out how a toy can move inside a PDF.
+- **His picks**: QR Q5, Q6, Q7, Q12 and Q13 yes (Q1 to Q4, Q9 and Q10 later or after more detail; Q8
+  waits; Q11 deferred); the site W1 to W8 and W10 to W12 yes (W9, for teachers, after the
+  correctness audit); science S2 to S7, S9, S12 to S17 yes (S1 after his word on fetching by code;
+  S8, S10 and S11 not now); tools only T5 and T6 as options; lanes Imaging, Earth and maps, Any pose
+  and a third Integrator yes, Circuits not yet, the English sweep and the write-up near the end.
+- **Fixes he asked for**: the photoreal alarm clock shows the real time (Fix8); the pages' sound on
+  drag turns and the pop-up switch (Pages r6); the Splat mirror's grain and the live Song landscape
+  (Live r7). The Chladni bow fix is already on main (Live input r4).
+
 Settled on 2026-10-04, evening:
 
 - Merged: Manual r2 (#253; "credit no": no credit line until the owner words one), Fluids r7 (#252)

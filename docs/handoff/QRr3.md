@@ -1,6 +1,17 @@
-# Lane QR r3 (prefix `qr3`): local lane
+# Lane QR r3 (prefix `qr3`): cloud lane (moved from local, October 4, 2026)
 
 ## Brief
+
+**Moved to the cloud (October 4, 2026, the owner's push).** This lane now runs in a cloud session
+that the Operator starts, not on the owner's Mac. Everything below holds, except the local parts:
+your checkout is the session's own clone on the branch named below (no worktree), use the default
+port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Operator" (not as PR
+comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
+"BLOCKED:" (and keep the same line at the top of "## State"), and clips go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK), as docs/OPERATING.md, "Steps for a lane", says.
+About ten lanes build at once during the push: edit only the files you own, merge main into your
+branch whenever it moves, and run your own specs and those of the files you touch before each push;
+the Integrators run the full suite before a merge (say in your PR which specs you ran).
 
 Local lane. You are a Splashery worker session, started by the owner on his Mac from a brief the
 Operator wrote. Repo: ryanjosephkamp/splashery. Your lane: QR r3 (id `QRr3`, prefix `qr3`). Your
@@ -40,6 +51,25 @@ from. Every code must still scan.
 6. **Proof.** Run tools/qr-scan-lab.mjs on every new motion and theme (both readers, the phone-like
    captures), and add tests/qr3.spec.mjs. Post a clip of each motion and a card with a still of each
    theme family.
+
+#### Added October 4, 2026 (the owner's push notes)
+
+The owner made the QR code "one of the things that we specialize in" and a major focus of the push
+(docs/reviews/2026-10-04-push-alignment/notes.md). On this toy he asked for:
+
+7. **More effects like the living color.** He likes "an electrical wave effect as the colors change"
+   and wants more like it: for example a current that runs along the module paths, a charge that
+   builds and discharges, a scan-line sweep. Every frame still scans.
+8. **A point-cloud breakup.** As in the splat toys' effects: the code dissolves into a drifting
+   cloud of points (splats shrinking to points and scattering) and gathers back into a code that
+   scans.
+9. More motions overall: count item 2's five plus these, and pick what reads best as motion at phone
+   size. He asked "how much can we modify QR codes while keeping them working?": the answer for the
+   motions is the scan lab's per-frame result, which goes in your PR.
+
+Two other lanes work on QR codes beside you and don't touch `src/qr/`: lane QR lab r2 (prefix `qrs`,
+the "How a QR code works" toy, the Damage lab and a study) and, later, lane QR craft (picture codes
+and codes built from real things). If they need a hook in `src/qr/`, the Operator asks you.
 
 #### You own
 

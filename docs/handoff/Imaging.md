@@ -1,6 +1,17 @@
-# Lane Imaging (prefix `img`): local lane
+# Lane Imaging (prefix `img`): cloud lane (moved from local, October 4, 2026)
 
 ## Brief
+
+**Moved to the cloud (October 4, 2026, the owner's push).** This lane now runs in a cloud session
+that the Operator starts, not on the owner's Mac. Everything below holds, except the local parts:
+your checkout is the session's own clone on the branch named below (no worktree), use the default
+port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Operator" (not as PR
+comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
+"BLOCKED:" (and keep the same line at the top of "## State"), and clips go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK), as docs/OPERATING.md, "Steps for a lane", says.
+About ten lanes build at once during the push: edit only the files you own, merge main into your
+branch whenever it moves, and run your own specs and those of the files you touch before each push;
+the Integrators run the full suite before a merge (say in your PR which specs you ran).
 
 Local lane. You are a Splashery worker session, started by the owner on his Mac from a brief the
 Operator wrote. Repo: ryanjosephkamp/splashery. Your lane: Imaging (id `Imaging`, prefix `img`).
