@@ -162,7 +162,7 @@ export class Stage {
     this.projectorTries++;
     try {
       if (!this.device.isWebGPU) return void (this.projectorTries = Infinity);
-      for (const cb of this.device._callbacks?.devicerestored || []) {
+      for (const cb of this.device._callbacks?.get?.("devicerestored") || []) {
         const p = cb?.scope?.renderer?.projector;
         if (!p?._projectorComputes || typeof p._destroyProjectorComputes !== "function") continue;
         const clear = p._destroyProjectorComputes;
