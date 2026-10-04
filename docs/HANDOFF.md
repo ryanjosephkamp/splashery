@@ -298,6 +298,15 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-04, evening:
+
+- Merged: Manual r2 (#253; "credit no": no credit line until the owner words one), Fluids r7 (#252)
+  and the live3 still-mirror test fix (#259), each after a full test run.
+- Codex's About audit (#193) is reworked in #260 (47 kept, 26 fixed, 17 kept as before, 18 kept
+  main's newer text). It changes public toys' help text, so it waits for the owner's OK.
+- The owner agreed to a push on this account through the scheduled reset of Wednesday, October 7, 4
+  p.m. ET, using his banked reset; the plan's ideas wait for his picks.
+
 Settled on 2026-10-04, afternoon:
 
 - The hands-on demo toys are merged: Engine #255 (a ball twisting on the spot stops) and #232, then
