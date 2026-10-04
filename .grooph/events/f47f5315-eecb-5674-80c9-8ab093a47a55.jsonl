@@ -155,3 +155,13 @@
 {"v":1,"t":"2026-10-04T11:34:05.630Z","harness":"claude-code","event":"session-end","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","cwd":"splashery"}
 {"v":1,"t":"2026-10-04T12:03:46.366Z","harness":"claude-code","event":"session-start","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","cwd":"splashery"}
 {"v":1,"t":"2026-10-04T12:03:46.638Z","harness":"claude-code","event":"turn-start","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:04:24.620Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:05:41.028Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:05:46.095Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Read","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:06:21.278Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:06:35.438Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:07:30.721Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:07:41.722Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Read","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:08:49.010Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:08:53.132Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Read","cwd":"splashery"}
+{"v":1,"t":"2026-10-04T12:19:03.633Z","harness":"claude-code","event":"tool","session":"f47f5315-eecb-5674-80c9-8ab093a47a55","tool":"Bash","cwd":"splashery"}
