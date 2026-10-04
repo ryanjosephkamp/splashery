@@ -1,0 +1,28 @@
+{
+  "measurementBaseline": "aba77089cd935f20358302a8ba8c7b39215b7f2d",
+  "synchronizedMain": "9b548b3456ee2da47826e31acec0be3f58c46199",
+  "measuredAfterSynchronization": false,
+  "upstreamChangedFiles": [
+    "docs/PACKS.md",
+    "docs/handoff/HandsEngineA.md",
+    "docs/handoff/HandsEngineB.md",
+    "docs/handoff/HandsEngineC.md",
+    "docs/handoff/Physics.md",
+    "src/effects.js",
+    "src/kit.js",
+    "src/motion.js",
+    "src/physics/fields.js",
+    "src/physics/hands-on.js",
+    "src/physics/joints.js",
+    "src/physics/materials.js",
+    "src/physics/soft.js",
+    "src/physics/water-view.js",
+    "src/physics/world.js",
+    "src/player.js",
+    "src/rig.js",
+    "tests/hea-engine.spec.mjs",
+    "tests/heb-engine.spec.mjs",
+    "tests/hec-engine.spec.mjs"
+  ],
+  "auditAuthoredApplicationChanges": false
+}

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "baseline": "aba77089cd935f20358302a8ba8c7b39215b7f2d",
+  "expected": {
+    "lab": 80,
+    "peers": 84,
+    "peerslow": 4,
+    "lower": 60,
+    "safe": 20,
+    "stress": 28,
+    "auto": 8
+  },
+  "renderingCells": 284,
+  "windows": 568,
+  "solverCells": 80,
+  "solverSimulationSteps": 14400,
+  "solverTimedSteps": 12000,
+  "solverLiquidTimedSteps": 9600,
+  "independentPilotCells": 6,
+  "soakRenderers": 2,
+  "checkedSourceFiles": 30,
+  "actualRenderers": ["webgl2", "webgpu"],
+  "pageErrors": 0,
+  "frameIntervals": 353278,
+  "physicalPhoneUsed": false,
+  "errors": [],
+  "sourceVerification": {
+    "pinnedBaselineHashes": true,
+    "checkoutHead": "9b548b3456ee2da47826e31acec0be3f58c46199",
+    "changedAfterBaseline": ["src/player.js", "src/kit.js"],
+    "allTimingBatchesAtPinnedBaseline": true
+  },
+  "growthProbeCycles": 6
+}
