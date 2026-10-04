@@ -227,17 +227,17 @@ export const TOY_HELP = {
   blueberry: {
     howTo: "Tap it to peel back its skin.",
     about:
-      "Blueberries are small round berries that grow on bushes and first come from North America. A fresh one wears a dusty, pale coat called bloom: a thin layer of wax the berry makes to protect itself. At the bottom sits a little five-pointed crown, the leftover end of the flower.\n\nTap it and the dark skin peels back toward you in five strips to show the pale green flesh, then closes again. Almost all the blue is in the skin; the inside of most blueberries is pale.",
+      "Blueberries are small round berries that grow on bushes; the main cultivated kinds come from North America. A fresh one wears a dusty, pale coat called bloom: a thin layer of wax the berry makes to protect itself. At the bottom sits a little five-pointed crown, the leftover end of the flower.\n\nTap it and the dark skin peels back toward you in five strips to show the pale green flesh, then closes again. Almost all the blue is in the skin; the inside of most blueberries is pale.",
   },
   grape: {
     howTo: "Tap it to peel back the skin.",
     about:
-      "A real grape, captured from many photos and drawn with many thousands of tiny, soft splats. Grapes grow in bunches on woody vines; people eat them fresh, dry them into raisins and press them for juice.\n\nTap it and four strips of the dark skin peel back from the stem end to show the pale flesh underneath, then the skin closes again. The color of a grape is almost all in its skin: under it, the flesh of red and green grapes alike is pale and see-through.",
+      "A real grape, captured from many photos and drawn with many thousands of tiny, soft splats. Grapes grow in bunches on woody vines; people eat them fresh, dry them into raisins and press them for juice.\n\nTap it and four strips of the dark skin peel back from the stem end to show the pale flesh underneath, then the skin closes again. The color of a grape is almost all in its skin: in most table grapes, the flesh beneath is pale and see-through, though some varieties have colored flesh.",
   },
   "star-cookie": {
     howTo: "Tap it to crumble it and put it back together.",
     about:
-      "Cinnamon stars are small star-shaped cookies baked at Christmas, above all in Germany, Switzerland and Austria. They are made with ground almonds or hazelnuts, sugar, egg whites and cinnamon, with no flour, and are topped with a crisp white glaze of beaten egg white and sugar.\n\nTap it and it crumbles into pieces and crumbs that fall away, then puts itself back together. The glaze goes on before baking, and a low oven keeps it snowy white.",
+      "Cinnamon stars are small star-shaped cookies baked at Christmas, above all in Germany, Switzerland and Austria. They are made with ground almonds or hazelnuts, sugar, egg whites and cinnamon, often with little or no flour, and are topped with a crisp white glaze of beaten egg white and sugar.\n\nTap it and it crumbles into pieces and crumbs that fall away, then puts itself back together. The glaze goes on before baking, and a low oven keeps it snowy white.",
   },
   tomatoes: {
     howTo:
@@ -268,7 +268,7 @@ export const TOY_HELP = {
   "wooden-elephant": {
     howTo: "Tap it to raise its trunk and trumpet.",
     about:
-      "A carved wooden elephant, the kind of figure woodcarvers have made for a very long time, shaped by hand with knives and chisels. Elephants are the largest animals on land. Their trunk is a nose and an upper lip joined together, strong enough to lift a log and gentle enough to pick up a single peanut.\n\nTap it and the trunk uncurls straight up to trumpet with a few toots, then curls back down while the elephant rocks on its feet. An elephant's trunk has no bones at all, but tens of thousands of muscles.",
+      "A carved wooden elephant, the kind of figure woodcarvers have made for a very long time, shaped by hand with knives and chisels. Elephants are the largest animals on land. Their trunk is a nose and an upper lip joined together, strong enough to lift a log and gentle enough to pick up a single peanut.\n\nTap it and the trunk uncurls straight up to trumpet with a few toots, then curls back down while the elephant rocks on its feet. An elephant's trunk has no bones at all, but tens of thousands of muscle bundles.",
   },
   "marble-bust": {
     howTo: "Tap it to make it turn and say hello in Latin.",
@@ -288,7 +288,7 @@ export const TOY_HELP = {
   "vintage-camera": {
     howTo: "Tap it to take a photo with a flash.",
     about:
-      "An old film camera. Inside, a roll of film coated with chemicals that change when light hits them sits behind the lens. Pressing the button opens a shutter for a split second, the lens lets in a picture of the world, and the film keeps it. Then a lever winds the film on to a fresh frame.\n\nTap it and the flash bursts, the whole scene whites out for a moment, and you hear the shutter and the whoomph of the flash powder. Early cameras needed people to sit still for minutes; a modern shutter can open for less than a thousandth of a second.",
+      "An old film camera. Inside, a roll of film coated with chemicals that change when light hits them sits behind the lens. Pressing the button opens a shutter for a split second, the lens lets in a picture of the world, and the film keeps it. Then a lever winds the film on to a fresh frame.\n\nTap it and the flash bursts, the whole scene whites out for a moment, and you hear the shutter and a stylized whoomph from the flash. Early cameras needed people to sit still for minutes; a modern shutter can open for less than a thousandth of a second.",
   },
   boombox: {
     howTo: "Tap it to play a beat.",
@@ -303,7 +303,7 @@ export const TOY_HELP = {
   "carrot-cake": {
     howTo: "Tap it to lift out a slice.",
     about:
-      "Carrot cake is a spiced cake made with grated carrots, which melt into the crumb and keep it soft and moist. It is often baked with cinnamon and nuts and topped with a thick, tangy cream cheese frosting.\n\nTap it and a slice facing you lifts out of the cake, showing the layers of crumb and frosting on its cut sides and in the gap. Carrots are sweet enough to bake with because they hold a lot of natural sugar, more than most other vegetables.",
+      "Carrot cake is a spiced cake made with grated carrots, which bake into the crumb and keep it moist. It is often baked with cinnamon and nuts and topped with a thick, tangy cream cheese frosting.\n\nTap it and a slice facing you lifts out of the cake, showing the layers of crumb and frosting on its cut sides and in the gap. Carrots are sweet enough to bake with because they are among the sweeter vegetables.",
   },
   pomegranate: {
     howTo: "Tap it to split it open.",
@@ -402,7 +402,7 @@ export const TOY_HELP = {
   volleyball: {
     howTo: "Tap it to set it up and spike it down.",
     about:
-      "A volleyball is a light ball of smooth leather panels. Volleyball was invented in 1895 by William G. Morgan, a teacher in Holyoke, Massachusetts. Each team may touch the ball three times before sending it back over the net.\n\nTap it for a set and a spike, the classic attack: a soft touch sends it straight up without spin, then a spike drives it down hard with topspin, so it slams into the floor, kicks up high and bounces out. Pick its two colors in the Toy tab.",
+      "A volleyball is a light ball of smooth leather panels. Volleyball was invented in 1895 by William G. Morgan, a teacher in Holyoke, Massachusetts. In ordinary indoor play, a team has three hits to return the ball; a block does not count as one of them.\n\nTap it for a set and a spike, the classic attack: a soft touch sends it straight up without spin, then a spike drives it down hard with topspin, so it slams into the floor, kicks up high and bounces out. Pick its two colors in the Toy tab.",
   },
   "water-polo-ball": {
     howTo: "Tap it to toss it in. Hands-on: drop it on the water and it bobs and floats.",
@@ -437,7 +437,7 @@ export const TOY_HELP = {
   dodgeball: {
     howTo: "Tap it to slam it down and watch it squash.",
     about:
-      "A dodgeball is a soft, light ball of rubber or foam, made to be thrown at other players in a game of dodging, catching and throwing. It is soft so that it does not hurt when it hits.\n\nTap it and it is lifted and slammed down: the soft rubber squashes flat and wobbles, then it bounces up again and squashes at each landing. A soft ball squashes more than a hard one, and it loses more of its bounce while it is squashed. Pick its color in the Toy tab.",
+      "A dodgeball is a soft, light ball of rubber or foam, made to be thrown at other players in a game of dodging, catching and throwing. Its soft material cushions an impact.\n\nTap it and it is lifted and slammed down: the soft rubber squashes flat and wobbles, then it bounces up again and squashes at each landing. A soft ball squashes more than a hard one, and it loses more of its bounce while it is squashed. Pick its color in the Toy tab.",
   },
   "medicine-ball": {
     howTo: "Tap it to heave it up and drop it with a thud.",
@@ -484,12 +484,12 @@ export const TOY_HELP = {
   sun: {
     howTo: "Tap it to set off a solar flare.",
     about:
-      "The Sun is the star at the center of our solar system, a huge ball of hot, glowing gas. About 1.3 million Earths could fit inside it, and its light takes about 8 minutes to reach us.\n\nThis Sun churns by itself: bright cells of hot gas swell and fade, and loops of glowing gas called prominences rise and sink at its edge. Tap it to set off a solar flare: a loop of hot gas climbs off the top edge, swells, and its top breaks away into space. Real flares are sudden bursts of energy that can disturb radio signals on the Earth.",
+      "The Sun is the star at the center of our solar system, a huge ball of hot, glowing gas. About 1.3 million Earths could fit inside it, and its light takes about 8 minutes to reach us.\n\nThis Sun churns by itself: bright cells of hot gas swell and fade, and loops of glowing gas called prominences rise and sink at its edge. Tap it to set off a solar flare: its feet flash white, a loop of hot gas climbs off the top edge, swells, and its top breaks away into space. Real flares are sudden bursts of energy that can disturb radio signals on Earth, and the gas thrown off with them can light up auroras.",
   },
   "solar-system": {
     howTo: "Tap to line up the planets and watch Mercury cross the Sun.",
     about:
-      "The solar system is the Sun and everything that circles it: eight planets, their moons, and many asteroids and comets. All the planets go around the Sun the same way, in orbits that lie nearly in one flat plane. The inner planets go around fastest: Mercury takes 88 days, Neptune about 165 years.\n\nThis is a model, spaced out so no two planets touch. Tap it and every planet swings into one row. The model tips until you look along its plane, and Mercury passes in front of the Sun as a small dark dot, which is called a transit. Then the planets spread out again. Real transits of Mercury happen about 13 times a century.",
+      "The solar system is the Sun and everything that circles it: eight planets, their moons, and many asteroids and comets. All the planets go around the Sun the same way, in orbits that lie nearly in one flat plane. The inner planets go around fastest: Mercury takes 88 days, Neptune about 165 years.\n\nThis is a model, not to scale: sizes and distances are squeezed so no two planets touch. Tap it and every planet swings into one row. The model tips until you look along its plane, and Mercury passes in front of the Sun as a small dark dot, which is called a transit. Then the planets spread out again. Real transits of Mercury happen about 13 times a century.",
   },
   mercury: {
     howTo: "Tap it to spin it fast in the sunlight.",
@@ -499,7 +499,7 @@ export const TOY_HELP = {
   venus: {
     howTo: "Tap it to whip the clouds around.",
     about:
-      "Venus is the second planet from the Sun and nearly the same size as the Earth. It is wrapped in thick yellowish clouds that trap heat, so it is the hottest planet of all, about 465 degrees Celsius at the ground, even hotter than Mercury.\n\nVenus spins backward compared with most planets, and very slowly, but its cloud tops race all the way around in about four Earth days. Tap it and the clouds whip around backward: the wide band at the middle goes around twice and the caps at the poles once, so the patterns stretch where they meet, then line up again.",
+      "Venus is the second planet from the Sun and nearly the same size as the Earth. Its dense atmosphere, mostly carbon dioxide, traps heat beneath thick clouds, so it is the hottest planet of all, about 465 degrees Celsius at the ground, even hotter than Mercury.\n\nVenus spins backward compared with most planets, and very slowly, but its cloud tops race all the way around in about four Earth days. Tap it and the clouds whip around backward: the wide band at the middle goes around twice and the caps at the poles once, so the patterns stretch where they meet, then line up again.",
   },
   earth: {
     howTo: "Tap it to turn it through one day and night.",
@@ -530,12 +530,12 @@ export const TOY_HELP = {
   uranus: {
     howTo: "Tap it to roll it on its side like a wheel.",
     about:
-      "Uranus is the seventh planet from the Sun, an ice giant colored blue-green by methane gas in its air. It is tipped right over on its side, so it rolls around the Sun like a ball. In 1781 William Herschel found it, the first planet discovered with a telescope.\n\nHere its thin rings turn slowly all the time. Tap it and it rolls like a wheel, to the right and back again. A year on Uranus lasts about 84 Earth years, so each pole gets about 42 years of sunlight and then about 42 years of dark.",
+      "Uranus is the seventh planet from the Sun, an ice giant colored blue-green by methane gas in its air. It is tipped right over on its side, with its axis tilted about 98 degrees, so it rolls around the Sun like a ball. In 1781 William Herschel found it, the first planet discovered with a telescope.\n\nHere its thin rings turn slowly all the time. Tap it and it rolls like a wheel, to the right and back again. A year on Uranus lasts about 84 Earth years, so each pole gets about 42 years of sunlight and then about 42 years of dark.",
   },
   neptune: {
     howTo: "Tap it to race the clouds around it.",
     about:
-      "Neptune is the eighth and farthest planet from the Sun, a deep blue ice giant. It has the strongest winds in the solar system, faster than 2,000 kilometers an hour. It was the first planet found by math: astronomers worked out where it must be before they saw it in 1846.\n\nTap it and belts of white cloud race around it twice while a band with a dark storm drifts the other way. The spacecraft Voyager 2 saw a great dark storm like this when it flew past in 1989. Neptune takes about 165 years to go around the Sun once.",
+      "Neptune is the eighth and farthest planet from the Sun, an ice giant of pale greenish blue, a little bluer than Uranus; the deep blue of older spacecraft pictures came from processing. It has the strongest winds in the solar system, faster than 2,000 kilometers an hour. It was the first planet found by math: astronomers worked out where it must be before they saw it in 1846.\n\nTap it and belts of white cloud race around it twice while a band with a dark storm drifts the other way. The spacecraft Voyager 2 saw a great dark storm like this when it flew past in 1989. Neptune takes about 165 years to go around the Sun once.",
   },
   planet: {
     howTo: "Tap it to sweep night across it. Pick a planet under Planet in the Toy tab.",
@@ -565,7 +565,7 @@ export const TOY_HELP = {
   star: {
     howTo: "Tap to run the star's life, sped up. Pick the kind of star in the Toy tab.",
     about:
-      "A star is a huge ball of hot gas that shines because, deep in its core, it squeezes hydrogen into helium and gives off energy. Its color shows how hot it is: red stars are the coolest and blue stars the hottest. The Sun is a yellow star, about halfway through its life.\n\nTap it to run the life of a star like the Sun, sped up. It swells into a red giant, puffs off its outer layers as a glowing shell and shrinks to a tiny white dwarf; then a new star lights up. A real star like the Sun takes about 10 billion years to do this. Pick the kind of star in the Toy tab.",
+      "A star is a huge ball of hot gas that shines because, deep in its core, it squeezes hydrogen into helium and gives off energy. Its color shows how hot it is: red stars are the coolest and blue stars the hottest. The Sun is a yellow star, about halfway through its life.\n\nTap it to run the life of a star like the Sun, sped up. It swells into a red giant, puffs off its outer layers as a glowing shell and shrinks to a tiny white dwarf; then a new star lights up. A real star like the Sun takes about 10 billion years to do this. Pick the kind of star in the Toy tab; a tap always plays the Sun's story.",
   },
   pulsar: {
     howTo: "Tap it to spin it up. Set its spin speed in the Toy tab.",
@@ -600,29 +600,29 @@ export const TOY_HELP = {
   "spiral-galaxy": {
     howTo: "Tap to swirl the arms. Pick a galaxy style in the Toy tab.",
     about:
-      "A galaxy is a huge family of stars, gas and dust held together by gravity. In a spiral galaxy, bright arms curl out from a glowing center. Our own galaxy, the Milky Way, is a spiral about 100,000 light-years across with hundreds of billions of stars, and the Sun takes about 230 million years to go around it once.\n\nHere the spiral turns slowly as one piece while its stars orbit, the inner ones faster. The arms are like traffic jams that the stars pass through, so they keep their shape. Tap it to swirl the arms once around, fast, while the core flares. Pick the Milky Way or Andromeda style in the Toy tab.",
+      "A galaxy is a huge family of stars, gas and dust held together by gravity. In a spiral galaxy, bright arms curl out from a glowing center. Our own galaxy, the Milky Way, is a spiral about 100,000 light-years across with hundreds of billions of stars, and the Sun takes about 230 million years to go around it once.\n\nHere the spiral turns slowly as one piece while its stars orbit, the inner ones faster. The toy illustrates one idea for spiral arms: a moving density pattern that stars pass through, like traffic through a jam. Real galaxies can also have changing arms. Tap it to swirl the arms once around, fast, while the core flares. Pick the Milky Way or Andromeda style in the Toy tab.",
   },
 
   // ---- Tiny world -----------------------------------------------------------------------
   virus: {
     howTo: "Tap it to make copies that bud off and drift away.",
     about:
-      "A virus is a tiny bundle of genes inside a shell of protein, far smaller than a bacterium. It cannot grow or copy itself on its own: it has to get inside a living cell, which then makes new copies of it. The spikes on its shell help it latch on to the right kind of cell.\n\nThis one's spikes sway gently. Tap it and a wave ripples through them, and two smaller copies bud out from behind it, drift apart and fade away. Most viruses are so small that only an electron microscope can show them.",
+      "A virus is a tiny bundle of genes inside a shell of protein, usually smaller than a bacterium. It cannot grow or copy itself on its own: it has to get inside a living cell, which then makes new copies of it. The spikes on its shell help it latch on to the right kind of cell.\n\nThis one's spikes sway gently. Tap it and a wave ripples through them, and two smaller copies bud out from behind it, drift apart and fade away. Most viruses are so small that only an electron microscope can show them.",
   },
   bacteriophage: {
     howTo: "Tap it to land and inject its DNA.",
     about:
-      "A bacteriophage, or phage, is a virus that infects only bacteria, not people. It has a head full of DNA, a hollow tail and thin legs, and it lands on a bacterium a bit like a spacecraft landing on the Moon.\n\nTap it to play the injection: the legs swing out, the sheath around the tail snaps to about half its length, the tail pokes through the base plate and a glowing strand of DNA coils out. Phages are thought to outnumber the bacteria on Earth about ten to one, and doctors are studying them as a way to treat infections.",
+      "A bacteriophage, or phage, is a virus that infects only bacteria, not people. This tailed phage has a head full of DNA, a hollow tail and thin tail fibers, like legs, and it lands on a bacterium a bit like a spacecraft landing on the Moon.\n\nTap it to play the injection: the legs swing out, the sheath around the tail snaps to about half its length, the tail pokes through the base plate and a glowing strand of DNA coils out. Phages are thought to be the most numerous biological things on Earth, and doctors are studying them as a way to treat infections.",
   },
   bacterium: {
     howTo: "Tap it to make it divide in two. Try the Swim slider in the Toy tab.",
     about:
-      "A bacterium is a living thing made of just one small cell, with no nucleus: its DNA floats inside it. This one is rod-shaped, with long whips called flagella that spin like propellers to push it along. Most bacteria are harmless, and many help us, like the ones in our gut that help digest food.\n\nTap it and it divides in two, as bacteria do: it pinches in at the middle as a new wall closes across it, its DNA is shared between the halves, and the two cells come apart. Then the toy slides them back together. Some bacteria can divide every 20 minutes.",
+      "A bacterium is a living thing made of just one small cell, with no nucleus: its DNA floats inside it. This one is rod-shaped, with long whips called flagella that spin like propellers to push it along. Most bacteria are harmless, and many help us, like the ones in our gut that help digest food.\n\nTap it and it divides in two, as bacteria do: it pinches in at the middle as a new wall closes across it, its DNA is shared between the halves, and the two cells come apart. Then the toy slides them back together. Some bacteria can divide every 20 minutes. Swim controls its swimming motion and Color sets its tint.",
   },
   "red-blood-cell": {
     howTo: "Tap it to curl it into a sickle shape and back.",
     about:
-      "Red blood cells carry oxygen from the lungs to every part of the body. Each is a soft disc, dented in on both sides, that bends to squeeze through the tiniest blood vessels. It has no nucleus and is packed with hemoglobin, the red protein that holds the oxygen.\n\nTap it and it sickles: it stretches and curls into a stiff crescent, then relaxes back into a disc. This happens in sickle cell disease, where a change in the hemoglobin makes cells stiffen when oxygen is low. The body makes millions of new red blood cells every second.",
+      "Red blood cells carry oxygen from the lungs to every part of the body. Each is a soft disc, dented in on both sides, that bends to squeeze through the tiniest blood vessels. A mature human red blood cell has no nucleus and is packed with hemoglobin, the red protein that holds the oxygen.\n\nTap it and it sickles: it stretches and curls into a stiff crescent, then relaxes back into a disc. This happens in sickle cell disease, where a change in the hemoglobin makes cells stiffen when oxygen is low. The body makes millions of new red blood cells every second.",
   },
   neuron: {
     howTo: "Tap it to fire a signal. Try the Signal slider in the Toy tab.",
@@ -637,12 +637,12 @@ export const TOY_HELP = {
   "animal-cell": {
     howTo: "Tap it to divide it in two. Switch off the Cutaway in the Toy tab to see it whole.",
     about:
-      "Cells are the tiny building blocks of every living thing, and the human body is made of tens of trillions of them. Inside an animal cell's soft skin, its membrane, are many parts: the nucleus holds the DNA, mitochondria make energy, and the Golgi packs up things the cell makes.\n\nA wedge is cut away so you can see inside. Tap it and the cell divides: the nucleus splits in two, then the cell pinches in two, sharing out its parts. Then the toy flows the two back into one. This is how bodies grow and repair themselves.",
+      "Cells are the tiny building blocks of every living thing, and the human body is made of tens of trillions of them. Inside an animal cell's soft skin, its membrane, are many parts: the nucleus holds the DNA, mitochondria turn food into energy the cell can use, and the Golgi packs up things the cell makes.\n\nA wedge is cut away so you can see inside. Tap it and the cell divides: the nucleus splits in two, then the cell pinches in two, sharing out its parts. This is how bodies grow and repair themselves. Cutaway opens or closes the viewing wedge.",
   },
   dna: {
     howTo: "Tap it to unzip it and zip it back up.",
     about:
-      "DNA is the long molecule that carries the instructions for building and running a living thing. It is shaped like a twisted ladder, a double helix: two strands wind around each other, joined by pairs of bases, A with T and C with G, like the rungs.\n\nTap it and it unzips almost to the bottom, the bases lighting up in pairs as it opens, then zips back up. A cell unzips its DNA like this to copy it. In 1953 scientists worked out its shape, helped by Rosalind Franklin's X-ray pictures. The DNA in one human cell would stretch about 2 meters if pulled straight.",
+      "DNA is the long molecule that carries the instructions for building and running a living thing. It is shaped like a twisted ladder, a double helix: two strands wind around each other, joined by pairs of bases, A with T and C with G, like the rungs.\n\nTap it and it unzips almost to the bottom, the bases lighting up in pairs as it opens, then zips back up. A cell unzips its DNA like this to copy it. In 1953 scientists worked out its shape, helped by Rosalind Franklin's X-ray pictures. The DNA in a typical human cell with a nucleus would stretch about 2 meters if pulled straight. Partner sets the matching strand's color.",
   },
   "white-blood-cell": {
     howTo: "Tap it to catch a bacterium and eat it up.",
@@ -657,12 +657,12 @@ export const TOY_HELP = {
   diatom: {
     howTo: "Tap it to make the glass shell glint and open.",
     about:
-      "A diatom is a tiny alga, a single cell that lives in a shell of glass. The shell comes in two halves that fit together like a box and its lid, and it is covered in rows of fine holes. Diatoms float in oceans, lakes and rivers, and use sunlight to make food.\n\nTap it and a glint of light runs across the glass, then the shell opens like a clam to show the golden cell inside, and closes again. Diatoms make about a fifth of the oxygen on Earth.",
+      "A diatom is a single-celled alga with a shell made of silica, the material in glass. Its patterned shell, called a frustule, has two overlapping halves, rather like a box and its lid. Diatoms live in fresh and salt water and use sunlight to make food, releasing oxygen.\n\nTap it and a glint of light runs across the glass, then the two halves lift apart to show the golden cell inside and close again; real diatoms don't open like this. Diatoms make about a fifth of the oxygen on Earth.",
   },
   tardigrade: {
     howTo: "Tap it to make it wiggle.",
     about:
-      "Tardigrades, or water bears, are tiny animals, most about half a millimeter long, with a plump body and eight stubby legs that end in claws. They live all over the world, in moss, soil, ponds and the sea.\n\nWhen their home dries out, they pull in their legs, curl into a dry little ball called a tun and wait, sometimes for years, until water brings them back. In 2007 some were even taken into space on the outside of a satellite, and a few came back alive.",
+      "Tardigrades, or water bears, are tiny animals, most about half a millimeter long, with a plump body and eight stubby legs that end in claws. They live all over the world, in moss, soil, ponds and the sea.\n\nWhen their home dries out, they pull in their legs, curl into a dry little ball called a tun and wait, sometimes for years, until water brings them back. In 2007 some were even taken into space on the outside of a satellite, and a few came back alive. Tap it and it wiggles its body and legs.",
   },
   pollen: {
     howTo: "Tap it to burst out a puff of tiny grains. Pick the Plant in the Toy tab.",
@@ -672,7 +672,7 @@ export const TOY_HELP = {
   snowflake: {
     howTo: "Tap to melt it and grow a new flake. Pick the kind of crystal in the Toy tab.",
     about:
-      "A snowflake starts high in a cloud, when water vapor freezes onto a tiny speck of dust and grows into an ice crystal. It has six sides because of the way water molecules fit together as they freeze. How cold and damp the air is decides its shape, from simple plates to feathery stars.\n\nTap it and the arms melt back to the middle, then a new flake grows out, a new pattern each time. In the Toy tab, pick the kind of crystal. In 1885 Wilson Bentley became the first person to photograph a single snowflake.",
+      "A snowflake starts high in a cloud, when water vapor deposits as ice onto a tiny speck of dust and grows into an ice crystal. It has six sides because of the way water molecules fit together as they freeze. How cold and damp the air is decides its shape, from simple plates to feathery stars.\n\nTap it and the arms melt back to the middle, then a new flake grows out, a new pattern each time. In the Toy tab, pick the kind of crystal. In 1885 Wilson Bentley became the first person to photograph a single snowflake.",
   },
   chromosome: {
     howTo: "Tap it to pull its two halves apart.",
@@ -682,7 +682,7 @@ export const TOY_HELP = {
   mitochondrion: {
     howTo: "Tap it to power it up. Switch off the Cutaway in the Toy tab to see it whole.",
     about:
-      "A mitochondrion is a tiny part inside a cell, often called the powerhouse of the cell. It uses oxygen to turn the sugar from food into ATP, the small molecule that carries energy to every part of the cell. Its inner skin is folded into ridges called cristae, which gives it lots of room to work.\n\nThe top is cut away to show the ridges. Tap it and light runs along them, it swells, and bright sparks of ATP pop out and drift off. Mitochondria even have their own DNA, which children get from their mothers.",
+      "A mitochondrion is a tiny part inside a cell, often called the powerhouse of the cell. It uses oxygen to turn the sugar from food into ATP, the small molecule that carries energy to every part of the cell. Its inner skin is folded into ridges called cristae, which gives it lots of room to work.\n\nThe top is cut away to show the ridges. Tap it and light runs along them, it swells, and bright sparks of ATP pop out and drift off. Mitochondria even have their own DNA, which humans usually inherit from their mothers. Cutaway opens or closes the view into the cristae.",
   },
   paramecium: {
     howTo: "Tap it to swim a loop. Try the Swim slider in the Toy tab.",
@@ -699,12 +699,12 @@ export const TOY_HELP = {
   orbital: {
     howTo: "Tap it to excite the electron. Pick any orbital up to 4f, or lobes, in the Toy tab.",
     about:
-      "An electron does not circle the center of an atom like a planet. It spreads out as a cloud, called an orbital, that shows where it is most likely to be found. Orbitals come in set shapes: a ball, a dumbbell, a dumbbell with a ring, and more. The two colors show the two halves of the electron's wave.\n\nTap it and a tiny packet of light, a photon, comes in. The electron takes it in, jumps up to a bigger orbital and glows, then drops back with a flash and gives the light out again. This is how glowing gases give off light of their own colors.",
+      "An electron does not circle the center of an atom like a planet. It spreads out as a cloud, called an orbital, that shows where it is most likely to be found. Orbitals come in set shapes: a ball, a dumbbell, a dumbbell with a ring, and more. The two colors show where the electron's wave is plus and where it is minus, not electric charge.\n\nPick an orbital from 1s to 4f, as a cloud or as lobes, in the Toy tab. Tap it and a tiny packet of light, a photon, comes in. The electron takes it in, jumps up to a bigger orbital and glows, then drops back with a flash and gives the light out again. This is how glowing gases give off light of their own colors.",
   },
   atom: {
     howTo: "Tap it to speed up the electrons. Pick any of the 118 elements in the Toy tab.",
     about:
-      "Everything around you is made of atoms. Each one has a tiny heavy center, the nucleus, made of protons and neutrons, with electrons around it. The number of protons decides which element it is: carbon has 6, oxygen 8 and gold 79.\n\nThis model draws the electrons in rings called shells, an idea of Niels Bohr's from 1913; pick the Cloud style for a truer picture, or Every nucleon to see all its protons and neutrons. Tap it and the electrons whirl faster until each shell blurs into a glowing ring, then slow down. The nucleus is tens of thousands of times smaller than the whole atom, which is mostly empty space.",
+      "Everything around you is made of atoms. Each one has a tiny heavy center, the nucleus, made of protons and (in almost every atom) neutrons, with electrons around it. The number of protons decides which element it is: carbon has 6, oxygen 8 and gold 79. Pick any of the 118 elements in the Toy tab.\n\nThis model draws the electrons in rings called shells, an idea of Niels Bohr's from 1913; pick the Cloud style for a truer picture, or Every nucleon to see all its protons and neutrons. Tap it and the electrons whirl faster until each shell blurs into a glowing ring, then slow down. The nucleus is tens of thousands of times smaller than the whole atom, which is mostly empty space.",
   },
   molecule: {
     howTo: "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
@@ -720,7 +720,7 @@ export const TOY_HELP = {
     howTo:
       "Tap a tile to raise its atom, again to lower it. Tap the board for a tour, 57-71 for its row.",
     about:
-      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
+      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of a typical isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
   },
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
@@ -762,19 +762,19 @@ export const TOY_HELP = {
   opal: {
     howTo: "Tap it to tilt it and roll flashes of color across it. Pick an opal in the Toy tab.",
     about:
-      "Opal is made of tiny balls of silica, the stuff of quartz and sand, packed in neat rows with a little water between them. When light passes through the rows, it splits into flashes of color that change as the stone moves. This is called play of color. Opal is cut into a smooth dome called a cabochon, not into facets.\n\nTap it and it rocks in the light while patches of color roll across it, changing as they go. In the Toy tab, pick a white, black or fire opal. Most of the world's opal comes from Australia.",
+      "Opal is made of tiny balls of silica, the stuff of quartz and sand, with a little water between them. In precious opal the balls are packed in neat rows, and light passing through them splits into flashes of color that change as the stone moves. This is called play of color. Fire opal is named for its orange body. Opal is cut into a smooth dome called a cabochon, not into facets.\n\nTap it and it rocks in the light while patches of color roll across it, changing as they go. In the Toy tab, pick a white, black or fire opal. Most of the world's opal comes from Australia.",
   },
   pearl: {
     howTo: "Tap to close the oyster; tap again to open it.",
     about:
-      "A pearl is a gem made by a living animal. When a bit of grit or other irritant gets inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms.",
+      "A pearl is a gem made by a living animal. When an irritant, usually a scrap of the animal's own tissue or a bead put in by a pearl farmer, ends up inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms.",
   },
 
   // ---- Body -----------------------------------------------------------------------------
   heart: {
     howTo: "Tap it to set it racing. Set its beat, or pick a love heart, in the Toy tab.",
     about:
-      "The heart is a muscle that pumps blood around the body. It has four chambers: the two atria on top fill with blood, then the two ventricles below squeeze it out, the right side to the lungs and the left side to the rest of the body.\n\nThis heart beats by itself, the atria first and then the ventricles. Tap it and it races, as it does when you run, then calms down again. A resting adult heart beats about 60 to 100 times a minute, which is about 100,000 beats a day.",
+      "The heart is a muscle that pumps blood around the body. It has four chambers: the two atria on top fill with blood, then the two ventricles below squeeze it out, the right side to the lungs and the left side to the rest of the body.\n\nThis heart beats by itself, the atria first and then the ventricles. Tap it and it races, as it does when you run, then calms down again. A resting adult heart beats about 60 to 100 times a minute, which is about 100,000 beats a day. Style switches between an anatomical heart and a love heart; Color changes its tint.",
   },
   brain: {
     howTo: "Tap it to think. Try the Sparks slider in the Toy tab.",
@@ -831,7 +831,7 @@ export const TOY_HELP = {
   maple: {
     howTo: "Tap it to send a gust whirling through. Pick the leaf color in the Toy tab.",
     about:
-      "The maple is a tree known for its leaves with pointed lobes, which turn fiery red, orange and gold in autumn. Leaves are green in summer because of chlorophyll, the stuff that catches sunlight; in autumn the tree stops making it, and the other colors show through. Its seeds have wings and spin down like little helicopters.\n\nTap it and a whirling gust tears leaves off and carries them around the tree in a widening spiral before they settle in a ring on the grass; then fresh leaves open. Maple syrup is made by boiling down maple sap: about 40 liters of sap make 1 liter of syrup.",
+      "The maple is a tree known for its leaves with pointed lobes, which turn fiery red, orange and gold in autumn. Leaves are green in summer because of chlorophyll, the stuff that catches sunlight; in autumn the tree stops making it, so yellow and orange pigments show through, and many maples also make new red ones. Its seeds have wings and spin down like little helicopters.\n\nTap it and a whirling gust tears leaves off and carries them around the tree in a widening spiral before they settle in a ring on the grass; then fresh leaves open. Maple syrup is made by boiling down maple sap: about 40 liters of sap make 1 liter of syrup.",
   },
   bonsai: {
     howTo: "Tap it to grow a new branch, then trim it.",
@@ -891,7 +891,7 @@ export const TOY_HELP = {
   coral: {
     howTo: "Tap it to open the polyps and let the fish out.",
     about:
-      "Corals may look like rocks or plants, but they are animals. Each coral is a colony of tiny soft polyps, each with a ring of tentacles, and together they build a hard skeleton of limestone. Over thousands of years, corals build reefs. Reefs cover a tiny part of the ocean floor but are home to about a quarter of all the kinds of sea life.\n\nTap it and the polyps open all over this staghorn coral, like tiny tentacled stars, and six little fish dart out of the reef, hover, turn and dart back in; then the polyps close. Pick a Seed in the Toy tab for a different reef.",
+      "Corals may look like rocks or plants, but they are animals. This reef-building coral is a colony of tiny polyps with tentacles that build a calcium carbonate skeleton; other corals can be soft or solitary. Over thousands of years, corals build reefs. Reefs cover a tiny part of the ocean floor but are home to about a quarter of all the kinds of sea life.\n\nTap it and the polyps open all over this staghorn coral, like tiny tentacled stars, and six little fish dart out of the reef, hover, turn and dart back in; then the polyps close. Pick a Seed in the Toy tab for a different reef.",
   },
   pinecone: {
     howTo: "Tap it to open the scales and drop them, then put it back together.",
@@ -906,7 +906,7 @@ export const TOY_HELP = {
   succulent: {
     howTo: "Tap it to open the rosette and send up a flower.",
     about:
-      "Succulents are plants with thick, fleshy leaves that store water, so they can live through long dry spells. This one grows in a rosette: a tight circle of leaves, like the petals of a rose, with new leaves coming from the middle.\n\nTap it and the rosette opens, every leaf tipping outward, and a flower stalk rises from the middle and arches over with little coral-colored bells; then it draws back and the rosette closes. Pick the color of the leaf tips in the Toy tab. Many succulents grow new plants from a single fallen leaf.",
+      "Succulents are plants that store water in fleshy leaves, stems or roots, so they can live through long dry spells. This one grows in a rosette: a tight circle of leaves, like the petals of a rose, with new leaves coming from the middle.\n\nTap it and the rosette opens, every leaf tipping outward, and a flower stalk rises from the middle and arches over with little coral-colored bells; then it draws back and the rosette closes. Pick the color of the leaf tips in the Toy tab. Many succulents grow new plants from a single fallen leaf.",
   },
   bamboo: {
     howTo: "Tap it to make the new shoots grow up tall.",
@@ -939,7 +939,7 @@ export const TOY_HELP = {
   "lava-lamp": {
     howTo: "Tap to heat it up. Pick colors, blobs and flow in the Toy tab.",
     about:
-      "A lava lamp is a glass bottle of liquid with blobs of colored wax inside, and a lamp in its base. When the wax is cool it is a little heavier than the liquid and rests at the bottom. The lamp warms it, the wax spreads out and gets lighter, and a blob rises; at the top it cools and sinks again.\n\nTap it to heat it up: the blobs move much faster, the wax glows and shifts color, and the liquid brightens, then it all eases back. In the Toy tab, pick a color set or your own colors, how many blobs, their size and shape, how fast they flow, and a glow from within.",
+      "A lava lamp is a glass bottle of liquid with blobs of colored wax inside, and a lamp in its base. When the wax is cool it is a little denser than the liquid and rests at the bottom. The lamp warms it, the wax spreads out and gets less dense, and a blob rises; at the top it cools and sinks again.\n\nTap it to heat it up: the blobs move much faster, the wax glows and shifts color, and the liquid brightens, then it all eases back. In the Toy tab, pick a color set or your own colors, how many blobs, their size and shape, how fast they flow, and a glow from within.",
   },
   "snow-globe": {
     howTo: "Tap it to swirl the snow. Hands-on: pick it up and shake it hard.",
@@ -959,12 +959,12 @@ export const TOY_HELP = {
   candle: {
     howTo: "Tap to blow out the candle; tap again to light it.",
     about:
-      "A candle is a stick of wax with a string, the wick, down the middle. The flame's heat melts the wax, the melted wax soaks up the wick, and near the flame it turns into a gas, which is what really burns. The blue part at the bottom of a flame is the hottest.\n\nThis candle starts lit. Tap it to blow it out, and a thin trail of smoke rises from the wick; tap again to light it. A flame is shaped like a teardrop because its hot gases rise; in space, where nothing rises, a candle flame is a round, blue ball. You can pick the wax color in the Toy tab.",
+      "A candle is a stick of wax with a string, the wick, down the middle. The flame's heat melts the wax, the melted wax soaks up the wick, and near the flame it turns into a gas, which is what really burns. The blue part at the bottom burns with plenty of air; the yellow above is tiny bits of soot glowing hot.\n\nThis candle starts lit. Tap it to blow it out, and a thin trail of smoke rises from the wick; tap again to light it. A flame is shaped like a teardrop because its hot gases rise; in space, where nothing rises, a candle flame is a round, blue ball. You can pick the wax color in the Toy tab.",
   },
   tornado: {
     howTo: "Tap to spin it up. Set its power in the Toy tab.",
     about:
-      "A tornado is a spinning column of air that reaches down from a thunderstorm to the ground. It is the most violent kind of storm on Earth: its winds can blow faster than 400 kilometers an hour, though most tornadoes are much weaker and last only a few minutes. The United States has more tornadoes than any other country, about 1,200 a year.\n\nTap it to spin it up: the funnel widens and whirls faster, dust boils up at its foot, and the planks, clods and leaves on the field are lifted one by one, spiral up around it, then fall back where they lay as it weakens.",
+      "A tornado is a spinning column of air that reaches down from a thunderstorm to the ground. It is the most violent kind of storm on Earth: its winds can blow faster than 400 kilometers an hour, though most tornadoes are much weaker and last only a few minutes. The United States has more tornadoes than any other country, about 1,200 a year.\n\nTap it to spin it up: the funnel widens and whirls faster, dust boils up at its foot, and the planks, clods and leaves on the field are lifted one by one, spiral up around it, then fall back where they lay as it weakens. The Power slider in the Toy tab sets how hard it swirls.",
   },
   rainbow: {
     howTo: "Tap it to draw the rainbow again, color by color.",
@@ -1057,7 +1057,7 @@ export const TOY_HELP = {
   pretzel: {
     howTo: "Tap it to twist it like a knot and let it spring back.",
     about:
-      "A pretzel is a baked bread shaped from a long rope of dough into a loop with a twist in the middle. Before baking, it is dipped in a special bath of water and an alkali, such as lye or baking soda, which gives it its shiny, dark brown crust. Then it is sprinkled with coarse salt.\n\nTap it and it twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little toward you. Let go, and it springs a little past its shape into the opposite twist and wobbles to a stop.",
+      "A pretzel is a baked bread shaped from a long rope of dough into a loop with a twist in the middle. Before baking, it is dipped in a special bath of water and an alkali, such as lye or baking soda, which gives it its shiny, dark brown crust. Then it is sprinkled with coarse salt.\n\nTap it and it twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little toward you. Then it springs a little past its shape into the opposite twist and wobbles to a stop.",
   },
   croissant: {
     howTo: "Tap it to slice it open and melt a pat of butter inside.",
@@ -1177,7 +1177,7 @@ export const TOY_HELP = {
     howTo:
       "Drag across a face to turn a row or column. Tap to scramble or solve it; tap again to pause.",
     about:
-      "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time. Tap while it turns and it pauses once the turn in progress lands, so you can take over by hand: your own move ends the automatic one, and the next tap starts again from there. Solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
+      "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time. Tap while it turns and it pauses once the turn in progress lands, so you can take over by hand: your own move ends the automatic one, and the next tap starts again from there. Solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer when a half-turn counts as one move.",
   },
   "spring-toy": {
     howTo: "Pull its top coils up or sideways; let go and it springs back. Tap to hurry it along.",
@@ -1288,7 +1288,7 @@ export const TOY_HELP = {
   "water-bottle": {
     howTo: "Tap it to unscrew the cap and pour water into the glass.",
     about:
-      "A reusable steel bottle closes with a screw cap. The cap's thread is a ramp wrapped around a cylinder, so turning it twice pulls it down tight against the bottle's mouth and keeps the water in.\n\nThis bottle is made from a detailed 3D model of a real one. Tap it and the cap spins off in two turns and hops aside, the bottle tips and a stream of water glugs into the glass, then it all runs back and the cap screws on. The glug comes from air: bubbles have to push back into the bottle to take the place of the water that leaves.",
+      "A reusable steel bottle closes with a screw cap. The cap's thread is a ramp wrapped around a cylinder, so turning it pulls it down tight.\n\nThis bottle is made from a detailed 3D model of a real one. Tap it and the cap spins off in two turns and hops aside, the bottle tips and a stream of water glugs into the glass, then it all runs back and the cap screws on. The glug comes from air: bubbles have to push back into the bottle to take the place of the water that leaves.",
   },
   "soda-can": {
     howTo: "Tap it to shake the can and pop it open.",
@@ -1303,7 +1303,7 @@ export const TOY_HELP = {
   hoodie: {
     howTo: "Tap it to flip the hood and cross the sleeves.",
     about:
-      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back. Pick a flag in the top bar and the hoodie wears its colors. With ✋ Hands-on on, pull the hood: it flops like cloth and springs back up.",
+      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is usually knitted cotton or a cotton blend, brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back. Pick a flag in the top bar and the hoodie wears its colors. With ✋ Hands-on on, pull the hood: it flops like cloth and springs back up.",
   },
   sunglasses: {
     howTo:
@@ -1366,7 +1366,7 @@ export const TOY_HELP = {
   "crystal-ball": {
     howTo: "Tap it to swirl the mist and raise a glowing sign.",
     about:
-      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab.",
+      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab. Sparkle adjusts the sparkling effect in the ball.",
   },
 
   // ---- Animals --------------------------------------------------------------------------
@@ -1383,7 +1383,7 @@ export const TOY_HELP = {
   butterfly: {
     howTo: "Tap it to make it flutter faster.",
     about:
-      "A butterfly is an insect with four large wings covered in tiny, overlapping scales, and the scales make its colors and patterns. Every butterfly starts life as a caterpillar, which wraps itself in a case called a chrysalis and comes out as a butterfly. Some colors, like the shining blue of the blue morpho, come from the shape of the scales, not from any paint-like color in them.\n\nIt flaps its wings slowly all the time. Tap it to flutter, beating its wings faster and wider for a moment. Pick a monarch, a blue morpho, a swallowtail or a rose butterfly in the Toy tab.",
+      "A butterfly is an insect with four large wings covered in tiny, overlapping scales, and the scales make its colors and patterns. Every butterfly starts life as a caterpillar, which sheds its skin to become a pupa, called a chrysalis, before emerging as a butterfly. Some colors, like the shining blue of the blue morpho, come from the shape of the scales, not from any paint-like color in them.\n\nIt flaps its wings slowly all the time. Tap it to flutter, beating its wings faster and wider for a moment. Pick a monarch, a blue morpho, a swallowtail or a rose butterfly in the Toy tab.",
   },
   pufferfish: {
     howTo: "Tap it to poke it. Try the Puff slider in the Toy tab.",
@@ -1413,7 +1413,7 @@ export const TOY_HELP = {
   starfish: {
     howTo: "Tap it to wave its arms.",
     about:
-      "A starfish, or sea star, is not a fish at all but a relative of the sea urchin. It has no brain and no blood; seawater flows through its body instead. Under each arm are hundreds of tiny tube feet that let it creep along and grip rocks, and at the tip of each arm is a simple eye. If it loses an arm, it can grow a new one.\n\nTap it and its five arms lift and curl in turn, like a slow wave, then settle back. Pick an orange, red, purple or blue starfish in the Toy tab.",
+      "A starfish, or sea star, is not a fish at all but a relative of the sea urchin. It has no brain. Seawater pumped through canals in its body works the hundreds of tiny tube feet under each arm, which let it creep along and grip rocks, and at the tip of each arm is a simple eye. Many kinds can regrow a lost arm.\n\nTap it and its five arms lift and curl in turn, like a slow wave, then settle back. Pick an orange, red, purple or blue starfish in the Toy tab.",
   },
   "sea-urchin": {
     howTo: "Tap it: its spines sweep in waves and it creeps along.",
@@ -1423,7 +1423,7 @@ export const TOY_HELP = {
   frog: {
     howTo: "Tap it: a fly buzzes in and the frog catches it with its tongue.",
     about:
-      "A frog is an amphibian: it starts life as a tadpole swimming in water and grows legs and lungs to live on land as well. It catches insects with a long, sticky tongue that flips out of its mouth in a flash. To swallow, a frog pulls its big eyes down into its head, and they help push the food down its throat.\n\nTap it: a fly buzzes in and hovers, the frog's tongue shoots out, catches it and snaps back, its eyes sink to swallow, and it croaks twice with a puff of its throat. Pick a green, red, blue or yellow frog in the Toy tab.",
+      "A frog is an amphibian: many species start as tadpoles in water, then grow legs and lungs, though others develop directly into small frogs. It catches insects with a long, sticky tongue that flips out of its mouth in a flash. To swallow, a frog pulls its big eyes down into its head, and they help push the food down its throat.\n\nTap it: a fly buzzes in and hovers, the frog's tongue shoots out, catches it and snaps back, its eyes sink to swallow, and it croaks twice with a puff of its throat. Pick a green, red, blue or yellow frog in the Toy tab.",
   },
   penguin: {
     howTo: "Tap it to flap its flippers.",
@@ -1445,7 +1445,7 @@ export const TOY_HELP = {
   mobius: {
     howTo: "Tap to send the rider round. Pick a rider in the Toy tab.",
     about:
-      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike or an ant in the Toy tab.",
+      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike or an ant in the Toy tab. Pick its colors and glow in the Toy tab too.",
   },
   "klein-bottle": {
     howTo: "Tap to send water through. Set the glow in the Toy tab.",
@@ -1455,18 +1455,18 @@ export const TOY_HELP = {
   "menger-sponge": {
     howTo: "Tap to close and carve the holes. Pick the level in the Toy tab.",
     about:
-      "A Menger sponge is a fractal. Start with a cube and cut it into 27 smaller cubes, like a puzzle cube. Take out the one in the middle and the six at the middle of each face, leaving 20. Then do the same to each of those 20 cubes, and again, forever. Karl Menger described it in 1926.\n\nTap it and every hole is plugged, the smallest first, until it is a plain cube. Then it is carved again: the big cubes slide out of the faces, then the next size down, then the smallest. Pick level 2 or 3 in the Toy tab: level 3 is made of 8,000 little cubes.",
+      "A Menger sponge is a fractal. Start with a cube and cut it into 27 smaller cubes, like a puzzle cube. Take out the one in the middle and the six at the middle of each face, leaving 20. Then do the same to each of those 20 cubes, and again, forever. Karl Menger described it in 1926.\n\nTap it and every hole is plugged, the smallest first, until it is a plain cube. Then it is carved again: the big cubes slide out of the faces, then the next size down, then the smallest. Pick level 2 or 3 in the Toy tab: level 2 keeps 400 little cubes, and level 3 keeps 8,000.",
   },
   hypercube: {
     howTo: "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
     about:
-      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time.",
+      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation.",
   },
   "torus-knot": {
     howTo:
       "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
     about:
-      "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Pick a trefoil, a cinquefoil or another knot in the Toy tab.",
+      "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Choose winding counts (2, 3), (2, 5), (3, 4), (3, 5) or (2, 7) in the Toy tab: the pair counts turns around the torus's two directions. Colors changes its palette and Glow its brightness.",
   },
   gyroid: {
     howTo: "Tap to make it breathe. Pick a cube or a ball in the Toy tab.",
@@ -1476,18 +1476,18 @@ export const TOY_HELP = {
   mandelbulb: {
     howTo: "Tap it to turn its discs like the dials of a lock.",
     about:
-      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. Zoom in anywhere and there is more and more detail. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture.",
+      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture.",
   },
   sierpinski: {
     howTo: "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
     about:
-      "A Sierpinski tetrahedron is a fractal pyramid. It is made of four smaller copies of itself, each half as tall, and each of those is made of four smaller ones, and so on. It is the 3D cousin of the Sierpinski triangle, named after the mathematician Wacław Sierpiński, who described the triangle in 1915.\n\nTap it to explode it into its pieces; tap again to put it back together. Pick the level in the Toy tab: each level has four times as many little pyramids, so level 4 has 256 and level 5 has 1,024.",
+      "A Sierpinski tetrahedron is a fractal pyramid. It is made of four smaller copies of itself, each half as tall, and each of those is made of four smaller ones, and so on. It is the 3D cousin of the Sierpinski triangle, named after the mathematician Wacław Sierpiński, who described the triangle in 1915.\n\nTap it to explode it into its pieces; tap again to put it back together. Pick the level in the Toy tab: each level has four times as many little pyramids, so levels 3, 4 and 5 have 64, 256 and 1,024 respectively.",
   },
   platonic: {
     howTo:
       "Tap to explode it; tap again to put it back. Pick one of the five solids in the Toy tab.",
     about:
-      "The Platonic solids are the only five shapes whose faces are all the same regular shape, meeting in the same way at every corner: the tetrahedron (4 triangles), the cube (6 squares), the octahedron (8 triangles), the dodecahedron (12 pentagons) and the icosahedron (20 triangles). They are named after the Greek thinker Plato, and Euclid proved there can be no others.\n\nIt starts as a dodecahedron. Tap it to explode its faces apart; tap again to put them back. Pick any of the five solids, and its colors, in the Toy tab. Many game dice come in these shapes.",
+      "The Platonic solids are the only five convex polyhedra whose faces are all the same regular shape, meeting in the same way at every corner: the tetrahedron (4 triangles), the cube (6 squares), the octahedron (8 triangles), the dodecahedron (12 pentagons) and the icosahedron (20 triangles). They are named after the Greek thinker Plato, and Euclid proved there can be no others.\n\nIt starts as a dodecahedron. Tap it to explode its faces apart; tap again to put them back. Pick any of the five solids, and its colors, in the Toy tab. Many game dice come in these shapes.",
   },
   "seashell-spiral": {
     howTo: "Tap it to hear the sea in the shell.",
@@ -1512,7 +1512,7 @@ export const TOY_HELP = {
   "fourier-circles": {
     howTo: "Tap to spin the circles. Type a word or a curve in the Toy tab.",
     about:
-      "Circles turning on circles can draw any closed shape. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type a word and each letter gets its own chain of circles.",
+      "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type a word and each letter gets its own chain of circles.",
   },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
@@ -1522,14 +1522,14 @@ export const TOY_HELP = {
   "pythagoras-proof": {
     howTo: "Tap it to slide the triangles and show that a² + b² = c².",
     about:
-      "In a right triangle, the two short sides a and b and the long side c always fit a rule: a² + b² = c². So a square drawn on the long side has the same area as the squares on the two short sides put together. It is named after Pythagoras, a Greek thinker of about 2,500 years ago, though people in Babylon knew it even earlier.\n\nThis is one of the oldest proofs. Four copies of the triangle fill a big square, leaving two empty squares, a² and b². Tap it and the triangles slide into the corners, and the empty space becomes one tilted square, c², so a² + b² must equal c². Then they slide back.",
+      "In a right triangle, the two short sides a and b and the long side c always fit a rule: a² + b² = c². So a square drawn on the long side has the same area as the squares on the two short sides put together. It is named after Pythagoras, a Greek thinker of about 2,500 years ago, though people in Babylon knew it even earlier.\n\nThis is a rearrangement proof. Four copies of the triangle fill a big square, leaving two empty squares, a² and b². Tap it and the triangles slide into the corners, and the empty space becomes one tilted square, c², so a² + b² must equal c². Then they slide back.",
   },
 
   // ---- AI and computing ----------------------------------------------------------------
   perceptron: {
     howTo: "Tap it to watch it try an example, get it wrong, and learn.",
     about:
-      "A perceptron is the simplest artificial neuron, invented by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab.",
+      "A perceptron is the simplest artificial neuron, invented by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab. This repeats a scripted learning example; it does not keep training on your taps.",
   },
   "multilayer-perceptron": {
     howTo: "Tap it to try all four inputs and fill in the XOR truth table.",
@@ -1539,7 +1539,7 @@ export const TOY_HELP = {
   "neural-network": {
     howTo: "Tap it to send signals forward, then learn backward. Set its size in the Toy tab.",
     about:
-      "A neural network is made of simple artificial neurons in layers. Each neuron adds up the signals coming in, each multiplied by a weight, and passes on a signal of its own; the weights are what the network learns. In training, a forward pass makes a guess, and backpropagation sends the error back through the network, nudging every weight a little to do better next time.\n\nTap it: pulses run from the inputs through the hidden layer to the outputs, each neuron glowing as strongly as it fires, and one output wins. Then red pulses run back and the wires thicken or thin as the weights change. In the Toy tab, set the number of inputs, hidden layers, neurons and outputs, and pick the poster or a 3D model.",
+      "A neural network is made of simple artificial neurons in layers. Each neuron adds up the signals coming in, each multiplied by a weight, and passes on a signal of its own; the weights are what the network learns. In training, a forward pass makes a guess, and backpropagation sends the error back through the network, finding how each weight affects the error; an optimizer then adjusts the weights.\n\nTap it: pulses run from the inputs through the hidden layer to the outputs, each neuron glowing as strongly as it fires, and one output wins. Then red pulses run back and the wires thicken or thin as the weights change. In the Toy tab, set the number of inputs, hidden layers, neurons and outputs, and pick the poster or a 3D model. The pulses and changing wires illustrate training; this toy repeats a prepared example.",
   },
   cnn: {
     howTo: "Tap it to read the digit. Draw your own digit in the Toy tab.",
@@ -1549,12 +1549,12 @@ export const TOY_HELP = {
   rnn: {
     howTo: "Tap it to read a sentence one word at a time. Try the LSTM style in the Toy tab.",
     about:
-      "A recurrent network, or RNN, reads a sequence, like the words of a sentence, one piece at a time. It keeps a memory called the hidden state: after each word, the state loops back in with the next word, so what it knows builds up as it reads. An LSTM (long short-term memory) adds gates that decide what to forget, what to take in and what to pass on.\n\nTap it: THE, CAT and SAT rise into the cell one at a time. The cell flashes, and the glowing orb, the hidden state, takes on the word's color mixed with what it carried and runs around the loop. In the Toy tab, pick the LSTM style to see its three gates open and shut like shutters, or a 3D model.",
+      "A recurrent network, or RNN, reads a sequence, like the words of a sentence, one piece at a time. It keeps a memory called the hidden state: after each word, the state loops back in with the next word, so what it knows builds up as it reads. An LSTM (long short-term memory) adds gates that decide what to forget, what to take in and what to pass on.\n\nTap it: THE, CAT and SAT rise into the cell one at a time. The cell flashes, and the glowing orb, the hidden state, takes on the word's color mixed with what it carried and runs around the loop. In the Toy tab, pick the LSTM style to see its three gates open and shut like shutters, or a 3D model. This is a scripted sequence, not a trained sentence reader.",
   },
   transformer: {
     howTo: "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
     about:
-      "A transformer is a neural network for language, first described in 2017. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. After many layers, it predicts the next token. Tap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in.\n\nThe Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, it predicts MUNDO.",
+      "A transformer is a neural network first described in 2017, for translating text. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. Language models built this way predict the next token.\n\nTap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in. The Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, it predicts MUNDO.",
   },
   "looped-transformer": {
     howTo: "Tap it: the tiles loop through one block, sharper each lap, until 3 + 4 = 7.",
@@ -1564,22 +1564,22 @@ export const TOY_HELP = {
   "diffusion-model": {
     howTo: "Tap it: the noise clears, step by step, into a rubber duck.",
     about:
-      "A diffusion model makes pictures out of noise. It is trained by taking real pictures, adding random noise to them a little at a time until only specks are left, and learning to undo each step. To make a new picture, it starts from pure noise and takes a little away at each of many steps, until a clear picture appears.\n\nTap it: a cloud of random specks clears in ten steps into a rubber duck while the STEP counter runs down from 50 to 0, then the noise washes back over it. It suits Splashery well: every toy here is drawn from many soft, blurry points too. Pick the poster or a 3D model in the Toy tab.",
+      "A diffusion model makes pictures out of noise. It is trained by taking real pictures, adding random noise to them a little at a time until only specks are left, and learning to undo each step. To make a new picture, it starts from pure noise and takes a little away at each of many steps, until a clear picture appears.\n\nTap it: a cloud of random specks clears in ten steps into a rubber duck while the STEP counter runs down from 50 to 0, then the noise washes back over it. Pick the poster or a 3D model in the Toy tab.",
   },
   "gradient-descent": {
     howTo: "Tap it to roll the ball downhill. Try the Learning rate in the Toy tab.",
     about:
-      "Gradient descent is how most neural networks learn. Picture the network's error as a hilly landscape: the lower the ground, the better its answers. At each step, it works out which way is downhill, the gradient, and steps that way. The learning rate sets how big each step is, and momentum lets it keep some speed from step to step.\n\nTap it: the ball takes 21 hopping steps downhill, leaving a trail of dots, overshoots the valley and settles in it. In the Toy tab, set the Learning rate: too low, and it creeps down the slope; too high, and it bounces from wall to wall; just right, and it settles.",
+      "Gradient descent is how most neural networks learn. Picture the network's error as a hilly landscape: the lower the ground, the better its answers. At each step, it works out the gradient, which points toward the steepest increase, and steps in the opposite direction. The learning rate sets how big each step is, and momentum lets it keep some speed from step to step.\n\nTap it: the ball takes 21 hopping steps downhill, leaving a trail of dots, overshoots the valley and settles in it. In the Toy tab, set the Learning rate: too low, and it creeps down the slope; too high, and it bounces from wall to wall; just right, and it settles. This prepared path illustrates the three settings; descent is not guaranteed to find the lowest valley of every landscape.",
   },
   "gaussian-splatting": {
     howTo: "Tap it: random splats learn the photo. Pick another View in the Toy tab.",
     about:
-      "Gaussian splatting draws a scene with many soft, colored blobs called splats. Each one has a place, a size in three directions, a turn, a color and an opacity. A scan's splats are trained the way a network learns: start from a random cloud, compare the picture it makes with the photos, and nudge every splat a little, again and again, until they match.\n\nTap it: a cloud of random splats slides, stretches and recolors into the strawberry photo, a real fit of 2,400 splats, while its error falls on the chart. Other views show one splat with its three axes, which a tap trains: it starts from a wrong guess and gradient steps move its place, turn, sizes, color and opacity toward the target outline, big steps first and then smaller ones, as in a real fit; a duck whose splats shrink to dots, and the back-to-front order splats are drawn in.",
+      "Gaussian splatting draws a scene with many soft, colored blobs called splats. Each one has a place, a size in three directions, a turn, a color and an opacity. A scan's splats are trained the way a network learns: start from a rough cloud of points (worked out from the photos, or random), compare the picture it makes with the photos, and nudge every splat a little, again and again, until they match.\n\nTap it: a cloud of random splats slides, stretches and recolors into the strawberry photo, a real fit of 2,400 splats, while its error falls on the chart. Other views show one splat with its three axes, which a tap trains: it starts from a wrong guess and gradient steps move its place, turn, sizes, color and opacity toward the target outline, big steps first and then smaller ones, as in a real fit; a duck whose splats shrink to dots, and the back-to-front order splats are drawn in.",
   },
   "word-vectors": {
     howTo: "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
     about:
-      "Word vectors turn each word into a list of numbers, a point in a space with many directions, so that words used in similar ways land near each other. These have 50 numbers per word, learned from a huge amount of text. Directions in the space can carry meaning: the step from man to woman is much like the step from king to queen.\n\nTap it: an arrow runs out to KING, the step from MAN to WOMAN is added on from there, and it lands right next to QUEEN, which lights up. Type your own A − B + C in the Toy tab, with any of 24,000 common words, and it finds the nearest word to the answer.",
+      "Word vectors turn each word into a list of numbers, a point in a space with many directions, so that words used in similar ways land near each other. These have 50 numbers per word, learned from a huge amount of text. Directions in the space can carry meaning: the step from man to woman is much like the step from king to queen.\n\nTap it: an arrow runs out to KING, the step from MAN to WOMAN is added on from there, and it lands right next to QUEEN, which lights up. Type your own A − B + C in the Toy tab, with any of 24,000 common words, and it finds the nearest of the 10,000 most common words, with the runner-up in gray. A text file containing A − B + C works too. These relationships are approximate and can reflect biases in the training text.",
   },
   "sorting-machine": {
     howTo: "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
@@ -1589,7 +1589,7 @@ export const TOY_HELP = {
   "half-adder": {
     howTo: "Tap it to add 1 + 1 in binary: the answer is 10.",
     about:
-      "A half adder is a tiny circuit that adds two bits, binary digits that are each 0 or 1. It uses two logic gates: an XOR gate gives the sum bit, which is 1 when exactly one input is 1, and an AND gate gives the carry bit, which is 1 when both are. Two half adders make a full adder, and a chain of full adders lets a computer add numbers of any size.\n\nTap it: switches A and B flip to 1, and light runs along the wires into the gates. The XOR gives 0, so the sum lamp stays dark, and the AND lights the carry lamp. The board reads 1 + 1 = 10, which is two in binary. Then the switches flip back.",
+      "A half adder adds two bits, each 0 or 1. Its XOR gate gives the sum bit: 1 when exactly one input is 1. Its AND gate gives the carry: 1 when both inputs are 1. With carry written first, 0 + 0 gives 00, 0 + 1 and 1 + 0 give 01, and 1 + 1 gives 10.\n\nTap to watch the fixed 1 + 1 example. Both switches flip to 1, light travels through the gates, and only the carry lamp lights: binary 10 means two. Then the switches reset. There is no incoming carry on a half adder. Two half adders plus an OR gate can make a full adder, which also accepts that carry; chaining full adders adds longer binary numbers.",
   },
   // ---- Machines that compute (lane Machines A) ----
   "turing-machine": {
@@ -1601,7 +1601,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to turn the crank once; tap again to keep cranking. Type your own polynomial in the Toy tab.",
     about:
-      "Charles Babbage designed his Difference Engine No. 2 in the 1840s to print mathematical tables without human mistakes. It was never built in his lifetime. In 1991, a team at a museum in London finished its calculating section from his drawings, and it worked. It uses the method of differences: for a polynomial, the differences between neighboring values settle into a pattern, so each new value needs nothing but addition.\n\nTap it: the crank turns, each difference is added into its neighbor, the wheels click round, and carries ripple up with little levers. For n², the value column shows 1, 4, 9, 16 and 25 in turn. Type your own polynomial, up to x³, and pick the starting x.",
+      "Charles Babbage designed Difference Engine No. 2 in the 1840s to make mathematical tables. Its calculating section was built from his drawings in London in 1991. It uses finite differences: for squares 1, 4, 9, 16, the gaps are 3, 5, 7, and their gaps are always 2. Repeated addition can therefore find the next square without multiplying.\n\nTap to turn the crank once; tap again for another value. Wheels turn and carries ripple between digits while each difference adds into its neighbor. The starting example is x². In the Toy tab, choose the starting x and type a polynomial in x or n, up to degree three, that gives whole numbers, such as x³ or n(n + 1)/2. The toy has five-digit columns, so values wrap at 100,000; it is a small working illustration, not the full historical engine.",
   },
   "enigma-machine": {
     howTo:
@@ -1620,7 +1620,7 @@ export const TOY_HELP = {
     howTo:
       "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
     about:
-      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nDouble-tap the page to fill the screen with it. Zoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
+      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nDouble-tap the page to fill the screen with it. Zoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded. Sample chooses a PDF article or a photo before you open your own file.",
   },
   "your-book": {
     howTo:
@@ -1644,7 +1644,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
     about:
-      "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a walnut cabinet and a curved glass face, a flat TV on a stand, a cinema with velvet curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap the picture to pause and play. To switch off, tap the old TV's power knob (the picture shrinks to a bright dot, as old tube sets did), the small button beside the flat TV's red light, the curtains (they close) or the hologram's base, or use the button in the Toy tab. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
+      "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a walnut cabinet and a curved glass face, a flat TV on a stand, a cinema with velvet curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap the picture to pause and play. To switch off, tap the old TV's power knob (the picture shrinks to a bright dot, as old tube sets did), the small button beside the flat TV's red light, the curtains (they close) or the hologram's base, or use the button in the Toy tab. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab. Sample chooses the built-in video or galloping-horse GIF.",
   },
 
   // ---- Studio ---------------------------------------------------------------------------
@@ -1665,13 +1665,13 @@ export const TOY_HELP = {
     howTo:
       "Tap “Use my microphone” in the Toy tab, then clap once: the echo time shows on the back wall.",
     about:
-      "When a sound stops, a room keeps ringing for a moment as the sound bounces between its walls, fading a little at each bounce. The reverberation time, RT60, is how long it takes to fade by 60 dB, to a millionth of its energy. A living room with a sofa and curtains is around half a second; a stone church can be several seconds.\n\nTap “Use my microphone” and clap once, sharply. The page listens to your clap fade away, takes away the room's background hum, and fits a straight line to the decay (Schroeder's method, the one acousticians use), then shows the RT60 on the back wall. The rings on the floor are the sound spreading out, each as bright as the room still was at that moment, at half speed. If the room is too noisy for the clap to stand out, it says so. The sound stays on this device; nothing is recorded or sent.",
+      "Reverberation is sound that keeps bouncing around a room after its source stops. RT60 is the time for its energy to fall by 60 decibels, to one millionth. This toy estimates that time from a measured decay slope, extrapolating when it cannot observe the entire 60-decibel fall; background noise and the recording affect the result.\n\nTap the toy to hear and see the sample room's clap. For your room, tap Use my microphone in the Toy tab, clap sharply once and stay quiet for two seconds. The page estimates background noise and fits the sound's fading energy. The back wall shows the result; floor rings visualize the decay at half speed. A noisy or unclear clap may be rejected. Audio is processed temporarily on this device and is not uploaded or saved. This is an exploratory estimate, not a calibrated room-acoustics measurement.",
   },
   "splat-mirror": {
     howTo:
       "Tap “Start camera” to see yourself in splats; turn it to see the depth. More in the Toy tab.",
     about:
-      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
+      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
   },
   "moving-photo-3d": {
     howTo:
@@ -1697,7 +1697,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
     about:
-      "A photo is flat, but a computer can guess how far away each part of it is. A depth model, a small neural network trained on millions of pictures, looks at your photo and gives every spot a distance: the path is near, the trees are far. This toy runs that model right on your device, and then rebuilds the photo as splats. Each splat takes the photo's color at its place and sits at its guessed depth, so when you turn the toy, near things move across far ones, the way they do when you move your head.\n\nWhere the depth jumps, a near leaf against a far tree, the surface is cut, so the leaf stands as its own layer instead of being smeared to the background. Tap to raise the layers one after another and sway. Layers pulls them apart. Depth sets how deep the relief is. Open a JPEG, PNG or WebP in the Toy tab (the model, 27 MB, loads the first time). Your photo never leaves your device.",
+      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose the forest path, cobbled street or still life, or open your own photo in the Toy tab. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
   },
 
   "video-3d": {
@@ -1711,7 +1711,7 @@ export const TOY_HELP = {
   "splat-field": {
     howTo: "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
     about:
-      "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea where you tap, or push the flow once more around the knot. Each tap adds its own: tap the sea in a few places and the rings cross.",
+      "Hundreds of thousands of splats (the count depends on your device and the Detail setting), and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea where you tap, or push the flow once more around the knot. Each tap adds its own: tap the sea in a few places and the rings cross.",
   },
 
   // ---- Science (lane Science) -----------------------------------------------------------
@@ -1719,18 +1719,18 @@ export const TOY_HELP = {
     howTo:
       "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
     about:
-      "X-ray crystallography measures each atom as a place and a spread: heat makes it jiggle, so it is smeared into a small cloud, a 3D Gaussian written in the file as six numbers, the displacement tensor U. Each atom here is exactly that Gaussian; its long axis is the way it moves most.\n\nCrystallographers draw it as an ellipsoid that holds the atom 50% of the time (as ORTEP and Mercury do); the dark lines are its principal planes. Hydrogens are placed by rule, so they are small spheres. The samples are aspirin at room temperature (Crystallography Open Database) and crambin, a small protein (Protein Data Bank). Jiggle moves each atom through places drawn from its own Gaussian, slowed down a trillion times. For looking and sharing, not for measuring.",
+      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid represents a Gaussian approximation to that spread, which can include vibration and static disorder. Its long axis shows the direction of greatest spread. It is not an exact photograph of an atom's motion.\n\nChoose aspirin at 300 K, the protein crambin, or open a CIF, mmCIF or PDB with displacement records. Probability selects an ellipsoid enclosing 30%, 50% or 90% of the modeled distribution. Draw solid ellipsoids or one soft Gaussian per atom; toggle bonds. Hydrogens can be small spheres, drawn as refined, or hidden. Atoms with only isotropic displacement appear as spheres. Tap to switch illustrative jiggles on or off; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore a structure, not to measure vibration rates.",
   },
   "smlm-microscope": {
     howTo:
       "Pinch or scroll to zoom down to single molecules. Tap to see a thin slice at one depth.",
     about:
-      "A light microscope can't see things smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: dye molecules blink on a few at a time, and each blink is pinned down to within a few nanometers. The result is a table of positions, each with its uncertainty, which is already a Gaussian. So each one here is a splat exactly as wide as its precision.\n\nThe sample is a 12 µm square of a cell's microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Pinch or scroll to zoom in about 150 times: each fuzzy spot is then one blink of one molecule. Tap for a slice 200 nanometers thick at the depth you tap. Scientists use ThunderSTORM and napari for this; this toy is for looking and sharing, not for measuring.",
+      "Ordinary light microscopy struggles to separate nearby objects about 200 to 300 nanometers apart. Single-molecule localization microscopy finds the centers of isolated fluorescent blinks more precisely, then builds a picture from many positions. Localization precision is not the same as the final image's resolution, and several blinks may come from one molecule. Here each blink is drawn as a Gaussian whose width represents its reported uncertainty.\n\nChoose microtubules and clathrin in a 12 µm cell region, a whole nucleus in 3D, or open a .smlm file or a CSV with positions and uncertainties in nanometers. Color by depth, time frame or channel. Depth scale shows true coordinates or stretches depth fourfold. Precision keeps all localizations or only those better than 5 or 3 nm. Pinch or scroll to zoom; tap for a 200 nm slice at that depth, then tap to restore all depths. Files stay on your device. This is a viewer, not a measurement tool.",
   },
   "galaxy-box": {
     howTo: "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
     about:
-      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nPinch or scroll to zoom far into the gas; tap to peel away the hot gas. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
+      "Galaxy simulations follow gas with particles that carry mass, temperature, density and a smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated present day, not a telescope image.\n\nEach particle is shown with a Gaussian whose spread approximates the simulation's smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue and hot orange or red, or by Density to compare the gas concentration. Brightness also increases with density. Switch The box to show or hide the frame. Pinch or scroll to zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the gas's shape but do not give a quantitative column-density measurement.",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
@@ -1775,7 +1775,7 @@ export const TOY_HELP = {
   diya: {
     howTo: "Tap to light the ring of diyas; tap again to put them out.",
     about:
-      "A diya is a small clay lamp that holds oil or butter and a cotton wick. Rows of diyas are lit for Diwali, the festival of lights celebrated by Hindus, Sikhs and Jains, to welcome light and good fortune. Homes are also decorated with rangoli, bright patterns of colored powder or flowers on the floor.\n\nThis diya sits on a rangoli. Tap it and its flame flares and grows, and eight small diyas around the pattern light one after another and stay lit. Tap again to put them out. In the Toy tab, set the size of the flame, or blow on it.",
+      "A diya is a small clay lamp that holds oil or butter and a cotton wick. Rows of diyas are lit for Diwali, the festival of lights celebrated by Hindus, Sikhs and Jains, to welcome light and good fortune. Homes are also decorated with rangoli, bright patterns of colored powder or flowers on the floor.\n\nThis diya sits on a rangoli. Tap it and its flame flares and grows, and eight small diyas around the pattern light one after another and stay lit. Tap again to put them out. In the Toy tab, set the flame's size or use Blow to make it dip; this is a button, not microphone input.",
   },
   menorah: {
     howTo: "Tap to put out the candles; tap again to light them one by one.",
@@ -1798,13 +1798,13 @@ export const TOY_HELP = {
     howTo:
       "Tap a bar, or drag across the bars for a glissando. Tap the mallet or frame to play a scale.",
     about:
-      "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
+      "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale. Drag along the bars for a run of notes, called a glissando.",
   },
   "grand-piano": {
     howTo:
       "Tap or drag along the keys to play them. Tap elsewhere for a song; the song bar plays it all.",
     about:
-      "A grand piano is a keyboard instrument whose strings lie flat under a lid shaped like a wing. Each of its 88 keys throws a felt hammer up against its strings, and a damper lifts off them so the note rings until the key comes up. The right pedal lifts every damper at once. Bartolomeo Cristofori built the first pianos in Italy around 1700.\n\nTap a key and it dips, its hammer strikes and its damper lifts. Tap anywhere else for the opening of Für Elise, or pick Clair de lune, Gymnopédie No. 1 or Ode to Joy in the Toy tab. The song bar plays, pauses, loops and slows a song, and you can open a MIDI file of your own or paste a tune in ABC notation.",
+      "A grand piano is a keyboard instrument whose strings lie flat under a lid shaped like a wing. Each of its 88 keys throws a felt hammer up against its strings, and most notes have dampers that lift to let them ring until the key comes up. The right pedal lifts every damper at once. Bartolomeo Cristofori built the first pianos in Italy around 1700.\n\nTap a key and it dips, its hammer strikes and its damper lifts. Tap anywhere else for the opening of Für Elise, or pick Clair de lune, Gymnopédie No. 1 or Ode to Joy in the Toy tab. The song bar plays, pauses, loops and slows a song, and you can open a MIDI file of your own or paste a tune in ABC notation.",
   },
   "upright-piano": {
     howTo:
@@ -1867,7 +1867,7 @@ export const TOY_HELP = {
   "propeller-plane": {
     howTo: "Tap it to loop the loop.",
     about:
-      "This propeller plane is a biplane: it has two sets of wings, one above the other, held together by struts and wires. Two wings give a lot of lift for a light, slow plane. The spinning propeller at the front pulls it through the air. The first airplane to fly with a pilot, the Wright brothers' Flyer of 1903, was a biplane too.\n\nTap it to loop the loop: it climbs, flies up and over on its back in a big circle, and comes out level again. Pick the colors of the body and the wings in the Toy tab.",
+      "This propeller plane is a biplane: it has two sets of wings, one above the other, held together by struts and wires. Two wings give a lot of lift for a light, slow plane. The spinning propeller at the front pulls it through the air. The Wright brothers' Flyer made a sustained, controlled powered flight in 1903; it was a biplane too.\n\nTap it to loop the loop: it climbs, flies up and over on its back in a big circle, and comes out level again. Pick the colors of the body and the wings in the Toy tab.",
   },
   jet: {
     howTo: "Tap it to climb and bank left, then right.",
@@ -1877,7 +1877,7 @@ export const TOY_HELP = {
   sailboat: {
     howTo: "Tap it for a gust of wind: it heels over, then rocks back upright.",
     about:
-      "A sailboat is pushed along by the wind in its sails. A sail works like a wing, so a sailboat can even sail at an angle toward the wind. Under the water, a heavy fin called a keel stops the boat from sliding sideways and keeps it from tipping over.\n\nTap it for a big gust: the boat heels over, leaning far to one side, with spray flying at the bow and the stern, then it rocks back upright. Sailors lean out over the high side to help hold the boat up. Pick the colors of the sails and the stripe in the Toy tab.",
+      "A sailboat is pushed along by the wind in its sails. A sail works like a wing, so a sailboat can even sail at an angle toward the wind. Under the water, a keel resists sideways motion; its weight helps a ballasted boat stay upright.\n\nTap it for a big gust: the boat heels over, leaning far to one side, with spray flying at the bow and the stern, then it rocks back upright. Sailors lean out over the high side to help hold the boat up. Pick the colors of the sails and the stripe in the Toy tab.",
   },
   submarine: {
     howTo: "Tap it to dive; then it surfaces and raises its periscope.",
@@ -1969,7 +1969,7 @@ export const TOY_HELP = {
   castle: {
     howTo: "Tap to lower the drawbridge; tap again to raise it.",
     about:
-      "A castle is a strong stone home for a lord or a king, built in the Middle Ages with thick walls, tall towers and a moat. The drawbridge across the moat could be pulled up on chains, so the gate was closed off. Castles were small towns inside: kitchens, stables, a hall for feasts and a well for water.\n\nThe drawbridge starts up. Tap to lower it, and five small knights march out, the leader carrying a banner; tap again and they march back in and the drawbridge rises. Pick the color of the roofs in the Toy tab.",
+      "A castle is a fortified residence. Many medieval castles had stone walls and towers; some had moats, while earlier ones were built partly or entirely of wood. The drawbridge across the moat could be pulled up on chains, so the gate was closed off. Castles were small towns inside: kitchens, stables, a hall for feasts and a well for water.\n\nThe drawbridge starts up. Tap to lower it, and five small knights march out, the leader carrying a banner; tap again and they march back in and the drawbridge rises. Pick the color of the roofs in the Toy tab.",
   },
   pagoda: {
     howTo: "Tap it to ring the wind chimes; lanterns and doors light up.",

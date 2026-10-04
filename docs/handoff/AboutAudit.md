@@ -119,4 +119,16 @@ export const P = {
 
 ## State
 
-(starting)
+READY: October 4, 2026. Codex's origin/codex/about-audit merged (merge commit); the 18 conflicts
+took main's entry (six got their listed corrections), the 17 rejects are main's text exactly, the 26
+fixes are applied (11 with the replacement texts), `fluid-lab` is main's, curly apostrophes the PR
+added are straight, the two audit files are fixed and noted. 79 entries differ from main.
+
+Checks: `tests/help.spec.mjs`, `tests/hta.spec.mjs`, `tests/unit.spec.mjs` pass;
+`npx prettier --check .` clean; `us-english.mjs --diff` lists only Codex's audit records (22 British
+spellings in `docs/audits/`, left as the record).
+
+Notes: `torus-knot` (a good-as-written entry) was 143 words and failed the hta test's 140 limit; I
+cut "The first is a trefoil and the second a cinquefoil." `splat-field` has no Detail option of its
+own in its recipe, so it says "the Detail setting" as the brief asked (the app's Detail setting).
+The new arsenic fact (sublimes at about 615 °C) cites the RSC arsenic page; not re-verified live.
