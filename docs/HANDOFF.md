@@ -298,6 +298,15 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-04 (the owner's answers of 03:30 UTC):
+
+- "Manual r2 go": lane Manual r2 (Sonnet 5.5, docs) builds Codex 13's newcomer proposals and a fresh
+  PDF (docs/handoff/Manual.md, "r2").
+- "Fluids Sonnet": lane Fluids r7 runs on Sonnet 5.5, with the owner's permission, as a test of
+  Sonnet on engine work; the Operator reviews the code and the numbers (docs/handoff/Fluids.md,
+  "r7").
+- The Dot's photoreal sound sources report is merged (#248). Live input r6 (#250) is in combo K.
+
 Settled on 2026-10-04, early (the owner's messages of October 3, evening):
 
 - Codex tasks 13 (#244, the Tinkerer's Manual audited for a newcomer), 14 (#247, the Fluid Lab on a
