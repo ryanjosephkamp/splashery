@@ -298,6 +298,18 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-04, afternoon:
+
+- The hands-on demo toys are merged: Engine #255 (a ball twisting on the spot stops) and #232, then
+  #229 and #230 through Ops combo #256. The owner marked every changed effect good. Combo L found
+  three Level 1 gaps (tests/hl1.spec.mjs) and a rig over 12 regions, fixed in the lanes before the
+  merge: the chest's lid and the jelly blob's stretch now take a press, so hl1 samples the soda can
+  and the toadstool instead.
+- tests/live3.spec.mjs:372 (the still splat mirror) fails on main since Live input r6 (#250); the
+  Live input lane fixes it on `claude/lane-live-input-r6-fix`.
+- Fluids r7 (#252, Sonnet 5.5) passed the Operator's technical review; it merges after a full test
+  run (labs). Manual r2 (#253, Sonnet 5.5) waits on the owner's answer on its credit line.
+
 Settled on 2026-10-04 (the owner's answers of 03:30 UTC):
 
 - "Manual r2 go": lane Manual r2 (Sonnet 5.5, docs) builds Codex 13's newcomer proposals and a fresh
