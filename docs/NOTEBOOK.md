@@ -56,6 +56,83 @@ which is which) is planned for the blog.
 | September 29, 2026    | A/B (maker A) | Sonnet 5.5 | The toy piano, built blind against maker B (#89, closed)                                                                                                                        | Its three cards were marked "too grainy"; closed after the owner's marks.                                                                                                                                                               |
 | September 29, 2026    | A/B (maker B) | Opus 5.5   | The toy piano: a hammer strikes a ringing rod for each key; Twinkle, Twinkle (#91)                                                                                              | About 5 hours to READY; all three cards good the first time, so it won the blind A/B and merged as a public toy.                                                                                                                        |
 | September 29, 2026    | Character     | Opus 5.5   | A detailed person for Worlds, kit-built from splats: real proportions, a sculpted face, hands, clothes, and a walk, run and idle (#110)                                         | About 4 hours; the owner: "Better, but still looks too low-poly", and stopped the lane there. The lesson: a person made of rigid splat parts reads as low-poly at game distance; the hybrid round tries a lit, skinned model beside it. |
+| September 29, 2026    | Books r2      | Opus 5.5   | Sharper book and album covers, edges, spines, leather and linen ([#112]).                                                                                                       | Time not recorded. 405 tests passed before later merges. Even faces, fine edge splats and density 1 replaced blurry edges and speckle.                                                                                                  |
+| September 29, 2026    | Sharpness     | Opus 5.5   | Labs controls and measurements for pixel ratio, culling, adaptive resolution and anti-aliasing ([#107]).                                                                        | Time not recorded. 14 toys and the island measured in software. Lifting the 2× cap to 3× narrowed edges by about a third; real-phone cost was not measured.                                                                             |
+| September 29, 2026    | Chemistry     | Opus 5.5   | The periodic table, all elements in the atom toy, and more molecules, crystals and orbitals ([#100], engine [#99]).                                                             | Time not recorded. 118 elements, 19 molecular conformers and 30 orbital choices; 440 tests passed in the recorded full run. Two sharpness review rounds followed.                                                                       |
+| September 29, 2026    | Song live     | Sonnet 5.5 | A scrolling Live view of the Song landscape, with fading cells and caps that follow loudness ([#119]).                                                                          | Time not recorded. 48 caps. The focused run reported 87 passes and one help-length failure, then fixed. The full run did not finish.                                                                                                    |
+| September 29, 2026    | Machines A    | Opus 5.5   | A Turing machine, difference engine, Enigma machine and Bombe, with working rules and typed input ([#102]).                                                                     | Time not recorded. Four toys; 110 focused tests passed after the detail fixes. All five first cards needed more sharpness. The second full run was interrupted.                                                                         |
+| September 30, 2026    | Books r3      | Opus 5.5   | Pages you tap and pull, a molded gold frame, GIFs and videos in frames, and ordered photo sets ([#123], engine [#117]).                                                         | Time not recorded. 449 tests passed and two failed on main too. Video seeking failed on the local server without range requests; opening the test clip as a file fixed it.                                                              |
+| September 30, 2026    | Photo to 3D   | Sonnet 5.5 | A photo becomes a depth relief on the device, with layer and depth choices ([#98]).                                                                                             | Time not recorded. 10 lane tests passed. The 27 MB depth model took 3.5–5 s on the container CPU; first use downloaded about 41 MB. Phone speed was not measured.                                                                       |
+| September 30, 2026    | Lab r2        | Opus 5.5   | Reliable taps on the faint galaxy, pulses where you tap, and sharper Splat equation choices ([#116], engine [#115]).                                                            | Time not recorded. Galaxy hits rose from 0/25 to 25/25 at both sizes after lowering the picking opacity threshold. The full run passed 450 tests in four chunks.                                                                        |
+| September 30, 2026    | Real objects  | Opus 5.5   | Seven everyday objects from 3D models, with moving parts, sharper surfaces and closed clothing joins ([#97]).                                                                   | Time not recorded. Five toys approved; can and bottle pours stayed in labs for Fluids. 38/40 spec files passed; the two failing files also failed on main.                                                                              |
+| September 30, 2026    | Screens r2    | Opus 5.5   | Sharper TV, cinema and hologram sets, with real switches and media held while off ([#111], engine [#109]).                                                                      | Time not recorded. 450 tests passed in reconciled shards, then 60 focused checks after main moved. Density rose from 0.8 to 2; all five review cards were good.                                                                         |
+| September 30, 2026    | Pianos        | Opus 5.5   | Four keyboards with moving keys and mechanisms, songs, a song bar, and MIDI and ABC readers ([#104], engine [#103]).                                                            | Time not recorded. 88 keys on each piano, 61 on the other two. The full run passed 520/521; the cat timing failure passed alone. Final cards were all good.                                                                             |
+| September 30, 2026    | Fluids v1     | Opus 5.5   | The Fluid lab: particle liquids, smoke, steam and flames, with viscosity choices and reference checks ([#121]).                                                                 | Time not recorded. 502/504 tests passed initially; both failures passed alone. Mid-tier liquid solver medians were 14–30 ms. Honey stopped rather than creeping.                                                                        |
+| September 30, 2026    | Sound sources | Sonnet 5.5 | A recorded-sound candidate catalog and coverage report for the sound lanes ([#140]).                                                                                            | Time not recorded. 102/158 change requests had a CC0 candidate: 252 entries. All 207 preview URLs returned 200. Originals needed a login; some matches were weak.                                                                       |
+| September 30, 2026    | Worlds r2     | Opus 5.5   | A sharper island: even ground and water, crisp signs, solid bushes, rebaked props and tiered rendering ([#108]).                                                                | Time not recorded. Ground speckle fell from 0.07 to 0.03 in software measurements. 429/430 tests passed; the resized render test then passed in the 16-test lane run.                                                                   |
+| September 30, 2026    | Quality audit | Sonnet 5.5 | A quality sweep of every public toy, the weakest 30, likely causes and proposed fixes ([#149]).                                                                                 | Time not recorded. 318 toys measured; 28 tap clips judged as frame strips. Scores were one reviewer’s judgments, with about one point of uncertainty; owner review was pending.                                                         |
+| September 30, 2026    | Worlds hybrid | Opus 5.5   | Model ground, water and sky beside splat props, with shared light, shadows and a mesh character ([#127]).                                                                       | Time not recorded. About 6 MB of assets. 528/529 tests passed; the cat timing failure passed alone. The stylized character read better, but its derived walk was stiff.                                                                 |
+| September 30, 2026    | Books r4      | Opus 5.5   | Page focus, One page reading on portrait phones, cleaner turns and sharper stapled paper ([#126]).                                                                              | Time not recorded. 519 tests passed before later merges. A single tap waits about 0.3 s to distinguish a double-tap; page focus was left out of embeds.                                                                                 |
+| September 30, 2026    | Fix4          | Opus 5.5   | Visible clock hands, clearer marble glass, and an engine option for view-dependent glass opacity ([#134], [#136]).                                                              | Time not recorded. The clock needed pose sorting as well as lifted hands. Four toy and four engine checks passed; the full run stopped early. The marble did not yet use the new opacity kind.                                          |
+| October 1, 2026       | Fix5          | Opus 5.5   | Flag-colored balloon scraps, a solid alarm-clock hand, glass taps, clearer help and live-time clock choices ([#145]).                                                           | Time not recorded. 8 lane tests passed. Partial rig weights had bent the scanned hand; a separate solid hand replaced it. The combined run caught an overlong help line, then fixed.                                                    |
+| October 1, 2026       | UI r2         | Opus 5.5   | Focus mode, larger panels and drawing pads, pan saved in scenes, and Home Screen app files ([#131]; handoff [#166]).                                                            | Time not recorded. 12 lane tests passed. The earlier full run passed 564/568; the pan bug was fixed and timing checks passed alone. Stroke length replaced pointer-event count.                                                         |
+| October 1, 2026       | Sound A       | Opus 5.5   | Recorded samples, credits, sound checks and revised sounds for the first shelves ([#141], [#142]; handoff [#161]).                                                              | Time not recorded. 67 toys; the handoff lists 57 CC0 sample files: 34 recordings plus 23 piano notes. Five lane tests passed. Listening proxies left final sound acceptance to the owner.                                               |
+| October 1, 2026       | Video 3D      | Opus 5.5   | A video-to-3D labs spike: on-device camera solving and splat training, PLY export and flight replay ([#133], engine [#137]).                                                    | Time not recorded. 587/589 tests passed on a quiet CPU; both failures passed alone. Software training left soft unseen angles and moving-person ghosts; real-device numbers were pending.                                               |
+| October 1, 2026       | UI r4         | Opus 5.5   | Drag across keys to play a glissando on six keyboard toys, with every crossed key registered ([#157], engine [#156]; handoff [#166]).                                           | Time not recorded. Four lane and two engine tests passed, plus 145 existing checks. All six clips were good. Interpolating between pointer samples prevented skipped keys.                                                              |
+| October 1, 2026       | Sound B       | Opus 5.5   | Revised sounds for the other shelves, including real recordings and new synthesized voices ([#138]; handoff [#165]).                                                            | Time not recorded. 108 toys; 28 recordings and 43 new voices. The recorded full run passed 416 then 207 tests. After re-encoding, all 85 sound files totaled 986,778 bytes.                                                             |
+| October 1, 2026       | UI r3         | Opus 5.5   | Tap to pause and resume long effects, still defaults for chart and keyboard toys, and a top-bar flag button ([#146]; handoff [#166]).                                           | Time not recorded. Eight lane tests passed. Two failures were fixed and one passed alone. Two checks remained red: a rig check also failed on main, and a long-effect test still expected restart.                                      |
+| October 1, 2026       | Fix6          | Opus 5.5   | Photo loading fixed, Enigma typing, a periodic-table tour without loading flashes, and a smoother guitar ([#154], [#155], [#159]; handoff [#167]).                              | Time not recorded. Gzipped content length had sized a decompressed buffer too small. A 24 MP JPEG built in 6.2 s on the test server; the Operator’s final 150 checks passed.                                                            |
+| October 1, 2026       | Worlds r3     | Opus 5.5   | A more detailed mesh character with captured motion, scanned props, and sharper hybrid terrain and water ([#135]).                                                              | Time not recorded. Hybrid downloads were 9.49–10.50 MB. 32 lane checks passed; the full run passed 582/583 and the remaining timing check passed alone. Software frame times were relative only.                                        |
+| October 1, 2026       | Live input    | Opus 5.5   | Microphone toys, a depth mirror, live Photo to 3D, a voice tuner, clap-to-tap and screen sharing ([#150], engine [#144]).                                                       | Time not recorded. Devices start on a tap. Fake-device tests covered permissions, Stop and signals; 46 focused checks passed after merging main. Physical-device capture was not verified.                                              |
+| October 2, 2026       | Shelves       | Opus 5.5   | Shelf moves, a dressed Torus, and five planet looks with saved choices ([#148], engine [#147]; handoff [#171]).                                                                 | Time not recorded. Torus built in 364–423 ms at 200k splats. The handoff records 141/141 focused passes and repaired shelf expectations. The handoff warns against per-splat assertions.                                                |
+| October 2, 2026       | Science       | Opus 5.5   | Thermal ellipsoids, a super-resolution microscope and an approximate simulated galaxy, each opening real data ([#132]).                                                         | Time not recorded. Three labs toys; 20 lane tests passed. The galaxy used 300k of 2.37 million gas particles. Gaussian spreads followed the data; phone frame rates were unmeasured.                                                    |
+| October 2, 2026       | Photoreal     | Sonnet 5.5 | A source and license report by shelf, plus a private page comparing captures with the toys ([#175]).                                                                            | Time not recorded. 14 captures kept from 21 examined; no capture shipped in this round. The private viewer was not tested, and unreachable sources were marked.                                                                         |
+| October 2, 2026       | Live input r2 | Opus 5.5   | Long songs play while a worker measures them, with four new measured looks and synchronized Live motion ([#163], engine [#162]).                                                | Time not recorded. A 10-minute MP3 started in 1.2–1.8 s in one software setting, versus 8.9 s before. All 12 WAV clicks crossed within 50 ms. Other formats still decoded whole.                                                        |
+| October 2, 2026       | Science r2    | Opus 5.5   | Pinch-and-scroll zoom for the microscope and galaxy, and the thermal-ellipsoid phone fix ([#181], engine [#182]; handoff [#189]).                                               | Time not recorded. 124 checks passed. A packed-type clash caused oversized atom discs; low-tier aspirin renders fell from 2,293 to 62 ms in software after the fix and budget reduction.                                                |
+| October 2, 2026       | Fluids r4     | Opus 5.5   | A GPU liquid solver, a shaded liquid surface, grid smoke and flames, and traced props ([#152]; handoff [#190]).                                                                 | Time not recorded. 12 lane tests passed. Dam-break RMS error fell from 1.23 to 0.27 over the same 13 reference points. The CPU path remained for browsers without WebGPU.                                                               |
+| October 2, 2026       | Fluids r5     | Opus 5.5   | A tappable faucet, a brighter clear stream, stable cooling lava and lighter phone settings ([#180]; handoff [#190]).                                                            | Time not recorded. 14 lane tests passed. Hidden prop splats had blocked taps; retaining them restored picking. Phone settings reduced particles and stepped down under load; phone timings were unmeasured.                             |
+| October 2, 2026       | Video 3D r6   | Opus 5.5   | Short training runs grow splats; street and statue samples were retrained more sharply ([#169]).                                                                                | Time not recorded. Both reached 120k splats; street edge sharpness rose 37%, statue 21%. 679 tests passed before the final asset update. A fixed refinement schedule had prevented growth.                                              |
+| October 2, 2026       | Video 3D r7   | Opus 5.5   | Filming guidance, plain failures with one retry, phone training settings and steering during flight replay ([#186]).                                                            | Time not recorded. The handoff records an Integrator run of 774/774. Phone-safe used 1,200 steps and 30k splats, with no growth. Bursts and the time limit were not tested on a real phone.                                             |
+| October 2, 2026       | Live input r3 | Opus 5.5   | Tilt and audio transport, microphone recording, a clearer echo meter, a steadier mirror and Moving photo to 3D ([#191], engine [#187]).                                         | Time not recorded. 137 focused checks passed with the engine. Mirror flashing fell from 15,635 pixels to under 2,500 in its test. Per-frame depth took about 1.4 s on the software setup.                                               |
+| October 2, 2026       | Sound C       | Opus 5.5   | The October 2 sound review, sound that pauses with motion, and samples ready for the first tap ([#192], engine [#183]).                                                         | Time not recorded. 44 review toys; 42 marked site, lungs ready, ice cream kept. The dice sample began 7.6 ms after motion in a slow-fetch test. The 730-pass/23-fail run used the wrong fixture port.                                   |
+| October 3, 2026       | Sharpness A   | Opus 5.5   | Sharper surfaces on 32 toys across landmarks, vehicles, Medieval, Open me, gems, space and weather ([#172]).                                                                    | Time not recorded. All 32 were approved. 145 focused checks passed after the storybook split. Even opaque surfaces and calmer colors removed grain without raising tier budgets.                                                        |
+| October 3, 2026       | Fix7          | Opus 5.5   | Taps where you tap, revised pause behavior, repaired looks and bonds, a wide periodic table and Enigma step-back ([#174], [#179]).                                              | Time not recorded. 24 part-two cards; 158 focused tests passed after main moved. Two older tests still needed count or fixture updates. The part-one full-run count was inconsistent in its PR.                                         |
+| October 3, 2026       | Sharpness B   | Opus 5.5   | Sharper food, toys, math, computing and album covers, closed bases, and draggable plotter sliders ([#185], engine [#200]).                                                      | Time not recorded. 341 toys viewed from below. 65 checks passed after the tomato rig fix; the whole suite was not repeated after later changes. Scan defects and some gyroid specks remained.                                           |
+| October 3, 2026       | Sharp A book  | Opus 5.5   | The storybook’s sharper words, cover and page edges, with pages sorted where they turn ([#202]).                                                                                | Time not recorded. 9 lane checks passed after main moved; the high-tier book built 151,781 splats in 321 ms. Sorting fixed washed-out words; a brief closing notch and specks remained.                                                 |
+| October 3, 2026       | Live input r4 | Opus 5.5   | The Chladni plate plays your audio, changes sand patterns with pitch, and hides its bow during external audio ([#199]).                                                         | Time not recorded. Two new tests and 145 regression checks passed. Fake-microphone and file tests showed the sand switching between 195 and 375 Hz; chords followed one dominant mode.                                                  |
+| October 3, 2026       | Live input r5 | Opus 5.5   | Moving photo plays synchronized sound with sharper frames; the mirror cuts depth edges and fills the background ([#207]).                                                       | Time not recorded. Four new tests and 150 regression checks passed after fixes. Max detail held about 44 MB for 48 frames. A never-seen background was a smooth guess; real phones were untested.                                       |
+| October 3, 2026       | Fluids r6     | Opus 5.5   | Liquid tops meet the glass, streams are thinner, lava shares one cooling material, and the falling drop is flattened ([#204]; handoff [#220]).                                  | Time not recorded. 14 lane tests passed; the full suite was not run. Four views checked the glass surface. Lava ropes, drop wobble and the owner’s phone checks remained open.                                                          |
+| October 3, 2026       | QR scan lab   | Sonnet 5.5 | A simulated-camera scan harness, two readers, a scorecard and regression checks for the QR styles ([#215]).                                                                     | Time not recorded. The handoff’s completed second round passed eight styles at four captures each in 44 s. Its full sweep took about 25 minutes. Simulated captures do not establish real-phone scan reliability.                       |
+| October 3, 2026       | Photoreal r2  | Sonnet 5.5 | 30 new captured toys in labs, full and lite files, credits, and a command that lists NonCommercial assets ([#212]).                                                             | Time not recorded. 27 CC BY and three NC assets. Full files reached 1M splats and 15 MB; lite files 300k. Mid-tier cost and the full test suite were not verified by the lane.                                                          |
+| October 3, 2026       | QR            | Opus 5.5   | A splat QR generator with eight content kinds, seven styles, scan checks, motion and exports ([#216]).                                                                          | Time not recorded. 11 lane tests passed; 44 GIF frames × 8 variants read back. M became Auto after the scan lab’s measurements. The full suite stopped at 91/845; some Bubbles clip frames failed.                                      |
+| October 3, 2026       | Fidelity      | Opus 5.5   | Trained-file decoding and rigged parts, an eleven-part orrery recipe, and render/train/measure tools ([#209], engine [#210]).                                                   | Time not recorded. Five tests passed with 272 KB of stand-in parts. Brush training had not run and the orrery was not on the shelf. Captured splats kept view-dependent color; kit parts kept base color only.                          |
+| October 3, 2026       | Physics       | Opus 5.5   | Hands-on play, a small physics engine, stable grabs and stacking, and nine showcase toys ([#176], [#203], [#222], [#184]).                                                      | Time not recorded. The grab’s 98 checks passed; the placement probe stacked cleanly 8/8 times, versus 1/3 before. Showcase testing covered 76 spec files; stones could remain pinned above removed stones.                              |
+| October 3, 2026       | UI r5         | Opus 5.5   | Reachable gallery controls, better piano framing and rotation, larger model files, and stage recording with sound ([#177], [#178]).                                             | Time not recorded. Three lane tests passed; a 66 MB model opened on both tiers. Recording capped takes at 60 s and 1920 px. Real-phone recording and the final full run were not verified.                                              |
+| October 3, 2026       | Books r5      | Opus 5.5   | PDF links, figures and album photos that rise from the page, plus Draw a box for other figures ([#219], engine [#218]).                                                         | Time not recorded. The handoff records 91 focused passes after main moved; the full run was left to Integrators. Vector figures needed a drawn box; cover-page links still did not work.                                                |
+
+### Codex audits (not a Claude lane)
+
+The Entries table lists Claude lanes only; its model column is always Opus 5.5 or Sonnet 5.5. Codex
+ran these on the owner's Mac (October 3, 2026):
+
+- What it built: Performance, licenses, accessibility, test health, materials, viewer comparison and
+  Hands-on audits ([#206], [#195], [#196], [#213], [#234], [#237], [#235]).
+- Model: GPT-6 where named (#234); not recorded for the others.
+- Notes: Time not recorded. GPT-6 is named in [#234]; other audit models are not recorded.
+  Performance covered 342 toys; test health found 17 distinct failures; Hands-on flagged 109/373.
+  Findings were proposals.
+
+Backfilled through October 3, 2026, on main at `aba77089`. New dates are the merge commit’s date in
+Eastern time for the round’s last substantive PR. Engine and handoff-only PRs are grouped with that
+round; their individual merge dates are in the linked source titles below. Review revisions within
+one toy PR stay in one entry. Ops PRs and Codex’s Dot jobs PR are omitted; the seven merged Codex
+audits share one entry, under "Codex audits" below the table. Earlier entries and the notes below
+remain as written.
+
+New counts, timings, lessons and model names come from the linked PR bodies and lane handoffs. They
+are reported results, not fresh tests of those branches. No elapsed lane duration was recorded in
+those sources, so each new entry says so. The QR scan lab’s PR body still describes its first push;
+its completed results come from its handoff.
 
 Dates are merge dates where the record has them; otherwise the day of the owner's review, or the
 span the record supports (Phases A to D have no recorded merge day). Every lane before September 29,
@@ -250,3 +327,296 @@ decide:
    followed by the reveal.
 5. The blog shows both clips side by side and says plainly what the numbers can and cannot show from
    one toy.
+
+[#97]:
+  https://github.com/ryanjosephkamp/splashery/pull/97
+  "Merged September 30, 2026, 6:21:19 AM Eastern"
+[#98]:
+  https://github.com/ryanjosephkamp/splashery/pull/98
+  "Merged September 30, 2026, 3:56:52 AM Eastern"
+[#99]:
+  https://github.com/ryanjosephkamp/splashery/pull/99
+  "Merged September 29, 2026, 5:09:36 PM Eastern"
+[#100]:
+  https://github.com/ryanjosephkamp/splashery/pull/100
+  "Merged September 29, 2026, 10:42:32 PM Eastern"
+[#102]:
+  https://github.com/ryanjosephkamp/splashery/pull/102
+  "Merged September 29, 2026, 11:16:01 PM Eastern"
+[#103]:
+  https://github.com/ryanjosephkamp/splashery/pull/103
+  "Merged September 30, 2026, 7:52:21 AM Eastern"
+[#104]:
+  https://github.com/ryanjosephkamp/splashery/pull/104
+  "Merged September 30, 2026, 7:52:26 AM Eastern"
+[#107]:
+  https://github.com/ryanjosephkamp/splashery/pull/107
+  "Merged September 29, 2026, 10:41:29 PM Eastern"
+[#108]:
+  https://github.com/ryanjosephkamp/splashery/pull/108
+  "Merged September 30, 2026, 5:27:09 PM Eastern"
+[#109]:
+  https://github.com/ryanjosephkamp/splashery/pull/109
+  "Merged September 29, 2026, 5:09:39 PM Eastern"
+[#111]:
+  https://github.com/ryanjosephkamp/splashery/pull/111
+  "Merged September 30, 2026, 6:53:04 AM Eastern"
+[#112]:
+  https://github.com/ryanjosephkamp/splashery/pull/112
+  "Merged September 29, 2026, 6:20:44 PM Eastern"
+[#115]:
+  https://github.com/ryanjosephkamp/splashery/pull/115
+  "Merged September 30, 2026, 5:48:06 AM Eastern"
+[#116]:
+  https://github.com/ryanjosephkamp/splashery/pull/116
+  "Merged September 30, 2026, 5:48:12 AM Eastern"
+[#117]:
+  https://github.com/ryanjosephkamp/splashery/pull/117
+  "Merged September 30, 2026, 2:53:04 AM Eastern"
+[#119]:
+  https://github.com/ryanjosephkamp/splashery/pull/119
+  "Merged September 29, 2026, 10:42:48 PM Eastern"
+[#121]:
+  https://github.com/ryanjosephkamp/splashery/pull/121
+  "Merged September 30, 2026, 1:52:19 PM Eastern"
+[#123]:
+  https://github.com/ryanjosephkamp/splashery/pull/123
+  "Merged September 30, 2026, 2:53:09 AM Eastern"
+[#126]:
+  https://github.com/ryanjosephkamp/splashery/pull/126
+  "Merged September 30, 2026, 9:11:35 PM Eastern"
+[#127]:
+  https://github.com/ryanjosephkamp/splashery/pull/127
+  "Merged September 30, 2026, 5:54:18 PM Eastern"
+[#131]:
+  https://github.com/ryanjosephkamp/splashery/pull/131
+  "Merged October 1, 2026, 4:12:35 AM Eastern"
+[#132]:
+  https://github.com/ryanjosephkamp/splashery/pull/132
+  "Merged October 2, 2026, 3:56:21 AM Eastern"
+[#133]:
+  https://github.com/ryanjosephkamp/splashery/pull/133
+  "Merged October 1, 2026, 9:48:34 AM Eastern"
+[#134]:
+  https://github.com/ryanjosephkamp/splashery/pull/134
+  "Merged September 30, 2026, 11:08:23 PM Eastern"
+[#135]:
+  https://github.com/ryanjosephkamp/splashery/pull/135
+  "Merged October 1, 2026, 7:24:49 PM Eastern"
+[#136]:
+  https://github.com/ryanjosephkamp/splashery/pull/136
+  "Merged September 30, 2026, 8:23:20 PM Eastern"
+[#137]:
+  https://github.com/ryanjosephkamp/splashery/pull/137
+  "Merged October 1, 2026, 1:50:05 AM Eastern"
+[#138]:
+  https://github.com/ryanjosephkamp/splashery/pull/138
+  "Merged October 1, 2026, 2:25:26 PM Eastern"
+[#140]:
+  https://github.com/ryanjosephkamp/splashery/pull/140
+  "Merged September 30, 2026, 4:44:54 PM Eastern"
+[#141]:
+  https://github.com/ryanjosephkamp/splashery/pull/141
+  "Merged October 1, 2026, 1:50:00 AM Eastern"
+[#142]:
+  https://github.com/ryanjosephkamp/splashery/pull/142
+  "Merged October 1, 2026, 5:51:51 AM Eastern"
+[#144]:
+  https://github.com/ryanjosephkamp/splashery/pull/144
+  "Merged October 1, 2026, 1:08:53 PM Eastern"
+[#145]:
+  https://github.com/ryanjosephkamp/splashery/pull/145
+  "Merged October 1, 2026, 12:41:53 AM Eastern"
+[#146]:
+  https://github.com/ryanjosephkamp/splashery/pull/146
+  "Merged October 1, 2026, 4:13:57 PM Eastern"
+[#147]:
+  https://github.com/ryanjosephkamp/splashery/pull/147
+  "Merged October 1, 2026, 1:49:56 AM Eastern"
+[#148]:
+  https://github.com/ryanjosephkamp/splashery/pull/148
+  "Merged October 2, 2026, 12:53:27 AM Eastern"
+[#149]:
+  https://github.com/ryanjosephkamp/splashery/pull/149
+  "Merged September 30, 2026, 5:28:55 PM Eastern"
+[#150]:
+  https://github.com/ryanjosephkamp/splashery/pull/150
+  "Merged October 1, 2026, 7:45:10 PM Eastern"
+[#152]:
+  https://github.com/ryanjosephkamp/splashery/pull/152
+  "Merged October 2, 2026, 8:31:58 AM Eastern"
+[#154]:
+  https://github.com/ryanjosephkamp/splashery/pull/154
+  "Merged October 1, 2026, 9:00:17 AM Eastern"
+[#155]:
+  https://github.com/ryanjosephkamp/splashery/pull/155
+  "Merged October 1, 2026, 4:13:51 PM Eastern"
+[#156]:
+  https://github.com/ryanjosephkamp/splashery/pull/156
+  "Merged October 1, 2026, 2:08:53 PM Eastern"
+[#157]:
+  https://github.com/ryanjosephkamp/splashery/pull/157
+  "Merged October 1, 2026, 2:08:58 PM Eastern"
+[#159]:
+  https://github.com/ryanjosephkamp/splashery/pull/159
+  "Merged October 1, 2026, 4:56:58 PM Eastern"
+[#161]:
+  https://github.com/ryanjosephkamp/splashery/pull/161
+  "Merged October 1, 2026, 11:30:21 AM Eastern"
+[#162]:
+  https://github.com/ryanjosephkamp/splashery/pull/162
+  "Merged October 2, 2026, 5:34:36 AM Eastern"
+[#163]:
+  https://github.com/ryanjosephkamp/splashery/pull/163
+  "Merged October 2, 2026, 7:08:07 AM Eastern"
+[#165]:
+  https://github.com/ryanjosephkamp/splashery/pull/165
+  "Merged October 2, 2026, 5:41:27 AM Eastern"
+[#166]:
+  https://github.com/ryanjosephkamp/splashery/pull/166
+  "Merged October 2, 2026, 5:41:29 AM Eastern"
+[#167]:
+  https://github.com/ryanjosephkamp/splashery/pull/167
+  "Merged October 2, 2026, 5:41:31 AM Eastern"
+[#169]:
+  https://github.com/ryanjosephkamp/splashery/pull/169
+  "Merged October 2, 2026, 3:21:06 PM Eastern"
+[#171]:
+  https://github.com/ryanjosephkamp/splashery/pull/171
+  "Merged October 2, 2026, 5:41:34 AM Eastern"
+[#172]:
+  https://github.com/ryanjosephkamp/splashery/pull/172
+  "Merged October 3, 2026, 12:44:47 AM Eastern"
+[#174]:
+  https://github.com/ryanjosephkamp/splashery/pull/174
+  "Merged October 3, 2026, 12:08:13 AM Eastern"
+[#175]:
+  https://github.com/ryanjosephkamp/splashery/pull/175
+  "Merged October 2, 2026, 5:41:24 AM Eastern"
+[#176]:
+  https://github.com/ryanjosephkamp/splashery/pull/176
+  "Merged October 2, 2026, 11:09:05 AM Eastern"
+[#177]:
+  https://github.com/ryanjosephkamp/splashery/pull/177
+  "Merged October 2, 2026, 12:40:19 PM Eastern"
+[#178]:
+  https://github.com/ryanjosephkamp/splashery/pull/178
+  "Merged October 3, 2026, 2:45:31 PM Eastern"
+[#179]:
+  https://github.com/ryanjosephkamp/splashery/pull/179
+  "Merged October 3, 2026, 1:03:43 AM Eastern"
+[#180]:
+  https://github.com/ryanjosephkamp/splashery/pull/180
+  "Merged October 2, 2026, 8:32:04 AM Eastern"
+[#181]:
+  https://github.com/ryanjosephkamp/splashery/pull/181
+  "Merged October 2, 2026, 8:31:52 AM Eastern"
+[#182]:
+  https://github.com/ryanjosephkamp/splashery/pull/182
+  "Merged October 2, 2026, 8:31:47 AM Eastern"
+[#183]:
+  https://github.com/ryanjosephkamp/splashery/pull/183
+  "Merged October 2, 2026, 10:06:07 AM Eastern"
+[#184]:
+  https://github.com/ryanjosephkamp/splashery/pull/184
+  "Merged October 3, 2026, 2:45:28 PM Eastern"
+[#185]:
+  https://github.com/ryanjosephkamp/splashery/pull/185
+  "Merged October 3, 2026, 5:43:29 AM Eastern"
+[#186]:
+  https://github.com/ryanjosephkamp/splashery/pull/186
+  "Merged October 2, 2026, 5:02:38 PM Eastern"
+[#187]:
+  https://github.com/ryanjosephkamp/splashery/pull/187
+  "Merged October 2, 2026, 6:49:07 PM Eastern"
+[#189]:
+  https://github.com/ryanjosephkamp/splashery/pull/189
+  "Merged October 2, 2026, 12:41:16 PM Eastern"
+[#190]:
+  https://github.com/ryanjosephkamp/splashery/pull/190
+  "Merged October 2, 2026, 12:41:20 PM Eastern"
+[#191]:
+  https://github.com/ryanjosephkamp/splashery/pull/191
+  "Merged October 2, 2026, 6:49:12 PM Eastern"
+[#192]:
+  https://github.com/ryanjosephkamp/splashery/pull/192
+  "Merged October 2, 2026, 6:49:17 PM Eastern"
+[#195]:
+  https://github.com/ryanjosephkamp/splashery/pull/195
+  "Merged October 2, 2026, 11:56:51 PM Eastern"
+[#196]:
+  https://github.com/ryanjosephkamp/splashery/pull/196
+  "Merged October 2, 2026, 11:56:55 PM Eastern"
+[#199]:
+  https://github.com/ryanjosephkamp/splashery/pull/199
+  "Merged October 3, 2026, 8:06:33 AM Eastern"
+[#200]:
+  https://github.com/ryanjosephkamp/splashery/pull/200
+  "Merged October 3, 2026, 4:26:15 AM Eastern"
+[#202]:
+  https://github.com/ryanjosephkamp/splashery/pull/202
+  "Merged October 3, 2026, 5:43:31 AM Eastern"
+[#203]:
+  https://github.com/ryanjosephkamp/splashery/pull/203
+  "Merged October 3, 2026, 8:06:28 AM Eastern"
+[#204]:
+  https://github.com/ryanjosephkamp/splashery/pull/204
+  "Merged October 3, 2026, 8:06:43 AM Eastern"
+[#206]:
+  https://github.com/ryanjosephkamp/splashery/pull/206
+  "Merged October 2, 2026, 10:46:54 PM Eastern"
+[#207]:
+  https://github.com/ryanjosephkamp/splashery/pull/207
+  "Merged October 3, 2026, 8:06:38 AM Eastern"
+[#209]:
+  https://github.com/ryanjosephkamp/splashery/pull/209
+  "Merged October 3, 2026, 2:45:26 PM Eastern"
+[#210]:
+  https://github.com/ryanjosephkamp/splashery/pull/210
+  "Merged October 3, 2026, 2:45:23 PM Eastern"
+[#212]:
+  https://github.com/ryanjosephkamp/splashery/pull/212
+  "Merged October 3, 2026, 11:16:48 AM Eastern"
+[#213]:
+  https://github.com/ryanjosephkamp/splashery/pull/213
+  "Merged October 3, 2026, 5:53:51 AM Eastern"
+[#215]:
+  https://github.com/ryanjosephkamp/splashery/pull/215
+  "Merged October 3, 2026, 11:16:43 AM Eastern"
+[#216]:
+  https://github.com/ryanjosephkamp/splashery/pull/216
+  "Merged October 3, 2026, 12:16:22 PM Eastern"
+[#218]:
+  https://github.com/ryanjosephkamp/splashery/pull/218
+  "Merged October 3, 2026, 2:45:33 PM Eastern"
+[#219]:
+  https://github.com/ryanjosephkamp/splashery/pull/219
+  "Merged October 3, 2026, 2:45:36 PM Eastern"
+[#220]:
+  https://github.com/ryanjosephkamp/splashery/pull/220
+  "Merged October 3, 2026, 2:45:38 PM Eastern"
+[#222]:
+  https://github.com/ryanjosephkamp/splashery/pull/222
+  "Merged October 3, 2026, 2:45:21 PM Eastern"
+[#234]:
+  https://github.com/ryanjosephkamp/splashery/pull/234
+  "Merged October 3, 2026, 1:47:28 PM Eastern"
+[#235]:
+  https://github.com/ryanjosephkamp/splashery/pull/235
+  "Merged October 3, 2026, 1:47:33 PM Eastern"
+[#237]:
+  https://github.com/ryanjosephkamp/splashery/pull/237
+  "Merged October 3, 2026, 1:47:31 PM Eastern"
+
+Lane handoffs: [Books](handoff/Books.md), [BooksR5](handoff/BooksR5.md),
+[Chemistry](handoff/Chemistry.md), [Fidelity](handoff/Fidelity.md), [Fix4](handoff/Fix4.md),
+[Fix5](handoff/Fix5.md), [Fix6](handoff/Fix6.md), [Fix7](handoff/Fix7.md),
+[Fluids](handoff/Fluids.md), [Lab](handoff/Lab.md), [LiveInput](handoff/LiveInput.md),
+[MachinesA](handoff/MachinesA.md), [Photo3D](handoff/Photo3D.md), [Photoreal](handoff/Photoreal.md),
+[PhotorealR2](handoff/PhotorealR2.md), [Physics](handoff/Physics.md), [Pianos](handoff/Pianos.md),
+[QR](handoff/QR.md), [QRLab](handoff/QRLab.md), [RealObjects](handoff/RealObjects.md),
+[Science](handoff/Science.md), [ScreensR2](handoff/ScreensR2.md), [SharpA](handoff/SharpA.md),
+[SharpB](handoff/SharpB.md), [Sharpness](handoff/Sharpness.md), [Shelves](handoff/Shelves.md),
+[SoundA](handoff/SoundA.md), [SoundB](handoff/SoundB.md), [SoundC](handoff/SoundC.md),
+[UIr2](handoff/UIr2.md), [UIr3](handoff/UIr3.md), [UIr4](handoff/UIr4.md), [UIr5](handoff/UIr5.md),
+[Video3D](handoff/Video3D.md), [Worlds](handoff/Worlds.md).

@@ -1,0 +1,4039 @@
+[
+  {
+    "renderer": "webgl2",
+    "errors": [],
+    "observations": [
+      {
+        "phase": "pour",
+        "i": 0,
+        "snapshot": {
+          "at": 8872.100000023842,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 3.100000023841858,
+            "particles": 4524,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.4695107638835907,
+              "n": 474,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 14663056,
+          "totalSize": 32407552,
+          "embedderHeapUsedSize": 10731432,
+          "backingStorageSize": 39367327
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 1,
+        "snapshot": {
+          "at": 13881.800000011921,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 3.699999988079071,
+            "particles": 4590,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0.19999998807907104,
+            "sound": {
+              "flux": 0,
+              "level": 0.5281838774681091,
+              "n": 540,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 0,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 20616156,
+          "totalSize": 33193984,
+          "embedderHeapUsedSize": 11534144,
+          "backingStorageSize": 39381823
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 2,
+        "snapshot": {
+          "at": 18887.400000035763,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.899999976158142,
+            "particles": 4452,
+            "slots": 6634,
+            "steps": 2,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.4008598327636719,
+              "n": 402,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 19343344,
+          "totalSize": 34766848,
+          "embedderHeapUsedSize": 12392568,
+          "backingStorageSize": 39396127
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 3,
+        "snapshot": {
+          "at": 23891.19999998808,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 2.300000011920929,
+            "particles": 4590,
+            "slots": 6634,
+            "steps": 2,
+            "uploadMs": 1.100000023841858,
+            "sound": {
+              "flux": 0,
+              "level": 0.5379741191864014,
+              "n": 540,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 23728284,
+          "totalSize": 40534016,
+          "embedderHeapUsedSize": 13357568,
+          "backingStorageSize": 39410527
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 4,
+        "snapshot": {
+          "at": 28899.69999998808,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 3.5,
+            "particles": 4590,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0.9000000357627869,
+            "sound": {
+              "flux": 0,
+              "level": 0.5339637398719788,
+              "n": 540,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 28461892,
+          "totalSize": 47611904,
+          "embedderHeapUsedSize": 14197680,
+          "backingStorageSize": 39425023
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 5,
+        "snapshot": {
+          "at": 33904.40000003576,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.600000023841858,
+            "particles": 4449,
+            "slots": 6634,
+            "steps": 2,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.4032040238380432,
+              "n": 399,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 20540628,
+          "totalSize": 49184768,
+          "embedderHeapUsedSize": 15017328,
+          "backingStorageSize": 39439423
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 6,
+        "snapshot": {
+          "at": 38910.10000002384,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 2.299999952316284,
+            "particles": 4590,
+            "slots": 6634,
+            "steps": 2,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.5369662046432495,
+              "n": 540,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 24729920,
+          "totalSize": 49184768,
+          "embedderHeapUsedSize": 15987128,
+          "backingStorageSize": 39453823
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 7,
+        "snapshot": {
+          "at": 43915.5,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 2.399999976158142,
+            "particles": 4590,
+            "slots": 6634,
+            "steps": 2,
+            "uploadMs": 0.30000001192092896,
+            "sound": {
+              "flux": 0,
+              "level": 0.5324411988258362,
+              "n": 540,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 28505756,
+          "totalSize": 51281920,
+          "embedderHeapUsedSize": 16880552,
+          "backingStorageSize": 39468223
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 8,
+        "snapshot": {
+          "at": 48921.5,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 2.699999988079071,
+            "particles": 4449,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0.09999996423721313,
+            "sound": {
+              "flux": 0,
+              "level": 0.39831656217575073,
+              "n": 399,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 32409732,
+          "totalSize": 51806208,
+          "embedderHeapUsedSize": 17722040,
+          "backingStorageSize": 39482623
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 9,
+        "snapshot": {
+          "at": 53925.60000002384,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 3.399999976158142,
+            "particles": 4590,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.5294589996337891,
+              "n": 540,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 36124564,
+          "totalSize": 52068352,
+          "embedderHeapUsedSize": 18462512,
+          "backingStorageSize": 39497023
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 10,
+        "snapshot": {
+          "at": 58932.19999998808,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 3.5,
+            "particles": 4590,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0.09999996423721313,
+            "sound": {
+              "flux": 0,
+              "level": 0.5305607914924622,
+              "n": 540,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 0,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 27423644,
+          "totalSize": 54427648,
+          "embedderHeapUsedSize": 19453616,
+          "backingStorageSize": 39511519
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 11,
+        "snapshot": {
+          "at": 63935.90000003576,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 2.399999976158142,
+            "particles": 4451,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0.19999998807907104,
+            "sound": {
+              "flux": 0,
+              "level": 0.40461283922195435,
+              "n": 399,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 30768832,
+          "totalSize": 55214080,
+          "embedderHeapUsedSize": 20324840,
+          "backingStorageSize": 39525919
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 0,
+        "scene": "candle",
+        "snapshot": {
+          "at": 65458.5,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 63937976,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 65444.40000003576,
+            "ema": 16.56279749417865,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 13836968,
+          "totalSize": 19562496,
+          "embedderHeapUsedSize": 7742056,
+          "backingStorageSize": 32638206
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 1,
+        "scene": "cup",
+        "snapshot": {
+          "at": 66958.5,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 57217984,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 66945.5,
+            "ema": 16.69580225144474,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 14864668,
+          "totalSize": 20611072,
+          "embedderHeapUsedSize": 7590136,
+          "backingStorageSize": 45789616
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 2,
+        "scene": "splash",
+        "snapshot": {
+          "at": 68358.60000002384,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.199999988079071,
+            "particles": 5681,
+            "slots": 9263,
+            "steps": 2,
+            "uploadMs": 0.2999999523162842,
+            "sound": {
+              "flux": 0,
+              "level": 0.07920810580253601,
+              "n": 282,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.07829735282337727
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40659264,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 14499160,
+          "totalSize": 18513920,
+          "embedderHeapUsedSize": 7153904,
+          "backingStorageSize": 29031620
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 3,
+        "scene": "glass",
+        "snapshot": {
+          "at": 69757.80000001192,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0.9000000357627869,
+            "particles": 4279,
+            "slots": 6634,
+            "steps": 2,
+            "uploadMs": 0.5,
+            "sound": {
+              "flux": 0,
+              "level": 0.24144406616687775,
+              "n": 229,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 16514520,
+          "totalSize": 24805376,
+          "embedderHeapUsedSize": 7127288,
+          "backingStorageSize": 38176998
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 4,
+        "scene": "candle",
+        "snapshot": {
+          "at": 71055.40000003576,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 63937976,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 71046.30000001192,
+            "ema": 16.75883211911127,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 15605116,
+          "totalSize": 25329664,
+          "embedderHeapUsedSize": 7800256,
+          "backingStorageSize": 60928705
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 5,
+        "scene": "cup",
+        "snapshot": {
+          "at": 72397.19999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 57217984,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 72395.30000001192,
+            "ema": 16.70866121238377,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 16664200,
+          "totalSize": 25591808,
+          "embedderHeapUsedSize": 8440976,
+          "backingStorageSize": 79108646
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 6,
+        "scene": "splash",
+        "snapshot": {
+          "at": 73772.69999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.5,
+            "particles": 5681,
+            "slots": 9263,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07920394092798233,
+              "n": 282,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.07829735282337727
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40659264,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 15057084,
+          "totalSize": 25591808,
+          "embedderHeapUsedSize": 9028752,
+          "backingStorageSize": 98781174
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 7,
+        "scene": "glass",
+        "snapshot": {
+          "at": 75139,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.4000000357627869,
+            "particles": 4279,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.24437442421913147,
+              "n": 229,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 14276748,
+          "totalSize": 24281088,
+          "embedderHeapUsedSize": 7668832,
+          "backingStorageSize": 52280619
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 8,
+        "scene": "candle",
+        "snapshot": {
+          "at": 76466.30000001192,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 63937976,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 76461,
+            "ema": 16.593740672432446,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 13748232,
+          "totalSize": 23494656,
+          "embedderHeapUsedSize": 7336736,
+          "backingStorageSize": 32110943
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 9,
+        "scene": "cup",
+        "snapshot": {
+          "at": 77802.80000001192,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 57217984,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 77793.69999998808,
+            "ema": 16.545415377521774,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 16133832,
+          "totalSize": 23756800,
+          "embedderHeapUsedSize": 7687264,
+          "backingStorageSize": 50290123
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 10,
+        "scene": "splash",
+        "snapshot": {
+          "at": 79173.60000002384,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.699999988079071,
+            "particles": 5681,
+            "slots": 9263,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07919693738222122,
+              "n": 282,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.07829735282337727
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40659264,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 14118964,
+          "totalSize": 23494656,
+          "embedderHeapUsedSize": 7719656,
+          "backingStorageSize": 51816453
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 11,
+        "scene": "glass",
+        "snapshot": {
+          "at": 80539,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.5,
+            "particles": 4279,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0.10000002384185791,
+            "sound": {
+              "flux": 0,
+              "level": 0.24389204382896423,
+              "n": 229,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 14050576,
+          "totalSize": 23494656,
+          "embedderHeapUsedSize": 7665720,
+          "backingStorageSize": 52279681
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 12,
+        "scene": "candle",
+        "snapshot": {
+          "at": 81865.60000002384,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 63937976,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 81860.40000003576,
+            "ema": 16.584285519749347,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 17003868,
+          "totalSize": 32145408,
+          "embedderHeapUsedSize": 7158912,
+          "backingStorageSize": 32110943
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 13,
+        "scene": "cup",
+        "snapshot": {
+          "at": 83200.90000003576,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 57217984,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 83194.40000003576,
+            "ema": 16.68584362145506,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 18979180,
+          "totalSize": 32931840,
+          "embedderHeapUsedSize": 7695448,
+          "backingStorageSize": 41217680
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 14,
+        "scene": "splash",
+        "snapshot": {
+          "at": 84584.90000003576,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.5999999642372131,
+            "particles": 5681,
+            "slots": 9263,
+            "steps": 3,
+            "uploadMs": 0.6000000238418579,
+            "sound": {
+              "flux": 0,
+              "level": 0.07920459657907486,
+              "n": 282,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.07829735282337727
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40659264,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 16943572,
+          "totalSize": 32407552,
+          "embedderHeapUsedSize": 7670936,
+          "backingStorageSize": 42711170
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 15,
+        "scene": "glass",
+        "snapshot": {
+          "at": 85945.30000001192,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.5,
+            "particles": 4279,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0.09999996423721313,
+            "sound": {
+              "flux": 0,
+              "level": 0.2390645444393158,
+              "n": 229,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 17074028,
+          "totalSize": 32145408,
+          "embedderHeapUsedSize": 7755168,
+          "backingStorageSize": 43207161
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 16,
+        "scene": "candle",
+        "snapshot": {
+          "at": 87269.90000003576,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 63937976,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 87260.80000001192,
+            "ema": 16.603197289544113,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 17358820,
+          "totalSize": 32407552,
+          "embedderHeapUsedSize": 7786680,
+          "backingStorageSize": 41848762
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 17,
+        "scene": "cup",
+        "snapshot": {
+          "at": 88628.5,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 57217984,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 88625.5,
+            "ema": 16.46802864205357,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 19114612,
+          "totalSize": 33980416,
+          "embedderHeapUsedSize": 7793696,
+          "backingStorageSize": 41217621
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 18,
+        "scene": "splash",
+        "snapshot": {
+          "at": 89998.90000003576,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.699999988079071,
+            "particles": 5681,
+            "slots": 9263,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07919752597808838,
+              "n": 282,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.07829735282337727
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40659264,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 17075508,
+          "totalSize": 32407552,
+          "embedderHeapUsedSize": 7731712,
+          "backingStorageSize": 42711170
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 19,
+        "scene": "glass",
+        "snapshot": {
+          "at": 91375,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1,
+            "particles": 4279,
+            "slots": 6634,
+            "steps": 2,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.24080230295658112,
+              "n": 229,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 17108104,
+          "totalSize": 32407552,
+          "embedderHeapUsedSize": 7796944,
+          "backingStorageSize": 43207065
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 20,
+        "scene": "candle",
+        "snapshot": {
+          "at": 92691,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 63937976,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 92677.90000003576,
+            "ema": 16.700188539160855,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 17396540,
+          "totalSize": 32669696,
+          "embedderHeapUsedSize": 7797944,
+          "backingStorageSize": 37243446
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 21,
+        "scene": "cup",
+        "snapshot": {
+          "at": 94055.10000002384,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 57217984,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 94043.5,
+            "ema": 16.633364095005636,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 19138984,
+          "totalSize": 32931840,
+          "embedderHeapUsedSize": 7757272,
+          "backingStorageSize": 41217621
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 22,
+        "scene": "splash",
+        "snapshot": {
+          "at": 95429.5,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.600000023841858,
+            "particles": 5681,
+            "slots": 9263,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07920616120100021,
+              "n": 282,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.07829735282337727
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40659264,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 17115924,
+          "totalSize": 32669696,
+          "embedderHeapUsedSize": 7783584,
+          "backingStorageSize": 42711170
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 23,
+        "scene": "glass",
+        "snapshot": {
+          "at": 96789.60000002384,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 1.600000023841858,
+            "particles": 4279,
+            "slots": 6634,
+            "steps": 3,
+            "uploadMs": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.2420164942741394,
+              "n": 229,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.0678577057802603
+            }
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 4,
+          "tracked": {
+            "tex": 40424304,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 3456,
+            "sb": 0
+          },
+          "grids": []
+        },
+        "heap": {
+          "usedSize": 17035684,
+          "totalSize": 32931840,
+          "embedderHeapUsedSize": 7626880,
+          "backingStorageSize": 43207977
+        }
+      }
+    ],
+    "beforeCyclesGC": {
+      "snapshot": {
+        "at": 64031.19999998808,
+        "profile": "mid",
+        "baseSplats": 105001,
+        "mode": "worker",
+        "stats": {
+          "mode": "worker",
+          "simMs": 2.399999976158142,
+          "particles": 4451,
+          "slots": 6634,
+          "steps": 3,
+          "uploadMs": 0.19999998807907104,
+          "sound": {
+            "flux": 0,
+            "level": 0.40461283922195435,
+            "n": 399,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.0678577057802603
+          }
+        },
+        "pendingDt": 0,
+        "spareBuffers": 0,
+        "buffers": 4,
+        "tracked": {
+          "tex": 40424304,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 3456,
+          "sb": 0
+        },
+        "grids": []
+      },
+      "heap": {
+        "usedSize": 12355740,
+        "totalSize": 14319616,
+        "embedderHeapUsedSize": 7223680,
+        "backingStorageSize": 23339115
+      }
+    },
+    "afterCyclesGC": {
+      "snapshot": {
+        "at": 98850.30000001192,
+        "profile": "mid",
+        "baseSplats": 105001,
+        "mode": "worker",
+        "stats": {
+          "mode": "worker",
+          "simMs": 1.100000023841858,
+          "particles": 4279,
+          "slots": 6634,
+          "steps": 2,
+          "uploadMs": 0,
+          "sound": {
+            "flux": 0,
+            "level": 0.2435620278120041,
+            "n": 229,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.0678577057802603
+          }
+        },
+        "pendingDt": 0,
+        "spareBuffers": 0,
+        "buffers": 4,
+        "tracked": {
+          "tex": 40424304,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 3456,
+          "sb": 0
+        },
+        "grids": []
+      },
+      "heap": {
+        "usedSize": 13626324,
+        "totalSize": 14581760,
+        "embedderHeapUsedSize": 7173328,
+        "backingStorageSize": 28170059
+      }
+    },
+    "profileStep": {
+      "before": {
+        "at": 98858.30000001192,
+        "profile": "mid",
+        "baseSplats": 105001,
+        "mode": "worker",
+        "stats": {
+          "mode": "worker",
+          "simMs": 1.5,
+          "particles": 4279,
+          "slots": 6634,
+          "steps": 3,
+          "uploadMs": 1.199999988079071,
+          "sound": {
+            "flux": 0,
+            "level": 0.2435620278120041,
+            "n": 229,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.0678577057802603
+          }
+        },
+        "pendingDt": 0,
+        "spareBuffers": 1,
+        "buffers": 4,
+        "tracked": {
+          "tex": 40424304,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 3456,
+          "sb": 0
+        },
+        "grids": []
+      },
+      "after": {
+        "at": 98866.30000001192,
+        "profile": "low",
+        "baseSplats": 105001,
+        "mode": "worker",
+        "stats": {
+          "mode": "worker",
+          "simMs": 1.5,
+          "particles": 4279,
+          "slots": 6634,
+          "steps": 3,
+          "uploadMs": 1.199999988079071,
+          "sound": {
+            "flux": 0,
+            "level": 0.2435620278120041,
+            "n": 229,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.0678577057802603
+          }
+        },
+        "pendingDt": 0,
+        "spareBuffers": 1,
+        "buffers": 4,
+        "tracked": {
+          "tex": 40424304,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 3456,
+          "sb": 0
+        },
+        "grids": []
+      },
+      "detectedAutomatic": "mid"
+    },
+    "watchProbe": null
+  },
+  {
+    "renderer": "webgpu",
+    "errors": [],
+    "observations": [
+      {
+        "phase": "pour",
+        "i": 0,
+        "snapshot": {
+          "at": 8797.299999952316,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0,
+            "particles": 13099,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.26149406433105465,
+              "n": 13099,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 13099,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 8787.299999952316,
+            "ema": 16.593913194394503,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 24410548,
+          "totalSize": 54165504,
+          "embedderHeapUsedSize": 16149096,
+          "backingStorageSize": 31494426
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 1,
+        "snapshot": {
+          "at": 13804.899999976158,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 1.2000000476837158,
+            "particles": 14000,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.2776594924926758,
+              "n": 14000,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 14000,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 13803.099999964237,
+            "ema": 16.558578389762932,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 29155292,
+          "totalSize": 59146240,
+          "embedderHeapUsedSize": 22539824,
+          "backingStorageSize": 36466434
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 2,
+        "snapshot": {
+          "at": 18810.899999976158,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.10000002384185791,
+            "particles": 6508,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.14781120300292971,
+              "n": 6508,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 6508,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 2
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 18802.69999998808,
+            "ema": 16.621604396215044,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 27836476,
+          "totalSize": 50757632,
+          "embedderHeapUsedSize": 7845968,
+          "backingStorageSize": 26586205
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 3,
+        "snapshot": {
+          "at": 23818.599999964237,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 1.2999999523162842,
+            "particles": 8921,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.18319791793823242,
+              "n": 8921,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 8921,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 23803.5,
+            "ema": 16.754575393607208,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 34533880,
+          "totalSize": 69632000,
+          "embedderHeapUsedSize": 8043152,
+          "backingStorageSize": 29644127
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 4,
+        "snapshot": {
+          "at": 28829.599999964237,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.699999988079071,
+            "particles": 11334,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.2245041847229004,
+              "n": 11334,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 11334,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 28819.19999998808,
+            "ema": 16.604912768074744,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 23734872,
+          "totalSize": 72777728,
+          "embedderHeapUsedSize": 8579320,
+          "backingStorageSize": 26805373
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 5,
+        "snapshot": {
+          "at": 33834.59999996424,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.3999999761581421,
+            "particles": 3737,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.09974267959594728,
+              "n": 3737,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 3737,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 33820.59999996424,
+            "ema": 16.684113942334754,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 16115568,
+          "totalSize": 72253440,
+          "embedderHeapUsedSize": 7481760,
+          "backingStorageSize": 23853943
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 6,
+        "snapshot": {
+          "at": 38842,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.09999996423721313,
+            "particles": 6150,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.13827377319335937,
+              "n": 6150,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 6150,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 38836.5,
+            "ema": 16.761597629356228,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 31268468,
+          "totalSize": 72253440,
+          "embedderHeapUsedSize": 8971088,
+          "backingStorageSize": 28053901
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 7,
+        "snapshot": {
+          "at": 43846.799999952316,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.5999999642372131,
+            "particles": 8544,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.1782206535339355,
+              "n": 8544,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 8544,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 43835.799999952316,
+            "ema": 16.668762700934614,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 37516516,
+          "totalSize": 72253440,
+          "embedderHeapUsedSize": 9191408,
+          "backingStorageSize": 31228429
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 8,
+        "snapshot": {
+          "at": 48855.19999998808,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.20000004768371582,
+            "particles": 2413,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07999405860900878,
+              "n": 2413,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 2413,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 2
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 48852.69999998808,
+            "ema": 16.682474532266138,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 16507316,
+          "totalSize": 73039872,
+          "embedderHeapUsedSize": 9554912,
+          "backingStorageSize": 25243007
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 9,
+        "snapshot": {
+          "at": 53861.69999998808,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.10000002384185791,
+            "particles": 4826,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.11662294387817383,
+              "n": 4826,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 4826,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 53851.799999952316,
+            "ema": 16.59356921101424,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 19706468,
+          "totalSize": 73826304,
+          "embedderHeapUsedSize": 7692752,
+          "backingStorageSize": 24634525
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 10,
+        "snapshot": {
+          "at": 58872.69999998808,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.5,
+            "particles": 7239,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.15538290023803714,
+              "n": 7239,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 7239,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 58870,
+            "ema": 16.808409660353497,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 39733728,
+          "totalSize": 73302016,
+          "embedderHeapUsedSize": 8043200,
+          "backingStorageSize": 29330871
+        }
+      },
+      {
+        "phase": "pour",
+        "i": 11,
+        "snapshot": {
+          "at": 63892.59999996424,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.7000000476837158,
+            "particles": 2413,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.08086696624755858,
+              "n": 2413,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 62,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 514624,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 2413,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 63887.09999996424,
+            "ema": 16.85980834891085,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 17621792,
+          "totalSize": 73826304,
+          "embedderHeapUsedSize": 7660184,
+          "backingStorageSize": 24116077
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 0,
+        "scene": "candle",
+        "snapshot": {
+          "at": 65403.799999952316,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 54,
+          "tracked": {
+            "tex": 62231196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1025216,
+            "sb": 28719908
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 65401.19999998808,
+            "ema": 16.59983382515696,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 15944364,
+          "totalSize": 27688960,
+          "embedderHeapUsedSize": 8846840,
+          "backingStorageSize": 22747561
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 1,
+        "scene": "cup",
+        "snapshot": {
+          "at": 66882.69999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 54,
+          "tracked": {
+            "tex": 55511204,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1025216,
+            "sb": 28719908
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 66868.19999998808,
+            "ema": 16.775938151229248,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 18222252,
+          "totalSize": 27688960,
+          "embedderHeapUsedSize": 10327680,
+          "backingStorageSize": 41085151
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 2,
+        "scene": "splash",
+        "snapshot": {
+          "at": 68287.19999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 1.2000000476837158,
+            "particles": 12600,
+            "slots": 0,
+            "steps": 9,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07433742523193358,
+              "n": 12600,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 64,
+          "tracked": {
+            "tex": 53484196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027072,
+            "sb": 33002724
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 12600,
+              "grid": [51, 38, 51],
+              "diffuseCap": 2560,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 68285.09999996424,
+            "ema": 16.70977711828446,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 19763904,
+          "totalSize": 37650432,
+          "embedderHeapUsedSize": 12020984,
+          "backingStorageSize": 62954805
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 3,
+        "scene": "glass",
+        "snapshot": {
+          "at": 69729.5,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.09999996423721313,
+            "particles": 10705,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.2194485282897949,
+              "n": 10705,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 64,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027072,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 10705,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 69717.19999998808,
+            "ema": 16.624857496907545,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 18139216,
+          "totalSize": 37306368,
+          "embedderHeapUsedSize": 9144464,
+          "backingStorageSize": 46227079
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 4,
+        "scene": "candle",
+        "snapshot": {
+          "at": 71079.5,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 56,
+          "tracked": {
+            "tex": 62231196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1025664,
+            "sb": 28719908
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 71066.79999995232,
+            "ema": 16.523931427764953,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 22253208,
+          "totalSize": 36601856,
+          "embedderHeapUsedSize": 8816496,
+          "backingStorageSize": 22763139
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 5,
+        "scene": "cup",
+        "snapshot": {
+          "at": 72446.59999996424,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 56,
+          "tracked": {
+            "tex": 55511204,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1025664,
+            "sb": 28719908
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 72435.59999996424,
+            "ema": 16.950038251116233,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 20950404,
+          "totalSize": 35553280,
+          "embedderHeapUsedSize": 8576168,
+          "backingStorageSize": 40943095
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 6,
+        "scene": "splash",
+        "snapshot": {
+          "at": 73828.69999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.09999996423721313,
+            "particles": 12600,
+            "slots": 0,
+            "steps": 9,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07415531158447265,
+              "n": 12600,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 66,
+          "tracked": {
+            "tex": 53484196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027520,
+            "sb": 33002724
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 12600,
+              "grid": [51, 38, 51],
+              "diffuseCap": 2560,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 73818.69999998808,
+            "ema": 16.690768616853443,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 29769148,
+          "totalSize": 50233344,
+          "embedderHeapUsedSize": 8893560,
+          "backingStorageSize": 49453737
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 7,
+        "scene": "glass",
+        "snapshot": {
+          "at": 75184.89999997616,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.5999999642372131,
+            "particles": 10705,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.21772405624389646,
+              "n": 10705,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 66,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027520,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 10705,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 75184.19999998808,
+            "ema": 16.686255152206392,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 22626400,
+          "totalSize": 53903360,
+          "embedderHeapUsedSize": 8253376,
+          "backingStorageSize": 25431533
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 8,
+        "scene": "candle",
+        "snapshot": {
+          "at": 76510.5,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 58,
+          "tracked": {
+            "tex": 62231196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1026112,
+            "sb": 28719908
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 76503.29999995232,
+            "ema": 16.868896270910305,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 24058880,
+          "totalSize": 55476224,
+          "embedderHeapUsedSize": 8913304,
+          "backingStorageSize": 31837153
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 9,
+        "scene": "cup",
+        "snapshot": {
+          "at": 77844.69999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 58,
+          "tracked": {
+            "tex": 55511204,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1026112,
+            "sb": 28719908
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 77834.69999998808,
+            "ema": 16.765730166409945,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 24704428,
+          "totalSize": 55214080,
+          "embedderHeapUsedSize": 8011720,
+          "backingStorageSize": 22795261
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 10,
+        "scene": "splash",
+        "snapshot": {
+          "at": 79246.39999997616,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.19999998807907104,
+            "particles": 12600,
+            "slots": 0,
+            "steps": 9,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07403034210205077,
+              "n": 12600,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 68,
+          "tracked": {
+            "tex": 53484196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027968,
+            "sb": 33002724
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 12600,
+              "grid": [51, 38, 51],
+              "diffuseCap": 2560,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 79235.59999996424,
+            "ema": 16.73004064307802,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 19958176,
+          "totalSize": 56524800,
+          "embedderHeapUsedSize": 8634928,
+          "backingStorageSize": 34130757
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 11,
+        "scene": "glass",
+        "snapshot": {
+          "at": 80634,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.6000000238418579,
+            "particles": 10705,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.21719322204589842,
+              "n": 10705,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 68,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027968,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 10705,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 80615.5,
+            "ema": 16.490346714404485,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 24213728,
+          "totalSize": 55738368,
+          "embedderHeapUsedSize": 8387248,
+          "backingStorageSize": 25480115
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 12,
+        "scene": "candle",
+        "snapshot": {
+          "at": 81948.19999998808,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 60,
+          "tracked": {
+            "tex": 62231196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1026560,
+            "sb": 28719908
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 81934.39999997616,
+            "ema": 16.659572841168686,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 25019916,
+          "totalSize": 56000512,
+          "embedderHeapUsedSize": 8746264,
+          "backingStorageSize": 22762105
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 13,
+        "scene": "cup",
+        "snapshot": {
+          "at": 83308.39999997616,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 60,
+          "tracked": {
+            "tex": 55511204,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1026560,
+            "sb": 28719908
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 83298.59999996424,
+            "ema": 16.52966252467,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 24529448,
+          "totalSize": 56262656,
+          "embedderHeapUsedSize": 8066936,
+          "backingStorageSize": 22796941
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 14,
+        "scene": "splash",
+        "snapshot": {
+          "at": 84676.09999996424,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.09999996423721313,
+            "particles": 12600,
+            "slots": 0,
+            "steps": 9,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07421330451965331,
+              "n": 12600,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 70,
+          "tracked": {
+            "tex": 53484196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1028416,
+            "sb": 33002724
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 12600,
+              "grid": [51, 38, 51],
+              "diffuseCap": 2560,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 84667.19999998808,
+            "ema": 16.641549844421267,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 32258188,
+          "totalSize": 56786944,
+          "embedderHeapUsedSize": 8285440,
+          "backingStorageSize": 40645307
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 15,
+        "scene": "glass",
+        "snapshot": {
+          "at": 86029.39999997616,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.5,
+            "particles": 10705,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.21773065567016603,
+              "n": 10705,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 70,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1028416,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 10705,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 86017.39999997616,
+            "ema": 16.718140041616323,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 25104624,
+          "totalSize": 57049088,
+          "embedderHeapUsedSize": 8254784,
+          "backingStorageSize": 25446915
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 16,
+        "scene": "candle",
+        "snapshot": {
+          "at": 87330.19999998808,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 62,
+          "tracked": {
+            "tex": 62231196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027008,
+            "sb": 28719908
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 87317.59999996424,
+            "ema": 16.72414953502399,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 28518612,
+          "totalSize": 58097664,
+          "embedderHeapUsedSize": 8811312,
+          "backingStorageSize": 22764297
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 17,
+        "scene": "cup",
+        "snapshot": {
+          "at": 88702.59999996424,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 62,
+          "tracked": {
+            "tex": 55511204,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027008,
+            "sb": 28719908
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 88700.39999997616,
+            "ema": 16.667547123831177,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 25879332,
+          "totalSize": 91652096,
+          "embedderHeapUsedSize": 8098712,
+          "backingStorageSize": 22797389
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 18,
+        "scene": "splash",
+        "snapshot": {
+          "at": 90083.29999995232,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.09999996423721313,
+            "particles": 12600,
+            "slots": 0,
+            "steps": 9,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.0741554069519043,
+              "n": 12600,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 72,
+          "tracked": {
+            "tex": 53484196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1028864,
+            "sb": 33002724
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 12600,
+              "grid": [51, 38, 51],
+              "diffuseCap": 2560,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 90067.69999998808,
+            "ema": 16.724382110995357,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 49629164,
+          "totalSize": 91389952,
+          "embedderHeapUsedSize": 7554944,
+          "backingStorageSize": 37620831
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 19,
+        "scene": "glass",
+        "snapshot": {
+          "at": 91463.39999997616,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.5,
+            "particles": 10705,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.2154080390930176,
+              "n": 10705,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 72,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1028864,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 10705,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 91448.59999996424,
+            "ema": 16.50295923045223,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 26673184,
+          "totalSize": 91652096,
+          "embedderHeapUsedSize": 8275792,
+          "backingStorageSize": 25480451
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 20,
+        "scene": "candle",
+        "snapshot": {
+          "at": 92768.5,
+          "profile": "mid",
+          "baseSplats": 104999,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 63504,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 0,
+          "buffers": 64,
+          "tracked": {
+            "tex": 62231196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027456,
+            "sb": 28719908
+          },
+          "grids": [
+            [28, 81, 28],
+            [28, 91, 28]
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 92766.29999995232,
+            "ema": 16.595696406809463,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 27599328,
+          "totalSize": 92176384,
+          "embedderHeapUsedSize": 8750744,
+          "backingStorageSize": 22763001
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 21,
+        "scene": "cup",
+        "snapshot": {
+          "at": 94107.19999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "worker",
+          "stats": {
+            "mode": "worker",
+            "simMs": 0,
+            "particles": 0,
+            "slots": 0,
+            "steps": 0,
+            "uploadMs": 0,
+            "gasCells": 36848,
+            "sound": null
+          },
+          "pendingDt": 0,
+          "spareBuffers": 1,
+          "buffers": 64,
+          "tracked": {
+            "tex": 55511204,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1027456,
+            "sb": 28719908
+          },
+          "grids": [[28, 47, 28]],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 94100.19999998808,
+            "ema": 16.7065833311177,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 26474272,
+          "totalSize": 92962816,
+          "embedderHeapUsedSize": 8003152,
+          "backingStorageSize": 22796845
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 22,
+        "scene": "splash",
+        "snapshot": {
+          "at": 95460.19999998808,
+          "profile": "mid",
+          "baseSplats": 105000,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.10000002384185791,
+            "particles": 12600,
+            "slots": 0,
+            "steps": 9,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.07420187950134279,
+              "n": 12600,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 74,
+          "tracked": {
+            "tex": 53484196,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1029312,
+            "sb": 33002724
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 12600,
+              "grid": [51, 38, 51],
+              "diffuseCap": 2560,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 95450.69999998808,
+            "ema": 16.696763491479047,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 45227276,
+          "totalSize": 93749248,
+          "embedderHeapUsedSize": 7411440,
+          "backingStorageSize": 34932399
+        }
+      },
+      {
+        "phase": "rebuild",
+        "i": 23,
+        "scene": "glass",
+        "snapshot": {
+          "at": 96810.69999998808,
+          "profile": "mid",
+          "baseSplats": 105001,
+          "mode": "gpu",
+          "stats": {
+            "mode": "gpu",
+            "simMs": 0.9000000357627869,
+            "particles": 10705,
+            "slots": 0,
+            "steps": 11,
+            "uploadMs": 0,
+            "gasCells": 0,
+            "sound": {
+              "flux": 0,
+              "level": 0.21771802902221676,
+              "n": 10705,
+              "spray": 0,
+              "bubbles": 0,
+              "preset": "water",
+              "d": 0.02
+            }
+          },
+          "pendingDt": 0,
+          "buffers": 74,
+          "tracked": {
+            "tex": 53459620,
+            "vb": 6176,
+            "ib": 1548,
+            "ub": 1029312,
+            "sb": 31295012
+          },
+          "grids": [],
+          "liquid": [
+            {
+              "cap": 14000,
+              "n": 10705,
+              "grid": [28, 58, 28],
+              "diffuseCap": 1024,
+              "diffuseN": 0
+            }
+          ],
+          "surfaceScale": 0.4,
+          "watch": {
+            "last": 96800.89999997616,
+            "ema": 16.718079790470078,
+            "slow": 0,
+            "steps": 0
+          }
+        },
+        "heap": {
+          "usedSize": 27926460,
+          "totalSize": 93749248,
+          "embedderHeapUsedSize": 8214656,
+          "backingStorageSize": 25448931
+        }
+      }
+    ],
+    "beforeCyclesGC": {
+      "snapshot": {
+        "at": 63962.09999996424,
+        "profile": "mid",
+        "baseSplats": 105001,
+        "mode": "gpu",
+        "stats": {
+          "mode": "gpu",
+          "simMs": 1.9000000357627869,
+          "particles": 2413,
+          "slots": 0,
+          "steps": 11,
+          "uploadMs": 0,
+          "gasCells": 0,
+          "sound": {
+            "flux": 0,
+            "level": 0.08086696624755858,
+            "n": 2413,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.02
+          }
+        },
+        "pendingDt": 0,
+        "buffers": 62,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 514624,
+          "sb": 31295012
+        },
+        "grids": [],
+        "liquid": [
+          {
+            "cap": 14000,
+            "n": 2413,
+            "grid": [28, 58, 28],
+            "diffuseCap": 1024,
+            "diffuseN": 0
+          }
+        ],
+        "surfaceScale": 0.4,
+        "watch": {
+          "last": 63958.39999997616,
+          "ema": 22.303827515211857,
+          "slow": 0,
+          "steps": 0
+        }
+      },
+      "heap": {
+        "usedSize": 14367480,
+        "totalSize": 16154624,
+        "embedderHeapUsedSize": 7167424,
+        "backingStorageSize": 23433562
+      }
+    },
+    "afterCyclesGC": {
+      "snapshot": {
+        "at": 98890.89999997616,
+        "profile": "mid",
+        "baseSplats": 105001,
+        "mode": "gpu",
+        "stats": {
+          "mode": "gpu",
+          "simMs": 0.40000003576278687,
+          "particles": 10705,
+          "slots": 0,
+          "steps": 11,
+          "uploadMs": 0,
+          "gasCells": 0,
+          "sound": {
+            "flux": 0,
+            "level": 0.21430885314941406,
+            "n": 10705,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.02
+          }
+        },
+        "pendingDt": 0,
+        "buffers": 74,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 1029312,
+          "sb": 31295012
+        },
+        "grids": [],
+        "liquid": [
+          {
+            "cap": 14000,
+            "n": 10705,
+            "grid": [28, 58, 28],
+            "diffuseCap": 1024,
+            "diffuseN": 0
+          }
+        ],
+        "surfaceScale": 0.4,
+        "watch": {
+          "last": 98887.19999998808,
+          "ema": 23.694777000686496,
+          "slow": 0,
+          "steps": 0
+        }
+      },
+      "heap": {
+        "usedSize": 22749168,
+        "totalSize": 25329664,
+        "embedderHeapUsedSize": 7166808,
+        "backingStorageSize": 23436267
+      }
+    },
+    "profileStep": {
+      "before": {
+        "at": 98896.89999997616,
+        "profile": "mid",
+        "baseSplats": 105001,
+        "mode": "gpu",
+        "stats": {
+          "mode": "gpu",
+          "simMs": 0.40000003576278687,
+          "particles": 10705,
+          "slots": 0,
+          "steps": 12,
+          "uploadMs": 0,
+          "gasCells": 0,
+          "sound": {
+            "flux": 0,
+            "level": 0.21430885314941406,
+            "n": 10705,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.02
+          }
+        },
+        "pendingDt": 0,
+        "buffers": 74,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 1029312,
+          "sb": 31295012
+        },
+        "grids": [],
+        "liquid": [
+          {
+            "cap": 14000,
+            "n": 10705,
+            "grid": [28, 58, 28],
+            "diffuseCap": 1024,
+            "diffuseN": 0
+          }
+        ],
+        "surfaceScale": 0.4,
+        "watch": {
+          "last": 98894.29999995232,
+          "ema": 22.03529929704157,
+          "slow": 0,
+          "steps": 0
+        }
+      },
+      "after": {
+        "at": 98898,
+        "profile": "low",
+        "baseSplats": 105001,
+        "mode": "gpu",
+        "stats": {
+          "mode": "gpu",
+          "simMs": 0.40000003576278687,
+          "particles": 10705,
+          "slots": 0,
+          "steps": 12,
+          "uploadMs": 0,
+          "gasCells": 0,
+          "sound": {
+            "flux": 0,
+            "level": 0.21430885314941406,
+            "n": 10705,
+            "spray": 0,
+            "bubbles": 0,
+            "preset": "water",
+            "d": 0.02
+          }
+        },
+        "pendingDt": 0,
+        "buffers": 74,
+        "tracked": {
+          "tex": 53459620,
+          "vb": 6176,
+          "ib": 1548,
+          "ub": 1029312,
+          "sb": 31295012
+        },
+        "grids": [],
+        "liquid": [
+          {
+            "cap": 14000,
+            "n": 10705,
+            "grid": [28, 58, 28],
+            "diffuseCap": 1024,
+            "diffuseN": 0
+          }
+        ],
+        "surfaceScale": 0.4,
+        "watch": {
+          "last": 98894.29999995232,
+          "ema": 22.03529929704157,
+          "slow": 0,
+          "steps": 0
+        }
+      },
+      "detectedAutomatic": "mid"
+    },
+    "watchProbe": {
+      "after500": {
+        "last": 98909.89999997616,
+        "ema": 100,
+        "slow": 1490,
+        "steps": 0
+      },
+      "after50": {
+        "last": 98909.89999997616,
+        "ema": 16,
+        "slow": 0,
+        "steps": 1
+      }
+    }
+  }
+]
