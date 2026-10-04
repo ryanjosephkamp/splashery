@@ -399,11 +399,34 @@ test.describe("the splat mirror, r3", () => {
         );
       let prev = await grab();
       const acc = new Float32Array(prev.length / 4);
+      const changed = (a, b) => {
+        let n = 0;
+        for (let j = 0; j < a.length; j += 4)
+          if (Math.abs(a[j] - b[j]) + Math.abs(a[j + 1] - b[j + 1]) > 40) n++;
+        return n;
+      };
+      // r6 fix (October 4): each nudge's frame is taken once the picture has
+      // settled (two grabs in a row nearly alike, or 16 tries), since the
+      // splats are re-sorted on a worker a few frames after a view change,
+      // later on a busy machine. Splats that rest in a tie (r3's flashing)
+      // reshuffle on every sort and never settle, so they still count.
+      const settled = async () => {
+        let last = await grab();
+        for (let k = 0; k < 16; k++) {
+          pl.stage.requestRender();
+          await new Promise((r) => setTimeout(r, 120));
+          const d = await grab();
+          const n = changed(d, last);
+          last = d;
+          if (n < 30) break;
+        }
+        return last;
+      };
+      prev = await settled();
       for (let i = 0; i < 16; i++) {
         pl.camera.rotateBy((i % 2 ? -1 : 1) * 0.02, 0);
         pl.stage.requestRender();
-        await new Promise((r) => setTimeout(r, 120));
-        const d = await grab();
+        const d = await settled();
         for (let j = 0; j < acc.length; j++) acc[j] = Math.max(acc[j], Math.abs(d[j * 4] - prev[j * 4]) + Math.abs(d[j * 4 + 1] - prev[j * 4 + 1])); // prettier-ignore
         prev = d;
       }
