@@ -87,7 +87,10 @@ async function record(clip) {
   const frames = [];
   const run = (fn, arg) => page.evaluate(fn, arg);
   // The stage's update handlers run only with the time this script gives.
-  await run((ratio) => (window.__flRatio = ratio), RATIO);
+  await run(
+    ([ratio, label]) => ((window.__flRatio = ratio), (window.__flLabel = label)),
+    [RATIO, LABEL],
+  );
   await run(() => {
     const { player } = window.__splashery;
     const stage = player.stage;
@@ -103,7 +106,7 @@ async function record(clip) {
     player.idle.weight = 0;
     player.stage.setPixelRatio(window.__flRatio);
     const tag = document.createElement("div");
-    tag.textContent = `Fluid lab · ${LABEL}`;
+    tag.textContent = `Fluid lab · ${window.__flLabel}`;
     tag.style.cssText =
       "position:fixed;left:10px;bottom:10px;z-index:99;font:600 12px system-ui;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:6px;pointer-events:none"; // prettier-ignore
     document.body.appendChild(tag);
