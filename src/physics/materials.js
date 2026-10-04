@@ -187,6 +187,15 @@ export function driftForce(b, mat, G, h) {
 // rests on something.
 export function rollForce(b, mat, G, h) {
   if (b.fixed || b.held || !mat.roll) return;
+  // A twist on the spot (spin about the floor's normal) is stopped by the
+  // friction across the small patch it rests on: a steady slowing,
+  // friction x gravity x the patch's radius (a tenth of the ball's) over
+  // the ball's inertia (a hollow ball: 2/3 of r^2), so a basketball spun on
+  // the floor stops within a second or two. (Rolling friction alone never
+  // touched it, and a ball left twisting never slept.)
+  const r = b.solid?.r ?? b.bound ?? 1;
+  const twist = Math.min(Math.abs(b.omega[1]), ((mat.friction * G * 0.1 * r) / ((2 / 3) * r * r)) * h); // prettier-ignore
+  b.omega[1] -= Math.sign(b.omega[1]) * twist;
   const v = b.vel;
   const hs = Math.hypot(v[0], v[2]);
   if (hs < 1e-6) return;
