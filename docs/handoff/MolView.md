@@ -10,8 +10,12 @@ Molecule viewer: open a molecule, or fetch one by its PDB code". Handoff file:
 docs/handoff/MolView.md (create it; start it with this brief, word for word, under "## Brief", then
 keep "## State
 
-WORKING (October 5, 2026). Built and tested; clips being posted on Effect review page 2.
+READY (October 5, 2026): built, tested and the clips posted. Waiting on the owner's marks and the
+merges (engine PR #300 first, then #295).
 
+- Clips on Effect review page 2 (lane record `MolView`, which the Operator still has to create):
+  `mol-measure-crambin`, `mol-measure-caffeine`, `mol-fetch-1ema`, `mol-dna-1bna`,
+  `mol-surface-1lyz`, `mol-spacefill-1crn`, `mol-big-1aon-phone`.
 - Engine PR #300 ("Engine: a tap can say something, and a toy's panel can take dropped files",
   branch `claude/lane-molecule-viewer-engine`) should merge first; this branch has it merged in.
 - The toy `molecule-viewer` (labs, Atoms shelf): `src/packs/molecule-viewer.js` and `src/molview/`
@@ -51,10 +55,12 @@ WORKING (October 5, 2026). Built and tested; clips being posted on Effect review
 
 ## Known issues
 
-- Along a bond the measuring line is mostly inside the balls and stick; the markers and the message
-  carry it there.
-- In the surface style the markers sit inside the surface and are mostly hidden; the message still
-  gives the measurement.
+- Along a bond the measuring line runs inside the stick and shows only between the balls; the
+  markers and the message carry it there.
+- In the surface style only atoms on the outside can be picked; their markers poke partly through
+  the surface.
+- The fetch clips used a saved copy of RCSB's answer: this sandbox's headless browser has no
+  internet. The live fetch was checked with curl (CORS `access-control-allow-origin: *`).
 - Titles of old entries show in capitals, as the PDB gives them.
 - The surface of a very big entry takes a few seconds to build on a phone.
 
