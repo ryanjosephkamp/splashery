@@ -145,7 +145,8 @@ choices in a toy's select options", needed by the structure picker; merge it fir
   one splat per voxel the surface crosses (its crossings averaged; `isoPointsPerVoxel`) at density 2
   (capsid Tenengrad 208 → 238); the telescope's galaxy moved from 100 to 50 Mpc, so the seeing blurs
   half as much, and thinned dust no longer widens into soft blobs. Cards `sci3-cryoem-capsid-r3` and
-  `sci3-telescope-filters-r2` at 2×. Still waiting: `sci3-cryoem-model-r2`, `sci3-telescope-r2`.
+  `sci3-telescope-filters-r2` at 2×, posted 07:35 UTC with `replacedBy` on the old cards. Still
+  waiting: `sci3-cryoem-model-r2`, `sci3-telescope-r2`.
 
 ## Proposals: more "in a box" (item 4)
 
