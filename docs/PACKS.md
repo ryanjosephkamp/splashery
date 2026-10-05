@@ -540,6 +540,9 @@ pitch and roll stay at the toy's starting pose. Zoom, pan, pinch and Reset view 
   set. The slider takes the value when `id` changes; moving it hands
   `info.slider = { id, value, n }` to the next drive (`n` counts the changes, so a drive can tell a
   new move from an old one).
+- A sheet's relief (`out.sheets[id].relief`, 5b) may carry `nearest: true`: its map is then sampled
+  without blending, so a map of a few flat values raises the picture in flat steps with clean edges
+  (cutout layers, as in a paper pop-up book).
 - `info.figures` is the scene's `toy.figures` (docs/SCENE-SCHEMA.md): `[{ page, box, depth }]`. A
   drive that hands back `out.figures` (a list) replaces it in the scene, so links, saved files and
   embeds carry it; an empty list clears it.
