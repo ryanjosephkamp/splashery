@@ -3591,6 +3591,15 @@ export const TOYS = [
     labs: true,
     tags: "game arcade space rocks asteroids real nasa bennu itokawa eros ship blast split dust 3d",
   },
+  {
+    id: "soft-landing",
+    label: "Soft Landing",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade lander land moon mars real terrain elevation nasa lola mola tycho copernicus apollo gale jezero olympus valles 3d",
+  },
 ];
 
 export function findToy(id) {

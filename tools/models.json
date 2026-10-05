@@ -234,6 +234,15 @@
       "author": "NASA",
       "license": "Public domain",
       "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
+    },
+    {
+      "id": "soft-landing-terrain",
+      "name": "Moon and Mars elevation patches",
+      "source": "https://svs.gsfc.nasa.gov/4720 (ldem_16_uint.tif, lroc_color_2k.jpg); https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg016/megt90n000eb.img",
+      "page": "https://svs.gsfc.nasa.gov/4720",
+      "author": "NASA (SVS; LRO LOLA and LROC; MGS MOLA, PDS)",
+      "license": "Public domain",
+      "note": "Lane Arcade: tools/arc-terrain.mjs cuts seven site patches into assets/toys/soft-landing/terrain.json for the Soft Landing game; checked October 5, 2026."
     }
   ]
 }

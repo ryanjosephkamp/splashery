@@ -1787,6 +1787,13 @@ export const TOY_HELP = {
       "The rocks here are the real shapes of seven asteroids, Bennu, Itokawa, Eros, Kleopatra, Geographos, Toutatis and Golevka, from NASA's public-domain models. They drift and tumble across a field that wraps round at its edges. A shot splits a big rock into two smaller ones and a small one into dust, with chips flying off each time; a rock that hits your ship costs a ship. The 3D button drops the camera in behind your ship, so the rocks show their real shapes as they tumble past.",
   },
 
+  "soft-landing": {
+    howTo:
+      "Tap or press Space to play. ← → tip the lander, ↑ or Space fires the engine. Land slowly, upright, on level ground.",
+    about:
+      "The ground here is real. On the Moon it comes from the laser altimeter and camera of NASA's Lunar Reconnaissance Orbiter (the CGI Moon Kit): Tycho crater, Copernicus crater and the Sea of Tranquility, where Apollo 11 landed. On Mars it comes from Mars Global Surveyor's laser altimeter: Gale crater, Jezero crater, Valles Marineris and Olympus Mons, colored by height. Heights are drawn taller than life so the shapes read; the site's card says how much.\n\nGravity pulls the lander down and the engine pushes it the way it points. Touch down slowly, upright and on level ground (the green lights mark flat spots) to score, with more for fuel left; land badly and it breaks apart. 2D is a true slice through the ground; the 3D button lifts the camera to show the whole patch of terrain around the slice, and the flight goes on.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

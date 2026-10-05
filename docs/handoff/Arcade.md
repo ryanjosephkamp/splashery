@@ -111,9 +111,34 @@ src/media.js and the Space pack without editing them; if you need a change there
 
 (October 5, 2026; built by Opus 5.5.)
 
-- The game kit (engine PR, `claude/lane-arcade-engine`): `src/arcade/` and a small hook in
-  `src/player.js`. In review.
-- G1 Shardball (the brick breaker), Flat board and Dome styles: playable; clips next.
+- The game kit: engine PR #283 (`claude/lane-arcade-engine`), `src/arcade/` and a four-line hook in
+  `src/player.js`. Ready for its merge once the Integrator's full run passes.
+- The games: PR #285 (`claude/lane-arcade`), all on the labs-only Arcade shelf:
+  - G1 **Shardball**: Flat board and Dome styles. Clips are on Effect review page 2.
+  - G2 **Longtail**: Cube, Planet (Mars, the Moon, Earth) and Ring worlds, with tunnels. Clips are
+    on page 2.
+  - G6 **Grain Garden**: falling sand in a glass box. Clip coming.
+  - G7 **Page Breaker**: words and pictures from your own PDF or photo. Clip coming.
+  - G3 **Strata**: falling stones in a deep well. Clip coming.
+  - G4 **Volley Table**: a two-paddle rally. Clip coming.
+  - G5 **Stone Belt**: real asteroid shapes from NASA. Clip coming.
+  - G11 **Soft Landing**: real Moon and Mars ground from NASA. Clip coming.
+- Not started: G13 Pinball, G8 Run across your photo, G9 Shadow puzzle, G10 Ride the song.
+
+## Names
+
+None of the names borrows a game's brand.
+
+- **Shardball**: the ball turns bricks into shards. It isn't "Breakout", "Arkanoid" or
+  "BrickBreaker", which are all product names.
+- **Longtail**: a long tail of beads. It isn't "Snake", and isn't "Worms", which is a brand.
+- **Grain Garden**: grains that pile and seeds that grow. It isn't "Powder Game".
+- **Page Breaker**: says what it does.
+- **Strata**: layers of stone. Its look is a stone well of 3D stone shapes, not the famous game's
+  flat colored tetrominoes in a tall well.
+- **Volley Table**: a rally on a felt table. It isn't "Pong".
+- **Stone Belt**: an asteroid belt of stones. It isn't "Asteroids".
+- **Soft Landing**: the goal. It isn't "Lunar Lander".
 
 ## Notes
 
@@ -154,11 +179,59 @@ src/media.js and the Space pack without editing them; if you need a change there
 - Embeds: a game's settings are its options (`view`, `level`, `style`), so they ride in the scene
   like any toy's.
 
+### The games' 2D/3D switches (the same rules through the change)
+
+- **Shardball, Flat board**: one game on the board's plane. 3D tips the board back by 62° and
+  deepens the bricks and rails, and the ball keeps flying throughout.
+- **Shardball, Dome**: two simulations with the same rules (break the bricks, don't miss), one on
+  the board and one inside a sphere. Pressing the switch hands the ball's place and heading over to
+  the other one and holds the ball for the 1.1 s slide while everything else keeps moving. A
+  continuous blend between a plane game and a sphere game isn't possible for the ball itself; the
+  bricks, paddle and pieces do slide continuously.
+- **Longtail**: one game on the world's own grid. Tiles move as solid pieces as the net folds into
+  the cube (and rounds into the planet, or rolls into the ring), and the trail keeps crawling on the
+  moving tiles. A screen direction picks the tile edge pointing most that way on screen, so controls
+  feel the same in both views.
+- **Grain Garden**: the box has depth in both views (4 to 8 grains), and 2D pours through all of it.
+- **Strata**: the 3D well in both views; 2D is the side view.
+- **Volley Table**: the table's plane, tilted.
+- **Stone Belt**: the field's plane, with a chase camera in 3D.
+- **Soft Landing**: the slice's plane, with the terrain around it in 3D.
+
+### Splat budgets (for a block world)
+
+- One layer of 60,000 slots (high tier) holds a whole game. The CPU writes 4 floats of center and 4
+  of turn and fade per splat per frame, and uploads both textures every frame. For 40,000 splats
+  that is about 1 to 3 ms of game code a frame on this machine (`stats.gameMs`), mostly the
+  per-splat writes.
+- Sorting 40,000 splats every frame is fine on WebGPU (the GPU sorts). On WebGL2 the CPU worker
+  sorts, so sort only when the view moves; in a still view, every few frames is enough.
+- A solid that reads as solid at phone size takes about 150 splats per block face area of 0.16 by
+  0.16 units (Strata's stones). A block world 32 × 32 × 16 visible blocks would need its exposed
+  faces only (about 2,000 to 6,000 faces), so 300,000 to 900,000 splats. That is over one layer's
+  budget: it needs chunks as separate layers, faces merged into larger splats far away, and the
+  GPU's own field programs (docs/lab/FIELDS.md) instead of per-splat CPU writes.
+- Points (single splats placed one by one) cost the same per splat as sprites. Grain Garden holds
+  22,000 grains on the high tier.
+
+### Measurements
+
+(To come: frame times and splat counts per game and view.)
+
 ## Known issues
 
-- The app's status line under the brand says "1 splats" for a game (it counts the toy's own build,
-  not the game's layer).
+- The app's status line under the brand counts the toy's own still picture (about 7k splats), not
+  the game's layer.
+- Effect review page 2 has no `lanes/Arcade` record yet, so the cards show under the lane's id
+  "Arcade" with no title or note.
+- `tools/make-thumbs.mjs` loads the app without labs, so it renders labs toys only when
+  `SPLASHERY_URL` carries `?labs=1`. Its 2.5 s wait is too short for Page Breaker, whose page is
+  read from a PDF, so that thumbnail was made with a longer wait.
 
 ## For the Operator
 
-- (none yet)
+- Please make the `lanes/Arcade` record on Effect review page 2 (title "Arcade", built by Opus 5.5).
+- For PACKS.md: a game recipe is a kit toy with an `arcade` block (`src/arcade/runtime.js`'s header
+  lists its fields). Its own build is only a still picture for the shelf's tools.
+- For the README: the Arcade shelf, and `tools/arc-clip.mjs`, `tools/arc-rocks.mjs` and
+  `tools/arc-terrain.mjs`.

@@ -2498,6 +2498,13 @@
       "effect": "Blast drifting, tumbling rocks shaped like real asteroids (NASA's public-domain models): big ones split into two smaller ones and small ones into dust, with chips flying each time. The 3D switch drops the camera in behind the ship.",
       "sound": "A short zap for each shot, a crack and rumble for a big rock, a crunch for a small one, an engine rumble while thrusting.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "soft-landing": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G11 (labs only): the Moon first, then Mars.",
+      "effect": "Land a lander on real ground from NASA's elevation maps (Tycho, Copernicus and the Sea of Tranquility on the Moon; Gale, Jezero, Valles Marineris and Olympus Mons on Mars): slow, upright and level, or it breaks apart into real pieces. 2D is a true slice through the ground; the 3D switch shows the whole patch around it.",
+      "sound": "An engine rumble while thrusting, a soft thud and a three-note chime on touchdown, a crack and clatter on a crash.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
     }
   }
 }

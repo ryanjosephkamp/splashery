@@ -2808,6 +2808,11 @@ export const TOY_SOUNDS = {
     { voice: "crack", vol: 0.7 },
     { voice: "rumble", at: 0.03, vol: 0.35, decay: 0.6 },
   ],
+  // A touchdown: a soft thud on the ground.
+  "soft-landing": [
+    { voice: "thud", f: 140, vol: 0.55 },
+    { voice: "hollow", at: 0.12, f: 330, decay: 0.5, vol: 0.3 },
+  ],
   // A word's brick breaking: a paper tear and a knock.
   "page-breaker": [
     { voice: "pock", f: 480, vol: 0.55 },

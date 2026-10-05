@@ -81,6 +81,22 @@ function picture(k, kind) {
       even: true,
       color: (c) => lit("#dcdfe4", c.n),
     });
+  } else if (kind === "lander") {
+    // A slice of cratered ground and a small lander above it.
+    k.cloud({ share: 0.7 }, (rand) => {
+      const x = (rand() - 0.5) * 2.2;
+      const z = (rand() - 0.5) * 0.8;
+      const r = Math.hypot(x + 0.3, z);
+      const y =
+        -0.6 +
+        0.12 * Math.exp(-((r - 0.35) ** 2) / 0.004) -
+        0.1 * Math.exp(-(r ** 2) / 0.06) +
+        0.02 * Math.sin(x * 9);
+      const g = 0.45 + 0.2 * rand();
+      return { p: [x, y, z], color: [g, g, g * 0.97], size: 1.4, n: [0, 1, 0] };
+    });
+    box(0.09, 0.05, 0.09, [0.3, 0.25, 0], "#d9a83d");
+    box(0.07, 0.04, 0.07, [0.3, 0.3, 0], "#b8b8bc");
   } else if (kind === "net") {
     // The cube's net of tiles, and a string of green beads.
     const A = 0.5;
@@ -471,6 +487,71 @@ export const RECIPES = {
         short: "← → turn · ↑ thrust · Space fire · V for the chase view",
       },
       create: async (api) => (await import("./arcade-rocks.js")).createRocks(api),
+    },
+  },
+  "soft-landing": {
+    turntable: false,
+    density: 0.05,
+    options: [
+      {
+        key: "world",
+        label: "World",
+        type: "select",
+        default: "moon",
+        choices: [
+          { id: "moon", label: "The Moon" },
+          { id: "mars", label: "Mars" },
+        ],
+      },
+      VIEW,
+    ],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    build(k) {
+      stage(k, "lander");
+    },
+    credits: [
+      {
+        label: "Soft Landing",
+        title:
+          "The Moon's ground: LRO's laser altimeter (LOLA) and camera (LROC), the CGI Moon Kit",
+        source: "https://svs.gsfc.nasa.gov/4720",
+        author:
+          "NASA's Scientific Visualization Studio (Ernie Wright), from the LOLA and LROC teams",
+        license: "Public domain",
+        licenseUrl: "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      },
+      {
+        label: "Soft Landing",
+        title:
+          "Mars's ground: Mars Global Surveyor's laser altimeter (MOLA), the MEGDR at 16 pixels a degree",
+        source: "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
+        author: "NASA's Planetary Data System, the MOLA Science Team",
+        license: "Public domain",
+        licenseUrl: "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      },
+    ],
+    arcade: {
+      title: "Soft Landing",
+      background: "#05060a",
+      goal: "Land on real ground: slow, upright and on a level spot. The green lights mark flat ones.",
+      stats: [
+        { key: "score", label: "Score" },
+        { key: "lives", label: "Landers", icon: "▲" },
+        { key: "fuel", label: "Fuel" },
+        { key: "down", label: "Falling" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["left", "right", "fire"],
+      padLabels: { fire: "Thrust" },
+      controls: {
+        keys: "← → (or A, D) tip the lander; ↑ (W) or Space fires the engine.",
+        touch: "Hold Thrust to fire the engine; ◀ ▶ tip the lander.",
+        pad: "Stick to tip; A fires the engine.",
+        short: "← → tip · ↑ or Space thrust · V shows the ground in 3D",
+      },
+      create: async (api) => (await import("./arcade-lander.js")).createLander(api),
     },
   },
 };
