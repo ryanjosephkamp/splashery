@@ -139,6 +139,14 @@ choices in a toy's select options", needed by the structure picker; merge it fir
   `sci3-telescope-r2` (05:55 UTC). Waiting for marks on the r2 cards, `sci3-life` and
   `sci3-telescope-filters`.
 
+- October 5, 2026, 06:57 UTC, more marks: good: `sci3-cryoem-apoferritin-r2`, `-ribosome-r2`,
+  `sci3-dna-r2`, `sci3-minerals-r2`, `sci3-life`; fix: `sci3-cryoem-capsid-r2` ("keep making it
+  sharper if possible") and `sci3-telescope-filters` ("Please make sharper"). Done: the map draws
+  one splat per voxel the surface crosses (its crossings averaged; `isoPointsPerVoxel`) at density 2
+  (capsid Tenengrad 208 → 238); the telescope's galaxy moved from 100 to 50 Mpc, so the seeing blurs
+  half as much, and thinned dust no longer widens into soft blobs. Cards `sci3-cryoem-capsid-r3` and
+  `sci3-telescope-filters-r2` at 2×. Still waiting: `sci3-cryoem-model-r2`, `sci3-telescope-r2`.
+
 ## Proposals: more "in a box" (item 4)
 
 The owner marked "In a box" yes on October 5, 2026 (wildfire, tornado and terrain, each after a
