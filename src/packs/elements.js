@@ -1290,7 +1290,10 @@ export const RECIPES = {
       const off = tp ? [clamp(tp[0], -0.85, 0.85) - STORM_BOLT_X, 0, clamp(tp[2], -0.6, 0.75) - 0.6] : [0, 0, 0]; // prettier-ignore
       out.parts.bolt3 = { visible: big ? 1 : 0, offset: off };
       out.parts.flash = { visible: on || big ? 1 : 0 };
-      out.parts.rain = { visible: 0.15 + 0.85 * c.rain };
+      // Lane Any pose: rain falls only from a cloud the right way up; turned
+      // over in Hands-on (about.up), it thins away instead of hanging still.
+      const upright = info.up ? smoothstep(0.5, 0.9, info.up[1]) : 1;
+      out.parts.rain = { visible: (0.15 + 0.85 * c.rain) * upright };
       out.amount = 1;
     },
     build(k) {
