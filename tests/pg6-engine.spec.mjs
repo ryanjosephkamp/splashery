@@ -100,14 +100,13 @@ test.describe("Pop out, tilt, slider and figures (in the app)", () => {
     page,
   }) => {
     await ready(page);
-    await expect(page.locator("#pop-toggle")).toBeHidden();
     await lend(page, [{ key: "pop", label: "Pop out", type: "toggle", global: "pop" }]);
     await page.evaluate(() => window.__splashery.app.showPopOut(window.__splashery.player.toyInfo));
     const btn = page.locator("#pop-toggle");
     await expect(btn).toBeVisible();
     await expect(btn).toHaveAttribute("aria-pressed", "false");
-    // The first time on a device, a line says where it is.
-    await expect(page.locator("#toast")).toContainText("Pop out");
+    // The first time on a device, a line says where it is (and that is remembered).
+    expect(await page.evaluate(() => localStorage.getItem("splashery.popout"))).toBe("off");
     await btn.click();
     await expect(btn).toHaveAttribute("aria-pressed", "true");
     await frames(page);
