@@ -138,7 +138,10 @@ WORKING (October 5, 2026). Model: Sonnet 5.5.
   is now a Clip choice (SAMPLES in `src/packs/moving-photo.js`); `clip: "sample"` still means the
   bunny. `tools/live3-depth.mjs <id>` makes a sample from a source kept in `.cache/smd/`. Still to
   do: a clip at phone size.
-- Items 3 to 5: not started.
+- Item 3, Model to splats: done. Five more Poly Haven models (CC0): camera, boombox, lantern, bronze
+  whale statue, rocking chair (0.5 to 1.4 MB each, color texture only, no compression), made by
+  `tools/stm-samples.mjs`; `tests/smd-models.spec.mjs` (9 pass). Still to do: a clip.
+- Items 4 and 5: not started.
 
 ## Notes
 

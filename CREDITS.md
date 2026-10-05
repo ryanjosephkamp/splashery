@@ -354,6 +354,21 @@ GLB in `assets/toys/model-splats/` that the toy converts to splats in the browse
   [Poly Haven](https://polyhaven.com/a/antique_ceramic_vase_01),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on
   September 29, 2026). Its 1k glTF with only the color texture kept.
+- "Camera 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Camera_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Boombox" by Thomas Paul Mouilleron on [Poly Haven](https://polyhaven.com/a/boombox),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Lantern 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Lantern_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Bronze Whale Statue" by Tina on [Poly Haven](https://polyhaven.com/a/bronze_whale_statue),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Rockingchair 01" by Jorge Camacho on [Poly Haven](https://polyhaven.com/a/Rockingchair_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
 
 `tools/stm-samples.mjs` fetches and packs them. The test models in `tests/fixtures/stm/` are made
 from numbers by `tools/stm-fixtures.mjs` and released under CC0 1.0. Models people open are

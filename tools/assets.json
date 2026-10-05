@@ -722,6 +722,61 @@
       "license": "CC0 1.0",
       "checked": "September 29, 2026",
       "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "camera",
+      "file": "assets/toys/model-splats/camera.glb",
+      "toy": "model-splats",
+      "name": "Camera 01",
+      "author": "Rajil Jose Macatangay",
+      "page": "https://polyhaven.com/a/Camera_01",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "boombox",
+      "file": "assets/toys/model-splats/boombox.glb",
+      "toy": "model-splats",
+      "name": "Boombox",
+      "author": "Thomas Paul Mouilleron",
+      "page": "https://polyhaven.com/a/boombox",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "lantern",
+      "file": "assets/toys/model-splats/lantern.glb",
+      "toy": "model-splats",
+      "name": "Lantern 01",
+      "author": "Rajil Jose Macatangay",
+      "page": "https://polyhaven.com/a/Lantern_01",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "whale",
+      "file": "assets/toys/model-splats/whale.glb",
+      "toy": "model-splats",
+      "name": "Bronze Whale Statue",
+      "author": "Tina",
+      "page": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "rocker",
+      "file": "assets/toys/model-splats/rocker.glb",
+      "toy": "model-splats",
+      "name": "Rockingchair 01",
+      "author": "Jorge Camacho",
+      "page": "https://polyhaven.com/a/Rockingchair_01",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
     }
   ],
   "worlds": [
