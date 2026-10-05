@@ -16,7 +16,7 @@ import { toyHelp } from "../toy-help.js";
 import { buildShareHash, shareURL, downloadBlob } from "../exports.js";
 import { formatBytes } from "../state.js";
 import { defCredits, madeOfNote, SITE_NOTE, longDate, toyLink } from "./entry.js";
-import { captureStill, captureRecording, jpegOf } from "./capture.js";
+import { captureStill, captureRecording, jpegOf, downscale, sampleFactor } from "./capture.js";
 import { buildToyPDF, estimateRecording, qrFor } from "./pdf.js";
 import { QUIET } from "../qr/encode.js";
 
@@ -27,7 +27,7 @@ export const SIZES = [
 ];
 export const RATES = [8, 12, 15];
 export const LENGTHS = [4, 6, 10];
-const QUALITY = 0.82;
+const QUALITY = 0.86;
 
 // The explainer page: what a PDF can do.
 export const EXPLAINER = new URL("../../pdf-lab/", import.meta.url).href;
@@ -101,11 +101,13 @@ export async function checkQR(url) {
 
 // ---- Making the file ---------------------------------------------------------------
 
-// The most a recording can add, from one frame at its size.
+// The most a recording can add, from one frame made as the recording makes
+// them (rendered larger, downscaled, the same quality).
 export async function estimate(app, { size, fps, maxSeconds }) {
   const player = app.player;
-  const sample = await app.withCapture([size, size], async () =>
-    jpegOf(await player.stage.captureFrame(), QUALITY),
+  const big = Math.round(size * sampleFactor(player, size, 2));
+  const sample = await app.withCapture([big, big], async () =>
+    jpegOf(downscale(await player.stage.captureFrame(), size), QUALITY),
   );
   const frames = Math.round(maxSeconds * fps);
   return { frames, bytes: estimateRecording({ frames, sampleBytes: sample.length }) };

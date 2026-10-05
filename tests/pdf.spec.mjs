@@ -316,3 +316,29 @@ test("old links still load: a version 2 scene link opens its toy", async ({ page
   await expect.poll(() => page.evaluate(() => window.__splashery.player.toyInfo?.id)).toBe("grapes"); // prettier-ignore
   expect(errors).toEqual([]);
 });
+
+// ---- Polish (October 5, 2026) ----------------------------------------------------------
+
+test("polish: the still is 1440 px, rendered larger and brought down, and the frames too", async ({
+  page,
+}) => {
+  // prettier-ignore
+  const errors = await openApp(page);
+  await page.evaluate(() => window.__splashery.app.chooseToy("grapes"));
+  await page.waitForTimeout(1500);
+  const res = await page.evaluate(async () => {
+    const c = await import("/src/pdf-export/capture.js");
+    const { app, player } = window.__splashery;
+    const still = await c.captureStill(app);
+    const cap = c.renderCap(player);
+    const big = document.createElement("canvas");
+    big.width = big.height = 840;
+    const small = c.downscale(big, 420);
+    return { w: still.width, ss: still.ss, cap, small: [small.width, small.height] };
+  });
+  expect(errors).toEqual([]);
+  expect(res.w).toBe(1440);
+  expect(res.ss).toBeCloseTo(Math.min(2, res.cap / 1440), 5);
+  expect(res.ss).toBeGreaterThan(1);
+  expect(res.small).toEqual([420, 420]);
+});

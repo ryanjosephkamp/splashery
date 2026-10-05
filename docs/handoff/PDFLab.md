@@ -9,22 +9,36 @@ your own files, as an "Engine: …" PR merged first). PR title: "Phase PDF lab: 
 and what a PDF can do". Handoff file: docs/handoff/PDFLab.md (create it; start it with this brief,
 word for word, under "## Brief", then keep "## State
 
-READY (October 5, 2026, 13:35 UTC): everything in the brief is built and tested; main merged into
-both branches. Engine PR #299 (the Save PDF row) must merge first; the lane PR #301 contains it.
-Clips on Effect review page 2 (cards `pdf-grapes-flipbook` and `pdf-dialog`, lane `PDFLab`; the lane
-record is the Operator's to make); no marks yet. The playback test now waits for PDF.js's scripting
-sandbox before pressing buttons (it raced once after the merge).
+READY (October 5, 2026, 21:20 UTC): #299 and #301 merged. Polish round on
+`claude/lane-pdf-lab-polish` ("Phase PDF lab polish: sharper stills, a clean QR code and page
+previews"): see "Polish" below. Clips: cards `pdf-grapes-flipbook-polish` and `pdf-explainer-pages`
+beside the first two.
+
+## Polish (October 5, 2026)
+
+The owner's note on Effect review page 2: "the toys could still be sharper." What changed:
+
+- The still is 1440 px (was 1080), rendered at up to twice that (the device's render-buffer limit,
+  at most 3072 px) and brought down in halving steps with smoothing (`downscale`, `sampleFactor` in
+  `capture.js`), JPEG quality 0.92.
+- The recording's frames are made the same way (twice their size, then down), at JPEG quality 0.86
+  (was 0.82); the size estimate samples a frame made the same way.
+- The QR code is one filled path instead of hundreds of squares, so no hairline seams show between
+  rows when a viewer smooths edges.
+- The explainer shows small previews of both sample pages (`pdf-lab/img/`), linking to the PDFs; the
+  samples were remade (113 KB and 707 KB).
+- New test: the still is 1440 px and supersampled. Screenshots `pdf-explainer-pages-*`.
 
 ## What was built
 
 - **Save PDF** (Share tab, labs only; engine PR #299 adds the row and `app.openPdfExport()`, which
   imports `src/pdf-export/index.js` on the tap). The dialog offers:
-  - **Still + live toy** (default): page 1 with a 1080-pixel still at the current camera and
-    settings, the toy's name and shelf, how-to line, About text, credits and licenses (the toy's
-    scan credit, a data recipe's credits, recorded sound samples, a flag), a clickable link and a
-    vector QR code to this scene (`buildShareHash` and `shareURL`, the app's own link). Before
-    writing, the QR is drawn and read back with the vendored jsQR (`checkQR`); no PDF is made if it
-    doesn't read back as the link.
+  - **Still + live toy** (default): page 1 with a 1440-pixel still (rendered at up to twice that and
+    downscaled) at the current camera and settings, the toy's name and shelf, how-to line, About
+    text, credits and licenses (the toy's scan credit, a data recipe's credits, recorded sound
+    samples, a flag), a clickable link and a vector QR code to this scene (`buildShareHash` and
+    `shareURL`, the app's own link). Before writing, the QR is drawn and read back with the vendored
+    jsQR (`checkQR`); no PDF is made if it doesn't read back as the link.
   - **Moving recording (desktop Firefox and Acrobat)**: page 1 as above, then page 2 with one tap
     recorded on a stepped clock (a short lead-in, the tap, a toggle switched on and off again,
     frames until it settles or the chosen longest length) and played by the `animate` widget method:
