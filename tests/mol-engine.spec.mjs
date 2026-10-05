@@ -5,7 +5,9 @@
 // - a recipe whose panel sets `input.drop` takes a file dropped on the page
 //   when its extension is one `input.accept` lists (other toys never see
 //   drops: a dropped file loads as before);
-// - the panel's "what is showing" line follows each tap.
+// - the panel's "what is showing" line follows each tap;
+// - drive() sees the camera's place in the recipe's frame (about.eye), so a
+//   measuring ring can face the camera.
 
 import { test, expect } from "@playwright/test";
 import { MotionDriver } from "../src/motion.js";
@@ -52,4 +54,28 @@ test("the say shows as a message; drops go to a toy only when it asks", async ({
   expect(out.text).toBe("Distance: 1.53 Å");
   expect(out.shown).toBe(true);
   expect(errors).toEqual([]);
+});
+
+test("drive() sees where the camera stands, in the recipe's frame", async ({ page }) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const out = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.chooseToy("protein");
+    while (app.busy) await new Promise((r) => setTimeout(r, 50));
+    const recipe = player.toyInfo.recipe;
+    const drive = recipe.drive;
+    let eye = null;
+    recipe.drive = (c, s, o, about) => {
+      eye = about.eye;
+      return drive?.(c, s, o, about);
+    };
+    player.stage.requestRender();
+    for (let i = 0; i < 30 && !eye; i++) await new Promise((r) => requestAnimationFrame(r));
+    recipe.drive = drive;
+    const want = player.toRecipe(player.camera.pose().position);
+    return { eye, want };
+  });
+  expect(out.eye).toHaveLength(3);
+  for (let i = 0; i < 3; i++) expect(out.eye[i]).toBeCloseTo(out.want[i], 1);
 });
