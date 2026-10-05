@@ -791,7 +791,9 @@ class Longtail {
     // a little above and to the side of the head, so three faces show
     const pitch = clamp(Math.asin(clamp(n[1], -1, 1)) + 0.42, -1.25, 1.25);
     yaw += 0.45;
-    const d3 = this.api.fitDistance(2.5, 2.5, aspect);
+    // (each world fitted to its own size, the beads riding on it included)
+    const fit3 = W.kind === "torus" ? 2.3 : W.kind === "planet" ? 2.15 : 1.95;
+    const d3 = this.api.fitDistance(fit3, fit3, aspect);
     return {
       target: [0, lerp(0.1, 0, view), 0],
       yaw: yaw * smooth(clamp(view * 1.3, 0, 1)),
