@@ -1662,6 +1662,12 @@ export const RECIPES = {
         scale: 0.92,
         visible: smoothstep(0, 0.25, s),
       };
+      // Lane Any pose: turned over in Hands-on (about.up), the falling snow
+      // would fall out through the glass, so it thins away and the swirling
+      // snow (always inside the globe) shows instead.
+      const upright = info.up ? smoothstep(0.5, 0.9, info.up[1]) : 1;
+      if (info.up) out.parts.swirl.visible = Math.max(out.parts.swirl.visible, 1 - upright);
+      out.parts.snowfall = { visible: upright };
       const wob = s * s * Math.sin(t * 22);
       out.body = { quat: quatAxisAngle([0, 0, 1], 0.1 * wob) };
     },
@@ -1834,7 +1840,9 @@ export const RECIPES = {
           color: "#16161a",
         });
       }
-      // Falling snow: each flake falls only as far as the ground under it.
+      // Falling snow: each flake falls only as far as the ground under it
+      // (its own part, so it can thin away when the globe is turned over).
+      const snowfall = k.part("snowfall", { pivot: G });
       const inside = (r) => {
         for (;;) {
           const p = [(r() - 0.5) * 2 * RG, floor + r() * (RG + G[1] - floor), (r() - 0.5) * 2 * RG];
@@ -1850,6 +1858,7 @@ export const RECIPES = {
           opacity: 0.95,
           kind: "fall",
           params: [Math.min(0.35, (p[1] - floor - 0.08) * 0.8), r()],
+          part: snowfall,
         };
       });
       // Snow swirling about after a shake.
