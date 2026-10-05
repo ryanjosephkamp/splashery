@@ -2,6 +2,13 @@
   `tools/pg6-clip.mjs` at 390x844 and watched: `pg6-two-up`, `pg6-turn`, `pg6-tilt`, `pg6-lab`,
   `pg6-terrain` (a NASA photo opened only for the clip, never in the repo) and `pg6-layers` (P1, the
   album's tulips).
+- The owner's marks (October 5, 2026): `pg6-turn` good; `pg6-two-up`, `pg6-tilt` and `pg6-lab` "fix"
+  ("popped out images shouldn't overlap"). Fixed: with more than one figure up, each rises straight
+  off its own place, a little less far toward you, and grows only as far as keeps it clear of the
+  others and on its page; a figure up alone still comes toward the middle, and eases back over its
+  place as a second one rises (`pgCrowd`; a Node test checks every frame that two risen figures
+  never overlap). Redone clips posted: `pg6-two-up-r2`, `pg6-tilt-r2`, `pg6-lab-r2` (the old cards
+  marked replaced).
 - READY for the Integrators' full run (October 5, 2026).
 
 # Lane Pages r6: pop-up for every page, and figures you choose (prefix `pg6`)
