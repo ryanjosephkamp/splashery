@@ -89,7 +89,9 @@ test.describe("the shelf", () => {
         const buf = ctx.buf;
         expect(buf.count, `${id} ${JSON.stringify(o)} ${tier}`).toBeGreaterThan(1000);
         expect(buf.count).toBeLessThanOrEqual(count * 1.001); // the kit's rounding
-        for (let i = 0; i < buf.count * 3; i++) expect(Number.isFinite(buf.pos[i])).toBe(true);
+        let bad = 0;
+        for (let i = 0; i < buf.count * 3; i++) if (!Number.isFinite(buf.pos[i])) bad++;
+        expect(bad).toBe(0);
       }
     }
   });
