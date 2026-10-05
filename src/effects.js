@@ -1017,7 +1017,13 @@ vec3 spKitCenter(vec3 p) {
     // of the part's centre are hidden, so a turning shell's back never draws
     // over its front (splats sort in their built pose).
     float vis = ofs.w;
-    if (vis < -0.5) {
+    if (vis < -9.5) {
+      // w <= -10 (lane Night sky): a part culled below the level plane
+      // through its centre (visibility -w - 10): a sky's stars set.
+      vis = -vis - 10.0;
+      vec3 fc = pv.xyz + ofs.xyz;
+      vis *= smoothstep(-0.004, 0.004, normalize(p - fc + vec3(1e-6)).y);
+    } else if (vis < -0.5) {
       vis = -vis - 1.0;
       vec3 fc = pv.xyz + ofs.xyz;
       float fd = dot(normalize(p - fc + vec3(1e-6)), normalize(uSpCam.xyz - p));
@@ -1248,7 +1254,12 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
     var vis = ofs.w;
-    if (vis < -0.5) {
+    if (vis < -9.5) {
+      // Lane Night sky: culled below the level plane through its centre.
+      vis = -vis - 10.0;
+      let fc = pv.xyz + ofs.xyz;
+      vis = vis * smoothstep(-0.004, 0.004, normalize(p - fc + vec3f(1e-6)).y);
+    } else if (vis < -0.5) {
       vis = -vis - 1.0;
       let fc = pv.xyz + ofs.xyz;
       let fd = dot(normalize(p - fc + vec3f(1e-6)), normalize(uniform.uSpCam.xyz - p));

@@ -71,3 +71,18 @@ test("the stage takes the inside field of view, and a toy without inside gets th
   expect(got.b.inside).toBe(null);
   expect(got.b.fov).toBeCloseTo(38, 6);
 });
+
+test("a part culled below its level plane packs its visibility as -w - 10; the old cull is unchanged", async () => {
+  const { packParts } = await import("../src/motion.js");
+  const parts = [
+    { name: "body", pivot: [0, 0, 0] },
+    { name: "a", pivot: [0, 0, 0] },
+    { name: "b", pivot: [0, 0, 0] },
+    { name: "c", pivot: [0, 0, 0] },
+  ];
+  const data = packParts(new Float32Array(16 * 12), parts, { a: { cull: "below" }, b: { cull: true, visible: 0.5 }, c: { cull: "below", visible: 0 } }, 1); // prettier-ignore
+  expect(data[1 * 12 + 11]).toBe(-11);
+  expect(data[2 * 12 + 11]).toBe(-1.5);
+  expect(data[3 * 12 + 11]).toBe(-10);
+  expect(data[0 * 12 + 11]).toBe(1);
+});

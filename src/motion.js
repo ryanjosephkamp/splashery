@@ -404,7 +404,7 @@ export class MotionDriver {
 
 // Packs part transforms for uSpParts: per part a rotation, the pivot (w =
 // scale - 1 about the pivot) and an offset (w = splat visibility).
-function packParts(data, parts, driven, scale) {
+export function packParts(data, parts, driven, scale) {
   for (let i = 0; i < 16; i++) {
     const o = i * 12;
     const def = parts[i];
@@ -420,14 +420,17 @@ function packParts(data, parts, driven, scale) {
       if (pd.offset) po = [pd.offset[0] * scale, pd.offset[1] * scale, pd.offset[2] * scale];
       if (pd.visible !== undefined) vis = pd.visible;
       if (pd.scale !== undefined) grow = pd.scale - 1;
-      cull = !!pd.cull;
+      cull = pd.cull === "below" ? "below" : !!pd.cull;
     }
     const pv = def ? def.pivot : [0, 0, 0];
     data.set(pq, o);
     data.set([pv[0], pv[1], pv[2], grow], o + 4);
     // A culled part hides its splats on the far side of its centre (the
-    // kit shader reads visibility -w - 1 from a w of -1 or less).
-    data.set([po[0], po[1], po[2], cull ? -1 - Math.max(0, vis) : vis], o + 8);
+    // kit shader reads visibility -w - 1 from a w of -1 or less); cull:
+    // "below" hides those under the level plane through it (lane Night sky,
+    // -w - 10 from a w of -10 or less).
+    const w = cull === "below" ? -10 - Math.max(0, vis) : cull ? -1 - Math.max(0, vis) : vis;
+    data.set([po[0], po[1], po[2], w], o + 8);
   }
   return data;
 }
