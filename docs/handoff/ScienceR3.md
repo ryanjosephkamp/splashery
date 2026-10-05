@@ -131,6 +131,14 @@ choices in a toy's select options", needed by the structure picker; merge it fir
   r2 of lane Science found sharper on the phone. Posted October 5, 05:30 UTC: `sci3-cryoem-*-r2`,
   `sci3-minerals-r2`, `sci3-dna-r2` (replacing their cards) and `sci3-life` (new).
 
+- October 5, 2026, 05:28 UTC, more marks: good: `sci3-contour-lab`, `sci3-galaxies`,
+  `sci3-microscope-pores`, `sci3-microscope-sets`, `sci3-terrain`, `sci3-terrain-helens`; "good, but
+  please try to make it sharper": `sci3-cryoem-model` and `sci3-telescope`. Done: finer backbone
+  beads; more stars in the telescope (a 0.1″ default was tried and reverted: each star particle
+  shrank to a pixel and the arms were lost); both clips at 2×, posted as `sci3-cryoem-model-r2` and
+  `sci3-telescope-r2` (05:55 UTC). Waiting for marks on the r2 cards, `sci3-life` and
+  `sci3-telescope-filters`.
+
 ## Proposals: more "in a box" (item 4)
 
 The owner marked "In a box" yes on October 5, 2026 (wildfire, tornado and terrain, each after a
