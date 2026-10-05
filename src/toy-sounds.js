@@ -2783,8 +2783,16 @@ export const TOY_SOUNDS = {
   // The story's own cues (tRNAs docking, the stop codon, the fold) come from
   // drive() in src/packs/tiny-r2.js; the tap starts it with a soft swell.
   "dna-to-protein": [
-    { voice: "glass", f: 784, decay: 1.6, vol: 0.3, bright: 0.25 },
-    { voice: "glass", f: 1175, at: 0.18, decay: 1.4, vol: 0.2, bright: 0.25 },
+    { voice: "glass", f: 784, decay: 1.6, vol: 0.7, bright: 0.25 },
+    { voice: "glass", f: 1175, at: 0.18, decay: 1.4, vol: 0.45, bright: 0.25 },
+  ],
+  // Cell division: a soft swell as the chromatin condenses, a light tick
+  // as the sisters part (7.6 s) and a low wooden pop as the cells pinch
+  // apart (13 s).
+  mitosis: [
+    { voice: "breath", f: 900, to: 0.7, decay: 2.2, vol: 0.7 },
+    { voice: "tine", f: 1319, at: 7.7, decay: 1.2, vol: 0.6 },
+    { voice: "hollow", f: 260, at: 13.1, decay: 0.8, vol: 0.9 },
   ],
 };
 

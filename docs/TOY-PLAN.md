@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 374 toys. 344 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 369.
+- 375 toys. 345 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 370.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -36,22 +36,22 @@ Proposals below are suggestions; the owner may change them.
   Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
   Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
   Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to
-  protein, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond,
-  Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney,
-  Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
-  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
-  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
-  Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
-  Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
-  Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
-  Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell
-  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
-  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
-  Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
-  orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
-  Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
+  protein, Cell division, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic
+  table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs,
+  Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai,
+  Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral
+  reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice
+  swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes,
+  Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger,
+  Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building
+  bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz
+  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
+  Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras
+  proof, Splat equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe,
+  Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown,
+  Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea
+  urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare
+  drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
   balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
   Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
   Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
@@ -1079,7 +1079,7 @@ Proposals below are suggestions; the owner may change them.
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
 
-## Tiny (19)
+## Tiny (20)
 
 - **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
@@ -1216,6 +1216,17 @@ Proposals below are suggestions; the owner may change them.
     PDB structure (about 34 s, the camera following each step).
   - Sound: A soft glass swell at the tap, a wooden knock as each tRNA docks, a bell at the stop
     codon and a low glass note as the protein settles.
+- **Cell division** (`mitosis`). Now: tap: Divide. Plan: keep.
+  - Owner: The owner's push notes (October 5, 2026): the cell's life cycle.
+  - Effect: Mitosis through its phases, from prophase to cytokinesis, and back to one cell.
+  - Improved: Tiny world r2: chromatin threads condense into eight solid chromatids (four
+    chromosomes), the centrosomes move round to the poles, the envelope breaks into twelve pieces,
+    kinetochore fibers grow out and the chromosomes line up at the plate; the sisters are pulled to
+    the poles as the cell stretches, new nuclei fade in, the furrow pinches the cell in two, and one
+    daughter drifts off while the other grows back into the first cell (18 s). Phase names show
+    above the cell.
+  - Sound: A soft breath as the chromatin condenses, a light tine as the sisters part and a hollow
+    pop as the cells pinch apart.
 
 ## Atoms (6)
 

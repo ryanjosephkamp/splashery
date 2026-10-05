@@ -2456,6 +2456,13 @@
       "effect": "Transcription, then translation codon by codon, then the chain folds into its real structure.",
       "sound": "A soft glass swell at the tap, a wooden knock as each tRNA docks, a bell at the stop codon and a low glass note as the protein settles.",
       "improved": "Tiny world r2: RNA polymerase opens the helix (the coding strand lifts, the template's bases turn to pair) and lays down the mRNA; the mRNA moves down, the small subunit and the first tRNA scan to AUG, the large subunit joins, tRNAs dock codon by codon and the chain grows up the exit tunnel into a globule; at the stop codon a release factor frees it and it folds into its PDB structure (about 34 s, the camera following each step)."
+    },
+    "mitosis": {
+      "v": "keep",
+      "owner": "The owner's push notes (October 5, 2026): the cell's life cycle.",
+      "effect": "Mitosis through its phases, from prophase to cytokinesis, and back to one cell.",
+      "sound": "A soft breath as the chromatin condenses, a light tine as the sisters part and a hollow pop as the cells pinch apart.",
+      "improved": "Tiny world r2: chromatin threads condense into eight solid chromatids (four chromosomes), the centrosomes move round to the poles, the envelope breaks into twelve pieces, kinetochore fibers grow out and the chromosomes line up at the plate; the sisters are pulled to the poles as the cell stretches, new nuclei fade in, the furrow pinches the cell in two, and one daughter drifts off while the other grows back into the first cell (18 s). Phase names show above the cell."
     }
   }
 }

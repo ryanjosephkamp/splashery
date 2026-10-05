@@ -870,6 +870,417 @@ const dnaToProtein = {
   },
 };
 
+// ---- Mitosis ------------------------------------------------------------------------------
+
+// An animal cell dividing: four of its chromosomes (two pairs of homologs,
+// each copied into two sister chromatids), drawn as in a textbook.
+const MI = {
+  R: 3.0, // the cell
+  N: 1.6, // its nucleus
+  RD: 3.0 / Math.cbrt(2), // a daughter cell (half the volume)
+  ND: 0.6, // a daughter nucleus, as a fraction of the first
+  T: 18, // the story's length (seconds)
+};
+MI.XD = MI.RD; // daughters' centers sit at ±XD when they part
+// Chromosomes at the metaphase plate (x = 0): length, color, place.
+const CHROMOSOMES = [
+  { len: 1.0, color: "#ff6b8b", at: [0, 1.5, 0.15] },
+  { len: 0.66, color: "#4fb3ff", at: [0, 0.5, -0.2] },
+  { len: 1.0, color: "#ffa0b4", at: [0, -0.5, 0.2] },
+  { len: 0.66, color: "#93d3ff", at: [0, -1.5, -0.15] },
+];
+const SISTER = 0.13; // a chromatid's distance from its chromosome's middle
+const POLE = 2.55;
+const MI_PHASES = ["INTERPHASE", "PROPHASE", "PROMETAPHASE", "METAPHASE", "ANAPHASE", "TELOPHASE", "CYTOKINESIS"]; // prettier-ignore
+
+// Where a point lands when a sphere of radius R about the origin pinches into
+// two spheres of radius RD at ±XD: each half's polar angle (from its own
+// pole, +x or -x) doubles, so its rim closes to the furrow point.
+function daughterPoint(p) {
+  const s = p[0] >= 0 ? 1 : -1;
+  const r = len(p) || 1;
+  const d = mul(p, 1 / r);
+  const th = Math.acos(Math.max(-1, Math.min(1, s * d[0])));
+  const rho = Math.hypot(d[1], d[2]) || 1e-6;
+  const th2 = Math.min(Math.PI, 2 * th);
+  const q = [s * Math.cos(th2), (Math.sin(th2) * d[1]) / rho, (Math.sin(th2) * d[2]) / rho];
+  return add([s * MI.XD, 0, 0], mul(q, MI.RD * (r / MI.R)));
+}
+
+// A smooth random walk inside the nucleus: a chromatid's chromatin thread.
+function threadPath(rand, start, n, step, rMax) {
+  const pts = [start];
+  let dir = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+  for (let i = 1; i < n; i++) {
+    dir = unit(add(dir, mul([rand() - 0.5, rand() - 0.5, rand() - 0.5], 1.4)));
+    let p = add(pts[i - 1], mul(dir, step));
+    if (len(p) > rMax) {
+      dir = unit(add(dir, mul(unit(p), -1.6)));
+      p = add(pts[i - 1], mul(dir, step));
+    }
+    pts.push(p);
+  }
+  return (t) => {
+    const f = Math.min(n - 1.0001, Math.max(0, t * (n - 1)));
+    const i = Math.floor(f);
+    return lerp(pts[i], pts[i + 1], f - i);
+  };
+}
+
+function rotZ(p, a) {
+  const c = Math.cos(a);
+  const s = Math.sin(a);
+  return [c * p[0] - s * p[1], s * p[0] + c * p[1], p[2]];
+}
+
+const mitosis = {
+  alive: true,
+  turntable: false,
+  controls: [{ key: "go", label: "Divide", type: "pulse", ease: MI.T }],
+  action: { key: "go", label: "Divide" },
+  drive(time, c, out, info) {
+    const D = info.data;
+    if (!D?.mi) return;
+    const t = c.go > 0 ? (1 - c.go) * MI.T : 0;
+    const on = c.go > 0 && t < MI.T - 0.1;
+    const ph = (a, b) => (on ? band(t, a, b) : 0);
+    const parts = out.parts;
+    const tokens = new Array(48).fill(null);
+    out.tokens = tokens;
+    const morph = [0, 0, 0, 0];
+    out.morph = morph;
+
+    // Phases (seconds).
+    const condense = ease(ph(0.4, 2.6));
+    const swap = on && t >= 2.6 && t < 16.3;
+    const migrate = ease(ph(0.6, 3.6));
+    const breakup = ease(ph(3.0, 4.4));
+    const turn = ease(ph(3.0, 4.4));
+    const reach = ease(ph(3.4, 4.7));
+    const congress = ease(ph(4.6, 6.6));
+    const apart = ease(ph(7.6, 10.2));
+    const poleOut = ease(ph(7.8, 10.4));
+    const gather = ease(ph(10.0, 11.6));
+    const envelope = ph(10.6, 11.8);
+    const decondense = on && t >= 11.6 && t < 16.3;
+    const pinch = ph(7.8, 13.5);
+    const leave = ease(ph(13.8, 15.4));
+    const grow = ease(ph(14.2, 16.2));
+    const restored = !on || t >= 16.3;
+
+    // The chromatin condenses (the threads draw into rods), then the rods
+    // take over as solid pieces.
+    morph[0] = restored ? 0 : condense;
+    parts.chromatin = { visible: !swap && !decondense ? 1 : 0 };
+    parts.nucleolus = {
+      scale: restored ? 1 : 1 - ease(ph(1.0, 2.6)),
+      visible: restored || t < 2.6 ? 1 : 0,
+    };
+    // Membrane: the round cell until anaphase, then it stretches and pinches
+    // (a soft change of shape), and the halves part.
+    morph[1] = restored ? 0 : smoothstep(0, 1, pinch);
+    parts.membrane = { visible: restored || t < 7.8 ? 1 : 0 };
+    const dividing = !restored && t >= 7.8;
+    // G1: the right daughter drifts away; the left grows back into a whole cell.
+    const growS = 1 + (MI.R / MI.RD - 1) * grow;
+    const leftOff = [MI.XD * grow, 0, 0];
+    parts.left = { offset: leftOff, scale: growS, visible: dividing ? 1 : 0 };
+    const rightOff = [7 * leave, 0.6 * leave, 0];
+    parts.right = { offset: rightOff, visible: dividing && leave < 1 ? 1 : 0 };
+    // Daughter nuclei: new envelopes and chromatin fade in (channel 2).
+    morph[2] = restored ? 0 : envelope;
+    const nucS = 1 + (1 / MI.ND - 1) * grow;
+    parts.nucL = { offset: leftOff, scale: nucS, visible: dividing && t >= 10.5 ? 1 : 0 };
+    parts.nucR = { offset: rightOff, visible: dividing && t >= 10.5 && leave < 1 ? 1 : 0 };
+
+    // Centrosomes (tokens 8, 9): beside the nucleus at rest, round it to the
+    // poles in prophase, out a little more in anaphase, then with their cells.
+    const cs = D.mi.cRest.map((rest, i) => {
+      const s = i ? 1 : -1;
+      const a0 = Math.atan2(rest[1], rest[0]);
+      const a1 = i ? 0 : Math.PI;
+      const a = a0 + (a1 - a0) * migrate;
+      const r0 = Math.hypot(rest[0], rest[1]);
+      const r = r0 + (POLE - r0) * migrate;
+      let p = [r * Math.cos(a), r * Math.sin(a), rest[2] * (1 - migrate)];
+      p = add(p, [s * 0.45 * poleOut, 0, 0]);
+      p = add(p, [s * 0.4 * gather, 0.5 * gather, 0]);
+      return p;
+    });
+    // In the parted cells each centrosome rides its cell (scaled with the
+    // left one as it grows); after G1 the left one is back at rest and the
+    // right one has been copied beside it.
+    const ride = (p, i) =>
+      i === 0 ? add(add([-MI.XD, 0, 0], mul(add(p, [MI.XD, 0, 0]), growS)), leftOff) : add(p, rightOff); // prettier-ignore
+    const cPos = cs.map((p, i) => ride(p, i));
+    if (restored) {
+      cPos[0] = D.mi.cRest[0];
+      cPos[1] = D.mi.cRest[1];
+    } else if (grow > 0.98) {
+      cPos[1] = lerp(D.mi.cRest[0], D.mi.cRest[1], band(t, 15.6, 16.3));
+    }
+    cPos.forEach((p, i) => {
+      tokens[8 + i] = { offset: sub(p, D.mi.cBuild[i]), visible: 1 };
+    });
+
+    // Chromatids (tokens 0..7): rods from the swap; to the plate; apart.
+    const chromPos = [];
+    CHROMOSOMES.forEach((ch, i) => {
+      const pro = D.mi.pro[i];
+      for (const s of [-1, 1]) {
+        const j = 2 * i + (s > 0 ? 1 : 0);
+        const built = add(ch.at, [s * SISTER, 0, 0]);
+        // Prophase place, turned about the chromosome's middle.
+        const ang = pro.ang * (1 - turn);
+        const proMid = pro.at;
+        let mid = lerp(proMid, ch.at, congress);
+        // Metaphase: a small jostle on the plate.
+        if (on && t > 6.6 && t < 7.6) mid = add(mid, [0.04 * Math.sin(t * 9 + i), 0, 0]);
+        let p = add(mid, rotZ([s * SISTER, 0, 0], ang));
+        // Anaphase: each sister to its pole.
+        const target = [s * 1.95, ch.at[1] * 0.5, ch.at[2] * 0.6];
+        p = lerp(p, target, apart);
+        if (gather > 0) p = add(p, [s * 0.35 * gather, 0.2 * gather, 0]);
+        chromPos[j] = p;
+        tokens[j] = {
+          base: built,
+          offset: sub(p, built),
+          quat: quatAxisAngle([0, 0, 1], ang),
+          visible: swap && !decondense ? 1 : 0,
+        };
+        // Its kinetochore fiber's tip (tokens 10..17): from its pole out to
+        // the kinetochore, then with it; back into the pole at telophase.
+        const pole = cPos[s > 0 ? 1 : 0];
+        const kin = add(p, [s * 0.14, 0, 0]);
+        const tip = lerp(pole, kin, reach * (1 - ease(ph(10.4, 11.4))));
+        tokens[10 + j] = { offset: sub(tip, add(built, [s * 0.14, 0, 0])), visible: 1 };
+      }
+    });
+    // Envelope pieces (tokens 18..29): whole at rest; they break apart in
+    // prometaphase, gather round each set of chromosomes at telophase and
+    // join the new envelopes.
+    D.mi.patches.forEach((pc, i) => {
+      const side = pc.side;
+      const out2 = mul(pc.dir, 1.12 * breakup);
+      let off = out2;
+      if (gather > 0) {
+        const goal = add([side * MI.XD * 0.92, 0, 0], mul(pc.dir, MI.N * MI.ND));
+        off = lerp(out2, sub(goal, mul(pc.dir, MI.N)), gather);
+      }
+      let vis = 1;
+      if (on && t >= 11.8 && !restored) vis = 0;
+      tokens[18 + i] = { offset: restored ? [0, 0, 0] : off, visible: vis };
+    });
+    // Polar fibers (tokens 37..40, each fiber's two ends): from each pole
+    // past the middle while the spindle stands, then gone.
+    const spindle = on && !restored && t >= 1.2 && t < 10.8 ? 1 : 0;
+    [0, 1].forEach((a) => {
+      const b = 1 - a;
+      tokens[37 + 2 * a] = { offset: sub(cPos[a], D.mi.cBuild[a]), visible: spindle };
+      tokens[38 + 2 * a] = { offset: sub(cPos[b], D.mi.cBuild[b]), visible: spindle };
+    });
+    // Phase names (tokens 30..36).
+    let phase = 0;
+    if (on && !restored)
+      phase =
+        t < 3.0 ? 1 : t < 4.6 ? 2 : t < 7.6 ? 3 : t < 10.2 ? 4 : t < 11.8 ? 5 : t < 14.2 ? 6 : 0;
+    MI_PHASES.forEach(
+      (_, i) => (tokens[30 + i] = { offset: [0, 0, 0], visible: i === phase ? 1 : 0 }),
+    );
+  },
+  build(k) {
+    const rand = k.rand;
+    const faint = (col, n, a = 0.8) => lit(col, n, a, 0.35);
+    // ---- The cell's membrane: a faint shell; its dividing copy (a morph)
+    // in two halves ----
+    const membrane = k.part("membrane");
+    const left = k.part("left", { pivot: [-MI.XD, 0, 0] });
+    const right = k.part("right", { pivot: [MI.XD, 0, 0] });
+    const shell = { even: true, flat: 0.45, opacity: 0.06, size: 1.4, jitter: 0, pattern: false };
+    const memColor = "#f7c4cf";
+    k.add(evenEllipsoid(k, MI.R, MI.R, MI.R), { ...shell, weight: 0.5, part: membrane, color: (c) => faint(memColor, c.n) }); // prettier-ignore
+    k.add(evenEllipsoid(k, MI.R, MI.R, MI.R), {
+      ...shell,
+      weight: 0.5,
+      part: (c) => (c.p[0] < 0 ? left : right),
+      channel: 1,
+      to: (c) => daughterPoint(c.p),
+      // The furrow's ring of actin shows red near the equator.
+      color: (c) =>
+        faint(mix(memColor, "#e0485c", 0.7 * smoothstep(0.12, 0.02, Math.abs(c.p[0]) / MI.R)), c.n),
+    });
+
+    // ---- The nucleus at rest: chromatin threads (they condense on channel
+    // 0), the nucleolus and the envelope in twelve pieces ----
+    const chromatin = k.part("chromatin");
+    const nucleolus = k.part("nucleolus", { pivot: [0.45, 0.35, 0.2] });
+    const pro = CHROMOSOMES.map((ch, i) => {
+      const a = (i / 4) * TAU + 0.6;
+      return { at: [0.62 * Math.cos(a), 0.62 * Math.sin(a), 0.25 * Math.sin(3 * a)], ang: 1.2 * (rand() - 0.5) + (i % 2 ? 0.8 : -0.6) }; // prettier-ignore
+    });
+    // Each chromatid's thread (sisters lie side by side).
+    const threads = [];
+    CHROMOSOMES.forEach((ch, i) => {
+      const path = threadPath(rand, pro[i].at, 14, 0.42, 1.25);
+      for (const s of [-1, 1]) threads.push((t) => add(path(t), [s * 0.05, 0, 0]));
+    });
+    // A point on chromatid j: t along it (0 bottom, 1 top), around angle a.
+    const rodPoint = (i, s, tt, a) => {
+      const ch = CHROMOSOMES[i];
+      const y = (tt - 0.5) * ch.len;
+      const pinch = 1 - 0.38 * Math.exp(-Math.pow(y / 0.08, 2));
+      const r = 0.12 * pinch * Math.sqrt(Math.max(0.05, 1 - Math.pow((2 * tt - 1) * 1.02, 8)));
+      return [s * SISTER + r * Math.cos(a), y, r * Math.sin(a)];
+    };
+    const band8 = (i, tt) => {
+      const ch = CHROMOSOMES[i];
+      const stripe = Math.sin(tt * ch.len * 26 + i * 1.7) > 0.55;
+      return stripe ? shade(ch.color, 0.72) : ch.color;
+    };
+    const chromSpec = { size: 1.25, pattern: false };
+    k.cloud({ ...chromSpec, share: 0.07 }, (rnd, n) => {
+      const j = Math.floor(rnd() * 8);
+      const i = j >> 1;
+      const s = j & 1 ? 1 : -1;
+      const tt = rnd();
+      const a = rnd() * TAU;
+      const local = rodPoint(i, s, tt, a);
+      const target = add(rotZ(local, pro[i].ang), pro[i].at);
+      const rest = add(threads[j](tt), mul([rnd() - 0.5, rnd() - 0.5, rnd() - 0.5], 0.06));
+      const nrm = unit([Math.cos(a), 0, Math.sin(a)]);
+      return { p: rest, color: lit(band8(i, tt), nrm), part: chromatin, to: target, channel: 0 };
+    });
+    k.add(evenEllipsoid(k, 0.34, 0.3, 0.3), { pos: [0.45, 0.35, 0.2], even: true, weight: 2, part: nucleolus, jitter: 0, color: (c) => lit("#6c4fa8", c.n) }); // prettier-ignore
+    // Envelope pieces: the sphere split by its nearest of twelve centers.
+    const centers = fibonacciPoints(12);
+    const patches = centers.map((d) => ({ dir: d, side: d[0] < 0 ? -1 : 1 }));
+    // Balance the sides: six pieces gather on each.
+    patches.sort((a, b) => a.dir[0] - b.dir[0]).forEach((pc, i) => (pc.side = i < 6 ? -1 : 1));
+    const envColor = "#b9a7ec";
+    k.add(evenEllipsoid(k, MI.N, MI.N, MI.N), {
+      even: true,
+      weight: 0.9,
+      flat: 0.4,
+      opacity: 0.08,
+      size: 1.4,
+      jitter: 0,
+      pattern: false,
+      kind: "token",
+      params: (c) => [18 + nearestIndex(patches, unit(c.p)), 0],
+      color: (c) => {
+        const d = unit(c.p);
+        // A thin gap between pieces, so they read as pieces once apart.
+        const near = patches.map((pc) => d[0] * pc.dir[0] + d[1] * pc.dir[1] + d[2] * pc.dir[2]).sort((a, b) => b - a); // prettier-ignore
+        if (near[0] - near[1] < 0.015) return null;
+        return faint(envColor, c.n);
+      },
+    });
+
+    // ---- Chromatids (tokens 0..7), built at the metaphase plate ----
+    CHROMOSOMES.forEach((ch, i) => {
+      for (const s of [-1, 1]) {
+        const j = 2 * i + (s > 0 ? 1 : 0);
+        k.cloud({ ...chromSpec, share: 0.012 }, (rnd, m, n) => {
+          const tt = (m + 0.5) / n;
+          const a = (m * 2.399963) % TAU;
+          const local = rodPoint(i, s, tt, a);
+          return { p: add(ch.at, local), color: lit(band8(i, tt), unit([Math.cos(a), 0, Math.sin(a)])), kind: "token", params: [j, 0] }; // prettier-ignore
+        });
+      }
+    });
+
+    // ---- Centrosomes (tokens 8, 9): two centrioles at right angles in a
+    // soft cloud, built at the poles ----
+    const cBuild = [
+      [-POLE, 0, 0],
+      [POLE, 0, 0],
+    ];
+    const cRest = [
+      [-0.55, 1.98, 0.5],
+      [0.15, 2.05, 0.5],
+    ];
+    cBuild.forEach((at, i) => {
+      const tok = { kind: "token", params: [8 + i, 0] };
+      k.add(k.cylinder(0.07, 0.24), { pos: at, weight: 6, ...tok, color: (c) => lit("#ffe08a", c.n) }); // prettier-ignore
+      k.add(k.cylinder(0.07, 0.24), { pos: add(at, [0.1, 0.1, 0]), rot: [90, 0, 0], weight: 6, ...tok, color: (c) => lit("#ffe08a", c.n) }); // prettier-ignore
+      k.cloud({ share: 0.004, size: 2.2, pattern: false }, (rnd) => ({ p: add(at, mul([rnd() - 0.5, rnd() - 0.5, rnd() - 0.5], 0.35)), color: "#fff1b8", opacity: 0.25, ...tok })); // prettier-ignore
+    });
+
+    // ---- Spindle fibers: kinetochore fibers from each pole to its
+    // chromatids (skin to tokens 8/9 and the tips 10..17), and polar fibers
+    // between the poles ----
+    const fiber = "#e9f3ff";
+    CHROMOSOMES.forEach((ch, i) => {
+      for (const s of [-1, 1]) {
+        const j = 2 * i + (s > 0 ? 1 : 0);
+        const pole = cBuild[s > 0 ? 1 : 0];
+        const kin = add(ch.at, [s * (SISTER + 0.14), 0, 0]);
+        k.cloud({ share: 0.0035, size: 1.5, pattern: false }, (rnd, m, n) => {
+          const sv = (m + 0.5) / n;
+          return { p: lerp(pole, kin, sv), color: fiber, opacity: 0.75, skin: [8 + (s > 0 ? 1 : 0), 10 + j, sv] }; // prettier-ignore
+        });
+      }
+    });
+    for (let f = 0; f < 6; f++) {
+      const dz = [0.5, -0.5, 0.15, -0.15, 0.35, -0.35][f];
+      const dy = [0.35, -0.35, 0.6, -0.6, 0, 0][f];
+      k.cloud({ share: 0.003, size: 1.4, pattern: false }, (rnd, m, n) => {
+        const sv = (m + 0.5) / n;
+        const from = f % 2 ? 1 : 0;
+        const a = cBuild[from];
+        const b = cBuild[1 - from];
+        // From one pole a little past the middle, bowed out.
+        const s2 = sv * 0.56;
+        const bow = Math.sin(Math.PI * sv) * 1;
+        const p = add(lerp(a, b, s2), [0, dy * bow, dz * bow]);
+        return { p, color: fiber, opacity: 0.6, skin: [37 + 2 * from, 38 + 2 * from, s2] };
+      });
+    }
+
+    // ---- Daughter nuclei (parts nucL, nucR): small copies of the nucleus
+    // at rest, which fade in at telophase (channel 2) ----
+    for (const s of [-1, 1]) {
+      const part = k.part(s < 0 ? "nucL" : "nucR", { pivot: [s * MI.XD, 0, 0] });
+      const at = [s * MI.XD, 0, 0];
+      const sc = MI.ND;
+      const fade = { kind: "fade", params: [0.5, -0.45], channel: 2, part };
+      k.add(evenEllipsoid(k, MI.N * sc, MI.N * sc, MI.N * sc), { pos: at, even: true, weight: 0.5, flat: 0.4, opacity: 0.14, size: 1.4, jitter: 0, pattern: false, ...fade, color: (c) => faint(envColor, c.n) }); // prettier-ignore
+      k.add(evenEllipsoid(k, 0.34 * sc, 0.3 * sc, 0.3 * sc), { pos: add(at, mul([0.45, 0.35, 0.2], sc)), even: true, weight: 2, jitter: 0, ...fade, color: (c) => lit("#6c4fa8", c.n) }); // prettier-ignore
+      k.cloud({ ...chromSpec, share: 0.03 }, (rnd) => {
+        const j = Math.floor(rnd() * 8);
+        const tt = rnd();
+        const p = add(at, mul(add(threads[j](tt), mul([rnd() - 0.5, rnd() - 0.5, rnd() - 0.5], 0.06)), sc)); // prettier-ignore
+        return { p, color: lit(band8(j >> 1, tt), [0, 0, 1]), ...fade };
+      });
+    }
+
+    // ---- Phase names (tokens 30..36) over the cell ----
+    MI_PHASES.forEach((s, i) => text(k, s, [0, MI.R + 0.55, 0], 0.07, "#eef2fb", { kind: "token", params: [30 + i, 0] })); // prettier-ignore
+    k.data = { mi: { pro, cRest, cBuild, patches } };
+  },
+};
+
+function fibonacciPoints(n) {
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const y = 1 - (2 * (i + 0.5)) / n;
+    const r = Math.sqrt(1 - y * y);
+    const a = i * 2.399963229728653;
+    out.push([r * Math.cos(a), y, r * Math.sin(a)]);
+  }
+  return out;
+}
+function nearestIndex(patches, d) {
+  let best = 0;
+  let bv = -2;
+  patches.forEach((pc, i) => {
+    const v = d[0] * pc.dir[0] + d[1] * pc.dir[1] + d[2] * pc.dir[2];
+    if (v > bv) [best, bv] = [i, v];
+  });
+  return best;
+}
+
 export const RECIPES = {
   "dna-to-protein": dnaToProtein,
+  mitosis,
 };
