@@ -304,3 +304,25 @@ lab's audit describes; at phone size every frame reads.
 | bubbles    | 8/8/8 | 8/8/8 | 8/8/8 | 8/8/8 | 8/8/8   | 8/8/8   | 8/8/8  | 8/8/8 |
 | neon       | 8/8/8 | 8/8/8 | 8/8/8 | 8/8/8 | 8/8/8   | 8/8/8   | 8/8/8  | 8/8/8 |
 | neon-light | 8/8/8 | 8/8/8 | 8/8/8 | 8/8/8 | 8/8/8   | 8/8/8   | 8/8/8  | 8/8/8 |
+
+### Polish round (October 5, 2026, from the owner's "the toys could still be sharper")
+
+The owner marked all 16 cards good. On `claude/lane-qr-r3-polish` (from `14f28439`):
+
+- **Twice the splat budget** (`density: 2`: 240,000 at the mid tier, the tier's own ceiling), spent
+  on finer edge rings: the build tries scale 0.6 first (`TUNE.finest`; the outermost ring 0.018 of a
+  module across) and coarsens only when a big code would not fit.
+- **Gems' facets** no longer reach past the module's edge at the girdle (the last style whose
+  outline was soft).
+- `node tools/qr3-sharp.mjs`, edge in CSS px (round 3 → polish): phone 390×844: Classic 0.68 → 0.56,
+  Dots 0.74 → 0.56, Rounded 0.71 → 0.54, Bricks 0.60 → 0.54, Gems 0.81 → 0.57, Bubbles 0.66 → 0.57,
+  pale Neon 0.69 → 0.46; desktop 1440×900: Classic 1.43 → 1.09, Dots 1.53 → 1.13, Rounded 1.45 →
+  1.08, Bricks 1.38 → 1.24, Gems 1.74 → 1.33, Bubbles 1.41 → 1.13, pale Neon 1.41 → 0.90. On a phone
+  that is about one device pixel, close to what the screen can show. The labs sharp kernel still
+  adds almost nothing (0.01 to 0.07 px), so it stays off.
+- **Knock loose** reads at phone size: the pieces fly further and spin less, so they stay face-on as
+  dark tiles.
+- Clips are filmed from a little below now: seen from above, pieces flying toward the camera drew
+  lighter (the splat sort runs a frame behind them).
+- Checks: every motion's last frame in all 8 styles reads in 9 of 9 phone-like captures (jsQR and
+  zxing); `tests/qr3.spec.mjs` and `tests/qr.spec.mjs` pass (20 tests).
