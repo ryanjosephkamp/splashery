@@ -40,6 +40,9 @@ engine PR #274 merged on October 5, 2026, and main is merged into this branch.
   holds the camera, so its clips were recorded in real time by a small script.
 - The thermal camera crossfades a visible copy and three thermal copies (hot, warm, cooled tea) on
   the four fade channels.
+- October 5, 2026 (the Operator's request): merged main again (#302's `tests/hl1.spec.mjs` change);
+  `tests/img.spec.mjs`, `tests/img-engine.spec.mjs`, `tests/hl1.spec.mjs:61` and
+  `tests/help.spec.mjs` pass (26 tests), Prettier and the American English check are clean.
 - Specs run: `tests/img-engine.spec.mjs` (WebGL2 and WebGPU), `tests/img.spec.mjs`,
   `tests/kit.spec.mjs`, `tests/taps.spec.mjs`. Not the full suite (the Integrators run it).
 
