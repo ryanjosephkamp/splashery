@@ -8,6 +8,9 @@
 //                       (src/science/smlm.js)
 //   galaxy-box          each gas particle of a FIRE-2 galaxy is a Gaussian of
 //                       the same spread as its smoothing kernel (an approximation)
+//   cryoem-map          a cryo-EM density map's isosurface at EMDB's recommended
+//                       level, a small flat splat per surface crossing
+//                       (src/science/density.js; lane Science r3)
 //
 // The toys bring their own GPU program (src/science/field.js, labs only): the
 // jiggle, the magnifier and the Gaussians' exact shapes.
@@ -20,6 +23,7 @@ import { readCrystal, probabilityScale, centerOf, eigenSym3 } from "../science/c
 import { readSmlm, readLocalizations } from "../science/smlm.js";
 import { STRUCTURES } from "../science/structures.js";
 import { fillCell, cellsFor, completeMolecules } from "../science/symmetry.js";
+import { readDensity, readBackbone, isoPoints } from "../science/density.js";
 import {
   SCI_TYPE,
   sciPart,
@@ -523,6 +527,58 @@ export const MICROSCOPE_SAMPLES = [
     source: "https://doi.org/10.5281/zenodo.7233696",
     ...CC_BY,
   },
+  // r3 (the brief's "nuclear pores, actin, mitochondria ... 3D sets"): four
+  // more ShareLoc.XYZ records, cut by tools/sci3-samples.mjs. Three have no
+  // precision column; theirs is estimated from the data by NeNA (the
+  // distances between a molecule's localizations in consecutive frames),
+  // one value for the whole set.
+  {
+    id: "pores",
+    choice: "Nuclear pores",
+    file: "pores-wga.smlm",
+    conserve: 1,
+    label: "Nuclear pores in a frog oocyte's nuclear envelope (an 8 µm square)",
+    title: "Xenopus laevis nuclear pore complex stained with WGA-ATTO520 (ShareLoc.XYZ, 10.5281/zenodo.7182237)", // prettier-ignore
+    author: "Anna Löschberger, on ShareLoc.XYZ; an 8 µm square cut from the record (a subset)",
+    source: "https://doi.org/10.5281/zenodo.7182237",
+    note: "The record gives no precision; NeNA estimates 11.5 nm for the whole set.",
+    ...CC_BY,
+  },
+  {
+    id: "actin",
+    choice: "Actin",
+    file: "actin-cos7.smlm",
+    conserve: 1,
+    label: "Actin filaments at a COS-7 cell's edge (a 10 µm square)",
+    title: "Actin with PhalloidinAF647 in COS7 (ShareLoc.XYZ, 10.5281/zenodo.5510661)",
+    author: "Sarah Aufmkolk, on ShareLoc.XYZ; a 10 µm square of one cell, 174,903 of its localizations (a subset)", // prettier-ignore
+    source: "https://doi.org/10.5281/zenodo.5510661",
+    note: "The record gives no precision; NeNA estimates 9.9 nm for the whole set.",
+    ...CC_BY,
+  },
+  {
+    id: "mitochondria",
+    choice: "Mitochondria",
+    file: "mitochondria-tom22.smlm",
+    conserve: 1,
+    label: "Mitochondria (their outer membrane's TOM22) in a COS-7 cell (a 15 µm square)",
+    title: "Mitochondrial protein TOM22 in COS7 cells (ShareLoc.XYZ, 10.5281/zenodo.5512636)",
+    author: "Wei Ouyang, on ShareLoc.XYZ; a 15 µm square of one field, 219,846 of its localizations (a subset)", // prettier-ignore
+    source: "https://doi.org/10.5281/zenodo.5512636",
+    note: "The record gives no precision; NeNA estimates 12.4 nm for the whole set.",
+    ...CC_BY,
+  },
+  {
+    id: "microtubules3d",
+    choice: "Microtubules (3D)",
+    file: "microtubules-zola-3d.smlm",
+    conserve: 1,
+    label: "Microtubules in 3D in a U-373 cell (a 12 µm square)",
+    title: "ZOLA-3D microtubules (ShareLoc.XYZ, 10.5281/zenodo.6861446)",
+    author: "Andrey Aristov, Benoit Lelandais and Christophe Zimmer (Institut Pasteur), on ShareLoc.XYZ; a 12 µm square, 159,785 of its localizations (a subset)", // prettier-ignore
+    source: "https://doi.org/10.5281/zenodo.6861446",
+    ...CC_BY,
+  },
 ];
 export const MICROSCOPE_SAMPLE = MICROSCOPE_SAMPLES[0];
 
@@ -703,14 +759,14 @@ const MICROSCOPE = {
       const bytes = await readAsset(`../../assets/toys/smlm-microscope/${def.file}`, true);
       MIC.samples.set(def.id, await readSmlm(bytes));
     }
-    MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false };
+    MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false, note: def.note, conserve: def.conserve ?? 0 }; // prettier-ignore
   },
   drive(t, c, out) {
     // Every localization is drawn at least about a pixel wide, wherever the
     // camera is; the slice narrows from the whole field to 200 nm.
     const s = smoothstep(0, 1, c.slice ?? 0);
     const thin = SLICE_NM * UM * (MIC.grid?.stretch ?? 1) * (MIC.unit ?? 1);
-    out.morph = [0, 1, 0.0008, 0];
+    out.morph = [0, 1, 0.0008, MIC.want?.conserve ?? 0];
     // (on a log scale, so it visibly narrows all the way)
     out.glow = [0, 0, MIC.sliceZ ?? 0, s > 0.01 ? thin * Math.pow(2 / thin, 1 - s) : 0];
   },
@@ -813,7 +869,7 @@ const MICROSCOPE = {
       drawn: count,
       has3D: T.has3D,
       channels: T.channels,
-      notes: T.notes,
+      notes: want.note ? [...T.notes, want.note] : T.notes,
       size: [(x1 - x0) * UM, (y1 - y0) * UM],
     };
     k.data = { microscope: MIC.info };
@@ -1112,8 +1168,304 @@ const GALAXY = {
   },
 };
 
+// ---- Cryo-EM map (lane Science r3) ------------------------------------------------------
+
+const EMDB_LICENSE = {
+  license: "Public domain (EMDB: free of all copyright restrictions)",
+  licenseUrl: "https://www.ebi.ac.uk/emdb/faq",
+};
+export const CRYOEM_SAMPLES = [
+  {
+    id: "apoferritin",
+    choice: "Apoferritin (2.6 Å)",
+    label: "Apoferritin, the cell's iron store: 24 copies of one protein in a hollow ball",
+    title: "Mouse heavy-chain apoferritin by cryo-EM at 100 keV, 2.6 Å (EMD-17961), with its fitted model (PDB 8PVC)", // prettier-ignore
+    author: "G. McMullan, K. Naydenova, D. Mihaylov et al. (PNAS 120, e2312905120, 2023), via EMDB and the PDB", // prettier-ignore
+    source: "https://www.ebi.ac.uk/emdb/EMD-17961",
+    model: "https://www.rcsb.org/structure/8PVC",
+  },
+  {
+    id: "ribosome",
+    choice: "A ribosome (3.2 Å)",
+    label: "A bacterial ribosome (E. coli 70S) with the antibiotic arbekacin bound",
+    title: "Arbekacin-bound E. coli 70S ribosome, 3.2 Å (EMD-48329), with its fitted model (PDB 9MKK)", // prettier-ignore
+    author: "S. Majumdar, N. P. Parajuli, X. Ge, A. Emmerich and S. Sanyal (Scientific Reports 15, 18271, 2025), via EMDB and the PDB", // prettier-ignore
+    source: "https://www.ebi.ac.uk/emdb/EMD-48329",
+    model: "https://www.rcsb.org/structure/9MKK",
+  },
+  {
+    id: "aav",
+    choice: "A virus capsid (3.0 Å)",
+    label: "The empty shell of adeno-associated virus 2 (AAV2), a gene-therapy carrier: 60 copies of one protein", // prettier-ignore
+    title: "AAV2 virus-like particle, 3.02 Å (EMD-20610), with its fitted model (PDB 6U0V)",
+    author: "M. Agbandje-McKenna and A. Bennett (deposited 2019), via EMDB and the PDB",
+    source: "https://www.ebi.ac.uk/emdb/EMD-20610",
+    model: "https://www.rcsb.org/structure/6U0V",
+    // 60 copies of one protein: colored by radius, as capsids usually are.
+    color: "radius",
+  },
+].map((d) => ({ ...d, ...EMDB_LICENSE }));
+
+const EM = { maps: new Map(), models: new Map(), want: null, info: null };
+export const cryoemState = () => (EM.info ? { ...EM.info } : null);
+// The level's choices, as multiples of EMDB's recommended contour.
+export const CRYOEM_LEVELS = { lower: 0.75, recommended: 1, higher: 1.5 };
+export const CRYOEM_DENSITY = 1;
+
+// Chain colors: proteins in cool hues, RNA and DNA in warm ones, each chain
+// its own (a golden-angle walk round the hue circle).
+function chainColor(i, kind) {
+  const h = kind === "nucleic" ? 0.02 + ((i * 0.618034) % 1) * 0.13 : 0.45 + ((i * 0.618034) % 1) * 0.45; // prettier-ignore
+  const s = kind === "nucleic" ? 0.75 : 0.5;
+  const l = kind === "nucleic" ? 0.6 : 0.62;
+  const f = (n) => {
+    const k = (n + h * 12) % 12;
+    const a = s * Math.min(l, 1 - l);
+    return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+  };
+  const hex = (v) =>
+    Math.round(v * 255)
+      .toString(16)
+      .padStart(2, "0");
+  return `#${hex(f(0))}${hex(f(8))}${hex(f(4))}`;
+}
+// Distance from the center: the classic radial coloring of capsids.
+const RADIAL = ["#3a4fd0", "#38a6d8", "#5fd08a", "#e8d84a", "#ef7a35", "#d8344a"];
+function radialColor(t) {
+  const x = Math.max(0, Math.min(1, t)) * (RADIAL.length - 1);
+  const i = Math.min(RADIAL.length - 2, Math.floor(x));
+  return mix(RADIAL[i], RADIAL[i + 1], x - i);
+}
+
+const CRYOEM = {
+  alive: false,
+  density: CRYOEM_DENSITY,
+  options: [
+    {
+      key: "map",
+      label: "Map",
+      type: "select",
+      default: "apoferritin",
+      choices: CRYOEM_SAMPLES.map((d) => ({ id: d.id, label: d.choice })),
+    },
+    {
+      key: "level",
+      label: "Level",
+      type: "select",
+      default: "recommended",
+      choices: [
+        { id: "lower", label: "Lower (more of the density)" },
+        { id: "recommended", label: "EMDB's recommended" },
+        { id: "higher", label: "Higher (only the strongest)" },
+      ],
+    },
+    {
+      key: "color",
+      label: "Color by",
+      type: "select",
+      default: "auto",
+      choices: [
+        { id: "auto", label: "What suits it" },
+        { id: "chain", label: "Chain (from the fitted model)" },
+        { id: "radius", label: "Distance from the center" },
+        { id: "plain", label: "One color" },
+      ],
+    },
+    { key: "model", label: "Fitted atomic model", type: "switch", default: false },
+  ],
+  controls: [{ key: "cut", label: "Cut it open", type: "toggle", default: 0, ease: 0.9 }],
+  // A tap cuts the front half away, as a molecular viewer's clipping plane
+  // does, to show the inside (apoferritin's and the capsid's hollow middle);
+  // a second tap closes it.
+  action: { key: "cut", label: "Cut it open" },
+  credits: CRYOEM_SAMPLES.map((d) => ({
+    label: d.choice,
+    title: d.title,
+    source: d.source,
+    author: d.author,
+    license: d.license,
+    licenseUrl: d.licenseUrl,
+  })),
+  async prepare(o) {
+    const def = CRYOEM_SAMPLES.find((d) => d.id === o.map) || CRYOEM_SAMPLES[0];
+    if (!EM.maps.has(def.id)) {
+      const [vol, model] = await Promise.all([
+        readAsset(`../../assets/toys/cryoem-map/${def.id}.vol.gz`, true),
+        readAsset(`../../assets/toys/cryoem-map/${def.id}-model.bin`, true),
+      ]);
+      EM.maps.set(def.id, await readDensity(vol));
+      EM.models.set(def.id, await readBackbone(model));
+    }
+    EM.want = { def, D: EM.maps.get(def.id), model: EM.models.get(def.id) };
+  },
+  drive(t, c, out) {
+    // The cut: a clipping plane through the middle, facing the camera,
+    // sweeping in from in front (toy units in front of the middle).
+    const u = smoothstep(0, 1, c.cut ?? 0);
+    out.morph = [0, 1, 0, u > 0.001 ? 1.4 - 1.38 * u : 0];
+    out.glow = [0, 0, 0, 0];
+  },
+  gpuField() {
+    return sciModifier(1, 1);
+  },
+  build(k, o) {
+    const W = EM.want;
+    if (!W) throw new Error("The map hasn't loaded.");
+    const { D, model, def } = W;
+    const level = D.head.level * (CRYOEM_LEVELS[o.level] ?? 1);
+    const colorBy = o.color === "auto" || !o.color ? (def.color ?? "chain") : o.color;
+    const S = isoPoints(D, level);
+    if (!S.count) throw new Error("Nothing of the map is above this level.");
+    // The middle: the center of the surface.
+    const P = S.p;
+    const c = [0, 0, 0];
+    for (let i = 0; i < S.count; i++) for (let a = 0; a < 3; a++) c[a] += P[3 * i + a] / S.count;
+    const radiusOf = (i) => Math.hypot(P[3 * i] - c[0], P[3 * i + 1] - c[1], P[3 * i + 2] - c[2]);
+    // The radial colors run between the 2nd and 99.5th percentiles of the
+    // radius (a stray speck far out doesn't squeeze them).
+    const radii = [];
+    for (let i = 0; i < S.count; i += Math.max(1, Math.floor(S.count / 20000)))
+      radii.push(radiusOf(i));
+    radii.sort((a, b) => a - b);
+    const r0 = radii[Math.floor(radii.length * 0.02)];
+    const rMax = radii[Math.floor(radii.length * 0.995)];
+    // Each surface point's chain: the nearest backbone atom's (within 8 Å).
+    const atoms = [];
+    model.forEach((ch, ci) => ch.p.forEach((p) => atoms.push([p, ci])));
+    const cell = 8;
+    const grid = new Map();
+    for (const a of atoms) {
+      const key = a[0].map((v) => Math.floor(v / cell)).join(",");
+      if (!grid.has(key)) grid.set(key, []);
+      grid.get(key).push(a);
+    }
+    // (cached per 2 Å cell: neighbors on the surface share their chain)
+    const cache = new Map();
+    const nearestChain = (p) => {
+      const key =
+        Math.floor(p[0] / 2) + 4096 * (Math.floor(p[1] / 2) + 4096 * Math.floor(p[2] / 2));
+      const hit = cache.get(key);
+      if (hit !== undefined) return hit;
+      const ci = nearestChainAt(p);
+      cache.set(key, ci);
+      return ci;
+    };
+    const nearestChainAt = (p) => {
+      const g = p.map((v) => Math.floor(v / cell));
+      let best = -1;
+      let bd = cell * cell;
+      for (let dx = -1; dx <= 1; dx++)
+        for (let dy = -1; dy <= 1; dy++)
+          for (let dz = -1; dz <= 1; dz++)
+            for (const [q, ci] of grid.get(`${g[0] + dx},${g[1] + dy},${g[2] + dz}`) ?? []) {
+              const d = (q[0] - p[0]) ** 2 + (q[1] - p[1]) ** 2 + (q[2] - p[2]) ** 2;
+              if (d < bd) [best, bd] = [ci, d];
+            }
+      return best;
+    };
+    const showModel = o.model === true;
+    const alpha = showModel ? 0.22 : 1;
+    // The budget: when the surface has more points than this device draws,
+    // an even share of them, each a little bigger to close the surface.
+    const budget = Math.max(2000, Math.floor(k.count * (showModel ? 0.8 : 0.98)));
+    const keep = Math.min(1, budget / S.count);
+    const vox = D.voxel[0];
+    const size = vox * 1.05 * Math.sqrt(1 / keep);
+    const pick = [];
+    for (let i = 0; i < S.count; i++) if ((i * 0.618034) % 1 < keep) pick.push(i);
+    const base = () => k.baseSize || 0.01;
+    k.cloud({ count: (pick.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
+      const i = pick[j];
+      if (i === undefined) return null;
+      const p = [P[3 * i], P[3 * i + 1], P[3 * i + 2]];
+      const n = [S.n[3 * i], S.n[3 * i + 1], S.n[3 * i + 2]];
+      let col = "#c9ccd6";
+      if (colorBy === "radius") col = radialColor((radiusOf(i) - r0) / (rMax - r0));
+      else if (colorBy !== "plain") {
+        const ci = nearestChain(p);
+        col = ci >= 0 ? chainColor(ci, model[ci].kind) : "#9aa0ad";
+      }
+      return {
+        p: [p[0] - c[0], p[1] - c[1], p[2] - c[2]],
+        n,
+        flat: 0.25,
+        size: size / base(),
+        color: lit(col, n, 0.25),
+        opacity: alpha,
+        part: sciPart(SCI_TYPE.plain),
+      };
+    });
+    // The fitted model's backbone: a bead at each Cα (or P) and between
+    // neighbors along the chain, in its chain's color.
+    let beads = 0;
+    if (showModel) {
+      const pts = [];
+      model.forEach((ch, ci) => {
+        const col = chainColor(ci, ch.kind);
+        const gap = ch.kind === "nucleic" ? 8 : 4.5;
+        const steps = ch.kind === "nucleic" ? 4 : 2;
+        ch.p.forEach((p, i) => {
+          pts.push([p, col]);
+          const q = ch.p[i + 1];
+          if (!q) return;
+          const d = Math.hypot(q[0] - p[0], q[1] - p[1], q[2] - p[2]);
+          if (d > gap) return;
+          for (let s2 = 1; s2 < steps; s2++) {
+            const t = s2 / steps;
+            pts.push([p.map((v, k2) => v + (q[k2] - v) * t), col]);
+          }
+        });
+      });
+      const room = Math.max(1000, Math.floor(k.count * 0.18));
+      const every = Math.max(1, Math.ceil(pts.length / room));
+      const bead = 1.3 * Math.sqrt(every); // Å across
+      const shown = pts.filter((_, i) => i % every === 0);
+      beads = shown.length;
+      k.cloud({ count: (shown.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
+        const e = shown[j];
+        if (!e) return null;
+        return {
+          p: [e[0][0] - c[0], e[0][1] - c[1], e[0][2] - c[2]],
+          size: bead / base(),
+          color: e[1],
+          opacity: 1,
+          part: sciPart(SCI_TYPE.plain),
+        };
+      });
+    }
+    EM.info = {
+      id: def.id,
+      name: def.label,
+      emdb: D.head.emdb,
+      pdb: D.head.pdb,
+      level,
+      recommended: D.head.level,
+      levelSource: D.head.levelSource,
+      resolution: D.head.resolution,
+      voxel: vox,
+      surface: S.count,
+      drawn: pick.length,
+      beads,
+      chains: model.length,
+      radius: rMax,
+      center: c,
+    };
+    k.data = { cryoem: EM.info };
+  },
+  input: {
+    title: "About this map",
+    fileButton: false,
+    shown() {
+      const i = EM.info;
+      if (!i) return "";
+      return `${i.emdb} at ${i.resolution} Å, resampled to ${i.voxel.toFixed(2)} Å voxels. Level ${+i.level.toPrecision(3)} (EMDB's recommended: ${i.recommended}, set by the ${String(i.levelSource || "depositors").toLowerCase() === "author" ? "authors" : "depositors"}). ${fmt(i.surface)} surface points, ${fmt(i.drawn)} drawn; ${fmt(i.chains)} chains in the fitted model (${i.pdb}).`; // prettier-ignore
+    },
+  },
+};
+
 export const RECIPES = {
   "thermal-ellipsoids": THERMAL,
   "smlm-microscope": MICROSCOPE,
   "galaxy-box": GALAXY,
+  "cryoem-map": CRYOEM,
 };

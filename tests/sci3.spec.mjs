@@ -2,14 +2,27 @@
 // the structures: every one of the catalog's structures loads with its anisotropic ellipsoids,
 // and the ellipsoids' axes give back the file's own U values (a PDB's ANISOU, and a CIF's U in
 // a cell with right angles, where the Cartesian U is the file's); the unit cell and the
-// completed molecules from the symmetry operations; the grouped picker.
+// completed molecules from the symmetry operations; the grouped picker. Item 2: the new
+// microscopy sets load (NeNA's precision checked on made-up data with a known one); the cryo-EM
+// maps' isosurface sits at EMDB's recommended contour level.
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { readCrystal, symOf, readCifBlocks, cifNumber } from "../src/science/crystal.js";
 import { parseSymop, fillCell, completeMolecules, turnU, cellsFor } from "../src/science/symmetry.js"; // prettier-ignore
 import { STRUCTURES } from "../src/science/structures.js";
-import { RECIPES, ellipsoidState, ELLIPSOID_SAMPLES } from "../src/packs/science.js";
+import {
+  RECIPES,
+  ellipsoidState,
+  ELLIPSOID_SAMPLES,
+  MICROSCOPE_SAMPLES,
+  microscopeState,
+  CRYOEM_SAMPLES,
+  cryoemState,
+} from "../src/packs/science.js";
+import { readSmlm, readThunderstormCsv } from "../src/science/smlm.js";
+import { readDensity, readBackbone, isoPoints } from "../src/science/density.js";
+import { nena } from "../tools/sci3-samples.mjs";
 import { buildRecipe } from "../src/kit.js";
 import { applyClay } from "../src/generators.js";
 import { resolveOptions } from "../src/player.js";
@@ -232,4 +245,122 @@ test("the picker lists the structures under their six groups", async ({ page }) 
   ]);
   expect(groups.reduce((n, g) => n + g[1], 0)).toBe(STRUCTURES.length);
   expect(errors).toEqual([]);
+});
+
+test.describe("microscopy (node)", () => {
+  test("NeNA recovers a known localization precision from consecutive frames", () => {
+    // 4,000 molecules, each localized in two consecutive frames with σ = 8 nm.
+    let seed = 3;
+    const rnd = () => (seed = (Math.imul(seed, 1103515245) + 12345) >>> 0) / 4294967296;
+    const gauss = () => Math.sqrt(-2 * Math.log(rnd() + 1e-12)) * Math.cos(2 * Math.PI * rnd());
+    const n = 8000;
+    const T = { n, x: new Float32Array(n), y: new Float32Array(n), frame: new Float32Array(n), has3D: false }; // prettier-ignore
+    for (let m = 0; m < n / 2; m++) {
+      const cx = rnd() * 20000;
+      const cy = rnd() * 20000;
+      const f = 2 * Math.floor(rnd() * 500);
+      for (const k of [0, 1]) {
+        T.x[2 * m + k] = cx + 8 * gauss();
+        T.y[2 * m + k] = cy + 8 * gauss();
+        T.frame[2 * m + k] = f + k;
+      }
+    }
+    const r = nena(T);
+    expect(Math.abs(r.sigma - 8)).toBeLessThan(0.6);
+  });
+
+  test("a column named frame_ (ShareLoc's ThunderSTORM export) is the frame", () => {
+    const csv = "frame_,x [nm],y [nm],uncertainty [nm]\n1,10,20,5\n2,30,40,6\n";
+    const t = readThunderstormCsv(csv);
+    expect(Array.from(t.frame)).toEqual([1, 2]);
+  });
+
+  test("the four new microscopy sets load, each credited, CC BY 4.0, with its precision", async () => {
+    const want = { pores: false, actin: false, mitochondria: false, microtubules3d: true };
+    for (const [id, is3D] of Object.entries(want)) {
+      const def = MICROSCOPE_SAMPLES.find((d) => d.id === id);
+      expect(def.license).toBe("CC BY 4.0");
+      expect(def.source).toMatch(/^https:\/\/doi\.org\/10\.5281\/zenodo\.\d+$/);
+      const file = `assets/toys/smlm-microscope/${def.file}`;
+      expect(fs.statSync(file).size).toBeLessThan(4_000_000);
+      const T = await readSmlm(new Uint8Array(fs.readFileSync(file)));
+      expect(T.has3D, id).toBe(is3D);
+      expect(T.n).toBeGreaterThan(100000);
+      // Every localization has a precision (the record's, or NeNA's).
+      expect(Array.from(T.sxy.slice(0, 1000)).every((v) => v > 0 && v < 60)).toBe(true);
+      if (def.note) expect(def.note).toMatch(/NeNA estimates [\d.]+ nm/);
+      const out = await build("smlm-microscope", 140000, { data: id });
+      expect(out.buf.count).toBeGreaterThan(50000);
+      expect(microscopeState().name).toBe(def.label);
+    }
+  });
+});
+
+// EMDB's recommended contour levels, read on each entry's page on October 5, 2026.
+const EMDB_LEVELS = { apoferritin: ["EMD-17961", 0.04], ribosome: ["EMD-48329", 0.02], aav: ["EMD-20610", 2] }; // prettier-ignore
+
+test.describe("cryo-EM maps (node)", () => {
+  test("each map's isosurface is at EMDB's recommended contour level", async () => {
+    for (const [id, [emdb, level]] of Object.entries(EMDB_LEVELS)) {
+      const D = await readDensity(new Uint8Array(fs.readFileSync(`assets/toys/cryoem-map/${id}.vol.gz`))); // prettier-ignore
+      expect(D.head.emdb).toBe(emdb);
+      expect(D.head.level).toBe(level);
+      expect(["AUTHOR", "EMDB"]).toContain(D.head.levelSource);
+      // The level is inside the stored range, and the bytes map back to it.
+      expect(D.head.lo).toBeLessThan(level);
+      expect(D.head.hi).toBeGreaterThan(level);
+      expect(D.fromByte(D.toByte(level))).toBeCloseTo(level, 9);
+      const S = isoPoints(D, level);
+      expect(S.count).toBeGreaterThan(10000);
+      // Every point is where the map's (trilinear) density equals the level.
+      const vAt = (i) => [S.v[3 * i], S.v[3 * i + 1], S.v[3 * i + 2]];
+      for (let i = 0; i < S.count; i += 97) expect(Math.abs(D.sample(...vAt(i)) - S.levelByte)).toBeLessThan(1e-3); // prettier-ignore
+      // and faces out of the density: a step outward is lower, inward higher.
+      let out = 0;
+      let tried = 0;
+      for (let i = 0; i < S.count; i += 211) {
+        const v = vAt(i);
+        const g = [S.n[3 * i], S.n[3 * i + 1], S.n[3 * i + 2]];
+        const step = (s) => D.sample(...v.map((q, k) => q + s * g[k]));
+        tried++;
+        if (step(0.4) < S.levelByte && step(-0.4) > S.levelByte) out++;
+      }
+      expect(out / tried).toBeGreaterThan(0.85);
+      const model = await readBackbone(new Uint8Array(fs.readFileSync(`assets/toys/cryoem-map/${id}-model.bin`))); // prettier-ignore
+      expect(model.length).toBeGreaterThanOrEqual(24);
+    }
+  });
+
+  test("the toy draws the map at EMDB's level by default, and the fitted model sits in it", async () => {
+    for (const def of CRYOEM_SAMPLES) {
+      expect(def.source).toMatch(/^https:\/\/www\.ebi\.ac\.uk\/emdb\/EMD-\d+$/);
+      expect(def.model).toMatch(/^https:\/\/www\.rcsb\.org\/structure\//);
+      const out = await build("cryoem-map", 140000, { map: def.id });
+      const st = cryoemState();
+      expect(st.level).toBe(EMDB_LEVELS[def.id][1]);
+      expect(st.level).toBe(st.recommended);
+      expect(out.buf.count).toBeGreaterThan(30000);
+      expect(out.buf.count).toBeLessThanOrEqual(140000 * 1.05);
+      // The model's backbone lies in the density: most Cα and P atoms are
+      // inside the surface (above the level).
+      const D = await readDensity(new Uint8Array(fs.readFileSync(`assets/toys/cryoem-map/${def.id}.vol.gz`))); // prettier-ignore
+      const model = await readBackbone(new Uint8Array(fs.readFileSync(`assets/toys/cryoem-map/${def.id}-model.bin`))); // prettier-ignore
+      const L = D.toByte(st.level);
+      let inside = 0;
+      let all = 0;
+      for (const ch of model)
+        for (let i = 0; i < ch.p.length; i += 7) {
+          const v = ch.p[i].map((q, k) => (q - D.at0[k]) / D.voxel[k]);
+          if (v.some((q, k) => q < 0 || q > D.n[k] - 1)) continue;
+          all++;
+          if (D.sample(...v) >= L) inside++;
+        }
+      expect(inside / all, def.id).toBeGreaterThan(0.6);
+    }
+    // The other levels and the model.
+    await build("cryoem-map", 140000, { map: "apoferritin", level: "higher" });
+    expect(cryoemState().level).toBeCloseTo(0.04 * 1.5, 9);
+    await build("cryoem-map", 140000, { map: "apoferritin", model: true });
+    expect(cryoemState().beads).toBeGreaterThan(4000);
+  });
 });

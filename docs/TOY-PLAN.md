@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
+- 374 toys. 344 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 5.
+- **new** (needs its own effect): 6.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -60,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Galaxy in a box, Cryo-EM map, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -69,7 +69,7 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code,
-  Video to 3D
+  Video to 3D, Cryo-EM map
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2893,7 +2893,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 
-## Science (3)
+## Science (4)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
@@ -2947,3 +2947,19 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+- **Cryo-EM map** (`cryoem-map`). Now: tap: Cut it open. Plan: new effect (E6).
+  - Owner: The owner's push notes of October 4, 2026 (S17, "100%"; the brief's "a new cryo-EM toy";
+    lane Science r3; labs only).
+  - Effect: A cryo-EM density map from EMDB (apoferritin at 2.6 Å, an E. coli ribosome with an
+    antibiotic at 3.2 Å, an AAV2 capsid at 3.0 Å) as its isosurface at EMDB's recommended level: a
+    small flat splat at each place the density crosses the level (marching cubes' vertices), facing
+    out of the density, colored by the fitted model's nearest chain or by distance from the center.
+    The fitted model's backbone can show inside a see-through map. The tap sweeps a clipping plane
+    in to cut the front half away and show the inside; a second tap closes it.
+  - Improved: Science r3: tools/sci3-cryoem.mjs reads each map (MRC) and EMDB's recommended contour,
+    crops to the density, blurs against aliasing and resamples to at most 128 to 160 voxels a side
+    and stores 8-bit volumes; maps at 2.6 to 3.2 Å, so the new voxels are about half the resolution
+    and EMDB's level keeps its meaning (an atomic-resolution map, 1.2 Å, was tried: blurred to a
+    phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the
+    assembly's operators.
+  - Sound: A soft, low whoosh as the cut sweeps in, and a softer one as it closes.

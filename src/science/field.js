@@ -25,6 +25,8 @@
 // Uniforms (from the recipe's drive):
 //   uSpMorph = [jiggle 0..1 (bonds fade with it), magnification, size floor
 //               per unit of camera distance (0: none), near clip (0: none)]
+//   (with `free`, w is instead how much a localization's light spreads over
+//   the pixels it is blurred across, r3; magnification and the clip are unused)
 //   The near clip, like a molecular viewer's clipping plane, fades splats
 //   nearer the camera than that many toy units in front of the middle, so a
 //   magnified structure doesn't hide the place you zoomed in on. A negative
@@ -214,6 +216,15 @@ void modifySplatColor(vec3 center, inout vec4 color) {
   if (FREE) {
     // A slice: the localizations within w of the depth z of uSpGlowC.
     if (sciKind == 5 && uSpGlowC.w > 0.0) a *= 1.0 - smoothstep(uSpGlowC.w, 1.6 * uSpGlowC.w, abs(center.z - uSpGlowC.z));
+    // r3: a localization smaller than a couple of pixels is blurred over
+    // them on screen; the same light spreads over that bigger spot
+    // (uSpMorph.w: how much; 0 keeps r2's look), so a crowded field doesn't
+    // saturate at a distance and is at full strength close up.
+    if (sciKind == 5 && uSpMorph.w > 0.0) {
+      float t = sciAn.z * UNIT * uSpClock.y;
+      float f = 2.0 * uSpMorph.z * length(uSpCam.xyz - center);
+      a *= mix(1.0, max(t * t / (t * t + f * f), 0.03), uSpMorph.w);
+    }
     // Close up, what is much nearer than the point the camera looks at
     // (uSpCam.w: its distance) fades, so it doesn't fill the view as big
     // soft spots.
@@ -317,6 +328,11 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   if (FREE) {
     if (sciKind == 5 && uniform.uSpGlowC.w > 0.0) {
       a = a * (1.0 - smoothstep(uniform.uSpGlowC.w, 1.6 * uniform.uSpGlowC.w, abs(center.z - uniform.uSpGlowC.z)));
+    }
+    if (sciKind == 5 && uniform.uSpMorph.w > 0.0) {
+      let t = sciAn.z * UNIT * uniform.uSpClock.y;
+      let f = 2.0 * uniform.uSpMorph.z * length(uniform.uSpCam.xyz - center);
+      a = a * mix(1.0, max(t * t / (t * t + f * f), 0.03), uniform.uSpMorph.w);
     }
     if (uniform.uSpCam.w > 0.0) {
       a = a * smoothstep(0.3, 0.55, length(center - uniform.uSpCam.xyz) / uniform.uSpCam.w);

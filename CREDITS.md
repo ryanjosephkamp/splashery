@@ -599,6 +599,61 @@ strand is added from its biological assembly (`tools/sci3-structures.mjs`).
 
 Files people open in these toys are read in their browser and never uploaded.
 
+Four more super-resolution microscopy sets from ShareLoc.XYZ on Zenodo (each record's CC BY 4.0 read
+on its live page on October 5, 2026). Three records give no localization precision; theirs is
+estimated from the data by NeNA (Endesfelder et al., Histochemistry and Cell Biology 141, 629–638,
+2014).
+
+- Super-resolution microscope: "Xenopus laevis nuclear pore complex stained with WGA-ATTO520" by
+  Anna Löschberger, on ShareLoc.XYZ,
+  [10.5281/zenodo.7182237](https://doi.org/10.5281/zenodo.7182237),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). An 8 µm square cut from the record (a
+  subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA estimates 11.5 nm
+  for the whole set.
+- Super-resolution microscope: "Actin with PhalloidinAF647 in COS7" by Sarah Aufmkolk, on
+  ShareLoc.XYZ, [10.5281/zenodo.5510661](https://doi.org/10.5281/zenodo.5510661),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 10 µm square of one cell, 174,903 of
+  its localizations (a subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA
+  estimates 9.9 nm for the whole set.
+- Super-resolution microscope: "Mitochondrial protein TOM22 in COS7 cells" by Wei Ouyang, on
+  ShareLoc.XYZ, [10.5281/zenodo.5512636](https://doi.org/10.5281/zenodo.5512636),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 15 µm square of one field, 219,846 of
+  its localizations (a subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA
+  estimates 12.4 nm for the whole set.
+- Super-resolution microscope: "ZOLA-3D microtubules" by Andrey Aristov, Benoit Lelandais and
+  Christophe Zimmer (Institut Pasteur), on ShareLoc.XYZ,
+  [10.5281/zenodo.6861446](https://doi.org/10.5281/zenodo.6861446),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 12 µm square, 159,785 of its
+  localizations (a subset), cut by `tools/sci3-samples.mjs`.
+
+Three cryo-EM maps from the Electron Microscopy Data Bank, each with the atomic model fitted into it
+from the PDB (checked on the live pages on October 5, 2026).
+
+- Cryo-EM map: Mouse heavy-chain apoferritin by cryo-EM at 100 keV, 2.6 Å,
+  [EMD-17961](https://www.ebi.ac.uk/emdb/EMD-17961) and its fitted model
+  [PDB 8PVC](https://www.rcsb.org/structure/8PVC), by G. McMullan, K. Naydenova, D. Mihaylov et al.
+  (PNAS 120, e2312905120, 2023). The map: EMDB's data are "free of all copyright restrictions and
+  made fully and freely available for both non-commercial and commercial use" (the
+  [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and resampled by
+  `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+  (the wwPDB data policy); its backbone only.
+- Cryo-EM map: Arbekacin-bound E. coli 70S ribosome, 3.2 Å,
+  [EMD-48329](https://www.ebi.ac.uk/emdb/EMD-48329) and its fitted model
+  [PDB 9MKK](https://www.rcsb.org/structure/9MKK), by S. Majumdar, N. P. Parajuli, X. Ge, A.
+  Emmerich and S. Sanyal (Scientific Reports 15, 18271, 2025). The map: EMDB's data are "free of all
+  copyright restrictions and made fully and freely available for both non-commercial and commercial
+  use" (the [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and
+  resampled by `tools/sci3-cryoem.mjs`. The model:
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the wwPDB data policy); its
+  backbone only.
+- Cryo-EM map: AAV2 virus-like particle, 3.02 Å, [EMD-20610](https://www.ebi.ac.uk/emdb/EMD-20610)
+  and its fitted model [PDB 6U0V](https://www.rcsb.org/structure/6U0V), by M. Agbandje-McKenna and
+  A. Bennett (deposited 2019). The map: EMDB's data are "free of all copyright restrictions and made
+  fully and freely available for both non-commercial and commercial use" (the
+  [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and resampled by
+  `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+  (the wwPDB data policy); its backbone only.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one

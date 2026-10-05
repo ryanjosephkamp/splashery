@@ -2772,6 +2772,12 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // A cryo-EM map cut open: a soft, low whoosh as the clipping plane sweeps
+  // in, and a softer one as it closes (Science r3).
+  "cryoem-map": {
+    on: { voice: "whoosh", f: 380, decay: 1.1, vol: 0.3 },
+    off: { voice: "whoosh", f: 300, decay: 1, vol: 0.25 },
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

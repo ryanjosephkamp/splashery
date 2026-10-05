@@ -2263,6 +2263,13 @@
       "sound": "Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it comes back.",
       "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral)."
     },
+    "cryoem-map": {
+      "v": "new",
+      "owner": "The owner's push notes of October 4, 2026 (S17, \"100%\"; the brief's \"a new cryo-EM toy\"; lane Science r3; labs only).",
+      "effect": "A cryo-EM density map from EMDB (apoferritin at 2.6 Å, an E. coli ribosome with an antibiotic at 3.2 Å, an AAV2 capsid at 3.0 Å) as its isosurface at EMDB's recommended level: a small flat splat at each place the density crosses the level (marching cubes' vertices), facing out of the density, colored by the fitted model's nearest chain or by distance from the center. The fitted model's backbone can show inside a see-through map. The tap sweeps a clipping plane in to cut the front half away and show the inside; a second tap closes it.",
+      "sound": "A soft, low whoosh as the cut sweeps in, and a softer one as it closes.",
+      "improved": "Science r3: tools/sci3-cryoem.mjs reads each map (MRC) and EMDB's recommended contour, crops to the density, blurs against aliasing and resamples to at most 128 to 160 voxels a side and stores 8-bit volumes; maps at 2.6 to 3.2 Å, so the new voxels are about half the resolution and EMDB's level keeps its meaning (an atomic-resolution map, 1.2 Å, was tried: blurred to a phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the assembly's operators."
+    },
     "fluid-lab": {
       "v": "keep",
       "owner": "The owner's notes on the water bottle and soda can of September 29, 2026 (\"a realistic fluid splat simulator\"; lane Fluids; labs only).",
