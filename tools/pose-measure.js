@@ -2,7 +2,7 @@
 // (in the page; tools/pose-sweep.mjs and tests/pose.spec.mjs load it). See
 // tools/pose-sweep.mjs for what the numbers mean.
 
-export async function measure({ id, size, kitfix }) {
+export async function measure({ id, size, kitfix, debug }) {
   const { app, player } = window.__splashery;
   const stage = player.stage;
   const TIMES = [0.35, 0.9, 1.8];
@@ -14,6 +14,7 @@ export async function measure({ id, size, kitfix }) {
   for (const which of ["up", "side", "down"]) {
     await app.chooseToy(id);
     await wait(300);
+    for (let t = 0; player.loading && t < 60; t++) await wait(250);
     const info = player.toyInfo;
     if (which === "up") {
       out.canPlay = !!player.handsOn && (await import("/src/physics/hands-on.js")).canPlay(info);
@@ -63,6 +64,16 @@ export async function measure({ id, size, kitfix }) {
     player.scene.seed = 12345;
     player.motion.kitClock = { t: 0, last: null, rate: 1 };
     player.motion.moveClock = { t: 0, last: null, rate: 1 };
+    // A scan streams in after it loads: wait (real time) until the toy shows.
+    for (let t = 0; t < 30; t++) {
+      const f = await snap();
+      let lit = 0;
+      for (let i = 0; i < f.data.length; i += 4)
+        if (f.data[i] + f.data[i + 1] + f.data[i + 2] > 24) lit++;
+      if (lit > size * size * 0.01) break;
+      if (t === 29) out.blank = true;
+      await wait(500);
+    }
     await advance(0.4);
     const frames = [await snap()];
     player.act(null);
@@ -123,5 +134,17 @@ export async function measure({ id, size, kitfix }) {
     out[which] = { err, floor, errs, rel: err / Math.max(out.move, 1) };
   }
   delete out.frames;
+  // debug: every frame as a PNG data URL, upright then side then down.
+  if (debug) {
+    const c = document.createElement("canvas");
+    c.width = c.height = size;
+    const x = c.getContext("2d");
+    out.images = ["up", "side", "down"].map((w) =>
+      shots[w].frames.map((f) => {
+        x.putImageData(f, 0, 0);
+        return c.toDataURL();
+      }),
+    );
+  }
   return out;
 }

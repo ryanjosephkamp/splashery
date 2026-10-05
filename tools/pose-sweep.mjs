@@ -3,7 +3,7 @@
 // measured (docs/audits/poses-2026-10.md).
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pose-sweep.mjs <out.json> [--size=128] [--kitfix] [--from=id] [--only=a,b] [--shelf=food] [--part=1/3]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pose-sweep.mjs <out.json> [--size=128] [--kitfix] [--from=id] [--only=a,b] [--shelf=food] [--part=1/3] [--recheck]
 //
 // Each pose turns the whole toy about the camera's line of sight (a quarter
 // turn: on its side; a half turn: upside down), through the point the camera
@@ -32,6 +32,7 @@ const [outFile] = args.filter((a) => !a.startsWith("--"));
 if (!outFile) throw new Error("Usage: node tools/pose-sweep.mjs <out.json>");
 const size = Number(opt("size", 128));
 const kitfix = args.includes("--kitfix");
+const recheck = args.includes("--recheck"); // measure toys that scored 3 or more again
 const only = opt("only", "") ? opt("only", "").split(",") : null;
 const shelf = opt("shelf", "");
 const from = opt("from", "");
@@ -69,13 +70,19 @@ const open = async () => {
 await open();
 
 for (const toy of list) {
-  if (done[toy.id] && !done[toy.id].error) continue; // (failed ones are measured again)
+  const d = done[toy.id];
+  const flagged = d && Math.max(d.side?.err ?? 0, d.down?.err ?? 0) >= 3;
+  if (d && !d.error && !(recheck && flagged)) continue; // (failed ones are measured again)
   let r;
   try {
-    r = await Promise.race([
-      page.evaluate((o) => import("/tools/pose-measure.js").then((m) => m.measure(o)), { id: toy.id, size, kitfix }), // prettier-ignore
-      new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 600_000)),
-    ]);
+    const run = (sz) =>
+      Promise.race([
+        page.evaluate((o) => import("/tools/pose-measure.js").then((m) => m.measure(o)), { id: toy.id, size: sz, kitfix }), // prettier-ignore
+        new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 600_000)),
+      ]);
+    r = await run(size);
+    // A scan with small splats can vanish at a small size: measure it larger.
+    if (r.blank) r = { ...(await run(size * 2)), size: size * 2 };
   } catch (e) {
     r = { error: String(e.message || e).slice(0, 200) };
     await browser.close().catch(() => {});
