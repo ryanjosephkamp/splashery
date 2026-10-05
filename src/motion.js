@@ -320,6 +320,9 @@ export class MotionDriver {
     const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
     // Lane Hands engine A: Hands-on's shake, finger and wheels (src/physics/fields.js).
     if (this.hands) about.hands = this.hands;
+    // Lane Any pose: the world's up in the recipe's frame while Hands-on has
+    // the toy turned (absent upright), for effects that fall or pour.
+    if (this.poseUp) about.up = this.poseUp;
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     // Lane Physics: pieces picked up in Hands-on go where the physics puts
     // them (src/physics/hands-on.js), and are sorted again now and then.

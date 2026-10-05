@@ -82,16 +82,19 @@ test("a toy posed in Hands-on gets the pose uniforms; put back, they are off", a
     const s = Math.SQRT1_2;
     player.stage.setToyPose({ pivot: player.toyInfo.center, q: [0, 0, s, s], t: [0, 0.1, 0] });
     player.update(1 / 60);
-    const posed = { t: get("uSpPoseT"), q: get("uSpPoseQ"), up: get("uSpPoseUp") };
+    const posed = { t: get("uSpPoseT"), q: get("uSpPoseQ"), up: get("uSpPoseUp"), about: player.motion.poseUp }; // prettier-ignore
     player.stage.setToyPose(null);
     player.update(1 / 60);
-    return { home, posed, back: get("uSpPoseT"), fix: player.motion.handsFix };
+    return { home, posed, back: get("uSpPoseT"), fix: player.motion.handsFix, aboutBack: player.motion.poseUp }; // prettier-ignore
   });
   expect(r.home[3]).toBe(0);
   expect(r.posed.t[3]).toBe(1);
   expect(r.posed.q[2]).toBeCloseTo(Math.SQRT1_2, 5);
   // On its side (a quarter turn about z), the world's up is the toy's +x.
   expect(r.posed.up[0]).toBeCloseTo(1, 5);
+  // A recipe's drive gets the same up as about.up while posed, and none upright.
+  expect(r.posed.about[0]).toBeCloseTo(1, 5);
+  expect(r.aboutBack).toBe(null);
   expect(r.back[3]).toBe(0);
   expect(r.fix ?? null).toBe(null);
 });

@@ -13,7 +13,7 @@ import { buildRecipe, meanLuminance, Kit } from "./kit.js";
 import { MotionDriver } from "./motion.js";
 import { rigLayout, tagRig } from "./rig.js";
 import { posePass } from "./pose.js";
-import { poseUniforms } from "./effects-pose.js"; // lane Any pose
+import { poseUniforms, poseUp } from "./effects-pose.js"; // lane Any pose
 import { fxTable } from "./rig-fx.js";
 import { RIGS } from "./rigs.js";
 import { drawPattern, patternUniforms } from "./patterns.js";
@@ -1390,6 +1390,7 @@ export class Player {
       camera: pose,
     });
     const motion = this.effectiveMotion();
+    this.motion.poseUp = poseUp(this.stage); // lane Any pose
     Object.assign(
       u,
       this.motion.compute({
