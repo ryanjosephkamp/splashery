@@ -101,6 +101,17 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
+October 5, 2026, 04:50 UTC (Opus 5.5): the owner's marks: `lv7-song-landscape` and
+`lv7-chladni-plate` good; both mirror cards "fix" ("keep making it sharper ... a little bit more
+seamless"). Round 2 is posted as `lv7-splat-mirror-r2` and `lv7-splat-mirror-hologram-r2` (the old
+cards marked replaced):
+
+- Tighter picture splats (1.2 cells across, was 1.45) and a light unsharp mask on the colors.
+- A frame of clean flat sheets.
+- The background layer's guard is 4 of its cells (the hair and ear edge showed as a ghost).
+- A face beside its outline keeps its own depth (a REACH of 7 cuts only the soft ramp).
+- The per-frame outline follow from round 1 is gone: it left patches on a moving face.
+
 READY (October 5, 2026, 04:15 UTC; Opus 5.5). Items 1 to 3 are posted (four `lv7-*` cards on page
 2). Then the Operator's routine of 02:24 UTC came in: the owner tested the Chladni plate with his
 own long song and the microphone, and the bow and the restart cycle were still there. That is item
@@ -178,9 +189,10 @@ Tests run on this branch: `lv7`, `live`, `live2`, `live3`, `live4`, `live5`, `li
     bilateral filter).
   - The cut now follows the outline in the picture: a cell at a jump goes with the side whose colors
     it has (the nearest color among each side's cells, `sideByColor`).
-  - Between depth answers a moving person moved in the picture but not in depth, so their leading
-    edge lay on the wall (a ghost of their outline from the side): near an outline, each frame's
-    colors now pick the side (`edgeBand`, `followOutline`).
+  - Between depth answers a moving person moves in the picture but not in depth, so their leading
+    edge lies on the wall (a ghost of their outline from the side). A per-frame fix by each frame's
+    colors (round 1) left patches on a moving face and was taken out in round 2; lone cells at an
+    outline are still tidied (`edgeBand`, `tidyBand`).
   - The depth's range and each cell's depth ease more where they only wobble (a range change under
     5%, a depth change under 0.03), and as before where something really moves.
   - The background layer learns the wall two cells clear of the person (was one).
