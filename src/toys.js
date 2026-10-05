@@ -3588,6 +3588,16 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.55, roll: 0, distance: 3.2 },
   },
   {
+    id: "stork-migration",
+    label: "Stork migration",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "stork storks bird birds migration flyway gps tracking movebank africa europe bosporus animal movement map earth geography",
+    camera: { yaw: 0.1, pitch: 0.85, roll: 0, distance: 3.2 },
+  },
+  {
     id: "earthquakes",
     label: "Earthquakes",
     category: "geo",

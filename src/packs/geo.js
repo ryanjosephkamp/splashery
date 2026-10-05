@@ -24,6 +24,9 @@
 //   living-city   a kit-built city: cars go round their blocks, a train runs
 //                 on its elevated loop, and the tap turns day to night (the
 //                 windows light up one by one) and back
+//   stork-migration  30 white storks tagged in Germany fly their real GPS
+//                 tracks to Africa (fall 2013, Movebank, CC0); the tap plays
+//                 July to October, each bird drawing its trail
 //   earthquakes   the USGS feed, live when the toy opens or its plaque is
 //                 tapped (a dated snapshot ships for when it can't be reached),
 //                 on a NOAA ETOPO1 relief globe; the tap plays the quakes in
@@ -34,6 +37,15 @@ import { evenBox, evenCylinder, evenEllipsoid } from "./even.js";
 import { loadGeo, geoLoaded, readText } from "../geo/data.js";
 import { inked } from "../font.js";
 import { frame, addBlock, hill } from "../geo/terrain.js";
+
+// Tokens that travel far (the storks) ask for a sort of the tokens the same way.
+function resortWhileMoving(out, d, s, moving, step = 0.25) {
+  const slot = moving ? Math.floor(s / step) : -1;
+  if (slot !== d.tokSlot) {
+    if (moving || d.tokSlot !== undefined) out.resort = true;
+    d.tokSlot = slot;
+  }
+}
 
 // Splats sort where they were built: a part that moves far (rising water)
 // asks for a sort a few times while it moves and once when it stops (as the
@@ -285,6 +297,7 @@ const ST_HELENS = {
       });
     }
     out.tokens = tokens;
+    resortWhileMoving(out, d, s, going);
   },
   build(k) {
     const g = geoLoaded(MSH_FILE);
@@ -1056,6 +1069,7 @@ const LIVING_CITY = {
       });
     });
     out.tokens = tokens;
+    resortWhileMoving(out, d, t, true, 0.3);
   },
   build(k) {
     const half = (LC_N * LC_BLOCK) / 2;
@@ -1197,6 +1211,165 @@ const LIVING_CITY = {
     }
     k.data = { cars, train, trainPath };
     k.reach([0, 0.8, 0]);
+  },
+};
+
+// ---- Migration: white storks -----------------------------------------------------------------
+
+const SM_FILE = "assets/toys/stork-migration/migration.bin";
+const SM_T = 14;
+const SM_FLY = 0.035; // flying height above the map (recipe units)
+
+function birdAt(pts, hour) {
+  if (hour <= pts[0][0]) return { lon: pts[0][1], lat: pts[0][2], i: 0 };
+  const last = pts[pts.length - 1];
+  if (hour >= last[0]) return { lon: last[1], lat: last[2], i: pts.length - 1 };
+  let lo = 0;
+  let hi = pts.length - 1;
+  while (hi - lo > 1) {
+    const mid = (lo + hi) >> 1;
+    if (pts[mid][0] <= hour) lo = mid;
+    else hi = mid;
+  }
+  const a = pts[lo];
+  const b = pts[hi];
+  const f = (hour - a[0]) / Math.max(1, b[0] - a[0]);
+  return { lon: a[1] + (b[1] - a[1]) * f, lat: a[2] + (b[2] - a[2]) * f, i: lo };
+}
+
+const STORK_MIGRATION = {
+  alive: false,
+  density: 1.3,
+  credits: [
+    {
+      label: "Storks",
+      title: "Data from: The challenges of the first migration (white storks, Rotics et al. 2016)",
+      source: "https://doi.org/10.5441/001/1.hn1bd23k",
+      author: "S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers, A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan (Movebank Data Repository)",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    },
+    CREDIT_ETOPO,
+  ],
+  controls: [{ key: "fly", label: "Fly", type: "pulse", ease: SM_T }],
+  action: { key: "fly", label: "Play the fall migration" },
+  async prepare() {
+    await loadGeo(SM_FILE);
+  },
+  drive(t, c, out, info) {
+    const d = info.data;
+    const s = c.fly > 0 ? (1 - c.fly) * SM_T : 0;
+    // 0.4 s at the nests, 12 s of migration, then a beat at the end before
+    // everyone is home again for the next tap.
+    const f = c.fly > 0 ? clamp((s - 0.4) / 12, 0, 1) : 0;
+    const hour = f * d.hours;
+    out.morph = [f > 0 && f < 1 ? f : c.fly > 0 && s > 12.4 ? 1 : 0, 0, 0, 0];
+    out.tokens = d.birds.map((b) => {
+      const q = birdAt(b.pts, hour);
+      const n = b.pts[Math.min(b.pts.length - 1, q.i + 1)];
+      const p = d.at(q.lon, q.lat);
+      const ahead = d.at(n[1], n[2]);
+      const head = Math.atan2(ahead[0] - p[0], ahead[2] - p[2]);
+      return {
+        base: b.base,
+        offset: [p[0] - b.base[0], 0, p[2] - b.base[2]],
+        quat: quatAxisAngle([0, 1, 0], Number.isFinite(head) && Math.hypot(ahead[0] - p[0], ahead[2] - p[2]) > 1e-4 ? head : 0), // prettier-ignore
+      };
+    });
+    resortWhileMoving(out, d, s, c.fly > 0);
+  },
+  build(k) {
+    const g = geoLoaded(SM_FILE);
+    const M = g.meta;
+    const H = g.layer("height");
+    const F = frame({ span: M.span, exag: 45, lo: -500, depth: 0.03 });
+    const [w, s, e, n] = M.map;
+    const at = (lon, lat) => {
+      const u = (lon - w) / (e - w);
+      const v = (n - lat) / (n - s);
+      return [F.x(u), Math.max(F.y(0), F.y(H.sample(u, v))) + SM_FLY, F.z(v)];
+    };
+    addBlock(k, {
+      F,
+      height: (u, v) => Math.max(-500, H.sample(u, v)),
+      share: 0.66,
+      color: (c) => {
+        const m = H.sample(c.u, c.v);
+        let col;
+        if (m < 0) col = mix("#1d3f6e", "#3e7cb0", smoothstep(-3000, -50, m));
+        else col = ramp(["#6b8f4e", "#a8a368", "#c2a477", "#9c8166", "#e8e4dc"], clamp(m / 3500, 0, 1));
+        // The Sahara and the Arabian desert read as sand south of 31° N.
+        const lat = n - c.v * (n - s);
+        if (m >= 0 && lat < 31 && lat > 14) col = mix(col, "#d9b98a", 0.7 * smoothstep(14, 20, lat));
+        return shade(col, 0.85 * hill(c.n, 0.4) + 0.1);
+      },
+      side: () => "#5a5248",
+    });
+    // Trails: a line per bird along its fixes, appearing behind it as the
+    // migration plays (the channel is the season's fraction).
+    const palette = ["#ff8a3d", "#ffd23a", "#ff5a7a", "#7fd1ff", "#b78bff", "#7dff9a"];
+    const birds = M.birds.map((b, bi) => {
+      const col = palette[bi % palette.length];
+      const pts = b.pts;
+      k.cloud({ share: 0.008, size: 1 }, (rand) => {
+        const x = rand() * (pts.length - 1);
+        const i = Math.floor(x);
+        const a = pts[i];
+        const bb = pts[Math.min(pts.length - 1, i + 1)];
+        const f = x - i;
+        const lon = a[1] + (bb[1] - a[1]) * f;
+        const lat = a[2] + (bb[2] - a[2]) * f;
+        const hour = a[0] + (bb[0] - a[0]) * f;
+        const p = at(lon, lat);
+        p[1] -= SM_FLY * 0.8;
+        return { p, color: col, size: 0.55, opacity: 0.9, kind: "fade", channel: 0, params: [hour / M.hours + 0.002, -0.004], pattern: false }; // prettier-ignore
+      });
+      // The stork: white body and wings with black flight feathers, a red
+      // bill, built facing +Z at its nest.
+      const base = at(pts[0][1], pts[0][2]);
+      k.cloud({ share: 0.0025, size: 1 }, (rand) => {
+        const r = rand();
+        let lp;
+        let color;
+        if (r < 0.35) {
+          lp = [(rand() - 0.5) * 0.008, (rand() - 0.5) * 0.006, (rand() - 0.5) * 0.026];
+          color = "#f3f1ec";
+        } else if (r < 0.92) {
+          const side = rand() < 0.5 ? -1 : 1;
+          const span = rand();
+          lp = [side * span * 0.032, 0.002 * span, (rand() - 0.5) * 0.012 - 0.002 * span];
+          color = span > 0.55 ? "#1f1f22" : "#f3f1ec";
+        } else {
+          lp = [0, 0, 0.013 + rand() * 0.008];
+          color = "#e0452c";
+        }
+        return { p: [base[0] + lp[0], base[1] + lp[1], base[2] + lp[2]], color, size: 0.6, kind: "token", params: [bi, 0], pattern: false }; // prettier-ignore
+      });
+      return { pts, base };
+    });
+    // The months along the front, with a bar that lights as time passes.
+    const z = F.z(1) + 0.08;
+    const x0 = F.x(0);
+    const x1 = F.x(1);
+    const start = new Date(M.start);
+    const months = [];
+    for (let mth = start.getUTCMonth(); mth <= start.getUTCMonth() + 4; mth++) {
+      const d0 = Date.UTC(start.getUTCFullYear(), mth, 1);
+      const fx = (d0 - start.getTime()) / 3.6e6 / M.hours;
+      if (fx > -0.02 && fx < 1) months.push([Math.max(0, fx), MONTHS[mth % 12]]);
+    }
+    k.add(k.param((u, v) => [x0 + (x1 - x0) * u, F.bottom - 0.01, z + v * 0.03], { grid: 24 }), { even: true, share: 0.01, color: "#2d3238", kind: "band", channel: 0, params: (c) => [c.u, 0.015], pattern: false }); // prettier-ignore
+    const fx = 0.019;
+    for (const [mf, word] of months) {
+      const mx = x0 + (x1 - x0) * mf;
+      k.add(k.param((u, v) => [mx + u * 0.34, F.bottom - 0.01, z + 0.045 + v * 0.135], { grid: 16 }), {
+        even: true,
+        share: 0.02,
+        flat: 0.1,
+        color: (c) => (inked([word], (c.p[0] - mx) / fx, (c.p[2] - z - 0.045) / fx) ? { c: [0.9, 0.9, 0.86], keep: true, size: 0.6 } : null), // prettier-ignore
+      });
+    }
+    k.data = { birds, hours: M.hours, at };
   },
 };
 
@@ -1451,5 +1624,6 @@ export const RECIPES = {
   hurricane: HURRICANE,
   "relief-map": RELIEF_MAP,
   "living-city": LIVING_CITY,
+  "stork-migration": STORK_MIGRATION,
   earthquakes: EARTHQUAKES,
 };
