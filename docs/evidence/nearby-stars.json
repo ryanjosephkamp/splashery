@@ -16,7 +16,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:223",
+      "test": "tests/sp2.spec.mjs:247",
       "note": ""
     },
     {
@@ -32,8 +32,8 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:223",
-      "note": "The other distances are checked against the catalog's own parallaxes in the test."
+      "test": "tests/sp2.spec.mjs:247",
+      "note": ""
     },
     {
       "claim": "Gaia cannot measure the brightest stars, so those brighter than magnitude 3.5 that GCNS lacks come from Hipparcos through the HYG database.",
@@ -54,7 +54,7 @@
     {
       "claim": "A star's color follows its temperature, from its measured color.",
       "how": "Temperatures interpolated from Gaia's BP − RP (or B − V for HYG stars) along Mamajek's table of mean dwarf colors; each temperature is drawn as a blackbody's color.",
-      "where": "src/packs/space-r2.js:490",
+      "where": "src/packs/space-r2.js:528",
       "sources": [
         {
           "title": "A Modern Mean Dwarf Stellar Color and Effective Temperature Sequence",
@@ -64,7 +64,7 @@
         }
       ],
       "verdict": "close",
-      "test": "tests/sp2.spec.mjs:223",
+      "test": "tests/sp2.spec.mjs:247",
       "note": "The table is for main-sequence dwarfs; giants (Arcturus, Pollux) and white dwarfs get the temperature of a dwarf of the same color, which is close for color but not exact."
     }
   ],

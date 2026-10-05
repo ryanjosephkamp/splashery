@@ -533,6 +533,14 @@ feature (`assets/toys/real-worlds/`). Feature positions are from the
   [Black Marble 2016](https://earthobservatory.nasa.gov/features/NightLights) (NASA Earth
   Observatory, Joshua Stevens and Miguel Román). Public domain.
 
+- The big moons, from the USGS Astrogeology Science Center's global mosaics (NASA, JPL; public
+  domain): Io (Galileo SSI and Voyager color merge, 1 km), Europa (Voyager and Galileo SSI, 500 m),
+  Ganymede (Voyager and Galileo SSI color, 1.4 km), Callisto (Voyager and Galileo SSI, 1 km) and
+  Titan (Cassini ISS, 4 km; Space Science Institute).
+- Pluto, Ceres and Vesta, from the USGS Astrogeology Science Center's maps (public domain): Pluto's
+  New Horizons LORRI and MVIC mosaic and DEM (NASA, Johns Hopkins APL, Southwest Research
+  Institute), and Ceres's and Vesta's Dawn Framing Camera mosaics and DTMs (NASA, JPL, MPS, DLR,
+  IDA).
 - Stars near the Sun: the
   [Gaia Catalogue of Nearby Stars](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/649/A6)
   (Gaia Collaboration, Smart et al. 2021, A&A 649, A6; ESA/Gaia/DPAC),

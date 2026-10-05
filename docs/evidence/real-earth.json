@@ -16,7 +16,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:145",
+      "test": "tests/sp2.spec.mjs:164",
       "note": ""
     },
     {
@@ -32,7 +32,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:145",
+      "test": "tests/sp2.spec.mjs:164",
       "note": ""
     },
     {
@@ -48,7 +48,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:145",
+      "test": "tests/sp2.spec.mjs:164",
       "note": ""
     },
     {
@@ -80,7 +80,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:145",
+      "test": "tests/sp2.spec.mjs:164",
       "note": ""
     },
     {
@@ -96,7 +96,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:145",
+      "test": "tests/sp2.spec.mjs:164",
       "note": ""
     },
     {
@@ -112,12 +112,12 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sp2.spec.mjs:145",
+      "test": "tests/sp2.spec.mjs:164",
       "note": ""
     }
   ],
   "simplified": [
-    "The relief is exaggerated (ten or twenty times by default, chosen and labeled in the Toy tab); close up during a fly it eases to at most twice its height. True height is one choice away.",
+    "The relief is exaggerated by default (ten or twenty times; Pluto, Ceres and Vesta are drawn at true height), as chosen and labeled in the Toy tab; close up during a fly it eases to at most twice its height. True height is one choice away.",
     "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
     "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
     "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",

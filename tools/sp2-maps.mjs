@@ -4,7 +4,7 @@
 // their pages are in src/space/worlds.js and tools/assets.json), and writes
 // small equirectangular maps for the toys:
 //
-//   assets/toys/real-worlds/<world>-color.jpg      2048 × 1024 (or less), east up to the right
+//   assets/toys/real-worlds/<world>-color.jpg      1536 × 768, east to the right
 //   assets/toys/real-worlds/<world>-height.bin     1024 × 512 heights (the SPH1 format below)
 //   assets/toys/real-worlds/<world>-night.jpg      1024 × 512 lights at night (Earth)
 //   assets/toys/real-worlds/<world>-<feature>-color.jpg / -height.bin
@@ -314,8 +314,8 @@ for (const world of WORLDS) {
   console.log(`${world.id}:`);
   if (!patchesOnly) {
     const c = await source(m.color);
-    const cw = m.colorSize?.[0] ?? 2048;
-    const chh = m.colorSize?.[1] ?? 1024;
+    const cw = m.colorSize?.[0] ?? 1536;
+    const chh = m.colorSize?.[1] ?? 768;
     const color = await resample(c, { w: cw, h: chh, ch: 3 });
     fillGaps(color);
     const n = writeColor(path.join(OUT, `${world.id}-color.jpg`), color, m.color);

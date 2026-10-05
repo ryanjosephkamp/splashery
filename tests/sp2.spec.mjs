@@ -90,6 +90,20 @@ const EXPECT = {
   // "A depth of over a mile": from the river to the highest rim within 14 km.
   "earth/grand-canyon": { mound: 1400, near: 14 },
   "earth/hawaii": { peak: 4000, near: 50 },
+  // Worlds without elevation maps: the feature is darker or brighter than
+  // the ground round it on the map.
+  // (Loki's dark lava lake rings a bright island.)
+  "io/loki": { tone: "dark", inner: 0.6, outer: 2 },
+  "europa/pwyll": { tone: "dark" },
+  "ganymede/osiris": { tone: "bright" },
+  "ganymede/tros": { tone: "bright", inner: 0.3, outer: 4 },
+  "callisto/valhalla": { tone: "bright" },
+  "titan/xanadu": { tone: "bright" },
+  "titan/kraken-mare": { tone: "dark" },
+  "pluto/sputnik-planitia": { tone: "bright", below: 0 },
+  "ceres/occator": { bowl: 2000 },
+  "ceres/ahuna-mons": { mound: 3000, near: 15 },
+  "vesta/rheasilvia": { below: -5000 },
 };
 
 test.describe("lane Space r2: real worlds", () => {
@@ -170,6 +184,16 @@ test.describe("lane Space r2: real worlds", () => {
           expect(rimMean - at, `${f.id} depth`).toBeGreaterThan(e.bowl);
         }
         if (e.below !== undefined) expect(at, `${f.id} below`).toBeLessThan(e.below);
+        if (e.tone) {
+          const lum = (lat, lon) => {
+            const c = W.color(lat, lon);
+            return c[0] + c[1] + c[2];
+          };
+          const inner = ringTone(W, f, e.inner ?? 0.15, lum);
+          const outer = ringTone(W, f, e.outer ?? 1.6, lum);
+          if (e.tone === "dark") expect(inner, `${f.id} dark`).toBeLessThan(outer * 0.9);
+          else expect(inner, `${f.id} bright`).toBeGreaterThan(outer * 1.1);
+        }
       }
     });
   }
@@ -371,6 +395,21 @@ test.describe("lane Space r2: real worlds", () => {
       }
     });
 });
+
+// The mean of a value round a feature at `frac` times its radius.
+function ringTone(W, f, frac, value) {
+  const r = ((f.km / 2) * frac) / W.def.radiusKm;
+  const c = dirOf(f.lat, f.lon);
+  const east = [Math.cos(f.lon * DEG), 0, -Math.sin(f.lon * DEG)];
+  const north = [c[1] * east[2] - c[2] * east[1], c[2] * east[0] - c[0] * east[2], c[0] * east[1] - c[1] * east[0]]; // prettier-ignore
+  let sum = 0;
+  for (let k = 0; k < 64; k++) {
+    const a = (k / 64) * Math.PI * 2;
+    const v = [0, 1, 2].map((i) => c[i] * Math.cos(r) + Math.sin(r) * (Math.cos(a) * east[i] + Math.sin(a) * north[i])); // prettier-ignore
+    sum += value(Math.asin(v[1]) / DEG, Math.atan2(v[0], v[2]) / DEG);
+  }
+  return sum / 64;
+}
 
 // The heights round a feature at `f` times its radius (its listed size).
 function ring(W, f, frac) {

@@ -2505,6 +2505,20 @@
       "effect": "NASA's 3D model of the Saturn V as splats. A tap fires its stages in Apollo 11's order, much faster: the S-IC burns and falls away, the interstage ring drops, the escape tower flies off, the S-II burns and falls away, the S-IVB burns, and the spacecraft pulls away from it; then it comes back together (12 s).",
       "sound": "A low rumble as the engines light, and a thud at each separation.",
       "improved": "Space r2: new toy (labs) from NASA 3D Resources, sampled with the Studio's model-to-splats code; the pieces are cut where the model's width steps."
+    },
+    "real-moons": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more planets\", photoreal from NASA data; lane Space r2; labs only).",
+      "effect": "Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back.",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice."
+    },
+    "real-small-worlds": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more planets\", photoreal from NASA data; lane Space r2; labs only).",
+      "effect": "Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice."
     }
   }
 }

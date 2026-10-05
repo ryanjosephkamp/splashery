@@ -2028,6 +2028,18 @@ export const TOY_HELP = {
     about:
       "The Saturn V, the rocket that sent astronauts to the Moon from 1968 to 1972, as splats from NASA's 3D model. At 110.6 m (363 feet) it is still among the tallest rockets ever flown. It had three stages: the S-IC first stage with five F-1 engines, the S-II second stage with five J-2 engines, and the S-IVB third stage with one J-2; on top rode the Apollo spacecraft under its launch escape tower.\n\nTap to stage it in the order of Apollo 11's flight, much faster than real: the first stage burns out and falls away at 2 minutes 40 seconds, the ring between the first and second stages drops at about 3 minutes 12 seconds, and the escape tower is thrown off just after; the second stage falls away at 9 minutes 8 seconds; the third stage takes the spacecraft into orbit and on toward the Moon, and the spacecraft leaves it about three and a half hours after launch. The flames are drawn simply. The model paints a band of the first stage navy blue; the real stage was white there, so it is drawn white.",
   },
+  "real-moons": {
+    howTo:
+      "Pick a moon in the Toy tab. Tap to fly close to one of its named places and back. Move the Sun slider to light it from another side.",
+    about:
+      "Five of the big moons of the outer planets, from the maps the USGS made of the pictures taken by the Voyager, Galileo and Cassini spacecraft: Io, with its volcanoes and lakes of lava; Europa, a shell of cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; Callisto, covered in craters; and Saturn's moon Titan, whose lakes and seas are liquid methane and ethane.\n\nNo spacecraft has mapped the heights of these moons all the way round, so their ground is drawn smooth: the light and dark you see are the moons' own colors (gray for the maps made in black and white). Titan's thick orange haze hides its surface from ordinary cameras; its map was taken through the haze in near-infrared light, and the haze is left out. Patches of the maps with different lighting show as seams. Each moon keeps one face toward its planet, so its day is as long as its orbit; it turns here a day each second.",
+  },
+  "real-small-worlds": {
+    howTo:
+      "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly close to one of its named places and back.",
+    about:
+      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons spacecraft as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn spacecraft, which orbited each of them. Each splat sits at its map's height above a sphere, so Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest of its map, and of its heights, is filled in smoothly from the edges and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright deposits of salt; Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at their true heights by default; pick ×5 or more in the Toy tab to exaggerate the relief.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------

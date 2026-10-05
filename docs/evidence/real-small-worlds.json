@@ -1,0 +1,210 @@
+{
+  "toy": "real-small-worlds",
+  "checked": "2026-10-05",
+  "summary": "3 worlds drawn from real maps (Pluto, Ceres, Vesta): every splat has its place's measured color and, where an elevation map exists, its measured height, and each named feature is where the planetary gazetteer puts it. The turning speed and the lighting are simplified, and labeled.",
+  "claims": [
+    {
+      "claim": "The map and elevation is Pluto New Horizons LORRI MVIC Global Mosaic and DEM 300m.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Pluto New Horizons LORRI MVIC Global Mosaic and DEM 300m",
+          "publisher": "NASA, Johns Hopkins APL, Southwest Research Institute, New Horizons mission; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Pluto turns once every 153.29 hours, backward (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Pluto Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/plutofact.html",
+          "says": "Sidereal rotation period (days) 6.3872 (retrograde)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Sputnik Planitia, a plain of nitrogen ice (the heart) at 19.51°, 178.69° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/15669",
+          "says": "Sputnik Planitia: diameter 1492 km, center latitude 19.51, center longitude 178.69 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Wright Mons, perhaps an ice volcano at -21.36°, 173.24° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/15835",
+          "says": "Wright Mons: diameter 165 km, center latitude -21.36, center longitude 173.24 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "The map and elevation is Ceres Dawn FC global mosaic (DLR, 2015) and HAMO DTM (DLR, 2016).",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Ceres Dawn FC global mosaic (DLR, 2015) and HAMO DTM (DLR, 2016)",
+          "publisher": "NASA, JPL, MPS, DLR, IDA, Dawn mission; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Ceres turns once every 9.074 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Ceres (dwarf planet)",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://en.wikipedia.org/wiki/Ceres_(dwarf_planet)",
+          "says": "Rotation period 9.074170 h."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Occator crater and its bright salt at 19.82°, -120.67° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/15341",
+          "says": "Occator: diameter 92 km, center latitude 19.82, center longitude -120.67 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Ahuna Mons, a lone mountain of ice at -10.48°, -43.8° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/15409",
+          "says": "Ahuna Mons: diameter 20 km, center latitude -10.48, center longitude -43.8 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "The map and elevation is Vesta Dawn FC HAMO Global Mosaic and DTM.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Vesta Dawn FC HAMO Global Mosaic and DTM",
+          "publisher": "NASA, JPL, MPS, DLR, IDA, Dawn mission; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/vesta_dawn_fc_hamo_global_dtm_93m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Vesta turns once every 5.342 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "4 Vesta",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://en.wikipedia.org/wiki/4_Vesta",
+          "says": "Rotation period 5.342 h."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Rheasilvia, a basin almost as wide as Vesta at -71.95°, 86.3° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/14886",
+          "says": "Rheasilvia: diameter 450 km, center latitude -71.95, center longitude 86.3 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Marcia crater at 8.98°, -20.45° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/14882",
+          "says": "Marcia: diameter 68 km, center latitude 8.98, center longitude -20.45 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The relief is exaggerated by default (ten or twenty times; Pluto, Ceres and Vesta are drawn at true height), as chosen and labeled in the Toy tab; close up during a fly it eases to at most twice its height. True height is one choice away.",
+    "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
+    "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
+    "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",
+    "The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the patches round the named features are sharper.",
+    "New Horizons saw one side of Pluto up close; the rest of its map and heights are filled in smoothly from the edges.",
+    "Ceres's heights are measured from a sphere of 470 km, so its real flattened shape shows.",
+    "Vesta's heights are measured from a sphere of 255 km, so its real lumpy shape shows."
+  ],
+  "fixes": []
+}

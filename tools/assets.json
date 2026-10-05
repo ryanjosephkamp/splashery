@@ -2316,6 +2316,139 @@
       "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
     },
     {
+      "id": "io-color-map",
+      "files": [
+        "assets/toys/real-worlds/io-color.jpg",
+        "assets/toys/real-worlds/io-loki-color.jpg",
+        "assets/toys/real-worlds/io-pele-color.jpg",
+        "assets/toys/real-worlds/io-prometheus-color.jpg"
+      ],
+      "toy": "real-moons",
+      "name": "Io Galileo SSI / Voyager Global Mosaic, color merge, 1 km",
+      "author": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/io_galileo_ssi_global_color_merge_mosaic_1km",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "europa-map",
+      "files": [
+        "assets/toys/real-worlds/europa-color.jpg",
+        "assets/toys/real-worlds/europa-conamara-color.jpg",
+        "assets/toys/real-worlds/europa-pwyll-color.jpg",
+        "assets/toys/real-worlds/europa-tyre-color.jpg"
+      ],
+      "toy": "real-moons",
+      "name": "Europa Voyager / Galileo SSI Global Mosaic 500m",
+      "author": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "ganymede-color-map",
+      "files": [
+        "assets/toys/real-worlds/ganymede-color.jpg",
+        "assets/toys/real-worlds/ganymede-galileo-regio-color.jpg",
+        "assets/toys/real-worlds/ganymede-osiris-color.jpg",
+        "assets/toys/real-worlds/ganymede-tros-color.jpg"
+      ],
+      "toy": "real-moons",
+      "name": "Ganymede Voyager / Galileo SSI Global Color Mosaic 1435m",
+      "author": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "callisto-map",
+      "files": [
+        "assets/toys/real-worlds/callisto-asgard-color.jpg",
+        "assets/toys/real-worlds/callisto-color.jpg",
+        "assets/toys/real-worlds/callisto-valhalla-color.jpg"
+      ],
+      "toy": "real-moons",
+      "name": "Callisto Voyager / Galileo SSI Global Mosaic 1km",
+      "author": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/callisto_voyager_galileo_ssi_global_mosaic_1km",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "titan-map",
+      "files": [
+        "assets/toys/real-worlds/titan-color.jpg",
+        "assets/toys/real-worlds/titan-kraken-mare-color.jpg",
+        "assets/toys/real-worlds/titan-selk-color.jpg",
+        "assets/toys/real-worlds/titan-xanadu-color.jpg"
+      ],
+      "toy": "real-moons",
+      "name": "Titan Cassini ISS Global Mosaic 4km",
+      "author": "NASA, JPL, Space Science Institute, Cassini mission; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/titan_cassini_iss_global_mosaic_4005m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "pluto-map-and-elevation",
+      "files": [
+        "assets/toys/real-worlds/pluto-color.jpg",
+        "assets/toys/real-worlds/pluto-height.bin",
+        "assets/toys/real-worlds/pluto-sputnik-planitia-color.jpg",
+        "assets/toys/real-worlds/pluto-sputnik-planitia-height.bin",
+        "assets/toys/real-worlds/pluto-wright-mons-color.jpg",
+        "assets/toys/real-worlds/pluto-wright-mons-height.bin"
+      ],
+      "toy": "real-small-worlds",
+      "name": "Pluto New Horizons LORRI MVIC Global Mosaic and DEM 300m",
+      "author": "NASA, Johns Hopkins APL, Southwest Research Institute, New Horizons mission; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "ceres-map-and-elevation",
+      "files": [
+        "assets/toys/real-worlds/ceres-ahuna-mons-color.jpg",
+        "assets/toys/real-worlds/ceres-ahuna-mons-height.bin",
+        "assets/toys/real-worlds/ceres-color.jpg",
+        "assets/toys/real-worlds/ceres-height.bin",
+        "assets/toys/real-worlds/ceres-occator-color.jpg",
+        "assets/toys/real-worlds/ceres-occator-height.bin"
+      ],
+      "toy": "real-small-worlds",
+      "name": "Ceres Dawn FC global mosaic (DLR, 2015) and HAMO DTM (DLR, 2016)",
+      "author": "NASA, JPL, MPS, DLR, IDA, Dawn mission; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "vesta-map-and-elevation",
+      "files": [
+        "assets/toys/real-worlds/vesta-color.jpg",
+        "assets/toys/real-worlds/vesta-height.bin",
+        "assets/toys/real-worlds/vesta-marcia-color.jpg",
+        "assets/toys/real-worlds/vesta-marcia-height.bin",
+        "assets/toys/real-worlds/vesta-rheasilvia-color.jpg",
+        "assets/toys/real-worlds/vesta-rheasilvia-height.bin"
+      ],
+      "toy": "real-small-worlds",
+      "name": "Vesta Dawn FC HAMO Global Mosaic and DTM",
+      "author": "NASA, JPL, MPS, DLR, IDA, Dawn mission; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/vesta_dawn_fc_hamo_global_dtm_93m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
       "id": "nearby-stars",
       "files": ["assets/toys/nearby-stars/stars.json"],
       "toy": "nearby-stars",

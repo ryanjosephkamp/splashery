@@ -59,7 +59,7 @@ the small worlds (Pluto, Ceres, Vesta), then items 2 (stars and galaxies) and 3 
 - **How a real world is built.** `tools/sp2-maps.mjs` streams each world's color and elevation maps
   from NASA, USGS and NOAA (big uncompressed GeoTIFFs are read a block of rows at a time with HTTP
   range requests, `tools/sp2-tiff.mjs`; nothing big is stored) and writes small maps in
-  `assets/toys/real-worlds/`: a 2048 × 1024 color JPEG, a 1024 × 512 height file (SPH1: int16,
+  `assets/toys/real-worlds/`: a 1536 × 768 color JPEG, a 1024 × 512 height file (SPH1: int16,
   plane-predicted, deflated; `src/space/maps.js` reads it with `DecompressionStream`), and a sharper
   512² patch of both round each named feature. The recipe (`src/packs/space-r2.js`) lays splats on a
   golden spiral over the globe and denser on each patch, at true height, each a disc lying on its

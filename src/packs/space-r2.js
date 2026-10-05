@@ -94,20 +94,41 @@ const labelText = (f) =>
 
 // ---- The recipe for a world ---------------------------------------------------------------
 
-function worldRecipe(id, extra = {}) {
-  const def = worldById(id);
-  const features = def.features || [];
+function worldRecipe(ids, extra = {}) {
+  // One world, or a choice of several (the Toy tab's World).
+  const list = [].concat(ids);
+  const pick = (o) => (list.includes(o?.world) ? o.world : list[0]);
+  const def = worldById(list[0]);
+  const relief = list.some((id) => worldById(id).maps.height);
   return {
     alive: true,
     turntable: false,
     options: [
-      {
-        key: "relief",
-        label: "Relief",
-        type: "select",
-        default: extra.relief ?? "10",
-        choices: RELIEF,
-      },
+      ...(list.length > 1
+        ? [
+            {
+              key: "world",
+              label: "World",
+              type: "select",
+              default: list[0],
+              choices: list.map((id) => ({
+                id,
+                label: worldById(id).name.replace(/^the /, "The "),
+              })),
+            },
+          ]
+        : []),
+      ...(relief
+        ? [
+            {
+              key: "relief",
+              label: "Relief",
+              type: "select",
+              default: extra.relief ?? "10",
+              choices: RELIEF,
+            },
+          ]
+        : []),
       {
         key: "turn",
         label: "Turning",
@@ -122,18 +143,21 @@ function worldRecipe(id, extra = {}) {
       { key: "fly", label: "Fly to a feature", type: "pulse", ease: FLY },
     ],
     action: { key: "fly", label: "Fly to a feature and back" },
-    note: `${extra.note || ""} Real elevation and color maps; the relief and the turning are scaled as chosen above, and the sun can be moved.`.trim(), // prettier-ignore
-    credits: def.credits,
+    note: `${extra.note || ""} ${relief ? "Real elevation and color maps; the relief and the turning are scaled as chosen above" : "Real maps (no elevation map exists for these, so the ground is smooth); the turning is scaled as chosen above"}, and the sun can be moved.`.trim(), // prettier-ignore
+    credits: list.flatMap((id) => worldById(id).credits.map((c) => (list.length > 1 ? { ...c, label: `${worldById(id).name}: ${c.label.toLowerCase()}` } : c))), // prettier-ignore
     // A double-tap isn't taken (the view resets as on other toys); having
     // focus lets the drive glide the view to a feature (out.view).
     focus: () => false,
-    async prepare() {
+    async prepare(o) {
+      const id = pick(o);
       if (!LOADED.has(id)) LOADED.set(id, await loadWorld(id));
     },
     gpuField(options, fit) {
+      const id = pick(options);
+      const d = worldById(id);
       return worldModifier({
         hstep: (BUILT.get(id)?.hstep ?? 1e-5) * (fit?.scale ?? 1),
-        air: def.atmosphere ? hex(def.atmosphere.color) : [0.6, 0.75, 1],
+        air: d.atmosphere ? hex(d.atmosphere.color) : [0.6, 0.75, 1],
         night: hex(extra.nightColor || "#ffc070"),
       });
     },
@@ -142,11 +166,13 @@ function worldRecipe(id, extra = {}) {
       const data = info?.data || {};
       const dt = m.t === undefined ? 0 : Math.max(0, Math.min(0.25, t - m.t));
       m.t = t;
-      m.spin ??= 0;
+      // (It starts with its best-known face toward the viewer.)
+      m.spin ??= -(data.face ?? 0) * DEG;
       const turn = TURNS[data.turn] || TURNS.hour;
       const flying = c.fly > 0;
       // The world's own turn (prograde: east toward the viewer's right).
-      if (!flying) m.spin += (dt * turn.rate * TAU) / (def.dayHours * 3600);
+      const day = data.dayHours || def.dayHours;
+      if (!flying) m.spin += (dt * turn.rate * TAU) / (day * 3600);
       let spin = m.spin;
       let tilt = 0;
       let label = -1;
@@ -196,9 +222,10 @@ function worldRecipe(id, extra = {}) {
       // hid a feature's name under the ground close up, October 5, 2026.)
     },
     build(k, o) {
+      const id = pick(o);
       const W = LOADED.get(id);
-      if (!W) throw new Error(`The maps of ${def.name} haven't loaded.`);
-      buildWorld(k, W, o, extra);
+      if (!W) throw new Error(`The maps of ${worldById(id).name} haven't loaded.`);
+      buildWorld(k, W, o, { ...extra, ...(extra.per?.[id] || {}) });
     },
   };
 }
@@ -386,7 +413,9 @@ function buildWorld(k, W, o, extra) {
     };
   });
   k.data = {
-    relief: E,
+    dayHours: def.dayHours,
+    face: def.face ?? 0,
+    relief: W.def.maps.height ? E : 1,
     features: flyTo,
     turn: o.turn,
     ambient: extra.ambient ?? 0.03,
@@ -467,6 +496,17 @@ export const RECIPES = {
     relief: "10",
     turn: "day",
     note: "Venus's hidden surface from NASA's Magellan radar: radar brightness tinted orange, not what an eye would see.",
+  }),
+  "real-moons": worldRecipe(["io", "europa", "ganymede", "callisto", "titan"], {
+    turn: "day",
+    note: "The big moons of Jupiter and Saturn, from the Voyager, Galileo and Cassini spacecraft.",
+    per: { io: { bright: 1.25 }, europa: { bright: 1.05 }, ganymede: { bright: 1.15 }, callisto: { bright: 1.5 }, titan: { bright: 1.2 } }, // prettier-ignore
+  }),
+  "real-small-worlds": worldRecipe(["pluto", "ceres", "vesta"], {
+    relief: "1",
+    turn: "hour",
+    note: "Pluto from New Horizons, and Ceres and Vesta from Dawn.",
+    per: { pluto: { bright: 1.1 }, ceres: { bright: 1.6 }, vesta: { bright: 1.3 } },
   }),
 };
 

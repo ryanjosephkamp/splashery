@@ -2789,6 +2789,8 @@ export const TOY_SOUNDS = {
   "nearby-stars": { voice: "breath", f: 420, to: 0.6, decay: 2.0, vol: 0.28 },
   "real-galaxies": { voice: "breath", f: 320, to: 0.85, decay: 2.8, vol: 0.3 },
   "saturn-v": { voice: "rumble", f: 52, rate: 4, decay: 2.4, vol: 0.85 },
+  "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
+  "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).
