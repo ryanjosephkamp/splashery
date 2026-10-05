@@ -121,6 +121,16 @@ function picture(k, kind) {
       color: (c) => lit("#3a73e6", c.n),
       weight: 3,
     });
+  } else if (kind === "song") {
+    for (const y of [-0.32, 0, 0.32]) box(2.4, 0.006, 0.006, [0.4, y - 0.035, 0], "#cfd6ff");
+    const notes = [[0.1, 0, "#ffd166"], [0.4, 0.32, "#7bdff2"], [0.7, -0.32, "#ff7a59"], [1.0, 0, "#ffd166"], [1.3, 0.32, "#7bdff2"]]; // prettier-ignore
+    for (const [x, y, c] of notes)
+      k.add(k.sphere(0.045), { pos: [x, y, 0], even: true, color: c, weight: 4 });
+    k.add(k.roundedBox(0.12, 0.03, 0.07, 4), {
+      pos: [-0.55, 0, 0],
+      even: true,
+      color: (c) => lit("#353a4d", c.n),
+    });
   } else if (kind === "net") {
     // The cube's net of tiles, and a string of green beads.
     const A = 0.5;
@@ -715,6 +725,68 @@ export const RECIPES = {
         short: "Space or tap to jump · V raises the photo into 3D",
       },
       create: async (api) => (await import("./arcade-dash.js")).createDash(api),
+    },
+  },
+  "note-rider": {
+    turntable: false,
+    density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
+    options: [
+      {
+        key: "tune",
+        label: "Tune",
+        type: "select",
+        default: "ode",
+        choices: [
+          { id: "ode", label: "Ode to Joy" },
+          { id: "twinkle", label: "Twinkle, Twinkle" },
+          { id: "jacques", label: "Frère Jacques" },
+        ],
+      },
+      VIEW,
+    ],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
+    build(k) {
+      stage(k, "song");
+    },
+    input: {
+      title: "Your own song",
+      accept: ".mid,.midi,.rmi,audio/midi",
+      binary: true,
+      fileButton: "Open a MIDI file…",
+      note: "Its melody (the highest note at each moment) comes down the track. The file is read on this device and never leaves it.",
+      async read(_text, fileName, file) {
+        if (!file) throw new Error("Open a MIDI file.");
+        const [{ readMidi }, { RIDE }] = await Promise.all([
+          import("../songs.js"),
+          import("./arcade-song.js"),
+        ]);
+        RIDE.song = readMidi(new Uint8Array(await file.arrayBuffer()), fileName);
+        RIDE.name = fileName;
+        return { tune: "own" };
+      },
+      shown: () => "",
+    },
+    arcade: {
+      title: "Note Rider",
+      background: "#0b0d18",
+      goal: "Steer into each note's lane as it arrives: every note you catch plays. Catch them all to play the tune.",
+      stats: [
+        { key: "score", label: "Score" },
+        { key: "caught", label: "Notes" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["down", "up"],
+      controls: {
+        keys: "↑ ↓ (or W, S, or ← → in 3D) change lanes.",
+        touch: "Swipe up or down, or hold a finger on a lane.",
+        pad: "Stick or D-pad changes lanes.",
+        short: "↑ ↓ change lanes · V turns the track into a road",
+      },
+      create: async (api) => (await import("./arcade-song.js")).createSong(api),
     },
   },
 };

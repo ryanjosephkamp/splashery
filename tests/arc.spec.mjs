@@ -400,3 +400,34 @@ test("Volley Table: a ball past the computer's paddle is your point", async ({ p
   });
   expect(r).toEqual({ you: 1, them: 0 });
 });
+
+test("Note Rider: a note caught in its lane plays and scores; one in another lane is missed", async ({
+  page,
+}) => {
+  await open(page, "note-rider");
+  const r = await read(page, () => {
+    const g = window.__arc.game;
+    const played = [];
+    g.api.sound = (s) => played.push(s.f);
+    const ctl = {
+      input: { axis: [0, 0], isHeld: () => false, pointer: null },
+      pressed: [],
+      view: 0,
+      demo: false,
+    };
+    const [a, b] = g.notes;
+    g.t = a.t - 0.01;
+    g.rider.lane = a.lane;
+    g.step(1 / 120, ctl);
+    g.rider.lane = (b.lane + 1) % 3;
+    for (let i = 0; i < 240 && !b.gone && !b.got; i++) g.step(1 / 120, ctl);
+    return {
+      first: a.got,
+      second: b.got,
+      caught: g.caught,
+      played: played.length,
+      score: g.score > 0,
+    };
+  });
+  expect(r).toEqual({ first: true, second: false, caught: 1, played: 1, score: true });
+});

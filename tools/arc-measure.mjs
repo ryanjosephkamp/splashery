@@ -36,7 +36,8 @@ for (const size of SIZES) {
           const { app, player } = window.__splashery;
           await app.chooseToy(id);
           await app.setToyOption("view", view);
-          for (let i = 0; i < 300 && !player.arcade?.game; i++) await new Promise((r) => setTimeout(r, 100));
+          for (let i = 0; i < 300 && !player.arcade?.game; i++)
+            await new Promise((r) => setTimeout(r, 100));
           const a = player.arcade;
           a.wake();
           a.autopilot = true;

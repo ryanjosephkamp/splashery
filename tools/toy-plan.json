@@ -2526,6 +2526,13 @@
       "effect": "A run across your own photo: the line where its sky meets its ground becomes the track, and a glass marble rolls along it, faster each lap; tap to jump the gaps and catch the sparks. The 3D switch raises the photo into a relief by its brightness, and the marble rolls on it.",
       "sound": "A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a rising three-note chime each lap.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "note-rider": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G10 (labs only).",
+      "effect": "A song's melody comes down a three-lane track as glowing notes, low to high by pitch; steer the sled into each note's lane as it arrives and the note plays, so catching them all plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or your own MIDI file.",
+      "sound": "Each caught note plays on the grand piano at its own pitch; a missed note is silent.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
     }
   }
 }

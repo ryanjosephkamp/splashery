@@ -3627,6 +3627,15 @@ export const TOYS = [
     labs: true,
     tags: "game arcade runner run jump marble your own photo skyline relief 3d",
   },
+  {
+    id: "note-rider",
+    label: "Note Rider",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade music song notes rhythm catch lanes melody midi your own song ode to joy 3d",
+  },
 ];
 
 export function findToy(id) {

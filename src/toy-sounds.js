@@ -2828,6 +2828,11 @@ export const TOY_SOUNDS = {
     { voice: "boing", f: 420, vol: 0.35, decay: 0.4 },
     { voice: "glass", at: 0.2, f: 1500, vol: 0.2, decay: 0.3 },
   ],
+  // A caught note: a piano note and its fifth.
+  "note-rider": [
+    { voice: "grand", f: 523.25, vol: 0.5, decay: 0.8 },
+    { voice: "grand", at: 0.18, f: 783.99, vol: 0.4, decay: 0.9 },
+  ],
   // A word's brick breaking: a paper tear and a knock.
   "page-breaker": [
     { voice: "pock", f: 480, vol: 0.55 },

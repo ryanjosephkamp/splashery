@@ -1814,6 +1814,13 @@ export const TOY_HELP = {
       "Your photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track. A glass marble rolls along it by itself, a little faster each lap; tap or press Space to jump the gaps, and catch the sparks on the way. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
   },
 
+  "note-rider": {
+    howTo:
+      "Steer into each note's lane as it arrives: the arrow keys, a swipe or a finger on the track. Pick a tune, or open a MIDI file, in the Toy tab.",
+    about:
+      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open a MIDI file of your own. In 2D the track runs across the screen with the lanes stacked by pitch; the 3D button turns it into a road coming toward you, the low lane on the left. The file is read on this device and never leaves it.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

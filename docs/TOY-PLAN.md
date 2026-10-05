@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 384 toys. 354 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 379.
+- 385 toys. 355 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 380.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -61,7 +61,7 @@ Proposals below are suggestions; the owner may change them.
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
   Galaxy in a box, Fluid lab, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash.
+  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2944,7 +2944,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 
-## Arcade (11)
+## Arcade (12)
 
 - **Shardball** (`shardball`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).
@@ -3035,3 +3035,11 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
   - Sound: A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a
     rising three-note chime each lap.
+- **Note Rider** (`note-rider`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G10 (labs only).
+  - Effect: A song's melody comes down a three-lane track as glowing notes, low to high by pitch;
+    steer the sled into each note's lane as it arrives and the note plays, so catching them all
+    plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or
+    your own MIDI file.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: Each caught note plays on the grand piano at its own pitch; a missed note is silent.
