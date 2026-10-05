@@ -59,10 +59,10 @@ Proposals below are suggestions; the owner may change them.
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
-  Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving
-  photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in
-  a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen.
+  Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to
+  3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
+  Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2880,15 +2880,24 @@ Proposals below are suggestions; the owner may change them.
     Poly Haven's vase).
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
     back.
-- **QR code** (`qr-code`). Now: tap: Burst and return. Plan: new effect (E6).
+- **QR code** (`qr-code`). Now: tap: Knock loose. Plan: new effect (E6).
   - Owner: The owner's idea of October 1, 2026 ("go hard on it"), lane QR, October 3, 2026.
   - Effect: A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles,
-    Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off
-    as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds
-    Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing
-    their back color).
-  - Sound: Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back
-    (Assemble: a rush in and a settle; Flip: two soft sweeps).
+    Neon) that always scans. A tap knocks the modules around your finger loose: they fly out toward
+    you, tumble and snap back on a spring (2.8 s). The Toy tab adds Assemble, Flip, Burst and
+    return, Ripple (tiles ride a ring wave), Split-flap (row by row, each tile flips round like a
+    departure board), Fold (the code folds like paper and unfolds), Rain (pieces lift off and rain
+    back down, bottom row first, stacking into place) and Point cloud (every splat shrinks to a
+    point, the code dissolves into a drifting cloud and gathers back). Each moves solid pieces and
+    ends on a code that scans.
+  - Improved: QR r3 (October 5, 2026): crisp module edges (rings of thin splats along each edge: the
+    10–90% edge about half as wide at phone and desktop size); six new motions and a tap that knocks
+    modules loose; Alive grows to eight patterns (wave, sweep, pulse, flowing gradient, rainbow,
+    current, charge, scan line) with a speed slider from a quarter to four times as fast, every
+    frame scanning; twelve color themes and 24 countries' flag colors, each at least 4.5 : 1.
+  - Sound: Soft: a wooden knock and a puff for the tap, then the click of pieces snapping back
+    (Burst: a muffled pop, a whoosh and a rush back; Split-flap: a run of light clicks; Rain: a
+    patter; Fold: paper rustles and soft creases).
 - **How a QR code works** (`qr-anatomy`). Now: tap: Next part. Plan: new effect (E6).
   - Owner: The owner's push notes of October 4, 2026 (Q6, "strong yes"; "it has to be technically
     correct"), lane QR lab r2, October 5, 2026.

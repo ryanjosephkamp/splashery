@@ -1,0 +1,189 @@
+{
+  "toy": "sorting-machine",
+  "checked": "2026-10-04",
+  "summary": "All eight implementations match independent comparison and array-change traces. The display counts swaps, except that merge sort counts single-item moves. The bar animation omits comparisons that do not change the array.",
+  "claims": [
+    {
+      "claim": "Bubble sort compares adjacent items in shrinking passes.",
+      "how": "It runs all shrinking passes, including any pass with no swaps.",
+      "where": "src/packs/computing.js:1055",
+      "sources": [
+        {
+          "title": "Bubble sort",
+          "publisher": "NIST Dictionary of Algorithms and Data Structures",
+          "url": "https://xlinux.nist.gov/dads/HTML/bubblesort.html",
+          "says": "Bubble sort compares neighboring items and exchanges items that are out of order."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "Quicksort uses the Lomuto partition.",
+      "how": "The last item is the pivot, values strictly below it move left, self-swaps are omitted, and left partitions run first.",
+      "where": "src/packs/computing.js:1067",
+      "sources": [
+        {
+          "title": "Quicksort",
+          "publisher": "Sedgewick and Wayne, Princeton Algorithms",
+          "url": "https://algs4.cs.princeton.edu/23quicksort/",
+          "says": "Quicksort partitions around a pivot and recursively sorts the resulting subarrays."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "Merge sort combines runs bottom up and stably.",
+      "how": "Runs double in size. Equal values stay left; each needed right item is moved ahead of a left item.",
+      "where": "src/packs/computing.js:1150",
+      "sources": [
+        {
+          "title": "Mergesort",
+          "publisher": "Sedgewick and Wayne, Princeton Algorithms",
+          "url": "https://algs4.cs.princeton.edu/22mergesort/",
+          "says": "Bottom-up mergesort combines adjacent sorted runs of increasing size; merge ordering can be stable."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "Insertion sort moves each new value into the sorted prefix.",
+      "how": "Adjacent swaps move the value left until it is in order.",
+      "where": "src/packs/computing.js:1101",
+      "sources": [
+        {
+          "title": "Insertion sort",
+          "publisher": "NIST Dictionary of Algorithms and Data Structures",
+          "url": "https://xlinux.nist.gov/dads/HTML/insertionSort.html",
+          "says": "Insertion sort inserts each item into the sorted prefix; an adjacent-swap version is also described."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "Selection sort selects the minimum of each remaining suffix.",
+      "how": "It exchanges the selected minimum with the current destination, omitting self-swaps.",
+      "where": "src/packs/computing.js:1106",
+      "sources": [
+        {
+          "title": "Selection sort",
+          "publisher": "NIST Dictionary of Algorithms and Data Structures",
+          "url": "https://xlinux.nist.gov/dads/HTML/selectionSort.html",
+          "says": "Selection sort repeatedly selects the smallest remaining item and moves it into place."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "Cocktail sort alternates forward and backward sweeps.",
+      "how": "Both sweeps shrink the active bounds and compare neighboring values.",
+      "where": "src/packs/computing.js:1114",
+      "sources": [
+        {
+          "title": "Bidirectional bubble sort",
+          "publisher": "NIST Dictionary of Algorithms and Data Structures",
+          "url": "https://xlinux.nist.gov/dads/HTML/bidirectionalBubbleSort.html",
+          "says": "Bidirectional bubble sort alternates forward and backward sweeps of adjacent comparisons."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "Shell sort uses gaps 4, 2, 1.",
+      "how": "Each gap performs insertion by exchanges within the interleaved subsequences.",
+      "where": "src/packs/computing.js:1125",
+      "sources": [
+        {
+          "title": "Shell sort",
+          "publisher": "NIST Dictionary of Algorithms and Data Structures",
+          "url": "https://xlinux.nist.gov/dads/HTML/shellsort.html",
+          "says": "Shell sort sorts interleaved subsequences at decreasing gaps, ending with gap one."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "Heap sort builds and drains a max heap.",
+      "how": "Heap construction starts from the last parent and repeated extraction moves the maximum to the sorted suffix.",
+      "where": "src/packs/computing.js:1131",
+      "sources": [
+        {
+          "title": "Priority queues and heapsort",
+          "publisher": "Sedgewick and Wayne, Princeton Algorithms",
+          "url": "https://algs4.cs.princeton.edu/24pq/",
+          "says": "Heapsort builds a heap and repeatedly removes the maximum into the end of the array."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "All comparison values/operators and every array snapshot match the independent reference on 384 inputs."
+    },
+    {
+      "claim": "The counter counts swaps or merge moves.",
+      "how": "For every recorded stage of all eight default traces, the seven-segment display shows the stage count and uses MOVES for merge, SWAPS otherwise.",
+      "where": "src/packs/computing.js:3764",
+      "sources": [
+        {
+          "title": "Mergesort",
+          "publisher": "Sedgewick and Wayne, Princeton Algorithms",
+          "url": "https://algs4.cs.princeton.edu/22mergesort/",
+          "says": "Bottom-up mergesort combines adjacent sorted runs of increasing size; merge ordering can be stable."
+        },
+        {
+          "title": "Bubble sort",
+          "publisher": "NIST Dictionary of Algorithms and Data Structures",
+          "url": "https://xlinux.nist.gov/dads/HTML/bubblesort.html",
+          "says": "Bubble sort compares neighboring items and exchanges items that are out of order."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:236",
+      "note": ""
+    },
+    {
+      "claim": "Animated bar movements show only the exchanges or moves.",
+      "how": "Only changed arrays are saved; comparisons with no array change have no visible step. Merge insertion is one move, not a count of every write.",
+      "where": "src/packs/computing.js:1052",
+      "sources": [
+        {
+          "title": "Mergesort",
+          "publisher": "Sedgewick and Wayne, Princeton Algorithms",
+          "url": "https://algs4.cs.princeton.edu/22mergesort/",
+          "says": "Bottom-up mergesort combines adjacent sorted runs of increasing size; merge ordering can be stable."
+        },
+        {
+          "title": "Bubble sort",
+          "publisher": "NIST Dictionary of Algorithms and Data Structures",
+          "url": "https://xlinux.nist.gov/dads/HTML/bubblesort.html",
+          "says": "Bubble sort compares neighboring items and exchanges items that are out of order."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:168",
+      "note": "The counter is not total running time, comparison count, or a fair memory-write benchmark across algorithms."
+    }
+  ],
+  "simplified": [
+    "There are eight fixed bars in the picture. Comparison-only work is invisible. Merge counts one insertion move even when that move rewrites several array slots, so its counter is not comparable to a count of memory writes."
+  ],
+  "fixes": [
+    {
+      "what": "Make the About counter description say swaps, or moves for merge sort, matching the actual display.",
+      "where": "src/toy-help.js:1588",
+      "status": "fixed in #278"
+    }
+  ]
+}

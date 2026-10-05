@@ -2743,11 +2743,13 @@ export const TOY_SOUNDS = {
   // for the ocean, a warm swelling tone for the knot. This is the galaxy's.
   // Lane QR: the tap bursts the code (a soft pop, a whoosh, pieces landing);
   // Assemble and Flip play their own through the recipe's cues.
+  // Lane QR r3: the tap knocks modules loose (a knock, a puff, the click of
+  // pieces snapping back); each Toy-tab motion sends its own sound as cues.
   "qr-code": [
-    { voice: "thud", f: 110, decay: 0.3, vol: 0.4 },
-    { voice: "breath", f: 700, to: 0.5, decay: 0.9, vol: 0.2 },
-    { voice: "wood", at: 1.05, f: 900, decay: 0.12, vol: 0.12 },
-    { voice: "breath", at: 2.15, f: 600, to: 1.2, decay: 1.0, vol: 0.16 },
+    { voice: "wood", f: 420, decay: 0.12, vol: 0.3 },
+    { voice: "breath", f: 800, to: 0.6, decay: 0.5, vol: 0.14 },
+    { voice: "wood", at: 1.05, f: 900, decay: 0.08, vol: 0.12 },
+    { voice: "wood", at: 1.2, f: 1100, decay: 0.06, vol: 0.08 },
   ],
   // Lane QR lab r2: soft, not electronic. A light knock as a part lifts; a
   // scrape and a soft thud as damage lands; a slide out and a knock back.
