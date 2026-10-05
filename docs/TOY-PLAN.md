@@ -2911,8 +2911,9 @@ Proposals below are suggestions; the owner may change them.
     a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big
     overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's
     count (36k on the low tier). Science r3 (the owner's push notes of October 4, 2026: "we could
-    maybe add quite a number"): 25 structures in six groups (everyday molecules, medicines, minerals
-    and gems, ice and salts, proteins at atomic resolution, DNA), all from COD or the PDB (CC0) with
+    maybe add quite a number", and his "could you add even more molecules?" of October 5): 38
+    structures in seven groups (everyday molecules, medicines, molecules of life, minerals and gems,
+    ice and salts, proteins at atomic resolution, DNA and RNA), all from COD or the PDB (CC0) with
     real anisotropic U; a Show option fills the unit cell from the space group's symmetry operations
     (each copy's U turned with it), minerals and salts by default, and completes a molecule split by
     symmetry.
@@ -2965,7 +2966,9 @@ Proposals below are suggestions; the owner may change them.
     and stores 8-bit volumes; maps at 2.6 to 3.2 Å, so the new voxels are about half the resolution
     and EMDB's level keeps its meaning (an atomic-resolution map, 1.2 Å, was tried: blurred to a
     phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the
-    assembly's operators.
+    assembly's operators. r2 (the owner's "sharper", October 5, 2026): more, smaller and flatter
+    splats (density 1.5, 0.8 of a voxel) and ambient occlusion from the density round each point,
+    which darkens grooves and pockets.
   - Sound: A soft, low whoosh as the cut sweeps in, and a softer one as it closes.
 - **Contour lab** (`contour-lab`). Now: tap: Pull the layers apart. Plan: new effect (E6).
   - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first, each

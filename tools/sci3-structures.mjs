@@ -19,6 +19,7 @@ import path from "node:path";
 import { readCrystal, readCifBlocks } from "../src/science/crystal.js";
 
 const DIR = "assets/toys/thermal-ellipsoids";
+const KEEP_DEPOSIT = new Set(["1J8G"]);
 const OUT = "src/science/structures.js";
 const check = process.argv.includes("--check");
 
@@ -29,11 +30,25 @@ const LIST = [
   ["Everyday molecules", "sucrose", "Table sugar (sucrose)", "cod:2300557", "molecule"],
   ["Everyday molecules", "urea", "Urea", "cod:1566505", "molecule"],
   ["Everyday molecules", "vitamin-c", "Vitamin C (ascorbic acid)", "cod:2300646", "molecule"],
-  ["Everyday molecules", "glycine", "Glycine (neutron)", "cod:2103308", "molecule"],
+  ["Everyday molecules", "vanillin", "Vanillin (the taste of vanilla)", "cod:7242089", "molecule"],
+  ["Everyday molecules", "capsaicin", "Capsaicin (the heat of chili peppers)", "cod:2312782", "molecule"], // prettier-ignore
   ["Medicines", "aspirin", "Aspirin", "cod:2104857", "molecule", "aspirin-cod-2104857.cif"],
   ["Medicines", "paracetamol", "Acetaminophen (paracetamol)", "cod:7232757", "molecule"],
   ["Medicines", "ibuprofen", "Ibuprofen (neutron)", "cod:2006278", "molecule"],
   ["Medicines", "nicotinamide", "Vitamin B3 (nicotinamide, neutron)", "cod:2003053", "molecule"],
+  ["Medicines", "salicylic-acid", "Salicylic acid (from willow bark)", "cod:2100548", "molecule"],
+  ["Medicines", "morphine", "Morphine", "cod:2237167", "molecule"],
+  ["Molecules of life", "glycine", "Glycine, an amino acid (neutron)", "cod:2103308", "molecule"],
+  ["Molecules of life", "cytosine", "Cytosine, a letter of DNA", "cod:2019803", "molecule"],
+  ["Molecules of life", "guanine", "Guanine, a letter of DNA", "cod:2015488", "molecule"],
+  [
+    "Molecules of life",
+    "serotonin",
+    "Serotonin, a messenger in the brain",
+    "cod:2244048",
+    "molecule",
+  ],
+  ["Molecules of life", "nad", "NAD+, a helper molecule in every cell", "cod:1507221", "molecule"],
   ["Minerals and gems", "quartz", "Quartz", "cod:9000775", "cell"],
   ["Minerals and gems", "calcite", "Calcite", "cod:9000965", "cell"],
   ["Minerals and gems", "corundum", "Corundum (ruby and sapphire)", "cod:1000032", "cell"],
@@ -49,8 +64,19 @@ const LIST = [
   ["Proteins at atomic resolution", "lysozyme", "Lysozyme, 0.65 Å", "pdb:2VB1", "molecule"],
   ["Proteins at atomic resolution", "hipip", "An iron-sulfur protein (HiPIP), 0.48 Å", "pdb:5D8V", "molecule"], // prettier-ignore
   ["Proteins at atomic resolution", "rubredoxin", "Rubredoxin, 0.68 Å", "pdb:2DSX", "molecule"],
-  ["DNA", "z-dna", "Z-DNA, 0.55 Å", "pdb:3P4J", "molecule"],
-  ["DNA", "b-dna", "B-DNA, 0.74 Å", "pdb:1D8G", "molecule"],
+  ["DNA and RNA", "b-dna", "B-DNA, 0.74 Å", "pdb:1D8G", "molecule"],
+  ["DNA and RNA", "a-dna", "A-DNA, 0.83 Å", "pdb:1DPL", "molecule"],
+  ["DNA and RNA", "z-dna", "Z-DNA, 0.55 Å", "pdb:3P4J", "molecule"],
+  ["DNA and RNA", "rna-quadruplex", "A four-stranded RNA, 0.61 Å", "pdb:1J8G", "molecule"],
+  ["DNA and RNA", "rrna-loop", "A loop of ribosomal RNA, 0.85 Å", "pdb:5NQI", "molecule"],
+  ["DNA and RNA", "dna-drug", "DNA with a drug in its groove, 0.95 Å", "pdb:3OMJ", "molecule"],
+  [
+    "DNA and RNA",
+    "dna-ruthenium",
+    "DNA with a light-switch metal complex, 0.92 Å",
+    "pdb:4E1U",
+    "molecule",
+  ],
 ];
 
 async function get(url, ok, binary = false) {
@@ -242,7 +268,8 @@ for (const [group, id, label, src, show, fileName] of LIST) {
     const url = db === "cod" ? `https://www.crystallography.net/cod/${acc}.cif` : `https://files.rcsb.org/download/${acc}.pdb`; // prettier-ignore
     let text = await get(url, (t) => (db === "cod" ? t.includes("data_") : t.includes("ATOM")));
     if (db === "pdb") {
-      const a = await assemble(acc, trimPdb(text));
+      // (1J8G's file already holds the four-stranded unit; its assembly stacks seven of them.)
+      const a = KEEP_DEPOSIT.has(acc) ? { text: trimPdb(text), ops: [] } : await assemble(acc, trimPdb(text)); // prettier-ignore
       text = a.text;
       if (a.ops.length) console.log(`${acc}: the biological assembly, with copies under ${a.ops.join("; ")}`); // prettier-ignore
     }

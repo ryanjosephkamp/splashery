@@ -71,17 +71,19 @@ const expectTensor = (m, six, eps = 1e-6) => {
 };
 
 test.describe("structures (node)", () => {
-  test("twenty-five structures in six groups, each with real anisotropic U and a CC0 credit", () => {
+  test("38 structures in seven groups, each with real anisotropic U and a CC0 credit", () => {
     expect(STRUCTURES.length).toBeGreaterThanOrEqual(15);
-    expect(STRUCTURES.length).toBeLessThanOrEqual(25);
+    // (r2: the owner's "could you add even more molecules?", October 5, 2026)
+    expect(STRUCTURES.length).toBeGreaterThanOrEqual(38);
     expect(new Set(STRUCTURES.map((s) => s.group))).toEqual(
       new Set([
         "Everyday molecules",
         "Medicines",
+        "Molecules of life",
         "Minerals and gems",
         "Ice and salts",
         "Proteins at atomic resolution",
-        "DNA",
+        "DNA and RNA",
       ]),
     );
     // The ids r1 shipped stay (old links).
@@ -228,7 +230,7 @@ test.describe("structures (node)", () => {
   });
 });
 
-test("the picker lists the structures under their six groups", async ({ page }) => {
+test("the picker lists the structures under their seven groups", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(APP);
@@ -247,10 +249,11 @@ test("the picker lists the structures under their six groups", async ({ page }) 
   expect(groups.map((g) => g[0])).toEqual([
     "Everyday molecules",
     "Medicines",
+    "Molecules of life",
     "Minerals and gems",
     "Ice and salts",
     "Proteins at atomic resolution",
-    "DNA",
+    "DNA and RNA",
   ]);
   expect(groups.reduce((n, g) => n + g[1], 0)).toBe(STRUCTURES.length);
   expect(errors).toEqual([]);

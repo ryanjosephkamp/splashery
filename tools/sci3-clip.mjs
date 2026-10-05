@@ -44,6 +44,29 @@ const framesOut = args.includes("--frames"); // also <card>-frames/NNNN.jpg, for
 // log scale (r2: the microscope and the galaxy zoom with the camera).
 const tour = (key, ids, every, from = 0) => ids.map((id, i) => ({ t: from + i * every, opt: { [key]: id } })); // prettier-ignore
 const CARDS = {
+  "sci3-cryoem-apoferritin-r2": { toy: "cryoem-map", options: { map: "apoferritin" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.4 }, { t: 2.5, tap: true }] }, // prettier-ignore
+  "sci3-cryoem-ribosome-r2": { toy: "cryoem-map", options: { map: "ribosome" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.4 }, { t: 3, tap: true }] }, // prettier-ignore
+  "sci3-cryoem-capsid-r2": { toy: "cryoem-map", options: { map: "aav" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.3 }, { t: 3, tap: true }] }, // prettier-ignore
+  "sci3-minerals-r2": {
+    toy: "thermal-ellipsoids",
+    options: { structure: "quartz", level: "50" },
+    secs: 12.5,
+    near: 0.8,
+    steps: [{ t: 0, yaw: 0.45 }, ...tour("structure", ["quartz", "calcite", "beryl", "rock-salt", "ice"], 2.5)], // prettier-ignore
+  },
+  "sci3-dna-r2": {
+    toy: "thermal-ellipsoids",
+    options: { structure: "a-dna", level: "50" },
+    secs: 15,
+    steps: [{ t: 0, yaw: 0.5 }, ...tour("structure", ["a-dna", "rna-quadruplex", "rrna-loop", "dna-drug", "dna-ruthenium"], 3)], // prettier-ignore
+  },
+  "sci3-life": {
+    toy: "thermal-ellipsoids",
+    options: { structure: "cytosine", level: "50" },
+    secs: 12.5,
+    near: 0.75,
+    steps: [{ t: 0, yaw: 0.5 }, ...tour("structure", ["cytosine", "guanine", "serotonin", "nad", "capsaicin"], 2.5)], // prettier-ignore
+  },
   "sci3-terrain": {
     toy: "terrain-box",
     options: { place: "grand-canyon", exag: "2" },

@@ -1474,7 +1474,7 @@ const EM = { maps: new Map(), models: new Map(), want: null, info: null };
 export const cryoemState = () => (EM.info ? { ...EM.info } : null);
 // The level's choices, as multiples of EMDB's recommended contour.
 export const CRYOEM_LEVELS = { lower: 0.75, recommended: 1, higher: 1.5 };
-export const CRYOEM_DENSITY = 1;
+export const CRYOEM_DENSITY = 1.5;
 
 // Chain colors: proteins in cool hues, RNA and DNA in warm ones, each chain
 // its own (a golden-angle walk round the hue circle).
@@ -1636,10 +1636,28 @@ const CRYOEM = {
     const budget = Math.max(2000, Math.floor(k.count * (showModel ? 0.8 : 0.98)));
     const keep = Math.min(showModel ? 0.07 : 1, budget / S.count);
     const vox = D.voxel[0];
-    const size = showModel ? vox * 0.6 : vox * 1.05 * Math.sqrt(1 / keep);
+    const size = showModel ? vox * 0.6 : vox * 0.8 * Math.sqrt(1 / keep);
     const pick = [];
     for (let i = 0; i < S.count; i++) if ((i * 0.618034) % 1 < keep) pick.push(i);
     const base = () => k.baseSize || 0.01;
+    // Ambient occlusion (r3, the owner's "sharper"): how much density
+    // surrounds a surface point, from 26 samples 3 voxels out, darkens the
+    // grooves and pockets, as a molecular viewer's full lighting does.
+    const DIRS = [];
+    for (let a = -1; a <= 1; a++)
+      for (let b = -1; b <= 1; b++)
+        for (let d = -1; d <= 1; d++)
+          if (a || b || d) DIRS.push(vec.unit([a, b, d]).map((v) => v * 3));
+    const L = S.levelByte;
+    const occlusion = (i) => {
+      const x = S.v[3 * i];
+      const y = S.v[3 * i + 1];
+      const z = S.v[3 * i + 2];
+      let hit = 0;
+      for (const [a, b, d] of DIRS) if (D.sample(x + a, y + b, z + d) >= L) hit++;
+      // A bump has about a fifth of the directions inside, a pocket half.
+      return Math.max(0, Math.min(1, (hit / DIRS.length - 0.18) / 0.4));
+    };
     k.cloud({ count: (pick.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
       const i = pick[j];
       if (i === undefined) return null;
@@ -1655,9 +1673,9 @@ const CRYOEM = {
       return {
         p: [p[0] - c[0], p[1] - c[1], p[2] - c[2]],
         n,
-        flat: 0.25,
+        flat: 0.12,
         size: size / base(),
-        color: lit(col, n, 0.25),
+        color: shade(lit(col, n, 0.25), 1 - 0.6 * occlusion(i)),
         opacity: alpha,
         part: sciPart(SCI_TYPE.plain),
       };

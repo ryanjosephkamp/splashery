@@ -500,8 +500,8 @@ checked on the live source page on September 30, 2026.
 
 ### Science r3 (lane Science r3)
 
-Twenty-three more structures for the Thermal ellipsoids toy (labs), each checked on its live page on
-October 5, 2026. The Crystallography Open Database dedicates all its data to the public domain under
+More structures for the Thermal ellipsoids toy (labs), each checked on its live page on October
+5, 2026. The Crystallography Open Database dedicates all its data to the public domain under
 [CC0](https://creativecommons.org/publicdomain/zero/1.0/) ("All data in the COD and the database
 itself are dedicated to the public domain and licensed under the CC0 License"); the PDB's data are
 CC0 under the [wwPDB data policy](https://www.rcsb.org/pages/usage-policy). The CIFs are kept with
@@ -598,6 +598,61 @@ strand is added from its biological assembly (`tools/sci3-structures.mjs`).
   [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
 
 Files people open in these toys are read in their browser and never uploaded.
+
+Thirteen more structures (the owner's "could you add even more molecules?", October 5, 2026), each
+checked on its live page that day:
+
+- Thermal ellipsoids: Vanillin (the taste of vanilla),
+  [COD 7242089](https://www.crystallography.net/cod/7242089.html), by S. Sundareswaran and S.
+  Karuppannan (CrystEngComm 23 1634, 2021),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Capsaicin (the heat of chili peppers),
+  [COD 2312782](https://www.crystallography.net/cod/2312782.html), by M. Lozin&#x161;ek (Acta
+  crystallographica. Section C, Structural chemistry 81 188, 2025),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Salicylic acid (from willow bark),
+  [COD 2100548](https://www.crystallography.net/cod/2100548.html), by P. Munshi and T. N. Guru Row
+  (Acta Crystallographica Section B 62 612, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Morphine, [COD 2237167](https://www.crystallography.net/cod/2237167.html), by
+  T. Gelbrich, D. E. Braun and U. J. Griesser (Acta Crystallographica Section E 69 o2, 2013),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Cytosine, a letter of DNA,
+  [COD 2019803](https://www.crystallography.net/cod/2019803.html), by B. Sridhar, J. B. Nanubolu and
+  K. Ravikumar (Acta Crystallographica Section C 71, 2015),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Guanine, a letter of DNA,
+  [COD 2015488](https://www.crystallography.net/cod/2015488.html), by K. Guille and W. Clegg (Acta
+  Crystallographica Section C 62 o515, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Serotonin, a messenger in the brain,
+  [COD 2244048](https://www.crystallography.net/cod/2244048.html), by M. Naeem, A. R. Chadeayne, J.
+  A. Golen and D. R. Manke (Acta Crystallographica Section E 78, 2022),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: NAD+, a helper molecule in every cell,
+  [COD 1507221](https://www.crystallography.net/cod/1507221.html), by B. Guillot, N. Muzet, E.
+  Artacho et al. (The Journal of Physical Chemistry B 107 9109, 2003),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: A-DNA, 0.83 Å, [PDB 1DPL](https://www.rcsb.org/structure/1DPL), by M. Egli, V.
+  Tereshko, M. Teplova et al. (Biopolymers 48 234, 1998),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: A four-stranded RNA, 0.61 Å, [PDB 1J8G](https://www.rcsb.org/structure/1J8G),
+  by J. Deng, Y. Xiong and M. Sundaralingam (Proc.Natl.Acad.Sci.USA 98 13665, 2001),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: A loop of ribosomal RNA, 0.85 Å,
+  [PDB 5NQI](https://www.rcsb.org/structure/5NQI), by C. Riml, A. Lusser, E. Ennifar and R. Micura
+  (J. Org. Chem. 82 7939, 2017), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under
+  the [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: DNA with a drug in its groove, 0.95 Å,
+  [PDB 3OMJ](https://www.rcsb.org/structure/3OMJ), by D. Chenoweth and P. Dervan (J.Am.Chem.Soc. 132
+  14521, 2010), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: DNA with a light-switch metal complex, 0.92 Å,
+  [PDB 4E1U](https://www.rcsb.org/structure/4E1U), by H. Song, J. Kaiser and J. Barton (Nat Chem 4
+  615, 2012), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
 
 Four more super-resolution microscopy sets from ShareLoc.XYZ on Zenodo (each record's CC BY 4.0 read
 on its live page on October 5, 2026). Three records give no localization precision; theirs is
