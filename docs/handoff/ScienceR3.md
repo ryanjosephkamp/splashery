@@ -105,4 +105,16 @@ this file.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+Model: Opus 5.5 (claude-opus-5-5), default effort.
+
+- October 5, 2026: started. Sources reachable from the container: COD, RCSB, EMDB, EMPIAR, Zenodo,
+  FlatHub. Order of work: (1) structures, (2) microscopy and the cryo-EM toy, (3) galaxies and the
+  telescope, (4) the three "in a box" proposals (the owner marked "In a box" yes on October 5:
+  wildfire, tornado and terrain, each after a small lab), building one if time allows.
+
+## Notes
+
+## Known issues
+
+## For the Operator
+
