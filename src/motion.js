@@ -163,6 +163,9 @@ export class MotionDriver {
   // tap as info.tap = { point, key, pick, time, n }.
   act(time, point = null, forced = null) {
     const a = this.recipe?.action;
+    // Lane Molecule viewer (engine): what the tap's `action.at` asked to tell
+    // the person ({ say: "…" } in its result), for the player to show.
+    this.said = null;
     // Lane Live input r2: a recipe may act inside the person's own gesture
     // (a song's audio may start playing only there, on a phone).
     a?.onAct?.(point, this.state);
@@ -173,6 +176,7 @@ export class MotionDriver {
       pick = forced.pick ?? null;
     } else if (a?.at && point) {
       const r = a.at(point, this.state);
+      if (r && typeof r === "object" && r.say) this.said = String(r.say);
       if (typeof r === "string") key = r;
       else if (r?.options) {
         // A tap that switches the toy ({ options, key, pick }): the player
@@ -320,6 +324,9 @@ export class MotionDriver {
     const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
     // Lane Hands engine A: Hands-on's shake, finger and wheels (src/physics/fields.js).
     if (this.hands) about.hands = this.hands;
+    // Lane Any pose: the world's up in the recipe's frame while Hands-on has
+    // the toy turned (absent upright), for effects that fall or pour.
+    if (this.poseUp) about.up = this.poseUp;
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     // Lane Physics: pieces picked up in Hands-on go where the physics puts
     // them (src/physics/hands-on.js), and are sorted again now and then.

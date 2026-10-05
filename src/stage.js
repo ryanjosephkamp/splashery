@@ -377,6 +377,7 @@ export class Stage {
   // them back where they were built.
   setToyPose(pose) {
     const t = this.toy;
+    this.toyPose = t ? pose : null; // lane Any pose: the effects follow it (src/effects-pose.js)
     if (!t) return;
     const ents = [t.entity, t.addon?.entity, ...(t.sheets || []).map((s) => s.entity), ...(t.layers || []).map((l) => l.entity)]; // prettier-ignore
     for (const e of ents) {

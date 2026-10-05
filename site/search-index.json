@@ -1245,6 +1245,46 @@
     "i": "../assets/toys/amoeba/thumb.webp"
   },
   {
+    "t": "DNA to protein",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRuYS10by1wcm90ZWluIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA2LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
+    "w": "dna to protein tiny world tiny world gene dna rna mrna transcription translation ribosome trna codon genetic code protein folding mutation sickle cell insulin hemoglobin gfp biology dna-to-protein",
+    "i": "../assets/toys/dna-to-protein/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cell division",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pdG9zaXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap the cell to watch it divide in two, phase by phase.",
+    "w": "cell division tiny world tiny world mitosis cell division cycle chromosome chromatid spindle centrosome prophase metaphase anaphase telophase cytokinesis biology mitosis",
+    "i": "../assets/toys/mitosis/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Apoptosis",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFwb3B0b3NpcyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap the cell to watch it take itself apart, step by step.",
+    "w": "apoptosis tiny world tiny world apoptosis cell death programmed blebbing apoptotic bodies pyknosis nucleus biology apoptosis",
+    "i": "../assets/toys/apoptosis/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Phagocytosis",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBoYWdvY3l0b3NpcyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap to watch the neutrophil catch and digest the bacterium.",
+    "w": "phagocytosis tiny world tiny world phagocytosis neutrophil white blood cell immune bacterium phagosome lysosome digestion biology phagocytosis",
+    "i": "../assets/toys/phagocytosis/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Electron orbital",
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYml0YWwifX0",
     "k": "toy",
@@ -3116,7 +3156,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyYW5zZm9ybWVyIn0sImNhbWVyYSI6eyJ5YXciOjAuMTYsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
+    "d": "Tap it to watch a prepared next-word example. Try the Encoder–decoder diagram in the Toy tab.",
     "w": "transformer ai and computing ai and computing attention heads tokens layers language model next word ai machine learning transformer",
     "i": "../assets/toys/transformer/thumb.webp"
   },

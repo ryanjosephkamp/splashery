@@ -2115,8 +2115,9 @@
     "qr-code": {
       "v": "new",
       "owner": "The owner's idea of October 1, 2026 (\"go hard on it\"), lane QR, October 3, 2026.",
-      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).",
-      "sound": "Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps)."
+      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap knocks the modules around your finger loose: they fly out toward you, tumble and snap back on a spring (2.8 s). The Toy tab adds Assemble, Flip, Burst and return, Ripple (tiles ride a ring wave), Split-flap (row by row, each tile flips round like a departure board), Fold (the code folds like paper and unfolds), Rain (pieces lift off and rain back down, bottom row first, stacking into place) and Point cloud (every splat shrinks to a point, the code dissolves into a drifting cloud and gathers back). Each moves solid pieces and ends on a code that scans.",
+      "sound": "Soft: a wooden knock and a puff for the tap, then the click of pieces snapping back (Burst: a muffled pop, a whoosh and a rush back; Split-flap: a run of light clicks; Rain: a patter; Fold: paper rustles and soft creases).",
+      "improved": "QR r3 (October 5, 2026): crisp module edges (rings of thin splats along each edge: the 10–90% edge about half as wide at phone and desktop size); six new motions and a tap that knocks modules loose; Alive grows to eight patterns (wave, sweep, pulse, flowing gradient, rainbow, current, charge, scan line) with a speed slider from a quarter to four times as fast, every frame scanning; twelve color themes and 24 countries' flag colors, each at least 4.5 : 1."
     },
     "qr-anatomy": {
       "v": "new",
@@ -2475,6 +2476,18 @@
       "effect": "The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6 (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star or planet with a ring around it and a few facts beside the stage.",
       "sound": "One soft, low tine and a faint breath as the ring marks it."
     },
+    "data-in-3d": {
+      "v": "new",
+      "owner": "Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes, ticks and labels that turn to face the camera. A tap drops every point, bar or the surface to the floor and lets it rise back into place with a small overshoot (2.4 s).",
+      "sound": "A soft thud as the marks land, a light knock, and a breath as they rise."
+    },
+    "climate-records": {
+      "v": "new",
+      "owner": "Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a year; GISTEMP temperature anomalies as a field of monthly bars or a wall of yearly stripes. A tap redraws the CO2 record from 1974 behind a bright bead (8 s), or lets the bars sink to zero and grow back.",
+      "sound": "A long, low breath under a soft thud."
+    },
     "dna-to-protein": {
       "v": "keep",
       "owner": "Push Plan pick S13 (October 5, 2026): “DNA to protein is awesome.”",
@@ -2544,6 +2557,27 @@
       "effect": "A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap crossfades from normal colors to the thermal camera's false colors (the iron palette), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.",
       "sound": "The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it turns off.",
       "improved": "Imaging: new toy."
+    },
+    "sound-lab": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "A bench instrument whose screen is a panel of splats: a scrolling spectrogram, the spectrum with its loudest frequency, an oscilloscope and a level meter (dBFS, with an uncalibrated dB SPL estimate). A tap plays or stops the tone generator (sine, square, saw or noise; two tones beat), measured on the screen as the speaker plays it; the speaker's cone moves with the signal. A metronome swings from side to side, one beat a swing, and clicks on each beat. The microphone, on a tap, takes over the screens.",
+      "sound": "A soft switch; the tone itself plays from the toy while the site's sound is on.",
+      "improved": "Sound and light lab: new toy. The screens are measured from samples (the generator's own, or the microphone's); tested: a known tone's spectrogram peak, the beat frequency, the metronome's clicks."
+    },
+    "sound-recorder": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "A studio microphone before a screen of splats showing the recording's waveform over its spectrogram, the kept span bright and the trimmed ends dimmed, with a play head. Record (in the Toy tab, from the microphone, kept in memory) lights the microphone's lamp; a tap plays or stops the recording. Trim, then save as WAV or a smaller Opus or AAC file.",
+      "sound": "A soft click.",
+      "improved": "Sound and light lab: new toy; the WAV file round-trips sample for sample (tested)."
+    },
+    "light-lab": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "Line spectra of sixteen elements from NIST to compare (a tap labels the next element's strongest lines); an optical bench where a lamp's beam passes a 60° prism (Snell's law, Schott's Sellmeier index) or a grating (CD, DVD or slide; d sin θ = m λ, orders −2 to +2), every ray traced onto a card, a tap changing the lamp from white light to each element; and a home spectrometer reading a camera picture (a CD or DVD and a fluorescent lamp), calibrated on mercury's 436 and 546 nm lines.",
+      "sound": "The click of a slide changer.",
+      "improved": "Sound and light lab: new toy; the lines match NIST's tables, the prism's minimum deviation and the grating angles match their formulas, and the spectrometer finds the lines of a made-up picture within 2 nm (tested)."
     }
   }
 }
