@@ -294,6 +294,26 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-05, afternoon:
+
+- AI-made sources: he marked AI1 to AI5 yes. CLAUDE.md has the rule (AI-made samples may ship as
+  Studio samples, labeled as AI-made, with no people, logos or text; never for science, math or
+  engineering toys, the photoreal shelves or landmarks shown as real). Claude can't make AI video or
+  pictures, so he makes them with his own AI plan and uploads them on a private upload page; Studio
+  media turns them into 3D.
+- Effect review page 2: "everything looks pretty good, some things look amazing"; he asked for one
+  more sharpness, polish and enhancement round on every push toy ("the toys could still be
+  sharper"). Lanes whose PRs are in a test run do it on `-polish` or `-r2` branches and open the
+  follow-up PR after the first one merges; public PRs (Pages r6, Computing r2) merge with their
+  asked fixes first.
+- He OK'd merging About-text fixes without a clip review: Codex's evidence for AI and computing
+  (#278) merged. Tiny world r2 (#291) merged after its start-codon fix.
+- Integrators now run the suite in foreground batches of spec files and keep the turn alive: an idle
+  session's container is reclaimed, which had been killing background runs.
+- Usage: about a third of his weekly allowance was used by mid-afternoon, so waiting lanes stopped
+  their hourly self check-ins (the Operator wakes them) and the second group's polish waits for its
+  merges.
+
 Settled on 2026-10-05, morning:
 
 - He used his banked reset at about 02:40 UTC. The push pace holds (about ten to twelve busy

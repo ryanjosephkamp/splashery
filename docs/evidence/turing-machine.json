@@ -1,0 +1,75 @@
+{
+  "toy": "turing-machine",
+  "checked": "2026-10-04",
+  "summary": "The transition tables correctly increment every supported 12-bit integer and run the two busy-beaver examples. The busy-beaver machines leave four and six ones. This is a finite, bounded demonstration of Turing’s tape model.",
+  "claims": [
+    {
+      "claim": "Turing described tape-and-rule computation in 1936.",
+      "how": "The head, states, write actions, and moves illustrate his model; the universal-computation claim presumes enough tape and time.",
+      "where": "src/toy-help.js:1599",
+      "sources": [
+        {
+          "title": "On Computable Numbers, with an Application to the Entscheidungsproblem",
+          "publisher": "Alan Turing, 1936; University of Virginia copy",
+          "url": "https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf",
+          "says": "Turing defines computation using a tape, scanned symbols, states, and transition rules, and describes a universal machine."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The add-one program implements binary carry.",
+      "how": "Every integer from 0 through 4095 produces its independently calculated increment; 1011 becomes 1100.",
+      "where": "src/packs/computing-history.js:310",
+      "sources": [
+        {
+          "title": "On Computable Numbers, with an Application to the Entscheidungsproblem",
+          "publisher": "Alan Turing, 1936; University of Virginia copy",
+          "url": "https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf",
+          "says": "Turing defines computation using a tape, scanned symbols, states, and transition rules, and describes a universal machine."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:369",
+      "note": ""
+    },
+    {
+      "claim": "The two- and three-state busy beavers write four and six ones.",
+      "how": "Independent rule traces agree with all writes, moves, states, halts, and final tapes, taking six and 13 transitions respectively.",
+      "where": "src/packs/computing-history.js:316",
+      "sources": [
+        {
+          "title": "Busy beaver research",
+          "publisher": "Heiner Marxen",
+          "url": "https://www.turbotm.de/~heiner/BB/index.html",
+          "says": "The maximum numbers of ones for two and three states are four and six. The longest three-state runtime is 21 steps."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:369",
+      "note": "Six ones is a maximum-output claim; this three-state table is not the 21-step maximum-runtime champion."
+    },
+    {
+      "claim": "The tape picture is a bounded illustration.",
+      "how": "The input parser caps the bit count and the interpreter caps the transition count; this is not an implementation with unlimited tape and time.",
+      "where": "src/packs/computing-history.js:355",
+      "sources": [
+        {
+          "title": "On Computable Numbers, with an Application to the Entscheidungsproblem",
+          "publisher": "Alan Turing, 1936; University of Virginia copy",
+          "url": "https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf",
+          "says": "Turing defines computation using a tape, scanned symbols, states, and transition rules, and describes a universal machine."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:369",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Input is at most 12 bits and runs stop after 60 transitions. A 13th overflow bit can lie outside the visible strip. The three-state six-one example runs in 13 steps; the separate maximum-runtime record is 21, not 13."
+  ],
+  "fixes": []
+}
