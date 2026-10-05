@@ -123,7 +123,7 @@ test.describe("the speed", () => {
       await frame();
       return { moved: MOVING.t - t0, duration: MOVING.clip.duration };
     }, mp);
-    expect(r.moved).toBeCloseTo(0.9, 2);
+    expect(((r.moved % r.duration) + r.duration) % r.duration).toBeCloseTo(0.9, 2); // (the 1.5 s clip loops)
   });
 
   test("a video's sound runs at its source's speed on a fast device", async ({ page }) => {
@@ -151,6 +151,33 @@ test.describe("the speed", () => {
     }, mp);
     expect(Math.abs(r.rate - 1)).toBeLessThan(0.03);
     expect(r.lag).toBeLessThan(2.5); // the picture follows the sound, a frame late at most
+  });
+
+  test("a video's sound comes back with the loop, even when frames are slow", async ({ page }) => {
+    test.setTimeout(240_000);
+    await open(page, "max", "sample");
+    const r = await page.evaluate(async (m) => {
+      const { MOVING } = await import(m);
+      window.__splashery.app.setControl("play", 1);
+      const el = MOVING.clip.audio.track.el;
+      let loops = 0;
+      let last = 0;
+      const end = performance.now() + 20_000;
+      let heard = 0;
+      while (performance.now() < end && loops < 1) {
+        await new Promise((res) => setTimeout(res, 100));
+        if (el.currentTime < last - 3) loops++;
+        last = el.currentTime;
+      }
+      // after the loop the sound plays again
+      const a = el.currentTime;
+      await new Promise((res) => setTimeout(res, 1500));
+      heard = el.currentTime - a;
+      return { loops, heard, paused: el.paused };
+    }, mp);
+    expect(r.loops).toBeGreaterThanOrEqual(1);
+    expect(r.paused).toBe(false);
+    expect(r.heard).toBeGreaterThan(0.5);
   });
 
   test("the Toy tab's Speed slider speeds the clip up and slows it down", async ({ page }) => {

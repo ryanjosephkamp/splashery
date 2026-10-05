@@ -2199,7 +2199,7 @@
       "page": "https://peach.blender.org/",
       "license": "CC BY 3.0",
       "checked": "October 2, 2026",
-      "note": "The Screen toy's six-second clip (assets/toys/screen/bunny.mp4) at 8 frames a second, 640 by 360, tiled 3 by 5 into four JPEGs (bunny-sheet-1.jpg to -4.jpg); each frame's depth worked out by tools/live3-depth.mjs with the vendored depth model."
+      "note": "The Screen toy's six-second clip (assets/toys/screen/bunny.mp4) at 16 frames a second (96 frames; 8 until October 5, 2026), 640 by 360, tiled 3 by 5 into seven JPEGs (bunny-sheet-1.jpg to -7.jpg); each frame's depth worked out by tools/live3-depth.mjs with the vendored depth model."
     },
     {
       "id": "horse",
@@ -2223,7 +2223,7 @@
       "page": "https://durian.blender.org/",
       "license": "CC BY 3.0",
       "checked": "October 5, 2026",
-      "note": "From the 720p trailer on download.blender.org/durian/trailer, cropped to 1280 by 544 and scaled to 640 by 272, 8 frames a second, three JPEG sheets, with its sound as a 56 kbps mono MP3 (sintel.mp3); each frame's depth by tools/live3-depth.mjs."
+      "note": "From the 720p trailer on download.blender.org/durian/trailer, cropped to 1280 by 544 and scaled to 640 by 272, 16 frames a second (96 frames), five JPEG sheets, with its sound as a 56 kbps mono MP3 (sintel.mp3); each frame's depth by tools/live3-depth.mjs."
     },
     {
       "id": "bridge",
@@ -2235,7 +2235,7 @@
       "page": "https://mango.blender.org/",
       "license": "CC BY 3.0",
       "checked": "October 5, 2026",
-      "note": "From the 720p download on download.blender.org/demo/movies/ToS, 640 by 267, 8 frames a second, three JPEG sheets, with its sound as a 56 kbps mono MP3 (tears.mp3); each frame's depth by tools/live3-depth.mjs."
+      "note": "From the 720p download on download.blender.org/demo/movies/ToS, 640 by 267, 16 frames a second (96 frames), five JPEG sheets, with its sound as a 56 kbps mono MP3 (tears.mp3); each frame's depth by tools/live3-depth.mjs."
     },
     {
       "id": "machine",
@@ -2247,7 +2247,7 @@
       "page": "https://orange.blender.org/",
       "license": "CC BY 2.5",
       "checked": "October 5, 2026",
-      "note": "From the 1024 by 576 download on download.blender.org/ED, 640 by 360, 8 frames a second, four JPEG sheets, with its sound as a 56 kbps mono MP3 (elephants.mp3); each frame's depth by tools/live3-depth.mjs."
+      "note": "From the 1024 by 576 download on download.blender.org/ED, 640 by 360, 16 frames a second (96 frames), seven JPEG sheets, with its sound as a 56 kbps mono MP3 (elephants.mp3); each frame's depth by tools/live3-depth.mjs."
     }
   ],
   "splatTrainer": {

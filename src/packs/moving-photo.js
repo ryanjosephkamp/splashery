@@ -692,13 +692,13 @@ export const SAMPLES = [
     label: "Big Buck Bunny",
     name: "Big Buck Bunny (a six-second scene)",
     file: "bunny",
-    sheets: 4,
+    sheets: 7,
     cols: 3,
     rows: 5,
-    frames: 48,
+    frames: 96,
     w: 640,
     h: 360,
-    fps: 8, // prettier-ignore
+    fps: 16, // prettier-ignore
     title: "Big Buck Bunny (a six-second scene, the sample clip)",
     source: "https://peach.blender.org/",
     ...BLENDER,
@@ -728,13 +728,13 @@ export const SAMPLES = [
     id: "dragon",
     label: "Sintel and the dragon",
     file: "sintel",
-    sheets: 3,
+    sheets: 5,
     cols: 3,
     rows: 7,
-    frames: 48,
+    frames: 96,
     w: 640,
     h: 272,
-    fps: 8, // prettier-ignore
+    fps: 16, // prettier-ignore
     title: "Sintel (trailer, six seconds from 0:29.5)",
     source: "https://durian.blender.org/",
     ...BLENDER,
@@ -745,13 +745,13 @@ export const SAMPLES = [
     id: "bridge",
     label: "The bridge and the robot",
     file: "tears",
-    sheets: 3,
+    sheets: 5,
     cols: 3,
-    rows: 6,
-    frames: 48,
+    rows: 7,
+    frames: 96,
     w: 640,
-    h: 268,
-    fps: 8, // prettier-ignore
+    h: 267,
+    fps: 16, // prettier-ignore
     title: "Tears of Steel (six seconds from 8:30.5)",
     source: "https://mango.blender.org/",
     ...BLENDER,
@@ -762,13 +762,13 @@ export const SAMPLES = [
     id: "machine",
     label: "Inside the machine",
     file: "elephants",
-    sheets: 4,
+    sheets: 7,
     cols: 3,
     rows: 5,
-    frames: 48,
+    frames: 96,
     w: 640,
     h: 360,
-    fps: 8, // prettier-ignore
+    fps: 16, // prettier-ignore
     title: "Elephants Dream (six seconds from 5:29.7)",
     source: "https://orange.blender.org/",
     author: "Blender Foundation",
@@ -1087,7 +1087,9 @@ export const MOVING_PHOTO = {
         if (!MOVING.anchor || now < MOVING.anchor.at || MOVING.anchor.rate !== rate) MOVING.anchor = { t: MOVING.t, at: now, rate }; // prettier-ignore
         MOVING.t = (MOVING.anchor.t + (now - MOVING.anchor.at) * rate) % clip.duration;
       }
-      if (tr && !tr.blocked && !tr.el.ended) {
+      // (Smd: a sound that ran out before the loop was drawn, as on a device that draws few frames a
+      // second, starts again with the picture's loop; it used to stay silent from then on.)
+      if (tr && !tr.blocked) {
         tr.el.currentTime = MOVING.t;
         tr.play(MOVING.sound);
       }

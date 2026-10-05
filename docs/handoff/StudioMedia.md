@@ -128,8 +128,7 @@ imports the Photo to 3D depth modules unchanged.
 
 ## State
 
-WORKING (October 5, 2026). Model: Sonnet 5.5. All five items are built and tested; what's left is
-the finishing list at the end of this section.
+READY (October 5, 2026). Model: Sonnet 5.5. All five items are built, tested and posted.
 
 - Item 1, Photo to 3D: three CC0 photos (spiral staircase, palace staircase, wildflowers up close)
   with depth from `tools/p3d-depth.mjs`; credits done. (A street photo with a shop's brand name in
@@ -188,7 +187,7 @@ test run (the Integrator).
 
 - The Speed slider speeds a video's sound by changing the audio element's playback rate (the browser
   keeps the pitch).
-- The bunny sample is 8 frames a second, so it looks choppy next to its 24 a second source.
+- The samples are 16 frames a second, not their sources' 24.
 - Show the original on Video to 3D plays the sample's span silently (the samples have no sound).
 - The tests here run on a software renderer (about a frame a second at the highest tier), so the
   speed and sync checks that depend on frame timing are made on the low tier or against the clocks.
@@ -219,5 +218,6 @@ test run (the Integrator).
 slider, now wired to the clip. If he still sees the bunny slow, it is the 8 frames a second of the
 sample.
 
-**Cannot be done from this sandbox:** none of it needs the owner's decision, but BY-SA candidates
-(Babelsberg, Grunewald, Zipser Burg) need his say per CLAUDE.md before they are made samples.
+**BY-SA:** I was not waiting on an approval. CC BY-SA is allowed per asset (the notice beside it,
+BY-SA kept), and I'd use Babelsberg. The blocker is training: a real GPU is needed (the owner's
+Mac), so no Babelsberg sample exists yet.
