@@ -202,6 +202,24 @@ data files are in the public domain under
 | [1EMA](https://www.rcsb.org/structure/1EMA) | Green fluorescent protein from _Aequorea victoria_ (1996) | M. Ormö, S. J. Remington                                            |
 | [4HHB](https://www.rcsb.org/structure/4HHB) | Human deoxyhaemoglobin at 1.74 Å (1984)                   | G. Fermi, M. F. Perutz                                              |
 
+### DNA to protein (lane Tiny world r2)
+
+The DNA to protein toy carries four real genes and the alpha carbons of their proteins' structures
+in `src/tiny/genes.js`, written by `tools/tw2-genes.mjs`. NCBI sequence records are in the public
+domain ([NCBI policies](https://www.ncbi.nlm.nih.gov/home/about/policies/)); PDB entries are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+| Source                                                          | What                                                 | Authors                                     |
+| --------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| [NM_000518.5](https://www.ncbi.nlm.nih.gov/nuccore/NM_000518.5) | Human hemoglobin subunit beta (HBB) mRNA             | NCBI RefSeq                                 |
+| [NM_000207.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000207.3) | Human insulin (INS) mRNA, transcript variant 1       | NCBI RefSeq                                 |
+| [NM_000239.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000239.3) | Human lysozyme (LYZ) mRNA                            | NCBI RefSeq                                 |
+| [M62653.1](https://www.ncbi.nlm.nih.gov/nuccore/M62653.1)       | _Aequorea victoria_ green fluorescent protein mRNA   | D. C. Prasher and others (1992)             |
+| [4HHB](https://www.rcsb.org/structure/4HHB)                     | Human deoxyhemoglobin at 1.74 Å (1984), a beta chain | G. Fermi, M. F. Perutz                      |
+| [1MSO](https://www.rcsb.org/structure/1MSO)                     | T6 human insulin at 1.0 Å (2003)                     | G. D. Smith, W. A. Pangborn, R. H. Blessing |
+| [1LZ1](https://www.rcsb.org/structure/1LZ1)                     | Human lysozyme at 1.5 Å (1981)                       | P. J. Artymiuk, C. C. F. Blake              |
+| [1GFL](https://www.rcsb.org/structure/1GFL)                     | Green fluorescent protein (1996)                     | F. Yang, L. G. Moss, G. N. Phillips Jr.     |
+
 ## Chemistry data (lane Chemistry)
 
 The periodic table, the atom toy's 118 elements, the molecule gallery and the DNA come from
@@ -541,6 +559,18 @@ checked on the live source page on September 30, 2026.
   cut by `tools/sci-galaxy.mjs`.
 
 Files people open in these toys are read in their browser and never uploaded.
+
+## Imaging (lane Imaging)
+
+- Walnut CT scan: Walnut 1 of the "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning:
+  Samples 1-8" by Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia
+  Bethany Coban and K. Joost Batenburg (CWI, Amsterdam; Scientific Data 6, 215, 2019),
+  [10.5281/zenodo.2686726](https://doi.org/10.5281/zenodo.2686726),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Its high-quality reconstruction (100 µm
+  voxels), every second slice, averaged to 0.3 mm, cropped and stored as 8-bit densities by
+  `tools/img-walnut.mjs`.
+- The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
+  recipes.
 
 ## Worlds
 
