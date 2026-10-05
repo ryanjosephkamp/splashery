@@ -157,8 +157,10 @@ function addFloodGrid(k, F, height, { lo, hi, part, spacing, color = "#3f6f78", 
   const base = () => k.baseSize || 0.01;
   k.cloud({ count: (sheet.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
     const p = sheet[Math.min(sheet.length - 1, i)];
-    const g = 0.5 + 0.5 * Math.sin(p[0] * 40 + p[2] * 23) * Math.sin(p[2] * 31 - p[0] * 9);
-    return { p, n: [0, 1, 0], flat: 0.15, size: (st * 1.25) / base(), color: mix(color, "#9cc4c8", 0.12 * g), opacity, part }; // prettier-ignore
+    // Small ripples catching the sky, finer than the grid's spacing would show
+    // as a pattern.
+    const g = 0.5 + 0.5 * gnoise(p[0] * 90, p[2] * 90, 5);
+    return { p, n: [0, 1, 0], flat: 0.15, size: (st * 1.25) / base(), color: shade(mix(color, "#a9c6c4", 0.18 * g * g), 0.92 + 0.12 * g), opacity, part }; // prettier-ignore
   });
   // The water's cut faces: each bit appears as the level passes it.
   const faces = [];
@@ -314,7 +316,7 @@ const GRAND_CANYON = {
     addGridSides(k, F, height, { spacing: land.spacing, side: (m) => gcRock(m) });
     const lo = H.min + 4;
     const hi = H.min + 0.5 * (H.max - H.min);
-    addFloodGrid(k, F, height, { lo, hi, part: water, spacing: land.spacing, color: "#46707a" });
+    addFloodGrid(k, F, height, { lo, hi, part: water, spacing: land.spacing, color: "#3e6158" });
     k.data = { yLo: F.y(lo), yHi: F.y(hi), grid: land };
   },
 };
@@ -473,8 +475,8 @@ const ST_HELENS = {
         };
       });
     };
-    for (let i = 0; i < PLUME; i++) puff(i, 0.06 + 0.04 * ((i * 0.37) % 1), "#8f8a84", 0.004, 0.95);
-    for (let i = 0; i < BLAST; i++) puff(PLUME + i, 0.07, "#4d4844", 0.003, 0.9);
+    for (let i = 0; i < PLUME; i++) puff(i, 0.06 + 0.04 * ((i * 0.37) % 1), "#7e766c", 0.004, 0.95);
+    for (let i = 0; i < BLAST; i++) puff(PLUME + i, 0.07, "#4a443e", 0.003, 0.9);
     k.reach([crater[0], crater[1] + 0.7, crater[2]]);
   },
 };
@@ -669,7 +671,10 @@ const TIDE_HARBOR = {
       opacity: 0.84,
       kind: "wave",
       params: (u, v) => [0.0035, u * 34 - v * 12],
-      color: (u, v) => mix("#2b4f5c", "#7aa4ad", 0.25 + 0.22 * gnoise(u * 60, v * 60, 4)),
+      color: (u, v) => {
+        const g = 0.5 + 0.5 * gnoise(u * 140, v * 140, 4);
+        return shade(mix("#2a4d57", "#8fb1b5", 0.12 + 0.2 * g * g), 0.92 + 0.1 * g);
+      },
     });
     // The water's cut faces: each bit shows while the tide is above it.
     const yFloor = F.y(TH_FLOOR);
@@ -1474,15 +1479,15 @@ const STORK_MIGRATION = {
         let lp;
         let color;
         if (r < 0.35) {
-          lp = [(rand() - 0.5) * 0.008, (rand() - 0.5) * 0.006, (rand() - 0.5) * 0.026];
+          lp = [(rand() - 0.5) * 0.012, (rand() - 0.5) * 0.009, (rand() - 0.5) * 0.04];
           color = "#f3f1ec";
         } else if (r < 0.92) {
           const side = rand() < 0.5 ? -1 : 1;
           const span = rand();
-          lp = [side * span * 0.032, 0.002 * span, (rand() - 0.5) * 0.012 - 0.002 * span];
+          lp = [side * span * 0.05, 0.003 * span, (rand() - 0.5) * 0.018 - 0.003 * span];
           color = span > 0.55 ? "#1f1f22" : "#f3f1ec";
         } else {
-          lp = [0, 0, 0.013 + rand() * 0.008];
+          lp = [0, 0, 0.02 + rand() * 0.012];
           color = "#e0452c";
         }
         return { p: [base[0] + lp[0], base[1] + lp[1], base[2] + lp[2]], color, size: 0.6, kind: "token", params: [bi, 0], pattern: false }; // prettier-ignore
@@ -1501,7 +1506,7 @@ const STORK_MIGRATION = {
       if (fx > -0.02 && fx < 1) months.push([Math.max(0, fx), MONTHS[mth % 12]]);
     }
     k.add(k.param((u, v) => [x0 + (x1 - x0) * u, F.bottom - 0.01, z + v * 0.03], { grid: 24 }), { even: true, share: 0.01, color: "#2d3238", kind: "band", channel: 0, params: (c) => [c.u, 0.015], pattern: false }); // prettier-ignore
-    const fx = 0.019;
+    const fx = 0.014;
     for (const [mf, word] of months) {
       const mx = x0 + (x1 - x0) * mf;
       k.add(
@@ -1714,30 +1719,45 @@ const EARTHQUAKES = {
     const ev = S.events;
     const t0 = ev.length ? ev[0][0] : 0;
     const t1 = ev.length ? ev[ev.length - 1][0] : 1;
-    k.cloud({ share: 0.12, size: 1 }, (rand, i, n) => {
-      const e = ev[Math.floor((i / n) * ev.length)] || [0, 0, 0, 10, 3];
-      const m = e[4];
-      const rr = 0.009 + 0.006 * Math.max(0, m - 2) ** 1.4;
-      const a = rand() * Math.PI * 2;
-      const q = Math.sqrt(rand()) * rr;
-      const p0 = onGlobe(e[1], e[2], R + Math.max(0, hAt(e[1], e[2])) * bump + 0.006);
-      const nrm = vec.unit(p0);
-      const t1v = vec.unit(vec.cross(nrm, [0, 1, 0.001]));
-      const t2v = vec.cross(nrm, t1v);
-      const p = vec.add(p0, vec.add(vec.mul(t1v, Math.cos(a) * q), vec.mul(t2v, Math.sin(a) * q)));
-      return {
-        p,
-        n: nrm,
-        color: depthColor(e[3]),
-        size: 0.9,
-        opacity: 1,
-        part: globe,
-        kind: "band",
-        channel: 0,
-        params: [(e[0] - t0) / Math.max(1, t1 - t0), 0.045],
-        pattern: false,
-      };
-    });
+    const rOf = (m) => 0.009 + 0.006 * Math.max(0, m - 2) ** 1.4;
+    const area = ev.reduce((sum, e) => sum + rOf(e[4]) ** 2, 0) || 1;
+    const budget = 0.1 * k.count;
+    const dots = [];
+    for (const e of ev) {
+      const rr = rOf(e[4]);
+      const n = Math.max(7, Math.round((budget * rr * rr) / area));
+      for (let j = 0; j < n; j++) dots.push({ e, rr, n, j });
+    }
+    const baseQ = () => k.baseSize || 0.01;
+    if (dots.length)
+      k.cloud({ count: (dots.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+        const { e, rr, n, j } = dots[Math.min(dots.length - 1, i)];
+        // A sunflower disc: even, with a crisp round edge.
+        const q = rr * Math.sqrt((j + 0.5) / n) * 0.92;
+        const a = j * 2.39996;
+        const p0 = onGlobe(e[1], e[2], R + Math.max(0, hAt(e[1], e[2])) * bump + 0.006);
+        const nrm = vec.unit(p0);
+        const t1v = vec.unit(vec.cross(nrm, [0, 1, 0.001]));
+        const t2v = vec.cross(nrm, t1v);
+        const p = vec.add(
+          p0,
+          vec.add(vec.mul(t1v, Math.cos(a) * q), vec.mul(t2v, Math.sin(a) * q)),
+        );
+        const rim = j / n > 0.8;
+        return {
+          p,
+          n: nrm,
+          flat: 0.2,
+          color: rim ? shade(depthColor(e[3]), 0.6) : depthColor(e[3]),
+          size: (rr * 1.9) / Math.sqrt(n) / baseQ(),
+          opacity: 1,
+          part: globe,
+          kind: "band",
+          channel: 0,
+          params: [(e[0] - t0) / Math.max(1, t1 - t0), 0.045],
+          pattern: false,
+        };
+      });
     k.data = { quakes: { live: S.live, count: ev.length, fetched: S.fetched.toISOString(), feed: S.feed } }; // prettier-ignore
     // The plaque: the source and the time of the data, with a timeline bar.
     const feedWords = EQ_FEEDS[S.feed].words;

@@ -3525,7 +3525,7 @@ export const TOYS = [
     pack: "geo",
     labs: true,
     tags: "grand canyon arizona colorado river terrain elevation usgs 3dep landscape relief flood map earth geography",
-    camera: { yaw: 0.35, pitch: 0.6, roll: 0, distance: 3.7 },
+    camera: { yaw: 0.35, pitch: 0.62, roll: 0, distance: 4.1 },
   },
   {
     id: "st-helens",
