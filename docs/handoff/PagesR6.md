@@ -1,3 +1,9 @@
+- Clips on Effect review page 2 (lane `PagesR6`), all six posted October 5, 2026, rendered with
+  `tools/pg6-clip.mjs` at 390x844 and watched: `pg6-two-up`, `pg6-turn`, `pg6-tilt`, `pg6-lab`,
+  `pg6-terrain` (a NASA photo opened only for the clip, never in the repo) and `pg6-layers` (P1, the
+  album's tulips).
+- READY for the Integrators' full run (October 5, 2026).
+
 # Lane Pages r6: pop-up for every page, and figures you choose (prefix `pg6`)
 
 ## Brief
@@ -160,75 +166,25 @@ unchanged; if they need a change, tell the Operator.
     pose (all in the recipe) and figures kept up across turns, the opposite of item 2; so it would
     be a mode of its own.
 
-## Known issues" and "## For the Operator" current.
-
-- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
-  What was cut), opened early and pushed after each finished item. Finish every working turn with a
-  final message that starts "READY:", "WORKING:" or "BLOCKED:".
-
-## State
-
-October 5, 2026 (Opus 5.5). Engine PR #282, lane PR #269.
-
-- **Engine PR** (`claude/lane-pages-r6-engine`, "Engine: a pop-up switch in the top bar, a freed
-  tilt, a stage slider and figure depths in scenes"), additive, with `tests/pg6-engine.spec.mjs`:
-  - A recipe control marked `global: "pop"` is set from a new top-bar button (`#pop-toggle`), not
-    the Toy tab: one setting for every toy that has it, remembered on the device
-    (`localStorage["splashery.popout"]`, as the turntable is), shown only while such a toy is open;
-    on a computer beside the flag, on a phone in the turntable's place (a page toy holds still). A
-    scene whose controls have it on turns it on for the visit. The first time such a toy opens on a
-    device, a line says the button is there.
-  - `out.tiltFree`: a toy whose tilt is locked turns any way while its drive asks; when it stops
-    asking, the view eases back level and square and the lock comes back.
-  - `out.slider = { id, label, value }`: a small slider over the stage; `info.slider` hands its
-    value back.
-  - `toy.figures` in scenes (`[{ page, box, depth }]`, depth 1 to 6, at most 64), as `info.figures`;
-    a drive's `out.figures` replaces it. Documented in SCENE-SCHEMA.md and PACKS.md (5c).
-- **Toy PR** (`claude/lane-pages-r6`), `src/packs/pictures.js`:
-  - Items 1 and 2: Pop out is the top bar's switch for Your book, the Photo album and the Picture
-    lab. Nothing rises by itself: a tap on a figure raises it, a tap on another raises that one too
-    (**at most three at once**: each risen figure is a picture sheet of its own, and a photo's can
-    be a few hundred thousand splats on a phone's budget; a fourth lays the oldest back), a tap on a
-    risen figure (where it stands, or the place it left) lays it back, a tap elsewhere does what it
-    did. A page turn (a tap, the Toy tab, a link, or a drag) lays every risen figure back quickly
-    (0.28 s) before the page moves. Draw a box can raise several boxes. Switching Pop out off lays
-    back the figures it raised; drawn boxes stay until tapped.
-  - Item 3: while a figure stands up the book's tilt is free (`out.tiltFree`): a drag on a risen
-    figure (or off the pages) turns the view any way, forward and back. A drag on the page still
-    pulls it over (after the figures lie down). When the last figure lies down the view eases back
-    to the reading view; Reset view works too.
-  - Item 4: the Picture lab has Pop out and Draw a box for PDFs and pictures (a picture is one
-    figure, the whole of it); a page step waits for risen figures to lie down.
-  - Item 5: a **Depth** slider over the stage sets the depth of the figure raised last, from its own
-    (the default, unchanged) up to five times, in quarter steps; a depth other than its own is kept
-    in the scene and links (`toy.figures`), so the figure rises at that depth when raised again, in
-    the app or an embed.
-  - Item 6: a page pulled over plays the page sound once, as it goes past halfway or is let go to
-    finish; one that falls back makes only a soft settle. The album plays its own page sound.
-  - Help texts (all three) and plan entries updated; TOY-PLAN.md regenerated.
-  - Tests: `tests/pg6.spec.mjs` (ten in Node with stand-in pictures, four in the app). The test PDF
-    with two pictures on a page is made by `tests/fixtures/pg6/make-pdf.mjs`.
-  - `tests/bk5.spec.mjs` (lane Books r5's) changed where it assumed the old behavior (the figure
-    rising by itself, one figure at a time, the switch in the Toy tab, `pop`/`bk5pop` now
-    `pop0`/`bk5pop0`).
-  - Clips: `tools/pg6-clip.mjs` (a copy of the Books r5 recorder with this lane's scenes).
-- P1 (layered pop-up scenes) is built: see "Notes".
-- Checks: `tests/pg6.spec.mjs` (12 in Node, 4 in the app), `tests/pg6-engine.spec.mjs`, the Node
-  parts of `tests/bk5.spec.mjs` and `tests/bk.spec.mjs`, and `tests/help.spec.mjs` pass;
-  `node tools/check-packs.mjs pictures` passes; the contact sheet shows the three toys unchanged at
-  rest, so their thumbnails were not re-rendered. The full suite is left to the Integrators.
-- Clips on Effect review page 2 (lane `PagesR6`), rendered with `tools/pg6-clip.mjs` at 390x844:
-  `pg6-two-up`, `pg6-turn`, `pg6-tilt`; `pg6-lab`, `pg6-layers` and `pg6-terrain` follow.
-
-## Notes
-
-- Depth Anything V2 Small on top-down photos: (to come).
-
 ## Known issues
 
-- (To come.)
+- A figure tapped before the page's figures have been found turns the page instead; they are found a
+  moment after the page settles.
+- Pop out takes effect on the next frame after the switch: a tap in the very same frame (only a
+  scripted one) misses.
+- A top-down photo made much deeper shows some fine streaks on bright, flat areas when tilted far;
+  the steepest steps are softened, but the depth model's relief there is weak.
+- P1 layers follow the depth model, so a landscape splits into bands (water, shore, sky) rather than
+  a subject in front of a background; a photo with a clear subject (the tulips) reads best.
+- The clip recorder takes about 15 to 30 minutes a clip here (SwiftShader).
 
 ## For the Operator
 
-- `tests/bk5.spec.mjs` (lane Books r5's file) had to change with the new behavior; the change is
-  only where it assumed a figure rises by itself.
+- `tests/bk5.spec.mjs` (lane Books r5's file) changed with the new behavior, only where it assumed a
+  figure rises by itself, one at a time, with the switch in the Toy tab (and the sheet `pop` is now
+  `pop0`); one sheet count in `tests/bk.spec.mjs` went from 41 to 43 (three pop sheets).
+- `tools/bk5-clip.mjs` (Books r5's recorder) still drives the old Toy tab switch; this lane's
+  recorder is `tools/pg6-clip.mjs`.
+- PACKS.md 5c documents the engine pieces: `global: "pop"` controls, `out.tiltFree`, `out.slider`
+  and `info.slider`, `info.figures` and `out.figures`, and the relief's `nearest` and `keep`.
+  SCENE-SCHEMA.md documents `toy.figures`.
