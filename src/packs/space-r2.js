@@ -101,6 +101,10 @@ function worldRecipe(ids, extra = {}) {
   const def = worldById(list[0]);
   const relief = list.some((id) => worldById(id).maps.height);
   return {
+    // Polish round: the labs sharp kernel and twice the tier's splats (capped
+    // by the tier), most of the extra going to the feature close-ups.
+    kernel: "sharp",
+    density: 2,
     alive: true,
     turntable: false,
     options: [
@@ -247,7 +251,7 @@ function buildWorld(k, W, o, extra) {
   const air = def.atmosphere;
   const shares = {
     air: air ? 0.07 : 0,
-    patches: patches.length ? 0.3 : 0,
+    patches: patches.length ? 0.42 : 0,
     labels: 0.012 * patches.length,
   };
   const nGround = Math.floor(N * (1 - shares.air - shares.patches - shares.labels));
@@ -560,6 +564,8 @@ const STAR_FLY = 8;
 const STAR_R = 20; // parsecs to the edge
 
 const starsRecipe = {
+  // Polish round: the labs sharp kernel for crisper stars and lines.
+  kernel: "sharp",
   alive: true,
   turntable: true,
   controls: [{ key: "fly", label: "Fly to a star", type: "pulse", ease: STAR_FLY }],
@@ -745,6 +751,10 @@ const GAL_TURN = 7;
 const DISK_HEIGHT = 0.035;
 
 const galaxyRecipe = {
+  // Polish round: the labs sharp kernel and twice the tier's splats (capped
+  // by the tier) for crisper edges.
+  kernel: "sharp",
+  density: 2,
   alive: true,
   turntable: false,
   options: [
@@ -855,6 +865,8 @@ const sizeColor = (re) => (re < 1.6 ? [0.62, 0.55, 0.5] : re < 4 ? [0.52, 0.68, 
 const SOLAR_COLORS = { Mercury: [0.62, 0.6, 0.58], Venus: [0.9, 0.82, 0.62], Earth: [0.35, 0.55, 0.85], Mars: [0.8, 0.45, 0.28] }; // prettier-ignore
 
 const systemsRecipe = {
+  // Polish round: the labs sharp kernel for crisper stars and lines.
+  kernel: "sharp",
   alive: true,
   // focus lets the drive glide the view to the side (out.view).
   focus: () => false,
@@ -1024,6 +1036,10 @@ const BURNS = [
 ];
 
 const rocketRecipe = {
+  // Polish round: the labs sharp kernel and twice the tier's splats (capped
+  // by the tier) for crisper edges.
+  kernel: "sharp",
+  density: 2,
   alive: true,
   turntable: true,
   controls: [{ key: "launch", label: "Stage it", type: "pulse", ease: STAGE_SECS }],
