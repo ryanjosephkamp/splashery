@@ -2779,6 +2779,12 @@ export const TOY_SOUNDS = {
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
+  // ---- Night sky (lane Night sky) ---------------------------------------------------
+  // The sky is silent: a soft breath and a faint glint as the ring marks a star.
+  "night-sky": [
+    { voice: "breath", f: 820, to: 1.15, decay: 1.4, vol: 0.18 },
+    { voice: "sparkle", at: 0.05, vol: 0.18 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).
