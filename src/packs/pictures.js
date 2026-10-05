@@ -4,9 +4,10 @@
 // follow add the book, the photo album, the frame and the screens.
 
 import { mix, shade, smoothstep, clamp } from "../kit.js";
+import { TOY_SOUNDS } from "../toy-sounds.js"; // lane Pages r6: the album's page sound on a pull
 
 // Each toy's tap state (one toy is shown at a time).
-const LAB = { tapN: 0, focus: false };
+const LAB = { tapN: 0, focus: false, sides: [], pend: 0 }; // (sides, pend: lane Pages r6)
 
 // Page focus (see bookFocus) for a toy with one picture: a double-tap on it
 // fills the screen with it, and again (or off it) lets go.
@@ -60,6 +61,8 @@ const PAGE_SOUNDS = {
   stapled: PAGE("your-book-paperback.mp3", { pitch: 1.08, vol: 0.9 }),
 };
 
+// Lane Pages r6: a page pulled over and let fall back settles softly.
+const PAGE_SETTLE = { voice: "thud", f: 160, decay: 0.2, vol: 0.12 };
 const BOOK_STYLES = {
   hardcover: { bound: "side", cover: "board", T: 0.045, cb: 0.024, ov: 0.03, g: 0, curl: 1.25, coverCurl: 0 }, // prettier-ignore
   paperback: { bound: "side", cover: "card", T: 0.036, cb: 0.005, ov: 0, g: 0, curl: 1.25, coverCurl: 1.0 }, // prettier-ignore
@@ -524,6 +527,7 @@ function pullV(a, time) {
 function bookTapAt(p) {
   const st = BOOK.style;
   if (!st || !BOOK.dims) return null;
+  PG.host = "book"; // lane Pages r6
   // Lane Books r5: a risen figure, or a link, first.
   const r5 = bk5Tap(p);
   if (r5) return r5;
@@ -642,36 +646,60 @@ function bookStep(st) {
   return true;
 }
 
-// ---- Links and figures that pop out (lane Books r5) -------------------------------
+// ---- Links and figures that pop out (lane Books r5, lane Pages r6) ----------------
 //
 // Links: a tap on a link of a PDF page lying open (not turning) follows it.
 // A web link asks first (pics.openLink: the address, then a real link that
 // opens in a new tab); a link to another page turns the book there. Each
 // page's links show as a faint blue tint with an underline (bookDecorate).
 //
-// Pop out: the figure on the page in view (a picture in the PDF, from
-// pics.figures; a photo in the album; or a box the reader drew round
-// anything else) rises off the page toward the reader as one solid piece,
-// grows a little and turns toward the middle, and the page under it shows
+// Pop out (lane Pages r6: the top bar's switch, one for every page toy):
+// nothing rises by itself. With the switch on, a tap on a figure (a picture
+// in the PDF, from pics.figures; a photo in the album; the photo in the
+// Picture lab) raises it off the page toward the reader as one solid piece,
+// grown a little and turned toward the middle, and the page under it shows
 // the empty place with a soft shadow (the page drawn again, as a variant).
+// A tap on another figure raises that one too (up to POP_CAP at once; one
+// more lays the oldest back); a tap on a risen figure lays it back; a box
+// drawn round anything else (Draw a box) rises the same way. A page turn
+// lays every risen figure back quickly before the page moves. While any is
+// up the book may be tilted (out.tiltFree): a drag on a risen figure, or off
+// the pages, turns the view.
+//
 // A photo gets its depth from the Photo to 3D depth model (loaded the first
 // time; until then it rises as a flat card); a flat graphic (a chart, a
 // diagram, text) rises as a card with its strongest shapes a little in
-// front. The figure is a picture sheet on its own part (bk5pop), so it moves
-// as one piece; a second tap lays it back.
+// front. Each risen figure is a picture sheet on its own part (pop0 on
+// bk5pop0, and so on), so it moves as one piece. The slider over the stage
+// sets the depth of the figure raised last (from its own depth up to five
+// times more); a depth other than its own is kept in the scene (toy.figures).
 const BK5 = { key: "", links: new Map(), figs: new Map(), popOn: false, boxOn: false, drawing: null, lastK: -1, frame: 0 }; // prettier-ignore
-const POP = { phase: "idle", target: null, next: null, manual: null, id: 0, t0: 0, asked: 0, tUp: 0, u: 0, relief: null, kind: "", known: false, depthMs: 0 }; // prettier-ignore
+// Three at once keeps a phone smooth: each risen figure is a sheet of its own
+// (a photo's up to a few hundred thousand splats on a phone's budget).
+const POP_CAP = 3;
 const POP_RISE = 0.95; // seconds to rise
 const POP_FALL = 0.7; // seconds to lay back
-const POP_SWAY = 6; // seconds the risen figure sways (smaller and smaller)
+const POP_FAST = 0.28; // seconds to lay back before a page turns
+const POP_SWAY = 6; // seconds a risen figure sways (smaller and smaller)
+const DEPTH_MAX = 5; // the most depth, in multiples of a figure's own
+// pops: the figures up (or on their way), oldest first; host: "book" (Your
+// book and the Photo album) or "lab" (the Picture lab); sel: the id of the
+// figure the slider sets; saved: the scene's figure depths (info.figures).
+const PG = { pops: [], id: 0, sel: 0, sliderN: 0, host: "book", pics: null, N: 0, time: 0, saved: [], wait: null, busy: false }; // prettier-ignore
+const LAB_DIMS = { W: 2, H: 2, g: 0 };
 // For tests and tools: the state of links and pop-out, and where a place on
 // a page in view lies (recipe units; f is [x, y] in fractions of the page
-// from its top-left corner).
+// from its top-left corner). POP is the figure raised last (or an idle
+// stand-in).
+const IDLE = { phase: "idle", target: null, kind: "", relief: null, u: 0 };
 export const BOOKS_R5 = {
   BK5,
-  POP,
+  PG,
+  get POP() {
+    return PG.pops[PG.pops.length - 1] || IDLE;
+  },
   point(page, f) {
-    const r = BOOK.sides ? bk5PhotoRect(page, BOOK.pics) : bk5PageRect(page, BOOK.pics);
+    const r = PG.host !== "lab" && BOOK.sides ? bk5PhotoRect(page, PG.pics) : bk5PageRect(page, PG.pics); // prettier-ignore
     return [r.cx - r.hw + 2 * r.hw * f[0], r.cy + r.hh - 2 * r.hh * f[1], r.z];
   },
 };
@@ -690,9 +718,18 @@ function qRot(q, v) {
 }
 const easeOutBack = (x) => 1 + 2.2 * (x - 1) ** 3 + 1.2 * (x - 1) ** 2;
 
+const isLab = () => PG.host === "lab";
+const pgDims = () => (isLab() ? LAB_DIMS : BOOK.dims);
+// The page in view seen close up: "L", "R" or "C" (the book), "C" (the
+// lab's page filling the screen), or null.
+const pgFocus = () => (isLab() ? (LAB.focus ? "C" : null) : BOOK.focus);
+const pgAlbum = () => !isLab() && !!BOOK.sides;
+
 // The sides (pages of a book, sides of the album) open in view: the page in
-// focus, else the right then the left; none while the book is shut.
+// focus, else the right then the left; none while the book is shut. The
+// Picture lab: its page, for a PDF or a picture.
 function bk5Sides(N) {
+  if (isLab()) return LAB.sides || [];
   const st = BOOK.style;
   const K = BOOK.K;
   if (!st || !N) return [];
@@ -709,14 +746,16 @@ function sideSlot(s) {
   return s % 2 ? { slot: ((s + 1) / 2) % 4, fb: "f" } : { slot: (s / 2) % 4, fb: "b" };
 }
 // Where a book's page lies at rest: its center and half sizes (recipe
-// units), fitted to its own shape as the sheets fit it.
+// units), fitted to its own shape as the sheets fit it. (The lab's page is
+// fitted about the middle of its square sheet.)
 function bk5PageRect(P, pics) {
-  const { W, H, g } = BOOK.dims;
+  const { W, H, g } = pgDims();
   const a = pics?.aspect?.(P) || W / H;
   let hw = W / 2;
   let hh = H / 2;
   if (a > W / H) hh = hw / a;
   else hw = hh * a;
+  if (isLab()) return { cx: 0, cy: 0, hw, hh, z: 0.002 };
   if (BOOK.style.bound === "top") return { cx: 0, cy: H / 2 - hh, hw, hh, z: E };
   return { cx: P % 2 ? g + hw : -(g + hw), cy: 0, hw, hh, z: E };
 }
@@ -745,11 +784,10 @@ function bk5PhotoRect(q, pics) {
   return { cx: s % 2 ? box.c[0] : -(W - box.c[0]), cy: box.c[1] + sh - (y0 + ph / 2), hw: (w * sc) / 2, hh: ph / 2, z: ALBUM_CARD + ALBUM_LIFT, sheet: `a${slot}${fb}${n}` }; // prettier-ignore
 }
 // A pop-out target: { page, box (fractions of the page), photo, sheet (the
-// page sheet that gets the hole), hole (its variant), rect (where the
-// figure lies at rest), c (its center on the pop sheet), g0 (the pop
-// sheet's scale at rest) }.
+// page sheet that gets the hole), rect (where the figure lies at rest), c
+// (its center on the pop sheet), g0 (the pop sheet's scale at rest) }.
 function bk5Target(page, box, pics, photo = false) {
-  const { W, H } = BOOK.dims;
+  const { W, H } = pgDims();
   // The pop sheet is the page (or photo) fitted into W x H about the middle.
   const a = pics?.aspect?.(page) || W / H;
   let fw = W / 2;
@@ -758,21 +796,23 @@ function bk5Target(page, box, pics, photo = false) {
   else fw = fh * a;
   const [x0, y0, x1, y1] = box;
   const c = [(x0 + x1 - 1) * fw, (1 - y0 - y1) * fh, 0];
-  if (BOOK.sides) {
+  if (pgAlbum()) {
     const r = bk5PhotoRect(page, pics);
-    return { page, box, photo: true, sheet: r.sheet, hole: "hole", rect: r, c, g0: r.hw / fw };
+    return { page, box, photo: true, sheet: r.sheet, rect: r, c, g0: r.hw / fw };
   }
   const pr = bk5PageRect(page, pics);
   const rect = { cx: pr.cx + (x0 + x1 - 1) * pr.hw, cy: pr.cy + (1 - y0 - y1) * pr.hh, hw: (x1 - x0) * pr.hw, hh: (y1 - y0) * pr.hh, z: pr.z }; // prettier-ignore
-  const { slot, fb } = sideSlot(page);
-  return { page, box, photo, sheet: `${fb}${slot}`, hole: `hole:${box.map((v) => v.toFixed(4)).join(",")}`, rect, c, g0: 1 }; // prettier-ignore
+  const sheet = isLab() ? "page" : (({ slot, fb }) => `${fb}${slot}`)(sideSlot(page));
+  return { page, box, photo, sheet, rect, c, g0: 1 };
 }
-// The figures on the pages in view, the biggest first on each page.
+// The figures on the pages in view, the biggest first on each page (a
+// picture in the lab is one figure, the whole of it).
 function bk5Figures(pics, N) {
   const out = [];
   for (const s of bk5Sides(N)) {
-    if (BOOK.sides)
+    if (pgAlbum())
       for (const q of BOOK.sides[s] || []) out.push(bk5Target(q, [0, 0, 1, 1], pics, true)); // prettier-ignore
+    else if (isLab() && pics?.kind === "image") out.push(bk5Target(s, [0, 0, 1, 1], pics, true));
     else {
       const figs = (BK5.figs.get(s) || []).slice();
       figs.sort((a, b) => (b.box[2] - b.box[0]) * (b.box[3] - b.box[1]) - (a.box[2] - a.box[0]) * (a.box[3] - a.box[1])); // prettier-ignore
@@ -782,12 +822,13 @@ function bk5Figures(pics, N) {
   return out;
 }
 const inRect = (p, r, pad = 0) => Math.abs(p[0] - r.cx) <= r.hw + pad && Math.abs(p[1] - r.cy) <= r.hh + pad; // prettier-ignore
+const sameBox = (a, b) => a.length === 4 && b.length === 4 && a.every((v, i) => Math.abs(v - b[i]) < 2e-3); // prettier-ignore
 // The page in view under a point, with where on it (fractions from its
 // top-left corner); null off the pages (or for the album, which has no
 // links and whose boxes are its photos).
 function bk5PageAt(p, pics) {
-  if (!BOOK.dims || BOOK.sides || BOOK.anim) return null;
-  for (const s of bk5Sides(BOOK.N)) {
+  if (pgAlbum() || (!isLab() && (!BOOK.dims || BOOK.anim))) return null;
+  for (const s of bk5Sides(PG.N)) {
     const r = bk5PageRect(s, pics);
     if (!inRect(p, r)) continue;
     return { page: s, rect: r, f: [(p[0] - (r.cx - r.hw)) / (2 * r.hw), (r.cy + r.hh - p[1]) / (2 * r.hh)] }; // prettier-ignore
@@ -795,27 +836,41 @@ function bk5PageAt(p, pics) {
   return null;
 }
 
-// What a tap does before it turns a page: lays a risen figure back (or
-// raises another it lands on), or follows a link.
-function bk5Tap(p) {
-  if (!BOOK.style || !BOOK.dims) return null;
-  const pics = BOOK.pics;
-  if (POP.phase !== "idle") {
-    const T = POP.target;
-    const other = bk5Figures(pics, BOOK.N).find((f) => (f.page !== T?.page || String(f.box) !== String(T?.box)) && inRect(p, f.rect)); // prettier-ignore
-    if (other) return { key: "turn", pick: { fig: { page: other.page, box: other.box } } };
-    // The switch goes off (and the Toy tab shows it); a drawn box just lays back.
-    return BK5.popOn ? "pop" : { key: "turn", pick: { lay: true } };
+// The risen figures: where each stands now (risen), and the place it left.
+const pgLive = () => PG.pops.filter((F) => F.phase !== "idle");
+const pgUp = () => PG.pops.some((F) => F.phase === "rise" || F.phase === "up");
+function pgHitRisen(p, standing = false) {
+  // (The nearest first: the one raised last.)
+  for (let i = PG.pops.length - 1; i >= 0; i--) {
+    const F = PG.pops[i];
+    if (F.phase !== "rise" && F.phase !== "up") continue;
+    if (F.at && inRect(p, F.at, 0.01)) return F;
+    if (!standing && inRect(p, F.target.rect, 0.005)) return F;
   }
-  const at = bk5PageAt(p, pics);
+  return null;
+}
+
+// What a tap does before it turns a page: lays a risen figure back, raises
+// a figure it lands on (Pop out on), or follows a link.
+function bk5Tap(p) {
+  if (isLab() ? !PG.pics : !BOOK.style || !BOOK.dims) return null;
+  const key = isLab() ? "next" : "turn";
+  const pics = PG.pics;
+  const hit = pgHitRisen(p);
+  if (hit) return { key, pick: { lay: hit.id } };
+  if (BK5.popOn && (isLab() || !BOOK.anim)) {
+    const f = bk5Figures(pics, PG.N).find((f) => inRect(p, f.rect) && !PG.pops.some((F) => F.phase !== "idle" && F.target.page === f.page && sameBox(F.target.box, f.box))); // prettier-ignore
+    if (f) return { key, pick: { fig: { page: f.page, box: f.box } } };
+  }
+  const at = !isLab() && bk5PageAt(p, pics);
   const links = at && BK5.links.get(at.page);
   if (!links) return null;
   const [fx, fy] = at.f;
   // (A little slack round each box: a finger is wider than a line of text.)
   const sx = 0.012;
   const sy = 0.008;
-  const hit = links.find((l) => fx >= l.box[0] - sx && fx <= l.box[2] + sx && fy >= l.box[1] - sy && fy <= l.box[3] + sy); // prettier-ignore
-  return hit ? { key: "turn", pick: { link: hit } } : null;
+  const link = links.find((l) => fx >= l.box[0] - sx && fx <= l.box[2] + sx && fy >= l.box[1] - sy && fy <= l.box[3] + sy); // prettier-ignore
+  return link ? { key, pick: { link } } : null;
 }
 
 // A tap's pick that is not a turn: true when it was one of these.
@@ -832,49 +887,84 @@ function bk5Pick(pk, pics, N) {
       pics.go(pk.link.page);
     }
   } else if (pk.fig) {
-    POP.next = pk.fig;
-    if (POP.phase === "up" || POP.phase === "rise") bk5Fall(BOOK.time);
+    pgRaise(pk.fig, false);
   } else if (pk.lay) {
-    POP.manual = null;
+    const F = PG.pops.find((F) => F.id === pk.lay);
+    if (F) pgFall(F, PG.time);
   }
   return true;
 }
 
-function bk5Idle() {
-  POP.phase = "idle";
-  POP.target = null;
-  POP.relief = null;
-  POP.u = 0;
-  POP.id++;
+// Raises a figure ({ page, box }): on its own sheet and part, the oldest
+// laid back first when POP_CAP are up.
+function pgRaise(fig, manual) {
+  const pics = PG.pics;
+  if (!pics) return;
+  const live = pgLive();
+  if (live.length >= POP_CAP) {
+    pgFall(live[0], PG.time, true);
+    PG.wait = { fig, manual };
+    return;
+  }
+  const used = new Set(PG.pops.map((F) => F.slot));
+  let slot = 0;
+  while (used.has(slot)) slot++;
+  const T = bk5Target(fig.page, fig.box, pics, pgAlbum() || (isLab() && pics.kind === "image"));
+  const saved = PG.saved.find((s) => s.page === T.page && sameBox(s.box, T.box));
+  const F = { id: ++PG.id, slot, target: T, phase: "prep", t0: 0, asked: 0, tUp: 0, u: 0, relief: null, kind: "", known: false, depthMs: 0, depth: saved ? saved.depth : 1, manual, fast: false, at: null }; // prettier-ignore
+  PG.pops.push(F);
+  PG.sel = F.id;
+  bk5Start(F, pics);
 }
-function bk5Fall(time) {
+function pgFall(F, time, fast = false) {
+  if (F.phase === "prep" || F.phase === "rest") {
+    F.phase = "unhole";
+    F.asked = time;
+    F.fast = fast;
+    return;
+  }
+  if (F.phase !== "rise" && F.phase !== "up") {
+    if (fast) F.fast = true;
+    return;
+  }
   // From wherever it is now, back down.
-  POP.phase = "fall";
-  POP.t0 = time - (1 - Math.min(1, POP.u)) * POP_FALL;
+  const dur = fast ? POP_FAST : POP_FALL;
+  F.phase = "fall";
+  F.fast = fast;
+  F.t0 = time - (1 - Math.min(1, F.u)) * dur;
+}
+// Every figure back down, quickly (a page about to turn).
+function pgLayAll(time) {
+  PG.wait = null;
+  for (const F of PG.pops) pgFall(F, time, true);
+}
+function pgClear() {
+  PG.pops = [];
+  PG.wait = null;
+  PG.sel = 0;
+}
+// (A new build: the slider's changes count from the start again.)
+function pgReset() {
+  pgClear();
+  PG.sliderN = 0;
 }
 
 // Starts a pop: the figure's own pixels tell a photo from a flat graphic;
 // a graphic gets its layers at once, a photo its depth when the model has
 // worked it out.
-function bk5Start(T, pics) {
-  bk5Idle();
-  POP.phase = "prep";
-  POP.target = T;
-  POP.known = false;
-  POP.kind = "";
-  POP.depthMs = 0;
-  const id = POP.id;
-  const live = () => POP.id === id;
+function bk5Start(F, pics) {
+  const T = F.target;
+  const live = () => PG.pops.includes(F) && F.phase !== "idle";
   (async () => {
     let photo = T.photo;
     if (!photo) {
       const c = await pics.crop(T.page, T.box, 160);
       if (!live() || !c) return;
       photo = bk5IsPhoto(c);
-      if (!photo) POP.relief = bk5Layers(c, T, id);
+      if (!photo) F.relief = bk5Layers(c, T, F.id);
     }
-    POP.kind = photo ? "photo" : "graphic";
-    POP.known = true;
+    F.kind = photo ? "photo" : "graphic";
+    F.known = true;
     if (!photo) return;
     const c = await pics.crop(T.page, T.box, 518);
     if (!live() || !c) return;
@@ -882,11 +972,11 @@ function bk5Start(T, pics) {
     const [{ estimateDepth }, { normalizeDepth }] = await Promise.all([import("./photo-3d-depth.js"), import("./photo-3d-core.js")]); // prettier-ignore
     const dep = await estimateDepth({ w: img.width, h: img.height, data: img.data });
     if (!live()) return;
-    POP.depthMs = dep.ms || 0;
+    F.depthMs = dep.ms || 0;
     // About a fifth of the figure's shorter side, from the farthest to the nearest.
-    const short = 2 * Math.min(T.rect.hw, T.rect.hh) / T.g0; // prettier-ignore
-    POP.relief = {
-      key: `d${id}`,
+    const short = (2 * Math.min(T.rect.hw, T.rect.hh)) / T.g0;
+    F.relief = {
+      key: `d${F.id}`,
       w: dep.w,
       h: dep.h,
       d: normalizeDepth(dep.d),
@@ -894,7 +984,7 @@ function bk5Start(T, pics) {
     };
   })().catch((err) => {
     console.warn("Pop out:", err?.message || err);
-    if (live()) POP.known = true;
+    if (live()) F.known = true;
   });
 }
 
@@ -950,36 +1040,72 @@ function bk5Layers(c, T, id) {
       }
     d = o;
   }
-  const short = 2 * Math.min(T.rect.hw, T.rect.hh) / T.g0; // prettier-ignore
+  const short = (2 * Math.min(T.rect.hw, T.rect.hh)) / T.g0;
   return { key: `l${id}`, w, h, d, depth: 0.045 * short };
 }
 
+// A figure's relief at its chosen depth (its own key per depth, so the
+// sheet is built again when the depth changes).
+function pgRelief(F) {
+  const r = F.relief;
+  if (!r || F.depth === 1) return r;
+  return { ...r, key: `${r.key}x${F.depth}`, depth: r.depth * F.depth };
+}
+
+// The slider over the stage: the depth of the figure raised last. Moving it
+// sets that figure's depth (in quarter steps) and keeps it in the scene.
+function pgSlider(out, info) {
+  const F = PG.pops.find((F) => F.id === PG.sel && (F.phase === "rise" || F.phase === "up"));
+  const s = info?.slider;
+  // (A toy built again counts its slider's changes from the start.)
+  if (s && s.n < PG.sliderN) PG.sliderN = 0;
+  if (F && s && s.n > PG.sliderN && s.id === `pg${F.id}`) {
+    const depth = Math.round(4 * (1 + (DEPTH_MAX - 1) * s.value)) / 4;
+    if (depth !== F.depth) {
+      F.depth = depth;
+      const T = F.target;
+      const list = PG.saved.filter((x) => !(x.page === T.page && sameBox(x.box, T.box)));
+      if (depth > 1) list.push({ page: T.page, box: T.box.map((v) => Math.round(v * 1e4) / 1e4), depth }); // prettier-ignore
+      PG.saved = list;
+      out.figures = list;
+    }
+  }
+  if (s) PG.sliderN = Math.max(PG.sliderN, s.n);
+  if (F && F.known) out.slider = { id: `pg${F.id}`, label: "Depth", value: (F.depth - 1) / (DEPTH_MAX - 1) }; // prettier-ignore
+}
+
 // Each frame: the links and figures of the pages in view, and the pop-out.
-function bk5Drive(c, out, pics, N, time) {
+// `moving`: a page turning (every figure goes at once).
+function bk5Drive(c, out, pics, N, time, info = null, moving = false) {
   BK5.frame++;
-  BOOK.pics = pics;
-  BOOK.time = time;
+  PG.pics = pics;
+  PG.N = N;
+  PG.time = time;
+  if (!isLab()) {
+    BOOK.pics = pics;
+    BOOK.time = time;
+  }
+  if (Array.isArray(info?.figures)) PG.saved = info.figures;
   const mk = pics ? `${pics.kind}|${pics.name}|${pics.count}` : "";
   if (mk !== BK5.key) {
     BK5.key = mk;
     BK5.links.clear();
     BK5.figs.clear();
-    POP.manual = null;
-    POP.next = null;
-    bk5Idle();
+    pgClear();
   }
   BK5.popOn = (c.pop ?? 0) > 0.5;
   BK5.boxOn = (c.box ?? 0) > 0.5;
-  const moving = !!BOOK.anim || BOOK.queue.length > 0;
-  // A page turned: a risen figure is put back at once, and a drawn box goes.
-  if (moving || BOOK.K !== BK5.lastK) {
-    if (POP.phase !== "idle") bk5Idle();
-    POP.manual = null;
-    POP.next = null;
-    BK5.lastK = BOOK.K;
+  // A page turned without waiting (a pull, a page that changed under it):
+  // every figure is put back at once, and a drawn box goes.
+  const K = isLab() ? (pics?.page ?? 0) : BOOK.K;
+  if (moving || K !== BK5.lastK) {
+    if (PG.pops.length) pgClear();
+    BK5.lastK = K;
   }
+  const canFind = pics && (pics.kind === "pdf" || (isLab() && pics.kind === "image"));
   if (
-    pics?.kind === "pdf" &&
+    canFind &&
+    pics.kind === "pdf" &&
     typeof pics.links === "function" &&
     typeof pics.figures === "function" &&
     !moving
@@ -990,91 +1116,61 @@ function bk5Drive(c, out, pics, N, time) {
         [BK5.links, "links"],
         [BK5.figs, "figures"],
       ]) {
-        // prettier-ignore
         if (map.has(s)) continue;
         map.set(s, null);
         const key = BK5.key;
         pics[what](s).then((list) => BK5.key === key && map.set(s, list || []), () => map.delete(s)); // prettier-ignore
       }
     }
-  const want = !moving && !!pics && (BK5.popOn || !!POP.manual);
-  const T = POP.target;
-  switch (POP.phase) {
-    case "idle": {
-      if (!want) break;
-      // A figure tapped while another was up, a drawn box, or the biggest in view.
-      let next = null;
-      const pick = POP.next || POP.manual;
-      if (pick) next = bk5Target(pick.page, pick.box, pics, !!BOOK.sides);
-      else next = bk5Figures(pics, N)[0] || null;
-      POP.next = null;
-      if (next) bk5Start(next, pics);
-      break;
-    }
-    case "prep":
-      if (!want) bk5Idle();
-      else if (POP.known && pics.ready("pop")) {
-        POP.phase = "rest";
-        POP.asked = time;
-      }
-      break;
-    case "rest": {
-      // (It lies where it was, so it can wait unseen: for the page under it,
-      // and up to 2.5 s for a photo's depth, so it rises with it.)
-      const depthWait = POP.kind === "photo" && !(POP.relief && pics.ready("pop")) && time - POP.asked < 2.5; // prettier-ignore
-      if (!want || POP.next) POP.phase = "unhole";
-      else if ((pics.ready(T.sheet) && !depthWait) || time - POP.asked > 4) {
-        POP.phase = "rise";
-        POP.t0 = time;
-        out.cues.push(POP_SOUNDS.rise);
-      }
-      break;
-    }
-    case "rise":
-    case "up":
-      if (!want || POP.next) bk5Fall(time);
-      else if (POP.phase === "rise" && time - POP.t0 >= POP_RISE) {
-        POP.phase = "up";
-        POP.tUp = time;
-      }
-      break;
-    case "fall":
-      if (time - POP.t0 >= POP_FALL) {
-        POP.phase = "unhole";
-        POP.asked = time;
-        out.cues.push(POP_SOUNDS.land);
-      }
-      break;
-    case "unhole":
-      // The page goes back to its own picture under the figure, then the
-      // figure goes.
-      if (pics.ready(T.sheet) || time - POP.asked > 1.5) bk5Idle();
-      break;
+  // Pop out switched off: the figures it raised lie back (drawn boxes stay).
+  if (!BK5.popOn) for (const F of PG.pops) if (!F.manual) pgFall(F, time);
+  for (const F of PG.pops) pgStep(F, out, pics, time);
+  PG.pops = PG.pops.filter((F) => F.phase !== "idle");
+  if (!PG.pops.some((F) => F.id === PG.sel)) PG.sel = PG.pops[PG.pops.length - 1]?.id || 0;
+  if (PG.wait && pgLive().length < POP_CAP) {
+    const w = PG.wait;
+    PG.wait = null;
+    pgRaise(w.fig, w.manual);
   }
-  // The pose.
-  const ph = POP.phase;
-  let u = 0;
-  if (ph === "rise") u = easeOutBack(clamp01((time - POP.t0) / POP_RISE));
-  else if (ph === "up") u = 1;
-  else if (ph === "fall") u = 1 - easeIO(clamp01((time - POP.t0) / POP_FALL));
-  POP.u = ph === "rise" ? clamp01((time - POP.t0) / POP_RISE) : ph === "up" ? 1 : ph === "fall" ? 1 - clamp01((time - POP.t0) / POP_FALL) : 0; // prettier-ignore
-  const tgt = POP.target;
-  if (tgt && ph !== "idle") {
-    out.sheets.pop = { page: tgt.page, crop: tgt.box, relief: POP.relief, visible: ph === "prep" ? 0 : 1, ahead: 1 }; // prettier-ignore
-    if ((ph === "rest" || ph === "rise" || ph === "up" || ph === "fall") && out.sheets[tgt.sheet])
-      out.sheets[tgt.sheet].variant = tgt.hole;
-    out.parts.bk5pop = bk5Pose(tgt, u, time);
-    if (ph === "rise" || ph === "fall" || (ph === "up" && time - POP.tUp < POP_SWAY)) {
+  pgSlider(out, info);
+  // The poses, the holes and the sheets.
+  const holes = new Map();
+  for (let i = 0; i < POP_CAP; i++) {
+    const F = PG.pops.find((F) => F.slot === i);
+    if (!F) {
+      out.sheets[`pop${i}`] = { page: -1, visible: 0 };
+      out.parts[`bk5pop${i}`] = { visible: 0 };
+      continue;
+    }
+    const T = F.target;
+    const ph = F.phase;
+    out.sheets[`pop${i}`] = { page: T.page, crop: T.box, relief: pgRelief(F), visible: ph === "prep" ? 0 : 1, ahead: 1 }; // prettier-ignore
+    if (ph === "rest" || ph === "rise" || ph === "up" || ph === "fall") {
+      if (!holes.has(T.sheet)) holes.set(T.sheet, []);
+      holes.get(T.sheet).push(T.box);
+    }
+    let u = 0;
+    const fall = F.fast ? POP_FAST : POP_FALL;
+    if (ph === "rise") u = easeOutBack(clamp01((time - F.t0) / POP_RISE));
+    else if (ph === "up") u = 1;
+    else if (ph === "fall") u = 1 - easeIO(clamp01((time - F.t0) / fall));
+    const pose = bk5Pose(F, u, time);
+    out.parts[`bk5pop${i}`] = pose;
+    if (ph === "rise" || ph === "fall" || (ph === "up" && time - F.tUp < POP_SWAY)) {
       if (BK5.frame % 2 === 0) out.resortPose = true;
     }
-  } else {
-    out.sheets.pop = { page: -1, visible: 0 };
-    out.parts.bk5pop = { visible: 0 };
   }
-  // Frames keep coming while it moves, waits for its pictures or its depth,
-  // or waits for the page's figures to be found.
-  const waiting = want && ph === "idle" && pics?.kind === "pdf" && typeof pics.figures === "function" && bk5Sides(N).some((s) => !BK5.figs.get(s)); // prettier-ignore
-  POP.busy = waiting || (ph !== "idle" && ph !== "up") || (ph === "up" && (time - POP.tUp < POP_SWAY || (POP.kind === "photo" && !POP.relief))); // prettier-ignore
+  for (const [id, boxes] of holes) {
+    if (!out.sheets[id]) continue;
+    // (The album's photo is its own sheet: the whole of it lifts.)
+    out.sheets[id].variant = pgAlbum() ? "hole" : `hole:${boxes.map((b) => b.map((v) => v.toFixed(4)).join(",")).join(";")}`; // prettier-ignore
+  }
+  // While a figure stands up, the book may be tilted to see it from the side.
+  if (pgUp()) out.tiltFree = true;
+  // Frames keep coming while a figure moves, waits for its pictures or its
+  // depth, or while the page's figures are being found.
+  const waiting = BK5.popOn && pics?.kind === "pdf" && typeof pics.figures === "function" && bk5Sides(N).some((s) => !BK5.figs.get(s)); // prettier-ignore
+  PG.busy = waiting || PG.pops.some((F) => F.phase !== "up" || time - F.tUp < POP_SWAY || (F.kind === "photo" && !F.relief)); // prettier-ignore
   // A box being drawn: its four corners.
   const D = BK5.drawing;
   for (let i = 0; i < 4; i++) {
@@ -1091,27 +1187,78 @@ function bk5Drive(c, out, pics, N, time) {
   if (D && BK5.frame % 3 === 0) out.resortPose = true;
 }
 
+// One figure's step: prep (finding photo or graphic) -> rest (lying where it
+// was, unseen, waiting for its sheet and a photo's depth) -> rise -> up ->
+// fall -> unhole (the page gets its own picture back) -> idle.
+function pgStep(F, out, pics, time) {
+  const T = F.target;
+  switch (F.phase) {
+    case "prep":
+      if (F.known && pics.ready(`pop${F.slot}`)) {
+        F.phase = "rest";
+        F.asked = time;
+      }
+      break;
+    case "rest": {
+      // (It lies where it was, so it can wait unseen: for the page under it,
+      // and up to 2.5 s for a photo's depth, so it rises with it.)
+      const depthWait = F.kind === "photo" && !(F.relief && pics.ready(`pop${F.slot}`)) && time - F.asked < 2.5; // prettier-ignore
+      if ((pics.ready(T.sheet) && !depthWait) || time - F.asked > 4) {
+        F.phase = "rise";
+        F.t0 = time;
+        out.cues.push(POP_SOUNDS.rise);
+      }
+      break;
+    }
+    case "rise":
+      if (time - F.t0 >= POP_RISE) {
+        F.phase = "up";
+        F.tUp = time;
+      }
+      break;
+    case "fall":
+      if (time - F.t0 >= (F.fast ? POP_FAST : POP_FALL)) {
+        F.phase = "unhole";
+        F.asked = time;
+        out.cues.push(POP_SOUNDS.land);
+      }
+      break;
+    case "unhole":
+      // The page goes back to its own picture under the figure, then the
+      // figure goes (sooner before a page turn).
+      if (pics.ready(T.sheet) || time - F.asked > (F.fast ? 0.5 : 1.5)) F.phase = "idle";
+      break;
+  }
+}
+
 // The risen figure's pose at u (0 lying where it was, 1 risen; past 1 it
 // overshoots a little): toward the reader and the middle of the view,
-// growing a little, turned toward the middle, swaying a few times.
-function bk5Pose(T, u, time) {
-  const { W, H, g } = BOOK.dims;
+// growing a little, turned toward the middle, swaying a few times. Also
+// keeps where it stands (F.at), for taps.
+function bk5Pose(F, u, time) {
+  const T = F.target;
+  const { W, H, g } = pgDims();
   const r = T.rect;
-  const f = BOOK.focus;
+  const f = pgFocus();
   const view = f === "L" ? [-(g + W / 2), 0] : f === "R" ? [g + W / 2, 0] : [0, 0];
   const z0 = r.z + 0.008;
   // Seen a page at a time the view is close: the figure comes less far
   // toward you and further toward the middle, so it stays on the screen.
-  const lift = f ? 0.18 : 0.3;
+  // (Each figure a little nearer than the one before, so two that meet
+  // stand in front of each other, not mixed.)
+  const lift = ((f ? 0.18 : 0.3) + 0.03 * F.slot) * H;
   const pull = f ? 0.65 : 0.3;
   const C = [r.cx + (view[0] - r.cx) * pull * u, r.cy + (view[1] - r.cy) * pull * u, z0 + lift * u]; // prettier-ignore
-  const grow = Math.max(1, Math.min(f ? 1.15 : 1.3, (0.82 * H) / (2 * r.hh), (0.82 * (f ? W : 2 * W)) / (2 * r.hw))); // prettier-ignore
+  const span = isLab() || f ? W : 2 * W;
+  const grow = Math.max(1, Math.min(f ? 1.15 : 1.3, (0.82 * H) / (2 * r.hh), (0.82 * span) / (2 * r.hw))); // prettier-ignore
   const s = T.g0 * (1 + (grow - 1) * u);
-  const face = Math.max(-0.32, Math.min(0.32, -(r.cx - view[0]) * 0.45));
-  const since = POP.phase === "up" ? time - POP.tUp : 0;
-  const sway = POP.phase === "up" ? 0.07 * Math.sin(2 * Math.PI * 0.32 * since) * Math.exp(-since / 2.2) : 0; // prettier-ignore
+  const face = Math.max(-0.32, Math.min(0.32, -(r.cx - view[0]) * 0.45 * (PAGE_H / H)));
+  const since = F.phase === "up" ? time - F.tUp : 0;
+  const sway = F.phase === "up" ? 0.07 * Math.sin(2 * Math.PI * 0.32 * since + F.slot) * Math.exp(-since / 2.2) : 0; // prettier-ignore
   const q = qMul(qAxis([0, 1, 0], face * u + sway), qAxis([1, 0, 0], -0.07 * u));
   const c = qRot(q, [T.c[0] * s, T.c[1] * s, 0]);
+  F.u = F.phase === "rise" ? clamp01((time - F.t0) / POP_RISE) : F.phase === "up" ? 1 : F.phase === "fall" ? Math.max(0, u) : 0; // prettier-ignore
+  F.at = { cx: C[0], cy: C[1], hw: (r.hw * s) / T.g0, hh: (r.hh * s) / T.g0 };
   return { quat: q, offset: [C[0] - c[0], C[1] - c[1], C[2] - c[2]], scale: s, visible: 1 };
 }
 
@@ -1121,18 +1268,18 @@ const POP_SOUNDS = {
   land: { voice: "thud", f: 170, decay: 0.25, vol: 0.25 },
 };
 
-// The pop sheet, its part and the corners of a box being drawn, for a book
-// or the album (after its own sheets).
-function bk5Build(k, z) {
-  const { W, H } = BOOK.dims;
-  bk5Idle();
-  POP.manual = null;
-  POP.next = null;
+// The pop sheets, their parts and the corners of a box being drawn, for a
+// book, the album or the lab (after its own sheets).
+function bk5Build(k, z, dims = BOOK.dims) {
+  const { W, H } = dims;
+  pgReset();
   BK5.drawing = null;
-  const pp = k.part("bk5pop", { pivot: [0, 0, 0], axis: [0, 1, 0] });
-  k.sheet({ id: "pop", center: [0, 0, 0], width: W, height: H, part: pp, method: "pixels" });
-  const a = 0.06;
-  const t = 0.01;
+  for (let i = 0; i < POP_CAP; i++) {
+    const pp = k.part(`bk5pop${i}`, { pivot: [0, 0, 0], axis: [0, 1, 0] });
+    k.sheet({ id: `pop${i}`, center: [0, 0, 0], width: W, height: H, part: pp, method: "pixels" });
+  }
+  const a = 0.06 * (H / PAGE_H);
+  const t = 0.01 * (H / PAGE_H);
   const blue = "#2f7de1";
   for (let i = 0; i < 4; i++) {
     const cp = k.part(`bk5c${i}`, { pivot: [0, 0, 0], axis: [0, 1, 0] });
@@ -1144,16 +1291,18 @@ function bk5Build(k, z) {
 }
 
 // Drawing a box (the "Draw a box" switch): a drag on a page draws it, and
-// letting go raises what is inside it. Otherwise the book's own drag.
+// letting go raises what is inside it. A drag that starts on a risen figure
+// turns the view (the camera's own drag). Otherwise the book's own drag.
 function bk5Drag(base) {
   return {
     plane: "view",
     at(p) {
-      if (BK5.boxOn && !BOOK.sides) return !!bk5PageAt(p, BOOK.pics);
+      if (pgHitRisen(p, true)) return false;
+      if (BK5.boxOn && !pgAlbum()) return !!bk5PageAt(p, PG.pics);
       return base.at(p);
     },
     start(p, time) {
-      const at = BK5.boxOn && !BOOK.sides ? bk5PageAt(p, BOOK.pics) : null;
+      const at = BK5.boxOn && !pgAlbum() ? bk5PageAt(p, PG.pics) : null;
       if (!at) return base.start(p, time);
       BK5.drawing = { page: at.page, rect: at.rect, p0: p.slice(), p1: p.slice() };
     },
@@ -1173,11 +1322,7 @@ function bk5Drag(base) {
       const box = [fx(Math.min(D.p0[0], D.p1[0])), fy(Math.max(D.p0[1], D.p1[1])), fx(Math.max(D.p0[0], D.p1[0])), fy(Math.min(D.p0[1], D.p1[1]))].map(clamp01); // prettier-ignore
       // Too small to be a box: a tap.
       if (box[2] - box[0] < 0.04 || box[3] - box[1] < 0.03) return;
-      POP.manual = { page: D.page, box };
-      if (POP.phase !== "idle") {
-        POP.next = POP.manual;
-        bk5Fall(time);
-      }
+      pgRaise({ page: D.page, box }, true);
     },
   };
 }
@@ -1190,10 +1335,9 @@ function bookDecorate(canvas, { variant, links, sheet }) {
   const g = canvas.getContext("2d", { willReadFrequently: true });
   const w = canvas.width;
   const h = canvas.height;
-  if (variant?.startsWith("hole:")) {
-    const b = variant.slice(5).split(",").map(Number);
-    bk5Hole(g, w, h, b);
-  }
+  // (Lane Pages r6: several figures' places, "hole:a,b,c,d;e,f,g,h".)
+  if (variant?.startsWith("hole:"))
+    for (const b of variant.slice(5).split(";")) bk5Hole(g, w, h, b.split(",").map(Number));
   for (const l of sheet === "cover" ? [] : links || []) {
     const [x0, y0, x1, y1] = l.box;
     g.fillStyle = "rgba(40, 110, 230, 0.12)";
@@ -1253,6 +1397,8 @@ function bk5Hole(g, w, h, [x0, y0, x1, y1], paper = null) {
 // curling from it. Let go past halfway, or with a flick, and the page
 // finishes its turn; otherwise it falls back. A press that doesn't move is
 // a tap (the tap then turns the page by itself).
+// Lane Pages r6: Pop out, set from the top bar (src/app.js, showPopOut).
+const POP_CONTROL = { key: "pop", label: "Pop out", type: "toggle", ease: 0.12, global: "pop" };
 const BOOK_PULL = { lag: 0.035, finish: 0.5, flick: 1.6, slow: 1, bendK: 1 };
 const ALBUM_PULL = { lag: 0.12, finish: 0.58, flick: 2.3, slow: 1.3, bendK: 0.7 };
 const OVER = 2 * Math.PI - 0.06; // a stapled sheet turned over the top, hanging behind
@@ -1288,6 +1434,12 @@ function bookDrag(opts) {
       const N = BOOK.N;
       const K = BOOK.K;
       let a = BOOK.anim;
+      // Lane Pages r6: figures standing up lie back first; the page follows
+      // the finger once they are down.
+      if (!a && PG.pops.length) {
+        pgLayAll(time);
+        return;
+      }
       if (!a) {
         // Which way: the page must move the way it turns.
         const dx = p[0] - pr.p0[0];
@@ -1356,7 +1508,7 @@ const BOOK_RECIPE = {
   density: 1,
   // Frames keep coming while a page turns (a turn can start from the Toy
   // tab's page buttons, not only from a tap).
-  alive: () => !!BOOK.anim || BOOK.queue.length > 0 || BOOK.landed > 0 || !!BOOK.press || POP.busy || !!BK5.drawing, // prettier-ignore
+  alive: () => !!BOOK.anim || BOOK.queue.length > 0 || BOOK.landed > 0 || !!BOOK.press || PG.busy || !!BK5.drawing, // prettier-ignore
   options: [
     {
       key: "style",
@@ -1376,9 +1528,10 @@ const BOOK_RECIPE = {
   ],
   controls: [
     { key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 },
-    // Lane Books r5: the figure in view rises off the page (and lies back);
-    // a drag on a page draws a box round anything else to raise.
-    { key: "pop", label: "Pop out", type: "toggle", ease: 0.12 },
+    // Lane Books r5: a figure rises off the page (and lies back); a drag on
+    // a page draws a box round anything else to raise. Lane Pages r6: Pop
+    // out is the top bar's switch, one for every page toy.
+    POP_CONTROL,
     { key: "box", label: "Draw a box", type: "toggle", ease: 0.1 },
   ],
   // Sound C: each style's own page sound (PAGE_SOUNDS), played by drive.
@@ -1400,6 +1553,7 @@ const BOOK_RECIPE = {
   drive(t, c, out, info) {
     const st = BOOK.style;
     if (!st) return;
+    PG.host = "book"; // lane Pages r6
     const D = BOOK.dims;
     const pics = info.data?.pictures;
     const N = bookCount(pics);
@@ -1428,8 +1582,21 @@ const BOOK_RECIPE = {
       delete a.go;
     }
     if (a?.pull) {
+      // Lane Pages r6: a page pulled over plays its page sound once, as it
+      // goes over (past halfway, or let go to finish); one that falls back
+      // settles softly.
+      const P = a.pull;
+      P.max = Math.max(P.max || 0, P.v);
+      if (!P.sounded && (P.v > 0.5 || P.release?.to)) {
+        P.sounded = true;
+        if (BOOK.pageSound) out.cues.push(BOOK.pageSound);
+      }
       // A pull ends once the page has finished its turn, or fallen back.
       const R = a.pull.release;
+      if (R && !R.to && !P.settled && P.max > 0.12 && time - R.t0 >= R.dur * 0.85) {
+        P.settled = true;
+        out.cues.push(PAGE_SETTLE);
+      }
       if (R && time - R.t0 >= R.dur) {
         BOOK.K = R.to ? a.to : a.from;
         BOOK.anim = null;
@@ -1460,7 +1627,11 @@ const BOOK_RECIPE = {
       BOOK.anim = null;
       BOOK.landed = 3; // sorted again where everything came to rest
     }
-    if (N && !BOOK.anim) {
+    // Lane Pages r6: a turn asked for while figures stand up waits until
+    // they have all laid back (quickly).
+    const turnAsked = !BOOK.anim && ((pics && pics.page !== BOOK.lastPage) || BOOK.queue.length > 0); // prettier-ignore
+    if (turnAsked && PG.pops.length) pgLayAll(time);
+    if (N && !BOOK.anim && !PG.pops.length) {
       if (pics && pics.page !== BOOK.lastPage) {
         // The Toy tab's Previous and Next step one spread; any other page
         // (a link, a jump) opens the spread that shows it.
@@ -1507,7 +1678,7 @@ const BOOK_RECIPE = {
       const R = info.R || 1;
       out.body = { offset: [(-(1 - L.open) * (D.g + D.W / 2) * D.S) / R, 0, 0] };
     }
-    bk5Drive(c, out, pics, N, time); // lane Books r5: links and the pop-out
+    bk5Drive(c, out, pics, N, time, info, !!BOOK.anim); // lane Books r5: links and the pop-out
   },
   build(k, o) {
     const st = BOOK_STYLES[o.style] || BOOK_STYLES.hardcover;
@@ -1518,9 +1689,11 @@ const BOOK_RECIPE = {
     const cover = o.color || "#2f4b6e";
     const paper = "#fcfbf7";
     bookResume(k);
+    BOOK.pageSound = PAGE_SOUNDS[o.style] || PAGE_SOUNDS.hardcover; // lane Pages r6: on a pull
     Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides: null, sideOf: null, sheetsOf: null, press: null, focus: null, viewK: -1, one: o.reading === "one" }); // prettier-ignore
     if (st.bound === "top") buildStapled(k, st, W, H);
     else buildSideBound(k, st, o, { W, H, cover, paper });
+    PG.host = "book"; // lane Pages r6
     bk5Build(k, 0.03);
     useBudget(k);
   },
@@ -2052,7 +2225,7 @@ const ALBUM_RECIPE = {
   ],
   controls: [
     { key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 },
-    { key: "pop", label: "Pop out", type: "toggle", ease: 0.12 }, // lane Books r5: a photo rises
+    POP_CONTROL, // lane Books r5: a photo rises (lane Pages r6: the top bar's switch)
   ],
   action: { key: "turn", label: "Turn the page", at: bookTapAt },
   focus: bookFocus,
@@ -2096,6 +2269,7 @@ const ALBUM_RECIPE = {
     bookResume(k);
     Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides, sideOf, press: null, focus: null, viewK: -1, one: o.reading === "one" }); // prettier-ignore
     Object.assign(BOOK, { kinds, captions: !!o.captions }); // lane Books r5 (where each photo lies)
+    BOOK.pageSound = TOY_SOUNDS["photo-album"]; // lane Pages r6: its tap sound, on a pull
     const names = ["o", "t", "u", "l", "r"];
     BOOK.sheetsOf = (i, fb, side) => {
       const kind = kinds[side] || "";
@@ -2137,6 +2311,7 @@ const ALBUM_RECIPE = {
         }
       },
     });
+    PG.host = "book"; // lane Pages r6
     bk5Build(k, 0.03);
     useBudget(k);
   },
@@ -2454,6 +2629,24 @@ const FRAME_RECIPE = {
   },
 };
 
+// Lane Pages r6: the Picture lab's tap: a figure (raise it, or lay a risen
+// one back) first, else the page on.
+function labTapAt(p) {
+  PG.host = "lab";
+  return bk5Tap(p) || { key: "next", pick: p[0] < 0 ? 1 : 0 };
+}
+// The lab's page drawn before it becomes splats: the places figures left.
+function labDecorate(canvas, { variant }) {
+  if (!variant?.startsWith("hole:")) return;
+  const g = canvas.getContext("2d", { willReadFrequently: true });
+  // (A whole picture lifted leaves the gray of its card.)
+  for (const b of variant.slice(5).split(";")) {
+    const box = b.split(",").map(Number);
+    const whole = box[0] < 0.01 && box[1] < 0.01 && box[2] > 0.99 && box[3] > 0.99;
+    bk5Hole(g, canvas.width, canvas.height, box, whole ? "#dde0e5" : null);
+  }
+}
+
 export const RECIPES = {
   "picture-lab": {
     // A flat sheet that shows whatever you open, and nothing else. It keeps
@@ -2474,17 +2667,27 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "next", label: "Next page", type: "pulse", ease: 0.35 }],
+    controls: [
+      { key: "next", label: "Next page", type: "pulse", ease: 0.35 },
+      // Lane Pages r6: Pop out (the top bar's switch) and Draw a box, as in
+      // Your book, for a PDF or a picture.
+      POP_CONTROL,
+      { key: "box", label: "Draw a box", type: "toggle", ease: 0.1 },
+    ],
     // A tap on the left of the page goes back, on the right (or the middle)
-    // forward; the pages slide, they don't flip.
-    action: { key: "next", label: "Next page, or play and pause", at: (p) => ({ key: "next", pick: p[0] < 0 ? 1 : 0 }) }, // prettier-ignore
+    // forward; the pages slide, they don't flip. (Lane Pages r6: a tap on a
+    // figure raises it, on a risen one lays it back.)
+    action: { key: "next", label: "Next page, or play and pause", at: (p) => labTapAt(p) }, // prettier-ignore
     focus: (p) => focusToggle(LAB, p),
+    alive: () => PG.busy || !!BK5.drawing || LAB.pend !== 0, // lane Pages r6
+    drag: bk5Drag({ plane: "view", at: () => false, start() {}, move() {}, end() {} }), // lane Pages r6: Draw a box
     // What the toy opens before you open something of your own, and what
     // it accepts.
     pictures: {
       sample: (o) =>
         o.sample === "photo" ? "assets/toys/picture-lab/photo.jpg" : "assets/toys/picture-lab/article.pdf", // prettier-ignore
       accept: ["pdf", "image", "gif", "video"],
+      decorate: labDecorate, // lane Pages r6: the place a figure left
     },
     credits: [
       {
@@ -2503,30 +2706,44 @@ export const RECIPES = {
     },
     drive(t, c, out, info) {
       const pics = info.data?.pictures;
+      const time = info.time ?? t;
+      PG.host = "lab"; // lane Pages r6
+      LAB.sides = pics && (pics.kind === "pdf" || pics.kind === "image") ? [pics.page] : [];
       // A tap turns to the next page (back to the first after the last), or
-      // plays and pauses a video.
+      // plays and pauses a video. (Lane Pages r6: a figure's tap first; a
+      // page turn waits until risen figures have laid back.)
       const n = info.tap?.n ?? 0;
       if (n < LAB.tapN) LAB.tapN = 0;
+      if (n > LAB.tapN && bk5Pick(info.tap?.pick, pics, pics?.count || 0)) LAB.tapN = n;
       if (n > LAB.tapN) {
         LAB.tapN = n;
         const d = info.tap?.pick === 1 ? -1 : 1;
         if (pics?.kind === "video") pics.togglePlay();
-        else if (pics?.count > 1) pics.go((pics.page + d + pics.count) % pics.count);
+        else if (pics?.count > 1) LAB.pend = d;
+      }
+      if (LAB.pend && PG.pops.length) pgLayAll(time);
+      else if (LAB.pend) {
+        if (pics?.count > 1) pics.go((pics.page + LAB.pend + pics.count) % pics.count);
+        LAB.pend = 0;
       }
       out.sheets = { page: { page: pics?.page ?? 0 } };
       // Page focus: a double-tap fills the screen with the page.
       out.view = LAB.focus
         ? { key: "page", center: [0, 0, 0], size: [2.08, 2.08] }
         : { key: "all" };
+      bk5Drive(c, out, pics, pics?.count || 0, time, info); // lane Pages r6: the pop-out
     },
     build(k) {
       LAB.tapN = 0;
       LAB.focus = false;
+      LAB.pend = 0;
       k.sheet({ id: "page", center: [0, 0, 0], width: 2, height: 2, normal: [0, 0, 1] });
       // A thin gray card behind it, so a white page has an edge on a white
       // background (and the picture a back), with clean, sharp edges (rect).
       const W = 2.08;
       rect(k, { share: 1, at: [-W / 2, -W / 2, -0.03], u: [W, 0, 0], v: [0, W, 0], n: [0, 0, 1], color: () => "#c3c7ce" }); // prettier-ignore
+      PG.host = "lab";
+      bk5Build(k, 0.04, LAB_DIMS); // lane Pages r6: the pop sheets and a drawn box's corners
     },
   },
   "your-book": BOOK_RECIPE,
