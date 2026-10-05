@@ -218,8 +218,10 @@ class Shadows {
     const m = new Uint8Array(G * G);
     for (const p of this.cells) {
       const w = this.q.qrot(q, p);
-      const gx = Math.floor((w[0] / (N * VOX) + 0.5) * G);
-      const gy = Math.floor((w[1] / (N * VOX) + 0.5) * G);
+      // A piece's center falls on a line between two cells, and it covers
+      // one each side (rounded, so a hair's turn doesn't flip it across).
+      const gx = Math.round((w[0] / (N * VOX) + 0.5) * G);
+      const gy = Math.round((w[1] / (N * VOX) + 0.5) * G);
       for (let dy = -1; dy <= 0; dy++)
         for (let dx = -1; dx <= 0; dx++) {
           const x = gx + dx;
