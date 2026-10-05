@@ -97,7 +97,8 @@ docs/audits/poses-2026-10.md, the per-toy recipe fixes your sweep lists, and thi
 
 ## State
 
-WORKING: engine fix written and being measured (October 5, 2026). Model: Opus 5.5, default effort.
+WORKING: engine PR #276 and lane PR #277 open (drafts); the full sweep is running (October 5, 2026).
+Model: Opus 5.5, default effort.
 
 ### The cause (item 1)
 
@@ -125,3 +126,25 @@ forced to play as one body (`tools/pose-clip.mjs --level1`).
 - Tools: `tools/pose-clip.mjs` (a tap upright, on its side and upside down, side by side),
   `tools/pose-sweep.mjs` (every toy measured), `tools/pose-upright.mjs` (upright frames and uniforms
   hashed, main against the branch).
+
+### Verified so far (October 5, 2026)
+
+- Upright untouched: `tools/pose-upright.mjs` on 15 toys × 5 moments, main against the engine
+  branch: every effect uniform identical (0 of 75 differ); frames pixel-identical except two late
+  heart frames, which also differ between two runs of the same branch (rendering timing).
+- `tests/pose-engine.spec.mjs` (4) and `tests/pose.spec.mjs` (grape, toy piano, heart, bee: error 0
+  in both poses) pass. `hea-engine`, `heb-engine`, `phy-engine` and `hec-engine` pass, except the
+  `hec-engine` timing test "soft parts are cheap", run while the machine was busy (to re-run idle).
+- Before the fix the grape's peel scored 34 (posed frames against the upright ones turned on the
+  screen); after, 0. The sweep (`tools/pose-sweep.mjs`, two parts) is measuring every toy.
+- Clips on Effect review page 2: `pose-grape` and `pose-hoodie` (after), with `-before` cards.
+
+### Gravity effects (item 5), so far
+
+- Engine: flame and rise kinds rise along the world's real up; fall kinds (the snow globe's snow,
+  rain under the storm cloud) fall along it only as far as the world's down runs down the toy, so
+  nothing falls out through a container's wall. A recipe's drive gets `about.up` while posed.
+- Never posed whole, so nothing to fix: the Newton's cradle (its own drags), the fluid lab
+  (`turntable: false`).
+- Still to check by eye: candle, campfire, snow globe, lava lamp, storm cloud, and the toys the
+  sweep marks "check".
