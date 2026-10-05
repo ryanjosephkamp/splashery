@@ -1010,7 +1010,7 @@ export const TOY_SOUNDS = {
   ],
   bacteriophage: [
     { voice: "boing", f: 120, to: 0.5, rate: 30, decay: 0.5 },
-    { voice: "clack", f: 1300, decay: 1.5 },
+    { voice: "hollow", f: 640, decay: 1.5 },
     { voice: "squish", at: 0.5, pitch: 1.5, bright: 0.8 },
   ],
   // Pinches in, the daughters part (1.45 s), then slide back and merge (3.4 s).
@@ -2751,6 +2751,20 @@ export const TOY_SOUNDS = {
     { voice: "wood", at: 1.05, f: 900, decay: 0.08, vol: 0.12 },
     { voice: "wood", at: 1.2, f: 1100, decay: 0.06, vol: 0.08 },
   ],
+  // Lane QR lab r2: soft, not electronic. A light knock as a part lifts; a
+  // scrape and a soft thud as damage lands; a slide out and a knock back.
+  "qr-anatomy": [
+    { voice: "wood", f: 820, decay: 0.18, vol: 0.16 },
+    { voice: "breath", f: 1100, to: 0.8, decay: 0.5, vol: 0.07 },
+  ],
+  "qr-damage": [
+    { voice: "breath", f: 520, to: 0.6, decay: 0.45, vol: 0.16 },
+    { voice: "thud", at: 0.3, f: 130, decay: 0.25, vol: 0.3 },
+  ],
+  "qr-three": [
+    { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.12 },
+    { voice: "wood", at: 2.6, f: 660, decay: 0.15, vol: 0.12 },
+  ],
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint
@@ -2774,12 +2788,105 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // ---- Imaging (lane Imaging) ---------------------------------------------------------
+  // The belt's low rumble as the bag rides through, the curtains' slap, and
+  // the scanner's soft beep when its picture is done.
+  "airport-xray": [
+    { voice: "rumble", f: 55, decay: 3.2, vol: 0.25 },
+    { voice: "slap", f: 300, at: 1.9, vol: 0.3 },
+    { voice: "blip", f: 880, at: 3.6, vol: 0.28 },
+  ],
+  // The gantry's knock as it starts and its motor's low run as it sweeps;
+  // lower as it sweeps back.
+  "how-ct": {
+    on: [
+      { voice: "hollow", f: 180, vol: 0.5 },
+      { voice: "rumble", f: 85, decay: 4.5, vol: 0.25, at: 0.05 },
+    ],
+    off: [
+      { voice: "hollow", f: 150, vol: 0.45 },
+      { voice: "rumble", f: 70, decay: 4, vol: 0.22, at: 0.05 },
+    ],
+  },
+  // A nutshell's hollow knock as the kernel falls away, and a softer one
+  // as it comes back.
+  "walnut-ct": {
+    on: [
+      { voice: "hollow", f: 420, vol: 0.55 },
+      { voice: "wood", f: 900, at: 0.09, vol: 0.3 },
+    ],
+    off: [
+      { voice: "hollow", f: 360, vol: 0.45 },
+      { voice: "wood", f: 760, at: 0.09, vol: 0.25 },
+    ],
+  },
+  // An MRI scanner's knocking as it steps through the slices.
+  "fruit-mri": [
+    { voice: "hollow", f: 640, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.12, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.24, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.36, vol: 0.32 },
+    { voice: "thud", f: 90, at: 0.55, vol: 0.4 },
+    { voice: "hollow", f: 540, at: 0.7, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 0.82, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 0.94, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 1.06, vol: 0.28 },
+  ],
+  // The microscope's stage motor stepping in, with a soft vacuum hum.
+  "electron-microscope": [
+    { voice: "wood", f: 520, vol: 0.35 },
+    { voice: "wood", f: 560, at: 0.1, vol: 0.3 },
+    { voice: "rumble", f: 110, decay: 1.2, vol: 0.18, at: 0.05 },
+  ],
+  // The thermal camera's shutter clicking as it calibrates, then a soft
+  // tick; a lower click as it turns off.
+  "thermal-camera": {
+    on: [
+      { voice: "wood", f: 1500, vol: 0.3 },
+      { voice: "wood", f: 1500, at: 0.18, vol: 0.25 },
+      { voice: "ding", f: 1046, at: 0.4, vol: 0.12, decay: 0.4 },
+    ],
+    off: [{ voice: "wood", f: 1100, vol: 0.28 }],
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
   "fluid-lab": [
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
+  ],
+  // ---- Tiny world r2 (lane Tiny world r2) ----
+  // The story's own cues (tRNAs docking, the stop codon, the fold) come from
+  // drive() in src/packs/tiny-r2.js; the tap starts it with a soft swell.
+  "dna-to-protein": [
+    { voice: "glass", f: 784, decay: 1.6, vol: 0.7, bright: 0.25 },
+    { voice: "glass", f: 1175, at: 0.18, decay: 1.4, vol: 0.45, bright: 0.25 },
+  ],
+  // Cell division: a soft swell as the chromatin condenses, a light tick
+  // as the sisters part (7.6 s) and a low wooden pop as the cells pinch
+  // apart (13 s).
+  mitosis: [
+    { voice: "breath", f: 900, to: 0.7, decay: 2.2, vol: 0.7 },
+    { voice: "tine", f: 1319, at: 7.7, decay: 1.2, vol: 0.6 },
+    { voice: "hollow", f: 260, at: 13.1, decay: 0.8, vol: 0.9 },
+  ],
+  // Apoptosis: a low sigh as the cell shrinks, soft bubbling as it blebs and
+  // a few quiet pops as the bodies part (6.6 s).
+  apoptosis: [
+    { voice: "breath", f: 500, to: 0.5, decay: 1.8, vol: 0.25 },
+    { voice: "boing", f: 300, at: 2.6, decay: 0.4, vol: 0.6 },
+    { voice: "boing", f: 360, at: 3.4, decay: 0.4, vol: 0.3 },
+    { voice: "boing", f: 330, at: 4.2, decay: 0.4, vol: 0.3 },
+    { voice: "pock", f: 520, at: 6.7, decay: 0.3, vol: 0.5 },
+    { voice: "pock", f: 600, at: 7.1, decay: 0.3, vol: 0.45 },
+  ],
+  // Phagocytosis: a soft stretch as the pseudopods reach out, a gulp as the
+  // phagosome closes (4.5 s) and a low fizz as it is digested.
+  phagocytosis: [
+    { voice: "breath", f: 1100, to: 0.6, at: 2.0, decay: 2.0, vol: 0.3 },
+    { voice: "thud", f: 140, at: 4.5, decay: 0.5, vol: 0.7 },
+    { voice: "hollow", f: 420, at: 4.55, decay: 0.5, vol: 0.5 },
+    { voice: "breath", f: 2400, to: 0.4, at: 8.9, decay: 2.0, vol: 0.2 },
   ],
 };
 

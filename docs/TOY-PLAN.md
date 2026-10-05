@@ -10,57 +10,59 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 386 toys. 356 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 378.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 5.
-- Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
+- **new** (needs its own effect): 8.
+- Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
 
 - **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant,
-  Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
-  Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball,
-  Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car,
-  Tractor, Statue of Liberty, Your book, Photo album. Effects to make clearer or more dramatic,
-  still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon
-  knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry,
-  Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden
-  elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot
-  cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball,
-  Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
-  ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
-  Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
-  puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar system, Mercury, Venus,
-  Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet,
-  Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
-  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
-  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba,
-  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby,
-  Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy
-  atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
-  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
-  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
-  Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
-  Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
-  Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
-  Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell
-  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
-  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
-  Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
-  orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
-  Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
-  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
-  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
-  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, QR code,
-  Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution
-  microscope, Galaxy in a box, Fluid lab, Screen.
+  Real alarm clock, Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American
+  football, Tennis ball, Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball,
+  Medicine ball, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop,
+  Decorated tree, Diya, Sports car, Tractor, Statue of Liberty, Your book, Photo album. Effects to
+  make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie,
+  Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee,
+  Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real
+  rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage
+  camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real
+  pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball,
+  Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball,
+  Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy
+  ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar
+  system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora
+  world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula,
+  Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell,
+  DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion,
+  Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis, Electron orbital,
+  Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode,
+  Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
+  tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
+  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
+  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
+  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
+  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
+  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
+  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
+  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
+  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
+  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
+  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
+  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
+  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
+  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
+  Song landscape, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo
+  to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
+  Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
+  microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -68,8 +70,8 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code,
-  Video to 3D
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
+  a QR code works, QR damage lab, Three QR codes in one, Video to 3D
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -369,7 +371,10 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Plucked ukulele chord (synth, bright, nylon).
 - **Real alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
   - Owner: Hands should move. On tap it should jump up and down and ring like an alarm clock.
-  - Effect: Hands tick all the time; tap rattles it off the table while it rings.
+  - Fixed: Fix8: the hands show the real time. The scanned hands are cut out cleanly and kit-built
+    hour, minute and second hands of the same shapes turn from this device's clock.
+  - Effect: The hands show the real time and the second hand ticks; tap rattles it off the table
+    while it rings.
   - Improved: E1: the red second hand ticks all the time. A tap rings the twin bells and the clock
     rattles across the table (2.4 s).
   - Sound: A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).
@@ -1079,7 +1084,7 @@ Proposals below are suggestions; the owner may change them.
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
 
-## Tiny (18)
+## Tiny (22)
 
 - **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
@@ -1205,6 +1210,48 @@ Proposals below are suggestions; the owner may change them.
     a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back.
   - Sound: Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle
     or ding (Sound C, October 2, 2026).
+- **DNA to protein** (`dna-to-protein`). Now: tap: Make the protein. Plan: keep.
+  - Owner: Push Plan pick S13 (October 5, 2026): “DNA to protein is awesome.”
+  - Effect: Transcription, then translation codon by codon, then the chain folds into its real
+    structure.
+  - Improved: Tiny world r2: RNA polymerase opens the helix (the coding strand lifts, the template's
+    bases turn to pair) and lays down the mRNA; the mRNA moves down, the small subunit and the first
+    tRNA scan to AUG, the large subunit joins, tRNAs dock codon by codon and the chain grows up the
+    exit tunnel into a globule; at the stop codon a release factor frees it and it folds into its
+    PDB structure (about 34 s, the camera following each step).
+  - Sound: A soft glass swell at the tap, a wooden knock as each tRNA docks, a bell at the stop
+    codon and a low glass note as the protein settles.
+- **Cell division** (`mitosis`). Now: tap: Divide. Plan: keep.
+  - Owner: The owner's push notes (October 5, 2026): the cell's life cycle.
+  - Effect: Mitosis through its phases, from prophase to cytokinesis, and back to one cell.
+  - Improved: Tiny world r2: chromatin threads condense into eight solid chromatids (four
+    chromosomes), the centrosomes move round to the poles, the envelope breaks into twelve pieces,
+    kinetochore fibers grow out and the chromosomes line up at the plate; the sisters are pulled to
+    the poles as the cell stretches, new nuclei fade in, the furrow pinches the cell in two, and one
+    daughter drifts off while the other grows back into the first cell (18 s). Phase names show
+    above the cell.
+  - Sound: A soft breath as the chromatin condenses, a light tine as the sisters part and a hollow
+    pop as the cells pinch apart.
+- **Apoptosis** (`apoptosis`). Now: tap: Start apoptosis. Plan: keep.
+  - Owner: The owner's push notes (October 5, 2026): apoptosis.
+  - Effect: The cell shrinks, blebs and comes apart into apoptotic bodies, which are cleared; a
+    neighbor moves in.
+  - Improved: Tiny world r2: the cell shrinks as a whole and its nucleus condenses dark; two sets of
+    blebs bulge in turn (morphs); the nucleus breaks into four pieces; the membrane pinches into
+    seven membrane-bound bodies (a morph, then solid pieces) holding the organelles and nuclear
+    pieces, which drift away; a neighbor cell moves in (14 s).
+  - Sound: A low breath as it shrinks, soft boings as it blebs and quiet pops as the bodies part.
+- **Phagocytosis** (`phagocytosis`). Now: tap: Catch the bacterium. Plan: keep.
+  - Owner: The owner's push notes (October 5, 2026): phagocytosis.
+  - Effect: Pseudopods wrap a bacterium into a phagosome; lysosomes fuse; it is digested and the
+    waste released.
+  - Improved: Tiny world r2: a bacterium swims to the neutrophil, pseudopods wrap round it (a morph
+    of the membrane, two layers deep) and close; the phagosome is drawn inside, five lysosomes fuse
+    with it one by one, the bacterium falls apart into six solid pieces that shrink, and the waste
+    is released out of the far side; new lysosomes bud from the Golgi and a new bacterium swims up
+    (16 s). Labels name each step.
+  - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
+    as it is digested.
 
 ## Atoms (6)
 
@@ -2763,7 +2810,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (9)
+## Studio (12)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2834,6 +2881,36 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Soft: a wooden knock and a puff for the tap, then the click of pieces snapping back
     (Burst: a muffled pop, a whoosh and a rush back; Split-flap: a run of light clicks; Rain: a
     patter; Fold: paper rustles and soft creases).
+- **How a QR code works** (`qr-anatomy`). Now: tap: Next part. Plan: new effect (E6).
+  - Owner: The owner's push notes of October 4, 2026 (Q6, "strong yes"; "it has to be technically
+    correct"), lane QR lab r2, October 5, 2026.
+  - Effect: How a QR code works: a tap lights up the next part of a real code (finders, separators,
+    timing, alignment, format and version information, the dark module, data and error correction
+    codewords, remainder bits, the mask); its modules lift toward you as solid tiles in the part's
+    color. Encode your own text steps through the mode, the count, the data bits, padding, error
+    correction, blocks and interleaving, the zigzag placement (every bit drops into place along the
+    path) and the eight masks (the masked tiles turn over, with each mask's penalty), every step
+    checked against Nayuki's encoder.
+  - Sound: A light wooden knock and a soft breath as each part lifts.
+- **QR damage lab** (`qr-damage`). Now: tap: Add damage. Plan: new effect (E6).
+  - Owner: The owner's push notes of October 4, 2026 (Q7, "an absolute strong yes ... build this out
+    very comprehensively"; X3, the code that heals, October 5), lane QR lab r2, October 5, 2026.
+  - Effect: The Damage lab: a tap adds the chosen damage (scratch, sticker, tear, burn, smudge, or
+    the splats' own: blur, shrink, grow, jitter, fade, color drift; with Tilt, Curve and Move in
+    time as sliders). A sticker drops onto the code, a torn corner peels up and falls away, a burned
+    corner chars and crumbles. A meter reads the very picture on the stage with jsQR after each
+    change and counts each block's lost codewords against what it can fix; the four levels can stand
+    side by side. Heal it shows the code as a reader read it, wrong modules in red, and turns them
+    over block by block as Reed–Solomon decoding fixes each block.
+  - Sound: A soft scrape and a muffled thud as the damage lands.
+- **Three QR codes in one** (`qr-three`). Now: tap: Pull the three apart. Plan: new effect (E6).
+  - Owner: The owner's pick X2 on the Push Plan, October 5, 2026 (three codes in one square), lane
+    QR lab r2.
+  - Effect: Three QR codes in the red, green and blue of one square (eight colors). A tap pulls the
+    square apart into its three codes, each in its own color, which slide back and out to the sides
+    and come back together. Read all three splits the picture into its channels and reads each code;
+    an ordinary reader's result is shown beside them.
+  - Sound: A soft breath as the codes slide apart and a light knock as they meet again.
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).
@@ -2951,3 +3028,62 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+
+## Imaging (6)
+
+- **Airport X-ray scanner** (`airport-xray`). Now: tap: Send the next bag. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
+  - Effect: Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride
+    the belt through the scanner, pushing its lead curtains aside; the screen on top builds each
+    bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic
+    orange, inorganic green, metal blue, dense black). A tap sends the next bag.
+  - Improved: Imaging: new toy.
+  - Sound: The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is
+    done.
+- **How CT works** (`how-ct`). Now: tap: Scan or undo the scan. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
+  - Effect: A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector
+    arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane).
+    Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps
+    back.
+  - Improved: Imaging: new toy.
+  - Sound: The gantry's knock as it starts and its motor's low run, lower on the way back.
+- **Walnut CT scan** (`walnut-ct`). Now: tap: Shell only, or the whole walnut. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an
+    openly licensed dataset (lane Imaging; labs only).
+  - Effect: A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm
+    block (resampled to the device's budget). A drag moves a cutting plane through it (front to
+    back, top down or side to side) and shows the shell, the kernel's lobes and the air between
+    them. The tap raises the density window so the kernel melts away and only the shell stays; a
+    second tap brings it back.
+  - Improved: Imaging: new toy, with tools/img-walnut.mjs.
+  - Sound: A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.
+- **MRI of a fruit** (`fruit-mri`). Now: tap: Play through the slices. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).
+  - Effect: A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each
+    slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline
+    of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag
+    scrolls through them and the tap plays through all of them, front to back, and comes back.
+  - Improved: Imaging: new toy.
+  - Sound: An MRI scanner's knocking as it steps through the slices.
+- **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step (the third goes back
+  out). Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom
+    and a snowflake (lane Imaging; labs only).
+  - Effect: Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of
+    pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron
+    microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each
+    tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface);
+    the third goes back out.
+  - Improved: Imaging: new toy.
+  - Sound: The stage motor's two soft steps and a low vacuum hum.
+- **Thermal camera** (`thermal-camera`). Now: tap: Thermal camera on or off. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea
+    cooling and a hand warmer (lane Imaging; labs only).
+  - Effect: A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap
+    crossfades from normal colors to the thermal camera's false colors (the iron palette), and the
+    tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays
+    warm and the ice water cold. A second tap goes back to normal colors.
+  - Improved: Imaging: new toy.
+  - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
+    turns off.
