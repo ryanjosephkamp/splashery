@@ -2115,8 +2115,9 @@
     "qr-code": {
       "v": "new",
       "owner": "The owner's idea of October 1, 2026 (\"go hard on it\"), lane QR, October 3, 2026.",
-      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).",
-      "sound": "Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps)."
+      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap knocks the modules around your finger loose: they fly out toward you, tumble and snap back on a spring (2.8 s). The Toy tab adds Assemble, Flip, Burst and return, Ripple (tiles ride a ring wave), Split-flap (row by row, each tile flips round like a departure board), Fold (the code folds like paper and unfolds), Rain (pieces lift off and rain back down, bottom row first, stacking into place) and Point cloud (every splat shrinks to a point, the code dissolves into a drifting cloud and gathers back). Each moves solid pieces and ends on a code that scans.",
+      "sound": "Soft: a wooden knock and a puff for the tap, then the click of pieces snapping back (Burst: a muffled pop, a whoosh and a rush back; Split-flap: a run of light clicks; Rain: a patter; Fold: paper rustles and soft creases).",
+      "improved": "QR r3 (October 5, 2026): crisp module edges (rings of thin splats along each edge: the 10–90% edge about half as wide at phone and desktop size); six new motions and a tap that knocks modules loose; Alive grows to eight patterns (wave, sweep, pulse, flowing gradient, rainbow, current, charge, scan line) with a speed slider from a quarter to four times as fast, every frame scanning; twelve color themes and 24 countries' flag colors, each at least 4.5 : 1."
     },
     "qr-anatomy": {
       "v": "new",
@@ -2489,6 +2490,18 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "data-in-3d": {
+      "v": "new",
+      "owner": "Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes, ticks and labels that turn to face the camera. A tap drops every point, bar or the surface to the floor and lets it rise back into place with a small overshoot (2.4 s).",
+      "sound": "A soft thud as the marks land, a light knock, and a breath as they rise."
+    },
+    "climate-records": {
+      "v": "new",
+      "owner": "Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a year; GISTEMP temperature anomalies as a field of monthly bars or a wall of yearly stripes. A tap redraws the CO2 record from 1974 behind a bright bead (8 s), or lets the bars sink to zero and grow back.",
+      "sound": "A long, low breath under a soft thud."
     },
     "dna-to-protein": {
       "v": "keep",
