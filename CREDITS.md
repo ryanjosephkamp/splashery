@@ -746,6 +746,18 @@ from the PDB (checked on the live pages on October 5, 2026).
   `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
   (the wwPDB data policy); its backbone only.
 
+## Imaging (lane Imaging)
+
+- Walnut CT scan: Walnut 1 of the "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning:
+  Samples 1-8" by Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia
+  Bethany Coban and K. Joost Batenburg (CWI, Amsterdam; Scientific Data 6, 215, 2019),
+  [10.5281/zenodo.2686726](https://doi.org/10.5281/zenodo.2686726),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Its high-quality reconstruction (100 µm
+  voxels), every second slice, averaged to 0.3 mm, cropped and stored as 8-bit densities by
+  `tools/img-walnut.mjs`.
+- The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
+  recipes.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
