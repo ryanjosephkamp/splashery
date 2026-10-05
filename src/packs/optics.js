@@ -41,7 +41,7 @@ export const freqOf = (c) => lerp(FREQ, clamp(c.freq ?? 0.67, 0, 1));
 const SOURCE_Y = 8; // dippers, cm from the front
 const LINE_Y = 7; // the plane-wave bar
 const BARRIER_Y = 12; // the barrier's middle
-const LIFT = 0.12; // recipe units of lift at full height (heights exaggerated)
+const LIFT = 0.075; // recipe units of lift at full height (heights exaggerated about 4 times)
 const H_SCALE = 0.035; // cm of water height that takes most of the lift
 const toX = (x) => x / 10 - TANK.width / 20;
 const toZ = (y) => TANK.depth / 20 - y / 10;
@@ -92,7 +92,7 @@ export function tankLayout(o) {
 
 // The one tank (one toy shows at a time); kept across rebuilds of the same
 // size, so changing the slits doesn't still the water.
-const RT = { tank: null, key: "", last: null, version: 0, tapN: 0, drop: null, guides: null, layout: null, readoutAt: -1 }; // prettier-ignore
+const RT = { M: 216, tank: null, key: "", last: null, version: 0, tapN: 0, drop: null, guides: null, layout: null, readoutAt: -1 }; // prettier-ignore
 
 function setUpTank(o) {
   if (!RT.tank) RT.tank = new RippleTank(TANK);
@@ -151,11 +151,13 @@ const GUIDE = [255, 214, 120];
 
 function tankScreen() {
   return {
+    // The display grid (RT.M × RT.M texels, set by the build from the
+    // splat budget), then the bars' rows.
     get width() {
-      return TANK.nx * 2;
+      return RT.M * 2;
     },
     get height() {
-      return Math.round(TANK.depth / (TANK.width / TANK.nx)) + BAR_K;
+      return RT.M + barRows(RT.M);
     },
     version: () => (RT.tank ? `${RT.version}|${RT.tank.steps}|${RT.guidesOn}` : "none"),
     draw(g) {
@@ -164,52 +166,87 @@ function tankScreen() {
   };
 }
 
+// Rows of texels the bars take below the water's M rows.
+const barRows = (M) => Math.ceil((TANK.nx * BAR_K) / M);
+
+// The display grid's sampling of the simulation, per column (and row): the
+// cell to its left and the weight of the next, for bilinear heights.
+function displaySampling(M, n) {
+  const i0 = new Int32Array(M);
+  const w = new Float32Array(M);
+  for (let I = 0; I < M; I++) {
+    const f = Math.min(n - 1.001, Math.max(0, ((I + 0.5) * n) / M - 0.5));
+    i0[I] = Math.floor(f);
+    w[I] = f - i0[I];
+  }
+  return { i0, w };
+}
+
 function drawTank(g, tank) {
   const { nx, ny, dx } = tank;
-  const W = nx * 2;
+  const M = RT.M;
+  const W = M * 2;
   const H = g.canvas.height;
   if (!RT.img || RT.img.width !== W || RT.img.height !== H) RT.img = g.createImageData(W, H);
+  if (!RT.samp || RT.samp.M !== M) RT.samp = { M, x: displaySampling(M, nx), y: displaySampling(M, ny), h: new Float32Array(M * M) }; // prettier-ignore
   const px = RT.img.data;
   const u = tank.u;
   const wall = tank.wall;
   const lambda = tank.wavelength;
   const guides = RT.guidesOn ? RT.guides : null;
+  // The height at every display texel, bilinear from the simulation's cells:
+  // finer than the grid, so the crests' light and shade stay crisp.
+  const { x: sx0, y: sy0, h: hd } = RT.samp;
+  for (let J = 0; J < M; J++) {
+    const j = sy0.i0[J];
+    const ty = sy0.w[J];
+    for (let I = 0; I < M; I++) {
+      const i = sx0.i0[I];
+      const tx = sx0.w[I];
+      const k = j * nx + i;
+      hd[J * M + I] = (1 - ty) * ((1 - tx) * u[k] + tx * u[k + 1]) + ty * ((1 - tx) * u[k + nx] + tx * u[k + nx + 1]); // prettier-ignore
+    }
+  }
   // Light from the back left, high up; the slope is exaggerated as the
   // heights are, and the curvature focuses light under the crests, as a
   // ripple tank's lamp does on the floor under it.
+  const dd = (dx * nx) / M; // cm between display texels
   const E = 2.2 / H_SCALE;
   const lx = -0.35;
   const lz = -0.45;
-  const F = 0.25 * H_SCALE * dx * dx;
-  for (let j = 0; j < ny; j++) {
-    for (let i = 0; i < nx; i++) {
-      const k = j * nx + i;
-      const o = (j * W + i) * 4;
-      const q = o + nx * 4;
-      const h = u[k];
-      const iL = i > 0 ? k - 1 : k;
-      const iR = i < nx - 1 ? k + 1 : k;
-      const jD = j > 0 ? k - nx : k;
-      const jU = j < ny - 1 ? k + nx : k;
+  const F = 0.25 * H_SCALE * dd * dd;
+  for (let J = 0; J < M; J++) {
+    const jc = Math.min(ny - 1, Math.floor(((J + 0.5) * ny) / M));
+    for (let I = 0; I < M; I++) {
+      const K = J * M + I;
+      const o = (J * W + I) * 4;
+      const q = o + M * 4;
+      const h = hd[K];
+      const iL = I > 0 ? K - 1 : K;
+      const iR = I < M - 1 ? K + 1 : K;
+      const jD = J > 0 ? K - M : K;
+      const jU = J < M - 1 ? K + M : K;
       // Slopes and curvature in units of the display height, softly
       // limited so strong waves near the source don't drown weak ones.
-      const sx = Math.tanh(((u[iR] - u[iL]) / (2 * dx)) * E);
-      const sy = Math.tanh(((u[jU] - u[jD]) / (2 * dx)) * E);
-      const lap = Math.tanh((u[iL] + u[iR] + u[jD] + u[jU] - 4 * h) / F);
+      const sx = Math.tanh(((hd[iR] - hd[iL]) / (2 * dd)) * E);
+      const sy = Math.tanh(((hd[jU] - hd[jD]) / (2 * dd)) * E);
+      const lap = Math.tanh((hd[iL] + hd[iR] + hd[jD] + hd[jU] - 4 * h) / F);
       // n = (-sx, 1, +sy) in tank axes where +y runs away (−z): dot with L.
       const nl = (-sx * lx + 1 * 0.8 + sy * lz) / Math.sqrt(1 + sx * sx + sy * sy);
-      let b = clamp(0.45 + 0.6 * (nl - 0.8) + 0.32 * Math.tanh(h / H_SCALE) - 0.12 * lap, 0, 1);
+      const b = clamp(0.45 + 0.6 * (nl - 0.8) + 0.32 * Math.tanh(h / H_SCALE) - 0.12 * lap, 0, 1);
+      const ic = Math.min(nx - 1, Math.floor(((I + 0.5) * nx) / M));
+      const kc = jc * nx + ic;
       let c;
-      if (wall[k]) c = [44, 46, 52];
+      if (wall[kc]) c = [44, 46, 52];
       else {
         c = b < 0.5 ? mixRGB(DEEP, MID, b * 2) : mixRGB(MID, CREST, (b - 0.5) * 2);
         if (guides) {
-          const gd = guides[k];
+          const gd = guides[kc];
           if (gd === gd) {
             const m = gd / lambda;
             const near = Math.abs(m - Math.round(m)) * lambda;
-            // Dotted: on for 0.5 cm, off for 0.5 cm along y.
-            if (near < 0.06 && (j * dx) % 0.8 < 0.3) c = mixRGB(c, GUIDE, 0.6);
+            // Dotted: on for 0.3 cm in every 0.8 cm along y.
+            if (near < Math.max(0.05, 0.6 * dd) && (J * dd) % 0.8 < 0.3) c = mixRGB(c, GUIDE, 0.6);
           }
         }
       }
@@ -235,10 +272,10 @@ function drawTank(g, tank) {
     const v = open ? Math.sqrt(tank.intensity[jb * nx + i] / RT.barTop) : 0;
     for (let s = 0; s < BAR_K; s++) {
       const n = i * BAR_K + s;
-      const r = ny + Math.floor(n / nx);
-      const col = n % nx;
+      const r = M + Math.floor(n / M);
+      const col = n % M;
       const o = (r * W + col) * 4;
-      const q = o + nx * 4;
+      const q = o + M * 4;
       const on = (s + 0.5) / BAR_K < v;
       const c = mixRGB([255, 170, 70], [255, 245, 200], s / BAR_K);
       px[o] = c[0];
@@ -318,7 +355,10 @@ const OPT = { tank: { o: null, c: null } };
 
 const RIPPLE = {
   alive: true,
-  density: 0.4,
+  // Sharpness round (October 5, 2026): the sharp kernel (labs), and a budget
+  // that gives a phone about one water splat a cell (a desktop 1.5).
+  kernel: "sharp",
+  density: 0.9,
   turntable: false,
   options: [
     { key: "setup", label: "Setup", type: "select", default: "double", choices: SETUPS },
@@ -414,49 +454,51 @@ const RIPPLE = {
     const { nx, ny, dx } = tank;
     const W = TANK.width / 10;
     const D = TANK.depth / 10;
-    const rows = ny + BAR_K;
     const cell = dx / 10;
-    // The water: one relief splat per cell, lifted along y by its height
-    // (on a small budget, one per 2 × 2 cells, reading the texture between
-    // them).
-    const st = (nx * ny + nx * BAR_K) * 1.05 > k.count * 0.85 ? 2 : 1;
-    const mx = Math.floor(nx / st);
-    const my = Math.floor(ny / st);
-    const nWater = mx * my;
-    const nBars = mx * BAR_K;
+    // The water: a grid of M × M relief splats, each lifted along y by its
+    // texel's height: up to 1.5 times finer than the simulation's cells
+    // where the budget allows (the texture is drawn at that size), and at
+    // least about one a cell on a phone.
+    const nBars = nx * BAR_K;
+    const M = Math.round(
+      clamp(Math.sqrt(Math.max(0, k.count * 0.85 - nBars)), 96, Math.round(nx * 1.5)),
+    );
+    RT.M = M;
+    const rows = M + barRows(M);
+    const nWater = M * M;
+    const dm = TANK.width / 10 / M; // recipe units between display splats
     k.reach([W / 2 + 0.08, 0.6, D / 2 + 0.08]);
     k.reach([-W / 2 - 0.08, -0.12, -D / 2 - 0.08]);
     k.cloud({ share: (nWater + nBars) / k.count, pattern: false }, (rand, n) => {
       if (n < nWater) {
-        const i = (n % mx) * st + (st - 1) / 2;
-        const j = Math.floor(n / mx) * st + (st - 1) / 2;
+        const I = n % M;
+        const J = Math.floor(n / M);
         return {
-          p: [toX((i + 0.5) * dx), -LIFT / 2, toZ((j + 0.5) * dx)],
-          scales: [cell * st * 0.62, cell * 0.08, cell * st * 0.62],
+          p: [-W / 2 + (I + 0.5) * dm, -LIFT / 2, D / 2 - (J + 0.5) * dm],
+          scales: [dm * 0.62, dm * 0.32, dm * 0.62],
           quat: [0, 0, 0, 1],
           color: "#3a7f9a",
           opacity: 1,
           kind: "relief",
-          params: [(i + 0.5) / nx, (j + 0.5) / rows, 1, LIFT],
+          params: [(I + 0.5) / M, (J + 0.5) / rows, 1, LIFT],
           pattern: false,
         };
       }
       const m = n - nWater;
       if (m >= nBars) return null;
-      // Bar i (every st-th column), splat s up it: its texel is that column's.
-      const i = Math.floor(m / BAR_K) * st;
+      // Bar i, splat s up it.
+      const i = Math.floor(m / BAR_K);
       const s = m % BAR_K;
-      const t = i * BAR_K + s;
-      const r = ny + Math.floor(t / nx);
-      const col = t % nx;
+      const r = M + Math.floor(m / M);
+      const col = m % M;
       return {
         p: [toX((i + 0.5) * dx), 0.05 + ((s + 0.5) / BAR_K) * BAR_H, -D / 2 - 0.03],
-        scales: [cell * st * 0.6, (BAR_H / BAR_K) * 0.55, 0.004],
+        scales: [cell * 0.6, (BAR_H / BAR_K) * 0.55, 0.004],
         quat: [0, 0, 0, 1],
         color: "#ffcc66",
         opacity: 1,
         kind: "relief",
-        params: [(col + 0.5) / nx, (r + 0.5) / rows, 3, 0.01],
+        params: [(col + 0.5) / M, (r + 0.5) / rows, 3, 0.01],
         pattern: false,
       };
     });
@@ -507,10 +549,10 @@ const RIPPLE = {
 // cell). Each sample of a ray (DS apart) takes a free splat near it, which
 // moves exactly there (to about 1/85 of a cell) and takes its color.
 const CELL = 0.06;
-const K = 14;
+const K = 20;
 const LIFTR = 1.5 * CELL;
-const DS = 0.0068; // recipe units between samples along a ray
-const RAY_SIGMA = 0.0058; // a ray splat's size (recipe units)
+const DS = 0.005; // recipe units between samples along a ray
+const RAY_SIGMA = 0.0052; // a ray splat's size (recipe units)
 const RAY_Z = 0.075; // in front of the parts' faces
 const TW = 256; // texels a row on each half of the screen canvas
 const LAT = (() => {
@@ -837,12 +879,12 @@ function partSplats(p) {
   const polys = partOutline(p);
   if (p.type === "fiber") {
     add(fillPoly(polys[0], 0.01), 0.01, GLASS, 0.011, 0.16);
-    add(edgePoly(polys[0], 0.005), 0.02, GLASS_EDGE, 0.0045, 0.85);
+    add(edgePoly(polys[0], 0.0035), 0.02, GLASS_EDGE, 0.0036, 0.9);
     add(fillPoly(polys[1], 0.01), 0.03, FLINT, 0.011, 0.16);
-    add(edgePoly(polys[1], 0.005), 0.04, [0.95, 0.9, 0.72], 0.004, 0.7);
+    add(edgePoly(polys[1], 0.0035), 0.04, [0.95, 0.9, 0.72], 0.0034, 0.75);
   } else if (polys.length) {
     add(fillPoly(polys[0], 0.01), 0.02, p.glass === "N-SF11" ? FLINT : GLASS, 0.011, 0.11);
-    add(edgePoly(polys[0], 0.0045), 0.04, GLASS_EDGE, 0.0045, 0.95);
+    add(edgePoly(polys[0], 0.0032), 0.04, GLASS_EDGE, 0.0036, 1);
   }
   if (p.type === "mirror") {
     // The silvered face, and the dark back behind it.
@@ -970,9 +1012,11 @@ function benchBuild(k, o) {
 
 const LIGHT_BENCH = {
   alive: true,
+  // Sharpness round: the sharp kernel (labs) for crisp rays and edges.
+  kernel: "sharp",
   turntable: false,
   tiltLock: true,
-  density: 0.8,
+  density: 1,
   options: [
     { key: "setup", label: "Setup", type: "select", default: "prism", choices: BENCH_SETUPS },
     { key: "lens", label: "Lens (Lens and image)", type: "select", default: "thin", choices: LENSES.map((l) => ({ id: l.id, label: l.label })) }, // prettier-ignore
