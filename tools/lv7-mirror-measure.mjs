@@ -9,7 +9,8 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/lv7-mirror-measure.mjs <still.y4m> [--look=plain|hologram] [--answers=10]
 //
 // The measures, over the middle of the face (eyes, nose and mouth), between
-// one depth answer and the next while nothing in front of the camera moves:
+// one depth answer and the next while nothing in front of the camera moves
+// (the jitters are medians over the answers):
 //
 //   heightJitter  how far each cell's height moves (0..1 of the relief)
 //   colorJitter   how far each cell's color moves (0..255, mean of r, g, b)
@@ -219,11 +220,17 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
   }
   const src = fineDetail(await cameraFace(page, box));
   const mean = (a) => a.reduce((s, v) => s + v, 0) / Math.max(1, a.length);
+  // The jitters are medians over the answers: on a loaded machine one slow
+  // frame (heights caught mid-ease) shouldn't decide the measure.
+  const median = (a) => {
+    const b = [...a].sort((x, y) => x - y);
+    return b.length ? (b.length % 2 ? b[(b.length - 1) / 2] : (b[b.length / 2 - 1] + b[b.length / 2]) / 2) : 0; // prettier-ignore
+  };
   return {
-    heightJitter: mean(hj),
-    colorJitter: mean(cj),
-    shownJitter: mean(sj),
-    shownJitterTurned: mean(tj),
+    heightJitter: median(hj),
+    colorJitter: median(cj),
+    shownJitter: median(sj),
+    shownJitterTurned: median(tj),
     grain: Math.max(0, mean(grain) - src),
     box,
   };

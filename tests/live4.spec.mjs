@@ -164,8 +164,10 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   if (!(await page.evaluate(async (m) => (await import(m)).chladniFileState().playing, studio)))
     await page.evaluate(() => document.getElementById("chladni-play").click());
   await until(page, async (m) => (await import(m)).chladniFileState().playing, studio, 60_000);
-  // The first tune keeps the 195 Hz plate and settles its sand.
-  const a = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.p > 0.4 ? s : null; }, studio, 60_000); // prettier-ignore
+  // The first tune keeps the 195 Hz plate and settles its sand. (Live r7: it
+  // waits for that mode to lead, as below for the second tune; on a loaded
+  // machine the sand could look settled while another mode led for a moment.)
+  const a = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.lead?.startsWith("2-3") && s.p > 0.4 ? s : null; }, studio, 90_000); // prettier-ignore
   expect(a.builds).toBeGreaterThanOrEqual(before);
   expect(a.lead).toMatch(/^2-3/);
   // The second tune (F♯4 and around it) takes the sand to the 375 Hz figure.
