@@ -45,6 +45,12 @@ if (from)
       list.findIndex((t) => t.id === from),
     ),
   );
+// --part=k/n: every n-th toy from the k-th (1-based), for parallel runs into separate files.
+const part = opt("part", "");
+if (part) {
+  const [k, n] = part.split("/").map(Number);
+  list = list.filter((_, i) => i % n === k - 1);
+}
 const done = fs.existsSync(outFile) ? JSON.parse(fs.readFileSync(outFile, "utf8")) : {};
 
 const launch = () =>
