@@ -300,9 +300,7 @@ class Longtail {
         : cubeWorld(N, this.worldKind === "planet");
     linkCells(this.world);
     this.view = 0;
-    this.camYaw = 0;
-    this.camDir = null;
-    this.camSpin = 0;
+    this.camFollow = null;
   }
 
   async load() {
@@ -600,41 +598,40 @@ class Longtail {
     this.followHead(dt);
   }
 
-  // Where the 3D camera looks from: the way the head faces, followed by a
-  // damped spring at the fixed step, so the turn round the world eases in
-  // and out and never steps from tile to tile (or face to face).
+  // Where the 3D camera looks from: above the way the head faces, on its
+  // eased path between tiles. Its heading and height each follow on a
+  // critically damped spring at the fixed step, speed capped, so the turn
+  // round the world eases in and out and never steps from tile to tile
+  // (or face to face).
   followHead(dt) {
     const W = this.world;
     const a = cellFrame(W, W.cells[this.prev?.[0] ?? this.body[0]], 1);
     const b = cellFrame(W, W.cells[this.body[0]], 1);
     const far = len(sub(a.p, b.p)) > this.cellSize * 1.8 || this.jump;
     const t = far ? 1 : smooth(this.frac || 0);
-    let want;
+    let n;
     if (W.kind === "torus") {
       const p = add(mul(a.p, 1 - t), mul(b.p, t));
-      want = unit(add(mul(unit([p[0], 0, p[2]]), 0.6), [0, 0.9, 0]));
-    } else want = unit(add(mul(a.n, 1 - t), mul(b.n, t)));
-    if (!this.camDir) {
-      this.camDir = want;
-      this.camSpin = 0;
+      n = unit(add(mul(unit([p[0], 0, p[2]]), 0.6), [0, 0.9, 0]));
+    } else n = unit(add(mul(a.n, 1 - t), mul(b.n, t)));
+    const c = this.camFollow;
+    // unwrap so the camera turns the short way round; over a pole the
+    // heading is unsteady, so hold it there and blend out of the hold
+    const hold = smooth(clamp((Math.abs(n[1]) - 0.8) / 0.15, 0, 1));
+    const yawW = c ? c.yaw + wrap(Math.atan2(n[0], n[2]) - c.yaw) : Math.atan2(n[0], n[2]);
+    const want = { yaw: c ? lerp(yawW, c.yaw, hold) : yawW, pitch: Math.asin(clamp(n[1], -1, 1)) };
+    if (!c || dt <= 0) {
+      this.camFollow = { ...want, vy: 0, vp: 0 };
       return;
     }
-    const c = this.camDir;
-    const err = Math.acos(clamp(dot(c, want), -1, 1));
-    if (err < 1e-5) {
-      this.camSpin = 0;
-      return;
-    }
-    // a critically damped spring on the angle, its speed capped
-    const W0 = 4.5;
-    this.camSpin += (W0 * W0 * err - 2 * W0 * this.camSpin) * dt;
-    this.camSpin = clamp(this.camSpin, 0, 1.8);
-    const turn = Math.min(err, this.camSpin * dt);
-    let ax = cross(c, want);
-    if (len(ax) < 1e-6) ax = Math.abs(c[1]) < 0.9 ? cross(c, [0, 1, 0]) : cross(c, [1, 0, 0]);
-    ax = unit(ax);
-    // Rodrigues: c turned by `turn` about ax (ax is at right angles to c)
-    this.camDir = unit(add(mul(c, Math.cos(turn)), mul(cross(ax, c), Math.sin(turn))));
+    const W0 = 3.2;
+    const spring = (x, v, to, cap) => {
+      v += (W0 * W0 * (to - x) - 2 * W0 * v) * dt;
+      v = clamp(v, -cap, cap);
+      return [x + v * dt, v];
+    };
+    [c.yaw, c.vy] = spring(c.yaw, c.vy, want.yaw, 1.3);
+    [c.pitch, c.vp] = spring(c.pitch, c.vp, want.pitch, 0.9);
   }
 
   // The attract mode (and clips): head for the berry, never into itself.
@@ -820,17 +817,10 @@ class Longtail {
     if (view < 1e-3) return { target: [0, 0.1, 0], yaw: 0, pitch: 0, distance: d2 };
     // 3D: from above the head, the whole world in view; it turns as the
     // head goes round.
-    if (!this.camDir) this.followHead(0);
-    const n = this.camDir;
-    const yawW = Math.atan2(n[0], n[2]);
-    // unwrap so the camera turns the short way round
-    let yaw = this.camYaw + wrap(yawW - this.camYaw);
-    // over a pole the heading is unsteady: hold it there, and blend out of the hold
-    const hold = smooth(clamp((Math.abs(n[1]) - 0.9) / 0.08, 0, 1));
-    yaw = lerp(yaw, this.camYaw, hold);
-    this.camYaw = yaw;
+    if (!this.camFollow) this.followHead(0);
+    let yaw = this.camFollow.yaw;
     // a little above and to the side of the head, so three faces show
-    const pitch = clamp(Math.asin(clamp(n[1], -1, 1)) + 0.42, -1.25, 1.25);
+    const pitch = clamp(this.camFollow.pitch + 0.42, -1.25, 1.25);
     yaw += 0.45;
     // (each world fitted to its own size, the beads riding on it included)
     const fit3 = W.kind === "torus" ? 2.3 : W.kind === "planet" ? 2.15 : 1.95;
