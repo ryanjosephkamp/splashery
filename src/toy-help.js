@@ -730,10 +730,9 @@ export const TOY_HELP = {
 
   // Lane Molecule viewer (labs).
   "molecule-viewer": {
-    howTo:
-      "Tap an atom, then another for the distance, a third for the angle. Fetch a PDB code in the Toy tab.",
+    howTo: "Tap two atoms for their distance, a third for the angle.",
     about:
-      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank (PDB and mmCIF files), small molecules as SDF, MOL or XYZ files. This viewer reads those files and draws every atom with splats, using the usual colors (carbon gray, oxygen red, nitrogen blue, sulfur yellow).\n\nChoose a sample, open a file of your own, or type a four-character PDB code such as 1MBN and press Fetch to read that entry from the Protein Data Bank; it is read only when you ask, nothing is stored or sent, and the entry's title, authors and fetch time show beside it. Draw it as a cartoon (ribbons for the chains: helices, strands and coil), balls and sticks, space-filling atoms (their van der Waals size) or a molecular surface (a smooth Gaussian surface, close to the surface a water molecule can touch). Color by element, chain, residue type, B-factor (how much each atom moves in the crystal), along the chain or by helix and strand. Tap two atoms to measure the distance between their centers in ångströms (0.1 nanometer), a third for the angle in degrees. Bonds come from the file or from distances; helices and strands come from the file, or are worked out from hydrogen bonds and say so. Big structures draw fewer splats per atom. Positions are the file's model, not a photograph: an experiment's best fit, with its own uncertainty.",
+      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank, small molecules as SDF, MOL or XYZ files. This viewer draws every atom of such a file with splats, in the usual colors: carbon gray, oxygen red, nitrogen blue.\n\nPick a sample, open your own file, or type a PDB code such as 1MBN and press Fetch in the Toy tab; the entry is read only when you ask, and its title, authors and fetch time show beside it. Draw it as a cartoon, balls and sticks, space-filling atoms or a smooth surface, colored by element, chain, residue or B-factor. Tap two atoms for the distance between their centers in ångströms, a third for the angle in degrees. Positions are an experiment's best fit, not a photograph.",
   },
 
   // ---- Gems -----------------------------------------------------------------------------
