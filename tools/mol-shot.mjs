@@ -10,7 +10,10 @@ const browser = await chromium.launch({
   ],
 });
 // A phone draws this canvas at a device pixel ratio of 2 (the stage caps it there).
-const page = await browser.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: Number(process.env.DPR || 2) });
+const page = await browser.newPage({
+  viewport: { width: w, height: h },
+  deviceScaleFactor: Number(process.env.DPR || 2),
+});
 page.on("pageerror", (e) => console.error("page error:", e.message));
 page.on("console", (m) => {
   if (m.type() === "error") console.error("console:", m.text());

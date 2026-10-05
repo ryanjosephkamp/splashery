@@ -49,7 +49,10 @@ const browser = await chromium.launch({
 });
 // A phone draws the canvas at a device pixel ratio of 2 (the stage caps it there), so the
 // clip does too (--dpr=1 for a smaller file).
-const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: Number(opt("dpr", 2)) });
+const page = await browser.newPage({
+  viewport: { width: W, height: H },
+  deviceScaleFactor: Number(opt("dpr", 2)),
+});
 page.on("pageerror", (e) => console.error("page error:", e.message));
 if (mock)
   await page.route("https://files.rcsb.org/**", (route) =>
