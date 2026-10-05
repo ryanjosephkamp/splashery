@@ -46,6 +46,11 @@ full checks are next.
 
 ## For the Operator
 
+- Effect review page 2 has no `lanes/SoundLightLab` record yet; the cards are posted under that lane
+  id. Please add the record.
+- No clip of the Sound recorder: its tap plays the recording, which is silent in a clip; its
+  screenshots (`tests/screenshots/sll-sound-recorder-*.png`) show the waveform and spectrogram.
+
 - License: NIST's pages state that Standard Reference Data (the Handbook is SRD 108, the ASD SRD 78)
   are copyrighted compilations under 15 U.S.C. 290e, not plain public domain as the brief says. Like
   the Chemistry lane, the toy ships only measured values (facts) from 16 small tables, with NIST

@@ -274,6 +274,9 @@ test.describe("in the page", () => {
       const rod = await page.evaluate(() => window.__splashery.player.motion.out.parts.rod.angle);
       expect(Number.isFinite(rod)).toBe(true);
       await page.screenshot({ path: "tests/screenshots/sll-sound-lab-1440x900.png" });
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.waitForTimeout(800);
+      await page.screenshot({ path: "tests/screenshots/sll-sound-lab-390x844.png" });
     } finally {
       await browser.close();
     }
@@ -327,6 +330,9 @@ test.describe("in the page", () => {
       expect(check.err2).toBeLessThanOrEqual(2 / 32768); // the browser reads 16 bits as n / 32768
       expect(Math.abs(check.hz - 1000)).toBeLessThan(5); // what the fake microphone played
       await page.screenshot({ path: "tests/screenshots/sll-sound-recorder-390x844.png" });
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await page.waitForTimeout(800);
+      await page.screenshot({ path: "tests/screenshots/sll-sound-recorder-1440x900.png" });
     } finally {
       await browser.close();
     }
