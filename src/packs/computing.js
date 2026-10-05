@@ -1384,7 +1384,7 @@ function sortLights(k, view) {
   const p = SORT_VIEWS[view].mark(0);
   const face = view === "dots" ? { rot: [90, 0, 0] } : {};
   for (const tok of [22, 23])
-    k.add(evenDisc(k, 0.032), {
+    k.add(evenDisc(k, 0.046), {
       pos: p,
       ...face,
       even: true,
@@ -1393,7 +1393,7 @@ function sortLights(k, view) {
       pattern: false,
       kind: "token",
       params: [tok, 0],
-      color: (c) => keep(mix("#fff6c8", "#ffc23a", Math.min(1, Math.hypot(c.p[0] - p[0], c.p[1] - p[1], c.p[2] - p[2]) / 0.032))), // prettier-ignore
+      color: (c) => keep(mix("#fff6c8", "#ffc23a", Math.min(1, Math.hypot(c.p[0] - p[0], c.p[1] - p[1], c.p[2] - p[2]) / 0.046))), // prettier-ignore
     });
 }
 
@@ -1467,7 +1467,7 @@ const SORT_BUILD = {
         },
       });
     });
-    sortPanel(k, algo, -0.88, 0.95);
+    sortPanel(k, algo, -0.88, 0.82);
   },
   ring(k, algo) {
     // The turntable: a dark round plate with a ring of slots and a white
