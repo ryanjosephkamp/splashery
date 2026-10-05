@@ -307,3 +307,13 @@
 {"v":1,"t":"2026-10-05T14:43:04.979Z","harness":"claude-code","event":"session-end","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T15:39:29.021Z","harness":"claude-code","event":"turn-start","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T15:39:29.021Z","harness":"claude-code","event":"session-start","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:39:33.859Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:39:39.739Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:39:44.055Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:39:48.403Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:39:50.988Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:39:53.162Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:39:54.951Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:40:03.130Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:40:08.788Z","harness":"claude-code","event":"tool","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:40:13.382Z","harness":"claude-code","event":"turn-end","session":"761e641f-8fb2-51eb-8924-f00cba33d88b","cwd":"splashery"}
