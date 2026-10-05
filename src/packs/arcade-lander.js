@@ -311,12 +311,21 @@ class Lander {
   }
 
   camera(view, aspect) {
-    const d2 = this.api.fitDistance(GROUND_W + 0.2, 1.75, aspect);
+    // On a tall screen the whole patch would be a thin strip: the camera
+    // shows a window of it that follows the lander across instead.
+    const tall = aspect < 1;
+    const w2 = tall ? 1.5 : GROUND_W + 0.2;
+    const w3 = tall ? 1.9 : GROUND_W * 1.25;
+    const x = this.ship ? this.ship.p[0] : 0;
+    const x2 = tall ? clamp(x, -(GROUND_W - w2) / 2, (GROUND_W - w2) / 2) : 0;
+    const x3 = tall ? clamp(x * 0.7, -(GROUND_W - w3) / 2, (GROUND_W - w3) / 2) : 0;
+    const d2 = this.api.fitDistance(w2, 1.75, aspect);
     return {
-      target: [0, lerp(0.05, -0.25, view), lerp(this.sliceZ, 0, view)],
+      target: [lerp(x2, x3, view), lerp(0.05, -0.25, view), lerp(this.sliceZ, 0, view)],
       yaw: lerp(0, 0.5, view),
       pitch: lerp(0, 0.5, view),
-      distance: lerp(d2, this.api.fitDistance(GROUND_W * 1.25, 1.6, aspect), view),
+      distance: lerp(d2, this.api.fitDistance(w3, 1.6, aspect), view),
+      ease: 0.25,
     };
   }
 
