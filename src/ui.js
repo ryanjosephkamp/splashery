@@ -5,6 +5,7 @@
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
+import { labsOn } from "./toys.js"; // lane PDF lab
 import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
@@ -39,6 +40,8 @@ function pct(v) {
 }
 
 export function createUI(app) {
+  let inputDrop = null; // lane Molecule viewer (engine): the toy's own drop, or null
+  let inputShown = null; // and its "what is showing" line
   initLive(app); // lane Live input: the live sources, and Clap to tap (labs)
   const els = {
     panel: $("panel"),
@@ -171,6 +174,8 @@ export function createUI(app) {
     webmRow: $("webm-row"),
     webmSeconds: $("webm-seconds"),
     exportWebm: $("export-webm"),
+    pdfRow: $("pdf-row"), // lane PDF lab
+    exportPdf: $("export-pdf"), // lane PDF lab
     webmUnavailable: $("webm-unavailable"),
     recordRow: $("record-row"), // UI r5
     recordStart: $("record-start"),
@@ -566,7 +571,16 @@ export function createUI(app) {
       let input;
       if (o.type === "select") {
         input = document.createElement("select");
-        for (const ch of o.choices) input.add(new Option(ch.label, ch.id));
+        // Choices with a `group` are listed under that heading (an optgroup).
+        let group = null;
+        for (const ch of o.choices) {
+          if (ch.group && ch.group !== group?.label) {
+            group = document.createElement("optgroup");
+            group.label = ch.group;
+            input.appendChild(group);
+          } else if (!ch.group) group = null;
+          (group ?? input).appendChild(new Option(ch.label, ch.id));
+        }
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "flag") {
@@ -611,6 +625,8 @@ export function createUI(app) {
       row.appendChild(input);
       els.toyOptions.appendChild(row);
     }
+    inputDrop = null;
+    inputShown = null;
     if (recipe?.input) renderInputPanel(recipe.input);
     els.toyNote.textContent = recipe
       ? recipe.note || ""
@@ -1554,10 +1570,9 @@ export function createUI(app) {
     open.textContent = input.fileButton || "Open a file…";
     open.addEventListener("click", () => file.click());
     fileRow.append(open);
-    file.addEventListener("change", async () => {
-      const files = [...(file.files || [])];
+    // Lane Molecule viewer (engine): the same path for picked and dropped files.
+    const take = async (files) => {
       const f = files[0];
-      file.value = "";
       if (!f) return;
       // input.maxBytes: a recipe's own cap, a number (the song landscape, lane
       // Live input r2, which streams its file) or a function of nothing (UI r5:
@@ -1571,7 +1586,30 @@ export function createUI(app) {
       }
       if (input.binary) apply("", f.name, f, files);
       else apply(await f.text(), f.name);
+    };
+    file.addEventListener("change", () => {
+      const files = [...(file.files || [])];
+      file.value = "";
+      take(files);
     });
+    // A recipe with input.drop takes a file dropped anywhere on the page when
+    // its extension is one input.accept lists; other toys never see drops.
+    const kinds = String(input.accept || "")
+      .split(",")
+      .map((x) => x.trim().toLowerCase())
+      .filter((x) => x.startsWith("."));
+    inputDrop = input.drop
+      ? (f) => {
+          const ext = (/\.[^.]+$/.exec(f.name)?.[0] ?? "").toLowerCase();
+          if (!kinds.includes(ext)) return false;
+          take([f]);
+          return true;
+        }
+      : null;
+    inputShown = () => {
+      shown.textContent = input.shown?.() || "";
+      shown.hidden = !shown.textContent;
+    };
     const note = document.createElement("p");
     note.className = "note";
     note.textContent = input.note || "";
@@ -2092,6 +2130,9 @@ export function createUI(app) {
     }),
   );
   els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  // Lane PDF lab: Save as PDF (labs).
+  els.pdfRow.hidden = !labsOn();
+  els.exportPdf.addEventListener("click", () => app.openPdfExport());
   // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
   els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
@@ -3072,6 +3113,15 @@ export function createUI(app) {
     },
     showDrop(on) {
       els.dropOverlay.hidden = !on;
+    },
+    // Lane Molecule viewer (engine): a dropped file for the toy's own panel
+    // (input.drop); true when the toy took it.
+    dropOnToy(f) {
+      return inputDrop ? inputDrop(f) : false;
+    },
+    // Lane Molecule viewer (engine): updates the panel's "what is showing" line.
+    refreshInputShown() {
+      inputShown?.();
     },
     collapseSheet() {
       setMode("row");
