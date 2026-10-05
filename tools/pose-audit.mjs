@@ -72,7 +72,7 @@ Totals: ${Object.entries(counts)
   .join(", ")}.
 `;
 for (const s of shelves) {
-  md += `\n## ${categoryLabel(s) || s}\n\n| Toy | Verdict | After (side / down) | Before | Note |\n| --- | --- | --- | --- | --- |\n`;
+  md += `\n## ${(categoryLabel(s) || s).replace(/^Maths$/, "Math")}\n\n| Toy | Verdict | After (side / down) | Before | Note |\n| --- | --- | --- | --- | --- |\n`;
   for (const r of rows.filter((x) => x.t.category === s))
     md += `| ${r.t.label}${r.t.labs ? " (labs)" : ""} | ${r.v} | ${r.a} | ${r.b} | ${r.note} |\n`;
 }

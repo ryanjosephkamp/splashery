@@ -97,54 +97,63 @@ docs/audits/poses-2026-10.md, the per-toy recipe fixes your sweep lists, and thi
 
 ## State
 
-WORKING: engine PR #276 and lane PR #277 open (drafts); the full sweep is running (October 5, 2026).
-Model: Opus 5.5, default effort.
+WORKING: the lane's work is done and its specs are running before READY (October 5, 2026). Model:
+Opus 5.5, default effort. Engine PR #276 (`claude/lane-any-pose-engine`) must merge first; lane PR
+#277 (`claude/lane-any-pose`) carries it merged in. Both have main merged (October 5).
 
 ### The cause (item 1)
 
 PlayCanvas runs Splashery's effect shader (`modifySplatCenter` in `src/effects.js`) on each splat's
 center in the world, after the toy's entity has placed it. Hands-on poses a whole toy by turning and
 moving that entity (`Stage.setToyPose`), so every effect of a posed toy was worked out about where
-the toy stood at home, with the world's up as its own: a rig scan's parts (the grape's peel, the
-hoodie's hood and sleeves before it got its own cloth) turned about pivots left behind, swells and
-spins went about an empty center, sways, key presses and pokes went along the wrong axes. Engine A's
-`poseKitUniforms` (#225) had patched only a kit toy's parts and tokens; rig scans, every kit
-behavior kind and every effect-panel effect were still wrong. The hoodie on main now plays in pieces
-(its hood is a cloth part, #230) and is no longer tossed whole, so it shows the fault only when
-forced to play as one body (`tools/pose-clip.mjs --level1`).
+the toy stood at home, with the world's up as its own: a rig scan's parts (the grape's peel opened
+the same way on the screen however the grape lay), the scans' break-apart, kit behavior kinds and
+the effects panel. Engine A's `poseKitUniforms` (#225, October 3) had already patched a kit toy's
+parts and tokens, which is what the owner saw on the hoodie; since its cloth hood (#230) the hoodie
+plays in pieces and is not tossed whole any more.
 
-### Engine fix (item 2): branch `claude/lane-any-pose-engine`
+### Engine (item 2): PR #276
 
-- `src/effects-pose.js` (new): the pose uniforms (`uSpPoseQ`, `uSpPoseT`, `uSpPoseC`, `uSpPoseUp`)
-  and the world points and directions the shader reads (pokes, magnet, grab, wind, the drop's
-  gravity, the camera, the squish) taken into the toy's home frame.
-- `src/effects.js`: with a pose set, the shader takes each center into the home frame first, runs
-  every effect there, puts it back after, and turns each splat's effect rotation by the pose. With
-  no pose the old code runs unchanged. Flame, rise and fall kinds follow the world's real up.
-- `src/stage.js` (1 line: `toyPose`), `src/player.js` (3 lines), `src/physics/hands-on.js`
+- `src/effects-pose.js` (new): the pose uniforms (`uSpPoseQ`, `uSpPoseT`, `uSpPoseC`, `uSpPoseUp`),
+  the world points and directions the shader reads taken into the toy's home frame, `poseUp` (a
+  recipe's `about.up`) and `poseGravity` (which toys have a real down).
+- `src/effects.js`: with a pose set, each center goes into the home frame, every effect runs there,
+  and it goes back; the effect rotations are turned by the pose. Upright the old lines run.
+- Gravity: flame and rise kinds rise toward the real sky, fall kinds fall toward the real floor, and
+  a scan's break-apart pieces fall toward the real floor and land there; the space, atoms, tiny
+  world, math and computing shelves and any recipe with `gravity: false` keep all that in their own
+  frame.
+- `src/stage.js` (1 line), `src/player.js` (5), `src/motion.js` (3), `src/physics/hands-on.js`
   (`handsFix` no longer set: the shader does it).
-- Tools: `tools/pose-clip.mjs` (a tap upright, on its side and upside down, side by side),
-  `tools/pose-sweep.mjs` (every toy measured), `tools/pose-upright.mjs` (upright frames and uniforms
-  hashed, main against the branch).
+- Upright untouched: 15 toys × 5 moments, main against the branch, every effect uniform identical (0
+  of 75 differ), frames pixel-identical except two late heart frames that also differ between two
+  runs of the same code.
 
-### Verified so far (October 5, 2026)
+### Sweep, fixes, gravity (items 3 to 5)
 
-- Upright untouched: `tools/pose-upright.mjs` on 15 toys × 5 moments, main against the engine
-  branch: every effect uniform identical (0 of 75 differ); frames pixel-identical except two late
-  heart frames, which also differ between two runs of the same branch (rendering timing).
-- `tests/pose-engine.spec.mjs` (4) and `tests/pose.spec.mjs` (grape, toy piano, heart, bee: error 0
-  in both poses) pass. `hea-engine`, `heb-engine`, `phy-engine` and `hec-engine` pass, except the
-  `hec-engine` timing test "soft parts are cheap", run while the machine was busy (to re-run idle).
-- Before the fix the grape's peel scored 34 (posed frames against the upright ones turned on the
-  screen); after, 0. The sweep (`tools/pose-sweep.mjs`, two parts) is measuring every toy.
-- Clips on Effect review page 2: `pose-grape` and `pose-hoodie` (after), with `-before` cards.
+- docs/audits/poses-2026-10.md: a verdict per toy (322 work, 21 checked, 16 pieces, 14 never posed),
+  from `tools/pose-sweep.mjs` (data in docs/audits/poses-2026-10.json; the scans before the change
+  in `…-before-rigs.json`) and the notes from checking every differing toy by eye
+  (`tools/pose-notes.json`).
+- Recipe fixes (each identical upright): the snow globe (falling snow thins away when turned, the
+  swirl shows), the storm cloud (rain thins away when turned), and `gravity: false` on the rocket,
+  gift box, potion bottle, tornado, geyser and volcano.
+- `tests/pose-engine.spec.mjs` (engine) and `tests/pose.spec.mjs` (a sample and every fixed toy, in
+  three poses).
+- Clips on Effect review page 2 (lane id `AnyPose`): grape, hoodie, blackberry, star cookie,
+  mandeltorus and blueberry, each after the fix with a "before" card beside it.
 
-### Gravity effects (item 5), so far
+### Known issues
 
-- Engine: flame and rise kinds rise along the world's real up; fall kinds (the snow globe's snow,
-  rain under the storm cloud) fall along it only as far as the world's down runs down the toy, so
-  nothing falls out through a container's wall. A recipe's drive gets `about.up` while posed.
-- Never posed whole, so nothing to fix: the Newton's cradle (its own drags), the fluid lab
-  (`turntable: false`).
-- Still to check by eye: candle, campfire, snow globe, lava lamp, storm cloud, and the toys the
-  sweep marks "check".
+- The lava lamp's wax keeps moving along the lamp; the coffee's steam rises through the saucer with
+  the cup upside down; the potion bottle's liquid is a still shape; the storm cloud's lightning
+  strikes from its own underside; the effects panel's drop keeps the floor it took when it started.
+- The kit melt kind (ice cream) still slumps toward the toy's own bottom.
+
+### For the Operator
+
+- The Effect review page has no `lanes/AnyPose` record yet; the cards are under that lane id.
+- `hec-engine` "soft parts are cheap" (a timing test, untouched code) failed once while the machine
+  was busy with the sweep; it is in the spec run now.
+- A cloud container sleeps when the session idles, which kills background jobs (servers, sweeps);
+  long jobs here were kept going by staying busy.
