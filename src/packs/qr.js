@@ -173,6 +173,12 @@ async function renderScan(app, size) {
   return app.withCapture([size, size], async () => {
     QR.still = true;
     try {
+      // Lane QR r3: a first frame starts the splat sort for this view (it
+      // finishes on a worker a frame or more later); the second is the
+      // picture. Right after a build, the first frame of the finer edges
+      // was drawn before any sort, gray and hatched.
+      await player.renderAt(player.time, scanPose());
+      await new Promise((r) => setTimeout(r, 80));
       const shot = await player.renderAt(player.time, scanPose());
       const out = document.createElement("canvas");
       out.width = out.height = size;
