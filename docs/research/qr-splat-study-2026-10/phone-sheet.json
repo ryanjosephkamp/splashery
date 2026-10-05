@@ -1,0 +1,352 @@
+[
+  {
+    "id": "S01",
+    "what": "Splat softness (wider): softness (splat spread ÷ spacing) = 0.55 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 67%, zxing-js 67%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S02",
+    "what": "Splat softness (wider): softness (splat spread ÷ spacing) = 1 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 0%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S03",
+    "what": "Splat softness (narrower): softness (splat spread ÷ spacing) = 0.05 (the far end of the sweep; still reads)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 89%, zxing-js 33%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S04",
+    "what": "Splats per module edge: splats per module edge = 3 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 67%, zxing-js 67%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S05",
+    "what": "Splats per module edge: splats per module edge = 2 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 44%, jsQR 33%, zxing-js 56%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S06",
+    "what": "Gaps between modules: gap (share of the module's edge) = 0.3 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S07",
+    "what": "Gaps between modules: gap (share of the module's edge) = 0.4 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 11%, jsQR 78%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S08",
+    "what": "Opacity: opacity of the dark splats = 0.1 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 78%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S09",
+    "what": "Opacity: opacity of the dark splats = 0.05 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 33%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S10",
+    "what": "Color contrast: WCAG contrast ratio (dark : light) = 1.54 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S11",
+    "what": "Color contrast: WCAG contrast ratio (dark : light) = 1.23 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 0%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S12",
+    "what": "Gradient toward pale: WCAG contrast at the gradient's pale end = 1.11 (the far end of the sweep; still reads)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 89%, zxing-js 89%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S13",
+    "what": "Dot modules, with gaps: gap (share of the module's edge) = 0.3 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S14",
+    "what": "Dot modules, with gaps: gap (share of the module's edge) = 0.4 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 11%, jsQR 78%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S15",
+    "what": "Turned sideways (yaw): yaw in the scene (degrees) = 60 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 44%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S16",
+    "what": "Turned sideways (yaw): yaw in the scene (degrees) = 65 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 11%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S17",
+    "what": "Scratch, all: amount of damage (0 to 1) = 0.4 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 50%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S18",
+    "what": "Scratch, all: amount of damage (0 to 1) = 0.5 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 50%, jsQR 50%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S19",
+    "what": "Sticker, center: amount of damage (0 to 1) = 0.4 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S20",
+    "what": "Sticker, center: amount of damage (0 to 1) = 0.5 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 0%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S21",
+    "what": "Tear, corner: amount of damage (0 to 1) = 0.6 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S22",
+    "what": "Tear, corner: amount of damage (0 to 1) = 0.7 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 50%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S23",
+    "what": "Smudge, center: amount of damage (0 to 1) = 1 (the far end of the sweep; still reads)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S24",
+    "what": "Jitter, all: amount of damage (0 to 1) = 0.2 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S25",
+    "what": "Jitter, all: amount of damage (0 to 1) = 0.3 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 0%, jsQR 50%, zxing-js 50%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S26",
+    "what": "Fade, all: amount of damage (0 to 1) = 0.9 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 50%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S27",
+    "what": "Fade, all: amount of damage (0 to 1) = 1 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 0%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S28",
+    "what": "Color drift, all: amount of damage (0 to 1) = 1 (the far end of the sweep; still reads)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 100%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S29",
+    "what": "Curve, all: amount of damage (0 to 1) = 0.3 (just on the readable side)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 100%, jsQR 100%, zxing-js 50%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S30",
+    "what": "Curve, all: amount of damage (0 to 1) = 0.4 (just past the threshold)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M, three texts pooled: zxing-cpp 0%, jsQR 0%, zxing-js 0%",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S31",
+    "what": "Shape: Square modules (the baseline)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S32",
+    "what": "Shape: Rounded modules",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S33",
+    "what": "Shape: Dots, finders too",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S34",
+    "what": "Shape: Dots, solid square finders",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S35",
+    "what": "Shape: Round finders (rings and a disk)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 3/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S36",
+    "what": "Shape: Framed in a circle (quiet zone kept)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S37",
+    "what": "Shape: Cut to a circle through the code's corners",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S38",
+    "what": "Shape: Cut to a circle inside the code (finders cut)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M: zxing-cpp 0/5, jsQR 0/5, zxing-js 0/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S39",
+    "what": "Shape: Circle of decoy modules, 4-module quiet zone",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S40",
+    "what": "Shape: Circle of decoy modules, 1-module quiet zone",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S41",
+    "what": "Shape: Quiet zone of 2 modules",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S42",
+    "what": "Shape: Quiet zone of 1 module",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S43",
+    "what": "Shape: No quiet zone (on the dark screen)",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M: zxing-cpp 0/5, jsQR 0/5, zxing-js 0/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S44",
+    "what": "Shape: No quiet zone, on a white screen",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 5/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S45",
+    "what": "Shape: Quiet zone filled with a pattern",
+    "predict": "should not scan",
+    "detail": "phone-like captures, level M: zxing-cpp 0/5, jsQR 0/5, zxing-js 0/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S46",
+    "what": "Shape: Stretched 2:1 sideways",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 5/5, zxing-js 0/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S47",
+    "what": "Shape: Turned 45° (a diamond)",
+    "predict": "should scan",
+    "detail": "phone-like captures, level M: zxing-cpp 5/5, jsQR 1/5, zxing-js 0/5",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  {
+    "id": "S48",
+    "what": "Micro QR (M3), as splats",
+    "predict": "most phone camera apps: unknown (only zxing-cpp of our three readers reads it)",
+    "detail": "front on: zxing-cpp 5/5, jsQR 0/5, zxing-js 0/5",
+    "text": "HELLO 123"
+  },
+  {
+    "id": "S49",
+    "what": "rMQR (R9x59, a rectangular code), as splats",
+    "predict": "most phone camera apps: unknown (only zxing-cpp of our three readers reads it)",
+    "detail": "front on: zxing-cpp 1/5, jsQR 0/5, zxing-js 0/5",
+    "text": "Splats make a code!"
+  },
+  {
+    "id": "S50",
+    "what": "Three codes in one square (red, green and blue channels)",
+    "predict": "an ordinary scanner reads the green code (…#grn) or nothing; Splashery's splitting reader reads all three",
+    "detail": "https://ryanjosephkamp.github.io/splashery/#red  ·  https://ryanjosephkamp.github.io/splashery/#grn  ·  https://ryanjosephkamp.github.io/splashery/#blu",
+    "text": "https://ryanjosephkamp.github.io/splashery/#grn"
+  }
+]
