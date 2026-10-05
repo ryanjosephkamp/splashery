@@ -2094,6 +2094,27 @@ export const TOY_HELP = {
     about:
       "Real planets round other stars, from the NASA Exoplanet Archive: TRAPPIST-1, a cool red dwarf 40 light-years away with seven rocky planets, all closer to it than Mercury is to the Sun; TOI-178, whose six planets go round in a chain of near-simple ratios; and 55 Cancri, with a planet that circles its star in less than a day. The inner Solar System is there to compare.\n\nThe sizes of the orbits and the time each planet takes to go round are measured, and the planets move at those rates (sped up as chosen). The star and the planets are drawn far larger than the orbits' scale, or they would be too small to see. Nobody knows these planets' colors: they are colored by size, gray-brown for rocky planets, blue for planets between Earth and Neptune in size, tan for giants. Tap to see the system edge on, as we see TRAPPIST-1 and TOI-178 from Earth: their planets were found because, seen from here, they pass in front of their star and dim it a little (of 55 Cancri's five, only the closest does).",
   },
+  // ---- Tiny world r2 (lane Tiny world r2) ----
+  "dna-to-protein": {
+    howTo: "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
+    about:
+      "A gene is a stretch of DNA that spells out a protein. Tap and RNA polymerase opens the double helix and reads the template strand, building messenger RNA that matches the coding strand (with U for T). A ribosome then reads the mRNA three bases (a codon) at a time from the start codon AUG; each tRNA whose anticodon pairs with the codon brings its amino acid, and the chain grows until a stop codon. The chain then folds into the protein's real shape from the Protein Data Bank.\n\nThe genes are real (NCBI); only the start and end are drawn base by base. Try a mutation: changing base 2 of codon 7 in hemoglobin beta to T is the sickle-cell change (glutamic acid to valine).",
+  },
+  mitosis: {
+    howTo: "Tap the cell to watch it divide in two, phase by phase.",
+    about:
+      "Mitosis is how one cell becomes two with the same chromosomes. Before it starts, each chromosome has been copied into two sister chromatids. Tap and the chromatin threads coil into compact chromosomes (prophase), the nuclear envelope breaks into pieces and spindle fibers from the two centrosomes reach the chromosomes (prometaphase), which line up across the middle (metaphase). The sisters are pulled to opposite poles (anaphase), new nuclei form round each set (telophase) and a ring pinches the cell in two (cytokinesis).\n\nA human cell has 46 chromosomes; four are shown, two pairs. One daughter then grows back into a whole cell.",
+  },
+  apoptosis: {
+    howTo: "Tap the cell to watch it take itself apart, step by step.",
+    about:
+      "Apoptosis is a cell's tidy, programmed death: the body's way of removing cells it no longer needs, or that are damaged, without harming their neighbors. Tap and the cell shrinks and its chromatin condenses into a small, dark nucleus (pyknosis). The membrane bubbles out in blebs, the nucleus breaks into pieces (karyorrhexis), and the cell comes apart into apoptotic bodies, each wrapped in membrane, which are cleared away.\n\nUnlike a cell that bursts, nothing spills out, so there is no inflammation. In the body, white blood cells eat the bodies; here they drift away and a neighbor moves in.",
+  },
+  phagocytosis: {
+    howTo: "Tap to watch the neutrophil catch and digest the bacterium.",
+    about:
+      'Phagocytosis means "cell eating". Tap and this neutrophil, a white blood cell, reaches out pseudopods around a bacterium until their tips meet, enclosing it in a bubble of membrane called a phagosome. Lysosomes, small sacs of digestive enzymes, fuse with it to make a phagolysosome, where the bacterium is broken down. The cell then releases the waste.\n\nNeutrophils are the most common white blood cells; their nucleus has several lobes. A real neutrophil also kills with bursts of reactive oxygen; the toy shows the steps of eating.',
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------
