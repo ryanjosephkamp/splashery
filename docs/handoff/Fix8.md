@@ -89,6 +89,23 @@ the shared lists, and this file.
 
 ## State
 
+READY (October 5, 2026): done and pushed (draft PR #273).
+
+- tests/fx8.spec.mjs and tests/fx5.spec.mjs pass (13 of 13), and Prettier and the US English check
+  pass.
+- The thumbnail is re-rendered and the contact sheet checked.
+- The clip is on Effect review page 2: card `fx8-alarm-clock-time`, lane record `Fix8`.
+- Waiting for the owner's mark on the clip. This changes a public toy, so it merges only after he
+  marks it good.
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
+- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
+  What was cut), opened early and pushed after each finished item. Finish every working turn with a
+  final message that starts "READY:", "WORKING:" or "BLOCKED:".
+
+## State
+
 WORKING (October 5, 2026): the hands are done and pushed (draft PR #273). Still to do: the clip on
 Effect review page 2, the contact sheet, thumbnails and the full lane checks.
 
@@ -123,6 +140,9 @@ Effect review page 2, the contact sheet, thumbnails and the full lane checks.
   matches the kit Alarm clock.
 - **Time zone:** not added. Scan rigs can't take Toy tab options without an engine change (only kit
   recipes and scan looks have options, and a rig's `drive()` gets no `info.data`).
+- Clips: `node tools/fx8-clip.mjs <out-dir>`. It gives the page a virtual clock that moves on with
+  each frame, so the hands move at their real speed in the clip (effect-clip.mjs steps only the
+  toy's clock).
 - tests/fx5.spec.mjs checked the old hand (part `hand`, turned from player time), so its one test is
   updated to the new parts.
 
