@@ -2779,6 +2779,18 @@ export const TOY_SOUNDS = {
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
+  // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
+  "data-in-3d": [
+    { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },
+    { voice: "wood", at: 0.42, f: 700, decay: 0.12, vol: 0.2 },
+    { voice: "breath", at: 0.85, f: 520, to: 1.15, decay: 1.1, vol: 0.08 },
+  ],
+  // The record playing back: a long, low breath under a soft pen.
+  "climate-records": [
+    { voice: "thud", f: 70, decay: 0.5, vol: 0.7 },
+    { voice: "wood", at: 0.08, f: 820, decay: 0.1, vol: 0.18 },
+    { voice: "breath", at: 0.1, f: 360, to: 1.1, decay: 2.4, vol: 0.07 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

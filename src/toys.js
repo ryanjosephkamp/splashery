@@ -3526,6 +3526,27 @@ export const TOYS = [
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
   },
+  // ---- Pack: data-climate (lane Data and climate) ----
+  {
+    id: "data-in-3d",
+    label: "Data in 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel",
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "climate-records",
+    label: "Climate records",
+    category: "science",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart",
+    camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.0 },
+  },
 ];
 
 export function findToy(id) {

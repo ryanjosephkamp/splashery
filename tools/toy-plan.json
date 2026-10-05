@@ -2449,6 +2449,18 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "data-in-3d": {
+      "v": "new",
+      "owner": "Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes, ticks and labels that turn to face the camera. A tap drops every point, bar or the surface to the floor and lets it rise back into place with a small overshoot (2.4 s).",
+      "sound": "A soft thud as the marks land, a light knock, and a breath as they rise."
+    },
+    "climate-records": {
+      "v": "new",
+      "owner": "Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a year; GISTEMP temperature anomalies as a field of monthly bars or a wall of yearly stripes. A tap redraws the CO2 record from 1974 behind a bright bead (8 s), or lets the bars sink to zero and grow back.",
+      "sound": "A long, low breath under a soft thud."
     }
   }
 }

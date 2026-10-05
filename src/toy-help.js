@@ -1654,6 +1654,18 @@ export const TOY_HELP = {
     about:
       "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the nearest mode, and a new note clearly held brings a new pattern with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
   },
+  // Lane Data and climate.
+  "data-in-3d": {
+    howTo:
+      "Open a CSV or TSV in the Toy tab (or pick a sample), choose the columns for X, Y, Z, color and size, then tap the chart to drop the points and watch them rise.",
+    about:
+      "A table becomes a 3D chart you can turn: each row a point in a scatter, or rows gathered into bars or a surface whose heights are the mean of the rows in each cell. The labels turn to face you as you go round.\n\nYour file is read in your browser and never uploaded. Headers, quoted fields, dates, categories and missing cells are understood; a very big table is shown as an even random sample, and the Toy tab says so. Save a picture or a turning video from the Toy tab. The samples are a month of earthquakes (USGS), Fisher's 150 iris flowers (UCI, CC BY 4.0) and the CO2 record at Mauna Loa (NOAA).",
+  },
+  "climate-records": {
+    howTo: "Pick a record in the Toy tab and turn it; tap to play the record again.",
+    about:
+      "Two of the clearest measurements of a changing climate, from dated snapshots taken October 5, 2026 (nothing is fetched live).\n\nThe CO2 spiral is NOAA's monthly mean CO2 at Mauna Loa, Hawaii, from May 1974 to August 2026: one turn a year climbing upward, its distance from the middle the CO2 in parts per million. It widens as CO2 rises from 333 to over 427 ppm, faster in later years, and every turn leans toward May, when the air holds the most CO2 before northern plants draw it down. NOAA's record goes back to March 1958, but those early months come from the Scripps Institution of Oceanography, whose terms don't allow reuse here, so they are left out.\n\nThe temperature charts are NASA's GISTEMP v4: how much warmer or cooler each month (bars) or each year (a wall) was across the globe than the 1951–1980 average, from 1880. Blue is cooler, red warmer; 2024 averaged 1.29 °C above that baseline.",
+  },
   // Lane QR.
   "qr-code": {
     howTo: "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
