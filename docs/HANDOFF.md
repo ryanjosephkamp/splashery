@@ -298,6 +298,19 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-05, early (the owner's go):
+
+- Wave 1 of the push started at 00:32 UTC: Pages r6, Studio media (Sonnet 5.5), Live r7, QR r3, QR
+  lab r2, Science r3, Imaging, Earth and maps, Site, Any pose and Fix8 (sessions in WORKSTREAMS.md).
+  He will use his banked reset when this account nears 100%.
+- His picks on the new ideas: P1 (layered pop-up scenes) yes, for Pages r6; P2 to P4 maybe; X1 to X4
+  (two codes in one sculpture, three codes in one square, the code that heals, a shadow code) yes:
+  X2 and X3 to QR lab r2, X1 and X4 to QR craft; N1 to N8 (in a box, a periodic table of real
+  samples, the X-ray car, real landmarks, graph splats, a shape lab, checkers with real games,
+  canvas clothing) yes: N1's first box to Science r3, the rest to later lanes.
+- "PDB fetch yes": the molecule viewer may fetch a structure by its code (CLAUDE.md, "Live data").
+- He sent both Dot research prompts and started Codex tasks 21 and 16.
+
 Settled on 2026-10-04, late evening (the owner's push alignment notes,
 [reviews/2026-10-04-push-alignment](reviews/2026-10-04-push-alignment/notes.md), and his picks on
 the Push Plan page):
