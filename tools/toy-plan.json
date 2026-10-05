@@ -2476,6 +2476,34 @@
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
     },
+    "dna-to-protein": {
+      "v": "keep",
+      "owner": "Push Plan pick S13 (October 5, 2026): “DNA to protein is awesome.”",
+      "effect": "Transcription, then translation codon by codon, then the chain folds into its real structure.",
+      "sound": "A soft glass swell at the tap, a wooden knock as each tRNA docks, a bell at the stop codon and a low glass note as the protein settles.",
+      "improved": "Tiny world r2: RNA polymerase opens the helix (the coding strand lifts, the template's bases turn to pair) and lays down the mRNA; the mRNA moves down, the small subunit and the first tRNA scan to AUG, the large subunit joins, tRNAs dock codon by codon and the chain grows up the exit tunnel into a globule; at the stop codon a release factor frees it and it folds into its PDB structure (about 34 s, the camera following each step)."
+    },
+    "mitosis": {
+      "v": "keep",
+      "owner": "The owner's push notes (October 5, 2026): the cell's life cycle.",
+      "effect": "Mitosis through its phases, from prophase to cytokinesis, and back to one cell.",
+      "sound": "A soft breath as the chromatin condenses, a light tine as the sisters part and a hollow pop as the cells pinch apart.",
+      "improved": "Tiny world r2: chromatin threads condense into eight solid chromatids (four chromosomes), the centrosomes move round to the poles, the envelope breaks into twelve pieces, kinetochore fibers grow out and the chromosomes line up at the plate; the sisters are pulled to the poles as the cell stretches, new nuclei fade in, the furrow pinches the cell in two, and one daughter drifts off while the other grows back into the first cell (18 s). Phase names show above the cell."
+    },
+    "apoptosis": {
+      "v": "keep",
+      "owner": "The owner's push notes (October 5, 2026): apoptosis.",
+      "effect": "The cell shrinks, blebs and comes apart into apoptotic bodies, which are cleared; a neighbor moves in.",
+      "sound": "A low breath as it shrinks, soft boings as it blebs and quiet pops as the bodies part.",
+      "improved": "Tiny world r2: the cell shrinks as a whole and its nucleus condenses dark; two sets of blebs bulge in turn (morphs); the nucleus breaks into four pieces; the membrane pinches into seven membrane-bound bodies (a morph, then solid pieces) holding the organelles and nuclear pieces, which drift away; a neighbor cell moves in (14 s)."
+    },
+    "phagocytosis": {
+      "v": "keep",
+      "owner": "The owner's push notes (October 5, 2026): phagocytosis.",
+      "effect": "Pseudopods wrap a bacterium into a phagosome; lysosomes fuse; it is digested and the waste released.",
+      "sound": "A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz as it is digested.",
+      "improved": "Tiny world r2: a bacterium swims to the neutrophil, pseudopods wrap round it (a morph of the membrane, two layers deep) and close; the phagosome is drawn inside, five lysosomes fuse with it one by one, the bacterium falls apart into six solid pieces that shrink, and the waste is released out of the far side; new lysosomes bud from the Golgi and a new bacterium swims up (16 s). Labels name each step."
+    },
     "airport-xray": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
