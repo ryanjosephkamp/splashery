@@ -15,6 +15,11 @@
 //   colorJitter   how far each cell's color moves (0..255, mean of r, g, b)
 //   shownJitter   how far the drawn picture's pixels move, face on and
 //                 turned a little (0..255), everything together
+//   sharpness     how much of the camera's own edges reach the drawn face:
+//                 the mean gradient of the drawn face over the camera's
+//                 picture of it at the same size (1 is as sharp as the
+//                 camera; polish round)
+//   drawMs        the picture's work per frame on the main thread (ms)
 //   grain         the drawn face's fine detail that the camera's picture
 //                 doesn't have: the mean difference between the drawn face
 //                 and the same face blurred a little, less the camera's own
@@ -40,8 +45,10 @@ export const fakeCamera = (y4m, args = []) => [
 ];
 
 // Opens the mirror with the camera on and the depth answering.
-export async function openMirror(page, base, { look = "plain" } = {}) {
-  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=mid&labs=1`);
+export async function openMirror(page, base, { look = "plain", query = "" } = {}) {
+  await page.goto(
+    `${base}?renderer=webgl2&adapt=off&profile=mid&labs=1${query ? `&${query}` : ""}`,
+  );
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   await page.evaluate(() => window.__splashery.app.chooseToy("splat-mirror"));
   await page.waitForFunction(() => document.getElementById("progress").hidden && window.__splashery.player.motion.recipe, null, { timeout: 180_000 }); // prettier-ignore
@@ -143,6 +150,21 @@ export function fineDetail(png) {
   return n ? s / n : 0;
 }
 
+// The mean gradient (gray, 0..255 per pixel) of an image.
+export function edgeEnergy(png) {
+  const { width: w, height: h, data } = png;
+  const g = new Float32Array(w * h);
+  for (let i = 0; i < w * h; i++) g[i] = (data[i * 4] + data[i * 4 + 1] + data[i * 4 + 2]) / 3;
+  let s = 0;
+  let n = 0;
+  for (let y = 0; y < h - 1; y++)
+    for (let x = 0; x < w - 1; x++) {
+      s += Math.hypot(g[y * w + x + 1] - g[y * w + x], g[(y + 1) * w + x] - g[y * w + x]);
+      n++;
+    }
+  return n ? s / n : 0;
+}
+
 const pixels = (png) => {
   const out = new Float32Array(png.width * png.height * 3);
   for (let i = 0; i < png.width * png.height; i++)
@@ -180,6 +202,7 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
   const sj = [];
   const tj = [];
   let grain = [];
+  const edges = [];
   const box = await faceBox(page);
   let last = null;
   let lastShot = null;
@@ -208,6 +231,7 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
       tj.push(meanAbs(pixels(turned), pixels(lastTurned)));
     }
     grain.push(fineDetail(face));
+    edges.push(edgeEnergy(face));
     if (dump && k === answers - 1) {
       const fs = await import("node:fs");
       fs.writeFileSync(`${dump}-face.png`, PNG.sync.write(face));
@@ -217,7 +241,22 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
     lastShot = face;
     lastTurned = turned;
   }
-  const src = fineDetail(await cameraFace(page, box));
+  const camFace = await cameraFace(page, box);
+  const src = fineDetail(camFace);
+  // The camera's face was drawn at twice the CSS size, like the shots.
+  const drawMs = await page.evaluate(async () => {
+    const { MIRROR, mirrorScreen } = await import("/src/live/relief.js");
+    const c = document.createElement("canvas");
+    c.width = mirrorScreen.width;
+    c.height = mirrorScreen.height;
+    const g = c.getContext("2d", { willReadFrequently: true });
+    const t0 = performance.now();
+    for (let i = 0; i < 20; i++) {
+      MIRROR.last = i / 60 - 1 / 60;
+      mirrorScreen.draw(g, i / 60);
+    }
+    return (performance.now() - t0) / 20;
+  });
   const mean = (a) => a.reduce((s, v) => s + v, 0) / Math.max(1, a.length);
   return {
     heightJitter: mean(hj),
@@ -225,6 +264,12 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
     shownJitter: mean(sj),
     shownJitterTurned: mean(tj),
     grain: Math.max(0, mean(grain) - src),
+    sharpness: mean(edges) / Math.max(1e-6, edgeEnergy(camFace)),
+    drawMs,
+    grid: await page.evaluate(async () => {
+      const { MIRROR } = await import("/src/live/relief.js");
+      return `${MIRROR.cols}x${MIRROR.rows}`;
+    }),
     box,
   };
 }
@@ -285,7 +330,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); // prettier-ignore
   page.on("pageerror", (e) => console.error("page error:", e.message));
-  await openMirror(page, process.env.SPLASHERY_URL || "http://127.0.0.1:4173/", { look });
+  await openMirror(page, process.env.SPLASHERY_URL || "http://127.0.0.1:4173/", { look, query: opt("query", "") }); // prettier-ignore
   const m = await measure(page, { answers: Number(opt("answers", 10)), dump: opt("dump", null) });
   if (look === "hologram") m.overFace = await overFace(page);
   console.log(JSON.stringify({ look, ...m }, null, 1));

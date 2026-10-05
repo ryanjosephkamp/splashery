@@ -357,6 +357,9 @@ async function readBytes(rel) {
 const SPLAT_MIRROR = {
   alive: () => live.on("camera") || MIRROR.look === "hologram",
   density: 1,
+  // Live r7 polish (the owner's "the toys could still be sharper"): the
+  // labs' sharp kernel, a flatter top and a crisper edge for each splat.
+  kernel: "sharp",
   turntable: false,
   options: [
     // r5: a gentler default depth (was 0.6), so a person stands out from the
@@ -408,6 +411,18 @@ const SPLAT_MIRROR = {
     // The tap flattens or raises the relief; the picture itself keeps still
     // (the owner's review of October 1, 2026: no swaying).
     MIRROR.gain = clamp(MIRROR.depth * (1 - (c.flat ?? 0)), 0, 1);
+    // Live r7 polish: the camera's picture sorts where its depth puts it
+    // (buildMirror), again a few times a second while the depth or the
+    // flattening changes, so a nearer splat draws over a farther one when
+    // the picture is turned.
+    const cam = MIRROR.cam;
+    if (cam?.have) {
+      const S = (MIRROR.sort ||= { at: -1, answers: -1, gain: -1 });
+      if (t - S.at > 0.25 && (cam.answers !== S.answers || Math.abs(MIRROR.gain - S.gain) > 0.01)) {
+        Object.assign(S, { at: t, answers: cam.answers, gain: MIRROR.gain });
+        out.resortPose = true;
+      }
+    }
   },
   build(k, o) {
     MIRROR.depth = o.depth ?? 0.5;

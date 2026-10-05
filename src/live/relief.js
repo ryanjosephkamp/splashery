@@ -351,7 +351,9 @@ export class CameraDepth {
       // from shimmering.
       if (this.have) hts[i] += (t[i] - hts[i]) * (Math.abs(t[i] - hts[i]) > 0.3 ? kBig : k);
       const o = i * 4;
-      px[o] = Math.round(255 * (this.have ? hts[i] * gain : 0));
+      // (Live r7 polish: blue, a signed offset from halfway up; see buildMirror.)
+      px[o] = px[o + 1] = 128;
+      px[o + 2] = Math.round(255 * (this.have ? hts[i] * gain : 0));
       px[o + 3] = 255;
     }
     g.putImageData(img, cols, 0);
@@ -969,12 +971,18 @@ export function buildMirror(
     MIRROR.cam = null;
     return { cols, rows, height };
   }
+  // Live r7 polish: the camera's picture rests halfway up its relief and a
+  // signed offset (axis 3, blue) places each splat from there, so the player
+  // can sort it where it shows (Player.resortPose reads the canvas; the
+  // splat mirror asks for that after each depth answer). Resting at one
+  // depth, it sorted as a tie, and where neighbors overlap, turned, the
+  // wrong one could draw on top (more visible with the sharper kernel).
   reliefGrid(k, {
     cols,
     rows,
-    at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, 0],
-    axis: 2,
-    lift,
+    at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, lift / 2],
+    axis: 3,
+    lift: lift / 2,
     n: [0, 0, 1],
     size: width / cols,
     spread: SPREAD,
