@@ -856,6 +856,8 @@ const SOLAR_COLORS = { Mercury: [0.62, 0.6, 0.58], Venus: [0.9, 0.82, 0.62], Ear
 
 const systemsRecipe = {
   alive: true,
+  // focus lets the drive glide the view to the side (out.view).
+  focus: () => false,
   turntable: false,
   options: [
     {
@@ -917,8 +919,9 @@ const systemsRecipe = {
     // Seen from Earth: these systems were found because their planets pass
     // in front of their stars, so we see their orbits almost edge on.
     const p = progress(c.edge);
-    const e = c.edge > 0 ? ease(band(p, 0, 0.3)) * (1 - ease(band(p, 0.75, 1))) : 0;
-    out.body = { quat: [Math.sin((e * 88 * DEG) / 2), 0, 0, Math.cos((e * 88 * DEG) / 2)] };
+    // The view glides to the side, level with the orbits, and back.
+    out.view = { key: "home" };
+    if (c.edge > 0 && p > 0.02 && p < 0.72) out.view = { key: "edge", center: [0, 0, 0], size: [2.2, 2.2] };
   },
   build(k, o) {
     const D = SYS.data;
