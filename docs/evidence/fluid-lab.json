@@ -106,7 +106,7 @@
     {
       "what": "Replace the all-particles description with a statement that gases can use a grid, depending on the rendering path.",
       "where": "src/toy-help.js:1742",
-      "status": "proposed"
+      "status": "fixed in #278"
     },
     {
       "what": "Treat the GPU viscosity table as tuned presets unless authoritative material data, temperature, units, and calibration tests are supplied. Add mass, density, and convergence benchmarks before scientific accuracy claims.",

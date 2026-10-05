@@ -125,7 +125,7 @@
     {
       "what": "Replace the odometer analogy with wording that names the occasional double step.",
       "where": "src/toy-help.js:1611",
-      "status": "proposed"
+      "status": "fixed in #278"
     },
     {
       "what": "Expose rotor order, rotors IV/V, rings, plug pairs, start windows, and a longer message area; then use the published WXC/KCH message procedure and full ciphertext as an acceptance example.",

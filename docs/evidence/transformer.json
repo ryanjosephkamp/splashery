@@ -59,12 +59,12 @@
     {
       "what": "Replace the prediction labels with prepared-example labels and state that words and attention strengths are stored.",
       "where": "src/toy-help.js:1556",
-      "status": "proposed"
+      "status": "fixed in #278"
     },
     {
       "what": "Make the diagram key describe MUNDO as the end of a prepared example, consistent with the help text.",
       "where": "src/packs/computing.js:3125",
-      "status": "proposed"
+      "status": "fixed in #278"
     },
     {
       "what": "A numerical decoder view could calculate masked attention and probabilities, with its learned or chosen weights identified.",

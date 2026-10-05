@@ -183,7 +183,7 @@
     {
       "what": "Make the About counter description say swaps, or moves for merge sort, matching the actual display.",
       "where": "src/toy-help.js:1588",
-      "status": "proposed"
+      "status": "fixed in #278"
     }
   ]
 }

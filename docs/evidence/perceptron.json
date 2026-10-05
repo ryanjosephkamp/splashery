@@ -59,7 +59,7 @@
     {
       "what": "Replace the unsupported invention-year wording with the date of Rosenblatt’s published description.",
       "where": "src/toy-help.js:1532",
-      "status": "proposed"
+      "status": "fixed in #278"
     }
   ]
 }

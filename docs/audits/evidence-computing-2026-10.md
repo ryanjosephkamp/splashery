@@ -94,7 +94,8 @@ scientific claims.
 
 Only `src/toy-help.js` and one diagram-note label in `src/packs/computing.js` change. These five
 corrections affect seven strings; the calculations, geometry, timing, assets, and existing tests are
-untouched. The corresponding JSON fix receipts will name this draft pull request.
+untouched. The corresponding JSON fix receipts name draft
+[#278](https://github.com/ryanjosephkamp/splashery/pull/278); behavior proposals remain proposed.
 
 | Correction                                                                                         | Location                                                                                                                                                                            | Source                                                                                                                                                                                                                                           |
 | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
