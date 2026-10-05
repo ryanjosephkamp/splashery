@@ -1428,7 +1428,7 @@ function pgCrowd(time) {
       const pr = bk5PageRect(F.target.page, PG.pics);
       cap = Math.min(cap, (pr.hw - Math.abs(a.cx - pr.cx)) / a.hw, (pr.hh - Math.abs(a.cy - pr.cy)) / a.hh); // prettier-ignore
     }
-    F.cap = alone ? Infinity : Math.max(1, 0.88 * cap);
+    F.cap = alone ? Infinity : Math.max(1, 0.8 * cap);
     const want = alone ? 1 : 0;
     if (F.k === undefined) F.k = want;
     F.k += (want - F.k) * (1 - Math.exp(-dt / 0.15));
@@ -1453,7 +1453,9 @@ function bk5Pose(F, u, time) {
   // (In the lab a figure as big as the page comes less far, or it would
   // fill the screen.)
   const big = isLab() ? Math.min(1, (2 * Math.max(r.hw, r.hh)) / H) : 0;
-  const lift = ((f ? 0.18 : 0.3) * (1 - 0.6 * big) + 0.03 * F.slot) * H;
+  // (With others up, it comes less far toward you too: nearer looks bigger.)
+  const near = 0.6 + 0.4 * (F.k ?? 1);
+  const lift = ((f ? 0.18 : 0.3) * (1 - 0.6 * big) * near + 0.03 * F.slot) * H;
   // (With others up, it rises straight off its own place and grows no
   // further than keeps it clear of them: the owner's note of October 5,
   // 2026, "popped out images shouldn't overlap". F.k eases between the two.)
