@@ -204,6 +204,7 @@ const linkService = new V.PDFLinkService({ eventBus });
 const scripting = new V.PDFScriptingManager({ eventBus, sandboxBundleSrc: D + "legacy/build/pdf.sandbox.mjs", wasmUrl: D + "wasm/" });
 const viewer = new V.PDFViewer({ container: document.getElementById("c"), eventBus, linkService, scriptingManager: scripting });
 linkService.setViewer(viewer); scripting.setViewer(viewer);
+eventBus.on("sandboxcreated", () => { window.sandboxReady = true; });
 eventBus.on("pagesinit", () => { viewer.currentScaleValue = "1"; window.pagesReady = true; });
 window.openPdf = async (b64) => {
   const data = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
@@ -227,11 +228,11 @@ test("the flip book plays, pauses and steps in PDF.js with scripting on", async 
   await page.goto("/__pdf-viewer.html");
   await page.waitForFunction(() => window.loaded);
   await page.evaluate((b64) => window.openPdf(b64), Buffer.from(bytes).toString("base64"));
-  await page.waitForFunction(() => window.pagesReady);
+  await page.waitForFunction(() => window.pagesReady && window.sandboxReady);
   await page.evaluate(() => (window.viewer.currentPageNumber = 2));
   // The fields on page 2, by name.
   const ids = await page.evaluate(async () => {
-    const a = await window.viewer.getPageView(1).pdfPage.getAnnotations();
+    const a = await (await window.viewer.pdfDocument.getPage(2)).getAnnotations();
     return Object.fromEntries(a.filter((x) => x.fieldName).map((x) => [x.fieldName, x.id]));
   });
   const shown = () =>
@@ -250,6 +251,8 @@ test("the flip book plays, pauses and steps in PDF.js with scripting on", async 
     await page.mouse.up();
   };
   await expect.poll(shown, { timeout: 30_000 }).toEqual(["spf0"]);
+  // Page 2's open action has run once the sandbox is up and the page is shown.
+  await page.waitForTimeout(1000);
   // The sandbox sets the page up on opening it (the counter).
   await expect.poll(count, { timeout: 30_000 }).toBe("Picture 1 of 40");
   await press("spfwd");

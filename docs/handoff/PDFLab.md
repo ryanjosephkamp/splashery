@@ -9,10 +9,11 @@ your own files, as an "Engine: …" PR merged first). PR title: "Phase PDF lab: 
 and what a PDF can do". Handoff file: docs/handoff/PDFLab.md (create it; start it with this brief,
 word for word, under "## Brief", then keep "## State
 
-READY (October 5, 2026): everything in the brief is built and tested. Engine PR #299 (the Save PDF
-row) must merge first; the lane PR #301 contains it. Clips posted on Effect review page 2 (cards
-`pdf-grapes-flipbook` and `pdf-dialog`, lane `PDFLab`; the lane record is the Operator's to make).
-Next: the owner's marks, and his device tests (Acrobat, phone QR scan).
+READY (October 5, 2026, 09:20 UTC): everything in the brief is built and tested; main merged into
+both branches. Engine PR #299 (the Save PDF row) must merge first; the lane PR #301 contains it.
+Clips on Effect review page 2 (cards `pdf-grapes-flipbook` and `pdf-dialog`, lane `PDFLab`; the
+lane record is the Operator's to make); no marks yet. The playback test now waits for PDF.js's
+scripting sandbox before pressing buttons (it raced once after the merge).
 
 ## What was built
 

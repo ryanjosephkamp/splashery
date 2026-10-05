@@ -42,6 +42,7 @@ const linkService = new V.PDFLinkService({ eventBus });
 const scripting = new V.PDFScriptingManager({ eventBus, sandboxBundleSrc: D + "legacy/build/pdf.sandbox.mjs", wasmUrl: D + "wasm/" });
 const viewer = new V.PDFViewer({ container: document.getElementById("c"), eventBus, linkService, scriptingManager: scripting });
 linkService.setViewer(viewer); scripting.setViewer(viewer);
+eventBus.on("sandboxcreated", () => { window.sandboxReady = true; });
 eventBus.on("pagesinit", () => { viewer.currentScaleValue = "page-width"; window.pagesReady = true; });
 window.openPdf = async (b64) => {
   const data = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
@@ -59,7 +60,7 @@ await page.route("**/__pdf-viewer.html", (r) => r.fulfill({ contentType: "text/h
 await page.goto(`${base}__pdf-viewer.html`);
 await page.waitForFunction(() => window.loaded);
 await page.evaluate((b64) => window.openPdf(b64), fs.readFileSync(file).toString("base64"));
-await page.waitForFunction(() => window.pagesReady);
+await page.waitForFunction(() => window.pagesReady && window.sandboxReady);
 await page.waitForTimeout(2500);
 if (args.includes("--shots")) {
   for (const n of [1, 2]) {
@@ -70,7 +71,7 @@ if (args.includes("--shots")) {
 }
 // Page 2, scrolled so the picture and its buttons fill the screen.
 const ids = await page.evaluate(async () => {
-  const a = await window.viewer.getPageView(1).pdfPage.getAnnotations();
+  const a = await (await window.viewer.pdfDocument.getPage(2)).getAnnotations();
   return Object.fromEntries(a.filter((x) => x.fieldName).map((x) => [x.fieldName, x.id]));
 });
 // Zoomed so the picture (396 points wide) about fills the screen's width.
