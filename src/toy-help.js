@@ -1717,9 +1717,9 @@ export const TOY_HELP = {
   // ---- Science (lane Science) -----------------------------------------------------------
   "thermal-ellipsoids": {
     howTo:
-      "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
+      "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Pick a structure or open your own CIF in the Toy tab.",
     about:
-      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid represents a Gaussian approximation to that spread, which can include vibration and static disorder. Its long axis shows the direction of greatest spread. It is not an exact photograph of an atom's motion.\n\nChoose aspirin at 300 K, the protein crambin, or open a CIF, mmCIF or PDB with displacement records. Probability selects an ellipsoid enclosing 30%, 50% or 90% of the modeled distribution. Draw solid ellipsoids or one soft Gaussian per atom; toggle bonds. Hydrogens can be small spheres, drawn as refined, or hidden. Atoms with only isotropic displacement appear as spheres. Tap to switch illustrative jiggles on or off; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore a structure, not to measure vibration rates.",
+      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid is a Gaussian picture of that spread, which can include vibration and static disorder; its long axis shows the direction of greatest spread. It is not a photograph of an atom's motion.\n\nPick one of 25 measured structures in six groups (everyday molecules, medicines, minerals and gems, ice and salts, proteins and DNA) from the Crystallography Open Database or the Protein Data Bank, or open a CIF, mmCIF or PDB file. Show fills the unit cell with the atoms' symmetry copies, as minerals show by default. Probability sets the ellipsoid to enclose 30%, 50% or 90% of the spread; hard minerals and cold crystals have small ones. Draw solid ellipsoids or one Gaussian per atom, with or without bonds; hydrogens can be small spheres, as refined, or hidden. Tap to jiggle; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore, not to measure.",
   },
   "smlm-microscope": {
     howTo:

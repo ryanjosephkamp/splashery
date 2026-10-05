@@ -2910,7 +2910,12 @@ Proposals below are suggestions; the owner may change them.
     Science r2 (the owner's review of October 2, 2026: "really, really big" and slow on his phone):
     a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big
     overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's
-    count (36k on the low tier).
+    count (36k on the low tier). Science r3 (the owner's push notes of October 4, 2026: "we could
+    maybe add quite a number"): 25 structures in six groups (everyday molecules, medicines, minerals
+    and gems, ice and salts, proteins at atomic resolution, DNA), all from COD or the PDB (CC0) with
+    real anisotropic U; a Show option fills the unit cell from the space group's symmetry operations
+    (each copy's U turned with it), minerals and salts by default, and completes a molecule split by
+    symmetry.
   - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
     breath as they settle.
 - **Super-resolution microscope** (`smlm-microscope`). Now: tap: Show a slice at the depth you tap.

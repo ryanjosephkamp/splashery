@@ -18,6 +18,8 @@ import { element } from "../chem/elements.js";
 import { perceiveBonds } from "../chem/molfile.js";
 import { readCrystal, probabilityScale, centerOf, eigenSym3 } from "../science/crystal.js";
 import { readSmlm, readLocalizations } from "../science/smlm.js";
+import { STRUCTURES } from "../science/structures.js";
+import { fillCell, cellsFor, completeMolecules } from "../science/symmetry.js";
 import {
   SCI_TYPE,
   sciPart,
@@ -76,30 +78,9 @@ function easeFocus(F, time) {
 
 // ---- Thermal ellipsoids ------------------------------------------------------------------
 
-export const ELLIPSOID_SAMPLES = [
-  {
-    id: "aspirin",
-    label: "Aspirin, 300 K (small molecule)",
-    file: "aspirin-cod-2104857.cif",
-    title: "Aspirin form II at 300 K (COD 2104857)",
-    author:
-      "E. J. Chan, T. R. Welberry, A. P. Heerdegen and D. J. Goossens (Acta Crystallographica B 66, 696–707, 2010), via the Crystallography Open Database",
-    source: "https://www.crystallography.net/cod/2104857.html",
-    license: "Public domain (Crystallography Open Database)",
-    licenseUrl: "https://www.crystallography.net/cod/",
-  },
-  {
-    id: "crambin",
-    label: "Crambin, 0.54 Å (protein)",
-    file: "crambin-1ejg.pdb",
-    title: "Crambin at ultra-high resolution (PDB 1EJG)",
-    author:
-      "C. Jelsch, M. M. Teeter, V. Lamzin, V. Pichon-Pesme, R. H. Blessing and C. Lecomte (PNAS 97, 3171–3176, 2000), via the Protein Data Bank",
-    source: "https://www.rcsb.org/structure/1EJG",
-    license: "CC0 1.0 (wwPDB data policy)",
-    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
-  },
-];
+// r3: twenty-five structures in six groups (tools/sci3-structures.mjs writes
+// the catalog; the ids of r1's aspirin and crambin are kept for old links).
+export const ELLIPSOID_SAMPLES = STRUCTURES;
 
 const ELL = {
   cache: new Map(), // sample id -> structure
@@ -142,6 +123,63 @@ function faceOn(atoms) {
   return eigenSym3(m).vectors;
 }
 
+// r3: the structure as the Show option asks: the file's atoms, or the unit
+// cell (a block of cells for a small one) with each atom's symmetry copies.
+// Only a small-molecule CIF has a cell to fill; a protein shows its atoms.
+const FILLED = new WeakMap(); // the file's molecules, completed by symmetry
+const CELLS = new WeakMap(); // the unit cell
+function shownStructure(s, show = "auto", suits = "molecule") {
+  const want = show === "auto" || !show ? suits : show;
+  if (want === "file") return s;
+  if (want !== "cell") {
+    if (!FILLED.has(s)) FILLED.set(s, completeMolecules(s));
+    return FILLED.get(s);
+  }
+  if (s.format !== "cif" || !s.cellM) {
+    return { ...s, notes: [...s.notes, "Only a small-molecule CIF has a unit cell to fill, so this shows the file's atoms."] }; // prettier-ignore
+  }
+  if (!CELLS.has(s)) {
+    // A molecule's copies stay whole; a mineral's atoms wrap into the cell.
+    const molecular = s.atoms.some((a) => a.el === "C") && s.atoms.some((a) => a.el === "H");
+    CELLS.set(s, fillCell(s, { cells: molecular ? [1, 1, 1] : cellsFor(s.cell), molecular }));
+  }
+  return CELLS.get(s);
+}
+
+// The bonds: the heavy atoms' from their distances, and each hydrogen to its
+// nearest heavy atom (r3: ice's hydrogens are half-occupied sites, two to an
+// O···O line, and must not bond to each other).
+function bondsOf(atoms, pos) {
+  const heavy = [];
+  const hyd = [];
+  atoms.forEach((a, i) => (a.el === "H" ? hyd : heavy).push(i));
+  const bonds = perceiveBonds(heavy.map((i) => ({ el: atoms[i].el, p: pos[i] }))).map(([a, b]) => [heavy[a], heavy[b]]); // prettier-ignore
+  if (!hyd.length) return bonds;
+  const cell = 1.3;
+  const grid = new Map();
+  const key = (p) => p.map((v) => Math.floor(v / cell));
+  for (const i of heavy) {
+    const k = key(pos[i]).join(",");
+    if (!grid.has(k)) grid.set(k, []);
+    grid.get(k).push(i);
+  }
+  for (const h of hyd) {
+    const [cx, cy, cz] = key(pos[h]);
+    let best = -1;
+    let bd = 1.25 * 1.25;
+    for (let dx = -1; dx <= 1; dx++)
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dz = -1; dz <= 1; dz++)
+          for (const i of grid.get(`${cx + dx},${cy + dy},${cz + dz}`) ?? []) {
+            const d = vec.sub(pos[i], pos[h]);
+            const d2 = vec.dot(d, d);
+            if (d2 < bd && d2 > 0.25) [best, bd] = [i, d2];
+          }
+    if (best >= 0) bonds.push([best, h]);
+  }
+  return bonds;
+}
+
 // A molecule needs fewer splats than most toys: 0.6 of the kit's count (36k,
 // 84k, 120k and 168k by tier) keeps every atom solid and a phone smooth.
 export const THERMAL_DENSITY = 0.6;
@@ -155,8 +193,21 @@ const THERMAL = {
       type: "select",
       default: "aspirin",
       choices: [
-        ...ELLIPSOID_SAMPLES.map((s) => ({ id: s.id, label: s.label })),
+        ...ELLIPSOID_SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })),
         { id: "custom", label: "Your file (open one below)" },
+      ],
+    },
+    {
+      // r3: a mineral's file lists only a few atoms (the asymmetric unit);
+      // its symmetry copies fill the unit cell.
+      key: "show",
+      label: "Show",
+      type: "select",
+      default: "auto",
+      choices: [
+        { id: "auto", label: "What suits it" },
+        { id: "file", label: "The atoms the file lists" },
+        { id: "cell", label: "The unit cell" },
       ],
     },
     {
@@ -259,7 +310,8 @@ const THERMAL = {
   },
   async prepare(o) {
     if (o.structure === "custom" && ELL.custom) {
-      ELL.want = { name: ELL.custom.name, structure: ELL.custom.structure, custom: true };
+      const st = shownStructure(ELL.custom.structure, o.show, "molecule");
+      ELL.want = { name: ELL.custom.name, structure: st, custom: true };
       return;
     }
     const def = ELLIPSOID_SAMPLES.find((s) => s.id === o.structure) || ELLIPSOID_SAMPLES[0];
@@ -267,7 +319,8 @@ const THERMAL = {
       const text = await readAsset(`../../assets/toys/thermal-ellipsoids/${def.file}`);
       ELL.cache.set(def.id, readCrystal(text, def.file));
     }
-    ELL.want = { name: def.title, structure: ELL.cache.get(def.id), custom: false };
+    const name = def.temperature ? `${def.title}, measured at ${Math.round(def.temperature)} K` : def.title; // prettier-ignore
+    ELL.want = { name, structure: shownStructure(ELL.cache.get(def.id), o.show, def.show), custom: false }; // prettier-ignore
   },
   drive(t, c, out, info) {
     const z = Math.max(0, Math.min(1, c.zoom ?? 0));
@@ -359,8 +412,10 @@ const THERMAL = {
     }
     let bonds = [];
     if (o.bonds !== false) {
-      bonds = perceiveBonds(atoms.map((a, i) => ({ el: a.el, p: pos[i] })));
-      const stick = evenCylinder(STICK, STICK, 1, false);
+      bonds = bondsOf(atoms, pos);
+      // A unit cell's sticks are thinner, so its small ellipsoids show.
+      const r = s.edges ? STICK * 0.55 : STICK;
+      const stick = evenCylinder(r, r, 1, false);
       for (const [i, j] of bonds) {
         const d = vec.sub(pos[j], pos[i]);
         const len = vec.len(d);
@@ -380,6 +435,34 @@ const THERMAL = {
           color: (cc) => lit(shade(cc.lp[1] < 0 ? ci : cj, 0.85), cc.n, 0.2),
         });
       }
+    }
+    // r3: the unit cell's edges, as thin lines of splats stretched along them.
+    if (s.edges) {
+      const SEG = 24;
+      const lines = [];
+      for (const [a, b] of s.edges) {
+        const pa = apply(R, vec.sub(a, c0));
+        const pb = apply(R, vec.sub(b, c0));
+        const d = vec.sub(pb, pa);
+        const len = vec.len(d);
+        for (let i = 0; i < SEG; i++)
+          lines.push({ p: vec.add(pa, vec.mul(d, (i + 0.5) / SEG)), dir: vec.mul(d, 1 / len), len: len / SEG }); // prettier-ignore
+      }
+      k.cloud({ count: (lines.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
+        const e = lines[j];
+        if (!e) return null;
+        const base = k.baseSize || 0.01;
+        const across = 0.035; // Å
+        return {
+          p: e.p,
+          dir: e.dir,
+          size: across / base,
+          stretch: (0.8 * e.len) / across,
+          color: "#8a94ad",
+          opacity: 0.9,
+          part: sciPart(SCI_TYPE.plain),
+        };
+      });
     }
     ELL.sigMax = sigMax;
     ELL.focus = focusState();

@@ -498,6 +498,105 @@ checked on the live source page on September 30, 2026.
   A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy,
   cut by `tools/sci-galaxy.mjs`.
 
+### Science r3 (lane Science r3)
+
+Twenty-three more structures for the Thermal ellipsoids toy (labs), each checked on its live page on
+October 5, 2026. The Crystallography Open Database dedicates all its data to the public domain under
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/) ("All data in the COD and the database
+itself are dedicated to the public domain and licensed under the CC0 License"); the PDB's data are
+CC0 under the [wwPDB data policy](https://www.rcsb.org/pages/usage-policy). The CIFs are kept with
+their embedded refinement files (reflections, SHELX .res and .hkl) left out; the PDB files keep
+their HEADER, TITLE, CRYST1, atom and ANISOU records without waters, and the B-DNA file's second
+strand is added from its biological assembly (`tools/sci3-structures.mjs`).
+
+- Thermal ellipsoids: Table sugar (sucrose),
+  [COD 2300557](https://www.crystallography.net/cod/2300557.html), by A. O. Dmitrienko and I. S.
+  Bushmarinov (Journal of Applied Crystallography 48, 2015),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Urea, [COD 1566505](https://www.crystallography.net/cod/1566505.html), by P.
+  N. Ruth, R. Herbst-Irmer and D. Stalke (IUCrJ 9 286, 2022),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Vitamin C (ascorbic acid),
+  [COD 2300646](https://www.crystallography.net/cod/2300646.html), by C. J. McMonagle and M. R.
+  Probert (Journal of Applied Crystallography 52 445, 2019),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Glycine (neutron),
+  [COD 2103308](https://www.crystallography.net/cod/2103308.html), by P. Langan, S. A. Mason, D.
+  Myles and B. P. Schoenborn (Acta Crystallographica Section B 58 728, 2002),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Acetaminophen (paracetamol),
+  [COD 7232757](https://www.crystallography.net/cod/7232757.html), by M. R. Ward and I. D. H. Oswald
+  (CrystEngComm 21 4437, 2019), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the
+  Crystallography Open Database).
+- Thermal ellipsoids: Ibuprofen (neutron),
+  [COD 2006278](https://www.crystallography.net/cod/2006278.html), by N. Shankland, C. C. Wilson, A.
+  J. Florence and P. J. Cox (Acta Crystallographica Section C 53 951, 1997),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Vitamin B3 (nicotinamide, neutron),
+  [COD 2003053](https://www.crystallography.net/cod/2003053.html), by Y. Miwa, T. Mizuno, K.
+  Tsuchida et al. (Acta Crystallographica, Section B 55 78, 1999),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Quartz, [COD 9000775](https://www.crystallography.net/cod/9000775.html), by L.
+  Levien, C. T. Prewitt and D. J. Weidner (American Mineralogist 65 920, 1980),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Calcite, [COD 9000965](https://www.crystallography.net/cod/9000965.html), by
+  S. A. Markgraf and R. J. Reeder (American Mineralogist 70 590, 1985),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Corundum (ruby and sapphire),
+  [COD 1000032](https://www.crystallography.net/cod/1000032.html), by L. Lutterotti and P. Scardi
+  (Journal of Applied Crystallography 23 246, 1990),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Beryl (emerald),
+  [COD 9000992](https://www.crystallography.net/cod/9000992.html), by G. E. Brown and B. A. Mills
+  (American Mineralogist 71 547, 1986),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Zircon, [COD 9000684](https://www.crystallography.net/cod/9000684.html), by R.
+  M. Hazen and L. W. Finger (American Mineralogist 64 196, 1979),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Garnet (pyrope),
+  [COD 2108142](https://www.crystallography.net/cod/2108142.html), by R. Destro, R. Ruffo, P.
+  Roversi et al. (Acta Crystallographica Section B 73 722, 2017),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Pyrite (fool's gold),
+  [COD 1564890](https://www.crystallography.net/cod/1564890.html), by K. Ma, R. Lefèvre, Q. Li et
+  al. (Chemical Science, 2021), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the
+  Crystallography Open Database).
+- Thermal ellipsoids: Ice from Antarctica (neutron),
+  [COD 9015208](https://www.crystallography.net/cod/9015208.html), by A. D. Fortes, I. G. Wood, D.
+  Grigoriev et al. (Journal of Chemical Physics 120 11376, 2004),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Rock salt, [COD 7132177](https://www.crystallography.net/cod/7132177.html), by
+  M. Mettler, A. Dewandre, N. Tumanov et al. (Chemical communications, 2023),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Gypsum (neutron),
+  [COD 2300258](https://www.crystallography.net/cod/2300258.html), by P. F. Henry, M. T. Weller and
+  C. C. Wilson (Journal of Applied Crystallography 42 1176, 2009),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Blue vitriol (chalcanthite, neutron),
+  [COD 9008253](https://www.crystallography.net/cod/9008253.html), by G. E. Bacon and D. H.
+  Titterton (Zeitschrift fur Kristallographie 141 330, 1975),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Lysozyme, 0.65 Å, [PDB 2VB1](https://www.rcsb.org/structure/2VB1), by J. Wang,
+  M. Dauter, R. Alkire et al. (Acta Crystallogr.,Sect.D 63 1254, 2007),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: An iron-sulfur protein (HiPIP), 0.48 Å,
+  [PDB 5D8V](https://www.rcsb.org/structure/5D8V), by Y. Hirano, K. Takeda and K. Miki (Nature 534
+  281, 2016), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: Rubredoxin, 0.68 Å, [PDB 2DSX](https://www.rcsb.org/structure/2DSX), by C.
+  Chen, Y. Lin, Y. Huang and M. Liu (Biochem.Biophys.Res.Commun. 349 79, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: Z-DNA, 0.55 Å, [PDB 3P4J](https://www.rcsb.org/structure/3P4J), by K.
+  Brzezinski, A. Brzuszkiewicz, M. Dauter et al. (Nucleic Acids Res. 39 6238, 2011),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: B-DNA, 0.74 Å, [PDB 1D8G](https://www.rcsb.org/structure/1D8G), by C.
+  Kielkopf, S. Ding, P. Kuhn and D. Rees (J.Mol.Biol. 296 787, 2000),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+
 Files people open in these toys are read in their browser and never uploaded.
 
 ## Worlds

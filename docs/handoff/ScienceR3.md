@@ -117,4 +117,3 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 ## Known issues
 
 ## For the Operator
-
