@@ -3408,7 +3408,7 @@ export const RECIPES = {
     controls: [{ key: "go", label: "Predict", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Predict the next word" },
     // The encoder-decoder diagram's key sits here in the panel, off the toy.
-    note: "Encoder–decoder key: ◉ attention · ◒ masked attention · + add & norm · » feed forward · ⠿ embedding · ∿ positional encoding · ╱ linear · ▁▃▇ softmax · N× repeated N times. HELLO WORLD goes in, and the decoder, given START HOLA, predicts MUNDO.", // prettier-ignore
+    note: "Encoder–decoder key: ◉ attention · ◒ masked attention · + add & norm · » feed forward · ⠿ embedding · ∿ positional encoding · ╱ linear · ▁▃▇ softmax · N× repeated N times. HELLO WORLD goes in, and the prepared decoder example, given START HOLA, ends with MUNDO. Its words and attention strengths are stored.", // prettier-ignore
     // Arcs of light jump between the word tiles (thicker where attention is
     // stronger, a colour for each head); the tiles rise through the
     // feed-forward block to the next layer, where new arcs jump, then up

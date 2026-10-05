@@ -1,0 +1,380 @@
+{
+  "cactus": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.2,
+    "side": {
+      "err": 2.3,
+      "floor": 0.3,
+      "rel": 0.2
+    },
+    "down": {
+      "err": 1.9,
+      "floor": 0.5,
+      "rel": 0.2
+    }
+  },
+  "strawberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 20.7,
+    "side": {
+      "err": 4.8,
+      "floor": 1.7,
+      "rel": 0.2
+    },
+    "down": {
+      "err": 6.8,
+      "floor": 1.5,
+      "rel": 0.3
+    }
+  },
+  "cookie": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 3.2,
+    "side": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "bee": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 96,
+    "side": {
+      "err": 96.3,
+      "floor": 0.6,
+      "rel": 1
+    },
+    "down": {
+      "err": 103.7,
+      "floor": 1.2,
+      "rel": 1.1
+    }
+  },
+  "cluster-fly": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.5,
+    "side": {
+      "err": 4.9,
+      "floor": 0.4,
+      "rel": 0.9
+    },
+    "down": {
+      "err": 6.7,
+      "floor": 0.4,
+      "rel": 1.2
+    }
+  },
+  "may-beetle": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.8,
+    "side": {
+      "err": 8.6,
+      "floor": 0.3,
+      "rel": 1.5
+    },
+    "down": {
+      "err": 7.8,
+      "floor": 0.2,
+      "rel": 1.4
+    }
+  },
+  "millipede": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 37.6,
+    "side": {
+      "err": 44,
+      "floor": 0.4,
+      "rel": 1.2
+    },
+    "down": {
+      "err": 40.5,
+      "floor": 0.6,
+      "rel": 1.1
+    }
+  },
+  "bumblebee": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 52.1,
+    "side": {
+      "err": 59.1,
+      "floor": 0.2,
+      "rel": 1.1
+    },
+    "down": {
+      "err": 61,
+      "floor": 0.2,
+      "rel": 1.2
+    }
+  },
+  "raspberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 28,
+    "side": {
+      "err": 32.6,
+      "floor": 0.2,
+      "rel": 1.2
+    },
+    "down": {
+      "err": 38.2,
+      "floor": 0.1,
+      "rel": 1.4
+    }
+  },
+  "blackberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 32.3,
+    "side": {
+      "err": 38.3,
+      "floor": 0.1,
+      "rel": 1.2
+    },
+    "down": {
+      "err": 38.1,
+      "floor": 0.2,
+      "rel": 1.2
+    }
+  },
+  "blueberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 38.9,
+    "side": {
+      "err": 24.2,
+      "floor": 0.2,
+      "rel": 0.6
+    },
+    "down": {
+      "err": 30.2,
+      "floor": 0.4,
+      "rel": 0.8
+    }
+  },
+  "grape": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 45.6,
+    "side": {
+      "err": 34.1,
+      "floor": 0.2,
+      "rel": 0.7
+    },
+    "down": {
+      "err": 35.3,
+      "floor": 0.2,
+      "rel": 0.8
+    }
+  },
+  "star-cookie": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 46.7,
+    "side": {
+      "err": 34.3,
+      "floor": 0.3,
+      "rel": 0.7
+    },
+    "down": {
+      "err": 37.3,
+      "floor": 0.3,
+      "rel": 0.8
+    }
+  },
+  "tomatoes": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 8.4,
+    "side": {
+      "err": 5.8,
+      "floor": 0.4,
+      "rel": 0.7
+    },
+    "down": {
+      "err": 8.4,
+      "floor": 0.3,
+      "rel": 1
+    }
+  },
+  "mandeltorus": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 30.8,
+    "side": {
+      "err": 33.4,
+      "floor": 0.5,
+      "rel": 1.1
+    },
+    "down": {
+      "err": 37.4,
+      "floor": 0.3,
+      "rel": 1.2
+    }
+  },
+  "basket": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 12.4,
+    "side": {
+      "err": 22.6,
+      "floor": 1.6,
+      "rel": 1.8
+    },
+    "down": {
+      "err": 19.3,
+      "floor": 1.7,
+      "rel": 1.5
+    }
+  },
+  "rubber-duck-real": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.6,
+    "side": {
+      "err": 14,
+      "floor": 0.5,
+      "rel": 1.5
+    },
+    "down": {
+      "err": 17.5,
+      "floor": 0.6,
+      "rel": 1.8
+    }
+  },
+  "garden-gnome": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 108.3,
+    "side": {
+      "err": 108.3,
+      "floor": 0,
+      "rel": 1
+    },
+    "down": {
+      "err": 0.2,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "wooden-elephant": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13,
+    "side": {
+      "err": 14.7,
+      "floor": 0.2,
+      "rel": 1.1
+    },
+    "down": {
+      "err": 17,
+      "floor": 0.2,
+      "rel": 1.3
+    }
+  },
+  "marble-bust": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 124.5,
+    "side": {
+      "err": 48.7,
+      "floor": 1.3,
+      "rel": 0.4
+    },
+    "down": {
+      "err": 49.8,
+      "floor": 0.5,
+      "rel": 0.4
+    }
+  },
+  "ukulele": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 96,
+    "side": {
+      "err": 99.2,
+      "floor": 0,
+      "rel": 1
+    },
+    "down": {
+      "err": 96.1,
+      "floor": 0,
+      "rel": 1
+    }
+  }
+}

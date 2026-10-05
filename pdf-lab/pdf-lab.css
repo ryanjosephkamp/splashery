@@ -1,0 +1,207 @@
+/* Lane PDF lab: "Can a toy move in a PDF?" (pdf-lab/index.html). */
+
+:root {
+  --page: #ffffff;
+  --ink: #141414;
+  --muted: #474747;
+  --line: #dddddd;
+  --soft: #f4f5f7;
+  --accent: #0b4f9c;
+  --yes: #1d6b36;
+  --yes-soft: #e7f4ea;
+  --some: #7a4b00;
+  --some-soft: #fff4dc;
+  --no: #8f1d1d;
+  --no-soft: #fbeaea;
+  --gray-soft: #eeeeee;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #101010;
+    --ink: #f2f2f2;
+    --muted: #c9c9c9;
+    --line: #363636;
+    --soft: #1a1b1e;
+    --accent: #b8ccff;
+    --yes: #8fe0a6;
+    --yes-soft: #13281a;
+    --some: #ffd28a;
+    --some-soft: #2b2110;
+    --no: #ffaaaa;
+    --no-soft: #2e1515;
+    --gray-soft: #262626;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #101010;
+  --ink: #f2f2f2;
+  --muted: #c9c9c9;
+  --line: #363636;
+  --soft: #1a1b1e;
+  --accent: #b8ccff;
+  --yes: #8fe0a6;
+  --yes-soft: #13281a;
+  --some: #ffd28a;
+  --some-soft: #2b2110;
+  --no: #ffaaaa;
+  --no-soft: #2e1515;
+  --gray-soft: #262626;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font:
+    17px/1.55 ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 28px 16px 64px;
+}
+a {
+  color: var(--accent);
+}
+h1 {
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0.2em 0 0.4em;
+}
+h2 {
+  font-size: 1.35rem;
+  margin: 2em 0 0.5em;
+}
+h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.3em;
+}
+p {
+  margin: 0 0 0.9em;
+}
+.kicker {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+.lead {
+  font-size: 1.12rem;
+}
+code,
+kbd {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+.card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+.card.yes {
+  background: var(--yes-soft);
+}
+.card.yes h3 {
+  color: var(--yes);
+}
+.card.some {
+  background: var(--some-soft);
+}
+.card.some h3 {
+  color: var(--some);
+}
+.card.no {
+  background: var(--no-soft);
+}
+.card.no h3 {
+  color: var(--no);
+}
+.files,
+.ways,
+.steps {
+  padding-left: 1.3em;
+}
+.files li,
+.ways li,
+.steps li {
+  margin-bottom: 0.6em;
+}
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.82rem;
+}
+th,
+td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+tbody th {
+  font-weight: 500;
+  position: sticky;
+  left: 0;
+  background: var(--page);
+}
+thead th {
+  background: var(--soft);
+}
+.tag {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0 7px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.tag.moves {
+  background: var(--yes-soft);
+  color: var(--yes);
+  font-weight: 600;
+}
+.tag.responds {
+  background: var(--some-soft);
+  color: var(--some);
+  font-weight: 600;
+}
+.tag.still {
+  background: var(--no-soft);
+  color: var(--no);
+}
+.tag.untested {
+  background: var(--gray-soft);
+  color: var(--muted);
+}
+.note {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-top: 0.8em;
+}

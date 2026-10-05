@@ -97,4 +97,65 @@ docs/audits/poses-2026-10.md, the per-toy recipe fixes your sweep lists, and thi
 
 ## State
 
-WORKING: not started yet (October 3, 2026).
+READY: all five items done (October 5, 2026). Model: Opus 5.5, default effort. Engine PR #276
+(`claude/lane-any-pose-engine`) must merge first; lane PR #277 (`claude/lane-any-pose`) carries it
+merged in. Both have main merged (October 5). Specs run: `pose-engine`, `pose`, `hea-engine`,
+`heb-engine`, `hec-engine`, `phy-engine`, `hec`, `phy`, `taps`, `smoke`, `unit`, all pass (the
+`hec-engine` timing test passes idle; it failed only under load).
+
+### The cause (item 1)
+
+PlayCanvas runs Splashery's effect shader (`modifySplatCenter` in `src/effects.js`) on each splat's
+center in the world, after the toy's entity has placed it. Hands-on poses a whole toy by turning and
+moving that entity (`Stage.setToyPose`), so every effect of a posed toy was worked out about where
+the toy stood at home, with the world's up as its own: a rig scan's parts (the grape's peel opened
+the same way on the screen however the grape lay), the scans' break-apart, kit behavior kinds and
+the effects panel. Engine A's `poseKitUniforms` (#225, October 3) had already patched a kit toy's
+parts and tokens, which is what the owner saw on the hoodie; since its cloth hood (#230) the hoodie
+plays in pieces and is not tossed whole any more.
+
+### Engine (item 2): PR #276
+
+- `src/effects-pose.js` (new): the pose uniforms (`uSpPoseQ`, `uSpPoseT`, `uSpPoseC`, `uSpPoseUp`),
+  the world points and directions the shader reads taken into the toy's home frame, `poseUp` (a
+  recipe's `about.up`) and `poseGravity` (which toys have a real down).
+- `src/effects.js`: with a pose set, each center goes into the home frame, every effect runs there,
+  and it goes back; the effect rotations are turned by the pose. Upright the old lines run.
+- Gravity: flame and rise kinds rise toward the real sky, fall kinds fall toward the real floor, and
+  a scan's break-apart pieces fall toward the real floor and land there; the space, atoms, tiny
+  world, math and computing shelves and any recipe with `gravity: false` keep all that in their own
+  frame.
+- `src/stage.js` (1 line), `src/player.js` (5), `src/motion.js` (3), `src/physics/hands-on.js`
+  (`handsFix` no longer set: the shader does it).
+- Upright untouched: 15 toys × 5 moments, main against the branch, every effect uniform identical (0
+  of 75 differ), frames pixel-identical except two late heart frames that also differ between two
+  runs of the same code.
+
+### Sweep, fixes, gravity (items 3 to 5)
+
+- docs/audits/poses-2026-10.md: a verdict per toy (322 work, 21 checked, 16 pieces, 14 never posed),
+  from `tools/pose-sweep.mjs` (data in docs/audits/poses-2026-10.json; the scans before the change
+  in `…-before-rigs.json`) and the notes from checking every differing toy by eye
+  (`tools/pose-notes.json`).
+- Recipe fixes (each identical upright): the snow globe (falling snow thins away when turned, the
+  swirl shows), the storm cloud (rain thins away when turned), and `gravity: false` on the rocket,
+  gift box, potion bottle, tornado, geyser and volcano.
+- `tests/pose-engine.spec.mjs` (engine) and `tests/pose.spec.mjs` (a sample and every fixed toy, in
+  three poses).
+- Clips on Effect review page 2 (lane id `AnyPose`): grape, hoodie, blackberry, star cookie,
+  mandeltorus and blueberry, each after the fix with a "before" card beside it.
+
+### Known issues
+
+- The lava lamp's wax keeps moving along the lamp; the coffee's steam rises through the saucer with
+  the cup upside down; the potion bottle's liquid is a still shape; the storm cloud's lightning
+  strikes from its own underside; the effects panel's drop keeps the floor it took when it started.
+- The kit melt kind (ice cream) still slumps toward the toy's own bottom.
+
+### For the Operator
+
+- The Effect review page has no `lanes/AnyPose` record yet; the cards are under that lane id.
+- `hec-engine` "soft parts are cheap" (a timing test, untouched code) fails under load (1.04 ms
+  against 1 ms) and passes idle on main and on the branch (about 0.5 ms).
+- A cloud container sleeps when the session idles, which kills background jobs (servers, sweeps);
+  long jobs here were kept going by staying busy.
