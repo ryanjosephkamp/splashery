@@ -153,9 +153,10 @@
     "alarm-clock": {
       "v": "keep",
       "owner": "Hands should move. On tap it should jump up and down and ring like an alarm clock.",
-      "effect": "Hands tick all the time; tap rattles it off the table while it rings.",
+      "effect": "The hands show the real time and the second hand ticks; tap rattles it off the table while it rings.",
       "sound": "A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).",
-      "improved": "E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s)."
+      "improved": "E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s).",
+      "fixed": "Fix8: the hands show the real time. The scanned hands are cut out cleanly and kit-built hour, minute and second hands of the same shapes turn from this device's clock."
     },
     "vintage-camera": {
       "v": "keep",
@@ -2117,6 +2118,24 @@
       "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).",
       "sound": "Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps)."
     },
+    "qr-anatomy": {
+      "v": "new",
+      "owner": "The owner's push notes of October 4, 2026 (Q6, \"strong yes\"; \"it has to be technically correct\"), lane QR lab r2, October 5, 2026.",
+      "effect": "How a QR code works: a tap lights up the next part of a real code (finders, separators, timing, alignment, format and version information, the dark module, data and error correction codewords, remainder bits, the mask); its modules lift toward you as solid tiles in the part's color. Encode your own text steps through the mode, the count, the data bits, padding, error correction, blocks and interleaving, the zigzag placement (every bit drops into place along the path) and the eight masks (the masked tiles turn over, with each mask's penalty), every step checked against Nayuki's encoder.",
+      "sound": "A light wooden knock and a soft breath as each part lifts."
+    },
+    "qr-damage": {
+      "v": "new",
+      "owner": "The owner's push notes of October 4, 2026 (Q7, \"an absolute strong yes ... build this out very comprehensively\"; X3, the code that heals, October 5), lane QR lab r2, October 5, 2026.",
+      "effect": "The Damage lab: a tap adds the chosen damage (scratch, sticker, tear, burn, smudge, or the splats' own: blur, shrink, grow, jitter, fade, color drift; with Tilt, Curve and Move in time as sliders). A sticker drops onto the code, a torn corner peels up and falls away, a burned corner chars and crumbles. A meter reads the very picture on the stage with jsQR after each change and counts each block's lost codewords against what it can fix; the four levels can stand side by side. Heal it shows the code as a reader read it, wrong modules in red, and turns them over block by block as Reed–Solomon decoding fixes each block.",
+      "sound": "A soft scrape and a muffled thud as the damage lands."
+    },
+    "qr-three": {
+      "v": "new",
+      "owner": "The owner's pick X2 on the Push Plan, October 5, 2026 (three codes in one square), lane QR lab r2.",
+      "effect": "Three QR codes in the red, green and blue of one square (eight colors). A tap pulls the square apart into its three codes, each in its own color, which slide back and out to the sides and come back together. Read all three splits the picture into its channels and reads each code; an ordinary reader's result is shown beside them.",
+      "sound": "A soft breath as the codes slide apart and a light knock as they meet again."
+    },
     "chladni-plate": {
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
@@ -2533,6 +2552,48 @@
       "effect": "A song's melody comes down a three-lane track as glowing notes, low to high by pitch; steer the sled into each note's lane as it arrives and the note plays, so catching them all plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or your own MIDI file.",
       "sound": "Each caught note plays on the grand piano at its own pitch; a missed note is silent.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "airport-xray": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
+      "effect": "Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride the belt through the scanner, pushing its lead curtains aside; the screen on top builds each bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic orange, inorganic green, metal blue, dense black). A tap sends the next bag.",
+      "sound": "The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is done.",
+      "improved": "Imaging: new toy."
+    },
+    "how-ct": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
+      "effect": "A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane). Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps back.",
+      "sound": "The gantry's knock as it starts and its motor's low run, lower on the way back.",
+      "improved": "Imaging: new toy."
+    },
+    "walnut-ct": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an openly licensed dataset (lane Imaging; labs only).",
+      "effect": "A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm block (resampled to the device's budget). A drag moves a cutting plane through it (front to back, top down or side to side) and shows the shell, the kernel's lobes and the air between them. The tap raises the density window so the kernel melts away and only the shell stays; a second tap brings it back.",
+      "sound": "A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.",
+      "improved": "Imaging: new toy, with tools/img-walnut.mjs."
+    },
+    "fruit-mri": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).",
+      "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back.",
+      "sound": "An MRI scanner's knocking as it steps through the slices.",
+      "improved": "Imaging: new toy."
+    },
+    "electron-microscope": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom and a snowflake (lane Imaging; labs only).",
+      "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out.",
+      "sound": "The stage motor's two soft steps and a low vacuum hum.",
+      "improved": "Imaging: new toy."
+    },
+    "thermal-camera": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea cooling and a hand warmer (lane Imaging; labs only).",
+      "effect": "A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap crossfades from normal colors to the thermal camera's false colors (the iron palette), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.",
+      "sound": "The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it turns off.",
+      "improved": "Imaging: new toy."
     }
   }
 }
