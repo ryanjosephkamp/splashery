@@ -921,7 +921,8 @@ const systemsRecipe = {
     const p = progress(c.edge);
     // The view glides to the side, level with the orbits, and back.
     out.view = { key: "home" };
-    if (c.edge > 0 && p > 0.02 && p < 0.72) out.view = { key: "edge", center: [0, 0, 0], size: [2.2, 2.2] };
+    if (c.edge > 0 && p > 0.02 && p < 0.72)
+      out.view = { key: "edge", center: [0, 0, 0], size: [2.2, 2.2] };
   },
   build(k, o) {
     const D = SYS.data;
