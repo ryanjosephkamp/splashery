@@ -1661,6 +1661,22 @@ export const TOY_HELP = {
     about:
       "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles. “Scan view” turns it flat to the camera, and the toy reads its own picture back to check that it still scans. Tap it and the modules burst, fall and fly back to their places. Your text never leaves your device.",
   },
+  // Lane QR lab r2.
+  "qr-anatomy": {
+    howTo: "Tap to light up each part of the code, or encode your own text step by step.",
+    about:
+      "A QR code is a grid of dark and light modules with a fixed plan. Three finder patterns mark the corners, timing patterns set the grid, alignment patterns help at an angle, and the format information says the error correction level and the mask. The rest is your text in 8-bit codewords, plus Reed–Solomon codewords that can rebuild damaged ones.\n\nTap to light up each part. Or type your own text in the Toy tab and step through the encoding: the mode, the count, the data bits, padding, error correction, interleaving, the zigzag placement and the eight masks with their penalty scores. Each step follows ISO/IEC 18004 and is checked against another encoder.",
+  },
+  "qr-damage": {
+    howTo: "Pick a damage in the Toy tab and tap the code to add it. Watch the meter.",
+    about:
+      "QR codes still scan when part of them is lost, because error correction can rebuild missing codewords: about 7, 15, 25 or 30 percent at levels L, M, Q and H.\n\nHere you scratch a code, stick a label on it, tear or burn a corner, smudge it, or do what only a code of splats allows: blur, shrink, grow, jitter or fade its splats, drift its color, curve it, tilt it or set it moving. After each change the meter reads the very picture on the stage and counts each block's lost codewords against what it can fix. Show all four levels side by side, or tap Heal it to watch Reed–Solomon decoding set each block right.",
+  },
+  "qr-three": {
+    howTo: "Tap to pull the three codes apart. Read all three in the Toy tab.",
+    about:
+      "One square holds three QR codes here: the first sets each module's red, the second its green and the third its blue. So each module is one of eight colors, from white to black.\n\nSplashery's reader splits the picture into its red, green and blue and reads each one as an ordinary code, for three times the data in the same square. An ordinary phone reader sees only gray, which comes mostly from green, so it usually reads the green code or nothing. Tap the square to pull its three codes apart and back. Type your own three texts in the Toy tab.",
+  },
   // Lane Live input.
   "room-echo": {
     howTo:
