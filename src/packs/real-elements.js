@@ -8,7 +8,7 @@
 // facts say why. Colors by category or block are an option. Loaded on demand (labs).
 //
 // Weight: the table's samples come in one 640 x 640 atlas (a JPEG of colors and a PNG of depth,
-// about 0.2 MB together); each lifted sample loads its own 256 x 256 pair (about 40 KB) only when
+// about 0.2 MB together); each lifted sample loads its own 384 x 384 pair (about 55 KB) only when
 // it is lifted.
 
 import { quatAxisAngle, quatMul } from "../kit.js";
@@ -20,6 +20,8 @@ import { inkCells } from "../elements-real/lettering.js";
 const TAU = Math.PI * 2;
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const ease = (x) => x * x * (3 - 2 * x);
+// Polish: a gentler start and stop than ease (zero speed and zero acceleration at both ends).
+const ease5 = (x) => x * x * x * (x * (x * 6 - 15) + 10);
 const band = (x, a, b) => clamp01((x - a) / (b - a));
 
 // ---- The facts ------------------------------------------------------------------------------
@@ -285,6 +287,11 @@ const REAL_ELEMENTS = {
   alive: true,
   turntable: false,
   density: 1.6,
+  // Polish (labs only): the Lab lane's sharper splat falloff, the low cull so the tiles' fine
+  // splats and lettering reach a phone's screen, and room to pinch in on a tile.
+  kernel: "sharp",
+  render: { cull: "low" },
+  closeUp: { minDistance: 0.12 },
   options: [
     {
       key: "element",
@@ -373,16 +380,20 @@ const REAL_ELEMENTS = {
     const m = mem(c);
     const u = c.up ?? 0;
     // Up: the sample rises out of its tile and grows as it comes forward; down: the reverse.
-    const rise = ease(band(u, 0, 0.75));
+    const rise = ease5(band(u, 0, 0.8));
     const vis = rise > 0.004 ? 1 : 0;
     const sc = D.homeScale + (1 - D.homeScale) * rise;
-    const off = D.home.map((h, i) => (h - LIFT_AT[i]) * (1 - rise));
+    // It comes straight out of its tile first, then glides over to its place (an arc toward the
+    // viewer, never through the neighboring tiles).
+    const glide = ease5(band(u, 0.12, 0.8));
+    const out1 = Math.sin(Math.PI * Math.min(1, u / 0.8)) * 0.9;
+    const off = D.home.map((h, i) => (h - LIFT_AT[i]) * (1 - (i === 2 ? rise : glide)) + (i === 2 ? out1 * (1 - rise) * 2 : 0)); // prettier-ignore
     // Once up, it swings slowly to show its relief; a tap turns it once around.
     if (u > 0.98 && m.swing0 === undefined) m.swing0 = t;
     if (u < 0.98) m.swing0 = undefined;
     const sw = m.swing0 === undefined ? 0 : t - m.swing0;
-    const swing = 0.62 * Math.sin(0.55 * sw) * Math.min(1, sw / 2);
-    const sp = c.spin > 0 ? ease(1 - c.spin) : 0;
+    const swing = 0.62 * Math.sin(0.55 * sw) * ease(Math.min(1, sw / 3));
+    const sp = c.spin > 0 ? ease5(1 - c.spin) : 0;
     const yaw = swing + TAU * sp + 2 * rise * (1 - rise);
     const tilt = -0.18 * rise;
     const q = quatMul(quatAxisAngle([0, 1, 0], yaw), quatAxisAngle([1, 0, 0], tilt));
@@ -420,6 +431,11 @@ const REAL_ELEMENTS = {
       jitter: 0,
       ...extra,
     });
+    // Lettering: one splat per font pixel (the sharp kernel keeps the strokes crisp; smaller,
+    // finer splats vanish in the 256 px shelf picture, which draws without the labs' low cull).
+    const inkPx = (list, cells, z, col, px) => {
+      for (const [x, y] of cells) list.push(splat([x, y, z], col, px * 0.62, { flat: 0.2 }));
+    };
     const cloud = (list, opts = {}) => {
       if (!list.length) return;
       k.cloud({ share: list.length / N, pattern: false, jitter: 0, ...opts }, (_r, i) => list[i] ?? null); // prettier-ignore
@@ -438,12 +454,13 @@ const REAL_ELEMENTS = {
       const y1 = 4.1;
       const n = Math.max(400, Math.round(N * 0.04));
       const step = Math.sqrt(((x1 - x0) * (y1 - y0)) / n);
-      // (Small splats at the rim keep its edge crisp.)
+      // The rim: a close row of small splats along each edge, so the sharp kernel draws a clean line
+      // (polish: bigger rim splats spaced a whole step apart read as a row of dots).
       for (let y = y0 + step / 2; y < y1; y += step)
-        for (let x = x0 + step / 2; x < x1; x += step) {
-          const rim = Math.min(x - x0, x1 - x, y - y0, y1 - y) < step;
-          list.push(splat([x, y, -0.06], hex(BOARD), step * (rim ? 0.4 : 0.66)));
-        }
+        for (let x = x0 + step / 2; x < x1; x += step) list.push(splat([x, y, -0.06], hex(BOARD), step * 0.66)); // prettier-ignore
+      const rs = step / 4;
+      for (let x = x0; x <= x1; x += rs) for (const y of [y0, y1]) list.push(splat([x, y, -0.06], hex(BOARD), rs * 0.9)); // prettier-ignore
+      for (let y = y0; y <= y1; y += rs) for (const x of [x0, x1]) list.push(splat([x, y, -0.06], hex(BOARD), rs * 0.9)); // prettier-ignore
       cloud(list);
     }
 
@@ -467,20 +484,14 @@ const REAL_ELEMENTS = {
         }
       const inkCol = hex(plain ? INK : "#171b26");
       const px = 0.03;
-      for (const [x, y] of inkCells(el.symbol, tx - TILE / 2 + 0.07, ty + TILE / 2 - 0.15, px))
-        ink.push(splat([x, y, 0.012], inkCol, px * 0.62));
+      inkPx(ink, inkCells(el.symbol, tx - TILE / 2 + 0.07, ty + TILE / 2 - 0.15, px), 0.012, inkCol, px); // prettier-ignore
       const pn = 0.019;
       const num = String(el.z);
-      for (const [
-        x,
-        y,
-      ] of inkCells(num, tx + TILE / 2 - 0.06 - (num.length * 6 - 1) * pn, ty + TILE / 2 - 0.12, pn)) // prettier-ignore
-        ink.push(splat([x, y, 0.012], inkCol, pn * 0.66));
+      inkPx(ink, inkCells(num, tx + TILE / 2 - 0.06 - (num.length * 6 - 1) * pn, ty + TILE / 2 - 0.12, pn), 0.012, inkCol, pn); // prettier-ignore
       if (el.sample.none) {
         const pb = 0.05;
         const dim = plain ? [0.36, 0.39, 0.45] : shadeArr(col, 0.7);
-        for (const [x, y] of inkCells(el.symbol, tx, ty + SAMPLE_DY, pb, true))
-          ink.push(splat([x, y, 0.01], dim, pb * 0.62));
+        inkPx(ink, inkCells(el.symbol, tx, ty + SAMPLE_DY, pb, true), 0.01, dim, pb);
       }
     }
     cloud(plates);
@@ -488,19 +499,20 @@ const REAL_ELEMENTS = {
 
     // The samples on the tiles: each its share of the budget, a relief over its tile.
     const tileList = [];
-    const per = (N * 0.45) / WITH_PHOTO.length;
+    const per = (N * 0.42) / WITH_PHOTO.length;
     for (const z of WITH_PHOTO) {
       const el = ELEMENTS[z - 1];
       const [tx, ty] = tilePos(z);
       const [ox, oy] = atlasSpot(z);
       const have = countPixels(atlas, ox, oy, ATLAS_CELL);
+      // (At least every third pixel: finer splats vanish in the shelf picture.)
       const step = Math.max(3, Math.sqrt(have / per));
       const px = (SAMPLE_SIDE / ATLAS_CELL) * step;
       for (const s of samplePixels(atlas, ox, oy, ATLAS_CELL, step)) {
         const x = tx + (s.u - 0.5) * SAMPLE_SIDE;
         const y = ty + SAMPLE_DY + (0.5 - s.v) * SAMPLE_SIDE;
         const zz = 0.015 + RELIEF * SAMPLE_SIDE * s.d;
-        tileList.push(splat([x, y, zz], s.c, px * 0.9, { part: el === e ? home : 0 }));
+        tileList.push(splat([x, y, zz], s.c, px * 0.85, { part: el === e ? home : 0, flat: 0.3 }));
       }
     }
     cloud(tileList);

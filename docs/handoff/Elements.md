@@ -9,19 +9,21 @@ to the app outside your own files, as an "Engine: …" PR merged first). PR titl
 elements: a periodic table of real samples". Handoff file: docs/handoff/Elements.md (create it;
 start it with this brief, word for word, under "## Brief", then keep "## State
 
-WORKING (October 5, 2026): the toy is built and pushed (labs, Atoms shelf): 91 real samples, 27
-honest placeholders, facts with cited uses, evidence file and tests (`tests/rel.spec.mjs`, 25 pass).
-Clips posted on Effect review page 2 (lane record `Elements`: bismuth, copper, neon, oganesson).
-Next: the owner's marks.
+#298 merged (October 5, 2026). WORKING: the polish round (the owner on Effect review page 2: "the
+toys could still be sharper"), on `claude/lane-real-elements-polish`, PR "Phase Real elements
+polish: sharper samples and a smoother lift":
 
-- Weight: the table loads `tiles.jpg` + `tiles.png` (about 0.26 MB) and the code; each lifted sample
-  adds its own `<z>.jpg` + `<z>.png` (about 30 KB). All of `assets/toys/real-elements/` is 2.85 MB
-  in the repo.
-- Rebuild: `node tools/rel-sources.mjs` (reads the source pages), `node tools/rel-facts.mjs` (facts
-  and the reference snapshot; then
-  `npx prettier --write tools/rel-reference.json src/elements-real/facts.js`),
-  `node tools/rel-samples.mjs [z ...]` (photos, depth, cutouts, atlas; the server must run),
-  `node tools/rel-credits.mjs` (CREDITS.md and tools/assets.json).
+- The Lab lane's sharp kernel (`kernel: "sharp"`) and the low cull (`render: { cull: "low" }`), both
+  labs only, and `closeUp` so a pinch comes close to one tile.
+- Cut-outs one pixel inside their rim and three fifths coverage per cell: no background fringe.
+- Lifted samples at 384 x 384 (up from 256), so a desktop's lift uses up to about 160,000 splats.
+- A clean board edge (a close row of small splats instead of a row of dots).
+- A smoother lift: a quintic ease, straight out of its tile first, then a glide; the swing and the
+  turn ease in and out.
+- Kept: tiles at every third atlas pixel and one splat per font pixel (finer splats vanish in the
+  256 px shelf picture, which draws without the labs' low cull).
+- Weight: the atlas is unchanged (0.25 MB); a lifted sample's pair is now about 55 KB; the folder is
+  5.1 MB in the repo.
 
 ## Notes", "##
 

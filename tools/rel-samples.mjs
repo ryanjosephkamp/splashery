@@ -10,7 +10,7 @@
 //      sample where it differs from both (soft shadows on the paper, darker but the same color and
 //      at the paper's depth, stay background); holes inside are filled and specks dropped,
 //   4. writes assets/toys/real-elements/: tiles.jpg and tiles.png (every sample at 64 x 64, ten to
-//      a row, for the table), and <z>.jpg and <z>.png (256 x 256, loaded only when a sample is
+//      a row, for the table), and <z>.jpg and <z>.png (384 x 384, loaded only when a sample is
 //      lifted). The JPEG holds the colors; the PNG is gray, 0 outside the sample and 1 to 255 its
 //      depth (255 nearest).
 //
@@ -32,7 +32,7 @@ for (const d of [rawDir, workDir, outDir]) fs.mkdirSync(d, { recursive: true });
 const args = process.argv.slice(2);
 const only = args.filter((a) => /^\d+$/.test(a)).map(Number);
 const TILE = 64;
-const DETAIL = 256;
+const DETAIL = 384; // polish: up from 256, for the lifted sample's finer splats
 const COLS = 10;
 const WORK = 512; // the photo's long side while cutting out
 const UA = { "User-Agent": "SplasheryBuild/1.0 (https://github.com/ryanjosephkamp/splashery; build tool)" }; // prettier-ignore
@@ -345,7 +345,8 @@ function pack(photo, depth, mask, size) {
         }
       const o = ty * size + tx;
       rgb[o * 4 + 3] = 255;
-      if (m * 2 < n || !m) {
+      // (Polish: three fifths, up from half, so the sample's rim keeps no background fringe.)
+      if (m * 5 < n * 3 || !m) {
         rgb.fill(0, o * 4, o * 4 + 3);
         continue;
       }
@@ -473,7 +474,10 @@ for (const z of ids) {
   }
   const photo = { w: got.w, h: got.h, data: Uint8Array.from(got.data) };
   const depth = Float32Array.from(got.depth);
-  const mask = cutout(photo, depth, TUNE[z]);
+  // Polish: one pixel off the cut-out's rim, where the photo's pixels still mix in the background
+  // (the fringe); the cropped cards keep their edges.
+  const raw = cutout(photo, depth, TUNE[z]);
+  const mask = TUNE[z]?.rect || TUNE[z]?.ellipse ? raw : morph(raw, photo.w, photo.h, 1, false);
   const det = pack(photo, depth, mask, DETAIL);
   writeJpeg(path.join(outDir, `${z}.jpg`), DETAIL, DETAIL, det.rgb, 86);
   writeGray(path.join(outDir, `${z}.png`), DETAIL, DETAIL, det.gray);

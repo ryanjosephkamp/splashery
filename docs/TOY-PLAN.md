@@ -1328,9 +1328,12 @@ Proposals below are suggestions; the owner may change them.
     demand.
   - Improved: Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons)
     cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table
-    and a 256 x 256 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab
+    and a 384 x 384 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab
     and Los Alamos (tools/rel-facts.mjs), checked by tests against a saved snapshot of the
-    references.
+    references. Polish (October 5, 2026): the sharp kernel and the low cull (labs), finer tile
+    samples, cut-outs one pixel inside their rim (no fringe), crisp four-splat lettering on big
+    budgets, a clean board edge, and a smoother lift that comes straight out of its tile, then
+    glides.
   - Sound: A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down,
     a rising blip as it turns.
 
