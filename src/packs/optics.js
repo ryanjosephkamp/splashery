@@ -391,6 +391,7 @@ const RIPPLE = {
       };
       if (s >= 1 && !RT.drop.hit) {
         RT.drop.hit = true;
+        RT.splashes = (RT.splashes || 0) + 1;
         tank.pebble(RT.drop.at[0], RT.drop.at[1]);
       }
       if (RT.drop.t > fall + 0.1) RT.drop = null;
@@ -404,6 +405,9 @@ const RIPPLE = {
   build(k, o) {
     OPT.tank.o = { ...o };
     const tank = setUpTank(o);
+    // The sliders' frequency and speed (as last set, else their defaults).
+    tank.c = speedOf(OPT.tank.c || {});
+    tank.f = freqOf(OPT.tank.c || {});
     // Let the water run a little, so it opens with waves already out.
     if (tank.time < 1.2) tank.advance(1.2 - tank.time, { maxSteps: 1e6, avg: 0.5 });
     RT.last = null;
