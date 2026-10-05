@@ -116,7 +116,7 @@ const CARDS = {
     secs: 7,
     steps: [
       { t: 0, yaw: 0.03 },
-      { t: 1, fly: { point: [-1.5, 1.5], dist: 0.06, secs: 5 } },
+      { t: 1, fly: { point: [-1.5, 1.5], dist: 0.25, secs: 5 } },
     ],
   },
   "sci3-microscope-sets": {

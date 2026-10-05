@@ -1628,13 +1628,15 @@ const CRYOEM = {
       return best;
     };
     const showModel = o.model === true;
-    const alpha = showModel ? 0.22 : 1;
+    // With the model, the map is a sparse, pale dotted surface (7% of its
+    // points, small), so the colored backbone inside shows through.
+    const alpha = showModel ? 0.3 : 1;
     // The budget: when the surface has more points than this device draws,
     // an even share of them, each a little bigger to close the surface.
     const budget = Math.max(2000, Math.floor(k.count * (showModel ? 0.8 : 0.98)));
-    const keep = Math.min(1, budget / S.count);
+    const keep = Math.min(showModel ? 0.07 : 1, budget / S.count);
     const vox = D.voxel[0];
-    const size = vox * 1.05 * Math.sqrt(1 / keep);
+    const size = showModel ? vox * 0.6 : vox * 1.05 * Math.sqrt(1 / keep);
     const pick = [];
     for (let i = 0; i < S.count; i++) if ((i * 0.618034) % 1 < keep) pick.push(i);
     const base = () => k.baseSize || 0.01;
@@ -1644,7 +1646,8 @@ const CRYOEM = {
       const p = [P[3 * i], P[3 * i + 1], P[3 * i + 2]];
       const n = [S.n[3 * i], S.n[3 * i + 1], S.n[3 * i + 2]];
       let col = "#c9ccd6";
-      if (colorBy === "radius") col = radialColor((radiusOf(i) - r0) / (rMax - r0));
+      if (showModel) col = "#d8dbe2";
+      else if (colorBy === "radius") col = radialColor((radiusOf(i) - r0) / (rMax - r0));
       else if (colorBy !== "plain") {
         const ci = nearestChain(p);
         col = ci >= 0 ? chainColor(ci, model[ci].kind) : "#9aa0ad";
@@ -1667,7 +1670,7 @@ const CRYOEM = {
       model.forEach((ch, ci) => {
         const col = chainColor(ci, ch.kind);
         const gap = ch.kind === "nucleic" ? 8 : 4.5;
-        const steps = ch.kind === "nucleic" ? 4 : 2;
+        const steps = ch.kind === "nucleic" ? 7 : 4;
         ch.p.forEach((p, i) => {
           pts.push([p, col]);
           const q = ch.p[i + 1];
@@ -1682,7 +1685,7 @@ const CRYOEM = {
       });
       const room = Math.max(1000, Math.floor(k.count * 0.18));
       const every = Math.max(1, Math.ceil(pts.length / room));
-      const bead = 1.3 * Math.sqrt(every); // Å across
+      const bead = 1.0 * Math.sqrt(every); // Å across
       const shown = pts.filter((_, i) => i % every === 0);
       beads = shown.length;
       k.cloud({ count: (shown.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
