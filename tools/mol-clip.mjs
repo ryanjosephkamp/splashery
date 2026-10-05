@@ -6,7 +6,7 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/mol-clip.mjs <out.mp4>
 //       [--opt=key=value ...] [--picks=demo|3] [--secs=2.5] [--gap=1.4] [--fps=12]
-//       [--zoom=0.6] [--fetch=1EMA] [--size=390x844]
+//       [--zoom=0.6] [--fetch=1EMA] [--size=390x844] [--profile=high]
 //
 // --picks=demo taps the atoms the Play button would (a bond near the middle,
 // then its angle): 2 or 3 of them, --gap seconds apart, through the same
@@ -34,6 +34,7 @@ const gap = Number(opt("gap", 1.4));
 const zoom = Number(opt("zoom", 1));
 const picks = opt("picks", "");
 const fetchCode = opt("fetch", "");
+const profile = opt("profile", "high");
 const options = Object.fromEntries(
   args.filter((a) => a.startsWith("--opt=")).map((a) => a.slice(6).split("=")),
 );
@@ -46,7 +47,7 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: W, height: H } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
-await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off&labs=1`);
+await page.goto(`${base}?renderer=webgl2&profile=${profile}&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(async (options) => {
   const { app, player } = window.__splashery;
@@ -113,6 +114,7 @@ const list = await page.evaluate(
       cam.target = w.slice();
       cam.aim = w.slice();
     }
+    cam.turntable = false;
     cam.cur = { ...cam.home, distance: cam.home.distance * zoom };
     cam.tgt = { ...cam.cur };
     return atoms.map((a) => [m.x[a], m.y[a], m.z[a]]);
@@ -124,6 +126,10 @@ for (let i = 0; i < list.length; i++) {
   await page.evaluate((p) => {
     const { player } = window.__splashery;
     player.act(player.fromRecipe(p));
+    // The frames take longer to make than they show, so the tap's message
+    // is held until the next tap (it shows for 6 s in the app).
+    const t = document.getElementById("toast");
+    if (t.textContent) window.__splashery.app.ui.toast(t.textContent, 600000);
   }, list[i]);
   await frames(i < list.length - 1 ? gap : secs);
 }
@@ -131,7 +137,10 @@ if (!list.length) await frames(secs);
 await browser.close();
 execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(fps), "-i", path.join(dir, "f%04d.png"), "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2", "-c:v", "libx264", "-crf", "23", out]); // prettier-ignore
 // The last frame as a still, for checking without playing it.
-const pngs = fs.readdirSync(dir).filter((f) => f.endsWith(".png")).sort();
+const pngs = fs
+  .readdirSync(dir)
+  .filter((f) => f.endsWith(".png"))
+  .sort();
 fs.copyFileSync(path.join(dir, pngs[pngs.length - 1]), out.replace(/\.mp4$/, "-last.png"));
 fs.rmSync(dir, { recursive: true });
 console.log(`${out}: ${n} frames, ${(fs.statSync(out).size / 1024).toFixed(0)} KB`);

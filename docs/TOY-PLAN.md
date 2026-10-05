@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 374 toys. 344 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 369.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -36,12 +36,12 @@ Proposals below are suggestions; the owner may change them.
   Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
   Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
   Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba,
-  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby,
-  Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy
-  atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
-  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
-  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
+  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Molecule viewer, Periodic table,
+  Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth,
+  Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping
+  willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef,
+  Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan,
+  Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
   Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
   Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
   Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
@@ -1206,7 +1206,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle
     or ding (Sound C, October 2, 2026).
 
-## Atoms (6)
+## Atoms (7)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
@@ -1254,6 +1254,22 @@ Proposals below are suggestions; the owner may change them.
     slices), so atoms never leave their bonds.
   - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
     October 2, 2026).
+- **Molecule viewer** (`molecule-viewer`). Now: tap: Measure an example. Plan: keep.
+  - Owner: Push Plan S1, approved by the owner with "PDB fetch yes" (October 5, 2026; lane Molecule
+    viewer, labs).
+  - Effect: A molecule viewer made of splats: open a PDB, mmCIF, SDF/MOL or XYZ file, or fetch an
+    entry from the Protein Data Bank by its code. Draw it as a cartoon, balls and sticks,
+    space-filling atoms or a molecular surface, colored by element, chain, residue, B-factor, along
+    the chain or by secondary structure. A tap on an atom picks it: a ring marker turns round it; a
+    second pick draws a dotted line and gives the distance in ångströms, a third an arc and the
+    angle in degrees. The Play button measures the distance across a bond angle near the middle,
+    then the angle, then clears.
+  - Improved: Lane Molecule viewer: readers for PDB, mmCIF, SDF/MOL and XYZ (src/molview/parse.js)
+    in a Web Worker; bonds from the file or from covalent radii; helices and strands from the file
+    or inferred (and labeled so); a blobby Gaussian surface; a splat budget that falls to one
+    Gaussian per atom on big structures (tested up to the human 80S ribosome, 4V6X, 237,685 atoms).
+    Samples (snapshot of October 5, 2026, CC0): 1CRN, 1EMA, 1LYZ, 1BNA and caffeine (CCD CFF).
+  - Sound: Quiet: one soft, low click as an atom is picked.
 - **Periodic table** (`periodic-table`). Now: tap: Raise or lower the atom. Plan: keep.
   - Owner: Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).
   - Effect: Tap an element's tile and its atom rises out of the table and builds itself: every

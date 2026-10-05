@@ -1366,7 +1366,7 @@ export const TOYS = [
     pack: "molecule-viewer",
     labs: true,
     tags: "molecule viewer pdb mmcif cif sdf mol xyz protein dna rna ligand cartoon ribbon surface ball stick spacefill cpk bond length angle measure rcsb protein data bank chemistry biology",
-    camera: { yaw: 0.25, pitch: 0.18, roll: 0, distance: 2.9 },
+    camera: { yaw: 0.25, pitch: 0.18, roll: 0, distance: 3.4 },
   },
 
   // ---- Pack: chemistry (lane Chemistry) ----

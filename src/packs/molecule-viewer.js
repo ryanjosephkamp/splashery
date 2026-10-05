@@ -24,7 +24,7 @@ import {
   drawCartoon,
   drawSurface,
   markerSplats,
-  beadSplat,
+  beadSplats,
   colorer,
   CHAIN_COLORS,
   residueColor,
@@ -127,10 +127,22 @@ export function measureText(m, picks = MV.picks) {
   if (!m || !picks.length) return "";
   const [a, b, c] = picks;
   if (picks.length === 1) return `${atomLabel(m, a)}. Tap a second atom for the distance.`;
-  const ab = `${distance(m, a, b).toFixed(2)} Å`;
+  // Atoms of one residue are named once: "NE–CZ in Arg 10 (chain A)".
+  const small = m.format === "sdf" || m.format === "xyz";
+  const one = !small && picks.every((i) => m.res[i] === m.res[a]);
+  // Otherwise "CA (Thr 2)", with the chain only when the atoms' chains differ.
+  const chains = new Set(picks.map((i) => m.residues[m.res[i]].chain)).size > 1;
+  const name = (i) => {
+    if (small || one) return atomLabel(m, i).replace(/ of .*$/, "");
+    const r = m.residues[m.res[i]];
+    const res = `${r.name.length === 3 ? r.name[0] + r.name.slice(1).toLowerCase() : r.name} ${r.seq}${r.icode}`;
+    return `${m.atomName[i]} (${res}${chains && m.chains[r.chain]?.id ? `, chain ${m.chains[r.chain].id}` : ""})`;
+  };
+  const where = one ? ` in ${atomLabel(m, a).replace(/^\S+ of /, "")}` : "";
+  const ab = distance(m, a, b).toFixed(2);
   if (picks.length === 2)
-    return `Distance ${atomLabel(m, a)} to ${atomLabel(m, b)}: ${ab}. Tap a third atom for the angle.`; // prettier-ignore
-  return `Angle at ${atomLabel(m, b)} (from ${atomLabel(m, a)} to ${atomLabel(m, c)}): ${angle(m, a, b, c).toFixed(1)}°. Distances ${ab} and ${distance(m, b, c).toFixed(2)} Å.`; // prettier-ignore
+    return `Distance ${name(a)} to ${name(b)}${where}: ${ab} Å. Tap a third atom for the angle.`;
+  return `Angle ${name(a)}–${name(b)}–${name(c)}${where}: ${angle(m, a, b, c).toFixed(1)}° (arms ${ab} Å and ${distance(m, b, c).toFixed(2)} Å).`; // prettier-ignore
 }
 
 // Adds an atom to the picks: a fourth starts over, the last one again takes
@@ -143,8 +155,8 @@ export function pickAtom(atom) {
   MV.pickTime = (MV.pickTime ?? 0) + 1;
 }
 
-// The Play button (a tap with no place): measures a bond near the middle,
-// then the angle it makes with a neighbor, then clears.
+// The Play button (a tap with no place): measures the distance across a
+// bond angle near the middle, then the angle, then clears.
 function demoStep() {
   const S = MV.shown;
   if (!S) return;
@@ -153,7 +165,8 @@ function demoStep() {
     MV.picks = [];
     return;
   }
-  MV.picks = S.demo.slice(0, MV.picks.length >= 2 ? 3 : 2);
+  // First the distance across the angle (its line is in the open), then the angle.
+  MV.picks = MV.picks.length >= 2 ? S.demo.slice(0, 3) : [S.demo[0], S.demo[2]];
 }
 
 // A bonded triple of shown heavy atoms near the middle: [a, b, c] with a–b
@@ -175,6 +188,19 @@ function demoTriple(m, shown, bonds) {
     if (d < bd) {
       bd = d;
       best = [list[0], b, list[1]];
+    }
+  }
+  if (best) return best;
+  // A cartoon shows no bonds: three CA (or P) atoms in a row instead.
+  const list = [];
+  for (let i = 0; i < m.n; i++) if (shown[i]) list.push(i);
+  for (let k = 0; k + 2 < list.length; k++) {
+    const [a, b, c] = [list[k], list[k + 1], list[k + 2]];
+    if (distance(m, a, b) > 7.5 || distance(m, b, c) > 7.5) continue;
+    const d = m.x[b] ** 2 + m.y[b] ** 2 + (m.z[b] - 3) ** 2;
+    if (d < bd) {
+      bd = d;
+      best = [a, b, c];
     }
   }
   return best;
@@ -238,7 +264,7 @@ const PICK_COLORS = [
 
 const VIEWER = {
   density: VIEWER_DENSITY,
-  turntable: true,
+  turntable: false, // it holds still for measuring (drag to turn it)
   options: [
     {
       key: "structure",
@@ -261,7 +287,7 @@ const VIEWER = {
   controls: [{ key: "pick", label: "Measure", type: "pulse", ease: 1.1 }],
   action: {
     key: "pick",
-    label: "Tap atoms to measure",
+    label: "Measure an example",
     // A tap on an atom picks it (two give a distance, three an angle); a tap
     // far from every atom clears the picks.
     at(point) {
@@ -373,6 +399,13 @@ const VIEWER = {
     if (!S) return;
     const m = S.model;
     const P = MV.picks.filter((i) => i < m.n);
+    // The marks are drawn in depth order where they stand: sort them again
+    // when the picks change (the player's resortTokens).
+    const key = `${S.splats}:${P.join(",")}`;
+    if (key !== MV.sorted) {
+      MV.sorted = key;
+      out.resort = true;
+    }
     // The newest pick's marks arrive as the tap's pulse runs out: its marker
     // turns a full circle, its line runs out from the last atom.
     const run = 1 - Math.max(0, Math.min(1, c.pick ?? 0));
@@ -405,7 +438,9 @@ const VIEWER = {
       const B = pos(m, P[1]);
       const u = unitTo(B, pos(m, P[0]));
       const w = unitTo(B, pos(m, P[2]));
-      const r = 0.38 * Math.min(distance(m, P[0], P[1]), distance(m, P[1], P[2]));
+      // Outside the middle atom's ball, inside the shorter arm.
+      const arm = Math.min(distance(m, P[0], P[1]), distance(m, P[1], P[2]));
+      const r = Math.min(0.8 * arm, Math.max(0.4 * arm, S.markR * 0.95));
       const th = Math.acos(Math.max(-1, Math.min(1, u[0] * w[0] + u[1] * w[1] + u[2] * w[2])));
       for (let j = 0; j < ARC; j++) {
         const f = (j + 0.5) / ARC;
@@ -507,13 +542,20 @@ const VIEWER = {
     const macro = (i) => kindOf(i) === KIND.amino || kindOf(i) === KIND.nucleic;
     let drawnBonds = [];
     if (style === "ballstick") {
-      const r = ballstick(atomsWhere(() => true), 1);
+      const r = ballstick(
+        atomsWhere(() => true),
+        1,
+      );
       drawnBonds = r.bonds;
       reach = 1.2;
       markR = 0.75;
     } else if (style === "spacefill") {
       const radius = (i) => vdwRadius(m.el[i]);
-      const all = thin(atomsWhere(() => true), budget, radius);
+      const all = thin(
+        atomsWhere(() => true),
+        budget,
+        radius,
+      );
       // Most of each sphere is buried in its neighbors: the buried splats are
       // left out (up to 30,000 atoms) and the budget goes to the rest.
       const cull = all.length <= 30000;
@@ -572,7 +614,8 @@ const VIEWER = {
     let ext = 0;
     for (let i = 0; i < m.n; i += Math.max(1, Math.floor(m.n / 20000))) if (shown[i]) ext = Math.max(ext, Math.abs(m.x[i]), Math.abs(m.y[i]), Math.abs(m.z[i])); // prettier-ignore
     markR = Math.max(markR, ext * 0.03);
-    const bead = Math.max(0.07, ext * 0.006, markR * 0.07);
+    // Beads wider than a stick, so a line along a bond still shows.
+    const bead = Math.max(0.17, ext * 0.005, markR * 0.11);
     if (!L.n)
       throw new Error("Nothing to show: every atom is hidden. Switch Hydrogens or Water on.");
     k.cloud({ count: ((L.n + 0.4) * 160000) / k.count, jitter: 0 }, (_r, i) => L.sample(i));
@@ -582,8 +625,8 @@ const VIEWER = {
       k.cloud({ count: ((ring.length + 0.4) * 160000) / k.count, jitter: 0, fit: false, pattern: false }, (_r, i) => (ring[i] ? { ...ring[i], kind: "token", params: [t, 0] } : null)); // prettier-ignore
     }
     for (let t = MARKERS; t < TOKENS; t++) {
-      const s = beadSplat(bead, t >= MARKERS + 2 * BEADS ? [1, 0.55, 0.85] : [1, 0.95, 0.75]);
-      k.cloud({ count: (1.4 * 160000) / k.count, jitter: 0, fit: false, pattern: false }, (_r, i) => (i === 0 ? { ...s, kind: "token", params: [t, 0] } : null)); // prettier-ignore
+      const ball = beadSplats(bead, t >= MARKERS + 2 * BEADS ? [1, 0.55, 0.9] : [1, 0.96, 0.55]);
+      k.cloud({ count: ((ball.length + 0.4) * 160000) / k.count, jitter: 0, fit: false, pattern: false }, (_r, i) => (ball[i] ? { ...ball[i], kind: "token", params: [t, 0] } : null)); // prettier-ignore
     }
     const demo = demoTriple(m, pickable, drawnBonds.length ? drawnBonds : bondList(() => true));
     if (style === "spacefill" || style === "surface") {
@@ -625,15 +668,6 @@ function slerp(u, w, th, f) {
   return [u[0] * a + w[0] * b, u[1] * a + w[1] * b, u[2] * a + w[2] * b];
 }
 
-// Old entries' titles are all capitals: "WATER STRUCTURE OF A PROTEIN" ->
-// "Water structure of a protein" (short words in capitals, like DNA, kept).
-export function sentenceCase(t) {
-  if (/[a-z]/.test(t)) return t;
-  const known = new Set(["DNA", "RNA", "TRNA", "B-DNA", "Z-DNA", "GFP", "ATP", "ADP", "NMR", "HIV", "X-RAY", "II", "III", "IV"]); // prettier-ignore
-  const words = t.split(" ").map((w) => (known.has(w.replace(/[^A-Z0-9-]/g, "")) || /\d/.test(w) ? w : w.toLowerCase())); // prettier-ignore
-  return words.join(" ").replace(/(^|[.:;?!]\s+)([a-z])/g, (_, a, b) => a + b.toUpperCase());
-}
-
 // "Hendrickson, W.A., Teeter, M.M." -> "W.A. Hendrickson and M.M. Teeter"; more
 // than three: the first and "and others".
 function authorsOf(m) {
@@ -654,7 +688,7 @@ export function shownText() {
   if (!S) return "";
   const m = S.model;
   const out = [];
-  const title = sentenceCase(clean(m.title, 160));
+  const title = clean(m.title, 160);
   const code = m.id && /^[0-9][A-Za-z0-9]{3}$/.test(m.id) ? m.id.toUpperCase() : "";
   out.push(code && !title.includes(code) ? `${code}: ${title}.` : `${title}.`);
   const who = authorsOf(m);

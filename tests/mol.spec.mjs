@@ -25,7 +25,6 @@ import {
   measureText,
   pickAtom,
   shownText,
-  sentenceCase,
   VIEWER_DENSITY,
 } from "../src/packs/molecule-viewer.js";
 import { buildRecipe } from "../src/kit.js";
@@ -167,7 +166,12 @@ test.describe("the readers", () => {
     expect(seqs("E")).toEqual([...range(1, 4), ...range(32, 35)]);
     // The PDB file without its HELIX and SHEET records: worked out from hydrogen bonds.
     const text = fs.readFileSync("tests/fixtures/mol/1crn.pdb", "utf8");
-    const bare = parsePdb(text.split("\n").filter((l) => !/^(HELIX |SHEET )/.test(l)).join("\n"));
+    const bare = parsePdb(
+      text
+        .split("\n")
+        .filter((l) => !/^(HELIX |SHEET )/.test(l))
+        .join("\n"),
+    );
     expect(bare.ssSource).toBe("inferred");
     const same = bare.residues.filter((r, i) => r.ss === m.residues[i].ss).length;
     expect(same / m.residues.length).toBeGreaterThan(0.75);
@@ -182,7 +186,8 @@ test.describe("the readers", () => {
     expect(m.bondSource).toBe("distance");
     const key = (mm) => {
       const out = [];
-      for (let q = 0; q < mm.order.length; q++) out.push(`${mm.bonds[2 * q]}-${mm.bonds[2 * q + 1]}`);
+      for (let q = 0; q < mm.order.length; q++)
+        out.push(`${mm.bonds[2 * q]}-${mm.bonds[2 * q + 1]}`);
       return out.sort();
     };
     expect(key(m)).toEqual(key(caf));
@@ -210,7 +215,9 @@ test.describe("the readers", () => {
     expect(() => readStructure("", "x.pdb")).toThrow("empty");
     expect(() => readStructure("hello there", "notes.txt")).toThrow("Could not tell");
     expect(() => readStructure(`${MAX_ATOMS + 1}\nbig\nC 0 0 0\n`, "big.xyz")).toThrow("more than 250,000 atoms"); // prettier-ignore
-    expect(() => readStructure("data_x\n_cell.length_a 5\n", "x.cif")).toThrow("Thermal ellipsoids");
+    expect(() => readStructure("data_x\n_cell.length_a 5\n", "x.cif")).toThrow(
+      "Thermal ellipsoids",
+    );
   });
 
   test("radii and colors: Bondi's van der Waals radii and the CPK colors", () => {
@@ -260,7 +267,13 @@ test.describe("geometry", () => {
   });
 
   test("bonds by distance on a lone water: two O–H bonds, no H–H", () => {
-    const m = { n: 3, x: [0, 0.757, -0.757], y: [0, 0.586, 0.586], z: [0, 0, 0], el: ["O", "H", "H"] };
+    const m = {
+      n: 3,
+      x: [0, 0.757, -0.757],
+      y: [0, 0.586, 0.586],
+      z: [0, 0, 0],
+      el: ["O", "H", "H"],
+    };
     expect(bondsByDistance(m).sort((a, b) => a[1] - b[1])).toEqual([
       [0, 1],
       [0, 2],
@@ -290,12 +303,11 @@ test.describe("the toy", () => {
   test("the Toy tab names the entry, its authors, the snapshot and the license", async () => {
     await build({ structure: "1crn" });
     const t = shownText();
-    expect(t).toContain("1CRN: Water structure of a hydrophobic protein");
+    expect(t).toContain("1CRN: WATER STRUCTURE OF A HYDROPHOBIC PROTEIN");
     expect(t).toContain("W.A. Hendrickson and M.M. Teeter");
     expect(t).toContain("snapshot from the Protein Data Bank, fetched October 5, 2026");
     expect(t).toContain("CC0");
     expect(t).toContain("Helices and strands: from the file's records.");
-    expect(sentenceCase("STRUCTURE OF A B-DNA DODECAMER. CONFORMATION")).toBe("Structure of a B-DNA dodecamer. Conformation"); // prettier-ignore
   });
 
   test("taps measure a distance in ångströms and an angle in degrees", async () => {
@@ -311,7 +323,7 @@ test.describe("the toy", () => {
     expect(r.key).toBe("pick");
     expect(S.picks).toEqual([N]);
     pickAtom(CA);
-    expect(measureText(m)).toMatch(/^Distance N of Thr 2 \(chain A\) to CA of Thr 2 \(chain A\): 1\.\d\d Å/);
+    expect(measureText(m)).toMatch(/^Distance N to CA in Thr 2 \(chain A\): 1\.\d\d Å/);
     pickAtom(C);
     const text = measureText(m);
     expect(text).toContain(`${angle(m, N, CA, C).toFixed(1)}°`);
@@ -342,7 +354,7 @@ test.describe("the toy", () => {
     S.picks = [];
   });
 
-  test("the Play button measures a bond near the middle, then its angle, then clears", async () => {
+  test("the Play button measures across a bond angle near the middle, then the angle, then clears", async () => {
     await build({ structure: "caffeine" });
     const S = viewerState();
     S.picks = [];
@@ -350,8 +362,10 @@ test.describe("the toy", () => {
     let n = S.lastTap;
     recipe.drive(1, { pick: 1 }, out(), { time: 1, tap: { n: ++n, point: null } });
     expect(S.picks.length).toBe(2);
-    const [a, b] = S.picks;
-    expect(distance(S.shown.model, a, b)).toBeLessThan(1.6); // a real bond
+    const [a, c] = S.picks;
+    // Across a bond angle: about 2.2 to 2.6 Å apart.
+    expect(distance(S.shown.model, a, c)).toBeGreaterThan(2);
+    expect(distance(S.shown.model, a, c)).toBeLessThan(2.7);
     recipe.drive(2, { pick: 1 }, out(), { time: 2, tap: { n: ++n, point: null } });
     expect(S.picks.length).toBe(3);
     recipe.drive(3, { pick: 1 }, out(), { time: 3, tap: { n: ++n, point: null } });
@@ -404,7 +418,9 @@ test.describe("in the browser", () => {
     expect(asked.filter((u) => /molview|molecule-viewer|rcsb/.test(u))).toEqual([]);
   });
 
-  test("Fetch by code (RCSB mocked), a tap's measurement, and the screenshots", async ({ page }) => {
+  test("Fetch by code (RCSB mocked), a tap's measurement, and the screenshots", async ({
+    page,
+  }) => {
     test.setTimeout(400_000);
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));

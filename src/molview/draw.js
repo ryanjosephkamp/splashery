@@ -672,7 +672,17 @@ export function markerSplats(R, color) {
   return out;
 }
 
-// One bead of a measuring line or arc: a small round splat at the origin.
-export function beadSplat(r, color) {
-  return { p: [0, 0, 0], scales: [r, r, r], quat: [0, 0, 0, 1], color, opacity: 1, jitter: 0 };
+// One bead of a measuring line or arc: a small solid ball of radius r at the
+// origin (lit like the atoms, so it reads as a crisp dot, not a haze).
+export function beadSplats(r, color) {
+  const n = 36;
+  const sz = 1.3 * Math.sqrt((4 * Math.PI * r * r) / (n * Math.PI));
+  return spherePoints(n, 0.3).map((d) => ({
+    p: mul(d, r),
+    scales: [sz, sz, sz * 0.35],
+    quat: discQuat(d),
+    color: lit(color, d, 0.4),
+    opacity: 1,
+    jitter: 0,
+  }));
 }
