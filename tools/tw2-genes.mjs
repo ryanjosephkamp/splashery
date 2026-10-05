@@ -34,7 +34,7 @@ const GENES = [
     pdb: "4HHB",
     chains: ["B"],
     pdbNote: "deoxyhemoglobin, one of its two beta chains",
-    // The first methionine is cut off (the next amino acid, valine, is small).
+    // The first methionine is cut off (UniProt P68871: "INIT_MET 1, Removed").
     removed: [[1, 1]],
   },
   {
@@ -75,8 +75,8 @@ const GENES = [
     pdb: "1GFL",
     chains: ["A"],
     pdbNote: "one of the two molecules in the crystal",
-    // The first methionine is cut off (the next amino acid, serine, is small).
-    removed: [[1, 1]],
+    // UniProt P42212 marks no cut: the chain is 1-238 (the crystal lacks
+    // the first residue and the last eight, which are disordered).
     // The crystallized clone differs from this record at residue 80 (Gln to
     // Arg, a harmless change in the widely used cDNA clone), and its residue
     // 1 is not the gene's methionine, so that one is left out.

@@ -1985,7 +1985,7 @@ export const TOY_HELP = {
   "dna-to-protein": {
     howTo: "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
     about:
-      "A gene is a stretch of DNA that spells out a protein. Tap and RNA polymerase opens the double helix and reads the template strand, building messenger RNA that matches the coding strand (with U for T). A ribosome then reads the mRNA three bases (a codon) at a time from the start codon AUG; each tRNA whose anticodon pairs with the codon brings its amino acid, and the chain grows until a stop codon. The chain then folds into the protein's real shape from the Protein Data Bank.\n\nThe genes are real (NCBI); only the start and end are drawn base by base. Try a mutation: changing base 2 of codon 7 in hemoglobin beta to T is the sickle-cell change.",
+      "A gene is a stretch of DNA that spells out a protein. Tap and RNA polymerase opens the double helix and reads the template strand, building messenger RNA that matches the coding strand (with U for T). A ribosome then reads the mRNA three bases (a codon) at a time from the start codon AUG; each tRNA whose anticodon pairs with the codon brings its amino acid, and the chain grows until a stop codon. The chain then folds into the protein's real shape from the Protein Data Bank.\n\nThe genes are real (NCBI); only the start and end are drawn base by base. Try a mutation: changing base 2 of codon 7 in hemoglobin beta to T is the sickle-cell change (glutamic acid to valine).",
   },
 };
 

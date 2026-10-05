@@ -127,7 +127,8 @@ export function codonWords(codon) {
 
 // One line for the toy's panel: what the gene makes, and what a mutation does.
 export function storyLine(s) {
-  const parts = [`${s.label}: ${s.codons.length} codons, ${s.protein.length} amino acids`];
+  const stop = s.nonstop ? " and no stop codon" : " and a stop codon";
+  const parts = [`${s.label}: ${s.protein.length} codons${stop}, ${s.protein.length} amino acids`];
   if (s.mut) {
     const m = s.mut;
     if (m.same) parts.push(`codon ${m.codon} already has ${m.base} there`);
@@ -142,7 +143,12 @@ export function storyLine(s) {
         was === now
           ? `still ${name(now)} (a silent change)`
           : `${name(was)} becomes ${name(now)}${now ? "" : " (a nonsense change)"}`;
-      parts.push(`codon ${m.codon} ${rna(oldCodon)} to ${rna(newCodon)}: ${effect}`);
+      // Proteins whose first methionine is cut off are usually numbered
+      // without it (the sickle-cell change is "Glu6Val").
+      const g = s.gene ? GENES[s.gene] : null;
+      const mature = g?.removed?.length === 1 && g.removed[0][0] === 1 && g.removed[0][1] === 1;
+      const num = mature && was !== now ? ` (number ${m.codon - 1} in the finished protein)` : "";
+      parts.push(`codon ${m.codon} ${rna(oldCodon)} to ${rna(newCodon)}: ${effect}${num}`);
     } else {
       const what = m.kind === "insert" ? `an extra ${m.base}` : `a missing ${m.was}`;
       parts.push(`${what} in codon ${m.codon} shifts the reading frame`);
