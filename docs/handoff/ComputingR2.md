@@ -31,6 +31,15 @@ brief, word for word, under "## Brief", then keep "## State
   cmp2-enigma, cmp2-engine, cmp2-shots, kit, taps, help, mca, unit (all pass; help after the
   rewrite).
 
+- Polish round (the Operator's note of 15:40 UTC, from the owner's "the toys could still be
+  sharper"), on `claude/lane-computing-r2-polish` from `3f209628`, PR to open after #290 merges: the
+  sorting machine uses the sharp kernel, with finer splats on bars, crates, pucks, dots and panel
+  letters; two small lights show the compared places as each comparison sounds (sortMarks, timed
+  with the sound by sortTimes); the crates' shuffle-back lanes are packed by size (the plinth 1.55
+  deep, was 2.05); the crates' and ring's panels sit lower; the Enigma's key and lamp letters carry
+  finer splats. Clips `cmp2p-*` on Effect review page 2 (group "polish"). Ran: cmp2-sort,
+  cmp2-enigma, cmp2-engine, cmp2-shots, ai, mca, help, unit, kit (132 passed).
+
 ## Notes", "## Known issues" and "##
 
 For the Operator" current). Model: Opus 5.5.
