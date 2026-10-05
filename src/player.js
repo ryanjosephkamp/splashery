@@ -717,7 +717,10 @@ export class Player {
     const parts = this.motion.partsData;
     let n = 0;
     const { buf } = proc.ctx;
-    n += posePass(buf.pos, buf.anim, buf.count, proc.container.centers, leaf, parts);
+    // Lane Live r7: relief splats moved by the toy's screen sort where it puts them.
+    const scr = this.screen?.canvas;
+    const relief = scr?.width ? { data: this.screen.g.getImageData(0, 0, scr.width, scr.height).data, width: scr.width, height: scr.height } : null; // prettier-ignore
+    n += posePass(buf.pos, buf.anim, buf.count, proc.container.centers, leaf, parts, relief);
     if (n) proc.container.update(buf.count, true);
     for (const sh of this.pictures?.sheets || []) {
       const d = sh.shown?.data;
