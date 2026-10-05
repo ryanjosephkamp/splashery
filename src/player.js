@@ -535,6 +535,7 @@ export class Player {
     }
     this.startPictures(ctx, toy, recipe, options); // Pictures
     this.startFluids(ctx, token); // Fluids
+    this.startArcade(ctx, token, recipe, options); // Arcade
     const b = ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
@@ -732,6 +733,9 @@ export class Player {
 
   disposeProcedural() {
     this.proc = null;
+    // Arcade: the old game stops with its toy.
+    this.arcade?.destroy();
+    this.arcade = null;
     // Fluids: the old toy's fluids stop with it.
     this.fluids?.destroy();
     this.fluids = null;
@@ -761,6 +765,17 @@ export class Player {
       phone: envelopeOn(),
       onNotice: (text) => this.emit("message", text),
     });
+  }
+
+  // ---- Arcade (lane Arcade) --------------------------------------------------------------
+  // A kit toy whose recipe has an `arcade` block is a game (src/arcade/):
+  // its runtime draws its splats, takes the controls and the camera, and
+  // runs its clock. The module loads only then.
+  async startArcade(ctx, token, recipe, options) {
+    if (!recipe.arcade) return;
+    const { ArcadeRuntime } = await import("./arcade/runtime.js");
+    if (token !== this.loadToken || this.proc?.ctx !== ctx) return;
+    this.arcade = new ArcadeRuntime(this, recipe, options, ctx);
   }
 
   // ---- Pictures (lane Pictures) ----------------------------------------------------
@@ -1342,7 +1357,7 @@ export class Player {
       this.camera.follow = this.handsOn.follow() || [0, 0, 0];
     }
     const moving = this.frozen ? false : this.camera.update(dt);
-    const pose = this.camera.pose();
+    const pose = this.arcade?.pose(this.frozen ? 0 : dt) || this.camera.pose(); // Arcade
     this.camera.viewportHeight = this.canvas.clientHeight || 600;
     this.stage.setCameraPose(pose);
     const key =
@@ -1429,6 +1444,7 @@ export class Player {
     const gliding = this.followView(); // Page focus
     // Fluids: step the toy's fluids on its own clock, steered by out.fluid.
     if (this.fluids && info.kind === "kit") this.fluids.frame(u.uSpKit[0], this.motion.out?.fluid);
+    if (this.arcade && info.kind === "kit") this.arcade.frame(this.frozen ? 0 : dt); // Arcade
     if (this.motion.addonU) {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }
