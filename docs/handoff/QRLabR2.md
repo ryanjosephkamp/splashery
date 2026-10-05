@@ -120,4 +120,17 @@ and this file.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+WORKING (October 5, 2026): started. Plan, in order: (1) the "How a QR code works" toy with an
+independent step-by-step encoder checked against Nayuki's; (2) the Damage lab with the live meter,
+the four levels side by side and the code that heals (X3, real Reed–Solomon decoding); (3) the study
+tools (`tools/qrs-*.mjs`) and the report; (4) the shapes question; then X2 (three codes in one
+square). Build tools added: zxing-wasm 3.1.4 (zxing-cpp, the third reader; it also writes and reads
+Micro QR and rMQR) and bwip-js 4.11.4 (an independent Micro QR and rMQR writer), both MIT, pinned
+devDependencies.
+
+## Notes
+
+## Known issues
+
+## For the Operator
+
