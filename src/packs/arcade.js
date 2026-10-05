@@ -638,6 +638,7 @@ export const RECIPES = {
         pad: "LB and RB, or the D-pad, are the flippers; A pulls the plunger.",
         short: "← → flippers · hold Space to launch · V for the player's view",
       },
+      slots: { high: 80000, mid: 60000, low: 40000 }, // crisp table and parts
       create: async (api) => (await import("./arcade-pinball.js")).createPinball(api),
     },
   },
