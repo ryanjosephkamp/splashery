@@ -685,7 +685,7 @@ const DEPTH_MAX = 5; // the most depth, in multiples of a figure's own
 // pops: the figures up (or on their way), oldest first; host: "book" (Your
 // book and the Photo album) or "lab" (the Picture lab); sel: the id of the
 // figure the slider sets; saved: the scene's figure depths (info.figures).
-const PG = { pops: [], id: 0, sel: 0, sliderN: 0, host: "book", pics: null, N: 0, time: 0, saved: [], wait: null, busy: false }; // prettier-ignore
+const PG = { pops: [], id: 0, sel: 0, layers: false, sliderN: 0, host: "book", pics: null, N: 0, time: 0, saved: [], wait: null, busy: false }; // prettier-ignore
 const LAB_DIMS = { W: 2, H: 2, g: 0 };
 // For tests and tools: the state of links and pop-out, and where a place on
 // a page in view lies (recipe units; f is [x, y] in fractions of the page
@@ -698,6 +698,8 @@ export const BOOKS_R5 = {
   get POP() {
     return PG.pops[PG.pops.length - 1] || IDLE;
   },
+  // A photo's relief at a depth (pgRelief), for tests.
+  deepen: (relief, depth) => pgRelief({ relief, depth, kind: "photo" }),
   point(page, f) {
     const r = PG.host !== "lab" && BOOK.sides ? bk5PhotoRect(page, PG.pics) : bk5PageRect(page, PG.pics); // prettier-ignore
     return [r.cx - r.hw + 2 * r.hw * f[0], r.cy + r.hh - 2 * r.hh * f[1], r.z];
@@ -908,8 +910,13 @@ function pgRaise(fig, manual) {
   const pics = PG.pics;
   if (!pics) return;
   const live = pgLive();
-  if (live.length >= POP_CAP) {
-    pgFall(live[0], PG.time, true);
+  // (P1: a figure in layers takes every pop sheet, one per layer; the
+  // others lie back first.)
+  const layered = PG.layers;
+  const load = live.reduce((n, F) => n + (F.layered ? POP_CAP : 1), 0);
+  if (load > 0 && (layered || load >= POP_CAP)) {
+    if (layered) for (const F of live) pgFall(F, PG.time, true);
+    else pgFall(live[0], PG.time, true);
     PG.wait = { fig, manual };
     return;
   }
@@ -918,7 +925,7 @@ function pgRaise(fig, manual) {
   while (used.has(slot)) slot++;
   const T = bk5Target(fig.page, fig.box, pics, pgAlbum() || (isLab() && pics.kind === "image"));
   const saved = PG.saved.find((s) => s.page === T.page && sameBox(s.box, T.box));
-  const F = { id: ++PG.id, slot, target: T, phase: "prep", t0: 0, asked: 0, tUp: 0, u: 0, relief: null, kind: "", known: false, depthMs: 0, depth: saved ? saved.depth : 1, manual, fast: false, at: null }; // prettier-ignore
+  const F = { id: ++PG.id, slot, target: T, phase: "prep", t0: 0, asked: 0, tUp: 0, u: 0, relief: null, kind: "", known: false, depthMs: 0, depth: saved ? saved.depth : 1, manual, fast: false, at: null, layered }; // prettier-ignore
   PG.pops.push(F);
   PG.sel = F.id;
   bk5Start(F, pics);
@@ -1052,11 +1059,148 @@ function bk5Layers(c, T, id) {
 }
 
 // A figure's relief at its chosen depth (its own key per depth, so the
-// sheet is built again when the depth changes).
+// sheet is built again when the depth changes). A graphic's layers stand
+// further out. A photo goes deeper; but a photo the depth model reads as
+// one smooth slope (a top-down photo of land: Depth Anything V2 Small sees
+// ground running away from the camera, a ramp with faint relief on it)
+// keeps its slope and gains its local relief instead: ridges and valleys,
+// the depth less a blur of itself, so it rises as terrain.
 function pgRelief(F) {
   const r = F.relief;
   if (!r || F.depth === 1) return r;
-  return { ...r, key: `${r.key}x${F.depth}`, depth: r.depth * F.depth };
+  const key = `${r.key}x${F.depth}`;
+  if (F.kind !== "photo") return { ...r, key, depth: r.depth * F.depth };
+  if (F.deep?.key === key) return F.deep;
+  F.shape ||= pgShape(r);
+  if (!F.shape.slope) return (F.deep = { ...r, key, depth: r.depth * F.depth });
+  const k = 0.3 * (F.depth - 1);
+  const d = new Float32Array(r.d.length);
+  let lo = Infinity;
+  let hi = -Infinity;
+  for (let i = 0; i < d.length; i++) {
+    d[i] = r.d[i] + k * F.shape.detail[i];
+    if (d[i] < lo) lo = d[i];
+    if (d[i] > hi) hi = d[i];
+  }
+  const span = hi - lo || 1;
+  for (let i = 0; i < d.length; i++) d[i] = (d[i] - lo) / span;
+  return (F.deep = { key, w: r.w, h: r.h, d, depth: r.depth * span });
+}
+// Whether a depth map is mostly one smooth slope (a plane fits it: R^2 over
+// 0.9), and its local relief (the map less the plane, less a wide blur of
+// that, scaled to about -0.5..0.5).
+function pgShape(r) {
+  const { w, h, d } = r;
+  const n = w * h;
+  const A = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const B = [0, 0, 0];
+  let mean = 0;
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const v = [1, x / w, y / h];
+      const z = d[y * w + x];
+      mean += z;
+      for (let i = 0; i < 3; i++) {
+        B[i] += v[i] * z;
+        for (let j = 0; j < 3; j++) A[i * 3 + j] += v[i] * v[j];
+      }
+    }
+  mean /= n;
+  const c = solve3(A, B);
+  let res = 0;
+  let tot = 0;
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const z = d[y * w + x];
+      res += (z - (c[0] + (c[1] * x) / w + (c[2] * y) / h)) ** 2;
+      tot += (z - mean) ** 2;
+    }
+  const slope = tot > 0 && 1 - res / tot > 0.9;
+  if (!slope) return { slope };
+  // (The slope comes off first, so the blur's edges add none of it back.)
+  const flat = new Float32Array(n);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) flat[y * w + x] = d[y * w + x] - (c[0] + (c[1] * x) / w + (c[2] * y) / h); // prettier-ignore
+  const blur = boxBlur(flat, w, h, Math.max(2, Math.round(0.06 * Math.max(w, h))));
+  const detail = new Float32Array(n);
+  for (let i = 0; i < n; i++) detail[i] = flat[i] - blur[i];
+  const sorted = Float32Array.from(detail).sort();
+  const range = sorted[Math.floor(0.98 * n)] - sorted[Math.floor(0.02 * n)] || 1;
+  for (let i = 0; i < n; i++) detail[i] /= range;
+  return { slope, detail };
+}
+function solve3(A, B) {
+  const M = [0, 1, 2].map((i) => [A[i * 3], A[i * 3 + 1], A[i * 3 + 2], B[i]]);
+  for (let i = 0; i < 3; i++) {
+    let p = i;
+    for (let k = i + 1; k < 3; k++) if (Math.abs(M[k][i]) > Math.abs(M[p][i])) p = k;
+    [M[i], M[p]] = [M[p], M[i]];
+    for (let k = 0; k < 3; k++) {
+      if (k === i || !M[i][i]) continue;
+      const f = M[k][i] / M[i][i];
+      for (let j = i; j < 4; j++) M[k][j] -= f * M[i][j];
+    }
+  }
+  return M.map((r, i) => (r[i] ? r[3] / r[i] : 0));
+}
+// A box blur of radius r, three times over (about a Gaussian), with running
+// sums so a wide one stays quick.
+function boxBlur(src, w, h, r) {
+  let a = Float32Array.from(src);
+  const t = new Float32Array(w * h);
+  const line = (get, set, len) => {
+    let sum = 0;
+    for (let k = -r; k <= r; k++) sum += get(Math.min(len - 1, Math.max(0, k)));
+    for (let i = 0; i < len; i++) {
+      set(i, sum / (2 * r + 1));
+      sum += get(Math.min(len - 1, i + r + 1)) - get(Math.max(0, i - r));
+    }
+  };
+  for (let pass = 0; pass < 3; pass++) {
+    for (let y = 0; y < h; y++)
+      line(
+        (x) => a[y * w + x],
+        (x, v) => (t[y * w + x] = v),
+        w,
+      );
+    for (let x = 0; x < w; x++)
+      line(
+        (y) => t[y * w + x],
+        (y, v) => (a[y * w + x] = v),
+        h,
+      );
+  }
+  return a;
+}
+
+// P1, layered pop-up scenes: the sheets a figure uses (every pop sheet in
+// layers), and layer i of a figure in layers: the whole picture behind
+// (0), then the nearer part (1) and the nearest (2) cut out by its depth
+// map (a graphic: its card, then its strongest shapes), each a flat card a
+// gap in front of the one behind. A layer waits for the map (`ready`).
+function pgSheets(F) {
+  return F.layered ? [0, 1, 2].map((i) => `pop${i}`) : [`pop${F.slot}`];
+}
+function pgLayer(F, i) {
+  const r = F.relief;
+  const T = F.target;
+  const short = (2 * Math.min(T.rect.hw, T.rect.hh)) / T.g0;
+  const gap = 0.07 * short * F.depth;
+  if (i === 0) return { relief: null, ready: true, gap };
+  if (!r) return { relief: null, ready: false, gap };
+  F.cuts ||= pgCuts(r, F.kind);
+  const lo = F.cuts[i - 1];
+  if (lo === undefined) return null;
+  return { relief: { key: `${r.key}L${i}`, w: r.w, h: r.h, d: r.d, depth: 0, nearest: true, keep: [lo, 1.01] }, ready: true, gap }; // prettier-ignore
+}
+// Where the layers are cut: a photo's depth at the middle and at four
+// fifths of its pixels (so the nearer layer is about half the picture and
+// the nearest about a fifth); a graphic's shapes in one layer.
+function pgCuts(r, kind) {
+  if (kind !== "photo") return [0.5];
+  const v = Array.from(r.d).sort((a, b) => a - b);
+  const q = (f) => v[Math.min(v.length - 1, Math.floor(f * v.length))];
+  return [Math.max(0.02, q(0.5)), Math.max(0.05, q(0.8))];
 }
 
 // The slider over the stage: the depth of the figure raised last. Moving it
@@ -1102,6 +1246,10 @@ function bk5Drive(c, out, pics, N, time, info = null, moving = false) {
   }
   BK5.popOn = (c.pop ?? 0) > 0.5;
   BK5.boxOn = (c.box ?? 0) > 0.5;
+  // P1: Pop-up layers switched: risen figures lie back, to rise the new way.
+  const layers = (c.layers ?? 0) > 0.5;
+  if (layers !== PG.layers) for (const F of PG.pops) pgFall(F, time);
+  PG.layers = layers;
   // A page turned without waiting (a pull, a page that changed under it):
   // every figure is put back at once, and a drawn box goes.
   const K = isLab() ? (pics?.page ?? 0) : BOOK.K;
@@ -1142,17 +1290,19 @@ function bk5Drive(c, out, pics, N, time, info = null, moving = false) {
   pgSlider(out, info);
   // The poses, the holes and the sheets.
   const holes = new Map();
+  const lay = PG.pops.find((F) => F.layered);
   for (let i = 0; i < POP_CAP; i++) {
-    const F = PG.pops.find((F) => F.slot === i);
-    if (!F) {
+    const F = lay || PG.pops.find((F) => F.slot === i);
+    const L = lay ? pgLayer(F, i) : null;
+    if (!F || (lay && !L)) {
       out.sheets[`pop${i}`] = { page: -1, visible: 0 };
       out.parts[`bk5pop${i}`] = { visible: 0 };
       continue;
     }
     const T = F.target;
     const ph = F.phase;
-    out.sheets[`pop${i}`] = { page: T.page, crop: T.box, relief: pgRelief(F), visible: ph === "prep" ? 0 : 1, ahead: 1 }; // prettier-ignore
-    if (ph === "rest" || ph === "rise" || ph === "up" || ph === "fall") {
+    out.sheets[`pop${i}`] = { page: T.page, crop: T.box, relief: L ? L.relief : pgRelief(F), visible: ph === "prep" || (L && !L.ready) ? 0 : 1, ahead: 1 }; // prettier-ignore
+    if ((ph === "rest" || ph === "rise" || ph === "up" || ph === "fall") && (!lay || i === 0)) {
       if (!holes.has(T.sheet)) holes.set(T.sheet, []);
       holes.get(T.sheet).push(T.box);
     }
@@ -1162,6 +1312,13 @@ function bk5Drive(c, out, pics, N, time, info = null, moving = false) {
     else if (ph === "up") u = 1;
     else if (ph === "fall") u = 1 - easeIO(clamp01((time - F.t0) / fall));
     const pose = bk5Pose(F, u, time);
+    // P1: each layer stands a little in front of the one behind it, and
+    // they part as the figure comes up.
+    if (L && i > 0) {
+      const part = easeIO(clamp01((F.u - 0.2) / 0.8));
+      const n = qRot(pose.quat, [0, 0, 1]);
+      for (let k = 0; k < 3; k++) pose.offset[k] += n[k] * L.gap * i * part;
+    }
     out.parts[`bk5pop${i}`] = pose;
     if (ph === "rise" || ph === "fall" || (ph === "up" && time - F.tUp < POP_SWAY)) {
       if (BK5.frame % 2 === 0) out.resortPose = true;
@@ -1201,7 +1358,7 @@ function pgStep(F, out, pics, time) {
   const T = F.target;
   switch (F.phase) {
     case "prep":
-      if (F.known && pics.ready(`pop${F.slot}`)) {
+      if (F.known && pgSheets(F).every((id) => pics.ready(id))) {
         F.phase = "rest";
         F.asked = time;
       }
@@ -1209,7 +1366,7 @@ function pgStep(F, out, pics, time) {
     case "rest": {
       // (It lies where it was, so it can wait unseen: for the page under it,
       // and up to 2.5 s for a photo's depth, so it rises with it.)
-      const depthWait = F.kind === "photo" && !(F.relief && pics.ready(`pop${F.slot}`)) && time - F.asked < 2.5; // prettier-ignore
+      const depthWait = F.kind === "photo" && !(F.relief && pgSheets(F).every((id) => pics.ready(id))) && time - F.asked < 2.5; // prettier-ignore
       if ((pics.ready(T.sheet) && !depthWait) || time - F.asked > 4) {
         F.phase = "rise";
         F.t0 = time;
@@ -1406,6 +1563,8 @@ function bk5Hole(g, w, h, [x0, y0, x1, y1], paper = null) {
 // a tap (the tap then turns the page by itself).
 // Lane Pages r6: Pop out, set from the top bar (src/app.js, showPopOut).
 const POP_CONTROL = { key: "pop", label: "Pop out", type: "toggle", ease: 0.12, global: "pop" };
+// P1: a risen figure splits into flat cutout layers, like a paper pop-up book.
+const LAYERS_CONTROL = { key: "layers", label: "Pop-up layers", type: "toggle", ease: 0.1 };
 const BOOK_PULL = { lag: 0.035, finish: 0.5, flick: 1.6, slow: 1, bendK: 1 };
 const ALBUM_PULL = { lag: 0.12, finish: 0.58, flick: 2.3, slow: 1.3, bendK: 0.7 };
 const OVER = 2 * Math.PI - 0.06; // a stapled sheet turned over the top, hanging behind
@@ -1540,6 +1699,7 @@ const BOOK_RECIPE = {
     // out is the top bar's switch, one for every page toy.
     POP_CONTROL,
     { key: "box", label: "Draw a box", type: "toggle", ease: 0.1 },
+    LAYERS_CONTROL,
   ],
   // Sound C: each style's own page sound (PAGE_SOUNDS), played by drive.
   action: { key: "turn", label: "Turn the page", at: bookTapAt, quiet: ["turn"] },
@@ -2236,6 +2396,7 @@ const ALBUM_RECIPE = {
   controls: [
     { key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 },
     POP_CONTROL, // lane Books r5: a photo rises (lane Pages r6: the top bar's switch)
+    LAYERS_CONTROL,
   ],
   action: { key: "turn", label: "Turn the page", at: bookTapAt },
   focus: bookFocus,
@@ -2683,6 +2844,7 @@ export const RECIPES = {
       // Your book, for a PDF or a picture.
       POP_CONTROL,
       { key: "box", label: "Draw a box", type: "toggle", ease: 0.1 },
+      LAYERS_CONTROL,
     ],
     // A tap on the left of the page goes back, on the right (or the middle)
     // forward; the pages slide, they don't flip. (Lane Pages r6: a tap on a

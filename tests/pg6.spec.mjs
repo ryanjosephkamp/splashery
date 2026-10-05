@@ -309,6 +309,76 @@ test.describe("Pop out in Your book (no browser)", () => {
   });
 });
 
+test.describe("deeper photos (no browser)", () => {
+  test("a photo read as one slope (top-down land) gains its ridges, not a steeper slope; others go deeper", async () => {
+    const { BOOKS_R5 } = await import("../src/packs/pictures.js");
+    const w = 64;
+    const h = 64;
+    // A ramp, top far to bottom near, with a small ridge across the middle.
+    const ramp = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) ramp[y * w + x] = (0.9 * y) / h + (Math.abs(y - 32) < 3 && x > 16 && x < 48 ? 0.05 : 0); // prettier-ignore
+    const r = { key: "d1", w, h, d: ramp, depth: 0.1 };
+    const deep = BOOKS_R5.deepen(r, 5);
+    expect(deep.key).toBe("d1x5");
+    // The ridge stands out far more against the slope round it.
+    const at = (m, x, y) => m.d[y * w + x] * m.depth;
+    const ridge = (m) => at(m, 32, 32) - (at(m, 32, 26) + at(m, 32, 38)) / 2;
+    expect(ridge(deep)).toBeGreaterThan(3 * ridge(r));
+    // ...and the slope itself is no steeper.
+    const slope = (m) => at(m, 5, 60) - at(m, 5, 4);
+    expect(slope(deep)).toBeLessThan(slope(r) * 1.3);
+    // A figure in front of a background (no slope): simply deeper.
+    const blob = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) blob[y * w + x] = Math.hypot(x - 32, y - 32) < 16 ? 1 : 0.1; // prettier-ignore
+    const b = BOOKS_R5.deepen({ key: "d2", w, h, d: blob, depth: 0.1 }, 3);
+    expect(b.depth).toBeCloseTo(0.3, 6);
+    expect(b.d).toBe(blob);
+  });
+});
+
+test.describe("Pop-up layers (P1, no browser)", () => {
+  test("a figure in layers splits into flat cutout cards that part as it rises; other figures lie back", async () => {
+    const { b, BOOKS_R5, at } = await openBook();
+    const { PG } = BOOKS_R5;
+    b.tap(at(mid(FIG_B)));
+    await b.settle();
+    b.run(1.5);
+    expect(PG.pops.length).toBe(1);
+    b.set("layers", 1);
+    b.run(1);
+    expect(PG.pops.length).toBe(0);
+    b.tap(at(mid(FIG_A)));
+    await b.settle();
+    b.run(0.3);
+    const zs = [];
+    for (let i = 0; i < 40; i++) {
+      const out = b.run(0.05);
+      zs.push([0, 1].map((k) => out.parts[`bk5pop${k}`].offset[2]));
+    }
+    const F = PG.pops[0];
+    expect(F.layered).toBe(true);
+    expect(F.phase).toBe("up");
+    // A graphic: the card, then its shapes cut out (the third sheet unused).
+    const o = b.out;
+    expect(o.sheets.pop0).toMatchObject({ page: 1, crop: FIG_A, relief: null, visible: 1 });
+    expect(o.sheets.pop1.relief).toMatchObject({ depth: 0, nearest: true, keep: [0.5, 1.01] });
+    expect(o.sheets.pop1.visible).toBe(1);
+    expect(o.sheets.pop2.visible).toBe(0);
+    // The front layer stands in front of the card, further once it is up.
+    const [z0, z1] = zs[zs.length - 1];
+    expect(z1 - z0).toBeGreaterThan(0.01);
+    expect(zs[0][1] - zs[0][0]).toBeLessThan(z1 - z0);
+    // One hole on the page (the figure's place), not one per layer.
+    const holes = Object.values(o.sheets).filter((s) => s.variant?.startsWith("hole:"));
+    expect(holes.length).toBe(1);
+    expect(holes[0].variant.split(";").length).toBe(1);
+    // A tap on it lays it back.
+    b.tap([F.at.cx, F.at.cy, 0.3]);
+    b.run(1.5);
+    expect(PG.pops.length).toBe(0);
+  });
+});
+
 test.describe("Pop out in the Photo album and the Picture lab (no browser)", () => {
   test("the album raises two photos in turn; a tap on one lays it back", async () => {
     const { BOOKS_R5 } = await import("../src/packs/pictures.js");
