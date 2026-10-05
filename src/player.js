@@ -1406,6 +1406,7 @@ export class Player {
         info,
         cameraPos: pose.position,
         cameraDistance: pose.distance, // Science r2
+        eye: this.motion.recipe?.drive ? this.toRecipe(pose.position) : null, // lane Molecule viewer
       }),
       patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
     );
