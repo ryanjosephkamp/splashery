@@ -331,7 +331,9 @@ async function record(scene) {
     await popOn();
     await control("layers", 1);
     await hold(900);
-    const n = await run(() => window.__splashery.player.pictures.page);
+    // (The second photo of the page: the tulips, flowers in front of the sky.)
+    const n =
+      (await run(() => window.__splashery.player.pictures.page)) + Number(opt("photo-index", 1));
     await raise(n, [0, 0, 1, 1]);
     await turn(0.6, 0.2, 1.6);
     await turn(-0.6, 0.35, 2.4);

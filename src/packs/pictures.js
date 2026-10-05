@@ -1073,7 +1073,7 @@ function pgRelief(F) {
   if (F.deep?.key === key) return F.deep;
   F.shape ||= pgShape(r);
   if (!F.shape.slope) return (F.deep = { ...r, key, depth: r.depth * F.depth });
-  const k = 0.3 * (F.depth - 1);
+  const k = 0.25 * (F.depth - 1);
   const d = new Float32Array(r.d.length);
   let lo = Infinity;
   let hi = -Infinity;
@@ -1126,7 +1126,15 @@ function pgShape(r) {
   for (let i = 0; i < n; i++) detail[i] = flat[i] - blur[i];
   const sorted = Float32Array.from(detail).sort();
   const range = sorted[Math.floor(0.98 * n)] - sorted[Math.floor(0.02 * n)] || 1;
-  for (let i = 0; i < n; i++) detail[i] /= range;
+  // Softened a little (steep steps would pull the splats apart) and faded
+  // out toward the edges (where the blur has less to go on).
+  const soft = boxBlur(detail, w, h, Math.max(1, Math.round(0.012 * Math.max(w, h))));
+  const edge = 0.05 * Math.max(w, h);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const k = Math.min(1, Math.min(x, y, w - 1 - x, h - 1 - y) / edge);
+      detail[y * w + x] = (soft[y * w + x] / range) * k * k * (3 - 2 * k);
+    }
   return { slope, detail };
 }
 function solve3(A, B) {
@@ -1410,11 +1418,15 @@ function bk5Pose(F, u, time) {
   // toward you and further toward the middle, so it stays on the screen.
   // (Each figure a little nearer than the one before, so two that meet
   // stand in front of each other, not mixed.)
-  const lift = ((f ? 0.18 : 0.3) + 0.03 * F.slot) * H;
+  // (In the lab a figure as big as the page comes less far, or it would
+  // fill the screen.)
+  const big = isLab() ? Math.min(1, (2 * Math.max(r.hw, r.hh)) / H) : 0;
+  const lift = ((f ? 0.18 : 0.3) * (1 - 0.6 * big) + 0.03 * F.slot) * H;
   const pull = f ? 0.65 : 0.3;
   const C = [r.cx + (view[0] - r.cx) * pull * u, r.cy + (view[1] - r.cy) * pull * u, z0 + lift * u]; // prettier-ignore
   const span = isLab() || f ? W : 2 * W;
-  const grow = Math.max(1, Math.min(f ? 1.15 : 1.3, (0.82 * H) / (2 * r.hh), (0.82 * span) / (2 * r.hw))); // prettier-ignore
+  // (Nor does it grow past the page.)
+  const grow = 1 + (1 - big) * (Math.max(1, Math.min(f ? 1.15 : 1.3, (0.82 * H) / (2 * r.hh), (0.82 * span) / (2 * r.hw))) - 1); // prettier-ignore
   const s = T.g0 * (1 + (grow - 1) * u);
   const face = Math.max(-0.32, Math.min(0.32, -(r.cx - view[0]) * 0.45 * (PAGE_H / H)));
   const since = F.phase === "up" ? time - F.tUp : 0;
