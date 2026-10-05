@@ -3578,6 +3578,16 @@ export const TOYS = [
     camera: { yaw: 0.25, pitch: 0.7, roll: 0, distance: 3.3 },
   },
   {
+    id: "living-city",
+    label: "Living city",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "city town buildings streets cars traffic train metro elevated rail night lights windows skyline urban map earth geography",
+    camera: { yaw: 0.55, pitch: 0.55, roll: 0, distance: 3.2 },
+  },
+  {
     id: "earthquakes",
     label: "Earthquakes",
     category: "geo",

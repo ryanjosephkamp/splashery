@@ -21,6 +21,9 @@
 //   relief-map    Yosemite Valley as a relief map: contour lines, height
 //                 tints, the aerial photo or land cover, and the named streams;
 //                 the tap sends a contour up the walls and water down the streams
+//   living-city   a kit-built city: cars go round their blocks, a train runs
+//                 on its elevated loop, and the tap turns day to night (the
+//                 windows light up one by one) and back
 //   earthquakes   the USGS feed, live when the toy opens or its plaque is
 //                 tapped (a dated snapshot ships for when it can't be reached),
 //                 on a NOAA ETOPO1 relief globe; the tap plays the quakes in
@@ -982,6 +985,221 @@ const RELIEF_MAP = {
   },
 };
 
+// ---- A living city ---------------------------------------------------------------------------
+
+const LC_N = 4; // blocks a side
+const LC_BLOCK = 0.5; // block pitch (street center to street center)
+const LC_STREET = 0.09; // street width
+const LC_CARS = 26;
+const LC_TRAIN = 5;
+const LC_LOOP = 1.13; // the train's loop, half-width
+const LC_RAIL_Y = 0.16;
+
+const hash = (...a) => {
+  let h = 2166136261;
+  for (const x of a) h = Math.imul(h ^ (Math.round(x * 1000) | 0), 16777619);
+  return ((h >>> 0) % 100000) / 100000;
+};
+
+// A closed rectangular path: point and heading at distance d along it.
+function loopPath(x0, z0, x1, z1) {
+  const sides = [
+    [[x0, z1], [x1, z1]],
+    [[x1, z1], [x1, z0]],
+    [[x1, z0], [x0, z0]],
+    [[x0, z0], [x0, z1]],
+  ];
+  const lens = sides.map(([a, b]) => Math.hypot(b[0] - a[0], b[1] - a[1]));
+  const total = lens.reduce((a, b) => a + b, 0);
+  return {
+    total,
+    at(d) {
+      d = ((d % total) + total) % total;
+      for (let i = 0; i < 4; i++) {
+        if (d <= lens[i] || i === 3) {
+          const [a, b] = sides[i];
+          const f = Math.min(1, d / lens[i]);
+          return { p: [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f], h: Math.atan2(b[0] - a[0], b[1] - a[1]) }; // prettier-ignore
+        }
+        d -= lens[i];
+      }
+      return null;
+    },
+  };
+}
+
+const LIVING_CITY = {
+  alive: true,
+  density: 1.3,
+  controls: [{ key: "night", label: "Night", type: "toggle", default: 0, ease: 4.5 }],
+  action: { key: "night", label: "Day or night" },
+  drive(t, c, out, info) {
+    const d = info.data;
+    out.morph = [c.night, 0, 0, 0];
+    const tokens = [];
+    // The cars: each goes round its own block, keeping to the right.
+    d.cars.forEach((car) => {
+      const q = car.path.at(car.d0 + t * car.speed);
+      tokens.push({
+        base: car.base,
+        offset: [q.p[0] - car.base[0], 0, q.p[1] - car.base[2]],
+        quat: quatAxisAngle([0, 1, 0], q.h - car.h0),
+      });
+    });
+    // The train: its cars follow one another round the elevated loop.
+    d.train.forEach((tc) => {
+      const q = d.trainPath.at(tc.d0 + t * 0.32);
+      tokens.push({
+        base: tc.base,
+        offset: [q.p[0] - tc.base[0], 0, q.p[1] - tc.base[2]],
+        quat: quatAxisAngle([0, 1, 0], q.h - tc.h0),
+      });
+    });
+    out.tokens = tokens;
+  },
+  build(k) {
+    const half = (LC_N * LC_BLOCK) / 2;
+    const P = LC_BLOCK;
+    const S = LC_STREET;
+    // The ground: streets with lane lines, sidewalks, one park. Day and night
+    // copies cross-fade on the night channel.
+    const isPark = (bi, bj) => bi === 1 && bj === 2;
+    const ground = (night) => (c) => {
+      const x = c.p[0] + half;
+      const z = c.p[2] + half;
+      const fx = ((x % P) + P) % P;
+      const fz = ((z % P) + P) % P;
+      const sx = Math.min(fx, P - fx);
+      const sz = Math.min(fz, P - fz);
+      const street = sx < S / 2 || sz < S / 2;
+      let col;
+      if (street) {
+        const line = (sx < 0.003 && sz > S / 2) || (sz < 0.003 && sx > S / 2);
+        col = line ? "#d8c25a" : "#3a3d42";
+      } else if (sx < S / 2 + 0.02 || sz < S / 2 + 0.02) col = "#9a9890";
+      else col = isPark(Math.floor(x / P), Math.floor(z / P)) ? mix("#4c7a3c", "#5d8a45", hash(Math.floor(x * 60), Math.floor(z * 60))) : "#8b8880"; // prettier-ignore
+      return night ? shade(col, 0.28) : col;
+    };
+    const base = evenBox(2 * half + 0.1, 0.06, 2 * half + 0.1);
+    k.add(base, { pos: [0, -0.03, 0], even: true, share: 0.16, flat: 0.15, jitter: 0.008, color: (c) => (c.s.face === 2 ? ground(false)(c) : "#5a554d"), kind: "fade", channel: 0, params: (c) => (c.s.face === 2 ? [0.35, 0.3] : [9, 0.1]) }); // prettier-ignore
+    k.add(evenBox(2 * half + 0.1, 0.001, 2 * half + 0.1), { pos: [0, 0.0005, 0], even: true, share: 0.14, flat: 0.15, jitter: 0.008, color: ground(true), kind: "fade", channel: 0, params: [0.35, -0.3] }); // prettier-ignore
+    // The buildings.
+    let bid = 0;
+    for (let bi = 0; bi < LC_N; bi++)
+      for (let bj = 0; bj < LC_N; bj++) {
+        if (isPark(bi, bj)) continue;
+        const cx = -half + (bi + 0.5) * P;
+        const cz = -half + (bj + 0.5) * P;
+        const inner = P - S - 0.05;
+        const split = hash(bi, bj, 1) < 0.5 ? 1 : 2;
+        const centrality = 1 - Math.hypot(cx, cz) / (half * 1.5);
+        for (let a = 0; a < split; a++)
+          for (let b = 0; b < 2; b++) {
+            const w = inner / split - 0.02;
+            const dz = inner / 2 - 0.02;
+            const x = cx - inner / 2 + (a + 0.5) * (inner / split);
+            const z = cz - inner / 2 + (b + 0.5) * (inner / 2);
+            const h = 0.08 + (0.12 + 0.55 * centrality) * (0.35 + 0.65 * hash(bi, bj, a, b));
+            const tone = ["#c9c2b4", "#a9b3bd", "#b98f74", "#d6d1c6", "#8e98a3"][Math.floor(hash(bid, 7) * 5)]; // prettier-ignore
+            const id = bid++;
+            const shape = evenBox(w, h, dz);
+            const win = (c) => {
+              if (c.s.face === 2 || c.s.face === 3) return null;
+              const along = c.s.face < 2 ? c.lp[2] + dz / 2 : c.lp[0] + w / 2;
+              const up = c.lp[1] + h / 2;
+              const fa = (along / 0.028) % 1;
+              const fu = (up / 0.032) % 1;
+              if (up < 0.025 || fa < 0.22 || fa > 0.78 || fu < 0.3 || fu > 0.8) return null;
+              return [c.s.face, Math.floor(along / 0.028), Math.floor(up / 0.032)];
+            };
+            const lit = (c) => {
+              const n = c.n;
+              return 0.78 + 0.26 * Math.max(0, n[0] * -0.5 + n[1] * 0.8 + n[2] * 0.6);
+            };
+            const common = { pos: [x, h / 2, z], even: true, weight: 1.4, flat: 0.2, jitter: 0.008 };
+            // Day: walls and roofs fade at dusk; the glass stays.
+            k.add(shape, { ...common, kind: "fade", channel: 0, params: (c) => (win(c) ? [9, 0.1] : [0.3 + 0.2 * hash(id), 0.25]), color: (c) => (win(c) ? "#3f5566" : shade(tone, lit(c))) }); // prettier-ignore
+            // Night: dark walls fade in ...
+            k.add(shape, { ...common, weight: 0.9, kind: "fade", channel: 0, params: [0.3 + 0.2 * hash(id), -0.25], color: (c) => (win(c) ? null : shade(tone, 0.22 * lit(c))) }); // prettier-ignore
+            // ... and each window lights up at its own moment.
+            k.add(shape, { ...common, weight: 0.5, size: 0.95, kind: "fade", channel: 0, params: (c) => { const wv = win(c); return [0.3 + 0.62 * hash(id, ...(wv || [0])), -0.04]; }, color: (c) => { const wv = win(c); return wv ? mix("#ffd27a", "#fff1c4", hash(id, ...wv, 5)) : null; }, pattern: false }); // prettier-ignore
+          }
+      }
+    // Park trees.
+    for (let i = 0; i < 9; i++) {
+      const x = -half + 1.5 * P + (hash(i, 3) - 0.5) * (P - S - 0.08);
+      const z = -half + 2.5 * P + (hash(i, 4) - 0.5) * (P - S - 0.08);
+      k.add(evenEllipsoid(k, 0.035, 0.04, 0.035), { pos: [x, 0.06, z], color: (c) => shade("#3d6b33", 0.8 + 0.3 * c.n[1]), share: 0.002, flat: 0.4 }); // prettier-ignore
+      k.add(evenCylinder(0.006, 0.006, 0.03), { pos: [x, 0.015, z], color: "#5b4532", share: 0.0005 });
+    }
+    // The elevated rail: a deck on pillars round the city.
+    const L = LC_LOOP;
+    for (const [px, pz, sx, sz] of [[0, L, 2 * L, 0.05], [0, -L, 2 * L, 0.05], [L, 0, 0.05, 2 * L], [-L, 0, 0.05, 2 * L]]) // prettier-ignore
+      k.add(evenBox(sx + 0.05, 0.012, sz + 0.05), { pos: [px, LC_RAIL_Y - 0.012, pz], even: true, share: 0.012, color: "#6d6a66", flat: 0.2 }); // prettier-ignore
+    for (let i = 0; i < 16; i++) {
+      const f = (i / 16) * 4;
+      const side = Math.floor(f);
+      const g2 = (f - side) * 2 - 1;
+      const [px, pz] = [[g2 * L, L], [L, -g2 * L], [-g2 * L, -L], [-L, g2 * L]][side];
+      k.add(evenCylinder(0.008, 0.008, LC_RAIL_Y - 0.012), { pos: [px, (LC_RAIL_Y - 0.012) / 2, pz], color: "#7d7a74", share: 0.0008 }); // prettier-ignore
+    }
+    // Cars and the train are tokens, built where they start.
+    const carCols = ["#c23b2e", "#2f5d8a", "#e8e4da", "#2b2b2e", "#d9a521", "#5f8a4a"];
+    const cars = [];
+    let tok = 0;
+    const addVehicle = (pos, h0, len, wid, hgt, col, isTrain) => {
+      const i = tok++;
+      const put = (lx, ly, lz) => [pos[0] + lx * Math.cos(h0) + lz * Math.sin(h0), pos[1] + ly, pos[2] - lx * Math.sin(h0) + lz * Math.cos(h0)]; // prettier-ignore
+      k.cloud({ share: isTrain ? 0.006 : 0.0022, size: 1 }, (rand) => {
+        // A rounded box body; lights at the ends.
+        const face = rand();
+        let lx = (rand() - 0.5) * wid;
+        let ly = rand() * hgt;
+        let lz = (rand() - 0.5) * len;
+        if (face < 0.3) ly = hgt;
+        else if (face < 0.5) lx = Math.sign(lx || 1) * wid / 2;
+        else if (face < 0.65) lz = Math.sign(lz || 1) * len / 2;
+        const front = lz > len / 2 - 0.002;
+        const back = lz < -len / 2 + 0.002;
+        let color = col;
+        if (!isTrain && ly > hgt * 0.55 && face >= 0.3) color = "#2f3b46"; // the cabin's glass
+        if (isTrain && ly > hgt * 0.45 && ly < hgt * 0.8 && face >= 0.3 && face < 0.5) color = "#2f3b46";
+        if (front && ly < hgt * 0.5 && Math.abs(lx) > wid * 0.25) color = "#fff6d8";
+        if (back && ly < hgt * 0.5 && Math.abs(lx) > wid * 0.25) color = "#e0342a";
+        return { p: put(lx, ly + 0.004, lz), color, size: 0.75, kind: "token", params: [i, 0], pattern: false };
+      });
+    };
+    for (let i = 0; i < LC_CARS; i++) {
+      // Each car's loop: the streets round one block (or two), on the right.
+      const bi = Math.floor(hash(i, 11) * LC_N);
+      const bj = Math.floor(hash(i, 12) * LC_N);
+      const wide = hash(i, 13) < 0.3 ? 1 : 0;
+      const lane = S / 4;
+      const x0 = -half + bi * P;
+      const z0 = -half + bj * P;
+      const x1 = Math.min(half, x0 + (1 + wide) * P);
+      const z1 = z0 + P;
+      const path = loopPath(x0 + lane, z0 + lane, x1 - lane, z1 - lane);
+      const d0 = hash(i, 14) * path.total;
+      const q = path.at(d0);
+      const basePos = [q.p[0], 0, q.p[1]];
+      addVehicle(basePos, q.h, 0.058, 0.027, 0.022, carCols[i % carCols.length], false);
+      cars.push({ path, d0, h0: q.h, base: basePos, speed: 0.12 + 0.08 * hash(i, 15) });
+    }
+    const trainPath = loopPath(-L, -L, L, L);
+    const train = [];
+    for (let i = 0; i < LC_TRAIN; i++) {
+      const d0 = -i * 0.11;
+      const q = trainPath.at(d0);
+      const basePos = [q.p[0], LC_RAIL_Y, q.p[1]];
+      addVehicle(basePos, q.h, 0.1, 0.034, 0.035, i === 0 ? "#d7d9dc" : "#c4c8cc", true);
+      train.push({ d0, h0: q.h, base: basePos });
+    }
+    k.data = { cars, train, trainPath };
+    k.reach([0, 0.8, 0]);
+  },
+};
+
 // ---- Earthquakes ---------------------------------------------------------------------------
 
 const EQ_DIR = "assets/toys/earthquakes/";
@@ -1232,5 +1450,6 @@ export const RECIPES = {
   "tide-harbor": TIDE_HARBOR,
   hurricane: HURRICANE,
   "relief-map": RELIEF_MAP,
+  "living-city": LIVING_CITY,
   earthquakes: EARTHQUAKES,
 };
