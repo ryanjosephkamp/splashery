@@ -101,6 +101,11 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
+October 5, 2026, 06:10 UTC (Opus 5.5): **all marks good.** `lv7-splat-mirror-r2`,
+`lv7-splat-mirror-hologram-r2` and `lv7-chladni-plate-r2` are marked good, after
+`lv7-song-landscape` and `lv7-chladni-plate` earlier. Main (through #292) is merged into both
+branches. READY for the Integrator's full run; the engine PR #284 merges first, then #263.
+
 October 5, 2026, 04:50 UTC (Opus 5.5): the owner's marks: `lv7-song-landscape` and
 `lv7-chladni-plate` good; both mirror cards "fix" ("keep making it sharper ... a little bit more
 seamless"). Round 2 is posted as `lv7-splat-mirror-r2` and `lv7-splat-mirror-hologram-r2` (the old
