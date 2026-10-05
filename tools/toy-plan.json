@@ -2488,7 +2488,7 @@
     "nearby-stars": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"more galaxies, more stellar systems, more planets\"; rockets; lane Space r2; labs only).",
-      "effect": "About 2,240 real stars within 65 light-years of the Sun (ESA Gaia's Catalogue of Nearby Stars, plus the brightest few from Hipparcos), colored by temperature and sized by brightness, round the Sun on faint rings in the Galaxy's plane. A tap flies to the next named star (Proxima Centauri, Sirius, Barnard's Star, Vega, Arcturus) with its name and distance in light-years, and back (8 s).",
+      "effect": "About 2,240 real stars within 65 light-years of the Sun (ESA Gaia's Catalogue of Nearby Stars, plus the brightest few from Hipparcos), colored by temperature and sized by brightness, round the Sun on faint rings in the Galaxy's plane. A tap flies to the next named star (Alpha Centauri with Proxima beside it, Sirius, Barnard's Star, Vega, Arcturus) with its name and distance in light-years, and back (8 s).",
       "sound": "Space is silent: a soft breath as the view flies.",
       "improved": "Space r2: new toy (labs); tools/sp2-stars.mjs reads GCNS from CDS VizieR (CC BY-SA 3.0 IGO) and HYG v4.4 (CC BY-SA 4.0), temperatures from Mamajek's color table."
     },

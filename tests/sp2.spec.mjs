@@ -270,7 +270,7 @@ test.describe("lane Space r2: real worlds", () => {
     const ctx = await build("nearby-stars", 60000);
     const tour = ctx.kit.data.tour;
     expect(tour.map((t) => t.name)).toEqual([
-      "Proxima Centauri",
+      "Rigil Kentaurus",
       "Sirius",
       "Barnard's Star",
       "Vega",

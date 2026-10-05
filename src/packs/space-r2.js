@@ -547,7 +547,9 @@ export function starColor(teff) {
 
 // The stars a tap flies to, in turn (names as the data file has them).
 const STAR_TOUR = [
-  { name: "Proxima Centauri", label: "PROXIMA CENTAURI" },
+  // (Proxima Centauri, the nearest star, sits right beside Alpha Centauri A
+  // and B at this scale: it is their small third star.)
+  { name: "Rigil Kentaurus", label: "ALPHA CENTAURI" },
   { name: "Sirius", label: "SIRIUS" },
   { name: "Barnard's Star", label: "BARNARD'S STAR" },
   { name: "Vega", label: "VEGA" },
