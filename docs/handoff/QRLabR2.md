@@ -159,7 +159,8 @@ READY (October 5, 2026). Everything in the brief and X2 and X3 is on the branch 
   part to pop out (optional): done, a "Pop the lit part out" switch. The Damage lab clips: "keep
   polishing": each tap now moves only the damage it adds (scratches draw on, smudges and char
   spread, a sticker drops only when it grows, torn or burned pieces fall once), each code is labeled
-  with its level, and misread modules show a stronger red. Seven -r2 cards replace the old ones.
+  with its level, and misread modules show a stronger red. Seven -r2 cards replace the old ones. All
+  seven -r2 cards and Three codes in one are marked "good" (October 5, 2026).
 
 ## Phone check (for the owner, through the Operator)
 
