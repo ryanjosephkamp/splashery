@@ -153,9 +153,10 @@
     "alarm-clock": {
       "v": "keep",
       "owner": "Hands should move. On tap it should jump up and down and ring like an alarm clock.",
-      "effect": "Hands tick all the time; tap rattles it off the table while it rings.",
+      "effect": "The hands show the real time and the second hand ticks; tap rattles it off the table while it rings.",
       "sound": "A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).",
-      "improved": "E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s)."
+      "improved": "E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s).",
+      "fixed": "Fix8: the hands show the real time. The scanned hands are cut out cleanly and kit-built hour, minute and second hands of the same shapes turn from this device's clock."
     },
     "vintage-camera": {
       "v": "keep",

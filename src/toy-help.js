@@ -283,7 +283,7 @@ export const TOY_HELP = {
   "alarm-clock": {
     howTo: "Tap it to ring the bells.",
     about:
-      'An old wind-up alarm clock runs on a spring: winding the key tightens the spring, and as it slowly unwinds it turns the gears and the hands. Two metal bells sit on top, and when the alarm goes off a little hammer rattles back and forth between them.\n\nThe red second hand ticks all the time. Tap it and the twin bells ring while the clock rattles across the table. Before alarm clocks were common, some people paid a "knocker-up" to tap on windows with a long pole and wake people for work.',
+      'An old wind-up alarm clock runs on a spring: winding the key tightens the spring, and as it slowly unwinds it turns the gears and the hands. Two metal bells sit on top, and when the alarm goes off a little hammer rattles back and forth between them.\n\nIts hands show the real time on this device, in its local time zone, and the red second hand ticks once a second. Tap it and the twin bells ring while the clock rattles across the table. Before alarm clocks were common, some people paid a "knocker-up" to tap on windows with a long pole and wake people for work.',
   },
   "vintage-camera": {
     howTo: "Tap it to take a photo with a flash.",
