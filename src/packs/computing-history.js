@@ -2048,6 +2048,9 @@ export const RECIPES = {
   },
   "enigma-machine": {
     density: 2,
+    // The owner's "make wheels sharper" (lane Computing r2): the crisper
+    // splat kernel, so the rotors' letters, ridges and edges stay sharp.
+    kernel: "sharp",
     // Your message, as typed (set from the panel, not shown), and the
     // machine's setting (lane Computing r2).
     get options() {
