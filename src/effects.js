@@ -786,6 +786,11 @@ export const KINDS = {
   // 4096 c + 262144 d (tokens 0..47), w = 1024 s + t (each 0..1023 for
   // 0..1), moving by mix(mix(a, b, s), mix(c, d, s), t).
   skin4: 25,
+  // Lane Imaging (engine): a splat in a measured volume (a CT or MRI scan).
+  // z = its density (0..1). It shows only while its density is inside the
+  // window and its rest place is on the near side of the cutting plane
+  // (uSpVol, set from out.volume); splats on the cut face glow (uSpVolC).
+  volume: 26,
 };
 
 // Levers: 96 amounts (three 8-bit channels each) and 6 groups.
@@ -803,7 +808,10 @@ uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
 vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat
 uniform vec4 uSpLeaf[8]; // Pictures: spine point, spine axis, page direction, then (angle, curl) per leaf
 uniform vec4 uSpLever[18]; // Pianos: per lever group, pivot + amount, direction + mode, glow colour + channel
-uniform vec4 uSpLevers[24]; // Pianos: 96 levers' amounts, three 8-bit channels packed in each float`;
+uniform vec4 uSpLevers[24]; // Pianos: 96 levers' amounts, three 8-bit channels packed in each float
+uniform vec4 uSpVol;     // Imaging: cutting plane normal (xyz) and offset (w), toy coordinates
+uniform vec4 uSpVolP;    // Imaging: x cut on, y slab half width (0: half space), z, w density window
+uniform vec4 uSpVolC;    // Imaging: rgb cut-face glow, a glow width`;
 
 const GLSL_KIT_FUNCTIONS = `
 float spBeat(float x) {
@@ -1031,6 +1039,18 @@ vec3 spKitCenter(vec3 p) {
     float fr = abs(dot(normalize(p - rc + vec3(1e-6)), normalize(uSpCam.xyz - p)));
     spFade *= mix(clamp(an.z, 0.0, 1.0), 1.0, pow(clamp(1.0 - fr, 0.0, 1.0), max(an.w, 0.05)));
   }
+  if (kind == 26) {
+    // Volume (lane Imaging): hidden outside the density window and beyond
+    // the cutting plane (measured at the splat's rest place, so the cut
+    // stays with the specimen as its part turns); the cut face glows.
+    if (an.z < uSpVolP.z || an.z > uSpVolP.w) spKitScale = 0.0;
+    if (uSpVolP.x > 0.5) {
+      float vd = dot(spRest - toy, uSpVol.xyz) - uSpVol.w;
+      float vg = uSpVolP.y > 0.0 ? uSpVolP.y - abs(vd) : -vd;
+      if (vg < 0.0) spKitScale = 0.0;
+      else if (uSpVolC.a > 0.0) spTint += uSpVolC.rgb * (1.0 - smoothstep(0.0, uSpVolC.a, vg));
+    }
+  }
   return p;
 }
 `;
@@ -1047,7 +1067,10 @@ var uSpScreenSampler: sampler;
 var<private> spScreenUV: vec3f = vec3f(0.0);
 uniform uSpLeaf: array<vec4f, 8>;
 uniform uSpLever: array<vec4f, 18>;
-uniform uSpLevers: array<vec4f, 24>;`;
+uniform uSpLevers: array<vec4f, 24>;
+uniform uSpVol: vec4f;
+uniform uSpVolP: vec4f;
+uniform uSpVolC: vec4f;`;
 
 const WGSL_KIT_FUNCTIONS = `
 fn spBeat(x: f32) -> f32 {
@@ -1262,6 +1285,20 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     if (part > 0) { rc = uniform.uSpParts[part * 3 + 1].xyz + uniform.uSpParts[part * 3 + 2].xyz; }
     let fr = abs(dot(normalize(p - rc + vec3f(1e-6)), normalize(uniform.uSpCam.xyz - p)));
     spFade = spFade * mix(clamp(an.z, 0.0, 1.0), 1.0, pow(clamp(1.0 - fr, 0.0, 1.0), max(an.w, 0.05)));
+  }
+  if (kind == 26) {
+    // Volume (lane Imaging): see the GLSL.
+    if (an.z < uniform.uSpVolP.z || an.z > uniform.uSpVolP.w) { spKitScale = 0.0; }
+    if (uniform.uSpVolP.x > 0.5) {
+      let vd = dot(spRest - toy, uniform.uSpVol.xyz) - uniform.uSpVol.w;
+      var vg = -vd;
+      if (uniform.uSpVolP.y > 0.0) { vg = uniform.uSpVolP.y - abs(vd); }
+      if (vg < 0.0) {
+        spKitScale = 0.0;
+      } else if (uniform.uSpVolC.a > 0.0) {
+        spTint = spTint + uniform.uSpVolC.rgb * (1.0 - smoothstep(0.0, uniform.uSpVolC.a, vg));
+      }
+    }
   }
   return p;
 }
