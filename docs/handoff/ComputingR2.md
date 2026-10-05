@@ -31,6 +31,15 @@ brief, word for word, under "## Brief", then keep "## State
   cmp2-enigma, cmp2-engine, cmp2-shots, kit, taps, help, mca, unit (all pass; help after the
   rewrite).
 
+- N6 (Integrator 1, October 5, 2026): five failures. On the heads of 22:00 UTC, four pass (the
+  shipped-text-option list in cmp2-engine, help.spec's how-to and About limits, fx6-2's 95-character
+  how-to). hl1's jellyfish rest-height (and waterfall floor) is a timing-sensitive check, not this
+  lane's change: with #289 it failed 5 of 6 runs; main passed 4 of 4 and main with 14 comment lines
+  3 of 3; but main with the same 14 lines of code under an option type nothing uses (so it never
+  runs) failed 1 of 3 (waterfall floor). No toy in hl1's sample shows a text box with #289 (checked
+  in the browser: none; canvas 390x645 for all). Codex's corrected facts (#278) are in the About
+  texts: swaps "or moves for merge sort"; the Enigma's "occasional double step" (no odometer).
+
 ## Notes", "## Known issues" and "##
 
 For the Operator" current). Model: Opus 5.5.
