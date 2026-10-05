@@ -409,8 +409,8 @@ export function xrayColor([o, n, mt]) {
   const ws = wo + wn + wm || 1;
   const hue = [0, 1, 2].map((k) => (XR_ORG[k] * wo + XR_INO[k] * wn + XR_MET[k] * wm) / ws);
   const a = 1 - Math.exp(-T * 2.2);
-  const dark = Math.exp(-Math.max(0, T - 1.3) * 0.75);
-  return [0, 1, 2].map((k) => (XR_BG[k] * (1 - a) + hue[k] * a) * (0.35 + 0.65 * dark));
+  const dark = Math.exp(-Math.max(0, T - 1.3) * 0.9);
+  return [0, 1, 2].map((k) => (XR_BG[k] * (1 - a) + hue[k] * a) * (0.15 + 0.85 * dark));
 }
 
 const XR = {
@@ -1840,22 +1840,6 @@ function buildThermal(k) {
       pattern: false,
     };
   });
-  // The camera's color scale, beside the scene, in thermal view only.
-  k.cloud({ share: 0.012, jitter: 0 }, (rand, i, n) => {
-    const t = rand();
-    const w = rand() - 0.5;
-    const T = TH.lo + (TH.hi - TH.lo) * t;
-    return {
-      p: [-1.35, 0.05 + 1.0 * t, -0.85 + w * 0.06],
-      color: ironColor(T),
-      n: [0, 0, 1],
-      size: 0.8,
-      kind: "fade",
-      params: [0, -0.99],
-      channel: 1 + (i % 3),
-      pattern: false,
-    };
-  });
   k.reach([0, 1.6, 0]);
 }
 
@@ -1938,7 +1922,8 @@ export const RECIPES = {
     controls: [{ key: "dense", label: "Shell only", type: "toggle", ease: 1.6 }],
     action: { key: "dense", label: "Shell only, or the whole walnut" },
     note: "Drag up or down on the walnut to cut into it.",
-    drag: cutDrag(walnutCut, (p) => p[1]),
+    // (Its recipe units are voxels; a drag across the walnut cuts all the way.)
+    drag: cutDrag(walnutCut, (p) => p[1] / 75),
     credits: [
       {
         label: "Walnut",

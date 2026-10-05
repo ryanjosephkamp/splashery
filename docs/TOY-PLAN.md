@@ -2996,9 +2996,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea
     cooling and a hand warmer (lane Imaging; labs only).
   - Effect: A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap
-    crossfades from normal colors to the thermal camera's false colors (the iron palette, with a
-    color scale), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam
-    thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.
+    crossfades from normal colors to the thermal camera's false colors (the iron palette), and the
+    tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays
+    warm and the ice water cold. A second tap goes back to normal colors.
   - Improved: Imaging: new toy.
   - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
     turns off.
