@@ -60,6 +60,9 @@ READY, merge origin/main into your branch (a merge commit) and rebuild `site/`.
 
 October 5, 2026. Model: Opus 5.5.
 
+READY (13:20 UTC): PRs #305 (engine, merge first) and #307 are drafts; main (#308) merged in and
+`site/` rebuilt. The walk-through card `tpg-walkthrough` on Effect review page 2 has no mark yet.
+
 - **Engine PR #305** (`claude/lane-toy-pages-engine`): `Viewer.setTheme` keeps a theme that arrives
   before the player has started (`Player.init` applies it), instead of throwing. The guard is in
   `src/viewer.js` rather than `src/embed.js`, so `<splashery-toy>` is covered too. Test
