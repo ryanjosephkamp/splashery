@@ -190,3 +190,15 @@ over it), so it is the base the later lane builds on.
 ## Known issues
 
 ## For the Operator
+
+- October 5, 2026, 08:20 UTC: the Operator accepted the small edits to `src/science/field.js`,
+  `crystal.js` and `smlm.js` (listed under "Deviations" in #270). On the branch,
+  `tests/sci.spec.mjs` and `tests/sci-engine.spec.mjs` pass together with both sci3 specs (48
+  passed).
+- An elliptical galaxy and a merger (IllustrisTNG or EAGLE): not pursued. Both need a personal
+  account and an API key, and CLAUDE.md approves only `HF_TOKEN` as a build-time secret; FIRE-2's
+  public release (no key) has neither. Listed under "Deviations" in #270. If the owner wants them,
+  he would register for the TNG public data and add its key as a build-time secret; a later lane
+  could then cut a merger the same way `tools/sci3-galaxy.mjs` cuts FIRE-2.
+- Open marks rounds: waiting for the owner on `sci3-cryoem-model-r2`, `sci3-telescope-r2`,
+  `sci3-cryoem-capsid-r3` and `sci3-telescope-filters-r2`; every other card is marked good.
