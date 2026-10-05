@@ -140,6 +140,49 @@ should open the green code's link or nothing.
 
 ## State
 
+READY (October 5, 2026). Everything in the brief and X2 and X3 is on the branch (PR #267):
+
+- **Item 1, How a QR code works** (`qr-anatomy`): the parts and the encoding steps, computed by
+  `src/qr-lab/steps.js` and checked step by step against Nayuki's encoder
+  (`tests/qrs-steps.spec.mjs`).
+- **Item 2, the Damage lab** (`qr-damage`): 14 kinds of damage, one code or the four levels side by
+  side, a meter that reads the stage with jsQR and counts each block's losses
+  (`tests/qrs-toys.spec.mjs`: the meter equals jsQR on a fixed set of 10).
+- **X3, the code that heals**: real Reed–Solomon decoding, block by block
+  (`tests/qrs-heal.spec.mjs`).
+- **X2, three codes in one** (`qr-three`) and its study.
+- **Items 3 and 4, the study**: `tools/qrs-study.mjs`, the report
+  `docs/research/qr-splat-study-2026-10.md` (43,240 captures, three readers, thresholds, the shapes
+  answer, X2, prior work, limits) and the phone sheet (form below).
+- Clips: 8 cards on Effect review page 2 (lane QRLabR2); marks checked hourly.
+
+## Phone check (for the owner, through the Operator)
+
+The test sheet is `docs/research/qr-splat-study-2026-10/phone-sheet.html` (and `phone-sheet.png`):
+50 codes, S01 to S50. Open it on a computer screen or print it, point the phone's camera app at each
+code, and note what happens. For each code, write the letter: **Y** it opened the right link or
+text, **N** nothing, **W** something else (say what). Also say which phone and camera app.
+
+| Ids     | Results (Y / N / W) |
+| ------- | ------------------- |
+| S01–S10 |                     |
+| S11–S20 |                     |
+| S21–S30 |                     |
+| S31–S40 |                     |
+| S41–S50 |                     |
+
+The study's predictions (zxing-cpp on simulated phone captures) are printed under each code on the
+sheet. S48 (Micro QR) and S49 (rMQR) have no prediction for phone apps; S50, the three-color code,
+should open the green code's link or nothing.
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
+- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
+  What was cut), opened early and pushed after each finished item. Finish every working turn with a
+  final message that starts "READY:", "WORKING:" or "BLOCKED:".
+
+## State
+
 WORKING (October 5, 2026). Done so far, on the branch:
 
 - **Item 1, How a QR code works** (`qr-anatomy`, labs, Studio shelf): tap through the parts
@@ -186,4 +229,16 @@ devDependencies.
 
 ## Known issues
 
+- The "Move in time" motion was fixed after the study's run (modules dipped behind the sheet and
+  vanished); the report says so, and the posted clip shows the old motion at small amounts.
+- The Damage lab's block counts and jsQR can disagree (blurred, shrunk or faded splats keep every
+  module's center right while jsQR fails); the meter shows both and says why.
+- Healing and the eased motions run slowly in the software renderer.
+- Three codes in one: a short jump from the colored square to the red layer as it pulls apart.
+
 ## For the Operator
+
+- New build-only devDependencies (pinned, MIT, in LICENSES.md): zxing-wasm 3.1.4 and bwip-js 4.11.4.
+  No new library in the page; no engine PR.
+- The phone check needs the owner: the form above.
+- The full suite was not run here (the Integrators run it); my specs (`tests/qrs*.spec.mjs`) pass.
