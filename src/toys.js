@@ -3462,6 +3462,27 @@ export const TOYS = [
     tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: viewers (lane Viewers) ----
+  {
+    id: "splat-toolkit",
+    label: "Splat toolkit",
+    category: "studio",
+    kind: "kit",
+    pack: "viewers",
+    labs: true,
+    tags: "gaussian splats ply splat spz sog compressed convert converter crop floaters outlier filter clean decimate shrink compare stats file tool",
+    camera: { yaw: 0.45, pitch: 0.2, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "point-clouds",
+    label: "Point clouds",
+    category: "studio",
+    kind: "kit",
+    pack: "viewers",
+    labs: true,
+    tags: "lidar las laz ply xyz pts point cloud survey usgs 3dep terrain classification intensity measure distance crop thin gis",
+    camera: { yaw: 0.6, pitch: 0.55, roll: 0, distance: 3.3 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",

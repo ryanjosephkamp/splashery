@@ -2242,6 +2242,20 @@
       "sound": "A soft, level breath of air as the flight sets off and as the camera comes home; during the flight of a video you opened, the video's own sound.",
       "improved": "Video to 3D (spike): Splat.js (MIT) vendored and loaded only when a video is opened; frames picked by sharpness; the result converted from Splat.js's PLY into kit splats with their own sizes and rotations; save as PLY; timing readout per stage."
     },
+    "splat-toolkit": {
+      "v": "new",
+      "owner": "The owner's Push Plan pick S3, \"Useful to everyone who makes splats\" (October 4, 2026; lane Viewers; labs only).",
+      "effect": "A splat file opened on the device: its numbers (splat count, size, harmonics degree, file size, memory); crop with a box (its outline drawn), remove floaters with a statistical outlier filter you tune (removed splats in red, or before and after side by side), shrink to a share of the splats, save as PLY, SPZ, SOG or .splat, and compare two splats side by side. The tap spins it round once, each splat about its own middle, both in step (3 s).",
+      "sound": "A soft swish of air as it spins.",
+      "improved": "Viewers: readers for PLY (binary, text and compressed), .splat, SPZ 1 to 3 and SOG 2 (zipped or as meta.json with its pictures); writers for PLY, SPZ 3, SOG 2 (base colors) and .splat; everything in a worker; the preview draws the most visible splats within the device's budget. Samples: the cactus, strawberry and bee captures, and the cactus with 0.6% stray splats added."
+    },
+    "point-clouds": {
+      "v": "new",
+      "owner": "The owner's Push Plan pick S2, \"Absolutely, yes ... maybe even a little bit more\" (October 4, 2026; lane Viewers; labs only).",
+      "effect": "LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity, classification (with a legend) or the file's own colors; measure the distance between two tapped points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line up through the points, from the lowest to the highest (2.6 s).",
+      "sound": "A rising airy tone with faint ticks as the scan line climbs.",
+      "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, the Grand Canyon's South Rim."
+    },
     "thermal-ellipsoids": {
       "v": "keep",
       "owner": "The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer \"Science yes\" (lane Science; labs only).",

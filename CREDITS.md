@@ -421,6 +421,32 @@ The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
 read in their browser and never uploaded.
 
+The Splat toolkit (a labs toy, lane Viewers) uses three of the captured toys above as its samples
+(the cactus, the strawberry and the Japanese bee, with their credits and licenses as listed there);
+its "cactus with stray splats" sample adds 0.6% made-up stray splats to the cactus, made on the
+device. Its .sog reading and saving use the WebP codec from
+[splat-transform](https://github.com/playcanvas/splat-transform) (PlayCanvas, MIT), which is
+[libwebp](https://chromium.googlesource.com/webm/libwebp) (Google, BSD-3-Clause) compiled to
+WebAssembly.
+
+The Point clouds toy (a labs toy, lane Viewers) ships three lidar samples in
+`assets/toys/point-clouds/`, each made by `tools/vwr-samples.mjs` from the U.S. Geological Survey's
+3D Elevation Program (3DEP) point clouds, read from the
+[USGS 3DEP Entwine Point Tiles on AWS](https://registry.opendata.aws/usgs-lidar/). They are U.S.
+Government works in the
+[public domain](https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map)
+(checked on the AWS registry page on October 5, 2026). Courtesy of the U.S. Geological Survey.
+
+- Palace of Fine Arts, San Francisco: project CA_SanFrancisco_1_B23, a 300 m box, 450,000 of its 8
+  million points.
+- Golden Gate Bridge's south end and Fort Point: project CA_SanFrancisco_1_B23, a 340 m box, 450,000
+  points.
+- Grand Canyon's South Rim at Mather Point: project AZ_GrandCanyonNP_1_2019, a 900 m box, 450,000
+  points.
+
+Each keeps the points' classification and intensity, without the noise classes, moved to UTM meters.
+LAZ files are read with [laz-perf](https://github.com/hobuinc/laz-perf) (Hobu, Inc., Apache-2.0).
+
 ## Sound effects (lane Sound C)
 
 Recorded sound effects for the owner's sound notes of October 2, 2026, in `assets/sounds/`. Every

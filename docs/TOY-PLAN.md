@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
+- 375 toys. 345 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 5.
+- **new** (needs its own effect): 7.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -59,8 +59,8 @@ Proposals below are suggestions; the owner may change them.
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Moving photo to 3D, Video to 3D, Splat toolkit, Point clouds, Splat field, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -69,7 +69,7 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code,
-  Video to 3D
+  Video to 3D, Splat toolkit, Point clouds
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2763,7 +2763,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (9)
+## Studio (11)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2860,6 +2860,35 @@ Proposals below are suggestions; the owner may change them.
     own sizes and rotations; save as PLY; timing readout per stage.
   - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
     the flight of a video you opened, the video's own sound.
+- **Splat toolkit** (`splat-toolkit`). Now: tap: Spin it round (both, in step). Plan: new effect
+  (E6).
+  - Owner: The owner's Push Plan pick S3, "Useful to everyone who makes splats" (October 4, 2026;
+    lane Viewers; labs only).
+  - Effect: A splat file opened on the device: its numbers (splat count, size, harmonics degree,
+    file size, memory); crop with a box (its outline drawn), remove floaters with a statistical
+    outlier filter you tune (removed splats in red, or before and after side by side), shrink to a
+    share of the splats, save as PLY, SPZ, SOG or .splat, and compare two splats side by side. The
+    tap spins it round once, each splat about its own middle, both in step (3 s).
+  - Improved: Viewers: readers for PLY (binary, text and compressed), .splat, SPZ 1 to 3 and SOG 2
+    (zipped or as meta.json with its pictures); writers for PLY, SPZ 3, SOG 2 (base colors) and
+    .splat; everything in a worker; the preview draws the most visible splats within the device's
+    budget. Samples: the cactus, strawberry and bee captures, and the cactus with 0.6% stray splats
+    added.
+  - Sound: A soft swish of air as it spins.
+- **Point clouds** (`point-clouds`). Now: tap: Sweep a lidar scan line over it. Plan: new effect
+  (E6).
+  - Owner: The owner's Push Plan pick S2, "Absolutely, yes ... maybe even a little bit more"
+    (October 4, 2026; lane Viewers; labs only).
+  - Effect: LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity,
+    classification (with a legend) or the file's own colors; measure the distance between two tapped
+    points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save
+    as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line up through the points, from the
+    lowest to the highest (2.6 s).
+  - Improved: Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf
+    (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ
+    writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of
+    Fine Arts, the Golden Gate Bridge's south end, the Grand Canyon's South Rim.
+  - Sound: A rising airy tone with faint ticks as the scan line climbs.
 
 ## Lab (2)
 

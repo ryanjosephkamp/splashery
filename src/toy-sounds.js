@@ -2721,6 +2721,14 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 700, to: 1, decay: 1.2, vol: 0.22 },
     off: { voice: "whoosh", f: 600, to: 1, decay: 1.0, vol: 0.18 },
   },
+  // ---- Viewers (lane Viewers) ---------------------------------------------------------
+  // The Splat toolkit's spin: a soft swish of air as the splats turn round together.
+  "splat-toolkit": { voice: "whoosh", f: 520, to: 1.3, decay: 2.2, vol: 0.2 },
+  // Point clouds: a lidar sweep, a rising airy tone with faint ticks as the scan line climbs.
+  "point-clouds": [
+    { voice: "whoosh", f: 380, to: 2.2, decay: 2.4, vol: 0.18 },
+    { voice: "sparkle", at: 0.1, f: 4200, n: 6, decay: 2, vol: 0.12 },
+  ],
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).

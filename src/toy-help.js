@@ -1707,6 +1707,20 @@ export const TOY_HELP = {
       "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
   },
 
+  // ---- Viewers (lane Viewers) -------------------------------------------------------------
+  "splat-toolkit": {
+    howTo:
+      "Tap to spin it round. Open your own splat file in the Toy tab to crop it, clean it, shrink it or save it in another format.",
+    about:
+      "A 3D Gaussian splat file is a long list of soft colored blobs, each with a place, a size in three directions, a turn, an opacity and a color (sometimes a color that changes with the viewing angle, called spherical harmonics). This toolkit opens the common formats (PLY, compressed PLY, .splat, SPZ and SOG) and shows what is inside: how many splats, how big the scene is, the harmonics' degree, and the memory it takes.\n\nCrop keeps what is inside a box. Remove floaters finds the stray blobs a capture leaves in the air: for each splat it measures the average distance to its nearest neighbors, and those much farther out than the rest (a statistical outlier filter) are removed; show them in red, or before and after side by side. Shrink keeps the splats that show most. Save writes the result in the format you choose, and Compare puts a second splat beside the first, turning in step. Everything runs on your device in the background; nothing is uploaded.",
+  },
+  "point-clouds": {
+    howTo:
+      "Tap to sweep a lidar scan line over it. Turn on Measure in the Toy tab and tap two points for the distance between them.",
+    about:
+      "A lidar scanner sends out laser pulses and times their echoes, so each echo becomes a point with its place, how strongly it reflected (intensity) and often a class (ground, vegetation, building, water). Millions of points make a point cloud. This toy opens LAS, LAZ (compressed LAS), PLY, XYZ and PTS files and draws every point as a small splat, colored by height, intensity, classification or the file's own colors.\n\nThe samples are real airborne lidar from the U.S. Geological Survey's 3D Elevation Program, which is mapping the whole country: San Francisco's Palace of Fine Arts, the Golden Gate Bridge's south end with Fort Point, and the Grand Canyon's South Rim. Measure gives the straight distance between two points, the distance along the ground and the rise. Crop and Thin work on every point, and Save writes PLY, LAS or XYZ. Your files stay on your device.",
+  },
+
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
     howTo: "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",

@@ -13,20 +13,20 @@ Notes", "## Known issues" and "## For the Operator" current). Model: Opus 5.5.
 
 Two labs tools for files people already have, on the device (nothing uploaded):
 
-1. **Splat toolkit** (S3, "Useful to everyone who makes splats"). Open .ply (3D Gaussian
-   splatting), .splat, .spz and .sog files (check what the vendored PlayCanvas 2.22.3 and tools
-   already read; add a reader where needed under the library rule). Show the stats (splat count,
-   bounds, spherical-harmonics degree, file size, memory). Crop with a box, remove floaters (a
-   statistical outlier filter you can tune, with a before/after), shrink (decimate to a target
-   count), convert and save to another format (a download the person chooses), and compare two
-   splats side by side in step. Fast on large files: work in a worker, show progress.
+1. **Splat toolkit** (S3, "Useful to everyone who makes splats"). Open .ply (3D Gaussian splatting),
+   .splat, .spz and .sog files (check what the vendored PlayCanvas 2.22.3 and tools already read;
+   add a reader where needed under the library rule). Show the stats (splat count, bounds,
+   spherical-harmonics degree, file size, memory). Crop with a box, remove floaters (a statistical
+   outlier filter you can tune, with a before/after), shrink (decimate to a target count), convert
+   and save to another format (a download the person chooses), and compare two splats side by side
+   in step. Fast on large files: work in a worker, show progress.
 2. **Point clouds** (S2, "Absolutely, yes ... maybe even a little bit more"). Open LAS, LAZ, PLY,
    XYZ and PTS; draw the points as splats; color by height, intensity, classification or the file's
    own color; measure a distance; crop; thin; export. LAZ needs a library: the owner approved a LAZ
    reader on October 4, 2026. Prefer a permissive license; if the only good one is LGPL, use it (he
    approved it by name) and say so in LICENSES.md and the PR. Load it only when a LAZ file is
-   opened. Include two or three small sample files under allowed licenses (USGS 3DEP lidar is
-   public domain; OpenTopography lists licenses per dataset), credited.
+   opened. Include two or three small sample files under allowed licenses (USGS 3DEP lidar is public
+   domain; OpenTopography lists licenses per dataset), credited.
 
 Both toys on the Studio or Lab shelf (your choice; say why), labs only. Tests in
 `tests/vwr*.spec.mjs` with small generated test files (no outside files in tests): each format
