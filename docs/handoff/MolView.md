@@ -10,24 +10,24 @@ Molecule viewer: open a molecule, or fetch one by its PDB code". Handoff file:
 docs/handoff/MolView.md (create it; start it with this brief, word for word, under "## Brief", then
 keep "## State
 
-READY (October 5, 2026): built, tested and the clips posted. Waiting on the owner's marks and the
-merges (engine PR #300 first, then #295).
+READY (October 5, 2026, evening): #300 (engine) and #295 (the toy) merged. Polish round on
+`claude/lane-molecule-viewer-polish`, PR #317 ("Phase Molecule viewer polish: sharper atoms, ribbons
+and surface"), from the Operator's message of 15:42 UTC quoting the owner: "the toys could still be
+sharper".
 
-- Clips on Effect review page 2 (lane record `MolView`, which the Operator still has to create):
-  `mol-measure-crambin`, `mol-measure-caffeine`, `mol-fetch-1ema`, `mol-dna-1bna`,
-  `mol-surface-1lyz`, `mol-spacefill-1crn`, `mol-big-1aon-phone`.
-- Engine PR #300 ("Engine: a tap can say something, and a toy's panel can take dropped files",
-  branch `claude/lane-molecule-viewer-engine`) should merge first; this branch has it merged in.
-- The toy `molecule-viewer` (labs, Atoms shelf): `src/packs/molecule-viewer.js` and `src/molview/`
-  (parse, worker, load, geom, draw, radii).
-- Samples (a dated snapshot, fetched October 5, 2026, CC0): 1CRN, 1EMA, 1LYZ, 1BNA (DNA) and
-  caffeine (Chemical Component CFF, ideal coordinates), in `assets/toys/molecule-viewer/`.
-- Tests: `tests/mol.spec.mjs` (27; the RCSB fetch mocked twice, in Node and with `page.route`),
-  `tests/mol-engine.spec.mjs` (2). Evidence: `docs/evidence/molecule-viewer.json`.
-- Tools: `tools/mol-clip.mjs` (phone-size MP4 clips of the whole page, the toast included),
-  `tools/mol-shot.mjs` (stills).
+- Done: twice the kit's splat budget (within the tier caps), the labs sharp kernel, denser ribbons
+  and balls, a surface refined onto its true level with exact normals and blended color seams,
+  ambient occlusion for space-filling and surface, clips and stills at a phone's device pixel ratio
+  of 2.
+- Clips beside the old ones on Effect review page 2: `molp-measure-crambin`,
+  `molp-measure-caffeine`, `molp-fetch-1ema`, `molp-dna-1bna`, `molp-surface-1lyz`,
+  `molp-spacefill-1crn`, `molp-big-1aon-phone`. Thumbnail and screenshots re-rendered.
 
 ## Notes
+
+- Polish round: phones draw the canvas at a device pixel ratio of up to 2 (the stage's cap), so
+  `tools/mol-clip.mjs` and `tools/mol-shot.mjs` render at 2 by default (`--dpr=1` / `DPR=1` for the
+  old size). The first round's clips were at 1 and looked softer than a phone shows.
 
 - Readers: PDB (fixed columns, HELIX/SHEET, CONECT, JRNL, AUTHOR, REMARK 2), mmCIF (streamed through
   `eachCifToken`/`readCif` from `src/chem/protein.js`; `_struct_conf`, `_struct_sheet_range`,
