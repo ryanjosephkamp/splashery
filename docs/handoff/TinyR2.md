@@ -42,8 +42,9 @@ for a long job, schedule a check-in with send_later instead of going idle.
 
 ## State
 
-WORKING (October 5, 2026): all four toys built, tested and documented; clips rendering for Effect
-review page 2.
+READY for review (October 5, 2026): all four toys built, tested and documented; clips posted on
+Effect review page 2 (cards tw2-dna-to-protein, tw2-mitosis, tw2-apoptosis, tw2-phagocytosis; lane
+record TinyR2). An hourly check-in reads the owner's marks.
 
 - **DNA to protein** (`dna-to-protein`): four NCBI genes (HBB, INS, LYZ, GFP) with the alpha carbons
   of PDB 4HHB, 1MSO, 1LZ1, 1GFL in `src/tiny/genes.js` (`node tools/tw2-genes.mjs` rebuilds it and
@@ -56,7 +57,7 @@ review page 2.
 - **Phagocytosis** (`phagocytosis`): a neutrophil wraps a bacterium into a phagosome, lysosomes
   fuse, digestion, the waste goes out (16 s), with labels for each step.
 - Evidence files for all four; tests `tests/tw2-dna.spec.mjs` and `tests/tw2-cells.spec.mjs`.
-- Next: post the clips on Effect review page 2 and read the owner's marks.
+- Next: the owner's marks; fix any notes in this PR.
 
 ## Notes
 
