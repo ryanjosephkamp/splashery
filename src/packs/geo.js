@@ -357,8 +357,20 @@ const GRAND_CANYON = {
 const MSH_FILE = "assets/toys/st-helens/terrain.bin.gz";
 const MSH_PIC = "assets/toys/st-helens/color.jpg";
 const MSH_T = 6;
-const PLUME = 34; // ash puffs (tokens)
+const PLUME = 10; // the ash column's segments (parts), from the vent up
+const PLUME_H = 0.9; // the column's height (recipe units; the real one rose about 24 km)
 const BLAST = 10; // the lateral blast's dark clouds (tokens)
+const PLUME_SUN = vec.unit([-0.55, 0.7, 0.45]); // the morning sun, from the southeast-ish front left
+
+// The ash column, segment by segment: its height, its radius, and whether it is the umbrella
+// at the top, where the column stops rising and spreads.
+function plumeSeg(j) {
+  const f = j / (PLUME - 1);
+  const h = 0.06 + f * PLUME_H * 0.88;
+  const top = j >= PLUME - 2;
+  const r = top ? 0.2 + 0.1 * (j - (PLUME - 2)) : 0.045 + 0.13 * f;
+  return { h, r, top, f };
+}
 
 // 1979's colors from height: forest, then alpine meadow and rock, then snow.
 function mshBefore(m, n, u, v) {
@@ -410,39 +422,45 @@ const ST_HELENS = {
     const tokens = [];
     const C = d.crater;
     const going = st.dir >= 0 && c.erupt > 0 && c.erupt < 1;
-    // The ash column: puffs rise from the crater, spread at the top and drift east.
-    for (let i = 0; i < PLUME; i++) {
-      const born = 0.8 + (i / PLUME) * 3.2;
-      const age = s - born;
-      const on = going && age > 0;
-      const up = Math.min(1, age / 2.2);
-      const h = 1.1 * Math.sqrt(Math.max(0, up)) * (0.75 + 0.25 * ((i * 0.618) % 1));
-      const spread = 0.12 * up + 0.25 * smoothstep(0.7, 1.0, up);
-      const a = i * 2.39996;
-      tokens.push({
-        base: C,
-        offset: [
-          Math.cos(a) * spread + 0.25 * Math.max(0, age - 1.5),
-          h,
-          Math.sin(a) * spread * 0.6,
-        ],
-        visible: on ? clamp(Math.min(age * 3, (MSH_T - 0.2 - s) * 0.9), 0, 1) : 0,
-      });
+    // The ash column: each segment rises from the vent to its height, swelling as it rises,
+    // then billows (turns slowly, each the other way from its neighbors) and drifts east on the
+    // wind, more the higher it is. At the end the wind carries it off and it thins away.
+    const away = ease(seg(s, MSH_T - 1.4, MSH_T - 0.15));
+    for (let j = 0; j < PLUME; j++) {
+      const P = plumeSeg(j);
+      const at = 0.75 + j * 0.2;
+      const p = ease(seg(s, at, at + 1.3));
+      const age = Math.max(0, s - at);
+      const drift = (0.03 + 0.12 * P.f) * age + 1.6 * away * away * (0.5 + P.f);
+      out.parts[`plume${j}`] = {
+        offset: [drift, -(1 - p) * P.h, 0.02 * Math.sin(age * 0.9 + j)],
+        quat: quatAxisAngle([0, 1, 0], (j % 2 ? 1 : -1) * (0.18 * age + 0.4 * p)),
+        scale: 0.3 + 0.7 * p + 0.04 * age,
+        // Shown whole or not at all (a part shown in part draws as a speckle).
+        visible: going && age > 0 && p > 0.02 && away < 0.98 ? 1 : 0,
+      };
     }
     // The lateral blast: low dark clouds racing north over the ridges.
     for (let i = 0; i < BLAST; i++) {
-      const age = s - 0.5 - i * 0.04;
-      const run = clamp(age / 1.6, 0, 1);
-      const a = (-0.5 + i / (BLAST - 1)) * 1.6; // a fan about north
-      const r = 0.15 + 0.85 * ease(run);
+      const jit = (i * 0.618034) % 1; // each cloud its own reach and moment
+      const age = s - 0.5 - 0.25 * jit;
+      const run = clamp(age / (1.3 + 0.5 * jit), 0, 1);
+      const a = (-0.5 + i / (BLAST - 1)) * 1.6 + 0.15 * (jit - 0.5); // a fan about north
+      const r = 0.12 + (0.5 + 0.45 * ((i * 0.381966) % 1)) * ease(run);
       tokens.push({
         base: C,
-        offset: [Math.sin(a) * r, -0.12 - 0.05 * run, -Math.cos(a) * r],
-        visible: going && age > 0 ? clamp((1 - run) * 3, 0, 1) : 0,
+        // Racing out over the ridges, then settling into the ground as ash.
+        offset: [
+          Math.sin(a) * r,
+          -0.12 - 0.05 * run - 0.2 * ease(seg(age, 1.3, 2.2)),
+          -Math.cos(a) * r,
+        ],
+        visible: going && age > 0 && age < 2.2 ? 1 : 0,
       });
     }
     out.tokens = tokens;
     resortWhileMoving(out, d, s, going);
+    sortWhileMoving(out, d, s, going, 0.3);
   },
   build(k) {
     const g = geoLoaded(MSH_FILE);
@@ -481,33 +499,84 @@ const ST_HELENS = {
       },
       color: (c) => (c.wall ? shade("#6e665d", 0.75) : shade(img.sample(c.u, c.v), 0.9 * hill(c.n, 0.3) + 0.1)), // prettier-ignore
     });
-    // Ash puffs: billows of a few overlapping balls, one token each, hidden at rest.
-    const puff = (i, r, col, n, tone) => {
-      const lobes = [0, 1, 2, 3].map((j) => {
-        const a = i * 1.7 + j * 2.1;
-        return j === 0 ? [0, 0, 0, r] : [Math.cos(a) * r * 0.7, (j - 1.5) * r * 0.35, Math.sin(a) * r * 0.7, r * 0.6]; // prettier-ignore
-      });
-      k.cloud({ share: n, size: 1 }, (rand) => {
-        const L = lobes[Math.floor(rand() * 4)];
-        const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
-        const q = Math.cbrt(rand()) * L[3];
-        const lit = 0.3 * Math.max(0, d[1]) - 0.15 * Math.max(0, -d[1]);
-        return {
-          p: [
-            crater[0] + L[0] + d[0] * q,
-            crater[1] + L[1] + d[1] * q,
-            crater[2] + L[2] + d[2] * q,
-          ],
-          color: shade(col, tone + lit - 0.08 * rand()),
-          size: 1.5,
-          opacity: 0.8,
-          kind: "token",
-          params: [i, 0],
-        };
-      });
+    // The ash column: each segment a ring of cauliflower billows (balls of smaller balls, their
+    // surfaces only, so the edges stay crisp), lit by the sun on one side and in its own shadow
+    // on the other; dark and dense near the vent, paler and steamier higher up.
+    const base = () => k.baseSize || 0.01;
+    const billow = (part, c, r, tone, n, rand) => {
+      // A ball with lumps on it, and smaller lumps on those: cauliflower.
+      const subs = [[0, 0, 0, r]];
+      for (let j = 0; j < 7; j++) {
+        const d = vec.unit([rand() - 0.5, rand() * 0.9 - 0.15, rand() - 0.5]);
+        const sr = r * (0.38 + 0.18 * rand());
+        subs.push([d[0] * r * 0.85, d[1] * r * 0.85, d[2] * r * 0.85, sr]);
+        const d2 = vec.unit([d[0] + rand() - 0.5, d[1] + rand() * 0.6, d[2] + rand() - 0.5]);
+        subs.push([d[0] * r * 0.85 + d2[0] * sr * 0.8, d[1] * r * 0.85 + d2[1] * sr * 0.8, d[2] * r * 0.85 + d2[2] * sr * 0.8, sr * 0.5]); // prettier-ignore
+      }
+      const area = subs.reduce((s, q) => s + q[3] * q[3], 0);
+      const pts = [];
+      for (const q of subs) {
+        const m = Math.max(12, Math.round((n * q[3] * q[3]) / area));
+        for (let i = 0; i < m; i++) {
+          const y = 1 - (2 * (i + 0.5)) / m;
+          const rr = Math.sqrt(1 - y * y);
+          const nrm = [
+            Math.cos(i * 2.39996 + q[3] * 50) * rr,
+            y,
+            Math.sin(i * 2.39996 + q[3] * 50) * rr,
+          ];
+          const p = [
+            c[0] + q[0] + nrm[0] * q[3],
+            c[1] + q[1] + nrm[1] * q[3],
+            c[2] + q[2] + nrm[2] * q[3],
+          ];
+          // Inside another ball: hidden, so leave it out.
+          if (subs.some((o) => o !== q && Math.hypot(p[0] - c[0] - o[0], p[1] - c[1] - o[1], p[2] - c[2] - o[2]) < o[3] * 0.97)) continue; // prettier-ignore
+          const sun = Math.max(0, vec.dot(nrm, PLUME_SUN));
+          const under = Math.max(0, -nrm[1]);
+          // Darker in the creases between lumps (near the ball's center line).
+          const crease = clamp(
+            Math.hypot(p[0] - c[0], p[1] - c[1], p[2] - c[2]) / (r * 1.1),
+            0.55,
+            1,
+          );
+          const lit = (0.36 + 0.78 * sun - 0.2 * under) * (0.7 + 0.3 * crease);
+          pts.push({ p, n: nrm, size: (q[3] * 3.1) / Math.sqrt(m), lit });
+        }
+      }
+      return pts.map((q) => ({ ...q, part, tone }));
     };
-    for (let i = 0; i < PLUME; i++) puff(i, 0.06 + 0.04 * ((i * 0.37) % 1), "#7e766c", 0.004, 0.95);
-    for (let i = 0; i < BLAST; i++) puff(PLUME + i, 0.07, "#4a443e", 0.003, 0.9);
+    const plume = [];
+    let seed = 7;
+    const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let j = 0; j < PLUME; j++) {
+      const P = plumeSeg(j);
+      const pivot = [crater[0], crater[1] + P.h, crater[2]];
+      const part = k.part(`plume${j}`, { pivot, axis: [0, 1, 0] });
+      // Dark gray-brown ash low down, paler gray above.
+      const tone = mix("#3f3a35", "#a39a8f", Math.pow(P.f, 0.8));
+      const balls = P.top ? 9 : 5 + Math.round(3 * P.f);
+      for (let b = 0; b < balls; b++) {
+        const a = b * 2.39996 + j * 0.9;
+        const ring = P.top ? P.r * (0.25 + 0.75 * Math.sqrt((b + 0.5) / balls)) : P.r * 0.55;
+        const c = [pivot[0] + Math.cos(a) * ring, pivot[1] + (P.top ? (rand() - 0.5) * 0.05 : (rand() - 0.5) * 0.06), pivot[2] + Math.sin(a) * ring * 0.8]; // prettier-ignore
+        const br = P.top ? 0.075 + 0.03 * rand() : P.r * (0.55 + 0.2 * rand());
+        plume.push(...billow(part, c, br, tone, Math.round(0.0012 * k.count), rand));
+      }
+    }
+    k.cloud({ count: (plume.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+      const q = plume[Math.min(plume.length - 1, i)];
+      return { p: q.p, n: q.n, flat: 0.35, size: q.size / base(), color: shade(q.tone, q.lit), opacity: 0.97, part: q.part, pattern: false }; // prettier-ignore
+    });
+    // The lateral blast's clouds: low dark billows, one token each, hidden at rest.
+    const blastPts = [];
+    for (let i = 0; i < BLAST; i++)
+      for (const q of billow(null, crater, 0.045 + 0.04 * ((i * 0.618034) % 1), "#4a443e", Math.round(0.0015 * k.count), rand)) // prettier-ignore
+        blastPts.push({ ...q, token: i });
+    k.cloud({ count: (blastPts.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+      const q = blastPts[Math.min(blastPts.length - 1, i)];
+      return { p: q.p, n: q.n, flat: 0.35, size: q.size / base(), color: shade(q.tone, q.lit), opacity: 0.95, kind: "token", params: [q.token, 0], pattern: false }; // prettier-ignore
+    });
     k.reach([crater[0], crater[1] + 0.7, crater[2]]);
   },
 };
