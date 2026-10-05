@@ -264,3 +264,34 @@ test("“Use my location” asks only when tapped, and the place stays on the de
   }
   await context.close();
 });
+
+// Polish (October 5, 2026): a new speed eases in instead of jumping, and the stars keep their
+// size on the screen as a pinch zooms in.
+test("a new speed eases in, and the stars keep their size on screen when zoomed", async ({
+  page,
+}) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await openSky(page, { city: "new-york", time: "2026-10-06T01:00:00Z", speed: "0" });
+  // The panel's speed choice (not the test hook, which is instant).
+  await page.evaluate(() => {
+    const sel = document.getElementById("sky-speed");
+    sel.value = "3600";
+    sel.dispatchEvent(new Event("change"));
+  });
+  const first = await page.evaluate(() => window.__splashery.sky.state());
+  expect(first.target).toBe(3600);
+  expect(first.rate).toBeLessThan(3600);
+  await expect
+    .poll(() => page.evaluate(() => window.__splashery.sky.state().rate), { timeout: 60_000 })
+    .toBe(3600);
+  // A pinch to half the field of view halves the stars' splats (the part's visibility).
+  const vis = await page.evaluate(async () => {
+    const { player } = window.__splashery;
+    player.camera.zoomBy(0.5);
+    player.camera.cur = { ...player.camera.tgt };
+    await new Promise((r) => setTimeout(r, 1500));
+    return player.motion.out.parts.stars.visible;
+  });
+  expect(vis).toBeCloseTo(0.5, 1);
+});
