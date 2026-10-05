@@ -2699,6 +2699,17 @@ export const TOY_SOUNDS = {
     off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.2, vol: 0.45 },
   },
   // Lane Live input r3: Moving photo to 3D pauses and plays with a soft click.
+  // Lane Sound and light lab: the Sound lab's switch (the tone itself plays
+  // from the toy), the recorder's soft button, the Light lab's slide changer.
+  "sound-lab": {
+    on: { voice: "switch", f: 2400, vol: 0.4 },
+    off: { voice: "switch", f: 1900, vol: 0.35 },
+  },
+  "sound-recorder": [{ voice: "click", f: 1500, decay: 0.04, vol: 0.3 }],
+  "light-lab": [
+    { voice: "click", f: 700, decay: 0.08, vol: 0.4 },
+    { voice: "click", at: 0.09, f: 950, decay: 0.05, vol: 0.3 },
+  ],
   "moving-photo-3d": {
     on: { voice: "click", f: 1200, decay: 0.05, vol: 0.35 },
     off: { voice: "click", f: 900, decay: 0.05, vol: 0.3 },

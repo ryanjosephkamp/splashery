@@ -1673,6 +1673,19 @@ export const TOY_HELP = {
     about:
       "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
   },
+  // Lane Sound and light lab.
+  "sound-lab": {
+    howTo:
+      "Tap to play or stop a tone. The Toy tab changes it, starts the metronome, or uses your microphone.",
+    about:
+      "Sound is air pressure going up and down, and this bench shows it four ways. The oscilloscope draws the wave over a few thousandths of a second. The spectrum splits it into frequencies and names the loudest. The spectrogram keeps eight seconds of spectra side by side: a whistle is a bright line, a clap a column. The level is in decibels below full scale (dBFS).\n\nTap to play the tone generator, a sine, square, saw or noise from 20 Hz to 20 kHz, through the speaker when the site's sound is on. Two close tones beat: 440 and 443 Hz swell and fade three times a second. A square wave's extra lines are its odd harmonics. Tap “Use my microphone” to see your voice instead; the sound goes only to the screen. The dB SPL figure is an uncalibrated estimate that assumes a typical phone microphone. The metronome clicks once a beat as it swings from side to side.",
+  },
+  "sound-recorder": {
+    howTo:
+      "Tap Record in the Toy tab, make your sound, then Stop. Tap the toy to play it; trim and save it there.",
+    about:
+      "A recorder for sound effects and ideas. Tap Record and the page keeps what your microphone hears, up to ten minutes. Stop shows the recording as a waveform (how loud, moment by moment) over a spectrogram (which pitches, from 40 Hz at the bottom to 16 kHz at the top). Drag Start and End, or tap Trim the silence, to keep just the part you want, and tap the toy to hear it.\n\nSave as WAV keeps every sample exactly as it was recorded (16-bit, the microphone's rate). Save as a smaller file uses your browser's own compression (Opus or AAC) and takes as long as the sound to make. The recording stays in this page's memory on your device and goes when you close the page; nothing is sent anywhere, and it's saved only to a file you choose. To show the Operator a sound you want, attach the file to a message in the chat.",
+  },
   "moving-photo-3d": {
     howTo:
       "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
@@ -1734,6 +1747,13 @@ export const TOY_HELP = {
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
+  // Lane Sound and light lab.
+  "light-lab": {
+    howTo:
+      "Tap for the next element or lamp. The Toy tab picks a prism, a grating or your camera as a spectrometer.",
+    about:
+      "Every element glows in its own colors. Its electrons jump up and fall back, each fall giving off light of one exact wavelength, so an element's light split by a prism is a few sharp lines, as unique as a fingerprint. These are the strong visible lines of sixteen elements measured by NIST, brightness from NIST's relative intensities.\n\nThe prism bends each color by Snell's law, from the glass maker's formula for its index: blue bends most. A grating (a CD, a DVD or a slide) sends each color off where d sin θ = m λ: red bends most, in several orders. Tap to change the lamp and every ray moves. Home spectrometer: hold an old CD or DVD near your camera under a fluorescent lamp, find the rainbow in it and tap “Use my camera”. It calibrates on mercury's 436 and 546 nm lines. Simplified: screens can't show pure spectral colors, and a real lamp's line strengths depend on its pressure and heat.",
+  },
   "fluid-lab": {
     howTo:
       "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
