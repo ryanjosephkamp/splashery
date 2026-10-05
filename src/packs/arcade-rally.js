@@ -7,6 +7,8 @@
 // 2D: the table seen from straight above. 3D: the table tilts toward you,
 // the camera low behind your paddle, and the same rally goes on.
 
+import { crispModel } from "./arcade-crisp.js";
+
 const W = 1.5;
 const H = 2.1;
 const BALL_R = 0.035;
@@ -28,43 +30,60 @@ class Rally {
     this.q = api.q;
     this.skill = clamp(Number(api.options.skill) || 2, 1, 3);
     const low = api.profile === "low";
-    const { kitModel } = api;
     const lit = (c, n, f = 1) => c.map((v) => v * (0.78 + 0.22 * n[1] + 0.1 * n[2]) * f);
+    // Crisp grids (src/packs/arcade-crisp.js): straight rails, clean lines.
+    const fine = low ? 0.008 : 0.005;
     this.models = {
-      table: kitModel(
-        (k) => {
+      table: crispModel(
+        (c) => {
           // Green felt with a white center line and edge lines, wooden rails.
-          k.add(k.box(W, H, 0.02), {
-            pos: [0, 0, -0.02],
-            even: true,
-            flat: 0.2,
-            color: (c) => {
-              const x = c.lp[0];
-              const y = c.lp[1];
-              const line = Math.abs(y) < 0.008 || Math.abs(Math.abs(x) - W / 2 + 0.03) < 0.006 || Math.abs(Math.abs(y) - H / 2 + 0.03) < 0.006; // prettier-ignore
-              const f = 0.92 + 0.05 * c.noise(x * 90, y * 90, 0);
-              return line ? [0.93, 0.93, 0.9] : [0.12 * f, 0.42 * f, 0.26 * f];
-            },
-          });
+          const felt = (p) => {
+            const h = Math.sin(p[0] * 12.9898 + p[1] * 78.233) * 43758.5453;
+            const f = 0.97 + 0.03 * (h - Math.floor(h));
+            return [0.12 * f, 0.42 * f, 0.26 * f];
+          };
+          c.box(W, H, 0.02, { pos: [0, 0, -0.02], color: felt, faces: "xXyYZ" });
           for (const s of [-1, 1])
-            k.add(k.box(0.05, H + 0.1, 0.08), { pos: [s * (W / 2 + 0.025), 0, 0.01], even: true, flat: 0.3, color: (c) => lit([0.45, 0.3, 0.19], c.n) }); // prettier-ignore
+            c.box(0.05, H + 0.1, 0.08, { pos: [s * (W / 2 + 0.025), 0, 0.01], color: (p, n) => lit([0.45, 0.3, 0.19], n, 0.97 + 0.03 * Math.sin(p[1] * 140)), faces: "xXyYZ" }); // prettier-ignore
         },
-        { count: low ? 4000 : 9000 },
+        { fine, coarse: 0.035 },
       ),
-      you: kitModel((k) => k.add(k.roundedBox(PAD.w, PAD.h, 0.06, 4), { even: true, color: (c) => lit([0.9, 0.42, 0.18], c.n) }), { count: low ? 300 : 600 }), // prettier-ignore
-      them: kitModel((k) => k.add(k.roundedBox(PAD.w, PAD.h, 0.06, 4), { even: true, color: (c) => lit([0.25, 0.48, 0.85], c.n) }), { count: low ? 300 : 600 }), // prettier-ignore
-      ball: kitModel(
-        (k) =>
-          k.add(k.sphere(BALL_R), {
-            even: true,
-            flat: 0.5,
-            color: (c) => {
-              const l = Math.max(0, c.n[0] * -0.3 + c.n[1] * 0.6 + c.n[2] * 0.7);
+      // The white lines, a sprite of their own just above the felt.
+      marks: crispModel(
+        (c) => {
+          const z = -0.0085;
+          const white = { color: [0.95, 0.95, 0.92] };
+          c.line([-W / 2 + 0.03, 0, z], [W / 2 - 0.03, 0, z], 0.014, white);
+          for (const s of [-1, 1]) {
+            c.line(
+              [s * (W / 2 - 0.03), -H / 2 + 0.03, z],
+              [s * (W / 2 - 0.03), H / 2 - 0.03, z],
+              0.01,
+              white,
+            );
+            c.line(
+              [-W / 2 + 0.03, s * (H / 2 - 0.03), z],
+              [W / 2 - 0.03, s * (H / 2 - 0.03), z],
+              0.01,
+              white,
+            );
+          }
+        },
+        { fine, coarse: 0.035 },
+      ),
+      you: crispModel((c) => c.box(PAD.w, PAD.h, 0.06, { color: (p, n) => lit([0.9, 0.42, 0.18], n) }), { fine, coarse: 0.02 }), // prettier-ignore
+      them: crispModel((c) => c.box(PAD.w, PAD.h, 0.06, { color: (p, n) => lit([0.25, 0.48, 0.85], n) }), { fine, coarse: 0.02 }), // prettier-ignore
+      ball: crispModel(
+        (c) =>
+          c.sphere(BALL_R, {
+            step: BALL_R / 7,
+            color: (p, n) => {
+              const l = Math.max(0, n[0] * -0.3 + n[1] * 0.6 + n[2] * 0.7);
               const f = 0.8 + 0.22 * l + 0.4 * Math.pow(l, 14);
               return [f, f * 0.97, f * 0.9];
             },
           }),
-        { count: low ? 120 : 220 },
+        { fine },
       ),
     };
   }
@@ -72,7 +91,11 @@ class Rally {
   reset() {
     const S = this.api.sprites;
     S.clear();
+    // The felt sorts below the lines, and both below what rolls on them.
     this.table = S.add(this.models.table);
+    this.table.sortBias = [0, 0, -0.1];
+    this.marks = S.add(this.models.marks);
+    this.marks.sortBias = [0, 0, -0.05];
     this.you = { x: 0, vx: 0, sprite: S.add(this.models.you) };
     this.them = { x: 0, vx: 0, sprite: S.add(this.models.them) };
     this.ball = { p: [0, 0], v: [0, 0], spin: 0, sprite: S.add(this.models.ball) };
@@ -224,6 +247,7 @@ class Rally {
       s.quat = M;
     };
     put(this.table, 0, 0);
+    put(this.marks, 0, 0);
     put(this.you.sprite, this.you.x, NEAR, 0.03);
     put(this.them.sprite, this.them.x, FAR, 0.03);
     put(this.ball.sprite, this.ball.p[0], this.ball.p[1], BALL_R + 0.005);

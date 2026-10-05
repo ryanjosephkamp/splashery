@@ -280,6 +280,12 @@ export class ArcadeLayer {
         cs[i * 3 + 1] = ce[i * 4 + 1];
         cs[i * 3 + 2] = ce[i * 4 + 2];
       }
+      for (const [start, n, b] of this.biases || [])
+        for (let i = start; i < start + n; i++) {
+          cs[i * 3] += b[0];
+          cs[i * 3 + 1] += b[1];
+          cs[i * 3 + 2] += b[2];
+        }
       c.update(this.slots, true);
     }
     this.stage.requestRender();
@@ -432,7 +438,12 @@ export class Sprites {
   write() {
     const ce = this.layer.center;
     const dy = this.layer.dyn;
+    const biases = (this.layer.biases = []);
     for (const s of this.list) {
+      // sortBias: a sprite that others rest on (a table, a floor) sorts as
+      // if moved by this (in its own axes, e.g. [0, 0, -0.1] for a board
+      // facing +z), so what stands on it draws over it from any angle.
+      if (s.sortBias && s.alive) biases.push([s.start, s.n, qrot(s.quat, s.sortBias)]);
       const m = s.model;
       const sc = Array.isArray(s.scale) ? s.scale : [s.scale, s.scale, s.scale];
       if (s.pieces) {

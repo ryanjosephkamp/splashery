@@ -36,7 +36,7 @@ const OPTS = Object.fromEntries(
 );
 const SCRIPT = opt("script", "play:4,switch,play:5,switch,play:2").split(",");
 const FPS = Number(opt("fps", 15));
-const WIDTH = Number(opt("width", 360));
+const WIDTH = Number(opt("width", 720));
 const SIZE = (opt("size", "390x844") || "390x844").split("x").map(Number);
 const PROFILE = opt("profile", "mid");
 const LABEL = opt("label", "built by Opus 5.5");
@@ -135,7 +135,7 @@ await browser.close();
 
 const ffmpeg = execFileSync("python3", ["-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]).toString().trim(); // prettier-ignore
 const out = path.join(outDir, `${name}.mp4`);
-execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(tmp, "f%04d.png"), "-vf", `scale=${WIDTH}:-2:flags=area`, "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-c:v", "libx264", "-crf", "23", out]); // prettier-ignore
+execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(tmp, "f%04d.png"), "-vf", `scale=${WIDTH}:-2:flags=area`, "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-c:v", "libx264", "-crf", "18", out]); // prettier-ignore
 // A strip of six frames.
 const files = fs.readdirSync(tmp).sort();
 const pick = [0, 1, 2, 3, 4, 5].map((i) => files[Math.round((i / 5) * (files.length - 1))]);
