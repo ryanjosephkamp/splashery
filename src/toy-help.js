@@ -1808,6 +1808,12 @@ export const TOY_HELP = {
       "A carved block hangs between a lamp and a wall, and every piece of it casts its own small shadow. Each block is carved so that from one way its shadow is a picture, a heart, a fish, a key, a house, a star, a tree or a bird, and from the side it is another; from most turns it is a jumble. Turn it until its shadow fills the outline drawn on the wall; the Match chip says how close you are. In 2D you see only the wall, as if you stood at the lamp, and turn the block by its shadow alone; the 3D button steps to the side so the lamp and the block show.",
   },
 
+  "photo-dash": {
+    howTo: "Tap or press Space to jump. Open your own photo in the Toy tab to run across it.",
+    about:
+      "Your photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track. A glass marble rolls along it by itself, a little faster each lap; tap or press Space to jump the gaps, and catch the sparks on the way. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

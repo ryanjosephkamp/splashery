@@ -107,6 +107,20 @@ function picture(k, kind) {
     box(1.6, 1.6, 0.02, [0, 0, -0.76], "#e8dfcc");
     for (const [x, y] of [[0, 0.2], [-0.2, 0], [0.2, 0], [0, -0.1], [-0.1, -0.25], [0.1, -0.25], [0, 0]]) box(0.2, 0.2, 0.01, [x, y, -0.74], "#2a282c"); // prettier-ignore
     for (const [x, y, z] of [[0, 0, 0], [0.075, 0, 0], [0, 0.075, 0], [0, 0, 0.075], [-0.075, 0, 0]]) k.add(k.box(0.072, 0.072, 0.072), { pos: [x + 0.3, y + 0.2, z + 0.3], even: true, color: (c) => lit("#c96f4a", c.n) }); // prettier-ignore
+  } else if (kind === "dash") {
+    k.cloud({ share: 0.85 }, (rand) => {
+      const x = (rand() - 0.5) * 2.6;
+      const y = (rand() - 0.5) * 2;
+      const sky = y > 0.1 + 0.1 * Math.sin(x * 3);
+      const c = sky ? [0.55, 0.72, 0.95] : [0.85, 0.25 + 0.4 * rand(), 0.3];
+      return { p: [x, y, 0], color: c, size: 1.3, n: [0, 0, 1] };
+    });
+    k.add(k.sphere(0.055), {
+      pos: [-0.5, 0.22, 0.06],
+      even: true,
+      color: (c) => lit("#3a73e6", c.n),
+      weight: 3,
+    });
   } else if (kind === "net") {
     // The cube's net of tiles, and a string of green beads.
     const A = 0.5;
@@ -643,6 +657,64 @@ export const RECIPES = {
         short: "Drag or arrows turn it · V shows the block itself",
       },
       create: async (api) => (await import("./arcade-shadows.js")).createShadows(api),
+    },
+  },
+  "photo-dash": {
+    turntable: false,
+    density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
+    options: [VIEW, { key: "source", label: "Source", type: "text", default: "", hidden: true }],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
+    build(k) {
+      stage(k, "dash");
+    },
+    input: {
+      title: "Your own photo",
+      accept: "image/png,image/jpeg,image/webp,image/avif",
+      binary: true,
+      fileButton: "Open a photo…",
+      note: "The line where the photo's sky meets its ground becomes the track. The photo is read on this device and never leaves it.",
+      async read(_text, fileName, file) {
+        if (!file) throw new Error("Open a photo.");
+        const { DASH } = await import("./arcade-dash.js");
+        DASH.file = file;
+        DASH.name = fileName;
+        return { source: "own" };
+      },
+      shown: () => "",
+    },
+    credits: [
+      {
+        label: "Photo Dash",
+        title: "Tulip field (the sample photo)",
+        source: "https://www.flickr.com/photos/14674348@N04/13825345834",
+        author: "DennisM2",
+        license: "CC0 1.0",
+        licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      },
+    ],
+    arcade: {
+      title: "Photo Dash",
+      goal: "Roll the marble along your photo's skyline. Jump the gaps; catch the sparks.",
+      stats: [
+        { key: "score", label: "Score" },
+        { key: "lives", label: "Marbles", icon: "●" },
+        { key: "lap", label: "Lap" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["fire"],
+      padLabels: { fire: "Jump" },
+      controls: {
+        keys: "Space (or ↑) jumps.",
+        mouse: "Click to jump.",
+        touch: "Tap to jump.",
+        pad: "A jumps.",
+        short: "Space or tap to jump · V raises the photo into 3D",
+      },
+      create: async (api) => (await import("./arcade-dash.js")).createDash(api),
     },
   },
 };

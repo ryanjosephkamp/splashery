@@ -3618,6 +3618,15 @@ export const TOYS = [
     labs: true,
     tags: "game arcade puzzle shadow light lamp wall silhouette turn rotate carved block 3d",
   },
+  {
+    id: "photo-dash",
+    label: "Photo Dash",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade runner run jump marble your own photo skyline relief 3d",
+  },
 ];
 
 export function findToy(id) {

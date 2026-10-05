@@ -2823,6 +2823,11 @@ export const TOY_SOUNDS = {
     { voice: "wood", f: 420, decay: 0.5, vol: 0.4 },
     { voice: "tine", at: 0.15, f: 1320, decay: 0.8, vol: 0.3 },
   ],
+  // A marble's jump and landing.
+  "photo-dash": [
+    { voice: "boing", f: 420, vol: 0.35, decay: 0.4 },
+    { voice: "glass", at: 0.2, f: 1500, vol: 0.2, decay: 0.3 },
+  ],
   // A word's brick breaking: a paper tear and a knock.
   "page-breaker": [
     { voice: "pock", f: 480, vol: 0.55 },

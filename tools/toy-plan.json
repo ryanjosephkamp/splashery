@@ -2519,6 +2519,13 @@
       "effect": "A shadow puzzle: turn a carved block between a lamp and a wall until its shadow (each piece casting its own dark splat) fills the outline of a picture; the block is carved to cast a different picture from the side. 2D shows only the wall; 3D shows the lamp and the block too.",
       "sound": "A soft rising tine as the shadow gets closer, a four-note chime when it matches.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "photo-dash": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G8 (labs only).",
+      "effect": "A run across your own photo: the line where its sky meets its ground becomes the track, and a glass marble rolls along it, faster each lap; tap to jump the gaps and catch the sparks. The 3D switch raises the photo into a relief by its brightness, and the marble rolls on it.",
+      "sound": "A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a rising three-note chime each lap.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
     }
   }
 }

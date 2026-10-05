@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 383 toys. 353 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 378.
+- 384 toys. 354 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 379.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -61,7 +61,7 @@ Proposals below are suggestions; the owner may change them.
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
   Galaxy in a box, Fluid lab, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow.
+  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2944,7 +2944,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 
-## Arcade (10)
+## Arcade (11)
 
 - **Shardball** (`shardball`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).
@@ -3027,3 +3027,11 @@ Proposals below are suggestions; the owner may change them.
     different picture from the side. 2D shows only the wall; 3D shows the lamp and the block too.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
   - Sound: A soft rising tine as the shadow gets closer, a four-note chime when it matches.
+- **Photo Dash** (`photo-dash`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G8 (labs only).
+  - Effect: A run across your own photo: the line where its sky meets its ground becomes the track,
+    and a glass marble rolls along it, faster each lap; tap to jump the gaps and catch the sparks.
+    The 3D switch raises the photo into a relief by its brightness, and the marble rolls on it.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a
+    rising three-note chime each lap.
