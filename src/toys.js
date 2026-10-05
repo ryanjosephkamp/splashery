@@ -36,6 +36,7 @@ export const CATEGORIES = [
   { id: "studio", label: "Studio" },
   { id: "lab", label: "Lab" },
   { id: "science", label: "Science" },
+  { id: "geo", label: "Earth and maps" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -3514,6 +3515,27 @@ export const TOYS = [
     labs: true,
     tags: "fluid liquid water soda honey lava pour glass splash drops viscosity smoke steam candle flame fire physics simulation lab",
     camera: { yaw: 0.45, pitch: 0.28, roll: 0, distance: 2.9 },
+  },
+  // ---- Pack: geo (lane Earth and maps) ----
+  {
+    id: "grand-canyon",
+    label: "Grand Canyon",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "grand canyon arizona colorado river terrain elevation usgs 3dep landscape relief flood map earth geography",
+    camera: { yaw: 0.35, pitch: 0.6, roll: 0, distance: 3.7 },
+  },
+  {
+    id: "st-helens",
+    label: "Mount St. Helens",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "mount st helens volcano eruption 1980 washington landslide ash terrain elevation usgs before after earth geography",
+    camera: { yaw: 2.85, pitch: 0.45, roll: 0, distance: 3.3 },
   },
   // ---- Pack: screens ----
   {
