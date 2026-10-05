@@ -1,0 +1,75 @@
+{
+  "toy": "splat-field",
+  "checked": "2026-10-04",
+  "summary": "The ocean and knot follow actual analytic coordinate formulas. The galaxy is prescribed orbital art and the taps add visual pulses. These fields demonstrate many parallel splat calculations, rather than validated galaxy or ocean dynamics.",
+  "claims": [
+    {
+      "claim": "The ocean adds four wave displacements.",
+      "how": "An independent four-wave formula matches 100 sampled positions to 12 decimal places, including the slowed time and horizontal scale.",
+      "where": "src/packs/lab.js:73",
+      "sources": [
+        {
+          "title": "Effective Water Simulation from Physical Models",
+          "publisher": "Mark Finch, GPU Gems, NVIDIA",
+          "url": "https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models",
+          "says": "Summed waves and Gerstner-style displacements provide practical water geometry for graphics."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:839",
+      "note": ""
+    },
+    {
+      "claim": "The knot is a periodic flow around a knotted tube.",
+      "how": "Its centerline winds twice around one direction and three times around the other. Sampled positions repeat after 1/0.03 time units.",
+      "where": "src/packs/lab.js:102",
+      "sources": [
+        {
+          "title": "Torus Knot",
+          "publisher": "Eric Weisstein, Wolfram MathWorld",
+          "url": "https://mathworld.wolfram.com/TorusKnot.html",
+          "says": "A torus knot winds around a torus in two relatively prime counts; the (2,3) knot is a trefoil."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:839",
+      "note": ""
+    },
+    {
+      "claim": "The galaxy is an illustrative field rather than an astronomical simulation.",
+      "how": "Its coordinates use prescribed ellipses, rotation, and a small bulge. No masses or gravitational forces are integrated.",
+      "where": "src/packs/lab.js:48",
+      "sources": [
+        {
+          "title": "Ellipse",
+          "publisher": "Eric Weisstein, Wolfram MathWorld",
+          "url": "https://mathworld.wolfram.com/Ellipse.html",
+          "says": "An ellipse can be parameterized as x = a cos(t), y = b sin(t), with different scalings on its two axes."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:839",
+      "note": "The source supports the oval geometry, not a claim that this galaxy obeys gravitational dynamics."
+    },
+    {
+      "claim": "GPU programs calculate field coordinates from u, v, and time.",
+      "how": "The pack supplies both shader languages and per-splat parameters; the CPU coordinate functions are checked independently.",
+      "where": "src/packs/lab.js:537",
+      "sources": [
+        {
+          "title": "Effective Water Simulation from Physical Models",
+          "publisher": "Mark Finch, GPU Gems, NVIDIA",
+          "url": "https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models",
+          "says": "Summed waves and Gerstner-style displacements provide practical water geometry for graphics."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:839",
+      "note": "This validates the analytic formulas, not every shader output on every GPU or a universal performance claim."
+    }
+  ],
+  "simplified": [
+    "The galaxy follows prescribed rotated ellipses and a small bulge, without gravity or interactions. Four wave formulas animate the ocean with slowed time and adjusted horizontal displacement. Tap ripples are added visual pulses. Smooth performance and particle count depend on the device and settings."
+  ],
+  "fixes": []
+}
