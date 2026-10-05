@@ -132,6 +132,20 @@ test.describe("Earth and maps", () => {
       expect(fs.statSync(`assets/toys/${f}`).size, f).toBeGreaterThan(50000);
   });
 
+  test("round 3: the living city is the Helsinki reality mesh, credited, with its night lights", async () => {
+    // The owner, October 5, 2026: "I'm fine with the Helsinki open reality mesh. Let's do it."
+    const g = parseGeo(new Uint8Array(zlib.gunzipSync(fs.readFileSync("assets/toys/living-city/city.bin.gz")))); // prettier-ignore
+    expect(g.meta.count).toBeGreaterThan(400000);
+    expect(g.meta.span[0]).toBeCloseTo(550, 0); // meters east-west
+    expect(g.meta.source).toContain("CC BY 4.0");
+    expect(fs.statSync("assets/toys/living-city/city.bin.gz").size).toBeLessThan(8 * 1024 * 1024);
+    expect(RECIPES["living-city"].credits[0]).toMatchObject({ author: "City of Helsinki", license: "CC BY 4.0" }); // prettier-ignore
+    expect(fs.readFileSync("CREDITS.md", "utf8")).toContain("Helsinki 3D reality mesh");
+    const ctx = await build("living-city");
+    // The day city fades out and the night city and its lights fade in on the same channel.
+    expect(ctx.buf.count).toBeGreaterThan(60000);
+  });
+
   test("the feed reader keeps earthquakes with every number, in time order", () => {
     const gj = {
       features: [
@@ -193,7 +207,7 @@ test.describe("Earth and maps", () => {
     });
     await page.goto(APP + "&geofeed=live");
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-    const geoFiles = (u) => /packs\/geo\.js|toys\/(grand-canyon|st-helens|sea-floor|tide-harbor|hurricane|relief-map|stork-migration|earthquakes)\/[^t]/.test(u); // prettier-ignore
+    const geoFiles = (u) => /packs\/geo\.js|toys\/(grand-canyon|st-helens|sea-floor|tide-harbor|hurricane|relief-map|living-city|stork-migration|earthquakes)\/[^t]/.test(u); // prettier-ignore
     expect(requests.filter(geoFiles)).toEqual([]);
     expect(calls).toBe(0);
     await page.evaluate(() => window.__splashery.app.chooseToy("earthquakes"));

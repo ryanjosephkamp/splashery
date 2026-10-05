@@ -2998,10 +2998,13 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft scrape and a few drips.
 - **Living city** (`living-city`). Now: tap: Day or night. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
-  - Effect: A kit-built city: cars go round their blocks on the right, an elevated train loops round
-    the edge, and a park. The tap turns day to night (walls and streets darken, each window lights
-    up at its own moment, about 4.5 s); a second tap brings the day back.
-  - Improved: Geo: new toy; cars and train are tokens on looping paths, re-sorted as they move.
+  - Effect: A real 550 m block of central Helsinki (the City of Helsinki's 2017 reality mesh, CC BY
+    4.0): Senate Square and the Cathedral, the Market Square, the South Harbor and the Uspenski
+    Cathedral. The tap turns day to night (the city dims under a blue sky, each street lamp and
+    window comes on at its own moment, the lamps lighting pools of street, about 4.5 s); a second
+    tap brings the day back.
+  - Improved: Geo r3: rebuilt from the Helsinki reality mesh (the owner: "was expecting something
+    closer to a photoreal city"; "I'm fine with the Helsinki open reality mesh").
   - Sound: A light switch and the city's low hum, darker at night.
 - **Stork migration** (`stork-migration`). Now: tap: Play the fall migration. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).

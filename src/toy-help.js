@@ -2016,10 +2016,11 @@ export const TOY_HELP = {
       "A relief map shows the shape of the land. Contour lines join points of the same height: here one every 100 meters, with a heavier line every 500, so lines close together mean a steep slope. This is Yosemite Valley in California, about 18 by 11 kilometers, with El Capitan and Half Dome rising more than 1,000 meters above the Merced River.\n\nThe heights come from the U.S. Geological Survey's 3D Elevation Program, and the streams from the National Hydrography Dataset. In the Toy tab, Map switches between height colors, the aerial photo and land cover (forest, meadow, bare rock and buildings, from the National Land Cover Database), and the switches turn the contour lines and streams on and off. Tap it and a glowing contour climbs from the valley floor to the rim while light runs down every stream, the way the water flows.",
   },
   "living-city": {
-    howTo: "Tap for night (the windows light up one by one); tap again for day.",
+    howTo: "Tap for night (the street lamps and windows come on); tap again for day.",
     about:
-      "A city made of blocks: streets with traffic going round the blocks, a park, and an elevated train looping around the edge. The buildings are taller toward the center, as in many downtowns. It is built from simple pieces rather than a real place.\n\nTap it and the sun goes down: walls and streets darken and the windows light up one at a time, while the cars and the train keep moving. Tap again for morning.",
+      "A real block of central Helsinki, Finland, from the city's own 3D model, made in 2017 from thousands of aerial photographs. The white Cathedral stands above Senate Square at the top; below are the Market Square and the South Harbor, with its sea pool, and the red-brick Uspenski Cathedral on its rock at the right edge. The block is about 550 meters across.\n\nTap it and the sun goes down: the city darkens under a blue sky as the street lamps and windows come on one by one, each lamp lighting a pool of the street. Tap again for morning. The City of Helsinki shares the model under the CC BY 4.0 license.",
   },
+
   "stork-migration": {
     howTo: "Tap to play the storks' fall migration from Germany to Africa.",
     about:

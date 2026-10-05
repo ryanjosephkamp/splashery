@@ -3584,7 +3584,7 @@ export const TOYS = [
     kind: "kit",
     pack: "geo",
     labs: true,
-    tags: "city town buildings streets cars traffic train metro elevated rail night lights windows skyline urban map earth geography",
+    tags: "city helsinki finland senate square cathedral market harbor reality mesh photogrammetry 3d model buildings streets night lights windows street lamps urban map earth geography",
     camera: { yaw: 0.55, pitch: 0.55, roll: 0, distance: 3.2 },
   },
   {

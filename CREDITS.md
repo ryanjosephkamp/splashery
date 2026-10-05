@@ -534,6 +534,11 @@ government works are in the public domain.
   [National Hydrography Dataset](https://www.usgs.gov/national-hydrography/national-hydrography-dataset)
   and the [National Land Cover Database 2021](https://www.mrlc.gov/data/nlcd-2021-land-cover-conus)
   (USGS and the MRLC consortium), public domain.
+- The living city (round 3): the City of Helsinki's
+  [Helsinki 3D reality mesh](https://hri.fi/data/en_GB/dataset/helsingin-3d-kaupunkimalli) (2017
+  aerial photogrammetry), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 550 m block
+  round Senate Square and the Market Square, cropped and turned into splats by `tools/geo-city.mjs`;
+  the night lights are added by the toy.
 - Earthquakes: the USGS
   [earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ("USGS-authored
   or produced data and information are considered to be in the U.S. Public Domain"). The toy reads

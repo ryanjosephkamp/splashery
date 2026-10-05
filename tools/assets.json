@@ -2289,6 +2289,17 @@
       "license": "Public domain",
       "checked": "October 5, 2026",
       "note": "Round 2 (the owner: \"something more photoreal\"): tools/geo-quakes.mjs, geo-migration.mjs and geo-storm.mjs, through the GIBS WMS."
+    },
+    {
+      "id": "living-city-helsinki",
+      "file": "assets/toys/living-city/city.bin.gz",
+      "toy": "living-city",
+      "name": "Helsinki 3D reality mesh (2017), a 550 m block of central Helsinki (Senate Square, the Market Square, the South Harbor)",
+      "author": "City of Helsinki",
+      "page": "https://hri.fi/data/en_GB/dataset/helsingin-3d-kaupunkimalli",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "Round 3 (the owner: \"I'm fine with the Helsinki open reality mesh\"): tools/geo-city.mjs reads the level-18 tiles of Helsinki3D_2017_OBJ_672496x2.zip by range requests, crops the block and samples it into splats with the Studio's converter. Anything made from it stays CC BY 4.0 with this credit."
     }
   ]
 }
