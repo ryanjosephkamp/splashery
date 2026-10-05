@@ -20,7 +20,10 @@ brief, word for word, under "## Brief", then keep "## State
   on this branch, is fixed and passes). The full suite is for the Integrator.
 - Clips: 13 posted on Effect review page 2 (lane record `ComputingR2`, cards `cmp2-*`), the eight
   algorithms' sounds in the bars view, the crates, ring and dots views, the Barbarossa decode and a
-  setting of one's own. Waiting on the owner's marks.
+  setting of one's own. The owner marked 12 good (October 5, 2026); the Enigma setting clip came
+  back "Cool. Please make wheels sharper": the rotors' rings, letters, thumb wheels and end wheels
+  now carry more, finer splats, and the rotor plates (hidden under the lampboard, a bug of mine) now
+  show; posted as `cmp2-enigma-own-r2`. Main merged in.
 
 ## Notes", "## Known issues" and "##
 

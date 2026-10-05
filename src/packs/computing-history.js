@@ -1401,7 +1401,7 @@ function buildEnigma(k, o) {
   block(k, [0.95, 0.03, 0.5], [0, -0.1, rcz], darkSteel);
   k.add(evenCylinder(0.02, 0.02, 0.9, true), { pos: [rcx, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
   for (const [x, w] of [[-0.4, 0.07], [0.37, 0.05]]) // prettier-ignore
-    k.add(evenCylinder(R * 0.9, R * 0.9, w, true), { pos: [x, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.2, pattern: false, color: darkSteel }); // prettier-ignore
+    k.add(evenCylinder(R * 0.9, R * 0.9, w, true), { pos: [x, rcy, rcz], rot: [0, 0, 90], even: true, weight: 3, jitter: 0, pattern: false, color: darkSteel }); // prettier-ignore
   EN_ROTOR_X.forEach((x, i) => {
     const part = k.part(["rotorL", "rotorM", "rotorR"][i], {
       pivot: [x, rcy, rcz],
@@ -1409,17 +1409,20 @@ function buildEnigma(k, o) {
     });
     const ride = { part, pattern: false, even: true };
     // The letter ring: an ivory band with the 26 letters round it.
-    k.add(evenCylinder(R, R, 0.1, false), { pos: [x, rcy, rcz], rot: [0, 0, 90], weight: 1.3, flat: 0.25, ...ride, color: (c) => keep(lit("#e8e0c8", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })) }); // prettier-ignore
+    // Lane Computing r2 (the owner's "make wheels sharper"): the rings,
+    // their letters and the thumb wheels carry more, smaller splats.
+    k.add(evenCylinder(R, R, 0.1, false), { pos: [x, rcy, rcz], rot: [0, 0, 90], weight: 4, flat: 0.25, jitter: 0, ...ride, color: (c) => keep(lit("#e8e0c8", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })) }); // prettier-ignore
     for (let l = 0; l < 26; l++) {
       const phi = EN.index - l * EN.step;
       const rr = R + 0.004;
-      text(k, AZ[l], [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], 0.0085, "#1c1a17", { weight: 16, size: 0.7, rot: [(phi * 180) / Math.PI - 90, 0, 0], ...ride }); // prettier-ignore
+      text(k, AZ[l], [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], 0.0092, "#1c1a17", { weight: 26, size: 0.8, rot: [(phi * 180) / Math.PI - 90, 0, 0], ...ride }); // prettier-ignore
     }
     // The ridged thumb wheel on its left side, and the drum's dark faces.
     k.add(evenCylinder(R + 0.035, R + 0.035, 0.035, true), {
       pos: [x - 0.07, rcy, rcz],
       rot: [0, 0, 90],
-      weight: 1.2,
+      weight: 4,
+      jitter: 0,
       flat: 0.25,
       ...ride,
       color: (c) => {
@@ -1428,12 +1431,12 @@ function buildEnigma(k, o) {
         return keep(lit(ridge ? "#3c3f44" : "#2a2c30", c.n, { amb: 0.7, dif: 0.35, spec: 0.35 }));
       },
     });
-    k.add(evenDisc(k, R, 0.02, 64), { pos: [x + 0.05, rcy, rcz], rot: [0, 0, -90], even: true, weight: 0.8, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
+    k.add(evenDisc(k, R, 0.02, 64), { pos: [x + 0.05, rcy, rcz], rot: [0, 0, -90], even: true, weight: 2, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
   });
   // Lane Computing r2: each rotor's number on the plate in front of it, and
   // the reflector's letter in front of it (left), as the setting has them.
-  EN_ROTOR_X.forEach((x, i) => text(k, st.rotors[i], [x, 0.004, rcz + R + 0.235], 0.009, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] })); // prettier-ignore
-  text(k, `UKW ${st.reflector}`, [-0.4, 0.004, rcz + R + 0.235], 0.007, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] }); // prettier-ignore
+  EN_ROTOR_X.forEach((x, i) => text(k, st.rotors[i], [x, 0.004, rcz + R + 0.05], 0.009, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] })); // prettier-ignore
+  text(k, `UKW ${st.reflector}`, [-0.4, 0.004, rcz + R + 0.05], 0.007, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] }); // prettier-ignore
   // The index marks: a small brass pointer at each rotor's reading place.
   EN_ROTOR_X.forEach((x) => {
     const phi = EN.index;
