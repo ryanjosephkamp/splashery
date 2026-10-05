@@ -9,9 +9,9 @@ import { test, expect } from "@playwright/test";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
-// A rig scan's parts (the grape's peel), a kit toy's parts and levers (the
-// toy piano), a kit's behavior kinds (the heart), and a winged rig (the bee).
-const SAMPLE = ["grape", "toy-piano", "heart", "bee"];
+// A rig scan's parts (the grape's peel), a scan breaking apart (the star cookie), a kit's
+// behavior kinds (the heart) and a winged rig (the bee).
+const SAMPLE = ["grape", "star-cookie", "heart", "bee"];
 
 test("a sample of toys: the tap plays the same on its side and upside down", async ({ page }) => {
   test.setTimeout(1_200_000);
@@ -52,4 +52,38 @@ test("the toys fixed in their recipes play the same on their side and upside dow
   console.log(`fixed poses: ${JSON.stringify(out)}`);
   for (const [id, r] of Object.entries(out))
     for (const p of ["side", "down"]) expect(r[p].err, `${id} ${p}`).toBeLessThan(4);
+});
+
+test("screenshots: the grape lying on its side, peeling (390x844 and 1440x900)", async ({
+  page,
+}) => {
+  test.setTimeout(600_000);
+  for (const [w, hgt] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: hgt });
+    await page.goto(APP);
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.evaluate(async () => {
+      const { app, player } = window.__splashery;
+      const { posePreset } = await import("/src/effects-pose.js");
+      await app.chooseToy("grape");
+      player.opts.idleDelay = 1e9;
+      // Set down on its side as a Hands-on toss leaves it, and held there.
+      const ho = player.handsOn;
+      ho.setOn(true);
+      ho.ensure();
+      const p = posePreset(ho, "side");
+      ho.body.pos = p.pos;
+      ho.body.q = p.q;
+      ho.moved = true;
+      ho.apply();
+      ho.step = () => false;
+      player.act(null);
+      for (let i = 0; i < 50; i++) player.update(1 / 60);
+    });
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `tests/screenshots/pose-grape-side-${w}x${hgt}.png` });
+  }
 });
