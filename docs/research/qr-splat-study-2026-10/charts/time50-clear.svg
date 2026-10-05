@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 954" width="640" height="954" font-family="system-ui, -apple-system, Segoe UI, sans-serif" role="img" aria-label="Motion frames, sheet set back (moves up to 0.3 modules)">
+<style>
+svg{--bg:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--grid:#e4e3df;--axis:#a3a29c}
+.s0{stroke:#2a78d6;fill:none}.m0{fill:#2a78d6;stroke:var(--bg);stroke-width:1.5}.s1{stroke:#eb6834;fill:none}.m1{fill:#eb6834;stroke:var(--bg);stroke-width:1.5}.s2{stroke:#1baf7a;fill:none}.m2{fill:#1baf7a;stroke:var(--bg);stroke-width:1.5}.s3{stroke:#eda100;fill:none}.m3{fill:#eda100;stroke:var(--bg);stroke-width:1.5}.s4{stroke:#e87ba4;fill:none}.m4{fill:#e87ba4;stroke:var(--bg);stroke-width:1.5}
+@media (prefers-color-scheme: dark){svg{--bg:#1a1a19;--ink:#ffffff;--ink2:#c3c2b7;--grid:#34332f;--axis:#6b6a64}.s0{stroke:#3987e5;fill:none}.m0{fill:#3987e5;stroke:var(--bg);stroke-width:1.5}.s1{stroke:#d95926;fill:none}.m1{fill:#d95926;stroke:var(--bg);stroke-width:1.5}.s2{stroke:#199e70;fill:none}.m2{fill:#199e70;stroke:var(--bg);stroke-width:1.5}.s3{stroke:#c98500;fill:none}.m3{fill:#c98500;stroke:var(--bg);stroke-width:1.5}.s4{stroke:#d55181;fill:none}.m4{fill:#d55181;stroke:var(--bg);stroke-width:1.5}}
+.bg{fill:var(--bg)}.t{fill:var(--ink);font-size:20px;font-weight:600}.st{fill:var(--ink2);font-size:15px}
+.pt{fill:var(--ink);font-size:16px;font-weight:600}.ax{fill:var(--ink2);font-size:14px}.lb{font-size:14px;font-weight:600;fill:var(--ink)}
+.g{stroke:var(--grid);stroke-width:1}.a{stroke:var(--axis);stroke-width:1}
+path.s0,path.s1,path.s2,path.s3,path.s4{stroke-width:2.25;stroke-linejoin:round;stroke-linecap:round}
+</style>
+<rect class="bg" x="0" y="0" width="640" height="954"/>
+<text class="t" x="16" y="30">Motion frames, sheet set back (moves up to 0.3 modules)</text>
+<text class="st" x="16" y="54">Share of “phone” captures read exactly; three texts pooled, 9 per point</text>
+<text class="pt" x="64" y="86">jsQR</text>
+<line class="g" x1="64" x2="548" y1="316" y2="316"/>
+<text class="ax" x="56" y="321" text-anchor="end">0%</text>
+<line class="g" x1="64" x2="548" y1="261" y2="261"/>
+<text class="ax" x="56" y="266" text-anchor="end">25%</text>
+<line class="g" x1="64" x2="548" y1="206" y2="206"/>
+<text class="ax" x="56" y="211" text-anchor="end">50%</text>
+<line class="g" x1="64" x2="548" y1="151" y2="151"/>
+<text class="ax" x="56" y="156" text-anchor="end">75%</text>
+<line class="g" x1="64" x2="548" y1="96" y2="96"/>
+<text class="ax" x="56" y="101" text-anchor="end">100%</text>
+<line class="a" x1="64" x2="548" y1="316" y2="316"/>
+<text class="ax" x="64" y="336" text-anchor="middle">0</text>
+<text class="ax" x="169.2173913043478" y="336" text-anchor="middle">0.2</text>
+<text class="ax" x="274.4347826086956" y="336" text-anchor="middle">0.4</text>
+<text class="ax" x="379.65217391304344" y="336" text-anchor="middle">0.6</text>
+<text class="ax" x="484.8695652173913" y="336" text-anchor="middle">0.8</text>
+<text class="ax" x="306" y="356" text-anchor="middle">moment in the motion (one loop)</text>
+<path class="s0" d="M64.0 96.0L106.1 144.8L153.4 120.4L195.5 169.3L237.6 169.3L285.0 218.3L327.0 267.2L369.1 291.6L416.5 316.0L458.6 291.6L500.7 316.0L548.0 144.8"/>
+<circle class="m0" cx="64" cy="96" r="4.5"/>
+<circle class="m0" cx="106.1" cy="144.8" r="4.5"/>
+<circle class="m0" cx="153.4" cy="120.4" r="4.5"/>
+<circle class="m0" cx="195.5" cy="169.3" r="4.5"/>
+<circle class="m0" cx="237.6" cy="169.3" r="4.5"/>
+<circle class="m0" cx="285" cy="218.3" r="4.5"/>
+<circle class="m0" cx="327" cy="267.2" r="4.5"/>
+<circle class="m0" cx="369.1" cy="291.6" r="4.5"/>
+<circle class="m0" cx="416.5" cy="316" r="4.5"/>
+<circle class="m0" cx="458.6" cy="291.6" r="4.5"/>
+<circle class="m0" cx="500.7" cy="316" r="4.5"/>
+<circle class="m0" cx="548" cy="144.8" r="4.5"/>
+<path class="s1" d="M64.0 96.0L106.1 120.4L153.4 144.8L195.5 169.3L237.6 169.3L285.0 218.3L327.0 218.3L369.1 267.2L416.5 291.6L458.6 267.2L500.7 242.7L548.0 144.8"/>
+<rect class="m1" x="59.5" y="91.5" width="9" height="9" rx="1"/>
+<rect class="m1" x="101.6" y="115.9" width="9" height="9" rx="1"/>
+<rect class="m1" x="148.9" y="140.3" width="9" height="9" rx="1"/>
+<rect class="m1" x="191" y="164.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="233.1" y="164.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="280.5" y="213.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="322.5" y="213.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="364.6" y="262.7" width="9" height="9" rx="1"/>
+<rect class="m1" x="412" y="287.1" width="9" height="9" rx="1"/>
+<rect class="m1" x="454.1" y="262.7" width="9" height="9" rx="1"/>
+<rect class="m1" x="496.2" y="238.2" width="9" height="9" rx="1"/>
+<rect class="m1" x="543.5" y="140.3" width="9" height="9" rx="1"/>
+<path class="s2" d="M64.0 120.4L106.1 144.8L153.4 169.3L195.5 169.3L237.6 169.3L285.0 218.3L327.0 218.3L369.1 218.3L416.5 267.2L458.6 291.6L500.7 193.7L548.0 218.3"/>
+<path class="m2" d="M64 114.9L69.5 124.9L58.5 124.9Z"/>
+<path class="m2" d="M106.1 139.3L111.6 149.3L100.6 149.3Z"/>
+<path class="m2" d="M153.4 163.8L158.9 173.8L147.9 173.8Z"/>
+<path class="m2" d="M195.5 163.8L201 173.8L190 173.8Z"/>
+<path class="m2" d="M237.6 163.8L243.1 173.8L232.1 173.8Z"/>
+<path class="m2" d="M285 212.8L290.5 222.8L279.5 222.8Z"/>
+<path class="m2" d="M327 212.8L332.5 222.8L321.5 222.8Z"/>
+<path class="m2" d="M369.1 212.8L374.6 222.8L363.6 222.8Z"/>
+<path class="m2" d="M416.5 261.7L422 271.7L411 271.7Z"/>
+<path class="m2" d="M458.6 286.1L464.1 296.1L453.1 296.1Z"/>
+<path class="m2" d="M500.7 188.2L506.2 198.2L495.2 198.2Z"/>
+<path class="m2" d="M548 212.8L553.5 222.8L542.5 222.8Z"/>
+<path class="s3" d="M64.0 169.3L106.1 144.8L153.4 169.3L195.5 169.3L237.6 218.3L285.0 193.7L327.0 242.7L369.1 291.6L416.5 267.2L458.6 193.7L500.7 193.7L548.0 169.3"/>
+<path class="m3" d="M64 163.8L69.5 169.3L64 174.8L58.5 169.3Z"/>
+<path class="m3" d="M106.1 139.3L111.6 144.8L106.1 150.3L100.6 144.8Z"/>
+<path class="m3" d="M153.4 163.8L158.9 169.3L153.4 174.8L147.9 169.3Z"/>
+<path class="m3" d="M195.5 163.8L201 169.3L195.5 174.8L190 169.3Z"/>
+<path class="m3" d="M237.6 212.8L243.1 218.3L237.6 223.8L232.1 218.3Z"/>
+<path class="m3" d="M285 188.2L290.5 193.7L285 199.2L279.5 193.7Z"/>
+<path class="m3" d="M327 237.2L332.5 242.7L327 248.2L321.5 242.7Z"/>
+<path class="m3" d="M369.1 286.1L374.6 291.6L369.1 297.1L363.6 291.6Z"/>
+<path class="m3" d="M416.5 261.7L422 267.2L416.5 272.7L411 267.2Z"/>
+<path class="m3" d="M458.6 188.2L464.1 193.7L458.6 199.2L453.1 193.7Z"/>
+<path class="m3" d="M500.7 188.2L506.2 193.7L500.7 199.2L495.2 193.7Z"/>
+<path class="m3" d="M548 163.8L553.5 169.3L548 174.8L542.5 169.3Z"/>
+<circle class="m0" cx="563" cy="144.84" r="4.5"/>
+<text class="lb" x="573" y="149.84">Level L</text>
+<rect class="m1" x="558.5" y="157.34" width="9" height="9" rx="1"/>
+<text class="lb" x="573" y="166.84">Level M</text>
+<path class="m3" d="M563 173.34L568.5 178.84L563 184.34L557.5 178.84Z"/>
+<text class="lb" x="573" y="183.84">Level H</text>
+<path class="m2" d="M563 212.82L568.5 222.82L557.5 222.82Z"/>
+<text class="lb" x="573" y="223.32">Level Q</text>
+<text class="pt" x="64" y="376">zxing-js</text>
+<line class="g" x1="64" x2="548" y1="606" y2="606"/>
+<text class="ax" x="56" y="611" text-anchor="end">0%</text>
+<line class="g" x1="64" x2="548" y1="551" y2="551"/>
+<text class="ax" x="56" y="556" text-anchor="end">25%</text>
+<line class="g" x1="64" x2="548" y1="496" y2="496"/>
+<text class="ax" x="56" y="501" text-anchor="end">50%</text>
+<line class="g" x1="64" x2="548" y1="441" y2="441"/>
+<text class="ax" x="56" y="446" text-anchor="end">75%</text>
+<line class="g" x1="64" x2="548" y1="386" y2="386"/>
+<text class="ax" x="56" y="391" text-anchor="end">100%</text>
+<line class="a" x1="64" x2="548" y1="606" y2="606"/>
+<text class="ax" x="64" y="626" text-anchor="middle">0</text>
+<text class="ax" x="169.2173913043478" y="626" text-anchor="middle">0.2</text>
+<text class="ax" x="274.4347826086956" y="626" text-anchor="middle">0.4</text>
+<text class="ax" x="379.65217391304344" y="626" text-anchor="middle">0.6</text>
+<text class="ax" x="484.8695652173913" y="626" text-anchor="middle">0.8</text>
+<text class="ax" x="306" y="646" text-anchor="middle">moment in the motion (one loop)</text>
+<path class="s0" d="M64.0 508.3L106.1 557.2L153.4 557.2L195.5 557.2L237.6 557.2L285.0 508.3L327.0 557.2L369.1 606.0L416.5 606.0L458.6 606.0L500.7 606.0L548.0 483.7"/>
+<circle class="m0" cx="64" cy="508.3" r="4.5"/>
+<circle class="m0" cx="106.1" cy="557.2" r="4.5"/>
+<circle class="m0" cx="153.4" cy="557.2" r="4.5"/>
+<circle class="m0" cx="195.5" cy="557.2" r="4.5"/>
+<circle class="m0" cx="237.6" cy="557.2" r="4.5"/>
+<circle class="m0" cx="285" cy="508.3" r="4.5"/>
+<circle class="m0" cx="327" cy="557.2" r="4.5"/>
+<circle class="m0" cx="369.1" cy="606" r="4.5"/>
+<circle class="m0" cx="416.5" cy="606" r="4.5"/>
+<circle class="m0" cx="458.6" cy="606" r="4.5"/>
+<circle class="m0" cx="500.7" cy="606" r="4.5"/>
+<circle class="m0" cx="548" cy="483.7" r="4.5"/>
+<path class="s1" d="M64.0 410.4L106.1 459.3L153.4 483.7L195.5 508.3L237.6 483.7L285.0 508.3L327.0 532.7L369.1 557.2L416.5 557.2L458.6 557.2L500.7 532.7L548.0 410.4"/>
+<rect class="m1" x="59.5" y="405.9" width="9" height="9" rx="1"/>
+<rect class="m1" x="101.6" y="454.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="148.9" y="479.2" width="9" height="9" rx="1"/>
+<rect class="m1" x="191" y="503.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="233.1" y="479.2" width="9" height="9" rx="1"/>
+<rect class="m1" x="280.5" y="503.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="322.5" y="528.2" width="9" height="9" rx="1"/>
+<rect class="m1" x="364.6" y="552.7" width="9" height="9" rx="1"/>
+<rect class="m1" x="412" y="552.7" width="9" height="9" rx="1"/>
+<rect class="m1" x="454.1" y="552.7" width="9" height="9" rx="1"/>
+<rect class="m1" x="496.2" y="528.2" width="9" height="9" rx="1"/>
+<rect class="m1" x="543.5" y="405.9" width="9" height="9" rx="1"/>
+<path class="s2" d="M64.0 434.8L106.1 459.3L153.4 459.3L195.5 459.3L237.6 508.3L285.0 557.2L327.0 532.7L369.1 557.2L416.5 557.2L458.6 557.2L500.7 483.7L548.0 459.3"/>
+<path class="m2" d="M64 429.3L69.5 439.3L58.5 439.3Z"/>
+<path class="m2" d="M106.1 453.8L111.6 463.8L100.6 463.8Z"/>
+<path class="m2" d="M153.4 453.8L158.9 463.8L147.9 463.8Z"/>
+<path class="m2" d="M195.5 453.8L201 463.8L190 463.8Z"/>
+<path class="m2" d="M237.6 502.8L243.1 512.8L232.1 512.8Z"/>
+<path class="m2" d="M285 551.7L290.5 561.7L279.5 561.7Z"/>
+<path class="m2" d="M327 527.2L332.5 537.2L321.5 537.2Z"/>
+<path class="m2" d="M369.1 551.7L374.6 561.7L363.6 561.7Z"/>
+<path class="m2" d="M416.5 551.7L422 561.7L411 561.7Z"/>
+<path class="m2" d="M458.6 551.7L464.1 561.7L453.1 561.7Z"/>
+<path class="m2" d="M500.7 478.2L506.2 488.2L495.2 488.2Z"/>
+<path class="m2" d="M548 453.8L553.5 463.8L542.5 463.8Z"/>
+<path class="s3" d="M64.0 459.3L106.1 483.7L153.4 459.3L195.5 459.3L237.6 532.7L285.0 508.3L327.0 532.7L369.1 606.0L416.5 557.2L458.6 483.7L500.7 459.3L548.0 459.3"/>
+<path class="m3" d="M64 453.8L69.5 459.3L64 464.8L58.5 459.3Z"/>
+<path class="m3" d="M106.1 478.2L111.6 483.7L106.1 489.2L100.6 483.7Z"/>
+<path class="m3" d="M153.4 453.8L158.9 459.3L153.4 464.8L147.9 459.3Z"/>
+<path class="m3" d="M195.5 453.8L201 459.3L195.5 464.8L190 459.3Z"/>
+<path class="m3" d="M237.6 527.2L243.1 532.7L237.6 538.2L232.1 532.7Z"/>
+<path class="m3" d="M285 502.8L290.5 508.3L285 513.8L279.5 508.3Z"/>
+<path class="m3" d="M327 527.2L332.5 532.7L327 538.2L321.5 532.7Z"/>
+<path class="m3" d="M369.1 600.5L374.6 606L369.1 611.5L363.6 606Z"/>
+<path class="m3" d="M416.5 551.7L422 557.2L416.5 562.7L411 557.2Z"/>
+<path class="m3" d="M458.6 478.2L464.1 483.7L458.6 489.2L453.1 483.7Z"/>
+<path class="m3" d="M500.7 453.8L506.2 459.3L500.7 464.8L495.2 459.3Z"/>
+<path class="m3" d="M548 453.8L553.5 459.3L548 464.8L542.5 459.3Z"/>
+<rect class="m1" x="558.5" y="405.92" width="9" height="9" rx="1"/>
+<text class="lb" x="573" y="415.42">Level M</text>
+<path class="m2" d="M563 453.76L568.5 463.76L557.5 463.76Z"/>
+<text class="lb" x="573" y="464.26">Level Q</text>
+<path class="m3" d="M563 470.76L568.5 476.26L563 481.76L557.5 476.26Z"/>
+<text class="lb" x="573" y="481.26">Level H</text>
+<circle class="m0" cx="563" cy="493.26" r="4.5"/>
+<text class="lb" x="573" y="498.26">Level L</text>
+<text class="pt" x="64" y="666">zxing-cpp</text>
+<line class="g" x1="64" x2="548" y1="896" y2="896"/>
+<text class="ax" x="56" y="901" text-anchor="end">0%</text>
+<line class="g" x1="64" x2="548" y1="841" y2="841"/>
+<text class="ax" x="56" y="846" text-anchor="end">25%</text>
+<line class="g" x1="64" x2="548" y1="786" y2="786"/>
+<text class="ax" x="56" y="791" text-anchor="end">50%</text>
+<line class="g" x1="64" x2="548" y1="731" y2="731"/>
+<text class="ax" x="56" y="736" text-anchor="end">75%</text>
+<line class="g" x1="64" x2="548" y1="676" y2="676"/>
+<text class="ax" x="56" y="681" text-anchor="end">100%</text>
+<line class="a" x1="64" x2="548" y1="896" y2="896"/>
+<text class="ax" x="64" y="916" text-anchor="middle">0</text>
+<text class="ax" x="169.2173913043478" y="916" text-anchor="middle">0.2</text>
+<text class="ax" x="274.4347826086956" y="916" text-anchor="middle">0.4</text>
+<text class="ax" x="379.65217391304344" y="916" text-anchor="middle">0.6</text>
+<text class="ax" x="484.8695652173913" y="916" text-anchor="middle">0.8</text>
+<text class="ax" x="306" y="936" text-anchor="middle">moment in the motion (one loop)</text>
+<path class="s0" d="M64.0 773.7L106.1 822.7L153.4 773.7L195.5 749.3L237.6 724.8L285.0 798.3L327.0 773.7L369.1 798.3L416.5 822.7L458.6 822.7L500.7 822.7L548.0 724.8"/>
+<circle class="m0" cx="64" cy="773.7" r="4.5"/>
+<circle class="m0" cx="106.1" cy="822.7" r="4.5"/>
+<circle class="m0" cx="153.4" cy="773.7" r="4.5"/>
+<circle class="m0" cx="195.5" cy="749.3" r="4.5"/>
+<circle class="m0" cx="237.6" cy="724.8" r="4.5"/>
+<circle class="m0" cx="285" cy="798.3" r="4.5"/>
+<circle class="m0" cx="327" cy="773.7" r="4.5"/>
+<circle class="m0" cx="369.1" cy="798.3" r="4.5"/>
+<circle class="m0" cx="416.5" cy="822.7" r="4.5"/>
+<circle class="m0" cx="458.6" cy="822.7" r="4.5"/>
+<circle class="m0" cx="500.7" cy="822.7" r="4.5"/>
+<circle class="m0" cx="548" cy="724.8" r="4.5"/>
+<path class="s1" d="M64.0 676.0L106.1 749.3L153.4 773.7L195.5 749.3L237.6 676.0L285.0 700.4L327.0 700.4L369.1 724.8L416.5 749.3L458.6 749.3L500.7 749.3L548.0 676.0"/>
+<rect class="m1" x="59.5" y="671.5" width="9" height="9" rx="1"/>
+<rect class="m1" x="101.6" y="744.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="148.9" y="769.2" width="9" height="9" rx="1"/>
+<rect class="m1" x="191" y="744.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="233.1" y="671.5" width="9" height="9" rx="1"/>
+<rect class="m1" x="280.5" y="695.9" width="9" height="9" rx="1"/>
+<rect class="m1" x="322.5" y="695.9" width="9" height="9" rx="1"/>
+<rect class="m1" x="364.6" y="720.3" width="9" height="9" rx="1"/>
+<rect class="m1" x="412" y="744.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="454.1" y="744.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="496.2" y="744.8" width="9" height="9" rx="1"/>
+<rect class="m1" x="543.5" y="671.5" width="9" height="9" rx="1"/>
+<path class="s2" d="M64.0 676.0L106.1 676.0L153.4 676.0L195.5 676.0L237.6 676.0L285.0 676.0L327.0 676.0L369.1 700.4L416.5 724.8L458.6 700.4L500.7 724.8L548.0 676.0"/>
+<path class="m2" d="M64 670.5L69.5 680.5L58.5 680.5Z"/>
+<path class="m2" d="M106.1 670.5L111.6 680.5L100.6 680.5Z"/>
+<path class="m2" d="M153.4 670.5L158.9 680.5L147.9 680.5Z"/>
+<path class="m2" d="M195.5 670.5L201 680.5L190 680.5Z"/>
+<path class="m2" d="M237.6 670.5L243.1 680.5L232.1 680.5Z"/>
+<path class="m2" d="M285 670.5L290.5 680.5L279.5 680.5Z"/>
+<path class="m2" d="M327 670.5L332.5 680.5L321.5 680.5Z"/>
+<path class="m2" d="M369.1 694.9L374.6 704.9L363.6 704.9Z"/>
+<path class="m2" d="M416.5 719.3L422 729.3L411 729.3Z"/>
+<path class="m2" d="M458.6 694.9L464.1 704.9L453.1 704.9Z"/>
+<path class="m2" d="M500.7 719.3L506.2 729.3L495.2 729.3Z"/>
+<path class="m2" d="M548 670.5L553.5 680.5L542.5 680.5Z"/>
+<path class="s3" d="M64.0 676.0L106.1 676.0L153.4 676.0L195.5 676.0L237.6 676.0L285.0 676.0L327.0 676.0L369.1 676.0L416.5 676.0L458.6 676.0L500.7 676.0L548.0 676.0"/>
+<path class="m3" d="M64 670.5L69.5 676L64 681.5L58.5 676Z"/>
+<path class="m3" d="M106.1 670.5L111.6 676L106.1 681.5L100.6 676Z"/>
+<path class="m3" d="M153.4 670.5L158.9 676L153.4 681.5L147.9 676Z"/>
+<path class="m3" d="M195.5 670.5L201 676L195.5 681.5L190 676Z"/>
+<path class="m3" d="M237.6 670.5L243.1 676L237.6 681.5L232.1 676Z"/>
+<path class="m3" d="M285 670.5L290.5 676L285 681.5L279.5 676Z"/>
+<path class="m3" d="M327 670.5L332.5 676L327 681.5L321.5 676Z"/>
+<path class="m3" d="M369.1 670.5L374.6 676L369.1 681.5L363.6 676Z"/>
+<path class="m3" d="M416.5 670.5L422 676L416.5 681.5L411 676Z"/>
+<path class="m3" d="M458.6 670.5L464.1 676L458.6 681.5L453.1 676Z"/>
+<path class="m3" d="M500.7 670.5L506.2 676L500.7 681.5L495.2 676Z"/>
+<path class="m3" d="M548 670.5L553.5 676L548 681.5L542.5 676Z"/>
+<rect class="m1" x="558.5" y="671.5" width="9" height="9" rx="1"/>
+<text class="lb" x="573" y="681">Level M</text>
+<path class="m2" d="M563 687.5L568.5 697.5L557.5 697.5Z"/>
+<text class="lb" x="573" y="698">Level Q</text>
+<path class="m3" d="M563 704.5L568.5 710L563 715.5L557.5 710Z"/>
+<text class="lb" x="573" y="715">Level H</text>
+<circle class="m0" cx="563" cy="727" r="4.5"/>
+<text class="lb" x="573" y="732">Level L</text>
+</svg>
