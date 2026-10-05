@@ -202,6 +202,24 @@ data files are in the public domain under
 | [1EMA](https://www.rcsb.org/structure/1EMA) | Green fluorescent protein from _Aequorea victoria_ (1996) | M. Ormö, S. J. Remington                                            |
 | [4HHB](https://www.rcsb.org/structure/4HHB) | Human deoxyhaemoglobin at 1.74 Å (1984)                   | G. Fermi, M. F. Perutz                                              |
 
+### DNA to protein (lane Tiny world r2)
+
+The DNA to protein toy carries four real genes and the alpha carbons of their proteins' structures
+in `src/tiny/genes.js`, written by `tools/tw2-genes.mjs`. NCBI sequence records are in the public
+domain ([NCBI policies](https://www.ncbi.nlm.nih.gov/home/about/policies/)); PDB entries are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+| Source                                                          | What                                                 | Authors                                     |
+| --------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| [NM_000518.5](https://www.ncbi.nlm.nih.gov/nuccore/NM_000518.5) | Human hemoglobin subunit beta (HBB) mRNA             | NCBI RefSeq                                 |
+| [NM_000207.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000207.3) | Human insulin (INS) mRNA, transcript variant 1       | NCBI RefSeq                                 |
+| [NM_000239.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000239.3) | Human lysozyme (LYZ) mRNA                            | NCBI RefSeq                                 |
+| [M62653.1](https://www.ncbi.nlm.nih.gov/nuccore/M62653.1)       | _Aequorea victoria_ green fluorescent protein mRNA   | D. C. Prasher and others (1992)             |
+| [4HHB](https://www.rcsb.org/structure/4HHB)                     | Human deoxyhemoglobin at 1.74 Å (1984), a beta chain | G. Fermi, M. F. Perutz                      |
+| [1MSO](https://www.rcsb.org/structure/1MSO)                     | T6 human insulin at 1.0 Å (2003)                     | G. D. Smith, W. A. Pangborn, R. H. Blessing |
+| [1LZ1](https://www.rcsb.org/structure/1LZ1)                     | Human lysozyme at 1.5 Å (1981)                       | P. J. Artymiuk, C. C. F. Blake              |
+| [1GFL](https://www.rcsb.org/structure/1GFL)                     | Green fluorescent protein (1996)                     | F. Yang, L. G. Moss, G. N. Phillips Jr.     |
+
 ## Chemistry data (lane Chemistry)
 
 The periodic table, the atom toy's 118 elements, the molecule gallery and the DNA come from
@@ -499,6 +517,51 @@ checked on the live source page on September 30, 2026.
   cut by `tools/sci-galaxy.mjs`.
 
 Files people open in these toys are read in their browser and never uploaded.
+
+## Data and climate (lane Data and climate)
+
+The Data in 3D toy (Studio) and the Climate records toy (Science) ship dated snapshots and never
+fetch anything live. Each license was checked on the live source page on October 5, 2026.
+
+- Climate records and a Data in 3D sample: monthly mean CO2 at Mauna Loa from the
+  [NOAA Global Monitoring Laboratory](https://gml.noaa.gov/ccgg/trends/data.html) (Xin Lan, Pieter
+  Tans and Kirk W. Thoning), NOAA's file of September 5, 2026, in the public domain under
+  [NOAA's terms](https://gml.noaa.gov/about/disclaimer.html) ("in the public domain, unless
+  specifically annotated otherwise"). NOAA does not endorse Splashery. Only NOAA's own measurements,
+  from May 1974, are kept: the file's months from March 1958 to April 1974 come from the Scripps
+  Institution of Oceanography, whose site carries no data license and whose site terms forbid
+  republishing without permission, so they are left out.
+- Climate records: the GISS Surface Temperature Analysis
+  ([GISTEMP v4](https://data.giss.nasa.gov/gistemp/)), Land-Ocean Temperature Index, by the GISTEMP
+  Team, NASA Goddard Institute for Space Studies (2026), accessed October 5, 2026; and Lenssen, N.,
+  G. A. Schmidt, M. Hendrickson, P. Jacobs, M. Menne and R. Ruedy (2024), "A GISTEMPv4 observational
+  uncertainty ensemble", Journal of Geophysical Research: Atmospheres 129, e2023JD040179. A U.S.
+  government work, in the public domain.
+- Data in 3D sample: earthquakes of magnitude 4.5 and up in the 30 days to October 5, 2026, from the
+  [U.S. Geological Survey](https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php), a U.S.
+  government work in the public domain. Seven of the feed's columns are kept.
+- Data in 3D sample: the Iris data of R. A. Fisher (1936), Bezdek's corrected copy from the
+  [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/53/iris),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A header row was added and "Iris-"
+  written as "Iris ".
+
+Tables people open in Data in 3D are read in their browser and never uploaded.
+## Sound and light lab
+
+The Sound lab, the Sound recorder and the Light lab (labs) use no recorded assets: their sounds and
+the spectrometer's sample picture are made by the page. Their data:
+
+- Emission lines: the visible lines (380 to 750 nm, in air) of sixteen neutral atoms, from the NIST
+  [Handbook of Basic Atomic Spectroscopic Data](https://www.nist.gov/pml/handbook-basic-atomic-spectroscopic-data)
+  (Sansonetti and Martin, J. Phys. Chem. Ref. Data 34, 1559 (2005); NIST SRD 108, drawn from the
+  Atomic Spectra Database), its "Strong Lines" tables for H, He, Li, Na, K, Ca, Sr, Ba, Cu, Zn, Cd,
+  Hg, Ne, Ar, Kr and Xe (for example
+  [hydrogentable2.htm](https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable2.htm)).
+  Measured values, credited to NIST; `tools/sll-nist.mjs` fetches them again.
+- Glass: SCHOTT's Sellmeier coefficients for N-SF11 and N-BK7, as listed on
+  [RefractiveIndex.INFO](https://refractiveindex.info/?shelf=specs&book=SCHOTT-optical&page=N-SF11)
+  (from the SCHOTT catalog).
+- Wavelength colors: Dan Bruton's approximation of the visible spectrum.
 
 ## Imaging (lane Imaging)
 
