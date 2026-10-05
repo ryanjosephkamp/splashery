@@ -95,6 +95,15 @@ test("typed DNA: FASTA, U and spaces are read; the first ATG starts the frame", 
   expect(buildStory({ gene: "custom", sequence: g.lead + g.cds + g.utr3 }).fold?.pdb).toBe("1LZ1");
 });
 
+test("your own DNA with no sequence, or no start codon, shows the default gene instead of failing", () => {
+  for (const sequence of ["", "GGGCCC", "not dna"]) {
+    const s = buildStory({ gene: "custom", sequence });
+    expect(s.gene).toBe("hbb");
+    expect(s.fallback.length).toBeGreaterThan(0);
+    expect(s.protein).toBe(GENES.hbb.protein);
+  }
+});
+
 test("the toy builds for every gene and change, and its drive stays finite", async () => {
   const { buildRecipe } = await import("../src/kit.js");
   const { RECIPES } = await import("../src/packs/tiny-r2.js");
@@ -105,6 +114,7 @@ test("the toy builds for every gene and change, and its drive stays finite", asy
     { gene: "hbb", change: "insert" },
     { gene: "hbb", change: "delete", codon: 4, pos: 1 },
     { gene: "custom", sequence: "ATGAAATTTTAG" },
+    { gene: "custom", sequence: "" },
   ];
   for (const o of cases) {
     const options = { ...base, ...o };

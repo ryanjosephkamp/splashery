@@ -4,7 +4,7 @@
 // genetic code gives, and whether it folds into a known structure.
 
 import { GENES } from "./genes.js";
-import { AMINO, START, mutate, rna, translate } from "./genetic-code.js";
+import { AMINO, START, mutate, readSequence, rna, translate } from "./genetic-code.js";
 
 export const SAMPLES = ["hbb", "ins", "lyz", "gfp"];
 export const LEAD = 5; // bases drawn before the start codon
@@ -14,19 +14,30 @@ export const MIDDLE = 9; // bases drawn (plain) for the codons in between
 export const ALL_SHOWN = 10; // a gene this short (codons with the stop) is drawn whole
 
 // opts: { gene, sequence, change, codon, pos, base }. gene "custom" reads the
-// typed sequence (already checked by readSequence).
+// typed sequence (read again here; empty or without ATG, it falls back to HBB).
 export function buildStory(opts) {
-  const known = GENES[opts.gene] ? opts.gene : null;
+  let known = GENES[opts.gene] ? opts.gene : null;
   let seq;
   let at;
+  // Your own sequence: read it again (a link may carry anything); with no
+  // sequence, or no start codon in it, the default gene is shown instead.
+  let fallback = "";
+  if (!known) {
+    try {
+      seq = readSequence(opts.sequence || "");
+      at = seq.indexOf(START);
+      if (at < 0) fallback = "Your sequence has no start codon (ATG)";
+    } catch {
+      fallback = opts.sequence
+        ? "Your sequence couldn't be read"
+        : "Type or open your own DNA below";
+    }
+    if (fallback) known = "hbb";
+  }
   if (known) {
     const g = GENES[known];
     seq = g.lead + g.cds + g.utr3;
     at = g.lead.length;
-  } else {
-    seq = opts.sequence || "";
-    at = seq.indexOf(START);
-    if (at < 0) throw new Error("There's no start codon (ATG) in this sequence.");
   }
   const original = translate(seq, at);
   // The mutation (codon 1 is the start codon, which is never changed).
@@ -102,6 +113,7 @@ export function buildStory(opts) {
   return {
     gene: known,
     label: known ? GENES[known].label : "Your sequence",
+    fallback,
     seq,
     at,
     mut,
@@ -128,6 +140,7 @@ export function codonWords(codon) {
 // One line for the toy's panel: what the gene makes, and what a mutation does.
 export function storyLine(s) {
   const stop = s.nonstop ? " and no stop codon" : " and a stop codon";
+  const lead = s.fallback ? `${s.fallback}, so this shows the default gene. ` : "";
   const parts = [`${s.label}: ${s.protein.length} codons${stop}, ${s.protein.length} amino acids`];
   if (s.mut) {
     const m = s.mut;
@@ -160,5 +173,5 @@ export function storyLine(s) {
       `folds as in PDB ${s.fold.pdb}` + (cut ? `, after ${cut} amino acid${cut > 1 ? "s are" : " is"} cut away` : ""), // prettier-ignore
     );
   } else if (s.why) parts.push(`no fold shown (${s.why})`);
-  return parts.join("; ") + ".";
+  return lead + parts.join("; ") + ".";
 }
