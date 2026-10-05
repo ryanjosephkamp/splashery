@@ -9,8 +9,10 @@ Sound and light lab: a sound lab with a recorder, and a light lab". Handoff file
 docs/handoff/SoundLightLab.md (create it; start it with this brief, word for word, under "## Brief",
 then keep "## State
 
-WORKING (October 5, 2026): the three toys are built and their tests pass; clips, screenshots and the
-full checks are next.
+READY (October 5, 2026): #286 merged; the r2 round (every toy sharper) is on
+`claude/lane-sound-light-lab-r2`, PR "Phase Sound and light lab r2: every toy sharper". Its clips
+are on Effect review page 2 (`sll-light-lab-r3`, `sll-light-lab-prism-r3`,
+`sll-light-lab-grating-r3`, `sll-sound-lab-r2`, and a still, `sll-sound-recorder-r2`).
 
 - `sound-lab` (Studio, labs): spectrogram, spectrum, oscilloscope, level (dBFS and an uncalibrated
   dB SPL estimate), tone generator (sine, square, saw, noise, 20 Hz to 20 kHz, a second tone for
@@ -43,13 +45,13 @@ full checks are next.
   otherwise rebuild the toy each step).
 
 - r2 (the Operator's notes of October 5, 2026, 14:10 and 15:40 UTC; on
-  `claude/lane-sound-light-lab-r2`, waiting for #286 to merge): every toy sharper. The Light lab:
-  density 2, finer rays and beams, thinner prism edges, finer prism faces, disc and slide, larger
-  panel caps. The Sound lab and the recorder: density 2, the sharp kernel, the speaker, metronome
-  and microphone rebuilt from exactly sized splats (`surfSplats`, `cylinderSplats`, `sphereSplats`),
-  the speaker's cone, surround and dust cap visible through a hole in the baffle, larger screen
-  labels. All three (labs only) set `render: { cull: "low", dpr: "native" }`: the engine's two-pixel
-  cull hid the finer splats at the high tier.
+  `claude/lane-sound-light-lab-r2`): every toy sharper. The Light lab: density 2, finer rays and
+  beams, thinner prism edges, finer prism faces, disc and slide, larger panel caps. The Sound lab
+  and the recorder: density 2, the sharp kernel, the speaker, metronome and microphone rebuilt from
+  exactly sized splats (`surfSplats`, `cylinderSplats`, `sphereSplats`), the speaker's cone,
+  surround and dust cap visible through a hole in the baffle, larger screen labels. All three (labs
+  only) set `render: { cull: "low", dpr: "native" }`: the engine's two-pixel cull hid the finer
+  splats at the high tier.
 
 ## Known issues
 
@@ -62,8 +64,8 @@ full checks are next.
 
 - Effect review page 2 has no `lanes/SoundLightLab` record yet; the cards are posted under that lane
   id. Please add the record.
-- No clip of the Sound recorder: its tap plays the recording, which is silent in a clip; its
-  screenshots (`tests/screenshots/sll-sound-recorder-*.png`) show the waveform and spectrogram.
+- No clip of the Sound recorder: its tap plays the recording, which is silent in a clip. A still
+  (`sll-sound-recorder-r2`) is on the review page.
 
 - License: NIST's pages state that Standard Reference Data (the Handbook is SRD 108, the ASD SRD 78)
   are copyrighted compilations under 15 U.S.C. 290e, not plain public domain as the brief says. Like
