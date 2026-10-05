@@ -9,7 +9,7 @@
 // 2D: the table seen from straight above. 3D: from the player's end of the
 // table, looking up the slope, as you stand at a real machine.
 
-import { evenCylinder } from "./even.js";
+import { crispModel } from "./arcade-crisp.js";
 import { World, Body, quat } from "../physics/world.js";
 
 const W = 1.0; // table width (x from -W/2 to W/2)
@@ -34,60 +34,63 @@ class Pinball {
     this.q = api.q;
     this.rand = api.rand;
     const low = api.profile === "low";
-    const { kitModel } = api;
     const lit = (c, n, f = 1) => c.map((v) => v * (0.72 + 0.28 * n[1] + 0.08 * n[2]) * f);
     const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
+    // Crisp grids (src/packs/arcade-crisp.js): a clean table and parts.
+    const fine = low ? 0.006 : 0.004;
+    const opt = { fine, coarse: 0.03 };
+    const up = { normal: [0, 1, 0] };
+    this.lit = lit;
+    this.crisp = opt;
     this.models = {
-      // The playfield: deep blue paint with a pale owl's-eye ring, star
-      // dots and the drain's arrow lines.
-      table: kitModel(
-        (k) => {
-          k.add(k.box(W, 0.02, L), {
-            pos: [0, -0.01, 0],
-            even: true,
-            flat: 0.2,
-            color: (c) => {
-              const x = c.lp[0];
-              const z = c.lp[2];
-              let col = hex("#16245a");
-              const r1 = Math.hypot(x + 0.12, z + 0.25);
-              const r2 = Math.hypot(x - 0.12, z + 0.25);
-              if (Math.abs(r1 - 0.11) < 0.012 || Math.abs(r2 - 0.11) < 0.012) col = hex("#f0c040");
-              else if (r1 < 0.05 || r2 < 0.05) col = hex("#f6efd0");
-              if (Math.abs(z - 0.45) < 0.006 && Math.abs(x) < 0.25) col = hex("#e05a8a");
-              const star = Math.sin(x * 91) * Math.sin(z * 73) > 0.985;
-              if (star) col = hex("#ffffff");
-              return lit(col, c.n);
-            },
-          });
-        },
-        { count: low ? 5000 : 11000 },
-      ),
-      rail: kitModel((k) => k.add(k.box(1, 0.06, 0.03), { even: true, flat: 0.3, color: (c) => lit(hex("#c9ccd2"), c.n) }), { count: low ? 220 : 420 }), // prettier-ignore
-      flipper: kitModel((k) => k.add(k.roundedBox(FLIP.len, 0.04, FLIP.w, 4), { pos: [FLIP.len / 2, 0, 0], even: true, color: (c) => lit(hex("#f4f4f0"), c.n) }), { count: low ? 200 : 380 }), // prettier-ignore
-      bumper: kitModel(
-        (k) => {
-          k.add(evenCylinder(0.055, 0.055, 0.05, "top"), { pos: [0, 0.025, 0], even: true, color: (c) => (c.n[1] > 0.5 ? hex("#ffe27a") : lit(hex("#d6382f"), c.n)) }); // prettier-ignore
-          k.add(evenCylinder(0.062, 0.062, 0.012, true), { pos: [0, 0.006, 0], even: true, color: (c) => lit(hex("#f4f4f0"), c.n) }); // prettier-ignore
-        },
-        { count: low ? 220 : 420 },
-      ),
-      ball: kitModel(
+      // The playfield: deep blue paint, with its markings on top.
+      table: crispModel((k) => k.box(W, 0.02, L, { pos: [0, -0.01, 0], faces: "xXYzZ", color: (q, n) => lit(hex("#16245a"), n) }), opt), // prettier-ignore
+      // A pale owl's-eye ring, star dots and the drain's arrow line.
+      marks: crispModel((k) => {
+        const y = 0.003;
+        for (const x of [-0.12, 0.12]) {
+          k.disc(0.122, { ...up, pos: [x, y, -0.25], inner: 0.098, color: hex("#f0c040") });
+          k.disc(0.05, { ...up, pos: [x, y, -0.25], color: hex("#f6efd0") });
+        }
+        k.line([-0.25, y, 0.45], [0.25, y, 0.45], 0.012, { ...up, color: hex("#e05a8a") });
+        let seed = 7;
+        const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+        for (let i = 0; i < 26; i++) {
+          const x = (rnd() - 0.5) * (W - 0.12);
+          const z = (rnd() - 0.5) * (L - 0.2);
+          if (Math.hypot(Math.abs(x) - 0.12, z + 0.25) < 0.16) continue;
+          k.disc(0.006 + 0.004 * rnd(), { ...up, pos: [x, y, z], color: [1, 1, 1], fine: 0.002 });
+        }
+      }, opt),
+      flipper: crispModel((k) => {
+        const c = (q, n) => lit(hex("#f4f4f0"), n);
+        k.box(FLIP.len - FLIP.w, 0.04, FLIP.w, { pos: [FLIP.len / 2, 0, 0], color: c });
+        k.cylinder(FLIP.w / 2, 0.04, { pos: [FLIP.w / 2, 0, 0], axis: [0, 1, 0], color: c });
+        k.cylinder(FLIP.w * 0.35, 0.04, {
+          pos: [FLIP.len - FLIP.w * 0.35, 0, 0],
+          axis: [0, 1, 0],
+          color: c,
+        });
+      }, opt),
+      bumper: crispModel((k) => {
+        k.cylinder(0.055, 0.05, { pos: [0, 0.025, 0], axis: [0, 1, 0], color: (q, n) => (n[1] > 0.5 ? hex("#ffe27a") : lit(hex("#d6382f"), n)) }); // prettier-ignore
+        k.cylinder(0.062, 0.012, { pos: [0, 0.006, 0], axis: [0, 1, 0], color: (q, n) => lit(hex("#f4f4f0"), n) }); // prettier-ignore
+      }, opt),
+      ball: crispModel(
         (k) =>
-          k.add(k.sphere(BALL_R), {
-            even: true,
-            flat: 0.5,
-            color: (c) => {
+          k.sphere(BALL_R, {
+            step: BALL_R / 6,
+            color: (q, n) => {
               // Chrome: the sky above bright, the table below dark blue.
-              const up = c.n[1];
-              const f = up > 0 ? 0.75 + 0.25 * up : 0.35 + 0.2 * (1 + up);
-              const spec = Math.pow(Math.max(0, c.n[1] * 0.6 + c.n[2] * 0.6), 20);
+              const u = n[1];
+              const f = u > 0 ? 0.75 + 0.25 * u : 0.35 + 0.2 * (1 + u);
+              const spec = Math.pow(Math.max(0, n[1] * 0.6 + n[2] * 0.6), 20);
               return [Math.min(1, f + spec), Math.min(1, f + spec), Math.min(1, f * 1.05 + spec)];
             },
           }),
-        { count: low ? 140 : 240 },
+        opt,
       ),
-      plunger: kitModel((k) => k.add(evenCylinder(0.018, 0.018, 0.12, true), { rot: [90, 0, 0], even: true, color: (c) => lit(hex("#b9bcc4"), c.n) }), { count: 120 }), // prettier-ignore
+      plunger: crispModel((k) => k.cylinder(0.018, 0.12, { axis: [0, 0, 1], color: (q, n) => lit(hex("#b9bcc4"), n) }), opt), // prettier-ignore
     };
   }
 
@@ -167,12 +170,15 @@ class Pinball {
     const S = this.api.sprites;
     S.clear();
     this.buildWorld();
+    // The table sorts below its markings, and both below what rolls on them.
     this.table = S.add(this.models.table);
+    this.table.sortBias = [0, -0.15, 0];
+    this.marks = S.add(this.models.marks);
+    this.marks.sortBias = [0, -0.08, 0];
     // Each rail is built at its own length (a stretched one would thin out).
-    const low = this.api.profile === "low";
     this.railModels ||= this.rails.map(
       (r) =>
-      this.api.kitModel((k) => k.add(k.box(r.len, 0.06, 0.03), { even: true, flat: 0.3, color: (c) => [0.79, 0.8, 0.82].map((v) => v * (0.72 + 0.28 * c.n[1] + 0.08 * c.n[2])) }), { count: Math.round((low ? 400 : 800) * (r.len + 0.1)) }), // prettier-ignore
+      crispModel((k) => k.box(r.len, 0.06, 0.03, { color: (q, n) => this.lit([0.79, 0.8, 0.82], n) }), this.crisp), // prettier-ignore
     );
     this.railSprites = this.rails.map((r, i) =>
       S.add(this.railModels[i], { pos: r.pos, quat: r.q }),
