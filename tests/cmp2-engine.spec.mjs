@@ -14,6 +14,8 @@ test("every text option shipped before this change stays hidden", async () => {
     for (const m of src.matchAll(/type: "text"[^}]*}/g)) {
       const before = src.slice(Math.max(0, m.index - 200), m.index);
       const block = before.slice(before.lastIndexOf("{")) + m[0];
+      // Only a toy's options (a key and a label), not the page's own inputs.
+      if (!/key: /.test(block) || !/label: /.test(block)) continue;
       if (!/hidden: true/.test(block) && !/key: "plugs"/.test(block)) shown.push(`${f}: ${block}`);
     }
   }
