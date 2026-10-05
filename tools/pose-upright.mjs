@@ -94,6 +94,7 @@ for (const id of ids) {
       const shots = [];
       // The same clocks in every run (the page's clock ran on while the toy loaded).
       player.time = 100;
+      player.scene.seed = 12345;
       player.motion.kitClock = { t: 0, last: null, rate: 1 };
       player.motion.moveClock = { t: 0, last: null, rate: 1 };
       await step(0.4);

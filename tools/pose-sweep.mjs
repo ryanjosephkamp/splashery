@@ -142,6 +142,7 @@ async function measure({ id, size, kitfix }) {
     };
     // The same clock in every pose (some effects run on the page's clock).
     player.time = 100;
+    player.scene.seed = 12345;
     player.motion.kitClock = { t: 0, last: null, rate: 1 };
     player.motion.moveClock = { t: 0, last: null, rate: 1 };
     await advance(0.4);
