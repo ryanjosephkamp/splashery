@@ -1,0 +1,111 @@
+{
+  "toy": "mitosis",
+  "checked": "2026-10-05",
+  "summary": "The toy shows an animal cell dividing by mitosis, phase by phase, in the order and with the events a biology textbook gives. The cell is a diagram: four chromosomes stand for a human cell's 46, and the parts are drawn clear and simple.",
+  "claims": [
+    {
+      "claim": "Prophase: the chromatin condenses into chromosomes of two sister chromatids, the nucleolus disappears and the centrosomes move toward opposite poles.",
+      "how": "Thin chromatin threads draw into eight solid chromatids (four chromosomes, sisters side by side); the nucleolus shrinks away; the two centrosomes travel round the nucleus to the poles.",
+      "where": "src/packs/tiny-r2.js (mitosis drive)",
+      "sources": [
+        {
+          "title": "Biology 2e, 10.2 The Cell Cycle",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle",
+          "says": "The sister chromatids begin to coil more tightly … the centrosomes begin to move to opposite poles."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "Prometaphase: the nuclear envelope breaks into pieces and spindle microtubules reach the kinetochores.",
+      "how": "The envelope comes apart in twelve pieces; a fiber grows from each pole to each chromatid's kinetochore.",
+      "where": "src/packs/tiny-r2.js (mitosis drive)",
+      "sources": [
+        {
+          "title": "Biology 2e, 10.2 The Cell Cycle",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle",
+          "says": "The remnants of the nuclear envelope fragment further … Each sister chromatid develops a protein structure called a kinetochore."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": "In the cell the envelope breaks into many small vesicles; the toy shows twelve large pieces so they read as pieces."
+    },
+    {
+      "claim": "Metaphase: the chromosomes line up on the metaphase plate midway between the poles.",
+      "how": "The chromosomes move to the plane between the poles, each sister attached to its own pole.",
+      "where": "src/packs/tiny-r2.js (mitosis drive)",
+      "sources": [
+        {
+          "title": "Biology 2e, 10.2 The Cell Cycle",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle",
+          "says": "All the chromosomes are aligned in a plane called the metaphase plate, or the equatorial plane, roughly midway between the two poles."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "Anaphase: the sister chromatids separate and are pulled to opposite poles, and the cell elongates.",
+      "how": "Each pair of sisters parts; each moves as a solid piece toward its pole as its fiber shortens; the poles move apart and the cell stretches.",
+      "where": "src/packs/tiny-r2.js (mitosis drive)",
+      "sources": [
+        {
+          "title": "Biology 2e, 10.2 The Cell Cycle",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle",
+          "says": "The cohesin proteins degrade, and the sister chromatids separate at the centromere … The cell becomes visibly elongated (oval shaped) as the polar microtubules slide."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "Telophase and cytokinesis: new nuclear envelopes form round each set of chromosomes, which decondense, and a contractile ring of actin pinches the cell in two at the cleavage furrow.",
+      "how": "New nuclei fade in round the chromosomes at each pole; a red ring at the equator closes as the membrane pinches into two cells.",
+      "where": "src/packs/tiny-r2.js (mitosis build, daughterPoint)",
+      "sources": [
+        {
+          "title": "Biology 2e, 10.2 The Cell Cycle",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle",
+          "says": "the chromosomes reach the opposite poles and begin to decondense … Nuclear envelopes form around the chromosomes … A contractile ring composed of actin filaments forms just inside the plasma membrane … This fissure is called the cleavage furrow."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": "The chromatids switch to the new nuclei's chromatin as the envelopes form, rather than unwinding visibly."
+    },
+    {
+      "claim": "A human cell has 46 chromosomes; the toy shows four, two pairs of homologs (each a slightly different shade).",
+      "how": "Four chromosomes, two long and two short, in two shades of pink and two of blue.",
+      "where": "src/packs/tiny-r2.js (CHROMOSOMES)",
+      "sources": [
+        {
+          "title": "How many chromosomes do people have?",
+          "publisher": "MedlinePlus Genetics (U.S. National Library of Medicine)",
+          "url": "https://medlineplus.gov/genetics/understanding/basics/howmanychromosomes/",
+          "says": "In humans, each cell normally contains 23 pairs of chromosomes, for a total of 46."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Four chromosomes stand for 46; their banding is decorative, not a real karyotype.",
+    "Each daughter gets one centrosome; the copy that appears beside it at the end stands for the duplication in the next S phase.",
+    "Spindle fibers are drawn as a few lines (a real spindle has thousands of microtubules) and astral microtubules are left out.",
+    "Only one daughter is followed: it grows back into the starting cell (G1), so the toy can play again; the other drifts away.",
+    "The whole division takes about 18 seconds; in a human cell mitosis takes about an hour."
+  ],
+  "fixes": []
+}

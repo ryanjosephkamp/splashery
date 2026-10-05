@@ -722,10 +722,25 @@ export const TOY_HELP = {
     about:
       "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of a typical isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
   },
+  // Lane Elements: the periodic table of real samples (labs).
+  "real-elements": {
+    howTo:
+      "Tap a tile to lift its sample and read its facts; tap the sample to turn it, its tile to set it back.",
+    about:
+      "Every element as a real sample, like the classic photographic periodic tables: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model that judged from the photo how far away each part is. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out toward you and swings so you see its shape. Its facts show beside it: mass, group and period, state, density, melting and boiling points, discovery and real uses, from PubChem. Tap the sample to turn it around, or its tile to set it back. About 27 elements have no photo of a real sample: the heaviest exist only a few atoms at a time. Their tiles are hatched, and their facts say why. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+  },
+
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
     about:
       "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
+  },
+
+  // Lane Molecule viewer (labs).
+  "molecule-viewer": {
+    howTo: "Tap two atoms for their distance, a third for the angle.",
+    about:
+      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank, small molecules as SDF, MOL or XYZ files. This viewer draws every atom of such a file with splats, in the usual colors: carbon gray, oxygen red, nitrogen blue.\n\nPick a sample, open your own file, or type a PDB code such as 1MBN and press Fetch in the Toy tab; the entry is read only when you ask, and its title, authors and fetch time show beside it. Draw it as a cartoon, balls and sticks, space-filling atoms or a smooth surface, colored by element, chain, residue or B-factor. Tap two atoms for the distance between their centers in ångströms, a third for the angle in degrees. Positions are an experiment's best fit, not a photograph.",
   },
 
   // ---- Gems -----------------------------------------------------------------------------
@@ -1529,7 +1544,7 @@ export const TOY_HELP = {
   perceptron: {
     howTo: "Tap it to watch it try an example, get it wrong, and learn.",
     about:
-      "A perceptron is the simplest artificial neuron, invented by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab. This repeats a scripted learning example; it does not keep training on your taps.",
+      "A perceptron is the simplest artificial neuron, described by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab. This repeats a scripted learning example; it does not keep training on your taps.",
   },
   "multilayer-perceptron": {
     howTo: "Tap it to try all four inputs and fill in the XOR truth table.",
@@ -1552,9 +1567,10 @@ export const TOY_HELP = {
       "A recurrent network, or RNN, reads a sequence, like the words of a sentence, one piece at a time. It keeps a memory called the hidden state: after each word, the state loops back in with the next word, so what it knows builds up as it reads. An LSTM (long short-term memory) adds gates that decide what to forget, what to take in and what to pass on.\n\nTap it: THE, CAT and SAT rise into the cell one at a time. The cell flashes, and the glowing orb, the hidden state, takes on the word's color mixed with what it carried and runs around the loop. In the Toy tab, pick the LSTM style to see its three gates open and shut like shutters, or a 3D model. This is a scripted sequence, not a trained sentence reader.",
   },
   transformer: {
-    howTo: "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
+    howTo:
+      "Tap it to watch a prepared next-word example. Try the Encoder–decoder diagram in the Toy tab.",
     about:
-      "A transformer is a neural network first described in 2017, for translating text. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. Language models built this way predict the next token.\n\nTap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in. The Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, it predicts MUNDO.",
+      "A transformer is a neural network first described in 2017, for translating text. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. Language models built this way predict the next token.\n\nTap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in. The Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, the prepared example ends with MUNDO. The words and attention strengths are prepared; this view does not calculate attention or predict text.",
   },
   "looped-transformer": {
     howTo: "Tap it: the tiles loop through one block, sharper each lap, until 3 + 4 = 7.",
@@ -1584,7 +1600,7 @@ export const TOY_HELP = {
   "sorting-machine": {
     howTo: "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
     about:
-      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. There are many: bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars of different heights sort themselves, each bar gliding to its new place, while a counter counts the swaps; then they shuffle back. Pick one of eight algorithms in the Toy tab, from bubble sort to heap sort, and watch how differently they work.",
+      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. There are many: bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars of different heights sort themselves, each bar gliding to its new place, while a counter counts the swaps, or moves for merge sort; then they shuffle back. Pick one of eight algorithms in the Toy tab, from bubble sort to heap sort, and watch how differently they work.",
   },
   "half-adder": {
     howTo: "Tap it to add 1 + 1 in binary: the answer is 10.",
@@ -1607,7 +1623,7 @@ export const TOY_HELP = {
     howTo:
       "Tap the keys or type to code letters. Tap the machine to decode. Tap the pad to clear it.",
     about:
-      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad under yours. Tap the machine off the keys: the coded letters, typed from the same start, give your message back. With nothing typed, it types the stored message (HELLO, or yours from the Toy tab). Tap the pad for a clean sheet. The real machine had no delete key: tap the rotors, or press Backspace, to turn them back a letter. On a keyboard, hold Shift for P and R. Its rotors and reflector have the historical wirings.",
+      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors, including an occasional double step, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad under yours. Tap the machine off the keys: the coded letters, typed from the same start, give your message back. With nothing typed, it types the stored message (HELLO, or yours from the Toy tab). Tap the pad for a clean sheet. The real machine had no delete key: tap the rotors, or press Backspace, to turn them back a letter. On a keyboard, hold Shift for P and R. Its rotors and reflector have the historical wirings.",
   },
   bombe: {
     howTo: "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
@@ -1654,11 +1670,23 @@ export const TOY_HELP = {
     about:
       "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the nearest mode, and a new note clearly held brings a new pattern with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
   },
+  // Lane Data and climate.
+  "data-in-3d": {
+    howTo:
+      "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
+    about:
+      "A table becomes a 3D chart you can turn: each row a point in a scatter, or rows gathered into bars or a surface whose heights are the mean of the rows in each cell. The labels turn to face you as you go round.\n\nYour file is read in your browser and never uploaded. Headers, quoted fields, dates, categories and missing cells are understood; a very big table is shown as an even random sample, and the Toy tab says so. Save a picture or a turning video from the Toy tab. The samples are a month of earthquakes (USGS), Fisher's 150 iris flowers (UCI, CC BY 4.0) and the CO2 record at Mauna Loa (NOAA).",
+  },
+  "climate-records": {
+    howTo: "Pick a record in the Toy tab and turn it; tap to play the record again.",
+    about:
+      "Two of the clearest measurements of a changing climate, from dated snapshots taken October 5, 2026 (nothing is fetched live).\n\nThe CO2 spiral is NOAA's monthly mean CO2 at Mauna Loa, Hawaii, from May 1974 to August 2026: one turn a year climbing upward, its distance from the middle the CO2 in parts per million. It widens as CO2 rises from 333 to over 427 ppm, faster in later years, and every turn leans toward May, when the air holds the most CO2 before northern plants draw it down. NOAA's record goes back to March 1958, but those early months come from the Scripps Institution of Oceanography, whose terms don't allow reuse here, so they are left out.\n\nThe temperature charts are NASA's GISTEMP v4: how much warmer or cooler each month (bars) or each year (a wall) was across the globe than the 1951–1980 average, from 1880. Blue is cooler, red warmer; 2024 averaged 1.29 °C above that baseline.",
+  },
   // Lane QR.
   "qr-code": {
-    howTo: "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
+    howTo: "Type a link in the Toy tab, pick a style or a theme, and tap the code.",
     about:
-      "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles. “Scan view” turns it flat to the camera, and the toy reads its own picture back to check that it still scans. Tap it and the modules burst, fall and fly back to their places. Your text never leaves your device.",
+      "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles and in a color theme or a country's flag colors, always with the contrast a camera needs. The toy reads its own picture back to check that it scans. Tap it and the modules around your finger are knocked loose and snap back; the Toy tab has eight more motions, each ending on a code that scans. Alive moves colors through the code at the speed you choose, and every frame still scans, because each module keeps nearly the same lightness. Your text never leaves your device.",
   },
   // Lane QR lab r2.
   "qr-anatomy": {
@@ -1688,6 +1716,19 @@ export const TOY_HELP = {
       "Tap “Start camera” to see yourself in splats; turn it to see the depth. More in the Toy tab.",
     about:
       "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
+  },
+  // Lane Sound and light lab.
+  "sound-lab": {
+    howTo:
+      "Tap to play or stop a tone. The Toy tab changes it, starts the metronome, or uses your microphone.",
+    about:
+      "Sound is air pressure going up and down, and this bench shows it four ways. The oscilloscope draws the wave over a few thousandths of a second. The spectrum splits it into frequencies and names the loudest. The spectrogram keeps eight seconds of spectra side by side: a whistle is a bright line, a clap a column. The level is in decibels below full scale (dBFS).\n\nTap to play the tone generator, a sine, square, saw or noise from 20 Hz to 20 kHz, through the speaker when the site's sound is on. Two close tones beat: 440 and 443 Hz swell and fade three times a second. A square wave's extra lines are its odd harmonics. Tap “Use my microphone” to see your voice instead; the sound goes only to the screen. The dB SPL figure is an uncalibrated estimate that assumes a typical phone microphone. The metronome clicks once a beat as it swings from side to side.",
+  },
+  "sound-recorder": {
+    howTo:
+      "Tap Record in the Toy tab, make your sound, then Stop. Tap the toy to play it; trim and save it there.",
+    about:
+      "A recorder for sound effects and ideas. Tap Record and the page keeps what your microphone hears, up to ten minutes. Stop shows the recording as a waveform (how loud, moment by moment) over a spectrogram (which pitches, from 40 Hz at the bottom to 16 kHz at the top). Drag Start and End, or tap Trim the silence, to keep just the part you want, and tap the toy to hear it.\n\nSave as WAV keeps every sample exactly as it was recorded (16-bit, the microphone's rate). Save as a smaller file uses your browser's own compression (Opus or AAC) and takes as long as the sound to make. The recording stays in this page's memory on your device and goes when you close the page; nothing is sent anywhere, and it's saved only to a file you choose. To show the Operator a sound you want, attach the file to a message in the chat.",
   },
   "moving-photo-3d": {
     howTo:
@@ -1735,7 +1776,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
     about:
-      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid represents a Gaussian approximation to that spread, which can include vibration and static disorder. Its long axis shows the direction of greatest spread. It is not an exact photograph of an atom's motion.\n\nChoose aspirin at 300 K, the protein crambin, or open a CIF, mmCIF or PDB with displacement records. Probability selects an ellipsoid enclosing 30%, 50% or 90% of the modeled distribution. Draw solid ellipsoids or one soft Gaussian per atom; toggle bonds. Hydrogens can be small spheres, drawn as refined, or hidden. Atoms with only isotropic displacement appear as spheres. Tap to switch illustrative jiggles on or off; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore a structure, not to measure vibration rates.",
+      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid is a Gaussian picture of that spread, which can include vibration and static disorder; its long axis shows the direction of greatest spread. It is not a photograph of an atom's motion.\n\nPick one of 38 measured structures in seven groups (everyday molecules, medicines, molecules of life, minerals and gems, ice and salts, proteins, and DNA and RNA) from the Crystallography Open Database or the Protein Data Bank, or open a CIF, mmCIF or PDB file. Show fills the unit cell with the atoms' symmetry copies, as minerals show by default. Probability sets the ellipsoid to enclose 30%, 50% or 90% of the spread; hard minerals and cold crystals have small ones. Draw solid ellipsoids or one Gaussian per atom, with or without bonds; hydrogens can be small spheres, as refined, or hidden. Tap to jiggle; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore, not to measure.",
   },
   "smlm-microscope": {
     howTo:
@@ -1743,10 +1784,27 @@ export const TOY_HELP = {
     about:
       "Ordinary light microscopy struggles to separate nearby objects about 200 to 300 nanometers apart. Single-molecule localization microscopy finds the centers of isolated fluorescent blinks more precisely, then builds a picture from many positions. Localization precision is not the same as the final image's resolution, and several blinks may come from one molecule. Here each blink is drawn as a Gaussian whose width represents its reported uncertainty.\n\nChoose microtubules and clathrin in a 12 µm cell region, a whole nucleus in 3D, or open a .smlm file or a CSV with positions and uncertainties in nanometers. Color by depth, time frame or channel. Depth scale shows true coordinates or stretches depth fourfold. Precision keeps all localizations or only those better than 5 or 3 nm. Pinch or scroll to zoom; tap for a 200 nm slice at that depth, then tap to restore all depths. Files stay on your device. This is a viewer, not a measurement tool.",
   },
-  "galaxy-box": {
-    howTo: "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
+  "cryoem-map": {
+    howTo:
+      "Tap to cut it open; tap again to close it. Pick a map, a level and the fitted model in the Toy tab.",
     about:
-      "Galaxy simulations follow gas with particles that carry mass, temperature, density and a smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated present day, not a telescope image.\n\nEach particle is shown with a Gaussian whose spread approximates the simulation's smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue and hot orange or red, or by Density to compare the gas concentration. Brightness also increases with density. Switch The box to show or hide the frame. Pinch or scroll to zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the gas's shape but do not give a quantitative column-density measurement.",
+      "Cryo-electron microscopy freezes thousands of copies of a molecule in thin ice, photographs them with electrons and averages the pictures into a 3D map of density. Scientists look at the map as a surface at one density level and build an atomic model into it.\n\nThis toy reads three real maps from the Electron Microscopy Data Bank: apoferritin, a ribosome and a virus shell. It draws the surface at the level EMDB recommends, one small flat splat wherever the density crosses that level, on a grid of about 1 to 1.6 Å voxels that fits a phone. Choose a lower or higher level, color by the fitted model's chains or by distance from the center, and show the model's backbone inside a see-through map. Tap to cut the front half away and see inside. It is for looking, not for measuring or model building.",
+  },
+  "contour-lab": {
+    howTo: "Tap to pull the layers apart; tap again to stack them. Pick a place in the Toy tab.",
+    about:
+      "A contour line joins places at the same height, and a map with them shows a 3D shape on flat paper. This lab cuts real land into layers, one for each step of height, so you can see where the lines come from.\n\nThe land is measured: the U.S. Geological Survey's elevation data for Mount St. Helens, the Grand Canyon or Yosemite Valley, about 35 m between samples. Each layer's edge is a contour line. Tap to lift the layers apart and see each edge on its own; seen from straight above, the edges are the nested rings of a contour map. Lines close together mean steep ground; far apart, gentle. Choose the place and how much the heights are stretched.",
+  },
+  "terrain-box": {
+    howTo: "Tap to fill the land with water; tap again to drain it. Pick a place in the Toy tab.",
+    about:
+      "This is real land in a box: the U.S. Geological Survey's measured heights for Mount St. Helens, the Grand Canyon or Yosemite Valley, a square about 10 km across with a sample every 35 m. Each sample is a small splat, tinted by height and shaded by the sun, and the box's walls show the land cut through.\n\nTap to fill the land with water to a level and watch which valleys flood first, then tap to drain it. It is a level rising, not a model of how real floods flow. Choose the place, stretch the heights to see gentle slopes, and turn on contour lines. The Contour lab next to it shows how those lines are made.",
+  },
+  "galaxy-box": {
+    howTo:
+      "Pinch to zoom into the gas; tap to peel the hot gas. Through the telescope, tap for a new exposure.",
+    about:
+      "Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2 simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4 billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't Gaussian), colored by temperature or density; tap to keep only the cold gas.\n\nThrough a telescope (simulated) shows what an observer might record if the galaxy were 160 million light-years away: its star particles, bluer and brighter when young, blurred by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a filter; each tap starts a new exposure whose grainy photon noise smooths out as light builds up. The colors use a rough rule for how starlight fades with age, so it is a picture to explore, not a measurement.",
   },
 
   // ---- Imaging (lane Imaging) -----------------------------------------------------------
@@ -1758,17 +1816,18 @@ export const TOY_HELP = {
   "how-ct": {
     howTo: "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
     about:
-      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.",
+      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.\n\nChoose another toy to put in the scanner in the Toy tab. Its CT volume is worked out from its shape: a dense skin around a softer, even inside, since the toy has no real inside to measure.",
   },
   "fruit-mri": {
     howTo: "Drag up or down to scroll through the slices. Tap to play through them all.",
     about:
-      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit in the Toy tab. The faint outline shows where the slice is.",
+      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit and the vision (the realistic gray, night vision or infrared) in the Toy tab. The faint outline shows where the slice is.",
   },
   "electron-microscope": {
-    howTo: "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
+    howTo:
+      "Tap to zoom in a step; the third tap goes back out. Choose the sample and the vision in the Toy tab.",
     about:
-      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface.",
+      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface. Vision in the Toy tab recolors the picture: the realistic gray, a night-vision scope's green, or an infrared camera's colors (for fun: an electron microscope sees no color).",
   },
   "thermal-camera": {
     howTo: "Tap to switch the thermal camera on or off, and watch the tea cool.",
@@ -1778,15 +1837,22 @@ export const TOY_HELP = {
   "walnut-ct": {
     howTo: "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
     about:
-      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
+      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors (CT gray, warm, night vision or infrared) in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
+  // Lane Sound and light lab.
+  "light-lab": {
+    howTo:
+      "Tap for the next element or lamp. The Toy tab picks a prism, a grating or your camera as a spectrometer.",
+    about:
+      "Every element glows in its own colors. Its electrons jump up and fall back, each fall giving off light of one exact wavelength, so an element's light split by a prism is a few sharp lines, as unique as a fingerprint. These are the strong visible lines of sixteen elements measured by NIST, brightness from NIST's relative intensities.\n\nThe prism bends each color by Snell's law, from the glass maker's formula for its index: blue bends most. A grating (a CD, a DVD or a slide) sends each color off where d sin θ = m λ: red bends most, in several orders. Tap to change the lamp and every ray moves. Home spectrometer: hold an old CD or DVD near your camera under a fluorescent lamp, find the rainbow in it and tap “Use my camera”. It calibrates on mercury's 436 and 546 nm lines. Simplified: screens can't show pure spectral colors, and a real lamp's line strengths depend on its pressure and heat.",
+  },
   "fluid-lab": {
     howTo:
       "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
     about:
-      "Everything that flows here is a crowd of small particles, each drawn as a splat. For the liquids, the computer keeps every particle from crowding its neighbors, so the crowd keeps its volume the way water does, and evens out their speeds to make them thick: a little for water, a lot for honey and lava. Where the flow is fast and breaks up, it throws off drops, foam and, for soda, rising bubbles. Smoke and steam are lighter particles that rise, swirl, spread and fade. A flame is a stream of short-lived hot particles that rise and cool from blue at the base to yellow, orange and dull red.\n\nPick a Scene: pour into a glass (the third tap empties it first), splash into a basin, blow out a candle, or blow across a hot cup. Pick a Liquid to see how thickness changes a pour. This is graphics physics: it moves believably, but it is not a validated scientific simulation.\n\nThis lab runs best on a computer. On a phone, choose Auto detail.",
+      "The liquids move as particles. Smoke and steam can use particles or a grid, depending on the rendering path. For the liquids, the computer keeps every particle from crowding its neighbors, so the crowd keeps its volume the way water does, and evens out their speeds to make them thick: a little for water, a lot for honey and lava. Where the flow is fast and breaks up, it throws off drops, foam and, for soda, rising bubbles. Smoke and steam rise, swirl, spread and fade. The flame rises and fades through blue, yellow, orange and dull red.\n\nPick a Scene: pour into a glass (the third tap empties it first), splash into a basin, blow out a candle, or blow across a hot cup. Pick a Liquid to see how thickness changes a pour. This is graphics physics: it moves believably, but it is not a validated scientific simulation.\n\nThis lab runs best on a computer. On a phone, choose Auto detail.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------
@@ -2028,6 +2094,33 @@ export const TOY_HELP = {
     howTo: "Tap it for a gust of wind that spins the sails hard.",
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
+  },
+  // Lane Night sky.
+  "night-sky": {
+    howTo: "Drag to look around the sky. Tap a star or a planet to name it.",
+    about:
+      "The sky over a place at a moment: about 5,000 stars down to magnitude 6, the faintest you can see from a dark place, each sized by its brightness and colored by its temperature. The Sun, the Moon and the planets are placed by JPL's formulas for their orbits, and the Moon is a small ball lit from the Sun's side, so you see its real phase. As the Sun rises the faint stars go out first.\n\nPick a city in the Toy tab, type a latitude and longitude, or tap “Use my location” (your browser asks first; the place stays on your device). Set a date from 1800 to 2050, or speed time up to watch the sky turn. The Sun and the Moon are drawn three times their real size.",
+  },
+  // ---- Tiny world r2 (lane Tiny world r2) ----
+  "dna-to-protein": {
+    howTo: "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
+    about:
+      "A gene is a stretch of DNA that spells out a protein. Tap and RNA polymerase opens the double helix and reads the template strand, building messenger RNA that matches the coding strand (with U for T). A ribosome then reads the mRNA three bases (a codon) at a time from the start codon AUG; each tRNA whose anticodon pairs with the codon brings its amino acid, and the chain grows until a stop codon. The chain then folds into the protein's real shape from the Protein Data Bank.\n\nThe genes are real (NCBI); only the start and end are drawn base by base. Try a mutation: changing base 2 of codon 7 in hemoglobin beta to T is the sickle-cell change (glutamic acid to valine).",
+  },
+  mitosis: {
+    howTo: "Tap the cell to watch it divide in two, phase by phase.",
+    about:
+      "Mitosis is how one cell becomes two with the same chromosomes. Before it starts, each chromosome has been copied into two sister chromatids. Tap and the chromatin threads coil into compact chromosomes (prophase), the nuclear envelope breaks into pieces and spindle fibers from the two centrosomes reach the chromosomes (prometaphase), which line up across the middle (metaphase). The sisters are pulled to opposite poles (anaphase), new nuclei form round each set (telophase) and a ring pinches the cell in two (cytokinesis).\n\nA human cell has 46 chromosomes; four are shown, two pairs. One daughter then grows back into a whole cell.",
+  },
+  apoptosis: {
+    howTo: "Tap the cell to watch it take itself apart, step by step.",
+    about:
+      "Apoptosis is a cell's tidy, programmed death: the body's way of removing cells it no longer needs, or that are damaged, without harming their neighbors. Tap and the cell shrinks and its chromatin condenses into a small, dark nucleus (pyknosis). The membrane bubbles out in blebs, the nucleus breaks into pieces (karyorrhexis), and the cell comes apart into apoptotic bodies, each wrapped in membrane, which are cleared away.\n\nUnlike a cell that bursts, nothing spills out, so there is no inflammation. In the body, white blood cells eat the bodies; here they drift away and a neighbor moves in.",
+  },
+  phagocytosis: {
+    howTo: "Tap to watch the neutrophil catch and digest the bacterium.",
+    about:
+      'Phagocytosis means "cell eating". Tap and this neutrophil, a white blood cell, reaches out pseudopods around a bacterium until their tips meet, enclosing it in a bubble of membrane called a phagosome. Lysosomes, small sacs of digestive enzymes, fuse with it to make a phagolysosome, where the bacterium is broken down. The cell then releases the waste.\n\nNeutrophils are the most common white blood cells; their nucleus has several lobes. A real neutrophil also kills with bursts of reactive oxygen; the toy shows the steps of eating.',
   },
 };
 
