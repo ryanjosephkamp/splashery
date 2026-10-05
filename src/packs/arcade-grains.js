@@ -63,6 +63,9 @@ class Grains {
     const dims = p === "low" ? [50, 64, 4] : p === "mid" ? [68, 88, 6] : [80, 104, 7];
     [this.GX, this.GY, this.GZ] = dims;
     this.cap = p === "low" ? 9000 : p === "mid" ? 20000 : 30000;
+    // Each grain is a little square of 2 × 2 small splats (one on a low
+    // profile), so a grain's edges, and so a pile's, stay crisp.
+    this.sub = p === "low" ? 1 : 2;
     this.cell = 2.0 / this.GY;
     this.size = [this.GX * this.cell, this.GY * this.cell, this.GZ * this.cell];
     this.rand = api.rand;
@@ -93,13 +96,17 @@ class Grains {
     this.stamp = new Uint8Array(n);
     this.tick = 0;
     this.box = S.add(this.boxModel);
-    this.pts = this.api.points(this.cap, { size: this.cell * 0.4, flat: 1 });
+    const q = this.sub;
+    this.pts = this.api.points(this.cap * q * q, {
+      size: q === 1 ? this.cell * 0.4 : this.cell * 0.26,
+      flat: 0.5,
+    });
     this.free = [];
     for (let i = this.cap - 1; i >= 0; i--) this.free.push(i);
     this.shade = new Float32Array(this.cap);
     for (let i = 0; i < this.cap; i++) this.shade[i] = this.rand();
     this.jit = new Float32Array(this.cap * 3);
-    for (let i = 0; i < this.cap * 3; i++) this.jit[i] = (this.rand() - 0.5) * 0.16;
+    for (let i = 0; i < this.cap * 3; i++) this.jit[i] = (this.rand() - 0.5) * 0.04;
     this.grains = 0;
     this.plants = 0;
     this.yaw = 0;
@@ -153,7 +160,7 @@ class Grains {
   kill(i) {
     const s = this.slot[i];
     if (s >= 0) {
-      this.pts.hide(s);
+      for (let k = 0, q = this.sub * this.sub; k < q; k++) this.pts.hide(s * q + k);
       this.free.push(s);
       this.grains--;
     }
@@ -177,14 +184,25 @@ class Grains {
     if (m === MATS.fire) {
       const f = Math.min(1, life / 60);
       c = [1, 0.35 + 0.5 * f * sh, 0.08 + 0.2 * f * f];
-      this.pts.color(s, c[0] * 1.15, c[1] * 1.1, c[2], 1);
+      this.tint(s, c[0] * 1.15, c[1] * 1.1, c[2], 1);
       return;
     }
     const pal = COLORS[m];
     if (m === MATS.flower) c = pal[(sh * 3) | 0];
     else c = mixc(pal[0], sh < 0.5 ? pal[1] : pal[2], Math.abs(sh - 0.5) * 2);
     const a = m === MATS.water ? 0.86 : m === MATS.smoke ? 0.45 : 1;
-    this.pts.color(s, c[0], c[1], c[2], a);
+    this.tint(s, c[0], c[1], c[2], a);
+  }
+
+  // A grain's color on all its small splats, a touch lighter at the top
+  // left and darker at the bottom right, so each grain reads as a piece.
+  tint(s, r, g, b, a) {
+    const q = this.sub;
+    if (q === 1) return this.pts.color(s, r, g, b, a);
+    for (let k = 0; k < 4; k++) {
+      const f = k === 2 ? 1.05 : k === 1 ? 0.93 : 1;
+      this.pts.color(s * 4 + k, Math.min(1, r * f), Math.min(1, g * f), Math.min(1, b * f), a);
+    }
   }
 
   place(i, s) {
@@ -195,7 +213,13 @@ class Grains {
     const c = this.cell;
     const [w, h, d] = this.size;
     const j = s * 3;
-    this.pts.set(s, -w / 2 + (x + 0.5 + this.jit[j]) * c, -h / 2 + (y + 0.5 + this.jit[j + 1] * 0.5) * c, -d / 2 + (z + 0.5 + this.jit[j + 2]) * c); // prettier-ignore
+    const px = -w / 2 + (x + 0.5 + this.jit[j]) * c;
+    const py = -h / 2 + (y + 0.5 + this.jit[j + 1] * 0.5) * c;
+    const pz = -d / 2 + (z + 0.5 + this.jit[j + 2]) * c;
+    if (this.sub === 1) return this.pts.set(s, px, py, pz);
+    const o = c / 4;
+    // k: 0 bottom left, 1 bottom right, 2 top left, 3 top right
+    for (let k = 0; k < 4; k++) this.pts.set(s * 4 + k, px + (k & 1 ? o : -o), py + (k & 2 ? o : -o), pz); // prettier-ignore
   }
 
   swap(i, j) {
@@ -450,7 +474,8 @@ class Grains {
       target: [0, view * -0.05 + 0.08 * (1 - view), 0],
       yaw: view * (0.62 + this.yaw),
       pitch: view * 0.42,
-      distance: d2 * (1 - 0.08 * view),
+      // (on a tall screen the turned box needs a little more room)
+      distance: d2 * (1 + (aspect < 1 ? 0.12 : -0.08) * view),
     };
   }
 

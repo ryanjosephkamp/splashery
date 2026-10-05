@@ -337,6 +337,7 @@ export const RECIPES = {
         keys: "Q and E turn the box in 3D.",
         short: "Hold to pour · V tips it into 3D",
       },
+      slots: { high: 130000, mid: 90000, low: 28000 }, // a grain is 2 × 2 small splats
       create: async (api) => (await import("./arcade-grains.js")).createGrains(api),
     },
   },
