@@ -1371,7 +1371,7 @@ function buildEnigma(k, o) {
         return keep(lit(col, c.n, { amb: 0.65, dif: 0.4, spec: 0.5, pow: 24 }));
       },
     });
-    text(k, ch, [p[0], p[1] + 0.03, p[2]], 0.0115, "#f4f1e8", { weight: 16, size: 0.9, rot: [-90, 0, 0], ...tok }); // prettier-ignore
+    text(k, ch, [p[0], p[1] + 0.03, p[2]], 0.0115, "#f4f1e8", { weight: 26, size: 0.85, rot: [-90, 0, 0], ...tok }); // prettier-ignore
   }
   // The lampboard: frosted glass windows with stenciled letters, and one
   // glow (token 26) that moves under the lamp that lights.
@@ -1379,8 +1379,9 @@ function buildEnigma(k, o) {
     const p = enLampPos(ch);
     k.add(evenCylinder(0.052, 0.052, 0.02, true), { pos: p, even: true, weight: 1.4, flat: 0.25, pattern: false, color: (c) => keep(lit(c.s.cap ? "#d9d6c8" : "#7c7f84", c.n, { amb: 0.8, dif: 0.25, spec: 0.3 })) }); // prettier-ignore
     text(k, ch, [p[0], p[1] + 0.03, p[2]], 0.011, "#2b2a27", {
-      weight: 16,
-      size: 0.85,
+      // Polish: finer splats, so the letters read at phone size.
+      weight: 24,
+      size: 0.8,
       rot: [-90, 0, 0],
     });
   }

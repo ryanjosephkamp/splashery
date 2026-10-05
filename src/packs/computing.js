@@ -8,7 +8,7 @@
 // seven-segment digits.
 
 import { mix, shade, clamp, ramp } from "../kit.js";
-import { evenBox, evenCylinder } from "./even.js";
+import { evenBox, evenCylinder, evenDisc } from "./even.js";
 import { FONT } from "../font.js";
 import { CNN_NET, CNN_SAMPLES, CNN_ACCURACY } from "./computing-cnn.js";
 
@@ -1213,22 +1213,18 @@ const SORT = (() => {
   return { start, runs, steps, names, colors, x, height, t0: 0.25, t1: 3.85 };
 })();
 
-// When each step sounds, for a sort whose swaps (or moves) come every `dt`
-// seconds from t0 (the bars glide for 0.85 of each step): a swap's note
-// plays as its bars land (the bar that moves right; a move's own bar),
-// loud; the comparisons made between two swaps play softly in between, each
-// the two compared bars' notes together; then the sorted bars play their
-// scale. Returns [time, spec] in time order.
-function sortCues(algo, run, dt) {
-  const sv = SORT_VOICES[algo] || SORT_VOICES.bubble;
-  const base = { voice: sv.voice, ...(sv.hold ? { hold: sv.hold } : {}) };
+// When each step happens, for a sort whose swaps (or moves) come every `dt`
+// seconds from t0 (the bars glide for 0.85 of each step): a swap or move as
+// its bars land, the comparisons made between two swaps spread in between.
+// Returns { t, e } for every step. sortCues is its sound: a swap's note (the
+// bar that moves right; a move's own bar) loud, each comparison the two
+// compared bars' notes together, softly; then the sorted bars play their
+// scale. It returns [time, spec] in time order.
+function sortTimes(run, dt) {
   const out = [];
   let pending = [];
   const flush = (a, b) => {
-    pending.forEach((e, k) => {
-      const notes = `${sortNote(e.vals[0], sv.up)}+${sortNote(e.vals[1], sv.up)}`;
-      out.push([a + ((b - a) * (k + 0.5)) / pending.length, { ...base, notes, decay: 0.35, vol: 0.28 }]); // prettier-ignore
-    });
+    pending.forEach((e, k) => out.push({ t: a + ((b - a) * (k + 0.5)) / pending.length, e }));
     pending = [];
   };
   let m = 0;
@@ -1240,14 +1236,33 @@ function sortCues(algo, run, dt) {
     }
     const next = SORT.t0 + m * dt + 0.85 * dt;
     flush(land + 0.03, next - 0.03);
-    const v = e.op === "move" ? e.vals[0] : Math.max(e.vals[0], e.vals[1]);
-    out.push([next, { ...base, notes: sortNote(v, sv.up), decay: 0.6, vol: 0.85 }]);
+    out.push({ t: next, e });
     land = next;
     m++;
   }
   if (pending.length) flush(land + 0.03, Math.min(SORT.t1 + 0.05, land + 0.03 + 0.08 * pending.length)); // prettier-ignore
+  return out;
+}
+function sortCues(algo, run, dt) {
+  const sv = SORT_VOICES[algo] || SORT_VOICES.bubble;
+  const base = { voice: sv.voice, ...(sv.hold ? { hold: sv.hold } : {}) };
+  const out = sortTimes(run, dt).map(({ t, e }) => {
+    if (e.op === "compare") {
+      const notes = `${sortNote(e.vals[0], sv.up)}+${sortNote(e.vals[1], sv.up)}`;
+      return [t, { ...base, notes, decay: 0.35, vol: 0.28 }];
+    }
+    const v = e.op === "move" ? e.vals[0] : Math.max(e.vals[0], e.vals[1]);
+    return [t, { ...base, notes: sortNote(v, sv.up), decay: 0.6, vol: 0.85 }];
+  });
   out.push([3.95, { ...base, notes: [0, 1, 2, 3, 4, 5, 6, 7].map((v) => sortNote(v, sv.up)).join(" "), step: 0.06, decay: 0.8 }]); // prettier-ignore
   return out.sort((p, q) => p[0] - q[0]);
+}
+// Polish (lane Computing r2): the two places being compared, lit for a
+// moment as each comparison sounds: [time, slot, slot].
+function sortMarks(run, dt) {
+  return sortTimes(run, dt)
+    .filter(({ e }) => e.op === "compare")
+    .map(({ t, e }) => [t, e.i, e.j]);
 }
 
 // ---- The sorting machine's views (lane Computing r2) ------------------------------------
@@ -1260,7 +1275,15 @@ const SORT_RING = { r: 0.7, puck: 0.11, h: 0.13 };
 const ringAngle = (s) => -Math.PI / 8 - (s * Math.PI) / 4;
 const crateSize = (v) => 0.1 + 0.02 * v;
 // The crates stand further apart than the bars, as the biggest is wider.
-const crateX = (slot) => (slot - 3.5) * 0.3;
+const crateX = (slot) => (slot - 3.5) * 0.28;
+// Polish: each crate's lane for the shuffle back, packed by size (the
+// biggest at the back, the smallest at the front, so none hides another),
+// each clear of the next, so the plinth (and the frame) stays shallow.
+const CRATE_LANE = (() => {
+  const z = [0];
+  for (let v = 1; v < 8; v++) z[v] = z[v - 1] + (crateSize(v - 1) + crateSize(v)) / 2 + 0.012;
+  return z.map((x) => z[7] / 2 - x);
+})();
 // Out to a side lane, across, and back in: 0 to 1 to 0 as f runs.
 const lane = (f) => ease(band(f, 0, 0.25)) * (1 - ease(band(f, 0.75, 1)));
 const across = (a, b, f) => a + (b - a) * ease(band(f, 0.25, 0.75));
@@ -1269,6 +1292,8 @@ const SORT_VIEWS = {
   // going left behind; on the shuffle back each has its own lane.
   bars: {
     at: (v, s) => [SORT.x(s), 0, 0],
+    // Where a compared place's light sits (on the plinth, in front).
+    mark: (s) => [SORT.x(s), 0.004, 0.3],
     swap(v, a, b, f) {
       return [SORT.x(a + (b - a) * f), 0, Math.sign(b - a) * 0.2 * Math.sin(Math.PI * f)];
     },
@@ -1280,16 +1305,17 @@ const SORT_VIEWS = {
   // Crates, bigger for bigger values: a crate going left slides out to the
   // front and along; one going right further than the next place is lifted
   // over the others. On the shuffle back each crate slides out to its own
-  // lane (front or back, by size), across, and in.
+  // lane (by size, the biggest at the back), across, and in.
   crates: {
     at: (v, s) => [crateX(s), 0, 0],
+    mark: (s) => [crateX(s), 0.004, 0.56],
     swap(v, a, b, f) {
       const x = crateX(across(a, b, f));
       if (b < a) return [x, 0, 0.3 * lane(f)];
       return [x, b - a > 1 ? 0.3 * lane(f) : 0, 0];
     },
     back(v, a, b, f) {
-      return [crateX(across(a, b, f)), 0, (v - 3.5) * 0.26 * lane(f)];
+      return [crateX(across(a, b, f)), 0, CRATE_LANE[v] * lane(f)];
     },
   },
   // A ring of colored pucks on a turntable, sorted by hue into a color
@@ -1300,6 +1326,10 @@ const SORT_VIEWS = {
     at(v, s) {
       const a = ringAngle(s);
       return [SORT_RING.r * Math.sin(a), 0, SORT_RING.r * Math.cos(a)];
+    },
+    mark(s) {
+      const a = ringAngle(s);
+      return [0.99 * Math.sin(a), 0.004, 0.99 * Math.cos(a)];
     },
     swap(v, a, b, f) {
       const s = across(a, b, f);
@@ -1317,6 +1347,7 @@ const SORT_VIEWS = {
   // moves leans out from the board as it goes.
   dots: {
     at: (v, s) => [SORT.x(s), 0, 0],
+    mark: (s) => [SORT.x(s), 0.12, 0.012],
     swap(v, a, b, f) {
       return [SORT.x(a + (b - a) * f), 0, 0.08 * Math.sin(Math.PI * f)];
     },
@@ -1340,10 +1371,30 @@ function sortPanel(k, algo, z, cy = 1.34) {
       keep(Math.abs(c.p[1] - cy - 0.12) > ph / 2 - 0.03 || Math.abs(c.p[0]) > pw / 2 - 0.03 ? BOARD_RIM : "#0b1020"), // prettier-ignore
   });
   k.add(k.box(0.05, cy - 0.24, 0.05), { pos: [0, (cy - 0.24) / 2, z], flat: 0.3, pattern: false, color: () => keep(BOARD_RIM) }); // prettier-ignore
-  text(k, SORT.names[algo], [0, cy + 0.27, z + 0.045], 0.018, "#ffd34d");
-  text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, cy, z + 0.045], 0.022, "#9fb0d6");
+  text(k, SORT.names[algo], [0, cy + 0.27, z + 0.045], 0.018, "#ffd34d", { weight: 14 });
+  text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, cy, z + 0.045], 0.022, "#9fb0d6", { weight: 14 }); // prettier-ignore
   sevenSeg(k, [0.26, cy, z + 0.03], 0.22, 8);
   sevenSeg(k, [0.44, cy, z + 0.03], 0.22, 15);
+}
+
+// Polish: the two lights that show which places are being compared
+// (tokens 22 and 23), small glowing discs at the view's mark(0), moved to
+// the compared places as each comparison sounds.
+function sortLights(k, view) {
+  const p = SORT_VIEWS[view].mark(0);
+  const face = view === "dots" ? { rot: [90, 0, 0] } : {};
+  for (const tok of [22, 23])
+    k.add(evenDisc(k, 0.032), {
+      pos: p,
+      ...face,
+      even: true,
+      weight: 3,
+      flat: 0.2,
+      pattern: false,
+      kind: "token",
+      params: [tok, 0],
+      color: (c) => keep(mix("#fff6c8", "#ffc23a", Math.min(1, Math.hypot(c.p[0] - p[0], c.p[1] - p[1], c.p[2] - p[2]) / 0.032))), // prettier-ignore
+    });
 }
 
 // A dark plinth, depth d, with a slot (of size w) for each piece at x(slot).
@@ -1367,6 +1418,7 @@ const SORT_BUILD = {
   bars(k, algo) {
     // The base: a dark plinth with a slot for each bar.
     sortPlinth(k, 0.7);
+    sortLights(k, "bars");
     // The bars (token = the bar's height, 0 to 7), in their shuffled order.
     SORT.start.forEach((v, slot) => {
       const h = SORT.height(v);
@@ -1374,7 +1426,8 @@ const SORT_BUILD = {
         pos: [SORT.x(slot), 0.004 + h / 2, 0],
         even: true,
         flat: 0.25,
-        weight: 1.3,
+        weight: 2.4,
+        jitter: 0,
         pattern: false,
         kind: "token",
         params: [v, 0],
@@ -1385,7 +1438,8 @@ const SORT_BUILD = {
   },
   crates(k, algo) {
     // A deeper plinth: the crates' lanes for the shuffle back are on it.
-    sortPlinth(k, 2.05, crateX, 0.26, 2.65);
+    sortPlinth(k, 1.55, crateX, 0.26, 2.45);
+    sortLights(k, "crates");
     // Wooden crates, each a cube as big as its value (token = the value):
     // a dark frame round every edge, planks across, and a painted band in
     // the value's color.
@@ -1396,7 +1450,8 @@ const SORT_BUILD = {
         pos: at,
         even: true,
         flat: 0.3,
-        weight: 1.3,
+        weight: 2.4,
+        jitter: 0,
         pattern: false,
         kind: "token",
         params: [v, 0],
@@ -1412,7 +1467,7 @@ const SORT_BUILD = {
         },
       });
     });
-    sortPanel(k, algo, -1.2, 0.95);
+    sortPanel(k, algo, -0.88, 0.95);
   },
   ring(k, algo) {
     // The turntable: a dark round plate with a ring of slots and a white
@@ -1429,6 +1484,7 @@ const SORT_BUILD = {
       k.add(evenCylinder(puck + 0.015, puck + 0.015, 0.004, true), { pos: [p[0], 0.002, p[2]], even: true, pattern: false, color: () => keep("#141b2b") }); // prettier-ignore
     }
     k.add(k.box(0.025, 0.006, 0.12), { pos: [0, 0.003, r + 0.02], flat: 0.2, pattern: false, color: () => keep("#e8ecf4") }); // prettier-ignore
+    sortLights(k, "ring");
     // The pucks (token = the value), each its own hue.
     SORT.start.forEach((v, slot) => {
       const p = SORT_VIEWS.ring.at(v, slot);
@@ -1436,7 +1492,8 @@ const SORT_BUILD = {
         pos: [p[0], 0.004 + h / 2, p[2]],
         even: true,
         flat: 0.25,
-        weight: 1.3,
+        weight: 2.4,
+        jitter: 0,
         pattern: false,
         kind: "token",
         params: [v, 0],
@@ -1453,12 +1510,14 @@ const SORT_BUILD = {
     board(k, W, H, { at: [0, H / 2], even: true });
     k.add(k.box(1.86, 0.008, 0.004), { pos: [0, 0.12, 0.004], flat: 0.2, pattern: false, color: () => keep("#3a4a6e") }); // prettier-ignore
     k.add(k.box(0.008, 1.1, 0.004), { pos: [-0.96, 0.67, 0.004], flat: 0.2, pattern: false, color: () => keep("#3a4a6e") }); // prettier-ignore
+    sortLights(k, "dots");
     // The dots (token = the value), at the value's height.
     SORT.start.forEach((v, slot) => {
       k.add(k.sphere(0.05), {
         pos: [SORT.x(slot), 0.22 + v * 0.14, 0.07],
         flat: 0.2,
-        weight: 1.6,
+        weight: 3,
+        jitter: 0,
         pattern: false,
         kind: "token",
         params: [v, 0],
@@ -1466,8 +1525,8 @@ const SORT_BUILD = {
       });
     });
     // The name and the counter, along the board's top.
-    text(k, SORT.names[algo], [0, 1.68, 0.02], 0.018, "#ffd34d");
-    text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, 1.4, 0.02], 0.022, "#9fb0d6");
+    text(k, SORT.names[algo], [0, 1.68, 0.02], 0.018, "#ffd34d", { weight: 14 });
+    text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, 1.4, 0.02], 0.022, "#9fb0d6", { weight: 14 }); // prettier-ignore
     sevenSeg(k, [0.26, 1.4, 0.005], 0.22, 8);
     sevenSeg(k, [0.44, 1.4, 0.005], 0.22, 15);
   },
@@ -4017,6 +4076,9 @@ export const RECIPES = {
     },
   },
   "sorting-machine": {
+    // Polish (the owner's "the toys could still be sharper"): the crisper
+    // splat kernel.
+    kernel: "sharp",
     options: [
       {
         key: "algo",
@@ -4083,6 +4145,16 @@ export const RECIPES = {
         }
         out.tokens[v] = { offset: sub(p, home), visible: 1 };
       }
+      // Polish: the two compared places light up as each comparison sounds.
+      const algoId = SORT.runs[data.algo] ? data.algo : "bubble";
+      const marks = (data.marks ||= sortMarks(SORT.runs[algoId], dt));
+      let lit2 = null;
+      if (on) for (const m of marks) if (m[0] - 0.02 <= s && s < m[0] + 0.13) lit2 = m;
+      const m0 = view.mark(0);
+      [22, 23].forEach((tok, j) => {
+        const q = lit2 ? view.mark(lit2[1 + j]) : m0;
+        out.tokens[tok] = { offset: sub(q, m0), visible: lit2 ? 1 : 0 };
+      });
       const count = back > 0 ? 0 : i;
       showDigit(out.tokens, 8, count >= 10 ? Math.floor(count / 10) : -1);
       showDigit(out.tokens, 15, count % 10);
