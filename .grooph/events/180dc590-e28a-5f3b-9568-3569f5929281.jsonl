@@ -254,3 +254,14 @@
 {"v":1,"t":"2026-10-05T13:18:30.245Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T13:18:33.202Z","harness":"claude-code","event":"turn-end","session":"180dc590-e28a-5f3b-9568-3569f5929281","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T13:18:35.190Z","harness":"claude-code","event":"subagent-stop","session":"180dc590-e28a-5f3b-9568-3569f5929281","agent":"adca12556871b1666"}
+{"v":1,"t":"2026-10-05T13:22:29.173Z","harness":"claude-code","event":"session-end","session":"180dc590-e28a-5f3b-9568-3569f5929281","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:20:37.474Z","harness":"claude-code","event":"session-start","session":"180dc590-e28a-5f3b-9568-3569f5929281","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:20:37.513Z","harness":"claude-code","event":"turn-start","session":"180dc590-e28a-5f3b-9568-3569f5929281","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:20:43.564Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:21:14.586Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:21:18.416Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:22:17.291Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:23:20.919Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:24:14.698Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:24:15.277Z","harness":"claude-code","event":"tool","session":"180dc590-e28a-5f3b-9568-3569f5929281","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T15:24:19.926Z","harness":"claude-code","event":"turn-end","session":"180dc590-e28a-5f3b-9568-3569f5929281","cwd":"splashery"}
