@@ -896,9 +896,7 @@ vec3 spKitCenter(vec3 p) {
       if (flame) spFlame = c;
     } else if (kind == 6) {
       float c = fract(t * (0.72 + 0.25 * h) + an.w);
-      // Falling things (snow in a globe, rain under a cloud) fall only as far
-      // as the world's down runs down the toy, so they stay inside it.
-      p -= gup * c * an.z * R * clamp(dot(gup, up), 0.0, 1.0);
+      p -= gup * c * an.z * R;
       spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
     } else if (kind == 7) {
       spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);
@@ -1144,7 +1142,7 @@ fn spKitCenter(p0: vec3f) -> vec3f {
       if (flame) { spFlame = c; }
     } else if (kind == 6) {
       let c = fract(t * (0.72 + 0.25 * h) + an.w);
-      p = p - gup * c * an.z * R * clamp(dot(gup, up), 0.0, 1.0);
+      p = p - gup * c * an.z * R;
       spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
     } else if (kind == 7) {
       spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);

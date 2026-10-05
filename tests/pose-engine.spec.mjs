@@ -71,10 +71,8 @@ test("every shader variant takes centers into the home frame and back, and turns
     }
   }
   // Rising and falling kit splats follow the world's real up.
-  expect(MODIFIER_KIT.glsl).toContain("p -= gup * c * an.z * R * clamp(dot(gup, up), 0.0, 1.0);");
-  expect(MODIFIER_KIT.wgsl).toContain(
-    "p = p - gup * c * an.z * R * clamp(dot(gup, up), 0.0, 1.0);",
-  );
+  expect(MODIFIER_KIT.glsl).toContain("p -= gup * c * an.z * R;");
+  expect(MODIFIER_KIT.wgsl).toContain("p = p - gup * c * an.z * R;");
 });
 
 test("a toy posed in Hands-on gets the pose uniforms; put back, they are off", async ({ page }) => {
