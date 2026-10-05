@@ -1218,6 +1218,15 @@ export const TOY_SOUNDS = {
       { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.4 },
     ],
   },
+  // Lane Elements: the sample lifting off its tile, and setting down with a small click; the lift's
+  // tine and the turn's blip come from the recipe (src/packs/real-elements.js).
+  "real-elements": {
+    on: [{ voice: "whoosh", f: 380, to: 1.4, decay: 1.1, vol: 0.1 }],
+    off: [
+      { voice: "whoosh", f: 600, to: 0.5, decay: 0.8, vol: 0.1 },
+      { voice: "clack", at: 0.8, f: 1100, decay: 0.25, vol: 0.3 },
+    ],
+  },
   // ---- Gems -------------------------------------------------------------------------
   diamond: [
     {

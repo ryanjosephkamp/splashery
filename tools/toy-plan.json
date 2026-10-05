@@ -2449,6 +2449,13 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "real-elements": {
+      "v": "keep",
+      "owner": "The owner's new-ideas pick N2 (yes) on the Push Plan (October 5, 2026; lane Elements; labs only).",
+      "effect": "The 118 elements as real samples on their tiles: open photos of the real elements cut out of their background and raised in 3D by the Photo to 3D depth model. A tap lifts the sample out of its tile toward the viewer (about 2 s), larger and in finer detail, with a back and rim so it turns as a solid piece, swings it slowly and shows its facts beside the stage; a tap on the sample turns it once around; a tap on its tile sets it back. Elements with no photo of a real sample have hatched tiles, and their facts say why. Tile colors by category or block on demand.",
+      "sound": "A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down, a rising blip as it turns.",
+      "improved": "Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons) cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table and a 256 x 256 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab and Los Alamos (tools/rel-facts.mjs), checked by tests against a saved snapshot of the references."
     }
   }
 }

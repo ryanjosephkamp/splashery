@@ -7,7 +7,23 @@ October push. Repo: ryanjosephkamp/splashery. Your lane: Real elements (id `Elem
 `rel`). Branch: `claude/lane-real-elements` (and `claude/lane-real-elements-engine` for any change
 to the app outside your own files, as an "Engine: …" PR merged first). PR title: "Phase Real
 elements: a periodic table of real samples". Handoff file: docs/handoff/Elements.md (create it;
-start it with this brief, word for word, under "## Brief", then keep "## State", "## Notes", "##
+start it with this brief, word for word, under "## Brief", then keep "## State
+
+WORKING (October 5, 2026): the toy is built and pushed (labs, Atoms shelf): 91 real samples, 27
+honest placeholders, facts with cited uses, evidence file and tests (`tests/rel.spec.mjs`, 25 pass).
+Next: clips on Effect review page 2, then polish from the marks.
+
+- Weight: the table loads `tiles.jpg` + `tiles.png` (about 0.26 MB) and the code; each lifted sample
+  adds its own `<z>.jpg` + `<z>.png` (about 30 KB). All of `assets/toys/real-elements/` is 2.85 MB
+  in the repo.
+- Rebuild: `node tools/rel-sources.mjs` (reads the source pages), `node tools/rel-facts.mjs` (facts
+  and the reference snapshot; then
+  `npx prettier --write tools/rel-reference.json src/elements-real/facts.js`),
+  `node tools/rel-samples.mjs [z ...]` (photos, depth, cutouts, atlas; the server must run),
+  `node tools/rel-credits.mjs` (CREDITS.md and tools/assets.json).
+
+## Notes", "##
+
 Known issues" and "## For the Operator" current). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 5, 2026, from the owner's Push Plan picks)
@@ -67,7 +83,13 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 ## Known issues
 
-- None yet.
+- Depth is the model's estimate from one photo, and a lifted sample's back is an invented, darker
+  mirror of its front (said in the About text and the evidence file).
+- A few photos can't be cut cleanly and show as cropped cards (fluorine, sodium, uranium) or an oval
+  (neptunium); samples in glass tubes keep the whole tube.
+- The tiles are small on a phone (the whole 18-column table fits the width); a tap needs aim.
+- `node tools/us-english.mjs --diff` flags "aluminium" in CREDITS.md: it is the Images of Elements
+  page's address, which can't change.
 
 ## For the Operator
 
