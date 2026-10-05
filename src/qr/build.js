@@ -239,12 +239,16 @@ function buildOnce(code, o, budget, scale) {
   const cx = (c) => c - N / 2 + 0.5;
   const cy = (r) => N / 2 - 0.5 - r;
   // The piece each module moves with.
+  // Lane QR r3: + 100 × how far along its dark path the module is (in
+  // modules, from where the path starts), for Alive's current.
+  const path = pathDistances(code);
   const pieceOf = (r, c) => {
     const id = code.piece[r * N + c];
-    if (id < 0) return [1 + r * N + c, 1];
+    const along = 100 * path[r * N + c];
+    if (id < 0) return [1 + r * N + c, 1 + along];
     const p = code.pieces[id];
     const h = (p.n - 1) / 2;
-    return [1 + (p.row + h) * N + (p.col + h), p.n + (p.kind === "finder" ? 10 : 0)];
+    return [1 + (p.row + h) * N + (p.col + h), p.n + (p.kind === "finder" ? 10 : 0) + along];
   };
   const isEye = (r, c) => {
     const id = code.piece[r * N + c];
@@ -441,7 +445,10 @@ function buildOnce(code, o, budget, scale) {
   };
 
   // ---- The sheet: the light modules and the quiet zone, one flat square.
-  const sheetZ = 0;
+  // Lane QR r3: the coarser sheet sits a little further behind the modules
+  // (0.26 of a module), so seen at an angle none of its splats sorts in
+  // front of a module's edge (that turned the code gray and hatched).
+  const sheetZ = scale ? -0.12 : 0;
 
   // ---- The plate under it.
   buildPlate(o.plate || "paper", H, pal, out, flat, dot);
@@ -854,11 +861,53 @@ function buildOnce(code, o, budget, scale) {
     if (dy < -m && !dark(r + 1, c)) return false;
     return Math.hypot(Math.max(Math.abs(dx) - 0.2, 0), Math.max(Math.abs(dy) - 0.2, 0)) < 0.2;
   };
+  // Lane QR r3: an underlay in the light color just behind the sheet, so
+  // whatever moves away (a module bursting off, the paper folding) shows
+  // light paper behind it, never a hole through to the plate's back.
+  if (scale) flat(-H, -H, H, H, sheetZ - 0.06, 0.6, null, pal.bg, [0, 0], { sigma: 0.6 });
+  // params [0, 20]: the sheet (it folds with the code in the Fold motion).
   if (scale)
-    flat(-H, -H, H, H, sheetZ, TUNE.sheet * scale, (px, py) => !covered(px, py), pal.bg, [0, 0], { sigma: 0.6 }); // prettier-ignore
-  else flat(-H, -H, H, H, sheetZ, sp, null, pal.bg, [0, 0], { sigma: 0.6 });
+    flat(-H, -H, H, H, sheetZ, TUNE.sheet * scale, (px, py) => !covered(px, py), pal.bg, [0, 20], { sigma: 0.6 }); // prettier-ignore
+  else flat(-H, -H, H, H, sheetZ, sp, null, pal.bg, [0, 20], { sigma: 0.6 });
   const depth = { bricks: 0.5, gems: 0.44, bubbles: 0.42, neon: 0.14 }[style] ?? 0.14;
   return { splats: out, half: H, depth, perModule: m, scale };
+}
+
+// How far along its dark path each dark module is: a breadth-first walk over
+// dark modules joined edge to edge, from the first module (in reading order)
+// of each joined group (lane QR r3, Alive's current). Light modules: 0.
+export function pathDistances(code) {
+  const N = code.size;
+  const dist = new Int32Array(N * N).fill(-1);
+  const queue = new Int32Array(N * N);
+  for (let start = 0; start < N * N; start++) {
+    if (!code.dark[start] || dist[start] >= 0) continue;
+    let head = 0;
+    let tail = 0;
+    dist[start] = 0;
+    queue[tail++] = start;
+    while (head < tail) {
+      const i = queue[head++];
+      const r = Math.floor(i / N);
+      const c = i - r * N;
+      for (const [dr, dc] of [
+        [0, 1],
+        [1, 0],
+        [0, -1],
+        [-1, 0],
+      ]) {
+        // prettier-ignore
+        const rr = r + dr;
+        const cc = c + dc;
+        if (rr < 0 || cc < 0 || rr >= N || cc >= N) continue;
+        const j = rr * N + cc;
+        if (!code.dark[j] || dist[j] >= 0) continue;
+        dist[j] = dist[i] + 1;
+        queue[tail++] = j;
+      }
+    }
+  }
+  return Array.from(dist, (d) => Math.max(0, d));
 }
 
 // ---- Plates -------------------------------------------------------------------------

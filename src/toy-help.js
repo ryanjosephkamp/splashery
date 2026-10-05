@@ -1656,9 +1656,10 @@ export const TOY_HELP = {
   },
   // Lane QR.
   "qr-code": {
-    howTo: "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
+    howTo:
+      "Type a link in the Toy tab, pick a style or a color theme, and tap the code to knock its modules loose.",
     about:
-      "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles. “Scan view” turns it flat to the camera, and the toy reads its own picture back to check that it still scans. Tap it and the modules burst, fall and fly back to their places. Your text never leaves your device.",
+      "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles, in its own colors, a color theme or a country's flag colors (pale flag colors become the light modules, so the code still has the contrast a camera needs). “Scan view” turns it flat to the camera, and the toy reads its own picture back to check that it still scans. Tap it and the modules around your finger are knocked loose and snap back; the Toy tab adds Assemble, Flip, Burst, Ripple, Split-flap, Fold, Rain and Point cloud, each ending on a code that scans. Alive moves colors through the code (a wave, a sweep, a pulse, a flowing gradient, a rainbow, a current along its paths, a charge, a scan line) at the speed you choose, and every frame still scans, because each module keeps nearly the same lightness. Your text never leaves your device.",
   },
   // Lane Live input.
   "room-echo": {

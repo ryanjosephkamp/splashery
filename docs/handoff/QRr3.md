@@ -9,8 +9,8 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-WORKING: item 1 (sharper modules) done and pushed; item 2 (more motions) next (October 5, 2026,
-Opus 5.5).
+WORKING: items 1, 2, 3, 4, 5, 7 and 8 built and pushed; item 6 (the scan lab on every motion and
+theme for every style, clips and cards) running now (October 5, 2026, Opus 5.5).
 
 ### Item 1: sharper modules (measured)
 
@@ -47,3 +47,44 @@ preceded by a warm-up frame: with finer edges, a frame drawn before the splat so
 came out gray and hatched (it failed the Full screen test once).
 
 `tests/qr.spec.mjs` passes (12 of 12) with the change.
+
+### Items 2, 7 and 8: motions (built)
+
+`src/qr/field.js` now runs one motion at a time: `uSpMorph.x` says which (`MOTION_IDS`), `.y` how far
+(0..1), `.zw` the tap point. Six new ones, each moving solid pieces and exactly at rest at 0 and 1:
+
+- **Ripple** (3.8 s): a ring wave runs out from the middle; each tile rises, falls and tilts with
+  the slope under it.
+- **Split-flap** (4.2 s): row by row, like a departure board, each tile turns once on its own axle,
+  shows its back color, and comes round to the front.
+- **Fold** (5.0 s): the code folds like paper (right half over the left, then the top down), then
+  unfolds; the light sheet folds too, splat by splat, and the paper's back is plain.
+- **Rain** (4.4 s): the pieces lift off the top, then rain back, bottom row first, land with a small
+  bounce and stack into place.
+- **Knock loose** (2.8 s), the tap: the pieces around the tap fly out toward you, tumble and snap
+  back on a spring. A second tap knocks again where it lands. (Burst and return is a Toy-tab
+  button now.)
+- **Point cloud** (5.2 s, item 8): every splat shrinks to a point; the code dissolves from the left
+  into a drifting, swirling cloud and gathers back.
+
+An underlay in the light color now sits behind the sheet, so a piece that moves away shows paper,
+not a hole; the sheet sits 0.26 of a module behind the modules so at an angle none of it sorts in
+front of them (it turned the code gray and hatched at 25°).
+
+### Items 3 and 7: Alive (built)
+
+Eight patterns (`PATTERNS`, picked in the panel; the option `alivePattern`): Wave, Sweep, Pulse,
+Flowing gradient, Rainbow, and the electric ones, Current (pulses run along the dark paths: each
+module knows its distance along its path, `pathDistances()`), Charge (fills in from the edges, then
+discharges in a flash from the middle) and Scan line. A speed slider (`speed`, 0 to 1) runs them
+from a quarter as fast to four times as fast; the phase is integrated, so a change of speed never
+jumps the colors. Each pattern moves a module's hue and may lift a dark module's gray, never by more
+than 35% of the way to the light modules (the color patterns use at most 60% of that).
+
+### Items 4 and 5: themes (built)
+
+`src/qr/themes.js`: twelve palettes and 24 flags, each at least 4.5 : 1 (test-checked). Flags: the
+palest color is the light modules (white light modules if none is pale), the darker colors are the
+code (a gradient between the first two) and the eyes; a color under 4.5 : 1 is darkened just
+enough, keeping its hue; a color under 2.5 : 1 (a yellow on white) would turn brown, so it colors
+Alive and the back of the tiles instead. The panel shows the measured contrast and these notes.
