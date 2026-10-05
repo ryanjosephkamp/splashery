@@ -12,13 +12,13 @@
 //   card.hide()
 
 const STYLE = `
-.smd-original { position: fixed; z-index: 24; top: 88px; left: 12px; width: min(40vw, 240px); margin: 0; padding: 4px;
+.smd-original { position: fixed; z-index: 24; top: 88px; left: 12px; width: min(34vw, 200px); margin: 0; padding: 4px;
   background: var(--panel, #fff); color: var(--ink, #111); border: 1px solid var(--line-strong, #8c8c8c); border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25); pointer-events: none; font: 12px/1.3 var(--font-sans, system-ui, sans-serif); }
 .smd-original[hidden] { display: none; }
 .smd-original figcaption { padding: 3px 4px 1px; font-weight: 600; }
 .smd-original canvas, .smd-original video { display: block; width: 100%; height: auto; border-radius: 6px; background: #000; }
-@media (min-width: 900px) { .smd-original { width: min(26vw, 360px); top: 96px; left: 18px; } }
+@media (min-width: 900px) { .smd-original { width: min(22vw, 320px); top: 96px; left: 18px; } }
 `;
 
 const CARDS = new Map();

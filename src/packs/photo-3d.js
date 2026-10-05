@@ -323,6 +323,9 @@ export function layerMorph(r, layer) {
 
 const PHOTO_3D = {
   density: PHOTO_DENSITY,
+  // Smd r2: the Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): edges 13 to 19% crisper
+  // on the relief at phone size (2.72 to 2.36 px, 3.45 to 2.78 px zoomed in).
+  kernel: "sharp",
   turntable: false,
   options: [
     {

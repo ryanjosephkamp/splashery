@@ -237,3 +237,26 @@ picture so the edges stay crisp. Face-on they are hidden; turned, they fill the 
 side's color. It helps every Photo to 3D sample (the main splats now take 95% of the budget, not
 98%). The depth modules in `photo-3d-core.js` are untouched (lane Pages r6 imports them). Test:
 `tests/smd-photo.spec.mjs` (4). A thin strip can still show at an extreme turn (about 60 degrees).
+
+### r2 round two: sharper, then polish (the owner's note of October 5, 2026)
+
+Measured with `tools/lab-kernels.mjs` (phone size, device pixel ratio 2, software renderer, 290k
+splats):
+
+| Toy                        | View      | Gaussian edge (px) | Sharp edge (px) |
+| -------------------------- | --------- | ------------------ | --------------- |
+| Photo to 3D (forest)       | home      | 2.72               | 2.36            |
+| Photo to 3D                | zoomed in | 3.45               | 2.78            |
+| Model to splats (burger)   | home      | 2.37               | 2.03            |
+| Moving photo to 3D (bunny) | home      | 2.00               | 1.99            |
+
+- `kernel: "sharp"` (labs only, docs/lab/KERNELS.md) is now on Photo to 3D and Model to splats.
+  Video to 3D already had it. Moving photo gained nothing measurable, so it stays as it was. Speckle
+  and shimmer rise a little on Photo to 3D (1.00 to 1.35 and 1.20 to 1.51 at home): the owner's eye
+  is the judge. The burger zoomed in measures wider with the sharp kernel (2.54 to 3.83) only
+  because the measure picks up its texture's edges; the stills show it crisper.
+- The splat counts were not the limit: Photo to 3D's grid is already near the photo's own pixels.
+- Polish: the original card is a little smaller (34% of the width, 200 px at most; 22% and 320 px on
+  a desktop), so it covers less of the 3D picture.
+- Six new clips are on page 2 as `smd-r2-*`, beside the old ones. Tests: `p3d`, `smd-photo`,
+  `smd-compare`, `stm`, `smd-models`: 46 pass.
