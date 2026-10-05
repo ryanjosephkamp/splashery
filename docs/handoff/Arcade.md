@@ -253,7 +253,37 @@ into blobs. `src/packs/arcade-crisp.js` builds game models on regular grids inst
 
 ### Measurements
 
-(To come: frame times and splat counts per game and view.)
+`tools/arc-measure.mjs`, October 5, 2026, after the sharper models: the game's own work a frame (its
+steps, placing its splats, the uploads; 120 frames of 1/60 s, the autopilot playing) and the splats
+on its layer. The software renderer's frame times only compare games with each other (a real GPU
+draws these many times faster), so they are left out.
+
+| Game              | Phone (mid) splats | Phone 2D / 3D ms | Desktop (high) splats | Desktop 2D / 3D ms |
+| ----------------- | -----------------: | ---------------: | --------------------: | -----------------: |
+| Shardball         |             50,740 |      1.34 / 1.19 |                50,740 |        1.20 / 1.39 |
+| Longtail (cube)   |             25,369 |      1.43 / 2.06 |                25,369 |        1.93 / 2.29 |
+| Grain Garden      |             29,344 |      1.51 / 1.92 |                39,344 |        2.86 / 2.73 |
+| Page Breaker      |            139,841 |      1.66 / 2.13 |               199,448 |        2.33 / 3.25 |
+| Strata            |             19,118 |      1.80 / 2.07 |                19,118 |        1.81 / 2.20 |
+| Volley Table      |             22,100 |      1.05 / 0.82 |                22,100 |        0.84 / 1.12 |
+| Stone Belt        |             34,326 |      5.74 / 4.55 |                43,007 |        3.60 / 3.09 |
+| Soft Landing      |             24,285 |      0.60 / 0.75 |                24,285 |        1.01 / 1.07 |
+| Night Owl Pinball |             37,032 |      1.27 / 1.44 |                37,032 |        1.70 / 1.40 |
+| Cast a Shadow     |             61,633 |      2.50 / 2.80 |                61,633 |        3.01 / 3.14 |
+| Photo Dash        |             53,804 |      1.25 / 1.67 |                79,964 |        1.87 / 2.16 |
+| Note Rider        |             20,206 |      0.81 / 1.42 |                20,206 |        1.71 / 1.98 |
+
+Every game's own work stays under 6 ms a frame here, well inside a 30 fps phone frame (33 ms) and a
+60 fps desktop frame (17 ms). Two things keep it there:
+
+- A sprite that hasn't moved keeps its centers (src/arcade/layer.js); before that, Page Breaker's
+  140,000 splats took 14.6 ms a frame in 3D.
+- The sort runs every few frames in 2D.
+
+Strata's count grows as the well fills (up to about 105,000 for a full wide well, inside its 120,000
+slots). Page Breaker fills its layer by design: its words take every slot the board leaves. Not
+measured: a real phone's GPU time for these splat counts. The toys draw 200,000 splats on phones
+already, so the counts are in the range the site has been tested at.
 
 ## Known issues
 
