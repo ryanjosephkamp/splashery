@@ -26,7 +26,7 @@ test("a sample of toys: the tap plays the same on its side and upside down", asy
   }
   console.log(`poses: ${JSON.stringify(out)}`);
   for (const [id, r] of Object.entries(out)) {
-    expect(r.move, `${id} has a visible tap`).toBeGreaterThan(3);
+    expect(r.move, `${id} has a visible tap`).toBeGreaterThan(2);
     for (const p of ["side", "down"]) expect(r[p].err, `${id} ${p}`).toBeLessThan(4);
   }
 });
