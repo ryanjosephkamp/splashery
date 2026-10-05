@@ -95,7 +95,7 @@ const cornerOf = (region, size) => (region === "finder" ? [-size / 2, size / 2] 
 
 // Geometry: where a point of the flat code goes under the damages that move
 // the plate (curve, tilt) and the modules (time). p in code units.
-export function warpPoint(p, damages, size, mod = -1) {
+export function warpPoint(p, damages, size, mod = -1, width = size + 8) {
   let [x, y, z] = p;
   for (const d of damages) {
     const a = clamp01(d.amount);
@@ -113,8 +113,7 @@ export function warpPoint(p, damages, size, mod = -1) {
     if (d.kind === "curve") {
       // Around a vertical cylinder behind the code: the whole width spans
       // up to 200 degrees.
-      const W = size + 8;
-      const R = W / (a * (200 / 180) * Math.PI);
+      const R = width / (a * (200 / 180) * Math.PI);
       const th = x / R;
       [x, z] = [(R + z) * Math.sin(th), (R + z) * Math.cos(th) - R];
     } else if (d.kind === "tilt") {
@@ -126,12 +125,12 @@ export function warpPoint(p, damages, size, mod = -1) {
 }
 
 // The turn (about y) the plate has at a point, for the splats' own rotation.
-function warpTurn(x, damages, size) {
+function warpTurn(x, damages, width) {
   let th = 0;
   for (const d of damages) {
     const a = clamp01(d.amount);
     if (!a) continue;
-    if (d.kind === "curve") th += x / ((size + 8) / (a * (200 / 180) * Math.PI));
+    if (d.kind === "curve") th += x / (width / (a * (200 / 180) * Math.PI));
     else if (d.kind === "tilt") th += (a * 80 * Math.PI) / 180;
   }
   return th;
@@ -159,7 +158,7 @@ const qmul = (a, b) => [
 // Returns { splats, pieces }: pieces holds what came off (the torn corner,
 // the burned part), each { kind, splats }, for the toy to drop away.
 // ctx: { size, fg, bg } (the code's colors, for the color drift).
-export function applyDamage(splats, damages, { size }) {
+export function applyDamage(splats, damages, { size, width = size + 8 }) {
   let list = splats.map((s) => ({ ...s, p: s.p.slice(), scales: s.scales.slice(), color: s.color.slice() })); // prettier-ignore
   const pieces = [];
   const extra = [];
@@ -305,8 +304,8 @@ export function applyDamage(splats, damages, { size }) {
   if (geo.length) {
     const move = (s) => {
       const x0 = s.p[0];
-      s.p = warpPoint(s.p, geo, size, s.mod);
-      const th = warpTurn(x0, geo, size);
+      s.p = warpPoint(s.p, geo, size, s.mod, width);
+      const th = warpTurn(x0, geo, width);
       if (th) s.quat = qmul(quatY(th), s.quat);
     };
     list.forEach(move);

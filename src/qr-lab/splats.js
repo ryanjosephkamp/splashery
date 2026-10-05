@@ -35,6 +35,7 @@ export const DEFAULTS = {
   bg: [1, 1, 1],
   fg2: null, // a gradient's second color (top left to bottom right)
   lightTiles: false, // light modules as tiles of their own (to move or flip)
+  key: null, // (module index) => which modules close up with each other (default: dark with dark)
   quiet: QUIET,
 };
 
@@ -77,7 +78,6 @@ export function codeSplats(modules, size, o = {}) {
           out.push({ p: [x, y, z], scales, quat: Q_FLAT, color: typeof color === "function" ? color(x, y) : color, opacity, mod, dark }); // prettier-ignore
         }
   };
-  // The sheet: the whole square with its quiet zone, a little behind.
   // The sheet: the whole square with its quiet zone, a little behind (light
   // modules show it, unless they are tiles of their own).
   patch(-H, -H, H, H, -0.02, Math.min(k.per, 2), null, k.bg, -1, 0, 0.55, 1);
@@ -99,7 +99,19 @@ export function codeSplats(modules, size, o = {}) {
           const qy = Math.max(Math.abs(py - y) - (h - rr), 0);
           return Math.hypot(qx, qy) <= rr + 1e-6;
         };
-      patch(x - h, y - h, x + h, y + h, d ? 0.01 : 0, k.per, inside, d ? fgAt : k.bg, i, d ? 1 : 0); // prettier-ignore
+      // A square module reaches a little into each neighbor of the same kind
+      // (and color), so a run of modules closes up with no seam.
+      let [x0, y0, x1, y1] = [x - h, y - h, x + h, y + h];
+      if (k.shape === "square" && !k.gap) {
+        const pad = 0.75 / k.per;
+        const key = k.key ? k.key(i) : modules[i];
+        const same = (rr, cc) => rr >= 0 && cc >= 0 && rr < N && cc < N && (modules[rr * N + cc] === 1 || k.lightTiles) && (k.key ? k.key(rr * N + cc) : modules[rr * N + cc]) === key; // prettier-ignore
+        if (same(r, c - 1)) x0 -= pad;
+        if (same(r, c + 1)) x1 += pad;
+        if (same(r + 1, c)) y0 -= pad;
+        if (same(r - 1, c)) y1 += pad;
+      }
+      patch(x0, y0, x1, y1, d ? 0.01 : 0, k.per, inside, d ? fgAt : k.bg, i, d ? 1 : 0); // prettier-ignore
     }
   return out;
 }
