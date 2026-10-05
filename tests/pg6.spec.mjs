@@ -140,7 +140,14 @@ test.describe("Pop out in Your book (no browser)", () => {
     // A tap on the second raises it too; the first stays up.
     b.tap(at(mid(FIG_B)));
     await b.settle();
-    b.run(1.5);
+    // They never overlap (the owner's note of October 5, 2026): the first
+    // goes back over its own place as the second rises.
+    const apart = (p, q) => Math.abs(p.cx - q.cx) >= p.hw + q.hw || Math.abs(p.cy - q.cy) >= p.hh + q.hh; // prettier-ignore
+    for (let i = 0; i < 45; i++) {
+      b.run(1 / 30);
+      const [P, Q] = PG.pops;
+      if (P.phase !== "idle" && Q.at && Q.phase !== "rest" && Q.phase !== "prep") expect(apart(P.at, Q.at)).toBe(true); // prettier-ignore
+    }
     expect(live(PG).map((x) => x[2])).toEqual(["up", "up"]);
     expect(b.out.parts.bk5pop1.visible).toBe(1);
     // Both places are empty on the page (one sheet, two holes).

@@ -1296,6 +1296,7 @@ function bk5Drive(c, out, pics, N, time, info = null, moving = false) {
     pgRaise(w.fig, w.manual);
   }
   pgSlider(out, info);
+  pgCrowd(time);
   // The poses, the holes and the sheets.
   const holes = new Map();
   const lay = PG.pops.find((F) => F.layered);
@@ -1403,6 +1404,32 @@ function pgStep(F, out, pics, time) {
   }
 }
 
+// Keeps risen figures apart: for each, whether it is up alone (F.k eases
+// to 1) or with others (to 0), and how far it may grow (F.cap, as a scale
+// of its place on the page) before it would reach another's place, both
+// grown alike, with a margin for the nearer one looking bigger.
+function pgCrowd(time) {
+  const dt = Math.max(0, Math.min(0.1, time - (PG.crowdT ?? time)));
+  PG.crowdT = time;
+  const shown = PG.pops.filter((F) => F.phase === "rest" || F.phase === "rise" || F.phase === "up" || F.phase === "fall"); // prettier-ignore
+  for (const F of PG.pops) {
+    const a = F.target.rect;
+    let cap = Infinity;
+    for (const G of shown) {
+      if (G === F) continue;
+      const b = G.target.rect;
+      const sx = Math.abs(a.cx - b.cx) / (a.hw + b.hw);
+      const sy = Math.abs(a.cy - b.cy) / (a.hh + b.hh);
+      cap = Math.min(cap, Math.max(sx, sy));
+    }
+    const alone = cap === Infinity;
+    F.cap = alone ? Infinity : Math.max(1, 0.88 * cap);
+    const want = alone ? 1 : 0;
+    if (F.k === undefined) F.k = want;
+    F.k += (want - F.k) * (1 - Math.exp(-dt / 0.15));
+  }
+}
+
 // The risen figure's pose at u (0 lying where it was, 1 risen; past 1 it
 // overshoots a little): toward the reader and the middle of the view,
 // growing a little, turned toward the middle, swaying a few times. Also
@@ -1422,16 +1449,22 @@ function bk5Pose(F, u, time) {
   // fill the screen.)
   const big = isLab() ? Math.min(1, (2 * Math.max(r.hw, r.hh)) / H) : 0;
   const lift = ((f ? 0.18 : 0.3) * (1 - 0.6 * big) + 0.03 * F.slot) * H;
-  const pull = f ? 0.65 : 0.3;
+  // (With others up, it rises straight off its own place and grows no
+  // further than keeps it clear of them: the owner's note of October 5,
+  // 2026, "popped out images shouldn't overlap". F.k eases between the two.)
+  const k = F.k ?? 1;
+  const pull = (f ? 0.65 : 0.3) * k;
   const C = [r.cx + (view[0] - r.cx) * pull * u, r.cy + (view[1] - r.cy) * pull * u, z0 + lift * u]; // prettier-ignore
   const span = isLab() || f ? W : 2 * W;
   // (Nor does it grow past the page.)
-  const grow = 1 + (1 - big) * (Math.max(1, Math.min(f ? 1.15 : 1.3, (0.82 * H) / (2 * r.hh), (0.82 * span) / (2 * r.hw))) - 1); // prettier-ignore
+  const solo = 1 + (1 - big) * (Math.max(1, Math.min(f ? 1.15 : 1.3, (0.82 * H) / (2 * r.hh), (0.82 * span) / (2 * r.hw))) - 1); // prettier-ignore
+  const crowd = Math.min(solo, F.cap ?? solo);
+  const grow = crowd + (solo - crowd) * k;
   const s = T.g0 * (1 + (grow - 1) * u);
   const face = Math.max(-0.32, Math.min(0.32, -(r.cx - view[0]) * 0.45 * (PAGE_H / H)));
   const since = F.phase === "up" ? time - F.tUp : 0;
   const sway = F.phase === "up" ? 0.07 * Math.sin(2 * Math.PI * 0.32 * since + F.slot) * Math.exp(-since / 2.2) : 0; // prettier-ignore
-  const q = qMul(qAxis([0, 1, 0], face * u + sway), qAxis([1, 0, 0], -0.07 * u));
+  const q = qMul(qAxis([0, 1, 0], face * (0.3 + 0.7 * k) * u + sway), qAxis([1, 0, 0], -0.07 * u)); // prettier-ignore
   const c = qRot(q, [T.c[0] * s, T.c[1] * s, 0]);
   F.u = F.phase === "rise" ? clamp01((time - F.t0) / POP_RISE) : F.phase === "up" ? 1 : F.phase === "fall" ? Math.max(0, u) : 0; // prettier-ignore
   F.at = { cx: C[0], cy: C[1], hw: (r.hw * s) / T.g0, hh: (r.hh * s) / T.g0 };
