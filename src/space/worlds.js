@@ -76,7 +76,7 @@ export const WORLDS = [
     dayHours: 24.6229,
     reference: "heights above the areoid, Mars's sea-level surface (MOLA)",
     sunlit: "#fff4e6",
-    atmosphere: { color: "#e8b08a", thickness: 0.006, strength: 0.1 },
+    atmosphere: { color: "#e8b08a", thickness: 0.006, strength: 0.05 },
     maps: {
       color: { url: `${USGS}Mars_Viking_ClrMosaic_global_925m.tif`, lonLeft: -180 },
       height: { url: `${USGS}Mars_MGS_MOLA_DEM_mosaic_global_463m.tif`, lonLeft: -180, nodata: -32768 }, // prettier-ignore
@@ -178,7 +178,7 @@ export const WORLDS = [
     dayHours: 23.9345,
     reference: "heights above sea level (ETOPO 2022); the oceans are shown at sea level",
     sunlit: "#ffffff",
-    atmosphere: { color: "#8fbaff", thickness: 0.012, strength: 0.26 },
+    atmosphere: { color: "#8fbaff", thickness: 0.012, strength: 0.07 },
     maps: {
       color: { url: `${BMNG}world.200407.3x5400x2700.jpg`, kind: "jpeg", lonLeft: -180 },
       patchColor: { url: `${BMNG}world.200407.3x21600x10800.jpg`, kind: "jpeg", lonLeft: -180 },
