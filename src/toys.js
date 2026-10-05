@@ -3558,6 +3558,16 @@ export const TOYS = [
     camera: { yaw: 0.1, pitch: 0.8, roll: 0, distance: 3.6 },
   },
   {
+    id: "hurricane",
+    label: "Hurricane",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "hurricane polo storm cyclone typhoon weather goes satellite infrared clouds eye rain wind track noaa pacific mexico earth geography",
+    camera: { yaw: 0.15, pitch: 0.95, roll: 0, distance: 3.2 },
+  },
+  {
     id: "earthquakes",
     label: "Earthquakes",
     category: "geo",

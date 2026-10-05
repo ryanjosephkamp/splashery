@@ -14,6 +14,10 @@
 //   tide-harbor   Bar Harbor, Maine (NOAA coastal DEM and USGS imagery) with
 //                 waves and NOAA's tide predictions for a spring tide; the tap
 //                 plays the day: the bar to Bar Island floods and dries
+//   hurricane     Hurricane Polo, September 21–22, 2026: GOES infrared cloud
+//                 tops over a Blue Marble map; the eyewall and bands turn, rain
+//                 falls and the low winds flow; the tap plays the day it grew
+//                 from 70 to 155 knots along its best track
 //   earthquakes   the USGS feed, live when the toy opens or its plaque is
 //                 tapped (a dated snapshot ships for when it can't be reached),
 //                 on a NOAA ETOPO1 relief globe; the tap plays the quakes in
@@ -632,6 +636,205 @@ const TIDE_HARBOR = {
   },
 };
 
+// ---- Weather over land: Hurricane Polo --------------------------------------------------
+
+const HU_FILE = "assets/toys/hurricane/storm.bin";
+const HU_T = 10;
+const HU_RINGS = [1.1, 2.6, 99]; // ring edges, degrees from the eye
+const HU_SPIN = [0.55, 0.28, 0.12]; // radians per second at the start of the day
+
+const HURRICANE = {
+  alive: true,
+  density: 1.4,
+  credits: [
+    {
+      label: "Clouds",
+      title: "GOES-East ABI band 13 (clean infrared), through NASA GIBS",
+      source: "https://www.star.nesdis.noaa.gov/GOES/",
+      author: "NOAA NESDIS (imagery served by NASA's Global Imagery Browse Services)",
+      license: "Public domain",
+      licenseUrl: "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
+    },
+    {
+      label: "Track",
+      title: "Best track of Hurricane Polo (EP17, 2026)",
+      source: "https://ftp.nhc.noaa.gov/atcf/btk/",
+      author: "NOAA National Hurricane Center",
+      license: "Public domain",
+      licenseUrl: "https://www.weather.gov/disclaimer",
+    },
+    {
+      label: "Map",
+      title: "Blue Marble: Shaded Relief and Bathymetry, through NASA GIBS",
+      source: "https://visibleearth.nasa.gov/collection/1484/blue-marble",
+      author: "NASA Earth Observatory",
+      license: "Public domain",
+      licenseUrl: "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
+    },
+    CREDIT_ETOPO,
+  ],
+  controls: [{ key: "day", label: "September 22", type: "toggle", default: 0, ease: HU_T }],
+  action: { key: "day", label: "Play the day it grew" },
+  async prepare() {
+    await loadGeo(HU_FILE);
+  },
+  drive(t, c, out, info) {
+    const d = info.data;
+    const p = ease(seg(c.day * HU_T, 1, HU_T - 1));
+    // Where the eye is along the best track, relative to the start.
+    const n = d.track.length - 1;
+    const x = p * n;
+    const i = Math.min(n - 1, Math.floor(x));
+    const a = d.track[i];
+    const b = d.track[i + 1];
+    const f = x - i;
+    const off = [a[0] + (b[0] - a[0]) * f - d.track[0][0], 0, a[1] + (b[1] - a[1]) * f - d.track[0][1]]; // prettier-ignore
+    // Each ring turns counterclockwise (seen from above), faster as the storm deepens.
+    const dt = d.last === null ? 0 : clamp(t - d.last, 0, 0.1);
+    d.last = t;
+    const kt = a[2] + (b[2] - a[2]) * f;
+    HU_SPIN.forEach((w, r) => {
+      d.ang[r] += dt * w * (0.6 + kt / 110);
+      out.parts[`ring${r}`] = { angle: d.ang[r], offset: off };
+    });
+    out.morph = [p, 0, 0, 0];
+    out.amount = 0.6 + kt / 200;
+    // The rings turn all the time, so their splats are sorted again often.
+    sortWhileMoving(out, d, t, true, 0.35);
+  },
+  build(k) {
+    const g = geoLoaded(HU_FILE);
+    const M = g.meta;
+    const H = g.layer("height");
+    const img = g.layer("color");
+    const F = frame({ span: M.span, exag: 14, lo: 0, depth: 0.04 });
+    const [w, s, e, nn] = M.map;
+    const uOf = (lon) => (lon - w) / (e - w);
+    const vOf = (lat) => (nn - lat) / (nn - s);
+    const XZ = (lon, lat) => [F.x(uOf(lon)), F.z(vOf(lat))];
+    addBlock(k, {
+      F,
+      height: (u, v) => Math.max(0, H.sample(u, v)),
+      share: 0.34,
+      color: (c) => shade(img.sample(c.u, c.v), 0.85 * hill(c.n, 0.3) + 0.12),
+      side: (m) => mix("#3c4a5a", "#5a5145", smoothstep(-100, 100, m)),
+    });
+    // The clouds: each infrared square becomes a deck of cloud tops, as high
+    // as their temperature says (about 6.5 °C colder per kilometer up), split
+    // into rings that turn about the eye. The start fades as the end comes in.
+    const eye0 = M.track[0];
+    const [ex, ez] = XZ(eye0.lon, eye0.lat);
+    const kCloud = F.k * 0.5; // clouds at half the land's exaggeration
+    const rings = HU_RINGS.map((_, r) => k.part(`ring${r}`, { pivot: [ex, 0, ez], axis: [0, 1, 0] }));
+    const ringOf = (deg) => rings[HU_RINGS.findIndex((edge) => deg < edge)];
+    M.frames.forEach((fr, fi) => {
+      const L = g.layer(fi ? "irB" : "irA");
+      const T = (u, v) => {
+        const i = Math.min(L.w - 1, Math.max(0, Math.round(u * (L.w - 1))));
+        const j = Math.min(L.h - 1, Math.max(0, Math.round(v * (L.h - 1))));
+        return L.data[j * L.w + i] - 100;
+      };
+      const top = (T0) => clamp((27 - T0) / 6.5, 0, 16) * 1000; // m
+      const [bw, bs, be, bn] = fr.box;
+      const clat = (bs + bn) / 2;
+      const clon = (bw + be) / 2;
+      k.cloud({ share: 0.29, size: 1 }, (rand) => {
+        // Sample the square, keeping only cloud.
+        for (let tries = 0; tries < 12; tries++) {
+          const u = rand();
+          const v = rand();
+          const t0 = T(u, v);
+          if (t0 > 6 && tries < 11) continue;
+          const lon = bw + (be - bw) * u;
+          const lat = bn - (bn - bs) * v;
+          const deg = Math.hypot(lon - clon, lat - clat);
+          if (deg > 5 || t0 > 6) return { p: [ex, -1, ez], color: [0, 0, 0], opacity: 0, part: rings[2] };
+          // Placed so this frame's eye sits on the start's eye.
+          const [x, z] = XZ(eye0.lon + (lon - clon), eye0.lat + (lat - clat));
+          const h = top(t0);
+          const e2 = 1 / 256;
+          const gx = top(T(u + e2, v)) - top(T(u - e2, v));
+          const gz = top(T(u, v + e2)) - top(T(u, v - e2));
+          const lit = clamp(0.86 - (gx - gz) * 0.00012, 0.5, 1.12);
+          const white = smoothstep(-10, -75, t0);
+          const col = shade(mix([0.55, 0.58, 0.62], [0.97, 0.97, 0.99], white), lit);
+          const edge = smoothstep(5, 3.8, deg);
+          return {
+            p: [x, h * kCloud + 0.004, z],
+            color: col,
+            size: 1.05 + 0.35 * rand(),
+            opacity: (0.3 + 0.68 * white) * edge,
+            n: [0, 1, 0],
+            part: ringOf(deg),
+            kind: "fade",
+            channel: 0,
+            params: [0.25 + 0.5 * (deg / 5) * 0.3 + 0.35 * rand(), fi ? -0.18 : 0.18],
+          };
+        }
+        return { p: [ex, -1, ez], opacity: 0, color: [0, 0, 0], part: rings[2] };
+      });
+    });
+    // Rain under the coldest tops of the grown storm, and low wind lines that
+    // stream round the eye.
+    const LB = g.layer("irB");
+    const frB = M.frames[1];
+    const [bw, bs, be, bn] = frB.box;
+    k.cloud({ share: 0.05, size: 1 }, (rand) => {
+      for (let tries = 0; tries < 20; tries++) {
+        const u = rand();
+        const v = rand();
+        const t0 = LB.data[Math.round(v * (LB.h - 1)) * LB.w + Math.round(u * (LB.w - 1))] - 100;
+        const lon = bw + (be - bw) * u;
+        const lat = bn - (bn - bs) * v;
+        const deg = Math.hypot(lon - (bw + be) / 2, lat - (bs + bn) / 2);
+        if (t0 > -62 || deg > 4.5) continue;
+        const [x, z] = XZ(eye0.lon + lon - (bw + be) / 2, eye0.lat + lat - (bs + bn) / 2);
+        return {
+          p: [x, 0.012 + 0.05 * rand(), z],
+          color: [0.5, 0.56, 0.64],
+          size: 0.6,
+          opacity: 0.3,
+          dir: [0, 1, 0],
+          stretch: 4,
+          part: ringOf(deg),
+          kind: "fall",
+          params: [0.05, rand() * 6.28],
+        };
+      }
+      return { p: [ex, -1, ez], opacity: 0, color: [0, 0, 0], part: rings[2] };
+    });
+    k.cloud({ share: 0.04, size: 1 }, (rand) => {
+      const deg = 0.4 + 4.2 * Math.sqrt(rand());
+      const a = rand() * Math.PI * 2;
+      const dlat = Math.sin(a) * deg;
+      const dlon = (Math.cos(a) * deg) / Math.cos((eye0.lat * Math.PI) / 180);
+      const [x, z] = XZ(eye0.lon + dlon, eye0.lat + dlat);
+      // Inflow: the streaks point mostly round the eye, a little inward.
+      const tan = vec.unit([-(z - ez), 0, x - ex]);
+      const inw = vec.unit([ex - x, 0, ez - z]);
+      return {
+        p: [x, 0.008, z],
+        color: [0.85, 0.9, 0.95],
+        size: 0.6,
+        opacity: 0.35,
+        dir: vec.unit(vec.add(vec.mul(tan, -1), vec.mul(inw, 0.35))),
+        stretch: 5,
+        part: ringOf(deg),
+      };
+    });
+    // The day's best track on the sea: a dot every six hours.
+    for (const pnt of M.track) {
+      const [x, z] = XZ(pnt.lon, pnt.lat);
+      k.add(k.disc(0.012), { pos: [x, 0.003, z], color: mix("#ffd25a", "#ff5a3c", (pnt.kt - 70) / 85), share: 0.002, flat: 0.1, pattern: false }); // prettier-ignore
+    }
+    k.data = {
+      track: M.track.map((pnt) => [...XZ(pnt.lon, pnt.lat), pnt.kt]),
+      ang: HU_SPIN.map(() => 0),
+      last: null,
+    };
+  },
+};
+
 // ---- Earthquakes ---------------------------------------------------------------------------
 
 const EQ_DIR = "assets/toys/earthquakes/";
@@ -880,5 +1083,6 @@ export const RECIPES = {
   "st-helens": ST_HELENS,
   "sea-floor": SEA_FLOOR,
   "tide-harbor": TIDE_HARBOR,
+  hurricane: HURRICANE,
   earthquakes: EARTHQUAKES,
 };
