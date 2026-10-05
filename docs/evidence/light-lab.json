@@ -1,0 +1,122 @@
+{
+  "toy": "light-lab",
+  "checked": "2026-10-05",
+  "summary": "The Light lab shows the visible emission lines of sixteen elements as NIST lists them, traces white light and each lamp's lines through a glass prism (Snell's law with the glass maker's dispersion formula) and through a CD, DVD or grating slide (the grating equation), and reads a spectrum from a camera picture calibrated on mercury's lines. The wavelengths and angles are exact; the colors and brightnesses are approximations.",
+  "claims": [
+    {
+      "claim": "Each element's lines are at the wavelengths NIST lists (in air), with NIST's relative intensities.",
+      "how": "tools/sll-nist.mjs reads each element's Handbook 'Strong Lines' table (air wavelengths, 380 to 750 nm, the neutral atom) into src/labs/nist-lines.js, digit for digit.",
+      "where": "src/labs/nist-lines.js:1",
+      "sources": [
+        {
+          "title": "Handbook of Basic Atomic Spectroscopic Data",
+          "publisher": "NIST Physical Measurement Laboratory",
+          "url": "https://www.nist.gov/pml/handbook-basic-atomic-spectroscopic-data",
+          "says": "Strong lines of the neutral and singly ionized atoms of 99 elements, with wavelengths in air above 200 nm and relative intensities (Sansonetti and Martin, J. Phys. Chem. Ref. Data 34, 1559 (2005))."
+        },
+        {
+          "title": "Strong Lines of Hydrogen",
+          "publisher": "NIST",
+          "url": "https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable2.htm",
+          "says": "Air wavelengths 6562.7110, 6562.7248 and 6562.8518 Å (H I); 4861.2786, 4861.2870 and 4861.3615 Å."
+        },
+        {
+          "title": "Strong Lines of Mercury",
+          "publisher": "NIST",
+          "url": "https://physics.nist.gov/PhysRefData/Handbook/Tables/mercurytable2.htm",
+          "says": "4046.563, 4358.328, 5460.735, 5769.598 and 5790.663 Å (Hg I)."
+        },
+        {
+          "title": "Strong Lines of Sodium",
+          "publisher": "NIST",
+          "url": "https://physics.nist.gov/PhysRefData/Handbook/Tables/sodiumtable2.htm",
+          "says": "5889.950 and 5895.924 Å (Na I), the D lines."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:101",
+      "note": "`node tools/sll-nist.mjs --check` compares the shipped file with NIST's tables again. Components closer than 0.05 nm (hydrogen's fine structure) are drawn as one line at their intensity-weighted wavelength."
+    },
+    {
+      "claim": "A prism bends blue more than red, by Snell's law and the glass's index.",
+      "how": "Each ray is refracted at both faces by Snell's law in vector form; the index comes from Schott's Sellmeier coefficients for N-SF11 and N-BK7. The beam meets the prism at the angle of minimum deviation for 550 nm.",
+      "where": "src/labs/light-optics.js:123",
+      "sources": [
+        {
+          "title": "N-SF11 and N-BK7 (SCHOTT optical glass)",
+          "publisher": "RefractiveIndex.INFO",
+          "url": "https://refractiveindex.info/?shelf=specs&book=SCHOTT-optical&page=N-SF11",
+          "says": "n² − 1 = 1.73759695λ²/(λ² − 0.013188707) + 0.313747346λ²/(λ² − 0.0623068142) + 1.89878101λ²/(λ² − 155.23629); nd = 1.78472 (from the SCHOTT catalog). N-BK7: 1.03961212, 0.231792344, 1.01046945; 0.00600069867, 0.0200179144, 103.560653; nd = 1.5168."
+        },
+        {
+          "title": "Minimum deviation",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Minimum_deviation",
+          "says": "When the entrance and exit angles are equal, the deviation is minimal: n = sin((A + Dm)/2) / sin(A/2)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:118",
+      "note": "The traced deviation equals the textbook minimum within 10⁻⁶ rad (tests/sll.spec.mjs:125)."
+    },
+    {
+      "claim": "A grating sends each color off at the angle where d sin θ = m λ; a CD's tracks are about 1.6 µm apart and a DVD's about 0.74 µm.",
+      "how": "Every ray of orders −2 to +2 at normal incidence; an order that would need sin θ > 1 is left out.",
+      "where": "src/labs/light-optics.js:165",
+      "sources": [
+        {
+          "title": "Diffraction grating",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Diffraction_grating",
+          "says": "The grating equation d sin θm = m λ for light at normal incidence."
+        },
+        {
+          "title": "Compact disc",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Compact_disc",
+          "says": "The distance between the windings (the pitch) is 1.6 μm."
+        },
+        {
+          "title": "Exploring Light and Color guide (DVD and CD as gratings)",
+          "publisher": "NISE Network",
+          "url": "https://www.nisenet.org/sites/default/files/catalog/uploads/Karen_rama_TG_part2_0.pdf",
+          "says": "The track spacing in a DVD is only about 0.740 μm while in a CD it is about 1.6 μm: about 1350 tracks per mm for a DVD and 625 for a CD."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:140",
+      "note": ""
+    },
+    {
+      "claim": "The home spectrometer finds a fluorescent lamp's mercury lines and calibrates its scale on them.",
+      "how": "A band of the picture is averaged into a brightness per column; the bluest peak is taken as 435.8 nm and the greenest as 546.1 nm (both NIST), and a straight line through them maps columns to wavelengths.",
+      "where": "src/labs/light-optics.js:273",
+      "sources": [
+        {
+          "title": "Handbook of Basic Atomic Spectroscopic Data",
+          "publisher": "NIST Physical Measurement Laboratory",
+          "url": "https://www.nist.gov/pml/handbook-basic-atomic-spectroscopic-data",
+          "says": "Strong lines of the neutral and singly ionized atoms of 99 elements, with wavelengths in air above 200 nm and relative intensities (Sansonetti and Martin, J. Phys. Chem. Ref. Data 34, 1559 (2005))."
+        },
+        {
+          "title": "Fluorescent lamp",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fluorescent_lamp",
+          "says": "Higher-quality lamps use a rare-earth tri-phosphor mixture based on europium and terbium ions, with peaks in the red, green and blue, beside mercury's own lines."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sll.spec.mjs:147",
+      "note": "Within 2 nm on made-up pictures at two scales and both directions; a real camera adds its own color response, and a disc's spread is only nearly linear in wavelength."
+    }
+  ],
+  "simplified": [
+    "Colors follow Dan Bruton's approximation of the visible spectrum (as in the colorwav package, https://ctan.org/tex-archive/macros/latex/contrib/colorwav); screens can't show pure spectral colors.",
+    "Only the neutral atom's lines are shown (a lamp's ions add lines of their own), and lines weaker than 2% of an element's strongest are left off the bench.",
+    "Line brightness is drawn on a square-root scale of NIST's relative intensities, which themselves depend on the light source NIST's references used; a real lamp's line strengths depend on its pressure and temperature.",
+    "Lines are drawn sharp; real lines have widths, and the slit and optics blur them.",
+    "The bench's grating is drawn as letting light through; a CD or DVD reflects it, with the same angles at normal incidence.",
+    "The sample picture for the spectrometer is made by the page: mercury's lines and approximate phosphor bands, not a photograph."
+  ],
+  "fixes": []
+}

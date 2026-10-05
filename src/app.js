@@ -168,6 +168,7 @@ class App {
       ui.setLook(player.scene.look, theme);
     });
     player.on("message", (m) => ui.toast(m));
+    player.on("say", (m) => ui.toast(m, 6000)); // a tap's own message (lane Molecule viewer)
     player.on("link", (l) => ui.confirmLink(l.url)); // lane Books r5: a link in a page
     player.on("effects", (fx) => ui.setEffects(fx));
     player.on("paint", (n) => ui.setPaintCount(n));
@@ -870,6 +871,7 @@ class App {
 
   onAction(r) {
     const player = this.player;
+    this.ui.refreshInputShown?.(); // lane Molecule viewer: the panel's line follows the taps
     const recipe = player.toyInfo?.recipe;
     // The toy's own sound (src/toy-sounds.js), else the recipe's, else a
     // plain hop or pop. A toggle plays its on or off half.
@@ -1357,6 +1359,9 @@ class App {
       depth = 0;
       this.ui.showDrop(false);
       const f = e.dataTransfer?.files?.[0];
+      // Lane Molecule viewer (engine): a toy whose panel takes dropped files
+      // (input.drop) reads a file of a kind it opens; anything else loads as before.
+      if (f && this.ui.dropOnToy?.(f)) return;
       if (f) this.openFile(f);
     });
   }
@@ -1708,6 +1713,19 @@ class App {
         return blob;
       }),
     );
+  }
+
+  // Lane PDF lab: Save as PDF (labs). Its dialog and pdf-lib load only when
+  // someone opens it (src/pdf-export/).
+  async openPdfExport() {
+    if (this.busy) return;
+    try {
+      const { openPdfDialog } = await import("./pdf-export/index.js");
+      return openPdfDialog(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("Save as PDF couldn't load. Try again in a moment.", 5000);
+    }
   }
 
   // ---- UI r5: Record ---------------------------------------------------------------
