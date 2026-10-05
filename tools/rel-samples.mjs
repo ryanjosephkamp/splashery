@@ -21,7 +21,7 @@ import fs from "node:fs";
 import path from "node:path";
 import jpeg from "jpeg-js";
 import { PNG } from "pngjs";
-import { SAMPLES, WITH_PHOTO } from "../src/elements-real/samples.js";
+import { PICTURED, pictureOf } from "../src/elements-real/samples.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const rawDir = path.join(root, ".cache/rel/raw");
@@ -46,14 +46,16 @@ async function fetchRetry(url) {
     await sleep(5000 * (i + 1));
   }
 }
+// (A stand-in picture, for an element with no photo of a real sample, is "<z>-stand".)
 const rawName = (z) => {
-  const s = SAMPLES[z];
+  const s = pictureOf(z);
+  if (s.kind) return `${z}-stand`;
   return s.src === "commons" ? `${z}-commons.jpg` : `${z}-${path.basename(s.file)}`;
 };
 async function download(z) {
   const at = path.join(rawDir, rawName(z));
   if (fs.existsSync(at)) return at;
-  const s = SAMPLES[z];
+  const s = pictureOf(z);
   let url = s.file;
   if (s.src === "commons") {
     const q = new URLSearchParams({ action: "query", prop: "imageinfo", iiprop: "url|size", iiurlwidth: "1200", titles: `File:${s.file}`, format: "json" }); // prettier-ignore
@@ -65,6 +67,16 @@ async function download(z) {
   fs.writeFileSync(at, Buffer.from(await (await fetchRetry(url)).arrayBuffer()));
   return at;
 }
+
+// A stand-in picture's treatment by its kind: a portrait is shown flat and in black and white, a
+// flag as a whole waving cloth, a coat of arms cut out by its own transparency; a photo of an
+// object or mineral is cut out like the samples.
+const KIND_TUNE = {
+  portrait: { rect: true, gray: true },
+  flag: { rect: true, wave: true },
+  arms: { alpha: true },
+};
+const tuneOf = (z) => ({ ...(KIND_TUNE[pictureOf(z).kind] || {}), ...(TUNE[z] || {}) });
 
 // ---- The cutout ---------------------------------------------------------------------------
 
@@ -207,6 +219,7 @@ export function cutout(photo, depth, tune = {}) {
   // A sample that can't be cut from its background cleanly is shown as its cropped photo, whole
   // (rect) or in an ellipse (a sphere).
   if (tune.rect) return new Uint8Array(N).fill(1);
+  if (tune.alpha) return data.filter((_, i) => i % 4 === 3).map((a) => (a > 127 ? 1 : 0));
   if (tune.ellipse) {
     const m = new Uint8Array(N);
     for (let y = 0; y < h; y++)
@@ -410,7 +423,7 @@ const TUNE = {
   99: { t: 1.5 },
 };
 
-const ids = only.length ? only.filter((z) => WITH_PHOTO.includes(z)) : WITH_PHOTO;
+const ids = only.length ? only.filter((z) => PICTURED.includes(z)) : PICTURED;
 for (const z of ids) await download(z);
 
 // The browser (for the depth model) only when a photo's depth isn't cached yet.
@@ -468,16 +481,37 @@ for (const z of ids) {
           }
         return { w, h, data: Array.from(data), depth: Array.from(depth), ms: d.ms };
       },
-      { url: `/.cache/rel/raw/${rawName(z)}`, crop: SAMPLES[z].crop, WORK },
+      { url: `/.cache/rel/raw/${rawName(z)}`, crop: pictureOf(z).crop, WORK },
     );
     fs.writeFileSync(cache, JSON.stringify(got));
   }
   const photo = { w: got.w, h: got.h, data: Uint8Array.from(got.data) };
-  const depth = Float32Array.from(got.depth);
+  let depth = Float32Array.from(got.depth);
+  const tune = tuneOf(z);
+  if (tune.gray)
+    for (let i = 0; i < photo.w * photo.h; i++) {
+      const [r, g2, b2] = photo.data.subarray(i * 4, i * 4 + 3);
+      photo.data.fill(Math.round(0.2126 * r + 0.7152 * g2 + 0.0722 * b2), i * 4, i * 4 + 3);
+    }
+  if (tune.wave) {
+    // A flag's cloth: a gentle wave that grows from the hoist (left) to the fly.
+    depth = new Float32Array(photo.w * photo.h);
+    for (let y = 0; y < photo.h; y++)
+      for (let x = 0; x < photo.w; x++) {
+        const u = x / photo.w;
+        depth[y * photo.w + x] =
+          0.5 + 0.5 * u * Math.sin(Math.PI * 2 * (1.4 * u + 0.25 * (y / photo.h)));
+      }
+  }
+  if (tune.alpha)
+    // The coat of arms on a white ground for the depth model's sake was never drawn: transparent
+    // pixels are black, so take them as the background color.
+    for (let i = 0; i < photo.w * photo.h; i++)
+      if (photo.data[i * 4 + 3] < 128) photo.data.fill(255, i * 4, i * 4 + 3);
   // Polish: one pixel off the cut-out's rim, where the photo's pixels still mix in the background
   // (the fringe); the cropped cards keep their edges.
-  const raw = cutout(photo, depth, TUNE[z]);
-  const mask = TUNE[z]?.rect || TUNE[z]?.ellipse ? raw : morph(raw, photo.w, photo.h, 1, false);
+  const raw = cutout(photo, depth, tune);
+  const mask = tune.rect || tune.ellipse ? raw : morph(raw, photo.w, photo.h, 1, false);
   const det = pack(photo, depth, mask, DETAIL);
   writeJpeg(path.join(outDir, `${z}.jpg`), DETAIL, DETAIL, det.rgb, 86);
   writeGray(path.join(outDir, `${z}.png`), DETAIL, DETAIL, det.gray);
@@ -492,13 +526,13 @@ for (const z of ids) {
 }
 await b?.close();
 
-// The atlas of every sample's tile, in WITH_PHOTO order.
-const rows = Math.ceil(WITH_PHOTO.length / COLS);
+// The atlas of every sample's tile, in PICTURED order.
+const rows = Math.ceil(PICTURED.length / COLS);
 const AW = COLS * TILE;
 const AH = rows * TILE;
 const argb = new Uint8Array(AW * AH * 4).fill(255);
 const agray = new Uint8Array(AW * AH);
-WITH_PHOTO.forEach((z, k) => {
+PICTURED.forEach((z, k) => {
   const f = path.join(workDir, `${z}.tile.json`);
   if (!fs.existsSync(f)) return;
   const t = JSON.parse(fs.readFileSync(f, "utf8"));

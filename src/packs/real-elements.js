@@ -13,7 +13,7 @@
 
 import { quatAxisAngle, quatMul } from "../kit.js";
 import { FACTS } from "../elements-real/facts.js";
-import { SAMPLES, WITH_PHOTO, LICENSE_URL } from "../elements-real/samples.js";
+import { SAMPLES, PICTURED, LICENSE_URL, STANDINS, pictureOf, reliefOf } from "../elements-real/samples.js"; // prettier-ignore
 import { placeOf, blockOf } from "../elements-real/layout.js";
 import { inkCells } from "../elements-real/lettering.js";
 
@@ -97,8 +97,15 @@ export function factsOf(e) {
   }
   items.push({ text: "Sample", head: true });
   const s = e.sample;
-  if (s.none) items.push({ text: s.none, dim: true });
-  else {
+  const stand = STANDINS[e.z];
+  if (s.none) {
+    items.push({ text: s.none, dim: true });
+    // Polish: a stand-in picture, said plainly to be one.
+    if (stand) {
+      items.push({ text: `Shown instead: ${stand.what}` });
+      items.push({ text: `Picture: ${stand.author}, ${stand.license}`, dim: true });
+    }
+  } else {
     items.push({ text: s.what });
     items.push({ text: `Photo: ${s.author}, ${s.license}`, dim: true });
   }
@@ -254,7 +261,7 @@ function countPixels(pair, ox, oy, size) {
 }
 
 const atlasSpot = (z) => {
-  const k = WITH_PHOTO.indexOf(z);
+  const k = PICTURED.indexOf(z);
   return [(k % ATLAS_COLS) * ATLAS_CELL, Math.floor(k / ATLAS_COLS) * ATLAS_CELL];
 };
 
@@ -345,13 +352,13 @@ const REAL_ELEMENTS = {
       license: "CC BY 3.0",
       licenseUrl: LICENSE_URL["CC BY 3.0"],
     },
-    ...WITH_PHOTO.filter((z) => SAMPLES[z].src === "commons").map((z) => ({
-      label: `${elementOf(ELEMENTS[z - 1].symbol).name} sample`,
-      title: SAMPLES[z].file,
-      source: SAMPLES[z].page,
-      author: SAMPLES[z].author,
-      license: SAMPLES[z].license,
-      licenseUrl: LICENSE_URL[SAMPLES[z].license],
+    ...PICTURED.filter((z) => pictureOf(z).src === "commons").map((z) => ({
+      label: `${ELEMENTS[z - 1].name} ${STANDINS[z] ? "(stand-in picture)" : "sample"}`,
+      title: pictureOf(z).file,
+      source: pictureOf(z).page,
+      author: pictureOf(z).author,
+      license: pictureOf(z).license,
+      licenseUrl: LICENSE_URL[pictureOf(z).license],
     })),
     {
       label: "Element facts",
@@ -372,7 +379,7 @@ const REAL_ELEMENTS = {
   liftAt: () => [LIFT_AT[0], LIFT_AT[1], LIFT_AT[2] + 0.4],
   async prepare(o) {
     const e = elementOf(o.element) || elementOf("Cu");
-    await Promise.all([loadAtlas(), e.sample.none ? null : loadDetail(e.z)]);
+    await Promise.all([loadAtlas(), pictureOf(e.z) ? loadDetail(e.z) : null]);
   },
   drive(t, c, out, info) {
     const D = info.data;
@@ -488,7 +495,7 @@ const REAL_ELEMENTS = {
       const pn = 0.019;
       const num = String(el.z);
       inkPx(ink, inkCells(num, tx + TILE / 2 - 0.06 - (num.length * 6 - 1) * pn, ty + TILE / 2 - 0.12, pn), 0.012, inkCol, pn); // prettier-ignore
-      if (el.sample.none) {
+      if (!pictureOf(el.z)) {
         const pb = 0.05;
         const dim = plain ? [0.36, 0.39, 0.45] : shadeArr(col, 0.7);
         inkPx(ink, inkCells(el.symbol, tx, ty + SAMPLE_DY, pb, true), 0.01, dim, pb);
@@ -499,8 +506,8 @@ const REAL_ELEMENTS = {
 
     // The samples on the tiles: each its share of the budget, a relief over its tile.
     const tileList = [];
-    const per = (N * 0.42) / WITH_PHOTO.length;
-    for (const z of WITH_PHOTO) {
+    const per = (N * 0.42) / PICTURED.length;
+    for (const z of PICTURED) {
       const el = ELEMENTS[z - 1];
       const [tx, ty] = tilePos(z);
       const [ox, oy] = atlasSpot(z);
@@ -511,7 +518,7 @@ const REAL_ELEMENTS = {
       for (const s of samplePixels(atlas, ox, oy, ATLAS_CELL, step)) {
         const x = tx + (s.u - 0.5) * SAMPLE_SIDE;
         const y = ty + SAMPLE_DY + (0.5 - s.v) * SAMPLE_SIDE;
-        const zz = 0.015 + RELIEF * SAMPLE_SIDE * s.d;
+        const zz = 0.015 + RELIEF * reliefOf(z) * SAMPLE_SIDE * s.d;
         tileList.push(splat([x, y, zz], s.c, px * 0.85, { part: el === e ? home : 0, flat: 0.3 }));
       }
     }
@@ -519,54 +526,10 @@ const REAL_ELEMENTS = {
 
     // The lifted sample, built at its lifted size and place; drive() shrinks it into its tile.
     const liftList = [];
-    if (!e.sample.none) {
+    if (pictureOf(e.z)) {
       const pair = RE.ready.get(e.z);
       if (pair) {
-        const size = pair.color.w;
-        const have = countPixels(pair, 0, 0, size);
-        // Front, back and rim: about 0.62, 0.26 and 0.12 of the share.
-        const share = N * 0.24;
-        const step = Math.max(1, Math.sqrt(have / (share * 0.62)));
-        const px = (LIFT_SIDE / size) * step;
-        const hz = RELIEF * LIFT_SIDE;
-        const backStep = step * 1.5;
-        const at = (s) => [LIFT_AT[0] + (s.u - 0.5) * LIFT_SIDE, LIFT_AT[1] + (0.5 - s.v) * LIFT_SIDE]; // prettier-ignore
-        // The front: the photo's own relief, each splat facing along the surface's normal.
-        for (const s of samplePixels(pair, 0, 0, size, step)) {
-          const [x, y] = at(s);
-          const n = normalAt(pair, s.i, size, LIFT_SIDE);
-          liftList.push(splat([x, y, LIFT_AT[2] + hz * (s.d - 0.5)], s.c, px * 0.8, { part: lift, n, flat: 0.3 })); // prettier-ignore
-        }
-        // The back: a shallower mirror of the front, darker (the photo never saw it).
-        for (const s of samplePixels(pair, 0, 0, size, backStep)) {
-          const [x, y] = at(s);
-          const zb = LIFT_AT[2] - hz * 0.5 - hz * 0.35 * s.d;
-          liftList.push(splat([x, y, zb], shadeArr(s.c, 0.55), px * 1.5 * 0.66, { part: lift, n: [0, 0, -1], flat: 0.3 })); // prettier-ignore
-        }
-        // The rim: the sample's edge, closed from its back to its front, so it turns as a solid.
-        const { depth } = pair;
-        const inS = (x, y) => x >= 0 && y >= 0 && x < size && y < size && depth.data[(y * size + x) * 4] > 0; // prettier-ignore
-        const rimStep = Math.max(1, Math.round(step));
-        for (let y = 0; y < size; y += rimStep)
-          for (let x = 0; x < size; x += rimStep) {
-            if (!inS(x, y)) continue;
-            const ex = inS(x - rimStep, y) && inS(x + rimStep, y) && inS(x, y - rimStep) && inS(x, y + rimStep); // prettier-ignore
-            if (ex) continue;
-            const i = y * size + x;
-            const d = (depth.data[i * 4] - 1) / 254;
-            const c = [pair.color.data[i * 4] / 255, pair.color.data[i * 4 + 1] / 255, pair.color.data[i * 4 + 2] / 255]; // prettier-ignore
-            const s = { u: (x + 0.5) / size, v: (y + 0.5) / size };
-            const [px0, py0] = at(s);
-            const zf = LIFT_AT[2] + hz * (d - 0.5);
-            const zb = LIFT_AT[2] - hz * 0.5 - hz * 0.35 * d;
-            const nOut = [px0 - LIFT_AT[0], py0 - LIFT_AT[1], 0];
-            const ln = Math.hypot(nOut[0], nOut[1]) || 1;
-            const steps = Math.max(1, Math.ceil((zf - zb) / px));
-            for (let j = 1; j < steps; j++) {
-              const zz = zb + ((zf - zb) * j) / steps;
-              liftList.push(splat([px0, py0, zz], shadeArr(c, 0.75), px * 0.7, { part: lift, n: [nOut[0] / ln, nOut[1] / ln, 0], flat: 0.4 })); // prettier-ignore
-            }
-          }
+        for (const sp of solidSample(pair, N * 0.24, lift, splat, reliefOf(e.z))) liftList.push(sp);
       }
     } else {
       // No photo: a frosted glass slab with the symbol, so the lift still says which element.
@@ -599,6 +562,93 @@ const REAL_ELEMENTS = {
     };
   },
 };
+
+// The lifted sample as a closed solid (polish, the owner's note of October 5, 2026: "it is hollow
+// and has a hole in it when it's turned to the side"): the photo's relief in front, a shallower,
+// darker mirror of it behind, a wall all round its outline from the back to the front, and fillers
+// wherever the relief steps steeply between neighbors, so no side view looks through it. The back
+// and the walls take the colors of the nearest front surface (darker, since no photo saw them).
+function solidSample(pair, share, part, splat, relief = 1) {
+  const out = [];
+  const size = pair.color.w;
+  const { depth, color } = pair;
+  const have = countPixels(pair, 0, 0, size);
+  // About two fifths of the share each for the front and the back, the rest for walls and fillers.
+  const step = Math.max(1, Math.sqrt(have / (share * 0.4)));
+  const g = Math.max(1, Math.round(step));
+  const px = (LIFT_SIDE / size) * g;
+  // (A flat picture keeps a thin card's thickness.)
+  const hz = RELIEF * LIFT_SIDE * Math.max(0.12, relief);
+  const W = Math.ceil(size / g);
+  const cell = new Int32Array(W * W).fill(-1);
+  const cells = [];
+  for (let gy = 0; gy < W; gy++)
+    for (let gx = 0; gx < W; gx++) {
+      const x = Math.min(size - 1, gx * g);
+      const y = Math.min(size - 1, gy * g);
+      const i = y * size + x;
+      const v = depth.data[i * 4];
+      if (!v) continue;
+      const d = (v - 1) / 254;
+      cell[gy * W + gx] = cells.length;
+      cells.push({
+        gx,
+        gy,
+        i,
+        x: LIFT_AT[0] + ((x + 0.5) / size - 0.5) * LIFT_SIDE,
+        y: LIFT_AT[1] + (0.5 - (y + 0.5) / size) * LIFT_SIDE,
+        zf: LIFT_AT[2] + hz * (d - 0.5),
+        zb: LIFT_AT[2] - hz * 0.5 - hz * 0.35 * d,
+        c: [color.data[i * 4] / 255, color.data[i * 4 + 1] / 255, color.data[i * 4 + 2] / 255],
+      });
+    }
+  const at = (gx, gy) => (gx < 0 || gy < 0 || gx >= W || gy >= W ? null : cells[cell[gy * W + gx]] ?? null); // prettier-ignore
+  const mixC = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
+  const NB = [[1, 0], [0, 1]]; // prettier-ignore
+  const AROUND = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]; // prettier-ignore
+  for (const p of cells) {
+    // The front, each splat along the surface's normal; the back, facing away.
+    const n = normalAt(pair, p.i, size, LIFT_SIDE);
+    out.push(splat([p.x, p.y, p.zf], p.c, px * 0.8, { part, n, flat: 0.3 }));
+    out.push(splat([p.x, p.y, p.zb], shadeArr(p.c, 0.6), px * 0.8, { part, n: [0, 0, -1], flat: 0.3 })); // prettier-ignore
+    // Fillers where the relief steps steeply to a neighbor (front and back).
+    for (const [dx, dy] of NB) {
+      const q = at(p.gx + dx, p.gy + dy);
+      if (!q) continue;
+      for (const [za, zb, dark] of [
+        [p.zf, q.zf, 0.9],
+        [p.zb, q.zb, 0.6],
+      ]) {
+        // prettier-ignore
+        const k = Math.min(3, Math.floor(Math.abs(zb - za) / (px * 1.2)));
+        for (let j = 1; j <= k; j++) {
+          const t = j / (k + 1);
+          out.push(splat([p.x + (q.x - p.x) * t, p.y + (q.y - p.y) * t, za + (zb - za) * t], shadeArr(mixC(p.c, q.c, t), dark), px * 0.8, { part, flat: 0.5 })); // prettier-ignore
+        }
+      }
+    }
+    // The wall: an outline cell is closed from the back to the front with tall, thin splats.
+    if (AROUND.every(([dx, dy]) => at(p.gx + dx, p.gy + dy))) continue;
+    // (Overlapping layers, their color shading from the back's to the front's, so the wall reads
+    // as one face, not stacked plates.)
+    const layer = px * 1.4;
+    const k = Math.max(1, Math.ceil((p.zf - p.zb) / layer));
+    const h = (p.zf - p.zb) / k;
+    for (let j = 0; j < k; j++) {
+      const t = (j + 0.5) / k;
+      out.push({
+        p: [p.x, p.y, p.zb + h * (j + 0.5)],
+        scales: [px * 0.6, px * 0.6, h * 0.85],
+        quat: [0, 0, 0, 1],
+        color: shadeArr(p.c, 0.6 + 0.3 * t),
+        opacity: 1,
+        pattern: false,
+        part,
+      });
+    }
+  }
+  return out;
+}
 
 function shadeArr(c, f) {
   return [Math.min(1, c[0] * f), Math.min(1, c[1] * f), Math.min(1, c[2] * f)];

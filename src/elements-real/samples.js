@@ -153,8 +153,28 @@ export const LICENSE_URL = {
   "Public domain": "https://creativecommons.org/publicdomain/mark/1.0/",
 };
 
-// The elements that have a sample photo, in order (their place in the tile atlas).
+// Stand-in pictures (the owner's plan of October 5, 2026) for the elements with no photo of a real
+// sample: the person, place or flag the element is named for, or a mineral or object that holds
+// traces of it. A portrait is shown flat and in black and white, a flag as waving cloth, a coat
+// of arms cut out by its own outline. Each license was checked on its Wikimedia Commons file page.
+// z -> { kind: "portrait" | "flag" | "arms" | "photo", src, file, page, author, license, what, crop }
+export const STANDINS = {};
+
+// What a tile shows: the sample photo, or the stand-in picture (null for neither).
+export const pictureOf = (z) => (SAMPLES[z]?.none ? STANDINS[z] || null : SAMPLES[z]);
+
+// How deep a picture's relief is, against a sample's: portraits and flags stay nearly flat.
+export const reliefOf = (z) => ({ portrait: 0.22, flag: 0.35, arms: 0.3 })[pictureOf(z)?.kind] ?? 1;
+
+// The elements that have a sample photo, in order.
 export const WITH_PHOTO = Object.keys(SAMPLES)
   .map(Number)
   .filter((z) => !SAMPLES[z].none)
+  .sort((a, b) => a - b);
+
+// Every element with a picture on its tile (a sample photo or a stand-in), in order: their places
+// in the tile atlas.
+export const PICTURED = Object.keys(SAMPLES)
+  .map(Number)
+  .filter((z) => pictureOf(z))
   .sort((a, b) => a - b);
