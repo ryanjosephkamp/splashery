@@ -10,6 +10,8 @@
 // ship and follows it (the rules stay on the field's plane), so the rocks
 // show their real shapes as they tumble past.
 
+import { evenBox } from "./even.js";
+
 const SIZES = [
   { r: 0.2, pts: 1600, points: 20, splat: 0.022 },
   { r: 0.12, pts: 900, points: 50, splat: 0.017 },
@@ -85,7 +87,7 @@ class StoneBelt {
         // A sleek dart: a pointed hull, two swept fins, a glowing engine.
         k.add(k.cone(0.035, 0.0, 0.16), { rot: [0, 0, -90], even: true, color: (c) => shadeC([0.85, 0.87, 0.9], c.n) }); // prettier-ignore
         for (const s of [-1, 1])
-          k.add(k.box(0.06, 0.012, 0.07), { pos: [-0.03, 0, s * 0.045], rot: [0, s * 25, 0], even: true, color: (c) => shadeC([0.85, 0.35, 0.18], c.n) }); // prettier-ignore
+          k.add(evenBox(0.06, 0.012, 0.07), { pos: [-0.03, 0, s * 0.045], rot: [0, s * 25, 0], even: true, color: (c) => shadeC([0.85, 0.35, 0.18], c.n) }); // prettier-ignore
         k.add(k.sphere(0.022), {
           pos: [-0.065, 0, 0],
           even: true,

@@ -165,6 +165,7 @@ export const RECIPES = {
   shardball: {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [
       {
         key: "style",
@@ -209,6 +210,7 @@ export const RECIPES = {
   longtail: {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [
       {
         key: "world",
@@ -262,6 +264,7 @@ export const RECIPES = {
   "grain-garden": {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -300,6 +303,7 @@ export const RECIPES = {
   "page-breaker": {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [
       {
         key: "sample",
@@ -379,6 +383,7 @@ export const RECIPES = {
   strata: {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [
       {
         key: "well",
@@ -423,6 +428,7 @@ export const RECIPES = {
   "volley-table": {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [
       { key: "skill", label: "The computer", type: "slider", min: 1, max: 3, step: 1, default: 2 },
       VIEW,
@@ -456,6 +462,7 @@ export const RECIPES = {
   "stone-belt": {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -498,6 +505,7 @@ export const RECIPES = {
   "soft-landing": {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [
       {
         key: "world",
@@ -563,6 +571,7 @@ export const RECIPES = {
   "night-owl-pinball": {
     turntable: false,
     density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },

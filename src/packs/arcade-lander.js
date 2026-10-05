@@ -9,6 +9,8 @@
 // and the ground around the slice shows, the whole patch of real terrain;
 // the lander keeps flying in the slice, by the same rules.
 
+import { evenBox } from "./even.js";
+
 const GROUND_W = 2.4; // the patch's width in game units
 const RELIEF = 0.5; // the tallest relief, in game units, after stretching
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -51,8 +53,8 @@ class Lander {
       (k) => {
         // A squat lander: a gold-foil body, a gray top stage, four legs
         // with round feet, and an engine bell under it.
-        k.add(k.box(0.09, 0.05, 0.09), { pos: [0, 0.035, 0], even: true, color: (c) => lit([0.86, 0.66, 0.24], c.n, 0.95 + 0.1 * Math.sin(c.p[0] * 300) * Math.sin(c.p[2] * 260)) }); // prettier-ignore
-        k.add(k.box(0.07, 0.04, 0.07), { pos: [0, 0.08, 0], even: true, color: (c) => lit([0.72, 0.72, 0.74], c.n) }); // prettier-ignore
+        k.add(evenBox(0.09, 0.05, 0.09), { pos: [0, 0.035, 0], even: true, color: (c) => lit([0.86, 0.66, 0.24], c.n, 0.95 + 0.1 * Math.sin(c.p[0] * 300) * Math.sin(c.p[2] * 260)) }); // prettier-ignore
+        k.add(evenBox(0.07, 0.04, 0.07), { pos: [0, 0.08, 0], even: true, color: (c) => lit([0.72, 0.72, 0.74], c.n) }); // prettier-ignore
         k.add(k.cone(0.025, 0.012, 0.03), { pos: [0, -0.002, 0], even: true, color: (c) => lit([0.35, 0.33, 0.32], c.n) }); // prettier-ignore
         for (const [sx, sz] of [
           [1, 1],

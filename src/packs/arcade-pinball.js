@@ -9,6 +9,7 @@
 // 2D: the table seen from straight above. 3D: from the player's end of the
 // table, looking up the slope, as you stand at a real machine.
 
+import { evenCylinder } from "./even.js";
 import { World, Body, quat } from "../physics/world.js";
 
 const W = 1.0; // table width (x from -W/2 to W/2)
@@ -66,8 +67,8 @@ class Pinball {
       flipper: kitModel((k) => k.add(k.roundedBox(FLIP.len, 0.04, FLIP.w, 4), { pos: [FLIP.len / 2, 0, 0], even: true, color: (c) => lit(hex("#f4f4f0"), c.n) }), { count: low ? 200 : 380 }), // prettier-ignore
       bumper: kitModel(
         (k) => {
-          k.add(k.cylinder(0.055, 0.05, { caps: "top" }), { pos: [0, 0.025, 0], even: true, color: (c) => (c.n[1] > 0.5 ? hex("#ffe27a") : lit(hex("#d6382f"), c.n)) }); // prettier-ignore
-          k.add(k.cylinder(0.062, 0.012, { caps: true }), { pos: [0, 0.006, 0], even: true, color: (c) => lit(hex("#f4f4f0"), c.n) }); // prettier-ignore
+          k.add(evenCylinder(0.055, 0.055, 0.05, "top"), { pos: [0, 0.025, 0], even: true, color: (c) => (c.n[1] > 0.5 ? hex("#ffe27a") : lit(hex("#d6382f"), c.n)) }); // prettier-ignore
+          k.add(evenCylinder(0.062, 0.062, 0.012, true), { pos: [0, 0.006, 0], even: true, color: (c) => lit(hex("#f4f4f0"), c.n) }); // prettier-ignore
         },
         { count: low ? 220 : 420 },
       ),
@@ -86,7 +87,7 @@ class Pinball {
           }),
         { count: low ? 140 : 240 },
       ),
-      plunger: kitModel((k) => k.add(k.cylinder(0.018, 0.12, { caps: true }), { rot: [90, 0, 0], even: true, color: (c) => lit(hex("#b9bcc4"), c.n) }), { count: 120 }), // prettier-ignore
+      plunger: kitModel((k) => k.add(evenCylinder(0.018, 0.018, 0.12, true), { rot: [90, 0, 0], even: true, color: (c) => lit(hex("#b9bcc4"), c.n) }), { count: 120 }), // prettier-ignore
     };
   }
 
@@ -308,10 +309,10 @@ class Pinball {
     // 3D: from the player's end, looking up the slope.
     const d2 = this.api.fitDistance(W + 0.15, L + 0.35, aspect);
     return {
-      target: [0, 0, lerp(0.02, -0.05, view)],
+      target: [0, 0, lerp(0.02, 0.08, view)],
       yaw: 0,
       pitch: lerp(Math.PI / 2 - 0.001, 0.62, view),
-      distance: lerp(d2, this.api.fitDistance(W + 0.3, L * 0.85, aspect), view),
+      distance: lerp(d2, this.api.fitDistance(W + 0.3, L * 1.15, aspect), view),
     };
   }
 

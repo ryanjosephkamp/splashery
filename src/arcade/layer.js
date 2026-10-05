@@ -145,6 +145,10 @@ export function makeModel(n) {
 // splat budget the kit shares between the shapes.
 export function kitModel(build, { count = 600, seed = 7 } = {}) {
   const k = new Kit(seed, { count, fit: false });
+  // Smooth, clean colors (the kit's usual color noise reads as grain on a
+  // game's solid pieces: PACKS.md 7c).
+  const add = k.add.bind(k);
+  k.add = (shape, o = {}) => add(shape, { jitter: 0.01, ...o });
   build(k);
   const it = k.emit();
   let r = it.next();

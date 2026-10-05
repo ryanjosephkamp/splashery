@@ -15,6 +15,8 @@
 // World units: the toy's own (the board is about 1.7 by 2.1).
 
 // The board (inside the rails); a game made from a page sets its own.
+import { evenCylinder } from "./even.js";
+
 const BOARD = { W: 1.6, H: 2.0, TOP: 1.0, PADDLE_Y: -0.86 };
 const BALL_R = 0.032;
 const BRICK = [0.142, 0.062, 0.09]; // full sizes (depth for 3D)
@@ -119,7 +121,7 @@ export class Shardball {
     );
     const dish = kitModel(
       (k) => {
-        k.add(k.cylinder(0.2, 0.035, { caps: true }), {
+        k.add(evenCylinder(0.2, 0.2, 0.035, true), {
           even: true,
           flat: 0.3,
           color: (c) => {
@@ -720,7 +722,7 @@ export class Shardball {
         target: [0, lerp(0.14, -0.08, view), lerp(0, 0.05, view)],
         yaw: 0,
         pitch: lerp(0, 0.62, view),
-        distance: lerp(d2, this.api.fitDistance(W + 0.5, 1.9, aspect), view),
+        distance: lerp(d2, this.api.fitDistance(W + 0.5, 2.5, aspect), view),
       };
     }
     const d2 = this.api.fitDistance(W + 0.3, H + 0.8, aspect);

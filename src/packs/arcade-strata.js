@@ -11,6 +11,8 @@
 // a wide 5 by 5 one, or a flat slot one stone deep, which plays like a
 // classic flat game in either view.
 
+import { evenRoundBox } from "./even.js";
+
 const SHAPES = [
   // Each a list of cubes [x, y, z] around a center cube.
   { name: "tripod", cubes: [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]], color: "#c8553d" }, // prettier-ignore
@@ -73,15 +75,18 @@ class Strata {
     // A carved stone: a rounded block with a lit top and darker sides.
     const stone = kitModel(
       (k) => {
-        k.add(k.roundedBox(c * 0.94, c * 0.94, c * 0.94, 6), {
-          even: true,
-          flat: 0.25,
-          color: (cc) => {
-            const f = 0.72 + 0.22 * cc.n[1] + 0.08 * cc.n[2] + 0.04 * cc.n[0];
-            const grain = 1 + 0.07 * cc.noise(cc.p[0] * 60, cc.p[1] * 60, cc.p[2] * 60);
-            return [f * grain, f * grain, f * grain];
+        k.add(
+          evenRoundBox(c * 0.94, c * 0.94, c * 0.94, Math.min(c * 0.94, c * 0.94, c * 0.94) * 0.3),
+          {
+            even: true,
+            flat: 0.25,
+            color: (cc) => {
+              const f = 0.72 + 0.22 * cc.n[1] + 0.08 * cc.n[2] + 0.04 * cc.n[0];
+              const grain = 1 + 0.07 * cc.noise(cc.p[0] * 60, cc.p[1] * 60, cc.p[2] * 60);
+              return [f * grain, f * grain, f * grain];
+            },
           },
-        });
+        );
       },
       { count: low ? 90 : 150 },
     );
