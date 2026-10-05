@@ -20,9 +20,9 @@ the evidence file. Next: clips on Effect review page 2, sound lint, check-packs,
   the browser has it (the browser's download elsewhere). Samples: USGS earthquakes, Fisher's iris
   (CC BY 4.0), NOAA CO2 by month. A tap drops the marks to the floor and lets them rise back.
 - **Climate records** (`climate-records`, Science, labs): `src/datavis/climate.js`. Views: the CO2
-  spiral (height is time, distance from the middle is ppm; a tap redraws the record behind a
-  bead), monthly temperature bars and a yearly temperature wall (a tap lets the bars sink to zero
-  and grow back). Snapshots in `assets/toys/climate-records/`, made by `tools/dcl-snapshots.mjs`.
+  spiral (height is time, distance from the middle is ppm; a tap redraws the record behind a bead),
+  monthly temperature bars and a yearly temperature wall (a tap lets the bars sink to zero and grow
+  back). Snapshots in `assets/toys/climate-records/`, made by `tools/dcl-snapshots.mjs`.
 - No engine changes.
 
 ## Notes
