@@ -9,11 +9,12 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-WORKING: Imaging r2 (October 5, 2026, Opus 5.5), PR #304 on `claude/lane-imaging` (restarted from
-main after #275 merged). The owner marked all ten clips "fix" with notes: sharper and less grainy
-everywhere; night-vision and infrared "visions" beside the realistic gray (microscope, MRI, walnut);
-and "virtually any toy" in How CT works. All three are built and pushed; the `-r2` clips are being
-rendered for Effect review page 2.
+READY: Imaging r2 (October 5, 2026, Opus 5.5), PR #304 on `claude/lane-imaging`, main merged
+(7ba9b56f). The owner's ten "fix" notes are answered: every toy sharper and less grainy,
+night-vision and infrared visions beside the realistic gray (microscope, MRI, walnut), and 19 other
+toys can lie in the CT scanner. Thirteen `-r2` and new cards are on Effect review page 2 (the old
+cards marked replaced). Specs run: `tests/img.spec.mjs`, `tests/kit.spec.mjs`, `tests/taps.spec.mjs`
+(62 passed); Prettier and the American English check are clean. The full suite is the Integrator's.
 
 - [x] 1. Airport X-ray scanner (`airport-xray`)
 - [x] 2. How CT works (`how-ct`): a kit-built nautilus shell
@@ -64,7 +65,11 @@ rendered for Effect review page 2.
 
 ## For the Operator
 
-- Effect review page 2 has no `lanes/Imaging` record yet; the cards use lane id `Imaging`.
+- r2 lessons for PACKS.md: a flat panel behind a picture of splats must sit clearly in front of what
+  is behind it (the X-ray screen's background z-fought the bezel and showed as static), and a
+  picture layer needs a few hundredths of a unit in front of its background, or the sort lets the
+  background wash it out. Crossfading two copies of a scene built from different random samples
+  looks grainy halfway; keep such blends short.
 - For PACKS.md (section 5, after the levers): the `volume` kind and `out.volume`, as in the Notes
   above; and that `out.view` zoom steps need `focus: () => false` when the toy has no focus of its
   own.

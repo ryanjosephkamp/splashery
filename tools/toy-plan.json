@@ -2474,7 +2474,7 @@
       "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
       "effect": "Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride the belt through the scanner, pushing its lead curtains aside; the screen on top builds each bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic orange, inorganic green, metal blue, dense black). A tap sends the next bag.",
       "sound": "The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is done.",
-      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, a 180 by 120 X-ray picture)."
+      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, a 180 by 120 X-ray picture on an even pale screen)."
     },
     "how-ct": {
       "v": "keep",
@@ -2509,7 +2509,7 @@
       "owner": "The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea cooling and a hand warmer (lane Imaging; labs only).",
       "effect": "A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap crossfades from normal colors to the thermal camera's false colors (the iron palette), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.",
       "sound": "The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it turns off.",
-      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats)."
+      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats); the tea steps from hot to warm to cooled with short blends (a long crossfade of two copies looked grainy)."
     }
   }
 }

@@ -41,11 +41,11 @@ const span = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 // screen: its center, its right and up directions (unit) and its width.
 // pixel(i, j) gives [r, g, b] (0..1) or null; extra fields go on each splat
 // (part, kind, params, channel).
-function screenSplats(k, { W, H, center, right, up, width, pixel, extra }) {
+function screenSplats(k, { W, H, center, right, up, width, pixel, extra, fill = 0.62 }) {
   const pitch = width / W;
   const n = vec.unit(vec.cross(right, up));
   const q = basisQuat(right, up, n);
-  const s = pitch * 0.62;
+  const s = pitch * fill;
   // Exactly one splat per pixel, whatever the budget.
   k.cloud({ count: W * H * (160000 / k.count), jitter: 0 }, (rand, idx) => {
     const i = idx % W;
@@ -567,19 +567,21 @@ function buildXray(k) {
     color: (c) => lit("#2a2d31", c.n, 0.3),
     even: true,
   });
-  // The screen's pale background, under the pictures.
-  k.add(evenBox(S.w, S.h, 0.004), {
-    pos: vec.add(S.center, vec.mul(normal, -0.004)),
-    rot: [-S.tilt, 0, 0],
-    color: XR_BG.map((v) => v * 0.97),
-    even: true,
-    flat: 0.1,
-    jitter: 0,
-    pattern: false,
+  // The screen's pale background, under the pictures: an even grid (a
+  // sampled box left grain between the pictures).
+  screenSplats(k, {
+    W: XR.W / 2,
+    H: XR.H / 2,
+    center: vec.add(S.center, vec.mul(normal, -0.001)),
+    right,
+    up,
+    width: S.w,
+    pixel: () => XR_BG.map((v) => v * 0.97),
+    fill: 0.9,
   });
   // The pictures, one part each; each builds in as its bag crosses the beam
   // (a fade on channel i % 2, so one picture can show while the next builds).
-  const face = vec.add(S.center, vec.mul(normal, 0.004));
+  const face = vec.add(S.center, vec.mul(normal, 0.03));
   BAGS.forEach((bag, b) => {
     const pic = xrayPicture(bag, XR.W, XR.H, XR.win, (x, y, z) => k.noise.fbm(x, y, z + b * 7, 3));
     const part = k.part(`pic${b}`);
@@ -2021,9 +2023,13 @@ function driveThermal(t, c, out, info) {
   // The tea cools from 72 to 34 degrees over about 24 seconds (minutes in
   // real life), sped up.
   const x = thermalOn.at === null ? 0 : clamp((t - thermalOn.at) / 24, 0, 1);
-  const w1 = x < 0.5 ? 1 - 2 * x : 0;
-  const w2 = x < 0.5 ? 2 * x : 2 - 2 * x;
-  const w3 = x < 0.5 ? 0 : 2 * x - 1;
+  // Each step blends into the next quickly: two copies half shown at once
+  // look grainy (the owner's note of October 5, 2026).
+  const a = smoothstep(0.4, 0.48, x);
+  const b = smoothstep(0.82, 0.9, x);
+  const w1 = 1 - a;
+  const w2 = a - b;
+  const w3 = b;
   out.morph = [v, v * w1, v * w2, v * w3];
   out.amount = 1 - 0.85 * x;
 }

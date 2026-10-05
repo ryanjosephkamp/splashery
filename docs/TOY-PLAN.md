@@ -2986,7 +2986,7 @@ Proposals below are suggestions; the owner may change them.
     bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic
     orange, inorganic green, metal blue, dense black). A tap sends the next bag.
   - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, a 180
-    by 120 X-ray picture).
+    by 120 X-ray picture on an even pale screen).
   - Sound: The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is
     done.
 - **How CT works** (`how-ct`). Now: tap: Scan or undo the scan. Plan: keep.
@@ -3038,6 +3038,8 @@ Proposals below are suggestions; the owner may change them.
     crossfades from normal colors to the thermal camera's false colors (the iron palette), and the
     tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays
     warm and the ice water cold. A second tap goes back to normal colors.
-  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats).
+  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats); the
+    tea steps from hot to warm to cooled with short blends (a long crossfade of two copies looked
+    grainy).
   - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
     turns off.
