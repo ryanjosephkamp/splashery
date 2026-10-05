@@ -60,7 +60,9 @@ for (const job of jobs) {
   if (kind === "motion") {
     // Seen from a little above and to the side while it moves.
     const n = Math.round(SECS[what] * FPS);
-    const side = { yaw: 24, pitch: -18, margin: 6 };
+    // From a little below: seen from above, pieces flying toward the camera
+    // drew lighter (the splat sort lags them).
+    const side = { yaw: 24, pitch: 16, margin: 6 };
     // A tap's knock lands up and to the left of the middle.
     for (let i = 0; i <= n; i++) frames.push({ motion: what, q: i / n, ...side, knock: [-5, 4] });
     const glide = Math.round(1.0 * FPS);

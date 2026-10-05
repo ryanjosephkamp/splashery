@@ -249,7 +249,7 @@ void modifySplatCenter(inout vec3 center) {
     // then back on a spring that overshoots a little.
     vec2 d = m2 - uSpMorph.zw;
     float r = length(d);
-    float k = exp(-qrSq(r / 6.0));
+    float k = exp(-qrSq(r / 7.0));
     vec2 dir = r > 0.3 ? d / r : normalize(vec2(h1 - 0.5, h2 - 0.5) + 1e-3);
     float a;
     if (Q < 0.36) a = 1.0 - exp(-8.0 * Q / 0.36);
@@ -258,8 +258,8 @@ void modifySplatCenter(inout vec3 center) {
       a = exp(-4.5 * u) * cos(8.0 * u) * (1.0 - smoothstep(0.85, 1.0, u));
     }
     a *= k;
-    off += vec3(dir * (2.8 + 2.2 * h1), 3.2 + 2.0 * h2) * a * QS;
-    q = qrMul(qrAxis(vec3(-dir.y, dir.x, h3 - 0.5), (2.5 + 2.0 * h3) * a), q);
+    off += vec3(dir * (3.6 + 2.6 * h1), 4.2 + 2.4 * h2) * a * QS;
+    q = qrMul(qrAxis(vec3(-dir.y, dir.x, h3 - 0.5), (0.9 + 0.8 * h3) * a), q);
   }
   qrQ = q;
   center = piv + qrRot(q, rel) + off;
@@ -537,7 +537,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   } else if (moving && M == 8.0) {
     let d = m2 - uniform.uSpMorph.zw;
     let r = length(d);
-    let k = exp(-qrSq(r / 6.0));
+    let k = exp(-qrSq(r / 7.0));
     let dir = select(normalize(vec2f(h1 - 0.5, h2 - 0.5) + 1e-3), d / max(r, 1e-6), r > 0.3);
     var a: f32;
     if (Q < 0.36) { a = 1.0 - exp(-8.0 * Q / 0.36); }
@@ -546,8 +546,8 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
       a = exp(-4.5 * u) * cos(8.0 * u) * (1.0 - smoothstep(0.85, 1.0, u));
     }
     a = a * k;
-    off += vec3f(dir * (2.8 + 2.2 * h1), 3.2 + 2.0 * h2) * a * QS;
-    q = qrMul(qrAxis(vec3f(-dir.y, dir.x, h3 - 0.5), (2.5 + 2.0 * h3) * a), q);
+    off += vec3f(dir * (3.6 + 2.6 * h1), 4.2 + 2.4 * h2) * a * QS;
+    q = qrMul(qrAxis(vec3f(-dir.y, dir.x, h3 - 0.5), (0.9 + 0.8 * h3) * a), q);
   }
   qrQ = q;
   *center = piv + qrRot(q, rel) + off;

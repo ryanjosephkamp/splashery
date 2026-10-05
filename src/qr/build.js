@@ -173,6 +173,7 @@ function lit(c, n, { amb = 0.55, dif = 0.55, spec = 0, shine = 30 } = {}) {
 // not fit the splat budget.
 export const TUNE = {
   crisp: true,
+  finest: 0.6, // the scale tried first (smaller: finer rings, more splats)
   rings: [0.03, 0.06, 0.11], // each ring's width across the edge (modules)
   stretch: 3, // a ring splat's length along the edge, in ring widths
   minLength: 0.12, // and at least this long (shorter splats vanish on a phone)
@@ -199,12 +200,14 @@ function rrectSDF(r, px, py) {
 // zone's square (modules), depth how far the code stands out in front.
 export function buildCode(code, o, budget = 120000) {
   if (!TUNE.crisp) return buildOnce(code, o, budget, 0);
-  // The finest edges first; when that is over the budget, one more try at
-  // the coarser scale that should fit (the splats go roughly as the scale to
-  // the power -1.5), and the old lattice (scale 0) if that is smaller still.
-  const r1 = buildOnce(code, o, budget, 1);
+  // The finest edges that fit: first at TUNE.finest; when that is over the
+  // budget, one more try at the coarser scale that should fit (the splats go
+  // roughly as the scale to the power -1.5), and the old lattice (scale 0) if
+  // that is smaller still.
+  const s1 = TUNE.finest;
+  const r1 = buildOnce(code, o, budget, s1);
   if (r1.splats.length <= budget) return r1;
-  const s2 = Math.min(4, 1.1 * Math.pow(r1.splats.length / budget, 1 / 1.5));
+  const s2 = Math.min(4, Math.max(s1, 1.1 * s1 * Math.pow(r1.splats.length / budget, 1 / 1.5)));
   const r2 = buildOnce(code, o, budget, s2);
   if (r2.splats.length <= budget * 1.15) return r2;
   const r0 = buildOnce(code, o, budget, 0);
@@ -713,7 +716,15 @@ function buildOnce(code, o, budget, scale) {
                 const u = -half + ((i + 0.5) / along) * 2 * half;
                 const d = t + (a - t) * w;
                 const p = dx ? [x + dx * d, y + u, z] : [x + u, y + dy * d, z];
-                dot(p, n, sp * 0.85, col, params);
+                // QR r3 polish: near the girdle a facet splat reaches no
+                // further than the module's edge (the gem's outline stays crisp).
+                if (!scale) dot(p, n, sp * 0.85, col, params);
+                else {
+                  const r0 = 0.62 * sp * 0.85;
+                  const rr = Math.max(0.012, Math.min(r0, (0.5 - d) / 1.6));
+                  const along = Math.max(0.012, Math.min(r0, (half - Math.abs(u) + 0.03) / 1.6));
+                  out.push({ p, scales: dx ? [rr, along, 0.03 * sp] : [along, rr, 0.03 * sp], quat: quatTo(n), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
+                }
               }
             }
           }

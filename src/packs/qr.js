@@ -776,6 +776,9 @@ const choices = (list) => list.map((x) => ({ id: x.id, label: x.label }));
 
 export const RECIPES = {
   "qr-code": {
+    // QR r3 polish: twice the splat budget (240,000 at the mid tier), spent
+    // on finer edge rings (TUNE.finest in src/qr/build.js).
+    density: 2,
     alive: true,
     turntable: false,
     options: [
