@@ -2860,7 +2860,7 @@ export const TOY_SOUNDS = {
   "grand-canyon": [
     { voice: "roar", f: 140, bright: 0.25, decay: 2.2, vol: 0.4 },
     { voice: "wave", at: 0.4, f: 380, decay: 1.6, vol: 0.35 },
-    { voice: "wave", at: 4.7, f: 300, decay: 1.5, vol: 0.28 },
+    { voice: "wave", at: 2.2, f: 300, decay: 1.0, vol: 0.28 },
   ],
   "st-helens": {
     on: [
@@ -2872,12 +2872,12 @@ export const TOY_SOUNDS = {
   },
   "sea-floor": [
     { voice: "roar", f: 110, bright: 0.2, decay: 2.4, vol: 0.38 },
-    { voice: "wave", at: 5.2, f: 260, decay: 2, vol: 0.32 },
+    { voice: "wave", at: 2.1, f: 260, decay: 1.0, vol: 0.32 },
   ],
   "tide-harbor": [
-    { voice: "wave", f: 420, decay: 1.8, vol: 0.32 },
-    { voice: "wave", at: 3, f: 360, decay: 1.8, vol: 0.26 },
-    { voice: "wave", at: 6.2, f: 420, decay: 1.8, vol: 0.3 },
+    { voice: "wave", f: 420, decay: 1.4, vol: 0.32 },
+    { voice: "wave", at: 1.3, f: 360, decay: 1.2, vol: 0.26 },
+    { voice: "wave", at: 2.4, f: 420, decay: 0.9, vol: 0.3 },
   ],
   hurricane: {
     on: [
