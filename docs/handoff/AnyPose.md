@@ -97,4 +97,31 @@ docs/audits/poses-2026-10.md, the per-toy recipe fixes your sweep lists, and thi
 
 ## State
 
-WORKING: not started yet (October 3, 2026).
+WORKING: engine fix written and being measured (October 5, 2026). Model: Opus 5.5, default effort.
+
+### The cause (item 1)
+
+PlayCanvas runs Splashery's effect shader (`modifySplatCenter` in `src/effects.js`) on each splat's
+center in the world, after the toy's entity has placed it. Hands-on poses a whole toy by turning and
+moving that entity (`Stage.setToyPose`), so every effect of a posed toy was worked out about where
+the toy stood at home, with the world's up as its own: a rig scan's parts (the grape's peel, the
+hoodie's hood and sleeves before it got its own cloth) turned about pivots left behind, swells and
+spins went about an empty center, sways, key presses and pokes went along the wrong axes. Engine A's
+`poseKitUniforms` (#225) had patched only a kit toy's parts and tokens; rig scans, every kit
+behavior kind and every effect-panel effect were still wrong. The hoodie on main now plays in pieces
+(its hood is a cloth part, #230) and is no longer tossed whole, so it shows the fault only when
+forced to play as one body (`tools/pose-clip.mjs --level1`).
+
+### Engine fix (item 2): branch `claude/lane-any-pose-engine`
+
+- `src/effects-pose.js` (new): the pose uniforms (`uSpPoseQ`, `uSpPoseT`, `uSpPoseC`, `uSpPoseUp`)
+  and the world points and directions the shader reads (pokes, magnet, grab, wind, the drop's
+  gravity, the camera, the squish) taken into the toy's home frame.
+- `src/effects.js`: with a pose set, the shader takes each center into the home frame first, runs
+  every effect there, puts it back after, and turns each splat's effect rotation by the pose. With
+  no pose the old code runs unchanged. Flame, rise and fall kinds follow the world's real up.
+- `src/stage.js` (1 line: `toyPose`), `src/player.js` (3 lines), `src/physics/hands-on.js`
+  (`handsFix` no longer set: the shader does it).
+- Tools: `tools/pose-clip.mjs` (a tap upright, on its side and upside down, side by side),
+  `tools/pose-sweep.mjs` (every toy measured), `tools/pose-upright.mjs` (upright frames and uniforms
+  hashed, main against the branch).
