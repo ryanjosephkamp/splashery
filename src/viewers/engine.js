@@ -99,7 +99,11 @@ export async function open(
     const cloud = await readCloudFile(bytes, name, { getLazPerf, onProgress });
     rec = { kind, cloud, name, fileBytes, stats: cloudStats(cloud, fileBytes), spacing: typicalSpacing(cloud) }; // prettier-ignore
   }
+  slots.delete(key(kind, slot));
   slots.set(key(kind, slot), rec);
+  // Keep the last four files of each kind (a splat table can take hundreds of MB).
+  const mine = [...slots.keys()].filter((k) => k.startsWith(`${kind}:`));
+  while (mine.length > 4) slots.delete(mine.shift());
   progress(1, "");
   return { name, stats: rec.stats, spacing: rec.spacing };
 }
@@ -222,11 +226,17 @@ export function applySplats({ slot, settings: s, budget }, progress = () => {}) 
   const crop = s.crop ? cropBox(frame, s.crop, upright) : null;
   progress(0, "Working on the splats…");
   const target = s.shrink && s.shrink < 1 ? Math.max(1, Math.round(t.count * s.shrink)) : 0;
-  const res = runPipeline(
-    t,
-    { crop, floaters: s.floaters || null, faint: s.faint || 0, target },
-    (p) => progress(p * 0.8, "Looking for floaters…"),
-  );
+  // The last few results are kept: switching the view or the comparison doesn't run the filter
+  // over every splat again.
+  const settings = { crop, floaters: s.floaters || null, faint: s.faint || 0, target };
+  const memoKey = JSON.stringify(settings, (_k, v) => (v === Infinity ? "inf" : v === -Infinity ? "-inf" : v)); // prettier-ignore
+  rec.memo ||= new Map();
+  let res = rec.memo.get(memoKey);
+  if (!res) {
+    res = runPipeline(t, settings, (p) => progress(p * 0.8, "Looking for floaters…"));
+    rec.memo.set(memoKey, res);
+    if (rec.memo.size > 4) rec.memo.delete(rec.memo.keys().next().value);
+  }
   rec.last = res;
   progress(0.85, "Making the preview…");
   const showAll = s.show === "original";

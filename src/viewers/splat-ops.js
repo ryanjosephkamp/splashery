@@ -229,6 +229,8 @@ export function decimateIndex(t, idx, target) {
   let k = 0;
   const frac = target / n;
   let carry = 0;
+  const score = new Float32Array(t.count);
+  for (let j = 0; j < n; j++) score[idx[j]] = importance(t, idx[j]);
   for (let c = 0; c + 1 < g.start.length; c++) {
     const a = g.start[c];
     const b = g.start[c + 1];
@@ -237,11 +239,8 @@ export function decimateIndex(t, idx, target) {
     const take = Math.min(b - a, Math.floor(want));
     carry = want - take;
     if (!take) continue;
-    const list = Array.from(g.order.subarray(a, b));
-    if (take < list.length) {
-      const sc = new Map(list.map((i) => [i, importance(t, i)]));
-      list.sort((p, q) => sc.get(q) - sc.get(p));
-    }
+    const list = g.order.slice(a, b);
+    if (take < list.length) list.sort((p, q) => score[q] - score[p]);
     for (let j = 0; j < take && k < target; j++) keep[k++] = list[j];
   }
   return keep.slice(0, k).sort();

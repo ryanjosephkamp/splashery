@@ -41,6 +41,8 @@ async function readBytes(rel) {
 
 // The splats a toy may draw on this device (as the player counts them).
 function budgetFor(recipe, profile) {
+  // The Node tools and tests give no profile and build a few thousand splats: a small preview.
+  if (!profile) return 24000;
   const prof = PROFILES[profile] || PROFILES.mid;
   return Math.round(Math.min(prof.maxCount, prof.defaultCount * (recipe.density ?? 1)) * 0.97);
 }
@@ -152,7 +154,8 @@ const SPLAT_SAMPLES = [
 const SPL = {
   files: { custom: null, custom2: null }, // { file, files, name, uid }
   uid: 0,
-  opened: { a: "", b: "" }, // what each worker slot holds
+  slot: { a: "", b: "" }, // the worker slot (a file's key) of the main splat and the compared one
+  statsByKey: new Map(), // each opened file's numbers
   stats: { a: null, b: null },
   view: null, // { main, second } previews from the worker
   cacheKey: "",
@@ -169,31 +172,34 @@ export const toolkitState = () => ({
   second: SPL.view?.second ? { counts: SPL.view.second.counts, name: SPL.view.second.name } : null, // prettier-ignore
 });
 
-// Opens a file or a sample in a worker slot (a: the main splat, b: the one compared with it).
-async function openSplatSource(slot, id, progress) {
+// Opens a file or a sample in the worker for a role (a: the main splat, b: the one compared with
+// it). The worker keeps the last few files by name, so switching back to one is instant.
+async function openSplatSource(role, id, progress) {
   const f = id === "custom" ? SPL.files.custom : id === "custom2" ? SPL.files.custom2 : null;
   const sample = SPLAT_SAMPLES.find((s) => s.id === id);
   const k = f ? `file:${f.uid}` : sample ? `sample:${sample.id}` : "";
   if (!k) throw new Error("Open a splat file first.");
-  if (SPL.opened[slot] === k) return;
-  let bytes;
-  let name;
-  let files = null;
-  if (f) {
-    bytes = new Uint8Array(await f.file.arrayBuffer());
-    name = f.name;
-    if (f.files?.length) {
-      files = new Map();
-      for (const x of f.files) if (x !== f.file) files.set(x.name, new Uint8Array(await x.arrayBuffer())); // prettier-ignore
+  if (!SPL.statsByKey.has(k) || !(await call("has", { kind: "splat", slot: k }))) {
+    let bytes;
+    let name;
+    let files = null;
+    if (f) {
+      bytes = new Uint8Array(await f.file.arrayBuffer());
+      name = f.name;
+      if (f.files?.length) {
+        files = new Map();
+        for (const x of f.files) if (x !== f.file) files.set(x.name, new Uint8Array(await x.arrayBuffer())); // prettier-ignore
+      }
+    } else {
+      progress?.(0, `Loading the ${sample.label.toLowerCase()}…`);
+      bytes = await readBytes(sample.file);
+      name = sample.file.split("/").pop();
     }
-  } else {
-    progress?.(0, `Loading the ${sample.label.toLowerCase()}…`);
-    bytes = await readBytes(sample.file);
-    name = sample.file.split("/").pop();
+    const r = await call("open", { kind: "splat", slot: k, name, bytes, files, stray: !!sample?.stray }, progress, [bytes.buffer]); // prettier-ignore
+    SPL.statsByKey.set(k, { ...r.stats, name: f ? f.name : sample.label });
   }
-  const r = await call("open", { kind: "splat", slot, name, bytes, files, stray: !!sample?.stray }, progress, [bytes.buffer]); // prettier-ignore
-  SPL.opened[slot] = k;
-  SPL.stats[slot] = { ...r.stats, name: f ? f.name : sample.label };
+  SPL.slot[role] = k;
+  SPL.stats[role] = SPL.statsByKey.get(k);
 }
 
 // The settings the worker runs from the toy's options.
@@ -315,7 +321,6 @@ const SPLAT_TOOLKIT = {
           "Pick a .ply, .splat, .spz or .sog file (or a SOG's meta.json with its pictures).",
         );
       SPL.files.custom = { file: main, files: picked, name: main.name, uid: ++SPL.uid };
-      SPL.opened.a = "";
       progress(`Reading ${main.name} (${mb(main.size)})…`);
       await openSplatSource("a", "custom", progressTo(progress));
       return { source: "custom", fileName: main.name.slice(0, 120) };
@@ -350,18 +355,18 @@ const SPLAT_TOOLKIT = {
       let second = null;
       if (o.show === "split") {
         const half = Math.floor(budget / 2);
-        second = await call("applySplats", { slot: "a", settings: { ...s, crop: null, floaters: null, faint: 0, shrink: 1 }, budget: half }, progress); // prettier-ignore
-        main = await call("applySplats", { slot: "a", settings: s, budget: half }, progress);
+        second = await call("applySplats", { slot: SPL.slot.a, settings: { ...s, crop: null, floaters: null, faint: 0, shrink: 1 }, budget: half }, progress); // prettier-ignore
+        main = await call("applySplats", { slot: SPL.slot.a, settings: s, budget: half }, progress);
         [main, second] = [second, main]; // before on the left, after on the right
         main.label = "Before";
         second.label = "After";
       } else if (cmp !== "off") {
         await openSplatSource("b", cmp, progress);
         const half = Math.floor(budget / 2);
-        main = await call("applySplats", { slot: "a", settings: s, budget: half }, progress);
-        second = await call("applySplats", { slot: "b", settings: { upright: uprightFor(o, cmp), show: "result" }, budget: half }, progress); // prettier-ignore
+        main = await call("applySplats", { slot: SPL.slot.a, settings: s, budget: half }, progress);
+        second = await call("applySplats", { slot: SPL.slot.b, settings: { upright: uprightFor(o, cmp), show: "result" }, budget: half }, progress); // prettier-ignore
       } else {
-        main = await call("applySplats", { slot: "a", settings: s, budget }, progress);
+        main = await call("applySplats", { slot: SPL.slot.a, settings: s, budget }, progress);
       }
       SPL.view = { main, second, split: o.show === "split" };
       SPL.cacheKey = key;
@@ -394,6 +399,10 @@ const SPLAT_TOOLKIT = {
     }
     // Each splat turns about its own middle.
     const right = dual ? k.part("right", { pivot: [1.05, 0, 0], axis: [0, 1, 0] }) : null;
+    // The worker's preview fits the device's budget; a smaller build (the Node tools ask for a few
+    // thousand) takes an even share of it.
+    const total = [v.main, v.second].filter(Boolean).reduce((t, w) => t + w.main.count + (w.red?.count || 0), 0); // prettier-ignore
+    const share = Math.min(1, (k.count * 0.95) / Math.max(1, total));
     const place = (view, part, dx, radius) => {
       const f = view.frame;
       const c = [0, 1, 2].map((a) => (f.min[a] + f.max[a]) / 2);
@@ -403,9 +412,10 @@ const SPLAT_TOOLKIT = {
       const items = [[m, false]];
       if (view.red) items.push([view.red, true]);
       for (const [arr] of items) {
-        const n = arr.count;
-        k.cloud({ count: (n * 160000) / k.count, pattern: false, part, fit: false }, (_r, j) => {
-          if (j >= n) return null;
+        const n = Math.max(1, Math.floor(arr.count * share));
+        k.cloud({ count: (n * 160000) / k.count, pattern: false, part, fit: false }, (_r, jj) => {
+          if (jj >= n) return null;
+          const j = Math.min(arr.count - 1, Math.floor(jj / share));
           return {
             p: [(arr.pos[j * 3] - c[0]) * s + dx, (arr.pos[j * 3 + 1] - c[1]) * s, (arr.pos[j * 3 + 2] - c[2]) * s], // prettier-ignore
             scales: [arr.scl[j * 3] * s, arr.scl[j * 3 + 1] * s, arr.scl[j * 3 + 2] * s],
@@ -464,7 +474,6 @@ function renderToolkitPanel() {
     const main = picked.find((f) => ["ply", "splat", "spz", "sog"].includes(extOf(f.name))) || picked.find((f) => f.name.toLowerCase().endsWith("meta.json")); // prettier-ignore
     if (!main) return;
     SPL.files.custom2 = { file: main, files: picked, name: main.name, uid: ++SPL.uid };
-    SPL.opened.b = "";
     await app()?.setToyOptions({ compare: "custom2" });
   });
   row.append(btn("vwr-open-second", "Open a second splat to compare…", () => second.click()));
@@ -477,7 +486,7 @@ function renderToolkitPanel() {
     op.value = id;
     sel.append(op);
   }
-  saveRow.append(sel, btn("vwr-save", "Save the result…", () => save("saveSplats", "a", sel.value, "splats"))); // prettier-ignore
+  saveRow.append(sel, btn("vwr-save", "Save the result…", () => save("saveSplats", SPL.slot.a, sel.value, "splats"))); // prettier-ignore
   const note = el("p", "note", "Save keeps every splat the crop, the filters and Shrink leave, in the format you pick, as a download on this device. The second splat of a comparison is shown as it is."); // prettier-ignore
   box.append(stats, status, row, saveRow, note, second);
   SPL.panel = {
@@ -788,7 +797,17 @@ const POINT_CLOUDS = {
     const v = PC.view;
     PC.distance = null;
     if (!v?.main) {
-      boxOutline(k, [-0.7, -0.3, -0.7], [0.7, 0.3, 0.7], [0.55, 0.6, 0.68], 0, 0.01);
+      // Nothing to show (an error, or a LAZ sample in the Node tools, which can't read LAZ): an
+      // even grid of gray points, like an empty scan.
+      const side = Math.floor(Math.sqrt(k.count * 0.9));
+      k.cloud({ count: (side * side * 160000) / k.count, pattern: false, fit: false }, (_r, j) => {
+        if (j >= side * side) return null;
+        const x = ((j % side) / (side - 1)) * 1.8 - 0.9;
+        const z = (Math.floor(j / side) / (side - 1)) * 1.8 - 0.9;
+        const y = 0.08 * Math.sin(x * 3) * Math.cos(z * 2) - 0.2;
+        const sz = 0.9 / side;
+        return { p: [x, y, z], scales: [sz, sz, sz], color: [0.55, 0.6, 0.68], opacity: 1, pattern: false }; // prettier-ignore
+      });
       k.data = { cloud: cloudState() };
       return;
     }
@@ -798,13 +817,16 @@ const POINT_CLOUDS = {
     const s = 0.95 / half;
     PC.frameInfo = { c, s };
     const m = v.main;
-    const n = m.count;
-    const size = Math.max(1e-4, v.spacing * s * 0.68 * (o.size || 1));
+    // An even share when the build asks for fewer points than the preview has (the Node tools).
+    const share = Math.min(1, (k.count * 0.95) / Math.max(1, m.count));
+    const n = Math.max(1, Math.floor(m.count * share));
+    const size = Math.max(1e-4, (v.spacing / Math.sqrt(share)) * s * 0.68 * (o.size || 1));
     // The scan line sweeps across from west to east, like a lidar pass over the ground.
     const lo = f.min[0];
     const span = f.max[0] - f.min[0] || 1;
-    k.cloud({ count: (n * 160000) / k.count, pattern: false, fit: false }, (_r, j) => {
-      if (j >= n) return null;
+    k.cloud({ count: (n * 160000) / k.count, pattern: false, fit: false }, (_r, jj) => {
+      if (jj >= n) return null;
+      const j = Math.min(m.count - 1, Math.floor(jj / share));
       const x = m.pos[j * 3];
       return {
         p: [(x - c[0]) * s, (m.pos[j * 3 + 1] - c[1]) * s, (m.pos[j * 3 + 2] - c[2]) * s],
