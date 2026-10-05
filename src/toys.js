@@ -3438,7 +3438,7 @@ export const TOYS = [
     pack: "qr-lab",
     labs: true,
     tags: "qr code how it works anatomy finder timing alignment format version mask reed solomon error correction encode bits zigzag",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.9 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   {
     id: "qr-damage",
@@ -3448,7 +3448,7 @@ export const TOYS = [
     pack: "qr-lab",
     labs: true,
     tags: "qr code damage scratch sticker tear burn smudge blur error correction reed solomon heal scan meter levels",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.9 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   {
     id: "qr-three",
@@ -3458,7 +3458,7 @@ export const TOYS = [
     pack: "qr-lab",
     labs: true,
     tags: "qr code color rgb red green blue three codes multiplex channels",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.9 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {

@@ -424,6 +424,7 @@ function anatomyPanel() {
 const ANATOMY = {
   alive: true,
   turntable: false,
+  kernel: "sharp",
   options: [
     { key: "text", label: "Text", type: "text", default: "HELLO WORLD", hidden: true },
     { key: "level", label: "Error correction", type: "select", default: "Q", hidden: true, choices: LEVELS.map((l) => ({ id: l, label: l })) }, // prettier-ignore
@@ -479,8 +480,11 @@ const ANATOMY = {
     AN.options = { ...o };
     const look = anatomyLook(s, o);
     const N = s.size;
-    const per = N > 45 ? 2 : 3;
-    const all = codeSplats(look.dark, N, { per, lightTiles: true, fg: FG, bg: BG });
+    let all;
+    for (let per = 6; per >= 2; per--) {
+      all = codeSplats(look.dark, N, { per, lightTiles: true, fg: FG, bg: BG });
+      if (all.length <= k.count) break;
+    }
     const splats = [];
     for (const sp of all) {
       if (sp.mod < 0) {
@@ -637,6 +641,10 @@ function meterRows() {
     lines.push(
       `Codewords (${c.blocks.length} block${c.blocks.length > 1 ? "s" : ""}): ${blocks.join("; ")}.`,
     );
+    if (!r.scans && a.decodes)
+      lines.push("Every block could be fixed, so a reader that found the grid would read it; jsQR didn't find or follow it (look at the finders, the alignment patterns and the quiet zone).", ); // prettier-ignore
+    if (r.scans && !a.decodes)
+      lines.push("jsQR read it anyway: it samples each module its own way, so where this count is close to the limit the two can differ.", ); // prettier-ignore
     if (r.healed !== undefined)
       lines.push(r.healed ? "After healing: it scans." : "After healing: it still doesn't scan.");
     const bars = el("div", { style: "display:flex;gap:3px;flex-wrap:wrap;margin:2px 0" });
@@ -778,6 +786,7 @@ function scheduleDamageCheck(delay = 500) {
 const DAMAGE = {
   alive: true,
   turntable: false,
+  kernel: "sharp",
   options: [
     { key: "text", label: "Text", type: "text", default: "https://ryanjosephkamp.github.io/splashery/", hidden: true }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "M", hidden: true, choices: [...LEVELS, "all"].map((l) => ({ id: l, label: l })) }, // prettier-ignore
@@ -844,62 +853,80 @@ const DAMAGE = {
     const S = N * N;
     const damage = parseDamage(o.damage);
     const showRead = o.show === "read" && DM.read?.length === codes.length;
-    const per = codes.length > 1 ? 2 : 3;
-    const splats = [];
-    // The table behind.
-    const T = L.half + 2.5;
-    const tn = Math.round(2 * T * 1.2);
-    for (let j = 0; j < tn; j++) for (let i = 0; i < tn; i++) splats.push({ p: [-T + (i + 0.5) * (2 * T / tn), -T + (j + 0.5) * (2 * T / tn), -0.4], scales: [0.6 * (2 * T / tn), 0.6 * (2 * T / tn), 0.02], quat: [0, 0, 0, 1], color: mixc(TABLE, [0.25, 0.2, 0.15], ((i * 7 + j * 3) % 5) / 12), opacity: 1, params: [0, 4], pattern: false }); // prettier-ignore
     let torn = null;
-    codes.forEach((s, ci) => {
-      const [ox, oy] = L.offsets[ci];
-      const id0 = ci * S;
-      if (showRead) {
-        // What a reader read: each module a tile of the color it was read as;
-        // the ones each block's correction sets right turn over in turn.
-        const a = DM.read[ci];
-        const read = a.dark;
-        // Turn 0: the function patterns and the format information, which a
-        // reader knows by their fixed places (BCH fixes the format bits);
-        // turn b + 1: what block b's Reed–Solomon decoding sets right.
-        const flip = new Int16Array(S).fill(-1);
-        const data = (m) =>
-          s.role[m] === ROLE.data || s.role[m] === ROLE.ecc || s.role[m] === ROLE.remainder;
-        for (let m = 0; m < S; m++) if (!data(m) && read[m] !== s.modules[m]) flip[m] = 0;
-        a.changed.forEach((list, b) => list.forEach((m) => (flip[m] = b + 1)));
-        for (const sp of codeSplats(read, N, { per, lightTiles: true, fg: FG, bg: BG })) {
-          sp.p[0] += ox;
-          sp.p[1] += oy;
-          const wrong = sp.mod >= 0 && flip[sp.mod] >= 0;
-          const kind = wrong ? 5 + 16 * flip[sp.mod] : 0;
-          // Modules read wrong show red until their turn sets them right.
-          const color = wrong ? (sp.dark ? WRONG_DARK : WRONG_LIGHT) : sp.color;
-          splats.push({ ...sp, color, params: [sp.mod >= 0 ? 1 + id0 + sp.mod : 0, kind], pattern: false }); // prettier-ignore
-        }
-        return;
-      }
-      const base = codeSplats(s.modules, N, { per, fg: FG, bg: BG });
-      const { splats: hit, pieces } = applyDamage(base, damage, { size: N });
-      for (const sp of hit) {
-        sp.p[0] += ox;
-        sp.p[1] += oy;
-        const kind = sp.piece === "sticker" ? 1 : 0;
-        splats.push({ ...sp, params: [sp.mod >= 0 ? 1 + id0 + sp.mod : 0, kind], pattern: false });
-      }
-      for (const pcs of pieces)
-        for (const sp of pcs.splats) {
-          sp.p[0] += ox;
-          sp.p[1] += oy;
-          if (pcs.kind === "tear") {
-            if (ci === 0) torn = torn || pcs.splats.reduce((m, q) => [m[0] + q.p[0] / pcs.splats.length, m[1] + q.p[1] / pcs.splats.length], [0, 0]); // prettier-ignore
-            splats.push({ ...sp, params: [sp.mod >= 0 ? 1 + id0 + sp.mod : 0, 2], pattern: false });
-          } else {
-            const gx = Math.floor(sp.p[0] / 2);
-            const gy = Math.floor(sp.p[1] / 2);
-            splats.push({ ...sp, params: [1 + (gx + 512) + 1024 * (gy + 512), 3], pattern: false });
+    const make = (per) => {
+      const splats = [];
+      // The table behind.
+      const T = L.half + 2.5;
+      const tn = Math.round(2 * T * 1.2);
+      for (let j = 0; j < tn; j++) for (let i = 0; i < tn; i++) splats.push({ p: [-T + (i + 0.5) * (2 * T / tn), -T + (j + 0.5) * (2 * T / tn), -0.4], scales: [0.6 * (2 * T / tn), 0.6 * (2 * T / tn), 0.02], quat: [0, 0, 0, 1], color: mixc(TABLE, [0.25, 0.2, 0.15], ((i * 7 + j * 3) % 5) / 12), opacity: 1, params: [0, 4], pattern: false }); // prettier-ignore
+      codes.forEach((s, ci) => {
+        const [ox, oy] = L.offsets[ci];
+        const id0 = ci * S;
+        if (showRead) {
+          // What a reader read: each module a tile of the color it was read as;
+          // the ones each block's correction sets right turn over in turn.
+          const a = DM.read[ci];
+          const read = a.dark;
+          // Turn 0: the function patterns and the format information, which a
+          // reader knows by their fixed places (BCH fixes the format bits);
+          // turn b + 1: what block b's Reed–Solomon decoding sets right.
+          const flip = new Int16Array(S).fill(-1);
+          const data = (m) =>
+            s.role[m] === ROLE.data || s.role[m] === ROLE.ecc || s.role[m] === ROLE.remainder;
+          for (let m = 0; m < S; m++) if (!data(m) && read[m] !== s.modules[m]) flip[m] = 0;
+          a.changed.forEach((list, b) => list.forEach((m) => (flip[m] = b + 1)));
+          for (const sp of codeSplats(read, N, { per, lightTiles: true, fg: FG, bg: BG })) {
+            sp.p[0] += ox;
+            sp.p[1] += oy;
+            const wrong = sp.mod >= 0 && flip[sp.mod] >= 0;
+            const kind = wrong ? 5 + 16 * flip[sp.mod] : 0;
+            // Modules read wrong show red until their turn sets them right.
+            const color = wrong ? (sp.dark ? WRONG_DARK : WRONG_LIGHT) : sp.color;
+            splats.push({ ...sp, color, params: [sp.mod >= 0 ? 1 + id0 + sp.mod : 0, kind], pattern: false }); // prettier-ignore
           }
+          return;
         }
-    });
+        const base = codeSplats(s.modules, N, { per, fg: FG, bg: BG });
+        const { splats: hit, pieces } = applyDamage(base, damage, { size: N });
+        for (const sp of hit) {
+          sp.p[0] += ox;
+          sp.p[1] += oy;
+          const kind = sp.piece === "sticker" ? 1 : 0;
+          splats.push({
+            ...sp,
+            params: [sp.mod >= 0 ? 1 + id0 + sp.mod : 0, kind],
+            pattern: false,
+          });
+        }
+        for (const pcs of pieces)
+          for (const sp of pcs.splats) {
+            sp.p[0] += ox;
+            sp.p[1] += oy;
+            if (pcs.kind === "tear") {
+              // Its center, in the code's own units (the same in every code).
+              torn = torn || pcs.splats.reduce((m, q) => [m[0] + (q.p[0] - ox) / pcs.splats.length, m[1] + (q.p[1] - oy) / pcs.splats.length], [0, 0]); // prettier-ignore
+              splats.push({ ...sp, params: [1 + id0 + Math.max(0, sp.mod), 2], pattern: false });
+            } else {
+              const gx = Math.floor(sp.p[0] / 2);
+              const gy = Math.floor(sp.p[1] / 2);
+              splats.push({
+                ...sp,
+                params: [1 + (gx + 512) + 1024 * (gy + 512), 3],
+                pattern: false,
+              });
+            }
+          }
+      });
+      return splats;
+    };
+    // As many splats per module as the budget allows.
+    let splats;
+    for (let per = 6; per >= 2; per--) {
+      torn = null;
+      splats = make(per);
+      if (splats.length <= k.count) break;
+    }
     DM.torn = torn;
     const H = L.half;
     k.reach([H + 3, H + 3, 2.5]);
@@ -975,6 +1002,7 @@ export async function readThree() {
 const THREE = {
   alive: true,
   turntable: false,
+  kernel: "sharp",
   options: [
     { key: "t1", label: "Red code", type: "text", default: TEXTS[0], hidden: true },
     { key: "t2", label: "Green code", type: "text", default: TEXTS[1], hidden: true },
@@ -1008,20 +1036,25 @@ const THREE = {
     TH.options = { ...o };
     TH.result = null;
     const N = r.size;
-    const all = [];
-    // Token 0: the square, every module in its own color.
     const ones = new Uint8Array(N * N).fill(1);
     const key = (i) => r.colors[i * 3] * 4 + r.colors[i * 3 + 1] * 2 + r.colors[i * 3 + 2];
-    for (const sp of codeSplats(ones, N, { per: 3, fg: FG, bg: BG, key }))
-      all.push({ ...sp, color: sp.mod >= 0 ? [r.colors[sp.mod * 3], r.colors[sp.mod * 3 + 1], r.colors[sp.mod * 3 + 2]] : sp.color, kind: "token", params: [0, 0], pattern: false }); // prettier-ignore
-    // Tokens 1–3: each channel's code, in its own color on white.
     const tint = [
       [0.86, 0.1, 0.12],
       [0.1, 0.62, 0.2],
       [0.12, 0.25, 0.85],
     ];
-    for (let ch = 0; ch < 3; ch++)
-      for (const sp of codeSplats(r.codes[ch].modules, N, { per: 2, fg: tint[ch], bg: BG })) all.push({ ...sp, p: [sp.p[0], sp.p[1], sp.p[2] - 0.05 * (ch + 1)], kind: "token", params: [ch + 1, 0], pattern: false }); // prettier-ignore
+    // As many splats per module as the budget allows (four layers).
+    let all;
+    for (let per = 6; per >= 2; per--) {
+      all = [];
+      // Token 0: the square, every module in its own color.
+      for (const sp of codeSplats(ones, N, { per, fg: FG, bg: BG, key }))
+        all.push({ ...sp, color: sp.mod >= 0 ? [r.colors[sp.mod * 3], r.colors[sp.mod * 3 + 1], r.colors[sp.mod * 3 + 2]] : sp.color, kind: "token", params: [0, 0], pattern: false }); // prettier-ignore
+      // Tokens 1–3: each channel's code, in its own color on white.
+      for (let ch = 0; ch < 3; ch++)
+        for (const sp of codeSplats(r.codes[ch].modules, N, { per: Math.max(2, per - 1), fg: tint[ch], bg: BG })) all.push({ ...sp, p: [sp.p[0], sp.p[1], sp.p[2] - 0.05 * (ch + 1)], kind: "token", params: [ch + 1, 0], pattern: false }); // prettier-ignore
+      if (all.length <= k.count) break;
+    }
     const H = N / 2 + QUIET;
     k.reach([H + 1, H + 1, 1]);
     k.reach([-H - 1, -H - 1, -0.5]);

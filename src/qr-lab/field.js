@@ -300,7 +300,7 @@ void modifySplatCenter(inout vec3 center) {
     vec3 rc = qlRowCol(id);
     // Move in time: one moment of a wave through the modules.
     float A = uSpTokens[0].w * 0.6;
-    if (A > 0.0) {
+    if (A > 0.0 && (kind < 1.5 || kind > 4.5)) {
       float ph = 6.2831853 * (uSpTokens[1].x - (rc.x + rc.y) / QN);
       u += vec3(A * 0.6 * sin(ph), A * 0.6 * cos(ph * 0.7 + 1.0), A * sin(ph + 0.8));
     }
@@ -323,13 +323,14 @@ void modifySplatCenter(inout vec3 center) {
   }
   if (kind > 1.5 && kind < 2.5) {
     // The torn corner peels up, then falls away tumbling, and is gone.
-    vec3 c = vec3(${num(tp[0])}, ${num(tp[1])}, 0.0);
+    float code = floor((an.z - 1.0 + 0.5) / (QN * QN));
+    vec3 c = vec3(${num(tp[0])}, ${num(tp[1])}, 0.0) + qlPivot(code * QN * QN) - vec3(0.5 - QN * 0.5, QN * 0.5 - 0.5, 0.0);
     float t = D * 1.8;
     float peel = qlSat(t / 0.35);
     float fly = max(t - 0.35, 0.0);
-    vec3 axis = vec3(c.x * c.y > 0.0 ? 1.0 : -1.0, 1.0, 0.0);
+    vec3 axis = vec3(${num(Math.sign(tp[0] * tp[1]) || 1)}, 1.0, 0.0);
     q = qlAxis(axis, 1.1 * peel + 4.0 * fly);
-    vec3 drift = vec3(sign(c.x) * 2.5 * fly, 3.0 * peel - 0.5 * 30.0 * fly * fly, 6.0 * peel + 4.0 * fly);
+    vec3 drift = vec3(${num(Math.sign(tp[0]) || 1)} * 2.5 * fly, 3.0 * peel - 0.5 * 30.0 * fly * fly, 6.0 * peel + 4.0 * fly);
     u = c + qlRot(q, u - c) + drift;
     qlAlpha = D > 0.999 ? 0.0 : 1.0 - qlSat((t - 1.3) / 0.45);
   }
@@ -385,7 +386,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
     let piv = qlPivot(id);
     let rc = qlRowCol(id);
     let A = uniform.uSpTokens[0].w * 0.6;
-    if (A > 0.0) {
+    if (A > 0.0 && (kind < 1.5 || kind > 4.5)) {
       let ph = 6.2831853 * (uniform.uSpTokens[1].x - (rc.x + rc.y) / QN);
       u += vec3f(A * 0.6 * sin(ph), A * 0.6 * cos(ph * 0.7 + 1.0), A * sin(ph + 0.8));
     }
@@ -405,13 +406,14 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
     q = qlAxis(vec3f(1.0, 0.3, 0.0), fall * 0.9);
   }
   if (kind > 1.5 && kind < 2.5) {
-    let c = vec3f(${num(tp[0])}, ${num(tp[1])}, 0.0);
+    let code = floor((an.z - 1.0 + 0.5) / (QN * QN));
+    let c = vec3f(${num(tp[0])}, ${num(tp[1])}, 0.0) + qlPivot(code * QN * QN) - vec3f(0.5 - QN * 0.5, QN * 0.5 - 0.5, 0.0);
     let t = D * 1.8;
     let peel = qlSat(t / 0.35);
     let fly = max(t - 0.35, 0.0);
-    let axis = vec3f(select(-1.0, 1.0, c.x * c.y > 0.0), 1.0, 0.0);
+    let axis = vec3f(${num(Math.sign(tp[0] * tp[1]) || 1)}, 1.0, 0.0);
     q = qlAxis(axis, 1.1 * peel + 4.0 * fly);
-    let drift = vec3f(sign(c.x) * 2.5 * fly, 3.0 * peel - 0.5 * 30.0 * fly * fly, 6.0 * peel + 4.0 * fly);
+    let drift = vec3f(${num(Math.sign(tp[0]) || 1)} * 2.5 * fly, 3.0 * peel - 0.5 * 30.0 * fly * fly, 6.0 * peel + 4.0 * fly);
     u = c + qlRot(q, u - c) + drift;
     qlAlpha = select(1.0 - qlSat((t - 1.3) / 0.45), 0.0, D > 0.999);
   }
