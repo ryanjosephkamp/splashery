@@ -67,6 +67,8 @@ for (const spec of ids) {
       player.idle.weight = 0;
       await new Promise((r) => setTimeout(r, 1500));
       const stage = player.stage;
+      // (Unwrap a previous toy's clock first, or the clock stops.)
+      if (window.__tw2) stage.updateHandlers.splice(0, stage.updateHandlers.length, ...window.__tw2.handlers); // prettier-ignore
       const handlers = stage.updateHandlers.slice();
       window.__tw2 = { pending: 0, handlers };
       stage.updateHandlers.length = 0;
