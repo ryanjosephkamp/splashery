@@ -3431,6 +3431,66 @@
     "l": 1
   },
   {
+    "t": "Airport X-ray scanner",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFpcnBvcnQteHJheSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "k": "toy",
+    "s": "Imaging",
+    "d": "Tap to send the next bag through the scanner and watch its X-ray picture build.",
+    "w": "airport x-ray scanner imaging imaging x-ray xray airport security scanner baggage luggage bag suitcase conveyor belt dual energy organic metal imaging airport-xray",
+    "i": "../assets/toys/airport-xray/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "How CT works",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imhvdy1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "k": "toy",
+    "s": "Imaging",
+    "d": "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
+    "w": "how ct works imaging imaging ct cat scan computed tomography x-ray gantry slice nautilus shell chambers volume cutting plane imaging how-ct",
+    "i": "../assets/toys/how-ct/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Walnut CT scan",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhbG51dC1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0",
+    "k": "toy",
+    "s": "Imaging",
+    "d": "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
+    "w": "walnut ct scan imaging imaging ct scan x-ray tomography walnut nut shell kernel volume real data slice cutting plane density cwi imaging walnut-ct",
+    "i": "../assets/toys/walnut-ct/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "MRI of a fruit",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZydWl0LW1yaSJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4xNSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Imaging",
+    "d": "Drag up or down to scroll through the slices. Tap to play through them all.",
+    "w": "mri of a fruit imaging imaging mri magnetic resonance imaging scan slices kiwi orange fruit seeds segments t2 imaging fruit-mri",
+    "i": "../assets/toys/fruit-mri/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Electron microscope",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZWN0cm9uLW1pY3Jvc2NvcGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuNDUsInJvbGwiOjAsImRpc3RhbmNlIjoyLjZ9fQ",
+    "k": "toy",
+    "s": "Imaging",
+    "d": "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
+    "w": "electron microscope imaging imaging sem scanning electron microscope micrograph pollen diatom snowflake rime zoom magnification imaging electron-microscope",
+    "i": "../assets/toys/electron-microscope/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Thermal camera",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRoZXJtYWwtY2FtZXJhIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjoyLjh9fQ",
+    "k": "toy",
+    "s": "Imaging",
+    "d": "Tap to switch the thermal camera on or off, and watch the tea cool.",
+    "w": "thermal camera imaging imaging thermal camera infrared heat false color temperature tea mug cooling hand warmer ice water imaging thermal-camera",
+    "i": "../assets/toys/thermal-camera/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Screen",
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
     "k": "toy",
