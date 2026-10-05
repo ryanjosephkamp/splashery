@@ -123,7 +123,45 @@ unchanged; if they need a change, tell the Operator.
 - Language: American English for every new text (color, center, gray, license, toward, -ize endings,
   dates like "October 5, 2026").
 - Your handoff file: start it with this brief, word for word, under "## Brief", then keep "##
-  State", "## Notes", "## Known issues" and "## For the Operator" current.
+  State", "## Notes
+
+- **Depth Anything V2 Small on top-down photos** (tested October 5, 2026 with public-domain NASA
+  photos from Wikimedia Commons: "Anti-Atlas Mountains, Morocco (2178).jpg", straight down from
+  orbit, and "Neve Glacier North Cascades USGS.jpg", an oblique aerial; neither is in the repo). The
+  model reads a straight-down photo of land as ground running away from the camera: its depth is a
+  smooth ramp from the top (far) to the bottom (near), and a plane fits it with R^2 = 0.97. The
+  terrain is there, but faint: once the ramp and a wide blur are taken off, what is left (2 to 6% of
+  the range) lines up with the ridges and the dry valleys. So more depth alone would only tilt the
+  photo further. What the toys do: a photo whose depth a plane fits (R^2 over 0.9) keeps its slope
+  when made deeper and gains its local relief instead (the depth less the plane, less a blur 6% of
+  its size wide, scaled up), so it rises as terrain; any other photo simply gets deeper. Depth from
+  shading or a model trained on aerial height maps would do better; neither is vendored (BACKLOG
+  material).
+- The depth model takes about 4 to 5 s a photo here (SwiftShader, one thread), after its first load.
+- P1 (layered pop-up scenes), behind a Toy tab switch, **Pop-up layers**, on all three toys: a
+  raised figure becomes flat cutout cards on the three pop parts: the whole picture behind, then its
+  nearer half and its nearest fifth (cut by the depth model's map at the 50th and 80th percentiles),
+  each a gap in front of the one behind (7% of the figure's shorter side, times the Depth slider).
+  The cards part as the figure rises, and a tilt shows the gaps. A graphic splits into its card and
+  its strongest shapes. One figure at a time in layers (it takes all three pop sheets); raising it
+  lays the others back.
+- The maybes, not built (time went to items 1 to 6 and P1):
+  - **P2, peel a figure off onto a desk:** a long press on a risen figure would let it be dragged
+    off the page onto a plain desk plane beside the book, where it stays as a standing card while
+    the pages turn (a "desk" list in the scene, like `toy.figures`). Costs: a desk surface and a
+    second pose set, and the pop sheets stop being free for new figures.
+  - **P3, a magnifier lens:** the owner's note is right that Capture (Draw a box) already does most
+    of this. A lens would be a round box that follows the finger and lifts what is under it a
+    little, magnified, as a live crop sheet rebuilt as it moves (several times a second: heavy on a
+    phone). I'd skip it, or make Draw a box's rise optionally larger instead.
+  - **P4, folds that open with the page:** a figure marked to fold stands on the page as a V-shaped
+    fold (two halves on hinge parts) that opens to standing as the page lands open and folds flat as
+    it turns, like a pop-up book's V-fold. It needs the page turn's angle passed to the figure's
+    pose (all in the recipe) and figures kept up across turns, the opposite of item 2; so it would
+    be a mode of its own.
+
+## Known issues" and "## For the Operator" current.
+
 - PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
   What was cut), opened early and pushed after each finished item. Finish every working turn with a
   final message that starts "READY:", "WORKING:" or "BLOCKED:".

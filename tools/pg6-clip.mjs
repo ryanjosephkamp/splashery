@@ -96,6 +96,16 @@ async function record(scene) {
       })); // prettier-ignore
   };
   const shot = async (holdMs) => {
+    if (process.env.PG6_DEBUG && frames.length % 12 === 0)
+      console.log(
+        "frame",
+        frames.length,
+        JSON.stringify(
+          await run(async () =>
+            (await import("/src/packs/pictures.js")).BOOKS_R5.PG.pops.map((F) => F.phase),
+          ),
+        ),
+      );
     const png = PNG.sync.read(await page.screenshot({ timeout: 180_000 }));
     frames.push({ img: shrink(png, width), delay: holdMs });
   };
@@ -238,14 +248,21 @@ async function record(scene) {
     }
   };
   // The book open on page 2 of the test PDF (one page at a time, as on a phone), Pop out on.
+  const dbg = (m) =>
+    process.env.PG6_DEBUG && console.log(new Date().toISOString().slice(11, 19), m);
   const bookTwo = async () => {
     await warm();
+    dbg("warm");
     await open("your-book", { reading: "one" });
+    dbg("open");
     await openTwo();
+    dbg("two");
     await run(() => window.__splashery.app.pictureStep(1));
     await play(2);
+    dbg("played");
     await popOn();
     await play(0.5);
+    dbg("pop on");
     for (let i = 0; i < 60 && (await figs(1)).length < 2; i++) await play(STEP);
     return figs(1);
   };
