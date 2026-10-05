@@ -375,3 +375,13 @@
 {"v":1,"t":"2026-10-05T12:06:00.990Z","harness":"claude-code","event":"session-end","session":"aa466900-b7db-546e-8ec0-61e40aca512c","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T13:03:34.111Z","harness":"claude-code","event":"session-start","session":"aa466900-b7db-546e-8ec0-61e40aca512c","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T13:03:34.135Z","harness":"claude-code","event":"turn-start","session":"aa466900-b7db-546e-8ec0-61e40aca512c","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:03:39.992Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:03:49.261Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:03:50.575Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:03:51.857Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:03:54.347Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:04:02.359Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:04:08.791Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:04:08.826Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"ToolSearch","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:04:13.869Z","harness":"claude-code","event":"tool","session":"aa466900-b7db-546e-8ec0-61e40aca512c","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T13:04:17.264Z","harness":"claude-code","event":"turn-end","session":"aa466900-b7db-546e-8ec0-61e40aca512c","cwd":"splashery"}
