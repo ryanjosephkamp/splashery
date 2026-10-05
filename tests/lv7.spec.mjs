@@ -103,7 +103,10 @@ test.describe("the mirror on a camera (a generated mannequin)", () => {
   const launch = (playwright) =>
     playwright.chromium.launch({ ...config.use.launchOptions, args: fakeCamera(y4m, config.use.launchOptions.args) }); // prettier-ignore
 
-  test("plain: steadier than before, frame to frame, and sharper", async ({ playwright, baseURL }) => {
+  test("plain: steadier than before, frame to frame, and sharper", async ({
+    playwright,
+    baseURL,
+  }) => {
     const browser = await launch(playwright);
     try {
       const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); // prettier-ignore
