@@ -392,6 +392,8 @@ export class Player {
     const close = info.closeUp?.minDistance;
     this.stage.nearFollow = Number.isFinite(close) && close > 0;
     if (this.stage.nearFollow) this.camera.minDistance = info.radius * close;
+    // Lane Night sky: a recipe's inside ({ fov }) shows the toy from its center.
+    this.camera.setInside(info.inside || null);
     this.time = 0;
     this.idle.pokeAt = 0;
     this.idle.pokes = 0;
@@ -552,6 +554,7 @@ export class Player {
       kernel: recipe.kernel, // Lab
       pickAlpha: recipe.pickAlpha, // Lab r2
       closeUp: recipe.closeUp || null, // Science r2
+      inside: recipe.inside || null, // Night sky
       recipe,
       options,
       credit: def.credit || null,
