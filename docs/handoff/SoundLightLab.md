@@ -42,6 +42,15 @@ full checks are next.
 - Tone, tempo and the lamp are kept in the module, not in the scene (dragging a slider would
   otherwise rebuild the toy each step).
 
+- r2 (the Operator's notes of October 5, 2026, 14:10 and 15:40 UTC; on
+  `claude/lane-sound-light-lab-r2`, waiting for #286 to merge): every toy sharper. The Light lab:
+  density 2, finer rays and beams, thinner prism edges, finer prism faces, disc and slide, larger
+  panel caps. The Sound lab and the recorder: density 2, the sharp kernel, the speaker, metronome
+  and microphone rebuilt from exactly sized splats (`surfSplats`, `cylinderSplats`, `sphereSplats`),
+  the speaker's cone, surround and dust cap visible through a hole in the baffle, larger screen
+  labels. All three (labs only) set `render: { cull: "low", dpr: "native" }`: the engine's two-pixel
+  cull hid the finer splats at the high tier.
+
 ## Known issues
 
 - In headless Chromium the player's clock runs slower than real time, so the spectrogram fills
