@@ -22,6 +22,13 @@ sharper".
 - Clips beside the old ones on Effect review page 2: `molp-measure-crambin`,
   `molp-measure-caffeine`, `molp-fetch-1ema`, `molp-dna-1bna`, `molp-surface-1lyz`,
   `molp-spacefill-1crn`, `molp-big-1aon-phone`. Thumbnail and screenshots re-rendered.
+- The owner's marks (Operator, 22:49 UTC): every molp card good; on the first cards "Please make the
+  colored markers sharper", and on space-filling and surface "these markers aren't easy to see". The
+  polish hadn't changed the markers, so they are redone: flat rings that face the camera with a dark
+  rim on both sides of the bright band, standing just in front of the atom (its ball, or the
+  surface) toward the camera; the measuring line and arc are bright dots with a dark edge, lifted
+  the same way. This needs engine PR #326 (`about.eye`: the camera in the recipe's frame), merged
+  first. Clips `molm-*` (six, beside the first cards).
 
 ## Notes
 
@@ -47,18 +54,19 @@ sharper".
   path point. Largest tested: the human 80S ribosome, 4V6X, 237,685 atoms (read in 2.1 s in Node;
   each style builds in 0.4 to 2.2 s inside the phone budget of 72k splats; the surface at the max
   tier takes about 4 s).
-- Taps: a tap on an atom picks it (a ring marker in yellow, cyan, magenta that turns once); two give
-  the distance (a line of beads), three the angle (and an arc). The words show as a message (the
-  engine PR's `say`) and in the Toy tab. The Play button measures across a bond angle near the
-  middle, then the angle, then clears. Marks are tokens, re-sorted when the picks change.
+- Taps: a tap on an atom picks it (a flat ring marker facing the camera, yellow, cyan or magenta
+  with a dark rim, that flips over once); two give the distance (a line of beads), three the angle
+  (and an arc). The words show as a message (the engine PR's `say`) and in the Toy tab. The Play
+  button measures across a bond angle near the middle, then the angle, then clears. Marks are
+  tokens, re-sorted when the picks change and when the camera has turned about 10 degrees from where
+  they were last sorted.
 - The toy holds still (`turntable: false`) so atoms can be tapped.
 
 ## Known issues
 
-- Along a bond the measuring line runs inside the stick and shows only between the balls; the
-  markers and the message carry it there.
-- In the surface style only atoms on the outside can be picked; their markers poke partly through
-  the surface.
+- In the surface style only atoms on the outside can be picked.
+- Markers on bonded atoms overlap (the atoms are 1.3 to 1.5 Å apart); the colors and rims keep each
+  readable.
 - The fetch clips used a saved copy of RCSB's answer: this sandbox's headless browser has no
   internet. The live fetch was checked with curl (CORS `access-control-allow-origin: *`).
 - Titles of old entries show in capitals, as the PDB gives them.
@@ -66,6 +74,7 @@ sharper".
 
 ## For the Operator
 
-- Merge order: #300 (engine) first, then this PR.
+- Merge order: #326 (engine, `about.eye`) first, then #317. (#300 is merged.) Without #326 the
+  markers fall back to the camera's turn and its usual tilt.
 - The `say` field and `input.drop` could go in docs/PACKS.md, section 5 ("Action" and "Your own
   input").

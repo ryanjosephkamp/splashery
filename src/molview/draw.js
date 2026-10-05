@@ -749,41 +749,48 @@ export function drawSurface(L, m, { use, color, max, rand }) {
 
 // ---- Measuring marks ----------------------------------------------------------------------------
 
-// A marker round a picked atom: three rings at right angles (it reads from
-// any side), radius R, drawn at the origin (the recipe moves it as a token).
-export function markerSplats(R, color) {
-  const out = [];
-  const ringN = Math.max(24, Math.round((TAU * R) / 0.08));
-  const w = (TAU * R) / ringN;
-  const axes = [
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1],
-  ];
-  for (const ax of axes) {
-    const u = across(ax);
-    const v = cross(ax, u);
-    for (let q = 0; q < ringN; q++) {
-      const a = (q / ringN) * TAU;
-      const n = add(mul(u, Math.cos(a)), mul(v, Math.sin(a)));
-      const tan = cross(ax, n);
-      out.push({ p: mul(n, R), scales: [w * 0.9, R * 0.06, R * 0.06], quat: alongQuat(tan), color, opacity: 1, jitter: 0 }); // prettier-ignore
+// The measuring marks are flat and face the camera (the recipe turns them,
+// as tokens, toward where it stands), drawn at the origin in their own plane
+// (x, y; +z toward the camera). A bright band with a dark rim on both sides,
+// so it reads against any color: white hydrogens, gray carbons, the surface.
+// Rim and band lie side by side, never over each other, so they read the same
+// in any depth order.
+const RIM = [0.07, 0.07, 0.09];
+function annulus(out, r0, r1, color, step, z = 0) {
+  const rows = Math.max(1, Math.round((r1 - r0) / step));
+  const dr = (r1 - r0) / rows;
+  for (let k = 0; k < rows; k++) {
+    const r = r0 + dr * (k + 0.5);
+    const n = Math.max(8, Math.round((TAU * r) / step));
+    const w = (TAU * r) / n;
+    for (let q = 0; q < n; q++) {
+      const a = (q / n) * TAU;
+      out.push({ p: [r * Math.cos(a), r * Math.sin(a), z], scales: [w * 0.62, dr * 0.62, dr * 0.1], quat: [0, 0, Math.sin((a + Math.PI / 2) / 2), Math.cos((a + Math.PI / 2) / 2)], color, opacity: 1, jitter: 0 }); // prettier-ignore
     }
   }
+}
+
+// A ring marker of radius R (the middle of its band).
+export function markerSplats(R, color) {
+  const out = [];
+  const b = R * 0.15; // half the band
+  const e = R * 0.07; // each rim
+  const step = b / 2; // about 500 splats a ring, at any size
+  annulus(out, R - b - e, R - b, RIM, step);
+  annulus(out, R - b, R + b, color, step);
+  annulus(out, R + b, R + b + e, RIM, step);
   return out;
 }
 
-// One bead of a measuring line or arc: a small solid ball of radius r at the
-// origin (lit like the atoms, so it reads as a crisp dot, not a haze).
+// One bead of a measuring line or arc: a flat dot of radius r. Its dark rim
+// is a wider disc just behind it, so the beads of a line run together into
+// one bright line with a dark edge (the recipe sorts the marks again as the
+// camera turns).
 export function beadSplats(r, color) {
-  const n = 36;
-  const sz = 1.3 * Math.sqrt((4 * Math.PI * r * r) / (n * Math.PI));
-  return spherePoints(n, 0.3).map((d) => ({
-    p: mul(d, r),
-    scales: [sz, sz, sz * 0.35],
-    quat: discQuat(d),
-    color: lit(color, d, 0.4),
-    opacity: 1,
-    jitter: 0,
-  }));
+  const out = [];
+  const step = r / 2;
+  out.push({ p: [0, 0, 0], scales: [step * 0.7, step * 0.7, step * 0.1], quat: [0, 0, 0, 1], color, opacity: 1, jitter: 0 }); // prettier-ignore
+  annulus(out, step * 0.6, r, color, step);
+  annulus(out, 0, r * 1.4, RIM, step * 1.2, -r * 0.5);
+  return out;
 }
