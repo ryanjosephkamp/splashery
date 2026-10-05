@@ -55,18 +55,30 @@ test("the stage takes the inside field of view, and a toy without inside gets th
 }) => {
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-  const got = await page.evaluate(async () => {
-    const { player, app } = window.__splashery;
-    const wait = () => new Promise((r) => setTimeout(r, 400));
+  // A toy fully open first, so its own load can't reset the camera under the test.
+  await page.evaluate(() => window.__splashery.app.chooseToy("beach-ball"));
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
     player.camera.setInside({ fov: 80 });
     player.stage.requestRender();
-    await wait();
-    const lens = player.stage.cameraEntity.camera;
-    const a = { fov: lens.fov, pos: player.camera.pose().position };
-    await app.chooseToy("beach-ball");
-    await wait();
-    return { a, b: { inside: player.camera.inside, fov: lens.fov } };
   });
+  // Headless frames are slow: wait for the stage to draw with the new lens.
+  await expect
+    .poll(() => page.evaluate(() => window.__splashery.player.stage.cameraEntity.camera.fov), {
+      timeout: 30_000,
+    })
+    .toBeCloseTo(80, 3);
+  const a = await page.evaluate(() => ({
+    fov: window.__splashery.player.stage.cameraEntity.camera.fov,
+    pos: window.__splashery.player.camera.pose().position,
+  }));
+  await page.evaluate(() => window.__splashery.app.chooseToy("tennis-ball"));
+  await expect
+    .poll(() => page.evaluate(() => window.__splashery.player.stage.cameraEntity.camera.fov), {
+      timeout: 30_000,
+    })
+    .toBeCloseTo(38, 6);
+  const got = { a, b: await page.evaluate(() => ({ inside: window.__splashery.player.camera.inside, fov: window.__splashery.player.stage.cameraEntity.camera.fov })) }; // prettier-ignore
   expect(got.a.fov).toBeCloseTo(80, 3);
   expect(got.b.inside).toBe(null);
   expect(got.b.fov).toBeCloseTo(38, 6);
