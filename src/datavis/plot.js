@@ -68,8 +68,8 @@ export function buildPlot(
   const ch = new Chart({ w: 2, h: 1.3, d: Z || chart !== "scatter" ? 2 : 0.5 });
   if (chart === "scatter") scatter(k, ch, table, { X, Y: Y || X, Z, C, S, flipY }, report);
   else grid(k, ch, table, { X, Y, Z, C }, report, chart);
-  if (title) ch.label(shorten(title, 30), [0, ch.h + ch.px * 30, -ch.d / 2], { scale: 1.15, color: "#101318", valign: "bottom" }); // prettier-ignore
-  if (caption) ch.label(shorten(caption, 40), [0, ch.h + ch.px * 21, -ch.d / 2], { scale: 0.75, color: "#4a505a", valign: "bottom" }); // prettier-ignore
+  if (title) ch.label(shorten(title, 30), [0, ch.h + ch.px * 40, -ch.d / 2], { scale: 1.15, color: "#101318", valign: "bottom" }); // prettier-ignore
+  if (caption) ch.label(shorten(caption, 40), [0, ch.h + ch.px * 31, -ch.d / 2], { scale: 0.75, color: "#4a505a", valign: "bottom" }); // prettier-ignore
   ch.emit(k);
   k.data = { labels: ch.labels, report, box: { w: ch.w, h: ch.h, d: ch.d } };
   return report;
@@ -114,7 +114,7 @@ function legendFor(ch, C) {
     for (let i = 0; i < n; i++) {
       const y = ch.h * 0.7 - i * ch.px * 11;
       for (let j = 0; j < 3; j++) ch.point([x + j * 0.012, y, -ch.d / 2], categorical(i), 0.016, 1);
-      ch.label(shorten(C.labels[i], 14), [x + ch.px * 4, y, -ch.d / 2], { align: "left", scale: 0.9 }); // prettier-ignore
+      ch.label(shorten(C.labels[i], 13), [x + ch.px * 4, y, -ch.d / 2], { align: "left", scale: 0.8 }); // prettier-ignore
     }
     ch.label(shorten(C.name, 18), [x, ch.h * 0.7 + ch.px * 8, -ch.d / 2], { align: "left", valign: "bottom" }); // prettier-ignore
     return;
@@ -138,7 +138,7 @@ function scatter(k, ch, table, { X, Y, Z, C, S, flipY }, report) {
   axisFor(ch, "x", X, { pad: 0.02 });
   axisFor(ch, "y", Y, { pad: 0.02, flip: flipY });
   axisFor(ch, "z", Z, { pad: 0.02 });
-  ch.frame({ zAxis: !!Z });
+  ch.frame({ zAxis: !!Z, zSide: "right" });
   legendFor(ch, C);
   const n = table.rows;
   const keep = sampleRows(n, maxPoints(k.count));
@@ -151,6 +151,9 @@ function scatter(k, ch, table, { X, Y, Z, C, S, flipY }, report) {
   const drawn = keep ? Math.min(shown, maxPoints(k.count)) : shown;
   const sigma = Math.max(0.006, Math.min(0.02, 0.17 / Math.cbrt(Math.max(1, drawn))));
   const shadows = drawn <= 6000;
+  // Polish round: up to a few thousand points, each is a small shaded ball of
+  // splats with a crisp edge; past that, one splat each (they are tiny anyway).
+  const balls = drawn <= 4000;
   shown = 0;
   for (let i = 0; i < n; i++) {
     if (keep && !keep[i]) continue;
@@ -164,15 +167,42 @@ function scatter(k, ch, table, { X, Y, Z, C, S, flipY }, report) {
     const p = Z ? ch.at(x, y, z) : [ch.X(x), ch.Y(y), 0];
     const s = S && !Number.isNaN(S.values[i]) ? 0.55 + 1.25 * Math.sqrt((S.values[i] - sMin) / sSpan) : 1; // prettier-ignore
     const c = color(C ? C.values[i] : 0);
-    ch.point(p, c, sigma * s, 0.95, { to: [p[0], 0.002, p[2]], channel: 0 });
+    if (balls) ball(ch, p, c, sigma * s);
+    else ch.point(p, c, sigma * s, 0.95, { to: [p[0], 0.002, p[2]], channel: 0 });
     // A faint shadow on the floor under each point helps tell near from far.
-    if (shadows) ch.point([p[0], 0.001, p[2]], "#6d727a", sigma * s * 0.8, 0.16);
+    if (shadows) ch.point([p[0], 0.001, p[2]], "#6d727a", sigma * s * 0.6, 0.12);
     shown++;
   }
   report.shown = shown;
   report.skipped = keep ? 0 : skipped;
   report.sampled = !!keep;
   report.missing = n - (keep ? n : shown + skipped) + skipped;
+}
+
+// A small ball: splats spread evenly over a sphere of radius r, lit from the
+// upper left, and one at the center so it never looks hollow. The tap
+// flattens it onto the floor with the rest.
+const BALL = (() => {
+  const n = 22;
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const y = 1 - (2 * (i + 0.5)) / n;
+    const rr = Math.sqrt(1 - y * y);
+    const a = i * 2.399963;
+    out.push([rr * Math.cos(a), y, rr * Math.sin(a)]);
+  }
+  return out;
+})();
+function ball(ch, p, c, sigma) {
+  const r = sigma * 1.1;
+  const s = r * 0.42;
+  const floor = (q) => [q[0], 0.002 + (q[1] - p[1]) * 0.05, q[2]];
+  ch.point(p, c, r * 0.7, 1, { to: floor(p), channel: 0 });
+  for (const n of BALL) {
+    const q = [p[0] + n[0] * r, p[1] + n[1] * r, p[2] + n[2] * r];
+    const lit = -0.45 * n[0] + 0.75 * n[1] + 0.45 * n[2];
+    ch.point(q, light(c, lit * 0.22), s, 1, { to: floor(q), channel: 0 });
+  }
 }
 
 // Bins a column for bars and surfaces: one bin per category or per whole
@@ -259,7 +289,7 @@ function grid(k, ch, table, { X, Y, Z, C }, report, chart) {
     else Object.assign(zAxis, { min: Z.min, max: Z.max });
     ch.axis("z", zAxis);
   } else ch.axis("z", { name: "", min: -0.5, max: 0.5, ticks: [] });
-  ch.frame({ zAxis: !!Z });
+  ch.frame({ zAxis: !!Z, zSide: "right" });
   // Colors: the color column's mean (or its most common category) per cell,
   // or the height.
   const cellColor = (j) => {

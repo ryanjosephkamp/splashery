@@ -10,7 +10,7 @@
 //
 // Coordinates: x in -w/2..w/2, y in 0..h, z in -d/2..d/2 (recipe units).
 
-import { labelSplats, MAX_LABELS } from "./text.js";
+import { labelSplats, MAX_LABELS, wrapText } from "./text.js";
 import { rgb } from "../kit.js";
 
 const MONTH = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]; // prettier-ignore
@@ -167,7 +167,7 @@ export class Chart {
   line(
     a,
     b,
-    { color = this.gridColor, opacity = 0.5, sigma = 0.0045, step = 0.011, kind, params } = {},
+    { color = this.gridColor, opacity = 0.5, sigma = 0.0034, step = 0.0075, kind, params } = {},
   ) {
     // prettier-ignore
     const len = Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
@@ -239,7 +239,7 @@ export class Chart {
       }
     }
     // The axes themselves.
-    const axisLine = { color: ink, opacity: 0.85, sigma: 0.006, step: 0.009 };
+    const axisLine = { color: ink, opacity: 0.9, sigma: 0.0045, step: 0.006 };
     this.line([x0, 0, z1], [x1, 0, z1], axisLine);
     const xz = zSide === "right" ? x1 : x0;
     const out = zSide === "right" ? 1 : -1;
@@ -263,10 +263,10 @@ export class Chart {
     }
     if (titles) {
       const A = this.axes;
-      const big = { scale: 1.2, color: "#14171c" };
-      if (A.x.name) this.label(shorten(A.x.name, 26), [0, -px * 16, z1 + tick + gap * 4], { ...big, valign: "top" }); // prettier-ignore
-      if (zAxis && A.z.name) this.label(shorten(A.z.name, 22), [xz + out * (tick + gap * 2), -px * 14, z1 + gap * 2], { ...big, valign: "top", align: out > 0 ? "left" : "right" }); // prettier-ignore
-      if (A.y.name) this.label(shorten(A.y.name, 26), [x0 - tick, h + px * 6, z0], { ...big, align: "right", valign: "bottom" }); // prettier-ignore
+      const big = { scale: 1.05, color: "#14171c" };
+      if (A.x.name) this.label(wrapText(shorten(A.x.name, 30), 18), [0, -px * 16, z1 + tick + gap * 4], { ...big, valign: "top" }); // prettier-ignore
+      if (zAxis && A.z.name) this.label(wrapText(shorten(A.z.name, 24), 12), [xz + out * (tick + gap * 2), -px * 14, z1 + gap * 2], { ...big, valign: "top", align: out > 0 ? "left" : "right" }); // prettier-ignore
+      if (A.y.name) this.label(wrapText(shorten(A.y.name, 24), 12), [x0 - tick * 2, h + px * 6, z0], { ...big, align: "left", valign: "bottom" }); // prettier-ignore
     }
   }
 

@@ -38,13 +38,13 @@ export const SNAPSHOTS = {
     file: "../../assets/toys/climate-records/co2-mlo-monthly.csv",
     taken: "October 5, 2026",
     source: "NOAA Global Monitoring Laboratory, Mauna Loa monthly mean CO2 (file of September 5, 2026)", // prettier-ignore
-    caption: "NOAA GML · SNAPSHOT OCT 5, 2026",
+    caption: "NOAA GML · OCT 5, 2026",
   },
   gistemp: {
     file: "../../assets/toys/climate-records/gistemp-v4-global.csv",
     taken: "October 5, 2026",
     source: "NASA GISS, GISTEMP v4 Land-Ocean Temperature Index (accessed October 5, 2026)",
-    caption: "NASA GISS GISTEMP V4 · SNAPSHOT OCT 5, 2026",
+    caption: "NASA GISTEMP V4 · OCT 5, 2026",
   },
 };
 
@@ -58,8 +58,8 @@ export const SAMPLES = [
     chart: "scatter",
     picks: { x: "longitude", y: "depth", z: "latitude", color: "mag", size: "mag" },
     flipY: true,
-    title: "EARTHQUAKES, MAGNITUDE 4.5+",
-    caption: "USGS · SEP 5 – OCT 5, 2026",
+    title: "EARTHQUAKES",
+    caption: "M4.5+ · USGS · SEP 5–OCT 5, 2026",
   },
   {
     id: "iris",
@@ -67,8 +67,8 @@ export const SAMPLES = [
     file: "../../assets/toys/data-in-3d/iris-uci.csv",
     chart: "scatter",
     picks: { x: "petal length (cm)", y: "petal width (cm)", z: "sepal length (cm)", color: "species", size: "sepal width (cm)" }, // prettier-ignore
-    title: "150 IRIS FLOWERS",
-    caption: "FISHER 1936 · UCI REPOSITORY",
+    title: "IRIS FLOWERS",
+    caption: "FISHER 1936 · UCI",
   },
   {
     id: "co2",
@@ -76,8 +76,8 @@ export const SAMPLES = [
     file: SNAPSHOTS.co2.file,
     chart: "bars",
     picks: { x: "year", y: "average", z: "month", color: NONE, size: NONE },
-    title: "CO₂ AT MAUNA LOA, PPM",
-    caption: "NOAA GML · MAY 1974 – AUG 2026",
+    title: "CO₂ AT MAUNA LOA",
+    caption: "NOAA GML · 1974–2026",
   },
 ];
 
@@ -332,6 +332,10 @@ const RISE = { key: "rise", label: "Drop and rise", type: "pulse", ease: 2.4 };
 export const RECIPES = {
   "data-in-3d": {
     alive: true,
+    // Polish round: more splats for the bars, the surface and the labels. (The
+    // labs' sharp kernel was measured here and left off: on these charts it
+    // added speckle and shimmer without sharper edges.)
+    density: 1.4,
     turntable: true,
     options: [
       { key: "table", label: "Table", type: "text", default: "earthquakes", hidden: true },
@@ -401,6 +405,7 @@ export const RECIPES = {
 
   "climate-records": {
     alive: true,
+    density: 1.4,
     options: [
       {
         key: "view",

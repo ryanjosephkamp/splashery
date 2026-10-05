@@ -106,7 +106,7 @@ export function co2Spiral(k, rows, { source = "", px = 0.02 } = {}) {
   const last = rows[n - 1];
   const curve = spiralCurve(rows, S);
   // The coil's splats follow the device's budget (fewer on a phone).
-  const along = Math.round(Math.min(70000, Math.max(18000, k.count * 0.45)));
+  const along = Math.round(Math.min(100000, Math.max(18000, k.count * 0.45)));
   const sigma = 0.0085;
   for (let i = 0; i < along; i++) {
     const t = i / (along - 1);
@@ -168,7 +168,7 @@ const anomalyColor = (v) => diverging(Math.max(-1, Math.min(1, v / 1.2)));
 const degrees = (v) => (v === 0 ? "0" : v > 0 ? `+${formatTick(v, 0.5)}` : formatTick(v, 0.5));
 
 function temperatureFrame(ch, years, { z = true, px }) {
-  ch.axis("x", { name: "YEAR", min: years[0] - 0.5, max: years[years.length - 1] + 0.5, ticks: [1880, 1920, 1960, 2000].filter((y) => y >= years[0]).map((v) => ({ v, text: String(v) })) }); // prettier-ignore
+  ch.axis("x", { name: "YEAR", min: years[0] - 0.5, max: years[years.length - 1] + 0.5, ticks: [1900, 1950, 2000].filter((y) => y >= years[0]).map((v) => ({ v, text: String(v) })) }); // prettier-ignore
   ch.axis("y", { name: "°C VS 1951–1980", min: TEMP.lo, max: TEMP.hi, ticks: [-1, -0.5, 0, 0.5, 1, 1.5].map((v) => ({ v, text: degrees(v) })) }); // prettier-ignore
   if (z)
     ch.axis("z", { name: "MONTH", min: 0.5, max: 12.5, ticks: [1, 7].map((m) => ({ v: m, text: MONTHS[m - 1] })) }); // prettier-ignore
@@ -202,7 +202,7 @@ function bar(k, x, z, w, d, y0, top, color) {
 // Every month since 1880: years across, months in depth.
 export function temperatureBars(k, data, { source = "", px = 0.02 } = {}) {
   const years = data.map((r) => r.year);
-  const ch = new Chart({ w: 2.4, h: 1.2, d: 1.4, px });
+  const ch = new Chart({ w: 2.0, h: 1.35, d: 1.3, px });
   const y0 = temperatureFrame(ch, years, { z: true, px });
   const cw = ch.w / years.length;
   const cd = ch.d / 12;
@@ -214,8 +214,8 @@ export function temperatureBars(k, data, { source = "", px = 0.02 } = {}) {
       bar(k, ch.X(r.year), ch.Z(m + 1), cw * 0.86, cd * 0.8, y0, ch.Y(v), anomalyColor(v));
       bars++;
     }
-  ch.label("GLOBAL TEMPERATURE, EVERY MONTH", [0, ch.h + px * 30, -ch.d / 2], { scale: 1.2, color: "#101318", valign: "bottom" }); // prettier-ignore
-  if (source) ch.label(source, [0, ch.h + px * 21, -ch.d / 2], { scale: 0.75, color: "#4a505a", valign: "bottom" }); // prettier-ignore
+  ch.label("GLOBAL TEMPERATURE", [0, ch.h + px * 40, -ch.d / 2], { scale: 1.1, color: "#101318", valign: "bottom" }); // prettier-ignore
+  if (source) ch.label(source, [0, ch.h + px * 31, -ch.d / 2], { scale: 0.75, color: "#4a505a", valign: "bottom" }); // prettier-ignore
   ch.emit(k);
   k.data = { view: "months", labels: ch.labels, bars, years: [years[0], years[years.length - 1]] };
   return k.data;
@@ -225,14 +225,14 @@ export function temperatureBars(k, data, { source = "", px = 0.02 } = {}) {
 export function temperatureWall(k, data, { source = "", px = 0.02 } = {}) {
   const full = data.filter((r) => !Number.isNaN(r.annual));
   const years = full.map((r) => r.year);
-  const ch = new Chart({ w: 2.4, h: 1.2, d: 0.4, px });
+  const ch = new Chart({ w: 2.0, h: 1.35, d: 0.4, px });
   const y0 = temperatureFrame(ch, years, { z: false, px });
   const cw = ch.w / years.length;
   for (const r of full) bar(k, ch.X(r.year), 0, cw * 0.94, ch.d * 0.7, y0, ch.Y(r.annual), anomalyColor(r.annual)); // prettier-ignore
   const last = full[full.length - 1];
   ch.label(`${last.year}: ${degrees(last.annual)}`, [ch.X(last.year), ch.Y(last.annual) + px * 5, 0], { align: "right", valign: "bottom", scale: 0.9 }); // prettier-ignore
-  ch.label("GLOBAL TEMPERATURE, YEAR BY YEAR", [0, ch.h + px * 30, -ch.d / 2], { scale: 1.2, color: "#101318", valign: "bottom" }); // prettier-ignore
-  if (source) ch.label(source, [0, ch.h + px * 21, -ch.d / 2], { scale: 0.75, color: "#4a505a", valign: "bottom" }); // prettier-ignore
+  ch.label("GLOBAL TEMPERATURE", [0, ch.h + px * 40, -ch.d / 2], { scale: 1.1, color: "#101318", valign: "bottom" }); // prettier-ignore
+  if (source) ch.label(source, [0, ch.h + px * 31, -ch.d / 2], { scale: 0.75, color: "#4a505a", valign: "bottom" }); // prettier-ignore
   ch.emit(k);
   k.data = { view: "years", labels: ch.labels, bars: full.length, years: [years[0], last.year] };
   return k.data;

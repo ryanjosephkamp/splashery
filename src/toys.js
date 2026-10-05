@@ -3705,7 +3705,7 @@ export const TOYS = [
     pack: "data-climate",
     labs: true,
     tags: "data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel",
-    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 2.9 },
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 3.3 },
   },
   {
     id: "climate-records",

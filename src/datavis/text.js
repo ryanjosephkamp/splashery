@@ -46,18 +46,37 @@ export const glyphOf = (ch) => {
   return GLYPHS[plain.toUpperCase()] ?? GLYPHS["?"];
 };
 
-// The inked pixels of a line of text, and its size in font pixels (6 per
-// character, the last column blank).
-export function textPixels(text) {
+// The inked pixels of a text, and its size in font pixels (6 per character,
+// the last column blank). Lines split at "\n" sit 10 pixels apart, each
+// aligned within the block ("left", "center" or "right").
+export function textPixels(text, align = "left") {
+  const lines = String(text)
+    .split("\n")
+    .map((l) => [...l]);
+  const widths = lines.map((l) => Math.max(0, l.length * 6 - 1));
+  const width = Math.max(...widths);
   const ink = [];
-  const s = [...String(text)];
-  for (let i = 0; i < s.length; i++) {
-    const g = glyphOf(s[i]);
-    if (!g) continue;
-    for (let r = 0; r < 7; r++)
-      for (let c = 0; c < 5; c++) if (g[r] & (1 << (4 - c))) ink.push([i * 6 + c, r]);
-  }
-  return { ink, width: Math.max(0, s.length * 6 - 1), height: 7 };
+  lines.forEach((s, li) => {
+    const shift = align === "right" ? width - widths[li] : align === "center" ? Math.round((width - widths[li]) / 2) : 0; // prettier-ignore
+    for (let i = 0; i < s.length; i++) {
+      const g = glyphOf(s[i]);
+      if (!g) continue;
+      for (let r = 0; r < 7; r++)
+        for (let c = 0; c < 5; c++) if (g[r] & (1 << (4 - c))) ink.push([shift + i * 6 + c, li * 10 + r]); // prettier-ignore
+    }
+  });
+  return { ink, width, height: lines.length * 10 - 3 };
+}
+
+// Splits a long title into two lines at the space nearest its middle.
+export function wrapText(text, max = 12) {
+  const t = String(text);
+  if (t.length <= max || !t.includes(" ")) return t;
+  let best = -1;
+  for (let i = 0; i < t.length; i++)
+    if (t[i] === " " && (best < 0 || Math.abs(i - t.length / 2) < Math.abs(best - t.length / 2)))
+      best = i;
+  return `${t.slice(0, best)}\n${t.slice(best + 1)}`;
 }
 
 // Lays out a label: anchor in recipe units, px the size of a font pixel,
@@ -78,7 +97,7 @@ export function labelSplats(
   },
 ) {
   // prettier-ignore
-  const { ink, width, height } = textPixels(text);
+  const { ink, width, height } = textPixels(text, align);
   const ox = align === "left" ? 0 : align === "right" ? -width : -width / 2;
   const oy = valign === "top" ? 0 : valign === "bottom" ? height : height / 2;
   const on = new Set(ink.map(([x, y]) => `${x},${y}`));
@@ -109,17 +128,37 @@ export function labelSplats(
       pattern: false,
     });
   }
+  // Polish round: each font pixel is four smaller splats (2 x 2), so strokes
+  // have square, crisp edges instead of round blobs, and a diagonal step
+  // (ink at two corners, none on the sides) gets a bridging splat between
+  // them, so slanted strokes (A, V, 2, 7) read as lines, not staircases.
+  const ink2 = (p) => ({
+    p,
+    color,
+    opacity,
+    scales: [px * 0.29, px * 0.29, px * 0.06],
+    quat: [0, 0, 0, 1],
+    kind: "token",
+    params: [token, 0],
+    pattern: false,
+  });
   for (const [x, y] of ink)
-    out.push({
-      p: place(x, y),
-      color,
-      opacity,
-      scales: [sigma * 0.85, sigma * 0.85, px * 0.08],
-      quat: [0, 0, 0, 1],
-      kind: "token",
-      params: [token, 0],
-      pattern: false,
-    });
+    for (const [sx, sy] of [
+      [-0.25, -0.25],
+      [0.25, -0.25],
+      [-0.25, 0.25],
+      [0.25, 0.25],
+    ]) {
+      // prettier-ignore
+      const c = place(x + sx, y + sy);
+      out.push(ink2(c));
+    }
+  for (const [x, y] of ink)
+    for (const dx of [-1, 1]) {
+      const dy = 1;
+      if (on.has(`${x + dx},${y + dy}`) && !on.has(`${x + dx},${y}`) && !on.has(`${x},${y + dy}`))
+        out.push(ink2(place(x + dx / 2, y + dy / 2)));
+    }
   return out;
 }
 

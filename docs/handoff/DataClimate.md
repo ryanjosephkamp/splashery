@@ -9,10 +9,28 @@ the app outside your own files, as an "Engine: …" PR merged first). PR title: 
 climate: your spreadsheet in 3D, and the climate records". Handoff file: docs/handoff/DataClimate.md
 (create it; start it with this brief, word for word, under "## Brief", then keep "## State
 
-READY (October 5, 2026, 09:00 UTC): both toys are built, tested and pushed on PR #294, with main
-merged in; five clips are on Effect review page 2 (lane record `DataClimate`, cards
-`dcl-data-earthquakes`, `dcl-data-iris`, `dcl-data-co2-bars`, `dcl-climate-co2-spiral`,
-`dcl-climate-temperature-bars`). Waiting on the owner's marks and the Integrator's full run.
+READY (October 5, 2026, 21:30 UTC): PR #294 merged (Integrator 5, combo N8). The polish round (the
+owner's "the toys could still be sharper") is on `claude/lane-data-climate-polish`, PR "Phase Data
+and climate polish: sharper labels, solid points, charts that fill the phone". Five new clips sit
+beside the old ones on Effect review page 2 (cards `dcl-*-p1`).
+
+### Polish round (October 5, 2026)
+
+Measured with `tools/lab-kernels.mjs` (390×844 at 2×, Data in 3D at home and 0.5 zoom):
+
+- Labels: four splats per font pixel (2 × 2) and a bridging splat on diagonal steps. Edge rise 1.88
+  → 1.65 px at home, 2.78 → 2.13 px zoomed.
+- Scatter points up to 4,000: a shaded ball of 23 splats each, with a crisp edge, instead of one
+  soft splat. Floor shadows smaller and fainter.
+- `density: 1.4` on both toys (a phone builds 84,000 splats, under its 120,000 cap); the CO2 coil
+  may use up to 100,000.
+- Finer axis and grid lines.
+- Framing: titles shortened (the old ones were wider than the charts, so the fit shrank everything),
+  long axis titles wrap onto two lines, the vertical axis title sits above the axis, Data in 3D's
+  depth axis is on the right, the temperature charts are narrower and taller, and the cameras sit a
+  little farther back. Every chart now fills a phone screen.
+- The labs' sharp kernel was measured and left off: on these charts it added speckle and shimmer
+  without sharper edges.
 
 - **Data in 3D** (`data-in-3d`, Studio, labs): `src/datavis/csv.js` reads the table,
   `src/datavis/plot.js` builds a scatter, bars or a surface inside `src/datavis/chart.js`'s frame
