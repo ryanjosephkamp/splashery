@@ -2792,6 +2792,18 @@ export const TOY_SOUNDS = {
       { voice: "rumble", f: 70, decay: 4, vol: 0.22, at: 0.05 },
     ],
   },
+  // A nutshell's hollow knock as the kernel falls away, and a softer one
+  // as it comes back.
+  "walnut-ct": {
+    on: [
+      { voice: "hollow", f: 420, vol: 0.55 },
+      { voice: "wood", f: 900, at: 0.09, vol: 0.3 },
+    ],
+    off: [
+      { voice: "hollow", f: 360, vol: 0.45 },
+      { voice: "wood", f: 760, at: 0.09, vol: 0.25 },
+    ],
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

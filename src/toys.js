@@ -3537,6 +3537,16 @@ export const TOYS = [
     tags: "ct cat scan computed tomography x-ray gantry slice nautilus shell chambers volume cutting plane imaging",
     camera: { yaw: 0.45, pitch: 0.25, roll: 0, distance: 3.2 },
   },
+  {
+    id: "walnut-ct",
+    label: "Walnut CT scan",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "ct scan x-ray tomography walnut nut shell kernel volume real data slice cutting plane density cwi imaging",
+    camera: { yaw: 0.35, pitch: 0.2, roll: 0, distance: 2.8 },
+  },
   // ---- Pack: screens ----
   {
     id: "screen",

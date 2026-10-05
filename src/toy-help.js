@@ -1744,6 +1744,11 @@ export const TOY_HELP = {
     about:
       "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.",
   },
+  "walnut-ct": {
+    howTo: "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
+    about:
+      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
+  },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
   "fluid-lab": {

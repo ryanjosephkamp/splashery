@@ -5,6 +5,8 @@
 //                    each bag's X-ray picture in the scanner's colors
 //   how-ct           a CT ring sweeps along a nautilus shell and builds its
 //                    volume slice by slice; then a drag cuts into it
+//   walnut-ct        a real CT scan of a walnut (CWI, CC BY 4.0) as volume
+//                    splats: cut it, or show only its dense shell
 //
 // The volume toys use the engine's volume kind (src/effects.js, KINDS.volume)
 // and out.volume: a cutting plane and a density window.
@@ -1005,6 +1007,186 @@ function driveHowCT(t, c, out, info) {
     out.volume = { normal: [0, 0, 1], at: -depth + 2 * depth * ctCut.at, glow: [0.14, 0.07, 0], glowWidth: 0.03 }; // prettier-ignore
 }
 
+// ---- A real CT scan: a walnut ------------------------------------------------------------
+
+// A walnut scanned with cone-beam X-ray CT at CWI in Amsterdam (Der Sarkissian
+// et al. 2019, Zenodo 2686726, CC BY 4.0): its high-quality reconstruction
+// (100 µm voxels), averaged to 0.3 mm by tools/img-walnut.mjs.
+export const WALNUT = {
+  file: "../../assets/toys/walnut-ct/walnut.vol.gz",
+  title: "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning: Samples 1-8 (Walnut 1)",
+  source: "https://doi.org/10.5281/zenodo.2686726",
+  author: "Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia Bethany Coban, K. Joost Batenburg (CWI)", // prettier-ignore
+  license: "CC BY 4.0",
+  licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+  air: 55, // densities at or below this (of 255) are air
+  shell: 0.62, // the shell's densities start about here (0..1)
+};
+let walnutVol = null;
+let walnutLoading = null;
+
+// A file of this pack's assets as bytes (fetched in a browser, read from disk
+// in Node for the build tools and tests), gunzipped.
+async function readGz(rel) {
+  const url = new URL(rel, import.meta.url);
+  if (url.protocol === "file:") {
+    const fs = await import("node:fs/promises");
+    const zlib = await import("node:zlib");
+    const b = zlib.gunzipSync(await fs.readFile(url));
+    return new Uint8Array(b.buffer, b.byteOffset, b.byteLength);
+  }
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`Could not load ${rel.split("/").pop()}.`);
+  const ds = r.body.pipeThrough(new DecompressionStream("gzip"));
+  return new Uint8Array(await new Response(ds).arrayBuffer());
+}
+
+async function loadWalnut() {
+  if (walnutVol) return walnutVol;
+  walnutLoading ||= readGz(WALNUT.file).then((b) => {
+    const dv = new DataView(b.buffer, b.byteOffset, b.byteLength);
+    const tag = String.fromCharCode(b[0], b[1], b[2], b[3]);
+    if (tag !== "WCT1") throw new Error("The walnut's volume file is not readable.");
+    const [nx, ny, nz] = [dv.getUint16(4, true), dv.getUint16(6, true), dv.getUint16(8, true)];
+    walnutVol = { nx, ny, nz, mm: dv.getFloat32(10, true), d: b.subarray(14, 14 + nx * ny * nz) };
+    return walnutVol;
+  });
+  return walnutLoading;
+}
+
+// The volume's density at a point in voxel units (trilinear).
+function volAt(V, x, y, z) {
+  const x0 = Math.floor(x);
+  const y0 = Math.floor(y);
+  const z0 = Math.floor(z);
+  if (x0 < 0 || y0 < 0 || z0 < 0 || x0 >= V.nx - 1 || y0 >= V.ny - 1 || z0 >= V.nz - 1) return 0;
+  const fx = x - x0;
+  const fy = y - y0;
+  const fz = z - z0;
+  const at = (i, j, k) => V.d[((z0 + k) * V.ny + y0 + j) * V.nx + x0 + i];
+  const lx = (j, k) => at(0, j, k) * (1 - fx) + at(1, j, k) * fx;
+  const ly = (k) => lx(0, k) * (1 - fy) + lx(1, k) * fy;
+  return ly(0) * (1 - fz) + ly(1) * fz;
+}
+
+const NEAR = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]]; // prettier-ignore
+
+// A volume as volume splats: sampled on a lattice whose pitch (in voxels)
+// fits the budget, one round splat per sample that is not air. The scan's
+// slices run down the walnut, so voxel z is down (recipe -y).
+function buildVolume(k, V, { budget, air, color, rand = Math.random }) {
+  let solid = 0;
+  for (let i = 0; i < V.d.length; i++) if (V.d[i] > air) solid++;
+  const pitch = Math.max(1, Math.cbrt(solid / Math.max(1000, budget * 0.92)));
+  const cx = (V.nx - 1) / 2;
+  const cy = (V.ny - 1) / 2;
+  const cz = (V.nz - 1) / 2;
+  const s = pitch * 0.78;
+  const pts = [];
+  for (let z = 0; z < V.nz - 1; z += pitch)
+    for (let y = 0; y < V.ny - 1; y += pitch)
+      for (let x = 0; x < V.nx - 1; x += pitch) {
+        // A little jitter breaks up the lattice's lines on a cut face.
+        const j = pitch * 0.18;
+        const px = x + (rand() - 0.5) * j;
+        const py = y + (rand() - 0.5) * j;
+        const pz = z + (rand() - 0.5) * j;
+        const v = volAt(V, px, py, pz);
+        if (v <= air) continue;
+        // Colored as the densest matter within a voxel, so a surface's
+        // partly filled voxels take the color of what they belong to.
+        let m = v;
+        for (const [dx, dy, dz] of NEAR) m = Math.max(m, volAt(V, px + dx, py + dy, pz + dz));
+        pts.push(px - cx, cz - pz, py - cy, v / 255, m / 255);
+      }
+  const n = pts.length / 5;
+  k.cloud({ count: n * (160000 / k.count), jitter: 0 }, (r, i) => {
+    if (i >= n) return null;
+    const d = pts[i * 5 + 3];
+    // Voxels only partly filled (at the surface) are only partly opaque, as
+    // a volume renderer draws them, so the outside reads as the shell.
+    const a = smoothstep(air / 255, air / 255 + 0.22, d);
+    return {
+      p: [pts[i * 5], pts[i * 5 + 1], pts[i * 5 + 2]],
+      color: color(pts[i * 5 + 4]),
+      scales: [s, s, s],
+      opacity: 0.15 + 0.85 * a,
+      kind: "volume",
+      params: [d, 0],
+      pattern: false,
+    };
+  });
+  return { n, pitch, half: [cx, cz, cy] };
+}
+
+// The CT's gray, or a warm color scale (kernel cream, shell brown).
+function walnutColor(style) {
+  if (style === "warm")
+    return (d) => {
+      const t = clamp((d - 0.2) / 0.75, 0, 1);
+      return mix(mix("#5a3a22", "#e9d3a6", smoothstep(0.05, 0.35, t)), "#8b5a2b", smoothstep(0.45, 0.75, t)); // prettier-ignore
+    };
+  return (d) => {
+    const v = clamp((d - 0.2) / 0.8, 0, 1);
+    const g = 0.18 + 0.82 * v ** 0.9;
+    return [g, g, g * 0.98];
+  };
+}
+
+// A cut a drag moves through a volume (one per toy): at 1 nothing is cut, at
+// 0 everything is.
+function cutState() {
+  return { at: 1, grab: null, data: null };
+}
+const walnutCut = cutState();
+// The cuts by toy (the tests and the clip tools set them).
+export const CUTS = { "how-ct": ctCut, "walnut-ct": walnutCut };
+
+const CUT_DIRS = {
+  front: { normal: [0, 0, 1], label: "Front to back" },
+  top: { normal: [0, 1, 0], label: "Top down" },
+  side: { normal: [1, 0, 0], label: "Side to side" },
+};
+
+function cutDrag(cut, pointer) {
+  return {
+    at: () => true,
+    plane: "view",
+    start(p) {
+      cut.grab = { y: pointer(p), at: cut.at };
+    },
+    move(p) {
+      if (!cut.grab) return;
+      cut.at = clamp(cut.grab.at + (pointer(p) - cut.grab.y) * 0.6, 0, 1);
+    },
+    end() {
+      cut.grab = null;
+    },
+  };
+}
+
+function driveWalnut(t, c, out, info) {
+  const data = info.data;
+  if (!data) return;
+  if (walnutCut.data !== data) {
+    walnutCut.data = data;
+    walnutCut.at = 1;
+  }
+  // The window rises from the air to the shell's densities as Shell only
+  // comes on, so the kernel melts away from its thinnest parts first.
+  const lo = (WALNUT.air + 1) / 255 + (WALNUT.shell - (WALNUT.air + 1) / 255) * ease(c.dense);
+  const dir = CUT_DIRS[data.cut] || CUT_DIRS.front;
+  const ext = vec.dot(dir.normal, data.half) * data.mm + 0.02;
+  const vol = { window: [lo, 1] };
+  if (walnutCut.at < 0.999) {
+    vol.normal = dir.normal;
+    vol.at = -ext + 2 * ext * walnutCut.at;
+    vol.glow = [0.1, 0.07, 0.02];
+    vol.glowWidth = 0.6 * data.mm * data.pitch;
+  }
+  out.volume = vol;
+}
+
 // ---- Recipes ------------------------------------------------------------------------------
 
 export const RECIPES = {
@@ -1042,6 +1224,52 @@ export const RECIPES = {
     build(k) {
       k.data = {};
       buildHowCT(k);
+    },
+  },
+  "walnut-ct": {
+    options: [
+      {
+        key: "cut",
+        label: "Cut",
+        type: "select",
+        default: "front",
+        choices: Object.entries(CUT_DIRS).map(([id, d]) => ({ id, label: d.label })),
+      },
+      {
+        key: "colors",
+        label: "Colors",
+        type: "select",
+        default: "gray",
+        choices: [
+          { id: "gray", label: "CT gray" },
+          { id: "warm", label: "Warm" },
+        ],
+      },
+    ],
+    controls: [{ key: "dense", label: "Shell only", type: "toggle", ease: 1.6 }],
+    action: { key: "dense", label: "Shell only, or the whole walnut" },
+    note: "Drag up or down on the walnut to cut into it.",
+    drag: cutDrag(walnutCut, (p) => p[1]),
+    credits: [
+      {
+        label: "Walnut",
+        title: WALNUT.title,
+        source: WALNUT.source,
+        author: WALNUT.author,
+        license: WALNUT.license,
+        licenseUrl: WALNUT.licenseUrl,
+      },
+    ],
+    async prepare() {
+      await loadWalnut();
+    },
+    drive: driveWalnut,
+    build(k, o) {
+      const V = walnutVol;
+      if (!V) throw new Error("The walnut's volume has not loaded.");
+      const r = buildVolume(k, V, { budget: k.count, air: WALNUT.air, color: walnutColor(o.colors), rand: k.rand }); // prettier-ignore
+      // Recipe units are voxels; the drive works in them too (mm: one voxel).
+      k.data = { cut: o.cut, half: r.half, pitch: r.pitch, mm: 1 };
     },
   },
 };

@@ -2463,6 +2463,13 @@
       "effect": "A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane). Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps back.",
       "sound": "The gantry's knock as it starts and its motor's low run, lower on the way back.",
       "improved": "Imaging: new toy."
+    },
+    "walnut-ct": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an openly licensed dataset (lane Imaging; labs only).",
+      "effect": "A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm block (resampled to the device's budget). A drag moves a cutting plane through it (front to back, top down or side to side) and shows the shell, the kernel's lobes and the air between them. The tap raises the density window so the kernel melts away and only the shell stays; a second tap brings it back.",
+      "sound": "A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.",
+      "improved": "Imaging: new toy, with tools/img-walnut.mjs."
     }
   }
 }

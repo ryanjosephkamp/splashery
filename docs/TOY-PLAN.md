@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 375 toys. 345 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 370.
+- 376 toys. 346 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 371.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -60,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Screen.
+  Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2943,7 +2943,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 
-## Imaging (2)
+## Imaging (3)
 
 - **Airport X-ray scanner** (`airport-xray`). Now: tap: Send the next bag. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
@@ -2962,3 +2962,13 @@ Proposals below are suggestions; the owner may change them.
     back.
   - Improved: Imaging: new toy.
   - Sound: The gantry's knock as it starts and its motor's low run, lower on the way back.
+- **Walnut CT scan** (`walnut-ct`). Now: tap: Shell only, or the whole walnut. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an
+    openly licensed dataset (lane Imaging; labs only).
+  - Effect: A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm
+    block (resampled to the device's budget). A drag moves a cutting plane through it (front to
+    back, top down or side to side) and shows the shell, the kernel's lobes and the air between
+    them. The tap raises the density window so the kernel melts away and only the shell stays; a
+    second tap brings it back.
+  - Improved: Imaging: new toy, with tools/img-walnut.mjs.
+  - Sound: A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.
