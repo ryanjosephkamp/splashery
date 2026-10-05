@@ -48,16 +48,28 @@ export function poseFrame(pose) {
   };
 }
 
+// Shelves whose toys have no real "down" (space, atoms, cells, math,
+// computing): their rising and falling splats (a comet's tail streaming, a
+// pulsar's jets) keep to the toy's own frame. A recipe's `gravity: true` or
+// `false` overrides its shelf.
+export const NO_GRAVITY = new Set(["space", "atoms", "tiny", "maths", "computing"]);
+export function poseGravity(info, def) {
+  const g = info?.recipe?.gravity;
+  if (g !== undefined) return !!g;
+  return !NO_GRAVITY.has(def?.category);
+}
+
 // Writes the pose uniforms into `u` and takes the world points and
 // directions it holds into the toy's home frame. `squish` is Hands-on's
 // squish ({ axis, point, ... } in the world) with its `amount`, or null.
-export function poseUniforms(u, pose, squish = null) {
+// gravity false: what rises or falls keeps to the toy's frame (poseGravity).
+export function poseUniforms(u, pose, squish = null, gravity = true) {
   const f = poseFrame(pose);
   if (!f) {
     Object.assign(u, NO_POSE);
     return u;
   }
-  const up = f.dirHome([0, 1, 0]);
+  const up = gravity ? f.dirHome([0, 1, 0]) : [0, 1, 0];
   u.uSpPoseQ = f.Q.slice();
   u.uSpPoseT = [f.ct[0], f.ct[1], f.ct[2], 1];
   u.uSpPoseC = [f.c[0], f.c[1], f.c[2], 0];
