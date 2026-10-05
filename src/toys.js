@@ -1316,6 +1316,49 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.5, roll: 0, distance: 5 },
   },
 
+  // ---- Pack: tiny-r2 ----
+  // (lane Tiny world r2: entries for src/packs/tiny-r2.js go here; labs)
+  {
+    id: "dna-to-protein",
+    label: "DNA to protein",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "gene dna rna mrna transcription translation ribosome trna codon genetic code protein folding mutation sickle cell insulin hemoglobin gfp biology",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "mitosis",
+    label: "Cell division",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "mitosis cell division cycle chromosome chromatid spindle centrosome prophase metaphase anaphase telophase cytokinesis biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "apoptosis",
+    label: "Apoptosis",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "apoptosis cell death programmed blebbing apoptotic bodies pyknosis nucleus biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "phagocytosis",
+    label: "Phagocytosis",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "phagocytosis neutrophil white blood cell immune bacterium phagosome lysosome digestion biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
+
   // ---- Pack: atoms ----
   // (entries for src/packs/atoms.js go here)
   {
@@ -3652,6 +3695,27 @@ export const TOYS = [
     labs: true,
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
+  },
+  // ---- Pack: data-climate (lane Data and climate) ----
+  {
+    id: "data-in-3d",
+    label: "Data in 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel",
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "climate-records",
+    label: "Climate records",
+    category: "science",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart",
+    camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.3 },
   },
 ];
 

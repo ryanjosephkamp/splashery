@@ -3177,6 +3177,10 @@ function ufoBuild(k) {
 
 export const RECIPES = {
   rocket: {
+    // Lane Any pose: turned over in Hands-on, its rising splats keep to the
+    // toy's own frame (the exhaust leaves the nozzle and the launch smoke
+    // billows along the pad), not the world's up.
+    gravity: false,
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#d62d2d" }],
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 7 }],
