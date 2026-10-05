@@ -3438,7 +3438,7 @@ export const TOYS = [
     pack: "photo-3d",
     labs: true,
     tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   // Lane Live input r3: a GIF or a video played back in 3D.
   {
@@ -3449,7 +3449,7 @@ export const TOYS = [
     pack: "live",
     labs: true,
     tags: "gif video animation movie clip moving photo depth 3d relief frames muybridge horse convert converter",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   // ---- Pack: video3d (lane Video 3D) ----
   {
@@ -3460,7 +3460,7 @@ export const TOYS = [
     pack: "video3d",
     labs: true,
     tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   // ---- Pack: lab (lane Lab) ----
   {
@@ -3514,6 +3514,16 @@ export const TOYS = [
     labs: true,
     tags: "wave waves ripple tank water interference diffraction slit double single young fringes wavelength frequency physics optics",
     camera: { yaw: 0, pitch: 1.05, roll: 0, distance: 3.1 },
+  },
+  {
+    id: "light-bench",
+    label: "Light bench",
+    category: "science",
+    kind: "kit",
+    pack: "optics",
+    labs: true,
+    tags: "light ray optics lens mirror prism spectrum rainbow refraction reflection snell glass fiber total internal reflection focal length physics",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   // ---- Pack: fluid-lab (lane Fluids) ----
   {

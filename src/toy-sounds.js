@@ -2779,6 +2779,9 @@ export const TOY_SOUNDS = {
     { voice: "drip", f: 640, n: 1, at: 0.3, vol: 0.8 },
     { voice: "wave", f: 420, decay: 1.2, at: 0.36, vol: 0.16 },
   ],
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  // A tap changes the light: the lamp's switch clicks.
+  "light-bench": { voice: "switch", f: 2900, vol: 0.7 },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

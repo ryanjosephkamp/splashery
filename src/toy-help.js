@@ -1741,6 +1741,14 @@ export const TOY_HELP = {
       "A ripple tank shows how waves spread, bend round edges and add up. This one solves the real two-dimensional wave equation on a grid of 216 × 216 cells (finite differences, with a time step small enough to stay stable), and each cell is a splat lifted by the water's height and lit so the crests catch the light. Sloping beaches at the edges soak the waves up, as in a real tank.\n\nThrough two slits, the waves from each slit add where their paths differ by a whole number of wavelengths, so bright lines fan out at the angles d·sin θ = m·λ gives; the dotted lines mark them. Through one slit, the beam spreads wider as the slit gets narrower. The bars on the back wall show how strong the waves are along the far side. The numbers are in the Toy tab.\n\nWhat it simplifies: real ripples on shallow water change speed a little with their wavelength; here every wavelength moves at the speed you set. The heights are exaggerated and the motion is four times slower than real.",
   },
 
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  "light-bench": {
+    howTo:
+      "Drag a part to move it, and turn it by its yellow knob. Tap the bench to change the light. Pick a setup in the Toy tab, where the numbers are.",
+    about:
+      "An optical bench: light traced as rays through real glass. At every surface a ray bends by Snell's law, n₁ sin θ₁ = n₂ sin θ₂, or reflects, from a mirror or totally inside glass when it meets a face beyond the critical angle. Lenses have real spherical faces, so their edges focus a little differently from their middles, as real lenses do.\n\nThe glass is Schott N-BK7 (a crown glass) and N-SF11 (a dense flint), each with its published Sellmeier formula for how its refractive index changes with the wavelength. Glass bends blue light more than red, so the prism fans white light out into its colors, and a simple lens focuses blue a little nearer than red. The light guide traps light by total internal reflection until a bend is too tight.\n\nThe Toy tab shows the numbers: the angles, the lensmaker's focal length, the image distance from 1/f = 1/d_o + 1/d_i beside where the traced rays really cross, and the prism's deviation for each color.\n\nWhat it simplifies: the bench is flat (rays in one plane), white light is nine wavelengths, and the weak reflections at each glass surface are left out.",
+  },
+
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
   "fluid-lab": {
     howTo:
