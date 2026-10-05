@@ -2749,6 +2749,20 @@ export const TOY_SOUNDS = {
     { voice: "wood", at: 1.05, f: 900, decay: 0.12, vol: 0.12 },
     { voice: "breath", at: 2.15, f: 600, to: 1.2, decay: 1.0, vol: 0.16 },
   ],
+  // Lane QR lab r2: soft, not electronic. A light knock as a part lifts; a
+  // scrape and a soft thud as damage lands; a slide out and a knock back.
+  "qr-anatomy": [
+    { voice: "wood", f: 820, decay: 0.18, vol: 0.16 },
+    { voice: "breath", f: 1100, to: 0.8, decay: 0.5, vol: 0.07 },
+  ],
+  "qr-damage": [
+    { voice: "breath", f: 520, to: 0.6, decay: 0.45, vol: 0.16 },
+    { voice: "thud", at: 0.3, f: 130, decay: 0.25, vol: 0.3 },
+  ],
+  "qr-three": [
+    { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.12 },
+    { voice: "wood", at: 2.6, f: 660, decay: 0.15, vol: 0.12 },
+  ],
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint
