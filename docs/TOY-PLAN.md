@@ -2976,7 +2976,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and
     small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026
     (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the
-    water, and a dot follows the curve on the plaque.
+    water, and a dot follows the curve on the plaque (and slides back to its start at the end).
   - Improved: Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea
     level).
   - Sound: Three soft waves through the day.
@@ -3008,7 +3008,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief
     map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each
     stork flies its real track, facing the way it goes, and draws its trail behind it; month labels
-    and a bar mark the time.
+    and a bar mark the time. Then the season rewinds in 2 s (the storks fly their tracks back to
+    their nests).
   - Improved: Geo: new toy from tools/geo-migration.mjs.
   - Sound: Wing beats and a stork's bill clatter.
 - **Earthquakes** (`earthquakes`). Now: tap: Play the quakes in time order. Plan: keep.

@@ -2474,7 +2474,7 @@
     "tide-harbor": {
       "v": "keep",
       "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
-      "effect": "A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026 (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the water, and a dot follows the curve on the plaque.",
+      "effect": "A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026 (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the water, and a dot follows the curve on the plaque (and slides back to its start at the end).",
       "sound": "Three soft waves through the day.",
       "improved": "Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea level)."
     },
@@ -2502,7 +2502,7 @@
     "stork-migration": {
       "v": "keep",
       "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
-      "effect": "Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each stork flies its real track, facing the way it goes, and draws its trail behind it; month labels and a bar mark the time.",
+      "effect": "Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each stork flies its real track, facing the way it goes, and draws its trail behind it; month labels and a bar mark the time. Then the season rewinds in 2 s (the storks fly their tracks back to their nests).",
       "sound": "Wing beats and a stork's bill clatter.",
       "improved": "Geo: new toy from tools/geo-migration.mjs."
     },

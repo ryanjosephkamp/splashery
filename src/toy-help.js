@@ -2023,7 +2023,7 @@ export const TOY_HELP = {
   "stork-migration": {
     howTo: "Tap to play the storks' fall migration from Germany to Africa.",
     about:
-      "White storks fly thousands of kilometers each fall from Europe to Africa, and back in spring. They soar on rising warm air and avoid long sea crossings, so storks from eastern Germany go round the Mediterranean by the Bosporus, Turkey, Israel and the Nile valley.\n\nThese are 30 real storks, juveniles and adults, tracked by GPS in 2013 by S. Rotics and colleagues and published on Movebank under a CC0 license, one position every six hours. Tap it to play July to October in about 12 seconds: each stork leaves its nest when it really did and draws its own trail behind it. The map's heights come from NOAA's ETOPO1, stretched up 45 times.",
+      "White storks fly thousands of kilometers each fall from Europe to Africa, and back in spring. They soar on rising warm air and avoid long sea crossings, so storks from eastern Germany go round the Mediterranean by the Bosporus, Turkey, Israel and the Nile valley.\n\nThese are 30 real storks, juveniles and adults, tracked by GPS in 2013 by S. Rotics and colleagues and published on Movebank under a CC0 license, one position every six hours. Tap it to play July to October in about 12 seconds: each stork leaves its nest when it really did and draws its own trail behind it. Then the season rewinds, and the storks fly their tracks back to their nests. The map's heights come from NOAA's ETOPO1, stretched up 45 times.",
   },
   earthquakes: {
     howTo: "Tap to play the quakes in time order. Tap the plaque to refresh the live feed.",

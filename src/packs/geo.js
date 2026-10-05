@@ -533,7 +533,9 @@ const TIDE_HARBOR = {
   drive(t, c, out, info) {
     const d = info.data;
     const s = c.day > 0 ? (1 - c.day) * TH_T : TH_T;
-    const f = c.day > 0 ? clamp((s - 0.3) / (TH_T - 0.6), 0, 1) : 0;
+    const f = c.day > 0 ? clamp((s - 0.3) / (TH_T - 1.1), 0, 1) : 0;
+    // The marker slides back to the start of the curve once the day is over.
+    const mk = f * (1 - ease(seg(s, TH_T - 0.75, TH_T - 0.1)));
     const level = tideAt(d.levels, f);
     const rise = (level - d.low) * d.k;
     out.parts.water = { offset: [0, rise, 0] };
@@ -548,7 +550,7 @@ const TIDE_HARBOR = {
       };
     });
     // The marker on the plaque's tide curve.
-    out.tokens = [{ base: d.plot.at(0, d.levels[0]), offset: vec.sub(d.plot.at(f, level), d.plot.at(0, d.levels[0])) }]; // prettier-ignore
+    out.tokens = [{ base: d.plot.at(0, d.levels[0]), offset: vec.sub(d.plot.at(mk, tideAt(d.levels, mk)), d.plot.at(0, d.levels[0])) }]; // prettier-ignore
     sortWhileMoving(out, d, s, c.day > 0 && s < TH_T - 0.1, 0.6);
   },
   build(k) {
@@ -1274,7 +1276,7 @@ const LIVING_CITY = {
 // ---- Migration: white storks -----------------------------------------------------------------
 
 const SM_FILE = "assets/toys/stork-migration/migration.bin";
-const SM_T = 14;
+const SM_T = 15.5;
 const SM_FLY = 0.035; // flying height above the map (recipe units)
 
 export function birdAt(pts, hour) {
@@ -1317,11 +1319,12 @@ const STORK_MIGRATION = {
   drive(t, c, out, info) {
     const d = info.data;
     const s = c.fly > 0 ? (1 - c.fly) * SM_T : 0;
-    // 0.4 s at the nests, 12 s of migration, then a beat at the end before
-    // everyone is home again for the next tap.
-    const f = c.fly > 0 ? clamp((s - 0.4) / 12, 0, 1) : 0;
+    // July to October in 12 s, a beat in Africa, then the season rewinds
+    // (the storks fly their tracks backward to their nests) in 2 s.
+    const f = c.fly > 0 ? clamp((s - 0.4) / 12, 0, 1) * (1 - ease(seg(s, 13.1, 15.2))) : 0;
     const hour = f * d.hours;
-    out.morph = [f > 0 && f < 1 ? f : c.fly > 0 && s > 12.4 ? 1 : 0, 0, 0, 0];
+    out.morph = [f, 0, 0, 0];
+    const back = s > 13.1 ? Math.PI : 0; // facing home while the season rewinds
     out.tokens = d.birds.map((b) => {
       const q = birdAt(b.pts, hour);
       const n = b.pts[Math.min(b.pts.length - 1, q.i + 1)];
@@ -1331,7 +1334,7 @@ const STORK_MIGRATION = {
       return {
         base: b.base,
         offset: [p[0] - b.base[0], 0, p[2] - b.base[2]],
-        quat: quatAxisAngle([0, 1, 0], Number.isFinite(head) && Math.hypot(ahead[0] - p[0], ahead[2] - p[2]) > 1e-4 ? head : 0), // prettier-ignore
+        quat: quatAxisAngle([0, 1, 0], Number.isFinite(head) && Math.hypot(ahead[0] - p[0], ahead[2] - p[2]) > 1e-4 ? head + back : 0), // prettier-ignore
       };
     });
     resortWhileMoving(out, d, s, c.fly > 0);
