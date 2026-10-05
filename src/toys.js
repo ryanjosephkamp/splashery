@@ -3556,7 +3556,7 @@ export const TOYS = [
     pack: "imaging",
     labs: true,
     tags: "x-ray xray airport security scanner baggage luggage bag suitcase conveyor belt dual energy organic metal imaging",
-    camera: { yaw: 0.3, pitch: 0.22, roll: 0, distance: 3.0 },
+    camera: { yaw: 0.3, pitch: 0.22, roll: 0, distance: 2.6 },
   },
   {
     id: "how-ct",
