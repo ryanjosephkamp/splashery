@@ -10,6 +10,8 @@
 // `nav` is the menu item it lights up; `type` is a key of PAGE_TYPES in
 // tools/site-build.mjs. Text fields are plain HTML (written here, never user input).
 
+import { toyPageEntries } from "./site-toy-pages.mjs";
+
 export const SITE = {
   name: "Splashery",
   tagline: "splats you can play with",
@@ -70,8 +72,10 @@ export const PAGES = [
     nav: "toys",
     title: "Toys",
     description: "Every toy on Splashery's shelves, from photoreal scans to atoms and games.",
-    lead: "Every toy on the shelves. Tap one to play with it in the gallery.",
+    lead: "Every toy on the shelves. Tap one to see its page and play with it.",
     shelves: "all",
+    // Built by tools/tpg-catalog.mjs (lane Toy pages); shown with the labs switch on.
+    catalog: { file: "splashery-catalog.pdf" },
   },
   {
     path: "tools/",
@@ -165,6 +169,9 @@ export const PAGES = [
     suggest: ["planet", "peel", "piano", "DNA", "chess", "atom", "magnet", "share"],
   },
 ];
+
+// A page for every toy, at toys/<id>/ (lane Toy pages: tools/site-toy-pages.mjs).
+PAGES.push(...toyPageEntries());
 
 // Pages built at a fixed file name instead of <path>index.html.
 export const NOT_FOUND = {

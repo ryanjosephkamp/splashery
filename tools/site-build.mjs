@@ -25,6 +25,7 @@ import { TOYS, CATEGORIES, holdsStill } from "../src/toys.js";
 import { TOY_HELP, defaultHowTo } from "../src/toy-help.js";
 import { RIGS } from "../src/rigs.js";
 import { SITE, MENU, PAGES, NOT_FOUND, HOME_TOY } from "./site-pages.mjs";
+import { toyPage, toyPath, toyPageDirs } from "./site-toy-pages.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(root, "site");
@@ -97,6 +98,18 @@ const FAVICON =
 // Sets the saved theme and the labs switch before the first paint.
 const EARLY = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("splashery.site.theme");if(t==="light"||t==="dark")d.dataset.theme=t;var q=new URLSearchParams(location.search).get("labs");if(q==="1")localStorage.setItem("splashery.labs","1");else if(q==="0")localStorage.removeItem("splashery.labs");if(localStorage.getItem("splashery.labs")==="1")d.classList.add("labs")}catch(e){}})();`; // prettier-ignore
 
+// A page's link preview picture: its own (a toy's thumbnail, relative to site/), or the site's.
+function ogImage(page) {
+  const img = page.image
+    ? { src: new URL(page.image, SITE.origin + SITE.base).href, w: page.imageSize, h: page.imageSize, alt: page.imageAlt, card: "summary" } // prettier-ignore
+    : { src: `${SITE.origin + SITE.base}assets/og.png`, w: 1200, h: 630, alt: "A strawberry made of soft 3D splats, beside the word Splashery", card: "summary_large_image" }; // prettier-ignore
+  return `<meta property="og:image" content="${esc(img.src)}" />
+<meta property="og:image:width" content="${img.w}" />
+<meta property="og:image:height" content="${img.h}" />
+<meta property="og:image:alt" content="${esc(img.alt)}" />
+<meta name="twitter:card" content="${img.card}" />`;
+}
+
 function shell(page, main, { up, url, fixedBase = false }) {
   const title = page.title.includes("Splashery") ? page.title : `${page.title} · Splashery`;
   const desc = plain(page.description);
@@ -123,11 +136,7 @@ ${SITE.preview ? '<meta name="robots" content="noindex" />' : ""}
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(desc)}" />
 <meta property="og:url" content="${esc(url)}" />
-<meta property="og:image" content="${esc(SITE.origin + SITE.base)}assets/og.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="A strawberry made of soft 3D splats, beside the word Splashery" />
-<meta name="twitter:card" content="summary_large_image" />
+${ogImage(page)}
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
@@ -186,7 +195,7 @@ const publicToys = TOYS.filter((t) => t.category);
 function toyCard(t, up) {
   const thumb = thumbHref(t);
   const labs = t.labs ? " data-labs" : "";
-  return `<li class="toy-card"${labs}><a href="${up}${galleryHref(t)}">${thumb ? `<img src="${up}${thumb}" alt="" width="96" height="96" loading="lazy" decoding="async" />` : `<span class="no-thumb" aria-hidden="true"></span>`}<span class="toy-name">${esc(t.label)}${t.labs ? ' <span class="badge">labs</span>' : ""}</span></a></li>`; // prettier-ignore
+  return `<li class="toy-card"${labs}><a href="${up}${toyPath(t)}">${thumb ? `<img src="${up}${thumb}" alt="" width="96" height="96" loading="lazy" decoding="async" />` : `<span class="no-thumb" aria-hidden="true"></span>`}<span class="toy-name">${esc(t.label)}${t.labs ? ' <span class="badge">labs</span>' : ""}</span></a></li>`; // prettier-ignore
 }
 
 function shelfSections(ids, up, headingLevel = 2) {
@@ -277,7 +286,7 @@ const PAGE_TYPES = {
       .filter((t) => t && !t.labs)
       .map(
         (t) =>
-          `<li><a href="${up}${galleryHref(t)}"><img src="${up}${thumbHref(t)}" alt="" width="120" height="120" loading="lazy" decoding="async" /><span class="feat-name">${esc(t.label)}</span><span class="feat-shelf">${esc(shelfName(t.category))}</span></a></li>`,
+          `<li><a href="${up}${toyPath(t)}"><img src="${up}${thumbHref(t)}" alt="" width="120" height="120" loading="lazy" decoding="async" /><span class="feat-name">${esc(t.label)}</span><span class="feat-shelf">${esc(shelfName(t.category))}</span></a></li>`,
       ) // prettier-ignore
       .join("");
     return `<section class="hero" aria-labelledby="h-home">
@@ -317,7 +326,9 @@ const PAGE_TYPES = {
 
   shelves(page, { up }) {
     const n = countToys(page.shelves);
-    return `${intro(page, `<p><a class="button primary" href="${up}../">Open the gallery${arrow}</a></p>`, `${n} toys`)}
+    // The catalog PDF (lane Toy pages: tools/tpg-catalog.mjs), labs only for now.
+    const catalog = page.catalog ? `<a class="button" data-labs href="${up}${page.catalog.file}" download>Download the catalog <span class="note">(PDF, ${(fs.statSync(path.join(OUT, page.catalog.file)).size / 1e6).toFixed(1)} MB)</span></a>` : ""; // prettier-ignore
+    return `${intro(page, `<p class="actions"><a class="button primary" href="${up}../">Open the gallery${arrow}</a>${catalog}</p>`, `${n} toys`)}
 ${shelfIndex(page.shelves)}
 ${shelfSections(page.shelves, up)}`;
   },
@@ -405,6 +416,9 @@ ${dates}
 <script type="module" src="../assets/search.js"></script>`;
   },
 
+  // A page for every toy (lane Toy pages): tools/site-toy-pages.mjs.
+  toy: (page, ctx) => toyPage(page, { ...ctx, esc, toyCard, galleryHref, thumbHref, shelfName, howTo, arrow }), // prettier-ignore
+
   notFound() {
     return `<div class="page-intro"><h1>This page isn't here</h1>
 <p class="lead">It may have moved. Try a search, or start from the home page.</p></div>
@@ -461,7 +475,7 @@ async function searchEntries() {
     const how = await howTo(t);
     out.push({
       t: t.label,
-      u: galleryHref(t),
+      u: toyPath(t),
       k: "toy",
       s: shelfName(t.category),
       d: how,
@@ -471,7 +485,7 @@ async function searchEntries() {
     });
   }
   for (const p of PAGES) {
-    if (p.type === "search") continue;
+    if (p.type === "search" || p.type === "toy") continue;
     out.push({
       t: p.path ? p.title : "Home",
       u: p.path,
@@ -538,7 +552,7 @@ function manifest() {
 }
 
 function sitemap() {
-  const urls = PAGES.map((p) => `${SITE.origin}${SITE.base}${p.path}`);
+  const urls = PAGES.filter((p) => p.sitemap !== false).map((p) => `${SITE.origin}${SITE.base}${p.path}`); // prettier-ignore
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${esc(u)}</loc></url>`).join("\n")}
@@ -570,8 +584,9 @@ async function pretty(file, text) {
 const files = new Map(); // path under site/ -> contents
 for (const page of PAGES) {
   const up = upTo(page.path);
-  const main = await PAGE_TYPES[page.type](page, { up });
-  files.set(`${page.path}index.html`, shell(page, main, { up, url: `${SITE.origin}${SITE.base}${page.path}` })); // prettier-ignore
+  const url = `${SITE.origin}${SITE.base}${page.path}`;
+  const main = await PAGE_TYPES[page.type](page, { up, url });
+  files.set(`${page.path}index.html`, shell(page, main, { up, url }));
 }
 files.set(
   NOT_FOUND.file,
@@ -603,7 +618,7 @@ const handWritten = fs
   .map((f) => `assets/${f}`);
 const precache = [
   "./",
-  ...PAGES.filter((p) => p.path).map((p) => p.path),
+  ...PAGES.filter((p) => p.path && p.precache !== false).map((p) => p.path),
   NOT_FOUND.file,
   "play/",
   "search-index.json",
@@ -624,7 +639,7 @@ files.set("sw.js", await pretty("sw.js", serviceWorker(version, precache)));
 // (tools/upkeep.mjs) rebuilds them after each merge. --check reports them but
 // fails only on the rest: the shell, the hand-written pages and everything else
 // the build makes. A new page type that reads toys belongs in TOY_TYPES.
-const TOY_TYPES = new Set(["home", "shelves", "tools", "about", "changelog"]);
+const TOY_TYPES = new Set(["home", "shelves", "tools", "about", "changelog", "toy"]);
 const followsMain = new Set([
   ...PAGES.filter((p) => TOY_TYPES.has(p.type)).map((p) => `${p.path}index.html`),
   "search-index.json",
@@ -647,6 +662,15 @@ for (const [f, text] of files) {
   }
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, text);
+}
+// A toy that leaves the list takes its page with it.
+for (const dir of fs.existsSync(path.join(OUT, "toys"))
+  ? fs.readdirSync(path.join(OUT, "toys"))
+  : []) {
+  if (!fs.statSync(path.join(OUT, "toys", dir)).isDirectory() || toyPageDirs().has(dir)) continue;
+  stale++;
+  if (CHECK) console.log(`follows main (rebuilt by the upkeep): site/toys/${dir}/`);
+  else fs.rmSync(path.join(OUT, "toys", dir), { recursive: true });
 }
 if (CHECK && staleShell) {
   console.log("Run: node tools/site-build.mjs");

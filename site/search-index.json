@@ -1,7 +1,7 @@
 [
   {
     "t": "Cactus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhY3R1cyJ9fQ",
+    "u": "toys/cactus/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to open a ring of flowers around its top.",
@@ -10,7 +10,7 @@
   },
   {
     "t": "Strawberry",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0cmF3YmVycnkifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjUuNn19",
+    "u": "toys/strawberry/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to pop out its seeds.",
@@ -19,7 +19,7 @@
   },
   {
     "t": "Heart cookie",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvb2tpZSJ9fQ",
+    "u": "toys/cookie/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make the jam heart beat.",
@@ -28,7 +28,7 @@
   },
   {
     "t": "Honeybee",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJlZSJ9fQ",
+    "u": "toys/bee/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it buzz its wings and lift off.",
@@ -37,7 +37,7 @@
   },
   {
     "t": "Torus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvcnVzIn0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuNjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "u": "toys/torus/",
     "k": "toy",
     "s": "Shapes",
     "d": "Tap it to spin it on its edge. Dress it as a donut, bagel or swim ring in the Toy tab.",
@@ -46,7 +46,7 @@
   },
   {
     "t": "Jelly blob",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsb2IifX0",
+    "u": "toys/blob/",
     "k": "toy",
     "s": "Shapes",
     "d": "Tap it to split it into three. Make a shape of your own in the Make tab.",
@@ -55,7 +55,7 @@
   },
   {
     "t": "Neon knot",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imtub3QifX0",
+    "u": "toys/knot/",
     "k": "toy",
     "s": "Shapes",
     "d": "Tap it to make it twist and writhe.",
@@ -64,7 +64,7 @@
   },
   {
     "t": "Cluster fly",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsdXN0ZXItZmx5In19",
+    "u": "toys/cluster-fly/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it groom its legs and face.",
@@ -73,7 +73,7 @@
   },
   {
     "t": "May beetle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1heS1iZWV0bGUifX0",
+    "u": "toys/may-beetle/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to lift its wing cases and fan its antennae.",
@@ -82,7 +82,7 @@
   },
   {
     "t": "Millipede",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pbGxpcGVkZSJ9fQ",
+    "u": "toys/millipede/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to send a wave down its legs.",
@@ -91,7 +91,7 @@
   },
   {
     "t": "Carder bumblebee",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1bWJsZWJlZSJ9fQ",
+    "u": "toys/bumblebee/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hover.",
@@ -100,7 +100,7 @@
   },
   {
     "t": "Raspberry",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJhc3BiZXJyeSJ9fQ",
+    "u": "toys/raspberry/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to drop its drupelets and put them back.",
@@ -109,7 +109,7 @@
   },
   {
     "t": "Blackberry",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsYWNrYmVycnkifX0",
+    "u": "toys/blackberry/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to burst off its drupelets.",
@@ -118,7 +118,7 @@
   },
   {
     "t": "Blueberry",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsdWViZXJyeSJ9fQ",
+    "u": "toys/blueberry/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to peel back its skin.",
@@ -127,7 +127,7 @@
   },
   {
     "t": "Grape",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBlIn19",
+    "u": "toys/grape/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to peel back the skin.",
@@ -136,7 +136,7 @@
   },
   {
     "t": "Cinnamon star cookie",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItY29va2llIn19",
+    "u": "toys/star-cookie/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to crumble it and put it back together.",
@@ -145,7 +145,7 @@
   },
   {
     "t": "Tomatoes",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvbWF0b2VzIn19",
+    "u": "toys/tomatoes/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make the tomatoes hop and rock. With ✋ on, drag a tomato to lift it and set it down.",
@@ -154,7 +154,7 @@
   },
   {
     "t": "Mandeltorus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hbmRlbHRvcnVzIn19",
+    "u": "toys/mandeltorus/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to spin its rings opposite ways.",
@@ -163,7 +163,7 @@
   },
   {
     "t": "Basket",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC43OCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "u": "toys/basket/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to shake the shells.",
@@ -172,7 +172,7 @@
   },
   {
     "t": "Heart donut",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlYXJ0LWRvbnV0In19",
+    "u": "toys/heart-donut/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -182,7 +182,7 @@
   },
   {
     "t": "Sushi boat",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1c2hpLWJvYXQifX0",
+    "u": "toys/sushi-boat/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -192,7 +192,7 @@
   },
   {
     "t": "Seeded bread loaf",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlZWRlZC1sb2FmIn19",
+    "u": "toys/seeded-loaf/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -202,7 +202,7 @@
   },
   {
     "t": "Cowboy steak",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0ZWFrIn19",
+    "u": "toys/steak/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -212,7 +212,7 @@
   },
   {
     "t": "Stollen",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b2xsZW4ifX0",
+    "u": "toys/stollen/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -222,7 +222,7 @@
   },
   {
     "t": "Orange (photo)",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZS1waG90byJ9fQ",
+    "u": "toys/orange-photo/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -232,7 +232,7 @@
   },
   {
     "t": "Physalis",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBoeXNhbGlzIn19",
+    "u": "toys/physalis/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -242,7 +242,7 @@
   },
   {
     "t": "Crystal",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeXN0YWwtZ2VtIn19",
+    "u": "toys/crystal-gem/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -252,7 +252,7 @@
   },
   {
     "t": "Alum crystal",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFsdW0tY3J5c3RhbCJ9fQ",
+    "u": "toys/alum-crystal/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -262,7 +262,7 @@
   },
   {
     "t": "Puffin",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1ZmZpbiJ9fQ",
+    "u": "toys/puffin/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -272,7 +272,7 @@
   },
   {
     "t": "Toy T. rex",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRveS10cmV4In19",
+    "u": "toys/toy-trex/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -282,7 +282,7 @@
   },
   {
     "t": "Monkey doll",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbmtleS1kb2xsIn19",
+    "u": "toys/monkey-doll/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -292,7 +292,7 @@
   },
   {
     "t": "Souvenir elephant",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZXBoYW50LXNvdXZlbmlyIn19",
+    "u": "toys/elephant-souvenir/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -302,7 +302,7 @@
   },
   {
     "t": "Souvenir turtle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InR1cnRsZS1zb3V2ZW5pciJ9fQ",
+    "u": "toys/turtle-souvenir/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -312,7 +312,7 @@
   },
   {
     "t": "Cave lioness",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhdmUtbGlvbmVzcyJ9fQ",
+    "u": "toys/cave-lioness/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -322,7 +322,7 @@
   },
   {
     "t": "Dog plush",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRvZy1wbHVzaCJ9fQ",
+    "u": "toys/dog-plush/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -332,7 +332,7 @@
   },
   {
     "t": "BMX bicycle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJteC1iaWtlIn19",
+    "u": "toys/bmx-bike/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -342,7 +342,7 @@
   },
   {
     "t": "Murex shell",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11cmV4LXNoZWxsIn19",
+    "u": "toys/murex-shell/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -352,7 +352,7 @@
   },
   {
     "t": "Sunflower (photo)",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1bmZsb3dlci1waG90byJ9fQ",
+    "u": "toys/sunflower-photo/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -362,7 +362,7 @@
   },
   {
     "t": "White roses",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLXJvc2VzIn19",
+    "u": "toys/white-roses/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -372,7 +372,7 @@
   },
   {
     "t": "Bonsai tree (photo)",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvbnNhaS1waG90byJ9fQ",
+    "u": "toys/bonsai-photo/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -382,7 +382,7 @@
   },
   {
     "t": "Mushroom (photo)",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2hyb29tLXBob3RvIn19",
+    "u": "toys/mushroom-photo/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -392,7 +392,7 @@
   },
   {
     "t": "Cactus (photo 2)",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhY3R1cy1yZWFsIn19",
+    "u": "toys/cactus-real/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -402,7 +402,7 @@
   },
   {
     "t": "Crochet Earth",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb2NoZXQtZWFydGgifX0",
+    "u": "toys/crochet-earth/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -412,7 +412,7 @@
   },
   {
     "t": "Desk globe",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRlc2stZ2xvYmUifX0",
+    "u": "toys/desk-globe/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -422,7 +422,7 @@
   },
   {
     "t": "Cherry blossom (photo)",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXJyeS1ibG9zc29tLXBob3RvIn19",
+    "u": "toys/cherry-blossom-photo/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -432,7 +432,7 @@
   },
   {
     "t": "Golden maple",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcGxlLXRyZWUifX0",
+    "u": "toys/maple-tree/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -442,7 +442,7 @@
   },
   {
     "t": "Peonies in a vase",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlb255In19",
+    "u": "toys/peony/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -452,7 +452,7 @@
   },
   {
     "t": "Money tree",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbmV5LXRyZWUifX0",
+    "u": "toys/money-tree/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -462,7 +462,7 @@
   },
   {
     "t": "Knight on a horse",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtuaWdodC1ob3JzZSJ9fQ",
+    "u": "toys/knight-horse/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop; drag to turn it.",
@@ -472,7 +472,7 @@
   },
   {
     "t": "Real rubber duck",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1YmJlci1kdWNrLXJlYWwifX0",
+    "u": "toys/rubber-duck-real/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to squeeze it.",
@@ -481,7 +481,7 @@
   },
   {
     "t": "Garden gnome",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhcmRlbi1nbm9tZSJ9fQ",
+    "u": "toys/garden-gnome/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it hop and light its lantern.",
@@ -490,7 +490,7 @@
   },
   {
     "t": "Wooden elephant",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Indvb2Rlbi1lbGVwaGFudCJ9fQ",
+    "u": "toys/wooden-elephant/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to raise its trunk and trumpet.",
@@ -499,7 +499,7 @@
   },
   {
     "t": "Marble bust",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcmJsZS1idXN0In19",
+    "u": "toys/marble-bust/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it turn and say hello in Latin.",
@@ -508,7 +508,7 @@
   },
   {
     "t": "Ukulele",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVrdWxlbGUifX0",
+    "u": "toys/ukulele/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to strum a chord.",
@@ -517,7 +517,7 @@
   },
   {
     "t": "Real alarm clock",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFsYXJtLWNsb2NrIn19",
+    "u": "toys/alarm-clock/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to ring the bells.",
@@ -526,7 +526,7 @@
   },
   {
     "t": "Vintage camera",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpbnRhZ2UtY2FtZXJhIn19",
+    "u": "toys/vintage-camera/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to take a photo with a flash.",
@@ -535,7 +535,7 @@
   },
   {
     "t": "Boombox",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvb21ib3gifX0",
+    "u": "toys/boombox/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to play a beat.",
@@ -544,7 +544,7 @@
   },
   {
     "t": "Real croissant",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb2lzc2FudC1yZWFsIn19",
+    "u": "toys/croissant-real/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to tear it open.",
@@ -553,7 +553,7 @@
   },
   {
     "t": "Carrot cake",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhcnJvdC1jYWtlIn19",
+    "u": "toys/carrot-cake/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to lift out a slice.",
@@ -562,7 +562,7 @@
   },
   {
     "t": "Pomegranate",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvbWVncmFuYXRlIn19",
+    "u": "toys/pomegranate/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to split it open.",
@@ -571,7 +571,7 @@
   },
   {
     "t": "Lantern",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhbnRlcm4ifX0",
+    "u": "toys/lantern/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap to light the lantern; tap again to put it out.",
@@ -580,7 +580,7 @@
   },
   {
     "t": "Cat statue",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhdC1zdGF0dWUifX0",
+    "u": "toys/cat-statue/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it look around and mew.",
@@ -589,7 +589,7 @@
   },
   {
     "t": "Horse statue",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhvcnNlLXN0YXR1ZSJ9fQ",
+    "u": "toys/horse-statue/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to make it rear up.",
@@ -598,7 +598,7 @@
   },
   {
     "t": "Real pencil",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlbmNpbC1yZWFsIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/pencil-real/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to spin it on the desk. Pick its color under Look in the Toy tab.",
@@ -607,7 +607,7 @@
   },
   {
     "t": "Real tin can",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRpbi1jYW4tcmVhbCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "u": "toys/tin-can-real/",
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to knock it into a spin. Pick its label under Look in the Toy tab.",
@@ -616,7 +616,7 @@
   },
   {
     "t": "Basketball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldGJhbGwifX0",
+    "u": "toys/basketball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to dribble it. Hands-on: hold it and flick up to spin it on your fingertip.",
@@ -625,7 +625,7 @@
   },
   {
     "t": "Soccer ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvY2Nlci1iYWxsIn19",
+    "u": "toys/soccer-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it for keepy-uppy: three kicks in the air, then it bounces to a stop.",
@@ -634,7 +634,7 @@
   },
   {
     "t": "American football",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFtZXJpY2FuLWZvb3RiYWxsIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjYyLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/american-football/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to throw a spiral pass.",
@@ -643,7 +643,7 @@
   },
   {
     "t": "Tennis ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlbm5pcy1iYWxsIn19",
+    "u": "toys/tennis-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to slam it down and watch it bounce high.",
@@ -652,7 +652,7 @@
   },
   {
     "t": "Baseball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsIn19",
+    "u": "toys/baseball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to pitch a curveball and hit it back.",
@@ -661,7 +661,7 @@
   },
   {
     "t": "Softball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvZnRiYWxsIn19",
+    "u": "toys/softball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to pitch it underhand in a slow, high arc.",
@@ -670,7 +670,7 @@
   },
   {
     "t": "Beach ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJlYWNoLWJhbGwifX0",
+    "u": "toys/beach-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to toss it up. Hands-on: toss it and it floats and drifts down.",
@@ -679,7 +679,7 @@
   },
   {
     "t": "Golf ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdvbGYtYmFsbCJ9fQ",
+    "u": "toys/golf-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to chip it; the backspin pulls it back.",
@@ -688,7 +688,7 @@
   },
   {
     "t": "Rugby ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1Z2J5LWJhbGwifX0",
+    "u": "toys/rugby-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to punt it end over end.",
@@ -697,7 +697,7 @@
   },
   {
     "t": "Volleyball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbGxleWJhbGwifX0",
+    "u": "toys/volleyball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to set it up and spike it down.",
@@ -706,7 +706,7 @@
   },
   {
     "t": "Water polo ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVyLXBvbG8tYmFsbCJ9fQ",
+    "u": "toys/water-polo-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to toss it in. Hands-on: drop it on the water and it bobs and floats.",
@@ -715,7 +715,7 @@
   },
   {
     "t": "Ping-pong ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmctcG9uZy1iYWxsIn19",
+    "u": "toys/ping-pong-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to flick it up and let it bounce to a buzz.",
@@ -724,7 +724,7 @@
   },
   {
     "t": "Cricket ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyaWNrZXQtYmFsbCJ9fQ",
+    "u": "toys/cricket-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to flick it seam up; it skids with backspin, then rolls home.",
@@ -733,7 +733,7 @@
   },
   {
     "t": "Bowling ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvd2xpbmctYmFsbCJ9fQ",
+    "u": "toys/bowling-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to bowl it down the lane with a hook.",
@@ -742,7 +742,7 @@
   },
   {
     "t": "Pool ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvb2wtYmFsbCJ9fQ",
+    "u": "toys/pool-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it for a draw shot: it slides out and spins back. Pick its number in the Toy tab.",
@@ -751,7 +751,7 @@
   },
   {
     "t": "Pickleball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY2tsZWJhbGwifX0",
+    "u": "toys/pickleball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to pop it up off a paddle.",
@@ -760,7 +760,7 @@
   },
   {
     "t": "Dodgeball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRvZGdlYmFsbCJ9fQ",
+    "u": "toys/dodgeball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to slam it down and watch it squash.",
@@ -769,7 +769,7 @@
   },
   {
     "t": "Medicine ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lZGljaW5lLWJhbGwifX0",
+    "u": "toys/medicine-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to heave it up and drop it with a thud.",
@@ -778,7 +778,7 @@
   },
   {
     "t": "Lacrosse ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhY3Jvc3NlLWJhbGwifX0",
+    "u": "toys/lacrosse-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to slam it down; it bounces hard and fast.",
@@ -787,7 +787,7 @@
   },
   {
     "t": "Squash ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNxdWFzaC1iYWxsIn19",
+    "u": "toys/squash-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to warm it up; the warmer it gets, the higher it bounces.",
@@ -796,7 +796,7 @@
   },
   {
     "t": "Bouncy ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvdW5jeS1iYWxsIn19",
+    "u": "toys/bouncy-ball/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to throw it down and watch it ricochet.",
@@ -805,7 +805,7 @@
   },
   {
     "t": "Marble",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcmJsZSJ9fQ",
+    "u": "toys/marble/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to roll it around a little circle.",
@@ -814,7 +814,7 @@
   },
   {
     "t": "Hockey puck",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhvY2tleS1wdWNrIn19",
+    "u": "toys/hockey-puck/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it for a slap shot across the ice.",
@@ -823,7 +823,7 @@
   },
   {
     "t": "Shuttlecock",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNodXR0bGVjb2NrIn19",
+    "u": "toys/shuttlecock/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to hit it up; it flips over and floats down cork first.",
@@ -832,7 +832,7 @@
   },
   {
     "t": "Flying disc",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZseWluZy1kaXNjIn19",
+    "u": "toys/flying-disc/",
     "k": "toy",
     "s": "Balls",
     "d": "Tap it to throw it around a loop and back.",
@@ -841,7 +841,7 @@
   },
   {
     "t": "Beating heart",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlYXJ0In19",
+    "u": "toys/heart/",
     "k": "toy",
     "s": "Body",
     "d": "Tap it to set it racing. Set its beat, or pick a love heart, in the Toy tab.",
@@ -850,7 +850,7 @@
   },
   {
     "t": "Campfire",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbXBmaXJlIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzgsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "u": "toys/campfire/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to stoke the fire. Set the fire's size in the Toy tab.",
@@ -859,7 +859,7 @@
   },
   {
     "t": "Treasure chest",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXN0In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NS40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/chest/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to open or close the lid. With ✋ on, lift the lid by hand: let go high and it stays open.",
@@ -868,7 +868,7 @@
   },
   {
     "t": "Sun",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1biJ9fQ",
+    "u": "toys/sun/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to set off a solar flare.",
@@ -877,7 +877,7 @@
   },
   {
     "t": "Solar system",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbGFyLXN5c3RlbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC43Miwicm9sbCI6MCwiZGlzdGFuY2UiOjMuN319",
+    "u": "toys/solar-system/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to line up the planets and watch Mercury cross the Sun.",
@@ -886,7 +886,7 @@
   },
   {
     "t": "Mercury",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lcmN1cnkifX0",
+    "u": "toys/mercury/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to spin it fast in the sunlight.",
@@ -895,7 +895,7 @@
   },
   {
     "t": "Venus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZlbnVzIn19",
+    "u": "toys/venus/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to whip the clouds around.",
@@ -904,7 +904,7 @@
   },
   {
     "t": "Earth",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRoIn19",
+    "u": "toys/earth/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to turn it through one day and night.",
@@ -913,7 +913,7 @@
   },
   {
     "t": "Moon",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vb24ifX0",
+    "u": "toys/moon/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to land a lunar module; tap again to pack up and lift off. Pick the flag in the Toy tab.",
@@ -922,7 +922,7 @@
   },
   {
     "t": "Mars",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcnMifX0",
+    "u": "toys/mars/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to raise a dust storm.",
@@ -931,7 +931,7 @@
   },
   {
     "t": "Jupiter",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imp1cGl0ZXIifX0",
+    "u": "toys/jupiter/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to race the cloud bands and spin up the Great Red Spot.",
@@ -940,7 +940,7 @@
   },
   {
     "t": "Saturn",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhdHVybiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuM319",
+    "u": "toys/saturn/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to send ripples across the rings.",
@@ -949,7 +949,7 @@
   },
   {
     "t": "Uranus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVyYW51cyJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "u": "toys/uranus/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to roll it on its side like a wheel.",
@@ -958,7 +958,7 @@
   },
   {
     "t": "Neptune",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lcHR1bmUifX0",
+    "u": "toys/neptune/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to race the clouds around it.",
@@ -967,7 +967,7 @@
   },
   {
     "t": "Tiny planet",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYW5ldCJ9fQ",
+    "u": "toys/planet/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to sweep night across it. Pick a planet under Planet in the Toy tab.",
@@ -976,7 +976,7 @@
   },
   {
     "t": "Aurora world",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF1cm9yYS1wbGFuZXQifX0",
+    "u": "toys/aurora-planet/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it for a burst of bright auroras.",
@@ -985,7 +985,7 @@
   },
   {
     "t": "Asteroid",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFzdGVyb2lkIn19",
+    "u": "toys/asteroid/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to break it apart; its pieces pull back together.",
@@ -994,7 +994,7 @@
   },
   {
     "t": "Comet",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbWV0In19",
+    "u": "toys/comet/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to swing it past the Sun and flare its tails.",
@@ -1003,7 +1003,7 @@
   },
   {
     "t": "Meteor",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1ldGVvciJ9fQ",
+    "u": "toys/meteor/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to send it streaking in to burst in a fireball.",
@@ -1012,7 +1012,7 @@
   },
   {
     "t": "Star",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXIifX0",
+    "u": "toys/star/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to run the star's life, sped up. Pick the kind of star in the Toy tab.",
@@ -1021,7 +1021,7 @@
   },
   {
     "t": "Pulsar",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1bHNhciJ9fQ",
+    "u": "toys/pulsar/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to spin it up. Set its spin speed in the Toy tab.",
@@ -1030,7 +1030,7 @@
   },
   {
     "t": "Black hole",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsYWNrLWhvbGUifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMTYsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ",
+    "u": "toys/black-hole/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to feed it a star.",
@@ -1039,7 +1039,7 @@
   },
   {
     "t": "Star cluster",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItY2x1c3RlciJ9fQ",
+    "u": "toys/star-cluster/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to make the cluster breathe in and out.",
@@ -1048,7 +1048,7 @@
   },
   {
     "t": "Ring nebula",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYW5ldGFyeS1uZWJ1bGEifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "u": "toys/planetary-nebula/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to blow out a new shell of gas.",
@@ -1057,7 +1057,7 @@
   },
   {
     "t": "Nebula",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lYnVsYSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/nebula/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it to light new stars in the clouds. Pick its colors in the Toy tab.",
@@ -1066,7 +1066,7 @@
   },
   {
     "t": "Supernova",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cGVybm92YSJ9fQ",
+    "u": "toys/supernova/",
     "k": "toy",
     "s": "Space",
     "d": "Tap it for a flash and a blast that blows the glowing shell apart.",
@@ -1075,7 +1075,7 @@
   },
   {
     "t": "Spiral galaxy",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwaXJhbC1nYWxheHkifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuOSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNX19",
+    "u": "toys/spiral-galaxy/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to swirl the arms. Pick a galaxy style in the Toy tab.",
@@ -1084,7 +1084,7 @@
   },
   {
     "t": "Virus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpcnVzIn19",
+    "u": "toys/virus/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to make copies that bud off and drift away.",
@@ -1093,7 +1093,7 @@
   },
   {
     "t": "Bacteriophage",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhY3RlcmlvcGhhZ2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/bacteriophage/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to land and inject its DNA.",
@@ -1102,7 +1102,7 @@
   },
   {
     "t": "Bacterium",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhY3Rlcml1bSJ9fQ",
+    "u": "toys/bacterium/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to make it divide in two. Try the Swim slider in the Toy tab.",
@@ -1111,7 +1111,7 @@
   },
   {
     "t": "Red blood cell",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlZC1ibG9vZC1jZWxsIn19",
+    "u": "toys/red-blood-cell/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to curl it into a sickle shape and back.",
@@ -1120,7 +1120,7 @@
   },
   {
     "t": "Neuron",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ldXJvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "u": "toys/neuron/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to fire a signal. Try the Signal slider in the Toy tab.",
@@ -1129,7 +1129,7 @@
   },
   {
     "t": "Astrocyte",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFzdHJvY3l0ZSJ9fQ",
+    "u": "toys/astrocyte/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to send a calcium wave out along its arms.",
@@ -1138,7 +1138,7 @@
   },
   {
     "t": "Animal cell",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFuaW1hbC1jZWxsIn19",
+    "u": "toys/animal-cell/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to divide it in two. Switch off the Cutaway in the Toy tab to see it whole.",
@@ -1147,7 +1147,7 @@
   },
   {
     "t": "DNA",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRuYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "u": "toys/dna/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to unzip it and zip it back up.",
@@ -1156,7 +1156,7 @@
   },
   {
     "t": "White blood cell",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLWJsb29kLWNlbGwifX0",
+    "u": "toys/white-blood-cell/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to catch a bacterium and eat it up.",
@@ -1165,7 +1165,7 @@
   },
   {
     "t": "Microglia",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pY3JvZ2xpYSJ9fQ",
+    "u": "toys/microglia/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to reach out its arms and sweep them to and fro.",
@@ -1174,7 +1174,7 @@
   },
   {
     "t": "Diatom",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpYXRvbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ",
+    "u": "toys/diatom/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to make the glass shell glint and open.",
@@ -1183,7 +1183,7 @@
   },
   {
     "t": "Tardigrade",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRhcmRpZ3JhZGUifX0",
+    "u": "toys/tardigrade/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to make it wiggle.",
@@ -1192,7 +1192,7 @@
   },
   {
     "t": "Pollen grain",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvbGxlbiJ9fQ",
+    "u": "toys/pollen/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to burst out a puff of tiny grains. Pick the Plant in the Toy tab.",
@@ -1201,7 +1201,7 @@
   },
   {
     "t": "Snowflake",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNub3dmbGFrZSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjE1LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/snowflake/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap to melt it and grow a new flake. Pick the kind of crystal in the Toy tab.",
@@ -1210,7 +1210,7 @@
   },
   {
     "t": "Chromosome",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNocm9tb3NvbWUifX0",
+    "u": "toys/chromosome/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to pull its two halves apart.",
@@ -1219,7 +1219,7 @@
   },
   {
     "t": "Mitochondrion",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pdG9jaG9uZHJpb24ifX0",
+    "u": "toys/mitochondrion/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to power it up. Switch off the Cutaway in the Toy tab to see it whole.",
@@ -1228,7 +1228,7 @@
   },
   {
     "t": "Paramecium",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcmFtZWNpdW0ifX0",
+    "u": "toys/paramecium/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to swim a loop. Try the Swim slider in the Toy tab.",
@@ -1237,7 +1237,7 @@
   },
   {
     "t": "Amoeba",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFtb2ViYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/amoeba/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Drag it to pull out a pseudopod; let go and it oozes back. Tap it to make it crawl.",
@@ -1246,7 +1246,7 @@
   },
   {
     "t": "Electron orbital",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYml0YWwifX0",
+    "u": "toys/orbital/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap it to excite the electron. Pick any orbital up to 4f, or lobes, in the Toy tab.",
@@ -1255,7 +1255,7 @@
   },
   {
     "t": "Atom",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF0b20ifX0",
+    "u": "toys/atom/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap it to speed up the electrons. Pick any of the 118 elements in the Toy tab.",
@@ -1264,7 +1264,7 @@
   },
   {
     "t": "Molecule",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19",
+    "u": "toys/molecule/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
@@ -1273,7 +1273,7 @@
   },
   {
     "t": "Protein",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3RlaW4ifX0",
+    "u": "toys/protein/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap it to pull it apart. Pick a protein, or open your own file, in the Toy tab.",
@@ -1282,7 +1282,7 @@
   },
   {
     "t": "Crystal lattice",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeXN0YWwtbGF0dGljZSJ9fQ",
+    "u": "toys/crystal-lattice/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
@@ -1291,7 +1291,7 @@
   },
   {
     "t": "Periodic table",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmlvZGljLXRhYmxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/periodic-table/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap a tile to raise its atom, again to lower it. Tap the board for a tour, 57-71 for its row.",
@@ -1300,7 +1300,7 @@
   },
   {
     "t": "Diamond",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpYW1vbmQifX0",
+    "u": "toys/diamond/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap it to turn it in the light and flash its fire.",
@@ -1309,7 +1309,7 @@
   },
   {
     "t": "Ruby",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1YnkifX0",
+    "u": "toys/ruby/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap it to make it glow deep red.",
@@ -1318,7 +1318,7 @@
   },
   {
     "t": "Emerald",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVtZXJhbGQifX0",
+    "u": "toys/emerald/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap it to send green light spiraling around its steps.",
@@ -1327,7 +1327,7 @@
   },
   {
     "t": "Amethyst geode",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFtZXRoeXN0LWdlb2RlIn19",
+    "u": "toys/amethyst-geode/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap to close the geode; tap again to open it.",
@@ -1336,7 +1336,7 @@
   },
   {
     "t": "Sapphire",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhcHBoaXJlIn19",
+    "u": "toys/sapphire/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap it to catch the six-rayed star gliding across it.",
@@ -1345,7 +1345,7 @@
   },
   {
     "t": "Quartz cluster",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InF1YXJ0ei1jbHVzdGVyIn19",
+    "u": "toys/quartz-cluster/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap it to light the crystal points one by one.",
@@ -1354,7 +1354,7 @@
   },
   {
     "t": "Opal",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9wYWwifX0",
+    "u": "toys/opal/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap it to tilt it and roll flashes of color across it. Pick an opal in the Toy tab.",
@@ -1363,7 +1363,7 @@
   },
   {
     "t": "Pearl",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlYXJsIn19",
+    "u": "toys/pearl/",
     "k": "toy",
     "s": "Gems",
     "d": "Tap to close the oyster; tap again to open it.",
@@ -1372,7 +1372,7 @@
   },
   {
     "t": "Brain",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJyYWluIn19",
+    "u": "toys/brain/",
     "k": "toy",
     "s": "Body",
     "d": "Tap it to think. Try the Sparks slider in the Toy tab.",
@@ -1381,7 +1381,7 @@
   },
   {
     "t": "Eye",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImV5ZSJ9fQ",
+    "u": "toys/eye/",
     "k": "toy",
     "s": "Body",
     "d": "Tap it to blink. Try the Pupil slider in the Toy tab.",
@@ -1390,7 +1390,7 @@
   },
   {
     "t": "Lungs",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imx1bmdzIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "u": "toys/lungs/",
     "k": "toy",
     "s": "Body",
     "d": "Tap for a deep breath. Try the Breath slider in the Toy tab.",
@@ -1399,7 +1399,7 @@
   },
   {
     "t": "Tooth",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvb3RoIn19",
+    "u": "toys/tooth/",
     "k": "toy",
     "s": "Body",
     "d": "Tap it to polish it until it sparkles.",
@@ -1408,7 +1408,7 @@
   },
   {
     "t": "Kidney",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtpZG5leSJ9fQ",
+    "u": "toys/kidney/",
     "k": "toy",
     "s": "Body",
     "d": "Tap it to pump blood through it.",
@@ -1417,7 +1417,7 @@
   },
   {
     "t": "Anatomy atlas",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFuYXRvbXktYXRsYXMifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/anatomy-atlas/",
     "k": "toy",
     "s": "Body",
     "d": "Tap to peel off a layer; after the organs, tap to put them all back. Try Labels.",
@@ -1427,7 +1427,7 @@
   },
   {
     "t": "Oak tree",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9hayJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/oak/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to shake down its leaves. Pick a season in the Toy tab.",
@@ -1436,7 +1436,7 @@
   },
   {
     "t": "Pine tree",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmUifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/pine/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to shake the snow off. Turn on Snow in the Toy tab for a snowy day.",
@@ -1445,7 +1445,7 @@
   },
   {
     "t": "Palm tree",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhbG0ifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/palm/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to shake down the coconuts.",
@@ -1454,7 +1454,7 @@
   },
   {
     "t": "Cherry blossom",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXJyeS1ibG9zc29tIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/cherry-blossom/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to shake down the blossom and watch it bloom again.",
@@ -1463,7 +1463,7 @@
   },
   {
     "t": "Maple tree",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/maple/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to send a gust whirling through. Pick the leaf color in the Toy tab.",
@@ -1472,7 +1472,7 @@
   },
   {
     "t": "Bonsai",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvbnNhaSJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/bonsai/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to grow a new branch, then trim it.",
@@ -1481,7 +1481,7 @@
   },
   {
     "t": "Weeping willow",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndpbGxvdyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/willow/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to send a breeze through the hanging branches.",
@@ -1490,7 +1490,7 @@
   },
   {
     "t": "Sunflower",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1bmZsb3dlciJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/sunflower/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to bring out the sun and watch the flower turn to face it.",
@@ -1499,7 +1499,7 @@
   },
   {
     "t": "Rose",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvc2UifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/rose/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to open the bloom. Pick its color in the Toy tab.",
@@ -1508,7 +1508,7 @@
   },
   {
     "t": "Dandelion",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhbmRlbGlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/dandelion/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to blow the seeds away.",
@@ -1517,7 +1517,7 @@
   },
   {
     "t": "Tulips",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InR1bGlwIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/tulip/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to open the tulips to the sun. Pick their color in the Toy tab.",
@@ -1526,7 +1526,7 @@
   },
   {
     "t": "Daisies",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhaXN5In0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/daisy/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to spin the big daisy: loves me, loves me not.",
@@ -1535,7 +1535,7 @@
   },
   {
     "t": "Lotus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxvdHVzIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjYyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "u": "toys/lotus/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to lift the flower out of the water and open it.",
@@ -1544,7 +1544,7 @@
   },
   {
     "t": "Toadstool",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2hyb29tIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/mushroom/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap the big cap to puff out a cloud of spores.",
@@ -1553,7 +1553,7 @@
   },
   {
     "t": "Fern",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZlcm4ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMzIsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9fQ",
+    "u": "toys/fern/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to unroll the fiddleheads into new fronds.",
@@ -1562,7 +1562,7 @@
   },
   {
     "t": "Saguaro cactus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhZ3Vhcm8ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/saguaro/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap for the spines, then a look inside. Set its arms and flowers in the Toy tab.",
@@ -1571,7 +1571,7 @@
   },
   {
     "t": "Coral reef",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvcmFsIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjozLjd9fQ",
+    "u": "toys/coral/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to open the polyps and let the fish out.",
@@ -1580,7 +1580,7 @@
   },
   {
     "t": "Pinecone",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmVjb25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/pinecone/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to open the scales and drop them, then put it back together.",
@@ -1589,7 +1589,7 @@
   },
   {
     "t": "Acorns",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFjb3JuIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0",
+    "u": "toys/acorn/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to pop the caps and sprout the acorns.",
@@ -1598,7 +1598,7 @@
   },
   {
     "t": "Succulent",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1Y2N1bGVudCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC41NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/succulent/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to open the rosette and send up a flower.",
@@ -1607,7 +1607,7 @@
   },
   {
     "t": "Bamboo",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhbWJvbyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/bamboo/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to make the new shoots grow up tall.",
@@ -1616,7 +1616,7 @@
   },
   {
     "t": "Pebbles",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvY2tzIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "u": "toys/rocks/",
     "k": "toy",
     "s": "Nature",
     "d": "Drag a pebble to pick it up and set it on another to stack them. Tap to tumble them.",
@@ -1625,7 +1625,7 @@
   },
   {
     "t": "Kelp",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtlbHAifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/kelp/",
     "k": "toy",
     "s": "Nature",
     "d": "Tap it to bring fish in to nibble the kelp.",
@@ -1634,7 +1634,7 @@
   },
   {
     "t": "Storm cloud",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b3JtLWNsb3VkIn0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "u": "toys/storm-cloud/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap for thunder: lightning strikes under your finger. Try the Rain slider in the Toy tab.",
@@ -1643,7 +1643,7 @@
   },
   {
     "t": "Lava lamp",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhdmEtbGFtcCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/lava-lamp/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap to heat it up. Pick colors, blobs and flow in the Toy tab.",
@@ -1652,7 +1652,7 @@
   },
   {
     "t": "Snow globe",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNub3ctZ2xvYmUifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/snow-globe/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to swirl the snow. Hands-on: pick it up and shake it hard.",
@@ -1661,7 +1661,7 @@
   },
   {
     "t": "Volcano",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbGNhbm8ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/volcano/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to make it erupt.",
@@ -1670,7 +1670,7 @@
   },
   {
     "t": "Ice swan",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImljZS1zdGF0dWUifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMTgsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9fQ",
+    "u": "toys/ice-statue/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap to melt the swan and refreeze it. Try the Temperature slider in the Toy tab.",
@@ -1679,7 +1679,7 @@
   },
   {
     "t": "Candle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/candle/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap to blow out the candle; tap again to light it.",
@@ -1688,7 +1688,7 @@
   },
   {
     "t": "Tornado",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvcm5hZG8ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMTUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/tornado/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap to spin it up. Set its power in the Toy tab.",
@@ -1697,7 +1697,7 @@
   },
   {
     "t": "Rainbow",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJhaW5ib3cifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4xNSwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "u": "toys/rainbow/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to draw the rainbow again, color by color.",
@@ -1706,7 +1706,7 @@
   },
   {
     "t": "Iceberg",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImljZWJlcmcifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/iceberg/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to break off a chunk into the sea.",
@@ -1715,7 +1715,7 @@
   },
   {
     "t": "Waterfall",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVyZmFsbCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/waterfall/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to send a surge of water over the falls.",
@@ -1724,7 +1724,7 @@
   },
   {
     "t": "Ocean wave",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jZWFuLXdhdmUifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/ocean-wave/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to break the wave; a new one curls up behind it.",
@@ -1733,7 +1733,7 @@
   },
   {
     "t": "Geyser",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdleXNlciJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/geyser/",
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to make it erupt.",
@@ -1742,7 +1742,7 @@
   },
   {
     "t": "Ice cream",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImljZS1jcmVhbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "u": "toys/ice-cream/",
     "k": "toy",
     "s": "Food",
     "d": "Tap to melt it and refreeze it. Pick scoops and flavors in the Toy tab.",
@@ -1751,7 +1751,7 @@
   },
   {
     "t": "Watermelon",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVybWVsb24ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzQsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "u": "toys/watermelon/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to chop it into slices that fan open.",
@@ -1760,7 +1760,7 @@
   },
   {
     "t": "Birthday cake",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJpcnRoZGF5LWNha2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzYsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/birthday-cake/",
     "k": "toy",
     "s": "Food",
     "d": "Tap to blow out the candles; tap again to light them. Choose how many in the Toy tab.",
@@ -1769,7 +1769,7 @@
   },
   {
     "t": "Popcorn",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvcGNvcm4ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzQsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/popcorn/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to pop more kernels up out of the bucket.",
@@ -1778,7 +1778,7 @@
   },
   {
     "t": "Jelly",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImplbGx5In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "u": "toys/jelly/",
     "k": "toy",
     "s": "Food",
     "d": "Drag it to stretch it; let go and it wobbles back. Tap it to poke it.",
@@ -1787,7 +1787,7 @@
   },
   {
     "t": "Pancakes",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhbmNha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4xfX0",
+    "u": "toys/pancakes/",
     "k": "toy",
     "s": "Food",
     "d": "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
@@ -1796,7 +1796,7 @@
   },
   {
     "t": "Cupcake",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImN1cGNha2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "u": "toys/cupcake/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to flick the cherry up; it plops back down.",
@@ -1805,7 +1805,7 @@
   },
   {
     "t": "Lollipop",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxvbGxpcG9wIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "u": "toys/lollipop/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to spin it fast; the swirl seems to pour inward.",
@@ -1814,7 +1814,7 @@
   },
   {
     "t": "Candy cane",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmR5LWNhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19",
+    "u": "toys/candy-cane/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to twist it until it snaps. With ✋ on, pull the hook until it snaps off.",
@@ -1823,7 +1823,7 @@
   },
   {
     "t": "Macarons",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hY2Fyb25zIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "u": "toys/macarons/",
     "k": "toy",
     "s": "Food",
     "d": "Drag a macaron to pick it up and stack it. Tap and the two in front hop up onto the stack.",
@@ -1832,7 +1832,7 @@
   },
   {
     "t": "Donut",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRvbnV0In0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuNjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "u": "toys/donut/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to break it apart and put it back together.",
@@ -1841,7 +1841,7 @@
   },
   {
     "t": "Gummy bear",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd1bW15LWJlYXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "u": "toys/gummy-bear/",
     "k": "toy",
     "s": "Food",
     "d": "Drag the bear to stretch it; let go and it springs back. Tap to squish it.",
@@ -1850,7 +1850,7 @@
   },
   {
     "t": "Pretzel",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByZXR6ZWwifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "u": "toys/pretzel/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to twist it like a knot and let it spring back.",
@@ -1859,7 +1859,7 @@
   },
   {
     "t": "Croissant",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb2lzc2FudCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "u": "toys/croissant/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to slice it open and melt a pat of butter inside.",
@@ -1868,7 +1868,7 @@
   },
   {
     "t": "Pizza",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpenphIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjcyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "u": "toys/pizza/",
     "k": "toy",
     "s": "Food",
     "d": "Tap to take a slice; tap again to go back.",
@@ -1877,7 +1877,7 @@
   },
   {
     "t": "Burger",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1cmdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19",
+    "u": "toys/burger/",
     "k": "toy",
     "s": "Food",
     "d": "Tap to spread out the layers; tap again to stack them up.",
@@ -1886,7 +1886,7 @@
   },
   {
     "t": "Sushi",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1c2hpIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjYyLCJyb2xsIjowLCJkaXN0YW5jZSI6My43fX0",
+    "u": "toys/sushi/",
     "k": "toy",
     "s": "Food",
     "d": "Tap a piece: the chopsticks pick that one up, dip it in soy sauce and put it back.",
@@ -1895,7 +1895,7 @@
   },
   {
     "t": "Taco",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRhY28ifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "u": "toys/taco/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to break the shell in half; then it closes up again.",
@@ -1904,7 +1904,7 @@
   },
   {
     "t": "Boiled egg",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVnZyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4xfX0",
+    "u": "toys/egg/",
     "k": "toy",
     "s": "Food",
     "d": "Tap to crack it open; tap again to go back.",
@@ -1913,7 +1913,7 @@
   },
   {
     "t": "Coffee",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvZmZlZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41OCwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "u": "toys/coffee/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to stir. Pick the latte art and the steam in the Toy tab.",
@@ -1922,7 +1922,7 @@
   },
   {
     "t": "Apple",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFwcGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "u": "toys/apple/",
     "k": "toy",
     "s": "Food",
     "d": "Tap to take a bite; tap again and a worm peeks out before it's whole again.",
@@ -1931,7 +1931,7 @@
   },
   {
     "t": "Bananas",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhbmFuYSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/banana/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to pull the bananas apart and peel all three.",
@@ -1940,7 +1940,7 @@
   },
   {
     "t": "Orange",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/orange/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to open it into wedges. With ✋ on, pull a wedge out; bring it back and it clicks in.",
@@ -1949,7 +1949,7 @@
   },
   {
     "t": "Kiwi",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imtpd2kifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzYsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ",
+    "u": "toys/kiwi/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to cut it open and show the green inside.",
@@ -1958,7 +1958,7 @@
   },
   {
     "t": "Pineapple",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmVhcHBsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "u": "toys/pineapple/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to slice it into rings.",
@@ -1967,7 +1967,7 @@
   },
   {
     "t": "Cherries",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXJyaWVzIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4xfX0",
+    "u": "toys/cherries/",
     "k": "toy",
     "s": "Food",
     "d": "Pull a cherry out on its stem and let go; it swings back and knocks the other. Tap to swing them.",
@@ -1976,7 +1976,7 @@
   },
   {
     "t": "Grapes",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBlcyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "u": "toys/grapes/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it: grapes drop off the bunch, bounce and hop back.",
@@ -1985,7 +1985,7 @@
   },
   {
     "t": "Avocado",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF2b2NhZG8ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNDUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/avocado/",
     "k": "toy",
     "s": "Food",
     "d": "Tap it to pop the stone into the other half and back.",
@@ -1994,7 +1994,7 @@
   },
   {
     "t": "Building bricks",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJyaWNrcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjUsInJvbGwiOjAsImRpc3RhbmNlIjozLjN9fQ",
+    "u": "toys/bricks/",
     "k": "toy",
     "s": "Toys",
     "d": "Drag a brick onto another to stack it; it clicks onto the studs. Tap to build a model.",
@@ -2003,7 +2003,7 @@
   },
   {
     "t": "Rubber duck",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1YmJlci1kdWNrIn0sImNhbWVyYSI6eyJ5YXciOjAuOTUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/rubber-duck/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to squeeze it: it squeaks, hops and bobs.",
@@ -2012,7 +2012,7 @@
   },
   {
     "t": "Spinning top",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwaW5uaW5nLXRvcCJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjV9fQ",
+    "u": "toys/spinning-top/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to spin it faster; it wobbles more, then steadies.",
@@ -2021,7 +2021,7 @@
   },
   {
     "t": "Dice",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpY2UifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/dice/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap to roll. Pick two six-sided dice or a d20 in the Toy tab.",
@@ -2030,7 +2030,7 @@
   },
   {
     "t": "Newton's cradle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ld3RvbnMtY3JhZGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/newtons-cradle/",
     "k": "toy",
     "s": "Toys",
     "d": "Drag a ball out to the side and let go. Or tap to lift the end ball.",
@@ -2039,7 +2039,7 @@
   },
   {
     "t": "Teddy bear",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlZGR5LWJlYXIifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "u": "toys/teddy-bear/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it and it waves hello.",
@@ -2048,7 +2048,7 @@
   },
   {
     "t": "Yo-yo",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvLXlvIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "u": "toys/yo-yo/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to throw it down; it spins down the string and climbs back up.",
@@ -2057,7 +2057,7 @@
   },
   {
     "t": "Puzzle cube",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1enpsZS1jdWJlIn0sImNhbWVyYSI6eyJ5YXciOjAuNjIsInBpdGNoIjowLjUsInJvbGwiOjAsImRpc3RhbmNlIjo3LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/puzzle-cube/",
     "k": "toy",
     "s": "Toys",
     "d": "Drag across a face to turn a row or column. Tap to scramble or solve it; tap again to pause.",
@@ -2066,7 +2066,7 @@
   },
   {
     "t": "Spring toy",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwcmluZy10b3kifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/spring-toy/",
     "k": "toy",
     "s": "Toys",
     "d": "Pull its top coils up or sideways; let go and it springs back. Tap to hurry it along.",
@@ -2075,7 +2075,7 @@
   },
   {
     "t": "Kite",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtpdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/kite/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it for a gust of wind: the kite loops and the tail whips.",
@@ -2084,7 +2084,7 @@
   },
   {
     "t": "Paper plane",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLXBsYW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuNywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ",
+    "u": "toys/paper-plane/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to do a barrel roll.",
@@ -2093,7 +2093,7 @@
   },
   {
     "t": "Origami crane",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yaWdhbWktY3JhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuN319",
+    "u": "toys/origami-crane/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to flap its wings.",
@@ -2102,7 +2102,7 @@
   },
   {
     "t": "Balloon dog",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhbGxvb24tZG9nIn0sImNhbWVyYSI6eyJ5YXciOjAuMiwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/balloon-dog/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to pop it; then it blows back up.",
@@ -2111,7 +2111,7 @@
   },
   {
     "t": "Soap bubbles",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvYXAtYnViYmxlcyJ9LCJjYW1lcmEiOnsieWF3IjowLjIsInBpdGNoIjowLjE1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/soap-bubbles/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to blow a stream of bubbles.",
@@ -2120,7 +2120,7 @@
   },
   {
     "t": "Wind-up robot",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvYm90In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjV9fQ",
+    "u": "toys/robot/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to wind it up: its key whirs and its arms swing wide.",
@@ -2129,7 +2129,7 @@
   },
   {
     "t": "Chess set",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXNzLXNldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My43fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/chess-set/",
     "k": "toy",
     "s": "Toys",
     "d": "Tap a piece, then a square, to move it. Or press play in the bar to watch a game.",
@@ -2138,7 +2138,7 @@
   },
   {
     "t": "Lorenz attractor",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxvcmVueiJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/lorenz/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to race along the path. Set the glow in the Toy tab.",
@@ -2147,7 +2147,7 @@
   },
   {
     "t": "Möbius strip",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vYml1cyJ9LCJjYW1lcmEiOnsieWF3IjowLjksInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0",
+    "u": "toys/mobius/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to send the rider round. Pick a rider in the Toy tab.",
@@ -2156,7 +2156,7 @@
   },
   {
     "t": "Klein bottle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtsZWluLWJvdHRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ",
+    "u": "toys/klein-bottle/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to send water through. Set the glow in the Toy tab.",
@@ -2165,7 +2165,7 @@
   },
   {
     "t": "Menger sponge",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lbmdlci1zcG9uZ2UifSwiY2FtZXJhIjp7InlhdyI6MC42MiwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjcuMn19",
+    "u": "toys/menger-sponge/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to close and carve the holes. Pick the level in the Toy tab.",
@@ -2174,7 +2174,7 @@
   },
   {
     "t": "Hypercube",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh5cGVyY3ViZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjYuNH19",
+    "u": "toys/hypercube/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
@@ -2183,7 +2183,7 @@
   },
   {
     "t": "Torus knot",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvcnVzLWtub3QifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/torus-knot/",
     "k": "toy",
     "s": "Math",
     "d": "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
@@ -2192,7 +2192,7 @@
   },
   {
     "t": "Gyroid",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd5cm9pZCJ9LCJjYW1lcmEiOnsieWF3IjowLjYyLCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjYuOH19",
+    "u": "toys/gyroid/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to make it breathe. Pick a cube or a ball in the Toy tab.",
@@ -2201,7 +2201,7 @@
   },
   {
     "t": "Mandelbulb",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hbmRlbGJ1bGIifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/mandelbulb/",
     "k": "toy",
     "s": "Math",
     "d": "Tap it to turn its discs like the dials of a lock.",
@@ -2210,7 +2210,7 @@
   },
   {
     "t": "Sierpinski tetrahedron",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNpZXJwaW5za2kifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/sierpinski/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
@@ -2219,7 +2219,7 @@
   },
   {
     "t": "Platonic solids",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYXRvbmljIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzUsInJvbGwiOjAsImRpc3RhbmNlIjo1LjJ9fQ",
+    "u": "toys/platonic/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to explode it; tap again to put it back. Pick one of the five solids in the Toy tab.",
@@ -2228,7 +2228,7 @@
   },
   {
     "t": "Seashell spiral",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYXNoZWxsLXNwaXJhbCJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjg1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0",
+    "u": "toys/seashell-spiral/",
     "k": "toy",
     "s": "Math",
     "d": "Tap it to hear the sea in the shell.",
@@ -2237,7 +2237,7 @@
   },
   {
     "t": "Graph plotter",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBoLXBsb3R0ZXIifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMDgsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/graph-plotter/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to draw the curve. Pick a curve, or type your own, in the Toy tab.",
@@ -2246,7 +2246,7 @@
   },
   {
     "t": "Surface plotter",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cmZhY2UtcGxvdHRlciJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/surface-plotter/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to raise the surface. Pick one, or type your own, in the Toy tab.",
@@ -2255,7 +2255,7 @@
   },
   {
     "t": "Circle and waves",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVuaXQtY2lyY2xlIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjA4LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/unit-circle/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to send the point round. Try 3D, or type your own path, in the Toy tab.",
@@ -2264,7 +2264,7 @@
   },
   {
     "t": "Fourier circles",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZvdXJpZXItY2lyY2xlcyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/fourier-circles/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to spin the circles. Type a word or a curve in the Toy tab.",
@@ -2273,7 +2273,7 @@
   },
   {
     "t": "Pythagoras proof",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB5dGhhZ29yYXMtcHJvb2YifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6My43fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/pythagoras-proof/",
     "k": "toy",
     "s": "Math",
     "d": "Tap it to slide the triangles and show that a² + b² = c².",
@@ -2282,7 +2282,7 @@
   },
   {
     "t": "Splat equation",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWVxdWF0aW9uIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjYsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/splat-equation/",
     "k": "toy",
     "s": "Math",
     "d": "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
@@ -2292,7 +2292,7 @@
   },
   {
     "t": "Storybook",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvb2sifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuNzgsInJvbGwiOjAsImRpc3RhbmNlIjozLjl9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/book/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to close the book; tap again to open it.",
@@ -2301,7 +2301,7 @@
   },
   {
     "t": "Laptop",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhcHRvcCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4zMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/laptop/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap the keys, or type on your keyboard. Drag on the trackpad. Tap elsewhere to close it.",
@@ -2310,7 +2310,7 @@
   },
   {
     "t": "Music box",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2ljLWJveCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/music-box/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to close or open the lid. With ✋ on, turn the crank round to play the tune note by note.",
@@ -2319,7 +2319,7 @@
   },
   {
     "t": "Alarm clock",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsb2NrIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/clock/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap it to ring the alarm.",
@@ -2328,7 +2328,7 @@
   },
   {
     "t": "Gift box",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdpZnQtYm94In0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzgsInJvbGwiOjAsImRpc3RhbmNlIjo0Ljh9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/gift-box/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to open the present; tap again to close it.",
@@ -2337,7 +2337,7 @@
   },
   {
     "t": "Umbrella",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVtYnJlbGxhIn0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuM30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/umbrella/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to close the umbrella; tap again to open it.",
@@ -2346,7 +2346,7 @@
   },
   {
     "t": "Desk fan",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRlc2stZmFuIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/desk-fan/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to switch it off or on. Turn its swing on or off in the Toy tab.",
@@ -2355,7 +2355,7 @@
   },
   {
     "t": "Desk lamp",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhbXAifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/lamp/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to switch the light off or on.",
@@ -2364,7 +2364,7 @@
   },
   {
     "t": "Potion bottle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvdGlvbi1ib3R0bGUifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/potion-bottle/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap it to pop the cork.",
@@ -2373,7 +2373,7 @@
   },
   {
     "t": "Telescope",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlbGVzY29wZSJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/telescope/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap to collapse it; tap again to pull it out.",
@@ -2382,7 +2382,7 @@
   },
   {
     "t": "Fountain pen",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZvdW50YWluLXBlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/fountain-pen/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap it to uncap the pen and write a swirl in wet blue ink.",
@@ -2391,7 +2391,7 @@
   },
   {
     "t": "Water bottle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVyLWJvdHRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6My42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/water-bottle/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap it to unscrew the cap and pour water into the glass.",
@@ -2401,7 +2401,7 @@
   },
   {
     "t": "Soda can",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvZGEtY2FuIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/soda-can/",
     "k": "toy",
     "s": "Open me",
     "d": "Tap it to shake the can and pop it open.",
@@ -2411,7 +2411,7 @@
   },
   {
     "t": "Running shoe",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1bm5pbmctc2hvZSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "u": "toys/running-shoe/",
     "k": "toy",
     "s": "Clothing",
     "d": "Tap it to untie the laces and tie them again, then watch it tap its toe.",
@@ -2420,7 +2420,7 @@
   },
   {
     "t": "Hoodie",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imhvb2RpZSJ9LCJjYW1lcmEiOnsieWF3IjowLjIyLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "u": "toys/hoodie/",
     "k": "toy",
     "s": "Clothing",
     "d": "Tap it to flip the hood and cross the sleeves.",
@@ -2429,7 +2429,7 @@
   },
   {
     "t": "Sunglasses",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1bmdsYXNzZXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMjUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "u": "toys/sunglasses/",
     "k": "toy",
     "s": "Clothing",
     "d": "Tap them (the frame or a lens) to fold the arms, flip the glasses round and darken the lenses.",
@@ -2438,7 +2438,7 @@
   },
   {
     "t": "Baseball cap",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsLWNhcCJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9fQ",
+    "u": "toys/baseball-cap/",
     "k": "toy",
     "s": "Clothing",
     "d": "Tap it to flip the cap off its stand and spin it like a flying disc.",
@@ -2447,7 +2447,7 @@
   },
   {
     "t": "Sword in the stone",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN3b3JkLWluLXN0b25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0",
+    "u": "toys/sword-in-stone/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap to pull the sword from the stone. With ✋ on, drag it up out of the stone and back in.",
@@ -2456,7 +2456,7 @@
   },
   {
     "t": "Heraldic shield",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNoaWVsZCJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "u": "toys/shield/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap it and it blocks a blow where you tap: sparks fly and the emblem gleams.",
@@ -2465,7 +2465,7 @@
   },
   {
     "t": "Bow and target",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvdy1hbmQtdGFyZ2V0In0sImNhbWVyYSI6eyJ5YXciOjAuOCwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "u": "toys/bow-and-target/",
     "k": "toy",
     "s": "Medieval",
     "d": "Pull the arrow back on the string and let go to shoot it. Tap to shoot too.",
@@ -2474,7 +2474,7 @@
   },
   {
     "t": "Trebuchet",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyZWJ1Y2hldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "u": "toys/trebuchet/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap it to launch: the weight drops and the long arm flings a stone.",
@@ -2483,7 +2483,7 @@
   },
   {
     "t": "Crossbow",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb3NzYm93In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0",
+    "u": "toys/crossbow/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap it to shoot a bolt; the string snaps and a new bolt loads.",
@@ -2492,7 +2492,7 @@
   },
   {
     "t": "Knight's helmet",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtuaWdodHMtaGVsbWV0In19",
+    "u": "toys/knights-helmet/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap to open the visor; tap again to close it.",
@@ -2501,7 +2501,7 @@
   },
   {
     "t": "Crown",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb3duIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/crown/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap it: it rises and its jewels light up one by one.",
@@ -2510,7 +2510,7 @@
   },
   {
     "t": "Dragon egg",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRyYWdvbi1lZ2cifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjgsInJvbGwiOjAsImRpc3RhbmNlIjo0LjZ9fQ",
+    "u": "toys/dragon-egg/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap to hatch the egg; tap again to go back.",
@@ -2519,7 +2519,7 @@
   },
   {
     "t": "Wizard's orb",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndpemFyZHMtb3JiIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/wizards-orb/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap it to cast a spell: sparks spiral out and runes circle the orb.",
@@ -2528,7 +2528,7 @@
   },
   {
     "t": "Crystal ball",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeXN0YWwtYmFsbCJ9fQ",
+    "u": "toys/crystal-ball/",
     "k": "toy",
     "s": "Medieval",
     "d": "Tap it to swirl the mist and raise a glowing sign.",
@@ -2537,7 +2537,7 @@
   },
   {
     "t": "Jellyfish",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImplbGx5ZmlzaCJ9fQ",
+    "u": "toys/jellyfish/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it to make it swim: one strong stroke jets it upward.",
@@ -2546,7 +2546,7 @@
   },
   {
     "t": "School of fish",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZpc2gtc2Nob29sIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/fish-school/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it for a bait ball. Hands-on: drag through the school and the fish dart away.",
@@ -2555,7 +2555,7 @@
   },
   {
     "t": "Butterfly",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1dHRlcmZseSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ",
+    "u": "toys/butterfly/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it to make it flutter faster.",
@@ -2564,7 +2564,7 @@
   },
   {
     "t": "Pufferfish",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1ZmZlcmZpc2gifX0",
+    "u": "toys/pufferfish/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it to poke it. Try the Puff slider in the Toy tab.",
@@ -2573,7 +2573,7 @@
   },
   {
     "t": "Nautilus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5hdXRpbHVzIn0sImNhbWVyYSI6eyJ5YXciOjAuMjUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/nautilus/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it to startle it: it hides its tentacles, then peeks out again.",
@@ -2582,7 +2582,7 @@
   },
   {
     "t": "Ladybug",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhZHlidWcifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC41LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/ladybug/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap to open the wings; tap again to close them.",
@@ -2591,7 +2591,7 @@
   },
   {
     "t": "Snail",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNuYWlsIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/snail/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap to make it hide in its shell; tap again to bring it out.",
@@ -2600,7 +2600,7 @@
   },
   {
     "t": "Octopus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jdG9wdXMifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ",
+    "u": "toys/octopus/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it to squirt ink.",
@@ -2609,7 +2609,7 @@
   },
   {
     "t": "Starfish",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXJmaXNoIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjgsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "u": "toys/starfish/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it to wave its arms.",
@@ -2618,7 +2618,7 @@
   },
   {
     "t": "Sea urchin",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYS11cmNoaW4ifX0",
+    "u": "toys/sea-urchin/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it: its spines sweep in waves and it creeps along.",
@@ -2627,7 +2627,7 @@
   },
   {
     "t": "Frog",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZyb2cifX0",
+    "u": "toys/frog/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it: a fly buzzes in and the frog catches it with its tongue.",
@@ -2636,7 +2636,7 @@
   },
   {
     "t": "Penguin",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlbmd1aW4ifX0",
+    "u": "toys/penguin/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it to flap its flippers.",
@@ -2645,7 +2645,7 @@
   },
   {
     "t": "Owl",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im93bCJ9fQ",
+    "u": "toys/owl/",
     "k": "toy",
     "s": "Animals",
     "d": "Tap it and it turns its head to look behind.",
@@ -2654,7 +2654,7 @@
   },
   {
     "t": "Jack-o'-lantern",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImphY2stby1sYW50ZXJuIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/jack-o-lantern/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap to lift the lid; tap again to put it back.",
@@ -2663,7 +2663,7 @@
   },
   {
     "t": "Snowman",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNub3dtYW4ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ",
+    "u": "toys/snowman/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
@@ -2672,7 +2672,7 @@
   },
   {
     "t": "Fireworks",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZpcmV3b3JrcyJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "u": "toys/fireworks/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap it to launch a firework; tap quickly for a few at once.",
@@ -2681,7 +2681,7 @@
   },
   {
     "t": "Decorated tree",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRlY29yYXRlZC10cmVlIn19",
+    "u": "toys/decorated-tree/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap to switch the lights on or off.",
@@ -2690,7 +2690,7 @@
   },
   {
     "t": "Patterned egg",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhdHRlcm5lZC1lZ2cifX0",
+    "u": "toys/patterned-egg/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap it to spin it. Pick a pattern and its colors in the Toy tab.",
@@ -2699,7 +2699,7 @@
   },
   {
     "t": "Paper lantern",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLWxhbnRlcm4ifX0",
+    "u": "toys/paper-lantern/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap it to set it swinging on its string; tap again for another push.",
@@ -2708,7 +2708,7 @@
   },
   {
     "t": "Diya",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpeWEifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuM319",
+    "u": "toys/diya/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap to light the ring of diyas; tap again to put them out.",
@@ -2717,7 +2717,7 @@
   },
   {
     "t": "Menorah",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lbm9yYWgifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "u": "toys/menorah/",
     "k": "toy",
     "s": "Holidays",
     "d": "Tap to put out the candles; tap again to light them one by one.",
@@ -2726,7 +2726,7 @@
   },
   {
     "t": "Acoustic guitar",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd1aXRhciJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/guitar/",
     "k": "toy",
     "s": "Music",
     "d": "Tap it to strum a few chords.",
@@ -2735,7 +2735,7 @@
   },
   {
     "t": "Snare drum",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRydW0ifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/drum/",
     "k": "toy",
     "s": "Music",
     "d": "Tap it for a drum roll; tap again quickly for a faster, longer roll.",
@@ -2744,7 +2744,7 @@
   },
   {
     "t": "Xylophone",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Inh5bG9waG9uZSJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC42Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/xylophone/",
     "k": "toy",
     "s": "Music",
     "d": "Tap a bar, or drag across the bars for a glissando. Tap the mallet or frame to play a scale.",
@@ -2753,7 +2753,7 @@
   },
   {
     "t": "Toy piano",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRveS1waWFubyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuN30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/toy-piano/",
     "k": "toy",
     "s": "Music",
     "d": "Tap or drag along the keys to play them, or tap the case to play Twinkle, Twinkle.",
@@ -2762,7 +2762,7 @@
   },
   {
     "t": "Grand piano",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYW5kLXBpYW5vIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjM4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/grand-piano/",
     "k": "toy",
     "s": "Music",
     "d": "Tap or drag along the keys to play them. Tap elsewhere for a song; the song bar plays it all.",
@@ -2771,7 +2771,7 @@
   },
   {
     "t": "Upright piano",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVwcmlnaHQtcGlhbm8ifSwiY2FtZXJhIjp7InlhdyI6MC40MiwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjN9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/upright-piano/",
     "k": "toy",
     "s": "Music",
     "d": "Tap or drag along the keys to play them. Tap elsewhere for a ragtime; the song bar plays it all.",
@@ -2780,7 +2780,7 @@
   },
   {
     "t": "Harpsichord",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhhcnBzaWNob3JkIn0sImNhbWVyYSI6eyJ5YXciOjAuNiwicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/harpsichord/",
     "k": "toy",
     "s": "Music",
     "d": "Tap a key to pluck its string, or drag along the keys. Tap anywhere else for a minuet.",
@@ -2789,7 +2789,7 @@
   },
   {
     "t": "Electronic keyboard",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZWN0cm9uaWMta2V5Ym9hcmQifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC43LCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/electronic-keyboard/",
     "k": "toy",
     "s": "Music",
     "d": "Tap or drag along the keys; a colored button changes the voice. Tap elsewhere for a song.",
@@ -2798,7 +2798,7 @@
   },
   {
     "t": "Rocket",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvY2tldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuM319",
+    "u": "toys/rocket/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to launch the rocket.",
@@ -2807,7 +2807,7 @@
   },
   {
     "t": "Helicopter",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlbGljb3B0ZXIifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "u": "toys/helicopter/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap to take off; tap again to land.",
@@ -2816,7 +2816,7 @@
   },
   {
     "t": "Hot-air balloon",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhvdC1haXItYmFsbG9vbiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "u": "toys/hot-air-balloon/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to fire the burner: the balloon swells and climbs.",
@@ -2825,7 +2825,7 @@
   },
   {
     "t": "Steam train",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0ZWFtLXRyYWluIn0sImNhbWVyYSI6eyJ5YXciOjAuNiwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "u": "toys/steam-train/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to blow the whistle.",
@@ -2834,7 +2834,7 @@
   },
   {
     "t": "Ocean liner",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jZWFuLWxpbmVyIn0sImNhbWVyYSI6eyJ5YXciOjAuNjIsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9fQ",
+    "u": "toys/ocean-liner/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to sound the horn.",
@@ -2843,7 +2843,7 @@
   },
   {
     "t": "Sports car",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwb3J0cy1jYXIifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44NX19",
+    "u": "toys/sports-car/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to rev the engine. Hands-on: push it and it rolls on its wheels.",
@@ -2852,7 +2852,7 @@
   },
   {
     "t": "Bus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1cyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/bus/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to stop for passengers: the lights flash and the doors open.",
@@ -2861,7 +2861,7 @@
   },
   {
     "t": "Propeller plane",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3BlbGxlci1wbGFuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjN9fQ",
+    "u": "toys/propeller-plane/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to loop the loop.",
@@ -2870,7 +2870,7 @@
   },
   {
     "t": "Jet airliner",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImpldCJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "u": "toys/jet/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to climb and bank left, then right.",
@@ -2879,7 +2879,7 @@
   },
   {
     "t": "Sailboat",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhaWxib2F0In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/sailboat/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it for a gust of wind: it heels over, then rocks back upright.",
@@ -2888,7 +2888,7 @@
   },
   {
     "t": "Submarine",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1Ym1hcmluZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/submarine/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to dive; then it surfaces and raises its periscope.",
@@ -2897,7 +2897,7 @@
   },
   {
     "t": "Bicycle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJpY3ljbGUifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "u": "toys/bicycle/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to ring the bell and spin the wheels.",
@@ -2906,7 +2906,7 @@
   },
   {
     "t": "Tractor",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyYWN0b3IifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "u": "toys/tractor/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to make it chug: it shakes and puffs smoke.",
@@ -2915,7 +2915,7 @@
   },
   {
     "t": "Flying saucer",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVmbyJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "u": "toys/ufo/",
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap to switch the beam off or on.",
@@ -2924,7 +2924,7 @@
   },
   {
     "t": "Eiffel Tower",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVpZmZlbC10b3dlciJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "u": "toys/eiffel-tower/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it for its night show of lights and fireworks.",
@@ -2933,7 +2933,7 @@
   },
   {
     "t": "Washington Monument",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Indhc2hpbmd0b24tbW9udW1lbnQifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0fX0",
+    "u": "toys/washington-monument/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it for a day in a few seconds: the sun crosses and the shadow swings around.",
@@ -2942,7 +2942,7 @@
   },
   {
     "t": "Pyramids of Giza",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB5cmFtaWRzIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjMyLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0",
+    "u": "toys/pyramids/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it: a tiny flying saucer beams up a camel made of sand.",
@@ -2951,7 +2951,7 @@
   },
   {
     "t": "Twisting supertall",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cGVydGFsbCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "u": "toys/supertall/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it to twist the tower further and send light up its glass.",
@@ -2960,7 +2960,7 @@
   },
   {
     "t": "Lighthouse",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxpZ2h0aG91c2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjgsInJvbGwiOjAsImRpc3RhbmNlIjo0LjN9fQ",
+    "u": "toys/lighthouse/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap to switch the light off or on.",
@@ -2969,7 +2969,7 @@
   },
   {
     "t": "Statue of Liberty",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXR1ZS1vZi1saWJlcnR5In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NH19",
+    "u": "toys/statue-of-liberty/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it to make the torch flare and send up golden sparks.",
@@ -2978,7 +2978,7 @@
   },
   {
     "t": "White House",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLWhvdXNlIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjM4LCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "u": "toys/white-house/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it: the fountain shoots up and the windows light up one by one.",
@@ -2987,7 +2987,7 @@
   },
   {
     "t": "Leaning Tower of Pisa",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxlYW5pbmctdG93ZXIifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/leaning-tower/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap to drop two balls from the top. Set the lean in the Toy tab.",
@@ -2996,7 +2996,7 @@
   },
   {
     "t": "Colosseum",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbG9zc2V1bSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC42Miwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn19",
+    "u": "toys/colosseum/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it for a chariot race around the arena.",
@@ -3005,7 +3005,7 @@
   },
   {
     "t": "Parthenon",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcnRoZW5vbiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19",
+    "u": "toys/parthenon/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it for a procession. Pick the temple today or as it was in the Toy tab.",
@@ -3014,7 +3014,7 @@
   },
   {
     "t": "Stonehenge",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b25laGVuZ2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNTUsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ",
+    "u": "toys/stonehenge/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it for the midsummer sunrise shining through the stones.",
@@ -3023,7 +3023,7 @@
   },
   {
     "t": "Big Ben",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJpZy1iZW4ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "u": "toys/big-ben/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it: the hands spin around, the dials glow and the bell swings.",
@@ -3032,7 +3032,7 @@
   },
   {
     "t": "Taj Mahal",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRhai1tYWhhbCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjMyLCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0",
+    "u": "toys/taj-mahal/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it for moonlight: night falls and the white dome glows.",
@@ -3041,7 +3041,7 @@
   },
   {
     "t": "Castle",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhc3RsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "u": "toys/castle/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap to lower the drawbridge; tap again to raise it.",
@@ -3050,7 +3050,7 @@
   },
   {
     "t": "Pagoda",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhZ29kYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0",
+    "u": "toys/pagoda/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it to ring the wind chimes; lanterns and doors light up.",
@@ -3059,7 +3059,7 @@
   },
   {
     "t": "Windmill",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndpbmRtaWxsIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0",
+    "u": "toys/windmill/",
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it for a gust of wind that spins the sails hard.",
@@ -3068,7 +3068,7 @@
   },
   {
     "t": "Perceptron",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmNlcHRyb24ifSwiY2FtZXJhIjp7InlhdyI6MC4xOCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/perceptron/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to watch it try an example, get it wrong, and learn.",
@@ -3077,7 +3077,7 @@
   },
   {
     "t": "Multilayer perceptron",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11bHRpbGF5ZXItcGVyY2VwdHJvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjE4LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/multilayer-perceptron/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to try all four inputs and fill in the XOR truth table.",
@@ -3086,7 +3086,7 @@
   },
   {
     "t": "Neural network",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ldXJhbC1uZXR3b3JrIn0sImNhbWVyYSI6eyJ5YXciOjAuMTgsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/neural-network/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to send signals forward, then learn backward. Set its size in the Toy tab.",
@@ -3095,7 +3095,7 @@
   },
   {
     "t": "Convolutional network",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNubiJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/cnn/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to read the digit. Draw your own digit in the Toy tab.",
@@ -3104,7 +3104,7 @@
   },
   {
     "t": "Recurrent network",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJubiJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/rnn/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to read a sentence one word at a time. Try the LSTM style in the Toy tab.",
@@ -3113,7 +3113,7 @@
   },
   {
     "t": "Transformer",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyYW5zZm9ybWVyIn0sImNhbWVyYSI6eyJ5YXciOjAuMTYsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/transformer/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
@@ -3122,7 +3122,7 @@
   },
   {
     "t": "Looped transformer",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imxvb3BlZC10cmFuc2Zvcm1lciJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/looped-transformer/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it: the tiles loop through one block, sharper each lap, until 3 + 4 = 7.",
@@ -3131,7 +3131,7 @@
   },
   {
     "t": "Diffusion model",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpZmZ1c2lvbi1tb2RlbCJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/diffusion-model/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it: the noise clears, step by step, into a rubber duck.",
@@ -3140,7 +3140,7 @@
   },
   {
     "t": "Gradient descent",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYWRpZW50LWRlc2NlbnQifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/gradient-descent/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to roll the ball downhill. Try the Learning rate in the Toy tab.",
@@ -3149,7 +3149,7 @@
   },
   {
     "t": "Gaussian splatting",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhdXNzaWFuLXNwbGF0dGluZyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/gaussian-splatting/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it: random splats learn the photo. Pick another View in the Toy tab.",
@@ -3159,7 +3159,7 @@
   },
   {
     "t": "Word vectors",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndvcmQtdmVjdG9ycyJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "u": "toys/word-vectors/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
@@ -3168,7 +3168,7 @@
   },
   {
     "t": "Sorting machine",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvcnRpbmctbWFjaGluZSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/sorting-machine/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
@@ -3177,7 +3177,7 @@
   },
   {
     "t": "Half adder",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhhbGYtYWRkZXIifSwiY2FtZXJhIjp7InlhdyI6MC4xOCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/half-adder/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to add 1 + 1 in binary: the answer is 10.",
@@ -3186,7 +3186,7 @@
   },
   {
     "t": "Turing machine",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InR1cmluZy1tYWNoaW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOTV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/turing-machine/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to run the program on the tape. Type your own number in the Toy tab.",
@@ -3195,7 +3195,7 @@
   },
   {
     "t": "Difference engine",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpZmZlcmVuY2UtZW5naW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMTUsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/difference-engine/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap to turn the crank once; tap again to keep cranking. Type your own polynomial in the Toy tab.",
@@ -3204,7 +3204,7 @@
   },
   {
     "t": "Enigma machine",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVuaWdtYS1tYWNoaW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMjUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6M30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/enigma-machine/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap the keys or type to code letters. Tap the machine to decode. Tap the pad to clear it.",
@@ -3213,7 +3213,7 @@
   },
   {
     "t": "Bombe",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvbWJlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/bombe/",
     "k": "toy",
     "s": "AI and computing",
     "d": "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
@@ -3222,7 +3222,7 @@
   },
   {
     "t": "Picture lab",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0",
+    "u": "toys/picture-lab/",
     "k": "toy",
     "s": "Pictures and pages",
     "d": "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
@@ -3232,7 +3232,7 @@
   },
   {
     "t": "Your book",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19",
+    "u": "toys/your-book/",
     "k": "toy",
     "s": "Pictures and pages",
     "d": "Tap the right page to turn on, the left to go back. Tap a link to follow it; Pop out lifts a picture.",
@@ -3242,7 +3242,7 @@
   },
   {
     "t": "Photo album",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "u": "toys/photo-album/",
     "k": "toy",
     "s": "Pictures and pages",
     "d": "Tap the right page to turn on, the left to go back, or pull one over. Pop out lifts a photo off the page.",
@@ -3252,7 +3252,7 @@
   },
   {
     "t": "Picture frame",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtZnJhbWUifSwiY2FtZXJhIjp7InlhdyI6MC4xLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "u": "toys/picture-frame/",
     "k": "toy",
     "s": "Pictures and pages",
     "d": "Tap the frame to set it swinging on its nail. Open your own photo, GIF or video in the Toy tab.",
@@ -3262,7 +3262,7 @@
   },
   {
     "t": "Song landscape",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/song-landscape/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to play or pause; drag to turn or tilt. The Toy tab starts over, scrubs, changes the look or uses the mic.",
@@ -3272,7 +3272,7 @@
   },
   {
     "t": "Chladni plate",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNobGFkbmktcGxhdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "u": "toys/chladni-plate/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to bow the plate and watch the sand find its still lines. In the Toy tab, sing to it or play your audio.",
@@ -3282,7 +3282,7 @@
   },
   {
     "t": "Room echo meter",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvb20tZWNobyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0",
+    "u": "toys/room-echo/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap “Use my microphone” in the Toy tab, then clap once: the echo time shows on the back wall.",
@@ -3292,7 +3292,7 @@
   },
   {
     "t": "Splat mirror",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LW1pcnJvciJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "u": "toys/splat-mirror/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap “Start camera” to see yourself in splats; turn it to see the depth. More in the Toy tab.",
@@ -3302,7 +3302,7 @@
   },
   {
     "t": "Model to splats",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0",
+    "u": "toys/model-splats/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
@@ -3312,7 +3312,7 @@
   },
   {
     "t": "QR code",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ",
+    "u": "toys/qr-code/",
     "k": "toy",
     "s": "Studio",
     "d": "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
@@ -3322,7 +3322,7 @@
   },
   {
     "t": "How a QR code works",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWFuYXRvbXkifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ",
+    "u": "toys/qr-anatomy/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to light up each part of the code, or encode your own text step by step.",
@@ -3332,7 +3332,7 @@
   },
   {
     "t": "QR damage lab",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWRhbWFnZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "u": "toys/qr-damage/",
     "k": "toy",
     "s": "Studio",
     "d": "Pick a damage in the Toy tab and tap the code to add it. Watch the meter.",
@@ -3342,7 +3342,7 @@
   },
   {
     "t": "Three QR codes in one",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXRocmVlIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0",
+    "u": "toys/qr-three/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to pull the three codes apart. Read all three in the Toy tab.",
@@ -3352,7 +3352,7 @@
   },
   {
     "t": "Photo to 3D",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "u": "toys/photo-3d/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
@@ -3362,7 +3362,7 @@
   },
   {
     "t": "Moving photo to 3D",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19",
+    "u": "toys/moving-photo-3d/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
@@ -3372,7 +3372,7 @@
   },
   {
     "t": "Video to 3D",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "u": "toys/video-3d/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
@@ -3382,7 +3382,7 @@
   },
   {
     "t": "Splat field",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWZpZWxkIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuODUsInJvbGwiOjAsImRpc3RhbmNlIjozfX0",
+    "u": "toys/splat-field/",
     "k": "toy",
     "s": "Lab",
     "d": "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
@@ -3392,7 +3392,7 @@
   },
   {
     "t": "Thermal ellipsoids",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRoZXJtYWwtZWxsaXBzb2lkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi45fX0",
+    "u": "toys/thermal-ellipsoids/",
     "k": "toy",
     "s": "Science",
     "d": "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
@@ -3402,7 +3402,7 @@
   },
   {
     "t": "Super-resolution microscope",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNtbG0tbWljcm9zY29wZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "u": "toys/smlm-microscope/",
     "k": "toy",
     "s": "Science",
     "d": "Pinch or scroll to zoom down to single molecules. Tap to see a thin slice at one depth.",
@@ -3412,7 +3412,7 @@
   },
   {
     "t": "Galaxy in a box",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhbGF4eS1ib3gifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/galaxy-box/",
     "k": "toy",
     "s": "Science",
     "d": "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
@@ -3422,7 +3422,7 @@
   },
   {
     "t": "Fluid lab",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZsdWlkLWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "u": "toys/fluid-lab/",
     "k": "toy",
     "s": "Lab",
     "d": "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
@@ -3432,7 +3432,7 @@
   },
   {
     "t": "Airport X-ray scanner",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFpcnBvcnQteHJheSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "u": "toys/airport-xray/",
     "k": "toy",
     "s": "Imaging",
     "d": "Tap to send the next bag through the scanner and watch its X-ray picture build.",
@@ -3442,7 +3442,7 @@
   },
   {
     "t": "How CT works",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imhvdy1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "u": "toys/how-ct/",
     "k": "toy",
     "s": "Imaging",
     "d": "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
@@ -3452,7 +3452,7 @@
   },
   {
     "t": "Walnut CT scan",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhbG51dC1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0",
+    "u": "toys/walnut-ct/",
     "k": "toy",
     "s": "Imaging",
     "d": "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
@@ -3462,7 +3462,7 @@
   },
   {
     "t": "MRI of a fruit",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZydWl0LW1yaSJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4xNSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/fruit-mri/",
     "k": "toy",
     "s": "Imaging",
     "d": "Drag up or down to scroll through the slices. Tap to play through them all.",
@@ -3472,7 +3472,7 @@
   },
   {
     "t": "Electron microscope",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZWN0cm9uLW1pY3Jvc2NvcGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuNDUsInJvbGwiOjAsImRpc3RhbmNlIjoyLjZ9fQ",
+    "u": "toys/electron-microscope/",
     "k": "toy",
     "s": "Imaging",
     "d": "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
@@ -3482,7 +3482,7 @@
   },
   {
     "t": "Thermal camera",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRoZXJtYWwtY2FtZXJhIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjoyLjh9fQ",
+    "u": "toys/thermal-camera/",
     "k": "toy",
     "s": "Imaging",
     "d": "Tap to switch the thermal camera on or off, and watch the tea cool.",
@@ -3492,7 +3492,7 @@
   },
   {
     "t": "Screen",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "u": "toys/screen/",
     "k": "toy",
     "s": "Pictures and pages",
     "d": "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
@@ -3512,7 +3512,7 @@
     "u": "toys/",
     "k": "page",
     "d": "Every toy on Splashery's shelves, from photoreal scans to atoms and games.",
-    "w": "toys every toy on splashery's shelves, from photoreal scans to atoms and games. every toy on the shelves. tap one to play with it in the gallery."
+    "w": "toys every toy on splashery's shelves, from photoreal scans to atoms and games. every toy on the shelves. tap one to see its page and play with it."
   },
   {
     "t": "Tools",

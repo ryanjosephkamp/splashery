@@ -1,0 +1,34 @@
+{
+  "toy": "sorting-machine",
+  "checked": "2026-10-05",
+  "summary": "A test file for the toy pages' \"Is it right?\" section (tests/tpg.spec.mjs); the real files live in docs/evidence/.",
+  "claims": [
+    {
+      "claim": "Bubble sort swaps neighbors until a pass makes no swap.",
+      "how": "Each pass compares neighbors and swaps them when they are out of order.",
+      "where": "src/packs/computing.js",
+      "sources": [
+        {
+          "title": "Bubble sort",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Bubble_sort",
+          "says": "Repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The bars stand for the numbers being sorted.",
+      "how": "Each bar's height is its value.",
+      "where": "src/packs/computing.js",
+      "sources": [],
+      "verdict": "simplified",
+      "test": "",
+      "note": ""
+    }
+  ],
+  "simplified": ["There are 8 bars, not thousands."],
+  "fixes": []
+}
