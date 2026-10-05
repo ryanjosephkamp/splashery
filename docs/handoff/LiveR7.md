@@ -101,6 +101,46 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
+October 5, 2026, 17:00 UTC (Opus 5.5): **the polish round** (the Operator's brief of 15:40 UTC: the
+owner's "the toys could still be sharper"), on `claude/lane-live-r7-polish` (from the lane's head;
+#263 and #284 are frozen for the Integrator's run). No PR yet: it opens as "Phase Live r7 polish: …"
+once #263 merges and main is merged in. No engine change was needed. Hourly check-ins stopped.
+
+- **Chladni plate** (`lv7-chladni-plate-r3`): the labs' sharp kernel, so each grain is a crisp
+  speck, and up to 14,000 grains (was 10,000). The plate's rim and sides are fine strips of small
+  discs, so its edge is straight and clean (was a box whose edge showed as beads). Its top is a
+  denser sheet that stops short of the rim (the sharp kernel showed a faint dotted texture). The bow
+  is drawn like a real one: a round stick with a little camber, a ribbon of hair, a frog and a tip.
+- **Song landscape** (`lv7-song-landscape-r2`): the sharp kernel on half as many splats again
+  (density 1.5).
+  - Live (the long-song path) has three splats a cell, the top and two down the wall to near the
+    floor. Whole song (the sample's path) has up to four layers, the lowest near the floor. The dark
+    floor no longer shows as specks between tall peaks.
+  - The waveform is a smooth envelope, so its lines are clean curves (they were scattered beads).
+  - The floor's edge, the marker and its glow are clean straight lines (they were soft,
+    round-cornered or dotted).
+- **Splat mirror** (`lv7-splat-mirror-r3`, `lv7-splat-mirror-hologram-r3`): sharper colors.
+  - The unsharp mask is 1.2 (was 0.5), its push held to 28 levels so a strong edge gets no halo,
+    with coring so the camera's leftover noise isn't sharpened. The splats are 1.0 cells across (was
+    1.2).
+  - Measured on the mannequin camera, with `sharpness` new in `tools/lv7-mirror-measure.mjs` (how
+    much of the camera's own edges reach the drawn face; 1 = as sharp as the camera): 0.51 to 0.52
+    on the r7 branch, 0.58 to 0.59 now.
+  - Steadiness is the same within this container's run-to-run spread. Measured back to back in both
+    orders: face on 0.8 to 1.2 on both branches; turned 2.7 to 3.3 here against 2.8 to 3.1 on r7.
+    The lane's mirror tests pass (turned 1.63, hologram over the face 8.3).
+- Photo to 3D's live view shares the mirror's picture (`src/live/relief.js`), so it gets the sharper
+  colors and the 1.0 splats too.
+- Tests: `tests/lv7.spec.mjs` checks the sharpness (over 0.57), the two toys' sharp kernel and
+  density, and the waveform's envelope. The landscape, Chladni and mirror tests pass on this branch.
+- **Tried and dropped for the mirror:**
+  - The sharp kernel: sharpness 0.60, but turned jitter doubled (5.3).
+  - A denser grid (383 by 287): sharpness 0.61, but the color noise doubled. A 640 by 480 camera has
+    little more to give.
+  - Sorting the picture at its depth (the camera picture as 3D-offset relief splats and a resort a
+    few times a second): face-on jitter rose from 1.1 to 5.1, as the order of nearly equal neighbors
+    kept changing.
+
 October 5, 2026, 06:10 UTC (Opus 5.5): **all marks good.** `lv7-splat-mirror-r2`,
 `lv7-splat-mirror-hologram-r2` and `lv7-chladni-plate-r2` are marked good, after
 `lv7-song-landscape` and `lv7-chladni-plate` earlier. Main (through #292) is merged into both
