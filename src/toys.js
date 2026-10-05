@@ -3568,6 +3568,16 @@ export const TOYS = [
     camera: { yaw: 0.15, pitch: 0.95, roll: 0, distance: 3.2 },
   },
   {
+    id: "relief-map",
+    label: "Relief map",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "relief map contour lines topographic topo yosemite valley half dome el capitan merced river streams land cover usgs map earth geography",
+    camera: { yaw: 0.25, pitch: 0.7, roll: 0, distance: 3.3 },
+  },
+  {
     id: "earthquakes",
     label: "Earthquakes",
     category: "geo",

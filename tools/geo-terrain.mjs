@@ -27,6 +27,7 @@ import {
   rgbGrid,
   spanMeters,
   writeGeo,
+  decodeImage,
 } from "./geo-lib.mjs";
 
 const N = 192; // height grid
@@ -92,7 +93,6 @@ const SITES = {
       return cached(`msh-${kind}-${w}.${kind === "elev" ? "tif" : "png"}`, base + new URLSearchParams(q));
     };
     const after = fillNoData(readTiff(await utm("elev", 400, 400)));
-    const { decodeImage } = await import("./geo-lib.mjs");
     const img = decodeImage(await utm("img", 1024, 1024));
     // The pre-eruption DEM covers the mountain and the valley north of it
     // (196 km²); beyond it the land barely changed, so today's heights fill in,
@@ -159,6 +159,42 @@ const SITES = {
       { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
       { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
       { name: "tide", type: "f32", w: levels.length, h: 1, data: levels },
+    ]);
+  },
+
+  // Yosemite Valley for the relief map: heights, imagery, USGS NLCD 2021 land
+  // cover (MRLC) and the named streams of the USGS National Hydrography
+  // Dataset, each a line of u, v points in the direction the water flows.
+  async "relief-map"() {
+    const bbox = [-119.7, 37.69, -119.5, 37.79];
+    const span = spanMeters(bbox);
+    const z = fillNoData(await elevation3dep("yv", bbox, 400, 220));
+    const img = await imageryUsgs("yv", bbox, 1024, 560);
+    const nlcdUrl = "https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2021_Land_Cover_L48/wms?" + new URLSearchParams({ service: "WMS", version: "1.1.1", request: "GetMap", layers: "NLCD_2021_Land_Cover_L48", srs: "EPSG:4326", bbox: bbox.join(","), width: "640", height: "352", format: "image/png" }); // prettier-ignore
+    const nlcd = decodeImage(await cached("yv-nlcd.png", nlcdUrl));
+    const nhdUrl = "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6/query?" + new URLSearchParams({ geometry: bbox.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326", outSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "gnis_name,ftype", returnGeometry: "true", f: "geojson" }); // prettier-ignore
+    const nhd = JSON.parse(await cached("yv-nhd.json", nhdUrl, { text: true }));
+    const rivers = [];
+    for (const f of nhd.features) {
+      const name = f.properties.gnis_name;
+      if (!name) continue;
+      const lines = f.geometry.type === "MultiLineString" ? f.geometry.coordinates : [f.geometry.coordinates];
+      for (const line of lines) {
+        const pts = line
+          .map(([lon, lat]) => [(lon - bbox[0]) / (bbox[2] - bbox[0]), (bbox[3] - lat) / (bbox[3] - bbox[1])])
+          .filter(([u, v]) => u >= 0 && u <= 1 && v >= 0 && v <= 1)
+          .map(([u, v]) => [+u.toFixed(4), +v.toFixed(4)]);
+        if (pts.length >= 2) rivers.push({ name, main: name === "Merced River", pts });
+      }
+    }
+    const HW = 192;
+    const HH = Math.round((HW * span[1]) / span[0]);
+    const CW = 320;
+    const CH = Math.round((CW * span[1]) / span[0]);
+    writeGeo("assets/toys/relief-map/terrain.bin", { site: "Yosemite Valley, California", bbox, span, fetched: today(), rivers }, [ // prettier-ignore
+      { name: "height", type: "height", w: HW, h: HH, data: resample(z, HW, HH) },
+      { name: "color", type: "rgb", w: CW, h: CH, data: rgbGrid(img, CW, CH) },
+      { name: "land", type: "rgb", w: CW, h: CH, data: rgbGrid(nlcd, CW, CH) },
     ]);
   },
 };

@@ -18,6 +18,9 @@
 //                 tops over a Blue Marble map; the eyewall and bands turn, rain
 //                 falls and the low winds flow; the tap plays the day it grew
 //                 from 70 to 155 knots along its best track
+//   relief-map    Yosemite Valley as a relief map: contour lines, height
+//                 tints, the aerial photo or land cover, and the named streams;
+//                 the tap sends a contour up the walls and water down the streams
 //   earthquakes   the USGS feed, live when the toy opens or its plaque is
 //                 tapped (a dated snapshot ships for when it can't be reached),
 //                 on a NOAA ETOPO1 relief globe; the tap plays the quakes in
@@ -835,6 +838,150 @@ const HURRICANE = {
   },
 };
 
+// ---- A relief map: Yosemite Valley ---------------------------------------------------------
+
+const RM_FILE = "assets/toys/relief-map/terrain.bin";
+const RM_T = 7;
+
+// A hypsometric tint, as on a printed relief map.
+const TINT = ["#4f7a45", "#7a9a56", "#b8b77a", "#c9a776", "#a98665", "#d9d1c4", "#f4f2ee"];
+
+const RELIEF_MAP = {
+  alive: false,
+  density: 1.5,
+  kernel: "sharp",
+  credits: [
+    CREDIT_3DEP,
+    {
+      label: "Streams",
+      title: "National Hydrography Dataset",
+      source: "https://www.usgs.gov/national-hydrography/national-hydrography-dataset",
+      author: "U.S. Geological Survey",
+      ...PD,
+    },
+    {
+      label: "Land cover",
+      title: "National Land Cover Database 2021 (MRLC)",
+      source: "https://www.mrlc.gov/data/nlcd-2021-land-cover-conus",
+      author: "U.S. Geological Survey and the MRLC consortium",
+      ...PD,
+    },
+    CREDIT_IMAGERY,
+  ],
+  options: [
+    {
+      key: "look",
+      label: "Map",
+      type: "select",
+      default: "height",
+      choices: [
+        { id: "height", label: "Height colors" },
+        { id: "photo", label: "Aerial photo" },
+        { id: "land", label: "Land cover" },
+      ],
+    },
+    { key: "contours", label: "Contour lines", type: "switch", default: true },
+    { key: "rivers", label: "Streams", type: "switch", default: true },
+  ],
+  controls: [{ key: "sweep", label: "Sweep", type: "pulse", ease: RM_T }],
+  action: { key: "sweep", label: "Sweep a contour and the streams" },
+  async prepare() {
+    await loadGeo(RM_FILE);
+  },
+  drive(t, c, out) {
+    const s = c.sweep > 0 ? (1 - c.sweep) * RM_T : RM_T;
+    const up = s < RM_T ? seg(s, 0.2, 5.6) * 1.06 - 0.03 : -1;
+    out.morph = [up, up, 0, 0];
+    out.glow = [0.35, 0.8, 1.0, 0.9];
+  },
+  build(k, o) {
+    const g = geoLoaded(RM_FILE);
+    const H = g.layer("height");
+    const photo = g.layer("color");
+    const land = g.layer("land");
+    const F = frame({ span: g.meta.span, exag: 1.5, lo: H.min - 300, depth: 0.08 });
+    const norm = (m) => (m - H.min) / (H.max - H.min);
+    const du = 1 / H.w;
+    const mPerU = g.meta.span[0];
+    const mPerV = g.meta.span[1];
+    addBlock(k, {
+      F,
+      height: H.sample,
+      share: 0.86,
+      kind: "band",
+      channel: 0,
+      params: (c) => [norm(F.m(c.p[1])), 0.008],
+      color: (c) => {
+        const m = F.m(c.p[1]);
+        let col;
+        if (o.look === "photo") col = photo.sample(c.u, c.v);
+        else if (o.look === "land") col = land.sample(c.u, c.v);
+        else col = ramp(TINT, norm(m));
+        col = shade(col, (o.look === "photo" ? 0.95 : 0.8) * hill(c.n, 0.45) + 0.05);
+        if (o.contours !== false) {
+          // A line every 100 m, heavier every 500 m, about as wide anywhere.
+          const gx = (H.sample(c.u + du, c.v) - H.sample(c.u - du, c.v)) / (2 * du * mPerU);
+          const gz = (H.sample(c.u, c.v + du) - H.sample(c.u, c.v - du)) / (2 * du * mPerV);
+          const grad = Math.hypot(gx, gz);
+          const near = (step) => {
+            const r = ((m % step) + step) % step;
+            return Math.min(r, step - r);
+          };
+          const w = Math.max(2.5, 30 * grad);
+          if (near(500) < w * 1.4) return { c: shade(col, 0.42), keep: true };
+          if (near(100) < w) return { c: shade(col, 0.66), keep: true };
+        }
+        return col;
+      },
+      side: (m) => mix("#6b6258", "#8f857a", smoothstep(H.min - 300, H.max, m)),
+    });
+    // The streams: short streaks along each line, a little above the ground;
+    // their glow runs downhill as the channel climbs.
+    if (o.rivers !== false) {
+      const segs = [];
+      let total = 0;
+      for (const r of g.meta.rivers)
+        for (let i = 0; i + 1 < r.pts.length; i++) {
+          const a = r.pts[i];
+          const b = r.pts[i + 1];
+          const len = Math.hypot((b[0] - a[0]) * F.sx, (b[1] - a[1]) * F.sz) * (r.main ? 2.2 : 1);
+          total += len;
+          segs.push({ a, b, main: r.main, cum: total });
+        }
+      const on = (u, v, lift) => [F.x(u), F.y(H.sample(u, v)) + lift, F.z(v)];
+      k.cloud({ share: 0.06, size: 1 }, (rand) => {
+        const x = rand() * total;
+        let lo = 0;
+        let hi = segs.length - 1;
+        while (lo < hi) {
+          const mid = (lo + hi) >> 1;
+          if (segs[mid].cum < x) lo = mid + 1;
+          else hi = mid;
+        }
+        const sg = segs[lo];
+        const f = rand();
+        const u = sg.a[0] + (sg.b[0] - sg.a[0]) * f;
+        const v = sg.a[1] + (sg.b[1] - sg.a[1]) * f;
+        const p = on(u, v, 0.004);
+        const q = on(sg.b[0], sg.b[1], 0.004);
+        const pa = on(sg.a[0], sg.a[1], 0.004);
+        return {
+          p,
+          color: sg.main ? [0.2, 0.45, 0.85] : [0.25, 0.55, 0.9],
+          size: sg.main ? 0.75 : 0.42,
+          dir: vec.unit(vec.sub(q, pa)),
+          stretch: 2.2,
+          opacity: 0.95,
+          kind: "band",
+          channel: 1,
+          params: [1 - norm(H.sample(u, v)), 0.04],
+          pattern: false,
+        };
+      });
+    }
+  },
+};
+
 // ---- Earthquakes ---------------------------------------------------------------------------
 
 const EQ_DIR = "assets/toys/earthquakes/";
@@ -1084,5 +1231,6 @@ export const RECIPES = {
   "sea-floor": SEA_FLOOR,
   "tide-harbor": TIDE_HARBOR,
   hurricane: HURRICANE,
+  "relief-map": RELIEF_MAP,
   earthquakes: EARTHQUAKES,
 };
