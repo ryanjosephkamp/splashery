@@ -355,6 +355,9 @@ export class ArcadeRuntime {
         steps++;
       }
     }
+    // A running game's frame with no step (no time passed yet) keeps its
+    // presses for the next one, so a press is never lost. (Paused, they go.)
+    if (running && !steps) for (const a of pressed) this.input.edges.push(a);
     if (this.mode === "play") {
       const st = this.game.status();
       if (st.over) {
