@@ -895,6 +895,13 @@ function bk5Pick(pk, pics, N) {
   return true;
 }
 
+// The taps since the last frame, oldest first (info.taps; info.tap alone
+// where only that is given).
+function pgTaps(info) {
+  if (info.taps?.length) return info.taps;
+  return info.tap ? [info.tap] : [];
+}
+
 // Raises a figure ({ page, box }): on its own sheet and part, the oldest
 // laid back first when POP_CAP are up.
 function pgRaise(fig, manual) {
@@ -1560,10 +1567,13 @@ const BOOK_RECIPE = {
     const time = info.time ?? t;
     const n = info.tap?.n ?? 0;
     if (n < BOOK.tapN) BOOK.tapN = 0;
-    if (n > BOOK.tapN && bk5Pick(info.tap?.pick, pics, N)) BOOK.tapN = n; // lane Books r5
-    if (n > BOOK.tapN) {
-      BOOK.tapN = n;
-      if (N && BOOK.queue.length < 3) BOOK.queue.push(info.tap?.pick === 1 ? -1 : 1);
+    // Every tap since the last frame, in order (lane Pages r6: two figures
+    // tapped quickly both rise).
+    for (const tp of pgTaps(info)) {
+      if (tp.n <= BOOK.tapN) continue;
+      BOOK.tapN = tp.n;
+      if (bk5Pick(tp.pick, pics, N)) continue; // lane Books r5
+      if (N && BOOK.queue.length < 3) BOOK.queue.push(tp.pick === 1 ? -1 : 1);
       // Sound C: the page's own sound for this style (the album has its own tap sound).
       const page = PAGE_SOUNDS[Object.keys(BOOK_STYLES).find((id) => BOOK_STYLES[id] === st)];
       if (page) out.cues.push(page);
@@ -2714,10 +2724,11 @@ export const RECIPES = {
       // page turn waits until risen figures have laid back.)
       const n = info.tap?.n ?? 0;
       if (n < LAB.tapN) LAB.tapN = 0;
-      if (n > LAB.tapN && bk5Pick(info.tap?.pick, pics, pics?.count || 0)) LAB.tapN = n;
-      if (n > LAB.tapN) {
-        LAB.tapN = n;
-        const d = info.tap?.pick === 1 ? -1 : 1;
+      for (const tp of pgTaps(info)) {
+        if (tp.n <= LAB.tapN) continue;
+        LAB.tapN = tp.n;
+        if (bk5Pick(tp.pick, pics, pics?.count || 0)) continue;
+        const d = tp.pick === 1 ? -1 : 1;
         if (pics?.kind === "video") pics.togglePlay();
         else if (pics?.count > 1) LAB.pend = d;
       }

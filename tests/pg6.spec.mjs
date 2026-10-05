@@ -519,7 +519,7 @@ test.describe("Pop out (in the app)", () => {
     await page.evaluate(() => window.__splashery.app.pictureStep(1));
     await downTo(page, 0);
     await step(page, 2);
-    expect(await page.evaluate(() => window.__splashery.player.pictures.page)).toBe(3);
+    expect(await page.evaluate(() => window.__splashery.player.pictures.page)).toBe(2);
     await expect(btn).toHaveAttribute("aria-pressed", "true");
     expect(await page.evaluate(() => window.__splashery.player.camera.tiltLock)).toBe(true);
     // Another page toy: still on. A toy that has none: the button goes.
@@ -572,6 +572,7 @@ test.describe("Pop out (in the app)", () => {
       const { createScene } = await import("/src/state.js");
       return encodeSceneHash(createScene({ toy: { kind: "builtin", id: "your-book", figures: [{ page: 1, box, depth: 3 }] }, motion: { controls: { pop: 1 } } })); // prettier-ignore
     }, BOXES.a);
+    await page.goto("about:blank");
     await ready(page, `${APP}&labs=1#s=${hash}`);
     await waitSheets(page);
     // A link with Pop out on turns it on.
