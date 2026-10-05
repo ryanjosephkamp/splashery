@@ -681,6 +681,9 @@ const POP_RISE = 0.95; // seconds to rise
 const POP_FALL = 0.7; // seconds to lay back
 const POP_FAST = 0.28; // seconds to lay back before a page turns
 const POP_SWAY = 6; // seconds a risen figure sways (smaller and smaller)
+// Polish: a pop sheet is built this many times its size at rest (the size it
+// shows once risen, grown and nearer), and its part scales it back.
+const POP_DETAIL = 1.6;
 const DEPTH_MAX = 5; // the most depth, in multiples of a figure's own
 // pops: the figures up (or on their way), oldest first; host: "book" (Your
 // book and the Photo album) or "lab" (the Picture lab); sel: the id of the
@@ -695,6 +698,7 @@ const IDLE = { phase: "idle", target: null, kind: "", relief: null, u: 0 };
 export const BOOKS_R5 = {
   BK5,
   PG,
+  POP_DETAIL, // (a pop part's scale is its figure's size over this)
   get POP() {
     return PG.pops[PG.pops.length - 1] || IDLE;
   },
@@ -1475,7 +1479,7 @@ function bk5Pose(F, u, time) {
   const c = qRot(q, [T.c[0] * s, T.c[1] * s, 0]);
   F.u = F.phase === "rise" ? clamp01((time - F.t0) / POP_RISE) : F.phase === "up" ? 1 : F.phase === "fall" ? Math.max(0, u) : 0; // prettier-ignore
   F.at = { cx: C[0], cy: C[1], hw: (r.hw * s) / T.g0, hh: (r.hh * s) / T.g0 };
-  return { quat: q, offset: [C[0] - c[0], C[1] - c[1], C[2] - c[2]], scale: s, visible: 1 };
+  return { quat: q, offset: [C[0] - c[0], C[1] - c[1], C[2] - c[2]], scale: s / POP_DETAIL, visible: 1 }; // prettier-ignore
 }
 
 const POP_SOUNDS = {
@@ -1492,7 +1496,9 @@ function bk5Build(k, z, dims = BOOK.dims) {
   BK5.drawing = null;
   for (let i = 0; i < POP_CAP; i++) {
     const pp = k.part(`bk5pop${i}`, { pivot: [0, 0, 0], axis: [0, 1, 0] });
-    k.sheet({ id: `pop${i}`, center: [0, 0, 0], width: W, height: H, part: pp, method: "pixels" });
+    // (Built POP_DETAIL times its size and shrunk back by its part, so it is
+    // built for the size it shows at once it has risen: sharp, not soft.)
+    k.sheet({ id: `pop${i}`, center: [0, 0, 0], width: W * POP_DETAIL, height: H * POP_DETAIL, part: pp, method: "pixels" }); // prettier-ignore
   }
   const a = 0.06 * (H / PAGE_H);
   const t = 0.01 * (H / PAGE_H);
@@ -1720,6 +1726,7 @@ function bookDrag(opts) {
 }
 
 const BOOK_RECIPE = {
+  kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
   // A book you page through: it keeps still, facing you.
   turntable: false,
   tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
@@ -2426,6 +2433,7 @@ const ALBUM_BOXES = (W, H) => ({
 });
 
 const ALBUM_RECIPE = {
+  kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
   turntable: false,
   tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
   density: 1,
@@ -2872,6 +2880,7 @@ function labDecorate(canvas, { variant }) {
 
 export const RECIPES = {
   "picture-lab": {
+    kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
     // A flat sheet that shows whatever you open, and nothing else. It keeps
     // still (no turntable), facing you.
     turntable: false,
