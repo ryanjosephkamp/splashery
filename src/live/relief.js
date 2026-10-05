@@ -792,6 +792,7 @@ export function tidyBand(band, d) {
 
 // Live r7: an unsharp mask on RGBA pixels (w x h) in place: c + amount (c -
 // the 3 by 3 box mean), by rows then columns.
+const CORE = 4; // levels (sharpen)
 export function sharpen(px, w, h, amount, tmp) {
   for (let ch = 0; ch < 3; ch++) {
     for (let y = 0; y < h; y++)
@@ -810,8 +811,12 @@ export function sharpen(px, w, h, amount, tmp) {
         const m = (tmp[(y0 * w + x) * 3 + ch] + tmp[(y * w + x) * 3 + ch] + tmp[(y1 * w + x) * 3 + ch]) / 3; // prettier-ignore
         const o = (y * w + x) * 4 + ch;
         // (Live r7 polish: the push is held to 28 levels, so a strong edge
-        // (an eye's rim) gets no halo while fine detail still sharpens.)
-        const push = amount * (px[o] - m);
+        // (an eye's rim) gets no halo while fine detail still sharpens; and a
+        // difference within the camera's leftover noise, a few levels, gets
+        // little of it (coring), so the picture is no less steady.)
+        const d = px[o] - m;
+        const ad = d < 0 ? -d : d;
+        const push = amount * (ad < CORE ? (d * ad) / CORE : d);
         px[o] = px[o] + (push > 28 ? 28 : push < -28 ? -28 : push);
       }
   }
