@@ -104,8 +104,9 @@ additive.
 
 ## State
 
-READY for review (October 5, 2026), PR #266. Model: Opus 5.5. No engine PR: nothing in the app or
-the gallery changed.
+READY to merge (October 5, 2026), PR #266: the owner marked the r3 cards (site-walkthrough-r3,
+site-tools-desktop-r3) "good". Model: Opus 5.5. No engine PR: nothing in the app or the gallery
+changed.
 
 Done, all under `site/` (https://ryanjosephkamp.github.io/splashery/site/ once merged, linked from
 nowhere public, `noindex` while it is a preview):
