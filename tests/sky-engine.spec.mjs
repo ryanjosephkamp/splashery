@@ -19,10 +19,20 @@ test("from inside, the camera stands at the target and looks out along the orbit
   const inside = cam.pose();
   expect(near(inside.position, [0, 0, 0])).toBe(true);
   // It looks the other way from the orbit camera, so up the sky for a positive pitch.
-  expect(near(inside.forward, orbit.forward.map((v) => -v))).toBe(true);
+  expect(
+    near(
+      inside.forward,
+      orbit.forward.map((v) => -v),
+    ),
+  ).toBe(true);
   expect(inside.forward[1]).toBeGreaterThan(0);
   expect(near(inside.up, orbit.up)).toBe(true);
-  expect(near(inside.right, orbit.right.map((v) => -v))).toBe(true);
+  expect(
+    near(
+      inside.right,
+      orbit.right.map((v) => -v),
+    ),
+  ).toBe(true);
   expect(inside.fov).toBeCloseTo(70, 6);
   // A pinch (the distance) scales the field of view, within 10 to 120 degrees.
   cam.zoomBy(0.5);
