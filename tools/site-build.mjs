@@ -6,7 +6,10 @@
 // history), so a new kind of page is a new entry in PAGE_TYPES, not new machinery.
 //
 //   node tools/site-build.mjs            # writes site/ (then commit what changed)
-//   node tools/site-build.mjs --check    # exits 1 if site/ is out of date
+//   node tools/site-build.mjs --check    # exits 1 if site/ is out of date, apart from
+//                                        # the files built from the toy list and the
+//                                        # git history (they follow main: the
+//                                        # Operator's upkeep rebuilds them)
 //
 // Hand-written files live in site/assets/ (site.css, site.js, search.js,
 // offline.js) and are copied by nobody: pages link to them. site/assets/og.png
@@ -616,22 +619,42 @@ hash.update(fs.readFileSync(path.join(root, "tools/site-sw.template.js")));
 const version = hash.digest("hex").slice(0, 12);
 files.set("sw.js", await pretty("sw.js", serviceWorker(version, precache)));
 
+// The files built from the toy list or the git history follow main: a lane that
+// adds a toy (or any merge) changes them, and the Operator's upkeep
+// (tools/upkeep.mjs) rebuilds them after each merge. --check reports them but
+// fails only on the rest: the shell, the hand-written pages and everything else
+// the build makes. A new page type that reads toys belongs in TOY_TYPES.
+const TOY_TYPES = new Set(["home", "shelves", "tools", "about", "changelog"]);
+const followsMain = new Set([
+  ...PAGES.filter((p) => TOY_TYPES.has(p.type)).map((p) => `${p.path}index.html`),
+  "search-index.json",
+  "sw.js",
+]);
 let stale = 0;
+let staleShell = 0;
 for (const [f, text] of files) {
   const file = path.join(OUT, f);
   const old = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
   if (old === text) continue;
   stale++;
   if (CHECK) {
-    console.log(`out of date: site/${f}`);
+    if (followsMain.has(f)) console.log(`follows main (rebuilt by the upkeep): site/${f}`);
+    else {
+      staleShell++;
+      console.log(`out of date: site/${f}`);
+    }
     continue;
   }
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, text);
 }
-if (CHECK && stale) {
+if (CHECK && staleShell) {
   console.log("Run: node tools/site-build.mjs");
   process.exit(1);
+}
+if (CHECK) {
+  console.log(`site/ is current${stale ? ` apart from ${stale} file(s) that follow main` : ""}.`);
+  process.exit(0);
 }
 console.log(
   `site/: ${files.size} files (${stale} changed), ${PAGES.length} pages, version ${version}`,

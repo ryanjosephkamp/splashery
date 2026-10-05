@@ -42,18 +42,24 @@ const homeToyReady = (page) =>
   page.frameLocator(".hero-toy iframe").locator("body[data-ready='true']").waitFor({ timeout: 180_000 }); // prettier-ignore
 
 test.describe("site", () => {
-  test("the build is current apart from What's new", () => {
-    // What's new follows the git history, so it changes whenever main moves;
-    // every other file must match a fresh build.
+  test("the build is current, apart from the files that follow main", () => {
+    // The pages built from the toy list and the git history (Home, Toys, Tools,
+    // Science, Studio, About, What's new, the search index and the service
+    // worker) change whenever a lane adds a toy or main gains a merge; the
+    // Operator's upkeep rebuilds them. Every other file must match a fresh build.
     let out = "";
+    let code = 0;
     try {
       out = execFileSync("node", ["tools/site-build.mjs", "--check"], { encoding: "utf8" });
     } catch (err) {
       out = String(err.stdout || "");
+      code = err.status;
     }
     const stale = out.split("\n").filter((l) => l.startsWith("out of date:"));
-    const real = stale.filter((l) => !/site\/(new\/index\.html|sw\.js)$/.test(l));
-    expect(real, out).toEqual([]);
+    expect(stale, out).toEqual([]);
+    expect(code, out).toBe(0);
+    // The upkeep rebuilds the site after each merge.
+    expect(fs.readFileSync("tools/upkeep.mjs", "utf8")).toContain('"tools/site-build.mjs"');
   });
 
   test("every page loads with the one menu, a title and a link preview", async ({ page }) => {

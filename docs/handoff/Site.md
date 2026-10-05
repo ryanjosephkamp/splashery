@@ -158,9 +158,12 @@ nowhere public, `noindex` while it is a preview):
   `site.css`, `site.js`, `search.js`, `offline.js`, `play.js`; `og.png` from
   `node tools/site-og.mjs`, which needs the local server). Commit what it writes. Never edit a
   generated file by hand; on a merge conflict in `site/`, take either side and rebuild.
-- `node tools/site-build.mjs --check` lists files that are out of date. `site/new/index.html` and
-  `site/sw.js` change whenever main gains a merged PR (What's new reads the git history), so rebuild
-  after merging main; the test allows those two to lag.
+- `node tools/site-build.mjs --check` fails only when the shell or a page that doesn't read the toy
+  list is out of date. The files built from the toy list and the git history (Home, Toys, Tools,
+  Science, Studio, About, What's new, `search-index.json`, `sw.js`; the page types in `TOY_TYPES`)
+  follow main: a lane that adds a toy doesn't rebuild `site/`, and the Operator's upkeep
+  (`node tools/upkeep.mjs`, which now runs the site build) refreshes them after each merge. A new
+  page type that reads toys goes in `TOY_TYPES`.
 - The menu, the pages and their words are in `tools/site-pages.mjs`; every link there is written
   relative to `site/`, and the build adds the way back up for each page's depth.
 - `site/play/` is the embed player (`embed/index.html`, rebuilt one folder deeper). The home page
