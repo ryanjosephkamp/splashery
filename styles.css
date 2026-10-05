@@ -2890,3 +2890,77 @@ body:has(#game-bar:not([hidden])) .hands-bar {
     display: none;
   }
 }
+
+/* Lane Pages r6 ------------------------------------------------------------- */
+/* Pop out, in the row of round buttons beside the flag on a computer; on a
+   phone, where the row is full, it takes the turntable's place (a page toy
+   holds still). Shown only while a page toy is open. */
+
+#pop-toggle {
+  right: calc(var(--panel-w) + 36px + 264px);
+}
+
+body.ui2 #pop-toggle {
+  right: calc(var(--panel-w) + 36px + 308px);
+}
+
+#pop-toggle[hidden] {
+  display: none;
+}
+
+/* (ui.js puts it where the turntable button sits on a phone.) */
+@media (max-width: 760px) {
+  body.pop-toy #turntable-toggle {
+    display: none;
+  }
+}
+
+body.focus #pop-toggle {
+  display: none !important;
+}
+
+/* The slider over the stage (a risen figure's depth), set by the toy. */
+.toy-slider {
+  position: fixed;
+  left: calc((100% - var(--panel-w) - 24px) / 2);
+  bottom: 70px;
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: min(320px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.toy-slider[hidden] {
+  display: none;
+}
+
+.toy-slider-label {
+  flex: none;
+  font-weight: 600;
+}
+
+.toy-slider input {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .toy-slider {
+    left: 50%;
+    bottom: calc(var(--dock-h, 200px) + 54px);
+  }
+
+  body.sheet-open .toy-slider,
+  body.shelf-grid .toy-slider {
+    display: none;
+  }
+}
+
+/* /Lane Pages r6 */

@@ -56,6 +56,10 @@ export function createUI(app) {
     flagToggle: $("flag-toggle"), // UI r3
     flagPop: $("flag-pop"), // UI r3
     flagGlobal: $("flag-global"), // UI r3
+    popToggle: $("pop-toggle"), // lane Pages r6
+    toySlider: $("toy-slider"), // lane Pages r6
+    toySliderLabel: $("toy-slider-label"),
+    toySliderInput: $("toy-slider-input"),
     tabs: $("tabs"),
     panes: $("panes"),
     shelf: $("shelf"),
@@ -513,6 +517,7 @@ export function createUI(app) {
     controlInputs.clear();
     for (const c of recipe?.controls || []) {
       if (c.type === "pulse") continue;
+      if (c.global) continue; // lane Pages r6: set from the top bar
       if (c.type === "toggle") {
         if (recipe.action?.key === c.key) continue;
         const row = document.createElement("label");
@@ -1893,6 +1898,13 @@ export function createUI(app) {
     showFlagPop(false);
     els.flagToggle.focus();
   });
+  els.popToggle.addEventListener("click", () => app.togglePopOut()); // lane Pages r6
+  // On a phone, where the row of round buttons is full, Pop out takes the
+  // turntable button's place (a page toy holds still).
+  function placePopToggle() {
+    els.popToggle.style.right = narrow.matches ? getComputedStyle(els.turntableToggle).right : "";
+  }
+  addEventListener("resize", placePopToggle);
   els.flagGlobal.addEventListener("change", () => {
     app.setGlobalFlag(els.flagGlobal.value);
     showFlagPop(false);
@@ -2585,6 +2597,28 @@ export function createUI(app) {
     legendBox.appendChild(list);
   });
 
+  // ---- The slider over the stage (lane Pages r6) ------------------------------------
+  // A kit toy's drive() may set out.slider = { id, label, value } (value 0
+  // to 1): a slider shown over the stage while it is set (a risen figure's
+  // depth). Its value is set from the drive when the id changes; moving it
+  // hands { id, value } to the next drive as info.slider.
+  let sliderId = null;
+  app.player?.on("frame", () => {
+    const sl = app.player.motion?.out?.slider || null;
+    const id = sl ? String(sl.id) : null;
+    els.toySlider.hidden = !sl;
+    if (id === sliderId) return;
+    sliderId = id;
+    if (!sl) return;
+    els.toySliderLabel.textContent = sl.label || "";
+    els.toySliderInput.value = String(Math.round(1000 * Math.min(1, Math.max(0, sl.value || 0))));
+    els.toySliderInput.setAttribute("aria-label", sl.label || "Amount");
+  });
+  els.toySliderInput.addEventListener("input", () => {
+    if (sliderId !== null)
+      app.player.sliderInput(sliderId, Number(els.toySliderInput.value) / 1000);
+  });
+
   // ---- Toy help (lane Help) ---------------------------------------------------------
   // A short how-to-play line when a new toy opens (picked from the shelf,
   // opened from a link or after a refresh). It fades after a few seconds and
@@ -3089,6 +3123,16 @@ export function createUI(app) {
       else setMode(stop);
     },
     toggleFocus: () => setFocus(!focusOn),
+    // Lane Pages r6: the top bar's Pop out, shown while a page toy is open.
+    setPopOut(available, on) {
+      els.popToggle.hidden = !available;
+      document.body.classList.toggle("pop-toy", !!available);
+      placePopToggle();
+      els.popToggle.setAttribute("aria-pressed", String(!!on));
+      els.popToggle.title = on
+        ? "Pop out: on (tap a figure to raise it)"
+        : "Pop out: off (turn it on, then tap a figure)";
+    },
     // UI r3: the flag button shows whether a flag is set for every toy.
     setGlobalFlag(code) {
       els.flagToggle.setAttribute("aria-pressed", String(!!code));

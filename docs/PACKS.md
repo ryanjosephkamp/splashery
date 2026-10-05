@@ -523,6 +523,27 @@ pitch and roll stay at the toy's starting pose. Zoom, pan, pinch and Reset view 
 - A normal two-finger pinch never turns a toy: two fingers zoom, roll only after a clear twist
   (about 17 degrees) and turn only when they move together first (`PINCH_*` in `src/camera.js`).
 
+- Since October 5, 2026 (lane Pages r6), a drive can free the tilt for a while:
+  `out.tiltFree = true` on each frame it wants it (a book with figures standing up, to see them from
+  the side). A toy whose tilt is locked then turns any way under a drag; when the drive stops
+  asking, the view eases back level and square to the toy and the lock comes back. A toy the visitor
+  had unlocked stays unlocked.
+
+### Top-bar switches, the stage slider and figure depths (lane Pages r6)
+
+- A control marked `global: "pop"` (a toggle) is set from the top bar's Pop out button, not from the
+  Toy tab: one setting for every toy that has such a control, remembered on the device
+  (`splashery.popout`), shown only while one is open. The app sets the control to 1 or 0 when the
+  toy opens and when the button is pressed; a scene whose controls have it on turns the button on
+  for the visit. The first time such a toy opens on a device, a line says the button is there.
+- `out.slider = { id, label, value }` (value 0 to 1) shows a small slider over the stage while it is
+  set. The slider takes the value when `id` changes; moving it hands
+  `info.slider = { id, value, n }` to the next drive (`n` counts the changes, so a drive can tell a
+  new move from an old one).
+- `info.figures` is the scene's `toy.figures` (docs/SCENE-SCHEMA.md): `[{ page, box, depth }]`. A
+  drive that hands back `out.figures` (a list) replaces it in the scene, so links, saved files and
+  embeds carry it; an empty list clears it.
+
 ## 5d. Songs and levers
 
 From lane Pianos (September 29, 2026; its notes are in [handoff/Pianos.md](handoff/Pianos.md)). A
