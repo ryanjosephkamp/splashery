@@ -3719,6 +3719,18 @@ export const TOYS = [
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
   },
+  // ---- Pack: night-sky (lane Night sky) ----
+  {
+    id: "night-sky",
+    label: "Night sky",
+    category: "space",
+    kind: "kit",
+    pack: "night-sky",
+    labs: true,
+    tags: "stars planets moon sun constellations planetarium astronomy sky night location date time phase",
+    // Seen from inside: looking south, a little above the horizon.
+    camera: { yaw: 0, pitch: 0.3, roll: 0, distance: 5 },
+  },
   // ---- Pack: data-climate (lane Data and climate) ----
   {
     id: "data-in-3d",

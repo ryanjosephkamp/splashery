@@ -2586,6 +2586,12 @@
       "effect": "A molecule viewer made of splats: open a PDB, mmCIF, SDF/MOL or XYZ file, or fetch an entry from the Protein Data Bank by its code. Draw it as a cartoon, balls and sticks, space-filling atoms or a molecular surface, colored by element, chain, residue, B-factor, along the chain or by secondary structure. A tap on an atom picks it: a ring marker turns round it; a second pick draws a dotted line and gives the distance in ångströms, a third an arc and the angle in degrees. The Play button measures the distance across a bond angle near the middle, then the angle, then clears.",
       "sound": "Quiet: one soft, low click as an atom is picked.",
       "improved": "Lane Molecule viewer: readers for PDB, mmCIF, SDF/MOL and XYZ (src/molview/parse.js) in a Web Worker; bonds from the file or from covalent radii; helices and strands from the file or inferred (and labeled so); a blobby Gaussian surface; a splat budget that falls to one Gaussian per atom on big structures (tested up to the human 80S ribosome, 4V6X, 237,685 atoms). Samples (snapshot of October 5, 2026, CC0): 1CRN, 1EMA, 1LYZ, 1BNA and caffeine (CCD CFF)."
+    },
+    "night-sky": {
+      "v": "new",
+      "owner": "Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.",
+      "effect": "The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6 (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star or planet with a ring around it and a few facts beside the stage.",
+      "sound": "One soft, low tine and a faint breath as the ring marks it."
     }
   }
 }

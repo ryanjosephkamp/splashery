@@ -2708,6 +2708,17 @@
       "license": "CC BY 4.0",
       "checked": "September 30, 2026",
       "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
+    },
+    {
+      "id": "night-sky-catalog",
+      "file": "assets/toys/night-sky/sky.json",
+      "toy": "night-sky",
+      "name": "HYG database v4.1 (stars to magnitude 6) and the Stellarium Western sky culture's constellation lines",
+      "author": "David Nash (astronexus.com); the Stellarium team",
+      "page": "https://github.com/astronexus/HYG-Database",
+      "license": "CC BY-SA 4.0",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/sky-catalog.mjs: 5,071 stars (every star to magnitude 6.0 plus the fainter ones a line needs) and 674 line segments (Stellarium commit 014fbb5e59; its data license reads \"CC BY-SA\", no version, credited as 4.0). The joined file stays CC BY-SA 4.0."
     }
   ],
   "dataClimateSamples": [

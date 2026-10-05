@@ -1,0 +1,173 @@
+{
+  "toy": "night-sky",
+  "checked": "2026-10-05",
+  "summary": "The sky over a chosen place and moment: about 5,000 cataloged stars, the Sun, the Moon with its phase, and the seven planets, placed by published formulas. Positions match JPL Horizons and Astropy to within a few hundredths of a degree for the Sun, the stars and the inner planets, about 0.2 degrees for Jupiter and Saturn and 0.3 degrees for the Moon. The sky's glow, the Milky Way's band and the drawn sizes of the Sun and the Moon are pictures, not measurements.",
+  "claims": [
+    {
+      "claim": "The stars are where the HYG catalog puts them, turned for the place's sidereal time and the date's precession.",
+      "how": "Each star sits at its catalog J2000 direction. One rotation turns them all: precession to the date (Meeus 21.2, the IAU 1976 angles), then the place's local sidereal time and latitude.",
+      "where": "src/sky/astro.js:75",
+      "sources": [
+        {
+          "title": "HYG Database (v4.1) and its field guide",
+          "publisher": "David Nash, astronexus",
+          "url": "https://raw.githubusercontent.com/astronexus/HYG-Database/main/hyg/README.md",
+          "says": "ra, dec: the star's right ascension and declination, for epoch and equinox 2000.0."
+        },
+        {
+          "title": "Astronomical Algorithms, 2nd ed., chapter 21 (Precession)",
+          "publisher": "Jean Meeus, Willmann-Bell, 1998",
+          "url": "https://archive.org/details/astronomical-algorithms-meeus",
+          "says": "The rigorous method: the angles zeta, z and theta as series in T, the centuries from J2000."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sky.spec.mjs:143",
+      "note": "Vega, Sirius, Polaris and Acrux at four places and times agree with Astropy (FK5 J2000 to AltAz, no refraction) within 0.02 degrees. Nutation, aberration, proper motion and refraction are left out; together they move a star by well under a tenth of a degree."
+    },
+    {
+      "claim": "Greenwich sidereal time follows the IAU 1982 formula.",
+      "how": "GMST = 280.46061837 + 360.98564736629 (JD − 2451545) + 0.000387933 T² − T³ / 38710000 degrees, plus the east longitude for local sidereal time.",
+      "where": "src/sky/astro.js:34",
+      "sources": [
+        {
+          "title": "Astronomical Algorithms, 2nd ed., chapter 12 (Sidereal Time at Greenwich), formula 12.4 and examples 12.a and 12.b",
+          "publisher": "Jean Meeus, Willmann-Bell, 1998",
+          "url": "https://archive.org/details/astronomical-algorithms-meeus",
+          "says": "1987 April 10 at 0h UT: mean sidereal time 13h 10m 46.3668s; at 19h 21m UT: 128.7378734 degrees."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sky.spec.mjs:135",
+      "note": "UT1 is taken as UTC, a difference of under a second."
+    },
+    {
+      "claim": "The planets and the Sun are placed by JPL's Keplerian elements for 1800 to 2050.",
+      "how": "Table 1's elements and rates give each orbit for the date; Kepler's equation gives the heliocentric position in the J2000 ecliptic; the Earth-Moon barycenter's position is subtracted, the planet's light-time allowed for, and the result turned to the equator.",
+      "where": "src/sky/astro.js:139",
+      "sources": [
+        {
+          "title": "Approximate Positions of the Planets (E. M. Standish), Table 1",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "says": "Keplerian elements and their rates, with respect to the mean ecliptic and equinox of J2000, valid for the time-interval 1800 AD - 2050 AD."
+        },
+        {
+          "title": "Horizons System",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "says": "Geocentric astrometric RA and Dec of the Sun and the planets on June 15, 1990, January 1, 2000, October 5, 2026 and March 20, 2045 (recorded in the test)."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sky.spec.mjs:109",
+      "note": "On those four dates the Sun, Mercury and Venus are within 0.004 degrees of Horizons, Mars within 0.01, Uranus and Neptune within 0.03, Jupiter within 0.1 and Saturn within 0.16 (the table leaves out the two giants' pull on each other). The Earth is taken at the Earth-Moon barycenter, at most about 4,700 km away. The date picker stops at 1800 and 2050, the table's range."
+    },
+    {
+      "claim": "The Moon is placed by the Astronomical Almanac's low-precision series and corrected for where you stand.",
+      "how": "The series gives the Moon's ecliptic longitude, latitude and parallax for the date; the observer's place on the Earth (in Earth radii) is subtracted, which moves the Moon by up to a degree.",
+      "where": "src/sky/astro.js:228",
+      "sources": [
+        {
+          "title": "The Astronomical Almanac, section D (low-precision formulas for the Moon)",
+          "publisher": "U.S. Naval Observatory and H.M. Nautical Almanac Office",
+          "url": "https://aa.usno.navy.mil/publications/asa",
+          "says": "The Moon's longitude, latitude and horizontal parallax as short sums of sine and cosine terms, to about 0.3 degrees."
+        },
+        {
+          "title": "Horizons System",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "says": "The Moon's geocentric position on four dates, and its apparent azimuth and elevation from Greenwich and New York on two (recorded in the test)."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sky.spec.mjs:124",
+      "note": "Within 0.16 degrees of Horizons geocentrically, and within about 0.1 degrees in altitude and azimuth from both places."
+    },
+    {
+      "claim": "The Moon shows its real phase.",
+      "how": "The Moon is a small ball whose lit half faces the Sun's direction; seen from the dome's center, the lit part you see is the real geometry. The illuminated fraction in the facts is (1 + cos i) / 2 from the phase angle i.",
+      "where": "src/sky/astro.js:299",
+      "sources": [
+        {
+          "title": "Astronomical Algorithms, 2nd ed., chapter 48 (Illuminated Fraction of the Moon's Disk)",
+          "publisher": "Jean Meeus, Willmann-Bell, 1998",
+          "url": "https://archive.org/details/astronomical-algorithms-meeus",
+          "says": "k = (1 + cos i) / 2, with the phase angle i found from the Moon's elongation and the distances of the Sun and the Moon."
+        },
+        {
+          "title": "Horizons System (quantity 10, illuminated fraction)",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "says": "The Moon was 33.3 percent lit seen from Greenwich at 0h UTC on October 5, 2026 and 2.5 percent on March 20, 2045 at 6h."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sky.spec.mjs:124",
+      "note": "Within one percentage point of Horizons in all four checks."
+    },
+    {
+      "claim": "Stars are sized by brightness and colored by temperature from their B−V color index.",
+      "how": "A star's splat grows and grows more opaque with its brightness (magnitude). Its temperature comes from B−V by Ballesteros's formula, and its color from that temperature along the black-body curve, softened toward white as stars look to the eye.",
+      "where": "src/sky/astro.js:340",
+      "sources": [
+        {
+          "title": "New insights into black bodies (Ballesteros 2012), EPL 97, 34008",
+          "publisher": "EPL (IOP Publishing)",
+          "url": "https://arxiv.org/abs/1201.1809",
+          "says": "The paper develops an analytical formula to determine the black body temperature of an object from a pair of measurements (its abstract); the B−V form is T = 4600 K (1 / (0.92 (B−V) + 1.7) + 1 / (0.92 (B−V) + 0.62))."
+        },
+        {
+          "title": "Color index",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Color_index",
+          "says": "A good approximation can be obtained by considering stars as black bodies, using Ballesteros' formula: T = 4600 K (1 / (0.92 (B−V) + 1.7) + 1 / (0.92 (B−V) + 0.62))."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/sky.spec.mjs:158",
+      "note": "Brightness on a screen can't span the sky's real range (Sirius is about 250 times brighter than a sixth-magnitude star), so sizes are compressed into a range that reads at phone size."
+    },
+    {
+      "claim": "Daylight puts the stars out faintest first, and twilight glows below the Sun.",
+      "how": "A daylight level rises from 0 when the Sun is 18 degrees below the horizon (astronomical twilight) to 1 when it is 4 degrees above. Each star goes out at a level set by its magnitude; a glow on the horizon follows the Sun's azimuth and is strongest with the Sun a few degrees down.",
+      "where": "src/packs/night-sky.js:104",
+      "sources": [
+        {
+          "title": "Twilight definitions (civil, nautical and astronomical)",
+          "publisher": "U.S. Naval Observatory, Astronomical Applications Department",
+          "url": "https://aa.usno.navy.mil/faq/RST_defs",
+          "says": "Astronomical twilight is defined to begin in the morning, and to end in the evening when the center of the Sun is geometrically 18 degrees below the horizon."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/sky.spec.mjs:204",
+      "note": "The colors of the day sky and the twilight glow are drawn, not computed from sunlight scattering; the Moon's light does not brighten the sky."
+    },
+    {
+      "claim": "Planets have about their real brightness for the date.",
+      "how": "The Astronomical Almanac's older magnitude formulas (as in Meeus chapter 41) from each planet's distances from the Sun and the Earth and its phase angle; a planet's splat is sized from that magnitude like a star's.",
+      "where": "src/sky/astro.js:203",
+      "sources": [
+        {
+          "title": "Astronomical Algorithms, 2nd ed., chapter 41 (Illuminated Fraction of the Disk and Magnitude of a Planet)",
+          "publisher": "Jean Meeus, Willmann-Bell, 1998",
+          "url": "https://archive.org/details/astronomical-algorithms-meeus",
+          "says": "Venus: −4.40 + 5 log (rΔ) + 0.0009 i + 0.000239 i² − 0.00000065 i³; Jupiter: −9.40 + 5 log (rΔ) + 0.005 i; and so on."
+        }
+      ],
+      "verdict": "close",
+      "test": "",
+      "note": "Saturn's rings, which can change its brightness by about a magnitude, are left out."
+    }
+  ],
+  "simplified": [
+    "The Sun and the Moon are drawn three times their real width (1.6 degrees instead of about 0.5), so they and the Moon's phase can be seen at phone size; the facts beside the stage say so.",
+    "The Milky Way is a soft band drawn along the galactic plane, brighter toward the center in Sagittarius, with a darker lane; it is not made from star counts or a photograph.",
+    "The constellation lines are one sky culture's figures (the Stellarium team's Western set), a human drawing, not a property of the stars.",
+    "The ground is a low row of hills, the same for every place; real horizons differ.",
+    "There is no atmospheric refraction (it lifts things on the horizon by about half a degree) and no light pollution."
+  ],
+  "fixes": []
+}

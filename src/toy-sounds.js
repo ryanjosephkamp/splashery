@@ -2878,6 +2878,12 @@ export const TOY_SOUNDS = {
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
+  // ---- Night sky (lane Night sky) ---------------------------------------------------
+  // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
+  "night-sky": [
+    { voice: "tine", f: 660, decay: 1.2, vol: 0.7 },
+    { voice: "breath", at: 0.03, f: 700, to: 1.1, decay: 1.2, vol: 0.12 },
+  ],
   // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
   "data-in-3d": [
     { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },
