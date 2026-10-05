@@ -68,7 +68,7 @@ for (const toy of list) {
   try {
     r = await Promise.race([
       page.evaluate(measure, { id: toy.id, size, kitfix }),
-      new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 240_000)),
+      new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 600_000)),
     ]);
   } catch (e) {
     r = { error: String(e.message || e).slice(0, 200) };
@@ -132,12 +132,12 @@ async function measure({ id, size, kitfix }) {
       const c = await stage.captureFrame();
       return c.getContext("2d").getImageData(0, 0, size, size);
     };
+    // The clock moves on without drawing (only the measured frames are drawn).
     const advance = async (secs) => {
       const step = 1 / 30;
       for (let t = 0; t < secs - 1e-6; t += step) {
         home();
-        pending = step;
-        await stage.captureFrame();
+        for (const h of handlers) h(step);
       }
     };
     await advance(0.4);
