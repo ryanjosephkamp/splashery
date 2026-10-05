@@ -1,0 +1,104 @@
+{
+  "toy": "gaussian-splatting",
+  "checked": "2026-10-04",
+  "summary": "The photo view uses a real optimizer on 2,400 flat Gaussians, with checked compositing and loss derivatives. It is a single-image 2D fit, not a multi-view 3D reconstruction. The one-splat motion is prepared, and the sorting view has a reproducible distance-versus-depth error.",
+  "claims": [
+    {
+      "claim": "A photo is fit using 2,400 optimized Gaussians.",
+      "how": "The production fit count is 2,400. Independent pixel compositing agrees with the loss; finite differences agree with all 18 tested derivatives, and a small fit reduces its loss.",
+      "where": "src/packs/splatting.js:32",
+      "sources": [
+        {
+          "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+          "publisher": "Kerbl, Kopanas, Leimkühler, and Drettakis, Inria",
+          "url": "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/",
+          "says": "The method optimizes 3D Gaussian parameters from multiple views, adapts the density of Gaussians, and renders them with visibility-aware splatting."
+        },
+        {
+          "title": "Adam: A Method for Stochastic Optimization",
+          "publisher": "Kingma and Ba",
+          "url": "https://arxiv.org/abs/1412.6980",
+          "says": "Adam uses adaptive estimates of first and second moments of gradients."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:737",
+      "note": ""
+    },
+    {
+      "claim": "The training picture is a single-image 2D version of Gaussian fitting.",
+      "how": "It optimizes position, two sizes, angle, color, and opacity in a flat photo plane, using Adam and cached frames; it does not optimize full 3D covariance from multiple views.",
+      "where": "src/packs/splat-fit.js:38",
+      "sources": [
+        {
+          "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+          "publisher": "Kerbl, Kopanas, Leimkühler, and Drettakis, Inria",
+          "url": "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/",
+          "says": "The method optimizes 3D Gaussian parameters from multiple views, adapts the density of Gaussians, and renders them with visibility-aware splatting."
+        },
+        {
+          "title": "Adam: A Method for Stochastic Optimization",
+          "publisher": "Kingma and Ba",
+          "url": "https://arxiv.org/abs/1412.6980",
+          "says": "Adam uses adaptive estimates of first and second moments of gradients."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:737",
+      "note": ""
+    },
+    {
+      "claim": "The one-splat view illustrates optimization with a prescribed path.",
+      "how": "A shared factor (1−rate) to the step count reduces every target-parameter error for 24 steps, then forces zero. There is no rendered-image loss calculation in this view.",
+      "where": "src/packs/splatting.js:497",
+      "sources": [
+        {
+          "title": "Gradient descent",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_optimization/gd.html",
+          "says": "Gradient descent moves against the gradient with a chosen step size; its convergence depends on the objective and step size."
+        },
+        {
+          "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+          "publisher": "Kerbl, Kopanas, Leimkühler, and Drettakis, Inria",
+          "url": "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/",
+          "says": "The method optimizes 3D Gaussian parameters from multiple views, adapts the density of Gaussians, and renders them with visibility-aware splatting."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:818",
+      "note": "This resembles gradient descent on a chosen quadratic parameter error; it is not another photometric fit."
+    },
+    {
+      "claim": "The sorting view shows the renderer’s back-to-front order.",
+      "how": "The bead order is sorted by Euclidean distance to a fixed camera rather than view-axis depth. The test finds pairs whose order disagrees with depth.",
+      "where": "src/packs/splatting.js:750",
+      "sources": [
+        {
+          "title": "Gaussian rasterizer depth",
+          "publisher": "Kerbl and coauthors, official implementation",
+          "url": "https://github.com/graphdeco-inria/diff-gaussian-rasterization/blob/main/cuda_rasterizer/forward.cu",
+          "says": "The renderer uses the Gaussian center transformed into view coordinates and stores its z coordinate as depth."
+        }
+      ],
+      "verdict": "wrong",
+      "test": "tests/evidence-computing.spec.mjs:826",
+      "note": "Distance order is not generally the transparency depth order for points away from the center of the view."
+    }
+  ],
+  "simplified": [
+    "The photo fit uses a reduced-resolution image and 2D parameters, caches its optimization, and replays keyframes. It does not infer a 3D scene from several cameras or adapt the splat count. The one-splat path follows prescribed parameter-error decay and snaps to the target at the end."
+  ],
+  "fixes": [
+    {
+      "what": "Sort the illustration by signed camera-space depth, and keep its bead reveal and clicks synchronized with that ordering.",
+      "where": "src/packs/splatting.js:750",
+      "status": "proposed"
+    },
+    {
+      "what": "Describe the one-splat view as a prepared parameter example, or give it an explicit loss and measured gradient in a future view.",
+      "where": "src/packs/splatting.js:497",
+      "status": "proposed"
+    }
+  ]
+}

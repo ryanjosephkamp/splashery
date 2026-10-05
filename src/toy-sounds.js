@@ -2699,6 +2699,17 @@ export const TOY_SOUNDS = {
     off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.2, vol: 0.45 },
   },
   // Lane Live input r3: Moving photo to 3D pauses and plays with a soft click.
+  // Lane Sound and light lab: the Sound lab's switch (the tone itself plays
+  // from the toy), the recorder's soft button, the Light lab's slide changer.
+  "sound-lab": {
+    on: { voice: "switch", f: 2400, vol: 0.4 },
+    off: { voice: "switch", f: 1900, vol: 0.35 },
+  },
+  "sound-recorder": [{ voice: "click", f: 1500, decay: 0.04, vol: 0.3 }],
+  "light-lab": [
+    { voice: "click", f: 700, decay: 0.08, vol: 0.4 },
+    { voice: "click", at: 0.09, f: 950, decay: 0.05, vol: 0.3 },
+  ],
   "moving-photo-3d": {
     on: { voice: "click", f: 1200, decay: 0.05, vol: 0.35 },
     off: { voice: "click", f: 900, decay: 0.05, vol: 0.3 },
@@ -2743,11 +2754,13 @@ export const TOY_SOUNDS = {
   // for the ocean, a warm swelling tone for the knot. This is the galaxy's.
   // Lane QR: the tap bursts the code (a soft pop, a whoosh, pieces landing);
   // Assemble and Flip play their own through the recipe's cues.
+  // Lane QR r3: the tap knocks modules loose (a knock, a puff, the click of
+  // pieces snapping back); each Toy-tab motion sends its own sound as cues.
   "qr-code": [
-    { voice: "thud", f: 110, decay: 0.3, vol: 0.4 },
-    { voice: "breath", f: 700, to: 0.5, decay: 0.9, vol: 0.2 },
-    { voice: "wood", at: 1.05, f: 900, decay: 0.12, vol: 0.12 },
-    { voice: "breath", at: 2.15, f: 600, to: 1.2, decay: 1.0, vol: 0.16 },
+    { voice: "wood", f: 420, decay: 0.12, vol: 0.3 },
+    { voice: "breath", f: 800, to: 0.6, decay: 0.5, vol: 0.14 },
+    { voice: "wood", at: 1.05, f: 900, decay: 0.08, vol: 0.12 },
+    { voice: "wood", at: 1.2, f: 1100, decay: 0.06, vol: 0.08 },
   ],
   // Lane QR lab r2: soft, not electronic. A light knock as a part lifts; a
   // scrape and a soft thud as damage lands; a slide out and a knock back.
@@ -2866,6 +2879,18 @@ export const TOY_SOUNDS = {
   "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
   "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },
   "star-systems": { voice: "breath", f: 450, to: 0.7, decay: 2.5, vol: 0.27 },
+  // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
+  "data-in-3d": [
+    { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },
+    { voice: "wood", at: 0.42, f: 700, decay: 0.12, vol: 0.2 },
+    { voice: "breath", at: 0.85, f: 520, to: 1.15, decay: 1.1, vol: 0.08 },
+  ],
+  // The record playing back: a long, low breath under a soft pen.
+  "climate-records": [
+    { voice: "thud", f: 70, decay: 0.5, vol: 0.7 },
+    { voice: "wood", at: 0.08, f: 820, decay: 0.1, vol: 0.18 },
+    { voice: "breath", at: 0.1, f: 360, to: 1.1, decay: 2.4, vol: 0.07 },
+  ],
   // ---- Tiny world r2 (lane Tiny world r2) ----
   // The story's own cues (tRNAs docking, the stop codon, the fold) come from
   // drive() in src/packs/tiny-r2.js; the tap starts it with a soft swell.

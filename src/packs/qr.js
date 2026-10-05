@@ -18,9 +18,10 @@
 
 import { encodeQR, ECC_RECOVERY, QUIET } from "../qr/encode.js";
 import { buildCode, STYLES, PLATES, PRESETS, palette, codeContrast } from "../qr/build.js";
-import { qrModifier, MOTION_SECS } from "../qr/field.js";
+import { qrModifier, MOTION_SECS, MOTION_IDS, PATTERNS, PHASE_RATE } from "../qr/field.js";
 import { readCode } from "../qr/scan.js";
 import { KINDS, kindById, contentText, shareableFields } from "../qr/content.js";
+import { THEMES, themeById, themeOptions } from "../qr/themes.js";
 import * as pc from "../pc.js";
 // The site's exports (PNG, GIF), loaded when a picture is first made (they
 // need the browser's import map, so the Node tools never load them).
@@ -43,10 +44,13 @@ const DEPTH = new Set(["bricks", "gems", "neon", "bubbles"]);
 const minModulePx = (o) => (["bricks", "gems", "neon"].includes(o.style) ? 6 : 4);
 export const MIN_MODULE_PX = 4;
 
-const MOTIONS = ["assemble", "flip", "burst"];
+const MOTIONS = Object.keys(MOTION_SECS);
+// Lane QR r3: Alive's speed, from the speed slider (0..1): a quarter as fast
+// at 0, normal at 0.5, four times as fast at 1.
+export const speedOf = (v) => Math.pow(4, 2 * (Number.isFinite(v) ? v : 0.5) - 1);
 
 // What the open code is, for the panel and the hook.
-const QR = { code: null, options: null, error: "", fit: null, kit: null, check: null, checking: false, still: false, gif: null, timer: 0 }; // prettier-ignore
+const QR = { code: null, options: null, error: "", fit: null, kit: null, check: null, checking: false, still: false, gif: null, timer: 0, phase: 0, lastT: null, knock: [0, 0], last: "burst" }; // prettier-ignore
 
 // ---- What the code holds ------------------------------------------------------------------
 // A link or plain text lives in the `text` option. Other kinds keep their
@@ -124,6 +128,34 @@ const SOUNDS = {
     { voice: "breath", f: 1400, to: 0.7, decay: 0.9, vol: 0.12 },
     { voice: "breath", at: 1.7, f: 1200, to: 0.7, decay: 0.9, vol: 0.12 },
   ],
+  // Lane QR r3.
+  ripple: [
+    { voice: "breath", f: 500, to: 0.8, decay: 1.6, vol: 0.16 },
+    { voice: "breath", at: 1.2, f: 420, to: 0.8, decay: 1.4, vol: 0.12 },
+  ],
+  flap: Array.from({ length: 14 }, (_, i) => ({ voice: "wood", at: 0.2 + i * 0.24, f: 1500 + 90 * (i % 3), decay: 0.05, vol: 0.09 })), // prettier-ignore
+  fold: [
+    { voice: "breath", f: 1800, to: 0.6, decay: 0.7, vol: 0.12 },
+    { voice: "wood", at: 1.15, f: 520, decay: 0.12, vol: 0.12 },
+    { voice: "breath", at: 1.35, f: 1600, to: 0.6, decay: 0.7, vol: 0.1 },
+    { voice: "wood", at: 2.45, f: 480, decay: 0.12, vol: 0.1 },
+    { voice: "breath", at: 2.6, f: 1700, to: 0.7, decay: 1.6, vol: 0.12 },
+  ],
+  rain: [
+    { voice: "breath", f: 900, to: 1.3, decay: 0.6, vol: 0.12 },
+    { voice: "patter", at: 1.0, f: 2200, n: 24, decay: 2.2, vol: 0.3 },
+    { voice: "wood", at: 3.4, f: 700, decay: 0.14, vol: 0.12 },
+  ],
+  knock: [
+    { voice: "wood", f: 420, decay: 0.12, vol: 0.3 },
+    { voice: "breath", f: 800, to: 0.6, decay: 0.5, vol: 0.14 },
+    { voice: "wood", at: 1.05, f: 900, decay: 0.08, vol: 0.12 },
+    { voice: "wood", at: 1.2, f: 1100, decay: 0.06, vol: 0.08 },
+  ],
+  cloud: [
+    { voice: "breath", f: 2600, to: 0.5, decay: 2.2, vol: 0.12 },
+    { voice: "breath", at: 3.0, f: 1300, to: 1.6, decay: 2.0, vol: 0.12 },
+  ],
   burst: [
     { voice: "thud", f: 110, decay: 0.3, vol: 0.4 },
     { voice: "breath", f: 700, to: 0.5, decay: 0.9, vol: 0.2 },
@@ -173,6 +205,12 @@ async function renderScan(app, size) {
   return app.withCapture([size, size], async () => {
     QR.still = true;
     try {
+      // Lane QR r3: a first frame starts the splat sort for this view (it
+      // finishes on a worker a frame or more later); the second is the
+      // picture. Right after a build, the first frame of the finer edges
+      // was drawn before any sort, gray and hatched.
+      await player.renderAt(player.time, scanPose());
+      await new Promise((r) => setTimeout(r, 80));
       const shot = await player.renderAt(player.time, scanPose());
       const out = document.createElement("canvas");
       out.width = out.height = size;
@@ -300,12 +338,16 @@ export async function makeGIF({
   const app = globalThis.__splashery?.app;
   if (!app?.player) return null;
   const player = app.player;
-  // Alive: one whole loop of the wave (it repeats every 2π / 1.8 s of the
-  // toy's clock), every frame live, so the GIF loops seamlessly.
+  if (motion !== "alive" && !MOTION_SECS[motion]) motion = "burst";
+  // Alive: one whole loop of the pattern (it repeats when its phase grows by
+  // 2π: 2π / 1.8 s at normal speed), every frame live, so the GIF loops
+  // seamlessly; 44 frames at normal speed, fewer when faster.
   const loop = motion === "alive";
-  const moving = loop ? 44 : Math.round(MOTION_SECS[motion] * fps);
+  const speed = speedOf(player.motion?.state?.speed);
+  const moving = loop ? Math.max(16, Math.min(120, Math.round(44 / speed))) : Math.round(MOTION_SECS[motion] * fps); // prettier-ignore
   const frames = loop ? moving : moving + Math.round(hold * fps);
-  const dt = loop ? (2 * Math.PI) / 1.8 / moving : 1 / fps;
+  const dt = loop ? (2 * Math.PI) / (PHASE_RATE * speed) / moving : 1 / fps;
+  const phase0 = QR.phase;
   const { encodeGIF, downloadBlob, timestampName } = await exportsJS();
   return app.withBusy("Making a GIF…", (progress) =>
     // Rendered at 1.5 times the size and scaled down smoothly: the GIF's
@@ -320,6 +362,7 @@ export async function makeGIF({
           onProgress: (f) => progress(f, "Making a GIF…"),
           renderFrame: async (i) => {
             QR.gif = i < moving ? { key: motion, q: i / moving } : { key: motion, q: 0 };
+            if (loop) QR.gif.phase = phase0 + (2 * Math.PI * i) / moving;
             QR.still = !loop && i >= moving;
             const shot = await player.renderAt(t0 + i * dt, scanPose());
             const out = document.createElement("canvas");
@@ -523,7 +566,12 @@ function renderPanel() {
   styleRow.setAttribute("role", "group");
   styleRow.setAttribute("aria-label", "Style");
   const styleButtons = STYLES.map((st) => {
-    const b = button(`qr-style-${st.id}`, st.label, () => app?.setToyOptions({ style: st.id, ...PRESETS[st.id] })); // prettier-ignore
+    // A theme's colors stay when the style changes (the style's own preset
+    // colors come only with no theme).
+    const b = button(`qr-style-${st.id}`, st.label, () => {
+      const t = themeById(QR.options?.theme);
+      app?.setToyOptions(t ? { style: st.id, plate: PRESETS[st.id].plate, ...themeOptions(t) } : { style: st.id, ...PRESETS[st.id], theme: "" }); // prettier-ignore
+    });
     styleRow.append(b);
     return [st.id, b];
   });
@@ -570,9 +618,59 @@ function renderPanel() {
   row3.className = "button-row";
   row3.append(
     button("qr-png", "Save a PNG", () => savePNG()),
-    button("qr-gif", "Save a GIF", () => makeGIF()),
+    button("qr-gif", "Save a GIF", () => makeGIF({ motion: QR.last })),
     button("qr-gif-alive", "Save a looping GIF", () => makeGIF({ motion: "alive" })),
   );
+  // Lane QR r3: Alive's patterns. Picking one turns Alive on; the speed is
+  // the Alive speed slider below.
+  const aliveLabel = document.createElement("p");
+  aliveLabel.className = "note";
+  aliveLabel.textContent = "Alive colors (every frame still scans; the speed slider is below)";
+  const aliveRow = document.createElement("div");
+  aliveRow.className = "button-row qr-alive";
+  aliveRow.setAttribute("role", "group");
+  aliveRow.setAttribute("aria-label", "Alive colors");
+  const aliveButtons = PATTERNS.map((pt) => {
+    const b = button(`qr-alive-${pt.id}`, pt.label, async () => {
+      if ((QR.options?.alivePattern || "wave") !== pt.id) await app?.setToyOptions({ alivePattern: pt.id }); // prettier-ignore
+      app?.setControl("alive", 1);
+    });
+    aliveRow.append(b);
+    return [pt.id, b];
+  });
+  // Lane QR r3: color themes and flag colors.
+  const themeLabel = document.createElement("p");
+  themeLabel.className = "note";
+  themeLabel.textContent =
+    "Color themes (each keeps at least 4.5 : 1 between dark and light, so it scans)";
+  const themeRow = document.createElement("div");
+  themeRow.className = "button-row qr-themes";
+  themeRow.setAttribute("role", "group");
+  themeRow.setAttribute("aria-label", "Color themes");
+  const themeButtons = THEMES.filter((t) => t.family === "palette").map((t) => {
+    const b = button(`qr-theme-${t.id}`, t.label, () => app?.setToyOptions(themeOptions(t)));
+    b.style.borderLeft = `0.9em solid ${t.fg}`;
+    themeRow.append(b);
+    return [t.id, b];
+  });
+  const flagRow = document.createElement("label");
+  flagRow.className = "row";
+  const flagName = document.createElement("span");
+  flagName.textContent = "Flag colors";
+  const flagPick = document.createElement("select");
+  flagPick.id = "qr-flag";
+  flagPick.add(new Option("None", ""));
+  for (const t of THEMES.filter((x) => x.family === "flag"))
+    flagPick.add(new Option(t.label, t.id));
+  flagPick.addEventListener("change", () => {
+    const t = themeById(flagPick.value);
+    if (t) app?.setToyOptions(themeOptions(t));
+    else app?.setToyOptions({ ...PRESETS[QR.options?.style || "classic"], theme: "" });
+  });
+  flagRow.append(flagName, flagPick);
+  const themeNote = document.createElement("p");
+  themeNote.className = "note";
+  themeNote.id = "qr-theme-note";
   const note = document.createElement("p");
   note.className = "note";
   note.textContent = "What the code holds stays on this device: nothing is sent anywhere, and no link shortener is used. But a #s= link to this toy, and a saved scene, carry what the code holds (the link, the text, the contact), so whoever you send them to can read it. A Wi-Fi password is left out of them: after opening a link, type it again. The PNG and the GIF end in scan view, with the quiet zone. Record (Share tab) makes a video, and Save splats keeps the splats."; // prettier-ignore
@@ -591,6 +689,12 @@ function renderPanel() {
     warn,
     result,
     row2,
+    themeLabel,
+    themeRow,
+    flagRow,
+    themeNote,
+    aliveLabel,
+    aliveRow,
     row3,
     note,
   );
@@ -602,6 +706,22 @@ function renderPanel() {
         b.classList.toggle("primary", id === (o.style || "classic"));
       }
       wallRow.hidden = o.style !== "neon";
+      // A theme counts while its colors are still the ones showing.
+      const th0 = themeById(o.theme);
+      const th = th0 && th0.fg === o.fg && th0.bg === o.bg ? th0 : null;
+      for (const [id, b] of themeButtons) {
+        b.setAttribute("aria-pressed", String(id === th?.id));
+        b.classList.toggle("primary", id === th?.id);
+      }
+      flagPick.value = th?.family === "flag" ? th.id : "";
+      themeNote.hidden = !th;
+      if (th)
+        themeNote.textContent = `${th.family === "flag" ? `${th.label}'s flag colors` : th.label}: contrast ${codeContrast(o).ratio.toFixed(1)} : 1. ${th.notes.join(" ")}`.trim(); // prettier-ignore
+      for (const [id, b] of aliveButtons) {
+        const on = id === (o.alivePattern || "wave") && !!QR.aliveOn;
+        b.setAttribute("aria-pressed", String(on));
+        b.classList.toggle("primary", on);
+      }
       tipRow.hidden = !(QR.neonTip && o.style === "neon" && !palette(o).neonLight);
       wall.textContent = palette(o).neonLight
         ? "Glow on a dark wall (inverted)"
@@ -707,15 +827,39 @@ export const RECIPES = {
       { key: "plate", label: "Plate", type: "select", default: "paper", choices: choices(PLATES) },
       { key: "back", label: "Back of the tiles", type: "color", default: "#e8743b" },
       { key: "wave", label: "Alive wave color", type: "color", default: "#1d4f9c" },
+      // Lane QR r3: Alive's pattern (picked in the panel).
+      { key: "alivePattern", label: "Alive pattern", type: "select", default: "wave", hidden: true, choices: choices(PATTERNS) }, // prettier-ignore
+      // Lane QR r3: the color theme picked last (its colors are the options
+      // above; "" once a color is changed by hand, or a style is picked).
+      { key: "theme", label: "Color theme", type: "text", default: "", hidden: true },
     ],
     controls: [
       { key: "assemble", label: "Assemble", type: "pulse", ease: MOTION_SECS.assemble },
       { key: "flip", label: "Flip", type: "pulse", ease: MOTION_SECS.flip },
       { key: "burst", label: "Burst and return", type: "pulse", ease: MOTION_SECS.burst },
+      // Lane QR r3.
+      { key: "ripple", label: "Ripple", type: "pulse", ease: MOTION_SECS.ripple },
+      { key: "flap", label: "Split-flap", type: "pulse", ease: MOTION_SECS.flap },
+      { key: "fold", label: "Fold", type: "pulse", ease: MOTION_SECS.fold },
+      { key: "rain", label: "Rain", type: "pulse", ease: MOTION_SECS.rain },
+      // A second tap knocks again where it lands (not a pause).
+      { key: "knock", label: "Knock loose", type: "pulse", ease: MOTION_SECS.knock, pausable: false }, // prettier-ignore
+      { key: "cloud", label: "Point cloud", type: "pulse", ease: MOTION_SECS.cloud },
       // Alive: an idle loop in which every frame still scans (src/qr/field.js).
       { key: "alive", label: "Alive", type: "toggle", default: 0, ease: 0.8 },
+      { key: "speed", label: "Alive speed", type: "slider", default: 0.5 },
     ],
-    action: { key: "burst", label: "Burst and return", quiet: MOTIONS },
+    // Lane QR r3: a tap knocks the modules loose around where it lands (the
+    // Play button, with no point, knocks the middle).
+    action: {
+      key: "knock",
+      label: "Knock loose",
+      quiet: MOTIONS,
+      at(point) {
+        QR.knock = [point?.[0] ?? 0, point?.[1] ?? 0];
+        return "knock";
+      },
+    },
     sounds: () => Object.values(SOUNDS).flat(),
     input: {
       title: "Your QR code",
@@ -728,14 +872,31 @@ export const RECIPES = {
     // The motions' progress (0 at rest) and the glint go to the GPU program;
     // each motion's sound starts with it.
     drive(t, c, out, info) {
+      // One motion at a time: the one that started first plays on.
       const q = (k) => (c[k] > 0 && c[k] < 1 ? 1 - c[k] : 0);
-      const m = [q("assemble"), q("flip"), q("burst")];
-      if (QR.gif) {
-        m.fill(0);
-        m[MOTIONS.indexOf(QR.gif.key)] = QR.gif.q;
+      let key = null;
+      let prog = 0;
+      for (const k of MOTIONS) {
+        const v = q(k);
+        if (v > prog) {
+          prog = v;
+          key = k;
+        }
       }
-      const alive = QR.gif ? (QR.gif.key === "alive" ? 1 : 0) : (c.alive ?? 0);
-      out.morph = [m[0], m[1], m[2], alive];
+      if (QR.gif) {
+        key = MOTION_IDS[QR.gif.key] ? QR.gif.key : null;
+        prog = key ? QR.gif.q : 0;
+      }
+      if (key) QR.last = key;
+      out.morph = [key ? MOTION_IDS[key] : 0, prog, QR.knock[0], QR.knock[1]];
+      // Alive: its phase grows at the chosen speed (so a change of speed
+      // never jumps the colors); a looping GIF sets it frame by frame.
+      const dt = QR.lastT == null ? 0 : t - QR.lastT;
+      QR.lastT = t;
+      if (Math.abs(dt) < 5) QR.phase += dt * PHASE_RATE * speedOf(c.speed);
+      const alive = QR.gif ? (QR.gif.alive ?? (QR.gif.key === "alive" ? 1 : 0)) : (c.alive ?? 0);
+      const phase = QR.gif?.phase ?? QR.phase;
+      out.glow = [alive, phase % (2 * Math.PI * 64), 0, 0];
       const aliveOn = (c.alive ?? 0) > 0.5;
       if (aliveOn !== !!QR.aliveOn) {
         QR.aliveOn = aliveOn;
@@ -750,7 +911,7 @@ export const RECIPES = {
     gpuField(o, fit) {
       if (!fit || !Number.isFinite(fit.scale) || !QR.code) return null;
       const pal = palette(o);
-      return qrModifier(QR.code.size, fit, pal.back, o.style === "gems", pal.wave);
+      return qrModifier(QR.code.size, fit, { back: pal.back, glint: o.style === "gems", wave: pal.wave, bg: pal.bg, depth: QR.depth ?? 0.14, pattern: o.alivePattern }); // prettier-ignore
     },
     build(k, o) {
       const { code, error } = codeFor(o);
@@ -765,6 +926,7 @@ export const RECIPES = {
       k.reach([-half - 1.6, -half - 1.6, -1.2]);
       k.cloud({ share: splats.length / k.count, jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
       k.data.depth = depth;
+      QR.depth = depth;
       // The kit fits the toy after build: keep the kit, and read its fit
       // (transform) when the scan view needs it.
       QR.kit = k;
@@ -856,6 +1018,62 @@ if (typeof window !== "undefined" && window.__splashery) {
       return canvasToBlob(await renderScan(app(), size));
     },
     gif: (opts = {}) => makeGIF({ ...opts, save: false }),
+    // Lane QR r3: one frame of a motion at progress q (0..1) and/or Alive
+    // at a phase (radians), seen in scan view turned by yaw and pitch
+    // (degrees), as a PNG data URL of `size` pixels. The toy's own state is
+    // left as it was.
+    // knock: where Knock loose lands (modules from the code's center);
+    // settle: frames rendered first at the same pose (default 1).
+    async frame({
+      motion = null,
+      q = 0,
+      alive = 0,
+      phase = 0,
+      size = 720,
+      yaw = 0,
+      pitch = 0,
+      margin = 1,
+      knock = null,
+      settle = 1,
+    } = {}) {
+      const a = app();
+      if (knock) QR.knock = knock.slice(0, 2);
+      return a.withCapture([size, size], async () => {
+        QR.gif = { key: motion || "none", q, alive, phase };
+        try {
+          const pose = { ...scanPose(margin), yaw: (yaw * Math.PI) / 180, pitch: (pitch * Math.PI) / 180 }; // prettier-ignore
+          // Frames until the splat sort has caught up with the pose (one
+          // when the pose is the last frame's).
+          const key = JSON.stringify([pose, size]);
+          // settle: warm-up frames at an unchanged pose (the sort runs a
+          // frame behind fast pieces, so a clip's moving frames take 2).
+          const warm = key === QR.framePose ? settle : 3;
+          QR.framePose = key;
+          for (let i = 0; i < warm; i++) {
+            await a.player.renderAt(a.player.time, pose);
+            await new Promise((r) => setTimeout(r, 80));
+          }
+          const shot = await a.player.renderAt(a.player.time, pose);
+          const out = document.createElement("canvas");
+          out.width = out.height = size;
+          out.getContext("2d").drawImage(shot, 0, 0, size, size);
+          return out.toDataURL("image/png");
+        } finally {
+          QR.gif = null;
+        }
+      });
+    },
+    // Lane QR r3: applies a color theme by id (src/qr/themes.js).
+    async theme(id) {
+      const t = themeById(id);
+      if (!t) throw new Error(`No theme ${id}`);
+      await app().setToyOptions(themeOptions(t));
+      snapScanView();
+      return this.info();
+    },
+    themes: () => THEMES.map((t) => ({ id: t.id, label: t.label, family: t.family, contrast: t.contrast, notes: t.notes })), // prettier-ignore
+    motions: () => MOTIONS.slice(),
+    patterns: () => PATTERNS.map((p) => p.id),
     // The picture the last check read, as a PNG data URL.
     lastShot: () => QR.lastShot?.toDataURL("image/png") ?? null,
     info: () => ({
@@ -867,6 +1085,7 @@ if (typeof window !== "undefined" && window.__splashery) {
       options: { ...QR.options },
       check: QR.check,
       warnings: colorWarnings(QR.options || {}),
+      contrast: codeContrast(QR.options || {}).ratio,
       error: QR.error,
     }),
   };

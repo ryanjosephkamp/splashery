@@ -2526,6 +2526,52 @@
       "note": "Made by tools/sp2-systems.mjs through the archive's TAP service; the inner Solar System from NSSDC fact sheets."
     }
   ],
+  "dataClimateSamples": [
+    {
+      "id": "co2-mlo-monthly",
+      "file": "assets/toys/climate-records/co2-mlo-monthly.csv",
+      "toy": "climate-records data-in-3d",
+      "name": "Mauna Loa monthly mean CO2 (snapshot of October 5, 2026; NOAA's file of September 5, 2026)",
+      "author": "NOAA Global Monitoring Laboratory (Xin Lan, Pieter Tans, Kirk W. Thoning)",
+      "page": "https://gml.noaa.gov/ccgg/trends/data.html",
+      "license": "Public domain (U.S. government work; https://gml.noaa.gov/about/disclaimer.html)",
+      "checked": "October 5, 2026",
+      "note": "NOAA's own measurements only, May 1974 to August 2026; the Scripps rows (March 1958 to April 1974) are left out because their reuse isn't cleared. Cut by tools/dcl-snapshots.mjs."
+    },
+    {
+      "id": "gistemp-v4-global",
+      "file": "assets/toys/climate-records/gistemp-v4-global.csv",
+      "toy": "climate-records",
+      "name": "GISTEMP v4 global Land-Ocean Temperature Index (snapshot of October 5, 2026)",
+      "author": "GISTEMP Team, NASA Goddard Institute for Space Studies",
+      "page": "https://data.giss.nasa.gov/gistemp/",
+      "license": "Public domain (U.S. government work)",
+      "checked": "October 5, 2026",
+      "note": "The table as published, with one line of provenance added by tools/dcl-snapshots.mjs. Cite Lenssen et al. (2024)."
+    },
+    {
+      "id": "earthquakes-usgs",
+      "file": "assets/toys/data-in-3d/earthquakes-usgs.csv",
+      "toy": "data-in-3d",
+      "name": "Earthquakes of magnitude 4.5 and up, past 30 days (snapshot of October 5, 2026)",
+      "author": "U.S. Geological Survey, Earthquake Hazards Program",
+      "page": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php",
+      "license": "Public domain (U.S. government work)",
+      "checked": "October 5, 2026",
+      "note": "Seven of the feed's columns, cut by tools/dcl-snapshots.mjs."
+    },
+    {
+      "id": "iris-uci",
+      "file": "assets/toys/data-in-3d/iris-uci.csv",
+      "toy": "data-in-3d",
+      "name": "Iris (R. A. Fisher, 1936), Bezdek's corrected copy",
+      "author": "R. A. Fisher; UCI Machine Learning Repository",
+      "page": "https://archive.ics.uci.edu/dataset/53/iris",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "A header row added and \"Iris-\" written as \"Iris \", by tools/dcl-snapshots.mjs."
+    }
+  ],
   "imagingSamples": [
     {
       "id": "walnut-1-ct",

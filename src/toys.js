@@ -3650,6 +3650,28 @@ export const TOYS = [
     tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: sound-lab (lane Sound and light lab) ----
+  {
+    id: "sound-lab",
+    label: "Sound lab",
+    category: "studio",
+    kind: "kit",
+    pack: "sound-lab",
+    labs: true,
+    tags: "sound audio spectrogram spectrum oscilloscope tone generator sine square saw noise beats frequency hertz decibel level meter metronome tempo microphone physics",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "sound-recorder",
+    label: "Sound recorder",
+    category: "studio",
+    kind: "kit",
+    pack: "sound-lab",
+    labs: true,
+    tags: "record recorder recording microphone voice sound effect wav webm m4a trim waveform spectrogram save audio",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.0 },
+  },
+  // ---- End of pack: sound-lab ----
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
@@ -3661,6 +3683,18 @@ export const TOYS = [
     tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
     camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: light-lab (lane Sound and light lab) ----
+  {
+    id: "light-lab",
+    label: "Light lab",
+    category: "lab",
+    kind: "kit",
+    pack: "light-lab",
+    labs: true,
+    tags: "light spectrum spectra emission lines element hydrogen helium neon sodium mercury prism grating rainbow diffraction cd dvd spectrometer camera wavelength nanometer nist physics",
+    camera: { yaw: 0, pitch: 0.5, roll: 0, distance: 3.4 },
+  },
+  // ---- End of pack: light-lab ----
   // ---- Pack: science (lane Science) ----
   {
     id: "thermal-ellipsoids",
@@ -3774,6 +3808,27 @@ export const TOYS = [
     labs: true,
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
+  },
+  // ---- Pack: data-climate (lane Data and climate) ----
+  {
+    id: "data-in-3d",
+    label: "Data in 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel",
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "climate-records",
+    label: "Climate records",
+    category: "science",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart",
+    camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.3 },
   },
 ];
 
