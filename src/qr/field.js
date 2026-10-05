@@ -343,11 +343,14 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
   scale = mix(scale, vec3(0.04 * QS), qrPt);
 }
 // c moved toward the tint by k, its gray kept (or lifted by up to 35% of
-// the way to the light modules: toward white for an inverted code).
+// the way to the light modules, and never within 0.55 of their gray:
+// toward white for an inverted code).
 vec3 qrToward(vec3 c, vec3 t, float k, float lift) {
   float g = dot(c, QW);
   float bg = dot(QBG, QW);
-  float gl = g + lift * 0.35 * (g < bg ? bg - g : 1.0 - g);
+  // Never closer to the light gray than 0.55 (Neon on a pale wall starts
+  // at 0.3, and lifting it 35% of the way cost frames).
+  float gl = g + lift * (g < bg ? min(0.35 * (bg - g), max(bg - 0.55 - g, 0.0)) : 0.35 * (1.0 - g));
   vec3 tc = clamp(t * (gl / max(dot(t, QW), 0.02)), 0.0, 1.0);
   tc = clamp(tc + vec3(max(gl - dot(tc, QW), 0.0)), 0.0, 1.0);
   return mix(c, tc, max(k, lift));
@@ -622,7 +625,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
 fn qrToward(c: vec3f, t: vec3f, k: f32, lift: f32) -> vec3f {
   let g = dot(c, QW);
   let bg = dot(QBG, QW);
-  let gl = g + lift * 0.35 * select(1.0 - g, bg - g, g < bg);
+  let gl = g + lift * select(0.35 * (1.0 - g), min(0.35 * (bg - g), max(bg - 0.55 - g, 0.0)), g < bg);
   var tc = clamp(t * (gl / max(dot(t, QW), 0.02)), vec3f(0.0), vec3f(1.0));
   tc = clamp(tc + vec3f(max(gl - dot(tc, QW), 0.0)), vec3f(0.0), vec3f(1.0));
   return mix(c, tc, max(k, lift));
