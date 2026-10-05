@@ -222,13 +222,13 @@ export class ArcadeLayer {
   }
 
   // Writes a model's look (colors, sizes, turns) into slots [start, start + n).
-  writeLook(start, model) {
+  writeLook(start, model, lo = 0, hi = model.n) {
     const half = pc.FloatPacking.float2Half;
     const c = this.container;
     const col = c.getTexture("dataColor").lock();
     const sc = c.getTexture("dataScale").lock();
     const rt = c.getTexture("dataRotation").lock();
-    for (let j = 0; j < model.n; j++) {
+    for (let j = lo; j < hi; j++) {
       const i4 = (start + j) * 4;
       const j3 = j * 3;
       const j4 = j * 4;
@@ -534,4 +534,67 @@ export function stepPieces(
     }
   }
   return busy;
+}
+
+// ---- Points ----------------------------------------------------------------------------
+
+// A block of single splats the game places one by one (a grain of sand
+// each): set(i, x, y, z) puts one, hide(i) hides it, color(i, r, g, b)
+// changes its color (written on flush, once a frame). Make them after
+// sprites.clear() (a reset gives every slot back).
+export class Points {
+  constructor(sprites, n, { size = 0.01, flat = 1 } = {}) {
+    this.layer = sprites.layer;
+    this.start = sprites.alloc(n);
+    if (this.start < 0) throw new Error("The game's splat layer is full.");
+    this.n = n;
+    const m = makeModel(n);
+    for (let i = 0; i < n; i++) {
+      m.scale.set([size, size, size * flat], i * 3);
+      m.rot.set([0, 0, 0, 1], i * 4);
+    }
+    this.model = m;
+    this.layer.writeLook(this.start, m);
+    this.lo = Infinity;
+    this.hi = -1;
+    const d = this.layer.dyn;
+    for (let i = this.start; i < this.start + n; i++) d.fill(0, i * 4, i * 4 + 4);
+  }
+
+  set(i, x, y, z, fade = 1) {
+    const j = (this.start + i) * 4;
+    const c = this.layer.center;
+    c[j] = x;
+    c[j + 1] = y;
+    c[j + 2] = z;
+    this.layer.dyn[j + 3] = fade;
+  }
+
+  hide(i) {
+    this.layer.dyn[(this.start + i) * 4 + 3] = 0;
+  }
+
+  color(i, r, g, b, a = 1) {
+    const c = this.model.color;
+    c[i * 4] = r;
+    c[i * 4 + 1] = g;
+    c[i * 4 + 2] = b;
+    c[i * 4 + 3] = a;
+    if (i < this.lo) this.lo = i;
+    if (i + 1 > this.hi) this.hi = i + 1;
+  }
+
+  // A splat's own size (and flatness) for a grain that changes kind.
+  size(i, s, flat = 1) {
+    this.model.scale.set([s, s, s * flat], i * 3);
+    if (i < this.lo) this.lo = i;
+    if (i + 1 > this.hi) this.hi = i + 1;
+  }
+
+  flush() {
+    if (this.hi <= this.lo) return;
+    this.layer.writeLook(this.start, this.model, this.lo, this.hi);
+    this.lo = Infinity;
+    this.hi = -1;
+  }
 }

@@ -37,7 +37,7 @@
 //   game.status()                        { over, won, title, lines }
 //   game.onView?(to)                     the switch was pressed (to: 0 or 1)
 
-import { ArcadeLayer, Sprites, kitModel, makeModel, recolor, stepPieces } from "./layer.js";
+import { ArcadeLayer, Sprites, Points, kitModel, makeModel, recolor, stepPieces } from "./layer.js";
 import * as Q from "./layer.js";
 import { Input } from "./input.js";
 import { Hud } from "./hud.js";
@@ -71,6 +71,7 @@ export class ArcadeRuntime {
     this.acc = 0;
     this.frames = 0;
     this.playMode = false;
+    this.autopilot = false; // clips and tests: the game plays itself in play
     this.cam = null;
     this.stats = { frame: 0, steps: 0, gameMs: 0, splats: 0 };
     this.bestKey = `splashery.arcade.${player.toyInfo?.id || recipe.arcade.title}.${this.options.style || ""}.${this.options.level ?? ""}`; // prettier-ignore
@@ -81,12 +82,15 @@ export class ArcadeRuntime {
       view: () => this.toggleView(),
       pause: () => this.togglePause(),
       restart: () => this.restart(),
+      choose: (id) => this.choose(id),
       pad: (a, down) => {
         this.input.pad(a, down);
         if (down) this.wake();
       },
     });
     this.hud.setView(this.viewTo > 0.5);
+    this.choice = this.def.choices?.[0]?.id ?? null;
+    this.hud.setChoice(this.choice);
     this.input = new Input(this.hud.surface);
     this.input.onPress = (a) => {
       if (a === "fire" && this.mode !== "play") this.wake();
@@ -138,6 +142,7 @@ export class ArcadeRuntime {
   async start() {
     const api = {
       sprites: this.sprites,
+      points: (n, opts) => new Points(this.sprites, n, opts),
       kitModel,
       makeModel,
       recolor,
@@ -150,6 +155,7 @@ export class ArcadeRuntime {
       sound: (spec) => this.sound(spec),
       aspect: () => this.aspect(),
       ray: (x, y) => this.ray(x, y),
+      pose: () => (this.cam ? orbitPose(this.cam) : null),
       fitDistance,
       best: () => this.best,
     };
@@ -192,6 +198,13 @@ export class ArcadeRuntime {
     if (on && this.mode === "play") this.mode = "paused";
     else if (!on && this.mode === "paused") this.mode = "play";
     this.input.clear();
+  }
+
+  // A game's own choice (def.choices), passed to its steps as ctl.choice.
+  choose(id) {
+    this.choice = id;
+    this.hud.setChoice(id);
+    this.input.active = true;
   }
 
   togglePause() {
@@ -320,7 +333,7 @@ export class ArcadeRuntime {
       while (this.acc >= STEP) {
         this.acc -= STEP;
         this.time += STEP;
-        this.game.step(STEP, { input, pressed, view: this.view, viewTo: this.viewTo, demo: this.mode === "attract", time: this.time }); // prettier-ignore
+        this.game.step(STEP, { input, pressed, view: this.view, viewTo: this.viewTo, demo: this.mode === "attract" || this.autopilot, time: this.time, choice: this.choice }); // prettier-ignore
         pressed.clear();
         steps++;
       }
