@@ -2607,7 +2607,11 @@ export const TOY_SOUNDS = {
     { voice: "ding", at: 2.25, f: "C7", decay: 1.2 },
   ],
   // Each swap plays the height of the bar moving right (bubble sort, a swap
-  // every 0.225 s), then the sorted bars play their rising scale.
+  // every 0.225 s), then the sorted bars play their rising scale. Lane
+  // Computing r2: on the toy, the sort plays its own notes (cues from
+  // src/packs/computing.js, sortCues), every comparison and swap in each
+  // algorithm's own voice, so the tap is quiet; this is bubble sort's swaps
+  // for the Sound Board.
   "sorting-machine": [
     { voice: "marimba", at: 0.44, notes: "A4 C5 C5 C5 C5 C5 A4 B4 B4 B4 E4 A4 A4 A4 F4 E4", step: 0.225, decay: 0.6 }, // prettier-ignore
     { voice: "marimba", at: 3.95, notes: "C4 D4 E4 F4 G4 A4 B4 C5", step: 0.06, decay: 0.8 },

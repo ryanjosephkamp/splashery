@@ -2615,8 +2615,13 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: eight bars sort by bubble sort, quicksort or merge sort, each a solid bar gliding
     past the others, with a SWAPS (or MOVES) counter; then they shuffle back (5 s). Owner's review:
     the algorithm's name is on the toy, and eight algorithms (insertion, selection, cocktail shaker,
-    Shell and heap sort added).
-  - Sound: Each bar plays its height as a note, so you hear the sort rise into a scale.
+    Shell and heap sort added). Computing r2: each algorithm sounds its comparisons and swaps in its
+    own voice; a View option shows the same steps as crates by size, a 3D ring of colored pucks
+    sorted by hue, or the classic dots; every step is checked against reference code
+    (tests/cmp2-sort.spec.mjs).
+  - Sound: Each algorithm has its own voice (lane Computing r2): every comparison plays the two
+    compared bars' notes softly, every swap the moving bar's note, each timed to its step; then the
+    sorted bars play their scale.
 - **Half adder** (`half-adder`). Now: tap: Add 1 + 1. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: Two input switches flip; light flows along the wires through an XOR gate and an AND
@@ -2659,7 +2664,11 @@ Proposals below are suggestions; the owner may change them.
     keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step
     back, as an operator corrected a mistake (the real machine had no delete key): a tap on the
     rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its
-    coded letter) off the pad and turns the rotors back to where they stood before it.
+    coded letter) off the pad and turns the rotors back to where they stood before it. Computing r2:
+    set it like a real Enigma I in the Toy tab (three of rotors I to V in any order, reflector B or
+    C, rings, start letters, up to ten plugboard pairs), the setting shown on the pad, the rotor
+    plates and the cables; a Barbarossa, 1941, preset decodes a real message; proof in
+    tests/cmp2-enigma.spec.mjs.
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.

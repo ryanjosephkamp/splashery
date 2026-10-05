@@ -1123,16 +1123,26 @@ function driveDifference(t, c, out, info) {
 
 // ---- The Enigma machine --------------------------------------------------------------
 
-// The Enigma I with rotors I, II and III (left to right), reflector B and a
-// plugboard: the historical wirings and stepping, including the middle
-// rotor's double step. Letters are 0..25.
+// The Enigma I: three of its five rotors in any order, reflector B or C,
+// ring settings, start positions and up to ten plugboard pairs (lane
+// Computing r2; it was rotors I, II and III, reflector B and AR GK OX, still
+// the default). The historical wirings and stepping, including the middle
+// rotor's double step. Letters are 0..25. Reflector A (the Enigma I's until
+// 1937) is here for the proof only (the 1930 manual's message, in
+// tests/cmp2-enigma.spec.mjs).
 const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const EN_ROTORS = {
   I: { wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ", notch: "Q" },
   II: { wiring: "AJDKSIRUXBLHWTMCQGZNPYFVOE", notch: "E" },
   III: { wiring: "BDFHJLCPRTXVZNYEIWGAKMUSQO", notch: "V" },
+  IV: { wiring: "ESOVPZJAYQUIRHXLNFTGKDCMWB", notch: "J" },
+  V: { wiring: "VZBRGITYUPSDNHLXAWMJQOFECK", notch: "Z" },
 };
-const EN_REFLECTOR_B = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+const EN_REFLECTORS = {
+  A: "EJMZALYXVBWFCRQUONTSPIKHGD",
+  B: "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+  C: "FVPJIAOYEDRZXWGCTKUQSBNMHL",
+};
 const EN_PLUGS = "AR GK OX";
 const EN_DEFAULT = "HELLO";
 const EN_MAX = 20;
@@ -1140,7 +1150,13 @@ const idx = (ch) => AZ.indexOf(ch);
 const mod26 = (n) => ((n % 26) + 26) % 26;
 
 // A machine: rotor names left to right, ring settings, plugboard pairs.
-function enigmaMachine({ rotors = ["I", "II", "III"], rings = [0, 0, 0], plugs = EN_PLUGS } = {}) {
+function enigmaMachine({
+  rotors = ["I", "II", "III"],
+  rings = [0, 0, 0],
+  plugs = EN_PLUGS,
+  reflector = "B",
+} = {}) {
+  // prettier-ignore
   const fwd = rotors.map((r) => [...EN_ROTORS[r].wiring].map(idx));
   const back = fwd.map((w) => {
     const b = [];
@@ -1148,7 +1164,7 @@ function enigmaMachine({ rotors = ["I", "II", "III"], rings = [0, 0, 0], plugs =
     return b;
   });
   const notch = rotors.map((r) => idx(EN_ROTORS[r].notch));
-  const refl = [...EN_REFLECTOR_B].map(idx);
+  const refl = [...EN_REFLECTORS[reflector]].map(idx);
   const plug = [...AZ].map((_, i) => i);
   for (const pair of String(plugs).toUpperCase().split(/\s+/).filter(Boolean)) {
     const a = idx(pair[0]);
@@ -1191,6 +1207,98 @@ function enigmaMachine({ rotors = ["I", "II", "III"], rings = [0, 0, 0], plugs =
 const enClean = (text) => String(text ?? "").toUpperCase().replace(/[^A-Z]/g, "").slice(0, EN_MAX); // prettier-ignore
 const EN_SHOWN = { label: "HELLO" };
 
+// Lane Computing r2: the setting, from the Toy tab. The rotors (three of I
+// to V; a rotor picked twice gives way to the first one not in use, as a
+// machine has one of each), the reflector, the ring settings and the start
+// positions (letters), and the plugboard: letters taken in pairs, each
+// letter in one pair at most, up to ten pairs (as the Enigma I had ten
+// cables). A preset sets them all to a published key.
+const EN_ROMAN = ["I", "II", "III", "IV", "V"];
+const EN_SIDES = [
+  ["L", "Left"],
+  ["M", "Middle"],
+  ["R", "Right"],
+];
+// The published keys (tests/cmp2-enigma.spec.mjs decodes the whole of both
+// parts): Operation Barbarossa, July 7, 1941, a German Army message in two
+// parts, as published from the original intercepts by Geoff Sullivan and
+// Frode Weierud (cryptocellar.org) and on Franklin Heath's Enigma sample
+// messages. Each part is at its message key; the pad takes its first 20
+// letters.
+const EN_PRESETS = {
+  barbarossa1: { rotors: ["II", "IV", "V"], reflector: "B", rings: "BUL", start: "BLA", plugs: "AV BS CG DL FU HZ IN KM OW RX", message: "EDPUDNRGYSZRCXNUYTPO", title: "Operation Barbarossa, 1941, part 1" }, // prettier-ignore
+  barbarossa2: { rotors: ["II", "IV", "V"], reflector: "B", rings: "BUL", start: "LSD", plugs: "AV BS CG DL FU HZ IN KM OW RX", message: "SFBWDNJUSEGQOBHKRTAR", title: "Operation Barbarossa, 1941, part 2" }, // prettier-ignore
+};
+const EN_STATE = { preset: "own" };
+function enPlugPairs(text) {
+  const letters = String(text ?? "")
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "");
+  const used = new Set();
+  const pairs = [];
+  for (let i = 0; i + 1 < letters.length && pairs.length < 10; i += 2) {
+    const [a, b] = [letters[i], letters[i + 1]];
+    if (a === b || used.has(a) || used.has(b)) continue;
+    used.add(a);
+    used.add(b);
+    pairs.push(a + b);
+  }
+  return pairs;
+}
+function enSetting(o = {}) {
+  const pre = EN_PRESETS[o.preset];
+  if (pre) {
+    const n = (str) => [...str].map(idx);
+    return { rotors: pre.rotors.slice(), reflector: pre.reflector, rings: n(pre.rings), start: n(pre.start), plugs: pre.plugs.split(" "), preset: o.preset }; // prettier-ignore
+  }
+  const rotors = [];
+  for (const [side] of EN_SIDES) {
+    const r = o[`rotor${side}`] ?? ["I", "II", "III"][rotors.length];
+    rotors.push(EN_ROTORS[r] && !rotors.includes(r) ? r : null);
+  }
+  for (let i = 0; i < 3; i++) rotors[i] ||= EN_ROMAN.find((x) => !rotors.includes(x));
+  const letter = (v) => Math.max(0, idx(String(v ?? "A").toUpperCase()));
+  return {
+    rotors,
+    reflector: o.reflector === "C" ? "C" : "B",
+    rings: EN_SIDES.map(([side]) => letter(o[`ring${side}`])),
+    start: EN_SIDES.map(([side]) => letter(o[`start${side}`])),
+    plugs: enPlugPairs(o.plugs ?? EN_PLUGS),
+    preset: "own",
+  };
+}
+// The setting as a key sheet line: II IV V  UKW B  RINGS 02 21 12 …
+function enSettingLine(st) {
+  const two = (v) => String(v + 1).padStart(2, "0");
+  const pos = st.start.map((v) => AZ[v]).join("");
+  return `${st.rotors.join(" ")}   UKW ${st.reflector}   RINGS ${st.rings.map(two).join(" ")}   START ${pos}   PLUGS ${st.plugs.join(" ") || "NONE"}`; // prettier-ignore
+}
+// The Toy tab's setting: a preset, or every part of the key.
+const EN_LETTERS = [...AZ].map((ch, i) => ({ id: ch, label: `${ch} (${String(i + 1).padStart(2, "0")})` })); // prettier-ignore
+function enOptions() {
+  const own = !EN_PRESETS[EN_STATE.preset];
+  const hide = own ? {} : { hidden: true };
+  return [
+    { key: "message", label: "Your message", type: "text", default: EN_DEFAULT, hidden: true },
+    {
+      key: "preset",
+      label: "Setting",
+      type: "select",
+      default: "own",
+      choices: [
+        { id: "own", label: "Set it yourself" },
+        { id: "barbarossa1", label: "Barbarossa, 1941, part 1" },
+        { id: "barbarossa2", label: "Barbarossa, 1941, part 2" },
+      ],
+    },
+    ...EN_SIDES.map(([side, name], i) => ({ key: `rotor${side}`, label: `${name} rotor`, type: "select", default: ["I", "II", "III"][i], choices: EN_ROMAN.map((r) => ({ id: r, label: `Rotor ${r}` })), ...hide })), // prettier-ignore
+    { key: "reflector", label: "Reflector", type: "select", default: "B", choices: [{ id: "B", label: "B" }, { id: "C", label: "C" }], ...hide }, // prettier-ignore
+    ...EN_SIDES.map(([side, name]) => ({ key: `ring${side}`, label: `${name} ring`, type: "select", default: "A", choices: EN_LETTERS, ...hide })), // prettier-ignore
+    ...EN_SIDES.map(([side, name]) => ({ key: `start${side}`, label: `${name} start`, type: "select", default: "A", choices: [...AZ].map((ch) => ({ id: ch, label: ch })), ...hide })), // prettier-ignore
+    { key: "plugs", label: "Plugboard", type: "text", default: EN_PLUGS, placeholder: "AR GK OX", maxLength: 40, ...hide }, // prettier-ignore
+  ];
+}
+
 // Keyboard and lampboard rows (the Enigma's own layout).
 const EN_ROWS = ["QWERTZUIO", "ASDFGHJK", "PYXCVBNML"];
 const EN = { key: 0.155, E: 9, rotorR: 0.2, step: TAU / 26, index: (35 * Math.PI) / 180 };
@@ -1210,26 +1318,34 @@ const EN_ROTOR_C = [0, 0.02, -0.72];
 // The timeline of a tap: each letter's key goes down (the rotors step as
 // it goes), the lamp lights, the key comes up; then the operator turns the
 // rotors back to the start.
-function enTimes(n, from = [0, 0, 0]) {
+function enTimes(n, from = [0, 0, 0], start = [0, 0, 0]) {
   const dt = Math.min(0.5, 6.4 / Math.max(1, n));
   // The rotors are turned back to the start first, if they are not there.
-  const t0 = from.some((p) => p) ? 0.6 : 0.2;
+  const t0 = from.some((p, j) => p !== start[j]) ? 0.6 : 0.2;
   const end = t0 + n * dt;
   return { dt, t0, end, back: end + 0.25, done: end + 1.05 };
 }
 
 function buildEnigma(k, o) {
-  const msg = enClean(o.message) || EN_DEFAULT;
+  const st = enSetting(o);
+  EN_STATE.preset = st.preset;
+  const pre = EN_PRESETS[st.preset];
+  // A preset puts its own coded message on the pad, unless one was typed.
+  const typed = enClean(o.message);
+  const msg = (pre && (!typed || typed === EN_DEFAULT) ? pre.message : typed) || EN_DEFAULT;
   EN_SHOWN.label = msg;
-  const mach = enigmaMachine();
-  const start = [0, 0, 0];
+  const mach = enigmaMachine({ rotors: st.rotors, rings: st.rings, plugs: st.plugs.join(" "), reflector: st.reflector }); // prettier-ignore
+  const start = st.start.slice();
   const enc = mach.type(msg, start);
   const coded = enc.map((e) => AZ[e.lamp]).join("");
   const dec = mach.type(coded, start);
   EN_KEYS.length = 0;
   k.data = { msg, coded, runs: [enc, dec], mach, m: {}, run: null, key: null, home: null };
   k.data.pad = { plain: msg, coded: "", dec: "", typed: false };
-  k.data.rest = [0, 0, 0];
+  k.data.rest = start.slice();
+  k.data.start = start;
+  k.data.setting = st;
+  k.data.line = enSettingLine(st);
   k.data.view = [msg, "", ""];
   // The box: a wooden case with a dark crackle-finish top plate.
   const W = 1.62;
@@ -1314,6 +1430,10 @@ function buildEnigma(k, o) {
     });
     k.add(evenDisc(k, R, 0.02, 64), { pos: [x + 0.05, rcy, rcz], rot: [0, 0, -90], even: true, weight: 0.8, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
   });
+  // Lane Computing r2: each rotor's number on the plate in front of it, and
+  // the reflector's letter in front of it (left), as the setting has them.
+  EN_ROTOR_X.forEach((x, i) => text(k, st.rotors[i], [x, 0.004, rcz + R + 0.235], 0.009, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] })); // prettier-ignore
+  text(k, `UKW ${st.reflector}`, [-0.4, 0.004, rcz + R + 0.235], 0.007, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] }); // prettier-ignore
   // The index marks: a small brass pointer at each rotor's reading place.
   EN_ROTOR_X.forEach((x) => {
     const phi = EN.index;
@@ -1334,11 +1454,11 @@ function buildEnigma(k, o) {
       k.add(evenDisc(k, 0.011, 0, 16), { pos: [p[0], p[1] + dy, pz + 0.002], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: () => keep("#0d0d0e") }); // prettier-ignore
     text(k, ch, [p[0] - 0.035, p[1], pz + 0.003], 0.006, "#e8e2d0", { weight: 16, size: 0.7 });
   }
-  const pairs = EN_PLUGS.split(" ");
-  pairs.forEach((pair, i) => {
+  // The setting's pairs (lane Computing r2): a cable for each.
+  st.plugs.forEach((pair, i) => {
     const a = plugAt(pair[0]);
     const b = plugAt(pair[1]);
-    const sag = 0.1 + 0.03 * i;
+    const sag = i < 3 ? 0.1 + 0.03 * i : 0.06 + 0.025 * (i - 3);
     const curve = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t - sag * Math.sin(Math.PI * t), pz + 0.03 + 0.04 * Math.sin(Math.PI * t)]; // prettier-ignore
     k.add(evenTube(k, curve, 0.011, { grid: 48 }), { even: true, weight: 2, flat: 0.35, pattern: false, color: (c) => keep(lit("#2b2b2e", c.n, { amb: 0.7, dif: 0.35, spec: 0.4 })) }); // prettier-ignore
     for (const p of [a, b])
@@ -1399,24 +1519,34 @@ function enSheet(w, h) {
 
 // The pad's picture: three ruled lines (the message, the coded letters and
 // the decoded ones) in five-letter groups, as operators wrote them.
-function enDrawPad(g, view) {
+// Lane Computing r2: the setting on a line above them, as on a key sheet.
+function enDrawPad(g, view, line = "") {
   const [W, H] = [EN_PAD.w, EN_PAD.h];
   const [plain, coded, dec] = view;
   g.fillStyle = "#f3ecd8";
   g.fillRect(0, 0, W, H);
   g.textBaseline = "top";
+  let ls = 19;
+  g.font = `bold ${ls}px "Courier New", Courier, monospace`;
+  const lw = g.measureText(line).width;
+  if (lw > W - 52) {
+    ls = Math.floor((ls * (W - 52)) / lw);
+    g.font = `bold ${ls}px "Courier New", Courier, monospace`;
+  }
+  g.fillStyle = "#5b3a1e";
+  g.fillText(line, 26, 10);
   const rows = [
     ["MESSAGE", plain, "#1f1c18"],
     ["CODED", coded, "#8a1d1d"],
     ["DECODED", dec, "#1d4f8a"],
   ];
   rows.forEach(([label, str, col], i) => {
-    const y = 12 + i * 104;
+    const y = 36 + i * 94;
     g.fillStyle = "#8a6d4c";
     g.font = "bold 22px sans-serif";
     g.fillText(label, 26, y);
     g.fillStyle = "#cdbb9c";
-    g.fillRect(22, y + 88, W - 44, 3);
+    g.fillRect(22, y + 82, W - 44, 3);
     const groups = (str.match(/.{1,5}/g) || []).join(" ");
     let size = 46;
     g.font = `bold ${size}px "Courier New", Courier, monospace`;
@@ -1426,7 +1556,7 @@ function enDrawPad(g, view) {
       g.font = `bold ${size}px "Courier New", Courier, monospace`;
     }
     g.fillStyle = col;
-    g.fillText(groups, 26, y + 34);
+    g.fillText(groups, 26, y + 30);
   });
   g.fillStyle = "#9c825f";
   g.font = "italic 21px sans-serif";
@@ -1482,7 +1612,7 @@ function driveEnigma(t, c, out, info) {
   if (!data.key && EN_KEYS.length) enKeyStart(data, EN_KEYS.shift(), t, out);
   let pose = null;
   if (data.run) {
-    const T = enTimes(data.run.list.length, data.run.from);
+    const T = enTimes(data.run.list.length, data.run.from, data.start);
     if (s < 0 || s >= T.done) enCommit(data);
     else pose = enPose(data.run, T, s);
   }
@@ -1501,7 +1631,7 @@ function driveEnigma(t, c, out, info) {
   if (!pose && data.home) {
     const f = ease(band(t - data.home.t0, 0, 0.6));
     if (f >= 1) data.home = null;
-    else pose = { key: -1, down: 0, lamp: -1, rotors: enTurn(data.home.from, data.home.to || [0, 0, 0], f) }; // prettier-ignore
+    else pose = { key: -1, down: 0, lamp: -1, rotors: enTurn(data.home.from, data.home.to || data.start, f) }; // prettier-ignore
   }
   // The pad's lines: a running message shows its letters as they light.
   const pad = data.pad;
@@ -1533,7 +1663,7 @@ function driveEnigma(t, c, out, info) {
   // and a faint click as each lamp lights.
   if (data.run && s >= 0) {
     if (m.cuesFor !== data.run) {
-      const T = enTimes(data.run.list.length, data.run.from);
+      const T = enTimes(data.run.list.length, data.run.from, data.start);
       const list = [];
       if (T.t0 > 0.3) list.push([0.05, { voice: "ratchet", f: 1200, n: 4, rate: 10, vol: 0.4 }]);
       data.run.list.forEach((e, i) => {
@@ -1555,26 +1685,26 @@ function enNextRun(data) {
   const pad = data.pad;
   const from = data.rest.slice();
   if (pad.typed && pad.coded && !pad.dec) {
-    const list = data.mach.type(pad.coded, [0, 0, 0]);
-    return { mode: 1, list, plain: pad.plain, coded: pad.coded, typed: true, from };
+    const list = data.mach.type(pad.coded, data.start);
+    return { mode: 1, list, plain: pad.plain, coded: pad.coded, typed: true, from, start: data.start }; // prettier-ignore
   }
   if (!pad.typed && pad.coded === data.coded && !pad.dec)
-    return { mode: 1, list: data.runs[1], plain: data.msg, coded: data.coded, typed: false, from }; // prettier-ignore
-  return { mode: 0, list: data.runs[0], plain: data.msg, coded: data.coded, typed: false, from };
+    return { mode: 1, list: data.runs[1], plain: data.msg, coded: data.coded, typed: false, from, start: data.start }; // prettier-ignore
+  return { mode: 0, list: data.runs[0], plain: data.msg, coded: data.coded, typed: false, from, start: data.start }; // prettier-ignore
 }
 // Where the keys, lamp, rotors and pad are at time s of a tap.
 function enPose(run, T, s) {
   const n = run.list.length;
   if (s < T.t0) {
     // The rotors are first turned back to the start, if they are not there.
-    const rotors = enTurn(run.from, [0, 0, 0], ease(band(s, 0, T.t0 - 0.05)));
+    const rotors = enTurn(run.from, run.start, ease(band(s, 0, T.t0 - 0.05)));
     return { key: -1, down: 0, lamp: -1, rotors, count: 0 };
   }
   if (s < T.end) {
     const i = Math.max(0, Math.min(n - 1, Math.floor((s - T.t0) / T.dt)));
     const f = clamp01((s - T.t0) / T.dt - i);
     const e = run.list[i];
-    const prev = i > 0 ? run.list[i - 1].pos : [0, 0, 0];
+    const prev = i > 0 ? run.list[i - 1].pos : run.start;
     const stepF = ease(band(f, 0.0, 0.25));
     const rotors = [0, 1, 2].map((j) => prev[j] + mod26(e.pos[j] - prev[j]) * stepF);
     const lampOn = f > 0.22 && f < 0.85;
@@ -1582,14 +1712,14 @@ function enPose(run, T, s) {
   }
   // Turned back to the start: each rotor turns the short way home.
   const b = ease(band(s, T.back, T.done - 0.1));
-  return { key: -1, down: 0, lamp: -1, rotors: enTurn(run.list[n - 1].pos, [0, 0, 0], b), count: n }; // prettier-ignore
+  return { key: -1, down: 0, lamp: -1, rotors: enTurn(run.list[n - 1].pos, run.start, b), count: n }; // prettier-ignore
 }
 function enCommit(data) {
   const r = data.run;
   if (!r) return;
   const lit = r.list.map((e) => AZ[e.lamp]).join("");
   data.pad = r.mode === 0 ? { plain: r.plain, coded: lit, dec: "", typed: r.typed } : { plain: r.plain, coded: r.coded, dec: lit, typed: r.typed }; // prettier-ignore
-  data.rest = [0, 0, 0];
+  data.rest = data.start.slice();
   data.run = null;
 }
 // One key: the rotors step, then the lamp lights and the letter is written.
@@ -1599,7 +1729,7 @@ function enKeyStart(data, k, t, out) {
   let start = data.rest;
   if (!data.pad.typed || data.pad.dec || data.pad.plain.length >= EN_MAX) {
     data.pad = enBlank();
-    start = [0, 0, 0];
+    start = data.start;
   }
   const to = data.mach.step(start);
   // Where the rotors stood before each letter, so a step back can return them.
@@ -1651,11 +1781,11 @@ function enClear(data, t, out) {
   enKeyDone(data);
   data.run = null;
   data.pad = enBlank();
-  if (data.rest.some((p) => p)) {
+  if (data.rest.some((p, j) => p !== data.start[j])) {
     data.home = { from: data.rest.slice(), t0: t };
     out.cues.push({ voice: "ratchet", f: 1200, n: 4, rate: 10, vol: 0.4 });
   }
-  data.rest = [0, 0, 0];
+  data.rest = data.start.slice();
 }
 
 // ---- The Turing-Welchman Bombe --------------------------------------------------------
@@ -1915,16 +2045,17 @@ export const RECIPES = {
   },
   "enigma-machine": {
     density: 2,
-    options: [
-      // Your message, as typed (set from the panel, not shown).
-      { key: "message", label: "Your message", type: "text", default: EN_DEFAULT, hidden: true },
-    ],
+    // Your message, as typed (set from the panel, not shown), and the
+    // machine's setting (lane Computing r2).
+    get options() {
+      return enOptions();
+    },
     input: {
       title: "Type your own message",
       placeholder: "HELLO",
       button: "Put it on the pad",
       fileButton: false,
-      note: "Or tap the machine's keys (or type on a keyboard) to code a message letter by letter, then tap the machine off the keys to decode it. A message you put on the pad here, up to 20 letters (spaces and anything that isn't a letter are left out, as Enigma operators did), is typed with a tap off the keys; the next tap decodes it.",
+      note: "Or tap the machine's keys (or type on a keyboard) to code a message letter by letter, then tap the machine off the keys to decode it. A message you put on the pad here, up to 20 letters (spaces and anything that isn't a letter are left out, as Enigma operators did), is typed with a tap off the keys; the next tap decodes it. Set the machine above, as an operator did from the day's key sheet: three of its five rotors in any order, reflector B or C, the rings, the start letters and up to ten plugboard pairs. Or pick Barbarossa, 1941, and tap to decode a real message of the German Army.",
       read(text) {
         const msg = enClean(text);
         if (!msg) throw new Error("Type a message with some letters in it, like HELLO.");
@@ -1990,8 +2121,8 @@ export const RECIPES = {
     screen: {
       width: EN_PAD.w,
       height: EN_PAD.h,
-      version: () => (EN_PAD.live?.view || []).join("|"),
-      draw: (g) => enDrawPad(g, EN_PAD.live?.view || ["", "", ""]),
+      version: () => `${EN_PAD.live?.line || ""}|${(EN_PAD.live?.view || []).join("|")}`,
+      draw: (g) => enDrawPad(g, EN_PAD.live?.view || ["", "", ""], EN_PAD.live?.line || ""),
     },
     drive: driveEnigma,
     build: buildEnigma,
