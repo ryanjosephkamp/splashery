@@ -120,6 +120,40 @@ and this file.
 
 ## State
 
+WORKING (October 5, 2026). Done so far, on the branch:
+
+- **Item 1, How a QR code works** (`qr-anatomy`, labs, Studio shelf): tap through the parts
+  (finders, separators, timing, alignment, format and version information, the dark module, data and
+  error correction codewords, remainder bits, the mask), or encode your own text step by step (mode,
+  count, data bits, padding, error correction, blocks and interleaving, zigzag placement, the eight
+  masks with their penalties, the chosen mask, format and version information). A second encoder
+  written from the standard (`src/qr-lab/steps.js`) computes every step; `tests/qrs-steps.spec.mjs`
+  checks each step against Nayuki's encoder on 100+ texts in every mode and level (segments,
+  version, data codewords, error correction, interleaving, placement path, each mask's penalty,
+  chosen mask, final modules) and against Thonky's worked example.
+- **Item 2, the Damage lab** (`qr-damage`): scratch, sticker, tear, burn, smudge, blur, shrink,
+  grow, jitter, fade, color drift (rebuilt), and tilt, curve, move in time (live sliders, on the
+  GPU, the same math as `src/qr-lab/damage.js`). One code or the four levels side by side. The meter
+  renders the stage, reads it with jsQR, samples every module and counts each block's lost codewords
+  against its capacity (`src/qr-lab/read.js`).
+- **X3, the code that heals**: "Heal it" shows what the reader read (wrong modules in red) and turns
+  them over block by block as real Reed–Solomon decoding (`src/qr-lab/rs.js`: Berlekamp–Massey,
+  Chien, Forney) fixes each block; `tests/qrs-heal.spec.mjs` checks the decoding.
+- **X2, three codes in one** (`qr-three`): the encoder and the splitting reader
+  (`src/qr-lab/rgb.js`); a tap pulls the three codes apart. Its study is part of item 3.
+- **Item 3 and 4** (the study and the shapes): a helper is building `tools/qrs-study.mjs`, the
+  report and the phone sheet.
+
+Next: clips (`tools/qrs-clip.mjs`), thumbnails, screenshots, the study's report, the phone form.
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
+- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
+  What was cut), opened early and pushed after each finished item. Finish every working turn with a
+  final message that starts "READY:", "WORKING:" or "BLOCKED:".
+
+## State
+
 WORKING (October 5, 2026): started. Plan, in order: (1) the "How a QR code works" toy with an
 independent step-by-step encoder checked against Nayuki's; (2) the Damage lab with the live meter,
 the four levels side by side and the code that heals (X3, real Reed–Solomon decoding); (3) the study
@@ -133,4 +167,3 @@ devDependencies.
 ## Known issues
 
 ## For the Operator
-

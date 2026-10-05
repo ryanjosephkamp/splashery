@@ -689,6 +689,7 @@ export async function checkDamage() {
   if (!a?.player || !DM.codes || !DM.layout) return null;
   if (DM.running) return DM.running;
   DM.running = (async () => {
+    await onStage(DM.kit);
     DM.checking = true;
     DM.panel?.refresh();
     try {
@@ -848,6 +849,7 @@ const DAMAGE = {
     const { codes } = damageCodes(o);
     const L = layoutFor(codes);
     DM.layout = L;
+    DM.kit = k;
     DM.options = { ...o };
     const N = L.N;
     const S = N * N;
@@ -984,6 +986,7 @@ export async function readThree() {
   const a = app();
   if (!a?.player || !TH.rgb) return null;
   await loadJsQR();
+  await onStage(TH.kit);
   const size = 900;
   const img = await a.withCapture([size, size], async () => {
     const shot = await a.player.renderAt(a.player.time, frontPose(TH.rgb.size / 2 + QUIET, 1.2));
@@ -1033,6 +1036,7 @@ const THREE = {
   build(k, o) {
     const r = encodeRGB([o.t1 ?? TEXTS[0], o.t2 ?? TEXTS[1], o.t3 ?? TEXTS[2]], o.level || "M");
     TH.rgb = r;
+    TH.kit = k;
     TH.options = { ...o };
     TH.result = null;
     const N = r.size;
@@ -1063,6 +1067,13 @@ const THREE = {
     Promise.resolve().then(() => TH.panel?.refresh());
   },
 };
+// Waits until the kit built last is the one on the stage (the player swaps
+// the toy in after the build), then two frames.
+async function onStage(kit) {
+  const a = app();
+  for (let i = 0; i < 200 && !(kit && a?.player?.proc?.ctx?.kit === kit && !a.busy); i++) await new Promise((r) => setTimeout(r, 50)); // prettier-ignore
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+}
 const smooth = (x) => {
   x = Math.min(1, Math.max(0, x));
   return x * x * (3 - 2 * x);
