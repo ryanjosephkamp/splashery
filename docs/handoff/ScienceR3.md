@@ -108,23 +108,19 @@ this file.
 Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #270 (lane) and #272 ("Engine: grouped
 choices in a toy's select options", needed by the structure picker; merge it first).
 
-- October 5, 2026: items 1 and 2 done and pushed; item 3 in progress; item 4's three proposals
-  written (below).
-  1. **Structures**: 25 in six groups (everyday molecules, medicines, minerals and gems, ice and
-     salts, proteins at atomic resolution, DNA), all COD or PDB (CC0) with real anisotropic U
-     (`tools/sci3-structures.mjs`). New: a Show option that fills the unit cell from the space
-     group's operations (`src/science/symmetry.js`; each copy's U turned), minerals and salts by
-     default; molecules split by symmetry are completed (urea); the B-DNA duplex comes from its
-     biological assembly.
-  2. **Microscopy**: four ShareLoc.XYZ sets (nuclear pores, actin, mitochondria, 3D microtubules;
-     `tools/sci3-samples.mjs`), NeNA precision where a record has none. **Cryo-EM map** (new toy,
-     labs): apoferritin, an E. coli ribosome with an antibiotic, an AAV2 capsid from EMDB, each with
-     its fitted PDB model; the isosurface at EMDB's recommended level; the tap cuts it open
-     (`tools/sci3-cryoem.mjs`, `src/science/density.js`).
-  3. **Galaxies**: a dwarf (m11h) and m12i at z = 2 join m12i today; a telescope view (simulated) of
-     the star particles with seeing, filters, dust and a building exposure
-     (`tools/sci3-galaxy.mjs`).
-- Clips: rendering (`tools/sci3-clip.mjs`), not posted yet.
+- October 5, 2026: items 1 to 3 done and pushed; item 4's three proposals written (below) and its
+  first box built: **Terrain in a box** and the **Contour lab** before it (USGS 3DEP, public domain;
+  `tools/sci3-terrain.mjs`, `src/science/terrain.js`; the water and the layers are kit parts).
+  1. **Structures**: 25 in six groups, COD or PDB (CC0) with real anisotropic U; Show fills the unit
+     cell (`src/science/symmetry.js`); split molecules are completed; the B-DNA duplex comes from
+     its biological assembly.
+  2. **Microscopy**: four ShareLoc.XYZ sets, NeNA precision where a record has none. **Cryo-EM map**
+     (new toy): apoferritin, a ribosome with an antibiotic, an AAV2 capsid (EMDB, with the fitted
+     PDB models); the isosurface at EMDB's recommended level; the tap cuts it open.
+  3. **Galaxies**: m12i at z = 2 and the dwarf m11h; a telescope view (simulated).
+- Clips: six cards posted on page 2 (lane record `ScienceR3`: molecules, minerals, DNA, three
+  cryo-EM maps); the microscope sets, galaxies, telescope, terrain, contour lab, the model view and
+  the pores zoom are rendering and go up next.
 
 ## Proposals: more "in a box" (item 4)
 
