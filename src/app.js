@@ -94,6 +94,32 @@ function rememberTurntable(on) {
   }
 }
 
+// Lane Pages r6: the top bar's Pop out (on or off, off when never chosen),
+// and whether its first-time line has been shown on this device.
+const POPOUT_KEY = "splashery.popout";
+function popOutPref() {
+  try {
+    return localStorage.getItem(POPOUT_KEY) === "on";
+  } catch {
+    return false;
+  }
+}
+function popOutHinted() {
+  try {
+    return localStorage.getItem(POPOUT_KEY) !== null;
+  } catch {
+    return true;
+  }
+}
+function rememberPopOut(on, hintOnly = false) {
+  try {
+    if (hintOnly) localStorage.setItem(POPOUT_KEY, popOutPref() ? "on" : "off");
+    else localStorage.setItem(POPOUT_KEY, on ? "on" : "off");
+  } catch {
+    // Private windows may refuse; the choice holds for this visit.
+  }
+}
+
 // Which toy a per-toy choice belongs to.
 const toyKey = (toy) => (toy.id ? `${toy.kind}:${toy.id}` : toy.kind);
 
@@ -119,6 +145,7 @@ class App {
     this.spins = new Map(); // UI r3: toy key -> turntable, chosen for a toy that holds still
     this.toyFlags = new Map(); // toy key -> its flag colours, or null (lane Viewer)
     this.globalFlag = null; // UI r3: the top bar's flag, for every toy (a flag code)
+    this.popOut = popOutPref(); // lane Pages r6: the top bar's Pop out, for the page toys
   }
 
   async start() {
@@ -148,6 +175,7 @@ class App {
     player.on("action", (r) => this.onAction(r));
     // A toy's slider dragged on the toy itself: the panel's slider follows.
     player.on("controls", (targets) => ui.setMotion(player.scene.motion, targets));
+    player.on("tilt", (locked) => ui.setTiltLock(locked)); // lane Pages r6: a tilt the toy freed
     // A tap that switches the toy's options rebuilds it the way the Toy tab does.
     // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
@@ -334,6 +362,7 @@ class App {
     // Lane Live input r3: a toy's own tilt range (recipe.pitchRange), or none.
     player.camera.setPitchRange(info.recipe?.pitchRange ?? null);
     ui.setTiltLock(lock);
+    this.showPopOut(info); // lane Pages r6
     // Lane Physics: Hands-on starts on for a toy that is hands-on already,
     // or as it was left on this toy earlier in the visit.
     if (this.handsChoice.has(key)) player.handsOn.setOn(this.handsChoice.get(key));
@@ -632,6 +661,30 @@ class App {
   toggleTurntable() {
     const on = !this.player.scene.autoplay.turntable;
     this.setAutoplay({ turntable: on });
+  }
+
+  // Lane Pages r6: the top bar's Pop out, one setting for every toy that
+  // has a control marked `global: "pop"` (Your book, the Photo album, the
+  // Picture lab), shown only while one is open. It is remembered on this
+  // device; a scene or link that had Pop out on turns it on for the visit.
+  // The first time such a toy opens on a device, a line says it is there.
+  showPopOut(info) {
+    const def = info.recipe?.controls?.find((c) => c.global === "pop");
+    if (def && (this.player.scene.motion.controls[def.key] ?? 0) > 0.5) this.popOut = true;
+    if (def) this.player.setGlobalControl(def.key, this.popOut);
+    this.ui.setPopOut(!!def, this.popOut);
+    if (!def || popOutHinted()) return;
+    rememberPopOut(null, true);
+    if (!this.popOut) this.ui.toast("Pop out is off. Turn it on at the top, then tap a figure to raise it.", 5200); // prettier-ignore
+  }
+
+  togglePopOut() {
+    this.popOut = !this.popOut;
+    rememberPopOut(this.popOut);
+    const def = this.player.toyInfo?.recipe?.controls?.find((c) => c.global === "pop");
+    if (def) this.player.setGlobalControl(def.key, this.popOut);
+    this.ui.setPopOut(!!def, this.popOut);
+    this.ui.toast(this.popOut ? "Pop out on: tap a figure to raise it." : "Pop out off.", 2500);
   }
 
   // The tilt lock for the toy on show; remembered for it during the visit.

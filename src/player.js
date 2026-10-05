@@ -36,7 +36,7 @@ export function ui2On() {
 }
 import { pickKernel } from "./kernels.js"; // Lab
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
-import { createScene, THEMES } from "./state.js";
+import { createScene, THEMES, normalizeFigures } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
 import { HandsOn } from "./physics/hands-on.js"; // lane Physics
@@ -256,6 +256,8 @@ export class Player {
 
   async loadToyNow(toy, { file = null, onProgress } = {}) {
     const token = ++this.loadToken;
+    this.tiltAsk = false; // lane Pages r6 (the app sets the new toy's tilt lock)
+    this.tiltFreed = false;
     const progress = (f, label) => onProgress?.(f, label);
     this.stroke = null;
     this.painter.detach();
@@ -1209,6 +1211,56 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // Lane Pages r6: a control the top bar sets for every toy that has it (a
+  // recipe control with `global`, such as the page toys' Pop out): on (1)
+  // or off (left out of the scene's controls).
+  setGlobalControl(key, on) {
+    this.motion.setControl(key, on ? 1 : 0, { snap: true });
+    const controls = { ...this.scene.motion.controls };
+    if (on) controls[key] = 1;
+    else delete controls[key];
+    this.scene.motion.controls = controls;
+    this.stage.requestRender();
+  }
+
+  // Lane Pages r6: the slider over the stage (a drive's out.slider) moved.
+  sliderInput(id, value) {
+    const n = (this.motion.sliderIn?.n || 0) + 1;
+    this.motion.sliderIn = { id, value: Math.min(1, Math.max(0, Number(value) || 0)), n };
+    this.stage.requestRender();
+  }
+
+  // Lane Pages r6, each frame: a drive's figure depths go into the scene
+  // (out.figures, a list; an empty one clears them), and its out.tiltFree
+  // frees the tilt of a toy whose tilt is locked while it is set (a book
+  // with figures standing up, to see them from the side). When it ends the
+  // view eases back level and square to the toy, and the lock comes back.
+  pagesR6(out) {
+    if (Array.isArray(out?.figures) && this.scene.toy?.kind === "builtin") {
+      const list = normalizeFigures(out.figures);
+      if (list.length) this.scene.toy.figures = list;
+      else delete this.scene.toy.figures;
+    }
+    const ask = !!out?.tiltFree;
+    if (ask === !!this.tiltAsk) return;
+    this.tiltAsk = ask;
+    const cam = this.camera;
+    if (ask && cam.tiltLock) {
+      cam.tiltLock = false;
+      this.tiltFreed = true;
+      this.emit("tilt", false);
+    } else if (!ask && this.tiltFreed) {
+      this.tiltFreed = false;
+      if (cam.tiltLock) return;
+      cam.setTiltLock(true);
+      const turn = (x) => x - 2 * Math.PI * Math.round(x / (2 * Math.PI));
+      cam.tgt.yaw = cam.cur.yaw + turn(cam.home.yaw - cam.cur.yaw);
+      cam.interact();
+      this.stage.requestRender();
+      this.emit("tilt", true);
+    }
+  }
+
   // A typed character (a real keyboard, while a toy that takes typing is
   // shown): the recipe's `typeKey(ch)` names the control and key it presses.
   // Returns false when the toy does not take that character.
@@ -1389,6 +1441,7 @@ export class Player {
       camera: pose,
     });
     const motion = this.effectiveMotion();
+    this.motion.figures = this.scene.toy?.figures || []; // lane Pages r6
     Object.assign(
       u,
       this.motion.compute({
@@ -1426,6 +1479,7 @@ export class Player {
       this.switchTo({ ...next, echo: true }).finally(() => (this.movingOn = false));
     }
     this.pictures?.update(this.motion.out, this.time); // Pictures
+    this.pagesR6(this.motion.out); // lane Pages r6
     const gliding = this.followView(); // Page focus
     // Fluids: step the toy's fluids on its own clock, steered by out.fluid.
     if (this.fluids && info.kind === "kit") this.fluids.frame(u.uSpKit[0], this.motion.out?.fluid);
