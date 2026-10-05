@@ -135,3 +135,29 @@ Every theme passed everything: check ✓, 9/9, 10° ✓, 20° ✓ in both styles
 | Nigeria (flag)        | 4.58 : 1  | #008751 on #ffffff |                                                                                                                                                                                                                 |
 | Kenya (flag)          | 6.75 : 1  | #000000 on #ffffff |                                                                                                                                                                                                                 |
 | Jamaica (flag)        | 14.33 : 1 | #000000 on #fed100 | Its green is too pale to read against the gold, so it colors Alive and the back of the tiles instead of the modules.                                                                                            |
+
+### Item 6 (and 9): how much can a code move and still scan?
+
+`node tools/qr3-scan.mjs motions --steps=10` (October 5, 2026): each motion's frames at progress 0,
+0.1, …, 1, front on, shrunk to 8 px per module (phone size) and read by jsQR and zxing (both must
+return the exact text); the last frame also through the scan lab's 9 phone-like captures. Each cell:
+frames that read out of 11. **Every motion in every style ends on a code that reads in 9 of 9
+phone-like captures.**
+
+| Style      | assemble | flip  | burst | ripple | flap  | fold | rain | knock | cloud |
+| ---------- | -------- | ----- | ----- | ------ | ----- | ---- | ---- | ----- | ----- |
+| classic    | 4/11     | 11/11 | 2/11  | 10/11  | 10/11 | 3/11 | 4/11 | 7/11  | 2/11  |
+| dots       | 3/11     | 11/11 | 2/11  | 9/11   | 10/11 | 3/11 | 4/11 | 7/11  | 2/11  |
+| rounded    | 4/11     | 11/11 | 2/11  | 10/11  | 10/11 | 3/11 | 4/11 | 7/11  | 2/11  |
+| bricks     | 4/11     | 6/11  | 2/11  | 9/11   | 9/11  | 3/11 | 4/11 | 7/11  | 2/11  |
+| gems       | 4/11     | 9/11  | 2/11  | 10/11  | 9/11  | 3/11 | 4/11 | 7/11  | 2/11  |
+| bubbles    | 4/11     | 10/11 | 2/11  | 10/11  | 9/11  | 3/11 | 4/11 | 7/11  | 2/11  |
+| neon       | 3/11     | 10/11 | 2/11  | 9/11   | 9/11  | 2/11 | 4/11 | 7/11  | 2/11  |
+| neon-light | 3/11     | 9/11  | 2/11  | 9/11   | 10/11 | 2/11 | 4/11 | 7/11  | 2/11  |
+
+What it says: a code survives motions that keep each module in its own place in the picture: a
+ripple's tilt and rise (9 or 10 of 11), the split-flap's row of turning tiles (9 or 10), Flip (9 to
+11; Bricks 6, its tall blocks hide neighbors while they turn), and Knock loose once the pieces are
+near home (7). Motions that take modules out of their places (Burst, Rain, Fold, Point cloud, the
+middle of Assemble) read only at rest, which is what makes them read as breaking apart: error
+correction M covers about 15% of the code, and those motions move far more.
