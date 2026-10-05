@@ -711,6 +711,32 @@ the spectrometer's sample picture are made by the page. Their data:
 - The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
   recipes.
 
+## Molecule viewer (lane Molecule viewer)
+
+The Molecule viewer (labs) ships a snapshot of five entries from the Protein Data Bank, fetched from
+files.rcsb.org on October 5, 2026, unchanged. PDB data are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+[wwPDB usage policy](https://www.wwpdb.org/about/usage-policies) (checked on the live page October
+5, 2026: "Data files contained in the PDB archive are available under the CC0 1.0 Universal (CC0
+1.0) Public Domain Dedication"); as it encourages, each entry and its authors are cited:
+
+- Crambin, [PDB 1CRN](https://www.rcsb.org/structure/1CRN), deposited by W. A. Hendrickson and M. M.
+  Teeter; M. M. Teeter, "Water structure of a hydrophobic protein at atomic resolution", PNAS 81,
+  6014 (1984).
+- Green fluorescent protein, [PDB 1EMA](https://www.rcsb.org/structure/1EMA), deposited by M. Ormö
+  and S. J. Remington; M. Ormö, A. B. Cubitt, K. Kallio, L. A. Gross, R. Y. Tsien and S. J.
+  Remington, Science 273, 1392 (1996).
+- Hen egg-white lysozyme, [PDB 1LYZ](https://www.rcsb.org/structure/1LYZ), deposited by R. Diamond,
+  D. C. Phillips, C. C. F. Blake and A. C. T. North; R. Diamond, J. Mol. Biol. 82, 371 (1974).
+- B-DNA dodecamer, [PDB 1BNA](https://www.rcsb.org/structure/1BNA): H. R. Drew, R. M. Wing, T.
+  Takano, C. Broka, S. Tanaka, K. Itakura and R. E. Dickerson, PNAS 78, 2179 (1981).
+- Caffeine, [Chemical Component CFF](https://www.rcsb.org/ligand/CFF): the ideal coordinates of the
+  wwPDB Chemical Component Dictionary (part of the PDB archive, CC0).
+
+An entry fetched by its code is read from RCSB when the person asks and is never stored; its title,
+authors and the time of the fetch show beside it, with the CC0 notice. Files people open are read in
+their browser and never uploaded.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
