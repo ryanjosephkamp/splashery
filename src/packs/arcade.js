@@ -289,6 +289,7 @@ export const RECIPES = {
         pad: "Stick or D-pad to turn.",
         short: "Arrows turn · V folds it into 3D",
       },
+      slots: { high: 90000, mid: 70000, low: 40000 }, // crisp tiles
       create: async (api) => (await import("./arcade-longtail.js")).createLongtail(api),
     },
   },

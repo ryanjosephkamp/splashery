@@ -178,28 +178,36 @@ export class Crisp {
   }
 
   // A sphere of radius r: splats spread evenly (a Fibonacci spiral) lying
-  // flat on it, `step` apart.
+  // flat on it, `step` apart. radii: [a, b, c] stretches it into an
+  // ellipsoid (r is then the step's scale only).
   sphere(r, o = {}) {
     const c = o.pos || [0, 0, 0];
     const color = typeof o.color === "function" ? o.color : () => o.color || [1, 1, 1];
+    const R = o.radii || [r, r, r];
     const step = o.step ?? Math.min(this.fine * 1.4, r / 3);
-    const n = Math.max(12, Math.round((4 * Math.PI * r * r) / (step * step)));
+    const area = 4 * Math.PI * Math.pow((R[0] * R[1] + R[1] * R[2] + R[0] * R[2]) / 3, 1);
+    const n = Math.max(12, Math.round(area / (step * step)));
     const ga = Math.PI * (3 - Math.sqrt(5));
     for (let i = 0; i < n; i++) {
       const y = 1 - (2 * (i + 0.5)) / n;
       const rr = Math.sqrt(1 - y * y);
-      const nn = [Math.cos(ga * i) * rr, y, Math.sin(ga * i) * rr];
-      const p = add(c, mul(nn, r));
+      const d = [Math.cos(ga * i) * rr, y, Math.sin(ga * i) * rr];
+      const nn = norm([d[0] / R[0], d[1] / R[1], d[2] / R[2]]);
+      const p = add(c, [d[0] * R[0], d[1] * R[1], d[2] * R[2]]);
       this.splat(p, color(p, nn), step * 0.62, step * 0.62, step * THIN, qfromto([0, 0, 1], nn));
     }
   }
 
-  // A filled disc of radius r in the xy plane facing +z: rings of splats,
-  // fine at the rim.
+  // A filled disc of radius r facing `normal` (+z by default): rings of
+  // splats, fine at the rim.
   disc(r, o = {}) {
     const c = o.pos || [0, 0, 0];
     const color = typeof o.color === "function" ? o.color : () => o.color || [1, 1, 1];
-    this.rings(c, [1, 0, 0], [0, 1, 0], [0, 0, 1], r, color, o);
+    const n = norm(o.normal || [0, 0, 1]);
+    const ref = Math.abs(n[0]) < 0.9 ? [1, 0, 0] : [0, 1, 0];
+    const e2 = norm(cross(n, ref));
+    const e1 = cross(e2, n);
+    this.rings(c, e1, e2, n, r, color, o);
   }
 
   // Rings of splats filling a disc of radius r around c in the plane of e1

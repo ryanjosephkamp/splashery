@@ -21,6 +21,8 @@
 // turn means the same thing in both views; a direction on the screen picks
 // the tile edge that points most that way, wherever the camera is.
 
+import { crispModel } from "./arcade-crisp.js";
+
 const TICK = 0.14;
 const A = 0.5; // half the cube's side
 const PLANET_R = 0.92;
@@ -308,7 +310,7 @@ class Longtail {
     if (this.worldKind === "planet") {
       const { RECIPES } = await import("./space.js");
       const r = RECIPES[this.planetId];
-      this.planetModel = kitModel((k) => r.build(k, {}), { count: low ? 6000 : 14000 });
+      this.planetModel = kitModel((k) => r.build(k, {}), { count: low ? 8000 : 24000 });
       // Tiles take the planet's color under them (its ground, not its haze).
       const m = this.planetModel;
       const pts = [];
@@ -352,24 +354,44 @@ class Longtail {
     const W = this.world;
     const cellSize = W.kind === "torus" ? Math.min((2 * Math.PI * TOR_R) / W.NU, (2 * Math.PI * TOR_r) / W.NV) : (2 * A) / W.N; // prettier-ignore
     this.cellSize = cellSize;
-    const s = cellSize * 0.9;
-    const tile = kitModel(
-      (k) => {
-        k.add(
-          k.param((u, v) => [(u - 0.5) * s, (v - 0.5) * s, 0], { grid: 8 }),
-          {
-            even: true,
-            flat: 0.15,
-            color: (c) => {
-              const edge = Math.max(Math.abs(c.lp[0]), Math.abs(c.lp[1])) / (s / 2);
-              const f = edge > 0.82 ? 0.9 : 1.0;
-              return [f, f, f];
-            },
-          },
+    // Crisp grids (src/packs/arcade-crisp.js): clean tiles, each built at
+    // the largest size its cell takes (flat or rounded: a ring's outer cells
+    // are wider than its inner ones) and scaled down to fit, never up, so
+    // its splats never spread apart.
+    const nu = W.N || W.NU;
+    const nv = W.N || W.NV;
+    this.span = (c, view) => {
+      const e = 0.2 / nu;
+      const f = 0.2 / nv;
+      const su = (len(sub(W.pos(c.face, c.a + e, c.b, view), W.pos(c.face, c.a - e, c.b, view))) / (2 * e)) * (1 / nu); // prettier-ignore
+      const sv = (len(sub(W.pos(c.face, c.a, c.b + f, view), W.pos(c.face, c.a, c.b - f, view))) / (2 * f)) * (1 / nv); // prettier-ignore
+      return [su, sv];
+    };
+    const tiles = new Map();
+    const tileOf = (w, h) => {
+      const key = `${w.toFixed(3)}:${h.toFixed(3)}`;
+      if (!tiles.has(key)) {
+        const step = Math.min(w, h) / (low ? 4 : 6);
+        const t = crispModel(
+          (c) =>
+            c.rect(w, h, {
+              color: (p) => {
+                const edge = Math.max(Math.abs(p[0]) / (w / 2), Math.abs(p[1]) / (h / 2));
+                const f = edge > 0.82 ? 0.9 : 1.0;
+                return [f, f, f];
+              },
+            }),
+          { fine: step, coarse: step },
         );
-      },
-      { count: low ? 22 : 34 },
-    );
+        tiles.set(key, t);
+      }
+      return tiles.get(key);
+    };
+    this.tileMax = W.cells.map((c) => {
+      const [a0, b0] = this.span(c, 0);
+      const [a1, b1] = this.span(c, 1);
+      return [Math.max(a0, a1), Math.max(b0, b1)];
+    });
     const palette =
       W.kind === "torus"
         ? [hex("#3c6e71"), hex("#4f8a8b")]
@@ -389,79 +411,50 @@ class Longtail {
         const jj = Math.round(c.b * W.N - 0.5);
         col = mixc(palette[(c.face * 2) % 6], palette[(c.face * 2 + 1) % 6], (ii + jj) % 2);
       }
-      return recolor(tile, (v) => [v[0] * col[0], v[1] * col[1], v[2] * col[2], 1]);
-      void i;
+      const [mu, mv] = this.tileMax[i];
+      return recolor(tileOf(mu * 0.9, mv * 0.9), (v) => [v[0] * col[0], v[1] * col[1], v[2] * col[2], 1]); // prettier-ignore
     });
     // A bead: glass, lit from above.
-    const bead = (col, r, count) =>
-      kitModel(
-        (k) => {
-          const c0 = hex(col);
-          k.add(k.sphere(r), {
-            even: true,
-            flat: 0.55,
-            color: (c) => {
-              const l = Math.max(0, dot(c.n, unit([-0.3, 0.8, 0.5])));
-              const f = 0.7 + 0.35 * l;
-              const spec = Math.pow(l, 18) * 0.7;
-              return c0.map((v) => Math.min(1, v * f + spec));
-            },
-          });
-        },
-        { count },
-      );
+    const glass = (c0, n) => {
+      const l = Math.max(0, dot(n, unit([-0.3, 0.8, 0.5])));
+      return c0.map((v) => Math.min(1, v * (0.7 + 0.35 * l) + Math.pow(l, 18) * 0.7));
+    };
     const r = cellSize * 0.42;
     this.r = r;
-    this.headModel = kitModel(
-      (k) => {
-        const c0 = hex("#2f7d4f");
-        k.add(k.sphere(r * 1.25), {
-          even: true,
-          flat: 0.55,
-          color: (c) => {
-            const l = Math.max(0, dot(c.n, unit([-0.3, 0.8, 0.5])));
-            return c0.map((v) => Math.min(1, v * (0.7 + 0.35 * l) + Math.pow(l, 18) * 0.7));
-          },
-        });
-        // Two eyes on its front (+x is the way it is heading; +z is up off the tiles).
-        for (const side of [-1, 1]) {
-          k.add(k.sphere(r * 0.36), { pos: [r * 0.95, side * r * 0.5, r * 0.55], even: true, color: "#fbfbf6", weight: 6 }); // prettier-ignore
-          k.add(k.sphere(r * 0.18), { pos: [r * 1.22, side * r * 0.52, r * 0.6], even: true, color: "#121212", weight: 8 }); // prettier-ignore
-        }
-      },
-      { count: low ? 140 : 220 },
-    );
-    this.bodyModels = ["#3f9a5f", "#58b06e", "#3f9a5f", "#7cc27a"].map((c) =>
-      bead(c, r, low ? 50 : 80),
-    );
-    this.berryModel = kitModel(
-      (k) => {
-        const c0 = hex("#c8203a");
-        k.add(k.sphere(r * 1.25), {
-          even: true,
-          flat: 0.5,
-          color: (c) => {
-            const l = Math.max(0, dot(c.n, unit([-0.3, 0.8, 0.5])));
-            return c0.map((v) => Math.min(1, v * (0.65 + 0.4 * l) + Math.pow(l, 16) * 0.8));
-          },
-        });
-        k.add(k.ellipsoid(r * 0.45, r * 0.18, r * 0.12), { pos: [0, r * 0.2, r * 1.05], rot: [0, 0, 30], color: "#3b8a2a", even: true, weight: 4 }); // prettier-ignore
-      },
-      { count: low ? 90 : 140 },
-    );
-    this.mouthModel = kitModel(
-      (k) => {
-        k.add(k.disc(cellSize * 0.42, 0), {
-          even: true,
-          flat: 0.1,
-          color: (c) => {
-            const rr = Math.hypot(c.lp[0], c.lp[2]) / (cellSize * 0.42);
+    const step = r / (low ? 2.6 : 3.4);
+    const bead = (col, rr) => crispModel((c) => c.sphere(rr, { step, color: (p, n) => glass(hex(col), n) })); // prettier-ignore
+    this.headModel = crispModel((c) => {
+      c.sphere(r * 1.25, { step, color: (p, n) => glass(hex("#2f7d4f"), n) });
+      // Two eyes on its front (+x is the way it is heading; +z is up off the tiles).
+      for (const side of [-1, 1]) {
+        c.sphere(r * 0.36, { pos: [r * 0.95, side * r * 0.5, r * 0.55], step: step * 0.5, color: hex("#fbfbf6") }); // prettier-ignore
+        c.sphere(r * 0.18, { pos: [r * 1.27, side * r * 0.52, r * 0.62], step: step * 0.35, color: hex("#121212") }); // prettier-ignore
+      }
+    });
+    this.bodyModels = ["#3f9a5f", "#58b06e", "#3f9a5f", "#7cc27a"].map((c) => bead(c, r));
+    this.berryModel = crispModel((c) => {
+      const c0 = hex("#c8203a");
+      c.sphere(r * 1.25, {
+        step,
+        color: (p, n) => {
+          const l = Math.max(0, dot(n, unit([-0.3, 0.8, 0.5])));
+          return c0.map((v) => Math.min(1, v * (0.65 + 0.4 * l) + Math.pow(l, 16) * 0.8));
+        },
+      });
+      // its leaf
+      c.sphere(r * 0.2, { pos: [0, r * 0.2, r * 1.28], radii: [r * 0.45, r * 0.16, r * 0.08], step: step * 0.5, color: hex("#3b8a2a") }); // prettier-ignore
+    });
+    this.mouthModel = crispModel(
+      (c) =>
+        c.disc(cellSize * 0.42, {
+          normal: [0, 1, 0],
+          color: (p) => {
+            const rr = Math.hypot(p[0], p[2]) / (cellSize * 0.42);
             const f = 0.05 + 0.25 * Math.pow(rr, 3);
             return [f * 0.7, f * 0.6, f];
           },
-        });
-      },
-      { count: low ? 40 : 70 },
+        }),
+      { fine: cellSize * 0.06, coarse: cellSize * 0.15 },
     );
     void makeModel;
   }
@@ -724,6 +717,8 @@ class Longtail {
       const s = this.tiles[i];
       s.pos = fr.p;
       s.quat = quatFromAxes(fr.ex, fr.ey, fr.n);
+      const [su, sv] = this.span(c, view);
+      s.scale = [su / this.tileMax[i][0], sv / this.tileMax[i][1], 1];
     });
     if (this.planet) {
       // The planet's own body shows under the tiles once they round out.
