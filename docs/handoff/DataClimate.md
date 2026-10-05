@@ -9,10 +9,10 @@ the app outside your own files, as an "Engine: …" PR merged first). PR title: 
 climate: your spreadsheet in 3D, and the climate records". Handoff file: docs/handoff/DataClimate.md
 (create it; start it with this brief, word for word, under "## Brief", then keep "## State
 
-WORKING (October 5, 2026, 08:30 UTC): both toys are built, tested and pushed on PR #294; five clips
-are on Effect review page 2 (lane record `DataClimate`, cards `dcl-data-earthquakes`,
-`dcl-data-iris`, `dcl-data-co2-bars`, `dcl-climate-co2-spiral`, `dcl-climate-temperature-bars`). The
-final run of the lane's specs and the shared suites it touches is in progress.
+READY (October 5, 2026, 09:00 UTC): both toys are built, tested and pushed on PR #294, with main
+merged in; five clips are on Effect review page 2 (lane record `DataClimate`, cards
+`dcl-data-earthquakes`, `dcl-data-iris`, `dcl-data-co2-bars`, `dcl-climate-co2-spiral`,
+`dcl-climate-temperature-bars`). Waiting on the owner's marks and the Integrator's full run.
 
 - **Data in 3D** (`data-in-3d`, Studio, labs): `src/datavis/csv.js` reads the table,
   `src/datavis/plot.js` builds a scatter, bars or a surface inside `src/datavis/chart.js`'s frame
@@ -45,6 +45,9 @@ final run of the lane's specs and the shared suites it touches is in progress.
 - The CO2 coil's yearly lean is small at phone size (the true size of the cycle: about ±3 ppm on a
   rise of 94 ppm); it shows when you zoom in.
 - Labels face the camera only about the vertical: seen from high above they foreshorten.
+- `tests/smoke.spec.mjs` "rigs pick splats by colour …" failed twice on this branch (the strawberry
+  had not settled within its 15 s poll) and then passed on the same commit; it passed on main too.
+  It looks timing-dependent, not tied to this lane (the lane doesn't touch rigs or the strawberry).
 - Reading a file of a few hundred thousand rows takes a few seconds on the main thread (about 2 s
   for 300,000 rows on this machine).
 
