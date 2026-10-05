@@ -1401,6 +1401,17 @@ export const TOYS = [
     pack: "atoms",
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
   },
+  // ---- Pack: molecule-viewer (lane Molecule viewer) ----
+  {
+    id: "molecule-viewer",
+    label: "Molecule viewer",
+    category: "atoms",
+    kind: "kit",
+    pack: "molecule-viewer",
+    labs: true,
+    tags: "molecule viewer pdb mmcif cif sdf mol xyz protein dna rna ligand cartoon ribbon surface ball stick spacefill cpk bond length angle measure rcsb protein data bank chemistry biology",
+    camera: { yaw: 0.25, pitch: 0.18, roll: 0, distance: 3.4 },
+  },
 
   // ---- Pack: chemistry (lane Chemistry) ----
   {
@@ -3707,6 +3718,18 @@ export const TOYS = [
     labs: true,
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
+  },
+  // ---- Pack: night-sky (lane Night sky) ----
+  {
+    id: "night-sky",
+    label: "Night sky",
+    category: "space",
+    kind: "kit",
+    pack: "night-sky",
+    labs: true,
+    tags: "stars planets moon sun constellations planetarium astronomy sky night location date time phase",
+    // Seen from inside: looking south, a little above the horizon.
+    camera: { yaw: 0, pitch: 0.3, roll: 0, distance: 5 },
   },
   // ---- Pack: data-climate (lane Data and climate) ----
   {

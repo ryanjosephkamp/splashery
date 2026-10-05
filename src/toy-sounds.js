@@ -2868,12 +2868,21 @@ export const TOY_SOUNDS = {
     ],
     off: [{ voice: "wood", f: 1100, vol: 0.28 }],
   },
+  // ---- Molecule viewer (lane Molecule viewer) ---------------------------------------
+  // Quiet (PACKS.md 7e): one soft, low click as an atom is picked.
+  "molecule-viewer": { voice: "clack", f: 1500, decay: 0.18, bright: 0.1, vol: 0.4 },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
   "fluid-lab": [
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
+  ],
+  // ---- Night sky (lane Night sky) ---------------------------------------------------
+  // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
+  "night-sky": [
+    { voice: "tine", f: 660, decay: 1.2, vol: 0.7 },
+    { voice: "breath", at: 0.03, f: 700, to: 1.1, decay: 1.2, vol: 0.12 },
   ],
   // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
   "data-in-3d": [
