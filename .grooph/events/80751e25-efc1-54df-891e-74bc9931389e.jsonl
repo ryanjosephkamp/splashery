@@ -351,3 +351,6 @@
 {"v":1,"t":"2026-10-05T17:09:40.277Z","harness":"claude-code","event":"tool","session":"80751e25-efc1-54df-891e-74bc9931389e","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T17:19:38.091Z","harness":"claude-code","event":"tool","session":"80751e25-efc1-54df-891e-74bc9931389e","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T17:29:38.735Z","harness":"claude-code","event":"tool","session":"80751e25-efc1-54df-891e-74bc9931389e","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T17:29:46.534Z","harness":"claude-code","event":"tool","session":"80751e25-efc1-54df-891e-74bc9931389e","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T17:30:46.028Z","harness":"claude-code","event":"tool","session":"80751e25-efc1-54df-891e-74bc9931389e","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T17:30:51.359Z","harness":"claude-code","event":"turn-end","session":"80751e25-efc1-54df-891e-74bc9931389e","cwd":"splashery"}
