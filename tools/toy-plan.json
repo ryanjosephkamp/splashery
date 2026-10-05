@@ -2449,6 +2449,20 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "airport-xray": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
+      "effect": "Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride the belt through the scanner, pushing its lead curtains aside; the screen on top builds each bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic orange, inorganic green, metal blue, dense black). A tap sends the next bag.",
+      "sound": "The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is done.",
+      "improved": "Imaging: new toy."
+    },
+    "how-ct": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
+      "effect": "A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane). Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps back.",
+      "sound": "The gantry's knock as it starts and its motor's low run, lower on the way back.",
+      "improved": "Imaging: new toy."
     }
   }
 }

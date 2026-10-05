@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 375 toys. 345 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 370.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -60,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2942,3 +2942,23 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+
+## Imaging (2)
+
+- **Airport X-ray scanner** (`airport-xray`). Now: tap: Send the next bag. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
+  - Effect: Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride
+    the belt through the scanner, pushing its lead curtains aside; the screen on top builds each
+    bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic
+    orange, inorganic green, metal blue, dense black). A tap sends the next bag.
+  - Improved: Imaging: new toy.
+  - Sound: The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is
+    done.
+- **How CT works** (`how-ct`). Now: tap: Scan or undo the scan. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
+  - Effect: A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector
+    arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane).
+    Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps
+    back.
+  - Improved: Imaging: new toy.
+  - Sound: The gantry's knock as it starts and its motor's low run, lower on the way back.

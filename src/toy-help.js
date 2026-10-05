@@ -1733,6 +1733,18 @@ export const TOY_HELP = {
       "Galaxy simulations follow gas with particles that carry mass, temperature, density and a smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated present day, not a telescope image.\n\nEach particle is shown with a Gaussian whose spread approximates the simulation's smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue and hot orange or red, or by Density to compare the gas concentration. Brightness also increases with density. Switch The box to show or hide the frame. Pinch or scroll to zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the gas's shape but do not give a quantitative column-density measurement.",
   },
 
+  // ---- Imaging (lane Imaging) -----------------------------------------------------------
+  "airport-xray": {
+    howTo: "Tap to send the next bag through the scanner and watch its X-ray picture build.",
+    about:
+      "An airport scanner sends a fan of X-rays through each bag as the belt carries it past, and a row of detectors measures what gets through, one line at a time. Most scanners measure two energies at once. Comparing them tells light elements from heavy ones, so the screen colors each thing by what it is made of: orange for organic matter (clothes, food, paper, plastic), green for mixed and light inorganic matter (glass, ceramics, plastics with fillers), blue for metal, and black where almost nothing gets through.\n\nThe bags and the pictures here are built for the toy, with simplified materials. Tap to send the next bag.",
+  },
+  "how-ct": {
+    howTo: "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
+    about:
+      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.",
+  },
+
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
   "fluid-lab": {
     howTo:

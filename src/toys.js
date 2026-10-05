@@ -36,6 +36,7 @@ export const CATEGORIES = [
   { id: "studio", label: "Studio" },
   { id: "lab", label: "Lab" },
   { id: "science", label: "Science" },
+  { id: "imaging", label: "Imaging" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -3514,6 +3515,27 @@ export const TOYS = [
     labs: true,
     tags: "fluid liquid water soda honey lava pour glass splash drops viscosity smoke steam candle flame fire physics simulation lab",
     camera: { yaw: 0.45, pitch: 0.28, roll: 0, distance: 2.9 },
+  },
+  // ---- Pack: imaging (lane Imaging) ----
+  {
+    id: "airport-xray",
+    label: "Airport X-ray scanner",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "x-ray xray airport security scanner baggage luggage bag suitcase conveyor belt dual energy organic metal imaging",
+    camera: { yaw: 0.3, pitch: 0.22, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "how-ct",
+    label: "How CT works",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "ct cat scan computed tomography x-ray gantry slice nautilus shell chambers volume cutting plane imaging",
+    camera: { yaw: 0.45, pitch: 0.25, roll: 0, distance: 3.2 },
   },
   // ---- Pack: screens ----
   {

@@ -2772,6 +2772,26 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // ---- Imaging (lane Imaging) ---------------------------------------------------------
+  // The belt's low rumble as the bag rides through, the curtains' slap, and
+  // the scanner's soft beep when its picture is done.
+  "airport-xray": [
+    { voice: "rumble", f: 55, decay: 3.2, vol: 0.25 },
+    { voice: "slap", f: 300, at: 1.9, vol: 0.3 },
+    { voice: "blip", f: 880, at: 3.6, vol: 0.28 },
+  ],
+  // The gantry's knock as it starts and its motor's low run as it sweeps;
+  // lower as it sweeps back.
+  "how-ct": {
+    on: [
+      { voice: "hollow", f: 180, vol: 0.5 },
+      { voice: "rumble", f: 85, decay: 4.5, vol: 0.25, at: 0.05 },
+    ],
+    off: [
+      { voice: "hollow", f: 150, vol: 0.45 },
+      { voice: "rumble", f: 70, decay: 4, vol: 0.22, at: 0.05 },
+    ],
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
