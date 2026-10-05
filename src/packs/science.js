@@ -1104,7 +1104,7 @@ const GALAXY = {
       key: "seeing",
       label: "Telescope's sharpness",
       type: "select",
-      default: "space", // r2: the owner's "sharper"
+      default: "ground",
       choices: [
         { id: "space", label: "A space telescope (0.1″)" },
         { id: "ground", label: "A good night on the ground (1″)" },
