@@ -122,13 +122,7 @@ own long song and the microphone, and the bow and the restart cycle were still t
 Earlier items: the Song landscape grows as the song plays; the Splat mirror is cleaner and steadier,
 with a clean hologram; the Chladni bow check (superseded by item 4).
 
-## Notes", "## Known issues" and "## For the Operator" current.
-
-- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
-  What was cut), opened early and pushed after each finished item. Finish every working turn with a
-  final message that starts "READY:", "WORKING:" or "BLOCKED:".
-
-## State
+The state before item 4, for the record:
 
 READY (October 5, 2026, 03:00 UTC; Opus 5.5, default effort, no helpers). Draft PR #263, main merged
 in (through #264). All three items are built, tested and posted on Effect review page 2:
@@ -153,25 +147,6 @@ check-in reads the owner's marks hourly.
 
 Tests run on this branch: `lv7`, `live`, `live2`, `live3`, `live4`, `live5`, `live6`, `p3d`, `sng`,
 `sts`. All pass (58 + 24 + the lv7 and live5 runs).
-
-## Notes", "## Known issues" and "## For the Operator" current.
-
-- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
-  What was cut), opened early and pushed after each finished item. Finish every working turn with a
-  final message that starts "READY:", "WORKING:" or "BLOCKED:".
-
-## State
-
-October 5, 2026 (Opus 5.5, default effort, no helpers). Draft PR #263. Work in progress:
-
-1. **Song landscape** (done, in test): Live opens on an empty plain; each moment rises at the line
-   at the front as it is heard and recedes behind it, for every song (the 20-second sample too, now
-   measured by the worker like a long song) and look (the measured looks already grew from their
-   gate). Whole song is unchanged. The plain stays put while the land slides over it, so the splats
-   are sorted again as it slides (`out.resortPose`, every 0.02 units).
-2. **Splat mirror** (built, measuring and clips next): see Notes.
-3. **Chladni bow**: a test of the rule with tone (mode) changes from the Toy tab; the microphone and
-   audio file cases are `tests/live4.spec.mjs`. Clip next.
 
 ## Notes
 
