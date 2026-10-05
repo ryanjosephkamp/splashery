@@ -367,6 +367,9 @@ export class MotionDriver {
       // (always set, like the tokens).
       u["uSpLever[0]"] = packLeverGroups(this.leverGroupData, this.ctx?.kit?.levers);
       u["uSpLevers[0]"] = packLevers(this.leverData, drive.levers);
+      // Volumes (lane Imaging): the cutting plane and density window of
+      // the volume kind (always set, like the tokens).
+      Object.assign(u, packVolume(drive.volume, this.ctx?.transform));
       if (this.ctx?.rig) {
         const td = this.tintData.fill(0);
         (this.ctx.parts || []).forEach((def, i) => {
@@ -468,6 +471,31 @@ function packLevers(data, levers) {
   for (let i = 0; i < MAX_LEVERS; i++)
     data[i] = q(levers[0], i) + 256 * q(levers[1], i) + 65536 * q(levers[2], i);
   return data;
+}
+
+// The volume kind's uniforms (lane Imaging) from out.volume = { normal,
+// at, slab, window: [lo, hi], glow: [r, g, b], glowWidth }, in recipe
+// coordinates: splats beyond the plane through at * normal (on the side the
+// normal points to) are hidden, or, with a slab width, all but those within
+// half of it; only densities inside the window show; splats within glowWidth
+// of the cut face take the glow. Without out.volume nothing is cut.
+function packVolume(v, transform) {
+  const c = transform?.center || [0, 0, 0];
+  const s = transform?.scale ?? 1;
+  const w = v?.window || [0, 1];
+  const lo = Number.isFinite(w[0]) ? w[0] : 0;
+  const hi = Number.isFinite(w[1]) ? w[1] : 1;
+  const len = v?.normal ? Math.hypot(...v.normal) : 0;
+  if (!(len > 0) || !Number.isFinite(len))
+    return { uSpVol: [1, 0, 0, 0], uSpVolP: [0, 0, lo, hi], uSpVolC: [0, 0, 0, 0] };
+  const n = v.normal.map((x) => x / len);
+  const off = s * ((v.at ?? 0) - (n[0] * c[0] + n[1] * c[1] + n[2] * c[2]));
+  const g = v.glow || [0, 0, 0];
+  return {
+    uSpVol: [n[0], n[1], n[2], off],
+    uSpVolP: [1, Math.max(0, (v.slab ?? 0) * 0.5 * s), lo, hi],
+    uSpVolC: [g[0], g[1], g[2], v.glow ? Math.max(0, (v.glowWidth ?? 0.03) * s) : 0],
+  };
 }
 
 // Game pieces (tokens) the kit shader can move: 32 chess pieces and 16
