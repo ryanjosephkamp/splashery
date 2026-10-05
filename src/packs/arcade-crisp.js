@@ -65,14 +65,33 @@ function cuts(L, fine, coarse, radial = false) {
     const s = len / n;
     for (let i = 0; i < n; i++) out.push([a + (i + 0.5) * s, s]);
   };
+  // The outermost row is half a fine step wide (a rim): a splat's soft
+  // falloff scales with its size, so the very edge comes out sharper still.
+  const rim = fine / 2;
+  const edge = (a, len, atStart) => {
+    if (len < fine * 1.5) return run(a, len, fine);
+    if (atStart) {
+      out.push([a + rim / 2, rim]);
+      run(a + rim, len - rim, fine);
+    } else {
+      run(a, len - rim, fine);
+      out.push([a + len - rim / 2, rim]);
+    }
+  };
   if (coarse <= fine || L <= ends * band + coarse) {
-    run(0, L, fine);
+    if (L < fine * 3) run(0, L, fine);
+    else if (radial) edge(0, L, false);
+    else {
+      out.push([rim / 2, rim]);
+      run(rim, L - 2 * rim, fine);
+      out.push([L - rim / 2, rim]);
+    }
     return out;
   }
   const mid = L - ends * band;
-  if (!radial) run(0, band, fine);
+  if (!radial) edge(0, band, true);
   run(radial ? 0 : band, mid, coarse);
-  run(radial ? mid : band + mid, band, fine);
+  edge(radial ? mid : band + mid, band, false);
   return out;
 }
 

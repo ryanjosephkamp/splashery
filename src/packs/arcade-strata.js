@@ -11,7 +11,7 @@
 // a wide 5 by 5 one, or a flat slot one stone deep, which plays like a
 // classic flat game in either view.
 
-import { evenRoundBox } from "./even.js";
+import { crispModel } from "./arcade-crisp.js";
 
 const SHAPES = [
   // Each a list of cubes [x, y, z] around a center cube.
@@ -70,56 +70,70 @@ class Strata {
     this.cube = Math.min(this.cube, 2.0 / this.H);
     this.rand = api.rand;
     const low = api.profile === "low";
-    const { kitModel, recolor } = api;
+    const { recolor } = api;
     const c = this.cube;
-    // A carved stone: a rounded block with a lit top and darker sides.
-    const stone = kitModel(
-      (k) => {
-        k.add(
-          evenRoundBox(c * 0.94, c * 0.94, c * 0.94, Math.min(c * 0.94, c * 0.94, c * 0.94) * 0.3),
-          {
-            even: true,
-            flat: 0.25,
-            color: (cc) => {
-              const f = 0.72 + 0.22 * cc.n[1] + 0.08 * cc.n[2] + 0.04 * cc.n[0];
-              const grain = 1 + 0.07 * cc.noise(cc.p[0] * 60, cc.p[1] * 60, cc.p[2] * 60);
-              return [f * grain, f * grain, f * grain];
-            },
+    // Crisp grids (src/packs/arcade-crisp.js): each stone a clean block.
+    const fine = c / (low ? 8 : 12);
+    const opt = { fine, coarse: c / (low ? 2.5 : 3) };
+    const h = (c * 0.94) / 2;
+    // A carved stone: a block with a lit top, darker sides and a darker
+    // chamfer along its edges.
+    const stone = crispModel(
+      (k) =>
+        k.box(c * 0.94, c * 0.94, c * 0.94, {
+          color: (p, n) => {
+            let edge = 0;
+            for (let i = 0; i < 3; i++)
+              if (Math.abs(n[i]) < 0.5) edge = Math.max(edge, Math.abs(p[i]) / h);
+            const f = (0.72 + 0.22 * n[1] + 0.08 * n[2] + 0.04 * n[0]) * (edge > 0.82 ? 0.84 : 1);
+            const g = Math.sin(p[0] * 131 + p[1] * 71) * Math.sin(p[2] * 97 - p[1] * 53);
+            const grain = 1 + 0.035 * g;
+            return [f * grain, f * grain, f * grain];
           },
-        );
-      },
-      { count: low ? 90 : 150 },
+        }),
+      opt,
     );
     this.models = this.shapes.map((s) => {
       const col = hex(s.color);
       return recolor(stone, (v) => [v[0] * col[0], v[1] * col[1], v[2] * col[2], 1]);
     });
-    // The well: stone walls drawn as a frame of posts and a floor grid.
+    // The well: stone walls drawn as a frame of posts and a floor of slabs.
     const [Wx, Hy, Dz] = [this.W * c, this.H * c, this.D * c];
-    this.wellModel = kitModel(
+    const e = c * 0.06;
+    const wallColor = (p, n) => {
+      const f = 0.62 + 0.15 * n[1];
+      return [0.42 * f, 0.4 * f, 0.38 * f];
+    };
+    this.wellModel = crispModel(
       (k) => {
-        const e = c * 0.06;
-        const wall = (sx, sy, sz, pos) =>
-          k.add(k.box(sx, sy, sz), { pos, even: true, flat: 0.3, color: (cc) => { const f = 0.62 + 0.15 * cc.n[1]; return [0.42 * f, 0.4 * f, 0.38 * f]; } }); // prettier-ignore
+        const wall = (sx, sy, sz, pos) => k.box(sx, sy, sz, { pos, color: wallColor });
         // the four corner posts and the rim
         for (const x of [-Wx / 2, Wx / 2])
           for (const z of [-Dz / 2, Dz / 2]) wall(e, Hy, e, [x, 0, z]);
         for (const z of [-Dz / 2, Dz / 2]) wall(Wx + e, e, e, [0, Hy / 2, z]);
         for (const x of [-Wx / 2, Wx / 2]) wall(e, e, Dz + e, [x, Hy / 2, 0]);
-        // the floor, a grid of slabs
-        k.add(k.box(Wx, e, Dz), {
-          pos: [0, -Hy / 2 - e / 2, 0],
-          even: true,
-          flat: 0.3,
-          color: (cc) => {
-            const gx = Math.abs((((cc.p[0] + Wx / 2) / c) % 1) - 0.5);
-            const gz = Math.abs((((cc.p[2] + Dz / 2) / c) % 1) - 0.5);
-            const line = gx > 0.45 || gz > 0.45 ? 0.75 : 1;
-            return [0.5 * line, 0.47 * line, 0.43 * line];
-          },
-        });
       },
-      { count: low ? 2200 : 4000 },
+      { fine: e / 2, coarse: c / 2 },
+    );
+    this.floorModel = crispModel(
+      (k) => k.box(Wx, e, Dz, { pos: [0, -Hy / 2 - e / 2, 0], color: [0.5, 0.47, 0.43] }),
+      { fine, coarse: c / 2 },
+    );
+    // The slabs' joints: lines on the floor, a sprite of their own.
+    this.jointModel = crispModel(
+      (k) => {
+        const y = -Hy / 2 + 0.004;
+        const col = { color: [0.36, 0.34, 0.31], normal: [0, 1, 0] };
+        for (let i = 0; i <= this.W; i++) {
+          const x = -Wx / 2 + i * c;
+          k.line([x, y, -Dz / 2], [x, y, Dz / 2], c * 0.05, col);
+        }
+        for (let i = 0; i <= this.D; i++) {
+          const z = -Dz / 2 + i * c;
+          k.line([-Wx / 2, y, z], [Wx / 2, y, z], c * 0.05, col);
+        }
+      },
+      { fine, coarse: c / 2 },
     );
   }
 
@@ -127,6 +141,11 @@ class Strata {
     const S = this.api.sprites;
     S.clear();
     this.well = S.add(this.wellModel);
+    // The floor sorts below its joints, and both below the stones on them.
+    this.floor = S.add(this.floorModel);
+    this.floor.sortBias = [0, -0.2, 0];
+    this.joints = S.add(this.jointModel);
+    this.joints.sortBias = [0, -0.1, 0];
     this.grid = new Array(this.W * this.D * this.H).fill(null); // sprite per cell
     this.shards = [];
     this.score = 0;
