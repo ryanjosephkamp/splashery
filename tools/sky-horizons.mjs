@@ -17,7 +17,8 @@ const SITES = [
 async function query(params) {
   const u = new URL(API);
   const base = { format: "text", MAKE_EPHEM: "YES", EPHEM_TYPE: "OBSERVER", ANG_FORMAT: "DEG", CSV_FORMAT: "YES", TIME_DIGITS: "MINUTES" }; // prettier-ignore
-  for (const [k, v] of Object.entries({ ...base, ...params })) u.searchParams.set(k, k === "format" ? v : `'${v}'`);
+  for (const [k, v] of Object.entries({ ...base, ...params }))
+    u.searchParams.set(k, k === "format" ? v : `'${v}'`);
   const r = await fetch(u);
   const text = await r.text();
   const head = /\n\s*Date__\(UT\)__HR:MN,(.*)\n/.exec(text);

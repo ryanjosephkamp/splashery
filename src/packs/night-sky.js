@@ -40,8 +40,13 @@ import {
 const D2R = Math.PI / 180;
 const R2D = 180 / Math.PI;
 
-// Layer radii (recipe units): nearer the viewer draws over farther.
-const R = { night: 1.0, day: 0.99, glow: 0.985, lines: 0.972, milky: 0.968, stars: 0.96, body: 0.93, mark: 0.925, ground: 0.9, letters: 0.895 }; // prettier-ignore
+// Layer radii (recipe units). Splats sort in their built pose, not where a part has turned them,
+// so the backdrop sits far out (it always sorts behind whatever turns in front of it), and the
+// Sun, the Moon, the planets and the marker are built near the center (they always sort in
+// front of the stars) and moved out to R.body by their parts.
+const R = { night: 8, day: 7, glow: 1.3, milky: 0.985, lines: 0.975, stars: 0.96, body: 0.93, mark: 0.925, ground: 0.9, letters: 0.895 }; // prettier-ignore
+const C0 = [0, 0.05, 0]; // where the Sun, the Moon and the planets are built
+const CM = [0, 0.04, 0]; // and the marker
 
 // Horizontal (ENU: east, north, up) to the scene (+X east, +Y up, +Z south) and back.
 const sc = (e) => [e[0], e[2], -e[1]];
@@ -207,11 +212,11 @@ function starFacts(i, s) {
     const ly = d.dist[i] * 3.26156;
     out.push(`${ly < 100 ? fmt(ly, 1) : fmt(Math.round(ly / 10) * 10)} light-years away`);
   }
-  if (d.ci[i] !== null) out.push(`About ${fmt(Math.round(bvToKelvin(d.ci[i]) / 100) * 100)} K at its surface (B−V ${fmt(d.ci[i], 2)})`); // prettier-ignore
+  if (d.ci[i] !== null) out.push(`About ${fmt(Math.round(bvToKelvin(d.ci[i]) / 100) * 100)} K at its surface (B−V ${fmt(Math.abs(d.ci[i]) < 0.005 ? 0 : d.ci[i], 2)})`); // prettier-ignore
   if (d.spect[i]) out.push(`Spectral type ${d.spect[i]}`);
   const enu = mulMV(s.matrix, CAT.vec[i]);
   const alt = Math.asin(clamp(enu[2], -1, 1)) * R2D;
-  const az = ((Math.atan2(enu[0], enu[1]) * R2D) % 360 + 360) % 360;
+  const az = (((Math.atan2(enu[0], enu[1]) * R2D) % 360) + 360) % 360;
   out.push(where(alt, az));
   return out;
 }
@@ -330,7 +335,8 @@ function renderPanel() {
     const a = Number(lat.value);
     const o = Number(lon.value);
     if (!(lat.value !== "" && lon.value !== "" && Math.abs(a) <= 90 && Math.abs(o) <= 180)) {
-      SKY.locError = "Type a latitude from −90 to 90 and a longitude from −180 to 180 (east positive).";
+      SKY.locError =
+        "Type a latitude from −90 to 90 and a longitude from −180 to 180 (east positive).";
       refreshPanel();
       return;
     }
@@ -446,9 +452,9 @@ function buildSky(k, o) {
     stars: P("stars"),
     lines: P("lines"),
     glow: P("glow"),
-    mark: P("mark"),
+    mark: P("mark", CM),
   };
-  const c0 = [0, R.body, 0];
+  const c0 = C0;
   for (const b of ["sun", "moon", ...PLANETS]) parts[b] = P(b, c0);
 
   // The night sky, a gradient from the zenith to a faint glow at the horizon.
@@ -458,7 +464,14 @@ function buildSky(k, o) {
   for (const q of band(nNight, -4, 90)) {
     const h = clamp(q.alt / 90, 0, 1);
     const col = mix([0.07, 0.075, 0.11], [0.008, 0.012, 0.035], Math.pow(h, 0.45));
-    push(sheetSplat(sc(q.enu).map((v) => v * R.night), sig * R.night, col, 1));
+    push(
+      sheetSplat(
+        sc(q.enu).map((v) => v * R.night),
+        sig * R.night,
+        col,
+        1,
+      ),
+    );
   }
   // The day sky fades in over it as the Sun comes up (channel 0).
   const nDay = Math.round(N * 0.12);
@@ -470,8 +483,8 @@ function buildSky(k, o) {
   }
   // Twilight: a glow on the horizon, made around north and turned to the Sun (channel 1).
   const nGlow = Math.round(N * 0.06);
-  sig = spacing(nGlow, -3, 35) * 0.9;
-  for (const q of band(nGlow, -3, 35)) {
+  sig = spacing(nGlow, 0, 35) * 0.9;
+  for (const q of band(nGlow, 0, 35)) {
     const daz = Math.min(q.az, 360 - q.az);
     const g = Math.exp(-((daz / 50) ** 2)) * Math.exp(-Math.max(0, q.alt) / 9) + 0.22 * Math.exp(-Math.max(0, q.alt) / 5); // prettier-ignore
     if (g < 0.03) continue;
@@ -481,7 +494,7 @@ function buildSky(k, o) {
 
   // The Milky Way: a soft band along the galactic plane, brightest toward the center in
   // Sagittarius, with the stars (J2000; the north galactic pole at RA 192.859, Dec 27.128).
-  const nMilky = Math.round(N * 0.07);
+  const nMilky = Math.round(N * 0.1);
   const gp = fromRaDec(192.85948, 27.12825);
   const gc = fromRaDec(266.405, -28.936);
   const gy = norm([gp[1] * gc[2] - gp[2] * gc[1], gp[2] * gc[0] - gp[0] * gc[2], gp[0] * gc[1] - gp[1] * gc[0]]); // prettier-ignore
@@ -493,7 +506,7 @@ function buildSky(k, o) {
     const v = norm(gc.map((c, j) => Math.cos(b) * (Math.cos(l) * c + Math.sin(l) * gy[j]) + Math.sin(b) * gp[j])); // prettier-ignore
     const lane = Math.abs(b) < 0.02 && Math.cos(l) > 0.2 ? 0.45 : 1; // the dark rift near the center
     const bright = (0.35 + 0.65 * Math.max(0, Math.cos(l)) ** 2) * lane * (0.6 + 0.4 * r);
-    push(sheetSplat(v.map((x) => x * R.milky), (0.55 + 0.6 * k.rand()) * D2R * R.milky, [0.78, 0.82, 0.95], 0.07 + 0.1 * bright, { part: parts.stars, kind: FADE, params: [0.02, 0.12], channel: 0 })); // prettier-ignore
+    push(sheetSplat(v.map((x) => x * R.milky), (0.28 + 0.4 * k.rand()) * D2R * R.milky, [0.78, 0.82, 0.95], 0.03 + 0.08 * bright, { part: parts.stars, kind: FADE, params: [0.02, 0.12], channel: 0 })); // prettier-ignore
     placed++;
   }
 
@@ -531,7 +544,7 @@ function buildSky(k, o) {
         const w1 = Math.sin(t * ang) / s;
         const v = norm(a.map((x, q) => w0 * x + w1 * b[q]));
         const tan = b.map((x, q) => x - a[q]);
-        push({ p: v.map((x) => x * R.lines), scales: [step * 0.75 * D2R * R.lines, 0.045 * D2R * R.lines, 0.02 * D2R], quat: quatFrame(tan, v), color: [0.36, 0.52, 0.86], opacity: 0.6, part: parts.lines, kind: FADE, params: [0.2, 0.25], channel: 0 }); // prettier-ignore
+        push({ p: v.map((x) => x * R.lines), scales: [step * 0.75 * D2R * R.lines, 0.035 * D2R * R.lines, 0.02 * D2R], quat: quatFrame(tan, v), color: [0.36, 0.52, 0.86], opacity: 0.45, part: parts.lines, kind: FADE, params: [0.2, 0.25], channel: 0 }); // prettier-ignore
       }
     }
   }
@@ -544,7 +557,10 @@ function buildSky(k, o) {
       const z = 1 - (2 * (i + 0.5)) / n;
       const r = Math.sqrt(1 - z * z);
       const nv = [r * Math.cos(i * g), z, r * Math.sin(i * g)];
-      fn(nv, c0.map((c, q) => c + nv[q] * rr));
+      fn(
+        nv,
+        c0.map((c, q) => c + nv[q] * rr),
+      );
     }
   };
   const ballSig = (n, rr) => Math.sqrt((4 * Math.PI * rr * rr) / n) * 0.75;
@@ -556,13 +572,15 @@ function buildSky(k, o) {
   }
 
   // The Moon: a ball lit on its +X side; drive turns +X toward the Sun.
+  // Its night side sits a little inside the day side, so no dark rim shows round a full Moon.
   sphere(520, ballR, (nv, p) => {
     const lit = nv[0];
     if (lit >= 0) {
       const shade = 0.78 + 0.22 * Math.sqrt(lit);
       push(dotSplat(p, ballSig(520, ballR), [0.94 * shade, 0.92 * shade, 0.86 * shade], 1, { part: parts.moon })); // prettier-ignore
     } else {
-      push(dotSplat(p, ballSig(520, ballR), [0.05, 0.055, 0.075], 1, { part: parts.moon, kind: FADE, params: [0.25, 0.4], channel: 0 })); // prettier-ignore
+      const q = c0.map((c, i) => c + nv[i] * ballR * 0.96);
+      push(dotSplat(q, ballSig(520, ballR) * 0.95, [0.05, 0.055, 0.075], 1, { part: parts.moon, kind: FADE, params: [0.2, 0.3], channel: 0 })); // prettier-ignore
     }
   });
 
@@ -576,11 +594,11 @@ function buildSky(k, o) {
     push(dotSplat(c0, sg * 2.4, PLANET_COLORS[name], 0.18, fade));
   }
 
-  // The marker round a tapped thing: a ring made at the zenith, turned to it.
+  // The marker round a tapped thing: a ring facing up, turned and moved to it.
   for (let i = 0; i < 40; i++) {
     const a = (i / 40) * 2 * Math.PI;
     const rr = R.mark * Math.tan(1.7 * D2R);
-    push(dotSplat([Math.cos(a) * rr, R.mark, Math.sin(a) * rr], 0.1 * D2R * R.mark, [1, 0.84, 0.42], 0.95, { part: parts.mark })); // prettier-ignore
+    push(dotSplat([CM[0] + Math.cos(a) * rr, CM[1], CM[2] + Math.sin(a) * rr], 0.1 * D2R * R.mark, [1, 0.84, 0.42], 0.95, { part: parts.mark })); // prettier-ignore
   }
 
   // The ground, up to a low skyline, and its daylight color.
@@ -589,7 +607,7 @@ function buildSky(k, o) {
   for (const q of band(nGround, -90, 4)) {
     if (q.alt > skyline(q.az)) continue;
     const near = clamp(-q.alt / 30, 0, 1);
-    push(sheetSplat(sc(q.enu).map((v) => v * R.ground), sig * R.ground, [1,0,0], 1)); // prettier-ignore
+    push(sheetSplat(sc(q.enu).map((v) => v * R.ground), sig * R.ground, mix([0.03, 0.033, 0.04], [0.012, 0.014, 0.018], near), 1)); // prettier-ignore
   }
   const nGroundDay = Math.round(N * 0.04);
   sig = spacing(nGroundDay, -90, 4) * 0.9;
@@ -600,7 +618,12 @@ function buildSky(k, o) {
 
   // N, E, S and W on the horizon, in the kit's bitmap font.
   const px = 0.3; // degrees per font pixel
-  for (const [ch, az] of [["N", 0], ["E", 90], ["S", 180], ["W", 270]]) {
+  for (const [ch, az] of [
+    ["N", 0],
+    ["E", 90],
+    ["S", 180],
+    ["W", 270],
+  ]) {
     const rows = BITMAP[ch];
     for (let y = 0; y < 7; y++)
       for (let x = 0; x < 5; x++) {
@@ -612,6 +635,9 @@ function buildSky(k, o) {
       }
   }
 
+  // Keep the fit centered on the viewer: the backdrop covers only the upper sky.
+  k.reach([R.night, R.night, R.night]);
+  k.reach([-R.night, -R.night, -R.night]);
   k.data = { parts: Object.keys(parts) };
   k.cloud({ count: (out.length * 160000) / N, jitter: 0, pattern: false }, (rand, i) => out[i] || null); // prettier-ignore
 }
@@ -674,15 +700,17 @@ export const RECIPES = {
       const sun = s.bodies.sun;
       const light = skyLight(sun.alt);
       out.morph = [light.day, light.glow, 0, 0];
-      out.parts.stars = { quat: q };
-      out.parts.lines = { quat: q, visible: c.lines ?? 1 };
-      out.parts.glow = { quat: quatAxisAngle([0, 1, 0], -sun.az * D2R) };
-      const c0 = [0, R.body, 0];
+      // The stars, the Milky Way and the lines set behind the horizon (cull "below").
+      out.parts.stars = { quat: q, cull: "below" };
+      out.parts.lines = { quat: q, visible: c.lines ?? 1, cull: "below" };
+      out.parts.glow = { quat: quatAxisAngle([0, 1, 0], -sun.az * D2R), cull: "below" };
       for (const name of ["sun", "moon", ...PLANETS]) {
         const b = s.bodies[name];
         const dir = sc(b.enu);
-        const offset = dir.map((v, i) => v * R.body - c0[i]);
-        const part = { offset };
+        const offset = dir.map((v, i) => v * R.body - C0[i]);
+        // Gone once its center is a little under the horizon.
+        const part = { offset, visible: b.alt > -0.9 ? 1 : 0 };
+        if (name === "moon" || name === "sun") part.cull = true; // a ball: its back never draws over its front
         if (name === "moon") part.quat = quatFromTo([1, 0, 0], sc(sun.enu));
         else if (name !== "sun") part.scale = starSigma(b.mag) / starSigma(0);
         out.parts[name] = part;
@@ -692,7 +720,8 @@ export const RECIPES = {
       let dir = null;
       if (pk?.kind === "body") dir = sc(s.bodies[pk.name].enu);
       else if (pk?.kind === "star") dir = sc(norm(mulMV(s.matrix, CAT.vec[pk.i])));
-      out.parts.mark = dir ? { quat: quatFromTo([0, 1, 0], dir), visible: 1 } : { visible: 0 };
+      if (dir && dir[1] < -0.015) dir = null; // under the horizon: no ring on the ground
+      out.parts.mark = dir ? { quat: quatFromTo([0, 1, 0], dir), offset: dir.map((v, i) => v * R.mark - CM[i]), visible: 1 } : { visible: 0 }; // prettier-ignore
       out.legend = legend(s, ms);
       if (Math.floor(t * 2) !== SKY.panelTick) {
         SKY.panelTick = Math.floor(t * 2);
@@ -728,7 +757,9 @@ function legend(s, ms) {
   const moon = s.bodies.moon;
   items.push({ text: sun.alt > -0.83 ? `The Sun is up (${fmt(sun.alt)}°)` : sun.alt > -18 ? "Twilight" : "Night" }); // prettier-ignore
   items.push({ text: `Moon: ${phaseName(moon.illum, moon.waxing).toLowerCase()}, ${moon.alt > 0 ? "up" : "down"}` }); // prettier-ignore
-  const up = PLANETS.filter((n) => s.bodies[n].alt > 0 && s.bodies[n].mag < 6).map((n) => BODY_NAMES[n]);
+  const up = PLANETS.filter((n) => s.bodies[n].alt > 0 && s.bodies[n].mag < 6).map(
+    (n) => BODY_NAMES[n],
+  );
   if (up.length) items.push({ text: `Up now: ${up.join(", ")}` });
   return { title: title || "The sky", items };
 }
@@ -761,6 +792,7 @@ if (typeof window !== "undefined" && window.__splashery) {
       return {
         place: { ...SKY.place },
         ms: SKY.anchorSky === null ? null : skyTime(),
+        drawn: SKY.ms ?? null, // the time the last frame showed
         lst: s?.lst,
         picked: SKY.picked,
         bodies: b ? Object.fromEntries(Object.entries(b).map(([k, v]) => [k, { alt: v.alt, az: v.az, mag: v.mag, illum: v.illum }])) : null, // prettier-ignore
@@ -771,6 +803,20 @@ if (typeof window !== "undefined" && window.__splashery) {
       const s = SKY.last;
       if (!f || !s) return null;
       return f.kind === "body" ? sc(s.bodies[f.name].enu) : sc(norm(mulMV(s.matrix, CAT.vec[f.i])));
+    },
+    // Turns the view to look at it (the inside camera's yaw and pitch).
+    look(name, fovScale = 1) {
+      const d = this.dirOf(name);
+      const cam = window.__splashery.player.camera;
+      if (!d) return null;
+      const pose = {
+        yaw: Math.atan2(d[0], d[2]),
+        pitch: Math.asin(clamp(d[1], -1, 1)),
+        roll: 0,
+        distance: 5 * fovScale,
+      };
+      cam.setState(pose);
+      return pose;
     },
     pick(name) {
       SKY.picked = find(name);

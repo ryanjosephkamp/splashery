@@ -284,7 +284,10 @@ export function sky(ms, latDeg, lonEast) {
   const m = moonGeocentric(jd);
   const lat = latDeg;
   const obs = [cos(lat) * cos(lstDeg), cos(lat) * sin(lstDeg), sin(lat)]; // Earth radii
-  const topo = sub(m.eq.map((x) => x * m.dist), obs);
+  const topo = sub(
+    m.eq.map((x) => x * m.dist),
+    obs,
+  );
   const enu = mulMV(H, topo);
   const n = len(enu);
   const moonDir = [enu[0] / n, enu[1] / n, enu[2] / n];
@@ -293,8 +296,7 @@ export function sky(ms, latDeg, lonEast) {
   const elong = Math.acos(Math.max(-1, Math.min(1, dot(moonDir, sunDir)))) * R2D;
   const sunAu = bodies.sun.delta;
   const moonAu = (n * 6378.14) / 149597870.7;
-  const phaseAngle =
-    Math.atan2(sunAu * sin(elong), moonAu - sunAu * cos(elong)) * R2D;
+  const phaseAngle = Math.atan2(sunAu * sin(elong), moonAu - sunAu * cos(elong)) * R2D;
   const illum = (1 + cos(phaseAngle)) / 2;
   // Waxing while the Moon is east of the Sun (its longitude ahead of the Sun's).
   const sunLon = toEclipticLon(planet("sun", jd).eq);
