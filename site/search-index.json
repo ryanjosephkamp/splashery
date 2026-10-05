@@ -1330,6 +1330,16 @@
     "i": "../assets/toys/crystal-lattice/thumb.webp"
   },
   {
+    "t": "Molecule viewer",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap two atoms for their distance, a third for the angle.",
+    "w": "molecule viewer atoms atoms molecule viewer pdb mmcif cif sdf mol xyz protein dna rna ligand cartoon ribbon surface ball stick spacefill cpk bond length angle measure rcsb protein data bank chemistry biology molecule-viewer",
+    "i": "../assets/toys/molecule-viewer/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Periodic table",
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmlvZGljLXRhYmxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
     "k": "toy",
@@ -1337,6 +1347,16 @@
     "d": "Tap a tile to raise its atom, again to lower it. Tap the board for a tour, 57-71 for its row.",
     "w": "periodic table atoms atoms elements periodic table atom nucleus proton neutron electron shell spectrum emission line photon chemistry physics periodic-table",
     "i": "../assets/toys/periodic-table/thumb.webp"
+  },
+  {
+    "t": "Real elements",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZWxlbWVudHMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMDYsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap a tile to lift its sample and read its facts; tap the sample to turn it, its tile to set it back.",
+    "w": "real elements atoms atoms elements periodic table real samples photos metals gases crystals chemistry real-elements",
+    "i": "../assets/toys/real-elements/thumb.webp",
+    "l": 1
   },
   {
     "t": "Diamond",
@@ -3355,7 +3375,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ",
     "k": "toy",
     "s": "Studio",
-    "d": "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
+    "d": "Type a link in the Toy tab, pick a style or a theme, and tap the code.",
     "w": "qr code studio studio qr code generator barcode link url scan camera phone print gif share qr-code",
     "i": "../assets/toys/qr-code/thumb.webp",
     "l": 1
@@ -3421,6 +3441,26 @@
     "l": 1
   },
   {
+    "t": "Sound lab",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvdW5kLWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to play or stop a tone. The Toy tab changes it, starts the metronome, or uses your microphone.",
+    "w": "sound lab studio studio sound audio spectrogram spectrum oscilloscope tone generator sine square saw noise beats frequency hertz decibel level meter metronome tempo microphone physics sound-lab",
+    "i": "../assets/toys/sound-lab/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Sound recorder",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvdW5kLXJlY29yZGVyIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA2LCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap Record in the Toy tab, make your sound, then Stop. Tap the toy to play it; trim and save it there.",
+    "w": "sound recorder studio studio record recorder recording microphone voice sound effect wav webm m4a trim waveform spectrogram save audio sound-recorder",
+    "i": "../assets/toys/sound-recorder/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat field",
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWZpZWxkIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuODUsInJvbGwiOjAsImRpc3RhbmNlIjozfX0",
     "k": "toy",
@@ -3428,6 +3468,16 @@
     "d": "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
     "w": "splat field lab lab gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment splat-field",
     "i": "../assets/toys/splat-field/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Light lab",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxpZ2h0LWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC41LCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0",
+    "k": "toy",
+    "s": "Lab",
+    "d": "Tap for the next element or lamp. The Toy tab picks a prism, a grating or your camera as a spectrometer.",
+    "w": "light lab lab lab light spectrum spectra emission lines element hydrogen helium neon sodium mercury prism grating rainbow diffraction cd dvd spectrometer camera wavelength nanometer nist physics light-lab",
+    "i": "../assets/toys/light-lab/thumb.webp",
     "l": 1
   },
   {
@@ -3455,9 +3505,39 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhbGF4eS1ib3gifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
     "k": "toy",
     "s": "Science",
-    "d": "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
+    "d": "Pinch to zoom into the gas; tap to peel the hot gas. Through the telescope, tap for a new exposure.",
     "w": "galaxy in a box science science galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science galaxy-box",
     "i": "../assets/toys/galaxy-box/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cryo-EM map",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeW9lbS1tYXAifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "k": "toy",
+    "s": "Science",
+    "d": "Tap to cut it open; tap again to close it. Pick a map, a level and the fitted model in the Toy tab.",
+    "w": "cryo-em map science science cryo-em electron microscopy density map emdb isosurface contour ribosome apoferritin ferritin virus capsid aav protein structure science cryoem-map",
+    "i": "../assets/toys/cryoem-map/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Contour lab",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbnRvdXItbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuNTUsInJvbGwiOjAsImRpc3RhbmNlIjozfX0",
+    "k": "toy",
+    "s": "Science",
+    "d": "Tap to pull the layers apart; tap again to stack them. Pick a place in the Toy tab.",
+    "w": "contour lab science science contour lines map topographic elevation height layers terrain mountain usgs geography lab science contour-lab",
+    "i": "../assets/toys/contour-lab/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Terrain in a box",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlcnJhaW4tYm94In0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Science",
+    "d": "Tap to fill the land with water; tap again to drain it. Pick a place in the Toy tab.",
+    "w": "terrain in a box science science terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science terrain-box",
+    "i": "../assets/toys/terrain-box/thumb.webp",
     "l": 1
   },
   {
@@ -3515,7 +3595,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZWN0cm9uLW1pY3Jvc2NvcGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuNDUsInJvbGwiOjAsImRpc3RhbmNlIjoyLjZ9fQ",
     "k": "toy",
     "s": "Imaging",
-    "d": "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
+    "d": "Tap to zoom in a step; the third tap goes back out. Choose the sample and the vision in the Toy tab.",
     "w": "electron microscope imaging imaging sem scanning electron microscope micrograph pollen diatom snowflake rime zoom magnification imaging electron-microscope",
     "i": "../assets/toys/electron-microscope/thumb.webp",
     "l": 1
@@ -3538,6 +3618,36 @@
     "d": "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
     "w": "screen pictures and pages pictures and pages tv television video gif movie cinema theater hologram screen curtains play watch screen",
     "i": "../assets/toys/screen/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Night sky",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5pZ2h0LXNreSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Drag to look around the sky. Tap a star or a planet to name it.",
+    "w": "night sky space space stars planets moon sun constellations planetarium astronomy sky night location date time phase night-sky",
+    "i": "../assets/toys/night-sky/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Data in 3D",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
+    "w": "data in 3d studio studio data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel data-in-3d",
+    "i": "../assets/toys/data-in-3d/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Climate records",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsaW1hdGUtcmVjb3JkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319",
+    "k": "toy",
+    "s": "Science",
+    "d": "Pick a record in the Toy tab and turn it; tap to play the record again.",
+    "w": "climate records science science climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart climate-records",
+    "i": "../assets/toys/climate-records/thumb.webp",
     "l": 1
   },
   {
