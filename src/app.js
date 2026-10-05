@@ -1662,6 +1662,19 @@ class App {
     );
   }
 
+  // Lane PDF lab: Save as PDF (labs). Its dialog and pdf-lib load only when
+  // someone opens it (src/pdf-export/).
+  async openPdfExport() {
+    if (this.busy) return;
+    try {
+      const { openPdfDialog } = await import("./pdf-export/index.js");
+      return openPdfDialog(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("Save as PDF couldn't load. Try again in a moment.", 5000);
+    }
+  }
+
   // ---- UI r5: Record ---------------------------------------------------------------
   // A live recording of the stage while someone plays, with the site's sound.
   // The Share tab starts it; the pill on the stage shows the time, stops it and

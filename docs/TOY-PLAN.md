@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 387 toys. 357 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 379.
+- 392 toys. 362 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 382.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 8.
+- **new** (needs its own effect): 10.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -59,10 +59,10 @@ Proposals below are suggestions; the owner may change them.
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
-  Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D,
-  Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid
-  lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope,
-  Thermal camera, Screen.
+  Song landscape, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo
+  to 3D, Video to 3D, Sound lab, Sound recorder, Splat field, Light lab, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works,
+  Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -71,7 +71,7 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
-  a QR code works, QR damage lab, Three QR codes in one, Video to 3D
+  a QR code works, QR damage lab, Three QR codes in one, Video to 3D, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2826,7 +2826,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (12)
+## Studio (15)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2879,15 +2879,24 @@ Proposals below are suggestions; the owner may change them.
     Poly Haven's vase).
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
     back.
-- **QR code** (`qr-code`). Now: tap: Burst and return. Plan: new effect (E6).
+- **QR code** (`qr-code`). Now: tap: Knock loose. Plan: new effect (E6).
   - Owner: The owner's idea of October 1, 2026 ("go hard on it"), lane QR, October 3, 2026.
   - Effect: A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles,
-    Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off
-    as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds
-    Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing
-    their back color).
-  - Sound: Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back
-    (Assemble: a rush in and a settle; Flip: two soft sweeps).
+    Neon) that always scans. A tap knocks the modules around your finger loose: they fly out toward
+    you, tumble and snap back on a spring (2.8 s). The Toy tab adds Assemble, Flip, Burst and
+    return, Ripple (tiles ride a ring wave), Split-flap (row by row, each tile flips round like a
+    departure board), Fold (the code folds like paper and unfolds), Rain (pieces lift off and rain
+    back down, bottom row first, stacking into place) and Point cloud (every splat shrinks to a
+    point, the code dissolves into a drifting cloud and gathers back). Each moves solid pieces and
+    ends on a code that scans.
+  - Improved: QR r3 (October 5, 2026): crisp module edges (rings of thin splats along each edge: the
+    10–90% edge about half as wide at phone and desktop size); six new motions and a tap that knocks
+    modules loose; Alive grows to eight patterns (wave, sweep, pulse, flowing gradient, rainbow,
+    current, charge, scan line) with a speed slider from a quarter to four times as fast, every
+    frame scanning; twelve color themes and 24 countries' flag colors, each at least 4.5 : 1.
+  - Sound: Soft: a wooden knock and a puff for the tap, then the click of pieces snapping back
+    (Burst: a muffled pop, a whoosh and a rush back; Split-flap: a run of light clicks; Rain: a
+    patter; Fold: paper rustles and soft creases).
 - **How a QR code works** (`qr-anatomy`). Now: tap: Next part. Plan: new effect (E6).
   - Owner: The owner's push notes of October 4, 2026 (Q6, "strong yes"; "it has to be technically
     correct"), lane QR lab r2, October 5, 2026.
@@ -2953,8 +2962,36 @@ Proposals below are suggestions; the owner may change them.
     own sizes and rotations; save as PLY; timing readout per stage.
   - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
     the flight of a video you opened, the video's own sound.
+- **Sound lab** (`sound-lab`). Now: tap: Play or stop the tone. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: A bench instrument whose screen is a panel of splats: a scrolling spectrogram, the
+    spectrum with its loudest frequency, an oscilloscope and a level meter (dBFS, with an
+    uncalibrated dB SPL estimate). A tap plays or stops the tone generator (sine, square, saw or
+    noise; two tones beat), measured on the screen as the speaker plays it; the speaker's cone moves
+    with the signal. A metronome swings from side to side, one beat a swing, and clicks on each
+    beat. The microphone, on a tap, takes over the screens.
+  - Improved: Sound and light lab: new toy. The screens are measured from samples (the generator's
+    own, or the microphone's); tested: a known tone's spectrogram peak, the beat frequency, the
+    metronome's clicks.
+  - Sound: A soft switch; the tone itself plays from the toy while the site's sound is on.
+- **Sound recorder** (`sound-recorder`). Now: tap: Play or stop the recording. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: A studio microphone before a screen of splats showing the recording's waveform over its
+    spectrogram, the kept span bright and the trimmed ends dimmed, with a play head. Record (in the
+    Toy tab, from the microphone, kept in memory) lights the microphone's lamp; a tap plays or stops
+    the recording. Trim, then save as WAV or a smaller Opus or AAC file.
+  - Improved: Sound and light lab: new toy; the WAV file round-trips sample for sample (tested).
+  - Sound: A soft click.
+- **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
+  - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
+  - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,
+    ticks and labels that turn to face the camera. A tap drops every point, bar or the surface to
+    the floor and lets it rise back into place with a small overshoot (2.4 s).
+  - Sound: A soft thud as the marks land, a light knock, and a breath as they rise.
 
-## Lab (2)
+## Lab (3)
 
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
@@ -2973,6 +3010,19 @@ Proposals below are suggestions; the owner may change them.
     each).
   - Sound: Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle
     wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).
+- **Light lab** (`light-lab`). Now: tap: Next element or lamp. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: Line spectra of sixteen elements from NIST to compare (a tap labels the next element's
+    strongest lines); an optical bench where a lamp's beam passes a 60° prism (Snell's law, Schott's
+    Sellmeier index) or a grating (CD, DVD or slide; d sin θ = m λ, orders −2 to +2), every ray
+    traced onto a card, a tap changing the lamp from white light to each element; and a home
+    spectrometer reading a camera picture (a CD or DVD and a fluorescent lamp), calibrated on
+    mercury's 436 and 546 nm lines.
+  - Improved: Sound and light lab: new toy; the lines match NIST's tables, the prism's minimum
+    deviation and the grating angles match their formulas, and the spectrometer finds the lines of a
+    made-up picture within 2 nm (tested).
+  - Sound: The click of a slide changer.
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
   - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
     fluid splat simulator"; lane Fluids; labs only).
@@ -2986,7 +3036,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 
-## Science (3)
+## Science (4)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
@@ -3035,6 +3085,13 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+- **Climate records** (`climate-records`). Now: tap: Play the record. Plan: new effect (E6).
+  - Owner: Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.
+  - Effect: NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a
+    year; GISTEMP temperature anomalies as a field of monthly bars or a wall of yearly stripes. A
+    tap redraws the CO2 record from 1974 behind a bright bead (8 s), or lets the bars sink to zero
+    and grow back.
+  - Sound: A long, low breath under a soft thud.
 
 ## Imaging (6)
 

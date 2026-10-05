@@ -5,6 +5,7 @@
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
+import { labsOn } from "./toys.js"; // lane PDF lab
 import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
@@ -173,6 +174,8 @@ export function createUI(app) {
     webmRow: $("webm-row"),
     webmSeconds: $("webm-seconds"),
     exportWebm: $("export-webm"),
+    pdfRow: $("pdf-row"), // lane PDF lab
+    exportPdf: $("export-pdf"), // lane PDF lab
     webmUnavailable: $("webm-unavailable"),
     recordRow: $("record-row"), // UI r5
     recordStart: $("record-start"),
@@ -568,7 +571,16 @@ export function createUI(app) {
       let input;
       if (o.type === "select") {
         input = document.createElement("select");
-        for (const ch of o.choices) input.add(new Option(ch.label, ch.id));
+        // Choices with a `group` are listed under that heading (an optgroup).
+        let group = null;
+        for (const ch of o.choices) {
+          if (ch.group && ch.group !== group?.label) {
+            group = document.createElement("optgroup");
+            group.label = ch.group;
+            input.appendChild(group);
+          } else if (!ch.group) group = null;
+          (group ?? input).appendChild(new Option(ch.label, ch.id));
+        }
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "flag") {
@@ -2118,6 +2130,9 @@ export function createUI(app) {
     }),
   );
   els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  // Lane PDF lab: Save as PDF (labs).
+  els.pdfRow.hidden = !labsOn();
+  els.exportPdf.addEventListener("click", () => app.openPdfExport());
   // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
   els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
