@@ -186,3 +186,6 @@
 {"v":1,"t":"2026-10-05T10:21:30.589Z","harness":"claude-code","event":"tool","session":"06f3f753-0d81-5386-aacc-1d9c1985e08a","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T10:21:33.883Z","harness":"claude-code","event":"tool","session":"06f3f753-0d81-5386-aacc-1d9c1985e08a","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T10:21:36.712Z","harness":"claude-code","event":"turn-end","session":"06f3f753-0d81-5386-aacc-1d9c1985e08a","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T10:21:41.243Z","harness":"claude-code","event":"subagent-stop","session":"06f3f753-0d81-5386-aacc-1d9c1985e08a","agent":"a4ed13ee1ce1ad5b2"}
+{"v":1,"t":"2026-10-05T10:29:34.169Z","harness":"claude-code","event":"turn-start","session":"06f3f753-0d81-5386-aacc-1d9c1985e08a","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T10:29:34.236Z","harness":"claude-code","event":"turn-start","session":"06f3f753-0d81-5386-aacc-1d9c1985e08a","cwd":"splashery"}
