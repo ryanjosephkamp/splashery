@@ -3321,6 +3321,36 @@
     "l": 1
   },
   {
+    "t": "How a QR code works",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWFuYXRvbXkifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to light up each part of the code, or encode your own text step by step.",
+    "w": "how a qr code works studio studio qr code how it works anatomy finder timing alignment format version mask reed solomon error correction encode bits zigzag qr-anatomy",
+    "i": "../assets/toys/qr-anatomy/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "QR damage lab",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWRhbWFnZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick a damage in the Toy tab and tap the code to add it. Watch the meter.",
+    "w": "qr damage lab studio studio qr code damage scratch sticker tear burn smudge blur error correction reed solomon heal scan meter levels qr-damage",
+    "i": "../assets/toys/qr-damage/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Three QR codes in one",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXRocmVlIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to pull the three codes apart. Read all three in the Toy tab.",
+    "w": "three qr codes in one studio studio qr code color rgb red green blue three codes multiplex channels qr-three",
+    "i": "../assets/toys/qr-three/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Photo to 3D",
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
     "k": "toy",
