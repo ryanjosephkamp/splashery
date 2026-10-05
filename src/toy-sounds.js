@@ -2813,6 +2813,11 @@ export const TOY_SOUNDS = {
     { voice: "thud", f: 140, vol: 0.55 },
     { voice: "hollow", at: 0.12, f: 330, decay: 0.5, vol: 0.3 },
   ],
+  // A pop bumper's ding and a flipper's clack.
+  "night-owl-pinball": [
+    { voice: "clack", f: 900, vol: 0.45 },
+    { voice: "ding", at: 0.12, f: 1150, vol: 0.4 },
+  ],
   // A word's brick breaking: a paper tear and a knock.
   "page-breaker": [
     { voice: "pock", f: 480, vol: 0.55 },

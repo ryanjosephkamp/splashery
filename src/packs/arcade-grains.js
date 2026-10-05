@@ -31,7 +31,7 @@ const LIQUID = new Uint8Array(16);
 LIQUID[MATS.water] = 1;
 LIQUID[MATS.oil] = 1;
 const BURNS = new Float32Array(16);
-BURNS[MATS.oil] = 0.35;
+BURNS[MATS.oil] = 0.5;
 BURNS[MATS.plant] = 0.06;
 BURNS[MATS.flower] = 0.06;
 BURNS[MATS.seed] = 0.08;
@@ -294,8 +294,9 @@ class Grains {
               if (R() < 0.2) this.api.sound({ voice: "sizzle", vol: 0.12, decay: 0.4 });
               continue;
             }
-            // Flicker upward.
-            if (y < GY - 1 && R() < 0.5) {
+            // Flicker upward (a flame on something that burns stays on it).
+            const onFuel = y > 0 && BURNS[mat[i - GX]] > 0;
+            if (y < GY - 1 && !onFuel && R() < 0.5) {
               const u = i + GX;
               const dx = ((R() * 3) | 0) - 1;
               const j = x + dx >= 0 && x + dx < GX ? u + dx : u;

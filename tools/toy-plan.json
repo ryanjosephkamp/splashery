@@ -2505,6 +2505,13 @@
       "effect": "Land a lander on real ground from NASA's elevation maps (Tycho, Copernicus and the Sea of Tranquility on the Moon; Gale, Jezero, Valles Marineris and Olympus Mons on Mars): slow, upright and level, or it breaks apart into real pieces. 2D is a true slice through the ground; the 3D switch shows the whole patch around it.",
       "sound": "An engine rumble while thrusting, a soft thud and a three-note chime on touchdown, a crack and clatter on a crash.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "night-owl-pinball": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G13 (labs only).",
+      "effect": "A pinball table moved by Splashery's own rigid-body engine: the steel ball rolls down the slope, bounces off rails and posts, the flippers swing and strike it, pop bumpers kick it away and light up, and the plunger launches it. 2D from above; 3D from the player's end.",
+      "sound": "A clack for each flipper, a bright ding for each bumper, small clicks off the rails, a thud for the plunger and a low thud for a drained ball.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and src/physics/world.js."
     }
   }
 }

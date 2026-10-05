@@ -97,6 +97,12 @@ function picture(k, kind) {
     });
     box(0.09, 0.05, 0.09, [0.3, 0.25, 0], "#d9a83d");
     box(0.07, 0.04, 0.07, [0.3, 0.3, 0], "#b8b8bc");
+  } else if (kind === "pinball") {
+    box(1.0, 0.02, 1.9, [0, -0.01, 0], (c) => lit("#16245a", c.n));
+    for (const x of [-0.5, 0.5]) box(0.03, 0.06, 1.9, [x, 0.03, 0], "#c9ccd2");
+    for (const [x, z] of [[-0.16, -0.45], [0.14, -0.5], [-0.02, -0.25]]) k.add(k.cylinder(0.055, 0.05), { pos: [x, 0.025, z], even: true, color: (c) => (c.n[1] > 0.5 ? [1, 0.88, 0.48] : lit("#d6382f", c.n)) }); // prettier-ignore
+    for (const s of [-1, 1]) box(0.16, 0.04, 0.03, [s * 0.12, 0.02, 0.74], "#f4f4f0");
+    k.add(k.sphere(0.028), { pos: [0.05, 0.028, 0.2], even: true, color: "#e8eaf0", weight: 3 });
   } else if (kind === "net") {
     // The cube's net of tiles, and a string of green beads.
     const A = 0.5;
@@ -552,6 +558,36 @@ export const RECIPES = {
         short: "← → tip · ↑ or Space thrust · V shows the ground in 3D",
       },
       create: async (api) => (await import("./arcade-lander.js")).createLander(api),
+    },
+  },
+  "night-owl-pinball": {
+    turntable: false,
+    density: 0.05,
+    options: [VIEW],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    build(k) {
+      stage(k, "pinball");
+    },
+    arcade: {
+      title: "Night Owl Pinball",
+      goal: "Keep the ball on the table with the flippers; the pop bumpers score.",
+      stats: [
+        { key: "score", label: "Score" },
+        { key: "balls", label: "Balls", icon: "●" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["turnL", "fire", "turnR"],
+      padLabels: { turnL: "◀", fire: "Pull", turnR: "▶" },
+      controls: {
+        keys: "← (or A, Q) left flipper, → (or D, E) right flipper; hold Space (or ↓) to pull the plunger, let go to launch.",
+        touch:
+          "Hold the left or right half of the table for that flipper; hold to pull the plunger.",
+        pad: "LB and RB, or the D-pad, are the flippers; A pulls the plunger.",
+        short: "← → flippers · hold Space to launch · V for the player's view",
+      },
+      create: async (api) => (await import("./arcade-pinball.js")).createPinball(api),
     },
   },
 };

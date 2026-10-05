@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 381 toys. 351 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 376.
+- 382 toys. 352 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 377.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -61,7 +61,7 @@ Proposals below are suggestions; the owner may change them.
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
   Galaxy in a box, Fluid lab, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing.
+  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2944,7 +2944,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 
-## Arcade (8)
+## Arcade (9)
 
 - **Shardball** (`shardball`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).
@@ -3011,3 +3011,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
   - Sound: An engine rumble while thrusting, a soft thud and a three-note chime on touchdown, a
     crack and clatter on a crash.
+- **Night Owl Pinball** (`night-owl-pinball`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G13 (labs only).
+  - Effect: A pinball table moved by Splashery's own rigid-body engine: the steel ball rolls down
+    the slope, bounces off rails and posts, the flippers swing and strike it, pop bumpers kick it
+    away and light up, and the plunger launches it. 2D from above; 3D from the player's end.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and
+    src/physics/world.js.
+  - Sound: A clack for each flipper, a bright ding for each bumper, small clicks off the rails, a
+    thud for the plunger and a low thud for a drained ball.

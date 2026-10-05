@@ -1794,6 +1794,13 @@ export const TOY_HELP = {
       "The ground here is real. On the Moon it comes from the laser altimeter and camera of NASA's Lunar Reconnaissance Orbiter (the CGI Moon Kit): Tycho crater, Copernicus crater and the Sea of Tranquility, where Apollo 11 landed. On Mars it comes from Mars Global Surveyor's laser altimeter: Gale crater, Jezero crater, Valles Marineris and Olympus Mons, colored by height. Heights are drawn taller than life so the shapes read; the site's card says how much.\n\nGravity pulls the lander down and the engine pushes it the way it points. Touch down slowly, upright and on level ground (the green lights mark flat spots) to score, with more for fuel left; land badly and it breaks apart. 2D is a true slice through the ground; the 3D button lifts the camera to show the whole patch of terrain around the slice, and the flight goes on.",
   },
 
+  "night-owl-pinball": {
+    howTo:
+      "Hold Space to pull the plunger and let go to launch. ← and → work the flippers; on a phone, hold either half of the table.",
+    about:
+      "A pinball table whose steel ball is moved by Splashery's own physics engine, the same one the Hands-on switch uses. The ball rolls down the sloped table under gravity, bounces off the rails and posts as hard as they give back, and the flippers are solid paddles: a flipper swinging as it meets the ball hits it harder than a still one. The three pop bumpers kick the ball away and light up, 100 points each. Keep the ball out of the drain between the flippers; you have three balls. The 3D button moves the view from straight above to the player's end of the table, looking up the slope.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

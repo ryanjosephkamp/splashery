@@ -3600,6 +3600,15 @@ export const TOYS = [
     labs: true,
     tags: "game arcade lander land moon mars real terrain elevation nasa lola mola tycho copernicus apollo gale jezero olympus valles 3d",
   },
+  {
+    id: "night-owl-pinball",
+    label: "Night Owl Pinball",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade pinball flippers bumpers plunger steel ball table physics 3d",
+  },
 ];
 
 export function findToy(id) {
