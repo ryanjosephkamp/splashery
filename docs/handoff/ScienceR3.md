@@ -202,3 +202,15 @@ over it), so it is the base the later lane builds on.
   could then cut a merger the same way `tools/sci3-galaxy.mjs` cuts FIRE-2.
 - Open marks rounds: waiting for the owner on `sci3-cryoem-model-r2`, `sci3-telescope-r2`,
   `sci3-cryoem-capsid-r3` and `sci3-telescope-filters-r2`; every other card is marked good.
+
+- October 5, 2026, 15:40 UTC, the Operator: one more sharper/polish/enhance round on every toy in
+  the lane, on `claude/lane-science-r3-r2` (from the lane head; #270 and #272 are under test in N7).
+  Done there: the sharp splat kernel on the cryo-EM map, Terrain in a box and the Contour lab
+  (Tenengrad at phone size 238 → 321 on the capsid, 209 → 221 terrain, 228 → 252 contour); the
+  slope-filling splats lit like the slope (they showed as rows of dark dots); three more molecules
+  (41: alanine, histidine at 5 K by neutrons, thymidine). Left as they were, measured: the
+  microscope, galaxy gas and telescope (the sharp kernel changed them by under 8%, and their
+  Gaussian light is the physics), and the ellipsoids (already crisp). Cards posted beside the old
+  ones (no `replacedBy`): `sci3-cryoem-capsid-r4`, `-apoferritin-r3`, `-ribosome-r3`, `-model-r3`,
+  `sci3-terrain-r2`, `sci3-terrain-helens-r2`, `sci3-contour-lab-r2`, `sci3-life-r2`. Next: after
+  #272 and #270 merge, merge main into the r2 branch and open "Phase Science r3 r2: …".
