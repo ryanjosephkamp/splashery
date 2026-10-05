@@ -22,7 +22,7 @@ const before = opt("before", "") ? read(opt("before", "")) : {};
 const notesFile = opt("notes", "tools/pose-notes.json");
 const notes = fs.existsSync(notesFile) ? JSON.parse(fs.readFileSync(notesFile, "utf8")) : {};
 const out = opt("out", "docs/audits/poses-2026-10.md");
-const { TOYS } = await import("../src/toys.js");
+const { TOYS, categoryLabel } = await import("../src/toys.js");
 
 const OK = 3; // err (0..255) under this: the same as upright, turned
 const worst = (r) => Math.max(r?.side?.err ?? 0, r?.down?.err ?? 0);
@@ -31,9 +31,9 @@ function verdict(id, r) {
   if (r.error) return ["not measured", `the sweep failed: ${r.error}`];
   if (!r.canPlay) return ["never posed", "Hands-on leaves it alone (a picture or turntable toy)"];
   if (r.mode === "pieces") return ["pieces", "plays in pieces in Hands-on; never tossed whole"];
-  if (notes[id]) return ["checked", ""];
   if (r.move < 2) return ["works", "no tap motion big enough to compare (the pose itself is fine)"];
   if (worst(r) < OK) return ["works", ""];
+  if (notes[id]) return ["checked", ""];
   return ["check", ""];
 }
 const fmt = (r) => (r && !r.error && r.side ? `${r.side.err.toFixed(1)} / ${r.down.err.toFixed(1)}` : "–"); // prettier-ignore
@@ -72,10 +72,37 @@ Totals: ${Object.entries(counts)
   .join(", ")}.
 `;
 for (const s of shelves) {
-  md += `\n## ${s}\n\n| Toy | Verdict | After (side / down) | Before | Note |\n| --- | --- | --- | --- | --- |\n`;
+  md += `\n## ${categoryLabel(s) || s}\n\n| Toy | Verdict | After (side / down) | Before | Note |\n| --- | --- | --- | --- | --- |\n`;
   for (const r of rows.filter((x) => x.t.category === s))
     md += `| ${r.t.label}${r.t.labs ? " (labs)" : ""} | ${r.v} | ${r.a} | ${r.b} | ${r.note} |\n`;
 }
+md += `
+## Upright is untouched
+
+\`tools/pose-upright.mjs\` rendered 15 toys (heart, grape, candle, toy piano, oak, sports car, hoodie,
+solar system, snow globe, basketball, cactus, earth, bee, jelly, chess set) at 5 moments around a
+tap, on main and with the engine change: every uniform the effects read was identical (0 of 75
+differ), and every frame was pixel-identical except two late heart frames, which also differ
+between two runs of the same code (rendering timing).
+
+## Gravity effects
+
+The engine works every effect out in the toy's own frame, except what only makes sense one way up:
+
+- Flames, smoke, steam, embers, bubbles and sparkles (the flame and rise kinds) rise toward the real
+  sky, and snow, rain, petals and confetti (the fall kind) fall toward the real floor.
+- A scan's break-apart pieces (the blackberry's drupelets, the donut's crumbs) fall toward the real
+  floor and land there.
+- Toys with no real down keep all of that in their own frame: the space, atoms, tiny world, math and
+  computing shelves, and any recipe with \`gravity: false\` (the rocket, gift box, potion bottle,
+  tornado, geyser and volcano, whose bursts leave through their own opening).
+- A recipe can read the real up as \`about.up\` while its toy is turned (the snow globe and storm
+  cloud use it to keep snow and rain from leaving them).
+- Never posed whole, so nothing to fix: the Newton's cradle (its own drags), the fluid lab.
+- Known, left as is: the lava lamp's wax keeps moving along the lamp; the coffee's steam rises
+  through the saucer when the cup lies upside down; the potion bottle's liquid is a still shape; the
+  storm cloud's lightning strikes from its own underside.
+`;
 fs.mkdirSync("docs/audits", { recursive: true });
 fs.writeFileSync(out, md);
 console.log(`${out}: ${JSON.stringify(counts)}`);
