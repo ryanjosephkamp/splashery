@@ -105,7 +105,8 @@ test.describe("the CSV reader", () => {
     expect(t.columns.find((c) => c.name === "magType").type).toBe("category");
     expect(t.columns.find((c) => c.name === "place").type).toBe("text");
     expect(() => readTable("", "e.csv")).toThrow(/no rows/);
-    expect(() => readTable("a,b\nx,y\nz,w\nq,r\n" + "s,t\n".repeat(10), "t.csv")).toThrow(/No column/); // prettier-ignore
+    const words = Array.from({ length: 20 }, (_, i) => `word${i},note${i}`).join("\n");
+    expect(() => readTable(`a,b\n${words}\n`, "t.csv")).toThrow(/No column/);
     expect(() => readTable("PK\u0003\u0004\u0000\u0000junk", "x.xlsx")).toThrow(/binary/);
   });
 
@@ -261,13 +262,13 @@ test.describe("in the browser", () => {
     page.on("request", (r) => urls.push(r.url()));
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    await page.setViewportSize({ width: 390, height: 844 });
+    // Desktop size: the Toy tab's panel shows beside the stage, not in the phone's sheet.
+    await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(APP);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     expect(urls.some((u) => /datavis|data-climate|climate-records\/|data-in-3d\//.test(u))).toBe(false); // prettier-ignore
     await page.evaluate(() => window.__splashery.app.chooseToy("data-in-3d"));
     await page.waitForFunction(() => window.__splashery.player.toyInfo?.id === "data-in-3d");
-    await page.evaluate(() => window.__splashery.app.ui.showTab?.("toy"));
     await expect(page.locator("#dcl-panel")).toBeAttached();
     await expect(page.locator("#dcl-x")).toHaveValue("longitude");
     // Open a file through the Toy tab's file button.

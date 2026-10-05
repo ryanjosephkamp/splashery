@@ -133,13 +133,11 @@ export function co2Spiral(k, rows, { source = "", px = 0.02 } = {}) {
       const a = (i / 160) * Math.PI * 2;
       ch.point([r * Math.sin(a), 0, r * Math.cos(a)], "#8b8f97", 0.0045, 0.35);
     }
-    if (v % 40 === 0) ch.label(`${v}`, [r * Math.sin(tickA), -px * 1.5, r * Math.cos(tickA)], { valign: "top", scale: 0.9 }); // prettier-ignore
+    if (v === 360 || v === S.hi) ch.label(v === S.hi ? `${v} PPM` : `${v}`, [r * Math.sin(tickA), -px * 1.5, r * Math.cos(tickA)], { valign: "top", scale: 0.9 }); // prettier-ignore
   }
-  const rp = S.r1 + 0.18;
-  ch.label("PPM", [rp * Math.sin(tickA), -px * 1.5, rp * Math.cos(tickA)], { valign: "top", scale: 0.9 }); // prettier-ignore
-  // The months, around the top of the coil.
+  // Four months around the top of the coil (January in front).
   const ring = spiralRadius(last.ppm, S) + 0.1;
-  for (let m = 0; m < 12; m += 1) {
+  for (let m = 0; m < 12; m += 3) {
     const a = ((m + 0.5) / 12) * Math.PI * 2;
     ch.label(MONTHS[m], [ring * Math.sin(a), S.H, ring * Math.cos(a)], { scale: 0.85 });
   }
