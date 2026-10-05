@@ -128,20 +128,35 @@ imports the Photo to 3D depth modules unchanged.
 
 ## State
 
-WORKING (October 5, 2026). Model: Sonnet 5.5.
+WORKING (October 5, 2026). Model: Sonnet 5.5. All five items are built and tested; what's left is
+the finishing list at the end of this section.
 
-- Item 1, Photo to 3D: done. Three CC0 photos (spiral staircase, palace staircase, wildflowers up
-  close) with depth from `tools/p3d-depth.mjs`; credits done. Clip still to do.
-- Item 2, Moving photo to 3D: done in code and tests (`tests/smd-moving.spec.mjs`, 15 pass). Four
-  new samples beside the bunny: the Muybridge horse GIF, the dragon (Sintel trailer, CC BY 3.0), the
-  bridge and the robot (Tears of Steel, CC BY 3.0), the machine (Elephants Dream, CC BY 2.5). There
-  is now a Clip choice (SAMPLES in `src/packs/moving-photo.js`); `clip: "sample"` still means the
-  bunny. `tools/live3-depth.mjs <id>` makes a sample from a source kept in `.cache/smd/`. Still to
-  do: a clip at phone size.
-- Item 3, Model to splats: done. Five more Poly Haven models (CC0): camera, boombox, lantern, bronze
-  whale statue, rocking chair (0.5 to 1.4 MB each, color texture only, no compression), made by
-  `tools/stm-samples.mjs`; `tests/smd-models.spec.mjs` (9 pass). Still to do: a clip.
-- Items 4 and 5: not started.
+- Item 1, Photo to 3D: three CC0 photos (spiral staircase, palace staircase, wildflowers up close)
+  with depth from `tools/p3d-depth.mjs`; credits done. (A street photo with a shop's brand name in
+  it was left out on purpose.)
+- Item 2, Moving photo to 3D: four new samples beside the bunny: the Muybridge horse GIF (public
+  domain), the dragon (Sintel trailer, CC BY 3.0), the bridge and the robot (Tears of Steel, CC BY
+  3.0), the machine (Elephants Dream, CC BY 2.5). A "Clip" choice in the Toy tab (SAMPLES in
+  `src/packs/moving-photo.js`; `clip: "sample"` in an old link still means the bunny).
+  `tools/live3-depth.mjs <id>` makes a sample from a source kept in `.cache/smd/` (never committed).
+  Speed measured and the Speed slider fixed (see Notes). `tests/smd-moving.spec.mjs`, 15 tests.
+- Item 3, Model to splats: five more Poly Haven models (CC0): camera, boombox, lantern, bronze whale
+  statue, rocking chair (0.4 to 1.4 MB each; color texture only; no Draco or meshopt), made by
+  `tools/stm-samples.mjs`. `tests/smd-models.spec.mjs`, 9 tests.
+- Item 4, Video to 3D: each sample ships its source's span at 480p (`<id>-source.webm` and `.mp4`, 1
+  to 2.6 MB, no sound, cut by `tools/smd-source.mjs`) for "Show the original". The source lengths
+  and the orbit answer are in "For the Operator" below. The plan for longer clips is
+  `docs/lab/VIDEO3D-LONGER.md`.
+- Item 5, the original beside the 3D: a "Show the original" option (off by default) on Photo to 3D,
+  Moving photo to 3D and Video to 3D: a small card in the corner (`src/compare.js`, loaded only when
+  switched on). A photo shows flat; a clip shows the frame the 3D one shows; a video plays in step
+  with Replay flight, holds when it holds, and takes a custom video too.
+  `tests/smd-compare.spec.mjs`, 3 tests. A corner card, not the Screen toy's flat picture: that one
+  is made of splats inside a toy's own scene, which a trained scene can't share.
+
+Still to do: phone-size clips of the best new samples and of the compare view on Effect review page
+2 (the Operator posts them if this session can't), the standard screenshots and thumbnails, the full
+test run (the Integrator).
 
 ## Notes
 
@@ -162,12 +177,45 @@ WORKING (October 5, 2026). Model: Sonnet 5.5.
   1.75 times (the middle, 50%, is the clip's own speed), the sound with it (`speedRate()` in
   `src/packs/moving-photo.js`). The song bar's speed menu is for the song toys and is not shown
   here.
+- Show the original keeps the flat video as a blob in memory (it is 1 to 3 MB): a static host
+  without range requests (the tests' python server) can't seek a video it hasn't fully downloaded.
+- The engine's flight clock steps at most a tenth of a second a frame, so a device under 10 frames a
+  second flies slower than real time; the flat video runs on its own clock and is pulled back when
+  it has drifted a third of a second (at most once a second).
+- Samples load only when picked; nothing new is in the opening download.
 
 ## Known issues
 
-- The Speed slider speeds a video's sound by changing the audio element's playback rate (pitch
-  preserved by the browser).
+- The Speed slider speeds a video's sound by changing the audio element's playback rate (the browser
+  keeps the pitch).
+- The bunny sample is 8 frames a second, so it looks choppy next to its 24 a second source.
+- Show the original on Video to 3D plays the sample's span silently (the samples have no sound).
+- The tests here run on a software renderer (about a frame a second at the highest tier), so the
+  speed and sync checks that depend on frame timing are made on the low tier or against the clocks.
+- No phone-size clips posted yet.
 
 ## For the Operator
 
-Nothing yet.
+**Video to 3D sources (item 4 questions):**
+
+- "Statue Of Liberty 4k Drone" (the Dronalist, CC BY 3.0): 228 s (3 min 48 s), 4K. The sample is 14
+  s from 3:24.
+- "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" (POPtravel, CC BY 3.0): 4,020 s (67
+  minutes), 1080p. The sample is 10 s from 7:32.
+- Does the drone fly all the way around the statue? No: several partial arcs. The fuller orbits are
+  about 0:53 to 1:46 (about three quarters of a circle, looking down on the head) and 0:08 to 0:46
+  (about a half circle at a steady distance). The sample's span is the pull-back at the end. (Judged
+  from 30 frames 7.6 s apart; times are rough.) Details and the best candidate (the Schloss
+  Babelsberg Rundflug, CC BY-SA 4.0, a full circle round a castle in 172 s) are in
+  `docs/lab/VIDEO3D-LONGER.md`.
+- Training longer clips: not here (SwiftShader took 431 and 517 minutes for 14 and 10 s). Estimate
+  on the owner's M3 Pro in Chrome: about 10 to 25 minutes for 60 frames at High, 25 to 60 at
+  Highest. **Please ask him to run it** (steps in `docs/lab/VIDEO3D-LONGER.md`), on the Babelsberg
+  flight.
+
+**Speed:** no gap found in the clips' own speed; the control he meant was the Toy tab's Speed
+slider, now wired to the clip. If he still sees the bunny slow, it is the 8 frames a second of the
+sample.
+
+**Cannot be done from this sandbox:** none of it needs the owner's decision, but BY-SA candidates
+(Babelsberg, Grunewald, Zipser Burg) need his say per CLAUDE.md before they are made samples.

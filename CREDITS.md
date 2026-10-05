@@ -446,8 +446,11 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 
 The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
 each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
-and the solved camera path only; the videos are not shipped). Each license was checked on its live
-Commons page on September 30, 2026:
+and the solved camera path). Since October 5, 2026 (lane Studio media) each also ships that same
+stretch of its video at 480p, without sound (`liberty-source.mp4` and `.webm`,
+`edinburgh-source.mp4` and `.webm`, cut by `tools/smd-source.mjs` from Commons' own 480p transcode),
+for the toy's "Show the original" option, under the same CC BY 3.0 license and credit. Each license
+was checked on its live Commons page on September 30, 2026 (and again on October 5, 2026):
 
 - "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on

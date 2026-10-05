@@ -939,6 +939,30 @@ export const movingTransport = {
   },
 };
 
+// Studio media: "Show the original": the clip's own flat frames in a corner card (src/compare.js,
+// loaded only when it is switched on), the frame the 3D one shows.
+function showOriginal(clip) {
+  if (typeof document === "undefined") return;
+  const mod = MOVING.compare;
+  if (!MOVING.original) {
+    if (mod?.original) mod.original("moving-photo-3d").hide();
+    MOVING.cardClip = null;
+    return;
+  }
+  if (!mod) {
+    MOVING.compare = false;
+    import("../compare.js").then((m) => (MOVING.compare = m));
+    return;
+  }
+  if (!mod.original) return;
+  const card = mod.original("moving-photo-3d");
+  if (MOVING.cardClip !== clip || !card.state.kind) {
+    MOVING.cardClip = clip;
+    card.frames({ w: clip.w, h: clip.h, frame: (i) => clip.colors[i], label: `Original: ${clip.name}` }); // prettier-ignore
+  }
+  card.sync({ frame: MOVING.frame });
+}
+
 export const MOVING_PHOTO = {
   alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip,
   density: 1.25, // r6: a quarter more splats than most, for a finer picture (see the top)
@@ -953,6 +977,16 @@ export const MOVING_PHOTO = {
       choices: [
         ...SAMPLES.map((s) => ({ id: s.id, label: s.label })),
         { id: "custom", label: "Your clip (open one below)" },
+      ],
+    },
+    {
+      key: "original",
+      label: "Show the original",
+      type: "select",
+      default: "off",
+      choices: [
+        { id: "off", label: "Off" },
+        { id: "on", label: "On: the flat clip in a corner, in step" },
       ],
     },
     { key: "clipName", label: "Clip name", type: "text", default: "", hidden: true },
@@ -1059,8 +1093,10 @@ export const MOVING_PHOTO = {
       }
     }
     MOVING.frame = frameAt(clip, MOVING.t);
+    showOriginal(clip);
   },
   build(k, o) {
+    MOVING.original = o.original === "on";
     const clip = MOVING.want;
     if (MOVING.clip !== clip) {
       if (MOVING.clip?.audio) MOVING.clip.audio.track.pause();

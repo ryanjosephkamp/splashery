@@ -91,6 +91,31 @@ export const SAMPLES = [
   },
 ];
 
+// Studio media: "Show the original": the flat photo in a corner card (src/compare.js, loaded only when
+// it is switched on).
+function showOriginal() {
+  if (typeof document === "undefined") return;
+  const mod = P3D.compare;
+  if (!P3D.original) {
+    if (mod?.original) mod.original("photo-3d").hide();
+    P3D.cardKey = null;
+    return;
+  }
+  if (!mod) {
+    P3D.compare = false;
+    import("../compare.js").then((m) => (P3D.compare = m));
+    return;
+  }
+  if (!mod.original) return;
+  const card = mod.original("photo-3d");
+  const src = P3D.original;
+  if (P3D.cardKey !== src.uid || !card.state.kind) {
+    P3D.cardKey = src.uid;
+    card.image({ ...src.photo, label: `Original: ${src.name}` });
+  }
+  card.sync();
+}
+
 const P3D = {
   samples: new Map(), // sample id -> { photo, depth, uid, name }
   custom: null, // the photo somebody opened: { photo, depth, uid, name, ms }
@@ -254,6 +279,16 @@ const PHOTO_3D = {
       ],
     },
     { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
+    {
+      key: "original",
+      label: "Show the original",
+      type: "select",
+      default: "off",
+      choices: [
+        { id: "off", label: "Off" },
+        { id: "on", label: "On: the flat photo in a corner" },
+      ],
+    },
     { key: "photoName", label: "Photo name", type: "text", default: "", hidden: true },
   ],
   controls: [
@@ -301,6 +336,7 @@ const PHOTO_3D = {
   },
   screen: mirrorScreen, // lane Live input: the live view's colors and depth
   drive(t, c, out) {
+    showOriginal();
     if (liveOn() && MIRROR.cam) {
       // Lane Live input: the live view shows its depth at once; a tap flattens it.
       MIRROR.gain = Math.min(1, 1.6 * MIRROR.depth) * (c.flat ?? 1);
@@ -317,6 +353,7 @@ const PHOTO_3D = {
     for (let b = 0; b < LAYERS; b++) out.parts[`layer${b}`] = { offset: [0, 0, (b - (LAYERS - 1) / 2) * 0.22 * L] }; // prettier-ignore
   },
   build(k, o) {
+    P3D.original = null;
     if (liveOn()) {
       // Lane Live input: the camera's live view.
       MIRROR.depth = o.depth ?? 0.5;
@@ -331,6 +368,7 @@ const PHOTO_3D = {
     MIRROR.stillBack = null;
     const src = P3D.want;
     if (!src) throw new Error("There is no photo to show.");
+    P3D.original = o.original === "on" ? src : null;
     const budget = Math.max(100, Math.floor(k.count * 0.98));
     const key = `${src.uid}/${budget}/${o.depth}`;
     let s = P3D.cache.get(key);
