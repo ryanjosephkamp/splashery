@@ -1315,6 +1315,19 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.5, roll: 0, distance: 5 },
   },
 
+  // ---- Pack: tiny-r2 ----
+  // (lane Tiny world r2: entries for src/packs/tiny-r2.js go here; labs)
+  {
+    id: "dna-to-protein",
+    label: "DNA to protein",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "gene dna rna mrna transcription translation ribosome trna codon genetic code protein folding mutation sickle cell insulin hemoglobin gfp biology",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.3 },
+  },
+
   // ---- Pack: atoms ----
   // (entries for src/packs/atoms.js go here)
   {

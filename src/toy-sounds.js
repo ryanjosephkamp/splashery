@@ -2779,6 +2779,13 @@ export const TOY_SOUNDS = {
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
+  // ---- Tiny world r2 (lane Tiny world r2) ----
+  // The story's own cues (tRNAs docking, the stop codon, the fold) come from
+  // drive() in src/packs/tiny-r2.js; the tap starts it with a soft swell.
+  "dna-to-protein": [
+    { voice: "glass", f: 784, decay: 1.6, vol: 0.3, bright: 0.25 },
+    { voice: "glass", f: 1175, at: 0.18, decay: 1.4, vol: 0.2, bright: 0.25 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

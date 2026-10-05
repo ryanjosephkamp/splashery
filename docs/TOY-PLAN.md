@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 374 toys. 344 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 369.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -35,10 +35,10 @@ Proposals below are suggestions; the owner may change them.
   Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet,
   Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
   Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
-  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba,
-  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby,
-  Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy
-  atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
+  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to
+  protein, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond,
+  Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney,
+  Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
   Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
   Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
   Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
@@ -1079,7 +1079,7 @@ Proposals below are suggestions; the owner may change them.
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
 
-## Tiny (18)
+## Tiny (19)
 
 - **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
@@ -1205,6 +1205,17 @@ Proposals below are suggestions; the owner may change them.
     a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back.
   - Sound: Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle
     or ding (Sound C, October 2, 2026).
+- **DNA to protein** (`dna-to-protein`). Now: tap: Make the protein. Plan: keep.
+  - Owner: Push Plan pick S13 (October 5, 2026): “DNA to protein is awesome.”
+  - Effect: Transcription, then translation codon by codon, then the chain folds into its real
+    structure.
+  - Improved: Tiny world r2: RNA polymerase opens the helix (the coding strand lifts, the template's
+    bases turn to pair) and lays down the mRNA; the mRNA moves down, the small subunit and the first
+    tRNA scan to AUG, the large subunit joins, tRNAs dock codon by codon and the chain grows up the
+    exit tunnel into a globule; at the stop codon a release factor frees it and it folds into its
+    PDB structure (about 34 s, the camera following each step).
+  - Sound: A soft glass swell at the tap, a wooden knock as each tRNA docks, a bell at the stop
+    codon and a low glass note as the protein settles.
 
 ## Atoms (6)
 

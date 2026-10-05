@@ -2449,6 +2449,13 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "dna-to-protein": {
+      "v": "keep",
+      "owner": "Push Plan pick S13 (October 5, 2026): “DNA to protein is awesome.”",
+      "effect": "Transcription, then translation codon by codon, then the chain folds into its real structure.",
+      "sound": "A soft glass swell at the tap, a wooden knock as each tRNA docks, a bell at the stop codon and a low glass note as the protein settles.",
+      "improved": "Tiny world r2: RNA polymerase opens the helix (the coding strand lifts, the template's bases turn to pair) and lays down the mRNA; the mRNA moves down, the small subunit and the first tRNA scan to AUG, the large subunit joins, tRNAs dock codon by codon and the chain grows up the exit tunnel into a globule; at the stop codon a release factor frees it and it folds into its PDB structure (about 34 s, the camera following each step)."
     }
   }
 }

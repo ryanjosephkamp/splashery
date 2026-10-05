@@ -1981,6 +1981,12 @@ export const TOY_HELP = {
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
   },
+  // ---- Tiny world r2 (lane Tiny world r2) ----
+  "dna-to-protein": {
+    howTo: "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
+    about:
+      "A gene is a stretch of DNA that spells out a protein. Tap and RNA polymerase opens the double helix and reads the template strand, building messenger RNA that matches the coding strand (with U for T). A ribosome then reads the mRNA three bases (a codon) at a time from the start codon AUG; each tRNA whose anticodon pairs with the codon brings its amino acid, and the chain grows until a stop codon. The chain then folds into the protein's real shape from the Protein Data Bank.\n\nThe genes are real (NCBI); only the start and end are drawn base by base. Try a mutation: changing base 2 of codon 7 in hemoglobin beta to T is the sickle-cell change.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------
