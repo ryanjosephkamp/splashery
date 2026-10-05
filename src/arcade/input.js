@@ -55,7 +55,8 @@ export class Input {
     this.swipe = null;
     this.taps = 0; // taps on the play area since the last read
     this.active = false; // takes the keyboard (the game is in play or chosen)
-    this.lastDevice = "keys";
+    // A touch screen shows the pad from the start (until keys are used).
+    this.lastDevice = globalThis.matchMedia?.("(pointer: coarse)").matches ? "touch" : "keys";
     this.gpPrev = new Set();
     this.listeners = [];
     const on = (t, type, fn, opts) => {

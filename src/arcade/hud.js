@@ -47,6 +47,9 @@ const CSS = `
   color: #fff; font: 800 20px/1 ui-sans-serif, system-ui, sans-serif; touch-action: none; }
 .arc-key.arc-down { background: rgba(90, 130, 240, 0.75); }
 .arc-key.arc-fire { width: 66px; height: 66px; border-radius: 50%; font-size: 15px; }
+.arc-pad-many .arc-key { width: 46px; height: 46px; font-size: 17px; }
+.arc-pad-many .arc-key.arc-fire { width: 50px; height: 50px; font-size: 13px; }
+.arc-pad-many .arc-pad-dir { grid-template-columns: repeat(3, 46px); grid-template-rows: repeat(2, 46px); }
 .arc-choices { position: absolute; left: 8px; right: 8px; top: 92px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; pointer-events: auto; }
 .arc-root[data-playmode="true"] .arc-choices { top: 52px; }
 body.app .arc-root[data-playmode="false"] .arc-choices { top: 148px; }
@@ -207,6 +210,8 @@ export class Hud {
     const names = this.game.padLabels || {};
     for (const a of acts) right.appendChild(make(a, names[a] || (a === "fire" ? "●" : a), "arc-fire")); // prettier-ignore
     box.append(left, right);
+    // Many buttons (a 3D puzzle's turns and tips): smaller, so they fit a phone.
+    if (dirs.length + acts.length > 5) box.classList.add("arc-pad-many");
   }
 
   // A game's own choices (a material to paint with): a row of buttons.
