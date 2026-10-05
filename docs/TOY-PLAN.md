@@ -10,38 +10,38 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 376 toys. 346 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 382 toys. 352 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 374.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 8.
-- Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
+- Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
 
 - **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant,
-  Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
-  Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball,
-  Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car,
-  Tractor, Statue of Liberty, Your book, Photo album. Effects to make clearer or more dramatic,
-  still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon
-  knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry,
-  Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden
-  elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot
-  cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball,
-  Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
-  ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
-  Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
-  puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar system, Mercury, Venus,
-  Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet,
-  Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
-  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
-  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba,
-  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby,
-  Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy
-  atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
-  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
-  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
+  Real alarm clock, Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American
+  football, Tennis ball, Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball,
+  Medicine ball, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop,
+  Decorated tree, Diya, Sports car, Tractor, Statue of Liberty, Your book, Photo album. Effects to
+  make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie,
+  Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee,
+  Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real
+  rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage
+  camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real
+  pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball,
+  Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball,
+  Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy
+  ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar
+  system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora
+  world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula,
+  Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell,
+  DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion,
+  Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table,
+  Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth,
+  Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping
+  willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef,
+  Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan,
+  Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
   Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
   Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
   Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
@@ -60,7 +60,8 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -369,7 +370,10 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Plucked ukulele chord (synth, bright, nylon).
 - **Real alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
   - Owner: Hands should move. On tap it should jump up and down and ring like an alarm clock.
-  - Effect: Hands tick all the time; tap rattles it off the table while it rings.
+  - Fixed: Fix8: the hands show the real time. The scanned hands are cut out cleanly and kit-built
+    hour, minute and second hands of the same shapes turn from this device's clock.
+  - Effect: The hands show the real time and the second hand ticks; tap rattles it off the table
+    while it rings.
   - Improved: E1: the red second hand ticks all the time. A tap rings the twin bells and the clock
     rattles across the table (2.4 s).
   - Sound: A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).
@@ -2972,3 +2976,62 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+
+## Imaging (6)
+
+- **Airport X-ray scanner** (`airport-xray`). Now: tap: Send the next bag. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
+  - Effect: Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride
+    the belt through the scanner, pushing its lead curtains aside; the screen on top builds each
+    bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic
+    orange, inorganic green, metal blue, dense black). A tap sends the next bag.
+  - Improved: Imaging: new toy.
+  - Sound: The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is
+    done.
+- **How CT works** (`how-ct`). Now: tap: Scan or undo the scan. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
+  - Effect: A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector
+    arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane).
+    Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps
+    back.
+  - Improved: Imaging: new toy.
+  - Sound: The gantry's knock as it starts and its motor's low run, lower on the way back.
+- **Walnut CT scan** (`walnut-ct`). Now: tap: Shell only, or the whole walnut. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an
+    openly licensed dataset (lane Imaging; labs only).
+  - Effect: A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm
+    block (resampled to the device's budget). A drag moves a cutting plane through it (front to
+    back, top down or side to side) and shows the shell, the kernel's lobes and the air between
+    them. The tap raises the density window so the kernel melts away and only the shell stays; a
+    second tap brings it back.
+  - Improved: Imaging: new toy, with tools/img-walnut.mjs.
+  - Sound: A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.
+- **MRI of a fruit** (`fruit-mri`). Now: tap: Play through the slices. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).
+  - Effect: A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each
+    slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline
+    of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag
+    scrolls through them and the tap plays through all of them, front to back, and comes back.
+  - Improved: Imaging: new toy.
+  - Sound: An MRI scanner's knocking as it steps through the slices.
+- **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step (the third goes back
+  out). Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom
+    and a snowflake (lane Imaging; labs only).
+  - Effect: Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of
+    pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron
+    microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each
+    tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface);
+    the third goes back out.
+  - Improved: Imaging: new toy.
+  - Sound: The stage motor's two soft steps and a low vacuum hum.
+- **Thermal camera** (`thermal-camera`). Now: tap: Thermal camera on or off. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea
+    cooling and a hand warmer (lane Imaging; labs only).
+  - Effect: A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap
+    crossfades from normal colors to the thermal camera's false colors (the iron palette), and the
+    tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays
+    warm and the ice water cold. A second tap goes back to normal colors.
+  - Improved: Imaging: new toy.
+  - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
+    turns off.
