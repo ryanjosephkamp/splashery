@@ -306,3 +306,6 @@
 {"v":1,"t":"2026-10-05T03:00:01.990Z","harness":"claude-code","event":"turn-end","session":"f9db1577-08bc-5d78-8655-af74d4bccbcd","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T03:00:02.221Z","harness":"claude-code","event":"turn-start","session":"f9db1577-08bc-5d78-8655-af74d4bccbcd","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T03:00:03.588Z","harness":"claude-code","event":"tool","session":"f9db1577-08bc-5d78-8655-af74d4bccbcd","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T03:00:07.026Z","harness":"claude-code","event":"tool","session":"f9db1577-08bc-5d78-8655-af74d4bccbcd","tool":"mcp__github__pull_request_read","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T03:00:10.054Z","harness":"claude-code","event":"turn-end","session":"f9db1577-08bc-5d78-8655-af74d4bccbcd","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T03:00:12.111Z","harness":"claude-code","event":"tool","session":"f9db1577-08bc-5d78-8655-af74d4bccbcd","tool":"Bash","cwd":"splashery"}
