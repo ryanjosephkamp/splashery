@@ -67,6 +67,40 @@ class Dash {
         sm[y * cols + x] = a / n;
       }
     this.lum = sm;
+    // The relief's depth: the brightness smoothed much more (two passes of a
+    // box blur 7 pixels wide), so neighboring pixels come forward together
+    // and the relief stays one solid surface instead of splitting apart.
+    let dep = sm;
+    for (let pass = 0; pass < 2; pass++) {
+      const out = new Float32Array(cols * rows);
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++) {
+          let a = 0;
+          let n = 0;
+          for (let dy = -3; dy <= 3; dy++)
+            for (let dx = -3; dx <= 3; dx++) {
+              a += dep[clamp(y + dy, 0, rows - 1) * cols + clamp(x + dx, 0, cols - 1)];
+              n++;
+            }
+          out[y * cols + x] = a / n;
+        }
+      dep = out;
+    }
+    this.depth = dep;
+    // How far each pixel's depth differs from its neighbors' (relief units),
+    // for the splats' thickness: each one reaches back to meet them.
+    const step = new Float32Array(cols * rows);
+    for (let y = 0; y < rows; y++)
+      for (let x = 0; x < cols; x++) {
+        const d0 = dep[y * cols + x];
+        let m = 0;
+        if (x > 0) m = Math.max(m, Math.abs(d0 - dep[y * cols + x - 1]));
+        if (x < cols - 1) m = Math.max(m, Math.abs(d0 - dep[y * cols + x + 1]));
+        if (y > 0) m = Math.max(m, Math.abs(d0 - dep[(y - 1) * cols + x]));
+        if (y < rows - 1) m = Math.max(m, Math.abs(d0 - dep[(y + 1) * cols + x]));
+        step[y * cols + x] = m;
+      }
+    this.reach = step;
     // The track: down each column, the strongest change from light to dark
     // in the picture's upper three quarters, then smoothed along the row.
     const raw = new Float32Array(cols);
@@ -150,7 +184,7 @@ class Dash {
   reliefZ(x, y, view) {
     const u = clamp(Math.floor(((x + this.W / 2) / this.W) * this.cols), 0, this.cols - 1);
     const v = clamp(Math.floor(((H / 2 - y) / H) * this.rows), 0, this.rows - 1);
-    return this.lum[v * this.cols + u] * RELIEF * view;
+    return this.depth[v * this.cols + u] * RELIEF * view;
   }
 
   // Gaps: stretches of the track that are missing (and get wider each lap).
@@ -315,7 +349,12 @@ class Dash {
   // the layer writes them each frame).
   writeRelief(view) {
     const m = this.photo.model;
-    for (let i = 0; i < this.cols * this.rows; i++) m.pos[i * 3 + 2] = this.lum[i] * RELIEF * view;
+    const thin = (H / this.rows) * 0.2;
+    for (let i = 0; i < this.cols * this.rows; i++) {
+      m.pos[i * 3 + 2] = this.depth[i] * RELIEF * view;
+      m.scale[i * 3 + 2] = Math.max(thin, this.reach[i] * RELIEF * view * 0.6);
+    }
+    this.api.sprites.layer.writeLook(this.photo.start, m);
   }
 
   camera(view, aspect) {
