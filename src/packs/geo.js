@@ -9,9 +9,14 @@
 //   st-helens     the USGS pre-1980 DEM and 3DEP today; the tap plays May 18,
 //                 1980 (the summit falls away, the blast and the ash column),
 //                 a second tap goes back to 1979
+//   earthquakes   the USGS feed, live when the toy opens or its plaque is
+//                 tapped (a dated snapshot ships for when it can't be reached),
+//                 on a NOAA ETOPO1 relief globe; the tap plays the quakes in
+//                 time order
 
 import { mix, shade, clamp, smoothstep, vec } from "../kit.js";
-import { loadGeo, geoLoaded } from "../geo/data.js";
+import { loadGeo, geoLoaded, readText } from "../geo/data.js";
+import { inked } from "../font.js";
 import { frame, addBlock, hill } from "../geo/terrain.js";
 
 // Splats sort where they were built: a part that moves far (rising water)
@@ -332,7 +337,251 @@ const ST_HELENS = {
   },
 };
 
+// ---- Earthquakes ---------------------------------------------------------------------------
+
+const EQ_DIR = "assets/toys/earthquakes/";
+const EQ_T = 10;
+const EQ_FEEDS = {
+  week: {
+    label: "Past week, magnitude 2.5 and up",
+    url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson",
+    words: "PAST WEEK, M2.5 AND UP",
+  },
+  month: {
+    label: "Past month, magnitude 4.5 and up",
+    url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson",
+    words: "PAST MONTH, M4.5 AND UP",
+  },
+  year: { label: "A year, magnitude 5 and up (snapshot)", words: "OCT 2025 TO SEP 2026, M5 AND UP" },
+};
+const MONTHS = "JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC".split(" ");
+const MONTH_NAMES = "January February March April May June July August September October November December".split(" "); // prettier-ignore
+const EQ = { snapshot: null, shown: null, live: new Map() };
+
+// Rows of [time s, lon, lat, depth km, magnitude] from a GeoJSON feed.
+function quakeRows(gj) {
+  const out = [];
+  for (const f of gj.features || []) {
+    const p = f.properties || {};
+    const g = f.geometry?.coordinates || [];
+    const row = [Math.round(p.time / 1000), +g[0], +g[1], +g[2], +p.mag];
+    if (p.type === "earthquake" && row.every(Number.isFinite)) out.push(row);
+  }
+  return out.sort((a, b) => a[0] - b[0]);
+}
+
+// Tests and clips (a browser driven by a tool) use the snapshot, so they
+// never depend on the network; ?geofeed=live overrides that.
+function liveAllowed() {
+  if (typeof window === "undefined" || typeof fetch !== "function") return false;
+  const q = new URLSearchParams(window.location?.search || "");
+  if (q.get("geofeed") === "live") return true;
+  if (q.get("geofeed") === "snapshot") return false;
+  return !globalThis.navigator?.webdriver;
+}
+
+async function eqFetch(feed) {
+  const ctl = typeof AbortController === "function" ? new AbortController() : null;
+  const timer = setTimeout(() => ctl?.abort(), 9000);
+  try {
+    const r = await fetch(EQ_FEEDS[feed].url, { cache: "no-store", signal: ctl?.signal });
+    if (!r.ok) throw new Error(String(r.status));
+    const gj = await r.json();
+    return { events: quakeRows(gj), fetched: new Date(gj.metadata?.generated || Date.now()), live: true }; // prettier-ignore
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+const two = (n) => String(n).padStart(2, "0");
+const utcWords = (d) => `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()} ${d.getUTCFullYear()} AT ${two(d.getUTCHours())}${two(d.getUTCMinutes())} UTC`; // prettier-ignore
+const utcText = (d) => `${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}, ${two(d.getUTCHours())}:${two(d.getUTCMinutes())} UTC`; // prettier-ignore
+
+// Where a lon/lat (degrees) sits on the globe of radius r: the Pacific's
+// Ring of Fire (160 degrees west) faces +Z, the viewer.
+const EQ_FRONT = -160;
+function onGlobe(lon, lat, r) {
+  const a = ((lon - EQ_FRONT) * Math.PI) / 180;
+  const b = (lat * Math.PI) / 180;
+  return [r * Math.cos(b) * Math.sin(a), r * Math.sin(b), r * Math.cos(b) * Math.cos(a)];
+}
+
+// USGS map colors by depth: shallow orange-red, intermediate yellow, deep blue.
+function depthColor(d) {
+  if (d < 33) return mix("#ff5a1f", "#ff8a2a", d / 33);
+  if (d < 70) return mix("#ff8a2a", "#ffd23a", (d - 33) / 37);
+  if (d < 300) return mix("#ffd23a", "#4fd17a", (d - 70) / 230);
+  return mix("#4fd17a", "#3d7dff", clamp((d - 300) / 300, 0, 1));
+}
+
+function reliefColor(h, n, c) {
+  let col;
+  if (h < 0) col = mix("#0d2a57", "#3d7fb8", smoothstep(-6500, -150, h));
+  else if (h < 2500) col = mix(mix("#5c8a43", "#9a9156", smoothstep(0, 900, h)), "#8d7660", smoothstep(900, 2500, h)); // prettier-ignore
+  else col = mix("#8d7660", "#e9ecef", smoothstep(2500, 5000, h));
+  const d = vec.dot(n, vec.unit([-0.4, 0.5, 0.75]));
+  return shade(col, 0.72 + 0.32 * Math.max(0, d) + 0.03 * c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30)); // prettier-ignore
+}
+
+const EARTHQUAKES = {
+  alive: true,
+  turntable: false,
+  options: [
+    {
+      key: "feed",
+      label: "Earthquakes",
+      type: "select",
+      default: "week",
+      choices: Object.entries(EQ_FEEDS).map(([id, f]) => ({ id, label: f.label })),
+    },
+    { key: "refresh", label: "Refresh", type: "text", default: "0", hidden: true },
+  ],
+  controls: [{ key: "play", label: "Play the quakes", type: "pulse", ease: EQ_T }],
+  action: {
+    key: "play",
+    label: "Play the quakes in time order",
+    // A tap on the plaque fetches the feed again.
+    at(point) {
+      if (point[1] > -1.2 || EQ.shown?.feed === "year") return null;
+      return { options: { refresh: String((Number(EQ.shown?.refresh) || 0) + 1) }, key: "play" };
+    },
+  },
+  get credits() {
+    const s = EQ.shown;
+    const out = [
+      {
+        label: "Earthquakes",
+        title: s
+          ? `${s.live ? "USGS earthquake feed, read live" : "USGS earthquake data, snapshot"} (${EQ_FEEDS[s.feed].label.toLowerCase()}; ${s.events.length} quakes; ${s.live ? "fetched" : "as of"} ${utcText(s.fetched)})` // prettier-ignore
+          : "USGS earthquake feeds",
+        source: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php",
+        author: "U.S. Geological Survey" + (s?.live ? " and its contributing networks" : ""),
+        ...PD,
+      },
+      {
+        label: "Relief",
+        title: "ETOPO1 Global Relief Model",
+        source: "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+        author: "NOAA National Centers for Environmental Information",
+        license: "Public domain",
+        licenseUrl: "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+      },
+    ];
+    return out;
+  },
+  async prepare(o) {
+    await loadGeo(EQ_DIR + "globe.bin");
+    if (!EQ.snapshot) EQ.snapshot = JSON.parse(await readText(EQ_DIR + "snapshot.json"));
+    const feed = EQ_FEEDS[o.feed] ? o.feed : "week";
+    const snap = EQ.snapshot.feeds[feed];
+    let got = null;
+    if (feed !== "year" && liveAllowed()) {
+      const key = `${feed}|${o.refresh}`;
+      if (!EQ.live.has(key)) EQ.live.set(key, eqFetch(feed).catch(() => null));
+      got = await EQ.live.get(key);
+    }
+    if (!got) got = { events: snap.events, fetched: new Date(snap.fetched), live: false };
+    EQ.shown = { ...got, feed, refresh: o.refresh };
+  },
+  drive(t, c, out, info) {
+    const s = c.play > 0 ? (1 - c.play) * EQ_T : 0;
+    // The timeline: 0.6 s in, the quakes flash one by one over 8 s.
+    const tl = c.play > 0 ? clamp((s - 0.6) / 8, 0, 1.08) : 0;
+    out.morph = [tl, 0, 0, 0];
+    out.glow = [1, 0.97, 0.85, 2.2];
+    out.parts.globe = { angle: t * 0.08 };
+  },
+  build(k, o) {
+    const G = geoLoaded(EQ_DIR + "globe.bin").layer("height");
+    const S = EQ.shown;
+    const globe = k.part("globe", { pivot: [0, 0, 0], axis: [0, 1, 0] });
+    const R = 1;
+    const bump = 0.035 / 8000;
+    const hAt = (lon, lat) => G.sample((lon + 180) / 360, (90 - lat) / 180);
+    const surf = (u, v) => {
+      const lon = -180 + 360 * u;
+      const lat = 90 - 180 * v;
+      return onGlobe(lon, lat, R + Math.max(0, hAt(lon, lat)) * bump);
+    };
+    k.add(k.param(surf, { grid: 160 }), {
+      part: globe,
+      even: true,
+      share: 0.8,
+      flat: 0.25,
+      jitter: 0.01,
+      color: (c) => {
+        const lon = -180 + 360 * c.u;
+        const lat = 90 - 180 * c.v;
+        return reliefColor(hAt(lon, lat), vec.unit(c.p), c);
+      },
+    });
+    // The quakes: a dot each (bigger for a stronger quake, colored by
+    // depth), flashing as the timeline passes its time.
+    const ev = S.events;
+    const t0 = ev.length ? ev[0][0] : 0;
+    const t1 = ev.length ? ev[ev.length - 1][0] : 1;
+    k.cloud({ share: 0.12, size: 1 }, (rand, i, n) => {
+      const e = ev[Math.floor((i / n) * ev.length)] || [0, 0, 0, 10, 3];
+      const m = e[4];
+      const rr = 0.009 + 0.006 * Math.max(0, m - 2) ** 1.4;
+      const a = rand() * Math.PI * 2;
+      const q = Math.sqrt(rand()) * rr;
+      const p0 = onGlobe(e[1], e[2], R + Math.max(0, hAt(e[1], e[2])) * bump + 0.006);
+      const nrm = vec.unit(p0);
+      const t1v = vec.unit(vec.cross(nrm, [0, 1, 0.001]));
+      const t2v = vec.cross(nrm, t1v);
+      const p = vec.add(p0, vec.add(vec.mul(t1v, Math.cos(a) * q), vec.mul(t2v, Math.sin(a) * q)));
+      return {
+        p,
+        n: nrm,
+        color: depthColor(e[3]),
+        size: 0.9,
+        opacity: 1,
+        part: globe,
+        kind: "band",
+        channel: 0,
+        params: [(e[0] - t0) / Math.max(1, t1 - t0), 0.045],
+        pattern: false,
+      };
+    });
+    k.data = { quakes: { live: S.live, count: ev.length, fetched: S.fetched.toISOString(), feed: S.feed } }; // prettier-ignore
+    // The plaque: the source and the time of the data, with a timeline bar.
+    const feedWords = EQ_FEEDS[S.feed].words;
+    const lines =
+      S.feed === "year"
+        ? ["USGS EARTHQUAKE CATALOG", feedWords, `${ev.length} QUAKES, SAVED ${utcWords(S.fetched).split(" AT")[0]}`] // prettier-ignore
+        : [S.live ? "USGS LIVE FEED" : "USGS FEED SNAPSHOT", feedWords, `${S.live ? "FETCHED" : "AS OF"} ${utcWords(S.fetched)}`, `${ev.length} QUAKES. TAP HERE TO REFRESH`]; // prettier-ignore
+    const PW = 2.5;
+    const cols = Math.max(...lines.map((l) => l.length)) * 6;
+    const fx = Math.min(0.016, (PW - 0.16) / cols);
+    const PH = 0.1 + (lines.length * 10 - 3) * fx;
+    const py = -1.25 - PH / 2;
+    k.add(k.param((u, v) => [(u - 0.5) * PW, py + (0.5 - v) * PH, 0.4], { grid: 24 }), {
+      even: true,
+      share: 0.06,
+      flat: 0.1,
+      color: (c) => {
+        const s0 = (c.p[0] + PW / 2 - 0.1) / fx;
+        const t0p = (py + PH / 2 - 0.05 - c.p[1]) / fx;
+        const ink = inked(lines, s0, t0p);
+        return ink ? { c: [0.95, 0.93, 0.86], keep: true, size: 0.7 } : { c: [0.12, 0.13, 0.15], keep: true }; // prettier-ignore
+      },
+    });
+    k.add(k.param((u, v) => [(u - 0.5) * PW, py - PH / 2 - 0.05 + (0.5 - v) * 0.03, 0.4], { grid: 24 }), {
+      even: true,
+      share: 0.01,
+      flat: 0.1,
+      color: "#3b3f45",
+      kind: "band",
+      channel: 0,
+      params: (c) => [c.u, 0.02],
+      pattern: false,
+    });
+  },
+};
+
 export const RECIPES = {
   "grand-canyon": GRAND_CANYON,
   "st-helens": ST_HELENS,
+  earthquakes: EARTHQUAKES,
 };

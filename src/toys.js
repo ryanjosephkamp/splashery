@@ -3537,6 +3537,16 @@ export const TOYS = [
     tags: "mount st helens volcano eruption 1980 washington landslide ash terrain elevation usgs before after earth geography",
     camera: { yaw: 2.85, pitch: 0.45, roll: 0, distance: 3.3 },
   },
+  {
+    id: "earthquakes",
+    label: "Earthquakes",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "earthquakes quakes usgs live feed globe ring of fire seismology magnitude depth plates timeline earth geography",
+    camera: { yaw: 0, pitch: 0.05, roll: 0, distance: 3.8 },
+  },
   // ---- Pack: screens ----
   {
     id: "screen",
