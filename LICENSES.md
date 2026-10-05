@@ -212,6 +212,11 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   lab (`tools/qr-scan-lab.mjs`, `tests/qrl.spec.mjs`). `qrcode-generator` 2.0.4 (MIT),
   https://github.com/kazuhikoarase/qrcode-generator: draws its reference codes. Nothing of them is
   served.
+- `zxing-wasm` 3.1.4 (MIT), https://github.com/Sec-ant/zxing-wasm, zxing-cpp (Apache-2.0) compiled
+  to WebAssembly: the third QR reader and a Micro QR and rMQR writer in the study of splat QR codes
+  (`tools/qrs-study.mjs`, `tests/qrs-study.spec.mjs`, lane QR lab r2). Nothing of it is served.
+- `bwip-js` 4.11.4 (MIT), https://github.com/metafloor/bwip-js, with BWIPP (MIT): an independent
+  Micro QR and rMQR writer in the same study. Nothing of it is served.
 - `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
   the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
   Chromium at build time. Nothing of three.js is served.
