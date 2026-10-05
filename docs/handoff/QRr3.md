@@ -118,4 +118,5 @@ is yours to run, not to change; if it needs a change, say so in "State".
 
 ## State
 
-WORKING: not started yet (October 3, 2026).
+WORKING: started in the cloud on October 5, 2026 (Opus 5.5). Reading the toy and the scan lab;
+item 1 (sharper modules) next. Draft PR open early.
