@@ -297,8 +297,10 @@ class Grains {
               if (R() < 0.2) this.api.sound({ voice: "sizzle", vol: 0.12, decay: 0.4 });
               continue;
             }
-            // Flicker upward (a flame on something that burns stays on it).
-            const onFuel = y > 0 && BURNS[mat[i - GX]] > 0;
+            // Flicker upward (a flame on something that burns stays on it,
+            // and burning oil burns where it lies for a moment first, so a
+            // pool of it burns right across, as a real one does).
+            const onFuel = (y > 0 && BURNS[mat[i - GX]] > 0) || life > 60;
             if (y < GY - 1 && !onFuel && R() < 0.5) {
               const u = i + GX;
               const dx = ((R() * 3) | 0) - 1;
