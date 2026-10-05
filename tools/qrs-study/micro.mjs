@@ -103,7 +103,7 @@ export async function runMicro(out, { trials = 5 } = {}) {
             img = pixels(m, q);
             wide = m.w + 2 * q;
           } else ({ img, wide } = splatted(m, q, trial));
-          if (trial === 0) fs.writeFileSync(path.join(dir, `${c.id}-${writer}-${how}.png`), toPNG(img.width > 320 ? resize(img, 320) : img)); // prettier-ignore
+          if (trial === 0) fs.writeFileSync(path.join(dir, `${c.id}-${writer}-${how}.png`), toPNG(img.width > 320 ? resize(img, 320) : img, { step: 8 })); // prettier-ignore
           // Plain pixels: every capture of the scan lab, once. Splats: the
           // study's three captures, each trial.
           if (how === "pixels" && trial > 0) continue;

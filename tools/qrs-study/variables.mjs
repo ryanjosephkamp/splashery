@@ -28,6 +28,11 @@ const solidEyes = (opts) => (splats, steps) => {
   const eye = (s) => s.mod >= 0 && steps.role[s.mod] === ROLE.finder;
   return splats.filter((s) => !eye(s)).concat(plain.filter(eye));
 };
+// The sheet set 0.8 modules back (behind anything the motion moves).
+const setBack = (splats) => {
+  for (const s of splats) if (s.mod === -1) s.p = [s.p[0], s.p[1], s.p[2] - 0.8];
+  return splats;
+};
 // The dark layer lifted off the sheet by `lift` modules (codeSplats puts it
 // 0.03 in front).
 const lifted = (lift) => (splats) => {
@@ -115,6 +120,17 @@ export function variables() {
     values: range(0, 0.6, 0.1),
     spec: (v) => ({ opts: { shape: "rounded", gap: v } }),
   });
+  // At 3 splats per module edge a dot and a rounded square keep the very
+  // same splats (every lattice point lies inside both), so the shapes are
+  // also swept at 6 per edge, where they differ.
+  for (const shape of ["dot", "rounded"])
+    add({
+      id: `${shape === "dot" ? "dots" : "rounded"}6`,
+      label: `${shape === "dot" ? "Dot" : "Rounded"} modules, 6 splats per edge`,
+      axis: "gap (share of the module's edge)",
+      values: range(0, 0.6, 0.1),
+      spec: (v) => ({ opts: { shape, gap: v, per: 6 } }),
+    });
   add({
     id: "dots-eyes",
     label: "Dot modules, finders kept solid",
@@ -133,6 +149,20 @@ export function variables() {
         opts: { fg: a.fg },
         recolor: (s, steps) => aliveColor(s.color, a.wave, s.mod % steps.size, Math.floor(s.mod / steps.size), steps.size, ph), // prettier-ignore
       }),
+    });
+  // The motion moves modules out of the plane by up to ±0.6 × amount, so in
+  // the trough of the wave they pass behind the sheet (0.03 behind them) and
+  // vanish. The "-clear" sweeps push the sheet 0.8 modules back, so they
+  // measure the motion itself.
+  for (const amt of [0.5, 1])
+    add({
+      id: `time${amt * 100}-clear`,
+      group: "motion",
+      label: `Motion frames, sheet set back (moves up to ${(amt * 0.6).toFixed(1)} modules)`,
+      axis: "moment in the motion (one loop)",
+      frontOn: false,
+      values: range(0, 11 / 12, 1 / 12).map(r2),
+      spec: (t) => ({ damages: [{ kind: "time", amount: amt, t, region: "all" }], transform: setBack }), // prettier-ignore
     });
   for (const amt of [0.5, 1])
     add({
@@ -210,6 +240,17 @@ export function variables() {
         values: range(0, 1, 0.1),
         spec: (a) => ({ damages: [{ kind: k.id, amount: a, region, t: 0.3 }] }),
       });
+  list.push({
+    id: "dmg-time-clear",
+    group: "damage",
+    kind: "time-clear",
+    region: "all",
+    frontOn: false,
+    label: "Move in time, sheet set back",
+    axis: "amount of damage (0 to 1)",
+    values: range(0, 1, 0.1),
+    spec: (a) => ({ damages: [{ kind: "time", amount: a, region: "all", t: 0.3 }], transform: setBack }), // prettier-ignore
+  });
   return list.map((v) => ({ x: (val) => val, ...v }));
 }
 

@@ -195,7 +195,7 @@ export async function runShapes(out, { trials = 5, levels = ["M", "H"], text = "
       for (let trial = 0; trial < trials; trial++) {
         const spec = sh.spec();
         const { img, wide } = screenShot(steps, spec, trial);
-        if (trial === 0 && level === "M") fs.writeFileSync(path.join(dir, `${sh.id}.png`), toPNG(resize(img, Math.min(img.width, 280)))); // prettier-ignore
+        if (trial === 0 && level === "M") fs.writeFileSync(path.join(dir, `${sh.id}.png`), toPNG(resize(img, Math.min(img.width, 280)), { step: 8 })); // prettier-ignore
         for (const c of CONDITIONS) {
           const photo = applyCondition(img, wide, c, 7 + trial * 101 + c.id.length);
           const got = await readAll(photo);

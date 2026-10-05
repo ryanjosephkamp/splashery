@@ -28,7 +28,7 @@
 //   --list                  list the variables and exit
 //
 // Writes, in DIR: sweeps.csv.gz (one row per capture), summary.json,
-// cells.csv (scan rate with Wilson 95% intervals per cell), thresholds.csv,
+// cells.csv.gz (scan rate with Wilson 95% intervals per cell), thresholds.csv,
 // blocks.csv (how well the block verdict predicts the readers), charts/*.svg,
 // and for the other parts shapes.csv, shapes/*.png, micro.csv, micro/*.png,
 // rgb.csv, rgb/*.png, engine.csv.
@@ -135,7 +135,7 @@ const meta = {
 if (opt("summarize")) {
   const rows = readRows(path.join(out, "sweeps.csv.gz"));
   const prev = fs.existsSync(path.join(out, "summary.json")) ? JSON.parse(fs.readFileSync(path.join(out, "summary.json"))).meta : {}; // prettier-ignore
-  summarize(rows, VARS, out, { ...meta, ...prev });
+  await summarize(rows, VARS, out, { ...meta, ...prev });
   console.log(`summarized ${rows.length} rows in ${out}`);
   process.exit(0);
 }
@@ -172,7 +172,7 @@ if (vars.length) {
   const prev = fs.existsSync(path.join(out, "summary.json")) ? JSON.parse(fs.readFileSync(path.join(out, "summary.json"))).meta : {}; // prettier-ignore
   const runs = { ...(prev.runs || {}) };
   runs[only.join("+")] = { seconds: Math.round(secs), captures: rows.length, codes: jobs.length, at: new Date().toISOString() }; // prettier-ignore
-  summarize(all, VARS, out, { ...meta, runs, captures: all.length });
+  await summarize(all, VARS, out, { ...meta, runs, captures: all.length });
   console.log(`sweeps: ${rows.length} captures in ${secs.toFixed(0)} s (${((secs * 1000 * jobsN) / rows.length).toFixed(0)} ms per capture per worker)`); // prettier-ignore
 }
 

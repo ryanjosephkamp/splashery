@@ -137,13 +137,18 @@ function warpTurn(x, damages, width) {
 }
 
 // One moment of the wave that moves the modules ("time"): each module moves
-// as a solid piece, out of the plane and sideways.
+// as a solid piece, sideways and toward the viewer (never back into the
+// sheet behind it, which would hide it: the study's finding of October 5).
 export function timeOffset(mod, size, amount, t) {
   const r = Math.floor(mod / size);
   const c = mod % size;
   const ph = 2 * Math.PI * (t - ((r + c) / (2 * size)) * 2);
   const A = amount * 0.6;
-  return [A * 0.6 * Math.sin(ph), A * 0.6 * Math.cos(ph * 0.7 + 1), A * Math.sin(ph + 0.8)];
+  return [
+    A * 0.6 * Math.sin(ph),
+    A * 0.6 * Math.cos(ph * 0.7 + 1),
+    A * 0.5 * (1 + Math.sin(ph + 0.8)),
+  ];
 }
 
 const quatY = (th) => [0, Math.sin(th / 2), 0, Math.cos(th / 2)];

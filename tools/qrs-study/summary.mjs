@@ -4,7 +4,8 @@
 // block verdict predicts the readers, and the charts.
 import fs from "node:fs";
 import path from "node:path";
-import { wilson, crossing, toCSV } from "./core.mjs";
+import zlib from "node:zlib";
+import { wilson, crossing, toCSV, writePretty } from "./core.mjs";
 import { READERS, READER_NAMES } from "./readers.mjs";
 import { lineChart } from "./charts.mjs";
 
@@ -24,7 +25,7 @@ function group(rows, keyOf) {
   return m;
 }
 
-export function summarize(rows, VARS, out, meta) {
+export async function summarize(rows, VARS, out, meta) {
   const byVar = group(rows, (r) => r.variable);
   const cells = [];
   const thresholds = [];
@@ -74,12 +75,12 @@ export function summarize(rows, VARS, out, meta) {
     const gv = new Map(VARS.map((v) => [v.id, v.group]));
     for (const g of ["splat", "motion", "damage"]) confusion(rs.filter((r) => gv.get(r.variable) === g), g, cond); // prettier-ignore
   }
-  fs.writeFileSync(path.join(out, "cells.csv"), toCSV(cells, ["variable", "value", "x", "level", "cond", "reader", "n", "k", "rate", "lo", "hi"])); // prettier-ignore
+  fs.writeFileSync(path.join(out, "cells.csv.gz"), zlib.gzipSync(toCSV(cells, ["variable", "value", "x", "level", "cond", "reader", "n", "k", "rate", "lo", "hi"]))); // prettier-ignore
   fs.writeFileSync(path.join(out, "thresholds.csv"), toCSV(thresholds, ["variable", "group", "level", "text", "cond", "reader", "x90", "at90", "x50", "at50", "first", "last", "min"])); // prettier-ignore
   fs.writeFileSync(path.join(out, "blocks.csv"), toCSV(blocks, ["group", "cond", "reader", "n", "tp", "fp", "fn", "tn", "agree", "readWhenBlocksOk", "readWhenBlocksFail"])); // prettier-ignore
   const captures = rows.length;
   const prev = fs.existsSync(path.join(out, "summary.json")) ? JSON.parse(fs.readFileSync(path.join(out, "summary.json"))) : {}; // prettier-ignore
-  fs.writeFileSync(path.join(out, "summary.json"), JSON.stringify({ ...prev, meta: { ...meta, captures }, blocks }, null, 1) + "\n"); // prettier-ignore
+  await writePretty(path.join(out, "summary.json"), JSON.stringify({ ...prev, meta: { ...meta, captures }, blocks }, null, 1) + "\n"); // prettier-ignore
   charts(cells, VARS, out);
 }
 
@@ -97,13 +98,15 @@ function charts(cells, VARS, out) {
     if (!cells.some((c) => c.variable === v.id)) continue;
     const panels = READERS.map((r) => ({ title: READER_NAMES[r], series: series(v.id, "phone", r) })); // prettier-ignore
     if (!panels[0].series.length) continue;
-    fs.writeFileSync(path.join(dir, `${v.id}.svg`), lineChart(panels, { title: v.label, subtitle: "Share of “phone” captures read exactly, by reader", xLabel: v.axis })); // prettier-ignore
+    const n = cells.find((c) => c.variable === v.id && c.cond === "phone")?.n;
+    fs.writeFileSync(path.join(dir, `${v.id}.svg`), lineChart(panels, { title: v.label, subtitle: `Share of “phone” captures read exactly; three texts pooled, ${n} per point`, xLabel: v.axis })); // prettier-ignore
   }
   const kinds = [...new Set(VARS.filter((v) => v.group === "damage").map((v) => v.kind))];
   for (const kind of kinds) {
     const vs = VARS.filter((v) => v.kind === kind && cells.some((c) => c.variable === v.id));
     if (!vs.length) continue;
     const panels = vs.map((v) => ({ title: `Region: ${v.region}`, series: series(v.id, "phone", "zxingcpp") })); // prettier-ignore
-    fs.writeFileSync(path.join(dir, `dmg-${kind}.svg`), lineChart(panels, { title: `Damage: ${kind}`, subtitle: "Share of “phone” captures zxing-cpp read exactly", xLabel: vs[0].axis })); // prettier-ignore
+    const n = cells.find((c) => c.variable === vs[0].id && c.cond === "phone")?.n;
+    fs.writeFileSync(path.join(dir, `dmg-${kind}.svg`), lineChart(panels, { title: `Damage: ${vs[0].label.split(",")[0]}`, subtitle: `Share of “phone” captures zxing-cpp read exactly; the link, ${n} per point`, xLabel: vs[0].axis })); // prettier-ignore
   }
 }

@@ -302,7 +302,7 @@ void modifySplatCenter(inout vec3 center) {
     float A = uSpTokens[0].w * 0.6;
     if (A > 0.0 && (kind < 1.5 || kind > 4.5)) {
       float ph = 6.2831853 * (uSpTokens[1].x - (rc.x + rc.y) / QN);
-      u += vec3(A * 0.6 * sin(ph), A * 0.6 * cos(ph * 0.7 + 1.0), A * sin(ph + 0.8));
+      u += vec3(A * 0.6 * sin(ph), A * 0.6 * cos(ph * 0.7 + 1.0), A * 0.5 * (1.0 + sin(ph + 0.8)));
     }
     // Healing: the modules a block sets right turn over once its turn comes.
     if (kind > 4.5 && kind < 5.5) {
@@ -388,7 +388,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
     let A = uniform.uSpTokens[0].w * 0.6;
     if (A > 0.0 && (kind < 1.5 || kind > 4.5)) {
       let ph = 6.2831853 * (uniform.uSpTokens[1].x - (rc.x + rc.y) / QN);
-      u += vec3f(A * 0.6 * sin(ph), A * 0.6 * cos(ph * 0.7 + 1.0), A * sin(ph + 0.8));
+      u += vec3f(A * 0.6 * sin(ph), A * 0.6 * cos(ph * 0.7 + 1.0), A * 0.5 * (1.0 + sin(ph + 0.8)));
     }
     if (kind > 4.5 && kind < 5.5) {
       let th = 3.1415927 * qlInOut(uniform.uSpMorph.y - extra);

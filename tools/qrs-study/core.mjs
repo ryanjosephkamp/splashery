@@ -7,6 +7,7 @@
 // readers (readers.mjs). For a code seen straight on, it also reads the
 // modules where it knows they are and asks src/qr-lab/read.js whether every
 // block's error correction can fix what was lost.
+import fs from "node:fs";
 import { encodeSteps } from "../../src/qr-lab/steps.js";
 import { codeSplats, moduleCenter, QUIET } from "../../src/qr-lab/splats.js";
 import { applyDamage, rng } from "../../src/qr-lab/damage.js";
@@ -225,6 +226,14 @@ export function crossing(points, level) {
     }
   }
   return { x: null, kind: "never" };
+}
+
+// Writes a JSON or HTML file formatted as the repository's Prettier does, so
+// `npx prettier --check .` stays clean after a run.
+export async function writePretty(file, text) {
+  const prettier = await import("prettier");
+  const options = (await prettier.resolveConfig(file)) || {};
+  fs.writeFileSync(file, await prettier.format(text, { ...options, filepath: file }));
 }
 
 export const toCSV = (rows, cols) =>

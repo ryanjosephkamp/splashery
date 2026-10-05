@@ -230,10 +230,12 @@ export function screenCamera(
 
 // PNG helpers.
 import { PNG } from "pngjs";
-export function toPNG(img) {
+// step: round each channel to multiples of it (8 keeps 32 levels: the same
+// to the eye, and a much smaller file).
+export function toPNG(img, { step = 1 } = {}) {
   const png = new PNG({ width: img.width, height: img.height });
-  png.data = Buffer.from(img.data);
-  return PNG.sync.write(png);
+  png.data = step > 1 ? Buffer.from(Uint8ClampedArray.from(img.data, (v) => Math.round(v / step) * step)) : Buffer.from(img.data); // prettier-ignore
+  return PNG.sync.write(png, { colorType: 2, deflateLevel: 9 }); // RGB, no alpha
 }
 export function fromPNG(buf) {
   const png = PNG.sync.read(buf);

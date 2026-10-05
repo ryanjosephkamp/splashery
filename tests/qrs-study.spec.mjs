@@ -76,7 +76,13 @@ test("the study runs on a tiny grid", () => {
   // A finder torn off: no reader reads it.
   for (const r of pick("dmg-tear-finder", 1)) expect([r.jsqr, r.zxing, r.zxingcpp]).toEqual(["0", "0", "0"]); // prettier-ignore
   // The summary files.
-  for (const f of ["cells.csv", "thresholds.csv", "blocks.csv", "summary.json", "charts/gap.svg"])
+  for (const f of [
+    "cells.csv.gz",
+    "thresholds.csv",
+    "blocks.csv",
+    "summary.json",
+    "charts/gap.svg",
+  ])
     expect(fs.existsSync(path.join(out, f))).toBe(true);
   const svg = fs.readFileSync(path.join(out, "charts/gap.svg"), "utf8");
   expect(svg).toContain("Level M");

@@ -13,20 +13,22 @@
 //   node tools/qrs-sheet.mjs [--data=DIR] [--out=DIR] [--no-png]
 //
 // DIR defaults to docs/research/qr-splat-study-2026-10 (it needs the full
-// run's cells.csv, shapes.csv, micro.csv and rgb.csv there). Writes
+// run's cells.csv.gz, shapes.csv, micro.csv and rgb.csv there). Writes
 // phone-sheet.html (self-contained, images inline), phone-sheet.png (a
 // screenshot of it in Chromium; needs SPLASHERY_CHROMIUM or Playwright's
 // own browser) and phone-sheet.json (the ids and predictions).
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 import { variables } from "./qrs-study/variables.mjs";
-import { screenShot, stepsFor, TEXTS } from "./qrs-study/core.mjs";
+import { screenShot, stepsFor, TEXTS, writePretty } from "./qrs-study/core.mjs";
 import { SHAPES } from "./qrs-study/shapes.mjs";
 import { SETS } from "./qrs-study/rgb.mjs";
 import { encodeRGB } from "../src/qr-lab/rgb.js";
 import { toPNG, render, screenCamera } from "./qrs-study/raster.mjs";
 import { codeSplats } from "../src/qr-lab/splats.js";
 import bwipjs from "bwip-js";
+import { resize } from "./qr-scan-lab/sim.mjs";
 
 const args = process.argv.slice(2);
 const opt = (n, d) => args.find((a) => a.startsWith(`--${n}=`))?.split("=")[1] ?? (args.includes(`--${n}`) ? true : d); // prettier-ignore
@@ -36,7 +38,8 @@ const out = path.resolve(opt("out", data));
 
 function csv(file) {
   if (!fs.existsSync(file)) return [];
-  const lines = fs.readFileSync(file, "utf8").trim().split("\n");
+  const raw = fs.readFileSync(file);
+  const lines = (file.endsWith(".gz") ? zlib.gunzipSync(raw) : raw).toString("utf8").trim().split("\n"); // prettier-ignore
   const split = (l) => {
     const o = [];
     let cur = "";
@@ -54,10 +57,16 @@ function csv(file) {
   const head = split(lines.shift());
   return lines.map((l) => Object.fromEntries(split(l).map((v, i) => [head[i], v])));
 }
-const cells = csv(path.join(data, "cells.csv"));
+const cells = csv(path.join(data, "cells.csv.gz"));
 const VARS = variables();
 const pct = (x) => `${Math.round(Number(x) * 100)}%`;
-const dataURL = (img) => `data:image/png;base64,${toPNG(img).toString("base64")}`;
+// Pictures at 300 px, each channel rounded to 32 levels (the same to the
+// eye and to a camera, and the PNG is a fraction of the size).
+const dataURL = (img) => {
+  const im = img.width > 300 ? resize(img, 300) : img;
+  const q = { ...im, data: Uint8ClampedArray.from(im.data, (v) => Math.round(v / 8) * 8) };
+  return `data:image/png;base64,${toPNG(q).toString("base64")}`;
+};
 
 // The variables on the sheet (each gives two codes).
 const PICK = ["soft", "sparse", "per", "gap", "opacity", "contrast", "gradient", "dots", "yaw", "dmg-scratch-all", "dmg-sticker-center", "dmg-tear-corner", "dmg-smudge-center", "dmg-jitter-all", "dmg-fade-all", "dmg-color-all", "dmg-curve-all"]; // prettier-ignore
@@ -98,7 +107,7 @@ for (const vid of PICK) {
       id: nextId("S"),
       what: `${v.label}: ${v.axis} = ${v.x(p.value)} (${side})`,
       predict: rate >= 0.9 ? "should scan" : rate <= 0.5 ? "should not scan" : "may scan",
-      detail: `phone-like captures, level M: ${predictLine(vid, p.value)}`,
+      detail: `phone-like captures, level M, three texts pooled: ${predictLine(vid, p.value)}`,
       img: dataURL(img),
       text: TEXTS.url,
     });
@@ -207,8 +216,8 @@ ${cards.map((c) => `<div class="card"><img src="${c.img}" alt="Code ${c.id}"><di
 </html>
 `;
 fs.mkdirSync(out, { recursive: true });
-fs.writeFileSync(path.join(out, "phone-sheet.html"), html);
-fs.writeFileSync(path.join(out, "phone-sheet.json"), JSON.stringify(cards.map(({ img, ...c }) => c), null, 1) + "\n"); // prettier-ignore
+await writePretty(path.join(out, "phone-sheet.html"), html);
+await writePretty(path.join(out, "phone-sheet.json"), JSON.stringify(cards.map(({ img, ...c }) => c), null, 1) + "\n"); // prettier-ignore
 console.log(`${cards.length} codes → ${path.relative(root, path.join(out, "phone-sheet.html"))}`);
 for (const c of cards) console.log(`${c.id}  ${c.what}  →  ${c.predict}`);
 
@@ -217,8 +226,16 @@ if (!opt("no-png")) {
   const browser = await chromium.launch({
     executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
   });
-  const page = await browser.newPage({ viewport: { width: 1100, height: 900 } });
+  const page = await browser.newPage({
+    viewport: { width: 1100, height: 900 },
+    deviceScaleFactor: 0.6,
+  });
   await page.goto("file://" + path.join(out, "phone-sheet.html"));
-  await page.screenshot({ path: path.join(out, "phone-sheet.png"), fullPage: true });
+  const shot = await page.screenshot({ fullPage: true });
   await browser.close();
+  // Rounded to 32 levels per channel, as the pictures in it, to keep it small.
+  const { fromPNG } = await import("./qrs-study/raster.mjs");
+  const img = fromPNG(shot);
+  img.data = Uint8ClampedArray.from(img.data, (v) => Math.round(v / 8) * 8);
+  fs.writeFileSync(path.join(out, "phone-sheet.png"), toPNG(img));
 }

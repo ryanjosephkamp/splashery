@@ -111,7 +111,10 @@ export async function runEngine(out) {
         const splats = built.splats.map((s) => ({ ...s, p: [s.p[0], s.p[1], s.p[2] + 0.3] }));
         const ours = render(splats, { width: PX, height: PX, focal: PX / 2 / t, dist: Daim, yaw: -yaw }, { backdrop: sampleCorner(engine) }); // prettier-ignore
         const al = align(engine, ours);
-        fs.writeFileSync(path.join(dir, `${tid}-yaw${yaw}.png`), toPNG(sideBySide(engine, ours)));
+        fs.writeFileSync(
+          path.join(dir, `${tid}-yaw${yaw}.png`),
+          toPNG(sideBySide(engine, ours), { step: 8 }),
+        );
         const row = { text: tid, version: info.version, yaw, splats: built.splats.length, perModule: built.perModule, mae: Math.round(al.mae * 10) / 10, corr: Math.round(al.corr * 1000) / 1000, shift: `${al.dx},${al.dy}`, scale: al.s }; // prettier-ignore
         for (const [name, img] of [
           ["engine", engine],

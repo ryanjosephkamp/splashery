@@ -122,8 +122,11 @@ export async function runRGB(out, { grid = "small", trials = 1 } = {}) {
         const shot = screenShot(fake, rgbSpec(enc.colors), trial);
         const ctl = screenShot(mono, {}, trial);
         if (trial === 0 && level === "M" && set === "url") {
-          fs.writeFileSync(path.join(dir, "rgb-code.png"), toPNG(resize(shot.img, 280)));
-          for (const [ci, name] of ["red", "green", "blue"].entries()) fs.writeFileSync(path.join(dir, `channel-${name}.png`), toPNG(resize(channel(shot.img, ci), 180))); // prettier-ignore
+          fs.writeFileSync(
+            path.join(dir, "rgb-code.png"),
+            toPNG(resize(shot.img, 280), { step: 8 }),
+          );
+          for (const [ci, name] of ["red", "green", "blue"].entries()) fs.writeFileSync(path.join(dir, `channel-${name}.png`), toPNG(resize(channel(shot.img, ci), 180), { step: 8 })); // prettier-ignore
         }
         for (const c of CONDITIONS)
           for (const k of ks)

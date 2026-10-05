@@ -113,7 +113,27 @@ and this file.
 - Language: American English for every new text (color, center, gray, license, toward, -ize endings,
   dates like "October 5, 2026").
 - Your handoff file: start it with this brief, word for word, under "## Brief", then keep "##
-  State", "## Notes", "## Known issues" and "## For the Operator" current.
+  State", "## Phone check (for the owner, through the Operator)
+
+The test sheet is `docs/research/qr-splat-study-2026-10/phone-sheet.html` (and `phone-sheet.png`):
+50 codes, S01 to S50. Open it on a computer screen or print it, point the phone's camera app at each
+code, and note what happens. For each code, write the letter: **Y** it opened the right link or
+text, **N** nothing, **W** something else (say what). Also say which phone and camera app.
+
+| Ids     | Results (Y / N / W) |
+| ------- | ------------------- |
+| S01–S10 |                     |
+| S11–S20 |                     |
+| S21–S30 |                     |
+| S31–S40 |                     |
+| S41–S50 |                     |
+
+The study's predictions (zxing-cpp on simulated phone captures) are printed under each code on the
+sheet. S48 (Micro QR) and S49 (rMQR) have no prediction for phone apps; S50, the three-color code,
+should open the green code's link or nothing.
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
 - PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
   What was cut), opened early and pushed after each finished item. Finish every working turn with a
   final message that starts "READY:", "WORKING:" or "BLOCKED:".
