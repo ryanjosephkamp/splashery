@@ -9,12 +9,18 @@
 //   st-helens     the USGS pre-1980 DEM and 3DEP today; the tap plays May 18,
 //                 1980 (the summit falls away, the blast and the ash column),
 //                 a second tap goes back to 1979
+//   sea-floor     NOAA ETOPO1 relief of the Mariana Trench under an ocean
+//                 that drains away on a tap and fills back
+//   tide-harbor   Bar Harbor, Maine (NOAA coastal DEM and USGS imagery) with
+//                 waves and NOAA's tide predictions for a spring tide; the tap
+//                 plays the day: the bar to Bar Island floods and dries
 //   earthquakes   the USGS feed, live when the toy opens or its plaque is
 //                 tapped (a dated snapshot ships for when it can't be reached),
 //                 on a NOAA ETOPO1 relief globe; the tap plays the quakes in
 //                 time order
 
-import { mix, shade, clamp, smoothstep, vec } from "../kit.js";
+import { mix, shade, clamp, smoothstep, vec, ramp, quatAxisAngle } from "../kit.js";
+import { evenBox, evenCylinder, evenEllipsoid } from "./even.js";
 import { loadGeo, geoLoaded, readText } from "../geo/data.js";
 import { inked } from "../font.js";
 import { frame, addBlock, hill } from "../geo/terrain.js";
@@ -337,6 +343,295 @@ const ST_HELENS = {
   },
 };
 
+// ---- The sea floor -------------------------------------------------------------------------
+
+const SF_FILE = "assets/toys/sea-floor/terrain.bin";
+const SF_T = 9;
+const CREDIT_ETOPO = {
+  label: "Relief",
+  title: "ETOPO1 Global Relief Model",
+  source: "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+  author: "NOAA National Centers for Environmental Information",
+  license: "Public domain",
+  licenseUrl: "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+};
+
+// Depth colors as on a bathymetric chart, with land above the sea.
+function seaColor(m) {
+  if (m >= 0) return mix("#6f8f4a", "#a08b62", smoothstep(0, 600, m));
+  const t = clamp((m + 11000) / 11000, 0, 1);
+  return ramp(["#140f3a", "#25306e", "#2f5891", "#3f7aa9", "#6fa5c4", "#a9d0de"], t ** 1.15);
+}
+
+const SEA_FLOOR = {
+  alive: true,
+  density: 1.5,
+  kernel: "sharp",
+  credits: [CREDIT_ETOPO],
+  controls: [{ key: "drain", label: "Drain the ocean", type: "pulse", ease: SF_T }],
+  action: { key: "drain", label: "Drain the ocean" },
+  async prepare() {
+    await loadGeo(SF_FILE);
+  },
+  drive(t, c, out, info) {
+    const d = info.data;
+    const s = c.drain > 0 ? (1 - c.drain) * SF_T : SF_T;
+    // Down over 3.5 s (the trench empties last), a pause on the bare floor,
+    // then the sea comes back.
+    const down = ease(seg(s, 0.2, 3.8)) * (1 - ease(seg(s, 5.2, 8.6)));
+    out.parts.sea = { offset: [0, -(d.ySea - d.yDeep) * down, 0], visible: down > 0.998 ? 0 : 1 };
+    out.morph = [down, 0, 0, 0];
+    out.amount = 1 - 0.7 * down;
+    sortWhileMoving(out, d, s, c.drain > 0 && s < 8.8);
+  },
+  build(k) {
+    const g = geoLoaded(SF_FILE);
+    const H = g.layer("height");
+    const F = frame({ span: g.meta.span, exag: 9, lo: H.min - 600, depth: 0.06 });
+    const height = H.sample;
+    addBlock(k, {
+      F,
+      height,
+      share: 0.72,
+      color: (c) => shade(seaColor(F.m(c.p[1])), 0.9 * hill(c.n, 0.4)),
+      side: (m) => (m > -6000 ? mix("#5d5144", "#3f3d3c", smoothstep(-6000, -1500, m)) : mix("#2b2a2e", "#3f3d3c", smoothstep(-11000, -6000, m))), // prettier-ignore
+    });
+    const ySea = F.y(0);
+    const yDeep = F.y(H.min) - 0.01;
+    const sea = k.part("sea");
+    // The ocean's surface: a gently heaving sheet at sea level, over every
+    // place that is under water.
+    k.add(k.param((u, v) => [F.x(u), ySea, F.z(v)], { grid: 96, flip: true }), {
+      part: sea,
+      even: true,
+      share: 0.14,
+      flat: 0.1,
+      jitter: 0.006,
+      opacity: 0.86,
+      kind: "wave",
+      params: (c) => [0.004, c.u * 9 + c.v * 5],
+      color: (c) => {
+        if (height(c.u, c.v) > 20) return null;
+        const g2 = c.noise(c.u * 30, c.v * 30, 2);
+        return mix("#1f4f7a", "#5d93b8", 0.25 + 0.2 * g2);
+      },
+    });
+    // The water's cut faces, which drop away as the level passes them.
+    const faces = [(a) => [a, 1], (a) => [1 - a, 0], (a) => [1, 1 - a], (a) => [0, a]];
+    for (const f of faces) {
+      k.add(
+        k.param((a, w) => {
+          const [u, v] = f(a);
+          return [F.x(u) * 1.002, yDeep + (ySea - yDeep) * w, F.z(v) * 1.002];
+        }, { grid: 48 }), // prettier-ignore
+        {
+          even: true,
+          share: 0.025,
+          flat: 0.15,
+          opacity: 0.88,
+          kind: "fade",
+          channel: 0,
+          params: (c) => [clamp(1 - (c.p[1] - yDeep) / (ySea - yDeep), 0, 1) - 0.01, 0.02],
+          color: (c) => {
+            const [u, v] = f(c.u);
+            if (F.y(height(u, v)) > c.p[1]) return null;
+            return mix("#0f2747", "#3c74a3", smoothstep(yDeep, ySea, c.p[1]));
+          },
+        },
+      );
+    }
+    k.data = { ySea, yDeep };
+  },
+};
+
+// ---- Waves and tides: Bar Harbor ---------------------------------------------------------
+
+const TH_FILE = "assets/toys/tide-harbor/terrain.bin";
+const TH_T = 12;
+const TH_FLOOR = -12; // the block's deep water is cut off here (m)
+// Three moorings in water deep at every tide (u, v), with each boat's heading.
+const TH_BOATS = [
+  [0.94, 0.47, 0.6, "#c9452f"],
+  [0.2, 0.33, -0.4, "#f2efe6"],
+  [0.3, 0.05, 1.9, "#2f5d8a"],
+];
+
+function tideAt(levels, f) {
+  const x = clamp(f, 0, 1) * (levels.length - 1);
+  const i = Math.min(levels.length - 2, Math.floor(x));
+  return levels[i] + (levels[i + 1] - levels[i]) * (x - i);
+}
+
+// Colors of the shore by height: always-wet mud, the weed and rock of the
+// tidal zone, sand at the top, then the aerial picture of the land.
+function shoreColor(m, img, n) {
+  let col;
+  if (m < -2.3) col = "#3d3a2f";
+  else if (m < 0.5) col = mix("#4a4a2c", "#6a5b3a", smoothstep(-2.3, 0.5, m));
+  else if (m < 2.6) col = mix("#8c7a5c", "#b9a888", smoothstep(0.5, 2.6, m));
+  else col = mix("#b9a888", img, smoothstep(2.6, 4.5, m));
+  return shade(col, 0.92 * hill(n, 0.35) + 0.06);
+}
+
+const TIDE_HARBOR = {
+  alive: true,
+  density: 1.5,
+  kernel: "sharp",
+  credits: [
+    {
+      label: "Tides",
+      title: "Tide predictions, Bar Harbor, Maine (8413320)",
+      source: "https://tidesandcurrents.noaa.gov/stationhome.html?id=8413320",
+      author: "NOAA Center for Operational Oceanographic Products and Services",
+      license: "Public domain",
+      licenseUrl: "https://tidesandcurrents.noaa.gov/disclaimers.html",
+    },
+    {
+      label: "Heights",
+      title: "NCEI coastal digital elevation models",
+      source: "https://www.ncei.noaa.gov/products/coastal-elevation-models",
+      author: "NOAA National Centers for Environmental Information",
+      license: "Public domain",
+      licenseUrl: "https://www.ncei.noaa.gov/products/coastal-elevation-models",
+    },
+    CREDIT_IMAGERY,
+  ],
+  controls: [{ key: "day", label: "Play the day", type: "pulse", ease: TH_T }],
+  action: { key: "day", label: "Play a day of tides" },
+  async prepare() {
+    await loadGeo(TH_FILE);
+  },
+  drive(t, c, out, info) {
+    const d = info.data;
+    const s = c.day > 0 ? (1 - c.day) * TH_T : TH_T;
+    const f = c.day > 0 ? clamp((s - 0.3) / (TH_T - 0.6), 0, 1) : 0;
+    const level = tideAt(d.levels, f);
+    const rise = (level - d.low) * d.k;
+    out.parts.water = { offset: [0, rise, 0] };
+    out.morph = [level - d.levels[0], 0, 0, 0];
+    // Each boat rides the water and rocks on the swell on its own phase.
+    d.boats.forEach((b, i) => {
+      const roll = 0.07 * Math.sin(t * 1.7 + i * 2.1);
+      const pitch = 0.05 * Math.sin(t * 1.3 + i * 1.3);
+      out.parts[`boat${i}`] = {
+        offset: [0, rise - (d.levels[0] - d.low) * d.k + 0.004 * Math.sin(t * 1.5 + i), 0],
+        quat: quatAxisAngle(vec.unit([Math.cos(b.h) * roll, 0.0001, Math.sin(b.h) * pitch + roll * 0.2]), Math.hypot(roll, pitch)), // prettier-ignore
+      };
+    });
+    // The marker on the plaque's tide curve.
+    out.tokens = [{ base: d.plot.at(0, d.levels[0]), offset: vec.sub(d.plot.at(f, level), d.plot.at(0, d.levels[0])) }]; // prettier-ignore
+    sortWhileMoving(out, d, s, c.day > 0 && s < TH_T - 0.1, 0.6);
+  },
+  build(k) {
+    const g = geoLoaded(TH_FILE);
+    const H = g.layer("height");
+    const img = g.layer("color");
+    const levels = Array.from(g.layer("tide").data);
+    const low = Math.min(...levels) - 0.05;
+    const high = Math.max(...levels);
+    const F = frame({ span: g.meta.span, exag: 6, lo: TH_FLOOR, depth: 0.05 });
+    const height = (u, v) => Math.max(TH_FLOOR + 0.5, H.sample(u, v));
+    addBlock(k, {
+      F,
+      height,
+      share: 0.66,
+      color: (c) => shoreColor(F.m(c.p[1]), img.sample(c.u, c.v), c.n),
+      side: (m) => (m > 0 ? mix("#6a5a45", "#7d6a52", smoothstep(0, 40, m)) : mix("#3b3a36", "#5c5145", smoothstep(TH_FLOOR, 0, m))), // prettier-ignore
+    });
+    // The sea: a sheet at the lowest tide that rises and falls with the curve,
+    // its surface heaving in small waves.
+    const water = k.part("water");
+    const yLow = F.y(low);
+    k.add(k.param((u, v) => [F.x(u), yLow, F.z(v)], { grid: 128, flip: true }), {
+      part: water,
+      even: true,
+      share: 0.16,
+      flat: 0.1,
+      jitter: 0.006,
+      opacity: 0.84,
+      kind: "wave",
+      params: (c) => [0.0035, c.u * 34 - c.v * 12],
+      color: (c) => {
+        if (height(c.u, c.v) > high + 0.6) return null;
+        const g2 = c.noise(c.u * 60, c.v * 60, 4);
+        return mix("#2b4f5c", "#7aa4ad", 0.25 + 0.22 * g2);
+      },
+    });
+    // The water's cut faces: each bit shows while the tide is above it.
+    const faces = [(a) => [a, 1], (a) => [1 - a, 0], (a) => [1, 1 - a], (a) => [0, a]];
+    const yHigh = F.y(high);
+    for (const fc of faces) {
+      k.add(
+        k.param((a, w) => {
+          const [u, v] = fc(a);
+          return [F.x(u) * 1.002, F.y(TH_FLOOR) + (yHigh - F.y(TH_FLOOR)) * w, F.z(v) * 1.002];
+        }, { grid: 48 }), // prettier-ignore
+        {
+          even: true,
+          share: 0.02,
+          flat: 0.15,
+          opacity: 0.88,
+          kind: "fade",
+          channel: 0,
+          params: (c) => [F.m(c.p[1]) - levels[0], 0.12],
+          color: (c) => {
+            const [u, v] = fc(c.u);
+            if (F.y(height(u, v)) > c.p[1]) return null;
+            return mix("#1f3c48", "#3f6b78", smoothstep(F.y(TH_FLOOR), yHigh, c.p[1]));
+          },
+        },
+      );
+    }
+    // Moored boats: a hull, a cabin and a mast each, floating at the day's
+    // first level.
+    const boats = TH_BOATS.map(([u, v, h, col], i) => {
+      const at = [F.x(u), F.y(levels[0]) + 0.004, F.z(v)];
+      const part = k.part(`boat${i}`, { pivot: at });
+      const rot = [0, (h * 180) / Math.PI, 0];
+      const put = (p) => {
+        const ca = Math.cos(h);
+        const sa = Math.sin(h);
+        return [at[0] + p[0] * ca + p[2] * sa, at[1] + p[1], at[2] - p[0] * sa + p[2] * ca];
+      };
+      k.add(evenEllipsoid(k, 0.032, 0.01, 0.012), { part, pos: put([0, 0.002, 0]), rot, color: (c) => (c.lp[1] > 0.004 ? "#f4f1ea" : col), share: 0.004, flat: 0.3 }); // prettier-ignore
+      k.add(evenBox(0.02, 0.009, 0.01), { part, pos: put([-0.004, 0.013, 0]), rot, color: "#e9e4d8", share: 0.0015, flat: 0.3 }); // prettier-ignore
+      k.add(evenCylinder(0.0012, 0.0012, 0.05), { part, pos: put([0.006, 0.032, 0]), color: "#cfc8b8", share: 0.0008, flat: 0.4 }); // prettier-ignore
+      return { h };
+    });
+    // The plaque: the day's tide curve, with high and low marked.
+    const pw = 1.4;
+    const ph = 0.22;
+    const pz = F.z(1) + 0.18;
+    const py = F.bottom - 0.02;
+    const plot = {
+      at: (f, m) => [-pw / 2 + 0.05 + f * (pw - 0.1), py - ph / 2 + 0.03 + ((m - low) / (high - low)) * (ph - 0.06), pz + 0.004], // prettier-ignore
+    };
+    k.add(k.param((u, v) => [(u - 0.5) * pw, py - v * ph, pz], { grid: 24 }), {
+      even: true,
+      share: 0.025,
+      flat: 0.1,
+      color: (c) => {
+        const f = (c.p[0] + pw / 2 - 0.05) / (pw - 0.1);
+        const hour = f * 24.9;
+        const tick = f >= 0 && f <= 1 && Math.abs(hour - Math.round(hour)) < 0.06 && Math.round(hour) % 6 === 0;
+        const mid = Math.abs(c.p[1] - plot.at(0, 0)[1]) < 0.0025;
+        return { c: tick || mid ? [0.33, 0.36, 0.4] : [0.13, 0.15, 0.18], keep: true };
+      },
+    });
+    k.add(
+      k.tube((tt) => plot.at(tt, tideAt(levels, tt)), 0.0028),
+      { share: 0.01, color: "#7fc3d4", pattern: false, stretch: 2 },
+    );
+    const m0 = plot.at(0, levels[0]);
+    k.cloud({ share: 0.003, size: 1 }, (rand) => {
+      const a = rand() * Math.PI * 2;
+      const r = Math.sqrt(rand()) * 0.02;
+      return { p: [m0[0] + Math.cos(a) * r, m0[1] + Math.sin(a) * r, m0[2] + 0.002], n: [0, 0, 1], color: "#ffd25a", kind: "token", params: [0, 0], pattern: false }; // prettier-ignore
+    });
+    k.data = { levels, low, k: F.k, boats, plot };
+  },
+};
+
 // ---- Earthquakes ---------------------------------------------------------------------------
 
 const EQ_DIR = "assets/toys/earthquakes/";
@@ -583,5 +878,7 @@ const EARTHQUAKES = {
 export const RECIPES = {
   "grand-canyon": GRAND_CANYON,
   "st-helens": ST_HELENS,
+  "sea-floor": SEA_FLOOR,
+  "tide-harbor": TIDE_HARBOR,
   earthquakes: EARTHQUAKES,
 };

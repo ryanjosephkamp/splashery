@@ -21,6 +21,7 @@ import {
   elevation3dep,
   imageryUsgs,
   readTiff,
+  elevationEtopo1,
   resample,
   fillNoData,
   rgbGrid,
@@ -123,6 +124,41 @@ const SITES = {
       { name: "before", type: "height", w: N, h: N, data: before.data },
       { name: "after", type: "height", w: N, h: N, data: now },
       { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
+    ]);
+  },
+
+  // The Mariana Trench and the Mariana Islands (Guam at the lower left), from
+  // NOAA's ETOPO1 bedrock relief.
+  async "sea-floor"() {
+    const bbox = [141.5, 9.5, 148.5, 16.5];
+    const z = fillNoData(await elevationEtopo1("mariana", bbox, 420, 420));
+    writeGeo("assets/toys/sea-floor/terrain.bin", {
+      site: "The Mariana Trench, western Pacific", bbox, span: spanMeters(bbox), fetched: today(),
+    }, [{ name: "height", type: "height", w: N, h: N, data: resample(z, N, N) }]);
+  },
+
+  // Bar Harbor, Maine: the bar to Bar Island, dry for a few hours around each
+  // low tide, with NOAA's tide predictions for one lunar day of the spring
+  // tide of October 28, 2026 (station 8413320, relative to mean sea level).
+  // Heights: NOAA NCEI's coastal DEMs (DEM_tiles_mosaic, NAVD88, taken here as
+  // mean sea level; at Bar Harbor the two differ by about a decimeter).
+  async "tide-harbor"() {
+    const bbox = [-68.2185, 44.3875, -68.2035, 44.3985];
+    const url =
+      "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/DEM_tiles_mosaic/ImageServer/exportImage?" +
+      new URLSearchParams({ bbox: bbox.join(","), bboxSR: "4326", imageSR: "4326", size: "400,400", format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation", f: "image" }); // prettier-ignore
+    const z = fillNoData(readTiff(await cached("bh2-dem-400.tif", url)));
+    const img = await imageryUsgs("bh2", bbox, 1024, 1024);
+    const tq = new URLSearchParams({ product: "predictions", station: "8413320", begin_date: "20261028 00:00", end_date: "20261029 00:54", datum: "MSL", units: "metric", time_zone: "gmt", format: "json", interval: "6" }); // prettier-ignore
+    const tide = JSON.parse(await cached("bh-tide.json", "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" + tq, { text: true })); // prettier-ignore
+    const levels = tide.predictions.map((p) => +p.v);
+    writeGeo("assets/toys/tide-harbor/terrain.bin", {
+      site: "Bar Harbor, Maine", bbox, span: spanMeters(bbox), fetched: today(),
+      tide: { station: "8413320 Bar Harbor, ME", start: "2026-10-28T00:00Z", step: 360, datum: "MSL" },
+    }, [
+      { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
+      { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
+      { name: "tide", type: "f32", w: levels.length, h: 1, data: levels },
     ]);
   },
 };

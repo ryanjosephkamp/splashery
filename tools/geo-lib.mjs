@@ -194,10 +194,10 @@ export async function elevation3dep(name, bbox, w, h) {
   return readTiff(await cached(`${name}-3dep-${w}x${h}.tif`, url));
 }
 
-// NOAA NCEI ETOPO 2022 (15 arc-second) bedrock and sea-floor elevation (public domain).
-export async function elevationEtopo(name, bbox, w, h) {
+// NOAA NCEI ETOPO1 (1 arc-minute) bedrock and sea-floor relief (public domain).
+export async function elevationEtopo1(name, bbox, w, h) {
   const url =
-    "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/DEM_global_mosaic/ImageServer/exportImage?" +
+    "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/ETOPO1_bedrock/ImageServer/exportImage?" +
     new URLSearchParams({
       bbox: bbox.join(","),
       bboxSR: "4326",
@@ -208,7 +208,7 @@ export async function elevationEtopo(name, bbox, w, h) {
       interpolation: "RSP_BilinearInterpolation",
       f: "image",
     });
-  return readTiff(await cached(`${name}-etopo-${w}x${h}.tif`, url));
+  return readTiff(await cached(`${name}-etopo1-${w}x${h}.tif`, url));
 }
 
 // The National Map's orthoimagery basemap (NAIP from USDA FSA, and Landsat and
