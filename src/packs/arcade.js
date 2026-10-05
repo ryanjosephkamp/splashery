@@ -747,6 +747,9 @@ export const RECIPES = {
         short: "Space or tap to jump · V raises the photo into 3D",
       },
       slots: { high: 140000, mid: 100000, low: 50000 }, // a finer photo
+      // a dark wall behind the photo, so its ends (the 3D relief's edge)
+      // read as a print on a wall, not a cut into a blank page
+      background: "#1f232b",
       create: async (api) => (await import("./arcade-dash.js")).createDash(api),
     },
   },

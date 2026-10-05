@@ -375,11 +375,15 @@ class Dash {
     // the side, so the relief shows.
     const d2 = this.api.fitDistance(Math.min(this.W, 1.6 * aspect * 1.2) + 0.1, H + 0.4, aspect);
     const half = Math.max(0, this.W / 2 - 0.8 * aspect);
+    // 3D: a little closer and less turned than before, and kept further in
+    // from the photo's ends, so the view stays on the photo (its edge and
+    // the blank page behind it showed).
+    const half3 = Math.max(0, this.W / 2 - 0.8 * aspect);
     return {
-      target: [clamp(m.x, -half, half), lerp(0, -0.1, view), lerp(0, RELIEF * 0.5, view)],
-      yaw: lerp(0, -0.45, view),
-      pitch: lerp(0, 0.45, view),
-      distance: lerp(d2, d2 * 0.95, view),
+      target: [clamp(m.x, -lerp(half, half3, view), lerp(half, half3, view)), lerp(0, 0.12, view), lerp(0, RELIEF * 0.5, view)], // prettier-ignore
+      yaw: lerp(0, -0.3, view),
+      pitch: lerp(0, 0.36, view),
+      distance: lerp(d2, d2 * 0.78, view),
     };
   }
 
