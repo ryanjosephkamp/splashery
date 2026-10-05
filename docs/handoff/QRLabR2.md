@@ -155,6 +155,11 @@ READY (October 5, 2026). Everything in the brief and X2 and X3 is on the branch 
   `docs/research/qr-splat-study-2026-10.md` (43,240 captures, three readers, thresholds, the shapes
   answer, X2, prior work, limits) and the phone sheet (form below).
 - Clips: 8 cards on Effect review page 2 (lane QRLabR2); marks checked hourly.
+- The owner's marks of October 5: Three codes in one "good"; the anatomy clips asked for the lit
+  part to pop out (optional): done, a "Pop the lit part out" switch. The Damage lab clips: "keep
+  polishing": each tap now moves only the damage it adds (scratches draw on, smudges and char
+  spread, a sticker drops only when it grows, torn or burned pieces fall once), each code is labeled
+  with its level, and misread modules show a stronger red. Seven -r2 cards replace the old ones.
 
 ## Phone check (for the owner, through the Operator)
 
