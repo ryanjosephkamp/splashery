@@ -9,6 +9,8 @@
 // into a relief (its bright parts nearer, its dark parts deeper) and the
 // marble rolls along the same track on the relief, by the same rules.
 
+import { crispModel } from "./arcade-crisp.js";
+
 export const DASH = { file: null, name: "" };
 
 const H = 2.0; // the photo's height in world units
@@ -37,7 +39,10 @@ class Dash {
     }
     const bmp = await createImageBitmap(src);
     const low = this.api.profile === "low";
-    const cols = low ? 120 : 176;
+    // (a finer photo since the owner's "please make sharper"; the blurs and
+    // the track's smoothing below scale with it, so they stay the same size)
+    const cols = low ? 160 : this.api.profile === "mid" ? 260 : 320;
+    const sc = cols / 176;
     const rows = Math.max(40, Math.round((cols * bmp.height) / bmp.width));
     const c = typeof OffscreenCanvas !== "undefined" ? new OffscreenCanvas(cols, rows) : Object.assign(document.createElement("canvas"), { width: cols, height: rows }); // prettier-ignore
     const g = c.getContext("2d", { willReadFrequently: true });
@@ -71,14 +76,15 @@ class Dash {
     // box blur 7 pixels wide), so neighboring pixels come forward together
     // and the relief stays one solid surface instead of splitting apart.
     let dep = sm;
+    const br = Math.max(3, Math.round(3 * sc));
     for (let pass = 0; pass < 2; pass++) {
       const out = new Float32Array(cols * rows);
       for (let y = 0; y < rows; y++)
         for (let x = 0; x < cols; x++) {
           let a = 0;
           let n = 0;
-          for (let dy = -3; dy <= 3; dy++)
-            for (let dx = -3; dx <= 3; dx++) {
+          for (let dy = -br; dy <= br; dy++)
+            for (let dx = -br; dx <= br; dx++) {
               a += dep[clamp(y + dy, 0, rows - 1) * cols + clamp(x + dx, 0, cols - 1)];
               n++;
             }
@@ -107,8 +113,9 @@ class Dash {
     for (let x = 0; x < cols; x++) {
       let best = rows * 0.4;
       let bd = -Infinity;
-      for (let y = 2; y < rows * 0.78; y++) {
-        const d = sm[(y - 2) * cols + x] - sm[(y + 2) * cols + x];
+      const g = Math.max(2, Math.round(2 * sc));
+      for (let y = g; y < rows * 0.78; y++) {
+        const d = sm[(y - g) * cols + x] - sm[Math.min(rows - 1, y + g) * cols + x];
         const score = Math.abs(d) - Math.abs(y / rows - 0.42) * 0.12;
         if (score > bd) {
           bd = score;
@@ -121,7 +128,8 @@ class Dash {
     for (let x = 0; x < cols; x++) {
       let a = 0;
       let n = 0;
-      for (let k = -4; k <= 4; k++) {
+      const kk = Math.max(4, Math.round(4 * sc));
+      for (let k = -kk; k <= kk; k++) {
         a += raw[clamp(x + k, 0, cols - 1)];
         n++;
       }
@@ -129,26 +137,29 @@ class Dash {
     }
     this.track = track;
     this.photoModel = this.buildPhoto();
+    // The marble and the sparks, crisp (src/packs/arcade-crisp.js).
+    this.marbleModel = crispModel((k) =>
+      k.sphere(0.055, {
+        step: low ? 0.009 : 0.0065,
+        color: (q, n) => {
+          // a blue glass marble with a white swirl and a highlight
+          const swirl = Math.sin(q[0] * 70 + Math.sin(q[1] * 50) * 2) > 0.6;
+          const l = Math.max(0, n[0] * -0.3 + n[1] * 0.6 + n[2] * 0.7);
+          const base = swirl ? [0.95, 0.96, 1] : [0.2, 0.45, 0.9];
+          return base.map((v) => Math.min(1, v * (0.65 + 0.4 * l) + Math.pow(l, 18) * 0.8));
+        },
+      }),
+    );
+    this.sparkModel = crispModel((k) =>
+      k.sphere(0.022, {
+        step: 0.005,
+        color: (q, n) => {
+          const l = Math.max(0, n[1] * 0.6 + n[2] * 0.8);
+          return [1, 0.82 + 0.18 * l, 0.35 + 0.5 * Math.pow(l, 8)];
+        },
+      }),
+    );
     const { kitModel } = this.api;
-    this.marbleModel = kitModel(
-      (k) =>
-        k.add(k.sphere(0.055), {
-          even: true,
-          flat: 0.5,
-          color: (cc) => {
-            // a blue glass marble with a white swirl and a highlight
-            const swirl = Math.sin(cc.lp[0] * 70 + Math.sin(cc.lp[1] * 50) * 2) > 0.6;
-            const l = Math.max(0, cc.n[0] * -0.3 + cc.n[1] * 0.6 + cc.n[2] * 0.7);
-            const base = swirl ? [0.95, 0.96, 1] : [0.2, 0.45, 0.9];
-            return base.map((v) => Math.min(1, v * (0.65 + 0.4 * l) + Math.pow(l, 18) * 0.8));
-          },
-        }),
-      { count: low ? 160 : 260 },
-    );
-    this.sparkModel = kitModel(
-      (k) => k.cloud({ share: 1 }, (rand) => ({ p: [(rand() - 0.5) * 0.05, (rand() - 0.5) * 0.05, (rand() - 0.5) * 0.05], color: [1, 0.85 + 0.15 * rand(), 0.4], size: 1.4, opacity: 0.95 })), // prettier-ignore
-      { count: 40 },
-    );
     this.lineModel = kitModel(
       (k) =>
         k.cloud({ share: 1 }, () => ({ p: [0, 0, 0], color: [1, 1, 1], size: 1, opacity: 0.9 })),

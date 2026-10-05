@@ -730,6 +730,7 @@ export const RECIPES = {
         pad: "A jumps.",
         short: "Space or tap to jump · V raises the photo into 3D",
       },
+      slots: { high: 140000, mid: 100000, low: 50000 }, // a finer photo
       create: async (api) => (await import("./arcade-dash.js")).createDash(api),
     },
   },

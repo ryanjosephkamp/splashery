@@ -209,7 +209,33 @@ None of the names borrows a game's brand.
 - **Stone Belt**: the field's plane, with a chase camera in 3D.
 - **Soft Landing**: the slice's plane, with the terrain around it in 3D.
 
+### Crisp shapes (the owner's "please make sharper", October 5, 2026)
+
+The owner marked every first clip "please make sharper". The kit scatters a shape's splats at random
+and sizes them from its whole budget, so a big board got big, soft splats, and thin lines frayed
+into blobs. `src/packs/arcade-crisp.js` builds game models on regular grids instead:
+
+- A face is cut along each side into a fine band at each end and coarse cells between, and filled
+  with the grid of both: coarse in the middle, fine along every edge. The outermost row is half a
+  fine step wide (a rim), so the very edge is sharper still, and a fine row's splats are cut to 2.5
+  fine steps long, or their tapered ends scallop the edge.
+- A splat is 0.6 of its cell across (a solid fill, no seams) and at most 0.12 of the fine step
+  thick, so a face seen edge-on draws as a hairline.
+- Shapes: rect, box (with only the faces that show), line, disc (or a ring), sphere (or an
+  ellipsoid), cylinder.
+- Never stretch a crisp model: scaling moves the splats apart without growing them. Build at the
+  largest size a part takes and scale down (Shardball's dome rows, Longtail's ring tiles).
+- Two layers on one plane (a line on a board) sort by their splats' centers. Keep them 0.005 apart,
+  and give the floor a `sortBias` (src/arcade/layer.js) so it sorts below what rests on it from any
+  angle; without it, a table's big splats nearer the camera draw over the ball's lower half.
+- A pattern finer than the coarse cells aliases (Volley Table's felt, the rails' wood grain): keep
+  patterns long against the cells, or put them in their own shapes.
+
 ### Splat budgets (for a block world)
+
+- Crisp blocks cost about 64 splats a visible face at Strata's size and 600 for a whole brick; a
+  voxel block (Cast a Shadow) builds only the faces with no neighbor, which is what a block world
+  needs too.
 
 - One layer of 60,000 slots (high tier) holds a whole game. The CPU writes 4 floats of center and 4
   of turn and fade per splat per frame, and uploads both textures every frame. For 40,000 splats

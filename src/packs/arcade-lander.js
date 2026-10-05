@@ -9,7 +9,7 @@
 // and the ground around the slice shows, the whole patch of real terrain;
 // the lander keeps flying in the slice, by the same rules.
 
-import { evenBox } from "./even.js";
+import { crispModel } from "./arcade-crisp.js";
 
 const GROUND_W = 2.4; // the patch's width in game units
 const RELIEF = 0.5; // the tallest relief, in game units, after stretching
@@ -49,28 +49,29 @@ class Lander {
     this.per = low ? 1 : 2; // splats a ground cell
     const { kitModel } = api;
     const lit = (c, n, f = 1) => c.map((v) => v * (0.72 + 0.26 * n[1] + 0.12 * n[2]) * f);
-    this.landerModel = kitModel(
+    // The lander, crisp (src/packs/arcade-crisp.js).
+    this.landerModel = crispModel(
       (k) => {
         // A squat lander: a gold-foil body, a gray top stage, four legs
         // with round feet, and an engine bell under it.
-        k.add(evenBox(0.09, 0.05, 0.09), { pos: [0, 0.035, 0], even: true, color: (c) => lit([0.86, 0.66, 0.24], c.n, 0.95 + 0.1 * Math.sin(c.p[0] * 300) * Math.sin(c.p[2] * 260)) }); // prettier-ignore
-        k.add(evenBox(0.07, 0.04, 0.07), { pos: [0, 0.08, 0], even: true, color: (c) => lit([0.72, 0.72, 0.74], c.n) }); // prettier-ignore
-        k.add(k.cone(0.025, 0.012, 0.03), { pos: [0, -0.002, 0], even: true, color: (c) => lit([0.35, 0.33, 0.32], c.n) }); // prettier-ignore
+        k.box(0.09, 0.05, 0.09, { pos: [0, 0.035, 0], color: (q, n) => lit([0.86, 0.66, 0.24], n, 0.95 + 0.1 * Math.sin(q[0] * 300) * Math.sin(q[2] * 260)) }); // prettier-ignore
+        k.box(0.07, 0.04, 0.07, { pos: [0, 0.08, 0], color: (q, n) => lit([0.72, 0.72, 0.74], n) });
+        k.cylinder(0.018, 0.03, { pos: [0, -0.002, 0], axis: [0, 1, 0], color: (q, n) => lit([0.35, 0.33, 0.32], n) }); // prettier-ignore
         for (const [sx, sz] of [
           [1, 1],
           [1, -1],
           [-1, 1],
           [-1, -1],
         ]) {
-          k.add(k.tube((t) => [sx * (0.04 + 0.035 * t), 0.03 - 0.05 * t, sz * (0.04 + 0.035 * t)], 0.004), { even: true, color: [0.7, 0.7, 0.72] }); // prettier-ignore
-          k.add(k.disc(0.012), {
-            pos: [sx * 0.075, -0.02, sz * 0.075],
-            even: true,
-            color: [0.65, 0.65, 0.66],
-          });
+          const a = [sx * 0.04, 0.03, sz * 0.04];
+          const b = [sx * 0.075, -0.02, sz * 0.075];
+          const d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
+          const l = Math.hypot(...d);
+          k.cylinder(0.004, l, { pos: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2], axis: d, caps: false, color: [0.7, 0.7, 0.72], fine: 0.002 }); // prettier-ignore
+          k.disc(0.012, { pos: b, normal: [0, 1, 0], color: [0.65, 0.65, 0.66], fine: 0.002 });
         }
       },
-      { count: low ? 500 : 900 },
+      { fine: low ? 0.004 : 0.003, coarse: 0.015 },
     );
     this.flameModel = kitModel(
       (k) =>
