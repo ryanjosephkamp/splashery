@@ -59,7 +59,9 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   tracking, migration) may be read the same way when their terms allow reuse. Only keyless public
   endpoints; the source and the time of the data show beside it; nothing is stored or sent; a dated
   snapshot ships with the site for when the feed can't be reached. The Night sky may ask for the
-  person's location only when they tap for it, and never stores or sends it.
+  person's location only when they tap for it, and never stores or sends it. The molecule viewer may
+  fetch a structure from the Protein Data Bank (CC0) by its code when the person asks (the owner's
+  "PDB fetch yes", October 5, 2026); the same terms apply.
 - Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`. Programs
   outside npm that train splats on the owner's Mac (Blender, Brush or msplat; the Splat Fidelity
   Plan, approved October 3, 2026) are build tools too: listed in `LICENSES.md`, never shipped.
