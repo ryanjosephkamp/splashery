@@ -1894,6 +1894,9 @@ export const RECIPES = {
   },
 
   volcano: {
+    // Lane Any pose: turned over in Hands-on, the eruption leaves its own crater
+    // (the toy's frame), not toward the world's up.
+    gravity: false,
     alive: true,
     controls: [{ key: "erupt", label: "Erupt", type: "pulse", ease: 4 }],
     action: { key: "erupt", label: "Erupt" },
@@ -2418,6 +2421,9 @@ export const RECIPES = {
   },
 
   tornado: {
+    // Lane Any pose: turned over in Hands-on, its dust keeps climbing its own
+    // funnel (the toy's frame), not the world's up.
+    gravity: false,
     alive: true,
     controls: [
       { key: "power", label: "Power", type: "slider", default: 0.6 },
@@ -3496,6 +3502,9 @@ export const RECIPES = {
   },
 
   geyser: {
+    // Lane Any pose: turned over in Hands-on, its water shoots out of its own vent
+    // (the toy's frame), not toward the world's up.
+    gravity: false,
     alive: true,
     controls: [{ key: "erupt", label: "Erupt", type: "pulse", ease: 5 }],
     action: { key: "erupt", label: "Erupt" },
