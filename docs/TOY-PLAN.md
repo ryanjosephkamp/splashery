@@ -2960,8 +2960,10 @@ Proposals below are suggestions; the owner may change them.
     May 18, 1980: the summit and north flank fall to today's crater (3DEP and imagery spread out
     from the crater), a lateral blast races north and an ash column rises and drifts east (about 6
     s); a second tap goes back to 1979.
-  - Improved: Geo: new toy; the 1979 surface sinks onto today's heights while today's fades in from
-    the crater out, and is then hidden (sorting).
+  - Improved: Geo r3 (the owner: "Smoke isn't realistic"): the ash column is ten stacked segments of
+    cauliflower billows that rise from the vent and swell as they rise, dark and dense near the vent
+    and paler above, shaded by the sun, spreading at the top and drifting east on the wind; the
+    blast's clouds race out and settle as ash.
   - Sound: A deep thud and rumble, then the eruption's roar; a low rumble going back.
 - **The sea floor** (`sea-floor`). Now: tap: Drain the ocean. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
@@ -2977,8 +2979,9 @@ Proposals below are suggestions; the owner may change them.
     small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026
     (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the
     water, and a dot follows the curve on the plaque (and slides back to its start at the end).
-  - Improved: Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea
-    level).
+  - Improved: Geo r3 (the owner: "sharper, especially the tide meter"): the tide meter is a chart of
+    square pixels leaning toward the viewer, with the water under the curve filled, lines every six
+    hours and the hours written under it, and a crisp dot riding the curve.
   - Sound: Three soft waves through the day.
 - **Hurricane** (`hurricane`). Now: tap: Play the day it grew. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
@@ -3010,10 +3013,12 @@ Proposals below are suggestions; the owner may change them.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
   - Effect: Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief
     map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each
-    stork flies its real track, facing the way it goes, and draws its trail behind it; month labels
-    and a bar mark the time. Then the season rewinds in 2 s (the storks fly their tracks back to
-    their nests).
-  - Improved: Geo: new toy from tools/geo-migration.mjs.
+    stork (a white dot, as on a tracking map) moves along its real track and draws a thin trail
+    behind it; month labels and a bar mark the time. Then the season rewinds in 2 s (the storks fly
+    their tracks back to their nests).
+  - Improved: Geo r3 (the owner: "too cartoonish"): drawn like a real tracking map: thin tracks on
+    the ground (gaps in the fixes left blank), each bird a small white dot with a dark rim, and
+    crisp month labels.
   - Sound: Wing beats and a stork's bill clatter.
 - **Earthquakes** (`earthquakes`). Now: tap: Play the quakes in time order. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
@@ -3022,5 +3027,7 @@ Proposals below are suggestions; the owner may change them.
     magnitude and colored by depth. A plaque shows the source, the feed and when it was fetched. The
     tap flashes the quakes in time order (about 8 s); a tap on the plaque fetches the feed again.
     The Toy tab picks the past week, the past month or a year of the catalog.
-  - Improved: Geo: new toy (Push Plan S14); live feed approved by the owner on October 4, 2026.
+  - Improved: Geo r3 (the owner: "still needs to be sharper"; the text below the planet too): about
+    one globe point per picture pixel, a thin layer of air at the limb, crisp quake dots with no
+    glow at rest, and the plaque's text in square pixels.
   - Sound: A low rumble, and a second one.

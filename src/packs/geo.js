@@ -254,7 +254,9 @@ function pixelPanel(k, { x0, y0, z, w, h, px, color, extra, place = (p) => p, n 
   k.cloud({ count: (nx * ny * 160000) / k.count, jitter: 0 }, (_r, i) => {
     const x = x0 + ((i % nx) + 0.5) * px;
     const y = y0 - (Math.floor(i / nx) + 0.5) * px;
-    return { p: place([x, y, z]), n, flat: 0.1, size: (px * 1.05) / base(), color: color(x, y), opacity: 1, pattern: false, ...(extra ? extra(x, y) : {}) }; // prettier-ignore
+    const col = color(x, y);
+    if (!col) return null; // no pixel here
+    return { p: place([x, y, z]), n, flat: 0.1, size: (px * 1.05) / base(), color: col, opacity: 1, pattern: false, ...(extra ? extra(x, y) : {}) }; // prettier-ignore
   });
 }
 
@@ -1409,6 +1411,7 @@ const STORK_MIGRATION = {
     const f = c.fly > 0 ? clamp((s - 0.4) / 12, 0, 1) * (1 - ease(seg(s, 13.1, 15.2))) : 0;
     const hour = f * d.hours;
     out.morph = [f, 0, 0, 0];
+    out.glow = [1, 0.95, 0.8, c.fly > 0 ? 1.6 : 0]; // the time bar lights where the season is
     const back = s > 13.1 ? Math.PI : 0; // facing home while the season rewinds
     out.tokens = d.birds.map((b) => {
       const q = birdAt(b.pts, hour);
@@ -1445,47 +1448,39 @@ const STORK_MIGRATION = {
       color: (c) => shade(pic.sample(c.u, c.v), (c.wall ? 0.6 : 0.95 * hill(c.n, 0.35)) + 0.18),
     });
     addGridSides(k, F, ground, { spacing: map.spacing, side: () => "#4a443c" });
-    // Trails: a line per bird along its fixes, appearing behind it as the
-    // migration plays (the channel is the season's fraction).
-    const palette = ["#ff8a3d", "#ffd23a", "#ff5a7a", "#7fd1ff", "#b78bff", "#7dff9a"];
-    const birds = M.birds.map((b, bi) => {
-      const col = palette[bi % palette.length];
+    // Round 3 (the owner: "too cartoonish"): drawn like a real tracking map. Each bird's track
+    // is a thin line on the ground (one small splat every few thousandths, so it stays crisp),
+    // drawn behind the bird as the season plays; each bird is a small white dot with a dark
+    // rim, like a GPS fix.
+    const palette = ["#f08a4b", "#f2c94c", "#eb6f92", "#6fc3df", "#a98be8", "#7fd6a0"];
+    const baseT = () => k.baseSize || 0.01;
+    const trail = [];
+    M.birds.forEach((b, bi) => {
       const pts = b.pts;
-      k.cloud({ share: 0.008, size: 1 }, (rand) => {
-        const x = rand() * (pts.length - 1);
-        const i = Math.floor(x);
+      for (let i = 0; i + 1 < pts.length; i++) {
         const a = pts[i];
-        const bb = pts[Math.min(pts.length - 1, i + 1)];
-        const f = x - i;
-        const lon = a[1] + (bb[1] - a[1]) * f;
-        const lat = a[2] + (bb[2] - a[2]) * f;
-        const hour = a[0] + (bb[0] - a[0]) * f;
-        const p = at(lon, lat);
-        p[1] -= SM_FLY * 0.8;
-        return { p, color: col, size: 0.55, opacity: 0.9, kind: "fade", channel: 0, params: [hour / M.hours + 0.002, -0.004], pattern: false }; // prettier-ignore
-      });
-      // The stork: white body and wings with black flight feathers, a red
-      // bill, built facing +Z at its nest.
-      const base = at(pts[0][1], pts[0][2]);
-      k.cloud({ share: 0.0025, size: 1 }, (rand) => {
-        const r = rand();
-        let lp;
-        let color;
-        if (r < 0.35) {
-          lp = [(rand() - 0.5) * 0.012, (rand() - 0.5) * 0.009, (rand() - 0.5) * 0.04];
-          color = "#f3f1ec";
-        } else if (r < 0.92) {
-          const side = rand() < 0.5 ? -1 : 1;
-          const span = rand();
-          lp = [side * span * 0.05, 0.003 * span, (rand() - 0.5) * 0.018 - 0.003 * span];
-          color = span > 0.55 ? "#1f1f22" : "#f3f1ec";
-        } else {
-          lp = [0, 0, 0.02 + rand() * 0.012];
-          color = "#e0452c";
+        const bb = pts[i + 1];
+        if (bb[0] - a[0] > 48) continue; // a gap in the fixes: left blank, as on a real tracking map
+        const pa = at(a[1], a[2]);
+        const pb = at(bb[1], bb[2]);
+        const steps = Math.max(1, Math.ceil(Math.hypot(pb[0] - pa[0], pb[2] - pa[2]) / 0.0025));
+        for (let j = 0; j < steps; j++) {
+          const f = j / steps;
+          const p = at(a[1] + (bb[1] - a[1]) * f, a[2] + (bb[2] - a[2]) * f);
+          p[1] -= SM_FLY - 0.003;
+          trail.push({ p, bi, hour: a[0] + (bb[0] - a[0]) * f });
         }
-        return { p: [base[0] + lp[0], base[1] + lp[1], base[2] + lp[2]], color, size: 0.6, kind: "token", params: [bi, 0], pattern: false }; // prettier-ignore
-      });
-      return { pts, base };
+      }
+    });
+    k.cloud({ count: (trail.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+      const q = trail[Math.min(trail.length - 1, i)];
+      return { p: q.p, n: [0, 1, 0], flat: 0.2, size: 0.0034 / baseT(), color: palette[q.bi % palette.length], opacity: 0.9, kind: "fade", channel: 0, params: [q.hour / M.hours + 0.002, -0.004], pattern: false }; // prettier-ignore
+    });
+    const birds = M.birds.map((b, bi) => {
+      const base = at(b.pts[0][1], b.pts[0][2]);
+      base[1] -= SM_FLY - 0.006;
+      dot(k, { at: base, n: [0, 1, 0], r: 0.011, color: "#fbfaf6", rim: "#1c1d20", extra: { kind: "token", params: [bi, 0] } }); // prettier-ignore
+      return { pts: b.pts, base };
     });
     // The months along the front, with a bar that lights as time passes.
     const z = F.z(1) + 0.08;
@@ -1498,20 +1493,28 @@ const STORK_MIGRATION = {
       const fx = (d0 - start.getTime()) / 3.6e6 / M.hours;
       if (fx > -0.02 && fx < 1) months.push([Math.max(0, fx), MONTHS[mth % 12]]);
     }
-    k.add(k.param((u, v) => [x0 + (x1 - x0) * u, F.bottom - 0.01, z + v * 0.03], { grid: 24 }), { even: true, share: 0.01, color: "#2d3238", kind: "band", channel: 0, params: (c) => [c.u, 0.015], pattern: false }); // prettier-ignore
-    const fx = 0.014;
-    for (const [mf, word] of months) {
-      const mx = x0 + (x1 - x0) * mf;
-      k.add(
-        k.param((u, v) => [mx + u * 0.34, F.bottom - 0.01, z + 0.045 + v * 0.135], { grid: 16 }),
-        {
-          even: true,
-          share: 0.02,
-          flat: 0.1,
-          color: (c) => (inked([word], (c.p[0] - mx) / fx, (c.p[2] - z - 0.045) / fx) ? { c: [0.9, 0.9, 0.86], keep: true, size: 0.6 } : null), // prettier-ignore
-        },
-      );
-    }
+    // Lying flat in front of the map: square pixels on a grid, as on the other plaques.
+    const flat = ([x, y]) => [x, F.bottom - 0.01, z - y];
+    const MPX = 0.0045;
+    pixelPanel(k, { x0, y0: 0, z: 0, w: x1 - x0, h: 0.03, px: MPX, place: flat, n: [0, 1, 0], color: () => [0.18, 0.2, 0.22], extra: (x) => ({ kind: "band", channel: 0, params: [(x - x0) / (x1 - x0), 0.015] }) }); // prettier-ignore
+    const fx = 0.009;
+    pixelPanel(k, {
+      x0,
+      y0: -0.045,
+      z: 0,
+      w: x1 - x0 + 0.3,
+      h: 0.08,
+      px: MPX,
+      place: flat,
+      n: [0, 1, 0],
+      color: (x, y) => {
+        for (const [mf, word] of months) {
+          const mx = x0 + (x1 - x0) * mf;
+          if (inked([word], (x - mx) / fx, (-0.045 - y) / fx)) return [0.9, 0.9, 0.86];
+        }
+        return null;
+      },
+    });
     k.data = { birds, hours: M.hours, at };
   },
 };
