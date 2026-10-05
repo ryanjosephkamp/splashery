@@ -163,6 +163,9 @@ export class MotionDriver {
   // tap as info.tap = { point, key, pick, time, n }.
   act(time, point = null, forced = null) {
     const a = this.recipe?.action;
+    // Lane Molecule viewer (engine): what the tap's `action.at` asked to tell
+    // the person ({ say: "…" } in its result), for the player to show.
+    this.said = null;
     // Lane Live input r2: a recipe may act inside the person's own gesture
     // (a song's audio may start playing only there, on a phone).
     a?.onAct?.(point, this.state);
@@ -173,6 +176,7 @@ export class MotionDriver {
       pick = forced.pick ?? null;
     } else if (a?.at && point) {
       const r = a.at(point, this.state);
+      if (r && typeof r === "object" && r.say) this.said = String(r.say);
       if (typeof r === "string") key = r;
       else if (r?.options) {
         // A tap that switches the toy ({ options, key, pick }): the player

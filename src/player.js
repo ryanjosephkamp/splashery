@@ -1229,6 +1229,9 @@ export class Player {
     // Lane Physics: pieces moved in Hands-on go home before the toy's tap.
     if (this.handsOn.mode === "pieces") this.handsOn.reset();
     const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);
+    // Lane Molecule viewer (engine): a tap that has something to say (a
+    // measurement) shows it as a message.
+    if (this.motion.said) this.emit("say", this.motion.said);
     if (r.options) {
       this.switchTo(r);
       return r;
