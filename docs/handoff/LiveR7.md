@@ -106,12 +106,14 @@ owner's "the toys could still be sharper"), on `claude/lane-live-r7-polish` (fro
 #263 and #284 are frozen for the Integrator's run). No PR yet: it opens as "Phase Live r7 polish: …"
 once #263 merges and main is merged in. No engine change was needed. Hourly check-ins stopped.
 
-- **Chladni plate** (`lv7-chladni-plate-r3`): the labs' sharp kernel, so each grain is a crisp speck
-  (up to 14,000 grains was tried and taken back: on a loaded machine the sand settled too slowly for
-  `live4`'s audio test). The plate's rim and sides are fine strips of small discs, so its edge is
-  straight and clean (was a box whose edge showed as beads). Its top is a denser sheet that stops
-  short of the rim (the sharp kernel showed a faint dotted texture). The bow is drawn like a real
-  one: a round stick with a little camber, a ribbon of hair, a frog and a tip.
+- **Chladni plate** (`lv7-chladni-plate-r3`): the labs' sharp kernel, so each grain is a crisp
+  speck. The plate's rim and sides are fine strips of small discs, so its edge is straight and clean
+  (was a box whose edge showed as beads), and its top stops short of the rim. The bow is drawn like
+  a real one: a round stick with a little camber, a ribbon of hair, a frog and a tip.
+  - The plate costs about what it did: the rim's splats come out of the top's share, and the top's
+    discs keep their size. A heavier plate (up to 14,000 grains, bigger top discs) drew a third
+    fewer frames in this container's software renderer, and as the sand settles only as fast as
+    frames come, `live4`'s audio test timed out. Both were taken back.
 - **Song landscape** (`lv7-song-landscape-r2`): the sharp kernel on half as many splats again
   (density 1.5).
   - Live (the long-song path) has three splats a cell, the top and two down the wall to near the

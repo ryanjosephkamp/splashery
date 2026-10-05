@@ -41,21 +41,14 @@ import { Sand } from "./chladni-sand.js";
 // A flat, smooth sheet of splats facing up: two staggered lattices of flat
 // discs that overlap, so it reads as a solid surface (not a grid of dots).
 // `cells` is the number of splats to spend; color(x, z) gives each one's color.
-function sheet(
-  k,
-  { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extra = null, overlap = 0.66 },
-) {
-  // prettier-ignore
+function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extra = null }) {
   const w = x1 - x0;
   const d = z1 - z0;
   const gx = Math.max(4, Math.round(Math.sqrt((cells / 2) * (w / d))));
   const gz = Math.max(4, Math.round(cells / 2 / gx));
   const sx = w / gx;
   const sz = d / gz;
-  // A splat reads about 2.5 sizes across. (Live r7 polish: `overlap` 0.85
-  // for a sheet drawn with the sharp kernel, whose flatter discs otherwise
-  // leave a faint dotted texture.)
-  const size = (overlap * Math.max(sx, sz)) / 0.01;
+  const size = (0.66 * Math.max(sx, sz)) / 0.01; // a splat reads about 2.5 sizes across
   const list = [];
   for (let layer = 0; layer < 2; layer++)
     for (let i = 0; i < gx - layer; i++)
@@ -75,7 +68,7 @@ function sheet(
 // small flat discs round the top's edge (`half` from the middle, at height
 // y), and each side a fine sheet of discs facing out, `thick` deep.
 function plateRim(k, { half, thick, y, part, top, side = "#4a535e" }) {
-  const step = 0.007;
+  const step = 0.009;
   const size = (step * 1.7) / 0.01;
   const along = Math.round((2 * half) / step);
   const down = Math.max(2, Math.round(thick / step));
@@ -91,7 +84,7 @@ function plateRim(k, { half, thick, y, part, top, side = "#4a535e" }) {
       const t = -half + ((i + 0.5) / along) * 2 * half;
       const at = (r, h) => (ax === 0 ? [sg * r, h, t] : [t, h, sg * r]);
       // The top's last few millimeters, with a hair of light on the edge.
-      for (const r of [half - 0.014, half - 0.0075, half - 0.0025]) {
+      for (const r of [half - 0.0105, half - 0.003]) {
         const [x, , z] = at(r, 0);
         const lit = r > half - 0.004 ? 1.12 : 1;
         list.push({ p: at(r, y), n: [0, 1, 0], flat: 0.02, size, opacity: 1, color: shade(top(x, z), lit), part, pattern: false }); // prettier-ignore
@@ -103,6 +96,7 @@ function plateRim(k, { half, thick, y, part, top, side = "#4a535e" }) {
     }
   }
   k.cloud({ share: list.length / k.count, pattern: false, jitter: 0 }, (rand, i) => list[i] || null); // prettier-ignore
+  return list.length;
 }
 
 export const F0 = 60; // Hz per unit of n² + m²
@@ -448,21 +442,25 @@ const CHLADNI = {
     // The plate: its top a smooth sheet of overlapping flat discs (brushed
     // steel, a soft light across it). Live r7 polish: the sheet stops short
     // of the rim, and the rim and the four sides are fine strips of small
-    // discs (was a box, whose edge showed as a row of beads).
+    // discs (was a box, whose edge showed as a row of beads). Bigger discs
+    // on the top were tried and cost a phone's frames (and the sand settles
+    // only as fast as frames come).
     const topColor = (x, z) => mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)); // prettier-ignore
     const inset = 0.012;
+    // (The rim's splats come out of the top's share, so the plate costs
+    // what it did: on a slow phone the sand settles only as fast as frames
+    // come.)
+    const rim = plateRim(k, { half: PLATE, thick: PLATE_T, y: 0.001, part: plate, top: topColor });
     sheet(k, {
       x0: -PLATE + inset,
       x1: PLATE - inset,
       z0: -PLATE + inset,
       z1: PLATE - inset,
       y: 0.001,
-      cells: k.count * 0.16,
+      cells: Math.max(4000, k.count * 0.16 - rim),
       part: plate,
-      overlap: 0.85,
       color: topColor,
     });
-    plateRim(k, { half: PLATE, thick: PLATE_T, y: 0.001, part: plate, top: topColor });
     // The bow: a slim stick with a pale ribbon of hair against the front edge.
     const bow = k.part("bow");
     // Live r7: it fades in by morph channel 1, which stays 0 unless a tap
@@ -479,20 +477,20 @@ const CHLADNI = {
     const STICK_Z = PLATE + 0.12;
     const TOP = 0.72;
     const BOT = -0.72;
-    for (let y = BOT; y <= TOP; y += 0.005) {
+    for (let y = BOT; y <= TOP; y += 0.007) {
       const t = (y - BOT) / (TOP - BOT);
       // The stick: nearer the hair in the middle (its camber).
       const z = STICK_Z - 0.035 * Math.sin(Math.PI * t);
-      for (let a = 0; a < 8; a++) {
-        const th = (a / 8) * Math.PI * 2;
+      for (let a = 0; a < 6; a++) {
+        const th = (a / 6) * Math.PI * 2;
         const n = [Math.cos(th), 0, Math.sin(th)];
         bowItems.push({ p: [X + 0.011 * n[0], y, z + 0.011 * n[2]], n, flat: 0.15, size: 1.0, color: shade("#6b4026", 0.78 + 0.32 * Math.max(0, n[0] * 0.6 + n[2] * 0.8)), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
       }
       // The hair: a ribbon a centimeter wide, facing the plate and away.
       if (y > BOT + 0.06 && y < TOP - 0.03)
-        for (let w = -2; w <= 2; w++)
+        for (let w = -1; w <= 1; w++)
           for (const side of [-1, 1])
-            bowItems.push({ p: [X + w * 0.0026, y, HAIR_Z + side * 0.002], n: [0, 0, side], flat: 0.05, size: 0.62, color: shade("#efe7d4", 0.94 + 0.03 * w), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+            bowItems.push({ p: [X + w * 0.0038, y, HAIR_Z + side * 0.002], n: [0, 0, side], flat: 0.05, size: 0.62, color: shade("#efe7d4", 0.94 + 0.03 * w), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
     }
     // The frog (where the hand holds it) and the tip, each joining stick and hair.
     const block = (y0, y1, color) => {
