@@ -722,10 +722,25 @@ export const TOY_HELP = {
     about:
       "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of a typical isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
   },
+  // Lane Elements: the periodic table of real samples (labs).
+  "real-elements": {
+    howTo:
+      "Tap a tile to lift its sample and read its facts; tap the sample to turn it, its tile to set it back.",
+    about:
+      "Every element as a real sample, like the classic photographic periodic tables: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model that judged from the photo how far away each part is. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out toward you and swings so you see its shape. Its facts show beside it: mass, group and period, state, density, melting and boiling points, discovery and real uses, from PubChem. Tap the sample to turn it around, or its tile to set it back. About 27 elements have no photo of a real sample: the heaviest exist only a few atoms at a time. Their tiles are hatched, and their facts say why. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+  },
+
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
     about:
       "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
+  },
+
+  // Lane Molecule viewer (labs).
+  "molecule-viewer": {
+    howTo: "Tap two atoms for their distance, a third for the angle.",
+    about:
+      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank, small molecules as SDF, MOL or XYZ files. This viewer draws every atom of such a file with splats, in the usual colors: carbon gray, oxygen red, nitrogen blue.\n\nPick a sample, open your own file, or type a PDB code such as 1MBN and press Fetch in the Toy tab; the entry is read only when you ask, and its title, authors and fetch time show beside it. Draw it as a cartoon, balls and sticks, space-filling atoms or a smooth surface, colored by element, chain, residue or B-factor. Tap two atoms for the distance between their centers in ångströms, a third for the angle in degrees. Positions are an experiment's best fit, not a photograph.",
   },
 
   // ---- Gems -----------------------------------------------------------------------------
@@ -1702,6 +1717,19 @@ export const TOY_HELP = {
     about:
       "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
   },
+  // Lane Sound and light lab.
+  "sound-lab": {
+    howTo:
+      "Tap to play or stop a tone. The Toy tab changes it, starts the metronome, or uses your microphone.",
+    about:
+      "Sound is air pressure going up and down, and this bench shows it four ways. The oscilloscope draws the wave over a few thousandths of a second. The spectrum splits it into frequencies and names the loudest. The spectrogram keeps eight seconds of spectra side by side: a whistle is a bright line, a clap a column. The level is in decibels below full scale (dBFS).\n\nTap to play the tone generator, a sine, square, saw or noise from 20 Hz to 20 kHz, through the speaker when the site's sound is on. Two close tones beat: 440 and 443 Hz swell and fade three times a second. A square wave's extra lines are its odd harmonics. Tap “Use my microphone” to see your voice instead; the sound goes only to the screen. The dB SPL figure is an uncalibrated estimate that assumes a typical phone microphone. The metronome clicks once a beat as it swings from side to side.",
+  },
+  "sound-recorder": {
+    howTo:
+      "Tap Record in the Toy tab, make your sound, then Stop. Tap the toy to play it; trim and save it there.",
+    about:
+      "A recorder for sound effects and ideas. Tap Record and the page keeps what your microphone hears, up to ten minutes. Stop shows the recording as a waveform (how loud, moment by moment) over a spectrogram (which pitches, from 40 Hz at the bottom to 16 kHz at the top). Drag Start and End, or tap Trim the silence, to keep just the part you want, and tap the toy to hear it.\n\nSave as WAV keeps every sample exactly as it was recorded (16-bit, the microphone's rate). Save as a smaller file uses your browser's own compression (Opus or AAC) and takes as long as the sound to make. The recording stays in this page's memory on your device and goes when you close the page; nothing is sent anywhere, and it's saved only to a file you choose. To show the Operator a sound you want, attach the file to a message in the chat.",
+  },
   "moving-photo-3d": {
     howTo:
       "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
@@ -1788,17 +1816,18 @@ export const TOY_HELP = {
   "how-ct": {
     howTo: "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
     about:
-      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.",
+      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.\n\nChoose another toy to put in the scanner in the Toy tab. Its CT volume is worked out from its shape: a dense skin around a softer, even inside, since the toy has no real inside to measure.",
   },
   "fruit-mri": {
     howTo: "Drag up or down to scroll through the slices. Tap to play through them all.",
     about:
-      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit in the Toy tab. The faint outline shows where the slice is.",
+      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit and the vision (the realistic gray, night vision or infrared) in the Toy tab. The faint outline shows where the slice is.",
   },
   "electron-microscope": {
-    howTo: "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
+    howTo:
+      "Tap to zoom in a step; the third tap goes back out. Choose the sample and the vision in the Toy tab.",
     about:
-      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface.",
+      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface. Vision in the Toy tab recolors the picture: the realistic gray, a night-vision scope's green, or an infrared camera's colors (for fun: an electron microscope sees no color).",
   },
   "thermal-camera": {
     howTo: "Tap to switch the thermal camera on or off, and watch the tea cool.",
@@ -1808,10 +1837,17 @@ export const TOY_HELP = {
   "walnut-ct": {
     howTo: "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
     about:
-      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
+      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors (CT gray, warm, night vision or infrared) in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
+  // Lane Sound and light lab.
+  "light-lab": {
+    howTo:
+      "Tap for the next element or lamp. The Toy tab picks a prism, a grating or your camera as a spectrometer.",
+    about:
+      "Every element glows in its own colors. Its electrons jump up and fall back, each fall giving off light of one exact wavelength, so an element's light split by a prism is a few sharp lines, as unique as a fingerprint. These are the strong visible lines of sixteen elements measured by NIST, brightness from NIST's relative intensities.\n\nThe prism bends each color by Snell's law, from the glass maker's formula for its index: blue bends most. A grating (a CD, a DVD or a slide) sends each color off where d sin θ = m λ: red bends most, in several orders. Tap to change the lamp and every ray moves. Home spectrometer: hold an old CD or DVD near your camera under a fluorescent lamp, find the rainbow in it and tap “Use my camera”. It calibrates on mercury's 436 and 546 nm lines. Simplified: screens can't show pure spectral colors, and a real lamp's line strengths depend on its pressure and heat.",
+  },
   "fluid-lab": {
     howTo:
       "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
@@ -2058,6 +2094,12 @@ export const TOY_HELP = {
     howTo: "Tap it for a gust of wind that spins the sails hard.",
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
+  },
+  // Lane Night sky.
+  "night-sky": {
+    howTo: "Drag to look around the sky. Tap a star or a planet to name it.",
+    about:
+      "The sky over a place at a moment: about 5,000 stars down to magnitude 6, the faintest you can see from a dark place, each sized by its brightness and colored by its temperature. The Sun, the Moon and the planets are placed by JPL's formulas for their orbits, and the Moon is a small ball lit from the Sun's side, so you see its real phase. As the Sun rises the faint stars go out first.\n\nPick a city in the Toy tab, type a latitude and longitude, or tap “Use my location” (your browser asks first; the place stays on your device). Set a date from 1800 to 2050, or speed time up to watch the sky turn. The Sun and the Moon are drawn three times their real size.",
   },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {

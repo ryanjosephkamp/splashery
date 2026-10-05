@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 391 toys. 361 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 378.
+- 397 toys. 367 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 383.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 13.
+- **new** (needs its own effect): 14.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -37,36 +37,37 @@ Proposals below are suggestions; the owner may change them.
   Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell,
   DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion,
   Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis, Electron orbital,
-  Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode,
-  Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
-  tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
-  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
-  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
-  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
-  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
-  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
-  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
-  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
-  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
-  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
-  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
-  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
-  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
-  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
-  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
-  Song landscape, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo
-  to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut
-  CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
+  Atom, Molecule, Protein, Crystal lattice, Molecule viewer, Periodic table, Real elements, Diamond,
+  Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney,
+  Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
+  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
+  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
+  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
+  Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
+  Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
+  Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
+  Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell
+  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
+  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
+  Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
+  orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
+  Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
+  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
+  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
+  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
+  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
+  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
+  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
+  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
+  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, QR code,
+  Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat field, Light lab,
+  Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab,
+  Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
-- **E2, new effects: space, atoms and gems.** None.
+- **E2, new effects: space, atoms and gems.** Night sky
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
@@ -911,7 +912,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (24)
+## Space (25)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -1084,6 +1085,14 @@ Proposals below are suggestions; the owner may change them.
     core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
+- **Night sky** (`night-sky`). Now: tap: Name a star. Plan: new effect (E2).
+  - Owner: Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.
+  - Effect: The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6
+    (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a
+    ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The
+    sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star
+    or planet with a ring around it and a few facts beside the stage.
+  - Sound: One soft, low tine and a faint breath as the ring marks it.
 
 ## Tiny (22)
 
@@ -1254,7 +1263,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
     as it is digested.
 
-## Atoms (6)
+## Atoms (8)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
@@ -1302,6 +1311,22 @@ Proposals below are suggestions; the owner may change them.
     slices), so atoms never leave their bonds.
   - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
     October 2, 2026).
+- **Molecule viewer** (`molecule-viewer`). Now: tap: Measure an example. Plan: keep.
+  - Owner: Push Plan S1, approved by the owner with "PDB fetch yes" (October 5, 2026; lane Molecule
+    viewer, labs).
+  - Effect: A molecule viewer made of splats: open a PDB, mmCIF, SDF/MOL or XYZ file, or fetch an
+    entry from the Protein Data Bank by its code. Draw it as a cartoon, balls and sticks,
+    space-filling atoms or a molecular surface, colored by element, chain, residue, B-factor, along
+    the chain or by secondary structure. A tap on an atom picks it: a ring marker turns round it; a
+    second pick draws a dotted line and gives the distance in ångströms, a third an arc and the
+    angle in degrees. The Play button measures the distance across a bond angle near the middle,
+    then the angle, then clears.
+  - Improved: Lane Molecule viewer: readers for PDB, mmCIF, SDF/MOL and XYZ (src/molview/parse.js)
+    in a Web Worker; bonds from the file or from covalent radii; helices and strands from the file
+    or inferred (and labeled so); a blobby Gaussian surface; a splat budget that falls to one
+    Gaussian per atom on big structures (tested up to the human 80S ribosome, 4V6X, 237,685 atoms).
+    Samples (snapshot of October 5, 2026, CC0): 1CRN, 1EMA, 1LYZ, 1BNA and caffeine (CCD CFF).
+  - Sound: Quiet: one soft, low click as an atom is picked.
 - **Periodic table** (`periodic-table`). Now: tap: Raise or lower the atom. Plan: keep.
   - Owner: Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).
   - Effect: Tap an element's tile and its atom rises out of the table and builds itself: every
@@ -1317,6 +1342,23 @@ Proposals below are suggestions; the owner may change them.
     (32 columns).
   - Sound: The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it
     packs into the nucleus, in sync (Sound C, October 2, 2026).
+- **Real elements** (`real-elements`). Now: tap: Lift or lower the sample. Plan: keep.
+  - Owner: The owner's new-ideas pick N2 (yes) on the Push Plan (October 5, 2026; lane Elements;
+    labs only).
+  - Effect: The 118 elements as real samples on their tiles: open photos of the real elements cut
+    out of their background and raised in 3D by the Photo to 3D depth model. A tap lifts the sample
+    out of its tile toward the viewer (about 2 s), larger and in finer detail, with a back and rim
+    so it turns as a solid piece, swings it slowly and shows its facts beside the stage; a tap on
+    the sample turns it once around; a tap on its tile sets it back. Elements with no photo of a
+    real sample have hatched tiles, and their facts say why. Tile colors by category or block on
+    demand.
+  - Improved: Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons)
+    cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table
+    and a 256 x 256 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab
+    and Los Alamos (tools/rel-facts.mjs), checked by tests against a saved snapshot of the
+    references.
+  - Sound: A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down,
+    a rising blip as it turns.
 
 ## Gems (8)
 
@@ -2811,7 +2853,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (13)
+## Studio (15)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2947,6 +2989,28 @@ Proposals below are suggestions; the owner may change them.
     own sizes and rotations; save as PLY; timing readout per stage.
   - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
     the flight of a video you opened, the video's own sound.
+- **Sound lab** (`sound-lab`). Now: tap: Play or stop the tone. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: A bench instrument whose screen is a panel of splats: a scrolling spectrogram, the
+    spectrum with its loudest frequency, an oscilloscope and a level meter (dBFS, with an
+    uncalibrated dB SPL estimate). A tap plays or stops the tone generator (sine, square, saw or
+    noise; two tones beat), measured on the screen as the speaker plays it; the speaker's cone moves
+    with the signal. A metronome swings from side to side, one beat a swing, and clicks on each
+    beat. The microphone, on a tap, takes over the screens.
+  - Improved: Sound and light lab: new toy. The screens are measured from samples (the generator's
+    own, or the microphone's); tested: a known tone's spectrogram peak, the beat frequency, the
+    metronome's clicks.
+  - Sound: A soft switch; the tone itself plays from the toy while the site's sound is on.
+- **Sound recorder** (`sound-recorder`). Now: tap: Play or stop the recording. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: A studio microphone before a screen of splats showing the recording's waveform over its
+    spectrogram, the kept span bright and the trimmed ends dimmed, with a play head. Record (in the
+    Toy tab, from the microphone, kept in memory) lights the microphone's lamp; a tap plays or stops
+    the recording. Trim, then save as WAV or a smaller Opus or AAC file.
+  - Improved: Sound and light lab: new toy; the WAV file round-trips sample for sample (tested).
+  - Sound: A soft click.
 - **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
   - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,
@@ -2954,7 +3018,7 @@ Proposals below are suggestions; the owner may change them.
     the floor and lets it rise back into place with a small overshoot (2.4 s).
   - Sound: A soft thud as the marks land, a light knock, and a breath as they rise.
 
-## Lab (2)
+## Lab (3)
 
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
@@ -2973,6 +3037,19 @@ Proposals below are suggestions; the owner may change them.
     each).
   - Sound: Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle
     wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).
+- **Light lab** (`light-lab`). Now: tap: Next element or lamp. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: Line spectra of sixteen elements from NIST to compare (a tap labels the next element's
+    strongest lines); an optical bench where a lamp's beam passes a 60° prism (Snell's law, Schott's
+    Sellmeier index) or a grating (CD, DVD or slide; d sin θ = m λ, orders −2 to +2), every ray
+    traced onto a card, a tap changing the lamp from white light to each element; and a home
+    spectrometer reading a camera picture (a CD or DVD and a fluorescent lamp), calibrated on
+    mercury's 436 and 546 nm lines.
+  - Improved: Sound and light lab: new toy; the lines match NIST's tables, the prism's minimum
+    deviation and the grating angles match their formulas, and the spectrometer finds the lines of a
+    made-up picture within 2 nm (tested).
+  - Sound: The click of a slide changer.
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
   - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
     fluid splat simulator"; lane Fluids; labs only).
@@ -3105,7 +3182,8 @@ Proposals below are suggestions; the owner may change them.
     the belt through the scanner, pushing its lead curtains aside; the screen on top builds each
     bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic
     orange, inorganic green, metal blue, dense black). A tap sends the next bag.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, a 180
+    by 120 X-ray picture on an even pale screen).
   - Sound: The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is
     done.
 - **How CT works** (`how-ct`). Now: tap: Scan or undo the scan. Plan: keep.
@@ -3114,7 +3192,9 @@ Proposals below are suggestions; the owner may change them.
     arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane).
     Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps
     back.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2 (the owner's notes of October 5, 2026): sharper (the labs
+    sharp kernel, twice the splats); 19 other toys can lie in the scanner instead of the shell (In
+    the scanner), each voxelized into a volume with a dense skin.
   - Sound: The gantry's knock as it starts and its motor's low run, lower on the way back.
 - **Walnut CT scan** (`walnut-ct`). Now: tap: Shell only, or the whole walnut. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an
@@ -3124,7 +3204,8 @@ Proposals below are suggestions; the owner may change them.
     back, top down or side to side) and shows the shell, the kernel's lobes and the air between
     them. The tap raises the density window so the kernel melts away and only the shell stays; a
     second tap brings it back.
-  - Improved: Imaging: new toy, with tools/img-walnut.mjs.
+  - Improved: Imaging: new toy, with tools/img-walnut.mjs. Imaging r2: sharper (the labs sharp
+    kernel, twice the splats); night-vision and infrared colors.
   - Sound: A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.
 - **MRI of a fruit** (`fruit-mri`). Now: tap: Play through the slices. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).
@@ -3132,7 +3213,8 @@ Proposals below are suggestions; the owner may change them.
     slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline
     of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag
     scrolls through them and the tap plays through all of them, front to back, and comes back.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a
+    Vision option (gray, night vision, infrared).
   - Sound: An MRI scanner's knocking as it steps through the slices.
 - **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step (the third goes back
   out). Plan: keep.
@@ -3143,7 +3225,8 @@ Proposals below are suggestions; the owner may change them.
     microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each
     tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface);
     the third goes back out.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer
+    splats); a Vision option (gray, night vision, infrared).
   - Sound: The stage motor's two soft steps and a low vacuum hum.
 - **Thermal camera** (`thermal-camera`). Now: tap: Thermal camera on or off. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea
@@ -3152,6 +3235,8 @@ Proposals below are suggestions; the owner may change them.
     crossfades from normal colors to the thermal camera's false colors (the iron palette), and the
     tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays
     warm and the ice water cold. A second tap goes back to normal colors.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats); the
+    tea steps from hot to warm to cooled with short blends (a long crossfade of two copies looked
+    grainy).
   - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
     turns off.
