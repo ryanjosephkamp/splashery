@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 379 toys. 349 have a tap action today; the other 30 only hop.
+- 382 toys. 352 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 374.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 5.
+- **new** (needs its own effect): 8.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -69,8 +69,8 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code,
-  Video to 3D
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
+  a QR code works, QR damage lab, Three QR codes in one, Video to 3D
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2764,7 +2764,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (9)
+## Studio (12)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2826,6 +2826,36 @@ Proposals below are suggestions; the owner may change them.
     their back color).
   - Sound: Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back
     (Assemble: a rush in and a settle; Flip: two soft sweeps).
+- **How a QR code works** (`qr-anatomy`). Now: tap: Next part. Plan: new effect (E6).
+  - Owner: The owner's push notes of October 4, 2026 (Q6, "strong yes"; "it has to be technically
+    correct"), lane QR lab r2, October 5, 2026.
+  - Effect: How a QR code works: a tap lights up the next part of a real code (finders, separators,
+    timing, alignment, format and version information, the dark module, data and error correction
+    codewords, remainder bits, the mask); its modules lift toward you as solid tiles in the part's
+    color. Encode your own text steps through the mode, the count, the data bits, padding, error
+    correction, blocks and interleaving, the zigzag placement (every bit drops into place along the
+    path) and the eight masks (the masked tiles turn over, with each mask's penalty), every step
+    checked against Nayuki's encoder.
+  - Sound: A light wooden knock and a soft breath as each part lifts.
+- **QR damage lab** (`qr-damage`). Now: tap: Add damage. Plan: new effect (E6).
+  - Owner: The owner's push notes of October 4, 2026 (Q7, "an absolute strong yes ... build this out
+    very comprehensively"; X3, the code that heals, October 5), lane QR lab r2, October 5, 2026.
+  - Effect: The Damage lab: a tap adds the chosen damage (scratch, sticker, tear, burn, smudge, or
+    the splats' own: blur, shrink, grow, jitter, fade, color drift; with Tilt, Curve and Move in
+    time as sliders). A sticker drops onto the code, a torn corner peels up and falls away, a burned
+    corner chars and crumbles. A meter reads the very picture on the stage with jsQR after each
+    change and counts each block's lost codewords against what it can fix; the four levels can stand
+    side by side. Heal it shows the code as a reader read it, wrong modules in red, and turns them
+    over block by block as Reed–Solomon decoding fixes each block.
+  - Sound: A soft scrape and a muffled thud as the damage lands.
+- **Three QR codes in one** (`qr-three`). Now: tap: Pull the three apart. Plan: new effect (E6).
+  - Owner: The owner's pick X2 on the Push Plan, October 5, 2026 (three codes in one square), lane
+    QR lab r2.
+  - Effect: Three QR codes in the red, green and blue of one square (eight colors). A tap pulls the
+    square apart into its three codes, each in its own color, which slide back and out to the sides
+    and come back together. Read all three splits the picture into its channels and reads each code;
+    an ordinary reader's result is shown beside them.
+  - Sound: A soft breath as the codes slide apart and a light knock as they meet again.
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).
