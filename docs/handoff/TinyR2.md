@@ -42,32 +42,46 @@ for a long job, schedule a check-in with send_later instead of going idle.
 
 ## State
 
-WORKING (October 5, 2026):
+WORKING (October 5, 2026): all four toys built, tested and documented; clips rendering for Effect
+review page 2.
 
-- **DNA to protein** (`dna-to-protein`, labs, Tiny world shelf): built and tested. Four genes from
-  NCBI (HBB, INS, LYZ, GFP) with the alpha carbons of their PDB structures (4HHB, 1MSO, 1LZ1, 1GFL)
-  in `src/tiny/genes.js` (`node tools/tw2-genes.mjs` rebuilds it and checks each translation against
-  the record's). Mutations (change, add or remove a base in codons 2 to 7) and typed DNA.
-- Next: the evidence file, the clip, then mitosis, apoptosis and phagocytosis.
+- **DNA to protein** (`dna-to-protein`): four NCBI genes (HBB, INS, LYZ, GFP) with the alpha carbons
+  of PDB 4HHB, 1MSO, 1LZ1, 1GFL in `src/tiny/genes.js` (`node tools/tw2-genes.mjs` rebuilds it and
+  checks each translation against the record). Mutations in codons 2 to 7 and typed DNA. About 34 s;
+  the camera follows each step. Evidence: docs/evidence/dna-to-protein.json.
+- **Cell division** (`mitosis`): prophase to cytokinesis with phase names, then one daughter grows
+  back into the cell (18 s).
+- **Apoptosis** (`apoptosis`): shrinkage, pyknosis, blebbing, karyorrhexis, apoptotic bodies that
+  drift away; a neighbor moves in (14 s).
+- **Phagocytosis** (`phagocytosis`): a neutrophil wraps a bacterium into a phagosome, lysosomes
+  fuse, digestion, the waste goes out (16 s), with labels for each step.
+- Evidence files for all four; tests `tests/tw2-dna.spec.mjs` and `tests/tw2-cells.spec.mjs`.
+- Next: post the clips on Effect review page 2 and read the owner's marks.
 
 ## Notes
 
-- The toy follows its story with the camera through `out.view` (lane Books' page focus: a recipe
+- The DNA toy follows its story with the camera through `out.view` (lane Books' page focus: a recipe
   with `focus` may say what to show). `tools/effect-clip.mjs` puts the camera home every frame, so
   this lane renders its clips with `tools/tw2-clip.mjs` (MP4, phone-size portrait, `--stills=` for a
   strip of moments).
-- The story is about 34 s at normal speed: transcription (7 s), the mRNA moves down, the small
-  subunit and the initiator tRNA scan to AUG, the large subunit joins, a cycle per drawn codon, a
-  quick run over the codons not drawn, the last codon, the stop codon and the release factor, then
-  the fold (a molten globule's copy swaps for a copy that morphs into the structure).
-- Tokens 0..9 are the tRNAs, 10..19 their amino acids, 20 and 21 the tether's ends; DNA bases are
-  levers (the coding strand lifts, the template's bases turn about its backbone).
+- DNA to protein: tokens 0..9 are the tRNAs, 10..19 their amino acids, 20 and 21 the tether's ends;
+  DNA bases are levers (the coding strand lifts, the template's bases turn about its backbone); the
+  chain's globule copy fades in bead by bead (channel 1) and swaps for a copy that morphs into the
+  structure (channel 2).
+- Cell division: chromatids are tokens 0..7 (condensed from a morphing chromatin copy), centrosomes
+  8 and 9, kinetochore-fiber tips 10..17 (fibers are skin), envelope pieces 18..29, phase names
+  30..36, polar-fiber ends 37..40. The membrane pinches by a morph (`daughterPoint`: each half's
+  polar angle doubles), tested in `tests/tw2-cells.spec.mjs`.
+- A source check corrected one claim: UniProt marks no removed methionine for GFP, so it stays.
 
 ## Known issues
 
-- On a phone the whole-toy view (at rest) is small: the gene is drawn wide. The story's own views
-  zoom in on each step.
+- On a phone the DNA toy's whole-toy view (at rest) is small: the gene is drawn wide. The story's
+  own views zoom in.
+- Faint membranes are drawn as thin shells of faint splats (no `rim` glass, because they also
+  morph); they read as translucent at phone size.
 
 ## For the Operator
 
-- Nothing yet.
+- The DNA toy uses `focus`/`out.view` so the camera follows its story: please tell me if the owner
+  would rather keep his own camera during a tap.

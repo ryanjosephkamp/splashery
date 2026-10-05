@@ -896,7 +896,7 @@ const MI_PHASES = ["INTERPHASE", "PROPHASE", "PROMETAPHASE", "METAPHASE", "ANAPH
 // Where a point lands when a sphere of radius R about the origin pinches into
 // two spheres of radius RD at ±XD: each half's polar angle (from its own
 // pole, +x or -x) doubles, so its rim closes to the furrow point.
-function daughterPoint(p) {
+export function daughterPoint(p) {
   const s = p[0] >= 0 ? 1 : -1;
   const r = len(p) || 1;
   const d = mul(p, 1 / r);
