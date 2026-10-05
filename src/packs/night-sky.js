@@ -18,6 +18,9 @@ import { quatAxisAngle, quatFromTo } from "../kit.js";
 import { BITMAP } from "../font.js";
 import {
   sky,
+  lst,
+  julianDay,
+  SOLAR_DAY_LST,
   fromRaDec,
   bvToKelvin,
   kelvinToRgb,
@@ -139,7 +142,12 @@ const SPEEDS = [
   { id: "60", label: "1 minute a second", rate: 60 },
   { id: "600", label: "10 minutes a second", rate: 600 },
   { id: "3600", label: "1 hour a second", rate: 3600 },
-  { id: "86164", label: "1 sidereal day a second (the stars hold still)", rate: 86164.0905 },
+  // The owner, October 5, 2026: slower by default, and a choice of speed. These hold the clock
+  // at one time of night while the days go by, so the sky stays still and the Moon walks
+  // through its phases (each whole day is the real sky; in between, the days are blended).
+  { id: "day2", label: "Same time each day: a day every 2 seconds", rate: 43200, daily: true },
+  { id: "day1", label: "Same time each day: a day a second", rate: 86400, daily: true },
+  { id: "day4", label: "Same time each day: 4 days a second (fast)", rate: 345600, daily: true },
   { id: "0", label: "Stopped", rate: 0 },
 ];
 
@@ -154,6 +162,8 @@ export const SKY = {
   rate: 1, // sky seconds a second now; it eases toward target
   target: 1,
   glide: null, // { from, to, t0, dur }: a short glide to a time picked in the panel
+  dailyAnchor: null, // the moment whose clock time a "same time each day" speed holds
+  daily: false,
   speed: "1",
   picked: null, // { kind: "star" | "body", i | name }
   pickedAt: 0,
@@ -168,6 +178,7 @@ const skyTime = () => clamp(SKY.ms ?? Date.now(), MIN_MS, MAX_MS);
 // to it); a longer one, or one from the test hook, is instant.
 function setTime(ms, glide = false) {
   const to = clamp(ms, MIN_MS, MAX_MS);
+  SKY.dailyAnchor = to;
   if (glide && SKY.ms !== null && Math.abs(to - SKY.ms) < 2 * 86400000)
     SKY.glide = { from: SKY.ms, to, t0: SKY.t, dur: 1 };
   else {
@@ -180,6 +191,9 @@ function setTime(ms, glide = false) {
 // A new speed eases in (and out, to a stop) over about a second, so the sky never lurches.
 function setSpeed(id, instant = false) {
   const s = SPEEDS.find((x) => x.id === id) || SPEEDS[0];
+  // The clock time a "same time each day" speed holds (kept while one of them stays chosen).
+  const was = SPEEDS.find((x) => x.id === SKY.speed);
+  if (s.daily && !was?.daily) SKY.dailyAnchor = SKY.ms ?? Date.now();
   SKY.target = s.rate;
   if (instant) SKY.rate = s.rate;
   SKY.speed = s.id;
@@ -594,10 +608,11 @@ function buildSky(k, o) {
   };
   const ballSig = (n, rr) => Math.sqrt((4 * Math.PI * rr * rr) / n) * 0.72;
   sphere(700, ballR, (nv, p) => push(dotSplat(p, ballSig(700, ballR), [1, 0.96, 0.84], 1, { part: parts.sun }))); // prettier-ignore
-  for (let i = 0; i < 90; i++) {
-    const rr = ballR * (1.3 + 3.5 * k.rand());
+  // Polish: a crisp disc in a fainter, wider glow (it was a soft blob).
+  for (let i = 0; i < 120; i++) {
+    const rr = ballR * (1.1 + 1.6 * Math.sqrt(k.rand()));
     const nv = norm([k.rand() - 0.5, k.rand() - 0.5, k.rand() - 0.5]);
-    push(dotSplat(c0.map((c, q) => c + nv[q] * rr * 0.6), ballR * (0.9 + 1.4 * k.rand()), [1, 0.88, 0.62], 0.1, { part: parts.sun })); // prettier-ignore
+    push(dotSplat(c0.map((c, q) => c + nv[q] * rr * 0.7), ballR * (0.5 + 0.5 * k.rand()), [1, 0.86, 0.6], 0.06, { part: parts.sun })); // prettier-ignore
   }
 
   // The Moon: a ball lit on its +X side; drive turns +X toward the Sun.
@@ -632,20 +647,57 @@ function buildSky(k, o) {
     push(dotSplat([CM[0] + Math.cos(a) * rr, CM[1], CM[2] + Math.sin(a) * rr], 0.1 * D2R * R.mark, [1, 0.84, 0.42], 0.95, { part: parts.mark })); // prettier-ignore
   }
 
-  // The ground, up to a low skyline, and its daylight color.
-  const nGround = Math.round(N * 0.1);
-  sig = spacing(nGround, -90, 4) * 1.05;
-  for (const q of band(nGround, -90, 4)) {
-    if (q.alt > skyline(q.az)) continue;
-    const near = clamp(-q.alt / 30, 0, 1);
-    push(sheetSplat(sc(q.enu).map((v) => v * R.ground), sig * R.ground, mix([0.03, 0.033, 0.04], [0.012, 0.014, 0.018], near), 1)); // prettier-ignore
-  }
-  const nGroundDay = Math.round(N * 0.04);
-  sig = spacing(nGroundDay, -90, 4) * 1.1;
-  for (const q of band(nGroundDay, -90, 4)) {
-    if (q.alt > skyline(q.az) - 0.05) continue;
-    push(sheetSplat(sc(q.enu).map((v) => v * (R.ground - 0.003)), sig * R.ground, mix([0.2, 0.24, 0.17], [0.1, 0.12, 0.08], clamp(-q.alt / 30, 0, 1)), 1, { kind: FADE, params: [0.35, -0.6], channel: 0 })); // prettier-ignore
-  }
+  // The ground, up to a low skyline, and its daylight color. Polish (the owner's "please make
+  // this sharper" on the sunrise): most of the ground's splats sit near the horizon, where the
+  // view looks, each nudged a little off the even pattern (no moiré); and a row of small splats
+  // traces the skyline, so the hills have a crisp edge against the dawn.
+  const groundLayer = (n, lo, hi, rr, color, extra = {}, edge = 0, overlap = 1.15) => {
+    const sg = spacing(n, lo, hi) * overlap;
+    for (const q of band(n, lo, hi)) {
+      const j = sg * R2D * 0.35;
+      const alt = q.alt + (k.rand() - 0.5) * j;
+      const az = q.az + ((k.rand() - 0.5) * j) / Math.max(0.2, Math.cos(alt * D2R));
+      if (alt > skyline(az) - edge) continue;
+      const e = [Math.cos(alt * D2R) * Math.sin(az * D2R), Math.cos(alt * D2R) * Math.cos(az * D2R), Math.sin(alt * D2R)]; // prettier-ignore
+      push(
+        sheetSplat(
+          sc(e).map((v) => v * rr),
+          sg * rr,
+          color(alt),
+          1,
+          extra,
+        ),
+      );
+    }
+  };
+  const ridge = (rr, color, extra = {}) => {
+    for (let a = 0; a < 360; a += 0.12) {
+      for (const dh of [0.1, 0.3]) {
+        const alt = skyline(a) - dh;
+        const e = [Math.cos(alt * D2R) * Math.sin(a * D2R), Math.cos(alt * D2R) * Math.cos(a * D2R), Math.sin(alt * D2R)]; // prettier-ignore
+        push(
+          sheetSplat(
+            sc(e).map((v) => v * rr),
+            0.11 * D2R * rr,
+            color(alt),
+            1,
+            extra,
+          ),
+        );
+      }
+    }
+  };
+  const nightGround = (alt) => mix([0.03, 0.033, 0.04], [0.012, 0.014, 0.018], clamp(-alt / 30, 0, 1)); // prettier-ignore
+  const dayGround = (alt) => mix([0.2, 0.24, 0.17], [0.1, 0.12, 0.08], clamp(-alt / 30, 0, 1));
+  // The daylight ground comes in over a short stretch of the dawn, and its splats overlap more:
+  // while it is half faded in, uneven overlap shows as mottling.
+  const dayFade = { kind: FADE, params: [0.55, -0.3], channel: 0 };
+  groundLayer(Math.round(N * 0.07), -14, 4, R.ground, nightGround);
+  groundLayer(Math.round(N * 0.03), -90, -13, R.ground, nightGround);
+  ridge(R.ground - 0.001, nightGround);
+  groundLayer(Math.round(N * 0.035), -14, 4, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
+  groundLayer(Math.round(N * 0.012), -90, -13, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
+  ridge(R.ground - 0.004, dayGround, dayFade);
 
   // N, E, S and W on the horizon, in the kit's bitmap font.
   const px = 0.3; // degrees per font pixel
@@ -731,7 +783,11 @@ export const RECIPES = {
     drive(t, c, out) {
       const ms = stepTime(t);
       const p = SKY.place;
-      const s = sky(ms, p.lat, p.lon);
+      // "Same time each day": the sidereal time moves on only by the days gone by.
+      const daily = SPEEDS.find((x) => x.id === SKY.speed)?.daily && SKY.dailyAnchor != null;
+      const anchorLst = daily ? lst(julianDay(SKY.dailyAnchor), p.lon) : null;
+      const s = sky(ms, p.lat, p.lon, daily ? anchorLst + ((ms - SKY.dailyAnchor) / 86400000) * SOLAR_DAY_LST : null); // prettier-ignore
+      SKY.daily = daily;
       SKY.last = s;
       SKY.drawn = ms;
       const q = quatFromMatrix(sceneMatrix(s.matrix));
@@ -797,7 +853,9 @@ function legend(s, ms) {
   }
   const p = SKY.place;
   items.push({ text: p.name, head: true });
-  items.push({ text: formatWhen(Math.floor(ms / 60000) * 60000, p.tz) });
+  // On a "same time each day" speed the clock shows the time held, on the day reached.
+  const shown = SKY.daily ? SKY.dailyAnchor + Math.floor((ms - SKY.dailyAnchor) / 86400000) * 86400000 : ms; // prettier-ignore
+  items.push({ text: formatWhen(Math.floor(shown / 60000) * 60000, p.tz) });
   if (SKY.rate !== 1) items.push({ text: (SPEEDS.find((x) => x.id === SKY.speed) || SPEEDS[0]).label }); // prettier-ignore
   const sun = s.bodies.sun;
   const moon = s.bodies.moon;

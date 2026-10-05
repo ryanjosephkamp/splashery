@@ -6,7 +6,8 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/sky-clip.mjs <out-dir> [name ...]
 //
-// Names: turn, tap, sunrise, moon (all by default). Writes <out-dir>/sky-<name>.gif.
+// Names: turn, tap, sunrise, moon (all by default). A clip's `speed` is one of the toy's own
+// speeds (src/packs/night-sky.js, SPEEDS); `rate` is any sky seconds a second. Writes <out-dir>/sky-<name>.gif.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -31,9 +32,10 @@ const CLIPS = {
   // London, June 21, 2026: from the end of the night to sunrise at 10 minutes a second, looking
   // northeast: the glow grows below the Sun, the faint stars go first, then the Sun comes up.
   sunrise: { city: "london", time: "2026-06-21T02:10:00Z", rate: 600, secs: 10, view: { yaw: 2.35, pitch: 0.2, zoom: 1 } }, // prettier-ignore
-  // New York from October 10, 2026, following the Moon one lunar day (24.84 hours) at a time, so
-  // it stays near the meridian while its phase grows from new to full and back.
-  moon: { city: "new-york", time: "2026-10-11T17:30:00Z", rate: 2 * 89428, secs: 14, follow: "moon", zoom: 0.35 }, // prettier-ignore
+  // New York, at 7:30 PM each evening from October 14 to 25, 2026, on the toy's "same time
+  // each day: a day every 2 seconds" speed (the owner's "slow it down"), following the Moon: it
+  // walks east night by night and waxes from a crescent to full.
+  moon: { city: "new-york", time: "2026-10-14T23:30:00Z", speed: "day2", secs: 22, follow: "moon", zoom: 0.5 }, // prettier-ignore
 };
 
 fs.mkdirSync(outDir, { recursive: true });
@@ -58,7 +60,7 @@ for (const name of names.length ? names : Object.keys(CLIPS)) {
       player.opts.idleDelay = 1e9;
       player.idle.weight = 0;
       sky.pick(null);
-      sky.set({ city: clip.city, time: clip.time, rate: clip.rate });
+      sky.set({ city: clip.city, time: clip.time, ...(clip.speed ? { speed: clip.speed } : { rate: clip.rate }) }); // prettier-ignore
       const stage = player.stage;
       const handlers = stage.updateHandlers.slice();
       let pending = 0;
@@ -98,7 +100,7 @@ for (const name of names.length ? names : Object.keys(CLIPS)) {
         aim();
         await stage.captureFrame();
       }
-      sky.set({ time: clip.time, rate: clip.rate });
+      sky.set({ time: clip.time, ...(clip.speed ? { speed: clip.speed } : { rate: clip.rate }) });
       pending = 0;
       aim();
       await stage.captureFrame();
