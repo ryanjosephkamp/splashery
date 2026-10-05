@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
+- 374 toys. 344 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 5.
+- **new** (needs its own effect): 6.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -64,7 +64,7 @@ Proposals below are suggestions; the owner may change them.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
-- **E2, new effects: space, atoms and gems.** None.
+- **E2, new effects: space, atoms and gems.** Night sky
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
@@ -905,7 +905,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (24)
+## Space (25)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -1078,6 +1078,14 @@ Proposals below are suggestions; the owner may change them.
     core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
+- **Night sky** (`night-sky`). Now: tap: Name a star. Plan: new effect (E2).
+  - Owner: Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.
+  - Effect: The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6
+    (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a
+    ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The
+    sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star
+    or planet with a ring around it and a few facts beside the stage.
+  - Sound: One soft, low tine and a faint breath as the ring marks it.
 
 ## Tiny (18)
 
