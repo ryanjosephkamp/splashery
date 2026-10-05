@@ -1,0 +1,230 @@
+{
+  "toy": "dna-to-protein",
+  "checked": "2026-10-05",
+  "summary": "The toy shows a real gene being transcribed into mRNA and translated into a protein, which then folds into its measured structure. The bases, codons, amino acids and structures are real data, and the genetic code is the standard one, checked by tests. The machines (RNA polymerase, the ribosome, tRNAs) are drawn as simple shapes, much smaller and much faster than the real ones, and most of each gene is shortened.",
+  "claims": [
+    {
+      "claim": "The genetic code is the standard code: 64 codons, 61 for amino acids and 3 stop codons (UAA, UAG, UGA); AUG codes for methionine and starts the protein.",
+      "how": "The code table is NCBI's translation table 1 written in its usual order; translation starts at the first ATG and reads in threes to the first stop codon in the same frame.",
+      "where": "src/tiny/genetic-code.js:7",
+      "sources": [
+        {
+          "title": "The Genetic Codes: 1. The Standard Code",
+          "publisher": "NCBI Taxonomy",
+          "url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi",
+          "says": "AAs = FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/tw2-dna.spec.mjs:17",
+      "note": "NCBI also lists TTG and CTG as rare alternative starts; the toy always starts at ATG, as nearly all human genes do."
+    },
+    {
+      "claim": "Each sample gene's coding sequence translates exactly into its protein: hemoglobin beta (147 amino acids), preproinsulin (110), lysozyme (148) and green fluorescent protein (238).",
+      "how": "tools/tw2-genes.mjs takes the CDS from each NCBI record and stops unless the toy's own translation equals the record's /translation; a test checks it again.",
+      "where": "tools/tw2-genes.mjs",
+      "sources": [
+        {
+          "title": "Homo sapiens hemoglobin subunit beta (HBB), mRNA, NM_000518.5",
+          "publisher": "NCBI Nucleotide",
+          "url": "https://www.ncbi.nlm.nih.gov/nuccore/NM_000518.5",
+          "says": "CDS 51..494, /translation=\"MVHLTPEEKSAVTALWGKVNVDEVGG…\""
+        },
+        {
+          "title": "Homo sapiens insulin (INS), transcript variant 1, mRNA, NM_000207.3",
+          "publisher": "NCBI Nucleotide",
+          "url": "https://www.ncbi.nlm.nih.gov/nuccore/NM_000207.3",
+          "says": "CDS 60..392, /translation=\"MALWMRLLPLLALLALWGPDPAAAFVNQHLCG…\""
+        },
+        {
+          "title": "Homo sapiens lysozyme (LYZ), mRNA, NM_000239.3",
+          "publisher": "NCBI Nucleotide",
+          "url": "https://www.ncbi.nlm.nih.gov/nuccore/NM_000239.3",
+          "says": "CDS 29..475; sig_peptide 29..82; mat_peptide 83..472."
+        },
+        {
+          "title": "Aequorea victoria green-fluorescent protein mRNA, complete cds, M62653.1",
+          "publisher": "NCBI Nucleotide (Prasher and others, Gene 111:229-233, 1992)",
+          "url": "https://www.ncbi.nlm.nih.gov/nuccore/M62653.1",
+          "says": "CDS 26..742, /translation=\"MSKGEELFTGVVPILVELDGDVNGHKFSVSG…\""
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/tw2-dna.spec.mjs:32",
+      "note": ""
+    },
+    {
+      "claim": "RNA polymerase reads the template strand; the mRNA is built 5′ to 3′, complementary to the template, so it matches the coding strand with U in place of T.",
+      "how": "The coding strand is drawn on top (5′ at the left), the template under it (3′ at the left), and each mRNA base appears under its template base as the complementary RNA base.",
+      "where": "src/packs/tiny-r2.js:374",
+      "sources": [
+        {
+          "title": "Biology 2e, 15.2 Prokaryotic Transcription",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/15-2-prokaryotic-transcription",
+          "says": "The mRNA product is complementary to the template strand and is almost identical to the other DNA strand, called the nontemplate strand, or the coding strand."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/tw2-dna.spec.mjs:57",
+      "note": ""
+    },
+    {
+      "claim": "The ribosome's small subunit with the initiator tRNA (methionine) binds near the mRNA's 5′ cap and scans to the first AUG; the large subunit then joins.",
+      "how": "The small subunit and the first tRNA come to the 5′ end together, move along the leader to the start codon, and the large subunit comes down onto them.",
+      "where": "src/packs/tiny-r2.js:454",
+      "sources": [
+        {
+          "title": "Biology 2e, 15.5 Ribosomes and Protein Synthesis",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis",
+          "says": "The eukaryotic initiation complex recognizes the 7-methylguanosine cap at the 5' end of the mRNA … tracks along the mRNA in the 5' to 3' direction, searching for the AUG start codon … the 60S subunit binds to the complex of Met-tRNAi, mRNA, and the 40S subunit."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": "The initiation factors are left out."
+    },
+    {
+      "claim": "Each tRNA's anticodon pairs with its codon in the A site; the chain moves onto it (a peptide bond), the ribosome moves one codon, and the empty tRNA leaves from the E site.",
+      "how": "A tRNA carrying the codon's amino acid docks with its anticodon on the codon, the chain shifts from the P-site tRNA to it, the ribosome moves three bases along, and the tRNA two places back leaves.",
+      "where": "src/packs/tiny-r2.js:454",
+      "sources": [
+        {
+          "title": "Biology 2e, 15.5 Ribosomes and Protein Synthesis",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis",
+          "says": "The A (aminoacyl) site binds incoming charged aminoacyl tRNAs. The P (peptidyl) site binds charged tRNAs carrying amino acids that have formed peptide bonds with the growing polypeptide chain … The E (exit) site releases dissociated tRNAs."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/tw2-dna.spec.mjs:57",
+      "note": "Each anticodon is drawn as the exact complement of its codon. Real cells read some codons with fewer tRNAs by wobble pairing at the codon's third base (inosine in the anticodon can pair with U, C or A)."
+    },
+    {
+      "claim": "At a stop codon no tRNA binds; a release factor frees the finished chain.",
+      "how": "When the stop codon reaches the A site, a tRNA-shaped release factor comes in, the chain leaves the tunnel, and the subunits come apart.",
+      "where": "src/packs/tiny-r2.js:556",
+      "sources": [
+        {
+          "title": "Biology 2e, 15.5 Ribosomes and Protein Synthesis",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis",
+          "says": "When a nonsense codon (UAA, UAG, or UGA) is encountered … release factors cause the polypeptide to detach from its tRNA."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The finished chain folds into the protein's measured structure (hemoglobin beta from PDB 4HHB, insulin from 1MSO, lysozyme from 1LZ1, GFP from 1GFL).",
+      "how": "Each amino acid moves to the place of its alpha carbon in the PDB entry, matched to the protein by sequence (GFP by residue number); amino acids missing from a crystal (GFP's first residue and last eight) hang loosely from their neighbors.",
+      "where": "src/packs/tiny-r2.js:98",
+      "sources": [
+        {
+          "title": "4HHB: the crystal structure of human deoxyhaemoglobin at 1.74 Å resolution",
+          "publisher": "RCSB Protein Data Bank",
+          "url": "https://www.rcsb.org/structure/4HHB",
+          "says": "Fermi, G., Perutz, M.F. (1984); X-ray, 1.74 Å."
+        },
+        {
+          "title": "1MSO: T6 human insulin at 1.0 Å resolution",
+          "publisher": "RCSB Protein Data Bank",
+          "url": "https://www.rcsb.org/structure/1MSO",
+          "says": "Smith, G.D., Pangborn, W.A., Blessing, R.H. (2003); X-ray, 1.0 Å."
+        },
+        {
+          "title": "1LZ1: refinement of human lysozyme at 1.5 Å resolution",
+          "publisher": "RCSB Protein Data Bank",
+          "url": "https://www.rcsb.org/structure/1LZ1",
+          "says": "Artymiuk, P.J., Blake, C.C.F. (1981); X-ray, 1.5 Å."
+        },
+        {
+          "title": "1GFL: structure of green fluorescent protein",
+          "publisher": "RCSB Protein Data Bank",
+          "url": "https://www.rcsb.org/structure/1GFL",
+          "says": "Yang, F., Moss, L.G., Phillips, G.N. Jr. (1996); X-ray, 1.9 Å."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/tw2-dna.spec.mjs:32",
+      "note": "The crystallized GFP has arginine at residue 80 where the mRNA record has glutamine, a harmless difference in the widely used cDNA clone; the toy draws the record's sequence on the crystal's shape."
+    },
+    {
+      "claim": "The cell cuts pieces away: hemoglobin beta's first methionine, insulin's signal peptide (1-24) and its C-peptide with the basic pairs around it (55-89), and lysozyme's signal peptide (1-18).",
+      "how": "These amino acids drift away as one piece while the rest folds.",
+      "where": "tools/tw2-genes.mjs",
+      "sources": [
+        {
+          "title": "P68871 (HBB_HUMAN)",
+          "publisher": "UniProt",
+          "url": "https://www.uniprot.org/uniprotkb/P68871",
+          "says": "INIT_MET 1, Removed; CHAIN 2..147, Hemoglobin subunit beta."
+        },
+        {
+          "title": "P01308 (INS_HUMAN)",
+          "publisher": "UniProt",
+          "url": "https://www.uniprot.org/uniprotkb/P01308",
+          "says": "SIGNAL 1..24; PEPTIDE 25..54 Insulin B chain; PROPEP 57..87 C peptide; PEPTIDE 90..110 Insulin A chain."
+        },
+        {
+          "title": "P61626 (LYSC_HUMAN)",
+          "publisher": "UniProt",
+          "url": "https://www.uniprot.org/uniprotkb/P61626",
+          "says": "SIGNAL 1..18; CHAIN 19..148, Lysozyme C."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": "In the cell these cuts happen at different times and places (signal peptides in the endoplasmic reticulum as the chain is made, insulin's C-peptide in secretory granules after folding). The toy makes all the cuts at once, as the chain folds."
+    },
+    {
+      "claim": "Changing base 2 of codon 7 of HBB from A to T turns GAG (glutamic acid) into GTG (valine): the sickle-cell change, Glu6Val in the finished protein's numbering.",
+      "how": "The mutation is made in the sequence before transcription, so it shows in the DNA, the mRNA, the codon, the tRNA and the amino acid; the panel line gives both numbers.",
+      "where": "src/tiny/genetic-code.js:85",
+      "sources": [
+        {
+          "title": "HBB gene",
+          "publisher": "MedlinePlus Genetics (U.S. National Library of Medicine)",
+          "url": "https://medlineplus.gov/genetics/gene/hbb/",
+          "says": "the amino acid glutamic acid is replaced with the amino acid valine at position 6 in beta-globin, written as Glu6Val (E6V)"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/tw2-dna.spec.mjs:67",
+      "note": "The folded hemoglobin S chain is drawn with the same shape; the change is on its surface."
+    },
+    {
+      "claim": "Adding or removing one base shifts the reading frame: every codon after it changes, and translation usually stops early at a new stop codon.",
+      "how": "The toy reads the changed sequence (on into the real 3′ untranslated region if it must) to the first stop in the new frame; a chain cut short like this is not folded.",
+      "where": "src/tiny/protein-story.js:18",
+      "sources": [
+        {
+          "title": "Biology 2e, 15.1 The Genetic Code",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code",
+          "says": "The insertion of one or two nucleotides completely changed the triplet reading frame, thereby altering the message for every subsequent amino acid."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/tw2-dna.spec.mjs:76",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Only the start and end of each gene are drawn base by base: five bases before the start codon, the first seven codons, the last codon and the stop codon. The codons in between are drawn as plain bases and go by quickly, and a label says how many there are.",
+    "The genes are drawn as coding sequences (like a cDNA). The real human genes have introns, which are spliced out of the RNA in the nucleus before it leaves for the cytoplasm; the toy leaves out splicing, the poly(A) tail and the trip through the nuclear pore, and most of the 5′ leader.",
+    "DNA is drawn as a flat ladder; the real double helix turns once every 10.5 base pairs. The transcription bubble is drawn a few bases wide; in the cell it is about a dozen.",
+    "RNA polymerase and the ribosome are drawn far smaller than they are next to the DNA and mRNA (a real ribosome covers about 30 bases of mRNA), as clear shells so you can see inside. The exit tunnel is drawn holding about five amino acids; a real one holds 30 or more.",
+    "The new chain gathers in a loose ball over the ribosome and folds after its release. In the cell, many proteins begin to fold while they are being made, often helped by chaperones, and hemoglobin and insulin finish as parts of larger assemblies (with heme, zinc and partner chains).",
+    "The story takes about half a minute. A cell makes a protein of 150 amino acids in well under a minute, and the transcription and translation of one gene happen many times over, by many polymerases and ribosomes at once."
+  ],
+  "fixes": [
+    {
+      "what": "GFP's first methionine was first drawn as cut away; UniProt P42212 marks the chain as 1-238 with no removed methionine, so it now stays.",
+      "where": "tools/tw2-genes.mjs",
+      "status": "fixed in this PR"
+    }
+  ]
+}
