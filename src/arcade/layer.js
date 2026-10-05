@@ -447,6 +447,7 @@ export class Sprites {
       const m = s.model;
       const sc = Array.isArray(s.scale) ? s.scale : [s.scale, s.scale, s.scale];
       if (s.pieces) {
+        s.last = null; // written piece by piece; whole again, it writes again
         const P = s.pieces;
         for (let i = 0; i < m.n; i++) {
           const pc_ = P[s.owner[i]];
@@ -468,6 +469,13 @@ export class Sprites {
         }
         continue;
       }
+      // A sprite that hasn't moved keeps the centers it wrote last time
+      // (most of a board stands still); a game that changes a model's own
+      // places sets s.dirty.
+      const key = [s.pos[0], s.pos[1], s.pos[2], s.quat[0], s.quat[1], s.quat[2], s.quat[3], sc[0], sc[1], sc[2], s.fade]; // prettier-ignore
+      if (!s.dirty && s.last && s.last.every((v, i) => v === key[i])) continue;
+      s.last = key;
+      s.dirty = false;
       const q = s.quat[3] < 0 ? s.quat.map((v) => -v) : s.quat;
       const [x, y, z, w] = q;
       // The rotation matrix, once per sprite.
