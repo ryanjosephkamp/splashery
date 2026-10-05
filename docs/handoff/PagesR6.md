@@ -168,7 +168,7 @@ unchanged; if they need a change, tell the Operator.
 
 ## State
 
-October 5, 2026 (Opus 5.5). WORKING.
+October 5, 2026 (Opus 5.5). Engine PR #282, lane PR #269.
 
 - **Engine PR** (`claude/lane-pages-r6-engine`, "Engine: a pop-up switch in the top bar, a freed
   tilt, a stage slider and figure depths in scenes"), additive, with `tests/pg6-engine.spec.mjs`:
@@ -212,7 +212,13 @@ October 5, 2026 (Opus 5.5). WORKING.
     rising by itself, one figure at a time, the switch in the Toy tab, `pop`/`bk5pop` now
     `pop0`/`bk5pop0`).
   - Clips: `tools/pg6-clip.mjs` (a copy of the Books r5 recorder with this lane's scenes).
-- Next: P1 (layered pop-up scenes), then clips, screenshots and the PR.
+- P1 (layered pop-up scenes) is built: see "Notes".
+- Checks: `tests/pg6.spec.mjs` (12 in Node, 4 in the app), `tests/pg6-engine.spec.mjs`, the Node
+  parts of `tests/bk5.spec.mjs` and `tests/bk.spec.mjs`, and `tests/help.spec.mjs` pass;
+  `node tools/check-packs.mjs pictures` passes; the contact sheet shows the three toys unchanged at
+  rest, so their thumbnails were not re-rendered. The full suite is left to the Integrators.
+- Clips on Effect review page 2 (lane `PagesR6`), rendered with `tools/pg6-clip.mjs` at 390x844:
+  `pg6-two-up`, `pg6-turn`, `pg6-tilt`; `pg6-lab`, `pg6-layers` and `pg6-terrain` follow.
 
 ## Notes
 

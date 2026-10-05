@@ -268,6 +268,7 @@ async function record(scene) {
   };
   const raise = async (n, box) => {
     await tapAt(await at(n, mid(box)));
+    dbg(`tap ${JSON.stringify(await at(n, mid(box)))} -> ${JSON.stringify(await pops())} pop=${await run(() => window.__splashery.player.motion.state.pop)}`); // prettier-ignore
     await play(STEP);
     await ready();
     await play(2.2);
@@ -325,7 +326,7 @@ async function record(scene) {
   } else if (scene === "layers") {
     await warm();
     await open("photo-album", { reading: "one" });
-    await run(() => window.__splashery.app.pictureStep(Number(opt("step", 1))));
+    await run((n) => window.__splashery.app.pictureStep(n), Number(opt("step", 1)));
     await play(2);
     await popOn();
     await control("layers", 1);
@@ -345,6 +346,7 @@ async function record(scene) {
     await openPhoto(file);
     await play(1);
     await popOn();
+    await play(0.25);
     await raise(0, [0, 0, 1, 1]);
     await turn(0, 0.7, 1.6);
     await hold(1000);
