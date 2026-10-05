@@ -1010,7 +1010,7 @@ export const TOY_SOUNDS = {
   ],
   bacteriophage: [
     { voice: "boing", f: 120, to: 0.5, rate: 30, decay: 0.5 },
-    { voice: "clack", f: 1300, decay: 1.5 },
+    { voice: "hollow", f: 640, decay: 1.5 },
     { voice: "squish", at: 0.5, pitch: 1.5, bright: 0.8 },
   ],
   // Pinches in, the daughters part (1.45 s), then slide back and merge (3.4 s).
@@ -2804,6 +2804,24 @@ export const TOY_SOUNDS = {
       { voice: "wood", f: 760, at: 0.09, vol: 0.25 },
     ],
   },
+  // An MRI scanner's knocking as it steps through the slices.
+  "fruit-mri": [
+    { voice: "hollow", f: 640, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.12, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.24, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.36, vol: 0.32 },
+    { voice: "thud", f: 90, at: 0.55, vol: 0.4 },
+    { voice: "hollow", f: 540, at: 0.7, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 0.82, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 0.94, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 1.06, vol: 0.28 },
+  ],
+  // The microscope's stage motor stepping in, with a soft vacuum hum.
+  "electron-microscope": [
+    { voice: "wood", f: 520, vol: 0.35 },
+    { voice: "wood", f: 560, at: 0.1, vol: 0.3 },
+    { voice: "rumble", f: 110, decay: 1.2, vol: 0.18, at: 0.05 },
+  ],
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

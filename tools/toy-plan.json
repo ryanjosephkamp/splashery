@@ -2470,6 +2470,20 @@
       "effect": "A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm block (resampled to the device's budget). A drag moves a cutting plane through it (front to back, top down or side to side) and shows the shell, the kernel's lobes and the air between them. The tap raises the density window so the kernel melts away and only the shell stays; a second tap brings it back.",
       "sound": "A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.",
       "improved": "Imaging: new toy, with tools/img-walnut.mjs."
+    },
+    "fruit-mri": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).",
+      "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back.",
+      "sound": "An MRI scanner's knocking as it steps through the slices.",
+      "improved": "Imaging: new toy."
+    },
+    "electron-microscope": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom and a snowflake (lane Imaging; labs only).",
+      "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out.",
+      "sound": "The stage motor's two soft steps and a low vacuum hum.",
+      "improved": "Imaging: new toy."
     }
   }
 }

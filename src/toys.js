@@ -3547,6 +3547,26 @@ export const TOYS = [
     tags: "ct scan x-ray tomography walnut nut shell kernel volume real data slice cutting plane density cwi imaging",
     camera: { yaw: 0.35, pitch: 0.2, roll: 0, distance: 2.8 },
   },
+  {
+    id: "fruit-mri",
+    label: "MRI of a fruit",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "mri magnetic resonance imaging scan slices kiwi orange fruit seeds segments t2 imaging",
+    camera: { yaw: 0.35, pitch: 0.15, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "electron-microscope",
+    label: "Electron microscope",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "sem scanning electron microscope micrograph pollen diatom snowflake rime zoom magnification imaging",
+    camera: { yaw: 0.0, pitch: 0.45, roll: 0, distance: 2.6 },
+  },
   // ---- Pack: screens ----
   {
     id: "screen",

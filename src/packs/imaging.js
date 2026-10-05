@@ -5,6 +5,10 @@
 //                    each bag's X-ray picture in the scanner's colors
 //   how-ct           a CT ring sweeps along a nautilus shell and builds its
 //                    volume slice by slice; then a drag cuts into it
+//   fruit-mri        a kiwi's or an orange's MRI slices (kit-built), scrolled
+//                    by a drag or played through by a tap
+//   electron-microscope  pollen, diatoms or a snowflake as a scanning
+//                    electron microscope sees them, with zoom steps
 //   walnut-ct        a real CT scan of a walnut (CWI, CC BY 4.0) as volume
 //                    splats: cut it, or show only its dense shell
 //
@@ -1187,6 +1191,501 @@ function driveWalnut(t, c, out, info) {
   out.volume = vol;
 }
 
+// ---- MRI of a fruit ----------------------------------------------------------------------
+
+// A fruit's MRI as a stack of slices across its long axis (z), as a scanner
+// takes them: fine in each slice, a slice every few millimeters. Each slice
+// is a sheet of volume splats; a slab of the cutting plane shows one at a
+// time. Signal is T2-weighted: watery tissue bright, seeds, skin and air
+// dark, with a little of the scanner's noise.
+const MRI = { slices: 26, kiwi: { a: 1.0, b: 0.76 }, orange: { r: 0.9 } };
+
+// The signal (0..1) at a point, or -1 outside the fruit.
+function kiwiSignal(x, y, z, noise) {
+  const { a, b } = MRI.kiwi;
+  const t = z / a;
+  if (Math.abs(t) >= 1) return -1;
+  const R = b * Math.sqrt(1 - t * t) * (1 + 0.03 * noise(x * 3, y * 3, z * 3));
+  const rr = Math.hypot(x, y);
+  const r = rr / R;
+  if (r >= 1) return -1;
+  const ang = Math.atan2(y, x);
+  // Toward the ends the inner rings shrink faster than the fruit.
+  const end = 1 - 0.35 * t * t;
+  if (r > 0.95) return 0.16 + 0.06 * noise(x * 40, y * 40, z * 40); // the hairy skin
+  const core = 0.24 * end;
+  const loc0 = 0.3 * end;
+  const loc1 = 0.5 * end;
+  if (r < core) return 0.5 + 0.08 * noise(x * 9, y * 9, z * 4); // the columella
+  if (r < loc0) return 0.62 - 0.12 * smoothstep(core, loc0, r);
+  if (r < loc1) {
+    // The locules: very watery, split by thin radial walls, two rows of
+    // dark seeds around the core.
+    const n = 34;
+    const k = ang / ((2 * Math.PI) / n);
+    const wall = Math.abs(k - Math.round(k));
+    let v = 0.92 - 0.35 * (1 - smoothstep(0.0, 0.07, wall));
+    for (const [rs, off] of [
+      [0.36, 0.25],
+      [0.43, 0.75],
+    ]) {
+      const ks = ang / ((2 * Math.PI) / n) - off;
+      const da = (ks - Math.round(ks)) * ((2 * Math.PI) / n) * rr;
+      const dr = rr - rs * end * R;
+      if ((da / 0.018) ** 2 + (dr / 0.03) ** 2 < 1) v = 0.07;
+    }
+    return v;
+  }
+  // The outer flesh, with faint rays.
+  return 0.74 + 0.025 * Math.sin(ang * 34) * smoothstep(loc1, 0.9, r) + 0.04 * noise(x * 12, y * 12, z * 6); // prettier-ignore
+}
+
+function orangeSignal(x, y, z, noise) {
+  const R = MRI.orange.r;
+  const rho = Math.hypot(x, y, z) / R;
+  if (rho >= 1) return -1;
+  if (rho > 0.95) return 0.5 + 0.25 * Math.max(0, noise(x * 30, y * 30, z * 30)); // the peel's oil glands
+  if (rho > 0.84) return 0.18 + 0.05 * noise(x * 20, y * 20, z * 20); // the white pith of the peel
+  const rr = Math.hypot(x, y);
+  if (rr < 0.09 * R) return 0.3; // the core
+  // Eleven segments, with thin dark membranes between them; juice
+  // vesicles fill each one.
+  const n = 11;
+  const ang = Math.atan2(y, x) + 0.15 * noise(z * 2, 1, 1);
+  const k = ang / ((2 * Math.PI) / n);
+  const wall = Math.abs(k - Math.round(k)) * ((2 * Math.PI) / n) * rr;
+  if (wall < 0.012 || rho > 0.82) return 0.12;
+  // A few seeds near the middle.
+  const seg = ((Math.floor(k) % n) + n) % n;
+  if (seg % 4 === 1) {
+    const a = (Math.floor(k) + 0.5) * ((2 * Math.PI) / n);
+    const sx = Math.cos(a) * 0.26 * R;
+    const sy = Math.sin(a) * 0.26 * R;
+    if (((x - sx) / 0.05) ** 2 + ((y - sy) / 0.05) ** 2 + (z / 0.11) ** 2 < 1) return 0.05;
+  }
+  const ves = noise(x * 26, y * 26, z * 8);
+  return 0.8 + 0.12 * ves;
+}
+
+function buildMRI(k, fruit) {
+  const signal = fruit === "orange" ? orangeSignal : kiwiSignal;
+  const half = fruit === "orange" ? MRI.orange.r : MRI.kiwi.a;
+  const across = fruit === "orange" ? MRI.orange.r : MRI.kiwi.b;
+  const S = MRI.slices;
+  const gap = (2 * half) / S;
+  // In-plane pitch from the budget (about 85% of it on the slices).
+  const area = Math.PI * across * across * 0.62; // the slices' mean area
+  const q = Math.sqrt((S * area) / (k.count * 0.85));
+  const noise = (x, y, z) => k.noise(x, y, z);
+  const grain = (x, y, z) => k.noise(x * 61, y * 61, z * 61);
+  const pts = [];
+  for (let i = 0; i < S; i++) {
+    const z = -half + (i + 0.5) * gap;
+    for (let y = -across + q / 2; y <= across; y += q)
+      for (let x = -across + q / 2; x <= across; x += q) {
+        const v = signal(x, y, z, noise);
+        if (v < 0) continue;
+        // Rician-looking noise: a grain that lifts the dark parts most.
+        const g = clamp(Math.hypot(v, 0.05 * (1 + grain(x, y, z))), 0, 1);
+        pts.push(x, y, z, g);
+      }
+  }
+  const n = pts.length / 4;
+  const s = q * 0.75;
+  k.cloud({ count: n * (160000 / k.count), jitter: 0 }, (r, i) => {
+    if (i >= n) return null;
+    const g = pts[i * 4 + 3];
+    const v = 0.04 + 0.96 * g;
+    return {
+      p: [pts[i * 4], pts[i * 4 + 1], pts[i * 4 + 2]],
+      color: [v, v, v],
+      scales: [s, s, gap * 0.12],
+      opacity: 1,
+      kind: "volume",
+      params: [g, 0],
+      pattern: false,
+    };
+  });
+  // A faint outline of the whole fruit, so the slice's place reads.
+  k.cloud({ share: 0.05, jitter: 0.2, size: 0.8 }, (rand) => {
+    const u = rand() * 2 - 1;
+    const a = rand() * 2 * Math.PI;
+    const w = Math.sqrt(1 - u * u);
+    const d = [w * Math.cos(a), w * Math.sin(a), u];
+    const p = fruit === "orange" ? vec.mul(d, MRI.orange.r) : [d[0] * MRI.kiwi.b, d[1] * MRI.kiwi.b, d[2] * MRI.kiwi.a]; // prettier-ignore
+    return { p, color: "#7fb3d9", opacity: 0.05, n: d, pattern: false };
+  });
+  return { S, gap, half };
+}
+
+const mriScroll = cutState();
+mriScroll.at = 0.5;
+CUTS["fruit-mri"] = mriScroll;
+
+function driveMRI(t, c, out, info) {
+  const data = info.data;
+  if (!data) return;
+  if (mriScroll.data !== data) {
+    mriScroll.data = data;
+    mriScroll.at = 0.5;
+  }
+  // A tap plays through every slice, from the front to the back, and comes
+  // back to the slice it left.
+  let f = mriScroll.at;
+  if (c.play > 0) {
+    const p = 1 - c.play;
+    const sweep = p < 0.15 ? f + (1 - f) * ease(p / 0.15) : p < 0.85 ? 1 - ease((p - 0.15) / 0.7) : f * ease((p - 0.85) / 0.15); // prettier-ignore
+    f = sweep;
+  }
+  const i = Math.round(f * (data.S - 1));
+  const z = -data.half + (i + 0.5) * data.gap;
+  out.volume = { normal: [0, 0, 1], at: z, slab: data.gap * 0.9 };
+}
+
+// ---- Electron microscope -----------------------------------------------------------------
+
+// A scanning electron microscope's picture: gray, with bright edges (more
+// electrons escape where the beam meets a surface at a slant), a shadow on
+// the side away from the detector, and a little grain. The beam comes down
+// the z axis onto specimens lying on carbon tape in the x-y plane.
+const SEM_DET = vec.unit([-0.65, 0.55, 0.5]);
+function semTone(n, extra = 0, grain = 0) {
+  const c = Math.max(0.22, Math.abs(n[2]));
+  const se = 0.2 + 0.3 / c; // the secondary-electron yield
+  const det = 0.62 + 0.38 * Math.max(0, vec.dot(n, SEM_DET));
+  const v = clamp(se * det + extra + grain, 0, 1);
+  return [v, v, v];
+}
+
+// Cellular noise: the distance to the nearest and second-nearest of
+// randomly placed points (one per unit cell).
+function worley(x, y, z, seed = 0) {
+  const hash = (i, j, k, s) => {
+    let h = (i * 374761393 + j * 668265263 + k * 2147483647 + s * 1442695041 + seed * 97) | 0;
+    h = Math.imul(h ^ (h >>> 13), 1274126177);
+    return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+  };
+  const xi = Math.floor(x);
+  const yi = Math.floor(y);
+  const zi = Math.floor(z);
+  let d1 = 9;
+  let d2 = 9;
+  for (let i = -1; i <= 1; i++)
+    for (let j = -1; j <= 1; j++)
+      for (let k = -1; k <= 1; k++) {
+        const cx = xi + i + hash(xi + i, yi + j, zi + k, 1);
+        const cy = yi + j + hash(xi + i, yi + j, zi + k, 2);
+        const cz = zi + k + hash(xi + i, yi + j, zi + k, 3);
+        const d = Math.hypot(x - cx, y - cy, z - cz);
+        if (d < d1) ((d2 = d1), (d1 = d));
+        else if (d < d2) d2 = d;
+      }
+  return [d1, d2];
+}
+
+// A point on a unit sphere from two random numbers.
+function sphereDir(u, v) {
+  const z = 2 * u - 1;
+  const a = 2 * Math.PI * v;
+  const w = Math.sqrt(1 - z * z);
+  return [w * Math.cos(a), w * Math.sin(a), z];
+}
+
+// The specimens, each a list of { share, sample(rand) -> { p, n, extra } }
+// plus where its zoom steps look: [center, size] in the x-y plane.
+function semSpecimen(name, noise) {
+  const parts = [];
+  const grain = (p) => 0.05 * noise(p[0] * 90, p[1] * 90, p[2] * 90);
+  // Carbon tape under everything: dark, with a fine texture.
+  const tapeR = 2.1;
+  parts.push({
+    share: 0.1,
+    sample(rand) {
+      const r = tapeR * Math.sqrt(rand());
+      const a = rand() * 2 * Math.PI;
+      const p = [r * Math.cos(a), r * Math.sin(a), 0.01 * noise(r * 9, a * 3, 0)];
+      return { p, n: [0, 0, 1], extra: -0.32 + 0.06 * noise(p[0] * 30, p[1] * 30, 0) };
+    },
+  });
+  if (name === "pollen") {
+    // An echinate grain (sunflower-like): a ball with conical spines.
+    const spiky = (c, R, spines, len, w, share) => {
+      const dirs = [];
+      const ga = Math.PI * (3 - Math.sqrt(5));
+      for (let i = 0; i < spines; i++) {
+        const z = 1 - (2 * (i + 0.5)) / spines;
+        const r = Math.sqrt(1 - z * z);
+        dirs.push([r * Math.cos(ga * i), r * Math.sin(ga * i), z]);
+      }
+      parts.push({
+        share: share * 0.55,
+        sample(rand) {
+          const d = sphereDir(rand(), rand());
+          // Fine pores between the spines.
+          const pore = worley(d[0] * R * 60, d[1] * R * 60, d[2] * R * 60)[0] < 0.18 ? -0.18 : 0;
+          return { p: vec.add(c, vec.mul(d, R)), n: d, extra: pore };
+        },
+      });
+      parts.push({
+        share: share * 0.45,
+        sample(rand) {
+          const d = dirs[Math.floor(rand() * dirs.length)];
+          const t = Math.sqrt(rand());
+          const h = 1 - t; // 0 at the base, 1 at the tip (more splats near the wider base)
+          const a = rand() * 2 * Math.PI;
+          const side = vec.unit(vec.cross(d, Math.abs(d[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0]));
+          const up = vec.cross(d, side);
+          const rad = w * (1 - h) ** 1.4;
+          const off = vec.add(vec.mul(side, Math.cos(a) * rad), vec.mul(up, Math.sin(a) * rad));
+          const p = vec.add(c, vec.add(vec.mul(d, R + len * h), off));
+          const n = vec.unit(vec.add(vec.mul(vec.unit(off), 1), vec.mul(d, (w / len) * 1.4)));
+          return { p, n, extra: 0.05 };
+        },
+      });
+    };
+    // A reticulate grain (lily-like): ridges on a net of cells.
+    const netted = (c, ax, cell, share) => {
+      parts.push({
+        share,
+        sample(rand) {
+          const d = sphereDir(rand(), rand());
+          const q = [d[0] * ax[0], d[1] * ax[1], d[2] * ax[2]];
+          const [d1, d2] = worley(q[0] / cell, q[1] / cell, q[2] / cell, 5);
+          const wall = 1 - smoothstep(0.05, 0.16, d2 - d1);
+          const n0 = vec.unit([d[0] / ax[0], d[1] / ax[1], d[2] / ax[2]]);
+          const p = vec.add(c, vec.add(q, vec.mul(n0, 0.025 * wall)));
+          return { p, n: n0, extra: 0.22 * wall - 0.14 * (1 - wall) };
+        },
+      });
+    };
+    spiky([-0.55, 0.32, 0.42], 0.42, 90, 0.13, 0.05, 0.38);
+    netted([0.85, 0.55, 0.3], [0.62, 0.34, 0.3], 0.16, 0.1);
+    // A bisaccate grain (pine-like): a body and two netted air sacs.
+    netted([0.1, -0.7, 0.28], [0.42, 0.28, 0.26], 0.09, 0.08);
+    netted([-0.33, -0.72, 0.3], [0.28, 0.3, 0.27], 0.11, 0.06);
+    netted([0.53, -0.72, 0.3], [0.28, 0.3, 0.27], 0.11, 0.06);
+    spiky([-1.25, -0.45, 0.2], 0.2, 40, 0.06, 0.03, 0.05);
+    spiky([1.35, -0.3, 0.2], 0.2, 40, 0.06, 0.03, 0.05);
+    spiky([-1.1, 1.05, 0.2], 0.2, 40, 0.06, 0.03, 0.04);
+    return {
+      parts,
+      steps: [
+        null,
+        [
+          [-0.55, 0.32, 0.42],
+          [1.3, 1.3],
+        ],
+        [
+          [-0.5, 0.38, 0.8],
+          [0.62, 0.62],
+        ],
+      ],
+    };
+  }
+  if (name === "diatom") {
+    // A centric diatom: a glass pillbox whose valve is pierced by rows of
+    // tiny chambers (areolae), finer toward the rim.
+    const R = 0.95;
+    const H = 0.3;
+    const C = [-0.25, 0.2, 0];
+    parts.push({
+      share: 0.58,
+      size: 0.55,
+      sample(rand) {
+        const r = R * Math.sqrt(rand());
+        const a = rand() * 2 * Math.PI;
+        const dome = 0.06 * (1 - (r / R) ** 2);
+        const p = [C[0] + r * Math.cos(a), C[1] + r * Math.sin(a), H + dome];
+        // Radial rows: the row count doubles at set radii.
+        const rows = r < 0.3 ? 12 : r < 0.6 ? 24 : 48;
+        const pitch = (2 * Math.PI * Math.max(r, 0.05)) / rows;
+        // Rings of pores, as far apart as the pores in a ring at the band's
+        // middle.
+        const mid = r < 0.3 ? 0.17 : r < 0.6 ? 0.45 : 0.78;
+        const ring = (2 * Math.PI * mid) / rows;
+        const k = (a / (2 * Math.PI)) * rows + (Math.floor(r / ring) % 2) * 0.5;
+        const ar = (k - Math.round(k)) * pitch;
+        const rr = (r / ring) % 1;
+        const hole = Math.hypot(ar / ring, rr - 0.5) < 0.32 && r > 0.06;
+        const rim = r > R * 0.93;
+        const n = rim ? vec.unit([Math.cos(a), Math.sin(a), 1.2]) : [0, 0, 1];
+        return { p: hole ? vec.add(p, [0, 0, -0.012]) : p, n, extra: hole ? -0.42 : 0.04 };
+      },
+    });
+    parts.push({
+      share: 0.12,
+      sample(rand) {
+        const a = rand() * 2 * Math.PI;
+        const z = rand() * H;
+        const n = [Math.cos(a), Math.sin(a), 0];
+        // The girdle bands' lines around the side.
+        const band = Math.abs((((z / H) * 4) % 1) - 0.5) < 0.06 ? -0.15 : 0;
+        return { p: [C[0] + R * n[0], C[1] + R * n[1], z], n, extra: band };
+      },
+    });
+    // A pennate diatom beside it: a boat with a central slit and striae.
+    const P = [0.95, -1.1, 0];
+    parts.push({
+      share: 0.12,
+      sample(rand) {
+        const u = rand() * 2 - 1;
+        const half = 0.26 * Math.sqrt(1 - u * u) * (1 - 0.15 * u * u);
+        const v = (rand() * 2 - 1) * half;
+        const lx = u * 0.85;
+        const rot = 0.5;
+        const p = [P[0] + lx * Math.cos(rot) - v * Math.sin(rot), P[1] + lx * Math.sin(rot) + v * Math.cos(rot), 0.12]; // prettier-ignore
+        const raphe = Math.abs(v) < 0.012 && Math.abs(u) < 0.9;
+        const sf = ((((u * 0.85) / 0.035) % 1) + 1) % 1;
+        const stria = Math.abs(sf - 0.5) < 0.17 && Math.abs(v) > 0.05;
+        const edge = Math.abs(v) > half * 0.88;
+        return { p, n: edge ? vec.unit([-Math.sin(rot) * Math.sign(v), Math.cos(rot) * Math.sign(v), 1]) : [0, 0, 1], extra: raphe ? -0.45 : stria ? -0.25 : 0.03 }; // prettier-ignore
+      },
+    });
+    return {
+      parts,
+      steps: [
+        null,
+        [
+          [C[0], C[1], H],
+          [2.1, 2.1],
+        ],
+        [
+          [C[0] + 0.3, C[1] + 0.2, H],
+          [0.7, 0.7],
+        ],
+      ],
+    };
+  }
+  // A snowflake (a stellar dendrite), coated with frozen droplets of rime,
+  // as low-temperature SEM sees it.
+  const arm = (x, y) => {
+    // The distance (negative inside) to the six arms and their side
+    // branches, in the plane.
+    let best = 9;
+    const r = Math.hypot(x, y);
+    for (let i = 0; i < 6; i++) {
+      const a = (i * Math.PI) / 3;
+      const ca = Math.cos(a);
+      const sa = Math.sin(a);
+      const u = x * ca + y * sa;
+      const v = -x * sa + y * ca;
+      const main = Math.max(Math.abs(v) - 0.07 * (1 - (0.4 * Math.max(0, u)) / 1.6), u - 1.6, -u);
+      best = Math.min(best, main);
+      for (const sgn of [-1, 1])
+        for (let j = 0; j < 6; j++) {
+          const u0 = 0.35 + j * 0.2;
+          const len = 0.42 * (1 - j / 7);
+          // A branch at 60 degrees from the arm.
+          const bu = (u - u0) * 0.5 + sgn * v * 0.866;
+          const bv = -(u - u0) * 0.866 * sgn + v * 0.5;
+          best = Math.min(best, Math.max(Math.abs(bv) - 0.035, bu - len, -bu));
+        }
+    }
+    // A small hexagonal plate at the middle joins the arms.
+    return best - (r < 0.2 ? 0.2 - r : 0);
+  };
+  const T = 0.05;
+  parts.push({
+    share: 0.5,
+    sample(rand) {
+      for (let tries = 0; tries < 20; tries++) {
+        const x = (rand() * 2 - 1) * 1.65;
+        const y = (rand() * 2 - 1) * 1.65;
+        if (arm(x, y) > 0) continue;
+        return { p: [x, y, 0.08 + T], n: [0, 0, 1], extra: 0.05 + 0.04 * noise(x * 20, y * 20, 0) };
+      }
+      return null;
+    },
+  });
+  parts.push({
+    share: 0.14,
+    sample(rand) {
+      for (let tries = 0; tries < 60; tries++) {
+        const x = (rand() * 2 - 1) * 1.65;
+        const y = (rand() * 2 - 1) * 1.65;
+        const d = arm(x, y);
+        if (Math.abs(d) > 0.008) continue;
+        const e = 0.004;
+        const g = vec.unit([arm(x + e, y) - arm(x - e, y), arm(x, y + e) - arm(x, y - e), 0]);
+        return { p: [x, y, 0.08 + T * rand()], n: g, extra: 0.1 };
+      }
+      return null;
+    },
+  });
+  // Rime: frozen droplets scattered over the crystal, a few big ones.
+  const rime = [];
+  const rr = mulberry(77);
+  while (rime.length < 220) {
+    const x = (rr() * 2 - 1) * 1.6;
+    const y = (rr() * 2 - 1) * 1.6;
+    if (arm(x, y) > -0.005) continue;
+    const s = 0.012 + 0.03 * rr() ** 3;
+    rime.push([x, y, 0.08 + T + s * 0.7, s]);
+  }
+  parts.push({
+    share: 0.22,
+    sample(rand) {
+      const [x, y, z, s] = rime[Math.floor(rand() * rime.length)];
+      const d = sphereDir(rand(), rand());
+      if (d[2] < -0.3) return null;
+      return { p: [x + d[0] * s, y + d[1] * s, z + d[2] * s], n: d, extra: 0.02 };
+    },
+  });
+  return {
+    parts,
+    steps: [
+      null,
+      [
+        [0.95, 0.0, 0.13],
+        [1.3, 1.3],
+      ],
+      [
+        [0.75, 0.12, 0.13],
+        [0.5, 0.5],
+      ],
+    ],
+  };
+}
+
+// A seeded random number generator for build-time choices.
+function mulberry(a) {
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function buildSEM(k, name) {
+  const noise = (x, y, z) => k.noise(x, y, z);
+  const spec = semSpecimen(name, noise);
+  for (const part of spec.parts) {
+    k.cloud(
+      { share: part.share * 0.97, jitter: 0.3, flat: 0.2, size: part.size ?? 0.75 },
+      (rand) => {
+        const s = part.sample(rand);
+        if (!s) return null;
+        const g = 0.06 * noise(s.p[0] * 140, s.p[1] * 140, s.p[2] * 140);
+        return { p: s.p, n: s.n, color: semTone(s.n, s.extra ?? 0, g), pattern: false };
+      },
+    );
+  }
+  return { steps: spec.steps };
+}
+
+function driveSEM(t, c, out, info) {
+  const data = info.data;
+  if (!data) return;
+  // Each tap goes one zoom step further (whole field, one grain, its
+  // surface), then back out; the view glides there.
+  const n = info.tap?.n ?? 0;
+  const step = n % 3;
+  const st = data.steps[step];
+  out.view = st ? { key: `sem${n % 3}`, center: st[0], size: st[1] } : { key: "sem0" };
+}
+
 // ---- Recipes ------------------------------------------------------------------------------
 
 export const RECIPES = {
@@ -1270,6 +1769,53 @@ export const RECIPES = {
       const r = buildVolume(k, V, { budget: k.count, air: WALNUT.air, color: walnutColor(o.colors), rand: k.rand }); // prettier-ignore
       // Recipe units are voxels; the drive works in them too (mm: one voxel).
       k.data = { cut: o.cut, half: r.half, pitch: r.pitch, mm: 1 };
+    },
+  },
+  "fruit-mri": {
+    options: [
+      {
+        key: "fruit",
+        label: "Fruit",
+        type: "select",
+        default: "kiwi",
+        choices: [
+          { id: "kiwi", label: "Kiwi" },
+          { id: "orange", label: "Orange" },
+        ],
+      },
+    ],
+    controls: [{ key: "play", label: "Play the slices", type: "pulse", ease: 6 }],
+    action: { key: "play", label: "Play through the slices" },
+    note: "Drag up or down to scroll through the slices.",
+    drag: cutDrag(mriScroll, (p) => p[1]),
+    drive: driveMRI,
+    build(k, o) {
+      k.data = buildMRI(k, o.fruit);
+    },
+  },
+  "electron-microscope": {
+    turntable: false,
+    options: [
+      {
+        key: "sample",
+        label: "Sample",
+        type: "select",
+        default: "pollen",
+        choices: [
+          { id: "pollen", label: "Pollen" },
+          { id: "diatom", label: "Diatoms" },
+          { id: "snow", label: "Snowflake" },
+        ],
+      },
+    ],
+    controls: [{ key: "zoom", label: "Zoom", type: "pulse", ease: 1.2 }],
+    action: { key: "zoom", label: "Zoom in a step (the third goes back out)" },
+    // The zoom steps glide the view (out.view); a double-tap does nothing
+    // of its own.
+    focus: () => false,
+    drive: driveSEM,
+    build(k, o) {
+      k.data = buildSEM(k, o.sample);
     },
   },
 };

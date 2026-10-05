@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 376 toys. 346 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 371.
+- 378 toys. 348 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 373.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -60,7 +60,8 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, Screen.
+  Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2943,7 +2944,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 
-## Imaging (3)
+## Imaging (5)
 
 - **Airport X-ray scanner** (`airport-xray`). Now: tap: Send the next bag. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
@@ -2972,3 +2973,22 @@ Proposals below are suggestions; the owner may change them.
     second tap brings it back.
   - Improved: Imaging: new toy, with tools/img-walnut.mjs.
   - Sound: A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.
+- **MRI of a fruit** (`fruit-mri`). Now: tap: Play through the slices. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).
+  - Effect: A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each
+    slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline
+    of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag
+    scrolls through them and the tap plays through all of them, front to back, and comes back.
+  - Improved: Imaging: new toy.
+  - Sound: An MRI scanner's knocking as it steps through the slices.
+- **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step (the third goes back
+  out). Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom
+    and a snowflake (lane Imaging; labs only).
+  - Effect: Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of
+    pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron
+    microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each
+    tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface);
+    the third goes back out.
+  - Improved: Imaging: new toy.
+  - Sound: The stage motor's two soft steps and a low vacuum hum.
