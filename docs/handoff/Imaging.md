@@ -9,12 +9,12 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-WORKING: polish round r3 (October 5, 2026, Opus 5.5) on `claude/lane-imaging-polish`, from #304's
-head 478f39cb (#304 is queued for Integrator 6's combo N10). Done: the thermal camera keeps one
-thermal copy plus three of the mug (sharper views); finer splats for the walnut, MRI and microscope;
-a finer X-ray fan in How CT works; the airport scanner framed closer. Six `-r3` cards are on Effect
-review page 2 beside the r2 ones. Specs run: `tests/img.spec.mjs`, `kit`, `taps` (62 passed). Next:
-when #304 merges, merge main here and open "Phase Imaging polish: …".
+READY: polish round r3 (October 5, 2026, Opus 5.5) on `claude/lane-imaging-polish`. Imaging r2
+(#304, 478f39cb) reached main through the Operator's #319, and main is merged here. Done: the
+thermal camera keeps one thermal copy plus three of the mug (sharper views); finer splats for the
+walnut, MRI and microscope; a finer X-ray fan in How CT works; the airport scanner framed closer.
+Six `-r3` cards are on Effect review page 2 beside the r2 ones. Specs run after the merge:
+`tests/img.spec.mjs`, `kit`, `taps` (69 passed); Prettier and the American English check clean.
 
 - [x] 1. Airport X-ray scanner (`airport-xray`)
 - [x] 2. How CT works (`how-ct`): a kit-built nautilus shell
