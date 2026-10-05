@@ -85,7 +85,7 @@ class PageBreaker extends Shardball {
       const all = [...boxes.map((b) => ({ box: b, word: true })), ...tiles.map((b) => ({ box: b, word: false }))]; // prettier-ignore
       // Share the layer: what is left after the board's own parts, split
       // by each brick's area.
-      const room = Math.max(4000, this.api.sprites.capacity - 9000);
+      const room = Math.max(3000, (this.api.sprites.capacity - 15000) / 2); // two layers a brick
       const area = all.reduce((a, b) => a + (b.box[2] - b.box[0]) * (b.box[3] - b.box[1]), 0) || 1;
       const density = Math.min(1, room / (area * wpx * hpx)); // splats per pixel
       const bricks = all.map((b) => this.brickFrom(px, wpx, hpx, b, density));
@@ -201,17 +201,21 @@ class PageBreaker extends Shardball {
     return job?.done || null;
   }
 
-  step(dt, ctl) {
-    // A page that was still being read shows up as soon as it is.
-    if (this.waiting !== null && this.waiting !== undefined) {
-      const job = this.pagesReady.get(this.waiting);
-      if (job && !job.watched) {
-        job.watched = true;
-        job.then((p) => (job.done = p));
-      }
-      if (job?.done) this.buildLevel();
-      return;
+  // A page that was still being read shows up as soon as it is (checked
+  // each frame, so a still view gets it too).
+  checkWaiting() {
+    if (this.waiting === null || this.waiting === undefined) return false;
+    const job = this.pagesReady.get(this.waiting);
+    if (job && !job.watched) {
+      job.watched = true;
+      job.then((p) => (job.done = p));
     }
+    if (job?.done) this.buildLevel();
+    return this.waiting !== null;
+  }
+
+  step(dt, ctl) {
+    if (this.checkWaiting()) return;
     super.step(dt, ctl);
   }
 
@@ -226,6 +230,7 @@ class PageBreaker extends Shardball {
   }
 
   render(view, frameDt) {
+    this.checkWaiting();
     super.render(view, frameDt);
     const p = this.paperSprite;
     if (p) {

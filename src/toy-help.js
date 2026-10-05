@@ -1768,6 +1768,25 @@ export const TOY_HELP = {
       "Shardball with your own page. Every word on the page (found from its ink) becomes a brick, and so does each piece of its pictures; a photo is cut into tiles. Each brick is made of that piece of the page, splat by splat, so a word that breaks falls apart into pieces of its letters. Each page of a PDF is the next level.\n\nOpen a file in the Toy tab, or play the sample article or photo. The file is read on this device and never leaves it. Flat board and Dome work as in Shardball: the 3D button tips the page back, or spreads its words over a dome.",
   },
 
+  strata: {
+    howTo:
+      "Tap or press Space to play. Arrows move the falling stone, X turns it, Q and E tip it, Space drops it.",
+    about:
+      "Stones of our own shapes fall down a square well: a tripod, two screws, a plus, a slab and more, most of them shapes that only work in 3D. Move each one across the well and turn it as it falls; when a whole layer of the well is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more layers at once, the more points; every four layers the stones fall faster.\n\n3D looks down into the well from above its rim; 2D is the side view, straight in from the front. Pick a Well in the Toy tab: deep, wide, or a flat slot one stone deep that plays like a flat game. P pauses, R starts again.",
+  },
+  "volley-table": {
+    howTo:
+      "Tap or press Space to serve. Steer your paddle with the mouse, a finger or the arrow keys.",
+    about:
+      "A rally on a felt table against the computer. Where the ball meets your paddle sets its angle, and a paddle moving as it hits puts spin on the ball, so it curves on its way. A ball that gets past a paddle is a point; first to seven wins. The 3D button tilts the table toward you, with the camera low behind your paddle, and the rally goes on. Set how quick the computer is in the Toy tab.",
+  },
+  "stone-belt": {
+    howTo:
+      "Tap or press Space to play. ← → turn, ↑ thrusts, Space fires. On a phone, hold a finger where to go.",
+    about:
+      "The rocks here are the real shapes of seven asteroids, Bennu, Itokawa, Eros, Kleopatra, Geographos, Toutatis and Golevka, from NASA's public-domain models. They drift and tumble across a field that wraps round at its edges. A shot splits a big rock into two smaller ones and a small one into dust, with chips flying off each time; a rock that hits your ship costs a ship. The 3D button drops the camera in behind your ship, so the rocks show their real shapes as they tumble past.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

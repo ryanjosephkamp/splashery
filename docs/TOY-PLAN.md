@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 377 toys. 347 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 372.
+- 380 toys. 350 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 375.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -60,7 +60,8 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen, Shardball, Longtail, Grain Garden, Page Breaker.
+  Galaxy in a box, Fluid lab, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
+  Volley Table, Stone Belt.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2943,7 +2944,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 
-## Arcade (4)
+## Arcade (7)
 
 - **Shardball** (`shardball`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).
@@ -2977,3 +2978,26 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the
     picture engine's figure finder.
   - Sound: Shardball's knocks and breaks.
+- **Strata** (`strata`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G3 (labs only).
+  - Effect: Falling stones in a deep well you look down into: our own stone shapes (a tripod, two
+    screws, a plus, a slab), moved and turned as they fall; a full layer crumbles into rubble that
+    falls and fades, and the stones above drop in. 2D is the side view.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A soft click as a stone moves, a wooden knock when it turns, a stony thud when it lands,
+    a crunch and rumble when a layer crumbles.
+- **Volley Table** (`volley-table`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G4 (labs only).
+  - Effect: A two-paddle rally against the computer: the paddle sets the angle and a moving paddle
+    puts curving spin on the ball; first to seven. The 3D switch tilts the table toward you.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A knock off each paddle, a wooden tap off the rails, a two-note chime for your point, a
+    thud for theirs.
+- **Stone Belt** (`stone-belt`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G5 (labs only).
+  - Effect: Blast drifting, tumbling rocks shaped like real asteroids (NASA's public-domain models):
+    big ones split into two smaller ones and small ones into dust, with chips flying each time. The
+    3D switch drops the camera in behind the ship.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A short zap for each shot, a crack and rumble for a big rock, a crunch for a small one,
+    an engine rumble while thrusting.

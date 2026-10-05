@@ -267,7 +267,8 @@ export class ArcadeLayer {
       tex.unlock();
       this.tintDirty = false;
     }
-    if (sort) {
+    if (sort || this.sortSoon) {
+      this.sortSoon = false;
       const cs = c.centers;
       const ce = this.center;
       for (let i = 0, n = this.slots; i < n; i++) {
@@ -332,6 +333,7 @@ export class Sprites {
     const start = this.alloc(n);
     if (start < 0) return null;
     this.layer.writeLook(start, model);
+    this.layer.sortSoon = true; // new splats: sort them where they are
     const s = { model, start, n, pos: pos.slice(), quat: quat.slice(), scale, fade, tint, pieces: null, alive: true }; // prettier-ignore
     this.list.push(s);
     if (tint) this.layer.tintDirty = true;

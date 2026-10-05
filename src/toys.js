@@ -3564,6 +3564,33 @@ export const TOYS = [
     labs: true,
     tags: "game arcade brick breaker paddle ball your own pdf page photo words pictures shatter",
   },
+  {
+    id: "strata",
+    label: "Strata",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade falling stones blocks well layers stack puzzle crumble 3d",
+  },
+  {
+    id: "volley-table",
+    label: "Volley Table",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade paddle rally table ball two paddles spin computer 3d",
+  },
+  {
+    id: "stone-belt",
+    label: "Stone Belt",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade space rocks asteroids real nasa bennu itokawa eros ship blast split dust 3d",
+  },
 ];
 
 export function findToy(id) {

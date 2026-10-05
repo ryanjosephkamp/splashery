@@ -136,6 +136,10 @@ export class ArcadeRuntime {
         if (!r?.echo && r?.key === player.arcade?.recipe.action?.key) player.arcade?.wake(true);
       });
     }
+    // The toy's own splats are only the game's still picture (for the
+    // shelf's tools and a first look): the game draws itself on its layer.
+    this.toyEntity = stage.toy?.entity || null;
+    if (this.toyEntity) this.toyEntity.enabled = false;
     this.ready = this.start();
   }
 
@@ -162,9 +166,18 @@ export class ArcadeRuntime {
     this.game = await this.def.create(api);
     if (this.dead) return;
     this.game.reset();
+    // A game may bring its own backdrop (space is dark); put back on leaving.
+    if (this.def.background) {
+      const h = this.def.background;
+      this.stage.setClearColor(
+        [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255),
+        1,
+      );
+    }
     this.game.render(this.view, 0);
     this.sprites.write();
     this.layer.upload(true);
+    this.stage.requestRender(300);
   }
 
   // ---- State -----------------------------------------------------------------
@@ -303,7 +316,11 @@ export class ArcadeRuntime {
   }
 
   frame(dt) {
-    if (!this.game || this.dead) return;
+    if (this.dead) return;
+    // Frames are drawn on demand: a game keeps them coming, even while it
+    // is still loading.
+    this.stage.requestRender(300);
+    if (!this.game) return;
     const t0 = performance.now();
     this.input.pollGamepads();
     this.hud.setTouch(this.input.lastDevice === "touch" || (this.input.lastDevice !== "keys" && this.hud.el.dataset.touch === "true")); // prettier-ignore
@@ -419,6 +436,8 @@ export class ArcadeRuntime {
     this.dead = true;
     this.exitPlay();
     this.stage.cameraEntity.camera.fov = 38;
+    if (this.def.background) this.player.applyLook();
+    if (this.toyEntity && this.stage.toy?.entity === this.toyEntity) this.toyEntity.enabled = true;
     this.player.canvas.classList.remove("arc-canvas");
     document.removeEventListener("visibilitychange", this.onVis);
     document.removeEventListener("pointerdown", this.onDocDown, true);

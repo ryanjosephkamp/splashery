@@ -171,6 +171,69 @@
       "light": {},
       "normalMap": true,
       "armAO": true
+    },
+    {
+      "id": "stone-belt-bennu",
+      "name": "Asteroid 101955 Bennu",
+      "source": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Asteroid%20101955%20Bennu",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "author": "NASA",
+      "license": "Public domain",
+      "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
+    },
+    {
+      "id": "stone-belt-itokawa",
+      "name": "Asteroid 25143 Itokawa",
+      "source": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Asteroid%2025143%20Itokawa",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "author": "NASA",
+      "license": "Public domain",
+      "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
+    },
+    {
+      "id": "stone-belt-eros",
+      "name": "Asteroid 433 Eros",
+      "source": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Asteroid%20433%20Eros",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "author": "NASA",
+      "license": "Public domain",
+      "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
+    },
+    {
+      "id": "stone-belt-kleopatra",
+      "name": "Asteroid 216 Kleopatra",
+      "source": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Asteroid%20216%20Kleopatra",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "author": "NASA",
+      "license": "Public domain",
+      "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
+    },
+    {
+      "id": "stone-belt-geographos",
+      "name": "Asteroid 1620 Geographos",
+      "source": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Asteroid%201620%20Geographos",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "author": "NASA",
+      "license": "Public domain",
+      "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
+    },
+    {
+      "id": "stone-belt-toutatis",
+      "name": "Asteroid 4179 Toutatis",
+      "source": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Asteroid%204179%20Toutatis",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "author": "NASA",
+      "license": "Public domain",
+      "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
+    },
+    {
+      "id": "stone-belt-golevka",
+      "name": "Asteroid 6489 Golevka",
+      "source": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Asteroid%206489%20Golevka",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "author": "NASA",
+      "license": "Public domain",
+      "note": "Lane Arcade: sampled to 1,600 surface points by tools/arc-rocks.mjs into assets/toys/stone-belt/rocks.json for the Stone Belt game; checked October 5, 2026 (the collection's README: \"free and without copyright\")."
     }
   ]
 }

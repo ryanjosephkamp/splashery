@@ -2793,6 +2793,21 @@ export const TOY_SOUNDS = {
   ],
   // A pour of sand.
   "grain-garden": { voice: "patter", decay: 0.8, vol: 0.5 },
+  // A stone landing in the well.
+  strata: [
+    { voice: "stone", f: 220, vol: 0.6, decay: 0.6 },
+    { voice: "patter", at: 0.08, vol: 0.25, decay: 0.4 },
+  ],
+  // A serve off the paddle and a tap off the rail.
+  "volley-table": [
+    { voice: "pock", f: 640, vol: 0.55 },
+    { voice: "wood", at: 0.2, f: 520, decay: 0.4, vol: 0.3 },
+  ],
+  // A rock cracking apart.
+  "stone-belt": [
+    { voice: "crack", vol: 0.7 },
+    { voice: "rumble", at: 0.03, vol: 0.35, decay: 0.6 },
+  ],
   // A word's brick breaking: a paper tear and a knock.
   "page-breaker": [
     { voice: "pock", f: 480, vol: 0.55 },

@@ -19,15 +19,130 @@ const VIEW = {
 
 const PLAY = [{ key: "go", label: "Play", type: "pulse", ease: 0.4 }];
 
-function stage(k, reach = 1.3) {
-  k.cloud({ count: 1 }, () => ({ p: [0, 0, 0], color: "#000000", opacity: 0, size: 0.01 }));
-  k.reach([reach, reach, reach]);
-  k.reach([-reach, -reach, -reach]);
+// Each game's still picture: what the toy itself builds. The game hides
+// it once its own layer is up; the shelf's tools (thumbnails, the contact
+// sheet, check-packs) and a first look before the game loads see it.
+const lit = (hexc, n, f = 1) => {
+  const c = [1, 3, 5].map((i) => parseInt(hexc.slice(i, i + 2), 16) / 255);
+  const l = (0.78 + 0.22 * n[1] + 0.08 * n[2]) * f;
+  return c.map((v) => v * l);
+};
+const RAINBOW = ["#d8443a", "#e97a2c", "#e9b730", "#6dbb46", "#2fa6a0", "#3a7bd5"];
+
+function picture(k, kind) {
+  const box = (sx, sy, sz, pos, col) => k.add(k.box(sx, sy, sz), { pos, even: true, flat: 0.25, color: (c) => (typeof col === "function" ? col(c) : lit(col, c.n)) }); // prettier-ignore
+  if (kind === "bricks" || kind === "page") {
+    // The board: rails, a wall of bricks (or a page of words), the paddle and the ball.
+    const wood = (c) => lit("#6b4630", c.n, 0.9 + 0.1 * Math.sin(c.p[0] * 80));
+    box(0.04, 2.0, 0.1, [-0.82, 0, 0], wood);
+    box(0.04, 2.0, 0.1, [0.82, 0, 0], wood);
+    box(1.68, 0.04, 0.1, [0, 1.0, 0], wood);
+    if (kind === "page") {
+      box(1.4, 1.5, 0.01, [0, 0.2, -0.02], "#f4f1e8");
+      for (let r = 0; r < 16; r++)
+        for (let w = 0; w < 5; w++) box(0.2 + 0.05 * ((r * 3 + w) % 3), 0.035, 0.02, [-0.55 + w * 0.27, 0.85 - r * 0.085, 0], "#2b2b30"); // prettier-ignore
+    } else {
+      for (let r = 0; r < 6; r++)
+        for (let c = 0; c < 10; c++) box(0.134, 0.054, 0.06, [-0.72 + c * 0.16, 0.8 - r * 0.075, 0], RAINBOW[r]); // prettier-ignore
+    }
+    k.add(k.roundedBox(0.3, 0.05, 0.1, 4), {
+      pos: [0, -0.86, 0],
+      even: true,
+      color: (c) => lit("#9fb4cf", c.n),
+    });
+    k.add(k.sphere(0.032), { pos: [0.1, -0.6, 0], even: true, color: "#f4f2ec", weight: 3 });
+  } else if (kind === "table") {
+    box(1.5, 2.1, 0.02, [0, 0, -0.02], (c) =>
+      Math.abs(c.lp[1]) < 0.01 ? [0.93, 0.93, 0.9] : [0.12, 0.42, 0.26],
+    );
+    for (const x of [-0.78, 0.78]) box(0.05, 2.2, 0.08, [x, 0, 0.01], "#73492f");
+    k.add(k.roundedBox(0.3, 0.05, 0.06, 4), {
+      pos: [0.1, -0.93, 0.03],
+      even: true,
+      color: (c) => lit("#e66b2e", c.n),
+    });
+    k.add(k.roundedBox(0.3, 0.05, 0.06, 4), {
+      pos: [-0.2, 0.93, 0.03],
+      even: true,
+      color: (c) => lit("#407ad9", c.n),
+    });
+    k.add(k.sphere(0.035), { pos: [0.05, -0.2, 0.04], even: true, color: "#f4f2ec", weight: 3 });
+  } else if (kind === "rocks") {
+    // Lumpy rocks on a starfield and a small ship.
+    k.cloud({ share: 0.1 }, (rand) => ({
+      p: [(rand() - 0.5) * 2.4, (rand() - 0.5) * 2.4, -0.4],
+      color: [0.85, 0.9, 1],
+      size: 1,
+    }));
+    for (const [x, y, r] of [[-0.5, 0.4, 0.22], [0.45, 0.55, 0.13], [0.3, -0.35, 0.18], [-0.3, -0.6, 0.08]])
+      k.add(k.radial((d) => r * (1 + 0.18 * Math.sin(d[0] * 5 + d[1] * 3) * Math.cos(d[2] * 4)), { grid: 24 }), { pos: [x, y, 0], even: true, color: (c) => lit("#6e6760", c.n) }); // prettier-ignore
+    k.add(k.cone(0.035, 0, 0.16), {
+      pos: [0, 0, 0.05],
+      even: true,
+      color: (c) => lit("#dcdfe4", c.n),
+    });
+  } else if (kind === "net") {
+    // The cube's net of tiles, and a string of green beads.
+    const A = 0.5;
+    const faces = [
+      [0, 0],
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1],
+      [0, -2],
+    ];
+    const cols = ["#e9c98f", "#9fcf96", "#9cbfe8", "#dcb878", "#88bf80", "#86acd8"];
+    faces.forEach(([fx, fy], f) => {
+      for (let j = 0; j < 7; j++)
+        for (let i = 0; i < 7; i++) box(0.13, 0.13, 0.01, [fx * 2 * A - A + (i + 0.5) * (2 * A / 7), fy * 2 * A + 0.5 - A + (j + 0.5) * (2 * A / 7), 0], (i + j) % 2 ? cols[f] : cols[(f + 3) % 6]); // prettier-ignore
+    });
+    for (let b = 0; b < 6; b++) k.add(k.sphere(0.055), { pos: [-0.36 + b * 0.143, 0.5, 0.06], even: true, color: (c) => lit(b === 5 ? "#2f7d4f" : "#58b06e", c.n), weight: 4 }); // prettier-ignore
+    k.add(k.sphere(0.06), {
+      pos: [0.36, 0.07, 0.06],
+      even: true,
+      color: (c) => lit("#c8203a", c.n),
+      weight: 4,
+    });
+  } else if (kind === "grains") {
+    // A glass box with a dune of sand, a pool and a ledge.
+    const e = 0.012;
+    const glass = "#bcd2dc";
+    for (const x of [-0.8, 0.8]) box(e, 2.0, e, [x, 0, 0.1], glass);
+    box(1.6, e, e, [0, 1.0, 0.1], glass);
+    box(1.6, e, e, [0, -1.0, 0.1], glass);
+    k.cloud({ share: 0.8 }, (rand) => {
+      const x = (rand() - 0.5) * 1.56;
+      const top = -0.82 + 0.1 * Math.sin(x * 4.4) + 0.05 * Math.sin(x * 15);
+      const y = -0.98 + rand() * (top + 0.98);
+      const water = x > 0.3 && y > -0.9;
+      const c = water
+        ? [0.24, 0.52, 0.85]
+        : [0.89, 0.76, 0.49].map((v) => v * (0.85 + 0.2 * rand()));
+      return { p: [x, y, (rand() - 0.5) * 0.18], color: c, size: 1.2 };
+    });
+    box(0.6, 0.03, 0.18, [-0.45, 0.1, 0], "#8b8f96");
+  } else {
+    // The well: four posts, a floor, and a few stones in it.
+    const e = 0.02;
+    const W = 0.32;
+    for (const x of [-W, W]) for (const z of [-W, W]) box(e, 1.9, e, [x, 0, z], "#6a6560");
+    box(0.64, 0.02, 0.64, [0, -0.96, 0], "#7d766c");
+    const stones = [[-0.24, -0.88, -0.24, "#3f88c5"], [-0.08, -0.88, -0.24, "#3f88c5"], [0.08, -0.88, 0.08, "#c8553d"], [0.24, -0.88, 0.24, "#44af69"], [-0.24, -0.72, -0.24, "#e8c547"], [0.08, 0.3, 0.08, "#f28f3b"], [0.24, 0.3, 0.08, "#f28f3b"], [0.08, 0.46, 0.08, "#f28f3b"]]; // prettier-ignore
+    for (const [x, y, z, c] of stones) k.add(k.roundedBox(0.15, 0.15, 0.15, 6), { pos: [x, y, z], even: true, color: (cc) => lit(c, cc.n) }); // prettier-ignore
+  }
+}
+
+function stage(k, kind = "bricks") {
+  picture(k, kind);
+  k.reach([1.1, 1.1, 0.4]);
+  k.reach([-1.1, -1.1, -0.4]);
 }
 
 export const RECIPES = {
   shardball: {
     turntable: false,
+    density: 0.05,
     options: [
       {
         key: "style",
@@ -45,7 +160,7 @@ export const RECIPES = {
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
     build(k) {
-      stage(k);
+      stage(k, "bricks");
     },
     arcade: {
       title: "Shardball",
@@ -71,6 +186,7 @@ export const RECIPES = {
   },
   longtail: {
     turntable: false,
+    density: 0.05,
     options: [
       {
         key: "world",
@@ -100,7 +216,7 @@ export const RECIPES = {
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
     build(k) {
-      stage(k);
+      stage(k, "net");
     },
     arcade: {
       title: "Longtail",
@@ -123,11 +239,12 @@ export const RECIPES = {
   },
   "grain-garden": {
     turntable: false,
+    density: 0.05,
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
     build(k) {
-      stage(k);
+      stage(k, "grains");
     },
     arcade: {
       title: "Grain Garden",
@@ -160,6 +277,7 @@ export const RECIPES = {
   },
   "page-breaker": {
     turntable: false,
+    density: 0.05,
     options: [
       {
         key: "sample",
@@ -187,7 +305,7 @@ export const RECIPES = {
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
     build(k) {
-      stage(k);
+      stage(k, "page");
     },
     input: {
       title: "Your own page",
@@ -234,6 +352,125 @@ export const RECIPES = {
         short: "← → steer · Space launch · V for 3D",
       },
       create: async (api) => (await import("./arcade-pages.js")).createPageBreaker(api),
+    },
+  },
+  strata: {
+    turntable: false,
+    density: 0.05,
+    options: [
+      {
+        key: "well",
+        label: "Well",
+        type: "select",
+        default: "deep",
+        choices: [
+          { id: "deep", label: "Deep (4 by 4)" },
+          { id: "wide", label: "Wide (5 by 5)" },
+          { id: "slot", label: "Flat slot (one deep)" },
+        ],
+      },
+      { ...VIEW, default: "3d" },
+    ],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    build(k) {
+      stage(k, "well");
+    },
+    arcade: {
+      title: "Strata",
+      goal: "Fill a whole layer of the well to clear it. Don't let the stones reach the rim.",
+      stats: [
+        { key: "score", label: "Score" },
+        { key: "layers", label: "Layers" },
+        { key: "level", label: "Level" },
+        { key: "next", label: "Next" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["left", "right", "up", "down", "alt", "turnL", "fire"],
+      padLabels: { alt: "⟳", turnL: "⤾", fire: "▼" },
+      controls: {
+        keys: "Arrows (or W, A, S, D) move the stone across the well; X turns it, Q and E tip it; Space drops it.",
+        touch: "Swipe to move it, swipe up to turn it; or use the pad.",
+        pad: "D-pad moves; B turns; LB and RB tip; A drops.",
+        short: "Arrows move · X turn · Q E tip · Space drop",
+      },
+      create: async (api) => (await import("./arcade-strata.js")).createStrata(api),
+    },
+  },
+  "volley-table": {
+    turntable: false,
+    density: 0.05,
+    options: [
+      { key: "skill", label: "The computer", type: "slider", min: 1, max: 3, step: 1, default: 2 },
+      VIEW,
+    ],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    build(k) {
+      stage(k, "table");
+    },
+    arcade: {
+      title: "Volley Table",
+      goal: "Get the ball past the computer's paddle. First to seven.",
+      stats: [
+        { key: "you", label: "You" },
+        { key: "them", label: "Computer" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["left", "right", "fire"],
+      padLabels: { fire: "Serve" },
+      controls: {
+        keys: "← → (or A, D) move your paddle; Space serves.",
+        mouse: "Move the mouse to steer your paddle.",
+        touch: "Drag to steer your paddle, or use the pad.",
+        pad: "Stick or D-pad to steer; A serves.",
+        short: "← → steer · a moving paddle puts spin on the ball · V tilts the table",
+      },
+      create: async (api) => (await import("./arcade-rally.js")).createRally(api),
+    },
+  },
+  "stone-belt": {
+    turntable: false,
+    density: 0.05,
+    options: [VIEW],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    build(k) {
+      stage(k, "rocks");
+    },
+    credits: [
+      {
+        label: "Stone Belt",
+        title:
+          "The shapes of Bennu, Itokawa, Eros, Kleopatra, Geographos, Toutatis and Golevka (NASA 3D Resources)",
+        source: "https://github.com/nasa/NASA-3D-Resources",
+        author: "NASA",
+        license: "Public domain",
+        licenseUrl: "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      },
+    ],
+    arcade: {
+      title: "Stone Belt",
+      background: "#05070c",
+      goal: "Blast the drifting rocks. Big ones split in two; small ones turn to dust.",
+      stats: [
+        { key: "score", label: "Score" },
+        { key: "lives", label: "Ships", icon: "▲" },
+        { key: "wave", label: "Wave" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["left", "right", "up", "fire"],
+      padLabels: { fire: "Fire" },
+      controls: {
+        keys: "← → (or A, D) turn; ↑ (W) thrusts; Space fires (hold to keep firing).",
+        touch: "Hold a finger where to go: the ship turns, flies and fires. Or use the pad.",
+        pad: "Stick to turn and thrust; A fires.",
+        short: "← → turn · ↑ thrust · Space fire · V for the chase view",
+      },
+      create: async (api) => (await import("./arcade-rocks.js")).createRocks(api),
     },
   },
 };

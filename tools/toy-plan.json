@@ -2477,6 +2477,27 @@
       "effect": "Shardball whose bricks are the words and pictures of your own PDF page or photo, made of that piece of the page; a word that breaks falls apart into pieces of its letters. Each page of a PDF is a level.",
       "sound": "Shardball's knocks and breaks.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the picture engine's figure finder."
+    },
+    "strata": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G3 (labs only).",
+      "effect": "Falling stones in a deep well you look down into: our own stone shapes (a tripod, two screws, a plus, a slab), moved and turned as they fall; a full layer crumbles into rubble that falls and fades, and the stones above drop in. 2D is the side view.",
+      "sound": "A soft click as a stone moves, a wooden knock when it turns, a stony thud when it lands, a crunch and rumble when a layer crumbles.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "volley-table": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G4 (labs only).",
+      "effect": "A two-paddle rally against the computer: the paddle sets the angle and a moving paddle puts curving spin on the ball; first to seven. The 3D switch tilts the table toward you.",
+      "sound": "A knock off each paddle, a wooden tap off the rails, a two-note chime for your point, a thud for theirs.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "stone-belt": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G5 (labs only).",
+      "effect": "Blast drifting, tumbling rocks shaped like real asteroids (NASA's public-domain models): big ones split into two smaller ones and small ones into dust, with chips flying each time. The 3D switch drops the camera in behind the ship.",
+      "sound": "A short zap for each shot, a crack and rumble for a big rock, a crunch for a small one, an engine rumble while thrusting.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
     }
   }
 }
