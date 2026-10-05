@@ -9,9 +9,11 @@ outside your own files, as an "Engine: …" PR merged first). PR title: "Phase W
 ripple tank and a light bench". Handoff file: docs/handoff/Optics.md (create it; start it with this
 brief, word for word, under "## Brief", then keep "## State
 
-WORKING (October 5, 2026): both toys built (ripple tank, light bench), tests in
-`tests/opt.spec.mjs`, evidence files written (`node tools/opt-evidence.mjs`), clips being rendered
-for Effect review page 2.
+READY for review (October 5, 2026): both toys built, `tests/opt.spec.mjs` 21 of 21 passing, evidence
+files written, eight clips posted on Effect review page 2 (lane record `Optics`, cards
+`opt-ripple-double`, `opt-ripple-single`, `opt-ripple-two`, `opt-bench-prism`, `opt-bench-lens`,
+`opt-bench-mirrors`, `opt-bench-block`, `opt-bench-fiber`). Next: the owner's marks (checked about
+hourly), and fixes as "-r2" cards.
 
 ## Notes
 
