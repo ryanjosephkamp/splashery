@@ -2779,6 +2779,25 @@ export const TOY_SOUNDS = {
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
+  // ---- Arcade (lane Arcade) --------------------------------------------------------------
+  // Play: the ball's first knock off the paddle (the game plays its own
+  // sounds as it goes: knocks, glassy breaks, stone cracks).
+  shardball: [
+    { voice: "pock", f: 520, vol: 0.6 },
+    { voice: "glass", at: 0.12, f: 960, decay: 0.5, vol: 0.35 },
+  ],
+  // A berry's pop and a bead's soft knock.
+  longtail: [
+    { voice: "pop", f: 760, vol: 0.55 },
+    { voice: "wood", at: 0.1, f: 900, decay: 0.4, vol: 0.3 },
+  ],
+  // A pour of sand.
+  "grain-garden": { voice: "patter", decay: 0.8, vol: 0.5 },
+  // A word's brick breaking: a paper tear and a knock.
+  "page-breaker": [
+    { voice: "pock", f: 480, vol: 0.55 },
+    { voice: "tear", at: 0.1, decay: 0.5, vol: 0.4 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

@@ -1741,6 +1741,33 @@ export const TOY_HELP = {
       "Everything that flows here is a crowd of small particles, each drawn as a splat. For the liquids, the computer keeps every particle from crowding its neighbors, so the crowd keeps its volume the way water does, and evens out their speeds to make them thick: a little for water, a lot for honey and lava. Where the flow is fast and breaks up, it throws off drops, foam and, for soda, rising bubbles. Smoke and steam are lighter particles that rise, swirl, spread and fade. A flame is a stream of short-lived hot particles that rise and cool from blue at the base to yellow, orange and dull red.\n\nPick a Scene: pour into a glass (the third tap empties it first), splash into a basin, blow out a candle, or blow across a hot cup. Pick a Liquid to see how thickness changes a pour. This is graphics physics: it moves believably, but it is not a validated scientific simulation.\n\nThis lab runs best on a computer. On a phone, choose Auto detail.",
   },
 
+  // ---- Arcade (lane Arcade) ------------------------------------------------------------
+  shardball: {
+    howTo:
+      "Tap or press Space to play. Steer the paddle with the mouse, a finger or the arrow keys; press 3D to slide into 3D.",
+    about:
+      "A ball, a paddle and a wall of bricks. Keep the ball in play and break every brick: where it meets the paddle sets its angle, glazed bricks break at one hit and stone bricks crack first and break at the second. Each brick that breaks falls apart into real pieces that tumble, bounce and fade.\n\nThe 3D button (or V) slides the game into 3D and back. Flat board tips the same board back into a table you look along, and play goes on. Dome takes the paddle down to the bottom of an invisible sphere and spreads the bricks over a dome around and above it; the ball then bounces in three dimensions, with a gentle pull down toward the paddle, and its shadow shows where it will land. Pick a Style and a starting Level in the Toy tab. ⛶ Play fills the whole page; P pauses, R starts again, Esc leaves. The best score stays on this device.",
+  },
+
+  longtail: {
+    howTo:
+      "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+    about:
+      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. Arrow keys, a swipe or the pad turn it toward that side of the screen.\n\nThe tiles are a world you can fold. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube you steer around. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
+  },
+  "grain-garden": {
+    howTo:
+      "Pick sand, water, oil, fire, seeds or stone, then hold and move to pour. Press 3D to tip the box.",
+    about:
+      "Every grain here is one splat, moved by a simple rule sixty times a second. Sand falls and slides off a pile at a slant. Water and oil fall and spread sideways to find their level; oil is lighter, so water sinks under it. Fire flickers upward and dies down to smoke, lighting oil, plants and seeds, and water puts it out. A seed resting by water sprouts a plant that grows up toward the light and sometimes flowers. Stone stays where it is put, for ledges and bowls; Erase clears.\n\nThe box has depth. In 2D you see it face on and pour through its whole depth; the 3D button tips it round so the grains show in 3D, still running by the same rules (Q and E turn it).",
+  },
+  "page-breaker": {
+    howTo:
+      "Open a PDF or a photo in the Toy tab, then tap to play. Steer the paddle; break every word.",
+    about:
+      "Shardball with your own page. Every word on the page (found from its ink) becomes a brick, and so does each piece of its pictures; a photo is cut into tiles. Each brick is made of that piece of the page, splat by splat, so a word that breaks falls apart into pieces of its letters. Each page of a PDF is the next level.\n\nOpen a file in the Toy tab, or play the sample article or photo. The file is read on this device and never leaves it. Flat board and Dome work as in Shardball: the 3D button tips the page back, or spreads its words over a dome.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

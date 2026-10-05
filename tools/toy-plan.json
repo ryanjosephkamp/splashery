@@ -2449,6 +2449,34 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "shardball": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).",
+      "effect": "A brick-breaking game: tap to play; every brick that breaks shatters into real pieces that tumble, bounce and fade. The 3D switch tips the Flat board back into a table, or takes the Dome style's paddle to the bottom of a sphere under a dome of bricks, where the ball bounces in 3D.",
+      "sound": "Knocks off the paddle and the rails, a glassy break for glazed bricks, a crack and clatter for stone, a thud for a lost ball, a rising chime for a new level.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "longtail": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G2 (labs only).",
+      "effect": "A growing-trail game: tap to play; a string of glass beads crawls tile to tile and grows with each berry. The 3D switch folds the flat cross of tiles into a cube, rounds it into a Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.",
+      "sound": "A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone through a tunnel, a thud when it runs into itself.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "grain-garden": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G6 (labs only).",
+      "effect": "A falling-sand box where every grain is a splat: pour sand, water, oil, fire, seeds or stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.",
+      "sound": "A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water puts it out, a pop when a seed sprouts.",
+      "improved": "Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "page-breaker": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G7 (labs only).",
+      "effect": "Shardball whose bricks are the words and pictures of your own PDF page or photo, made of that piece of the page; a word that breaks falls apart into pieces of its letters. Each page of a PDF is a level.",
+      "sound": "Shardball's knocks and breaks.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the picture engine's figure finder."
     }
   }
 }

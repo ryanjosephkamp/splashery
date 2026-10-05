@@ -47,9 +47,23 @@ const CSS = `
   color: #fff; font: 800 20px/1 ui-sans-serif, system-ui, sans-serif; touch-action: none; }
 .arc-key.arc-down { background: rgba(90, 130, 240, 0.75); }
 .arc-key.arc-fire { width: 66px; height: 66px; border-radius: 50%; font-size: 15px; }
+.arc-choices { position: absolute; left: 8px; right: 8px; top: 92px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; pointer-events: auto; }
+.arc-root[data-playmode="true"] .arc-choices { top: 52px; }
+body.app .arc-root[data-playmode="false"] .arc-choices { top: 148px; }
+.arc-choice { height: 30px; padding: 0 10px 0 6px; font-size: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(12, 14, 20, 0.66);
+  color: #fff; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; touch-action: manipulation; }
+.arc-choice i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,0.5); }
+.arc-choice[aria-pressed="true"] { background: rgba(70, 110, 220, 0.9); border-color: #cfe0ff; }
 .arc-hint { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); padding: 3px 10px; border-radius: 999px; font-weight: 500; font-size: 12px;
   background: rgba(12, 14, 20, 0.5); white-space: nowrap; pointer-events: none; opacity: 0.9; }
-.arc-root[data-touch="true"] .arc-hint { display: none; }
+.arc-root[data-touch="true"] .arc-choices { position: absolute; left: 8px; right: 8px; top: 92px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; pointer-events: auto; }
+.arc-root[data-playmode="true"] .arc-choices { top: 52px; }
+body.app .arc-root[data-playmode="false"] .arc-choices { top: 148px; }
+.arc-choice { height: 30px; padding: 0 10px 0 6px; font-size: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(12, 14, 20, 0.66);
+  color: #fff; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; touch-action: manipulation; }
+.arc-choice i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,0.5); }
+.arc-choice[aria-pressed="true"] { background: rgba(70, 110, 220, 0.9); border-color: #cfe0ff; }
+.arc-hint { display: none; }
 .arc-root[data-touch="false"] .arc-pad { display: none; }
 .arc-root[data-playmode="false"] .arc-exit { display: none; }
 body.app .arc-root[data-playmode="false"] .arc-top { top: 64px; }
@@ -99,6 +113,7 @@ export class Hud {
       </div>
       <div class="arc-msg" hidden></div>
       <div class="arc-help" hidden></div>
+      <div class="arc-choices" hidden></div>
       <div class="arc-pad"></div>
       <div class="arc-hint"></div>`;
     canvas.after(el);
@@ -125,6 +140,7 @@ export class Hud {
     this.helpEl.addEventListener("click", () => this.toggleHelp(false));
     this.buildPad(game.pad || ["left", "right", "fire"], on.pad);
     this.buildHelp();
+    this.buildChoices(game.choices, on.choose);
     this.hintEl.textContent = game.controls?.short || "";
     this.chips = new Map();
     this.lastStats = "";
@@ -191,6 +207,32 @@ export class Hud {
     const names = this.game.padLabels || {};
     for (const a of acts) right.appendChild(make(a, names[a] || (a === "fire" ? "●" : a), "arc-fire")); // prettier-ignore
     box.append(left, right);
+  }
+
+  // A game's own choices (a material to paint with): a row of buttons.
+  buildChoices(choices, choose) {
+    const box = this.el.querySelector(".arc-choices");
+    this.choiceEls = [];
+    if (!choices?.length) return;
+    box.hidden = false;
+    for (const c of choices) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "arc-choice";
+      b.innerHTML = `<i style="background:${esc(c.color || "#888")}"></i>${esc(c.label)}`;
+      b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        choose?.(c.id);
+      });
+      b.dataset.id = c.id;
+      box.appendChild(b);
+      this.choiceEls.push(b);
+    }
+  }
+
+  setChoice(id) {
+    for (const b of this.choiceEls || [])
+      b.setAttribute("aria-pressed", String(b.dataset.id === id));
   }
 
   buildHelp() {

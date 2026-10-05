@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 377 toys. 347 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 372.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -60,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Galaxy in a box, Fluid lab, Screen, Shardball, Longtail, Grain Garden, Page Breaker.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2942,3 +2942,38 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+
+## Arcade (4)
+
+- **Shardball** (`shardball`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).
+  - Effect: A brick-breaking game: tap to play; every brick that breaks shatters into real pieces
+    that tumble, bounce and fade. The 3D switch tips the Flat board back into a table, or takes the
+    Dome style's paddle to the bottom of a sphere under a dome of bricks, where the ball bounces in
+    3D.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: Knocks off the paddle and the rails, a glassy break for glazed bricks, a crack and
+    clatter for stone, a thud for a lost ball, a rising chime for a new level.
+- **Longtail** (`longtail`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G2 (labs only).
+  - Effect: A growing-trail game: tap to play; a string of glass beads crawls tile to tile and grows
+    with each berry. The 3D switch folds the flat cross of tiles into a cube, rounds it into a
+    Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone
+    through a tunnel, a thud when it runs into itself.
+- **Grain Garden** (`grain-garden`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G6 (labs only).
+  - Effect: A falling-sand box where every grain is a splat: pour sand, water, oil, fire, seeds or
+    stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.
+  - Improved: Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water
+    puts it out, a pop when a seed sprouts.
+- **Page Breaker** (`page-breaker`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G7 (labs only).
+  - Effect: Shardball whose bricks are the words and pictures of your own PDF page or photo, made of
+    that piece of the page; a word that breaks falls apart into pieces of its letters. Each page of
+    a PDF is a level.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the
+    picture engine's figure finder.
+  - Sound: Shardball's knocks and breaks.
