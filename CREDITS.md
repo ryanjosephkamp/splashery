@@ -546,6 +546,22 @@ fetch anything live. Each license was checked on the live source page on October
   written as "Iris ".
 
 Tables people open in Data in 3D are read in their browser and never uploaded.
+## Sound and light lab
+
+The Sound lab, the Sound recorder and the Light lab (labs) use no recorded assets: their sounds and
+the spectrometer's sample picture are made by the page. Their data:
+
+- Emission lines: the visible lines (380 to 750 nm, in air) of sixteen neutral atoms, from the NIST
+  [Handbook of Basic Atomic Spectroscopic Data](https://www.nist.gov/pml/handbook-basic-atomic-spectroscopic-data)
+  (Sansonetti and Martin, J. Phys. Chem. Ref. Data 34, 1559 (2005); NIST SRD 108, drawn from the
+  Atomic Spectra Database), its "Strong Lines" tables for H, He, Li, Na, K, Ca, Sr, Ba, Cu, Zn, Cd,
+  Hg, Ne, Ar, Kr and Xe (for example
+  [hydrogentable2.htm](https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable2.htm)).
+  Measured values, credited to NIST; `tools/sll-nist.mjs` fetches them again.
+- Glass: SCHOTT's Sellmeier coefficients for N-SF11 and N-BK7, as listed on
+  [RefractiveIndex.INFO](https://refractiveindex.info/?shelf=specs&book=SCHOTT-optical&page=N-SF11)
+  (from the SCHOTT catalog).
+- Wavelength colors: Dan Bruton's approximation of the visible spectrum.
 
 ## Imaging (lane Imaging)
 

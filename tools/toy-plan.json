@@ -2551,6 +2551,27 @@
       "effect": "A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap crossfades from normal colors to the thermal camera's false colors (the iron palette), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.",
       "sound": "The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it turns off.",
       "improved": "Imaging: new toy."
+    },
+    "sound-lab": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "A bench instrument whose screen is a panel of splats: a scrolling spectrogram, the spectrum with its loudest frequency, an oscilloscope and a level meter (dBFS, with an uncalibrated dB SPL estimate). A tap plays or stops the tone generator (sine, square, saw or noise; two tones beat), measured on the screen as the speaker plays it; the speaker's cone moves with the signal. A metronome swings from side to side, one beat a swing, and clicks on each beat. The microphone, on a tap, takes over the screens.",
+      "sound": "A soft switch; the tone itself plays from the toy while the site's sound is on.",
+      "improved": "Sound and light lab: new toy. The screens are measured from samples (the generator's own, or the microphone's); tested: a known tone's spectrogram peak, the beat frequency, the metronome's clicks."
+    },
+    "sound-recorder": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "A studio microphone before a screen of splats showing the recording's waveform over its spectrogram, the kept span bright and the trimmed ends dimmed, with a play head. Record (in the Toy tab, from the microphone, kept in memory) lights the microphone's lamp; a tap plays or stops the recording. Trim, then save as WAV or a smaller Opus or AAC file.",
+      "sound": "A soft click.",
+      "improved": "Sound and light lab: new toy; the WAV file round-trips sample for sample (tested)."
+    },
+    "light-lab": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "Line spectra of sixteen elements from NIST to compare (a tap labels the next element's strongest lines); an optical bench where a lamp's beam passes a 60° prism (Snell's law, Schott's Sellmeier index) or a grating (CD, DVD or slide; d sin θ = m λ, orders −2 to +2), every ray traced onto a card, a tap changing the lamp from white light to each element; and a home spectrometer reading a camera picture (a CD or DVD and a fluorescent lamp), calibrated on mercury's 436 and 546 nm lines.",
+      "sound": "The click of a slide changer.",
+      "improved": "Sound and light lab: new toy; the lines match NIST's tables, the prism's minimum deviation and the grating angles match their formulas, and the spectrometer finds the lines of a made-up picture within 2 nm (tested)."
     }
   }
 }

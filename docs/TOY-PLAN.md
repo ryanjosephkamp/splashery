@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 388 toys. 358 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 378.
+- 391 toys. 361 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 381.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 10.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -60,9 +60,9 @@ Proposals below are suggestions; the owner may change them.
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
   Song landscape, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo
-  to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen.
+  to 3D, Video to 3D, Sound lab, Sound recorder, Splat field, Light lab, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works,
+  Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2810,7 +2810,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (13)
+## Studio (15)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2946,6 +2946,28 @@ Proposals below are suggestions; the owner may change them.
     own sizes and rotations; save as PLY; timing readout per stage.
   - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
     the flight of a video you opened, the video's own sound.
+- **Sound lab** (`sound-lab`). Now: tap: Play or stop the tone. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: A bench instrument whose screen is a panel of splats: a scrolling spectrogram, the
+    spectrum with its loudest frequency, an oscilloscope and a level meter (dBFS, with an
+    uncalibrated dB SPL estimate). A tap plays or stops the tone generator (sine, square, saw or
+    noise; two tones beat), measured on the screen as the speaker plays it; the speaker's cone moves
+    with the signal. A metronome swings from side to side, one beat a swing, and clicks on each
+    beat. The microphone, on a tap, takes over the screens.
+  - Improved: Sound and light lab: new toy. The screens are measured from samples (the generator's
+    own, or the microphone's); tested: a known tone's spectrogram peak, the beat frequency, the
+    metronome's clicks.
+  - Sound: A soft switch; the tone itself plays from the toy while the site's sound is on.
+- **Sound recorder** (`sound-recorder`). Now: tap: Play or stop the recording. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: A studio microphone before a screen of splats showing the recording's waveform over its
+    spectrogram, the kept span bright and the trimmed ends dimmed, with a play head. Record (in the
+    Toy tab, from the microphone, kept in memory) lights the microphone's lamp; a tap plays or stops
+    the recording. Trim, then save as WAV or a smaller Opus or AAC file.
+  - Improved: Sound and light lab: new toy; the WAV file round-trips sample for sample (tested).
+  - Sound: A soft click.
 - **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
   - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,
@@ -2953,7 +2975,7 @@ Proposals below are suggestions; the owner may change them.
     the floor and lets it rise back into place with a small overshoot (2.4 s).
   - Sound: A soft thud as the marks land, a light knock, and a breath as they rise.
 
-## Lab (2)
+## Lab (3)
 
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
@@ -2972,6 +2994,19 @@ Proposals below are suggestions; the owner may change them.
     each).
   - Sound: Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle
     wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).
+- **Light lab** (`light-lab`). Now: tap: Next element or lamp. Plan: keep.
+  - Owner: The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs
+    only).
+  - Effect: Line spectra of sixteen elements from NIST to compare (a tap labels the next element's
+    strongest lines); an optical bench where a lamp's beam passes a 60° prism (Snell's law, Schott's
+    Sellmeier index) or a grating (CD, DVD or slide; d sin θ = m λ, orders −2 to +2), every ray
+    traced onto a card, a tap changing the lamp from white light to each element; and a home
+    spectrometer reading a camera picture (a CD or DVD and a fluorescent lamp), calibrated on
+    mercury's 436 and 546 nm lines.
+  - Improved: Sound and light lab: new toy; the lines match NIST's tables, the prism's minimum
+    deviation and the grating angles match their formulas, and the spectrometer finds the lines of a
+    made-up picture within 2 nm (tested).
+  - Sound: The click of a slide changer.
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
   - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
     fluid splat simulator"; lane Fluids; labs only).
