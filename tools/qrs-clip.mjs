@@ -122,7 +122,7 @@ const SCRIPTS = {
     { opts: { damage: "blur:0.6:all:1" }, key: "drop", cap: "Blur: splats 2.8 times as wide" },
     { wait: 0.8 },
     { check: true },
-    { opts: { damage: "shrink:0.75:all:1" }, key: "drop", cap: "Shrink: splats 36% of their size" },
+    { opts: { damage: "shrink:0.5:all:1" }, key: "drop", cap: "Shrink: splats 58% of their size" },
     { wait: 0.8 },
     { check: true },
     { wait: 0.6 },
@@ -216,7 +216,11 @@ for (const clip of clips) {
         g.font = "600 13px sans-serif";
         wrap(caption, 8, size + 17, size - 16, 16);
         g.font = "12px sans-serif";
-        g.fillStyle = meter.startsWith("✗") ? "#b3261e" : "#1d6b3a";
+        g.fillStyle = meter.startsWith("✗")
+          ? "#b3261e"
+          : meter.startsWith("✓")
+            ? "#1d6b3a"
+            : "#222";
         wrap(meter, 8, size + 52, size - 16, 15);
         frames.push(g.getImageData(0, 0, size, size + BAR).data.slice());
       };
