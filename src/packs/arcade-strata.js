@@ -73,8 +73,8 @@ class Strata {
     const { recolor } = api;
     const c = this.cube;
     // Crisp grids (src/packs/arcade-crisp.js): each stone a clean block.
-    const fine = c / (low ? 8 : 12);
-    const opt = { fine, coarse: c / (low ? 2.5 : 3) };
+    const fine = c / (low ? 5 : 7);
+    const opt = { fine, coarse: c / (low ? 2 : 2.5) };
     const h = (c * 0.94) / 2;
     // A carved stone: a block with a lit top, darker sides and a darker
     // chamfer along its edges.
@@ -176,7 +176,13 @@ class Strata {
     this.piece.y = this.H - 1 - top;
     this.piece.sprites = cubes.map(() => this.api.sprites.add(this.models[k]));
     this.piece.shown = null;
-    if (!this.fits(this.piece.cubes, this.piece.x, this.piece.y, this.piece.z)) {
+    // (a full layer of splats ends the game like a full well, never breaks it)
+    const full = this.piece.sprites.some((sp) => !sp);
+    if (full) {
+      for (const sp of this.piece.sprites) if (sp) this.api.sprites.remove(sp);
+      this.piece.sprites = this.piece.sprites.map(() => null);
+    }
+    if (full || !this.fits(this.piece.cubes, this.piece.x, this.piece.y, this.piece.z)) {
       this.over = true;
       this.api.sound([{ voice: "rumble", vol: 0.6, decay: 0.8 }, { voice: "stone", f: 120, vol: 0.7 }]); // prettier-ignore
     }

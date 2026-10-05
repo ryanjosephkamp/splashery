@@ -458,7 +458,7 @@ export const RECIPES = {
         pad: "D-pad moves; B turns; LB and RB tip; A drops.",
         short: "Arrows move · X turn · Q E tip · Space drop",
       },
-      slots: { high: 90000, mid: 70000, low: 40000 }, // crisp stones
+      slots: { high: 150000, mid: 120000, low: 60000 }, // crisp stones
       create: async (api) => (await import("./arcade-strata.js")).createStrata(api),
     },
   },
