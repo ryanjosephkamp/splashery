@@ -28,7 +28,7 @@
     {
       "claim": "The thickness is a guess: a thin disk with an exponential height profile (scale height 3.5% of the radius pictured) and a round bulge.",
       "how": "Each splat's height is drawn from a Laplace (two-sided exponential) distribution in the disk and from a ball in the bulge.",
-      "where": "src/packs/space-r2.js:741",
+      "where": "src/packs/space-r2.js:743",
       "sources": [
         {
           "title": "Galaxy Disks",

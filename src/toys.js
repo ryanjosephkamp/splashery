@@ -1244,6 +1244,16 @@ export const TOYS = [
     camera: { yaw: 0.6, pitch: 0.45, roll: 0, distance: 2.6 },
   },
   {
+    id: "star-systems",
+    label: "Real star systems",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "exoplanets planets star system trappist-1 toi-178 55 cancri orbits nasa exoplanet archive transit real data",
+    camera: { yaw: 0.5, pitch: 0.55, roll: 0, distance: 2.6 },
+  },
+  {
     id: "real-galaxies",
     label: "Real galaxies",
     category: "space",

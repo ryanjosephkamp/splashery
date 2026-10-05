@@ -839,6 +839,149 @@ const smooth01 = (x) => {
 
 RECIPES["real-galaxies"] = galaxyRecipe;
 
+// ---- Real star systems ---------------------------------------------------------------------
+
+const SYS = { data: null };
+const SYS_TURN = 7;
+const SYS_SPEEDS = [
+  { id: "1", label: "A day each second" },
+  { id: "10", label: "10 days each second" },
+  { id: "100", label: "100 days each second" },
+];
+// Planets of unknown color, by size: rocky, mini-Neptune, giant.
+const sizeColor = (re) => (re < 1.6 ? [0.62, 0.55, 0.5] : re < 4 ? [0.52, 0.68, 0.82] : [0.82, 0.72, 0.56]); // prettier-ignore
+const SOLAR_COLORS = { Mercury: [0.62, 0.6, 0.58], Venus: [0.9, 0.82, 0.62], Earth: [0.35, 0.55, 0.85], Mars: [0.8, 0.45, 0.28] }; // prettier-ignore
+
+const systemsRecipe = {
+  alive: true,
+  turntable: false,
+  options: [
+    {
+      key: "system",
+      label: "System",
+      type: "select",
+      default: "trappist-1",
+      choices: [
+        { id: "trappist-1", label: "TRAPPIST-1" },
+        { id: "toi-178", label: "TOI-178" },
+        { id: "55-cnc", label: "55 Cancri" },
+        { id: "inner-solar-system", label: "The inner Solar System" },
+      ],
+    },
+    { key: "speed", label: "Speed", type: "select", default: "1", choices: SYS_SPEEDS },
+    {
+      key: "spacing",
+      label: "Distances",
+      type: "select",
+      default: "true",
+      choices: [
+        { id: "true", label: "To scale" },
+        { id: "spread", label: "Spread out (not to scale)" },
+      ],
+    },
+  ],
+  controls: [{ key: "edge", label: "See it from Earth", type: "pulse", ease: SYS_TURN }],
+  action: { key: "edge", label: "Turn it to the view from Earth and back" },
+  note: "Real planetary systems from the NASA Exoplanet Archive: the orbits' sizes and periods are measured; the star and the planets are drawn much larger than the orbits' scale, and the planets' colors are not known (they show their size class).",
+  credits: [
+    {
+      label: "Planets",
+      title: "NASA Exoplanet Archive, Planetary Systems Composite Parameters",
+      source: "https://exoplanetarchive.ipac.caltech.edu/",
+      author: "NASA Exoplanet Science Institute (Caltech/IPAC)",
+      license: "CC0 (NASA mission data)",
+      licenseUrl: "https://science.data.nasa.gov/about/license",
+    },
+  ],
+  async prepare() {
+    SYS.data ||= await readJson("../../assets/toys/star-systems/systems.json");
+  },
+  drive(t, c, out, info) {
+    const m = mem(c);
+    const d = info?.data;
+    if (!d) return;
+    const dt = m.t === undefined ? 0 : Math.max(0, Math.min(0.25, t - m.t));
+    m.t = t;
+    m.days = (m.days ?? 0) + dt * d.speed;
+    out.tokens = d.planets.map((p) => {
+      const a = p.phase + (TAU * m.days) / p.period;
+      return { base: [p.r, 0, 0], offset: [p.r * Math.cos(a) - p.r, 0, -p.r * Math.sin(a)] };
+    });
+    // Sort the planets again now and then where they are.
+    if (t - (m.sorted ?? -1) > 0.4) {
+      m.sorted = t;
+      out.resort = true;
+    }
+    // Seen from Earth: these systems were found because their planets pass
+    // in front of their stars, so we see their orbits almost edge on.
+    const p = progress(c.edge);
+    const e = c.edge > 0 ? ease(band(p, 0, 0.3)) * (1 - ease(band(p, 0.75, 1))) : 0;
+    out.body = { quat: [Math.sin((e * 88 * DEG) / 2), 0, 0, Math.cos((e * 88 * DEG) / 2)] };
+  },
+  build(k, o) {
+    const D = SYS.data;
+    if (!D) throw new Error("The systems haven't loaded.");
+    const sys = D.systems.find((x) => x.id === o.system) || D.systems[0];
+    const amax = Math.max(...sys.planets.map((p) => p.aAU));
+    const spread = o.spacing === "spread";
+    const rOf = (a) => (spread ? Math.sqrt(a / amax) : a / amax);
+    const maxRe = Math.max(...sys.planets.map((p) => p.radiusEarth || 1));
+    // The biggest planet drawn 0.035 across the system's radius; the star
+    // at least 0.05 (both far larger than to scale).
+    const k1 = 0.035 / maxRe;
+    const starR = Math.max(0.05, Math.min(0.12, (sys.star.radiusSun * 0.00465) / amax));
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    const sphere = (n, i) => {
+      const y = 1 - (2 * (i + 0.5)) / n;
+      const rr = Math.sqrt(1 - y * y);
+      return [rr * Math.cos(golden * i), y, rr * Math.sin(golden * i)];
+    };
+    // The star: a glowing ball in its temperature's color.
+    const sc = starColor(sys.star.teff);
+    k.cloud({ count: (2500 * 160000) / k.count, jitter: 0, pattern: false }, (_r, i) => {
+      const d = sphere(2500, i);
+      return { p: d.map((v) => v * starR), scales: [starR * 0.12, starR * 0.12, starR * 0.12], color: sc, opacity: 0.95 }; // prettier-ignore
+    });
+    k.cloud({ count: (400 * 160000) / k.count, jitter: 0, pattern: false }, (rand) => {
+      const u = randDir3(rand);
+      const r = starR * (1.1 + 0.8 * rand());
+      return { p: u.map((v) => v * r), scales: [starR * 0.3, starR * 0.3, starR * 0.3], color: sc, opacity: 0.12 }; // prettier-ignore
+    });
+    // The orbits: thin circles.
+    const planets = [];
+    sys.planets.forEach((pl, i) => {
+      const r = rOf(pl.aAU);
+      const n = Math.round(260 * Math.max(0.3, r));
+      k.cloud({ count: (n * 160000) / k.count + 1, jitter: 0, pattern: false }, (_r, j) => {
+        if (j >= n) return null;
+        const a = (j / n) * TAU;
+        return { p: [r * Math.cos(a), 0, r * Math.sin(a)], scales: [(TAU * r) / n * 0.5, 0.0015, 0.0015], quat: discQuatAlong([-Math.sin(a), 0, Math.cos(a)]), color: [0.4, 0.5, 0.7], opacity: 0.45 }; // prettier-ignore
+      });
+      // The planet, a small ball (token i), built at angle 0.
+      const pr = Math.max(0.006, (pl.radiusEarth || 1) * k1);
+      const col = SOLAR_COLORS[pl.name] || sizeColor(pl.radiusEarth || 1);
+      const N = 180;
+      k.cloud({ count: (N * 160000) / k.count + 1, jitter: 0, pattern: false }, (_r, j) => {
+        if (j >= N) return null;
+        const d = sphere(N, j);
+        const lit = 0.55 + 0.45 * Math.max(0, -d[0]);
+        return { p: [r + d[0] * pr, d[1] * pr, d[2] * pr], scales: [pr * 0.3, pr * 0.3, pr * 0.3], color: col.map((v) => v * lit), opacity: 0.97, kind: "token", params: [i, 0] }; // prettier-ignore
+      });
+      planets.push({ name: pl.name, r, period: pl.periodDays, phase: (i * 2.399963) % TAU, radiusEarth: pl.radiusEarth }); // prettier-ignore
+    });
+    for (const s of [[1.05, 0, 0], [-1.05, 0, 0], [0, 0, 1.05], [0, 0, -1.05], [0, 0.2, 0], [0, -0.2, 0]]) k.reach(s); // prettier-ignore
+    k.data = { system: sys.id, planets, speed: Number(o.speed) || 1 };
+  },
+};
+const randDir3 = (rand) => {
+  const z = rand() * 2 - 1;
+  const a = rand() * TAU;
+  const r = Math.sqrt(1 - z * z);
+  return [r * Math.cos(a), z, r * Math.sin(a)];
+};
+
+RECIPES["star-systems"] = systemsRecipe;
+
 // ---- Rockets -------------------------------------------------------------------------------
 
 const ROCKET = { prep: null };

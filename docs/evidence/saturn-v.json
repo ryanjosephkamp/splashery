@@ -6,7 +6,7 @@
     {
       "claim": "The pieces separate in the order of a real flight: the S-IC, the interstage ring, the launch escape tower, the S-II, then the spacecraft leaves the S-IVB.",
       "how": "The drive moves each piece at its time on a 12-second clock; the test checks the order.",
-      "where": "src/packs/space-r2.js:861",
+      "where": "src/packs/space-r2.js:1006",
       "sources": [
         {
           "title": "Saturn V",
@@ -22,7 +22,7 @@
     {
       "claim": "The S-IC is the bottom 38% of the rocket's height (42 m of 110.6 m).",
       "how": "The pieces are cut at shares of the model's height where its width steps, checked against the stages' lengths.",
-      "where": "src/packs/space-r2.js:849",
+      "where": "src/packs/space-r2.js:994",
       "sources": [
         {
           "title": "Saturn V",

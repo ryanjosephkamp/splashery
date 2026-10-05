@@ -344,6 +344,40 @@ test.describe("lane Space r2: real worlds", () => {
     expect(order).toEqual(["s1", "ring", "les", "s2", "s3"]);
   });
 
+  test("each real star system's planets go round at their measured periods", async () => {
+    const D = JSON.parse(fs.readFileSync("assets/toys/star-systems/systems.json", "utf8"));
+    const t1 = D.systems.find((x) => x.id === "trappist-1");
+    expect(t1.planets.map((p) => p.name)).toEqual(["b", "c", "d", "e", "f", "g", "h"].map((x) => `TRAPPIST-1 ${x}`)); // prettier-ignore
+    expect(Math.abs(t1.planets[0].periodDays - 1.51)).toBeLessThan(0.01);
+    // Kepler's third law holds within each system: a^3 / P^2 is the same for
+    // every planet (within 15%: the archive takes each planet's values from
+    // its best paper, and 55 Cancri e's orbit size uses another stellar mass).
+    for (const s of D.systems) {
+      const k = s.planets.map((p) => p.aAU ** 3 / p.periodDays ** 2);
+      for (const v of k) expect(Math.abs(v / k[0] - 1)).toBeLessThan(0.15);
+    }
+    const ctx = await build("star-systems", 60000, { system: "trappist-1", speed: "1" });
+    const recipe = RECIPES["star-systems"];
+    const c = { edge: 0 };
+    const at = (t) => {
+      const out = { parts: {}, cues: [] };
+      recipe.drive(t, c, out, { data: ctx.kit.data });
+      return out;
+    };
+    at(0);
+    let out;
+    // 48 steps of 0.25 s (the drive's longest): 12 days at a day a second.
+    for (let n = 1; n <= 48; n++) out = at(n * 0.25);
+    const P = ctx.kit.data.planets;
+    P.forEach((p, i) => {
+      const o = out.tokens[i].offset;
+      const ang = Math.atan2(-o[2], p.r + o[0]);
+      const want = (p.phase + (2 * Math.PI * 12) / p.period) % (2 * Math.PI);
+      const d = Math.abs(((ang - want + 3 * Math.PI) % (2 * Math.PI)) - Math.PI);
+      expect(d, p.name).toBeLessThan(0.01);
+    });
+  });
+
   test("nothing of the real worlds loads before one opens; each then builds", async ({ page }) => {
     test.setTimeout(400_000);
     const errors = [];

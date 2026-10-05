@@ -2519,6 +2519,13 @@
       "effect": "Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.",
       "sound": "Space is silent: a soft breath as the view flies in.",
       "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice."
+    },
+    "star-systems": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more stellar systems, more planets\"; lane Space r2; labs only).",
+      "effect": "TRAPPIST-1, TOI-178 and 55 Cancri (and the inner Solar System to compare) from the NASA Exoplanet Archive: planets on their measured orbits at their measured periods (sped up, labeled), star and planets drawn larger than to scale (said). A tap turns the system edge on, as Earth sees it, and back (7 s).",
+      "sound": "Space is silent: a soft breath as it turns.",
+      "improved": "Space r2: new toy (labs); tools/sp2-systems.mjs reads pscomppars through the archive's TAP service."
     }
   }
 }

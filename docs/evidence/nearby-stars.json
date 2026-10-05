@@ -54,7 +54,7 @@
     {
       "claim": "A star's color follows its temperature, from its measured color.",
       "how": "Temperatures interpolated from Gaia's BP − RP (or B − V for HYG stars) along Mamajek's table of mean dwarf colors; each temperature is drawn as a blackbody's color.",
-      "where": "src/packs/space-r2.js:528",
+      "where": "src/packs/space-r2.js:530",
       "sources": [
         {
           "title": "A Modern Mean Dwarf Stellar Color and Effective Temperature Sequence",

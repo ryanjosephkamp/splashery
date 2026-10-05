@@ -2513,6 +2513,17 @@
       "license": "NASA 3D Resources: free to download and use (NASA media guidelines); not a CC license",
       "checked": "October 5, 2026",
       "note": "The GLB as downloaded (927 KB). The owner decides the NASA 3D Resources terms route (docs/audits/new-sources-2026-10.md, A9)."
+    },
+    {
+      "id": "star-systems",
+      "files": ["assets/toys/star-systems/systems.json"],
+      "toy": "star-systems",
+      "name": "Planetary Systems Composite Parameters (TRAPPIST-1, TOI-178, 55 Cancri)",
+      "author": "NASA Exoplanet Science Institute (Caltech/IPAC)",
+      "page": "https://exoplanetarchive.ipac.caltech.edu/",
+      "license": "CC0 (NASA mission data; https://science.data.nasa.gov/about/license)",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/sp2-systems.mjs through the archive's TAP service; the inner Solar System from NSSDC fact sheets."
     }
   ]
 }

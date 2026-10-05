@@ -2040,6 +2040,12 @@ export const TOY_HELP = {
     about:
       "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons spacecraft as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn spacecraft, which orbited each of them. Each splat sits at its map's height above a sphere, so Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest of its map, and of its heights, is filled in smoothly from the edges and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright deposits of salt; Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at their true heights by default; pick ×5 or more in the Toy tab to exaggerate the relief.",
   },
+  "star-systems": {
+    howTo:
+      "Tap to turn the system to the view from Earth and back. Pick a system, its speed and its spacing in the Toy tab.",
+    about:
+      "Real planets round other stars, from the NASA Exoplanet Archive: TRAPPIST-1, a cool red dwarf 40 light-years away with seven rocky planets, all closer to it than Mercury is to the Sun; TOI-178, whose six planets go round in a chain of near-simple ratios; and 55 Cancri, with a planet that circles its star in less than a day. The inner Solar System is there to compare.\n\nThe sizes of the orbits and the time each planet takes to go round are measured, and the planets move at those rates (sped up as chosen). The star and the planets are drawn far larger than the orbits' scale, or they would be too small to see. Nobody knows these planets' colors: they are colored by size, gray-brown for rocky planets, blue for planets between Earth and Neptune in size, tan for giants. Tap to turn the system edge on, as we see it from Earth: these planets were found because, seen from here, they pass in front of their star and dim it a little.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------

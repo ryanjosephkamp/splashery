@@ -552,6 +552,12 @@ feature (`assets/toys/real-worlds/`). Feature positions are from the
   4.0. Temperatures from colors by E. Mamajek's
   [table of mean dwarf colors](https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)
   (Pecaut & Mamajek 2013).
+- Real star systems: the [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/)'s
+  Planetary Systems Composite Parameters (NASA Exoplanet Science Institute, Caltech/IPAC; NASA
+  mission data, [CC0](https://science.data.nasa.gov/about/license)): "This research has made use of
+  the NASA Exoplanet Archive, which is operated by the California Institute of Technology, under
+  contract with the National Aeronautics and Space Administration under the Exoplanet Exploration
+  Program." The inner Solar System from NASA's planetary fact sheets (NSSDC).
 - Real galaxies, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), cropped round each
   galaxy: the Whirlpool Galaxy, M51 ([heic0506a](https://esahubble.org/images/heic0506a/); NASA,
   ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)); the Pinwheel Galaxy, M101
