@@ -1401,6 +1401,17 @@ export const TOYS = [
     pack: "atoms",
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
   },
+  // ---- Pack: molecule-viewer (lane Molecule viewer) ----
+  {
+    id: "molecule-viewer",
+    label: "Molecule viewer",
+    category: "atoms",
+    kind: "kit",
+    pack: "molecule-viewer",
+    labs: true,
+    tags: "molecule viewer pdb mmcif cif sdf mol xyz protein dna rna ligand cartoon ribbon surface ball stick spacefill cpk bond length angle measure rcsb protein data bank chemistry biology",
+    camera: { yaw: 0.25, pitch: 0.18, roll: 0, distance: 3.4 },
+  },
 
   // ---- Pack: chemistry (lane Chemistry) ----
   {
@@ -1411,6 +1422,18 @@ export const TOYS = [
     pack: "chemistry",
     tags: "elements periodic table atom nucleus proton neutron electron shell spectrum emission line photon chemistry physics",
     camera: { yaw: 0.1, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
+
+  // ---- Pack: real-elements (lane Elements) ----
+  {
+    id: "real-elements",
+    label: "Real elements",
+    category: "atoms",
+    kind: "kit",
+    pack: "real-elements",
+    labs: true,
+    tags: "elements periodic table real samples photos metals gases crystals chemistry",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.1 },
   },
 
   // ---- Pack: gems ----
@@ -3696,6 +3719,18 @@ export const TOYS = [
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
   },
+  // ---- Pack: night-sky (lane Night sky) ----
+  {
+    id: "night-sky",
+    label: "Night sky",
+    category: "space",
+    kind: "kit",
+    pack: "night-sky",
+    labs: true,
+    tags: "stars planets moon sun constellations planetarium astronomy sky night location date time phase",
+    // Seen from inside: looking south, a little above the horizon.
+    camera: { yaw: 0, pitch: 0.3, roll: 0, distance: 5 },
+  },
   // ---- Pack: data-climate (lane Data and climate) ----
   {
     id: "data-in-3d",
@@ -3834,6 +3869,7 @@ const STILL_TOYS = new Set([
   "puzzle-cube",
   // Added: they read like a chart, a diagram or a page.
   "periodic-table",
+  "real-elements", // lane Elements
   "splat-equation",
   "chladni-plate",
   "anatomy-atlas",

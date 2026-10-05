@@ -1218,6 +1218,15 @@ export const TOY_SOUNDS = {
       { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.4 },
     ],
   },
+  // Lane Elements: the sample lifting off its tile, and setting down with a small click; the lift's
+  // tine and the turn's blip come from the recipe (src/packs/real-elements.js).
+  "real-elements": {
+    on: [{ voice: "whoosh", f: 380, to: 1.4, decay: 1.1, vol: 0.1 }],
+    off: [
+      { voice: "whoosh", f: 600, to: 0.5, decay: 0.8, vol: 0.1 },
+      { voice: "clack", at: 0.8, f: 1100, decay: 0.25, vol: 0.3 },
+    ],
+  },
   // ---- Gems -------------------------------------------------------------------------
   diamond: [
     {
@@ -2863,12 +2872,21 @@ export const TOY_SOUNDS = {
     ],
     off: [{ voice: "wood", f: 1100, vol: 0.28 }],
   },
+  // ---- Molecule viewer (lane Molecule viewer) ---------------------------------------
+  // Quiet (PACKS.md 7e): one soft, low click as an atom is picked.
+  "molecule-viewer": { voice: "clack", f: 1500, decay: 0.18, bright: 0.1, vol: 0.4 },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
   "fluid-lab": [
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
+  ],
+  // ---- Night sky (lane Night sky) ---------------------------------------------------
+  // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
+  "night-sky": [
+    { voice: "tine", f: 660, decay: 1.2, vol: 0.7 },
+    { voice: "breath", at: 0.03, f: 700, to: 1.1, decay: 1.2, vol: 0.12 },
   ],
   // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
   "data-in-3d": [
