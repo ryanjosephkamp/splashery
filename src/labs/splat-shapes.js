@@ -3,13 +3,22 @@
 // splat size from the budget left after the screens, which can leave a
 // small case with big, soft splats; these keep a fixed spacing instead.
 
+// The spacing that keeps a shape's splats in step with the toy's budget
+// (0.012 at the kit's reference budget of 160,000).
+export const budgetGap = (k, at = 0.018) => at * Math.sqrt(160000 / Math.max(20000, k.count));
+// A grid size scaled the same way (n at the reference budget).
+export const budgetN = (k, n) =>
+  Math.max(8, Math.round(n * Math.sqrt(Math.max(20000, k.count) / 160000)));
+
 // A box (full sizes w × h × d, centered at c) covered in flat splats about
 // `gap` apart, each face shaded from `color(n)` (n its outward normal).
+// `skip` leaves faces out by index (0 +x, 1 −x, 2 +y, 3 −y, 4 +z, 5 −z): the
+// back of a case, the underside of a table.
 // `tilt` leans it back about x (radians, its top away from the viewer) and
 // `turn` turns it about y (radians, counterclockwise seen from above).
 export function boxSplats(
   k,
-  { c, w, h, d, gap = 0.012, color, part = 0, pattern = false, tilt = 0, turn = 0 },
+  { c, w, h, d, gap = budgetGap(k), color, part = 0, pattern = false, tilt = 0, turn = 0, skip = [] }, // prettier-ignore
 ) {
   const ct = Math.cos(tilt);
   const st = Math.sin(tilt);
@@ -30,7 +39,8 @@ export function boxSplats(
     [[0, 0, 1], [1, 0, 0], [0, 1, 0], w, h, d / 2],
     [[0, 0, -1], [-1, 0, 0], [0, 1, 0], w, h, d / 2],
   ];
-  for (const [n, u, v, su, sv, off] of faces) {
+  for (const [f, [n, u, v, su, sv, off]] of faces.entries()) {
+    if (skip.includes(f)) continue;
     const nu = Math.max(1, Math.round(su / gap));
     const nv = Math.max(1, Math.round(sv / gap));
     const s = Math.max(su / nu, sv / nv) * 0.62;
@@ -52,7 +62,7 @@ export function boxSplats(
         });
       }
   }
-  k.cloud({ count: list.length, pattern, jitter: 0 }, (rand, i) => list[i] || null);
+  k.cloud({ share: list.length / k.count, pattern, jitter: 0 }, (rand, i) => list[i] || null);
 }
 
 // The rotation taking +z to the unit vector n.
@@ -89,5 +99,8 @@ export function faceSplats(
       if (keep && !keep(u, v)) continue;
       list.push({ p: f(u, v), scales: [s, s, s * 0.05], quat: q, color, opacity, kind, params, part, pattern: false }); // prettier-ignore
     }
-  k.cloud({ count: list.length, pattern: false, jitter: 0 }, (rand, i) => list[i] || null);
+  k.cloud(
+    { share: list.length / k.count, pattern: false, jitter: 0 },
+    (rand, i) => list[i] || null,
+  );
 }

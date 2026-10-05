@@ -57,13 +57,16 @@ function screenPanel(k, { center, width, height, cols, rows, part = 0, u = [0, 1
         pattern: false,
       });
     }
-  k.cloud({ count: list.length, pattern: false, jitter: 0 }, (rand, i) => list[i] || null);
+  k.cloud(
+    { share: list.length / k.count, pattern: false, jitter: 0 },
+    (rand, i) => list[i] || null,
+  );
 }
 
 // The panel's resolution from the toy's budget: `share` of it, at the
 // panel's shape, at most one splat per canvas pixel.
 function panelSize(k, share, aspect, maxCols) {
-  const n = Math.max(6000, k.count * share);
+  const n = Math.max(6000, Math.min(k.count * share, 150000));
   const cols = Math.min(maxCols, Math.round(Math.sqrt(n * aspect)));
   return { cols, rows: Math.round(cols / aspect) };
 }
@@ -732,7 +735,7 @@ const SOUND_LAB = {
       d: 0.16,
       color: lit(shade, "#2a3038"),
     });
-    const { cols, rows } = panelSize(k, 0.55, SW / SH, SW);
+    const { cols, rows } = panelSize(k, 0.5, SW / SH, SW);
     screenPanel(k, { center: [0, cy, 0.002], width: W, height: H, cols, rows });
     // The speaker (left): a cabinet, a cone that moves with the signal and a
     // lamp that lights while the tone plays.
@@ -1230,7 +1233,7 @@ const SOUND_RECORDER = {
       d: 0.16,
       color: lit(shade, "#2a3038"),
     });
-    const { cols, rows } = panelSize(k, 0.6, SW / SH, SW);
+    const { cols, rows } = panelSize(k, 0.5, SW / SH, SW);
     screenPanel(k, { center: [0, cy, 0.002], width: W, height: H, cols, rows });
     // A studio microphone on a short stand, its lamp red while it records.
     const my = -1.18;
