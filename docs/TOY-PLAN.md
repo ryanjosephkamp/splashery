@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 386 toys. 356 have a tap action today; the other 30 only hop.
+- 388 toys. 358 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 378.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 8.
+- **new** (needs its own effect): 10.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -71,7 +71,7 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
-  a QR code works, QR damage lab, Three QR codes in one, Video to 3D
+  a QR code works, QR damage lab, Three QR codes in one, Video to 3D, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2810,7 +2810,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (12)
+## Studio (13)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2946,6 +2946,12 @@ Proposals below are suggestions; the owner may change them.
     own sizes and rotations; save as PLY; timing readout per stage.
   - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
     the flight of a video you opened, the video's own sound.
+- **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
+  - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
+  - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,
+    ticks and labels that turn to face the camera. A tap drops every point, bar or the surface to
+    the floor and lets it rise back into place with a small overshoot (2.4 s).
+  - Sound: A soft thud as the marks land, a light knock, and a breath as they rise.
 
 ## Lab (2)
 
@@ -2979,7 +2985,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 
-## Science (3)
+## Science (4)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
@@ -3028,6 +3034,13 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+- **Climate records** (`climate-records`). Now: tap: Play the record. Plan: new effect (E6).
+  - Owner: Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.
+  - Effect: NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a
+    year; GISTEMP temperature anomalies as a field of monthly bars or a wall of yearly stripes. A
+    tap redraws the CO2 record from 1974 behind a bright bead (8 s), or lets the bars sink to zero
+    and grow back.
+  - Sound: A long, low breath under a soft thud.
 
 ## Imaging (6)
 
