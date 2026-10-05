@@ -351,3 +351,13 @@
 {"v":1,"t":"2026-10-05T11:34:33.863Z","harness":"claude-code","event":"session-end","session":"46d65b02-7487-5336-9acb-61b33bcfb369","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T12:34:24.900Z","harness":"claude-code","event":"session-start","session":"46d65b02-7487-5336-9acb-61b33bcfb369","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T12:34:25.013Z","harness":"claude-code","event":"turn-start","session":"46d65b02-7487-5336-9acb-61b33bcfb369","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:34:30.522Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:34:36.928Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:34:41.224Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:34:43.975Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:34:53.811Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:38:40.605Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:39:37.791Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:39:39.740Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"ToolSearch","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:39:44.594Z","harness":"claude-code","event":"tool","session":"46d65b02-7487-5336-9acb-61b33bcfb369","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:39:48.915Z","harness":"claude-code","event":"turn-end","session":"46d65b02-7487-5336-9acb-61b33bcfb369","cwd":"splashery"}
