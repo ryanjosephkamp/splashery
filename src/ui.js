@@ -5,6 +5,7 @@
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
+import { labsOn } from "./toys.js"; // lane PDF lab
 import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
@@ -171,6 +172,8 @@ export function createUI(app) {
     webmRow: $("webm-row"),
     webmSeconds: $("webm-seconds"),
     exportWebm: $("export-webm"),
+    pdfRow: $("pdf-row"), // lane PDF lab
+    exportPdf: $("export-pdf"), // lane PDF lab
     webmUnavailable: $("webm-unavailable"),
     recordRow: $("record-row"), // UI r5
     recordStart: $("record-start"),
@@ -2101,6 +2104,9 @@ export function createUI(app) {
     }),
   );
   els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  // Lane PDF lab: Save as PDF (labs).
+  els.pdfRow.hidden = !labsOn();
+  els.exportPdf.addEventListener("click", () => app.openPdfExport());
   // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
   els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
