@@ -432,3 +432,18 @@ test("Note Rider: a note caught in its lane plays and scores; one in another lan
   });
   expect(r).toEqual({ first: true, second: false, caught: 1, played: 1, score: true });
 });
+
+test("Cast a Shadow: the right turn matches the outline, even a hair off; a wrong one doesn't", async ({
+  page,
+}) => {
+  await open(page, "cast-a-shadow");
+  const r = await read(page, () => {
+    const g = window.__arc.game;
+    const q = window.__arc.api?.q || g.q;
+    const near = g.match(g.mask(q.qnorm([0.004, -0.003, 0.002, -1])));
+    const far = g.match(g.mask(q.qaxis([0, 1, 0], Math.PI / 2))); // the other picture
+    return { near, far };
+  });
+  expect(r.near).toBeGreaterThan(0.86);
+  expect(r.far).toBeLessThan(0.6);
+});
