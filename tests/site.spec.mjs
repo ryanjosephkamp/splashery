@@ -216,7 +216,7 @@ test.describe("site", () => {
 
     await ctx.setOffline(true);
     await page.reload();
-    await expect(page.locator("h1")).toHaveText("Splashery");
+    await expect(page.locator("h1")).toHaveText(PAGES[0].headline);
     await homeToyReady(page);
     const toy = await page
       .frameLocator(".hero-toy iframe")

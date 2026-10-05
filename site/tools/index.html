@@ -68,6 +68,23 @@
             </g></svg
           ><span>Splashery</span></a
         >
+        <a class="search-link" href="../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
         <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
           <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
         </button>
@@ -370,27 +387,52 @@
       </section>
     </main>
     <footer class="site-footer">
-      <nav aria-label="Footer">
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="../toys/">Toys</a></li>
-          <li><a href="../tools/">Tools</a></li>
-          <li><a href="../science/">Science</a></li>
-          <li><a href="../studio/">Studio</a></li>
-          <li><a href="../learn/">Learn</a></li>
-          <li><a href="../new/">What's new</a></li>
-          <li><a href="../about/">About</a></li>
-          <li><a href="../search/">Search</a></li>
-        </ul>
-      </nav>
-      <p>
-        Splashery is free and runs in your browser; files you open stay on your device.
-        <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a> (MIT) ·
-        <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a> ·
-        Built on the PlayCanvas engine.
-      </p>
-      <p class="preview-note">
-        A preview of Splashery's new site. The toys live in <a href="../../">the gallery</a>.
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="../toys/">Toys</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../science/">Science</a></li>
+            <li><a href="../studio/">Studio</a></li>
+            <li><a href="../learn/">Learn</a></li>
+            <li><a href="../new/">What's new</a></li>
+            <li><a href="../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../">The gallery</a></li>
+            <li><a href="../search/">Search</a></li>
+            <li><a href="../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../">the gallery</a>.
       </p>
     </footer>
   </body>

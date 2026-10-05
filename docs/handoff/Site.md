@@ -135,6 +135,14 @@ nowhere public, `noindex` while it is a preview):
   about 110 ms; with the live toy the page transfers 8.9 MB (the engine and the strawberry's lighter
   or full splat file).
 
+- **Design pass r2** (the owner's note on the walk-through, October 5, 2026: "make sure that this
+  site feels premium"): a headline hero with the live toy on a soft glow of the logo's three splat
+  colors, real counts (toys, shelves, zero uploads), a "From the shelves" row, three short reasons
+  with small drawings, door cards with toy thumbnails, a closing call to the gallery, a frosted
+  sticky header (a search button on phones), sticky shelf chips that scroll sideways on a phone, and
+  a fuller footer. Still no web fonts and no images beyond the toys' own thumbnails: the home page's
+  own files are 57 KB (about 11 KB gzipped on GitHub Pages).
+
 ## Notes
 
 ### How the site is built

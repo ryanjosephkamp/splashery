@@ -140,6 +140,7 @@ ${SITE.preview ? '<meta name="robots" content="noindex" />' : ""}
 <header class="site-header">
 <div class="bar">
 <a class="brand" href="${up}" aria-label="Splashery home">${LOGO}<span>Splashery</span></a>
+<a class="search-link" href="${up}search/" aria-label="Search"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
 <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span></button>
 <div class="menu" id="site-menu">
 <nav aria-label="Site"><ul>${nav}</ul></nav>
@@ -159,9 +160,12 @@ ${SITE.preview ? '<meta name="robots" content="noindex" />' : ""}
 ${main}
 </main>
 <footer class="site-footer">
-<nav aria-label="Footer"><ul>${MENU.map((m) => `<li><a href="${up}${m.href}">${esc(m.label)}</a></li>`).join("")}<li><a href="${up}search/">Search</a></li></ul></nav>
-<p>Splashery is free and runs in your browser; files you open stay on your device. <a href="${SITE.github}">Source on GitHub</a> (MIT) · <a href="${SITE.github}/blob/main/CREDITS.md">Credits</a> · Built on the PlayCanvas engine.</p>
-${SITE.preview ? `<p class="preview-note">A preview of Splashery's new site. The toys live in <a href="${up}../">the gallery</a>.</p>` : ""}
+<div class="footer-grid">
+<div class="footer-brand"><a class="brand" href="${up}">${LOGO}<span>Splashery</span></a><p>${esc(SITE.tagline)}. Free, in your browser, with nothing to install; files you open stay on your device.</p></div>
+<nav aria-label="Explore"><h2>Explore</h2><ul>${MENU.map((m) => `<li><a href="${up}${m.href}">${esc(m.label)}</a></li>`).join("")}</ul></nav>
+<nav aria-label="More"><h2>More</h2><ul><li><a href="${up}../">The gallery</a></li><li><a href="${up}search/">Search</a></li><li><a href="${up}../manual/">The Tinkerer's Manual</a></li><li><a href="${SITE.github}">Source on GitHub</a></li><li><a href="${SITE.github}/blob/main/CREDITS.md">Credits</a></li></ul></nav>
+</div>
+<p class="fine">Code under the MIT license; each toy's assets keep their own licenses. Built on the PlayCanvas engine.${SITE.preview ? ` This is a preview of Splashery's new site; the toys live in <a href="${up}../">the gallery</a>.` : ""}</p>
 </footer>
 </body>
 </html>
@@ -212,46 +216,88 @@ function shelfIndex(ids) {
     .join("")}</ul></nav>`;
 }
 
-const intro = (page, extra = "") =>
-  `<div class="page-intro"><h1>${esc(page.title)}</h1>${page.lead ? `<p class="lead">${page.lead}</p>` : ""}${extra}</div>`; // prettier-ignore
+const intro = (page, extra = "", eyebrow = "") =>
+  `<div class="page-intro">${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ""}<h1>${esc(page.title)}</h1>${page.lead ? `<p class="lead">${page.lead}</p>` : ""}${extra}</div>`; // prettier-ignore
+const countToys = (ids) =>
+  publicToys.filter((t) => !t.labs && (ids === "all" || ids.includes(t.category))).length;
+
+// Small line drawings for the home page's reasons (currentColor, so they follow the theme).
+const ICONS = {
+  capture: `<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 16v-4a4 4 0 0 1 4-4h4M32 8h4a4 4 0 0 1 4 4v4M40 32v4a4 4 0 0 1-4 4h-4M16 40h-4a4 4 0 0 1-4-4v-4"/></g><g opacity=".9"><ellipse cx="20" cy="22" rx="7" ry="5.5" fill="#ff5fa2"/><ellipse cx="28" cy="21" rx="6" ry="6.5" fill="#7bdff2"/><ellipse cx="24" cy="29" rx="7.5" ry="5.5" fill="#ffd166"/></g></svg>`, // prettier-ignore
+  move: `<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g opacity=".9"><ellipse cx="17" cy="25" rx="7" ry="5.5" fill="#ff5fa2"/><ellipse cx="31" cy="17" rx="5" ry="5.5" fill="#7bdff2"/><ellipse cx="33" cy="33" rx="6" ry="4.5" fill="#ffd166"/></g><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M24 21l3-2M25 29l3 1.5"/><path d="M38 10l3-3M41 38l3 2"/></g></svg>`, // prettier-ignore
+  recipe: `<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14 7 24l9 10M32 14l9 10-9 10"/></g><g opacity=".9"><ellipse cx="22" cy="24" rx="3.5" ry="3" fill="#ff5fa2"/><ellipse cx="27" cy="21" rx="3" ry="3.2" fill="#7bdff2"/><ellipse cx="26" cy="27.5" rx="3.5" ry="2.8" fill="#ffd166"/></g></svg>`, // prettier-ignore
+};
+const arrow = `<svg class="arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4 12.5 8l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`; // prettier-ignore
 
 const PAGE_TYPES = {
   home(page, { up }) {
     const toy = TOYS.find((t) => t.id === HOME_TOY.id);
     const play = `${up}play/?toy=${toy.id}&autoplay=${HOME_TOY.autoplay}`;
+    const shelves = new Set(publicToys.filter((t) => !t.labs).map((t) => t.category)).size;
+    const art = (ids) =>
+      ids
+        .map((id) => TOYS.find((t) => t.id === id))
+        .filter((t) => t && thumbHref(t))
+        .map(
+          (t) =>
+            `<img src="${up}${thumbHref(t)}" alt="" width="72" height="72" loading="lazy" decoding="async" />`,
+        ) // prettier-ignore
+        .join("");
     const doors = page.doors
       .map((d) => {
         const m = MENU.find((x) => x.id === d.nav);
         const href = d.href ?? m.href;
         const label = d.label ?? m.label;
         const id = d.id ?? d.nav;
-        return `<li class="door door-${id}"${d.labs ? " data-labs" : ""}><a href="${up}${href}"><span class="door-title">${esc(label)}${d.labs ? ' <span class="badge">labs</span>' : ""}</span><span class="door-text">${esc(d.text)}</span></a></li>`; // prettier-ignore
+        const pics = art(d.art || []);
+        return `<li class="door door-${id}"${d.labs ? " data-labs" : ""}><a href="${up}${href}">${pics ? `<span class="door-art">${pics}</span>` : `<span class="door-art door-art-mark">${LOGO}</span>`}<span class="door-title">${esc(label)}${d.labs ? ' <span class="badge">labs</span>' : ""}${arrow}</span><span class="door-text">${esc(d.text)}</span></a></li>`; // prettier-ignore
       })
+      .join("");
+    const featured = page.featured
+      .map((id) => TOYS.find((t) => t.id === id))
+      .filter((t) => t && !t.labs)
+      .map(
+        (t) =>
+          `<li><a href="${up}${galleryHref(t)}"><img src="${up}${thumbHref(t)}" alt="" width="120" height="120" loading="lazy" decoding="async" /><span class="feat-name">${esc(t.label)}</span><span class="feat-shelf">${esc(shelfName(t.category))}</span></a></li>`,
+      ) // prettier-ignore
       .join("");
     return `<section class="hero" aria-labelledby="h-home">
 <div class="hero-text">
-<h1 id="h-home">Splashery</h1>
-<p class="tagline">${esc(SITE.tagline)}</p>
+<p class="eyebrow">Free · runs in your browser</p>
+<h1 id="h-home">${esc(page.headline)}</h1>
 <p class="lead">${page.lead}</p>
-<p class="actions"><a class="button primary" href="${up}../">Open the gallery</a><a class="button" href="${up}${galleryHref(toy)}">Play with the ${esc(toy.label.toLowerCase())}</a></p>
+<p class="actions"><a class="button primary" href="${up}../">Open the gallery${arrow}</a><a class="button" href="${up}${galleryHref(toy)}">Play with the ${esc(toy.label.toLowerCase())}</a></p>
+<p class="stats"><span><b>${countToys("all")}</b> toys</span><span><b>${shelves}</b> shelves</span><span><b>0</b> uploads</span></p>
 </div>
 <figure class="hero-toy">
+<div class="stage">
 <iframe src="${play}" title="A live ${esc(toy.label.toLowerCase())} made of splats: drag to turn it" loading="eager" allow="fullscreen"></iframe>
+</div>
 <figcaption>A real ${esc(toy.label.toLowerCase())}, captured from photos and drawn with soft splats. Drag to turn it.</figcaption>
 </figure>
 </section>
-<section class="why" aria-labelledby="h-why">
-<h2 id="h-why">Why splats</h2>
-${page.why.map((p) => `<p>${p}</p>`).join("\n")}
+<section class="band featured" aria-labelledby="h-featured">
+<div class="band-head"><h2 id="h-featured">From the shelves</h2><a href="${up}toys/">Every toy${arrow}</a></div>
+<ul class="feat-row">${featured}</ul>
 </section>
-<section aria-labelledby="h-doors">
+<section class="band" aria-labelledby="h-why">
+<h2 id="h-why">Why splats</h2>
+<ul class="features">${page.features.map((f) => `<li>${ICONS[f.icon]}<h3>${esc(f.title)}</h3><p>${esc(f.text)}</p></li>`).join("")}</ul>
+</section>
+<section class="band" aria-labelledby="h-doors">
 <h2 id="h-doors">Where to go</h2>
 <ul class="doors">${doors}</ul>
+</section>
+<section class="cta" aria-labelledby="h-cta">
+<h2 id="h-cta">Pick a toy and poke it.</h2>
+<p>Every toy can be shared as a link, put on your own page, or saved as a GIF or a video.</p>
+<p class="actions"><a class="button primary" href="${up}../">Open the gallery${arrow}</a></p>
 </section>`;
   },
 
   shelves(page, { up }) {
-    return `${intro(page, `<p><a class="button primary" href="${up}../">Open the gallery</a></p>`)}
+    const n = countToys(page.shelves);
+    return `${intro(page, `<p><a class="button primary" href="${up}../">Open the gallery${arrow}</a></p>`, `${n} toys`)}
 ${shelfIndex(page.shelves)}
 ${shelfSections(page.shelves, up)}`;
   },

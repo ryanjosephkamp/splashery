@@ -45,18 +45,23 @@ export const PAGES = [
     title: "Splashery · splats you can play with",
     description:
       "Toys made of 3D Gaussian splats that run in your browser: poke them, blow on them, paint them, drop them, then share them as a link or an embed.",
+    headline: "Splats you can play with.",
     lead: "Toys made of soft 3D splats that run right in your browser. Poke one, blow on it, paint it, break it apart, then share it.",
-    why: [
-      "A splat is a tiny, soft, colored blob. Hundreds of thousands of them together make a photoreal scan of a real strawberry or a ball you can squash. Because every splat can move on its own, a toy can peel, ripple, shatter and come back together, not just spin.",
-      "Each toy is a short recipe: a few lines that say which parts move and how. The same recipes run the atoms, the planets and the games, and you can write your own.",
+    // Three short reasons, each with a small drawing (an id in ICONS in site-build.mjs).
+    features: [
+      { icon: "capture", title: "Real things, captured", text: "Hundreds of thousands of tiny, soft, colored splats make a photoreal scan of a real strawberry, a bee or a cactus." }, // prettier-ignore
+      { icon: "move", title: "Every splat can move", text: "So a toy can peel, ripple, shatter and come back together, not just spin." }, // prettier-ignore
+      { icon: "recipe", title: "A recipe for each toy", text: "A few lines say which parts move and how. The same recipes run the atoms, the planets and the games, and you can write your own." }, // prettier-ignore
     ],
+    // A row of toys to start with, in this order (public toys only).
+    featured: ["grape", "solar-system", "dna", "toy-piano", "chess-set", "newtons-cradle", "black-hole", "puzzle-cube", "atom", "rubber-duck", "earth", "graph-plotter"], // prettier-ignore
     doors: [
-      { nav: "toys", href: "../", label: "Toys", text: "The gallery: every toy on its shelf, ready to play." }, // prettier-ignore
-      { nav: "tools", text: "Poke, paint, magnet and clay, and ways to share what you make." },
-      { nav: "science", text: "Atoms, planets, the body, math and computing, as toys." },
-      { nav: "studio", text: "Turn your own photos, pages and sounds into splats." },
-      { id: "worlds", href: "../worlds/?labs=1", label: "Worlds", text: "Walk around small worlds made of splats.", labs: true }, // prettier-ignore
-      { nav: "learn", text: "How splats work, and how to program your own toys." },
+      { nav: "toys", href: "../", label: "Toys", text: "The gallery: every toy on its shelf, ready to play.", art: ["rubber-duck", "grape", "chess-set"] }, // prettier-ignore
+      { nav: "tools", text: "Poke, paint, magnet and clay, and ways to share what you make.", art: ["blob", "knot", "torus"] }, // prettier-ignore
+      { nav: "science", text: "Atoms, planets, the body, math and computing, as toys.", art: ["atom", "saturn", "dna"] }, // prettier-ignore
+      { nav: "studio", text: "Turn your own photos, pages and sounds into splats.", art: ["photo-3d", "song-landscape", "picture-frame"] }, // prettier-ignore
+      { id: "worlds", href: "../worlds/?labs=1", label: "Worlds", text: "Walk around small worlds made of splats.", labs: true, art: [] }, // prettier-ignore
+      { nav: "learn", text: "How splats work, and how to program your own toys.", art: ["fourier-circles", "unit-circle", "graph-plotter"] }, // prettier-ignore
     ],
   },
   {
