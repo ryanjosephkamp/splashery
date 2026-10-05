@@ -912,6 +912,42 @@
       "license": "CC0 1.0",
       "checked": "September 29, 2026",
       "note": "A painting in the public domain, CC0 from the Met's Open Access program on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "spiral-stairs",
+      "file": "assets/toys/photo-3d/spiral-stairs.jpg",
+      "depth": "assets/toys/photo-3d/spiral-stairs.depth",
+      "toy": "photo-3d",
+      "name": "Spiral Staircase, Keck Center (U.S. National Academies)",
+      "author": "Jorge Mendoza",
+      "page": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "palace-stairs",
+      "file": "assets/toys/photo-3d/palace-stairs.jpg",
+      "depth": "assets/toys/photo-3d/palace-stairs.depth",
+      "toy": "photo-3d",
+      "name": "Escalier monumental, Neue Burg, Vienna",
+      "author": "Jebulon",
+      "page": "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "wildflowers",
+      "file": "assets/toys/photo-3d/wildflowers.jpg",
+      "depth": "assets/toys/photo-3d/wildflowers.depth",
+      "toy": "photo-3d",
+      "name": "Wildflowers in foreground",
+      "author": "PookieFugglestein",
+      "page": "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
     }
   ],
   "soundSamples": [

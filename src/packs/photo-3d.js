@@ -61,6 +61,34 @@ export const SAMPLES = [
     license: "CC0 1.0",
     licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
   },
+  {
+    id: "spiral-stairs",
+    label: "Spiral staircase",
+    title: "Spiral Staircase, Keck Center (U.S. National Academies)",
+    author: "Jorge Mendoza",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  {
+    id: "palace-stairs",
+    label: "Palace staircase",
+    title: "Escalier monumental, Neue Burg, Vienna",
+    author: "Jebulon",
+    source: "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  {
+    id: "wildflowers",
+    label: "Wildflowers up close",
+    title: "Wildflowers in foreground",
+    author: "PookieFugglestein",
+    source: "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
 ];
 
 const P3D = {

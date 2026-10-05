@@ -128,4 +128,22 @@ imports the Photo to 3D depth modules unchanged.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+WORKING (October 5, 2026). Model: Sonnet 5.5.
+
+- Item 1, Photo to 3D: done in code. Three CC0 photos added (spiral staircase, palace staircase,
+  wildflowers up close) with depth from `tools/p3d-depth.mjs`; credits in CREDITS.md and
+  `tools/assets.json`. Still to do: tests, clips.
+- Items 2 to 5: not started.
+
+## Notes
+
+- Wikimedia's API rate-limits fast loops; fetch one file at a time with a pause and a User-Agent.
+- A photo with a visible shop sign (a brand name) was left out on purpose.
+
+## Known issues
+
+None yet.
+
+## For the Operator
+
+Nothing yet.

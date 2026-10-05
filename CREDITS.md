@@ -345,9 +345,10 @@ GLB in `assets/toys/model-splats/` that the toy converts to splats in the browse
 from numbers by `tools/stm-fixtures.mjs` and released under CC0 1.0. Models people open are
 converted in their browser and never uploaded.
 
-The Photo to 3D toy (a labs toy, lane Photo to 3D) ships three CC0 sample photos in
+The Photo to 3D toy (a labs toy, lane Photo to 3D) ships six CC0 sample photos in
 `assets/toys/photo-3d/`, each with a depth map made by `tools/p3d-depth.mjs`. Each license was
-checked on its live Wikimedia Commons page on September 29, 2026:
+checked on its live Wikimedia Commons page on September 29, 2026 (the last three on October 5,
+2026):
 
 - "Forest Away Path" by Seaq68 (from Pixabay, 2017),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
@@ -358,6 +359,15 @@ checked on its live Wikimedia Commons page on September 29, 2026:
 - "Still Life with Cheese" by Antoine Vollon, from the Metropolitan Museum of Art's Open Access
   program, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg).
+- "Spiral Staircase, Keck Center (U.S. National Academies)" by Jorge Mendoza,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](<https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg>).
+- "Escalier monumental, Neue Burg, Vienna" by Jebulon,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg).
+- "Wildflowers in foreground" by PookieFugglestein,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG).
 
 The depth is worked out on the device by
 [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small) (Lihe Yang
