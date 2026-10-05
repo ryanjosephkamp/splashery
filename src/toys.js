@@ -3636,6 +3636,37 @@ export const TOYS = [
     tags: "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
     camera: { yaw: 0.3, pitch: 1.0, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: science (lane Science r3) ----
+  {
+    id: "cryoem-map",
+    label: "Cryo-EM map",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "cryo-em electron microscopy density map emdb isosurface contour ribosome apoferritin ferritin virus capsid aav protein structure science",
+    camera: { yaw: 0.4, pitch: 0.35, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "contour-lab",
+    label: "Contour lab",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "contour lines map topographic elevation height layers terrain mountain usgs geography lab science",
+    camera: { yaw: 0.5, pitch: 0.55, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "terrain-box",
+    label: "Terrain in a box",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science",
+    camera: { yaw: 0.5, pitch: 0.5, roll: 0, distance: 3.0 },
+  },
   // ---- Pack: fluid-lab (lane Fluids) ----
   {
     id: "fluid-lab",

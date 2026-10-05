@@ -2267,7 +2267,7 @@
       "owner": "The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer \"Science yes\" (lane Science; labs only).",
       "effect": "Each atom of a crystal structure is the Gaussian of its measured displacement tensor U, drawn as a solid ellipsoid at a probability level (50% by default) with its three principal planes, or as one Gaussian splat. The tap makes every atom jiggle through places drawn from its own Gaussian while the bonds fade to a ghost of the mean structure; a second tap stills them. Zoom in with the slider and tap an atom to look there.",
       "sound": "Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer breath as they settle.",
-      "improved": "Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes), mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples: aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0). Science r2 (the owner's review of October 2, 2026: \"really, really big\" and slow on his phone): a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's count (36k on the low tier)."
+      "improved": "Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes), mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples: aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0). Science r2 (the owner's review of October 2, 2026: \"really, really big\" and slow on his phone): a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's count (36k on the low tier). Science r3 (the owner's push notes of October 4, 2026: \"we could maybe add quite a number\", and his \"could you add even more molecules?\" of October 5): 38 structures in seven groups (everyday molecules, medicines, molecules of life, minerals and gems, ice and salts, proteins at atomic resolution, DNA and RNA), all from COD or the PDB (CC0) with real anisotropic U; a Show option fills the unit cell from the space group's symmetry operations (each copy's U turned with it), minerals and salts by default, and completes a molecule split by symmetry."
     },
     "smlm-microscope": {
       "v": "keep",
@@ -2281,7 +2281,7 @@
       "owner": "The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer \"Science yes\" (lane Science; labs only).",
       "effect": "The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature and brighter where denser, in a box with a dark floor. Pinch or scroll zooms the camera far into the gas (about 60 times closer) and back out. The tap peels the hot gas away (a second tap brings it back).",
       "sound": "Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it comes back.",
-      "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral)."
+      "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral). Science r3: two more galaxies (m12i 10.4 billion years ago, z = 2; the dwarf m11h), and a telescope view (simulated): the star particles as if 50 Mpc away (100 Mpc before r3), blurred by the seeing (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading with age, an approximation), cold dense gas as dust, and a tap that starts an exposure whose photon grain smooths out (tools/sci3-galaxy.mjs). r2 (the owner's \"sharper\", October 5): more stars, and the clip at twice the size (0.1″ seeing was tried as the default: with 250,000 particles standing in for millions of stars, the light shrank to a dim core, so 1″ stays). r3 (\"make sharper\" on the filters): the galaxy moved to 50 Mpc (1″ is 0.24 kpc), so the seeing blurs half as much; thinned dust no longer widens into soft blobs; fainter stars a little brighter."
     },
     "fluid-lab": {
       "v": "keep",
@@ -2592,6 +2592,27 @@
       "owner": "Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.",
       "effect": "The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6 (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star or planet with a ring around it and a few facts beside the stage.",
       "sound": "One soft, low tine and a faint breath as the ring marks it."
+    },
+    "cryoem-map": {
+      "v": "new",
+      "owner": "The owner's push notes of October 4, 2026 (S17, \"100%\"; the brief's \"a new cryo-EM toy\"; lane Science r3; labs only).",
+      "effect": "A cryo-EM density map from EMDB (apoferritin at 2.6 Å, an E. coli ribosome with an antibiotic at 3.2 Å, an AAV2 capsid at 3.0 Å) as its isosurface at EMDB's recommended level: a small flat splat at each place the density crosses the level (marching cubes' vertices), facing out of the density, colored by the fitted model's nearest chain or by distance from the center. The fitted model's backbone can show inside a see-through map. The tap sweeps a clipping plane in to cut the front half away and show the inside; a second tap closes it.",
+      "sound": "A soft, low whoosh as the cut sweeps in, and a softer one as it closes.",
+      "improved": "Science r3: tools/sci3-cryoem.mjs reads each map (MRC) and EMDB's recommended contour, crops to the density, blurs against aliasing and resamples to at most 128 to 160 voxels a side and stores 8-bit volumes; maps at 2.6 to 3.2 Å, so the new voxels are about half the resolution and EMDB's level keeps its meaning (an atomic-resolution map, 1.2 Å, was tried: blurred to a phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the assembly's operators. r2 (the owner's \"sharper\", October 5, 2026): more, smaller and flatter splats (density 1.5, 0.8 of a voxel) and ambient occlusion from the density round each point, which darkens grooves and pockets. r3 (\"keep making it sharper\" on the capsid): one splat per voxel the surface crosses (its crossings averaged), so the edges no longer pile up into a soft rim, and density 2."
+    },
+    "contour-lab": {
+      "v": "new",
+      "owner": "The owner's picks on the Push Plan, October 5, 2026: \"In a box\" yes, terrain first, each after a small lab that teaches what it needs (lane Science r3; labs only).",
+      "effect": "Real land (USGS 3DEP heights of Mount St. Helens, the Grand Canyon or Yosemite Valley) cut into contour layers, each a solid piece with its edge a contour line. The tap lifts the layers apart (a second tap stacks them).",
+      "sound": "A soft wooden slide as the layers lift; a lower one as they settle.",
+      "improved": "Science r3: tools/sci3-terrain.mjs (geotiff.js range reads of the public-domain 1/3″ tiles), src/science/terrain.js; the layers are kit parts."
+    },
+    "terrain-box": {
+      "v": "new",
+      "owner": "The owner's picks on the Push Plan, October 5, 2026: \"In a box\" yes, terrain first (lane Science r3; labs only).",
+      "effect": "Real land in a box (USGS 3DEP heights, a square about 10 km across, 256 × 256 samples), tinted by height and shaded by the sun, with cliffs filled and the box's walls showing the cross-section. The tap raises a sheet of water to 45% of the relief, flooding the valleys first (a level, not a flood model); a second tap drains it.",
+      "sound": "A gentle rush as the water rises; a lower one as it drains.",
+      "improved": "Science r3: the water is a kit part rising; contour lines, a height stretch (1×, 2×, 4×), three places."
     }
   }
 }
