@@ -122,6 +122,14 @@ choices in a toy's select options", needed by the structure picker; merge it fir
   cryo-EM, microscope, galaxy, terrain), each built by Opus 5.5, waiting for the owner's marks.
   Screenshots `tests/screenshots/sci3-*-390x844.png` and `…-1440x900.png`.
 
+- October 5, 2026, 04:10 UTC, the owner's first marks: `sci3-molecules` good. `sci3-cryoem-*` (all
+  three): "outstanding ... cool as hell", "make it sharper, and keep iterating"; `sci3-minerals`:
+  "keep enhancing this and making it sharper"; `sci3-dna`: "virtually perfect ... could you add even
+  more molecules?". Done in r2 (commit 81523da7): the cryo-EM map draws more, smaller, flatter
+  splats with ambient occlusion (Tenengrad 172 → 216, 179 → 232), and 13 more structures (38 in
+  seven groups, with Molecules of life and DNA and RNA). The r2 clips render at 2× (780 × 1688), as
+  r2 of lane Science found sharper on the phone; they replace the six cards.
+
 ## Proposals: more "in a box" (item 4)
 
 The owner marked "In a box" yes on October 5, 2026 (wildfire, tornado and terrain, each after a
