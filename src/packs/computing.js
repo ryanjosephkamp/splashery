@@ -1500,7 +1500,7 @@ const SORT_BUILD = {
         color: (c) => keep(lit(c.s.cap ? shade(SORT.colors[v], 1.15) : SORT.colors[v], c.n, { amb: 0.7, dif: 0.4, spec: 0.3 })), // prettier-ignore
       });
     });
-    sortPanel(k, algo, -1.3, 1.0);
+    sortPanel(k, algo, -1.3, 0.86);
   },
   dots(k, algo) {
     // A dark board standing up, with a faint axis along its foot and side:
