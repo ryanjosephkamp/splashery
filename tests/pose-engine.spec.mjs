@@ -57,6 +57,9 @@ test("space and other shelves without a real down keep what rises or falls in th
   const pose = { pivot: [0, 0, 0], q: [0, 0, Math.SQRT1_2, Math.SQRT1_2], t: [0, 0, 0] };
   expect(poseUniforms({}, pose, null, false).uSpPoseUp).toEqual([0, 1, 0, 0]);
   expect(poseUniforms({}, pose, null, true).uSpPoseUp[0]).toBeCloseTo(1, 9);
+  // The floor below the center along the world's down: the toy's half
+  // extent along it (on its side, its half width).
+  expect(poseUniforms({}, pose, null, true, [0.4, 0.9, 0.3]).uSpPoseUp[3]).toBeCloseTo(0.4, 9);
   expect(poseGravity({ recipe: {} }, { category: "space" })).toBe(false);
   expect(poseGravity({ recipe: {} }, { category: "weather" })).toBe(true);
   expect(poseGravity({ recipe: { gravity: true } }, { category: "space" })).toBe(true);
@@ -70,6 +73,8 @@ test("every shader variant takes centers into the home frame and back, and turns
       expect(code).toContain("uSpPoseUp");
     }
   }
+  // Breaking rig pieces fall toward the world's real down and land on its floor.
+  expect(MODIFIER_RIG.glsl).toContain("g3 = uSpPoseUp.xyz * f3.y + vec3(f3.x, 0.0, f3.z);");
   // Rising and falling kit splats follow the world's real up.
   expect(MODIFIER_KIT.glsl).toContain("p -= gup * c * an.z * R;");
   expect(MODIFIER_KIT.wgsl).toContain("p = p - gup * c * an.z * R;");

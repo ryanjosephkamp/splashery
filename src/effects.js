@@ -155,7 +155,7 @@ uniform vec4 uSpBodyP;   // xyz the squish's pivot, where it touched
 uniform vec4 uSpPoseQ;   // Any pose: the toy's turn in Hands-on (quaternion; src/effects-pose.js)
 uniform vec4 uSpPoseT;   // xyz where its pivot is now, w on (0: upright at home)
 uniform vec4 uSpPoseC;   // xyz its pivot at home
-uniform vec4 uSpPoseUp;  // xyz the world's up in the toy's home frame
+uniform vec4 uSpPoseUp;  // xyz the world's up in the toy's home frame, w the floor's distance below its center along it
 uniform vec4 uSpPat;     // x on, y projection (0 wrap, 1 front, 2 globe), z repeats, w amount
 uniform vec4 uSpPatB;    // x keep detail, y half height, z mean luminance, w half width
 uniform sampler2D uSpPattern;
@@ -1464,11 +1464,20 @@ vec3 spRigFx(vec3 p, vec3 rest, vec4 pk, int part, int o) {
     if (hc <= f9.x) {
       float u = clamp(env, 0.0, 1.0);
       vec3 outd = normalize(pc - org + vec3(1e-4));
-      vec3 disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
+      vec3 g3 = f3.xyz;
+      // Lane Any pose: pieces fall toward the world's real down in a toy turned over.
+      if (uSpPoseT.w > 0.5) g3 = uSpPoseUp.xyz * f3.y + vec3(f3.x, 0.0, f3.z);
+      vec3 disp = (outd * f3.w * u * (1.0 - 0.5 * u) + g3 * u * u) * f1.x * sel;
       // Pieces land on the floor instead of falling through it.
-      float floorY = uSpToy.y - uSpBodyF.x + 0.015 * uSpToy.w;
-      float yc = pc.y + disp.y;
-      if (yc < floorY) disp.y += floorY - yc;
+      if (uSpPoseT.w > 0.5) {
+        float fl = 0.015 * uSpToy.w - uSpPoseUp.w;
+        float hgt = dot(pc + disp - uSpToy.xyz, uSpPoseUp.xyz);
+        if (hgt < fl) disp += uSpPoseUp.xyz * (fl - hgt);
+      } else {
+        float floorY = uSpToy.y - uSpBodyF.x + 0.015 * uSpToy.w;
+        float yc = pc.y + disp.y;
+        if (yc < floorY) disp.y += floorY - yc;
+      }
       float ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
       vec3 ax = normalize(spCellHash3(cid + 3.1) + vec3(1e-3));
       p = pc + disp + spRotate(p - pc, ax, ang);
@@ -1690,10 +1699,19 @@ fn spRigFx(p0: vec3f, rest: vec3f, pk: vec4f, part: i32, o: i32) -> vec3f {
     if (hc <= f9.x) {
       let u = clamp(env, 0.0, 1.0);
       let outd = normalize(pc - org + vec3f(1e-4));
-      var disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
-      let floorY = uniform.uSpToy.y - uniform.uSpBodyF.x + 0.015 * uniform.uSpToy.w;
-      let yc = pc.y + disp.y;
-      if (yc < floorY) { disp.y = disp.y + floorY - yc; }
+      var g3 = f3.xyz;
+      // Lane Any pose: pieces fall toward the world's real down in a toy turned over.
+      if (uniform.uSpPoseT.w > 0.5) { g3 = uniform.uSpPoseUp.xyz * f3.y + vec3f(f3.x, 0.0, f3.z); }
+      var disp = (outd * f3.w * u * (1.0 - 0.5 * u) + g3 * u * u) * f1.x * sel;
+      if (uniform.uSpPoseT.w > 0.5) {
+        let fl = 0.015 * uniform.uSpToy.w - uniform.uSpPoseUp.w;
+        let hgt = dot(pc + disp - uniform.uSpToy.xyz, uniform.uSpPoseUp.xyz);
+        if (hgt < fl) { disp = disp + uniform.uSpPoseUp.xyz * (fl - hgt); }
+      } else {
+        let floorY = uniform.uSpToy.y - uniform.uSpBodyF.x + 0.015 * uniform.uSpToy.w;
+        let yc = pc.y + disp.y;
+        if (yc < floorY) { disp.y = disp.y + floorY - yc; }
+      }
       let ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
       let ax = normalize(spCellHash3(cid + vec3f(3.1)) + vec3f(1e-3));
       p = pc + disp + spRotate(p - pc, ax, ang);

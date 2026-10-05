@@ -63,7 +63,9 @@ export function poseGravity(info, def) {
 // directions it holds into the toy's home frame. `squish` is Hands-on's
 // squish ({ axis, point, ... } in the world) with its `amount`, or null.
 // gravity false: what rises or falls keeps to the toy's frame (poseGravity).
-export function poseUniforms(u, pose, squish = null, gravity = true) {
+// half: the toy's half extents (home frame), for the floor's distance below
+// its center along the world's down (where breaking pieces land).
+export function poseUniforms(u, pose, squish = null, gravity = true, half = null) {
   const f = poseFrame(pose);
   if (!f) {
     Object.assign(u, NO_POSE);
@@ -73,7 +75,8 @@ export function poseUniforms(u, pose, squish = null, gravity = true) {
   u.uSpPoseQ = f.Q.slice();
   u.uSpPoseT = [f.ct[0], f.ct[1], f.ct[2], 1];
   u.uSpPoseC = [f.c[0], f.c[1], f.c[2], 0];
-  u.uSpPoseUp = [up[0], up[1], up[2], 0];
+  const floor = half ? Math.abs(up[0]) * half[0] + Math.abs(up[1]) * half[1] + Math.abs(up[2]) * half[2] : 0; // prettier-ignore
+  u.uSpPoseUp = [up[0], up[1], up[2], floor];
   const point = (k) => {
     const a = u[k];
     if (!a) return;
