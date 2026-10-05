@@ -533,6 +533,28 @@ feature (`assets/toys/real-worlds/`). Feature positions are from the
   [Black Marble 2016](https://earthobservatory.nasa.gov/features/NightLights) (NASA Earth
   Observatory, Joshua Stevens and Miguel Román). Public domain.
 
+- Stars near the Sun: the
+  [Gaia Catalogue of Nearby Stars](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/649/A6)
+  (Gaia Collaboration, Smart et al. 2021, A&A 649, A6; ESA/Gaia/DPAC),
+  [CC BY-SA 3.0 IGO](https://creativecommons.org/licenses/by-sa/3.0/igo/), read through CDS VizieR,
+  and, for the brightest stars Gaia cannot measure and for star names, the
+  [HYG database v4.4](https://codeberg.org/astronexus/hyg) (David Nash, astronexus),
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The toy's star file
+  (`assets/toys/nearby-stars/stars.json`) is made from both and shares them alike under CC BY-SA
+  4.0. Temperatures from colors by E. Mamajek's
+  [table of mean dwarf colors](https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)
+  (Pecaut & Mamajek 2013).
+- Real galaxies, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), cropped round each
+  galaxy: the Whirlpool Galaxy, M51 ([heic0506a](https://esahubble.org/images/heic0506a/); NASA,
+  ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)); the Pinwheel Galaxy, M101
+  ([heic0602a](https://esahubble.org/images/heic0602a/); European Space Agency & NASA); the Phantom
+  Galaxy, M74 ([heic0719a](https://esahubble.org/images/heic0719a/); NASA, ESA, and The Hubble
+  Heritage (STScI/AURA)-ESA/Hubble Collaboration); and the Southern Pinwheel Galaxy, M83
+  ([eso0825a](https://www.eso.org/public/images/eso0825a/); ESO).
+- Saturn V: NASA's [Saturn V 3D model](https://science.nasa.gov/3d-resources/saturn-v/) (NASA 3D
+  Resources, "free to download and use" under NASA's
+  [media guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one

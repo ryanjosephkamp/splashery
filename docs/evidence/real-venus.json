@@ -1,0 +1,109 @@
+{
+  "toy": "real-venus",
+  "checked": "2026-10-05",
+  "summary": "Venus drawn from real maps: every splat sits at its place's measured height and has its place's measured color, and each named feature is where the planetary gazetteer puts it. The relief, the turning speed and the lighting are simplified, and each simplification is labeled in the toy.",
+  "claims": [
+    {
+      "claim": "The radar and elevation maps are Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m and Venus Magellan Global Topography 4641m.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m and Venus Magellan Global Topography 4641m",
+          "publisher": "NASA, JPL, Magellan mission; PDS Geosciences Node; topography by Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "Venus turns once every 5832.6 hours, backward (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Venus Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
+          "says": "Sidereal rotation period (hrs) -5832.6 (backward); volumetric mean radius 6051.8 km."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Maxwell Montes at 65.2°, 3.3° east, and the map shows it there. Its summit on the map is over 10,000 m above the reference, within 300 km of the listed center.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/3766",
+          "says": "Maxwell Montes: 797 km, center latitude 65.20, center longitude 3.30 (+East)."
+        },
+        {
+          "title": "Maxwell Montes",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Maxwell_Montes",
+          "says": "Maxwell Montes is 11 km high"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Maat Mons at 0.5°, -165.4° east, and the map shows it there. Its summit on the map is over 7,500 m above the reference, within 120 km of the listed center.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/3550",
+          "says": "Maat Mons: 395 km, center latitude 0.50, center longitude 194.60 (+East), which is -165.40."
+        },
+        {
+          "title": "Maat Mons",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Maat_Mons",
+          "says": "It rises 8 kilometres (5.0 mi) above Venus's mean planetary radius at 0.5°N 194.6°E"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Artemis Corona at -35°, 135° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/401",
+          "says": "Artemis Corona: 2600 km, center latitude -35.00, center longitude 135.00 (+East)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:172",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The relief is exaggerated (ten or twenty times by default, chosen and labeled in the Toy tab); close up during a fly it eases to at most twice its height. True height is one choice away.",
+    "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
+    "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
+    "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",
+    "The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the patches round the named features are sharper.",
+    "The colors are radar brightness tinted orange, not what an eye would see; the clouds that hide the surface are left out.",
+    "About 8% of the elevation map had no data and was filled smoothly from its surroundings."
+  ],
+  "fixes": []
+}

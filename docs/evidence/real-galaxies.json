@@ -1,0 +1,51 @@
+{
+  "toy": "real-galaxies",
+  "checked": "2026-10-05",
+  "summary": "Four real galaxies drawn from telescope pictures: every color is where the telescope saw it. Their thickness cannot be seen in a picture and is a guess, which the toy says and shows.",
+  "claims": [
+    {
+      "claim": "The colors come from ESA/Hubble's pictures of M51, M101 and M74 and ESO's picture of M83.",
+      "how": "tools/sp2-galaxies.mjs crops each picture round its galaxy; each splat takes the color of the pixel it is drawn from.",
+      "where": "src/space/galaxies.js",
+      "sources": [
+        {
+          "title": "Usage of ESA/Hubble Images and Videos",
+          "publisher": "ESA/Hubble",
+          "url": "https://esahubble.org/copyright/",
+          "says": "Creative Commons Attribution 4.0 International license ... provided they are clearly and visibly credited."
+        },
+        {
+          "title": "The Whirlpool Galaxy (M51) and companion",
+          "publisher": "ESA/Hubble",
+          "url": "https://esahubble.org/images/heic0506a/",
+          "says": "Credit: NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:273",
+      "note": ""
+    },
+    {
+      "claim": "The thickness is a guess: a thin disk with an exponential height profile (scale height 3.5% of the radius pictured) and a round bulge.",
+      "how": "Each splat's height is drawn from a Laplace (two-sided exponential) distribution in the disk and from a ball in the bulge.",
+      "where": "src/packs/space-r2.js:703",
+      "sources": [
+        {
+          "title": "Galaxy Disks",
+          "publisher": "P. C. van der Kruit and K. C. Freeman, Annual Review of Astronomy and Astrophysics 49 (2011); arXiv:1101.1771",
+          "url": "https://arxiv.org/abs/1101.1771",
+          "says": "Disks are mostly very flat and sometimes very thin."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/sp2.spec.mjs:273",
+      "note": "Labeled in the toy's note and About text."
+    }
+  ],
+  "simplified": [
+    "The depth is guessed, not measured (said in the toy).",
+    "The disk is drawn face on as photographed; the galaxies' small tilts to us (about 20° to 30°) are not undone.",
+    "Stars of our own Galaxy in front of a galaxy, and galaxies far behind it, are drawn in its disk; M51's companion, NGC 5195, is cut off at the edge."
+  ],
+  "fixes": []
+}

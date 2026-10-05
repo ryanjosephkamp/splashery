@@ -76,7 +76,7 @@ export const WORLDS = [
     dayHours: 24.6229,
     reference: "heights above the areoid, Mars's sea-level surface (MOLA)",
     sunlit: "#fff4e6",
-    atmosphere: { color: "#e8b08a", thickness: 0.008, strength: 0.3 },
+    atmosphere: { color: "#e8b08a", thickness: 0.006, strength: 0.18 },
     maps: {
       color: { url: `${USGS}Mars_Viking_ClrMosaic_global_925m.tif`, lonLeft: -180 },
       height: { url: `${USGS}Mars_MGS_MOLA_DEM_mosaic_global_463m.tif`, lonLeft: -180, nodata: -32768 }, // prettier-ignore

@@ -1,0 +1,108 @@
+{
+  "toy": "real-mercury",
+  "checked": "2026-10-05",
+  "summary": "Mercury drawn from real maps: every splat sits at its place's measured height and has its place's measured color, and each named feature is where the planetary gazetteer puts it. The relief, the turning speed and the lighting are simplified, and each simplification is labeled in the toy.",
+  "claims": [
+    {
+      "claim": "The color and elevation maps are Mercury MESSENGER MDIS basemap, 3-color (1000, 750 and 430 nm; MESS-H-MDIS-5-RDR-MD3-V1.0, 665 m), and Mercury MESSENGER Global DEM 665m.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Mercury MESSENGER MDIS basemap, 3-color (1000, 750 and 430 nm; MESS-H-MDIS-5-RDR-MD3-V1.0, 665 m), and Mercury MESSENGER Global DEM 665m",
+          "publisher": "NASA, Johns Hopkins APL, Carnegie Institution for Science, Arizona State University; DEM by Kris Becker (USGS Astrogeology Science Center)",
+          "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "Mercury turns once every 1407.6 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Mercury Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html",
+          "says": "Sidereal rotation period (hrs) 1407.6; volumetric mean radius 2439.7 km."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Caloris Planitia (the Caloris basin) at 31.65°, 161.98° east, and the map shows it there. Its center lies below Mercury's reference sphere on the map.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/979",
+          "says": "Caloris Planitia: diameter 1500 km, center latitude 31.65, center longitude 198.02 (+West, 0 to 360), which is 161.98 east."
+        },
+        {
+          "title": "Caloris Planitia",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Caloris_Planitia",
+          "says": "a plain within a large impact basin on Mercury ... about 1,550 km in diameter"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Rachmaninoff crater at 27.66°, 57.37° east, and the map shows it there. Its floor lies at least 2,000 m below its rim on the map.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/14653",
+          "says": "Rachmaninoff: diameter 305 km, center latitude 27.66, center longitude 302.63 (+West), which is 57.37 east."
+        },
+        {
+          "title": "Rachmaninoff (crater)",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rachmaninoff_(crater)",
+          "says": "an impact crater on Mercury ... first imaged in its entirety during MESSENGER's third Mercury flyby"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Hokusai crater at 57.84°, 16.65° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/14644",
+          "says": "Hokusai: diameter 114 km, center latitude 57.84, center longitude 343.35 (+West), which is 16.65 east."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:172",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The relief is exaggerated (ten or twenty times by default, chosen and labeled in the Toy tab); close up during a fly it eases to at most twice its height. True height is one choice away.",
+    "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
+    "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
+    "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",
+    "The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the patches round the named features are sharper.",
+    "The colors are near-infrared, red and blue light shown as red, green and blue: false color, as in the mission's maps."
+  ],
+  "fixes": []
+}

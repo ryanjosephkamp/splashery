@@ -15,7 +15,9 @@ import {
   worldQuat,
   worldModifier,
 } from "../src/space/field.js";
-import { RECIPES, dirOf } from "../src/packs/space-r2.js";
+import { RECIPES, dirOf, starColor } from "../src/packs/space-r2.js";
+import { GALAXIES } from "../src/space/galaxies.js";
+import fs from "node:fs";
 import { buildRecipe, quatRotate } from "../src/kit.js";
 import { applyClay } from "../src/generators.js";
 import { resolveOptions } from "../src/player.js";
@@ -24,6 +26,9 @@ import { TOY_SOUNDS } from "../src/toy-sounds.js";
 import { TOY_HELP } from "../src/toy-help.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
+const WORLD_TOYS = Object.keys(RECIPES).filter((id) =>
+  /^real-(moon|mars|earth|mercury|venus)$/.test(id),
+);
 const DEG = Math.PI / 180;
 
 async function build(id, count, options = {}) {
@@ -171,7 +176,7 @@ test.describe("lane Space r2: real worlds", () => {
 
   test("each world builds with its relief, and a tap flies to the feature on the map", async () => {
     test.setTimeout(240_000);
-    for (const id of Object.keys(RECIPES)) {
+    for (const id of WORLD_TOYS) {
       const ctx = await build(id, 60000, { relief: "1" });
       const buf = ctx.buf;
       const s = ctx.transform.scale;
@@ -215,6 +220,106 @@ test.describe("lane Space r2: real worlds", () => {
     }
   });
 
+  test("the stars near the Sun are where Gaia and Hipparcos put them, and a tap flies to each", async () => {
+    const D = JSON.parse(fs.readFileSync("assets/toys/nearby-stars/stars.json", "utf8"));
+    expect(D.stars.length).toBeGreaterThan(2000);
+    const LY = 3.26156;
+    const ly = (name) => {
+      const s = D.stars.find((x) => x[6] === name);
+      return Math.hypot(s[0], s[1], s[2]) * LY;
+    };
+    // Proxima Centauri 4.25 ly, Sirius 8.6 ly, Barnard's Star 5.96 ly, Vega 25 ly, Arcturus 36.7 ly.
+    expect(Math.abs(ly("Proxima Centauri") - 4.25)).toBeLessThan(0.05);
+    expect(Math.abs(ly("Sirius") - 8.6)).toBeLessThan(0.1);
+    expect(Math.abs(ly("Barnard's Star") - 5.96)).toBeLessThan(0.05);
+    expect(Math.abs(ly("Vega") - 25)).toBeLessThan(0.3);
+    expect(Math.abs(ly("Arcturus") - 36.7)).toBeLessThan(0.5);
+    expect(Math.max(...D.stars.map((s) => Math.hypot(s[0], s[1], s[2])))).toBeLessThanOrEqual(
+      20.001,
+    );
+    // A red dwarf is redder than the Sun, which is redder than Sirius.
+    const [r1, , b1] = starColor(3200);
+    const [r2, , b2] = starColor(5772);
+    const [r3, , b3] = starColor(9900);
+    expect(b1 / r1).toBeLessThan(b2 / r2);
+    expect(b2 / r2).toBeLessThan(b3 / r3);
+    const ctx = await build("nearby-stars", 60000);
+    const tour = ctx.kit.data.tour;
+    expect(tour.map((t) => t.name)).toEqual([
+      "Proxima Centauri",
+      "Sirius",
+      "Barnard's Star",
+      "Vega",
+      "Arcturus",
+    ]);
+    const c = { fly: 0 };
+    const recipe = RECIPES["nearby-stars"];
+    const frame = (t) => {
+      const out = { parts: {}, cues: [] };
+      recipe.drive(t, c, out, { data: ctx.kit.data });
+      return out;
+    };
+    frame(0);
+    for (let k = 0; k < tour.length; k++) {
+      c.fly = 1;
+      frame(1 + k * 10);
+      c.fly = 0.5;
+      const out = frame(5 + k * 10);
+      expect(out.view.center).toEqual(tour[k].p);
+      expect(out.parts[`label${k}`].visible).toBe(1);
+      c.fly = 0;
+      frame(9 + k * 10);
+    }
+  });
+
+  test("each real galaxy takes its colors from its picture, in a thin disk", async () => {
+    for (const g of GALAXIES) {
+      expect(fs.existsSync(`assets/toys/real-galaxies/${g.id}.jpg`)).toBe(true);
+      const ctx = await build("real-galaxies", 60000, { galaxy: g.id });
+      const b = ctx.buf;
+      expect(b.count).toBeGreaterThan(50000);
+      const s = ctx.transform.scale;
+      let thin = 0;
+      let bad = 0;
+      for (let i = 0; i < b.count; i++) {
+        if (!Number.isFinite(b.color[i * 4])) bad++;
+        const r = Math.hypot(b.pos[i * 3], b.pos[i * 3 + 1]) / s;
+        if (r > 0.3 && Math.abs(b.pos[i * 3 + 2] / s) < 0.12) thin++;
+        else if (r <= 0.3) thin++;
+      }
+      expect(bad).toBe(0);
+      // Outside the bulge, nearly all the light lies within 0.12 of the middle plane.
+      expect(thin / b.count).toBeGreaterThan(0.97);
+    }
+  });
+
+  test("the Saturn V stages in the order of a real flight", async () => {
+    const ctx = await build("saturn-v", 60000);
+    expect(ctx.kit.data.pieces).toEqual(["s1", "ring", "s2", "s3", "csm", "les"]);
+    const recipe = RECIPES["saturn-v"];
+    const c = { launch: 0 };
+    const gone = {};
+    recipe.drive(0, c, { parts: {}, cues: [] });
+    for (let s = 0; s <= 11; s += 0.1) {
+      c.launch = 1 - s / 12;
+      const out = { parts: {}, cues: [] };
+      recipe.drive(s, c, out);
+      for (const p of ["s1", "ring", "les", "s2", "s3"]) {
+        const o = out.parts[p].offset;
+        if (gone[p] === undefined && Math.hypot(o[0], o[1]) > 0.01) gone[p] = s;
+      }
+      // The escape tower leaves upward; the stages fall back.
+      if (gone.les !== undefined && s > gone.les + 0.3 && s < 4)
+        expect(out.parts.les.offset[1]).toBeGreaterThan(0);
+      if (gone.s1 !== undefined && s > gone.s1 + 0.3 && s < 2.5)
+        expect(out.parts.s1.offset[1]).toBeLessThan(0);
+    }
+    const order = Object.entries(gone)
+      .sort((a, b) => a[1] - b[1])
+      .map((e) => e[0]);
+    expect(order).toEqual(["s1", "ring", "les", "s2", "s3"]);
+  });
+
   test("nothing of the real worlds loads before one opens; each then builds", async ({ page }) => {
     test.setTimeout(400_000);
     const errors = [];
@@ -225,7 +330,7 @@ test.describe("lane Space r2: real worlds", () => {
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     const ours = (u) => /real-worlds|space-r2|src\/space\//.test(u) && !/thumb/.test(u);
     expect(requests.filter(ours)).toEqual([]);
-    for (const id of Object.keys(RECIPES)) {
+    for (const id of WORLD_TOYS) {
       await page.evaluate((id) => window.__splashery.app.chooseToy(id), id);
       await page.waitForFunction((id) => window.__splashery.player.toyInfo?.id === id && window.__splashery.player.proc?.ctx?.kit?.data?.features?.length > 0, id, { timeout: 120_000 }); // prettier-ignore
       const world = id.replace(/^real-/, "");

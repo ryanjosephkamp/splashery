@@ -1,0 +1,130 @@
+{
+  "toy": "real-mars",
+  "checked": "2026-10-05",
+  "summary": "Mars drawn from real maps: every splat sits at its place's measured height and has its place's measured color, and each named feature is where the planetary gazetteer puts it. The relief, the turning speed and the lighting are simplified, and each simplification is labeled in the toy.",
+  "claims": [
+    {
+      "claim": "The color map is Mars Viking Colorized Global Mosaic 925m.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Mars Viking Colorized Global Mosaic 925m",
+          "publisher": "NASA, JPL, Viking orbiters (Planetary Data System); USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "The elevation map is Mars MGS MOLA DEM 463m.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Mars MGS MOLA DEM 463m",
+          "publisher": "MOLA Science Team (NASA Goddard Space Flight Center); USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "Mars turns once every 24.6229 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Mars Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html",
+          "says": "Sidereal rotation period (hrs) 24.6229; volumetric mean radius 3389.5 km."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Olympus Mons at 18.65°, -133.8° east, and the map shows it there. Its summit on the map is over 20,500 m, within 60 km of the listed center (the map averages over cells about 1.6 km wide).",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/4453",
+          "says": "Olympus Mons: diameter 610.13 km, center latitude 18.65, center longitude 226.20 (+East, 0 to 360)."
+        },
+        {
+          "title": "Olympus Mons",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Olympus_Mons",
+          "says": "As measured by the Mars Orbiter Laser Altimeter (MOLA), it is 21.287 kilometres (69,840 ft) high"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Valles Marineris at -14.01°, -58.59° east, and the map shows it there. Its listed center lies more than 4,000 m below Mars's datum on the map.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/6288",
+          "says": "Valles Marineris: 3761.28 km, center latitude -14.01, center longitude 301.41 (+East, 0 to 360)."
+        },
+        {
+          "title": "Valles Marineris",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Valles_Marineris",
+          "says": "more than 4,000 km long, 200 km wide and up to 7 km deep"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Gale crater (the Curiosity rover) at -5.37°, 137.81° east, and the map shows it there. On the map, the mound rises more than 4,000 m above the crater's lowest floor.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/2071",
+          "says": "Gale: diameter 154.08 km, center latitude -5.37, center longitude 137.81 (+East)."
+        },
+        {
+          "title": "Aeolis Mons",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Aeolis_Mons",
+          "says": "It forms the central peak within Gale crater ... rising 5.5 km (18,000 ft) high from the valley floor"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The relief is exaggerated (ten or twenty times by default, chosen and labeled in the Toy tab); close up during a fly it eases to at most twice its height. True height is one choice away.",
+    "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
+    "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
+    "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",
+    "The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the patches round the named features are sharper.",
+    "The thin rim of air is a drawn glow, not a model of Mars's atmosphere."
+  ],
+  "fixes": []
+}

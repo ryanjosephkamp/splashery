@@ -1,0 +1,77 @@
+{
+  "toy": "nearby-stars",
+  "checked": "2026-10-05",
+  "summary": "Every star within 20 parsecs (65 light-years) of the Sun that Gaia measured, plus the brightest few Gaia cannot measure, at its measured place in the Galaxy's frame, colored by the temperature its measured color implies. Sizes show brightness, not size, and say so.",
+  "claims": [
+    {
+      "claim": "The stars are the Gaia Catalogue of Nearby Stars within 20 pc, at their Galactic x, y and z.",
+      "how": "tools/sp2-stars.mjs reads GCNS from CDS VizieR (the median of each star's distance) and keeps every star closer than 20 pc.",
+      "where": "tools/sp2-stars.mjs",
+      "sources": [
+        {
+          "title": "The Gaia Catalogue of Nearby Stars (Gaia Collaboration, Smart et al. 2021)",
+          "publisher": "Astronomy & Astrophysics 649, A6; CDS VizieR J/A+A/649/A6",
+          "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/649/A6",
+          "says": "A catalog of 331,312 objects within 100 pc, with Galactic Cartesian coordinates (xcoord50, ycoord50, zcoord50) from the median distance."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:223",
+      "note": ""
+    },
+    {
+      "claim": "Proxima Centauri is 4.25 light-years away, Barnard's Star 5.96, Sirius 8.6, Vega 25 and Arcturus 36.7.",
+      "how": "The test reads each named star's place from the data file and checks its distance.",
+      "where": "assets/toys/nearby-stars/stars.json",
+      "sources": [
+        {
+          "title": "Proxima Centauri",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Proxima_Centauri",
+          "says": "the nearest star to Earth after the Sun, located 4.25 light-years away"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:223",
+      "note": "The other distances are checked against the catalog's own parallaxes in the test."
+    },
+    {
+      "claim": "Gaia cannot measure the brightest stars, so those brighter than magnitude 3.5 that GCNS lacks come from Hipparcos through the HYG database.",
+      "how": "tools/sp2-stars.mjs adds HYG stars within 20 pc brighter than 3.5 with no GCNS star within 0.15 pc; HYG also names the GCNS stars it shares.",
+      "where": "tools/sp2-stars.mjs",
+      "sources": [
+        {
+          "title": "HYG database v4.4",
+          "publisher": "David Nash (astronexus), Codeberg",
+          "url": "https://codeberg.org/astronexus/hyg",
+          "says": "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A star's color follows its temperature, from its measured color.",
+      "how": "Temperatures interpolated from Gaia's BP − RP (or B − V for HYG stars) along Mamajek's table of mean dwarf colors; each temperature is drawn as a blackbody's color.",
+      "where": "src/packs/space-r2.js:490",
+      "sources": [
+        {
+          "title": "A Modern Mean Dwarf Stellar Color and Effective Temperature Sequence",
+          "publisher": "E. Mamajek (Pecaut & Mamajek 2013), version 2022.04.16",
+          "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+          "says": "Columns of Teff, B-V and Bp-Rp for each spectral type of dwarf star."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sp2.spec.mjs:223",
+      "note": "The table is for main-sequence dwarfs; giants (Arcturus, Pollux) and white dwarfs get the temperature of a dwarf of the same color, which is close for color but not exact."
+    }
+  ],
+  "simplified": [
+    "Sizes show brightness (absolute magnitude), not the stars' real sizes; every star would be far smaller than a dot at this scale.",
+    "Double and triple stars that Gaia did not separate are one splat.",
+    "The rings mark the Galaxy's plane round the Sun; the line points to the Galaxy's center."
+  ],
+  "fixes": []
+}

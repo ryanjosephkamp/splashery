@@ -1,0 +1,129 @@
+{
+  "toy": "real-earth",
+  "checked": "2026-10-05",
+  "summary": "Earth drawn from real maps: every splat sits at its place's measured height and has its place's measured color, and each named feature is where the planetary gazetteer puts it. The relief, the turning speed and the lighting are simplified, and each simplification is labeled in the toy.",
+  "claims": [
+    {
+      "claim": "The color map is Blue Marble: Next Generation (July 2004).",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Blue Marble: Next Generation (July 2004)",
+          "publisher": "NASA Earth Observatory (Reto Stöckli)",
+          "url": "https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation",
+          "says": "Public domain (NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "The elevation map is ETOPO 2022 Global Relief Model (60 and 15 arc-seconds).",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "ETOPO 2022 Global Relief Model (60 and 15 arc-seconds)",
+          "publisher": "NOAA National Centers for Environmental Information",
+          "url": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+          "says": "Public domain (NOAA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "The lights at night is Black Marble 2016 (Earth at Night).",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Black Marble 2016 (Earth at Night)",
+          "publisher": "NASA Earth Observatory (Joshua Stevens, Miguel Román)",
+          "url": "https://earthobservatory.nasa.gov/features/NightLights",
+          "says": "Public domain (NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "Earth turns once every 23.9345 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Earth Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "says": "Sidereal rotation period (hrs) 23.9345; volumetric mean radius 6371.0 km."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Mount Everest and the Himalayas at 27.988°, 86.925° east, and the map shows it there. Its summit on the map is over 8,000 m, within 15 km (ETOPO's 15-arc-second cells, about 450 m, average the very top).",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Mount Everest",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mount_Everest",
+          "says": "Its height was most recently measured in 2020 ... as 8,848.86 m"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to The Grand Canyon (at Phantom Ranch, on the canyon floor) at 36.106°, -112.095° east, and the map shows it there. On the map, the rim within 14 km of Phantom Ranch stands more than 1,400 m above the canyon floor.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Grand Canyon; Phantom Ranch",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Grand_Canyon",
+          "says": "attains a depth of over a mile (Phantom Ranch, on the canyon floor, is at 36.10605, -112.09469)"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Hawaii, with Mauna Kea and Mauna Loa at 19.6°, -155.5° east, and the map shows it there. The island's highest point on the map is over 4,000 m, within 50 km of the listed point.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Mauna Kea",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mauna_Kea",
+          "says": "Its peak is 13,803 feet (4,207.3 m) above sea level"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The relief is exaggerated (ten or twenty times by default, chosen and labeled in the Toy tab); close up during a fly it eases to at most twice its height. True height is one choice away.",
+    "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
+    "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
+    "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",
+    "The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the patches round the named features are sharper.",
+    "The oceans are drawn flat at sea level; there are no clouds; the blue rim of air is a drawn glow.",
+    "The city lights are NASA's 2016 composite of cloud-free nights, not one night."
+  ],
+  "fixes": []
+}

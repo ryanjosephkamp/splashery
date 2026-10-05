@@ -1,0 +1,46 @@
+{
+  "toy": "saturn-v",
+  "checked": "2026-10-05",
+  "summary": "NASA's 3D model of the Saturn V, cut into its stages where the model's width steps, staging in the order of Apollo 11's flight, much faster than real.",
+  "claims": [
+    {
+      "claim": "The pieces separate in the order of a real flight: the S-IC, the interstage ring, the launch escape tower, the S-II, then the spacecraft leaves the S-IVB.",
+      "how": "The drive moves each piece at its time on a 12-second clock; the test checks the order.",
+      "where": "src/packs/space-r2.js:823",
+      "sources": [
+        {
+          "title": "Saturn V",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Saturn_V",
+          "says": "First stage separation occurred less than one second after the engines were cut off ... At about T+3 minutes 12 seconds, the interstage ring dropped ... Shortly after interstage separation, the Launch Escape System was also jettisoned ... At about T+9 minutes 8 seconds ... separating the S-II ... About 40 minutes after TLI, the Apollo Command and Service module (CSM) separated from the third stage."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:294",
+      "note": ""
+    },
+    {
+      "claim": "The S-IC is the bottom 38% of the rocket's height (42 m of 110.6 m).",
+      "how": "The pieces are cut at shares of the model's height where its width steps, checked against the stages' lengths.",
+      "where": "src/packs/space-r2.js:811",
+      "sources": [
+        {
+          "title": "Saturn V",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Saturn_V",
+          "says": "Height 110.6 m (363 ft); S-IC length 42 m (138 ft); S-IVB 58 ft 7 in (17.86 m) tall."
+        }
+      ],
+      "verdict": "close",
+      "test": "",
+      "note": "The cuts follow the model, which is an artist's model rather than an engineering drawing."
+    }
+  ],
+  "simplified": [
+    "Staging that took hours is shown in 12 seconds.",
+    "The flames are glowing cones, not a simulation of the exhaust.",
+    "The model paints a band of the first stage navy blue; the real stage was white there, so it is drawn white.",
+    "The panels round the lunar module and the lunar module itself are not shown separately."
+  ],
+  "fixes": []
+}

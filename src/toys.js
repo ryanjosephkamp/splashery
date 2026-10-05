@@ -1213,6 +1213,36 @@ export const TOYS = [
     tags: "venus planet magellan radar nasa usgs real map elevation relief maxwell montes maat mons artemis corona",
     camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
   },
+  {
+    id: "nearby-stars",
+    label: "Stars near the Sun",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "stars neighborhood gaia hipparcos nearby proxima centauri sirius barnard vega arcturus light-years map galaxy real data",
+    camera: { yaw: 0.6, pitch: 0.45, roll: 0, distance: 2.6 },
+  },
+  {
+    id: "real-galaxies",
+    label: "Real galaxies",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "galaxy galaxies hubble eso telescope whirlpool m51 pinwheel m101 phantom m74 m83 spiral real picture",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
+  {
+    id: "saturn-v",
+    label: "Saturn V",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "rocket saturn v apollo moon launch stages staging nasa model s-ic s-ii s-ivb escape tower",
+    camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 2.4 },
+  },
   // ---- End of pack: space-r2 ----
 
   // ---- Pack: tiny ----

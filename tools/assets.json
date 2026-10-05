@@ -2314,6 +2314,72 @@
       "license": "Public domain (NASA)",
       "checked": "October 5, 2026",
       "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "nearby-stars",
+      "files": ["assets/toys/nearby-stars/stars.json"],
+      "toy": "nearby-stars",
+      "name": "Gaia Catalogue of Nearby Stars (stars within 20 pc) and HYG database v4.4 (the brightest stars and names)",
+      "author": "Gaia Collaboration, Smart et al. 2021 (ESA/Gaia/DPAC); David Nash (astronexus)",
+      "page": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/649/A6",
+      "license": "CC BY-SA 3.0 IGO (Gaia) and CC BY-SA 4.0 (HYG); the file is shared alike under CC BY-SA 4.0",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/sp2-stars.mjs; HYG's license read on https://codeberg.org/astronexus/hyg."
+    },
+    {
+      "id": "galaxy-m51",
+      "files": ["assets/toys/real-galaxies/m51.jpg"],
+      "toy": "real-galaxies",
+      "name": "M51",
+      "author": "NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)",
+      "page": "https://esahubble.org/images/heic0506a/",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "The 1,280-pixel screen picture, cropped round the galaxy and scaled to 768 × 768 by tools/sp2-galaxies.mjs."
+    },
+    {
+      "id": "galaxy-m101",
+      "files": ["assets/toys/real-galaxies/m101.jpg"],
+      "toy": "real-galaxies",
+      "name": "M101",
+      "author": "European Space Agency & NASA",
+      "page": "https://esahubble.org/images/heic0602a/",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "The 1,280-pixel screen picture, cropped round the galaxy and scaled to 768 × 768 by tools/sp2-galaxies.mjs."
+    },
+    {
+      "id": "galaxy-m74",
+      "files": ["assets/toys/real-galaxies/m74.jpg"],
+      "toy": "real-galaxies",
+      "name": "M74",
+      "author": "NASA, ESA, and The Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration",
+      "page": "https://esahubble.org/images/heic0719a/",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "The 1,280-pixel screen picture, cropped round the galaxy and scaled to 768 × 768 by tools/sp2-galaxies.mjs."
+    },
+    {
+      "id": "galaxy-m83",
+      "files": ["assets/toys/real-galaxies/m83.jpg"],
+      "toy": "real-galaxies",
+      "name": "M83",
+      "author": "ESO",
+      "page": "https://www.eso.org/public/images/eso0825a/",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "The 1,280-pixel screen picture, cropped round the galaxy and scaled to 768 × 768 by tools/sp2-galaxies.mjs."
+    },
+    {
+      "id": "saturn-v",
+      "files": ["assets/toys/real-rockets/saturn-v.glb"],
+      "toy": "saturn-v",
+      "name": "Saturn V",
+      "author": "NASA",
+      "page": "https://science.nasa.gov/3d-resources/saturn-v/",
+      "license": "NASA 3D Resources: free to download and use (NASA media guidelines); not a CC license",
+      "checked": "October 5, 2026",
+      "note": "The GLB as downloaded (927 KB). The owner decides the NASA 3D Resources terms route (docs/audits/new-sources-2026-10.md, A9)."
     }
   ]
 }

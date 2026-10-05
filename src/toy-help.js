@@ -2012,6 +2012,22 @@ export const TOY_HELP = {
     about:
       "The real surface of Venus, which no camera can see from space: its thick clouds hide it. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors here are the radar's brightness (rough ground bright, smooth ground dark), tinted orange like the photos the Soviet Venera landers took on the surface; they are not what an eye would see. The heights come from Magellan's radar altimeter. The clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here it turns 86,400 times faster, a day each second. The lighting casts no shadows.",
   },
+  "nearby-stars": {
+    howTo:
+      "Tap to fly to Proxima Centauri, Sirius, Barnard's Star, Vega or Arcturus, one each tap, and back. Drag to look around the Sun.",
+    about:
+      "Every star within about 65 light-years (20 parsecs) of the Sun, where it really is: about 2,200 stars measured by the European Space Agency's Gaia spacecraft, which found each one's distance from the tiny shift of its position as Earth goes round the Sun (its parallax). Gaia cannot measure the very brightest stars, so about 35 of them, like Sirius, Vega and Alpha Centauri A and B, come from the older Hipparcos survey (by way of the HYG database).\n\nThe Sun is in the middle. The faint rings lie in the plane of our Galaxy, 16, 33, 49 and 65 light-years out, and the line points toward the Galaxy's center. Each star's color comes from its temperature, worked out from its measured color: red dwarfs, the most common stars, are orange-red; hot stars like Sirius are blue-white. The sizes show how bright each star really is, not how big it is (pick All the same in the Toy tab to see them equal); every star would be far smaller than a dot at this scale. Tap to fly to a named star; its distance shows in light-years.",
+  },
+  "real-galaxies": {
+    howTo: "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
+    about:
+      "Four real galaxies from telescope pictures: the Whirlpool (M51), the Pinwheel (M101) and the Phantom (M74) from the Hubble Space Telescope, and the Southern Pinwheel (M83) from the European Southern Observatory's Very Large Telescope. Every splat takes its color from the picture, so the spiral arms, the pink clouds where new stars are born and the dark lanes of dust are exactly where the telescope saw them.\n\nA picture is taken from one side, so it says nothing about how thick a galaxy is. The thickness here is a guess, based on what spiral galaxies seen edge on usually look like: a thin disk (most of its light within a few percent of its width of the middle) and a round bulge at the center. Tap to turn the galaxy edge on and see the guess. Stars of our own Galaxy in front of it, and more distant galaxies behind it, are drawn in its disk too. Each picture is credited in About.",
+  },
+  "saturn-v": {
+    howTo: "Tap to fire its stages in the order of a real flight.",
+    about:
+      "The Saturn V, the rocket that sent astronauts to the Moon from 1968 to 1972, as splats from NASA's 3D model. At 110.6 m (363 feet) it is still among the tallest rockets ever flown. It had three stages: the S-IC first stage with five F-1 engines, the S-II second stage with five J-2 engines, and the S-IVB third stage with one J-2; on top rode the Apollo spacecraft under its launch escape tower.\n\nTap to stage it in the order of Apollo 11's flight, much faster than real: the first stage burns out and falls away at 2 minutes 40 seconds, the ring between the first and second stages drops at about 3 minutes 12 seconds, and the escape tower is thrown off just after; the second stage falls away at 9 minutes 8 seconds; the third stage takes the spacecraft into orbit and on toward the Moon, and the spacecraft leaves it about three and a half hours after launch. The flames are drawn simply. The model paints a band of the first stage navy blue; the real stage was white there, so it is drawn white.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------

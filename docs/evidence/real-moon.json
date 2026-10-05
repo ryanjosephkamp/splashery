@@ -1,0 +1,108 @@
+{
+  "toy": "real-moon",
+  "checked": "2026-10-05",
+  "summary": "The Moon drawn from real maps: every splat sits at its place's measured height and has its place's measured color, and each named feature is where the planetary gazetteer puts it. The relief, the turning speed and the lighting are simplified, and each simplification is labeled in the toy.",
+  "claims": [
+    {
+      "claim": "The color and elevation maps are CGI Moon Kit (LRO LROC color mosaic, 2025, and LOLA elevation).",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "CGI Moon Kit (LRO LROC color mosaic, 2025, and LOLA elevation)",
+          "publisher": "NASA's Scientific Visualization Studio (Ernie Wright); LRO LROC and LOLA teams",
+          "url": "https://svs.gsfc.nasa.gov/4720",
+          "says": "Public domain (NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "The Moon turns once every 655.72 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Moon Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+          "says": "Sidereal rotation period (hrs) 655.720; volumetric mean radius 1737.4 km."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Tycho crater at -43.3°, -11.22° east, and the map shows it there. Its floor lies at least 3,500 m below its rim on the map.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/6163",
+          "says": "Tycho: diameter 85.29 km, center latitude -43.30, center longitude -11.22 (+East)."
+        },
+        {
+          "title": "Tycho (lunar crater)",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Tycho_(lunar_crater)",
+          "says": "a diameter of around 85 km (53 mi) and a depth of around 4.7 km"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Copernicus crater at 9.62°, -20.08° east, and the map shows it there. Its floor lies at least 3,000 m below its rim on the map.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/1296",
+          "says": "Copernicus: diameter 96.07 km, center latitude 9.62, center longitude -20.08 (+East)."
+        },
+        {
+          "title": "Copernicus (crater)",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Copernicus_(lunar_crater)",
+          "says": "a lunar impact crater located in eastern Oceanus Procellarum ... with a central mountain"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:145",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Apollo 11's landing site (Tranquility Base) at 0.67°, 23.47° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/5684",
+          "says": "Statio Tranquillitatis: center latitude 0.67, center longitude 23.47 (+East)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:172",
+      "note": "A landing site has no relief of its own to check; the test checks only that the fly faces it."
+    }
+  ],
+  "simplified": [
+    "The relief is exaggerated (ten or twenty times by default, chosen and labeled in the Toy tab); close up during a fly it eases to at most twice its height. True height is one choice away.",
+    "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
+    "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
+    "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",
+    "The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the patches round the named features are sharper.",
+    "The colors come from NASA's color map, which is adjusted toward human vision; the poles beyond 70° are filled from the laser altimeter's monochrome albedo."
+  ],
+  "fixes": []
+}

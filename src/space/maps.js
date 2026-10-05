@@ -42,7 +42,7 @@ async function inflate(data) {
 }
 
 // A JPEG as { w, h, rgb: Uint8Array (3 per pixel) }.
-async function decodeJpeg(data) {
+export async function decodeJpeg(data) {
   if (isNode) {
     // jpeg-js is a devDependency: the Node tools and tests have it.
     const jpeg = (await import("jpeg-js")).default;

@@ -24,9 +24,11 @@
 //                        (Earth's city lights; 0 elsewhere)
 //     WORLD_TYPE.air     a splat of the atmosphere's rim: lit by the sun,
 //                        brightest seen edge-on
-//     WORLD_TYPE.label   a splat of a feature's name, lying on the ground:
-//                        extra = the feature's index; shown only while
-//                        uSpKitB.w (the kit's key press value) = index + fade
+//     WORLD_TYPE.label   a splat of a feature's name, stored where it shows
+//                        during its fly (above the feature turned to face +z;
+//                        it neither turns nor lifts): extra = the feature's
+//                        index; shown only while uSpKitB.w (the kit's key
+//                        press value) = index + fade
 //
 // The splats are built at true height; the program lifts each one by the
 // relief's exaggeration (uSpKitB.z, the kit's amount) times its height, and
@@ -116,7 +118,7 @@ const num = (x) => {
   return s.includes(".") ? s : `${s}.0`;
 };
 
-const GLSL = (air, night, hstep, labelUp) => `
+const GLSL = (air, night, hstep) => `
 uniform vec4 uSpClock;   // y splat scale, z exposure
 uniform vec4 uSpMorph;   // spin, tilt, ambient, night glow
 uniform vec4 uSpGlowC;   // toward the sun (xyz), brightness
@@ -125,7 +127,6 @@ uniform vec4 uSpKitB;    // z: the relief's exaggeration; w: the label shown + i
 const vec3 AIR = vec3(${num(air[0])}, ${num(air[1])}, ${num(air[2])});
 const vec3 NIGHT = vec3(${num(night[0])}, ${num(night[1])}, ${num(night[2])});
 const float HSTEP = ${num(hstep)};
-const float LABEL_UP = ${num(labelUp)};
 vec4 wAn = vec4(0.0);
 int wType = 0;
 vec4 wQ = vec4(0.0, 0.0, 0.0, 1.0);
@@ -133,7 +134,6 @@ float wHide = 0.0;
 float wExtra = 0.0;
 vec3 wDir = vec3(0.0, 1.0, 0.0);
 vec3 wN = vec3(0.0, 1.0, 0.0);
-float wShrink = 1.0;
 vec3 wRot(vec4 q, vec3 v) {
   return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
 }
@@ -176,19 +176,21 @@ void modifySplatCenter(inout vec3 center) {
   float tl = uSpMorph.y;
   wQ = wMul(vec4(sin(tl * 0.5), 0.0, 0.0, cos(tl * 0.5)), vec4(0.0, sin(sp * 0.5), 0.0, cos(sp * 0.5)));
   vec3 r = normalize(center + vec3(1e-6));
-  // A name is stored high above its place (so the sort draws it after the
-  // ground) and drawn halfway from the camera to its place, half its size:
-  // it looks the same, lying on the ground.
-  if (wType == 2) center -= r * LABEL_UP;
+  // A feature's name is stored where it shows during its fly (the feature
+  // turned to face +z), so it neither turns nor lifts, and the sort, which
+  // ranks the stored places, draws it over the ground.
+  if (wType == 2) {
+    wQ = vec4(0.0, 0.0, 0.0, 1.0);
+    wDir = r;
+    wHide = 0.0;
+    float shown = uSpKitB.w;
+    if (shown < -0.5 || abs(floor(shown) - wExtra) > 0.5) wHide = 1.0;
+    return;
+  }
   // Lifted by the exaggeration (built at true height).
   float ex = uSpKitB.z;
   vec3 c = center + r * (ex - 1.0) * h;
   center = wRot(wQ, c);
-  wShrink = 1.0;
-  if (wType == 2) {
-    center = uSpCam.xyz + (center - uSpCam.xyz) * 0.5;
-    wShrink = 0.5;
-  }
   wDir = wRot(wQ, r);
   // The ground's normal, tipped as much more as the ground is lifted.
   vec3 n1 = wNormal(wAn.z);
@@ -197,10 +199,6 @@ void modifySplatCenter(inout vec3 center) {
   // The far side: hidden (a little past the rim, for tall ground there).
   float facing = dot(wDir, normalize(uSpCam.xyz - center));
   wHide = 1.0 - smoothstep(-0.2, -0.06, facing);
-  if (wType == 2) {
-    float shown = uSpKitB.w;
-    if (shown < -0.5 || abs(floor(shown) - wExtra) > 0.5) wHide = 1.0;
-  }
 }
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
   if (wType == 0) {
@@ -218,7 +216,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
   // patches' small splats would vanish from afar).
   float fl = 0.0007 * length(uSpCam.xyz - modifiedCenter);
   scale = vec3(max(scale.xy, vec2(fl)), max(scale.z, 0.2 * fl));
-  scale *= uSpClock.y * (1.0 - wHide) * wShrink;
+  scale *= uSpClock.y * (1.0 - wHide);
 }
 void modifySplatColor(vec3 center, inout vec4 color) {
   vec3 sun = normalize(uSpGlowC.xyz);
@@ -244,7 +242,7 @@ void modifySplatColor(vec3 center, inout vec4 color) {
 }
 `;
 
-const WGSL = (air, night, hstep, labelUp) => `
+const WGSL = (air, night, hstep) => `
 uniform uSpClock: vec4f;
 uniform uSpMorph: vec4f;
 uniform uSpGlowC: vec4f;
@@ -253,7 +251,6 @@ uniform uSpKitB: vec4f;
 const AIR: vec3f = vec3f(${num(air[0])}, ${num(air[1])}, ${num(air[2])});
 const NIGHT: vec3f = vec3f(${num(night[0])}, ${num(night[1])}, ${num(night[2])});
 const HSTEP: f32 = ${num(hstep)};
-const LABEL_UP: f32 = ${num(labelUp)};
 var<private> wAn: vec4f = vec4f(0.0);
 var<private> wType: i32 = 0;
 var<private> wQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
@@ -261,7 +258,6 @@ var<private> wHide: f32 = 0.0;
 var<private> wExtra: f32 = 0.0;
 var<private> wDir: vec3f = vec3f(0.0, 1.0, 0.0);
 var<private> wN: vec3f = vec3f(0.0, 1.0, 0.0);
-var<private> wShrink: f32 = 1.0;
 fn wRot(q: vec4f, v: vec3f) -> vec3f {
   return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
 }
@@ -305,15 +301,16 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   let tl = uniform.uSpMorph.y;
   wQ = wMul(vec4f(sin(tl * 0.5), 0.0, 0.0, cos(tl * 0.5)), vec4f(0.0, sin(sp * 0.5), 0.0, cos(sp * 0.5)));
   let r = normalize(*center + vec3f(1e-6));
-  var base = *center;
-  if (wType == 2) { base = base - r * LABEL_UP; }
-  let ex = uniform.uSpKitB.z;
-  var c = wRot(wQ, base + r * (ex - 1.0) * h);
-  wShrink = 1.0;
   if (wType == 2) {
-    c = uniform.uSpCam.xyz + (c - uniform.uSpCam.xyz) * 0.5;
-    wShrink = 0.5;
+    wQ = vec4f(0.0, 0.0, 0.0, 1.0);
+    wDir = r;
+    wHide = 0.0;
+    let shown = uniform.uSpKitB.w;
+    if (shown < -0.5 || abs(floor(shown) - wExtra) > 0.5) { wHide = 1.0; }
+    return;
   }
+  let ex = uniform.uSpKitB.z;
+  let c = wRot(wQ, *center + r * (ex - 1.0) * h);
   *center = c;
   wDir = wRot(wQ, r);
   let n1 = wNormal(wAn.z);
@@ -321,10 +318,6 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   wN = wRot(wQ, normalize(r - ex * (r - n1 / nr)));
   let facing = dot(wDir, normalize(uniform.uSpCam.xyz - c));
   wHide = 1.0 - smoothstep(-0.2, -0.06, facing);
-  if (wType == 2) {
-    let shown = uniform.uSpKitB.w;
-    if (shown < -0.5 || abs(floor(shown) - wExtra) > 0.5) { wHide = 1.0; }
-  }
 }
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
   var sc = *scale;
@@ -341,7 +334,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
   }
   *rotation = rot;
   let fl = 0.0007 * length(uniform.uSpCam.xyz - modifiedCenter);
-  *scale = vec3f(max(sc.xy, vec2f(fl)), max(sc.z, 0.2 * fl)) * (uniform.uSpClock.y * (1.0 - wHide) * wShrink);
+  *scale = vec3f(max(sc.xy, vec2f(fl)), max(sc.z, 0.2 * fl)) * (uniform.uSpClock.y * (1.0 - wHide));
 }
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   let sun = normalize(uniform.uSpGlowC.xyz);
@@ -369,8 +362,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 
 // The program for a world: air is its atmosphere's color and night the
 // color of its lights at night ([r, g, b], 0..1); hstep the size of a
-// height step in toy units (after the fit), and labelUp how far above its
-// place a feature's name is stored (toy units; LABEL_UP in the recipe).
+// height step in toy units (after the fit).
 export function worldModifier({
   air = [0.6, 0.75, 1],
   night = [1, 0.75, 0.4],
