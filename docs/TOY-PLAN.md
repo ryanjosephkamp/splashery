@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 394 toys. 364 have a tap action today; the other 30 only hop.
+- 397 toys. 367 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 383.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 11.
+- **new** (needs its own effect): 14.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -61,9 +61,9 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, QR code,
   Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat field, Light lab,
-  Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Airport X-ray
-  scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera,
-  Screen.
+  Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab,
+  Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -72,7 +72,8 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
-  a QR code works, QR damage lab, Three QR codes in one, Video to 3D, Data in 3D, Climate records
+  a QR code works, QR damage lab, Three QR codes in one, Video to 3D, Cryo-EM map, Contour lab,
+  Terrain in a box, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -3062,7 +3063,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 
-## Science (4)
+## Science (7)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
@@ -3079,7 +3080,13 @@ Proposals below are suggestions; the owner may change them.
     Science r2 (the owner's review of October 2, 2026: "really, really big" and slow on his phone):
     a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big
     overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's
-    count (36k on the low tier).
+    count (36k on the low tier). Science r3 (the owner's push notes of October 4, 2026: "we could
+    maybe add quite a number", and his "could you add even more molecules?" of October 5): 38
+    structures in seven groups (everyday molecules, medicines, molecules of life, minerals and gems,
+    ice and salts, proteins at atomic resolution, DNA and RNA), all from COD or the PDB (CC0) with
+    real anisotropic U; a Show option fills the unit cell from the space group's symmetry operations
+    (each copy's U turned with it), minerals and salts by default, and completes a molecule split by
+    symmetry.
   - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
     breath as they settle.
 - **Super-resolution microscope** (`smlm-microscope`). Now: tap: Show a slice at the depth you tap.
@@ -3108,9 +3115,57 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles
     in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
     face up and works out each temperature; the toy draws them approximately (not a column-density
-    integral).
+    integral). Science r3: two more galaxies (m12i 10.4 billion years ago, z = 2; the dwarf m11h),
+    and a telescope view (simulated): the star particles as if 50 Mpc away (100 Mpc before r3),
+    blurred by the seeing (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading
+    with age, an approximation), cold dense gas as dust, and a tap that starts an exposure whose
+    photon grain smooths out (tools/sci3-galaxy.mjs). r2 (the owner's "sharper", October 5): more
+    stars, and the clip at twice the size (0.1″ seeing was tried as the default: with 250,000
+    particles standing in for millions of stars, the light shrank to a dim core, so 1″ stays). r3
+    ("make sharper" on the filters): the galaxy moved to 50 Mpc (1″ is 0.24 kpc), so the seeing
+    blurs half as much; thinned dust no longer widens into soft blobs; fainter stars a little
+    brighter.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+- **Cryo-EM map** (`cryoem-map`). Now: tap: Cut it open. Plan: new effect (E6).
+  - Owner: The owner's push notes of October 4, 2026 (S17, "100%"; the brief's "a new cryo-EM toy";
+    lane Science r3; labs only).
+  - Effect: A cryo-EM density map from EMDB (apoferritin at 2.6 Å, an E. coli ribosome with an
+    antibiotic at 3.2 Å, an AAV2 capsid at 3.0 Å) as its isosurface at EMDB's recommended level: a
+    small flat splat at each place the density crosses the level (marching cubes' vertices), facing
+    out of the density, colored by the fitted model's nearest chain or by distance from the center.
+    The fitted model's backbone can show inside a see-through map. The tap sweeps a clipping plane
+    in to cut the front half away and show the inside; a second tap closes it.
+  - Improved: Science r3: tools/sci3-cryoem.mjs reads each map (MRC) and EMDB's recommended contour,
+    crops to the density, blurs against aliasing and resamples to at most 128 to 160 voxels a side
+    and stores 8-bit volumes; maps at 2.6 to 3.2 Å, so the new voxels are about half the resolution
+    and EMDB's level keeps its meaning (an atomic-resolution map, 1.2 Å, was tried: blurred to a
+    phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the
+    assembly's operators. r2 (the owner's "sharper", October 5, 2026): more, smaller and flatter
+    splats (density 1.5, 0.8 of a voxel) and ambient occlusion from the density round each point,
+    which darkens grooves and pockets. r3 ("keep making it sharper" on the capsid): one splat per
+    voxel the surface crosses (its crossings averaged), so the edges no longer pile up into a soft
+    rim, and density 2.
+  - Sound: A soft, low whoosh as the cut sweeps in, and a softer one as it closes.
+- **Contour lab** (`contour-lab`). Now: tap: Pull the layers apart. Plan: new effect (E6).
+  - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first, each
+    after a small lab that teaches what it needs (lane Science r3; labs only).
+  - Effect: Real land (USGS 3DEP heights of Mount St. Helens, the Grand Canyon or Yosemite Valley)
+    cut into contour layers, each a solid piece with its edge a contour line. The tap lifts the
+    layers apart (a second tap stacks them).
+  - Improved: Science r3: tools/sci3-terrain.mjs (geotiff.js range reads of the public-domain 1/3″
+    tiles), src/science/terrain.js; the layers are kit parts.
+  - Sound: A soft wooden slide as the layers lift; a lower one as they settle.
+- **Terrain in a box** (`terrain-box`). Now: tap: Fill it with water. Plan: new effect (E6).
+  - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first (lane
+    Science r3; labs only).
+  - Effect: Real land in a box (USGS 3DEP heights, a square about 10 km across, 256 × 256 samples),
+    tinted by height and shaded by the sun, with cliffs filled and the box's walls showing the
+    cross-section. The tap raises a sheet of water to 45% of the relief, flooding the valleys first
+    (a level, not a flood model); a second tap drains it.
+  - Improved: Science r3: the water is a kit part rising; contour lines, a height stretch (1×, 2×,
+    4×), three places.
+  - Sound: A gentle rush as the water rises; a lower one as it drains.
 - **Climate records** (`climate-records`). Now: tap: Play the record. Plan: new effect (E6).
   - Owner: Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a
