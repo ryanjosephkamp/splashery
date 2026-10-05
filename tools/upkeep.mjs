@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // The Operator's upkeep on main after a lane merges (docs/OPERATING.md,
 // "Upkeep after a merge"): regenerates docs/TOY-PLAN.md from
-// tools/toy-plan.json, rebuilds the Sound Board page file, and refreshes the
-// standard screenshots that the smoke tests write.
+// tools/toy-plan.json, rebuilds the Sound Board page file and the preview site
+// (site/, from the toy list and the git history), and refreshes the standard
+// screenshots that the smoke tests write.
 //
 //   node tools/upkeep.mjs                  # all three
 //   node tools/upkeep.mjs --no-shots       # the plan and the Sound Board only
@@ -73,6 +74,9 @@ run("npx", ["prettier", "--write", "docs/TOY-PLAN.md"]);
 // 2. The Sound Board page file.
 run("node", ["tools/sound-board.mjs"]);
 
+// 2b. The preview site (lane Site): its toy pages, search index and What's new.
+run("node", ["tools/site-build.mjs"]);
+
 // 3. The standard screenshots (or the whole suite, which writes them too).
 if (!has("--no-shots")) {
   const env = { ...process.env };
@@ -89,7 +93,7 @@ if (!has("--no-shots")) {
 }
 
 console.log("\nChanged:");
-run("git", ["status", "--short", "--", "docs/TOY-PLAN.md", "tests/screenshots"]);
+run("git", ["status", "--short", "--", "docs/TOY-PLAN.md", "site", "tests/screenshots"]);
 console.log(
   "\nNext: republish .cache/pages/sound-board.html to the Sound Board link " +
     "(docs/OPERATING.md, Pages), then commit the changes above in a small PR.",
