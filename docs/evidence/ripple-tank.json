@@ -16,7 +16,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:126",
+      "test": "tests/opt.spec.mjs:129",
       "note": "The test checks that a dipper's crests are λ = c / f apart (within 2%)."
     },
     {
@@ -32,7 +32,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:96",
+      "test": "tests/opt.spec.mjs:99",
       "note": "The test runs 6,000 steps with a source and a barrier and checks the water stays bounded."
     },
     {
@@ -48,7 +48,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:113",
+      "test": "tests/opt.spec.mjs:116",
       "note": "After a pebble's rings reach the edges, under 1% of their energy is left in the tank."
     },
     {
@@ -64,7 +64,7 @@
         }
       ],
       "verdict": "close",
-      "test": "tests/opt.spec.mjs:157",
+      "test": "tests/opt.spec.mjs:160",
       "note": "For d = 10 and 12 cm and λ = 4 cm the first bright fringes land within 0.6° of the law; the second, at wide angles, within 4°, pulled in by each slit's own spreading."
     },
     {
@@ -80,7 +80,7 @@
         }
       ],
       "verdict": "close",
-      "test": "tests/opt.spec.mjs:178",
+      "test": "tests/opt.spec.mjs:181",
       "note": "Each narrower slit's beam is at least 20% wider; the 8 cm slit's first dark fringe is within 1.5° of 30°."
     },
     {

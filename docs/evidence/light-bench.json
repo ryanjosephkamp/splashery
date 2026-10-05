@@ -16,7 +16,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:218",
+      "test": "tests/opt.spec.mjs:221",
       "note": "Checked at six angles and three wavelengths, to 9 decimal places; the critical angle in its own test."
     },
     {
@@ -38,7 +38,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:205",
+      "test": "tests/opt.spec.mjs:208",
       "note": "nd, nF and nC of N-BK7 to 4 decimal places, and its Abbe number 64.17."
     },
     {
@@ -54,7 +54,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:247",
+      "test": "tests/opt.spec.mjs:250",
       "note": "For the four lenses at three object distances the traced image is within 0.3% of the formula. Rays far from the axis cross a little off it (spherical aberration and the aberrations of off-axis points), as with real lenses."
     },
     {
@@ -70,7 +70,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:279",
+      "test": "tests/opt.spec.mjs:282",
       "note": "Agreement to 1e-9 radian; N-BK7's minimum deviation at 587.6 nm for a 60° prism is 38.65°."
     },
     {
@@ -86,7 +86,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:308",
+      "test": "tests/opt.spec.mjs:311",
       "note": ""
     },
     {
@@ -102,7 +102,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/opt.spec.mjs:324",
+      "test": "tests/opt.spec.mjs:327",
       "note": "A tight bend lets light out where it meets the wall under the critical angle; the bend radius is an option."
     }
   ],
