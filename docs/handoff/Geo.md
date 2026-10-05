@@ -9,13 +9,51 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-READY (October 5, 2026): all nine toys built, tested and pushed on `claude/lane-geo` (draft PR
-#268), on Opus 5.5 throughout; no engine PR was needed. Clips are on Effect review page 2 as cards
-`geo-grand-canyon`, `geo-st-helens`, `geo-sea-floor`, `geo-tide-harbor`, `geo-hurricane`,
-`geo-relief-map`, `geo-living-city`, `geo-stork-migration` and `geo-earthquakes` (lane "Geo"; the
-page has no `lanes/Geo` record yet). Specs run: `tests/geo.spec.mjs` (14), `tests/kit.spec.mjs`,
-`tests/taps.spec.mjs`, `tests/help.spec.mjs`, `tests/unit.spec.mjs` (all pass after the taps fix);
-the full suite is left to the Integrators.
+WORKING (October 5, 2026, round 2 on `claude/lane-geo-r2`, from #268's a25d5aa7): the owner marked
+all nine round-1 clips "fix" ("Please make sharper"; on the earthquakes and the city, "something
+more photoreal" / "closer to a photoreal city"). Done so far: every toy sharper (below) and the
+photoreal sources researched (below). Left: the -r2 clips on Effect review page 2, then, once #268
+merges, merge main and open "Phase Earth and maps r2: …". Model: Opus 5.5.
+
+### Round 2: what changed
+
+- **Why round 1 looked soft.** Random (even) surface placement with the kit's base splat size, a
+  192-sample height grid and 320-pixel imagery, clips rendered without labs (so without the sharp
+  kernel), and GIF's 256 colors.
+- **The land as a grid** (`addGrid` in `src/geo/terrain.js`, after Science r3's terrain box, whose
+  clips the owner marked good): one flat splat per grid sample facing up its slope, sized to the
+  grid spacing, no random placement, steep drops filled down to the lower neighbor (the Grand
+  Canyon's walls now show their rock layers); the cut sides and the water sheets are grids too.
+- **Finer data:** 512 × 512 heights (delta-coded and gzipped, `.bin.gz`), the aerial imagery as
+  1024-pixel JPEGs, the hurricane's infrared at 384 pixels (one cloud splat per pixel).
+- **Photoreal imagery:** the earthquakes' globe, the storks' map and the hurricane's map use NASA's
+  Blue Marble Next Generation (true color, public domain).
+- Every toy has `kernel: "sharp"` and `density: 2` (1.6 for the globe), and the clips come from
+  `tools/geo-clip.mjs` (labs on, phone width, lossless frames to MP4).
+
+### Photoreal sources (the Operator's ask: say what's possible before building anything big)
+
+- **A photoreal city: Helsinki's reality mesh** (City of Helsinki, CC BY 4.0, checked on the HRI
+  CKAN record `helsingin-3d-kaupunkimalli`, October 5, 2026): a textured photogrammetric mesh of the
+  whole city from aerial photographs, as OBJ in 2 km tiles (0.1 to 1.8 GB each, at
+  https://3d.hel.ninja/data/mesh/Helsinki3D-MESH_2017_OBJ_2km-250m_ZIP/), each with coarser levels
+  of detail inside. One tile's coarse level run through `tools/model-to-splats.mjs` would give a
+  real, photoreal city block (Senate Square or the harbor) as splats; the traffic, train and night
+  could ride on it as tokens and a light layer. Cost: a download of about 0.5 to 2 GB at build time
+  and a converted file of perhaps 5 to 15 MB (budget it like the photoreal toys). Credit: "City of
+  Helsinki, CC BY 4.0". Also: Kalasatama in more detail (CC BY 4.0, a 6 GB Zenodo record,
+  doi:10.5281/zenodo.7599228, Aalto University), too big to start with.
+- **A CC0 city: Zürich's 3D city model** (Open Data Zürich, CC0 per its search listing; not yet
+  checked on the live page): about 50,000 buildings as LOD2 OBJ with photogrammetric roofs, but
+  untextured, so a cleaner kit-like city rather than a photoreal one.
+- **Lidar point clouds: USGS 3DEP** (public domain): colored point clouds of US cities (where a
+  project carries RGB), which become splats directly; the owner approved a LAZ reader on October
+  4, 2026. Walls are sparse from the air, so it reads best from above.
+- **Photoreal terrain:** the terrain toys already use USGS NAIP imagery at about 20 m a pixel (Grand
+  Canyon) to 1 m (Bar Harbor); finer imagery is possible (NAIP is 1 m everywhere in the US) at a
+  larger file size.
+- My suggestion: a "Helsinki" photoreal city toy from one reality-mesh tile, as its own small item
+  once the Operator says go.
 
 ### The toys (Earth and maps shelf, `geo`, all labs)
 
