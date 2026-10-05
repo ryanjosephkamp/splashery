@@ -3429,6 +3429,37 @@ export const TOYS = [
     // stage's buttons on any screen (the field of view spans the narrower side).
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.1 },
   },
+  // ---- Pack: qr-lab (lane QR lab r2) ----
+  {
+    id: "qr-anatomy",
+    label: "How a QR code works",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-lab",
+    labs: true,
+    tags: "qr code how it works anatomy finder timing alignment format version mask reed solomon error correction encode bits zigzag",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-damage",
+    label: "QR damage lab",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-lab",
+    labs: true,
+    tags: "qr code damage scratch sticker tear burn smudge blur error correction reed solomon heal scan meter levels",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-three",
+    label: "Three QR codes in one",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-lab",
+    labs: true,
+    tags: "qr code color rgb red green blue three codes multiplex channels",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {
     id: "photo-3d",

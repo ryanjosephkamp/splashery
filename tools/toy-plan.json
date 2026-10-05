@@ -2117,6 +2117,24 @@
       "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).",
       "sound": "Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps)."
     },
+    "qr-anatomy": {
+      "v": "new",
+      "owner": "The owner's push notes of October 4, 2026 (Q6, \"strong yes\"; \"it has to be technically correct\"), lane QR lab r2, October 5, 2026.",
+      "effect": "How a QR code works: a tap lights up the next part of a real code (finders, separators, timing, alignment, format and version information, the dark module, data and error correction codewords, remainder bits, the mask); its modules lift toward you as solid tiles in the part's color. Encode your own text steps through the mode, the count, the data bits, padding, error correction, blocks and interleaving, the zigzag placement (every bit drops into place along the path) and the eight masks (the masked tiles turn over, with each mask's penalty), every step checked against Nayuki's encoder.",
+      "sound": "A light wooden knock and a soft breath as each part lifts."
+    },
+    "qr-damage": {
+      "v": "new",
+      "owner": "The owner's push notes of October 4, 2026 (Q7, \"an absolute strong yes ... build this out very comprehensively\"; X3, the code that heals, October 5), lane QR lab r2, October 5, 2026.",
+      "effect": "The Damage lab: a tap adds the chosen damage (scratch, sticker, tear, burn, smudge, or the splats' own: blur, shrink, grow, jitter, fade, color drift; with Tilt, Curve and Move in time as sliders). A sticker drops onto the code, a torn corner peels up and falls away, a burned corner chars and crumbles. A meter reads the very picture on the stage with jsQR after each change and counts each block's lost codewords against what it can fix; the four levels can stand side by side. Heal it shows the code as a reader read it, wrong modules in red, and turns them over block by block as Reed–Solomon decoding fixes each block.",
+      "sound": "A soft scrape and a muffled thud as the damage lands."
+    },
+    "qr-three": {
+      "v": "new",
+      "owner": "The owner's pick X2 on the Push Plan, October 5, 2026 (three codes in one square), lane QR lab r2.",
+      "effect": "Three QR codes in the red, green and blue of one square (eight colors). A tap pulls the square apart into its three codes, each in its own color, which slide back and out to the sides and come back together. Read all three splits the picture into its channels and reads each code; an ordinary reader's result is shown beside them.",
+      "sound": "A soft breath as the codes slide apart and a light knock as they meet again."
+    },
     "chladni-plate": {
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
