@@ -116,4 +116,14 @@ file.
 
 ## State
 
-WORKING: not started yet (October 3, 2026).
+WORKING (October 5, 2026): started in the cloud on Opus 5.5. Sources checked from the container:
+the USGS 3DEP elevation service (raw float GeoTIFF), the USGS imagery basemap (NAIP and Landsat,
+public domain), the USGS earthquake GeoJSON feed and NOAA CO-OPS tides all answer. Building the data
+tool and the first terrain toy (the Grand Canyon), then the live earthquakes.
+
+### Plan
+
+1. `tools/geo-fetch.mjs`: elevation and imagery snapshots into `assets/toys/<id>/`.
+2. Grand Canyon (flood and drain), then the earthquakes (live feed and snapshot).
+3. Mount St. Helens, sea floor, waves and tides, storm, living city, relief map, migration.
+4. Shared lists, tests (`tests/geo.spec.mjs`), thumbnails, screenshots, clips.
