@@ -122,14 +122,16 @@ once #263 merges and main is merged in. No engine change was needed. Hourly chec
     round-cornered or dotted).
 - **Splat mirror** (`lv7-splat-mirror-r3`, `lv7-splat-mirror-hologram-r3`): sharper colors.
   - The unsharp mask is 1.2 (was 0.5), its push held to 28 levels so a strong edge gets no halo,
-    with coring so the camera's leftover noise isn't sharpened. The splats are 1.0 cells across (was
+    with coring so the camera's leftover noise isn't sharpened. The splats are 1.1 cells across (was
     1.2).
   - Measured on the mannequin camera, with `sharpness` new in `tools/lv7-mirror-measure.mjs` (how
     much of the camera's own edges reach the drawn face; 1 = as sharp as the camera): 0.51 to 0.52
-    on the r7 branch, 0.58 to 0.59 now.
-  - Steadiness is the same within this container's run-to-run spread. Measured back to back in both
-    orders: face on 0.8 to 1.2 on both branches; turned 2.7 to 3.3 here against 2.8 to 3.1 on r7.
-    The lane's mirror tests pass (turned 1.63, hologram over the face 8.3).
+    on the r7 branch, 0.56 to 0.57 now.
+  - Steadiness is the same within this container's run-to-run spread (medians over 8 depth answers):
+    face on 0.83 to 0.95 (r7 0.79 to 0.85); turned 1.6 to 3.4 (r7 1.8 to 3.1). Turned follows the
+    depth model's own wobble, which varies from run to run.
+  - 1.0 cells across was sharper still (0.58 to 0.59) but less steady turned (up to 4.4, and it
+    failed the lane's mirror test once), so 1.1 it is.
 - Photo to 3D's live view shares the mirror's picture (`src/live/relief.js`), so it gets the sharper
   colors and the 1.0 splats too.
 - Tests: `tests/lv7.spec.mjs` checks the sharpness (over 0.57), the two toys' sharp kernel and

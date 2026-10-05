@@ -873,9 +873,9 @@ export function gridColors(frame, cols, rows, mirror) {
 
 // Live r7 (the owner's "keep making it sharper" of October 5, 2026): a
 // picture splat's diameter over its cell's width. 1.45 blurred the picture;
-// at 1.2 neighbors still overlap, so no gaps show when it is turned. (The
-// polish round tried 1.0: a little sharper, but less steady turned; 1.1 is
-// being measured.)
+// at 1.2 neighbors still overlap, so no gaps show when it is turned. The
+// polish round: 1.1, a little sharper and as steady turned (1.0 was sharper
+// still, but less steady turned; docs/handoff/LiveR7.md).
 const SPREAD = 1.1;
 
 export const MIRROR = {
