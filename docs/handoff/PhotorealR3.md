@@ -105,8 +105,8 @@ stretching, twinkle or clicking layers, and nothing loud or overwhelming.
 **Also from his review:**
 
 - The **dog plush** looks broken (gaps in it): patch it with kit-built pieces, never by smearing.
-- The **real alarm clock** on the Photoreal shelf doesn't show the current time, while the kit alarm
-  clock does: make it show the current time the same way.
+- ~~The **real alarm clock** shows the current time.~~ Done by lane Fix8 (#273, merged October 5,
+  2026): its kit-built hands show this device's local time.
 
 #### You own
 
