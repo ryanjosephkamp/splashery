@@ -651,6 +651,105 @@ checked on the live source page on September 30, 2026.
   A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy,
   cut by `tools/sci-galaxy.mjs`.
 
+### Science r3 (lane Science r3)
+
+More structures for the Thermal ellipsoids toy (labs), each checked on its live page on October
+5, 2026. The Crystallography Open Database dedicates all its data to the public domain under
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/) ("All data in the COD and the database
+itself are dedicated to the public domain and licensed under the CC0 License"); the PDB's data are
+CC0 under the [wwPDB data policy](https://www.rcsb.org/pages/usage-policy). The CIFs are kept with
+their embedded refinement files (reflections, SHELX .res and .hkl) left out; the PDB files keep
+their HEADER, TITLE, CRYST1, atom and ANISOU records without waters, and the B-DNA file's second
+strand is added from its biological assembly (`tools/sci3-structures.mjs`).
+
+- Thermal ellipsoids: Table sugar (sucrose),
+  [COD 2300557](https://www.crystallography.net/cod/2300557.html), by A. O. Dmitrienko and I. S.
+  Bushmarinov (Journal of Applied Crystallography 48, 2015),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Urea, [COD 1566505](https://www.crystallography.net/cod/1566505.html), by P.
+  N. Ruth, R. Herbst-Irmer and D. Stalke (IUCrJ 9 286, 2022),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Vitamin C (ascorbic acid),
+  [COD 2300646](https://www.crystallography.net/cod/2300646.html), by C. J. McMonagle and M. R.
+  Probert (Journal of Applied Crystallography 52 445, 2019),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Glycine (neutron),
+  [COD 2103308](https://www.crystallography.net/cod/2103308.html), by P. Langan, S. A. Mason, D.
+  Myles and B. P. Schoenborn (Acta Crystallographica Section B 58 728, 2002),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Acetaminophen (paracetamol),
+  [COD 7232757](https://www.crystallography.net/cod/7232757.html), by M. R. Ward and I. D. H. Oswald
+  (CrystEngComm 21 4437, 2019), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the
+  Crystallography Open Database).
+- Thermal ellipsoids: Ibuprofen (neutron),
+  [COD 2006278](https://www.crystallography.net/cod/2006278.html), by N. Shankland, C. C. Wilson, A.
+  J. Florence and P. J. Cox (Acta Crystallographica Section C 53 951, 1997),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Vitamin B3 (nicotinamide, neutron),
+  [COD 2003053](https://www.crystallography.net/cod/2003053.html), by Y. Miwa, T. Mizuno, K.
+  Tsuchida et al. (Acta Crystallographica, Section B 55 78, 1999),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Quartz, [COD 9000775](https://www.crystallography.net/cod/9000775.html), by L.
+  Levien, C. T. Prewitt and D. J. Weidner (American Mineralogist 65 920, 1980),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Calcite, [COD 9000965](https://www.crystallography.net/cod/9000965.html), by
+  S. A. Markgraf and R. J. Reeder (American Mineralogist 70 590, 1985),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Corundum (ruby and sapphire),
+  [COD 1000032](https://www.crystallography.net/cod/1000032.html), by L. Lutterotti and P. Scardi
+  (Journal of Applied Crystallography 23 246, 1990),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Beryl (emerald),
+  [COD 9000992](https://www.crystallography.net/cod/9000992.html), by G. E. Brown and B. A. Mills
+  (American Mineralogist 71 547, 1986),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Zircon, [COD 9000684](https://www.crystallography.net/cod/9000684.html), by R.
+  M. Hazen and L. W. Finger (American Mineralogist 64 196, 1979),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Garnet (pyrope),
+  [COD 2108142](https://www.crystallography.net/cod/2108142.html), by R. Destro, R. Ruffo, P.
+  Roversi et al. (Acta Crystallographica Section B 73 722, 2017),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Pyrite (fool's gold),
+  [COD 1564890](https://www.crystallography.net/cod/1564890.html), by K. Ma, R. Lefèvre, Q. Li et
+  al. (Chemical Science, 2021), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the
+  Crystallography Open Database).
+- Thermal ellipsoids: Ice from Antarctica (neutron),
+  [COD 9015208](https://www.crystallography.net/cod/9015208.html), by A. D. Fortes, I. G. Wood, D.
+  Grigoriev et al. (Journal of Chemical Physics 120 11376, 2004),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Rock salt, [COD 7132177](https://www.crystallography.net/cod/7132177.html), by
+  M. Mettler, A. Dewandre, N. Tumanov et al. (Chemical communications, 2023),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Gypsum (neutron),
+  [COD 2300258](https://www.crystallography.net/cod/2300258.html), by P. F. Henry, M. T. Weller and
+  C. C. Wilson (Journal of Applied Crystallography 42 1176, 2009),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Blue vitriol (chalcanthite, neutron),
+  [COD 9008253](https://www.crystallography.net/cod/9008253.html), by G. E. Bacon and D. H.
+  Titterton (Zeitschrift fur Kristallographie 141 330, 1975),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Lysozyme, 0.65 Å, [PDB 2VB1](https://www.rcsb.org/structure/2VB1), by J. Wang,
+  M. Dauter, R. Alkire et al. (Acta Crystallogr.,Sect.D 63 1254, 2007),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: An iron-sulfur protein (HiPIP), 0.48 Å,
+  [PDB 5D8V](https://www.rcsb.org/structure/5D8V), by Y. Hirano, K. Takeda and K. Miki (Nature 534
+  281, 2016), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: Rubredoxin, 0.68 Å, [PDB 2DSX](https://www.rcsb.org/structure/2DSX), by C.
+  Chen, Y. Lin, Y. Huang and M. Liu (Biochem.Biophys.Res.Commun. 349 79, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: Z-DNA, 0.55 Å, [PDB 3P4J](https://www.rcsb.org/structure/3P4J), by K.
+  Brzezinski, A. Brzuszkiewicz, M. Dauter et al. (Nucleic Acids Res. 39 6238, 2011),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: B-DNA, 0.74 Å, [PDB 1D8G](https://www.rcsb.org/structure/1D8G), by C.
+  Kielkopf, S. Ding, P. Kuhn and D. Rees (J.Mol.Biol. 296 787, 2000),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+
 Files people open in these toys are read in their browser and never uploaded.
 
 ## Night sky (lane Night sky)
@@ -680,6 +779,152 @@ toy's About tab says so.
 
 The place the toy shows is never saved or sent: a city's coordinates are built in, and "Use my
 location" keeps the browser's answer in memory only.
+Thirteen more structures (the owner's "could you add even more molecules?", October 5, 2026), each
+checked on its live page that day:
+
+- Thermal ellipsoids: Vanillin (the taste of vanilla),
+  [COD 7242089](https://www.crystallography.net/cod/7242089.html), by S. Sundareswaran and S.
+  Karuppannan (CrystEngComm 23 1634, 2021),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Capsaicin (the heat of chili peppers),
+  [COD 2312782](https://www.crystallography.net/cod/2312782.html), by M. Lozin&#x161;ek (Acta
+  crystallographica. Section C, Structural chemistry 81 188, 2025),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Salicylic acid (from willow bark),
+  [COD 2100548](https://www.crystallography.net/cod/2100548.html), by P. Munshi and T. N. Guru Row
+  (Acta Crystallographica Section B 62 612, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Morphine, [COD 2237167](https://www.crystallography.net/cod/2237167.html), by
+  T. Gelbrich, D. E. Braun and U. J. Griesser (Acta Crystallographica Section E 69 o2, 2013),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Cytosine, a letter of DNA,
+  [COD 2019803](https://www.crystallography.net/cod/2019803.html), by B. Sridhar, J. B. Nanubolu and
+  K. Ravikumar (Acta Crystallographica Section C 71, 2015),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Guanine, a letter of DNA,
+  [COD 2015488](https://www.crystallography.net/cod/2015488.html), by K. Guille and W. Clegg (Acta
+  Crystallographica Section C 62 o515, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Serotonin, a messenger in the brain,
+  [COD 2244048](https://www.crystallography.net/cod/2244048.html), by M. Naeem, A. R. Chadeayne, J.
+  A. Golen and D. R. Manke (Acta Crystallographica Section E 78, 2022),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: NAD+, a helper molecule in every cell,
+  [COD 1507221](https://www.crystallography.net/cod/1507221.html), by B. Guillot, N. Muzet, E.
+  Artacho et al. (The Journal of Physical Chemistry B 107 9109, 2003),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: A-DNA, 0.83 Å, [PDB 1DPL](https://www.rcsb.org/structure/1DPL), by M. Egli, V.
+  Tereshko, M. Teplova et al. (Biopolymers 48 234, 1998),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: A four-stranded RNA, 0.61 Å, [PDB 1J8G](https://www.rcsb.org/structure/1J8G),
+  by J. Deng, Y. Xiong and M. Sundaralingam (Proc.Natl.Acad.Sci.USA 98 13665, 2001),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: A loop of ribosomal RNA, 0.85 Å,
+  [PDB 5NQI](https://www.rcsb.org/structure/5NQI), by C. Riml, A. Lusser, E. Ennifar and R. Micura
+  (J. Org. Chem. 82 7939, 2017), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under
+  the [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: DNA with a drug in its groove, 0.95 Å,
+  [PDB 3OMJ](https://www.rcsb.org/structure/3OMJ), by D. Chenoweth and P. Dervan (J.Am.Chem.Soc. 132
+  14521, 2010), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: DNA with a light-switch metal complex, 0.92 Å,
+  [PDB 4E1U](https://www.rcsb.org/structure/4E1U), by H. Song, J. Kaiser and J. Barton (Nat Chem 4
+  615, 2012), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+
+Four more super-resolution microscopy sets from ShareLoc.XYZ on Zenodo (each record's CC BY 4.0 read
+on its live page on October 5, 2026). Three records give no localization precision; theirs is
+estimated from the data by NeNA (Endesfelder et al., Histochemistry and Cell Biology 141, 629–638,
+2014).
+
+- Super-resolution microscope: "Xenopus laevis nuclear pore complex stained with WGA-ATTO520" by
+  Anna Löschberger, on ShareLoc.XYZ,
+  [10.5281/zenodo.7182237](https://doi.org/10.5281/zenodo.7182237),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). An 8 µm square cut from the record (a
+  subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA estimates 11.5 nm
+  for the whole set.
+- Super-resolution microscope: "Actin with PhalloidinAF647 in COS7" by Sarah Aufmkolk, on
+  ShareLoc.XYZ, [10.5281/zenodo.5510661](https://doi.org/10.5281/zenodo.5510661),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 10 µm square of one cell, 174,903 of
+  its localizations (a subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA
+  estimates 9.9 nm for the whole set.
+- Super-resolution microscope: "Mitochondrial protein TOM22 in COS7 cells" by Wei Ouyang, on
+  ShareLoc.XYZ, [10.5281/zenodo.5512636](https://doi.org/10.5281/zenodo.5512636),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 15 µm square of one field, 219,846 of
+  its localizations (a subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA
+  estimates 12.4 nm for the whole set.
+- Super-resolution microscope: "ZOLA-3D microtubules" by Andrey Aristov, Benoit Lelandais and
+  Christophe Zimmer (Institut Pasteur), on ShareLoc.XYZ,
+  [10.5281/zenodo.6861446](https://doi.org/10.5281/zenodo.6861446),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 12 µm square, 159,785 of its
+  localizations (a subset), cut by `tools/sci3-samples.mjs`.
+
+More of the FIRE-2 public data release for Galaxy in a box
+([FlatHUB](https://flathub.flatironinstitute.org/fire),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), read on the release's README on October
+5, 2026), with the citation it asks for: "We use the publicly-available FIRE-2 cosmological zoom-in
+simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project,
+generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018)."
+Subsets cut by `tools/sci3-galaxy.mjs`:
+
+- FIRE-2 m12i (res7100), snapshot 600 (z = 0), stars (m12i: Wetzel et al. (2016)): 250,000 of the
+  11.4 million star particles in the 40 × 12 × 40 kpc box, with their ages.
+- FIRE-2 m12i (res7100), snapshot 172 (z = 2), gas (m12i: Wetzel et al. (2016)): 300,000 of the 1.36
+  million gas particles in a 24 kpc box.
+- FIRE-2 m12i (res7100), snapshot 172 (z = 2), stars (m12i: Wetzel et al. (2016)): 250,000 of the
+  640,318 star particles in a 24 kpc box.
+- FIRE-2 m11h (res7100), snapshot 600 (z = 0), gas (m11h: El-Badry et al. (2018)): 300,000 of the
+  351,956 gas particles in a 16 kpc box.
+- FIRE-2 m11h (res7100), snapshot 600 (z = 0), stars (m11h: El-Badry et al. (2018)): 250,000 of the
+  640,445 star particles in a 16 kpc box.
+
+The land for Terrain in a box and the Contour lab: the U.S. Geological Survey's 3D Elevation
+Program, 1/3 arc-second (about 10 m) seamless elevation tiles from The National Map, public domain
+(each tile's metadata, read on October 5, 2026: "All 3DEP products are public domain."), cut by
+`tools/sci3-terrain.mjs`:
+
+- Mount St. Helens, Washington: a 9 km square of
+  [USGS_13_n47w123.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n47w123/USGS_13_n47w123.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n47w123/USGS_13_n47w123.xml)),
+  averaged to 256 × 256 samples.
+- The Grand Canyon near Grand Canyon Village, Arizona: a 12 km square of
+  [USGS_13_n37w113.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.xml)),
+  averaged to 256 × 256 samples.
+- Yosemite Valley and Half Dome, California: a 10 km square of
+  [USGS_13_n38w120.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w120/USGS_13_n38w120.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w120/USGS_13_n38w120.xml)),
+  averaged to 256 × 256 samples.
+
+Three cryo-EM maps from the Electron Microscopy Data Bank, each with the atomic model fitted into it
+from the PDB (checked on the live pages on October 5, 2026).
+
+- Cryo-EM map: Mouse heavy-chain apoferritin by cryo-EM at 100 keV, 2.6 Å,
+  [EMD-17961](https://www.ebi.ac.uk/emdb/EMD-17961) and its fitted model
+  [PDB 8PVC](https://www.rcsb.org/structure/8PVC), by G. McMullan, K. Naydenova, D. Mihaylov et al.
+  (PNAS 120, e2312905120, 2023). The map: EMDB's data are "free of all copyright restrictions and
+  made fully and freely available for both non-commercial and commercial use" (the
+  [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and resampled by
+  `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+  (the wwPDB data policy); its backbone only.
+- Cryo-EM map: Arbekacin-bound E. coli 70S ribosome, 3.2 Å,
+  [EMD-48329](https://www.ebi.ac.uk/emdb/EMD-48329) and its fitted model
+  [PDB 9MKK](https://www.rcsb.org/structure/9MKK), by S. Majumdar, N. P. Parajuli, X. Ge, A.
+  Emmerich and S. Sanyal (Scientific Reports 15, 18271, 2025). The map: EMDB's data are "free of all
+  copyright restrictions and made fully and freely available for both non-commercial and commercial
+  use" (the [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and
+  resampled by `tools/sci3-cryoem.mjs`. The model:
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the wwPDB data policy); its
+  backbone only.
+- Cryo-EM map: AAV2 virus-like particle, 3.02 Å, [EMD-20610](https://www.ebi.ac.uk/emdb/EMD-20610)
+  and its fitted model [PDB 6U0V](https://www.rcsb.org/structure/6U0V), by M. Agbandje-McKenna and
+  A. Bennett (deposited 2019). The map: EMDB's data are "free of all copyright restrictions and made
+  fully and freely available for both non-commercial and commercial use" (the
+  [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and resampled by
+  `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+  (the wwPDB data policy); its backbone only.
 
 ## Data and climate (lane Data and climate)
 
