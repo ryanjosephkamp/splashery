@@ -87,10 +87,13 @@ export function addBlock(k, o) {
     });
   });
   // The bottom.
-  k.add(k.param((u, v) => [F.x(u), F.bottom, F.z(1 - v)], { grid: 16 }), {
-    even: true,
-    share: 0.02,
-    flat: 0.2,
-    color: "#3f3529",
-  });
+  k.add(
+    k.param((u, v) => [F.x(u), F.bottom, F.z(1 - v)], { grid: 16 }),
+    {
+      even: true,
+      share: 0.02,
+      flat: 0.2,
+      color: "#3f3529",
+    },
+  );
 }

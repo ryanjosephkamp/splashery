@@ -74,7 +74,9 @@ for (const [id, url] of Object.entries(FEEDS)) {
   console.log(`year: ${events.length} events (${dropped} left out)`);
 }
 fs.writeFileSync(`${OUT}/snapshot.json`, JSON.stringify(snap));
-console.log(`${OUT}/snapshot.json: ${(fs.statSync(`${OUT}/snapshot.json`).size / 1024).toFixed(0)} KB`);
+console.log(
+  `${OUT}/snapshot.json: ${(fs.statSync(`${OUT}/snapshot.json`).size / 1024).toFixed(0)} KB`,
+);
 
 // The globe's relief: ETOPO1 bedrock, 360 x 180 (one degree... sampled at cell centers).
 const W = 360;
@@ -84,6 +86,15 @@ const url =
   new URLSearchParams({ bbox: "-180,-90,180,90", bboxSR: "4326", imageSR: "4326", size: `${W},${H}`, format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation", f: "image" }); // prettier-ignore
 const { cached } = await import("./geo-lib.mjs");
 const t = fillNoData(readTiff(await cached(`etopo1-world-${W}.tif`, url)));
-writeGeo(`${OUT}/globe.bin`, { source: "NOAA NCEI ETOPO1 Global Relief Model (bedrock)", bbox: [-180, -90, 180, 90], fetched: new Date().toISOString().slice(0, 10) }, [ // prettier-ignore
-  { name: "height", type: "height", w: t.w, h: t.h, data: t.data },
-]);
+writeGeo(
+  `${OUT}/globe.bin`,
+  {
+    source: "NOAA NCEI ETOPO1 Global Relief Model (bedrock)",
+    bbox: [-180, -90, 180, 90],
+    fetched: new Date().toISOString().slice(0, 10),
+  },
+  [
+    // prettier-ignore
+    { name: "height", type: "height", w: t.w, h: t.h, data: t.data },
+  ],
+);

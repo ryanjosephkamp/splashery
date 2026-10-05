@@ -257,12 +257,18 @@ export function fillNoData(grid) {
         if (!bad(data[y * w + x])) continue;
         let s = 0;
         let n = 0;
-        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { // prettier-ignore
+        for (const [dx, dy] of [
+          [1, 0],
+          [-1, 0],
+          [0, 1],
+          [0, -1],
+        ]) {
+          // prettier-ignore
           const X = x + dx;
           const Y = y + dy;
           if (X < 0 || Y < 0 || X >= w || Y >= h) continue;
           const v = data[Y * w + X];
-          if (!bad(v)) (s += v), n++;
+          if (!bad(v)) ((s += v), n++);
         }
         if (n) data[y * w + x] = s / n;
         else left++;
@@ -285,7 +291,7 @@ export function writeGeo(file, meta, arrays) {
     if (a.type === "height") {
       let mn = Infinity;
       let mx = -Infinity;
-      for (const v of a.data) (mn = Math.min(mn, v)), (mx = Math.max(mx, v));
+      for (const v of a.data) ((mn = Math.min(mn, v)), (mx = Math.max(mx, v)));
       if (mx === mn) mx = mn + 1;
       const q = new Uint16Array(a.data.length);
       a.data.forEach((v, i) => (q[i] = Math.round(((v - mn) / (mx - mn)) * 65535)));

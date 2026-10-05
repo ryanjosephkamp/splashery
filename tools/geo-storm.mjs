@@ -90,7 +90,13 @@ function decode(img, n) {
       for (let i = 0; i < n; i++) {
         const k = j * n + i;
         if (!Number.isNaN(near[k])) continue;
-        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { // prettier-ignore
+        for (const [dx, dy] of [
+          [1, 0],
+          [-1, 0],
+          [0, 1],
+          [0, -1],
+        ]) {
+          // prettier-ignore
           const X = i + dx;
           const Y = j + dy;
           if (X < 0 || Y < 0 || X >= n || Y >= n) continue;
@@ -140,18 +146,25 @@ const z = fillNoData(readTiff(await cached("polo-etopo1-400.tif", etopo)));
 const bm = "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?" + new URLSearchParams({ SERVICE: "WMS", VERSION: "1.1.1", REQUEST: "GetMap", LAYERS: "BlueMarble_ShadedRelief_Bathymetry", SRS: "EPSG:4326", BBOX: MAP.join(","), WIDTH: "1024", HEIGHT: "1024", FORMAT: "image/jpeg" }); // prettier-ignore
 const color = decodeImage(await cached("polo-bluemarble.jpg", bm));
 const day = track.filter((p) => p.time >= START && p.time <= END);
-writeGeo("assets/toys/hurricane/storm.bin", {
-  storm: "Hurricane Polo (EP17), eastern Pacific",
-  map: MAP,
-  span: spanMeters(MAP),
-  frames: [{ time: A.iso, box: A.box }, { time: B.iso, box: B.box }],
-  track: day,
-  fetched: new Date().toISOString().slice(0, 10),
-}, [
-  { name: "irA", type: "u8", w: N, h: N, data: A.data },
-  { name: "irB", type: "u8", w: N, h: N, data: B.data },
-  { name: "height", type: "height", w: 192, h: 192, data: resample(z, 192, 192) },
-  { name: "color", type: "rgb", w: 320, h: 320, data: rgbGrid(color, 320, 320) },
-]);
+writeGeo(
+  "assets/toys/hurricane/storm.bin",
+  {
+    storm: "Hurricane Polo (EP17), eastern Pacific",
+    map: MAP,
+    span: spanMeters(MAP),
+    frames: [
+      { time: A.iso, box: A.box },
+      { time: B.iso, box: B.box },
+    ],
+    track: day,
+    fetched: new Date().toISOString().slice(0, 10),
+  },
+  [
+    { name: "irA", type: "u8", w: N, h: N, data: A.data },
+    { name: "irB", type: "u8", w: N, h: N, data: B.data },
+    { name: "height", type: "height", w: 192, h: 192, data: resample(z, 192, 192) },
+    { name: "color", type: "rgb", w: 320, h: 320, data: rgbGrid(color, 320, 320) },
+  ],
+);
 console.log(day.map((p) => `${p.time} ${p.kt} kt ${p.mb} mb`).join("\n"));
 void fs;

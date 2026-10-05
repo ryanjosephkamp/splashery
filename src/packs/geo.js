@@ -103,12 +103,7 @@ function addFlood(k, F, height, { lo, hi, part, color = "#3f6f78" }) {
       },
     },
   );
-  const faces = [
-    (a) => [a, 1],
-    (a) => [1 - a, 0],
-    (a) => [1, 1 - a],
-    (a) => [0, a],
-  ];
+  const faces = [(a) => [a, 1], (a) => [1 - a, 0], (a) => [1, 1 - a], (a) => [0, a]];
   for (const f of faces) {
     k.add(
       k.param(
@@ -280,7 +275,11 @@ const ST_HELENS = {
       const a = i * 2.39996;
       tokens.push({
         base: C,
-        offset: [Math.cos(a) * spread + 0.25 * Math.max(0, age - 1.5), h, Math.sin(a) * spread * 0.6],
+        offset: [
+          Math.cos(a) * spread + 0.25 * Math.max(0, age - 1.5),
+          h,
+          Math.sin(a) * spread * 0.6,
+        ],
         visible: on ? clamp(Math.min(age * 3, (MSH_T - 0.2 - s) * 0.9), 0, 1) : 0,
       });
     }
@@ -351,7 +350,11 @@ const ST_HELENS = {
         const q = Math.cbrt(rand()) * L[3];
         const lit = 0.3 * Math.max(0, d[1]) - 0.15 * Math.max(0, -d[1]);
         return {
-          p: [crater[0] + L[0] + d[0] * q, crater[1] + L[1] + d[1] * q, crater[2] + L[2] + d[2] * q],
+          p: [
+            crater[0] + L[0] + d[0] * q,
+            crater[1] + L[1] + d[1] * q,
+            crater[2] + L[2] + d[2] * q,
+          ],
           color: shade(col, tone + lit - 0.08 * rand()),
           size: 1.5,
           opacity: 0.8,
@@ -424,21 +427,24 @@ const SEA_FLOOR = {
     const sea = k.part("sea");
     // The ocean's surface: a gently heaving sheet at sea level, over every
     // place that is under water.
-    k.add(k.param((u, v) => [F.x(u), ySea, F.z(v)], { grid: 96, flip: true }), {
-      part: sea,
-      even: true,
-      share: 0.14,
-      flat: 0.1,
-      jitter: 0.006,
-      opacity: 0.86,
-      kind: "wave",
-      params: (c) => [0.004, c.u * 9 + c.v * 5],
-      color: (c) => {
-        if (height(c.u, c.v) > 20) return null;
-        const g2 = c.noise(c.u * 30, c.v * 30, 2);
-        return mix("#1f4f7a", "#5d93b8", 0.25 + 0.2 * g2);
+    k.add(
+      k.param((u, v) => [F.x(u), ySea, F.z(v)], { grid: 96, flip: true }),
+      {
+        part: sea,
+        even: true,
+        share: 0.14,
+        flat: 0.1,
+        jitter: 0.006,
+        opacity: 0.86,
+        kind: "wave",
+        params: (c) => [0.004, c.u * 9 + c.v * 5],
+        color: (c) => {
+          if (height(c.u, c.v) > 20) return null;
+          const g2 = c.noise(c.u * 30, c.v * 30, 2);
+          return mix("#1f4f7a", "#5d93b8", 0.25 + 0.2 * g2);
+        },
       },
-    });
+    );
     // The water's cut faces, which drop away as the level passes them.
     const faces = [(a) => [a, 1], (a) => [1 - a, 0], (a) => [1, 1 - a], (a) => [0, a]];
     for (const f of faces) {
@@ -479,7 +485,7 @@ const TH_BOATS = [
   [0.3, 0.05, 1.9, "#2f5d8a"],
 ];
 
-function tideAt(levels, f) {
+export function tideAt(levels, f) {
   const x = clamp(f, 0, 1) * (levels.length - 1);
   const i = Math.min(levels.length - 2, Math.floor(x));
   return levels[i] + (levels[i + 1] - levels[i]) * (x - i);
@@ -565,21 +571,24 @@ const TIDE_HARBOR = {
     // its surface heaving in small waves.
     const water = k.part("water");
     const yLow = F.y(low);
-    k.add(k.param((u, v) => [F.x(u), yLow, F.z(v)], { grid: 128, flip: true }), {
-      part: water,
-      even: true,
-      share: 0.16,
-      flat: 0.1,
-      jitter: 0.006,
-      opacity: 0.84,
-      kind: "wave",
-      params: (c) => [0.0035, c.u * 34 - c.v * 12],
-      color: (c) => {
-        if (height(c.u, c.v) > high + 0.6) return null;
-        const g2 = c.noise(c.u * 60, c.v * 60, 4);
-        return mix("#2b4f5c", "#7aa4ad", 0.25 + 0.22 * g2);
+    k.add(
+      k.param((u, v) => [F.x(u), yLow, F.z(v)], { grid: 128, flip: true }),
+      {
+        part: water,
+        even: true,
+        share: 0.16,
+        flat: 0.1,
+        jitter: 0.006,
+        opacity: 0.84,
+        kind: "wave",
+        params: (c) => [0.0035, c.u * 34 - c.v * 12],
+        color: (c) => {
+          if (height(c.u, c.v) > high + 0.6) return null;
+          const g2 = c.noise(c.u * 60, c.v * 60, 4);
+          return mix("#2b4f5c", "#7aa4ad", 0.25 + 0.22 * g2);
+        },
       },
-    });
+    );
     // The water's cut faces: each bit shows while the tide is above it.
     const faces = [(a) => [a, 1], (a) => [1 - a, 0], (a) => [1, 1 - a], (a) => [0, a]];
     const yHigh = F.y(high);
@@ -629,18 +638,25 @@ const TIDE_HARBOR = {
     const plot = {
       at: (f, m) => [-pw / 2 + 0.05 + f * (pw - 0.1), py - ph / 2 + 0.03 + ((m - low) / (high - low)) * (ph - 0.06), pz + 0.004], // prettier-ignore
     };
-    k.add(k.param((u, v) => [(u - 0.5) * pw, py - v * ph, pz], { grid: 24 }), {
-      even: true,
-      share: 0.025,
-      flat: 0.1,
-      color: (c) => {
-        const f = (c.p[0] + pw / 2 - 0.05) / (pw - 0.1);
-        const hour = f * 24.9;
-        const tick = f >= 0 && f <= 1 && Math.abs(hour - Math.round(hour)) < 0.06 && Math.round(hour) % 6 === 0;
-        const mid = Math.abs(c.p[1] - plot.at(0, 0)[1]) < 0.0025;
-        return { c: tick || mid ? [0.33, 0.36, 0.4] : [0.13, 0.15, 0.18], keep: true };
+    k.add(
+      k.param((u, v) => [(u - 0.5) * pw, py - v * ph, pz], { grid: 24 }),
+      {
+        even: true,
+        share: 0.025,
+        flat: 0.1,
+        color: (c) => {
+          const f = (c.p[0] + pw / 2 - 0.05) / (pw - 0.1);
+          const hour = f * 24.9;
+          const tick =
+            f >= 0 &&
+            f <= 1 &&
+            Math.abs(hour - Math.round(hour)) < 0.06 &&
+            Math.round(hour) % 6 === 0;
+          const mid = Math.abs(c.p[1] - plot.at(0, 0)[1]) < 0.0025;
+          return { c: tick || mid ? [0.33, 0.36, 0.4] : [0.13, 0.15, 0.18], keep: true };
+        },
       },
-    });
+    );
     k.add(
       k.tube((tt) => plot.at(tt, tideAt(levels, tt)), 0.0028),
       { share: 0.01, color: "#7fc3d4", pattern: false, stretch: 2 },
@@ -672,7 +688,8 @@ const HURRICANE = {
       source: "https://www.star.nesdis.noaa.gov/GOES/",
       author: "NOAA NESDIS (imagery served by NASA's Global Imagery Browse Services)",
       license: "Public domain",
-      licenseUrl: "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
+      licenseUrl:
+        "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
     },
     {
       label: "Track",
@@ -688,7 +705,8 @@ const HURRICANE = {
       source: "https://visibleearth.nasa.gov/collection/1484/blue-marble",
       author: "NASA Earth Observatory",
       license: "Public domain",
-      licenseUrl: "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
+      licenseUrl:
+        "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
     },
     CREDIT_ETOPO,
   ],
@@ -744,7 +762,9 @@ const HURRICANE = {
     const eye0 = M.track[0];
     const [ex, ez] = XZ(eye0.lon, eye0.lat);
     const kCloud = F.k * 0.5; // clouds at half the land's exaggeration
-    const rings = HU_RINGS.map((_, r) => k.part(`ring${r}`, { pivot: [ex, 0, ez], axis: [0, 1, 0] }));
+    const rings = HU_RINGS.map((_, r) =>
+      k.part(`ring${r}`, { pivot: [ex, 0, ez], axis: [0, 1, 0] }),
+    );
     const ringOf = (deg) => rings[HU_RINGS.findIndex((edge) => deg < edge)];
     M.frames.forEach((fr, fi) => {
       const L = g.layer(fi ? "irB" : "irA");
@@ -767,7 +787,8 @@ const HURRICANE = {
           const lon = bw + (be - bw) * u;
           const lat = bn - (bn - bs) * v;
           const deg = Math.hypot(lon - clon, lat - clat);
-          if (deg > 5 || t0 > 6) return { p: [ex, -1, ez], color: [0, 0, 0], opacity: 0, part: rings[2] };
+          if (deg > 5 || t0 > 6)
+            return { p: [ex, -1, ez], color: [0, 0, 0], opacity: 0, part: rings[2] };
           // Placed so this frame's eye sits on the start's eye.
           const [x, z] = XZ(eye0.lon + (lon - clon), eye0.lat + (lat - clat));
           const h = top(t0);
@@ -917,6 +938,7 @@ const RELIEF_MAP = {
     const land = g.layer("land");
     const F = frame({ span: g.meta.span, exag: 1.5, lo: H.min - 300, depth: 0.08 });
     const norm = (m) => (m - H.min) / (H.max - H.min);
+    k.data = { look: o.look };
     const du = 1 / H.w;
     const mPerU = g.meta.span[0];
     const mPerV = g.meta.span[1];
@@ -1017,10 +1039,22 @@ const hash = (...a) => {
 // A closed rectangular path: point and heading at distance d along it.
 function loopPath(x0, z0, x1, z1) {
   const sides = [
-    [[x0, z1], [x1, z1]],
-    [[x1, z1], [x1, z0]],
-    [[x1, z0], [x0, z0]],
-    [[x0, z0], [x0, z1]],
+    [
+      [x0, z1],
+      [x1, z1],
+    ],
+    [
+      [x1, z1],
+      [x1, z0],
+    ],
+    [
+      [x1, z0],
+      [x0, z0],
+    ],
+    [
+      [x0, z0],
+      [x0, z1],
+    ],
   ];
   const lens = sides.map(([a, b]) => Math.hypot(b[0] - a[0], b[1] - a[1]));
   const total = lens.reduce((a, b) => a + b, 0);
@@ -1130,7 +1164,13 @@ const LIVING_CITY = {
               const n = c.n;
               return 0.78 + 0.26 * Math.max(0, n[0] * -0.5 + n[1] * 0.8 + n[2] * 0.6);
             };
-            const common = { pos: [x, h / 2, z], even: true, weight: 1.4, flat: 0.2, jitter: 0.008 };
+            const common = {
+              pos: [x, h / 2, z],
+              even: true,
+              weight: 1.4,
+              flat: 0.2,
+              jitter: 0.008,
+            };
             // Day: walls and roofs fade at dusk; the glass stays.
             k.add(shape, { ...common, kind: "fade", channel: 0, params: (c) => (win(c) ? [9, 0.1] : [0.3 + 0.2 * hash(id), 0.25]), color: (c) => (win(c) ? "#3f5566" : shade(tone, lit(c))) }); // prettier-ignore
             // Night: dark walls fade in ...
@@ -1144,7 +1184,11 @@ const LIVING_CITY = {
       const x = -half + 1.5 * P + (hash(i, 3) - 0.5) * (P - S - 0.08);
       const z = -half + 2.5 * P + (hash(i, 4) - 0.5) * (P - S - 0.08);
       k.add(evenEllipsoid(k, 0.035, 0.04, 0.035), { pos: [x, 0.06, z], color: (c) => shade("#3d6b33", 0.8 + 0.3 * c.n[1]), share: 0.002, flat: 0.4 }); // prettier-ignore
-      k.add(evenCylinder(0.006, 0.006, 0.03), { pos: [x, 0.015, z], color: "#5b4532", share: 0.0005 });
+      k.add(evenCylinder(0.006, 0.006, 0.03), {
+        pos: [x, 0.015, z],
+        color: "#5b4532",
+        share: 0.0005,
+      });
     }
     // The elevated rail: a deck on pillars round the city.
     const L = LC_LOOP;
@@ -1154,7 +1198,12 @@ const LIVING_CITY = {
       const f = (i / 16) * 4;
       const side = Math.floor(f);
       const g2 = (f - side) * 2 - 1;
-      const [px, pz] = [[g2 * L, L], [L, -g2 * L], [-g2 * L, -L], [-L, g2 * L]][side];
+      const [px, pz] = [
+        [g2 * L, L],
+        [L, -g2 * L],
+        [-g2 * L, -L],
+        [-L, g2 * L],
+      ][side];
       k.add(evenCylinder(0.008, 0.008, LC_RAIL_Y - 0.012), { pos: [px, (LC_RAIL_Y - 0.012) / 2, pz], color: "#7d7a74", share: 0.0008 }); // prettier-ignore
     }
     // Cars and the train are tokens, built where they start.
@@ -1171,16 +1220,24 @@ const LIVING_CITY = {
         let ly = rand() * hgt;
         let lz = (rand() - 0.5) * len;
         if (face < 0.3) ly = hgt;
-        else if (face < 0.5) lx = Math.sign(lx || 1) * wid / 2;
-        else if (face < 0.65) lz = Math.sign(lz || 1) * len / 2;
+        else if (face < 0.5) lx = (Math.sign(lx || 1) * wid) / 2;
+        else if (face < 0.65) lz = (Math.sign(lz || 1) * len) / 2;
         const front = lz > len / 2 - 0.002;
         const back = lz < -len / 2 + 0.002;
         let color = col;
         if (!isTrain && ly > hgt * 0.55 && face >= 0.3) color = "#2f3b46"; // the cabin's glass
-        if (isTrain && ly > hgt * 0.45 && ly < hgt * 0.8 && face >= 0.3 && face < 0.5) color = "#2f3b46";
+        if (isTrain && ly > hgt * 0.45 && ly < hgt * 0.8 && face >= 0.3 && face < 0.5)
+          color = "#2f3b46";
         if (front && ly < hgt * 0.5 && Math.abs(lx) > wid * 0.25) color = "#fff6d8";
         if (back && ly < hgt * 0.5 && Math.abs(lx) > wid * 0.25) color = "#e0342a";
-        return { p: put(lx, ly + 0.004, lz), color, size: 0.75, kind: "token", params: [i, 0], pattern: false };
+        return {
+          p: put(lx, ly + 0.004, lz),
+          color,
+          size: 0.75,
+          kind: "token",
+          params: [i, 0],
+          pattern: false,
+        };
       });
     };
     for (let i = 0; i < LC_CARS; i++) {
@@ -1220,7 +1277,7 @@ const SM_FILE = "assets/toys/stork-migration/migration.bin";
 const SM_T = 14;
 const SM_FLY = 0.035; // flying height above the map (recipe units)
 
-function birdAt(pts, hour) {
+export function birdAt(pts, hour) {
   if (hour <= pts[0][0]) return { lon: pts[0][1], lat: pts[0][2], i: 0 };
   const last = pts[pts.length - 1];
   if (hour >= last[0]) return { lon: last[1], lat: last[2], i: pts.length - 1 };
@@ -1245,7 +1302,8 @@ const STORK_MIGRATION = {
       label: "Storks",
       title: "Data from: The challenges of the first migration (white storks, Rotics et al. 2016)",
       source: "https://doi.org/10.5441/001/1.hn1bd23k",
-      author: "S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers, A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan (Movebank Data Repository)",
+      author:
+        "S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers, A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan (Movebank Data Repository)",
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
     },
@@ -1297,10 +1355,15 @@ const STORK_MIGRATION = {
         const m = H.sample(c.u, c.v);
         let col;
         if (m < 0) col = mix("#1d3f6e", "#3e7cb0", smoothstep(-3000, -50, m));
-        else col = ramp(["#6b8f4e", "#a8a368", "#c2a477", "#9c8166", "#e8e4dc"], clamp(m / 3500, 0, 1));
+        else
+          col = ramp(
+            ["#6b8f4e", "#a8a368", "#c2a477", "#9c8166", "#e8e4dc"],
+            clamp(m / 3500, 0, 1),
+          );
         // The Sahara and the Arabian desert read as sand south of 31° N.
         const lat = n - c.v * (n - s);
-        if (m >= 0 && lat < 31 && lat > 14) col = mix(col, "#d9b98a", 0.7 * smoothstep(14, 20, lat));
+        if (m >= 0 && lat < 31 && lat > 14)
+          col = mix(col, "#d9b98a", 0.7 * smoothstep(14, 20, lat));
         return shade(col, 0.85 * hill(c.n, 0.4) + 0.1);
       },
       side: () => "#5a5248",
@@ -1362,12 +1425,15 @@ const STORK_MIGRATION = {
     const fx = 0.019;
     for (const [mf, word] of months) {
       const mx = x0 + (x1 - x0) * mf;
-      k.add(k.param((u, v) => [mx + u * 0.34, F.bottom - 0.01, z + 0.045 + v * 0.135], { grid: 16 }), {
-        even: true,
-        share: 0.02,
-        flat: 0.1,
-        color: (c) => (inked([word], (c.p[0] - mx) / fx, (c.p[2] - z - 0.045) / fx) ? { c: [0.9, 0.9, 0.86], keep: true, size: 0.6 } : null), // prettier-ignore
-      });
+      k.add(
+        k.param((u, v) => [mx + u * 0.34, F.bottom - 0.01, z + 0.045 + v * 0.135], { grid: 16 }),
+        {
+          even: true,
+          share: 0.02,
+          flat: 0.1,
+          color: (c) => (inked([word], (c.p[0] - mx) / fx, (c.p[2] - z - 0.045) / fx) ? { c: [0.9, 0.9, 0.86], keep: true, size: 0.6 } : null), // prettier-ignore
+        },
+      );
     }
     k.data = { birds, hours: M.hours, at };
   },
@@ -1388,20 +1454,25 @@ const EQ_FEEDS = {
     url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson",
     words: "PAST MONTH, M4.5 AND UP",
   },
-  year: { label: "A year, magnitude 5 and up (snapshot)", words: "OCT 2025 TO SEP 2026, M5 AND UP" },
+  year: {
+    label: "A year, magnitude 5 and up (snapshot)",
+    words: "OCT 2025 TO SEP 2026, M5 AND UP",
+  },
 };
 const MONTHS = "JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC".split(" ");
 const MONTH_NAMES = "January February March April May June July August September October November December".split(" "); // prettier-ignore
 const EQ = { snapshot: null, shown: null, live: new Map() };
 
 // Rows of [time s, lon, lat, depth km, magnitude] from a GeoJSON feed.
-function quakeRows(gj) {
+export function quakeRows(gj) {
   const out = [];
   for (const f of gj.features || []) {
     const p = f.properties || {};
     const g = f.geometry?.coordinates || [];
+    // An unknown (null) magnitude or depth stays unknown, never 0: such a quake is left out.
+    if (p.type !== "earthquake" || p.mag == null || g[2] == null || p.time == null) continue;
     const row = [Math.round(p.time / 1000), +g[0], +g[1], +g[2], +p.mag];
-    if (p.type === "earthquake" && row.every(Number.isFinite)) out.push(row);
+    if (row.every(Number.isFinite)) out.push(row);
   }
   return out.sort((a, b) => a[0] - b[0]);
 }
@@ -1453,7 +1524,8 @@ function depthColor(d) {
 function reliefColor(h, n, c) {
   let col;
   if (h < 0) col = mix("#0d2a57", "#3d7fb8", smoothstep(-6500, -150, h));
-  else if (h < 2500) col = mix(mix("#5c8a43", "#9a9156", smoothstep(0, 900, h)), "#8d7660", smoothstep(900, 2500, h)); // prettier-ignore
+  else if (h < 2500)
+    col = mix(mix("#5c8a43", "#9a9156", smoothstep(0, 900, h)), "#8d7660", smoothstep(900, 2500, h)); // prettier-ignore
   else col = mix("#8d7660", "#e9ecef", smoothstep(2500, 5000, h));
   const d = vec.dot(n, vec.unit([-0.4, 0.5, 0.75]));
   return shade(col, 0.72 + 0.32 * Math.max(0, d) + 0.03 * c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30)); // prettier-ignore
@@ -1513,7 +1585,11 @@ const EARTHQUAKES = {
     let got = null;
     if (feed !== "year" && liveAllowed()) {
       const key = `${feed}|${o.refresh}`;
-      if (!EQ.live.has(key)) EQ.live.set(key, eqFetch(feed).catch(() => null));
+      if (!EQ.live.has(key))
+        EQ.live.set(
+          key,
+          eqFetch(feed).catch(() => null),
+        );
       got = await EQ.live.get(key);
     }
     if (!got) got = { events: snap.events, fetched: new Date(snap.fetched), live: false };
@@ -1592,27 +1668,33 @@ const EARTHQUAKES = {
     const fx = Math.min(0.016, (PW - 0.16) / cols);
     const PH = 0.1 + (lines.length * 10 - 3) * fx;
     const py = -1.25 - PH / 2;
-    k.add(k.param((u, v) => [(u - 0.5) * PW, py + (0.5 - v) * PH, 0.4], { grid: 24 }), {
-      even: true,
-      share: 0.06,
-      flat: 0.1,
-      color: (c) => {
-        const s0 = (c.p[0] + PW / 2 - 0.1) / fx;
-        const t0p = (py + PH / 2 - 0.05 - c.p[1]) / fx;
-        const ink = inked(lines, s0, t0p);
-        return ink ? { c: [0.95, 0.93, 0.86], keep: true, size: 0.7 } : { c: [0.12, 0.13, 0.15], keep: true }; // prettier-ignore
+    k.add(
+      k.param((u, v) => [(u - 0.5) * PW, py + (0.5 - v) * PH, 0.4], { grid: 24 }),
+      {
+        even: true,
+        share: 0.06,
+        flat: 0.1,
+        color: (c) => {
+          const s0 = (c.p[0] + PW / 2 - 0.1) / fx;
+          const t0p = (py + PH / 2 - 0.05 - c.p[1]) / fx;
+          const ink = inked(lines, s0, t0p);
+          return ink ? { c: [0.95, 0.93, 0.86], keep: true, size: 0.7 } : { c: [0.12, 0.13, 0.15], keep: true }; // prettier-ignore
+        },
       },
-    });
-    k.add(k.param((u, v) => [(u - 0.5) * PW, py - PH / 2 - 0.05 + (0.5 - v) * 0.03, 0.4], { grid: 24 }), {
-      even: true,
-      share: 0.01,
-      flat: 0.1,
-      color: "#3b3f45",
-      kind: "band",
-      channel: 0,
-      params: (c) => [c.u, 0.02],
-      pattern: false,
-    });
+    );
+    k.add(
+      k.param((u, v) => [(u - 0.5) * PW, py - PH / 2 - 0.05 + (0.5 - v) * 0.03, 0.4], { grid: 24 }),
+      {
+        even: true,
+        share: 0.01,
+        flat: 0.1,
+        color: "#3b3f45",
+        kind: "band",
+        channel: 0,
+        params: (c) => [c.u, 0.02],
+        pattern: false,
+      },
+    );
   },
 };
 

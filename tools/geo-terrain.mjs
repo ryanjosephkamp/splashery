@@ -41,12 +41,19 @@ const SITES = {
     const span = spanMeters(bbox);
     const z = fillNoData(await elevation3dep("gc", bbox, 400, 400));
     const img = await imageryUsgs("gc", bbox, 1024, 1024);
-    writeGeo("assets/toys/grand-canyon/terrain.bin", {
-      site: "Grand Canyon, Arizona", bbox, span, fetched: today(),
-    }, [
-      { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
-      { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
-    ]);
+    writeGeo(
+      "assets/toys/grand-canyon/terrain.bin",
+      {
+        site: "Grand Canyon, Arizona",
+        bbox,
+        span,
+        fetched: today(),
+      },
+      [
+        { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
+        { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
+      ],
+    );
   },
 
   // Mount St. Helens before (1952-era topography, the USGS pre-eruption DEM)
@@ -84,13 +91,24 @@ const SITES = {
     };
     const pre0 = crop(N);
     const utm = async (kind, w, h) => {
-      const base = kind === "elev"
-        ? "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage?"
-        : "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?";
-      const q = { bbox: box.join(","), bboxSR: "26910", imageSR: "26910", size: `${w},${h}`, f: "image" };
-      if (kind === "elev") Object.assign(q, { format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation" }); // prettier-ignore
+      const base =
+        kind === "elev"
+          ? "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage?"
+          : "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?";
+      const q = {
+        bbox: box.join(","),
+        bboxSR: "26910",
+        imageSR: "26910",
+        size: `${w},${h}`,
+        f: "image",
+      };
+      if (kind === "elev")
+        Object.assign(q, { format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation" }); // prettier-ignore
       else q.format = "png24";
-      return cached(`msh-${kind}-${w}.${kind === "elev" ? "tif" : "png"}`, base + new URLSearchParams(q));
+      return cached(
+        `msh-${kind}-${w}.${kind === "elev" ? "tif" : "png"}`,
+        base + new URLSearchParams(q),
+      );
     };
     const after = fillNoData(readTiff(await utm("elev", 400, 400)));
     const img = decodeImage(await utm("img", 1024, 1024));
@@ -106,7 +124,13 @@ const SITES = {
       for (let j = 0; j < N; j++)
         for (let i = 0; i < N; i++) {
           let m = wgt[j * N + i];
-          for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { // prettier-ignore
+          for (const [dx, dy] of [
+            [1, 0],
+            [-1, 0],
+            [0, 1],
+            [0, -1],
+          ]) {
+            // prettier-ignore
             const X = Math.min(N - 1, Math.max(0, i + dx));
             const Y = Math.min(N - 1, Math.max(0, j + dy));
             m = Math.min(m, wgt[Y * N + X] + 0.2);
@@ -118,13 +142,20 @@ const SITES = {
     const before = { data: new Float32Array(N * N) };
     for (let i = 0; i < N * N; i++)
       before.data[i] = ok[i] ? pre0.data[i] * wgt[i] + now[i] * (1 - wgt[i]) : now[i];
-    writeGeo("assets/toys/st-helens/terrain.bin", {
-      site: "Mount St. Helens, Washington", utm: box, span: [box[2] - box[0], box[3] - box[1]], fetched: today(),
-    }, [
-      { name: "before", type: "height", w: N, h: N, data: before.data },
-      { name: "after", type: "height", w: N, h: N, data: now },
-      { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
-    ]);
+    writeGeo(
+      "assets/toys/st-helens/terrain.bin",
+      {
+        site: "Mount St. Helens, Washington",
+        utm: box,
+        span: [box[2] - box[0], box[3] - box[1]],
+        fetched: today(),
+      },
+      [
+        { name: "before", type: "height", w: N, h: N, data: before.data },
+        { name: "after", type: "height", w: N, h: N, data: now },
+        { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
+      ],
+    );
   },
 
   // The Mariana Trench and the Mariana Islands (Guam at the lower left), from
@@ -132,9 +163,16 @@ const SITES = {
   async "sea-floor"() {
     const bbox = [141.5, 9.5, 148.5, 16.5];
     const z = fillNoData(await elevationEtopo1("mariana", bbox, 420, 420));
-    writeGeo("assets/toys/sea-floor/terrain.bin", {
-      site: "The Mariana Trench, western Pacific", bbox, span: spanMeters(bbox), fetched: today(),
-    }, [{ name: "height", type: "height", w: N, h: N, data: resample(z, N, N) }]);
+    writeGeo(
+      "assets/toys/sea-floor/terrain.bin",
+      {
+        site: "The Mariana Trench, western Pacific",
+        bbox,
+        span: spanMeters(bbox),
+        fetched: today(),
+      },
+      [{ name: "height", type: "height", w: N, h: N, data: resample(z, N, N) }],
+    );
   },
 
   // Bar Harbor, Maine: the bar to Bar Island, dry for a few hours around each
@@ -152,14 +190,26 @@ const SITES = {
     const tq = new URLSearchParams({ product: "predictions", station: "8413320", begin_date: "20261028 00:00", end_date: "20261029 00:54", datum: "MSL", units: "metric", time_zone: "gmt", format: "json", interval: "6" }); // prettier-ignore
     const tide = JSON.parse(await cached("bh-tide.json", "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" + tq, { text: true })); // prettier-ignore
     const levels = tide.predictions.map((p) => +p.v);
-    writeGeo("assets/toys/tide-harbor/terrain.bin", {
-      site: "Bar Harbor, Maine", bbox, span: spanMeters(bbox), fetched: today(),
-      tide: { station: "8413320 Bar Harbor, ME", start: "2026-10-28T00:00Z", step: 360, datum: "MSL" },
-    }, [
-      { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
-      { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
-      { name: "tide", type: "f32", w: levels.length, h: 1, data: levels },
-    ]);
+    writeGeo(
+      "assets/toys/tide-harbor/terrain.bin",
+      {
+        site: "Bar Harbor, Maine",
+        bbox,
+        span: spanMeters(bbox),
+        fetched: today(),
+        tide: {
+          station: "8413320 Bar Harbor, ME",
+          start: "2026-10-28T00:00Z",
+          step: 360,
+          datum: "MSL",
+        },
+      },
+      [
+        { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
+        { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
+        { name: "tide", type: "f32", w: levels.length, h: 1, data: levels },
+      ],
+    );
   },
 
   // Yosemite Valley for the relief map: heights, imagery, USGS NLCD 2021 land
@@ -178,10 +228,14 @@ const SITES = {
     for (const f of nhd.features) {
       const name = f.properties.gnis_name;
       if (!name) continue;
-      const lines = f.geometry.type === "MultiLineString" ? f.geometry.coordinates : [f.geometry.coordinates];
+      const lines =
+        f.geometry.type === "MultiLineString" ? f.geometry.coordinates : [f.geometry.coordinates];
       for (const line of lines) {
         const pts = line
-          .map(([lon, lat]) => [(lon - bbox[0]) / (bbox[2] - bbox[0]), (bbox[3] - lat) / (bbox[3] - bbox[1])])
+          .map(([lon, lat]) => [
+            (lon - bbox[0]) / (bbox[2] - bbox[0]),
+            (bbox[3] - lat) / (bbox[3] - bbox[1]),
+          ])
           .filter(([u, v]) => u >= 0 && u <= 1 && v >= 0 && v <= 1)
           .map(([u, v]) => [+u.toFixed(4), +v.toFixed(4)]);
         if (pts.length >= 2) rivers.push({ name, main: name === "Merced River", pts });
@@ -191,11 +245,16 @@ const SITES = {
     const HH = Math.round((HW * span[1]) / span[0]);
     const CW = 320;
     const CH = Math.round((CW * span[1]) / span[0]);
-    writeGeo("assets/toys/relief-map/terrain.bin", { site: "Yosemite Valley, California", bbox, span, fetched: today(), rivers }, [ // prettier-ignore
-      { name: "height", type: "height", w: HW, h: HH, data: resample(z, HW, HH) },
-      { name: "color", type: "rgb", w: CW, h: CH, data: rgbGrid(img, CW, CH) },
-      { name: "land", type: "rgb", w: CW, h: CH, data: rgbGrid(nlcd, CW, CH) },
-    ]);
+    writeGeo(
+      "assets/toys/relief-map/terrain.bin",
+      { site: "Yosemite Valley, California", bbox, span, fetched: today(), rivers },
+      [
+        // prettier-ignore
+        { name: "height", type: "height", w: HW, h: HH, data: resample(z, HW, HH) },
+        { name: "color", type: "rgb", w: CW, h: CH, data: rgbGrid(img, CW, CH) },
+        { name: "land", type: "rgb", w: CW, h: CH, data: rgbGrid(nlcd, CW, CH) },
+      ],
+    );
   },
 };
 

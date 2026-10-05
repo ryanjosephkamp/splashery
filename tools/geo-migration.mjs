@@ -21,7 +21,8 @@ const MAX_BIRDS = 30;
 
 const zip = path.join(CACHE, "storks.zip");
 await cached("storks.zip", "https://datarepository.movebank.org/server/api/core/bitstreams/ef95f900-1cde-417e-be8a-c6e64e576bea/content"); // prettier-ignore
-const csvName = "Fall migrations of juvenile vs. adult white storks (data from Rotics et al. 2016)-gps.csv";
+const csvName =
+  "Fall migrations of juvenile vs. adult white storks (data from Rotics et al. 2016)-gps.csv";
 const csv = path.join(CACHE, csvName);
 if (!fs.existsSync(csv)) execFileSync("unzip", ["-o", "-q", zip, "-d", CACHE]);
 
@@ -66,17 +67,25 @@ console.log(`fall ${year}: ${birds.length} birds of ${birds0.length}, ${new Date
 // Per bird: fixes as [hours since t0, lon, lat] with two decimals.
 const out = birds.map((b) => ({
   id: b.id,
-  pts: b.pts.map(([t, lon, lat]) => [Math.round((t - t0) / 3600), +lon.toFixed(2), +lat.toFixed(2)]),
+  pts: b.pts.map(([t, lon, lat]) => [
+    Math.round((t - t0) / 3600),
+    +lon.toFixed(2),
+    +lat.toFixed(2),
+  ]),
 }));
 const etopo = "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/ETOPO1_bedrock/ImageServer/exportImage?" + new URLSearchParams({ bbox: MAP.join(","), bboxSR: "4326", imageSR: "4326", size: "420,510", format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation", f: "image" }); // prettier-ignore
 const z = fillNoData(readTiff(await cached("stork-etopo1-b.tif", etopo)));
-writeGeo("assets/toys/stork-migration/migration.bin", {
-  study: "Fall migrations of juvenile vs. adult white storks (Rotics et al. 2016)",
-  doi: "10.5441/001/1.hn1bd23k",
-  map: MAP,
-  span: spanMeters(MAP),
-  start: new Date(t0 * 1000).toISOString(),
-  hours: Math.round((t1 - t0) / 3600),
-  birds: out,
-  fetched: new Date().toISOString().slice(0, 10),
-}, [{ name: "height", type: "height", w: 210, h: 255, data: resample(z, 210, 255) }]);
+writeGeo(
+  "assets/toys/stork-migration/migration.bin",
+  {
+    study: "Fall migrations of juvenile vs. adult white storks (Rotics et al. 2016)",
+    doi: "10.5441/001/1.hn1bd23k",
+    map: MAP,
+    span: spanMeters(MAP),
+    start: new Date(t0 * 1000).toISOString(),
+    hours: Math.round((t1 - t0) / 3600),
+    birds: out,
+    fetched: new Date().toISOString().slice(0, 10),
+  },
+  [{ name: "height", type: "height", w: 210, h: 255, data: resample(z, 210, 255) }],
+);
