@@ -221,3 +221,19 @@ sample.
 **BY-SA:** I was not waiting on an approval. CC BY-SA is allowed per asset (the notice beside it,
 BY-SA kept), and I'd use Babelsberg. The blocker is training: a real GPU is needed (the owner's
 Mac), so no Babelsberg sample exists yet.
+
+## r2: the photo spiral (October 5, 2026)
+
+The owner marked `smd-photo-spiral-original` "fix": "Looks good, but appears broken." What looked
+broken: turn the 3D spiral and the glass pane on the left (a near part) pulled away from the stairs
+behind it and left a wide white band, with the torn pieces of the stairs' edge beside it. The cause
+is Photo to 3D itself, not this sample: the relief has nothing behind a near part, and the depth
+model puts the pane far in front of the stairs.
+
+Fix (branch `claude/lane-studio-media-r2`, `src/packs/photo-3d.js`, `backingOf()`): a backing layer
+of about 3.5% of the splat budget, a coarse grid of splats, each at the deepest depth of the splats
+within about a fifth of the picture and in their color, a little behind them, kept inside the
+picture so the edges stay crisp. Face-on they are hidden; turned, they fill the gap with the far
+side's color. It helps every Photo to 3D sample (the main splats now take 95% of the budget, not
+98%). The depth modules in `photo-3d-core.js` are untouched (lane Pages r6 imports them). Test:
+`tests/smd-photo.spec.mjs` (4). A thin strip can still show at an extreme turn (about 60 degrees).
