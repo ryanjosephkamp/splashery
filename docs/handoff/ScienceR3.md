@@ -118,9 +118,9 @@ choices in a toy's select options", needed by the structure picker; merge it fir
      (new toy): apoferritin, a ribosome with an antibiotic, an AAV2 capsid (EMDB, with the fitted
      PDB models); the isosurface at EMDB's recommended level; the tap cuts it open.
   3. **Galaxies**: m12i at z = 2 and the dwarf m11h; a telescope view (simulated).
-- Clips: six cards posted on page 2 (lane record `ScienceR3`: molecules, minerals, DNA, three
-  cryo-EM maps); the microscope sets, galaxies, telescope, terrain, contour lab, the model view and
-  the pores zoom are rendering and go up next.
+- Clips: all 15 cards are on Effect review page 2 (lane record `ScienceR3`, five groups: structures,
+  cryo-EM, microscope, galaxy, terrain), each built by Opus 5.5, waiting for the owner's marks.
+  Screenshots `tests/screenshots/sci3-*-390x844.png` and `…-1440x900.png`.
 
 ## Proposals: more "in a box" (item 4)
 
