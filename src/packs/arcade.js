@@ -233,7 +233,7 @@ export const RECIPES = {
         pad: "Stick or D-pad to steer; A launches.",
         short: "← → steer · Space launch · V for 3D",
       },
-      slots: { high: 80000, mid: 60000, low: 36000 }, // crisp bricks
+      slots: { high: 100000, mid: 80000, low: 50000 }, // crisp bricks
       create: async (api) => (await import("./arcade-shardball.js")).createShardball(api),
     },
   },
@@ -411,6 +411,7 @@ export const RECIPES = {
         pad: "Stick or D-pad to steer; A launches.",
         short: "← → steer · Space launch · V for 3D",
       },
+      slots: { high: 200000, mid: 140000, low: 70000 }, // a sharp page
       create: async (api) => (await import("./arcade-pages.js")).createPageBreaker(api),
     },
   },

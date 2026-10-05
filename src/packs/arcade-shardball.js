@@ -77,8 +77,8 @@ export class Shardball {
     const { kitModel, recolor } = this.api;
     const prof = this.api.profile;
     // Crisp grids (src/packs/arcade-crisp.js): straight brick edges.
-    const fine = prof === "low" ? 0.006 : 0.004;
-    const opt = { fine, coarse: fine * 4 };
+    const fine = prof === "low" ? 0.008 : 0.005;
+    const opt = { fine, coarse: fine * 5 };
     // A brick of each kind and row; the dome builds its rows' bricks at their
     // size there (mx, my times the board's) and only ever scales them down,
     // so their splats never spread apart.
@@ -163,8 +163,10 @@ export class Shardball {
       crispModel(
         (c) =>
           c.box(len, 0.04, 0.12, {
+            faces: "xXyYZ",
             color: (p, n) => {
-              const grain = 0.88 + 0.12 * Math.sin(p[0] * 90 + Math.sin(p[0] * 13) * 2);
+              // (a grain long against the rail's cells, so it never aliases)
+              const grain = 0.9 + 0.1 * Math.sin(p[0] * 24 + Math.sin(p[0] * 7) * 2);
               const f = (0.85 + 0.15 * n[1] + 0.06 * n[2]) * grain;
               return [0.42 * f, 0.28 * f, 0.18 * f];
             },
@@ -193,9 +195,14 @@ export class Shardball {
       },
       { count: 900 },
     );
-    const { W, H } = this.geo;
-    const rails = { side: rail(H + 0.08), top: rail(W + 0.08) };
-    return { brick, paddle, dish, ball, shadow, rails, floor };
+    // (rails are built when the board's size is known: see reset)
+    const rails = new Map();
+    const railOf = (len) => {
+      const key = len.toFixed(3);
+      if (!rails.has(key)) rails.set(key, rail(len));
+      return rails.get(key);
+    };
+    return { brick, paddle, dish, ball, shadow, railOf, floor };
   }
 
   // ---- Game ----------------------------------------------------------------------
@@ -217,7 +224,7 @@ export class Shardball {
         { pos: [W / 2 + 0.02, 0, 0], quat: this.q.qaxis([0, 0, 1], Math.PI / 2), len: H + 0.08 },
         { pos: [0, TOP + 0.02, 0], quat: [0, 0, 0, 1], len: W + 0.08 },
       ]) {
-        r.sprite = s.add(r.len === W + 0.08 ? this.models.rails.top : this.models.rails.side, { pos: r.pos, quat: r.quat }); // prettier-ignore
+        r.sprite = s.add(this.models.railOf(r.len), { pos: r.pos, quat: r.quat });
         this.rails.push(r);
       }
     }

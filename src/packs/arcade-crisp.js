@@ -23,7 +23,8 @@
 import { makeModel, qfromto, qmul, qaxis } from "../arcade/layer.js";
 
 const K = 0.6; // a splat's size against its grid cell: a solid fill, no seams
-const THIN = 0.12; // its thickness against its cell
+const THIN = 0.12; // its thickness against its cell (or the fine step, if smaller):
+// a face seen edge-on then draws as a hairline, not a soft band
 
 const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -130,10 +131,20 @@ export class Crisp {
     const corner = sub(c, add(mul(u, w / 2), mul(v, h / 2)));
     const cu = cuts(w, fine, coarse);
     const cv = cuts(h, fine, coarse);
+    // A fine row's splats would run a whole coarse cell long, and their
+    // tapered ends would scallop the edge: they are cut to 2.5 fine steps.
+    const most = fine * 2.5;
     for (const [y, sy] of cv)
       for (const [x, sx] of cu) {
-        const p = add(corner, add(mul(u, x), mul(v, y)));
-        this.splat(p, color(p, n), sx * K, sy * K, Math.min(sx, sy) * THIN, rot);
+        const kx = sy <= fine * 1.01 && sx > most ? Math.ceil(sx / most) : 1;
+        const ky = sx <= fine * 1.01 && sy > most ? Math.ceil(sy / most) : 1;
+        const ex = sx / kx;
+        const ey = sy / ky;
+        for (let j = 0; j < ky; j++)
+          for (let i = 0; i < kx; i++) {
+            const p = add(corner, add(mul(u, x - sx / 2 + (i + 0.5) * ex), mul(v, y - sy / 2 + (j + 0.5) * ey))); // prettier-ignore
+            this.splat(p, color(p, n), ex * K, ey * K, Math.min(ex, ey, fine) * THIN, rot);
+          }
       }
   }
 
@@ -227,7 +238,7 @@ export class Crisp {
         const p = add(c, mul(dir, rad));
         const tan = m === 1 ? e1 : add(mul(e1, -Math.sin(a)), mul(e2, Math.cos(a)));
         const sz = m === 1 ? dr : da;
-        this.splat(p, color(p, n), sz * K, dr * K, Math.min(sz, dr) * THIN, frame(tan, n));
+        this.splat(p, color(p, n), sz * K, dr * K, Math.min(sz, dr, fine) * THIN, frame(tan, n));
       }
     }
   }
@@ -251,7 +262,7 @@ export class Crisp {
       const rot = frame(ax, nn);
       for (const [x, cl] of cuts(l, fine, coarse)) {
         const p = add(c, add(mul(nn, r), mul(ax, x - l / 2)));
-        this.splat(p, color(p, nn), cl * K, ca * K, Math.min(ca, cl) * THIN, rot);
+        this.splat(p, color(p, nn), cl * K, ca * K, Math.min(ca, cl, fine) * THIN, rot);
       }
     }
     if (o.caps === false) return;

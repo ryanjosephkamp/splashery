@@ -9,6 +9,7 @@
 // Files stay on this device: the page is read and drawn in the browser.
 
 import { Shardball } from "./arcade-shardball.js";
+import { crispModel } from "./arcade-crisp.js";
 
 // The file someone opened (kept in the module, never in the scene).
 export const PAGES = { file: null, name: "" };
@@ -59,7 +60,9 @@ class PageBreaker extends Shardball {
     if (this.pagesReady.has(i)) return this.pagesReady.get(i);
     const job = (async () => {
       const m = this.media;
-      const pw = this.api.profile === "low" ? 420 : 640;
+      // (sharper since the owner's marks of October 5, 2026: a finer page
+      // and a bigger share of splats for its words)
+      const pw = this.api.profile === "low" ? 560 : 960;
       const asp = m.aspect(i) || 0.77;
       const wpx = pw;
       const hpx = Math.round(pw / asp);
@@ -85,7 +88,7 @@ class PageBreaker extends Shardball {
       const all = [...boxes.map((b) => ({ box: b, word: true })), ...tiles.map((b) => ({ box: b, word: false }))]; // prettier-ignore
       // Share the layer: what is left after the board's own parts, split
       // by each brick's area.
-      const room = Math.max(3000, (this.api.sprites.capacity - 15000) / 2); // two layers a brick
+      const room = Math.max(3000, this.api.sprites.capacity - 25000);
       const area = all.reduce((a, b) => a + (b.box[2] - b.box[0]) * (b.box[3] - b.box[1]), 0) || 1;
       const density = Math.min(1, room / (area * wpx * hpx)); // splats per pixel
       const bricks = all.map((b) => this.brickFrom(px, wpx, hpx, b, density));
@@ -97,8 +100,9 @@ class PageBreaker extends Shardball {
     return job;
   }
 
-  // A brick: the page's pixels in its box as splats (a front and a back
-  // layer of paper, so it has some body in 3D), centered on its middle.
+  // A brick: the page's pixels in its box as splats, one thin layer of
+  // paper (all its splats go to the words' sharpness), centered on its
+  // middle.
   brickFrom(px, w, h, { box, word }, density) {
     const { makeModel } = this.api;
     const x0 = Math.floor(box[0] * w);
@@ -111,11 +115,11 @@ class PageBreaker extends Shardball {
     const step = Math.max(1, Math.sqrt(1 / Math.max(1e-6, density)) * 0.9);
     const nx = Math.max(2, Math.round(bw / step));
     const ny = Math.max(2, Math.round(bh / step));
-    const n = Math.min(900, nx * ny);
+    const n = Math.min(4000, nx * ny);
     const sx = (this.pageBox.w * bw) / w;
     const sy = (this.pageBox.h * bh) / h;
     const depth = 0.03;
-    const m = makeModel(n * 2);
+    const m = makeModel(n);
     const sz = Math.max(sx / nx, sy / ny) * 0.62;
     let k = 0;
     for (let j = 0; j < ny && k < n; j++)
@@ -126,18 +130,13 @@ class PageBreaker extends Shardball {
         const pyy = Math.min(h - 1, Math.floor(y0 + v * bh));
         const o = (pyy * w + pxx) * 4;
         const c = [px[o] / 255, px[o + 1] / 255, px[o + 2] / 255];
-        const pos = [(u - 0.5) * sx, (0.5 - v) * sy, depth / 2];
-        for (const back of [0, 1]) {
-          const q = k * 2 + back;
-          m.pos.set(back ? [pos[0], pos[1], -depth / 2] : pos, q * 3);
-          const f = back ? 0.82 : 1;
-          m.color.set([c[0] * f, c[1] * f, c[2] * f, 1], q * 4);
-          m.scale.set([sz, sz, sz * 0.12], q * 3);
-          m.rot.set([0, 0, 0, 1], q * 4);
-        }
+        m.pos.set([(u - 0.5) * sx, (0.5 - v) * sy, 0], k * 3);
+        m.color.set([c[0], c[1], c[2], 1], k * 4);
+        m.scale.set([sz, sz, sz * 0.12], k * 3);
+        m.rot.set([0, 0, 0, 1], k * 4);
         k++;
       }
-    m.n = k * 2;
+    m.n = k;
     const cx = -this.pageBox.w / 2 + (this.pageBox.w * (box[0] + box[2])) / 2;
     const cy = this.pageBox.top - (this.pageBox.h * (box[1] + box[3])) / 2;
     return { model: m, x: cx, y: cy, w: sx, h: sy, d: depth, word };
@@ -146,26 +145,12 @@ class PageBreaker extends Shardball {
   // The bare paper behind the bricks (the page's own paper color, a little
   // shaded), so a broken word leaves a blank spot.
   paperModel(px, w, h) {
-    const { makeModel } = this.api;
-    // The paper color: the page's most common light color.
-    const n = this.api.profile === "low" ? 1600 : 3200;
-    const asp = this.pageBox.w / this.pageBox.h;
-    const ny = Math.round(Math.sqrt(n / asp));
-    const nx = Math.round(n / ny);
-    const m = makeModel(nx * ny);
-    const paper = paperColor(px);
-    const sz = (this.pageBox.w / nx) * 0.7;
-    let k = 0;
-    for (let j = 0; j < ny; j++)
-      for (let i = 0; i < nx; i++) {
-        m.pos.set([(-0.5 + (i + 0.5) / nx) * this.pageBox.w, this.pageBox.top - ((j + 0.5) / ny) * this.pageBox.h, PAPER_Z], k * 3); // prettier-ignore
-        const f = 0.8;
-        m.color.set([paper[0] * f, paper[1] * f, paper[2] * f, 1], k * 4);
-        m.scale.set([sz, sz, sz * 0.1], k * 3);
-        m.rot.set([0, 0, 0, 1], k * 4);
-        k++;
-      }
-    return m;
+    // The paper color: the page's most common light color, a shade darker
+    // than the words' own paper so a broken word leaves a faint blank spot.
+    const paper = paperColor(px).map((v) => v * 0.95);
+    const { w: pw, h: ph, top } = this.pageBox;
+    const fine = this.api.profile === "low" ? 0.006 : 0.004;
+    return crispModel((c) => c.rect(pw, ph, { pos: [0, top - ph / 2, PAPER_Z], color: paper }), { fine, coarse: 0.03 }); // prettier-ignore
   }
 
   buildLevel() {
