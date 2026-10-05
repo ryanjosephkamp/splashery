@@ -1,0 +1,22 @@
+{
+  "baseline": "19f8d720b77df087f1aba2e807fc3a490725a936",
+  "toy": "grapes",
+  "source": "src/packs/food.js",
+  "browser": "154.0.8037.95",
+  "renderer": "WebGL2 / ANGLE Metal",
+  "fps": 8,
+  "frames": 40,
+  "size": [420, 420],
+  "tapFrame": 4,
+  "simulationStepSeconds": 0.125,
+  "splats": 200012,
+  "sampledPoints": 2382,
+  "stride": 84,
+  "camera": {
+    "yaw": 0.45,
+    "pitch": 0.25,
+    "roll": 0,
+    "distance": 2.8862162113189695
+  },
+  "pageErrors": []
+}
