@@ -104,12 +104,127 @@ additive.
 
 ## State
 
-WORKING (October 5, 2026): started. Building the shell and the generator (`tools/site-build.mjs`),
-then the home page, search, the service worker and the finishing pass, all under `site/`.
+READY for review (October 5, 2026), PR #266. Model: Opus 5.5. No engine PR: nothing in the app or
+the gallery changed.
+
+Done, all under `site/` (https://ryanjosephkamp.github.io/splashery/site/ once merged, linked from
+nowhere public, `noindex` while it is a preview):
+
+- **The shell**: one header, menu (Home, Toys, Tools, Science, Studio, Learn, What's new, About),
+  search box, theme button (Auto, Light, Dark) and footer on every page; phone first (the menu folds
+  behind a Menu button under 1000 px), the gallery's fonts and colors, light and dark.
+- **The pages**: Home, Toys (every shelf, thumbnails, each toy opens in the gallery), Tools,
+  Science, Studio, Learn, What's new (from the merged PRs in the git history, minus "Ops:"), About
+  (what it is, privacy, the terms of use from the gallery's About tab, the captured toys' credits),
+  Search and a 404 page. The hubs are first drafts for the Site pages lane (W4 to W8) to grow.
+- **The home page**: the name, a live strawberry (the embed player), two sentences on why splats and
+  recipes, and doors to Toys (the gallery), Tools, Science, Studio, Worlds (labs only) and Learn.
+- **Search**: `site/search-index.json` (every toy, tool and page; 180 KB, 32 KB gzipped, loaded only
+  when someone searches), searched on the device like the gallery's own search (every word must
+  match; names first). Toy results open the toy in the gallery; labs toys show only with the labs
+  switch on (the same `splashery.labs` switch as the gallery).
+- **Install and offline**: `site/manifest.webmanifest` (scope `./`) and `site/sw.js`, whose scope is
+  `site/` only. The shell is cached on install; pages and code come from the network first; pictures
+  and splat files from the cache first. On the first visit the page tells the worker which files it
+  already loaded, so the home page's toy works offline from the second visit on. A page under
+  `site/` that isn't there gets `site/404.html` (status 404), online or offline.
+- **The finishing pass**: `site/sitemap.xml`, the 404 page, link previews (title, description, a
+  1200×630 picture, `site/assets/og.png`, rendered by `tools/site-og.mjs`), skip link, labels, 44 px
+  targets, AA contrast in both themes, reduced motion respected (the toy holds still).
+- **Measured** (local server, headless Chromium): the home page's shell is 26 KB and first paint is
+  about 110 ms; with the live toy the page transfers 8.9 MB (the engine and the strawberry's lighter
+  or full splat file).
 
 ## Notes
 
+### How the site is built
+
+- `node tools/site-build.mjs` writes everything under `site/` except `site/assets/` (hand-written:
+  `site.css`, `site.js`, `search.js`, `offline.js`, `play.js`; `og.png` from
+  `node tools/site-og.mjs`, which needs the local server). Commit what it writes. Never edit a
+  generated file by hand; on a merge conflict in `site/`, take either side and rebuild.
+- `node tools/site-build.mjs --check` lists files that are out of date. `site/new/index.html` and
+  `site/sw.js` change whenever main gains a merged PR (What's new reads the git history), so rebuild
+  after merging main; the test allows those two to lag.
+- The menu, the pages and their words are in `tools/site-pages.mjs`; every link there is written
+  relative to `site/`, and the build adds the way back up for each page's depth.
+- `site/play/` is the embed player (`embed/index.html`, rebuilt one folder deeper). The home page
+  embeds the toy from there, inside the worker's scope, so the worker sees every file the toy loads.
+  Later toy pages should embed toys the same way (`play/?toy=<id>`, any embed option).
+- Toy links to the gallery are `../#s=j.<base64url of a version 3 scene>` with the toy's camera (and
+  the turntable off for a toy that holds still): no gallery change was needed.
+
+### How to add a page type
+
+1. In `tools/site-build.mjs`, add a function to `PAGE_TYPES`: `(page, { up }) => html` returns what
+   goes inside `<main>`; `up` is the prefix back to `site/` (`""`, `"../"`, …). Reuse `intro(page)`,
+   `shelfSections(ids, up)`, `toyCard(t, up)` and `galleryHref(t)`.
+2. In `tools/site-pages.mjs`, add pages with `type: "<your key>"`, a `path` ending in `/`, a `nav`
+   (the menu item it lights up, or `null`), a `title`, a `description` and the type's own fields.
+   Many pages of one type (a page per toy) can be pushed onto `PAGES` in a loop there.
+3. If it should be found, add its words in `searchEntries()`. Sitemap, service worker precache and
+   link previews pick new pages up by themselves.
+4. Run the build, and add the page's checks to a `tests/site*.spec.mjs` file; "every page loads" and
+   "the links lead somewhere" in `tests/site.spec.mjs` already cover every entry in `PAGES`.
+
+### At the swap (when the owner makes the site the front door)
+
+- **Where the pages go**: either move `site/*` to the root (the gallery moves to, say, `play/` or
+  `toys/`), or keep the gallery at the root and make only the home page new. Either way `#s=` links
+  must keep opening in the gallery: the root page has to send any URL with `#s=` (and the old query
+  options) to the gallery before it paints, so old shared links keep working.
+- **The service worker**: one worker at the root (`/splashery/sw.js`, scope `/splashery/`) replaces
+  the site's. It must then also cover the gallery and the app: network first for `index.html`,
+  `src/` and `vendor/` code (never mix old and new modules), cache first for `assets/toys/`, and a
+  version bump on every deploy. The site's worker at `site/sw.js` must be removed with an
+  unregistering worker left in its place for one release, so old visitors don't keep a stale shell.
+  The root `manifest.webmanifest` already exists and would gain `id`.
+- **Offline for every toy**: a toy works offline once played; an "Offline" switch could fetch the
+  whole shelf (about 500 MB for every toy's files today, about 140 MB of the scans are their light
+  copies), so it should be opt-in and say the size.
+- **A root 404** (proposed, not added): `404.html` at the root with the site's shell, which also
+  sends `…/#s=` links and old toy addresses to the gallery, and suggests a search for the path's
+  words. GitHub Pages serves it for every missing path.
+- Set `preview: false` in `tools/site-pages.mjs` (drops `noindex`), and add a `robots.txt` at the
+  root pointing at the sitemap.
+
+### Native apps later (macOS, iOS, Android)
+
+Splashery is static pages, so every route wraps the same files; the choice is about stores and
+device features (saving files, the camera, offline).
+
+- **Installed web app (now)**: free; Chrome, Edge and Android install it from the browser; Safari on
+  macOS ("Add to Dock") and iOS ("Add to Home Screen") too. Works offline with the service worker.
+  No store, no review, updates with the site. iOS limits storage for web apps and may clear it after
+  weeks unused.
+- **Android store (TWA)**: wraps the installed web app for Google Play (Bubblewrap or PWABuilder).
+  About a day's work, a one-time $25 developer fee, and a Digital Asset Links file on the site. The
+  app is the site, so it updates with it.
+- **Capacitor (iOS and Android)**: the files ship inside a native shell with plugins for files,
+  sharing and the camera; truly offline from install. A few days to set up, then a store release for
+  each update; Apple's developer program is $99 a year, and App Review wants it to feel like an app,
+  not a website.
+- **macOS desktop**: Tauri (small, uses the system's WebKit; WebGPU support depends on the Safari
+  version) or Electron (bundles Chromium, about 150 MB, the same engine as Chrome). Signing and
+  notarizing need the Apple developer account. Tauri also builds for Windows and Linux.
+- Suggested order: installed web app (done with the swap), then a TWA for Android, then Capacitor
+  for iOS if the owner wants the App Store.
+
 ## Known issues
+
+- Toy results and cards open the toy in the gallery (the toy pages come with W3).
+- The hubs' words are first drafts; the Site pages lane owns them next.
+- What's new lists PR titles as they were written (some older ones are lane jargon); W7 can add a
+  curated summary per release.
+- The service worker only controls `site/`, so the gallery itself is not yet offline (by design
+  during the preview).
 
 ## For the Operator
 
+- No engine PR, no shared lists touched. Files: `site/`, `tools/site-build.mjs`,
+  `tools/site-pages.mjs`, `tools/site-og.mjs`, `tools/site-sw.template.js`, `tests/site.spec.mjs`,
+  screenshots `tests/screenshots/site-*.png`.
+- README line (for the Operator): "`site/`: the preview site (home page, one menu, search, offline),
+  built by `node tools/site-build.mjs`; see docs/handoff/Site.md."
+- After each merge to main that adds PRs, What's new is stale until someone runs the build; the
+  upkeep (`tools/upkeep.mjs`) could run `node tools/site-build.mjs` too.

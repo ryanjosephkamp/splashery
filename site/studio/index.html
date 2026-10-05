@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en" data-root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Studio · Splashery</title>
+    <meta
+      name="description"
+      content="Turn your own photos, pages, songs and files into splats on Splashery."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/studio/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Studio · Splashery" />
+    <meta
+      property="og:description"
+      content="Turn your own photos, pages, songs and files into splats on Splashery."
+    />
+    <meta property="og:url" content="https://ryanjosephkamp.github.io/splashery/site/studio/" />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../assets/site.css" />
+    <script type="module" src="../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../">Home</a></li>
+              <li><a href="../toys/">Toys</a></li>
+              <li><a href="../tools/">Tools</a></li>
+              <li><a href="../science/">Science</a></li>
+              <li><a href="../studio/" aria-current="page">Studio</a></li>
+              <li><a href="../learn/">Learn</a></li>
+              <li><a href="../new/">What's new</a></li>
+              <li><a href="../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-intro">
+        <h1>Studio</h1>
+        <p class="lead">
+          Bring your own: photos, pages, songs and splat files, turned into toys on your device.
+          Nothing is uploaded.
+        </p>
+        <p><a class="button primary" href="../../">Open the gallery</a></p>
+      </div>
+
+      <section class="shelf" id="shelf-studio" data-labs aria-labelledby="h-shelf-studio">
+        <h2 id="h-shelf-studio">Studio <span class="count">labs</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/song-landscape/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Song landscape <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNobGFkbmktcGxhdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/chladni-plate/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Chladni plate <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvb20tZWNobyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0"
+              ><img
+                src="../../assets/toys/room-echo/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Room echo meter <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LW1pcnJvciJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+              ><img
+                src="../../assets/toys/splat-mirror/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Splat mirror <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+              ><img
+                src="../../assets/toys/model-splats/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Model to splats <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+              ><img
+                src="../../assets/toys/qr-code/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">QR code <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+              ><img
+                src="../../assets/toys/photo-3d/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Photo to 3D <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+              ><img
+                src="../../assets/toys/moving-photo-3d/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Moving photo to 3D <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+              ><img
+                src="../../assets/toys/video-3d/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Video to 3D <span class="badge">labs</span></span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-pictures" data-labs aria-labelledby="h-shelf-pictures">
+        <h2 id="h-shelf-pictures">Pictures and pages <span class="count">labs</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+              ><img
+                src="../../assets/toys/picture-lab/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Picture lab <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+              ><img
+                src="../../assets/toys/your-book/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Your book <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+              ><img
+                src="../../assets/toys/photo-album/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Photo album <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtZnJhbWUifSwiY2FtZXJhIjp7InlhdyI6MC4xLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19"
+              ><img
+                src="../../assets/toys/picture-frame/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Picture frame <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+              ><img
+                src="../../assets/toys/screen/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Screen <span class="badge">labs</span></span></a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../toys/">Toys</a></li>
+          <li><a href="../tools/">Tools</a></li>
+          <li><a href="../science/">Science</a></li>
+          <li><a href="../studio/">Studio</a></li>
+          <li><a href="../learn/">Learn</a></li>
+          <li><a href="../new/">What's new</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="../search/">Search</a></li>
+        </ul>
+      </nav>
+      <p>
+        Splashery is free and runs in your browser; files you open stay on your device.
+        <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a> (MIT) ·
+        <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a> ·
+        Built on the PlayCanvas engine.
+      </p>
+      <p class="preview-note">
+        A preview of Splashery's new site. The toys live in <a href="../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

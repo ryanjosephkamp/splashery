@@ -1,0 +1,3574 @@
+[
+  {
+    "t": "Cactus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhY3R1cyJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to open a ring of flowers around its top.",
+    "w": "cactus photoreal photoreal plant succulent pot captured photo real cactus",
+    "i": "../assets/toys/cactus/thumb.webp"
+  },
+  {
+    "t": "Strawberry",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0cmF3YmVycnkifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjUuNn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to pop out its seeds.",
+    "w": "strawberry photoreal photoreal fruit food berry captured photo real strawberry",
+    "i": "../assets/toys/strawberry/thumb.webp"
+  },
+  {
+    "t": "Heart cookie",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvb2tpZSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make the jam heart beat.",
+    "w": "heart cookie photoreal photoreal food biscuit heart sweet captured photo real cookie",
+    "i": "../assets/toys/cookie/thumb.webp"
+  },
+  {
+    "t": "Honeybee",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJlZSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it buzz its wings and lift off.",
+    "w": "honeybee photoreal photoreal insect animal bug honeybee captured photo real bee",
+    "i": "../assets/toys/bee/thumb.webp"
+  },
+  {
+    "t": "Torus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvcnVzIn0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuNjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "k": "toy",
+    "s": "Shapes",
+    "d": "Tap it to spin it on its edge. Dress it as a donut, bagel or swim ring in the Toy tab.",
+    "w": "torus shapes shapes ring donut doughnut bagel swim ring float geometry math shape torus",
+    "i": "../assets/toys/torus/thumb.webp"
+  },
+  {
+    "t": "Jelly blob",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsb2IifX0",
+    "k": "toy",
+    "s": "Shapes",
+    "d": "Tap it to split it into three. Make a shape of your own in the Make tab.",
+    "w": "jelly blob shapes shapes jelly noise candy generated blob",
+    "i": "../assets/toys/blob/thumb.webp"
+  },
+  {
+    "t": "Neon knot",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imtub3QifX0",
+    "k": "toy",
+    "s": "Shapes",
+    "d": "Tap it to make it twist and writhe.",
+    "w": "neon knot shapes shapes trefoil neon maths generated knot",
+    "i": "../assets/toys/knot/thumb.webp"
+  },
+  {
+    "t": "Cluster fly",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsdXN0ZXItZmx5In19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it groom its legs and face.",
+    "w": "cluster fly photoreal photoreal photoreal scan captured insect bug animal macro cluster-fly",
+    "i": "../assets/toys/cluster-fly/thumb.webp"
+  },
+  {
+    "t": "May beetle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1heS1iZWV0bGUifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to lift its wing cases and fan its antennae.",
+    "w": "may beetle photoreal photoreal photoreal scan captured insect bug animal cockchafer may-beetle",
+    "i": "../assets/toys/may-beetle/thumb.webp"
+  },
+  {
+    "t": "Millipede",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pbGxpcGVkZSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to send a wave down its legs.",
+    "w": "millipede photoreal photoreal photoreal scan captured insect bug animal legs millipede",
+    "i": "../assets/toys/millipede/thumb.webp"
+  },
+  {
+    "t": "Carder bumblebee",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1bWJsZWJlZSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hover.",
+    "w": "carder bumblebee photoreal photoreal photoreal scan captured insect bee animal macro bumblebee",
+    "i": "../assets/toys/bumblebee/thumb.webp"
+  },
+  {
+    "t": "Raspberry",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJhc3BiZXJyeSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to drop its drupelets and put them back.",
+    "w": "raspberry photoreal photoreal photoreal scan captured fruit food berry raspberry",
+    "i": "../assets/toys/raspberry/thumb.webp"
+  },
+  {
+    "t": "Blackberry",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsYWNrYmVycnkifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to burst off its drupelets.",
+    "w": "blackberry photoreal photoreal photoreal scan captured fruit food berry blackberry",
+    "i": "../assets/toys/blackberry/thumb.webp"
+  },
+  {
+    "t": "Blueberry",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsdWViZXJyeSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to peel back its skin.",
+    "w": "blueberry photoreal photoreal photoreal scan captured fruit food berry blueberry",
+    "i": "../assets/toys/blueberry/thumb.webp"
+  },
+  {
+    "t": "Grape",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBlIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to peel back the skin.",
+    "w": "grape photoreal photoreal photoreal scan captured fruit food grape",
+    "i": "../assets/toys/grape/thumb.webp"
+  },
+  {
+    "t": "Cinnamon star cookie",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItY29va2llIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to crumble it and put it back together.",
+    "w": "cinnamon star cookie photoreal photoreal photoreal scan captured food biscuit christmas sweet star-cookie",
+    "i": "../assets/toys/star-cookie/thumb.webp"
+  },
+  {
+    "t": "Tomatoes",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvbWF0b2VzIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make the tomatoes hop and rock. With ✋ on, drag a tomato to lift it and set it down.",
+    "w": "tomatoes photoreal photoreal photoreal scan captured vegetable food tomatoes",
+    "i": "../assets/toys/tomatoes/thumb.webp"
+  },
+  {
+    "t": "Mandeltorus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hbmRlbHRvcnVzIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to spin its rings opposite ways.",
+    "w": "mandeltorus photoreal photoreal photoreal scan captured maths fractal art mandeltorus",
+    "i": "../assets/toys/mandeltorus/thumb.webp"
+  },
+  {
+    "t": "Basket",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC43OCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to shake the shells.",
+    "w": "basket photoreal photoreal photoreal scan captured wicker woven basket",
+    "i": "../assets/toys/basket/thumb.webp"
+  },
+  {
+    "t": "Heart donut",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlYXJ0LWRvbnV0In19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "heart donut photoreal photoreal photoreal scan captured food pastry doughnut sweet dessert glaze heart-donut",
+    "i": "../assets/toys/heart-donut/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Sushi boat",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1c2hpLWJvYXQifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "sushi boat photoreal photoreal photoreal scan captured food sushi fish rice japanese wooden boat sushi-boat",
+    "i": "../assets/toys/sushi-boat/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Seeded bread loaf",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlZWRlZC1sb2FmIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "seeded bread loaf photoreal photoreal photoreal scan captured food bread bakery loaf seeds seeded-loaf",
+    "i": "../assets/toys/seeded-loaf/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cowboy steak",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0ZWFrIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "cowboy steak photoreal photoreal photoreal scan captured food steak meat grilled beef steak",
+    "i": "../assets/toys/steak/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Stollen",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b2xsZW4ifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "stollen photoreal photoreal photoreal scan captured food bread christmas german sweet fruit powdered sugar stollen",
+    "i": "../assets/toys/stollen/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Orange (photo)",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZS1waG90byJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "orange (photo) photoreal photoreal photoreal scan captured food fruit citrus orange peel real orange-photo",
+    "i": "../assets/toys/orange-photo/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Physalis",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBoeXNhbGlzIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "physalis photoreal photoreal photoreal scan captured plant fruit lantern husk cape gooseberry physalis",
+    "i": "../assets/toys/physalis/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Crystal",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeXN0YWwtZ2VtIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "crystal photoreal photoreal photoreal scan captured gem crystal quartz mineral clear shiny crystal-gem",
+    "i": "../assets/toys/crystal-gem/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Alum crystal",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFsdW0tY3J5c3RhbCJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "alum crystal photoreal photoreal photoreal scan captured gem crystal alum mineral pink salt deodorant alum-crystal",
+    "i": "../assets/toys/alum-crystal/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Puffin",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1ZmZpbiJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "puffin photoreal photoreal photoreal scan captured animal bird puffin seabird figurine puffin",
+    "i": "../assets/toys/puffin/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Toy T. rex",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRveS10cmV4In19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "toy t. rex photoreal photoreal photoreal scan captured toy dinosaur trex rubber figure toy-trex",
+    "i": "../assets/toys/toy-trex/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Monkey doll",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbmtleS1kb2xsIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "monkey doll photoreal photoreal photoreal scan captured toy plush monkey doll soft stuffed monkey-doll",
+    "i": "../assets/toys/monkey-doll/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Souvenir elephant",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZXBoYW50LXNvdXZlbmlyIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "souvenir elephant photoreal photoreal photoreal scan captured animal elephant souvenir statue figurine thai elephant-souvenir",
+    "i": "../assets/toys/elephant-souvenir/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Souvenir turtle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InR1cnRsZS1zb3V2ZW5pciJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "souvenir turtle photoreal photoreal photoreal scan captured animal turtle sea souvenir statue figurine turtle-souvenir",
+    "i": "../assets/toys/turtle-souvenir/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cave lioness",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhdmUtbGlvbmVzcyJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "cave lioness photoreal photoreal photoreal scan captured animal lion lioness cave museum cat cave-lioness",
+    "i": "../assets/toys/cave-lioness/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Dog plush",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRvZy1wbHVzaCJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "dog plush photoreal photoreal photoreal scan captured toy plush dog doll soft stuffed dog-plush",
+    "i": "../assets/toys/dog-plush/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "BMX bicycle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJteC1iaWtlIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "bmx bicycle photoreal photoreal photoreal scan captured vehicle bicycle bike bmx wheels bmx-bike",
+    "i": "../assets/toys/bmx-bike/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Murex shell",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11cmV4LXNoZWxsIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "murex shell photoreal photoreal photoreal scan captured shell nature sea snail spines venus comb murex-shell",
+    "i": "../assets/toys/murex-shell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Sunflower (photo)",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1bmZsb3dlci1waG90byJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "sunflower (photo) photoreal photoreal photoreal scan captured plant flower sunflower yellow seeds real sunflower-photo",
+    "i": "../assets/toys/sunflower-photo/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "White roses",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLXJvc2VzIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "white roses photoreal photoreal photoreal scan captured plant flower roses vase white bouquet white-roses",
+    "i": "../assets/toys/white-roses/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Bonsai tree (photo)",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvbnNhaS1waG90byJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "bonsai tree (photo) photoreal photoreal photoreal scan captured plant tree bonsai garden japanese real bonsai-photo",
+    "i": "../assets/toys/bonsai-photo/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Mushroom (photo)",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2hyb29tLXBob3RvIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "mushroom (photo) photoreal photoreal photoreal scan captured nature mushroom fungus forest floor real mushroom-photo",
+    "i": "../assets/toys/mushroom-photo/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cactus (photo 2)",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhY3R1cy1yZWFsIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "cactus (photo 2) photoreal photoreal photoreal scan captured plant cactus succulent spines real desert cactus-real",
+    "i": "../assets/toys/cactus-real/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Crochet Earth",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb2NoZXQtZWFydGgifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "crochet earth photoreal photoreal photoreal scan captured space earth planet crochet craft world globe crochet-earth",
+    "i": "../assets/toys/crochet-earth/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Desk globe",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRlc2stZ2xvYmUifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "desk globe photoreal photoreal photoreal scan captured space earth globe map geography school desk desk-globe",
+    "i": "../assets/toys/desk-globe/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cherry blossom (photo)",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXJyeS1ibG9zc29tLXBob3RvIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "cherry blossom (photo) photoreal photoreal photoreal scan captured nature tree cherry blossom spring flowers pink real cherry-blossom-photo",
+    "i": "../assets/toys/cherry-blossom-photo/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Golden maple",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcGxlLXRyZWUifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "golden maple photoreal photoreal photoreal scan captured nature tree maple autumn garden shrub real maple-tree",
+    "i": "../assets/toys/maple-tree/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Peonies in a vase",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlb255In19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "peonies in a vase photoreal photoreal photoreal scan captured plant flower peony vase pink bouquet peony",
+    "i": "../assets/toys/peony/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Money tree",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbmV5LXRyZWUifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "money tree photoreal photoreal photoreal scan captured plant houseplant pachira pot tree green money-tree",
+    "i": "../assets/toys/money-tree/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Knight on a horse",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtuaWdodC1ob3JzZSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop; drag to turn it.",
+    "w": "knight on a horse photoreal photoreal photoreal scan captured toy knight horse medieval figure miniature sword armor knight-horse",
+    "i": "../assets/toys/knight-horse/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Real rubber duck",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1YmJlci1kdWNrLXJlYWwifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to squeeze it.",
+    "w": "real rubber duck photoreal photoreal photoreal model bath toy yellow model rubber-duck-real",
+    "i": "../assets/toys/rubber-duck-real/thumb.webp"
+  },
+  {
+    "t": "Garden gnome",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhcmRlbi1nbm9tZSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it hop and light its lantern.",
+    "w": "garden gnome photoreal photoreal photoreal model garden hat beard statue garden-gnome",
+    "i": "../assets/toys/garden-gnome/thumb.webp"
+  },
+  {
+    "t": "Wooden elephant",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Indvb2Rlbi1lbGVwaGFudCJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to raise its trunk and trumpet.",
+    "w": "wooden elephant photoreal photoreal photoreal model carving animal wood wooden-elephant",
+    "i": "../assets/toys/wooden-elephant/thumb.webp"
+  },
+  {
+    "t": "Marble bust",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcmJsZS1idXN0In19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it turn and say hello in Latin.",
+    "w": "marble bust photoreal photoreal photoreal model sculpture statue head art marble-bust",
+    "i": "../assets/toys/marble-bust/thumb.webp"
+  },
+  {
+    "t": "Ukulele",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVrdWxlbGUifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to strum a chord.",
+    "w": "ukulele photoreal photoreal photoreal model music instrument guitar strings ukulele",
+    "i": "../assets/toys/ukulele/thumb.webp"
+  },
+  {
+    "t": "Real alarm clock",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFsYXJtLWNsb2NrIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to ring the bells.",
+    "w": "real alarm clock photoreal photoreal photoreal model time bell alarm-clock",
+    "i": "../assets/toys/alarm-clock/thumb.webp"
+  },
+  {
+    "t": "Vintage camera",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpbnRhZ2UtY2FtZXJhIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to take a photo with a flash.",
+    "w": "vintage camera photoreal photoreal photoreal model photo retro film vintage-camera",
+    "i": "../assets/toys/vintage-camera/thumb.webp"
+  },
+  {
+    "t": "Boombox",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvb21ib3gifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to play a beat.",
+    "w": "boombox photoreal photoreal photoreal model radio music stereo retro boombox",
+    "i": "../assets/toys/boombox/thumb.webp"
+  },
+  {
+    "t": "Real croissant",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb2lzc2FudC1yZWFsIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to tear it open.",
+    "w": "real croissant photoreal photoreal photoreal model food pastry bakery croissant-real",
+    "i": "../assets/toys/croissant-real/thumb.webp"
+  },
+  {
+    "t": "Carrot cake",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhcnJvdC1jYWtlIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to lift out a slice.",
+    "w": "carrot cake photoreal photoreal photoreal model food dessert cake slice carrot-cake",
+    "i": "../assets/toys/carrot-cake/thumb.webp"
+  },
+  {
+    "t": "Pomegranate",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvbWVncmFuYXRlIn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to split it open.",
+    "w": "pomegranate photoreal photoreal photoreal model food fruit pomegranate",
+    "i": "../assets/toys/pomegranate/thumb.webp"
+  },
+  {
+    "t": "Lantern",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhbnRlcm4ifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap to light the lantern; tap again to put it out.",
+    "w": "lantern photoreal photoreal photoreal model light lamp camping lantern",
+    "i": "../assets/toys/lantern/thumb.webp"
+  },
+  {
+    "t": "Cat statue",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhdC1zdGF0dWUifX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it look around and mew.",
+    "w": "cat statue photoreal photoreal photoreal model animal cat concrete statue cat-statue",
+    "i": "../assets/toys/cat-statue/thumb.webp"
+  },
+  {
+    "t": "Horse statue",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhvcnNlLXN0YXR1ZSJ9fQ",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it rear up.",
+    "w": "horse statue photoreal photoreal photoreal model animal horse sculpture horse-statue",
+    "i": "../assets/toys/horse-statue/thumb.webp"
+  },
+  {
+    "t": "Real pencil",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlbmNpbC1yZWFsIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to spin it on the desk. Pick its color under Look in the Toy tab.",
+    "w": "real pencil photoreal photoreal photoreal ai photo pencil yellow hb wood eraser school stationery pencil-real",
+    "i": "../assets/toys/pencil-real/thumb.webp"
+  },
+  {
+    "t": "Real tin can",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRpbi1jYW4tcmVhbCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to knock it into a spin. Pick its label under Look in the Toy tab.",
+    "w": "real tin can photoreal photoreal photoreal ai photo tin can peaches label fruit food metal kitchen tin-can-real",
+    "i": "../assets/toys/tin-can-real/thumb.webp"
+  },
+  {
+    "t": "Basketball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldGJhbGwifX0",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to dribble it. Hands-on: hold it and flick up to spin it on your fingertip.",
+    "w": "basketball balls balls sport ball hoops court orange basketball",
+    "i": "../assets/toys/basketball/thumb.webp"
+  },
+  {
+    "t": "Soccer ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvY2Nlci1iYWxsIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it for keepy-uppy: three kicks in the air, then it bounces to a stop.",
+    "w": "soccer ball balls balls sport ball football association pentagon hexagon soccer-ball",
+    "i": "../assets/toys/soccer-ball/thumb.webp"
+  },
+  {
+    "t": "American football",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFtZXJpY2FuLWZvb3RiYWxsIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjYyLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to throw a spiral pass.",
+    "w": "american football balls balls sport ball gridiron laces pigskin american-football",
+    "i": "../assets/toys/american-football/thumb.webp"
+  },
+  {
+    "t": "Tennis ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlbm5pcy1iYWxsIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to slam it down and watch it bounce high.",
+    "w": "tennis ball balls balls sport ball felt fuzzy yellow racket tennis-ball",
+    "i": "../assets/toys/tennis-ball/thumb.webp"
+  },
+  {
+    "t": "Baseball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to pitch a curveball and hit it back.",
+    "w": "baseball balls balls sport ball stitches bat diamond baseball",
+    "i": "../assets/toys/baseball/thumb.webp"
+  },
+  {
+    "t": "Softball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvZnRiYWxsIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to pitch it underhand in a slow, high arc.",
+    "w": "softball balls balls sport ball stitches yellow softball",
+    "i": "../assets/toys/softball/thumb.webp"
+  },
+  {
+    "t": "Beach ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJlYWNoLWJhbGwifX0",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to toss it up. Hands-on: toss it and it floats and drifts down.",
+    "w": "beach ball balls balls sport ball inflatable summer stripes beach-ball",
+    "i": "../assets/toys/beach-ball/thumb.webp"
+  },
+  {
+    "t": "Golf ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdvbGYtYmFsbCJ9fQ",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to chip it; the backspin pulls it back.",
+    "w": "golf ball balls balls sport ball dimples tee golf-ball",
+    "i": "../assets/toys/golf-ball/thumb.webp"
+  },
+  {
+    "t": "Rugby ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1Z2J5LWJhbGwifX0",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to punt it end over end.",
+    "w": "rugby ball balls balls sport ball oval try rugby-ball",
+    "i": "../assets/toys/rugby-ball/thumb.webp"
+  },
+  {
+    "t": "Volleyball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbGxleWJhbGwifX0",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to set it up and spike it down.",
+    "w": "volleyball balls balls sport ball net beach panels volleyball",
+    "i": "../assets/toys/volleyball/thumb.webp"
+  },
+  {
+    "t": "Water polo ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVyLXBvbG8tYmFsbCJ9fQ",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to toss it in. Hands-on: drop it on the water and it bobs and floats.",
+    "w": "water polo ball balls balls sport ball pool swim grip water-polo-ball",
+    "i": "../assets/toys/water-polo-ball/thumb.webp"
+  },
+  {
+    "t": "Ping-pong ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmctcG9uZy1iYWxsIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to flick it up and let it bounce to a buzz.",
+    "w": "ping-pong ball balls balls sport ball table tennis small ping-pong-ball",
+    "i": "../assets/toys/ping-pong-ball/thumb.webp"
+  },
+  {
+    "t": "Cricket ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyaWNrZXQtYmFsbCJ9fQ",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to flick it seam up; it skids with backspin, then rolls home.",
+    "w": "cricket ball balls balls sport ball leather seam red cricket-ball",
+    "i": "../assets/toys/cricket-ball/thumb.webp"
+  },
+  {
+    "t": "Bowling ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvd2xpbmctYmFsbCJ9fQ",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to bowl it down the lane with a hook.",
+    "w": "bowling ball balls balls sport ball pins lane holes bowling-ball",
+    "i": "../assets/toys/bowling-ball/thumb.webp"
+  },
+  {
+    "t": "Pool ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvb2wtYmFsbCJ9fQ",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it for a draw shot: it slides out and spins back. Pick its number in the Toy tab.",
+    "w": "pool ball balls balls sport ball billiards snooker cue eight number pool-ball",
+    "i": "../assets/toys/pool-ball/thumb.webp"
+  },
+  {
+    "t": "Pickleball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY2tsZWJhbGwifX0",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to pop it up off a paddle.",
+    "w": "pickleball balls balls sport ball paddle holes wiffle pickleball",
+    "i": "../assets/toys/pickleball/thumb.webp"
+  },
+  {
+    "t": "Dodgeball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRvZGdlYmFsbCJ9fQ",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to slam it down and watch it squash.",
+    "w": "dodgeball balls balls sport ball playground rubber dodgeball",
+    "i": "../assets/toys/dodgeball/thumb.webp"
+  },
+  {
+    "t": "Medicine ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lZGljaW5lLWJhbGwifX0",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to heave it up and drop it with a thud.",
+    "w": "medicine ball balls balls sport ball gym workout heavy medicine-ball",
+    "i": "../assets/toys/medicine-ball/thumb.webp"
+  },
+  {
+    "t": "Lacrosse ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhY3Jvc3NlLWJhbGwifX0",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to slam it down; it bounces hard and fast.",
+    "w": "lacrosse ball balls balls sport ball rubber stick lacrosse-ball",
+    "i": "../assets/toys/lacrosse-ball/thumb.webp"
+  },
+  {
+    "t": "Squash ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNxdWFzaC1iYWxsIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to warm it up; the warmer it gets, the higher it bounces.",
+    "w": "squash ball balls balls sport ball racquet dots squash-ball",
+    "i": "../assets/toys/squash-ball/thumb.webp"
+  },
+  {
+    "t": "Bouncy ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvdW5jeS1iYWxsIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to throw it down and watch it ricochet.",
+    "w": "bouncy ball balls balls sport ball super rubber swirl bouncy-ball",
+    "i": "../assets/toys/bouncy-ball/thumb.webp"
+  },
+  {
+    "t": "Marble",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcmJsZSJ9fQ",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to roll it around a little circle.",
+    "w": "marble balls balls sport ball glass cats eye marble",
+    "i": "../assets/toys/marble/thumb.webp"
+  },
+  {
+    "t": "Hockey puck",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhvY2tleS1wdWNrIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it for a slap shot across the ice.",
+    "w": "hockey puck balls balls sport ball ice rink hockey-puck",
+    "i": "../assets/toys/hockey-puck/thumb.webp"
+  },
+  {
+    "t": "Shuttlecock",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNodXR0bGVjb2NrIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to hit it up; it flips over and floats down cork first.",
+    "w": "shuttlecock balls balls sport ball badminton birdie feathers shuttlecock",
+    "i": "../assets/toys/shuttlecock/thumb.webp"
+  },
+  {
+    "t": "Flying disc",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZseWluZy1kaXNjIn19",
+    "k": "toy",
+    "s": "Balls",
+    "d": "Tap it to throw it around a loop and back.",
+    "w": "flying disc balls balls sport ball throw frisbee catch flying-disc",
+    "i": "../assets/toys/flying-disc/thumb.webp"
+  },
+  {
+    "t": "Beating heart",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlYXJ0In19",
+    "k": "toy",
+    "s": "Body",
+    "d": "Tap it to set it racing. Set its beat, or pick a love heart, in the Toy tab.",
+    "w": "beating heart body body organ body cardio pulse love valentine heart",
+    "i": "../assets/toys/heart/thumb.webp"
+  },
+  {
+    "t": "Campfire",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbXBmaXJlIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzgsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to stoke the fire. Set the fire's size in the Toy tab.",
+    "w": "campfire weather & fire weather & fire fire flame camping logs embers sparks campfire",
+    "i": "../assets/toys/campfire/thumb.webp"
+  },
+  {
+    "t": "Treasure chest",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXN0In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NS40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to open or close the lid. With ✋ on, lift the lid by hand: let go high and it stays open.",
+    "w": "treasure chest open me open me pirate gold coins gems box lid open close chest",
+    "i": "../assets/toys/chest/thumb.webp"
+  },
+  {
+    "t": "Sun",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1biJ9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to set off a solar flare.",
+    "w": "sun space space star solar corona prominence sunspot hot yellow sun",
+    "i": "../assets/toys/sun/thumb.webp"
+  },
+  {
+    "t": "Solar system",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbGFyLXN5c3RlbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC43Miwicm9sbCI6MCwiZGlzdGFuY2UiOjMuN319",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to line up the planets and watch Mercury cross the Sun.",
+    "w": "solar system space space orrery planets orbits sun model solar-system",
+    "i": "../assets/toys/solar-system/thumb.webp"
+  },
+  {
+    "t": "Mercury",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lcmN1cnkifX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to spin it fast in the sunlight.",
+    "w": "mercury space space planet craters grey rocky small solar system mercury",
+    "i": "../assets/toys/mercury/thumb.webp"
+  },
+  {
+    "t": "Venus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZlbnVzIn19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to whip the clouds around.",
+    "w": "venus space space planet clouds yellow hot solar system venus",
+    "i": "../assets/toys/venus/thumb.webp"
+  },
+  {
+    "t": "Earth",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRoIn19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to turn it through one day and night.",
+    "w": "earth space space planet world globe ocean continents clouds home blue earth",
+    "i": "../assets/toys/earth/thumb.webp"
+  },
+  {
+    "t": "Moon",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vb24ifX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to land a lunar module; tap again to pack up and lift off. Pick the flag in the Toy tab.",
+    "w": "moon space space lunar craters maria grey satellite moon",
+    "i": "../assets/toys/moon/thumb.webp"
+  },
+  {
+    "t": "Mars",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcnMifX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to raise a dust storm.",
+    "w": "mars space space planet red rust polar cap solar system mars",
+    "i": "../assets/toys/mars/thumb.webp"
+  },
+  {
+    "t": "Jupiter",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imp1cGl0ZXIifX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to race the cloud bands and spin up the Great Red Spot.",
+    "w": "jupiter space space planet gas giant bands great red spot storm jupiter",
+    "i": "../assets/toys/jupiter/thumb.webp"
+  },
+  {
+    "t": "Saturn",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhdHVybiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuM319",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to send ripples across the rings.",
+    "w": "saturn space space planet rings gas giant bands saturn",
+    "i": "../assets/toys/saturn/thumb.webp"
+  },
+  {
+    "t": "Uranus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVyYW51cyJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to roll it on its side like a wheel.",
+    "w": "uranus space space planet ice giant cyan rings tilted uranus",
+    "i": "../assets/toys/uranus/thumb.webp"
+  },
+  {
+    "t": "Neptune",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lcHR1bmUifX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to race the clouds around it.",
+    "w": "neptune space space planet ice giant blue dark spot wind neptune",
+    "i": "../assets/toys/neptune/thumb.webp"
+  },
+  {
+    "t": "Tiny planet",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYW5ldCJ9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to sweep night across it. Pick a planet under Planet in the Toy tab.",
+    "w": "tiny planet space space earth world globe space generated v1 mars moon jupiter neptune planet",
+    "i": "../assets/toys/planet/thumb.webp"
+  },
+  {
+    "t": "Aurora world",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF1cm9yYS1wbGFuZXQifX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it for a burst of bright auroras.",
+    "w": "aurora world space space planet night aurora northern lights city lights earth aurora-planet",
+    "i": "../assets/toys/aurora-planet/thumb.webp"
+  },
+  {
+    "t": "Asteroid",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFzdGVyb2lkIn19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to break it apart; its pieces pull back together.",
+    "w": "asteroid space space rock space potato craters tumble asteroid",
+    "i": "../assets/toys/asteroid/thumb.webp"
+  },
+  {
+    "t": "Comet",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbWV0In19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to swing it past the Sun and flare its tails.",
+    "w": "comet space space ice tail dust coma nucleus comet",
+    "i": "../assets/toys/comet/thumb.webp"
+  },
+  {
+    "t": "Meteor",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1ldGVvciJ9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to send it streaking in to burst in a fireball.",
+    "w": "meteor space space shooting star fireball rock fire trail falling meteor",
+    "i": "../assets/toys/meteor/thumb.webp"
+  },
+  {
+    "t": "Star",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXIifX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to run the star's life, sped up. Pick the kind of star in the Toy tab.",
+    "w": "star space space sun red dwarf blue giant white dwarf twinkle star",
+    "i": "../assets/toys/star/thumb.webp"
+  },
+  {
+    "t": "Pulsar",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1bHNhciJ9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to spin it up. Set its spin speed in the Toy tab.",
+    "w": "pulsar space space neutron star beams lighthouse spin magnetic pulsar",
+    "i": "../assets/toys/pulsar/thumb.webp"
+  },
+  {
+    "t": "Black hole",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsYWNrLWhvbGUifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMTYsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to feed it a star.",
+    "w": "black hole space space accretion disk event horizon gravity lensing black-hole",
+    "i": "../assets/toys/black-hole/thumb.webp"
+  },
+  {
+    "t": "Star cluster",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItY2x1c3RlciJ9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to make the cluster breathe in and out.",
+    "w": "star cluster space space globular cluster stars twinkle star-cluster",
+    "i": "../assets/toys/star-cluster/thumb.webp"
+  },
+  {
+    "t": "Ring nebula",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYW5ldGFyeS1uZWJ1bGEifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to blow out a new shell of gas.",
+    "w": "ring nebula space space planetary nebula shell gas dying star ring planetary-nebula",
+    "i": "../assets/toys/planetary-nebula/thumb.webp"
+  },
+  {
+    "t": "Nebula",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lYnVsYSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it to light new stars in the clouds. Pick its colors in the Toy tab.",
+    "w": "nebula space space gas cloud pillars stars emission colourful nebula",
+    "i": "../assets/toys/nebula/thumb.webp"
+  },
+  {
+    "t": "Supernova",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cGVybm92YSJ9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap it for a flash and a blast that blows the glowing shell apart.",
+    "w": "supernova space space explosion star remnant debris blast supernova",
+    "i": "../assets/toys/supernova/thumb.webp"
+  },
+  {
+    "t": "Spiral galaxy",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwaXJhbC1nYWxheHkifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuOSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNX19",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to swirl the arms. Pick a galaxy style in the Toy tab.",
+    "w": "spiral galaxy space space milky way andromeda stars arms barred spiral-galaxy",
+    "i": "../assets/toys/spiral-galaxy/thumb.webp"
+  },
+  {
+    "t": "Virus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpcnVzIn19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to make copies that bud off and drift away.",
+    "w": "virus tiny world tiny world microbe germ capsid spikes icosahedron microscope biology virus",
+    "i": "../assets/toys/virus/thumb.webp"
+  },
+  {
+    "t": "Bacteriophage",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhY3RlcmlvcGhhZ2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to land and inject its DNA.",
+    "w": "bacteriophage tiny world tiny world phage virus microbe tail fibres lander inject dna microscope biology bacteriophage",
+    "i": "../assets/toys/bacteriophage/thumb.webp"
+  },
+  {
+    "t": "Bacterium",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhY3Rlcml1bSJ9fQ",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to make it divide in two. Try the Swim slider in the Toy tab.",
+    "w": "bacterium tiny world tiny world microbe germ bacteria rod flagella pili swim microscope biology bacterium",
+    "i": "../assets/toys/bacterium/thumb.webp"
+  },
+  {
+    "t": "Red blood cell",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlZC1ibG9vZC1jZWxsIn19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to curl it into a sickle shape and back.",
+    "w": "red blood cell tiny world tiny world cell blood erythrocyte disc body microscope biology red-blood-cell",
+    "i": "../assets/toys/red-blood-cell/thumb.webp"
+  },
+  {
+    "t": "Neuron",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ldXJvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to fire a signal. Try the Signal slider in the Toy tab.",
+    "w": "neuron tiny world tiny world nerve cell brain axon dendrite myelin synapse signal microscope biology neuron",
+    "i": "../assets/toys/neuron/thumb.webp"
+  },
+  {
+    "t": "Astrocyte",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFzdHJvY3l0ZSJ9fQ",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to send a calcium wave out along its arms.",
+    "w": "astrocyte tiny world tiny world glia glial star cell brain nerve end feet microscope biology astrocyte",
+    "i": "../assets/toys/astrocyte/thumb.webp"
+  },
+  {
+    "t": "Animal cell",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFuaW1hbC1jZWxsIn19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to divide it in two. Switch off the Cutaway in the Toy tab to see it whole.",
+    "w": "animal cell tiny world tiny world cell nucleus mitochondria golgi organelles membrane microscope biology animal-cell",
+    "i": "../assets/toys/animal-cell/thumb.webp"
+  },
+  {
+    "t": "DNA",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRuYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to unzip it and zip it back up.",
+    "w": "dna tiny world tiny world double helix gene genome base pairs unzip molecule biology dna",
+    "i": "../assets/toys/dna/thumb.webp"
+  },
+  {
+    "t": "White blood cell",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLWJsb29kLWNlbGwifX0",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to catch a bacterium and eat it up.",
+    "w": "white blood cell tiny world tiny world cell blood immune leukocyte neutrophil granules body microscope biology white-blood-cell",
+    "i": "../assets/toys/white-blood-cell/thumb.webp"
+  },
+  {
+    "t": "Microglia",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pY3JvZ2xpYSJ9fQ",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to reach out its arms and sweep them to and fro.",
+    "w": "microglia tiny world tiny world glia glial cell brain immune branches microscope biology microglia",
+    "i": "../assets/toys/microglia/thumb.webp"
+  },
+  {
+    "t": "Diatom",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpYXRvbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to make the glass shell glint and open.",
+    "w": "diatom tiny world tiny world algae plankton glass silica shell pores ocean microscope biology diatom",
+    "i": "../assets/toys/diatom/thumb.webp"
+  },
+  {
+    "t": "Tardigrade",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRhcmRpZ3JhZGUifX0",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to make it wiggle.",
+    "w": "tardigrade tiny world tiny world water bear moss piglet animal legs claws cute microscope biology tardigrade",
+    "i": "../assets/toys/tardigrade/thumb.webp"
+  },
+  {
+    "t": "Pollen grain",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvbGxlbiJ9fQ",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to burst out a puff of tiny grains. Pick the Plant in the Toy tab.",
+    "w": "pollen grain tiny world tiny world plant flower spiky allergy sunflower pine lily microscope biology pollen",
+    "i": "../assets/toys/pollen/thumb.webp"
+  },
+  {
+    "t": "Snowflake",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNub3dmbGFrZSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjE1LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap to melt it and grow a new flake. Pick the kind of crystal in the Toy tab.",
+    "w": "snowflake tiny world tiny world snow ice crystal winter frost six hexagon weather snowflake",
+    "i": "../assets/toys/snowflake/thumb.webp"
+  },
+  {
+    "t": "Chromosome",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNocm9tb3NvbWUifX0",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to pull its two halves apart.",
+    "w": "chromosome tiny world tiny world dna gene chromatid centromere genetics cell biology chromosome",
+    "i": "../assets/toys/chromosome/thumb.webp"
+  },
+  {
+    "t": "Mitochondrion",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pdG9jaG9uZHJpb24ifX0",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to power it up. Switch off the Cutaway in the Toy tab to see it whole.",
+    "w": "mitochondrion tiny world tiny world mitochondria cell powerhouse energy cristae organelle biology mitochondrion",
+    "i": "../assets/toys/mitochondrion/thumb.webp"
+  },
+  {
+    "t": "Paramecium",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcmFtZWNpdW0ifX0",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap it to swim a loop. Try the Swim slider in the Toy tab.",
+    "w": "paramecium tiny world tiny world protist ciliate cilia pond water swim microscope biology paramecium",
+    "i": "../assets/toys/paramecium/thumb.webp"
+  },
+  {
+    "t": "Amoeba",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFtb2ViYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Drag it to pull out a pseudopod; let go and it oozes back. Tap it to make it crawl.",
+    "w": "amoeba tiny world tiny world protist blob pseudopod pond water microscope biology amoeba",
+    "i": "../assets/toys/amoeba/thumb.webp"
+  },
+  {
+    "t": "Electron orbital",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYml0YWwifX0",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap it to excite the electron. Pick any orbital up to 4f, or lobes, in the Toy tab.",
+    "w": "electron orbital atoms atoms atom electron cloud quantum wave function hydrogen chemistry physics orbital",
+    "i": "../assets/toys/orbital/thumb.webp"
+  },
+  {
+    "t": "Atom",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF0b20ifX0",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap it to speed up the electrons. Pick any of the 118 elements in the Toy tab.",
+    "w": "atom atoms atoms bohr element nucleus proton neutron electron shell periodic table chemistry physics atom",
+    "i": "../assets/toys/atom/thumb.webp"
+  },
+  {
+    "t": "Molecule",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
+    "w": "molecule atoms atoms ball stick water caffeine benzene methane ethanol buckyball chemistry smiles formula mol sdf molecule",
+    "i": "../assets/toys/molecule/thumb.webp"
+  },
+  {
+    "t": "Protein",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3RlaW4ifX0",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap it to pull it apart. Pick a protein, or open your own file, in the Toy tab.",
+    "w": "protein atoms atoms protein pdb ribbon helix strand ubiquitin insulin gfp hemoglobin biology chemistry protein",
+    "i": "../assets/toys/protein/thumb.webp"
+  },
+  {
+    "t": "Crystal lattice",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeXN0YWwtbGF0dGljZSJ9fQ",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
+    "w": "crystal lattice atoms atoms salt diamond graphite ice crystal structure atoms chemistry crystal-lattice",
+    "i": "../assets/toys/crystal-lattice/thumb.webp"
+  },
+  {
+    "t": "Periodic table",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmlvZGljLXRhYmxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap a tile to raise its atom, again to lower it. Tap the board for a tour, 57-71 for its row.",
+    "w": "periodic table atoms atoms elements periodic table atom nucleus proton neutron electron shell spectrum emission line photon chemistry physics periodic-table",
+    "i": "../assets/toys/periodic-table/thumb.webp"
+  },
+  {
+    "t": "Diamond",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpYW1vbmQifX0",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap it to turn it in the light and flash its fire.",
+    "w": "diamond gems gems gem jewel brilliant cut sparkle stone mineral diamond",
+    "i": "../assets/toys/diamond/thumb.webp"
+  },
+  {
+    "t": "Ruby",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1YnkifX0",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap it to make it glow deep red.",
+    "w": "ruby gems gems gem jewel red oval cut stone mineral ruby",
+    "i": "../assets/toys/ruby/thumb.webp"
+  },
+  {
+    "t": "Emerald",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVtZXJhbGQifX0",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap it to send green light spiraling around its steps.",
+    "w": "emerald gems gems gem jewel green step cut stone mineral emerald",
+    "i": "../assets/toys/emerald/thumb.webp"
+  },
+  {
+    "t": "Amethyst geode",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFtZXRoeXN0LWdlb2RlIn19",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap to close the geode; tap again to open it.",
+    "w": "amethyst geode gems gems gem crystal purple rock cave open quartz mineral amethyst-geode",
+    "i": "../assets/toys/amethyst-geode/thumb.webp"
+  },
+  {
+    "t": "Sapphire",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhcHBoaXJlIn19",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap it to catch the six-rayed star gliding across it.",
+    "w": "sapphire gems gems gem jewel blue cushion cut stone mineral sapphire",
+    "i": "../assets/toys/sapphire/thumb.webp"
+  },
+  {
+    "t": "Quartz cluster",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InF1YXJ0ei1jbHVzdGVyIn19",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap it to light the crystal points one by one.",
+    "w": "quartz cluster gems gems crystal points rock clear mineral quartz-cluster",
+    "i": "../assets/toys/quartz-cluster/thumb.webp"
+  },
+  {
+    "t": "Opal",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9wYWwifX0",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap it to tilt it and roll flashes of color across it. Pick an opal in the Toy tab.",
+    "w": "opal gems gems gem jewel rainbow play of colour cabochon stone mineral opal",
+    "i": "../assets/toys/opal/thumb.webp"
+  },
+  {
+    "t": "Pearl",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlYXJsIn19",
+    "k": "toy",
+    "s": "Gems",
+    "d": "Tap to close the oyster; tap again to open it.",
+    "w": "pearl gems gems gem jewel oyster shell lustre sea open pearl",
+    "i": "../assets/toys/pearl/thumb.webp"
+  },
+  {
+    "t": "Brain",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJyYWluIn19",
+    "k": "toy",
+    "s": "Body",
+    "d": "Tap it to think. Try the Sparks slider in the Toy tab.",
+    "w": "brain body body organ body mind think lobes cerebrum cerebellum neuron nerve brain",
+    "i": "../assets/toys/brain/thumb.webp"
+  },
+  {
+    "t": "Eye",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImV5ZSJ9fQ",
+    "k": "toy",
+    "s": "Body",
+    "d": "Tap it to blink. Try the Pupil slider in the Toy tab.",
+    "w": "eye body body organ body eyeball iris pupil see vision look eye",
+    "i": "../assets/toys/eye/thumb.webp"
+  },
+  {
+    "t": "Lungs",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imx1bmdzIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "k": "toy",
+    "s": "Body",
+    "d": "Tap for a deep breath. Try the Breath slider in the Toy tab.",
+    "w": "lungs body body organ body breathe air trachea bronchi respiration lungs",
+    "i": "../assets/toys/lungs/thumb.webp"
+  },
+  {
+    "t": "Tooth",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvb3RoIn19",
+    "k": "toy",
+    "s": "Body",
+    "d": "Tap it to polish it until it sparkles.",
+    "w": "tooth body body molar teeth dentist enamel root body mouth tooth",
+    "i": "../assets/toys/tooth/thumb.webp"
+  },
+  {
+    "t": "Kidney",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtpZG5leSJ9fQ",
+    "k": "toy",
+    "s": "Body",
+    "d": "Tap it to pump blood through it.",
+    "w": "kidney body body organ body bean urine filter renal kidney",
+    "i": "../assets/toys/kidney/thumb.webp"
+  },
+  {
+    "t": "Anatomy atlas",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFuYXRvbXktYXRsYXMifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Body",
+    "d": "Tap to peel off a layer; after the organs, tap to put them all back. Try Labels.",
+    "w": "anatomy atlas body body body human anatomy atlas layers peel skin muscles skeleton bones organs labels anatomy-atlas",
+    "i": "../assets/toys/anatomy-atlas/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Oak tree",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9hayJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to shake down its leaves. Pick a season in the Toy tab.",
+    "w": "oak tree nature nature tree plant leaves branches forest acorn season autumn winter oak",
+    "i": "../assets/toys/oak/thumb.webp"
+  },
+  {
+    "t": "Pine tree",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmUifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to shake the snow off. Turn on Snow in the Toy tab for a snowy day.",
+    "w": "pine tree nature nature tree plant conifer evergreen fir spruce forest needles snow christmas pine",
+    "i": "../assets/toys/pine/thumb.webp"
+  },
+  {
+    "t": "Palm tree",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhbG0ifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to shake down the coconuts.",
+    "w": "palm tree nature nature tree plant tropical beach island coconut fronds palm",
+    "i": "../assets/toys/palm/thumb.webp"
+  },
+  {
+    "t": "Cherry blossom",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXJyeS1ibG9zc29tIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to shake down the blossom and watch it bloom again.",
+    "w": "cherry blossom nature nature tree plant sakura pink flowers spring petals japan cherry-blossom",
+    "i": "../assets/toys/cherry-blossom/thumb.webp"
+  },
+  {
+    "t": "Maple tree",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to send a gust whirling through. Pick the leaf color in the Toy tab.",
+    "w": "maple tree nature nature tree plant autumn fall leaves red orange maple",
+    "i": "../assets/toys/maple/thumb.webp"
+  },
+  {
+    "t": "Bonsai",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvbnNhaSJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to grow a new branch, then trim it.",
+    "w": "bonsai nature nature tree plant miniature pot japan zen bonsai",
+    "i": "../assets/toys/bonsai/thumb.webp"
+  },
+  {
+    "t": "Weeping willow",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndpbGxvdyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to send a breeze through the hanging branches.",
+    "w": "weeping willow nature nature tree plant weeping drooping river willow",
+    "i": "../assets/toys/willow/thumb.webp"
+  },
+  {
+    "t": "Sunflower",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1bmZsb3dlciJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to bring out the sun and watch the flower turn to face it.",
+    "w": "sunflower nature nature flower plant summer yellow seeds petals sunflower",
+    "i": "../assets/toys/sunflower/thumb.webp"
+  },
+  {
+    "t": "Rose",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvc2UifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to open the bloom. Pick its color in the Toy tab.",
+    "w": "rose nature nature flower plant red love petals thorns valentine rose",
+    "i": "../assets/toys/rose/thumb.webp"
+  },
+  {
+    "t": "Dandelion",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhbmRlbGlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to blow the seeds away.",
+    "w": "dandelion nature nature flower plant seeds blow wish clock weed dandelion",
+    "i": "../assets/toys/dandelion/thumb.webp"
+  },
+  {
+    "t": "Tulips",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InR1bGlwIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to open the tulips to the sun. Pick their color in the Toy tab.",
+    "w": "tulips nature nature flower plant spring bulb petals holland tulip",
+    "i": "../assets/toys/tulip/thumb.webp"
+  },
+  {
+    "t": "Daisies",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhaXN5In0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to spin the big daisy: loves me, loves me not.",
+    "w": "daisies nature nature flower plant white petals meadow spring daisy",
+    "i": "../assets/toys/daisy/thumb.webp"
+  },
+  {
+    "t": "Lotus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxvdHVzIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjYyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to lift the flower out of the water and open it.",
+    "w": "lotus nature nature flower plant water lily pad pond pink lotus",
+    "i": "../assets/toys/lotus/thumb.webp"
+  },
+  {
+    "t": "Toadstool",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2hyb29tIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap the big cap to puff out a cloud of spores.",
+    "w": "toadstool nature nature fungus fly agaric red spots forest fairy mushroom",
+    "i": "../assets/toys/mushroom/thumb.webp"
+  },
+  {
+    "t": "Fern",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZlcm4ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMzIsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9fQ",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to unroll the fiddleheads into new fronds.",
+    "w": "fern nature nature plant frond forest fiddlehead green fern",
+    "i": "../assets/toys/fern/thumb.webp"
+  },
+  {
+    "t": "Saguaro cactus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhZ3Vhcm8ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap for the spines, then a look inside. Set its arms and flowers in the Toy tab.",
+    "w": "saguaro cactus nature nature plant cactus desert spines arms succulent saguaro",
+    "i": "../assets/toys/saguaro/thumb.webp"
+  },
+  {
+    "t": "Coral reef",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvcmFsIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjozLjd9fQ",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to open the polyps and let the fish out.",
+    "w": "coral reef nature nature sea ocean reef anemone fish underwater coral",
+    "i": "../assets/toys/coral/thumb.webp"
+  },
+  {
+    "t": "Pinecone",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmVjb25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to open the scales and drop them, then put it back together.",
+    "w": "pinecone nature nature pine cone seed scales forest tree pinecone",
+    "i": "../assets/toys/pinecone/thumb.webp"
+  },
+  {
+    "t": "Acorns",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFjb3JuIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to pop the caps and sprout the acorns.",
+    "w": "acorns nature nature oak nut seed leaf autumn squirrel acorn",
+    "i": "../assets/toys/acorn/thumb.webp"
+  },
+  {
+    "t": "Succulent",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1Y2N1bGVudCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC41NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to open the rosette and send up a flower.",
+    "w": "succulent nature nature plant rosette echeveria pot cactus succulent",
+    "i": "../assets/toys/succulent/thumb.webp"
+  },
+  {
+    "t": "Bamboo",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhbWJvbyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to make the new shoots grow up tall.",
+    "w": "bamboo nature nature plant grass stalks panda asia green bamboo",
+    "i": "../assets/toys/bamboo/thumb.webp"
+  },
+  {
+    "t": "Pebbles",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvY2tzIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Drag a pebble to pick it up and set it on another to stack them. Tap to tumble them.",
+    "w": "pebbles nature nature rock stone pile cairn pebble beach rocks",
+    "i": "../assets/toys/rocks/thumb.webp"
+  },
+  {
+    "t": "Kelp",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtlbHAifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Nature",
+    "d": "Tap it to bring fish in to nibble the kelp.",
+    "w": "kelp nature nature seaweed sea ocean underwater forest algae kelp",
+    "i": "../assets/toys/kelp/thumb.webp"
+  },
+  {
+    "t": "Storm cloud",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b3JtLWNsb3VkIn0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap for thunder: lightning strikes under your finger. Try the Rain slider in the Toy tab.",
+    "w": "storm cloud weather & fire weather & fire weather rain lightning thunder cloud storm storm-cloud",
+    "i": "../assets/toys/storm-cloud/thumb.webp"
+  },
+  {
+    "t": "Lava lamp",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhdmEtbGFtcCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap to heat it up. Pick colors, blobs and flow in the Toy tab.",
+    "w": "lava lamp weather & fire weather & fire lamp wax blobs retro groovy glow light lava-lamp",
+    "i": "../assets/toys/lava-lamp/thumb.webp"
+  },
+  {
+    "t": "Snow globe",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNub3ctZ2xvYmUifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to swirl the snow. Hands-on: pick it up and shake it hard.",
+    "w": "snow globe weather & fire weather & fire snow winter glass shake snowman christmas snow-globe",
+    "i": "../assets/toys/snow-globe/thumb.webp"
+  },
+  {
+    "t": "Volcano",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbGNhbm8ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to make it erupt.",
+    "w": "volcano weather & fire weather & fire lava eruption magma island mountain smoke fire volcano",
+    "i": "../assets/toys/volcano/thumb.webp"
+  },
+  {
+    "t": "Ice swan",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImljZS1zdGF0dWUifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMTgsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9fQ",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap to melt the swan and refreeze it. Try the Temperature slider in the Toy tab.",
+    "w": "ice swan weather & fire weather & fire ice sculpture swan melt frozen cold statue ice-statue",
+    "i": "../assets/toys/ice-statue/thumb.webp"
+  },
+  {
+    "t": "Candle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap to blow out the candle; tap again to light it.",
+    "w": "candle weather & fire weather & fire flame wax light fire birthday glow candle",
+    "i": "../assets/toys/candle/thumb.webp"
+  },
+  {
+    "t": "Tornado",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvcm5hZG8ifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMTUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap to spin it up. Set its power in the Toy tab.",
+    "w": "tornado weather & fire weather & fire twister wind storm funnel weather cyclone tornado",
+    "i": "../assets/toys/tornado/thumb.webp"
+  },
+  {
+    "t": "Rainbow",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJhaW5ib3cifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4xNSwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to draw the rainbow again, color by color.",
+    "w": "rainbow weather & fire weather & fire weather colours arc clouds sky rainbow",
+    "i": "../assets/toys/rainbow/thumb.webp"
+  },
+  {
+    "t": "Iceberg",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImljZWJlcmcifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to break off a chunk into the sea.",
+    "w": "iceberg weather & fire weather & fire ice sea ocean arctic cold floe glacier iceberg",
+    "i": "../assets/toys/iceberg/thumb.webp"
+  },
+  {
+    "t": "Waterfall",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVyZmFsbCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to send a surge of water over the falls.",
+    "w": "waterfall weather & fire weather & fire water river cliff falls mist pool waterfall",
+    "i": "../assets/toys/waterfall/thumb.webp"
+  },
+  {
+    "t": "Ocean wave",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jZWFuLXdhdmUifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to break the wave; a new one curls up behind it.",
+    "w": "ocean wave weather & fire weather & fire sea surf wave curl barrel water beach ocean-wave",
+    "i": "../assets/toys/ocean-wave/thumb.webp"
+  },
+  {
+    "t": "Geyser",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdleXNlciJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Weather & fire",
+    "d": "Tap it to make it erupt.",
+    "w": "geyser weather & fire weather & fire steam water hot spring eruption geyser",
+    "i": "../assets/toys/geyser/thumb.webp"
+  },
+  {
+    "t": "Ice cream",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImljZS1jcmVhbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap to melt it and refreeze it. Pick scoops and flavors in the Toy tab.",
+    "w": "ice cream food food cone scoop gelato waffle melt sprinkles cherry sweet dessert ice-cream",
+    "i": "../assets/toys/ice-cream/thumb.webp"
+  },
+  {
+    "t": "Watermelon",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVybWVsb24ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzQsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to chop it into slices that fan open.",
+    "w": "watermelon food food fruit melon wedge slice seeds summer picnic watermelon",
+    "i": "../assets/toys/watermelon/thumb.webp"
+  },
+  {
+    "t": "Birthday cake",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJpcnRoZGF5LWNha2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzYsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap to blow out the candles; tap again to light them. Choose how many in the Toy tab.",
+    "w": "birthday cake food food party candles flames blow out frosting sprinkles layers sweet dessert birthday-cake",
+    "i": "../assets/toys/birthday-cake/thumb.webp"
+  },
+  {
+    "t": "Popcorn",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvcGNvcm4ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzQsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to pop more kernels up out of the bucket.",
+    "w": "popcorn food food cinema movie snack bucket pop kernels butter popcorn",
+    "i": "../assets/toys/popcorn/thumb.webp"
+  },
+  {
+    "t": "Jelly",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImplbGx5In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Drag it to stretch it; let go and it wobbles back. Tap it to poke it.",
+    "w": "jelly food food jello gelatin wobble wobbly dessert fruit pudding jelly",
+    "i": "../assets/toys/jelly/thumb.webp"
+  },
+  {
+    "t": "Pancakes",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhbmNha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4xfX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
+    "w": "pancakes food food breakfast stack syrup butter flip hotcakes pancakes",
+    "i": "../assets/toys/pancakes/thumb.webp"
+  },
+  {
+    "t": "Cupcake",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImN1cGNha2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to flick the cherry up; it plops back down.",
+    "w": "cupcake food food fairy cake muffin frosting swirl sprinkles cherry sweet cupcake",
+    "i": "../assets/toys/cupcake/thumb.webp"
+  },
+  {
+    "t": "Lollipop",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxvbGxpcG9wIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to spin it fast; the swirl seems to pour inward.",
+    "w": "lollipop food food candy swirl sweet rainbow stick sucker lollipop",
+    "i": "../assets/toys/lollipop/thumb.webp"
+  },
+  {
+    "t": "Candy cane",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmR5LWNhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to twist it until it snaps. With ✋ on, pull the hook until it snaps off.",
+    "w": "candy cane food food christmas peppermint stripes candy sweet bow candy-cane",
+    "i": "../assets/toys/candy-cane/thumb.webp"
+  },
+  {
+    "t": "Macarons",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hY2Fyb25zIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Drag a macaron to pick it up and stack it. Tap and the two in front hop up onto the stack.",
+    "w": "macarons food food french biscuits pastel almond sweet stack macarons",
+    "i": "../assets/toys/macarons/thumb.webp"
+  },
+  {
+    "t": "Donut",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRvbnV0In0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuNjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to break it apart and put it back together.",
+    "w": "donut food food doughnut torus food sprinkles frosting generated donut",
+    "i": "../assets/toys/donut/thumb.webp"
+  },
+  {
+    "t": "Gummy bear",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd1bW15LWJlYXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Drag the bear to stretch it; let go and it springs back. Tap to squish it.",
+    "w": "gummy bear food food candy jelly sweet bear chewy squish gummy-bear",
+    "i": "../assets/toys/gummy-bear/thumb.webp"
+  },
+  {
+    "t": "Pretzel",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByZXR6ZWwifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to twist it like a knot and let it spring back.",
+    "w": "pretzel food food bread knot salt baked snack bakery pretzel",
+    "i": "../assets/toys/pretzel/thumb.webp"
+  },
+  {
+    "t": "Croissant",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb2lzc2FudCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to slice it open and melt a pat of butter inside.",
+    "w": "croissant food food pastry bakery breakfast french flaky butter croissant",
+    "i": "../assets/toys/croissant/thumb.webp"
+  },
+  {
+    "t": "Pizza",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpenphIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjcyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap to take a slice; tap again to go back.",
+    "w": "pizza food food pepperoni margherita cheese slice italian basil dinner pizza",
+    "i": "../assets/toys/pizza/thumb.webp"
+  },
+  {
+    "t": "Burger",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1cmdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap to spread out the layers; tap again to stack them up.",
+    "w": "burger food food hamburger cheeseburger bun sesame lettuce tomato cheese patty burger",
+    "i": "../assets/toys/burger/thumb.webp"
+  },
+  {
+    "t": "Sushi",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1c2hpIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjYyLCJyb2xsIjowLCJkaXN0YW5jZSI6My43fX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap a piece: the chopsticks pick that one up, dip it in soy sauce and put it back.",
+    "w": "sushi food food japanese nigiri maki roll salmon tuna rice chopsticks wasabi sushi",
+    "i": "../assets/toys/sushi/thumb.webp"
+  },
+  {
+    "t": "Taco",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRhY28ifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to break the shell in half; then it closes up again.",
+    "w": "taco food food mexican shell lettuce cheese tomato beef taco",
+    "i": "../assets/toys/taco/thumb.webp"
+  },
+  {
+    "t": "Boiled egg",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVnZyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4xfX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap to crack it open; tap again to go back.",
+    "w": "boiled egg food food breakfast egg cup yolk toast soldiers crack egg",
+    "i": "../assets/toys/egg/thumb.webp"
+  },
+  {
+    "t": "Coffee",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvZmZlZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41OCwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to stir. Pick the latte art and the steam in the Toy tab.",
+    "w": "coffee food food latte cappuccino cup saucer drink steam cafe art coffee",
+    "i": "../assets/toys/coffee/thumb.webp"
+  },
+  {
+    "t": "Apple",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFwcGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap to take a bite; tap again and a worm peeks out before it's whole again.",
+    "w": "apple food food fruit red green golden leaf orchard apple",
+    "i": "../assets/toys/apple/thumb.webp"
+  },
+  {
+    "t": "Bananas",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhbmFuYSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to pull the bananas apart and peel all three.",
+    "w": "bananas food food fruit bunch yellow tropical banana",
+    "i": "../assets/toys/banana/thumb.webp"
+  },
+  {
+    "t": "Orange",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to open it into wedges. With ✋ on, pull a wedge out; bring it back and it clicks in.",
+    "w": "orange food food fruit citrus segments half juicy leaf orange",
+    "i": "../assets/toys/orange/thumb.webp"
+  },
+  {
+    "t": "Kiwi",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imtpd2kifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMzYsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to cut it open and show the green inside.",
+    "w": "kiwi food food fruit kiwifruit green seeds half fuzzy kiwi",
+    "i": "../assets/toys/kiwi/thumb.webp"
+  },
+  {
+    "t": "Pineapple",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmVhcHBsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to slice it into rings.",
+    "w": "pineapple food food fruit tropical crown leaves spiky pineapple",
+    "i": "../assets/toys/pineapple/thumb.webp"
+  },
+  {
+    "t": "Cherries",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXJyaWVzIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4xfX0",
+    "k": "toy",
+    "s": "Food",
+    "d": "Pull a cherry out on its stem and let go; it swings back and knocks the other. Tap to swing them.",
+    "w": "cherries food food fruit cherry pair stems red glossy cherries",
+    "i": "../assets/toys/cherries/thumb.webp"
+  },
+  {
+    "t": "Grapes",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBlcyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it: grapes drop off the bunch, bounce and hop back.",
+    "w": "grapes food food fruit bunch vine purple green leaf grapes",
+    "i": "../assets/toys/grapes/thumb.webp"
+  },
+  {
+    "t": "Avocado",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF2b2NhZG8ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNDUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Food",
+    "d": "Tap it to pop the stone into the other half and back.",
+    "w": "avocado food food fruit halves stone pit green guacamole avocado",
+    "i": "../assets/toys/avocado/thumb.webp"
+  },
+  {
+    "t": "Building bricks",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJyaWNrcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjUsInJvbGwiOjAsImRpc3RhbmNlIjozLjN9fQ",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Drag a brick onto another to stack it; it clicks onto the studs. Tap to build a model.",
+    "w": "building bricks toys toys blocks studs stack build construction plastic bricks",
+    "i": "../assets/toys/bricks/thumb.webp"
+  },
+  {
+    "t": "Rubber duck",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1YmJlci1kdWNrIn0sImNhbWVyYSI6eyJ5YXciOjAuOTUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to squeeze it: it squeaks, hops and bobs.",
+    "w": "rubber duck toys toys bath duckie yellow squeak rubber-duck",
+    "i": "../assets/toys/rubber-duck/thumb.webp"
+  },
+  {
+    "t": "Spinning top",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwaW5uaW5nLXRvcCJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjV9fQ",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to spin it faster; it wobbles more, then steadies.",
+    "w": "spinning top toys toys spin whirl gyroscope precession spinning-top",
+    "i": "../assets/toys/spinning-top/thumb.webp"
+  },
+  {
+    "t": "Dice",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpY2UifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap to roll. Pick two six-sided dice or a d20 in the Toy tab.",
+    "w": "dice toys toys die d6 d20 roll pips game chance dice",
+    "i": "../assets/toys/dice/thumb.webp"
+  },
+  {
+    "t": "Newton's cradle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ld3RvbnMtY3JhZGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Drag a ball out to the side and let go. Or tap to lift the end ball.",
+    "w": "newton's cradle toys toys pendulum balls swing desk physics momentum newtons-cradle",
+    "i": "../assets/toys/newtons-cradle/thumb.webp"
+  },
+  {
+    "t": "Teddy bear",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlZGR5LWJlYXIifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it and it waves hello.",
+    "w": "teddy bear toys toys bear plush soft cuddly stuffed teddy-bear",
+    "i": "../assets/toys/teddy-bear/thumb.webp"
+  },
+  {
+    "t": "Yo-yo",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvLXlvIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to throw it down; it spins down the string and climbs back up.",
+    "w": "yo-yo toys toys yoyo string spin throw yo-yo",
+    "i": "../assets/toys/yo-yo/thumb.webp"
+  },
+  {
+    "t": "Puzzle cube",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1enpsZS1jdWJlIn0sImNhbWVyYSI6eyJ5YXciOjAuNjIsInBpdGNoIjowLjUsInJvbGwiOjAsImRpc3RhbmNlIjo3LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Drag across a face to turn a row or column. Tap to scramble or solve it; tap again to pause.",
+    "w": "puzzle cube toys toys twist cube colours puzzle 3x3 puzzle-cube",
+    "i": "../assets/toys/puzzle-cube/thumb.webp"
+  },
+  {
+    "t": "Spring toy",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwcmluZy10b3kifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Pull its top coils up or sideways; let go and it springs back. Tap to hurry it along.",
+    "w": "spring toy toys toys coil slinky rainbow stairs walk spring-toy",
+    "i": "../assets/toys/spring-toy/thumb.webp"
+  },
+  {
+    "t": "Kite",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtpdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it for a gust of wind: the kite loops and the tail whips.",
+    "w": "kite toys toys wind fly diamond tail string sky kite",
+    "i": "../assets/toys/kite/thumb.webp"
+  },
+  {
+    "t": "Paper plane",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLXBsYW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuNywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to do a barrel roll.",
+    "w": "paper plane toys toys paper aeroplane airplane dart fold fly paper-plane",
+    "i": "../assets/toys/paper-plane/thumb.webp"
+  },
+  {
+    "t": "Origami crane",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yaWdhbWktY3JhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuN319",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to flap its wings.",
+    "w": "origami crane toys toys paper fold bird japan crane origami-crane",
+    "i": "../assets/toys/origami-crane/thumb.webp"
+  },
+  {
+    "t": "Balloon dog",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhbGxvb24tZG9nIn0sImNhbWVyYSI6eyJ5YXciOjAuMiwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to pop it; then it blows back up.",
+    "w": "balloon dog toys toys balloon animal twist party pop balloon-dog",
+    "i": "../assets/toys/balloon-dog/thumb.webp"
+  },
+  {
+    "t": "Soap bubbles",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvYXAtYnViYmxlcyJ9LCJjYW1lcmEiOnsieWF3IjowLjIsInBpdGNoIjowLjE1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to blow a stream of bubbles.",
+    "w": "soap bubbles toys toys bubble wand iridescent float blow soap-bubbles",
+    "i": "../assets/toys/soap-bubbles/thumb.webp"
+  },
+  {
+    "t": "Wind-up robot",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvYm90In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjV9fQ",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap it to wind it up: its key whirs and its arms swing wide.",
+    "w": "wind-up robot toys toys robot tin clockwork key antenna retro robot",
+    "i": "../assets/toys/robot/thumb.webp"
+  },
+  {
+    "t": "Chess set",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXNzLXNldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My43fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Toys",
+    "d": "Tap a piece, then a square, to move it. Or press play in the bar to watch a game.",
+    "w": "chess set toys toys chess game board pieces king queen knight opera morphy chess-set",
+    "i": "../assets/toys/chess-set/thumb.webp"
+  },
+  {
+    "t": "Lorenz attractor",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxvcmVueiJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to race along the path. Set the glow in the Toy tab.",
+    "w": "lorenz attractor math maths chaos butterfly strange attractor curve differential equations lorenz",
+    "i": "../assets/toys/lorenz/thumb.webp"
+  },
+  {
+    "t": "Möbius strip",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vYml1cyJ9LCJjYW1lcmEiOnsieWF3IjowLjksInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to send the rider round. Pick a rider in the Toy tab.",
+    "w": "mobius strip math maths mobius moebius band one side twist topology surface mobius",
+    "i": "../assets/toys/mobius/thumb.webp"
+  },
+  {
+    "t": "Klein bottle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtsZWluLWJvdHRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to send water through. Set the glow in the Toy tab.",
+    "w": "klein bottle math maths topology surface glass bottle non-orientable klein-bottle",
+    "i": "../assets/toys/klein-bottle/thumb.webp"
+  },
+  {
+    "t": "Menger sponge",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lbmdlci1zcG9uZ2UifSwiY2FtZXJhIjp7InlhdyI6MC42MiwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjcuMn19",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to close and carve the holes. Pick the level in the Toy tab.",
+    "w": "menger sponge math maths fractal cube holes sponge recursive menger-sponge",
+    "i": "../assets/toys/menger-sponge/thumb.webp"
+  },
+  {
+    "t": "Hypercube",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh5cGVyY3ViZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjYuNH19",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
+    "w": "hypercube math maths tesseract 4d four dimensions cube projection hypercube",
+    "i": "../assets/toys/hypercube/thumb.webp"
+  },
+  {
+    "t": "Torus knot",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvcnVzLWtub3QifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
+    "w": "torus knot math maths knot trefoil topology tube curve torus-knot",
+    "i": "../assets/toys/torus-knot/thumb.webp"
+  },
+  {
+    "t": "Gyroid",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd5cm9pZCJ9LCJjYW1lcmEiOnsieWF3IjowLjYyLCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjYuOH19",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to make it breathe. Pick a cube or a ball in the Toy tab.",
+    "w": "gyroid math maths minimal surface triply periodic labyrinth gyroid",
+    "i": "../assets/toys/gyroid/thumb.webp"
+  },
+  {
+    "t": "Mandelbulb",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hbmRlbGJ1bGIifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap it to turn its discs like the dials of a lock.",
+    "w": "mandelbulb math maths fractal 3d mandelbrot bulb mandelbulb",
+    "i": "../assets/toys/mandelbulb/thumb.webp"
+  },
+  {
+    "t": "Sierpinski tetrahedron",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNpZXJwaW5za2kifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
+    "w": "sierpinski tetrahedron math maths fractal triangle pyramid tetrix recursive sierpinski",
+    "i": "../assets/toys/sierpinski/thumb.webp"
+  },
+  {
+    "t": "Platonic solids",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYXRvbmljIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzUsInJvbGwiOjAsImRpc3RhbmNlIjo1LjJ9fQ",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to explode it; tap again to put it back. Pick one of the five solids in the Toy tab.",
+    "w": "platonic solids math maths polyhedron tetrahedron cube octahedron dodecahedron icosahedron geometry platonic",
+    "i": "../assets/toys/platonic/thumb.webp"
+  },
+  {
+    "t": "Seashell spiral",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYXNoZWxsLXNwaXJhbCJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjg1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap it to hear the sea in the shell.",
+    "w": "seashell spiral math maths spiral shell logarithmic conch snail growth seashell-spiral",
+    "i": "../assets/toys/seashell-spiral/thumb.webp"
+  },
+  {
+    "t": "Graph plotter",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBoLXBsb3R0ZXIifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMDgsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to draw the curve. Pick a curve, or type your own, in the Toy tab.",
+    "w": "graph plotter math maths graph plot curve function equation type sine polar parametric cardioid rose butterfly heart lissajous spiral graph-plotter",
+    "i": "../assets/toys/graph-plotter/thumb.webp"
+  },
+  {
+    "t": "Surface plotter",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cmZhY2UtcGxvdHRlciJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to raise the surface. Pick one, or type your own, in the Toy tab.",
+    "w": "surface plotter math maths surface plot 3d function equation type saddle sombrero egg crate gaussian rosenbrock banana surface-plotter",
+    "i": "../assets/toys/surface-plotter/thumb.webp"
+  },
+  {
+    "t": "Circle and waves",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVuaXQtY2lyY2xlIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjA4LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to send the point round. Try 3D, or type your own path, in the Toy tab.",
+    "w": "circle and waves math maths unit circle sine cosine wave trigonometry euler formula angle radian unit-circle",
+    "i": "../assets/toys/unit-circle/thumb.webp"
+  },
+  {
+    "t": "Fourier circles",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZvdXJpZXItY2lyY2xlcyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to spin the circles. Type a word or a curve in the Toy tab.",
+    "w": "fourier circles math maths fourier series epicycles circles spinning draw heart star square wave frequency fourier-circles",
+    "i": "../assets/toys/fourier-circles/thumb.webp"
+  },
+  {
+    "t": "Pythagoras proof",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB5dGhhZ29yYXMtcHJvb2YifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6My43fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap it to slide the triangles and show that a² + b² = c².",
+    "w": "pythagoras proof math maths pythagoras theorem proof right triangle square hypotenuse geometry pythagoras-proof",
+    "i": "../assets/toys/pythagoras-proof/thumb.webp"
+  },
+  {
+    "t": "Splat equation",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWVxdWF0aW9uIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjYsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
+    "w": "splat equation math maths splat equation program parametric code u v time sphere torus mobius seashell trefoil knot wave galaxy klein bottle splat-equation",
+    "i": "../assets/toys/splat-equation/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Storybook",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvb2sifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuNzgsInJvbGwiOjAsImRpc3RhbmNlIjozLjl9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to close the book; tap again to open it.",
+    "w": "storybook open me open me book pages read story hardcover open close flip book",
+    "i": "../assets/toys/book/thumb.webp"
+  },
+  {
+    "t": "Laptop",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhcHRvcCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4zMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap the keys, or type on your keyboard. Drag on the trackpad. Tap elsewhere to close it.",
+    "w": "laptop open me open me computer notebook screen keyboard open close laptop",
+    "i": "../assets/toys/laptop/thumb.webp"
+  },
+  {
+    "t": "Music box",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2ljLWJveCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to close or open the lid. With ✋ on, turn the crank round to play the tune note by note.",
+    "w": "music box open me open me ballerina dancer jewellery box lid tune music-box",
+    "i": "../assets/toys/music-box/thumb.webp"
+  },
+  {
+    "t": "Alarm clock",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsb2NrIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap it to ring the alarm.",
+    "w": "alarm clock open me open me clock time bells alarm ring hands clock",
+    "i": "../assets/toys/clock/thumb.webp"
+  },
+  {
+    "t": "Gift box",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdpZnQtYm94In0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzgsInJvbGwiOjAsImRpc3RhbmNlIjo0Ljh9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to open the present; tap again to close it.",
+    "w": "gift box open me open me present birthday ribbon bow surprise confetti gift-box",
+    "i": "../assets/toys/gift-box/thumb.webp"
+  },
+  {
+    "t": "Umbrella",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVtYnJlbGxhIn0sImNhbWVyYSI6eyJ5YXciOjAuNCwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuM30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to close the umbrella; tap again to open it.",
+    "w": "umbrella open me open me rain parasol canopy open close umbrella",
+    "i": "../assets/toys/umbrella/thumb.webp"
+  },
+  {
+    "t": "Desk fan",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRlc2stZmFuIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to switch it off or on. Turn its swing on or off in the Toy tab.",
+    "w": "desk fan open me open me fan blades spin breeze oscillating retro desk-fan",
+    "i": "../assets/toys/desk-fan/thumb.webp"
+  },
+  {
+    "t": "Desk lamp",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhbXAifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to switch the light off or on.",
+    "w": "desk lamp open me open me lamp light bulb switch anglepoise lamp",
+    "i": "../assets/toys/lamp/thumb.webp"
+  },
+  {
+    "t": "Potion bottle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvdGlvbi1ib3R0bGUifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap it to pop the cork.",
+    "w": "potion bottle open me open me magic flask glow cork bubbles wizard potion-bottle",
+    "i": "../assets/toys/potion-bottle/thumb.webp"
+  },
+  {
+    "t": "Telescope",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlbGVzY29wZSJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap to collapse it; tap again to pull it out.",
+    "w": "telescope open me open me brass spyglass tripod stars astronomy extend telescope",
+    "i": "../assets/toys/telescope/thumb.webp"
+  },
+  {
+    "t": "Fountain pen",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZvdW50YWluLXBlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap it to uncap the pen and write a swirl in wet blue ink.",
+    "w": "fountain pen open me open me real scan model pen nib ink cap write swirl notepad paper fountain-pen",
+    "i": "../assets/toys/fountain-pen/thumb.webp"
+  },
+  {
+    "t": "Water bottle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVyLWJvdHRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6My42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap it to unscrew the cap and pour water into the glass.",
+    "w": "water bottle open me open me real scan model steel bottle cap screw pour water glass drink drops water-bottle",
+    "i": "../assets/toys/water-bottle/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Soda can",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvZGEtY2FuIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Open me",
+    "d": "Tap it to shake the can and pop it open.",
+    "w": "soda can open me open me real scan model drink can soda pop fizz foam ring pull tab shake open coaster soda-can",
+    "i": "../assets/toys/soda-can/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Running shoe",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1bm5pbmctc2hvZSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "k": "toy",
+    "s": "Clothing",
+    "d": "Tap it to untie the laces and tie them again, then watch it tap its toe.",
+    "w": "running shoe clothing clothing real scan photogrammetry sneaker trainer laces bow tie untie eyelets toe tap running-shoe",
+    "i": "../assets/toys/running-shoe/thumb.webp"
+  },
+  {
+    "t": "Hoodie",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imhvb2RpZSJ9LCJjYW1lcmEiOnsieWF3IjowLjIyLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "k": "toy",
+    "s": "Clothing",
+    "d": "Tap it to flip the hood and cross the sleeves.",
+    "w": "hoodie clothing clothing real scan model sweatshirt hood drawstrings sleeves fleece pullover hoodie",
+    "i": "../assets/toys/hoodie/thumb.webp"
+  },
+  {
+    "t": "Sunglasses",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1bmdsYXNzZXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMjUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjF9fQ",
+    "k": "toy",
+    "s": "Clothing",
+    "d": "Tap them (the frame or a lens) to fold the arms, flip the glasses round and darken the lenses.",
+    "w": "sunglasses clothing clothing real scan model glasses spectacles round frame hinge fold lenses dark light changing sunglasses",
+    "i": "../assets/toys/sunglasses/thumb.webp"
+  },
+  {
+    "t": "Baseball cap",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsLWNhcCJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9fQ",
+    "k": "toy",
+    "s": "Clothing",
+    "d": "Tap it to flip the cap off its stand and spin it like a flying disc.",
+    "w": "baseball cap clothing clothing real scan model hat cap brim stand flip spin flying disc baseball-cap",
+    "i": "../assets/toys/baseball-cap/thumb.webp"
+  },
+  {
+    "t": "Sword in the stone",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN3b3JkLWluLXN0b25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap to pull the sword from the stone. With ✋ on, drag it up out of the stone and back in.",
+    "w": "sword in the stone medieval medieval legend king blade rock moss pull magic knight sword-in-stone",
+    "i": "../assets/toys/sword-in-stone/thumb.webp"
+  },
+  {
+    "t": "Heraldic shield",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNoaWVsZCJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap it and it blocks a blow where you tap: sparks fly and the emblem gleams.",
+    "w": "heraldic shield medieval medieval knight heater coat of arms heraldry crest armour shield",
+    "i": "../assets/toys/shield/thumb.webp"
+  },
+  {
+    "t": "Bow and target",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvdy1hbmQtdGFyZ2V0In0sImNhbWVyYSI6eyJ5YXciOjAuOCwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Pull the arrow back on the string and let go to shoot it. Tap to shoot too.",
+    "w": "bow and target medieval medieval archery arrow bullseye longbow shoot straw bow-and-target",
+    "i": "../assets/toys/bow-and-target/thumb.webp"
+  },
+  {
+    "t": "Trebuchet",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyZWJ1Y2hldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap it to launch: the weight drops and the long arm flings a stone.",
+    "w": "trebuchet medieval medieval siege engine catapult castle launch stone counterweight trebuchet",
+    "i": "../assets/toys/trebuchet/thumb.webp"
+  },
+  {
+    "t": "Crossbow",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb3NzYm93In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap it to shoot a bolt; the string snaps and a new bolt loads.",
+    "w": "crossbow medieval medieval bolt string archery shoot crossbow",
+    "i": "../assets/toys/crossbow/thumb.webp"
+  },
+  {
+    "t": "Knight's helmet",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtuaWdodHMtaGVsbWV0In19",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap to open the visor; tap again to close it.",
+    "w": "knight's helmet medieval medieval armour helm visor plume feathers steel knights-helmet",
+    "i": "../assets/toys/knights-helmet/thumb.webp"
+  },
+  {
+    "t": "Crown",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyb3duIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap it: it rises and its jewels light up one by one.",
+    "w": "crown medieval medieval king queen royal gold gems jewels pearls ermine crown",
+    "i": "../assets/toys/crown/thumb.webp"
+  },
+  {
+    "t": "Dragon egg",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRyYWdvbi1lZ2cifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjgsInJvbGwiOjAsImRpc3RhbmNlIjo0LjZ9fQ",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap to hatch the egg; tap again to go back.",
+    "w": "dragon egg medieval medieval fantasy baby dragon hatch nest scales dragon-egg",
+    "i": "../assets/toys/dragon-egg/thumb.webp"
+  },
+  {
+    "t": "Wizard's orb",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndpemFyZHMtb3JiIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap it to cast a spell: sparks spiral out and runes circle the orb.",
+    "w": "wizard's orb medieval medieval magic crystal ball fantasy spell swirl sparkles wizards-orb",
+    "i": "../assets/toys/wizards-orb/thumb.webp"
+  },
+  {
+    "t": "Crystal ball",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeXN0YWwtYmFsbCJ9fQ",
+    "k": "toy",
+    "s": "Medieval",
+    "d": "Tap it to swirl the mist and raise a glowing sign.",
+    "w": "crystal ball medieval medieval glass orb magic mist fortune stand swirl crystal-ball",
+    "i": "../assets/toys/crystal-ball/thumb.webp"
+  },
+  {
+    "t": "Jellyfish",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImplbGx5ZmlzaCJ9fQ",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it to make it swim: one strong stroke jets it upward.",
+    "w": "jellyfish animals animals sea ocean jelly tentacles glow pulse moon nettle jellyfish",
+    "i": "../assets/toys/jellyfish/thumb.webp"
+  },
+  {
+    "t": "School of fish",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZpc2gtc2Nob29sIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it for a bait ball. Hands-on: drag through the school and the fish dart away.",
+    "w": "school of fish animals animals sea ocean shoal sardines swim bubbles tropical fish-school",
+    "i": "../assets/toys/fish-school/thumb.webp"
+  },
+  {
+    "t": "Butterfly",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1dHRlcmZseSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it to make it flutter faster.",
+    "w": "butterfly animals animals insect wings flutter monarch morpho swallowtail bug butterfly",
+    "i": "../assets/toys/butterfly/thumb.webp"
+  },
+  {
+    "t": "Pufferfish",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1ZmZlcmZpc2gifX0",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it to poke it. Try the Puff slider in the Toy tab.",
+    "w": "pufferfish animals animals sea ocean blowfish puff spines inflate fish pufferfish",
+    "i": "../assets/toys/pufferfish/thumb.webp"
+  },
+  {
+    "t": "Nautilus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5hdXRpbHVzIn0sImNhbWVyYSI6eyJ5YXciOjAuMjUsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it to startle it: it hides its tentacles, then peeks out again.",
+    "w": "nautilus animals animals sea ocean shell spiral chambers tentacles golden ratio nautilus",
+    "i": "../assets/toys/nautilus/thumb.webp"
+  },
+  {
+    "t": "Ladybug",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxhZHlidWcifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC41LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap to open the wings; tap again to close them.",
+    "w": "ladybug animals animals ladybird insect beetle bug spots wings fly ladybug",
+    "i": "../assets/toys/ladybug/thumb.webp"
+  },
+  {
+    "t": "Snail",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNuYWlsIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap to make it hide in its shell; tap again to bring it out.",
+    "w": "snail animals animals garden shell spiral slow slime hide snail",
+    "i": "../assets/toys/snail/thumb.webp"
+  },
+  {
+    "t": "Octopus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jdG9wdXMifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it to squirt ink.",
+    "w": "octopus animals animals sea ocean tentacles arms ink suckers octopus",
+    "i": "../assets/toys/octopus/thumb.webp"
+  },
+  {
+    "t": "Starfish",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXJmaXNoIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjgsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it to wave its arms.",
+    "w": "starfish animals animals sea star ocean beach arms starfish",
+    "i": "../assets/toys/starfish/thumb.webp"
+  },
+  {
+    "t": "Sea urchin",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYS11cmNoaW4ifX0",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it: its spines sweep in waves and it creeps along.",
+    "w": "sea urchin animals animals sea ocean spines spiky uni sea-urchin",
+    "i": "../assets/toys/sea-urchin/thumb.webp"
+  },
+  {
+    "t": "Frog",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZyb2cifX0",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it: a fly buzzes in and the frog catches it with its tongue.",
+    "w": "frog animals animals pond amphibian toad hop green frog",
+    "i": "../assets/toys/frog/thumb.webp"
+  },
+  {
+    "t": "Penguin",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlbmd1aW4ifX0",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it to flap its flippers.",
+    "w": "penguin animals animals bird ice antarctic flippers waddle penguin",
+    "i": "../assets/toys/penguin/thumb.webp"
+  },
+  {
+    "t": "Owl",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im93bCJ9fQ",
+    "k": "toy",
+    "s": "Animals",
+    "d": "Tap it and it turns its head to look behind.",
+    "w": "owl animals animals bird night hoot feathers branch wise owl",
+    "i": "../assets/toys/owl/thumb.webp"
+  },
+  {
+    "t": "Jack-o'-lantern",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImphY2stby1sYW50ZXJuIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap to lift the lid; tap again to put it back.",
+    "w": "jack-o'-lantern holidays holidays halloween pumpkin carved candle glow autumn jack-o-lantern",
+    "i": "../assets/toys/jack-o-lantern/thumb.webp"
+  },
+  {
+    "t": "Snowman",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNub3dtYW4ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjUsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
+    "w": "snowman holidays holidays winter snow melt carrot scarf hat christmas snowman",
+    "i": "../assets/toys/snowman/thumb.webp"
+  },
+  {
+    "t": "Fireworks",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZpcmV3b3JrcyJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap it to launch a firework; tap quickly for a few at once.",
+    "w": "fireworks holidays holidays new year celebration rocket sparks burst diwali festival fireworks",
+    "i": "../assets/toys/fireworks/thumb.webp"
+  },
+  {
+    "t": "Decorated tree",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRlY29yYXRlZC10cmVlIn19",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap to switch the lights on or off.",
+    "w": "decorated tree holidays holidays christmas evergreen fir baubles lights star presents winter decorated-tree",
+    "i": "../assets/toys/decorated-tree/thumb.webp"
+  },
+  {
+    "t": "Patterned egg",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhdHRlcm5lZC1lZ2cifX0",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap it to spin it. Pick a pattern and its colors in the Toy tab.",
+    "w": "patterned egg holidays holidays easter nowruz spring pysanka painted decorated patterned-egg",
+    "i": "../assets/toys/patterned-egg/thumb.webp"
+  },
+  {
+    "t": "Paper lantern",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLWxhbnRlcm4ifX0",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap it to set it swinging on its string; tap again for another push.",
+    "w": "paper lantern holidays holidays lunar new year mid-autumn festival glow hanging tassel paper-lantern",
+    "i": "../assets/toys/paper-lantern/thumb.webp"
+  },
+  {
+    "t": "Diya",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpeWEifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuM319",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap to light the ring of diyas; tap again to put them out.",
+    "w": "diya holidays holidays diwali oil lamp flame light rangoli clay festival diya",
+    "i": "../assets/toys/diya/thumb.webp"
+  },
+  {
+    "t": "Menorah",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lbm9yYWgifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19",
+    "k": "toy",
+    "s": "Holidays",
+    "d": "Tap to put out the candles; tap again to light them one by one.",
+    "w": "menorah holidays holidays hanukkah hanukkiah candles festival of lights brass menorah",
+    "i": "../assets/toys/menorah/thumb.webp"
+  },
+  {
+    "t": "Acoustic guitar",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd1aXRhciJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap it to strum a few chords.",
+    "w": "acoustic guitar music music instrument strings strum acoustic sunburst guitar",
+    "i": "../assets/toys/guitar/thumb.webp"
+  },
+  {
+    "t": "Snare drum",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRydW0ifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap it for a drum roll; tap again quickly for a faster, longer roll.",
+    "w": "snare drum music music instrument percussion sticks beat hit drum",
+    "i": "../assets/toys/drum/thumb.webp"
+  },
+  {
+    "t": "Xylophone",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Inh5bG9waG9uZSJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC42Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap a bar, or drag across the bars for a glissando. Tap the mallet or frame to play a scale.",
+    "w": "xylophone music music instrument rainbow bars mallet toy glockenspiel xylophone",
+    "i": "../assets/toys/xylophone/thumb.webp"
+  },
+  {
+    "t": "Toy piano",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRveS1waWFubyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuN30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap or drag along the keys to play them, or tap the case to play Twinkle, Twinkle.",
+    "w": "toy piano music music instrument keys keyboard hammers rods twinkle little star lullaby toy-piano",
+    "i": "../assets/toys/toy-piano/thumb.webp"
+  },
+  {
+    "t": "Grand piano",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYW5kLXBpYW5vIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjM4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap or drag along the keys to play them. Tap elsewhere for a song; the song bar plays it all.",
+    "w": "grand piano music music instrument piano keys hammers strings concert song midi beethoven debussy satie grand-piano",
+    "i": "../assets/toys/grand-piano/thumb.webp"
+  },
+  {
+    "t": "Upright piano",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVwcmlnaHQtcGlhbm8ifSwiY2FtZXJhIjp7InlhdyI6MC40MiwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjN9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap or drag along the keys to play them. Tap elsewhere for a ragtime; the song bar plays it all.",
+    "w": "upright piano music music instrument piano keys hammers strings ragtime saloon honky-tonk song midi joplin upright-piano",
+    "i": "../assets/toys/upright-piano/thumb.webp"
+  },
+  {
+    "t": "Harpsichord",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhhcnBzaWNob3JkIn0sImNhbWVyYSI6eyJ5YXciOjAuNiwicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap a key to pluck its string, or drag along the keys. Tap anywhere else for a minuet.",
+    "w": "harpsichord music music instrument keyboard baroque quill jacks plucked strings bach minuet song midi harpsichord",
+    "i": "../assets/toys/harpsichord/thumb.webp"
+  },
+  {
+    "t": "Electronic keyboard",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZWN0cm9uaWMta2V5Ym9hcmQifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC43LCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "Music",
+    "d": "Tap or drag along the keys; a colored button changes the voice. Tap elsewhere for a song.",
+    "w": "electronic keyboard music music instrument keyboard synth organ vibes drum pads lights learn song midi electronic-keyboard",
+    "i": "../assets/toys/electronic-keyboard/thumb.webp"
+  },
+  {
+    "t": "Rocket",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvY2tldCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuM319",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to launch the rocket.",
+    "w": "rocket vehicles vehicles space launch pad blast off lift off fins spaceship rocket",
+    "i": "../assets/toys/rocket/thumb.webp"
+  },
+  {
+    "t": "Helicopter",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlbGljb3B0ZXIifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap to take off; tap again to land.",
+    "w": "helicopter vehicles vehicles chopper rotor fly helipad aircraft helicopter",
+    "i": "../assets/toys/helicopter/thumb.webp"
+  },
+  {
+    "t": "Hot-air balloon",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhvdC1haXItYmFsbG9vbiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to fire the burner: the balloon swells and climbs.",
+    "w": "hot-air balloon vehicles vehicles balloon basket burner float sky flight hot-air-balloon",
+    "i": "../assets/toys/hot-air-balloon/thumb.webp"
+  },
+  {
+    "t": "Steam train",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0ZWFtLXRyYWluIn0sImNhbWVyYSI6eyJ5YXciOjAuNiwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to blow the whistle.",
+    "w": "steam train vehicles vehicles locomotive engine railway track smoke choo choo tender steam-train",
+    "i": "../assets/toys/steam-train/thumb.webp"
+  },
+  {
+    "t": "Ocean liner",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jZWFuLWxpbmVyIn0sImNhbWVyYSI6eyJ5YXciOjAuNjIsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9fQ",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to sound the horn.",
+    "w": "ocean liner vehicles vehicles ship boat steamship funnels sea cruise ocean-liner",
+    "i": "../assets/toys/ocean-liner/thumb.webp"
+  },
+  {
+    "t": "Sports car",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwb3J0cy1jYXIifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44NX19",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to rev the engine. Hands-on: push it and it rolls on its wheels.",
+    "w": "sports car vehicles vehicles car racing coupe fast wheels spoiler sports-car",
+    "i": "../assets/toys/sports-car/thumb.webp"
+  },
+  {
+    "t": "Bus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJ1cyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to stop for passengers: the lights flash and the doors open.",
+    "w": "bus vehicles vehicles school bus double decker coach wheels bus",
+    "i": "../assets/toys/bus/thumb.webp"
+  },
+  {
+    "t": "Propeller plane",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3BlbGxlci1wbGFuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjo0LjN9fQ",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to loop the loop.",
+    "w": "propeller plane vehicles vehicles biplane aeroplane airplane aircraft pilot prop fly loop propeller-plane",
+    "i": "../assets/toys/propeller-plane/thumb.webp"
+  },
+  {
+    "t": "Jet airliner",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImpldCJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to climb and bank left, then right.",
+    "w": "jet airliner vehicles vehicles aeroplane airplane aircraft plane passenger fly wings engines jet",
+    "i": "../assets/toys/jet/thumb.webp"
+  },
+  {
+    "t": "Sailboat",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhaWxib2F0In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it for a gust of wind: it heels over, then rocks back upright.",
+    "w": "sailboat vehicles vehicles yacht boat sail sea mast wind sailboat",
+    "i": "../assets/toys/sailboat/thumb.webp"
+  },
+  {
+    "t": "Submarine",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1Ym1hcmluZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to dive; then it surfaces and raises its periscope.",
+    "w": "submarine vehicles vehicles sub underwater periscope bubbles sea submarine",
+    "i": "../assets/toys/submarine/thumb.webp"
+  },
+  {
+    "t": "Bicycle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJpY3ljbGUifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to ring the bell and spin the wheels.",
+    "w": "bicycle vehicles vehicles bike cycle wheels pedals bell bicycle",
+    "i": "../assets/toys/bicycle/thumb.webp"
+  },
+  {
+    "t": "Tractor",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyYWN0b3IifSwiY2FtZXJhIjp7InlhdyI6MC42LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap it to make it chug: it shakes and puffs smoke.",
+    "w": "tractor vehicles vehicles farm field wheels exhaust tractor",
+    "i": "../assets/toys/tractor/thumb.webp"
+  },
+  {
+    "t": "Flying saucer",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVmbyJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19",
+    "k": "toy",
+    "s": "Vehicles",
+    "d": "Tap to switch the beam off or on.",
+    "w": "flying saucer vehicles vehicles ufo alien spaceship beam cow space ufo",
+    "i": "../assets/toys/ufo/thumb.webp"
+  },
+  {
+    "t": "Eiffel Tower",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVpZmZlbC10b3dlciJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it for its night show of lights and fireworks.",
+    "w": "eiffel tower landmarks landmarks paris france tower iron lattice eiffel-tower",
+    "i": "../assets/toys/eiffel-tower/thumb.webp"
+  },
+  {
+    "t": "Washington Monument",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Indhc2hpbmd0b24tbW9udW1lbnQifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0fX0",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it for a day in a few seconds: the sun crosses and the shadow swings around.",
+    "w": "washington monument landmarks landmarks obelisk usa washington dc flags washington-monument",
+    "i": "../assets/toys/washington-monument/thumb.webp"
+  },
+  {
+    "t": "Pyramids of Giza",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB5cmFtaWRzIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjMyLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it: a tiny flying saucer beams up a camel made of sand.",
+    "w": "pyramids of giza landmarks landmarks egypt giza sphinx desert ancient pharaoh pyramids",
+    "i": "../assets/toys/pyramids/thumb.webp"
+  },
+  {
+    "t": "Twisting supertall",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cGVydGFsbCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it to twist the tower further and send light up its glass.",
+    "w": "twisting supertall landmarks landmarks skyscraper tower city glass modern building supertall",
+    "i": "../assets/toys/supertall/thumb.webp"
+  },
+  {
+    "t": "Lighthouse",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxpZ2h0aG91c2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjgsInJvbGwiOjAsImRpc3RhbmNlIjo0LjN9fQ",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap to switch the light off or on.",
+    "w": "lighthouse landmarks landmarks beacon coast sea rocks beam light lighthouse",
+    "i": "../assets/toys/lighthouse/thumb.webp"
+  },
+  {
+    "t": "Statue of Liberty",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXR1ZS1vZi1saWJlcnR5In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NH19",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it to make the torch flare and send up golden sparks.",
+    "w": "statue of liberty landmarks landmarks new york usa torch crown statue harbour statue-of-liberty",
+    "i": "../assets/toys/statue-of-liberty/thumb.webp"
+  },
+  {
+    "t": "White House",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLWhvdXNlIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjM4LCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it: the fountain shoots up and the windows light up one by one.",
+    "w": "white house landmarks landmarks washington usa president house columns portico white-house",
+    "i": "../assets/toys/white-house/thumb.webp"
+  },
+  {
+    "t": "Leaning Tower of Pisa",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxlYW5pbmctdG93ZXIifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap to drop two balls from the top. Set the lean in the Toy tab.",
+    "w": "leaning tower of pisa landmarks landmarks pisa italy lean tower bell leaning-tower",
+    "i": "../assets/toys/leaning-tower/thumb.webp"
+  },
+  {
+    "t": "Colosseum",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbG9zc2V1bSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC42Miwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn19",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it for a chariot race around the arena.",
+    "w": "colosseum landmarks landmarks rome italy amphitheatre arena ancient colosseum",
+    "i": "../assets/toys/colosseum/thumb.webp"
+  },
+  {
+    "t": "Parthenon",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcnRoZW5vbiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it for a procession. Pick the temple today or as it was in the Toy tab.",
+    "w": "parthenon landmarks landmarks athens greece temple acropolis columns ancient parthenon",
+    "i": "../assets/toys/parthenon/thumb.webp"
+  },
+  {
+    "t": "Stonehenge",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b25laGVuZ2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNTUsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it for the midsummer sunrise shining through the stones.",
+    "w": "stonehenge landmarks landmarks stones circle england ancient trilithon stonehenge",
+    "i": "../assets/toys/stonehenge/thumb.webp"
+  },
+  {
+    "t": "Big Ben",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJpZy1iZW4ifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it: the hands spin around, the dials glow and the bell swings.",
+    "w": "big ben landmarks landmarks clock tower london england elizabeth tower bell big-ben",
+    "i": "../assets/toys/big-ben/thumb.webp"
+  },
+  {
+    "t": "Taj Mahal",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRhai1tYWhhbCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjMyLCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it for moonlight: night falls and the white dome glows.",
+    "w": "taj mahal landmarks landmarks india agra dome minarets marble taj-mahal",
+    "i": "../assets/toys/taj-mahal/thumb.webp"
+  },
+  {
+    "t": "Castle",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhc3RsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap to lower the drawbridge; tap again to raise it.",
+    "w": "castle landmarks landmarks medieval towers drawbridge moat battlements castle",
+    "i": "../assets/toys/castle/thumb.webp"
+  },
+  {
+    "t": "Pagoda",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhZ29kYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it to ring the wind chimes; lanterns and doors light up.",
+    "w": "pagoda landmarks landmarks japan temple tiers roofs bells pagoda",
+    "i": "../assets/toys/pagoda/thumb.webp"
+  },
+  {
+    "t": "Windmill",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndpbmRtaWxsIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0",
+    "k": "toy",
+    "s": "Landmarks",
+    "d": "Tap it for a gust of wind that spins the sails hard.",
+    "w": "windmill landmarks landmarks netherlands dutch mill sails tulips windmill",
+    "i": "../assets/toys/windmill/thumb.webp"
+  },
+  {
+    "t": "Perceptron",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmNlcHRyb24ifSwiY2FtZXJhIjp7InlhdyI6MC4xOCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to watch it try an example, get it wrong, and learn.",
+    "w": "perceptron ai and computing ai and computing neuron neural network learning weights threshold ai machine learning perceptron",
+    "i": "../assets/toys/perceptron/thumb.webp"
+  },
+  {
+    "t": "Multilayer perceptron",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11bHRpbGF5ZXItcGVyY2VwdHJvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjE4LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to try all four inputs and fill in the XOR truth table.",
+    "w": "multilayer perceptron ai and computing ai and computing mlp xor hidden layer perceptron logic neural network ai machine learning multilayer-perceptron",
+    "i": "../assets/toys/multilayer-perceptron/thumb.webp"
+  },
+  {
+    "t": "Neural network",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ldXJhbC1uZXR3b3JrIn0sImNhbWVyYSI6eyJ5YXciOjAuMTgsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to send signals forward, then learn backward. Set its size in the Toy tab.",
+    "w": "neural network ai and computing ai and computing mlp multilayer perceptron neurons layers backpropagation deep learning ai machine learning neural-network",
+    "i": "../assets/toys/neural-network/thumb.webp"
+  },
+  {
+    "t": "Convolutional network",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNubiJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to read the digit. Draw your own digit in the Toy tab.",
+    "w": "convolutional network ai and computing ai and computing cnn convolution filter kernel pooling image digit recognition vision ai machine learning cnn",
+    "i": "../assets/toys/cnn/thumb.webp"
+  },
+  {
+    "t": "Recurrent network",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJubiJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to read a sentence one word at a time. Try the LSTM style in the Toy tab.",
+    "w": "recurrent network ai and computing ai and computing rnn lstm recurrent memory hidden state sequence words language ai machine learning rnn",
+    "i": "../assets/toys/rnn/thumb.webp"
+  },
+  {
+    "t": "Transformer",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyYW5zZm9ybWVyIn0sImNhbWVyYSI6eyJ5YXciOjAuMTYsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
+    "w": "transformer ai and computing ai and computing attention heads tokens layers language model next word ai machine learning transformer",
+    "i": "../assets/toys/transformer/thumb.webp"
+  },
+  {
+    "t": "Looped transformer",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imxvb3BlZC10cmFuc2Zvcm1lciJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it: the tiles loop through one block, sharper each lap, until 3 + 4 = 7.",
+    "w": "looped transformer ai and computing ai and computing loop recurrent depth block reasoning tokens resolve ai machine learning looped-transformer",
+    "i": "../assets/toys/looped-transformer/thumb.webp"
+  },
+  {
+    "t": "Diffusion model",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpZmZ1c2lvbi1tb2RlbCJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it: the noise clears, step by step, into a rubber duck.",
+    "w": "diffusion model ai and computing ai and computing denoise noise steps generative image model duck ai machine learning diffusion-model",
+    "i": "../assets/toys/diffusion-model/thumb.webp"
+  },
+  {
+    "t": "Gradient descent",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYWRpZW50LWRlc2NlbnQifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to roll the ball downhill. Try the Learning rate in the Toy tab.",
+    "w": "gradient descent ai and computing ai and computing loss landscape optimization learning rate momentum valley ball ai machine learning gradient-descent",
+    "i": "../assets/toys/gradient-descent/thumb.webp"
+  },
+  {
+    "t": "Gaussian splatting",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhdXNzaWFuLXNwbGF0dGluZyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it: random splats learn the photo. Pick another View in the Toy tab.",
+    "w": "gaussian splatting ai and computing ai and computing gaussian splat splats 3dgs training fit gradient descent sorting point cloud rendering ai gaussian-splatting",
+    "i": "../assets/toys/gaussian-splatting/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Word vectors",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndvcmQtdmVjdG9ycyJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
+    "w": "word vectors ai and computing ai and computing embedding word2vec king queen analogy vector space language ai machine learning word-vectors",
+    "i": "../assets/toys/word-vectors/thumb.webp"
+  },
+  {
+    "t": "Sorting machine",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvcnRpbmctbWFjaGluZSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
+    "w": "sorting machine ai and computing ai and computing sort algorithm bubble sort quicksort merge sort bars swaps computer science sorting-machine",
+    "i": "../assets/toys/sorting-machine/thumb.webp"
+  },
+  {
+    "t": "Half adder",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhhbGYtYWRkZXIifSwiY2FtZXJhIjp7InlhdyI6MC4xOCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to add 1 + 1 in binary: the answer is 10.",
+    "w": "half adder ai and computing ai and computing logic gates xor and binary addition circuit bits carry computer half-adder",
+    "i": "../assets/toys/half-adder/thumb.webp"
+  },
+  {
+    "t": "Turing machine",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InR1cmluZy1tYWNoaW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOTV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to run the program on the tape. Type your own number in the Toy tab.",
+    "w": "turing machine ai and computing ai and computing alan turing tape head state binary add one busy beaver program rules computer science turing-machine",
+    "i": "../assets/toys/turing-machine/thumb.webp"
+  },
+  {
+    "t": "Difference engine",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpZmZlcmVuY2UtZW5naW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMTUsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap to turn the crank once; tap again to keep cranking. Type your own polynomial in the Toy tab.",
+    "w": "difference engine ai and computing ai and computing charles babbage method of differences polynomial wheels crank carry brass calculator mechanical difference-engine",
+    "i": "../assets/toys/difference-engine/thumb.webp"
+  },
+  {
+    "t": "Enigma machine",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVuaWdtYS1tYWNoaW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMjUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6M30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap the keys or type to code letters. Tap the machine to decode. Tap the pad to clear it.",
+    "w": "enigma machine ai and computing ai and computing cipher code secret message rotors plugboard lamps keyboard cryptography bletchley park turing history enigma-machine",
+    "i": "../assets/toys/enigma-machine/thumb.webp"
+  },
+  {
+    "t": "Bombe",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvbWJlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "k": "toy",
+    "s": "AI and computing",
+    "d": "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
+    "w": "bombe ai and computing ai and computing bombe bletchley park alan turing gordon welchman codebreaking enigma drums crib menu history bombe",
+    "i": "../assets/toys/bombe/thumb.webp"
+  },
+  {
+    "t": "Picture lab",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0",
+    "k": "toy",
+    "s": "Pictures and pages",
+    "d": "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
+    "w": "picture lab pictures and pages pictures and pages pdf page document article photo picture image gif video open file picture-lab",
+    "i": "../assets/toys/picture-lab/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Your book",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19",
+    "k": "toy",
+    "s": "Pictures and pages",
+    "d": "Tap the right page to turn on, the left to go back. Tap a link to follow it; Pop out lifts a picture.",
+    "w": "your book pictures and pages pictures and pages book pdf pages flip turn read hardcover paperback magazine notebook spiral stapled your-book",
+    "i": "../assets/toys/your-book/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Photo album",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "k": "toy",
+    "s": "Pictures and pages",
+    "d": "Tap the right page to turn on, the left to go back, or pull one over. Pop out lifts a photo off the page.",
+    "w": "photo album pictures and pages pictures and pages photo album scrapbook pictures family photos leather linen pages turn photo-album",
+    "i": "../assets/toys/photo-album/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Picture frame",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtZnJhbWUifSwiY2FtZXJhIjp7InlhdyI6MC4xLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "k": "toy",
+    "s": "Pictures and pages",
+    "d": "Tap the frame to set it swinging on its nail. Open your own photo, GIF or video in the Toy tab.",
+    "w": "picture frame pictures and pages pictures and pages picture frame photo wall nail swing wood gold modern digital picture-frame",
+    "i": "../assets/toys/picture-frame/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Song landscape",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to play or pause; drag to turn or tilt. The Toy tab starts over, scrubs, changes the look or uses the mic.",
+    "w": "song landscape studio studio song music audio sound spectrogram spectrum frequency pitch loudness fourier waveform mp3 wav landscape song-landscape",
+    "i": "../assets/toys/song-landscape/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Chladni plate",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNobGFkbmktcGxhdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to bow the plate and watch the sand find its still lines. In the Toy tab, sing to it or play your audio.",
+    "w": "chladni plate studio studio chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics chladni-plate",
+    "i": "../assets/toys/chladni-plate/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Room echo meter",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvb20tZWNobyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap “Use my microphone” in the Toy tab, then clap once: the echo time shows on the back wall.",
+    "w": "room echo meter studio studio room echo reverb reverberation rt60 clap acoustics sound decay microphone live measure room-echo",
+    "i": "../assets/toys/room-echo/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Splat mirror",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LW1pcnJvciJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap “Start camera” to see yourself in splats; turn it to see the depth. More in the Toy tab.",
+    "w": "splat mirror studio studio mirror camera webcam selfie live depth hologram 3d relief video you splat-mirror",
+    "i": "../assets/toys/splat-mirror/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Model to splats",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
+    "w": "model to splats studio studio 3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print model-splats",
+    "i": "../assets/toys/model-splats/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "QR code",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
+    "w": "qr code studio studio qr code generator barcode link url scan camera phone print gif share qr-code",
+    "i": "../assets/toys/qr-code/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Photo to 3D",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
+    "w": "photo to 3d studio studio photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp photo-3d",
+    "i": "../assets/toys/photo-3d/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Moving photo to 3D",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
+    "w": "moving photo to 3d studio studio gif video animation movie clip moving photo depth 3d relief frames muybridge horse convert converter moving-photo-3d",
+    "i": "../assets/toys/moving-photo-3d/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Video to 3D",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
+    "w": "video to 3d studio studio video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm video-3d",
+    "i": "../assets/toys/video-3d/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Splat field",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWZpZWxkIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuODUsInJvbGwiOjAsImRpc3RhbmNlIjozfX0",
+    "k": "toy",
+    "s": "Lab",
+    "d": "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
+    "w": "splat field lab lab gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment splat-field",
+    "i": "../assets/toys/splat-field/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Thermal ellipsoids",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRoZXJtYWwtZWxsaXBzb2lkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi45fX0",
+    "k": "toy",
+    "s": "Science",
+    "d": "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
+    "w": "thermal ellipsoids science science crystal crystallography cif mmcif pdb anisotropic displacement ellipsoid ortep atoms vibration uncertainty gaussian science thermal-ellipsoids",
+    "i": "../assets/toys/thermal-ellipsoids/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Super-resolution microscope",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNtbG0tbWljcm9zY29wZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "k": "toy",
+    "s": "Science",
+    "d": "Pinch or scroll to zoom down to single molecules. Tap to see a thin slice at one depth.",
+    "w": "super-resolution microscope science science microscope super resolution smlm storm palm paint localization thunderstorm cell microtubules clathrin fluorescence nanometer science smlm-microscope",
+    "i": "../assets/toys/smlm-microscope/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Galaxy in a box",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhbGF4eS1ib3gifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Science",
+    "d": "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
+    "w": "galaxy in a box science science galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science galaxy-box",
+    "i": "../assets/toys/galaxy-box/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Fluid lab",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZsdWlkLWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "k": "toy",
+    "s": "Lab",
+    "d": "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
+    "w": "fluid lab lab lab fluid liquid water soda honey lava pour glass splash drops viscosity smoke steam candle flame fire physics simulation lab fluid-lab",
+    "i": "../assets/toys/fluid-lab/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Screen",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "k": "toy",
+    "s": "Pictures and pages",
+    "d": "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
+    "w": "screen pictures and pages pictures and pages tv television video gif movie cinema theater hologram screen curtains play watch screen",
+    "i": "../assets/toys/screen/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Home",
+    "u": "",
+    "k": "page",
+    "d": "Toys made of 3D Gaussian splats that run in your browser: poke them, blow on them, paint them, drop them, then share them as a link or an embed.",
+    "w": "splashery · splats you can play with toys made of 3d gaussian splats that run in your browser: poke them, blow on them, paint them, drop them, then share them as a link or an embed. toys made of soft 3d splats that run right in your browser. poke one, blow on it, paint it, break it apart, then share it."
+  },
+  {
+    "t": "Toys",
+    "u": "toys/",
+    "k": "page",
+    "d": "Every toy on Splashery's shelves, from photoreal scans to atoms and games.",
+    "w": "toys every toy on splashery's shelves, from photoreal scans to atoms and games. every toy on the shelves. tap one to play with it in the gallery."
+  },
+  {
+    "t": "Tools",
+    "u": "tools/",
+    "k": "page",
+    "d": "What you can do to a Splashery toy, and the ways to share it.",
+    "w": "tools what you can do to a splashery toy, and the ways to share it. every toy answers to the same tools. pick one in the gallery's toolbar, then drag on the toy."
+  },
+  {
+    "t": "Orbit",
+    "u": "tools/#tool-orbit",
+    "k": "tool",
+    "d": "Drag to turn the toy; pinch or scroll to zoom. Double-tap to reset the view.",
+    "w": "orbit drag to turn the toy; pinch or scroll to zoom. double-tap to reset the view. tool play"
+  },
+  {
+    "t": "Poke",
+    "u": "tools/#tool-poke",
+    "k": "tool",
+    "d": "Tap or drag to push splats in; they spring back.",
+    "w": "poke tap or drag to push splats in; they spring back. tool play"
+  },
+  {
+    "t": "Paint",
+    "u": "tools/#tool-paint",
+    "k": "tool",
+    "d": "Brush color onto the toy, splat by splat.",
+    "w": "paint brush color onto the toy, splat by splat. tool play"
+  },
+  {
+    "t": "Magnet",
+    "u": "tools/#tool-magnet",
+    "k": "tool",
+    "d": "Pull splats toward your finger and let them fly back.",
+    "w": "magnet pull splats toward your finger and let them fly back. tool play"
+  },
+  {
+    "t": "Clay",
+    "u": "tools/#tool-clay",
+    "k": "tool",
+    "d": "Push and pull the surface like soft clay.",
+    "w": "clay push and pull the surface like soft clay. tool play"
+  },
+  {
+    "t": "Tap",
+    "u": "tools/#tool-tap",
+    "k": "tool",
+    "d": "Each toy has its own tap: a peel, a hop, a song, a shatter.",
+    "w": "tap each toy has its own tap: a peel, a hop, a song, a shatter. tool play"
+  },
+  {
+    "t": "Make",
+    "u": "tools/#tool-make",
+    "k": "tool",
+    "d": "Build your own toy from a shape, a palette and a seed.",
+    "w": "make build your own toy from a shape, a palette and a seed. tool make and share"
+  },
+  {
+    "t": "Link",
+    "u": "tools/#tool-link",
+    "k": "tool",
+    "d": "A link carries the toy and every setting, so others see what you see.",
+    "w": "link a link carries the toy and every setting, so others see what you see. tool make and share"
+  },
+  {
+    "t": "Embed",
+    "u": "tools/#tool-embed",
+    "k": "tool",
+    "d": "Put a live toy on your own page with an iframe or one script tag.",
+    "w": "embed put a live toy on your own page with an iframe or one script tag. tool make and share"
+  },
+  {
+    "t": "GIF and video",
+    "u": "tools/#tool-gif-and-video",
+    "k": "tool",
+    "d": "Save a turntable or a short effect loop as a file.",
+    "w": "gif and video save a turntable or a short effect loop as a file. tool make and share"
+  },
+  {
+    "t": "Science",
+    "u": "science/",
+    "k": "page",
+    "d": "Atoms, planets, the body, math and computing on Splashery, as toys you can play with.",
+    "w": "science atoms, planets, the body, math and computing on splashery, as toys you can play with. science, math and computing toys: things you can turn over, take apart and run."
+  },
+  {
+    "t": "Studio",
+    "u": "studio/",
+    "k": "page",
+    "d": "Turn your own photos, pages, songs and files into splats on Splashery.",
+    "w": "studio turn your own photos, pages, songs and files into splats on splashery. bring your own: photos, pages, songs and splat files, turned into toys on your device. nothing is uploaded."
+  },
+  {
+    "t": "Learn",
+    "u": "learn/",
+    "k": "page",
+    "d": "How splats work, and how to program your own Splashery toys.",
+    "w": "learn how splats work, and how to program your own splashery toys. how the toys work, and how to make your own."
+  },
+  {
+    "t": "The Tinkerer's Manual",
+    "u": "../manual/",
+    "k": "page",
+    "d": "How to program splats, from the math of one splat to your own equations.",
+    "w": "the tinkerer's manual how to program splats, from the math of one splat to your own equations. learn"
+  },
+  {
+    "t": "The Manual as a PDF",
+    "u": "../manual/tinkerers-manual.pdf",
+    "k": "page",
+    "d": "The same manual, to read offline or print.",
+    "w": "the manual as a pdf the same manual, to read offline or print. learn"
+  },
+  {
+    "t": "Writing toy recipes",
+    "u": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md",
+    "k": "page",
+    "d": "How a toy's recipe says which parts move, and how.",
+    "w": "writing toy recipes how a toy's recipe says which parts move, and how. learn"
+  },
+  {
+    "t": "The scene format",
+    "u": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md",
+    "k": "page",
+    "d": "What a shared link or a saved scene holds.",
+    "w": "the scene format what a shared link or a saved scene holds. learn"
+  },
+  {
+    "t": "Embedding a toy",
+    "u": "https://github.com/ryanjosephkamp/splashery#embedding",
+    "k": "page",
+    "d": "The iframe and the custom element, with every option.",
+    "w": "embedding a toy the iframe and the custom element, with every option. learn"
+  },
+  {
+    "t": "What's new",
+    "u": "new/",
+    "k": "page",
+    "d": "The latest changes to Splashery, newest first.",
+    "w": "what's new the latest changes to splashery, newest first. the latest changes, newest first."
+  },
+  {
+    "t": "About",
+    "u": "about/",
+    "k": "page",
+    "d": "What Splashery is, who makes it, the terms of use and the credits.",
+    "w": "about what splashery is, who makes it, the terms of use and the credits. splashery is a free toy box of 3d gaussian splats that runs in your browser."
+  }
+]

@@ -1,0 +1,1426 @@
+<!doctype html>
+<html lang="en" data-root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Science · Splashery</title>
+    <meta
+      name="description"
+      content="Atoms, planets, the body, math and computing on Splashery, as toys you can play with."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/science/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Science · Splashery" />
+    <meta
+      property="og:description"
+      content="Atoms, planets, the body, math and computing on Splashery, as toys you can play with."
+    />
+    <meta property="og:url" content="https://ryanjosephkamp.github.io/splashery/site/science/" />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../assets/site.css" />
+    <script type="module" src="../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../">Home</a></li>
+              <li><a href="../toys/">Toys</a></li>
+              <li><a href="../tools/">Tools</a></li>
+              <li><a href="../science/" aria-current="page">Science</a></li>
+              <li><a href="../studio/">Studio</a></li>
+              <li><a href="../learn/">Learn</a></li>
+              <li><a href="../new/">What's new</a></li>
+              <li><a href="../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-intro">
+        <h1>Science</h1>
+        <p class="lead">
+          Science, math and computing toys: things you can turn over, take apart and run.
+        </p>
+        <p><a class="button primary" href="../../">Open the gallery</a></p>
+      </div>
+      <nav class="shelf-index" aria-label="Shelves">
+        <ul>
+          <li data-labs><a href="#shelf-science">Science</a></li>
+          <li><a href="#shelf-atoms">Atoms</a></li>
+          <li><a href="#shelf-space">Space</a></li>
+          <li><a href="#shelf-tiny">Tiny world</a></li>
+          <li><a href="#shelf-anatomy">Body</a></li>
+          <li><a href="#shelf-maths">Math</a></li>
+          <li><a href="#shelf-computing">AI and computing</a></li>
+          <li data-labs><a href="#shelf-lab">Lab</a></li>
+        </ul>
+      </nav>
+      <section class="shelf" id="shelf-science" data-labs aria-labelledby="h-shelf-science">
+        <h2 id="h-shelf-science">Science <span class="count">labs</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRoZXJtYWwtZWxsaXBzb2lkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi45fX0"
+              ><img
+                src="../../assets/toys/thermal-ellipsoids/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Thermal ellipsoids <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNtbG0tbWljcm9zY29wZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19"
+              ><img
+                src="../../assets/toys/smlm-microscope/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name"
+                >Super-resolution microscope <span class="badge">labs</span></span
+              ></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhbGF4eS1ib3gifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ"
+              ><img
+                src="../../assets/toys/galaxy-box/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Galaxy in a box <span class="badge">labs</span></span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-atoms" aria-labelledby="h-shelf-atoms">
+        <h2 id="h-shelf-atoms">Atoms <span class="count">6 toys</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYml0YWwifX0"
+              ><img
+                src="../../assets/toys/orbital/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Electron orbital</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF0b20ifX0"
+              ><img
+                src="../../assets/toys/atom/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Atom</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19"
+              ><img
+                src="../../assets/toys/molecule/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Molecule</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3RlaW4ifX0"
+              ><img
+                src="../../assets/toys/protein/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Protein</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeXN0YWwtbGF0dGljZSJ9fQ"
+              ><img
+                src="../../assets/toys/crystal-lattice/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Crystal lattice</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmlvZGljLXRhYmxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/periodic-table/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Periodic table</span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-space" aria-labelledby="h-shelf-space">
+        <h2 id="h-shelf-space">Space <span class="count">24 toys</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1biJ9fQ"
+              ><img
+                src="../../assets/toys/sun/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Sun</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbGFyLXN5c3RlbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC43Miwicm9sbCI6MCwiZGlzdGFuY2UiOjMuN319"
+              ><img
+                src="../../assets/toys/solar-system/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Solar system</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lcmN1cnkifX0"
+              ><img
+                src="../../assets/toys/mercury/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Mercury</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZlbnVzIn19"
+              ><img
+                src="../../assets/toys/venus/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Venus</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRoIn19"
+              ><img
+                src="../../assets/toys/earth/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Earth</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vb24ifX0"
+              ><img
+                src="../../assets/toys/moon/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Moon</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcnMifX0"
+              ><img
+                src="../../assets/toys/mars/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Mars</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imp1cGl0ZXIifX0"
+              ><img
+                src="../../assets/toys/jupiter/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Jupiter</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhdHVybiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuM319"
+              ><img
+                src="../../assets/toys/saturn/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Saturn</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVyYW51cyJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19"
+              ><img
+                src="../../assets/toys/uranus/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Uranus</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lcHR1bmUifX0"
+              ><img
+                src="../../assets/toys/neptune/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Neptune</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYW5ldCJ9fQ"
+              ><img
+                src="../../assets/toys/planet/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Tiny planet</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImF1cm9yYS1wbGFuZXQifX0"
+              ><img
+                src="../../assets/toys/aurora-planet/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Aurora world</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFzdGVyb2lkIn19"
+              ><img
+                src="../../assets/toys/asteroid/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Asteroid</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbWV0In19"
+              ><img
+                src="../../assets/toys/comet/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Comet</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1ldGVvciJ9fQ"
+              ><img
+                src="../../assets/toys/meteor/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Meteor</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXIifX0"
+              ><img
+                src="../../assets/toys/star/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Star</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1bHNhciJ9fQ"
+              ><img
+                src="../../assets/toys/pulsar/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Pulsar</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJsYWNrLWhvbGUifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMTYsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ"
+              ><img
+                src="../../assets/toys/black-hole/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Black hole</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItY2x1c3RlciJ9fQ"
+              ><img
+                src="../../assets/toys/star-cluster/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Star cluster</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYW5ldGFyeS1uZWJ1bGEifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19"
+              ><img
+                src="../../assets/toys/planetary-nebula/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Ring nebula</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lYnVsYSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19"
+              ><img
+                src="../../assets/toys/nebula/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Nebula</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cGVybm92YSJ9fQ"
+              ><img
+                src="../../assets/toys/supernova/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Supernova</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwaXJhbC1nYWxheHkifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuOSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNX19"
+              ><img
+                src="../../assets/toys/spiral-galaxy/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Spiral galaxy</span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-tiny" aria-labelledby="h-shelf-tiny">
+        <h2 id="h-shelf-tiny">Tiny world <span class="count">18 toys</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpcnVzIn19"
+              ><img
+                src="../../assets/toys/virus/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Virus</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhY3RlcmlvcGhhZ2UifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19"
+              ><img
+                src="../../assets/toys/bacteriophage/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Bacteriophage</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhY3Rlcml1bSJ9fQ"
+              ><img
+                src="../../assets/toys/bacterium/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Bacterium</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlZC1ibG9vZC1jZWxsIn19"
+              ><img
+                src="../../assets/toys/red-blood-cell/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Red blood cell</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ldXJvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19"
+              ><img
+                src="../../assets/toys/neuron/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Neuron</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFzdHJvY3l0ZSJ9fQ"
+              ><img
+                src="../../assets/toys/astrocyte/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Astrocyte</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFuaW1hbC1jZWxsIn19"
+              ><img
+                src="../../assets/toys/animal-cell/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Animal cell</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRuYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNX19"
+              ><img
+                src="../../assets/toys/dna/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">DNA</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLWJsb29kLWNlbGwifX0"
+              ><img
+                src="../../assets/toys/white-blood-cell/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">White blood cell</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pY3JvZ2xpYSJ9fQ"
+              ><img
+                src="../../assets/toys/microglia/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Microglia</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpYXRvbSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ"
+              ><img
+                src="../../assets/toys/diatom/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Diatom</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRhcmRpZ3JhZGUifX0"
+              ><img
+                src="../../assets/toys/tardigrade/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Tardigrade</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvbGxlbiJ9fQ"
+              ><img
+                src="../../assets/toys/pollen/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Pollen grain</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNub3dmbGFrZSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjE1LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19"
+              ><img
+                src="../../assets/toys/snowflake/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Snowflake</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNocm9tb3NvbWUifX0"
+              ><img
+                src="../../assets/toys/chromosome/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Chromosome</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pdG9jaG9uZHJpb24ifX0"
+              ><img
+                src="../../assets/toys/mitochondrion/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Mitochondrion</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcmFtZWNpdW0ifX0"
+              ><img
+                src="../../assets/toys/paramecium/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Paramecium</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFtb2ViYSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41LCJyb2xsIjowLCJkaXN0YW5jZSI6NX19"
+              ><img
+                src="../../assets/toys/amoeba/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Amoeba</span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-anatomy" aria-labelledby="h-shelf-anatomy">
+        <h2 id="h-shelf-anatomy">Body <span class="count">6 toys</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlYXJ0In19"
+              ><img
+                src="../../assets/toys/heart/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Beating heart</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJyYWluIn19"
+              ><img
+                src="../../assets/toys/brain/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Brain</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImV5ZSJ9fQ"
+              ><img
+                src="../../assets/toys/eye/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Eye</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imx1bmdzIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0"
+              ><img
+                src="../../assets/toys/lungs/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Lungs</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvb3RoIn19"
+              ><img
+                src="../../assets/toys/tooth/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Tooth</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtpZG5leSJ9fQ"
+              ><img
+                src="../../assets/toys/kidney/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Kidney</span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFuYXRvbXktYXRsYXMifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/anatomy-atlas/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Anatomy atlas <span class="badge">labs</span></span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-maths" aria-labelledby="h-shelf-maths">
+        <h2 id="h-shelf-maths">Math <span class="count">16 toys</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxvcmVueiJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+              ><img
+                src="../../assets/toys/lorenz/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Lorenz attractor</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vYml1cyJ9LCJjYW1lcmEiOnsieWF3IjowLjksInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0"
+              ><img
+                src="../../assets/toys/mobius/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Möbius strip</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtsZWluLWJvdHRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjR9fQ"
+              ><img
+                src="../../assets/toys/klein-bottle/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Klein bottle</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lbmdlci1zcG9uZ2UifSwiY2FtZXJhIjp7InlhdyI6MC42MiwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjcuMn19"
+              ><img
+                src="../../assets/toys/menger-sponge/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Menger sponge</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh5cGVyY3ViZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjYuNH19"
+              ><img
+                src="../../assets/toys/hypercube/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Hypercube</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvcnVzLWtub3QifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0"
+              ><img
+                src="../../assets/toys/torus-knot/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Torus knot</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd5cm9pZCJ9LCJjYW1lcmEiOnsieWF3IjowLjYyLCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjYuOH19"
+              ><img
+                src="../../assets/toys/gyroid/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Gyroid</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hbmRlbGJ1bGIifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNH19"
+              ><img
+                src="../../assets/toys/mandelbulb/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Mandelbulb</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNpZXJwaW5za2kifSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0"
+              ><img
+                src="../../assets/toys/sierpinski/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Sierpinski tetrahedron</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBsYXRvbmljIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzUsInJvbGwiOjAsImRpc3RhbmNlIjo1LjJ9fQ"
+              ><img
+                src="../../assets/toys/platonic/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Platonic solids</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYXNoZWxsLXNwaXJhbCJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjg1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0"
+              ><img
+                src="../../assets/toys/seashell-spiral/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Seashell spiral</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBoLXBsb3R0ZXIifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMDgsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/graph-plotter/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Graph plotter</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1cmZhY2UtcGxvdHRlciJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC41NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/surface-plotter/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Surface plotter</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVuaXQtY2lyY2xlIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjA4LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+              ><img
+                src="../../assets/toys/unit-circle/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Circle and waves</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZvdXJpZXItY2lyY2xlcyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/fourier-circles/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Fourier circles</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB5dGhhZ29yYXMtcHJvb2YifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6My43fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+              ><img
+                src="../../assets/toys/pythagoras-proof/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Pythagoras proof</span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWVxdWF0aW9uIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjYsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/splat-equation/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Splat equation <span class="badge">labs</span></span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-computing" aria-labelledby="h-shelf-computing">
+        <h2 id="h-shelf-computing">AI and computing <span class="count">16 toys</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmNlcHRyb24ifSwiY2FtZXJhIjp7InlhdyI6MC4xOCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/perceptron/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Perceptron</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11bHRpbGF5ZXItcGVyY2VwdHJvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjE4LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+              ><img
+                src="../../assets/toys/multilayer-perceptron/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Multilayer perceptron</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ldXJhbC1uZXR3b3JrIn0sImNhbWVyYSI6eyJ5YXciOjAuMTgsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/neural-network/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Neural network</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNubiJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+              ><img
+                src="../../assets/toys/cnn/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Convolutional network</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJubiJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+              ><img
+                src="../../assets/toys/rnn/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Recurrent network</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRyYW5zZm9ybWVyIn0sImNhbWVyYSI6eyJ5YXciOjAuMTYsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/transformer/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Transformer</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imxvb3BlZC10cmFuc2Zvcm1lciJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+              ><img
+                src="../../assets/toys/looped-transformer/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Looped transformer</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpZmZ1c2lvbi1tb2RlbCJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/diffusion-model/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Diffusion model</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYWRpZW50LWRlc2NlbnQifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/gradient-descent/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Gradient descent</span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhdXNzaWFuLXNwbGF0dGluZyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/gaussian-splatting/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Gaussian splatting <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndvcmQtdmVjdG9ycyJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+              ><img
+                src="../../assets/toys/word-vectors/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Word vectors</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvcnRpbmctbWFjaGluZSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/sorting-machine/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Sorting machine</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhhbGYtYWRkZXIifSwiY2FtZXJhIjp7InlhdyI6MC4xOCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/half-adder/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Half adder</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InR1cmluZy1tYWNoaW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOTV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/turing-machine/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Turing machine</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpZmZlcmVuY2UtZW5naW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMTUsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/difference-engine/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Difference engine</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVuaWdtYS1tYWNoaW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuMjUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6M30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><img
+                src="../../assets/toys/enigma-machine/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Enigma machine</span></a
+            >
+          </li>
+          <li class="toy-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJvbWJlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+              ><img
+                src="../../assets/toys/bombe/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Bombe</span></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="shelf" id="shelf-lab" data-labs aria-labelledby="h-shelf-lab">
+        <h2 id="h-shelf-lab">Lab <span class="count">labs</span></h2>
+        <ul class="toy-grid">
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWZpZWxkIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuODUsInJvbGwiOjAsImRpc3RhbmNlIjozfX0"
+              ><img
+                src="../../assets/toys/splat-field/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Splat field <span class="badge">labs</span></span></a
+            >
+          </li>
+          <li class="toy-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZsdWlkLWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yOCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19"
+              ><img
+                src="../../assets/toys/fluid-lab/thumb.webp"
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              /><span class="toy-name">Fluid lab <span class="badge">labs</span></span></a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../toys/">Toys</a></li>
+          <li><a href="../tools/">Tools</a></li>
+          <li><a href="../science/">Science</a></li>
+          <li><a href="../studio/">Studio</a></li>
+          <li><a href="../learn/">Learn</a></li>
+          <li><a href="../new/">What's new</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="../search/">Search</a></li>
+        </ul>
+      </nav>
+      <p>
+        Splashery is free and runs in your browser; files you open stay on your device.
+        <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a> (MIT) ·
+        <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a> ·
+        Built on the PlayCanvas engine.
+      </p>
+      <p class="preview-note">
+        A preview of Splashery's new site. The toys live in <a href="../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
