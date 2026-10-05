@@ -34,6 +34,11 @@ full checks are next.
   `src/packs/song-record.js`, the FFT, window and spectrogram from `src/packs/studio-audio.js`.
 - The tone and the recording play only while the site's sound is on (PACKS.md, "Playing its own
   audio"); a watchdog stops them when frames stop (another toy, a hidden tab).
+- The owner's marks of October 5, 2026: the Sound lab "good"; the three Light lab clips "Please make
+  sharper". r2: the Light lab uses the labs-only sharp kernel (`kernel: "sharp"`), its panels take
+  more of the budget, and the text and lines are larger. A panel's columns are capped (420 for the
+  bench's info panel): at the high tier smaller splats fall under the engine's two-pixel cull and
+  the panel goes blank.
 - Tone, tempo and the lamp are kept in the module, not in the scene (dragging a slider would
   otherwise rebuild the toy each step).
 

@@ -152,12 +152,12 @@ function strip(g, x0, y, w, h, sym) {
     const k = Math.sqrt(l.rel);
     if (k < 0.08) continue;
     g.fillStyle = rgbCss(nmColor(l.nm), 0.25 + 0.95 * k);
-    g.fillRect(Math.round(xs(l.nm)) - 1, y, 3, h);
+    g.fillRect(Math.round(xs(l.nm)) - 2, y, 4, h);
   }
   g.globalCompositeOperation = "source-over";
 }
 
-function axis(g, x0, y, w, { color = "#7d90a2", size = 14 } = {}) {
+function axis(g, x0, y, w, { color = "#9fb2c4", size = 18 } = {}) {
   for (let nm = 400; nm <= 750; nm += 50) {
     const x = x0 + ((nm - NM_LO) / (NM_HI - NM_LO)) * w;
     g.fillStyle = color;
@@ -173,7 +173,7 @@ function drawSpectra(g) {
   g.fillRect(0, 0, LW, 512);
   const els = SETS[LL.set].els;
   const hi = els[LL.highlight % els.length];
-  label(g, "Emission lines of the elements (NIST)", 18, 34, { size: 22, color: "#eef3f8", weight: "700" }); // prettier-ignore
+  label(g, "Emission lines (NIST)", 18, 36, { size: 28, color: "#eef3f8", weight: "700" }); // prettier-ignore
   label(g, `${NAME[hi]} (${hi})`, LW - 18, 34, { size: 22, color: "#ffe9a8", weight: "700", align: "right" }); // prettier-ignore
   const x0 = 120;
   const w = LW - x0 - 40;
@@ -201,7 +201,7 @@ function drawSpectra(g) {
     .sort((a, b) => b.rel - a.rel)
     .slice(0, 5)
     .sort((a, b) => a.nm - b.nm);
-  label(g, lines.map((l) => `${l.nm.toFixed(1)}`).join("   ") + "  nm (strongest)", x0, yAxis + 52, { size: 17, color: "#ffe9a8" }); // prettier-ignore
+  label(g, lines.map((l) => `${l.nm.toFixed(1)}`).join("   ") + "  nm (strongest)", x0, yAxis + 56, { size: 22, color: "#ffe9a8", weight: "700" }); // prettier-ignore
 }
 
 // ---- The bench (prism and grating) ------------------------------------------------------
@@ -301,7 +301,7 @@ function drawBenchInfo(g) {
   g.fillStyle = "#0a0e14";
   g.fillRect(0, 0, LW, 280);
   const src = sourceName(LL.source);
-  label(g, src, 20, 40, { size: 30, color: "#ffe9a8", weight: "700" });
+  label(g, src, 20, 42, { size: 34, color: "#ffe9a8", weight: "700" });
   label(g, "tap for the next lamp", LW - 20, 40, { size: 20, color: "#7d90a2", align: "right" });
   const lines = [];
   if (LL.view === "prism") {
@@ -312,7 +312,7 @@ function drawBenchInfo(g) {
     lines.push(`Index: ${n4.toFixed(4)} at 486 nm (blue), ${n6.toFixed(4)} at 656 nm (red).`);
     const d = LL.bench?.devs;
     if (d) lines.push(`Bent by ${d[0].toFixed(1)}° (400 nm) to ${d[1].toFixed(1)}° (700 nm): blue bends most.`); // prettier-ignore
-    lines.push("Snell's law at both faces; the beam is set for least bending at 550 nm.");
+    lines.push("Snell's law at both faces; least bending at 550 nm.");
   } else {
     const gr = GRATINGS[LL.grating];
     const a1 = gratingAngle(400, gr.d, 1);
@@ -321,9 +321,11 @@ function drawBenchInfo(g) {
     lines.push(`d sin θ = m λ: first order from ${((a1 * 180) / Math.PI).toFixed(1)}° (400 nm) to ${((a7 * 180) / Math.PI).toFixed(1)}° (700 nm).`); // prettier-ignore
     const a72 = gratingAngle(700, gr.d, 2);
     lines.push(a72 === null ? "Second order: only up to " + Math.floor(gr.d / 2) + " nm fits (sin θ ≤ 1)." : "Second order: twice as spread; it overlaps the first."); // prettier-ignore
-    lines.push("Red bends most here, the other way from a prism. The middle stays white.");
+    lines.push("Red bends most, unlike a prism; the middle stays white.");
   }
-  lines.forEach((t, i) => label(g, t, 20, 92 + i * 44, { size: 24, color: "#c9d6e2" }));
+  lines.forEach((t, i) =>
+    label(g, t, 20, 92 + i * 46, { size: 27, color: "#dbe4ec", weight: "700" }),
+  );
 }
 
 // ---- The spectrometer ---------------------------------------------------------------------
@@ -580,7 +582,12 @@ function buildPrism(k, o) {
   const x0 = Math.min(...xs) - Math.max(0.12, span * 0.6);
   const x1 = Math.max(...xs) + Math.max(0.12, span * 0.6);
   LL.bench = { hits, card: { x0, x1, z: zCard }, devs, zero: null };
-  card(k, { x0, x1, z: zCard, cols: colsFor(k, 0.1, x1 - x0, ((x1 - x0) * CARD.h) / CARD.w, 300) });
+  card(k, {
+    x0,
+    x1,
+    z: zCard,
+    cols: colsFor(k, 0.14, x1 - x0, ((x1 - x0) * CARD.h) / CARD.w, 280),
+  });
   // The prism: glass, nearly clear face on and denser where its faces turn
   // away (behaviour "rim"), with brighter edges, standing on the table.
   const H = 0.36;
@@ -677,7 +684,7 @@ function buildGrating(k) {
     x0: -half,
     x1: half,
     z: zCard,
-    cols: colsFor(k, 0.1, 2 * half, (2 * half * CARD.h) / CARD.w, 360),
+    cols: colsFor(k, 0.14, 2 * half, (2 * half * CARD.h) / CARD.w, 340),
   });
   // The grating: a disc (a CD or DVD) or a slide in its frame, upright.
   if (LL.grating === "slide") {
@@ -719,7 +726,7 @@ function buildPanelOnly(k) {
   const W = 2.6;
   const H = (W * 512) / LW;
   boxSplats(k, { c: [0, 0, -0.045], w: W + 0.12, h: H + 0.12, d: 0.08, tilt: PITCH, skip: [5], color: lit(shade, "#2a3038") }); // prettier-ignore
-  const cols = Math.min(LW, Math.round(Math.sqrt(Math.min(k.count * 0.55, 150000) * (LW / 512))));
+  const cols = Math.min(LW, Math.round(Math.sqrt(Math.min(k.count * 0.78, 220000) * (LW / 512))));
   panel(k, { center: [0, 0, 0.002], up: FACE_UP, width: W, height: H, region: { x: 0, y: 0, w: LW, h: 512 }, cols }); // prettier-ignore
   boxSplats(k, {
     c: [0, -H / 2 - 0.36, 0],
@@ -820,6 +827,9 @@ const LIGHT_LAB = {
   alive: () => LL.view === "camera" && live.on("camera") && !LL.frozen,
   density: 1.6,
   turntable: false,
+  // Labs only: the sharper splat falloff (docs/lab/KERNELS.md), for crisp text and lines
+  // (the owner's "Please make sharper", October 5, 2026).
+  kernel: "sharp",
   options: [
     {
       key: "view",
@@ -931,8 +941,10 @@ const LIGHT_LAB = {
     LL.rays = benchRays(LL.view);
     const { infoAt } = LL.view === "prism" ? buildPrism(k, o) : buildGrating(k, o);
     // The info panel above the bench, facing the viewer.
-    const W = 2.2;
-    panel(k, { center: infoAt, up: FACE_UP, width: W, height: (W * 280) / LW, region: { x: 0, y: 0, w: LW, h: 280 }, cols: colsFor(k, 0.18, W, (W * 280) / LW, 520) }); // prettier-ignore
+    // Capped at 420 columns: smaller splats fall under the engine's two-pixel cull at a
+    // high budget (the panel went blank).
+    const W = 2.6;
+    panel(k, { center: infoAt, up: FACE_UP, width: W, height: (W * 280) / LW, region: { x: 0, y: 0, w: LW, h: 280 }, cols: colsFor(k, 0.26, W, (W * 280) / LW, 420) }); // prettier-ignore
     boxSplats(k, { c: [infoAt[0], infoAt[1] - 0.025 * Math.sin(PITCH), infoAt[2] - 0.025 * Math.cos(PITCH)], w: W + 0.08, h: (W * 280) / LW + 0.08, d: 0.04, tilt: PITCH, skip: [5], color: lit(shade, "#2a3038") }); // prettier-ignore
     k.data = { lightLab: LL.view };
   },
