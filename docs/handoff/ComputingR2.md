@@ -7,7 +7,23 @@ October push. Repo: ryanjosephkamp/splashery. Your lane: Computing r2 (id `Compu
 `cmp2`). Branch: `claude/lane-computing-r2` (engine PR, if needed, on
 `claude/lane-computing-r2-engine`). PR title: "Phase Computing r2: sorting you can hear and see, and
 an Enigma you can set". Handoff file: docs/handoff/ComputingR2.md (create it; start it with this
-brief, word for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "##
+brief, word for word, under "## Brief", then keep "## State
+
+- Engine PR #289 ("Engine: a shown text option is a text box in the Toy tab"), draft, on
+  `claude/lane-computing-r2-engine`: a kit toy's `type: "text"` option without `hidden: true` shows
+  as a text box (for the Enigma's plugboard). Merged into the lane branch; it must merge first. Its
+  test runs on the Bombe (whose options stay fixed).
+- Lane PR #290, draft. Sorting machine and Enigma done; proof in `tests/cmp2-sort.spec.mjs` (6
+  passed) and `tests/cmp2-enigma.spec.mjs` (8 passed); `tests/cmp2-shots.spec.mjs` (5 passed:
+  screenshots and the Enigma's setting typed in the Toy tab).
+- Run on October 5, 2026: ai, mca, unit and cmp2 specs, 102 passed (the one failure, the engine test
+  on this branch, is fixed and passes). The full suite is for the Integrator.
+- Clips: 13 posted on Effect review page 2 (lane record `ComputingR2`, cards `cmp2-*`), the eight
+  algorithms' sounds in the bars view, the crates, ring and dots views, the Barbarossa decode and a
+  setting of one's own. Waiting on the owner's marks.
+
+## Notes", "## Known issues" and "##
+
 For the Operator" current). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 5, 2026, from the owner's push notes, docs/reviews/2026-10-04-push-alignment/notes.md)
@@ -88,6 +104,11 @@ instead of going idle.
   unchanged and still passes.
 
 ## Known issues
+
+- The review page plays clips muted with no controls, so the sound in the sorting clips (MP4 with
+  audio, rendered by `tools/cmp2-sound.mjs`) is not heard there. The owner hears it in the toy.
+- The crates view reads small at phone size (its plinth is deep, to hold the lanes of the shuffle
+  back).
 
 - Reflector C has no published historical message in the tests; it is checked against the reference
   code (wiring from the Crypto Museum and Wikipedia tables) on random settings.
