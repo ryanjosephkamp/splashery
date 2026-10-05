@@ -9,11 +9,40 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-WORKING (October 5, 2026, round 2 on `claude/lane-geo-r2`, from #268's a25d5aa7): the owner marked
-all nine round-1 clips "fix" ("Please make sharper"; on the earthquakes and the city, "something
-more photoreal" / "closer to a photoreal city"). Done so far: every toy sharper (below) and the
-photoreal sources researched (below). Left: the -r2 clips on Effect review page 2, then, once #268
-merges, merge main and open "Phase Earth and maps r2: …". Model: Opus 5.5.
+WORKING (October 5, 2026, round 3 on `claude/lane-geo-r2`): the owner's marks of 22:48 UTC. Good:
+Grand Canyon r3, hurricane r2, relief map r2, sea floor r2. Fixed in round 3 (below): the living
+city (Helsinki's reality mesh), the earthquakes, St. Helens' plume, the storks and the tide meter.
+Left: the -r3/-r4 clips on Effect review page 2, the tests, then the PR. Model: Opus 5.5.
+
+### Round 3: what changed (the owner's marks of October 5, 2026)
+
+- **Living city** ("too much like a cartoon"; "I'm fine with the Helsinki open reality mesh"): a
+  real 550 m block of central Helsinki (Senate Square and the Cathedral, the Market Square, the
+  South Harbor, the Uspenski Cathedral) from the City of Helsinki's 2017 reality mesh (CC BY 4.0,
+  checked on the HRI record and hel.fi, October 5, 2026). `tools/geo-city.mjs` reads only the 144
+  level-18 pieces it needs (about 25 MB) out of the 2 GB zip with HTTP range requests, crops the
+  block, and samples it into about 590,000 splats with the Studio's converter
+  (`src/packs/studio-models-core.js`). The snapshot is 5.2 MB (`city.bin.gz`), loaded only when the
+  toy opens. The tap still turns day to night: the city dims under a blue sky (a quarter-density
+  night copy) while the street lamps and windows come on, each lamp lighting a warm pool of street.
+  The kit-built cars and train are gone (they would look cartoonish on a real city).
+- **Earthquakes** ("still needs to be sharper"; "the text below the planet"): the globe has about
+  one point per picture pixel, a thin layer of air at the limb (kind "rim"), a slightly bluer deep
+  ocean, crisp quake dots with no glow at rest, and the plaque is a grid of square pixels (two to
+  each pixel of the letters).
+- **St. Helens** ("smoke isn't realistic"): the ash column is ten stacked parts of cauliflower
+  billows (balls of lumpy balls, surfaces only), each rising from the vent and swelling as it rises,
+  dark and dense low down and paler above, lit by the sun on one side, spreading at the top and
+  drifting east on the wind, which carries it off at the end. The blast's clouds race out at their
+  own reach and moment and settle as ash. No part is shown half-visible (that draws as a speckle).
+- **Storks** ("too cartoonish"): like a real tracking map: thin tracks on the ground (one small
+  splat every 2.5 thousandths; gaps over two days in the fixes left blank), each bird a small white
+  dot with a dark rim, crisp month labels and a time bar that lights as the season plays.
+- **Tide harbor** ("sharper, especially the tide meter"): the meter is a chart of square pixels that
+  leans toward the viewer, the water under the curve filled, lines every six hours and at mean sea
+  level, the hours written under it, and a crisp dot riding the curve (re-sorted while it moves).
+- A helper for all of these: `pixelPanel` and `dot` in `src/packs/geo.js`. The clips are rendered at
+  780 × 1040 (a phone's real pixels) instead of 390 × 520.
 
 ### Round 2: what changed
 
@@ -65,13 +94,14 @@ merges, merge main and open "Phase Earth and maps r2: …". Model: Opus 5.5.
 | `tide-harbor`     | NOAA NCEI coastal DEM, CO-OPS predictions (8413320), imagery       | Plays the October 28, 2026 spring tide (12 s)        |
 | `hurricane`       | GOES-East band 13 (through NASA GIBS), NHC best track, Blue Marble | Toggle: Polo's day of rapid intensification / back   |
 | `relief-map`      | 3DEP, NHD streams, NLCD 2021 land cover, imagery (Yosemite Valley) | A contour climbs, light runs down the streams (7 s)  |
-| `living-city`     | Kit-built (no data)                                                | Toggle: night (windows light one by one) / day       |
+| `living-city`     | City of Helsinki reality mesh (2017), CC BY 4.0                    | Toggle: night (lamps and windows come on) / day      |
 | `stork-migration` | Rotics et al. 2016 white storks, Movebank (CC0 1.0); ETOPO1        | Plays July to October 2013 (14 s)                    |
 | `earthquakes`     | USGS feed, live (snapshot when it can't be reached); ETOPO1        | Quakes flash in time order; the plaque refreshes     |
 
 Tools: `tools/geo-lib.mjs` (TIFF and LZW reader, cached fetches, the snapshot writer),
 `tools/geo-terrain.mjs` (the terrain blocks), `tools/geo-quakes.mjs`, `tools/geo-storm.mjs`,
-`tools/geo-migration.mjs`. Toy code: `src/packs/geo.js`, `src/geo/data.js`, `src/geo/terrain.js`.
+`tools/geo-migration.mjs`, `tools/geo-city.mjs`. Toy code: `src/packs/geo.js`, `src/geo/data.js`,
+`src/geo/terrain.js`.
 
 ### The live feed (CLAUDE.md, "Live data")
 
@@ -118,13 +148,13 @@ Tools: `tools/geo-lib.mjs` (TIFF and LZW reader, cached fetches, the snapshot wr
   About text). GIBS keeps GOES imagery only from about June 2026, so the storm is from this season.
 - Bar Harbor's DEM is NAVD88, taken as mean sea level (they differ by about a decimeter there).
 - The pre-1980 DEM covers 196 km² round the mountain; beyond it the 1979 surface is today's.
-- Snapshots total about 3 MB, each loaded only when its toy opens (largest 645 KB, relief map).
+- Snapshots total about 8 MB, each loaded only when its toy opens (largest: the city, 5.2 MB).
 - Rainfall on the relief map was cut: PRISM's terms are non-commercial and Daymet's were unclear;
   land cover (NLCD) took its place.
 
 ### For the Operator
 
-- ODbL (OpenStreetMap) was not needed: the city is kit-built.
+- ODbL (OpenStreetMap) was not needed: the city is Helsinki's own mesh (CC BY 4.0).
 - Licenses outside the list: GEBCO's extra terms and the UN migrant stock's terms (not used).
 - A PACKS.md lesson: tokens and parts that travel far must ask for a sort while they move
   (`out.resort` for tokens, `out.resortPose` for parts), or nearer splats paint over them; morph
