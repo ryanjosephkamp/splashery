@@ -182,6 +182,7 @@ export const RECIPES = {
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "bricks");
     },
@@ -239,6 +240,7 @@ export const RECIPES = {
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "net");
     },
@@ -268,6 +270,7 @@ export const RECIPES = {
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "grains");
     },
@@ -330,6 +333,7 @@ export const RECIPES = {
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "page");
     },
@@ -400,6 +404,7 @@ export const RECIPES = {
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "well");
     },
@@ -435,6 +440,7 @@ export const RECIPES = {
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "table");
     },
@@ -466,6 +472,7 @@ export const RECIPES = {
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "rocks");
     },
@@ -521,6 +528,7 @@ export const RECIPES = {
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "lander");
     },
@@ -575,6 +583,7 @@ export const RECIPES = {
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
     build(k) {
       stage(k, "pinball");
     },
