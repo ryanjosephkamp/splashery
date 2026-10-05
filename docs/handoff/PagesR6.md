@@ -130,4 +130,8 @@ unchanged; if they need a change, tell the Operator.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+October 5, 2026 (Opus 5.5). WORKING: read the brief, BooksR5.md and the code; building the engine
+PR first (`claude/lane-pages-r6-engine`): the top-bar pop-up switch (a recipe control marked
+`global: "pop"`), a freed tilt while a recipe asks for it, a small slider over the stage, and
+figure depths in scenes (`toy.figures`). Then items 1 to 6 on `claude/lane-pages-r6`, then P1
+(layered pop-up scenes; the owner marked it yes on October 5).
