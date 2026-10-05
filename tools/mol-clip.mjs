@@ -47,7 +47,9 @@ const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"], // prettier-ignore
 });
-const page = await browser.newPage({ viewport: { width: W, height: H } });
+// A phone draws the canvas at a device pixel ratio of 2 (the stage caps it there), so the
+// clip does too (--dpr=1 for a smaller file).
+const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: Number(opt("dpr", 2)) });
 page.on("pageerror", (e) => console.error("page error:", e.message));
 if (mock)
   await page.route("https://files.rcsb.org/**", (route) =>

@@ -26,6 +26,8 @@ import {
   markerSplats,
   beadSplats,
   colorer,
+  openness,
+  occluded,
   CHAIN_COLORS,
   residueColor,
 } from "../molview/draw.js";
@@ -232,9 +234,10 @@ const styleFor = (o, m) => (o.style === "auto" || !o.style ? (isMacro(m) ? "cart
 
 // ---- Splat budget --------------------------------------------------------------------------------------
 
-// The toy draws 1.2 of the kit's count (72k, 168k, 240k and 336k splats by
-// tier). Big structures spread these thinner, down to one Gaussian per atom.
-export const VIEWER_DENSITY = 1.2;
+// The toy draws twice the kit's count, within each tier's cap (120k, 240k,
+// 300k and 400k splats: the polish round, for sharper atoms and ribbons). Big
+// structures spread these thinner, down to one Gaussian per atom.
+export const VIEWER_DENSITY = 2;
 const BALL = 0.25; // ball-and-stick: a ball is this share of the van der Waals radius
 const STICK = 0.13; // ball-and-stick: the stick's radius, Å
 const SS_COLORS = { H: [0.9, 0.3, 0.38], E: [0.95, 0.78, 0.22], C: [0.82, 0.83, 0.8] };
@@ -268,6 +271,7 @@ const PICK_COLORS = [
 const VIEWER = {
   density: VIEWER_DENSITY,
   turntable: false, // it holds still for measuring (drag to turn it)
+  kernel: "sharp", // crisper edges on the bigger splats (labs; src/kernels.js)
   options: [
     {
       key: "structure",
@@ -512,8 +516,8 @@ const VIEWER = {
       let area = 0;
       for (const i of atoms) area += 4 * Math.PI * radius(i) ** 2;
       for (const [i, j] of bonds) area += 2 * Math.PI * STICK * Math.max(0.1, distance(m, i, j) - radius(i) - radius(j)); // prettier-ignore
-      // A small molecule needs no more than about 300 splats per Å² to look solid.
-      const density = Math.min(300, cap / Math.max(1, area));
+      // A small molecule needs no more than about 700 splats per Å² to look solid.
+      const density = Math.min(700, cap / Math.max(1, area));
       const lines = bonds.reduce((n, b) => n + (b[2] === 1 ? 1 : 2), 0);
       let mode = "full";
       if ((density * area) / Math.max(1, atoms.length) < 8) {
@@ -562,7 +566,9 @@ const VIEWER = {
       // Most of each sphere is buried in its neighbors: the buried splats are
       // left out (up to 30,000 atoms) and the budget goes to the rest.
       const cull = all.length <= 30000;
-      const r = drawAtoms(L, m, all, { radius, color, density: 300, budget, cull, rand });
+      // Buried atoms a little darker (ambient occlusion), so the shape reads in depth.
+      const shade = occluded(color, openness(m, all));
+      const r = drawAtoms(L, m, all, { radius, color: shade, density: 700, budget, cull, rand });
       if (r.single) lodNotes.push("one Gaussian per atom");
       for (const i of all) pickable[i] = 1;
       drawnBonds = bondList(() => true);
@@ -573,10 +579,15 @@ const VIEWER = {
       const use = (i) => inSurface(i) && m.el[i] !== "H";
       const others = atomsWhere((i) => !inSurface(i));
       const share = others.length ? Math.min(0.25, (others.length * 30) / budget) : 0;
-      const sf = drawSurface(L, m, { use, color, max: budget * (1 - share), rand });
+      const inside = atomsWhere(use);
+      const shade = occluded(color, openness(m, inside));
+      const sf = drawSurface(L, m, { use, color: shade, max: budget * (1 - share), rand });
       if (others.length) drawnBonds = ballstick(others, share).bonds;
-      // Only atoms on the outside can be tapped: their markers show through the surface.
-      for (const i of outerAtoms(m, atomsWhere(use), (i) => vdwRadius(m.el[i]))) pickable[i] = 1;
+      // Only atoms on the outside can be tapped: their markers show through the
+      // surface. (A very big entry skips the search; at that scale a tap lands
+      // on the outside anyway.)
+      const outside = inside.length <= 60000 ? outerAtoms(m, inside, (i) => vdwRadius(m.el[i])) : inside; // prettier-ignore
+      for (const i of outside) pickable[i] = 1;
       notes.push(`The surface is a blobby (Gaussian) surface over the heavy atoms at their van der Waals radii, sampled every ${sf.h.toFixed(2)} Å: close to the solvent-excluded surface, but smoother in deep crevices.`); // prettier-ignore
       reach = 3.4;
       markR = 2.9;
