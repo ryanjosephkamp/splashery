@@ -98,7 +98,7 @@ export function spiralCurve(rows, S = SPIRAL) {
   };
 }
 
-export function co2Spiral(k, rows, { source = "", px = 0.02 } = {}) {
+export function co2Spiral(k, rows, { source = "", px = 0.015 } = {}) {
   const S = SPIRAL;
   const ch = new Chart({ w: 2 * S.r1, h: S.H, d: 2 * S.r1, px });
   const n = rows.length;
@@ -106,8 +106,8 @@ export function co2Spiral(k, rows, { source = "", px = 0.02 } = {}) {
   const last = rows[n - 1];
   const curve = spiralCurve(rows, S);
   // The coil's splats follow the device's budget (fewer on a phone).
-  const along = Math.round(Math.min(100000, Math.max(18000, k.count * 0.45)));
-  const sigma = 0.0085;
+  const along = Math.round(Math.min(140000, Math.max(24000, k.count * 0.45)));
+  const sigma = 0.0062;
   for (let i = 0; i < along; i++) {
     const t = i / (along - 1);
     const p = curve(t);
@@ -119,10 +119,10 @@ export function co2Spiral(k, rows, { source = "", px = 0.02 } = {}) {
   const ink = "#3a3f47";
   // The years: a scale standing at the left, outside the coil.
   const xs = -(S.r1 + 0.14);
-  ch.line([xs, 0, 0], [xs, S.H, 0], { color: ink, opacity: 0.8, sigma: 0.005, step: 0.008 });
+  ch.line([xs, 0, 0], [xs, S.H, 0], { color: ink, opacity: 0.8, sigma: 0.0038, step: 0.006 });
   for (const y of [1980, 1990, 2000, 2010, 2020]) {
     const h = ((y - first.decimal) / (last.decimal - first.decimal)) * S.H;
-    ch.line([xs, h, 0], [xs - 0.04, h, 0], { color: ink, opacity: 0.85, sigma: 0.004 });
+    ch.line([xs, h, 0], [xs - 0.04, h, 0], { color: ink, opacity: 0.85, sigma: 0.003 });
     ch.label(`${y}`, [xs - 0.06, h, 0], { align: "right" });
   }
   // The ppm scale: rings on the floor, labeled along a line across the view.
@@ -177,7 +177,7 @@ function temperatureFrame(ch, years, { z = true, px }) {
   // The zero plane's outline: anomalies rise above it or hang below it.
   const y0 = ch.Y(0);
   const [x0, x1, z0, z1] = [-ch.w / 2, ch.w / 2, -ch.d / 2, ch.d / 2];
-  const zero = { color: "#5b616b", opacity: 0.6, sigma: 0.0045 };
+  const zero = { color: "#5b616b", opacity: 0.6, sigma: 0.0034 };
   ch.line([x0, y0, z0], [x1, y0, z0], zero);
   ch.line([x0, y0, z1], [x1, y0, z1], zero);
   ch.line([x1, y0, z0], [x1, y0, z1], zero);
@@ -192,6 +192,7 @@ function bar(k, x, z, w, d, y0, top, color) {
     pos: [x, (top + y0) / 2, z],
     even: true,
     opacity: 1,
+    size: 0.8,
     color: (cc) => light(color, [0.06, -0.1, 0.2, -0.3, 0.02, -0.16][cc.s.face] ?? 0),
     to: (cc) => [cc.p[0], y0 + (cc.p[1] - y0) * 0.02, cc.p[2]],
     channel: 0,
@@ -200,7 +201,7 @@ function bar(k, x, z, w, d, y0, top, color) {
 }
 
 // Every month since 1880: years across, months in depth.
-export function temperatureBars(k, data, { source = "", px = 0.02 } = {}) {
+export function temperatureBars(k, data, { source = "", px = 0.015 } = {}) {
   const years = data.map((r) => r.year);
   const ch = new Chart({ w: 2.0, h: 1.35, d: 1.3, px });
   const y0 = temperatureFrame(ch, years, { z: true, px });
@@ -222,7 +223,7 @@ export function temperatureBars(k, data, { source = "", px = 0.02 } = {}) {
 }
 
 // Each year's mean as a wall of colored stripes, as high as the year was warm.
-export function temperatureWall(k, data, { source = "", px = 0.02 } = {}) {
+export function temperatureWall(k, data, { source = "", px = 0.015 } = {}) {
   const full = data.filter((r) => !Number.isNaN(r.annual));
   const years = full.map((r) => r.year);
   const ch = new Chart({ w: 2.0, h: 1.35, d: 0.4, px });

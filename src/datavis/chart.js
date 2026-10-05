@@ -87,7 +87,7 @@ export function dateTicks(min, max, count = 5) {
 }
 
 export class Chart {
-  constructor({ w = 2, h = 1.3, d = 2, px = 0.018, grid = "#8b8f97" } = {}) {
+  constructor({ w = 2, h = 1.3, d = 2, px = 0.0135, grid = "#8b8f97" } = {}) {
     this.w = w;
     this.h = h;
     this.d = d;
@@ -167,7 +167,7 @@ export class Chart {
   line(
     a,
     b,
-    { color = this.gridColor, opacity = 0.5, sigma = 0.0034, step = 0.0075, kind, params } = {},
+    { color = this.gridColor, opacity = 0.5, sigma = 0.0026, step = 0.0055, kind, params } = {},
   ) {
     // prettier-ignore
     const len = Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
@@ -239,7 +239,7 @@ export class Chart {
       }
     }
     // The axes themselves.
-    const axisLine = { color: ink, opacity: 0.9, sigma: 0.0045, step: 0.006 };
+    const axisLine = { color: ink, opacity: 0.9, sigma: 0.0034, step: 0.0045 };
     this.line([x0, 0, z1], [x1, 0, z1], axisLine);
     const xz = zSide === "right" ? x1 : x0;
     const out = zSide === "right" ? 1 : -1;

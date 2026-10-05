@@ -114,7 +114,7 @@ export function labelSplats(
     anchor[1] + (oy - y - 0.5) * px,
     anchor[2],
   ];
-  const sigma = px * 0.62;
+  const sigma = px * 0.5;
   for (const key of rimSet) {
     const [x, y] = key.split(",").map(Number);
     out.push({
@@ -128,36 +128,29 @@ export function labelSplats(
       pattern: false,
     });
   }
-  // Polish round: each font pixel is four smaller splats (2 x 2), so strokes
+  // Polish rounds: each font pixel is nine small splats (3 x 3), so strokes
   // have square, crisp edges instead of round blobs, and a diagonal step
-  // (ink at two corners, none on the sides) gets a bridging splat between
+  // (ink at two corners, none on the sides) gets a bridge of splats between
   // them, so slanted strokes (A, V, 2, 7) read as lines, not staircases.
+  // Small labels (captions, legends) use 2 x 2: splats much under about
+  // 0.003 units drop below a pixel on a phone (worse at the back of a chart) and vanish.
+  const fine = px * 0.2 >= 0.0032;
   const ink2 = (p) => ({
     p,
     color,
     opacity,
-    scales: [px * 0.29, px * 0.29, px * 0.06],
+    scales: fine ? [px * 0.2, px * 0.2, px * 0.05] : [px * 0.29, px * 0.29, px * 0.06],
     quat: [0, 0, 0, 1],
     kind: "token",
     params: [token, 0],
     pattern: false,
   });
-  for (const [x, y] of ink)
-    for (const [sx, sy] of [
-      [-0.25, -0.25],
-      [0.25, -0.25],
-      [-0.25, 0.25],
-      [0.25, 0.25],
-    ]) {
-      // prettier-ignore
-      const c = place(x + sx, y + sy);
-      out.push(ink2(c));
-    }
+  const sub = fine ? [-1 / 3, 0, 1 / 3] : [-0.25, 0.25];
+  for (const [x, y] of ink) for (const sy of sub) for (const sx of sub) out.push(ink2(place(x + sx, y + sy))); // prettier-ignore
   for (const [x, y] of ink)
     for (const dx of [-1, 1]) {
-      const dy = 1;
-      if (on.has(`${x + dx},${y + dy}`) && !on.has(`${x + dx},${y}`) && !on.has(`${x},${y + dy}`))
-        out.push(ink2(place(x + dx / 2, y + dy / 2)));
+      if (on.has(`${x + dx},${y + 1}`) && !on.has(`${x + dx},${y}`) && !on.has(`${x},${y + 1}`))
+        for (const t of [0.35, 0.5, 0.65]) out.push(ink2(place(x + dx * t, y + t)));
     }
   return out;
 }

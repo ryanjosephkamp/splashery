@@ -183,7 +183,7 @@ function scatter(k, ch, table, { X, Y, Z, C, S, flipY }, report) {
 // upper left, and one at the center so it never looks hollow. The tap
 // flattens it onto the floor with the rest.
 const BALL = (() => {
-  const n = 22;
+  const n = 34;
   const out = [];
   for (let i = 0; i < n; i++) {
     const y = 1 - (2 * (i + 0.5)) / n;
@@ -195,7 +195,7 @@ const BALL = (() => {
 })();
 function ball(ch, p, c, sigma) {
   const r = sigma * 1.1;
-  const s = r * 0.42;
+  const s = r * 0.34;
   const floor = (q) => [q[0], 0.002 + (q[1] - p[1]) * 0.05, q[2]];
   ch.point(p, c, r * 0.7, 1, { to: floor(p), channel: 0 });
   for (const n of BALL) {
@@ -324,6 +324,7 @@ function grid(k, ch, table, { X, Y, Z, C }, report, chart) {
           pos: [x, yc, z],
           even: true,
           opacity: 1,
+          size: 0.8,
           color: (cc) => light(c, [0.08, -0.12, 0.22, -0.3, 0.02, -0.18][cc.s.face] ?? 0),
           to: (cc) => [cc.p[0], y0 + (cc.p[1] - y0) * 0.02, cc.p[2]],
           channel: 0,
@@ -365,6 +366,7 @@ function grid(k, ch, table, { X, Y, Z, C }, report, chart) {
         even: true,
         opacity: 1,
         flat: 0.35,
+        size: 0.8,
         color: (cc) => {
           const u = (cc.lp[0] + ch.w / 2) / cellW - 0.5;
           const v = (ch.d / 2 - cc.lp[2]) / cellD - 0.5;

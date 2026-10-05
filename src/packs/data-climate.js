@@ -335,7 +335,7 @@ export const RECIPES = {
     // Polish round: more splats for the bars, the surface and the labels. (The
     // labs' sharp kernel was measured here and left off: on these charts it
     // added speckle and shimmer without sharper edges.)
-    density: 1.4,
+    density: 1.7,
     turntable: true,
     options: [
       { key: "table", label: "Table", type: "text", default: "earthquakes", hidden: true },
@@ -405,7 +405,7 @@ export const RECIPES = {
 
   "climate-records": {
     alive: true,
-    density: 1.4,
+    density: 1.7,
     options: [
       {
         key: "view",
