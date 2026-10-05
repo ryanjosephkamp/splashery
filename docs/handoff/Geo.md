@@ -9,10 +9,13 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-WORKING (October 5, 2026): all nine toys are built and pushed on `claude/lane-geo` (draft PR #268),
-with help, sounds, plan entries, credits, thumbnails and `tests/geo.spec.mjs`. Left: the shared
-specs run, the clips on Effect review page 2, the screenshots, then READY. Model: Opus 5.5
-throughout. No engine PR was needed.
+READY (October 5, 2026): all nine toys built, tested and pushed on `claude/lane-geo` (draft PR
+#268), on Opus 5.5 throughout; no engine PR was needed. Clips are on Effect review page 2 as cards
+`geo-grand-canyon`, `geo-st-helens`, `geo-sea-floor`, `geo-tide-harbor`, `geo-hurricane`,
+`geo-relief-map`, `geo-living-city`, `geo-stork-migration` and `geo-earthquakes` (lane "Geo"; the
+page has no `lanes/Geo` record yet). Specs run: `tests/geo.spec.mjs` (14), `tests/kit.spec.mjs`,
+`tests/taps.spec.mjs`, `tests/help.spec.mjs`, `tests/unit.spec.mjs` (all pass after the taps fix);
+the full suite is left to the Integrators.
 
 ### The toys (Earth and maps shelf, `geo`, all labs)
 
