@@ -2944,7 +2944,11 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles
     in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
     face up and works out each temperature; the toy draws them approximately (not a column-density
-    integral).
+    integral). Science r3: two more galaxies (m12i 10.4 billion years ago, z = 2; the dwarf m11h),
+    and a telescope view (simulated): the star particles as if 100 Mpc away, blurred by the seeing
+    (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading with age, an
+    approximation), cold dense gas as dust, and a tap that starts an exposure whose photon grain
+    smooths out (tools/sci3-galaxy.mjs).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 - **Cryo-EM map** (`cryoem-map`). Now: tap: Cut it open. Plan: new effect (E6).

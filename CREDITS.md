@@ -626,6 +626,25 @@ estimated from the data by NeNA (Endesfelder et al., Histochemistry and Cell Bio
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 12 µm square, 159,785 of its
   localizations (a subset), cut by `tools/sci3-samples.mjs`.
 
+More of the FIRE-2 public data release for Galaxy in a box
+([FlatHUB](https://flathub.flatironinstitute.org/fire),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), read on the release's README on October
+5, 2026), with the citation it asks for: "We use the publicly-available FIRE-2 cosmological zoom-in
+simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project,
+generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018)."
+Subsets cut by `tools/sci3-galaxy.mjs`:
+
+- FIRE-2 m12i (res7100), snapshot 600 (z = 0), stars (m12i: Wetzel et al. (2016)): 250,000 of the
+  11.4 million star particles in the 40 × 12 × 40 kpc box, with their ages.
+- FIRE-2 m12i (res7100), snapshot 172 (z = 2), gas (m12i: Wetzel et al. (2016)): 300,000 of the 1.36
+  million gas particles in a 24 kpc box.
+- FIRE-2 m12i (res7100), snapshot 172 (z = 2), stars (m12i: Wetzel et al. (2016)): 250,000 of the
+  640,318 star particles in a 24 kpc box.
+- FIRE-2 m11h (res7100), snapshot 600 (z = 0), gas (m11h: El-Badry et al. (2018)): 300,000 of the
+  351,956 gas particles in a 16 kpc box.
+- FIRE-2 m11h (res7100), snapshot 600 (z = 0), stars (m11h: El-Badry et al. (2018)): 250,000 of the
+  640,445 star particles in a 16 kpc box.
+
 Three cryo-EM maps from the Electron Microscopy Data Bank, each with the atomic model fitted into it
 from the PDB (checked on the live pages on October 5, 2026).
 

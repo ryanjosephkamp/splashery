@@ -2261,7 +2261,7 @@
       "owner": "The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer \"Science yes\" (lane Science; labs only).",
       "effect": "The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature and brighter where denser, in a box with a dark floor. Pinch or scroll zooms the camera far into the gas (about 60 times closer) and back out. The tap peels the hot gas away (a second tap brings it back).",
       "sound": "Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it comes back.",
-      "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral)."
+      "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral). Science r3: two more galaxies (m12i 10.4 billion years ago, z = 2; the dwarf m11h), and a telescope view (simulated): the star particles as if 100 Mpc away, blurred by the seeing (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading with age, an approximation), cold dense gas as dust, and a tap that starts an exposure whose photon grain smooths out (tools/sci3-galaxy.mjs)."
     },
     "cryoem-map": {
       "v": "new",

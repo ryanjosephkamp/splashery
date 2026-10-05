@@ -2540,6 +2540,61 @@
       "license": "CC0 1.0",
       "checked": "October 5, 2026",
       "note": "The backbone only (Cα and P atoms), with the biological assembly's copies, by tools/sci3-cryoem.mjs."
+    },
+    {
+      "id": "sci3-m12i-stars",
+      "file": "assets/toys/galaxy-box/m12i-stars.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m12i (res7100), snapshot 600 (z = 0), stars",
+      "author": "The FIRE project (Wetzel et al. 2023, 2025; Hopkins 2015; Hopkins et al. 2018); m12i: Wetzel et al. (2016)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "A subset: 250,000 of the 11.4 million star particles in the 40 × 12 × 40 kpc box, with their ages, cut by tools/sci3-galaxy.mjs."
+    },
+    {
+      "id": "sci3-m12i-z2-gas",
+      "file": "assets/toys/galaxy-box/m12i-z2-gas.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m12i (res7100), snapshot 172 (z = 2), gas",
+      "author": "The FIRE project (Wetzel et al. 2023, 2025; Hopkins 2015; Hopkins et al. 2018); m12i: Wetzel et al. (2016)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "A subset: 300,000 of the 1.36 million gas particles in a 24 kpc box, cut by tools/sci3-galaxy.mjs."
+    },
+    {
+      "id": "sci3-m12i-z2-stars",
+      "file": "assets/toys/galaxy-box/m12i-z2-stars.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m12i (res7100), snapshot 172 (z = 2), stars",
+      "author": "The FIRE project (Wetzel et al. 2023, 2025; Hopkins 2015; Hopkins et al. 2018); m12i: Wetzel et al. (2016)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "A subset: 250,000 of the 640,318 star particles in a 24 kpc box, cut by tools/sci3-galaxy.mjs."
+    },
+    {
+      "id": "sci3-m11h-gas",
+      "file": "assets/toys/galaxy-box/m11h-gas.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m11h (res7100), snapshot 600 (z = 0), gas",
+      "author": "The FIRE project (Wetzel et al. 2023, 2025; Hopkins 2015; Hopkins et al. 2018); m11h: El-Badry et al. (2018)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "A subset: 300,000 of the 351,956 gas particles in a 16 kpc box, cut by tools/sci3-galaxy.mjs."
+    },
+    {
+      "id": "sci3-m11h-stars",
+      "file": "assets/toys/galaxy-box/m11h-stars.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m11h (res7100), snapshot 600 (z = 0), stars",
+      "author": "The FIRE project (Wetzel et al. 2023, 2025; Hopkins 2015; Hopkins et al. 2018); m11h: El-Badry et al. (2018)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "A subset: 250,000 of the 640,445 star particles in a 16 kpc box, cut by tools/sci3-galaxy.mjs."
     }
   ]
 }

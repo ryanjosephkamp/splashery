@@ -1346,8 +1346,9 @@ function buildTelescope(k, o) {
   // An astronomer's stretch (asinh) of the brightness, about its median.
   const sorted = Array.from(bright).sort((a, b) => a - b);
   const med = sorted[sorted.length >> 1] || 1;
-  const top = sorted[Math.floor(sorted.length * 0.999)] || 1;
-  const stretch = (b) => Math.asinh(b / med) / Math.asinh(top / med);
+  const top = sorted[Math.floor(sorted.length * 0.995)] || 1;
+  const soft = 0.25 * med; // the stretch's knee: below it light is linear
+  const stretch = (b) => Math.asinh(b / soft) / Math.asinh(top / soft);
   // The whole exposure's photons for the median star: the grain's scale.
   const photons = 60;
   let shown = 0;
@@ -1363,16 +1364,14 @@ function buildTelescope(k, o) {
     const b = light[j * 3 + 2];
     const mx = Math.max(r, g, b) || 1;
     // The star's color (its filters' ratio), brightened by the stretch.
-    const col = [r / mx, g / mx, b / mx].map((v) =>
-      Math.round(255 * Math.min(1, v * (0.55 + 0.45 * sb))),
-    );
+    const col = [r / mx, g / mx, b / mx].map((v) => Math.min(1, v * (0.75 + 0.25 * sb)));
     // Its size: the point spread (and a little for the particle itself).
     const size = Math.SQRT2 * Math.hypot(psf, 0.01);
     return {
       p,
       size: size / base(),
-      color: `rgb(${col.join(",")})`,
-      opacity: Math.min(1, 0.08 + 0.9 * sb),
+      color: col,
+      opacity: Math.min(0.9, 0.02 + 0.5 * sb * sb),
       part: sciPart(SCI_TYPE.star),
       params: [asF32((bright[j] / med) * photons), (i * 2654435761) % 1000003],
     };
@@ -1395,14 +1394,14 @@ function buildTelescope(k, o) {
       p: G.pos(i),
       size: (Math.SQRT2 * Math.hypot(KERNEL_SIGMA * h, psf)) / base(),
       color: "#120a06",
-      opacity: Math.min(0.3, absorb * 0.1 * (0.06 / h) ** 2),
+      opacity: Math.min(0.15, absorb * 0.04 * (0.06 / h) ** 2),
       part: sciPart(SCI_TYPE.plain),
     };
   });
   const half = G.head.half;
-  // The night sky behind it: a dark plate under the galaxy, as wide as three
-  // boxes (the view looks down on the disk).
-  k.add(evenBox(6 * half, 0.04, 6 * half), {
+  // The night sky behind it: a dark plate under the galaxy, a little wider
+  // than the box (the view looks down on the disk).
+  k.add(evenBox(2.3 * half, 0.04, 2.3 * half), {
     pos: [0, -(G.head.halfY ?? half) - 0.5, 0],
     even: true,
     color: "#020205",

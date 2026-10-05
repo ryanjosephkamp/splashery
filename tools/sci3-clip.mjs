@@ -53,12 +53,14 @@ const CARDS = {
   "sci3-telescope": {
     toy: "galaxy-box",
     options: { galaxy: "m12i", view: "telescope", filter: "color", seeing: "ground" },
+    pitch: 1.4,
     secs: 9,
     steps: [{ t: 0, yaw: 0.02 }],
   },
   "sci3-telescope-filters": {
     toy: "galaxy-box",
     options: { galaxy: "m12i", view: "telescope", filter: "blue", seeing: "ground" },
+    pitch: 1.4,
     secs: 13.5,
     steps: [{ t: 0, yaw: 0.02 }, ...tour("filter", ["blue", "red", "color"], 4.5)],
   },
@@ -179,6 +181,7 @@ for (const name of cards) {
       const cam = player.camera;
       const homeDistance = cam.home.distance;
       if (card.near) cam.home.distance *= card.near;
+      if (card.pitch !== undefined) cam.home.pitch = card.pitch;
       let yaw = cam.home.yaw;
       let yawRate = 0;
       let dist = cam.home.distance;
