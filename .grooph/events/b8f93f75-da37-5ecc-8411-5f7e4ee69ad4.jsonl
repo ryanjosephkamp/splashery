@@ -293,3 +293,13 @@
 {"v":1,"t":"2026-10-05T10:15:09.956Z","harness":"claude-code","event":"subagent-stop","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","agent":"a360a826f52348a62"}
 {"v":1,"t":"2026-10-05T12:14:19.483Z","harness":"claude-code","event":"turn-start","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T12:14:26.601Z","harness":"claude-code","event":"turn-end","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:14:57.322Z","harness":"claude-code","event":"session-end","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:15:09.709Z","harness":"claude-code","event":"session-start","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:20:13.812Z","harness":"claude-code","event":"session-end","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:36:41.706Z","harness":"claude-code","event":"session-start","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:36:41.708Z","harness":"claude-code","event":"turn-start","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:36:45.582Z","harness":"claude-code","event":"tool","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:37:16.803Z","harness":"claude-code","event":"tool","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:37:26.447Z","harness":"claude-code","event":"tool","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:37:36.351Z","harness":"claude-code","event":"tool","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T12:37:41.949Z","harness":"claude-code","event":"turn-end","session":"b8f93f75-da37-5ecc-8411-5f7e4ee69ad4","cwd":"splashery"}
