@@ -14,7 +14,9 @@ page.on("pageerror", (e) => console.error("page error:", e.message));
 page.on("console", (m) => {
   if (m.type() === "error") console.error("console:", m.text());
 });
-await page.goto(`${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}?renderer=webgl2&profile=high&adapt=off&labs=1`);
+await page.goto(
+  `${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}?renderer=webgl2&profile=high&adapt=off&labs=1`,
+);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
 const specs = process.argv.slice(2);
 for (const spec of specs) {
