@@ -95,8 +95,8 @@ READY (October 5, 2026): done and pushed (draft PR #273).
   pass.
 - The thumbnail is re-rendered and the contact sheet checked.
 - The clip is on Effect review page 2: card `fx8-alarm-clock-time`, lane record `Fix8`.
-- Waiting for the owner's mark on the clip. This changes a public toy, so it merges only after he
-  marks it good.
+- The owner marked the clip `fx8-alarm-clock-time` good (October 5, 2026, 01:02 UTC), so it is
+  ready for the Operator to merge after the full test run.
 
 ## Notes", "## Known issues" and "## For the Operator" current.
 
