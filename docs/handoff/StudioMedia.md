@@ -192,7 +192,9 @@ test run (the Integrator).
 - Show the original on Video to 3D plays the sample's span silently (the samples have no sound).
 - The tests here run on a software renderer (about a frame a second at the highest tier), so the
   speed and sync checks that depend on frame timing are made on the low tier or against the clocks.
-- No phone-size clips posted yet.
+- No clip of Video to 3D's original: the clip recorder steps a video's seeks too fast for the card
+  to catch up, so the card sat still in the recording; `tests/smd-compare.spec.mjs` checks that
+  sync.
 
 ## For the Operator
 

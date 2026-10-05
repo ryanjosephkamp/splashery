@@ -958,7 +958,7 @@ function showOriginal(clip) {
   const card = mod.original("moving-photo-3d");
   if (MOVING.cardClip !== clip || !card.state.kind) {
     MOVING.cardClip = clip;
-    card.frames({ w: clip.w, h: clip.h, frame: (i) => clip.colors[i], label: `Original: ${clip.name}` }); // prettier-ignore
+    card.frames({ w: clip.w, h: clip.h, frame: (i) => clip.colors[i], label: `Original: ${SAMPLES.find((x) => x.id === clip.sample)?.label || clip.name}` }); // prettier-ignore
   }
   card.sync({ frame: MOVING.frame });
 }

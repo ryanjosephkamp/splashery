@@ -153,14 +153,16 @@ export function original(owner) {
         // let the video run). Held still, it is exact.
         const now = performance.now();
         const drift = Math.abs(v.currentTime - t);
-        if (!playing) {
+        // (a recorder that steps the clock by hand, __clipT, wants every frame exact)
+        if (!playing || globalThis.__clipT !== undefined) {
           if (drift > 0.02) v.currentTime = t;
         } else if (!v.seeking && drift > 0.35 && now - state.sought > 1000) {
           state.sought = now;
           v.currentTime = t;
         }
-        if (playing && v.paused) v.play().catch(() => {});
-        else if (!playing && !v.paused) v.pause();
+        const run = playing && globalThis.__clipT === undefined;
+        if (run && v.paused) v.play().catch(() => {});
+        else if (!run && !v.paused) v.pause();
       }
     },
     hide() {
