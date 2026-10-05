@@ -34,8 +34,9 @@ export const EXPLAINER = new URL("../../pdf-lab/", import.meta.url).href;
 
 // ---- What the page says --------------------------------------------------------
 
-// The toy on the stage, with the link to this scene.
-export async function appEntry(app) {
+// The toy on the stage, with the link to this scene. `base` replaces the
+// site's address in the link (the samples link to the live site).
+export async function appEntry(app, { base = null } = {}) {
   const player = app.player;
   const info = player.toyInfo || {};
   const def = info.id ? findToy(info.id) : null;
@@ -57,9 +58,9 @@ export async function appEntry(app) {
   const notes = [madeOfNote(info.kind === "captured" ? "captured" : info.kind), SITE_NOTE];
   const res = await buildShareHash(app.exportScene());
   let url;
-  if (res.ok) url = shareURL(res.hash);
+  if (res.ok) url = base ? `${base}#s=${res.hash}` : shareURL(res.hash);
   else if (info.id && def) {
-    url = await toyLink(info.id, new URL("../../", import.meta.url).href);
+    url = await toyLink(info.id, base || new URL("../../", import.meta.url).href);
     notes.unshift(
       "This scene is too big for a link, so the link and code open the toy as it starts.",
     );
@@ -113,10 +114,9 @@ export async function estimate(app, { size, fps, maxSeconds }) {
 // Makes the PDF (no saving). mode: "still" | "moving".
 export async function makeToyPDF(
   app,
-  { mode = "still", size = 420, fps = 8, maxSeconds = 6, onProgress } = {},
+  { mode = "still", size = 420, fps = 8, maxSeconds = 6, base = null, onProgress } = {},
 ) {
-  // prettier-ignore
-  const entry = await appEntry(app);
+  const entry = await appEntry(app, { base });
   if (entry.url && !(await checkQR(entry.url)))
     throw new Error("The QR code didn't read back as the link, so no PDF was made.");
   onProgress?.(0.05, "Taking a picture…");

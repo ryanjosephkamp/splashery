@@ -255,8 +255,8 @@ export async function addToyPage(doc, fonts, entry) {
     const s = Math.min(side / img.width, side / img.height);
     const w = img.width * s;
     const h = img.height * s;
-    page.drawRectangle({ x: m, y: top - side, width: side, height: side, color: P.rgb(0.93, 0.93, 0.94) }); // prettier-ignore
     page.drawImage(img, { x: m + (side - w) / 2, y: top - side + (side - h) / 2, width: w, height: h }); // prettier-ignore
+    page.drawRectangle({ x: m, y: top - side, width: side, height: side, borderColor: P.rgb(0.82, 0.82, 0.85), borderWidth: 0.75 }); // prettier-ignore
   }
   const cx = m + side + 24;
   const cw = PAGE.w - m - cx;
@@ -420,7 +420,7 @@ export async function addRecordingPage(doc, fonts, entry, rec) {
   const side = 396;
   const fx = (PAGE.w - side) / 2;
   const rect = [fx, y - side, fx + side, y];
-  page.drawRectangle({ x: fx, y: y - side, width: side, height: side, color: P.rgb(0.93, 0.93, 0.94) }); // prettier-ignore
+  page.drawRectangle({ x: fx - 1, y: y - side - 1, width: side + 2, height: side + 2, borderColor: P.rgb(0.82, 0.82, 0.85), borderWidth: 0.75 }); // prettier-ignore
   const fields = [];
   const widget = (dict) => {
     const ref = ctx.register(ctx.obj({ Type: "Annot", Subtype: "Widget", P: page.ref, ...dict }));
