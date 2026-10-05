@@ -252,6 +252,11 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   https://github.com/nodeca/pako: reads the FIRE-2 simulation's HDF5 snapshot in
   `tools/sci-galaxy.mjs` (lane Science). The site never loads them. `pngjs` (above) also writes that
   tool's picture of the source data (`--map`).
+- `geotiff` 3.0.5 (MIT), https://github.com/geotiffjs/geotiff.js, with its dependencies
+  `@petamoriken/float16` 3.9.3 (MIT), `lerc` 3.0.0 (Apache-2.0), `parse-headers` 2.0.6 (MIT),
+  `quick-lru` 6.1.2 (MIT), `web-worker` 1.5.0 (Apache-2.0), `xml-utils` 1.10.2 (CC0-1.0) and
+  `zstddec` 0.2.0 (MIT AND BSD-3-Clause): reads the USGS 3DEP elevation tiles (GeoTIFF) by range
+  requests in `tools/sci3-terrain.mjs` (lane Science r3). The site never loads them.
 - `pdfjs-dist` 6.3.289 (Apache-2.0), https://github.com/mozilla/pdf.js: the same version as
   `vendor/pdfjs/`, with its viewer and scripting sandbox (QuickJS, MIT), which the site doesn't
   ship. `tests/pdf.spec.mjs` and `tools/pdf-clip.mjs` (lane PDF lab) open a made PDF in it with its

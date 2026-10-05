@@ -2808,6 +2808,23 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // A cryo-EM map cut open: a soft, low whoosh as the clipping plane sweeps
+  // in, and a softer one as it closes (Science r3).
+  "cryoem-map": {
+    on: { voice: "whoosh", f: 380, decay: 1.1, vol: 0.3 },
+    off: { voice: "whoosh", f: 300, decay: 1, vol: 0.25 },
+  },
+  // The contour layers lifting apart: a soft wooden slide; settling back, a
+  // lower one (Science r3).
+  "contour-lab": {
+    on: { voice: "wood", f: 520, decay: 0.5, vol: 0.3 },
+    off: { voice: "wood", f: 420, decay: 0.5, vol: 0.28 },
+  },
+  // Water filling the land: a gentle rush rising; draining, a lower one.
+  "terrain-box": {
+    on: { voice: "whoosh", f: 300, decay: 2.4, vol: 0.3 },
+    off: { voice: "whoosh", f: 240, decay: 2.2, vol: 0.25 },
+  },
   // ---- Imaging (lane Imaging) ---------------------------------------------------------
   // The belt's low rumble as the bag rides through, the curtains' slap, and
   // the scanner's soft beep when its picture is done.
