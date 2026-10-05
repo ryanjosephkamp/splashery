@@ -15,6 +15,8 @@
 // grains and all, still running by the same rules. Paint with the mouse or
 // a finger; pick what to pour from the row of buttons.
 
+import { crispModel } from "./arcade-crisp.js";
+
 const MATS = {
   empty: 0,
   sand: 1,
@@ -56,26 +58,27 @@ class Grains {
   constructor(api) {
     this.api = api;
     const p = api.profile;
-    const dims = p === "low" ? [44, 56, 4] : p === "mid" ? [56, 72, 6] : [64, 82, 8];
+    // A fine grid of small grains (the owner's "please make sharper"): a
+    // pile's edge is as sharp as one grain.
+    const dims = p === "low" ? [50, 64, 4] : p === "mid" ? [68, 88, 6] : [80, 104, 7];
     [this.GX, this.GY, this.GZ] = dims;
-    this.cap = p === "low" ? 7000 : p === "mid" ? 14000 : 22000;
+    this.cap = p === "low" ? 9000 : p === "mid" ? 20000 : 30000;
     this.cell = 2.0 / this.GY;
     this.size = [this.GX * this.cell, this.GY * this.cell, this.GZ * this.cell];
     this.rand = api.rand;
-    const { kitModel } = api;
     const [w, h, d] = this.size;
-    // The glass box: its twelve edges, thin and bright.
-    this.boxModel = kitModel(
+    // The glass box: its twelve edges, thin and bright (crisp bars).
+    const e = 0.012;
+    this.boxModel = crispModel(
       (k) => {
-        const e = 0.012;
         const add = (sx, sy, sz, pos) =>
-          k.add(k.box(sx, sy, sz), { pos, even: true, flat: 0.4, color: (c) => { const f = 0.78 + 0.2 * c.n[1]; return [0.75 * f, 0.84 * f, 0.9 * f]; } }); // prettier-ignore
+          k.box(sx, sy, sz, { pos, color: (q, n) => { const f = 0.78 + 0.2 * n[1]; return [0.75 * f, 0.84 * f, 0.9 * f]; } }); // prettier-ignore
         for (const y of [-h / 2, h / 2])
           for (const z of [-d / 2, d / 2]) add(w + e, e, e, [0, y, z]);
         for (const x of [-w / 2, w / 2]) for (const z of [-d / 2, d / 2]) add(e, h, e, [x, 0, z]);
         for (const x of [-w / 2, w / 2]) for (const y of [-h / 2, h / 2]) add(e, e, d, [x, y, 0]);
       },
-      { count: p === "low" ? 2000 : 3600 },
+      { fine: e / 2, coarse: 0.06 },
     );
   }
 
@@ -90,13 +93,13 @@ class Grains {
     this.stamp = new Uint8Array(n);
     this.tick = 0;
     this.box = S.add(this.boxModel);
-    this.pts = this.api.points(this.cap, { size: this.cell * 0.42, flat: 1 });
+    this.pts = this.api.points(this.cap, { size: this.cell * 0.4, flat: 1 });
     this.free = [];
     for (let i = this.cap - 1; i >= 0; i--) this.free.push(i);
     this.shade = new Float32Array(this.cap);
     for (let i = 0; i < this.cap; i++) this.shade[i] = this.rand();
     this.jit = new Float32Array(this.cap * 3);
-    for (let i = 0; i < this.cap * 3; i++) this.jit[i] = (this.rand() - 0.5) * 0.3;
+    for (let i = 0; i < this.cap * 3; i++) this.jit[i] = (this.rand() - 0.5) * 0.16;
     this.grains = 0;
     this.plants = 0;
     this.yaw = 0;
