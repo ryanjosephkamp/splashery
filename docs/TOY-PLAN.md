@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 378 toys. 348 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 373.
+- 379 toys. 349 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 374.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -61,7 +61,7 @@ Proposals below are suggestions; the owner may change them.
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
   Galaxy in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Screen.
+  Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2944,7 +2944,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 
-## Imaging (5)
+## Imaging (6)
 
 - **Airport X-ray scanner** (`airport-xray`). Now: tap: Send the next bag. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).
@@ -2992,3 +2992,13 @@ Proposals below are suggestions; the owner may change them.
     the third goes back out.
   - Improved: Imaging: new toy.
   - Sound: The stage motor's two soft steps and a low vacuum hum.
+- **Thermal camera** (`thermal-camera`). Now: tap: Thermal camera on or off. Plan: keep.
+  - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea
+    cooling and a hand warmer (lane Imaging; labs only).
+  - Effect: A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap
+    crossfades from normal colors to the thermal camera's false colors (the iron palette, with a
+    color scale), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam
+    thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.
+  - Improved: Imaging: new toy.
+  - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
+    turns off.

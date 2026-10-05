@@ -11,7 +11,8 @@ comments), you finish every working turn with a final message that starts "READY
 
 WORKING: started October 5, 2026 (cloud session, Opus 5.5). The engine PR is open: #274, "Engine: a
 cutting plane and a density window (the volume kit kind)", on `claude/lane-imaging-engine`, merged
-into this branch. It should merge first. Items 1 to 5 are built; next: the thermal camera.
+into this branch. It should merge first. Items 1 to 6 are built; next: clips on the Effect review
+page, my own tests, then an idea of my own.
 
 - [x] 1. Airport X-ray scanner (`airport-xray`)
 - [x] 2. How CT works (`how-ct`): a kit-built nautilus shell
@@ -19,7 +20,7 @@ into this branch. It should merge first. Items 1 to 5 are built; next: the therm
      docs/audits/new-sources-2026-10.md, B1)
 - [x] 4. MRI of a fruit (`fruit-mri`): kit-built kiwi and orange slices
 - [x] 5. Electron microscope (`electron-microscope`): pollen, diatoms, a rimed snowflake
-- [ ] 6. Thermal camera
+- [x] 6. Thermal camera (`thermal-camera`): tea cooling, a hand warmer, ice water
 - [ ] 7. Ideas of my own (up to two)
 
 ## Notes

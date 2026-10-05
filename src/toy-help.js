@@ -1754,6 +1754,11 @@ export const TOY_HELP = {
     about:
       "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface.",
   },
+  "thermal-camera": {
+    howTo: "Tap to switch the thermal camera on or off, and watch the tea cool.",
+    about:
+      "Everything gives off infrared light, more the warmer it is. A thermal camera measures that light and paints each temperature its own false color: here, black and violet for cold, then magenta, red, orange and yellow up to white for hot.\n\nThe tea in the mug starts at about 72 °C and cools (sped up: in real life it takes many minutes) as its steam thins. The mug's wall warms from the tea, the hand warmer stays at about 47 °C as the iron powder inside slowly rusts, and the glass of ice water is cold. The table is at room temperature, warmed or chilled a little where things stand on it. The scene and its temperatures are built for the toy.",
+  },
   "walnut-ct": {
     howTo: "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
     about:

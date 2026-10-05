@@ -3567,6 +3567,16 @@ export const TOYS = [
     tags: "sem scanning electron microscope micrograph pollen diatom snowflake rime zoom magnification imaging",
     camera: { yaw: 0.0, pitch: 0.45, roll: 0, distance: 2.6 },
   },
+  {
+    id: "thermal-camera",
+    label: "Thermal camera",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "thermal camera infrared heat false color temperature tea mug cooling hand warmer ice water imaging",
+    camera: { yaw: 0.3, pitch: 0.42, roll: 0, distance: 2.8 },
+  },
   // ---- Pack: screens ----
   {
     id: "screen",

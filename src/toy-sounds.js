@@ -2822,6 +2822,16 @@ export const TOY_SOUNDS = {
     { voice: "wood", f: 560, at: 0.1, vol: 0.3 },
     { voice: "rumble", f: 110, decay: 1.2, vol: 0.18, at: 0.05 },
   ],
+  // The thermal camera's shutter clicking as it calibrates, then a soft
+  // tick; a lower click as it turns off.
+  "thermal-camera": {
+    on: [
+      { voice: "wood", f: 1500, vol: 0.3 },
+      { voice: "wood", f: 1500, at: 0.18, vol: 0.25 },
+      { voice: "ding", f: 1046, at: 0.4, vol: 0.12, decay: 0.4 },
+    ],
+    off: [{ voice: "wood", f: 1100, vol: 0.28 }],
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

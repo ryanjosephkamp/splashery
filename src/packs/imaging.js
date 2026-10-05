@@ -9,6 +9,8 @@
 //                    by a drag or played through by a tap
 //   electron-microscope  pollen, diatoms or a snowflake as a scanning
 //                    electron microscope sees them, with zoom steps
+//   thermal-camera   a mug of tea cooling, a hand warmer and a glass of ice
+//                    water, in a thermal camera's false colors
 //   walnut-ct        a real CT scan of a walnut (CWI, CC BY 4.0) as volume
 //                    splats: cut it, or show only its dense shell
 //
@@ -1686,6 +1688,194 @@ function driveSEM(t, c, out, info) {
   out.view = st ? { key: `sem${n % 3}`, center: st[0], size: st[1] } : { key: "sem0" };
 }
 
+// ---- Thermal camera ----------------------------------------------------------------------
+
+// A thermal camera sees the infrared that warm things give off and shows it
+// in false color. The "iron" palette: cold black and violet, through
+// magenta, red and orange, to hot yellow and white.
+const IRON = [
+  "#05010d",
+  "#2a0b5c",
+  "#6a0f86",
+  "#b5207a",
+  "#e84a2a",
+  "#f88d12",
+  "#fdd23c",
+  "#fffbe6",
+];
+const TH = { lo: 5, hi: 72, room: 21, tea: [72, 50, 34], warmer: 47, ice: 2, water: 6 };
+function ironColor(T) {
+  const x = clamp((T - TH.lo) / (TH.hi - TH.lo), 0, 1) * (IRON.length - 1);
+  const i = Math.min(IRON.length - 2, Math.floor(x));
+  return mix(IRON[i], IRON[i + 1], x - i);
+}
+
+const MUG = { x: -0.62, z: 0.1, r: 0.4, h: 0.82, level: 0.7 };
+const WARM = { x: 0.62, z: 0.42 };
+const GLASS = { x: 0.55, z: -0.5, r: 0.26, h: 0.72, level: 0.55 };
+
+// The scene in one look: "visible" or a tea temperature for the thermal
+// copies. fade gives each copy's fade (channel and direction).
+function thermalScene(k, look, fade) {
+  const thermal = look !== "visible";
+  const Tt = thermal ? look : 0;
+  const o = { even: true, flat: 0.2, jitter: thermal ? 0.01 : 0.012, pattern: false, kind: "fade", params: fade.params, channel: fade.channel, share: undefined }; // prettier-ignore
+  delete o.share;
+  const noise = (x, y, z) => k.noise(x, y, z);
+  const T2 = (T, c) => ironColor(T + 0.6 * noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 14));
+  // The table: the room's temperature, warmed under the mug and the
+  // warmer, chilled under the glass.
+  k.add(evenBox(3.0, 0.08, 1.9), {
+    ...o,
+    pos: [0, -0.04, 0],
+    weight: 0.6,
+    color: (c) => {
+      if (!thermal) {
+        const grain = 0.06 * Math.sin(c.p[0] * 30 + 4 * noise(c.p[0] * 2, c.p[2] * 9, 0));
+        return lit(shade("#a8794d", 1 + grain), c.n, 0.15);
+      }
+      const near = (x, z, r) => Math.exp(-((c.p[0] - x) ** 2 + (c.p[2] - z) ** 2) / (r * r));
+      const T = TH.room + (Tt - TH.room) * 0.35 * near(MUG.x, MUG.z, 0.5) + (TH.warmer - TH.room) * 0.4 * near(WARM.x, WARM.z, 0.45) - 6 * near(GLASS.x, GLASS.z, 0.35); // prettier-ignore
+      return T2(T, c);
+    },
+  });
+  // The mug: its wall warm from the tea, warmest at the tea's level; the
+  // handle cooler.
+  const mugT = (y) => TH.room + (Tt - TH.room) * (0.55 + 0.3 * smoothstep(0, MUG.level, y));
+  k.add(evenCylinder(MUG.r, MUG.r, MUG.h, false), {
+    ...o,
+    pos: [MUG.x, MUG.h / 2, MUG.z],
+    color: (c) => (thermal ? T2(mugT(c.p[1]), c) : lit("#2f6e8e", c.n, 0.45)),
+  });
+  k.add(evenCylinder(MUG.r - 0.035, MUG.r - 0.035, MUG.h - MUG.level, false), {
+    ...o,
+    pos: [MUG.x, (MUG.h + MUG.level) / 2, MUG.z],
+    weight: 0.7,
+    color: (c) => (thermal ? T2(mugT(MUG.level) + 2, c) : lit("#e9e4da", vec.mul(c.n, -1), 0.3)),
+  });
+  k.add(k.torus(MUG.r - 0.017, 0.018), {
+    ...o,
+    pos: [MUG.x, MUG.h, MUG.z],
+    weight: 5,
+    color: (c) => (thermal ? T2(mugT(MUG.level) - 2, c) : lit("#3a7fa1", c.n, 0.5)),
+  });
+  // The tea's surface: hottest at the middle.
+  k.add(k.disc(MUG.r - 0.035), {
+    ...o,
+    pos: [MUG.x, MUG.level, MUG.z],
+    weight: 1.6,
+    color: (c) => {
+      const r = Math.hypot(c.p[0] - MUG.x, c.p[2] - MUG.z) / MUG.r;
+      if (!thermal) return mix("#7a3d12", "#a85a1c", 0.4 + 0.3 * noise(c.p[0] * 8, c.p[2] * 8, 0)); // prettier-ignore
+      return T2(Tt - 3 * r * r, c);
+    },
+  });
+  k.add(
+    k.tube((t) => {
+      const a = -Math.PI / 2 + Math.PI * t;
+      return [MUG.x - MUG.r - 0.16 * Math.cos(a), 0.45 - 0.22 * Math.sin(a), MUG.z];
+    }, 0.04),
+    {
+      ...o,
+      weight: 1.5,
+      color: (c) => (thermal ? T2(TH.room + (Tt - TH.room) * 0.3, c) : lit("#2f6e8e", c.n, 0.45)),
+    },
+  );
+  // A hand warmer: a fabric pouch of iron powder, warm throughout, a little
+  // lumpy.
+  k.add(evenRoundBox(0.72, 0.13, 0.52, 0.06), {
+    ...o,
+    pos: [WARM.x, 0.065, WARM.z],
+    rot: [0, -18, 0],
+    color: (c) => {
+      const lump = noise(c.p[0] * 7, c.p[1] * 7, c.p[2] * 7);
+      if (!thermal) {
+        const quilt = Math.abs(((c.p[0] - WARM.x) * 12) % 1) < 0.08 && c.n[1] > 0.5;
+        return lit(quilt ? "#c9b48e" : shade("#e3d3b0", 1 + 0.05 * lump), c.n, 0.1);
+      }
+      return T2(TH.warmer + 3 * lump - (c.n[1] < -0.5 ? 2 : 0), c);
+    },
+  });
+  // A glass of ice water: cold.
+  k.add(evenCylinder(GLASS.r, GLASS.r * 0.9, GLASS.h, false), {
+    ...o,
+    pos: [GLASS.x, GLASS.h / 2, GLASS.z],
+    opacity: thermal ? 0.95 : 0.35,
+    color: (c) => (thermal ? T2(TH.water + 6 * smoothstep(GLASS.level, GLASS.h, c.p[1]), c) : lit("#d8eef5", c.n, 0.7)), // prettier-ignore
+  });
+  k.add(k.disc(GLASS.r * 0.97), {
+    ...o,
+    pos: [GLASS.x, GLASS.level, GLASS.z],
+    color: (c) => (thermal ? T2(TH.water, c) : mix("#bfe3ef", "#e8f6fa", 0.5 + 0.5 * noise(c.p[0] * 9, c.p[2] * 9, 0))), // prettier-ignore
+  });
+  for (const [dx, dz, a] of [
+    [-0.08, 0.05, 20],
+    [0.09, -0.04, -35],
+    [0.0, -0.1, 60],
+  ])
+    k.add(evenRoundBox(0.12, 0.1, 0.12, 0.02), {
+      ...o,
+      pos: [GLASS.x + dx, GLASS.level + 0.02, GLASS.z + dz],
+      rot: [8, a, 5],
+      weight: 1.5,
+      color: (c) => (thermal ? T2(TH.ice, c) : lit("#f2fbff", c.n, 0.8)),
+    });
+}
+
+function buildThermal(k) {
+  // The camera's view (visible light) fades out on channel 0; the thermal
+  // copies (hot, warm, cooled tea) fade in on channels 1, 2 and 3.
+  thermalScene(k, "visible", { channel: 0, params: [0, 0.99] });
+  TH.tea.forEach((T, i) => thermalScene(k, T, { channel: i + 1, params: [0, -0.99] }));
+  // Steam over the tea while it is hot.
+  k.cloud({ share: 0.01, jitter: 0.4, size: 1.4 }, (rand) => {
+    const a = rand() * 2 * Math.PI;
+    const r = Math.sqrt(rand()) * (MUG.r - 0.08);
+    return {
+      p: [MUG.x + r * Math.cos(a), MUG.h + 0.02, MUG.z + r * Math.sin(a)],
+      color: "#f4f1ec",
+      opacity: 0.07,
+      kind: "rise",
+      params: [0.45, rand()],
+      pattern: false,
+    };
+  });
+  // The camera's color scale, beside the scene, in thermal view only.
+  k.cloud({ share: 0.012, jitter: 0 }, (rand, i, n) => {
+    const t = rand();
+    const w = rand() - 0.5;
+    const T = TH.lo + (TH.hi - TH.lo) * t;
+    return {
+      p: [-1.35, 0.05 + 1.0 * t, -0.85 + w * 0.06],
+      color: ironColor(T),
+      n: [0, 0, 1],
+      size: 0.8,
+      kind: "fade",
+      params: [0, -0.99],
+      channel: 1 + (i % 3),
+      pattern: false,
+    };
+  });
+  k.reach([0, 1.6, 0]);
+}
+
+// When the thermal camera came on (toy clock), so the tea cools from then.
+const thermalOn = { at: null };
+
+function driveThermal(t, c, out, info) {
+  const v = ease(c.thermal);
+  if (c.thermal > 0 && thermalOn.at === null) thermalOn.at = t;
+  if (c.thermal === 0) thermalOn.at = null;
+  // The tea cools from 72 to 34 degrees over about 24 seconds (minutes in
+  // real life), sped up.
+  const x = thermalOn.at === null ? 0 : clamp((t - thermalOn.at) / 24, 0, 1);
+  const w1 = x < 0.5 ? 1 - 2 * x : 0;
+  const w2 = x < 0.5 ? 2 * x : 2 - 2 * x;
+  const w3 = x < 0.5 ? 0 : 2 * x - 1;
+  out.morph = [v, v * w1, v * w2, v * w3];
+  out.amount = 1 - 0.85 * x;
+}
+
 // ---- Recipes ------------------------------------------------------------------------------
 
 export const RECIPES = {
@@ -1816,6 +2006,15 @@ export const RECIPES = {
     drive: driveSEM,
     build(k, o) {
       k.data = buildSEM(k, o.sample);
+    },
+  },
+  "thermal-camera": {
+    alive: true,
+    controls: [{ key: "thermal", label: "Thermal view", type: "toggle", ease: 1.2 }],
+    action: { key: "thermal", label: "Thermal camera on or off" },
+    drive: driveThermal,
+    build(k) {
+      buildThermal(k);
     },
   },
 };

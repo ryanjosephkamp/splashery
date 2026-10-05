@@ -2484,6 +2484,13 @@
       "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out.",
       "sound": "The stage motor's two soft steps and a low vacuum hum.",
       "improved": "Imaging: new toy."
+    },
+    "thermal-camera": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea cooling and a hand warmer (lane Imaging; labs only).",
+      "effect": "A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap crossfades from normal colors to the thermal camera's false colors (the iron palette, with a color scale), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.",
+      "sound": "The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it turns off.",
+      "improved": "Imaging: new toy."
     }
   }
 }
