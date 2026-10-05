@@ -48,6 +48,12 @@ px) are on Effect review page 2: `vwr-clouds-palace-r2`, `vwr-clouds-bridge-r2`,
 
 ## Notes
 
+- October 5, 2026, 13:30 UTC (Integrator 5's run N4): the how-to lines were over the 110-character
+  help limit (now 99 and 94); builds now keep to the kit's count (the Node tools ask for 8,000), the
+  Point clouds fallback is a full grid, and the worker keeps the last four files and filter results,
+  so `tests/kit.spec.mjs` takes 3.1 minutes instead of timing out. Ran help, kit, taps and vwr: 89
+  passed.
+
 - Shelf: Studio. It is where files people bring become splats (Model to splats, Video to 3D, the QR
   code); both new toys are tools for files people already have.
 - LAZ reader: laz-perf (Hobu, Apache-2.0; npm `laz-perf@0.0.7`, WASM), permissive, so no LGPL
