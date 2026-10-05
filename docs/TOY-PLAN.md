@@ -2986,7 +2986,7 @@ Proposals below are suggestions; the owner may change them.
     bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic
     orange, inorganic green, metal blue, dense black). A tap sends the next bag.
   - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, a 180
-    by 120 X-ray picture on an even pale screen).
+    by 120 X-ray picture on an even pale screen). Polish (r3): framed closer.
   - Sound: The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is
     done.
 - **How CT works** (`how-ct`). Now: tap: Scan or undo the scan. Plan: keep.
@@ -2997,7 +2997,7 @@ Proposals below are suggestions; the owner may change them.
     back.
   - Improved: Imaging: new toy. Imaging r2 (the owner's notes of October 5, 2026): sharper (the labs
     sharp kernel, twice the splats); 19 other toys can lie in the scanner instead of the shell (In
-    the scanner), each voxelized into a volume with a dense skin.
+    the scanner), each voxelized into a volume with a dense skin. Polish (r3): a finer X-ray fan.
   - Sound: The gantry's knock as it starts and its motor's low run, lower on the way back.
 - **Walnut CT scan** (`walnut-ct`). Now: tap: Shell only, or the whole walnut. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an
@@ -3008,7 +3008,8 @@ Proposals below are suggestions; the owner may change them.
     them. The tap raises the density window so the kernel melts away and only the shell stays; a
     second tap brings it back.
   - Improved: Imaging: new toy, with tools/img-walnut.mjs. Imaging r2: sharper (the labs sharp
-    kernel, twice the splats); night-vision and infrared colors.
+    kernel, twice the splats); night-vision and infrared colors. Polish (r3): finer splats, a
+    lighter tint on the cut face.
   - Sound: A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.
 - **MRI of a fruit** (`fruit-mri`). Now: tap: Play through the slices. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).
@@ -3017,7 +3018,7 @@ Proposals below are suggestions; the owner may change them.
     of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag
     scrolls through them and the tap plays through all of them, front to back, and comes back.
   - Improved: Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a
-    Vision option (gray, night vision, infrared).
+    Vision option (gray, night vision, infrared). Polish (r3): finer splats.
   - Sound: An MRI scanner's knocking as it steps through the slices.
 - **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step (the third goes back
   out). Plan: keep.
@@ -3029,7 +3030,7 @@ Proposals below are suggestions; the owner may change them.
     tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface);
     the third goes back out.
   - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer
-    splats); a Vision option (gray, night vision, infrared).
+    splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats.
   - Sound: The stage motor's two soft steps and a low vacuum hum.
 - **Thermal camera** (`thermal-camera`). Now: tap: Thermal camera on or off. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea
@@ -3040,6 +3041,7 @@ Proposals below are suggestions; the owner may change them.
     warm and the ice water cold. A second tap goes back to normal colors.
   - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats); the
     tea steps from hot to warm to cooled with short blends (a long crossfade of two copies looked
-    grainy).
+    grainy). Polish (r3): one thermal copy of the scene plus three of the mug (four full copies
+    split the budget), so each view is sharper.
   - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
     turns off.

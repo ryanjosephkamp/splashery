@@ -9,12 +9,12 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-READY: Imaging r2 (October 5, 2026, Opus 5.5), PR #304 on `claude/lane-imaging`, main merged
-(7ba9b56f). The owner's ten "fix" notes are answered: every toy sharper and less grainy,
-night-vision and infrared visions beside the realistic gray (microscope, MRI, walnut), and 19 other
-toys can lie in the CT scanner. Thirteen `-r2` and new cards are on Effect review page 2 (the old
-cards marked replaced). Specs run: `tests/img.spec.mjs`, `tests/kit.spec.mjs`, `tests/taps.spec.mjs`
-(62 passed); Prettier and the American English check are clean. The full suite is the Integrator's.
+WORKING: polish round r3 (October 5, 2026, Opus 5.5) on `claude/lane-imaging-polish`, from #304's
+head 478f39cb (#304 is queued for Integrator 6's combo N10). Done: the thermal camera keeps one
+thermal copy plus three of the mug (sharper views); finer splats for the walnut, MRI and microscope;
+a finer X-ray fan in How CT works; the airport scanner framed closer. Six `-r3` cards are on Effect
+review page 2 beside the r2 ones. Specs run: `tests/img.spec.mjs`, `kit`, `taps` (62 passed). Next:
+when #304 merges, merge main here and open "Phase Imaging polish: …".
 
 - [x] 1. Airport X-ray scanner (`airport-xray`)
 - [x] 2. How CT works (`how-ct`): a kit-built nautilus shell
@@ -56,6 +56,11 @@ cards marked replaced). Specs run: `tests/img.spec.mjs`, `tests/kit.spec.mjs`, `
   `tests/kit.spec.mjs`, `tests/taps.spec.mjs`. Not the full suite (the Integrators run it).
 
 ## Known issues
+
+- r3 tried letting the belt carry the bags in and out of view (the belt running on past the frame,
+  `fit: false`), but the player frames kit toys by all their splats (`ctx.buf.bounds()`), not the
+  kit's fit, so the scanner came out small. That needs an engine change; the next bag still appears
+  just above the belt.
 
 - The airport scanner's next bag is set down from just above the belt and appears there (a short
   pop), and the last bag is lifted out of view; a real person's hands are not shown.
