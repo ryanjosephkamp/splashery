@@ -2774,7 +2774,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Live input r2: a long song plays from the file at once (no decoding first) and its
     picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six
     bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its
-    wireframe), on cream paper or alone, all on the audio clock.
+    wireframe), on cream paper or alone, all on the audio clock. Live r7: Live opens on an empty
+    plain and the land grows as the song plays: each moment rises at the line at the front as it is
+    heard and moves back, for every song and look; Whole song shows it all.
   - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2803,7 +2805,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Live input: relief splats (a new kind) take their color and lift from a canvas drawn
     each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so
     it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a
-    hologram look.
+    hologram look. Live r7: steadier and cleaner (colors smoothed against the camera's noise, the
+    depth smoothed within each surface and cut only at real jumps, along the outline in the picture,
+    which follows a moving person between depth answers); the hologram keeps the person clear, with
+    the scanlines and a soft glow only in the room behind.
   - Sound: A soft rising whoosh as the depth comes up; a falling one as it flattens.
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.

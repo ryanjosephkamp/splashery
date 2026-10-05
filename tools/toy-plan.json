@@ -2128,7 +2128,7 @@
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
       "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it. View: Live scrolls the landscape with the music like a waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward you, what has played fades away, and a row of caps rises with the loudness at the line.",
       "sound": "The song itself.",
-      "improved": "Live input r2: a long song plays from the file at once (no decoding first) and its picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its wireframe), on cream paper or alone, all on the audio clock."
+      "improved": "Live input r2: a long song plays from the file at once (no decoding first) and its picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its wireframe), on cream paper or alone, all on the audio clock. Live r7: Live opens on an empty plain and the land grows as the song plays: each moment rises at the line at the front as it is heard and moves back, for every song and look; Whole song shows it all."
     },
     "anatomy-atlas": {
       "v": "keep",
@@ -2163,7 +2163,7 @@
       "owner": "The owner's approval of lane Live input (\"live input go\", September 30, 2026; labs only).",
       "effect": "A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near each part is as often as the device allows, and the picture rises into a relief you can turn. Before the camera is on it shows a still life with its depth. A tap flattens the relief into its frame and the next raises it again (about 1.4 s); the picture itself keeps still.",
       "sound": "A soft rising whoosh as the depth comes up; a falling one as it flattens.",
-      "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a hologram look."
+      "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a hologram look. Live r7: steadier and cleaner (colors smoothed against the camera's noise, the depth smoothed within each surface and cut only at real jumps, along the outline in the picture, which follows a moving person between depth answers); the hologram keeps the person clear, with the scanlines and a soft glow only in the room behind."
     },
     "moving-photo-3d": {
       "v": "keep",

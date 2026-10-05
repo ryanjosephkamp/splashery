@@ -101,13 +101,64 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
-October 5, 2026: started (Opus 5.5, default effort, no helpers). Reading the mirror (`src/live/relief.js`,
-`src/packs/live.js`), the Song landscape and the Chladni plate; a generated mannequin test video
-next.
+October 5, 2026 (Opus 5.5, default effort, no helpers). Draft PR #263. Work in progress:
+
+1. **Song landscape** (done, in test): Live opens on an empty plain; each moment rises at the line
+   at the front as it is heard and recedes behind it, for every song (the 20-second sample too, now
+   measured by the worker like a long song) and look (the measured looks already grew from their
+   gate). Whole song is unchanged. The plain stays put while the land slides over it, so the splats
+   are sorted again as it slides (`out.resortPose`, every 0.02 units).
+2. **Splat mirror** (built, measuring and clips next): see Notes.
+3. **Chladni bow**: a test of the rule with tone (mode) changes from the Toy tab; the microphone and
+   audio file cases are `tests/live4.spec.mjs`. Clip next.
 
 ## Notes
+
+- **The mannequin camera.** `tools/lv7-mannequin.mjs` renders a talking mannequin (a sphere-traced
+  head, hair, neck and shirt before a room's wall, a camera's noise in every frame) into a Y4M for
+  Chromium's fake camera; `--still` holds one pose, for measuring. No real face is used.
+- **The measures** (`tools/lv7-mirror-measure.mjs`, still mannequin, 10 depth answers, mid profile,
+  390 by 844 at 2x, the middle of the face), main → this branch:
+
+  | Measure                                | Main  | Live r7 |
+  | -------------------------------------- | ----- | ------- |
+  | Color jitter (0..255)                  | 3.58  | 0.75    |
+  | Height jitter (0..1)                   | 0.013 | 0.012   |
+  | Shown jitter, face on (0..255)         | 1.41  | 0.78    |
+  | Shown jitter, turned 0.35 rad          | 3.23  | 2.18    |
+  | Hologram: added over the face (0..255) | 37.4  | 7.6     |
+  | Hologram: shown jitter, face on        | 9.6   | 1.9     |
+
+  The depth model's own guess wanders a little between answers on a still picture; per answer the
+  face's depth moves 0.016 (median) on main and 0.005 here.
+
+- **What made it grainy, and the fixes** (`src/live/relief.js`):
+  - The camera's noise came through the colors: each frame shrank with the browser's default filter
+    and only changes under 20 (of 765) were halved. Now the best filter, floats, and a share that
+    rises smoothly with the change (a fifth within the noise, all of a clear move).
+  - The depth's cut at edges (`snapEdges`) also cut a face's own relief into terraces (a nose and
+    cheeks span more than 0.15 in nine cells): now only where two neighboring cells step by more
+    than 0.06, and the surfaces are smoothed within themselves first (`smoothSurface`, a 5 by 5
+    bilateral filter).
+  - The cut now follows the outline in the picture: a cell at a jump goes with the side whose colors
+    it has (the nearest color among each side's cells, `sideByColor`).
+  - Between depth answers a moving person moved in the picture but not in depth, so their leading
+    edge lay on the wall (a ghost of their outline from the side): near an outline, each frame's
+    colors now pick the side (`edgeBand`, `followOutline`).
+  - The depth's range and each cell's depth ease more where they only wobble (a range change under
+    5%, a depth change under 0.03), and as before where something really moves.
+  - The background layer learns the wall two cells clear of the person (was one).
+  - The hologram: the person (near, from the depth) is a clean cyan picture of themselves; the
+    scanlines and a soft rim glow are only on the room behind (and its background layer, which the
+    hologram now has too: turned, it showed a hole).
+- Photo to 3D's live view uses the same `CameraDepth`, so it gets the steadier colors and depth too
+  (not the hologram, which it doesn't have).
 
 ## Known issues
 
 ## For the Operator
 
+- `src/live/relief.js` is the Live input lane's file (finished); the mirror's fixes are there. Its
+  `CameraDepth` is shared with Photo to 3D's live view (Studio media changes that toy's samples, not
+  this file).
+- Tests of other lanes changed: none so far.

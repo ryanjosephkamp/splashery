@@ -370,7 +370,7 @@ const SPLAT_MIRROR = {
       default: "plain",
       choices: [
         { id: "plain", label: "Plain" },
-        { id: "hologram", label: "Hologram (cyan, scanlines, glowing edges)" },
+        { id: "hologram", label: "Hologram (cyan, lines behind you, a glowing outline)" }, // Live r7
       ],
     },
   ],

@@ -7,7 +7,10 @@
 // written as a Y4M (YUV 4:2:0) for Chromium's fake camera
 // (--use-file-for-fake-video-capture). No real person's face is used.
 //
-//   node tools/lv7-mannequin.mjs <out.y4m> [--w=640] [--h=480] [--frames=120] [--fps=30] [--noise=5]
+//   node tools/lv7-mannequin.mjs <out.y4m> [--w=640] [--h=480] [--frames=120] [--fps=30] [--noise=5] [--still]
+//
+// --still holds one pose (only the sensor's noise changes from frame to
+// frame), for measuring how steady the mirror stays.
 //
 // The clip loops cleanly (every motion is a whole number of cycles).
 
@@ -25,6 +28,7 @@ const H = opt("h", 480);
 const N = opt("frames", 120);
 const FPS = opt("fps", 30);
 const NOISE = opt("noise", 5);
+const STILL = args.includes("--still");
 
 const TAU = Math.PI * 2;
 const len3 = (x, y, z) => Math.sqrt(x * x + y * y + z * z);
@@ -244,7 +248,7 @@ const U = Buffer.alloc((W / 2) * (H / 2));
 const V = Buffer.alloc((W / 2) * (H / 2));
 const cl = (v) => Math.max(0, Math.min(255, Math.round(v)));
 for (let f = 0; f < N; f++) {
-  render(f / N, rgb);
+  if (!STILL || f === 0) render(STILL ? 0.1 : f / N, rgb);
   for (let i = 0; i < W * H; i++) {
     const n = NOISE * gauss();
     const r = rgb[i * 3] + n;
