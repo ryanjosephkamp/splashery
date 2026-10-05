@@ -11,6 +11,7 @@
 // rules (the low lane is the left one).
 
 import { songFromText } from "../songs.js";
+import { crispModel } from "./arcade-crisp.js";
 
 export const RIDE = { song: null, name: "" };
 
@@ -44,6 +45,15 @@ const TUNES = {
 const LEAD = 2.0; // seconds before the first note
 const SPEED = 0.9; // world units a second the notes travel
 const HIT = 0.09; // how close in time (seconds) counts as a catch
+const TRACK = 2.8; // seconds of track in view (0.2 behind the catch line)
+const LANE_GAP = 0.3; // lane to lane
+const LANE_W = 0.27;
+const LANE_COLORS = ["#ff7a59", "#ffd166", "#7bdff2"];
+// The track's turn in 3D: its length (x) runs away from you (−z) and its
+// face (z) up (+y), so its y runs to the left (−x). Each lane is placed on
+// its own (the low lane on the left), and every track model is the same
+// on both sides of its middle, so the mirror never shows.
+const ROAD = [-0.5, 0.5, 0.5, 0.5];
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp = (v, lo, hi) => (v < lo ? lo : v > hi ? hi : v);
 
@@ -80,61 +90,86 @@ class NoteRider {
     const q2 = sorted[Math.floor((2 * sorted.length) / 3)] ?? 64;
     this.laneOf = (n) => (n < q1 ? 0 : n < q2 || q1 === q2 ? 1 : 2);
     const low = api.profile === "low";
-    const { kitModel } = api;
-    const LANE_COLORS = ["#ff7a59", "#ffd166", "#7bdff2"];
-    this.noteModels = LANE_COLORS.map((c) =>
-      kitModel(
-        (k) => {
-          const c0 = [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16) / 255);
-          k.add(k.sphere(0.045), { even: true, flat: 0.5, color: (cc) => c0.map((v) => Math.min(1, v * (0.85 + 0.25 * Math.max(0, cc.n[1])) + 0.15)) }); // prettier-ignore
-          k.cloud({ share: 0.35 }, (rand) => {
-            const d = [rand() - 0.5, rand() - 0.5, rand() - 0.5];
-            const l = Math.hypot(...d) || 1;
-            return {
-              p: d.map((v) => (v / l) * (0.05 + 0.03 * rand())),
-              color: c0,
-              size: 0.9,
-              opacity: 0.35,
-            };
-          });
-        },
-        { count: low ? 90 : 160 },
+    // Crisp grids (src/packs/arcade-crisp.js), the owner's "much sharper
+    // and improve design": tinted lanes with clean edges, a pad per lane at
+    // the catch line that presses down as it plays a note, crisp gems with
+    // a tail as long as the note is held, and a ring that bursts on a catch.
+    const fine = low ? 0.006 : 0.004;
+    const opt = { fine, coarse: 0.03 };
+    const rgb = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16) / 255);
+    this.colors = LANE_COLORS.map(rgb);
+    const LEN = TRACK * SPEED;
+    this.laneModels = this.colors.map(
+      (c) =>
+      crispModel((k) => k.rect(LEN, LANE_W, { pos: [LEN / 2 - 0.2 * SPEED, 0, 0], color: c.map((v) => 0.1 + v * 0.13) }), opt), // prettier-ignore
+    );
+    this.edgeModel = crispModel((k) => {
+      for (const y of [-1.5, -0.5, 0.5, 1.5]) k.line([-0.2 * SPEED, y * LANE_GAP, 0.004], [LEN - 0.2 * SPEED, y * LANE_GAP, 0.004], 0.006, { color: [0.42, 0.45, 0.6] }); // prettier-ignore
+      // the catch line, across the lanes
+      k.line([0, -1.5 * LANE_GAP, 0.006], [0, 1.5 * LANE_GAP, 0.006], 0.01, {
+        color: [0.95, 0.95, 1],
+      });
+    }, opt);
+    this.padModels = this.colors.map(
+      (c) =>
+      crispModel((k) => k.box(0.07, LANE_W * 0.86, 0.035, { pos: [0, 0, 0.018], color: (q, n) => c.map((v) => v * (0.55 + 0.3 * n[2] + 0.15 * n[1])) }), opt), // prettier-ignore
+    );
+    // A note: a glossy bead in its lane's color, lit from above left.
+    const L = [-0.35, 0.6, 0.72];
+    const ll = Math.hypot(...L);
+    this.noteModels = this.colors.map((c) =>
+      crispModel((k) =>
+        k.sphere(0.055, {
+          step: 0.0075,
+          color: (q, n) => {
+            const l = Math.max(0, (n[0] * L[0] + n[1] * L[1] + n[2] * L[2]) / ll);
+            const spec = Math.pow(l, 24) * 0.9;
+            return c.map((v) => Math.min(1, v * (0.55 + 0.5 * l) + spec));
+          },
+        }),
       ),
     );
-    this.riderModel = kitModel(
-      (k) => {
-        // A little sled with a glowing bow.
-        k.add(k.roundedBox(0.12, 0.03, 0.07, 4), { even: true, color: (cc) => [0.2, 0.22, 0.3].map((v) => v * (0.8 + 0.3 * cc.n[1])) }); // prettier-ignore
-        k.add(k.sphere(0.03), { pos: [0.06, 0.02, 0], even: true, color: [1, 1, 0.9], weight: 3 });
-        k.add(
-          k.tube((t) => [-0.06 + 0.12 * t, -0.02, 0.03], 0.004),
-          { color: [0.75, 0.78, 0.85] },
-        );
-        k.add(
-          k.tube((t) => [-0.06 + 0.12 * t, -0.02, -0.03], 0.004),
-          { color: [0.75, 0.78, 0.85] },
-        );
-      },
-      { count: low ? 200 : 350 },
+    // A held note's tail, built per length (a tenth of a second apart).
+    this.tails = new Map();
+    this.tailOf = (lane, len) => {
+      const key = `${lane}:${Math.round(len * 10)}`;
+      if (!this.tails.has(key)) {
+        const L = Math.max(0.05, Math.round(len * 10) / 10);
+        const c = this.colors[lane];
+        this.tails.set(key, crispModel((k) => k.rect(L, 0.026, { pos: [L / 2, 0, 0.002], color: c.map((v) => v * 0.75) }), { fine: 0.004, coarse: 0.02 })); // prettier-ignore
+      }
+      return this.tails.get(key);
+    };
+    this.ringModels = this.colors.map(
+      (c) =>
+      crispModel((k) => k.disc(0.07, { inner: 0.058, color: c.map((v) => Math.min(1, v + 0.2)) }), { fine: 0.003, coarse: 0.012 }), // prettier-ignore
     );
-    this.laneModel = kitModel(
-      (k) => k.add(k.box(1, 0.006, 0.006), { color: [1, 1, 1], opacity: 0.6 }),
-      { count: low ? 400 : 700 },
-    );
+    this.riderModel = crispModel((k) => {
+      // A little sled with a glowing bow, on two runners.
+      k.box(0.12, 0.03, 0.07, {
+        color: (q, n) => [0.22, 0.24, 0.34].map((v) => v * (0.8 + 0.3 * n[1])),
+      });
+      k.sphere(0.022, { pos: [0.06, 0.02, 0], step: 0.004, color: [1, 1, 0.9] });
+      for (const z of [-0.03, 0.03])
+        k.box(0.14, 0.006, 0.006, { pos: [0, -0.02, z], color: [0.75, 0.78, 0.85] });
+    }, opt);
   }
 
   reset() {
     const S = this.api.sprites;
     S.clear();
-    this.lanes = [0, 1, 2].map(() => S.add(this.laneModel));
+    // The track: lanes below their lines, both below what moves on them.
+    this.lanes = this.laneModels.map((m) => {
+      const sp = S.add(m);
+      sp.sortBias = [0, 0, -0.12];
+      return sp;
+    });
+    this.edges = S.add(this.edgeModel);
+    this.edges.sortBias = [0, 0, -0.06];
+    this.pads = this.padModels.map((m) => ({ sprite: S.add(m), press: 0 }));
     this.rider = { lane: 1, shown: 1, sprite: S.add(this.riderModel) };
-    this.notes = this.melody.map((n) => ({
-      ...n,
-      lane: this.laneOf(n.n),
-      got: false,
-      gone: false,
-      sprite: null,
-    }));
+    this.notes = this.melody.map((n) => ({ ...n, lane: this.laneOf(n.n), got: false, gone: false, sprite: null, tail: null })); // prettier-ignore
+    this.bursts = [];
     this.t = -LEAD;
     this.score = 0;
     this.streak = 0;
@@ -171,11 +206,15 @@ class NoteRider {
         this.streak++;
         this.score += 10 + Math.min(40, this.streak * 2);
         this.api.sound({ voice: "grand", f: 440 * 2 ** ((n.n - 69) / 12), vol: 0.5 + 0.4 * n.v, decay: Math.min(2, 0.4 + n.d) }); // prettier-ignore
+        // its lane's pad presses down for as long as the note is held
+        this.pads[n.lane].press = Math.max(0.12, Math.min(0.6, n.d));
+        this.bursts.push({ lane: n.lane, age: 0, sprite: null });
       } else if (dtn < -HIT) {
         n.gone = true;
         this.streak = 0;
       }
     }
+    for (const p of this.pads) p.press = Math.max(0, p.press - dt);
     const end = (this.notes.at(-1)?.t ?? 0) + 1.2;
     if (this.t > end) this.over = true;
   }
@@ -184,10 +223,8 @@ class NoteRider {
   place(ahead, lane, view) {
     // 2D: across (x) by time, up (y) by lane. 3D: away (−z) by time, across
     // (x) by lane, on a road (y fixed).
-    const x2 = -0.55 + ahead * SPEED;
-    const y2 = (lane - 1) * 0.32;
-    const p2 = [x2, y2, 0];
-    const p3 = [(lane - 1) * 0.3, -0.25, 0.6 - ahead * SPEED];
+    const p2 = [-0.55 + ahead * SPEED, (lane - 1) * LANE_GAP, 0];
+    const p3 = [(lane - 1) * LANE_GAP, -0.25, 0.6 - ahead * SPEED];
     return [lerp(p2[0], p3[0], view), lerp(p2[1], p3[1], view), lerp(p2[2], p3[2], view)];
   }
 
@@ -196,38 +233,65 @@ class NoteRider {
   render(view, frameDt) {
     this.view = view;
     const S = this.api.sprites;
+    const q = this.q;
+    const flat = q.qslerp([0, 0, 0, 1], ROAD, view); // the track's turn
+    const up = q.qrot(flat, [0, 0, 1]); // its face's normal
+    const along = (p, d) => [p[0] + up[0] * d, p[1] + up[1] * d, p[2] + up[2] * d];
+    this.lanes.forEach((s, lane) => {
+      s.pos = this.place(0, lane, view);
+      s.quat = flat;
+    });
+    this.edges.pos = this.place(0, 1, view);
+    this.edges.quat = flat;
+    this.pads.forEach((p, lane) => {
+      const k = Math.min(1, p.press / 0.08);
+      p.sprite.pos = along(this.place(0, lane, view), -0.014 * k);
+      p.sprite.quat = flat;
+      p.sprite.tint = k > 0 ? [1, 1, 1, 0.45 * k] : null;
+    });
     const r = this.rider;
     r.shown += (r.lane - r.shown) * Math.min(1, (frameDt || 0) * 14);
-    r.sprite.pos = this.place(0, r.shown, view);
-    r.sprite.quat = this.q.qaxis([0, 1, 0], (Math.PI / 2) * view);
-    // The lanes: lines along the track.
-    this.lanes.forEach((s, lane) => {
-      const a = this.place(-0.2, lane, view);
-      const b = this.place(2.6, lane, view);
-      s.pos = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - 0.035, (a[2] + b[2]) / 2];
-      const d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
-      const len = Math.hypot(...d);
-      s.quat = this.q.qfromto(
-        [1, 0, 0],
-        d.map((v) => v / len),
-      );
-      s.scale = [len, 1, 1];
-      s.fade = 0.6;
-    });
-    // The notes in view: added as they come near, gone once past.
+    r.sprite.pos = along(this.place(-0.06, r.shown, view), 0.055);
+    r.sprite.quat = q.qaxis([0, 1, 0], (Math.PI / 2) * view);
+    // The notes in view: added as they come near, gone once past. A gem
+    // stands just off the track (up off the road in 3D), its tail lies on it.
+    const lift = (p) => [p[0], p[1] + 0.06 * view, p[2] + 0.06 * (1 - view)];
     for (const n of this.notes) {
       const ahead = n.t - this.t;
-      const showing = !n.gone && (!n.got || ahead > -0.25) && ahead < 2.6 && ahead > -0.6;
-      if (showing && !n.sprite) n.sprite = S.add(this.noteModels[n.lane]);
+      const showing = !n.gone && !n.got && ahead < TRACK - 0.2 && ahead > -0.3;
+      const tailLen = n.d > 0.3 ? (n.d - 0.12) * SPEED : 0;
+      if (showing && !n.sprite) {
+        n.sprite = S.add(this.noteModels[n.lane]);
+        if (tailLen) n.tail = S.add(this.tailOf(n.lane, tailLen));
+      }
       if (!showing && n.sprite) {
         S.remove(n.sprite);
-        n.sprite = null;
+        if (n.tail) S.remove(n.tail);
+        n.sprite = n.tail = null;
       }
       if (!n.sprite) continue;
-      n.sprite.pos = this.place(ahead, n.lane, view);
-      n.sprite.scale = n.got ? 1 + 3 * Math.max(0, -ahead) : 1;
-      n.sprite.fade = n.got ? Math.max(0, 1 + ahead * 4) : 1;
+      const at = this.place(ahead, n.lane, view);
+      n.sprite.pos = lift(at);
+      if (n.tail) {
+        n.tail.pos = at;
+        n.tail.quat = flat;
+      }
     }
+    // A caught note's ring bursts outward from its pad and fades.
+    for (const b of this.bursts) {
+      b.age += frameDt || 0;
+      if (!b.sprite) b.sprite = S.add(this.ringModels[b.lane]);
+      if (!b.sprite) continue;
+      const t = Math.min(1, b.age / 0.4);
+      b.sprite.pos = lift(this.place(0, b.lane, view));
+      b.sprite.scale = 1 + 1.4 * t;
+      b.sprite.fade = 1 - t;
+    }
+    this.bursts = this.bursts.filter((b) => {
+      if (b.age < 0.4) return true;
+      if (b.sprite) S.remove(b.sprite);
+      return false;
+    });
   }
 
   camera(view, aspect) {

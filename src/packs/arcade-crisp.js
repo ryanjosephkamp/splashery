@@ -210,7 +210,7 @@ export class Crisp {
   }
 
   // A filled disc of radius r facing `normal` (+z by default): rings of
-  // splats, fine at the rim.
+  // splats, fine at the rim. inner: a ring from that radius out.
   disc(r, o = {}) {
     const c = o.pos || [0, 0, 0];
     const color = typeof o.color === "function" ? o.color : () => o.color || [1, 1, 1];
@@ -226,7 +226,10 @@ export class Crisp {
   rings(c, e1, e2, n, r, color, o = {}) {
     const fine = o.fine ?? this.fine;
     const coarse = o.coarse ?? this.coarse;
-    for (const [rad, dr] of cuts(r, fine, coarse, true)) {
+    // inner: a ring (fine at both its edges) instead of a full disc
+    const inner = o.inner || 0;
+    const radii = inner > 0 ? cuts(r - inner, fine, coarse).map(([q, d]) => [q + inner, d]) : cuts(r, fine, coarse, true); // prettier-ignore
+    for (const [rad, dr] of radii) {
       const m =
         rad < dr * 0.75
           ? 1
