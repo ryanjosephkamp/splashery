@@ -671,6 +671,7 @@ export const RECIPES = {
         pad: "Stick to turn; LB and RB roll.",
         short: "Drag or arrows turn it · V shows the block itself",
       },
+      slots: { high: 120000, mid: 90000, low: 50000 }, // crisp pieces
       create: async (api) => (await import("./arcade-shadows.js")).createShadows(api),
     },
   },

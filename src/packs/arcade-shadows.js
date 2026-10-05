@@ -11,6 +11,8 @@
 // you turn it by its shadow alone. 3D: from the side, the lamp, the block
 // and the wall all show.
 
+import { crispModel } from "./arcade-crisp.js";
+
 const N = 12; // the carving grid
 const VOX = 0.075; // a piece's size
 const WALL_Z = -0.75;
@@ -89,29 +91,46 @@ class Shadows {
     this.cells = this.carve(front, side);
     const low = this.api.profile === "low";
     const c0 = [1, 3, 5].map((i) => parseInt(color.slice(i, i + 2), 16) / 255);
-    // The block: a small wooden cube for each piece.
-    this.blockModel = this.api.kitModel(
+    // The block: a small wooden cube for each piece, crisp
+    // (src/packs/arcade-crisp.js), and only the faces that show (a face
+    // against a neighbor is left out).
+    const key = (p) => p.map((v) => Math.round(v / VOX)).join(",");
+    const has = new Set(this.cells.map(key));
+    const fine = VOX / (low ? 6 : 9);
+    this.blockModel = crispModel(
       (k) => {
-        for (const p of this.cells)
-          k.add(k.box(VOX * 0.96, VOX * 0.96, VOX * 0.96), {
+        for (const p of this.cells) {
+          let faces = "";
+          for (const [
+            f,
+            d,
+          ] of [["X", [1, 0, 0]], ["x", [-1, 0, 0]], ["Y", [0, 1, 0]], ["y", [0, -1, 0]], ["Z", [0, 0, 1]], ["z", [0, 0, -1]]]) // prettier-ignore
+            if (!has.has(key([p[0] + d[0] * VOX, p[1] + d[1] * VOX, p[2] + d[2] * VOX])))
+              faces += f;
+          if (!faces) continue;
+          k.box(VOX * 0.96, VOX * 0.96, VOX * 0.96, {
             pos: p,
-            even: true,
-            flat: 0.3,
-            color: (c) => {
-              const f = 0.7 + 0.25 * c.n[1] + 0.1 * c.n[2] + 0.05 * c.n[0];
-              const g = 0.94 + 0.08 * Math.sin(c.p[0] * 180 + c.p[1] * 40);
+            faces,
+            color: (q, n) => {
+              const f = 0.7 + 0.25 * n[1] + 0.1 * n[2] + 0.05 * n[0];
+              const g = 0.95 + 0.05 * Math.sin(q[0] * 60 + q[1] * 23);
               return c0.map((v) => v * f * g);
             },
           });
+        }
       },
-      { count: Math.min(low ? 9000 : 16000, this.cells.length * (low ? 30 : 50)) },
+      { fine, coarse: VOX / 3 },
     );
+    // The wall sorts below the shadow and the outline on it.
     this.wall = S.add(this.wallModel());
+    this.wall.sortBias = [0, 0, -0.15];
     this.lamp = S.add(this.lampModel(), { pos: [0, 0, 1.25] });
     this.block = S.add(this.blockModel);
-    // The shadow: one dark splat per piece, on the wall.
-    this.shadow = this.api.points(this.cells.length, { size: VOX * 0.62, flat: 0.08 });
-    for (let i = 0; i < this.cells.length; i++) this.shadow.color(i, 0.12, 0.11, 0.13, 0.92);
+    // The shadow: each piece's eight corners (pulled in a quarter of the
+    // way) as small dark splats on the wall, so it takes the turned cube's
+    // own outline, crisp.
+    this.shadow = this.api.points(this.cells.length * 8, { size: VOX * 0.34, flat: 0.08 });
+    for (let i = 0; i < this.cells.length * 8; i++) this.shadow.color(i, 0.12, 0.11, 0.13, 0.95);
     // The outline to match: the front picture's edge, drawn on the wall.
     const edge = [];
     for (let y = 0; y < N; y++)
@@ -133,15 +152,16 @@ class Shadows {
           ]);
         }
       }
-    this.outline = this.api.points(edge.length * 3, { size: VOX * 0.16, flat: 0.1 });
-    edge.forEach(([x, y, ex, ey], i) => {
-      for (let k = 0; k < 3; k++) {
-        const j = i * 3 + k;
-        const t = (k - 1) * 0.33 * VOX;
-        this.outline.color(j, 1, 0.92, 0.55, 1);
-        this.outline.set(j, x + ex * t, y + ey * t, WALL_Z + 0.006);
-      }
-    });
+    // The outline: a crisp line along each edge, just off the wall.
+    this.outline = S.add(
+      crispModel(
+        (k) => {
+          for (const [x, y, ex, ey] of edge)
+            k.line([x - (ex * VOX) / 2, y - (ey * VOX) / 2, WALL_Z + 0.008], [x + (ex * VOX) / 2, y + (ey * VOX) / 2, WALL_Z + 0.008], 0.007, { color: [1, 0.92, 0.55] }); // prettier-ignore
+        },
+        { fine: 0.0035, coarse: 0.02 },
+      ),
+    );
     this.target = this.mask(this.q.qaxis([0, 1, 0], 0));
     // Start turned away: a random turn far from the answer.
     let q;
@@ -166,20 +186,18 @@ class Shadows {
   }
 
   wallModel() {
-    return this.api.kitModel(
+    // a warm plaster wall, lit brightest where the lamp points
+    return crispModel(
       (k) =>
-        k.add(k.box(1.6, 1.6, 0.02), {
-          pos: [0, 0, WALL_Z - 0.012],
-          even: true,
-          flat: 0.2,
-          color: (c) => {
-            // a warm plaster wall, lit brightest where the lamp points
-            const r = Math.hypot(c.p[0], c.p[1]);
+        k.rect(1.6, 1.6, {
+          pos: [0, 0, WALL_Z - 0.002],
+          color: (p) => {
+            const r = Math.hypot(p[0], p[1]);
             const f = 0.62 + 0.38 * Math.exp(-r * r * 1.6);
             return [0.93 * f, 0.88 * f, 0.8 * f];
           },
         }),
-      { count: this.api.profile === "low" ? 5000 : 9000 },
+      { fine: 0.005, coarse: 0.03 },
     );
   }
 
@@ -291,14 +309,16 @@ class Shadows {
     // In 2D you see only the wall: the block hides (you stand at the lamp).
     this.block.fade = clamp(view * 1.6 - 0.3, 0, 1);
     this.lamp.fade = clamp(view * 1.6 - 0.3, 0, 1);
+    const h = VOX * 0.25;
     this.cells.forEach((p, i) => {
-      const w = this.q.qrot(this.turn, p);
-      // a little nearer the wall for pieces nearer it, so overlapping
-      // shadow splats sort steadily
-      this.shadow.set(i, w[0], w[1], WALL_Z + 0.002 + 0.0005 * (w[2] + 1));
+      for (let c = 0; c < 8; c++) {
+        const w = this.q.qrot(this.turn, [p[0] + (c & 1 ? h : -h), p[1] + (c & 2 ? h : -h), p[2] + (c & 4 ? h : -h)]); // prettier-ignore
+        // a little nearer the wall for pieces nearer it, so overlapping
+        // shadow splats sort steadily
+        this.shadow.set(i * 8 + c, w[0], w[1], WALL_Z + 0.002 + 0.0005 * (w[2] + 1));
+      }
     });
     this.shadow.flush();
-    this.outline.flush();
   }
 
   camera(view, aspect) {
