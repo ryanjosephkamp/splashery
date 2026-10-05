@@ -10,7 +10,7 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/qrs-clip.mjs <out-dir> [--size=360] [--fps=12] [clip ...]
 //
-// Clips: anatomy-parts, anatomy-pop, anatomy-encode, damage-spread, damage-levels,
+// Clips: anatomy-parts, anatomy-pop, anatomy-encode, anatomy-encode-pop, damage-spread, damage-levels,
 // damage-heal, damage-tear-burn, damage-splats, three. Writes <out-dir>/qrs-<clip>.gif and
 // a strip of 8 frames, <out-dir>/qrs-<clip>-strip.png.
 
@@ -26,7 +26,7 @@ const opt = (k, d) => {
 const outDir = args.find((a) => !a.startsWith("--")) || ".cache/qrs-clips";
 const size = Number(opt("size", 360));
 const fps = Number(opt("fps", 12));
-const all = ["anatomy-parts", "anatomy-pop", "anatomy-encode", "damage-spread", "damage-levels", "damage-heal", "damage-tear-burn", "damage-splats", "three"]; // prettier-ignore
+const all = ["anatomy-parts", "anatomy-pop", "anatomy-encode-pop", "anatomy-encode", "damage-spread", "damage-levels", "damage-heal", "damage-tear-burn", "damage-splats", "three"]; // prettier-ignore
 const pick = args.filter((a) => !a.startsWith("--")).slice(1);
 const clips = pick.length ? pick : all;
 fs.mkdirSync(outDir, { recursive: true });
@@ -56,6 +56,18 @@ const SCRIPTS = {
   "anatomy-encode": [
     { toy: "qr-anatomy" },
     ...["mode", "count", "data", "pad", "ecc", "blocks"].flatMap((st) => [{ opts: { view: "encode", step: st, text: "HELLO WORLD", level: "Q" }, key: "lift", cap: `step:${st}` }, { wait: 1.5 }]), // prettier-ignore
+    { opts: { view: "encode", step: "place" }, key: "place", cap: "step:place" },
+    { wait: 6.4 },
+    { opts: { view: "encode", step: "mask3" }, key: "mask", cap: "step:mask3" },
+    { wait: 2.8 },
+    { opts: { view: "encode", step: "chosen" }, key: "lift", cap: "step:chosen" },
+    { wait: 1.6 },
+    { opts: { view: "encode", step: "format" }, key: "lift", cap: "step:format" },
+    { wait: 1.6 },
+  ],
+  "anatomy-encode-pop": [
+    { toy: "qr-anatomy" },
+    ...["mode", "count", "data", "pad", "ecc", "blocks"].flatMap((st) => [{ opts: { view: "encode", step: st, text: "HELLO WORLD", level: "Q", pop: true }, key: "lift", cap: `step:${st}` }, { wait: 1.5 }]), // prettier-ignore
     { opts: { view: "encode", step: "place" }, key: "place", cap: "step:place" },
     { wait: 6.4 },
     { opts: { view: "encode", step: "mask3" }, key: "mask", cap: "step:mask3" },
