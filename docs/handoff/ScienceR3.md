@@ -128,7 +128,8 @@ choices in a toy's select options", needed by the structure picker; merge it fir
   more molecules?". Done in r2 (commit 81523da7): the cryo-EM map draws more, smaller, flatter
   splats with ambient occlusion (Tenengrad 172 → 216, 179 → 232), and 13 more structures (38 in
   seven groups, with Molecules of life and DNA and RNA). The r2 clips render at 2× (780 × 1688), as
-  r2 of lane Science found sharper on the phone; they replace the six cards.
+  r2 of lane Science found sharper on the phone. Posted October 5, 05:30 UTC: `sci3-cryoem-*-r2`,
+  `sci3-minerals-r2`, `sci3-dna-r2` (replacing their cards) and `sci3-life` (new).
 
 ## Proposals: more "in a box" (item 4)
 
