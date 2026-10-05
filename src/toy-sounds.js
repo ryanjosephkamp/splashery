@@ -2780,10 +2780,10 @@ export const TOY_SOUNDS = {
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
   // ---- Night sky (lane Night sky) ---------------------------------------------------
-  // The sky is silent: a soft breath and a faint glint as the ring marks a star.
+  // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
   "night-sky": [
-    { voice: "breath", f: 820, to: 1.15, decay: 1.4, vol: 0.18 },
-    { voice: "sparkle", at: 0.05, vol: 0.18 },
+    { voice: "tine", f: 660, decay: 1.2, vol: 0.7 },
+    { voice: "breath", at: 0.03, f: 700, to: 1.1, decay: 1.2, vol: 0.12 },
   ],
 };
 

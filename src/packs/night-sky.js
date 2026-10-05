@@ -504,9 +504,11 @@ function buildSky(k, o) {
     const l = k.rand() * 2 * Math.PI;
     const b = (k.rand() + k.rand() + k.rand() - 1.5) * 0.17 * (1 + 0.6 * Math.cos(l)); // radians
     const v = norm(gc.map((c, j) => Math.cos(b) * (Math.cos(l) * c + Math.sin(l) * gy[j]) + Math.sin(b) * gp[j])); // prettier-ignore
-    const lane = Math.abs(b) < 0.02 && Math.cos(l) > 0.2 ? 0.45 : 1; // the dark rift near the center
-    const bright = (0.35 + 0.65 * Math.max(0, Math.cos(l)) ** 2) * lane * (0.6 + 0.4 * r);
-    push(sheetSplat(v.map((x) => x * R.milky), (0.28 + 0.4 * k.rand()) * D2R * R.milky, [0.78, 0.82, 0.95], 0.03 + 0.08 * bright, { part: parts.stars, kind: FADE, params: [0.02, 0.12], channel: 0 })); // prettier-ignore
+    // Patchy, as star clouds and dust lanes make it; the dark rift splits it near the center.
+    const patch = clamp(0.55 + 0.9 * k.noise.fbm(v[0] * 3.2, v[1] * 3.2, v[2] * 3.2, 4), 0.05, 1);
+    const lane = Math.abs(b - 0.03 * Math.sin(3 * l)) < 0.035 && Math.cos(l) > 0.1 ? 0.25 : 1;
+    const bright = (0.3 + 0.7 * Math.max(0, Math.cos(l)) ** 2) * lane * patch * (0.7 + 0.3 * r);
+    push(sheetSplat(v.map((x) => x * R.milky), (0.25 + 0.35 * k.rand()) * D2R * R.milky, [0.8, 0.84, 0.96], 0.012 + 0.05 * bright, { part: parts.stars, kind: FADE, params: [0.02, 0.12], channel: 0 })); // prettier-ignore
     placed++;
   }
 
@@ -572,15 +574,15 @@ function buildSky(k, o) {
   }
 
   // The Moon: a ball lit on its +X side; drive turns +X toward the Sun.
-  // Its night side sits a little inside the day side, so no dark rim shows round a full Moon.
+  // Its night side is close to the night sky's own color, so no dark rim shows round a full Moon
+  // and it hides the stars behind it as the real one does.
   sphere(520, ballR, (nv, p) => {
     const lit = nv[0];
     if (lit >= 0) {
       const shade = 0.78 + 0.22 * Math.sqrt(lit);
       push(dotSplat(p, ballSig(520, ballR), [0.94 * shade, 0.92 * shade, 0.86 * shade], 1, { part: parts.moon })); // prettier-ignore
     } else {
-      const q = c0.map((c, i) => c + nv[i] * ballR * 0.96);
-      push(dotSplat(q, ballSig(520, ballR) * 0.95, [0.05, 0.055, 0.075], 1, { part: parts.moon, kind: FADE, params: [0.2, 0.3], channel: 0 })); // prettier-ignore
+      push(dotSplat(p, ballSig(520, ballR), [0.035, 0.04, 0.065], 1, { part: parts.moon, kind: FADE, params: [0.2, 0.3], channel: 0 })); // prettier-ignore
     }
   });
 
@@ -603,14 +605,14 @@ function buildSky(k, o) {
 
   // The ground, up to a low skyline, and its daylight color.
   const nGround = Math.round(N * 0.1);
-  sig = spacing(nGround, -90, 4) * 0.85;
+  sig = spacing(nGround, -90, 4) * 1.05;
   for (const q of band(nGround, -90, 4)) {
     if (q.alt > skyline(q.az)) continue;
     const near = clamp(-q.alt / 30, 0, 1);
     push(sheetSplat(sc(q.enu).map((v) => v * R.ground), sig * R.ground, mix([0.03, 0.033, 0.04], [0.012, 0.014, 0.018], near), 1)); // prettier-ignore
   }
   const nGroundDay = Math.round(N * 0.04);
-  sig = spacing(nGroundDay, -90, 4) * 0.9;
+  sig = spacing(nGroundDay, -90, 4) * 1.1;
   for (const q of band(nGroundDay, -90, 4)) {
     if (q.alt > skyline(q.az) - 0.05) continue;
     push(sheetSplat(sc(q.enu).map((v) => v * (R.ground - 0.003)), sig * R.ground, mix([0.2, 0.24, 0.17], [0.1, 0.12, 0.08], clamp(-q.alt / 30, 0, 1)), 1, { kind: FADE, params: [0.35, -0.6], channel: 0 })); // prettier-ignore
@@ -721,7 +723,9 @@ export const RECIPES = {
       if (pk?.kind === "body") dir = sc(s.bodies[pk.name].enu);
       else if (pk?.kind === "star") dir = sc(norm(mulMV(s.matrix, CAT.vec[pk.i])));
       if (dir && dir[1] < -0.015) dir = null; // under the horizon: no ring on the ground
-      out.parts.mark = dir ? { quat: quatFromTo([0, 1, 0], dir), offset: dir.map((v, i) => v * R.mark - CM[i]), visible: 1 } : { visible: 0 }; // prettier-ignore
+      // A tap's ring closes in on its target (the "name" pulse eases from 1 to 0).
+      const lock = 1 + 1.6 * (c.name ?? 0) ** 2;
+      out.parts.mark = dir ? { quat: quatFromTo([0, 1, 0], dir), offset: dir.map((v, i) => v * R.mark - CM[i]), scale: lock, visible: 1 } : { visible: 0 }; // prettier-ignore
       out.legend = legend(s, ms);
       if (Math.floor(t * 2) !== SKY.panelTick) {
         SKY.panelTick = Math.floor(t * 2);
@@ -778,12 +782,18 @@ if (typeof window !== "undefined" && window.__splashery) {
     return i >= 0 ? { kind: "star", i } : null;
   };
   window.__splashery.sky = {
-    set({ city, lat, lon, time, speed } = {}) {
+    set({ city, lat, lon, time, speed, rate } = {}) {
       if (city) setPlace({ ...cityById(city) });
       else if (Number.isFinite(lat) && Number.isFinite(lon))
         setPlace({ id: "typed", name: formatLatLon(lat, lon), lat, lon, tz: "UTC" });
       if (time !== undefined) setTime(typeof time === "number" ? time : Date.parse(time));
       if (speed !== undefined) setSpeed(String(speed));
+      // Any rate (sky seconds per second), for the clip tool (tools/sky-clip.mjs).
+      if (Number.isFinite(rate)) {
+        SKY.anchorSky = skyTime();
+        SKY.anchorT = SKY.t;
+        SKY.rate = rate;
+      }
       return this.state();
     },
     state() {
