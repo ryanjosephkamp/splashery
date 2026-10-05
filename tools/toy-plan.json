@@ -2512,6 +2512,13 @@
       "effect": "A pinball table moved by Splashery's own rigid-body engine: the steel ball rolls down the slope, bounces off rails and posts, the flippers swing and strike it, pop bumpers kick it away and light up, and the plunger launches it. 2D from above; 3D from the player's end.",
       "sound": "A clack for each flipper, a bright ding for each bumper, small clicks off the rails, a thud for the plunger and a low thud for a drained ball.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and src/physics/world.js."
+    },
+    "cast-a-shadow": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G9 (labs only).",
+      "effect": "A shadow puzzle: turn a carved block between a lamp and a wall until its shadow (each piece casting its own dark splat) fills the outline of a picture; the block is carved to cast a different picture from the side. 2D shows only the wall; 3D shows the lamp and the block too.",
+      "sound": "A soft rising tine as the shadow gets closer, a four-note chime when it matches.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
     }
   }
 }

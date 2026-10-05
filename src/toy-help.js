@@ -1801,6 +1801,13 @@ export const TOY_HELP = {
       "A pinball table whose steel ball is moved by Splashery's own physics engine, the same one the Hands-on switch uses. The ball rolls down the sloped table under gravity, bounces off the rails and posts as hard as they give back, and the flippers are solid paddles: a flipper swinging as it meets the ball hits it harder than a still one. The three pop bumpers kick the ball away and light up, 100 points each. Keep the ball out of the drain between the flippers; you have three balls. The 3D button moves the view from straight above to the player's end of the table, looking up the slope.",
   },
 
+  "cast-a-shadow": {
+    howTo:
+      "Drag (or use the arrow keys) to turn the block until its shadow fills the outline on the wall. Q and E roll it.",
+    about:
+      "A carved block hangs between a lamp and a wall, and every piece of it casts its own small shadow. Each block is carved so that from one way its shadow is a picture, a heart, a fish, a key, a house, a star, a tree or a bird, and from the side it is another; from most turns it is a jumble. Turn it until its shadow fills the outline drawn on the wall; the Match chip says how close you are. In 2D you see only the wall, as if you stood at the lamp, and turn the block by its shadow alone; the 3D button steps to the side so the lamp and the block show.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

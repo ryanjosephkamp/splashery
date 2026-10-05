@@ -103,6 +103,10 @@ function picture(k, kind) {
     for (const [x, z] of [[-0.16, -0.45], [0.14, -0.5], [-0.02, -0.25]]) k.add(k.cylinder(0.055, 0.05), { pos: [x, 0.025, z], even: true, color: (c) => (c.n[1] > 0.5 ? [1, 0.88, 0.48] : lit("#d6382f", c.n)) }); // prettier-ignore
     for (const s of [-1, 1]) box(0.16, 0.04, 0.03, [s * 0.12, 0.02, 0.74], "#f4f4f0");
     k.add(k.sphere(0.028), { pos: [0.05, 0.028, 0.2], even: true, color: "#e8eaf0", weight: 3 });
+  } else if (kind === "shadow") {
+    box(1.6, 1.6, 0.02, [0, 0, -0.76], "#e8dfcc");
+    for (const [x, y] of [[0, 0.2], [-0.2, 0], [0.2, 0], [0, -0.1], [-0.1, -0.25], [0.1, -0.25], [0, 0]]) box(0.2, 0.2, 0.01, [x, y, -0.74], "#2a282c"); // prettier-ignore
+    for (const [x, y, z] of [[0, 0, 0], [0.075, 0, 0], [0, 0.075, 0], [0, 0, 0.075], [-0.075, 0, 0]]) k.add(k.box(0.072, 0.072, 0.072), { pos: [x + 0.3, y + 0.2, z + 0.3], even: true, color: (c) => lit("#c96f4a", c.n) }); // prettier-ignore
   } else if (kind === "net") {
     // The cube's net of tiles, and a string of green beads.
     const A = 0.5;
@@ -606,6 +610,39 @@ export const RECIPES = {
         short: "← → flippers · hold Space to launch · V for the player's view",
       },
       create: async (api) => (await import("./arcade-pinball.js")).createPinball(api),
+    },
+  },
+  "cast-a-shadow": {
+    turntable: false,
+    density: 0.05,
+    kernel: "sharp", // the sharper splat edge (labs)
+    options: [VIEW],
+    controls: PLAY,
+    action: { key: "go", label: "Play or pause" },
+    drive() {}, // the game moves on its own layer; the toy's still picture stays still
+    build(k) {
+      stage(k, "shadow");
+    },
+    arcade: {
+      title: "Cast a Shadow",
+      goal: "Turn the carved block until its shadow fills the outline on the wall.",
+      stats: [
+        { key: "puzzle", label: "Puzzle" },
+        { key: "match", label: "Match" },
+        { key: "score", label: "Score" },
+      ],
+      best: "score",
+      views: true,
+      pad: ["left", "right", "up", "down", "turnL", "turnR"],
+      padLabels: { turnL: "⟲", turnR: "⟳" },
+      controls: {
+        keys: "Arrows (or W, A, S, D) turn the block; Q and E roll it.",
+        mouse: "Drag to turn the block.",
+        touch: "Drag to turn the block, or use the pad.",
+        pad: "Stick to turn; LB and RB roll.",
+        short: "Drag or arrows turn it · V shows the block itself",
+      },
+      create: async (api) => (await import("./arcade-shadows.js")).createShadows(api),
     },
   },
 };

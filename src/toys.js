@@ -3609,6 +3609,15 @@ export const TOYS = [
     labs: true,
     tags: "game arcade pinball flippers bumpers plunger steel ball table physics 3d",
   },
+  {
+    id: "cast-a-shadow",
+    label: "Cast a Shadow",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade puzzle shadow light lamp wall silhouette turn rotate carved block 3d",
+  },
 ];
 
 export function findToy(id) {

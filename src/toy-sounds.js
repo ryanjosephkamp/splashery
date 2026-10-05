@@ -2818,6 +2818,11 @@ export const TOY_SOUNDS = {
     { voice: "clack", f: 900, vol: 0.45 },
     { voice: "ding", at: 0.12, f: 1150, vol: 0.4 },
   ],
+  // A shadow puzzle solved: a soft knock and a chime.
+  "cast-a-shadow": [
+    { voice: "wood", f: 420, decay: 0.5, vol: 0.4 },
+    { voice: "tine", at: 0.15, f: 1320, decay: 0.8, vol: 0.3 },
+  ],
   // A word's brick breaking: a paper tear and a knock.
   "page-breaker": [
     { voice: "pock", f: 480, vol: 0.55 },
