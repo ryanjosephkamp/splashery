@@ -9,8 +9,10 @@ the app outside your own files, as an "Engine: …" PR merged first). PR title: 
 climate: your spreadsheet in 3D, and the climate records". Handoff file: docs/handoff/DataClimate.md
 (create it; start it with this brief, word for word, under "## Brief", then keep "## State
 
-WORKING (October 5, 2026): both toys build and run, with tests, credits, how-to and About texts, and
-the evidence file. Next: clips on Effect review page 2, sound lint, check-packs, thumbnails.
+WORKING (October 5, 2026, 08:30 UTC): both toys are built, tested and pushed on PR #294; five clips
+are on Effect review page 2 (lane record `DataClimate`, cards `dcl-data-earthquakes`,
+`dcl-data-iris`, `dcl-data-co2-bars`, `dcl-climate-co2-spiral`, `dcl-climate-temperature-bars`). The
+final run of the lane's specs and the shared suites it touches is in progress.
 
 - **Data in 3D** (`data-in-3d`, Studio, labs): `src/datavis/csv.js` reads the table,
   `src/datavis/plot.js` builds a scatter, bars or a surface inside `src/datavis/chart.js`'s frame
@@ -48,4 +50,8 @@ the evidence file. Next: clips on Effect review page 2, sound lint, check-packs,
 
 ## For the Operator
 
-Nothing yet.
+- The CO2 record starts in May 1974 (Notes says why). If the Scripps segment is ever cleared, rerun
+  `tools/dcl-snapshots.mjs` without its cut and update the evidence file.
+- Saving to "a file the person chooses" uses `showSaveFilePicker` where the browser has it (Chrome
+  and Edge on a computer); elsewhere it is the browser's own download or save sheet.
+- No engine PR was needed: the Toy tab panel uses `input.live` with a `render`, as the QR toy does.

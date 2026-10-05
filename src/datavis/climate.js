@@ -133,7 +133,7 @@ export function co2Spiral(k, rows, { source = "", px = 0.02 } = {}) {
       const a = (i / 160) * Math.PI * 2;
       ch.point([r * Math.sin(a), 0, r * Math.cos(a)], "#8b8f97", 0.0045, 0.35);
     }
-    if (v === 360 || v === S.hi) ch.label(v === S.hi ? `${v} PPM` : `${v}`, [r * Math.sin(tickA), -px * 1.5, r * Math.cos(tickA)], { valign: "top", scale: 0.9 }); // prettier-ignore
+    if (v === 360 || v === S.hi) ch.label(v === S.hi ? `${v} PPM` : `${v}`, [r * Math.sin(tickA), -px * 1.5, r * Math.cos(tickA)], { valign: "top", scale: 0.9, align: v === S.hi ? "left" : "right" }); // prettier-ignore
   }
   // Four months around the top of the coil (January in front).
   const ring = spiralRadius(last.ppm, S) + 0.1;
@@ -171,7 +171,7 @@ function temperatureFrame(ch, years, { z = true, px }) {
   ch.axis("x", { name: "YEAR", min: years[0] - 0.5, max: years[years.length - 1] + 0.5, ticks: [1880, 1920, 1960, 2000].filter((y) => y >= years[0]).map((v) => ({ v, text: String(v) })) }); // prettier-ignore
   ch.axis("y", { name: "°C VS 1951–1980", min: TEMP.lo, max: TEMP.hi, ticks: [-1, -0.5, 0, 0.5, 1, 1.5].map((v) => ({ v, text: degrees(v) })) }); // prettier-ignore
   if (z)
-    ch.axis("z", { name: "MONTH", min: 0.5, max: 12.5, ticks: [1, 4, 7, 10].map((m) => ({ v: m, text: MONTHS[m - 1] })) }); // prettier-ignore
+    ch.axis("z", { name: "MONTH", min: 0.5, max: 12.5, ticks: [1, 7].map((m) => ({ v: m, text: MONTHS[m - 1] })) }); // prettier-ignore
   else ch.axis("z", { name: "", min: 0, max: 1, ticks: [] });
   ch.frame({ zAxis: z, walls: true, zSide: "right" });
   // The zero plane's outline: anomalies rise above it or hang below it.
