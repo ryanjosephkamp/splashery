@@ -11,7 +11,6 @@
 // show their real shapes as they tumble past.
 
 import { crispModel } from "./arcade-crisp.js";
-import { evenBox } from "./even.js";
 
 const SIZES = [
   // (more points since the owner's "please make sharper": smaller splats)
@@ -118,20 +117,19 @@ class StoneBelt {
         return m;
       }),
     );
-    this.ship = kitModel(
-      (k) => {
+    // The ship, crisp (src/packs/arcade-crisp.js).
+    this.ship = crispModel(
+      (c) => {
         // A sleek dart: a pointed hull, two swept fins, a glowing engine.
-        k.add(k.cone(0.035, 0.0, 0.16), { rot: [0, 0, -90], even: true, color: (c) => shadeC([0.85, 0.87, 0.9], c.n) }); // prettier-ignore
+        c.cylinder(0.035, 0.16, { axis: [1, 0, 0], r2: 0.0015, color: (p, n) => shadeC([0.85, 0.87, 0.9], n) }); // prettier-ignore
         for (const s of [-1, 1])
-          k.add(evenBox(0.06, 0.012, 0.07), { pos: [-0.03, 0, s * 0.045], rot: [0, s * 25, 0], even: true, color: (c) => shadeC([0.85, 0.35, 0.18], c.n) }); // prettier-ignore
-        k.add(k.sphere(0.022), {
-          pos: [-0.065, 0, 0],
-          even: true,
-          color: [1, 0.75, 0.35],
-          weight: 3,
-        });
+          c.group(
+            { pos: [-0.03, 0, s * 0.045], rot: this.q.qaxis([0, 1, 0], (s * 25 * Math.PI) / 180) },
+            () => c.box(0.06, 0.012, 0.07, { color: (p, n) => shadeC([0.85, 0.35, 0.18], n) }),
+          );
+        c.sphere(0.022, { pos: [-0.075, 0, 0], step: 0.005, color: [1, 0.75, 0.35] });
       },
-      { count: low ? 900 : 2400 },
+      { fine: low ? 0.004 : 0.0028, coarse: 0.012 },
     );
     this.flame = kitModel(
       (k) =>
@@ -153,7 +151,9 @@ class StoneBelt {
     const S = this.api.sprites;
     S.clear();
     const a = this.api.aspect();
-    [this.W, this.H] = a < 1 ? [1.9, 2.7] : [3.0, 2.0];
+    // (a tall field a little smaller than before, so the ship and the rocks
+    // are bigger on a phone)
+    [this.W, this.H] = a < 1 ? [1.6, 2.4] : [3.0, 2.0];
     this.starSprite = S.add(this.stars);
     this.rocks = [];
     this.shots = [];

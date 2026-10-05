@@ -250,29 +250,56 @@ export class Crisp {
   }
 
   // A cylinder of radius r and length l along axis (unit), centered at pos,
-  // with its two caps (caps: false leaves them off).
+  // with its two caps (caps: false leaves them off). r2: the radius at its
+  // far end (a cone, or a tapered rod).
   cylinder(r, l, o = {}) {
     const c = o.pos || [0, 0, 0];
     const ax = norm(o.axis || [0, 0, 1]);
     const color = typeof o.color === "function" ? o.color : () => o.color || [1, 1, 1];
     const fine = o.fine ?? this.fine;
     const coarse = o.coarse ?? this.coarse;
+    const r2 = o.r2 ?? r;
     const ref = Math.abs(ax[0]) < 0.9 ? [1, 0, 0] : [0, 1, 0];
     const e1 = norm(cross(ax, ref));
     const e2 = cross(ax, e1);
-    const m = Math.max(8, Math.round((2 * Math.PI * r) / (fine * 2)));
-    const ca = (2 * Math.PI * r) / m;
+    const big = Math.max(r, r2);
+    const m = Math.max(8, Math.round((2 * Math.PI * big) / (fine * 2)));
+    const slope = (r2 - r) / l;
+    const side = Math.hypot(l, r2 - r); // the slanted side's length
     for (let i = 0; i < m; i++) {
       const a = ((i + 0.5) / m) * Math.PI * 2;
-      const nn = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
-      const rot = frame(ax, nn);
-      for (const [x, cl] of cuts(l, fine, coarse)) {
-        const p = add(c, add(mul(nn, r), mul(ax, x - l / 2)));
+      const radial = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
+      const nn = norm(sub(radial, mul(ax, slope)));
+      const along = norm(add(ax, mul(radial, slope)));
+      const rot = frame(along, nn);
+      for (const [x, cl0] of cuts(side, fine, coarse)) {
+        const t = x / side;
+        const rr = r + (r2 - r) * t;
+        if (rr < fine * 0.25) continue;
+        const ca = (2 * Math.PI * rr) / m;
+        const cl = cl0;
+        const p = add(c, add(mul(radial, rr), mul(ax, t * l - l / 2)));
         this.splat(p, color(p, nn), cl * K, ca * K, Math.min(ca, cl, fine) * THIN, rot);
       }
     }
     if (o.caps === false) return;
-    for (const s of [-1, 1]) this.rings(add(c, mul(ax, (s * l) / 2)), e1, s > 0 ? e2 : mul(e2, -1), mul(ax, s), r, color, o); // prettier-ignore
+    for (const s of [-1, 1]) {
+      const rr = s < 0 ? r : r2;
+      if (rr < fine) continue;
+      this.rings(add(c, mul(ax, (s * l) / 2)), e1, s > 0 ? e2 : mul(e2, -1), mul(ax, s), rr, color, o); // prettier-ignore
+    }
+  }
+
+  // Shapes built in fn around the origin, then turned by rot (a quaternion)
+  // and moved to pos.
+  group({ pos = [0, 0, 0], rot = [0, 0, 0, 1] } = {}, fn) {
+    const start = this.pts.length;
+    fn(this);
+    for (let i = start; i < this.pts.length; i++) {
+      const s = this.pts[i];
+      s.p = add(rotate(rot, s.p), pos);
+      s.r = qmul(rot, s.r);
+    }
   }
 
   model() {
