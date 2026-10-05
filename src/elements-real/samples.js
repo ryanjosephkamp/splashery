@@ -99,7 +99,7 @@ export const SAMPLES = {
   58: ioe("cerium", "cerium.jpg", "Ultrapure cerium under argon, 1.5 grams"),
   59: ioe("praseodymium", "praseodymium.jpg", "Ultrapure praseodymium pieces under argon"),
   60: ioe("neodymium", "neodymium.jpg", "Ultrapure neodymium under argon, 5 grams"),
-  61: { none: "No photo of a real sample: promethium is strongly radioactive, and almost none exists on Earth." },
+  61: commons("Promethium Metal Buttons.png", "E. J. Wheelwright, U.S. Atomic Energy Commission", "Public domain", "The first two buttons of promethium-147 metal (beside a coin, cropped out here)", { crop: [0, 0, 1, 0.6] }),
   62: ioe("samarium", "samarium.jpg", "Ultrapure samarium, 2 grams, in a glass tube"),
   63: ioe("europium", "europium.jpg", "A strongly oxidized piece of europium, 1 gram"),
   64: ioe("gadolinium", "gadolinium.jpg", "Ultrapure gadolinium, 12 grams"),
@@ -150,6 +150,8 @@ export const LICENSE_URL = {
   "CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/",
   "CC BY-SA 3.0": "https://creativecommons.org/licenses/by-sa/3.0/",
   "CC BY-SA 4.0": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "CC BY 2.0": "https://creativecommons.org/licenses/by/2.0/",
+  CC0: "https://creativecommons.org/publicdomain/zero/1.0/",
   "Public domain": "https://creativecommons.org/publicdomain/mark/1.0/",
 };
 
@@ -158,7 +160,35 @@ export const LICENSE_URL = {
 // traces of it. A portrait is shown flat and in black and white, a flag as waving cloth, a coat
 // of arms cut out by its own outline. Each license was checked on its Wikimedia Commons file page.
 // z -> { kind: "portrait" | "flag" | "arms" | "photo", src, file, page, author, license, what, crop }
-export const STANDINS = {};
+// prettier-ignore
+export const STANDINS = {
+  84: {"kind":"flag","src":"commons","file":"Flag of Poland.svg","page":"https://commons.wikimedia.org/wiki/File:Flag_of_Poland.svg","author":"Wikimedia Commons contributors","license":"Public domain","what":"The flag of Poland, Marie Curie's homeland, for which polonium is named"},
+  85: {"kind":"photo","src":"commons","file":"Autunite-20885.jpg","page":"https://commons.wikimedia.org/wiki/File:Autunite-20885.jpg","author":"Robert M. Lavinsky (iRocks.com)","license":"CC BY-SA 3.0","what":"Autunite, a uranium mineral that holds tiny traces of astatine"},
+  86: {"kind":"photo","src":"commons","file":"Granite 5 (48674315157).jpg","page":"https://commons.wikimedia.org/wiki/File:Granite_5_%2848674315157%29.jpg","author":"James St. John","license":"CC BY 2.0","what":"A block of granite; its uranium and thorium traces give off radon gas"},
+  87: {"kind":"photo","src":"commons","file":"Thorite-288916.jpg","page":"https://commons.wikimedia.org/wiki/File:Thorite-288916.jpg","author":"Robert M. Lavinsky (iRocks.com)","license":"CC BY-SA 3.0","what":"A thorite crystal, a thorium mineral that holds trace francium","crop":[0,0,1,0.85]},
+  104: {"kind":"portrait","src":"commons","file":"Ernest Rutherford LOC.jpg","page":"https://commons.wikimedia.org/wiki/File:Ernest_Rutherford_LOC.jpg","author":"George Grantham Bain Collection (Library of Congress)","license":"Public domain","what":"Ernest Rutherford, for whom rutherfordium is named"},
+  105: {"kind":"arms","src":"commons","file":"Coat of arms of Dubna.svg","page":"https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Dubna.svg","author":"City of Dubna","license":"Public domain","what":"The coat of arms of Dubna, the Russian science city for which dubnium is named"},
+  106: {"kind":"portrait","src":"commons","file":"Glenn Seaborg - 1964.jpg","page":"https://commons.wikimedia.org/wiki/File:Glenn_Seaborg_-_1964.jpg","author":"U.S. Atomic Energy Commission","license":"Public domain","what":"Glenn T. Seaborg, for whom seaborgium is named"},
+  107: {"kind":"portrait","src":"commons","file":"Niels Bohr.jpg","page":"https://commons.wikimedia.org/wiki/File:Niels_Bohr.jpg","author":"AB Lagrelius & Westphal","license":"Public domain","what":"Niels Bohr, for whom bohrium is named"},
+  108: {"kind":"arms","src":"commons","file":"Coat of arms of Hesse.svg","page":"https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Hesse.svg","author":"State of Hesse","license":"Public domain","what":"The coat of arms of Hesse, the German state for which hassium is named"},
+  109: {"kind":"portrait","src":"commons","file":"Lise Meitner NatGeo.jpg","page":"https://commons.wikimedia.org/wiki/File:Lise_Meitner_NatGeo.jpg","author":"Harris & Ewing","license":"Public domain","what":"Lise Meitner, for whom meitnerium is named","crop":[0.12,0.04,0.88,0.6]},
+  110: {"kind":"arms","src":"commons","file":"Wappen Darmstadt.svg","page":"https://commons.wikimedia.org/wiki/File:Wappen_Darmstadt.svg","author":"City of Darmstadt (Hessisches Staatsarchiv)","license":"Public domain","what":"The coat of arms of Darmstadt, the city for which darmstadtium is named"},
+  111: {"kind":"portrait","src":"commons","file":"Roentgen2.jpg","page":"https://commons.wikimedia.org/wiki/File:Roentgen2.jpg","author":"Unknown photographer","license":"Public domain","what":"Wilhelm Röntgen, for whom roentgenium is named"},
+  112: {"kind":"portrait","src":"commons","file":"Nikolaus Kopernikus.jpg","page":"https://commons.wikimedia.org/wiki/File:Nikolaus_Kopernikus.jpg","author":"Unknown painter (Toruń Town Hall portrait, c. 1580)","license":"Public domain","what":"Nicolaus Copernicus, for whom copernicium is named"},
+  113: {"kind":"flag","src":"commons","file":"Flag of Japan.svg","page":"https://commons.wikimedia.org/wiki/File:Flag_of_Japan.svg","author":"Government of Japan","license":"Public domain","what":"The flag of Japan; nihonium is named for Nihon, Japan"},
+  114: {"kind":"portrait","src":"commons","file":"RUSMARKA-1660 (cropped).jpg","page":"https://commons.wikimedia.org/wiki/File:RUSMARKA-1660_%28cropped%29.jpg","author":"Russian Post (Marka); designer A. Povarikhin","license":"Public domain","what":"Georgy Flerov on a 2013 stamp; flerovium is named for his lab","crop":[0.08,0.1,0.95,1]},
+  115: {"kind":"flag","src":"commons","file":"Flag of Moscow, Russia.svg","page":"https://commons.wikimedia.org/wiki/File:Flag_of_Moscow%2C_Russia.svg","author":"City of Moscow","license":"Public domain","what":"The flag of Moscow; moscovium is named for the Moscow region"},
+  116: {"kind":"photo","src":"commons","file":"Downtown Livermore California.jpg","page":"https://commons.wikimedia.org/wiki/File:Downtown_Livermore_California.jpg","author":"LPS.1","license":"CC0","what":"Downtown Livermore, California, home of the lab that livermorium is named for"},
+  117: {"kind":"flag","src":"commons","file":"Flag of Tennessee.svg","page":"https://commons.wikimedia.org/wiki/File:Flag_of_Tennessee.svg","author":"State of Tennessee; drawn by -xfi-","license":"Public domain","what":"The flag of Tennessee, the state for which tennessine is named"},
+  118: {"kind":"portrait","src":"commons","file":"Yuri Oganessian (cropped).jpg","page":"https://commons.wikimedia.org/wiki/File:Yuri_Oganessian_%28cropped%29.jpg","author":"VPRO","license":"CC BY-SA 3.0","what":"Yuri Oganessian, for whom oganesson is named"},
+  89: {"kind":"photo","src":"commons","file":"Uraninite-225146.jpg","page":"https://commons.wikimedia.org/wiki/File:Uraninite-225146.jpg","author":"Robert M. Lavinsky (iRocks.com)","license":"CC BY-SA 3.0","what":"Uraninite crystals, a uranium ore that holds trace actinium"},
+  90: {"kind":"photo","src":"commons","file":"Thorianite-729924.jpg","page":"https://commons.wikimedia.org/wiki/File:Thorianite-729924.jpg","author":"Kelly Nash","license":"CC BY 3.0","what":"A thorianite crystal, a thorium oxide mineral (Smithsonian collection)","crop":[0.25,0.08,0.78,0.62]},
+  96: {"kind":"portrait","src":"commons","file":"Marie Curie c1920.jpg","page":"https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg","author":"Henri Manuel","license":"Public domain","what":"Marie Curie; curium is named for her and Pierre Curie"},
+  100: {"kind":"portrait","src":"commons","file":"Enrico Fermi 1943-49.jpg","page":"https://commons.wikimedia.org/wiki/File:Enrico_Fermi_1943-49.jpg","author":"U.S. Department of Energy","license":"Public domain","what":"Enrico Fermi, for whom fermium is named","crop":[0.15,0,0.9,0.62]},
+  101: {"kind":"portrait","src":"commons","file":"DIMendeleevCab.jpg","page":"https://commons.wikimedia.org/wiki/File:DIMendeleevCab.jpg","author":"Unknown photographer","license":"Public domain","what":"Dmitri Mendeleev, for whom mendelevium is named","crop":[0.35,0.1,1,0.75]},
+  102: {"kind":"portrait","src":"commons","file":"AlfredNobel2.jpg","page":"https://commons.wikimedia.org/wiki/File:AlfredNobel2.jpg","author":"Unknown photographer","license":"Public domain","what":"Alfred Nobel, for whom nobelium is named"},
+  103: {"kind":"portrait","src":"commons","file":"Ernest Lawrence.jpg","page":"https://commons.wikimedia.org/wiki/File:Ernest_Lawrence.jpg","author":"Nobel Foundation","license":"Public domain","what":"Ernest O. Lawrence, for whom lawrencium is named"},
+};
 
 // What a tile shows: the sample photo, or the stand-in picture (null for neither).
 export const pictureOf = (z) => (SAMPLES[z]?.none ? STANDINS[z] || null : SAMPLES[z]);

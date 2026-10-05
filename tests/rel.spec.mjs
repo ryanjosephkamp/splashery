@@ -10,7 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { RECIPES, ELEMENTS, elementOf, factsOf } from "../src/packs/real-elements.js";
 import { FACTS } from "../src/elements-real/facts.js";
-import { SAMPLES, WITH_PHOTO, LICENSE_URL } from "../src/elements-real/samples.js";
+import { SAMPLES, WITH_PHOTO, PICTURED, STANDINS, LICENSE_URL, pictureOf } from "../src/elements-real/samples.js"; // prettier-ignore
 import { cellOf, blockOf } from "../src/elements-real/layout.js";
 import { PERIODIC } from "../src/chem/periodic.js";
 import { buildRecipe } from "../src/kit.js";
@@ -144,11 +144,12 @@ test.describe("the facts", () => {
     expect(tc).toContain("Photo: Marco Cardin, CC BY-SA 4.0");
     const og = factsOf(elementOf("Og")).items;
     expect(og.find((i) => i.dim).text).toMatch(/few atoms/);
+    expect(og.map((i) => i.text)).toContain("Shown instead: Yuri Oganessian, for whom oganesson is named"); // prettier-ignore
   });
 });
 
 test.describe("the samples", () => {
-  const ALLOWED = ["CC BY 3.0", "CC BY 4.0", "CC BY-SA 3.0", "CC BY-SA 4.0", "Public domain"];
+  const ALLOWED = ["CC0", "CC BY 2.0", "CC BY 3.0", "CC BY 4.0", "CC BY-SA 3.0", "CC BY-SA 4.0", "Public domain"]; // prettier-ignore
 
   test("every element has a photo with an allowed license, or says why not", () => {
     for (let z = 1; z <= 118; z++) {
@@ -164,21 +165,43 @@ test.describe("the samples", () => {
       expect(s.author.length).toBeGreaterThan(2);
       expect(s.what.length).toBeGreaterThan(8);
     }
-    expect(WITH_PHOTO.length).toBe(91);
+    expect(WITH_PHOTO.length).toBe(92);
     // The heaviest have none.
     for (let z = 100; z <= 118; z++) expect(SAMPLES[z].none).toBeTruthy();
   });
 
+  test("every element without a sample photo has a stand-in picture, said to be one", () => {
+    expect(PICTURED.length).toBe(118);
+    for (let z = 1; z <= 118; z++) {
+      if (!SAMPLES[z].none) {
+        expect(STANDINS[z]).toBeUndefined();
+        continue;
+      }
+      const s = STANDINS[z];
+      expect(s, `${z}`).toBeTruthy();
+      expect(["portrait", "flag", "arms", "photo"]).toContain(s.kind);
+      expect(ALLOWED).toContain(s.license);
+      expect(s.page).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+      expect(s.what.length).toBeLessThanOrEqual(90);
+      const items = factsOf(ELEMENTS[z - 1]).items.map((i) => i.text);
+      expect(items).toContain(SAMPLES[z].none);
+      expect(items).toContain(`Shown instead: ${s.what}`);
+      expect(items).toContain(`Picture: ${s.author}, ${s.license}`);
+    }
+    // Dubnium is named for Dubna, Russia (not Dublin).
+    expect(STANDINS[105].what).toMatch(/Dubna/);
+  });
+
   test("the toy credits every Commons photo, BY-SA ones with their license", () => {
     const c = RECIPE.credits;
-    for (const z of WITH_PHOTO.filter((z) => SAMPLES[z].src === "commons"))
-      expect(c.find((x) => x.source === SAMPLES[z].page)?.license).toBe(SAMPLES[z].license);
+    for (const z of PICTURED.filter((z) => pictureOf(z).src === "commons"))
+      expect(c.find((x) => x.source === pictureOf(z).page)?.license).toBe(pictureOf(z).license);
     expect(c.find((x) => x.source === "https://images-of-elements.com/").license).toBe("CC BY 3.0");
   });
 
   test("the files are there and small", () => {
     let total = 0;
-    for (const z of WITH_PHOTO)
+    for (const z of PICTURED)
       for (const ext of ["jpg", "png"]) {
         const f = path.join(ASSETS, `${z}.${ext}`);
         expect(fs.existsSync(f), f).toBe(true);
@@ -187,7 +210,7 @@ test.describe("the samples", () => {
     const atlas = fs.statSync(path.join(ASSETS, "tiles.jpg")).size + fs.statSync(path.join(ASSETS, "tiles.png")).size; // prettier-ignore
     // The table opens with the atlas alone; each lifted sample adds its own pair.
     expect(atlas).toBeLessThan(600_000);
-    expect(total / WITH_PHOTO.length).toBeLessThan(80_000);
+    expect(total / PICTURED.length).toBeLessThan(80_000);
   });
 
   test("the table builds within its budget, the lifted sample in finer detail", async () => {
@@ -199,7 +222,7 @@ test.describe("the samples", () => {
     expect(d.legend.title).toBe("29 Cu · Copper");
     expect(d.splats.lift).toBeGreaterThan(0.12 * count);
     expect(d.splats.tiles).toBeGreaterThan(0.25 * count);
-    // A placeholder element lifts a plain slab with its symbol.
+    // An element with no sample photo lifts its stand-in picture (Oganessian's portrait, flat).
     const og = await build(count, { element: "Og" });
     expect(og.kit.data.legend.title).toBe("118 Og · Oganesson");
     expect(og.kit.data.splats.lift).toBeGreaterThan(1000);
@@ -249,7 +272,12 @@ test.describe("the toy in the app", () => {
         performance.now() - t0 < 120_000
       )
         await new Promise((ok) => setTimeout(ok, 100));
-      await new Promise((ok) => setTimeout(ok, 3000));
+      // The facts show once the sample is most of the way up (wait for them, however slow the
+      // machine draws).
+      const legend = document.getElementById("toy-legend");
+      const t1 = performance.now();
+      while (!legend.innerText.includes("Bismuth") && performance.now() - t1 < 30_000)
+        await new Promise((ok) => setTimeout(ok, 200));
       return {
         element: player.scene.toy.options.element,
         up: player.motion.targets.up,

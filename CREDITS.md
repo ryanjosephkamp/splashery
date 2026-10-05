@@ -258,7 +258,7 @@ toy's About tab. `tools/chs-data.mjs` and `tools/chs-molecules.mjs` fetch them a
 
 ## Real elements (lane Elements)
 
-The Real elements toy (a labs toy) shows 91 elements as photos of real samples, each cut out of its
+The Real elements toy (a labs toy) shows 92 elements as photos of real samples, each cut out of its
 background and given depth by Depth Anything V2 Small (Apache 2.0) at build time
 (`tools/rel-samples.mjs`), in `assets/toys/real-elements/`. Each license was checked on the live
 page on October 5, 2026.
@@ -355,6 +355,9 @@ page on October 5, 2026.
   [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Technetium-sample.jpg). The cut-out sample made
   from it is shared under the same license, shown beside the sample in the toy.
+- Promethium: "Promethium Metal Buttons.png" by E. J. Wheelwright, U.S. Atomic Energy Commission,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Promethium_Metal_Buttons.png).
 - Radium: "Radium226.jpg" by grenadier, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/),
   on [Commons](https://commons.wikimedia.org/wiki/File:Radium226.jpg).
 - Protactinium: "Protactinium-233.jpg" by U.S. Department of Energy,
@@ -381,6 +384,93 @@ page on October 5, 2026.
 - Einsteinium: "EinsteiniumGlow.JPG" by R. G. Haire, U.S. Department of Energy,
   [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:EinsteiniumGlow.JPG).
+
+For the 26 elements with no photo of a real sample, the toy shows a stand-in picture, said plainly
+to be one: the person, place or flag the element is named for, or a mineral that holds traces of it.
+Each from Wikimedia Commons, its license checked on the file page on October 5, 2026:
+
+- Polonium: "Flag of Poland.svg" by Wikimedia Commons contributors,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Poland.svg).
+- Astatine: "Autunite-20885.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Autunite-20885.jpg). The picture made from it is
+  shared under the same license, shown beside it in the toy.
+- Radon: "Granite 5 (48674315157).jpg" by James St. John,
+  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Granite_5_%2848674315157%29.jpg).
+- Francium: "Thorite-288916.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Thorite-288916.jpg). The picture made from it is
+  shared under the same license, shown beside it in the toy.
+- Actinium: "Uraninite-225146.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Uraninite-225146.jpg). The picture made from it
+  is shared under the same license, shown beside it in the toy.
+- Thorium: "Thorianite-729924.jpg" by Kelly Nash,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Thorianite-729924.jpg).
+- Curium: "Marie Curie c1920.jpg" by Henri Manuel,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg).
+- Fermium: "Enrico Fermi 1943-49.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Enrico_Fermi_1943-49.jpg).
+- Mendelevium: "DIMendeleevCab.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:DIMendeleevCab.jpg).
+- Nobelium: "AlfredNobel2.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:AlfredNobel2.jpg).
+- Lawrencium: "Ernest Lawrence.jpg" by Nobel Foundation,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Ernest_Lawrence.jpg).
+- Rutherfordium: "Ernest Rutherford LOC.jpg" by George Grantham Bain Collection (Library of
+  Congress), [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Ernest_Rutherford_LOC.jpg).
+- Dubnium: "Coat of arms of Dubna.svg" by City of Dubna,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Dubna.svg).
+- Seaborgium: "Glenn Seaborg - 1964.jpg" by U.S. Atomic Energy Commission,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Glenn_Seaborg_-_1964.jpg).
+- Bohrium: "Niels Bohr.jpg" by AB Lagrelius & Westphal,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Niels_Bohr.jpg).
+- Hassium: "Coat of arms of Hesse.svg" by State of Hesse,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Hesse.svg).
+- Meitnerium: "Lise Meitner NatGeo.jpg" by Harris & Ewing,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Lise_Meitner_NatGeo.jpg).
+- Darmstadtium: "Wappen Darmstadt.svg" by City of Darmstadt (Hessisches Staatsarchiv),
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Wappen_Darmstadt.svg).
+- Roentgenium: "Roentgen2.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Roentgen2.jpg).
+- Copernicium: "Nikolaus Kopernikus.jpg" by Unknown painter (Toruń Town Hall portrait, c. 1580),
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Nikolaus_Kopernikus.jpg).
+- Nihonium: "Flag of Japan.svg" by Government of Japan,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Japan.svg).
+- Flerovium: "RUSMARKA-1660 (cropped).jpg" by Russian Post (Marka); designer A. Povarikhin,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:RUSMARKA-1660_%28cropped%29.jpg).
+- Moscovium: "Flag of Moscow, Russia.svg" by City of Moscow,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Moscow%2C_Russia.svg).
+- Livermorium: "Downtown Livermore California.jpg" by LPS.1,
+  [CC0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Downtown_Livermore_California.jpg).
+- Tennessine: "Flag of Tennessee.svg" by State of Tennessee; drawn by -xfi-,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Tennessee.svg).
+- Oganesson: "Yuri Oganessian (cropped).jpg" by VPRO,
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Yuri_Oganessian_%28cropped%29.jpg). The picture
+  made from it is shared under the same license, shown beside it in the toy.
 
 The facts come from PubChem's periodic table and element pages (NCBI; public domain U.S. government
 data); the uses are our own short sentences, each backed by words PubChem quotes from Jefferson Lab

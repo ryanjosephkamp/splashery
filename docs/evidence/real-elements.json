@@ -1,7 +1,7 @@
 {
   "toy": "real-elements",
   "checked": "2026-10-05",
-  "summary": "The toy shows each element's facts (atomic mass, group and period, state at room temperature, density, melting and boiling points, discovery and one or two uses) and, for 91 elements, a photo of a real sample raised in 3D. The facts are PubChem's, copied by a build tool and checked against a saved copy of PubChem's table for all 118 elements; each use is our own short sentence backed by the words of Jefferson Lab or Los Alamos National Laboratory as PubChem quotes them. The samples' fronts are real photos; their depth is a depth model's estimate and their backs are invented.",
+  "summary": "The toy shows each element's facts (atomic mass, group and period, state at room temperature, density, melting and boiling points, discovery and one or two uses) and, for 92 elements, a photo of a real sample raised in 3D. The facts are PubChem's, copied by a build tool and checked against a saved copy of PubChem's table for all 118 elements; each use is our own short sentence backed by the words of Jefferson Lab or Los Alamos National Laboratory as PubChem quotes them. The samples' fronts are real photos; their depth is a depth model's estimate and their backs are invented.",
   "claims": [
     {
       "claim": "All 118 elements are in the standard 18-column layout, with the right atomic numbers, symbols and names.",
@@ -86,8 +86,8 @@
       "note": "Which elements sit in group 3 (La and Ac, or Lu and Lr) is debated; the toy follows the common layout and gives no group number to the f-block."
     },
     {
-      "claim": "Each sample is a photo of the real element, and elements with no such photo say why.",
-      "how": "91 photos of real samples (Images of Elements, CC BY 3.0; Wikimedia Commons, public domain, CC BY or CC BY-SA), each license read on its live page; 27 elements have none: the sources show only illustrations (promethium, polonium, astatine, radon, francium, mendelevium to lawrencium), the only photos found aren't openly licensed (actinium, thorium, curium), or no visible amount has ever been made (fermium and everything from rutherfordium on).",
+      "claim": "Each sample is a photo of the real element; an element with no such photo says why and shows a stand-in picture, said plainly to be one.",
+      "how": "92 photos of real samples (Images of Elements, CC BY 3.0; Wikimedia Commons, public domain, CC BY or CC BY-SA), each license read on its live page. 26 elements have none: the sources show only illustrations (polonium, astatine, radon, francium, mendelevium to lawrencium), the only photos found aren't openly licensed (actinium, thorium, curium), or no visible amount has ever been made (fermium and everything from rutherfordium on). Each of those shows a stand-in from Wikimedia Commons: the person, place or flag it is named for, or a mineral that holds traces of it; the facts list says 'Shown instead' before it.",
       "where": "src/elements-real/samples.js",
       "sources": [
         {
@@ -98,8 +98,8 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/rel.spec.mjs:153",
-      "note": "Some samples are compounds or mixtures, said in their description: iron is a fragment of an iron meteorite (about 92% iron), radium is plated on copper foil, protactinium-233 sits on a support. Sodium and others are kept under oil or argon, and the gases are shown glowing in sealed vials."
+      "test": "tests/rel.spec.mjs:154",
+      "note": "Some samples are compounds or mixtures, said in their description: iron is a fragment of an iron meteorite (about 92% iron), radium is plated on copper foil, protactinium-233 sits on a support. Sodium and others are kept under oil or argon, and the gases are shown glowing in sealed vials. Promethium's picture is the first two buttons of promethium-147 metal from a U.S. Atomic Energy Commission report, a real sample. Dubnium's stand-in is Dubna's coat of arms: dubnium is named for Dubna, Russia, not Dublin."
     }
   ],
   "simplified": [

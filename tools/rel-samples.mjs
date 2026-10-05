@@ -61,7 +61,7 @@ async function download(z) {
     const q = new URLSearchParams({ action: "query", prop: "imageinfo", iiprop: "url|size", iiurlwidth: "1200", titles: `File:${s.file}`, format: "json" }); // prettier-ignore
     const j = await (await fetchRetry(`https://commons.wikimedia.org/w/api.php?${q}`)).json();
     const ii = Object.values(j.query.pages)[0].imageinfo[0];
-    url = ii.width > 1200 ? ii.thumburl : ii.url;
+    url = ii.width > 1200 || /\.svg$/i.test(s.file) ? ii.thumburl : ii.url; // (an SVG comes as a PNG)
     await sleep(3000);
   }
   fs.writeFileSync(at, Buffer.from(await (await fetchRetry(url)).arrayBuffer()));
@@ -421,6 +421,7 @@ const TUNE = {
   92: { rect: true },
   93: { ellipse: true },
   99: { t: 1.5 },
+  116: { rect: true }, // a street, shown whole
 };
 
 const ids = only.length ? only.filter((z) => PICTURED.includes(z)) : PICTURED;

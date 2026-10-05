@@ -22,8 +22,20 @@ polish: sharper samples and a smoother lift":
   turn ease in and out.
 - Kept: tiles at every third atlas pixel and one splat per font pixel (finer splats vanish in the
   256 px shelf picture, which draws without the labs' low cull).
-- Weight: the atlas is unchanged (0.25 MB); a lifted sample's pair is now about 55 KB; the folder is
-  5.1 MB in the repo.
+- The owner's marks (October 5, 2026), in the same PR:
+  - "Hollow ... a hole in it when it's turned to the side": the lifted sample is now a closed solid
+    (front relief, a darker mirror behind, a wall round the outline from back to front shading
+    between the two, and fillers at steep steps). I chose filling over limiting the turn.
+  - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
+    Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
+    coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
+    says "Shown instead: …" with the credit.
+  - Deviations from his list: dubnium shows Dubna's coat of arms (dubnium is named for Dubna,
+    Russia, not Dublin); polonium shows Poland's flag (every polonium brush photo found shows a
+    brand); livermorium shows downtown Livermore (no logo); promethium's tile is a real sample now
+    (a public-domain photo of the first promethium-147 metal buttons).
+- Weight: the atlas is 640 x 768 now (0.3 MB); a lifted sample's pair is about 55 KB; the folder is
+  6.6 MB in the repo.
 
 ## Notes", "##
 

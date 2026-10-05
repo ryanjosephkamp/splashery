@@ -1349,8 +1349,9 @@ Proposals below are suggestions; the owner may change them.
     out of its tile toward the viewer (about 2 s), larger and in finer detail, with a back and rim
     so it turns as a solid piece, swings it slowly and shows its facts beside the stage; a tap on
     the sample turns it once around; a tap on its tile sets it back. Elements with no photo of a
-    real sample have hatched tiles, and their facts say why. Tile colors by category or block on
-    demand.
+    real sample have hatched tiles with a stand-in picture (the person, place or flag the element is
+    named for, or a mineral holding traces of it), and their facts say why and that it is a
+    stand-in. Tile colors by category or block on demand.
   - Improved: Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons)
     cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table
     and a 384 x 384 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab
@@ -1358,7 +1359,10 @@ Proposals below are suggestions; the owner may change them.
     references. Polish (October 5, 2026): the sharp kernel and the low cull (labs), finer tile
     samples, cut-outs one pixel inside their rim (no fringe), crisp four-splat lettering on big
     budgets, a clean board edge, and a smoother lift that comes straight out of its tile, then
-    glides.
+    glides. Owner's marks (October 5, 2026): the lifted sample is a closed solid (a back, a wall
+    round its outline and fillers at steep steps), so no turn shows a hole; 26 stand-in pictures
+    from Wikimedia Commons (portraits flat in black and white, flags waving, coats of arms cut out,
+    minerals as samples); promethium's tile is now a real sample photo.
   - Sound: A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down,
     a rising blip as it turns.
 
