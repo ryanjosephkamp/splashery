@@ -2994,7 +2994,8 @@ Proposals below are suggestions; the owner may change them.
     ice and salts, proteins at atomic resolution, DNA and RNA), all from COD or the PDB (CC0) with
     real anisotropic U; a Show option fills the unit cell from the space group's symmetry operations
     (each copy's U turned with it), minerals and salts by default, and completes a molecule split by
-    symmetry.
+    symmetry. Science r3 r2: three more structures (41): alanine, histidine (neutron, 5 K) and
+    thymidine, a building block of DNA, all from COD (CC0).
   - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
     breath as they settle.
 - **Super-resolution microscope** (`smlm-microscope`). Now: tap: Show a slice at the depth you tap.
@@ -3053,7 +3054,8 @@ Proposals below are suggestions; the owner may change them.
     splats (density 1.5, 0.8 of a voxel) and ambient occlusion from the density round each point,
     which darkens grooves and pockets. r3 ("keep making it sharper" on the capsid): one splat per
     voxel the surface crosses (its crossings averaged), so the edges no longer pile up into a soft
-    rim, and density 2.
+    rim, and density 2. Science r3 r2 (the owner's "sharper, polish" round, October 5): the sharp
+    splat kernel (labs), which crisps each splat's edge (Tenengrad on the AAV capsid 238 → 321).
   - Sound: A soft, low whoosh as the cut sweeps in, and a softer one as it closes.
 - **Contour lab** (`contour-lab`). Now: tap: Pull the layers apart. Plan: new effect (E6).
   - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first, each
@@ -3062,7 +3064,8 @@ Proposals below are suggestions; the owner may change them.
     cut into contour layers, each a solid piece with its edge a contour line. The tap lifts the
     layers apart (a second tap stacks them).
   - Improved: Science r3: tools/sci3-terrain.mjs (geotiff.js range reads of the public-domain 1/3″
-    tiles), src/science/terrain.js; the layers are kit parts.
+    tiles), src/science/terrain.js; the layers are kit parts. Science r3 r2: the sharp splat kernel
+    (Tenengrad 228 → 252), and the slope fill lit like the slope (no dark dots).
   - Sound: A soft wooden slide as the layers lift; a lower one as they settle.
 - **Terrain in a box** (`terrain-box`). Now: tap: Fill it with water. Plan: new effect (E6).
   - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first (lane
@@ -3072,7 +3075,9 @@ Proposals below are suggestions; the owner may change them.
     cross-section. The tap raises a sheet of water to 45% of the relief, flooding the valleys first
     (a level, not a flood model); a second tap drains it.
   - Improved: Science r3: the water is a kit part rising; contour lines, a height stretch (1×, 2×,
-    4×), three places.
+    4×), three places. Science r3 r2: the sharp splat kernel (Tenengrad 209 → 221 on St. Helens),
+    and the splats that fill steep slopes are lit like the slope itself; lit by their own sideways
+    normal they showed as rows of dark dots.
   - Sound: A gentle rush as the water rises; a lower one as it drains.
 
 ## Imaging (6)

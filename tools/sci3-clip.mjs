@@ -44,6 +44,16 @@ const framesOut = args.includes("--frames"); // also <card>-frames/NNNN.jpg, for
 // log scale (r2: the microscope and the galaxy zoom with the camera).
 const tour = (key, ids, every, from = 0) => ids.map((id, i) => ({ t: from + i * every, opt: { [key]: id } })); // prettier-ignore
 const CARDS = {
+  // r2 round (the owner's "sharper, polish, enhance" of October 5): the sharp
+  // kernel on the map, the terrain and the contour lab; three more molecules.
+  "sci3-cryoem-capsid-r4": { toy: "cryoem-map", options: { map: "aav" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.3 }, { t: 3, tap: true }] }, // prettier-ignore
+  "sci3-cryoem-apoferritin-r3": { toy: "cryoem-map", options: { map: "apoferritin" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.4 }, { t: 2.5, tap: true }] }, // prettier-ignore
+  "sci3-cryoem-ribosome-r3": { toy: "cryoem-map", options: { map: "ribosome" }, near: 0.95, secs: 8, steps: [{ t: 0, yaw: 0.4 }, { t: 3, tap: true }] }, // prettier-ignore
+  "sci3-cryoem-model-r3": { toy: "cryoem-map", options: { map: "apoferritin", model: true }, near: 0.85, secs: 7, steps: [{ t: 0, yaw: 0.45 }] }, // prettier-ignore
+  "sci3-terrain-r2": { toy: "terrain-box", options: { place: "grand-canyon", exag: "2" }, secs: 10, steps: [{ t: 0, yaw: 0.2 }, { t: 1.5, tap: true }, { t: 6.5, tap: true }] }, // prettier-ignore
+  "sci3-terrain-helens-r2": { toy: "terrain-box", options: { place: "st-helens", exag: "2", contours: true }, secs: 7, steps: [{ t: 0, yaw: 0.45 }] }, // prettier-ignore
+  "sci3-contour-lab-r2": { toy: "contour-lab", options: { place: "st-helens", exag: "2" }, secs: 9, steps: [{ t: 0, yaw: 0.25 }, { t: 1.2, tap: true }, { t: 5.5, tap: true }] }, // prettier-ignore
+  "sci3-life-r2": { toy: "thermal-ellipsoids", options: { structure: "alanine", level: "50" }, secs: 7.5, near: 1.0, steps: [{ t: 0, yaw: 0.5 }, ...tour("structure", ["alanine", "histidine", "thymidine"], 2.5)] }, // prettier-ignore
   "sci3-cryoem-capsid-r3": { toy: "cryoem-map", options: { map: "aav" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.3 }, { t: 3, tap: true }] }, // prettier-ignore
   "sci3-telescope-filters-r2": { toy: "galaxy-box", options: { galaxy: "m12i", view: "telescope", filter: "blue", seeing: "ground" }, pitch: 1.4, secs: 13.5, steps: [{ t: 0, yaw: 0.02 }, ...tour("filter", ["blue", "red", "color"], 4.5)] }, // prettier-ignore
   "sci3-cryoem-model-r2": { toy: "cryoem-map", options: { map: "apoferritin", model: true }, near: 0.85, secs: 7, steps: [{ t: 0, yaw: 0.45 }] }, // prettier-ignore
