@@ -44,6 +44,24 @@ const framesOut = args.includes("--frames"); // also <card>-frames/NNNN.jpg, for
 // log scale (r2: the microscope and the galaxy zoom with the camera).
 const tour = (key, ids, every, from = 0) => ids.map((id, i) => ({ t: from + i * every, opt: { [key]: id } })); // prettier-ignore
 const CARDS = {
+  "sci3-galaxies": {
+    toy: "galaxy-box",
+    options: { galaxy: "m12i", view: "gas" },
+    secs: 10.5,
+    steps: [{ t: 0, yaw: 0.12 }, ...tour("galaxy", ["m12i", "m12i-z2", "m11h"], 3.5)],
+  },
+  "sci3-telescope": {
+    toy: "galaxy-box",
+    options: { galaxy: "m12i", view: "telescope", filter: "color", seeing: "ground" },
+    secs: 9,
+    steps: [{ t: 0, yaw: 0.02 }],
+  },
+  "sci3-telescope-filters": {
+    toy: "galaxy-box",
+    options: { galaxy: "m12i", view: "telescope", filter: "blue", seeing: "ground" },
+    secs: 13.5,
+    steps: [{ t: 0, yaw: 0.02 }, ...tour("filter", ["blue", "red", "color"], 4.5)],
+  },
   "sci3-molecules": {
     toy: "thermal-ellipsoids",
     options: { structure: "sucrose", level: "50" },

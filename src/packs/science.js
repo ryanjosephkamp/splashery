@@ -930,7 +930,42 @@ export const GALAXY_SAMPLE = {
   licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
 };
 
-const GAL = { data: null, info: null };
+// r3: more galaxies, each a FIRE-2 snapshot cut by tools/sci3-galaxy.mjs
+// (the gas as tools/sci-galaxy.mjs cuts it, and the stars for the
+// telescope view).
+const FIRE_CITE =
+  "The FIRE project: Wetzel et al. (2023, 2025), Hopkins (2015), Hopkins et al. (2018)";
+export const GALAXY_SAMPLES = [
+  {
+    id: "m12i",
+    choice: "A Milky Way–mass galaxy today",
+    gas: GALAXY_SAMPLE.file,
+    stars: "m12i-stars.bin",
+    label: GALAXY_SAMPLE.label,
+    title: GALAXY_SAMPLE.title,
+    author: GALAXY_SAMPLE.author,
+  },
+  {
+    id: "m12i-z2",
+    choice: "The same galaxy 10.4 billion years ago",
+    gas: "m12i-z2-gas.bin",
+    stars: "m12i-z2-stars.bin",
+    label: "FIRE-2 m12i at z = 2, 10.4 billion years ago, when it was young and clumpy",
+    title: "FIRE-2 cosmological zoom-in simulation m12i, snapshot 172 (z = 2), gas and stars",
+    author: `${FIRE_CITE}; m12i from Wetzel et al. (2016). A subset of the particles in a 24 kpc box round the galaxy`, // prettier-ignore
+  },
+  {
+    id: "m11h",
+    choice: "A dwarf galaxy today",
+    gas: "m11h-gas.bin",
+    stars: "m11h-stars.bin",
+    label: "FIRE-2 m11h, a dwarf galaxy about as massive as the Small Magellanic Cloud, today",
+    title: "FIRE-2 cosmological zoom-in simulation m11h, snapshot 600 (z = 0), gas and stars",
+    author: `${FIRE_CITE}; m11h from El-Badry et al. (2018). A subset of the particles in a 16 kpc box round the galaxy`, // prettier-ignore
+  },
+].map((d) => ({ ...d, source: GALAXY_SAMPLE.source, license: GALAXY_SAMPLE.license, licenseUrl: GALAXY_SAMPLE.licenseUrl })); // prettier-ignore
+
+const GAL = { data: null, info: null, gas: new Map(), stars: new Map(), want: null, expose: { last: null, t0: 0 } }; // prettier-ignore
 export const KERNEL_SIGMA = 0.274; // the cubic spline's σ over its support radius
 // r2: how close the camera may come (the box's radii).
 export const GALAXY_CLOSE = 0.05;
@@ -962,6 +997,56 @@ export function readGalaxy(bytes) {
   };
 }
 
+// The stars file tools/sci3-galaxy.mjs writes (its header says how).
+export function readStars(bytes) {
+  const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const len = dv.getUint32(0, true);
+  const head = JSON.parse(new TextDecoder().decode(bytes.subarray(4, 4 + len)));
+  if (head.format !== "splashery-stars-1") throw new Error("This isn't a stars file.");
+  const n = head.n;
+  let o = 4 + len;
+  const pos = new Int16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 6)); // prettier-ignore
+  o += n * 6;
+  const aq = new Uint16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 2)); // prettier-ignore
+  o += n * 2;
+  const mq = new Uint16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 2)); // prettier-ignore
+  const q = head.half / 32767;
+  return {
+    head,
+    n,
+    pos: (i) => [pos[i * 3] * q, pos[i * 3 + 1] * q, pos[i * 3 + 2] * q],
+    ageGyr: (i) => Math.pow(10, 6 + (aq[i] / 65535) * 4.5) / 1e9,
+    mass: (i) => Math.pow(10, 2 + (mq[i] / 65535) * 6),
+  };
+}
+
+// ---- The telescope (r3) ----
+//
+// The galaxy as a telescope would record it, told plainly as a simulation:
+// its stars (the simulation's star particles) seen as if it were 100 Mpc
+// away (about 330 million light-years, where 1″ is 0.48 kpc), each blurred
+// by the point spread of the seeing, through a filter, with the cold, dense
+// gas absorbing as dust; each tap starts a new exposure whose light builds
+// up with the grain of photon noise smoothing out.
+//
+// A star particle is thousands of stars of one age. How bright such a
+// population is per unit mass falls as it ages, faster in blue light than
+// red (young populations are blue, old ones red): here roughly as
+// age^−1.0 in blue and age^−0.6 in red, scaled to be equal at 1 Gyr, an
+// approximation of stellar population models (for example Bruzual and
+// Charlot 2003), not a model fit.
+export const TELESCOPE = {
+  kpcPerArcsec: 0.485, // at 100 Mpc
+  seeing: { space: 0.1, ground: 1, poor: 2.5 }, // arcseconds (FWHM)
+  exposureSecs: 6, // how long a toy exposure takes to build up
+};
+export function starLight(ageGyr, mass) {
+  const a = Math.max(0.003, ageGyr);
+  const blue = mass * Math.pow(a, -1.0);
+  const red = mass * Math.pow(a, -0.6);
+  return { blue, red, green: Math.sqrt(blue * red) };
+}
+
 // Temperature colors: cold molecular gas deep blue, the warm disk pale,
 // hot gas orange to red.
 const TEMP_STOPS = [
@@ -983,9 +1068,48 @@ function tempColor(logT) {
 }
 
 const GALAXY = {
-  alive: false,
+  alive: (c) => GAL.want?.telescope === true && (GAL.info?.exposure ?? 1) < 1,
   density: GALAXY_DENSITY,
   options: [
+    {
+      key: "galaxy",
+      label: "Galaxy",
+      type: "select",
+      default: "m12i",
+      choices: GALAXY_SAMPLES.map((d) => ({ id: d.id, label: d.choice })),
+    },
+    {
+      key: "view",
+      label: "View",
+      type: "select",
+      default: "gas",
+      choices: [
+        { id: "gas", label: "The gas (the simulation)" },
+        { id: "telescope", label: "Through a telescope (simulated)" },
+      ],
+    },
+    {
+      key: "filter",
+      label: "Telescope filter",
+      type: "select",
+      default: "color",
+      choices: [
+        { id: "color", label: "Color (blue, green and red)" },
+        { id: "blue", label: "Blue light (young stars)" },
+        { id: "red", label: "Red light (older stars)" },
+      ],
+    },
+    {
+      key: "seeing",
+      label: "Telescope's sharpness",
+      type: "select",
+      default: "ground",
+      choices: [
+        { id: "space", label: "A space telescope (0.1″)" },
+        { id: "ground", label: "A good night on the ground (1″)" },
+        { id: "poor", label: "A hazy night (2.5″)" },
+      ],
+    },
     {
       key: "color",
       label: "Color by",
@@ -1001,33 +1125,60 @@ const GALAXY = {
   // r2: a pinch or the wheel zooms all the way in, to 0.05 of the box's
   // radius (about 60 times closer than the home view, a few hundred parsecs).
   closeUp: { minDistance: GALAXY_CLOSE },
-  controls: [{ key: "peel", label: "Only the cold gas", type: "toggle", default: 0, ease: 1.6 }],
-  // A tap peels the hot gas away (the cold, dense gas of the disk and its
-  // arms stays); a second tap brings it back.
-  action: { key: "peel", label: "Peel away the hot gas" },
-  credits: [
-    {
-      label: "Galaxy",
-      title: GALAXY_SAMPLE.title,
-      source: GALAXY_SAMPLE.source,
-      author: GALAXY_SAMPLE.author,
-      license: GALAXY_SAMPLE.license,
-      licenseUrl: GALAXY_SAMPLE.licenseUrl,
-    },
+  controls: [
+    { key: "peel", label: "Only the cold gas", type: "toggle", default: 0, ease: 1.6 },
+    { key: "expose", label: "A new exposure", type: "toggle", default: 0, ease: 0.01 },
   ],
-  async prepare() {
-    if (!GAL.data) GAL.data = readGalaxy(await readAsset(`../../assets/toys/galaxy-box/${GALAXY_SAMPLE.file}`, true)); // prettier-ignore
+  // A tap peels the hot gas away (the cold, dense gas of the disk and its
+  // arms stays); a second tap brings it back. Through the telescope, a tap
+  // starts a new exposure.
+  action: {
+    key: "peel",
+    label: "Peel away the hot gas",
+    at() {
+      return GAL.want?.telescope ? { key: "expose" } : undefined;
+    },
   },
-  drive(t, c, out) {
+  credits: GALAXY_SAMPLES.map((d) => ({
+    label: d.choice,
+    title: d.title,
+    source: d.source,
+    author: d.author,
+    license: d.license,
+    licenseUrl: d.licenseUrl,
+  })),
+  async prepare(o) {
+    const def = GALAXY_SAMPLES.find((d) => d.id === o.galaxy) || GALAXY_SAMPLES[0];
+    const telescope = o.view === "telescope";
+    if (!GAL.gas.has(def.id)) GAL.gas.set(def.id, readGalaxy(await readAsset(`../../assets/toys/galaxy-box/${def.gas}`, true))); // prettier-ignore
+    if (telescope && !GAL.stars.has(def.id)) GAL.stars.set(def.id, readStars(await readAsset(`../../assets/toys/galaxy-box/${def.stars}`, true))); // prettier-ignore
+    GAL.data = GAL.gas.get(def.id);
+    GAL.want = { def, telescope, stars: GAL.stars.get(def.id) ?? null };
+    GAL.expose = { last: null, t0: null };
+  },
+  drive(t, c, out, info) {
     out.grow = 1 - smoothstep(0, 1, c.peel ?? 0);
     // Every particle at least about a pixel wide, wherever the camera is.
     out.morph = [0, 1, 0.0006, 0];
     out.glow = [0, 0, 0, 0];
+    if (GAL.want?.telescope) {
+      // Each flip of the exposure control (a tap) starts a new exposure; one
+      // also starts when the view opens.
+      const E = GAL.expose;
+      const flip = (c.expose ?? 0) > 0.5;
+      if (E.t0 === null || flip !== E.last) E.t0 = info.time;
+      E.last = flip;
+      const e = Math.max(0, Math.min(1, (info.time - E.t0) / TELESCOPE.exposureSecs));
+      if (GAL.info) GAL.info.exposure = e;
+      // (light grows as the exposure, at a rate that fills in over its time)
+      out.glow = [e, 1, 0, 0];
+    }
   },
   gpuField() {
     return sciModifier(1, 1, { free: true });
   },
   build(k, o) {
+    if (GAL.want?.telescope) return buildTelescope(k, o);
     const G = GAL.data;
     if (!G) throw new Error("The galaxy hasn't loaded.");
     const half = G.head.half;
@@ -1167,6 +1318,119 @@ const GALAXY = {
     k.data = { galaxy: GAL.info };
   },
 };
+
+// The telescope view's build: the stars through the filter, blurred by the
+// seeing, and the cold, dense gas in front of them as dust.
+function buildTelescope(k, o) {
+  const S = GAL.want.stars;
+  const G = GAL.data;
+  if (!S || !G) throw new Error("The galaxy's stars haven't loaded.");
+  const base = () => k.baseSize || 0.01;
+  const psfFwhm = (TELESCOPE.seeing[o.seeing] ?? 1) * TELESCOPE.kpcPerArcsec; // kpc
+  const psf = psfFwhm / 2.3548; // σ
+  const filter = o.filter ?? "color";
+  const budget = Math.max(2000, Math.floor(k.count * 0.75));
+  const pick = pickIndices(S.n, budget);
+  const nStars = pick ? pick.length : S.n;
+  const at = (j) => (pick ? pick[j] : j);
+  // Each star's light in the filter (blue, green, red), and its brightness.
+  const light = new Float32Array(nStars * 3);
+  const bright = new Float32Array(nStars);
+  for (let j = 0; j < nStars; j++) {
+    const i = at(j);
+    const L = starLight(S.ageGyr(i), S.mass(i));
+    const rgb = filter === "blue" ? [L.blue, L.blue, L.blue] : filter === "red" ? [L.red, L.red, L.red] : [L.red, L.green, L.blue]; // prettier-ignore
+    light.set(rgb, j * 3);
+    bright[j] = (rgb[0] + rgb[1] + rgb[2]) / 3;
+  }
+  // An astronomer's stretch (asinh) of the brightness, about its median.
+  const sorted = Array.from(bright).sort((a, b) => a - b);
+  const med = sorted[sorted.length >> 1] || 1;
+  const top = sorted[Math.floor(sorted.length * 0.999)] || 1;
+  const stretch = (b) => Math.asinh(b / med) / Math.asinh(top / med);
+  // The whole exposure's photons for the median star: the grain's scale.
+  const photons = 60;
+  let shown = 0;
+  k.cloud({ count: (nStars * 160000) / k.count, jitter: 0 }, (_r, j) => {
+    if (j >= nStars) return null;
+    const i = at(j);
+    const p = S.pos(i);
+    const sb = Math.max(0, Math.min(1, stretch(bright[j])));
+    if (sb <= 0.002) return null;
+    shown++;
+    const r = light[j * 3];
+    const g = light[j * 3 + 1];
+    const b = light[j * 3 + 2];
+    const mx = Math.max(r, g, b) || 1;
+    // The star's color (its filters' ratio), brightened by the stretch.
+    const col = [r / mx, g / mx, b / mx].map((v) =>
+      Math.round(255 * Math.min(1, v * (0.55 + 0.45 * sb))),
+    );
+    // Its size: the point spread (and a little for the particle itself).
+    const size = Math.SQRT2 * Math.hypot(psf, 0.01);
+    return {
+      p,
+      size: size / base(),
+      color: `rgb(${col.join(",")})`,
+      opacity: Math.min(1, 0.08 + 0.9 * sb),
+      part: sciPart(SCI_TYPE.star),
+      params: [asF32((bright[j] / med) * photons), (i * 2654435761) % 1000003],
+    };
+  });
+  // Dust: the cold, dense gas (below 20,000 K, smoothing length under 0.3
+  // kpc) dims what is behind it, more in blue light than red.
+  const absorb = filter === "red" ? 0.45 : filter === "blue" ? 1 : 0.75;
+  const dRoom = Math.max(1000, Math.floor(k.count * 0.22));
+  const dust = [];
+  for (let i = 0; i < G.n && dust.length < dRoom * 3; i++)
+    if (G.logT(i) < 4.3 && G.h(i) < 0.3) dust.push(i);
+  const dPick = pickIndices(dust.length, dRoom);
+  const nDust = dPick ? dPick.length : dust.length;
+  const widen = dPick ? Math.cbrt(dust.length / nDust) : 1;
+  k.cloud({ count: (nDust * 160000) / k.count, jitter: 0 }, (_r, j) => {
+    if (j >= nDust) return null;
+    const i = dust[dPick ? dPick[j] : j];
+    const h = G.h(i) * widen;
+    return {
+      p: G.pos(i),
+      size: (Math.SQRT2 * Math.hypot(KERNEL_SIGMA * h, psf)) / base(),
+      color: "#120a06",
+      opacity: Math.min(0.3, absorb * 0.1 * (0.06 / h) ** 2),
+      part: sciPart(SCI_TYPE.plain),
+    };
+  });
+  const half = G.head.half;
+  // The night sky behind it: a dark plate under the galaxy, as wide as three
+  // boxes (the view looks down on the disk).
+  k.add(evenBox(6 * half, 0.04, 6 * half), {
+    pos: [0, -(G.head.halfY ?? half) - 0.5, 0],
+    even: true,
+    color: "#020205",
+    jitter: 0,
+    opacity: 1,
+    flat: 0.3,
+    weight: 0.4,
+    part: sciPart(SCI_TYPE.plain),
+  });
+  k.reach([half, G.head.halfY ?? half, half]);
+  k.reach([-half, -(G.head.halfY ?? half), -half]);
+  GAL.info = {
+    telescope: true,
+    galaxy: GAL.want.def.id,
+    stars: S.n,
+    drawn: nStars,
+    get shown() {
+      return shown;
+    },
+    dust: nDust,
+    psfKpc: psfFwhm,
+    filter,
+    photons,
+    exposure: 0,
+    simulation: S.head.simulation,
+  };
+  k.data = { galaxy: GAL.info };
+}
 
 // ---- Cryo-EM map (lane Science r3) ------------------------------------------------------
 

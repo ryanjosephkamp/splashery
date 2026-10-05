@@ -16,6 +16,10 @@
 //     SCI_TYPE.loc    a localization: z, w = its true size across and deep
 //                     (√2 σ, recipe units, times UNIT for toy units); the
 //                     stored splat is wider so it shows without labs
+//     SCI_TYPE.star   a star in the telescope view (r3): z = the photons it
+//                     sends in a full exposure (relative), w = a seed; its
+//                     light builds up with the exposure (uSpGlowC.x, 0..1)
+//                     with a grain of 1/√photons that smooths out
 //   For atoms, x, z and w pack the atom's principal axes as a quaternion
 //   (four bytes), its three standard deviations (three bytes, as fractions of
 //   the structure's largest, SIG_MAX toy units) and a seed (9 bits, mixed
@@ -44,7 +48,7 @@
 // brings the focus to the middle; a scaling keeps the depth order, so the
 // sort stays right.
 
-export const SCI_TYPE = { plain: 0, bond: 1, atom: 2, gauss: 3, gas: 4, loc: 5 };
+export const SCI_TYPE = { plain: 0, bond: 1, atom: 2, gauss: 3, gas: 4, loc: 5, star: 6 };
 
 // A splat's first value (the kit's part, plus flags) for a type: a multiple
 // of 16, so the kit reads part 0 with no flags; its behaviour kind stays
@@ -213,6 +217,15 @@ void modifySplatColor(vec3 center, inout vec4 color) {
   float a = color.a;
   if (sciKind == 1) a *= 1.0 - 0.8 * uSpMorph.x;
   if (sciKind == 4) a *= 1.0 - (1.0 - clamp(uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z);
+  if (FREE && sciKind == 6) {
+    // r3: a star's light in an exposure that is building up (uSpGlowC.x of
+    // the full one; uSpGlowC.y photons per unit of sciAn.z): its own fixed
+    // grain, as big as Poisson noise on the photons so far (1/√n), shrinks.
+    float e = clamp(uSpGlowC.x, 0.0, 1.0);
+    float n = max(e * sciAn.z * uSpGlowC.y, 1e-3);
+    float r = sciHash(uint(sciAn.w) + 17u, 7u) - 0.5;
+    a *= e * max(0.0, 1.0 + r * 3.4641016 / sqrt(n));
+  }
   if (FREE) {
     // A slice: the localizations within w of the depth z of uSpGlowC.
     if (sciKind == 5 && uSpGlowC.w > 0.0) a *= 1.0 - smoothstep(uSpGlowC.w, 1.6 * uSpGlowC.w, abs(center.z - uSpGlowC.z));
@@ -325,6 +338,12 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var a = (*color).a;
   if (sciKind == 1) { a = a * (1.0 - 0.8 * uniform.uSpMorph.x); }
   if (sciKind == 4) { a = a * (1.0 - (1.0 - clamp(uniform.uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z)); }
+  if (FREE && sciKind == 6) {
+    let e = clamp(uniform.uSpGlowC.x, 0.0, 1.0);
+    let n = max(e * sciAn.z * uniform.uSpGlowC.y, 1e-3);
+    let r = sciHash(u32(sciAn.w) + 17u, 7u) - 0.5;
+    a = a * e * max(0.0, 1.0 + r * 3.4641016 / sqrt(n));
+  }
   if (FREE) {
     if (sciKind == 5 && uniform.uSpGlowC.w > 0.0) {
       a = a * (1.0 - smoothstep(uniform.uSpGlowC.w, 1.6 * uniform.uSpGlowC.w, abs(center.z - uniform.uSpGlowC.z)));

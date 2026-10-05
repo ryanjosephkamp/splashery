@@ -105,12 +105,63 @@ this file.
 
 ## State
 
-Model: Opus 5.5 (claude-opus-5-5), default effort.
+Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #270 (lane) and #272 ("Engine: grouped
+choices in a toy's select options", needed by the structure picker; merge it first).
 
-- October 5, 2026: started. Sources reachable from the container: COD, RCSB, EMDB, EMPIAR, Zenodo,
-  FlatHub. Order of work: (1) structures, (2) microscopy and the cryo-EM toy, (3) galaxies and the
-  telescope, (4) the three "in a box" proposals (the owner marked "In a box" yes on October 5:
-  wildfire, tornado and terrain, each after a small lab), building one if time allows.
+- October 5, 2026: items 1 and 2 done and pushed; item 3 in progress; item 4's three proposals
+  written (below).
+  1. **Structures**: 25 in six groups (everyday molecules, medicines, minerals and gems, ice and
+     salts, proteins at atomic resolution, DNA), all COD or PDB (CC0) with real anisotropic U
+     (`tools/sci3-structures.mjs`). New: a Show option that fills the unit cell from the space
+     group's operations (`src/science/symmetry.js`; each copy's U turned), minerals and salts by
+     default; molecules split by symmetry are completed (urea); the B-DNA duplex comes from its
+     biological assembly.
+  2. **Microscopy**: four ShareLoc.XYZ sets (nuclear pores, actin, mitochondria, 3D microtubules;
+     `tools/sci3-samples.mjs`), NeNA precision where a record has none. **Cryo-EM map** (new toy,
+     labs): apoferritin, an E. coli ribosome with an antibiotic, an AAV2 capsid from EMDB, each with
+     its fitted PDB model; the isosurface at EMDB's recommended level; the tap cuts it open
+     (`tools/sci3-cryoem.mjs`, `src/science/density.js`).
+  3. **Galaxies**: a dwarf (m11h) and m12i at z = 2 join m12i today; a telescope view (simulated) of
+     the star particles with seeing, filters, dust and a building exposure
+     (`tools/sci3-galaxy.mjs`).
+- Clips: rendering (`tools/sci3-clip.mjs`), not posted yet.
+
+## Proposals: more "in a box" (item 4)
+
+The owner marked "In a box" yes on October 5, 2026 (wildfire, tornado and terrain, each after a
+small lab that teaches what it needs). Each license below was read on the live source on October
+5, 2026. All three are honest models or measurements, labeled as such; none forecasts anything.
+
+1. **Terrain in a box** (build first). Lab before it: a **contour lab**, a hill sliced into contour
+   layers that slide apart and back, so a contour map reads as a 3D shape. The box: a real 10 km
+   square of land as a surface of flat splats, one per elevation sample, colored by height with the
+   sun's shading, in a box whose walls show the land's cross-section; options for the place (the
+   Grand Canyon, Mount St. Helens's crater, a river delta), vertical exaggeration (true, 2×, 5×) and
+   contour lines. The tap fills it with water to a level, rising and draining (a level, not a flood
+   model). Data: the USGS 3D Elevation Program's 1/3″ (about 10 m) tiles, GeoTIFF on The National
+   Map's S3 bucket; the tile's metadata says "All 3DEP products are public domain." Color, if
+   wanted: Landsat (USGS, public domain). Build tool: `geotiff` (MIT) as a pinned devDependency to
+   read the tile; a 256 × 256 crop (about 40 m samples) is about 130 kB.
+2. **Wildfire in a box.** Lab before it: a **fire-spread lab**, a grid of fuel that burns cell to
+   cell, faster uphill and downwind (the rate of spread grows with slope and wind, as in Rothermel's
+   1972 model), so the person sees why fires run up slopes. The box: real terrain (3DEP, above) and
+   real fuels (LANDFIRE's 40 Scott and Burgan fuel models, 30 m; a US federal product, its
+   public-domain status still to be confirmed on landfire.gov, whose pages didn't say it in this
+   check), a fire started where you tap, spreading as a glowing front with embers and a smoke plume,
+   and, for one real fire, its mapped perimeter from the National Interagency Fire Center's open
+   data (public domain) to compare. Told plainly: a teaching model of spread, not a prediction.
+3. **Tornado in a box.** Lab before it: a **wind lab**, the classic vortex models (a Rankine and a
+   Burgers–Rott vortex) as streamlines of splats, with the inflow, the updraft and why the wind is
+   fastest at the core's edge. The box: a real radar scan of a tornadic supercell, the May 20, 2013
+   Moore, Oklahoma storm from the KTLX radar (NEXRAD Level II on NOAA's open data on AWS: "open to
+   the public and can be used as desired", attribution requested, and no claim of NOAA's
+   endorsement): the reflectivity volume as splats (its hook echo and the debris ball), the Doppler
+   velocity couplet in red and green, and a model funnel with debris particles, labeled as a model.
+   Each volume scan is about 10 MB compressed; a build tool would grid one scan.
+
+Why terrain first: its data are public domain and ready (a GeoTIFF tile, checked), it needs no new
+physics, and both other boxes stand on terrain (the fire burns across it; the storm's radar sits
+over it), so it is the base the later lane builds on.
 
 ## Notes
 

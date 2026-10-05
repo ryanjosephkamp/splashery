@@ -4,7 +4,9 @@
 // a cell with right angles, where the Cartesian U is the file's); the unit cell and the
 // completed molecules from the symmetry operations; the grouped picker. Item 2: the new
 // microscopy sets load (NeNA's precision checked on made-up data with a known one); the cryo-EM
-// maps' isosurface sits at EMDB's recommended contour level.
+// maps' isosurface sits at EMDB's recommended contour level. Item 3: each galaxy loads (its gas and
+// its stars, CC BY 4.0 with FIRE's citation), and the telescope view draws the stars through its
+// filters with the point spread of its seeing.
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
@@ -19,6 +21,12 @@ import {
   microscopeState,
   CRYOEM_SAMPLES,
   cryoemState,
+  GALAXY_SAMPLES,
+  galaxyState,
+  readGalaxy,
+  readStars,
+  starLight,
+  TELESCOPE,
 } from "../src/packs/science.js";
 import { readSmlm, readThunderstormCsv } from "../src/science/smlm.js";
 import { readDensity, readBackbone, isoPoints } from "../src/science/density.js";
@@ -362,5 +370,57 @@ test.describe("cryo-EM maps (node)", () => {
     expect(cryoemState().level).toBeCloseTo(0.04 * 1.5, 9);
     await build("cryoem-map", 140000, { map: "apoferritin", model: true });
     expect(cryoemState().beads).toBeGreaterThan(4000);
+  });
+});
+
+test.describe("galaxies and the telescope (node)", () => {
+  test("each galaxy's gas and stars load, credited with FIRE's citation", async () => {
+    for (const def of GALAXY_SAMPLES) {
+      expect(def.license).toBe("CC BY 4.0");
+      const gas = readGalaxy(new Uint8Array(fs.readFileSync(`assets/toys/galaxy-box/${def.gas}`)));
+      const stars = readStars(new Uint8Array(fs.readFileSync(`assets/toys/galaxy-box/${def.stars}`))); // prettier-ignore
+      for (const f of [gas, stars]) {
+        expect(f.head.license).toBe("CC BY 4.0");
+        expect(f.head.cite).toMatch(/We use the publicly-available FIRE-2 cosmological zoom-in simulations/); // prettier-ignore
+        expect(f.n).toBeGreaterThan(100000);
+      }
+      // The stars share the gas's frame (the same center and spin).
+      gas.head.center.forEach((v, k) => expect(Math.abs(v - stars.head.center[k])).toBeLessThan(0.05)); // prettier-ignore
+      // Every star is inside the box, with an age within the universe's.
+      const H = stars.head.half;
+      for (let i = 0; i < stars.n; i += 997) {
+        expect(stars.pos(i).every((v) => Math.abs(v) <= H * 1.0001)).toBe(true);
+        expect(stars.ageGyr(i)).toBeLessThanOrEqual(stars.head.age * 1.01);
+      }
+      await build("galaxy-box", 140000, { galaxy: def.id });
+      expect(galaxyState().simulation).toBe(gas.head.simulation);
+    }
+  });
+
+  test("young stars are bluer and brighter than old ones (the filters' light)", () => {
+    const young = starLight(0.05, 1e4);
+    const old = starLight(10, 1e4);
+    expect(young.blue / young.red).toBeGreaterThan(1);
+    expect(old.blue / old.red).toBeLessThan(1);
+    expect(young.blue).toBeGreaterThan(old.blue * 50);
+    // Equal at 1 Gyr (the scale).
+    const mid = starLight(1, 1);
+    expect(mid.blue).toBeCloseTo(mid.red, 9);
+  });
+
+  test("the telescope view: stars blurred by the seeing, dust, and an exposure that builds up", async () => {
+    for (const [seeing, arcsec] of Object.entries(TELESCOPE.seeing)) {
+      const out = await build("galaxy-box", 140000, { view: "telescope", seeing });
+      const st = galaxyState();
+      expect(st.telescope).toBe(true);
+      expect(st.psfKpc).toBeCloseTo(arcsec * TELESCOPE.kpcPerArcsec, 9);
+      expect(st.shown).toBeGreaterThan(50000);
+      expect(st.dust).toBeGreaterThan(1000);
+      expect(out.buf.count).toBeLessThanOrEqual(140000 * 1.05);
+    }
+    for (const filter of ["blue", "red", "color"]) {
+      await build("galaxy-box", 140000, { view: "telescope", filter });
+      expect(galaxyState().filter).toBe(filter);
+    }
   });
 });
