@@ -14,34 +14,34 @@ Proposals below are suggestions; the owner may change them.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
-- Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
+- Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
 
 - **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant,
-  Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
-  Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball,
-  Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car,
-  Tractor, Statue of Liberty, Your book, Photo album. Effects to make clearer or more dramatic,
-  still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon
-  knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry,
-  Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden
-  elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot
-  cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball,
-  Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
-  ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
-  Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
-  puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar system, Mercury, Venus,
-  Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet,
-  Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
-  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
-  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba,
-  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby,
-  Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy
-  atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
-  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
-  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
+  Real alarm clock, Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American
+  football, Tennis ball, Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball,
+  Medicine ball, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop,
+  Decorated tree, Diya, Sports car, Tractor, Statue of Liberty, Your book, Photo album. Effects to
+  make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie,
+  Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee,
+  Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real
+  rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage
+  camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real
+  pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball,
+  Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball,
+  Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy
+  ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar
+  system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora
+  world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula,
+  Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell,
+  DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion,
+  Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table,
+  Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth,
+  Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping
+  willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef,
+  Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan,
+  Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
   Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
   Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
   Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
@@ -369,7 +369,10 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Plucked ukulele chord (synth, bright, nylon).
 - **Real alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
   - Owner: Hands should move. On tap it should jump up and down and ring like an alarm clock.
-  - Effect: Hands tick all the time; tap rattles it off the table while it rings.
+  - Fixed: Fix8: the hands show the real time. The scanned hands are cut out cleanly and kit-built
+    hour, minute and second hands of the same shapes turn from this device's clock.
+  - Effect: The hands show the real time and the second hand ticks; tap rattles it off the table
+    while it rings.
   - Improved: E1: the red second hand ticks all the time. A tap rings the twin bells and the clock
     rattles across the table (2.4 s).
   - Sound: A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).

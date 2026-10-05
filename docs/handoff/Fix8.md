@@ -89,4 +89,49 @@ the shared lists, and this file.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+WORKING (October 5, 2026): the hands are done and pushed (draft PR #273). Still to do: the clip on
+Effect review page 2, the contact sheet, thumbnails and the full lane checks.
+
+## Notes
+
+- **Cutting out the scanned hands.** These numbers come from the splats (`splat-transform` to CSV).
+  The dial's face is at z = 0.193 (its highest splat is at 0.19368). Inside the bezel, the only
+  splats between z 0.1937 and 0.215 are the hands: the second hand at 0.194 to 0.195, the minute
+  hand at 0.1956 to 0.2025, the hour hand at 0.2028 to 0.2094, and a silver pin up to 0.215. The
+  bezel starts at radius 0.641, above z 0.215. The rig's hidden part `second` now has three regions:
+  - Fix5's region, keyed to red, for the second hand.
+  - A flat ellipsoid (center z 0.2046, radii 1.12, 1.12 and 0.0109, soft 0.001), keyed to near-black
+    #212121 with tolerance 0.5, for the hour and minute hands.
+  - A small one (radius 0.12) with no color key, for the pin.
+
+  A simulation of the shader's weights over all 200,000 splats found every hand splat at full
+  weight. No dial or bezel splat was caught: the one other splat in range, on a bell post, gets a
+  weight of 0. The dial is whole under the hands.
+
+- **Kit hands** (`CLOCK` in src/rigs.js), measured from the scan as half-widths along each hand:
+  - The hour hand is 0.48 long with a spade at 0.25 to 0.38 (up to 0.043 wide on each side).
+  - The minute hand is 0.62 long with a lozenge at 0.34 to 0.46 (up to 0.026 on each side).
+  - A round hub (radius 0.05) turns with the hour hand.
+  - Fix5's red needle is the second hand, with a red boss and a silver pin.
+
+  The pivot is (0, -0.186, 0.21). The hands are built pointing at twelve and stacked hour, minute,
+  second at z +0.014, +0.022 and +0.03 off the pivot.
+
+- **Movement:** `clockHands(date)` (exported). The second hand steps once a second and snaps onto
+  each mark with a little overshoot. The minute and hour hands move on with each step. A wind-up
+  clock's balance really beats 4 to 5 times a second; once a second reads best at phone size and
+  matches the kit Alarm clock.
+- **Time zone:** not added. Scan rigs can't take Toy tab options without an engine change (only kit
+  recipes and scan looks have options, and a rig's `drive()` gets no `info.data`).
+- tests/fx5.spec.mjs checked the old hand (part `hand`, turned from player time), so its one test is
+  updated to the new parts.
+
+## Known issues
+
+- None known.
+
+## For the Operator
+
+- This also does the alarm-clock item in Lane Photoreal r3's brief (docs/handoff/PhotorealR3.md,
+  lines 108-109).
+- A time zone option for the real alarm clock would need a small engine PR: options for scan rigs.

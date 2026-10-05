@@ -13,8 +13,8 @@ const TAU = Math.PI * 2;
 // 10, the second hand near 1), so the dial shows whether they are gone.
 const ZONE = "America/Chicago";
 const WHEN = new Date("2026-10-05T20:40:45.600Z");
-const HOUR = ((3 + 40.76 / 60) / 12) * TAU;
-const MINUTE = (40.76 / 60) * TAU;
+const HOUR = ((3 + 40.75 / 60) / 12) * TAU;
+const MINUTE = (40.75 / 60) * TAU;
 const SECOND = (45 / 60) * TAU;
 
 async function openClock(page, extra = "") {
