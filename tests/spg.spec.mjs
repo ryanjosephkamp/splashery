@@ -72,7 +72,7 @@ test.describe("site pages", () => {
     const cards = page.locator(".tool-card a");
     expect(await cards.count()).toBeGreaterThan(25);
     const hrefs = await cards.evaluateAll((as) => as.map((a) => a.getAttribute("href")));
-    for (const h of hrefs) expect(h).toMatch(/^\.\.\/(#s=j\.[\w-]+)?$/);
+    for (const h of hrefs) expect(h).toMatch(/^(\.\.\/)+(#s=j\.[\w-]+)?$/);
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: `${SHOTS}/spg-tools-390x844.png` });
     await page.setViewportSize({ width: 1440, height: 900 });

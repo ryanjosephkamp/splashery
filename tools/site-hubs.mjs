@@ -491,7 +491,7 @@ ${days}
 <label>Theme<select name="theme"><option value="">Follow the page</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
 <label>Background<select name="bg"><option value="">Normal</option><option value="transparent">Transparent</option></select></label>
 <label>On its own<select name="autoplay"><option value="">Turn slowly</option><option value="breeze">A breeze</option><option value="pokes">Little pokes</option><option value="twist">A slow twist</option><option value="dissolve">Dissolve and rebuild</option></select></label>
-<label>Zoom <output id="eo-zoom-out">1</output><input type="range" name="zoom" min="0.5" max="2" step="0.1" value="1" /></label>
+<label>Zoom <output id="eo-zoom-out">1</output><input type="range" name="zoom" aria-label="Zoom" min="0.5" max="2" step="0.1" value="1" /></label>
 <label class="check"><input type="checkbox" name="turntable" /> Hold still (no turntable)</label>
 <label class="check"><input type="checkbox" name="controls" /> Hide the + and − buttons</label>
 <label>Width<select name="width"><option value="360px">Small (360 px)</option><option value="600px" selected>Medium (600 px)</option><option value="900px">Large (900 px)</option><option value="">Full width</option></select></label>
