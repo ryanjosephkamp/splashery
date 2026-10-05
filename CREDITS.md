@@ -546,6 +546,7 @@ fetch anything live. Each license was checked on the live source page on October
   written as "Iris ".
 
 Tables people open in Data in 3D are read in their browser and never uploaded.
+
 ## Sound and light lab
 
 The Sound lab, the Sound recorder and the Light lab (labs) use no recorded assets: their sounds and
