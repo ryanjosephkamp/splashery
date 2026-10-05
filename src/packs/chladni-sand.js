@@ -61,6 +61,10 @@ export class Sand {
     }
     this.moving = false;
     this.steps = 0;
+    // A little shaking everywhere while the plate rings (a real plate is
+    // never quite still between its lines), so sand spreads along a new
+    // figure's lines instead of leaving gaps where the old figure had none.
+    this.floor = 0.0012;
   }
 
   // One frame: `dt` seconds of shaking by the modes in `drive` ([{ n, m, s,
@@ -137,7 +141,7 @@ export class Sand {
           dy *= reach / len;
         }
         // ...and hop about, more where the plate swings more.
-        const a = jumpScale * Math.min(2, Math.sqrt(E)) ** 1.5;
+        const a = jumpScale * (Math.min(2, Math.sqrt(E)) ** 1.5 + this.floor / 0.012);
         const th = rand() * PI * 2;
         const r = a * (0.3 + rand());
         x += dx + r * Math.cos(th);

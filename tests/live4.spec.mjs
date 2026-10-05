@@ -173,8 +173,10 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   const b = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.lead?.startsWith("3-4") && s.p > 0.3 ? s : null; }, studio, 60_000); // prettier-ignore
   expect(b.builds).toBe(a.builds);
   expect(b.playing).toBe(true); // the audio played on through the switch
-  // Pause: the clock and the sand hold.
+  // Pause: the clock and the sand hold. (Live r7: the sand stops on the next
+  // frame; its settledness is read a moment later.)
   await page.evaluate(() => document.getElementById("chladni-play").click());
+  await page.waitForTimeout(400);
   const p0 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
   await page.waitForTimeout(1000);
   const p1 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);

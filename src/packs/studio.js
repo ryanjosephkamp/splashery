@@ -339,6 +339,8 @@ const CHLADNI = {
       }
     }
     if (sung || played) CH.bowUntil = CH.stirUntil = 0;
+    // Paused audio stops the plate at once: the sand stays where it is.
+    if (played && !CHF.song.track.playing) CH.amp.clear();
     const bowing = time < CH.bowUntil;
     const stirring = time < CH.stirUntil;
     // The modes as the sound drives them (or the bow, its own mode).
@@ -443,7 +445,7 @@ const CHLADNI = {
     // them). Each rests a hair from the plate's middle (a different hair for
     // each, so the canvas's steps of 1/255 don't line grains up) and the
     // screen canvas moves it to its place: a signed offset of up to SAND_LIFT.
-    const n = Math.max(2500, Math.min(14000, Math.floor(k.count * 0.06)));
+    const n = Math.max(2500, Math.min(10000, Math.floor(k.count * 0.06)));
     const sand = new Sand(n, () => k.rand());
     const cols = Math.min(256, Math.ceil(Math.sqrt(n * 2)));
     const rows = Math.ceil(n / cols);

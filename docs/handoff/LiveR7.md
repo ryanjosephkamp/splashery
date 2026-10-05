@@ -101,6 +101,35 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
+WORKING (October 5, 2026, 03:45 UTC; Opus 5.5). Items 1 to 3 are posted (four `lv7-*` cards on page
+2). Then the Operator's routine of 02:24 UTC came in: the owner tested the Chladni plate with his
+own long song and the microphone, and the bow and the restart cycle were still there. That is item
+4, now built:
+
+4. **Chladni plate, live sand** (`src/packs/chladni-sand.js`, new; the plate in
+   `src/packs/studio.js`): every grain moves on every frame, the plate's modes driven as strongly as
+   the sound drives them. A new note sets the sand off at once, from where it lies, with no new
+   plate. Silence leaves the sand put. The bow shows only for a tap with no audio open. It also
+   fades in by a morph channel, so it can't show on a rebuild's first frames, the likely way it came
+   back for the owner. The engine PR #284 (`claude/lane-live-r7-engine`, "Engine: relief splats sort
+   where their screen moves them") is merged into this branch: without it the grains in the near
+   half of the plate drew under it. Tests: `tests/lv7.spec.mjs` ("the Chladni plate": tap, audio
+   file, microphone) and `tests/lv7-engine.spec.mjs`. The Chladni checks in `tests/live3.spec.mjs`
+   and `tests/live4.spec.mjs` now expect the sand to move on the same plate, not a new plate per
+   note. Speed: on the low profile at 4× CPU throttle, 7,200 grains take 2.8 ms a frame to move and
+   0.4 ms to draw. The mid profile is capped at 10,000 grains.
+
+Earlier items: the Song landscape grows as the song plays; the Splat mirror is cleaner and steadier,
+with a clean hologram; the Chladni bow check (superseded by item 4).
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
+- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
+  What was cut), opened early and pushed after each finished item. Finish every working turn with a
+  final message that starts "READY:", "WORKING:" or "BLOCKED:".
+
+## State
+
 READY (October 5, 2026, 03:00 UTC; Opus 5.5, default effort, no helpers). Draft PR #263, main merged
 in (through #264). All three items are built, tested and posted on Effect review page 2:
 
@@ -187,6 +216,16 @@ October 5, 2026 (Opus 5.5, default effort, no helpers). Draft PR #263. Work in p
   (not the hologram, which it doesn't have).
 
 ## Known issues
+
+- **Chladni plate, what is simplified:** the classic square-plate model (cos·cos ± cos·cos, pitch
+  growing with n² + m²), a quarter-thickness plate for voices. Each mode's resonance is 150 cents
+  wide, broader than a real plate's, so a voice between modes still rings one. The sand isn't
+  ballistic: a grain hops at random by the local swing and slides toward the still lines (the rule
+  `settle()` always used). Modes ringing at once act on the sand through their time-averaged energy
+  (each weighted by its strength squared). The hop height is drawn, not simulated. A grain's place
+  reaches the GPU in steps of about 0.008 of a recipe unit (0.4% of the plate), dithered per grain.
+  When the note changes, the new figure first has gaps where the old one had no sand nearby; a
+  little shaking everywhere fills them in over a few seconds.
 
 - A person who moves fast still leaves a little of their outline on the wall behind, seen from the
   side, until the next depth answer. The depth can't move with the picture where the person's colors
