@@ -17,8 +17,10 @@ import { Kit } from "../kit.js";
 
 const GLSL = /* glsl */ `
 uniform vec4 uSpClock;   // y splat scale, z exposure
+uniform vec4 uArcEye;    // the camera's place (xyz); w 1 turns the edge fade on
 vec4 arDyn = vec4(0.0, 0.0, 0.0, 1.0);
 vec4 arTint = vec4(0.0);
+float arEdge = 1.0;
 vec4 arQ(vec4 a, vec4 b) {
   return vec4(a.w * b.xyz + b.w * a.xyz + cross(a.xyz, b.xyz), a.w * b.w - dot(a.xyz, b.xyz));
 }
@@ -30,20 +32,31 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
   vec3 v = arDyn.xyz;
   vec4 q = vec4(v, sqrt(max(0.0, 1.0 - dot(v, v))));
   rotation = normalize(arQ(q, rotation));
+  // A flat splat seen edge-on draws as a soft line (the side of a board seen
+  // face on): it fades out over its last few degrees before edge-on.
+  arEdge = 1.0;
+  if (uArcEye.w > 0.5 && scale.z < 0.4 * min(scale.x, scale.y)) {
+    vec3 n = vec3(0.0, 0.0, 1.0);
+    n = n + 2.0 * cross(rotation.xyz, cross(rotation.xyz, n) + rotation.w * n);
+    float c = abs(dot(normalize(n), normalize(uArcEye.xyz - modifiedCenter)));
+    arEdge = smoothstep(0.04, 0.14, c);
+  }
   float f = clamp(arDyn.w, 0.0, 1.0);
   scale *= uSpClock.y * (f > 0.002 ? mix(0.6, 1.0, f) : 0.0);
 }
 void modifySplatColor(vec3 center, inout vec4 color) {
   float f = clamp(arDyn.w, 0.0, 1.0);
   color.rgb = mix(color.rgb, arTint.rgb, clamp(arTint.a, 0.0, 1.0)) * uSpClock.z;
-  color.a *= f;
+  color.a *= f * arEdge;
 }
 `;
 
 const WGSL = /* wgsl */ `
 uniform uSpClock: vec4f;
+uniform uArcEye: vec4f;
 var<private> arDyn: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> arTint: vec4f = vec4f(0.0);
+var<private> arEdge: f32 = 1.0;
 fn arQ(a: vec4f, b: vec4f) -> vec4f {
   return vec4f(a.w * b.xyz + b.w * a.xyz + cross(a.xyz, b.xyz), a.w * b.w - dot(a.xyz, b.xyz));
 }
@@ -55,6 +68,15 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
   let v = arDyn.xyz;
   let q = vec4f(v, sqrt(max(0.0, 1.0 - dot(v, v))));
   *rotation = normalize(arQ(q, *rotation));
+  arEdge = 1.0;
+  let r = *rotation;
+  let sc = *scale;
+  if (uniform.uArcEye.w > 0.5 && sc.z < 0.4 * min(sc.x, sc.y)) {
+    var n = vec3f(0.0, 0.0, 1.0);
+    n = n + 2.0 * cross(r.xyz, cross(r.xyz, n) + r.w * n);
+    let c = abs(dot(normalize(n), normalize(uniform.uArcEye.xyz - modifiedCenter)));
+    arEdge = smoothstep(0.04, 0.14, c);
+  }
   let f = clamp(arDyn.w, 0.0, 1.0);
   var k = 0.0;
   if (f > 0.002) { k = mix(0.6, 1.0, f); }
@@ -64,7 +86,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   let f = clamp(arDyn.w, 0.0, 1.0);
   let c = *color;
   let rgb = mix(c.rgb, arTint.rgb, clamp(arTint.a, 0.0, 1.0)) * uniform.uSpClock.z;
-  *color = vec4f(rgb, c.a * f);
+  *color = vec4f(rgb, c.a * f * arEdge);
 }
 `;
 
@@ -257,6 +279,8 @@ export class ArcadeLayer {
   // Uploads this frame's centers, turns and fades, and sorts when asked.
   upload(sort) {
     const c = this.container;
+    // the camera's place, for the edge fade (set by the runtime each frame)
+    if (this.eye) this.stage.setLayerUniforms(this.layer, { uArcEye: [this.eye[0], this.eye[1], this.eye[2], 1] }); // prettier-ignore
     for (const [name, src] of [
       ["dataCenter", this.center],
       ["arcDyn", this.dyn],
