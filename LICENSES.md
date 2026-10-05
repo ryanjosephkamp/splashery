@@ -190,6 +190,21 @@ subject to the following conditions:
 - License: Apache License 2.0 (checked on the npm package and the live repository page on October 3,
   2026; the full text is in `vendor/jsqr/LICENSE`).
 
+## pdf-lib 1.17.1 (lane PDF lab)
+
+- Package: `pdf-lib@1.17.1` (file: `vendor/pdf-lib/pdf-lib.esm.min.js`, the package's
+  `dist/pdf-lib.esm.min.js`, unchanged, 523 KB; the license is copied to
+  `vendor/pdf-lib/LICENSE.md`).
+- Source: https://github.com/Hopding/pdf-lib (Andrew Dillon).
+- Loaded only when someone makes a PDF with Save PDF in the Share tab (labs; a dynamic import in
+  `src/pdf-export/pdf.js`), and by the lane's tools and tests in Node. Never on first paint, on the
+  shelf or in an embed.
+- License: MIT (checked on the npm package and the live repository page on October 5, 2026; the full
+  text is in `vendor/pdf-lib/LICENSE.md`). The bundle includes its dependencies, all permissive:
+  `pako` (MIT and Zlib), `@pdf-lib/standard-fonts` and `@pdf-lib/upng` (MIT), and `tslib` (Apache
+  License 2.0, its notice kept at the top of the file). It uses only the 14 standard PDF fonts; no
+  font file is embedded.
+
 ## Development tools (not shipped)
 
 These are `devDependencies` used to prepare assets and run tests; nothing from them is served.
@@ -242,6 +257,11 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   `quick-lru` 6.1.2 (MIT), `web-worker` 1.5.0 (Apache-2.0), `xml-utils` 1.10.2 (CC0-1.0) and
   `zstddec` 0.2.0 (MIT AND BSD-3-Clause): reads the USGS 3DEP elevation tiles (GeoTIFF) by range
   requests in `tools/sci3-terrain.mjs` (lane Science r3). The site never loads them.
+- `pdfjs-dist` 6.3.289 (Apache-2.0), https://github.com/mozilla/pdf.js: the same version as
+  `vendor/pdfjs/`, with its viewer and scripting sandbox (QuickJS, MIT), which the site doesn't
+  ship. `tests/pdf.spec.mjs` and `tools/pdf-clip.mjs` (lane PDF lab) open a made PDF in it with its
+  scripting on, the engine inside Firefox's PDF viewer, to check that the flip book plays. Nothing
+  of it is served.
 
 ## Build tools outside npm (not shipped)
 
