@@ -84,7 +84,9 @@ Built, all under `site/` (preview, `noindex`):
 - Tests: `tests/spg.spec.mjs`. Screenshots:
   `tests/screenshots/spg-{tools,science,learn,share}-*.png`.
 
-Still to do: the walk-through clip on Effect review page 2, and a final merge of main.
+Tests: `tests/spg.spec.mjs` (8) and `tests/site.spec.mjs` pass. The walk-through clip (card
+`spg-walkthrough`, lane record `SitePages`) is on Effect review page 2; `node tools/spg-clip.mjs`
+records it. Main was merged (already up to date) October 5, 2026.
 
 ## Notes
 
