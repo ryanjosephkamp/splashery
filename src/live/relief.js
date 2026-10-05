@@ -273,6 +273,7 @@ export class CameraDepth {
     // Live r7: the cells near an outline, and the colors on each side of it,
     // so each frame's colors can move the outline before the next answer.
     this.band = colors ? edgeBand(t, cols, rows) : null;
+    if (this.band) tidyBand(this.band, t);
     this.answer = { d: Float32Array.from(t), colors };
     if (this.back && this.sent) this.back.learn(this.sent, t, cols, rows, this.mirror);
     if (!this.have) this.heights.set(t);
@@ -336,7 +337,10 @@ export class CameraDepth {
     // seen from the side) and the wall they uncovered stood out on them.
     // Near an outline, each frame's own colors now say which side a cell is
     // on: the near side's or the far side's colors, from the last answer.
-    if (this.band) followOutline(this.band, cp, this.answer.colors, this.answer.d, this.target);
+    if (this.band) {
+      followOutline(this.band, cp, this.answer.colors, this.answer.d, this.target);
+      tidyBand(this.band, this.target);
+    }
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
     const kBig = 1 - Math.exp(-dt / 0.04);
@@ -777,6 +781,28 @@ export function followOutline(band, px, colors, d, target) {
     }
     const pick = sideByColor(d, w, h, colors, i % w, Math.floor(i / w), BAND, 2, lo[b], hi[b], px, o); // prettier-ignore
     if (pick && pick.trust > 0.5) target[i] = pick.near >= 0.5 ? hi[b] : lo[b];
+  }
+}
+
+// Live r7: no lone cell on the wrong side of an outline (hair the depth
+// model took for wall showed as dark specks on it, seen from the side): each
+// band cell (edgeBand) takes the side most of its eight neighbors are on.
+export function tidyBand(band, d) {
+  const { w, h, idx, lo, hi } = band;
+  const was = (band.was ||= new Float32Array(idx.length));
+  for (let b = 0; b < idx.length; b++) was[b] = d[idx[b]];
+  for (let b = 0; b < idx.length; b++) {
+    const i = idx[b];
+    const x = i % w;
+    const y = (i - x) / w;
+    if (x === 0 || y === 0 || x === w - 1 || y === h - 1) continue;
+    const mid = (lo[b] + hi[b]) / 2;
+    let near = 0;
+    for (let j = -1; j <= 1; j++)
+      for (let k = -1; k <= 1; k++) if ((j || k) && d[i + j * w + k] > mid) near++;
+    const self = was[b] > mid;
+    if (self && near <= 2) d[i] = lo[b];
+    else if (!self && near >= 6) d[i] = hi[b];
   }
 }
 

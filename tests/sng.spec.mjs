@@ -93,13 +93,16 @@ test.describe("in the browser", () => {
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song, null, { timeout: 90_000 }); // prettier-ignore
     // the default is Live (lane Live input r3)
     expect(await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.song.live)).toBe(true); // prettier-ignore
+    // Live r7: the land grows as the song plays and what has played slides
+    // back from the line at the front (the look part's offset falls).
     const z = () =>
-      page.evaluate(() => window.__splashery.player.motion.out?.body?.offset?.[2] ?? 0);
+      page.evaluate(() => window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? 0);
+    await page.waitForFunction(() => window.__splashery.player.motion.out?.parts?.look, null, { timeout: 90_000 }); // prettier-ignore
     const still = await z();
     await page.evaluate(() => window.__splashery.app.act()); // play
-    await page.waitForFunction(() => window.__splashery.player.motion.out?.body?.offset?.[2] > 0.02, null, { timeout: 90_000 }); // prettier-ignore
+    await page.waitForFunction((s) => (window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? s) < s - 0.02, still, { timeout: 90_000 }); // prettier-ignore
     const moved = await z();
-    expect(moved).toBeGreaterThan(still);
+    expect(moved).toBeLessThan(still);
     await page.evaluate(() => window.__splashery.app.act()); // pause
     await page.waitForTimeout(1500);
     const a = await z();
@@ -123,7 +126,8 @@ test.describe("in the browser", () => {
       await page.evaluate(() => window.__splashery.app.setToyOptions({ view: "live" }));
       await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.live === true, null, { timeout: 90_000 }); // prettier-ignore
       await page.evaluate(() => window.__splashery.app.act());
-      await page.waitForFunction(() => window.__splashery.player.motion.out?.body?.offset?.[2] > 0.1, null, { timeout: 120_000 }); // prettier-ignore
+      // (Live r7: the land grows as it plays; the look part slides back.)
+      await page.waitForFunction(() => window.__splashery.player.motion.out?.parts?.look?.offset?.[2] < 2.6, null, { timeout: 120_000 }); // prettier-ignore
       await page.evaluate(() => window.__splashery.app.act());
       await page.waitForTimeout(1200);
       await page.screenshot({ path: `tests/screenshots/sng-live-${w}x${h}.png` });
