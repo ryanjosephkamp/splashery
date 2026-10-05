@@ -2949,7 +2949,8 @@ Proposals below are suggestions; the owner may change them.
     and a telescope view (simulated): the star particles as if 100 Mpc away, blurred by the seeing
     (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading with age, an
     approximation), cold dense gas as dust, and a tap that starts an exposure whose photon grain
-    smooths out (tools/sci3-galaxy.mjs).
+    smooths out (tools/sci3-galaxy.mjs). r2 (the owner's "sharper", October 5): the telescope opens
+    at a space telescope's 0.1″ (1″ and 2.5″ stay as choices) with more stars.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 - **Cryo-EM map** (`cryoem-map`). Now: tap: Cut it open. Plan: new effect (E6).

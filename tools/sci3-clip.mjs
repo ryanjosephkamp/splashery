@@ -44,6 +44,8 @@ const framesOut = args.includes("--frames"); // also <card>-frames/NNNN.jpg, for
 // log scale (r2: the microscope and the galaxy zoom with the camera).
 const tour = (key, ids, every, from = 0) => ids.map((id, i) => ({ t: from + i * every, opt: { [key]: id } })); // prettier-ignore
 const CARDS = {
+  "sci3-cryoem-model-r2": { toy: "cryoem-map", options: { map: "apoferritin", model: true }, near: 0.85, secs: 7, steps: [{ t: 0, yaw: 0.45 }] }, // prettier-ignore
+  "sci3-telescope-r2": { toy: "galaxy-box", options: { galaxy: "m12i", view: "telescope", filter: "color", seeing: "space" }, pitch: 1.4, secs: 9, steps: [{ t: 0, yaw: 0.02 }] }, // prettier-ignore
   "sci3-cryoem-apoferritin-r2": { toy: "cryoem-map", options: { map: "apoferritin" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.4 }, { t: 2.5, tap: true }] }, // prettier-ignore
   "sci3-cryoem-ribosome-r2": { toy: "cryoem-map", options: { map: "ribosome" }, near: 0.95, secs: 8, steps: [{ t: 0, yaw: 0.4 }, { t: 3, tap: true }] }, // prettier-ignore
   "sci3-cryoem-capsid-r2": { toy: "cryoem-map", options: { map: "aav" }, near: 0.72, secs: 8, steps: [{ t: 0, yaw: 0.3 }, { t: 3, tap: true }] }, // prettier-ignore

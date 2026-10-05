@@ -1104,7 +1104,7 @@ const GALAXY = {
       key: "seeing",
       label: "Telescope's sharpness",
       type: "select",
-      default: "ground",
+      default: "space", // r2: the owner's "sharper"
       choices: [
         { id: "space", label: "A space telescope (0.1″)" },
         { id: "ground", label: "A good night on the ground (1″)" },
@@ -1330,7 +1330,7 @@ function buildTelescope(k, o) {
   const psfFwhm = (TELESCOPE.seeing[o.seeing] ?? 1) * TELESCOPE.kpcPerArcsec; // kpc
   const psf = psfFwhm / 2.3548; // σ
   const filter = o.filter ?? "color";
-  const budget = Math.max(2000, Math.floor(k.count * 0.75));
+  const budget = Math.max(2000, Math.floor(k.count * 0.85));
   const pick = pickIndices(S.n, budget);
   const nStars = pick ? pick.length : S.n;
   const at = (j) => (pick ? pick[j] : j);
@@ -1380,7 +1380,7 @@ function buildTelescope(k, o) {
   // Dust: the cold, dense gas (below 20,000 K, smoothing length under 0.3
   // kpc) dims what is behind it, more in blue light than red.
   const absorb = filter === "red" ? 0.45 : filter === "blue" ? 1 : 0.75;
-  const dRoom = Math.max(1000, Math.floor(k.count * 0.22));
+  const dRoom = Math.max(1000, Math.floor(k.count * 0.12));
   const dust = [];
   for (let i = 0; i < G.n && dust.length < dRoom * 3; i++)
     if (G.logT(i) < 4.3 && G.h(i) < 0.3) dust.push(i);
@@ -1703,7 +1703,7 @@ const CRYOEM = {
       });
       const room = Math.max(1000, Math.floor(k.count * 0.18));
       const every = Math.max(1, Math.ceil(pts.length / room));
-      const bead = 1.0 * Math.sqrt(every); // Å across
+      const bead = 0.8 * Math.sqrt(every); // Å across (r2: finer, the owner's "sharper")
       const shown = pts.filter((_, i) => i % every === 0);
       beads = shown.length;
       k.cloud({ count: (shown.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
