@@ -113,22 +113,20 @@ src/media.js and the Space pack without editing them; if you need a change there
 
 - The game kit: engine PR #283 (`claude/lane-arcade-engine`), `src/arcade/` and a four-line hook in
   `src/player.js`. Ready for its merge once the Integrator's full run passes.
-- The games: PR #285 (`claude/lane-arcade`), all on the labs-only Arcade shelf:
-  - G1 **Shardball**: Flat board and Dome styles. Clips are on Effect review page 2.
-  - G2 **Longtail**: Cube, Planet (Mars, the Moon, Earth) and Ring worlds, with tunnels. Clips are
-    on page 2.
-  - G6 **Grain Garden**: falling sand in a glass box. Clip on page 2.
-  - G7 **Page Breaker**: words and pictures from your own PDF or photo. Clip on page 2.
-  - G3 **Strata**: falling stones in a deep well.
-  - G4 **Volley Table**: a two-paddle rally.
-  - G5 **Stone Belt**: real asteroid shapes from NASA.
-  - G11 **Soft Landing**: real Moon and Mars ground from NASA.
-  - G13 **Night Owl Pinball**: a table on the physics engine (src/physics).
-  - G9 **Cast a Shadow**: turn a carved block until its shadow fills the outline.
-  - G8 **Photo Dash**: a marble runs along the skyline of your own photo.
-  - G10 **Note Rider**: catch a song's notes in their lanes to play it (built-in tunes or a MIDI
-    file).
-  - The clips from Strata on are rendering and go on page 2 as each one finishes.
+- The games: PR #285 (`claude/lane-arcade`), twelve, all on the labs-only Arcade shelf: G1
+  **Shardball** (Flat board and Dome styles), G2 **Longtail** (Cube, Planet, Ring), G6 **Grain
+  Garden**, G7 **Page Breaker**, G3 **Strata**, G4 **Volley Table**, G5 **Stone Belt**, G11 **Soft
+  Landing** (the Moon and Mars), G13 **Night Owl Pinball**, G9 **Cast a Shadow**, G8 **Photo Dash**
+  and G10 **Note Rider**.
+- The owner's marks of October 5: every first clip was "fix: please make sharper" (Note Rider: "much
+  sharper and improve design"). All twelve are rebuilt with crisp shapes (Notes, "Crisp shapes"),
+  Note Rider is redesigned, and the round-2 clips (`arc-…-r2`, plus the first Night Owl Pinball and
+  Cast a Shadow clips) are on Effect review page 2, waiting for his marks.
+- Fixed along the way: Cast a Shadow's match (a right answer read 82%), Strata and Pinball running
+  short of slots, a press lost in a frame with no step (the flaky controller test), burning oil that
+  floated off before it spread, and five how-to lines over the help line's 110 characters.
+- Engine PR #283 also carries `sortBias`, the skip for sprites that haven't moved, and the press fix
+  (all additive); its seven tests pass.
 - Not built: mini golf waits, as the brief says. The block world (G14, G15) is a later lane; its
   splat-budget notes are under Notes.
 
