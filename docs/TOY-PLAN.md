@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 374 toys. 344 have a tap action today; the other 30 only hop.
+- 376 toys. 346 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 6.
+- **new** (needs its own effect): 8.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -60,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Cryo-EM map, Fluid lab, Screen.
+  Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -69,7 +69,7 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code,
-  Video to 3D, Cryo-EM map
+  Video to 3D, Cryo-EM map, Contour lab, Terrain in a box
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2893,7 +2893,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 
-## Science (4)
+## Science (6)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
@@ -2967,3 +2967,22 @@ Proposals below are suggestions; the owner may change them.
     phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the
     assembly's operators.
   - Sound: A soft, low whoosh as the cut sweeps in, and a softer one as it closes.
+- **Contour lab** (`contour-lab`). Now: tap: Pull the layers apart. Plan: new effect (E6).
+  - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first, each
+    after a small lab that teaches what it needs (lane Science r3; labs only).
+  - Effect: Real land (USGS 3DEP heights of Mount St. Helens, the Grand Canyon or Yosemite Valley)
+    cut into contour layers, each a solid piece with its edge a contour line. The tap lifts the
+    layers apart (a second tap stacks them).
+  - Improved: Science r3: tools/sci3-terrain.mjs (geotiff.js range reads of the public-domain 1/3″
+    tiles), src/science/terrain.js; the layers are kit parts.
+  - Sound: A soft wooden slide as the layers lift; a lower one as they settle.
+- **Terrain in a box** (`terrain-box`). Now: tap: Fill it with water. Plan: new effect (E6).
+  - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first (lane
+    Science r3; labs only).
+  - Effect: Real land in a box (USGS 3DEP heights, a square about 10 km across, 256 × 256 samples),
+    tinted by height and shaded by the sun, with cliffs filled and the box's walls showing the
+    cross-section. The tap raises a sheet of water to 45% of the relief, flooding the valleys first
+    (a level, not a flood model); a second tap drains it.
+  - Improved: Science r3: the water is a kit part rising; contour lines, a height stretch (1×, 2×,
+    4×), three places.
+  - Sound: A gentle rush as the water rises; a lower one as it drains.

@@ -24,6 +24,7 @@ import { readSmlm, readLocalizations } from "../science/smlm.js";
 import { STRUCTURES } from "../science/structures.js";
 import { fillCell, cellsFor, completeMolecules } from "../science/symmetry.js";
 import { readDensity, readBackbone, isoPoints } from "../science/density.js";
+import { TERRAIN, CONTOUR } from "../science/terrain.js";
 import {
   SCI_TYPE,
   sciPart,
@@ -1731,4 +1732,6 @@ export const RECIPES = {
   "smlm-microscope": MICROSCOPE,
   "galaxy-box": GALAXY,
   "cryoem-map": CRYOEM,
+  "terrain-box": TERRAIN,
+  "contour-lab": CONTOUR,
 };

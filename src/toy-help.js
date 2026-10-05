@@ -1733,6 +1733,16 @@ export const TOY_HELP = {
     about:
       "Cryo-electron microscopy freezes thousands of copies of a molecule in thin ice, photographs them with electrons and averages the pictures into a 3D map of density. Scientists look at the map as a surface at one density level and build an atomic model into it.\n\nThis toy reads three real maps from the Electron Microscopy Data Bank: apoferritin, a ribosome and a virus shell. It draws the surface at the level EMDB recommends, one small flat splat wherever the density crosses that level, on a grid of about 1 to 1.6 Å voxels that fits a phone. Choose a lower or higher level, color by the fitted model's chains or by distance from the center, and show the model's backbone inside a see-through map. Tap to cut the front half away and see inside. It is for looking, not for measuring or model building.",
   },
+  "contour-lab": {
+    howTo: "Tap to pull the layers apart; tap again to stack them. Pick a place in the Toy tab.",
+    about:
+      "A contour line joins places at the same height, and a map with them shows a 3D shape on flat paper. This lab cuts real land into layers, one for each step of height, so you can see where the lines come from.\n\nThe land is measured: the U.S. Geological Survey's elevation data for Mount St. Helens, the Grand Canyon or Yosemite Valley, about 35 m between samples. Each layer's edge is a contour line. Tap to lift the layers apart and see each edge on its own; seen from straight above, the edges are the nested rings of a contour map. Lines close together mean steep ground; far apart, gentle. Choose the place and how much the heights are stretched.",
+  },
+  "terrain-box": {
+    howTo: "Tap to fill the land with water; tap again to drain it. Pick a place in the Toy tab.",
+    about:
+      "This is real land in a box: the U.S. Geological Survey's measured heights for Mount St. Helens, the Grand Canyon or Yosemite Valley, a square about 10 km across with a sample every 35 m. Each sample is a small splat, tinted by height and shaded by the sun, and the box's walls show the land cut through.\n\nTap to fill the land with water to a level and watch which valleys flood first, then tap to drain it. It is a level rising, not a model of how real floods flow. Choose the place, stretch the heights to see gentle slopes, and turn on contour lines. The Contour lab next to it shows how those lines are made.",
+  },
   "galaxy-box": {
     howTo:
       "Pinch to zoom into the gas; tap to peel the hot gas. Through the telescope, tap for a new exposure.",

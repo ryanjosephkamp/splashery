@@ -2778,6 +2778,17 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 380, decay: 1.1, vol: 0.3 },
     off: { voice: "whoosh", f: 300, decay: 1, vol: 0.25 },
   },
+  // The contour layers lifting apart: a soft wooden slide; settling back, a
+  // lower one (Science r3).
+  "contour-lab": {
+    on: { voice: "wood", f: 520, decay: 0.5, vol: 0.3 },
+    off: { voice: "wood", f: 420, decay: 0.5, vol: 0.28 },
+  },
+  // Water filling the land: a gentle rush rising; draining, a lower one.
+  "terrain-box": {
+    on: { voice: "whoosh", f: 300, decay: 2.4, vol: 0.3 },
+    off: { voice: "whoosh", f: 240, decay: 2.2, vol: 0.25 },
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

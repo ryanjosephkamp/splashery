@@ -44,6 +44,32 @@ const framesOut = args.includes("--frames"); // also <card>-frames/NNNN.jpg, for
 // log scale (r2: the microscope and the galaxy zoom with the camera).
 const tour = (key, ids, every, from = 0) => ids.map((id, i) => ({ t: from + i * every, opt: { [key]: id } })); // prettier-ignore
 const CARDS = {
+  "sci3-terrain": {
+    toy: "terrain-box",
+    options: { place: "grand-canyon", exag: "2" },
+    secs: 10,
+    steps: [
+      { t: 0, yaw: 0.2 },
+      { t: 1.5, tap: true },
+      { t: 6.5, tap: true },
+    ],
+  },
+  "sci3-terrain-helens": {
+    toy: "terrain-box",
+    options: { place: "st-helens", exag: "2", contours: true },
+    secs: 7,
+    steps: [{ t: 0, yaw: 0.45 }],
+  },
+  "sci3-contour-lab": {
+    toy: "contour-lab",
+    options: { place: "st-helens", exag: "2" },
+    secs: 9,
+    steps: [
+      { t: 0, yaw: 0.25 },
+      { t: 1.2, tap: true },
+      { t: 5.5, tap: true },
+    ],
+  },
   "sci3-galaxies": {
     toy: "galaxy-box",
     options: { galaxy: "m12i", view: "gas" },

@@ -645,6 +645,24 @@ Subsets cut by `tools/sci3-galaxy.mjs`:
 - FIRE-2 m11h (res7100), snapshot 600 (z = 0), stars (m11h: El-Badry et al. (2018)): 250,000 of the
   640,445 star particles in a 16 kpc box.
 
+The land for Terrain in a box and the Contour lab: the U.S. Geological Survey's 3D Elevation
+Program, 1/3 arc-second (about 10 m) seamless elevation tiles from The National Map, public domain
+(each tile's metadata, read on October 5, 2026: "All 3DEP products are public domain."), cut by
+`tools/sci3-terrain.mjs`:
+
+- Mount St. Helens, Washington: a 9 km square of
+  [USGS_13_n47w123.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n47w123/USGS_13_n47w123.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n47w123/USGS_13_n47w123.xml)),
+  averaged to 256 × 256 samples.
+- The Grand Canyon near Grand Canyon Village, Arizona: a 12 km square of
+  [USGS_13_n37w113.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.xml)),
+  averaged to 256 × 256 samples.
+- Yosemite Valley and Half Dome, California: a 10 km square of
+  [USGS_13_n38w120.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w120/USGS_13_n38w120.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w120/USGS_13_n38w120.xml)),
+  averaged to 256 × 256 samples.
+
 Three cryo-EM maps from the Electron Microscopy Data Bank, each with the atomic model fitted into it
 from the PDB (checked on the live pages on October 5, 2026).
 

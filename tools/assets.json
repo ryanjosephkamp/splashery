@@ -2595,6 +2595,39 @@
       "license": "CC BY 4.0",
       "checked": "October 5, 2026",
       "note": "A subset: 250,000 of the 640,445 star particles in a 16 kpc box, cut by tools/sci3-galaxy.mjs."
+    },
+    {
+      "id": "sci3-st-helens-dem",
+      "file": "assets/toys/terrain-box/st-helens.dem.gz",
+      "toy": "terrain-box",
+      "name": "Mount St. Helens, Washington: USGS 3DEP 1/3 arc-second elevation",
+      "author": "U.S. Geological Survey, 3D Elevation Program",
+      "page": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n47w123/USGS_13_n47w123.xml",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "A 9 km square averaged to 256 × 256 samples by tools/sci3-terrain.mjs; also used by the Contour lab."
+    },
+    {
+      "id": "sci3-grand-canyon-dem",
+      "file": "assets/toys/terrain-box/grand-canyon.dem.gz",
+      "toy": "terrain-box",
+      "name": "The Grand Canyon near Grand Canyon Village, Arizona: USGS 3DEP 1/3 arc-second elevation",
+      "author": "U.S. Geological Survey, 3D Elevation Program",
+      "page": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.xml",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "A 12 km square averaged to 256 × 256 samples by tools/sci3-terrain.mjs; also used by the Contour lab."
+    },
+    {
+      "id": "sci3-yosemite-dem",
+      "file": "assets/toys/terrain-box/yosemite.dem.gz",
+      "toy": "terrain-box",
+      "name": "Yosemite Valley and Half Dome, California: USGS 3DEP 1/3 arc-second elevation",
+      "author": "U.S. Geological Survey, 3D Elevation Program",
+      "page": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w120/USGS_13_n38w120.xml",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "A 10 km square averaged to 256 × 256 samples by tools/sci3-terrain.mjs; also used by the Contour lab."
     }
   ]
 }

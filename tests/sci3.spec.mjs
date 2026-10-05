@@ -31,6 +31,7 @@ import {
 import { readSmlm, readThunderstormCsv } from "../src/science/smlm.js";
 import { readDensity, readBackbone, isoPoints } from "../src/science/density.js";
 import { nena } from "../tools/sci3-samples.mjs";
+import { readDem, terrainState, contourState, contourInterval, TERRAIN_PLACES } from "../src/science/terrain.js"; // prettier-ignore
 import { buildRecipe } from "../src/kit.js";
 import { applyClay } from "../src/generators.js";
 import { resolveOptions } from "../src/player.js";
@@ -421,6 +422,73 @@ test.describe("galaxies and the telescope (node)", () => {
     for (const filter of ["blue", "red", "color"]) {
       await build("galaxy-box", 140000, { view: "telescope", filter });
       expect(galaxyState().filter).toBe(filter);
+    }
+  });
+});
+
+// Known heights (m): Mount St. Helens's summit is 2,549 m and its crater floor about 1,900 m;
+// the Colorado River at Grand Canyon Village is about 730 m and the South Rim about 2,100 m;
+// Half Dome is 2,693 m and Yosemite Valley's floor about 1,200 m. A 35 m average lowers peaks a
+// little, so the checks allow some room.
+const KNOWN = { "st-helens": [700, 900, 2400, 2560], "grand-canyon": [650, 800, 2100, 2300], yosemite: [1150, 1260, 2550, 2800] }; // prettier-ignore
+
+test.describe("terrain (node)", () => {
+  test("each place's measured heights load, with the summits and valleys where they are", async () => {
+    for (const p of TERRAIN_PLACES) {
+      expect(p.license).toMatch(/Public domain/);
+      const D = await readDem(new Uint8Array(fs.readFileSync(`assets/toys/terrain-box/${p.id}.dem.gz`))); // prettier-ignore
+      expect(D.n).toBe(256);
+      const [loMin, loMax, hiMin, hiMax] = KNOWN[p.id];
+      expect(D.head.low, p.id).toBeGreaterThan(loMin);
+      expect(D.head.low, p.id).toBeLessThan(loMax);
+      expect(D.head.high, p.id).toBeGreaterThan(hiMin);
+      expect(D.head.high, p.id).toBeLessThan(hiMax);
+      // About 35 m between samples, a square 9 to 12 km across.
+      for (const s of D.head.spacing) (expect(s).toBeGreaterThan(30), expect(s).toBeLessThan(50));
+      expect(D.head.source).toMatch(
+        /^https:\/\/prd-tnm\.s3\.amazonaws\.com\/StagedProducts\/Elevation\/13\//,
+      );
+    }
+  });
+
+  test("a tidy contour interval", () => {
+    expect(contourInterval(1750, 10)).toBe(200);
+    expect(contourInterval(1500, 12)).toBe(200);
+    expect(contourInterval(90, 10)).toBe(10);
+  });
+
+  test("terrain in a box: land, walls and a water sheet that rises to 45% of the relief", async () => {
+    for (const p of TERRAIN_PLACES) {
+      const out = await build("terrain-box", 140000, { place: p.id, exag: "2" });
+      const st = terrainState();
+      expect(st.land).toBeGreaterThan(60000);
+      expect(st.walls).toBeGreaterThan(1000);
+      expect(st.waterLevel).toBeCloseTo(st.low + 0.45 * (st.high - st.low), 6);
+      expect(st.waterTop).toBeCloseTo(0.45 * ((st.high - st.low) / 1000) * 2, 9);
+      expect(out.buf.count).toBeGreaterThan(50000);
+      // The water is its own part, hidden at rest and raised by the tap.
+      const r = RECIPES["terrain-box"];
+      const o0 = { parts: {} };
+      r.drive(0, { water: 0 }, o0, {});
+      expect(o0.parts.water.visible).toBe(0);
+      const o1 = { parts: {} };
+      r.drive(0, { water: 1 }, o1, {});
+      expect(o1.parts.water.visible).toBe(1);
+      expect(o1.parts.water.offset[1]).toBeCloseTo(st.waterTop, 9);
+    }
+  });
+
+  test("the contour lab: at most 14 layers, each its own part, lifted apart by the tap", async () => {
+    for (const p of TERRAIN_PLACES) {
+      await build("contour-lab", 140000, { place: p.id });
+      const st = contourState();
+      expect(st.bands).toBeLessThanOrEqual(14);
+      expect(st.bands).toBeGreaterThan(4);
+      const o = { parts: {} };
+      RECIPES["contour-lab"].drive(0, { apart: 1 }, o, {});
+      expect(Object.keys(o.parts).length).toBe(st.bands);
+      expect(o.parts.band0.offset[1]).toBe(0);
+      expect(o.parts[`band${st.bands - 1}`].offset[1]).toBeCloseTo((st.bands - 1) * st.gap, 9);
     }
   });
 });
