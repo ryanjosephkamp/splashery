@@ -50,7 +50,18 @@ function applyTheme(t) {
   }
   for (const f of document.querySelectorAll("iframe")) tellFrame(f);
 }
+// The embed player takes the theme by message, but only once it has started
+// (a message before that would reach a player that isn't there yet).
+function frameReady(frame) {
+  try {
+    return frame.contentDocument?.body?.dataset.ready === "true";
+  } catch {
+    return false;
+  }
+}
 function tellFrame(frame) {
+  // A browser without WebGL2 or WebGPU shows the player's note instead: no theme to set.
+  if (!frameReady(frame) || frame.contentDocument.getElementById("fallback")?.hidden === false) return; // prettier-ignore
   try {
     frame.contentWindow?.postMessage(
       { type: "splashery:theme", theme: resolved(saved()) },
@@ -72,8 +83,16 @@ themeButton?.addEventListener("click", () => {
 });
 dark.addEventListener("change", () => applyTheme(saved()));
 applyTheme(saved());
-for (const f of document.querySelectorAll("iframe")) {
-  f.addEventListener("load", () => setTimeout(() => tellFrame(f), 300));
+
+// ---- The home page's live toy: its picture shows until the toy is drawn ---------------------
+for (const stage of document.querySelectorAll(".stage")) {
+  const frame = stage.querySelector("iframe");
+  const check = () => {
+    if (!frameReady(frame)) return setTimeout(check, 200);
+    stage.classList.add("ready");
+    tellFrame(frame);
+  };
+  check();
 }
 
 // ---- Offline: the service worker, scoped to site/ -----------------------------------------

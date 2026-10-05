@@ -227,6 +227,22 @@ const ICONS = {
   move: `<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g opacity=".9"><ellipse cx="17" cy="25" rx="7" ry="5.5" fill="#ff5fa2"/><ellipse cx="31" cy="17" rx="5" ry="5.5" fill="#7bdff2"/><ellipse cx="33" cy="33" rx="6" ry="4.5" fill="#ffd166"/></g><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M24 21l3-2M25 29l3 1.5"/><path d="M38 10l3-3M41 38l3 2"/></g></svg>`, // prettier-ignore
   recipe: `<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14 7 24l9 10M32 14l9 10-9 10"/></g><g opacity=".9"><ellipse cx="22" cy="24" rx="3.5" ry="3" fill="#ff5fa2"/><ellipse cx="27" cy="21" rx="3" ry="3.2" fill="#7bdff2"/><ellipse cx="26" cy="27.5" rx="3.5" ry="2.8" fill="#ffd166"/></g></svg>`, // prettier-ignore
 };
+// The tools' small drawings, and the gallery's keys for the first five.
+const TOOL_ICONS = {
+  orbit: '<path d="M12 4a8 8 0 1 1-7.4 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 5v4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/>', // prettier-ignore
+  poke: '<path d="M9 13V5.5a1.5 1.5 0 0 1 3 0V11l4.6.9a2 2 0 0 1 1.6 2.3l-.8 4.3a2 2 0 0 1-2 1.5H11a2 2 0 0 1-1.6-.8L6 14.8a1.4 1.4 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>', // prettier-ignore
+  paint: '<path d="M14.5 4.5l5 5-8 8-5-5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6.5 12.5 4 20l7.5-2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>', // prettier-ignore
+  magnet: '<path d="M6 4v8a6 6 0 0 0 12 0V4h-4v8a2 2 0 0 1-4 0V4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 8h4M14 8h4" stroke="currentColor" stroke-width="1.8"/>', // prettier-ignore
+  clay: '<path d="M5 16c0-4 3-9 7-9s7 5 7 9c0 2-3 3-7 3s-7-1-7-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 11c1 1 3 1 4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>', // prettier-ignore
+  tap: '<circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".6"/><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".3"/>', // prettier-ignore
+  make: '<path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/>', // prettier-ignore
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>', // prettier-ignore
+  embed: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>', // prettier-ignore
+  "gif-and-video": '<rect x="3.5" y="6" width="17" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m10.5 9.5 4 2.5-4 2.5z" fill="currentColor"/>', // prettier-ignore
+};
+const TOOL_KEYS = { orbit: "1", poke: "2", paint: "3", magnet: "4", clay: "5" };
+const slug = (name) => fold(name).replace(/\W+/g, "-");
+
 const arrow = `<svg class="arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4 12.5 8l-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`; // prettier-ignore
 
 const PAGE_TYPES = {
@@ -271,6 +287,7 @@ const PAGE_TYPES = {
 </div>
 <figure class="hero-toy">
 <div class="stage">
+<span class="poster" aria-hidden="true" style="background-image: url('${up}${thumbHref(toy)}')"></span>
 <iframe src="${play}" title="A live ${esc(toy.label.toLowerCase())} made of splats: drag to turn it" loading="eager" allow="fullscreen"></iframe>
 </div>
 <figcaption>A real ${esc(toy.label.toLowerCase())}, captured from photos and drawn with soft splats. Drag to turn it.</figcaption>
@@ -307,13 +324,13 @@ ${shelfSections(page.shelves, up)}`;
       .map(
         (g) => `<section class="tool-group" aria-labelledby="h-${fold(g.title).replace(/\W+/g, "-")}">
 <h2 id="h-${fold(g.title).replace(/\W+/g, "-")}">${esc(g.title)}</h2>
-<dl class="tool-list">${g.items.map(([name, text]) => `<div id="tool-${fold(name).replace(/\W+/g, "-")}"><dt>${esc(name)}</dt><dd>${esc(text)}</dd></div>`).join("")}</dl>
+<dl class="tool-list">${g.items.map(([name, text]) => { const k = slug(name); const icon = TOOL_ICONS[k] ? `<svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">${TOOL_ICONS[k]}</svg>` : ""; const key = TOOL_KEYS[k] ? ` <kbd title="Key ${TOOL_KEYS[k]} in the gallery">${TOOL_KEYS[k]}</kbd>` : ""; return `<div id="tool-${k}">${icon}<dt>${esc(name)}${key}</dt><dd>${esc(text)}</dd></div>`; }).join("")}</dl>
 </section>`, // prettier-ignore
       )
       .join("\n");
     return `${intro(page)}
 ${groups}
-<section aria-labelledby="h-own"><h2 id="h-own">${esc(page.shelvesTitle)}</h2>
+<section aria-labelledby="h-own"${page.shelves.every((id) => publicToys.filter((t) => t.category === id).every((t) => t.labs)) ? " data-labs" : ""}><h2 id="h-own">${esc(page.shelvesTitle)}</h2>
 ${shelfSections(page.shelves, up, 3)}
 </section>`;
   },
@@ -377,8 +394,9 @@ ${dates}
     return `<div class="page-intro"><h1>Search</h1></div>
 <form class="search-page-form" role="search" action="./" method="get">
 <label for="q">Search toys, tools and pages</label>
-<input id="q" type="search" name="q" autocomplete="off" enterkeyhint="search" placeholder="Try: planet, peel, piano" />
+<input id="q" type="search" name="q" autocomplete="off" enterkeyhint="search" placeholder="A toy, a shelf or what it does" />
 </form>
+<div class="suggest" id="search-suggest"><p>Try</p><ul>${page.suggest.map((w) => `<li><a href="./?q=${encodeURIComponent(w)}">${esc(w)}</a></li>`).join("")}</ul></div>
 <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
 <ul class="search-results" id="search-results"></ul>
 <script type="module" src="../assets/search.js"></script>`;
@@ -561,7 +579,13 @@ files.set(
   }),
 );
 files.set("play/index.html", playPage());
-files.set("search-index.json", JSON.stringify(await searchEntries()));
+const index = await searchEntries();
+files.set("search-index.json", JSON.stringify(index));
+// Every suggested search must find something on the public shelf.
+for (const w of PAGES.find((p) => p.type === "search").suggest) {
+  const hits = index.filter((e) => !e.l && `${e.w} ${fold(e.d)}`.includes(fold(w)));
+  if (!hits.length) throw new Error(`The suggested search "${w}" finds nothing.`);
+}
 files.set("manifest.webmanifest", manifest());
 files.set("sitemap.xml", sitemap());
 

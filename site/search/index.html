@@ -134,9 +134,22 @@
           name="q"
           autocomplete="off"
           enterkeyhint="search"
-          placeholder="Try: planet, peel, piano"
+          placeholder="A toy, a shelf or what it does"
         />
       </form>
+      <div class="suggest" id="search-suggest">
+        <p>Try</p>
+        <ul>
+          <li><a href="./?q=planet">planet</a></li>
+          <li><a href="./?q=peel">peel</a></li>
+          <li><a href="./?q=piano">piano</a></li>
+          <li><a href="./?q=DNA">DNA</a></li>
+          <li><a href="./?q=chess">chess</a></li>
+          <li><a href="./?q=atom">atom</a></li>
+          <li><a href="./?q=magnet">magnet</a></li>
+          <li><a href="./?q=share">share</a></li>
+        </ul>
+      </div>
       <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
       <ul class="search-results" id="search-results"></ul>
       <script type="module" src="../assets/search.js"></script>

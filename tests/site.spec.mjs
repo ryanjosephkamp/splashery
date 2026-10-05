@@ -281,6 +281,9 @@ test.describe("site", () => {
         }),
     );
     await homeToyReady(page);
+    // The toy's picture gives way to the toy once it is drawn.
+    await expect(page.locator(".stage.ready")).toHaveCount(1);
+    await expect(page.locator(".stage .poster")).toHaveCSS("opacity", "0");
     await page.waitForTimeout(1500);
     const all = [...sizes].reduce((a, [, b]) => a + b, 0);
     const shell = [...sizes]

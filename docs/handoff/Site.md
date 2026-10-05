@@ -142,6 +142,12 @@ nowhere public, `noindex` while it is a preview):
   sticky header (a search button on phones), sticky shelf chips that scroll sideways on a phone, and
   a fuller footer. Still no web fonts and no images beyond the toys' own thumbnails: the home page's
   own files are 57 KB (about 11 KB gzipped on GitHub Pages).
+- **Polish r3** (the owner's note on r2, October 5, 2026: "almost perfect… keep polishing"): the
+  home page's toy shows its own picture until it is drawn, then fades in (no blank box); the Tools
+  page has a small drawing per tool and the gallery's keys (1 to 5); the search page suggests
+  searches before anything is typed (the build checks each finds a public toy); the Tools page's
+  "Open your own files" heading hides with its labs-only shelves. Fixed a race: the theme was sent
+  to the toy's frame before its player started.
 
 ## Notes
 
@@ -228,6 +234,11 @@ device features (saving files, the camera, offline).
   during the preview).
 
 ## For the Operator
+
+- Engine note (not fixed here): `src/embed.js` passes a `splashery:theme` message straight to
+  `viewer.setTheme`, which throws (`setClearColor` of undefined) if the message arrives before the
+  player has started. The site now waits for the player, but another host page could hit it; a
+  one-line guard in an engine PR would close it.
 
 - No engine PR, no shared lists touched. Files: `site/`, `tools/site-build.mjs`,
   `tools/site-pages.mjs`, `tools/site-og.mjs`, `tools/site-sw.template.js`, `tests/site.spec.mjs`,

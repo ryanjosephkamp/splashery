@@ -6,6 +6,7 @@
 const input = document.getElementById("q");
 const list = document.getElementById("search-results");
 const status = document.getElementById("search-status");
+const suggest = document.getElementById("search-suggest");
 const up = "../";
 const labs = document.documentElement.classList.contains("labs");
 
@@ -82,6 +83,7 @@ async function run(query, { push = false } = {}) {
   if (q) url.searchParams.set("q", q);
   else url.searchParams.delete("q");
   history[push ? "pushState" : "replaceState"](null, "", url);
+  if (suggest) suggest.hidden = !!q;
   if (!q) {
     list.replaceChildren();
     status.textContent = "";

@@ -161,6 +161,8 @@ export const PAGES = [
     nav: null,
     title: "Search",
     description: "Search Splashery's toys, tools and pages.",
+    // Shown before anything is typed; the build checks each finds something.
+    suggest: ["planet", "peel", "piano", "DNA", "chess", "atom", "magnet", "share"],
   },
 ];
 
