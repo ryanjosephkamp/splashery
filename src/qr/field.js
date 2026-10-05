@@ -242,7 +242,9 @@ void modifySplatCenter(inout vec3 center) {
     }
     y *= 1.0 - smoothstep(0.96, 1.0, Q);
     off.y += y * QS;
-    off.z += 0.15 * spin * QS;
+    // In the air the pieces fall in front of the board (a module and a
+    // half toward the viewer), and come down onto it as they land.
+    off.z += (1.5 * qrSat(y / 4.0) + 0.15 * spin) * QS;
     q = qrMul(qrAxis(vec3(h3 - 0.5, 0.2, h1 - 0.5), 1.4 * (h2 - 0.5) * spin), q);
   } else if (moving && M == 8.0) {
     // Knock loose around the tap (zw): out toward the viewer with a tumble,
@@ -532,7 +534,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
     }
     y = y * (1.0 - smoothstep(0.96, 1.0, Q));
     off.y += y * QS;
-    off.z += 0.15 * spin * QS;
+    off.z += (1.5 * qrSat(y / 4.0) + 0.15 * spin) * QS;
     q = qrMul(qrAxis(vec3f(h3 - 0.5, 0.2, h1 - 0.5), 1.4 * (h2 - 0.5) * spin), q);
   } else if (moving && M == 8.0) {
     let d = m2 - uniform.uSpMorph.zw;

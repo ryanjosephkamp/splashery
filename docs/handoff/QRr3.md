@@ -326,3 +326,9 @@ The owner marked all 16 cards good. On `claude/lane-qr-r3-polish` (from `14f2843
   lighter (the splat sort runs a frame behind them).
 - Checks: every motion's last frame in all 8 styles reads in 9 of 9 phone-like captures (jsQR and
   zxing); `tests/qr3.spec.mjs` and `tests/qr.spec.mjs` pass (20 tests).
+- **Rain, r3** (the owner's note on `qr3-dots-rain-r2`: "The dots seem to fall behind the white
+  square board, not in front of it."): while in the air the pieces now fall a module and a half in
+  front of the board and come down onto it as they land. Seen from slightly below, the splat sort
+  still drew the board over them, so the Rain clip is filmed from a little above
+  (`tools/qr3-clip.mjs --pitch=-16`); head on (the toy's own view) and from above they pass in
+  front. Rain's last frame still reads in 9 of 9 phone-like captures in all 8 styles.

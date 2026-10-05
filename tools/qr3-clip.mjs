@@ -8,7 +8,7 @@
 // Alive clip stays in Scan view and runs two loops of the pattern.
 //
 //   node tools/qr3-clip.mjs <out dir> motion:<style>:<motion> … alive:<style>:<pattern>[:<speed>] …
-//     [--theme=<id>] [--size=480] [--fps=25]
+//     [--theme=<id>] [--size=480] [--fps=25] [--pitch=16] (degrees; negative: from above)
 //
 // Writes <out>/<name>.mp4 (and checks its last frame reads with jsQR).
 // Needs the local server, SPLASHERY_CHROMIUM, and ffmpeg from imageio-ffmpeg
@@ -62,7 +62,7 @@ for (const job of jobs) {
     const n = Math.round(SECS[what] * FPS);
     // From a little below: seen from above, pieces flying toward the camera
     // drew lighter (the splat sort lags them).
-    const side = { yaw: 24, pitch: 16, margin: 6 };
+    const side = { yaw: 24, pitch: Number(opt("pitch", 16)), margin: 6 };
     // A tap's knock lands up and to the left of the middle.
     for (let i = 0; i <= n; i++) frames.push({ motion: what, q: i / n, ...side, knock: [-5, 4] });
     const glide = Math.round(1.0 * FPS);
