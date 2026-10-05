@@ -3127,7 +3127,8 @@ Proposals below are suggestions; the owner may change them.
     the belt through the scanner, pushing its lead curtains aside; the screen on top builds each
     bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic
     orange, inorganic green, metal blue, dense black). A tap sends the next bag.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, a 180
+    by 120 X-ray picture on an even pale screen).
   - Sound: The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is
     done.
 - **How CT works** (`how-ct`). Now: tap: Scan or undo the scan. Plan: keep.
@@ -3136,7 +3137,9 @@ Proposals below are suggestions; the owner may change them.
     arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane).
     Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps
     back.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2 (the owner's notes of October 5, 2026): sharper (the labs
+    sharp kernel, twice the splats); 19 other toys can lie in the scanner instead of the shell (In
+    the scanner), each voxelized into a volume with a dense skin.
   - Sound: The gantry's knock as it starts and its motor's low run, lower on the way back.
 - **Walnut CT scan** (`walnut-ct`). Now: tap: Shell only, or the whole walnut. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an
@@ -3146,7 +3149,8 @@ Proposals below are suggestions; the owner may change them.
     back, top down or side to side) and shows the shell, the kernel's lobes and the air between
     them. The tap raises the density window so the kernel melts away and only the shell stays; a
     second tap brings it back.
-  - Improved: Imaging: new toy, with tools/img-walnut.mjs.
+  - Improved: Imaging: new toy, with tools/img-walnut.mjs. Imaging r2: sharper (the labs sharp
+    kernel, twice the splats); night-vision and infrared colors.
   - Sound: A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.
 - **MRI of a fruit** (`fruit-mri`). Now: tap: Play through the slices. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).
@@ -3154,7 +3158,8 @@ Proposals below are suggestions; the owner may change them.
     slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline
     of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag
     scrolls through them and the tap plays through all of them, front to back, and comes back.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a
+    Vision option (gray, night vision, infrared).
   - Sound: An MRI scanner's knocking as it steps through the slices.
 - **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step (the third goes back
   out). Plan: keep.
@@ -3165,7 +3170,8 @@ Proposals below are suggestions; the owner may change them.
     microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each
     tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface);
     the third goes back out.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer
+    splats); a Vision option (gray, night vision, infrared).
   - Sound: The stage motor's two soft steps and a low vacuum hum.
 - **Thermal camera** (`thermal-camera`). Now: tap: Thermal camera on or off. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea
@@ -3174,6 +3180,8 @@ Proposals below are suggestions; the owner may change them.
     crossfades from normal colors to the thermal camera's false colors (the iron palette), and the
     tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays
     warm and the ice water cold. A second tap goes back to normal colors.
-  - Improved: Imaging: new toy.
+  - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats); the
+    tea steps from hot to warm to cooled with short blends (a long crossfade of two copies looked
+    grainy).
   - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
     turns off.
