@@ -172,6 +172,9 @@ function demoStep() {
 // A bonded triple of shown heavy atoms near the middle: [a, b, c] with a–b
 // and b–c bonds.
 function demoTriple(m, shown, bonds) {
+  // Near the middle of the side that faces the viewer (+z), so its marks show.
+  let front = -Infinity;
+  for (let i = 0; i < m.n; i++) if (shown[i] && m.z[i] > front) front = m.z[i];
   const nb = new Map();
   for (const [i, j] of bonds) {
     if (!shown[i] || !shown[j] || m.el[i] === "H" || m.el[j] === "H") continue;
@@ -184,7 +187,7 @@ function demoTriple(m, shown, bonds) {
   let bd = Infinity;
   for (const [b, list] of nb) {
     if (list.length < 2) continue;
-    const d = m.x[b] ** 2 + m.y[b] ** 2 + (m.z[b] - 3) ** 2;
+    const d = m.x[b] ** 2 + m.y[b] ** 2 + (m.z[b] - front) ** 2;
     if (d < bd) {
       bd = d;
       best = [list[0], b, list[1]];
@@ -197,7 +200,7 @@ function demoTriple(m, shown, bonds) {
   for (let k = 0; k + 2 < list.length; k++) {
     const [a, b, c] = [list[k], list[k + 1], list[k + 2]];
     if (distance(m, a, b) > 7.5 || distance(m, b, c) > 7.5) continue;
-    const d = m.x[b] ** 2 + m.y[b] ** 2 + (m.z[b] - 3) ** 2;
+    const d = m.x[b] ** 2 + m.y[b] ** 2 + (m.z[b] - front) ** 2;
     if (d < bd) {
       bd = d;
       best = [a, b, c];
@@ -572,10 +575,11 @@ const VIEWER = {
       const share = others.length ? Math.min(0.25, (others.length * 30) / budget) : 0;
       const sf = drawSurface(L, m, { use, color, max: budget * (1 - share), rand });
       if (others.length) drawnBonds = ballstick(others, share).bonds;
-      for (let i = 0; i < m.n; i++) if (use(i)) pickable[i] = 1;
+      // Only atoms on the outside can be tapped: their markers show through the surface.
+      for (const i of outerAtoms(m, atomsWhere(use), (i) => vdwRadius(m.el[i]))) pickable[i] = 1;
       notes.push(`The surface is a blobby (Gaussian) surface over the heavy atoms at their van der Waals radii, sampled every ${sf.h.toFixed(2)} Å: close to the solvent-excluded surface, but smoother in deep crevices.`); // prettier-ignore
       reach = 3.4;
-      markR = 2.3;
+      markR = 2.9;
     } else {
       // Cartoon: ribbons for the chains, balls and sticks for the rest.
       const residueAtom = (ri) => {

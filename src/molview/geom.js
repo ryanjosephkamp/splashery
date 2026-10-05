@@ -206,13 +206,14 @@ export function blobbySurface(
 
 // ---- The outside atoms ------------------------------------------------------------------------
 
-// The atoms a viewer outside the structure could see: each atom's sphere
-// (radius(i) plus half a voxel) is marked on a grid, the empty space joined to
-// the grid's edge is flooded, and an atom is "outside" when that space comes
-// within a voxel of its sphere. Used when a big structure has more atoms than
+// The atoms a viewer outside the structure could see: each atom's sphere,
+// widened by a water probe (1.4 Å), is marked on a grid, the empty space
+// joined to the grid's edge is flooded (where a water molecule could go), and
+// an atom is "outside" when that space comes within `reach` voxels of its
+// widened sphere. Used when a big structure has more atoms than
 // splats to draw them with (the level of detail): the buried ones would never
 // show. Returns the atoms kept, in order.
-export function outerAtoms(m, atoms, radius, { maxVoxels = 8e6 } = {}) {
+export function outerAtoms(m, atoms, radius, { maxVoxels = 8e6, reach = 1, probe = 1.4 } = {}) {
   if (!atoms.length) return [];
   const lo = [Infinity, Infinity, Infinity];
   const hi = [-Infinity, -Infinity, -Infinity];
@@ -225,7 +226,7 @@ export function outerAtoms(m, atoms, radius, { maxVoxels = 8e6 } = {}) {
     }
     rmax = Math.max(rmax, radius(i));
   }
-  const pad = rmax + 3;
+  const pad = rmax + probe + 3;
   const ext = [0, 1, 2].map((a) => hi[a] - lo[a] + 2 * pad);
   const v = Math.max(1.4, Math.cbrt((ext[0] * ext[1] * ext[2]) / maxVoxels));
   const N = ext.map((e) => Math.ceil(e / v) + 1);
@@ -248,7 +249,7 @@ export function outerAtoms(m, atoms, radius, { maxVoxels = 8e6 } = {}) {
     return false;
   };
   for (const i of atoms)
-    cells(i, v * 0.5, (k) => {
+    cells(i, probe, (k) => {
       grid[k] = 1;
       return false;
     });
@@ -278,5 +279,5 @@ export function outerAtoms(m, atoms, radius, { maxVoxels = 8e6 } = {}) {
     if (c > 0) visit(k - NXY);
     if (c < N[2] - 1) visit(k + NXY);
   }
-  return atoms.filter((i) => cells(i, v * 1.5, (k) => grid[k] === 2));
+  return atoms.filter((i) => cells(i, probe + v * reach, (k) => grid[k] === 2));
 }

@@ -6,13 +6,14 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/mol-clip.mjs <out.mp4>
 //       [--opt=key=value ...] [--picks=demo|3] [--secs=2.5] [--gap=1.4] [--fps=12]
-//       [--zoom=0.6] [--fetch=1EMA] [--size=390x844] [--profile=high]
+//       [--zoom=0.6] [--fetch=1EMA [--mock=file.cif]] [--size=390x844] [--profile=high]
 //
 // --picks=demo taps the atoms the Play button would (a bond near the middle,
 // then its angle): 2 or 3 of them, --gap seconds apart, through the same
 // player.act a finger's tap uses. --zoom brings the camera closer, aimed at
 // the picked atoms. --fetch types a code in the Toy tab and presses Fetch
-// (the real RCSB, as a person would). The clock is stepped by hand.
+// (the real RCSB, as a person would; --mock answers for RCSB with a local
+// file where the browser can't reach it). The clock is stepped by hand.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -34,6 +35,7 @@ const gap = Number(opt("gap", 1.4));
 const zoom = Number(opt("zoom", 1));
 const picks = opt("picks", "");
 const fetchCode = opt("fetch", "");
+const mock = opt("mock", "");
 const profile = opt("profile", "high");
 const options = Object.fromEntries(
   args.filter((a) => a.startsWith("--opt=")).map((a) => a.slice(6).split("=")),
@@ -47,6 +49,14 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: W, height: H } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
+if (mock)
+  await page.route("https://files.rcsb.org/**", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "chemical/x-cif",
+      body: fs.readFileSync(mock, "utf8"),
+    }),
+  );
 await page.goto(`${base}?renderer=webgl2&profile=${profile}&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(async (options) => {
@@ -93,7 +103,11 @@ if (fetchCode) {
   await page.fill("#toy-input-text", fetchCode);
   await frames(0.4);
   await page.click("#toy-input-go");
-  for (let i = 0; i < 400 && !(await page.locator(".input-shown").textContent()).includes(fetchCode.toUpperCase()); i++) await frame(); // prettier-ignore
+  // A second of the loading message, then wait without filming.
+  const done = async () => (await page.locator(".input-shown").textContent()).includes(fetchCode.toUpperCase()); // prettier-ignore
+  for (let i = 0; i < fps && !(await done()); i++) await frame();
+  for (let i = 0; i < 600 && !(await done()); i++) await page.waitForTimeout(200);
+  if (!(await done())) throw new Error(`${fetchCode} did not load`);
   await frames(1.5);
   await page.evaluate(() => window.__splashery.app.ui.collapseSheet?.());
 }
@@ -106,7 +120,8 @@ const list = await page.evaluate(
     const S = viewerState();
     S.picks = [];
     const m = S.shown.model;
-    const atoms = picks ? S.shown.demo.slice(0, picks === "demo" ? 3 : Number(picks)) : [];
+    const atoms =
+      picks && S.shown.demo ? S.shown.demo.slice(0, picks === "demo" ? 3 : Number(picks)) : [];
     const cam = player.camera;
     if (atoms.length && zoom !== 1) {
       const c = [0, 1, 2].map((k) => atoms.reduce((s, a) => s + [m.x[a], m.y[a], m.z[a]][k], 0) / atoms.length); // prettier-ignore
