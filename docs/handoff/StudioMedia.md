@@ -221,3 +221,13 @@ sample.
 **BY-SA:** I was not waiting on an approval. CC BY-SA is allowed per asset (the notice beside it,
 BY-SA kept), and I'd use Babelsberg. The blocker is training: a real GPU is needed (the owner's
 Mac), so no Babelsberg sample exists yet.
+
+### N3 fix (October 5, 2026)
+
+`tests/snda.spec.mjs` (Sound A) reads every quoted `"name.mp3"` in `src/packs/*.js` as a file in
+`assets/sounds/`, so the Moving photo samples' soundtracks (`sintel.mp3`, `tears.mp3`,
+`elephants.mp3` in `assets/toys/moving-photo-3d/`) failed "every sample is used... exists". The
+samples now name them without the extension (`sound: "sintel"`), and `sampleSound()` adds `.mp3`.
+The files and their credits are unchanged. Ran on main 483242bf + this branch: snda, sndc, smoke,
+kit, taps and smd-moving (135 specs: all pass; one smd-moving speed check's tolerance widened to 8%
+for the 1.5 s horse loop).

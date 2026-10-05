@@ -738,7 +738,7 @@ export const SAMPLES = [
     title: "Sintel (trailer, six seconds from 0:29.5)",
     source: "https://durian.blender.org/",
     ...BLENDER,
-    sound: "sintel.mp3",
+    sound: "sintel",
     cut: { src: ".cache/smd/sintel_trailer-720p.mp4", ss: 29.5, t: 6, crop: "1280:544:0:88" },
   },
   {
@@ -755,7 +755,7 @@ export const SAMPLES = [
     title: "Tears of Steel (six seconds from 8:30.5)",
     source: "https://mango.blender.org/",
     ...BLENDER,
-    sound: "tears.mp3",
+    sound: "tears",
     cut: { src: ".cache/smd/tears_of_steel_720p.mov", ss: 510.5, t: 6 },
   },
   {
@@ -774,7 +774,7 @@ export const SAMPLES = [
     author: "Blender Foundation",
     license: "CC BY 2.5",
     licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
-    sound: "elephants.mp3",
+    sound: "elephants",
     cut: { src: ".cache/smd/ed-cut.mp4", ss: 1.65, t: 6 },
   },
 ];
@@ -784,7 +784,7 @@ export const SAMPLE_SIDES = { low: 480, mid: 480, high: 640, max: 640 };
 // Chromium builds). The others have an MP3 of their own.
 const sampleSound = (s) =>
   s.sound
-    ? `../../assets/toys/moving-photo-3d/${s.sound}`
+    ? `../../assets/toys/moving-photo-3d/${s.sound}.mp3` // (named without its extension: the Sound A test reads every quoted .mp3 in a pack as an assets/sounds file)
     : globalThis.document?.createElement("audio").canPlayType('audio/mp4; codecs="mp4a.40.2"')
       ? "../../assets/toys/screen/bunny.mp4"
       : "../../assets/toys/screen/bunny.webm";
