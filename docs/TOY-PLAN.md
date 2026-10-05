@@ -18,8 +18,51 @@ Proposals below are suggestions; the owner may change them.
 
 ## By phase
 
-- **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant, Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car, Tractor, Statue of Liberty, Your book, Photo album.
-  Effects to make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth, The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real star systems, Real galaxies, Saturn V, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
+- **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant,
+  Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
+  Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball,
+  Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car,
+  Tractor, Statue of Liberty, Your book, Photo album. Effects to make clearer or more dramatic,
+  still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon
+  knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry,
+  Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden
+  elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot
+  cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball,
+  Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
+  ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
+  Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
+  puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar system, Mercury, Venus,
+  Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet,
+  Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon,
+  The real Mars, The real Earth, The real Mercury, The real Venus, Real moons, Pluto, Ceres and
+  Vesta, Stars near the Sun, Real star systems, Real galaxies, Saturn V, Virus, Bacteriophage,
+  Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia,
+  Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital,
+  Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode,
+  Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
+  tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
+  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
+  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
+  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
+  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
+  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
+  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
+  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
+  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
+  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
+  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
+  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
+  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
+  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
+  Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D,
+  Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid
+  lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -27,7 +70,8 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, Video to 3D
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code,
+  Video to 3D
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -35,429 +79,586 @@ Proposals below are suggestions; the owner may change them.
 - **Cactus** (`cactus`). Now: tap: Bloom (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
   - Effect: Tiny flowers bloom on the spines, then close.
-  - Improved: E1: nine magenta flowers (a kit-built add-on) open in a ring round the crown, one after another, then close (3.4 s). Plucks rise with them.
+  - Improved: E1: nine magenta flowers (a kit-built add-on) open in a ring round the crown, one
+    after another, then close (3.4 s). Plucks rise with them.
   - Sound: Soft pluck with a dry rattle.
 - **Strawberry** (`strawberry`). Now: tap: Pop seeds (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
   - Effect: Seeds pop out and sparkle, then settle back; the berry blushes redder.
-  - Improved: E1: the seeds (picked by colour) pop out in a staggered wave and glow, the red flesh blushes deeper, then all settles (2.2 s).
+  - Improved: E1: the seeds (picked by colour) pop out in a staggered wave and glow, the red flesh
+    blushes deeper, then all settles (2.2 s).
   - Sound: Juicy squish.
 - **Heart cookie** (`cookie`). Now: tap: Heartbeat (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
   - Effect: The jam heart glows and throbs twice like a heartbeat.
-  - Improved: E1: the jam heart (picked by colour) glows red and swells twice like a heartbeat, timed with the two thumps (1.6 s).
+  - Improved: E1: the jam heart (picked by colour) glows red and swells twice like a heartbeat,
+    timed with the two thumps (1.6 s).
   - Sound: Short crunch and a soft double thump.
 - **Honeybee** (`bee`). Now: tap: Fly (rig). Plan: keep.
   - Owner: Now the right way up. Maybe flap its wings.
   - Effect: Wings buzz in a blur and the bee lifts off a little, then lands.
-  - Improved: E1: the wings are rig parts that buzz in a blur while the bee lifts off, tilts and lands (2.2 s).
+  - Improved: E1: the wings are rig parts that buzz in a blur while the bee lifts off, tilts and
+    lands (2.2 s).
   - Sound: Honeybee buzz (higher than the bumblebee).
 - **Cluster fly** (`cluster-fly`). Now: tap: Groom (rig). Plan: keep.
   - Owner: Right way up. Do what a fly does: rub its hands together, clean its face, flap its wings.
   - Effect: Front legs rub together, then the wings flick.
-  - Improved: E1b: grooming like a real fly: the front legs (cut as solid pieces, bending at the knee) rub together, then reach up and wipe the face while the head dips, then a little shake (3 s).
+  - Improved: E1b: grooming like a real fly: the front legs (cut as solid pieces, bending at the
+    knee) rub together, then reach up and wipe the face while the head dips, then a little shake (3
+    s).
   - Sound: Short thin fly buzz.
 - **May beetle** (`may-beetle`). Now: tap: Open wings (rig). Plan: keep.
   - Owner: Detail is great but underwhelming; it needs an effect.
   - Effect: Wing cases lift and the fanned antennae spread, then fold.
-  - Improved: E1: the wing cases lift and part with a shiver and the fanned antennae spread, then fold (2.6 s).
+  - Improved: E1: the wing cases lift and part with a shiver and the fanned antennae spread, then
+    fold (2.6 s).
   - Sound: Low clicking whirr.
 - **Millipede** (`millipede`). Now: tap: Crawl (rig). Plan: keep.
   - Owner: Great chance for all the legs to move and the body to stretch out.
   - Effect: A leg wave ripples down the body while it stretches and curls.
-  - Improved: E1: a leg wave (the legs, picked by colour) ripples down the body while it stretches straight, then curls tighter and relaxes (2.8 s).
+  - Improved: E1: a leg wave (the legs, picked by colour) ripples down the body while it stretches
+    straight, then curls tighter and relaxes (2.8 s).
   - Sound: Soft many-footed patter.
 - **Carder bumblebee** (`bumblebee`). Now: tap: Hover (rig). Plan: keep.
   - Owner: Needs an effect.
   - Effect: Fuzzy body shivers and the wings hum; a slow, clumsy hover.
-  - Improved: E1: the fuzzy body shivers, the wings hum and it hovers up with a slow, clumsy wobble, then settles (3 s).
+  - Improved: E1: the fuzzy body shivers, the wings hum and it hovers up with a slow, clumsy wobble,
+    then settles (3 s).
   - Sound: Deep, lazy bumblebee drone.
 - **Raspberry** (`raspberry`). Now: tap: Drop drupelets (rig). Plan: keep.
   - Owner: Looks really cool; very good resolution.
   - Effect: The drupelets bounce one by one in a ripple.
-  - Improved: E1b: drupelets break off as solid pieces one after another, tumble down to the table and hop back into place (3.2 s).
-  - Sound: A real juicy squish as the drupelets break off, then a soft tap for each one landing on the table, and a small squish as they come back (no bubbles).
+  - Improved: E1b: drupelets break off as solid pieces one after another, tumble down to the table
+    and hop back into place (3.2 s).
+  - Sound: A real juicy squish as the drupelets break off, then a soft tap for each one landing on
+    the table, and a small squish as they come back (no bubbles).
 - **Blackberry** (`blackberry`). Now: tap: Burst (rig). Plan: keep.
   - Owner: Same as the raspberry: looks great.
   - Effect: Drupelets gleam in a wave, like light running over it.
-  - Improved: E1b: half the glossy drupelets burst off as solid pieces, bounce on the table and glint, then spring back (2.8 s).
-  - Sound: A darker, deeper real squish, the drupelets tapping down on the table as they bounce, and a soft squish as they spring back (no bubbles).
+  - Improved: E1b: half the glossy drupelets burst off as solid pieces, bounce on the table and
+    glint, then spring back (2.8 s).
+  - Sound: A darker, deeper real squish, the drupelets tapping down on the table as they bounce, and
+    a soft squish as they spring back (no bubbles).
 - **Blueberry** (`blueberry`). Now: tap: Peel (rig). Plan: keep.
   - Owner: Looks good.
   - Effect: The bloom (dusty coat) wipes off in a swirl, showing deep blue, then returns.
-  - Improved: E1b: now like the grape (the owner's favourite): the dark skin peels back towards you in five strips, showing the pale green flesh, then closes (3.2 s).
+  - Improved: E1b: now like the grape (the owner's favourite): the dark skin peels back towards you
+    in five strips, showing the pale green flesh, then closes (3.2 s).
   - Sound: Small round pop.
 - **Grape** (`grape`). Now: tap: Peel (rig). Plan: keep.
   - Owner: Looks good. Maybe the skin comes off.
   - Effect: The skin peels back in strips to show the pale flesh, then closes.
-  - Improved: E1: four strips of skin peel back from the stem end, the flesh under them turns pale, then the skin closes (3.2 s).
+  - Improved: E1: four strips of skin peel back from the stem end, the flesh under them turns pale,
+    then the skin closes (3.2 s).
   - Sound: Slippery peel.
 - **Cinnamon star cookie** (`star-cookie`). Now: tap: Crumble (rig). Plan: keep.
   - Owner: Looks OK. Maybe it crumbles.
   - Fixed: C1: turned round so the glazed top faces the camera.
   - Effect: Crumbles into pieces and crumbs, then reassembles.
-  - Improved: E1: it crumbles into pieces and crumbs that fall away, then puts itself back together (2.8 s).
-  - Sound: A real crisp snap and crumble as it breaks, and a small soft crumble as it puts itself back together.
+  - Improved: E1: it crumbles into pieces and crumbs that fall away, then puts itself back together
+    (2.8 s).
+  - Sound: A real crisp snap and crumble as it breaks, and a small soft crumble as it puts itself
+    back together.
 - **Tomatoes** (`tomatoes`). Now: tap: Roll (rig). Plan: keep.
   - Owner: Fantastic, extremely realistic. Maybe they move around.
   - Effect: The tomatoes roll and jostle each other, then settle.
-  - Improved: E1c: the plate gives a little shake and a wave of small hops runs round it: four groups of tomatoes land on the four thuds, rocking outward and settling with a wobble. The big ones rock instead of hopping, so no unscanned underside shows (2.6 s). Hands engine B (Hands-on): Pick up each of the ten tomatoes on its own (a rigid rig part) and set it down on the plate or on another.
+  - Improved: E1c: the plate gives a little shake and a wave of small hops runs round it: four
+    groups of tomatoes land on the four thuds, rocking outward and settling with a wobble. The big
+    ones rock instead of hopping, so no unscanned underside shows (2.6 s). Hands engine B
+    (Hands-on): Pick up each of the ten tomatoes on its own (a rigid rig part) and set it down on
+    the plate or on another.
   - Sound: Soft thuds rolling on a table.
 - **Mandeltorus** (`mandeltorus`). Now: tap: Counter-spin (rig). Plan: keep.
   - Owner: Some parts should rotate clockwise and others counterclockwise.
   - Effect: Rings of the fractal counter-rotate in bands, then lock back.
   - Improved: E1: alternate rings turn opposite ways with a cyan glow, then lock back (3 s).
-  - Sound: Like the Mandelbulb: a low drone with a ratchet as the rings start to turn, and again as they lock back.
+  - Sound: Like the Mandelbulb: a low drone with a ratchet as the rings start to turn, and again as
+    they lock back.
 - **Basket** (`basket`). Now: tap: Shake (rig). Plan: keep.
   - Owner: A basket of seashells. Neat. No effect.
   - Effect: Shells hop inside the basket one after another.
-  - Improved: E1b: seen from above so the shells show; the basket shakes and ten of the biggest shells (urchins, sand dollars, starfish, a scallop) bounce up in turn, spinning, and drop back. The blurry fringe under the basket is hidden (2.6 s).
+  - Improved: E1b: seen from above so the shells show; the basket shakes and ten of the biggest
+    shells (urchins, sand dollars, starfish, a scallop) bounce up in turn, spinning, and drop back.
+    The blurry fringe under the basket is hidden (2.6 s).
   - Sound: Clattering shells.
 - **Heart donut** (`heart-donut`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Sushi boat** (`sushi-boat`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Seeded bread loaf** (`seeded-loaf`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Cowboy steak** (`steak`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Stollen** (`stollen`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Orange (photo)** (`orange-photo`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Physalis** (`physalis`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Crystal** (`crystal-gem`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Alum crystal** (`alum-crystal`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Puffin** (`puffin`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Toy T. rex** (`toy-trex`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Monkey doll** (`monkey-doll`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Souvenir elephant** (`elephant-souvenir`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Souvenir turtle** (`turtle-souvenir`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Cave lioness** (`cave-lioness`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Dog plush** (`dog-plush`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **BMX bicycle** (`bmx-bike`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Murex shell** (`murex-shell`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Sunflower (photo)** (`sunflower-photo`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **White roses** (`white-roses`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Bonsai tree (photo)** (`bonsai-photo`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Mushroom (photo)** (`mushroom-photo`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Cactus (photo 2)** (`cactus-real`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Crochet Earth** (`crochet-earth`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Desk globe** (`desk-globe`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Cherry blossom (photo)** (`cherry-blossom-photo`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Golden maple** (`maple-tree`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Peonies in a vase** (`peony`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Money tree** (`money-tree`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Knight on a horse** (`knight-horse`). Now: hops. Plan: keep.
-  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
+    good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
 - **Real rubber duck** (`rubber-duck-real`). Now: tap: Squeeze (rig). Plan: keep.
   - Owner: Squeeze and quack. It must differ from the other rubber duck.
   - Effect: Squeezes flat and springs back.
-  - Improved: D: a whole-toy rig. A tap squeezes it flat; it springs back taller, wobbles and settles (1.4 s), with a high rubber squeak (the other duck quacks).
+  - Improved: D: a whole-toy rig. A tap squeezes it flat; it springs back taller, wobbles and
+    settles (1.4 s), with a high rubber squeak (the other duck quacks).
   - Sound: Squeaky squeeze (high whistle) — the other duck quacks.
 - **Garden gnome** (`garden-gnome`). Now: tap: Light lantern (rig). Plan: keep.
   - Owner: Hilarious, looks great. Maybe the lantern lights up, or it moves around.
   - Effect: The lantern lights with a warm glow and the gnome gives a little hop.
-  - Improved: E1: the gnome hops and its lantern lights with a warm glow and halo (a flame add-on), then goes out (3.2 s).
-  - Sound: A soft stone thud as the gnome lands from its hop, and a match-like flare and soft flame as its lantern lights (no chirp, no click).
+  - Improved: E1: the gnome hops and its lantern lights with a warm glow and halo (a flame add-on),
+    then goes out (3.2 s).
+  - Sound: A soft stone thud as the gnome lands from its hop, and a match-like flare and soft flame
+    as its lantern lights (no chirp, no click).
 - **Wooden elephant** (`wooden-elephant`). Now: tap: Trumpet (rig). Plan: keep.
   - Owner: Underwhelming; the style seems off.
-  - Fixed: C1: soft studio light and the model's normal map baked into the colours, and textures filtered to each splat's size, so the carving reads. The model stays (it is the best CC0 elephant found).
+  - Fixed: C1: soft studio light and the model's normal map baked into the colours, and textures
+    filtered to each splat's size, so the carving reads. The model stays (it is the best CC0
+    elephant found).
   - Effect: Trunk lifts and it rocks on its wooden feet.
-  - Improved: E1c: the scan's trunk is fused to the forehead, so it could only tear; it is replaced by a kit-built trunk traced from the scan (five segments on ball joints, in the carving's colours). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while the elephant rocks on its feet (2.6 s). A small kit patch covers the forehead where the tip rested.
+  - Improved: E1c: the scan's trunk is fused to the forehead, so it could only tear; it is replaced
+    by a kit-built trunk traced from the scan (five segments on ball joints, in the carving's
+    colours). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while
+    the elephant rocks on its feet (2.6 s). A small kit patch covers the forehead where the tip
+    rested.
   - Sound: A light wooden knock, then a real elephant trumpeting as the trunk lifts.
 - **Marble bust** (`marble-bust`). Now: tap: Speak (rig). Plan: keep.
   - Owner: Looks good. Maybe the face moves and says something.
   - Effect: The head turns to look at you; a speech bubble says a short Latin line.
-  - Improved: E1b: the head turns on its neck (a straight cut, no bending), the jaw drops once per syllable of "SALVE, AMICE!" (a shadowed gap opens between the lips) and the speech bubble appears (3.4 s).
+  - Improved: E1b: the head turns on its neck (a straight cut, no bending), the jaw drops once per
+    syllable of "SALVE, AMICE!" (a shadowed gap opens between the lips) and the speech bubble
+    appears (3.4 s).
   - Sound: Stone grind and a low murmur.
 - **Ukulele** (`ukulele`). Now: tap: Strum (rig). Plan: keep.
   - Owner: Instruments should be played so music comes out.
   - Effect: Strings vibrate and it plays a short strum pattern.
-  - Improved: E1b: played like a real ukulele: a pick sweeps across the strings on each of four strums and the strings shake in a standing wave between the nut and the bridge (2.2 s).
+  - Improved: E1b: played like a real ukulele: a pick sweeps across the strings on each of four
+    strums and the strings shake in a standing wave between the nut and the bridge (2.2 s).
   - Sound: Plucked ukulele chord (synth, bright, nylon).
 - **Real alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
   - Owner: Hands should move. On tap it should jump up and down and ring like an alarm clock.
   - Effect: Hands tick all the time; tap rattles it off the table while it rings.
-  - Improved: E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s).
+  - Improved: E1: the red second hand ticks all the time. A tap rings the twin bells and the clock
+    rattles across the table (2.4 s).
   - Sound: A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).
 - **Vintage camera** (`vintage-camera`). Now: tap: Take a photo (rig). Plan: keep.
   - Owner: Could snap a photo with the flash going off.
-  - Fixed: C1: the grain was one-texel aliasing and unlit metal. Textures are now filtered to each splat's size, soft light with gloss is baked in, the lens is dark glass (it was a white disc), and the printed maker's names are painted out.
+  - Fixed: C1: the grain was one-texel aliasing and unlit metal. Textures are now filtered to each
+    splat's size, soft light with gloss is baked in, the lens is dark glass (it was a white disc),
+    and the printed maker's names are painted out.
   - Effect: Flash burst from the camera and the view briefly whites out.
-  - Improved: E1: a flash bursts from the camera (a splat add-on) and the whole toy whites out for a moment, with a shutter click and wind-on (1.6 s).
+  - Improved: E1: a flash bursts from the camera (a splat add-on) and the whole toy whites out for a
+    moment, with a shutter click and wind-on (1.6 s).
   - Sound: A real vintage press camera: a soft shutter and the whoomph of the flash powder.
 - **Boombox** (`boombox`). Now: tap: Play (rig). Plan: keep.
   - Owner: Also a bit grainy.
-  - Fixed: C1: filtered textures and baked light; the speakers read as grilles, not static. The small maker badge is painted out.
+  - Fixed: C1: filtered textures and baked light; the speakers read as grilles, not static. The
+    small maker badge is painted out.
   - Effect: Speakers pulse to a beat and the tape reels turn.
-  - Improved: E1: the speakers pump and glow blue on the kick drum and the tape reels turn, two bars (2.6 s).
+  - Improved: E1: the speakers pump and glow blue on the kick drum and the tape reels turn, two bars
+    (2.6 s).
   - Sound: A short synth beat loop.
 - **Real croissant** (`croissant-real`). Now: tap: Tear (rig). Plan: keep.
   - Owner: Must do something different from the other croissant.
   - Effect: Tears in half and steam puffs out.
-  - Improved: E1: it tears in half, showing its soft layered inside (an add-on), and a puff of steam rises, then it closes (3 s).
+  - Improved: E1: it tears in half, showing its soft layered inside (an add-on), and a puff of steam
+    rises, then it closes (3 s).
   - Sound: Flaky tear.
 - **Carrot cake** (`carrot-cake`). Now: tap: Cut a slice (rig). Plan: keep.
   - Owner: Interesting but underwhelming.
   - Effect: A slice cuts out and lifts away, showing layers.
-  - Improved: E1: a slice facing you lifts out of the ring, showing crumb and frosting layers on its cut faces and in the gap (3.2 s).
+  - Improved: E1: a slice facing you lifts out of the ring, showing crumb and frosting layers on its
+    cut faces and in the gap (3.2 s).
   - Sound: A softer knife slide, a moist crumb as the slice lifts out, and the same soft plate thud.
 - **Pomegranate** (`pomegranate`). Now: tap: Split open (rig). Plan: keep.
   - Owner: Underwhelming.
   - Effect: Splits open to show glowing red seeds that spill a little.
-  - Improved: E1: it splits open like a book on a hinge at the bottom, showing faces packed with glowing red seeds; a few seeds tumble out (3.4 s).
+  - Improved: E1: it splits open like a book on a hinge at the bottom, showing faces packed with
+    glowing red seeds; a few seeds tumble out (3.4 s).
   - Sound: Crack and a scatter of beads.
 - **Lantern** (`lantern`). Now: tap: Light (rig). Plan: keep.
   - Owner: A flame should light up inside, like the other fire toys.
   - Effect: A flame lights inside with a warm glow and flicker.
-  - Improved: E1: a tap lights a flickering flame inside (an add-on) and warms the glass; tap again to blow it out.
+  - Improved: E1: a tap lights a flickering flame inside (an add-on) and warms the glass; tap again
+    to blow it out.
   - Sound: A real match strike and a soft flame catching when it lights; a real puff blowing it out.
 - **Cat statue** (`cat-statue`). Now: tap: Look around (rig). Plan: keep.
   - Owner: Like the bust: the cat moves a bit.
   - Effect: The head turns and the tail swishes once.
-  - Improved: E1c: the head is cut on the neck's own slanted plane, measured from the scan, under a red collar that follows the neck all round (no longer sunk into the stone). A tap turns the head right round to look at you, tilts it one way as it mews and the other, and turns it back (2.6 s). The tail stays still: it lies on unscanned ground.
+  - Improved: E1c: the head is cut on the neck's own slanted plane, measured from the scan, under a
+    red collar that follows the neck all round (no longer sunk into the stone). A tap turns the head
+    right round to look at you, tilts it one way as it mews and the other, and turns it back (2.6
+    s). The tail stays still: it lies on unscanned ground.
   - Sound: A soft stone scrape as the head turns, then a real cat's meow as it tilts.
 - **Horse statue** (`horse-statue`). Now: tap: Rear up (rig). Plan: keep.
   - Owner: Work like the other statues.
-  - Fixed: C1: baked soft light (with the model's normal and occlusion maps) gives it shading, so the marble no longer reads as flat white.
+  - Fixed: C1: baked soft light (with the model's normal and occlusion maps) gives it shading, so
+    the marble no longer reads as flat white.
   - Effect: Rears up on its hind legs, then settles.
-  - Improved: E1c: no more foreleg cuts (the hooves looked broken off). The whole horse above the base rears as one solid piece about its hind hooves, prances at the top and lands with a small bounce (2.6 s).
+  - Improved: E1c: no more foreleg cuts (the hooves looked broken off). The whole horse above the
+    base rears as one solid piece about its hind hooves, prances at the top and lands with a small
+    bounce (2.6 s).
   - Sound: A soft stone scrape, a real horse's whinny as it rears, and a stone thud as it lands.
 - **Real pencil** (`pencil-real`). Now: tap: Spin (rig). Plan: keep.
   - Owner: Owner's list of real-life (photographic) splats (lane G brief): a pencil, no brands.
   - Effect: Flicked, it spins flat on the desk and slows to a stop.
-  - Improved: G: made from one CC BY photo with the TRELLIS image-to-3D model. A tap flicks the pencil: it spins flat on the desk about its middle, two whole turns, slowing evenly to a stop where it began (2.4 s). It stays photo side up; a roll showed the dark underside the model guessed. G review: painted as a classic yellow pencil (yellow body, silver ferrule, pink eraser, an HB mark) over the scan's own shading. G looks: the Toy tab's Look picks yellow, red, blue, green, black, plain wood or the original bare scan.
+  - Improved: G: made from one CC BY photo with the TRELLIS image-to-3D model. A tap flicks the
+    pencil: it spins flat on the desk about its middle, two whole turns, slowing evenly to a stop
+    where it began (2.4 s). It stays photo side up; a roll showed the dark underside the model
+    guessed. G review: painted as a classic yellow pencil (yellow body, silver ferrule, pink eraser,
+    an HB mark) over the scan's own shading. G looks: the Toy tab's Look picks yellow, red, blue,
+    green, black, plain wood or the original bare scan.
   - Sound: A wooden flick, then a soft scrape that slows.
 - **Real tin can** (`tin-can-real`). Now: tap: Knock (rig). Plan: keep.
   - Owner: Owner's list of real-life (photographic) splats (lane G brief): a can of soup, no brands.
   - Effect: Knocked onto its rim, spins round on it faster and faster, and drops flat.
-  - Improved: G: made from one CC0 photo of a plain unlabelled can with the TRELLIS image-to-3D model. A tap tips it onto its bottom rim; it spins round on the rim faster as it leans less, like a settling coin, and drops flat with a clank (2.6 s). G review: an original vintage-style peaches label (CC0) wraps its side; the rims and lid stay metal. G looks: the Toy tab's Look picks the peaches label, a tomatoes label, plain metal or the original bare scan.
-  - Sound: One real recording of an empty can rolling on a hard floor, slowing and settling; no drum hit, no coin ring (Sound C, October 2, 2026).
+  - Improved: G: made from one CC0 photo of a plain unlabelled can with the TRELLIS image-to-3D
+    model. A tap tips it onto its bottom rim; it spins round on the rim faster as it leans less,
+    like a settling coin, and drops flat with a clank (2.6 s). G review: an original vintage-style
+    peaches label (CC0) wraps its side; the rims and lid stay metal. G looks: the Toy tab's Look
+    picks the peaches label, a tomatoes label, plain metal or the original bare scan.
+  - Sound: One real recording of an empty can rolling on a hard floor, slowing and settling; no drum
+    hit, no coin ring (Sound C, October 2, 2026).
 
 ## Shapes (3)
 
 - **Torus** (`torus`). Now: tap: Spin it on its edge. Plan: keep.
-  - Owner: Owner's notes of September 28, 2026 (lane Shelves): Shapes keeps a plain torus people can dress as a donut, a bagel or a swim ring.
+  - Owner: Owner's notes of September 28, 2026 (lane Shelves): Shapes keeps a plain torus people can
+    dress as a donut, a bagel or a swim ring.
   - Effect: Pops onto its edge, wobbles around like a coin spun on a table, and settles flat.
-  - Improved: Shelves: a sharp, even kit torus with a Dress it as choice (plain, donut, bagel, swim ring). A tap pops it up onto its edge; it wobbles around like a settling coin, leaning lower and circling faster, and drops flat with a small bounce (3.6 s).
+  - Improved: Shelves: a sharp, even kit torus with a Dress it as choice (plain, donut, bagel, swim
+    ring). A tap pops it up onto its edge; it wobbles around like a settling coin, leaning lower and
+    circling faster, and drops flat with a small bounce (3.6 s).
   - Sound: A soft pop, a roll that circles faster, a settle.
 - **Jelly blob** (`blob`). Now: tap: Split (rig). Plan: keep.
   - Owner: Interesting; no idea for an effect. The original shapes are really good-looking.
   - Effect: Splits into three small blobs that merge back.
-  - Improved: E1: splits into three smaller blobs that wobble apart, then merge back with a jelly bounce (2.8 s). Hands engine C (Hands-on): drag it to stretch it toward the finger; let go and it wobbles back.
+  - Improved: E1: splits into three smaller blobs that wobble apart, then merge back with a jelly
+    bounce (2.8 s). Hands engine C (Hands-on): drag it to stretch it toward the finger; let go and
+    it wobbles back.
   - Sound: Gloopy wobble.
 - **Neon knot** (`knot`). Now: tap: Contort (rig). Plan: keep.
   - Effect: The neon flows along the knot and it ties tighter, then relaxes.
-  - Improved: E1b: the knot contorts: waves of swelling loops run round the tube, lifting and twisting it, then it settles back into its trefoil (3 s).
-  - Sound: A real jelly wobbling, then a softer wobble as it settles; no buzz, hum or horn (Sound C, October 2, 2026).
+  - Improved: E1b: the knot contorts: waves of swelling loops run round the tube, lifting and
+    twisting it, then it settles back into its trefoil (3 s).
+  - Sound: A real jelly wobbling, then a softer wobble as it settles; no buzz, hum or horn (Sound C,
+    October 2, 2026).
 
 ## Balls (25)
 
 - **Basketball** (`basketball`). Now: tap: Dribble and spin. Plan: keep.
   - Owner: Balls look good. Bouncing is fine but each should bounce differently.
-  - Fixed: C1: pebbled rubber (embossed bumps lit from one side), clean black channels in small splats, even splat placement.
+  - Fixed: C1: pebbled rubber (embossed bumps lit from one side), clean black channels in small
+    splats, even splat placement.
   - Effect: Dribble: fast low bounces, then a spin on a fingertip.
-  - Improved: E6a: a dribble: three fast, low bounces, each pushed back down by an unseen hand; then a toss onto the fingertip of a jointed robot hand that comes up from below, its finger straightening to catch it; it spins there with a slight wobble; it drops off as the hand drops away and bounces lower each time, still spinning down (4.8 s). Hands engine A: in Hands-on it has a basketball's own bounce (about 0.8 of its speed kept) and grip; hold it and flick up and it hops onto your fingertip and spins there with a slight wobble, and keeps spinning when you let go.
+  - Improved: E6a: a dribble: three fast, low bounces, each pushed back down by an unseen hand; then
+    a toss onto the fingertip of a jointed robot hand that comes up from below, its finger
+    straightening to catch it; it spins there with a slight wobble; it drops off as the hand drops
+    away and bounces lower each time, still spinning down (4.8 s). Hands engine A: in Hands-on it
+    has a basketball's own bounce (about 0.8 of its speed kept) and grip; hold it and flick up and
+    it hops onto your fingertip and spins there with a slight wobble, and keeps spinning when you
+    let go.
   - Sound: Hollow basketball boing.
 - **Soccer ball** (`soccer-ball`). Now: tap: Keepy-uppy. Plan: keep.
-  - Fixed: C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side showing through gaps) is gone with even splat placement.
+  - Fixed: C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side
+    showing through gaps) is gone with even splat placement.
   - Effect: Keepy-uppy: three small kicks with spin.
-  - Improved: E6a: keepy-uppy: three small kicks from an unseen foot, each with its own spin, the last one higher; then it drops and bounces lower and lower (it keeps about 0.78 of its speed) and settles (3.6 s).
+  - Improved: E6a: keepy-uppy: three small kicks from an unseen foot, each with its own spin, the
+    last one higher; then it drops and bounces lower and lower (it keeps about 0.78 of its speed)
+    and settles (3.6 s).
   - Sound: Firm thump.
 - **American football** (`american-football`). Now: tap: Throw a spiral. Plan: keep.
-  - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too.
+  - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
+    ball should be fuzzy and the American football should look like leathered pigskin. Look at the
+    other balls too.
   - Fixed: C1: pebbled pigskin with a soft sheen, darker seams, crisp white laces.
   - Effect: A tight spiral spin in place.
-  - Improved: E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the nose tipping over at the top, and lands with a wobble (2.4 s). Math: the spiral is six whole turns, so it lands laces up with no snap back, and the ball is built twice, half a turn apart, so its laces never show through while it is upside down.
+  - Improved: E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the
+    nose tipping over at the top, and lands with a wobble (2.4 s). Math: the spiral is six whole
+    turns, so it lands laces up with no snap back, and the ball is built twice, half a turn apart,
+    so its laces never show through while it is upside down.
   - Sound: Leathery whoosh.
 - **Tennis ball** (`tennis-ball`). Now: tap: Bounce it hard. Plan: keep.
-  - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too.
-  - Fixed: C1: soft felt in larger round splats with a fuzz of fine hairs standing off it (which also softens the edge), and a clean white seam.
+  - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
+    ball should be fuzzy and the American football should look like leathered pigskin. Look at the
+    other balls too.
+  - Fixed: C1: soft felt in larger round splats with a fuzz of fine hairs standing off it (which
+    also softens the edge), and a clean white seam.
   - Effect: Fast high bounce with the fuzz fluffing out.
-  - Improved: E6a: slammed onto the floor, it squashes hard and shoots up high with topspin, the fuzz fluffing out at each hit; each bounce is lower (0.75 of its speed) (1.7 s).
-  - Sound: A real tennis ball slammed down, then a real tennis-ball bounce on each bounce, softer each time.
+  - Improved: E6a: slammed onto the floor, it squashes hard and shoots up high with topspin, the
+    fuzz fluffing out at each hit; each bounce is lower (0.75 of its speed) (1.7 s).
+  - Sound: A real tennis ball slammed down, then a real tennis-ball bounce on each bounce, softer
+    each time.
 - **Baseball** (`baseball`). Now: tap: Pitch a curveball. Plan: keep.
   - Fixed: C1: smooth white leather with a soft sheen and crisp raised red stitches.
   - Effect: Curveball: it spins hard and swerves.
-  - Improved: E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a dead little bounce. Its highlight stays put while it spins (2.3 s).
+  - Improved: E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the
+    side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a
+    dead little bounce. Its highlight stays put while it spins (2.3 s).
   - Sound: The same pitch whoosh, then the crack of a real wooden bat.
 - **Softball** (`softball`). Now: tap: Pitch underhand. Plan: keep.
   - Fixed: C1: smooth yellow leather with a soft sheen and crisp raised red stitches.
   - Effect: Underhand arc and a softer thud.
-  - Improved: E6a: an underhand pitch: a swing back and through, then a high, slow arc away with a little backspin; it lands with a soft thud and hardly bounces; a softer toss brings it back (3.0 s).
-  - Sound: The same whoosh, then the real dull thump of a heavy ball landing (away and back home). Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a hit; a bat crack would need a bat hit in the motion.
+  - Improved: E6a: an underhand pitch: a swing back and through, then a high, slow arc away with a
+    little backspin; it lands with a soft thud and hardly bounces; a softer toss brings it back (3.0
+    s).
+  - Sound: The same whoosh, then the real dull thump of a heavy ball landing (away and back home).
+    Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a
+    hit; a bat crack would need a bat hit in the motion.
 - **Beach ball** (`beach-ball`). Now: tap: Toss it up. Plan: keep.
   - Effect: Floats up slowly, drifts and bobs down.
-  - Improved: E6a: punched up, the air slows it at once; it floats down slowly, drifting and turning lazily, lands soft with a wobble and bobs to a stop (2.9 s). Hands engine A: in Hands-on it is light and big (a 60 cm inflatable of 60 g): the air holds it up, it drifts sideways and turns lazily as it falls, and lands soft.
-  - Sound: A real plastic beach-ball bounce each time it lands (no boing), and a light slap as it's punched up.
+  - Improved: E6a: punched up, the air slows it at once; it floats down slowly, drifting and turning
+    lazily, lands soft with a wobble and bobs to a stop (2.9 s). Hands engine A: in Hands-on it is
+    light and big (a 60 cm inflatable of 60 g): the air holds it up, it drifts sideways and turns
+    lazily as it falls, and lands soft.
+  - Sound: A real plastic beach-ball bounce each time it lands (no boing), and a light slap as it's
+    punched up.
 - **Golf ball** (`golf-ball`). Now: tap: Chip it. Plan: keep.
   - Effect: Tiny chip hop and a spin-back.
-  - Improved: E6a: a chip: it pops up with heavy backspin, lands, checks with a tiny hop, and the backspin grips and pulls it back to its spot (1.7 s).
+  - Improved: E6a: a chip: it pops up with heavy backspin, lands, checks with a tiny hop, and the
+    backspin grips and pulls it back to its spot (1.7 s).
   - Sound: Click of a club.
 - **Rugby ball** (`rugby-ball`). Now: tap: Punt. Plan: keep.
   - Fixed: C1: an even pebbled grip; clean seams.
   - Effect: Tumbles end over end with an odd bounce.
-  - Improved: E1b: a punt: it tumbles end over end up and down, lands on a point and takes an awkward bounce before settling (2.6 s).
+  - Improved: E1b: a punt: it tumbles end over end up and down, lands on a point and takes an
+    awkward bounce before settling (2.6 s).
   - Sound: Dull thud.
 - **Volleyball** (`volleyball`). Now: tap: Set and spike. Plan: keep.
   - Fixed: C1: smooth leather panels with a sheen and clean fine seams.
   - Effect: A set then a spike straight down.
-  - Improved: E6a: a soft set straight up with no spin, then a spike drives it down hard with topspin; it slams into the floor, kicks up high and bounces out (2.5 s).
+  - Improved: E6a: a soft set straight up with no spin, then a spike drives it down hard with
+    topspin; it slams into the floor, kicks up high and bounces out (2.5 s).
   - Sound: Slap.
 - **Water polo ball** (`water-polo-ball`). Now: tap: Toss it in. Plan: keep.
   - Effect: Bobs on an invisible water line with ripples.
-  - Improved: E6a: tossed up, it plunges into the water with a splash, pops back up and bobs on the water line, sending out ripples that spread and fade (3.1 s). Hands engine A: in Hands-on it floats on a pool, a third under water; dropped in, it plunges, pops up and bobs two or three times to rest.
+  - Improved: E6a: tossed up, it plunges into the water with a splash, pops back up and bobs on the
+    water line, sending out ripples that spread and fade (3.1 s). Hands engine A: in Hands-on it
+    floats on a pool, a third under water; dropped in, it plunges, pops up and bobs two or three
+    times to rest.
   - Sound: Splash.
 - **Ping-pong ball** (`ping-pong-ball`). Now: tap: Drop it. Plan: keep.
   - Effect: Rapid tiny bounces getting faster.
-  - Improved: E6a: flicked up, it bounces on and on (it keeps nearly 0.9 of its speed), each bounce lower and quicker, till it buzzes to a stop; a tik for every bounce (1.9 s).
+  - Improved: E6a: flicked up, it bounces on and on (it keeps nearly 0.9 of its speed), each bounce
+    lower and quicker, till it buzzes to a stop; a tik for every bounce (1.9 s).
   - Sound: Tik-tik-tik.
 - **Cricket ball** (`cricket-ball`). Now: tap: Seam-up flick. Plan: keep.
   - Fixed: C1: polished red leather with a bright highlight and a raised, lit seam.
   - Effect: Seam-up spin and a skid.
-  - Improved: E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it, then it comes down level and skids on with its backspin till the spin grips and rolls it home. Its shine stays put while it spins (1.9 s).
+  - Improved: E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it,
+    then it comes down level and skids on with its backspin till the spin grips and rolls it home.
+    Its shine stays put while it spins (1.9 s).
   - Sound: Crisp leather knock.
 - **Bowling ball** (`bowling-ball`). Now: tap: Bowl it. Plan: keep.
   - Effect: Heavy roll with a hook.
-  - Improved: E6a: a heavy roll with a hook: it drops onto the lane with a thud, rolls away straight and hooks across, the finger holes turning over; the pins crash far off and it rolls back home (3.8 s).
+  - Improved: E6a: a heavy roll with a hook: it drops onto the lane with a thud, rolls away straight
+    and hooks across, the finger holes turning over; the pins crash far off and it rolls back home
+    (3.8 s).
   - Sound: A real bowling ball rolling down the lane, real pins crashing far off, and the roll back.
 - **Pool ball** (`pool-ball`). Now: tap: Draw shot. Plan: keep.
-  - Fixed: E1b: fully opaque polished resin with a sharp window highlight and a soft room reflection, so the black 8 reads as a solid shiny ball (it looked see-through).
+  - Fixed: E1b: fully opaque polished resin with a sharp window highlight and a soft room
+    reflection, so the black 8 reads as a solid shiny ball (it looked see-through).
   - Effect: Clicks forward and spins with back-spin.
-  - Improved: E6a: a draw shot: struck low, it slides forward spinning backwards, stops, and the backspin pulls it back till it rolls cleanly home. The window highlight and the room's reflection stay put while the number turns (1.8 s).
+  - Improved: E6a: a draw shot: struck low, it slides forward spinning backwards, stops, and the
+    backspin pulls it back till it rolls cleanly home. The window highlight and the room's
+    reflection stay put while the number turns (1.8 s).
   - Sound: The real solid tock of a cue tip striking the ball.
 - **Pickleball** (`pickleball`). Now: tap: Pop it up. Plan: keep.
   - Effect: Light pop-up with air whistling through the holes.
-  - Improved: E6a: popped up twice off an unseen paddle, the light holed ball slows fast in the air and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead bounce (1.9 s).
+  - Improved: E6a: popped up twice off an unseen paddle, the light holed ball slows fast in the air
+    and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead
+    bounce (1.9 s).
   - Sound: Its hollow plastic pock, without the whistle.
 - **Dodgeball** (`dodgeball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Squashes hard on a bounce.
-  - Improved: E6a: lifted and slammed down, the soft rubber squashes flat and wobbles, bounces up lively and squashes again at each landing (2.2 s).
+  - Improved: E6a: lifted and slammed down, the soft rubber squashes flat and wobbles, bounces up
+    lively and squashes again at each landing (2.2 s).
   - Sound: Rubbery bwong.
 - **Medicine ball** (`medicine-ball`). Now: tap: Heave and drop. Plan: keep.
   - Fixed: C1: matte rubber grip (low bumps, no shine), and a faint rim of light on dark pages.
   - Effect: Barely lifts and lands with a heavy squash.
-  - Improved: E6a: heaved up only a little, slowly, it drops with a heavy thud and a big, slow squash, no bounce at all, and a puff of dust spreads out along the floor (1.6 s).
+  - Improved: E6a: heaved up only a little, slowly, it drops with a heavy thud and a big, slow
+    squash, no bounce at all, and a puff of dust spreads out along the floor (1.6 s).
   - Sound: Heavy thud.
 - **Lacrosse ball** (`lacrosse-ball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Very fast, hard bounces.
-  - Improved: E6a: slammed down, the hard rubber ball rockets up and bounces hard and fast, the liveliest ball on the shelf (0.83 of its speed kept) (1.9 s).
+  - Improved: E6a: slammed down, the hard rubber ball rockets up and bounces hard and fast, the
+    liveliest ball on the shelf (0.83 of its speed kept) (1.9 s).
   - Sound: Hard rubber knock.
 - **Squash ball** (`squash-ball`). Now: tap: Warm it up. Plan: keep.
   - Owner: Weird; hard to see on dark.
-  - Fixed: C1: a faint rim of light around the ball on a dark page (a see-through shell that adds up at the silhouette); invisible on a light page.
+  - Fixed: C1: a faint rim of light around the ball on a dark page (a see-through shell that adds up
+    at the silhouette); invisible on a light page.
   - Effect: Warms up: glows faintly as it bounces faster.
-  - Improved: E6a: cold, it is dead: dropped, it hardly bounces. Hit over and over, it warms, glows faintly and bounces higher and faster; let go, it bounces out and cools (2.6 s).
+  - Improved: E6a: cold, it is dead: dropped, it hardly bounces. Hit over and over, it warms, glows
+    faintly and bounces higher and faster; let go, it bounces out and cools (2.6 s).
   - Sound: Dead, low squash thock.
 - **Bouncy ball** (`bouncy-ball`). Now: tap: Throw it down. Plan: keep.
   - Effect: Wild ricochet bounces all over, then home.
-  - Improved: E6a: thrown down hard, it ricochets all over the floor, keeping nearly all its speed, its spin flipping at every bounce, then comes home and settles (2.5 s).
+  - Improved: E6a: thrown down hard, it ricochets all over the floor, keeping nearly all its speed,
+    its spin flipping at every bounce, then comes home and settles (2.5 s).
   - Sound: Springy boing that rises.
 - **Marble** (`marble`). Now: tap: Roll it. Plan: keep.
   - Owner: Super neat.
   - Effect: Rolls around a little circle; the swirl inside turns.
-  - Improved: E6a: it rolls round a little circle, turning the way it rolls, and after one lap is back exactly as it was; the swirl inside turns as it goes (2.4 s). Fix7: the glass shell reads as polished glass: a faint tint that is clear face on and denser toward the rim, reflecting a light sky above and a darker floor below (no added highlights).
+  - Improved: E6a: it rolls round a little circle, turning the way it rolls, and after one lap is
+    back exactly as it was; the swirl inside turns as it goes (2.4 s). Fix7: the glass shell reads
+    as polished glass: a faint tint that is clear face on and denser toward the rim, reflecting a
+    light sky above and a darker floor below (no added highlights).
   - Sound: The same real marble roll, about 6 dB quieter (Sound C, October 2, 2026).
 - **Hockey puck** (`hockey-puck`). Now: tap: Slap shot. Plan: keep.
   - Owner: Underwhelming.
   - Fixed: C1: the same faint rim of light, and a little sheen on the rubber.
   - Effect: Slides and spins flat, throwing up ice sparkle.
-  - Improved: E1c: a slap shot. Sparkling ice chips spray from where the stick hit, and the puck glides flat across the ice, spinning fast, round a wide loop and back to its spot (3 s).
+  - Improved: E1c: a slap shot. Sparkling ice chips spray from where the stick hit, and the puck
+    glides flat across the ice, spinning fast, round a wide loop and back to its spot (3 s).
   - Sound: Stick slap and ice scrape.
 - **Shuttlecock** (`shuttlecock`). Now: tap: Hit it. Plan: keep.
   - Owner: Cool.
   - Effect: Flips over and floats down feathers-up.
-  - Improved: E1b: hit up: it flips over cork first and flies up spinning, turns over at the top and floats back down cork first, spinning slower as it falls (3 s).
+  - Improved: E1b: hit up: it flips over cork first and flies up spinning, turns over at the top and
+    floats back down cork first, spinning slower as it falls (3 s).
   - Sound: Light racket tock.
 - **Flying disc** (`flying-disc`). Now: tap: Throw. Plan: keep.
   - Owner: Looks fine.
   - Fixed: C1: glossy plastic with a highlight and two moulded flight rings.
   - Effect: Spins fast and hovers, tilting.
-  - Improved: E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a returning throw and settles back (3 s).
+  - Improved: E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a
+    returning throw and settles back (3 s).
   - Sound: Whirring whoosh.
 
 ## Anatomy (7)
@@ -465,57 +666,85 @@ Proposals below are suggestions; the owner may change them.
 - **Beating heart** (`heart`). Now: tap: Race and calm. Plan: keep.
   - Owner: Needs a special effect.
   - Effect: Racing heartbeat: faster beats with a glow, then calms.
-  - Improved: E3: a tap sets the heart racing: the atria then the ventricles squeeze (the ventricles wring a little, the aorta swells), faster and stronger with a warm glow on each squeeze, then it calms to its resting beat (about 5 s).
-  - Sound: The same real heartbeats at the same tempo, about 60 percent louder (Sound C, October 2, 2026).
+  - Improved: E3: a tap sets the heart racing: the atria then the ventricles squeeze (the ventricles
+    wring a little, the aorta swells), faster and stronger with a warm glow on each squeeze, then it
+    calms to its resting beat (about 5 s).
+  - Sound: The same real heartbeats at the same tempo, about 60 percent louder (Sound C, October 2,
+    2026).
 - **Brain** (`brain`). Now: tap: Think. Plan: keep.
   - Owner: Needs a special effect.
   - Effect: Sparks of light race across the folds (a thought).
-  - Improved: E3: a tap sparks a thought: light races out along the folds of the tapped lobe, then through the next lobes and round the brain, and at the end every lobe flashes at once (about 2.5 s).
-  - Sound: A subtle electric crackle as the sparks race round (softer and lower than the neuron's), and a small snap as the side lights up; no wind (Sound C, October 2, 2026).
+  - Improved: E3: a tap sparks a thought: light races out along the folds of the tapped lobe, then
+    through the next lobes and round the brain, and at the end every lobe flashes at once (about 2.5
+    s).
+  - Sound: A subtle electric crackle as the sparks race round (softer and lower than the neuron's),
+    and a small snap as the side lights up; no wind (Sound C, October 2, 2026).
 - **Eye** (`eye`). Now: tap: Blink. Plan: keep.
-  - Owner: Pupil dilation is cool but underwhelming. Let the eye look around by itself, and use a different tap animation.
+  - Owner: Pupil dilation is cool but underwhelming. Let the eye look around by itself, and use a
+    different tap animation.
   - Effect: Idle: the eye looks around. Tap: it blinks, looks at you and the pupil snaps small.
-  - Improved: C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and snaps the pupil small (about 2.5 s).
+  - Improved: C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and
+    snaps the pupil small (about 2.5 s).
   - Sound: A soft, small click as the lids close, and a fainter one as they open.
 - **Lungs** (`lungs`). Now: tap: Take a deep breath. Plan: keep.
   - Owner: Expand and contract like lungs.
   - Effect: A deep breath in and out.
-  - Improved: E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s). After the owner's review the breath is about twice as big. Fix7: the deep breath fills the lungs about 70% further out than before.
+  - Improved: E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the
+    airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
+    After the owner's review the breath is about twice as big. Fix7: the deep breath fills the lungs
+    about 70% further out than before.
   - Sound: A real person's slow deep breath in, then out.
 - **Tooth** (`tooth`). Now: tap: Polish. Plan: keep.
   - Owner: Looks good; no idea for an effect.
   - Effect: A sparkle wipe cleans it bright white.
-  - Improved: E3: a tap polishes it: a bright sheen wipes across from the top left, star sparkles pop where it passes and twinkle again while it gleams, then it settles (about 3.5 s).
+  - Improved: E3: a tap polishes it: a bright sheen wipes across from the top left, star sparkles
+    pop where it passes and twinkle again while it gleams, then it settles (about 3.5 s).
   - Sound: A soft polishing swish instead of the squeak, then the same short gleam and sparkles.
 - **Kidney** (`kidney`). Now: tap: Pump blood through. Plan: keep.
   - Owner: Add an effect.
   - Effect: Fluid flows through in pulses along the vessels.
-  - Improved: E3: a tap pumps three pulses through: each runs in along the artery as light, spreads through the kidney as a soft flush while it swells a little, leaves along the vein, and a drop runs down the ureter (about 4.5 s).
+  - Improved: E3: a tap pumps three pulses through: each runs in along the artery as light, spreads
+    through the kidney as a soft flush while it swells a little, leaves along the vein, and a drop
+    runs down the ureter (about 4.5 s).
   - Sound: Gentle trickle.
 - **Anatomy atlas** (`anatomy-atlas`). Now: tap: Peel a layer. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Anatomy), September 29, 2026.
-  - Effect: A standing figure in four layers (a smooth mannequin skin, the superficial muscles, the skeleton and the organs); each tap peels the outer layer in solid pieces (the skin opens along its seams, the muscles and bones lift off group by group) in about 3 s, and after the organs a tap brings every layer back. Layer picks a layer; Labels lists the parts beside the toy.
-  - Improved: Anatomy: a kit-built body (smoothly joined primitives, so the skin has no seams but its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and intestines.
+  - Effect: A standing figure in four layers (a smooth mannequin skin, the superficial muscles, the
+    skeleton and the organs); each tap peels the outer layer in solid pieces (the skin opens along
+    its seams, the muscles and bones lift off group by group) in about 3 s, and after the organs a
+    tap brings every layer back. Layer picks a layer; Labels lists the parts beside the toy.
+  - Improved: Anatomy: a kit-built body (smoothly joined primitives, so the skin has no seams but
+    its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our
+    brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and
+    intestines.
   - Sound: A soft paper-and-cloth slide for each peel, and a low chime as the layers settle back.
 
 ## Weather (13)
 
 - **Campfire** (`campfire`). Now: tap: Stoke the fire. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: The volcano's kind of fire, a low flickering rush with a few soft pops of wood (no clicks).
+  - Sound: The volcano's kind of fire, a low flickering rush with a few soft pops of wood (no
+    clicks).
 - **Storm cloud** (`storm-cloud`). Now: tap: Thunder. Plan: keep.
   - Owner: Basically perfect.
-  - Improved: Fix7: a tap's bolt strikes straight down from the cloud under the finger (from its tapped place), not in a fixed spot.
+  - Improved: Fix7: a tap's bolt strikes straight down from the cloud under the finger (from its
+    tapped place), not in a fixed spot.
   - Sound: Thunder rumble.
 - **Lava lamp** (`lava-lamp`). Now: tap: Heat it up. Plan: keep.
   - Owner: Moves really well. On tap: blobs move faster, light up or change colours.
   - Fixed: C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.
   - Effect: Blobs speed up, glow and shift colour for a few seconds.
-  - Improved: E4: a tap heats the lamp: the wax blobs speed up to about three and a half times, smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta, gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean, Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall), and Flow and Glow sliders.
+  - Improved: E4: a tap heats the lamp: the wax blobs speed up to about three and a half times,
+    smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta,
+    gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The
+    glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean,
+    Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall),
+    and Flow and Glow sliders.
   - Sound: Only the gloops and bubbles (the rising hum is gone).
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
   - Owner: Basically perfect.
-  - Improved: Hands engine A: in Hands-on, pick it up and shake it back and forth: each shake swirls the snow, more the harder you shake.
+  - Improved: Hands engine A: in Hands-on, pick it up and shake it back and forth: each shake swirls
+    the snow, more the harder you shake.
   - Sound: The water sloshing as it is shaken, then the twinkle (no rattle of clicks).
 - **Volcano** (`volcano`). Now: tap: Erupt. Plan: keep.
   - Owner: Basically perfect.
@@ -523,7 +752,14 @@ Proposals below are suggestions; the owner may change them.
 - **Ice swan** (`ice-statue`). Now: tap: Melt and refreeze. Plan: keep.
   - Owner: Let the little white specks move. The swan could melt or break apart.
   - Effect: Specks drift; tap melts the swan into drips, then it refreezes.
-  - Improved: E4, redone after the owner's review ("it melts by dripping water and slowly breaking decomposing, with the melt speed accelerating"): a tap melts the swan faster and faster: water beads and drips from the beak, the wings and the pedestal into a spreading puddle; the beak wears away, the wing tips crack off and fall into the water, then the head and the top of the neck; the tail, the neck and the wings wear away and the body wears down to a lump, each piece solid ice getting smaller; the fallen pieces melt away in the puddle. Then it refreezes piece by piece and a frosty white light sweeps up it (about 7.5 s). Temperature melts it to the same point and back.
+  - Improved: E4, redone after the owner's review ("it melts by dripping water and slowly breaking
+    decomposing, with the melt speed accelerating"): a tap melts the swan faster and faster: water
+    beads and drips from the beak, the wings and the pedestal into a spreading puddle; the beak
+    wears away, the wing tips crack off and fall into the water, then the head and the top of the
+    neck; the tail, the neck and the wings wear away and the body wears down to a lump, each piece
+    solid ice getting smaller; the fallen pieces melt away in the puddle. Then it refreezes piece by
+    piece and a frosty white light sweeps up it (about 7.5 s). Temperature melts it to the same
+    point and back.
   - Sound: The drips and the refreezing; the wind at the start is gone.
 - **Candle** (`candle`). Now: tap: Blow out or light. Plan: keep.
   - Owner: Pretty good; OK as it is.
@@ -531,24 +767,45 @@ Proposals below are suggestions; the owner may change them.
 - **Tornado** (`tornado`). Now: tap: Spin it up. Plan: keep.
   - Owner: Becomes bigger or more intense.
   - Effect: Spins up bigger and faster, pulling debris, then weakens.
-  - Improved: E4: a tap spins the tornado up: the funnel widens (most at the foot), whirls round faster and kicks up dust, and the planks, clods and leaves on the field lift one by one, spiral up round the funnel and fall back where they lay as it weakens (about 5 s). Power still works. Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: E4: a tap spins the tornado up: the funnel widens (most at the foot), whirls round
+    faster and kicks up dust, and the planks, clods and leaves on the field lift one by one, spiral
+    up round the funnel and fall back where they lay as it weakens (about 5 s). Power still works.
+    Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: Rising roar of wind.
 - **Rainbow** (`rainbow`). Now: tap: Draw the rainbow. Plan: keep.
   - Owner: Pick an effect.
   - Effect: The arc draws itself colour by colour and sparkles at the ends.
-  - Improved: E4: a tap wipes the arc away in a blink, then redraws it colour by colour, red first, each band sweeping left to right behind a bright pen, and sparkles burst from both clouds and settle (about 5 s).
+  - Improved: E4: a tap wipes the arc away in a blink, then redraws it colour by colour, red first,
+    each band sweeping left to right behind a bright pen, and sparkles burst from both clouds and
+    settle (about 5 s).
   - Sound: Rising harp glissando.
 - **Iceberg** (`iceberg`). Now: tap: Break off a chunk. Plan: keep.
   - Effect: A chunk calves off and splashes; the berg bobs.
-  - Improved: E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place (about 6 s).
-  - Sound: Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a fallback.
+  - Improved: E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken
+    faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while
+    the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place
+    (about 6 s).
+  - Sound: Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then
+    the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a
+    fallback.
 - **Waterfall** (`waterfall`). Now: tap: Send a surge. Plan: keep.
   - Effect: A surge: the flow doubles and mist billows.
-  - Improved: E4: a tap sends a surge: a white-water front runs along the river and over the lip, a wider, thicker sheet of white water unrolls down the curtain with streaks pouring down it, foam spreads over the pool and mist billows up, then it calms (about 5 s).
+  - Improved: E4: a tap sends a surge: a white-water front runs along the river and over the lip, a
+    wider, thicker sheet of white water unrolls down the curtain with streaks pouring down it, foam
+    spreads over the pool and mist billows up, then it calms (about 5 s).
   - Sound: Rushing water swell.
 - **Ocean wave** (`ocean-wave`). Now: tap: Break the wave. Plan: keep.
   - Effect: The wave curls and breaks into foam.
-  - Improved: E4, redone after the owner's review ("the waves themselves should curl, not just the end"): the whole wave moves as one sheet: a tap pitches the lip out and the face leans over after it until the lip crashes into the water in front; white water falls flat, spray bursts up and foam spreads; the wave collapses and flattens, then a new swell rises behind, steepens, throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters. Fix3 (the owner's note: "the collapse happens awkwardly; it should be smooth"): the lip plunges without stopping, the barrel it closes shrinks as it rolls forward, white water froths up out of the plunge and climbs over it as a foaming wall, then sinks into lace as the water flattens, all on one smooth clock; the rebuild is unchanged. Fix7: the lip stays joined to the face as the wave throws and rolls, so no dark strip opens at the curl.
+  - Improved: E4, redone after the owner's review ("the waves themselves should curl, not just the
+    end"): the whole wave moves as one sheet: a tap pitches the lip out and the face leans over
+    after it until the lip crashes into the water in front; white water falls flat, spray bursts up
+    and foam spreads; the wave collapses and flattens, then a new swell rises behind, steepens,
+    throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters. Fix3
+    (the owner's note: "the collapse happens awkwardly; it should be smooth"): the lip plunges
+    without stopping, the barrel it closes shrinks as it rolls forward, white water froths up out of
+    the plunge and climbs over it as a foaming wall, then sinks into lace as the water flattens, all
+    on one smooth clock; the rebuild is unchanged. Fix7: the lip stays joined to the face as the
+    wave throws and rolls, so no dark strip opens at the curl.
   - Sound: Wave crash.
 - **Geyser** (`geyser`). Now: tap: Erupt. Plan: keep.
   - Owner: Pretty cool.
@@ -558,20 +815,33 @@ Proposals below are suggestions; the owner may change them.
 
 - **Treasure chest** (`chest`). Now: tap: Open or close. Plan: keep.
   - Owner: Perfect.
-  - Improved: Hands engine B (Hands-on): Lift the lid on its hinge by hand: let go past upright and it stays open; lower, it drops shut with a thud.
+  - Improved: Hands engine B (Hands-on): Lift the lid on its hinge by hand: let go past upright and
+    it stays open; lower, it drops shut with a thud.
   - Sound: Creak and a treasure chime.
 - **Storybook** (`book`). Now: tap: Open or close. Plan: keep.
   - Owner: Blurry; try to make it more detailed so the writing looks like something.
-  - Fixed: C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages, a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and page lines splats can show.
-  - Improved: Sharpness A (October 2, 2026): the words on the two open pages are ink dots laid on the font's pixels. Round 2 (October 3, 2026): the turned leaves are sorted where they lie, so the left page's paper no longer covers its words and the cover's inside no longer shows through; a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.
-  - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.
+  - Fixed: C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages,
+    a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is
+    crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and
+    page lines splats can show.
+  - Improved: Sharpness A (October 2, 2026): the words on the two open pages are ink dots laid on
+    the font's pixels. Round 2 (October 3, 2026): the turned leaves are sorted where they lie, so
+    the left page's paper no longer covers its words and the cover's inside no longer shows through;
+    a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.
+  - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
+    synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
   - Owner: Pretty awesome; keep it the same. After E1b: basically perfect, lock it in.
-  - Fixed: E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the pointer and click.
-  - Sound: Opening keeps only the screen-on sound (no twinkle), closing has no thunk, and the keys sound like a real keyboard (a tick and a thock).
+  - Fixed: E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your
+    own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the
+    pointer and click.
+  - Sound: Opening keeps only the screen-on sound (no twinkle), closing has no thunk, and the keys
+    sound like a real keyboard (a tick and a thock).
 - **Music box** (`music-box`). Now: tap: Open or close. Plan: keep.
   - Owner: Animation is basically perfect; it needs music.
-  - Improved: Hands engine B (Hands-on): Lift the lid on its hinge by hand, and turn the crank by drawing circles round it: each of its 12 clicks a turn plays the tune's next note, and the dancer turns with it.
+  - Improved: Hands engine B (Hands-on): Lift the lid on its hinge by hand, and turn the crank by
+    drawing circles round it: each of its 12 clicks a turn plays the tune's next note, and the
+    dancer turns with it.
   - Sound: A music-box melody (plucked comb tones) while open.
 - **Alarm clock** (`clock`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Does roughly what the scan alarm clock should do; keep them slightly different.
@@ -584,7 +854,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Fwump of the canopy opening.
 - **Desk fan** (`desk-fan`). Now: tap: Switch on or off. Plan: keep.
   - Owner: Perfect.
-  - Sound: The blades' soft thrum of air swelling in as it starts and fading as it stops (no rising motor hum).
+  - Sound: The blades' soft thrum of air swelling in as it starts and fading as it stops (no rising
+    motor hum).
 - **Desk lamp** (`lamp`). Now: tap: Switch the light. Plan: keep.
   - Owner: Perfect.
   - Sound: Switch click.
@@ -595,123 +866,208 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Perfect.
   - Sound: Brass slide and a twinkle.
 - **Fountain pen** (`fountain-pen`). Now: tap: Uncap and write. Plan: keep.
-  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration."
-  - Effect: The cap (cut out of the scan as a solid piece) slides off and clicks onto the end, and the nib writes a swirl in wet blue ink that glistens, then dries darker; the cap goes back on (4 s).
-  - Improved: Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: The cap (cut out of the scan as a solid piece) slides off and clicks onto the end, and
+    the nib writes a swirl in wet blue ink that glistens, then dries darker; the cap goes back on (4
+    s).
+  - Improved: Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted
+    out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and
+    writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes
+    back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model.
   - Sound: A cap click, a smooth nib scratch, another click.
 - **Water bottle** (`water-bottle`). Now: tap: Unscrew and pour. Plan: keep.
-  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration."
-  - Effect: Its cap (cut out of the scan as a solid piece) spins off in two turns and hops up. The bottle tips and water glugs out as a stream of drops into a glass beside it; then it all runs back and the cap screws on (4.5 s).
-  - Improved: Real objects: a detailed CC BY model of an orange steel bottle. The cap (cut from the model above its plug, its underside closed) unscrews in two turns and hops to the table, the bottle lifts and tips, and a continuous stream of water, drawn as overlapping pieces that follow the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises; then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model, cap plug left out, a stream instead of drops.
-  - Sound: The cap twisted off, a real pour (a splashing stream and the water sloshing in the glass) and the cap twisted back on (no clicks or bubbly glugs).
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: Its cap (cut out of the scan as a solid piece) spins off in two turns and hops up. The
+    bottle tips and water glugs out as a stream of drops into a glass beside it; then it all runs
+    back and the cap screws on (4.5 s).
+  - Improved: Real objects: a detailed CC BY model of an orange steel bottle. The cap (cut from the
+    model above its plug, its underside closed) unscrews in two turns and hops to the table, the
+    bottle lifts and tips, and a continuous stream of water, drawn as overlapping pieces that follow
+    the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises;
+    then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model,
+    cap plug left out, a stream instead of drops.
+  - Sound: The cap twisted off, a real pour (a splashing stream and the water sloshing in the glass)
+    and the cap twisted back on (no clicks or bubbly glugs).
 - **Soda can** (`soda-can`). Now: tap: Shake and open. Plan: keep.
-  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration."
-  - Effect: It shakes in place, then the ring pull (a kit-built piece matched to the scan) levers up with a crack, and a jet of foam and bubbles sprays up and spatters down around it; the tab folds back and the foam fades (3.5 s).
-  - Improved: Real objects: a detailed CC BY model of a can with an original plain orange label (no brand) on a kit-built cork coaster. It shakes, its own ring pull (cut from the model as a solid piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps.
-  - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that dies away (no bubbles).
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: It shakes in place, then the ring pull (a kit-built piece matched to the scan) levers up
+    with a crack, and a jet of foam and bubbles sprays up and spatters down around it; the tab folds
+    back and the foam fades (3.5 s).
+  - Improved: Real objects: a detailed CC BY model of a can with an original plain orange label (no
+    brand) on a kit-built cork coaster. It shakes, its own ring pull (cut from the model as a solid
+    piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots
+    up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the
+    tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps.
+  - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
+    dies away (no bubbles).
 
 ## Space (35)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
-  - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs a super effect.
+  - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
+    a super effect.
   - Effect: Idle: stronger churning and pulsing. Tap: a big solar flare loops off the surface.
-  - Improved: E2: by itself the Sun churns (two layers of bright granules swell and fade in turn), its prominences rise and sink and the corona breathes. A tap sets off a flare: the footpoints flash, a loop of hot gas climbs off the upper limb, swells, and its top breaks away into space (4.6 s).
+  - Improved: E2: by itself the Sun churns (two layers of bright granules swell and fade in turn),
+    its prominences rise and sink and the corona breathes. A tap sets off a flare: the footpoints
+    flash, a loop of hot gas climbs off the upper limb, swells, and its top breaks away into space
+    (4.6 s).
   - Sound: Deep roaring whoosh.
 - **Solar system** (`solar-system`). Now: tap: Line up the planets. Plan: keep.
   - Owner: Really cool. Maybe the planets line up for an eclipse.
   - Effect: Planets swing into a line and one eclipses the Sun, then orbits resume.
-  - Improved: E2: every planet swings forward round its orbit into one straight row beside the Sun; the system tips until we look along its plane, Mercury swings on in front of the Sun as a dark dot (a transit) and a pearly eclipse corona flares; then it tips back and the planets swing on round their orbits to where they would have been, spread out again (7 s). The orbits are spaced, and the planets sized, so that no two planets touch, at rest or in the row. Mercury is lit from the Sun and turns as it orbits.
-  - Sound: No synth chord: a soft whoosh as the planets swing into line, a warm flare as the corona shows, and a whoosh as they swing on.
+  - Improved: E2: every planet swings forward round its orbit into one straight row beside the Sun;
+    the system tips until we look along its plane, Mercury swings on in front of the Sun as a dark
+    dot (a transit) and a pearly eclipse corona flares; then it tips back and the planets swing on
+    round their orbits to where they would have been, spread out again (7 s). The orbits are spaced,
+    and the planets sized, so that no two planets touch, at rest or in the row. Mercury is lit from
+    the Sun and turns as it orbits.
+  - Sound: No synth chord: a soft whoosh as the planets swing into line, a warm flare as the corona
+    shows, and a whoosh as they swing on.
 - **Mercury** (`mercury`). Now: tap: Spin in the sunlight. Plan: keep.
   - Effect: Quick orbit-like spin and heat shimmer on the day side.
-  - Improved: E2: a tap spins it once, fast, and the side facing the Sun glows red-hot and shimmers, then cools (3.4 s).
-  - Sound: A quick spin whoosh, then a low roar of heat and a soft searing sizzle while the day side glows, fading as it cools (no tone).
+  - Improved: E2: a tap spins it once, fast, and the side facing the Sun glows red-hot and shimmers,
+    then cools (3.4 s).
+  - Sound: A quick spin whoosh, then a low roar of heat and a soft searing sizzle while the day side
+    glows, fading as it cools (no tone).
 - **Venus** (`venus`). Now: tap: Swirl the clouds. Plan: keep.
   - Effect: The thick clouds swirl fast around it.
-  - Improved: E2: a tap whips the clouds round backwards (as Venus turns): the wide equatorial band twice and the polar caps once, so the chevrons shear where they meet, then lock together again (4 s).
+  - Improved: E2: a tap whips the clouds round backwards (as Venus turns): the wide equatorial band
+    twice and the polar caps once, so the chevrons shear where they meet, then lock together again
+    (4 s).
   - Sound: Muffled wind.
 - **Earth** (`earth`). Now: tap: Turn through a day. Plan: keep.
   - Effect: Night side lights up with city lights as it turns; clouds move.
-  - Improved: E2: a tap turns it through one day with the Sun to the left: night falls over the right half, the Earth turns once, city lights come on as the land turns into the dark and go out at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now.
-  - Sound: The same ocean wash (a little softer) and chime, with the wind turned right down (softer, shorter and quieter).
+  - Improved: E2: a tap turns it through one day with the Sun to the left: night falls over the
+    right half, the Earth turns once, city lights come on as the land turns into the dark and go out
+    at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now.
+  - Sound: The same ocean wash (a little softer) and chime, with the wind turned right down (softer,
+    shorter and quieter).
 - **Moon** (`moon`). Now: tap: Land or leave. Plan: keep.
   - Effect: A lunar module lands; an astronaut plants a flag.
-  - Improved: E2 (redone after review): a tap lands a lunar module near the top of the Moon (it comes down slowing, leaning back, and throws a sheet of dust straight out); an astronaut climbs down the ladder, takes the rolled flag off the leg, bounds over in low-gravity hops, plants it, unrolls it along its crossbar (the flag is a toy option: any country) and waves. A second tap packs up: the flag is rolled and stowed, the astronaut climbs back in and the lander lifts off (10 s each way).
+  - Improved: E2 (redone after review): a tap lands a lunar module near the top of the Moon (it
+    comes down slowing, leaning back, and throws a sheet of dust straight out); an astronaut climbs
+    down the ladder, takes the rolled flag off the leg, bounds over in low-gravity hops, plants it,
+    unrolls it along its crossbar (the flag is a toy option: any country) and waves. A second tap
+    packs up: the flag is rolled and stowed, the astronaut climbs back in and the lander lifts off
+    (10 s each way).
   - Sound: Engine rumble, touchdown thud, lift-off roar.
 - **Mars** (`mars`). Now: tap: Raise a dust storm. Plan: keep.
   - Effect: A dust storm sweeps across it.
-  - Improved: E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a ragged front, covers the whole face and hides the dark markings, then settles, clearing from the east edge (5.4 s).
+  - Improved: E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a
+    ragged front, covers the whole face and hides the dark markings, then settles, clearing from the
+    east edge (5.4 s).
   - Sound: The dust storm is quieter and darker: a softer hiss of dust and a lower wind.
 - **Jupiter** (`jupiter`). Now: tap: Race the bands. Plan: keep.
   - Effect: Bands race and the Great Red Spot spins up.
-  - Improved: E2: a tap sets the cloud bands racing, neighbours in opposite directions (the equator fastest), and the Great Red Spot's swirl spins up inside its oval; each band turns whole turns, so the picture comes back together (4.2 s).
+  - Improved: E2: a tap sets the cloud bands racing, neighbours in opposite directions (the equator
+    fastest), and the Great Red Spot's swirl spins up inside its oval; each band turns whole turns,
+    so the picture comes back together (4.2 s).
   - Sound: Low gas-giant drone.
 - **Saturn** (`saturn`). Now: tap: Ripple the rings. Plan: keep.
   - Owner: The rings should move by default.
   - Effect: Idle: rings turn. Tap: ring particles sparkle and ripple outward.
-  - Improved: E2: the rings turn all the time, inner rings faster, with dark spokes and bright clumps that show the motion. A tap sends two sparkling waves rippling out across the rings (4 s).
-  - Sound: Two soft icy sweeps as the waves ripple out across the rings, with a faint glitter (no synth shimmer).
+  - Improved: E2: the rings turn all the time, inner rings faster, with dark spokes and bright
+    clumps that show the motion. A tap sends two sparkling waves rippling out across the rings (4
+    s).
+  - Sound: Two soft icy sweeps as the waves ripple out across the rings, with a faint glitter (no
+    synth shimmer).
 - **Uranus** (`uranus`). Now: tap: Roll on its side. Plan: keep.
   - Owner: Rings move a little by default too.
   - Effect: Idle: slow ring motion. Tap: it rolls on its side.
-  - Improved: E2: its thin rings turn slowly all the time (bright arcs show it). A tap rolls it like a wheel, to the right and back, as Uranus lies on its side (3.8 s).
+  - Improved: E2: its thin rings turn slowly all the time (bright arcs show it). A tap rolls it like
+    a wheel, to the right and back, as Uranus lies on its side (3.8 s).
   - Sound: A soft low rumble as it rolls to the right, and again as it rolls back (no bell).
 - **Neptune** (`neptune`). Now: tap: Race the clouds. Plan: keep.
   - Effect: A dark storm and fast white clouds race by.
-  - Improved: E2: a tap sends the belts of white cloud racing round it twice while the band with the dark storm and its white companion drifts the other way once (3.8 s).
+  - Improved: E2: a tap sends the belts of white cloud racing round it twice while the band with the
+    dark storm and its white companion drifts the other way once (3.8 s).
   - Sound: Deep icy wind.
 - **Tiny planet** (`planet`). Now: tap: Day and night (rig). Plan: keep.
   - Effect: Clouds race around and a day-night band sweeps over it.
-  - Improved: E1: the clouds race once round the planet and a night band sweeps across it (2.8 s). Shelves: moved to Space; the Toy tab's Planet picks Earth, Mars, the Moon, Jupiter or Neptune, each in the same tiny-planet style.
+  - Improved: E1: the clouds race once round the planet and a night band sweeps across it (2.8 s).
+    Shelves: moved to Space; the Toy tab's Planet picks Earth, Mars, the Moon, Jupiter or Neptune,
+    each in the same tiny-planet style.
   - Sound: A quiet, darker breeze and a soft low whoosh as the clouds race round.
 - **Aurora world** (`aurora-planet`). Now: tap: Auroral surge. Plan: keep.
   - Owner: The auroras should actually move, realistically and dynamically.
   - Effect: Idle: auroras ripple as curtains. Tap: a bright surge of green and violet.
-  - Improved: E2: the curtains move all the time: bright folds race round the oval, rays flicker and the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops bursts out towards the equator and the folds race brighter, then it calms (4.2 s).
+  - Improved: E2: the curtains move all the time: bright folds race round the oval, rays flicker and
+    the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops
+    bursts out towards the equator and the folds race brighter, then it calms (4.2 s).
   - Sound: The same aurora air, much lower and gentler (Sound C, October 2, 2026).
 - **Asteroid** (`asteroid`). Now: tap: Break it apart. Plan: keep.
   - Owner: Pretty neat. Maybe it breaks into pieces.
   - Effect: Cracks and breaks into pieces that drift apart, then pull back together.
-  - Improved: E2: a tap cracks it (glowing cracks flash), it falls apart into 18 pieces that drift off tumbling, each on its own path, with a puff of dust; the broken faces are paler fresh rock; then gravity pulls the rubble back together and it settles (5.4 s).
-  - Sound: A rock crack and a muffled boom, real rocks crumbling apart, a soft grinding as the rubble comes back, and the stone settling.
+  - Improved: E2: a tap cracks it (glowing cracks flash), it falls apart into 18 pieces that drift
+    off tumbling, each on its own path, with a puff of dust; the broken faces are paler fresh rock;
+    then gravity pulls the rubble back together and it settles (5.4 s).
+  - Sound: A rock crack and a muffled boom, real rocks crumbling apart, a soft grinding as the
+    rubble comes back, and the stone settling.
 - **Comet** (`comet`). Now: tap: Swing past the Sun. Plan: keep.
   - Owner: Extremely underwhelming; does not look like a comet.
-  - Fixed: C1: overhauled: a bright icy nucleus in a thin coma, a straight blue ion tail of streamers and a curved gold dust tail.
+  - Fixed: C1: overhauled: a bright icy nucleus in a thin coma, a straight blue ion tail of
+    streamers and a curved gold dust tail.
   - Effect: Tail flares longer and brighter as it swings by.
-  - Improved: E2: a tap swings it past the Sun: jets of gas burst from the sunward side of the nucleus, the coma swells, and both tails flare longer and brighter as they swing round, then fade back (4.8 s).
+  - Improved: E2: a tap swings it past the Sun: jets of gas burst from the sunward side of the
+    nucleus, the coma swells, and both tails flare longer and brighter as they swing round, then
+    fade back (4.8 s).
   - Sound: A real burning torch roaring as the jets and tails flare, fading as they die back.
 - **Meteor** (`meteor`). Now: tap: Streak in and burst. Plan: keep.
   - Owner: Much cooler than the comet.
   - Effect: Streaks in and bursts in a fireball.
-  - Improved: E2: a tap sends it streaking in from the upper right; it bursts in a fireball, its rock flying apart in glowing fragments that burn out while the trail is snuffed out; then the next one streaks in to take its place (5.4 s).
-  - Sound: The streak's fire, then the star's own burst (over a short crack) as it explodes at 0.37 s, in time with the fireball (Sound C, October 2, 2026).
+  - Improved: E2: a tap sends it streaking in from the upper right; it bursts in a fireball, its
+    rock flying apart in glowing fragments that burn out while the trail is snuffed out; then the
+    next one streaks in to take its place (5.4 s).
+  - Sound: The streak's fire, then the star's own burst (over a short crack) as it explodes at 0.37
+    s, in time with the fireball (Sound C, October 2, 2026).
 - **Star** (`star`). Now: tap: Live and die. Plan: keep.
   - Owner: Dynamic like the Sun. Maybe a solar flare, or it evolves into a dying star and dies.
-  - Effect: Tap runs a life cycle: swells into a red giant, puffs off its shell and leaves a white dwarf, then reforms.
-  - Improved: E2: a tap runs its life, sped up: it swells into a throbbing red giant, puffs off its outer layers as a glowing shell and shrinks to a tiny white dwarf; then a new star lights up and grows back (8.5 s).
-  - Sound: A deep stellar roar as it swells, low throbs as the red giant pulses, a real explosion as it puffs off its shell, and a soft roar as a new star lights.
+  - Effect: Tap runs a life cycle: swells into a red giant, puffs off its shell and leaves a white
+    dwarf, then reforms.
+  - Improved: E2: a tap runs its life, sped up: it swells into a throbbing red giant, puffs off its
+    outer layers as a glowing shell and shrinks to a tiny white dwarf; then a new star lights up and
+    grows back (8.5 s).
+  - Sound: A deep stellar roar as it swells, low throbs as the red giant pulses, a real explosion as
+    it puffs off its shell, and a soft roar as a new star lights.
 - **Pulsar** (`pulsar`). Now: tap: Spin up. Plan: keep.
   - Owner: Really neat; needs a really cool effect.
   - Effect: Beams sweep faster and faster with strobing flashes.
-  - Improved: E2: each time a beam sweeps past the viewer the star flashes, like a lighthouse. A tap spins it up to a blur, the flashes coming faster into a strobe, each with a tick, then it winds down (5.4 s).
-  - Sound: A deep boom and rumble as it spins up, and a deep pulse with each flash instead of a tick.
+  - Improved: E2: each time a beam sweeps past the viewer the star flashes, like a lighthouse. A tap
+    spins it up to a blur, the flashes coming faster into a strobe, each with a tick, then it winds
+    down (5.4 s).
+  - Sound: A deep boom and rumble as it spins up, and a deep pulse with each flash instead of a
+    tick.
 - **Black hole** (`black-hole`). Now: tap: Feed it a star. Plan: keep.
   - Owner: Almost perfect as it is; add an effect.
   - Effect: A small star falls in, gets stretched into a spiral and swallowed; the disk flares.
-  - Improved: E2: a tap sends a small star falling in: it spirals closer, faster, is stretched into a streak and leaves a stream of its gas along its path; it plunges in, the disk and photon ring flare, and the stream swirls down after it (6.6 s).
-  - Sound: A deep growing roar as the star spirals in, a rushing whoosh, a huge low boom as it plunges, and the gas swirling down after it.
+  - Improved: E2: a tap sends a small star falling in: it spirals closer, faster, is stretched into
+    a streak and leaves a stream of its gas along its path; it plunges in, the disk and photon ring
+    flare, and the stream swirls down after it (6.6 s).
+  - Sound: A deep growing roar as the star spirals in, a rushing whoosh, a huge low boom as it
+    plunges, and the gas swirling down after it.
 - **Star cluster** (`star-cluster`). Now: tap: Breathe in and out. Plan: keep.
   - Owner: Extremely cool; no idea for an effect.
   - Effect: Stars twinkle in a wave and the cluster breathes in and out.
-  - Improved: E2: a tap makes the cluster breathe (in, out and settle, the core first and the outskirts after) while a wave of sparkle runs out from the middle through the stars (4.8 s).
+  - Improved: E2: a tap makes the cluster breathe (in, out and settle, the core first and the
+    outskirts after) while a wave of sparkle runs out from the middle through the stars (4.8 s).
   - Sound: Two faint, soft swells of air; much quieter, no hiss (Sound C, October 2, 2026).
 - **Ring nebula** (`planetary-nebula`). Now: tap: Blow a new shell. Plan: keep.
   - Effect: The ring expands and glows brighter, then settles.
-  - Improved: E2: a tap makes the central star flare and blow out a thin bright shock ring; when it reaches the main ring, the ring glows brighter and is pushed outwards, then settles (4.8 s).
-  - Sound: A small burst as the star flares, a whoosh as the shock ring expands, and a deep soft boom as it pushes the main ring out.
+  - Improved: E2: a tap makes the central star flare and blow out a thin bright shock ring; when it
+    reaches the main ring, the ring glows brighter and is pushed outwards, then settles (4.8 s).
+  - Sound: A small burst as the star flares, a whoosh as the shock ring expands, and a deep soft
+    boom as it pushes the main ring out.
 - **Nebula** (`nebula`). Now: tap: Light new stars. Plan: keep.
   - Effect: New stars ignite inside the clouds.
-  - Improved: E2: a tap lights seven new stars one after another, three at the tips of the pillars: each flares up with spikes, settles to a bright point in a small glow of lit gas, and later fades (6.5 s).
+  - Improved: E2: a tap lights seven new stars one after another, three at the tips of the pillars:
+    each flares up with spikes, settles to a bright point in a small glow of lit gas, and later
+    fades (6.5 s).
   - Sound: A soft fiery flare for each of the seven new stars as it lights (no chimes).
 - **Supernova** (`supernova`). Now: tap: Explode. Plan: keep.
   - Owner: Outstanding; keep it as it is.
@@ -719,62 +1075,128 @@ Proposals below are suggestions; the owner may change them.
 - **Spiral galaxy** (`spiral-galaxy`). Now: tap: Swirl the arms. Plan: keep.
   - Owner: No clear effect; it should rotate like a spiral galaxy.
   - Effect: Idle: slow rotation. Tap: arms swirl faster and the core flares.
-  - Improved: E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm glow, and finer dust lanes.
+  - Improved: E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep
+    their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the
+    core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm
+    glow, and finer dust lanes.
   - Sound: Deep swirling hum.
 - **The real Moon** (`real-moon`). Now: tap: Fly to a feature and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or data from, you know, NASA"; lane Space r2; labs only).
-  - Effect: The real Moon as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's landing site) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).
-  - Improved: Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Moon as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's
+    landing site) to face you, glides in close with its name lying on the ground, and glides back
+    (about 10 s).
+  - Improved: Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and
+    the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper
+    patch round each feature; src/space/field.js turns, lifts and lights the splats.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **The real Mars** (`real-mars`). Now: tap: Fly to a feature and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or data from, you know, NASA"; lane Space r2; labs only).
-  - Effect: The real Mars as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and Gale crater) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).
-  - Improved: Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Mars as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and
+    Gale crater) to face you, glides in close with its name lying on the ground, and glides back
+    (about 10 s).
+  - Improved: Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser
+    altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch
+    round each feature; src/space/field.js turns, lifts and lights the splats.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **The real Earth** (`real-earth`). Now: tap: Fly to a feature and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or data from, you know, NASA"; lane Space r2; labs only).
-  - Effect: The real Earth as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).
-  - Improved: Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Earth as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and
+    Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about
+    10 s).
+  - Improved: Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's
+    Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each
+    feature; src/space/field.js turns, lifts and lights the splats.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **The real Mercury** (`real-mercury`). Now: tap: Fly to a feature and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or data from, you know, NASA"; lane Space r2; labs only).
-  - Effect: The real Mercury as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).
-  - Improved: Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Mercury as splats on its real elevation and color maps, turning at its real
+    rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and
+    Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about
+    10 s).
+  - Improved: Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global
+    elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each
+    feature; src/space/field.js turns, lifts and lights the splats.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **The real Venus** (`real-venus`). Now: tap: Fly to a feature and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or data from, you know, NASA"; lane Space r2; labs only).
-  - Effect: The real Venus as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis Corona) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).
-  - Improved: Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Venus as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis
+    Corona) to face you, glides in close with its name lying on the ground, and glides back (about
+    10 s).
+  - Improved: Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut
+    by tools/sp2-maps.mjs into a global map and a sharper patch round each feature;
+    src/space/field.js turns, lifts and lights the splats.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **Real moons** (`real-moons`). Now: tap: Fly to a feature and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane Space r2; labs only).
-  - Effect: Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back.
+  - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane
+    Space r2; labs only).
+  - Effect: Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and
+    Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates
+    (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki
+    Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back.
   - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **Pluto, Ceres and Vesta** (`real-small-worlds`). Now: tap: Fly to a feature and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane Space r2; labs only).
-  - Effect: Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.
+  - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane
+    Space r2; labs only).
+  - Effect: Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true
+    shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik
+    Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.
   - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **Stars near the Sun** (`nearby-stars`). Now: tap: Fly to the next star and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more planets"; rockets; lane Space r2; labs only).
-  - Effect: About 2,240 real stars within 65 light-years of the Sun (ESA Gaia's Catalogue of Nearby Stars, plus the brightest few from Hipparcos), colored by temperature and sized by brightness, round the Sun on faint rings in the Galaxy's plane. A tap flies to the next named star (Alpha Centauri with Proxima beside it, Sirius, Barnard's Star, Vega, Arcturus) with its name and distance in light-years, and back (8 s).
-  - Improved: Space r2: new toy (labs); tools/sp2-stars.mjs reads GCNS from CDS VizieR (CC BY-SA 3.0 IGO) and HYG v4.4 (CC BY-SA 4.0), temperatures from Mamajek's color table.
+  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
+    planets"; rockets; lane Space r2; labs only).
+  - Effect: About 2,240 real stars within 65 light-years of the Sun (ESA Gaia's Catalogue of Nearby
+    Stars, plus the brightest few from Hipparcos), colored by temperature and sized by brightness,
+    round the Sun on faint rings in the Galaxy's plane. A tap flies to the next named star (Alpha
+    Centauri with Proxima beside it, Sirius, Barnard's Star, Vega, Arcturus) with its name and
+    distance in light-years, and back (8 s).
+  - Improved: Space r2: new toy (labs); tools/sp2-stars.mjs reads GCNS from CDS VizieR (CC BY-SA 3.0
+    IGO) and HYG v4.4 (CC BY-SA 4.0), temperatures from Mamajek's color table.
   - Sound: Space is silent: a soft breath as the view flies.
-- **Real star systems** (`star-systems`). Now: tap: Turn it to the view from Earth and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("more stellar systems, more planets"; lane Space r2; labs only).
-  - Effect: TRAPPIST-1, TOI-178 and 55 Cancri (and the inner Solar System to compare) from the NASA Exoplanet Archive: planets on their measured orbits at their measured periods (sped up, labeled), star and planets drawn larger than to scale (said). A tap turns the system edge on, as Earth sees it, and back (7 s).
-  - Improved: Space r2: new toy (labs); tools/sp2-systems.mjs reads pscomppars through the archive's TAP service.
+- **Real star systems** (`star-systems`). Now: tap: Turn it to the view from Earth and back. Plan:
+  keep.
+  - Owner: The owner's push notes of October 5, 2026 ("more stellar systems, more planets"; lane
+    Space r2; labs only).
+  - Effect: TRAPPIST-1, TOI-178 and 55 Cancri (and the inner Solar System to compare) from the NASA
+    Exoplanet Archive: planets on their measured orbits at their measured periods (sped up,
+    labeled), star and planets drawn larger than to scale (said). A tap turns the system edge on, as
+    Earth sees it, and back (7 s).
+  - Improved: Space r2: new toy (labs); tools/sp2-systems.mjs reads pscomppars through the archive's
+    TAP service.
   - Sound: Space is silent: a soft breath as it turns.
 - **Real galaxies** (`real-galaxies`). Now: tap: Turn it edge on and back. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more planets"; rockets; lane Space r2; labs only).
-  - Effect: M51, M101, M74 and M83 from ESA/Hubble and ESO pictures (CC BY 4.0): every splat takes its picture's color where the telescope saw it; the depth is a labeled guess (a thin exponential disk and a round bulge). A tap turns the galaxy edge on to show the guessed thickness, and back (7 s).
+  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
+    planets"; rockets; lane Space r2; labs only).
+  - Effect: M51, M101, M74 and M83 from ESA/Hubble and ESO pictures (CC BY 4.0): every splat takes
+    its picture's color where the telescope saw it; the depth is a labeled guess (a thin exponential
+    disk and a round bulge). A tap turns the galaxy edge on to show the guessed thickness, and back
+    (7 s).
   - Improved: Space r2: new toy (labs); tools/sp2-galaxies.mjs crops each picture round its galaxy.
   - Sound: Space is silent: a long soft breath as it turns.
 - **Saturn V** (`saturn-v`). Now: tap: Fire the stages in order. Plan: keep.
-  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more planets"; rockets; lane Space r2; labs only).
-  - Effect: NASA's 3D model of the Saturn V as splats. A tap fires its stages in Apollo 11's order, much faster: the S-IC burns and falls away, the interstage ring drops, the escape tower flies off, the S-II burns and falls away, the S-IVB burns, and the spacecraft pulls away from it; then it comes back together (12 s).
-  - Improved: Space r2: new toy (labs) from NASA 3D Resources, sampled with the Studio's model-to-splats code; the pieces are cut where the model's width steps.
+  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
+    planets"; rockets; lane Space r2; labs only).
+  - Effect: NASA's 3D model of the Saturn V as splats. A tap fires its stages in Apollo 11's order,
+    much faster: the S-IC burns and falls away, the interstage ring drops, the escape tower flies
+    off, the S-II burns and falls away, the S-IVB burns, and the spacecraft pulls away from it; then
+    it comes back together (12 s).
+  - Improved: Space r2: new toy (labs) from NASA 3D Resources, sampled with the Studio's
+    model-to-splats code; the pieces are cut where the model's width steps.
   - Sound: A low rumble as the engines light, and a thud at each separation.
 
 ## Tiny (18)
@@ -782,150 +1204,235 @@ Proposals below are suggestions; the owner may change them.
 - **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
   - Effect: Spikes wave and it splits into copies that fade away.
-  - Improved: E3: its spikes sway at rest; a tap sends a wave rippling through them from the front, and two smaller copies bud out from behind it, drift apart along the diagonal, turn and fade away (about 4.5 s).
+  - Improved: E3: its spikes sway at rest; a tap sends a wave rippling through them from the front,
+    and two smaller copies bud out from behind it, drift apart along the diagonal, turn and fade
+    away (about 4.5 s).
   - Sound: The same ripple, squish and pops as the copies bud, without the shimmer at the end.
 - **Bacteriophage** (`bacteriophage`). Now: tap: Inject DNA. Plan: keep.
   - Owner: Tapping does nothing visible. Upgrade it.
-  - Effect: Make the injection obvious: the legs splay, the sheath contracts a lot further and a glowing DNA strand shoots out of the tail.
-  - Improved: C2: the legs swing out, the sheath snaps to about half its length, the tail pokes through the plate and a glowing DNA strand coils out, then fades (about 4.5 s).
+  - Effect: Make the injection obvious: the legs splay, the sheath contracts a lot further and a
+    glowing DNA strand shoots out of the tail.
+  - Improved: C2: the legs swing out, the sheath snaps to about half its length, the tail pokes
+    through the plate and a glowing DNA strand coils out, then fades (about 4.5 s).
   - Sound: Spring-loaded thunk and a squirt.
 - **Bacterium** (`bacterium`). Now: tap: Divide in two. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Divides in two (binary fission), then merges back.
-  - Improved: E3: binary fission: the rod pinches in at the middle as a new wall closes across it, its DNA and ribosomes split between the halves, and the two daughter cells come apart with a little hinge (the front one without flagella); then they slide back together and merge (5 s).
+  - Improved: E3: binary fission: the rod pinches in at the middle as a new wall closes across it,
+    its DNA and ribosomes split between the halves, and the two daughter cells come apart with a
+    little hinge (the front one without flagella); then they slide back together and merge (5 s).
   - Sound: Wet pop.
 - **Red blood cell** (`red-blood-cell`). Now: tap: Sickle and relax. Plan: keep.
   - Owner: Maybe turn into a sickle cell, if that is realistic.
-  - Effect: Deforms into a sickle shape (as in sickle-cell disease at low oxygen), then relaxes back to a disc.
-  - Improved: E3: sickling at low oxygen: the soft disc stretches and curls into a stiff crescent with pointed ends, holds, then relaxes back into a disc with a little wobble (4 s).
-  - Sound: A soft, gel-like squish as it stretches into a crescent, and a soft wobble as it relaxes (no squeaks).
+  - Effect: Deforms into a sickle shape (as in sickle-cell disease at low oxygen), then relaxes back
+    to a disc.
+  - Improved: E3: sickling at low oxygen: the soft disc stretches and curls into a stiff crescent
+    with pointed ends, holds, then relaxes back into a disc with a little wobble (4 s).
+  - Sound: A soft, gel-like squish as it stretches into a crescent, and a soft wobble as it relaxes
+    (no squeaks).
 - **Neuron** (`neuron`). Now: tap: Fire a signal. Plan: keep.
   - Owner: Decent effect but should be more dramatic.
   - Effect: A bright pulse runs from the dendrites down the whole axon and bursts at the terminals.
-  - Improved: C2: a bright spark runs from the cell body down the whole axon and bursts into light at the terminals (about 2 s).
-  - Sound: A real crackling electric arc running down the axon, and a brighter burst at the terminals.
+  - Improved: C2: a bright spark runs from the cell body down the whole axon and bursts into light
+    at the terminals (about 2 s).
+  - Sound: A real crackling electric arc running down the axon, and a brighter burst at the
+    terminals.
 - **Astrocyte** (`astrocyte`). Now: tap: Send a calcium wave. Plan: keep.
   - Owner: Needs an effect; looks good.
   - Effect: Calcium wave: a glow ripples out along its arms.
-  - Improved: E3: a calcium wave: a front of green light spreads from the cell body out along every arm to the tips and the end-feet, and the blood vessel they hold widens for a moment; faint waves pass now and then at rest (4.4 s).
-  - Sound: A soft airy swell as the calcium wave spreads (no synth shimmer), then the same soft wash as the vessel widens.
+  - Improved: E3: a calcium wave: a front of green light spreads from the cell body out along every
+    arm to the tips and the end-feet, and the blood vessel they hold widens for a moment; faint
+    waves pass now and then at rest (4.4 s).
+  - Sound: A soft airy swell as the calcium wave spreads (no synth shimmer), then the same soft wash
+    as the vessel widens.
 - **Animal cell** (`animal-cell`). Now: tap: Divide in two. Plan: keep.
   - Owner: Show some process going on inside, like replication.
   - Effect: Cell division: the nucleus splits and the cell pinches into two, then rejoins.
-  - Improved: E3: cell division: the nucleus (and its nucleolus and ER) splits into two, then the cell pinches in two across the view, sharing out its mitochondria, vesicles and Golgi; after a moment the two cells flow back into one (5.2 s).
+  - Improved: E3: cell division: the nucleus (and its nucleolus and ER) splits into two, then the
+    cell pinches in two across the view, sharing out its mitochondria, vesicles and Golgi; after a
+    moment the two cells flow back into one (5.2 s).
   - Sound: Gloopy stretching pop.
 - **DNA** (`dna`). Now: tap: Unzip and zip. Plan: keep.
   - Owner: Unzip even further, then zip back up. Almost perfect otherwise.
   - Effect: Unzips all the way, bases light up in pairs, then zips back.
-  - Improved: C2: a tap unzips it almost to the foot, the bases light up in pairs as the fork passes, then it zips back up (about 5.5 s).
-  - Sound: The real zipper timed to the strands: a quick zip as they fly open, a slower one as they close up (3.45 s) (Sound C, October 2, 2026).
+  - Improved: C2: a tap unzips it almost to the foot, the bases light up in pairs as the fork
+    passes, then it zips back up (about 5.5 s).
+  - Sound: The real zipper timed to the strands: a quick zip as they fly open, a slower one as they
+    close up (3.45 s) (Sound C, October 2, 2026).
 - **White blood cell** (`white-blood-cell`). Now: tap: Catch a bacterium. Plan: keep.
   - Owner: Needs an effect; looks good.
   - Effect: Chases and engulfs a small bacterium (phagocytosis).
-  - Improved: E3: phagocytosis: a bacterium swims in from the side, the cell leans out and reaches a cup of membrane round it, draws it inside and closes over it; granules gather on it and it glows and shrinks away as it is digested (5.6 s).
-  - Sound: A soft squishy membrane reaching out (no flutter clicks), the same gulp as it swallows, and a quieter fizz as it digests.
+  - Improved: E3: phagocytosis: a bacterium swims in from the side, the cell leans out and reaches a
+    cup of membrane round it, draws it inside and closes over it; granules gather on it and it glows
+    and shrinks away as it is digested (5.6 s).
+  - Sound: A soft squishy membrane reaching out (no flutter clicks), the same gulp as it swallows,
+    and a quieter fizz as it digests.
 - **Microglia** (`microglia`). Now: tap: Reach and sweep. Plan: keep.
   - Effect: Arms reach out and sweep, then retract.
-  - Improved: E3: its six arms feel about at rest; a tap makes every arm stretch out along its length, sweep to and fro twice, and draw back in (4.4 s).
+  - Improved: E3: its six arms feel about at rest; a tap makes every arm stretch out along its
+    length, sweep to and fro twice, and draw back in (4.4 s).
   - Sound: Soft scratchy rustle.
 - **Diatom** (`diatom`). Now: tap: Glint and open. Plan: keep.
   - Effect: The glass shell glints and splits into two halves.
-  - Improved: E3: a glint of light runs across the glass, then the shell parts into its two halves, opening like a clam from its far edge to show the golden chloroplasts inside, and closes again (4.4 s).
+  - Improved: E3: a glint of light runs across the glass, then the shell parts into its two halves,
+    opening like a clam from its far edge to show the golden chloroplasts inside, and closes again
+    (4.4 s).
   - Sound: Glassy tink.
 - **Tardigrade** (`tardigrade`). Now: tap: Wiggle. Plan: keep.
   - Owner: Looks great; the effect is awesome.
   - Sound: Tiny squeaky step.
 - **Pollen grain** (`pollen`). Now: tap: Burst. Plan: keep.
   - Effect: Bursts a puff of tiny grains.
-  - Improved: E3: it bursts as pollen does when it soaks up rain: it swells, then a puff of tiny starch granules jets out of its pores (or furrow), stays where it was let go while the grain turns, drifts down and fades (3.8 s).
+  - Improved: E3: it bursts as pollen does when it soaks up rain: it swells, then a puff of tiny
+    starch granules jets out of its pores (or furrow), stays where it was let go while the grain
+    turns, drifts down and fades (3.8 s).
   - Sound: The same puff and chirp, quieter (Sound C, October 2, 2026).
 - **Snowflake** (`snowflake`). Now: tap: Grow a new flake. Plan: keep.
   - Owner: Melt it, or change into another shape.
   - Effect: Arms regrow into a new pattern each tap.
-  - Improved: E3: the arms melt back from their tips to the middle, then a new flake grows out from the centre: three patterns of the chosen kind, one after another, each tap (3.6 s).
+  - Improved: E3: the arms melt back from their tips to the middle, then a new flake grows out from
+    the centre: three patterns of the chosen kind, one after another, each tap (3.6 s).
   - Sound: Crystalline tinkle.
 - **Chromosome** (`chromosome`). Now: tap: Pull apart. Plan: keep.
   - Owner: Something like mitosis or meiosis.
   - Effect: The sister chromatids pull apart at the centromere, then rejoin.
-  - Improved: E3: anaphase: spindle fibres reach in from two bright poles to the kinetochores and pull the sister chromatids apart, each led by its centromere with its arms trailing; then they come back together and the fibres let go (4.6 s).
-  - Sound: A soft sticky tear as the chromatids pull apart, and a soft squish as they come back together (no string, no clacks).
+  - Improved: E3: anaphase: spindle fibres reach in from two bright poles to the kinetochores and
+    pull the sister chromatids apart, each led by its centromere with its arms trailing; then they
+    come back together and the fibres let go (4.6 s).
+  - Sound: A soft sticky tear as the chromatids pull apart, and a soft squish as they come back
+    together (no string, no clacks).
 - **Mitochondrion** (`mitochondrion`). Now: tap: Make energy. Plan: keep.
   - Owner: The powerhouse of the cell; make the effect about that.
   - Effect: The cristae light up and energy sparks (ATP) pop out.
-  - Improved: E3: it powers up: light runs along the cristae from end to end, the whole thing gives a swell, and bright ATP sparks pop out of the open side in three waves and drift off; faint waves run along it now and then at rest (4 s).
-  - Sound: A real gas furnace lighting with a soft whoomp and a warm roar as it powers up, with the ATP sparks' soft pops; no motor, vroom or buzz (candidate A; B is a gas burner's steadier roar) (Sound C, October 2, 2026).
+  - Improved: E3: it powers up: light runs along the cristae from end to end, the whole thing gives
+    a swell, and bright ATP sparks pop out of the open side in three waves and drift off; faint
+    waves run along it now and then at rest (4 s).
+  - Sound: A real gas furnace lighting with a soft whoomp and a warm roar as it powers up, with the
+    ATP sparks' soft pops; no motor, vroom or buzz (candidate A; B is a gas burner's steadier roar)
+    (Sound C, October 2, 2026).
 - **Paramecium** (`paramecium`). Now: tap: Swim a loop. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Cilia beat in waves and it swims a loop.
-  - Improved: E3: its cilia beat hard in waves and it swims a full loop in the plane of the view, coming back to where it was (4.2 s).
-  - Sound: A hand moving gently through water: soft strokes through its loop, no shuffle or wind (Sound C, October 2, 2026).
+  - Improved: E3: its cilia beat hard in waves and it swims a full loop in the plane of the view,
+    coming back to where it was (4.2 s).
+  - Sound: A hand moving gently through water: soft strokes through its loop, no shuffle or wind
+    (Sound C, October 2, 2026).
 - **Amoeba** (`amoeba`). Now: tap: Crawl. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Pushes out a pseudopod and oozes over.
-  - Improved: E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back.
-  - Sound: Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle or ding (Sound C, October 2, 2026).
+  - Improved: E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and
+    the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch
+    a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back.
+  - Sound: Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle
+    or ding (Sound C, October 2, 2026).
 
 ## Atoms (6)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
   - Effect: Jumps to a higher orbital shape with a glow, then drops back and flashes.
-  - Improved: E2: a tap sends in a photon (a wiggle of light) that the electron absorbs: its cloud jumps to the next orbital up (one step up in energy, one more unit of angular momentum) and glows, then drops back with a flash and gives the photon out again (5.2 s).
-  - Sound: A short electric crackle and a rising swish as the photon is absorbed, and a brighter crackle and falling swish as it is given out.
+  - Improved: E2: a tap sends in a photon (a wiggle of light) that the electron absorbs: its cloud
+    jumps to the next orbital up (one step up in energy, one more unit of angular momentum) and
+    glows, then drops back with a flash and gives the photon out again (5.2 s).
+  - Sound: A short electric crackle and a rising swish as the photon is absorbed, and a brighter
+    crackle and falling swish as it is given out.
 - **Atom** (`atom`). Now: tap: Speed up the electrons. Plan: keep.
   - Effect: Electrons speed up into blurred shells.
-  - Improved: E2: a tap energises the atom: the electrons whirl faster and faster until each shell blurs into a glowing ring, then slow down (4.6 s). The cloud style's shells swell and brighten.
-  - Sound: The periodic table's atom sound: a soft electric blip as the electrons speed up and a ping as they blur into rings; no motor (Sound C, October 2, 2026).
+  - Improved: E2: a tap energises the atom: the electrons whirl faster and faster until each shell
+    blurs into a glowing ring, then slow down (4.6 s). The cloud style's shells swell and brighten.
+  - Sound: The periodic table's atom sound: a soft electric blip as the electrons speed up and a
+    ping as they blur into rings; no motor (Sound C, October 2, 2026).
 - **Molecule** (`molecule`). Now: tap: Heat it up. Plan: keep.
   - Effect: Bonds vibrate and stretch (like heat), then calm.
-  - Improved: E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe). Your own molecule (after the E2 review): type a name (about sixty well-known ones), a formula that names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES are embedded with a small force field) and heats up the same way. Fix7: each bond stretches and squeezes between its two atoms (its splats follow both atoms, by how far along the bond they are), so an atom never leaves its bond when it is heated.
-  - Sound: Soft little ticks of the atoms jostling as it heats, thinning out as it settles; no wind, no building blocks (Sound C, October 2, 2026).
+  - Improved: E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond
+    stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it
+    cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe). Your
+    own molecule (after the E2 review): type a name (about sixty well-known ones), a formula that
+    names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES
+    are embedded with a small force field) and heats up the same way. Fix7: each bond stretches and
+    squeezes between its two atoms (its splats follow both atoms, by how far along the bond they
+    are), so an atom never leaves its bond when it is heated.
+  - Sound: Soft little ticks of the atoms jostling as it heats, thinning out as it settles; no wind,
+    no building blocks (Sound C, October 2, 2026).
 - **Protein** (`protein`). Now: tap: Pull it apart. Plan: keep.
   - Owner: (Asked for in the E2 review: a protein toy that can take a PDB file.)
   - Effect: The protein pulls apart into its helices, strands and loops, then locks back together.
-  - Improved: New after the E2 review: a cartoon of a real structure from the Protein Data Bank (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows, loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s), instead of pausing; the next tap pulls it apart again.
-  - Sound: A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft thud as it reassembles (no building blocks).
+  - Improved: New after the E2 review: a cartoon of a real structure from the Protein Data Bank
+    (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows,
+    loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured
+    rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart
+    into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green
+    while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s),
+    instead of pausing; the next tap pulls it apart again.
+  - Sound: A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft
+    thud as it reassembles (no building blocks).
 - **Crystal lattice** (`crystal-lattice`). Now: tap: Send a wave through. Plan: keep.
   - Effect: A wave of vibration travels through the lattice.
-  - Improved: E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8 s). Fix7: the bonds between slices stretch and bend with the wave (their two ends follow their slices), so atoms never leave their bonds.
-  - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C, October 2, 2026).
+  - Improved: E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs
+    across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8
+    s). Fix7: the bonds between slices stretch and bend with the wave (their two ends follow their
+    slices), so atoms never leave their bonds.
+  - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
+    October 2, 2026).
 - **Periodic table** (`periodic-table`). Now: tap: Raise or lower the atom. Plan: keep.
   - Owner: Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).
-  - Effect: Tap an element's tile and its atom rises out of the table and builds itself: every proton and neutron of its commonest isotope, then the electrons filling their shells in order. Tap the atom and an electron jumps up a shell and falls back with a flash in the element's strongest visible line (NIST).
-  - Improved: Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it. Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic number or shuffled), and any tap stops it. Fix7: a tap on the 57-71 or 89-103 cell lights its row of lanthanides or actinides (3.5 s); a Wide table option shows the f-block in its periods (32 columns).
-  - Sound: The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it packs into the nucleus, in sync (Sound C, October 2, 2026).
+  - Effect: Tap an element's tile and its atom rises out of the table and builds itself: every
+    proton and neutron of its commonest isotope, then the electrons filling their shells in order.
+    Tap the atom and an electron jumps up a shell and falls back with a flash in the element's
+    strongest visible line (NIST).
+  - Improved: Chemistry: all 118 elements in the standard layout, colored by family; the atom rises
+    (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it.
+    Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap
+    on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic
+    number or shuffled), and any tap stops it. Fix7: a tap on the 57-71 or 89-103 cell lights its
+    row of lanthanides or actinides (3.5 s); a Wide table option shows the f-block in its periods
+    (32 columns).
+  - Sound: The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it
+    packs into the nucleus, in sync (Sound C, October 2, 2026).
 
 ## Gems (8)
 
 - **Diamond** (`diamond`). Now: tap: Turn it in the light. Plan: keep.
   - Owner: Gems need effects.
   - Effect: Fire: rainbow sparkles flash off the facets as it turns.
-  - Improved: E2: a tap turns it one way and the other in the light, like a ring: facet after facet flashes rainbow fire and the star glints flare (3.8 s).
+  - Improved: E2: a tap turns it one way and the other in the light, like a ring: facet after facet
+    flashes rainbow fire and the star glints flare (3.8 s).
   - Sound: A real bright glassy tap, and smaller tinks as the facets flash.
 - **Ruby** (`ruby`). Now: tap: Make it glow. Plan: keep.
   - Effect: Glows deep red from inside.
-  - Improved: E2: rubies glow red in ultraviolet light. A tap lights the stone deep red from its heart outwards; the glow throbs twice, shines out round it and fades (4 s).
+  - Improved: E2: rubies glow red in ultraviolet light. A tap lights the stone deep red from its
+    heart outwards; the glow throbs twice, shines out round it and fades (4 s).
   - Sound: A lower real glassy tap and a warm low glow as it lights red.
 - **Emerald** (`emerald`). Now: tap: Run light round the steps. Plan: keep.
   - Effect: Green light runs along the step cuts.
-  - Improved: E2: a tap sends green light racing round the edges of the step cut's steps, each step a little behind the one outside it, so the light spirals in to the table (4 s).
+  - Improved: E2: a tap sends green light racing round the edges of the step cut's steps, each step
+    a little behind the one outside it, so the light spirals in to the table (4 s).
   - Sound: The crisp gem tap alone, without the whoosh (Sound C, October 2, 2026).
 - **Amethyst geode** (`amethyst-geode`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
   - Effect: The geode opens wider and the crystals glow violet.
-  - Improved: C2: each time it opens, the halves swing wider and the crystals glow violet with twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: C2: each time it opens, the halves swing wider and the crystals glow violet with
+    twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even,
+    solid splats and calmer textures).
   - Sound: Stone crack and a chime.
 - **Sapphire** (`sapphire`). Now: tap: Catch the star. Plan: keep.
   - Effect: A star shimmer (asterism) glides across it.
-  - Improved: E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from a bright centre, lying on the stone and ending at its edge; it glides across the top with its rays keeping their directions, and the rays draw back in at the far side (3.6 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from
+    a bright centre, lying on the stone and ending at its edge; it glides across the top with its
+    rays keeping their directions, and the rays draw back in at the far side (3.6 s). Sharpness A
+    (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: The crisp gem tap alone, without the wind and sandy shuffle (Sound C, October 2, 2026).
 - **Quartz cluster** (`quartz-cluster`). Now: tap: Light the points. Plan: keep.
   - Effect: Points light up one by one.
-  - Improved: E2: a tap lights the ten points one by one from left to right, each glowing from within with a glint at its tip (a long and a short spike, each point's turned its own way), with a rising chime for each (4.4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: E2: a tap lights the ten points one by one from left to right, each glowing from
+    within with a glint at its tip (a long and a short spike, each point's turned its own way), with
+    a rising chime for each (4.4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats
+    and calmer textures).
   - Sound: Tinkling chimes.
 - **Opal** (`opal`). Now: tap: Tilt it in the light. Plan: keep.
   - Effect: Colour play: flashes of colour roll across it.
-  - Improved: E2: a tap rocks the stone in the light while flashes of colour roll across it patch by patch, changing hue as they go (4.2 s).
+  - Improved: E2: a tap rocks the stone in the light while flashes of colour roll across it patch by
+    patch, changing hue as they go (4.2 s).
   - Sound: A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).
 - **Pearl** (`pearl`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
@@ -936,108 +1443,171 @@ Proposals below are suggestions; the owner may change them.
 - **Oak tree** (`oak`). Now: tap: Shake the tree. Plan: keep.
   - Owner: Shake it and leaves come out.
   - Effect: Shakes and leaves flutter down.
-  - Improved: E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose one after another, each fluttering down on its own swinging path to lie on the grass; then they wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves still cling to the twigs, and those fall.
-  - Sound: A leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the synthesized sound as a fallback.
+  - Improved: E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose
+    one after another, each fluttering down on its own swinging path to lie on the grass; then they
+    wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves
+    still cling to the twigs, and those fall.
+  - Sound: A leafy rustle as the crown rocks, then soft rustles as the loose leaves land
+    (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the
+    synthesized sound as a fallback.
 - **Pine tree** (`pine`). Now: tap: Shake off the snow. Plan: keep.
   - Owner: Christmas lights and a star appear.
-  - Effect: Shakes off a dusting of snow (approved instead of lights, which the decorated tree already has).
-  - Improved: E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh snow settles on them again afterwards.
-  - Sound: The needles rustle as it rocks, with a soft jingle of sleigh bells; the snow's hiss and thump stay (no chime).
+  - Effect: Shakes off a dusting of snow (approved instead of lights, which the decorated tree
+    already has).
+  - Improved: E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs
+    drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and
+    melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh
+    snow settles on them again afterwards.
+  - Sound: The needles rustle as it rocks, with a soft jingle of sleigh bells; the snow's hiss and
+    thump stay (no chime).
 - **Palm tree** (`palm`). Now: tap: Shake down the coconuts. Plan: keep.
   - Owner: Tap it and the coconuts fall.
   - Effect: The coconuts fall and bounce, then regrow.
-  - Improved: E4: a tap shakes the crown and the five coconuts (now hanging in a bunch you can see) drop one after another, thump into the sand, bounce twice and roll to a stop, each with its own bonk; new coconuts swell in the crown while the fallen ones are carried off (about 5.5 s).
+  - Improved: E4: a tap shakes the crown and the five coconuts (now hanging in a bunch you can see)
+    drop one after another, thump into the sand, bounce twice and roll to a stop, each with its own
+    bonk; new coconuts swell in the crown while the fallen ones are carried off (about 5.5 s).
   - Sound: Two coconut bonks.
 - **Cherry blossom** (`cherry-blossom`). Now: tap: Shake the blossom. Plan: keep.
   - Owner: Really cool already. Maybe all the blossoms fall off when touched.
   - Effect: All the petals fall in a flurry, then it blooms again.
-  - Improved: C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches go bare, then it blooms again (about 4.5 s).
-  - Sound: The opening of the traditional "Sakura Sakura" on a plucked koto-like string, over a faint rustle of petals (no wind).
+  - Improved: C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches
+    go bare, then it blooms again (about 4.5 s).
+  - Sound: The opening of the traditional "Sakura Sakura" on a plucked koto-like string, over a
+    faint rustle of petals (no wind).
 - **Maple tree** (`maple`). Now: tap: Send a gust. Plan: keep.
   - Owner: Same kind of thing as the cherry blossom.
   - Effect: Leaves swirl down in a spiral gust (different from the cherry's gentle fall).
-  - Improved: E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s).
-  - Sound: A soft gust and the leaves rustling as they swirl and land (no crunching clicks, much less wind).
+  - Improved: E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off
+    and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the
+    grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s).
+  - Sound: A soft gust and the leaves rustling as they swirl and land (no crunching clicks, much
+    less wind).
 - **Bonsai** (`bonsai`). Now: tap: Grow a branch, then trim it. Plan: keep.
   - Owner: Maybe shrink or grow.
   - Effect: Grows a new branch, then the scissors snip it back.
-  - Improved: E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared away, and the stub heals over (about 5 s).
-  - Sound: The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized sound as a fallback.
+  - Improved: E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai
+    scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared
+    away, and the stub heals over (about 5 s).
+  - Sound: The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the
+    cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized
+    sound as a fallback.
 - **Weeping willow** (`willow`). Now: tap: Send a breeze through. Plan: keep.
   - Owner: Pick anything.
   - Effect: The long branches sway in a wave like a breeze passing.
-  - Improved: E4: a tap sends a breeze across the tree from the left: the hanging strands swing away with it a curtain at a time (they bend, most at their tips), swing back and settle, and the crown leans a little (about 5.5 s). The strands also sway gently at rest.
+  - Improved: E4: a tap sends a breeze across the tree from the left: the hanging strands swing away
+    with it a curtain at a time (they bend, most at their tips), swing back and settle, and the
+    crown leans a little (about 5.5 s). The strands also sway gently at rest.
   - Sound: The same breath of wind, quieter, with the strands rustling.
 - **Sunflower** (`sunflower`). Now: tap: Bring out the sun. Plan: keep.
   - Effect: The head turns to face the sun and petals open wide.
-  - Improved: E4: a tap brings out the sun at the top left: the head turns up to face it and all 48 ray petals spread wide open, each turning about its root; then the sun goes in, the head turns back and the petals lift again (about 5.5 s). The head nods gently at rest.
+  - Improved: E4: a tap brings out the sun at the top left: the head turns up to face it and all 48
+    ray petals spread wide open, each turning about its root; then the sun goes in, the head turns
+    back and the petals lift again (about 5.5 s). The head nods gently at rest.
   - Sound: A warm low swell as the sun comes out (no bouncing tone) and the petals rustling open.
 - **Rose** (`rose`). Now: tap: Open the bloom. Plan: keep.
   - Effect: Blooms open further, a petal drops.
-  - Improved: E4: a tap opens the bloom further (every petal turns out about its root, the outer ones most) and the outer petal facing you comes loose and flutters down to lie on the grass; the bloom closes up again, the fallen petal withers and a new one fills its place (about 5.5 s).
-  - Sound: As before, plus the daisy's soft tap when the loose petal lands on the grass (Sound C, October 2, 2026).
+  - Improved: E4: a tap opens the bloom further (every petal turns out about its root, the outer
+    ones most) and the outer petal facing you comes loose and flutters down to lie on the grass; the
+    bloom closes up again, the fallen petal withers and a new one fills its place (about 5.5 s).
+  - Sound: As before, plus the daisy's soft tap when the loose petal lands on the grass (Sound C,
+    October 2, 2026).
 - **Dandelion** (`dandelion`). Now: tap: Blow the seeds. Plan: keep.
   - Owner: Really cool effect; keep it.
   - Sound: Puff of breath.
 - **Tulips** (`tulip`). Now: tap: Open to the sun. Plan: keep.
   - Effect: Petals open wide to the sun, then close.
-  - Improved: E4: a tap opens the three tulips wide to the sun one after another: each of the eighteen petals turns out about its root and shows the dark stamens and the pale pistil inside; then they close up again (about 5 s).
+  - Improved: E4: a tap opens the three tulips wide to the sun one after another: each of the
+    eighteen petals turns out about its root and shows the dark stamens and the pale pistil inside;
+    then they close up again (about 5 s).
   - Sound: Gentle pluck.
 - **Daisies** (`daisy`). Now: tap: Loves me, loves me not. Plan: keep.
   - Effect: Petals spin like a pinwheel (loves me, loves me not).
-  - Improved: E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not), and it flings off eight petals one after another, a tick each, which flutter down to the grass while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the gaps (about 5.5 s).
-  - Sound: Each petal's soft tap now lands with it: scheduled for the landing itself, so it stays in sync at any frame rate (Sound C, October 2, 2026).
+  - Improved: E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not),
+    and it flings off eight petals one after another, a tick each, which flutter down to the grass
+    while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the
+    gaps (about 5.5 s).
+  - Sound: Each petal's soft tap now lands with it: scheduled for the landing itself, so it stays in
+    sync at any frame rate (Sound C, October 2, 2026).
 - **Lotus** (`lotus`). Now: tap: Rise and open. Plan: keep.
   - Effect: The flower rises and opens on the water with ripples.
-  - Improved: E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a ring of light spreading over the water, and opens it wide up in the air, the outer petals first; then it sinks back onto its pad, open, with a second ring (about 6.5 s).
+  - Improved: E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a
+    ring of light spreading over the water, and opens it wide up in the air, the outer petals first;
+    then it sinks back onto its pad, open, with a second ring (about 6.5 s).
   - Sound: Water drop and a bell.
 - **Toadstool** (`mushroom`). Now: tap: Puff out spores. Plan: keep.
   - Effect: Puffs a cloud of glowing spores.
-  - Improved: E4: a tap bops the big cap: it dips and springs back, and a cloud of glowing spores puffs out from the gills and billows up and out, each spore on its own path, fading as it drifts (about 4 s).
+  - Improved: E4: a tap bops the big cap: it dips and springs back, and a cloud of glowing spores
+    puffs out from the gills and billows up and out, each spore on its own path, fading as it drifts
+    (about 4 s).
   - Sound: Soft puff.
 - **Fern** (`fern`). Now: tap: Unfurl the fiddleheads. Plan: keep.
   - Effect: The fronds unroll from fiddleheads.
-  - Improved: E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a chain of six pieces that straighten one joint after another from the base to the tip, their leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s).
-  - Sound: A soft leafy rustle and a gentle stem creak as each frond unrolls, and again as they roll back up (no sandy flutter).
+  - Improved: E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a
+    chain of six pieces that straighten one joint after another from the base to the tip, their
+    leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s).
+  - Sound: A soft leafy rustle and a gentle stem creak as each frond unrolls, and again as they roll
+    back up (no sandy flutter).
 - **Saguaro cactus** (`saguaro`). Now: tap: Spines out, then a look inside. Plan: keep.
   - Owner: The spines come out, or it is cut in half to show the cactus water inside.
   - Effect: The spines shoot out and back; a second tap shows a cut-away with the watery inside.
-  - Improved: E4: taps take turns. The first shoots every spine out along its own line and draws them back with a quiver; the next slides a wedge out of the trunk to show the inside, wet pale-green flesh round a ring of woody ribs, dripping, then slides it home (about 4.5 s). It acts and sounds unlike the cactus scan, which blooms.
+  - Improved: E4: taps take turns. The first shoots every spine out along its own line and draws
+    them back with a quiver; the next slides a wedge out of the trunk to show the inside, wet
+    pale-green flesh round a ring of woody ribs, dripping, then slides it home (about 4.5 s). It
+    acts and sounds unlike the cactus scan, which blooms.
   - Sound: Prickly zing.
 - **Coral reef** (`coral`). Now: tap: Open the polyps. Plan: keep.
   - Owner: Really cool; pick something.
   - Effect: Polyps open and little fish dart out and back.
-  - Improved: E4: a tap opens the polyps all over the staghorn coral (tiny tentacled stars spread from their cups) and six little fish dart out of the reef, each on its own path, hover, turn and dart back in; then the polyps close (about 5 s).
+  - Improved: E4: a tap opens the polyps all over the staghorn coral (tiny tentacled stars spread
+    from their cups) and six little fish dart out of the reef, each on its own path, hover, turn and
+    dart back in; then the polyps close (about 5 s).
   - Sound: Bubbles.
 - **Pinecone** (`pinecone`). Now: tap: Open the scales. Plan: keep.
   - Owner: Good-looking but underwhelming; break apart.
   - Effect: The scales open wide (as in dry weather) and seeds drift out.
-  - Improved: E4, redone after the owner's review ("the actual pieces of the pinecone must fall off"): a tap opens the cone as in dry weather and six winged seeds spin down; then the 42 scales facing you break off one after another from the bottom up, tumble and land flat in a pile round the base, leaving the bare core with the stubs where they grew; they fly back up into place, top first, and the cone closes (about 7 s).
+  - Improved: E4, redone after the owner's review ("the actual pieces of the pinecone must fall
+    off"): a tap opens the cone as in dry weather and six winged seeds spin down; then the 42 scales
+    facing you break off one after another from the bottom up, tumble and land flat in a pile round
+    the base, leaving the bare core with the stubs where they grew; they fly back up into place, top
+    first, and the cone closes (about 7 s).
   - Sound: Woody creak.
 - **Acorns** (`acorn`). Now: tap: Pop the caps. Plan: keep.
   - Owner: Should do something.
   - Effect: The caps pop off and a sprout pokes out.
-  - Improved: E4: a tap pops the caps off: each flips through the air and lands upside down on the leaf, and a green sprout pokes out of each acorn and opens two tiny oak leaves; then the sprouts draw back in and the caps hop home (about 5 s).
+  - Improved: E4: a tap pops the caps off: each flips through the air and lands upside down on the
+    leaf, and a green sprout pokes out of each acorn and opens two tiny oak leaves; then the sprouts
+    draw back in and the caps hop home (about 5 s).
   - Sound: Tiny pop.
 - **Succulent** (`succulent`). Now: tap: Open and flower. Plan: keep.
   - Owner: Pick something.
   - Effect: The rosette opens and a small flower stalk rises.
-  - Improved: E4: a tap opens the rosette (every leaf tips outward about its root) and a flower stalk rises from the middle and arches over with six little coral bells; then it draws back and the rosette closes (about 5.5 s).
+  - Improved: E4: a tap opens the rosette (every leaf tips outward about its root) and a flower
+    stalk rises from the middle and arches over with six little coral bells; then it draws back and
+    the rosette closes (about 5.5 s).
   - Sound: Soft rising pluck.
 - **Bamboo** (`bamboo`). Now: tap: Grow new shoots. Plan: keep.
   - Owner: Maybe it grows.
   - Effect: Shoots grow tall very fast, segment by segment.
-  - Improved: E4: three young shoots sit on the ground. A tap makes them shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, carrying the sheathed tip, and a tuft of leaves opens at the top; later they sink back down (about 5.5 s).
+  - Improved: E4: three young shoots sit on the ground. A tap makes them shoot up a section at a
+    time, each new section sliding up out of the one below with a hollow knock, carrying the
+    sheathed tip, and a tuft of leaves opens at the top; later they sink back down (about 5.5 s).
   - Sound: Hollow wooden knocks.
 - **Pebbles** (`rocks`). Now: tap: Tumble and stack. Plan: keep.
   - Owner: Should fall or drop.
   - Effect: The pebbles drop and scatter, then stack into a cairn.
-  - Improved: E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again. Physics (Hands-on): drag a pebble to pick it up and set it on the sand or on another stone; a careful stack stands, a careless one topples.
-  - Sound: Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay; real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.
+  - Improved: E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie
+    clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a
+    clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off
+    and are stacked again. Physics (Hands-on): drag a pebble to pick it up and set it on the sand or
+    on another stone; a careful stack stands, a careless one topples.
+  - Sound: Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay;
+    real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.
 - **Kelp** (`kelp`). Now: tap: Fish come to nibble. Plan: keep.
   - Owner: Maybe fish eat it; pick something.
   - Effect: Fish swim in and nibble; the kelp sways away.
-  - Improved: E4: a tap brings three little fish swimming in from the left; each noses up to a blade and takes a few nibbles, and the kelp sways away from them, the nearest stalks first, then swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest.
+  - Improved: E4: a tap brings three little fish swimming in from the left; each noses up to a blade
+    and takes a few nibbles, and the kelp sways away from them, the nearest stalks first, then
+    swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest.
   - Sound: Underwater bubbles.
 
 ## Food (28)
@@ -1045,133 +1615,196 @@ Proposals below are suggestions; the owner may change them.
 - **Ice cream** (`ice-cream`). Now: tap: Melt and refreeze. Plan: keep.
   - Owner: Really neat; I like that you can melt it. Make melting part of the tap effect.
   - Effect: Tap melts it: drips run down the cone, then it refreezes.
-  - Improved: C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes (about 5 s). The Warmth slider still works.
+  - Improved: C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes
+    (about 5 s). The Warmth slider still works.
   - Sound: A slow, thick melt with heavy drops plopping down (no bubbles or drips).
 - **Watermelon** (`watermelon`). Now: tap: Chop into slices. Plan: keep.
   - Owner: Cut it in half or into slices.
   - Effect: Cuts into slices that fan out.
-  - Improved: E5: a big knife chops the whole melon five times, right to left, then the six slices fan open on their bottoms like an accordion, showing red flesh, pale rind and black seeds on their cut faces, and fold shut (about 3.6 s).
+  - Improved: E5: a big knife chops the whole melon five times, right to left, then the six slices
+    fan open on their bottoms like an accordion, showing red flesh, pale rind and black seeds on
+    their cut faces, and fold shut (about 3.6 s).
   - Sound: No whoosh at the start, only a soft settle; the chops and the fan are unchanged.
 - **Birthday cake** (`birthday-cake`). Now: tap: Blow out. Plan: keep.
   - Owner: Pretty much perfect.
-  - Sound: Blown out with a breath, then the last line of "Happy Birthday to You" on the piano with its chords (no voices); relighting keeps the match.
+  - Sound: Blown out with a breath, then the last line of "Happy Birthday to You" on the piano with
+    its chords (no voices); relighting keeps the match.
 - **Popcorn** (`popcorn`). Now: tap: Pop!. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum (Sound C, October 2, 2026).
+  - Sound: A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum
+    (Sound C, October 2, 2026).
 - **Jelly** (`jelly`). Now: tap: Poke. Plan: keep.
   - Owner: Pretty much fine.
-  - Improved: Physics (Hands-on): drag it to stretch it toward the finger; let go and it springs back and wobbles on its plate.
+  - Improved: Physics (Hands-on): drag it to stretch it toward the finger; let go and it springs
+    back and wobbles on its plate.
   - Sound: A wet, heavy wobble instead of a cartoon boing.
 - **Pancakes** (`pancakes`). Now: tap: Flip the top one. Plan: keep.
   - Owner: Really neat.
-  - Improved: Fix7: the syrup on the top pancake, and the drips down its side, flip with it; the syrup that ran onto the pancakes below stays.
+  - Improved: Fix7: the syrup on the top pancake, and the drips down its side, flip with it; the
+    syrup that ran onto the pancakes below stays.
   - Sound: A smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks).
 - **Cupcake** (`cupcake`). Now: tap: Flick the cherry. Plan: keep.
   - Owner: Needs an effect.
   - Effect: A cherry drops on top and sprinkles rain down.
-  - Improved: E5: the frosting springs and flicks the cherry up; it tumbles and drops back with a plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down (about 2.3 s).
+  - Improved: E5: the frosting springs and flicks the cherry up; it tumbles and drops back with a
+    plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down (about
+    2.3 s).
   - Sound: Plop and sprinkle patter.
 - **Lollipop** (`lollipop`). Now: tap: Spin fast. Plan: keep.
   - Owner: Maybe spins really fast.
   - Effect: Spins fast and the swirl hypnotises.
-  - Improved: E5: the swirl whirls up to nearly three turns a second, so the spiral seems to pour inwards, then slows back to its idle turn (about 3 s).
+  - Improved: E5: the swirl whirls up to nearly three turns a second, so the spiral seems to pour
+    inwards, then slows back to its idle turn (about 3 s).
   - Sound: Only the wind as it spins (the rising "vroom" hum is gone).
 - **Candy cane** (`candy-cane`). Now: tap: Twist and snap. Plan: keep.
   - Owner: Pick something.
   - Effect: The stripes wind around like a barber pole, then it snaps in two and rejoins.
-  - Improved: E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then the halves come back together and mend with a glint (about 2.9 s). Fix7: the bow has both ribbon tails, hanging in front of the canes. Hands engine B (Hands-on): Pull the hook: it bends a little, then snaps in two with a crack; pick up the broken piece; reset mends it.
+  - Improved: E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with
+    a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then
+    the halves come back together and mend with a glint (about 2.9 s). Fix7: the bow has both ribbon
+    tails, hanging in front of the canes. Hands engine B (Hands-on): Pull the hook: it bends a
+    little, then snaps in two with a crack; pick up the broken piece; reset mends it.
   - Sound: The sugar strains as it twists (no whistle); the snaps and the mends stay.
 - **Macarons** (`macarons`). Now: tap: Stack up. Plan: keep.
   - Owner: Maybe they do something.
   - Effect: They stack themselves into a tower.
-  - Improved: E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s). Physics (Hands-on): pick up any macaron and stack it on the plate or the stack; a crooked one slides off.
+  - Improved: E5: the two in front hop one after the other up onto the stack, rising clear of its
+    rim and landing level with a soft tap; the tower of five sways, then they hop back down (about
+    3.5 s). Physics (Hands-on): pick up any macaron and stack it on the plate or the stack; a
+    crooked one slides off.
   - Sound: Soft taps.
 - **Donut** (`donut`). Now: tap: Break apart (rig). Plan: keep.
   - Owner: Interesting; good-looking.
   - Effect: Sprinkles jump off and rain back down.
-  - Improved: E1b: it snaps into chunks that fly apart and tumble (the dough shows inside), the sprinkles spray off, then it all flies back together (2.8 s).
-  - Sound: A soft, dry tear as it pulls apart (a real bread tear) and a soft pat as the halves meet; nothing wet (Sound C, October 2, 2026).
+  - Improved: E1b: it snaps into chunks that fly apart and tumble (the dough shows inside), the
+    sprinkles spray off, then it all flies back together (2.8 s).
+  - Sound: A soft, dry tear as it pulls apart (a real bread tear) and a soft pat as the halves meet;
+    nothing wet (Sound C, October 2, 2026).
 - **Gummy bear** (`gummy-bear`). Now: tap: Squish. Plan: keep.
-  - Owner: Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back with realistic physics.
+  - Owner: Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back
+    with realistic physics.
   - Effect: Drag to stretch (like the Magnet, with springy release); tap does a jelly jiggle.
-  - Improved: D: drag-to-stretch. With the Orbit tool, a drag that starts on the bear pulls the part you grabbed (up to about a body length) and it springs back with a few wobbles when you let go; a drag beside it still turns the view. A tap still does the jelly jiggle.
+  - Improved: D: drag-to-stretch. With the Orbit tool, a drag that starts on the bear pulls the part
+    you grabbed (up to about a body length) and it springs back with a few wobbles when you let go;
+    a drag beside it still turns the view. A tap still does the jelly jiggle.
   - Sound: Only the bounce (the whistle is gone).
   - Touch or drag interaction (phase F).
 - **Pretzel** (`pretzel`). Now: tap: Twist. Plan: keep.
   - Owner: Some sort of twisting, like the knots.
   - Effect: Untwists into a rope and twists back.
-  - Improved: E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope crosses or rests on itself it stays joined; let go, it springs a little past its shape into the opposite twist and wobbles to a stop (about 3.8 s).
+  - Improved: E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece:
+    its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope
+    crosses or rests on itself it stays joined; let go, it springs a little past its shape into the
+    opposite twist and wobbles to a stop (about 3.8 s).
   - Sound: Soft dough squished and pulled, with a wet stretching sound.
 - **Croissant** (`croissant`). Now: tap: Open it. Plan: keep.
   - Owner: Must differ from the real croissant.
   - Effect: Puffs up in an oven glow (rising), then flakes fly off.
-  - Improved: E5 (r2, after the owner's note): a tap slices it open along its middle: the top lifts and tips back like a lid, showing the soft layered inside, where a pat of butter melts and spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which tears in half.
-  - Sound: The flaky layers shattering softly under the knife, and a smooth butter sizzle (no clicks).
+  - Improved: E5 (r2, after the owner's note): a tap slices it open along its middle: the top lifts
+    and tips back like a lid, showing the soft layered inside, where a pat of butter melts and
+    spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which
+    tears in half.
+  - Sound: The flaky layers shattering softly under the knife, and a smooth butter sizzle (no
+    clicks).
 - **Pizza** (`pizza`). Now: tap: Take a slice. Plan: keep.
   - Owner: Perfect.
-  - Improved: Hands engine C (Hands-on): pull the slice away; the cheese strings sag, stretch and snap; set it back.
+  - Improved: Hands engine C (Hands-on): pull the slice away; the cheese strings sag, stretch and
+    snap; set it back.
   - Sound: The bite and a softer, shorter cheese stretch; not windy (Sound C, October 2, 2026).
 - **Burger** (`burger`). Now: tap: Explode view. Plan: keep.
   - Owner: Perfect.
-  - Improved: Fix7: about 160 real sesame seeds on the bun, and no pale crumb showing through the crust close up (the white flash); the lettuce is whole, with no hole in its middle.
+  - Improved: Fix7: about 160 real sesame seeds on the bun, and no pale crumb showing through the
+    crust close up (the white flash); the lettuce is whole, with no hole in its middle.
   - Sound: The patty's smooth sizzle, no clicking.
 - **Sushi** (`sushi`). Now: tap: Pick up and dip. Plan: keep.
   - Owner: Chopsticks lifted by an invisible hand pick up the sushi.
   - Effect: Chopsticks pick up a roll, dip it and put it back.
-  - Improved: E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s). Physics: a tap on a piece sends the chopsticks to that piece (either nigiri or any maki); they dip it and put it back.
+  - Improved: E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll
+    (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down
+    again (about 4.7 s). Physics: a tap on a piece sends the chopsticks to that piece (either nigiri
+    or any maki); they dip it and put it back.
   - Sound: Wooden chopstick clicks.
 - **Taco** (`taco`). Now: tap: Break in half. Plan: keep.
   - Owner: Break in half to show what is inside. Really cool taco.
   - Effect: Shell cracks in half and the filling spills out, then it reassembles.
-  - Improved: E5: the shell snaps across the middle with a crunch; the halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto a new plate and bounce; then they hop back in and the halves close (about 3.1 s). Fix7: the meat stays inside the shell; the bits drop out of the opened break onto the plate, bounce a little and slide to a stop.
-  - Sound: A hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings now (taco-crack.mp3), with the synthesized sound as a fallback.
+  - Improved: E5: the shell snaps across the middle with a crunch; the halves pull apart and swing
+    open like a book, showing the filling in each break, and bits spill onto a new plate and bounce;
+    then they hop back in and the halves close (about 3.1 s). Fix7: the meat stays inside the shell;
+    the bits drop out of the opened break onto the plate, bounce a little and slide to a stop.
+  - Sound: A hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings
+    now (taco-crack.mp3), with the synthesized sound as a fallback.
 - **Boiled egg** (`egg`). Now: tap: Crack. Plan: keep.
   - Owner: Perfect.
   - Sound: Shell tap.
 - **Coffee** (`coffee`). Now: tap: Stir. Plan: keep.
   - Owner: Needs work. The cream on top could spin in a swirl on tap.
   - Effect: Latte art swirl spins; steam curls up.
-  - Improved: C2: the latte art twists into a swirl (the middle turns further than the edge) and relaxes back, with a thick curl of steam.
+  - Improved: C2: the latte art twists into a swirl (the middle turns further than the edge) and
+    relaxes back, with a thick curl of steam.
   - Sound: A simple "tap tap" of a spoon on the cup.
 - **Apple** (`apple`). Now: tap: Take a bite. Plan: keep.
   - Owner: A bite taken out of it, or a worm comes out.
   - Effect: A bite appears (crunch); a second tap, a worm peeks out.
-  - Improved: E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about, ducks back in, and the apple grows whole (about 2.9 s). Fix7: the bite's edge is clean: no pale flesh specks on the skin round it.
-  - Sound: A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper; real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.
+  - Improved: E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of
+    pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about,
+    ducks back in, and the apple grows whole (about 2.9 s). Fix7: the bite's edge is clean: no pale
+    flesh specks on the skin round it.
+  - Sound: A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper;
+    real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.
 - **Bananas** (`banana`). Now: tap: Peel them. Plan: keep.
   - Owner: Peel open.
   - Effect: One banana peels open.
-  - Improved: E5 (r2, after the owner's note): the three bananas pull apart off their crown, then each is peeled from its tip, front first: its skin splits into three strips that curl back, each bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they pull apart. Fix7: the three bananas lie side by side, just touching (they used to cross); the fruit and the inner peel show only while a banana is peeled, so no pale specks show through the skin.
-  - Sound: A soft rustle as the bunch comes apart, and a quiet real banana peel as each one peels (no zipper) (Sound C, October 2, 2026).
+  - Improved: E5 (r2, after the owner's note): the three bananas pull apart off their crown, then
+    each is peeled from its tip, front first: its skin splits into three strips that curl back, each
+    bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes
+    together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is
+    gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they
+    pull apart. Fix7: the three bananas lie side by side, just touching (they used to cross); the
+    fruit and the inner peel show only while a banana is peeled, so no pale specks show through the
+    skin.
+  - Sound: A soft rustle as the bunch comes apart, and a quiet real banana peel as each one peels
+    (no zipper) (Sound C, October 2, 2026).
 - **Orange** (`orange`). Now: tap: Open into wedges. Plan: keep.
   - Owner: Pick something.
   - Effect: Splits into segments that fan out.
-  - Improved: E5: the whole orange opens like a flower: eight wedges fall open outwards on their bottoms, one just after another, showing their juicy cut faces, while juice squirts up out of the middle; then it closes up (about 3 s). Hands engine B (Hands-on): Pull the wedges out one by one and set them down; bring one back over its place and it clicks home.
+  - Improved: E5: the whole orange opens like a flower: eight wedges fall open outwards on their
+    bottoms, one just after another, showing their juicy cut faces, while juice squirts up out of
+    the middle; then it closes up (about 3 s). Hands engine B (Hands-on): Pull the wedges out one by
+    one and set them down; bring one back over its place and it clicks home.
   - Sound: Juicy squirt.
 - **Kiwi** (`kiwi`). Now: tap: Cut open. Plan: keep.
   - Owner: Pick something.
   - Effect: Halves open to show the green inside and seeds.
-  - Improved: E5: the whole kiwi is cut across the middle; the halves slide apart and turn to show their green faces with the ring of black seeds, then close up again (about 2.8 s).
+  - Improved: E5: the whole kiwi is cut across the middle; the halves slide apart and turn to show
+    their green faces with the ring of black seeds, then close up again (about 2.8 s).
   - Sound: Soft slice.
 - **Pineapple** (`pineapple`). Now: tap: Slice into rings. Plan: keep.
   - Owner: Maybe it gets cut.
   - Effect: Cut into rings that stack.
-  - Improved: E5: four chops, top first: with each, everything above lifts and leans towards you, until five rings stand apart in a leaning stack showing their golden faces and pale cores; then they drop back onto each other (about 3 s).
+  - Improved: E5: four chops, top first: with each, everything above lifts and leans towards you,
+    until five rings stand apart in a leaning stack showing their golden faces and pale cores; then
+    they drop back onto each other (about 3 s).
   - Sound: Chop.
 - **Cherries** (`cherries`). Now: tap: Swing. Plan: keep.
   - Owner: No idea.
   - Effect: The pair swings and bounces on its stems.
-  - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s). Physics (Hands-on): pull a cherry out on its stem and let go; it swings back and knocks the other, which swings out in turn.
+  - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and
+    knock together (a plink each time), bouncing apart again until they settle, while the joint bobs
+    (about 3.6 s). Physics (Hands-on): pull a cherry out on its stem and let go; it swings back and
+    knocks the other, which swings out in turn.
   - Sound: No string note, only the stems' soft swish; the knocking is unchanged.
 - **Grapes** (`grapes`). Now: tap: Drop grapes. Plan: keep.
   - Owner: Could fall off the stem.
   - Effect: Grapes drop off the stem and bounce, then return.
-  - Improved: E5: ten grapes on the front come off one after another, drop and bounce on the table and roll a little, each on its own path, then hop back up to their places one by one (about 3.9 s). Unlike the grape scan, whose peel curls back.
+  - Improved: E5: ten grapes on the front come off one after another, drop and bounce on the table
+    and roll a little, each on its own path, then hop back up to their places one by one (about 3.9
+    s). Unlike the grape scan, whose peel curls back.
   - Sound: Plop-plop cascade.
 - **Avocado** (`avocado`). Now: tap: Pop the stone. Plan: keep.
   - Owner: Pick something.
   - Effect: Splits open and the stone pops out and back.
-  - Improved: E5: the stone pops out of its half, flies over and drops into the empty half with a thock, rocking it, then pops back home and the first half rocks (about 3.1 s).
+  - Improved: E5: the stone pops out of its half, flies over and drops into the empty half with a
+    thock, rocking it, then pops back home and the first half rocks (about 3.1 s).
   - Sound: Thock.
 
 ## Toys (16)
@@ -1179,47 +1812,72 @@ Proposals below are suggestions; the owner may change them.
 - **Building bricks** (`bricks`). Now: tap: Build something. Plan: keep.
   - Owner: Build something random from the blocks.
   - Effect: Bricks rearrange into a random small build (tower, bridge, animal), different each tap.
-  - Improved: F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s). Physics (Hands-on): pick up any brick and stack it; over another brick it turns square, lines up with the studs and clicks on.
+  - Improved: F: eighteen bricks lie poured out round the table. Each tap pops the last model apart
+    and builds a new one in the middle, brick by brick from the bottom up, each clicking into place:
+    a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s). Physics
+    (Hands-on): pick up any brick and stack it; over another brick it turns square, lines up with
+    the studs and clicks on.
   - Sound: A lower plastic clack, for the tap and each brick landing.
   - Touch or drag interaction (phase F).
 - **Rubber duck** (`rubber-duck`). Now: tap: Squeak. Plan: keep.
   - Owner: Effect is OK; it needs a quack.
   - Effect: Keep the effect.
-  - Improved: C2: the same squeeze and hop, now with a bob and rock that settles by about 1.8 s. The quack is Phase D.
+  - Improved: C2: the same squeeze and hop, now with a bob and rock that settles by about 1.8 s. The
+    quack is Phase D.
   - Sound: Rubber duck quack.
 - **Spinning top** (`spinning-top`). Now: tap: Spin it. Plan: keep.
   - Owner: Perfect.
-  - Sound: A soft flick as it starts; its spin is a quiet real hum that follows its speed (louder and a little higher when fast, gone as it slows), also when a drag spins it (Sound C, October 2, 2026).
+  - Sound: A soft flick as it starts; its spin is a quiet real hum that follows its speed (louder
+    and a little higher when fast, gone as it slows), also when a drag spins it (Sound C, October 2,
+    2026).
 - **Dice** (`dice`). Now: tap: Roll. Plan: keep.
   - Owner: Maybe my favourite; rolls feel random like real dice. Keep it.
-  - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling; real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.
+  - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling;
+    real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.
 - **Newton's cradle** (`newtons-cradle`). Now: tap: Lift and let go. Plan: keep.
   - Owner: Tapping has no noticeable effect. Make it more interactive.
-  - Effect: Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back and let go.
-  - Improved: E1c: a tap lifts the end ball and lets it go. Each strike sends the far ball out, loses a little height and clacks as it lands, the middle balls twitch with the knock, and it dies away over about 9 s. It no longer swings on its own. F: drag any ball out to the side and let go; the balls between it and the end come with it, and as many balls fly out the other side.
+  - Effect: Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back
+    and let go.
+  - Improved: E1c: a tap lifts the end ball and lets it go. Each strike sends the far ball out,
+    loses a little height and clacks as it lands, the middle balls twitch with the knock, and it
+    dies away over about 9 s. It no longer swings on its own. F: drag any ball out to the side and
+    let go; the balls between it and the end come with it, and as many balls fly out the other side.
   - Sound: Crisp steel clacks.
   - Touch or drag interaction (phase F).
 - **Teddy bear** (`teddy-bear`). Now: tap: Wave hello. Plan: keep.
   - Owner: Cute; fine.
-  - Sound: The soft rustle of a plush bear's fabric and stuffing; no creak (Sound C, October 2, 2026).
+  - Sound: The soft rustle of a plush bear's fabric and stuffing; no creak (Sound C, October 2,
+    2026).
 - **Yo-yo** (`yo-yo`). Now: tap: Throw. Plan: keep.
   - Owner: Fine.
-  - Improved: Hands engine C (Hands-on): pull the yo-yo down its string and let go; it drops, spins at the end and climbs back.
+  - Improved: Hands engine C (Hands-on): pull the yo-yo down its string and let go; it drops, spins
+    at the end and climbs back.
   - Sound: The string unwinding, the whirr at the bottom and the smack back into the hand.
 - **Puzzle cube** (`puzzle-cube`). Now: tap: Scramble or solve. Plan: keep.
-  - Owner: Only the top row twists (very cool). Move more than the top row; ideally swipe any row or column to solve it; add a shuffle.
-  - Effect: Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.
-  - Improved: F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes. Fix7: a tap during a scramble or solve pauses it once the turn in progress lands, so the cube can be turned by hand; a move of your own ends the automatic one, and the next tap starts a new one from there (a tap without a move carries on).
-  - Sound: Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0 recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.
+  - Owner: Only the top row twists (very cool). Move more than the top row; ideally swipe any row or
+    column to solve it; add a shuffle.
+  - Effect: Tap scrambles with several random layer turns. Later: swipe a face to turn that layer,
+    with a solved check.
+  - Improved: F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it
+    follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14
+    quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and
+    chimes. Fix7: a tap during a scramble or solve pauses it once the turn in progress lands, so the
+    cube can be turned by hand; a move of your own ends the automatic one, and the next tap starts a
+    new one from there (a tap without a move carries on).
+  - Sound: Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0
+    recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.
   - Touch or drag interaction (phase F).
 - **Spring toy** (`spring-toy`). Now: tap: Make it walk. Plan: keep.
   - Owner: Basically perfect.
-  - Improved: Physics (Hands-on): pull its top coils up or sideways and it stretches coil by coil; let go and it springs back, wobbles and walks on.
+  - Improved: Physics (Hands-on): pull its top coils up or sideways and it stretches coil by coil;
+    let go and it springs back, wobbles and walks on.
   - Sound: A real metal Slinky's shimmering coils as it walks (Sound C, October 2, 2026).
 - **Kite** (`kite`). Now: tap: Gust of wind. Plan: keep.
   - Owner: Underwhelming; develop the animation further.
   - Effect: A big gust: the kite loops the loop and the tail whips.
-  - Improved: C2: a big gust loops the kite round while it rises, and the tail whips; the line stays attached (about 3 s). Hands engine C (Hands-on): drag the kite or its line; it swoops back up into the wind, its tail flapping.
+  - Improved: C2: a big gust loops the kite round while it rises, and the tail whips; the line stays
+    attached (about 3 s). Hands engine C (Hands-on): drag the kite or its line; it swoops back up
+    into the wind, its tail flapping.
   - Sound: The same, with the wind dialed back.
 - **Paper plane** (`paper-plane`). Now: tap: Barrel roll. Plan: keep.
   - Owner: Fine.
@@ -1229,60 +1887,101 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Paper flutter.
 - **Balloon dog** (`balloon-dog`). Now: tap: Pop. Plan: keep.
   - Owner: Almost perfect.
-  - Sound: A real balloon bursting (no whistle first); real CC0 recordings now (balloon-dog-pop.mp3), with the synthesized sound as a fallback.
+  - Sound: A real balloon bursting (no whistle first); real CC0 recordings now
+    (balloon-dog-pop.mp3), with the synthesized sound as a fallback.
 - **Soap bubbles** (`soap-bubbles`). Now: tap: Blow bubbles. Plan: keep.
   - Owner: Perfect.
-  - Sound: A soft breath through the wand, and a soft real pop as each bubble bursts while it's blown (Sound C, October 2, 2026).
+  - Sound: A soft breath through the wand, and a soft real pop as each bubble bursts while it's
+    blown (Sound C, October 2, 2026).
 - **Wind-up robot** (`robot`). Now: tap: Wind it up. Plan: keep.
   - Owner: Perfect.
-  - Sound: A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a fallback.
+  - Sound: A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet
+    clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a
+    fallback.
 - **Chess set** (`chess-set`). Now: tap: Play the Opera Game. Plan: keep.
-  - Owner: Ideally playable. At least: a tap plays a real game, white against black, as a long animation.
-  - Effect: Plays a famous public-domain game move by move; later, tap a piece then a square to move it.
-  - Improved: E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear message for a bad file), set the move speed, or go back to the Opera Game (the default). A promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or resignation. F: tap a piece whose turn it is (it lifts), then a square it can legally move to; the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king over). The Play button, the game bar and a tap beside the board still play the Opera Game.
-  - Sound: Pieces set down on a felted wooden board, a woody thock (a sharper one for captures), like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the synthesized sound as a fallback.
+  - Owner: Ideally playable. At least: a tap plays a real game, white against black, as a long
+    animation.
+  - Effect: Plays a famous public-domain game move by move; later, tap a piece then a square to move
+    it.
+  - Improved: E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera
+    Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces
+    go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap
+    again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all
+    the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear
+    message for a bad file), set the move speed, or go back to the Opera Game (the default). A
+    promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or
+    resignation. F: tap a piece whose turn it is (it lifts), then a square it can legally move to;
+    the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king
+    over). The Play button, the game bar and a tap beside the board still play the Opera Game.
+  - Sound: Pieces set down on a felted wooden board, a woody thock (a sharper one for captures),
+    like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
+    synthesized sound as a fallback.
 
 ## Maths (17)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
   - Effect: A glowing point races along the trail, drawing a new path.
-  - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it again in light that then fades (about 3 s).
+  - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
+    again in light that then fades (about 3 s).
   - Sound: Something epic, a deep hit, a dark slow rush and a wide low chord (no whistling howl).
 - **Möbius strip** (`mobius`). Now: tap: Send it round. Plan: keep.
   - Owner: Wow, really neat. Maybe twist a little.
   - Effect: An ant-like dot walks the single side; the band twists.
-  - Improved: E3: a tap sends a rider on two laps along the middle of the band: after one lap it is underneath (the band has one side), after two it is back on top where it started, while the band twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck riding a bicycle (wheels and pedals turning) or the ant.
-  - Sound: No step tune; each rider has its own sound on the ride: a race car's engine, a rolling beach ball, a bicycle with one soft quack, the ant's tiny feet.
+  - Improved: E3: a tap sends a rider on two laps along the middle of the band: after one lap it is
+    underneath (the band has one side), after two it is back on top where it started, while the band
+    twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the
+    Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck
+    riding a bicycle (wheels and pedals turning) or the ant.
+  - Sound: No step tune; each rider has its own sound on the ride: a race car's engine, a rolling
+    beach ball, a bicycle with one soft quack, the ant's tiny feet.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
-  - Owner: Not sure it has an effect. Maybe water flows through it; it already kind of does, make that dramatic.
+  - Owner: Not sure it has an effect. Maybe water flows through it; it already kind of does, make
+    that dramatic.
   - Effect: A clear surge of water flows through the neck and round.
-  - Improved: C2: a new tap action sends a surge of rippling water along the tube and round, and the glass glows (about 4 s).
-  - Sound: Water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0 recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.
+  - Improved: C2: a new tap action sends a surge of rippling water along the tube and round, and the
+    glass glows (about 4 s).
+  - Sound: Water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0
+    recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.
 - **Menger sponge** (`menger-sponge`). Now: tap: Close and carve the holes. Plan: keep.
-  - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely homepage embed (the transcript may refer to the next toy, the hypercube).
+  - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely
+    homepage embed (the transcript may refer to the next toy, the hypercube).
   - Effect: Zooms into itself: the holes open to show the next level down.
-  - Improved: E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into a plain cube; then it is carved again level by level: the six big cubes slide out of the faces, then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead of a zoom, which blurred.)
+  - Improved: E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into
+    a plain cube; then it is carved again level by level: the six big cubes slide out of the faces,
+    then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead
+    of a zoom, which blurred.)
   - Sound: Descending recursive blips.
 - **Hypercube** (`hypercube`). Now: tap: Turn inside out. Plan: keep.
   - Owner: Possibly the favourite and homepage embed (see the Menger sponge).
   - Effect: Rotates through the fourth dimension, turning inside out.
-  - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, holds a moment, then turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
-  - Sound: No "vroom"; a great slow rush as it turns inside out and again as it turns home, over a low chord.
+  - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
+    cube swells out to become the outer one while the blue one folds inside, holds a moment, then
+    turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
+  - Sound: No "vroom"; a great slow rush as it turns inside out and again as it turns home, over a
+    low chord.
 - **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: keep.
   - Owner: Contort a little; looks cool.
   - Effect: Contorts through different knot shapes.
-  - Improved: E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4 s).
-  - Sound: It strains as it is pulled and lets go with a real thump and swish (no banjo or guitar notes).
+  - Improved: E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it
+    springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4
+    s).
+  - Sound: It strains as it is pulled and lets go with a real thump and swish (no banjo or guitar
+    notes).
 - **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: keep.
   - Owner: Really neat; needs an effect.
   - Effect: The surface flows and shifts phase like a breathing sponge.
-  - Improved: E3: a tap makes the sponge breathe: the surface slides to a shifted level of its own equation, so the orange channels swell as the blue ones narrow, then the other way, and it settles (about 3.8 s).
+  - Improved: E3: a tap makes the sponge breathe: the surface slides to a shifted level of its own
+    equation, so the orange channels swell as the blue ones narrow, then the other way, and it
+    settles (about 3.8 s).
   - Sound: Slow rushes one way and back over a low chord (no rising hum, no bubbles).
 - **Mandelbulb** (`mandelbulb`). Now: tap: Turn the discs. Plan: keep.
   - Owner: Like the Mandeltorus: twisting.
   - Effect: Morphs through powers (bulb shapes twist and bloom).
-  - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination lock: neighbours click round in opposite directions, top to bottom, then back the other way, bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same picture (about 4 s). This replaced a twist after the owner's review.
+  - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination
+    lock: neighbours click round in opposite directions, top to bottom, then back the other way,
+    bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same
+    picture (about 4 s). This replaced a twist after the owner's review.
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
@@ -1293,103 +1992,195 @@ Proposals below are suggestions; the owner may change them.
 - **Seashell spiral** (`seashell-spiral`). Now: tap: Hear the sea. Plan: keep.
   - Owner: Something to do with hearing the ocean in a seashell.
   - Effect: Glows softly and waves ripple out of the opening.
-  - Improved: E3: a tap lets you hear the sea in the shell: three soft swells of sea-blue light run down the spiral to the mouth, and a ripple rolls out of the opening with each one, widening and fading (about 4.5 s).
+  - Improved: E3: a tap lets you hear the sea in the shell: three soft swells of sea-blue light run
+    down the spiral to the mouth, and a ripple rolls out of the opening with each one, widening and
+    fading (about 4.5 s).
   - Sound: Ocean hush.
 - **Graph plotter** (`graph-plotter`). Now: tap: Draw it. Plan: keep.
-  - Owner: Toy Ideas page (approved, 2026-09-27): type y = …, r = … or x(t), y(t), or pick one of about 40 famous curves.
-  - Effect: A pen traces the curve across a lit grid, then the a slider sweeps and the curve bends in real time before settling back.
-  - Improved: Math: new toy. A tap wipes the curve and a pen draws it again across the lit grid, humming a tone that follows its height; then the a slider sweeps up, down and back and the curve bends with it (4.5 s). 42 famous curves, or your own equation typed in the Toy tab (read by a safe reader, no eval); a is a live slider, b an option.
+  - Owner: Toy Ideas page (approved, 2026-09-27): type y = …, r = … or x(t), y(t), or pick one of
+    about 40 famous curves.
+  - Effect: A pen traces the curve across a lit grid, then the a slider sweeps and the curve bends
+    in real time before settling back.
+  - Improved: Math: new toy. A tap wipes the curve and a pen draws it again across the lit grid,
+    humming a tone that follows its height; then the a slider sweeps up, down and back and the curve
+    bends with it (4.5 s). 42 famous curves, or your own equation typed in the Toy tab (read by a
+    safe reader, no eval); a is a live slider, b an option.
   - Sound: A tone that follows the curve's height as the pen draws it.
 - **Surface plotter** (`surface-plotter`). Now: tap: Raise it. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27): type z = f(x, y), or pick a famous surface.
-  - Effect: The surface rises out of a flat sheet, colored by height, then its parameter plays so it ripples, twists or breathes, and it settles.
-  - Improved: Math: new toy. A tap lays the surface flat, then it rises out of the sheet colored by height, overshoots a little, and its parameter a plays so it ripples, twists or breathes before settling (5 s). 16 famous surfaces (sombrero, saddle, monkey saddle, egg crate, Rosenbrock's banana valley and more), or your own z = … typed in the Toy tab.
+  - Effect: The surface rises out of a flat sheet, colored by height, then its parameter plays so it
+    ripples, twists or breathes, and it settles.
+  - Improved: Math: new toy. A tap lays the surface flat, then it rises out of the sheet colored by
+    height, overshoots a little, and its parameter a plays so it ripples, twists or breathes before
+    settling (5 s). 16 famous surfaces (sombrero, saddle, monkey saddle, egg crate, Rosenbrock's
+    banana valley and more), or your own z = … typed in the Toy tab.
   - Sound: Subtle, a soft low chord swelling as the surface rises (no wave, no "vroom").
 - **Circle and waves** (`unit-circle`). Now: tap: Go round. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
-  - Effect: A point runs round the unit circle while its shadows unroll as a sine wave and a cosine wave on two walls, and Euler's formula lights up term by term.
-  - Improved: Math: new toy. A tap sends the point once round the circle; dotted guides carry its height to the sine wave on the right wall and its left-right place down to the cosine wave on the lower wall, both drawn afresh, while e^(iθ) = cos θ + i sin θ lights up term by term in the waves' colors (5 s). After the owner's review (a 3D version, and your own equation or parameters): a View option adds a 3D helix (the point runs back along e^(iθ) while its shadows draw the cosine wave on the floor and the sine wave on a side wall); a Path option picks the circle, an ellipse, a figure eight, a cardioid, a rose or your own typed path (x = …, y = … or r = …); and a Turns option runs it one to three times.
-  - Sound: Warmer, a soft low chord that swells with the turn and a gentle rush a quarter turn later (one option to try).
+  - Effect: A point runs round the unit circle while its shadows unroll as a sine wave and a cosine
+    wave on two walls, and Euler's formula lights up term by term.
+  - Improved: Math: new toy. A tap sends the point once round the circle; dotted guides carry its
+    height to the sine wave on the right wall and its left-right place down to the cosine wave on
+    the lower wall, both drawn afresh, while e^(iθ) = cos θ + i sin θ lights up term by term in the
+    waves' colors (5 s). After the owner's review (a 3D version, and your own equation or
+    parameters): a View option adds a 3D helix (the point runs back along e^(iθ) while its shadows
+    draw the cosine wave on the floor and the sine wave on a side wall); a Path option picks the
+    circle, an ellipse, a figure eight, a cardioid, a rose or your own typed path (x = …, y = … or r
+    = …); and a Turns option runs it one to three times.
+  - Sound: Warmer, a soft low chord that swells with the turn and a gentle rush a quarter turn later
+    (one option to try).
 - **Fourier circles** (`fourier-circles`). Now: tap: Spin the circles. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
-  - Effect: A chain of spinning circles, each riding on the last, draws a shape with its tip; a Circles option sets how many.
-  - Improved: Math: new toy. A tap spins the chain of circles once round and the tip draws the shape again: a heart, a star or a square wave (drawn out to the right). The Circles option runs from a wobbly 3 to a crisp 60 (5 s). After the owner's review (a 3D version, your own equation or parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★, and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r = …) can be typed too.
+  - Effect: A chain of spinning circles, each riding on the last, draws a shape with its tip; a
+    Circles option sets how many.
+  - Improved: Math: new toy. A tap spins the chain of circles once round and the tip draws the shape
+    again: a heart, a star or a square wave (drawn out to the right). The Circles option runs from a
+    wobbly 3 to a crisp 60 (5 s). After the owner's review (a 3D version, your own equation or
+    parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words
+    gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★,
+    and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r
+    = …) can be typed too.
   - Sound: Each circle hums its own frequency, building into a chord.
 - **Pythagoras proof** (`pythagoras-proof`). Now: tap: Rearrange. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
-  - Effect: Four copies of a right triangle slide as solid pieces inside a big square, so the empty space changes from a² + b² into c²; then they slide back.
-  - Improved: Math: new toy. A tap slides the wooden triangles one at a time from two rectangles into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide without turning, and one stays put.
+  - Effect: Four copies of a right triangle slide as solid pieces inside a big square, so the empty
+    space changes from a² + b² into c²; then they slide back.
+  - Improved: Math: new toy. A tap slides the wooden triangles one at a time from two rectangles
+    into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with
+    a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
+    without turning, and one stays put.
   - Sound: Wooden slides, and a click as each piece lands.
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
-  - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.
-  - Effect: One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere ripples, a galaxy turns.
-  - Improved: Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order. Lab r2 (the owner's review of September 29, 2026: "really, really grainy"): every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each programmed splat its own dot). Fix7: no seam where u wraps round (the torus, the Möbius strip and every other wrapping preset): the grid's last column was being left out.
+  - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
+    type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that
+    explains the language.
+  - Effect: One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere
+    ripples, a galaxy turns.
+  - Improved: Manual: new toy (labs). You type where every splat goes and what color it is, as
+    equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and
+    spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius
+    strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π
+    (4 s) through twelve copies, each morphing into the next; a program without t draws its splats
+    again in order. Lab r2 (the owner's review of September 29, 2026: "really, really grainy"):
+    every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid
+    (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each
+    programmed splat its own dot). Fix7: no seam where u wraps round (the torus, the Möbius strip
+    and every other wrapping preset): the grid's last column was being left out.
   - Sound: Changed entirely, the quiet scratch of chalk as t plays.
 
 ## Clothing (4)
 
 - **Running shoe** (`running-shoe`). Now: tap: Untie and tie again. Plan: keep.
-  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration."
-  - Effect: Its laces (kit-built jointed cords over the scan's own laces) come undone, cross back through the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4 s).
-  - Improved: Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2: denser scan, thinner braided laces. Sharpness A (October 2, 2026): exact splat sizes for a crisper outline and a calmer fabric texture. Fix7: flag colors reach the shoe (its laces keep theirs).
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: Its laces (kit-built jointed cords over the scan's own laces) come undone, cross back
+    through the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4 s).
+  - Improved: Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped
+    for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift
+    and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
+    denser scan, thinner braided laces. Sharpness A (October 2, 2026): exact splat sizes for a
+    crisper outline and a calmer fabric texture. Fix7: flag colors reach the shoe (its laces keep
+    theirs).
   - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
 - **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
-  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration."
-  - Effect: The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).
-  - Improved: Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in front of the chest, clear of the body, with fabric filling the shoulders, then swing back down and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a raised sleeve shows cloth, not a hole; flag colors reach the cloth. Hands engine C (Hands-on): pull the hood; it flops like cloth and springs back up.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then
+    the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).
+  - Improved: Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the
+    hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across
+    the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in
+    front of the chest, clear of the body, with fabric filling the shoulders, then swing back down
+    and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a
+    band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a
+    raised sleeve shows cloth, not a hole; flag colors reach the cloth. Hands engine C (Hands-on):
+    pull the hood; it flops like cloth and springs back up.
   - Sound: The fabric's soft brushes and the zip, with much less wind (Sound C, October 2, 2026).
 - **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
-  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration."
-  - Effect: The arms fold in on their hinges one after the other, the glasses flip to face you and the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).
-  - Improved: Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold in one after the other, both behind the lenses and the second behind the first, the glasses turn head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a lens starts the effect too (faint pick splats over the glass). Fix7: flag colors reach the frame (the lenses keep theirs).
-  - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no electronic clicks or shimmer).
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: The arms fold in on their hinges one after the other, the glasses flip to face you and
+    the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).
+  - Improved: Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold
+    in one after the other, both behind the lenses and the second behind the first, the glasses turn
+    head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
+    the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a
+    lens starts the effect too (faint pick splats over the glass). Fix7: flag colors reach the frame
+    (the lenses keep theirs).
+  - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no
+    electronic clicks or shimmer).
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
-  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration."
-  - Effect: It flips up off its stand, spins flat like a flying disc and lands brim backward; then a second flip turns it round the right way (3 s).
-  - Improved: Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut stand. It flips up off the stand, spins flat three and a half turns round a small loop like a flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2: denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut).
-  - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are unchanged.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: It flips up off its stand, spins flat like a flying disc and lands brim backward; then a
+    second flip turns it round the right way (3 s).
+  - Improved: Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut
+    stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
+    flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
+    denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut).
+  - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are
+    unchanged.
 
 ## Medieval (10)
 
 - **Sword in the stone** (`sword-in-stone`). Now: tap: Pull. Plan: keep.
   - Owner: Perfect.
-  - Improved: Hands engine B (Hands-on): Pull the sword up out of the stone by hand: it sticks and wiggles first, then slides free; it stays where it is let go and clanks back in.
+  - Improved: Hands engine B (Hands-on): Pull the sword up out of the stone by hand: it sticks and
+    wiggles first, then slides free; it stays where it is let go and clanks back in.
   - Sound: Metal ring.
 - **Heraldic shield** (`shield`). Now: tap: Block a blow. Plan: keep.
   - Owner: Only bounces; find a better effect.
   - Effect: Blocks an invisible hit: it jolts, sparks and the emblem gleams.
-  - Improved: E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across the emblem (about 2 s). Fix7: the blow lands where you tap on the shield's face: the flash and sparks start there, the sparks spray away from the middle, and the shield rocks away from that spot (about 2 s).
+  - Improved: E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks
+    spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across
+    the emblem (about 2 s). Fix7: the blow lands where you tap on the shield's face: the flash and
+    sparks start there, the sparks spray away from the middle, and the shield rocks away from that
+    spot (about 2 s).
   - Sound: The clang and the gleam's shimmer, no crackling clicks.
 - **Bow and target** (`bow-and-target`). Now: tap: Shoot. Plan: keep.
   - Owner: Unbelievably impressive.
-  - Improved: Physics (Hands-on): pull the arrow back on the string and let go; it flies under gravity, faster the further it was drawn, and sticks in the target or the grass.
-  - Sound: A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
+  - Improved: Physics (Hands-on): pull the arrow back on the string and let go; it flies under
+    gravity, faster the further it was drawn, and sticks in the target or the grass.
+  - Sound: A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is
+    unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a
+    fallback.
 - **Trebuchet** (`trebuchet`). Now: tap: Launch. Plan: keep.
   - Owner: Fine.
   - Sound: The timber beam creaks and strains, then a softer swing (much less wind).
 - **Crossbow** (`crossbow`). Now: tap: Shoot. Plan: keep.
   - Owner: Solid.
-  - Sound: No click; the string's real thump, then the bolt hitting as before; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
+  - Sound: No click; the string's real thump, then the bolt hitting as before; real CC0 recordings
+    now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
 - **Knight's helmet** (`knights-helmet`). Now: tap: Open the visor. Plan: keep.
   - Owner: Really neat.
   - Sound: Visor clank.
 - **Crown** (`crown`). Now: tap: Light the jewels. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Jewels light up in turn and it rises with a glow.
-  - Improved: E6: the crown lifts and hovers; its eight jewels light up one after another round the band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it settles (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
-  - Sound: The fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of synthetic brass; the jewels' pings stay.
+  - Improved: E6: the crown lifts and hovers; its eight jewels light up one after another round the
+    band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it
+    settles (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer
+    textures).
+  - Sound: The fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of
+    synthetic brass; the jewels' pings stay.
 - **Dragon egg** (`dragon-egg`). Now: tap: Hatch. Plan: keep.
   - Owner: Cute and perfect.
   - Sound: Crack and a tiny roar.
 - **Wizard's orb** (`wizards-orb`). Now: tap: Cast. Plan: keep.
   - Owner: Looks really good; develop it further to be more impressive.
   - Effect: A bigger spell: runes orbit, light bursts and sparks spiral out.
-  - Improved: C2: a bigger spell: a flash fills the glass, the swirl spins up, sparks spiral out in five arms and a ring of runes rises and circles the orb (about 3 s).
+  - Improved: C2: a bigger spell: a flash fills the glass, the swirl spins up, sparks spiral out in
+    five arms and a ring of runes rises and circles the orb (about 3 s).
   - Sound: A deep, slow hum of power swelling in the glass (no wind or twinkles).
 - **Crystal ball** (`crystal-ball`). Now: tap: Gaze into the ball. Plan: keep.
   - Owner: Hard to tell what the effect is; make it clearer and more dramatic.
   - Effect: Mist swirls hard and a glowing shape appears inside, then fades.
-  - Improved: C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a star, a moon or a heart in turn (about 3.5 s).
+  - Improved: C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a
+    star, a moon or a heart in turn (about 3.5 s).
   - Sound: A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).
 
 ## Animals (13)
@@ -1397,12 +2188,16 @@ Proposals below are suggestions; the owner may change them.
 - **Jellyfish** (`jellyfish`). Now: tap: Swim. Plan: keep.
   - Owner: Not sure what the effect does; make it more apparent.
   - Effect: A strong pulse that jets it upward, trailing glowing tentacles.
-  - Improved: C2: one strong stroke squeezes the bell and jets it up about a third of its size, trailing glowing tentacles, then it drifts down (about 3 s).
+  - Improved: C2: one strong stroke squeezes the bell and jets it up about a third of its size,
+    trailing glowing tentacles, then it drifts down (about 3 s).
   - Sound: The same two swimming pulses, a little louder (Sound C, October 2, 2026).
 - **School of fish** (`fish-school`). Now: tap: Bait ball. Plan: keep.
   - Owner: Swim around more dynamically, like a swarm.
   - Effect: The school swirls into a bait ball and scatters.
-  - Improved: E6: each fish is now its own piece (48 fish). A tap: the school tightens into a spinning bait ball, bursts outwards head first in every direction as if something struck at it, and swims back into place (5 s). Hands engine A: in Hands-on a drag through the school sends the fish near your finger darting away head first; each swims back to its place.
+  - Improved: E6: each fish is now its own piece (48 fish). A tap: the school tightens into a
+    spinning bait ball, bursts outwards head first in every direction as if something struck at it,
+    and swims back into place (5 s). Hands engine A: in Hands-on a drag through the school sends the
+    fish near your finger darting away head first; each swims back to its place.
   - Sound: Water swishes and bursts, with bubbles.
 - **Butterfly** (`butterfly`). Now: tap: Flutter. Plan: keep.
   - Owner: Perfect.
@@ -1410,12 +2205,15 @@ Proposals below are suggestions; the owner may change them.
 - **Pufferfish** (`pufferfish`). Now: tap: Poke. Plan: keep.
   - Owner: Should puff: get big, then small.
   - Effect: Inflates to a big spiky ball, then deflates.
-  - Improved: C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates with a sputter (about 4 s).
+  - Improved: C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates
+    with a sputter (about 4 s).
   - Sound: Balloon inflate and a sputter.
 - **Nautilus** (`nautilus`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Enter and exit its shell.
   - Effect: Tentacles pull into the shell, then peek back out.
-  - Improved: E6: startled, it jets back a little and pulls its tentacles in behind its hood (each shortens towards its base); it waits, peeks out halfway, then slowly reaches out again (about 4.5 s).
+  - Improved: E6: startled, it jets back a little and pulls its tentacles in behind its hood (each
+    shortens towards its base); it waits, peeks out halfway, then slowly reaches out again (about
+    4.5 s).
   - Sound: A jet of water, the hollow shell, a knock and bubbles.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
@@ -1423,32 +2221,47 @@ Proposals below are suggestions; the owner may change them.
 - **Snail** (`snail`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Perfect, but it disappears too much when hiding; make it more elegant.
   - Effect: Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.
-  - Improved: C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the shell and the foot slides in; the shell stays in view and rocks once. Math (owner: it "looks weird while and after retracting"): like a real snail, the eye stalks roll in first (each shortens from its tip into the head), then the head, neck and whole foot, front and tail, are drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the head, then the stalks unroll.
+  - Improved: C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the
+    shell and the foot slides in; the shell stays in view and rocks once. Math (owner: it "looks
+    weird while and after retracting"): like a real snail, the eye stalks roll in first (each
+    shortens from its tip into the head), then the head, neck and whole foot, front and tail, are
+    drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on
+    the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the
+    head, then the stalks unroll.
   - Sound: Wetter and slimier, a squish with a sticky stretch.
 - **Octopus** (`octopus`). Now: tap: Squirt ink. Plan: keep.
   - Owner: Underwhelming; the ink should be much bigger and more dramatic.
   - Effect: A big ink cloud billows out while it jets away and back.
-  - Improved: C2: a big billowing ink cloud grows behind it while it jets up and away with its arms streaming, then drifts back as the ink thins (about 4.5 s). Hands engine C (Hands-on): drag it and the arms trail and curl back; pull an arm and let it go.
+  - Improved: C2: a big billowing ink cloud grows behind it while it jets up and away with its arms
+    streaming, then drifts back as the ink thins (about 4.5 s). Hands engine C (Hands-on): drag it
+    and the arms trail and curl back; pull an arm and let it go.
   - Sound: A squirt, then the ink bubbling out as a liquid (no wind).
 - **Starfish** (`starfish`). Now: tap: Wave the arms. Plan: keep.
   - Owner: Fine.
-  - Sound: The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it settles, one after another.
+  - Sound: The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it
+    settles, one after another.
 - **Sea urchin** (`sea-urchin`). Now: tap: Wave the spines. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Spines ripple in waves and it creeps along.
-  - Improved: E6: the spines sweep round the urchin in waves (each tilts on its base, so it stays straight), the pink tube feet reach out, and it creeps a little way to the side and back (about 4.5 s).
+  - Improved: E6: the spines sweep round the urchin in waves (each tilts on its base, so it stays
+    straight), the pink tube feet reach out, and it creeps a little way to the side and back (about
+    4.5 s).
   - Sound: A prickly rustle, wave after wave.
 - **Frog** (`frog`). Now: tap: Catch a fly. Plan: keep.
   - Owner: Mouth opens and the tongue shoots out.
   - Effect: Tongue shoots out to catch a fly.
-  - Improved: E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with their eyes), and it croaks twice with its throat sac (about 3.5 s).
-  - Sound: A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.
+  - Improved: E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches
+    the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with
+    their eyes), and it croaks twice with its throat sac (about 3.5 s).
+  - Sound: A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings
+    now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.
 - **Penguin** (`penguin`). Now: tap: Flap. Plan: keep.
   - Owner: Perfect and very cute.
   - Sound: Squawk.
 - **Owl** (`owl`). Now: tap: Turn the head. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: A short, natural owl hoot (h'HOO-oo and a soft hoo), about 1 s (Sound C, October 2, 2026).
+  - Sound: A short, natural owl hoot (h'HOO-oo and a soft hoo), about 1 s (Sound C, October 2,
+    2026).
 
 ## Holidays (8)
 
@@ -1458,76 +2271,132 @@ Proposals below are suggestions; the owner may change them.
 - **Snowman** (`snowman`). Now: tap: Melt and rebuild. Plan: keep.
   - Owner: Do more than bounce; maybe it melts.
   - Effect: Melts into a puddle, then rebuilds itself.
-  - Improved: E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first), drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower).
+  - Improved: E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first),
+    drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading
+    puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops
+    back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a
+    real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower).
   - Sound: Drips, then a crunch of snow and a twinkle as it rebuilds.
 - **Fireworks** (`fireworks`). Now: tap: Launch. Plan: keep.
-  - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.
+  - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour
+    of the cannon that fires it.
   - Effect: Random shell types each tap; burst colour matches its tube.
-  - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the show; rapid taps launch more shells, up to three at once (one per tube), each with its own rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
-  - Sound: A real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.
+  - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the
+    rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the
+    show; rapid taps launch more shells, up to three at once (one per tube), each with its own
+    rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness
+    A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Sound: A real firework, the launch's thump and rush (no whistle), a deep boom and the stars'
+    soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a
+    fallback.
 - **Decorated tree** (`decorated-tree`). Now: tap: Lights on or off. Plan: keep.
   - Owner: Lights only show very briefly; make it more dramatic.
   - Fixed: C1: a faceted gold star facing the viewer, with only a faint glow.
   - Effect: Lights come on and chase in patterns and stay on; the star glows.
-  - Improved: C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off.
-  - Sound: Jingle Bells on a real glockenspiel with a shake of real sleigh bells, at the same tempo (Sound C, October 2, 2026).
+  - Improved: C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling
+    chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off.
+  - Sound: Jingle Bells on a real glockenspiel with a shake of real sleigh bells, at the same tempo
+    (Sound C, October 2, 2026).
 - **Patterned egg** (`patterned-egg`). Now: tap: Spin. Plan: keep.
   - Owner: Pretty cool; keep.
   - Sound: Painted-shell tap.
 - **Paper lantern** (`paper-lantern`). Now: tap: Swing. Plan: keep.
   - Owner: Perfect; the physics are really good.
-  - Improved: Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing grows smoothly (no jump).
+  - Improved: Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing
+    grows smoothly (no jump).
   - Sound: Paper rustle.
 - **Diya** (`diya`). Now: tap: Light the diyas. Plan: keep.
   - Owner: Very underwhelming.
-  - Fixed: C1: painted clay (dots, a red line, lotus petals) and dark amber oil with a sheen and the flame's reflection.
+  - Fixed: C1: painted clay (dots, a red line, lotus petals) and dark amber oil with a sheen and the
+    flame's reflection.
   - Effect: The flame grows and a ring of small diyas lights around it.
-  - Improved: C2: a tap makes the flame flare and grow, and eight small diyas round the rangoli light one after another and stay lit.
+  - Improved: C2: a tap makes the flame flare and grow, and eight small diyas round the rangoli
+    light one after another and stay lit.
   - Sound: Soft flame whoosh.
 - **Menorah** (`menorah`). Now: tap: Light the candles. Plan: keep.
   - Owner: Pretty much perfect.
-  - Sound: A match struck, then each wick catching with a soft flame as it lights, one by one; going out, a small puff as each flame goes out in turn (no big gust).
+  - Sound: A match struck, then each wick catching with a soft flame as it lights, one by one; going
+    out, a small puff as each flame goes out in turn (no big gust).
 
 ## Music (8)
 
 - **Acoustic guitar** (`guitar`). Now: tap: Strum. Plan: keep.
   - Owner: Looks fine; add the music.
   - Effect: Keep the strum; strings vibrate visibly.
-  - Improved: C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D. Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines.
+  - Improved: C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and
+    vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D.
+    Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color
+    noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines.
   - Sound: A real strummed chord progression (synth plucks).
 - **Snare drum** (`drum`). Now: tap: Play a roll. Plan: keep.
   - Owner: Could be more dramatic. Fast taps could play longer and faster rolls.
   - Effect: Sticks play a roll; fast repeated taps make faster, longer rolls.
-  - Improved: C2: the sticks play a roll; taps within 0.9 s of each other step up through four speeds and make the roll longer (up to 3 s after the last tap).
+  - Improved: C2: the sticks play a roll; taps within 0.9 s of each other step up through four
+    speeds and make the roll longer (up to 3 s after the last tap).
   - Sound: Snare hits with rattle.
 - **Xylophone** (`xylophone`). Now: tap: Play a scale. Plan: keep.
   - Owner: Incredible; basically perfect.
-  - Improved: D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps. A tap off the bars still plays the scale.
+  - Improved: D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a
+    tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the
+    row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from
+    wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps.
+    A tap off the bars still plays the scale.
   - Sound: The scale it already plays, as mallet tones.
 - **Toy piano** (`toy-piano`). Now: tap: Play Twinkle, Twinkle. Plan: keep.
-  - Owner: The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): "Tap a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings. Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn."
-  - Effect: Tap a key: it dips, its hammer swings up and strikes its rod, and the rod shivers as the note rings. Tap elsewhere: the opening line of Twinkle, Twinkle, Little Star, each key, hammer and rod moving with its note (5 s).
-  - Improved: A/B (maker B): new kit toy. An upright toy piano with 18 keys (C5 to F6, black keys raised), a red lacquer case (Color in the Toy tab) with an open back and a raised lid. Every key, hammer and steel rod is its own solid piece: a key turns on its balance rail, its hammer swings up through a sixth of a turn to strike, and the rod shivers sideways as the note rings (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands. A tap anywhere else plays Twinkle, Twinkle.
+  - Owner: The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): "Tap
+    a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings.
+    Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn."
+  - Effect: Tap a key: it dips, its hammer swings up and strikes its rod, and the rod shivers as the
+    note rings. Tap elsewhere: the opening line of Twinkle, Twinkle, Little Star, each key, hammer
+    and rod moving with its note (5 s).
+  - Improved: A/B (maker B): new kit toy. An upright toy piano with 18 keys (C5 to F6, black keys
+    raised), a red lacquer case (Color in the Toy tab) with an open back and a raised lid. Every
+    key, hammer and steel rod is its own solid piece: a key turns on its balance rail, its hammer
+    swings up through a sixth of a turn to strike, and the rod shivers sideways as the note rings
+    (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands.
+    A tap anywhere else plays Twinkle, Twinkle.
   - Sound: The plinky, bell-like tone of struck metal rods, made in the page.
 - **Grand piano** (`grand-piano`). Now: tap: Play the opening. Plan: keep.
   - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
-  - Effect: Tap a key: it dips, its hammer flies up under the open lid and strikes the strings, and the damper lifts while the note rings. Tap anywhere else: it plays the opening of its song, every key and hammer moving with the notes and the sustain pedal going down with the phrases (about 5 s; the whole song plays from the song bar).
-  - Improved: Pianos: 88 keys, 88 hammers and 70 dampers, each its own solid piece (the lever kind). A tapped key dips for about 0.9 s, its hammer strikes and falls back, its damper lifts. A tap elsewhere plays the song's opening (about 5 s) with the keys, hammers, dampers and sustain pedal following every note. The song bar plays the whole song, and a MIDI file or an ABC tune of your own.
-  - Sound: A real acoustic piano: recorded CC0 notes (one every four semitones, each played at its key's pitch), with the damper falling when a key comes up. The electronic keyboard's PIANO button keeps the synth. Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.
+  - Effect: Tap a key: it dips, its hammer flies up under the open lid and strikes the strings, and
+    the damper lifts while the note rings. Tap anywhere else: it plays the opening of its song,
+    every key and hammer moving with the notes and the sustain pedal going down with the phrases
+    (about 5 s; the whole song plays from the song bar).
+  - Improved: Pianos: 88 keys, 88 hammers and 70 dampers, each its own solid piece (the lever kind).
+    A tapped key dips for about 0.9 s, its hammer strikes and falls back, its damper lifts. A tap
+    elsewhere plays the song's opening (about 5 s) with the keys, hammers, dampers and sustain pedal
+    following every note. The song bar plays the whole song, and a MIDI file or an ABC tune of your
+    own.
+  - Sound: A real acoustic piano: recorded CC0 notes (one every four semitones, each played at its
+    key's pitch), with the damper falling when a key comes up. The electronic keyboard's PIANO
+    button keeps the synth. Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.
 - **Upright piano** (`upright-piano`). Now: tap: Play the opening. Plan: keep.
   - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
-  - Effect: Tap a key to play it: the front panel is off, so you see the row of hammers swing forward onto the upright strings. Tap elsewhere for its song, a ragtime (The Entertainer), the hammers rippling along the row.
-  - Improved: Pianos: a walnut upright with its upper front panel off; 88 keys, hammers that swing back onto the strings and 66 dampers that pull away, each its own solid piece. A tap elsewhere plays the opening of The Entertainer (about 5 s); the song bar plays the rest.
+  - Effect: Tap a key to play it: the front panel is off, so you see the row of hammers swing
+    forward onto the upright strings. Tap elsewhere for its song, a ragtime (The Entertainer), the
+    hammers rippling along the row.
+  - Improved: Pianos: a walnut upright with its upper front panel off; 88 keys, hammers that swing
+    back onto the strings and 66 dampers that pull away, each its own solid piece. A tap elsewhere
+    plays the opening of The Entertainer (about 5 s); the song bar plays the rest.
   - Sound: A brighter, slightly honky-tonk upright voice, so it sounds different from the grand.
 - **Harpsichord** (`harpsichord`). Now: tap: Play the opening. Plan: keep.
   - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
-  - Effect: Tap a key: its jack rises and the quill plucks the string, which you see quiver. Tap elsewhere: the Minuet in G from Bach's notebook, the jacks bobbing like a row of dancers.
-  - Improved: Pianos: a French-style harpsichord (black naturals, bone sharps) with 61 keys, jacks and strings, each its own solid piece. A key lifts its jack, which plucks; the string quivers until the key comes up. A tap elsewhere plays the opening of the Minuet in G (about 5 s); the song bar plays both halves, each twice.
+  - Effect: Tap a key: its jack rises and the quill plucks the string, which you see quiver. Tap
+    elsewhere: the Minuet in G from Bach's notebook, the jacks bobbing like a row of dancers.
+  - Improved: Pianos: a French-style harpsichord (black naturals, bone sharps) with 61 keys, jacks
+    and strings, each its own solid piece. A key lifts its jack, which plucks; the string quivers
+    until the key comes up. A tap elsewhere plays the opening of the Minuet in G (about 5 s); the
+    song bar plays both halves, each twice.
   - Sound: A bright, plucked harpsichord voice, made in the page.
 - **Electronic keyboard** (`electronic-keyboard`). Now: tap: Play the opening. Plan: keep.
   - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
-  - Effect: Tap a key to play it. Tap elsewhere and the keys light up just ahead of each note, like a learning keyboard, while the little screen scrolls the song's title and a beat starts on the drum pads. Panel buttons switch the voice: piano, organ, synth, vibes.
-  - Improved: Pianos: 61 keys that light up just before each note of the song and stay lit while held, a screen that scrolls the title and shows the voice, four colored voice buttons and four drum pads that flash with the beat (kick, snare, hi-hat, tom). Songs: Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or your own MIDI file (its drums, or a simple beat).
+  - Effect: Tap a key to play it. Tap elsewhere and the keys light up just ahead of each note, like
+    a learning keyboard, while the little screen scrolls the song's title and a beat starts on the
+    drum pads. Panel buttons switch the voice: piano, organ, synth, vibes.
+  - Improved: Pianos: 61 keys that light up just before each note of the song and stay lit while
+    held, a screen that scrolls the title and shows the voice, four colored voice buttons and four
+    drum pads that flash with the beat (kick, snare, hi-hat, tom). Songs: Ode to Joy, Twinkle,
+    Twinkle, Little Star and Frère Jacques, or your own MIDI file (its drums, or a simple beat).
   - Sound: Four synth voices and a simple drum beat, all made in the page.
 
 ## Vehicles (14)
@@ -1537,55 +2406,69 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The flickering roar of the exhaust over a deep rumble.
 - **Helicopter** (`helicopter`). Now: tap: Take off or land. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Real rotor blades chopping; landing, the chop slowing as it fades (Sound C, October 2, 2026).
+  - Sound: Real rotor blades chopping; landing, the chop slowing as it fades (Sound C, October 2,
+    2026).
 - **Hot-air balloon** (`hot-air-balloon`). Now: tap: Fire the burner. Plan: keep.
   - Owner: Could be more dramatic; maybe inflate more.
   - Effect: Burner roars, the envelope swells and it rises higher.
-  - Improved: C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon
+    climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even,
+    solid splats and calmer textures).
   - Sound: Burner roar.
 - **Steam train** (`steam-train`). Now: tap: Blow the whistle. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: A real steam locomotive chuffing, fading with its steam; no bell, horn or whistle (Sound C, October 2, 2026).
+  - Sound: A real steam locomotive chuffing, fading with its steam; no bell, horn or whistle (Sound
+    C, October 2, 2026).
 - **Ocean liner** (`ocean-liner`). Now: tap: Sound the horn. Plan: keep.
   - Owner: Almost perfect.
   - Sound: Deep ship horn.
 - **Sports car** (`sports-car`). Now: tap: Rev the engine. Plan: keep.
   - Owner: Looks really good.
   - Fixed: C1: the home camera comes closer.
-  - Improved: Hands engine A: in Hands-on a drag pushes it: it rolls on, gripping sideways, its wheels turning by the distance rolled, and coasts to a stop; ↺ rolls it home.
-  - Sound: The same real rev, now fading out with the exhaust (gone at 1.8 s) (Sound C, October 2, 2026).
+  - Improved: Hands engine A: in Hands-on a drag pushes it: it rolls on, gripping sideways, its
+    wheels turning by the distance rolled, and coasts to a stop; ↺ rolls it home.
+  - Sound: The same real rev, now fading out with the exhaust (gone at 1.8 s) (Sound C, October 2,
+    2026).
 - **Bus** (`bus`). Now: tap: Stop for passengers. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Stop sign swings out, lights flash, doors open.
-  - Improved: C2: the school bus stops: warning lights flash, the stop sign swings out and the doors open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle door.
+  - Improved: C2: the school bus stops: warning lights flash, the stop sign swings out and the doors
+    open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle
+    door.
   - Sound: Horn beep and door hiss.
 - **Propeller plane** (`propeller-plane`). Now: tap: Loop the loop. Plan: keep.
   - Owner: Unbelievable; perfect.
-  - Sound: A real piston engine with the propeller's beat; real CC0 recordings now (propeller-plane-engine.mp3), with the synthesized sound as a fallback.
+  - Sound: A real piston engine with the propeller's beat; real CC0 recordings now
+    (propeller-plane-engine.mp3), with the synthesized sound as a fallback.
 - **Jet airliner** (`jet`). Now: tap: Climb and bank. Plan: keep.
   - Owner: Very solid; bank more to one side or the other.
   - Effect: Climbs and banks hard left then right.
-  - Improved: C2: it climbs nose up while banking hard left, then hard right (about 50 degrees each way, 3.5 s).
+  - Improved: C2: it climbs nose up while banking hard left, then hard right (about 50 degrees each
+    way, 3.5 s).
   - Sound: No whistle; a softer, natural rush of the engines.
 - **Sailboat** (`sailboat`). Now: tap: A gust of wind. Plan: keep.
   - Owner: Pretty good; a bit more dramatic.
   - Effect: A big gust heels it over with spray.
-  - Improved: C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks back upright (3.5 s).
+  - Improved: C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks
+    back upright (3.5 s).
   - Sound: Wind and water spray.
 - **Submarine** (`submarine`). Now: tap: Dive and surface. Plan: keep.
   - Owner: Underwhelming that only the periscope appears and disappears.
   - Effect: Dives with bubbles, then surfaces and raises the periscope.
-  - Improved: C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then it surfaces and raises the periscope (5 s).
+  - Improved: C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then
+    it surfaces and raises the periscope (5 s).
   - Sound: Sonar ping.
 - **Bicycle** (`bicycle`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Not sure what the effect is; make it more dramatic.
   - Effect: Pedals spin, the wheels turn and the bell rings clearly.
-  - Improved: C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and the pedals two (2.5 s).
+  - Improved: C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and
+    the pedals two (2.5 s).
   - Sound: A real bicycle bell's ding-ding (Sound C, October 2, 2026).
 - **Tractor** (`tractor`). Now: tap: Chug chug. Plan: keep.
   - Owner: Perfect.
   - Fixed: C1: a light wisp of exhaust; the cab glass is clear instead of static.
-  - Sound: A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3), with the synthesized sound as a fallback.
+  - Sound: A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3),
+    with the synthesized sound as a fallback.
 - **Flying saucer** (`ufo`). Now: tap: Beam on or off. Plan: keep.
   - Owner: Maybe my favourite; really cool.
   - Sound: A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).
@@ -1595,23 +2478,37 @@ Proposals below are suggestions; the owner may change them.
 - **Eiffel Tower** (`eiffel-tower`). Now: tap: Sparkle and fireworks. Plan: keep.
   - Owner: Fireworks burst around it.
   - Effect: Sparkling lights run up the tower and fireworks burst around it.
-  - Improved: E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white lights climbs the tower, and four fireworks burst round it one after another (blue, white, red and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
-  - Sound: Real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.
+  - Improved: E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white
+    lights climbs the tower, and four fireworks burst round it one after another (blue, white, red
+    and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s).
+    Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Sound: Real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0
+    recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.
 - **Washington Monument** (`washington-monument`). Now: tap: Sun and shadow. Plan: keep.
   - Owner: Something cool and not disrespectful.
   - Effect: The reflecting pool shimmers and the flags wave.
-  - Improved: E6: a day in a few seconds, like a sundial: the sun rises behind the monument, arcs over and sets, the obelisk's shadow swings round the lawn in front, and the flags ripple in the breeze (about 4.5 s). There is no reflecting pool in the model, so the shadow replaced the pool's shimmer.
+  - Improved: E6: a day in a few seconds, like a sundial: the sun rises behind the monument, arcs
+    over and sets, the obelisk's shadow swings round the lawn in front, and the flags ripple in the
+    breeze (about 4.5 s). There is no reflecting pool in the model, so the shadow replaced the
+    pool's shimmer.
   - Sound: Only the soft chime at noon (no wind).
 - **Pyramids of Giza** (`pyramids`). Now: tap: A visitor from space. Plan: keep.
   - Owner: Neat. Maybe put a UFO there, as a joke.
-  - Effect: A tiny UFO (the Flying saucer) hovers over the Great Pyramid and beams up a camel-shaped cloud of sand.
-  - Improved: E6: a tiny flying saucer glides in by the Great Pyramid and switches on its beam; sand streams up out of the desert into the shape of a camel, which floats up into the saucer; the saucer wobbles happily and zips away (about 5 s). Sharpness A (October 2, 2026): sharper (even, solid faces with clean stone steps) and a clearer, larger Sphinx.
+  - Effect: A tiny UFO (the Flying saucer) hovers over the Great Pyramid and beams up a camel-shaped
+    cloud of sand.
+  - Improved: E6: a tiny flying saucer glides in by the Great Pyramid and switches on its beam; sand
+    streams up out of the desert into the shape of a camel, which floats up into the saucer; the
+    saucer wobbles happily and zips away (about 5 s). Sharpness A (October 2, 2026): sharper (even,
+    solid faces with clean stone steps) and a clearer, larger Sphinx.
   - Sound: Theremin warble, sand hiss and a zip away.
 - **Twisting supertall** (`supertall`). Now: tap: Twist and light up. Plan: keep.
   - Owner: Make it twist or glow.
   - Effect: The tower twists further and its lights run upward.
-  - Improved: E6: the floors wring round further in twelve rigid bands (the top turns most) while a ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4 s).
-  - Sound: The lift's low whir as the floors wring round and a soft low bell each time the light reaches the top (no rising tone or bright dings).
+  - Improved: E6: the floors wring round further in twelve rigid bands (the top turns most) while a
+    ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4
+    s).
+  - Sound: The lift's low whir as the floors wring round and a soft low bell each time the light
+    reaches the top (no rising tone or bright dings).
 - **Lighthouse** (`lighthouse`). Now: tap: Light on or off. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Foghorn.
@@ -1619,249 +2516,549 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Everything else looks fine. Make the effect a good one.
   - Fixed: C1: the crown's seven rays rise higher and taper to sharp, lit points.
   - Effect: The torch flame flares bright and sparkles drift from it.
-  - Improved: E6: the torch flares: the flame leaps to twice its size in a halo of light, a warm glow spreads down the statue, and a plume of golden sparks drifts up and away on the breeze and burns out (about 4 s).
+  - Improved: E6: the torch flares: the flame leaps to twice its size in a halo of light, a warm
+    glow spreads down the statue, and a plume of golden sparks drifts up and away on the breeze and
+    burns out (about 4 s).
   - Sound: The whoosh and the bell, no crackling clicks.
 - **White House** (`white-house`). Now: tap: Fountain and lights. Plan: keep.
   - Owner: Nothing destructive or disrespectful.
   - Effect: The fountain on the lawn sprays higher and the flag raises.
-  - Improved: E6: the fountain on the south lawn shoots up a tall jet that falls back as spray, the lights come on in the windows one by one and the flag ripples; then the jet sinks and the lights go out one by one (about 4.5 s). The flag stays at the top of its pole, so it never looks like half-mast.
+  - Improved: E6: the fountain on the south lawn shoots up a tall jet that falls back as spray, the
+    lights come on in the windows one by one and the flag ripples; then the jet sinks and the lights
+    go out one by one (about 4.5 s). The flag stays at the top of its pole, so it never looks like
+    half-mast.
   - Sound: The spray's splash and a soft, steady rush of water falling back (no patter of clicks).
 - **Leaning Tower of Pisa** (`leaning-tower`). Now: tap: Drop two balls. Plan: keep.
   - Owner: Lean further and things fall off, like Galileo dropping objects.
   - Effect: Two balls of different sizes drop from the top and land together.
-  - Improved: E6: Galileo's drop: the tower leans a little further, a big iron ball and a small bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs of dust; they bounce, settle and fade, and the tower eases back (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: E6: Galileo's drop: the tower leans a little further, a big iron ball and a small
+    bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs
+    of dust; they bounce, settle and fade, and the tower eases back (about 4 s). Sharpness A
+    (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: The tower grinds, then two thuds at the same moment.
 - **Colosseum** (`colosseum`). Now: tap: A chariot race. Plan: keep.
   - Owner: Gladiators fighting inside?
-  - Effect: Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting, per the no-gore rule).
-  - Improved: E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
-  - Sound: A real crowd in the stands and horses' hooves trotting; real CC0 recordings now (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.
+  - Effect: Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting,
+    per the no-gore rule).
+  - Improved: E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the
+    team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes,
+    swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s). Sharpness
+    A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Sound: A real crowd in the stands and horses' hooves trotting; real CC0 recordings now
+    (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.
 - **Parthenon** (`parthenon`). Now: tap: A procession. Plan: keep.
   - Owner: Little ancient people in it.
   - Effect: Tiny robed figures walk between the columns in procession.
-  - Improved: E6: a procession: eight robed figures, some with baskets and jars on their heads, walk in single file along the temple, round the corner and across the front of its steps, then fade away (about 5.5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: E6: a procession: eight robed figures, some with baskets and jars on their heads, walk
+    in single file along the temple, round the corner and across the front of its steps, then fade
+    away (about 5.5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer
+    textures).
   - Sound: A lyre plays a walking tune.
 - **Stonehenge** (`stonehenge`). Now: tap: Solstice sunrise. Plan: keep.
   - Owner: No idea.
   - Effect: Solstice sunrise: the sun rises through the stones and lights them gold.
-  - Improved: E6: solstice sunrise: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones along the monument's axis, and the stones glow gold; then it fades back (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: E6: solstice sunrise: the sun comes up over the far bank, framed by the great
+    trilithon, a golden beam shines through the stones along the monument's axis, and the stones
+    glow gold; then it fades back (about 5 s). Sharpness A (October 2, 2026): sharper look (even,
+    solid splats and calmer textures).
   - Sound: A low drone and a bell as the stones light.
 - **Big Ben** (`big-ben`). Now: tap: Chime the bell. Plan: keep.
   - Owner: No visible effect; make it pronounced or pick something better.
   - Effect: Hands spin to the hour, the clock face glows and the bell swings.
-  - Improved: C2: the hands spin round and land back on the real time, all four dials glow and a bell swings in the now open belfry (4 s).
+  - Improved: C2: the hands spin round and land back on the real time, all four dials glow and a
+    bell swings in the now open belfry (4 s).
   - Sound: Big Ben chimes (Westminster quarters, simplified).
 - **Taj Mahal** (`taj-mahal`). Now: tap: Moonlight. Plan: keep.
   - Owner: Looks good; needs an effect.
   - Effect: Moonlight: the dome glows and the reflecting pool ripples.
-  - Improved: E6: moonlight: night falls on the garden and the buildings, the moon rises behind the Taj, the great dome stays bright white and glows against the night, and moonlight shimmers on the rippling pool; then day comes back (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: E6: moonlight: night falls on the garden and the buildings, the moon rises behind the
+    Taj, the great dome stays bright white and glows against the night, and moonlight shimmers on
+    the rippling pool; then day comes back (about 5 s). Sharpness A (October 2, 2026): sharper look
+    (even, solid splats and calmer textures).
   - Sound: A slow sitar phrase.
 - **Castle** (`castle`). Now: tap: Raise or lower the drawbridge. Plan: keep.
   - Owner: Pretty good but underwhelming. Knights come out when the drawbridge opens.
   - Effect: The drawbridge drops and tiny knights march out with a banner.
-  - Improved: C2: the drawbridge now starts up. A tap lowers it and five small knights march out, the leader with a banner; a second tap marches them back in and raises it. Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: C2: the drawbridge now starts up. A tap lowers it and five small knights march out,
+    the leader with a banner; a second tap marches them back in and raises it. Sharpness A (October
+    2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: Chain rattle and a trumpet.
 - **Pagoda** (`pagoda`). Now: tap: Ring the bells. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Wind chimes swing on every roof tier and lanterns light up.
-  - Improved: C2: wind chimes at every roof corner swing, one tier after another, and two stone lanterns by the path light up, with the doors glowing (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: C2: wind chimes at every roof corner swing, one tier after another, and two stone
+    lanterns by the path light up, with the doors glowing (4 s). Sharpness A (October 2, 2026):
+    sharper look (even, solid splats and calmer textures).
   - Sound: Wind chimes.
 - **Windmill** (`windmill`). Now: tap: A gust of wind. Plan: keep.
   - Owner: Pretty good, but move a little faster.
   - Effect: Faster sails; the gust spins them up hard.
-  - Improved: C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+  - Improved: C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns
+    (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: Creaking sails and wind.
 
 ## Computing (17)
 
 - **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: Three input lights send pulses along wires whose thickness shows their weights into one node; the sum fills a gauge, and if it passes the threshold the output lamp snaps on. On a wrong answer the wires thicken or thin, so you watch it learn (4 s).
-  - Improved: AI: inputs X1 and X3 light and send pulses along wires as thick as their weights; the gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s). Owner's review: a 3D version too, so a View option adds a 3D model that floats in space (no stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb.
+  - Effect: Three input lights send pulses along wires whose thickness shows their weights into one
+    node; the sum fills a gauge, and if it passes the threshold the output lamp snaps on. On a wrong
+    answer the wires thicken or thin, so you watch it learn (4 s).
+  - Improved: AI: inputs X1 and X3 light and send pulses along wires as thick as their weights; the
+    gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it
+    learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s).
+    Owner's review: a 3D version too, so a View option adds a 3D model that floats in space (no
+    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb.
   - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
 - **Multilayer perceptron** (`multilayer-perceptron`). Now: tap: Try all four inputs. Plan: keep.
-  - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer perceptrons (MLPs).
-  - Effect: A two-layer perceptron solving XOR, which a single perceptron cannot: each input pair lights in turn, pulses run through an OR and a NAND neuron to an AND neuron, and the truth table fills in.
-  - Improved: AI: XOR, one input pair at a time (00, 01, 10, 11): the inputs light, pulses run along blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written into the truth table (5 s). A View option picks the poster or a 3D model, which floats in space (no stand).
+  - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer
+    perceptrons (MLPs).
+  - Effect: A two-layer perceptron solving XOR, which a single perceptron cannot: each input pair
+    lights in turn, pulses run through an OR and a NAND neuron to an AND neuron, and the truth table
+    fills in.
+  - Improved: AI: XOR, one input pair at a time (00, 01, 10, 11): the inputs light, pulses run along
+    blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send
+    pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written
+    into the truth table (5 s). A View option picks the poster or a 3D model, which floats in space
+    (no stand).
   - Sound: A blip for each input, a ding when the answer is 1, a knock when it is 0.
 - **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: A forward pass: a wave of light runs left to right through three layers, each neuron glowing as bright as its activation; then a red backprop pulse runs right to left and the weights shift a little (4.5 s).
-  - Improved: AI: a 3-4-2 network with a real forward pass: yellow pulses run layer by layer and each neuron glows as bright as it fires; red pulses run back and the wires thicken or thin a little, easing back at the end (4.5 s). Owner's review: a View option adds a 3D model built like a molecule (third review): solid neuron balls in rings, weights as bonds, floating with no stand; a gold shell grows round each neuron as it fires. Its size is set by options: 2 to 4 inputs, 1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks with more than 24 wires send waves of light along the wires.
-  - Sound: More intense, an electric surge as each layer lights over a dark chord, a deep hit at the answer and crackling current as the pulses run back.
+  - Effect: A forward pass: a wave of light runs left to right through three layers, each neuron
+    glowing as bright as its activation; then a red backprop pulse runs right to left and the
+    weights shift a little (4.5 s).
+  - Improved: AI: a 3-4-2 network with a real forward pass: yellow pulses run layer by layer and
+    each neuron glows as bright as it fires; red pulses run back and the wires thicken or thin a
+    little, easing back at the end (4.5 s). Owner's review: a View option adds a 3D model built like
+    a molecule (third review): solid neuron balls in rings, weights as bonds, floating with no
+    stand; a gold shell grows round each neuron as it fires. Its size is set by options: 2 to 4
+    inputs, 1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks
+    with more than 24 wires send waves of light along the wires.
+  - Sound: More intense, an electric surge as each layer lights over a dark chord, a deep hit at the
+    answer and crackling current as the pulses run back.
 - **Convolutional network** (`cnn`). Now: tap: Read the digit. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: A glowing 3×3 filter slides across a pixel picture of a handwritten 7, stamping a feature map tile by tile; pooling shrinks the map, and a bar chart of the digits 0 to 9 rises with 7 on top (5 s).
-  - Improved: AI: a gold 3×3 filter slides over a handwritten 7, stamping a 5×5 feature map tile by tile (a real convolution); the tiles slide together into a 3×3 pooled map and the digit scores rise, 7 on top (5 s). Owner's review: a View option adds a 3D model (slabs of cubes, the filter's receptive field as lines to the tile it stamps). A third View, "3D, draw a digit": a small CNN trained on the UCI handwritten digits (CC BY 4.0) reads a digit you draw on a pad in the Toy tab; every cell of every layer lights as bright as it fires, the layers light in order and the scores rise.
+  - Effect: A glowing 3×3 filter slides across a pixel picture of a handwritten 7, stamping a
+    feature map tile by tile; pooling shrinks the map, and a bar chart of the digits 0 to 9 rises
+    with 7 on top (5 s).
+  - Improved: AI: a gold 3×3 filter slides over a handwritten 7, stamping a 5×5 feature map tile by
+    tile (a real convolution); the tiles slide together into a 3×3 pooled map and the digit scores
+    rise, 7 on top (5 s). Owner's review: a View option adds a 3D model (slabs of cubes, the
+    filter's receptive field as lines to the tile it stamps). A third View, "3D, draw a digit": a
+    small CNN trained on the UCI handwritten digits (CC BY 4.0) reads a digit you draw on a pad in
+    the Toy tab; every cell of every layer lights as bright as it fires, the layers light in order
+    and the scores rise.
   - Sound: A tick at each step of the filter, a chime at the answer.
 - **Recurrent network** (`rnn`). Now: tap: Read a sentence. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: Word blocks feed in one at a time; the hidden state, a glowing orb, loops back through the cell after each one and changes color as it carries what came before. An LSTM style (an option) shows its three gates opening and closing like shutters (4.5 s).
-  - Improved: AI: THE, CAT and SAT rise into the cell one at a time; the orb (the hidden state) takes on each word's color mixed with what it carried and runs round the loop. The LSTM style adds forget, input and output gates whose slats turn like shutters (4.5 s). Owner's review: a View option adds a 3D model (a cell with lit edges, the loop arching over it on a slant).
-  - Sound: A soft pulse of current as each word goes in and the loop's chord growing a note each time (no rising hum).
+  - Effect: Word blocks feed in one at a time; the hidden state, a glowing orb, loops back through
+    the cell after each one and changes color as it carries what came before. An LSTM style (an
+    option) shows its three gates opening and closing like shutters (4.5 s).
+  - Improved: AI: THE, CAT and SAT rise into the cell one at a time; the orb (the hidden state)
+    takes on each word's color mixed with what it carried and runs round the loop. The LSTM style
+    adds forget, input and output gates whose slats turn like shutters (4.5 s). Owner's review: a
+    View option adds a 3D model (a cell with lit edges, the loop arching over it on a slant).
+  - Sound: A soft pulse of current as each word goes in and the loop's chord growing a note each
+    time (no rising hum).
 - **Transformer** (`transformer`). Now: tap: Predict the next word. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: A row of token tiles; arcs of light jump between them, thicker where attention is stronger and a different color for each head; the tiles rise through a feed-forward block and up the stack of layers, and a new token tile appears at the end of the row (5 s).
-  - Improved: AI: two heads of attention arcs (cyan and magenta, thicker where stronger) draw between THE CAT SAT ON at each of two layers; the tiles rise through the feed-forward blocks, and MAT drops into the end of the row (5 s). A View option adds a 3D model (word blocks, box-outline blocks, arcs upright and leaning back). A Diagram option adds the classic encoder-decoder layout (from the 2017 paper's figure, with generic labels): a packet rises up the encoder, each box lighting as it passes, crosses into the decoder's middle attention, the decoder's packet meets it and goes on through the linear layer and softmax, and the next word comes out of the top; both diagrams have a 3D model. After the third review the classic diagram is spread out, each box carries an icon instead of its name, and the key is the toy's note in the panel (off the toy). Round 4: the 3D models' labels are about twice as big and bright.
-  - Sound: The first two sounds are warm swells of current instead of electronic shimmers; the last two are unchanged.
+  - Effect: A row of token tiles; arcs of light jump between them, thicker where attention is
+    stronger and a different color for each head; the tiles rise through a feed-forward block and up
+    the stack of layers, and a new token tile appears at the end of the row (5 s).
+  - Improved: AI: two heads of attention arcs (cyan and magenta, thicker where stronger) draw
+    between THE CAT SAT ON at each of two layers; the tiles rise through the feed-forward blocks,
+    and MAT drops into the end of the row (5 s). A View option adds a 3D model (word blocks,
+    box-outline blocks, arcs upright and leaning back). A Diagram option adds the classic
+    encoder-decoder layout (from the 2017 paper's figure, with generic labels): a packet rises up
+    the encoder, each box lighting as it passes, crosses into the decoder's middle attention, the
+    decoder's packet meets it and goes on through the linear layer and softmax, and the next word
+    comes out of the top; both diagrams have a 3D model. After the third review the classic diagram
+    is spread out, each box carries an icon instead of its name, and the key is the toy's note in
+    the panel (off the toy). Round 4: the 3D models' labels are about twice as big and bright.
+  - Sound: The first two sounds are warm swells of current instead of electronic shimmers; the last
+    two are unchanged.
 - **Looped transformer** (`looped-transformer`). Now: tap: Loop until it's sure. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: One transformer block with a track looping through it: the row of tokens rides round the loop several times, going from blurry to sharp on each pass, until the answer settles (5 s).
-  - Improved: AI: five tiles ride three laps through one block; each pass sharpens every mark one step (noise, a coarse mosaic, nearly right, exact) until 3 + 4 = 7 settles (5 s). A View option adds a 3D model (the loop leans back through a box-outline block).
+  - Effect: One transformer block with a track looping through it: the row of tokens rides round the
+    loop several times, going from blurry to sharp on each pass, until the answer settles (5 s).
+  - Improved: AI: five tiles ride three laps through one block; each pass sharpens every mark one
+    step (noise, a coarse mosaic, nearly right, exact) until 3 + 4 = 7 settles (5 s). A View option
+    adds a 3D model (the loop leans back through a box-outline block).
   - Sound: A tone that climbs a step on each loop, then resolves.
 - **Diffusion model** (`diffusion-model`). Now: tap: Denoise. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: A cloud of random specks clears step by step into a crisp small toy (a rubber duck) while a step counter runs down from 50 to 0; then the noise washes back over it (5 s).
-  - Improved: AI: a cloud of specks clears in ten steps into a rubber duck while the STEP counter runs from 50 to 0; then the noise washes back (5 s). Owner's review: a View option adds a 3D model (a round cloud clears into a duck over a stand).
-  - Sound: A soft dark swell as the noise clears (no sandy hiss) and a chord rolled on the piano as the duck appears.
+  - Effect: A cloud of random specks clears step by step into a crisp small toy (a rubber duck)
+    while a step counter runs down from 50 to 0; then the noise washes back over it (5 s).
+  - Improved: AI: a cloud of specks clears in ten steps into a rubber duck while the STEP counter
+    runs from 50 to 0; then the noise washes back (5 s). Owner's review: a View option adds a 3D
+    model (a round cloud clears into a duck over a stand).
+  - Sound: A soft dark swell as the noise clears (no sandy hiss) and a chord rolled on the piano as
+    the duck appears.
 - **Gradient descent** (`gradient-descent`). Now: tap: Roll downhill. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: A ball rolls down a hilly loss landscape, overshoots and settles into a valley. A "Learning rate" option makes it creep, or bounce right out of the valley when it's too high (4.5 s).
-  - Improved: AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots; just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces wall to wall (4.5 s).
-  - Sound: A soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home (the falling tone and whoosh are gone).
+  - Effect: A ball rolls down a hilly loss landscape, overshoots and settles into a valley. A
+    "Learning rate" option makes it creep, or bounce right out of the valley when it's too high (4.5
+    s).
+  - Improved: AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots;
+    just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
+    wall to wall (4.5 s).
+  - Sound: A soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home
+    (the falling tone and whoosh are gone).
 - **Gaussian splatting** (`gaussian-splatting`). Now: tap: Train, or play the view. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
-  - Effect: Training: a cloud of random splats slides, stretches and recolors, step by step, into a photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s). Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.
-  - Improved: Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13 keyframes as each splat slides to its next place; views One splat (sizes, opacity and color sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats appear far to near from a camera). Fix7: the one-splat view starts from a tap anywhere on it, and its tap trains the splat: from a wrong guess, 24 gradient steps move its place, turn, sizes, color and opacity toward the target (a dashed outline), each closing a share of the error at its own rate (about 7 s).
-  - Sound: Training, a soft tone falling as the loss curve draws (no chord or notes); one splat, a soft airy swell; many splats, a fainter twinkle; sorting, a pebble's click for each splat as it is placed, in sync, each a little different (Sound C, October 2, 2026).
+  - Effect: Training: a cloud of random splats slides, stretches and recolors, step by step, into a
+    photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s).
+    Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.
+  - Improved: Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13
+    keyframes as each splat slides to its next place; views One splat (sizes, opacity and color
+    sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats
+    appear far to near from a camera). Fix7: the one-splat view starts from a tap anywhere on it,
+    and its tap trains the splat: from a wrong guess, 24 gradient steps move its place, turn, sizes,
+    color and opacity toward the target (a dashed outline), each closing a share of the error at its
+    own rate (about 7 s).
+  - Sound: Training, a soft tone falling as the loss curve draws (no chord or notes); one splat, a
+    soft airy swell; many splats, a fainter twinkle; sorting, a pebble's click for each splat as it
+    is placed, in sync, each a little different (Sound C, October 2, 2026).
 - **Word vectors** (`word-vectors`). Now: tap: A − B + C. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus woman, and land right next to queen, which lights up (4 s).
-  - Improved: AI: an arrow runs to KING, another from MAN to WOMAN, and the same step runs on from KING, landing next to QUEEN, which lights up (4 s). Owner's review: real GloVe word vectors; type your own A - B + C and the nearest common word lights up.
+  - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus
+    woman, and land right next to queen, which lights up (4 s).
+  - Improved: AI: an arrow runs to KING, another from MAN to WOMAN, and the same step runs on from
+    KING, landing next to QUEEN, which lights up (4 s). Owner's review: real GloVe word vectors;
+    type your own A - B + C and the nearest common word lights up.
   - Sound: Three chimes, then a bright ding at the answer.
 - **Sorting machine** (`sorting-machine`). Now: tap: Sort the bars. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: A row of colored bars of different heights sorts itself, the bars swapping as solid pieces, by bubble sort, quicksort or merge sort (an option), with a swap counter; then it shuffles again (5 s).
-  - Improved: AI: eight bars sort by bubble sort, quicksort or merge sort, each a solid bar gliding past the others, with a SWAPS (or MOVES) counter; then they shuffle back (5 s). Owner's review: the algorithm's name is on the toy, and eight algorithms (insertion, selection, cocktail shaker, Shell and heap sort added).
+  - Effect: A row of colored bars of different heights sorts itself, the bars swapping as solid
+    pieces, by bubble sort, quicksort or merge sort (an option), with a swap counter; then it
+    shuffles again (5 s).
+  - Improved: AI: eight bars sort by bubble sort, quicksort or merge sort, each a solid bar gliding
+    past the others, with a SWAPS (or MOVES) counter; then they shuffle back (5 s). Owner's review:
+    the algorithm's name is on the toy, and eight algorithms (insertion, selection, cocktail shaker,
+    Shell and heap sort added).
   - Sound: Each bar plays its height as a note, so you hear the sort rise into a scale.
 - **Half adder** (`half-adder`). Now: tap: Add 1 + 1. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
-  - Effect: Two input switches flip; light flows along the wires through an XOR gate and an AND gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5 s).
-  - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
+  - Effect: Two input switches flip; light flows along the wires through an XOR gate and an AND
+    gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5
+    s).
+  - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
+    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
   - Sound: The buzz near the end is gone; the rest is unchanged.
 - **Turing machine** (`turing-machine`). Now: tap: Run the program. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane Machines A).
-  - Effect: A tape of 0 and 1 tiles runs under a read-write head with a state lamp: the head reads, flips tiles to write and the tape slides, following the rule card, until it halts with a bell. Add one on your binary number; count up; the busy beaver (about 4.5 s).
-  - Improved: Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab (about 4.5 s for 1011).
-  - Sound: A relay click as the head reads, a wooden clack as each tile flips, a short whir as the tape slides, and a bell at the halt.
+  - Effect: A tape of 0 and 1 tiles runs under a read-write head with a state lamp: the head reads,
+    flips tiles to write and the tape slides, following the rule card, until it halts with a bell.
+    Add one on your binary number; count up; the busy beaver (about 4.5 s).
+  - Improved: Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule
+    card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds
+    one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab
+    (about 4.5 s for 1011).
+  - Sound: A relay click as the head reads, a wooden clack as each tile flips, a short whir as the
+    tape slides, and a bell at the halt.
 - **Difference engine** (`difference-engine`). Now: tap: Turn the crank. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane Machines A).
-  - Effect: Babbage's engine: columns of numbered wheels and a crank. Each turn adds every column into its neighbor, the wheels click round, carries ripple up with levers, and the value column shows the next value of your polynomial (about 4 s per turn).
-  - Improved: Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read through a window), two-phase addition staggered as in Babbage's design, carry levers that set and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial up to x³ and start value in the Toy tab.
-  - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each carry, and a small bell when a new result is ready.
+  - Effect: Babbage's engine: columns of numbered wheels and a crank. Each turn adds every column
+    into its neighbor, the wheels click round, carries ripple up with levers, and the value column
+    shows the next value of your polynomial (about 4 s per turn).
+  - Improved: Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read
+    through a window), two-phase addition staggered as in Babbage's design, carry levers that set
+    and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial
+    up to x³ and start value in the Toy tab.
+  - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each
+    carry, and a small bell when a new result is ready.
 - **Enigma machine** (`enigma-machine`). Now: tap: Type the message. Plan: keep.
   - Owner: The owner's own idea on the Toy Ideas page (lane Machines A).
-  - Effect: An Enigma cipher machine in its wooden box: tap and it types your message, each key going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard; a second tap types the coded text back and gets the message again (about 4 s).
-  - Improved: Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step back, as an operator corrected a mistake (the real machine had no delete key): a tap on the rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its coded letter) off the pad and turns the rotors back to where they stood before it.
-  - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp lights.
+  - Effect: An Enigma cipher machine in its wooden box: tap and it types your message, each key
+    going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard;
+    a second tap types the coded text back and gets the message again (about 4 s).
+  - Improved: Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B
+    and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the
+    operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy
+    tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the
+    keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step
+    back, as an operator corrected a mistake (the real machine had no delete key): a tap on the
+    rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its
+    coded letter) off the pad and turns the rotors back to where they stood before it.
+  - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
+    lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.
   - Owner: The owner's own idea on the Toy Ideas page (lane Machines A).
-  - Effect: The Bletchley Park codebreaking machine: rows of colored drums spin in their sets through rotor settings, stop together on a possible setting and a lamp lights; then the coded message reads out in plain text (about 5 s).
-  - Improved: Machines A: one bank of 12 drum sets (36 drums), a menu from a 12-letter crib, a real search of all 17,576 settings (plugboard taken as known), the stop lamp, and a readout of the setting and the plain text; your own message in the Toy tab.
-  - Sound: The drums' clatter without the low motor buzz; the switch, the stop and the bell are unchanged.
+  - Effect: The Bletchley Park codebreaking machine: rows of colored drums spin in their sets
+    through rotor settings, stop together on a possible setting and a lamp lights; then the coded
+    message reads out in plain text (about 5 s).
+  - Improved: Machines A: one bank of 12 drum sets (36 drums), a menu from a 12-letter crib, a real
+    search of all 17,576 settings (plugboard taken as known), the stop lamp, and a readout of the
+    setting and the plain text; your own message in the Toy tab.
+  - Sound: The drums' clatter without the low motor buzz; the switch, the stop and the bell are
+    unchanged.
 
 ## Pictures (5)
 
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
-  - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.
-  - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and pauses a video.
-  - Sound: A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.
+  - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
+    and 28, 2026.
+  - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
+    page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
+    pauses a video.
+  - Sound: A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound
+    as a fallback.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
-  - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire.
-  - Effect: Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.
-  - Improved: Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s).
-  - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C, October 2, 2026).
+  - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little
+    blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp
+    edges (faces stop short of their edges, with finer splats and a line of thin splats along each),
+    full density and smooth cloth colors; the spiral's wire and the staples are thin splats along
+    the wire.
+  - Effect: Open a PDF of any length and turn its pages: each page turns over its spine as a solid
+    sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback,
+    magazine, stapled paper and spiral notebook.
+  - Improved: Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling
+    as it goes with the next page on its back; at the end a tap closes the book. Previous and Next
+    in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached
+    are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled
+    paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let
+    go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling
+    as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a
+    double-tap on a page glides the view in until the page fills the screen, and again (or a zoom
+    out) shows both pages; while a page is in view, forward goes from the left page to the right
+    one, then turns the leaf and lands on the next left page (back the other way). Reading: One page
+    (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at
+    once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand.
+    Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and
+    opens it in a new tab only when you say so (http, https and mailto only), and a link to another
+    page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture
+    on the page in view off the paper toward you as one solid piece (it rises, grows a little and
+    turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page;
+    a photo rises with its depth from the on-device depth model, a chart or diagram as a card with
+    its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift
+    it out. A tap lays it back (0.7 s).
+  - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback
+    (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C,
+    October 2, 2026).
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
-  - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth.
-  - Effect: Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.
-  - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop out lifts the photo on the page in view out of its corners toward you as one solid piece, with its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on the other photo of a page lifts that one instead, and a tap lays it back.
-  - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.
+  - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the
+    edges): the covers and card pages have clean, sharp edges and full density; the leather's
+    stitches and groove are thin splats in front of the cover, the scrapbook's label its own card,
+    and the leather and linen smooth.
+  - Effect: Open a set of photos and turn through them on thick album pages, each photo held by four
+    photo corners, one or two to a page as fits their shapes, with the file names as captions.
+  - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages
+    (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end
+    a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
+    lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
+    Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop
+    out lifts the photo on the page in view out of its corners toward you as one solid piece, with
+    its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on
+    the other photo of a page lifts that one instead, and a tap lays it back.
+  - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the
+    synthesized sound as a fallback.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
-  - Effect: A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the digital one fades through a set of photos.
-  - Improved: Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps through them in order or at random. Books r4: a double-tap fills the screen with the photo, and again steps back.
+  - Effect: A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid
+    piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the
+    digital one fades through a set of photos.
+  - Improved: Books: a tap swings the frame, its wire and photo about the nail like a damped
+    pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame
+    (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF
+    or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps
+    through them in order or at random. Books r4: a double-tap fills the screen with the photo, and
+    again steps back.
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
 - **Screen** (`screen`). Now: tap: Switch on or off. Plan: keep.
-  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of September 29, 2026: "very close to perfect"; sharper sets, nothing of the picture while off, and a real off switch (lane Screens r2).
-  - Effect: Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a hologram. A tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains part, the hologram flickers up); a tap on the picture plays and pauses; a tap on its switch (the old TV's power knob, the flat TV's button, the curtains, the hologram's base) switches it off: the old TV's picture shrinks to a bright dot, the flat TV fades to black, the curtains close, the hologram sinks into its beam.
-  - Improved: Screens: four styles on a picture sheet with method "screen", a Big Buck Bunny scene (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
+  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of
+    September 29, 2026: "very close to perfect"; sharper sets, nothing of the picture while off, and
+    a real off switch (lane Screens r2).
+  - Effect: Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a
+    hologram. A tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains
+    part, the hologram flickers up); a tap on the picture plays and pauses; a tap on its switch (the
+    old TV's power knob, the flat TV's button, the curtains, the hologram's base) switches it off:
+    the old TV's picture shrinks to a bright dot, the flat TV fades to black, the curtains close,
+    the hologram sinks into its beam.
+  - Improved: Screens: four styles on a picture sheet with method "screen", a Big Buck Bunny scene
+    (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker
+    button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are
+    closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each
+    style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
 ## Studio (9)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
-  - Effect: A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it. View: Live scrolls the landscape with the music like a waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward you, what has played fades away, and a row of caps rises with the loudness at the line.
-  - Improved: Live input r2: a long song plays from the file at once (no decoding first) and its picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its wireframe), on cream paper or alone, all on the audio clock.
+  - Effect: A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing
+    marker and the camera glide along it. View: Live scrolls the landscape with the music like a
+    waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward
+    you, what has played fades away, and a row of caps rises with the loudness at the line.
+  - Improved: Live input r2: a long song plays from the file at once (no decoding first) and its
+    picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six
+    bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its
+    wireframe), on cream paper or alone, all on the audio clock.
   - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
-  - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
+  - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
+    to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
-  - Effect: A splat room with a wooden floor and three walls. Tap “Use my microphone” and clap once: rings of sound spread across the floor from the clap, a new one every 70 ms for as long as the room still rings, each as bright as the sound was at that moment (on a dB scale), and the walls glow as they arrive; the rings run at half speed. The page measures the room's reverberation time (RT60, Schroeder's backward integral, T20 or T10) and shows it on the back wall, or says plainly when the room is too noisy. A tap claps in a sample room (0.8 s) or the last room measured.
-  - Improved: Live input: the first toy fed by the microphone, turned on only by its button; the measurement is tested on synthetic decays of 0.4, 0.8 and 1.6 s (within 10%).
+  - Effect: A splat room with a wooden floor and three walls. Tap “Use my microphone” and clap once:
+    rings of sound spread across the floor from the clap, a new one every 70 ms for as long as the
+    room still rings, each as bright as the sound was at that moment (on a dB scale), and the walls
+    glow as they arrive; the rings run at half speed. The page measures the room's reverberation
+    time (RT60, Schroeder's backward integral, T20 or T10) and shows it on the back wall, or says
+    plainly when the room is too noisy. A tap claps in a sample room (0.8 s) or the last room
+    measured.
+  - Improved: Live input: the first toy fed by the microphone, turned on only by its button; the
+    measurement is tested on synthetic decays of 0.4, 0.8 and 1.6 s (within 10%).
   - Sound: A hand clap that rings as long as the room (silent while the microphone listens).
 - **Splat mirror** (`splat-mirror`). Now: tap: Flatten or raise the depth. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
-  - Effect: A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near each part is as often as the device allows, and the picture rises into a relief you can turn. Before the camera is on it shows a still life with its depth. A tap flattens the relief into its frame and the next raises it again (about 1.4 s); the picture itself keeps still.
-  - Improved: Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a hologram look.
+  - Effect: A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the
+    depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near
+    each part is as often as the device allows, and the picture rises into a relief you can turn.
+    Before the camera is on it shows a still life with its depth. A tap flattens the relief into its
+    frame and the next raises it again (about 1.4 s); the picture itself keeps still.
+  - Improved: Live input: relief splats (a new kind) take their color and lift from a canvas drawn
+    each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so
+    it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a
+    hologram look.
   - Sound: A soft rising whoosh as the depth comes up; a falling one as it flattens.
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.
-  - Effect: A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every splat off the surface into a loose cloud and lets each settle back into its own place in about 3 s. Show: Wireframe draws the mesh's edges as thin splats.
-  - Improved: Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase).
-  - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.
+  - Effect: A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every
+    splat off the surface into a loose cloud and lets each settle back into its own place in about 3
+    s. Show: Wireframe draws the mesh's edges as thin splats.
+  - Improved: Studio Models: a converter that samples the surface by area (more splats where it
+    bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the
+    texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger,
+    Poly Haven's vase).
+  - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
+    back.
 - **QR code** (`qr-code`). Now: tap: Burst and return. Plan: new effect (E6).
   - Owner: The owner's idea of October 1, 2026 ("go hard on it"), lane QR, October 3, 2026.
-  - Effect: A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).
-  - Sound: Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps).
+  - Effect: A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles,
+    Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off
+    as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds
+    Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing
+    their back color).
+  - Sound: Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back
+    (Assemble: a rush in and a settle; Flip: two soft sweeps).
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
-  - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to 3D; labs only).
-  - Effect: Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.
-  - Improved: Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life).
-  - Sound: The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh).
+  - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
+    3D; labs only).
+  - Effect: Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the
+    photo's color at its place and sits at its depth, and the surface is cut where the depth jumps,
+    so a near object stands as its own layer. The picture starts flat; the tap raises its depth
+    layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how
+    deep the relief is; Layers pulls the depth bands apart.
+  - Improved: Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime
+    Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their
+    neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled
+    street, a still life).
+  - Sound: The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no
+    whoosh).
 - **Moving photo to 3D** (`moving-photo-3d`). Now: tap: Play or pause the clip. Plan: keep.
-  - Owner: The owner's idea in his review of October 2, 2026 (lane Live input r3; labs only): a GIF or video played back in 3D, like the live camera.
-  - Effect: A GIF or a short video playing in 3D: every frame's depth comes from the depth model, and the picture moves in relief as it plays (turn it to see the depth). It opens with six seconds of Big Buck Bunny, its depth worked out ahead. A tap pauses or plays it.
-  - Improved: Live input r3: each splat rests at its average depth over the clip and moves from there, so the picture sorts the way it shows and doesn't flash.
+  - Owner: The owner's idea in his review of October 2, 2026 (lane Live input r3; labs only): a GIF
+    or video played back in 3D, like the live camera.
+  - Effect: A GIF or a short video playing in 3D: every frame's depth comes from the depth model,
+    and the picture moves in relief as it plays (turn it to see the depth). It opens with six
+    seconds of Big Buck Bunny, its depth worked out ahead. A tap pauses or plays it.
+  - Improved: Live input r3: each splat rests at its average depth over the clip and moves from
+    there, so the picture sorts the way it shows and doesn't flash.
   - Sound: A soft click as it pauses or plays.
 - **Video to 3D** (`video-3d`). Now: tap: Replay flight. Plan: new effect (E6).
-  - Owner: Approved as a one-week labs spike (the owner's question and the Operator's answer, call 18, September 30, 2026; lane Video 3D).
-  - Effect: Your video rebuilt as trained 3D Gaussian splats on this device: the sharpest frames of a chosen stretch, the camera path solved by Splat.js, splats trained through WebGPU. The tap flies the video's own camera path with its sound (Replay flight); a drag roams off it; the tap again brings the camera home.
-  - Improved: Video to 3D (spike): Splat.js (MIT) vendored and loaded only when a video is opened; frames picked by sharpness; the result converted from Splat.js's PLY into kit splats with their own sizes and rotations; save as PLY; timing readout per stage.
-  - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during the flight of a video you opened, the video's own sound.
+  - Owner: Approved as a one-week labs spike (the owner's question and the Operator's answer, call
+    18, September 30, 2026; lane Video 3D).
+  - Effect: Your video rebuilt as trained 3D Gaussian splats on this device: the sharpest frames of
+    a chosen stretch, the camera path solved by Splat.js, splats trained through WebGPU. The tap
+    flies the video's own camera path with its sound (Replay flight); a drag roams off it; the tap
+    again brings the camera home.
+  - Improved: Video to 3D (spike): Splat.js (MIT) vendored and loaded only when a video is opened;
+    frames picked by sharpness; the result converted from Splat.js's PLY into kit splats with their
+    own sizes and rotations; save as PLY; timing readout per stage.
+  - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
+    the flight of a video you opened, the video's own sound.
 
 ## Lab (2)
 
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
-  - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.
-  - Effect: Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).
-  - Improved: Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it). Fix7: a tap never pauses it; each tap adds its own pulse (another stone where you tap the sea, with rings that cross, another ring through the galaxy, another lap of the knot), up to eight at once (3 s each).
-  - Sound: Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).
+  - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
+    Lab; labs only): splat fields on the GPU.
+  - Effect: Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral
+    galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a
+    stone in the sea, or pushes the flow once more around the knot (3 s).
+  - Improved: Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the
+    toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place,
+    tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning
+    ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
+    torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
+    stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it). Fix7: a tap
+    never pauses it; each tap adds its own pulse (another stone where you tap the sea, with rings
+    that cross, another ring through the galaxy, another lap of the knot), up to eight at once (3 s
+    each).
+  - Sound: Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle
+    wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C, October 2, 2026).
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
-  - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic fluid splat simulator"; lane Fluids; labs only).
-  - Effect: A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).
-  - Improved: Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the glass and the bowl.
-  - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a breath on the candle and the cup.
+  - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
+    fluid splat simulator"; lane Fluids; labs only).
+  - Effect: A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass
+    (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out
+    and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).
+  - Improved: Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a
+    viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a
+    curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the
+    glass and the bowl.
+  - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
+    breath on the candle and the cup.
 
 ## Science (3)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
-  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer "Science yes" (lane Science; labs only).
-  - Effect: Each atom of a crystal structure is the Gaussian of its measured displacement tensor U, drawn as a solid ellipsoid at a probability level (50% by default) with its three principal planes, or as one Gaussian splat. The tap makes every atom jiggle through places drawn from its own Gaussian while the bonds fade to a ghost of the mean structure; a second tap stills them. Zoom in with the slider and tap an atom to look there.
-  - Improved: Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes), mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples: aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0). Science r2 (the owner's review of October 2, 2026: "really, really big" and slow on his phone): a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's count (36k on the low tier).
-  - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer breath as they settle.
-- **Super-resolution microscope** (`smlm-microscope`). Now: tap: Show a slice at the depth you tap. Plan: keep.
-  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer "Science yes" (lane Science; labs only).
-  - Effect: A super-resolution microscope's localizations, each a Gaussian as wide as its localization precision (and deeper by its axial precision), colored by depth, time or channel. Pinch or scroll zooms the camera all the way down to single molecules (about 150 times closer) and back out; every localization stays at least a pixel wide. The tap shows a slice 200 nm thick at the depth of the molecules you tap; a second tap shows them all.
-  - Improved: Science: .smlm (a zip, inflated with DecompressionStream) and ThunderSTORM CSV readers; tier budgets (84k to 392k localizations); a size floor so the whole field shows at any zoom. Sample: a 12 µm square of Christophe Leterrier's microtubules and clathrin record on ShareLoc.XYZ (CC BY 4.0, a subset).
-  - Sound: A microscope's focus knob turning smoothly as the slice comes in, and turning back as it goes.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: Each atom of a crystal structure is the Gaussian of its measured displacement tensor U,
+    drawn as a solid ellipsoid at a probability level (50% by default) with its three principal
+    planes, or as one Gaussian splat. The tap makes every atom jiggle through places drawn from its
+    own Gaussian while the bonds fade to a ghost of the mean structure; a second tap stills them.
+    Zoom in with the slider and tap an atom to look there.
+  - Improved: Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes),
+    mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the
+    one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples:
+    aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0).
+    Science r2 (the owner's review of October 2, 2026: "really, really big" and slow on his phone):
+    a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big
+    overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's
+    count (36k on the low tier).
+  - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
+    breath as they settle.
+- **Super-resolution microscope** (`smlm-microscope`). Now: tap: Show a slice at the depth you tap.
+  Plan: keep.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: A super-resolution microscope's localizations, each a Gaussian as wide as its
+    localization precision (and deeper by its axial precision), colored by depth, time or channel.
+    Pinch or scroll zooms the camera all the way down to single molecules (about 150 times closer)
+    and back out; every localization stays at least a pixel wide. The tap shows a slice 200 nm thick
+    at the depth of the molecules you tap; a second tap shows them all.
+  - Improved: Science: .smlm (a zip, inflated with DecompressionStream) and ThunderSTORM CSV
+    readers; tier budgets (84k to 392k localizations); a size floor so the whole field shows at any
+    zoom. Sample: a 12 µm square of Christophe Leterrier's microtubules and clathrin record on
+    ShareLoc.XYZ (CC BY 4.0, a subset).
+  - Sound: A microscope's focus knob turning smoothly as the slice comes in, and turning back as it
+    goes.
 - **Galaxy in a box** (`galaxy-box`). Now: tap: Peel away the hot gas. Plan: keep.
-  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer "Science yes" (lane Science; labs only).
-  - Effect: The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature and brighter where denser, in a box with a dark floor. Pinch or scroll zooms the camera far into the gas (about 60 times closer) and back out. The tap peels the hot gas away (a second tap brings it back).
-  - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral).
-  - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it comes back.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with
+    the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature
+    and brighter where denser, in a box with a dark floor. Pinch or scroll zooms the camera far into
+    the gas (about 60 times closer) and back out. The tap peels the hot gas away (a second tap
+    brings it back).
+  - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles
+    in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
+    face up and works out each temperature; the toy draws them approximately (not a column-density
+    integral).
+  - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
+    comes back.
