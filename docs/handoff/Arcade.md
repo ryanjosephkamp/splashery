@@ -127,6 +127,13 @@ src/media.js and the Space pack without editing them; if you need a change there
   floated off before it spread, and five how-to lines over the help line's 110 characters.
 - Engine PR #283 also carries `sortBias`, the skip for sprites that haven't moved, and the press fix
   (all additive); its seven tests pass.
+- Round 2 (the owner's "the toys could still be sharper", October 5): PR #328
+  (`claude/lane-arcade-r2`) with engine PR #327 (`claude/lane-arcade-r2-engine`, the edge fade).
+  Merge order: #283, #285, #327, #328. The owner marked ten r2 clips "good". He asked for two more
+  fixes, both done: Grain Garden "even sharper" (each grain is a 2 × 2 block of small splats) and
+  Longtail's 3D turn smoother (heading and height on capped, critically damped springs at the fixed
+  step: at most 1.5° a frame and 0.1° of change in speed, from 8.6° and 7.6°). Their `-r3` clips are
+  on Effect review page 2.
 - Not built: mini golf waits, as the brief says. The block world (G14, G15) is a later lane; its
   splat-budget notes are under Notes.
 
