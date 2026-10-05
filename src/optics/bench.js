@@ -52,10 +52,10 @@ export const SETUPS = [
 // Real lenses: each face's sag at the rim leaves glass at the edge (a
 // lens's center thickness must exceed the two sags together).
 export const LENSES = [
-  { id: "thin", label: "Thin biconvex", R1: 0.75, R2: -0.75, t: 0.045, h: 0.17 },
+  { id: "thin", label: "Thin biconvex", R1: 0.6, R2: -0.6, t: 0.045, h: 0.15 },
   { id: "thick", label: "Thick biconvex", R1: 0.5, R2: -0.5, t: 0.3, h: 0.2 },
-  { id: "plano", label: "Plano-convex", R1: 0.38, R2: Infinity, t: 0.08, h: 0.18 },
-  { id: "concave", label: "Biconcave", R1: -0.75, R2: 0.75, t: 0.03, h: 0.17 },
+  { id: "plano", label: "Plano-convex", R1: 0.3, R2: Infinity, t: 0.07, h: 0.15 },
+  { id: "concave", label: "Biconcave", R1: -0.6, R2: 0.6, t: 0.03, h: 0.15 },
 ];
 
 // The parts of a setup, at home. Each: { id, type, pos, angle, … }, with
@@ -68,7 +68,7 @@ export function homeParts(o) {
     case "lens":
       return [
         { id: "object", type: "object", pos: [-1.45, 0], angle: 0, height: 0.15, move: "x", turn: false }, // prettier-ignore
-        { id: "lens", type: "lens", pos: [0, 0], angle: 0, lens, move: "x", turn: false },
+        { id: "lens", type: "lens", pos: [-0.3, 0], angle: 0, lens, move: "x", turn: false },
       ];
     case "mirrors":
       return [
@@ -84,7 +84,10 @@ export function homeParts(o) {
       ];
     case "fiber":
       return [
-        { id: "lamp", type: "lamp", pos: [-1.38, -0.62], angle: (9 * Math.PI) / 180, move: "free", turn: true }, // prettier-ignore
+        // The lamp stays aimed at the guide's end (its `aim`) wherever it
+        // is dragged, so dragging it round chooses the angle the light goes
+        // in at.
+        aimed({ id: "lamp", type: "lamp", pos: [-1.0 - 0.32 * Math.cos(0.3), -0.6 - 0.32 * Math.sin(0.3)], angle: 0, aim: [-1.0, -0.6], move: "free", turn: false }), // prettier-ignore
         { id: "fiber", type: "fiber", pos: [-1.0, -0.6], angle: 0, R: (Number(o.bend) || 7) / 10, move: false, turn: false }, // prettier-ignore
       ];
     case "prism":
@@ -101,6 +104,12 @@ export function homeParts(o) {
       return [lamp, prism, { id: "screen", type: "screen", pos: [1.3, -0.5], angle: 0, length: 0.9, move: "free", turn: false }]; // prettier-ignore
     }
   }
+}
+
+// A part with an `aim` turns to face it.
+export function aimed(p) {
+  if (p.aim) p.angle = Math.atan2(p.aim[1] - p.pos[1], p.aim[0] - p.pos[0]);
+  return p;
 }
 
 const FIBER = { a: 0.07, b: 0.035, len1: 0.95, bend: (70 * Math.PI) / 180, len2: 0.5, core: "N-SF11", clad: "N-BK7" }; // prettier-ignore

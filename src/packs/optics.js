@@ -15,7 +15,7 @@
 // It runs in the kit's own program, on WebGL2 and WebGPU alike.
 
 import { RippleTank, doubleSlitAngles, singleSlitFirstMin } from "../optics/ripple.js";
-import { BENCH, LENSES, LIGHTS, SETUPS as BENCH_SETUPS, benchNumbers, homeParts, partOutline, traceBench } from "../optics/bench.js"; // prettier-ignore
+import { BENCH, LENSES, LIGHTS, SETUPS as BENCH_SETUPS, aimed, benchNumbers, homeParts, partOutline, traceBench } from "../optics/bench.js"; // prettier-ignore
 import { rot } from "../optics/rays.js";
 import { quatAxisAngle } from "../kit.js";
 
@@ -776,6 +776,7 @@ const BENCH_DRAG = {
       const x = clamp(p[0] - g.from[0], -BENCH.W / 2 + m, BENCH.W / 2 - m);
       const y = clamp(p[1] - g.from[1], -BENCH.H / 2 + m, BENCH.H / 2 - m);
       part.pos = part.move === "x" ? [x, part.pos[1]] : [x, y];
+      aimed(part);
     }
     benchUpdate();
   },
