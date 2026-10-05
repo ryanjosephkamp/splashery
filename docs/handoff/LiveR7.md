@@ -101,6 +101,38 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
+READY (October 5, 2026, 03:00 UTC; Opus 5.5, default effort, no helpers). Draft PR #263, main merged
+in (through #264). All three items are built, tested and posted on Effect review page 2:
+
+- `lv7-splat-mirror`: before and after, plain look.
+- `lv7-splat-mirror-hologram`: before and after, hologram look.
+- `lv7-song-landscape`: the land growing from an empty plain.
+- `lv7-chladni-plate`: taps and mode changes, the microphone, an audio file.
+
+There is no `LiveR7` lane record on the page yet, so the cards show under the id. A send_later
+check-in reads the owner's marks hourly.
+
+1. **Song landscape**: Live opens on an empty plain. Each moment rises at the line at the front as
+   it is heard and recedes behind it, for every song and look. The 20-second sample is now measured
+   by the worker like a long song; the measured looks already grew from their gate. Whole song is
+   unchanged. The plain stays put while the land slides over it, so the splats are sorted again as
+   it slides (`out.resortPose`, every 0.02 units).
+2. **Splat mirror**: see Notes.
+3. **Chladni bow**: the bow shows only while a tap moves the sand. Clip and test cover tone (mode)
+   changes from the Toy tab, the microphone and an audio file. Nothing needed fixing: the bug was
+   already fixed on main (Live input r4).
+
+Tests run on this branch: `lv7`, `live`, `live2`, `live3`, `live4`, `live5`, `live6`, `p3d`, `sng`,
+`sts`. All pass (58 + 24 + the lv7 and live5 runs).
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
+- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
+  What was cut), opened early and pushed after each finished item. Finish every working turn with a
+  final message that starts "READY:", "WORKING:" or "BLOCKED:".
+
+## State
+
 October 5, 2026 (Opus 5.5, default effort, no helpers). Draft PR #263. Work in progress:
 
 1. **Song landscape** (done, in test): Live opens on an empty plain; each moment rises at the line
@@ -156,9 +188,25 @@ October 5, 2026 (Opus 5.5, default effort, no helpers). Draft PR #263. Work in p
 
 ## Known issues
 
+- A person who moves fast still leaves a little of their outline on the wall behind, seen from the
+  side, until the next depth answer. The depth can't move with the picture where the person's colors
+  are close to the wall's (skin and a beige wall). In this container a depth answer takes 0.3 to 0.5
+  s, against about 0.1 s on a laptop, so the clips show more of it than a computer would.
+- The depth model's own guess wanders a little on a still picture. Per answer, the face's depth
+  moves about 0.005 (median) here, against 0.016 on main.
+- The Song landscape's shelf thumbnail is kept as it was (the Whole song look). A thumbnail made now
+  would show the empty plain Live opens on.
+- `node tools/check-packs.mjs live` reports Moving photo to 3D's build at 2.5 s (over 1.5 s). That
+  is not this lane's toy (Studio media and Live input own it), and this lane didn't change its
+  build.
+
 ## For the Operator
 
 - `src/live/relief.js` is the Live input lane's file (finished); the mirror's fixes are there. Its
   `CameraDepth` is shared with Photo to 3D's live view (Studio media changes that toy's samples, not
   this file).
-- Tests of other lanes changed: none so far.
+- Tests of other lanes changed: `tests/sng.spec.mjs` (Song live) now follows the growing land (the
+  look part's offset, not the body's). `tests/sts.spec.mjs` (Studio Sound) opens its beep in Whole
+  song, which still builds at once and reports its `top`. The Node-only tests in sng.spec still
+  build the old scrolling Live, which remains for a build without a worker.
+- The cards are under lane id `LiveR7`; the page has no record for it yet.
