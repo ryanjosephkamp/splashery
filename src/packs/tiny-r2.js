@@ -265,7 +265,7 @@ function dnaLayout(story, rand) {
   const xs = (j) => x[Math.max(0, Math.min(n - 1, j))];
   const startTo = midFrom > 0 ? midFrom - 1 : n - 1;
   const views = {
-    txA: span(xs(0) - 1.6, Math.min(xs(startTo) + 0.8, xs(0) + 11), YR - 1.0, YD + 1.4),
+    txA: span(xs(0) - 3.6, Math.min(xs(startTo) + 0.8, xs(0) + 11), YR - 1.0, YD + 1.4),
     txB: midFrom > 0 ? span(xs(midFrom) - 0.8, xs(n - 1) + 1.6, YR - 1.0, YD + 1.4) : null,
     tlA: span(xs(0) - 1.4, Math.min(xs(startTo) + 2.2, xs(0) + 11.5), YM - 1.6, YM + 6.4),
     tlB: span(pAt(ffStartQ) - 2.6, xs(n - 1) + 1.8, YM - 1.6, center[1] + R + 0.8),
@@ -484,7 +484,7 @@ const dnaToProtein = {
         const tl0 = tLeave(k);
         if (t >= tl0) {
           const f = band(t, tl0, tl0 + 0.7);
-          off = lerp([0, 0, 0], [-3.2, 7, 0.6], ease(f));
+          off = lerp([0, 0, 0], [-2.6, 4.2, 3.5], ease(f));
           if (f >= 1) vis = 0;
         }
         if (reset > 0) {
@@ -1280,7 +1280,384 @@ function nearestIndex(patches, d) {
   return best;
 }
 
+// ---- Apoptosis ----------------------------------------------------------------------------
+
+// A cell's programmed death, as in a pathology textbook: it shrinks, its
+// chromatin condenses (pyknosis), the membrane blebs, the nucleus breaks up
+// (karyorrhexis) and the cell comes apart into membrane-bound apoptotic
+// bodies, which are cleared away; a neighbor moves in.
+const AP = { R: 2.6, NR: 1.05, S: 0.82, T: 14 };
+// The bodies: centers and radii in the cell's own (unshrunk) frame.
+const BODIES = [
+  { c: [0, 0, 0], r: 1.2 },
+  ...fibonacciPoints(6).map((d, i) => ({ c: mul(d, 1.55), r: i % 2 ? 0.8 : 0.9 })),
+];
+// Blebs: bulges of the membrane round these directions.
+const BLEBS = fibonacciPoints(9).map((d, i) => ({ d, ch: 1 + (i % 2), h: 0.75 + 0.2 * (i % 3) }));
+const AP_LABELS = ["A HEALTHY CELL", "THE CELL SHRINKS", "THE MEMBRANE BLEBS", "APOPTOTIC BODIES", "A NEIGHBOR MOVES IN"]; // prettier-ignore
+
+function bodyOf(p) {
+  let best = 0;
+  let bv = Infinity;
+  BODIES.forEach((b, i) => {
+    const v = len(sub(p, b.c)) - b.r;
+    if (v < bv) [best, bv] = [i, v];
+  });
+  return best;
+}
+
+const apoptosis = {
+  alive: true,
+  turntable: false,
+  controls: [{ key: "go", label: "Apoptosis", type: "pulse", ease: AP.T }],
+  action: { key: "go", label: "Start apoptosis" },
+  drive(time, c, out, info) {
+    const D = info.data;
+    if (!D?.ap) return;
+    const t = c.go > 0 ? (1 - c.go) * AP.T : 0;
+    const on = c.go > 0 && t < AP.T - 0.1;
+    const ph = (a, b) => (on ? band(t, a, b) : 0);
+    const parts = out.parts;
+    const tokens = new Array(48).fill(null);
+    out.tokens = tokens;
+    const morph = [0, 0, 0, 0];
+    out.morph = morph;
+
+    const shrink = ease(ph(0.3, 2.3));
+    const s = 1 - (1 - AP.S) * shrink;
+    const pykno = ph(0.9, 2.8);
+    const nucShrink = 1 - 0.3 * ease(ph(0.9, 3.2));
+    const blebbing = on && t >= 2.3 && t < 6.3;
+    const env = Math.sin(Math.PI * ph(2.3, 6.3));
+    const broken = on && t >= 6.2;
+    const fragment = ease(ph(6.5, 8.4));
+    const shells = on && t >= 8.4;
+    const drift = ease(ph(8.6, 11.6));
+    const back = ease(ph(10.6, 13.6));
+    const cellShown = !on || t < 6.5 || t >= 10.6;
+
+    // Blebs come and go in two alternating sets.
+    if (blebbing) {
+      const w = ((t - 2.3) * TAU) / 1.5;
+      morph[1] = env * (0.55 + 0.45 * Math.sin(w));
+      morph[2] = env * (0.55 + 0.45 * Math.sin(w + Math.PI));
+    }
+    morph[0] = t >= 10.6 || !on ? 0 : pykno;
+    morph[3] = on && t >= 6.5 && t < 10.6 ? fragment : 0;
+    // The cell (membrane and organelles): shrinks; later a neighbor of the
+    // same kind moves in from the left to take the space.
+    const late = on && t >= 10.6;
+    const inOff = late ? [-9 * (1 - back), 0.4 * (1 - back), 0] : [0, 0, 0];
+    const inScale = late ? 0.9 + 0.1 * back : s;
+    parts.cell = { offset: inOff, scale: inScale, visible: cellShown ? 1 : 0 };
+    parts.nucleus = { offset: inOff, scale: late ? inScale : s * nucShrink, visible: cellShown && !(broken && t < 10.6) ? 1 : 0 }; // prettier-ignore
+    // The dividing copy of the membrane: swapped in to pinch into bodies.
+    parts.split = { scale: AP.S, visible: on && t >= 6.5 && t < 8.4 ? 1 : 0 };
+    // Bodies: shells (tokens 0..6) and what each holds (7..13).
+    BODIES.forEach((b, k) => {
+      const home = mul(b.c, AP.S);
+      const away = k === 0 ? [0.4, -0.6, 0.3] : mul(unit(add(b.c, [0.001, 0, 0])), 1);
+      let p = add(home, mul(away, 6.5 * drift * drift + 0.6 * drift));
+      const quat = quatAxisAngle(unit([b.c[1] + 0.3, b.c[0] - 0.2, 0.5]), 1.6 * drift);
+      const gone = drift >= 1;
+      tokens[k] = { base: home, offset: sub(p, home), quat, visible: shells && !gone ? 1 : 0 };
+      // Contents: hidden in the cell until it breaks (the cell's own copy
+      // shows them), then with their body.
+      const inner = sub(p, b.c);
+      tokens[7 + k] = { base: b.c, offset: inner, quat, visible: broken && !gone ? 1 : 0 };
+    });
+    // Before the bodies form, the contents shrink with the cell.
+    if (broken && !shells)
+      BODIES.forEach((b, k) => (tokens[7 + k] = { base: b.c, offset: sub(mul(b.c, AP.S), b.c), quat: [0, 0, 0, 1], visible: 1 })); // prettier-ignore
+    // Labels (tokens 14..18).
+    let lab = 0;
+    if (on) lab = t < 2.3 ? 1 : t < 6.5 ? 2 : t < 10.6 ? 3 : 4;
+    if (on && t > AP.T - 0.6) lab = 0;
+    AP_LABELS.forEach(
+      (_, i) => (tokens[14 + i] = { offset: [0, 0, 0], visible: i === lab ? 1 : 0 }),
+    );
+  },
+  build(k) {
+    const rand = k.rand;
+    const shell = { even: true, flat: 0.45, opacity: 0.07, size: 1.4, jitter: 0, pattern: false };
+    const memColor = "#f4d3b8";
+    const cell = k.part("cell");
+    const nucleus = k.part("nucleus");
+    const split = k.part("split");
+    // The membrane, with its blebs (channels 1 and 2).
+    k.add(evenEllipsoid(k, AP.R, AP.R, AP.R), {
+      ...shell,
+      weight: 0.6,
+      part: cell,
+      channel: (c) => {
+        const d = unit(c.p);
+        let best = BLEBS[0];
+        let bv = -2;
+        for (const b of BLEBS) {
+          const v = d[0] * b.d[0] + d[1] * b.d[1] + d[2] * b.d[2];
+          if (v > bv) [best, bv] = [b, v];
+        }
+        return best.ch;
+      },
+      to: (c) => {
+        const d = unit(c.p);
+        for (const b of BLEBS) {
+          const a = Math.acos(Math.min(1, d[0] * b.d[0] + d[1] * b.d[1] + d[2] * b.d[2]));
+          if (a < 0.5) return add(c.p, mul(d, b.h * Math.pow(1 - (a / 0.5) ** 2, 1.5)));
+        }
+        return null;
+      },
+      color: (c) => lit(memColor, c.n, 0.8, 0.35),
+    });
+    // The dividing copy: each point of the membrane to the body it falls in.
+    k.add(evenEllipsoid(k, AP.R, AP.R, AP.R), {
+      ...shell,
+      weight: 0.6,
+      part: split,
+      channel: 3,
+      to: (c) => {
+        const b = BODIES[bodyOf(c.p)];
+        return add(b.c, mul(unit(sub(c.p, b.c)), b.r));
+      },
+      color: (c) => lit(memColor, c.n, 0.8, 0.35),
+    });
+    // Organelles: mitochondria and vesicles, each inside one future body;
+    // drawn once in the cell and once with its body (tokens 7..13).
+    const organelles = (target) => {
+      BODIES.forEach((b, kk) => {
+        const tok = target === "token" ? { kind: "token", params: [7 + kk, 0] } : { part: cell };
+        const n = kk === 0 ? 1 : 2;
+        for (let i = 0; i < n; i++) {
+          const off = mul(unit([Math.sin(kk * 3.1 + i * 1.7), Math.cos(kk * 2.3 + i), Math.sin(kk + i * 2.9)]), b.r * 0.45); // prettier-ignore
+          const at = add(b.c, kk === 0 ? [0.85, -0.55, 0.35] : off);
+          const rot = [kk * 40 + i * 70, kk * 25, i * 50];
+          k.add(evenEllipsoid(k, 0.15, 0.3, 0.15), { pos: at, rot, even: true, weight: 3, jitter: 0, ...tok, color: (c) => lit("#ff9f5a", c.n) }); // prettier-ignore
+          k.add(evenEllipsoid(k, 0.1, 0.1, 0.1), { pos: add(at, [0.3, 0.25, -0.1]), even: true, weight: 3, jitter: 0, ...tok, color: (c) => lit("#9fd8c6", c.n) }); // prettier-ignore
+        }
+      });
+    };
+    organelles("cell");
+    organelles("token");
+    // The nucleus: envelope, chromatin and nucleolus; a dark condensed
+    // copy fades in (pyknosis, channel 0).
+    const envColor = "#b9a7ec";
+    k.add(evenEllipsoid(k, AP.NR, AP.NR, AP.NR), { ...shell, opacity: 0.12, weight: 0.8, part: nucleus, color: (c) => lit(envColor, c.n, 0.8, 0.35) }); // prettier-ignore
+    k.cloud({ share: 0.03, size: 1.2, pattern: false }, (rnd) => ({
+      p: mul(unit([rnd() - 0.5, rnd() - 0.5, rnd() - 0.5]), AP.NR * 0.85 * Math.cbrt(rnd())),
+      color: mix("#8f7fd6", "#c4b8f2", rnd()),
+      opacity: 0.5,
+      part: nucleus,
+    }));
+    k.add(evenEllipsoid(k, 0.28, 0.25, 0.25), { pos: [0.3, 0.3, 0.2], even: true, weight: 2, part: nucleus, jitter: 0, color: (c) => lit("#6c4fa8", c.n) }); // prettier-ignore
+    k.add(evenEllipsoid(k, AP.NR * 0.8, AP.NR * 0.8, AP.NR * 0.8), { even: true, weight: 1.4, part: nucleus, kind: "fade", params: [0.3, -0.5], channel: 0, jitter: 0, color: (c) => lit("#3d2b6e", c.n) }); // prettier-ignore
+    // Nuclear fragments (karyorrhexis), in the middle body.
+    for (let i = 0; i < 4; i++) {
+      const at = mul(unit([Math.cos(i * 1.9), Math.sin(i * 2.3), Math.cos(i * 1.1 + 1)]), 0.42);
+      k.add(evenEllipsoid(k, 0.3, 0.27, 0.27), { pos: at, even: true, weight: 2, jitter: 0, kind: "token", params: [7, 0], color: (c) => lit("#3d2b6e", c.n) }); // prettier-ignore
+    }
+    // Body shells (tokens 0..6), built where they form (the cell shrunk).
+    BODIES.forEach((b, kk) => {
+      k.add(evenEllipsoid(k, b.r * AP.S, b.r * AP.S, b.r * AP.S), { ...shell, pos: mul(b.c, AP.S), weight: 0.45, kind: "token", params: [kk, 0], color: (c) => lit(memColor, c.n, 0.8, 0.35) }); // prettier-ignore
+    });
+    AP_LABELS.forEach((s, i) => text(k, s, [0, AP.R + 0.75, 0], 0.07, "#eef2fb", { kind: "token", params: [14 + i, 0] })); // prettier-ignore
+    k.data = { ap: true };
+    void rand;
+  },
+};
+
+// ---- Phagocytosis -------------------------------------------------------------------------
+
+// A neutrophil eating a bacterium, step by step as in an immunology
+// textbook: pseudopods reach round it, close into a phagosome, lysosomes
+// fuse with it, the bacterium is broken down and the waste goes out.
+const PH = { R: 2.4, RB: 1.2, T: 16 };
+PH.U = unit([1, 0.18, 0]); // toward the bacterium
+PH.BC = mul(PH.U, PH.R + 0.75); // where it is caught
+PH.IN = [0.85, 0.25, 0.1]; // where the phagosome goes
+PH.OUT = [-2.0, -0.85, 0.2]; // where its waste leaves
+const BACT = { a: 0.3, b: 0.78, slices: 6 };
+const LYSO = [
+  [-0.6, 1.3, 0.5],
+  [-1.2, 0.5, -0.4],
+  [0.2, -1.3, 0.4],
+  [-0.4, -0.9, -0.6],
+  [0.9, 1.25, -0.3],
+];
+const GOLGI = [-0.9, -0.15, 0.6];
+const PH_LABELS = ["A NEUTROPHIL", "PSEUDOPODS REACH AROUND IT", "A PHAGOSOME", "LYSOSOMES FUSE WITH IT", "THE BACTERIUM IS DIGESTED", "THE WASTE IS RELEASED"]; // prettier-ignore
+
+// A point of the membrane near the bacterium, wrapped round it (the angle
+// from the contact doubles into the angle round the bacterium).
+function wrapPoint(p) {
+  const d = unit(p);
+  const ca = Math.max(-1, Math.min(1, d[0] * PH.U[0] + d[1] * PH.U[1] + d[2] * PH.U[2]));
+  const a = Math.acos(ca);
+  const A0 = 0.62;
+  const BL = 0.38;
+  if (a > A0 + BL) return null;
+  const w = unit(sub(d, mul(PH.U, ca)));
+  const at = (th, r) => add(PH.BC, mul(add(mul(PH.U, -Math.cos(th)), mul(w, Math.sin(th))), r));
+  // The arm's inner side hugs the bacterium; past its tip the outer side
+  // curves back round it, a little further out, to the cell.
+  if (a <= A0) return at(Math.PI * 0.9 * (a / A0), PH.RB + 0.06);
+  const u = (a - A0) / BL;
+  const outer = at(Math.PI * 0.9 * (1 - u), PH.RB + 0.06 + 0.32 * Math.sin(Math.PI * Math.min(1, u * 1.15))); // prettier-ignore
+  return lerp(outer, p, smoothstep(0.7, 1, u));
+}
+
+const phagocytosis = {
+  alive: true,
+  turntable: false,
+  controls: [{ key: "go", label: "Eat", type: "pulse", ease: PH.T }],
+  action: { key: "go", label: "Catch the bacterium" },
+  drive(time, c, out, info) {
+    const D = info.data;
+    if (!D?.ph) return;
+    const t = c.go > 0 ? (1 - c.go) * PH.T : 0;
+    const on = c.go > 0 && t < PH.T - 0.1;
+    const ph = (a, b) => (on ? band(t, a, b) : 0);
+    const tokens = new Array(48).fill(null);
+    out.tokens = tokens;
+    const morph = [0, 0, 0, 0];
+    out.morph = morph;
+
+    const swim = ease(ph(0.3, 2.0));
+    const wrap = ease(ph(2.0, 4.4));
+    const smooth = ease(ph(4.6, 5.8));
+    const closed = on && t >= 4.5;
+    const inward = ease(ph(5.0, 6.6));
+    const fusedAll = on && t >= 8.6;
+    const digest = ph(8.8, 11.4);
+    const exo = ease(ph(11.4, 12.9));
+    const eject = ease(ph(12.9, 14.0));
+    const renew = ease(ph(12.6, 15.6));
+    morph[1] = closed ? 1 - smooth : wrap;
+
+    // The phagosome's middle.
+    let pc = lerp(PH.BC, PH.IN, inward);
+    pc = lerp(pc, PH.OUT, exo);
+    // The bacterium in six slices (tokens 0..5): at rest it swims beside
+    // the cell; it swims in, is wrapped and drawn inside, then its pieces
+    // part and shrink; the waste leaves; a new one swims in.
+    const rest = D.ph.rest;
+    for (let i = 0; i < BACT.slices; i++) {
+      let p = lerp(rest, PH.BC, swim);
+      let q = [0, 0, 0, 1];
+      let vis = 1;
+      const wiggle = on && t < 2 ? 0.05 * Math.sin(time * 6) : 0;
+      if (!on) p = add(rest, [0, 0.05 * Math.sin(time * 1.5), 0]);
+      if (closed) p = pc;
+      let off = sub(p, PH.BC);
+      if (on && digest > 0) {
+        // Apart inside the phagolysosome, turning and getting smaller.
+        const dir = D.ph.slice[i].dir;
+        off = add(off, mul(dir, 0.3 * ease(digest)));
+        q = quatAxisAngle(D.ph.slice[i].axis, 2.2 * digest);
+        vis = 1 - 0.55 * ease(digest);
+      }
+      if (on && t >= 12.9) {
+        // Out of the cell, and away.
+        off = add(off, mul(D.ph.slice[i].away, 5 * eject * eject + 0.5 * eject));
+        if (eject >= 1) vis = 0;
+      }
+      if (on && t >= 14.0) {
+        // A new bacterium swims in from the right.
+        off = add(sub(rest, PH.BC), [6 * (1 - ease(band(t, 14.0, 15.7))), 0.5 * (1 - ease(band(t, 14.0, 15.7))), 0]); // prettier-ignore
+        q = [0, 0, 0, 1];
+        vis = 1;
+      }
+      off = add(off, [0, wiggle, 0]);
+      tokens[i] = { base: D.ph.slice[i].center, offset: off, quat: q, visible: vis };
+    }
+    // The phagosome (token 6), then the phagolysosome (token 7).
+    const pOff = sub(pc, PH.BC);
+    tokens[6] = { offset: pOff, visible: closed && !fusedAll ? 1 : 0 };
+    tokens[7] = { offset: pOff, visible: fusedAll && t < 12.9 ? 1 : 0 };
+    // Lysosomes (tokens 8..12): to the phagosome one after another, where
+    // they fuse; new ones bud from the Golgi and take their places.
+    LYSO.forEach((home, i) => {
+      const t0 = 6.4 + i * 0.4;
+      const f = ease(ph(t0, t0 + 0.9));
+      const target = add(pc, mul(unit(sub(home, pc)), PH.RB * 0.95));
+      let p = lerp(home, target, f);
+      let vis = on && f >= 1 && t < 12.6 ? 0 : 1;
+      if (on && t >= 12.6) {
+        const g = ease(band(t, 12.6 + i * 0.35, 14.2 + i * 0.35));
+        p = lerp(GOLGI, home, g);
+        vis = g > 0 ? 1 : 0;
+      }
+      tokens[8 + i] = { offset: sub(p, home), visible: vis };
+    });
+    let lab = 0;
+    if (on)
+      lab = t < 2.0 ? 0 : t < 4.6 ? 1 : t < 6.6 ? 2 : t < 8.8 ? 3 : t < 11.4 ? 4 : t < 14.2 ? 5 : 0;
+    PH_LABELS.forEach(
+      (_, i) => (tokens[13 + i] = { offset: [0, 0, 0], visible: i === lab ? 1 : 0 }),
+    );
+    void renew;
+  },
+  build(k) {
+    const shell = { even: true, flat: 0.45, opacity: 0.08, size: 1.4, jitter: 0, pattern: false };
+    const memColor = "#dfe6f5";
+    // The membrane; the part near the bacterium wraps round it (channel 1).
+    k.add(evenEllipsoid(k, PH.R, PH.R, PH.R), {
+      ...shell,
+      weight: 0.8,
+      channel: 1,
+      to: (c) => wrapPoint(c.p),
+      color: (c) => lit(memColor, c.n, 0.8, 0.35),
+    });
+    // Granules in the cytoplasm, and the Golgi.
+    k.cloud({ share: 0.004, size: 1.3, pattern: false }, (rnd) => {
+      const p = mul(unit([rnd() - 0.5, rnd() - 0.5, rnd() - 0.5]), PH.R * 0.85 * Math.cbrt(rnd()));
+      return { p, color: mix("#b9b0e0", "#e8dcae", rnd()), opacity: 0.5 };
+    });
+    for (let i = 0; i < 4; i++)
+      k.add(evenEllipsoid(k, 0.5 - i * 0.06, 0.06, 0.28), { pos: add(GOLGI, [0, i * 0.15 - 0.22, 0]), even: true, weight: 3, jitter: 0, color: (c) => lit("#f2c46a", c.n) }); // prettier-ignore
+    // A neutrophil's nucleus: three lobes joined by thin strands.
+    const lobes = [
+      [-1.05, 0.55, -0.2],
+      [-0.35, 0.95, -0.4],
+      [0.25, 0.55, -0.3],
+    ];
+    lobes.forEach((at) => k.add(evenEllipsoid(k, 0.42, 0.36, 0.36), { pos: at, even: true, weight: 1.6, jitter: 0, color: (c) => lit("#7a5cc4", c.n) })); // prettier-ignore
+    for (let i = 0; i < 2; i++)
+      k.add(k.tube((s) => lerp(lobes[i], lobes[i + 1], s), 0.08), { weight: 2, color: (c) => lit("#7a5cc4", c.n) }); // prettier-ignore
+    // The bacterium, built where it is caught: a rod in six slices (tokens
+    // 0..5) with a flagellum on the last.
+    const slice = [];
+    for (let i = 0; i < BACT.slices; i++) {
+      const y = -BACT.b + ((i + 0.5) * 2 * BACT.b) / BACT.slices;
+      slice.push({
+        center: add(PH.BC, [0, y, 0]),
+        dir: unit([Math.sin(i * 2.1), (i - 2.5) * 0.6, Math.cos(i * 1.3)]),
+        axis: unit([Math.cos(i), 0.5, Math.sin(i * 1.7)]),
+        away: unit([-1, -0.4 + 0.2 * i, 0.3 * Math.sin(i)]),
+      });
+    }
+    k.add(evenEllipsoid(k, BACT.a, BACT.b, BACT.a), {
+      pos: PH.BC,
+      even: true,
+      weight: 2.5,
+      jitter: 0,
+      kind: "token",
+      params: (c) => [Math.min(BACT.slices - 1, Math.floor(((c.p[1] - PH.BC[1] + BACT.b) / (2 * BACT.b)) * BACT.slices)), 0], // prettier-ignore
+      color: (c) => lit(mix("#5fbf6a", "#3f9a4c", 0.5 + 0.5 * Math.sin(c.p[1] * 9)), c.n),
+    });
+    k.add(k.tube((s) => add(PH.BC, [0.18 * Math.sin(s * 9), -BACT.b - s * 0.36, 0.08 * Math.cos(s * 9)]), 0.025), { weight: 4, kind: "token", params: [0, 0], color: "#9be3a3" }); // prettier-ignore
+    // The phagosome (token 6) and the phagolysosome (token 7).
+    k.add(evenEllipsoid(k, PH.RB, PH.RB, PH.RB), { ...shell, opacity: 0.12, pos: PH.BC, weight: 0.8, kind: "token", params: [6, 0], color: (c) => lit(memColor, c.n, 0.8, 0.35) }); // prettier-ignore
+    k.add(evenEllipsoid(k, PH.RB, PH.RB, PH.RB), { ...shell, opacity: 0.16, pos: PH.BC, weight: 0.8, kind: "token", params: [7, 0], color: (c) => lit("#e38aa8", c.n, 0.8, 0.35) }); // prettier-ignore
+    // Lysosomes (tokens 8..12).
+    LYSO.forEach((at, i) => k.add(evenEllipsoid(k, 0.2, 0.2, 0.2), { pos: at, even: true, weight: 3, jitter: 0, kind: "token", params: [8 + i, 0], color: (c) => lit("#e0567d", c.n) })); // prettier-ignore
+    PH_LABELS.forEach((s, i) => text(k, s, [0.6, PH.R + 0.6, 0], 0.042, "#eef2fb", { kind: "token", params: [13 + i, 0] })); // prettier-ignore
+    k.data = { ph: { rest: [3.55, 1.85, 0.2], slice } };
+  },
+};
+
 export const RECIPES = {
   "dna-to-protein": dnaToProtein,
   mitosis,
+  apoptosis,
+  phagocytosis,
 };

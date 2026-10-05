@@ -1992,6 +1992,16 @@ export const TOY_HELP = {
     about:
       "Mitosis is how one cell becomes two with the same chromosomes. Before it starts, each chromosome has been copied into two sister chromatids. Tap and the chromatin threads coil into compact chromosomes (prophase), the nuclear envelope breaks into pieces and spindle fibers from the two centrosomes reach the chromosomes (prometaphase), which line up across the middle (metaphase). The sisters are pulled to opposite poles (anaphase), new nuclei form round each set (telophase) and a ring pinches the cell in two (cytokinesis).\n\nA human cell has 46 chromosomes; four are shown, two pairs. One daughter then grows back into a whole cell.",
   },
+  apoptosis: {
+    howTo: "Tap the cell to watch it take itself apart, step by step.",
+    about:
+      "Apoptosis is a cell's tidy, programmed death: the body's way of removing cells it no longer needs, or that are damaged, without harming their neighbors. Tap and the cell shrinks and its chromatin condenses into a small, dark nucleus (pyknosis). The membrane bubbles out in blebs, the nucleus breaks into pieces (karyorrhexis), and the cell comes apart into apoptotic bodies, each wrapped in membrane, which are cleared away.\n\nUnlike a cell that bursts, nothing spills out, so there is no inflammation. In the body, white blood cells eat the bodies; here they drift away and a neighbor moves in.",
+  },
+  phagocytosis: {
+    howTo: "Tap to watch the neutrophil catch and digest the bacterium.",
+    about:
+      'Phagocytosis means "cell eating". Tap and this neutrophil, a white blood cell, reaches out pseudopods around a bacterium until their tips meet, enclosing it in a bubble of membrane called a phagosome. Lysosomes, small sacs of digestive enzymes, fuse with it to make a phagolysosome, where the bacterium is broken down. The cell then releases the waste.\n\nNeutrophils are the most common white blood cells; their nucleus has several lobes. A real neutrophil also kills with bursts of reactive oxygen; the toy shows the steps of eating.',
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------

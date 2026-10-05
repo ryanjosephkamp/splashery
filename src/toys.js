@@ -1337,6 +1337,26 @@ export const TOYS = [
     tags: "mitosis cell division cycle chromosome chromatid spindle centrosome prophase metaphase anaphase telophase cytokinesis biology",
     camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
   },
+  {
+    id: "apoptosis",
+    label: "Apoptosis",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "apoptosis cell death programmed blebbing apoptotic bodies pyknosis nucleus biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "phagocytosis",
+    label: "Phagocytosis",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "phagocytosis neutrophil white blood cell immune bacterium phagosome lysosome digestion biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
 
   // ---- Pack: atoms ----
   // (entries for src/packs/atoms.js go here)

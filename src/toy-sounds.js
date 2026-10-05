@@ -2794,6 +2794,24 @@ export const TOY_SOUNDS = {
     { voice: "tine", f: 1319, at: 7.7, decay: 1.2, vol: 0.6 },
     { voice: "hollow", f: 260, at: 13.1, decay: 0.8, vol: 0.9 },
   ],
+  // Apoptosis: a low sigh as the cell shrinks, soft bubbling as it blebs and
+  // a few quiet pops as the bodies part (6.6 s).
+  apoptosis: [
+    { voice: "breath", f: 500, to: 0.5, decay: 1.8, vol: 0.25 },
+    { voice: "boing", f: 300, at: 2.6, decay: 0.4, vol: 0.6 },
+    { voice: "boing", f: 360, at: 3.4, decay: 0.4, vol: 0.3 },
+    { voice: "boing", f: 330, at: 4.2, decay: 0.4, vol: 0.3 },
+    { voice: "pock", f: 520, at: 6.7, decay: 0.3, vol: 0.5 },
+    { voice: "pock", f: 600, at: 7.1, decay: 0.3, vol: 0.45 },
+  ],
+  // Phagocytosis: a soft stretch as the pseudopods reach out, a gulp as the
+  // phagosome closes (4.5 s) and a low fizz as it is digested.
+  phagocytosis: [
+    { voice: "breath", f: 1100, to: 0.6, at: 2.0, decay: 2.0, vol: 0.3 },
+    { voice: "thud", f: 140, at: 4.5, decay: 0.5, vol: 0.7 },
+    { voice: "hollow", f: 420, at: 4.55, decay: 0.5, vol: 0.5 },
+    { voice: "breath", f: 2400, to: 0.4, at: 8.9, decay: 2.0, vol: 0.2 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

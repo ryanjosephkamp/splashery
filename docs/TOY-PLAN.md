@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 375 toys. 345 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 370.
+- 377 toys. 347 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 372.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -36,31 +36,31 @@ Proposals below are suggestions; the owner may change them.
   Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus,
   Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
   Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to
-  protein, Cell division, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic
-  table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs,
-  Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai,
-  Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral
-  reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice
-  swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes,
-  Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger,
-  Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building
-  bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz
-  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
-  Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras
-  proof, Splat equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe,
-  Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown,
-  Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea
-  urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare
-  drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
-  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
-  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
-  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  protein, Cell division, Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein,
+  Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster,
+  Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry
+  blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool,
+  Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud,
+  Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream,
+  Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel,
+  Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries,
+  Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy,
+  Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
+  knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
+  Fourier circles, Pythagoras proof, Splat equation, Storybook, Music box, Fountain pen, Water
+  bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic
+  shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish,
+  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern,
+  Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord,
+  Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle,
+  Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White
+  House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle,
+  Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network,
+  Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian
+  splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma
+  machine, Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter, Splat
+  mirror, Model to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal
+  ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1079,7 +1079,7 @@ Proposals below are suggestions; the owner may change them.
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
 
-## Tiny (20)
+## Tiny (22)
 
 - **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
@@ -1227,6 +1227,26 @@ Proposals below are suggestions; the owner may change them.
     above the cell.
   - Sound: A soft breath as the chromatin condenses, a light tine as the sisters part and a hollow
     pop as the cells pinch apart.
+- **Apoptosis** (`apoptosis`). Now: tap: Start apoptosis. Plan: keep.
+  - Owner: The owner's push notes (October 5, 2026): apoptosis.
+  - Effect: The cell shrinks, blebs and comes apart into apoptotic bodies, which are cleared; a
+    neighbor moves in.
+  - Improved: Tiny world r2: the cell shrinks as a whole and its nucleus condenses dark; two sets of
+    blebs bulge in turn (morphs); the nucleus breaks into four pieces; the membrane pinches into
+    seven membrane-bound bodies (a morph, then solid pieces) holding the organelles and nuclear
+    pieces, which drift away; a neighbor cell moves in (14 s).
+  - Sound: A low breath as it shrinks, soft boings as it blebs and quiet pops as the bodies part.
+- **Phagocytosis** (`phagocytosis`). Now: tap: Catch the bacterium. Plan: keep.
+  - Owner: The owner's push notes (October 5, 2026): phagocytosis.
+  - Effect: Pseudopods wrap a bacterium into a phagosome; lysosomes fuse; it is digested and the
+    waste released.
+  - Improved: Tiny world r2: a bacterium swims to the neutrophil, pseudopods wrap round it (a morph
+    of the membrane, two layers deep) and close; the phagosome is drawn inside, five lysosomes fuse
+    with it one by one, the bacterium falls apart into six solid pieces that shrink, and the waste
+    is released out of the far side; new lysosomes bud from the Golgi and a new bacterium swims up
+    (16 s). Labels name each step.
+  - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
+    as it is digested.
 
 ## Atoms (6)
 
