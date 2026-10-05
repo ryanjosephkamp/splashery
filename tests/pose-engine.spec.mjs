@@ -2,7 +2,7 @@
 // (src/effects-pose.js and the pose lines of the effect shader).
 
 import { test, expect } from "@playwright/test";
-import { NO_POSE, poseFrame, poseUniforms } from "../src/effects-pose.js";
+import { NO_POSE, poseFrame, poseUniforms, poseGravity } from "../src/effects-pose.js";
 import { MODIFIER, MODIFIER_KIT, MODIFIER_RIG } from "../src/effects.js";
 import { quat, v3 } from "../src/physics/world.js";
 
@@ -51,6 +51,15 @@ test("a pose: world points and directions go into the toy's home frame", () => {
   // The world's up, in the home frame.
   expect(close(u.uSpPoseUp.slice(0, 3), quat.rotate(quat.conj(pose.q), [0, 1, 0]))).toBe(true);
   expect(u.uSpPoseT[3]).toBe(1);
+});
+
+test("space and other shelves without a real down keep what rises or falls in the toy's frame", () => {
+  const pose = { pivot: [0, 0, 0], q: [0, 0, Math.SQRT1_2, Math.SQRT1_2], t: [0, 0, 0] };
+  expect(poseUniforms({}, pose, null, false).uSpPoseUp).toEqual([0, 1, 0, 0]);
+  expect(poseUniforms({}, pose, null, true).uSpPoseUp[0]).toBeCloseTo(1, 9);
+  expect(poseGravity({ recipe: {} }, { category: "space" })).toBe(false);
+  expect(poseGravity({ recipe: {} }, { category: "weather" })).toBe(true);
+  expect(poseGravity({ recipe: { gravity: true } }, { category: "space" })).toBe(true);
 });
 
 test("every shader variant takes centers into the home frame and back, and turns", () => {
