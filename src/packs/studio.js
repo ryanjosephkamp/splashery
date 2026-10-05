@@ -20,7 +20,7 @@ import { reliefGrid } from "../live/relief.js";
 // Lane Live input r2: a long song plays at once and is measured in a worker;
 // the measured looks (Ribbons, Tube, Lines, Mesh).
 import { Track, SongAnalysis } from "./song-stream.js";
-import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps } from "./song-looks.js"; // prettier-ignore
+import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps, liveOffset } from "./song-looks.js"; // prettier-ignore
 import { HOP as FRAME, F as FIELD, FIELDS } from "./song-analysis.js";
 import { MicRecorder, wavBlob, saveBlob, songTransport } from "./song-record.js";
 
@@ -370,6 +370,12 @@ const CHLADNI = {
 // the back. What has played fades away as it crosses the line (the fade kind, driven by
 // morph channel 0 = how far through the song). Loud bands rise at the line: 48 small
 // caps (tokens) ride the loudness the song has at that moment.
+//
+// Live r7: in the browser, Live now grows the land as the song plays instead
+// (song-looks.js buildLandscapeLong): it opens on an empty plain, each moment
+// rises at the line at the front as it is heard, and what has played
+// recedes behind it. The scrolling build below remains for a build without a
+// worker (the Node tools); Whole song is unchanged.
 
 export const DB_RANGE = 45;
 const W = 2; // width (pitch axis)
@@ -480,6 +486,7 @@ const R2 = { look: null, land: null, an: null, anFor: null, actN: 0, lastShown: 
 export const songAnalysisStarted = () => R2.an?.started;
 // For the sync test: what the look last drew at its "now" mark.
 export const songShown = () => R2.look?.shown ?? null;
+export const r2Land = () => R2.land;
 export const songTest = () => ({
   track: SONG.current?.track ?? null,
   features: R2.an?.features ?? null,
@@ -642,7 +649,15 @@ function driveR2(g, out, info) {
   } else if (R2.land) {
     const f = clamp01(now / duration);
     if (g.live) {
-      out.parts.look = { offset: [0, 0, f * g.D] };
+      // Live r7: the land slides back over the plain, which stays put; splats
+      // sort where they were built, so they sort again as it slides (the
+      // plain drew over the land otherwise).
+      const off = liveOffset(R2.land, now, duration);
+      out.parts.look = { offset: [0, 0, off] };
+      if (Math.abs(off - (R2.land.sortedAt ?? Infinity)) > 0.02) {
+        R2.land.sortedAt = off;
+        out.resortPose = true;
+      }
       const caps = landscapeCaps(R2.land, R2.an, now);
       if (caps) out.tokens = caps;
     } else out.parts.marker = { offset: [0, 0, -f * g.D] };
@@ -909,7 +924,8 @@ const SONG_LANDSCAPE = {
     version(time) {
       if (liveIn.on("mic")) return Math.floor(time * LIVE_SONG.rate);
       if (R2.look) return lookVersion(R2.look, R2.an, heardNow());
-      if (R2.land) return `${R2.an?.version ?? -1}|${R2.land.live ? Math.floor((heardNow() / Math.max(1, SONG.current?.duration || 1)) * R2.land.nt) : 0}`; // prettier-ignore
+      // Live r7: in Live the land grows with every frame heard.
+      if (R2.land) return `${R2.an?.version ?? -1}|${R2.land.live ? Math.floor(heardNow() / FRAME) : 0}`; // prettier-ignore
       return "off";
     },
     draw(g, time) {
@@ -1000,7 +1016,12 @@ const SONG_LANDSCAPE = {
     R2.look = null;
     R2.land = null;
     if (liveIn.on("mic")) return liveSongBuild(k, o); // lane Live input
-    if (LOOKS.includes(o.look) || song.long) return buildR2(k, o, song); // lane Live input r2
+    // Live r7: Live grows the land as the song plays (the owner's push notes
+    // of October 4, 2026), for every song: a short one too is measured by
+    // the worker and drawn frame by frame as it is heard. (Without a worker,
+    // as in the Node tools, it builds whole as before.)
+    const grow = o.view === "live" && typeof Worker !== "undefined";
+    if (LOOKS.includes(o.look) || song.long || grow) return buildR2(k, o, song); // lane Live input r2
     // A new build (another song, a look) starts stopped.
     try {
       PLAY.src?.stop();
