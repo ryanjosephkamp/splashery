@@ -9,8 +9,9 @@ outside your own files, as an "Engine: …" PR merged first). PR title: "Phase N
 and planets over you". Handoff file: docs/handoff/NightSky.md (create it; start it with this brief,
 word for word, under "## Brief", then keep "## State
 
-READY (October 5, 2026): the Night sky toy is built (labs, Space shelf), with tests, evidence,
-credits and four clips on Effect review page 2. It needs the engine PR #297 merged first.
+READY (October 5, 2026): the Night sky toy is built (labs, Space shelf), with tests (sky,
+sky-engine, help, unit, kit, taps: all pass), evidence, credits and four clips on Effect review
+page 2. It needs the engine PR #297 merged first.
 
 - Engine PR #297 (`claude/lane-night-sky-engine`): `recipe.inside` (the camera at the toy's center,
   looking out, with its own field of view) and `cull: "below"` (a part's splats hidden under the
