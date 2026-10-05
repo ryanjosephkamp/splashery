@@ -1342,7 +1342,7 @@ const LIVING_CITY = {
       const [r, gg, b] = col(i);
       const w = pool(meterAt(i));
       const color = [0.03 + r * 0.2 + w * 0.75 * (0.35 + r), 0.04 + gg * 0.23 + w * 0.5 * (0.35 + gg), 0.09 + b * 0.36 + w * 0.2 * (0.3 + b)]; // prettier-ignore
-      return { p: at(i), n: nrm(i), flat: 0.14, size: (meters(i) * m * Math.sqrt(nStride)) / base(), color, opacity: 1, kind: "fade", channel: 0, params: [0.35 + 0.25 * lcRand(i, 2), -0.3] }; // prettier-ignore
+      return { p: at(i), n: nrm(i), flat: 0.14, size: (meters(i) * m * Math.sqrt(nStride)) / base(), color: color.map((v) => Math.min(1, v)), opacity: 1, kind: "fade", channel: 0, params: [0.35 + 0.25 * lcRand(i, 2), -0.3] }; // prettier-ignore
     });
     k.cloud({ count: (lights.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
       const [i, what] = lights[Math.min(lights.length - 1, j)];
@@ -1353,6 +1353,7 @@ const LIVING_CITY = {
       const warm = lcRand(i, 5);
       return { p: q, size: ((lamp ? 0.9 : 0.7) * m) / base(), color: lamp ? [1, 0.86, 0.6] : mix("#ffc56e", "#fff0c8", warm), opacity: 1, kind: "fade", channel: 0, params: [0.5 + 0.45 * lcRand(i, 6), -0.05], pattern: false }; // prettier-ignore
     });
+    k.data = { city: { splats: use, lights: lights.length } };
     k.reach([0, 0.25, 0]);
   },
 };
