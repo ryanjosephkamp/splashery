@@ -6,6 +6,7 @@
 
 import { test, expect } from "@playwright/test";
 import { normalizeFigures, normalizeScene, createScene } from "../src/state.js";
+import { buildSheet } from "../src/picture-splats.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 
@@ -65,6 +66,32 @@ test.describe("figure depths (no browser)", () => {
     // Scenes without them (every older scene) have none.
     delete scene.toy.figures;
     expect(normalizeScene(scene).toy.figures).toBeUndefined();
+  });
+});
+
+test.describe("stepped relief (no browser)", () => {
+  test("a relief sampled nearest keeps flat steps: every splat sits on a step", () => {
+    const w = 32;
+    const h = 32;
+    const px = new Uint8ClampedArray(w * h * 4).fill(200);
+    // Three steps across: 0, 0.5 and 1.
+    const d = new Float32Array(6 * 6);
+    for (let y = 0; y < 6; y++) for (let x = 0; x < 6; x++) d[y * 6 + x] = x < 2 ? 0 : x < 4 ? 0.5 : 1; // prettier-ignore
+    const job = { pixels: px, w, h, method: "pixels", origin: [0, 0, 0], right: [1 / w, 0, 0], down: [0, -1 / w, 0], normal: [0, 0, 1] }; // prettier-ignore
+    const flat = buildSheet({ ...job, pixels: px.slice() });
+    const step = buildSheet({ ...job, pixels: px.slice(), relief: { w: 6, h: 6, d, amount: 0.3, nearest: true } }); // prettier-ignore
+    const blend = buildSheet({
+      ...job,
+      pixels: px.slice(),
+      relief: { w: 6, h: 6, d, amount: 0.3 },
+    });
+    const off = (b) => {
+      const ups = new Set();
+      for (let i = 0; i < b.count; i++) ups.add(Math.round((b.centers[i * 3 + 2] - flat.centers[i * 3 + 2]) * 1000)); // prettier-ignore
+      return [...ups].sort((a, b) => a - b);
+    };
+    expect(off(step)).toEqual([0, 150, 300]);
+    expect(off(blend).length).toBeGreaterThan(3);
   });
 });
 

@@ -239,6 +239,11 @@ function blockColor(blocks, x, y, out) {
 // ---- Relief (lane Books r5) -------------------------------------------------------
 
 // A map's value at fractional cell (fx, fy), bilinear, clamped at the edges.
+function nearest(d, rw, rh, fx, fy) {
+  const x = Math.min(rw - 1, Math.max(0, Math.round(fx)));
+  const y = Math.min(rh - 1, Math.max(0, Math.round(fy)));
+  return d[y * rw + x];
+}
 function bilinear(d, rw, rh, fx, fy) {
   const x = Math.min(rw - 1, Math.max(0, fx));
   const y = Math.min(rh - 1, Math.max(0, fy));
@@ -296,7 +301,8 @@ export function sheetCount(w, h, method, inkPixels = w * h) {
 //     most raised), amount (toy units at 1) } to raise the picture off the
 //     sheet toward its facing (lane Books r5: a figure that pops out). The
 //     base under the detail takes the lowest relief round it, so it never
-//     shows in front of the detail.
+//     shows in front of the detail. With `nearest: true` (lane Pages r6)
+//     the map is sampled without blending, for a relief of flat steps.
 // }
 // Returns { count, center (Float32 x4), color, scale, rotation (Uint16 half
 // x4), anim (Float32 x4), centers (Float32 x3), ink (the detail count) }.
@@ -362,7 +368,10 @@ export function buildSheet(job) {
   // Lane Books r5: the relief, sampled at a pixel of the picture.
   const rel = job.relief?.d && job.relief.amount && job.relief.w > 0 && job.relief.h > 0 ? job.relief : null; // prettier-ignore
   const relLow = rel ? minFilter(rel.d, rel.w, rel.h, Math.max(1, Math.ceil((2.2 * BASE_SIGMA * rel.w) / w))) : null; // prettier-ignore
-  const raise = (map, x, y) => rel.amount * Math.max(0, Math.min(1, bilinear(map, rel.w, rel.h, (x / w) * rel.w - 0.5, (y / h) * rel.h - 0.5))); // prettier-ignore
+  // (Lane Pages r6: `nearest` takes the nearest value, not a blend, so a
+  // relief of a few flat steps (cutout layers) keeps clean edges.)
+  const sample = rel?.nearest ? nearest : bilinear;
+  const raise = (map, x, y) => rel.amount * Math.max(0, Math.min(1, sample(map, rel.w, rel.h, (x / w) * rel.w - 0.5, (y / h) * rel.h - 0.5))); // prettier-ignore
 
   // One splat at pixel coordinates (x, y), `up` world units in front of
   // the sheet, with sigmas sx, sy in pixels and color rgb (0..1), or for a

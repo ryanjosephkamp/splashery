@@ -26,8 +26,9 @@
 // picture, and pics.openLink(url) asks the visitor before a web link opens.
 // A sheet may show part of its page (out.sheets[id].crop, placed where that
 // part lies on the page), raised off the sheet by a relief map
-// (out.sheets[id].relief), and a page may be drawn another way by the
-// recipe's decorate (out.sheets[id].variant).
+// (out.sheets[id].relief; lane Pages r6: `nearest: true` for flat steps),
+// and a page may be drawn another way by the recipe's decorate
+// (out.sheets[id].variant).
 
 import * as pc from "./pc.js";
 import { buildSheet } from "./picture-splats.js";
@@ -688,7 +689,7 @@ export class Pictures {
     const pixels = canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h).data; // prettier-ignore
     const geom = this.geometry(sheet, media.aspect(want.page), w, h, r);
     const rel = want.relief;
-    const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale } : null; // prettier-ignore
+    const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale, nearest: !!rel.nearest } : null; // prettier-ignore
     const data = await buildOffThread({ pixels, w, h, method: want.method, relief, ...geom }); // prettier-ignore
     if (this.destroyed || media !== this.media) return null;
     data.w = w;
