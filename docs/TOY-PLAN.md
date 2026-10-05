@@ -2823,7 +2823,10 @@ Proposals below are suggestions; the owner may change them.
     bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its
     wireframe), on cream paper or alone, all on the audio clock. Live r7: Live opens on an empty
     plain and the land grows as the song plays: each moment rises at the line at the front as it is
-    heard and moves back, for every song and look; Whole song shows it all.
+    heard and moves back, for every song and look; Whole song shows it all. Live r7 polish: the
+    sharp kernel on half as many splats again; each cell is a wall to the floor (no dark specks
+    between peaks), the waveform a smooth envelope, and the marker, its glow and the floor's edge
+    clean lines.
   - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2833,7 +2836,9 @@ Proposals below are suggestions; the owner may change them.
     every frame. With your audio or the microphone the plate's modes ring as strongly as the sound
     drives them, so a new note sets the sand off for its figure at once, from where it lies (no new
     plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio
-    open.
+    open. Live r7 polish: the sharp kernel (each grain a crisp speck, up to 14,000 of them), a clean
+    straight rim and a smooth top on the plate, and a bow drawn like a real one (a round stick, a
+    ribbon of hair, a frog and a tip).
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
@@ -2860,7 +2865,9 @@ Proposals below are suggestions; the owner may change them.
     hologram look. Live r7: steadier and cleaner (colors smoothed against the camera's noise, the
     depth smoothed within each surface and cut only at real jumps, along the outline in the picture,
     which follows a moving person between depth answers); the hologram keeps the person clear, with
-    the scanlines and a soft glow only in the room behind.
+    the scanlines and a soft glow only in the room behind. Live r7 polish: sharper (a stronger
+    unsharp mask on the colors, held back at strong edges so no halo shows, and tighter splats),
+    measured as steady as before.
   - Sound: A soft rising whoosh as the depth comes up; a falling one as it flattens.
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.

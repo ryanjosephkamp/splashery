@@ -333,9 +333,11 @@ export class CameraDepth {
     this.lastColors = cp.slice();
     // Live r7: a light unsharp mask on what is drawn (the colors above stay
     // as they are, for the next frame): each cell moves away from the mean
-    // of its 3 by 3 neighborhood by half the difference, so edges a cell or
+    // of its 3 by 3 neighborhood by a share of the difference, so edges a cell or
     // two wide read crisply at phone size. The noise is smoothed first.
-    sharpen(cp, cols, rows, 0.5, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
+    // Live r7 polish (the owner's "the toys could still be sharper", October
+    // 5): 1.2, held to 28 levels (sharpen); was 0.5.
+    sharpen(cp, cols, rows, 1.2, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
     g.putImageData(cur, 0, 0);
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
@@ -807,7 +809,10 @@ export function sharpen(px, w, h, amount, tmp) {
       for (let ch = 0; ch < 3; ch++) {
         const m = (tmp[(y0 * w + x) * 3 + ch] + tmp[(y * w + x) * 3 + ch] + tmp[(y1 * w + x) * 3 + ch]) / 3; // prettier-ignore
         const o = (y * w + x) * 4 + ch;
-        px[o] = px[o] + amount * (px[o] - m);
+        // (Live r7 polish: the push is held to 28 levels, so a strong edge
+        // (an eye's rim) gets no halo while fine detail still sharpens.)
+        const push = amount * (px[o] - m);
+        px[o] = px[o] + (push > 28 ? 28 : push < -28 ? -28 : push);
       }
   }
 }
@@ -863,8 +868,10 @@ export function gridColors(frame, cols, rows, mirror) {
 
 // Live r7 (the owner's "keep making it sharper" of October 5, 2026): a
 // picture splat's diameter over its cell's width. 1.45 blurred the picture;
-// at 1.2 neighbors still overlap, so no gaps show when it is turned.
-const SPREAD = 1.2;
+// at 1.2 neighbors still overlap, so no gaps show when it is turned. The
+// polish round: 1.0 (a splat reads a little wider than its size, so they
+// still meet), measured sharper and no less steady (docs/handoff/LiveR7.md).
+const SPREAD = 1.0;
 
 export const MIRROR = {
   cols: 128,
