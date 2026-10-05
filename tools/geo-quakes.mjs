@@ -16,7 +16,7 @@
 // but never saved here (docs/audits/new-sources-2026-10.md, C8).
 
 import fs from "node:fs";
-import { readTiff, writeGeo, fillNoData } from "./geo-lib.mjs";
+import { readTiff, writeGeo, fillNoData, blueMarble, writeJpeg } from "./geo-lib.mjs";
 
 const OUT = "assets/toys/earthquakes";
 fs.mkdirSync(OUT, { recursive: true });
@@ -87,7 +87,7 @@ const url =
 const { cached } = await import("./geo-lib.mjs");
 const t = fillNoData(readTiff(await cached(`etopo1-world-${W}.tif`, url)));
 writeGeo(
-  `${OUT}/globe.bin`,
+  `${OUT}/globe.bin.gz`,
   {
     source: "NOAA NCEI ETOPO1 Global Relief Model (bedrock)",
     bbox: [-180, -90, 180, 90],
@@ -97,4 +97,14 @@ writeGeo(
     // prettier-ignore
     { name: "height", type: "height", w: t.w, h: t.h, data: t.data },
   ],
+);
+
+// Round 2 (the owner: "something more photoreal"): the Earth's true colors,
+// NASA Blue Marble Next Generation, 2048 x 1024.
+writeJpeg(
+  `${OUT}/earth.jpg`,
+  await blueMarble("world", [-180, -90, 180, 90], 4096, 2048),
+  2048,
+  1024,
+  90,
 );

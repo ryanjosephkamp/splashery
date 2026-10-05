@@ -8,16 +8,61 @@ const READY = new Map();
 
 // A file of this lane's assets as bytes (fetched in a browser, read from disk
 // in Node for the build tools and tests).
+// A file ending in .gz is unzipped (DecompressionStream, in browsers and Node).
 export async function readBytes(rel) {
   const url = new URL(`../../${rel}`, import.meta.url);
+  let bytes;
   if (url.protocol === "file:") {
     const fs = await import("node:fs/promises");
     const b = await fs.readFile(url);
-    return new Uint8Array(b.buffer, b.byteOffset, b.byteLength);
+    bytes = new Uint8Array(b.buffer, b.byteOffset, b.byteLength);
+  } else {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`Could not load ${rel.split("/").pop()}.`);
+    bytes = new Uint8Array(await r.arrayBuffer());
   }
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`Could not load ${rel.split("/").pop()}.`);
-  return new Uint8Array(await r.arrayBuffer());
+  return rel.endsWith(".gz") ? gunzip(bytes) : bytes;
+}
+
+export async function gunzip(bytes) {
+  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+// An aerial picture (a JPEG) as a color grid: decoded by the browser, or by
+// jpeg-js (a build-time devDependency) in Node for the tools and tests.
+const PICTURES = new Map();
+export async function loadPicture(rel) {
+  if (PICTURES.has(rel)) return PICTURES.get(rel);
+  const bytes = await readBytes(rel);
+  let w;
+  let h;
+  let rgba;
+  if (typeof createImageBitmap === "function" && typeof OffscreenCanvas === "function") {
+    const bmp = await createImageBitmap(new Blob([bytes], { type: "image/jpeg" }));
+    w = bmp.width;
+    h = bmp.height;
+    const cv = new OffscreenCanvas(w, h);
+    const g = cv.getContext("2d");
+    g.drawImage(bmp, 0, 0);
+    rgba = g.getImageData(0, 0, w, h).data;
+  } else {
+    const jpeg = (await import("jpeg-js")).default;
+    const img = jpeg.decode(bytes, { useTArray: true });
+    w = img.width;
+    h = img.height;
+    rgba = img.data;
+  }
+  const rgb = new Uint8Array(w * h * 3);
+  for (let i = 0; i < w * h; i++) rgb.set([rgba[i * 4], rgba[i * 4 + 1], rgba[i * 4 + 2]], i * 3);
+  const pic = colorGrid({ w, h }, rgb);
+  PICTURES.set(rel, pic);
+  return pic;
+}
+export function pictureLoaded(rel) {
+  const p = PICTURES.get(rel);
+  if (!p) throw new Error(`${rel} is not loaded (prepare() loads it).`);
+  return p;
 }
 
 export async function readText(rel) {
@@ -55,6 +100,16 @@ export function parseGeo(bytes) {
     const at = bytes.byteOffset + base + L.offset;
     if (L.type === "height") {
       const q = new Uint16Array(bytes.buffer.slice(at, at + L.bytes));
+      if (L.delta) {
+        // Round 2: each row is stored as differences of `step`-meter levels.
+        for (let j = 0; j < L.h; j++) {
+          let v = 0;
+          for (let i = 0; i < L.w; i++) {
+            v = (v + q[j * L.w + i]) & 0xffff;
+            q[j * L.w + i] = v;
+          }
+        }
+      }
       layers[L.name] = heightGrid(L, q);
     } else if (L.type === "rgb") {
       layers[L.name] = colorGrid(L, new Uint8Array(bytes.buffer.slice(at, at + L.bytes)));
@@ -69,7 +124,7 @@ export function parseGeo(bytes) {
 // A height grid in meters, sampled bilinearly at u, v in 0..1 (u east, v south).
 function heightGrid(L, q) {
   const { w, h, min, max } = L;
-  const k = (max - min) / 65535;
+  const k = L.delta ? L.step : (max - min) / 65535;
   const at = (x, y) => min + q[y * w + x] * k;
   const sample = (u, v) => {
     const fx = Math.min(Math.max(u, 0), 1) * (w - 1);

@@ -13,7 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
 import { execFileSync } from "node:child_process";
-import { CACHE, cached, readTiff, fillNoData, resample, spanMeters, writeGeo } from "./geo-lib.mjs";
+import { CACHE, cached, readTiff, fillNoData, resample, spanMeters, writeGeo, blueMarble, writeJpeg } from "./geo-lib.mjs"; // prettier-ignore
 
 const MAP = [4, 6, 46, 57]; // lon/lat box round the eastern flyway
 const STEP = 6 * 3600; // seconds between kept fixes
@@ -88,4 +88,12 @@ writeGeo(
     fetched: new Date().toISOString().slice(0, 10),
   },
   [{ name: "height", type: "height", w: 210, h: 255, data: resample(z, 210, 255) }],
+);
+// Round 2: the map's true colors (NASA Blue Marble Next Generation).
+writeJpeg(
+  "assets/toys/stork-migration/earth.jpg",
+  await blueMarble("storks", MAP, 1680, 2040),
+  840,
+  1020,
+  90,
 );

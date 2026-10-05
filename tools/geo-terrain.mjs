@@ -24,14 +24,14 @@ import {
   elevationEtopo1,
   resample,
   fillNoData,
-  rgbGrid,
+  writeJpeg,
   spanMeters,
   writeGeo,
   decodeImage,
 } from "./geo-lib.mjs";
 
-const N = 192; // height grid
-const C = 320; // color grid
+const N = 512; // height grid (round 2: finer, gzipped)
+const C = 1024; // the aerial picture, a JPEG beside it
 
 const SITES = {
   // Grand Canyon: Grand Canyon Village, the Bright Angel and Garden Creek
@@ -39,21 +39,19 @@ const SITES = {
   async "grand-canyon"() {
     const bbox = [-112.2, 36.02, -111.98, 36.2];
     const span = spanMeters(bbox);
-    const z = fillNoData(await elevation3dep("gc", bbox, 400, 400));
-    const img = await imageryUsgs("gc", bbox, 1024, 1024);
+    const z = fillNoData(await elevation3dep("gc", bbox, 1024, 1024));
+    const img = await imageryUsgs("gc", bbox, 2048, 2048);
     writeGeo(
-      "assets/toys/grand-canyon/terrain.bin",
+      "assets/toys/grand-canyon/terrain.bin.gz",
       {
         site: "Grand Canyon, Arizona",
         bbox,
         span,
         fetched: today(),
       },
-      [
-        { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
-        { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
-      ],
+      [{ name: "height", type: "height", w: N, h: N, data: resample(z, N, N) }],
     );
+    writeJpeg("assets/toys/grand-canyon/color.jpg", img, C, C);
   },
 
   // Mount St. Helens before (1952-era topography, the USGS pre-eruption DEM)
@@ -110,8 +108,8 @@ const SITES = {
         base + new URLSearchParams(q),
       );
     };
-    const after = fillNoData(readTiff(await utm("elev", 400, 400)));
-    const img = decodeImage(await utm("img", 1024, 1024));
+    const after = fillNoData(readTiff(await utm("elev", 1024, 1024)));
+    const img = decodeImage(await utm("img", 2048, 2048));
     // The pre-eruption DEM covers the mountain and the valley north of it
     // (196 km²); beyond it the land barely changed, so today's heights fill in,
     // blended over a few cells at the seam.
@@ -143,7 +141,7 @@ const SITES = {
     for (let i = 0; i < N * N; i++)
       before.data[i] = ok[i] ? pre0.data[i] * wgt[i] + now[i] * (1 - wgt[i]) : now[i];
     writeGeo(
-      "assets/toys/st-helens/terrain.bin",
+      "assets/toys/st-helens/terrain.bin.gz",
       {
         site: "Mount St. Helens, Washington",
         utm: box,
@@ -153,9 +151,9 @@ const SITES = {
       [
         { name: "before", type: "height", w: N, h: N, data: before.data },
         { name: "after", type: "height", w: N, h: N, data: now },
-        { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
       ],
     );
+    writeJpeg("assets/toys/st-helens/color.jpg", img, C, C);
   },
 
   // The Mariana Trench and the Mariana Islands (Guam at the lower left), from
@@ -164,7 +162,7 @@ const SITES = {
     const bbox = [141.5, 9.5, 148.5, 16.5];
     const z = fillNoData(await elevationEtopo1("mariana", bbox, 420, 420));
     writeGeo(
-      "assets/toys/sea-floor/terrain.bin",
+      "assets/toys/sea-floor/terrain.bin.gz",
       {
         site: "The Mariana Trench, western Pacific",
         bbox,
@@ -184,14 +182,14 @@ const SITES = {
     const bbox = [-68.2185, 44.3875, -68.2035, 44.3985];
     const url =
       "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/DEM_tiles_mosaic/ImageServer/exportImage?" +
-      new URLSearchParams({ bbox: bbox.join(","), bboxSR: "4326", imageSR: "4326", size: "400,400", format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation", f: "image" }); // prettier-ignore
-    const z = fillNoData(readTiff(await cached("bh2-dem-400.tif", url)));
-    const img = await imageryUsgs("bh2", bbox, 1024, 1024);
+      new URLSearchParams({ bbox: bbox.join(","), bboxSR: "4326", imageSR: "4326", size: "800,800", format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation", f: "image" }); // prettier-ignore
+    const z = fillNoData(readTiff(await cached("bh2-dem-800.tif", url)));
+    const img = await imageryUsgs("bh2", bbox, 2048, 2048);
     const tq = new URLSearchParams({ product: "predictions", station: "8413320", begin_date: "20261028 00:00", end_date: "20261029 00:54", datum: "MSL", units: "metric", time_zone: "gmt", format: "json", interval: "6" }); // prettier-ignore
     const tide = JSON.parse(await cached("bh-tide.json", "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" + tq, { text: true })); // prettier-ignore
     const levels = tide.predictions.map((p) => +p.v);
     writeGeo(
-      "assets/toys/tide-harbor/terrain.bin",
+      "assets/toys/tide-harbor/terrain.bin.gz",
       {
         site: "Bar Harbor, Maine",
         bbox,
@@ -206,10 +204,10 @@ const SITES = {
       },
       [
         { name: "height", type: "height", w: N, h: N, data: resample(z, N, N) },
-        { name: "color", type: "rgb", w: C, h: C, data: rgbGrid(img, C, C) },
         { name: "tide", type: "f32", w: levels.length, h: 1, data: levels },
       ],
     );
+    writeJpeg("assets/toys/tide-harbor/color.jpg", img, C, C);
   },
 
   // Yosemite Valley for the relief map: heights, imagery, USGS NLCD 2021 land
@@ -218,10 +216,10 @@ const SITES = {
   async "relief-map"() {
     const bbox = [-119.7, 37.69, -119.5, 37.79];
     const span = spanMeters(bbox);
-    const z = fillNoData(await elevation3dep("yv", bbox, 400, 220));
-    const img = await imageryUsgs("yv", bbox, 1024, 560);
-    const nlcdUrl = "https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2021_Land_Cover_L48/wms?" + new URLSearchParams({ service: "WMS", version: "1.1.1", request: "GetMap", layers: "NLCD_2021_Land_Cover_L48", srs: "EPSG:4326", bbox: bbox.join(","), width: "640", height: "352", format: "image/png" }); // prettier-ignore
-    const nlcd = decodeImage(await cached("yv-nlcd.png", nlcdUrl));
+    const z = fillNoData(await elevation3dep("yv", bbox, 1024, 640));
+    const img = await imageryUsgs("yv", bbox, 2048, 1280);
+    const nlcdUrl = "https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2021_Land_Cover_L48/wms?" + new URLSearchParams({ service: "WMS", version: "1.1.1", request: "GetMap", layers: "NLCD_2021_Land_Cover_L48", srs: "EPSG:4326", bbox: bbox.join(","), width: "1024", height: "640", format: "image/png" }); // prettier-ignore
+    const nlcd = decodeImage(await cached("yv-nlcd-1024.png", nlcdUrl));
     const nhdUrl = "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6/query?" + new URLSearchParams({ geometry: bbox.join(","), geometryType: "esriGeometryEnvelope", inSR: "4326", outSR: "4326", spatialRel: "esriSpatialRelIntersects", outFields: "gnis_name,ftype", returnGeometry: "true", f: "geojson" }); // prettier-ignore
     const nhd = JSON.parse(await cached("yv-nhd.json", nhdUrl, { text: true }));
     const rivers = [];
@@ -241,20 +239,20 @@ const SITES = {
         if (pts.length >= 2) rivers.push({ name, main: name === "Merced River", pts });
       }
     }
-    const HW = 192;
+    const HW = 512;
     const HH = Math.round((HW * span[1]) / span[0]);
-    const CW = 320;
+    const CW = 1024;
     const CH = Math.round((CW * span[1]) / span[0]);
     writeGeo(
-      "assets/toys/relief-map/terrain.bin",
+      "assets/toys/relief-map/terrain.bin.gz",
       { site: "Yosemite Valley, California", bbox, span, fetched: today(), rivers },
       [
         // prettier-ignore
         { name: "height", type: "height", w: HW, h: HH, data: resample(z, HW, HH) },
-        { name: "color", type: "rgb", w: CW, h: CH, data: rgbGrid(img, CW, CH) },
-        { name: "land", type: "rgb", w: CW, h: CH, data: rgbGrid(nlcd, CW, CH) },
       ],
     );
+    writeJpeg("assets/toys/relief-map/color.jpg", img, CW, CH);
+    writeJpeg("assets/toys/relief-map/land.jpg", nlcd, CW, CH, 92);
   },
 };
 

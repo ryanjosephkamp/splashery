@@ -34,9 +34,9 @@
 
 import { mix, shade, clamp, smoothstep, vec, ramp, quatAxisAngle } from "../kit.js";
 import { evenBox, evenCylinder, evenEllipsoid } from "./even.js";
-import { loadGeo, geoLoaded, readText } from "../geo/data.js";
+import { loadGeo, geoLoaded, readText, loadPicture, pictureLoaded } from "../geo/data.js";
 import { inked } from "../font.js";
-import { frame, addBlock, hill } from "../geo/terrain.js";
+import { frame, addBlock, addGrid, addGridSides, hill } from "../geo/terrain.js";
 
 // Tokens that travel far (the storks) ask for a sort of the tokens the same way.
 function resortWhileMoving(out, d, s, moving, step = 0.25) {
@@ -78,6 +78,15 @@ const CREDIT_IMAGERY = {
   source: "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer",
   author: "USDA Farm Service Agency, NASA and the U.S. Geological Survey",
   ...PD,
+};
+
+const CREDIT_BLUE_MARBLE = {
+  label: "Imagery",
+  title: "Blue Marble: Next Generation (true color), through NASA GIBS",
+  source: "https://visibleearth.nasa.gov/collection/1484/blue-marble",
+  author: "NASA Earth Observatory",
+  license: "Public domain",
+  licenseUrl: "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
 };
 
 // ---- Water rising in a block -----------------------------------------------------------------
@@ -131,9 +140,111 @@ function addFlood(k, F, height, { lo, hi, part, color = "#3f6f78" }) {
   }
 }
 
+// Round 2: the same water as grids of splats sized to the land's spacing.
+function addFloodGrid(k, F, height, { lo, hi, part, spacing, color = "#3f6f78", opacity = 0.92 }) {
+  const yLo = F.y(lo);
+  const yHi = F.y(hi);
+  const sheet = [];
+  const st = spacing * 1.6;
+  const nx = Math.round((2 * F.sx) / st) + 1;
+  const nz = Math.round((2 * F.sz) / st) + 1;
+  for (let j = 0; j < nz; j++)
+    for (let i = 0; i < nx; i++) {
+      const u = i / (nx - 1);
+      const v = j / (nz - 1);
+      if (height(u, v) <= hi + 30) sheet.push([F.x(u), yLo, F.z(v)]);
+    }
+  const base = () => k.baseSize || 0.01;
+  k.cloud({ count: (sheet.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+    const p = sheet[Math.min(sheet.length - 1, i)];
+    const g = 0.5 + 0.5 * Math.sin(p[0] * 40 + p[2] * 23) * Math.sin(p[2] * 31 - p[0] * 9);
+    return { p, n: [0, 1, 0], flat: 0.15, size: (st * 1.25) / base(), color: mix(color, "#9cc4c8", 0.12 * g), opacity, part }; // prettier-ignore
+  });
+  // The water's cut faces: each bit appears as the level passes it.
+  const faces = [];
+  const edge = (u, v, nrm) => {
+    const ground = F.y(height(u, v));
+    for (let y = Math.max(yLo, ground); y <= yHi; y += spacing * 0.8)
+      faces.push({ p: [F.x(u) + nrm[0] * 0.003, y, F.z(v) + nrm[2] * 0.003], n: nrm });
+  };
+  const ex = Math.round((2 * F.sx) / spacing) + 1;
+  const ez = Math.round((2 * F.sz) / spacing) + 1;
+  for (let i = 0; i < ex; i++)
+    (edge(i / (ex - 1), 1, [0, 0, 1]), edge(i / (ex - 1), 0, [0, 0, -1]));
+  for (let j = 0; j < ez; j++)
+    (edge(1, j / (ez - 1), [1, 0, 0]), edge(0, j / (ez - 1), [-1, 0, 0]));
+  if (!faces.length) return;
+  k.cloud({ count: (faces.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+    const e = faces[Math.min(faces.length - 1, i)];
+    const f = clamp((e.p[1] - yLo) / (yHi - yLo), 0, 1);
+    return { p: e.p, n: e.n, flat: 0.15, size: spacing / base(), color: shade(color, 0.6 + 0.25 * f), opacity: 0.92, kind: "fade", channel: 0, params: [f, -0.02] }; // prettier-ignore
+  });
+}
+
+// A flat sheet of water as a grid of splats at height y (recipe units), where
+// keep(u, v) says so; and the water's cut faces from yLo to yHi on the block's
+// sides, above the ground, each with params(f) for f = its place in 0..1.
+function gridSheet(k, F, { y, spacing, keep, color, part, kind, params, opacity = 0.9 }) {
+  const pts = [];
+  const nx = Math.round((2 * F.sx) / spacing) + 1;
+  const nz = Math.round((2 * F.sz) / spacing) + 1;
+  for (let j = 0; j < nz; j++)
+    for (let i = 0; i < nx; i++) {
+      const u = i / (nx - 1);
+      const v = j / (nz - 1);
+      if (!keep || keep(u, v)) pts.push([u, v]);
+    }
+  if (!pts.length) return;
+  const base = () => k.baseSize || 0.01;
+  k.cloud({ count: (pts.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+    const [u, v] = pts[Math.min(pts.length - 1, i)];
+    const out = { p: [F.x(u), y, F.z(v)], n: [0, 1, 0], flat: 0.15, size: (spacing * 1.2) / base(), color: color(u, v), opacity, part }; // prettier-ignore
+    if (kind) ((out.kind = kind), (out.params = params(u, v)));
+    return out;
+  });
+}
+function gridFaces(k, F, height, { yLo, yHi, spacing, color, params, channel = 0, opacity = 0.9 }) {
+  const faces = [];
+  const edge = (u, v, nrm) => {
+    const ground = F.y(height(u, v));
+    for (let y = Math.max(yLo, ground); y <= yHi; y += spacing * 0.8)
+      faces.push({ p: [F.x(u) + nrm[0] * 0.003, y, F.z(v) + nrm[2] * 0.003], n: nrm, f: clamp((y - yLo) / (yHi - yLo), 0, 1) }); // prettier-ignore
+  };
+  const ex = Math.round((2 * F.sx) / spacing) + 1;
+  const ez = Math.round((2 * F.sz) / spacing) + 1;
+  for (let i = 0; i < ex; i++)
+    (edge(i / (ex - 1), 1, [0, 0, 1]), edge(i / (ex - 1), 0, [0, 0, -1]));
+  for (let j = 0; j < ez; j++)
+    (edge(1, j / (ez - 1), [1, 0, 0]), edge(0, j / (ez - 1), [-1, 0, 0]));
+  if (!faces.length) return;
+  const base = () => k.baseSize || 0.01;
+  k.cloud({ count: (faces.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+    const e = faces[Math.min(faces.length - 1, i)];
+    return { p: e.p, n: e.n, flat: 0.15, size: spacing / base(), color: color(e.f), opacity, kind: "fade", channel, params: params(e.f) }; // prettier-ignore
+  });
+}
+
+// A smooth hash noise for colors on the grid (-1..1), from the sample's place.
+function gnoise(x, y, seed = 0) {
+  const h = (a, b) => {
+    const t = Math.sin(a * 127.1 + b * 311.7 + seed * 74.7) * 43758.5453;
+    return t - Math.floor(t);
+  };
+  const xi = Math.floor(x);
+  const yi = Math.floor(y);
+  const fx = x - xi;
+  const fy = y - yi;
+  const sx = fx * fx * (3 - 2 * fx);
+  const sy = fy * fy * (3 - 2 * fy);
+  const a = h(xi, yi) + (h(xi + 1, yi) - h(xi, yi)) * sx;
+  const b = h(xi, yi + 1) + (h(xi + 1, yi + 1) - h(xi, yi + 1)) * sx;
+  return (a + (b - a) * sy) * 2 - 1;
+}
+
 // ---- Grand Canyon ------------------------------------------------------------------------
 
-const GC_FILE = "assets/toys/grand-canyon/terrain.bin";
+const GC_FILE = "assets/toys/grand-canyon/terrain.bin.gz";
+const GC_PIC = "assets/toys/grand-canyon/color.jpg";
 const GC_T = 8;
 
 // The rock layers of the canyon walls, top down (approximate elevations at
@@ -154,7 +265,7 @@ const gcRock = (m) => GC_STRATA.find(([at]) => m >= at)[1];
 
 const GRAND_CANYON = {
   alive: false,
-  density: 1.5,
+  density: 2,
   kernel: "sharp",
   credits: [CREDIT_3DEP, CREDIT_IMAGERY],
   controls: [{ key: "flood", label: "Flood", type: "pulse", ease: GC_T }],
@@ -173,7 +284,7 @@ const GRAND_CANYON = {
     },
   ],
   async prepare() {
-    await loadGeo(GC_FILE);
+    await Promise.all([loadGeo(GC_FILE), loadPicture(GC_PIC)]);
   },
   drive(t, c, out, info) {
     const s = c.flood > 0 ? (1 - c.flood) * GC_T : GC_T;
@@ -186,49 +297,51 @@ const GRAND_CANYON = {
   build(k, o) {
     const g = geoLoaded(GC_FILE);
     const H = g.layer("height");
-    const img = g.layer("color");
+    const img = pictureLoaded(GC_PIC);
     const F = frame({ span: g.meta.span, exag: Number(o.exag) || 2, lo: H.min - 250, depth: 0.12 }); // prettier-ignore
     const height = H.sample;
     const water = k.part("water");
-    addBlock(k, {
+    const land = addGrid(k, {
       F,
       height,
       share: 0.78,
       color: (c) => {
+        if (c.wall) return shade(gcRock(c.m), 0.55 + 0.35 * Math.max(0, vec.dot(c.n, [-0.6, 0.2, 0.75]))); // prettier-ignore
         const base = img.sample(c.u, c.v);
-        return shade(mix(base, [0.72, 0.6, 0.5], 0.08), 0.92 * hill(c.n, 0.32) + 0.1);
+        return shade(mix(base, [0.72, 0.6, 0.5], 0.06), 0.9 * hill(c.n, 0.3) + 0.12);
       },
-      side: (m) => gcRock(m),
     });
+    addGridSides(k, F, height, { spacing: land.spacing, side: (m) => gcRock(m) });
     const lo = H.min + 4;
     const hi = H.min + 0.5 * (H.max - H.min);
-    addFlood(k, F, height, { lo, hi, part: water, color: "#46707a" });
-    k.data = { yLo: F.y(lo), yHi: F.y(hi) };
+    addFloodGrid(k, F, height, { lo, hi, part: water, spacing: land.spacing, color: "#46707a" });
+    k.data = { yLo: F.y(lo), yHi: F.y(hi), grid: land };
   },
 };
 
 // ---- Mount St. Helens --------------------------------------------------------------------
 
-const MSH_FILE = "assets/toys/st-helens/terrain.bin";
+const MSH_FILE = "assets/toys/st-helens/terrain.bin.gz";
+const MSH_PIC = "assets/toys/st-helens/color.jpg";
 const MSH_T = 6;
 const PLUME = 34; // ash puffs (tokens)
 const BLAST = 10; // the lateral blast's dark clouds (tokens)
 
 // 1979's colors from height: forest, then alpine meadow and rock, then snow.
-function mshBefore(m, n, u, v, c) {
-  const forest = mix("#2f4a2c", "#3d5a33", 0.5 + 0.5 * c.noise(u * 40, v * 40, 1));
+function mshBefore(m, n, u, v) {
+  const forest = mix("#2a4428", "#3d5a33", 0.5 + 0.5 * gnoise(u * 160, v * 160, 1));
   const rock = "#7c7368";
   const snow = "#eef1f4";
-  let col = forest;
-  col = mix(col, rock, smoothstep(1350, 1650, m + 120 * c.noise(u * 20, v * 20, 3)));
-  col = mix(col, snow, smoothstep(1750, 2050, m + 150 * c.noise(u * 25, v * 25, 7)) * clamp(0.4 + n[1], 0, 1)); // prettier-ignore
+  let col = shade(forest, 0.9 + 0.12 * gnoise(u * 600, v * 600, 2));
+  col = mix(col, rock, smoothstep(1350, 1650, m + 120 * gnoise(u * 40, v * 40, 3)));
+  col = mix(col, snow, smoothstep(1750, 2050, m + 150 * gnoise(u * 50, v * 50, 7)) * clamp(0.4 + n[1], 0, 1)); // prettier-ignore
   // Spirit Lake (north-northeast of the summit).
   return shade(col, hill(n, 0.45));
 }
 
 const ST_HELENS = {
   alive: false,
-  density: 1.5,
+  density: 2,
   kernel: "sharp",
   credits: [
     {
@@ -244,7 +357,7 @@ const ST_HELENS = {
   controls: [{ key: "erupt", label: "1980", type: "toggle", default: 0, ease: MSH_T }],
   action: { key: "erupt", label: "Play May 18, 1980" },
   async prepare() {
-    await loadGeo(MSH_FILE);
+    await Promise.all([loadGeo(MSH_FILE), loadPicture(MSH_PIC)]);
   },
   drive(t, c, out, info) {
     const d = info.data;
@@ -302,42 +415,39 @@ const ST_HELENS = {
     const g = geoLoaded(MSH_FILE);
     const B = g.layer("before");
     const A = g.layer("after");
-    const img = g.layer("color");
+    const img = pictureLoaded(MSH_PIC);
     const lo = Math.min(B.min, A.min) - 150;
     const F = frame({ span: g.meta.span, exag: 1.5, lo, depth: 0.08 });
     const crater = [F.x(0.5), F.y(A.sample(0.5, 0.5)) + 0.02, F.z(0.47)];
     k.data = { crater, state: { last: 0, dir: 1 } };
-    // 1979: the old cone, which morphs down onto today's land (a little under
-    // it, so the 1980 surface covers it).
-    addBlock(k, {
+    // 1979: the old cone, which morphs down under today's land (so the 1980
+    // surface covers it) and is then hidden.
+    const old = addGrid(k, {
       F,
       height: B.sample,
-      share: 0.5,
+      share: 0.46,
       part: k.part("old"),
+      cliffs: false, // the old cone has no cliffs, and it is hidden after the fall
       channel: 0,
       to: (c) => [c.p[0], F.y(A.sample(c.u, c.v)) - 0.05, c.p[2]],
-      color: (c) => mshBefore(F.m(c.p[1]), c.n, c.u, c.v, c),
-      side: (m) => mix("#4a3d33", "#6e604f", smoothstep(lo, lo + 900, m)),
+      color: (c) => (c.wall ? shade("#6b6259", 0.7) : mshBefore(c.m, c.n, c.u, c.v)),
     });
+    addGridSides(k, F, B.sample, { spacing: old.spacing, side: (m) => mix("#4a3d33", "#6e604f", smoothstep(lo, lo + 900, m)) }); // prettier-ignore
     // 1980 onward: today's surface, colored from the imagery, appearing from
     // the crater outward as the blast passes.
-    k.add(
-      k.param((u, v) => [F.x(u), F.y(A.sample(u, v)), F.z(v)], { grid: 128, flip: true }),
-      {
-        even: true,
-        share: 0.36,
-        flat: 0.2,
-        jitter: 0.01,
-        kind: "fade",
-        channel: 0,
-        params: (c) => {
-          const r = Math.hypot(c.u - 0.5, (c.v - 0.47) * 1.15);
-          const north = c.v < 0.5 ? 0 : 0.15;
-          return [clamp(0.15 + 1.3 * r + north, 0.05, 0.98), -0.06];
-        },
-        color: (c) => shade(img.sample(c.u, c.v), 0.92 * hill(c.n, 0.3) + 0.08),
+    addGrid(k, {
+      F,
+      height: A.sample,
+      share: 0.4,
+      kind: "fade",
+      channel: 0,
+      params: (c) => {
+        const r = Math.hypot(c.u - 0.5, (c.v - 0.47) * 1.15);
+        const north = c.v < 0.5 ? 0 : 0.15;
+        return [clamp(0.15 + 1.3 * r + north, 0.05, 0.98), -0.06];
       },
-    );
+      color: (c) => (c.wall ? shade("#6e665d", 0.75) : shade(img.sample(c.u, c.v), 0.9 * hill(c.n, 0.3) + 0.1)), // prettier-ignore
+    });
     // Ash puffs: billows of a few overlapping balls, one token each, hidden at rest.
     const puff = (i, r, col, n, tone) => {
       const lobes = [0, 1, 2, 3].map((j) => {
@@ -371,7 +481,7 @@ const ST_HELENS = {
 
 // ---- The sea floor -------------------------------------------------------------------------
 
-const SF_FILE = "assets/toys/sea-floor/terrain.bin";
+const SF_FILE = "assets/toys/sea-floor/terrain.bin.gz";
 const SF_T = 9;
 const CREDIT_ETOPO = {
   label: "Relief",
@@ -391,7 +501,7 @@ function seaColor(m) {
 
 const SEA_FLOOR = {
   alive: true,
-  density: 1.5,
+  density: 2,
   kernel: "sharp",
   credits: [CREDIT_ETOPO],
   controls: [{ key: "drain", label: "Drain the ocean", type: "pulse", ease: SF_T }],
@@ -415,67 +525,45 @@ const SEA_FLOOR = {
     const H = g.layer("height");
     const F = frame({ span: g.meta.span, exag: 9, lo: H.min - 600, depth: 0.06 });
     const height = H.sample;
-    addBlock(k, {
+    const land = addGrid(k, {
       F,
       height,
-      share: 0.72,
-      color: (c) => shade(seaColor(F.m(c.p[1])), 0.9 * hill(c.n, 0.4)),
-      side: (m) => (m > -6000 ? mix("#5d5144", "#3f3d3c", smoothstep(-6000, -1500, m)) : mix("#2b2a2e", "#3f3d3c", smoothstep(-11000, -6000, m))), // prettier-ignore
+      share: 0.66,
+      color: (c) => shade(seaColor(c.m), c.wall ? 0.6 : 0.9 * hill(c.n, 0.4)),
     });
+    addGridSides(k, F, height, { spacing: land.spacing, side: (m) => (m > -6000 ? mix("#5d5144", "#3f3d3c", smoothstep(-6000, -1500, m)) : mix("#2b2a2e", "#3f3d3c", smoothstep(-11000, -6000, m))) }); // prettier-ignore
     const ySea = F.y(0);
     const yDeep = F.y(H.min) - 0.01;
     const sea = k.part("sea");
     // The ocean's surface: a gently heaving sheet at sea level, over every
     // place that is under water.
-    k.add(
-      k.param((u, v) => [F.x(u), ySea, F.z(v)], { grid: 96, flip: true }),
-      {
-        part: sea,
-        even: true,
-        share: 0.14,
-        flat: 0.1,
-        jitter: 0.006,
-        opacity: 0.86,
-        kind: "wave",
-        params: (c) => [0.004, c.u * 9 + c.v * 5],
-        color: (c) => {
-          if (height(c.u, c.v) > 20) return null;
-          const g2 = c.noise(c.u * 30, c.v * 30, 2);
-          return mix("#1f4f7a", "#5d93b8", 0.25 + 0.2 * g2);
-        },
-      },
-    );
+    gridSheet(k, F, {
+      y: ySea,
+      spacing: land.spacing * 1.5,
+      keep: (u, v) => height(u, v) <= 20,
+      part: sea,
+      opacity: 0.86,
+      kind: "wave",
+      params: (u, v) => [0.004, u * 9 + v * 5],
+      color: (u, v) => mix("#1f4f7a", "#5d93b8", 0.25 + 0.2 * gnoise(u * 30, v * 30, 2)),
+    });
     // The water's cut faces, which drop away as the level passes them.
-    const faces = [(a) => [a, 1], (a) => [1 - a, 0], (a) => [1, 1 - a], (a) => [0, a]];
-    for (const f of faces) {
-      k.add(
-        k.param((a, w) => {
-          const [u, v] = f(a);
-          return [F.x(u) * 1.002, yDeep + (ySea - yDeep) * w, F.z(v) * 1.002];
-        }, { grid: 48 }), // prettier-ignore
-        {
-          even: true,
-          share: 0.025,
-          flat: 0.15,
-          opacity: 0.88,
-          kind: "fade",
-          channel: 0,
-          params: (c) => [clamp(1 - (c.p[1] - yDeep) / (ySea - yDeep), 0, 1) - 0.01, 0.02],
-          color: (c) => {
-            const [u, v] = f(c.u);
-            if (F.y(height(u, v)) > c.p[1]) return null;
-            return mix("#0f2747", "#3c74a3", smoothstep(yDeep, ySea, c.p[1]));
-          },
-        },
-      );
-    }
+    gridFaces(k, F, height, {
+      yLo: yDeep,
+      yHi: ySea,
+      spacing: land.spacing,
+      opacity: 0.88,
+      color: (f) => mix("#0f2747", "#3c74a3", f),
+      params: (f) => [clamp(1 - f, 0, 1) - 0.01, 0.02],
+    });
     k.data = { ySea, yDeep };
   },
 };
 
 // ---- Waves and tides: Bar Harbor ---------------------------------------------------------
 
-const TH_FILE = "assets/toys/tide-harbor/terrain.bin";
+const TH_FILE = "assets/toys/tide-harbor/terrain.bin.gz";
+const TH_PIC = "assets/toys/tide-harbor/color.jpg";
 const TH_T = 12;
 const TH_FLOOR = -12; // the block's deep water is cut off here (m)
 // Three moorings in water deep at every tide (u, v), with each boat's heading.
@@ -504,7 +592,7 @@ function shoreColor(m, img, n) {
 
 const TIDE_HARBOR = {
   alive: true,
-  density: 1.5,
+  density: 2,
   kernel: "sharp",
   credits: [
     {
@@ -528,7 +616,7 @@ const TIDE_HARBOR = {
   controls: [{ key: "day", label: "Play the day", type: "pulse", ease: TH_T }],
   action: { key: "day", label: "Play a day of tides" },
   async prepare() {
-    await loadGeo(TH_FILE);
+    await Promise.all([loadGeo(TH_FILE), loadPicture(TH_PIC)]);
   },
   drive(t, c, out, info) {
     const d = info.data;
@@ -556,66 +644,44 @@ const TIDE_HARBOR = {
   build(k) {
     const g = geoLoaded(TH_FILE);
     const H = g.layer("height");
-    const img = g.layer("color");
+    const img = pictureLoaded(TH_PIC);
     const levels = Array.from(g.layer("tide").data);
     const low = Math.min(...levels) - 0.05;
     const high = Math.max(...levels);
     const F = frame({ span: g.meta.span, exag: 6, lo: TH_FLOOR, depth: 0.05 });
     const height = (u, v) => Math.max(TH_FLOOR + 0.5, H.sample(u, v));
-    addBlock(k, {
+    const land = addGrid(k, {
       F,
       height,
       share: 0.66,
-      color: (c) => shoreColor(F.m(c.p[1]), img.sample(c.u, c.v), c.n),
-      side: (m) => (m > 0 ? mix("#6a5a45", "#7d6a52", smoothstep(0, 40, m)) : mix("#3b3a36", "#5c5145", smoothstep(TH_FLOOR, 0, m))), // prettier-ignore
+      color: (c) => (c.wall ? shade(shoreColor(c.m, img.sample(c.u, c.v), [0, 1, 0]), 0.7) : shoreColor(c.m, img.sample(c.u, c.v), c.n)), // prettier-ignore
     });
+    addGridSides(k, F, height, { spacing: land.spacing, side: (m) => (m > 0 ? mix("#6a5a45", "#7d6a52", smoothstep(0, 40, m)) : mix("#3b3a36", "#5c5145", smoothstep(TH_FLOOR, 0, m))) }); // prettier-ignore
     // The sea: a sheet at the lowest tide that rises and falls with the curve,
     // its surface heaving in small waves.
     const water = k.part("water");
     const yLow = F.y(low);
-    k.add(
-      k.param((u, v) => [F.x(u), yLow, F.z(v)], { grid: 128, flip: true }),
-      {
-        part: water,
-        even: true,
-        share: 0.16,
-        flat: 0.1,
-        jitter: 0.006,
-        opacity: 0.84,
-        kind: "wave",
-        params: (c) => [0.0035, c.u * 34 - c.v * 12],
-        color: (c) => {
-          if (height(c.u, c.v) > high + 0.6) return null;
-          const g2 = c.noise(c.u * 60, c.v * 60, 4);
-          return mix("#2b4f5c", "#7aa4ad", 0.25 + 0.22 * g2);
-        },
-      },
-    );
+    gridSheet(k, F, {
+      y: yLow,
+      spacing: land.spacing * 1.3,
+      keep: (u, v) => height(u, v) <= high + 0.6,
+      part: water,
+      opacity: 0.84,
+      kind: "wave",
+      params: (u, v) => [0.0035, u * 34 - v * 12],
+      color: (u, v) => mix("#2b4f5c", "#7aa4ad", 0.25 + 0.22 * gnoise(u * 60, v * 60, 4)),
+    });
     // The water's cut faces: each bit shows while the tide is above it.
-    const faces = [(a) => [a, 1], (a) => [1 - a, 0], (a) => [1, 1 - a], (a) => [0, a]];
+    const yFloor = F.y(TH_FLOOR);
     const yHigh = F.y(high);
-    for (const fc of faces) {
-      k.add(
-        k.param((a, w) => {
-          const [u, v] = fc(a);
-          return [F.x(u) * 1.002, F.y(TH_FLOOR) + (yHigh - F.y(TH_FLOOR)) * w, F.z(v) * 1.002];
-        }, { grid: 48 }), // prettier-ignore
-        {
-          even: true,
-          share: 0.02,
-          flat: 0.15,
-          opacity: 0.88,
-          kind: "fade",
-          channel: 0,
-          params: (c) => [F.m(c.p[1]) - levels[0], 0.12],
-          color: (c) => {
-            const [u, v] = fc(c.u);
-            if (F.y(height(u, v)) > c.p[1]) return null;
-            return mix("#1f3c48", "#3f6b78", smoothstep(F.y(TH_FLOOR), yHigh, c.p[1]));
-          },
-        },
-      );
-    }
+    gridFaces(k, F, height, {
+      yLo: yFloor,
+      yHi: yHigh,
+      spacing: land.spacing,
+      opacity: 0.88,
+      color: (f) => mix("#1f3c48", "#3f6b78", f),
+      params: (f) => [F.m(yFloor + f * (yHigh - yFloor)) - levels[0], 0.12],
+    });
     // Moored boats: a hull, a cabin and a mast each, floating at the day's
     // first level.
     const boats = TH_BOATS.map(([u, v, h, col], i) => {
@@ -675,14 +741,16 @@ const TIDE_HARBOR = {
 
 // ---- Weather over land: Hurricane Polo --------------------------------------------------
 
-const HU_FILE = "assets/toys/hurricane/storm.bin";
+const HU_FILE = "assets/toys/hurricane/storm.bin.gz";
+const HU_PIC = "assets/toys/hurricane/color.jpg";
 const HU_T = 10;
 const HU_RINGS = [1.1, 2.6, 99]; // ring edges, degrees from the eye
 const HU_SPIN = [0.55, 0.28, 0.12]; // radians per second at the start of the day
 
 const HURRICANE = {
   alive: true,
-  density: 1.4,
+  density: 2,
+  kernel: "sharp",
   credits: [
     {
       label: "Clouds",
@@ -703,7 +771,7 @@ const HURRICANE = {
     },
     {
       label: "Map",
-      title: "Blue Marble: Shaded Relief and Bathymetry, through NASA GIBS",
+      title: "Blue Marble: Next Generation (true color), through NASA GIBS",
       source: "https://visibleearth.nasa.gov/collection/1484/blue-marble",
       author: "NASA Earth Observatory",
       license: "Public domain",
@@ -715,7 +783,7 @@ const HURRICANE = {
   controls: [{ key: "day", label: "September 22", type: "toggle", default: 0, ease: HU_T }],
   action: { key: "day", label: "Play the day it grew" },
   async prepare() {
-    await loadGeo(HU_FILE);
+    await Promise.all([loadGeo(HU_FILE), loadPicture(HU_PIC)]);
   },
   drive(t, c, out, info) {
     const d = info.data;
@@ -745,19 +813,20 @@ const HURRICANE = {
     const g = geoLoaded(HU_FILE);
     const M = g.meta;
     const H = g.layer("height");
-    const img = g.layer("color");
+    const img = pictureLoaded(HU_PIC);
     const F = frame({ span: M.span, exag: 14, lo: 0, depth: 0.04 });
     const [w, s, e, nn] = M.map;
     const uOf = (lon) => (lon - w) / (e - w);
     const vOf = (lat) => (nn - lat) / (nn - s);
     const XZ = (lon, lat) => [F.x(uOf(lon)), F.z(vOf(lat))];
-    addBlock(k, {
+    const ground = (u, v) => Math.max(0, H.sample(u, v));
+    const map = addGrid(k, {
       F,
-      height: (u, v) => Math.max(0, H.sample(u, v)),
-      share: 0.34,
-      color: (c) => shade(img.sample(c.u, c.v), 0.85 * hill(c.n, 0.3) + 0.12),
-      side: (m) => mix("#3c4a5a", "#5a5145", smoothstep(-100, 100, m)),
+      height: ground,
+      share: 0.3,
+      color: (c) => shade(img.sample(c.u, c.v), (c.wall ? 0.6 : 0.9 * hill(c.n, 0.3)) + 0.16),
     });
+    addGridSides(k, F, ground, { spacing: map.spacing, side: (m) => mix("#3c4a5a", "#5a5145", smoothstep(-100, 100, m)) }); // prettier-ignore
     // The clouds: each infrared square becomes a deck of cloud tops, as high
     // as their temperature says (about 6.5 °C colder per kilometer up), split
     // into rings that turn about the eye. The start fades as the end comes in.
@@ -779,41 +848,50 @@ const HURRICANE = {
       const [bw, bs, be, bn] = fr.box;
       const clat = (bs + bn) / 2;
       const clon = (bw + be) / 2;
-      k.cloud({ share: 0.29, size: 1 }, (rand) => {
-        // Sample the square, keeping only cloud.
-        for (let tries = 0; tries < 12; tries++) {
-          const u = rand();
-          const v = rand();
+      // Every infrared pixel that is cloud becomes one flat splat at its
+      // cloud-top height, sized to the pixel (thinned evenly to fit the budget).
+      const pts = [];
+      const want = 0.3 * k.count;
+      let cloudy = 0;
+      for (let j = 0; j < L.h; j++) for (let i = 0; i < L.w; i++) if (L.data[j * L.w + i] - 100 <= 6) cloudy++; // prettier-ignore
+      const stride = Math.max(1, Math.ceil(Math.sqrt(cloudy / want)));
+      const px = ((be - bw) / L.w) * stride; // degrees a splat covers
+      const [x1] = XZ(eye0.lon + px, eye0.lat);
+      const step = Math.abs(x1 - ex) * Math.cos((eye0.lat * Math.PI) / 180);
+      for (let j = 0; j < L.h; j += stride)
+        for (let i = 0; i < L.w; i += stride) {
+          const u = i / (L.w - 1);
+          const v = j / (L.h - 1);
           const t0 = T(u, v);
-          if (t0 > 6 && tries < 11) continue;
+          if (t0 > 6) continue;
           const lon = bw + (be - bw) * u;
           const lat = bn - (bn - bs) * v;
           const deg = Math.hypot(lon - clon, lat - clat);
-          if (deg > 5 || t0 > 6)
-            return { p: [ex, -1, ez], color: [0, 0, 0], opacity: 0, part: rings[2] };
+          if (deg > 5) continue;
           // Placed so this frame's eye sits on the start's eye.
           const [x, z] = XZ(eye0.lon + (lon - clon), eye0.lat + (lat - clat));
-          const h = top(t0);
-          const e2 = 1 / 256;
+          const e2 = stride / L.w;
           const gx = top(T(u + e2, v)) - top(T(u - e2, v));
           const gz = top(T(u, v + e2)) - top(T(u, v - e2));
-          const lit = clamp(0.86 - (gx - gz) * 0.00012, 0.5, 1.12);
+          const lit = clamp(0.88 - (gx - gz) * 0.0001, 0.5, 1.15);
           const white = smoothstep(-10, -75, t0);
-          const col = shade(mix([0.55, 0.58, 0.62], [0.97, 0.97, 0.99], white), lit);
-          const edge = smoothstep(5, 3.8, deg);
-          return {
-            p: [x, h * kCloud + 0.004, z],
-            color: col,
-            size: 1.05 + 0.35 * rand(),
-            opacity: (0.3 + 0.68 * white) * edge,
-            n: [0, 1, 0],
-            part: ringOf(deg),
-            kind: "fade",
-            channel: 0,
-            params: [0.25 + 0.5 * (deg / 5) * 0.3 + 0.35 * rand(), fi ? -0.18 : 0.18],
-          };
+          pts.push({ p: [x, top(t0) * kCloud + 0.004, z], col: shade(mix([0.55, 0.58, 0.62], [0.97, 0.97, 0.99], white), lit), white, deg, at: 0.25 + 0.15 * (deg / 5) + 0.35 * (((i * 7919 + j * 104729) % 1000) / 1000) }); // prettier-ignore
         }
-        return { p: [ex, -1, ez], opacity: 0, color: [0, 0, 0], part: rings[2] };
+      const base = () => k.baseSize || 0.01;
+      k.cloud({ count: (pts.length * 160000) / k.count, jitter: 0 }, (_r, idx) => {
+        const e = pts[Math.min(pts.length - 1, idx)];
+        return {
+          p: e.p,
+          color: e.col,
+          size: (step * 1.15) / base(),
+          opacity: (0.35 + 0.63 * e.white) * smoothstep(5, 3.8, e.deg),
+          n: [0, 1, 0],
+          flat: 0.35,
+          part: ringOf(e.deg),
+          kind: "fade",
+          channel: 0,
+          params: [e.at, fi ? -0.18 : 0.18],
+        };
       });
     });
     // Rain under the coldest tops of the grown storm, and low wind lines that
@@ -867,7 +945,7 @@ const HURRICANE = {
     // The day's best track on the sea: a dot every six hours.
     for (const pnt of M.track) {
       const [x, z] = XZ(pnt.lon, pnt.lat);
-      k.add(k.disc(0.012), { pos: [x, 0.003, z], color: mix("#ffd25a", "#ff5a3c", (pnt.kt - 70) / 85), share: 0.002, flat: 0.1, pattern: false }); // prettier-ignore
+      k.add(k.disc(0.012), { pos: [x, 0.003, z], color: mix("#ffd25a", "#ff5a3c", (pnt.kt - 70) / 85), share: 0.002, flat: 0.1, even: true, pattern: false }); // prettier-ignore
     }
     k.data = {
       track: M.track.map((pnt) => [...XZ(pnt.lon, pnt.lat), pnt.kt]),
@@ -879,7 +957,11 @@ const HURRICANE = {
 
 // ---- A relief map: Yosemite Valley ---------------------------------------------------------
 
-const RM_FILE = "assets/toys/relief-map/terrain.bin";
+const RM_FILE = "assets/toys/relief-map/terrain.bin.gz";
+const RM_PICS = {
+  photo: "assets/toys/relief-map/color.jpg",
+  land: "assets/toys/relief-map/land.jpg",
+};
 const RM_T = 7;
 
 // A hypsometric tint, as on a printed relief map.
@@ -887,7 +969,7 @@ const TINT = ["#4f7a45", "#7a9a56", "#b8b77a", "#c9a776", "#a98665", "#d9d1c4", 
 
 const RELIEF_MAP = {
   alive: false,
-  density: 1.5,
+  density: 2,
   kernel: "sharp",
   credits: [
     CREDIT_3DEP,
@@ -924,8 +1006,8 @@ const RELIEF_MAP = {
   ],
   controls: [{ key: "sweep", label: "Sweep", type: "pulse", ease: RM_T }],
   action: { key: "sweep", label: "Sweep a contour and the streams" },
-  async prepare() {
-    await loadGeo(RM_FILE);
+  async prepare(o) {
+    await Promise.all([loadGeo(RM_FILE), RM_PICS[o?.look] ? loadPicture(RM_PICS[o.look]) : null]);
   },
   drive(t, c, out) {
     const s = c.sweep > 0 ? (1 - c.sweep) * RM_T : RM_T;
@@ -936,45 +1018,43 @@ const RELIEF_MAP = {
   build(k, o) {
     const g = geoLoaded(RM_FILE);
     const H = g.layer("height");
-    const photo = g.layer("color");
-    const land = g.layer("land");
+    const pic = RM_PICS[o.look] ? pictureLoaded(RM_PICS[o.look]) : null;
     const F = frame({ span: g.meta.span, exag: 1.5, lo: H.min - 300, depth: 0.08 });
     const norm = (m) => (m - H.min) / (H.max - H.min);
     k.data = { look: o.look };
     const du = 1 / H.w;
     const mPerU = g.meta.span[0];
     const mPerV = g.meta.span[1];
-    addBlock(k, {
+    const grid = addGrid(k, {
       F,
       height: H.sample,
-      share: 0.86,
+      share: 0.84,
       kind: "band",
       channel: 0,
-      params: (c) => [norm(F.m(c.p[1])), 0.008],
+      params: (c) => [norm(c.m), 0.008],
+      pattern: false,
       color: (c) => {
-        const m = F.m(c.p[1]);
-        let col;
-        if (o.look === "photo") col = photo.sample(c.u, c.v);
-        else if (o.look === "land") col = land.sample(c.u, c.v);
-        else col = ramp(TINT, norm(m));
-        col = shade(col, (o.look === "photo" ? 0.95 : 0.8) * hill(c.n, 0.45) + 0.05);
+        const m = c.m;
+        let col = pic ? pic.sample(c.u, c.v) : ramp(TINT, norm(m));
+        if (c.wall) return shade(col, 0.6);
+        col = shade(col, (pic && o.look === "photo" ? 0.95 : 0.8) * hill(c.n, 0.45) + 0.05);
         if (o.contours !== false) {
           // A line every 100 m, heavier every 500 m, about as wide anywhere.
           const gx = (H.sample(c.u + du, c.v) - H.sample(c.u - du, c.v)) / (2 * du * mPerU);
           const gz = (H.sample(c.u, c.v + du) - H.sample(c.u, c.v - du)) / (2 * du * mPerV);
           const grad = Math.hypot(gx, gz);
           const near = (step) => {
-            const r = ((m % step) + step) % step;
-            return Math.min(r, step - r);
+            const rr = ((m % step) + step) % step;
+            return Math.min(rr, step - rr);
           };
-          const w = Math.max(2.5, 30 * grad);
-          if (near(500) < w * 1.4) return { c: shade(col, 0.42), keep: true };
-          if (near(100) < w) return { c: shade(col, 0.66), keep: true };
+          const w = Math.max(2.5, 22 * grad);
+          if (near(500) < w * 1.4) return shade(col, 0.42);
+          if (near(100) < w) return shade(col, 0.66);
         }
         return col;
       },
-      side: (m) => mix("#6b6258", "#8f857a", smoothstep(H.min - 300, H.max, m)),
     });
+    addGridSides(k, F, H.sample, { spacing: grid.spacing, side: (m) => mix("#6b6258", "#8f857a", smoothstep(H.min - 300, H.max, m)) }); // prettier-ignore
     // The streams: short streaks along each line, a little above the ground;
     // their glow runs downhill as the channel climbs.
     if (o.rivers !== false) {
@@ -988,33 +1068,36 @@ const RELIEF_MAP = {
           total += len;
           segs.push({ a, b, main: r.main, cum: total });
         }
+      void total;
       const on = (u, v, lift) => [F.x(u), F.y(H.sample(u, v)) + lift, F.z(v)];
-      k.cloud({ share: 0.06, size: 1 }, (rand) => {
-        const x = rand() * total;
-        let lo = 0;
-        let hi = segs.length - 1;
-        while (lo < hi) {
-          const mid = (lo + hi) >> 1;
-          if (segs[mid].cum < x) lo = mid + 1;
-          else hi = mid;
+      // Evenly spaced splats along every line, sized to the land's grid.
+      const pts = [];
+      for (const sg of segs) {
+        const pa = on(sg.a[0], sg.a[1], 0.003);
+        const pb = on(sg.b[0], sg.b[1], 0.003);
+        const len = vec.len(vec.sub(pb, pa));
+        const n = Math.max(1, Math.ceil(len / (grid.spacing * 0.55)));
+        const dir = vec.unit(vec.sub(pb, pa));
+        for (let i = 0; i < n; i++) {
+          const f = i / n;
+          const u = sg.a[0] + (sg.b[0] - sg.a[0]) * f;
+          const v = sg.a[1] + (sg.b[1] - sg.a[1]) * f;
+          pts.push({ p: on(u, v, 0.003), dir, main: sg.main, at: 1 - norm(H.sample(u, v)) });
         }
-        const sg = segs[lo];
-        const f = rand();
-        const u = sg.a[0] + (sg.b[0] - sg.a[0]) * f;
-        const v = sg.a[1] + (sg.b[1] - sg.a[1]) * f;
-        const p = on(u, v, 0.004);
-        const q = on(sg.b[0], sg.b[1], 0.004);
-        const pa = on(sg.a[0], sg.a[1], 0.004);
+      }
+      const base = () => k.baseSize || 0.01;
+      k.cloud({ count: (pts.length * 160000) / k.count, jitter: 0 }, (_r, i) => {
+        const e = pts[Math.min(pts.length - 1, i)];
         return {
-          p,
-          color: sg.main ? [0.2, 0.45, 0.85] : [0.25, 0.55, 0.9],
-          size: sg.main ? 0.75 : 0.42,
-          dir: vec.unit(vec.sub(q, pa)),
-          stretch: 2.2,
-          opacity: 0.95,
+          p: e.p,
+          n: [0, 1, 0],
+          flat: 0.2,
+          color: e.main ? [0.16, 0.4, 0.82] : [0.22, 0.52, 0.9],
+          size: (grid.spacing * (e.main ? 1.5 : 0.95)) / base(),
+          opacity: 1,
           kind: "band",
           channel: 1,
-          params: [1 - norm(H.sample(u, v)), 0.04],
+          params: [e.at, 0.04],
           pattern: false,
         };
       });
@@ -1079,7 +1162,8 @@ function loopPath(x0, z0, x1, z1) {
 
 const LIVING_CITY = {
   alive: true,
-  density: 1.3,
+  density: 2,
+  kernel: "sharp",
   controls: [{ key: "night", label: "Night", type: "toggle", default: 0, ease: 4.5 }],
   action: { key: "night", label: "Day or night" },
   drive(t, c, out, info) {
@@ -1276,6 +1360,7 @@ const LIVING_CITY = {
 // ---- Migration: white storks -----------------------------------------------------------------
 
 const SM_FILE = "assets/toys/stork-migration/migration.bin";
+const SM_PIC = "assets/toys/stork-migration/earth.jpg";
 const SM_T = 15.5;
 const SM_FLY = 0.035; // flying height above the map (recipe units)
 
@@ -1298,7 +1383,8 @@ export function birdAt(pts, hour) {
 
 const STORK_MIGRATION = {
   alive: false,
-  density: 1.3,
+  density: 2,
+  kernel: "sharp",
   credits: [
     {
       label: "Storks",
@@ -1309,12 +1395,13 @@ const STORK_MIGRATION = {
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
     },
+    CREDIT_BLUE_MARBLE,
     CREDIT_ETOPO,
   ],
   controls: [{ key: "fly", label: "Fly", type: "pulse", ease: SM_T }],
   action: { key: "fly", label: "Play the fall migration" },
   async prepare() {
-    await loadGeo(SM_FILE);
+    await Promise.all([loadGeo(SM_FILE), loadPicture(SM_PIC)]);
   },
   drive(t, c, out, info) {
     const d = info.data;
@@ -1350,27 +1437,16 @@ const STORK_MIGRATION = {
       const v = (n - lat) / (n - s);
       return [F.x(u), Math.max(F.y(0), F.y(H.sample(u, v))) + SM_FLY, F.z(v)];
     };
-    addBlock(k, {
+    // The map in true color (NASA Blue Marble Next Generation), on its relief.
+    const pic = pictureLoaded(SM_PIC);
+    const ground = (u, v) => Math.max(-500, H.sample(u, v));
+    const map = addGrid(k, {
       F,
-      height: (u, v) => Math.max(-500, H.sample(u, v)),
-      share: 0.66,
-      color: (c) => {
-        const m = H.sample(c.u, c.v);
-        let col;
-        if (m < 0) col = mix("#1d3f6e", "#3e7cb0", smoothstep(-3000, -50, m));
-        else
-          col = ramp(
-            ["#6b8f4e", "#a8a368", "#c2a477", "#9c8166", "#e8e4dc"],
-            clamp(m / 3500, 0, 1),
-          );
-        // The Sahara and the Arabian desert read as sand south of 31° N.
-        const lat = n - c.v * (n - s);
-        if (m >= 0 && lat < 31 && lat > 14)
-          col = mix(col, "#d9b98a", 0.7 * smoothstep(14, 20, lat));
-        return shade(col, 0.85 * hill(c.n, 0.4) + 0.1);
-      },
-      side: () => "#5a5248",
+      height: ground,
+      share: 0.62,
+      color: (c) => shade(pic.sample(c.u, c.v), (c.wall ? 0.6 : 0.95 * hill(c.n, 0.35)) + 0.18),
     });
+    addGridSides(k, F, ground, { spacing: map.spacing, side: () => "#4a443c" });
     // Trails: a line per bird along its fixes, appearing behind it as the
     // migration plays (the channel is the season's fraction).
     const palette = ["#ff8a3d", "#ffd23a", "#ff5a7a", "#7fd1ff", "#b78bff", "#7dff9a"];
@@ -1524,18 +1600,10 @@ function depthColor(d) {
   return mix("#4fd17a", "#3d7dff", clamp((d - 300) / 300, 0, 1));
 }
 
-function reliefColor(h, n, c) {
-  let col;
-  if (h < 0) col = mix("#0d2a57", "#3d7fb8", smoothstep(-6500, -150, h));
-  else if (h < 2500)
-    col = mix(mix("#5c8a43", "#9a9156", smoothstep(0, 900, h)), "#8d7660", smoothstep(900, 2500, h)); // prettier-ignore
-  else col = mix("#8d7660", "#e9ecef", smoothstep(2500, 5000, h));
-  const d = vec.dot(n, vec.unit([-0.4, 0.5, 0.75]));
-  return shade(col, 0.72 + 0.32 * Math.max(0, d) + 0.03 * c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30)); // prettier-ignore
-}
-
 const EARTHQUAKES = {
   alive: true,
+  density: 1.6,
+  kernel: "sharp",
   turntable: false,
   options: [
     {
@@ -1577,11 +1645,12 @@ const EARTHQUAKES = {
         license: "Public domain",
         licenseUrl: "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
       },
+      CREDIT_BLUE_MARBLE,
     ];
     return out;
   },
   async prepare(o) {
-    await loadGeo(EQ_DIR + "globe.bin");
+    await Promise.all([loadGeo(EQ_DIR + "globe.bin.gz"), loadPicture(EQ_DIR + "earth.jpg")]);
     if (!EQ.snapshot) EQ.snapshot = JSON.parse(await readText(EQ_DIR + "snapshot.json"));
     const feed = EQ_FEEDS[o.feed] ? o.feed : "week";
     const snap = EQ.snapshot.feeds[feed];
@@ -1607,7 +1676,8 @@ const EARTHQUAKES = {
     out.parts.globe = { angle: t * 0.08 };
   },
   build(k, o) {
-    const G = geoLoaded(EQ_DIR + "globe.bin").layer("height");
+    const G = geoLoaded(EQ_DIR + "globe.bin.gz").layer("height");
+    const earth = pictureLoaded(EQ_DIR + "earth.jpg");
     const S = EQ.shown;
     const globe = k.part("globe", { pivot: [0, 0, 0], axis: [0, 1, 0] });
     const R = 1;
@@ -1618,17 +1688,26 @@ const EARTHQUAKES = {
       const lat = 90 - 180 * v;
       return onGlobe(lon, lat, R + Math.max(0, hAt(lon, lat)) * bump);
     };
-    k.add(k.param(surf, { grid: 160 }), {
-      part: globe,
-      even: true,
-      share: 0.8,
-      flat: 0.25,
-      jitter: 0.01,
-      color: (c) => {
-        const lon = -180 + 360 * c.u;
-        const lat = 90 - 180 * c.v;
-        return reliefColor(hAt(lon, lat), vec.unit(c.p), c);
-      },
+    // Round 2: the Earth in true color (NASA Blue Marble Next Generation),
+    // one flat splat per point of an even (Fibonacci) sphere, sized to the
+    // spacing, lit from the front left; the relief raises the land a little.
+    const nPts = Math.round(0.8 * k.count);
+    const gold = Math.PI * (3 - Math.sqrt(5));
+    const spacing = Math.sqrt((4 * Math.PI) / nPts) * 1.05;
+    const LIGHT = vec.unit([-0.4, 0.5, 0.75]);
+    const base = () => k.baseSize || 0.01;
+    k.cloud({ count: (nPts * 160000) / k.count, jitter: 0 }, (_r, i) => {
+      const y = 1 - (2 * (i + 0.5)) / nPts;
+      const r = Math.sqrt(1 - y * y);
+      const th = gold * i;
+      const dir = [Math.cos(th) * r, y, Math.sin(th) * r];
+      // Back to lon/lat (the inverse of onGlobe).
+      const lat = (Math.asin(y) * 180) / Math.PI;
+      const lon = (((Math.atan2(dir[0], dir[2]) * 180) / Math.PI + EQ_FRONT + 540) % 360) - 180;
+      const h = hAt(lon, lat);
+      const col = earth.sample((lon + 180) / 360, (90 - lat) / 180);
+      const lit = 0.62 + 0.5 * Math.max(0, vec.dot(dir, LIGHT));
+      return { p: onGlobe(lon, lat, R + Math.max(0, h) * bump), n: dir, flat: 0.3, size: spacing / base(), color: shade(col, lit * 1.25), opacity: 1, part: globe }; // prettier-ignore
     });
     // The quakes: a dot each (bigger for a stronger quake, colored by
     // depth), flashing as the timeline passes its time.

@@ -5,6 +5,7 @@
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import zlib from "node:zlib";
 import { RECIPES, quakeRows, tideAt, birdAt } from "../src/packs/geo.js";
 import { parseGeo } from "../src/geo/data.js";
 import { buildRecipe } from "../src/kit.js";
@@ -38,7 +39,10 @@ async function build(id, options = {}) {
   return r.value;
 }
 
-const geo = (file) => parseGeo(new Uint8Array(fs.readFileSync(file)));
+const geo = (file) => {
+  const b = fs.readFileSync(file);
+  return parseGeo(new Uint8Array(file.endsWith(".gz") ? zlib.gunzipSync(b) : b));
+};
 
 test.describe("Earth and maps", () => {
   test("every toy is on the geo shelf, in labs, with help, a sound and a recipe", () => {
@@ -74,18 +78,18 @@ test.describe("Earth and maps", () => {
   });
 
   test("the snapshots hold real-looking data", () => {
-    const msh = geo("assets/toys/st-helens/terrain.bin");
+    const msh = geo("assets/toys/st-helens/terrain.bin.gz");
     // The summit was about 2,950 m before 1980 and is about 2,550 m now.
     expect(msh.layer("before").max).toBeGreaterThan(2850);
     expect(msh.layer("after").max).toBeLessThan(2600);
-    const sea = geo("assets/toys/sea-floor/terrain.bin");
+    const sea = geo("assets/toys/sea-floor/terrain.bin.gz");
     expect(sea.layer("height").min).toBeLessThan(-10000); // the Challenger Deep
-    const th = geo("assets/toys/tide-harbor/terrain.bin");
+    const th = geo("assets/toys/tide-harbor/terrain.bin.gz");
     const lv = Array.from(th.layer("tide").data);
     expect(Math.max(...lv) - Math.min(...lv)).toBeGreaterThan(3.5); // a spring tide
     expect(Math.abs(lv[0] - lv[lv.length - 1])).toBeLessThan(0.3); // a lunar day closes
     expect(tideAt(lv, 0)).toBeCloseTo(lv[0], 5);
-    const hu = geo("assets/toys/hurricane/storm.bin");
+    const hu = geo("assets/toys/hurricane/storm.bin.gz");
     expect(hu.meta.track[0].kt).toBe(70);
     expect(hu.meta.track[hu.meta.track.length - 1].kt).toBe(155);
     const sm = geo("assets/toys/stork-migration/migration.bin");
@@ -115,6 +119,17 @@ test.describe("Earth and maps", () => {
         expect(Number.isFinite(depth) && Number.isFinite(mag)).toBe(true);
       }
     }
+  });
+
+  test("round 2: every terrain toy is a grid of splats sized to its spacing, with its picture", async () => {
+    // The owner's notes of October 5, 2026: "please make sharper". Each sample
+    // is one splat on a regular grid (no random placement).
+    const ctx = await build("grand-canyon");
+    expect(ctx.kit.data.grid.spacing).toBeGreaterThan(0);
+    expect(ctx.kit.data.grid.pts).toBeGreaterThan(20000);
+    for (const id of IDS) expect(RECIPES[id].kernel, id).toBe("sharp");
+    for (const f of ["grand-canyon/color.jpg", "st-helens/color.jpg", "tide-harbor/color.jpg", "relief-map/color.jpg", "relief-map/land.jpg", "hurricane/color.jpg", "stork-migration/earth.jpg", "earthquakes/earth.jpg"]) // prettier-ignore
+      expect(fs.statSync(`assets/toys/${f}`).size, f).toBeGreaterThan(50000);
   });
 
   test("the feed reader keeps earthquakes with every number, in time order", () => {

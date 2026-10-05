@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import jpeg from "jpeg-js";
 import { PNG } from "pngjs";
+import zlib from "node:zlib";
 
 export const CACHE = ".cache/geo";
 fs.mkdirSync(CACHE, { recursive: true });
@@ -227,6 +228,12 @@ export async function imageryUsgs(name, bbox, w, h) {
   return decodeImage(await cached(`${name}-img-${w}x${h}.png`, url));
 }
 
+// NASA Blue Marble Next Generation (true color, public domain), through GIBS.
+export async function blueMarble(name, bbox, w, h) {
+  const url = "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?" + new URLSearchParams({ SERVICE: "WMS", VERSION: "1.1.1", REQUEST: "GetMap", LAYERS: "BlueMarble_NextGeneration", SRS: "EPSG:4326", BBOX: bbox.join(","), WIDTH: String(w), HEIGHT: String(h), FORMAT: "image/jpeg" }); // prettier-ignore
+  return decodeImage(await cached(`${name}-bmng-${w}x${h}.jpg`, url));
+}
+
 // Resample a grid to w x h (bilinear), filling no-data (< -1e4 or NaN) from neighbors.
 export function resample(grid, w, h) {
   const out = new Float32Array(w * h);
@@ -293,9 +300,21 @@ export function writeGeo(file, meta, arrays) {
       let mx = -Infinity;
       for (const v of a.data) ((mn = Math.min(mn, v)), (mx = Math.max(mx, v)));
       if (mx === mn) mx = mn + 1;
+      // Steps of 0.25 m (finer for a small range), each row stored as the
+      // differences from its previous sample: smooth land then zips well.
+      const step = Math.max(0.0001, Math.min(0.25, (mx - mn) / 65535));
+      const levels = Math.round((mx - mn) / step);
       const q = new Uint16Array(a.data.length);
-      a.data.forEach((v, i) => (q[i] = Math.round(((v - mn) / (mx - mn)) * 65535)));
-      Object.assign(entry, { min: +mn.toFixed(2), max: +mx.toFixed(2) });
+      for (let j = 0; j < a.h; j++) {
+        let prev = 0;
+        for (let i = 0; i < a.w; i++) {
+          const k = j * a.w + i;
+          const val = Math.round((a.data[k] - mn) / step);
+          q[k] = (val - prev) & 0xffff;
+          prev = val;
+        }
+      }
+      Object.assign(entry, { min: +mn.toFixed(3), max: +(mn + levels * step).toFixed(3), step, delta: true }); // prettier-ignore
       bytes = new Uint8Array(q.buffer);
     } else if (a.type === "rgb") {
       bytes = a.data;
@@ -315,9 +334,25 @@ export function writeGeo(file, meta, arrays) {
   const len = new Uint8Array(4);
   new DataView(len.buffer).setUint32(0, head.byteLength, true);
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, Buffer.concat([len, head, ...parts].map((p) => Buffer.from(p))));
+  const all = Buffer.concat([len, head, ...parts].map((p) => Buffer.from(p)));
+  fs.writeFileSync(file, file.endsWith(".gz") ? zlib.gzipSync(all, { level: 9 }) : all);
   const size = fs.statSync(file).size;
   console.log(`${file}: ${(size / 1024).toFixed(0)} KB`);
+}
+
+// An RGBA image (as decodeImage gives) resized to w x h and saved as a JPEG.
+export function writeJpeg(file, img, w, h, quality = 88) {
+  const data = new Uint8Array(w * h * 4);
+  for (let j = 0; j < h; j++)
+    for (let i = 0; i < w; i++) {
+      const x = Math.min(img.w - 1, Math.round((i / (w - 1)) * (img.w - 1)));
+      const y = Math.min(img.h - 1, Math.round((j / (h - 1)) * (img.h - 1)));
+      const o = (y * img.w + x) * img.ch;
+      data.set([img.data[o], img.data[o + 1], img.data[o + 2], 255], (j * w + i) * 4);
+    }
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, jpeg.encode({ data, width: w, height: h }, quality).data);
+  console.log(`${file}: ${(fs.statSync(file).size / 1024).toFixed(0)} KB`);
 }
 
 // Sample an RGBA image into an RGB byte grid of w x h.

@@ -2182,18 +2182,18 @@
   "geoData": [
     {
       "id": "grand-canyon-terrain",
-      "file": "assets/toys/grand-canyon/terrain.bin",
+      "file": "assets/toys/grand-canyon/terrain.bin.gz, assets/toys/grand-canyon/color.jpg",
       "toy": "grand-canyon",
       "name": "Grand Canyon heights (3DEP) and aerial imagery (The National Map)",
       "author": "U.S. Geological Survey; USDA Farm Service Agency (NAIP); NASA (Landsat)",
       "page": "https://www.usgs.gov/3d-elevation-program",
       "license": "Public domain",
       "checked": "October 5, 2026",
-      "note": "tools/geo-terrain.mjs: the 3DEP ImageServer and the USGSImageryOnly basemap, resampled to 192 x 192 heights and 320 x 320 colors."
+      "note": "tools/geo-terrain.mjs: the 3DEP ImageServer and the USGSImageryOnly basemap, round 2: 512 x 512 heights (gzipped, delta-coded) and a 1024 x 1024 JPEG of the imagery."
     },
     {
       "id": "st-helens-terrain",
-      "file": "assets/toys/st-helens/terrain.bin",
+      "file": "assets/toys/st-helens/terrain.bin.gz, assets/toys/st-helens/color.jpg",
       "toy": "st-helens",
       "name": "Mount St. Helens before 1980 (USGS pre-eruption DEM) and today (3DEP, imagery)",
       "author": "J. A. Bard and R. Phillips-Netherton, U.S. Geological Survey (doi:10.5066/P91W7C1L); U.S. Geological Survey (3DEP); USDA FSA (NAIP)",
@@ -2204,7 +2204,7 @@
     },
     {
       "id": "sea-floor-terrain",
-      "file": "assets/toys/sea-floor/terrain.bin",
+      "file": "assets/toys/sea-floor/terrain.bin.gz",
       "toy": "sea-floor",
       "name": "Mariana Trench relief (ETOPO1 bedrock)",
       "author": "NOAA National Centers for Environmental Information",
@@ -2215,7 +2215,7 @@
     },
     {
       "id": "tide-harbor-terrain",
-      "file": "assets/toys/tide-harbor/terrain.bin",
+      "file": "assets/toys/tide-harbor/terrain.bin.gz, assets/toys/tide-harbor/color.jpg",
       "toy": "tide-harbor",
       "name": "Bar Harbor heights (NCEI coastal DEMs), imagery and tide predictions (CO-OPS 8413320)",
       "author": "NOAA NCEI; NOAA CO-OPS; U.S. Geological Survey; USDA FSA (NAIP)",
@@ -2226,9 +2226,9 @@
     },
     {
       "id": "hurricane-polo",
-      "file": "assets/toys/hurricane/storm.bin",
+      "file": "assets/toys/hurricane/storm.bin.gz, assets/toys/hurricane/color.jpg",
       "toy": "hurricane",
-      "name": "Hurricane Polo (EP17, 2026): GOES-East band 13 at 18 UTC on September 21 and 22, the best track, Blue Marble and ETOPO1",
+      "name": "Hurricane Polo (EP17, 2026): GOES-East band 13 at 18 UTC on September 21 and 22, the best track, Blue Marble Next Generation and ETOPO1",
       "author": "NOAA NESDIS (GOES), NOAA NHC (best track), NASA Earth Observatory (Blue Marble, through NASA GIBS), NOAA NCEI (ETOPO1)",
       "page": "https://ftp.nhc.noaa.gov/atcf/btk/",
       "license": "Public domain",
@@ -2237,7 +2237,7 @@
     },
     {
       "id": "relief-map-terrain",
-      "file": "assets/toys/relief-map/terrain.bin",
+      "file": "assets/toys/relief-map/terrain.bin.gz, assets/toys/relief-map/color.jpg, assets/toys/relief-map/land.jpg",
       "toy": "relief-map",
       "name": "Yosemite Valley heights (3DEP), imagery, NLCD 2021 land cover and NHD streams",
       "author": "U.S. Geological Survey; MRLC consortium (NLCD); USDA FSA (NAIP)",
@@ -2270,7 +2270,7 @@
     },
     {
       "id": "earthquakes-globe",
-      "file": "assets/toys/earthquakes/globe.bin",
+      "file": "assets/toys/earthquakes/globe.bin.gz",
       "toy": "earthquakes",
       "name": "ETOPO1 global relief, 360 x 180",
       "author": "NOAA National Centers for Environmental Information",
@@ -2278,6 +2278,17 @@
       "license": "Public domain",
       "checked": "October 5, 2026",
       "note": "tools/geo-quakes.mjs."
+    },
+    {
+      "id": "blue-marble",
+      "file": "assets/toys/earthquakes/earth.jpg, assets/toys/stork-migration/earth.jpg, assets/toys/hurricane/color.jpg",
+      "toy": "earthquakes, stork-migration, hurricane",
+      "name": "Blue Marble: Next Generation (true color), through NASA GIBS",
+      "author": "NASA Earth Observatory",
+      "page": "https://visibleearth.nasa.gov/collection/1484/blue-marble",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "Round 2 (the owner: \"something more photoreal\"): tools/geo-quakes.mjs, geo-migration.mjs and geo-storm.mjs, through the GIBS WMS."
     }
   ]
 }
