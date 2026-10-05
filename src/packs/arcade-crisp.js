@@ -52,60 +52,70 @@ function rotate(q, v) {
   return add(add(v, mul(t, w)), cross([x, y, z], t));
 }
 
+// Cuts a length L into cells: a fine band at each end (wide enough to cover
+// the coarse cells' bleed, about a third of a cell) and coarse cells between,
+// or all fine when it is short. Returns [center, cell size] pairs. radial:
+// only the outer end gets a band (a disc's rim).
+function cuts(L, fine, coarse, radial = false) {
+  const band = Math.max(fine * 2, coarse * 0.35);
+  const ends = radial ? 1 : 2;
+  const out = [];
+  const run = (a, len, step) => {
+    const n = Math.max(1, Math.round(len / step));
+    const s = len / n;
+    for (let i = 0; i < n; i++) out.push([a + (i + 0.5) * s, s]);
+  };
+  if (coarse <= fine || L <= ends * band + coarse) {
+    run(0, L, fine);
+    return out;
+  }
+  const mid = L - ends * band;
+  if (!radial) run(0, band, fine);
+  run(radial ? 0 : band, mid, coarse);
+  run(radial ? mid : band + mid, band, fine);
+  return out;
+}
+
 export class Crisp {
   constructor({ fine = 0.006, coarse = 0.03 } = {}) {
     this.fine = fine;
     this.coarse = coarse;
     this.pts = [];
+    this.opacity = 1; // a shape's opacity: its option `opacity`
+    for (const name of ["rect", "box", "line", "sphere", "disc", "cylinder"]) {
+      const fn = this[name].bind(this);
+      this[name] = (...args) => {
+        const o = args.at(-1);
+        this.opacity = (o && typeof o === "object" && !Array.isArray(o) && o.opacity) ?? 1;
+        fn(...args);
+        this.opacity = 1;
+      };
+    }
   }
 
-  splat(p, color, sx, sy, sz, rot, opacity = 1) {
-    this.pts.push({ p, c: [color[0], color[1], color[2], opacity], s: [sx, sy, sz], r: rot });
-  }
-
-  // A grid of splats over the parallelogram o + a·u + b·v (a in 0..w, b in
-  // 0..h), facing n, about su apart along u and sv along v.
-  grid(o, u, v, w, h, n, su, sv, color, rot) {
-    const nx = Math.max(1, Math.round(w / su));
-    const ny = Math.max(1, Math.round(h / sv));
-    const cx = w / nx;
-    const cy = h / ny;
-    const t = Math.min(cx, cy) * THIN;
-    for (let j = 0; j < ny; j++)
-      for (let i = 0; i < nx; i++) {
-        const p = add(o, add(mul(u, (i + 0.5) * cx), mul(v, (j + 0.5) * cy)));
-        this.splat(p, color(p, n), cx * K, cy * K, t, rot);
-      }
+  splat(p, color, sx, sy, sz, rot) {
+    const a = color[3] ?? this.opacity;
+    this.pts.push({ p, c: [color[0], color[1], color[2], a], s: [sx, sy, sz], r: rot });
   }
 
   // A flat face: the rectangle centered at c with sides w along u and h
-  // along v (unit vectors), facing n. Coarse inside, fine along its edges.
+  // along v (unit vectors), facing n. Each side is cut into a fine band at
+  // each end and coarse cells between (cuts()), and the face is the grid of
+  // both: coarse in the middle, fine splats along every edge (long and thin,
+  // laid along it) and fine at the corners.
   face(c, u, v, w, h, n, colorIn, o = {}) {
     const color = typeof colorIn === "function" ? colorIn : () => colorIn;
     const fine = o.fine ?? this.fine;
     const coarse = o.coarse ?? this.coarse;
     const rot = frame(u, n);
     const corner = sub(c, add(mul(u, w / 2), mul(v, h / 2)));
-    // The coarse splats bleed about a third of a cell past their own; a
-    // fine band half a coarse cell wide covers that. An edge needs the fine
-    // step only across it, so the band's splats are long and thin, laid
-    // along the edge (up to 2.5 fine steps long).
-    const band = Math.min(coarse * 0.5, w / 2, h / 2);
-    const along = Math.max(fine, Math.min(coarse, fine * 2.5));
-    const thinU = w <= 2 * band + fine || coarse <= fine;
-    const thinV = h <= 2 * band + fine || coarse <= fine;
-    if (thinU || thinV) {
-      // a narrow face (a rail's top, a line): fine across, longer along
-      this.grid(corner, u, v, w, h, n, thinU ? fine : along, thinV ? fine : along, color, rot);
-      return;
-    }
-    // the middle, coarse
-    this.grid(add(corner, add(mul(u, band), mul(v, band))), u, v, w - 2 * band, h - 2 * band, n, coarse, coarse, color, rot); // prettier-ignore
-    // the bands: bottom and top full width, the sides between
-    this.grid(corner, u, v, w, band, n, along, fine, color, rot);
-    this.grid(add(corner, mul(v, h - band)), u, v, w, band, n, along, fine, color, rot);
-    this.grid(add(corner, mul(v, band)), u, v, band, h - 2 * band, n, fine, along, color, rot);
-    this.grid(add(corner, add(mul(u, w - band), mul(v, band))), u, v, band, h - 2 * band, n, fine, along, color, rot); // prettier-ignore
+    const cu = cuts(w, fine, coarse);
+    const cv = cuts(h, fine, coarse);
+    for (const [y, sy] of cv)
+      for (const [x, sx] of cu) {
+        const p = add(corner, add(mul(u, x), mul(v, y)));
+        this.splat(p, color(p, n), sx * K, sy * K, Math.min(sx, sy) * THIN, rot);
+      }
   }
 
   // A rectangle in the xy plane facing +z (and its back, with back: true).
@@ -170,59 +180,55 @@ export class Crisp {
   disc(r, o = {}) {
     const c = o.pos || [0, 0, 0];
     const color = typeof o.color === "function" ? o.color : () => o.color || [1, 1, 1];
+    this.rings(c, [1, 0, 0], [0, 1, 0], [0, 0, 1], r, color, o);
+  }
+
+  // Rings of splats filling a disc of radius r around c in the plane of e1
+  // and e2, facing n.
+  rings(c, e1, e2, n, r, color, o = {}) {
     const fine = o.fine ?? this.fine;
-    const nr = Math.max(1, Math.round(r / fine));
-    const dr = r / nr;
-    for (let k = 0; k < nr; k++) {
-      const rad = (k + 0.5) * dr;
-      const m = Math.max(1, Math.round((2 * Math.PI * rad) / dr));
+    const coarse = o.coarse ?? this.coarse;
+    for (const [rad, dr] of cuts(r, fine, coarse, true)) {
+      const m =
+        rad < dr * 0.75
+          ? 1
+          : Math.max(3, Math.round((2 * Math.PI * rad) / Math.min(dr * 2.5, coarse)));
+      const da = (2 * Math.PI * rad) / m;
       for (let i = 0; i < m; i++) {
-        const a = (i / m) * Math.PI * 2;
-        const p = add(c, [Math.cos(a) * rad, Math.sin(a) * rad, 0]);
-        this.splat(p, color(p, [0, 0, 1]), dr * K, dr * K, dr * THIN, qaxis([0, 0, 1], a));
+        const a = ((i + 0.5) / m) * Math.PI * 2;
+        const dir = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
+        const p = add(c, mul(dir, rad));
+        const tan = m === 1 ? e1 : add(mul(e1, -Math.sin(a)), mul(e2, Math.cos(a)));
+        const sz = m === 1 ? dr : da;
+        this.splat(p, color(p, n), sz * K, dr * K, Math.min(sz, dr) * THIN, frame(tan, n));
       }
     }
   }
 
   // A cylinder of radius r and length l along axis (unit), centered at pos,
-  // with its two caps.
+  // with its two caps (caps: false leaves them off).
   cylinder(r, l, o = {}) {
     const c = o.pos || [0, 0, 0];
     const ax = norm(o.axis || [0, 0, 1]);
     const color = typeof o.color === "function" ? o.color : () => o.color || [1, 1, 1];
     const fine = o.fine ?? this.fine;
+    const coarse = o.coarse ?? this.coarse;
     const ref = Math.abs(ax[0]) < 0.9 ? [1, 0, 0] : [0, 1, 0];
     const e1 = norm(cross(ax, ref));
     const e2 = cross(ax, e1);
-    const m = Math.max(8, Math.round((2 * Math.PI * r) / fine));
-    const nl = Math.max(1, Math.round(l / fine));
+    const m = Math.max(8, Math.round((2 * Math.PI * r) / (fine * 2)));
     const ca = (2 * Math.PI * r) / m;
-    const cl = l / nl;
     for (let i = 0; i < m; i++) {
       const a = ((i + 0.5) / m) * Math.PI * 2;
       const nn = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
       const rot = frame(ax, nn);
-      for (let j = 0; j < nl; j++) {
-        const p = add(c, add(mul(nn, r), mul(ax, (j + 0.5) * cl - l / 2)));
+      for (const [x, cl] of cuts(l, fine, coarse)) {
+        const p = add(c, add(mul(nn, r), mul(ax, x - l / 2)));
         this.splat(p, color(p, nn), cl * K, ca * K, Math.min(ca, cl) * THIN, rot);
       }
     }
     if (o.caps === false) return;
-    for (const s of [-1, 1]) {
-      const nn = mul(ax, s);
-      const nr = Math.max(1, Math.round(r / fine));
-      const dr = r / nr;
-      for (let k = 0; k < nr; k++) {
-        const rad = (k + 0.5) * dr;
-        const mm = Math.max(1, Math.round((2 * Math.PI * rad) / dr));
-        for (let i = 0; i < mm; i++) {
-          const a = (i / mm) * Math.PI * 2;
-          const dir = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
-          const p = add(c, add(mul(ax, (s * l) / 2), mul(dir, rad)));
-          this.splat(p, color(p, nn), dr * K, dr * K, dr * THIN, frame(dir, nn));
-        }
-      }
-    }
+    for (const s of [-1, 1]) this.rings(add(c, mul(ax, (s * l) / 2)), e1, s > 0 ? e2 : mul(e2, -1), mul(ax, s), r, color, o); // prettier-ignore
   }
 
   model() {

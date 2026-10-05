@@ -15,7 +15,7 @@
 // World units: the toy's own (the board is about 1.7 by 2.1).
 
 // The board (inside the rails); a game made from a page sets its own.
-import { evenCylinder } from "./even.js";
+import { crispModel } from "./arcade-crisp.js";
 
 const BOARD = { W: 1.6, H: 2.0, TOP: 1.0, PADDLE_Y: -0.86 };
 const BALL_R = 0.032;
@@ -75,100 +75,102 @@ export class Shardball {
 
   makeModels() {
     const { kitModel, recolor } = this.api;
-    const base = kitModel(
-      (k) => {
-        const [w, h, d] = BRICK;
-        k.add(k.box(w * 0.94, h * 0.86, d), {
-          even: true,
-          flat: 0.2,
-          color: (c) => {
-            // Glazed tile: a lit top edge, darker sides, a soft sheen.
-            const n = c.n;
-            let f = 0.92 + 0.12 * n[1] + 0.05 * n[2];
-            const edge = Math.max(Math.abs(c.lp[0]) / (w * 0.47), Math.abs(c.lp[1]) / (h * 0.43));
-            if (edge > 0.86 && n[2] > 0.5) f *= 1.12;
-            return [f, f, f];
-          },
-        });
-      },
-      { count: this.api.profile === "low" ? 260 : this.api.profile === "mid" ? 380 : 560 },
-    );
-    const bricks = {};
-    ROW_COLORS.forEach((col, r) => {
-      const c = hex(col);
-      bricks[`glaze${r}`] = recolor(base, (v) => [c[0] * v[0], c[1] * v[1], c[2] * v[2], 1]);
-      const s = mix3(c, [0.55, 0.53, 0.5], 0.72);
-      bricks[`stone${r}`] = recolor(base, (v, i, p) => {
-        // Stone: grainy gray with a hint of the row's color.
-        const g =
-          0.85 + 0.25 * Math.sin(p[0] * 210 + p[1] * 330) * Math.sin(p[1] * 170 - p[0] * 90);
-        return [s[0] * v[0] * g, s[1] * v[1] * g, s[2] * v[2] * g, 1];
-      });
-    });
-    const paddle = kitModel(
-      (k) => {
-        k.add(k.roundedBox(0.3, 0.05, 0.11, 4), {
-          even: true,
-          flat: 0.3,
-          color: (c) => {
-            const f = 0.75 + 0.3 * c.n[1] + 0.12 * c.n[2];
-            const stripe = Math.abs(c.lp[0]) > 0.11 ? [0.95, 0.45, 0.2] : [0.62, 0.72, 0.85];
+    const prof = this.api.profile;
+    // Crisp grids (src/packs/arcade-crisp.js): straight brick edges.
+    const fine = prof === "low" ? 0.006 : 0.004;
+    const opt = { fine, coarse: fine * 4 };
+    // A brick of each kind and row; the dome builds its rows' bricks at their
+    // size there (mx, my times the board's) and only ever scales them down,
+    // so their splats never spread apart.
+    const cache = new Map();
+    const brick = (kind, r, mx = 1, my = 1) => {
+      const key = `${kind}${r}:${mx.toFixed(2)}:${my.toFixed(2)}`;
+      if (cache.has(key)) return cache.get(key);
+      const [bw, bh, bd] = [BRICK[0] * 0.94 * mx, BRICK[1] * 0.86 * my, BRICK[2]];
+      const base = crispModel(
+        (c) =>
+          c.box(bw, bh, bd, {
+            faces: "xXyYZ",
+            color: (p, n) => {
+              // Glazed tile: a lit top edge, darker sides, a soft sheen.
+              let f = 0.92 + 0.12 * n[1] + 0.05 * n[2];
+              const edge = Math.max(Math.abs(p[0]) / (bw / 2), Math.abs(p[1]) / (bh / 2));
+              if (edge > 0.86 && n[2] > 0.5) f *= 1.12;
+              return [f, f, f];
+            },
+          }),
+        opt,
+      );
+      const c = hex(ROW_COLORS[r]);
+      const st = mix3(c, [0.55, 0.53, 0.5], 0.72);
+      const m =
+        kind === "stone"
+          ? recolor(base, (v, i, p) => {
+              // Stone: grainy gray with a hint of the row's color.
+              const g =
+                0.85 + 0.25 * Math.sin(p[0] * 210 + p[1] * 330) * Math.sin(p[1] * 170 - p[0] * 90);
+              return [st[0] * v[0] * g, st[1] * v[1] * g, st[2] * v[2] * g, 1];
+            })
+          : recolor(base, (v) => [c[0] * v[0], c[1] * v[1], c[2] * v[2], 1]);
+      cache.set(key, m);
+      return m;
+    };
+    const paddle = crispModel(
+      (c) =>
+        c.box(0.3, 0.05, 0.11, {
+          color: (p, n) => {
+            const f = 0.75 + 0.3 * n[1] + 0.12 * n[2];
+            const stripe = Math.abs(p[0]) > 0.11 ? [0.95, 0.45, 0.2] : [0.62, 0.72, 0.85];
             return stripe.map((v) => v * f);
           },
-        });
-      },
-      { count: 700 },
+        }),
+      opt,
     );
-    const dish = kitModel(
-      (k) => {
-        k.add(evenCylinder(0.2, 0.2, 0.035, true), {
-          even: true,
-          flat: 0.3,
-          color: (c) => {
-            const f = 0.75 + 0.3 * c.n[1];
-            const rr = Math.hypot(c.lp[0], c.lp[2]);
-            const ring = rr > 0.15 ? [0.95, 0.45, 0.2] : [0.62, 0.72, 0.85];
+    const dish = crispModel(
+      (c) =>
+        c.cylinder(0.2, 0.035, {
+          axis: [0, 1, 0],
+          color: (p, n) => {
+            const f = 0.75 + 0.3 * n[1];
+            const ring = Math.hypot(p[0], p[2]) > 0.15 ? [0.95, 0.45, 0.2] : [0.62, 0.72, 0.85];
             return ring.map((v) => v * f);
           },
-        });
-      },
-      { count: 900 },
+        }),
+      opt,
     );
-    const ball = kitModel(
-      (k) => {
-        k.add(k.sphere(BALL_R), {
-          even: true,
-          flat: 0.5,
-          color: (c) => {
-            const l = Math.max(0, c.n[0] * -0.3 + c.n[1] * 0.7 + c.n[2] * 0.6);
+    const ball = crispModel(
+      (c) =>
+        c.sphere(BALL_R, {
+          step: BALL_R / 7,
+          color: (p, n) => {
+            const l = Math.max(0, n[0] * -0.3 + n[1] * 0.7 + n[2] * 0.6);
             const f = 0.78 + 0.25 * l + 0.4 * Math.pow(l, 12);
             return [f, f * 0.98, f * 0.94];
           },
-        });
-      },
-      { count: 220 },
+        }),
+      opt,
     );
-    const shadow = kitModel(
-      (k) => {
-        k.add(k.disc(BALL_R * 1.3), { even: true, flat: 0.1, opacity: 0.45, color: () => [0.05, 0.05, 0.08] }); // prettier-ignore
-      },
-      { count: 60 },
-    );
-    const rail = kitModel(
-      (k) => {
-        // A rail of dark wood, 1 unit long (scaled along x).
-        k.add(k.box(1, 0.04, 0.12), {
-          even: true,
-          flat: 0.25,
-          color: (c) => {
-            const grain = 0.88 + 0.12 * Math.sin(c.lp[0] * 90 + Math.sin(c.lp[0] * 13) * 2);
-            const f = (0.85 + 0.15 * c.n[1] + 0.06 * c.n[2]) * grain;
-            return [0.42 * f, 0.28 * f, 0.18 * f];
-          },
-        });
-      },
-      { count: this.api.profile === "low" ? 1000 : 2000 },
-    );
+    // The dome's ball shadow: a soft dark disc, lying flat (facing +y).
+    const shadow = crispModel((c) => c.disc(BALL_R * 1.3, { opacity: 0.45, color: [0.05, 0.05, 0.08] }), { fine: BALL_R / 4 }); // prettier-ignore
+    for (let i = 0; i < shadow.n; i++) {
+      const p = shadow.pos.subarray(i * 3, i * 3 + 3);
+      [p[1], p[2]] = [p[2], -p[1]];
+      shadow.rot.set(this.q.qmul(this.q.qaxis([1, 0, 0], -Math.PI / 2), Array.from(shadow.rot.subarray(i * 4, i * 4 + 4))), i * 4); // prettier-ignore
+    }
+    // Rails of dark wood, each built at its own length (a stretched one
+    // would smear its splats).
+    const rail = (len) =>
+      crispModel(
+        (c) =>
+          c.box(len, 0.04, 0.12, {
+            color: (p, n) => {
+              const grain = 0.88 + 0.12 * Math.sin(p[0] * 90 + Math.sin(p[0] * 13) * 2);
+              const f = (0.85 + 0.15 * n[1] + 0.06 * n[2]) * grain;
+              return [0.42 * f, 0.28 * f, 0.18 * f];
+            },
+          }),
+        { fine, coarse: 0.04 },
+      );
     // The dome's floor: a dotted rim where the sphere meets the dish's
     // level, and fainter rings inside it, so the bowl reads in depth.
     const floor = kitModel(
@@ -191,7 +193,9 @@ export class Shardball {
       },
       { count: 900 },
     );
-    return { bricks, paddle, dish, ball, shadow, rail, floor };
+    const { W, H } = this.geo;
+    const rails = { side: rail(H + 0.08), top: rail(W + 0.08) };
+    return { brick, paddle, dish, ball, shadow, rails, floor };
   }
 
   // ---- Game ----------------------------------------------------------------------
@@ -213,7 +217,7 @@ export class Shardball {
         { pos: [W / 2 + 0.02, 0, 0], quat: this.q.qaxis([0, 0, 1], Math.PI / 2), len: H + 0.08 },
         { pos: [0, TOP + 0.02, 0], quat: [0, 0, 0, 1], len: W + 0.08 },
       ]) {
-        r.sprite = s.add(this.models.rail, { pos: r.pos, quat: r.quat, scale: [r.len, 1, 1] });
+        r.sprite = s.add(r.len === W + 0.08 ? this.models.rails.top : this.models.rails.side, { pos: r.pos, quat: r.quat }); // prettier-ignore
         this.rails.push(r);
       }
     }
@@ -242,7 +246,12 @@ export class Shardball {
         const x = -W / 2 + gx * (c + 0.5);
         const y = TOP - 0.2 - r * 0.075;
         const b = { c, r, kind, hits: KINDS[kind].hits, x, y, w: BRICK[0], h: BRICK[1], d: BRICK[2], alive: true }; // prettier-ignore
-        b.sprite = this.api.sprites.add(this.models.bricks[`${kind}${r}`]);
+        if (this.style === "dome") {
+          const sx = this.domePose(b).scale[0];
+          b.mscale = [Math.max(1, sx), 1.25, 1];
+        }
+        const ms = b.mscale || [1, 1, 1];
+        b.sprite = this.api.sprites.add(this.models.brick(kind, r, ms[0], ms[1]));
         this.bricks.push(b);
       }
   }
@@ -662,7 +671,8 @@ export class Shardball {
         const d = (br.dome = this.domePose(br));
         s.pos = br.x === undefined ? d.pos : lerp3([br.x, br.y, 0], d.pos, view);
         s.quat = q.qslerp([0, 0, 0, 1], d.quat, view);
-        s.scale = lerp3([1, 1, 0.25], d.scale, view);
+        const ms = br.mscale || [1, 1, 1];
+        s.scale = lerp3([1, 1, 0.25], d.scale, view).map((v, i) => v / ms[i]);
         s.fade = 1;
       }
     }
@@ -672,12 +682,12 @@ export class Shardball {
       if (flat) {
         s.pos = q.qrot(M, r.pos);
         s.quat = q.qmul(M, r.quat);
-        s.scale = [r.len, 1, lerp(0.4, 1.3, view)];
+        s.scale = [1, 1, lerp(0.4, 1.3, view)];
         s.fade = 1;
       } else {
         s.pos = r.pos;
         s.quat = r.quat;
-        s.scale = [r.len, 1, 0.4];
+        s.scale = [1, 1, 0.4];
         s.fade = clamp(1 - view * 2, 0, 1);
       }
     }

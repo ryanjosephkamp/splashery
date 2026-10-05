@@ -233,6 +233,7 @@ export const RECIPES = {
         pad: "Stick or D-pad to steer; A launches.",
         short: "← → steer · Space launch · V for 3D",
       },
+      slots: { high: 80000, mid: 60000, low: 36000 }, // crisp bricks
       create: async (api) => (await import("./arcade-shardball.js")).createShardball(api),
     },
   },

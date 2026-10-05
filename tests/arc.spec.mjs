@@ -63,7 +63,8 @@ test("Shardball: the ball bounces off the paddle, and a broken brick shatters in
   // Every piece is a solid chunk (many splats), and they fall.
   for (const p of shards) expect(p.n).toBeGreaterThan(8);
   const y0 = shards.map((p) => p.y);
-  await run(page, 0.4);
+  // (they burst away from the ball first, then fall)
+  await run(page, 1);
   const y1 = await read(page, () =>
     window.__arc.game.shards[0]?.sprite.pieces.map((p) => p.pos[1]),
   );
