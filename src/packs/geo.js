@@ -243,6 +243,37 @@ function gnoise(x, y, seed = 0) {
   return (a + (b - a) * sy) * 2 - 1;
 }
 
+// A flat panel of square pixels facing +Z, one splat each on a regular grid, for crisp text and
+// charts (a randomly sampled surface blurs a one-pixel line). (x0, y0) is the top-left corner;
+// color(x, y) gives a pixel's color at its center; extra(x, y) adds fields (part, kind ...).
+// place(p) moves a point of the panel's plane where it goes (a panel leaning back), n its normal.
+function pixelPanel(k, { x0, y0, z, w, h, px, color, extra, place = (p) => p, n = [0, 0, 1] }) {
+  const nx = Math.round(w / px);
+  const ny = Math.round(h / px);
+  const base = () => k.baseSize || 0.01;
+  k.cloud({ count: (nx * ny * 160000) / k.count, jitter: 0 }, (_r, i) => {
+    const x = x0 + ((i % nx) + 0.5) * px;
+    const y = y0 - (Math.floor(i / nx) + 0.5) * px;
+    return { p: place([x, y, z]), n, flat: 0.1, size: (px * 1.05) / base(), color: color(x, y), opacity: 1, pattern: false, ...(extra ? extra(x, y) : {}) }; // prettier-ignore
+  });
+}
+
+// A crisp round dot (a sunflower of splats) with a light rim, facing +Z.
+function dot(k, { at, r, color, rim = "#f6f1e4", extra, n: nrm = [0, 0, 1] }) {
+  const u = vec.unit(vec.cross(Math.abs(nrm[1]) > 0.9 ? [1, 0, 0] : [0, 1, 0], nrm));
+  const v = vec.cross(nrm, u);
+  const n = 90;
+  const base = () => k.baseSize || 0.01;
+  k.cloud({ count: (n * 160000) / k.count, jitter: 0 }, (_r, i) => {
+    const rr = r * Math.sqrt((i + 0.5) / n);
+    const a = i * 2.399963;
+    const edge = rr > r * 0.78;
+    const c = Math.cos(a) * rr;
+    const s = Math.sin(a) * rr;
+    return { p: [at[0] + u[0] * c + v[0] * s, at[1] + u[1] * c + v[1] * s, at[2] + u[2] * c + v[2] * s], n: nrm, flat: 0.1, size: (r * 1.9) / Math.sqrt(n) / base(), color: edge ? rim : color, opacity: 1, pattern: false, ...(extra || {}) }; // prettier-ignore
+  });
+}
+
 // ---- Grand Canyon ------------------------------------------------------------------------
 
 const GC_FILE = "assets/toys/grand-canyon/terrain.bin.gz";
@@ -642,6 +673,7 @@ const TIDE_HARBOR = {
     // The marker on the plaque's tide curve.
     out.tokens = [{ base: d.plot.at(0, d.levels[0]), offset: vec.sub(d.plot.at(mk, tideAt(d.levels, mk)), d.plot.at(0, d.levels[0])) }]; // prettier-ignore
     sortWhileMoving(out, d, s, c.day > 0 && s < TH_T - 0.1, 0.6);
+    resortWhileMoving(out, d, s, c.day > 0 && s < TH_T - 0.1, 0.6);
   },
   build(k) {
     const g = geoLoaded(TH_FILE);
@@ -703,43 +735,56 @@ const TIDE_HARBOR = {
       k.add(evenCylinder(0.0012, 0.0012, 0.05), { part, pos: put([0.006, 0.032, 0]), color: "#cfc8b8", share: 0.0008, flat: 0.4 }); // prettier-ignore
       return { h };
     });
-    // The plaque: the day's tide curve, with high and low marked.
+    // The tide meter: the day's tide curve on a chart of square pixels (crisp at phone size),
+    // the water under the curve filled, lines every six hours and at mean sea level, and the
+    // hours written under it. A dot rides the curve through the day.
     const pw = 1.4;
     const ph = 0.22;
     const pz = F.z(1) + 0.18;
     const py = F.bottom - 0.02;
+    const PX = 0.004;
+    // The meter leans back to face the viewer, who looks down on the harbor.
+    const LEAN = 0.6;
+    const lean = ([x, y, z]) => [x, py - (py - y) * Math.cos(LEAN), z + (py - y) * Math.sin(LEAN)]; // prettier-ignore
+    const leanN = [0, Math.sin(LEAN), Math.cos(LEAN)];
+    const flatAt = (f, m) => [-pw / 2 + 0.05 + f * (pw - 0.1), py - ph + 0.03 + ((m - low) / (high - low)) * (ph - 0.06), pz]; // prettier-ignore
     const plot = {
-      at: (f, m) => [-pw / 2 + 0.05 + f * (pw - 0.1), py - ph / 2 + 0.03 + ((m - low) / (high - low)) * (ph - 0.06), pz + 0.004], // prettier-ignore
+      at: (f, m) => vec.add(lean(flatAt(f, m)), vec.mul(leanN, 0.004)),
     };
-    k.add(
-      k.param((u, v) => [(u - 0.5) * pw, py - v * ph, pz], { grid: 24 }),
-      {
-        even: true,
-        share: 0.025,
-        flat: 0.1,
-        color: (c) => {
-          const f = (c.p[0] + pw / 2 - 0.05) / (pw - 0.1);
-          const hour = f * 24.9;
-          const tick =
-            f >= 0 &&
-            f <= 1 &&
-            Math.abs(hour - Math.round(hour)) < 0.06 &&
-            Math.round(hour) % 6 === 0;
-          const mid = Math.abs(c.p[1] - plot.at(0, 0)[1]) < 0.0025;
-          return { c: tick || mid ? [0.33, 0.36, 0.4] : [0.13, 0.15, 0.18], keep: true };
-        },
+    const hours = ["0H", "6H", "12H", "18H", "24H"];
+    const LH = 0.06; // the labels' strip under the chart
+    pixelPanel(k, {
+      x0: -pw / 2,
+      y0: py,
+      z: pz,
+      w: pw,
+      h: ph + LH,
+      px: PX,
+      place: lean,
+      n: leanN,
+      color: (x, y) => {
+        const f = (x + pw / 2 - 0.05) / (pw - 0.1);
+        if (y < py - ph) {
+          // An hour label, centered under its line, in 2 x 2 pixel letters.
+          for (let j = 0; j < hours.length; j++) {
+            const hx = flatAt((j * 6) / 24.9, 0)[0];
+            const s = (x - hx) / (2 * PX) + (hours[j].length * 6 - 1) / 2;
+            if (inked([hours[j]], s, (py - ph - 0.012 - y) / (2 * PX))) return [0.78, 0.8, 0.82];
+          }
+          return [0.09, 0.1, 0.12];
+        }
+        if (f < 0 || f > 1) return [0.09, 0.1, 0.12];
+        const cy = flatAt(f, tideAt(levels, f))[1];
+        if (Math.abs(y - cy) < PX * 0.9) return [0.62, 0.9, 0.96];
+        const hour = f * 24.9;
+        const grid = Math.abs(hour - 6 * Math.round(hour / 6)) * ((pw - 0.1) / 24.9) < PX * 0.5;
+        const mean = Math.abs(y - flatAt(0, 0)[1]) < PX * 0.5;
+        if (y < cy) return grid || mean ? [0.24, 0.42, 0.48] : [0.13, 0.28, 0.34];
+        return grid || mean ? [0.3, 0.33, 0.37] : [0.11, 0.12, 0.15];
       },
-    );
-    k.add(
-      k.tube((tt) => plot.at(tt, tideAt(levels, tt)), 0.0028),
-      { share: 0.01, color: "#7fc3d4", pattern: false, stretch: 2 },
-    );
-    const m0 = plot.at(0, levels[0]);
-    k.cloud({ share: 0.003, size: 1 }, (rand) => {
-      const a = rand() * Math.PI * 2;
-      const r = Math.sqrt(rand()) * 0.02;
-      return { p: [m0[0] + Math.cos(a) * r, m0[1] + Math.sin(a) * r, m0[2] + 0.002], n: [0, 0, 1], color: "#ffd25a", kind: "token", params: [0, 0], pattern: false }; // prettier-ignore
     });
+    const m0 = vec.add(plot.at(0, levels[0]), vec.mul(leanN, 0.002));
+    dot(k, { at: m0, n: leanN, r: 0.014, color: "#ffd25a", extra: { kind: "token", params: [0, 0] } }); // prettier-ignore
     k.data = { levels, low, k: F.k, boats, plot };
   },
 };
@@ -1556,7 +1601,7 @@ const EARTHQUAKES = {
     // The timeline: 0.6 s in, the quakes flash one by one over 8 s.
     const tl = c.play > 0 ? clamp((s - 0.6) / 8, 0, 1.08) : 0;
     out.morph = [tl, 0, 0, 0];
-    out.glow = [1, 0.97, 0.85, 2.2];
+    out.glow = [1, 0.97, 0.85, c.play > 0 ? 2.2 : 0]; // no glow at rest: crisp dots
     out.parts.globe = { angle: t * 0.08 };
   },
   build(k, o) {
@@ -1575,7 +1620,8 @@ const EARTHQUAKES = {
     // Round 2: the Earth in true color (NASA Blue Marble Next Generation),
     // one flat splat per point of an even (Fibonacci) sphere, sized to the
     // spacing, lit from the front left; the relief raises the land a little.
-    const nPts = Math.round(0.8 * k.count);
+    // Round 3 ("still needs to be sharper"): about one point per picture pixel at the equator.
+    const nPts = Math.round(1.8 * k.count);
     const gold = Math.PI * (3 - Math.sqrt(5));
     const spacing = Math.sqrt((4 * Math.PI) / nPts) * 1.05;
     const LIGHT = vec.unit([-0.4, 0.5, 0.75]);
@@ -1589,9 +1635,20 @@ const EARTHQUAKES = {
       const lat = (Math.asin(y) * 180) / Math.PI;
       const lon = (((Math.atan2(dir[0], dir[2]) * 180) / Math.PI + EQ_FRONT + 540) % 360) - 180;
       const h = hAt(lon, lat);
-      const col = earth.sample((lon + 180) / 360, (90 - lat) / 180);
+      // The deep ocean a little bluer than the picture's near-black, as in photographs from orbit.
+      const pic = earth.sample((lon + 180) / 360, (90 - lat) / 180);
+      const col = h < 0 ? mix(pic, "#163a6a", 0.22) : pic;
       const lit = 0.62 + 0.5 * Math.max(0, vec.dot(dir, LIGHT));
-      return { p: onGlobe(lon, lat, R + Math.max(0, h) * bump), n: dir, flat: 0.3, size: spacing / base(), color: shade(col, lit * 1.25), opacity: 1, part: globe }; // prettier-ignore
+      return { p: onGlobe(lon, lat, R + Math.max(0, h) * bump), n: dir, flat: 0.12, size: spacing / base(), color: shade(col, lit * 1.25), opacity: 1, part: globe }; // prettier-ignore
+    });
+    // The air: a thin shell, clear face on and pale blue at the limb (kind "rim").
+    const nAir = Math.round(0.12 * k.count);
+    const airSpacing = Math.sqrt((4 * Math.PI) / nAir) * 1.1;
+    k.cloud({ count: (nAir * 160000) / k.count, jitter: 0 }, (_r, i) => {
+      const y = 1 - (2 * (i + 0.5)) / nAir;
+      const r = Math.sqrt(1 - y * y);
+      const dir = [Math.cos(gold * i) * r, y, Math.sin(gold * i) * r];
+      return { p: vec.mul(dir, R * 1.02), n: dir, flat: 0.12, size: (airSpacing * 1.02) / base(), color: [0.56, 0.76, 1], opacity: 0.6, kind: "rim", params: [0, 5], pattern: false }; // prettier-ignore
     });
     // The quakes: a dot each (bigger for a stronger quake, colored by
     // depth), flashing as the timeline passes its time.
@@ -1604,7 +1661,7 @@ const EARTHQUAKES = {
     const dots = [];
     for (const e of ev) {
       const rr = rOf(e[4]);
-      const n = Math.max(7, Math.round((budget * rr * rr) / area));
+      const n = Math.max(48, Math.round((budget * rr * rr) / area));
       for (let j = 0; j < n; j++) dots.push({ e, rr, n, j });
     }
     const baseQ = () => k.baseSize || 0.01;
@@ -1628,7 +1685,7 @@ const EARTHQUAKES = {
           n: nrm,
           flat: 0.2,
           color: rim ? shade(depthColor(e[3]), 0.6) : depthColor(e[3]),
-          size: (rr * 1.9) / Math.sqrt(n) / baseQ(),
+          size: (rr * 1.7) / Math.sqrt(n) / baseQ(),
           opacity: 1,
           part: globe,
           kind: "band",
@@ -1649,33 +1706,32 @@ const EARTHQUAKES = {
     const fx = Math.min(0.016, (PW - 0.16) / cols);
     const PH = 0.1 + (lines.length * 10 - 3) * fx;
     const py = -1.25 - PH / 2;
-    k.add(
-      k.param((u, v) => [(u - 0.5) * PW, py + (0.5 - v) * PH, 0.4], { grid: 24 }),
-      {
-        even: true,
-        share: 0.06,
-        flat: 0.1,
-        color: (c) => {
-          const s0 = (c.p[0] + PW / 2 - 0.1) / fx;
-          const t0p = (py + PH / 2 - 0.05 - c.p[1]) / fx;
-          const ink = inked(lines, s0, t0p);
-          return ink ? { c: [0.95, 0.93, 0.86], keep: true, size: 0.7 } : { c: [0.12, 0.13, 0.15], keep: true }; // prettier-ignore
-        },
+    // Round 3 ("the text below the planet also needs to be sharper"): square pixels on a grid,
+    // two to each pixel of the letters.
+    const PXQ = fx / 2;
+    pixelPanel(k, {
+      x0: -PW / 2,
+      y0: py + PH / 2,
+      z: 0.4,
+      w: PW,
+      h: PH,
+      px: PXQ,
+      color: (x, y) => {
+        const ink = inked(lines, (x + PW / 2 - 0.1) / fx, (py + PH / 2 - 0.05 - y) / fx);
+        return ink ? [0.95, 0.93, 0.86] : [0.12, 0.13, 0.15];
       },
-    );
-    k.add(
-      k.param((u, v) => [(u - 0.5) * PW, py - PH / 2 - 0.05 + (0.5 - v) * 0.03, 0.4], { grid: 24 }),
-      {
-        even: true,
-        share: 0.01,
-        flat: 0.1,
-        color: "#3b3f45",
-        kind: "band",
-        channel: 0,
-        params: (c) => [c.u, 0.02],
-        pattern: false,
-      },
-    );
+    });
+    // The timeline bar under it: lit as the quakes play.
+    pixelPanel(k, {
+      x0: -PW / 2,
+      y0: py - PH / 2 - 0.035,
+      z: 0.4,
+      w: PW,
+      h: 0.03,
+      px: PXQ,
+      color: () => [0.23, 0.25, 0.27],
+      extra: (x) => ({ kind: "band", channel: 0, params: [(x + PW / 2) / PW, 0.02] }),
+    });
   },
 };
 
