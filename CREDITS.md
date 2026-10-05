@@ -752,33 +752,6 @@ strand is added from its biological assembly (`tools/sci3-structures.mjs`).
 
 Files people open in these toys are read in their browser and never uploaded.
 
-## Night sky (lane Night sky)
-
-The catalog snapshot `assets/toys/night-sky/sky.json` (made by `tools/sky-catalog.mjs`) joins two CC
-BY-SA sources, so it is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) too, and the
-toy's About tab says so.
-
-- Stars: the [HYG database](https://github.com/astronexus/HYG-Database) v4.1 by David Nash
-  (astronexus.com), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live
-  LICENSE file, checked October 5, 2026). Every star to magnitude 6.0 and the fainter stars a
-  constellation line needs (5,071), with position, magnitude, B−V color, distance, spectral type and
-  names.
-- Constellation lines: the Stellarium team's
-  [Western sky culture](https://github.com/Stellarium/stellarium-skycultures/tree/master/western)
-  (commit 014fbb5e59, May 26, 2026). Its description's license section reads "Text and data: CC
-  BY-SA" (no version given; credited here as 4.0) and "Illustrations: Free Art License"; only the
-  line data (pairs of Hipparcos numbers, 674 segments in the 88 constellations) is used, never the
-  illustrations.
-- Planet, Sun and Moon positions are computed in the browser from published formulas: E. M.
-  Standish's
-  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
-  (JPL Solar System Dynamics, Table 1), the Astronomical Almanac's low-precision lunar series, and
-  Jean Meeus, _Astronomical Algorithms_ (2nd ed., 1998) for sidereal time, precession and planet
-  magnitudes. The tests compare them with values recorded from
-  [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) (`tools/sky-horizons.mjs`, build time only).
-
-The place the toy shows is never saved or sent: a city's coordinates are built in, and "Use my
-location" keeps the browser's answer in memory only.
 Thirteen more structures (the owner's "could you add even more molecules?", October 5, 2026), each
 checked on its live page that day:
 
@@ -925,6 +898,34 @@ from the PDB (checked on the live pages on October 5, 2026).
   [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and resampled by
   `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
   (the wwPDB data policy); its backbone only.
+
+## Night sky (lane Night sky)
+
+The catalog snapshot `assets/toys/night-sky/sky.json` (made by `tools/sky-catalog.mjs`) joins two CC
+BY-SA sources, so it is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) too, and the
+toy's About tab says so.
+
+- Stars: the [HYG database](https://github.com/astronexus/HYG-Database) v4.1 by David Nash
+  (astronexus.com), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live
+  LICENSE file, checked October 5, 2026). Every star to magnitude 6.0 and the fainter stars a
+  constellation line needs (5,071), with position, magnitude, B−V color, distance, spectral type and
+  names.
+- Constellation lines: the Stellarium team's
+  [Western sky culture](https://github.com/Stellarium/stellarium-skycultures/tree/master/western)
+  (commit 014fbb5e59, May 26, 2026). Its description's license section reads "Text and data: CC
+  BY-SA" (no version given; credited here as 4.0) and "Illustrations: Free Art License"; only the
+  line data (pairs of Hipparcos numbers, 674 segments in the 88 constellations) is used, never the
+  illustrations.
+- Planet, Sun and Moon positions are computed in the browser from published formulas: E. M.
+  Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (JPL Solar System Dynamics, Table 1), the Astronomical Almanac's low-precision lunar series, and
+  Jean Meeus, _Astronomical Algorithms_ (2nd ed., 1998) for sidereal time, precession and planet
+  magnitudes. The tests compare them with values recorded from
+  [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) (`tools/sky-horizons.mjs`, build time only).
+
+The place the toy shows is never saved or sent: a city's coordinates are built in, and "Use my
+location" keeps the browser's answer in memory only.
 
 ## Data and climate (lane Data and climate)
 
