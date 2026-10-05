@@ -1024,8 +1024,8 @@ export function readStars(bytes) {
 // ---- The telescope (r3) ----
 //
 // The galaxy as a telescope would record it, told plainly as a simulation:
-// its stars (the simulation's star particles) seen as if it were 100 Mpc
-// away (about 330 million light-years, where 1″ is 0.48 kpc), each blurred
+// its stars (the simulation's star particles) seen as if it were 50 Mpc
+// away (about 160 million light-years, where 1″ is 0.24 kpc), each blurred
 // by the point spread of the seeing, through a filter, with the cold, dense
 // gas absorbing as dust; each tap starts a new exposure whose light builds
 // up with the grain of photon noise smoothing out.
@@ -1037,7 +1037,7 @@ export function readStars(bytes) {
 // approximation of stellar population models (for example Bruzual and
 // Charlot 2003), not a model fit.
 export const TELESCOPE = {
-  kpcPerArcsec: 0.485, // at 100 Mpc
+  kpcPerArcsec: 0.2425, // at 50 Mpc
   seeing: { space: 0.1, ground: 1, poor: 2.5 }, // arcseconds (FWHM)
   exposureSecs: 6, // how long a toy exposure takes to build up
 };
@@ -1330,7 +1330,7 @@ function buildTelescope(k, o) {
   const psfFwhm = (TELESCOPE.seeing[o.seeing] ?? 1) * TELESCOPE.kpcPerArcsec; // kpc
   const psf = psfFwhm / 2.3548; // σ
   const filter = o.filter ?? "color";
-  const budget = Math.max(2000, Math.floor(k.count * 0.85));
+  const budget = Math.max(2000, Math.floor(k.count * 0.78));
   const pick = pickIndices(S.n, budget);
   const nStars = pick ? pick.length : S.n;
   const at = (j) => (pick ? pick[j] : j);
@@ -1372,7 +1372,7 @@ function buildTelescope(k, o) {
       p,
       size: size / base(),
       color: col,
-      opacity: Math.min(0.9, 0.02 + 0.5 * sb * sb),
+      opacity: Math.min(0.9, 0.04 + 0.65 * sb * sb),
       part: sciPart(SCI_TYPE.star),
       params: [asF32((bright[j] / med) * photons), (i * 2654435761) % 1000003],
     };
@@ -1380,13 +1380,15 @@ function buildTelescope(k, o) {
   // Dust: the cold, dense gas (below 20,000 K, smoothing length under 0.3
   // kpc) dims what is behind it, more in blue light than red.
   const absorb = filter === "red" ? 0.45 : filter === "blue" ? 1 : 0.75;
-  const dRoom = Math.max(1000, Math.floor(k.count * 0.12));
+  const dRoom = Math.max(1000, Math.floor(k.count * 0.19));
   const dust = [];
   for (let i = 0; i < G.n && dust.length < dRoom * 3; i++)
     if (G.logT(i) < 4.3 && G.h(i) < 0.3) dust.push(i);
   const dPick = pickIndices(dust.length, dRoom);
   const nDust = dPick ? dPick.length : dust.length;
-  const widen = dPick ? Math.cbrt(dust.length / nDust) : 1;
+  // Thinned dust widens a little to keep its cover, but not into soft
+  // blobs (r2: sharper).
+  const widen = dPick ? Math.min(1.25, Math.cbrt(dust.length / nDust)) : 1;
   k.cloud({ count: (nDust * 160000) / k.count, jitter: 0 }, (_r, j) => {
     if (j >= nDust) return null;
     const i = dust[dPick ? dPick[j] : j];

@@ -2946,12 +2946,15 @@ Proposals below are suggestions; the owner may change them.
     in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
     face up and works out each temperature; the toy draws them approximately (not a column-density
     integral). Science r3: two more galaxies (m12i 10.4 billion years ago, z = 2; the dwarf m11h),
-    and a telescope view (simulated): the star particles as if 100 Mpc away, blurred by the seeing
-    (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading with age, an
-    approximation), cold dense gas as dust, and a tap that starts an exposure whose photon grain
-    smooths out (tools/sci3-galaxy.mjs). r2 (the owner's "sharper", October 5): more stars, and the
-    clip at twice the size (0.1″ seeing was tried as the default: with 250,000 particles standing in
-    for millions of stars, the light shrank to a dim core, so 1″ stays).
+    and a telescope view (simulated): the star particles as if 50 Mpc away (100 Mpc before r3),
+    blurred by the seeing (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading
+    with age, an approximation), cold dense gas as dust, and a tap that starts an exposure whose
+    photon grain smooths out (tools/sci3-galaxy.mjs). r2 (the owner's "sharper", October 5): more
+    stars, and the clip at twice the size (0.1″ seeing was tried as the default: with 250,000
+    particles standing in for millions of stars, the light shrank to a dim core, so 1″ stays). r3
+    ("make sharper" on the filters): the galaxy moved to 50 Mpc (1″ is 0.24 kpc), so the seeing
+    blurs half as much; thinned dust no longer widens into soft blobs; fainter stars a little
+    brighter.
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
 - **Cryo-EM map** (`cryoem-map`). Now: tap: Cut it open. Plan: new effect (E6).
@@ -2970,7 +2973,9 @@ Proposals below are suggestions; the owner may change them.
     phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the
     assembly's operators. r2 (the owner's "sharper", October 5, 2026): more, smaller and flatter
     splats (density 1.5, 0.8 of a voxel) and ambient occlusion from the density round each point,
-    which darkens grooves and pockets.
+    which darkens grooves and pockets. r3 ("keep making it sharper" on the capsid): one splat per
+    voxel the surface crosses (its crossings averaged), so the edges no longer pile up into a soft
+    rim, and density 2.
   - Sound: A soft, low whoosh as the cut sweeps in, and a softer one as it closes.
 - **Contour lab** (`contour-lab`). Now: tap: Pull the layers apart. Plan: new effect (E6).
   - Owner: The owner's picks on the Push Plan, October 5, 2026: "In a box" yes, terrain first, each
