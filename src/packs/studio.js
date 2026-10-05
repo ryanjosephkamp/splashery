@@ -41,14 +41,21 @@ import { Sand } from "./chladni-sand.js";
 // A flat, smooth sheet of splats facing up: two staggered lattices of flat
 // discs that overlap, so it reads as a solid surface (not a grid of dots).
 // `cells` is the number of splats to spend; color(x, z) gives each one's color.
-function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extra = null }) {
+function sheet(
+  k,
+  { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extra = null, overlap = 0.66 },
+) {
+  // prettier-ignore
   const w = x1 - x0;
   const d = z1 - z0;
   const gx = Math.max(4, Math.round(Math.sqrt((cells / 2) * (w / d))));
   const gz = Math.max(4, Math.round(cells / 2 / gx));
   const sx = w / gx;
   const sz = d / gz;
-  const size = (0.66 * Math.max(sx, sz)) / 0.01; // a splat reads about 2.5 sizes across
+  // A splat reads about 2.5 sizes across. (Live r7 polish: `overlap` 0.85
+  // for a sheet drawn with the sharp kernel, whose flatter discs otherwise
+  // leave a faint dotted texture.)
+  const size = (overlap * Math.max(sx, sz)) / 0.01;
   const list = [];
   for (let layer = 0; layer < 2; layer++)
     for (let i = 0; i < gx - layer; i++)
@@ -62,6 +69,40 @@ function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extr
     { share: list.length / k.count, pattern: false, jitter: 0 },
     (rand, i) => list[i] || null,
   );
+}
+
+// Live r7 polish: a square plate's rim, crisp at phone size: a band of
+// small flat discs round the top's edge (`half` from the middle, at height
+// y), and each side a fine sheet of discs facing out, `thick` deep.
+function plateRim(k, { half, thick, y, part, top, side = "#4a535e" }) {
+  const step = 0.007;
+  const size = (step * 1.7) / 0.01;
+  const along = Math.round((2 * half) / step);
+  const down = Math.max(2, Math.round(thick / step));
+  const list = [];
+  for (const [ax, sg] of [
+    [0, 1],
+    [0, -1],
+    [2, 1],
+    [2, -1],
+  ]) {
+    const n = ax === 0 ? [sg, 0, 0] : [0, 0, sg];
+    for (let i = 0; i < along; i++) {
+      const t = -half + ((i + 0.5) / along) * 2 * half;
+      const at = (r, h) => (ax === 0 ? [sg * r, h, t] : [t, h, sg * r]);
+      // The top's last few millimeters, with a hair of light on the edge.
+      for (const r of [half - 0.014, half - 0.0075, half - 0.0025]) {
+        const [x, , z] = at(r, 0);
+        const lit = r > half - 0.004 ? 1.12 : 1;
+        list.push({ p: at(r, y), n: [0, 1, 0], flat: 0.02, size, opacity: 1, color: shade(top(x, z), lit), part, pattern: false }); // prettier-ignore
+      }
+      for (let j = 0; j < down; j++) {
+        const h = y - 0.003 - ((j + 0.5) / down) * (thick - 0.003);
+        list.push({ p: at(half, h), n, flat: 0.02, size, opacity: 1, color: shade(side, 0.92 + 0.12 * (1 - j / down)), part, pattern: false }); // prettier-ignore
+      }
+    }
+  }
+  k.cloud({ share: list.length / k.count, pattern: false, jitter: 0 }, (rand, i) => list[i] || null); // prettier-ignore
 }
 
 export const F0 = 60; // Hz per unit of n² + m²
@@ -265,6 +306,9 @@ const CHLADNI = {
   screen: sandScreen,
   // Sand grains take most of the budget (in twelve copies of which one shows).
   density: 2,
+  // Live r7 polish (the owner's "the toys could still be sharper"): the labs'
+  // sharp kernel, so each grain is a crisp speck and the plate's rim clean.
+  kernel: "sharp",
   options: [
     {
       key: "mode",
@@ -402,50 +446,69 @@ const CHLADNI = {
       even: true,
     });
     // The plate: its top a smooth sheet of overlapping flat discs (brushed
-    // steel, a soft light across it), its edge a thin box.
-    k.add(k.box(2 * PLATE, PLATE_T, 2 * PLATE), {
-      pos: [0, -PLATE_T / 2 - 0.002, 0],
-      color: (c) => shade("#56606c", 0.75 + 0.25 * Math.abs(c.n[1])),
-      part: plate,
-      share: 0.04,
-      even: true,
-    });
+    // steel, a soft light across it). Live r7 polish: the sheet stops short
+    // of the rim, and the rim and the four sides are fine strips of small
+    // discs (was a box, whose edge showed as a row of beads).
+    const topColor = (x, z) => mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)); // prettier-ignore
+    const inset = 0.012;
     sheet(k, {
-      x0: -PLATE,
-      x1: PLATE,
-      z0: -PLATE,
-      z1: PLATE,
+      x0: -PLATE + inset,
+      x1: PLATE - inset,
+      z0: -PLATE + inset,
+      z1: PLATE - inset,
       y: 0.001,
       cells: k.count * 0.16,
       part: plate,
-      color: (x, z) => mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)),
+      overlap: 0.85,
+      color: topColor,
     });
+    plateRim(k, { half: PLATE, thick: PLATE_T, y: 0.001, part: plate, top: topColor });
     // The bow: a slim stick with a pale ribbon of hair against the front edge.
     const bow = k.part("bow");
     // Live r7: it fades in by morph channel 1, which stays 0 unless a tap
     // bows the plate, so it never shows by default (not on a rebuild's first
     // frames either).
     const hidden = { kind: "fade", params: [0.5, -0.02], channel: 1 };
-    k.add(k.box(0.05, 1.5, 0.05), {
-      pos: [0.15, 0.0, PLATE + 0.16],
-      rot: [0, 0, 0],
-      color: "#6a4a30",
-      part: bow,
-      share: 0.02,
-      ...hidden,
-    });
-    k.add(k.box(0.012, 1.45, 0.11), {
-      pos: [0.15, 0.0, PLATE + 0.06],
-      color: "#efe6d0",
-      part: bow,
-      share: 0.015,
-      ...hidden,
-    });
+    // Live r7 polish: drawn from fine splats, like a real bow: a round wooden
+    // stick bowed a little toward the hair, a flat ribbon of pale hair
+    // against the plate's edge, a dark frog below and a pale tip above (was
+    // two boxes, which read as one blurry bar).
+    const bowItems = [];
+    const X = 0.15;
+    const HAIR_Z = PLATE + 0.045;
+    const STICK_Z = PLATE + 0.12;
+    const TOP = 0.72;
+    const BOT = -0.72;
+    for (let y = BOT; y <= TOP; y += 0.005) {
+      const t = (y - BOT) / (TOP - BOT);
+      // The stick: nearer the hair in the middle (its camber).
+      const z = STICK_Z - 0.035 * Math.sin(Math.PI * t);
+      for (let a = 0; a < 8; a++) {
+        const th = (a / 8) * Math.PI * 2;
+        const n = [Math.cos(th), 0, Math.sin(th)];
+        bowItems.push({ p: [X + 0.011 * n[0], y, z + 0.011 * n[2]], n, flat: 0.15, size: 1.0, color: shade("#6b4026", 0.78 + 0.32 * Math.max(0, n[0] * 0.6 + n[2] * 0.8)), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+      }
+      // The hair: a ribbon a centimeter wide, facing the plate and away.
+      if (y > BOT + 0.06 && y < TOP - 0.03)
+        for (let w = -2; w <= 2; w++)
+          for (const side of [-1, 1])
+            bowItems.push({ p: [X + w * 0.0026, y, HAIR_Z + side * 0.002], n: [0, 0, side], flat: 0.05, size: 0.62, color: shade("#efe7d4", 0.94 + 0.03 * w), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+    }
+    // The frog (where the hand holds it) and the tip, each joining stick and hair.
+    const block = (y0, y1, color) => {
+      for (let y = y0; y <= y1; y += 0.006)
+        for (let z = HAIR_Z; z <= STICK_Z; z += 0.006)
+          for (const side of [-1, 1])
+            bowItems.push({ p: [X + side * 0.012, y, z], n: [side, 0, 0], flat: 0.05, size: 0.85, color, opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+    };
+    block(BOT, BOT + 0.08, "#1d1a19");
+    block(TOP - 0.035, TOP, "#ece5d6");
+    k.cloud({ share: bowItems.length / k.count, pattern: false, jitter: 0 }, (rand, i) => bowItems[i] || null); // prettier-ignore
     // Live r7: the sand, one relief splat per grain (chladni-sand.js moves
     // them). Each rests a hair from the plate's middle (a different hair for
     // each, so the canvas's steps of 1/255 don't line grains up) and the
     // screen canvas moves it to its place: a signed offset of up to SAND_LIFT.
-    const n = Math.max(2500, Math.min(10000, Math.floor(k.count * 0.06)));
+    const n = Math.max(2500, Math.min(14000, Math.floor(k.count * 0.06))); // (polish: up to 14,000, was 10,000)
     const sand = new Sand(n, () => k.rand());
     const cols = Math.min(256, Math.ceil(Math.sqrt(n * 2)));
     const rows = Math.ceil(n / cols);
@@ -909,7 +972,11 @@ const SONG_LANDSCAPE = {
   // Lane Live input: the microphone; r2: a long song's track, and the
   // picture filling in while the song is measured.
   alive: () => PLAY.on || liveIn.on("mic") || !!SONG.current?.track?.playing || !!(R2.an && !R2.an.finished && (R2.look || R2.land)), // prettier-ignore
-  density: 1,
+  // Live r7 polish (the owner's "the toys could still be sharper"): half as
+  // many splats again (the land's three a cell, buildLandscapeLong), and the
+  // labs' sharp kernel.
+  density: 1.5,
+  kernel: "sharp",
   options: [
     {
       key: "look",
@@ -1173,9 +1240,12 @@ const SONG_LANDSCAPE = {
         const nl = Math.hypot(sx, 1, sz);
         const nrm = [(-sx * 0.4) / nl, 1 / nl, (-sz * 0.4) / nl];
         const col = songColor(o.look, f, nf, h);
-        const layers = h > 0.06 ? 1 + Math.min(2, Math.floor((h * H) / 0.12)) : 1;
+        // (Live r7 polish: up to four, a layer every 0.09; with three the
+        // dark floor showed between tall, narrow peaks as specks.)
+        const layers = h > 0.06 ? 1 + Math.min(3, Math.floor((h * H) / 0.09)) : 1;
         for (let l = 0; l < layers; l++) {
-          const y = h * H * (1 - l / layers) + 0.01;
+          // (Live r7 polish: the lowest layer reaches nearly to the floor.)
+          const y = h * H * (layers > 1 ? 1 - l / (layers - 0.85) : 1) + 0.01;
           cells.push({
             p: [x(f), y, z(t)],
             n: l === 0 ? nrm : [0, 0, 1],
@@ -1200,6 +1270,15 @@ const SONG_LANDSCAPE = {
       for (let i = t * stepN; i < Math.min(song.samples.length, (t + 1) * stepN); i++) peak = Math.max(peak, Math.abs(song.samples[i])); // prettier-ignore
       wave.push(peak);
     }
+    // Live r7 polish: its envelope, smoothed over about a hundredth of the
+    // song (the loudest within a few slices, then averaged), so its lines are
+    // clean curves; slice by slice they jumped and read as scattered beads.
+    const wr = Math.max(1, Math.round(wave.length / 160));
+    const wpeak = wave.map((_, t) => Math.max(...wave.slice(Math.max(0, t - wr), t + wr + 1)));
+    for (let t = 0; t < wave.length; t++) {
+      const win = wpeak.slice(Math.max(0, t - wr), t + wr + 1);
+      wave[t] = win.reduce((s2, v) => s2 + v, 0) / win.length;
+    }
     const wmax = Math.max(1e-6, ...wave);
     const wcells = [];
     for (let t = 0; t < wave.length; t++) {
@@ -1215,8 +1294,10 @@ const SONG_LANDSCAPE = {
     const mk = [];
     for (let i = 0; i < 160; i++) {
       const xx = ((i + 0.5) / 160 - 0.5) * (W + 0.1);
-      mk.push({ p: [xx, 0.02, D / 2], color: "#fff3b0", size: 1.1, opacity: 1, part: marker, pattern: false }); // prettier-ignore
-      if (i % 4 === 0) mk.push({ p: [xx, 0.5 * H, D / 2], color: "#ffe680", size: 0.9, opacity: 0.55, part: marker, pattern: false }); // prettier-ignore
+      // (Live r7 polish: drawn out along the line, so the marker and its
+      // glow above are clean lines rather than rows of dots.)
+      mk.push({ p: [xx, 0.02, D / 2], dir: [1, 0, 0], stretch: 3, size: 0.9, color: "#fff3b0", opacity: 1, part: marker, pattern: false }); // prettier-ignore
+      if (i % 2 === 0) mk.push({ p: [xx, 0.5 * H, D / 2], dir: [1, 0, 0], stretch: 4, size: 0.7, color: "#ffe680", opacity: 0.55, part: marker, pattern: false }); // prettier-ignore
     }
     k.cloud({ share: mk.length / k.count, pattern: false }, (rand, i) => mk[i] || null);
     // Live: the loudness caps. The bands are pooled into up to 48 groups (one token each); a cap is a

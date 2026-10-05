@@ -458,6 +458,34 @@ test.describe("the Chladni plate", () => {
 
 // ---- Screenshots (lv7-*.png) ---------------------------------------------------------
 
+// ---- The polish round (the owner's "the toys could still be sharper", October 5) -------
+
+test.describe("the polish round (no browser)", () => {
+  test("the Chladni plate and the Song landscape draw with the sharp kernel, the landscape on half as many splats again", async () => {
+    const { RECIPES } = await import("../src/packs/studio.js");
+    expect(RECIPES["chladni-plate"].kernel).toBe("sharp");
+    expect(RECIPES["song-landscape"].kernel).toBe("sharp");
+    expect(RECIPES["song-landscape"].density).toBe(1.5);
+  });
+
+  test("the landscape's waveform is a smooth envelope that keeps its loud parts, not a scatter", async () => {
+    const { waveEnvelope } = await import("../src/packs/song-looks.js");
+    // A jagged swing, as a song's slot by slot loudness is.
+    const nt = 400;
+    const wave = new Float32Array(nt);
+    for (let i = 0; i < nt; i++) wave[i] = (i % 2 ? 1 : 0.1) * (0.5 + 0.5 * Math.sin(i / 40));
+    const e = waveEnvelope({ nt, wave, hVersion: 1 });
+    let jumps = 0;
+    let raw = 0;
+    for (let i = 1; i < nt; i++) {
+      jumps += Math.abs(e[i] - e[i - 1]);
+      raw += Math.abs(wave[i] - wave[i - 1]);
+    }
+    expect(jumps).toBeLessThan(raw * 0.05);
+    expect(Math.max(...e)).toBeGreaterThan(0.9 * Math.max(...wave));
+  });
+});
+
 test("screenshots at phone and desktop size: the landscape growing", async ({ browser }) => {
   test.setTimeout(300_000);
   for (const [w, h] of [
