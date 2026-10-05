@@ -104,4 +104,12 @@ additive.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+WORKING (October 5, 2026): started. Building the shell and the generator (`tools/site-build.mjs`),
+then the home page, search, the service worker and the finishing pass, all under `site/`.
+
+## Notes
+
+## Known issues
+
+## For the Operator
+
