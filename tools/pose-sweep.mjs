@@ -3,7 +3,7 @@
 // measured (docs/audits/poses-2026-10.md).
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pose-sweep.mjs <out.json> [--size=128] [--kitfix] [--from=id] [--only=a,b] [--shelf=food]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pose-sweep.mjs <out.json> [--size=128] [--kitfix] [--from=id] [--only=a,b] [--shelf=food] [--part=1/3]
 //
 // Each pose turns the whole toy about the camera's line of sight (a quarter
 // turn: on its side; a half turn: upside down), through the point the camera
@@ -87,7 +87,7 @@ await browser.close();
 async function measure({ id, size, kitfix }) {
   const { app, player } = window.__splashery;
   const stage = player.stage;
-  const TIMES = [0.25, 0.7, 1.3, 2.1, 3.0];
+  const TIMES = [0.35, 0.9, 1.8];
   const wait = (ms) => new Promise((ok) => setTimeout(ok, ms));
   const quatAxis = (a, t) => [a[0] * Math.sin(t / 2), a[1] * Math.sin(t / 2), a[2] * Math.sin(t / 2), Math.cos(t / 2)]; // prettier-ignore
   const fieldsMod = kitfix ? await import("/src/physics/fields.js") : null;
@@ -140,6 +140,10 @@ async function measure({ id, size, kitfix }) {
         for (const h of handlers) h(step);
       }
     };
+    // The same clock in every pose (some effects run on the page's clock).
+    player.time = 100;
+    player.motion.kitClock = { t: 0, last: null, rate: 1 };
+    player.motion.moveClock = { t: 0, last: null, rate: 1 };
     await advance(0.4);
     const frames = [await snap()];
     player.act(null);
