@@ -325,11 +325,18 @@ class Shadows {
 
   camera(view, aspect) {
     const d2 = this.api.fitDistance(1.5, 1.7, aspect);
+    // 3D: from the side, the block and its shadow both in view (closer on
+    // a tall screen, where the wide view left them small)
+    const tall = aspect < 1;
     return {
-      target: [0, 0.02, lerp(WALL_Z + 0.05, -0.15, view)],
-      yaw: lerp(0, 0.95, view),
+      target: [
+        lerp(0, tall ? -0.08 : 0, view),
+        0.02,
+        lerp(WALL_Z + 0.05, tall ? -0.32 : -0.15, view),
+      ],
+      yaw: lerp(0, tall ? 0.8 : 0.95, view),
       pitch: lerp(0, 0.25, view),
-      distance: lerp(d2, this.api.fitDistance(2.9, 2.3, aspect), view),
+      distance: lerp(d2, tall ? this.api.fitDistance(2.05, 2.3, aspect) : this.api.fitDistance(2.9, 2.3, aspect), view), // prettier-ignore
     };
   }
 
