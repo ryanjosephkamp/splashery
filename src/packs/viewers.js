@@ -228,7 +228,7 @@ function splatSettings(o, src) {
 }
 
 const SPLAT_TOOLKIT = {
-  density: 2.2,
+  density: 3, // as many splats as the device draws smoothly (each tier's cap)
   turntable: false,
   kernel: "sharp", // trained splats read crisper with the Lab's sharper falloff (as Video to 3D)
   options: [
@@ -390,7 +390,12 @@ const SPLAT_TOOLKIT = {
     k.fitOn = false;
     const v = SPL.view;
     const dual = !!v?.second;
-    const left = k.part("left", { pivot: [dual ? -1.05 : 0, 0, 0], axis: [0, 1, 0] });
+    // Two splats sit side by side on a wide screen and one above the other on a phone held
+    // upright, so each stays as large as the screen allows.
+    const stacked = dual && isBrowser() && window.innerHeight > window.innerWidth * 1.15;
+    const gap = 1.05;
+    const at = (sign) => (!dual ? [0, 0, 0] : stacked ? [0, -sign * gap, 0] : [sign * gap, 0, 0]);
+    const left = k.part("left", { pivot: at(-1), axis: [0, 1, 0] });
     if (!v?.main) {
       // Nothing to show (an error): an empty frame.
       boxOutline(k, [-0.7, -0.7, -0.7], [0.7, 0.7, 0.7], [0.55, 0.6, 0.68], left, 0.01);
@@ -398,16 +403,17 @@ const SPLAT_TOOLKIT = {
       return;
     }
     // Each splat turns about its own middle.
-    const right = dual ? k.part("right", { pivot: [1.05, 0, 0], axis: [0, 1, 0] }) : null;
+    const right = dual ? k.part("right", { pivot: at(1), axis: [0, 1, 0] }) : null;
     // The worker's preview fits the device's budget; a smaller build (the Node tools ask for a few
     // thousand) takes an even share of it.
     const total = [v.main, v.second].filter(Boolean).reduce((t, w) => t + w.main.count + (w.red?.count || 0), 0); // prettier-ignore
     const share = Math.min(1, (k.count * 0.95) / Math.max(1, total));
-    const place = (view, part, dx, radius) => {
+    const place = (view, part, off, radius) => {
       const f = view.frame;
       const c = [0, 1, 2].map((a) => (f.min[a] + f.max[a]) / 2);
       const half = Math.max(...[0, 1, 2].map((a) => (f.max[a] - f.min[a]) / 2)) || 1;
       const s = radius / half;
+      const reachOut = radius * 1.35;
       const m = view.main;
       const items = [[m, false]];
       if (view.red) items.push([view.red, true]);
@@ -416,8 +422,12 @@ const SPLAT_TOOLKIT = {
         k.cloud({ count: (n * 160000) / k.count, pattern: false, part, fit: false }, (_r, jj) => {
           if (jj >= n) return null;
           const j = Math.min(arr.count - 1, Math.floor(jj / share));
+          const p = [0, 1, 2].map((a) => (arr.pos[j * 3 + a] - c[a]) * s);
+          // Stray splats far outside the frame are left out of the view (they would pull the
+          // camera back and shrink the splat); the stats and Save still count them.
+          if (Math.abs(p[0]) > reachOut || Math.abs(p[1]) > reachOut || Math.abs(p[2]) > reachOut) return null; // prettier-ignore
           return {
-            p: [(arr.pos[j * 3] - c[0]) * s + dx, (arr.pos[j * 3 + 1] - c[1]) * s, (arr.pos[j * 3 + 2] - c[2]) * s], // prettier-ignore
+            p: [p[0] + off[0], p[1] + off[1], p[2] + off[2]],
             scales: [arr.scl[j * 3] * s, arr.scl[j * 3 + 1] * s, arr.scl[j * 3 + 2] * s],
             quat: [arr.quat[j * 4], arr.quat[j * 4 + 1], arr.quat[j * 4 + 2], arr.quat[j * 4 + 3]],
             color: [arr.col[j * 3], arr.col[j * 3 + 1], arr.col[j * 3 + 2]],
@@ -428,17 +438,18 @@ const SPLAT_TOOLKIT = {
         });
       }
       if (view.crop && !(v.split && part === left)) {
-        const mn = [0, 1, 2].map((a) => (view.crop.min[a] - c[a]) * s + (a === 0 ? dx : 0));
-        const mx = [0, 1, 2].map((a) => (view.crop.max[a] - c[a]) * s + (a === 0 ? dx : 0));
+        const mn = [0, 1, 2].map((a) => (view.crop.min[a] - c[a]) * s + off[a]);
+        const mx = [0, 1, 2].map((a) => (view.crop.max[a] - c[a]) * s + off[a]);
         boxOutline(k, mn, mx, [1, 0.72, 0.15], part, 0.005);
       }
     };
     if (dual) {
-      place(v.main, left, -1.05, 0.92);
-      place(v.second, right, 1.05, 0.92);
-    } else place(v.main, left, 0, 0.95);
-    k.reach([dual ? -2 : -0.97, -0.97, -0.97]);
-    k.reach([dual ? 2 : 0.97, 0.97, 0.97]);
+      place(v.main, left, at(-1), 0.92);
+      place(v.second, right, at(1), 0.92);
+    } else place(v.main, left, [0, 0, 0], 0.95);
+    const ext = dual ? 2 : 0.97;
+    k.reach([stacked ? -0.97 : -ext, stacked ? -ext : -0.97, -0.97]);
+    k.reach([stacked ? 0.97 : ext, stacked ? ext : 0.97, 0.97]);
     k.data = { toolkit: toolkitState() };
   },
 };
@@ -820,7 +831,7 @@ const POINT_CLOUDS = {
     // An even share when the build asks for fewer points than the preview has (the Node tools).
     const share = Math.min(1, (k.count * 0.95) / Math.max(1, m.count));
     const n = Math.max(1, Math.floor(m.count * share));
-    const size = Math.max(1e-4, (v.spacing / Math.sqrt(share)) * s * 0.68 * (o.size || 1));
+    const size = Math.max(1e-4, (v.spacing / Math.sqrt(share)) * s * 0.65 * (o.size || 1));
     // The scan line sweeps across from west to east, like a lidar pass over the ground.
     const lo = f.min[0];
     const span = f.max[0] - f.min[0] || 1;

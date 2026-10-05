@@ -2950,7 +2950,10 @@ Proposals below are suggestions; the owner may change them.
     (zipped or as meta.json with its pictures); writers for PLY, SPZ 3, SOG 2 (base colors) and
     .splat; everything in a worker; the preview draws the most visible splats within the device's
     budget. Samples: the cactus, strawberry and bee captures, and the cactus with 0.6% stray splats
-    added.
+    added. Viewers r3 (the owner's "the toys could still be sharper", October 5, 2026): as many
+    splats as each device draws smoothly, splats left at their own size (a preview grows them by at
+    most a quarter), two splats stacked one above the other on a phone held upright, and far strays
+    left out of the view so the splat fills the screen.
   - Sound: A soft swish of air as it spins.
 - **Point clouds** (`point-clouds`). Now: tap: Sweep a lidar scan line over it. Plan: new effect
   (E6).
@@ -2968,7 +2971,10 @@ Proposals below are suggestions; the owner may change them.
     make sharper" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's
     sharper falloff, shaded relief baked into their colors (lit by the slope under each point,
     darker under canopies), the preview picks one point per small cube instead of a random share (no
-    more holes), and up to the device's full budget.
+    more holes), and up to the device's full budget. Viewers r3 (the owner's "the toys could still
+    be sharper", October 5, 2026): the samples remade with even thinning (one point per small cube,
+    so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or
+    cliff, so edges read crisply.
   - Sound: An airy rising tone with faint ticks as the scan line crosses.
 
 ## Lab (2)

@@ -48,6 +48,14 @@ px) are on Effect review page 2: `vwr-clouds-palace-r2`, `vwr-clouds-bridge-r2`,
 
 ## Notes
 
+- October 5, 2026, 16:30 UTC (the owner: "the toys could still be sharper"; round r3 on every view):
+  the toolkit draws as many splats as each tier allows (density 3), a preview grows its splats by at
+  most a quarter (it was 1.6), two splats stack vertically on a phone held upright, and far strays
+  are left out of the view so the camera frames the splat. Point clouds: the samples are remade with
+  even thinning (one point per small cube) instead of a random 5%, the points are a little finer,
+  and a dark rim marks where the ground meets something taller. Clips: `-r3` for the three clouds,
+  `-r2` for the toolkit's two views.
+
 - October 5, 2026, 13:30 UTC (Integrator 5's run N4): the how-to lines were over the 110-character
   help limit (now 99 and 94); builds now keep to the kit's count (the Node tools ask for 8,000), the
   Point clouds fallback is a full grid, and the worker keeps the last four files and filter results,

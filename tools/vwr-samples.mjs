@@ -2,7 +2,7 @@
 // 3D Elevation Program lidar (public domain), read from the USGS's public Entwine Point Tiles on
 // AWS (s3://usgs-lidar-public). For each sample it gathers every tile around a place, keeps the
 // points inside a box, moves them from Web Mercator to UTM meters (so a measured distance is in
-// real meters), thins them to a budget and writes LAZ 1.4.
+// real meters), thins them evenly to a budget and writes LAZ 1.4.
 //
 // Needs Python 3 with laspy, lazrs and pyproj (pip install "laspy[lazrs]" pyproj); they are build
 // tools, never shipped. Usage: node tools/vwr-samples.mjs [--only id]
@@ -82,8 +82,18 @@ a = np.concatenate(parts)
 a = a[(a[:, 4] != 7) & (a[:, 4] != 18)]
 total = len(a)
 rng = np.random.default_rng(7)
+# Even thinning: one point per small cube (shuffled first, so which point a cube keeps is fair),
+# with the cube sized so about the budget survive. A random share leaves holes and clumps.
 if len(a) > s["budget"]:
-    a = a[rng.choice(len(a), s["budget"], replace=False)]
+    a = a[rng.permutation(len(a))]
+    span = a[:, :2].max(0) - a[:, :2].min(0)
+    v = float(np.sqrt(span[0] * span[1] / s["budget"]))
+    for _ in range(8):
+        key = np.floor((a[:, :3] - a[:, :3].min(0)) / v).astype(np.int64)
+        _, first = np.unique(key, axis=0, return_index=True)
+        if abs(len(first) - s["budget"]) < s["budget"] * 0.03: break
+        v *= (len(first) / s["budget"]) ** 0.5
+    a = a[np.sort(first)][: s["budget"]]
 ux, uy = toUtm.transform(a[:, 0], a[:, 1])
 h = laspy.LasHeader(point_format=6, version="1.4")
 h.scales = [0.01, 0.01, 0.01]

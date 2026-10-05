@@ -246,7 +246,7 @@ export function applySplats({ slot, settings: s, budget }, progress = () => {}) 
   // A device that draws fewer splats than the file has gets the ones that show most, a little
   // bigger to close the gaps.
   const shown = base.length > room ? decimateIndex(t, base, room) : base;
-  const grow = base.length > room ? Math.min(1.6, Math.pow(base.length / room, 0.25)) : 1;
+  const grow = base.length > room ? Math.min(1.25, Math.pow(base.length / room, 0.15)) : 1;
   const main = splatToView(previewArrays(t, shown), upright);
   if (grow !== 1) for (let j = 0; j < main.scl.length; j++) main.scl[j] *= grow;
   let red = null;

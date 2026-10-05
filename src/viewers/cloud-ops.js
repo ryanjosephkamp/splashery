@@ -303,11 +303,20 @@ export function reliefShade(c, idx, { up = "z", cell } = {}) {
       const lambert = (-gx * L[0] - gy * L[1] + L[2]) / len;
       shadeOf[y * nx + x] = 0.5 + 0.6 * Math.max(0, lambert);
     }
+  // Cells at the foot of something taller (a wall, a tree, a cliff) get a dark rim, so edges read
+  // crisply at phone size (as eye-dome lighting does in point-cloud viewers).
+  const rim = new Float32Array(nx * ny).fill(1);
+  for (let y = 0; y < ny; y++)
+    for (let x = 0; x < nx; x++) {
+      const own = at(x, y);
+      const step = Math.max(at(x + 1, y), at(x - 1, y), at(x, y + 1), at(x, y - 1)) - own;
+      if (step > 4 * s) rim[y * nx + x] = Math.max(0.62, 1 - (step / (14 * s)) * 0.4);
+    }
   for (let j = 0; j < n; j++) {
     const k = cellOf[j];
     const below = top[k] - az[idx[j]];
     const under = below > 2 * s ? Math.max(0.75, 1 - (below / (12 * s)) * 0.25) : 1;
-    out[j] = shadeOf[k] * under;
+    out[j] = shadeOf[k] * under * (below < 2 * s ? rim[k] : 1);
   }
   return out;
 }
