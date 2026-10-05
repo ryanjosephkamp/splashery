@@ -2449,6 +2449,69 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "grand-canyon": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A 20 km block of the Grand Canyon round Grand Canyon Village (USGS 3DEP heights, aerial imagery, the rock layers on its cut sides). The tap floods it from the river to half its depth, leaving the buttes as islands, and drains it (about 8 s).",
+      "sound": "A rush of water rising and a wave as it drains.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs; the water is a sheet that rises as one piece, with cut faces that appear as the level passes them."
+    },
+    "st-helens": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Mount St. Helens from the north, as in 1979 (the USGS pre-eruption DEM). The tap plays May 18, 1980: the summit and north flank fall to today's crater (3DEP and imagery spread out from the crater), a lateral blast races north and an ash column rises and drifts east (about 6 s); a second tap goes back to 1979.",
+      "sound": "A deep thud and rumble, then the eruption's roar; a low rumble going back.",
+      "improved": "Geo: new toy; the 1979 surface sinks onto today's heights while today's fades in from the crater out, and is then hidden (sorting)."
+    },
+    "sea-floor": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "The Mariana Trench and Mariana Islands (NOAA ETOPO1, nine times taller) under a heaving ocean. The tap drains the ocean (the trench empties last), shows the bare floor and fills it back (about 9 s).",
+      "sound": "A low roar of draining water and a wave as it returns.",
+      "improved": "Geo: new toy; the ocean is a sheet that sinks as one piece, with cut faces that drop away."
+    },
+    "tide-harbor": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026 (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the water, and a dot follows the curve on the plaque.",
+      "sound": "Three soft waves through the day.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea level)."
+    },
+    "hurricane": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Hurricane Polo (EP17, September 2026) over a Blue Marble map of the Mexican coast: GOES-East infrared cloud tops as tall as their temperature, in rings that turn counterclockwise round the eye (faster inside), with rain and low wind lines. The tap plays September 21 to 22, when it grew from 70 to 155 knots: it follows its best track, the start's clouds give way to the end's (with a clear eye), and it spins faster (about 10 s); a second tap goes back.",
+      "sound": "Wind and rain, then a low rumble; a softer wind going back.",
+      "improved": "Geo: new toy from tools/geo-storm.mjs (GIBS colors turned back into temperatures)."
+    },
+    "relief-map": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Yosemite Valley as a relief map: contour lines every 100 m (heavier every 500), height colors, the aerial photo or NLCD land cover, and the NHD's named streams. The tap sends a glowing contour from the valley floor to the rim while light runs down every stream (about 7 s).",
+      "sound": "A soft scrape and a few drips.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs."
+    },
+    "living-city": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A kit-built city: cars go round their blocks on the right, an elevated train loops round the edge, and a park. The tap turns day to night (walls and streets darken, each window lights up at its own moment, about 4.5 s); a second tap brings the day back.",
+      "sound": "A light switch and the city's low hum, darker at night.",
+      "improved": "Geo: new toy; cars and train are tokens on looping paths, re-sorted as they move."
+    },
+    "stork-migration": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each stork flies its real track, facing the way it goes, and draws its trail behind it; month labels and a bar mark the time.",
+      "sound": "Wing beats and a stork's bill clatter.",
+      "improved": "Geo: new toy from tools/geo-migration.mjs."
+    },
+    "earthquakes": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A relief globe (NOAA ETOPO1) turning slowly with the USGS earthquake feed on it, read live when the toy opens (a dated snapshot when it can't be reached): a dot per quake, sized by magnitude and colored by depth. A plaque shows the source, the feed and when it was fetched. The tap flashes the quakes in time order (about 8 s); a tap on the plaque fetches the feed again. The Toy tab picks the past week, the past month or a year of the catalog.",
+      "sound": "A low rumble, and a second one.",
+      "improved": "Geo: new toy (Push Plan S14); live feed approved by the owner on October 4, 2026."
     }
   }
 }

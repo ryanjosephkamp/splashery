@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 382 toys. 352 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 377.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -60,7 +60,8 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Galaxy in a box, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor,
+  Hurricane, Relief map, Living city, Stork migration, Earthquakes, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2942,3 +2943,80 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+
+## Geo (9)
+
+- **Grand Canyon** (`grand-canyon`). Now: tap: Flood the canyon. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A 20 km block of the Grand Canyon round Grand Canyon Village (USGS 3DEP heights, aerial
+    imagery, the rock layers on its cut sides). The tap floods it from the river to half its depth,
+    leaving the buttes as islands, and drains it (about 8 s).
+  - Improved: Geo: new toy from tools/geo-terrain.mjs; the water is a sheet that rises as one piece,
+    with cut faces that appear as the level passes them.
+  - Sound: A rush of water rising and a wave as it drains.
+- **Mount St. Helens** (`st-helens`). Now: tap: Play May 18, 1980. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Mount St. Helens from the north, as in 1979 (the USGS pre-eruption DEM). The tap plays
+    May 18, 1980: the summit and north flank fall to today's crater (3DEP and imagery spread out
+    from the crater), a lateral blast races north and an ash column rises and drifts east (about 6
+    s); a second tap goes back to 1979.
+  - Improved: Geo: new toy; the 1979 surface sinks onto today's heights while today's fades in from
+    the crater out, and is then hidden (sorting).
+  - Sound: A deep thud and rumble, then the eruption's roar; a low rumble going back.
+- **The sea floor** (`sea-floor`). Now: tap: Drain the ocean. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: The Mariana Trench and Mariana Islands (NOAA ETOPO1, nine times taller) under a heaving
+    ocean. The tap drains the ocean (the trench empties last), shows the bare floor and fills it
+    back (about 9 s).
+  - Improved: Geo: new toy; the ocean is a sheet that sinks as one piece, with cut faces that drop
+    away.
+  - Sound: A low roar of draining water and a wave as it returns.
+- **Tides at Bar Harbor** (`tide-harbor`). Now: tap: Play a day of tides. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and
+    small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026
+    (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the
+    water, and a dot follows the curve on the plaque.
+  - Improved: Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea
+    level).
+  - Sound: Three soft waves through the day.
+- **Hurricane** (`hurricane`). Now: tap: Play the day it grew. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Hurricane Polo (EP17, September 2026) over a Blue Marble map of the Mexican coast:
+    GOES-East infrared cloud tops as tall as their temperature, in rings that turn counterclockwise
+    round the eye (faster inside), with rain and low wind lines. The tap plays September 21 to 22,
+    when it grew from 70 to 155 knots: it follows its best track, the start's clouds give way to the
+    end's (with a clear eye), and it spins faster (about 10 s); a second tap goes back.
+  - Improved: Geo: new toy from tools/geo-storm.mjs (GIBS colors turned back into temperatures).
+  - Sound: Wind and rain, then a low rumble; a softer wind going back.
+- **Relief map** (`relief-map`). Now: tap: Sweep a contour and the streams. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Yosemite Valley as a relief map: contour lines every 100 m (heavier every 500), height
+    colors, the aerial photo or NLCD land cover, and the NHD's named streams. The tap sends a
+    glowing contour from the valley floor to the rim while light runs down every stream (about 7 s).
+  - Improved: Geo: new toy from tools/geo-terrain.mjs.
+  - Sound: A soft scrape and a few drips.
+- **Living city** (`living-city`). Now: tap: Day or night. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A kit-built city: cars go round their blocks on the right, an elevated train loops round
+    the edge, and a park. The tap turns day to night (walls and streets darken, each window lights
+    up at its own moment, about 4.5 s); a second tap brings the day back.
+  - Improved: Geo: new toy; cars and train are tokens on looping paths, re-sorted as they move.
+  - Sound: A light switch and the city's low hum, darker at night.
+- **Stork migration** (`stork-migration`). Now: tap: Play the fall migration. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief
+    map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each
+    stork flies its real track, facing the way it goes, and draws its trail behind it; month labels
+    and a bar mark the time.
+  - Improved: Geo: new toy from tools/geo-migration.mjs.
+  - Sound: Wing beats and a stork's bill clatter.
+- **Earthquakes** (`earthquakes`). Now: tap: Play the quakes in time order. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A relief globe (NOAA ETOPO1) turning slowly with the USGS earthquake feed on it, read
+    live when the toy opens (a dated snapshot when it can't be reached): a dot per quake, sized by
+    magnitude and colored by depth. A plaque shows the source, the feed and when it was fetched. The
+    tap flashes the quakes in time order (about 8 s); a tap on the plaque fetches the feed again.
+    The Toy tab picks the past week, the past month or a year of the catalog.
+  - Improved: Geo: new toy (Push Plan S14); live feed approved by the owner on October 4, 2026.
+  - Sound: A low rumble, and a second one.

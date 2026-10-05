@@ -2779,6 +2779,58 @@ export const TOY_SOUNDS = {
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
+  // ---- Earth and maps (lane Geo) ------------------------------------------------------
+  // Water rushing in and draining out, the eruption's blast and roar, the
+  // storm's rumble and wind, the city's hum, a stork's bill clatter, and the
+  // ground's rumble: quiet and low.
+  "grand-canyon": [
+    { voice: "roar", f: 140, bright: 0.25, decay: 2.2, vol: 0.4 },
+    { voice: "wave", at: 0.4, f: 380, decay: 1.6, vol: 0.35 },
+    { voice: "wave", at: 4.7, f: 300, decay: 1.5, vol: 0.28 },
+  ],
+  "st-helens": {
+    on: [
+      { voice: "rumble", f: 60, rate: 6, decay: 1.6, vol: 0.7 },
+      { voice: "roar", at: 0.7, f: 120, bright: 0.3, decay: 3, vol: 0.55 },
+      { voice: "thud", at: 0.55, f: 55, decay: 1.4, vol: 0.6 },
+    ],
+    off: { voice: "rumble", f: 75, rate: 3, decay: 1.2, vol: 0.35 },
+  },
+  "sea-floor": [
+    { voice: "roar", f: 110, bright: 0.2, decay: 2.4, vol: 0.38 },
+    { voice: "wave", at: 5.2, f: 260, decay: 2, vol: 0.32 },
+  ],
+  "tide-harbor": [
+    { voice: "wave", f: 420, decay: 1.8, vol: 0.32 },
+    { voice: "wave", at: 3, f: 360, decay: 1.8, vol: 0.26 },
+    { voice: "wave", at: 6.2, f: 420, decay: 1.8, vol: 0.3 },
+  ],
+  hurricane: {
+    on: [
+      { voice: "rumble", f: 80, rate: 4, decay: 2.2, vol: 0.6 },
+      { voice: "wind", at: 0.3, f: 380, rate: 0.9, decay: 2.6, vol: 0.14 },
+    ],
+    off: [
+      { voice: "rumble", f: 95, rate: 3, decay: 1.4, vol: 0.4 },
+      { voice: "wind", at: 0.2, f: 300, rate: 0.5, decay: 1.8, vol: 0.1 },
+    ],
+  },
+  "relief-map": [
+    { voice: "scrape", f: 300, rate: 6, decay: 0.8, vol: 0.18 },
+    { voice: "drip", at: 1.2, f: 900, n: 6, rate: 4, vol: 0.3 },
+  ],
+  "living-city": {
+    on: { voice: "roar", f: 90, bright: 0.15, decay: 2.4, vol: 0.3 },
+    off: { voice: "roar", f: 130, bright: 0.3, decay: 2.4, vol: 0.34 },
+  },
+  "stork-migration": [
+    { voice: "flutter", n: 6, rate: 7, decay: 1.2, vol: 0.4 },
+    { voice: "clack", at: 0.6, f: 1400, notes: "C5 C5 C5 C5 C5 C5", step: 0.07, vol: 0.25 },
+  ],
+  earthquakes: [
+    { voice: "rumble", f: 70, rate: 7, decay: 1.8, vol: 0.6 },
+    { voice: "rumble", at: 2.5, f: 90, rate: 10, decay: 1.2, vol: 0.4 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

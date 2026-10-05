@@ -1981,6 +1981,55 @@ export const TOY_HELP = {
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
   },
+
+  // ---- Earth and maps (lane Geo) ------------------------------------------------------
+  "grand-canyon": {
+    howTo:
+      "Tap to flood the canyon from the river up, and watch it drain. Height in the Toy tab sets how tall it stands.",
+    about:
+      "The Grand Canyon in Arizona is about 1,800 meters (a mile) deep, cut by the Colorado River over the last five or six million years through layers of rock laid down over almost two billion years. This block is a 20 by 20 kilometer piece around Grand Canyon Village, the Bright Angel and Garden Creek side canyons and the river below them. Its shape comes from the U.S. Geological Survey's 3D Elevation Program, and its colors from aerial photographs; the cut sides show the canyon's rock layers in their usual order, from the cream Kaibab limestone at the rim to the dark Vishnu schist at the bottom.\n\nTap it and water rises from the river until the canyon is half full, leaving the buttes as islands, then drains away. The flood is imaginary, a way to read the canyon's depth. Height in the Toy tab shows it at true scale or stretched up two or three times.",
+  },
+  "st-helens": {
+    howTo: "Tap to play May 18, 1980; tap again to go back to 1979.",
+    about:
+      "Mount St. Helens, a volcano in Washington State, erupted on May 18, 1980. An earthquake set off the largest landslide ever recorded: the bulging north side of the mountain slid away, a sideways blast flattened the forest for miles, and a column of ash rose about 24 kilometers into the sky. The summit was about 400 meters lower afterward, with a horseshoe-shaped crater open to the north.\n\nThis block shows the mountain before the eruption, from a U.S. Geological Survey model made from 1950s topographic maps, and today, from the 3D Elevation Program and aerial photographs, seen from the north. Tap it to watch the summit fall away while the blast races north and the ash column rises and drifts east; tap again to go back to 1979. The heights are real; the timing and the ash are shortened to a few seconds.",
+  },
+  "sea-floor": {
+    howTo: "Tap to drain the ocean and fill it back.",
+    about:
+      "The Mariana Trench in the western Pacific is the deepest place in the ocean: its Challenger Deep is nearly 11 kilometers (about 7 miles) down. It forms where the Pacific Plate sinks beneath the Mariana Plate, and the same collision built the arc of islands beside it, including Guam. This block covers about 750 kilometers, with heights from NOAA's ETOPO1 relief model, stretched up nine times so the trench and the seamounts show.\n\nTap it and the ocean drains away to bare the sea floor: the plains, the seamounts and the long curve of the trench, which empties last. Then the sea comes back. Colors darken with depth, as on a chart.",
+  },
+  "tide-harbor": {
+    howTo: "Tap to play a day of tides: watch the bar to Bar Island dry out and flood.",
+    about:
+      "Tides are the slow rise and fall of the sea, pulled by the Moon and the Sun. Bar Harbor, Maine, has a range of about 3 to 4 meters, and at low tide a gravel bar appears between the town and Bar Island, so you can walk across for a few hours before the water covers it again.\n\nThis block is a kilometer of that shore, from NOAA's coastal elevation models and aerial photographs, with the heights stretched up six times. Tap it to play NOAA's tide predictions for the spring tide of October 28, 2026: about 25 hours in 12 seconds, two highs and two lows. The curve on the plaque is the prediction, and its dot marks the moment shown; the moored boats ride up and down with the water, and small waves move on the surface.",
+  },
+  hurricane: {
+    howTo: "Tap to play the day Polo grew from 70 to 155 knots; tap again to go back to the start.",
+    about:
+      "Hurricane Polo grew over the warm eastern Pacific, off the coast of Mexico, in September 2026. In the 24 hours from September 21 to 22 its strongest winds rose from 70 to 155 knots (about 290 kilometers an hour), a burst forecasters call rapid intensification, and a clear eye formed in its center.\n\nThe clouds are built from infrared pictures from NOAA's GOES-East satellite at the start and end of that day: colder cloud tops are higher, so each cloud stands as tall as its temperature says. They turn counterclockwise around the eye, faster near the center, with rain falling and low winds spiraling in. Tap it to play the day: the storm follows its best track from the National Hurricane Center, the early ragged clouds give way to the later ones, and it spins faster as it strengthens. The two pictures are real; the change between them is a blend.",
+  },
+  "relief-map": {
+    howTo:
+      "Tap to send a contour line up the cliffs and water down the streams. Change the map and layers in the Toy tab.",
+    about:
+      "A relief map shows the shape of the land. Contour lines join points of the same height: here one every 100 meters, with a heavier line every 500, so lines close together mean a steep slope. This is Yosemite Valley in California, about 18 by 11 kilometers, with El Capitan and Half Dome rising more than 1,000 meters above the Merced River.\n\nThe heights come from the U.S. Geological Survey's 3D Elevation Program, and the streams from the National Hydrography Dataset. In the Toy tab, Map switches between height colors, the aerial photo and land cover (forest, meadow, bare rock and buildings, from the National Land Cover Database), and the switches turn the contour lines and streams on and off. Tap it and a glowing contour climbs from the valley floor to the rim while light runs down every stream, the way the water flows.",
+  },
+  "living-city": {
+    howTo: "Tap for night (the windows light up one by one); tap again for day.",
+    about:
+      "A city made of blocks: streets with traffic going round the blocks, a park, and an elevated train looping around the edge. The buildings are taller toward the center, as in many downtowns. It is built from simple pieces rather than a real place.\n\nTap it and the sun goes down: walls and streets darken and the windows light up one at a time, while the cars and the train keep moving. Tap again for morning.",
+  },
+  "stork-migration": {
+    howTo: "Tap to play the storks' fall migration from Germany to Africa.",
+    about:
+      "White storks fly thousands of kilometers each fall from Europe to Africa, and back in spring. They soar on rising warm air and avoid long sea crossings, so storks from eastern Germany go round the Mediterranean by the Bosporus, Turkey, Israel and the Nile valley.\n\nThese are 30 real storks, juveniles and adults, tracked by GPS in 2013 by S. Rotics and colleagues and published on Movebank under a CC0 license, one position every six hours. Tap it to play July to October in about 12 seconds: each stork leaves its nest when it really did and draws its own trail behind it. The map's heights come from NOAA's ETOPO1, stretched up 45 times.",
+  },
+  earthquakes: {
+    howTo: "Tap to play the quakes in time order. Tap the plaque to refresh the live feed.",
+    about:
+      "Every day the U.S. Geological Survey publishes the earthquakes it has located around the world. This globe reads its feed when the toy opens: each dot is a quake, bigger for a stronger one, colored by depth (red and orange shallow, yellow and green deeper, blue deepest). Most lie along the edges of tectonic plates, such as the Pacific's Ring of Fire facing you.\n\nTap the globe to play the quakes in time order: each flashes at its moment. Tap the plaque to fetch the feed again; it shows when the data was fetched. Pick the past week, the past month or a year of the catalog in the Toy tab. If the feed can't be reached, the toy shows a saved snapshot and says so. Nothing is stored or sent.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------

@@ -2178,5 +2178,106 @@
       "checked": "September 30, 2026",
       "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
     }
+  ],
+  "geoData": [
+    {
+      "id": "grand-canyon-terrain",
+      "file": "assets/toys/grand-canyon/terrain.bin",
+      "toy": "grand-canyon",
+      "name": "Grand Canyon heights (3DEP) and aerial imagery (The National Map)",
+      "author": "U.S. Geological Survey; USDA Farm Service Agency (NAIP); NASA (Landsat)",
+      "page": "https://www.usgs.gov/3d-elevation-program",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: the 3DEP ImageServer and the USGSImageryOnly basemap, resampled to 192 x 192 heights and 320 x 320 colors."
+    },
+    {
+      "id": "st-helens-terrain",
+      "file": "assets/toys/st-helens/terrain.bin",
+      "toy": "st-helens",
+      "name": "Mount St. Helens before 1980 (USGS pre-eruption DEM) and today (3DEP, imagery)",
+      "author": "J. A. Bard and R. Phillips-Netherton, U.S. Geological Survey (doi:10.5066/P91W7C1L); U.S. Geological Survey (3DEP); USDA FSA (NAIP)",
+      "page": "https://doi.org/10.5066/P91W7C1L",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: an 11 km square round the summit on the UTM zone 10 grid; outside the pre-eruption DEM's 196 km² the 1979 surface is today's."
+    },
+    {
+      "id": "sea-floor-terrain",
+      "file": "assets/toys/sea-floor/terrain.bin",
+      "toy": "sea-floor",
+      "name": "Mariana Trench relief (ETOPO1 bedrock)",
+      "author": "NOAA National Centers for Environmental Information",
+      "page": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: 141.5–148.5° E, 9.5–16.5° N, 192 x 192."
+    },
+    {
+      "id": "tide-harbor-terrain",
+      "file": "assets/toys/tide-harbor/terrain.bin",
+      "toy": "tide-harbor",
+      "name": "Bar Harbor heights (NCEI coastal DEMs), imagery and tide predictions (CO-OPS 8413320)",
+      "author": "NOAA NCEI; NOAA CO-OPS; U.S. Geological Survey; USDA FSA (NAIP)",
+      "page": "https://tidesandcurrents.noaa.gov/stationhome.html?id=8413320",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: six-minute predictions relative to mean sea level, October 28, 2026, 00:00 UTC, for 24 h 54 min; the DEM's NAVD88 heights are taken as mean sea level."
+    },
+    {
+      "id": "hurricane-polo",
+      "file": "assets/toys/hurricane/storm.bin",
+      "toy": "hurricane",
+      "name": "Hurricane Polo (EP17, 2026): GOES-East band 13 at 18 UTC on September 21 and 22, the best track, Blue Marble and ETOPO1",
+      "author": "NOAA NESDIS (GOES), NOAA NHC (best track), NASA Earth Observatory (Blue Marble, through NASA GIBS), NOAA NCEI (ETOPO1)",
+      "page": "https://ftp.nhc.noaa.gov/atcf/btk/",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-storm.mjs: GIBS's colored infrared turned back into cloud-top temperatures through the layer's color map."
+    },
+    {
+      "id": "relief-map-terrain",
+      "file": "assets/toys/relief-map/terrain.bin",
+      "toy": "relief-map",
+      "name": "Yosemite Valley heights (3DEP), imagery, NLCD 2021 land cover and NHD streams",
+      "author": "U.S. Geological Survey; MRLC consortium (NLCD); USDA FSA (NAIP)",
+      "page": "https://www.mrlc.gov/data/nlcd-2021-land-cover-conus",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: the named NHD flowlines (layer 6), in flow direction."
+    },
+    {
+      "id": "stork-tracks",
+      "file": "assets/toys/stork-migration/migration.bin",
+      "toy": "stork-migration",
+      "name": "Fall migrations of juvenile vs. adult white storks (Rotics et al. 2016), fall 2013, and ETOPO1",
+      "author": "S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers, A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan; NOAA NCEI (ETOPO1)",
+      "page": "https://doi.org/10.5441/001/1.hn1bd23k",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-migration.mjs: 30 birds that reached Africa south of 15° N, one fix every six hours."
+    },
+    {
+      "id": "earthquakes-snapshot",
+      "file": "assets/toys/earthquakes/snapshot.json",
+      "toy": "earthquakes",
+      "name": "USGS earthquake feeds (past week M2.5+, past month M4.5+) and a year of the catalog (M5+, October 2025 to September 2026)",
+      "author": "U.S. Geological Survey",
+      "page": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-quakes.mjs: only records of networks us, hv, at and pt (USGS and NOAA authored); the live feed is read in the page, never stored."
+    },
+    {
+      "id": "earthquakes-globe",
+      "file": "assets/toys/earthquakes/globe.bin",
+      "toy": "earthquakes",
+      "name": "ETOPO1 global relief, 360 x 180",
+      "author": "NOAA National Centers for Environmental Information",
+      "page": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-quakes.mjs."
+    }
   ]
 }

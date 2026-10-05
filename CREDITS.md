@@ -500,6 +500,49 @@ checked on the live source page on September 30, 2026.
 
 Files people open in these toys are read in their browser and never uploaded.
 
+## Earth and maps (lane Geo)
+
+The Earth and maps toys (labs, lane Geo) are built from public data snapshots that `tools/geo-*.mjs`
+fetch at build time. Each license was checked on the live source page on October 5, 2026. U.S.
+government works are in the public domain.
+
+- Elevation: the U.S. Geological Survey's
+  [3D Elevation Program](https://www.usgs.gov/3d-elevation-program) ("All 3DEP products are public
+  domain"), for the Grand Canyon, Mount St. Helens today and Yosemite Valley.
+- Mount St. Helens before 1980: J. A. Bard and R. Phillips-Netherton (2024),
+  [Digital elevation model of Mount St. Helens, Washington and vicinity prior to the 1980 eruption](https://doi.org/10.5066/P91W7C1L),
+  U.S. Geological Survey data release, public domain.
+- Aerial imagery: The National Map's
+  [orthoimagery basemap](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
+  (USDA Farm Service Agency NAIP, with NASA Landsat at small scales), public domain.
+- Relief of the sea floor and the maps: NOAA NCEI's
+  [ETOPO1 Global Relief Model](https://www.ncei.noaa.gov/products/etopo-global-relief-model) and
+  [coastal elevation models](https://www.ncei.noaa.gov/products/coastal-elevation-models) (Bar
+  Harbor), public domain.
+- Tides: NOAA CO-OPS
+  [tide predictions for Bar Harbor, Maine (8413320)](https://tidesandcurrents.noaa.gov/stationhome.html?id=8413320),
+  public domain ([disclaimers](https://tidesandcurrents.noaa.gov/disclaimers.html)).
+- Hurricane Polo: GOES-East ABI band 13 imagery (NOAA NESDIS), served by NASA's
+  [Global Imagery Browse Services](https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy);
+  the [NHC best track](https://ftp.nhc.noaa.gov/atcf/btk/) (NOAA); the map from NASA's
+  [Blue Marble](https://visibleearth.nasa.gov/collection/1484/blue-marble) shaded relief and
+  bathymetry. All public domain.
+- Yosemite Valley's streams and land cover: the USGS
+  [National Hydrography Dataset](https://www.usgs.gov/national-hydrography/national-hydrography-dataset)
+  and the [National Land Cover Database 2021](https://www.mrlc.gov/data/nlcd-2021-land-cover-conus)
+  (USGS and the MRLC consortium), public domain.
+- Earthquakes: the USGS
+  [earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ("USGS-authored
+  or produced data and information are considered to be in the U.S. Public Domain"). The toy reads
+  the live feed when it opens or its plaque is tapped, and shows its source and time beside it;
+  nothing is stored or sent. The shipped snapshot keeps only records of networks us, hv, at and pt
+  (USGS and NOAA authored).
+- White storks: S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers,
+  A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan (2016),
+  [Data from: The challenges of the first migration](https://doi.org/10.5441/001/1.hn1bd23k),
+  Movebank Data Repository, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). The
+  paper: Journal of Animal Ecology, doi:10.1111/1365-2656.12525.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
