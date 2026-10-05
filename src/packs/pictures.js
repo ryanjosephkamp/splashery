@@ -1423,6 +1423,11 @@ function pgCrowd(time) {
       cap = Math.min(cap, Math.max(sx, sy));
     }
     const alone = cap === Infinity;
+    // (And, with others up, it stays within its page.)
+    if (!alone && !pgAlbum()) {
+      const pr = bk5PageRect(F.target.page, PG.pics);
+      cap = Math.min(cap, (pr.hw - Math.abs(a.cx - pr.cx)) / a.hw, (pr.hh - Math.abs(a.cy - pr.cy)) / a.hh); // prettier-ignore
+    }
     F.cap = alone ? Infinity : Math.max(1, 0.88 * cap);
     const want = alone ? 1 : 0;
     if (F.k === undefined) F.k = want;
