@@ -153,9 +153,10 @@
     "alarm-clock": {
       "v": "keep",
       "owner": "Hands should move. On tap it should jump up and down and ring like an alarm clock.",
-      "effect": "Hands tick all the time; tap rattles it off the table while it rings.",
+      "effect": "The hands show the real time and the second hand ticks; tap rattles it off the table while it rings.",
       "sound": "A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).",
-      "improved": "E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s)."
+      "improved": "E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s).",
+      "fixed": "Fix8: the hands show the real time. The scanned hands are cut out cleanly and kit-built hour, minute and second hands of the same shapes turn from this device's clock."
     },
     "vintage-camera": {
       "v": "keep",
@@ -2468,6 +2469,48 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "airport-xray": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
+      "effect": "Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride the belt through the scanner, pushing its lead curtains aside; the screen on top builds each bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic orange, inorganic green, metal blue, dense black). A tap sends the next bag.",
+      "sound": "The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is done.",
+      "improved": "Imaging: new toy."
+    },
+    "how-ct": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
+      "effect": "A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane). Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps back.",
+      "sound": "The gantry's knock as it starts and its motor's low run, lower on the way back.",
+      "improved": "Imaging: new toy."
+    },
+    "walnut-ct": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an openly licensed dataset (lane Imaging; labs only).",
+      "effect": "A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm block (resampled to the device's budget). A drag moves a cutting plane through it (front to back, top down or side to side) and shows the shell, the kernel's lobes and the air between them. The tap raises the density window so the kernel melts away and only the shell stays; a second tap brings it back.",
+      "sound": "A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.",
+      "improved": "Imaging: new toy, with tools/img-walnut.mjs."
+    },
+    "fruit-mri": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).",
+      "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back.",
+      "sound": "An MRI scanner's knocking as it steps through the slices.",
+      "improved": "Imaging: new toy."
+    },
+    "electron-microscope": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom and a snowflake (lane Imaging; labs only).",
+      "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out.",
+      "sound": "The stage motor's two soft steps and a low vacuum hum.",
+      "improved": "Imaging: new toy."
+    },
+    "thermal-camera": {
+      "v": "keep",
+      "owner": "The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea cooling and a hand warmer (lane Imaging; labs only).",
+      "effect": "A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap crossfades from normal colors to the thermal camera's false colors (the iron palette), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.",
+      "sound": "The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it turns off.",
+      "improved": "Imaging: new toy."
     }
   }
 }

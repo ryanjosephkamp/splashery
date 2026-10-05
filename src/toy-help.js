@@ -283,7 +283,7 @@ export const TOY_HELP = {
   "alarm-clock": {
     howTo: "Tap it to ring the bells.",
     about:
-      'An old wind-up alarm clock runs on a spring: winding the key tightens the spring, and as it slowly unwinds it turns the gears and the hands. Two metal bells sit on top, and when the alarm goes off a little hammer rattles back and forth between them.\n\nThe red second hand ticks all the time. Tap it and the twin bells ring while the clock rattles across the table. Before alarm clocks were common, some people paid a "knocker-up" to tap on windows with a long pole and wake people for work.',
+      'An old wind-up alarm clock runs on a spring: winding the key tightens the spring, and as it slowly unwinds it turns the gears and the hands. Two metal bells sit on top, and when the alarm goes off a little hammer rattles back and forth between them.\n\nIts hands show the real time on this device, in its local time zone, and the red second hand ticks once a second. Tap it and the twin bells ring while the clock rattles across the table. Before alarm clocks were common, some people paid a "knocker-up" to tap on windows with a long pole and wake people for work.',
   },
   "vintage-camera": {
     howTo: "Tap it to take a photo with a flash.",
@@ -1747,6 +1747,38 @@ export const TOY_HELP = {
     howTo: "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
     about:
       "Galaxy simulations follow gas with particles that carry mass, temperature, density and a smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated present day, not a telescope image.\n\nEach particle is shown with a Gaussian whose spread approximates the simulation's smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue and hot orange or red, or by Density to compare the gas concentration. Brightness also increases with density. Switch The box to show or hide the frame. Pinch or scroll to zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the gas's shape but do not give a quantitative column-density measurement.",
+  },
+
+  // ---- Imaging (lane Imaging) -----------------------------------------------------------
+  "airport-xray": {
+    howTo: "Tap to send the next bag through the scanner and watch its X-ray picture build.",
+    about:
+      "An airport scanner sends a fan of X-rays through each bag as the belt carries it past, and a row of detectors measures what gets through, one line at a time. Most scanners measure two energies at once. Comparing them tells light elements from heavy ones, so the screen colors each thing by what it is made of: orange for organic matter (clothes, food, paper, plastic), green for mixed and light inorganic matter (glass, ceramics, plastics with fillers), blue for metal, and black where almost nothing gets through.\n\nThe bags and the pictures here are built for the toy, with simplified materials. Tap to send the next bag.",
+  },
+  "how-ct": {
+    howTo: "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
+    about:
+      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.",
+  },
+  "fruit-mri": {
+    howTo: "Drag up or down to scroll through the slices. Tap to play through them all.",
+    about:
+      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit in the Toy tab. The faint outline shows where the slice is.",
+  },
+  "electron-microscope": {
+    howTo: "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
+    about:
+      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface.",
+  },
+  "thermal-camera": {
+    howTo: "Tap to switch the thermal camera on or off, and watch the tea cool.",
+    about:
+      "Everything gives off infrared light, more the warmer it is. A thermal camera measures that light and paints each temperature its own false color: here, black and violet for cold, then magenta, red, orange and yellow up to white for hot.\n\nThe tea in the mug starts at about 72 °C and cools (sped up: in real life it takes many minutes) as its steam thins. The mug's wall warms from the tea, the hand warmer stays at about 47 °C as the iron powder inside slowly rusts, and the glass of ice water is cold. The table is at room temperature, warmed or chilled a little where things stand on it. The scene and its temperatures are built for the toy.",
+  },
+  "walnut-ct": {
+    howTo: "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
+    about:
+      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
