@@ -9,9 +9,11 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-READY: October 5, 2026 (cloud session, Opus 5.5). Items 1 to 6 of the brief are built, with clips on
-Effect review page 2 (cards `img-*`, lane id `Imaging`). Item 7 (ideas of my own) is not built. The
-engine PR #274 merged on October 5, 2026, and main is merged into this branch.
+WORKING: Imaging r2 (October 5, 2026, Opus 5.5), PR #304 on `claude/lane-imaging` (restarted from
+main after #275 merged). The owner marked all ten clips "fix" with notes: sharper and less grainy
+everywhere; night-vision and infrared "visions" beside the realistic gray (microscope, MRI, walnut);
+and "virtually any toy" in How CT works. All three are built and pushed; the `-r2` clips are being
+rendered for Effect review page 2.
 
 - [x] 1. Airport X-ray scanner (`airport-xray`)
 - [x] 2. How CT works (`how-ct`): a kit-built nautilus shell
@@ -24,6 +26,12 @@ engine PR #274 merged on October 5, 2026, and main is merged into this branch.
      ultrasound of an egg).
 
 ## Notes
+
+- r2: every toy has `kernel: "sharp"` (labs) and `density: 2`. Visions: `VISIONS` and
+  `visionColor()` (gray, night, infrared) behind a Vision option (the walnut's Colors option). How
+  CT works: `CT_SPECIMENS` (the nautilus and 19 kit toys); `loadSpecimen()` builds the toy at rest
+  (parts hidden at rest left out) and `specimenVolume()` voxelizes its splats on a 72³ grid (skin,
+  plus a flood fill from the border for the inside).
 
 - The engine piece (#274): kit kind `volume` (`params: [density]`), driven by
   `out.volume = { normal, at, slab, window, glow, glowWidth }` (recipe coordinates). The cut is
