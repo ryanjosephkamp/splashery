@@ -101,4 +101,13 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+October 5, 2026: started (Opus 5.5, default effort, no helpers). Reading the mirror (`src/live/relief.js`,
+`src/packs/live.js`), the Song landscape and the Chladni plate; a generated mannequin test video
+next.
+
+## Notes
+
+## Known issues
+
+## For the Operator
+
