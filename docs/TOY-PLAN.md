@@ -2836,9 +2836,9 @@ Proposals below are suggestions; the owner may change them.
     every frame. With your audio or the microphone the plate's modes ring as strongly as the sound
     drives them, so a new note sets the sand off for its figure at once, from where it lies (no new
     plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio
-    open. Live r7 polish: the sharp kernel (each grain a crisp speck, up to 14,000 of them), a clean
-    straight rim and a smooth top on the plate, and a bow drawn like a real one (a round stick, a
-    ribbon of hair, a frog and a tip).
+    open. Live r7 polish: the sharp kernel (each grain a crisp speck), a clean straight rim and a
+    smooth top on the plate, and a bow drawn like a real one (a round stick, a ribbon of hair, a
+    frog and a tip).
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
