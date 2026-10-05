@@ -101,7 +101,7 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
-WORKING (October 5, 2026, 03:45 UTC; Opus 5.5). Items 1 to 3 are posted (four `lv7-*` cards on page
+READY (October 5, 2026, 04:15 UTC; Opus 5.5). Items 1 to 3 are posted (four `lv7-*` cards on page
 2). Then the Operator's routine of 02:24 UTC came in: the owner tested the Chladni plate with his
 own long song and the microphone, and the bow and the restart cycle were still there. That is item
 4, now built:
