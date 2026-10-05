@@ -2146,6 +2146,50 @@
       "note": "The PDB file's HEADER, TITLE, AUTHOR, resolution, ATOM, HETATM, ANISOU, TER and END records, water left out."
     },
     {
+      "id": "cos7-mt-clathrin",
+      "file": "assets/toys/smlm-microscope/cos7-mt-clathrin.smlm",
+      "toy": "smlm-microscope",
+      "name": "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ)",
+      "author": "Christophe Leterrier",
+      "page": "https://doi.org/10.5281/zenodo.5507427",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: the localizations in a 12 µm square, cut by tools/sci-samples.mjs."
+    },
+    {
+      "id": "nucleus-nup",
+      "file": "assets/toys/smlm-microscope/nucleus-nup.smlm",
+      "toy": "smlm-microscope",
+      "name": "Zola-3D NUP full nucleus (ShareLoc.XYZ)",
+      "author": "Andrey Aristov (uploaded by Benoit Lelandais)",
+      "page": "https://doi.org/10.5281/zenodo.7233696",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: a random half of the localizations, cut by tools/sci-samples.mjs."
+    },
+    {
+      "id": "m12i-gas",
+      "file": "assets/toys/galaxy-box/m12i-gas.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m12i (res7100), snapshot 600 (z = 0), gas",
+      "author": "The FIRE project (Wetzel et al. 2016, 2023, 2025; Hopkins 2015; Hopkins et al. 2018)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
+    },
+    {
+      "id": "night-sky-catalog",
+      "file": "assets/toys/night-sky/sky.json",
+      "toy": "night-sky",
+      "name": "HYG database v4.1 (stars to magnitude 6) and the Stellarium Western sky culture's constellation lines",
+      "author": "David Nash (astronexus.com); the Stellarium team",
+      "page": "https://github.com/astronexus/HYG-Database",
+      "license": "CC BY-SA 4.0",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/sky-catalog.mjs: 5,071 stars (every star to magnitude 6.0 plus the fainter ones a line needs) and 674 line segments (Stellarium commit 014fbb5e59; its data license reads \"CC BY-SA\", no version, credited as 4.0). The joined file stays CC BY-SA 4.0."
+    },
+    {
       "id": "sci3-sucrose",
       "file": "assets/toys/thermal-ellipsoids/sucrose-cod-2300557.cif",
       "toy": "thermal-ellipsoids",
@@ -2575,28 +2619,6 @@
       "note": "The PDB file's HEADER, TITLE, CRYST1, ATOM, HETATM, ANISOU and TER records (waters and alternate locations other than A left out), by tools/sci3-structures.mjs."
     },
     {
-      "id": "cos7-mt-clathrin",
-      "file": "assets/toys/smlm-microscope/cos7-mt-clathrin.smlm",
-      "toy": "smlm-microscope",
-      "name": "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ)",
-      "author": "Christophe Leterrier",
-      "page": "https://doi.org/10.5281/zenodo.5507427",
-      "license": "CC BY 4.0",
-      "checked": "September 30, 2026",
-      "note": "A subset: the localizations in a 12 µm square, cut by tools/sci-samples.mjs."
-    },
-    {
-      "id": "nucleus-nup",
-      "file": "assets/toys/smlm-microscope/nucleus-nup.smlm",
-      "toy": "smlm-microscope",
-      "name": "Zola-3D NUP full nucleus (ShareLoc.XYZ)",
-      "author": "Andrey Aristov (uploaded by Benoit Lelandais)",
-      "page": "https://doi.org/10.5281/zenodo.7233696",
-      "license": "CC BY 4.0",
-      "checked": "September 30, 2026",
-      "note": "A subset: a random half of the localizations, cut by tools/sci-samples.mjs."
-    },
-    {
       "id": "sci3-pores",
       "file": "assets/toys/smlm-microscope/pores-wga.smlm",
       "toy": "smlm-microscope",
@@ -2639,17 +2661,6 @@
       "license": "CC BY 4.0",
       "checked": "October 5, 2026",
       "note": "A subset cut by tools/sci3-samples.mjs."
-    },
-    {
-      "id": "m12i-gas",
-      "file": "assets/toys/galaxy-box/m12i-gas.bin",
-      "toy": "galaxy-box",
-      "name": "FIRE-2 m12i (res7100), snapshot 600 (z = 0), gas",
-      "author": "The FIRE project (Wetzel et al. 2016, 2023, 2025; Hopkins 2015; Hopkins et al. 2018)",
-      "page": "https://flathub.flatironinstitute.org/fire",
-      "license": "CC BY 4.0",
-      "checked": "September 30, 2026",
-      "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
     },
     {
       "id": "sci3-apoferritin-map",
@@ -2804,17 +2815,6 @@
       "license": "Public domain",
       "checked": "October 5, 2026",
       "note": "A 10 km square averaged to 256 × 256 samples by tools/sci3-terrain.mjs; also used by the Contour lab."
-    },
-    {
-      "id": "night-sky-catalog",
-      "file": "assets/toys/night-sky/sky.json",
-      "toy": "night-sky",
-      "name": "HYG database v4.1 (stars to magnitude 6) and the Stellarium Western sky culture's constellation lines",
-      "author": "David Nash (astronexus.com); the Stellarium team",
-      "page": "https://github.com/astronexus/HYG-Database",
-      "license": "CC BY-SA 4.0",
-      "checked": "October 5, 2026",
-      "note": "Made by tools/sky-catalog.mjs: 5,071 stars (every star to magnitude 6.0 plus the fainter ones a line needs) and 674 line segments (Stellarium commit 014fbb5e59; its data license reads \"CC BY-SA\", no version, credited as 4.0). The joined file stays CC BY-SA 4.0."
     }
   ],
   "dataClimateSamples": [
