@@ -56,17 +56,18 @@ READY for review (October 5, 2026, 07:00 UTC). Built, all labs, in `src/packs/sp
 - `real-moons` (Io, Europa, Ganymede, Callisto, Titan; maps only, no elevation exists) and
   `real-small-worlds` (Pluto, Ceres, Vesta, with their real shapes).
 - `nearby-stars`: Gaia's nearby stars within 20 pc, plus the brightest from HYG.
-- `star-systems`: TRAPPIST-1, TOI-178, 55 Cancri and the inner Solar System from the NASA
-  Exoplanet Archive; a tap glides the view level with the orbits (edge on, as Earth sees them).
+- `star-systems`: TRAPPIST-1, TOI-178, 55 Cancri and the inner Solar System from the NASA Exoplanet
+  Archive; a tap glides the view level with the orbits (edge on, as Earth sees them).
 - `real-galaxies`: M51, M101, M74 and M83 from ESA/Hubble and ESO pictures, with a guessed depth.
 - `saturn-v`: NASA's model, staging in Apollo 11's order.
 
-Evidence files, thumbnails, help and sounds for all eleven; clips and cards for all eleven on
-Effect review page 2 (lane record `SpaceR2`); `tests/sp2.spec.mjs` passes (23 tests), with
-screenshots `sp2-moon-*` and `sp2-mars-*`. Waiting on the owner's marks, and on the NASA 3D terms
-before more rockets.
+Evidence files, thumbnails, help and sounds for all eleven; clips and cards for all eleven on Effect
+review page 2 (lane record `SpaceR2`); `tests/sp2.spec.mjs` passes (23 tests), with screenshots
+`sp2-moon-*` and `sp2-mars-*`. Waiting on the owner's marks, and on the NASA 3D terms before more
+rockets.
 
 ## Notes", "## Known issues" and "##
+
 For the Operator" current). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 5, 2026, from the owner's push notes)
