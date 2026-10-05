@@ -2189,5 +2189,18 @@
       "checked": "October 5, 2026",
       "note": "Made by tools/sky-catalog.mjs: 5,071 stars (every star to magnitude 6.0 plus the fainter ones a line needs) and 674 line segments (Stellarium commit 014fbb5e59; its data license reads \"CC BY-SA\", no version, credited as 4.0). The joined file stays CC BY-SA 4.0."
     }
+  ],
+  "imagingSamples": [
+    {
+      "id": "walnut-1-ct",
+      "file": "assets/toys/walnut-ct/walnut.vol.gz",
+      "toy": "walnut-ct",
+      "name": "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning: Samples 1-8 (Walnut 1, the full_AGD_50 reconstruction)",
+      "author": "Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia Bethany Coban, K. Joost Batenburg (CWI, Amsterdam)",
+      "page": "https://doi.org/10.5281/zenodo.2686726",
+      "license": "CC BY 4.0",
+      "checked": "October 5, 2026",
+      "note": "Every second slice of the 501^3 reconstruction (100 µm voxels), read from Walnut1.zip by range requests, averaged in 3 x 3 x 3 blocks to 0.3 mm, cropped to the walnut and stored as 8-bit densities by tools/img-walnut.mjs."
+    }
   ]
 }
