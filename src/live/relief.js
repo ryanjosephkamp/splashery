@@ -38,6 +38,7 @@ export function reliefGrid(
     opacity = 1,
     v0 = 0,
     vs = 1,
+    spread = 1.45, // Live r7: a splat's diameter over its cell's width
   },
 ) {
   // prettier-ignore
@@ -52,7 +53,7 @@ export function reliefGrid(
         items.push({
           p,
           n: l === 0 ? n : [0, 0, 1],
-          size: (size * (l === 0 ? 1.45 : 1.2)) / 0.01,
+          size: (size * (l === 0 ? spread : 1.2)) / 0.01,
           flat,
           opacity,
           color: "#808080",
@@ -330,6 +331,11 @@ export class CameraDepth {
         cp[i + 2] = last[i + 2];
       }
     this.lastColors = cp.slice();
+    // Live r7: a light unsharp mask on what is drawn (the colors above stay
+    // as they are, for the next frame): each cell moves away from the mean
+    // of its 3 by 3 neighborhood by half the difference, so edges a cell or
+    // two wide read crisply at phone size. The noise is smoothed first.
+    sharpen(cp, cols, rows, 0.5, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
     g.putImageData(cur, 0, 0);
     // Live r7: someone who moves between two depth answers moves in the
     // picture at once, but their depth only at the next answer, so their
@@ -379,6 +385,7 @@ export class CameraDepth {
 // person's own colors, so no second copy of them shows behind.
 const FAR = 0.35; // a cell is wall below this (0 far .. 1 near)
 const BACK_GAP = 0.06; // r6: how far behind the wall it sits (recipe units)
+const GUARD = 4; // Live r7: its cells this near a person never learn the wall
 export class BackPlate {
   constructor(cols, rows) {
     this.cols = cols;
@@ -422,12 +429,14 @@ export class BackPlate {
     for (let y = 0; y < br; y++)
       for (let x = 0; x < bc; x++) {
         const c = y * bc + x;
-        // Live r7: two cells clear of the person (was one), so the soft rim
-        // of their outline isn't learned as wall (it showed as a ghost of
-        // the person beside them, seen from the side).
+        // Live r7: GUARD cells clear of the person (was one), so the rim of
+        // their outline isn't learned as wall: the depth model draws a
+        // person's outline a little inside their hair and ears, and those
+        // colors, learned as wall, showed as a ghost of the person beside
+        // them, seen from the side.
         let edge = false;
-        for (let j = Math.max(0, y - 2); j <= Math.min(br - 1, y + 2) && !edge; j++)
-          for (let i = Math.max(0, x - 2); i <= Math.min(bc - 1, x + 2); i++)
+        for (let j = Math.max(0, y - GUARD); j <= Math.min(br - 1, y + GUARD) && !edge; j++)
+          for (let i = Math.max(0, x - GUARD); i <= Math.min(bc - 1, x + GUARD); i++)
             if (near[j * bc + i]) edge = true;
         if (edge) continue;
         // The cell's colors: the frame's pixels under it (mirrored with the
@@ -603,7 +612,7 @@ export function fillHoles(vals, w, W, H, ch) {
 // depth, so the cut follows the outline in the picture.
 const EDGE = 0.15;
 const STEP = 0.06;
-const REACH = 4;
+const REACH = 7; // Live r7: was 4; the model draws an outline a few cells inside the hair
 export function snapEdges(d, w, h, colors = null) {
   const out = new Float32Array(d.length);
   // Cells beside a steep step, then grown by REACH (a running count per row,
@@ -668,7 +677,12 @@ export function snapEdges(d, w, h, colors = null) {
         const pick = sideByColor(d, w, h, colors, x, y, REACH, 1, lo, hi, colors, (y * w + x) * 3);
         if (pick) toNear = toNear * (1 - pick.trust) + pick.near * pick.trust;
       }
-      out[y * w + x] = toNear >= 0.5 ? hi : lo;
+      // A cell already on its side, where the depth around it is gentle (a
+      // face beside its outline), keeps its own depth: only the ramp of the
+      // model's soft edge is cut to the side's far or near value.
+      const side = toNear >= 0.5 ? hi : lo;
+      const own = toNear >= 0.5 ? v > (lo + hi) / 2 : v <= (lo + hi) / 2;
+      out[y * w + x] = own && !steep[y * w + x] ? v : side;
     }
   return out;
 }
@@ -806,6 +820,30 @@ export function tidyBand(band, d) {
   }
 }
 
+// Live r7: an unsharp mask on RGBA pixels (w x h) in place: c + amount (c -
+// the 3 by 3 box mean), by rows then columns.
+export function sharpen(px, w, h, amount, tmp) {
+  for (let ch = 0; ch < 3; ch++) {
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const a = px[(y * w + Math.max(0, x - 1)) * 4 + ch];
+        const b = px[(y * w + x) * 4 + ch];
+        const c = px[(y * w + Math.min(w - 1, x + 1)) * 4 + ch];
+        tmp[(y * w + x) * 3 + ch] = (a + b + c) / 3;
+      }
+  }
+  for (let y = 0; y < h; y++) {
+    const y0 = Math.max(0, y - 1);
+    const y1 = Math.min(h - 1, y + 1);
+    for (let x = 0; x < w; x++)
+      for (let ch = 0; ch < 3; ch++) {
+        const m = (tmp[(y0 * w + x) * 3 + ch] + tmp[(y * w + x) * 3 + ch] + tmp[(y1 * w + x) * 3 + ch]) / 3; // prettier-ignore
+        const o = (y * w + x) * 4 + ch;
+        px[o] = px[o] + amount * (px[o] - m);
+      }
+  }
+}
+
 // Live r7: smooths the depth within each surface and never across a jump (a
 // small bilateral filter, 5 by 5): the model's guess wobbles a little from
 // cell to cell over a face, and the splats lifted by it read as grain.
@@ -854,6 +892,11 @@ export function gridColors(frame, cols, rows, mirror) {
 // A picture of relief splats facing the viewer: `cols` by `rows`, `width`
 // wide, rising toward the viewer by up to `lift` where the depth says it is
 // near. Its canvas (the recipe's screen) holds the colors and the depth.
+
+// Live r7 (the owner's "keep making it sharper" of October 5, 2026): a
+// picture splat's diameter over its cell's width. 1.45 blurred the picture;
+// at 1.2 neighbors still overlap, so no gaps show when it is turned.
+const SPREAD = 1.2;
 
 export const MIRROR = {
   cols: 128,
@@ -927,7 +970,7 @@ export function buildMirror(
       for (let i = 0; i < cols; i++) {
         const u = (i + 0.5) / cols;
         const v = (j + 0.5) / rows;
-        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, withBack ? v / 2 : v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * SPREAD) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, withBack ? v / 2 : v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
       }
     k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
     // r5: the still picture's background layer, learned once from the photo.
@@ -966,6 +1009,7 @@ export function buildMirror(
     lift,
     n: [0, 0, 1],
     size: width / cols,
+    spread: SPREAD,
     part,
     vs: withBack ? 0.5 : 1,
   });
