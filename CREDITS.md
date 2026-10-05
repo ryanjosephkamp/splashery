@@ -202,6 +202,24 @@ data files are in the public domain under
 | [1EMA](https://www.rcsb.org/structure/1EMA) | Green fluorescent protein from _Aequorea victoria_ (1996) | M. Ormö, S. J. Remington                                            |
 | [4HHB](https://www.rcsb.org/structure/4HHB) | Human deoxyhaemoglobin at 1.74 Å (1984)                   | G. Fermi, M. F. Perutz                                              |
 
+### DNA to protein (lane Tiny world r2)
+
+The DNA to protein toy carries four real genes and the alpha carbons of their proteins' structures
+in `src/tiny/genes.js`, written by `tools/tw2-genes.mjs`. NCBI sequence records are in the public
+domain ([NCBI policies](https://www.ncbi.nlm.nih.gov/home/about/policies/)); PDB entries are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+| Source                                                          | What                                                 | Authors                                     |
+| --------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| [NM_000518.5](https://www.ncbi.nlm.nih.gov/nuccore/NM_000518.5) | Human hemoglobin subunit beta (HBB) mRNA             | NCBI RefSeq                                 |
+| [NM_000207.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000207.3) | Human insulin (INS) mRNA, transcript variant 1       | NCBI RefSeq                                 |
+| [NM_000239.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000239.3) | Human lysozyme (LYZ) mRNA                            | NCBI RefSeq                                 |
+| [M62653.1](https://www.ncbi.nlm.nih.gov/nuccore/M62653.1)       | _Aequorea victoria_ green fluorescent protein mRNA   | D. C. Prasher and others (1992)             |
+| [4HHB](https://www.rcsb.org/structure/4HHB)                     | Human deoxyhemoglobin at 1.74 Å (1984), a beta chain | G. Fermi, M. F. Perutz                      |
+| [1MSO](https://www.rcsb.org/structure/1MSO)                     | T6 human insulin at 1.0 Å (2003)                     | G. D. Smith, W. A. Pangborn, R. H. Blessing |
+| [1LZ1](https://www.rcsb.org/structure/1LZ1)                     | Human lysozyme at 1.5 Å (1981)                       | P. J. Artymiuk, C. C. F. Blake              |
+| [1GFL](https://www.rcsb.org/structure/1GFL)                     | Green fluorescent protein (1996)                     | F. Yang, L. G. Moss, G. N. Phillips Jr.     |
+
 ## Chemistry data (lane Chemistry)
 
 The periodic table, the atom toy's 118 elements, the molecule gallery and the DNA come from
@@ -235,6 +253,141 @@ toy's About tab. `tools/chs-data.mjs` and `tools/chs-molecules.mjs` fetch them a
   usual bond lengths.
 - Crystals: lattice constants at room temperature; alpha quartz's positions after Le Page and Donnay
   (1976).
+
+<!-- Real elements: written by tools/rel-credits.mjs -->
+
+## Real elements (lane Elements)
+
+The Real elements toy (a labs toy) shows 91 elements as photos of real samples, each cut out of its
+background and given depth by Depth Anything V2 Small (Apache 2.0) at build time
+(`tools/rel-samples.mjs`), in `assets/toys/real-elements/`. Each license was checked on the live
+page on October 5, 2026.
+
+- 80 photos from [Images of Elements](https://images-of-elements.com/) (Jumk.de Webprojects),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) ("The images are licensed under a
+  Creative Commons Attribution 3.0 Unported License, unless otherwise noted."; none of these is
+  otherwise noted), each credited by a link to its element's page:
+  [Hydrogen](https://images-of-elements.com/hydrogen.php),
+  [Helium](https://images-of-elements.com/helium.php),
+  [Lithium](https://images-of-elements.com/lithium.php),
+  [Beryllium](https://images-of-elements.com/beryllium.php),
+  [Boron](https://images-of-elements.com/boron.php),
+  [Carbon](https://images-of-elements.com/carbon.php),
+  [Nitrogen](https://images-of-elements.com/nitrogen.php),
+  [Oxygen](https://images-of-elements.com/oxygen.php),
+  [Neon](https://images-of-elements.com/neon.php),
+  [Sodium](https://images-of-elements.com/sodium.php),
+  [Magnesium](https://images-of-elements.com/magnesium.php),
+  [Aluminum](https://images-of-elements.com/aluminium.php),
+  [Silicon](https://images-of-elements.com/silicon.php),
+  [Phosphorus](https://images-of-elements.com/phosphorus.php),
+  [Sulfur](https://images-of-elements.com/sulfur.php),
+  [Chlorine](https://images-of-elements.com/chlorine.php),
+  [Argon](https://images-of-elements.com/argon.php),
+  [Potassium](https://images-of-elements.com/potassium.php),
+  [Calcium](https://images-of-elements.com/calcium.php),
+  [Scandium](https://images-of-elements.com/scandium.php),
+  [Titanium](https://images-of-elements.com/titanium.php),
+  [Vanadium](https://images-of-elements.com/vanadium.php),
+  [Chromium](https://images-of-elements.com/chromium.php),
+  [Manganese](https://images-of-elements.com/manganese.php),
+  [Iron](https://images-of-elements.com/iron.php),
+  [Cobalt](https://images-of-elements.com/cobalt.php),
+  [Nickel](https://images-of-elements.com/nickel.php),
+  [Copper](https://images-of-elements.com/copper.php),
+  [Zinc](https://images-of-elements.com/zinc.php),
+  [Gallium](https://images-of-elements.com/gallium.php),
+  [Germanium](https://images-of-elements.com/germanium.php),
+  [Arsenic](https://images-of-elements.com/arsenic.php),
+  [Selenium](https://images-of-elements.com/selenium.php),
+  [Bromine](https://images-of-elements.com/bromine.php),
+  [Krypton](https://images-of-elements.com/krypton.php),
+  [Rubidium](https://images-of-elements.com/rubidium.php),
+  [Strontium](https://images-of-elements.com/strontium.php),
+  [Yttrium](https://images-of-elements.com/yttrium.php),
+  [Zirconium](https://images-of-elements.com/zirconium.php),
+  [Niobium](https://images-of-elements.com/niobium.php),
+  [Molybdenum](https://images-of-elements.com/molybdenum.php),
+  [Ruthenium](https://images-of-elements.com/ruthenium.php),
+  [Rhodium](https://images-of-elements.com/rhodium.php),
+  [Palladium](https://images-of-elements.com/palladium.php),
+  [Silver](https://images-of-elements.com/silver.php),
+  [Cadmium](https://images-of-elements.com/cadmium.php),
+  [Indium](https://images-of-elements.com/indium.php),
+  [Tin](https://images-of-elements.com/tin.php),
+  [Antimony](https://images-of-elements.com/antimony.php),
+  [Tellurium](https://images-of-elements.com/tellurium.php),
+  [Iodine](https://images-of-elements.com/iodine.php),
+  [Xenon](https://images-of-elements.com/xenon.php),
+  [Cesium](https://images-of-elements.com/caesium.php),
+  [Barium](https://images-of-elements.com/barium.php),
+  [Lanthanum](https://images-of-elements.com/lanthanum.php),
+  [Cerium](https://images-of-elements.com/cerium.php),
+  [Praseodymium](https://images-of-elements.com/praseodymium.php),
+  [Neodymium](https://images-of-elements.com/neodymium.php),
+  [Samarium](https://images-of-elements.com/samarium.php),
+  [Europium](https://images-of-elements.com/europium.php),
+  [Gadolinium](https://images-of-elements.com/gadolinium.php),
+  [Terbium](https://images-of-elements.com/terbium.php),
+  [Dysprosium](https://images-of-elements.com/dysprosium.php),
+  [Holmium](https://images-of-elements.com/holmium.php),
+  [Erbium](https://images-of-elements.com/erbium.php),
+  [Thulium](https://images-of-elements.com/thulium.php),
+  [Ytterbium](https://images-of-elements.com/ytterbium.php),
+  [Lutetium](https://images-of-elements.com/lutetium.php),
+  [Hafnium](https://images-of-elements.com/hafnium.php),
+  [Tantalum](https://images-of-elements.com/tantalum.php),
+  [Tungsten](https://images-of-elements.com/tungsten.php),
+  [Rhenium](https://images-of-elements.com/rhenium.php),
+  [Osmium](https://images-of-elements.com/osmium.php),
+  [Iridium](https://images-of-elements.com/iridium.php),
+  [Platinum](https://images-of-elements.com/platinum.php),
+  [Gold](https://images-of-elements.com/gold.php),
+  [Mercury](https://images-of-elements.com/mercury.php),
+  [Thallium](https://images-of-elements.com/thallium.php),
+  [Lead](https://images-of-elements.com/lead.php),
+  [Bismuth](https://images-of-elements.com/bismuth.php).
+- Fluorine: "Liquid fluorine.jpg" by Prof B. G. Mueller,
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Liquid_fluorine.jpg). The cut-out sample made
+  from it is shared under the same license, shown beside the sample in the toy.
+- Technetium: "Technetium-sample.jpg" by Marco Cardin,
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Technetium-sample.jpg). The cut-out sample made
+  from it is shared under the same license, shown beside the sample in the toy.
+- Radium: "Radium226.jpg" by grenadier, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/),
+  on [Commons](https://commons.wikimedia.org/wiki/File:Radium226.jpg).
+- Protactinium: "Protactinium-233.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Protactinium-233.jpg).
+- Uranium: "Depleted Uranium.jpg" by 范皓程,
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Depleted_Uranium.jpg).
+- Neptunium: "Neptunium2.jpg" by Los Alamos National Laboratory,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Neptunium2.jpg).
+- Plutonium: "Plutonium3.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Plutonium3.jpg).
+- Americium: "Americium microscope.jpg" by Bionerd,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Americium_microscope.jpg).
+- Berkelium: "Berkelium metal.jpg" by Oak Ridge National Laboratory, U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Berkelium_metal.jpg).
+- Californium: "Californium.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Californium.jpg).
+- Einsteinium: "EinsteiniumGlow.JPG" by R. G. Haire, U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:EinsteiniumGlow.JPG).
+
+The facts come from PubChem's periodic table and element pages (NCBI; public domain U.S. government
+data); the uses are our own short sentences, each backed by words PubChem quotes from Jefferson Lab
+and Los Alamos National Laboratory (U.S. Department of Energy). See `tools/rel-facts.mjs` and
+`docs/evidence/real-elements.json`.
+
+<!-- End of Real elements -->
 
 ## Word vectors
 
@@ -500,6 +653,80 @@ checked on the live source page on September 30, 2026.
 
 Files people open in these toys are read in their browser and never uploaded.
 
+## Night sky (lane Night sky)
+
+The catalog snapshot `assets/toys/night-sky/sky.json` (made by `tools/sky-catalog.mjs`) joins two CC
+BY-SA sources, so it is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) too, and the
+toy's About tab says so.
+
+- Stars: the [HYG database](https://github.com/astronexus/HYG-Database) v4.1 by David Nash
+  (astronexus.com), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live
+  LICENSE file, checked October 5, 2026). Every star to magnitude 6.0 and the fainter stars a
+  constellation line needs (5,071), with position, magnitude, B−V color, distance, spectral type and
+  names.
+- Constellation lines: the Stellarium team's
+  [Western sky culture](https://github.com/Stellarium/stellarium-skycultures/tree/master/western)
+  (commit 014fbb5e59, May 26, 2026). Its description's license section reads "Text and data: CC
+  BY-SA" (no version given; credited here as 4.0) and "Illustrations: Free Art License"; only the
+  line data (pairs of Hipparcos numbers, 674 segments in the 88 constellations) is used, never the
+  illustrations.
+- Planet, Sun and Moon positions are computed in the browser from published formulas: E. M.
+  Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (JPL Solar System Dynamics, Table 1), the Astronomical Almanac's low-precision lunar series, and
+  Jean Meeus, _Astronomical Algorithms_ (2nd ed., 1998) for sidereal time, precession and planet
+  magnitudes. The tests compare them with values recorded from
+  [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) (`tools/sky-horizons.mjs`, build time only).
+
+The place the toy shows is never saved or sent: a city's coordinates are built in, and "Use my
+location" keeps the browser's answer in memory only.
+
+## Data and climate (lane Data and climate)
+
+The Data in 3D toy (Studio) and the Climate records toy (Science) ship dated snapshots and never
+fetch anything live. Each license was checked on the live source page on October 5, 2026.
+
+- Climate records and a Data in 3D sample: monthly mean CO2 at Mauna Loa from the
+  [NOAA Global Monitoring Laboratory](https://gml.noaa.gov/ccgg/trends/data.html) (Xin Lan, Pieter
+  Tans and Kirk W. Thoning), NOAA's file of September 5, 2026, in the public domain under
+  [NOAA's terms](https://gml.noaa.gov/about/disclaimer.html) ("in the public domain, unless
+  specifically annotated otherwise"). NOAA does not endorse Splashery. Only NOAA's own measurements,
+  from May 1974, are kept: the file's months from March 1958 to April 1974 come from the Scripps
+  Institution of Oceanography, whose site carries no data license and whose site terms forbid
+  republishing without permission, so they are left out.
+- Climate records: the GISS Surface Temperature Analysis
+  ([GISTEMP v4](https://data.giss.nasa.gov/gistemp/)), Land-Ocean Temperature Index, by the GISTEMP
+  Team, NASA Goddard Institute for Space Studies (2026), accessed October 5, 2026; and Lenssen, N.,
+  G. A. Schmidt, M. Hendrickson, P. Jacobs, M. Menne and R. Ruedy (2024), "A GISTEMPv4 observational
+  uncertainty ensemble", Journal of Geophysical Research: Atmospheres 129, e2023JD040179. A U.S.
+  government work, in the public domain.
+- Data in 3D sample: earthquakes of magnitude 4.5 and up in the 30 days to October 5, 2026, from the
+  [U.S. Geological Survey](https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php), a U.S.
+  government work in the public domain. Seven of the feed's columns are kept.
+- Data in 3D sample: the Iris data of R. A. Fisher (1936), Bezdek's corrected copy from the
+  [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/53/iris),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A header row was added and "Iris-"
+  written as "Iris ".
+
+Tables people open in Data in 3D are read in their browser and never uploaded.
+
+## Sound and light lab
+
+The Sound lab, the Sound recorder and the Light lab (labs) use no recorded assets: their sounds and
+the spectrometer's sample picture are made by the page. Their data:
+
+- Emission lines: the visible lines (380 to 750 nm, in air) of sixteen neutral atoms, from the NIST
+  [Handbook of Basic Atomic Spectroscopic Data](https://www.nist.gov/pml/handbook-basic-atomic-spectroscopic-data)
+  (Sansonetti and Martin, J. Phys. Chem. Ref. Data 34, 1559 (2005); NIST SRD 108, drawn from the
+  Atomic Spectra Database), its "Strong Lines" tables for H, He, Li, Na, K, Ca, Sr, Ba, Cu, Zn, Cd,
+  Hg, Ne, Ar, Kr and Xe (for example
+  [hydrogentable2.htm](https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable2.htm)).
+  Measured values, credited to NIST; `tools/sll-nist.mjs` fetches them again.
+- Glass: SCHOTT's Sellmeier coefficients for N-SF11 and N-BK7, as listed on
+  [RefractiveIndex.INFO](https://refractiveindex.info/?shelf=specs&book=SCHOTT-optical&page=N-SF11)
+  (from the SCHOTT catalog).
+- Wavelength colors: Dan Bruton's approximation of the visible spectrum.
+
 ## Imaging (lane Imaging)
 
 - Walnut CT scan: Walnut 1 of the "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning:
@@ -511,6 +738,32 @@ Files people open in these toys are read in their browser and never uploaded.
   `tools/img-walnut.mjs`.
 - The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
   recipes.
+
+## Molecule viewer (lane Molecule viewer)
+
+The Molecule viewer (labs) ships a snapshot of five entries from the Protein Data Bank, fetched from
+files.rcsb.org on October 5, 2026, unchanged. PDB data are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+[wwPDB usage policy](https://www.wwpdb.org/about/usage-policies) (checked on the live page October
+5, 2026: "Data files contained in the PDB archive are available under the CC0 1.0 Universal (CC0
+1.0) Public Domain Dedication"); as it encourages, each entry and its authors are cited:
+
+- Crambin, [PDB 1CRN](https://www.rcsb.org/structure/1CRN), deposited by W. A. Hendrickson and M. M.
+  Teeter; M. M. Teeter, "Water structure of a hydrophobic protein at atomic resolution", PNAS 81,
+  6014 (1984).
+- Green fluorescent protein, [PDB 1EMA](https://www.rcsb.org/structure/1EMA), deposited by M. Ormö
+  and S. J. Remington; M. Ormö, A. B. Cubitt, K. Kallio, L. A. Gross, R. Y. Tsien and S. J.
+  Remington, Science 273, 1392 (1996).
+- Hen egg-white lysozyme, [PDB 1LYZ](https://www.rcsb.org/structure/1LYZ), deposited by R. Diamond,
+  D. C. Phillips, C. C. F. Blake and A. C. T. North; R. Diamond, J. Mol. Biol. 82, 371 (1974).
+- B-DNA dodecamer, [PDB 1BNA](https://www.rcsb.org/structure/1BNA): H. R. Drew, R. M. Wing, T.
+  Takano, C. Broka, S. Tanaka, K. Itakura and R. E. Dickerson, PNAS 78, 2179 (1981).
+- Caffeine, [Chemical Component CFF](https://www.rcsb.org/ligand/CFF): the ideal coordinates of the
+  wwPDB Chemical Component Dictionary (part of the PDB archive, CC0).
+
+An entry fetched by its code is read from RCSB when the person asks and is never stored; its title,
+authors and the time of the fetch show beside it, with the CC0 notice. Files people open are read in
+their browser and never uploaded.
 
 ## Worlds
 
