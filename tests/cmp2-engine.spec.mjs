@@ -25,18 +25,18 @@ test("a shown text option is a text box that sets the option", async ({ page }) 
   page.on("pageerror", (e) => problems.push(e.message));
   await page.goto("/?renderer=webgl2&profile=weak");
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-  // The Enigma, with its message option shown for this test.
+  // The Bombe, with its message option shown for this test.
   await page.evaluate(async () => {
     const { RECIPES } = await import("/src/packs/computing-history.js");
-    const o = RECIPES["enigma-machine"].options.find((x) => x.key === "message");
+    const o = RECIPES.bombe.options.find((x) => x.key === "message");
     o.hidden = false;
-    o.placeholder = "HELLO";
+    o.placeholder = "WEATHERREPORT";
     const app = window.__splashery.app;
-    await app.loadToy({ kind: "builtin", id: "enigma-machine" });
+    await app.loadToy({ kind: "builtin", id: "bombe" });
   });
   const box = page.locator("#toy-options input.option-text");
   await expect(box).toHaveCount(1, { timeout: 120_000 });
-  await expect(box).toHaveValue("HELLO");
+  await expect(box).toHaveValue("WEATHERREPORT");
   await box.fill("WETTER");
   await box.press("Enter");
   await expect
