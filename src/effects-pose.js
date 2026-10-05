@@ -85,6 +85,14 @@ export function poseUniforms(u, pose, squish = null) {
   return u;
 }
 
+// The world's up in the toy's model (recipe) frame while the toy is posed,
+// else null: a recipe's drive reads it as about.up.
+export function poseUp(stage) {
+  if (!stage.toyPose || !stage.toy) return null;
+  const o = stage.worldToModel([0, 0, 0]);
+  return v3.norm(v3.sub(stage.worldToModel([0, 1, 0]), o));
+}
+
 // For tests and clips: a Level 1 body's pose lying on its side ("side",
 // turned a quarter about the view's depth) or upside down ("down"), set down
 // on the floor where it stood. ho: a HandsOn after ensure() in "toy" mode.
