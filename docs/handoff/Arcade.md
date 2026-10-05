@@ -117,13 +117,20 @@ src/media.js and the Space pack without editing them; if you need a change there
   - G1 **Shardball**: Flat board and Dome styles. Clips are on Effect review page 2.
   - G2 **Longtail**: Cube, Planet (Mars, the Moon, Earth) and Ring worlds, with tunnels. Clips are
     on page 2.
-  - G6 **Grain Garden**: falling sand in a glass box. Clip coming.
-  - G7 **Page Breaker**: words and pictures from your own PDF or photo. Clip coming.
-  - G3 **Strata**: falling stones in a deep well. Clip coming.
-  - G4 **Volley Table**: a two-paddle rally. Clip coming.
-  - G5 **Stone Belt**: real asteroid shapes from NASA. Clip coming.
-  - G11 **Soft Landing**: real Moon and Mars ground from NASA. Clip coming.
-- Not started: G13 Pinball, G8 Run across your photo, G9 Shadow puzzle, G10 Ride the song.
+  - G6 **Grain Garden**: falling sand in a glass box. Clip on page 2.
+  - G7 **Page Breaker**: words and pictures from your own PDF or photo. Clip on page 2.
+  - G3 **Strata**: falling stones in a deep well.
+  - G4 **Volley Table**: a two-paddle rally.
+  - G5 **Stone Belt**: real asteroid shapes from NASA.
+  - G11 **Soft Landing**: real Moon and Mars ground from NASA.
+  - G13 **Night Owl Pinball**: a table on the physics engine (src/physics).
+  - G9 **Cast a Shadow**: turn a carved block until its shadow fills the outline.
+  - G8 **Photo Dash**: a marble runs along the skyline of your own photo.
+  - G10 **Note Rider**: catch a song's notes in their lanes to play it (built-in tunes or a MIDI
+    file).
+  - The clips from Strata on are rendering and go on page 2 as each one finishes.
+- Not built: mini golf waits, as the brief says. The block world (G14, G15) is a later lane; its
+  splat-budget notes are under Notes.
 
 ## Names
 
@@ -139,6 +146,10 @@ None of the names borrows a game's brand.
 - **Volley Table**: a rally on a felt table. It isn't "Pong".
 - **Stone Belt**: an asteroid belt of stones. It isn't "Asteroids".
 - **Soft Landing**: the goal. It isn't "Lunar Lander".
+- **Night Owl Pinball**: a night table with an owl. No brand table.
+- **Cast a Shadow**: says what it does. It isn't "Shadowmatic".
+- **Photo Dash**: a dash across your photo.
+- **Note Rider**: you ride the notes. It isn't "Guitar Hero" or "Audiosurf".
 
 ## Notes
 
