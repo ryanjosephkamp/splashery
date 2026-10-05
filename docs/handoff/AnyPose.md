@@ -97,9 +97,11 @@ docs/audits/poses-2026-10.md, the per-toy recipe fixes your sweep lists, and thi
 
 ## State
 
-WORKING: the lane's work is done and its specs are running before READY (October 5, 2026). Model:
-Opus 5.5, default effort. Engine PR #276 (`claude/lane-any-pose-engine`) must merge first; lane PR
-#277 (`claude/lane-any-pose`) carries it merged in. Both have main merged (October 5).
+READY: all five items done (October 5, 2026). Model: Opus 5.5, default effort. Engine PR #276
+(`claude/lane-any-pose-engine`) must merge first; lane PR #277 (`claude/lane-any-pose`) carries it
+merged in. Both have main merged (October 5). Specs run: `pose-engine`, `pose`, `hea-engine`,
+`heb-engine`, `hec-engine`, `phy-engine`, `hec`, `phy`, `taps`, `smoke`, `unit`, all pass (the
+`hec-engine` timing test passes idle; it failed only under load).
 
 ### The cause (item 1)
 
@@ -153,7 +155,7 @@ plays in pieces and is not tossed whole any more.
 ### For the Operator
 
 - The Effect review page has no `lanes/AnyPose` record yet; the cards are under that lane id.
-- `hec-engine` "soft parts are cheap" (a timing test, untouched code) failed once while the machine
-  was busy with the sweep; it is in the spec run now.
+- `hec-engine` "soft parts are cheap" (a timing test, untouched code) fails under load (1.04 ms
+  against 1 ms) and passes idle on main and on the branch (about 0.5 ms).
 - A cloud container sleeps when the session idles, which kills background jobs (servers, sweeps);
   long jobs here were kept going by staying busy.
