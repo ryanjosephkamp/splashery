@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" data-root="./">
+  <head>
+    <script>
+      (function () {
+        var p = location.pathname,
+          i = p.indexOf("/site/");
+        var b = document.createElement("base");
+        b.href = i < 0 ? "/" : p.slice(0, i + 6);
+        document.head.appendChild(b);
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Page not found · Splashery</title>
+    <meta name="description" content="This page isn't here." />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/404.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Page not found · Splashery" />
+    <meta property="og:description" content="This page isn't here." />
+    <meta property="og:url" content="https://ryanjosephkamp.github.io/splashery/site/404.html" />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/site.css" />
+    <script type="module" src="assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="">Home</a></li>
+              <li><a href="toys/">Toys</a></li>
+              <li><a href="tools/">Tools</a></li>
+              <li><a href="science/">Science</a></li>
+              <li><a href="studio/">Studio</a></li>
+              <li><a href="learn/">Learn</a></li>
+              <li><a href="new/">What's new</a></li>
+              <li><a href="about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-intro">
+        <h1>This page isn't here</h1>
+        <p class="lead">It may have moved. Try a search, or start from the home page.</p>
+      </div>
+      <form class="search-page-form" role="search" action="search/" method="get">
+        <label for="q404">Search toys, tools and pages</label>
+        <input id="q404" type="search" name="q" autocomplete="off" enterkeyhint="search" />
+      </form>
+      <p class="actions">
+        <a class="button primary" href="./">Home</a
+        ><a class="button" href="../">Open the gallery</a>
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href=""
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="toys/">Toys</a></li>
+            <li><a href="tools/">Tools</a></li>
+            <li><a href="science/">Science</a></li>
+            <li><a href="studio/">Studio</a></li>
+            <li><a href="learn/">Learn</a></li>
+            <li><a href="new/">What's new</a></li>
+            <li><a href="about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../">The gallery</a></li>
+            <li><a href="search/">Search</a></li>
+            <li><a href="../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
