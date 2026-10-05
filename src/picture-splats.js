@@ -302,7 +302,9 @@ export function sheetCount(w, h, method, inkPixels = w * h) {
 //     sheet toward its facing (lane Books r5: a figure that pops out). The
 //     base under the detail takes the lowest relief round it, so it never
 //     shows in front of the detail. With `nearest: true` (lane Pages r6)
-//     the map is sampled without blending, for a relief of flat steps.
+//     the map is sampled without blending, for a relief of flat steps; with
+//     `keep: [lo, hi]` only the picture where the map lies in that range is
+//     built (a cutout; amount may then be 0).
 // }
 // Returns { count, center (Float32 x4), color, scale, rotation (Uint16 half
 // x4), anim (Float32 x4), centers (Float32 x3), ink (the detail count) }.
@@ -371,6 +373,17 @@ export function buildSheet(job) {
   // (Lane Pages r6: `nearest` takes the nearest value, not a blend, so a
   // relief of a few flat steps (cutout layers) keeps clean edges.)
   const sample = rel?.nearest ? nearest : bilinear;
+  // (Lane Pages r6: `keep: [lo, hi]` keeps only the part of the picture where
+  // the map lies between lo and hi, a cutout with clean edges: a base block
+  // only where all of it is inside.)
+  const kr = job.relief?.keep && job.relief.d && job.relief.w > 0 && job.relief.h > 0 ? job.relief : null; // prettier-ignore
+  const kept = (x, y) => {
+    if (!kr) return true;
+    const v = nearest(kr.d, kr.w, kr.h, (x / w) * kr.w - 0.5, (y / h) * kr.h - 0.5);
+    return v >= kr.keep[0] && v <= kr.keep[1];
+  };
+  const r0 = 1.5 * BASE_SIGMA;
+  const keptBlock = (x, y) => !kr || (kept(x, y) && kept(x - r0, y) && kept(x + r0, y) && kept(x, y - r0) && kept(x, y + r0)); // prettier-ignore
   const raise = (map, x, y) => rel.amount * Math.max(0, Math.min(1, sample(map, rel.w, rel.h, (x / w) * rel.w - 0.5, (y / h) * rel.h - 0.5))); // prettier-ignore
 
   // One splat at pixel coordinates (x, y), `up` world units in front of
@@ -433,6 +446,7 @@ export function buildSheet(job) {
     const off = pass * BLOCK * 0.5;
     for (let y = inset + off; y <= h - inset; y += BLOCK)
       for (let x = inset + off; x <= w - inset; x += BLOCK) {
+        if (!keptBlock(x, y)) continue;
         if (!screen) blockColor(blocks, x, y, c);
         emit(x, y, 0, BASE_SIGMA, BASE_SIGMA, c[0], c[1], c[2]);
       }
@@ -468,6 +482,7 @@ export function buildSheet(job) {
     for (let x = 0; x < w; x++) {
       const i = y * w + x;
       if (inkMask && !inkMask[i]) continue;
+      if (kr && !kept(x + 0.5, y + 0.5)) continue;
       const o = i * 4;
       if (screen) emit(x + 0.5, y + 0.5, lift, DETAIL_SIGMA, DETAIL_SIGMA, 1, 1, 1);
       else emit(x + 0.5, y + 0.5, lift, DETAIL_SIGMA, DETAIL_SIGMA, px[o] / 255, px[o + 1] / 255, px[o + 2] / 255); // prettier-ignore

@@ -93,6 +93,21 @@ test.describe("stepped relief (no browser)", () => {
     expect(off(step)).toEqual([0, 150, 300]);
     expect(off(blend).length).toBeGreaterThan(3);
   });
+
+  test("a relief's keep range builds only that part of the picture, with clean edges", () => {
+    const w = 32;
+    const h = 32;
+    const px = new Uint8ClampedArray(w * h * 4).fill(200);
+    // The right half is "near" (1), the left half "far" (0).
+    const d = new Float32Array(8 * 8);
+    for (let y = 0; y < 8; y++) for (let x = 4; x < 8; x++) d[y * 8 + x] = 1;
+    const job = { pixels: px, w, h, method: "pixels", origin: [0, 0, 0], right: [1 / w, 0, 0], down: [0, -1 / w, 0], normal: [0, 0, 1] }; // prettier-ignore
+    const all = buildSheet({ ...job, pixels: px.slice() });
+    const cut = buildSheet({ ...job, pixels: px.slice(), relief: { w: 8, h: 8, d, amount: 0, keep: [0.5, 1] } }); // prettier-ignore
+    expect(cut.count).toBeGreaterThan(all.count * 0.4);
+    expect(cut.count).toBeLessThan(all.count * 0.6);
+    for (let i = 0; i < cut.count; i++) expect(cut.centers[i * 3]).toBeGreaterThan(0.48);
+  });
 });
 
 test.describe("Pop out, tilt, slider and figures (in the app)", () => {

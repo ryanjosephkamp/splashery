@@ -542,7 +542,10 @@ pitch and roll stay at the toy's starting pose. Zoom, pan, pinch and Reset view 
   new move from an old one).
 - A sheet's relief (`out.sheets[id].relief`, 5b) may carry `nearest: true`: its map is then sampled
   without blending, so a map of a few flat values raises the picture in flat steps with clean edges
-  (cutout layers, as in a paper pop-up book).
+  (cutout layers, as in a paper pop-up book), and `keep: [lo, hi]`: only the part of the picture
+  where the map lies in that range is built, a cutout with clean edges (its `depth` may be 0).
+  Several cutouts of one picture on parts of their own make the layers of a paper pop-up book (lane
+  Pages r6's P1).
 - `info.figures` is the scene's `toy.figures` (docs/SCENE-SCHEMA.md): `[{ page, box, depth }]`. A
   drive that hands back `out.figures` (a list) replaces it in the scene, so links, saved files and
   embeds carry it; an empty list clears it.
