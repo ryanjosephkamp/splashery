@@ -138,8 +138,9 @@ Effect review page 2, the contact sheet, thumbnails and the full lane checks.
   each mark with a little overshoot. The minute and hour hands move on with each step. A wind-up
   clock's balance really beats 4 to 5 times a second; once a second reads best at phone size and
   matches the kit Alarm clock.
-- **Time zone:** not added. Scan rigs can't take Toy tab options without an engine change (only kit
-  recipes and scan looks have options, and a rig's `drive()` gets no `info.data`).
+- **Time zone:** not added, on the Operator's call of October 5, 2026: the clock shows this device's
+  local time, and its About text says so. Scan rigs can't take Toy tab options without an engine
+  change (only kit recipes and scan looks have options, and a rig's `drive()` gets no `info.data`).
 - Clips: `node tools/fx8-clip.mjs <out-dir>`. It gives the page a virtual clock that moves on with
   each frame, so the hands move at their real speed in the clip (effect-clip.mjs steps only the
   toy's clock).
@@ -154,4 +155,3 @@ Effect review page 2, the contact sheet, thumbnails and the full lane checks.
 
 - This also does the alarm-clock item in Lane Photoreal r3's brief (docs/handoff/PhotorealR3.md,
   lines 108-109).
-- A time zone option for the real alarm clock would need a small engine PR: options for scan rigs.
