@@ -1657,7 +1657,7 @@ export const TOY_HELP = {
   // Lane Data and climate.
   "data-in-3d": {
     howTo:
-      "Open a CSV or TSV in the Toy tab (or pick a sample), choose the columns for X, Y, Z, color and size, then tap the chart to drop the points and watch them rise.",
+      "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
     about:
       "A table becomes a 3D chart you can turn: each row a point in a scatter, or rows gathered into bars or a surface whose heights are the mean of the rows in each cell. The labels turn to face you as you go round.\n\nYour file is read in your browser and never uploaded. Headers, quoted fields, dates, categories and missing cells are understood; a very big table is shown as an even random sample, and the Toy tab says so. Save a picture or a turning video from the Toy tab. The samples are a month of earthquakes (USGS), Fisher's 150 iris flowers (UCI, CC BY 4.0) and the CO2 record at Mauna Loa (NOAA).",
   },
