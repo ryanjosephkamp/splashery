@@ -3545,7 +3545,7 @@ export const TOYS = [
     pack: "data-climate",
     labs: true,
     tags: "climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart",
-    camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.0 },
+    camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.3 },
   },
 ];
 
