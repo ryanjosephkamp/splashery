@@ -6,46 +6,41 @@ You are a Splashery worker session, started by the Operator (the coordinating se
 October push. Repo: ryanjosephkamp/splashery. Your lane: Viewers (id `Viewers`, prefix `vwr`).
 Branches: `claude/lane-viewers` (and `claude/lane-viewers-engine` for any engine change). PR title:
 "Phase Viewers: a splat toolkit and a point cloud viewer". Handoff file: docs/handoff/Viewers.md
-(create it; start it with this brief, word for word, under "## Brief", then keep "## State", "##
-Notes", "## Known issues" and "## For the Operator" current). Model: Opus 5.5.
+(create it; start it with this brief, word for word, under "## Brief", then keep "## State
 
-### Brief (written by the Operator on October 5, 2026, from the owner's Push Plan picks S2 and S3)
+READY (October 5, 2026): both toys built, tested and pushed on `claude/lane-viewers` (PR #287).
+Five clips are on Effect review page 2 (lane record `Viewers`): `vwr-toolkit-split`,
+`vwr-toolkit-compare`, `vwr-clouds-palace`, `vwr-clouds-bridge`, `vwr-clouds-crater`. Waiting for
+the owner's marks; the full suite is for the Integrator.
 
-Two labs tools for files people already have, on the device (nothing uploaded):
-
-1. **Splat toolkit** (S3, "Useful to everyone who makes splats"). Open .ply (3D Gaussian splatting),
-   .splat, .spz and .sog files (check what the vendored PlayCanvas 2.22.3 and tools already read;
-   add a reader where needed under the library rule). Show the stats (splat count, bounds,
-   spherical-harmonics degree, file size, memory). Crop with a box, remove floaters (a statistical
-   outlier filter you can tune, with a before/after), shrink (decimate to a target count), convert
-   and save to another format (a download the person chooses), and compare two splats side by side
-   in step. Fast on large files: work in a worker, show progress.
-2. **Point clouds** (S2, "Absolutely, yes ... maybe even a little bit more"). Open LAS, LAZ, PLY,
-   XYZ and PTS; draw the points as splats; color by height, intensity, classification or the file's
-   own color; measure a distance; crop; thin; export. LAZ needs a library: the owner approved a LAZ
-   reader on October 4, 2026. Prefer a permissive license; if the only good one is LGPL, use it (he
-   approved it by name) and say so in LICENSES.md and the PR. Load it only when a LAZ file is
-   opened. Include two or three small sample files under allowed licenses (USGS 3DEP lidar is public
-   domain; OpenTopography lists licenses per dataset), credited.
-
-Both toys on the Studio or Lab shelf (your choice; say why), labs only. Tests in
-`tests/vwr*.spec.mjs` with small generated test files (no outside files in tests): each format
-opens, crop and filter do what they say, export round-trips. Clips at phone size on Effect review
-page 2 (lane record `Viewers`). How-to and About texts.
-
-You own: `src/viewers/` (new), `src/packs/viewers.js` (new), the vendored LAZ reader in `vendor/`,
-`tools/vwr-*.mjs`, `tests/vwr*.spec.mjs`, your toys' lines in the shared lists, and your handoff
-file. The existing Model to splats toy and the Video to 3D toy belong to other lanes: import from
-them, don't edit them.
-
-How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
-replace the prefix and lane record with yours). Labs: the Operator merges after a full test run.
-Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
-for a long job, schedule a check-in with send_later instead of going idle.
-
-## State
-
-WORKING (October 5, 2026): started. Plan below.
+- **Splat toolkit** (`splat-toolkit`, Studio, labs). Opens PLY (binary, text and the compressed PLY
+  of SuperSplat and splat-transform), .splat, SPZ 1 to 3 and SOG 2 (zipped, or meta.json with its
+  pictures). Shows the count, size (and the middle 98%), harmonics degree, file size, memory, mean
+  opacity and median splat size. Crop with a box (outline drawn; keep inside or outside), Remove
+  floaters (a statistical outlier filter: mean distance to the k nearest neighbors, removed past
+  mean + strength × std; strength and k in the Toy tab), Also remove nearly invisible splats, Shrink
+  (keep a share; the most visible splats, spread over the scene), Show the result, the result with
+  the removed splats in red, or before and after side by side. Compare puts a second splat (a sample
+  or a second file) beside the first. Save writes PLY, SPZ 3, SOG 2 (base colors) or .splat as a
+  download. The tap spins each splat once about its own middle, both in step. Defaults: the cactus
+  with 0.6% stray splats added, floaters on, before and after.
+- **Point clouds** (`point-clouds`, Studio, labs). Opens LAS 1.0 to 1.4 (formats 0 to 10), LAZ
+  (laz-perf in the worker), point PLY, XYZ and PTS. Color by height, intensity, classification (with
+  a legend) or the file's colors; point size; Measure (two taps drop pins on the nearest drawn
+  points; straight, along the ground and the rise, in meters when the file says UTM); Thin (one
+  point per 1.5 to 12 typical spacings); Crop; Up is Z or Y; Save PLY, LAS 1.2 or XYZ. The tap
+  sweeps a glowing lidar scan line across the points. Samples: USGS 3DEP lidar (public domain): the
+  Palace of Fine Arts, the Golden Gate Bridge's south end with Fort Point, Meteor Crater (the Grand
+  Canyon project covers only strips of the walls, so it read as a slab).
+- Work runs in a module worker (`src/viewers/worker.js` over `src/viewers/engine.js`); the toy gets
+  a preview within the device's budget (the most visible splats, a little bigger, for a big splat
+  file; an even share of points for a cloud). Readers and edits are plain modules (`splat-io.js`,
+  `splat-ops.js`, `cloud-io.js`, `cloud-ops.js`) used by the Node tests too.
+- Tests: `tests/vwr.spec.mjs` (21 tests: each format opens, crop, filter, shrink, thin, every save
+  round-trips, splat-transform reads our PLY and SOG, LAZ and SOG open in the browser worker, Save
+  downloads a file that reads back, two taps measure). Fixtures: `tools/vwr-fixtures.mjs` makes
+  `tests/fixtures/vwr/` from our own numbers (splat-transform for compressed PLY and SOG; laspy for
+  LAS and LAZ).
 
 ## Notes
 
@@ -60,8 +55,22 @@ WORKING (October 5, 2026): started. Plan below.
 
 ## Known issues
 
-(none yet)
+- In Node (check-packs, the Node tests' recipe builds) Point clouds shows its placeholder: the
+  vendored laz-perf is its worker build, so LAZ is read only in a browser worker. The browser tests
+  cover it.
+- SOG is saved without view-dependent colors (degree 0): the palette of harmonics needs a k-means
+  over all splats that is too slow in JavaScript; PLY and SPZ keep them. SPZ 4 (zstd) and KSPLAT are
+  not read (clear messages).
+- SPZ is read and written in its own right-up-back axes (Niantic's spec; Splashery's file loader
+  agrees); splat-transform reads SPZ without turning it, so an SPZ saved here opens upside down
+  there.
+- Side by side at phone width each splat is small (the pair is wide); turn the phone or zoom in.
 
 ## For the Operator
 
-(nothing yet)
+- New libraries under the library rule (both permissive, under 2 MB, no server): laz-perf 0.0.7
+  (Apache-2.0, 300 KB) and the WebP codec from splat-transform 3.6.1 (MIT and libwebp BSD-3, 360
+  KB). Both load only inside the toys' worker when a .laz or .sog is opened (or SOG saved).
+- Build tools added to LICENSES.md: Python laspy, lazrs and pyproj (samples and fixtures).
+- Samples add about 11 MB of LAZ under `assets/toys/point-clouds/` (three 450,000-point tiles),
+  loaded only when the toy opens.

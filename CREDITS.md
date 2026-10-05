@@ -441,8 +441,8 @@ Government works in the
   million points.
 - Golden Gate Bridge's south end and Fort Point: project CA_SanFrancisco_1_B23, a 340 m box, 450,000
   points.
-- Grand Canyon's South Rim at Mather Point: project AZ_GrandCanyonNP_1_2019, a 900 m box, 450,000
-  points.
+- Meteor Crater (Barringer meteorite crater), Arizona: project AZ_NorthEast_3_D23, a 1.6 km box,
+  450,000 of its 8.5 million points.
 
 Each keeps the points' classification and intensity, without the noise classes, moved to UTM meters.
 LAZ files are read with [laz-perf](https://github.com/hobuinc/laz-perf) (Hobu, Inc., Apache-2.0).

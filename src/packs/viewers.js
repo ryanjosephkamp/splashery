@@ -230,7 +230,7 @@ const SPLAT_TOOLKIT = {
       key: "source",
       label: "Splat",
       type: "select",
-      default: "cactus",
+      default: "cactus-stray",
       choices: [
         ...SPLAT_SAMPLES.map((s) => ({ id: s.id, label: s.label })),
         { id: "custom", label: "Your splat (open one below)" },
@@ -240,7 +240,7 @@ const SPLAT_TOOLKIT = {
       key: "show",
       label: "Show",
       type: "select",
-      default: "result",
+      default: "split",
       choices: [
         { id: "result", label: "The result" },
         { id: "removed", label: "The result, with what is removed in red" },
@@ -269,7 +269,7 @@ const SPLAT_TOOLKIT = {
         { id: "no", label: "No, as it is stored" },
       ],
     },
-    { key: "floaters", label: "Remove floaters", type: "switch", default: false },
+    { key: "floaters", label: "Remove floaters", type: "switch", default: true },
     { key: "strength", label: "Floaters: how far out (lower removes more)", type: "slider", min: 0.5, max: 6, step: 0.1, default: 3 }, // prettier-ignore
     {
       key: "neighbors",
@@ -540,10 +540,10 @@ export const CLOUD_SAMPLES = [
     title: "USGS 3DEP lidar, CA_SanFrancisco_1_B23 (340 m around Fort Point, 450,000 of its points)", // prettier-ignore
   },
   {
-    id: "grand-canyon",
-    file: "../../assets/toys/point-clouds/grand-canyon.laz",
-    label: "Grand Canyon's South Rim at Mather Point (LAZ)",
-    title: "USGS 3DEP lidar, AZ_GrandCanyonNP_1_2019 (900 m at Mather Point, 450,000 of its points)", // prettier-ignore
+    id: "meteor-crater",
+    file: "../../assets/toys/point-clouds/meteor-crater.laz",
+    label: "Meteor Crater, Arizona (LAZ)",
+    title: "USGS 3DEP lidar, AZ_NorthEast_3_D23 (1.6 km around Barringer meteorite crater, 450,000 of its 8.5 million points)", // prettier-ignore
   },
 ].map((s) => ({
   ...s,
@@ -770,7 +770,7 @@ const POINT_CLOUDS = {
     PC.panel?.refresh();
   },
   drive(t, c, out) {
-    // The scan line climbs from the lowest point to the highest and fades out above.
+    // The scan line crosses from one side to the other.
     const s = c.scan ?? 0;
     out.morph = [s > 0 ? 1.15 * (1 - s) : 0, 0, 0, 0];
     out.glow = [0.35, 1, 0.9, s > 0 ? 1.4 : 0];
@@ -792,19 +792,20 @@ const POINT_CLOUDS = {
     const m = v.main;
     const n = m.count;
     const size = Math.max(1e-4, v.spacing * s * 0.6 * (o.size || 1));
-    const lo = f.min[1];
-    const span = f.max[1] - f.min[1] || 1;
+    // The scan line sweeps across from west to east, like a lidar pass over the ground.
+    const lo = f.min[0];
+    const span = f.max[0] - f.min[0] || 1;
     k.cloud({ count: (n * 160000) / k.count, pattern: false, fit: false }, (_r, j) => {
       if (j >= n) return null;
-      const y = m.pos[j * 3 + 1];
+      const x = m.pos[j * 3];
       return {
-        p: [(m.pos[j * 3] - c[0]) * s, (y - c[1]) * s, (m.pos[j * 3 + 2] - c[2]) * s],
+        p: [(x - c[0]) * s, (m.pos[j * 3 + 1] - c[1]) * s, (m.pos[j * 3 + 2] - c[2]) * s],
         scales: [size, size, size],
         color: [m.col[j * 3], m.col[j * 3 + 1], m.col[j * 3 + 2]],
         opacity: 0.95,
         pattern: false,
         kind: "band",
-        params: [(y - lo) / span, 0.06],
+        params: [(x - lo) / span, 0.035],
         channel: 0,
       };
     });

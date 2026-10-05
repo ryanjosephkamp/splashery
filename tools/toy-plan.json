@@ -2252,9 +2252,9 @@
     "point-clouds": {
       "v": "new",
       "owner": "The owner's Push Plan pick S2, \"Absolutely, yes ... maybe even a little bit more\" (October 4, 2026; lane Viewers; labs only).",
-      "effect": "LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity, classification (with a legend) or the file's own colors; measure the distance between two tapped points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line up through the points, from the lowest to the highest (2.6 s).",
-      "sound": "A rising airy tone with faint ticks as the scan line climbs.",
-      "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, the Grand Canyon's South Rim."
+      "effect": "LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity, classification (with a legend) or the file's own colors; measure the distance between two tapped points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line across the points from west to east, like a scanner's pass over the ground (2.6 s).",
+      "sound": "An airy rising tone with faint ticks as the scan line crosses.",
+      "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, Meteor Crater."
     },
     "thermal-ellipsoids": {
       "v": "keep",

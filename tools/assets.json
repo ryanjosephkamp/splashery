@@ -2205,16 +2205,16 @@
       "note": "Made by tools/vwr-samples.mjs as above (450,000 points, UTM zone 10N)."
     },
     {
-      "id": "grand-canyon",
-      "file": "assets/toys/point-clouds/grand-canyon.laz",
+      "id": "meteor-crater",
+      "file": "assets/toys/point-clouds/meteor-crater.laz",
       "toy": "point-clouds",
-      "name": "USGS 3DEP lidar, project AZ_GrandCanyonNP_1_2019: 900 m at Mather Point on the South Rim",
+      "name": "USGS 3DEP lidar, project AZ_NorthEast_3_D23: 1.6 km around Barringer meteorite crater (Meteor Crater), Arizona",
       "author": "U.S. Geological Survey, 3D Elevation Program",
       "page": "https://registry.opendata.aws/usgs-lidar/",
       "license": "Public domain (U.S. Government work)",
       "licenseUrl": "https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map",
       "checked": "October 5, 2026",
-      "note": "Made by tools/vwr-samples.mjs as above (450,000 points, UTM zone 12N)."
+      "note": "Made by tools/vwr-samples.mjs as above (450,000 of its 8.5 million points, UTM zone 12N)."
     }
   ],
   "lazReader": {
