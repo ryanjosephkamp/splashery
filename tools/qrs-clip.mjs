@@ -10,7 +10,7 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/qrs-clip.mjs <out-dir> [--size=360] [--fps=12] [clip ...]
 //
-// Clips: anatomy-parts, anatomy-encode, damage-spread, damage-levels,
+// Clips: anatomy-parts, anatomy-pop, anatomy-encode, damage-spread, damage-levels,
 // damage-heal, damage-tear-burn, damage-splats, three. Writes <out-dir>/qrs-<clip>.gif and
 // a strip of 8 frames, <out-dir>/qrs-<clip>-strip.png.
 
@@ -26,7 +26,7 @@ const opt = (k, d) => {
 const outDir = args.find((a) => !a.startsWith("--")) || ".cache/qrs-clips";
 const size = Number(opt("size", 360));
 const fps = Number(opt("fps", 12));
-const all = ["anatomy-parts", "anatomy-encode", "damage-spread", "damage-levels", "damage-heal", "damage-tear-burn", "damage-splats", "three"]; // prettier-ignore
+const all = ["anatomy-parts", "anatomy-pop", "anatomy-encode", "damage-spread", "damage-levels", "damage-heal", "damage-tear-burn", "damage-splats", "three"]; // prettier-ignore
 const pick = args.filter((a) => !a.startsWith("--")).slice(1);
 const clips = pick.length ? pick : all;
 fs.mkdirSync(outDir, { recursive: true });
@@ -44,6 +44,14 @@ const SCRIPTS = {
     },
     { wait: 1.2 },
     ...["finder", "separator", "timing", "format", "dark", "data", "ecc", "mask"].flatMap((p) => [{ opts: { view: "parts", part: p }, key: "lift", cap: `part:${p}` }, { wait: 1.6 }]), // prettier-ignore
+  ],
+  "anatomy-pop": [
+    { toy: "qr-anatomy" },
+    { opts: { view: "parts", part: "", text: "HELLO WORLD", level: "Q", pop: true }, key: "lift", cap: "Pop the lit part out: on" }, // prettier-ignore
+    { wait: 0.8 },
+    ...["finder", "timing", "format", "data", "ecc"].flatMap((p) => [{ opts: { view: "parts", part: p }, key: "lift", cap: `part:${p}` }, { wait: 2.2 }]), // prettier-ignore
+    { opts: { view: "encode", step: "mode" }, key: "lift", cap: "step:mode" },
+    { wait: 2.2 },
   ],
   "anatomy-encode": [
     { toy: "qr-anatomy" },
@@ -261,6 +269,9 @@ for (const clip of clips) {
         }
         if (st.opts) {
           unhook();
+          // A step that adds damage: only what it adds moves.
+          if (st.opts.damage !== undefined && lab.damage)
+            lab.setPrev(lab.damage().options?.damage ?? "");
           await player.switchTo({ options: st.opts, key: st.key, value: 1 });
           hook();
           pending = 0;

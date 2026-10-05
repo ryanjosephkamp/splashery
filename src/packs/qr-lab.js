@@ -29,12 +29,14 @@ import { sampleModules, toDark, analyze } from "../qr-lab/read.js";
 import { encodeRGB, readRGB } from "../qr-lab/rgb.js";
 import { anatomyModifier, damageModifier } from "../qr-lab/field.js";
 import * as pc from "../pc.js";
+import { inked } from "../font.js";
 
 const FG = [0.07, 0.08, 0.1];
 const BG = [1, 1, 1];
 const TABLE = [0.36, 0.29, 0.22];
-const WRONG_DARK = [0.55, 0.08, 0.1];
-const WRONG_LIGHT = [1, 0.8, 0.8];
+const WRONG_DARK = [0.62, 0.04, 0.08];
+const WRONG_LIGHT = [1, 0.64, 0.64];
+const LABEL = [0.93, 0.89, 0.8];
 const app = () => globalThis.__splashery?.app;
 const mixc = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
 const bin = (v, n) => v.toString(2).padStart(n, "0");
@@ -431,6 +433,9 @@ const ANATOMY = {
     { key: "view", label: "View", type: "select", default: "parts", hidden: true, choices: [{ id: "parts", label: "The parts" }, { id: "encode", label: "Encode" }] }, // prettier-ignore
     { key: "part", label: "Part", type: "select", default: "", hidden: true, choices: [{ id: "", label: "None" }, ...PARTS.map((p) => ({ id: p.id, label: p.label }))] }, // prettier-ignore
     { key: "step", label: "Step", type: "select", default: "mode", hidden: true, choices: STEPS.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
+    // The owner's idea of October 5, 2026: the lit part pops out of the code
+    // (kept on as you tap through the parts and steps).
+    { key: "pop", label: "Pop the lit part out", type: "switch", default: false },
   ],
   controls: [
     { key: "lift", label: "Light it up", type: "pulse", ease: 1.2 },
@@ -469,6 +474,14 @@ const ANATOMY = {
     // The highlight lifts and settles a little after each tap.
     const L = d.lifted ? 0.55 + 0.45 * Math.sin(Math.PI * Math.min(1, (1 - (c.lift ?? 0)) * 1.0)) * (c.lift > 0 ? 1 : 0) : 0; // prettier-ignore
     out.morph = [P, F, L, d.maskId ?? 0];
+    // Pop out eases on its own clock, so it carries on smoothly across the
+    // rebuilds each tap makes.
+    const dt = Math.min(0.1, Math.max(0, t - (AN.popT ?? t)));
+    AN.popT = t;
+    const want = AN.options?.pop ? 1 : 0;
+    AN.pop = (AN.pop ?? 0) + Math.max(-dt / 0.9, Math.min(dt / 0.9, want - (AN.pop ?? 0)));
+    const ease = AN.pop * AN.pop * (3 - 2 * AN.pop);
+    out.tokens = [{ visible: d.lifted ? ease : 0 }];
   },
   gpuField(o, fit) {
     const s = AN.steps;
@@ -673,6 +686,7 @@ async function addDamage() {
   let d = list.find((x) => x.kind === tool && x.region === region);
   if (!d) list.push((d = { kind: tool, amount: 0, region, seed: 1 + list.length }));
   d.amount = Math.min(1, d.amount + STEP_AMOUNT);
+  DM.pendingPrev = o.damage || "";
   await switchTo({ damage: formatDamage(list), show: "damaged" }, "drop");
 }
 
@@ -784,6 +798,18 @@ function scheduleDamageCheck(delay = 500) {
   DM.timer = setTimeout(go, delay);
 }
 
+// Words on the table (the site's 5 × 7 font), centered on (cx, cy), h tall.
+function label(out, text, cx, cy, h) {
+  const px = h / 7;
+  const w = text.length * 6 - 1;
+  for (let t = 0; t < 7; t++)
+    for (let s = 0; s < w; s++) {
+      if (!inked([text], s + 0.5, t + 0.5)) continue;
+      for (const [a, b] of [[0.25, 0.25], [0.75, 0.25], [0.25, 0.75], [0.75, 0.75]]) // prettier-ignore
+        out.push({ p: [cx + (s + a - w / 2) * px, cy + (3.5 - t - b) * px, -0.36], scales: [0.4 * px, 0.4 * px, 0.01], quat: [0, 0, 0, 1], color: LABEL, opacity: 1, params: [0, 4], pattern: false }); // prettier-ignore
+    }
+}
+
 const DAMAGE = {
   alive: true,
   turntable: false,
@@ -814,6 +840,7 @@ const DAMAGE = {
       let d = list.find((x) => x.kind === tool && x.region === region);
       if (!d) list.push((d = { kind: tool, amount: 0, region, seed: 1 + list.length }));
       d.amount = Math.min(1, d.amount + STEP_AMOUNT);
+      DM.pendingPrev = o.damage || "";
       return { options: { damage: formatDamage(list), show: "damaged" }, key: "drop" };
     },
   },
@@ -854,6 +881,9 @@ const DAMAGE = {
     const N = L.N;
     const S = N * N;
     const damage = parseDamage(o.damage);
+    // The damage before the last tap (the same as now after any other rebuild).
+    const prev = DM.pendingPrev !== undefined ? parseDamage(DM.pendingPrev) : damage;
+    DM.pendingPrev = undefined;
     const showRead = o.show === "read" && DM.read?.length === codes.length;
     let torn = null;
     const make = (per) => {
@@ -890,24 +920,48 @@ const DAMAGE = {
           return;
         }
         const base = codeSplats(s.modules, N, { per, fg: FG, bg: BG });
+        base.forEach((sp, i) => (sp.id = i));
         const { splats: hit, pieces } = applyDamage(base, damage, { size: N });
+        // Only the damage the last tap added moves: what the damage before it
+        // had already done stays as it was.
+        const before = prev === damage ? null : applyDamage(base, prev, { size: N });
+        const gone = new Set(
+          before ? before.pieces.flatMap((pc) => pc.splats.map((q) => q.id)) : [],
+        );
+        const was = new Map(before ? before.splats.map((q) => [q.id, q]) : []);
+        const stickerNew = !!before && JSON.stringify(damage.filter((d) => d.kind === "sticker")) !== JSON.stringify(prev.filter((d) => d.kind === "sticker")); // prettier-ignore
         for (const sp of hit) {
           sp.p[0] += ox;
           sp.p[1] += oy;
-          const kind = sp.piece === "sticker" ? 1 : 0;
+          let kind = sp.piece === "sticker" ? (stickerNew ? 1 : 0) : 0;
+          const old = was.get(sp.id);
+          if (
+            before &&
+            sp.reveal !== undefined &&
+            old &&
+            old.color.some((v, j) => Math.abs(v - sp.color[j]) > 0.02)
+          ) {
+            // Newly recolored: it keeps its old color until its turn comes.
+            kind =
+              6 +
+              16 * (2 * Math.round(Math.min(1, Math.max(0, sp.reveal)) * 200) + (sp.dark ? 1 : 0));
+          }
           splats.push({
             ...sp,
             params: [sp.mod >= 0 ? 1 + id0 + sp.mod : 0, kind],
             pattern: false,
           });
         }
+        // The torn piece's center, in the code's own units (the same in
+        // every code), for the GPU program to turn it about.
+        const tear = pieces.find((pc) => pc.kind === "tear");
+        if (tear?.splats.length && !torn) torn = tear.splats.reduce((m, q) => [m[0] + q.p[0] / tear.splats.length, m[1] + q.p[1] / tear.splats.length], [0, 0]); // prettier-ignore
         for (const pcs of pieces)
           for (const sp of pcs.splats) {
+            if (!before || gone.has(sp.id)) continue; // came off before this tap
             sp.p[0] += ox;
             sp.p[1] += oy;
             if (pcs.kind === "tear") {
-              // Its center, in the code's own units (the same in every code).
-              torn = torn || pcs.splats.reduce((m, q) => [m[0] + (q.p[0] - ox) / pcs.splats.length, m[1] + (q.p[1] - oy) / pcs.splats.length], [0, 0]); // prettier-ignore
               splats.push({ ...sp, params: [1 + id0 + Math.max(0, sp.mod), 2], pattern: false });
             } else {
               const gx = Math.floor(sp.p[0] / 2);
@@ -919,6 +973,11 @@ const DAMAGE = {
               });
             }
           }
+      });
+      // Each code's level, on the table under it.
+      codes.forEach((s, ci) => {
+        const [ox, oy] = L.offsets[ci];
+        label(splats, `LEVEL ${s.level}`, ox, oy - s.size / 2 - QUIET - 1.05, 1.15);
       });
       return splats;
     };
@@ -1102,6 +1161,8 @@ if (typeof window !== "undefined" && window.__splashery) {
     heal: () => heal(),
     addDamage: () => addDamage(),
     readThree: () => readThree(),
+    // The damage before the next rebuild (so only what is added moves).
+    setPrev: (damage) => (DM.pendingPrev = damage),
     three: () => ({ rgb: TH.rgb, result: TH.result, shot: TH.lastShot }),
     frontPose: (half, margin) => frontPose(half, margin),
     set autoCheck(on) {

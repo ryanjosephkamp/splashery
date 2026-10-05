@@ -160,6 +160,9 @@ const qmul = (a, b) => [
 ];
 
 // Applies the damages to the splats (a new list; the input is untouched).
+// Splats a scratch, smudge or burn recolors get `reveal` (0..1): the order in
+// which the toy shows the change arrive (along a scratch, out from a
+// smudge's middle, out from a burn).
 // Returns { splats, pieces }: pieces holds what came off (the torn corner,
 // the burned part), each { kind, splats }, for the toy to drop away.
 // ctx: { size, fg, bg } (the code's colors, for the color drift).
@@ -200,6 +203,7 @@ export function applyDamage(splats, damages, { size, width = size + 8 }) {
             if (Math.abs(along) < half && across < 0.18) {
               s.color = mixc(s.color, [0.93, 0.92, 0.9], 0.9);
               s.scratched = true;
+              s.reveal = (along + half) / (2 * half); // drawn along the line
               break;
             }
           }
@@ -251,6 +255,7 @@ export function applyDamage(splats, damages, { size, width = size + 8 }) {
                 const k = (ragged - dist) / (ragged * 0.28);
                 s.color = mixc(s.color, CHAR, clamp01(k * 1.1));
                 s.charred = true;
+                s.reveal = clamp01(dist / ragged); // the char spreads outward
               }
               keep.push(s);
             }
@@ -273,7 +278,11 @@ export function applyDamage(splats, damages, { size, width = size + 8 }) {
           const u = (dx * c + dy * s_) / rx;
           const v = (-dx * s_ + dy * c) / ry;
           const q = u * u + v * v;
-          if (q < 1) s.color = mixc(s.color, SMUDGE, 0.8 * (1 - q * q));
+          if (q < 1) {
+            s.color = mixc(s.color, SMUDGE, 0.8 * (1 - q * q));
+            s.smudged = true;
+            s.reveal = Math.sqrt(q); // the smear spreads from its middle
+          }
         }
         break;
       }

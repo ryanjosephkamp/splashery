@@ -9,8 +9,9 @@
 //        2 the torn corner (flies off)    3 a burned chunk (crumbles away)
 //        4 the table behind (never bent)  5 a module a block's healing flips
 //                                           (extra: the block)
-//        6 a data or error correction module (extra: its place on the
-//          zigzag path, in bits)
+//        6 anatomy: a data or error correction module (extra: its place on
+//          the zigzag path, in bits); Damage lab: a module new damage
+//          recolors (extra: 2 × its turn, 0..200, + 1 if it was dark)
 //        + 8 lifted by the highlight (the parts of a code)
 //
 // "How a QR code works" (anatomyModifier): uSpMorph x the placement's
@@ -48,6 +49,7 @@ vec4 qlQ = vec4(0.0, 0.0, 0.0, 1.0);
 float qlAlpha = 1.0;
 float qlBack = 0.0;
 float qlAsh = 0.0;
+float qlOrig = -1.0; // 0 or 1: show the module's color from before the damage
 float qlHash(float n) { return fract(sin(n * 12.9898 + 4.1414) * 43758.5453); }
 vec3 qlRot(vec4 q, vec3 v) { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 vec4 qlAxis(vec3 a, float t) { return vec4(normalize(a) * sin(t * 0.5), cos(t * 0.5)); }
@@ -78,6 +80,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
 }
 void modifySplatColor(vec3 center, inout vec4 color) {
   vec3 c = color.rgb;
+  if (qlOrig > -0.5) c = qlOrig > 0.5 ? QFG : QBG;
   float mid = 0.5 * (dot(QFG, vec3(0.2126, 0.7152, 0.0722)) + dot(QBG, vec3(0.2126, 0.7152, 0.0722)));
   vec3 other = dot(c, vec3(0.2126, 0.7152, 0.0722)) < mid ? QBG : QFG;
   c = mix(c, other, qlBack);
@@ -101,6 +104,7 @@ var<private> qlQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> qlAlpha: f32 = 1.0;
 var<private> qlBack: f32 = 0.0;
 var<private> qlAsh: f32 = 0.0;
+var<private> qlOrig: f32 = -1.0;
 fn qlHash(n: f32) -> f32 { return fract(sin(n * 12.9898 + 4.1414) * 43758.5453); }
 fn qlRot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 fn qlAxis(a: vec3f, t: f32) -> vec4f { return vec4f(normalize(a) * sin(t * 0.5), cos(t * 0.5)); }
@@ -134,6 +138,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
 }
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var c = (*color).rgb;
+  if (qlOrig > -0.5) { c = select(QBG, QFG, qlOrig > 0.5); }
   let W = vec3f(0.2126, 0.7152, 0.0722);
   let mid = 0.5 * (dot(QFG, W) + dot(QBG, W));
   let other = select(QFG, QBG, dot(c, W) < mid);
@@ -209,8 +214,18 @@ void modifySplatCenter(inout vec3 center) {
     }
   }
   if (kind > 7.5) off.z += uSpMorph.z * (0.9 + 0.15 * sin(uSpKit.x * 3.0)) * QS;
+  vec3 p = piv + qlRot(q, rel) + off;
+  // Pop out: the lit part comes off the code as one piece, tipping toward
+  // the viewer about the code's middle and floating in front of it.
+  float pop = uSpTokens[0].w;
+  if (kind > 7.5 && pop > 0.0) {
+    vec3 mid = -QC * QS;
+    vec4 tip = qlAxis(vec3(1.0, 0.0, 0.0), -0.55 * pop);
+    p = mid + qlRot(tip, p - mid) + vec3(0.0, 0.9 * pop, 4.5 * pop + 0.25 * pop * sin(uSpKit.x * 2.0)) * QS;
+    q = qlMul(tip, q);
+  }
   qlQ = q;
-  center = piv + qlRot(q, rel) + off;
+  center = p;
 }
 `;
   const wgsl = `${WGSL_HEAD(k)}
@@ -250,8 +265,16 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
     }
   }
   if (kind > 7.5) { off.z += uniform.uSpMorph.z * (0.9 + 0.15 * sin(uniform.uSpKit.x * 3.0)) * QS; }
+  var p = piv + qlRot(q, rel) + off;
+  let pop = uniform.uSpTokens[0].w;
+  if (kind > 7.5 && pop > 0.0) {
+    let mid = -QC * QS;
+    let tip = qlAxis(vec3f(1.0, 0.0, 0.0), -0.55 * pop);
+    p = mid + qlRot(tip, p - mid) + vec3f(0.0, 0.9 * pop, 4.5 * pop + 0.25 * pop * sin(uniform.uSpKit.x * 2.0)) * QS;
+    q = qlMul(tip, q);
+  }
   qlQ = q;
-  *center = piv + qlRot(q, rel) + off;
+  *center = p;
 }
 `;
   return { glsl, wgsl };
@@ -294,7 +317,7 @@ void modifySplatCenter(inout vec3 center) {
   vec3 u = center / QS + QC; // code units
   vec4 q = vec4(0.0, 0.0, 0.0, 1.0);
   float D = uSpMorph.x;
-  if (an.z > 0.5 && (kind < 2.5 || (kind > 4.5 && kind < 5.5))) {
+  if (an.z > 0.5 && (kind < 2.5 || (kind > 4.5 && kind < 6.5))) {
     float id = an.z - 1.0;
     vec3 piv = qlPivot(id);
     vec3 rc = qlRowCol(id);
@@ -312,6 +335,13 @@ void modifySplatCenter(inout vec3 center) {
       u = piv + qlRot(q, r) + vec3(0.0, 0.0, abs(sin(th)) * 0.8);
       qlBack = cos(th) < 0.0 ? 1.0 : 0.0;
     }
+  }
+  if (kind > 5.5 && kind < 6.5) {
+    // New damage arrives in order: a scratch along its line, a smudge out
+    // from its middle, a burn's char out from the burn; until then the
+    // module keeps its old color.
+    float t = floor((extra + 0.5) / 2.0) / 200.0;
+    if (D < 0.999 && D / 0.55 < t) qlOrig = qlMod(extra, 2.0);
   }
   if (kind > 0.5 && kind < 1.5) {
     // A sticker lands: it drops from in front, turning flat as it comes.
@@ -381,7 +411,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   var u = *center / QS + QC;
   var q = vec4f(0.0, 0.0, 0.0, 1.0);
   let D = uniform.uSpMorph.x;
-  if (an.z > 0.5 && (kind < 2.5 || (kind > 4.5 && kind < 5.5))) {
+  if (an.z > 0.5 && (kind < 2.5 || (kind > 4.5 && kind < 6.5))) {
     let id = an.z - 1.0;
     let piv = qlPivot(id);
     let rc = qlRowCol(id);
@@ -397,6 +427,10 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
       u = piv + qlRot(q, r) + vec3f(0.0, 0.0, abs(sin(th)) * 0.8);
       qlBack = select(0.0, 1.0, cos(th) < 0.0);
     }
+  }
+  if (kind > 5.5 && kind < 6.5) {
+    let t = floor((extra + 0.5) / 2.0) / 200.0;
+    if (D < 0.999 && D / 0.55 < t) { qlOrig = qlMod(extra, 2.0); }
   }
   if (kind > 0.5 && kind < 1.5) {
     let s = qlSat(D / 0.45);
