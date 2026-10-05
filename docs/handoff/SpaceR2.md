@@ -49,10 +49,18 @@ for a long job, schedule a check-in with send_later instead of going idle.
 
 ## State
 
-WORKING (October 5, 2026): item 1, the real worlds. Built: the Moon, Mars, Mercury and Venus as labs
-toys (`real-moon`, `real-mars`, `real-mercury`, `real-venus`); Earth's maps are being cut. Next:
-Earth, clips on Effect review page 2, then the big moons (Io, Europa, Ganymede, Callisto, Titan) and
-the small worlds (Pluto, Ceres, Vesta), then items 2 (stars and galaxies) and 3 (rockets).
+WORKING (October 5, 2026, 06:30 UTC). Built, all labs, in `src/packs/space-r2.js`:
+
+- `real-moon`, `real-mars`, `real-earth`, `real-mercury`, `real-venus`: real color and elevation
+  maps; a tap flies to three named features each.
+- `real-moons` (Io, Europa, Ganymede, Callisto, Titan; maps only, no elevation exists) and
+  `real-small-worlds` (Pluto, Ceres, Vesta, with their real shapes).
+- `nearby-stars`: Gaia's nearby stars within 20 pc, plus the brightest from HYG.
+- `real-galaxies`: M51, M101, M74 and M83 from ESA/Hubble and ESO pictures, with a guessed depth.
+- `saturn-v`: NASA's model, staging in Apollo 11's order.
+
+Evidence files for all ten. Next: clips on Effect review page 2, thumbnails and screenshots, then
+the browser half of `tests/sp2.spec.mjs`; then more rockets if the owner accepts the NASA 3D terms.
 
 ## Notes
 
@@ -85,7 +93,18 @@ the small worlds (Pluto, Ceres, Vesta), then items 2 (stars and galaxies) and 3 
 ## Known issues
 
 - The lighting shades every slope but casts no shadows.
+- The splats sort in their built pose (WebGL2). The far side of each world is hidden, so a turned
+  ball sorts acceptably. `out.resortPose` with the globe as kit part 1 (same turn) made the order
+  worse close up (it hid names under the ground), so it was taken out. Why is not understood; the
+  sorter's worker keeps the centers it was first sent, which may be it.
+- The Saturn V model paints a band of its first stage navy; it is drawn white (said in About).
+- The moons have no elevation maps; their map seams (different lighting between pictures) show.
 
 ## For the Operator
 
-Nothing yet.
+- NASA 3D Resources (the Saturn V model) say "free to download and use" under NASA's media
+  guidelines, not a CC license; the sources audit (A9) leaves that route to the owner. The Saturn V
+  is built and labs-only; please get the owner's yes or no before it leaves labs. With a yes I can
+  add the SLS and the Space Shuttle the same way.
+- Gaia's nearby stars (CC BY-SA 3.0 IGO) and HYG (CC BY-SA 4.0) make one star file, shared alike
+  under CC BY-SA 4.0 (both licenses are share-alike; credited in the toy and CREDITS.md).
