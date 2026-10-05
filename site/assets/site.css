@@ -977,6 +977,11 @@ main > section {
   gap: 12px;
   margin: 0;
 }
+@media (min-width: 1000px) {
+  .tool-list {
+    grid-template-columns: repeat(var(--cols, 3), 1fr);
+  }
+}
 .tool-list > div {
   padding: 18px 20px;
   border: 1px solid var(--line);
@@ -1212,7 +1217,7 @@ main section > ul:not(.toy-grid):not(.doors):not(.features):not(.feat-row) {
 }
 .footer-grid,
 .site-footer .fine {
-  max-width: var(--max);
+  max-width: calc(var(--max) - 2 * var(--gutter));
   margin: 0 auto;
 }
 .footer-grid {

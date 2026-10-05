@@ -324,7 +324,7 @@ ${shelfSections(page.shelves, up)}`;
       .map(
         (g) => `<section class="tool-group" aria-labelledby="h-${fold(g.title).replace(/\W+/g, "-")}">
 <h2 id="h-${fold(g.title).replace(/\W+/g, "-")}">${esc(g.title)}</h2>
-<dl class="tool-list">${g.items.map(([name, text]) => { const k = slug(name); const icon = TOOL_ICONS[k] ? `<svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">${TOOL_ICONS[k]}</svg>` : ""; const key = TOOL_KEYS[k] ? ` <kbd title="Key ${TOOL_KEYS[k]} in the gallery">${TOOL_KEYS[k]}</kbd>` : ""; return `<div id="tool-${k}">${icon}<dt>${esc(name)}${key}</dt><dd>${esc(text)}</dd></div>`; }).join("")}</dl>
+<dl class="tool-list" style="--cols: ${g.items.length % 3 === 0 ? 3 : 4}">${g.items.map(([name, text]) => { const k = slug(name); const icon = TOOL_ICONS[k] ? `<svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">${TOOL_ICONS[k]}</svg>` : ""; const key = TOOL_KEYS[k] ? ` <kbd title="Key ${TOOL_KEYS[k]} in the gallery">${TOOL_KEYS[k]}</kbd>` : ""; return `<div id="tool-${k}">${icon}<dt>${esc(name)}${key}</dt><dd>${esc(text)}</dd></div>`; }).join("")}</dl>
 </section>`, // prettier-ignore
       )
       .join("\n");
