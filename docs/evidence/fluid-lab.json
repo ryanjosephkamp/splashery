@@ -1,0 +1,117 @@
+{
+  "toy": "fluid-lab",
+  "checked": "2026-10-04",
+  "summary": "The liquid solver uses genuine particle-fluid techniques, and the scene controls behave as described. Other paths use a grid for gases and surface or volume rendering. The presets and flame colors are tuned graphics effects, without validation as physical material measurements.",
+  "claims": [
+    {
+      "claim": "The CPU liquid uses density constraints and neighbor velocity smoothing.",
+      "how": "Kernel constants, isolated gravity motion, and water/honey/lava neighbor smoothing agree with independent calculations. Three constraint iterations approximate a liquid rather than enforce exact volume.",
+      "where": "src/fluids/sim.js:284",
+      "sources": [
+        {
+          "title": "Position Based Fluids",
+          "publisher": "Macklin and Müller, 2013",
+          "url": "https://mmacklin.com/pbf_sig_preprint.pdf",
+          "says": "Position-based density constraints and XSPH velocity smoothing provide a practical particle liquid method for graphics."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:920",
+      "note": "The tested kernels and smoothing are mathematical checks, not a converged benchmark of the entire solver."
+    },
+    {
+      "claim": "Thickness increases from water to honey and lava in the graphics presets.",
+      "how": "The stored dimensionless viscosity settings and smoothing passes implement this ordering; they are not measured viscosities of specified materials.",
+      "where": "src/fluids/sim.js:40",
+      "sources": [
+        {
+          "title": "Position Based Fluids",
+          "publisher": "Macklin and Müller, 2013",
+          "url": "https://mmacklin.com/pbf_sig_preprint.pdf",
+          "says": "Position-based density constraints and XSPH velocity smoothing provide a practical particle liquid method for graphics."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:920",
+      "note": ""
+    },
+    {
+      "claim": "The listed GPU material viscosities are verified real-world values.",
+      "how": "The code labels water 0.000001, honey 0.004, and lava 0.01 as m²/s, then applies a floor and a time-step cap. No temperature, composition, density source, or experimental reference is supplied.",
+      "where": "src/fluids/gpu/liquid.js:142",
+      "sources": [],
+      "verdict": "unverified",
+      "test": "",
+      "note": "The particle-fluid and graphics references were inspected; neither verifies these material values. A physical-data source and stated conditions are still needed."
+    },
+    {
+      "claim": "The scene controls pour, drain, splash, extinguish, and blow.",
+      "how": "The actual recipe outputs activate pouring, drain on the third glass tap, extinguish and restart the candle, and add wind across the cup.",
+      "where": "src/toy-help.js:1740",
+      "sources": [
+        {
+          "title": "Position Based Fluids",
+          "publisher": "Macklin and Müller, 2013",
+          "url": "https://mmacklin.com/pbf_sig_preprint.pdf",
+          "says": "Position-based density constraints and XSPH velocity smoothing provide a practical particle liquid method for graphics."
+        },
+        {
+          "title": "Real-Time Simulation and Rendering of 3D Fluids",
+          "publisher": "Crane, Llamas, and Tariq, GPU Gems 3, NVIDIA",
+          "url": "https://developer.nvidia.com/gpugems/gpugems3/part-v-physics-simulation/chapter-30-real-time-simulation-and-rendering-3d-fluids",
+          "says": "Grid fluid animation uses advection, buoyancy, pressure projection, and vorticity confinement, with volume rendering for smoke and fire."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:882",
+      "note": ""
+    },
+    {
+      "claim": "Gas and flame motion represent graphics effects.",
+      "how": "The CPU curl field is divergence-free at checked points, but buoyancy, lifetimes, spreading, and flame colors are prescribed. The GPU path instead advects gas on a grid.",
+      "where": "src/fluids/sim.js:1387",
+      "sources": [
+        {
+          "title": "Real-Time Simulation and Rendering of 3D Fluids",
+          "publisher": "Crane, Llamas, and Tariq, GPU Gems 3, NVIDIA",
+          "url": "https://developer.nvidia.com/gpugems/gpugems3/part-v-physics-simulation/chapter-30-real-time-simulation-and-rendering-3d-fluids",
+          "says": "Grid fluid animation uses advection, buoyancy, pressure projection, and vorticity confinement, with volume rendering for smoke and fire."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:882",
+      "note": "No chemical combustion or measured temperature-to-color relation is established by these checks."
+    },
+    {
+      "claim": "Flows can be rendered as particles, liquid surfaces, or gas volumes.",
+      "how": "The original all-particles description was too broad: the GPU gas path stores grid fields and renders volumes. The description now distinguishes particles and grids without assuming all gases or flames are particles.",
+      "where": "src/fluids/gpu/gas.js:344",
+      "sources": [
+        {
+          "title": "Real-Time Simulation and Rendering of 3D Fluids",
+          "publisher": "Crane, Llamas, and Tariq, GPU Gems 3, NVIDIA",
+          "url": "https://developer.nvidia.com/gpugems/gpugems3/part-v-physics-simulation/chapter-30-real-time-simulation-and-rendering-3d-fluids",
+          "says": "Grid fluid animation uses advection, buoyancy, pressure projection, and vorticity confinement, with volume rendering for smoke and fire."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The CPU liquid uses position-based density constraints and velocity smoothing; the GPU liquid uses a different grid-particle method. Smoke and flame may use a grid or prescribed particles. Foam, bubbles, heat, colors, and thickness are tuned effects. Numerical checks here do not establish measured volume conservation, temperature, or material accuracy."
+  ],
+  "fixes": [
+    {
+      "what": "Replace the all-particles description with a statement that gases can use a grid, depending on the rendering path.",
+      "where": "src/toy-help.js:1742",
+      "status": "proposed"
+    },
+    {
+      "what": "Treat the GPU viscosity table as tuned presets unless authoritative material data, temperature, units, and calibration tests are supplied. Add mass, density, and convergence benchmarks before scientific accuracy claims.",
+      "where": "src/fluids/gpu/liquid.js:142",
+      "status": "proposed"
+    }
+  ]
+}

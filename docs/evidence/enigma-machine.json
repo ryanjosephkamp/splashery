@@ -1,0 +1,136 @@
+{
+  "toy": "enigma-machine",
+  "checked": "2026-10-04",
+  "summary": "The I–II–III wirings, reflector B, plugboard transformation, and double step agree with published references. Independent encryption matches all six supported rotor orders and nonzero rings in the calculation helper. The interactive toy exposes only one fixed configuration and cannot yet decode the published historical example.",
+  "claims": [
+    {
+      "claim": "Rotors I, II, III and reflector B use the historical wiring.",
+      "how": "The stored permutations and notch letters Q, E, V match the museum table; the independent reference uses separately written string permutations.",
+      "where": "src/packs/computing-history.js:1130",
+      "sources": [
+        {
+          "title": "Enigma wiring",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/enigma/wiring.htm",
+          "says": "The published tables specify rotors I through V, their notches, and reflector B."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:302",
+      "note": ""
+    },
+    {
+      "claim": "Stepping occurs before encryption and includes the middle rotor’s double step.",
+      "how": "Published double-step sequences and 384 independent 100-letter messages match every intermediate rotor position and output.",
+      "where": "src/packs/computing-history.js:1162",
+      "sources": [
+        {
+          "title": "How Enigma works",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/enigma/working.htm",
+          "says": "The pawl mechanism steps before encryption and causes the middle rotor to step on consecutive presses. The plugboard and reflector give reciprocal encryption."
+        },
+        {
+          "title": "Enigma test examples",
+          "publisher": "Py-Enigma maintainer Brian Neal",
+          "url": "https://github.com/gremmie/enigma/blob/master/enigma/tests/test_enigma.py",
+          "says": "The tests publish cipher and stepping examples and a wartime message using II-IV-V, rings B-U-L, ten plug pairs, and indicator WXC/KCH."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:320",
+      "note": ""
+    },
+    {
+      "claim": "The plugboard and reflector make encryption reciprocal.",
+      "how": "No-plug and two nontrivial plugboards are checked across all rotor orders and nonzero rings; resetting and enciphering ciphertext recovers the input, and no letter encrypts to itself.",
+      "where": "src/packs/computing-history.js:1172",
+      "sources": [
+        {
+          "title": "How Enigma works",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/enigma/working.htm",
+          "says": "The pawl mechanism steps before encryption and causes the middle rotor to step on consecutive presses. The plugboard and reflector give reciprocal encryption."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:320",
+      "note": ""
+    },
+    {
+      "claim": "Polish mathematicians broke military Enigma in 1932.",
+      "how": "The About date agrees with Rejewski’s recovery of the wiring and subsequent Polish cryptanalysis.",
+      "where": "src/toy-help.js:1611",
+      "sources": [
+        {
+          "title": "Enigma history",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/enigma/hist.htm",
+          "says": "Rejewski recovered the military Enigma wiring in 1932, with Polish cryptanalytic work by Różycki and Zygalski."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The interface represents only a fixed Enigma configuration.",
+      "how": "It resets to AAA with default rotors and plug pairs. Historical rotor selection, rings, plugs, and starting windows are not selectable.",
+      "where": "src/packs/computing-history.js:1916",
+      "sources": [
+        {
+          "title": "Enigma wiring",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/enigma/wiring.htm",
+          "says": "The published tables specify rotors I through V, their notches, and reflector B."
+        },
+        {
+          "title": "How Enigma works",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/enigma/working.htm",
+          "says": "The pawl mechanism steps before encryption and causes the middle rotor to step on consecutive presses. The plugboard and reflector give reciprocal encryption."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:302",
+      "note": "A helper’s optional settings are not features the reader can choose in the toy."
+    },
+    {
+      "claim": "A historical message would require additional settings.",
+      "how": "An independent extended reference decodes KCH at WXC to BLA, then the published wartime message using II-IV-V, rings B-U-L, and ten plug pairs. IV/V exist only in the test reference.",
+      "where": "src/packs/computing-history.js:1138",
+      "sources": [
+        {
+          "title": "Enigma test examples",
+          "publisher": "Py-Enigma maintainer Brian Neal",
+          "url": "https://github.com/gremmie/enigma/blob/master/enigma/tests/test_enigma.py",
+          "says": "The tests publish cipher and stepping examples and a wartime message using II-IV-V, rings B-U-L, ten plug pairs, and indicator WXC/KCH."
+        },
+        {
+          "title": "Py-Enigma user guide",
+          "publisher": "Py-Enigma maintainer Brian Neal",
+          "url": "https://py-enigma.readthedocs.io/en/latest/guide.html",
+          "says": "The example decodes indicator KCH at WXC to message key BLA, then resets the rotors to decode the body."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:341",
+      "note": "The current toy cannot run that configuration or fit its full message on the short pad."
+    }
+  ],
+  "simplified": [
+    "The interface fixes order I–II–III, rings A–A–A, starting windows A–A–A, and plug pairs A–R, G–K, O–X. The helper supports the six I/II/III orders and rings, but those controls are not exposed. Rotors IV and V are absent. Backspace, reversing a key press, and the short pad are conveniences rather than historical machine features."
+  ],
+  "fixes": [
+    {
+      "what": "Replace the odometer analogy with wording that names the occasional double step.",
+      "where": "src/toy-help.js:1611",
+      "status": "proposed"
+    },
+    {
+      "what": "Expose rotor order, rotors IV/V, rings, plug pairs, start windows, and a longer message area; then use the published WXC/KCH message procedure and full ciphertext as an acceptance example.",
+      "where": "src/packs/computing-history.js:1916",
+      "status": "proposed"
+    }
+  ]
+}
