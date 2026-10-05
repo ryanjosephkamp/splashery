@@ -153,9 +153,9 @@ for (const clip of clips) {
   const res = await page.evaluate(
     async ({ script, size, fps }) => {
       const { app, player } = window.__splashery;
-      const lab = window.__splashery.qrLab;
+      // The pack's hook appears once its first toy loads.
+      let lab = window.__splashery.qrLab;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
-      lab.autoCheck = false;
       const BAR = 76;
       const stage = player.stage;
       const step = 1 / fps;
@@ -245,6 +245,8 @@ for (const clip of clips) {
         if (st.toy) {
           unhook();
           await app.chooseToy(st.toy);
+          lab = window.__splashery.qrLab;
+          lab.autoCheck = false;
           app.setLook({ background: "#ffffff" });
           player.opts.idleDelay = 1e9;
           player.idle.weight = 0;
