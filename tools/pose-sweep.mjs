@@ -69,7 +69,7 @@ const open = async () => {
 await open();
 
 for (const toy of list) {
-  if (done[toy.id]) continue;
+  if (done[toy.id] && !done[toy.id].error) continue; // (failed ones are measured again)
   let r;
   try {
     r = await Promise.race([
