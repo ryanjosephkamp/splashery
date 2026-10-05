@@ -7,52 +7,12 @@ October push. Repo: ryanjosephkamp/splashery. Your lane: PDF lab (id `PDFLab`, p
 Branch: `claude/lane-pdf-lab` (and `claude/lane-pdf-lab-engine` for any change to the app outside
 your own files, as an "Engine: …" PR merged first). PR title: "Phase PDF lab: export a toy as a PDF,
 and what a PDF can do". Handoff file: docs/handoff/PDFLab.md (create it; start it with this brief,
-word for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "## For the
-Operator" current). Model: Opus 5.5.
+word for word, under "## Brief", then keep "## State
 
-### Brief (written by the Operator on October 5, 2026, from the owner's Push Plan picks)
-
-The owner, October 4, 2026, on putting a Splashery toy in a PDF: he is "not going to let up on
-this". Codex task 21 answered it: read docs/audits/pdf-motion-2026-10.md and its samples first (a
-PDF can move and respond in some viewers; a WebGL splat toy can't run inside one; the report's
-recommendations are your spec).
-
-1. **Export as PDF** (an engine PR for the menu item, small and additive): from any toy, make a PDF
-   in the browser and save it to a file the person chooses. Default "Still + live toy": a sharp
-   still of the toy as it is now (its camera and settings), its name, how-to line and About text,
-   credits and license notices, and a link and a QR code to the live toy with this scene (the scene
-   link the app already makes; the QR made with the vendored QR generator and checked with the
-   vendored jsQR). Option "Moving recording (desktop Firefox and Acrobat)": one effect cycle as
-   frames played by the `animate`-style widget method the report proved, with play and step
-   controls, a still first page for other viewers, a size estimate before saving, and plain words
-   that it is a recording, not the toy. Use a small permissive PDF library under the library rule
-   (for example pdf-lib, MIT), loaded only when someone exports.
-2. **The explainer**: a labs page or toy, "Can a toy move in a PDF?", that says what the report
-   found in plain words, with the sample PDFs to download and the table of which viewers move,
-   respond or stay still, and what the owner should test on his devices.
-3. **Reuse**: the Toy pages lane will build a PDF catalog of every toy, one per page; write the
-   exporter so it can make one page per toy without the app open (a function that takes a toy id and
-   its still), and say how in your handoff file.
-
-Tests in `tests/pdf*.spec.mjs`: the PDF parses with the vendored PDF.js, its link and QR point at
-the right scene, the moving option's frames count and size stay within the estimate; old links still
-load. Clips or screenshots at phone size on Effect review page 2 (lane record `PDFLab`).
-
-You own: `src/pdf-export/` (new), the export menu item through your engine PR, `tools/pdf-*.mjs`,
-`tests/pdf*.spec.mjs`, the explainer, any new vendored library (listed in LICENSES.md), and your
-handoff file. Don't edit `docs/audits/pdf-motion-2026-10*`.
-
-How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
-replace the prefix and lane record with yours). Labs: the Operator merges after a full test run.
-Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
-for a long job, schedule a check-in with send_later instead of going idle. Before READY, re-read
-CLAUDE.md's "Effect quality rules" and check each clip against them at phone size.
-
-## State
-
-WORKING (October 5, 2026): everything in the brief is built and tested; the clip is being posted on
-Effect review page 2. Engine PR #299 (the Save PDF row) is open and must merge first; this branch
-already contains it.
+READY (October 5, 2026): everything in the brief is built and tested. Engine PR #299 (the Save PDF
+row) must merge first; the lane PR #301 contains it. Clips posted on Effect review page 2 (cards
+`pdf-grapes-flipbook` and `pdf-dialog`, lane `PDFLab`; the lane record is the Operator's to make).
+Next: the owner's marks, and his device tests (Acrobat, phone QR scan).
 
 ## What was built
 
