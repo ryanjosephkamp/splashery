@@ -1733,6 +1733,14 @@ export const TOY_HELP = {
       "Galaxy simulations follow gas with particles that carry mass, temperature, density and a smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated present day, not a telescope image.\n\nEach particle is shown with a Gaussian whose spread approximates the simulation's smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue and hot orange or red, or by Density to compare the gas concentration. Brightness also increases with density. Switch The box to show or hide the frame. Pinch or scroll to zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the gas's shape but do not give a quantitative column-density measurement.",
   },
 
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  "ripple-tank": {
+    howTo:
+      "Tap the water to drop a pebble. Pick a setup in the Toy tab, and slide the frequency and the wave speed.",
+    about:
+      "A ripple tank shows how waves spread, bend round edges and add up. This one solves the real two-dimensional wave equation on a grid of 216 × 216 cells (finite differences, with a time step small enough to stay stable), and each cell is a splat lifted by the water's height and lit so the crests catch the light. Sloping beaches at the edges soak the waves up, as in a real tank.\n\nThrough two slits, the waves from each slit add where their paths differ by a whole number of wavelengths, so bright lines fan out at the angles d·sin θ = m·λ gives; the dotted lines mark them. Through one slit, the beam spreads wider as the slit gets narrower. The bars on the back wall show how strong the waves are along the far side. The numbers are in the Toy tab.\n\nWhat it simplifies: real ripples on shallow water change speed a little with their wavelength; here every wavelength moves at the speed you set. The heights are exaggerated and the motion is four times slower than real.",
+  },
+
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
   "fluid-lab": {
     howTo:

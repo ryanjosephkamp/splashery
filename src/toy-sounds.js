@@ -2772,6 +2772,13 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
+  // its rings.
+  "ripple-tank": [
+    { voice: "drip", f: 640, n: 1, at: 0.3, vol: 0.8 },
+    { voice: "wave", f: 420, decay: 1.2, at: 0.36, vol: 0.16 },
+  ],
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

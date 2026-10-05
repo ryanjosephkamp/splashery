@@ -3504,6 +3504,17 @@ export const TOYS = [
     tags: "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
     camera: { yaw: 0.3, pitch: 1.0, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: optics (lane Optics) ----
+  {
+    id: "ripple-tank",
+    label: "Ripple tank",
+    category: "science",
+    kind: "kit",
+    pack: "optics",
+    labs: true,
+    tags: "wave waves ripple tank water interference diffraction slit double single young fringes wavelength frequency physics optics",
+    camera: { yaw: 0, pitch: 1.05, roll: 0, distance: 3.1 },
+  },
   // ---- Pack: fluid-lab (lane Fluids) ----
   {
     id: "fluid-lab",
