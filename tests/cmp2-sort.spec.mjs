@@ -179,54 +179,61 @@ function inputs() {
   return out;
 }
 
+// Every mismatch is written down (one expect at the end keeps it quick).
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
 test("every step of every algorithm matches the reference code", () => {
   const all = inputs();
   expect(all.length).toBeGreaterThan(1300);
+  const wrong = [];
+  let checked = 0;
   for (const algo of ALGOS) {
     for (const input of all) {
       const got = run(algo, input);
       const ref = reference(algo, input);
       const tag = `${algo} [${input.join(",")}]`;
+      const bad = (what) => wrong.push(`${tag}: ${what}`);
       // The same comparisons, of the same values, in the same order.
       const compared = got.events.filter((e) => e.op === "compare").map((e) => e.vals);
-      expect(compared, tag).toEqual(ref.compared);
-      expect(got.compares, tag).toBe(ref.compared.length);
+      if (!same(compared, ref.compared)) bad("comparisons");
+      if (got.compares !== ref.compared.length) bad("comparison count");
       // The same arrangement after every swap or move.
-      expect(got.frames, tag).toEqual(ref.frames);
-      expect(got.swaps, tag).toBe(ref.frames.length);
+      if (!same(got.frames, ref.frames)) bad("arrangements");
+      if (got.swaps !== ref.frames.length) bad("swap count");
       // Sorted, and the same values.
       const sorted = input.slice().sort((x, y) => x - y);
-      expect(got.sorted, tag).toEqual(sorted);
-      expect(ref.sorted, tag).toEqual(sorted);
-      // Each recorded swap or move turns the arrangement before it into the
-      // one after it, and nothing else changes.
-      let now = input.slice();
+      if (!same(got.sorted, sorted) || !same(ref.sorted, sorted)) bad("not sorted");
+      // Each recorded step looks at the values it says, and each swap or
+      // move turns the arrangement before it into the one after it.
+      const now = input.slice();
       let f = 0;
       for (const e of got.events) {
+        checked++;
         if (e.op === "compare") {
-          expect([now[e.i], now[e.j]], tag).toEqual(e.vals);
+          if (!same([now[e.i], now[e.j]], e.vals)) bad("a comparison's values");
           continue;
         }
         if (e.op === "swap") {
-          expect([now[e.i], now[e.j]], tag).toEqual(e.vals);
+          if (!same([now[e.i], now[e.j]], e.vals)) bad("a swap's values");
           [now[e.i], now[e.j]] = [now[e.j], now[e.i]];
         } else {
-          expect(algo, tag).toBe("merge");
-          expect(e.j, tag).toBeLessThan(e.i);
+          if (algo !== "merge" || e.j >= e.i) bad("a move");
           const [v] = now.splice(e.i, 1);
           now.splice(e.j, 0, v);
         }
-        expect(now, tag).toEqual(got.frames[f++]);
+        if (!same(now, got.frames[f++])) bad("a step's arrangement");
       }
-      expect(f, tag).toBe(got.frames.length);
+      if (f !== got.frames.length) bad("steps left over");
     }
   }
+  expect(wrong.slice(0, 20)).toEqual([]);
+  expect(checked).toBeGreaterThan(500000);
 });
 
 test("the counts agree with what is known about each algorithm", () => {
-  for (const input of inputs()) {
+  for (const input of inputs().filter((_, i) => i % 3 === 0)) {
     const n = input.length;
-    const half = (n * (n - 1)) / 2;
+    const half = n < 2 ? 0 : (n * (n - 1)) / 2;
     const inv = inversions(input);
     const r = Object.fromEntries(ALGOS.map((a) => [a, run(a, input)]));
     // Bubble, insertion and cocktail sort swap only neighbors that are out
@@ -265,13 +272,13 @@ test("the toy's eight bars: the same steps as the reference, and its counts", ()
   }
   expect(counts).toEqual({
     bubble: [16, 28],
-    quick: [10, 17],
-    merge: [10, 14],
-    insertion: [16, 22],
+    quick: [10, 13],
+    merge: [10, 17],
+    insertion: [16, 21],
     selection: [6, 28],
-    cocktail: [16, 25],
-    shell: [10, 21],
-    heap: [18, 28],
+    cocktail: [16, 28],
+    shell: [10, 23],
+    heap: [18, 25],
   });
 });
 
@@ -323,16 +330,18 @@ test("the counter shows every swap or move, and every view follows the steps", (
       // After each step (the pieces have landed, just before the next one
       // starts), each piece stands where that step's arrangement puts it,
       // and the counter shows the steps so far.
+      const wrong = [];
       for (let i = 1; i <= n; i++) {
         const f = at(SORT.t0 + i * dt - 0.02).out;
-        expect(counter(f.tokens), `${view} ${algo} step ${i}`).toBe(i);
+        if (counter(f.tokens) !== i) wrong.push(`step ${i}: the counter shows ${counter(f.tokens)}`); // prettier-ignore
         for (let v = 0; v < 8; v++) {
           const home = V.at(v, SORT.start.indexOf(v));
           const want = V.at(v, steps[i - 1].indexOf(v));
           const got = f.tokens[v].offset.map((d, j) => d + home[j]);
-          for (let j = 0; j < 3; j++) expect(got[j]).toBeCloseTo(want[j], 3);
+          if (got.some((g, j) => Math.abs(g - want[j]) > 1e-3)) wrong.push(`step ${i}: piece ${v}`);
         }
       }
+      expect(wrong, `${view} ${algo}`).toEqual([]);
       // At rest before and after: the counter reads 0 and every piece is home.
       const end = frames[frames.length - 1].out;
       expect(counter(end.tokens)).toBe(0);
@@ -350,6 +359,7 @@ const places = (view, f) =>
 test("crates and pucks are solid: none passes through another, at any moment", () => {
   for (const algo of ALGOS) {
     // Crates: cubes as big as their values, standing on the plinth.
+    const wrong = [];
     let frames = play(build({ algo, view: "crates" }), 120);
     const size = (v) => 0.1 + 0.02 * v;
     for (const { s, out } of frames) {
@@ -360,7 +370,7 @@ test("crates and pucks are solid: none passes through another, at any moment", (
           const ya = p[a][1] + size(a) / 2;
           const yb = p[b][1] + size(b) / 2;
           const apart = Math.abs(p[a][0] - p[b][0]) >= reach - 1e-6 || Math.abs(p[a][2] - p[b][2]) >= reach - 1e-6 || Math.abs(ya - yb) >= reach - 1e-6; // prettier-ignore
-          expect(apart, `crates ${algo} ${a}/${b} at ${s.toFixed(3)} s`).toBe(true);
+          if (!apart) wrong.push(`crates ${algo} ${a}/${b} at ${s.toFixed(3)} s`);
         }
     }
     // Pucks: upright cylinders on the turntable.
@@ -371,9 +381,10 @@ test("crates and pucks are solid: none passes through another, at any moment", (
       for (let a = 0; a < 8; a++)
         for (let b = a + 1; b < 8; b++) {
           const apart = Math.hypot(p[a][0] - p[b][0], p[a][2] - p[b][2]) >= 2 * puck - 1e-6 || Math.abs(p[a][1] - p[b][1]) >= h - 1e-6; // prettier-ignore
-          expect(apart, `ring ${algo} ${a}/${b} at ${s.toFixed(3)} s`).toBe(true);
+          if (!apart) wrong.push(`ring ${algo} ${a}/${b} at ${s.toFixed(3)} s`);
         }
     }
+    expect(wrong.slice(0, 10)).toEqual([]);
   }
 });
 

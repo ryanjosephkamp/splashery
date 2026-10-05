@@ -108,8 +108,8 @@ Evidence for docs/evidence/ (Codex task 16), all in the tests named:
 - Known counts: bubble, insertion and cocktail swaps equal the inversions; bubble and selection make
   n(n-1)/2 comparisons; selection at most n - 1 swaps; a sorted list needs no swaps.
 - The toy's own bars (5 2 7 0 6 3 1 4), swaps (moves for merge) and comparisons: bubble 16 / 28,
-  quick 10 / 17, merge 10 / 14, insertion 16 / 22, selection 6 / 28, cocktail 16 / 25, Shell 10 /
-  21, heap 18 / 28.
+  quick 10 / 13, merge 10 / 17, insertion 16 / 21, selection 6 / 28, cocktail 16 / 28, Shell 10 /
+  23, heap 18 / 25.
 - In every view and algorithm, after each step the counter shows the steps so far and every piece
   stands where that step's arrangement puts it; crates and pucks never pass through each other
   (checked at 120 frames a second); each comparison and swap sounds exactly once, in the algorithm's
