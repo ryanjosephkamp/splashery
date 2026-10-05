@@ -194,8 +194,9 @@ test("the toy shows the sky from inside, and a tap on Vega names it", async ({ p
   await expect
     .poll(() => page.evaluate(() => window.__splashery.sky.state().picked), { timeout: 10_000 })
     .toMatchObject({ kind: "star" });
+  // The words beside the stage follow on the next frames (slow in a headless browser).
+  await expect(page.locator("#toy-legend")).toContainText("Vega", { timeout: 30_000 });
   const legend = await page.locator("#toy-legend").innerText();
-  expect(legend).toContain("Vega");
   expect(legend).toContain("Lyra");
   expect(legend).toMatch(/light-years away/);
   await page.screenshot({ path: "tests/screenshots/sky-vega-390x844.png" });
