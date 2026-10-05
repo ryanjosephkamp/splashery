@@ -2122,6 +2122,63 @@
     "checked": "September 30, 2026",
     "note": "The 20 modules session.js and its workers reach, unmodified (vendor/splatjs/VERSION.md). Loaded only when someone opens a video in the Video to 3D toy."
   },
+  "moleculeViewerSamples": [
+    {
+      "id": "molview-1crn",
+      "file": "assets/toys/molecule-viewer/1crn.cif",
+      "toy": "molecule-viewer",
+      "name": "Crambin, PDB 1CRN",
+      "author": "W. A. Hendrickson, M. M. Teeter",
+      "page": "https://www.rcsb.org/structure/1CRN",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-1ema",
+      "file": "assets/toys/molecule-viewer/1ema.cif",
+      "toy": "molecule-viewer",
+      "name": "Green fluorescent protein, PDB 1EMA",
+      "author": "M. Ormö, S. J. Remington",
+      "page": "https://www.rcsb.org/structure/1EMA",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-1lyz",
+      "file": "assets/toys/molecule-viewer/1lyz.cif",
+      "toy": "molecule-viewer",
+      "name": "Hen egg-white lysozyme, PDB 1LYZ",
+      "author": "R. Diamond, D. C. Phillips, C. C. F. Blake, A. C. T. North",
+      "page": "https://www.rcsb.org/structure/1LYZ",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-1bna",
+      "file": "assets/toys/molecule-viewer/1bna.cif",
+      "toy": "molecule-viewer",
+      "name": "B-DNA dodecamer, PDB 1BNA",
+      "author": "H. R. Drew, R. M. Wing, T. Takano, C. Broka, S. Tanaka, K. Itakura, R. E. Dickerson",
+      "page": "https://www.rcsb.org/structure/1BNA",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-caffeine-cff-ideal",
+      "file": "assets/toys/molecule-viewer/caffeine-cff-ideal.sdf",
+      "toy": "molecule-viewer",
+      "name": "Caffeine, PDB Chemical Component Dictionary CFF (ideal coordinates)",
+      "author": "wwPDB Chemical Component Dictionary",
+      "page": "https://www.rcsb.org/ligand/CFF",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CFF_ideal.sdf from files.rcsb.org, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    }
+  ],
   "scienceSamples": [
     {
       "id": "aspirin",

@@ -728,6 +728,14 @@ export const TOY_HELP = {
       "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
   },
 
+  // Lane Molecule viewer (labs).
+  "molecule-viewer": {
+    howTo:
+      "Tap an atom, then another for the distance, a third for the angle. Fetch a PDB code in the Toy tab.",
+    about:
+      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank (PDB and mmCIF files), small molecules as SDF, MOL or XYZ files. This viewer reads those files and draws every atom with splats, using the usual colors (carbon gray, oxygen red, nitrogen blue, sulfur yellow).\n\nChoose a sample, open a file of your own, or type a four-character PDB code such as 1MBN and press Fetch to read that entry from the Protein Data Bank; it is read only when you ask, nothing is stored or sent, and the entry's title, authors and fetch time show beside it. Draw it as a cartoon (ribbons for the chains: helices, strands and coil), balls and sticks, space-filling atoms (their van der Waals size) or a molecular surface (a smooth Gaussian surface, close to the surface a water molecule can touch). Color by element, chain, residue type, B-factor (how much each atom moves in the crystal), along the chain or by helix and strand. Tap two atoms to measure the distance between their centers in ångströms (0.1 nanometer), a third for the angle in degrees. Bonds come from the file or from distances; helices and strands come from the file, or are worked out from hydrogen bonds and say so. Big structures draw fewer splats per atom. Positions are the file's model, not a photograph: an experiment's best fit, with its own uncertainty.",
+  },
+
   // ---- Gems -----------------------------------------------------------------------------
   diamond: {
     howTo: "Tap it to turn it in the light and flash its fire.",

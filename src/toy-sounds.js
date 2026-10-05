@@ -2772,6 +2772,9 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // ---- Molecule viewer (lane Molecule viewer) ---------------------------------------
+  // Quiet (PACKS.md 7e): one soft, low click as an atom is picked.
+  "molecule-viewer": { voice: "clack", f: 1500, decay: 0.18, bright: 0.1, vol: 0.4 },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

@@ -927,6 +927,13 @@
       "sound": "One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C, October 2, 2026).",
       "improved": "E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8 s). Fix7: the bonds between slices stretch and bend with the wave (their two ends follow their slices), so atoms never leave their bonds."
     },
+    "molecule-viewer": {
+      "v": "keep",
+      "owner": "Push Plan S1, approved by the owner with \"PDB fetch yes\" (October 5, 2026; lane Molecule viewer, labs).",
+      "effect": "A molecule viewer made of splats: open a PDB, mmCIF, SDF/MOL or XYZ file, or fetch an entry from the Protein Data Bank by its code. Draw it as a cartoon, balls and sticks, space-filling atoms or a molecular surface, colored by element, chain, residue, B-factor, along the chain or by secondary structure. A tap on an atom picks it: a ring marker turns round it; a second pick draws a dotted line and gives the distance in ångströms, a third an arc and the angle in degrees. The Play button measures a bond and its angle near the middle, then clears.",
+      "sound": "Quiet: one soft, low click as an atom is picked.",
+      "improved": "Lane Molecule viewer: readers for PDB, mmCIF, SDF/MOL and XYZ (src/molview/parse.js) in a Web Worker; bonds from the file or from covalent radii; helices and strands from the file or inferred (and labeled so); a blobby Gaussian surface; a splat budget that falls to one Gaussian per atom on big structures (tested up to the human 80S ribosome, 4V6X, 237,685 atoms). Samples (snapshot of October 5, 2026, CC0): 1CRN, 1EMA, 1LYZ, 1BNA and caffeine (CCD CFF)."
+    },
     "periodic-table": {
       "v": "keep",
       "owner": "Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).",
