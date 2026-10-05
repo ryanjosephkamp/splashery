@@ -312,9 +312,7 @@ function drawBenchInfo(g) {
     lines.push(`Index: ${n4.toFixed(4)} at 486 nm (blue), ${n6.toFixed(4)} at 656 nm (red).`);
     const d = LL.bench?.devs;
     if (d) lines.push(`Bent by ${d[0].toFixed(1)}° (400 nm) to ${d[1].toFixed(1)}° (700 nm): blue bends most.`); // prettier-ignore
-    lines.push(
-      "Snell's law at both faces; the beam is set for least bending at 550 nm.",
-    );
+    lines.push("Snell's law at both faces; the beam is set for least bending at 550 nm.");
   } else {
     const gr = GRATINGS[LL.grating];
     const a1 = gratingAngle(400, gr.d, 1);
