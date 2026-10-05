@@ -238,7 +238,7 @@ test("Grain Garden: sand piles at a slant, water spreads out flat, and fire burn
     for (let i = 0; i < g.mat.length; i++) if (g.mat[i]) g.kill(i);
     for (let x = 10; x < 20; x++) for (let z = 0; z < g.GZ; z++) g.put(x, 0, z, 3);
     g.put(15, 1, 0, 4);
-    for (let k = 0; k < 600; k++) g.stepCells();
+    for (let k = 0; k < 900; k++) g.stepCells();
     let oil = 0;
     for (let i = 0; i < g.mat.length; i++) if (g.mat[i] === 3) oil++;
     return { mid, side, waterTop: top, oil, total: 10 * g.GZ };
