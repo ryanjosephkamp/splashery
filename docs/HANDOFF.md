@@ -177,22 +177,18 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                                        | Status                                                                                       | Handoff                                  |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| Operator                                                                    | Running; runs the lanes                                                                      | —                                        |
-| Sound C: the sound notes of October 2                                       | Merged (engine #183, toys #192); its sounds are live                                         | `handoff/SoundC.md` (on its branch)      |
-| Fix7: taps where you tap, and the bugs from October 2                       | Running, Opus 5.5 (#174 and #179 wait for marks)                                             | `handoff/Fix7.md` (on its branch)        |
-| Physics: hands-on play and a physics engine                                 | Running, Opus 5.5 (engine #176 merged; showcase toys #184 wait for marks; the hands-on plan) | `handoff/Physics.md` (on its branch)     |
-| Sharpness A: landmarks, vehicles, Medieval, Open me, gems, space, weather   | Running, Opus 5.5 (#172 waits for marks)                                                     | `handoff/SharpA.md` (on its branch)      |
-| Sharpness B: food, toys, math, AI, the album covers, closed bases           | Running, Opus 5.5 (#185 waits for marks)                                                     | `handoff/SharpB.md` (on its branch)      |
-| UI r5: gallery button, rotation defaults, the piano bar, big models, Record | Running, Opus 5.5 (engine #177 merged; #178 waits for marks)                                 | `handoff/UIr5.md` (on its branch)        |
-| Live input r3: the October 2 notes and Moving photo to 3D                   | Merged (#187, #191; labs)                                                                    | `handoff/LiveInput.md`                   |
-| Video 3D: a one-week spike                                                  | Merged r7 (#169, #186; labs)                                                                 | [handoff/Video3D.md](handoff/Video3D.md) |
-| Fluids r4 and r5                                                            | Merged; waits for the owner's phone test before the next round                               | [handoff/Fluids.md](handoff/Fluids.md)   |
-| Science                                                                     | Idle after r2 (merged)                                                                       | [handoff/Science.md](handoff/Science.md) |
-| Worlds r4: the character lab                                                | Paused at the owner's request (October 2, 2026; #168 draft)                                  | [handoff/Worlds.md](handoff/Worlds.md)   |
-| Integrator and Integrator 2                                                 | Running, Sonnet 5.5; they can split one run's spec files in half                             | —                                        |
-| Next (WORKSTREAMS.md, Next)                                                 | Category hands-on lanes once the owner approves the hands-on plan; Quality, Knots, Food r2   | —                                        |
+| Lane                                                  | Status                                                                                                                                                                                                                                                                          | Handoff                                 |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Operator                                              | Running; runs the lanes                                                                                                                                                                                                                                                         | —                                       |
+| The push, wave 1 (started October 5, 2026, 00:32 UTC) | Merged: QR lab r2 (#267), Imaging (#274, #275), Fix8 (#273), Site (#266). In test runs: Studio media (#271), Live r7 (#284, #263), Earth and maps (#268), Pages r6 (#282, #269), QR r3 (#265), Any pose (#276, #277), Science r3 (#272, #270). Imaging round 2 (#304) finishing | `handoff/<lane>.md`                     |
+| Arcade, the games lane (started 02:23 UTC)            | Running, Opus 5.5 (#283 the game kit, #285 the games)                                                                                                                                                                                                                           | `handoff/Arcade.md` (on its branch)     |
+| The push, wave 2 (started 04:20 UTC)                  | Running, Opus 5.5: Computing r2 (#289, #290), Viewers (#287), Sound and light lab (#286), Space r2 (#288), Tiny world r2 (#291)                                                                                                                                                 | `handoff/<lane>.md` (on their branches) |
+| The push, wave 3 (started 07:14 UTC)                  | Running, Opus 5.5: Molecule viewer (#300, #295), Waves and optics (#296), Data and climate (#294), Night sky (#297, #293), Real elements (#298), PDF lab (#299, #301)                                                                                                           | `handoff/<lane>.md` (on their branches) |
+| Toy pages and Site pages (started 11:35 UTC)          | Running: Toy pages, Opus 5.5 (#305 the embed fix, #307 a page for every toy and the catalog PDF); Site pages, Sonnet 5.5 (#306 the hubs, About, credits, privacy, What's new and the embed guide)                                                                               | `handoff/<lane>.md` (on their branches) |
+| Integrators 1, 3, 4, 5 and 6                          | Running, Sonnet 5.5; each runs one combination's full suite (about four and a half hours)                                                                                                                                                                                       | —                                       |
+| Local lanes on the owner's Mac                        | Photoreal r3, Circuits and the hands-on lanes H1 to H5: briefs written                                                                                                                                                                                                          | `handoff/<lane>.md`                     |
+| Worlds r4: the character lab                          | Paused at the owner's request (October 2, 2026; #168 draft)                                                                                                                                                                                                                     | [handoff/Worlds.md](handoff/Worlds.md)  |
+| Next (WORKSTREAMS.md, Next)                           | QR craft, Photoreal r3, Showcase, Powers of ten, Graph splats                                                                                                                                                                                                                   | —                                       |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
@@ -297,6 +293,58 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
+
+Settled on 2026-10-05, afternoon:
+
+- AI-made sources: he marked AI1 to AI5 yes. CLAUDE.md has the rule (AI-made samples may ship as
+  Studio samples, labeled as AI-made, with no people, logos or text; never for science, math or
+  engineering toys, the photoreal shelves or landmarks shown as real). Claude can't make AI video or
+  pictures, so he makes them with his own AI plan and uploads them on a private upload page; Studio
+  media turns them into 3D.
+- Effect review page 2: "everything looks pretty good, some things look amazing"; he asked for one
+  more sharpness, polish and enhancement round on every push toy ("the toys could still be
+  sharper"). Lanes whose PRs are in a test run do it on `-polish` or `-r2` branches and open the
+  follow-up PR after the first one merges; public PRs (Pages r6, Computing r2) merge with their
+  asked fixes first.
+- He OK'd merging About-text fixes without a clip review: Codex's evidence for AI and computing
+  (#278) merged. Tiny world r2 (#291) merged after its start-codon fix.
+- Integrators now run the suite in foreground batches of spec files and keep the turn alive: an idle
+  session's container is reclaimed, which had been killing background runs.
+- Usage: about a third of his weekly allowance was used by mid-afternoon, so waiting lanes stopped
+  their hourly self check-ins (the Operator wakes them) and the second group's polish waits for its
+  merges.
+
+Settled on 2026-10-05, morning:
+
+- He used his banked reset at about 02:40 UTC. The push pace holds (about ten to twelve busy
+  workers) until the weekly reset of Wednesday, October 7, 2026, 4 p.m. ET.
+- Games: his idea of real games made as splat toys (simple and geometric first, 2D and 3D, full
+  screen and in embeds, remixes of classic games only where the law allows) is a main lane, Arcade,
+  started at 02:23 UTC on a new labs shelf. His marks on the Push Plan: the 2D/3D change is a switch
+  that slides smoothly, not a slider (a slider only where it is part of play); each game has its own
+  stats; brick breaker's 3D version puts the paddle at the bottom of an invisible sphere under a
+  dome of bricks, and a version that differs from his idea is kept beside it; snake uses the Space
+  shelf's planets, with tunnels and other shapes; the lander goes to other worlds besides the Moon;
+  mini golf is deferred; pinball is practice for the physics. The block world (G14, G15) is a later
+  lane.
+- The Chladni plate: his test at 02:24 UTC, with his own long song and with the microphone, still
+  showed the bow and a new plate every 5 to 6 seconds, with the sand moving only at each restart. He
+  wants no bow with an audio file or the microphone, and the sand answering at once and
+  continuously. Live r7 rebuilt it as live sand (#263, with the engine PR #284); in a test run.
+- AI-made sources: his idea of making videos and pictures with his own AI video and image plan and
+  turning them into splats with Video to 3D, Photo to 3D and Moving photo to 3D. The Push Plan has
+  the answers (consistency from frame to frame, slow orbits of still subjects, no watermarks, the
+  output is his to use but can't be copyrighted) and test prompts; cards AI1 to AI5, including a
+  rule for AI-made sources, wait for his marks. The science toys stay on real data.
+- Later that morning: QR lab r2 (#267), Imaging (#274, #275) and Fix8 (#273, the real alarm clock
+  tells the time) merged after full test runs. The hands-on sample test now asks for every public
+  shelf, so labs-only shelves such as Imaging and Arcade don't fail it (#302). A full run takes
+  about four and a half hours, so six Integrators run (Integrator 2 retired), and wave 3 started at
+  07:14 UTC.
+- Merged the same morning: Codex task 21's report (#280, docs/audits/pdf-motion-2026-10.md: a PDF
+  can move and respond in some viewers, a WebGL toy can't run inside one; the sample PDFs wait for
+  his tests on his devices) and the Dot's two source reports (#279, open science data; #281,
+  photoreal captures and Studio media sources). A fourth Integrator started at 05:27 UTC.
 
 Settled on 2026-10-05, early (the owner's go):
 
