@@ -49,6 +49,10 @@ const LIST = [
     "molecule",
   ],
   ["Molecules of life", "nad", "NAD+, a helper molecule in every cell", "cod:1507221", "molecule"],
+  // r2 (the owner's "could you add even more molecules?"): three more.
+  ["Molecules of life", "alanine", "Alanine, the simplest amino acid with a side chain", "cod:8000310", "molecule"], // prettier-ignore
+  ["Molecules of life", "histidine", "Histidine, an amino acid (neutron, 5 K)", "cod:2108879", "molecule"], // prettier-ignore
+  ["Molecules of life", "thymidine", "Thymidine, a building block of DNA", "cod:2104143", "molecule"], // prettier-ignore
   ["Minerals and gems", "quartz", "Quartz", "cod:9000775", "cell"],
   ["Minerals and gems", "calcite", "Calcite", "cod:9000965", "cell"],
   ["Minerals and gems", "corundum", "Corundum (ruby and sapphire)", "cod:1000032", "cell"],
@@ -239,7 +243,10 @@ function citeCif(text) {
   const t = blk.table("_publ_author_name");
   const names = [];
   for (let r = 0; t && r < t.count; r++) names.push(t.get(r, "_publ_author_name"));
-  const journal = blk.item("_journal_name_full").replace(/\s*\([^)]*\)/g, "");
+  let journal = blk.item("_journal_name_full").replace(/\s*\([^)]*\)/g, "");
+  // A few CIFs give the journal in lower case: title-case it (not "of").
+  if (journal.slice(1) === journal.slice(1).toLowerCase())
+    journal = journal.replace(/\b([a-z])([a-z]*)/g, (w, a, b, i) => (i && /^(of|and|the|in)$/.test(w) ? w : a.toUpperCase() + b)); // prettier-ignore
   const vol = blk.item("_journal_volume");
   const page = blk.item("_journal_page_first");
   const year = blk.item("_journal_year");

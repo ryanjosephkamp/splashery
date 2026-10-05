@@ -651,6 +651,18 @@ checked on its live page that day:
   [COD 1507221](https://www.crystallography.net/cod/1507221.html), by B. Guillot, N. Muzet, E.
   Artacho et al. (The Journal of Physical Chemistry B 107 9109, 2003),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Alanine, the simplest amino acid with a side chain,
+  [COD 8000310](https://www.crystallography.net/cod/8000310.html), by L. A. Malaspina, E. K.
+  Wieduwilt, J. Bergmann et al. (The Journal of Physical Chemistry Letters 6973, 2019),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Histidine, an amino acid (neutron, 5 K),
+  [COD 2108879](https://www.crystallography.net/cod/2108879.html), by G. Novelli, C. J. McMonagle,
+  F. Kleemiss et al. (Acta Crystallographica Section B 77, 2021),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Thymidine, a building block of DNA,
+  [COD 2104143](https://www.crystallography.net/cod/2104143.html), by C. B. Hübschle, B. Dittrich,
+  S. Grabowsky et al. (Acta Crystallographica Section B 64 363, 2008),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
 - Thermal ellipsoids: A-DNA, 0.83 Å, [PDB 1DPL](https://www.rcsb.org/structure/1DPL), by M. Egli, V.
   Tereshko, M. Teplova et al. (Biopolymers 48 234, 1998),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the

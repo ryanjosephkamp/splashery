@@ -132,7 +132,9 @@ function landSplats(D, { exag, stride, interval, contours, onlyHeight }, emit) {
         for (let k = 1; k <= m; k++) {
           const y = Y(h) - (k * drop) / (m + 1);
           const hk = low + (y / exag) * 1000;
-          emit([X(i) + (dir[0] * step) / 2, y, Z(j) + (dir[2] * step) / 2], out, sunlit(shade(onlyHeight ? "#b9b3a6" : tint((hk - low) / relief), 0.85), out), band(hk)); // prettier-ignore
+          // Lit like the slope it fills (r2): lit by its own sideways
+          // normal, each fill splat read as a dark dot on the slope.
+          emit([X(i) + (dir[0] * step) / 2, y, Z(j) + (dir[2] * step) / 2], out, sunlit(onlyHeight ? "#b9b3a6" : tint((hk - low) / relief), nrm), band(hk)); // prettier-ignore
         }
       }
     }
@@ -171,6 +173,8 @@ const credits = TERRAIN_PLACES.map((p) => ({
 // ---- Terrain in a box ------------------------------------------------------------------
 
 export const TERRAIN = {
+  // r2 (the owner's "sharper"): the sharp splat kernel (labs; src/kernels.js).
+  kernel: "sharp",
   alive: false,
   options: [
     PLACE_OPTION,
@@ -276,6 +280,8 @@ export const TERRAIN = {
 // ---- Contour lab ---------------------------------------------------------------------
 
 export const CONTOUR = {
+  // r2 (the owner's "sharper"): the sharp splat kernel (labs; src/kernels.js).
+  kernel: "sharp",
   alive: false,
   options: [PLACE_OPTION, EXAG_OPTION],
   controls: [

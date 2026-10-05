@@ -71,10 +71,10 @@ const expectTensor = (m, six, eps = 1e-6) => {
 };
 
 test.describe("structures (node)", () => {
-  test("38 structures in seven groups, each with real anisotropic U and a CC0 credit", () => {
+  test("41 structures in seven groups, each with real anisotropic U and a CC0 credit", () => {
     expect(STRUCTURES.length).toBeGreaterThanOrEqual(15);
     // (r2: the owner's "could you add even more molecules?", October 5, 2026)
-    expect(STRUCTURES.length).toBeGreaterThanOrEqual(38);
+    expect(STRUCTURES.length).toBeGreaterThanOrEqual(41);
     expect(new Set(STRUCTURES.map((s) => s.group))).toEqual(
       new Set([
         "Everyday molecules",

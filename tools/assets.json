@@ -2487,6 +2487,39 @@
       "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
     },
     {
+      "id": "sci3-alanine",
+      "file": "assets/toys/thermal-ellipsoids/alanine-cod-8000310.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Alanine, the simplest amino acid with a side chain (COD 8000310)",
+      "author": "L. A. Malaspina, E. K. Wieduwilt, J. Bergmann et al.",
+      "page": "https://www.crystallography.net/cod/8000310.html",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
+    },
+    {
+      "id": "sci3-histidine",
+      "file": "assets/toys/thermal-ellipsoids/histidine-cod-2108879.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Histidine, an amino acid (neutron, 5 K) (COD 2108879)",
+      "author": "G. Novelli, C. J. McMonagle, F. Kleemiss et al.",
+      "page": "https://www.crystallography.net/cod/2108879.html",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
+    },
+    {
+      "id": "sci3-thymidine",
+      "file": "assets/toys/thermal-ellipsoids/thymidine-cod-2104143.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Thymidine, a building block of DNA (COD 2104143)",
+      "author": "C. B. Hübschle, B. Dittrich, S. Grabowsky et al.",
+      "page": "https://www.crystallography.net/cod/2104143.html",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
+    },
+    {
       "id": "sci3-a-dna",
       "file": "assets/toys/thermal-ellipsoids/a-dna-pdb-1dpl.pdb",
       "toy": "thermal-ellipsoids",

@@ -1504,6 +1504,8 @@ function radialColor(t) {
 }
 
 const CRYOEM = {
+  // r2 (the owner's "sharper"): the sharp splat kernel (labs; src/kernels.js).
+  kernel: "sharp",
   alive: false,
   density: CRYOEM_DENSITY,
   options: [
