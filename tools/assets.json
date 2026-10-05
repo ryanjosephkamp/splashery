@@ -2145,6 +2145,54 @@
       "license": "CC BY 3.0",
       "checked": "October 2, 2026",
       "note": "The Screen toy's six-second clip (assets/toys/screen/bunny.mp4) at 8 frames a second, 640 by 360, tiled 3 by 5 into four JPEGs (bunny-sheet-1.jpg to -4.jpg); each frame's depth worked out by tools/live3-depth.mjs with the vendored depth model."
+    },
+    {
+      "id": "horse",
+      "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/horse.depth",
+      "toy": "moving-photo-3d",
+      "name": "Race horse galloping (Muybridge, 1887)",
+      "author": "Eadweard Muybridge",
+      "page": "https://commons.wikimedia.org/wiki/File:Muybridge_race_horse_animated.gif",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "The Screen toy's GIF (assets/toys/screen/horse.gif), unchanged, 15 frames of a tenth of a second at 300 by 200 in one JPEG sheet; each frame's depth worked out by tools/live3-depth.mjs."
+    },
+    {
+      "id": "dragon",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/sintel.depth",
+      "toy": "moving-photo-3d",
+      "name": "Sintel (trailer, 29.5 to 35.5 s)",
+      "author": "Blender Foundation",
+      "page": "https://durian.blender.org/",
+      "license": "CC BY 3.0",
+      "checked": "October 5, 2026",
+      "note": "From the 720p trailer on download.blender.org/durian/trailer, cropped to 1280 by 544 and scaled to 640 by 272, 8 frames a second, three JPEG sheets, with its sound as a 56 kbps mono MP3 (sintel.mp3); each frame's depth by tools/live3-depth.mjs."
+    },
+    {
+      "id": "bridge",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/tears.depth",
+      "toy": "moving-photo-3d",
+      "name": "Tears of Steel (8:30.5 to 8:36.5)",
+      "author": "Blender Foundation",
+      "page": "https://mango.blender.org/",
+      "license": "CC BY 3.0",
+      "checked": "October 5, 2026",
+      "note": "From the 720p download on download.blender.org/demo/movies/ToS, 640 by 267, 8 frames a second, three JPEG sheets, with its sound as a 56 kbps mono MP3 (tears.mp3); each frame's depth by tools/live3-depth.mjs."
+    },
+    {
+      "id": "machine",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/elephants.depth",
+      "toy": "moving-photo-3d",
+      "name": "Elephants Dream (5:29.7 to 5:35.7)",
+      "author": "Blender Foundation",
+      "page": "https://orange.blender.org/",
+      "license": "CC BY 2.5",
+      "checked": "October 5, 2026",
+      "note": "From the 1024 by 576 download on download.blender.org/ED, 640 by 360, 8 frames a second, four JPEG sheets, with its sound as a 56 kbps mono MP3 (elephants.mp3); each frame's depth by tools/live3-depth.mjs."
     }
   ],
   "splatTrainer": {

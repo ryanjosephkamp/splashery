@@ -53,7 +53,7 @@ export const DEPTH_SIDE = DEPTH_SIDES.low;
 const LIFT = 0.9; // recipe units at full depth
 
 export const MOVING = {
-  sample: null, // the sample clip, once loaded
+  samples: new Map(), // sample id -> its clip, once loaded
   custom: null, // a clip the person opened
   want: null, // the clip the next build shows
   clip: null, // the clip on show
@@ -678,30 +678,127 @@ async function readBytes(rel) {
   return new Uint8Array(await r.arrayBuffer());
 }
 
-// The sample's sheets: SAMPLE.sheets sheets of SAMPLE.cols by SAMPLE.rows
-// frames (SAMPLE.frames in all), each SAMPLE.w by SAMPLE.h, at SAMPLE.fps
-// (tools/live3-depth.mjs makes them; four, as a decoded picture is at most
-// 2048 pixels on a side). r5: 640 by 360, the scene's own size, shown so
-// on a high or max device and at 480 by 270 otherwise (SAMPLE_SIDES).
-export const SAMPLE = { sheets: 4, cols: 3, rows: 5, frames: 48, w: 640, h: 360, fps: 8 };
+// The samples. Each is a few seconds of a clip, tiled into `sheets` sheets of `cols` by `rows`
+// frames (`frames` in all), each `w` by `h`, at `fps`, with its depth (assets/toys/moving-photo-3d/
+// <file>.depth) and, for a video, its sound. tools/live3-depth.mjs makes them (four sheets for the
+// bunny, as a decoded picture is at most 2048 pixels on a side). The first, "sample", is the
+// original (a link or a saved scene that says `clip: "sample"` keeps meaning the bunny). r5: 640 by
+// 360, the scene's own size, shown so on a high or max device and at 480 wide otherwise
+// (SAMPLE_SIDES).
+const BLENDER = { license: "CC BY 3.0", licenseUrl: "https://creativecommons.org/licenses/by/3.0/", author: "Blender Foundation" }; // prettier-ignore
+export const SAMPLES = [
+  {
+    id: "sample",
+    label: "Big Buck Bunny",
+    name: "Big Buck Bunny (a six-second scene)",
+    file: "bunny",
+    sheets: 4,
+    cols: 3,
+    rows: 5,
+    frames: 48,
+    w: 640,
+    h: 360,
+    fps: 8, // prettier-ignore
+    title: "Big Buck Bunny (a six-second scene, the sample clip)",
+    source: "https://peach.blender.org/",
+    ...BLENDER,
+    cut: { src: "assets/toys/screen/bunny.mp4", ss: 0, t: 6 },
+  },
+  {
+    id: "horse",
+    label: "Galloping horse (1887)",
+    file: "horse",
+    sheets: 1,
+    cols: 3,
+    rows: 5,
+    frames: 15,
+    w: 300,
+    h: 200,
+    fps: 10, // prettier-ignore
+    title: "Race horse galloping (Muybridge, 1887, a GIF)",
+    source: "https://commons.wikimedia.org/wiki/File:Muybridge_race_horse_animated.gif",
+    author: "Eadweard Muybridge",
+    license: "Public domain",
+    licenseUrl:
+      "https://commons.wikimedia.org/wiki/Commons:Licensing#Material_in_the_public_domain",
+    cut: { src: "assets/toys/screen/horse.gif" },
+    gif: true,
+  },
+  {
+    id: "dragon",
+    label: "Sintel and the dragon",
+    file: "sintel",
+    sheets: 3,
+    cols: 3,
+    rows: 7,
+    frames: 48,
+    w: 640,
+    h: 272,
+    fps: 8, // prettier-ignore
+    title: "Sintel (trailer, six seconds from 0:29.5)",
+    source: "https://durian.blender.org/",
+    ...BLENDER,
+    sound: "sintel.mp3",
+    cut: { src: ".cache/smd/sintel_trailer-720p.mp4", ss: 29.5, t: 6, crop: "1280:544:0:88" },
+  },
+  {
+    id: "bridge",
+    label: "The bridge and the robot",
+    file: "tears",
+    sheets: 3,
+    cols: 3,
+    rows: 6,
+    frames: 48,
+    w: 640,
+    h: 268,
+    fps: 8, // prettier-ignore
+    title: "Tears of Steel (six seconds from 8:30.5)",
+    source: "https://mango.blender.org/",
+    ...BLENDER,
+    sound: "tears.mp3",
+    cut: { src: ".cache/smd/tears_of_steel_720p.mov", ss: 510.5, t: 6 },
+  },
+  {
+    id: "machine",
+    label: "Inside the machine",
+    file: "elephants",
+    sheets: 4,
+    cols: 3,
+    rows: 5,
+    frames: 48,
+    w: 640,
+    h: 360,
+    fps: 8, // prettier-ignore
+    title: "Elephants Dream (six seconds from 5:29.7)",
+    source: "https://orange.blender.org/",
+    author: "Blender Foundation",
+    license: "CC BY 2.5",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
+    sound: "elephants.mp3",
+    cut: { src: ".cache/smd/ed-cut.mp4", ss: 1.65, t: 6 },
+  },
+];
+export const SAMPLE = SAMPLES[0];
 export const SAMPLE_SIDES = { low: 480, mid: 480, high: 640, max: 640 };
-// The same scene with its sound (the Screen toy's files): MP4, or WebM where
-// the browser can't play MP4 (some Chromium builds).
-const SAMPLE_SOUND = () =>
-  globalThis.document?.createElement("audio").canPlayType('audio/mp4; codecs="mp4a.40.2"')
-    ? "../../assets/toys/screen/bunny.mp4"
-    : "../../assets/toys/screen/bunny.webm";
+// The bunny's sound (the Screen toy's files): MP4, or WebM where the browser can't play MP4 (some
+// Chromium builds). The others have an MP3 of their own.
+const sampleSound = (s) =>
+  s.sound
+    ? `../../assets/toys/moving-photo-3d/${s.sound}`
+    : globalThis.document?.createElement("audio").canPlayType('audio/mp4; codecs="mp4a.40.2"')
+      ? "../../assets/toys/screen/bunny.mp4"
+      : "../../assets/toys/screen/bunny.webm";
 
-// The sheets (decoded) cut into frames, in order, each `side` pixels wide
-// (scaled down from the sheets' own size when smaller).
-export function sheetFrames(photos, side = SAMPLE.w) {
-  const { cols, rows, w, h, fps, frames } = SAMPLE;
+// The sample's sheets (decoded) cut into frames, in order, each `side` pixels wide (scaled down
+// from the sheets' own size when smaller).
+export function sheetFrames(photos, side = SAMPLE.w, sample = SAMPLE) {
+  const { cols, rows, w, h, fps, frames } = sample;
   const tw = Math.min(w, side);
   const th = Math.round((h * tw) / w);
   const out = [];
   for (let photo of [].concat(photos)) {
     if (tw < w && typeof document !== "undefined") photo = scaledSheet(photo, cols * tw, rows * th);
-    else if (tw < w) return sheetFrames(photos, w); // (Node: no canvas to scale with)
+    else if (tw < w) return sheetFrames(photos, w, sample); // (Node: no canvas to scale with)
     for (let f = 0; f < cols * rows && out.length < frames; f++) {
       const x0 = (f % cols) * tw;
       const y0 = Math.floor(f / cols) * th;
@@ -730,19 +827,21 @@ function scaledSheet(photo, w, h) {
   return { w, h, data: g.getImageData(0, 0, w, h).data };
 }
 
-export async function loadSample() {
-  if (MOVING.sample) return MOVING.sample;
+export async function loadSample(id = "sample") {
+  const s = SAMPLES.find((x) => x.id === id) || SAMPLE;
+  if (MOVING.samples.has(s.id)) return MOVING.samples.get(s.id);
   const { decodePhoto, unpackDepth } = await import("./photo-3d.js");
-  const sheets = await Promise.all(Array.from({ length: SAMPLE.sheets }, (_, i) => readBytes(`../../assets/toys/moving-photo-3d/bunny-sheet-${i + 1}.jpg`).then(decodePhoto))); // prettier-ignore
-  const dep = await readBytes("../../assets/toys/moving-photo-3d/bunny.depth");
+  const sheets = await Promise.all(Array.from({ length: s.sheets }, (_, i) => readBytes(`../../assets/toys/moving-photo-3d/${s.file}-sheet-${i + 1}.jpg`).then(decodePhoto))); // prettier-ignore
+  const dep = await readBytes(`../../assets/toys/moving-photo-3d/${s.file}.depth`);
   // (Node, building toys for the tests, has no canvas to scale with.)
-  const w = typeof document === "undefined" ? SAMPLE.w : SAMPLE_SIDES[profile()] || SAMPLE_SIDES.mid; // prettier-ignore
-  const h = Math.round((SAMPLE.h * w) / SAMPLE.w);
-  const frames = sheetFrames(sheets, w);
+  const w = typeof document === "undefined" ? s.w : Math.min(s.w, SAMPLE_SIDES[profile()] || SAMPLE_SIDES.mid); // prettier-ignore
+  const h = Math.round((s.h * w) / s.w);
+  const frames = sheetFrames(sheets, w, s);
   const raw = unpackDepths(dep, unpackDepth);
-  const clip = makeClip("Big Buck Bunny (a six-second scene)", w, h, frames, normalizeDepths(raw, w, h)); // prettier-ignore
-  clip.audio = typeof Audio === "undefined" ? null : await soundOf(new URL(SAMPLE_SOUND(), import.meta.url).href, false); // prettier-ignore
-  MOVING.sample = clip;
+  const clip = makeClip(s.name || s.title, w, h, frames, normalizeDepths(raw, w, h));
+  clip.sample = s.id;
+  clip.audio = typeof Audio === "undefined" || s.gif ? null : await soundOf(new URL(sampleSound(s), import.meta.url).href, false); // prettier-ignore
+  MOVING.samples.set(s.id, clip);
   return clip;
 }
 
@@ -765,6 +864,11 @@ function setShown(text) {
 
 // The clip's sound (r5), if it has one.
 const track = () => MOVING.clip?.audio?.track ?? null;
+
+// Smd: the Toy tab's Speed slider (0 to 1, the middle is the clip's own speed) sets how fast the
+// clip plays, as it does the turntable on other toys: 0.25 to 1.75 times, its sound with it.
+export const speedRate = (speed) => 0.25 + 1.5 * Math.min(1, Math.max(0, speed ?? 0.5));
+const clipRate = () => speedRate(globalThis.window?.__splashery?.player?.scene?.motion?.speed);
 
 // r6 (the owner's note of October 3: after a pause the sound didn't come
 // back): one clock for the frames and the sound. Whether the clip plays is
@@ -841,7 +945,16 @@ export const MOVING_PHOTO = {
   turntable: false,
   options: [
     { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.6 },
-    { key: "clip", label: "Clip", type: "text", default: "sample", hidden: true },
+    {
+      key: "clip",
+      label: "Clip",
+      type: "select",
+      default: "sample",
+      choices: [
+        ...SAMPLES.map((s) => ({ id: s.id, label: s.label })),
+        { id: "custom", label: "Your clip (open one below)" },
+      ],
+    },
     { key: "clipName", label: "Clip name", type: "text", default: "", hidden: true },
   ],
   controls: [{ key: "play", label: "Play", type: "toggle", default: 1, ease: 0.2 }],
@@ -875,16 +988,14 @@ export const MOVING_PHOTO = {
     },
     shown: () => MOVING.status || (MOVING.clip ? clipLine(MOVING.clip) : ""),
   },
-  credits: [
-    {
-      label: "Moving photo to 3D",
-      title: "Big Buck Bunny (a six-second scene, the sample clip)",
-      source: "https://peach.blender.org/",
-      author: "Blender Foundation",
-      license: "CC BY 3.0",
-      licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
-    },
-  ],
+  credits: SAMPLES.map((s) => ({
+    label: s.label,
+    title: s.title,
+    source: s.source,
+    author: s.author,
+    license: s.license,
+    licenseUrl: s.licenseUrl,
+  })),
   screen: {
     get width() {
       return (MOVING.grid?.cols || 16) * 2;
@@ -903,7 +1014,7 @@ export const MOVING_PHOTO = {
     },
   },
   async prepare(o) {
-    MOVING.want = o.clip === "custom" && MOVING.custom ? MOVING.custom : await loadSample();
+    MOVING.want = o.clip === "custom" && MOVING.custom ? MOVING.custom : await loadSample(o.clip === "custom" ? "sample" : o.clip); // prettier-ignore
   },
   drive(t, c, out, info) {
     const time = info?.time ?? t;
@@ -914,6 +1025,8 @@ export const MOVING_PHOTO = {
     // r6: the control's target, not its eased value (see playTarget).
     const on = globalThis.window?.__splashery?.player?.motion ? playTarget() : (c.play ?? 1) > 0.5;
     const tr = track();
+    const rate = clipRate();
+    if (tr) tr.el.playbackRate = rate;
     if (!on) {
       if (tr?.playing) soundTo(false);
       MOVING.anchor = null;
@@ -937,8 +1050,8 @@ export const MOVING_PHOTO = {
       const now = pl ? (globalThis.window.__clipT ?? performance.now() / 1000) : time;
       if (pl?.frozen) MOVING.anchor = null;
       else {
-        if (!MOVING.anchor || now < MOVING.anchor.at) MOVING.anchor = { t: MOVING.t, at: now };
-        MOVING.t = (MOVING.anchor.t + (now - MOVING.anchor.at)) % clip.duration;
+        if (!MOVING.anchor || now < MOVING.anchor.at || MOVING.anchor.rate !== rate) MOVING.anchor = { t: MOVING.t, at: now, rate }; // prettier-ignore
+        MOVING.t = (MOVING.anchor.t + (now - MOVING.anchor.at) * rate) % clip.duration;
       }
       if (tr && !tr.blocked && !tr.el.ended) {
         tr.el.currentTime = MOVING.t;

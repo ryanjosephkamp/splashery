@@ -314,7 +314,21 @@ Blender Foundation, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), c
 peach.blender.org on October 2, 2026): 48 frames of it at 640 by 360, tiled into
 `assets/toys/moving-photo-3d/bunny-sheet-1.jpg` to `-4.jpg`, with each frame's depth worked out by
 the vendored depth model (`bunny.depth`, made by `tools/live3-depth.mjs`). GIFs and videos people
-open in it are read in their browser and never uploaded.
+open in it are read in their browser and never uploaded. Four more samples (Studio media lane, each
+license checked on its live source page on October 5, 2026), each a few seconds tiled into JPEG
+sheets with each frame's depth (`assets/toys/moving-photo-3d/<name>-sheet-N.jpg` and `<name>.depth`,
+made by `tools/live3-depth.mjs`) and, for the videos, their sound as a mono MP3:
+
+- The race horse GIF above (Muybridge, 1887, public domain), unchanged.
+- "Sintel" (trailer, 29.5 to 35.5 s), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the trailer on
+  download.blender.org ([durian.blender.org](https://durian.blender.org/)).
+- "Tears of Steel" (8:30.5 to 8:36.5), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the 720p download on
+  download.blender.org ([mango.blender.org](https://mango.blender.org/)).
+- "Elephants Dream" (5:29.7 to 5:35.7), © Blender Foundation,
+  [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/), from the download on
+  download.blender.org ([orange.blender.org](https://orange.blender.org/)).
 
 The Gaussian splatting toy (a labs toy, lane Screens) learns the photo "Strawberry on white
 background" by Joselodos

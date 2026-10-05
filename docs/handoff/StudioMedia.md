@@ -130,19 +130,40 @@ imports the Photo to 3D depth modules unchanged.
 
 WORKING (October 5, 2026). Model: Sonnet 5.5.
 
-- Item 1, Photo to 3D: done in code. Three CC0 photos added (spiral staircase, palace staircase,
-  wildflowers up close) with depth from `tools/p3d-depth.mjs`; credits in CREDITS.md and
-  `tools/assets.json`. Still to do: tests, clips.
-- Items 2 to 5: not started.
+- Item 1, Photo to 3D: done. Three CC0 photos (spiral staircase, palace staircase, wildflowers up
+  close) with depth from `tools/p3d-depth.mjs`; credits done. Clip still to do.
+- Item 2, Moving photo to 3D: done in code and tests (`tests/smd-moving.spec.mjs`, 15 pass). Four
+  new samples beside the bunny: the Muybridge horse GIF, the dragon (Sintel trailer, CC BY 3.0), the
+  bridge and the robot (Tears of Steel, CC BY 3.0), the machine (Elephants Dream, CC BY 2.5). There
+  is now a Clip choice (SAMPLES in `src/packs/moving-photo.js`); `clip: "sample"` still means the
+  bunny. `tools/live3-depth.mjs <id>` makes a sample from a source kept in `.cache/smd/`. Still to
+  do: a clip at phone size.
+- Items 3 to 5: not started.
 
 ## Notes
 
-- Wikimedia's API rate-limits fast loops; fetch one file at a time with a pause and a User-Agent.
+- Wikimedia rate-limits fast loops (429 on the API and on upload.wikimedia.org, from this shared
+  address); fetch one file at a time with a pause and a User-Agent. The Blender open-movie files
+  came from download.blender.org, which did not limit.
 - A photo with a visible shop sign (a brand name) was left out on purpose.
+- Speed, measured (`tests/smd-moving.spec.mjs`, Chromium on SwiftShader, 4 s of play): on the low
+  tier the bunny, the horse and the three videos each play at 99 to 100% of their source's speed
+  (for example the bunny 3.55 s of clip in 3.55 s; the horse 3.78 in 3.78). A video's frames follow
+  its sound, a GIF's its wall clock, and both held. A fast device that draws only a frame a second
+  (the test renderer at max) shows the position a frame late, so that tier is checked against the
+  clock each kind follows: the silent clip's clock moves it exactly, and the sound's element runs at
+  1.00 times. So no gap was found in the clip's own speed: the bunny sample is 8 frames a second (48
+  frames in 6 s), so it can look slower than the 24 a second source even though it lasts as long.
+- The Speed control he meant is the Toy tab's Speed slider (the app-wide `motion.speed`). It only
+  scaled the turntable and idle moves, so it did nothing here. It now plays the clip from 0.25 to
+  1.75 times (the middle, 50%, is the clip's own speed), the sound with it (`speedRate()` in
+  `src/packs/moving-photo.js`). The song bar's speed menu is for the song toys and is not shown
+  here.
 
 ## Known issues
 
-None yet.
+- The Speed slider speeds a video's sound by changing the audio element's playback rate (pitch
+  preserved by the browser).
 
 ## For the Operator
 
