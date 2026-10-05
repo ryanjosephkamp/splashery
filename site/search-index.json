@@ -3518,50 +3518,50 @@
     "t": "Tools",
     "u": "tools/",
     "k": "page",
-    "d": "What you can do to a Splashery toy, and the ways to share it.",
-    "w": "tools what you can do to a splashery toy, and the ways to share it. every toy answers to the same tools. pick one in the gallery's toolbar, then drag on the toy."
+    "d": "Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light.",
+    "w": "tools every splashery tool in one place: make and convert, open your own files, scan and measure, qr codes, sound and light. splashery is also a workshop. each of these opens in the gallery and works on your own things, on your device; nothing is uploaded."
   },
   {
     "t": "Orbit",
     "u": "tools/#tool-orbit",
     "k": "tool",
     "d": "Drag to turn the toy; pinch or scroll to zoom. Double-tap to reset the view.",
-    "w": "orbit drag to turn the toy; pinch or scroll to zoom. double-tap to reset the view. tool play"
+    "w": "orbit drag to turn the toy; pinch or scroll to zoom. double-tap to reset the view. tool in every toy"
   },
   {
     "t": "Poke",
     "u": "tools/#tool-poke",
     "k": "tool",
     "d": "Tap or drag to push splats in; they spring back.",
-    "w": "poke tap or drag to push splats in; they spring back. tool play"
+    "w": "poke tap or drag to push splats in; they spring back. tool in every toy"
   },
   {
     "t": "Paint",
     "u": "tools/#tool-paint",
     "k": "tool",
     "d": "Brush color onto the toy, splat by splat.",
-    "w": "paint brush color onto the toy, splat by splat. tool play"
+    "w": "paint brush color onto the toy, splat by splat. tool in every toy"
   },
   {
     "t": "Magnet",
     "u": "tools/#tool-magnet",
     "k": "tool",
     "d": "Pull splats toward your finger and let them fly back.",
-    "w": "magnet pull splats toward your finger and let them fly back. tool play"
+    "w": "magnet pull splats toward your finger and let them fly back. tool in every toy"
   },
   {
     "t": "Clay",
     "u": "tools/#tool-clay",
     "k": "tool",
     "d": "Push and pull the surface like soft clay.",
-    "w": "clay push and pull the surface like soft clay. tool play"
+    "w": "clay push and pull the surface like soft clay. tool in every toy"
   },
   {
     "t": "Tap",
     "u": "tools/#tool-tap",
     "k": "tool",
     "d": "Each toy has its own tap: a peel, a hop, a song, a shatter.",
-    "w": "tap each toy has its own tap: a peel, a hop, a song, a shatter. tool play"
+    "w": "tap each toy has its own tap: a peel, a hop, a song, a shatter. tool in every toy"
   },
   {
     "t": "Make",
@@ -3592,11 +3592,18 @@
     "w": "gif and video save a turntable or a short effect loop as a file. tool make and share"
   },
   {
+    "t": "Embed and share",
+    "u": "share/",
+    "k": "page",
+    "d": "Put a Splashery toy on your own page with an iframe or one script tag, and how scene links carry a toy and its settings.",
+    "w": "embed and share put a splashery toy on your own page with an iframe or one script tag, and how scene links carry a toy and its settings. put a live toy on your own page, with every option, or send someone a link to a toy exactly as you set it."
+  },
+  {
     "t": "Science",
     "u": "science/",
     "k": "page",
-    "d": "Atoms, planets, the body, math and computing on Splashery, as toys you can play with.",
-    "w": "science atoms, planets, the body, math and computing on splashery, as toys you can play with. science, math and computing toys: things you can turn over, take apart and run."
+    "d": "Every science, math and computing toy on Splashery, with the data it comes from, its license and what it shows.",
+    "w": "science every science, math and computing toy on splashery, with the data it comes from, its license and what it shows. science, math and computing toys: things you can turn over, take apart and run. where a toy shows real data, its source and license are listed here."
   },
   {
     "t": "Studio",
@@ -3609,22 +3616,43 @@
     "t": "Learn",
     "u": "learn/",
     "k": "page",
-    "d": "How splats work, and how to program your own Splashery toys.",
-    "w": "learn how splats work, and how to program your own splashery toys. how the toys work, and how to make your own."
+    "d": "How 3D Gaussian splats work, the Tinkerer's Manual, the lab notebook and how Splashery is made.",
+    "w": "learn how 3d gaussian splats work, the tinkerer's manual, the lab notebook and how splashery is made. how the toys work, how to make your own, and how splashery itself is made."
   },
   {
     "t": "The Tinkerer's Manual",
     "u": "../manual/",
     "k": "page",
-    "d": "How to program splats, from the math of one splat to your own equations.",
-    "w": "the tinkerer's manual how to program splats, from the math of one splat to your own equations. learn"
+    "d": "How to program splats, from the math of one splat to your own equations, toys and pictures. Start here if you want to make something.",
+    "w": "the tinkerer's manual how to program splats, from the math of one splat to your own equations, toys and pictures. start here if you want to make something. learn"
   },
   {
-    "t": "The Manual as a PDF",
-    "u": "../manual/tinkerers-manual.pdf",
+    "t": "How 3D Gaussian splats work",
+    "u": "learn/splats/",
     "k": "page",
-    "d": "The same manual, to read offline or print.",
-    "w": "the manual as a pdf the same manual, to read offline or print. learn"
+    "d": "A soft colored blob, hundreds of thousands of them, sorted and blended: what a splat is and what a recipe is, with small drawings.",
+    "w": "how 3d gaussian splats work a soft colored blob, hundreds of thousands of them, sorted and blended: what a splat is and what a recipe is, with small drawings. learn"
+  },
+  {
+    "t": "The lab notebook",
+    "u": "learn/notebook/",
+    "k": "page",
+    "d": "What each lane built, which model built it, and what the team learned along the way.",
+    "w": "the lab notebook what each lane built, which model built it, and what the team learned along the way. learn"
+  },
+  {
+    "t": "How Splashery is made",
+    "u": "learn/made/",
+    "k": "page",
+    "d": "Lanes, the Operator, the reviews and the rules, in plain words.",
+    "w": "how splashery is made lanes, the operator, the reviews and the rules, in plain words. learn"
+  },
+  {
+    "t": "Embed and share",
+    "u": "share/",
+    "k": "page",
+    "d": "Put a toy on your own page, and how a scene link carries a toy and its settings.",
+    "w": "embed and share put a toy on your own page, and how a scene link carries a toy and its settings. learn"
   },
   {
     "t": "Writing toy recipes",
@@ -3641,24 +3669,59 @@
     "w": "the scene format what a shared link or a saved scene holds. learn"
   },
   {
-    "t": "Embedding a toy",
-    "u": "https://github.com/ryanjosephkamp/splashery#embedding",
+    "t": "How 3D Gaussian splats work",
+    "u": "learn/splats/",
     "k": "page",
-    "d": "The iframe and the custom element, with every option.",
-    "w": "embedding a toy the iframe and the custom element, with every option. learn"
+    "d": "What a 3D Gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is.",
+    "w": "how 3d gaussian splats work what a 3d gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is. a soft colored blob, a lot of them, and a recipe: the whole idea, with pictures."
+  },
+  {
+    "t": "How Splashery is made",
+    "u": "learn/made/",
+    "k": "page",
+    "d": "The lanes, the Operator, the reviews and the rules behind Splashery, in plain words.",
+    "w": "how splashery is made the lanes, the operator, the reviews and the rules behind splashery, in plain words. many claude sessions, one person with ideas, and a lot of watching clips."
+  },
+  {
+    "t": "The lab notebook",
+    "u": "learn/notebook/",
+    "k": "page",
+    "d": "What each lane of Splashery built, which model built it, how long it took and what the team learned.",
+    "w": "the lab notebook what each lane of splashery built, which model built it, how long it took and what the team learned. a running record of how splashery is built, one entry per lane."
   },
   {
     "t": "What's new",
     "u": "new/",
     "k": "page",
-    "d": "The latest changes to Splashery, newest first.",
-    "w": "what's new the latest changes to splashery, newest first. the latest changes, newest first."
+    "d": "What changed in Splashery, day by day, in plain words, with every merged change listed underneath.",
+    "w": "what's new what changed in splashery, day by day, in plain words, with every merged change listed underneath. what changed, day by day, in plain words. under each day is the full list of merged changes."
   },
   {
     "t": "About",
     "u": "about/",
     "k": "page",
-    "d": "What Splashery is, who makes it, the terms of use and the credits.",
-    "w": "about what splashery is, who makes it, the terms of use and the credits. splashery is a free toy box of 3d gaussian splats that runs in your browser."
+    "d": "What Splashery is, who makes it and why, and where to find the credits, the terms and the privacy page.",
+    "w": "about what splashery is, who makes it and why, and where to find the credits, the terms and the privacy page. splashery is a free toy box of 3d gaussian splats that runs in your browser."
+  },
+  {
+    "t": "Credits and licenses",
+    "u": "about/credits/",
+    "k": "page",
+    "d": "Every scan, model, sound, dataset and library in Splashery, with its author and license, built from the project's CREDITS.md and LICENSES.md.",
+    "w": "credits and licenses every scan, model, sound, dataset and library in splashery, with its author and license, built from the project's credits.md and licenses.md. everything in splashery that someone else made, who made it, and the license it comes under."
+  },
+  {
+    "t": "Terms of use",
+    "u": "about/terms/",
+    "k": "page",
+    "d": "The terms of using Splashery: your files stay on your device, you are responsible for what you open and share, and the licenses.",
+    "w": "terms of use the terms of using splashery: your files stay on your device, you are responsible for what you open and share, and the licenses. short and plain."
+  },
+  {
+    "t": "Privacy",
+    "u": "about/privacy/",
+    "k": "page",
+    "d": "Nothing you open leaves your device. What the live feeds and the protein fetch read, and when; no tracking, no cookies.",
+    "w": "privacy nothing you open leaves your device. what the live feeds and the protein fetch read, and when; no tracking, no cookies. nothing you open leaves your device. no accounts, no tracking."
   }
 ]

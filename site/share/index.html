@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en" data-root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Embed and share · Splashery</title>
+    <meta
+      name="description"
+      content="Put a Splashery toy on your own page with an iframe or one script tag, and how scene links carry a toy and its settings."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/share/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Embed and share · Splashery" />
+    <meta
+      property="og:description"
+      content="Put a Splashery toy on your own page with an iframe or one script tag, and how scene links carry a toy and its settings."
+    />
+    <meta property="og:url" content="https://ryanjosephkamp.github.io/splashery/site/share/" />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../assets/site.css" />
+    <link rel="stylesheet" href="../assets/hubs.css" />
+    <script type="module" src="../assets/site.js"></script>
+    <script type="module" src="../assets/hubs.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../">Home</a></li>
+              <li><a href="../toys/">Toys</a></li>
+              <li><a href="../tools/" aria-current="page">Tools</a></li>
+              <li><a href="../science/">Science</a></li>
+              <li><a href="../studio/">Studio</a></li>
+              <li><a href="../learn/">Learn</a></li>
+              <li><a href="../new/">What's new</a></li>
+              <li><a href="../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-intro">
+        <h1>Embed and share</h1>
+        <p class="lead">
+          Put a live toy on your own page, with every option, or send someone a link to a toy
+          exactly as you set it.
+        </p>
+      </div>
+      <article class="prose guide">
+        <section aria-labelledby="h-try">
+          <h2 id="h-try">Try it: pick a toy and its options</h2>
+          <p>
+            Choose below. The toy updates, and the two snippets underneath are what you paste into
+            your own page.
+          </p>
+          <div
+            class="embed-lab"
+            id="embed-lab"
+            data-origin="https://ryanjosephkamp.github.io/splashery/"
+            data-home="strawberry"
+          >
+            <form class="embed-form" id="embed-form" aria-label="Embed options">
+              <label
+                >Toy<select name="toy" id="eo-toy">
+                  <option value="strawberry">Strawberry</option>
+                </select></label
+              >
+              <label
+                >Theme<select name="theme">
+                  <option value="">Follow the page</option>
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                </select></label
+              >
+              <label
+                >Background<select name="bg">
+                  <option value="">Normal</option>
+                  <option value="transparent">Transparent</option>
+                </select></label
+              >
+              <label
+                >On its own<select name="autoplay">
+                  <option value="">Turn slowly</option>
+                  <option value="breeze">A breeze</option>
+                  <option value="pokes">Little pokes</option>
+                  <option value="twist">A slow twist</option>
+                  <option value="dissolve">Dissolve and rebuild</option>
+                </select></label
+              >
+              <label
+                >Zoom <output id="eo-zoom-out">1</output
+                ><input type="range" name="zoom" min="0.5" max="2" step="0.1" value="1"
+              /></label>
+              <label class="check"
+                ><input type="checkbox" name="turntable" /> Hold still (no turntable)</label
+              >
+              <label class="check"
+                ><input type="checkbox" name="controls" /> Hide the + and − buttons</label
+              >
+              <label
+                >Width<select name="width">
+                  <option value="360px">Small (360 px)</option>
+                  <option value="600px" selected>Medium (600 px)</option>
+                  <option value="900px">Large (900 px)</option>
+                  <option value="">Full width</option>
+                </select></label
+              >
+            </form>
+            <figure class="embed-stage" id="embed-stage">
+              <div class="embed-frame" id="embed-frame"></div>
+              <noscript
+                ><p>
+                  The live example needs JavaScript. The snippets below work without it.
+                </p></noscript
+              >
+            </figure>
+            <h3 id="h-iframe">The iframe</h3>
+            <p>Works on any page.</p>
+            <div class="snippet">
+              <pre><code id="snip-iframe">&lt;iframe
+  src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=strawberry&quot;
+  title=&quot;Splashery toy&quot;
+  loading=&quot;lazy&quot;
+  style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;
+&gt;&lt;/iframe&gt;</code></pre>
+              <button type="button" class="button copy" data-copy="snip-iframe">Copy</button>
+            </div>
+            <h3 id="h-element">The <code>&lt;splashery-toy&gt;</code> element</h3>
+            <p>
+              One script tag, no iframe. It starts when it scrolls into view and pauses when it
+              scrolls away.
+              <button type="button" class="button" id="show-element">Show it live</button>
+            </p>
+            <div class="snippet">
+              <pre><code id="snip-element">&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;strawberry&quot;&gt;&lt;/splashery-toy&gt;</code></pre>
+              <button type="button" class="button copy" data-copy="snip-element">Copy</button>
+            </div>
+            <div id="element-stage" class="embed-frame element-frame" hidden></div>
+          </div>
+        </section>
+        <section aria-labelledby="h-options">
+          <h2 id="h-options">Every option</h2>
+          <p>
+            The iframe takes options as a query string after <code>embed/</code>. The element takes
+            the same options as attributes.
+          </p>
+          <div
+            class="table-wrap"
+            tabindex="0"
+            role="region"
+            aria-label="Embed options, scrolls sideways"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">In the iframe's address</th>
+                  <th scope="col">On the element</th>
+                  <th scope="col">What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>toy=cactus</code></th>
+                  <td><code>toy=&quot;cactus&quot;</code></td>
+                  <td>A shelf toy by its id. Used when there is no scene.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>#s=PAYLOAD</code></th>
+                  <td><code>scene=&quot;PAYLOAD&quot;</code></td>
+                  <td>A scene from a share link: the toy with its settings, camera and look.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>theme=light | dark</code></th>
+                  <td><code>theme=&quot;auto | light | dark&quot;</code></td>
+                  <td>The color theme. The element's auto follows your page.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>bg=transparent</code></th>
+                  <td><code>background=&quot;transparent | page | #rrggbb&quot;</code></td>
+                  <td>A see-through or colored background.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>autoplay=breeze</code></th>
+                  <td><code>autoplay=&quot;breeze&quot;</code></td>
+                  <td>
+                    One gentle effect while it sits idle: <code>breeze</code>, <code>pokes</code>,
+                    <code>twist</code> or <code>dissolve</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>turntable=off</code></th>
+                  <td><code>turntable=&quot;off&quot;</code></td>
+                  <td>Hold the toy still instead of turning it slowly.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>zoom=1.5</code></th>
+                  <td><code>zoom=&quot;1.5&quot;</code></td>
+                  <td>
+                    From 0.5 to 2. At 1 the toy fills about 80% of the shorter side; 2 comes twice
+                    as close.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>controls=0</code></th>
+                  <td><code>controls=&quot;0&quot;</code></td>
+                  <td>Hide the + and − zoom buttons.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code></code></th>
+                  <td><code>label=&quot;A cactus&quot;</code></td>
+                  <td>The accessible name read by a screen reader.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section aria-labelledby="h-details">
+          <h2 id="h-details">Good to know</h2>
+          <ul>
+            <li>
+              <strong>Size.</strong> The iframe is 4:3 and fills its column, up to the width you
+              set. A built-in toy loads well under 30 MB in all; even the heaviest scan is about 8
+              MB (the engine plus one file).
+            </li>
+            <li>
+              <strong>Transparent embeds.</strong> Add <code>color-scheme: light</code> to the
+              iframe's style, as the snippet does, so browsers keep it see-through when a visitor's
+              system is in dark mode.
+            </li>
+            <li>
+              <strong>Switching the theme from your page.</strong> Send the iframe a message:
+              <code
+                >iframe.contentWindow.postMessage({ type: "splashery:theme", theme: "dark" },
+                "*")</code
+              >. The element follows the page by itself, including a
+              <code>paper-theme-change</code> event on <code>document</code> and
+              <code>data-resolved-theme</code> on <code>&lt;html&gt;</code>.
+            </li>
+            <li>
+              <strong>Scrolling and zooming.</strong> The mouse wheel scrolls your page until a
+              visitor clicks or taps the toy; after that it zooms until the pointer leaves. Ctrl or
+              ⌘ with the wheel, a pinch, and the + and − buttons always zoom.
+            </li>
+            <li>
+              <strong>Privacy.</strong> An embed loads nothing from third parties, shows no ads, and
+              sets no cookies. Embeds are always silent.
+            </li>
+            <li>
+              <strong>The element's attributes</strong> also include <code>scene</code> (a share
+              payload, see below) and <code>label</code> (the accessible name).
+            </li>
+          </ul>
+        </section>
+        <section aria-labelledby="h-links">
+          <h2 id="h-links">How scene links work</h2>
+          <p>
+            Every toy can be shared as a link. Open the gallery's <strong>Share</strong> tab and tap
+            <strong>Copy link</strong>. The link looks like this:
+          </p>
+          <pre
+            class="code"
+          ><code>https://ryanjosephkamp.github.io/splashery/#s=<span class="muted-code">PAYLOAD</span></code></pre>
+          <p>
+            The part after <code>#s=</code> is the <strong>scene</strong>: a small JSON document
+            that says which toy it is, the camera, the look (background, theme, accent color, splat
+            size and exposure), every effect's settings, any paint, and the pattern and motion. The
+            JSON is compressed and written in a URL-safe form, so the payload starts with
+            <code>d.</code> (compressed) or <code>j.</code> (plain JSON, for old browsers). It all
+            lives after the <code>#</code>, so it goes to nobody: your browser keeps the part after
+            a hash to itself.
+          </p>
+          <ul>
+            <li>
+              <strong>Your own files.</strong> A link for a toy you opened yourself carries the
+              settings only, and says so. Splashery doesn't put your file in a link. A link can
+              carry a web address instead, so a picture hosted on your own site opens for whoever
+              follows it.
+            </li>
+            <li>
+              <strong>Long scenes.</strong> If a scene is too long for a link (about 12 KB), the
+              paint and then the clay edits are left out, and the app says so.
+            </li>
+            <li>
+              <strong>Old links keep working.</strong> Version 2 and 3 scenes, from any time, still
+              load.
+            </li>
+            <li>
+              <strong>In an embed.</strong> The same payload works in the embed player:
+              <code>embed/#s=PAYLOAD</code>, or the element's <code>scene</code> attribute. That is
+              how an embed can show a toy with its exact look and camera.
+            </li>
+            <li>
+              <strong>As a file.</strong> <strong>Save JSON</strong> in the Share tab saves the same
+              scene as a file, and <strong>Load JSON</strong> (or dropping the file on the page)
+              opens it. The format is written down in
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md"
+                >the scene format</a
+              >.
+            </li>
+          </ul>
+          <h3 id="h-make-link">Make a link to any toy</h3>
+          <p>Pick a toy to get its link, and the same toy as an embed address:</p>
+          <div class="embed-lab" id="link-lab">
+            <label class="wide">Toy<select id="lk-toy"></select></label>
+            <div class="snippet">
+              <pre><code id="snip-link"></code></pre>
+              <button type="button" class="button copy" data-copy="snip-link">Copy</button>
+            </div>
+            <div class="snippet">
+              <pre><code id="snip-embed-link"></code></pre>
+              <button type="button" class="button copy" data-copy="snip-embed-link">Copy</button>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="h-more">
+          <h2 id="h-more">More</h2>
+          <ul>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/embed/demo.html"
+                >The demo page</a
+              >
+              shows the iframe and the element side by side.
+            </li>
+            <li><a href="../../">Open the gallery</a> to make your own scene, then share it.</li>
+          </ul>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="../toys/">Toys</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../science/">Science</a></li>
+            <li><a href="../studio/">Studio</a></li>
+            <li><a href="../learn/">Learn</a></li>
+            <li><a href="../new/">What's new</a></li>
+            <li><a href="../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../">The gallery</a></li>
+            <li><a href="../search/">Search</a></li>
+            <li><a href="../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li><a href="../share/">Embed and share</a></li>
+            <li><a href="../about/credits/">Credits</a></li>
+            <li><a href="../about/privacy/">Privacy</a></li>
+            <li><a href="../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

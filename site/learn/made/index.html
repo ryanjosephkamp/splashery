@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>How Splashery is made</title>
+    <meta
+      name="description"
+      content="The lanes, the Operator, the reviews and the rules behind Splashery, in plain words."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/learn/made/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="How Splashery is made" />
+    <meta
+      property="og:description"
+      content="The lanes, the Operator, the reviews and the rules behind Splashery, in plain words."
+    />
+    <meta property="og:url" content="https://ryanjosephkamp.github.io/splashery/site/learn/made/" />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/hubs.css" />
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-intro">
+        <h1>How Splashery is made</h1>
+        <p class="lead">
+          Many Claude sessions, one person with ideas, and a lot of watching clips.
+        </p>
+      </div>
+      <article class="prose">
+        <section aria-labelledby="h-people">
+          <h2 id="h-people">One person with ideas, and Claude as the builder</h2>
+          <p>
+            Splashery is made by Ryan Kamp. Ryan decides what it should be, looks at the results and
+            says what is good and what isn't. The code is written by Claude, Anthropic's AI model,
+            working in many sessions at once. Nothing is hidden about that: it is the experiment.
+          </p>
+        </section>
+        <section aria-labelledby="h-lanes">
+          <h2 id="h-lanes">Lanes: one session, one job</h2>
+          <p>
+            A big idea gets split into small jobs, and each job is a <strong>lane</strong>: one
+            Claude session with one task (a new shelf of toys, a fix for something that looked
+            grainy, the tools for opening a PDF). Each lane works on its own copy of the project and
+            owns its own files, so lanes can run side by side without stepping on each other. When a
+            lane finishes it writes down what it did, what it left undone and what it learned, in a
+            handoff file, and opens a <em>draft pull request</em>: a proposal that someone else must
+            look at before it joins the real thing.
+          </p>
+        </section>
+        <section aria-labelledby="h-operator">
+          <h2 id="h-operator">The Operator keeps order</h2>
+          <p>
+            One long-running session, the <strong>Operator</strong>, doesn't build toys. It plans
+            the lanes, writes each lane's brief, checks the work, merges finished pieces in the
+            right order and keeps the plan and the rules up to date. Ryan talks to the Operator, so
+            the lanes never need managing by hand. Different lanes use different models: the larger
+            Opus model for the engine and the toys, the lighter Sonnet model for documents,
+            converters and content, and each one is recorded.
+          </p>
+        </section>
+        <section aria-labelledby="h-review">
+          <h2 id="h-review">Every effect is judged as a short film</h2>
+          <p>
+            A still picture can't tell you whether a toy moves well, so every new or changed effect
+            is recorded as a short clip at phone size and posted on a private review page. Ryan
+            watches each one and marks it <em>good</em> or <em>fix</em>, with a note. The rules he
+            has set from those reviews are written down: parts move as solid pieces, never a bent
+            picture; separate things move separately; instruments are really played; materials look
+            like what they are. A "fix" goes back to the lane that made it, and the new clip is
+            judged again.
+          </p>
+        </section>
+        <section aria-labelledby="h-checks">
+          <h2 id="h-checks">Checked in a real browser, with rules about what goes in</h2>
+          <p>
+            Every change is tested by driving a real browser through the toys, the links and the
+            page layout, and a test checks that an embed stays under 30 MB. The site is plain files,
+            with nothing to deploy but the files. Beyond the tests there are rules the toys must
+            follow: every picture, scan and sound is public domain or under a Creative Commons
+            license that allows it here, and each is credited; nothing you open is uploaded; and
+            files and links from older versions keep working.
+          </p>
+        </section>
+        <section aria-labelledby="h-notes">
+          <h2 id="h-notes">The notes are public</h2>
+          <p>
+            The project keeps a <a href="../../learn/notebook/">lab notebook</a>: for each lane,
+            what it built, which model built it, and what the team learned. The plan, the rules and
+            every lane's handoff are in the open on
+            <a href="https://github.com/ryanjosephkamp/splashery">GitHub</a>, and
+            <a href="../../new/">What's new</a> says what changed and when. As of this build there
+            are 319 toys on the public shelves.
+          </p>
+          <p class="actions">
+            <a class="button primary" href="../../learn/notebook/"
+              >Read the lab notebook<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></a
+            ><a class="button" href="../../learn/">Back to Learn</a>
+          </p>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+{
+  "_note": "What's new, in plain words (lane Site pages). One entry per day, newest first or any order: the build sorts them. `title` is a short headline, `items` are short sentences a visitor would understand (no lane names, no PR titles; HTML is allowed in an item, so write & as &amp;). `until` makes a range of days. Add an entry whenever something visitors would notice has merged; a day with merged changes and no entry here still shows its list of changes.",
+  "days": [
+    {
+      "date": "2026-10-05",
+      "title": "A new site, a QR lab and ways to see inside things",
+      "items": [
+        "A preview of a new Splashery site: a home page, one menu everywhere, search, and a copy that keeps working offline.",
+        "A QR code lab: see how a QR code works, damage one on purpose and watch how much it can lose.",
+        "New imaging toys: an airport X-ray scanner, how CT works, a real CT scan of a walnut, an MRI of a fruit, an electron microscope and a thermal camera.",
+        "The alarm clock now tells the real time."
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "title": "Toys you can pick up, and a gentler manual",
+      "items": [
+        "Hands-on toys: pick up a basketball, a beach ball or a snow globe, drop it, and watch it land and settle.",
+        "The Fluid lab works on a phone.",
+        "The Tinkerer's Manual was rewritten for a newcomer.",
+        "Moving photo to 3D keeps the sound and the speed of your clip, and the splat mirror holds still again."
+      ]
+    },
+    {
+      "date": "2026-10-03",
+      "title": "A QR code made of splats",
+      "items": [
+        "A QR code generator whose codes are made of splats, with a check that the code still scans.",
+        "Hands-on showcase toys and a small physics engine under them.",
+        "Pages in a book can carry links, and figures can pop out of the page.",
+        "Sharper trained splats on our own toys, and a piano bar with new rotation defaults."
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "title": "Real science data, a faucet and film-your-own 3D",
+      "items": [
+        "Science toys: crystals with thermal ellipsoids that now work well on a phone, with pinch-and-scroll zoom.",
+        "The song landscape gained tilt, recording and playback controls; the Chladni plate's sand was fixed; Moving photo to 3D arrived.",
+        "A tappable faucet, water that reads as water and real lava in the Fluid lab.",
+        "Video to 3D now tells you what to film and why a result failed, and steers the flight."
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "title": "Use your microphone, camera or screen, and film a scene",
+      "items": [
+        "Toys can use the microphone, the camera or screen capture, but only when you tap to start.",
+        "Real recorded sounds for the first shelves of toys.",
+        "Focus mode, bigger panels and a drawing pad.",
+        "Photo to 3D opens your own photos, and an early version of Video to 3D arrived."
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "title": "Liquids, pianos and your photo in depth",
+      "items": [
+        "The Fluid lab: liquids, smoke, steam and flames made of splats.",
+        "Four keyboards with moving keys and mechanisms, songs and a song bar.",
+        "Photo to 3D turns a photo into a depth relief on your device.",
+        "Books with pages you tap and pull, and sharper screens with a real off switch.",
+        "Seven everyday objects with moving parts, and a sharper island in Worlds."
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "title": "The chemistry set, machines and a sharper picture",
+      "items": [
+        "Chemistry: a periodic table, all 118 elements in the atom toy and many more molecules, crystals and orbitals.",
+        "Machines that compute: a Turing machine, a difference engine, an Enigma machine and a Bombe.",
+        "Splats are drawn sharper by default, and a Detail setting picks how many a toy gets.",
+        "The Tinkerer's Manual and the lab notebook, the anatomy atlas with layers you peel, and the song landscape's Live view.",
+        "A short terms-of-use page in the About tab."
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "title": "Math, AI and your own pages",
+      "items": [
+        "Math toys: a graph plotter, a surface plotter, circles and waves, Fourier circles and a Pythagoras proof.",
+        "A shelf of AI and computing toys where you watch the data move, including a network that reads a digit you draw.",
+        "Every toy got a how-to line and an About text.",
+        "PDFs, photos, GIFs and videos can be turned into splats, and a book shows any PDF with turning pages."
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "title": "Toys you can reach into",
+      "items": [
+        "The puzzle cube turns under your finger, the bricks build models, chess takes your moves and Newton's cradle balls can be dragged.",
+        "A real pencil and a real tin can, made from photos with an image-to-3D model."
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "until": "2026-09-26",
+      "title": "The first toy box",
+      "items": [
+        "Sharper splats on phones and computers, and a phone shelf shown as a full grid.",
+        "A sound for every toy, and new tap effects for well over a hundred toys across the shelves: fruit, balls, space, atoms, gems, the tiny world, the body, nature and weather.",
+        "A chess set you can play and a laptop you can type on."
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
     <title>Tools · Splashery</title>
     <meta
       name="description"
-      content="What you can do to a Splashery toy, and the ways to share it."
+      content="Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/tools/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Tools · Splashery" />
     <meta
       property="og:description"
-      content="What you can do to a Splashery toy, and the ways to share it."
+      content="Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light."
     />
     <meta property="og:url" content="https://ryanjosephkamp.github.io/splashery/site/tools/" />
     <meta
@@ -53,6 +53,7 @@
       })();
     </script>
     <link rel="stylesheet" href="../assets/site.css" />
+    <link rel="stylesheet" href="../assets/hubs.css" />
     <script type="module" src="../assets/site.js"></script>
   </head>
   <body>
@@ -134,438 +135,1329 @@
       <div class="page-intro">
         <h1>Tools</h1>
         <p class="lead">
-          Every toy answers to the same tools. Pick one in the gallery's toolbar, then drag on the
-          toy.
+          Splashery is also a workshop. Each of these opens in the gallery and works on your own
+          things, on your device; nothing is uploaded.
         </p>
+        <nav class="shelf-index" aria-label="Tool groups">
+          <ul>
+            <li data-labs><a href="#h-make">Make and convert</a></li>
+            <li><a href="#h-files">Open your own files</a></li>
+            <li data-labs><a href="#h-scan">Scan and measure</a></li>
+            <li data-labs><a href="#h-qr">QR codes</a></li>
+            <li data-labs><a href="#h-sound">Sound and light</a></li>
+            <li><a href="#h-play">In every toy</a></li>
+          </ul>
+        </nav>
       </div>
-      <section class="tool-group" aria-labelledby="h-play">
-        <h2 id="h-play">Play</h2>
-        <dl class="tool-list" style="--cols: 3">
-          <div id="tool-orbit">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="M12 4a8 8 0 1 1-7.4 5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-              />
-              <path
-                d="M3 5v4.5h4.5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <circle cx="12" cy="12" r="2.5" fill="currentColor" />
-            </svg>
-            <dt>Orbit <kbd title="Key 1 in the gallery">1</kbd></dt>
-            <dd>Drag to turn the toy; pinch or scroll to zoom. Double-tap to reset the view.</dd>
+      <section class="tool-hub" id="make" data-labs aria-labelledby="h-make">
+        <div class="hub-head">
+          <svg class="hub-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path
+              d="M12 4v16M4 12h16"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8" />
+          </svg>
+          <div>
+            <h2 id="h-make">Make and convert</h2>
+            <p>Turn a photo, a video, a model or a song into splats you can play with.</p>
           </div>
-          <div id="tool-poke">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="M9 13V5.5a1.5 1.5 0 0 1 3 0V11l4.6.9a2 2 0 0 1 1.6 2.3l-.8 4.3a2 2 0 0 1-2 1.5H11a2 2 0 0 1-1.6-.8L6 14.8a1.4 1.4 0 0 1 2-2z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <dt>Poke <kbd title="Key 2 in the gallery">2</kbd></dt>
-            <dd>Tap or drag to push splats in; they spring back.</dd>
-          </div>
-          <div id="tool-paint">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="M14.5 4.5l5 5-8 8-5-5z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M6.5 12.5 4 20l7.5-2.5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <dt>Paint <kbd title="Key 3 in the gallery">3</kbd></dt>
-            <dd>Brush color onto the toy, splat by splat.</dd>
-          </div>
-          <div id="tool-magnet">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="M6 4v8a6 6 0 0 0 12 0V4h-4v8a2 2 0 0 1-4 0V4z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linejoin="round"
-              />
-              <path d="M6 8h4M14 8h4" stroke="currentColor" stroke-width="1.8" />
-            </svg>
-            <dt>Magnet <kbd title="Key 4 in the gallery">4</kbd></dt>
-            <dd>Pull splats toward your finger and let them fly back.</dd>
-          </div>
-          <div id="tool-clay">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="M5 16c0-4 3-9 7-9s7 5 7 9c0 2-3 3-7 3s-7-1-7-3z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M10 11c1 1 3 1 4 0"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-              />
-            </svg>
-            <dt>Clay <kbd title="Key 5 in the gallery">5</kbd></dt>
-            <dd>Push and pull the surface like soft clay.</dd>
-          </div>
-          <div id="tool-tap">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <circle cx="12" cy="12" r="3" fill="currentColor" />
-              <circle
-                cx="12"
-                cy="12"
-                r="7"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                opacity=".6"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="10.5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.4"
-                opacity=".3"
-              />
-            </svg>
-            <dt>Tap</dt>
-            <dd>Each toy has its own tap: a peel, a hop, a song, a shatter.</dd>
-          </div>
-        </dl>
-      </section>
-      <section class="tool-group" aria-labelledby="h-make-and-share">
-        <h2 id="h-make-and-share">Make and share</h2>
-        <dl class="tool-list" style="--cols: 4">
-          <div id="tool-make">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="M12 4v16M4 12h16"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="8.5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-              />
-            </svg>
-            <dt>Make</dt>
-            <dd>Build your own toy from a shape, a palette and a seed.</dd>
-          </div>
-          <div id="tool-link">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-              />
-            </svg>
-            <dt>Link</dt>
-            <dd>A link carries the toy and every setting, so others see what you see.</dd>
-          </div>
-          <div id="tool-embed">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path
-                d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <dt>Embed</dt>
-            <dd>Put a live toy on your own page with an iframe or one script tag.</dd>
-          </div>
-          <div id="tool-gif-and-video">
-            <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <rect
-                x="3.5"
-                y="6"
-                width="17"
-                height="12"
-                rx="2.5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-              />
-              <path d="m10.5 9.5 4 2.5-4 2.5z" fill="currentColor" />
-            </svg>
-            <dt>GIF and video</dt>
-            <dd>Save a turntable or a short effect loop as a file.</dd>
-          </div>
-        </dl>
-      </section>
-      <section aria-labelledby="h-own" data-labs>
-        <h2 id="h-own">Open your own files</h2>
-        <section class="shelf" id="shelf-studio" data-labs aria-labelledby="h-shelf-studio">
-          <h3 id="h-shelf-studio">Studio <span class="count">labs</span></h3>
-          <ul class="toy-grid">
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
-                ><img
-                  src="../../assets/toys/song-landscape/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Song landscape <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNobGFkbmktcGxhdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
-                ><img
-                  src="../../assets/toys/chladni-plate/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Chladni plate <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvb20tZWNobyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0"
-                ><img
-                  src="../../assets/toys/room-echo/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Room echo meter <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LW1pcnJvciJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
-                ><img
-                  src="../../assets/toys/splat-mirror/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Splat mirror <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
-                ><img
-                  src="../../assets/toys/model-splats/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Model to splats <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
-                ><img
-                  src="../../assets/toys/qr-code/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">QR code <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWFuYXRvbXkifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ"
-                ><img
-                  src="../../assets/toys/qr-anatomy/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name"
-                  >How a QR code works <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWRhbWFnZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
-                ><img
-                  src="../../assets/toys/qr-damage/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">QR damage lab <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXRocmVlIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
-                ><img
-                  src="../../assets/toys/qr-three/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name"
-                  >Three QR codes in one <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+        </div>
+        <ul class="tool-cards">
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/photo-3d/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Photo to 3D <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Photo to 3D <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A photo becomes a relief with real depth; tap to lift it out of the
+                  picture.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/moving-photo-3d/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name"
-                  >Moving photo to 3D <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Moving photo to 3D <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A GIF or a short video, with depth, still moving and still making its
+                  sound.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/video-3d/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Video to 3D <span class="badge">labs</span></span></a
-              >
-            </li>
-          </ul>
-        </section>
-        <section class="shelf" id="shelf-pictures" data-labs aria-labelledby="h-shelf-pictures">
-          <h3 id="h-shelf-pictures">Pictures and pages <span class="count">labs</span></h3>
-          <ul class="toy-grid">
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Video to 3D <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Film a scene and fly through it as splats, solved and trained on your
+                  device.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/model-splats/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Model to splats <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A 3D model (glTF, OBJ or STL) becomes splats that lift off and settle back.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/song-landscape/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Song landscape <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A song becomes a landscape you fly over: a real spectrogram, in 3D.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+        </ul>
+      </section>
+      <section class="tool-hub" id="files" aria-labelledby="h-files">
+        <div class="hub-head">
+          <svg class="hub-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path
+              d="M7 3.5h7l4 4V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14 3.5V8h4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <div>
+            <h2 id="h-files">Open your own files</h2>
+            <p>Pages, pictures, molecules and crystals, opened right in your browser.</p>
+          </div>
+        </div>
+        <ul class="tool-cards">
+          <li class="tool-card">
+            <a href="../../"
+              ><span class="tool-art"
+                ><svg
+                  class="hub-icon"
+                  viewBox="0 0 24 24"
+                  width="40"
+                  height="40"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 3.5h7l4 4V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M14 3.5V8h4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"
+                  /></svg></span
+              ><span class="tool-body"
+                ><span class="tool-name">Splat files</span
+                ><span class="tool-text"
+                  >Drop a .ply, .sog, .splat or .spz file in the gallery's Toy tab to look at it,
+                  play with it and share it.</span
+                ><span class="tool-open"
+                  >Open the gallery<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/picture-lab/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Picture lab <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Picture lab <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A PDF, a picture, a GIF or a video, drawn in splats with the figures lifted off
+                  the page.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/your-book/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Your book <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Your book <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Any PDF as a book with pages that turn, curl and pop their pictures out.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/photo-album/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Photo album <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtZnJhbWUifSwiY2FtZXJhIjp7InlhdyI6MC4xLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Photo album <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A set of photos as an album: tap to turn a page, pull one over, pop a photo
+                  out.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtZnJhbWUifSwiY2FtZXJhIjp7InlhdyI6MC4xLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/picture-frame/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Picture frame <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a
-                href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Picture frame <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Put your own photo, GIF or video in a frame that swings on its nail.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card">
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/molecule/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Molecule</span
+                ><span class="tool-text"
+                  >Type a name, a formula or a SMILES string, or open a MOL, SDF, XYZ or PDB
+                  file.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRoZXJtYWwtZWxsaXBzb2lkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi45fX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/thermal-ellipsoids/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Thermal ellipsoids <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Open a crystal file (CIF) and see each atom's jiggle as a soft ellipsoid.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+        </ul>
+      </section>
+      <section class="tool-hub" id="scan" data-labs aria-labelledby="h-scan">
+        <div class="hub-head">
+          <svg class="hub-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path
+              d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <path d="M4 12h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+          <div>
+            <h2 id="h-scan">Scan and measure</h2>
+            <p>
+              See inside things, and look closer than an eye can: X-ray, CT, MRI and microscopes.
+            </p>
+          </div>
+        </div>
+        <ul class="tool-cards">
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFpcnBvcnQteHJheSJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6M319"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/airport-xray/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Airport X-ray scanner <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Send bags through the scanner and watch their X-ray pictures build up.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imhvdy1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/how-ct/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">How CT works <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A CT scan, step by step: scan a shell, then cut into it.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhbG51dC1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/walnut-ct/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Walnut CT scan <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A real CT scan of a walnut: drag to cut into it, slice by slice.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImZydWl0LW1yaSJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4xNSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/fruit-mri/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">MRI of a fruit <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Scroll through an MRI of a fruit, or play through every slice.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVsZWN0cm9uLW1pY3Jvc2NvcGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuNDUsInJvbGwiOjAsImRpc3RhbmNlIjoyLjZ9fQ"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/electron-microscope/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Electron microscope <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Zoom in on a sample, step by step, the way an electron microscope does.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNtbG0tbWljcm9zY29wZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/smlm-microscope/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name"
+                  >Super-resolution microscope <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Real super-resolution microscopy data, down to single molecules.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRoZXJtYWwtY2FtZXJhIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjoyLjh9fQ"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/thermal-camera/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Thermal camera <span class="badge">labs</span></span
+                ><span class="tool-text">A thermal camera that watches a cup of tea cool.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvb20tZWNobyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/room-echo/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Room echo meter <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Clap once, and the microphone measures how long your room echoes.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+        </ul>
+      </section>
+      <section class="tool-hub" id="qr" data-labs aria-labelledby="h-qr">
+        <div class="hub-head">
+          <svg class="hub-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <rect
+              x="4"
+              y="4"
+              width="6"
+              height="6"
+              rx="1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            />
+            <rect
+              x="14"
+              y="4"
+              width="6"
+              height="6"
+              rx="1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            />
+            <rect
+              x="4"
+              y="14"
+              width="6"
+              height="6"
+              rx="1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            />
+            <path
+              d="M14 14h2.5v2.5H14zM18 18h2v2h-2zM17.5 14H20"
+              stroke="currentColor"
+              stroke-width="1.8"
+            />
+          </svg>
+          <div>
+            <h2 id="h-qr">QR codes</h2>
+            <p>Make one, see how it works, break it on purpose, and hide three in one.</p>
+          </div>
+        </div>
+        <ul class="tool-cards">
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/qr-code/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">QR code <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Type a link, pick a style, and check that the code still scans.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWFuYXRvbXkifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/qr-anatomy/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">How a QR code works <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Light up each part of a code, or encode your own text step by step.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWRhbWFnZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/qr-damage/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">QR damage lab <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Scratch, smudge and cover a code, and watch how much it can lose.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXRocmVlIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/qr-three/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Three QR codes in one <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Three codes in one picture: pull them apart and read each.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+        </ul>
+      </section>
+      <section class="tool-hub" id="sound" data-labs aria-labelledby="h-sound">
+        <div class="hub-head">
+          <svg class="hub-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path
+              d="M4 10v4h3.5L12 18V6L7.5 10z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div>
+            <h2 id="h-sound">Sound and light</h2>
+            <p>
+              Hear a toy, see a sound, and see yourself in splats. These ask for the microphone or
+              the camera only when you tap.
+            </p>
+          </div>
+        </div>
+        <ul class="tool-cards">
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNobGFkbmktcGxhdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/chladni-plate/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Chladni plate <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Bow a plate, or sing to it, and sand finds the still lines of the sound.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/song-landscape/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Song landscape <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Play a song and fly over its sound; or use the microphone to see it live.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LW1pcnJvciJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/splat-mirror/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Splat mirror <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >Tap Start camera and see yourself made of splats; turn it to see the depth.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJvb20tZWNobyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0"
+              ><span class="tool-art"
+                ><img
+                  src="../../assets/toys/room-echo/thumb.webp"
+                  alt=""
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Room echo meter <span class="badge">labs</span></span
+                ><span class="tool-text">Measure your room's echo with one clap.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+          <li class="tool-card" data-labs>
+            <a
+              href="../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+              ><span class="tool-art"
                 ><img
                   src="../../assets/toys/screen/thumb.webp"
                   alt=""
-                  width="96"
-                  height="96"
+                  width="88"
+                  height="88"
                   loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Screen <span class="badge">labs</span></span></a
-              >
-            </li>
-          </ul>
-        </section>
+                  decoding="async" /></span
+              ><span class="tool-body"
+                ><span class="tool-name">Screen <span class="badge">labs</span></span
+                ><span class="tool-text"
+                  >A screen that plays your own picture or video, with a real off switch.</span
+                ><span class="tool-open"
+                  >Open it<svg
+                    class="arrow"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8h9M8.5 4 12.5 8l-4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span></span
+            ></a>
+          </li>
+        </ul>
       </section>
+      <div id="h-play">
+        <section class="tool-group" aria-labelledby="h-in-every-toy">
+          <h2 id="h-in-every-toy">In every toy</h2>
+          <dl class="tool-list" style="--cols: 3">
+            <div id="tool-orbit">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="M12 4a8 8 0 1 1-7.4 5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M3 5v4.5h4.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+              </svg>
+              <dt>Orbit <kbd title="Key 1 in the gallery">1</kbd></dt>
+              <dd>Drag to turn the toy; pinch or scroll to zoom. Double-tap to reset the view.</dd>
+            </div>
+            <div id="tool-poke">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="M9 13V5.5a1.5 1.5 0 0 1 3 0V11l4.6.9a2 2 0 0 1 1.6 2.3l-.8 4.3a2 2 0 0 1-2 1.5H11a2 2 0 0 1-1.6-.8L6 14.8a1.4 1.4 0 0 1 2-2z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <dt>Poke <kbd title="Key 2 in the gallery">2</kbd></dt>
+              <dd>Tap or drag to push splats in; they spring back.</dd>
+            </div>
+            <div id="tool-paint">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="M14.5 4.5l5 5-8 8-5-5z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6.5 12.5 4 20l7.5-2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <dt>Paint <kbd title="Key 3 in the gallery">3</kbd></dt>
+              <dd>Brush color onto the toy, splat by splat.</dd>
+            </div>
+            <div id="tool-magnet">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="M6 4v8a6 6 0 0 0 12 0V4h-4v8a2 2 0 0 1-4 0V4z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path d="M6 8h4M14 8h4" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+              <dt>Magnet <kbd title="Key 4 in the gallery">4</kbd></dt>
+              <dd>Pull splats toward your finger and let them fly back.</dd>
+            </div>
+            <div id="tool-clay">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="M5 16c0-4 3-9 7-9s7 5 7 9c0 2-3 3-7 3s-7-1-7-3z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M10 11c1 1 3 1 4 0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <dt>Clay <kbd title="Key 5 in the gallery">5</kbd></dt>
+              <dd>Push and pull the surface like soft clay.</dd>
+            </div>
+            <div id="tool-tap">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3" fill="currentColor" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  opacity=".6"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  opacity=".3"
+                />
+              </svg>
+              <dt>Tap</dt>
+              <dd>Each toy has its own tap: a peel, a hop, a song, a shatter.</dd>
+            </div>
+          </dl>
+        </section>
+        <section class="tool-group" aria-labelledby="h-make-and-share">
+          <h2 id="h-make-and-share">Make and share</h2>
+          <dl class="tool-list" style="--cols: 4">
+            <div id="tool-make">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="M12 4v16M4 12h16"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="8.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+              <dt>Make</dt>
+              <dd>Build your own toy from a shape, a palette and a seed.</dd>
+            </div>
+            <div id="tool-link">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <dt>Link</dt>
+              <dd>A link carries the toy and every setting, so others see what you see.</dd>
+            </div>
+            <div id="tool-embed">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path
+                  d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <dt>Embed</dt>
+              <dd>Put a live toy on your own page with an iframe or one script tag.</dd>
+            </div>
+            <div id="tool-gif-and-video">
+              <svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <rect
+                  x="3.5"
+                  y="6"
+                  width="17"
+                  height="12"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path d="m10.5 9.5 4 2.5-4 2.5z" fill="currentColor" />
+              </svg>
+              <dt>GIF and video</dt>
+              <dd>Save a turntable or a short effect loop as a file.</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
     </main>
     <footer class="site-footer">
       <div class="footer-grid">
@@ -604,9 +1496,10 @@
             <li><a href="../search/">Search</a></li>
             <li><a href="../../manual/">The Tinkerer's Manual</a></li>
             <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
-            <li>
-              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
-            </li>
+            <li><a href="../share/">Embed and share</a></li>
+            <li><a href="../about/credits/">Credits</a></li>
+            <li><a href="../about/privacy/">Privacy</a></li>
+            <li><a href="../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>

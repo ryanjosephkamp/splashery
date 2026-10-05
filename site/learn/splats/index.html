@@ -1,0 +1,1968 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>How 3D Gaussian splats work · Splashery</title>
+    <meta
+      name="description"
+      content="What a 3D Gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/learn/splats/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="How 3D Gaussian splats work · Splashery" />
+    <meta
+      property="og:description"
+      content="What a 3D Gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/splats/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/hubs.css" />
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-intro">
+        <h1>How 3D Gaussian splats work</h1>
+        <p class="lead">
+          A soft colored blob, a lot of them, and a recipe: the whole idea, with pictures.
+        </p>
+      </div>
+      <article class="prose">
+        <section aria-labelledby="h-one">
+          <h2 id="h-one">One splat is a soft, colored blob</h2>
+          <p>
+            A <strong>3D Gaussian splat</strong> is the smallest piece of every toy here. Think of a
+            tiny ball of colored fog. It has a <strong>center</strong> (where it sits in space), a
+            <strong>size in each direction</strong> (so it can be a ball, a disc or a long grain of
+            rice) with a <strong>tilt</strong>, a <strong>color</strong> and an
+            <strong>opacity</strong>. Its edge isn't sharp: it fades out smoothly, the way a drop of
+            ink fades into wet paper. Mathematicians call that fade a <em>Gaussian</em>, which is
+            where the name comes from.
+          </p>
+          <figure class="figure">
+            <svg viewBox="0 0 440 220" role="img" aria-labelledby="g1-t" class="figure-svg">
+              <title id="g1-t">
+                One splat: a soft, colored, see-through ellipsoid with a center, a size in each
+                direction and a tilt
+              </title>
+              <defs>
+                <radialGradient id="g1-g">
+                  <stop offset="0" stop-color="#ff5fa2" stop-opacity="0.95" />
+                  <stop offset="0.55" stop-color="#ff5fa2" stop-opacity="0.55" />
+                  <stop offset="1" stop-color="#ff5fa2" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <g transform="translate(150 110) rotate(-24)">
+                <ellipse rx="100" ry="52" fill="url(#g1-g)" />
+                <path
+                  d="M-100 0H100M0 -52V52"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-dasharray="4 4"
+                  opacity=".55"
+                />
+                <circle r="3.5" fill="currentColor" />
+              </g>
+              <g class="fig-note" fill="currentColor" font-size="12.5">
+                <path d="M153 110 250 60" stroke="currentColor" stroke-width="1.2" fill="none" />
+                <text x="252" y="58">center: where it sits</text>
+                <path d="M222 140 252 160" stroke="currentColor" stroke-width="1.2" fill="none" />
+                <text x="204" y="176">long one way, short the other</text>
+                <path d="M62 82 40 44" stroke="currentColor" stroke-width="1.2" fill="none" />
+                <text x="10" y="34">tilt, color, see-through</text>
+              </g>
+            </svg>
+            <figcaption>
+              One splat, drawn flat: a center, a stretch in two directions, a tilt, a color and a
+              soft edge. In 3D it has three sizes, not two.
+            </figcaption>
+          </figure>
+        </section>
+        <section aria-labelledby="h-many">
+          <h2 id="h-many">Hundreds of thousands of them make a picture</h2>
+          <p>
+            One splat is hardly anything. But a scan of a strawberry is made of about 450,000 of
+            them, each a little different: some small and dark where the seeds sit, some wide and
+            red on the smooth skin. Packed together they overlap, and your eye can't see where one
+            stops and the next begins. What you see is the berry.
+          </p>
+          <figure class="figure">
+            <svg viewBox="0 0 380 224" role="img" aria-labelledby="g2-t" class="figure-svg">
+              <title id="g2-t">
+                A berry drawn with many overlapping splats, and a zoom into a handful of them
+              </title>
+              <g>
+                <ellipse
+                  cx="132.2"
+                  cy="184.6"
+                  rx="12.9"
+                  ry="10.6"
+                  transform="rotate(9 132.2 184.6)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="120.8"
+                  cy="128.7"
+                  rx="8.6"
+                  ry="10.9"
+                  transform="rotate(175 120.8 128.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="86.2"
+                  cy="131.9"
+                  rx="12.8"
+                  ry="9.7"
+                  transform="rotate(140 86.2 131.9)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="73.5"
+                  cy="126.8"
+                  rx="10.9"
+                  ry="7.9"
+                  transform="rotate(17 73.5 126.8)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="148.7"
+                  cy="78.8"
+                  rx="9.4"
+                  ry="10.9"
+                  transform="rotate(22 148.7 78.8)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="110.4"
+                  cy="122.4"
+                  rx="8.9"
+                  ry="8.7"
+                  transform="rotate(139 110.4 122.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="83.0"
+                  cy="73.3"
+                  rx="10.1"
+                  ry="8.5"
+                  transform="rotate(63 83.0 73.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="77.9"
+                  cy="111.2"
+                  rx="10.5"
+                  ry="5.9"
+                  transform="rotate(157 77.9 111.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="98.7"
+                  cy="165.4"
+                  rx="11.9"
+                  ry="6.1"
+                  transform="rotate(46 98.7 165.4)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="93.0"
+                  cy="89.5"
+                  rx="9.4"
+                  ry="7.6"
+                  transform="rotate(32 93.0 89.5)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="110.6"
+                  cy="57.4"
+                  rx="9.2"
+                  ry="8.3"
+                  transform="rotate(134 110.6 57.4)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="107.0"
+                  cy="149.2"
+                  rx="13.1"
+                  ry="10.0"
+                  transform="rotate(91 107.0 149.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="143.5"
+                  cy="47.3"
+                  rx="10.6"
+                  ry="10.3"
+                  transform="rotate(37 143.5 47.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="179.8"
+                  cy="97.1"
+                  rx="9.7"
+                  ry="5.3"
+                  transform="rotate(53 179.8 97.1)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="131.8"
+                  cy="83.0"
+                  rx="12.1"
+                  ry="9.5"
+                  transform="rotate(75 131.8 83.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="114.7"
+                  cy="142.1"
+                  rx="15.0"
+                  ry="6.2"
+                  transform="rotate(122 114.7 142.1)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="100.1"
+                  cy="129.7"
+                  rx="12.2"
+                  ry="7.0"
+                  transform="rotate(18 100.1 129.7)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="77.5"
+                  cy="129.3"
+                  rx="14.9"
+                  ry="9.6"
+                  transform="rotate(42 77.5 129.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="115.3"
+                  cy="105.9"
+                  rx="13.9"
+                  ry="9.9"
+                  transform="rotate(101 115.3 105.9)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="177.6"
+                  cy="137.8"
+                  rx="11.5"
+                  ry="11.0"
+                  transform="rotate(164 177.6 137.8)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="123.7"
+                  cy="181.0"
+                  rx="14.5"
+                  ry="10.9"
+                  transform="rotate(171 123.7 181.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="152.5"
+                  cy="92.5"
+                  rx="15.8"
+                  ry="6.4"
+                  transform="rotate(166 152.5 92.5)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="102.2"
+                  cy="72.8"
+                  rx="11.0"
+                  ry="6.1"
+                  transform="rotate(5 102.2 72.8)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="155.7"
+                  cy="163.2"
+                  rx="8.7"
+                  ry="7.2"
+                  transform="rotate(88 155.7 163.2)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="142.0"
+                  cy="165.7"
+                  rx="12.1"
+                  ry="7.4"
+                  transform="rotate(97 142.0 165.7)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="116.7"
+                  cy="84.7"
+                  rx="11.5"
+                  ry="6.1"
+                  transform="rotate(135 116.7 84.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="110.7"
+                  cy="126.3"
+                  rx="15.3"
+                  ry="5.5"
+                  transform="rotate(106 110.7 126.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="151.3"
+                  cy="79.6"
+                  rx="13.1"
+                  ry="7.8"
+                  transform="rotate(48 151.3 79.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="115.9"
+                  cy="79.9"
+                  rx="8.1"
+                  ry="9.7"
+                  transform="rotate(101 115.9 79.9)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="133.8"
+                  cy="63.7"
+                  rx="10.3"
+                  ry="6.2"
+                  transform="rotate(172 133.8 63.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="164.8"
+                  cy="123.2"
+                  rx="12.1"
+                  ry="5.4"
+                  transform="rotate(94 164.8 123.2)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="83.6"
+                  cy="146.5"
+                  rx="8.1"
+                  ry="10.9"
+                  transform="rotate(44 83.6 146.5)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="158.4"
+                  cy="102.1"
+                  rx="9.1"
+                  ry="10.7"
+                  transform="rotate(25 158.4 102.1)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="174.6"
+                  cy="127.0"
+                  rx="9.4"
+                  ry="9.1"
+                  transform="rotate(166 174.6 127.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="179.8"
+                  cy="140.3"
+                  rx="11.6"
+                  ry="5.1"
+                  transform="rotate(93 179.8 140.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="122.9"
+                  cy="159.9"
+                  rx="12.6"
+                  ry="10.2"
+                  transform="rotate(175 122.9 159.9)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="135.1"
+                  cy="120.8"
+                  rx="9.6"
+                  ry="10.6"
+                  transform="rotate(105 135.1 120.8)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="111.1"
+                  cy="58.4"
+                  rx="9.3"
+                  ry="8.9"
+                  transform="rotate(41 111.1 58.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="168.5"
+                  cy="86.4"
+                  rx="10.9"
+                  ry="10.2"
+                  transform="rotate(149 168.5 86.4)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="169.6"
+                  cy="117.2"
+                  rx="14.7"
+                  ry="10.5"
+                  transform="rotate(141 169.6 117.2)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="131.7"
+                  cy="115.7"
+                  rx="15.8"
+                  ry="6.4"
+                  transform="rotate(95 131.7 115.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="92.6"
+                  cy="145.6"
+                  rx="13.8"
+                  ry="10.1"
+                  transform="rotate(87 92.6 145.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="128.0"
+                  cy="160.4"
+                  rx="11.1"
+                  ry="9.3"
+                  transform="rotate(151 128.0 160.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="159.3"
+                  cy="158.0"
+                  rx="11.3"
+                  ry="9.0"
+                  transform="rotate(145 159.3 158.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="170.2"
+                  cy="73.8"
+                  rx="11.7"
+                  ry="7.5"
+                  transform="rotate(61 170.2 73.8)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="118.7"
+                  cy="160.7"
+                  rx="9.8"
+                  ry="9.2"
+                  transform="rotate(12 118.7 160.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="181.5"
+                  cy="106.5"
+                  rx="8.3"
+                  ry="8.6"
+                  transform="rotate(156 181.5 106.5)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="138.2"
+                  cy="74.0"
+                  rx="10.8"
+                  ry="5.9"
+                  transform="rotate(145 138.2 74.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="169.8"
+                  cy="120.5"
+                  rx="11.2"
+                  ry="7.9"
+                  transform="rotate(151 169.8 120.5)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="125.1"
+                  cy="96.7"
+                  rx="12.5"
+                  ry="7.9"
+                  transform="rotate(108 125.1 96.7)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="132.8"
+                  cy="163.6"
+                  rx="15.3"
+                  ry="10.2"
+                  transform="rotate(52 132.8 163.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="140.9"
+                  cy="148.8"
+                  rx="13.5"
+                  ry="10.1"
+                  transform="rotate(154 140.9 148.8)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="152.6"
+                  cy="110.3"
+                  rx="13.5"
+                  ry="9.3"
+                  transform="rotate(66 152.6 110.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="122.6"
+                  cy="46.9"
+                  rx="9.4"
+                  ry="7.9"
+                  transform="rotate(43 122.6 46.9)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="163.9"
+                  cy="127.4"
+                  rx="10.0"
+                  ry="10.8"
+                  transform="rotate(4 163.9 127.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="136.7"
+                  cy="67.0"
+                  rx="11.1"
+                  ry="8.6"
+                  transform="rotate(141 136.7 67.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="93.0"
+                  cy="72.1"
+                  rx="12.2"
+                  ry="5.2"
+                  transform="rotate(23 93.0 72.1)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="127.3"
+                  cy="90.2"
+                  rx="11.3"
+                  ry="6.7"
+                  transform="rotate(152 127.3 90.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="161.5"
+                  cy="120.2"
+                  rx="10.3"
+                  ry="10.7"
+                  transform="rotate(47 161.5 120.2)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="121.3"
+                  cy="126.6"
+                  rx="12.9"
+                  ry="8.8"
+                  transform="rotate(85 121.3 126.6)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="109.3"
+                  cy="136.2"
+                  rx="11.5"
+                  ry="5.2"
+                  transform="rotate(155 109.3 136.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="96.0"
+                  cy="121.6"
+                  rx="9.2"
+                  ry="10.7"
+                  transform="rotate(156 96.0 121.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="77.5"
+                  cy="120.3"
+                  rx="10.7"
+                  ry="7.9"
+                  transform="rotate(102 77.5 120.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="159.9"
+                  cy="115.1"
+                  rx="9.8"
+                  ry="9.2"
+                  transform="rotate(167 159.9 115.1)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="109.2"
+                  cy="72.0"
+                  rx="8.9"
+                  ry="7.9"
+                  transform="rotate(150 109.2 72.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="133.2"
+                  cy="127.2"
+                  rx="13.9"
+                  ry="8.4"
+                  transform="rotate(23 133.2 127.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="153.8"
+                  cy="102.5"
+                  rx="14.8"
+                  ry="7.4"
+                  transform="rotate(45 153.8 102.5)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="89.9"
+                  cy="92.6"
+                  rx="13.2"
+                  ry="5.7"
+                  transform="rotate(36 89.9 92.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="123.7"
+                  cy="87.7"
+                  rx="15.7"
+                  ry="7.7"
+                  transform="rotate(20 123.7 87.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="88.5"
+                  cy="143.5"
+                  rx="10.0"
+                  ry="7.9"
+                  transform="rotate(66 88.5 143.5)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="107.3"
+                  cy="63.0"
+                  rx="8.9"
+                  ry="9.8"
+                  transform="rotate(16 107.3 63.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="116.5"
+                  cy="123.3"
+                  rx="8.4"
+                  ry="5.7"
+                  transform="rotate(17 116.5 123.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="127.8"
+                  cy="79.3"
+                  rx="12.7"
+                  ry="10.6"
+                  transform="rotate(35 127.8 79.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="115.8"
+                  cy="97.4"
+                  rx="8.8"
+                  ry="10.7"
+                  transform="rotate(112 115.8 97.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="166.5"
+                  cy="114.4"
+                  rx="15.1"
+                  ry="9.9"
+                  transform="rotate(56 166.5 114.4)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="89.1"
+                  cy="80.7"
+                  rx="14.7"
+                  ry="11.0"
+                  transform="rotate(127 89.1 80.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="111.9"
+                  cy="128.2"
+                  rx="8.3"
+                  ry="5.8"
+                  transform="rotate(166 111.9 128.2)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="124.9"
+                  cy="66.3"
+                  rx="15.2"
+                  ry="8.4"
+                  transform="rotate(73 124.9 66.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="112.0"
+                  cy="129.0"
+                  rx="14.5"
+                  ry="9.7"
+                  transform="rotate(170 112.0 129.0)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="173.0"
+                  cy="101.9"
+                  rx="11.2"
+                  ry="8.0"
+                  transform="rotate(136 173.0 101.9)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="101.6"
+                  cy="93.5"
+                  rx="15.0"
+                  ry="6.1"
+                  transform="rotate(127 101.6 93.5)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="123.5"
+                  cy="133.6"
+                  rx="13.3"
+                  ry="11.0"
+                  transform="rotate(128 123.5 133.6)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="101.0"
+                  cy="141.5"
+                  rx="12.9"
+                  ry="5.9"
+                  transform="rotate(83 101.0 141.5)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="147.5"
+                  cy="139.8"
+                  rx="10.4"
+                  ry="6.4"
+                  transform="rotate(132 147.5 139.8)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="96.5"
+                  cy="150.9"
+                  rx="8.1"
+                  ry="8.2"
+                  transform="rotate(13 96.5 150.9)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="137.5"
+                  cy="70.6"
+                  rx="10.6"
+                  ry="8.3"
+                  transform="rotate(148 137.5 70.6)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="102.5"
+                  cy="163.2"
+                  rx="8.8"
+                  ry="9.5"
+                  transform="rotate(125 102.5 163.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="123.7"
+                  cy="166.7"
+                  rx="12.7"
+                  ry="5.4"
+                  transform="rotate(162 123.7 166.7)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="104.7"
+                  cy="92.4"
+                  rx="11.5"
+                  ry="10.1"
+                  transform="rotate(97 104.7 92.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="133.2"
+                  cy="131.7"
+                  rx="12.6"
+                  ry="10.8"
+                  transform="rotate(167 133.2 131.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="149.8"
+                  cy="105.6"
+                  rx="8.5"
+                  ry="10.2"
+                  transform="rotate(27 149.8 105.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="96.6"
+                  cy="67.8"
+                  rx="13.1"
+                  ry="9.5"
+                  transform="rotate(5 96.6 67.8)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="105.0"
+                  cy="159.3"
+                  rx="13.4"
+                  ry="8.1"
+                  transform="rotate(135 105.0 159.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="161.9"
+                  cy="160.1"
+                  rx="15.9"
+                  ry="6.5"
+                  transform="rotate(102 161.9 160.1)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="117.2"
+                  cy="112.4"
+                  rx="15.2"
+                  ry="8.8"
+                  transform="rotate(96 117.2 112.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="162.9"
+                  cy="85.1"
+                  rx="8.9"
+                  ry="7.2"
+                  transform="rotate(2 162.9 85.1)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="142.5"
+                  cy="178.4"
+                  rx="9.1"
+                  ry="8.8"
+                  transform="rotate(178 142.5 178.4)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="183.3"
+                  cy="86.3"
+                  rx="11.7"
+                  ry="7.8"
+                  transform="rotate(158 183.3 86.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="109.0"
+                  cy="139.2"
+                  rx="8.7"
+                  ry="6.0"
+                  transform="rotate(122 109.0 139.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="123.7"
+                  cy="126.1"
+                  rx="11.2"
+                  ry="5.7"
+                  transform="rotate(49 123.7 126.1)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="121.3"
+                  cy="179.5"
+                  rx="9.6"
+                  ry="8.8"
+                  transform="rotate(175 121.3 179.5)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="98.9"
+                  cy="164.3"
+                  rx="8.1"
+                  ry="9.3"
+                  transform="rotate(118 98.9 164.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="109.0"
+                  cy="83.4"
+                  rx="11.5"
+                  ry="6.0"
+                  transform="rotate(131 109.0 83.4)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="172.3"
+                  cy="107.0"
+                  rx="9.5"
+                  ry="10.5"
+                  transform="rotate(174 172.3 107.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="133.2"
+                  cy="170.3"
+                  rx="9.5"
+                  ry="7.7"
+                  transform="rotate(166 133.2 170.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="104.0"
+                  cy="83.4"
+                  rx="14.6"
+                  ry="5.7"
+                  transform="rotate(37 104.0 83.4)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="189.9"
+                  cy="129.3"
+                  rx="9.9"
+                  ry="5.9"
+                  transform="rotate(116 189.9 129.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="141.8"
+                  cy="135.9"
+                  rx="12.1"
+                  ry="6.5"
+                  transform="rotate(5 141.8 135.9)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="159.0"
+                  cy="72.1"
+                  rx="8.8"
+                  ry="6.4"
+                  transform="rotate(6 159.0 72.1)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="129.7"
+                  cy="181.2"
+                  rx="13.2"
+                  ry="10.1"
+                  transform="rotate(13 129.7 181.2)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="121.0"
+                  cy="106.7"
+                  rx="8.9"
+                  ry="5.8"
+                  transform="rotate(10 121.0 106.7)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="108.1"
+                  cy="159.0"
+                  rx="8.4"
+                  ry="10.7"
+                  transform="rotate(180 108.1 159.0)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="97.6"
+                  cy="102.8"
+                  rx="9.2"
+                  ry="8.8"
+                  transform="rotate(33 97.6 102.8)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="161.4"
+                  cy="114.4"
+                  rx="12.0"
+                  ry="6.8"
+                  transform="rotate(89 161.4 114.4)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="182.8"
+                  cy="133.2"
+                  rx="14.1"
+                  ry="5.1"
+                  transform="rotate(68 182.8 133.2)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="87.7"
+                  cy="98.9"
+                  rx="13.5"
+                  ry="5.6"
+                  transform="rotate(123 87.7 98.9)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="159.4"
+                  cy="74.6"
+                  rx="9.3"
+                  ry="9.1"
+                  transform="rotate(173 159.4 74.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="99.5"
+                  cy="157.0"
+                  rx="13.3"
+                  ry="6.0"
+                  transform="rotate(134 99.5 157.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="156.5"
+                  cy="112.7"
+                  rx="11.7"
+                  ry="7.7"
+                  transform="rotate(47 156.5 112.7)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="74.7"
+                  cy="131.2"
+                  rx="12.0"
+                  ry="5.2"
+                  transform="rotate(113 74.7 131.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="121.6"
+                  cy="138.6"
+                  rx="14.2"
+                  ry="6.0"
+                  transform="rotate(11 121.6 138.6)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="155.0"
+                  cy="156.4"
+                  rx="8.5"
+                  ry="9.7"
+                  transform="rotate(42 155.0 156.4)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="151.7"
+                  cy="105.6"
+                  rx="11.6"
+                  ry="6.6"
+                  transform="rotate(67 151.7 105.6)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="99.2"
+                  cy="83.8"
+                  rx="15.4"
+                  ry="6.9"
+                  transform="rotate(69 99.2 83.8)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="117.8"
+                  cy="75.2"
+                  rx="11.1"
+                  ry="8.5"
+                  transform="rotate(166 117.8 75.2)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="114.8"
+                  cy="148.9"
+                  rx="14.7"
+                  ry="7.3"
+                  transform="rotate(82 114.8 148.9)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="124.7"
+                  cy="124.9"
+                  rx="8.6"
+                  ry="7.7"
+                  transform="rotate(82 124.7 124.9)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="133.8"
+                  cy="172.7"
+                  rx="10.6"
+                  ry="9.9"
+                  transform="rotate(108 133.8 172.7)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="71.6"
+                  cy="119.1"
+                  rx="8.2"
+                  ry="9.6"
+                  transform="rotate(130 71.6 119.1)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="74.9"
+                  cy="99.3"
+                  rx="10.5"
+                  ry="7.7"
+                  transform="rotate(133 74.9 99.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="141.5"
+                  cy="116.6"
+                  rx="13.5"
+                  ry="9.9"
+                  transform="rotate(131 141.5 116.6)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="177.0"
+                  cy="71.6"
+                  rx="14.9"
+                  ry="10.6"
+                  transform="rotate(170 177.0 71.6)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="133.2"
+                  cy="76.6"
+                  rx="15.3"
+                  ry="10.3"
+                  transform="rotate(122 133.2 76.6)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="80.6"
+                  cy="104.2"
+                  rx="10.6"
+                  ry="6.2"
+                  transform="rotate(144 80.6 104.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="148.1"
+                  cy="56.2"
+                  rx="12.4"
+                  ry="5.0"
+                  transform="rotate(105 148.1 56.2)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="178.4"
+                  cy="136.9"
+                  rx="13.3"
+                  ry="9.1"
+                  transform="rotate(146 178.4 136.9)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="126.2"
+                  cy="187.3"
+                  rx="15.6"
+                  ry="6.1"
+                  transform="rotate(114 126.2 187.3)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="153.0"
+                  cy="122.0"
+                  rx="13.5"
+                  ry="5.0"
+                  transform="rotate(19 153.0 122.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="133.1"
+                  cy="51.3"
+                  rx="10.4"
+                  ry="6.7"
+                  transform="rotate(108 133.1 51.3)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="116.3"
+                  cy="138.1"
+                  rx="10.3"
+                  ry="5.5"
+                  transform="rotate(151 116.3 138.1)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="138.3"
+                  cy="110.2"
+                  rx="15.6"
+                  ry="5.9"
+                  transform="rotate(2 138.3 110.2)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="149.3"
+                  cy="166.8"
+                  rx="9.4"
+                  ry="10.8"
+                  transform="rotate(17 149.3 166.8)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="106.5"
+                  cy="142.9"
+                  rx="11.5"
+                  ry="9.4"
+                  transform="rotate(155 106.5 142.9)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="122.3"
+                  cy="58.1"
+                  rx="12.3"
+                  ry="7.6"
+                  transform="rotate(48 122.3 58.1)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="120.2"
+                  cy="115.0"
+                  rx="13.4"
+                  ry="7.0"
+                  transform="rotate(2 120.2 115.0)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="113.5"
+                  cy="74.0"
+                  rx="13.4"
+                  ry="8.4"
+                  transform="rotate(24 113.5 74.0)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="106.7"
+                  cy="166.7"
+                  rx="12.2"
+                  ry="5.7"
+                  transform="rotate(109 106.7 166.7)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="112.8"
+                  cy="152.5"
+                  rx="12.4"
+                  ry="9.2"
+                  transform="rotate(16 112.8 152.5)"
+                  fill="#ffd166"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="151.0"
+                  cy="93.2"
+                  rx="14.0"
+                  ry="9.2"
+                  transform="rotate(32 151.0 93.2)"
+                  fill="#ff5f78"
+                  opacity=".55"
+                />
+                <ellipse
+                  cx="145.7"
+                  cy="140.5"
+                  rx="13.7"
+                  ry="6.9"
+                  transform="rotate(63 145.7 140.5)"
+                  fill="#e63b52"
+                  opacity=".55"
+                />
+              </g>
+              <circle
+                cx="292"
+                cy="112"
+                r="44"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-dasharray="4 4"
+              />
+              <g>
+                <ellipse
+                  cx="277.5"
+                  cy="99.5"
+                  rx="16.8"
+                  ry="8.5"
+                  transform="rotate(129 277.5 99.5)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="311.4"
+                  cy="88.8"
+                  rx="19.7"
+                  ry="8.6"
+                  transform="rotate(38 311.4 88.8)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="308.1"
+                  cy="99.1"
+                  rx="16.9"
+                  ry="10.1"
+                  transform="rotate(93 308.1 99.1)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="299.9"
+                  cy="106.0"
+                  rx="17.8"
+                  ry="12.0"
+                  transform="rotate(72 299.9 106.0)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="271.1"
+                  cy="125.0"
+                  rx="20.2"
+                  ry="8.2"
+                  transform="rotate(55 271.1 125.0)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="271.0"
+                  cy="116.3"
+                  rx="14.4"
+                  ry="10.2"
+                  transform="rotate(166 271.0 116.3)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="309.2"
+                  cy="124.8"
+                  rx="21.7"
+                  ry="8.3"
+                  transform="rotate(65 309.2 124.8)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="307.4"
+                  cy="85.8"
+                  rx="15.7"
+                  ry="13.2"
+                  transform="rotate(32 307.4 85.8)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+                <ellipse
+                  cx="279.8"
+                  cy="132.8"
+                  rx="20.0"
+                  ry="13.6"
+                  transform="rotate(131 279.8 132.8)"
+                  fill="#e63b52"
+                  opacity=".5"
+                />
+              </g>
+              <path
+                d="M170 100 250 90"
+                stroke="currentColor"
+                stroke-width="1.2"
+                fill="none"
+                stroke-dasharray="3 3"
+              />
+              <text class="fig-note" x="244" y="176" font-size="12.5" fill="currentColor">
+                zoom in: just soft blobs
+              </text>
+            </svg>
+            <figcaption>
+              A berry drawn with a hundred and fifty big splats, and a zoom into a handful of them.
+              Real toys use far more, and far smaller, ones.
+            </figcaption>
+          </figure>
+          <p>
+            Try it:
+            <a
+              href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0cmF3YmVycnkifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjUuNn19"
+              >open the strawberry</a
+            >
+            and pinch in close. The fruit turns into a cloud of soft blobs, and zooming back out
+            makes it solid again.
+          </p>
+        </section>
+        <section aria-labelledby="h-sorted">
+          <h2 id="h-sorted">Sorted, then blended</h2>
+          <p>
+            To draw a frame, the computer does two things with all those splats. First it
+            <strong>sorts</strong> them by distance from you, farthest first. Then it
+            <strong>paints</strong> them one after another, and each one is see-through, so it only
+            tints what is already there. A near splat covers a far one, and where they overlap their
+            colors mix. Do that sixty times a second and the picture can move.
+          </p>
+          <figure class="figure">
+            <svg viewBox="0 0 400 190" role="img" aria-labelledby="g3-t" class="figure-svg">
+              <title id="g3-t">
+                Three splats drawn from farthest to nearest; where they overlap their colors blend
+              </title>
+              <g>
+                <ellipse
+                  cx="70"
+                  cy="78"
+                  rx="46"
+                  ry="30"
+                  transform="rotate(-18 70 78)"
+                  fill="#7bdff2"
+                  opacity=".62"
+                />
+                <text
+                  x="70"
+                  y="83"
+                  text-anchor="middle"
+                  font-size="15"
+                  font-weight="700"
+                  fill="#111"
+                >
+                  1
+                </text>
+                <text
+                  x="70"
+                  y="132"
+                  text-anchor="middle"
+                  font-size="12.5"
+                  fill="currentColor"
+                  class="fig-note"
+                >
+                  farthest, first
+                </text>
+              </g>
+              <g>
+                <ellipse
+                  cx="120"
+                  cy="90"
+                  rx="46"
+                  ry="30"
+                  transform="rotate(-18 120 90)"
+                  fill="#ffd166"
+                  opacity=".62"
+                />
+                <text
+                  x="120"
+                  y="95"
+                  text-anchor="middle"
+                  font-size="15"
+                  font-weight="700"
+                  fill="#111"
+                >
+                  2
+                </text>
+                <text
+                  x="120"
+                  y="144"
+                  text-anchor="middle"
+                  font-size="12.5"
+                  fill="currentColor"
+                  class="fig-note"
+                >
+                  next
+                </text>
+              </g>
+              <g>
+                <ellipse
+                  cx="170"
+                  cy="78"
+                  rx="46"
+                  ry="30"
+                  transform="rotate(-18 170 78)"
+                  fill="#ff5fa2"
+                  opacity=".62"
+                />
+                <text
+                  x="170"
+                  y="83"
+                  text-anchor="middle"
+                  font-size="15"
+                  font-weight="700"
+                  fill="#111"
+                >
+                  3
+                </text>
+                <text
+                  x="170"
+                  y="132"
+                  text-anchor="middle"
+                  font-size="12.5"
+                  fill="currentColor"
+                  class="fig-note"
+                >
+                  nearest, last
+                </text>
+              </g>
+              <path d="M236 82h40" stroke="currentColor" stroke-width="1.6" fill="none" />
+              <path
+                d="m270 76 8 6-8 6"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linecap="round"
+              />
+              <g transform="translate(335 82)">
+                <ellipse
+                  rx="46"
+                  ry="30"
+                  transform="rotate(-18)"
+                  fill="#7bdff2"
+                  opacity=".62"
+                  cx="-26"
+                  cy="-2"
+                />
+                <ellipse
+                  rx="46"
+                  ry="30"
+                  transform="rotate(-18)"
+                  fill="#ffd166"
+                  opacity=".62"
+                  cx="0"
+                  cy="8"
+                />
+                <ellipse
+                  rx="46"
+                  ry="30"
+                  transform="rotate(-18)"
+                  fill="#ff5fa2"
+                  opacity=".62"
+                  cx="26"
+                  cy="-2"
+                />
+              </g>
+              <text
+                class="fig-note"
+                x="335"
+                y="150"
+                text-anchor="middle"
+                font-size="12.5"
+                fill="currentColor"
+              >
+                one blended picture
+              </text>
+            </svg>
+            <figcaption>
+              Three splats, painted from the farthest to the nearest. The overlaps blend.
+            </figcaption>
+          </figure>
+          <p>
+            That is the whole trick, and it is why splats look so soft and real: no hard polygons,
+            no textures, just blended color. It also means every splat is free to move on its own,
+            which is what makes toys that peel, ripple, shatter and come back together possible.
+          </p>
+        </section>
+        <section aria-labelledby="h-recipe">
+          <h2 id="h-recipe">Where the splats come from</h2>
+          <p>There are two kinds of toys on Splashery.</p>
+          <ul>
+            <li>
+              <strong>Captured toys</strong> are scans. Someone walked around a real strawberry or
+              cactus with a camera, a program worked out the splats that would reproduce those
+              photos, and Splashery shows the result. Each scan's author and license are in the
+              <a href="../../about/credits/">credits</a>.
+            </li>
+            <li>
+              <strong>Recipe toys</strong> are made from a short description. A
+              <strong>recipe</strong> says what a toy is built from (a cone for the tower, a box for
+              each sail), what color each part is, and what moves and how. Your browser reads the
+              recipe and makes the splats when you pick the toy, so a toy costs a few thousand
+              characters instead of megabytes.
+            </li>
+          </ul>
+          <figure class="figure recipe-figure">
+            <pre class="code"><code>// A little windmill, from its recipe
+build(k) {
+  k.add(k.cone(0.5, 0.3, 1.6), { color: "#8b8f97" });   // the tower
+  const sails = k.part("sails", { pivot: [0, 0.6, 0.42] });
+  k.add(k.box(0.16, 0.9, 0.02), { part: sails });        // a sail
+}
+drive(t, c, out) {
+  out.parts.sails = { angle: t * 1.5 };                  // the sails turn
+}</code></pre>
+            <figcaption>
+              Real recipes are a little longer, but they read like this: shapes, colors, and what
+              moves.
+            </figcaption>
+          </figure>
+          <p>
+            Because a recipe is plain text, anyone can write one. The
+            <a href="../../../manual/">Tinkerer's Manual</a> teaches it from the math of one splat
+            up to your own toys, and
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+              >Writing toy recipes</a
+            >
+            is the reference.
+          </p>
+        </section>
+        <section aria-labelledby="h-why">
+          <h2 id="h-why">Why make toys from splats?</h2>
+          <p>
+            Splats are usually something you watch: a scan you orbit and then close. Here they are
+            something you play with. Because each splat is separate, a toy can peel like a grape,
+            pour like water or ring like a piano, and the same recipes run atoms, planets and games.
+            And since the whole thing is plain web code, it works on a phone with nothing to
+            install.
+          </p>
+          <p class="actions">
+            <a class="button primary" href="../../../"
+              >Open the gallery<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></a
+            ><a class="button" href="../../learn/">Back to Learn</a>
+          </p>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
