@@ -856,7 +856,7 @@ function legend(s, ms) {
   // On a "same time each day" speed the clock shows the time held, on the day reached.
   const shown = SKY.daily ? SKY.dailyAnchor + Math.floor((ms - SKY.dailyAnchor) / 86400000) * 86400000 : ms; // prettier-ignore
   items.push({ text: formatWhen(Math.floor(shown / 60000) * 60000, p.tz) });
-  if (SKY.rate !== 1) items.push({ text: (SPEEDS.find((x) => x.id === SKY.speed) || SPEEDS[0]).label }); // prettier-ignore
+  if (SKY.rate !== 1) items.push({ text: SPEEDS.find((x) => x.id === SKY.speed)?.label ?? `${fmt(SKY.rate)} times real time` }); // prettier-ignore
   const sun = s.bodies.sun;
   const moon = s.bodies.moon;
   items.push({ text: sun.alt > -0.83 ? `The Sun is up (${fmt(sun.alt)}°)` : sun.alt > -18 ? "Twilight" : "Night" }); // prettier-ignore
@@ -889,7 +889,10 @@ if (typeof window !== "undefined" && window.__splashery) {
       if (time !== undefined) setTime(typeof time === "number" ? time : Date.parse(time));
       if (speed !== undefined) setSpeed(String(speed), true);
       // Any rate (sky seconds per second), for the clip tool (tools/sky-clip.mjs).
-      if (Number.isFinite(rate)) SKY.rate = SKY.target = rate;
+      if (Number.isFinite(rate)) {
+        SKY.rate = SKY.target = rate;
+        SKY.speed = "custom"; // not one of the panel's speeds (and never "same time each day")
+      }
       return this.state();
     },
     state() {

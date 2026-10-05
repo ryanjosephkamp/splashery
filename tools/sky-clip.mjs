@@ -35,7 +35,7 @@ const CLIPS = {
   // New York, at 7:30 PM each evening from October 14 to 25, 2026, on the toy's "same time
   // each day: a day every 2 seconds" speed (the owner's "slow it down"), following the Moon: it
   // walks east night by night and waxes from a crescent to full.
-  moon: { city: "new-york", time: "2026-10-14T23:30:00Z", speed: "day2", secs: 22, follow: "moon", zoom: 0.5 }, // prettier-ignore
+  moon: { city: "new-york", time: "2026-10-14T23:30:00Z", speed: "day2", secs: 22, follow: "moon", zoom: 0.3 }, // prettier-ignore
 };
 
 fs.mkdirSync(outDir, { recursive: true });
