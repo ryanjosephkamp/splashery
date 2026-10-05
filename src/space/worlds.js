@@ -76,7 +76,7 @@ export const WORLDS = [
     dayHours: 24.6229,
     reference: "heights above the areoid, Mars's sea-level surface (MOLA)",
     sunlit: "#fff4e6",
-    atmosphere: { color: "#e8b08a", thickness: 0.006, strength: 0.18 },
+    atmosphere: { color: "#e8b08a", thickness: 0.006, strength: 0.1 },
     maps: {
       color: { url: `${USGS}Mars_Viking_ClrMosaic_global_925m.tif`, lonLeft: -180 },
       height: { url: `${USGS}Mars_MGS_MOLA_DEM_mosaic_global_463m.tif`, lonLeft: -180, nodata: -32768 }, // prettier-ignore
@@ -178,7 +178,7 @@ export const WORLDS = [
     dayHours: 23.9345,
     reference: "heights above sea level (ETOPO 2022); the oceans are shown at sea level",
     sunlit: "#ffffff",
-    atmosphere: { color: "#8fbaff", thickness: 0.012, strength: 0.45 },
+    atmosphere: { color: "#8fbaff", thickness: 0.012, strength: 0.26 },
     maps: {
       color: { url: `${BMNG}world.200407.3x5400x2700.jpg`, kind: "jpeg", lonLeft: -180 },
       patchColor: { url: `${BMNG}world.200407.3x21600x10800.jpg`, kind: "jpeg", lonLeft: -180 },
@@ -388,6 +388,8 @@ export const WORLDS = [
         nodata: -32768,
       },
     },
+    // It starts with the heart, New Horizons' sharp side, toward the viewer.
+    face: 178.7,
     features: [
       { id: "sputnik-planitia", name: "Sputnik Planitia, a plain of nitrogen ice (the heart)", label: "Sputnik Planitia", lat: 19.51, lon: 178.69, km: 1492, gaz: 15669, patch: { deg: 16 } }, // prettier-ignore
       { id: "wright-mons", name: "Wright Mons, perhaps an ice volcano", label: "Wright Mons", lat: -21.36, lon: 173.24, km: 165, gaz: 15835, patch: { deg: 6 } }, // prettier-ignore
