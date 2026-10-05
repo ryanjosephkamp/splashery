@@ -23,7 +23,7 @@ import { readCrystal, probabilityScale, centerOf, eigenSym3 } from "../science/c
 import { readSmlm, readLocalizations } from "../science/smlm.js";
 import { STRUCTURES } from "../science/structures.js";
 import { fillCell, cellsFor, completeMolecules } from "../science/symmetry.js";
-import { readDensity, readBackbone, isoPoints } from "../science/density.js";
+import { readDensity, readBackbone, isoPointsPerVoxel } from "../science/density.js";
 import { TERRAIN, CONTOUR } from "../science/terrain.js";
 import {
   SCI_TYPE,
@@ -1474,7 +1474,7 @@ const EM = { maps: new Map(), models: new Map(), want: null, info: null };
 export const cryoemState = () => (EM.info ? { ...EM.info } : null);
 // The level's choices, as multiples of EMDB's recommended contour.
 export const CRYOEM_LEVELS = { lower: 0.75, recommended: 1, higher: 1.5 };
-export const CRYOEM_DENSITY = 1.5;
+export const CRYOEM_DENSITY = 2;
 
 // Chain colors: proteins in cool hues, RNA and DNA in warm ones, each chain
 // its own (a golden-angle walk round the hue circle).
@@ -1578,7 +1578,9 @@ const CRYOEM = {
     const { D, model, def } = W;
     const level = D.head.level * (CRYOEM_LEVELS[o.level] ?? 1);
     const colorBy = o.color === "auto" || !o.color ? (def.color ?? "chain") : o.color;
-    const S = isoPoints(D, level);
+    // r3 (the owner's "keep making it sharper"): one point per surface voxel,
+    // so a big map fits the budget with less thinning.
+    const S = isoPointsPerVoxel(D, level);
     if (!S.count) throw new Error("Nothing of the map is above this level.");
     // The middle: the center of the surface.
     const P = S.p;

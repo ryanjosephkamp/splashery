@@ -155,3 +155,42 @@ export function isoPoints(D, level) {
   for (let k = 0; k < count * 3; k++) p[k] = D.at0[k % 3] + v[k] * D.voxel[k % 3];
   return { p, n, v, count, levelByte: L };
 }
+
+// r3 (the owner's "sharper"): the same surface with one point per surface
+// voxel, the mean of the crossings on the voxel's own three edges (and their
+// normals): about a third of the points, each a voxel apart, so a big map
+// fits a phone's budget without thinning and enlarging its splats. The
+// points stay on the surface to within the voxel (a mean of points on it).
+export function isoPointsPerVoxel(D, level) {
+  const S = isoPoints(D, level);
+  const [nx, ny] = D.n;
+  const owner = new Map(); // voxel index -> [sum v (3), sum n (3), count]
+  for (let i = 0; i < S.count; i++) {
+    const x = Math.floor(S.v[3 * i] + 1e-6);
+    const y = Math.floor(S.v[3 * i + 1] + 1e-6);
+    const z = Math.floor(S.v[3 * i + 2] + 1e-6);
+    const key = x + nx * (y + ny * z);
+    let o = owner.get(key);
+    if (!o) owner.set(key, (o = new Float64Array(7)));
+    for (let k = 0; k < 3; k++) {
+      o[k] += S.v[3 * i + k];
+      o[3 + k] += S.n[3 * i + k];
+    }
+    o[6]++;
+  }
+  const count = owner.size;
+  const v = new Float32Array(count * 3);
+  const n = new Float32Array(count * 3);
+  const p = new Float32Array(count * 3);
+  let j = 0;
+  for (const o of owner.values()) {
+    const nl = Math.hypot(o[3], o[4], o[5]) || 1;
+    for (let k = 0; k < 3; k++) {
+      v[3 * j + k] = o[k] / o[6];
+      n[3 * j + k] = o[3 + k] / nl;
+      p[3 * j + k] = D.at0[k] + v[3 * j + k] * D.voxel[k];
+    }
+    j++;
+  }
+  return { p, n, v, count, levelByte: S.levelByte };
+}
