@@ -529,6 +529,18 @@ fetch anything live. Each license was checked on the live source page on October
 
 Tables people open in Data in 3D are read in their browser and never uploaded.
 
+## Imaging (lane Imaging)
+
+- Walnut CT scan: Walnut 1 of the "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning:
+  Samples 1-8" by Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia
+  Bethany Coban and K. Joost Batenburg (CWI, Amsterdam; Scientific Data 6, 215, 2019),
+  [10.5281/zenodo.2686726](https://doi.org/10.5281/zenodo.2686726),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Its high-quality reconstruction (100 µm
+  voxels), every second slice, averaged to 0.3 mm, cropped and stored as 8-bit densities by
+  `tools/img-walnut.mjs`.
+- The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
+  recipes.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
