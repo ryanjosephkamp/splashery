@@ -1981,6 +1981,37 @@ export const TOY_HELP = {
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
   },
+  // ---- Space r2 (lane Space r2): real worlds ---------------------------------------------
+  "real-moon": {
+    howTo:
+      "Tap to fly close to Tycho, Copernicus or Apollo 11's landing site, one each tap, and back. Move the Sun slider to light it from another side.",
+    about:
+      "The real Moon, built from NASA's maps of it: the color of every place from the Lunar Reconnaissance Orbiter's wide-angle camera, and its height from the orbiter's laser altimeter, which measured the whole surface. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it and leaves the rest dark: the craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the Moon's highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here it turns 86,400 times faster, a day each second. Tap to fly to a named place and back; close up, the relief eases to at most twice its height. The lighting shades each slope but casts no shadows, and the colors are enhanced a little, as in NASA's map.",
+  },
+  "real-mars": {
+    howTo:
+      "Tap to fly close to Olympus Mons, Valles Marineris or Gale crater, one each tap, and back. Move the Sun slider to light it from another side.",
+    about:
+      "The real Mars, built from NASA and USGS maps: its colors from the Viking orbiters' mosaic and its heights from the Mars Global Surveyor's laser altimeter (MOLA), measured above the areoid, Mars's equivalent of sea level. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris, a system of canyons as long as the United States is wide, drops up to about 7 km; Gale crater is where the Curiosity rover is climbing the mound in its middle. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here it turns 3,600 times faster, an hour each second. Close up, the relief eases to at most twice its height. The thin pink rim is its dusty air, drawn simply; the lighting casts no shadows.",
+  },
+  "real-earth": {
+    howTo:
+      "Tap to fly close to Mount Everest, the Grand Canyon or Hawaii, one each tap, and back. Move the Sun slider to see the lights of cities on the night side.",
+    about:
+      "The real Earth, built from NASA and NOAA maps: its colors from NASA's Blue Marble (a cloud-free mosaic of July 2004 from the Terra satellite), its heights from NOAA's ETOPO 2022 relief model, and the lights on its night side from NASA's Black Marble (2016). The oceans lie flat at sea level. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here it turns 3,600 times faster, an hour each second. Close up, the relief eases to at most twice its height. There are no clouds, and the lighting casts no shadows.",
+  },
+  "real-mercury": {
+    howTo:
+      "Tap to fly close to the Caloris basin, Rachmaninoff crater or Hokusai crater, one each tap, and back. Move the Sun slider to light it from another side.",
+    about:
+      "The real Mercury, built from the maps of NASA's MESSENGER spacecraft, which orbited it from 2011 to 2015: its color from three of the camera's filters (near-infrared, red and blue light, shown as red, green and blue, so the colors are not what an eye would see but show the rocks apart) and its heights from the USGS's global elevation model. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here it turns 86,400 times faster, a day each second. Close up, the relief eases to at most twice its height. The lighting casts no shadows.",
+  },
+  "real-venus": {
+    howTo:
+      "Tap to fly close to Maxwell Montes, Maat Mons or Artemis Corona, one each tap, and back. Move the Sun slider to light it from another side.",
+    about:
+      "The real surface of Venus, which no camera can see from space: its thick clouds hide it. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors here are the radar's brightness (rough ground bright, smooth ground dark), tinted orange like the photos the Soviet Venera landers took on the surface; they are not what an eye would see. The heights come from Magellan's radar altimeter. The clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here it turns 86,400 times faster, a day each second. The lighting casts no shadows.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------

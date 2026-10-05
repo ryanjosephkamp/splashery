@@ -2779,6 +2779,13 @@ export const TOY_SOUNDS = {
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
   ],
+  // ---- Space r2 (lane Space r2): real worlds --------------------------------------------
+  // Space is silent: a soft breath as the view flies in to a feature.
+  "real-moon": { voice: "breath", f: 340, to: 0.7, decay: 2.2, vol: 0.32 },
+  "real-mars": { voice: "breath", f: 300, to: 0.75, decay: 2.4, vol: 0.34 },
+  "real-earth": { voice: "breath", f: 380, to: 0.65, decay: 2.1, vol: 0.3 },
+  "real-mercury": { voice: "breath", f: 360, to: 0.8, decay: 1.9, vol: 0.3 },
+  "real-venus": { voice: "breath", f: 260, to: 0.7, decay: 2.6, vol: 0.34 },
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

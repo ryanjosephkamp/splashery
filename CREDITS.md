@@ -500,6 +500,39 @@ checked on the live source page on September 30, 2026.
 
 Files people open in these toys are read in their browser and never uploaded.
 
+## Real worlds (lane Space r2)
+
+The real Moon, Mars, Earth, Mercury and Venus are built from public-domain maps made by NASA, the
+USGS and NOAA, cut by `tools/sp2-maps.mjs` into a global map and a sharper patch round each named
+feature (`assets/toys/real-worlds/`). Feature positions are from the
+[USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/).
+
+- The Moon: the [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720) by NASA's Scientific Visualization
+  Studio (Ernie Wright), from the Lunar Reconnaissance Orbiter's LROC color mosaic (2025 version)
+  and LOLA elevation. Public domain.
+- Mars:
+  [Mars Viking Colorized Global Mosaic 925m](https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m)
+  (NASA, JPL, Viking orbiters; USGS Astrogeology Science Center) and
+  [Mars MGS MOLA DEM 463m](https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m) (MOLA
+  Science Team, NASA Goddard Space Flight Center; USGS). Public domain.
+- Mercury: the MESSENGER MDIS basemap in three colors (1000, 750 and 430 nm; PDS data set
+  MESS-H-MDIS-5-RDR-MD3-V1.0) and the
+  [Mercury MESSENGER Global DEM 665m](https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m)
+  (Kris Becker, NASA, Arizona State University, Johns Hopkins APL, Carnegie Institution for Science;
+  USGS). Public domain.
+- Venus: the
+  [Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m)
+  (PDS Geosciences Node) and the
+  [Venus Magellan Global Topography 4641m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m)
+  (Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley; NASA, JPL; USGS). Public domain.
+- Earth:
+  [Blue Marble: Next Generation, July 2004](https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation)
+  (NASA Earth Observatory, Reto Stöckli), the
+  [ETOPO 2022 Global Relief Model](https://www.ncei.noaa.gov/products/etopo-global-relief-model) at
+  60 and 15 arc-seconds (NOAA National Centers for Environmental Information) and
+  [Black Marble 2016](https://earthobservatory.nasa.gov/features/NightLights) (NASA Earth
+  Observatory, Joshua Stevens and Miguel Román). Public domain.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one

@@ -2178,5 +2178,142 @@
       "checked": "September 30, 2026",
       "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
     }
+  ],
+  "spaceSamples": [
+    {
+      "id": "moon-color-and-elevation-maps",
+      "files": [
+        "assets/toys/real-worlds/moon-apollo-11-color.jpg",
+        "assets/toys/real-worlds/moon-apollo-11-height.bin",
+        "assets/toys/real-worlds/moon-color.jpg",
+        "assets/toys/real-worlds/moon-copernicus-color.jpg",
+        "assets/toys/real-worlds/moon-copernicus-height.bin",
+        "assets/toys/real-worlds/moon-height.bin",
+        "assets/toys/real-worlds/moon-tycho-color.jpg",
+        "assets/toys/real-worlds/moon-tycho-height.bin"
+      ],
+      "toy": "real-moon",
+      "name": "CGI Moon Kit (LRO LROC color mosaic, 2025, and LOLA elevation)",
+      "author": "NASA's Scientific Visualization Studio (Ernie Wright); LRO LROC and LOLA teams",
+      "page": "https://svs.gsfc.nasa.gov/4720",
+      "license": "Public domain (NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "mars-color-map",
+      "files": [
+        "assets/toys/real-worlds/mars-color.jpg",
+        "assets/toys/real-worlds/mars-gale-color.jpg",
+        "assets/toys/real-worlds/mars-olympus-mons-color.jpg",
+        "assets/toys/real-worlds/mars-valles-marineris-color.jpg"
+      ],
+      "toy": "real-mars",
+      "name": "Mars Viking Colorized Global Mosaic 925m",
+      "author": "NASA, JPL, Viking orbiters (Planetary Data System); USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "mars-elevation-map",
+      "files": [
+        "assets/toys/real-worlds/mars-gale-height.bin",
+        "assets/toys/real-worlds/mars-height.bin",
+        "assets/toys/real-worlds/mars-olympus-mons-height.bin",
+        "assets/toys/real-worlds/mars-valles-marineris-height.bin"
+      ],
+      "toy": "real-mars",
+      "name": "Mars MGS MOLA DEM 463m",
+      "author": "MOLA Science Team (NASA Goddard Space Flight Center); USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "mercury-color-and-elevation-maps",
+      "files": [
+        "assets/toys/real-worlds/mercury-caloris-color.jpg",
+        "assets/toys/real-worlds/mercury-caloris-height.bin",
+        "assets/toys/real-worlds/mercury-color.jpg",
+        "assets/toys/real-worlds/mercury-height.bin",
+        "assets/toys/real-worlds/mercury-hokusai-color.jpg",
+        "assets/toys/real-worlds/mercury-hokusai-height.bin",
+        "assets/toys/real-worlds/mercury-rachmaninoff-color.jpg",
+        "assets/toys/real-worlds/mercury-rachmaninoff-height.bin"
+      ],
+      "toy": "real-mercury",
+      "name": "Mercury MESSENGER MDIS basemap, 3-color (1000, 750 and 430 nm; MESS-H-MDIS-5-RDR-MD3-V1.0, 665 m), and Mercury MESSENGER Global DEM 665m",
+      "author": "NASA, Johns Hopkins APL, Carnegie Institution for Science, Arizona State University; DEM by Kris Becker (USGS Astrogeology Science Center)",
+      "page": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "venus-radar-and-elevation-maps",
+      "files": [
+        "assets/toys/real-worlds/venus-artemis-corona-color.jpg",
+        "assets/toys/real-worlds/venus-artemis-corona-height.bin",
+        "assets/toys/real-worlds/venus-color.jpg",
+        "assets/toys/real-worlds/venus-height.bin",
+        "assets/toys/real-worlds/venus-maat-mons-color.jpg",
+        "assets/toys/real-worlds/venus-maat-mons-height.bin",
+        "assets/toys/real-worlds/venus-maxwell-montes-color.jpg",
+        "assets/toys/real-worlds/venus-maxwell-montes-height.bin"
+      ],
+      "toy": "real-venus",
+      "name": "Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m and Venus Magellan Global Topography 4641m",
+      "author": "NASA, JPL, Magellan mission; PDS Geosciences Node; topography by Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley; USGS Astrogeology Science Center",
+      "page": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m",
+      "license": "Public domain (USGS and NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "earth-color-map",
+      "files": [
+        "assets/toys/real-worlds/earth-color.jpg",
+        "assets/toys/real-worlds/earth-everest-color.jpg",
+        "assets/toys/real-worlds/earth-grand-canyon-color.jpg",
+        "assets/toys/real-worlds/earth-hawaii-color.jpg"
+      ],
+      "toy": "real-earth",
+      "name": "Blue Marble: Next Generation (July 2004)",
+      "author": "NASA Earth Observatory (Reto Stöckli)",
+      "page": "https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation",
+      "license": "Public domain (NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "earth-elevation-map",
+      "files": [
+        "assets/toys/real-worlds/earth-everest-height.bin",
+        "assets/toys/real-worlds/earth-grand-canyon-height.bin",
+        "assets/toys/real-worlds/earth-hawaii-height.bin",
+        "assets/toys/real-worlds/earth-height.bin"
+      ],
+      "toy": "real-earth",
+      "name": "ETOPO 2022 Global Relief Model (60 and 15 arc-seconds)",
+      "author": "NOAA National Centers for Environmental Information",
+      "page": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+      "license": "Public domain (NOAA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    },
+    {
+      "id": "earth-lights-at-night",
+      "files": ["assets/toys/real-worlds/earth-night.jpg"],
+      "toy": "real-earth",
+      "name": "Black Marble 2016 (Earth at Night)",
+      "author": "NASA Earth Observatory (Joshua Stevens, Miguel Román)",
+      "page": "https://earthobservatory.nasa.gov/features/NightLights",
+      "license": "Public domain (NASA)",
+      "checked": "October 5, 2026",
+      "note": "Cut by tools/sp2-maps.mjs into a global map and a sharper patch round each named feature (src/space/worlds.js lists the source files)."
+    }
   ]
 }

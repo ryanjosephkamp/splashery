@@ -18,10 +18,10 @@ galaxies, more stellar systems, more planets"; rockets).
 1. **Real worlds as splats**: build the Moon, Mars and Earth first, then Mercury, Venus (radar), and
    the big moons you can find good data for, each from real color and elevation maps (for example
    NASA's CGI Moon Kit from LRO, MOLA and Viking for Mars, Blue Marble and ETOPO for Earth,
-   MESSENGER for Mercury, Magellan for Venus; public domain or the allowed licenses, checked on their
-   pages). Real relief, with an option to exaggerate it (labeled), turning at its real rate (scaled,
-   labeled), lit by a sun you can move. A tap flies close to a named feature (Olympus Mons, Tycho,
-   Valles Marineris) and back.
+   MESSENGER for Mercury, Magellan for Venus; public domain or the allowed licenses, checked on
+   their pages). Real relief, with an option to exaggerate it (labeled), turning at its real rate
+   (scaled, labeled), lit by a sun you can move. A tap flies close to a named feature (Olympus Mons,
+   Tycho, Valles Marineris) and back.
 2. **More galaxies and star systems from data**: real nearby stars from an open catalog (ESA Gaia
    data is CC BY-SA 3.0 IGO: allowed per asset with its notice), and galaxies from open telescope
    images (ESA/Hubble and ESA/Webb images are CC BY 4.0) given depth honestly (say what is guessed).
@@ -49,10 +49,43 @@ for a long job, schedule a check-in with send_later instead of going idle.
 
 ## State
 
-WORKING (October 5, 2026): lane started; reading the engine and gathering the planetary maps.
+WORKING (October 5, 2026): item 1, the real worlds. Built: the Moon, Mars, Mercury and Venus as labs
+toys (`real-moon`, `real-mars`, `real-mercury`, `real-venus`); Earth's maps are being cut. Next:
+Earth, clips on Effect review page 2, then the big moons (Io, Europa, Ganymede, Callisto, Titan) and
+the small worlds (Pluto, Ceres, Vesta), then items 2 (stars and galaxies) and 3 (rockets).
 
 ## Notes
 
+- **How a real world is built.** `tools/sp2-maps.mjs` streams each world's color and elevation maps
+  from NASA, USGS and NOAA (big uncompressed GeoTIFFs are read a block of rows at a time with HTTP
+  range requests, `tools/sp2-tiff.mjs`; nothing big is stored) and writes small maps in
+  `assets/toys/real-worlds/`: a 2048 × 1024 color JPEG, a 1024 × 512 height file (SPH1: int16,
+  plane-predicted, deflated; `src/space/maps.js` reads it with `DecompressionStream`), and a sharper
+  512² patch of both round each named feature. The recipe (`src/packs/space-r2.js`) lays splats on a
+  golden spiral over the globe and denser on each patch, at true height, each a disc lying on its
+  ground with its ground's normal packed in its anim values.
+- **The GPU program** (`src/space/field.js`, labs only, through `gpuField`): turns the world (spin,
+  then a tilt that brings a feature to the middle), lifts each splat by the relief's exaggeration,
+  tips its normal to match, stretches its disc up the slope, and lights it from a sun the Sun slider
+  moves. The far side is hidden. The globe is also kit part 1 with the same turn, and the drive asks
+  for `out.resortPose` whenever the turn moves 1.5°, so WebGL2's CPU sort stays right.
+- **The fly**: a tap turns the next feature to face the viewer and glides the camera to it with
+  `out.view` (the recipe has a `focus` that takes no double-tap, which is what lets `out.view`
+  work), shows its name lying on the ground, and comes back. Close up, the exaggeration eases to at
+  most ×2 (×10 hides the ground round a tall crater wall).
+- **For the Arcade lane** (lander, snake): `import { loadWorld } from "../space/maps.js"`;
+  `await loadWorld("moon")` gives `height(lat, lon)` in meters, `color(lat, lon)` (0..1),
+  `night(lat, lon)` and `def` (radius, day, features, credits) from `src/space/worlds.js`. Credit
+  the maps with `def.credits`.
+- **Splats with opacity 1** decode to infinite colors in the work buffer: the recipe caps opacity at
+  0.99.
+- `tools/sp2-clip.mjs` is `tools/effect-clip.mjs` with labs on and the camera left free after the
+  tap (effect-clip puts it home every frame, which hides the fly).
+
 ## Known issues
 
+- The lighting shades every slope but casts no shadows.
+
 ## For the Operator
+
+Nothing yet.

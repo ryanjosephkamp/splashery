@@ -2449,6 +2449,41 @@
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
+    },
+    "real-moon": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Moon as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's landing site) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-mars": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Mars as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and Gale crater) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-earth": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Earth as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-mercury": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Mercury as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-venus": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Venus as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis Corona) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
     }
   }
 }

@@ -1162,6 +1162,59 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.9, roll: 0, distance: 3.5 },
   },
 
+  // ---- Pack: space-r2 (lane Space r2) ----
+  {
+    id: "real-moon",
+    label: "The real Moon",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "moon lunar lro lola nasa real map elevation relief craters tycho copernicus apollo",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-mars",
+    label: "The real Mars",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "mars red planet viking mola nasa usgs real map elevation relief olympus mons valles marineris gale curiosity",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-earth",
+    label: "The real Earth",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "earth world globe blue marble etopo nasa noaa real map elevation relief night lights everest himalaya grand canyon hawaii",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-mercury",
+    label: "The real Mercury",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "mercury planet messenger nasa usgs real map elevation relief caloris rachmaninoff hokusai craters",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-venus",
+    label: "The real Venus",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "venus planet magellan radar nasa usgs real map elevation relief maxwell montes maat mons artemis corona",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  // ---- End of pack: space-r2 ----
+
   // ---- Pack: tiny ----
   // (entries for src/packs/tiny.js go here)
   {
