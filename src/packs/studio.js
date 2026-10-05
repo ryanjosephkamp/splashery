@@ -303,7 +303,7 @@ const CHLADNI = {
       { render: () => songTransport(chladniTransport) },
       { kind: "mic", rebuild: false, status: singStatus },
     ],
-    note: "Tap “Use my microphone” and sing a steady note, or open a song or any sound file. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest the note rings, and the sand settles into its figure. Change the note and another mode takes over, with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, drives it as it plays; the file stays on your device.",
+    note: "Tap “Use my microphone” and sing a steady note, or open a song or any sound file. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest the note rings, and the sand sets off for its figure at once. Change the note and it moves on to the next figure; when the sound stops it stays put. A song's strongest pitch, moved by octaves into the plate's range, drives it as it plays; the file stays on your device.",
   },
   drive(t, c, out, info) {
     const g = info?.data?.chladni;
@@ -1396,7 +1396,7 @@ function modesFor(hz, loud, chosen) {
     const key = m.n * m.n + m.m * m.m;
     if (seen.has(key)) continue;
     seen.add(key);
-    const pick = MODES.find((q) => q.n === m.n && q.m === m.m && q.s === chosen.s && q.n * q.n + q.m * q.m === key && chosen.n === q.n && chosen.m === q.m) || MODES.find((q) => q.n * q.n + q.m * q.m === key && q.s > 0) || m; // prettier-ignore
+    const pick = chosen.n === m.n && chosen.m === m.m ? chosen : MODES.find((q) => q.n === m.n && q.m === m.m && q.s > 0) || m; // prettier-ignore
     const x = (1200 * Math.log2(hz / singFreq(pick))) / SING_WIDTH;
     const a = loud / (1 + x * x);
     if (a > 0.02) out.push({ mode: pick, a });
@@ -1446,7 +1446,13 @@ export const chladniFileState = () => ({
 });
 
 // Live r7: the sand, for the tests: how many grains, and whether they move.
-export const chladniSand = () => ({ n: SAND.sand?.n ?? 0, moving: !!SAND.sand?.moving, steps: SAND.sand?.steps ?? 0, x0: SAND.sand?.X[0] ?? null, y0: SAND.sand?.Y[0] ?? null }); // prettier-ignore
+export const chladniSand = () => ({
+  n: SAND.sand?.n ?? 0,
+  moving: !!SAND.sand?.moving,
+  steps: SAND.sand?.steps ?? 0,
+  at: SAND.sand ? Array.from(SAND.sand.X.subarray(0, 50)).concat(Array.from(SAND.sand.Y.subarray(0, 50))) : [], // prettier-ignore
+  amps: Object.fromEntries([...CH.amp].map(([k, v]) => [k, v.a])), // each driven mode's strength
+});
 
 // Into the plate's range, by octaves (60 to 400 Hz).
 export function foldHz(hz) {

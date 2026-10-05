@@ -264,12 +264,86 @@ test.describe("the Song landscape grows with the song", () => {
   });
 });
 
-// ---- The Chladni plate's bow ----------------------------------------------------------
+// ---- The Chladni plate: live sand, and the bow only for a tap ------------------------
+// The owner's report of October 5, 2026: with his own audio or the
+// microphone the bow kept coming back every five or six seconds, and the
+// sand waited, then started over, at each change of note.
 
-test.describe("the Chladni plate's bow", () => {
+const RATE = 48000;
+// Notes one after another ([hz, seconds]), as an instrument plays them, as a
+// 16-bit mono WAV.
+function toneWav(file, notes) {
+  const n = Math.round(RATE * notes.reduce((a, [, d]) => a + d, 0));
+  const b = Buffer.alloc(44 + n * 2);
+  b.write("RIFF", 0);
+  b.writeUInt32LE(36 + n * 2, 4);
+  b.write("WAVEfmt ", 8);
+  b.writeUInt32LE(16, 16);
+  b.writeUInt16LE(1, 20);
+  b.writeUInt16LE(1, 22);
+  b.writeUInt32LE(RATE, 24);
+  b.writeUInt32LE(RATE * 2, 28);
+  b.writeUInt16LE(2, 32);
+  b.writeUInt16LE(16, 34);
+  b.write("data", 36);
+  b.writeUInt32LE(n * 2, 40);
+  let at = 0;
+  let ph = 0;
+  for (const [hz, d] of notes) {
+    const m = Math.round(RATE * d);
+    for (let i = 0; i < m; i++) {
+      const t = i / RATE;
+      const env = Math.min(1, t / 0.02, (d - t) / 0.02);
+      ph += (2 * Math.PI * hz * 2 ** ((10 * Math.sin(2 * Math.PI * 5 * t)) / 1200)) / RATE;
+      const v = env * (0.3 * Math.sin(ph) + 0.12 * Math.sin(2 * ph) + 0.05 * Math.sin(3 * ph));
+      b.writeInt16LE(Math.round(v * 32767), 44 + (at + i) * 2);
+    }
+    at += m;
+  }
+  fs.writeFileSync(file, b);
+  return file;
+}
+// G3 (the 195 Hz mode), F♯4 (375 Hz), C4 (255 Hz), G3 again: 6 s each.
+const STEPS = [
+  [196, 6],
+  [370, 6],
+  [262, 6],
+  [196, 6],
+];
+
+const studio = "/src/packs/studio.js";
+const plateReady = (page) =>
+  page.waitForFunction(() => window.__splashery.player.scene.toy.id === "chladni-plate" && window.__splashery.player.motion.recipe && document.getElementById("progress").hidden, null, { timeout: 120_000 }); // prettier-ignore
+
+// A log of every frame: the bow shown (its part, and its fade channel), the
+// plate's builds, the audio's clock and the modes' strengths.
+async function logFrames(page) {
+  await page.evaluate(async (m) => {
+    const st = await import(m);
+    window.__log = [];
+    const tick = () => {
+      const out = window.__splashery.player.motion.out;
+      const f = st.chladniFileState();
+      window.__log.push({
+        t: performance.now(),
+        bow: (out?.parts?.bow?.visible ?? 0) > 0 || (out?.morph?.[1] ?? 0) > 0,
+        builds: f.builds,
+        pos: f.pos,
+        playing: f.playing,
+        amps: st.chladniSand().amps,
+        steps: st.chladniSand().steps,
+      });
+      requestAnimationFrame(tick);
+    };
+    tick();
+  }, studio);
+}
+const takeLog = (page) => page.evaluate(() => window.__log.splice(0));
+
+test.describe("the Chladni plate", () => {
   test.describe.configure({ timeout: 300_000 });
 
-  test("the bow shows only while a tap moves the sand: not when the tone (mode) changes", async ({
+  test("a tap bows the plate (the bow shows while it moves the sand) and nothing else does, not a change of mode", async ({
     page,
   }) => {
     const errors = [];
@@ -278,45 +352,131 @@ test.describe("the Chladni plate's bow", () => {
     await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("chladni-plate"));
-    const ready = () =>
-      page.waitForFunction(() => window.__splashery.player.scene.toy.id === "chladni-plate" && window.__splashery.player.motion.recipe && document.getElementById("progress").hidden, null, { timeout: 120_000 }); // prettier-ignore
-    await ready();
-    // A log of each frame: the bow shown or not, and how far the sand has gone.
-    await page.evaluate(() => {
-      window.__bowLog = [];
-      const tick = () => {
-        const out = window.__splashery.player.motion.out;
-        window.__bowLog.push({ bow: (out?.parts?.bow?.visible ?? 0) > 0, mode: window.__splashery.player.scene.toy.options?.mode ?? "2-3+" }); // prettier-ignore
-        window.__bowRaf = requestAnimationFrame(tick);
-      };
-      tick();
-    });
-    const take = () => page.evaluate(() => window.__bowLog.splice(0));
+    await plateReady(page);
+    await logFrames(page);
     // At rest: no bow.
     await page.waitForTimeout(1000);
-    expect((await take()).some((f) => f.bow)).toBe(false);
-    // A tap bows: the bow shows while the sand moves, and goes once it has settled.
+    expect((await takeLog(page)).some((f) => f.bow)).toBe(false);
+    // A tap bows: the bow shows while the sand moves, and goes once it has
+    // settled.
     await page.evaluate(() => window.__splashery.app.act());
     let bowed = [];
     for (let k = 0; k < 60; k++) {
       await page.waitForTimeout(1000);
-      bowed = bowed.concat(await take());
+      bowed = bowed.concat(await takeLog(page));
       if (bowed.length > 5 && !bowed.slice(-5).some((f) => f.bow)) break;
     }
     expect(bowed.some((f) => f.bow)).toBe(true);
-    expect(bowed.slice(-5).some((f) => f.bow)).toBe(false); // settled: the bow has gone
-    // Change the tone (another mode): the plate rebuilds with no bow.
+    expect(bowed.slice(-5).some((f) => f.bow)).toBe(false);
+    expect((await page.evaluate(async (m) => (await import(m)).singState(), studio)).p).toBeGreaterThan(0.5); // prettier-ignore
+    // Change the mode: the plate rebuilds with no bow.
     for (const mode of ["3-4+", "1-2+"]) {
       await page.evaluate((mode) => window.__splashery.app.setToyOptions({ mode }), mode);
-      await ready();
-      await page.waitForTimeout(3000);
-      expect((await take()).some((f) => f.bow)).toBe(false);
+      await plateReady(page);
+      await page.waitForTimeout(2500);
+      expect((await takeLog(page)).some((f) => f.bow)).toBe(false);
     }
     // A tap on the new plate bows it again.
     await page.evaluate(() => window.__splashery.app.act());
     await page.waitForTimeout(1500);
-    expect((await take()).some((f) => f.bow)).toBe(true);
+    expect((await takeLog(page)).some((f) => f.bow)).toBe(true);
     expect(errors).toEqual([]);
+  });
+
+  test("your audio: no bow ever, no new plate, the sand sets off for each new note at once and holds when it stops", async ({
+    page,
+  }) => {
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.evaluate(() => window.__splashery.app.chooseToy("chladni-plate"));
+    await plateReady(page);
+    await page.setInputFiles("#toy-input-file", toneWav(path.join(DIR, "steps.wav"), STEPS));
+    for (let k = 0; k < 240; k++) {
+      const f = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
+      if (f.name && f.measured >= 1) break;
+      await page.waitForTimeout(250);
+    }
+    await plateReady(page);
+    if (!(await page.evaluate(async (m) => (await import(m)).chladniFileState().playing, studio)))
+      await page.evaluate(() => document.getElementById("chladni-play").click());
+    await logFrames(page);
+    // Play it through the first three notes and into the fourth.
+    for (let k = 0; k < 90; k++) {
+      await page.waitForTimeout(500);
+      if ((await page.evaluate(async (m) => (await import(m)).chladniFileState().pos, studio)) > 19.5) break; // prettier-ignore
+    }
+    const log = await takeLog(page);
+    // Never a bow, and never a new plate.
+    expect(log.filter((f) => f.bow).length).toBe(0);
+    expect(new Set(log.map((f) => f.builds)).size).toBe(1);
+    // Each new note drives its mode within about 100 ms of the audio clock
+    // reaching it (the analysis' 40 ms frames, and the frames this software
+    // renderer draws): 375 Hz (3, 4) after 6 s, 255 Hz after 12 s.
+    for (const [at, mode] of [
+      [6, "3-4+"],
+      [12, "1-4-"],
+    ]) {
+      const first = log.find((f) => f.pos >= at && (f.amps[mode] ?? 0) > 0.2);
+      expect(first, `${mode} driven after ${at} s`).toBeTruthy();
+      // The frame before it, to allow for a slow frame here.
+      const i = log.indexOf(first);
+      const before = log[i - 1];
+      expect(Math.min(first.pos, Math.max(at, before?.pos ?? at)) - at).toBeLessThan(0.15);
+    }
+    // The sand moved on every frame while the audio played.
+    const playing = log.filter((f) => f.playing);
+    expect(playing[playing.length - 1].steps - playing[0].steps).toBeGreaterThan(
+      playing.length * 0.8,
+    );
+    // Pause: the sand holds where it is.
+    await page.evaluate(() => document.getElementById("chladni-play").click());
+    await page.waitForTimeout(600);
+    const a = await page.evaluate(async (m) => (await import(m)).chladniSand().at, studio);
+    await page.waitForTimeout(1500);
+    const b = await page.evaluate(async (m) => (await import(m)).chladniSand().at, studio);
+    expect(b).toEqual(a);
+    expect((await takeLog(page)).some((f) => f.bow)).toBe(false);
+    expect(errors).toEqual([]);
+  });
+
+  test("the microphone: no bow ever, and no new plate, through a run of notes", async ({
+    playwright,
+    baseURL,
+  }) => {
+    const wav = toneWav(path.join(DIR, "sung.wav"), STEPS.slice(0, 3));
+    const browser = await playwright.chromium.launch({
+      ...config.use.launchOptions,
+      args: [...config.use.launchOptions.args, "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream", `--use-file-for-fake-audio-capture=${wav}`], // prettier-ignore
+    });
+    try {
+      const page = await browser.newPage({ baseURL, viewport: { width: 390, height: 844 } });
+      const errors = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
+      await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+      await page.evaluate(() => window.__splashery.app.chooseToy("chladni-plate"));
+      await plateReady(page);
+      await logFrames(page);
+      await page.evaluate(() => document.getElementById("live-mic").click());
+      // Until the sand has settled on the 375 Hz figure (F♯4).
+      for (let k = 0; k < 120; k++) {
+        await page.waitForTimeout(500);
+        const s = await page.evaluate(async (m) => (await import(m)).singState(), studio);
+        if (s.lead?.startsWith("3-4") && s.p > 0.3) break;
+      }
+      await page.evaluate(() => document.getElementById("live-mic").click());
+      await page.waitForTimeout(1500);
+      const log = await takeLog(page);
+      expect(log.filter((f) => f.bow).length).toBe(0);
+      expect(new Set(log.map((f) => f.builds)).size).toBe(1);
+      expect((await page.evaluate(async (m) => (await import(m)).singState(), studio)).lead).toMatch(/^3-4/); // prettier-ignore
+      expect(errors).toEqual([]);
+    } finally {
+      await browser.close();
+    }
   });
 });
 

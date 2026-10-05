@@ -58,9 +58,9 @@ Proposals below are suggestions; the owner may change them.
   Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to
+  splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2782,6 +2782,11 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
   - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
     to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
+  - Improved: Live r7 (the owner's report of October 5, 2026): the sand moves live, every grain on
+    every frame. With your audio or the microphone the plate's modes ring as strongly as the sound
+    drives them, so a new note sets the sand off for its figure at once, from where it lies (no new
+    plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio
+    open.
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
