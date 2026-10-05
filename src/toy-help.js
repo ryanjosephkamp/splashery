@@ -736,6 +736,13 @@ export const TOY_HELP = {
       "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
   },
 
+  // Lane Molecule viewer (labs).
+  "molecule-viewer": {
+    howTo: "Tap two atoms for their distance, a third for the angle.",
+    about:
+      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank, small molecules as SDF, MOL or XYZ files. This viewer draws every atom of such a file with splats, in the usual colors: carbon gray, oxygen red, nitrogen blue.\n\nPick a sample, open your own file, or type a PDB code such as 1MBN and press Fetch in the Toy tab; the entry is read only when you ask, and its title, authors and fetch time show beside it. Draw it as a cartoon, balls and sticks, space-filling atoms or a smooth surface, colored by element, chain, residue or B-factor. Tap two atoms for the distance between their centers in ångströms, a third for the angle in degrees. Positions are an experiment's best fit, not a photograph.",
+  },
+
   // ---- Gems -----------------------------------------------------------------------------
   diamond: {
     howTo: "Tap it to turn it in the light and flash its fire.",
@@ -2069,6 +2076,12 @@ export const TOY_HELP = {
     howTo: "Tap it for a gust of wind that spins the sails hard.",
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
+  },
+  // Lane Night sky.
+  "night-sky": {
+    howTo: "Drag to look around the sky. Tap a star or a planet to name it.",
+    about:
+      "The sky over a place at a moment: about 5,000 stars down to magnitude 6, the faintest you can see from a dark place, each sized by its brightness and colored by its temperature. The Sun, the Moon and the planets are placed by JPL's formulas for their orbits, and the Moon is a small ball lit from the Sun's side, so you see its real phase. As the Sun rises the faint stars go out first.\n\nPick a city in the Toy tab, type a latitude and longitude, or tap “Use my location” (your browser asks first; the place stays on your device). Set a date from 1800 to 2050, or speed time up to watch the sky turn. The Sun and the Moon are drawn three times their real size.",
   },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {

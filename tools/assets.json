@@ -2177,6 +2177,17 @@
       "license": "CC BY 4.0",
       "checked": "September 30, 2026",
       "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
+    },
+    {
+      "id": "night-sky-catalog",
+      "file": "assets/toys/night-sky/sky.json",
+      "toy": "night-sky",
+      "name": "HYG database v4.1 (stars to magnitude 6) and the Stellarium Western sky culture's constellation lines",
+      "author": "David Nash (astronexus.com); the Stellarium team",
+      "page": "https://github.com/astronexus/HYG-Database",
+      "license": "CC BY-SA 4.0",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/sky-catalog.mjs: 5,071 stars (every star to magnitude 6.0 plus the fainter ones a line needs) and 674 line segments (Stellarium commit 014fbb5e59; its data license reads \"CC BY-SA\", no version, credited as 4.0). The joined file stays CC BY-SA 4.0."
     }
   ],
   "dataClimateSamples": [
@@ -3330,6 +3341,63 @@
       "license": "Public domain",
       "checked": "October 5, 2026",
       "note": "From the Commons file \"EinsteiniumGlow.JPG\". Cut out of its background, reduced to 256 x 256 (and 64 x 64 in tiles.jpg), with its depth from Depth Anything V2 Small, by tools/rel-samples.mjs."
+    }
+  ],
+  "moleculeViewerSamples": [
+    {
+      "id": "molview-1crn",
+      "file": "assets/toys/molecule-viewer/1crn.cif",
+      "toy": "molecule-viewer",
+      "name": "Crambin, PDB 1CRN",
+      "author": "W. A. Hendrickson, M. M. Teeter",
+      "page": "https://www.rcsb.org/structure/1CRN",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-1ema",
+      "file": "assets/toys/molecule-viewer/1ema.cif",
+      "toy": "molecule-viewer",
+      "name": "Green fluorescent protein, PDB 1EMA",
+      "author": "M. Ormö, S. J. Remington",
+      "page": "https://www.rcsb.org/structure/1EMA",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-1lyz",
+      "file": "assets/toys/molecule-viewer/1lyz.cif",
+      "toy": "molecule-viewer",
+      "name": "Hen egg-white lysozyme, PDB 1LYZ",
+      "author": "R. Diamond, D. C. Phillips, C. C. F. Blake, A. C. T. North",
+      "page": "https://www.rcsb.org/structure/1LYZ",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-1bna",
+      "file": "assets/toys/molecule-viewer/1bna.cif",
+      "toy": "molecule-viewer",
+      "name": "B-DNA dodecamer, PDB 1BNA",
+      "author": "H. R. Drew, R. M. Wing, T. Takano, C. Broka, S. Tanaka, K. Itakura, R. E. Dickerson",
+      "page": "https://www.rcsb.org/structure/1BNA",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The entry's mmCIF file, unchanged. Fetched from files.rcsb.org on October 5, 2026."
+    },
+    {
+      "id": "molview-caffeine-cff-ideal",
+      "file": "assets/toys/molecule-viewer/caffeine-cff-ideal.sdf",
+      "toy": "molecule-viewer",
+      "name": "Caffeine, PDB Chemical Component Dictionary CFF (ideal coordinates)",
+      "author": "wwPDB Chemical Component Dictionary",
+      "page": "https://www.rcsb.org/ligand/CFF",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CFF_ideal.sdf from files.rcsb.org, unchanged. Fetched from files.rcsb.org on October 5, 2026."
     }
   ]
 }

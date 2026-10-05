@@ -653,6 +653,34 @@ checked on the live source page on September 30, 2026.
 
 Files people open in these toys are read in their browser and never uploaded.
 
+## Night sky (lane Night sky)
+
+The catalog snapshot `assets/toys/night-sky/sky.json` (made by `tools/sky-catalog.mjs`) joins two CC
+BY-SA sources, so it is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) too, and the
+toy's About tab says so.
+
+- Stars: the [HYG database](https://github.com/astronexus/HYG-Database) v4.1 by David Nash
+  (astronexus.com), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live
+  LICENSE file, checked October 5, 2026). Every star to magnitude 6.0 and the fainter stars a
+  constellation line needs (5,071), with position, magnitude, B−V color, distance, spectral type and
+  names.
+- Constellation lines: the Stellarium team's
+  [Western sky culture](https://github.com/Stellarium/stellarium-skycultures/tree/master/western)
+  (commit 014fbb5e59, May 26, 2026). Its description's license section reads "Text and data: CC
+  BY-SA" (no version given; credited here as 4.0) and "Illustrations: Free Art License"; only the
+  line data (pairs of Hipparcos numbers, 674 segments in the 88 constellations) is used, never the
+  illustrations.
+- Planet, Sun and Moon positions are computed in the browser from published formulas: E. M.
+  Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (JPL Solar System Dynamics, Table 1), the Astronomical Almanac's low-precision lunar series, and
+  Jean Meeus, _Astronomical Algorithms_ (2nd ed., 1998) for sidereal time, precession and planet
+  magnitudes. The tests compare them with values recorded from
+  [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) (`tools/sky-horizons.mjs`, build time only).
+
+The place the toy shows is never saved or sent: a city's coordinates are built in, and "Use my
+location" keeps the browser's answer in memory only.
+
 ## Data and climate (lane Data and climate)
 
 The Data in 3D toy (Studio) and the Climate records toy (Science) ship dated snapshots and never
@@ -710,6 +738,32 @@ the spectrometer's sample picture are made by the page. Their data:
   `tools/img-walnut.mjs`.
 - The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
   recipes.
+
+## Molecule viewer (lane Molecule viewer)
+
+The Molecule viewer (labs) ships a snapshot of five entries from the Protein Data Bank, fetched from
+files.rcsb.org on October 5, 2026, unchanged. PDB data are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+[wwPDB usage policy](https://www.wwpdb.org/about/usage-policies) (checked on the live page October
+5, 2026: "Data files contained in the PDB archive are available under the CC0 1.0 Universal (CC0
+1.0) Public Domain Dedication"); as it encourages, each entry and its authors are cited:
+
+- Crambin, [PDB 1CRN](https://www.rcsb.org/structure/1CRN), deposited by W. A. Hendrickson and M. M.
+  Teeter; M. M. Teeter, "Water structure of a hydrophobic protein at atomic resolution", PNAS 81,
+  6014 (1984).
+- Green fluorescent protein, [PDB 1EMA](https://www.rcsb.org/structure/1EMA), deposited by M. Ormö
+  and S. J. Remington; M. Ormö, A. B. Cubitt, K. Kallio, L. A. Gross, R. Y. Tsien and S. J.
+  Remington, Science 273, 1392 (1996).
+- Hen egg-white lysozyme, [PDB 1LYZ](https://www.rcsb.org/structure/1LYZ), deposited by R. Diamond,
+  D. C. Phillips, C. C. F. Blake and A. C. T. North; R. Diamond, J. Mol. Biol. 82, 371 (1974).
+- B-DNA dodecamer, [PDB 1BNA](https://www.rcsb.org/structure/1BNA): H. R. Drew, R. M. Wing, T.
+  Takano, C. Broka, S. Tanaka, K. Itakura and R. E. Dickerson, PNAS 78, 2179 (1981).
+- Caffeine, [Chemical Component CFF](https://www.rcsb.org/ligand/CFF): the ideal coordinates of the
+  wwPDB Chemical Component Dictionary (part of the PDB archive, CC0).
+
+An entry fetched by its code is read from RCSB when the person asks and is never stored; its title,
+authors and the time of the fetch show beside it, with the CC0 notice. Files people open are read in
+their browser and never uploaded.
 
 ## Worlds
 
