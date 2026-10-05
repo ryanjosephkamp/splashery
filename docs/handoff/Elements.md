@@ -11,7 +11,8 @@ start it with this brief, word for word, under "## Brief", then keep "## State
 
 WORKING (October 5, 2026): the toy is built and pushed (labs, Atoms shelf): 91 real samples, 27
 honest placeholders, facts with cited uses, evidence file and tests (`tests/rel.spec.mjs`, 25 pass).
-Next: clips on Effect review page 2, then polish from the marks.
+Clips posted on Effect review page 2 (lane record `Elements`: bismuth, copper, neon, oganesson).
+Next: the owner's marks.
 
 - Weight: the table loads `tiles.jpg` + `tiles.png` (about 0.26 MB) and the code; each lifted sample
   adds its own `<z>.jpg` + `<z>.png` (about 30 KB). All of `assets/toys/real-elements/` is 2.85 MB
@@ -93,4 +94,10 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 ## For the Operator
 
-- Nothing yet.
+- Ready for the full test run and a labs merge. I ran `tests/rel.spec.mjs` (25 pass),
+  `tests/help.spec.mjs`, `tests/kit.spec.mjs` and the toy's row of `tests/taps.spec.mjs`; not the
+  full suite (the "embed transfer" test measures a captured toy's embed, which this lazy pack
+  doesn't touch).
+- Thorium, actinium and curium have no tile photo: the only photos found are FAL-only (thorium,
+  Alchemist-hp), all rights reserved (actinium, Los Alamos) or EU copyright not confirmed open
+  (curium, JRC). If the owner wants them, a CC BY or CC0 photo is the unblocker.
