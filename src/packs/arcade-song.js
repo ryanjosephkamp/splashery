@@ -191,7 +191,9 @@ class NoteRider {
     if (sw === "down" || sw === "left") r.lane = Math.max(0, r.lane - 1);
     // A finger held on the track picks the lane under it.
     const ptr = ctl.input.pointer;
-    if (ptr?.down && ptr.kind !== "mouse") r.lane = this.view > 0.5 ? (ptr.x < 0.36 ? 0 : ptr.x > 0.64 ? 2 : 1) : ptr.y > 0.62 ? 0 : ptr.y < 0.42 ? 2 : 1; // prettier-ignore
+    // (side by side lanes in 3D and in a tall 2D view; stacked in a wide one)
+    const across = this.view > 0.5 || this.tall;
+    if (ptr?.down && ptr.kind !== "mouse") r.lane = across ? (ptr.x < 0.36 ? 0 : ptr.x > 0.64 ? 2 : 1) : ptr.y > 0.62 ? 0 : ptr.y < 0.42 ? 2 : 1; // prettier-ignore
     if (ctl.demo) {
       // the attract mode moves to the next note's lane
       const next = this.notes.find((n) => !n.got && !n.gone && n.t > this.t - HIT);
@@ -221,9 +223,13 @@ class NoteRider {
 
   // Where a note (or the rider) is, for a time ahead of now and a lane.
   place(ahead, lane, view) {
-    // 2D: across (x) by time, up (y) by lane. 3D: away (−z) by time, across
-    // (x) by lane, on a road (y fixed).
-    const p2 = [-0.55 + ahead * SPEED, (lane - 1) * LANE_GAP, 0];
+    // 2D, wide: across (x) by time, up (y) by lane. 2D, tall (a phone held
+    // upright): the lanes side by side (x), the notes falling (y) to a catch
+    // line near the bottom. 3D: away (−z) by time, across (x) by lane, on a
+    // road (y fixed).
+    const p2 = this.tall
+      ? [(lane - 1) * LANE_GAP, -0.6 + ahead * SPEED, 0]
+      : [-0.55 + ahead * SPEED, (lane - 1) * LANE_GAP, 0];
     const p3 = [(lane - 1) * LANE_GAP, -0.25, 0.6 - ahead * SPEED];
     return [lerp(p2[0], p3[0], view), lerp(p2[1], p3[1], view), lerp(p2[2], p3[2], view)];
   }
@@ -234,7 +240,10 @@ class NoteRider {
     this.view = view;
     const S = this.api.sprites;
     const q = this.q;
-    const flat = q.qslerp([0, 0, 0, 1], ROAD, view); // the track's turn
+    this.tall = this.api.aspect() < 1;
+    // the track's turn: its length along time (up the screen when tall)
+    const flat2 = this.tall ? q.qaxis([0, 0, 1], Math.PI / 2) : [0, 0, 0, 1];
+    const flat = q.qslerp(flat2, ROAD, view);
     const up = q.qrot(flat, [0, 0, 1]); // its face's normal
     const along = (p, d) => [p[0] + up[0] * d, p[1] + up[1] * d, p[2] + up[2] * d];
     this.lanes.forEach((s, lane) => {
@@ -252,7 +261,7 @@ class NoteRider {
     const r = this.rider;
     r.shown += (r.lane - r.shown) * Math.min(1, (frameDt || 0) * 14);
     r.sprite.pos = along(this.place(-0.06, r.shown, view), 0.055);
-    r.sprite.quat = q.qaxis([0, 1, 0], (Math.PI / 2) * view);
+    r.sprite.quat = q.qslerp(this.tall ? q.qaxis([0, 0, 1], Math.PI / 2) : [0, 0, 0, 1], q.qaxis([0, 1, 0], Math.PI / 2), view); // prettier-ignore
     // The notes in view: added as they come near, gone once past. A gem
     // stands just off the track (up off the road in 3D), its tail lies on it.
     const lift = (p) => [p[0], p[1] + 0.06 * view, p[2] + 0.06 * (1 - view)];
@@ -295,9 +304,13 @@ class NoteRider {
   }
 
   camera(view, aspect) {
-    const d2 = this.api.fitDistance(2.6, 1.3, aspect);
+    const tall = aspect < 1;
+    const d2 = tall
+      ? this.api.fitDistance(1.05, 2.75, aspect)
+      : this.api.fitDistance(2.6, 1.3, aspect);
+    const t2 = tall ? [0, 0.5, 0] : [0.55, 0, 0];
     return {
-      target: [lerp(0.55, 0, view), lerp(0, -0.2, view), lerp(0, -0.4, view)],
+      target: [lerp(t2[0], 0, view), lerp(t2[1], -0.2, view), lerp(t2[2], -0.4, view)],
       yaw: 0,
       pitch: lerp(0, 0.35, view),
       distance: lerp(d2, 2.2, view),

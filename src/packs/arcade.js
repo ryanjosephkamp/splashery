@@ -803,12 +803,13 @@ export const RECIPES = {
       ],
       best: "score",
       views: true,
-      pad: ["down", "up"],
+      // (on a phone held upright the lanes run side by side: ◀ ▶)
+      pad: ["left", "right"],
       controls: {
-        keys: "↑ ↓ (or W, S, or ← → in 3D) change lanes.",
-        touch: "Swipe up or down, or hold a finger on a lane.",
+        keys: "← → or ↑ ↓ (or A, D, W, S) change lanes.",
+        touch: "Swipe left or right, or hold a finger on a lane.",
         pad: "Stick or D-pad changes lanes.",
-        short: "↑ ↓ change lanes · V turns the track into a road",
+        short: "← → change lanes · V turns the track into a road",
       },
       create: async (api) => (await import("./arcade-song.js")).createSong(api),
     },
