@@ -2263,6 +2263,20 @@
       "sound": "Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it comes back.",
       "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral)."
     },
+    "ripple-tank": {
+      "v": "keep",
+      "owner": "Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane Optics; labs only).",
+      "effect": "A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the beaches. Bars on the back wall graph the waves' strength.",
+      "sound": "The pebble's plop as it lands, and the soft lap of its rings.",
+      "improved": "Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave speed and the beaches (docs/evidence/ripple-tank.json)."
+    },
+    "light-bench": {
+      "v": "keep",
+      "owner": "Push Plan S9 (yes), October 5, 2026: a light bench with rays traced through real glass (lane Optics; labs only).",
+      "effect": "Rays as thin bright splat lines on a dark bench, traced with Snell's law through parts you drag and turn: a prism that fans white light into its colors on a screen, a lens with the image the lens equation predicts, a flat and a curved mirror, a glass block and a light guide that traps light by total internal reflection. The tap changes the light (white, red, green, blue).",
+      "sound": "The lamp's switch clicks.",
+      "improved": "Optics: new toy (labs). N-BK7 and N-SF11 from Schott's Sellmeier coefficients; the numbers in the Toy tab; tests check Snell's law, the lens equation, the prism's deviation, a mirror's focus and the guide's acceptance angle (docs/evidence/light-bench.json)."
+    },
     "fluid-lab": {
       "v": "keep",
       "owner": "The owner's notes on the water bottle and soda can of September 29, 2026 (\"a realistic fluid splat simulator\"; lane Fluids; labs only).",

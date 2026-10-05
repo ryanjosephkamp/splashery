@@ -1,0 +1,117 @@
+{
+  "toy": "light-bench",
+  "checked": "2026-10-05",
+  "summary": "The light bench traces rays through real surfaces: at each one a ray bends by Snell's law or reflects, with the glass's refractive index from its published Sellmeier formula. The lens equation's image distance, the prism's deviation and a light guide's acceptance angle are checked against the traced rays. The bench is flat, white light is nine wavelengths, and the weak reflections at glass surfaces are left out.",
+  "claims": [
+    {
+      "claim": "Rays bend by Snell's law, n₁ sin θ₁ = n₂ sin θ₂, and reflect totally past the critical angle.",
+      "how": "Refraction uses the vector form of Snell's law; when it has no solution the ray reflects (total internal reflection).",
+      "where": "src/optics/rays.js:75",
+      "sources": [
+        {
+          "title": "Snell's law",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Snell%27s_law",
+          "says": "n₁ sin θ₁ = n₂ sin θ₂; in vector form v_refract = rℓ + (rc − √(1 − r²(1 − c²)))n with r = n₁/n₂ and c = −n·ℓ; beyond θ_crit = arcsin(n₂/n₁) light is totally reflected."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:218",
+      "note": "Checked at six angles and three wavelengths, to 9 decimal places; the critical angle in its own test."
+    },
+    {
+      "claim": "The glass is Schott N-BK7 and N-SF11, with their published Sellmeier coefficients.",
+      "how": "n² − 1 = Σ Bᵢλ² / (λ² − Cᵢ), with the data sheets' six coefficients for each glass.",
+      "where": "src/optics/rays.js:42",
+      "sources": [
+        {
+          "title": "N-BK7 (SCHOTT optical glass data sheets, 2017)",
+          "publisher": "RefractiveIndex.INFO",
+          "url": "https://refractiveindex.info/?shelf=specs&book=SCHOTT-optical&page=N-BK7",
+          "says": "B₁ = 1.03961212, B₂ = 0.231792344, B₃ = 1.01046945, C₁ = 0.00600069867, C₂ = 0.0200179144, C₃ = 103.560653 (λ in μm); nd = 1.5168."
+        },
+        {
+          "title": "N-SF11 (SCHOTT optical glass data sheets, 2017)",
+          "publisher": "RefractiveIndex.INFO",
+          "url": "https://refractiveindex.info/?shelf=specs&book=SCHOTT-optical&page=N-SF11",
+          "says": "B₁ = 1.73759695, B₂ = 0.313747346, B₃ = 1.89878101, C₁ = 0.013188707, C₂ = 0.0623068142, C₃ = 155.23629; nd = 1.78472."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:205",
+      "note": "nd, nF and nC of N-BK7 to 4 decimal places, and its Abbe number 64.17."
+    },
+    {
+      "claim": "A lens's focal length follows the lensmaker's equation, and its image the lens equation 1/f = 1/d_o + 1/d_i.",
+      "how": "The bench prints f from the thick-lens lensmaker's equation and d_i from the lens equation (measured from the principal planes), beside where the traced rays from the object's foot, close to the axis, really cross.",
+      "where": "src/optics/rays.js:253",
+      "sources": [
+        {
+          "title": "Lens",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lens#Lensmaker's_equation",
+          "says": "1/f = (n − 1)[1/R₁ − 1/R₂ + (n − 1)d/(nR₁R₂)]; and the Gaussian lens formula 1/f = 1/S₁ + 1/S₂ (virtual images have negative S₂)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:247",
+      "note": "For the four lenses at three object distances the traced image is within 0.3% of the formula. Rays far from the axis cross a little off it (spherical aberration and the aberrations of off-axis points), as with real lenses."
+    },
+    {
+      "claim": "A prism deviates light by δ = i + e − A, more for blue than for red, so white light fans out.",
+      "how": "The traced ray's change of direction is compared with the formula from Snell's law at each face, for two glasses, three angles and five wavelengths.",
+      "where": "src/optics/rays.js:297",
+      "sources": [
+        {
+          "title": "Minimum deviation",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Minimum_deviation",
+          "says": "δ = i + e − A; at minimum deviation n = sin((A + D_m)/2) / sin(A/2), when the ray inside runs parallel to the base."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:279",
+      "note": "Agreement to 1e-9 radian; N-BK7's minimum deviation at 587.6 nm for a 60° prism is 38.65°."
+    },
+    {
+      "claim": "A concave mirror focuses a parallel beam at f = R / 2; a flat mirror reflects at the angle it was hit.",
+      "how": "Rays near the axis are traced off a circular mirror and their crossing with the axis is measured.",
+      "where": "src/optics/rays.js:320",
+      "sources": [
+        {
+          "title": "Focal length",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Focal_length",
+          "says": "For a spherically curved mirror, the magnitude of the focal length is equal to the radius of curvature of the mirror divided by two."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:308",
+      "note": ""
+    },
+    {
+      "claim": "The light guide keeps light inside by total internal reflection, accepting rays up to the angle its numerical aperture gives.",
+      "how": "A core of N-SF11 in a cladding of N-BK7: the critical angle is arcsin(n₂/n₁) and the acceptance half angle arcsin(√(n₁² − n₂²)) in air; rays are traced into a straight guide at angles either side of it.",
+      "where": "src/optics/rays.js:387",
+      "sources": [
+        {
+          "title": "Numerical aperture",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Numerical_aperture",
+          "says": "For a step-index fiber NA = √(n_core² − n_clad²), and n sin θ_max = NA gives the acceptance angle."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:324",
+      "note": "A tight bend lets light out where it meets the wall under the critical angle; the bend radius is an option."
+    }
+  ],
+  "simplified": [
+    "The bench is flat: rays travel in one plane, and lenses and mirrors are their cross sections.",
+    "White light is drawn as nine wavelengths from 410 to 665 nm, and the colors on screen are approximations of the spectral colors.",
+    "The weak reflections at each glass surface (about 4% for N-BK7 face on) are left out; only refraction, mirror reflection and total internal reflection are drawn.",
+    "Air is taken as n = 1.",
+    "The light guide is a thick glass rod with a high-index core (N-SF11 in N-BK7), much wider than a telecom fiber, so its rays can be seen; it works by the same total internal reflection."
+  ],
+  "fixes": []
+}

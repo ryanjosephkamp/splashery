@@ -412,18 +412,23 @@ const RIPPLE = {
     const D = TANK.depth / 10;
     const rows = ny + BAR_K;
     const cell = dx / 10;
-    // The water: one relief splat per cell, lifted along y by its height.
-    const nWater = nx * ny;
-    const nBars = nx * BAR_K;
+    // The water: one relief splat per cell, lifted along y by its height
+    // (on a small budget, one per 2 × 2 cells, reading the texture between
+    // them).
+    const st = (nx * ny + nx * BAR_K) * 1.05 > k.count * 0.85 ? 2 : 1;
+    const mx = Math.floor(nx / st);
+    const my = Math.floor(ny / st);
+    const nWater = mx * my;
+    const nBars = mx * BAR_K;
     k.reach([W / 2 + 0.08, 0.6, D / 2 + 0.08]);
     k.reach([-W / 2 - 0.08, -0.12, -D / 2 - 0.08]);
     k.cloud({ share: (nWater + nBars) / k.count, pattern: false }, (rand, n) => {
       if (n < nWater) {
-        const i = n % nx;
-        const j = Math.floor(n / nx);
+        const i = (n % mx) * st + (st - 1) / 2;
+        const j = Math.floor(n / mx) * st + (st - 1) / 2;
         return {
           p: [toX((i + 0.5) * dx), -LIFT / 2, toZ((j + 0.5) * dx)],
-          scales: [cell * 0.62, cell * 0.08, cell * 0.62],
+          scales: [cell * st * 0.62, cell * 0.08, cell * st * 0.62],
           quat: [0, 0, 0, 1],
           color: "#3a7f9a",
           opacity: 1,
@@ -434,13 +439,15 @@ const RIPPLE = {
       }
       const m = n - nWater;
       if (m >= nBars) return null;
-      const i = Math.floor(m / BAR_K);
+      // Bar i (every st-th column), splat s up it: its texel is that column's.
+      const i = Math.floor(m / BAR_K) * st;
       const s = m % BAR_K;
-      const r = ny + Math.floor(m / nx);
-      const col = m % nx;
+      const t = i * BAR_K + s;
+      const r = ny + Math.floor(t / nx);
+      const col = t % nx;
       return {
         p: [toX((i + 0.5) * dx), 0.05 + ((s + 0.5) / BAR_K) * BAR_H, -D / 2 - 0.03],
-        scales: [cell * 0.6, (BAR_H / BAR_K) * 0.55, 0.004],
+        scales: [cell * st * 0.6, (BAR_H / BAR_K) * 0.55, 0.004],
         quat: [0, 0, 0, 1],
         color: "#ffcc66",
         opacity: 1,
@@ -963,9 +970,9 @@ const LIGHT_BENCH = {
   density: 0.8,
   options: [
     { key: "setup", label: "Setup", type: "select", default: "prism", choices: BENCH_SETUPS },
-    { key: "lens", label: "Lens", type: "select", default: "thin", choices: LENSES.map((l) => ({ id: l.id, label: l.label })) }, // prettier-ignore
+    { key: "lens", label: "Lens (Lens and image)", type: "select", default: "thin", choices: LENSES.map((l) => ({ id: l.id, label: l.label })) }, // prettier-ignore
     { key: "light", label: "Light", type: "select", default: "white", choices: LIGHTS.map((l) => ({ id: l.id, label: l.label })) }, // prettier-ignore
-    { key: "bend", label: "Light guide bend radius (cm)", type: "slider", min: 0.25, max: 1.2, step: 0.05, default: 0.7 }, // prettier-ignore
+    { key: "bend", label: "Bend radius, light guide (cm)", type: "slider", min: 2.5, max: 12, step: 0.5, default: 7 }, // prettier-ignore
   ],
   controls: [{ key: "light", label: "Change the light", type: "pulse", ease: 0.3 }],
   action: { key: "light", label: "Change the light" },

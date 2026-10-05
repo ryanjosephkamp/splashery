@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 373 toys. 343 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
+- 375 toys. 345 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 370.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -60,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
   Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Fluid lab, Screen.
+  Galaxy in a box, Ripple tank, Light bench, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2893,7 +2893,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 
-## Science (3)
+## Science (5)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
@@ -2942,3 +2942,27 @@ Proposals below are suggestions; the owner may change them.
     integral).
   - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
     comes back.
+- **Ripple tank** (`ripple-tank`). Now: tap: Drop a pebble. Plan: keep.
+  - Owner: Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane
+    Optics; labs only).
+  - Effect: A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave
+    equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on
+    dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a
+    pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the
+    beaches. Bars on the back wall graph the waves' strength.
+  - Improved: Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing
+    beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave
+    speed and the beaches (docs/evidence/ripple-tank.json).
+  - Sound: The pebble's plop as it lands, and the soft lap of its rings.
+- **Light bench** (`light-bench`). Now: tap: Change the light. Plan: keep.
+  - Owner: Push Plan S9 (yes), October 5, 2026: a light bench with rays traced through real glass
+    (lane Optics; labs only).
+  - Effect: Rays as thin bright splat lines on a dark bench, traced with Snell's law through parts
+    you drag and turn: a prism that fans white light into its colors on a screen, a lens with the
+    image the lens equation predicts, a flat and a curved mirror, a glass block and a light guide
+    that traps light by total internal reflection. The tap changes the light (white, red, green,
+    blue).
+  - Improved: Optics: new toy (labs). N-BK7 and N-SF11 from Schott's Sellmeier coefficients; the
+    numbers in the Toy tab; tests check Snell's law, the lens equation, the prism's deviation, a
+    mirror's focus and the guide's acceptance angle (docs/evidence/light-bench.json).
+  - Sound: The lamp's switch clicks.

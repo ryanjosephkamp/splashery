@@ -85,7 +85,7 @@ export function homeParts(o) {
     case "fiber":
       return [
         { id: "lamp", type: "lamp", pos: [-1.38, -0.62], angle: (9 * Math.PI) / 180, move: "free", turn: true }, // prettier-ignore
-        { id: "fiber", type: "fiber", pos: [-1.0, -0.6], angle: 0, R: Number(o.bend) || 0.7, move: false, turn: false }, // prettier-ignore
+        { id: "fiber", type: "fiber", pos: [-1.0, -0.6], angle: 0, R: (Number(o.bend) || 7) / 10, move: false, turn: false }, // prettier-ignore
       ];
     case "prism":
     default: {

@@ -2,25 +2,16 @@
 
 ## Brief
 
-You are a Splashery worker session, started by the Operator (the coordinating session) for the October push. Repo: ryanjosephkamp/splashery. Your lane: Waves and optics (id `Optics`, prefix `opt`). Branch: `claude/lane-optics` (and `claude/lane-optics-engine` for any change to the app outside your own files, as an "Engine: …" PR merged first). PR title: "Phase Waves and optics: a ripple tank and a light bench". Handoff file: docs/handoff/Optics.md (create it; start it with this brief, word for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "## For the Operator" current). Model: Opus 5.5.
+You are a Splashery worker session, started by the Operator (the coordinating session) for the
+October push. Repo: ryanjosephkamp/splashery. Your lane: Waves and optics (id `Optics`, prefix
+`opt`). Branch: `claude/lane-optics` (and `claude/lane-optics-engine` for any change to the app
+outside your own files, as an "Engine: …" PR merged first). PR title: "Phase Waves and optics: a
+ripple tank and a light bench". Handoff file: docs/handoff/Optics.md (create it; start it with this
+brief, word for word, under "## Brief", then keep "## State
 
-### Brief (written by the Operator on October 5, 2026, from the owner's Push Plan picks)
-
-Push Plan S9 (yes). Everything physically right, with sources you open, and plain words where it simplifies.
-
-1. **Ripple tank**: a real 2D wave equation solved on a grid (finite differences, stable time step, absorbing edges), drawn as a water surface of splats lit so the crests read. One or two point sources, a plane wave, a barrier with one or two slits of adjustable width and spacing, frequency and speed controls. The double slit's bright fringes must land where d·sin θ = m·λ says (test it numerically), and single-slit diffraction must widen as the slit narrows. A tap drops a pebble.
-2. **Light bench**: rays traced through parts you drag on a bench: thin and thick lenses (real spherical surfaces with Snell's law), plane and curved mirrors, a prism with real dispersion (a named glass, such as BK7, with its published Sellmeier coefficients), a glass block, and total internal reflection in a fiber. Show the numbers (angles, focal length, the lens equation's image distance). Rays are thin bright splat lines; white light splits into a spectrum through the prism.
-3. **Evidence**: docs/evidence/<toy id>.json for each toy, with tests: refraction angles against Snell's law, a lens's image position against 1/f = 1/d_o + 1/d_i, the fringe spacing, the prism's deviation for a wavelength.
-
-New labs toys on the Science shelf. The Sound and light lab lane owns emission spectra and the home spectrometer: don't build those; the bench's prism splits white light only. Tests in `tests/opt*.spec.mjs`; clips at phone size on Effect review page 2 (lane record `Optics`); how-to and About texts; a sound for a tap if it fits (src/voices.js).
-
-You own: `src/optics/` (new), `src/packs/optics.js` (new), `tools/opt-*.mjs`, `tests/opt*.spec.mjs`, your toys' evidence files, their lines in the shared lists, and your handoff file.
-
-How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it; replace the prefix and lane record with yours). Labs: the Operator merges after a full test run. Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for; for a long job, schedule a check-in with send_later instead of going idle. Before READY, re-read CLAUDE.md's "Effect quality rules" and check each clip against them at phone size.
-
-## State
-
-WORKING (October 5, 2026): design settled, building the ripple tank first, then the light bench.
+WORKING (October 5, 2026): both toys built (ripple tank, light bench), tests in
+`tests/opt.spec.mjs`, evidence files written (`node tools/opt-evidence.mjs`), clips being rendered
+for Effect review page 2.
 
 ## Notes
 
@@ -28,16 +19,33 @@ WORKING (October 5, 2026): design settled, building the ripple tank first, then 
   lane Live input): the recipe's `screen` canvas holds each splat's color (left half) and lift
   (right half), redrawn when `screen.version()` changes. It runs in the kit's own program, so it
   works on WebGL2 and WebGPU, with labs on or off.
-- The ripple tank: the wave equation runs on the CPU (`src/optics/ripple.js`), one relief splat per
-  grid cell, lifted by the height and lit on the CPU so the crests read.
-- The light bench: the parts are kit tokens (dragged); the rays are relief splats on a fine lattice
-  (each sample of a ray goes to a free splat of the lattice cell it falls in, moved within the cell
-  by the 3D offset), so rays redraw live while a part is dragged.
+- **Ripple tank** (`src/optics/ripple.js`, the recipe in `src/packs/optics.js`): the wave equation
+  on a 216 × 216 grid (36 × 36 cm, 1/6 cm cells), Courant number 0.5, absorbing beaches 5 cm wide
+  (damping rising as the square of the depth). One relief splat per cell (one per 2 × 2 cells on a
+  small budget), lifted by the height and lit on the CPU from the slope and curvature. Shown 4 times
+  slower than real. Setups: double slit (default), single slit, two dippers, one dipper, plane wave,
+  still water. The dotted guides are the cells whose path difference to the two slits (or dippers)
+  is a whole number of wavelengths. The back wall's bars graph the time-averaged strength along the
+  far side.
+- **Light bench** (`src/optics/rays.js` tracing, `src/optics/bench.js` the setups and numbers): rays
+  in 2D through segments and circular arcs with Snell's law in vector form, total internal
+  reflection, mirrors and stops. Glass: Schott N-BK7 and N-SF11 (Sellmeier, checked against the data
+  sheets). Parts are kit tokens (moved and turned by drive); rays are relief splats on a lattice of
+  0.06-unit (6 mm) cells, 14 splats a cell, each able to move 1.5 cells, so a ray sample takes a
+  free splat near it and moves exactly there. White light is nine wavelengths; where neighboring
+  colors lie within a ray's width they are drawn as one sample of their mixed color.
+- Tools: `tools/opt-shot.mjs` (a screenshot with labs on), `tools/opt-clip.mjs` (MP4 clips with a
+  script of taps, drags and control changes), `tools/opt-evidence.mjs` (writes the evidence files
+  with their line numbers looked up).
 
 ## Known issues
 
-None yet.
+- The bench's dragged positions are not saved in a scene or link (a link opens the setup at home).
+- The light bench is wide; on a phone in portrait it fills the width but not the height.
 
 ## For the Operator
 
-Nothing yet.
+- For PACKS.md (a lesson): live per-splat data without an engine change. The relief kind's 3D mode
+  plus a lattice of splats lets a recipe draw lines that move anywhere (the bench's rays): put K
+  splats in each cell of a lattice, give each a lift of 1.5 cells, and let each sample take a free
+  splat in its own or a neighboring cell; its 8-bit offset is then exact to about 1/85 of a cell.

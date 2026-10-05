@@ -1,0 +1,110 @@
+{
+  "toy": "ripple-tank",
+  "checked": "2026-10-05",
+  "summary": "The ripple tank solves the two-dimensional wave equation on a grid and draws the water's height. Through two slits its bright fringes land where d·sin θ = m·λ says, and a single slit's beam spreads wider as the slit narrows, both measured from the simulation itself. The water is shown slowed down and with its heights exaggerated, and every wavelength travels at the one speed set.",
+  "claims": [
+    {
+      "claim": "The water follows the wave equation ∂²u/∂t² = c²∇²u, solved by finite differences.",
+      "how": "Each step updates every cell from its four neighbors with the standard second-order centered scheme (the five-point Laplacian); a damping term is added only in the beaches at the edges.",
+      "where": "src/optics/ripple.js:158",
+      "sources": [
+        {
+          "title": "Wave equation",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wave_equation",
+          "says": "In two dimensions u_tt = c²(u_xx + u_yy); the wave equation describes mechanical waves such as water waves and sound waves, and light."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:126",
+      "note": "The test checks that a dipper's crests are λ = c / f apart (within 2%)."
+    },
+    {
+      "claim": "The time step is small enough for the scheme to stay stable.",
+      "how": "Δt is set so the Courant number c·Δt/Δx is 0.5 at the fastest speed the controls allow, so even the sum over both directions (2 × 0.5) stays at the limit of 1.",
+      "where": "src/optics/ripple.js:29",
+      "sources": [
+        {
+          "title": "Courant–Friedrichs–Lewy condition",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition",
+          "says": "In two dimensions C = u_x Δt/Δx + u_y Δt/Δy ≤ C_max; for an explicit (time-marching) solver typically C_max = 1."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:96",
+      "note": "The test runs 6,000 steps with a source and a barrier and checks the water stays bounded."
+    },
+    {
+      "claim": "The edges absorb the waves, like the sloping beaches of a real ripple tank.",
+      "how": "A border 5 cm wide damps the water, gently at its inner edge and more toward the wall (as the square of the depth into it), so a ring crosses it and dies instead of bouncing back.",
+      "where": "src/optics/ripple.js:54",
+      "sources": [
+        {
+          "title": "Ripple tank",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ripple_tank",
+          "says": "All the basic properties of waves, including reflection, refraction, interference and diffraction, can be demonstrated; the ripples show up as shadows on the screen underneath."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/opt.spec.mjs:113",
+      "note": "After a pebble's rings reach the edges, under 1% of their energy is left in the tank."
+    },
+    {
+      "claim": "Through two slits d apart, the bright fringes are at angles where d·sin θ = m·λ.",
+      "how": "The test runs a plane wave through two slits in a large tank and measures the time-averaged strength of the water along an arc 52 cm from the slits, then finds its peaks.",
+      "where": "src/optics/ripple.js:210",
+      "sources": [
+        {
+          "title": "Double-slit experiment",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Double-slit_experiment",
+          "says": "The interference fringe maxima occur at angles d sin θ = nλ, n = 0, 1, 2, … (bright bands where the path difference is a whole number of wavelengths)."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/opt.spec.mjs:157",
+      "note": "For d = 10 and 12 cm and λ = 4 cm the first bright fringes land within 0.6° of the law; the second, at wide angles, within 4°, pulled in by each slit's own spreading."
+    },
+    {
+      "claim": "A single slit's beam spreads wider as the slit narrows, with its first dark fringe at sin θ = λ / a.",
+      "how": "The test measures the beam's half width for slits 12, 8 and 5 cm wide, and the first dark fringe for the 8 cm slit.",
+      "where": "src/optics/ripple.js:270",
+      "sources": [
+        {
+          "title": "Double-slit experiment",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Double-slit_experiment",
+          "says": "A single slit of width b gives an intensity proportional to sinc²(π b sin θ / λ), which is first zero where b sin θ = λ."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/opt.spec.mjs:178",
+      "note": "Each narrower slit's beam is at least 20% wider; the 8 cm slit's first dark fringe is within 1.5° of 30°."
+    },
+    {
+      "claim": "The dotted lines mark where the two paths differ by a whole number of wavelengths.",
+      "how": "For each cell past the slits (or the two dippers) the toy works out the difference of its distances to the two and dots the cells where it is a multiple of λ; far away these lines run at the angles d·sin θ = m·λ gives.",
+      "where": "src/packs/optics.js:120",
+      "sources": [
+        {
+          "title": "Double-slit experiment",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Double-slit_experiment",
+          "says": "Bright bands appear where the path difference is an integral number of wavelengths."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Real ripples on shallow water are dispersive (their speed changes a little with the wavelength, and surface tension matters for short ones); here every wavelength moves at the speed set by the slider.",
+    "The motion is shown four times slower than real, and the heights are exaggerated so the crests can be seen.",
+    "The light and shade are worked out from the water's slope and curvature for the picture; they are not a ray-traced image of a lamp through water.",
+    "The dippers are idealized: each holds a small disc of water to a sine wave."
+  ],
+  "fixes": []
+}
