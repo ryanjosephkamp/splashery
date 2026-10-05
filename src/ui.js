@@ -566,7 +566,16 @@ export function createUI(app) {
       let input;
       if (o.type === "select") {
         input = document.createElement("select");
-        for (const ch of o.choices) input.add(new Option(ch.label, ch.id));
+        // Choices with a `group` are listed under that heading (an optgroup).
+        let group = null;
+        for (const ch of o.choices) {
+          if (ch.group && ch.group !== group?.label) {
+            group = document.createElement("optgroup");
+            group.label = ch.group;
+            input.appendChild(group);
+          } else if (!ch.group) group = null;
+          (group ?? input).appendChild(new Option(ch.label, ch.id));
+        }
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "flag") {
