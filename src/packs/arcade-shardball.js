@@ -90,12 +90,20 @@ export class Shardball {
       const base = crispModel(
         (c) =>
           c.box(bw, bh, bd, {
-            faces: "xXyYZ",
+            // the flat board's bricks have no left and right sides: in its
+            // views they are only ever seen at a slant, as a soft sliver
+            faces: this.style === "dome" ? "xXyYZ" : "yYZ",
             color: (p, n) => {
-              // Glazed tile: a lit top edge, darker sides, a soft sheen.
-              let f = 0.92 + 0.12 * n[1] + 0.05 * n[2];
-              const edge = Math.max(Math.abs(p[0]) / (bw / 2), Math.abs(p[1]) / (bh / 2));
-              if (edge > 0.86 && n[2] > 0.5) f *= 1.12;
+              // Glazed tile: a lit top, darker sides, and a thin darker
+              // chamfer round its face, so its edge reads crisp (a bright
+              // rim read as a soft glow at phone size).
+              // (the sides darker than the face: seen edge-on in 2D they
+              // draw the brick's outline, so a lighter side read as a halo)
+              let f = n[2] > 0.5 ? 0.97 : 0.68 + 0.1 * n[1];
+              const ex = bw / 2 - Math.abs(p[0]);
+              const ey = bh / 2 - Math.abs(p[1]);
+              if (n[2] > 0.5 && Math.min(ex, ey) < 0.0045) f *= 0.8;
+              else if (n[2] > 0.5) f *= 1 + 0.06 * (p[1] / bh); // a little lighter up top
               return [f, f, f];
             },
           }),
@@ -165,10 +173,11 @@ export class Shardball {
           c.box(len, 0.04, 0.12, {
             faces: "xXyYZ",
             color: (p, n) => {
-              // (a grain long against the rail's cells, so it never aliases)
-              const grain = 0.9 + 0.1 * Math.sin(p[0] * 24 + Math.sin(p[0] * 7) * 2);
-              const f = (0.85 + 0.15 * n[1] + 0.06 * n[2]) * grain;
-              return [0.42 * f, 0.28 * f, 0.18 * f];
+              // Smooth dark wood with a faint long grain; its sides darker,
+              // so in 2D its edges read as clean lines, not a soft band.
+              const grain = 0.96 + 0.04 * Math.sin(p[0] * 9 + Math.sin(p[0] * 3) * 2);
+              const f = (n[2] > 0.5 ? 1 : 0.62) * grain;
+              return [0.45 * f, 0.3 * f, 0.19 * f];
             },
           }),
         { fine, coarse: 0.04 },

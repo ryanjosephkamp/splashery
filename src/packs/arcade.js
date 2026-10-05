@@ -17,6 +17,10 @@ const VIEW = {
   ],
 };
 
+// The render levers (src/sharpness.js, labs only): a game's fine splats are
+// kept down to a pixel (cull low) and drawn at the device's own pixel ratio.
+const SHARP = { cull: "low", dpr: "native" };
+
 const PLAY = [{ key: "go", label: "Play", type: "pulse", ease: 0.4 }];
 
 // Each game's still picture: what the toy itself builds. The game hides
@@ -194,6 +198,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [
       {
         key: "style",
@@ -241,6 +246,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [
       {
         key: "world",
@@ -297,6 +303,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -337,6 +344,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [
       {
         key: "sample",
@@ -419,6 +427,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [
       {
         key: "well",
@@ -466,6 +475,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [
       { key: "skill", label: "The computer", type: "slider", min: 1, max: 3, step: 1, default: 2 },
       VIEW,
@@ -501,6 +511,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -546,6 +557,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [
       {
         key: "world",
@@ -613,6 +625,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -646,6 +659,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [VIEW],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -680,6 +694,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [VIEW, { key: "source", label: "Source", type: "text", default: "", hidden: true }],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -739,6 +754,7 @@ export const RECIPES = {
     turntable: false,
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
+    render: SHARP,
     options: [
       {
         key: "tune",

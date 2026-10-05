@@ -432,7 +432,9 @@ export class ArcadeRuntime {
     // A game may widen the view (inside a dome); put back on leaving.
     const cam = this.stage.cameraEntity.camera;
     if (Math.abs(cam.fov - this.cam.fov) > 1e-3) cam.fov = this.cam.fov;
-    return orbitPose(this.cam);
+    const p = orbitPose(this.cam);
+    this.layer.eye = p.position; // for the layer's edge fade
+    return p;
   }
 
   destroy() {

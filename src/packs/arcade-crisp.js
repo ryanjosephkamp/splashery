@@ -172,7 +172,10 @@ export class Crisp {
     ];
     for (const [k, n, u, v, w, h, d] of F) {
       if (!keep.includes(k)) continue;
-      this.face(add(c, mul(n, d / 2)), u, v, w, h, n, col, o);
+      // each face pulled in a hair at its edges, so the faces meet at the
+      // corners without their edge splats poking past them (sparkles)
+      const t = (o.fine ?? this.fine) * 0.35;
+      this.face(add(c, mul(n, d / 2)), u, v, Math.max(w - 2 * t, w * 0.5), Math.max(h - 2 * t, h * 0.5), n, col, o); // prettier-ignore
     }
   }
 

@@ -36,7 +36,7 @@ const OPTS = Object.fromEntries(
 );
 const SCRIPT = opt("script", "play:4,switch,play:5,switch,play:2").split(",");
 const FPS = Number(opt("fps", 15));
-const WIDTH = Number(opt("width", 720));
+const WIDTH = Number(opt("width", 780)); // the frames' own width (390 at 2x): no resampling
 const SIZE = (opt("size", "390x844") || "390x844").split("x").map(Number);
 const PROFILE = opt("profile", "mid");
 const LABEL = opt("label", "built by Opus 5.5");
