@@ -271,11 +271,11 @@ export class CameraDepth {
     this.smooth = Float32Array.from(t);
     const colors = this.sent ? gridColors(this.sent, cols, rows, this.mirror) : null;
     t.set(snapEdges(smoothSurface(t, cols, rows), cols, rows, colors));
-    // Live r7: the cells near an outline, and the colors on each side of it,
-    // so each frame's colors can move the outline before the next answer.
+    // Live r7: the cells near an outline, with no lone cell on the wrong side.
+    // (A per-frame step that moved the outline by each frame's colors between
+    // answers was tried and left patches on a moving face; it is gone.)
     this.band = colors ? edgeBand(t, cols, rows) : null;
     if (this.band) tidyBand(this.band, t);
-    this.answer = { d: Float32Array.from(t), colors };
     if (this.back && this.sent) this.back.learn(this.sent, t, cols, rows, this.mirror);
     if (!this.have) this.heights.set(t);
     this.have = true;
@@ -337,16 +337,6 @@ export class CameraDepth {
     // two wide read crisply at phone size. The noise is smoothed first.
     sharpen(cp, cols, rows, 0.5, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
     g.putImageData(cur, 0, 0);
-    // Live r7: someone who moves between two depth answers moves in the
-    // picture at once, but their depth only at the next answer, so their
-    // leading edge showed on the wall behind them (a ghost of their outline,
-    // seen from the side) and the wall they uncovered stood out on them.
-    // Near an outline, each frame's own colors now say which side a cell is
-    // on: the near side's or the far side's colors, from the last answer.
-    if (this.band) {
-      followOutline(this.band, cp, this.answer.colors, this.answer.d, this.target);
-      tidyBand(this.band, this.target);
-    }
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
     const kBig = 1 - Math.exp(-dt / 0.04);
@@ -774,28 +764,6 @@ export function edgeBand(d, w, h) {
     }
   }
   return { w, h, idx: Int32Array.from(idx), lo: Float32Array.from(lo), hi: Float32Array.from(hi) }; // prettier-ignore
-}
-
-// Live r7: moves the outline with the picture. A band cell (edgeBand) whose
-// colors in this frame (px: r, g, b, a per cell) changed clearly since the
-// frame its depth came from (colors, r, g, b per cell) has had something move
-// over or off it: it takes the near or the far side's depth (d, the
-// answer's), by which side's colors its new ones match, when they tell
-// clearly. Writes into `target`.
-export function followOutline(band, px, colors, d, target) {
-  const { w, h, idx, lo, hi } = band;
-  for (let b = 0; b < idx.length; b++) {
-    const i = idx[b];
-    const o = i * 4;
-    const c = i * 3;
-    const moved = Math.abs(px[o] - colors[c]) + Math.abs(px[o + 1] - colors[c + 1]) + Math.abs(px[o + 2] - colors[c + 2]); // prettier-ignore
-    if (moved < 45) {
-      target[i] = d[i];
-      continue;
-    }
-    const pick = sideByColor(d, w, h, colors, i % w, Math.floor(i / w), BAND, 2, lo[b], hi[b], px, o); // prettier-ignore
-    if (pick && pick.trust > 0.5) target[i] = pick.near >= 0.5 ? hi[b] : lo[b];
-  }
 }
 
 // Live r7: no lone cell on the wrong side of an outline (hair the depth

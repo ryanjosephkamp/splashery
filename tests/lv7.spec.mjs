@@ -88,30 +88,6 @@ test.describe("the mirror's depth (no browser)", () => {
       for (let x = 22; x < 28; x++) expect(out[y * w + x]).toBeLessThan(0.25);
     }
   });
-
-  test("between two depth answers, the outline follows the picture", async () => {
-    const { edgeBand, followOutline } = await import("../src/live/relief.js");
-    // The answer: red near (x < 20), blue far. Then the person moves 4 cells
-    // right in the picture before the next answer.
-    const w = 40;
-    const h = 6;
-    const d = new Float32Array(w * h);
-    const colors = new Float32Array(w * h * 3);
-    const px = new Uint8ClampedArray(w * h * 4);
-    for (let y = 0; y < h; y++)
-      for (let x = 0; x < w; x++) {
-        const i = y * w + x;
-        d[i] = x < 20 ? 0.9 : 0.1;
-        colors.set(x < 20 ? [200, 40, 40] : [30, 40, 200], i * 3);
-        px.set(x < 24 ? [200, 40, 40, 255] : [30, 40, 200, 255], i * 4);
-      }
-    const target = Float32Array.from(d);
-    followOutline(edgeBand(d, w, h), px, colors, d, target);
-    for (let y = 0; y < h; y++) {
-      for (let x = 20; x < 24; x++) expect(target[y * w + x]).toBeCloseTo(0.9, 3); // moved over: near
-      for (let x = 24; x < 30; x++) expect(target[y * w + x]).toBeCloseTo(0.1, 3); // still wall
-    }
-  });
 });
 
 // ---- The mirror on a camera ----------------------------------------------------------
