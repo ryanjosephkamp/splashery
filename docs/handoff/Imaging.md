@@ -11,7 +11,7 @@ comments), you finish every working turn with a final message that starts "READY
 
 READY: October 5, 2026 (cloud session, Opus 5.5). Items 1 to 6 of the brief are built, with clips on
 Effect review page 2 (cards `img-*`, lane id `Imaging`). Item 7 (ideas of my own) is not built. The
-engine PR #274 should merge first; it is merged into this branch.
+engine PR #274 merged on October 5, 2026, and main is merged into this branch.
 
 - [x] 1. Airport X-ray scanner (`airport-xray`)
 - [x] 2. How CT works (`how-ct`): a kit-built nautilus shell
