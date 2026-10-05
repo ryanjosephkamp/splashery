@@ -9,11 +9,10 @@ outside your own files, as an "Engine: …" PR merged first). PR title: "Phase W
 ripple tank and a light bench". Handoff file: docs/handoff/Optics.md (create it; start it with this
 brief, word for word, under "## Brief", then keep "## State
 
-READY for review (October 5, 2026): both toys built, `tests/opt.spec.mjs` 21 of 21 passing, evidence
-files written, eight clips posted on Effect review page 2 (lane record `Optics`, cards
-`opt-ripple-double`, `opt-ripple-single`, `opt-ripple-two`, `opt-bench-prism`, `opt-bench-lens`,
-`opt-bench-mirrors`, `opt-bench-block`, `opt-bench-fiber`). Next: the owner's marks (checked about
-hourly), and fixes as "-r2" cards.
+Polish round (October 5, 2026, the owner: "Looks amazing. Please make it sharper." on all eight
+cards): branch `claude/lane-optics-polish` from `claude/lane-optics` at d87cb77b, draft PR #323. The
+`-p1` cards are on Effect review page 2 beside the originals. Next: merge main once #296 merges (the
+Operator says when), then the owner's marks on the `-p1` cards.
 
 ## Notes
 
@@ -39,6 +38,12 @@ hourly), and fixes as "-r2" cards.
 - Tools: `tools/opt-shot.mjs` (a screenshot with labs on), `tools/opt-clip.mjs` (MP4 clips with a
   script of taps, drags and control changes), `tools/opt-evidence.mjs` (writes the evidence files
   with their line numbers looked up).
+
+- Polish round: the tank's texture and splat grid are at display resolution (M × M, up to 1.5 times
+  the simulation's 216, from the budget; bilinear heights, light and shade per texel), the sharp
+  kernel on both toys, a lower lift and thicker water splats (the sharp kernel showed shingle
+  stripes on steep faces), and on the bench finer ray samples (0.5 mm), 20 lattice splats a cell,
+  thinner glass edges.
 
 ## Known issues
 
