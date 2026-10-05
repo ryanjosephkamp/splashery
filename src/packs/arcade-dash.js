@@ -366,6 +366,7 @@ class Dash {
       m.scale[i * 3 + 2] = Math.max(thin, this.reach[i] * RELIEF * view * 0.6);
     }
     this.api.sprites.layer.writeLook(this.photo.start, m);
+    this.photo.dirty = true; // its places changed: write its centers again
   }
 
   camera(view, aspect) {
