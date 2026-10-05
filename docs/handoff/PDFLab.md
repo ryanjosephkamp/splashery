@@ -11,9 +11,9 @@ word for word, under "## Brief", then keep "## State
 
 READY (October 5, 2026, 09:20 UTC): everything in the brief is built and tested; main merged into
 both branches. Engine PR #299 (the Save PDF row) must merge first; the lane PR #301 contains it.
-Clips on Effect review page 2 (cards `pdf-grapes-flipbook` and `pdf-dialog`, lane `PDFLab`; the
-lane record is the Operator's to make); no marks yet. The playback test now waits for PDF.js's
-scripting sandbox before pressing buttons (it raced once after the merge).
+Clips on Effect review page 2 (cards `pdf-grapes-flipbook` and `pdf-dialog`, lane `PDFLab`; the lane
+record is the Operator's to make); no marks yet. The playback test now waits for PDF.js's scripting
+sandbox before pressing buttons (it raced once after the merge).
 
 ## What was built
 
