@@ -599,6 +599,20 @@ export function createUI(app) {
         input.className = "switch";
         input.checked = !!value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.checked));
+      } else if (o.type === "text") {
+        // A short line of text the toy reads itself (the Enigma's plugboard
+        // pairs); it applies when the box is left or Enter is pressed.
+        input = document.createElement("input");
+        input.type = "text";
+        input.className = "option-text";
+        input.id = `opt-${o.key}`;
+        input.value = String(value ?? "");
+        input.spellcheck = false;
+        input.autocomplete = "off";
+        if (o.placeholder) input.placeholder = o.placeholder;
+        if (o.maxLength) input.maxLength = o.maxLength;
+        input.setAttribute("aria-label", o.label);
+        input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else {
         input = document.createElement("input");
         input.type = "range";
