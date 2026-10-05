@@ -2030,6 +2030,27 @@ export const TOY_HELP = {
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
   },
+  // ---- Tiny world r2 (lane Tiny world r2) ----
+  "dna-to-protein": {
+    howTo: "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
+    about:
+      "A gene is a stretch of DNA that spells out a protein. Tap and RNA polymerase opens the double helix and reads the template strand, building messenger RNA that matches the coding strand (with U for T). A ribosome then reads the mRNA three bases (a codon) at a time from the start codon AUG; each tRNA whose anticodon pairs with the codon brings its amino acid, and the chain grows until a stop codon. The chain then folds into the protein's real shape from the Protein Data Bank.\n\nThe genes are real (NCBI); only the start and end are drawn base by base. Try a mutation: changing base 2 of codon 7 in hemoglobin beta to T is the sickle-cell change (glutamic acid to valine).",
+  },
+  mitosis: {
+    howTo: "Tap the cell to watch it divide in two, phase by phase.",
+    about:
+      "Mitosis is how one cell becomes two with the same chromosomes. Before it starts, each chromosome has been copied into two sister chromatids. Tap and the chromatin threads coil into compact chromosomes (prophase), the nuclear envelope breaks into pieces and spindle fibers from the two centrosomes reach the chromosomes (prometaphase), which line up across the middle (metaphase). The sisters are pulled to opposite poles (anaphase), new nuclei form round each set (telophase) and a ring pinches the cell in two (cytokinesis).\n\nA human cell has 46 chromosomes; four are shown, two pairs. One daughter then grows back into a whole cell.",
+  },
+  apoptosis: {
+    howTo: "Tap the cell to watch it take itself apart, step by step.",
+    about:
+      "Apoptosis is a cell's tidy, programmed death: the body's way of removing cells it no longer needs, or that are damaged, without harming their neighbors. Tap and the cell shrinks and its chromatin condenses into a small, dark nucleus (pyknosis). The membrane bubbles out in blebs, the nucleus breaks into pieces (karyorrhexis), and the cell comes apart into apoptotic bodies, each wrapped in membrane, which are cleared away.\n\nUnlike a cell that bursts, nothing spills out, so there is no inflammation. In the body, white blood cells eat the bodies; here they drift away and a neighbor moves in.",
+  },
+  phagocytosis: {
+    howTo: "Tap to watch the neutrophil catch and digest the bacterium.",
+    about:
+      'Phagocytosis means "cell eating". Tap and this neutrophil, a white blood cell, reaches out pseudopods around a bacterium until their tips meet, enclosing it in a bubble of membrane called a phagosome. Lysosomes, small sacs of digestive enzymes, fuse with it to make a phagolysosome, where the bacterium is broken down. The cell then releases the waste.\n\nNeutrophils are the most common white blood cells; their nucleus has several lobes. A real neutrophil also kills with bursts of reactive oxygen; the toy shows the steps of eating.',
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------
