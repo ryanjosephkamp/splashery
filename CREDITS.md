@@ -254,6 +254,141 @@ toy's About tab. `tools/chs-data.mjs` and `tools/chs-molecules.mjs` fetch them a
 - Crystals: lattice constants at room temperature; alpha quartz's positions after Le Page and Donnay
   (1976).
 
+<!-- Real elements: written by tools/rel-credits.mjs -->
+
+## Real elements (lane Elements)
+
+The Real elements toy (a labs toy) shows 91 elements as photos of real samples, each cut out of its
+background and given depth by Depth Anything V2 Small (Apache 2.0) at build time
+(`tools/rel-samples.mjs`), in `assets/toys/real-elements/`. Each license was checked on the live
+page on October 5, 2026.
+
+- 80 photos from [Images of Elements](https://images-of-elements.com/) (Jumk.de Webprojects),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) ("The images are licensed under a
+  Creative Commons Attribution 3.0 Unported License, unless otherwise noted."; none of these is
+  otherwise noted), each credited by a link to its element's page:
+  [Hydrogen](https://images-of-elements.com/hydrogen.php),
+  [Helium](https://images-of-elements.com/helium.php),
+  [Lithium](https://images-of-elements.com/lithium.php),
+  [Beryllium](https://images-of-elements.com/beryllium.php),
+  [Boron](https://images-of-elements.com/boron.php),
+  [Carbon](https://images-of-elements.com/carbon.php),
+  [Nitrogen](https://images-of-elements.com/nitrogen.php),
+  [Oxygen](https://images-of-elements.com/oxygen.php),
+  [Neon](https://images-of-elements.com/neon.php),
+  [Sodium](https://images-of-elements.com/sodium.php),
+  [Magnesium](https://images-of-elements.com/magnesium.php),
+  [Aluminum](https://images-of-elements.com/aluminium.php),
+  [Silicon](https://images-of-elements.com/silicon.php),
+  [Phosphorus](https://images-of-elements.com/phosphorus.php),
+  [Sulfur](https://images-of-elements.com/sulfur.php),
+  [Chlorine](https://images-of-elements.com/chlorine.php),
+  [Argon](https://images-of-elements.com/argon.php),
+  [Potassium](https://images-of-elements.com/potassium.php),
+  [Calcium](https://images-of-elements.com/calcium.php),
+  [Scandium](https://images-of-elements.com/scandium.php),
+  [Titanium](https://images-of-elements.com/titanium.php),
+  [Vanadium](https://images-of-elements.com/vanadium.php),
+  [Chromium](https://images-of-elements.com/chromium.php),
+  [Manganese](https://images-of-elements.com/manganese.php),
+  [Iron](https://images-of-elements.com/iron.php),
+  [Cobalt](https://images-of-elements.com/cobalt.php),
+  [Nickel](https://images-of-elements.com/nickel.php),
+  [Copper](https://images-of-elements.com/copper.php),
+  [Zinc](https://images-of-elements.com/zinc.php),
+  [Gallium](https://images-of-elements.com/gallium.php),
+  [Germanium](https://images-of-elements.com/germanium.php),
+  [Arsenic](https://images-of-elements.com/arsenic.php),
+  [Selenium](https://images-of-elements.com/selenium.php),
+  [Bromine](https://images-of-elements.com/bromine.php),
+  [Krypton](https://images-of-elements.com/krypton.php),
+  [Rubidium](https://images-of-elements.com/rubidium.php),
+  [Strontium](https://images-of-elements.com/strontium.php),
+  [Yttrium](https://images-of-elements.com/yttrium.php),
+  [Zirconium](https://images-of-elements.com/zirconium.php),
+  [Niobium](https://images-of-elements.com/niobium.php),
+  [Molybdenum](https://images-of-elements.com/molybdenum.php),
+  [Ruthenium](https://images-of-elements.com/ruthenium.php),
+  [Rhodium](https://images-of-elements.com/rhodium.php),
+  [Palladium](https://images-of-elements.com/palladium.php),
+  [Silver](https://images-of-elements.com/silver.php),
+  [Cadmium](https://images-of-elements.com/cadmium.php),
+  [Indium](https://images-of-elements.com/indium.php),
+  [Tin](https://images-of-elements.com/tin.php),
+  [Antimony](https://images-of-elements.com/antimony.php),
+  [Tellurium](https://images-of-elements.com/tellurium.php),
+  [Iodine](https://images-of-elements.com/iodine.php),
+  [Xenon](https://images-of-elements.com/xenon.php),
+  [Cesium](https://images-of-elements.com/caesium.php),
+  [Barium](https://images-of-elements.com/barium.php),
+  [Lanthanum](https://images-of-elements.com/lanthanum.php),
+  [Cerium](https://images-of-elements.com/cerium.php),
+  [Praseodymium](https://images-of-elements.com/praseodymium.php),
+  [Neodymium](https://images-of-elements.com/neodymium.php),
+  [Samarium](https://images-of-elements.com/samarium.php),
+  [Europium](https://images-of-elements.com/europium.php),
+  [Gadolinium](https://images-of-elements.com/gadolinium.php),
+  [Terbium](https://images-of-elements.com/terbium.php),
+  [Dysprosium](https://images-of-elements.com/dysprosium.php),
+  [Holmium](https://images-of-elements.com/holmium.php),
+  [Erbium](https://images-of-elements.com/erbium.php),
+  [Thulium](https://images-of-elements.com/thulium.php),
+  [Ytterbium](https://images-of-elements.com/ytterbium.php),
+  [Lutetium](https://images-of-elements.com/lutetium.php),
+  [Hafnium](https://images-of-elements.com/hafnium.php),
+  [Tantalum](https://images-of-elements.com/tantalum.php),
+  [Tungsten](https://images-of-elements.com/tungsten.php),
+  [Rhenium](https://images-of-elements.com/rhenium.php),
+  [Osmium](https://images-of-elements.com/osmium.php),
+  [Iridium](https://images-of-elements.com/iridium.php),
+  [Platinum](https://images-of-elements.com/platinum.php),
+  [Gold](https://images-of-elements.com/gold.php),
+  [Mercury](https://images-of-elements.com/mercury.php),
+  [Thallium](https://images-of-elements.com/thallium.php),
+  [Lead](https://images-of-elements.com/lead.php),
+  [Bismuth](https://images-of-elements.com/bismuth.php).
+- Fluorine: "Liquid fluorine.jpg" by Prof B. G. Mueller,
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Liquid_fluorine.jpg). The cut-out sample made
+  from it is shared under the same license, shown beside the sample in the toy.
+- Technetium: "Technetium-sample.jpg" by Marco Cardin,
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Technetium-sample.jpg). The cut-out sample made
+  from it is shared under the same license, shown beside the sample in the toy.
+- Radium: "Radium226.jpg" by grenadier, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/),
+  on [Commons](https://commons.wikimedia.org/wiki/File:Radium226.jpg).
+- Protactinium: "Protactinium-233.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Protactinium-233.jpg).
+- Uranium: "Depleted Uranium.jpg" by 范皓程,
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Depleted_Uranium.jpg).
+- Neptunium: "Neptunium2.jpg" by Los Alamos National Laboratory,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Neptunium2.jpg).
+- Plutonium: "Plutonium3.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Plutonium3.jpg).
+- Americium: "Americium microscope.jpg" by Bionerd,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Americium_microscope.jpg).
+- Berkelium: "Berkelium metal.jpg" by Oak Ridge National Laboratory, U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Berkelium_metal.jpg).
+- Californium: "Californium.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Californium.jpg).
+- Einsteinium: "EinsteiniumGlow.JPG" by R. G. Haire, U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:EinsteiniumGlow.JPG).
+
+The facts come from PubChem's periodic table and element pages (NCBI; public domain U.S. government
+data); the uses are our own short sentences, each backed by words PubChem quotes from Jefferson Lab
+and Los Alamos National Laboratory (U.S. Department of Energy). See `tools/rel-facts.mjs` and
+`docs/evidence/real-elements.json`.
+
+<!-- End of Real elements -->
+
 ## Word vectors
 
 The word vectors toy uses [GloVe](https://nlp.stanford.edu/projects/glove/) word vectors (Wikipedia
@@ -546,6 +681,7 @@ fetch anything live. Each license was checked on the live source page on October
   written as "Iris ".
 
 Tables people open in Data in 3D are read in their browser and never uploaded.
+
 ## Sound and light lab
 
 The Sound lab, the Sound recorder and the Light lab (labs) use no recorded assets: their sounds and

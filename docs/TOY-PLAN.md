@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 391 toys. 361 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 381.
+- 392 toys. 362 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 382.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 10.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -37,23 +37,23 @@ Proposals below are suggestions; the owner may change them.
   Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell,
   DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion,
   Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis, Electron orbital,
-  Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode,
-  Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
-  tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
-  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
-  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
-  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
-  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
-  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
-  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
-  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
-  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
-  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
-  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
-  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Atom, Molecule, Protein, Crystal lattice, Periodic table, Real elements, Diamond, Ruby, Emerald,
+  Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas,
+  Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower,
+  Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns,
+  Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow,
+  Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy
+  cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple,
+  Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck,
+  Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip,
+  Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph
+  plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation,
+  Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses,
+  Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal
+  ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
+  Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano,
+  Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus,
+  Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
   Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
@@ -1253,7 +1253,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
     as it is digested.
 
-## Atoms (6)
+## Atoms (7)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
@@ -1316,6 +1316,23 @@ Proposals below are suggestions; the owner may change them.
     (32 columns).
   - Sound: The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it
     packs into the nucleus, in sync (Sound C, October 2, 2026).
+- **Real elements** (`real-elements`). Now: tap: Lift or lower the sample. Plan: keep.
+  - Owner: The owner's new-ideas pick N2 (yes) on the Push Plan (October 5, 2026; lane Elements;
+    labs only).
+  - Effect: The 118 elements as real samples on their tiles: open photos of the real elements cut
+    out of their background and raised in 3D by the Photo to 3D depth model. A tap lifts the sample
+    out of its tile toward the viewer (about 2 s), larger and in finer detail, with a back and rim
+    so it turns as a solid piece, swings it slowly and shows its facts beside the stage; a tap on
+    the sample turns it once around; a tap on its tile sets it back. Elements with no photo of a
+    real sample have hatched tiles, and their facts say why. Tile colors by category or block on
+    demand.
+  - Improved: Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons)
+    cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table
+    and a 256 x 256 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab
+    and Los Alamos (tools/rel-facts.mjs), checked by tests against a saved snapshot of the
+    references.
+  - Sound: A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down,
+    a rising blip as it turns.
 
 ## Gems (8)
 

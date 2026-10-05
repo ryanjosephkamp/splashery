@@ -1413,6 +1413,18 @@ export const TOYS = [
     camera: { yaw: 0.1, pitch: 0.12, roll: 0, distance: 3.1 },
   },
 
+  // ---- Pack: real-elements (lane Elements) ----
+  {
+    id: "real-elements",
+    label: "Real elements",
+    category: "atoms",
+    kind: "kit",
+    pack: "real-elements",
+    labs: true,
+    tags: "elements periodic table real samples photos metals gases crystals chemistry",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.1 },
+  },
+
   // ---- Pack: gems ----
   // (entries for src/packs/gems.js go here)
   {
@@ -3834,6 +3846,7 @@ const STILL_TOYS = new Set([
   "puzzle-cube",
   // Added: they read like a chart, a diagram or a page.
   "periodic-table",
+  "real-elements", // lane Elements
   "splat-equation",
   "chladni-plate",
   "anatomy-atlas",
