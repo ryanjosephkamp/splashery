@@ -722,10 +722,25 @@ export const TOY_HELP = {
     about:
       "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of a typical isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
   },
+  // Lane Elements: the periodic table of real samples (labs).
+  "real-elements": {
+    howTo:
+      "Tap a tile to lift its sample and read its facts; tap the sample to turn it, its tile to set it back.",
+    about:
+      "Every element as a real sample, like the classic photographic periodic tables: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model that judged from the photo how far away each part is. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out toward you and swings so you see its shape. Its facts show beside it: mass, group and period, state, density, melting and boiling points, discovery and real uses, from PubChem. Tap the sample to turn it around, or its tile to set it back. About 27 elements have no photo of a real sample: the heaviest exist only a few atoms at a time. Their tiles are hatched, and their facts say why. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+  },
+
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
     about:
       "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
+  },
+
+  // Lane Molecule viewer (labs).
+  "molecule-viewer": {
+    howTo: "Tap two atoms for their distance, a third for the angle.",
+    about:
+      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank, small molecules as SDF, MOL or XYZ files. This viewer draws every atom of such a file with splats, in the usual colors: carbon gray, oxygen red, nitrogen blue.\n\nPick a sample, open your own file, or type a PDB code such as 1MBN and press Fetch in the Toy tab; the entry is read only when you ask, and its title, authors and fetch time show beside it. Draw it as a cartoon, balls and sticks, space-filling atoms or a smooth surface, colored by element, chain, residue or B-factor. Tap two atoms for the distance between their centers in ångströms, a third for the angle in degrees. Positions are an experiment's best fit, not a photograph.",
   },
 
   // ---- Gems -----------------------------------------------------------------------------
@@ -2061,6 +2076,12 @@ export const TOY_HELP = {
     howTo: "Tap it for a gust of wind that spins the sails hard.",
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
+  },
+  // Lane Night sky.
+  "night-sky": {
+    howTo: "Drag to look around the sky. Tap a star or a planet to name it.",
+    about:
+      "The sky over a place at a moment: about 5,000 stars down to magnitude 6, the faintest you can see from a dark place, each sized by its brightness and colored by its temperature. The Sun, the Moon and the planets are placed by JPL's formulas for their orbits, and the Moon is a small ball lit from the Sun's side, so you see its real phase. As the Sun rises the faint stars go out first.\n\nPick a city in the Toy tab, type a latitude and longitude, or tap “Use my location” (your browser asks first; the place stays on your device). Set a date from 1800 to 2050, or speed time up to watch the sky turn. The Sun and the Moon are drawn three times their real size.",
   },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {

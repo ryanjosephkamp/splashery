@@ -1,0 +1,1610 @@
+[
+  {
+    "z": 1,
+    "uses": [
+      {
+        "text": "Large amounts of hydrogen are combined with nitrogen to make ammonia.",
+        "src": "jlab",
+        "quote": "Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia"
+      },
+      {
+        "text": "Liquid hydrogen burned with liquid oxygen is a rocket fuel.",
+        "src": "jlab",
+        "quote": "when combined with liquid oxygen, makes an excellent rocket fuel"
+      }
+    ]
+  },
+  {
+    "z": 2,
+    "uses": [
+      {
+        "text": "Helium fills party balloons, science balloons and blimps.",
+        "src": "jlab",
+        "quote": "Helium gas is used to inflate blimps, scientific balloons and party balloons."
+      },
+      {
+        "text": "Liquid helium is used in MRI scanners in hospitals.",
+        "src": "lanl",
+        "quote": "Liquid helium's use in magnetic resonance imaging (MRI) continues to increase"
+      }
+    ]
+  },
+  {
+    "z": 3,
+    "uses": [
+      {
+        "text": "Lithium compounds are used in batteries.",
+        "src": "lanl",
+        "quote": "Other lithium compounds are used in dry cells and storage batteries."
+      },
+      {
+        "text": "Lithium carbonate is a medicine for bipolar disorder.",
+        "src": "lanl",
+        "quote": "Lithium carbonate is used for the treatment of bipolar disease"
+      }
+    ]
+  },
+  {
+    "z": 4,
+    "uses": [
+      {
+        "text": "Beryllium lets X-rays through, so it makes windows for X-ray tubes.",
+        "src": "jlab",
+        "quote": "Beryllium is relatively transparent to X-rays and is used to make windows for X-ray tubes."
+      },
+      {
+        "text": "Beryllium copper makes springs, electrical contacts and tools that don't spark.",
+        "src": "lanl",
+        "quote": "beryllium copper, which is extensively used for springs, electrical contacts, spot-welding electrodes, and non-sparking tools"
+      }
+    ]
+  },
+  {
+    "z": 5,
+    "uses": [
+      {
+        "text": "Boron compounds go into fiberglass insulation and bleach.",
+        "src": "jlab",
+        "quote": "Large amounts of this compound are used in the manufacture of fiberglass insulation and sodium perborate bleach."
+      },
+      {
+        "text": "Boron gives fireworks and flares a green color.",
+        "src": "jlab",
+        "quote": "Boron is used in pyrotechnics and flares to produce a green color."
+      }
+    ]
+  },
+  {
+    "z": 6,
+    "uses": [
+      {
+        "text": "Pencil \"lead\" is really graphite, a form of carbon.",
+        "src": "jlab",
+        "quote": "Although commonly called lead, the black material used in pencils is actually graphite."
+      },
+      {
+        "text": "Carbon-14 is used to find the age of things that were once alive.",
+        "src": "jlab",
+        "quote": "is used to find the age of formerly living things through a process known as radiocarbon dating"
+      }
+    ]
+  },
+  {
+    "z": 7,
+    "uses": [
+      {
+        "text": "Nitrogen is made into ammonia, which is used to make fertilizers.",
+        "src": "jlab",
+        "quote": "Large amounts of ammonia are then used to create fertilizers"
+      },
+      {
+        "text": "Liquid nitrogen keeps things very cold, such as stored biological samples.",
+        "src": "jlab",
+        "quote": "Liquid nitrogen is an inexpensive cryogenic liquid used for refrigeration, preservation of biological samples"
+      }
+    ]
+  },
+  {
+    "z": 8,
+    "uses": [
+      {
+        "text": "Hospitals give oxygen to patients who have trouble breathing.",
+        "src": "lanl",
+        "quote": "Hospitals frequently prescribe oxygen for patients with respiratory ailments."
+      },
+      {
+        "text": "Steelmakers blow oxygen through molten iron to burn away impurities.",
+        "src": "jlab",
+        "quote": "Impurities in molten pig iron are burned away with streams of high pressure oxygen to produce steel."
+      }
+    ]
+  },
+  {
+    "z": 9,
+    "uses": [
+      {
+        "text": "Fluoride compounds in toothpaste help prevent tooth decay.",
+        "src": "jlab",
+        "quote": "compounds added to toothpaste, also to help prevent tooth decay"
+      },
+      {
+        "text": "Hydrofluoric acid, a fluorine compound, is used to etch glass.",
+        "src": "jlab",
+        "quote": "Hydrofluoric acid (HF) is used to etch glass, including most of the glass used in light bulbs."
+      }
+    ]
+  },
+  {
+    "z": 10,
+    "uses": [
+      {
+        "text": "Neon's biggest use is in glowing advertising signs.",
+        "src": "jlab",
+        "quote": "The largest use for neon gas is in advertising signs."
+      },
+      {
+        "text": "Neon and helium together make helium-neon lasers.",
+        "src": "jlab",
+        "quote": "is combined with helium to make helium-neon lasers"
+      }
+    ]
+  },
+  {
+    "z": 11,
+    "uses": [
+      {
+        "text": "Sodium vapor lamps light streets with a bright yellow glow.",
+        "src": "jlab",
+        "quote": "Sodium vapor is used in streetlights and produces a brilliant yellow light."
+      },
+      {
+        "text": "Sodium compounds include table salt and baking soda.",
+        "src": "jlab",
+        "quote": "Some of the most common are: table salt (NaCl), soda ash (Na2CO3), baking soda (NaHCO3)"
+      }
+    ]
+  },
+  {
+    "z": 12,
+    "uses": [
+      {
+        "text": "Light magnesium-aluminum alloys are used in airplanes and rockets.",
+        "src": "jlab",
+        "quote": "Magnesium-aluminum alloys are used where strong, lightweight materials are required, such as in airplanes, missiles and rockets."
+      },
+      {
+        "text": "Magnesium burns with a brilliant white light in flares and fireworks.",
+        "src": "jlab",
+        "quote": "Magnesium burns with a brilliant white light and is used in pyrotechnics, flares and photographic flashbulbs."
+      }
+    ]
+  },
+  {
+    "z": 13,
+    "uses": [
+      {
+        "text": "Aluminum makes drink cans, foil and kitchen utensils.",
+        "src": "jlab",
+        "quote": "aluminum and aluminum alloys are used in a wide variety of products: cans, foils and kitchen utensils"
+      },
+      {
+        "text": "Being light, aluminum is used in electrical power lines.",
+        "src": "lanl",
+        "quote": "it is used in electrical transmission lines because of its light weight"
+      }
+    ]
+  },
+  {
+    "z": 14,
+    "uses": [
+      {
+        "text": "Silicon crystals are the base of microchips, transistors and solar cells.",
+        "src": "jlab",
+        "quote": "are used in the manufacture of solid-state electronic devices, such as transistors, solar cells, rectifiers and microchips"
+      },
+      {
+        "text": "Silica, found in sand, is the main ingredient of glass.",
+        "src": "lanl",
+        "quote": "Silica, as sand, is a principal ingredient of glass"
+      }
+    ]
+  },
+  {
+    "z": 15,
+    "uses": [
+      {
+        "text": "Phosphates are a major part of farm fertilizers.",
+        "src": "lanl",
+        "quote": "World-wide demand for fertilizers has caused record phosphate production."
+      },
+      {
+        "text": "Red phosphorus is used in safety matches and fireworks.",
+        "src": "jlab",
+        "quote": "Red phosphorus is used in safety matches, fireworks, smoke bombs and pesticides."
+      }
+    ]
+  },
+  {
+    "z": 16,
+    "uses": [
+      {
+        "text": "Most sulfur is made into sulfuric acid, a key industrial chemical.",
+        "src": "jlab",
+        "quote": "Most of the sulfur that is produced is used in the manufacture of sulfuric acid"
+      },
+      {
+        "text": "Sulfur is used to vulcanize natural rubber.",
+        "src": "jlab",
+        "quote": "Smaller amounts of sulfur are used to vulcanize natural rubbers"
+      }
+    ]
+  },
+  {
+    "z": 17,
+    "uses": [
+      {
+        "text": "Chlorine makes drinking water safe and keeps swimming pools clean.",
+        "src": "jlab",
+        "quote": "is used to make drinking water safe and to treat swimming pools"
+      },
+      {
+        "text": "Chlorine is used to make plastics, paper products, dyes and medicines.",
+        "src": "jlab",
+        "quote": "such as in the production of paper products, plastics, dyes, textiles, medicines"
+      }
+    ]
+  },
+  {
+    "z": 18,
+    "uses": [
+      {
+        "text": "Argon fills light bulbs so the hot filament doesn't corrode.",
+        "src": "jlab",
+        "quote": "It is used to fill incandescent and fluorescent light bulbs to prevent oxygen from corroding the hot filament."
+      },
+      {
+        "text": "Argon shields metal from the air during welding.",
+        "src": "lanl",
+        "quote": "Argon is also used as an inert gas shield for arc welding and cutting"
+      }
+    ]
+  },
+  {
+    "z": 19,
+    "uses": [
+      {
+        "text": "Most potassium goes into fertilizers as potash.",
+        "src": "lanl",
+        "quote": "The greatest demand for potash has been in its use for fertilizers."
+      },
+      {
+        "text": "Potassium hydroxide is used to make soaps and detergents.",
+        "src": "jlab",
+        "quote": "Potassium hydroxide (KOH) is used to make soaps, detergents and drain cleaners."
+      }
+    ]
+  },
+  {
+    "z": 20,
+    "uses": [
+      {
+        "text": "Gypsum, a calcium compound, is used to make drywall and plaster.",
+        "src": "jlab",
+        "quote": "calcium sulfate (CaSO4), also known as gypsum, which is used to make dry wall and plaster of Paris"
+      },
+      {
+        "text": "Calcium carbonate goes into toothpaste, antacids and white paint.",
+        "src": "jlab",
+        "quote": "Calcium carbonate is used to make white paint, cleaning powder, toothpaste and stomach antacids"
+      }
+    ]
+  },
+  {
+    "z": 21,
+    "uses": [
+      {
+        "text": "Scandium-aluminum alloys are used in bicycle frames and baseball bats.",
+        "src": "jlab",
+        "quote": "such as aluminum baseball bats, bicycle frames and lacrosse sticks"
+      },
+      {
+        "text": "Scandium iodide makes lamps give off light much like sunlight.",
+        "src": "jlab",
+        "quote": "is added to mercury vapor lamps so that they will emit light that closely resembles sunlight"
+      }
+    ]
+  },
+  {
+    "z": 22,
+    "uses": [
+      {
+        "text": "Most titanium is used as titanium dioxide, the white pigment in paint.",
+        "src": "jlab",
+        "quote": "is used as a pigment to create white paint and accounts for the largest use of the element"
+      },
+      {
+        "text": "Titanium is used for artificial hips and other implants in the body.",
+        "src": "jlab",
+        "quote": "it is used to create artificial hips, pins for setting bones and for other biological implants"
+      }
+    ]
+  },
+  {
+    "z": 23,
+    "uses": [
+      {
+        "text": "Nearly 80% of all vanadium is used as an additive to steel.",
+        "src": "jlab",
+        "quote": "Nearly 80% of the vanadium produced is used to make ferrovanadium or as an additive to steel."
+      },
+      {
+        "text": "Vanadium steels are used for car axles, crankshafts and gears.",
+        "src": "jlab",
+        "quote": "Ferrovanadium and vanadium-steel alloys are used to make such things as axles, crankshafts and gears for cars"
+      }
+    ]
+  },
+  {
+    "z": 24,
+    "uses": [
+      {
+        "text": "Chrome plating gives metal a hard, shiny surface that resists corrosion.",
+        "src": "lanl",
+        "quote": "It is mostly used in plating to produce a hard, beautiful surface and to prevent corrosion."
+      },
+      {
+        "text": "Chromium is added to steel to harden it and to make stainless steel.",
+        "src": "jlab",
+        "quote": "Chromium is added to steel to harden it and to form stainless steel"
+      }
+    ]
+  },
+  {
+    "z": 25,
+    "uses": [
+      {
+        "text": "Nearly 90% of all manganese is used in making steel.",
+        "src": "jlab",
+        "quote": "Nearly 90% of all of the manganese produced each year is used in the production of steel."
+      },
+      {
+        "text": "Manganese dioxide is used in dry cell batteries.",
+        "src": "jlab",
+        "quote": "It is used in dry cell batteries to prevent the formation of hydrogen"
+      }
+    ]
+  },
+  {
+    "z": 26,
+    "uses": [
+      {
+        "text": "Most iron goes into steel, an alloy of iron and a little carbon.",
+        "src": "jlab",
+        "quote": "Huge amounts of iron are used to make steel, an alloy of iron and carbon."
+      },
+      {
+        "text": "Iron sulfate is used to treat anemia, a blood disease.",
+        "src": "jlab",
+        "quote": "Iron sulfate (FeSO4) is used to treat the blood disease anemia."
+      }
+    ]
+  },
+  {
+    "z": 27,
+    "uses": [
+      {
+        "text": "Cobalt alloys are used in jet engines and gas turbines.",
+        "src": "jlab",
+        "quote": "Cobalt is also used to make alloys for jet engines and gas turbines"
+      },
+      {
+        "text": "Cobalt compounds give glass, pottery and tile a blue color.",
+        "src": "lanl",
+        "quote": "Cobalt salts have been used for centuries to produce brilliant and permanent blue colors in porcelain, glass, pottery"
+      }
+    ]
+  },
+  {
+    "z": 28,
+    "uses": [
+      {
+        "text": "Nickel is used to make stainless steel and other alloys that resist corrosion.",
+        "src": "lanl",
+        "quote": "It is extensively used for making stainless steel and other corrosion-resistant alloys"
+      },
+      {
+        "text": "Nickel is used in some coins and batteries.",
+        "src": "jlab",
+        "quote": "Nickel is also used to manufacture some types of coins and batteries."
+      }
+    ]
+  },
+  {
+    "z": 29,
+    "uses": [
+      {
+        "text": "Large amounts of copper are made into electrical wire.",
+        "src": "jlab",
+        "quote": "Used in large amounts by the electrical industry in the form of wire"
+      },
+      {
+        "text": "Copper is used for water pipes and jewelry.",
+        "src": "jlab",
+        "quote": "Copper is also used to make water pipes and jewelry"
+      }
+    ]
+  },
+  {
+    "z": 30,
+    "uses": [
+      {
+        "text": "Roughly a third of zinc is used to galvanize, or coat, iron against corrosion.",
+        "src": "jlab",
+        "quote": "Roughly one third of all metallic zinc produced today is used in a process known as galvanization."
+      },
+      {
+        "text": "Zinc and copper make brass, used in musical instruments and screws.",
+        "src": "jlab",
+        "quote": "Brass is still used today, particularly in musical instruments, screws and other hardware"
+      }
+    ]
+  },
+  {
+    "z": 31,
+    "uses": [
+      {
+        "text": "Gallium is used to make transistors and light-emitting diodes (LEDs).",
+        "src": "jlab",
+        "quote": "has been used to produce solid-state items like transistors and light emitting diodes"
+      },
+      {
+        "text": "Gallium arsenide turns electricity directly into laser light.",
+        "src": "jlab",
+        "quote": "Gallium arsenide (GaAs) can produce laser light directly from electricity."
+      }
+    ]
+  },
+  {
+    "z": 32,
+    "uses": [
+      {
+        "text": "Germanium's largest use is in semiconductors such as transistors.",
+        "src": "jlab",
+        "quote": "The largest use of germanium is in the semiconductor industry."
+      },
+      {
+        "text": "Germanium lets infrared light through and is used in infrared optics.",
+        "src": "jlab",
+        "quote": "are transparent to infrared radiation and are used in infrared optical instruments and infrared detectors"
+      }
+    ]
+  },
+  {
+    "z": 33,
+    "uses": [
+      {
+        "text": "Small amounts of arsenic are added to semiconductors to make transistors.",
+        "src": "lanl",
+        "quote": "Arsenic is finding increasing uses as a doping agent in solid-state devices such as transistors."
+      },
+      {
+        "text": "Arsenic compounds have been used as rat poison and insecticides.",
+        "src": "jlab",
+        "quote": "They have been used to make rat poison and some insecticides."
+      }
+    ]
+  },
+  {
+    "z": 34,
+    "uses": [
+      {
+        "text": "Selenium is used in xerography to copy documents.",
+        "src": "lanl",
+        "quote": "Selenium is used in Xerography for reproducing and copying documents, letters, etc."
+      },
+      {
+        "text": "Selenium gives glass and enamel a ruby-red color.",
+        "src": "jlab",
+        "quote": "is also used to make a ruby-red color in glasses and enamels"
+      }
+    ]
+  },
+  {
+    "z": 35,
+    "uses": [
+      {
+        "text": "Silver bromide, used in photography, is bromine's largest use.",
+        "src": "jlab",
+        "quote": "Silver bromide (AgBr), a chemical used in photography, now accounts for the largest use of bromine."
+      },
+      {
+        "text": "Bromine compounds are used in flameproofing and water purification.",
+        "src": "jlab",
+        "quote": "Other bromine compounds are used in fumigants, in flameproofing agents and in some compounds used to purify water."
+      }
+    ]
+  },
+  {
+    "z": 36,
+    "uses": [
+      {
+        "text": "Krypton is used in flash lamps for high-speed photography.",
+        "src": "jlab",
+        "quote": "Krypton is used in some types of photographic flashes used in high speed photography."
+      },
+      {
+        "text": "Some fluorescent bulbs are filled with krypton and argon.",
+        "src": "jlab",
+        "quote": "Some fluorescent light bulbs are filled with a mixture of krypton and argon gases."
+      }
+    ]
+  },
+  {
+    "z": 37,
+    "uses": [
+      {
+        "text": "Rubidium soaks up stray gases inside vacuum tubes.",
+        "src": "jlab",
+        "quote": "Rubidium is used in vacuum tubes as a getter, a material that combines with and removes trace gases"
+      },
+      {
+        "text": "Rubidium is used in photocells and special glasses.",
+        "src": "jlab",
+        "quote": "It is also used in the manufacture of photocells and in special glasses."
+      }
+    ]
+  },
+  {
+    "z": 38,
+    "uses": [
+      {
+        "text": "Strontium compounds give fireworks and flares a bright red flame.",
+        "src": "jlab",
+        "quote": "burn with a bright, red flame and are used in fireworks and signal flares"
+      },
+      {
+        "text": "Strontium is used to make ferrite magnets and to refine zinc.",
+        "src": "lanl",
+        "quote": "strontium has found use in producing ferrite magnets and in refining zinc"
+      }
+    ]
+  },
+  {
+    "z": 39,
+    "uses": [
+      {
+        "text": "Yttrium compounds help make the red color in color TV screens.",
+        "src": "jlab",
+        "quote": "are both combined with europium to produce the red phosphor used in color televisions"
+      },
+      {
+        "text": "Yttrium-iron garnets act as filters in microwave equipment.",
+        "src": "lanl",
+        "quote": "Yttrium oxide also is used to produce yttrium-iron-garnets, which are very effective microwave filters."
+      }
+    ]
+  },
+  {
+    "z": 40,
+    "uses": [
+      {
+        "text": "Nearly 90% of zirconium is used in nuclear reactors.",
+        "src": "jlab",
+        "quote": "The nuclear power industry uses nearly 90% of the zirconium produced each year"
+      },
+      {
+        "text": "Zircon, a zirconium mineral, is cut into gems that look like diamond.",
+        "src": "jlab",
+        "quote": "the most popular of which is a clear, transparent gemstone that can be cut to look like diamond"
+      }
+    ]
+  },
+  {
+    "z": 41,
+    "uses": [
+      {
+        "text": "Niobium-titanium wire is used to make superconducting magnets.",
+        "src": "jlab",
+        "quote": "an alloy of niobium and titanium which can then be used to make superconductive magnets"
+      },
+      {
+        "text": "Niobium is used in welding rods for stainless steel.",
+        "src": "lanl",
+        "quote": "Niobium is used in arc-welding rods for stabilized grades of stainless steel."
+      }
+    ]
+  },
+  {
+    "z": 42,
+    "uses": [
+      {
+        "text": "Molybdenum is mostly used to make strong steel alloys.",
+        "src": "jlab",
+        "quote": "Molybdenum is primarily used as an alloying agent in steel. When added to steel"
+      },
+      {
+        "text": "Molybdenum sulfide is a lubricant that works where oils would break down.",
+        "src": "lanl",
+        "quote": "Molybdenum sulfide is useful as a lubricant, especially at high temperatures where oils would decompose"
+      }
+    ]
+  },
+  {
+    "z": 43,
+    "uses": [
+      {
+        "text": "Technetium is used as a medical tracer.",
+        "src": "jlab",
+        "quote": "Technetium can also be used as a medical tracer and to calibrate particle detectors."
+      },
+      {
+        "text": "Small amounts of technetium can slow the corrosion of steel.",
+        "src": "jlab",
+        "quote": "Small amounts of technetium can retard the corrosion of steel"
+      }
+    ]
+  },
+  {
+    "z": 44,
+    "uses": [
+      {
+        "text": "A little ruthenium makes titanium far more resistant to corrosion.",
+        "src": "jlab",
+        "quote": "Adding 0.1% ruthenium to titanium makes titanium 100 times more resistant to corrosion."
+      },
+      {
+        "text": "Ruthenium strengthens platinum and palladium alloys used in jewelry.",
+        "src": "jlab",
+        "quote": "Small amounts of ruthenium are added to platinum and palladium to strengthen them. These alloys are used in jewelry"
+      }
+    ]
+  },
+  {
+    "z": 45,
+    "uses": [
+      {
+        "text": "Rhodium is used in catalytic converters, jewelry and electrical contacts.",
+        "src": "jlab",
+        "quote": "Rhodium is used to make electrical contacts, as jewelry and in catalytic converters"
+      },
+      {
+        "text": "Rhodium's main use is to harden platinum and palladium alloys.",
+        "src": "lanl",
+        "quote": "Rhodium's primary use is as an alloying agent to harden platinum and palladium."
+      }
+    ]
+  },
+  {
+    "z": 46,
+    "uses": [
+      {
+        "text": "Palladium mixed with gold makes white gold for jewelry.",
+        "src": "jlab",
+        "quote": "Palladium alloys are used to make jewelry and, when alloyed with gold, forms a material known as white gold."
+      },
+      {
+        "text": "Palladium is used in dental crowns, surgical tools and electrical contacts.",
+        "src": "jlab",
+        "quote": "Palladium is used to make springs for watches, surgical instruments, electrical contacts and dental fillings and crowns."
+      }
+    ]
+  },
+  {
+    "z": 47,
+    "uses": [
+      {
+        "text": "Sterling silver is used for jewelry and silverware.",
+        "src": "jlab",
+        "quote": "Sterling silver, an alloy containing 92.5% silver, is used to make silverware, jewelry and other decorative items."
+      },
+      {
+        "text": "Silver, the best electrical conductor, is used in contacts and circuit boards.",
+        "src": "jlab",
+        "quote": "it is sometimes used in making solder, electrical contacts and printed circuit boards"
+      }
+    ]
+  },
+  {
+    "z": 48,
+    "uses": [
+      {
+        "text": "Cadmium is used in rechargeable nickel-cadmium batteries.",
+        "src": "jlab",
+        "quote": "Cadmium is also used in rechargeable nickel-cadmium batteries."
+      },
+      {
+        "text": "Cadmium absorbs neutrons and is used in nuclear reactor control rods.",
+        "src": "jlab",
+        "quote": "Cadmium easily absorbs neutrons and is used to make control rods for nuclear reactors."
+      }
+    ]
+  },
+  {
+    "z": 49,
+    "uses": [
+      {
+        "text": "Indium makes mirrors as bright as silver ones that tarnish more slowly.",
+        "src": "jlab",
+        "quote": "Indium can be used to make mirrors that are as reflective as silver mirrors but do not tarnish as quickly."
+      },
+      {
+        "text": "Indium is added to germanium to make transistors.",
+        "src": "jlab",
+        "quote": "Indium is used to dope germanium to make transistors. It is also used"
+      }
+    ]
+  },
+  {
+    "z": 50,
+    "uses": [
+      {
+        "text": "Tin cans are steel cans with a thin coat of tin to stop rust.",
+        "src": "jlab",
+        "quote": "A thin layer of tin is applied to the inside and outside of the can"
+      },
+      {
+        "text": "Most window glass is made by floating molten glass on molten tin.",
+        "src": "jlab",
+        "quote": "molten glass is poured onto a pool of molten tin. The glass floats on the surface of the tin"
+      }
+    ]
+  },
+  {
+    "z": 51,
+    "uses": [
+      {
+        "text": "Antimony is alloyed with lead to make it harder and stronger.",
+        "src": "lanl",
+        "quote": "It greatly increases the hardness and mechanical strength of lead."
+      },
+      {
+        "text": "Antimony compounds are used in flame-proofing materials and glass.",
+        "src": "jlab",
+        "quote": "Antimony compounds are used to make flame-proofing materials, paints, ceramic enamels, glass and pottery."
+      }
+    ]
+  },
+  {
+    "z": 52,
+    "uses": [
+      {
+        "text": "Tellurium makes copper and stainless steel easier to machine.",
+        "src": "lanl",
+        "quote": "Tellurium improves the machinability of copper and stainless steel, and its addition to lead"
+      },
+      {
+        "text": "Bismuth telluride, a tellurium compound, is used in thermoelectric devices.",
+        "src": "lanl",
+        "quote": "Tellurium is used in ceramics. Bismuth telluride has been used in thermoelectric devices."
+      }
+    ]
+  },
+  {
+    "z": 53,
+    "uses": [
+      {
+        "text": "Radioactive iodine-131 is used to treat some thyroid diseases.",
+        "src": "jlab",
+        "quote": "A radioactive isotope of iodine, iodine-131, is used to treat some diseases of the thyroid gland."
+      },
+      {
+        "text": "Iodine in alcohol is used as an antiseptic on wounds.",
+        "src": "jlab",
+        "quote": "when mixed with iodine in alcohol, as an antiseptic for external wounds"
+      }
+    ]
+  },
+  {
+    "z": 54,
+    "uses": [
+      {
+        "text": "Xenon makes the bright white flash in strobe lights.",
+        "src": "jlab",
+        "quote": "Xenon produces a brilliant white flash of light when it is excited electrically and is widely used in strobe lights."
+      },
+      {
+        "text": "Xenon fueled the ion engine of the Deep Space 1 space probe.",
+        "src": "jlab",
+        "quote": "xenon ions were used as a fuel in an experimental ion engine aboard the space probe Deep Space 1"
+      }
+    ]
+  },
+  {
+    "z": 55,
+    "uses": [
+      {
+        "text": "Cesium keeps time in atomic clocks.",
+        "src": "lanl",
+        "quote": "Cesium is used in atomic clocks, which are accurate to 5 s in 300 years."
+      },
+      {
+        "text": "Cesium is used in photoelectric cells.",
+        "src": "lanl",
+        "quote": "It is also used in photoelectric cells, as well as a catalyst"
+      }
+    ]
+  },
+  {
+    "z": 56,
+    "uses": [
+      {
+        "text": "Swallowed barium sulfate shows the intestines on X-ray images.",
+        "src": "jlab",
+        "quote": "when swallowed, can be used to produce X-ray images of the intestinal tract"
+      },
+      {
+        "text": "Barium nitrate gives fireworks and flares a bright green color.",
+        "src": "jlab",
+        "quote": "burns with a bright green color and is used in signal flares and fireworks"
+      }
+    ]
+  },
+  {
+    "z": 57,
+    "uses": [
+      {
+        "text": "Lanthanum oxide is used to make glass for camera lenses.",
+        "src": "jlab",
+        "quote": "is used to make the glass used in camera lenses and in other special glasses"
+      },
+      {
+        "text": "Lanthanum is about a quarter of misch metal, used for lighter flints.",
+        "src": "jlab",
+        "quote": "Lanthanum also makes up about 25% of Misch metal, a material that is used to make flints for lighters."
+      }
+    ]
+  },
+  {
+    "z": 58,
+    "uses": [
+      {
+        "text": "Cerium oxide is used to polish glass.",
+        "src": "lanl",
+        "quote": "The oxide is finding increased use as a glass polishing agent instead of rouge"
+      },
+      {
+        "text": "Cerium oxide is built into the walls of self-cleaning ovens.",
+        "src": "jlab",
+        "quote": "is a component of the walls of self cleaning ovens and of incandescent lantern mantles"
+      }
+    ]
+  },
+  {
+    "z": 59,
+    "uses": [
+      {
+        "text": "Praseodymium is alloyed with magnesium for strong aircraft engine metals.",
+        "src": "jlab",
+        "quote": "Praseodymium's primary use is as an alloying agent with magnesium to create high-strength metals that are used in aircraft engines."
+      },
+      {
+        "text": "Praseodymium gives glass a clean, intense yellow color.",
+        "src": "lanl",
+        "quote": "praseodymium produces an intense and unusually clean yellow color in glass"
+      }
+    ]
+  },
+  {
+    "z": 60,
+    "uses": [
+      {
+        "text": "Neodymium colors glass in shades from violet to wine-red and gray.",
+        "src": "lanl",
+        "quote": "By itself, neodymium colors glass delicate shades ranging from pure violet through wine-red and warm gray."
+      },
+      {
+        "text": "Glass containing neodymium is used to make lasers.",
+        "src": "lanl",
+        "quote": "Glass containing neodymium can be used as a laser material to produce coherent light."
+      }
+    ]
+  },
+  {
+    "z": 61,
+    "uses": [
+      {
+        "text": "Promethium's radiation is used in gauges that measure thickness.",
+        "src": "lanl",
+        "quote": "The element has applications as a beta source for thickness gages"
+      },
+      {
+        "text": "Promethium can make a phosphor glow, lighting signs and signals.",
+        "src": "lanl",
+        "quote": "Light produced in this manner can be used for signs or signals that require dependable operation"
+      }
+    ]
+  },
+  {
+    "z": 62,
+    "uses": [
+      {
+        "text": "Samarium and cobalt make powerful permanent magnets.",
+        "src": "jlab",
+        "quote": "Samarium forms a compound with cobalt (SmCo5) which is a powerful permanent magnet"
+      },
+      {
+        "text": "Samarium is used in glass that absorbs infrared light.",
+        "src": "lanl",
+        "quote": "It is used in infrared absorbing glass and as a neutron absorber in nuclear reactors."
+      }
+    ]
+  },
+  {
+    "z": 63,
+    "uses": [
+      {
+        "text": "Europium oxide makes the red glow in television screens.",
+        "src": "jlab",
+        "quote": "is widely used as a red phosphor in television sets and as an activator for yttrium-based phosphors"
+      },
+      {
+        "text": "Plastic doped with europium has been used to make lasers.",
+        "src": "lanl",
+        "quote": "Europium-doped plastic has been used as a laser material."
+      }
+    ]
+  },
+  {
+    "z": 64,
+    "uses": [
+      {
+        "text": "Gadolinium captures neutrons better than any element, for reactor control rods.",
+        "src": "jlab",
+        "quote": "the greatest ability to capture thermal neutrons of all known elements and can be used as control rods"
+      },
+      {
+        "text": "A little gadolinium helps iron and chromium alloys resist heat and oxidation.",
+        "src": "lanl",
+        "quote": "gadolinium improves the workability and resistance of iron, chromium, and related alloys to high temperatures and oxidation"
+      }
+    ]
+  },
+  {
+    "z": 65,
+    "uses": [
+      {
+        "text": "Terbium helps stabilize crystals in high-temperature fuel cells.",
+        "src": "jlab",
+        "quote": "as a crystal stabilizer in fuel cells that operate at high temperatures"
+      },
+      {
+        "text": "Sodium terbium borate is used to make laser light.",
+        "src": "jlab",
+        "quote": "Sodium terbium borate, another terbium compound, is used to make laser light."
+      }
+    ]
+  },
+  {
+    "z": 66,
+    "uses": [
+      {
+        "text": "A dysprosium oxide-nickel cement is used to cool nuclear reactor rods.",
+        "src": "lanl",
+        "quote": "A dysprosium oxide-nickel cement has found use in cooling nuclear reactor rods."
+      },
+      {
+        "text": "With vanadium and other rare earths, dysprosium is used in lasers.",
+        "src": "jlab",
+        "quote": "When combined with vanadium and other rare earth elements, dysprosium is used as a laser material."
+      }
+    ]
+  },
+  {
+    "z": 67,
+    "uses": []
+  },
+  {
+    "z": 68,
+    "uses": [
+      {
+        "text": "Erbium is added to fiber optic cables to amplify signals.",
+        "src": "jlab",
+        "quote": "Erbium is added to fiber optic cables as a doping agent where it is used as a signal amplifier."
+      },
+      {
+        "text": "Erbium oxide gives glass and glazes a pink color.",
+        "src": "lanl",
+        "quote": "Erbium oxide gives a pink color and has been used as a colorant in glasses and porcelain enamel glazes."
+      }
+    ]
+  },
+  {
+    "z": 69,
+    "uses": [
+      {
+        "text": "Thulium-169 could be the radiation source in portable X-ray machines.",
+        "src": "jlab",
+        "quote": "thulium-169, could be used as a radiation source for portable X-ray machines"
+      },
+      {
+        "text": "Thulium can be added to fiber lasers.",
+        "src": "lanl",
+        "quote": "used in microwave equipment, and can be used for doping fiber lasers"
+      }
+    ]
+  },
+  {
+    "z": 70,
+    "uses": [
+      {
+        "text": "Ytterbium can amplify signals in fiber optic cable.",
+        "src": "jlab",
+        "quote": "used as a doping agent in fiber optic cable where it can be used as an amplifier"
+      },
+      {
+        "text": "Ytterbium can improve some mechanical properties of stainless steel.",
+        "src": "jlab",
+        "quote": "It can be alloyed with stainless steel to improve some of its mechanical properties"
+      }
+    ]
+  },
+  {
+    "z": 71,
+    "uses": [
+      {
+        "text": "Lutetium has few uses, but it can be a catalyst in cracking petroleum.",
+        "src": "jlab",
+        "quote": "can be used as a catalyst in the cracking of petroleum products"
+      }
+    ]
+  },
+  {
+    "z": 72,
+    "uses": [
+      {
+        "text": "Hafnium absorbs neutrons and is used in nuclear reactor control rods.",
+        "src": "jlab",
+        "quote": "Hafnium is a good absorber of neutrons and is used in the control rods of nuclear reactors."
+      },
+      {
+        "text": "Hafnium is used in gas-filled and incandescent lamps.",
+        "src": "lanl",
+        "quote": "Hafnium is used in gas-filled and incandescent lamps, and is an efficient getter"
+      }
+    ]
+  },
+  {
+    "z": 73,
+    "uses": [
+      {
+        "text": "Most tantalum is used in electronic capacitors and furnace parts.",
+        "src": "lanl",
+        "quote": "Tantalum is used to make electrolytic capacitors and vacuum furnace parts, which account for about 60% of its use."
+      },
+      {
+        "text": "Tantalum doesn't irritate the body, so it is used for implants and sutures.",
+        "src": "jlab",
+        "quote": "Tantalum also does not irritate the body and is used to make surgical sutures as well as implants"
+      }
+    ]
+  },
+  {
+    "z": 74,
+    "uses": [
+      {
+        "text": "Tungsten has the highest melting point of any metal and is used in bulb filaments.",
+        "src": "jlab",
+        "quote": "Tungsten has the highest melting point of all metallic elements and is used to make filaments for incandescent light bulbs"
+      },
+      {
+        "text": "Very hard tungsten carbide tips drill bits and cutting tools.",
+        "src": "jlab",
+        "quote": "It is used in the tips of drill bits, high speed cutting tools and in mining machinery."
+      }
+    ]
+  },
+  {
+    "z": 75,
+    "uses": [
+      {
+        "text": "Rhenium is mostly used in alloys with tungsten and molybdenum.",
+        "src": "jlab",
+        "quote": "but is most frequently used as an alloying agent in tungsten and molybdenum"
+      },
+      {
+        "text": "Rhenium makes filaments for lab instruments such as mass spectrographs.",
+        "src": "lanl",
+        "quote": "It is widely used as filaments for mass spectrographs and ion gauges."
+      }
+    ]
+  },
+  {
+    "z": 76,
+    "uses": [
+      {
+        "text": "Hard osmium alloys are used in pen tips and electrical contacts.",
+        "src": "jlab",
+        "quote": "Osmium alloys can be found in ball point pen tips, fountain pen tips, record player needles, electrical contacts"
+      },
+      {
+        "text": "Osmium tetroxide has been used to reveal fingerprints and stain tissue.",
+        "src": "lanl",
+        "quote": "The tetroxide has been used to detect fingerprints and to stain fatty tissue for microscope slides."
+      }
+    ]
+  },
+  {
+    "z": 77,
+    "uses": [
+      {
+        "text": "Iridium is mainly used to harden platinum.",
+        "src": "jlab",
+        "quote": "It is primarily used as a hardening agent for platinum. Platinum-iridium alloys"
+      },
+      {
+        "text": "An iridium-osmium alloy is used for fountain pen tips and compass bearings.",
+        "src": "jlab",
+        "quote": "Iridium is also alloyed with osmium to make the tips of fountain pens and compass bearings."
+      }
+    ]
+  },
+  {
+    "z": 78,
+    "uses": [
+      {
+        "text": "Platinum in car catalytic converters cleans up exhaust gases.",
+        "src": "jlab",
+        "quote": "a catalytic converter, a device found in the exhaust systems of most cars"
+      },
+      {
+        "text": "Platinum is used for jewelry, electrical contacts and lab ware.",
+        "src": "jlab",
+        "quote": "It is used to make jewelry, wire, electrical contacts and laboratory vessels."
+      }
+    ]
+  },
+  {
+    "z": 79,
+    "uses": [
+      {
+        "text": "Gold alloys are made into jewelry, coins and dental fillings.",
+        "src": "jlab",
+        "quote": "Gold alloys are used to make jewelry, decorative items, dental fillings and coins."
+      },
+      {
+        "text": "Gold doesn't tarnish, so it is used in electrical connectors and circuit boards.",
+        "src": "jlab",
+        "quote": "so it can be used to make electrical connectors and printed circuit boards"
+      }
+    ]
+  },
+  {
+    "z": 80,
+    "uses": [
+      {
+        "text": "Mercury vapor glows in fluorescent lamps and some streetlights.",
+        "src": "jlab",
+        "quote": "Mercury vapor is used in streetlights, fluorescent lamps and advertising signs."
+      },
+      {
+        "text": "Mercury has been used in thermometers and barometers.",
+        "src": "jlab",
+        "quote": "Mercury can be used to make thermometers, barometers and other scientific instruments."
+      }
+    ]
+  },
+  {
+    "z": 81,
+    "uses": [
+      {
+        "text": "Thallium compounds are used in devices that detect infrared light.",
+        "src": "jlab",
+        "quote": "are all compounds used in devices to detect infrared radiation"
+      },
+      {
+        "text": "Thallium is used to make glasses that melt at low temperatures.",
+        "src": "lanl",
+        "quote": "Thallium has been used, with sulfur or selenium and arsenic, to produce low melting glasses"
+      }
+    ]
+  },
+  {
+    "z": 82,
+    "uses": [
+      {
+        "text": "Most lead today goes into lead-acid storage batteries.",
+        "src": "jlab",
+        "quote": "Most of the lead used today is used in the production on lead-acid storage batteries"
+      },
+      {
+        "text": "Dense lead is used as a shield against X-rays and gamma rays.",
+        "src": "jlab",
+        "quote": "Lead's high density makes it useful as a shield against X-ray and gamma-ray radiation"
+      }
+    ]
+  },
+  {
+    "z": 83,
+    "uses": [
+      {
+        "text": "Low-melting bismuth alloys are used in fire sprinklers and fuses.",
+        "src": "jlab",
+        "quote": "These alloys are used in such things as automatic fire sprinkler systems, fire detection systems and electrical fuses."
+      },
+      {
+        "text": "Bismuth compounds are used in cosmetics and in medicine.",
+        "src": "lanl",
+        "quote": "Bismuth oxychloride is used extensively in cosmetics. Bismuth subnitrate and subcarbonate are used in medicine."
+      }
+    ]
+  },
+  {
+    "z": 84,
+    "uses": [
+      {
+        "text": "Polonium can be used to remove static electricity from machinery.",
+        "src": "jlab",
+        "quote": "Polonium can be used to eliminate static electricity in machinery"
+      },
+      {
+        "text": "Polonium is used in brushes that remove dust from photographic film.",
+        "src": "jlab",
+        "quote": "Polonium is also used in brushes for removing dust from photographic films"
+      }
+    ]
+  },
+  {
+    "z": 85,
+    "uses": [
+      {
+        "text": "Too rare and short-lived for any use outside research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for astatine outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 86,
+    "uses": [
+      {
+        "text": "Small amounts of radon are sometimes used to treat some cancers.",
+        "src": "jlab",
+        "quote": "Small amounts of radon are sometimes used by hospitals to treat some forms of cancer."
+      }
+    ]
+  },
+  {
+    "z": 87,
+    "uses": [
+      {
+        "text": "Too rare and short-lived for any use outside research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for francium outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 88,
+    "uses": [
+      {
+        "text": "Radium was once used in glowing paint for watch and instrument dials.",
+        "src": "jlab",
+        "quote": "Radium had been used to make self-luminous paints for watches, aircraft instrument dials and other instrumentation"
+      },
+      {
+        "text": "Mixed with beryllium, radium is used as a neutron source.",
+        "src": "jlab",
+        "quote": "A mixture of radium and beryllium will emit neutrons and is used as a neutron source."
+      }
+    ]
+  },
+  {
+    "z": 89,
+    "uses": [
+      {
+        "text": "Actinium has no commercial uses but is used to produce neutrons.",
+        "src": "jlab",
+        "quote": "Actinium has no significant commercial applications, although it is used in the production of neutrons."
+      }
+    ]
+  },
+  {
+    "z": 90,
+    "uses": [
+      {
+        "text": "Thorium strengthens magnesium alloys at high temperatures.",
+        "src": "jlab",
+        "quote": "Thorium is used as an alloying agent to improve magnesium's strength at high temperatures."
+      },
+      {
+        "text": "Thorium oxide was long used in gas lantern mantles that glow brightly.",
+        "src": "lanl",
+        "quote": "The principal historic use of thorium has been in the preparation of the Welsbach mantle"
+      }
+    ]
+  },
+  {
+    "z": 91,
+    "uses": [
+      {
+        "text": "Too rare and radioactive for any use outside research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for protactinium outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 92,
+    "uses": [
+      {
+        "text": "Uranium fuels nuclear power plants that generate electricity.",
+        "src": "jlab",
+        "quote": "is most commonly used in the nuclear power industry to generate electricity"
+      },
+      {
+        "text": "Uranium compounds have been used for centuries to color glass.",
+        "src": "jlab",
+        "quote": "Uranium compounds have been used for centuries to color glass."
+      }
+    ]
+  },
+  {
+    "z": 93,
+    "uses": [
+      {
+        "text": "Neptunium-237, a by-product of nuclear reactors, is used in neutron detectors.",
+        "src": "jlab",
+        "quote": "a by-product of the production of plutonium in nuclear reactors, is used in neutron detectors"
+      }
+    ]
+  },
+  {
+    "z": 94,
+    "uses": [
+      {
+        "text": "Plutonium-238 powers space probes that travel too far for solar power.",
+        "src": "jlab",
+        "quote": "Plutonium-238 is used in radioisotope thermoelectric generators to provide electricity for space probes"
+      },
+      {
+        "text": "Plutonium-239 fuels some nuclear reactors and is used in nuclear weapons.",
+        "src": "jlab",
+        "quote": "so it is used at the heart of modern day nuclear weapons and in some nuclear reactors"
+      }
+    ]
+  },
+  {
+    "z": 95,
+    "uses": [
+      {
+        "text": "Americium-241 is used in smoke detectors.",
+        "src": "jlab",
+        "quote": "It is used in smoke detectors and can be used as a portable source of gamma rays."
+      },
+      {
+        "text": "Americium is used to gauge glass thickness when making flat glass.",
+        "src": "lanl",
+        "quote": "americium has been employed to gauge glass thickness to help create flat glass"
+      }
+    ]
+  },
+  {
+    "z": 96,
+    "uses": [
+      {
+        "text": "Only milligrams have ever been made, so it is used only in research.",
+        "src": "jlab",
+        "quote": "Since only milligram amounts of curium have ever been produced, there are currently no commercial applications for it"
+      }
+    ]
+  },
+  {
+    "z": 97,
+    "uses": []
+  },
+  {
+    "z": 98,
+    "uses": [
+      {
+        "text": "Californium-252 neutrons help identify gold and silver ores.",
+        "src": "jlab",
+        "quote": "It is being used as a neutron source to identify gold and silver ores"
+      },
+      {
+        "text": "Californium gauges find water- and oil-bearing layers in oil wells.",
+        "src": "jlab",
+        "quote": "used to find water and oil bearing layers in oil wells"
+      }
+    ]
+  },
+  {
+    "z": 99,
+    "uses": [
+      {
+        "text": "Made only in tiny amounts; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 100,
+    "uses": [
+      {
+        "text": "Made in tiny amounts and quickly decays; used only in research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for fermium outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 101,
+    "uses": [
+      {
+        "text": "Made only in tiny amounts; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 102,
+    "uses": [
+      {
+        "text": "Made only in tiny amounts; used only in research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for it outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 103,
+    "uses": [
+      {
+        "text": "Made only in tiny amounts; used only in research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for it outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 104,
+    "uses": [
+      {
+        "text": "Made in tiny amounts and quickly decays; used only in research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for rutherfordium outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 105,
+    "uses": [
+      {
+        "text": "Made in tiny amounts and quickly decays; used only in research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for dubnium outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 106,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for seaborgium outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 107,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "there are currently no uses for bohrium outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 108,
+    "uses": [
+      {
+        "text": "Made only in tiny amounts; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 109,
+    "uses": [
+      {
+        "text": "Made only in tiny amounts; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 110,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 111,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 112,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 113,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 114,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 115,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 116,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 117,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  },
+  {
+    "z": 118,
+    "uses": [
+      {
+        "text": "Made only a few atoms at a time; used only in research.",
+        "src": "jlab",
+        "quote": "it currently has no uses outside of basic scientific research"
+      }
+    ]
+  }
+]
