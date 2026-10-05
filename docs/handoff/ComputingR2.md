@@ -24,6 +24,12 @@ brief, word for word, under "## Brief", then keep "## State
   back "Cool. Please make wheels sharper": the rotors' rings, letters, thumb wheels and end wheels
   now carry more, finer splats, and the rotor plates (hidden under the lampboard, a bug of mine) now
   show; posted as `cmp2-enigma-own-r2`. Main merged in.
+- After the Operator's note of 14:10 UTC: the Enigma also uses the sharp splat kernel
+  (`kernel: "sharp"`), posted as `cmp2-enigma-own-r3` (it replaces the two earlier cards). The help
+  texts were over the limits in tests/help.spec.mjs (the Enigma's how-to 141 characters, both About
+  texts over 180 words); both are rewritten within them. Ran on the new head: cmp2-sort,
+  cmp2-enigma, cmp2-engine, cmp2-shots, kit, taps, help, mca, unit (all pass; help after the
+  rewrite).
 
 ## Notes", "## Known issues" and "##
 
