@@ -229,3 +229,85 @@ export function runCloudPipeline(c, s) {
 }
 
 export { CLASS_NAMES };
+
+// Shaded relief for the drawn points, so a surface of flat-colored dots reads as a shape (the
+// eye-dome and hillshade shading point-cloud viewers use). The highest point in each cell of a
+// plan-view grid makes a height map; each point is lit by the slope there (light from the
+// northwest and above), and points well below their cell's top (under a canopy, at a wall's foot)
+// are darkened a little. Returns a factor (about 0.45 to 1.1) per point of idx.
+export function reliefShade(c, idx, { up = "z", cell } = {}) {
+  const n = idx.length;
+  const out = new Float32Array(n).fill(1);
+  if (!n || !(cell > 0)) return out;
+  const [ax, ay, az] = up === "y" ? [c.x, c.z, c.y] : [c.x, c.y, c.z];
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity; // prettier-ignore
+  for (let j = 0; j < n; j++) {
+    const i = idx[j];
+    if (ax[i] < x0) x0 = ax[i];
+    if (ax[i] > x1) x1 = ax[i];
+    if (ay[i] < y0) y0 = ay[i];
+    if (ay[i] > y1) y1 = ay[i];
+  }
+  let s = cell;
+  let nx = Math.floor((x1 - x0) / s) + 1;
+  let ny = Math.floor((y1 - y0) / s) + 1;
+  while (nx * ny > 4e6) {
+    s *= 1.5;
+    nx = Math.floor((x1 - x0) / s) + 1;
+    ny = Math.floor((y1 - y0) / s) + 1;
+  }
+  const top = new Float32Array(nx * ny).fill(-Infinity);
+  const cellOf = new Uint32Array(n);
+  for (let j = 0; j < n; j++) {
+    const i = idx[j];
+    const k = Math.floor((ay[i] - y0) / s) * nx + Math.floor((ax[i] - x0) / s);
+    cellOf[j] = k;
+    if (az[i] > top[k]) top[k] = az[i];
+  }
+  // Fill empty cells from their neighbors (a few rounds), so slopes at gaps stay calm.
+  for (let round = 0; round < 3; round++)
+    for (let y = 0; y < ny; y++)
+      for (let x = 0; x < nx; x++) {
+        const k = y * nx + x;
+        if (top[k] !== -Infinity) continue;
+        let sum = 0;
+        let cnt = 0;
+        for (const [dx, dy] of [
+          [1, 0],
+          [-1, 0],
+          [0, 1],
+          [0, -1],
+        ]) {
+          const xx = x + dx, yy = y + dy; // prettier-ignore
+          if (xx < 0 || yy < 0 || xx >= nx || yy >= ny) continue;
+          const v = top[yy * nx + xx];
+          if (v !== -Infinity) {
+            sum += v;
+            cnt++;
+          }
+        }
+        if (cnt) top[k] = sum / cnt - 1e-6; // marked as filled, not measured
+      }
+  const at = (x, y) => {
+    const v = top[Math.min(ny - 1, Math.max(0, y)) * nx + Math.min(nx - 1, Math.max(0, x))];
+    return v === -Infinity ? 0 : v;
+  };
+  // Light from the northwest (-x, +y in plan) and 50 degrees up.
+  const L = [-0.45, 0.45, 0.77];
+  const shadeOf = new Float32Array(nx * ny);
+  for (let y = 0; y < ny; y++)
+    for (let x = 0; x < nx; x++) {
+      const gx = (at(x + 1, y) - at(x - 1, y)) / (2 * s);
+      const gy = (at(x, y + 1) - at(x, y - 1)) / (2 * s);
+      const len = Math.hypot(gx, gy, 1);
+      const lambert = (-gx * L[0] - gy * L[1] + L[2]) / len;
+      shadeOf[y * nx + x] = 0.5 + 0.6 * Math.max(0, lambert);
+    }
+  for (let j = 0; j < n; j++) {
+    const k = cellOf[j];
+    const below = top[k] - az[idx[j]];
+    const under = below > 2 * s ? Math.max(0.75, 1 - (below / (12 * s)) * 0.25) : 1;
+    out[j] = shadeOf[k] * under;
+  }
+  return out;
+}

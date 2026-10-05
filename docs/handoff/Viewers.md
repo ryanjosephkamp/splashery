@@ -8,10 +8,14 @@ Branches: `claude/lane-viewers` (and `claude/lane-viewers-engine` for any engine
 "Phase Viewers: a splat toolkit and a point cloud viewer". Handoff file: docs/handoff/Viewers.md
 (create it; start it with this brief, word for word, under "## Brief", then keep "## State
 
-READY (October 5, 2026): both toys built, tested and pushed on `claude/lane-viewers` (PR #287).
-Five clips are on Effect review page 2 (lane record `Viewers`): `vwr-toolkit-split`,
-`vwr-toolkit-compare`, `vwr-clouds-palace`, `vwr-clouds-bridge`, `vwr-clouds-crater`. Waiting for
-the owner's marks; the full suite is for the Integrator.
+READY (October 5, 2026): both toys built, tested and pushed on `claude/lane-viewers` (PR #287). The
+owner marked the two toolkit clips good and the three point cloud clips "fix: Please make sharper".
+Round 2 (r2) answers that: the points are drawn as crisp dots with the Lab's sharper kernel, shaded
+relief is baked into their colors (each point lit by the slope under it, darker under canopies), the
+preview picks one point per small cube instead of a random share (the black specks were holes
+between randomly picked points), and the toy draws up to the device's full budget. The r2 clips (480
+px) are on Effect review page 2: `vwr-clouds-palace-r2`, `vwr-clouds-bridge-r2`,
+`vwr-clouds-crater-r2`, replacing the first three.
 
 - **Splat toolkit** (`splat-toolkit`, Studio, labs). Opens PLY (binary, text and the compressed PLY
   of SuperSplat and splat-transform), .splat, SPZ 1 to 3 and SOG 2 (zipped, or meta.json with its

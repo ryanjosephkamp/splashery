@@ -2887,7 +2887,11 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf
     (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ
     writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of
-    Fine Arts, the Golden Gate Bridge's south end, Meteor Crater.
+    Fine Arts, the Golden Gate Bridge's south end, Meteor Crater. Viewers r2 (the owner's "Please
+    make sharper" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's
+    sharper falloff, shaded relief baked into their colors (lit by the slope under each point,
+    darker under canopies), the preview picks one point per small cube instead of a random share (no
+    more holes), and up to the device's full budget.
   - Sound: An airy rising tone with faint ticks as the scan line crosses.
 
 ## Lab (2)

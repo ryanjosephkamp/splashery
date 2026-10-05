@@ -3481,7 +3481,7 @@ export const TOYS = [
     pack: "viewers",
     labs: true,
     tags: "lidar las laz ply xyz pts point cloud survey usgs 3dep terrain classification intensity measure distance crop thin gis",
-    camera: { yaw: 0.6, pitch: 0.55, roll: 0, distance: 3.3 },
+    camera: { yaw: 0.6, pitch: 0.55, roll: 0, distance: 2.8 },
   },
   // ---- Pack: lab (lane Lab) ----
   {

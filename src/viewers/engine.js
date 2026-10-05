@@ -10,7 +10,7 @@
 import { readSplatFile, writeSplatFile, pick, SAVE_FORMATS, boundsOf, emptyTable, FIELDS } from "./splat-io.js"; // prettier-ignore
 import { splatStats, runPipeline, previewArrays, decimateIndex, robustBounds } from "./splat-ops.js"; // prettier-ignore
 import { readCloudFile, writeCloudFile, pickCloud, CLOUD_SAVE } from "./cloud-io.js";
-import { cloudStats, cloudColors, runCloudPipeline, nearestPoint, measure, typicalSpacing, evenShare } from "./cloud-ops.js"; // prettier-ignore
+import { cloudStats, cloudColors, runCloudPipeline, nearestPoint, measure, typicalSpacing, evenShare, reliefShade, thinCloud } from "./cloud-ops.js"; // prettier-ignore
 
 const slots = new Map(); // "splat:a" -> { table, name, fileBytes, stats, last }
 
@@ -348,13 +348,19 @@ export function applyCloud({ slot, settings: s, budget }, progress = () => {}) {
   const res = runCloudPipeline(c, { crop, spacing: s.thin || 0 });
   rec.last = res;
   rec.up = up;
-  const shown = evenShare(res.keep, budget, 5);
+  const shown = evenPreview(c, res.keep, budget, rec.spacing);
   rec.shown = shown;
   const pos = cloudToView(c, shown, up);
   // Height colors stretch over the whole file, so a crop keeps its colors.
   const h = up === "y" ? 1 : 2;
   const range = [rec.stats.bounds.min[h], rec.stats.bounds.max[h]];
   const { col, mode } = cloudColors(c, shown, s.color || "height", { up, range });
+  // Shaded relief (on by default): each point lit by the slope under it.
+  if (s.shade !== false) {
+    const f = reliefShade(c, shown, { up, cell: rec.spacing * 3 });
+    for (let j = 0; j < shown.length; j++)
+      for (let k = 0; k < 3; k++) col[j * 3 + k] = Math.min(1, col[j * 3 + k] * f[j]);
+  }
   // Each point drawn about as wide as the gap to its neighbors at this budget.
   const spacing = Math.max(rec.spacing, s.thin || 0) * Math.sqrt(Math.max(1, res.keep.length / Math.max(1, shown.length))); // prettier-ignore
   progress(1, "");
@@ -368,6 +374,20 @@ export function applyCloud({ slot, settings: s, budget }, progress = () => {}) {
     stats: rec.stats,
     name: rec.name,
   };
+}
+
+// The points the toy draws when there are more than its budget: one per small cube (sized so the
+// count fits), so the surface is covered evenly; a random share leaves holes and clumps.
+function evenPreview(c, keep, budget, spacing) {
+  if (keep.length <= budget) return keep;
+  let size = spacing * Math.sqrt(keep.length / budget);
+  let picked = keep;
+  for (let round = 0; round < 5; round++) {
+    picked = thinCloud(c, keep, size);
+    if (picked.length <= budget) break;
+    size *= Math.sqrt(picked.length / budget) * 1.03;
+  }
+  return picked.length > budget ? evenShare(picked, budget, 5) : picked;
 }
 
 // The nearest shown point to a tapped place (view axes); its place in view axes and in the

@@ -612,7 +612,7 @@ function cloudSettings(o) {
         invert: !!o.cropInvert,
       }
     : null;
-  return { up: upFor(o), color: o.color, crop, thin: (THIN[o.thin] || 0) * PC.spacing };
+  return { up: upFor(o), color: o.color, crop, thin: (THIN[o.thin] || 0) * PC.spacing, shade: o.shade !== false }; // prettier-ignore
 }
 
 function upFor(o) {
@@ -630,8 +630,10 @@ const parsePin = (s) => {
 };
 
 const POINT_CLOUDS = {
-  density: 2.4,
+  density: 3,
   turntable: false,
+  // The Lab lane's sharper falloff: each point a crisp dot, not a soft blob (the owner's review).
+  kernel: "sharp",
   pickAlpha: 0.02, // points are small: a tap finds them at any opacity
   options: [
     {
@@ -655,6 +657,12 @@ const POINT_CLOUDS = {
         { id: "class", label: "Classification (ground, trees, buildings…)" },
         { id: "rgb", label: "The file's own colors" },
       ],
+    },
+    {
+      key: "shade",
+      label: "Shaded relief (light from the northwest)",
+      type: "switch",
+      default: true,
     },
     { key: "size", label: "Point size", type: "slider", min: 0.4, max: 3, step: 0.1, default: 1 },
     { key: "measure", label: "Measure: tap two points", type: "switch", default: false },
@@ -791,7 +799,7 @@ const POINT_CLOUDS = {
     PC.frameInfo = { c, s };
     const m = v.main;
     const n = m.count;
-    const size = Math.max(1e-4, v.spacing * s * 0.6 * (o.size || 1));
+    const size = Math.max(1e-4, v.spacing * s * 0.68 * (o.size || 1));
     // The scan line sweeps across from west to east, like a lidar pass over the ground.
     const lo = f.min[0];
     const span = f.max[0] - f.min[0] || 1;
@@ -802,7 +810,7 @@ const POINT_CLOUDS = {
         p: [(x - c[0]) * s, (m.pos[j * 3 + 1] - c[1]) * s, (m.pos[j * 3 + 2] - c[2]) * s],
         scales: [size, size, size],
         color: [m.col[j * 3], m.col[j * 3 + 1], m.col[j * 3 + 2]],
-        opacity: 0.95,
+        opacity: 1,
         pattern: false,
         kind: "band",
         params: [(x - lo) / span, 0.035],
