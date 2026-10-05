@@ -276,3 +276,38 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
 - msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
   Silicon, if Brush can't run.
+
+## PDF motion audit build tools (Codex task 21; not shipped)
+
+`tools/pdf-motion/` uses these programs/libraries to build the sample PDFs under
+`docs/audits/pdf-motion-2026-10/`. They do not become site runtime dependencies. License sources
+were opened on October 4, 2026; installed package notices were also inspected where available.
+
+- ReportLab 4.4.9 (BSD-3-Clause), https://www.reportlab.com/docs/reportlab-userguide.pdf: lays out
+  the static sample pages. Existing bundled Python package; no ReportLab program is vendored.
+- pypdf 6.10.0 (BSD-3-Clause), https://raw.githubusercontent.com/py-pdf/pypdf/main/LICENSE: writes
+  annotations, document scripts and attachments, and checks the resulting objects.
+- Pillow 12.3.0 (MIT-CMU), https://pillow.readthedocs.io/en/stable/about.html: reduces captured
+  frames to grayscale and assembles verification images. Already listed above for Blender tools;
+  this audit uses the existing bundled Python copy.
+- TeX Live 2026 / pdfTeX 1.40.29 (TeX Live's component licenses; CTAN lists pdfTeX as GPL and the
+  installed executable also reports LGPL component notices), https://ctan.org/pkg/texlive and
+  https://ctan.org/pkg/pdftex, with `animate` dated October 14, 2024 (LPPL-1.3c),
+  https://ctan.org/pkg/animate: builds the color widget and OCG flip books. The generated PDF
+  animation scripts come from `animate`; both LaTeX sources are included. Existing installation.
+- Asymptote 3.15 (core LGPL-3.0-or-later, with separately licensed dependencies including GPL
+  GSL/Readline), https://raw.githubusercontent.com/vectorgraphics/asymptote/master/README: exports
+  the sampled centers as colored PRC markers. Installed through Homebrew after the existing MacTeX
+  3.09 binary crashed. The generated geometry and its `.asy` source are included; the exporter
+  itself is not copied into the repository.
+- FFmpeg / ffprobe 9.0.2 (this installed build reports GPL-3.0-or-later; FFmpeg's base license is
+  LGPL-2.1-or-later, with optional GPL parts), https://ffmpeg.org/legal.html: encodes and inspects
+  the H.264 clip using the existing build's libx264 encoder. No FFmpeg or x264 executable is
+  shipped.
+- Poppler `pdftoppm` 26.05.0 (GPL-2.0-or-later), https://poppler.freedesktop.org/ and
+  https://raw.githubusercontent.com/tsdgeos/poppler_mirror/master/COPYING: renders static first-page
+  posters for inspection, using the bundled runtime. It does not verify active playback.
+
+The existing Playwright, qrcode-generator, jsQR and pngjs tools listed above capture the toy and
+build/check its QR. No DoomPDF, PDF Tetris, Flash player or outside game asset is copied. All image,
+video and point payloads in these samples come from Splashery's procedural grapes toy.
