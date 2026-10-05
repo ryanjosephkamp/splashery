@@ -141,3 +141,6 @@
 {"v":1,"t":"2026-10-05T02:37:15.551Z","harness":"claude-code","event":"tool","session":"7edb0594-4bde-5da6-8107-487ede01b5fd","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T02:37:34.519Z","harness":"claude-code","event":"tool","session":"7edb0594-4bde-5da6-8107-487ede01b5fd","tool":"mcp__github__update_pull_request","cwd":"splashery"}
 {"v":1,"t":"2026-10-05T02:37:42.918Z","harness":"claude-code","event":"turn-end","session":"7edb0594-4bde-5da6-8107-487ede01b5fd","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T02:42:34.967Z","harness":"claude-code","event":"session-end","session":"7edb0594-4bde-5da6-8107-487ede01b5fd","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T03:38:52.574Z","harness":"claude-code","event":"session-start","session":"7edb0594-4bde-5da6-8107-487ede01b5fd","cwd":"splashery"}
+{"v":1,"t":"2026-10-05T03:38:52.580Z","harness":"claude-code","event":"turn-start","session":"7edb0594-4bde-5da6-8107-487ede01b5fd","cwd":"splashery"}
