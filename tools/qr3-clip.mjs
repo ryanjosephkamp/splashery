@@ -60,7 +60,7 @@ for (const job of jobs) {
   if (kind === "motion") {
     // Seen from a little above and to the side while it moves.
     const n = Math.round(SECS[what] * FPS);
-    const side = { yaw: 16, pitch: -14, margin: 5 };
+    const side = { yaw: 24, pitch: -18, margin: 6 };
     // A tap's knock lands up and to the left of the middle.
     for (let i = 0; i <= n; i++) frames.push({ motion: what, q: i / n, ...side, knock: [-5, 4] });
     const glide = Math.round(1.0 * FPS);
@@ -77,7 +77,7 @@ for (const job of jobs) {
     for (let i = 0; i < n; i++) frames.push({ alive: 1, phase: (2 * Math.PI * i) / (loop * FPS), margin: 1 }); // prettier-ignore
   }
   for (let i = 0; i < frames.length; i++) {
-    const url = await page.evaluate((o) => window.__splashery.qr.frame(o), { size: SIZE, ...frames[i] }); // prettier-ignore
+    const url = await page.evaluate((o) => window.__splashery.qr.frame(o), { size: SIZE, settle: 2, ...frames[i] }); // prettier-ignore
     fs.writeFileSync(path.join(tmp, `f${String(i).padStart(4, "0")}.png`), Buffer.from(url.split(",")[1], "base64")); // prettier-ignore
   }
   const last = PNG.sync.read(fs.readFileSync(path.join(tmp, `f${String(frames.length - 1).padStart(4, "0")}.png`))); // prettier-ignore

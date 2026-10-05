@@ -1022,7 +1022,8 @@ if (typeof window !== "undefined" && window.__splashery) {
     // at a phase (radians), seen in scan view turned by yaw and pitch
     // (degrees), as a PNG data URL of `size` pixels. The toy's own state is
     // left as it was.
-    // knock: where Knock loose lands (modules from the code's center).
+    // knock: where Knock loose lands (modules from the code's center);
+    // settle: frames rendered first at the same pose (default 1).
     async frame({
       motion = null,
       q = 0,
@@ -1033,8 +1034,8 @@ if (typeof window !== "undefined" && window.__splashery) {
       pitch = 0,
       margin = 1,
       knock = null,
+      settle = 1,
     } = {}) {
-      // prettier-ignore
       const a = app();
       if (knock) QR.knock = knock.slice(0, 2);
       return a.withCapture([size, size], async () => {
@@ -1044,7 +1045,9 @@ if (typeof window !== "undefined" && window.__splashery) {
           // Frames until the splat sort has caught up with the pose (one
           // when the pose is the last frame's).
           const key = JSON.stringify([pose, size]);
-          const warm = key === QR.framePose ? 1 : 3;
+          // settle: warm-up frames at an unchanged pose (the sort runs a
+          // frame behind fast pieces, so a clip's moving frames take 2).
+          const warm = key === QR.framePose ? settle : 3;
           QR.framePose = key;
           for (let i = 0; i < warm; i++) {
             await a.player.renderAt(a.player.time, pose);
