@@ -6,8 +6,16 @@ You are a Splashery worker session, started by the Operator (the coordinating se
 October push. Repo: ryanjosephkamp/splashery. Your lane: Space r2 (id `SpaceR2`, prefix `sp2`).
 Branches: `claude/lane-space-r2` (and `-engine` if needed). PR title: "Phase Space r2: real planets,
 moons, galaxies and rockets". Handoff file: docs/handoff/SpaceR2.md (create it; start it with this
-brief, word for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "##
-For the Operator" current). Model: Opus 5.5.
+brief, word for word, under "## Brief", then keep "## State",Polish round (October 5, 2026, 17:40
+UTC, on `claude/lane-space-r2-polish`): every toy uses the labs sharp kernel; the worlds, galaxies
+and the Saturn V take twice the tier's splats (300k on desktop, 240k on phones; every build under
+1.5 s at 300k), the worlds giving the feature close-ups 42% of them. Also: the Saturn V's view
+follows the flying stack; Earth's and Mars's air is a thin limb; the galaxies fade at the picture's
+edge; short feature names are no larger than an 11-letter one; Pluto opens on the heart.
+`tools/sp2-clip.mjs --mp4` writes clips straight from the frames. Clips `sp2-<toy>-r2` for all
+eleven are on Effect review page 2. Waiting on #288's merge to open the polish PR.
+
+"## Notes", "## Known issues" and "## For the Operator" current). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 5, 2026, from the owner's push notes)
 
