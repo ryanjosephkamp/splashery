@@ -1401,6 +1401,17 @@ export const TOYS = [
     pack: "atoms",
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
   },
+  // ---- Pack: molecule-viewer (lane Molecule viewer) ----
+  {
+    id: "molecule-viewer",
+    label: "Molecule viewer",
+    category: "atoms",
+    kind: "kit",
+    pack: "molecule-viewer",
+    labs: true,
+    tags: "molecule viewer pdb mmcif cif sdf mol xyz protein dna rna ligand cartoon ribbon surface ball stick spacefill cpk bond length angle measure rcsb protein data bank chemistry biology",
+    camera: { yaw: 0.25, pitch: 0.18, roll: 0, distance: 3.4 },
+  },
 
   // ---- Pack: chemistry (lane Chemistry) ----
   {
@@ -1411,6 +1422,18 @@ export const TOYS = [
     pack: "chemistry",
     tags: "elements periodic table atom nucleus proton neutron electron shell spectrum emission line photon chemistry physics",
     camera: { yaw: 0.1, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
+
+  // ---- Pack: real-elements (lane Elements) ----
+  {
+    id: "real-elements",
+    label: "Real elements",
+    category: "atoms",
+    kind: "kit",
+    pack: "real-elements",
+    labs: true,
+    tags: "elements periodic table real samples photos metals gases crystals chemistry",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.1 },
   },
 
   // ---- Pack: gems ----
@@ -3537,6 +3560,28 @@ export const TOYS = [
     tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: sound-lab (lane Sound and light lab) ----
+  {
+    id: "sound-lab",
+    label: "Sound lab",
+    category: "studio",
+    kind: "kit",
+    pack: "sound-lab",
+    labs: true,
+    tags: "sound audio spectrogram spectrum oscilloscope tone generator sine square saw noise beats frequency hertz decibel level meter metronome tempo microphone physics",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "sound-recorder",
+    label: "Sound recorder",
+    category: "studio",
+    kind: "kit",
+    pack: "sound-lab",
+    labs: true,
+    tags: "record recorder recording microphone voice sound effect wav webm m4a trim waveform spectrogram save audio",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.0 },
+  },
+  // ---- End of pack: sound-lab ----
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
@@ -3548,6 +3593,18 @@ export const TOYS = [
     tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
     camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: light-lab (lane Sound and light lab) ----
+  {
+    id: "light-lab",
+    label: "Light lab",
+    category: "lab",
+    kind: "kit",
+    pack: "light-lab",
+    labs: true,
+    tags: "light spectrum spectra emission lines element hydrogen helium neon sodium mercury prism grating rainbow diffraction cd dvd spectrometer camera wavelength nanometer nist physics",
+    camera: { yaw: 0, pitch: 0.5, roll: 0, distance: 3.4 },
+  },
+  // ---- End of pack: light-lab ----
   // ---- Pack: science (lane Science) ----
   {
     id: "thermal-ellipsoids",
@@ -3578,6 +3635,37 @@ export const TOYS = [
     labs: true,
     tags: "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
     camera: { yaw: 0.3, pitch: 1.0, roll: 0, distance: 3.0 },
+  },
+  // ---- Pack: science (lane Science r3) ----
+  {
+    id: "cryoem-map",
+    label: "Cryo-EM map",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "cryo-em electron microscopy density map emdb isosurface contour ribosome apoferritin ferritin virus capsid aav protein structure science",
+    camera: { yaw: 0.4, pitch: 0.35, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "contour-lab",
+    label: "Contour lab",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "contour lines map topographic elevation height layers terrain mountain usgs geography lab science",
+    camera: { yaw: 0.5, pitch: 0.55, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "terrain-box",
+    label: "Terrain in a box",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science",
+    camera: { yaw: 0.5, pitch: 0.5, roll: 0, distance: 3.0 },
   },
   // ---- Pack: fluid-lab (lane Fluids) ----
   {
@@ -3661,6 +3749,39 @@ export const TOYS = [
     labs: true,
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
+  },
+  // ---- Pack: night-sky (lane Night sky) ----
+  {
+    id: "night-sky",
+    label: "Night sky",
+    category: "space",
+    kind: "kit",
+    pack: "night-sky",
+    labs: true,
+    tags: "stars planets moon sun constellations planetarium astronomy sky night location date time phase",
+    // Seen from inside: looking south, a little above the horizon.
+    camera: { yaw: 0, pitch: 0.3, roll: 0, distance: 5 },
+  },
+  // ---- Pack: data-climate (lane Data and climate) ----
+  {
+    id: "data-in-3d",
+    label: "Data in 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel",
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "climate-records",
+    label: "Climate records",
+    category: "science",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart",
+    camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.3 },
   },
 ];
 
@@ -3779,6 +3900,7 @@ const STILL_TOYS = new Set([
   "puzzle-cube",
   // Added: they read like a chart, a diagram or a page.
   "periodic-table",
+  "real-elements", // lane Elements
   "splat-equation",
   "chladni-plate",
   "anatomy-atlas",

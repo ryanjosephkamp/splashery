@@ -375,7 +375,7 @@ function readSmallCif(blocks) {
         }
         U = [uiso, uiso, uiso, 0, 0, 0];
       }
-      atoms.push({ label, el, p: apply3(cellM.A, f), U, aniso: isAniso });
+      atoms.push({ label, el, p: apply3(cellM.A, f), U, aniso: isAniso, f });
       if (atoms.length > MAX_CRYSTAL_ATOMS) fail(tooMany());
     }
     if (!atoms.length) fail("This CIF's atom table has no atoms this toy can read.");
@@ -390,7 +390,14 @@ function readSmallCif(blocks) {
       blk.item("_diffrn_ambient_temperature", "_cell_measurement_temperature"),
     );
     notes.unshift("The asymmetric unit only: the atoms the file lists, without symmetry copies.");
-    return { format: "cif", id: blk.id, name: clean(name), formula: clean(formula), cell, temperature, atoms, notes, skipped }; // prettier-ignore
+    // r3: the symmetry operations (for the unit cell, src/science/symmetry.js).
+    const ops = blk.table("_space_group_symop_operation_xyz") ?? blk.table("_symmetry_equiv_pos_as_xyz"); // prettier-ignore
+    const symops = [];
+    for (let r = 0; ops && r < ops.count; r++) {
+      const op = ops.get(r, "_space_group_symop_operation_xyz", "_symmetry_equiv_pos_as_xyz");
+      if (op) symops.push(op);
+    }
+    return { format: "cif", id: blk.id, name: clean(name), formula: clean(formula), cell, cellM, symops, temperature, atoms, notes, skipped }; // prettier-ignore
   }
   return null;
 }
