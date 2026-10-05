@@ -40,6 +40,8 @@ function pct(v) {
 }
 
 export function createUI(app) {
+  let inputDrop = null; // lane Molecule viewer (engine): the toy's own drop, or null
+  let inputShown = null; // and its "what is showing" line
   initLive(app); // lane Live input: the live sources, and Clap to tap (labs)
   const els = {
     panel: $("panel"),
@@ -623,6 +625,8 @@ export function createUI(app) {
       row.appendChild(input);
       els.toyOptions.appendChild(row);
     }
+    inputDrop = null;
+    inputShown = null;
     if (recipe?.input) renderInputPanel(recipe.input);
     els.toyNote.textContent = recipe
       ? recipe.note || ""
@@ -1566,10 +1570,9 @@ export function createUI(app) {
     open.textContent = input.fileButton || "Open a file…";
     open.addEventListener("click", () => file.click());
     fileRow.append(open);
-    file.addEventListener("change", async () => {
-      const files = [...(file.files || [])];
+    // Lane Molecule viewer (engine): the same path for picked and dropped files.
+    const take = async (files) => {
       const f = files[0];
-      file.value = "";
       if (!f) return;
       // input.maxBytes: a recipe's own cap, a number (the song landscape, lane
       // Live input r2, which streams its file) or a function of nothing (UI r5:
@@ -1583,7 +1586,30 @@ export function createUI(app) {
       }
       if (input.binary) apply("", f.name, f, files);
       else apply(await f.text(), f.name);
+    };
+    file.addEventListener("change", () => {
+      const files = [...(file.files || [])];
+      file.value = "";
+      take(files);
     });
+    // A recipe with input.drop takes a file dropped anywhere on the page when
+    // its extension is one input.accept lists; other toys never see drops.
+    const kinds = String(input.accept || "")
+      .split(",")
+      .map((x) => x.trim().toLowerCase())
+      .filter((x) => x.startsWith("."));
+    inputDrop = input.drop
+      ? (f) => {
+          const ext = (/\.[^.]+$/.exec(f.name)?.[0] ?? "").toLowerCase();
+          if (!kinds.includes(ext)) return false;
+          take([f]);
+          return true;
+        }
+      : null;
+    inputShown = () => {
+      shown.textContent = input.shown?.() || "";
+      shown.hidden = !shown.textContent;
+    };
     const note = document.createElement("p");
     note.className = "note";
     note.textContent = input.note || "";
@@ -3087,6 +3113,15 @@ export function createUI(app) {
     },
     showDrop(on) {
       els.dropOverlay.hidden = !on;
+    },
+    // Lane Molecule viewer (engine): a dropped file for the toy's own panel
+    // (input.drop); true when the toy took it.
+    dropOnToy(f) {
+      return inputDrop ? inputDrop(f) : false;
+    },
+    // Lane Molecule viewer (engine): updates the panel's "what is showing" line.
+    refreshInputShown() {
+      inputShown?.();
     },
     collapseSheet() {
       setMode("row");

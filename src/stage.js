@@ -297,6 +297,15 @@ export class Stage {
     // The field of view applies to the narrower side, so tall canvases fit too.
     const portrait = this.canvas.width < this.canvas.height;
     if (e.camera.horizontalFov !== portrait) e.camera.horizontalFov = portrait;
+    // Lane Night sky: a toy seen from inside brings its own field of view;
+    // the usual 38 degrees come back after it (other lenses are left alone).
+    if (Number.isFinite(pose.fov)) {
+      if (e.camera.fov !== pose.fov) e.camera.fov = pose.fov;
+      this.insideFov = true;
+    } else if (this.insideFov) {
+      e.camera.fov = 38;
+      this.insideFov = false;
+    }
     e.setPosition(pose.position[0], pose.position[1], pose.position[2]);
     // Science r2: for a toy with a closeUp, the near clip follows the camera
     // in (0.02, as always, from a distance of 1 on).
