@@ -3,9 +3,9 @@
 // Resources (public domain: "free and without copyright"; CREDITS.md).
 // Reads each binary STL, samples points evenly by area over its surface
 // with their normals, scales the rock to a radius of 1, and writes them
-// small (8 bits a number) to assets/toys/stone-belt/rocks.json.
+// small (places at 16 bits, normals at 8) to assets/toys/stone-belt/rocks.json.
 //
-//   node tools/arc-rocks.mjs <dir with the STL files>
+//   node tools/arc-rocks.mjs <dir with the STL files> [points a rock, 5000]
 //
 // The STLs come from https://github.com/nasa/NASA-3D-Resources ("3D Printing").
 
@@ -21,9 +21,8 @@ const ROCKS = [
   { id: "toutatis", name: "Toutatis", file: "Asteroid_4179_Toutatis.stl" },
   { id: "golevka", name: "Golevka", file: "Asteroid_6489_Golevka.stl" },
 ];
-const N = 1600;
-
 const dir = process.argv[2];
+const N = Number(process.argv[3]) || 5000;
 if (!dir) throw new Error("Usage: node tools/arc-rocks.mjs <dir with the STL files>");
 
 // A small seeded random (so the file is the same every run).
@@ -79,19 +78,39 @@ for (const r of ROCKS) {
     pts.push({ p, n: t.n });
   }
   const R = Math.max(...pts.map((q) => Math.hypot(...q.p)));
+  // Smooth the normals over a small neighborhood (a few percent of the
+  // radius): the models are faceted, and each facet's flat normal shows as
+  // terraces in the lighting.
+  const near = (0.06 * R) ** 2;
+  const smooth = pts.map((q) => {
+    const a = [0, 0, 0];
+    for (const o of pts) {
+      const d = (o.p[0] - q.p[0]) ** 2 + (o.p[1] - q.p[1]) ** 2 + (o.p[2] - q.p[2]) ** 2;
+      if (d > near) continue;
+      const w = 1 - d / near;
+      a[0] += o.n[0] * w;
+      a[1] += o.n[1] * w;
+      a[2] += o.n[2] * w;
+    }
+    const l = Math.hypot(...a) || 1;
+    return a.map((v) => v / l);
+  });
+  pts.forEach((q, i) => (q.n = smooth[i]));
+  // Places at 16 bits (8 would show as terraces on a big rock), normals at 8.
+  const q16 = (x) => Math.max(-32767, Math.min(32767, Math.round(x * 32767)));
   const q8 = (x) => Math.max(-127, Math.min(127, Math.round(x * 127)));
-  const bytes = new Int8Array(N * 6);
+  const pos = new Int16Array(N * 3);
+  const nrm = new Int8Array(N * 3);
   pts.forEach((q, i) => {
-    bytes.set(
-      [q8(q.p[0] / R), q8(q.p[1] / R), q8(q.p[2] / R), q8(q.n[0]), q8(q.n[1]), q8(q.n[2])],
-      i * 6,
-    );
+    pos.set([q16(q.p[0] / R), q16(q.p[1] / R), q16(q.p[2] / R)], i * 3);
+    nrm.set([q8(q.n[0]), q8(q.n[1]), q8(q.n[2])], i * 3);
   });
   out.rocks.push({
     id: r.id,
     name: r.name,
     n: N,
-    data: Buffer.from(bytes.buffer).toString("base64"),
+    pos: Buffer.from(pos.buffer).toString("base64"),
+    nrm: Buffer.from(nrm.buffer).toString("base64"),
   });
   console.log(`${r.name}: ${tris.length} triangles -> ${N} points`);
 }

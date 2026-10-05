@@ -10,12 +10,14 @@
 // ship and follows it (the rules stay on the field's plane), so the rocks
 // show their real shapes as they tumble past.
 
+import { crispModel } from "./arcade-crisp.js";
 import { evenBox } from "./even.js";
 
 const SIZES = [
-  { r: 0.2, pts: 1600, points: 20, splat: 0.022 },
-  { r: 0.12, pts: 900, points: 50, splat: 0.017 },
-  { r: 0.065, pts: 420, points: 100, splat: 0.012 },
+  // (more points since the owner's "please make sharper": smaller splats)
+  { r: 0.2, pts: 5000, points: 20, splat: 0.022 },
+  { r: 0.12, pts: 2400, points: 50, splat: 0.017 },
+  { r: 0.065, pts: 1000, points: 100, splat: 0.012 },
 ];
 const SHOT_SPEED = 2.2;
 const SHOT_LIFE = 0.75;
@@ -29,11 +31,33 @@ async function loadRocks() {
   if (ROCKS) return ROCKS;
   const url = new URL("../../assets/toys/stone-belt/rocks.json", import.meta.url);
   const j = await (await fetch(url)).json();
+  const bytes = (b64) => {
+    const bin = atob(b64);
+    const b = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) b[i] = bin.charCodeAt(i);
+    return b.buffer;
+  };
+  // Each rock's points as places and normals in −1..1 (pos at 16 bits and
+  // nrm at 8; an older file packed both at 8 bits in data).
   ROCKS = j.rocks.map((r) => {
-    const bin = atob(r.data);
-    const b = new Int8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) b[i] = (bin.charCodeAt(i) << 24) >> 24;
-    return { id: r.id, name: r.name, n: r.n, data: b };
+    const p = new Float32Array(r.n * 3);
+    const nn = new Float32Array(r.n * 3);
+    if (r.pos) {
+      const a = new Int16Array(bytes(r.pos));
+      const b = new Int8Array(bytes(r.nrm));
+      for (let i = 0; i < r.n * 3; i++) {
+        p[i] = a[i] / 32767;
+        nn[i] = b[i] / 127;
+      }
+    } else {
+      const d = new Int8Array(bytes(r.data));
+      for (let i = 0; i < r.n; i++)
+        for (let k = 0; k < 3; k++) {
+          p[i * 3 + k] = d[i * 6 + k] / 127;
+          nn[i * 3 + k] = d[i * 6 + 3 + k] / 127;
+        }
+    }
+    return { id: r.id, name: r.name, n: r.n, p, nn };
   });
   return ROCKS;
 }
@@ -57,28 +81,40 @@ class StoneBelt {
     this.models = shapes.map((sh, si) =>
       SIZES.map((sz) => {
         const n = Math.min(sh.n, low ? Math.round(sz.pts * 0.55) : sz.pts);
-        const m = makeModel(n);
-        const step = sh.n / n;
-        for (let i = 0; i < n; i++) {
-          const o = Math.floor(i * step) * 6;
-          const d = sh.data;
-          const p = [d[o] / 127, d[o + 1] / 127, d[o + 2] / 127];
-          const nn = norm3([d[o + 3] / 127, d[o + 4] / 127, d[o + 5] / 127]);
-          m.pos.set(
-            p.map((v) => v * sz.r),
-            i * 3,
-          );
-          // Lit from one side; hollows (normals turned from the middle) darker.
-          const l = Math.max(0, dot3(nn, L));
-          const hollow = clamp(dot3(nn, norm3(p)), 0, 1);
-          const g = 0.88 + 0.24 * hash(i * 7.1 + si);
-          const f = (0.35 + 0.75 * l) * (0.65 + 0.35 * hollow) * g;
-          const t = tints[si % tints.length];
-          m.color.set([t[0] * f, t[1] * f, t[2] * f, 1], i * 4);
-          const s = sz.splat * Math.sqrt(1600 / Math.max(1, n)) * (sz.r / 0.2) * 0.9;
-          m.scale.set([s, s, s * 0.3], i * 3);
-          m.rot.set(api.q.qfromto([0, 0, 1], nn), i * 4);
-        }
+        // Two inner shells (the rock scaled to 62% and 30%), sparser and with
+        // bigger splats, so a broken rock's chips are solid rock, not shell.
+        const inner = [
+          { k: 0.62, n: Math.round(n * 0.2) },
+          { k: 0.3, n: Math.round(n * 0.06) },
+        ];
+        const total = n + inner[0].n + inner[1].n;
+        const m = makeModel(total);
+        const t = tints[si % tints.length];
+        const s0 = sz.splat * Math.sqrt(1600 / Math.max(1, n)) * (sz.r / 0.2) * 0.9;
+        let j = 0;
+        const put = (count, k, size, dark) => {
+          const step = sh.n / count;
+          for (let i = 0; i < count; i++, j++) {
+            const o = Math.floor(i * step) * 3;
+            const p = [sh.p[o], sh.p[o + 1], sh.p[o + 2]];
+            const nn = norm3([sh.nn[o], sh.nn[o + 1], sh.nn[o + 2]]);
+            m.pos.set(
+              p.map((v) => v * sz.r * k),
+              j * 3,
+            );
+            // Lit from one side; hollows (normals turned from the middle) darker.
+            const l = Math.max(0, dot3(nn, L));
+            const hollow = clamp(dot3(nn, norm3(p)), 0, 1);
+            const g = 0.88 + 0.24 * hash(i * 7.1 + si);
+            const f = dark ? 0.32 * g : (0.35 + 0.75 * l) * (0.65 + 0.35 * hollow) * g;
+            m.color.set([t[0] * f, t[1] * f, t[2] * f, 1], j * 4);
+            m.scale.set([size, size, size * 0.3], j * 3);
+            m.rot.set(api.q.qfromto([0, 0, 1], nn), j * 4);
+          }
+        };
+        put(n, 1, s0, false);
+        for (const sh2 of inner)
+          put(sh2.n, sh2.k, s0 * sh2.k * Math.sqrt(n / Math.max(1, sh2.n)), true);
         return m;
       }),
     );
@@ -95,7 +131,7 @@ class StoneBelt {
           weight: 3,
         });
       },
-      { count: low ? 300 : 600 },
+      { count: low ? 900 : 2400 },
     );
     this.flame = kitModel(
       (k) =>
@@ -103,13 +139,13 @@ class StoneBelt {
           const t = rand();
           return { p: [-0.07 - t * 0.12, (rand() - 0.5) * 0.03 * (1 - t), (rand() - 0.5) * 0.03 * (1 - t)], color: [1, 0.55 + 0.4 * (1 - t), 0.2 * (1 - t)], size: 1.2, opacity: 0.85 * (1 - t) }; // prettier-ignore
         }),
-      { count: low ? 60 : 120 },
+      { count: low ? 90 : 200 },
     );
-    this.shot = kitModel((k) => k.add(k.sphere(0.012), { color: [0.7, 1, 0.9] }), { count: 20 });
+    this.shot = crispModel((c) => c.sphere(0.012, { step: 0.004, color: [0.7, 1, 0.9] }));
     this.stars = kitModel(
       (k) =>
-        k.cloud({ share: 1 }, (rand) => ({ p: [(rand() - 0.5) * 6, (rand() - 0.5) * 6, -0.6 - rand() * 0.8], color: rand() < 0.5 ? "#e8eeff" : "#fff6e6", opacity: 0.4 + 0.6 * rand(), size: 0.6 + 0.8 * rand() })), // prettier-ignore
-      { count: low ? 400 : 900 },
+        k.cloud({ share: 1 }, (rand) => ({ p: [(rand() - 0.5) * 6, (rand() - 0.5) * 6, -0.6 - rand() * 0.8], color: rand() < 0.5 ? "#e8eeff" : "#fff6e6", opacity: 0.4 + 0.6 * rand(), size: 0.35 + 0.5 * rand() })), // prettier-ignore
+      { count: low ? 600 : 1400 },
     );
   }
 

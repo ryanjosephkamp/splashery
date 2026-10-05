@@ -538,6 +538,7 @@ export const RECIPES = {
         pad: "Stick to turn and thrust; A fires.",
         short: "← → turn · ↑ thrust · Space fire · V for the chase view",
       },
+      slots: { high: 120000, mid: 90000, low: 50000 }, // sharper rocks
       create: async (api) => (await import("./arcade-rocks.js")).createRocks(api),
     },
   },
