@@ -418,4 +418,10 @@ body {
     flex-wrap: wrap;
     padding: 16px 24px 24px;
   }
+
+  .shw-open {
+    margin-left: 0;
+    flex-basis: 100%;
+    justify-content: center;
+  }
 }

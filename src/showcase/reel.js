@@ -41,8 +41,8 @@ const fill = (text, scene) =>
 const fmt = (n) => (typeof n === "number" ? n.toLocaleString("en-US") : String(n));
 const kb = (bytes) =>
   bytes >= 1e6
-    ? `${(bytes / 1048576).toFixed(1)} MB`
-    : `${Math.max(1, Math.round(bytes / 1024)).toLocaleString("en-US")} KB`;
+    ? `${(bytes / 1048576).toFixed(1)}\u00a0MB`
+    : `${Math.max(1, Math.round(bytes / 1024)).toLocaleString("en-US")}\u00a0KB`;
 
 // The line of numbers under a caption: what this device just did (splats,
 // time, bytes fetched) and, for a kit toy, the size of its recipe file.
@@ -51,14 +51,14 @@ function factLine(scene, live) {
   const parts = [];
   if (live) {
     const how = f.kind === "kit" ? "Built here" : "Loaded here";
-    parts.push(`${how}: ${fmt(Math.round(live.splats / 1000) * 1000)} splats, ${live.secs.toFixed(1)} s`); // prettier-ignore
+    parts.push(`${how}: ${fmt(Math.round(live.splats / 1000) * 1000)} splats, ${live.secs.toFixed(1)}\u00a0s`); // prettier-ignore
     if (live.bytes > 0) parts.push(`${kb(live.bytes)} fetched`);
   }
   if (f.kind === "kit") {
     const shared = f.sharedBy > 1 ? ` (${f.sharedBy} toys share it)` : "";
-    parts.push(`recipe file ${fmt(Math.round(f.recipeGzipKB))} KB compressed${shared}`);
+    parts.push(`recipe file ${fmt(Math.round(f.recipeGzipKB))}\u00a0KB compressed${shared}`);
   } else if (f.captureKB) {
-    parts.push(`a real capture of ${fmt(Math.round(f.captureKB / 102.4) / 10)} MB`);
+    parts.push(`a real capture of ${fmt(Math.round(f.captureKB / 102.4) / 10)}\u00a0MB`);
   }
   return parts.join(" · ").replace(/^./, (c) => c.toUpperCase()) + (parts.length ? "." : "");
 }

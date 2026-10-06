@@ -82,7 +82,7 @@ for (const ch of playlist.chapters) {
       }));
       expect(info.toy, s.id).toBe(s.toy);
       expect(info.splats, s.id).toBeGreaterThan(1000);
-      expect(info.fact, s.id).toMatch(/splats in \d+\.\d s/);
+      expect(info.fact, s.id).toMatch(/splats, \d+\.\d\u00a0s/);
       // Play the scene's first two seconds of steps, a few frames at a time.
       for (let k = 0; k < 8; k++) await page.evaluate(() => window.__reel.frame(0.25));
       const t = await page.evaluate(() => window.__reel.state().t);
@@ -122,6 +122,10 @@ test("the controls: pause holds the scene, next and the chapter list move on", a
   expect(await page.evaluate(() => window.__showcase.state.t)).toBe(t1);
   await page.click("#shw-next");
   await page.waitForFunction(() => window.__showcase.state.index === 1);
+  // Sound comes on only when asked, and its modules load only then.
+  await expect(page.locator("#shw-sound")).toHaveAttribute("aria-pressed", "false");
+  await page.click("#shw-sound");
+  await expect(page.locator("#shw-sound")).toHaveAttribute("aria-pressed", "true");
   await page.click("#shw-chapters");
   await expect(page.locator("#shw-list")).toBeVisible();
   const last = scenes.length - 1;

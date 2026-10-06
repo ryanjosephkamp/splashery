@@ -117,13 +117,14 @@
           "id": "real-moon",
           "toy": "real-moon",
           "card": "sp2-real-moon-r2",
-          "what": "The Moon from NASA's maps: colors from an orbiter's camera, heights from its laser altimeter. It turns to the far side.",
+          "what": "The Moon from NASA's maps: colors from an orbiter's camera, heights from its laser altimeter. Here the sun moves across it.",
           "why": "Each splat sits at its map's height and leans with the ground, so the sun lights real slopes.",
           "steps": [
             {
-              "at": 0.3,
-              "do": "turn",
-              "by": 2.4,
+              "at": 0.2,
+              "do": "slide",
+              "key": "sun",
+              "to": 0.62,
               "over": 6
             }
           ],
@@ -248,8 +249,7 @@
               "do": "tap"
             }
           ],
-          "secs": 6.5,
-          "zoom": 1.5
+          "secs": 6.5
         },
         {
           "id": "model-splats",

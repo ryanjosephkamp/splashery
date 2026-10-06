@@ -11,7 +11,8 @@
 //
 // Writes <out-dir>/showcase-390x844.mp4 and/or showcase-1440x900.mp4. The
 // phone video is drawn at twice the pixels (780×1688), as a phone shows it.
-// --scenes records only those scenes (by playlist id), for a short clip.
+// --scenes records only those scenes (by playlist id), for a short clip;
+// --chapter=<id> records one chapter; --name=<file> names the output.
 
 import { chromium } from "@playwright/test";
 import { spawn, execFileSync } from "node:child_process";
@@ -27,7 +28,14 @@ const opt = (name, def) => {
 const outDir = args.find((a) => !a.startsWith("--"));
 if (!outDir) throw new Error("Usage: node tools/shw-video.mjs <out-dir> [--size=both]");
 const fps = Number(opt("fps", 20));
-const only = opt("scenes", "") ? opt("scenes", "").split(",") : null;
+let only = opt("scenes", "") ? opt("scenes", "").split(",") : null;
+const chapter = opt("chapter", "");
+if (chapter) {
+  const pl = JSON.parse(fs.readFileSync("src/showcase/playlist.json", "utf8"));
+  const ch = pl.chapters.find((c) => c.id === chapter);
+  if (!ch) throw new Error(`No chapter ${chapter}`);
+  only = ch.scenes.map((s) => s.id);
+}
 const titleSecs = Number(opt("title", 2.5));
 const which = opt("size", "both");
 const SIZES = {
@@ -44,7 +52,7 @@ const browser = await chromium.launch({
 
 for (const key of which === "both" ? ["phone", "desktop"] : [which]) {
   const size = SIZES[key];
-  const file = path.join(outDir, size.name);
+  const file = path.join(outDir, opt("name", "") || size.name);
   const enc = spawn(ffmpeg, [
     "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(fps), "-c:v", "mjpeg", "-i", "-",
     "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",
