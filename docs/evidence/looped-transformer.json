@@ -1,0 +1,59 @@
+{
+  "toy": "looped-transformer",
+  "checked": "2026-10-04",
+  "summary": "Repeating one block is a valid idea in recurrent transformer designs. Here three laps reveal stored pictures of 3 + 4 = 7; no transformer block or arithmetic inference runs.",
+  "claims": [
+    {
+      "claim": "Transformer computation can repeat across depth.",
+      "how": "The single block and returning track illustrate a recurrent-depth architecture.",
+      "where": "src/toy-help.js:1563",
+      "sources": [
+        {
+          "title": "Universal Transformers",
+          "publisher": "Dehghani and coauthors, 2018",
+          "url": "https://arxiv.org/abs/1807.03819",
+          "says": "Transformer computation can recur across depth, with an optional mechanism that adapts the number of updates."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:611",
+      "note": "This is the general idea; it does not reproduce every mechanism of a Universal Transformer."
+    },
+    {
+      "claim": "The toy ends with the correct arithmetic statement 3 + 4 = 7.",
+      "how": "The five stored marks are 3, +, 4, =, 7; the last tile images contain only finished bitmap values.",
+      "where": "src/packs/computing.js:745",
+      "sources": [
+        {
+          "title": "Multilayer perceptrons",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+          "says": "Hidden layers with nonlinear activations extend the functions a linear classifier can represent."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:611",
+      "note": "The answer is supplied to the picture, not discovered by a network."
+    },
+    {
+      "claim": "The three laps illustrate refinement rather than learned reasoning.",
+      "how": "Each lap chooses another stored bitmap level, with no attention, recurrent tensor update, or learned stopping rule.",
+      "where": "src/packs/computing.js:745",
+      "sources": [
+        {
+          "title": "Universal Transformers",
+          "publisher": "Dehghani and coauthors, 2018",
+          "url": "https://arxiv.org/abs/1807.03819",
+          "says": "Transformer computation can recur across depth, with an optional mechanism that adapts the number of updates."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:611",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The noise, coarse, nearly finished, and exact tile images are prepared stages. The lap count is fixed at three and is not chosen by difficulty."
+  ],
+  "fixes": []
+}

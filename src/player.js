@@ -13,6 +13,7 @@ import { buildRecipe, meanLuminance, Kit } from "./kit.js";
 import { MotionDriver } from "./motion.js";
 import { rigLayout, tagRig } from "./rig.js";
 import { posePass } from "./pose.js";
+import { poseUniforms, poseUp, poseGravity } from "./effects-pose.js"; // lane Any pose
 import { fxTable } from "./rig-fx.js";
 import { RIGS } from "./rigs.js";
 import { drawPattern, patternUniforms } from "./patterns.js";
@@ -392,6 +393,8 @@ export class Player {
     const close = info.closeUp?.minDistance;
     this.stage.nearFollow = Number.isFinite(close) && close > 0;
     if (this.stage.nearFollow) this.camera.minDistance = info.radius * close;
+    // Lane Night sky: a recipe's inside ({ fov }) shows the toy from its center.
+    this.camera.setInside(info.inside || null);
     this.time = 0;
     this.idle.pokeAt = 0;
     this.idle.pokes = 0;
@@ -552,6 +555,7 @@ export class Player {
       kernel: recipe.kernel, // Lab
       pickAlpha: recipe.pickAlpha, // Lab r2
       closeUp: recipe.closeUp || null, // Science r2
+      inside: recipe.inside || null, // Night sky
       recipe,
       options,
       credit: def.credit || null,
@@ -717,7 +721,10 @@ export class Player {
     const parts = this.motion.partsData;
     let n = 0;
     const { buf } = proc.ctx;
-    n += posePass(buf.pos, buf.anim, buf.count, proc.container.centers, leaf, parts);
+    // Lane Live r7: relief splats moved by the toy's screen sort where it puts them.
+    const scr = this.screen?.canvas;
+    const relief = scr?.width ? { data: this.screen.g.getImageData(0, 0, scr.width, scr.height).data, width: scr.width, height: scr.height } : null; // prettier-ignore
+    n += posePass(buf.pos, buf.anim, buf.count, proc.container.centers, leaf, parts, relief);
     if (n) proc.container.update(buf.count, true);
     for (const sh of this.pictures?.sheets || []) {
       const d = sh.shown?.data;
@@ -1228,6 +1235,9 @@ export class Player {
     // Lane Physics: pieces moved in Hands-on go home before the toy's tap.
     if (this.handsOn.mode === "pieces") this.handsOn.reset();
     const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);
+    // Lane Molecule viewer (engine): a tap that has something to say (a
+    // measurement) shows it as a message.
+    if (this.motion.said) this.emit("say", this.motion.said);
     if (r.options) {
       this.switchTo(r);
       return r;
@@ -1389,6 +1399,7 @@ export class Player {
       camera: pose,
     });
     const motion = this.effectiveMotion();
+    this.motion.poseUp = poseUp(this.stage); // lane Any pose
     Object.assign(
       u,
       this.motion.compute({
@@ -1404,6 +1415,10 @@ export class Player {
     const sq = this.handsOn.squishUniforms(); // lane Physics
     u.uSpBodyS = sq ? [sq.axis[0], sq.axis[1], sq.axis[2], sq.amount] : [0, 1, 0, 0];
     u.uSpBodyP = sq ? [sq.pivot[0], sq.pivot[1], sq.pivot[2], 0] : [0, 0, 0, 0];
+    // Lane Any pose: a toy posed whole (Hands-on) has its effects worked out in its own frame.
+    const hs = this.handsOn.mode === "toy" ? this.handsOn.squish : null;
+    const grav = poseGravity(info, info.id ? findToy(info.id) : null);
+    poseUniforms(u, this.stage.toyPose, hs && { axis: hs.axis, point: hs.point, amount: this.handsOn.squishAmp() }, grav, info.half); // prettier-ignore
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);

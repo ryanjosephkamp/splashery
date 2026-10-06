@@ -8,6 +8,9 @@
 //                       (src/science/smlm.js)
 //   galaxy-box          each gas particle of a FIRE-2 galaxy is a Gaussian of
 //                       the same spread as its smoothing kernel (an approximation)
+//   cryoem-map          a cryo-EM density map's isosurface at EMDB's recommended
+//                       level, a small flat splat per surface crossing
+//                       (src/science/density.js; lane Science r3)
 //
 // The toys bring their own GPU program (src/science/field.js, labs only): the
 // jiggle, the magnifier and the Gaussians' exact shapes.
@@ -18,6 +21,10 @@ import { element } from "../chem/elements.js";
 import { perceiveBonds } from "../chem/molfile.js";
 import { readCrystal, probabilityScale, centerOf, eigenSym3 } from "../science/crystal.js";
 import { readSmlm, readLocalizations } from "../science/smlm.js";
+import { STRUCTURES } from "../science/structures.js";
+import { fillCell, cellsFor, completeMolecules } from "../science/symmetry.js";
+import { readDensity, readBackbone, isoPointsPerVoxel } from "../science/density.js";
+import { TERRAIN, CONTOUR } from "../science/terrain.js";
 import {
   SCI_TYPE,
   sciPart,
@@ -76,30 +83,9 @@ function easeFocus(F, time) {
 
 // ---- Thermal ellipsoids ------------------------------------------------------------------
 
-export const ELLIPSOID_SAMPLES = [
-  {
-    id: "aspirin",
-    label: "Aspirin, 300 K (small molecule)",
-    file: "aspirin-cod-2104857.cif",
-    title: "Aspirin form II at 300 K (COD 2104857)",
-    author:
-      "E. J. Chan, T. R. Welberry, A. P. Heerdegen and D. J. Goossens (Acta Crystallographica B 66, 696–707, 2010), via the Crystallography Open Database",
-    source: "https://www.crystallography.net/cod/2104857.html",
-    license: "Public domain (Crystallography Open Database)",
-    licenseUrl: "https://www.crystallography.net/cod/",
-  },
-  {
-    id: "crambin",
-    label: "Crambin, 0.54 Å (protein)",
-    file: "crambin-1ejg.pdb",
-    title: "Crambin at ultra-high resolution (PDB 1EJG)",
-    author:
-      "C. Jelsch, M. M. Teeter, V. Lamzin, V. Pichon-Pesme, R. H. Blessing and C. Lecomte (PNAS 97, 3171–3176, 2000), via the Protein Data Bank",
-    source: "https://www.rcsb.org/structure/1EJG",
-    license: "CC0 1.0 (wwPDB data policy)",
-    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
-  },
-];
+// r3: twenty-five structures in six groups (tools/sci3-structures.mjs writes
+// the catalog; the ids of r1's aspirin and crambin are kept for old links).
+export const ELLIPSOID_SAMPLES = STRUCTURES;
 
 const ELL = {
   cache: new Map(), // sample id -> structure
@@ -142,6 +128,63 @@ function faceOn(atoms) {
   return eigenSym3(m).vectors;
 }
 
+// r3: the structure as the Show option asks: the file's atoms, or the unit
+// cell (a block of cells for a small one) with each atom's symmetry copies.
+// Only a small-molecule CIF has a cell to fill; a protein shows its atoms.
+const FILLED = new WeakMap(); // the file's molecules, completed by symmetry
+const CELLS = new WeakMap(); // the unit cell
+function shownStructure(s, show = "auto", suits = "molecule") {
+  const want = show === "auto" || !show ? suits : show;
+  if (want === "file") return s;
+  if (want !== "cell") {
+    if (!FILLED.has(s)) FILLED.set(s, completeMolecules(s));
+    return FILLED.get(s);
+  }
+  if (s.format !== "cif" || !s.cellM) {
+    return { ...s, notes: [...s.notes, "Only a small-molecule CIF has a unit cell to fill, so this shows the file's atoms."] }; // prettier-ignore
+  }
+  if (!CELLS.has(s)) {
+    // A molecule's copies stay whole; a mineral's atoms wrap into the cell.
+    const molecular = s.atoms.some((a) => a.el === "C") && s.atoms.some((a) => a.el === "H");
+    CELLS.set(s, fillCell(s, { cells: molecular ? [1, 1, 1] : cellsFor(s.cell), molecular }));
+  }
+  return CELLS.get(s);
+}
+
+// The bonds: the heavy atoms' from their distances, and each hydrogen to its
+// nearest heavy atom (r3: ice's hydrogens are half-occupied sites, two to an
+// O···O line, and must not bond to each other).
+function bondsOf(atoms, pos) {
+  const heavy = [];
+  const hyd = [];
+  atoms.forEach((a, i) => (a.el === "H" ? hyd : heavy).push(i));
+  const bonds = perceiveBonds(heavy.map((i) => ({ el: atoms[i].el, p: pos[i] }))).map(([a, b]) => [heavy[a], heavy[b]]); // prettier-ignore
+  if (!hyd.length) return bonds;
+  const cell = 1.3;
+  const grid = new Map();
+  const key = (p) => p.map((v) => Math.floor(v / cell));
+  for (const i of heavy) {
+    const k = key(pos[i]).join(",");
+    if (!grid.has(k)) grid.set(k, []);
+    grid.get(k).push(i);
+  }
+  for (const h of hyd) {
+    const [cx, cy, cz] = key(pos[h]);
+    let best = -1;
+    let bd = 1.25 * 1.25;
+    for (let dx = -1; dx <= 1; dx++)
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dz = -1; dz <= 1; dz++)
+          for (const i of grid.get(`${cx + dx},${cy + dy},${cz + dz}`) ?? []) {
+            const d = vec.sub(pos[i], pos[h]);
+            const d2 = vec.dot(d, d);
+            if (d2 < bd && d2 > 0.25) [best, bd] = [i, d2];
+          }
+    if (best >= 0) bonds.push([best, h]);
+  }
+  return bonds;
+}
+
 // A molecule needs fewer splats than most toys: 0.6 of the kit's count (36k,
 // 84k, 120k and 168k by tier) keeps every atom solid and a phone smooth.
 export const THERMAL_DENSITY = 0.6;
@@ -155,8 +198,21 @@ const THERMAL = {
       type: "select",
       default: "aspirin",
       choices: [
-        ...ELLIPSOID_SAMPLES.map((s) => ({ id: s.id, label: s.label })),
+        ...ELLIPSOID_SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })),
         { id: "custom", label: "Your file (open one below)" },
+      ],
+    },
+    {
+      // r3: a mineral's file lists only a few atoms (the asymmetric unit);
+      // its symmetry copies fill the unit cell.
+      key: "show",
+      label: "Show",
+      type: "select",
+      default: "auto",
+      choices: [
+        { id: "auto", label: "What suits it" },
+        { id: "file", label: "The atoms the file lists" },
+        { id: "cell", label: "The unit cell" },
       ],
     },
     {
@@ -259,7 +315,8 @@ const THERMAL = {
   },
   async prepare(o) {
     if (o.structure === "custom" && ELL.custom) {
-      ELL.want = { name: ELL.custom.name, structure: ELL.custom.structure, custom: true };
+      const st = shownStructure(ELL.custom.structure, o.show, "molecule");
+      ELL.want = { name: ELL.custom.name, structure: st, custom: true };
       return;
     }
     const def = ELLIPSOID_SAMPLES.find((s) => s.id === o.structure) || ELLIPSOID_SAMPLES[0];
@@ -267,7 +324,8 @@ const THERMAL = {
       const text = await readAsset(`../../assets/toys/thermal-ellipsoids/${def.file}`);
       ELL.cache.set(def.id, readCrystal(text, def.file));
     }
-    ELL.want = { name: def.title, structure: ELL.cache.get(def.id), custom: false };
+    const name = def.temperature ? `${def.title}, measured at ${Math.round(def.temperature)} K` : def.title; // prettier-ignore
+    ELL.want = { name, structure: shownStructure(ELL.cache.get(def.id), o.show, def.show), custom: false }; // prettier-ignore
   },
   drive(t, c, out, info) {
     const z = Math.max(0, Math.min(1, c.zoom ?? 0));
@@ -359,8 +417,10 @@ const THERMAL = {
     }
     let bonds = [];
     if (o.bonds !== false) {
-      bonds = perceiveBonds(atoms.map((a, i) => ({ el: a.el, p: pos[i] })));
-      const stick = evenCylinder(STICK, STICK, 1, false);
+      bonds = bondsOf(atoms, pos);
+      // A unit cell's sticks are thinner, so its small ellipsoids show.
+      const r = s.edges ? STICK * 0.55 : STICK;
+      const stick = evenCylinder(r, r, 1, false);
       for (const [i, j] of bonds) {
         const d = vec.sub(pos[j], pos[i]);
         const len = vec.len(d);
@@ -380,6 +440,34 @@ const THERMAL = {
           color: (cc) => lit(shade(cc.lp[1] < 0 ? ci : cj, 0.85), cc.n, 0.2),
         });
       }
+    }
+    // r3: the unit cell's edges, as thin lines of splats stretched along them.
+    if (s.edges) {
+      const SEG = 24;
+      const lines = [];
+      for (const [a, b] of s.edges) {
+        const pa = apply(R, vec.sub(a, c0));
+        const pb = apply(R, vec.sub(b, c0));
+        const d = vec.sub(pb, pa);
+        const len = vec.len(d);
+        for (let i = 0; i < SEG; i++)
+          lines.push({ p: vec.add(pa, vec.mul(d, (i + 0.5) / SEG)), dir: vec.mul(d, 1 / len), len: len / SEG }); // prettier-ignore
+      }
+      k.cloud({ count: (lines.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
+        const e = lines[j];
+        if (!e) return null;
+        const base = k.baseSize || 0.01;
+        const across = 0.035; // Å
+        return {
+          p: e.p,
+          dir: e.dir,
+          size: across / base,
+          stretch: (0.8 * e.len) / across,
+          color: "#8a94ad",
+          opacity: 0.9,
+          part: sciPart(SCI_TYPE.plain),
+        };
+      });
     }
     ELL.sigMax = sigMax;
     ELL.focus = focusState();
@@ -438,6 +526,58 @@ export const MICROSCOPE_SAMPLES = [
     author:
       "Andrey Aristov (Institut Pasteur), uploaded by Benoit Lelandais, on ShareLoc.XYZ; a random half of the localizations (a subset)",
     source: "https://doi.org/10.5281/zenodo.7233696",
+    ...CC_BY,
+  },
+  // r3 (the brief's "nuclear pores, actin, mitochondria ... 3D sets"): four
+  // more ShareLoc.XYZ records, cut by tools/sci3-samples.mjs. Three have no
+  // precision column; theirs is estimated from the data by NeNA (the
+  // distances between a molecule's localizations in consecutive frames),
+  // one value for the whole set.
+  {
+    id: "pores",
+    choice: "Nuclear pores",
+    file: "pores-wga.smlm",
+    conserve: 1,
+    label: "Nuclear pores in a frog oocyte's nuclear envelope (an 8 µm square)",
+    title: "Xenopus laevis nuclear pore complex stained with WGA-ATTO520 (ShareLoc.XYZ, 10.5281/zenodo.7182237)", // prettier-ignore
+    author: "Anna Löschberger, on ShareLoc.XYZ; an 8 µm square cut from the record (a subset)",
+    source: "https://doi.org/10.5281/zenodo.7182237",
+    note: "The record gives no precision; NeNA estimates 11.5 nm for the whole set.",
+    ...CC_BY,
+  },
+  {
+    id: "actin",
+    choice: "Actin",
+    file: "actin-cos7.smlm",
+    conserve: 1,
+    label: "Actin filaments at a COS-7 cell's edge (a 10 µm square)",
+    title: "Actin with PhalloidinAF647 in COS7 (ShareLoc.XYZ, 10.5281/zenodo.5510661)",
+    author: "Sarah Aufmkolk, on ShareLoc.XYZ; a 10 µm square of one cell, 174,903 of its localizations (a subset)", // prettier-ignore
+    source: "https://doi.org/10.5281/zenodo.5510661",
+    note: "The record gives no precision; NeNA estimates 9.9 nm for the whole set.",
+    ...CC_BY,
+  },
+  {
+    id: "mitochondria",
+    choice: "Mitochondria",
+    file: "mitochondria-tom22.smlm",
+    conserve: 1,
+    label: "Mitochondria (their outer membrane's TOM22) in a COS-7 cell (a 15 µm square)",
+    title: "Mitochondrial protein TOM22 in COS7 cells (ShareLoc.XYZ, 10.5281/zenodo.5512636)",
+    author: "Wei Ouyang, on ShareLoc.XYZ; a 15 µm square of one field, 219,846 of its localizations (a subset)", // prettier-ignore
+    source: "https://doi.org/10.5281/zenodo.5512636",
+    note: "The record gives no precision; NeNA estimates 12.4 nm for the whole set.",
+    ...CC_BY,
+  },
+  {
+    id: "microtubules3d",
+    choice: "Microtubules (3D)",
+    file: "microtubules-zola-3d.smlm",
+    conserve: 1,
+    label: "Microtubules in 3D in a U-373 cell (a 12 µm square)",
+    title: "ZOLA-3D microtubules (ShareLoc.XYZ, 10.5281/zenodo.6861446)",
+    author: "Andrey Aristov, Benoit Lelandais and Christophe Zimmer (Institut Pasteur), on ShareLoc.XYZ; a 12 µm square, 159,785 of its localizations (a subset)", // prettier-ignore
+    source: "https://doi.org/10.5281/zenodo.6861446",
     ...CC_BY,
   },
 ];
@@ -620,14 +760,14 @@ const MICROSCOPE = {
       const bytes = await readAsset(`../../assets/toys/smlm-microscope/${def.file}`, true);
       MIC.samples.set(def.id, await readSmlm(bytes));
     }
-    MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false };
+    MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false, note: def.note, conserve: def.conserve ?? 0 }; // prettier-ignore
   },
   drive(t, c, out) {
     // Every localization is drawn at least about a pixel wide, wherever the
     // camera is; the slice narrows from the whole field to 200 nm.
     const s = smoothstep(0, 1, c.slice ?? 0);
     const thin = SLICE_NM * UM * (MIC.grid?.stretch ?? 1) * (MIC.unit ?? 1);
-    out.morph = [0, 1, 0.0008, 0];
+    out.morph = [0, 1, 0.0008, MIC.want?.conserve ?? 0];
     // (on a log scale, so it visibly narrows all the way)
     out.glow = [0, 0, MIC.sliceZ ?? 0, s > 0.01 ? thin * Math.pow(2 / thin, 1 - s) : 0];
   },
@@ -730,7 +870,7 @@ const MICROSCOPE = {
       drawn: count,
       has3D: T.has3D,
       channels: T.channels,
-      notes: T.notes,
+      notes: want.note ? [...T.notes, want.note] : T.notes,
       size: [(x1 - x0) * UM, (y1 - y0) * UM],
     };
     k.data = { microscope: MIC.info };
@@ -791,7 +931,42 @@ export const GALAXY_SAMPLE = {
   licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
 };
 
-const GAL = { data: null, info: null };
+// r3: more galaxies, each a FIRE-2 snapshot cut by tools/sci3-galaxy.mjs
+// (the gas as tools/sci-galaxy.mjs cuts it, and the stars for the
+// telescope view).
+const FIRE_CITE =
+  "The FIRE project: Wetzel et al. (2023, 2025), Hopkins (2015), Hopkins et al. (2018)";
+export const GALAXY_SAMPLES = [
+  {
+    id: "m12i",
+    choice: "A Milky Way–mass galaxy today",
+    gas: GALAXY_SAMPLE.file,
+    stars: "m12i-stars.bin",
+    label: GALAXY_SAMPLE.label,
+    title: GALAXY_SAMPLE.title,
+    author: GALAXY_SAMPLE.author,
+  },
+  {
+    id: "m12i-z2",
+    choice: "The same galaxy 10.4 billion years ago",
+    gas: "m12i-z2-gas.bin",
+    stars: "m12i-z2-stars.bin",
+    label: "FIRE-2 m12i at z = 2, 10.4 billion years ago, when it was young and clumpy",
+    title: "FIRE-2 cosmological zoom-in simulation m12i, snapshot 172 (z = 2), gas and stars",
+    author: `${FIRE_CITE}; m12i from Wetzel et al. (2016). A subset of the particles in a 24 kpc box round the galaxy`, // prettier-ignore
+  },
+  {
+    id: "m11h",
+    choice: "A dwarf galaxy today",
+    gas: "m11h-gas.bin",
+    stars: "m11h-stars.bin",
+    label: "FIRE-2 m11h, a dwarf galaxy about as massive as the Small Magellanic Cloud, today",
+    title: "FIRE-2 cosmological zoom-in simulation m11h, snapshot 600 (z = 0), gas and stars",
+    author: `${FIRE_CITE}; m11h from El-Badry et al. (2018). A subset of the particles in a 16 kpc box round the galaxy`, // prettier-ignore
+  },
+].map((d) => ({ ...d, source: GALAXY_SAMPLE.source, license: GALAXY_SAMPLE.license, licenseUrl: GALAXY_SAMPLE.licenseUrl })); // prettier-ignore
+
+const GAL = { data: null, info: null, gas: new Map(), stars: new Map(), want: null, expose: { last: null, t0: 0 } }; // prettier-ignore
 export const KERNEL_SIGMA = 0.274; // the cubic spline's σ over its support radius
 // r2: how close the camera may come (the box's radii).
 export const GALAXY_CLOSE = 0.05;
@@ -823,6 +998,56 @@ export function readGalaxy(bytes) {
   };
 }
 
+// The stars file tools/sci3-galaxy.mjs writes (its header says how).
+export function readStars(bytes) {
+  const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const len = dv.getUint32(0, true);
+  const head = JSON.parse(new TextDecoder().decode(bytes.subarray(4, 4 + len)));
+  if (head.format !== "splashery-stars-1") throw new Error("This isn't a stars file.");
+  const n = head.n;
+  let o = 4 + len;
+  const pos = new Int16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 6)); // prettier-ignore
+  o += n * 6;
+  const aq = new Uint16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 2)); // prettier-ignore
+  o += n * 2;
+  const mq = new Uint16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 2)); // prettier-ignore
+  const q = head.half / 32767;
+  return {
+    head,
+    n,
+    pos: (i) => [pos[i * 3] * q, pos[i * 3 + 1] * q, pos[i * 3 + 2] * q],
+    ageGyr: (i) => Math.pow(10, 6 + (aq[i] / 65535) * 4.5) / 1e9,
+    mass: (i) => Math.pow(10, 2 + (mq[i] / 65535) * 6),
+  };
+}
+
+// ---- The telescope (r3) ----
+//
+// The galaxy as a telescope would record it, told plainly as a simulation:
+// its stars (the simulation's star particles) seen as if it were 50 Mpc
+// away (about 160 million light-years, where 1″ is 0.24 kpc), each blurred
+// by the point spread of the seeing, through a filter, with the cold, dense
+// gas absorbing as dust; each tap starts a new exposure whose light builds
+// up with the grain of photon noise smoothing out.
+//
+// A star particle is thousands of stars of one age. How bright such a
+// population is per unit mass falls as it ages, faster in blue light than
+// red (young populations are blue, old ones red): here roughly as
+// age^−1.0 in blue and age^−0.6 in red, scaled to be equal at 1 Gyr, an
+// approximation of stellar population models (for example Bruzual and
+// Charlot 2003), not a model fit.
+export const TELESCOPE = {
+  kpcPerArcsec: 0.2425, // at 50 Mpc
+  seeing: { space: 0.1, ground: 1, poor: 2.5 }, // arcseconds (FWHM)
+  exposureSecs: 6, // how long a toy exposure takes to build up
+};
+export function starLight(ageGyr, mass) {
+  const a = Math.max(0.003, ageGyr);
+  const blue = mass * Math.pow(a, -1.0);
+  const red = mass * Math.pow(a, -0.6);
+  return { blue, red, green: Math.sqrt(blue * red) };
+}
+
 // Temperature colors: cold molecular gas deep blue, the warm disk pale,
 // hot gas orange to red.
 const TEMP_STOPS = [
@@ -844,9 +1069,48 @@ function tempColor(logT) {
 }
 
 const GALAXY = {
-  alive: false,
+  alive: (c) => GAL.want?.telescope === true && (GAL.info?.exposure ?? 1) < 1,
   density: GALAXY_DENSITY,
   options: [
+    {
+      key: "galaxy",
+      label: "Galaxy",
+      type: "select",
+      default: "m12i",
+      choices: GALAXY_SAMPLES.map((d) => ({ id: d.id, label: d.choice })),
+    },
+    {
+      key: "view",
+      label: "View",
+      type: "select",
+      default: "gas",
+      choices: [
+        { id: "gas", label: "The gas (the simulation)" },
+        { id: "telescope", label: "Through a telescope (simulated)" },
+      ],
+    },
+    {
+      key: "filter",
+      label: "Telescope filter",
+      type: "select",
+      default: "color",
+      choices: [
+        { id: "color", label: "Color (blue, green and red)" },
+        { id: "blue", label: "Blue light (young stars)" },
+        { id: "red", label: "Red light (older stars)" },
+      ],
+    },
+    {
+      key: "seeing",
+      label: "Telescope's sharpness",
+      type: "select",
+      default: "ground",
+      choices: [
+        { id: "space", label: "A space telescope (0.1″)" },
+        { id: "ground", label: "A good night on the ground (1″)" },
+        { id: "poor", label: "A hazy night (2.5″)" },
+      ],
+    },
     {
       key: "color",
       label: "Color by",
@@ -862,33 +1126,60 @@ const GALAXY = {
   // r2: a pinch or the wheel zooms all the way in, to 0.05 of the box's
   // radius (about 60 times closer than the home view, a few hundred parsecs).
   closeUp: { minDistance: GALAXY_CLOSE },
-  controls: [{ key: "peel", label: "Only the cold gas", type: "toggle", default: 0, ease: 1.6 }],
-  // A tap peels the hot gas away (the cold, dense gas of the disk and its
-  // arms stays); a second tap brings it back.
-  action: { key: "peel", label: "Peel away the hot gas" },
-  credits: [
-    {
-      label: "Galaxy",
-      title: GALAXY_SAMPLE.title,
-      source: GALAXY_SAMPLE.source,
-      author: GALAXY_SAMPLE.author,
-      license: GALAXY_SAMPLE.license,
-      licenseUrl: GALAXY_SAMPLE.licenseUrl,
-    },
+  controls: [
+    { key: "peel", label: "Only the cold gas", type: "toggle", default: 0, ease: 1.6 },
+    { key: "expose", label: "A new exposure", type: "toggle", default: 0, ease: 0.01 },
   ],
-  async prepare() {
-    if (!GAL.data) GAL.data = readGalaxy(await readAsset(`../../assets/toys/galaxy-box/${GALAXY_SAMPLE.file}`, true)); // prettier-ignore
+  // A tap peels the hot gas away (the cold, dense gas of the disk and its
+  // arms stays); a second tap brings it back. Through the telescope, a tap
+  // starts a new exposure.
+  action: {
+    key: "peel",
+    label: "Peel away the hot gas",
+    at() {
+      return GAL.want?.telescope ? { key: "expose" } : undefined;
+    },
   },
-  drive(t, c, out) {
+  credits: GALAXY_SAMPLES.map((d) => ({
+    label: d.choice,
+    title: d.title,
+    source: d.source,
+    author: d.author,
+    license: d.license,
+    licenseUrl: d.licenseUrl,
+  })),
+  async prepare(o) {
+    const def = GALAXY_SAMPLES.find((d) => d.id === o.galaxy) || GALAXY_SAMPLES[0];
+    const telescope = o.view === "telescope";
+    if (!GAL.gas.has(def.id)) GAL.gas.set(def.id, readGalaxy(await readAsset(`../../assets/toys/galaxy-box/${def.gas}`, true))); // prettier-ignore
+    if (telescope && !GAL.stars.has(def.id)) GAL.stars.set(def.id, readStars(await readAsset(`../../assets/toys/galaxy-box/${def.stars}`, true))); // prettier-ignore
+    GAL.data = GAL.gas.get(def.id);
+    GAL.want = { def, telescope, stars: GAL.stars.get(def.id) ?? null };
+    GAL.expose = { last: null, t0: null };
+  },
+  drive(t, c, out, info) {
     out.grow = 1 - smoothstep(0, 1, c.peel ?? 0);
     // Every particle at least about a pixel wide, wherever the camera is.
     out.morph = [0, 1, 0.0006, 0];
     out.glow = [0, 0, 0, 0];
+    if (GAL.want?.telescope) {
+      // Each flip of the exposure control (a tap) starts a new exposure; one
+      // also starts when the view opens.
+      const E = GAL.expose;
+      const flip = (c.expose ?? 0) > 0.5;
+      if (E.t0 === null || flip !== E.last) E.t0 = info.time;
+      E.last = flip;
+      const e = Math.max(0, Math.min(1, (info.time - E.t0) / TELESCOPE.exposureSecs));
+      if (GAL.info) GAL.info.exposure = e;
+      // (light grows as the exposure, at a rate that fills in over its time)
+      out.glow = [e, 1, 0, 0];
+    }
   },
   gpuField() {
     return sciModifier(1, 1, { free: true });
   },
   build(k, o) {
+    if (GAL.want?.telescope) return buildTelescope(k, o);
     const G = GAL.data;
     if (!G) throw new Error("The galaxy hasn't loaded.");
     const half = G.head.half;
@@ -1029,8 +1320,443 @@ const GALAXY = {
   },
 };
 
+// The telescope view's build: the stars through the filter, blurred by the
+// seeing, and the cold, dense gas in front of them as dust.
+function buildTelescope(k, o) {
+  const S = GAL.want.stars;
+  const G = GAL.data;
+  if (!S || !G) throw new Error("The galaxy's stars haven't loaded.");
+  const base = () => k.baseSize || 0.01;
+  const psfFwhm = (TELESCOPE.seeing[o.seeing] ?? 1) * TELESCOPE.kpcPerArcsec; // kpc
+  const psf = psfFwhm / 2.3548; // σ
+  const filter = o.filter ?? "color";
+  const budget = Math.max(2000, Math.floor(k.count * 0.78));
+  const pick = pickIndices(S.n, budget);
+  const nStars = pick ? pick.length : S.n;
+  const at = (j) => (pick ? pick[j] : j);
+  // Each star's light in the filter (blue, green, red), and its brightness.
+  const light = new Float32Array(nStars * 3);
+  const bright = new Float32Array(nStars);
+  for (let j = 0; j < nStars; j++) {
+    const i = at(j);
+    const L = starLight(S.ageGyr(i), S.mass(i));
+    const rgb = filter === "blue" ? [L.blue, L.blue, L.blue] : filter === "red" ? [L.red, L.red, L.red] : [L.red, L.green, L.blue]; // prettier-ignore
+    light.set(rgb, j * 3);
+    bright[j] = (rgb[0] + rgb[1] + rgb[2]) / 3;
+  }
+  // An astronomer's stretch (asinh) of the brightness, about its median.
+  const sorted = Array.from(bright).sort((a, b) => a - b);
+  const med = sorted[sorted.length >> 1] || 1;
+  const top = sorted[Math.floor(sorted.length * 0.995)] || 1;
+  const soft = 0.25 * med; // the stretch's knee: below it light is linear
+  const stretch = (b) => Math.asinh(b / soft) / Math.asinh(top / soft);
+  // The whole exposure's photons for the median star: the grain's scale.
+  const photons = 60;
+  let shown = 0;
+  k.cloud({ count: (nStars * 160000) / k.count, jitter: 0 }, (_r, j) => {
+    if (j >= nStars) return null;
+    const i = at(j);
+    const p = S.pos(i);
+    const sb = Math.max(0, Math.min(1, stretch(bright[j])));
+    if (sb <= 0.002) return null;
+    shown++;
+    const r = light[j * 3];
+    const g = light[j * 3 + 1];
+    const b = light[j * 3 + 2];
+    const mx = Math.max(r, g, b) || 1;
+    // The star's color (its filters' ratio), brightened by the stretch.
+    const col = [r / mx, g / mx, b / mx].map((v) => Math.min(1, v * (0.75 + 0.25 * sb)));
+    // Its size: the point spread (and a little for the particle itself).
+    const size = Math.SQRT2 * Math.hypot(psf, 0.01);
+    return {
+      p,
+      size: size / base(),
+      color: col,
+      opacity: Math.min(0.9, 0.04 + 0.65 * sb * sb),
+      part: sciPart(SCI_TYPE.star),
+      params: [asF32((bright[j] / med) * photons), (i * 2654435761) % 1000003],
+    };
+  });
+  // Dust: the cold, dense gas (below 20,000 K, smoothing length under 0.3
+  // kpc) dims what is behind it, more in blue light than red.
+  const absorb = filter === "red" ? 0.45 : filter === "blue" ? 1 : 0.75;
+  const dRoom = Math.max(1000, Math.floor(k.count * 0.19));
+  const dust = [];
+  for (let i = 0; i < G.n && dust.length < dRoom * 3; i++)
+    if (G.logT(i) < 4.3 && G.h(i) < 0.3) dust.push(i);
+  const dPick = pickIndices(dust.length, dRoom);
+  const nDust = dPick ? dPick.length : dust.length;
+  // Thinned dust widens a little to keep its cover, but not into soft
+  // blobs (r2: sharper).
+  const widen = dPick ? Math.min(1.25, Math.cbrt(dust.length / nDust)) : 1;
+  k.cloud({ count: (nDust * 160000) / k.count, jitter: 0 }, (_r, j) => {
+    if (j >= nDust) return null;
+    const i = dust[dPick ? dPick[j] : j];
+    const h = G.h(i) * widen;
+    return {
+      p: G.pos(i),
+      size: (Math.SQRT2 * Math.hypot(KERNEL_SIGMA * h, psf)) / base(),
+      color: "#120a06",
+      opacity: Math.min(0.15, absorb * 0.04 * (0.06 / h) ** 2),
+      part: sciPart(SCI_TYPE.plain),
+    };
+  });
+  const half = G.head.half;
+  // The night sky behind it: a dark plate under the galaxy, a little wider
+  // than the box (the view looks down on the disk).
+  k.add(evenBox(2.3 * half, 0.04, 2.3 * half), {
+    pos: [0, -(G.head.halfY ?? half) - 0.5, 0],
+    even: true,
+    color: "#020205",
+    jitter: 0,
+    opacity: 1,
+    flat: 0.3,
+    weight: 0.4,
+    part: sciPart(SCI_TYPE.plain),
+  });
+  k.reach([half, G.head.halfY ?? half, half]);
+  k.reach([-half, -(G.head.halfY ?? half), -half]);
+  GAL.info = {
+    telescope: true,
+    galaxy: GAL.want.def.id,
+    stars: S.n,
+    drawn: nStars,
+    get shown() {
+      return shown;
+    },
+    dust: nDust,
+    psfKpc: psfFwhm,
+    filter,
+    photons,
+    exposure: 0,
+    simulation: S.head.simulation,
+  };
+  k.data = { galaxy: GAL.info };
+}
+
+// ---- Cryo-EM map (lane Science r3) ------------------------------------------------------
+
+const EMDB_LICENSE = {
+  license: "Public domain (EMDB: free of all copyright restrictions)",
+  licenseUrl: "https://www.ebi.ac.uk/emdb/faq",
+};
+export const CRYOEM_SAMPLES = [
+  {
+    id: "apoferritin",
+    choice: "Apoferritin (2.6 Å)",
+    label: "Apoferritin, the cell's iron store: 24 copies of one protein in a hollow ball",
+    title: "Mouse heavy-chain apoferritin by cryo-EM at 100 keV, 2.6 Å (EMD-17961), with its fitted model (PDB 8PVC)", // prettier-ignore
+    author: "G. McMullan, K. Naydenova, D. Mihaylov et al. (PNAS 120, e2312905120, 2023), via EMDB and the PDB", // prettier-ignore
+    source: "https://www.ebi.ac.uk/emdb/EMD-17961",
+    model: "https://www.rcsb.org/structure/8PVC",
+  },
+  {
+    id: "ribosome",
+    choice: "A ribosome (3.2 Å)",
+    label: "A bacterial ribosome (E. coli 70S) with the antibiotic arbekacin bound",
+    title: "Arbekacin-bound E. coli 70S ribosome, 3.2 Å (EMD-48329), with its fitted model (PDB 9MKK)", // prettier-ignore
+    author: "S. Majumdar, N. P. Parajuli, X. Ge, A. Emmerich and S. Sanyal (Scientific Reports 15, 18271, 2025), via EMDB and the PDB", // prettier-ignore
+    source: "https://www.ebi.ac.uk/emdb/EMD-48329",
+    model: "https://www.rcsb.org/structure/9MKK",
+  },
+  {
+    id: "aav",
+    choice: "A virus capsid (3.0 Å)",
+    label: "The empty shell of adeno-associated virus 2 (AAV2), a gene-therapy carrier: 60 copies of one protein", // prettier-ignore
+    title: "AAV2 virus-like particle, 3.02 Å (EMD-20610), with its fitted model (PDB 6U0V)",
+    author: "M. Agbandje-McKenna and A. Bennett (deposited 2019), via EMDB and the PDB",
+    source: "https://www.ebi.ac.uk/emdb/EMD-20610",
+    model: "https://www.rcsb.org/structure/6U0V",
+    // 60 copies of one protein: colored by radius, as capsids usually are.
+    color: "radius",
+  },
+].map((d) => ({ ...d, ...EMDB_LICENSE }));
+
+const EM = { maps: new Map(), models: new Map(), want: null, info: null };
+export const cryoemState = () => (EM.info ? { ...EM.info } : null);
+// The level's choices, as multiples of EMDB's recommended contour.
+export const CRYOEM_LEVELS = { lower: 0.75, recommended: 1, higher: 1.5 };
+export const CRYOEM_DENSITY = 2;
+
+// Chain colors: proteins in cool hues, RNA and DNA in warm ones, each chain
+// its own (a golden-angle walk round the hue circle).
+function chainColor(i, kind) {
+  const h = kind === "nucleic" ? 0.02 + ((i * 0.618034) % 1) * 0.13 : 0.45 + ((i * 0.618034) % 1) * 0.45; // prettier-ignore
+  const s = kind === "nucleic" ? 0.75 : 0.5;
+  const l = kind === "nucleic" ? 0.6 : 0.62;
+  const f = (n) => {
+    const k = (n + h * 12) % 12;
+    const a = s * Math.min(l, 1 - l);
+    return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+  };
+  const hex = (v) =>
+    Math.round(v * 255)
+      .toString(16)
+      .padStart(2, "0");
+  return `#${hex(f(0))}${hex(f(8))}${hex(f(4))}`;
+}
+// Distance from the center: the classic radial coloring of capsids.
+const RADIAL = ["#3a4fd0", "#38a6d8", "#5fd08a", "#e8d84a", "#ef7a35", "#d8344a"];
+function radialColor(t) {
+  const x = Math.max(0, Math.min(1, t)) * (RADIAL.length - 1);
+  const i = Math.min(RADIAL.length - 2, Math.floor(x));
+  return mix(RADIAL[i], RADIAL[i + 1], x - i);
+}
+
+const CRYOEM = {
+  alive: false,
+  density: CRYOEM_DENSITY,
+  options: [
+    {
+      key: "map",
+      label: "Map",
+      type: "select",
+      default: "apoferritin",
+      choices: CRYOEM_SAMPLES.map((d) => ({ id: d.id, label: d.choice })),
+    },
+    {
+      key: "level",
+      label: "Level",
+      type: "select",
+      default: "recommended",
+      choices: [
+        { id: "lower", label: "Lower (more of the density)" },
+        { id: "recommended", label: "EMDB's recommended" },
+        { id: "higher", label: "Higher (only the strongest)" },
+      ],
+    },
+    {
+      key: "color",
+      label: "Color by",
+      type: "select",
+      default: "auto",
+      choices: [
+        { id: "auto", label: "What suits it" },
+        { id: "chain", label: "Chain (from the fitted model)" },
+        { id: "radius", label: "Distance from the center" },
+        { id: "plain", label: "One color" },
+      ],
+    },
+    { key: "model", label: "Fitted atomic model", type: "switch", default: false },
+  ],
+  controls: [{ key: "cut", label: "Cut it open", type: "toggle", default: 0, ease: 0.9 }],
+  // A tap cuts the front half away, as a molecular viewer's clipping plane
+  // does, to show the inside (apoferritin's and the capsid's hollow middle);
+  // a second tap closes it.
+  action: { key: "cut", label: "Cut it open" },
+  credits: CRYOEM_SAMPLES.map((d) => ({
+    label: d.choice,
+    title: d.title,
+    source: d.source,
+    author: d.author,
+    license: d.license,
+    licenseUrl: d.licenseUrl,
+  })),
+  async prepare(o) {
+    const def = CRYOEM_SAMPLES.find((d) => d.id === o.map) || CRYOEM_SAMPLES[0];
+    if (!EM.maps.has(def.id)) {
+      const [vol, model] = await Promise.all([
+        readAsset(`../../assets/toys/cryoem-map/${def.id}.vol.gz`, true),
+        readAsset(`../../assets/toys/cryoem-map/${def.id}-model.bin`, true),
+      ]);
+      EM.maps.set(def.id, await readDensity(vol));
+      EM.models.set(def.id, await readBackbone(model));
+    }
+    EM.want = { def, D: EM.maps.get(def.id), model: EM.models.get(def.id) };
+  },
+  drive(t, c, out) {
+    // The cut: a clipping plane through the middle, facing the camera,
+    // sweeping in from in front (toy units in front of the middle).
+    const u = smoothstep(0, 1, c.cut ?? 0);
+    out.morph = [0, 1, 0, u > 0.001 ? 1.4 - 1.38 * u : 0];
+    out.glow = [0, 0, 0, 0];
+  },
+  gpuField() {
+    return sciModifier(1, 1);
+  },
+  build(k, o) {
+    const W = EM.want;
+    if (!W) throw new Error("The map hasn't loaded.");
+    const { D, model, def } = W;
+    const level = D.head.level * (CRYOEM_LEVELS[o.level] ?? 1);
+    const colorBy = o.color === "auto" || !o.color ? (def.color ?? "chain") : o.color;
+    // r3 (the owner's "keep making it sharper"): one point per surface voxel,
+    // so a big map fits the budget with less thinning.
+    const S = isoPointsPerVoxel(D, level);
+    if (!S.count) throw new Error("Nothing of the map is above this level.");
+    // The middle: the center of the surface.
+    const P = S.p;
+    const c = [0, 0, 0];
+    for (let i = 0; i < S.count; i++) for (let a = 0; a < 3; a++) c[a] += P[3 * i + a] / S.count;
+    const radiusOf = (i) => Math.hypot(P[3 * i] - c[0], P[3 * i + 1] - c[1], P[3 * i + 2] - c[2]);
+    // The radial colors run between the 2nd and 99.5th percentiles of the
+    // radius (a stray speck far out doesn't squeeze them).
+    const radii = [];
+    for (let i = 0; i < S.count; i += Math.max(1, Math.floor(S.count / 20000)))
+      radii.push(radiusOf(i));
+    radii.sort((a, b) => a - b);
+    const r0 = radii[Math.floor(radii.length * 0.02)];
+    const rMax = radii[Math.floor(radii.length * 0.995)];
+    // Each surface point's chain: the nearest backbone atom's (within 8 Å).
+    const atoms = [];
+    model.forEach((ch, ci) => ch.p.forEach((p) => atoms.push([p, ci])));
+    const cell = 8;
+    const grid = new Map();
+    for (const a of atoms) {
+      const key = a[0].map((v) => Math.floor(v / cell)).join(",");
+      if (!grid.has(key)) grid.set(key, []);
+      grid.get(key).push(a);
+    }
+    // (cached per 2 Å cell: neighbors on the surface share their chain)
+    const cache = new Map();
+    const nearestChain = (p) => {
+      const key =
+        Math.floor(p[0] / 2) + 4096 * (Math.floor(p[1] / 2) + 4096 * Math.floor(p[2] / 2));
+      const hit = cache.get(key);
+      if (hit !== undefined) return hit;
+      const ci = nearestChainAt(p);
+      cache.set(key, ci);
+      return ci;
+    };
+    const nearestChainAt = (p) => {
+      const g = p.map((v) => Math.floor(v / cell));
+      let best = -1;
+      let bd = cell * cell;
+      for (let dx = -1; dx <= 1; dx++)
+        for (let dy = -1; dy <= 1; dy++)
+          for (let dz = -1; dz <= 1; dz++)
+            for (const [q, ci] of grid.get(`${g[0] + dx},${g[1] + dy},${g[2] + dz}`) ?? []) {
+              const d = (q[0] - p[0]) ** 2 + (q[1] - p[1]) ** 2 + (q[2] - p[2]) ** 2;
+              if (d < bd) [best, bd] = [ci, d];
+            }
+      return best;
+    };
+    const showModel = o.model === true;
+    // With the model, the map is a sparse, pale dotted surface (7% of its
+    // points, small), so the colored backbone inside shows through.
+    const alpha = showModel ? 0.3 : 1;
+    // The budget: when the surface has more points than this device draws,
+    // an even share of them, each a little bigger to close the surface.
+    const budget = Math.max(2000, Math.floor(k.count * (showModel ? 0.8 : 0.98)));
+    const keep = Math.min(showModel ? 0.07 : 1, budget / S.count);
+    const vox = D.voxel[0];
+    const size = showModel ? vox * 0.6 : vox * 0.8 * Math.sqrt(1 / keep);
+    const pick = [];
+    for (let i = 0; i < S.count; i++) if ((i * 0.618034) % 1 < keep) pick.push(i);
+    const base = () => k.baseSize || 0.01;
+    // Ambient occlusion (r3, the owner's "sharper"): how much density
+    // surrounds a surface point, from 26 samples 3 voxels out, darkens the
+    // grooves and pockets, as a molecular viewer's full lighting does.
+    const DIRS = [];
+    for (let a = -1; a <= 1; a++)
+      for (let b = -1; b <= 1; b++)
+        for (let d = -1; d <= 1; d++)
+          if (a || b || d) DIRS.push(vec.unit([a, b, d]).map((v) => v * 3));
+    const L = S.levelByte;
+    const occlusion = (i) => {
+      const x = S.v[3 * i];
+      const y = S.v[3 * i + 1];
+      const z = S.v[3 * i + 2];
+      let hit = 0;
+      for (const [a, b, d] of DIRS) if (D.sample(x + a, y + b, z + d) >= L) hit++;
+      // A bump has about a fifth of the directions inside, a pocket half.
+      return Math.max(0, Math.min(1, (hit / DIRS.length - 0.18) / 0.4));
+    };
+    k.cloud({ count: (pick.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
+      const i = pick[j];
+      if (i === undefined) return null;
+      const p = [P[3 * i], P[3 * i + 1], P[3 * i + 2]];
+      const n = [S.n[3 * i], S.n[3 * i + 1], S.n[3 * i + 2]];
+      let col = "#c9ccd6";
+      if (showModel) col = "#d8dbe2";
+      else if (colorBy === "radius") col = radialColor((radiusOf(i) - r0) / (rMax - r0));
+      else if (colorBy !== "plain") {
+        const ci = nearestChain(p);
+        col = ci >= 0 ? chainColor(ci, model[ci].kind) : "#9aa0ad";
+      }
+      return {
+        p: [p[0] - c[0], p[1] - c[1], p[2] - c[2]],
+        n,
+        flat: 0.12,
+        size: size / base(),
+        color: shade(lit(col, n, 0.25), 1 - 0.6 * occlusion(i)),
+        opacity: alpha,
+        part: sciPart(SCI_TYPE.plain),
+      };
+    });
+    // The fitted model's backbone: a bead at each Cα (or P) and between
+    // neighbors along the chain, in its chain's color.
+    let beads = 0;
+    if (showModel) {
+      const pts = [];
+      model.forEach((ch, ci) => {
+        const col = chainColor(ci, ch.kind);
+        const gap = ch.kind === "nucleic" ? 8 : 4.5;
+        const steps = ch.kind === "nucleic" ? 7 : 4;
+        ch.p.forEach((p, i) => {
+          pts.push([p, col]);
+          const q = ch.p[i + 1];
+          if (!q) return;
+          const d = Math.hypot(q[0] - p[0], q[1] - p[1], q[2] - p[2]);
+          if (d > gap) return;
+          for (let s2 = 1; s2 < steps; s2++) {
+            const t = s2 / steps;
+            pts.push([p.map((v, k2) => v + (q[k2] - v) * t), col]);
+          }
+        });
+      });
+      const room = Math.max(1000, Math.floor(k.count * 0.18));
+      const every = Math.max(1, Math.ceil(pts.length / room));
+      const bead = 0.8 * Math.sqrt(every); // Å across (r2: finer, the owner's "sharper")
+      const shown = pts.filter((_, i) => i % every === 0);
+      beads = shown.length;
+      k.cloud({ count: (shown.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
+        const e = shown[j];
+        if (!e) return null;
+        return {
+          p: [e[0][0] - c[0], e[0][1] - c[1], e[0][2] - c[2]],
+          size: bead / base(),
+          color: e[1],
+          opacity: 1,
+          part: sciPart(SCI_TYPE.plain),
+        };
+      });
+    }
+    EM.info = {
+      id: def.id,
+      name: def.label,
+      emdb: D.head.emdb,
+      pdb: D.head.pdb,
+      level,
+      recommended: D.head.level,
+      levelSource: D.head.levelSource,
+      resolution: D.head.resolution,
+      voxel: vox,
+      surface: S.count,
+      drawn: pick.length,
+      beads,
+      chains: model.length,
+      radius: rMax,
+      center: c,
+    };
+    k.data = { cryoem: EM.info };
+  },
+  input: {
+    title: "About this map",
+    fileButton: false,
+    shown() {
+      const i = EM.info;
+      if (!i) return "";
+      return `${i.emdb} at ${i.resolution} Å, resampled to ${i.voxel.toFixed(2)} Å voxels. Level ${+i.level.toPrecision(3)} (EMDB's recommended: ${i.recommended}, set by the ${String(i.levelSource || "depositors").toLowerCase() === "author" ? "authors" : "depositors"}). ${fmt(i.surface)} surface points, ${fmt(i.drawn)} drawn; ${fmt(i.chains)} chains in the fitted model (${i.pdb}).`; // prettier-ignore
+    },
+  },
+};
+
 export const RECIPES = {
   "thermal-ellipsoids": THERMAL,
   "smlm-microscope": MICROSCOPE,
   "galaxy-box": GALAXY,
+  "cryoem-map": CRYOEM,
+  "terrain-box": TERRAIN,
+  "contour-lab": CONTOUR,
 };

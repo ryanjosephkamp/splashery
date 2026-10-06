@@ -152,6 +152,10 @@ uniform vec4 uSpBodyT;   // xyz whole-toy offset, w squash (+ flattens, - stretc
 uniform vec4 uSpBodyF;   // x floor distance below the toy centre
 uniform vec4 uSpBodyS;   // Hands-on squish (lane Physics): xyz axis, w amount (+ flattens)
 uniform vec4 uSpBodyP;   // xyz the squish's pivot, where it touched
+uniform vec4 uSpPoseQ;   // Any pose: the toy's turn in Hands-on (quaternion; src/effects-pose.js)
+uniform vec4 uSpPoseT;   // xyz where its pivot is now, w on (0: upright at home)
+uniform vec4 uSpPoseC;   // xyz its pivot at home
+uniform vec4 uSpPoseUp;  // xyz the world's up in the toy's home frame, w the floor's distance below its center along it
 uniform vec4 uSpPat;     // x on, y projection (0 wrap, 1 front, 2 globe), z repeats, w amount
 uniform vec4 uSpPatB;    // x keep detail, y half height, z mean luminance, w half width
 uniform sampler2D uSpPattern;
@@ -199,6 +203,16 @@ vec4 spQuatMul(vec4 a, vec4 b) {
 
 vec3 spQuatRotate(vec4 q, vec3 v) {
   return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
+}
+
+// Lane Any pose: a world point in the toy's home frame (where every effect
+// is worked out), and back into its Hands-on pose (src/effects-pose.js).
+vec3 spPoseIn(vec3 p) {
+  return uSpPoseC.xyz + spQuatRotate(vec4(-uSpPoseQ.xyz, uSpPoseQ.w), p - uSpPoseT.xyz);
+}
+
+vec3 spPoseOut(vec3 p) {
+  return uSpPoseT.xyz + spQuatRotate(uSpPoseQ, p - uSpPoseC.xyz);
 }
 
 // Whole-toy motion (bounce, spin, wobble, float): squash about the floor,
@@ -286,6 +300,7 @@ vec3 spWind(vec3 home) {
 }
 
 void modifySplatCenter(inout vec3 center) {
+  if (uSpPoseT.w > 0.5) center = spPoseIn(center); // lane Any pose
   spRest = center;
   __KIT_CENTER__
   center = spBody(center);
@@ -393,11 +408,18 @@ void modifySplatCenter(inout vec3 center) {
     spCut = side > 0.0 ? 1.0 : 0.0;
   }
 
-  center = p;
+  center = uSpPoseT.w > 0.5 ? spPoseOut(p) : p; // lane Any pose
 }
 
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-  rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, rotation)));
+  if (uSpPoseT.w > 0.5) {
+    // Lane Any pose: the effects' turns are in the toy's home frame.
+    vec4 fx = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spPartQ));
+    fx = spQuatMul(uSpPoseQ, spQuatMul(fx, vec4(-uSpPoseQ.xyz, uSpPoseQ.w)));
+    rotation = spQuatMul(fx, rotation);
+  } else {
+    rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, rotation)));
+  }
   scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch);
   if (spCut > 0.5) scale = vec3(0.0);
 }
@@ -417,7 +439,7 @@ void modifySplatColor(vec3 center, inout vec4 color) {
   }
   color.rgb = color.rgb * (1.0 - paint.a) + paint.rgb;
   if (uSpSliceP.x > 0.5) {
-    float side = dot(center - uSpToy.xyz, uSpSlice.xyz) - uSpSlice.w;
+    float side = dot((uSpPoseT.w > 0.5 ? spPoseIn(center) : center) - uSpToy.xyz, uSpSlice.xyz) - uSpSlice.w;
     float glow = side > 0.0 ? 0.0 : 1.0 - smoothstep(0.0, uSpSliceP.y, -side);
     color.rgb = mix(color.rgb, uSpAccent.rgb, glow * 0.85);
     if (side > 0.0) color.a = 0.0;
@@ -456,6 +478,10 @@ uniform uSpBodyT: vec4f;
 uniform uSpBodyF: vec4f;
 uniform uSpBodyS: vec4f;
 uniform uSpBodyP: vec4f;
+uniform uSpPoseQ: vec4f;
+uniform uSpPoseT: vec4f;
+uniform uSpPoseC: vec4f;
+uniform uSpPoseUp: vec4f;
 uniform uSpPat: vec4f;
 uniform uSpPatB: vec4f;
 var uSpPattern: texture_2d<f32>;
@@ -503,6 +529,15 @@ fn spQuatMul(a: vec4f, b: vec4f) -> vec4f {
 
 fn spQuatRotate(q: vec4f, v: vec3f) -> vec3f {
   return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
+}
+
+// Lane Any pose: a world point in the toy's home frame, and back.
+fn spPoseIn(p: vec3f) -> vec3f {
+  return uniform.uSpPoseC.xyz + spQuatRotate(vec4f(-uniform.uSpPoseQ.xyz, uniform.uSpPoseQ.w), p - uniform.uSpPoseT.xyz);
+}
+
+fn spPoseOut(p: vec3f) -> vec3f {
+  return uniform.uSpPoseT.xyz + spQuatRotate(uniform.uSpPoseQ, p - uniform.uSpPoseC.xyz);
 }
 
 fn spBody(p: vec3f) -> vec3f {
@@ -585,6 +620,7 @@ fn spWind(home: vec3f) -> vec3f {
 }
 
 fn modifySplatCenter(center: ptr<function, vec3f>) {
+  if (uniform.uSpPoseT.w > 0.5) { *center = spPoseIn(*center); } // lane Any pose
   spRest = *center;
   __KIT_CENTER__
   *center = spBody(*center);
@@ -688,10 +724,18 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   }
 
   *center = p;
+  if (uniform.uSpPoseT.w > 0.5) { *center = spPoseOut(p); } // lane Any pose
 }
 
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
-  *rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, *rotation)));
+  if (uniform.uSpPoseT.w > 0.5) {
+    // Lane Any pose: the effects' turns are in the toy's home frame.
+    var fx = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spPartQ));
+    fx = spQuatMul(uniform.uSpPoseQ, spQuatMul(fx, vec4f(-uniform.uSpPoseQ.xyz, uniform.uSpPoseQ.w)));
+    *rotation = spQuatMul(fx, *rotation);
+  } else {
+    *rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, *rotation)));
+  }
   *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch));
   if (spCut > 0.5) { *scale = vec3f(0.0); }
 }
@@ -713,7 +757,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var rgb = base * (1.0 - paint.a) + paint.rgb;
   var a = (*color).a;
   if (uniform.uSpSliceP.x > 0.5) {
-    let side = dot(center - uniform.uSpToy.xyz, uniform.uSpSlice.xyz) - uniform.uSpSlice.w;
+    let side = dot(select(center, spPoseIn(center), uniform.uSpPoseT.w > 0.5) - uniform.uSpToy.xyz, uniform.uSpSlice.xyz) - uniform.uSpSlice.w;
     let glow = select(1.0 - smoothstep(0.0, uniform.uSpSliceP.y, -side), 0.0, side > 0.0);
     rgb = mix(rgb, uniform.uSpAccent.rgb, glow * 0.85);
     if (side > 0.0) { a = 0.0; }
@@ -833,6 +877,9 @@ vec3 spKitCenter(vec3 p) {
   vec3 toy = uSpToy.xyz;
   float R = uSpToy.w;
   vec3 up = vec3(0.0, 1.0, 0.0);
+  // Lane Any pose: the world's real up, for what rises or falls (a flame,
+  // embers, snow) in a toy lying on its side.
+  vec3 gup = uSpPoseT.w > 0.5 ? uSpPoseUp.xyz : up;
   float t = uSpKit.x * uSpKit.z;
   float amt = uSpKitB.z;
   if (uSpKit.y > 0.5 && kind > 0) {
@@ -851,13 +898,13 @@ vec3 spKitCenter(vec3 p) {
       float c = fract(t * (0.6 + 0.5 * h) * (flame ? 1.4 : 0.35) + an.w + h);
       float travel = amt * an.z * R;
       vec3 side = vec3(sin(t * 3.0 + h * 17.0), 0.0, cos(t * 2.3 + h * 11.0));
-      p += up * c * travel + side * (flame ? 0.07 : 0.22) * c * travel;
+      p += gup * c * travel + (side - gup * dot(side, gup)) * (flame ? 0.07 : 0.22) * c * travel;
       spFade = smoothstep(0.0, 0.1, c) * (1.0 - smoothstep(0.55, 1.0, c));
       spKitScale = flame ? mix(1.0, 0.3, c) : mix(0.7, 1.25, c);
       if (flame) spFlame = c;
     } else if (kind == 6) {
       float c = fract(t * (0.72 + 0.25 * h) + an.w);
-      p -= up * c * an.z * R;
+      p -= gup * c * an.z * R;
       spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
     } else if (kind == 7) {
       spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);
@@ -1025,7 +1072,13 @@ vec3 spKitCenter(vec3 p) {
     // of the part's centre are hidden, so a turning shell's back never draws
     // over its front (splats sort in their built pose).
     float vis = ofs.w;
-    if (vis < -0.5) {
+    if (vis < -9.5) {
+      // w <= -10 (lane Night sky): a part culled below the level plane
+      // through its centre (visibility -w - 10): a sky's stars set.
+      vis = -vis - 10.0;
+      vec3 fc = pv.xyz + ofs.xyz;
+      vis *= smoothstep(-0.004, 0.004, normalize(p - fc + vec3(1e-6)).y);
+    } else if (vis < -0.5) {
       vis = -vis - 1.0;
       vec3 fc = pv.xyz + ofs.xyz;
       float fd = dot(normalize(p - fc + vec3(1e-6)), normalize(uSpCam.xyz - p));
@@ -1092,6 +1145,8 @@ fn spKitCenter(p0: vec3f) -> vec3f {
   let toy = uniform.uSpToy.xyz;
   let R = uniform.uSpToy.w;
   let up = vec3f(0.0, 1.0, 0.0);
+  // Lane Any pose: the world's real up, for what rises or falls.
+  let gup = select(up, uniform.uSpPoseUp.xyz, uniform.uSpPoseT.w > 0.5);
   let t = uniform.uSpKit.x * uniform.uSpKit.z;
   let amt = uniform.uSpKitB.z;
   if (uniform.uSpKit.y > 0.5 && kind > 0) {
@@ -1110,13 +1165,13 @@ fn spKitCenter(p0: vec3f) -> vec3f {
       let c = fract(t * (0.6 + 0.5 * h) * select(0.35, 1.4, flame) + an.w + h);
       let travel = amt * an.z * R;
       let side = vec3f(sin(t * 3.0 + h * 17.0), 0.0, cos(t * 2.3 + h * 11.0));
-      p = p + up * c * travel + side * select(0.22, 0.07, flame) * c * travel;
+      p = p + gup * c * travel + (side - gup * dot(side, gup)) * select(0.22, 0.07, flame) * c * travel;
       spFade = smoothstep(0.0, 0.1, c) * (1.0 - smoothstep(0.55, 1.0, c));
       spKitScale = select(mix(0.7, 1.25, c), mix(1.0, 0.3, c), flame);
       if (flame) { spFlame = c; }
     } else if (kind == 6) {
       let c = fract(t * (0.72 + 0.25 * h) + an.w);
-      p = p - up * c * an.z * R;
+      p = p - gup * c * an.z * R;
       spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
     } else if (kind == 7) {
       spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);
@@ -1271,7 +1326,12 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
     var vis = ofs.w;
-    if (vis < -0.5) {
+    if (vis < -9.5) {
+      // Lane Night sky: culled below the level plane through its centre.
+      vis = -vis - 10.0;
+      let fc = pv.xyz + ofs.xyz;
+      vis = vis * smoothstep(-0.004, 0.004, normalize(p - fc + vec3f(1e-6)).y);
+    } else if (vis < -0.5) {
       vis = -vis - 1.0;
       let fc = pv.xyz + ofs.xyz;
       let fd = dot(normalize(p - fc + vec3f(1e-6)), normalize(uniform.uSpCam.xyz - p));
@@ -1452,11 +1512,20 @@ vec3 spRigFx(vec3 p, vec3 rest, vec4 pk, int part, int o) {
     if (hc <= f9.x) {
       float u = clamp(env, 0.0, 1.0);
       vec3 outd = normalize(pc - org + vec3(1e-4));
-      vec3 disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
+      vec3 g3 = f3.xyz;
+      // Lane Any pose: pieces fall toward the world's real down in a toy turned over.
+      if (uSpPoseT.w > 0.5) g3 = uSpPoseUp.xyz * f3.y + vec3(f3.x, 0.0, f3.z);
+      vec3 disp = (outd * f3.w * u * (1.0 - 0.5 * u) + g3 * u * u) * f1.x * sel;
       // Pieces land on the floor instead of falling through it.
-      float floorY = uSpToy.y - uSpBodyF.x + 0.015 * uSpToy.w;
-      float yc = pc.y + disp.y;
-      if (yc < floorY) disp.y += floorY - yc;
+      if (uSpPoseT.w > 0.5) {
+        float fl = 0.015 * uSpToy.w - uSpPoseUp.w;
+        float hgt = dot(pc + disp - uSpToy.xyz, uSpPoseUp.xyz);
+        if (hgt < fl) disp += uSpPoseUp.xyz * (fl - hgt);
+      } else {
+        float floorY = uSpToy.y - uSpBodyF.x + 0.015 * uSpToy.w;
+        float yc = pc.y + disp.y;
+        if (yc < floorY) disp.y += floorY - yc;
+      }
       float ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
       vec3 ax = normalize(spCellHash3(cid + 3.1) + vec3(1e-3));
       p = pc + disp + spRotate(p - pc, ax, ang);
@@ -1678,10 +1747,19 @@ fn spRigFx(p0: vec3f, rest: vec3f, pk: vec4f, part: i32, o: i32) -> vec3f {
     if (hc <= f9.x) {
       let u = clamp(env, 0.0, 1.0);
       let outd = normalize(pc - org + vec3f(1e-4));
-      var disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
-      let floorY = uniform.uSpToy.y - uniform.uSpBodyF.x + 0.015 * uniform.uSpToy.w;
-      let yc = pc.y + disp.y;
-      if (yc < floorY) { disp.y = disp.y + floorY - yc; }
+      var g3 = f3.xyz;
+      // Lane Any pose: pieces fall toward the world's real down in a toy turned over.
+      if (uniform.uSpPoseT.w > 0.5) { g3 = uniform.uSpPoseUp.xyz * f3.y + vec3f(f3.x, 0.0, f3.z); }
+      var disp = (outd * f3.w * u * (1.0 - 0.5 * u) + g3 * u * u) * f1.x * sel;
+      if (uniform.uSpPoseT.w > 0.5) {
+        let fl = 0.015 * uniform.uSpToy.w - uniform.uSpPoseUp.w;
+        let hgt = dot(pc + disp - uniform.uSpToy.xyz, uniform.uSpPoseUp.xyz);
+        if (hgt < fl) { disp = disp + uniform.uSpPoseUp.xyz * (fl - hgt); }
+      } else {
+        let floorY = uniform.uSpToy.y - uniform.uSpBodyF.x + 0.015 * uniform.uSpToy.w;
+        let yc = pc.y + disp.y;
+        if (yc < floorY) { disp.y = disp.y + floorY - yc; }
+      }
       let ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
       let ax = normalize(spCellHash3(cid + vec3f(3.1)) + vec3f(1e-3));
       p = pc + disp + spRotate(p - pc, ax, ang);
