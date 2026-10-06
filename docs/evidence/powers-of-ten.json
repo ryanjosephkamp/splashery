@@ -272,6 +272,44 @@
       "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
     },
     {
+      "id": "cells",
+      "power": -4,
+      "label": "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",
+      "size_m": 0.0002,
+      "sizeInLabel": "200 µm",
+      "how": "Wellcome's confocal picture, cut into squares 158, 50 and 16 µm wide round one chloroplast, from its stated width (tools/pot-micro.mjs).",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "Arabidopsis thaliana plant cells containing chloroplasts, LM",
+          "publisher": "Wellcome Collection (Fernán Federici), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/gwmfux6b",
+          "says": "Confocal micrograph of cells inside a leaf from the plant Arabidopsis thaliana ... Mesophyll cells (blue; round/oval shape) containing chloroplasts (red) ... Width of image is 200 micrometres."
+        }
+      ],
+      "note": "A thale cress leaf, not a maple's; the colors are the microscope's false colors."
+    },
+    {
+      "id": "chloroplast",
+      "power": -5.6,
+      "label": "A chloroplast, where a leaf turns light into food, about 3.5 µm long: an electron micrograph (false color).",
+      "size_m": 0.0000035,
+      "sizeInLabel": "3.5 µm",
+      "how": "Wellcome's electron micrograph, cut into squares 3.16 and 1 µm wide inside the chloroplast; its length, about 620 of the picture's 800 columns of a 4.5 µm width, is about 3.5 µm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "close",
+      "sources": [
+        {
+          "title": "Chloroplast in a bean leaf, TEM",
+          "publisher": "Wellcome Collection (Kevin Mackenzie, University of Aberdeen), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/bx3dctp2",
+          "says": "False-colour transmission electron micrograph of a chloroplast in a bean leaf ... grana ... and lamellae ... are visible here. Width of image is 4.5 micrometres."
+        }
+      ],
+      "note": "A bean's chloroplast, set inside the thale cress cell's; the length is measured on the picture."
+    },
+    {
       "id": "ribosome",
       "power": -7.4,
       "label": "A ribosome, the machine that builds proteins, about 20 nm across: its RNA orange, its proteins blue.",
@@ -531,6 +569,38 @@
       "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
     },
     {
+      "claim": "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",
+      "how": "Wellcome's confocal picture, cut into squares 158, 50 and 16 µm wide round one chloroplast, from its stated width (tools/pot-micro.mjs).",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Arabidopsis thaliana plant cells containing chloroplasts, LM",
+          "publisher": "Wellcome Collection (Fernán Federici), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/gwmfux6b",
+          "says": "Confocal micrograph of cells inside a leaf from the plant Arabidopsis thaliana ... Mesophyll cells (blue; round/oval shape) containing chloroplasts (red) ... Width of image is 200 micrometres."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": "A thale cress leaf, not a maple's; the colors are the microscope's false colors."
+    },
+    {
+      "claim": "A chloroplast, where a leaf turns light into food, about 3.5 µm long: an electron micrograph (false color).",
+      "how": "Wellcome's electron micrograph, cut into squares 3.16 and 1 µm wide inside the chloroplast; its length, about 620 of the picture's 800 columns of a 4.5 µm width, is about 3.5 µm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Chloroplast in a bean leaf, TEM",
+          "publisher": "Wellcome Collection (Kevin Mackenzie, University of Aberdeen), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/bx3dctp2",
+          "says": "False-colour transmission electron micrograph of a chloroplast in a bean leaf ... grana ... and lamellae ... are visible here. Width of image is 4.5 micrometres."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/pot.spec.mjs",
+      "note": "A bean's chloroplast, set inside the thale cress cell's; the length is measured on the picture."
+    },
+    {
       "claim": "A ribosome, the machine that builds proteins, about 20 nm across: its RNA orange, its proteins blue.",
       "how": "Science r3's cryo-EM map of the E. coli 70S ribosome, its surface at EMDB's recommended level, one splat per surface voxel (1 Å = 1e-10 m); RNA and protein from the nearest chain of the fitted model.",
       "where": "src/packs/powers-of-ten.js (buildRibosome); src/science/density.js",
@@ -556,7 +626,8 @@
   "simplified": [
     "The Milky Way is M83, a similar galaxy, scaled to the Milky Way's size and laid at its real tilt and place.",
     "Planet and star dots are far bigger than the bodies would be at their scale; their places are real.",
-    "The garden bed is a 3D capture made elsewhere, set in the garden at an estimated size."
+    "The garden bed is a 3D capture made elsewhere, set in the garden at an estimated size.",
+    "Below the garden the pictures come from different plants (thale cress cells, a bean's chloroplast, a bacterium's ribosome), each at its true size, nested as they would be in one leaf."
   ],
   "fixes": []
 }

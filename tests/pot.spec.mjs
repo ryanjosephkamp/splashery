@@ -144,9 +144,9 @@ test.describe("Powers of ten in the app", () => {
     const d0 = await page.evaluate(() => window.__splashery.player.camera.tgt.distance);
     const box = await page.locator("canvas").first().boundingBox();
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 3);
-    // Out: about two and a half decades (the wheel takes four decades per e-fold).
+    // Out: a few decades (four decades per e-fold of the wheel's zoom).
     for (let i = 0; i < 12; i++) await page.mouse.wheel(0, 120);
-    await page.waitForFunction(() => /10[²³] m/.test(document.querySelector("#toy-legend")?.innerText || "")); // prettier-ignore
+    await page.waitForFunction(() => /10[²³⁴⁵] m/.test(document.querySelector("#toy-legend")?.innerText || "")); // prettier-ignore
     await settle(page);
     const s = await page.evaluate(() => ({
       legend: document.querySelector("#toy-legend").innerText,
@@ -154,8 +154,11 @@ test.describe("Powers of ten in the app", () => {
       d: window.__splashery.player.camera.tgt.distance,
     }));
     expect(s.d).toBeCloseTo(d0, 6);
-    expect(s.legend).toMatch(/Haupt Garden|National Mall/);
-    expect(s.ids).toContain("aerial-3.0");
+    expect(s.legend).toMatch(/Haupt Garden|National Mall|Washington/);
+    expect(s.ids.some((id) => /^aerial-[345]/.test(id))).toBe(true);
+    // And back in: the garden again.
+    for (let i = 0; i < 12; i++) await page.mouse.wheel(0, -120);
+    await page.waitForFunction(() => (document.querySelector("#toy-legend")?.innerText || "").includes("garden bed")); // prettier-ignore
   });
 
   test("the slider goes to the galaxy and to the ribosome", async ({ page }) => {

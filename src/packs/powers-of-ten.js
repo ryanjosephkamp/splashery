@@ -10,7 +10,7 @@
 // The stops and their sources are in src/powers/stops.js; the evidence is
 // docs/evidence/powers-of-ten.json.
 
-import { TARGET, AERIAL, STOPS, Z_MIN, Z_MAX, Z_HOME, stopAt } from "../powers/stops.js";
+import { TARGET, AERIAL, MICRO, Z_MIN, Z_MAX, Z_HOME, stopAt } from "../powers/stops.js";
 import { loadTrained } from "./fidelity.js";
 import * as SKY from "../powers/sky.js";
 import { readDensity, readBackbone, isoPointsPerVoxel } from "../science/density.js";
@@ -42,10 +42,25 @@ const asset = (name) => new URL(`../../assets/toys/powers-of-ten/${name}`, impor
 // square (two or three layers show at once while one fades into the next).
 const SIDE = { low: 360, mid: 560, high: 600, max: 600 };
 
-async function pixels(name, side) {
+// A square picture's pixels at `side` (or its own size, when smaller): { data, side }.
+async function pixelsOf(name, side) {
   const r = await fetch(asset(name));
   if (!r.ok) throw new Error(`Could not load ${name}.`);
-  const bmp = await createImageBitmap(await r.blob(), {
+  const blob = await r.blob();
+  const own = await createImageBitmap(blob);
+  const n = Math.min(side, own.width);
+  own.close?.();
+  return { data: await pixels(blob, n), side: n };
+}
+
+async function pixels(name, side) {
+  let blob = name;
+  if (typeof name === "string") {
+    const r = await fetch(asset(name));
+    if (!r.ok) throw new Error(`Could not load ${name}.`);
+    blob = await r.blob();
+  }
+  const bmp = await createImageBitmap(blob, {
     resizeWidth: side,
     resizeHeight: side,
     resizeQuality: "high",
@@ -517,8 +532,7 @@ async function buildGalaxy(k, layer, profile) {
 // background of that kind clear, so the subject (a leaf on a white table)
 // lies on the scene round it.
 async function buildPicture(k, layer, profile) {
-  const side = SIDE[profile] || SIDE.mid;
-  const data = await pixels(layer.file, side);
+  const { data, side } = await pixelsOf(layer.file, SIDE[profile] || SIDE.mid);
   const ku = U / 10 ** layer.e;
   const w = layer.width * ku;
   const c = layer.center || [0.5, 0.5];
@@ -660,9 +674,22 @@ export const LAYERS = [
     cover: true,
     fadeIn: a.e === 6 ? [0.08, 0.2] : [0.3, 0.55],
     dim: a.e === 1.5 ? [-1.1, -0.5, 0.3] : null,
+    fadeOut: a.e === 1.5 ? [150, 400] : null,
     build: (k, layer, profile) => buildAerial(k, a, profile),
   })),
   { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [6, 9], build: buildBed }, // prettier-ignore
+  ...MICRO.flatMap((m) =>
+    m.layers.map((L, i) => ({
+      id: `${m.id}${L.e}`,
+      e: L.e,
+      file: L.file,
+      width: 10 ** L.e,
+      cover: true,
+      fadeIn: i ? [0.3, 0.55] : [0.25, 0.5],
+      dim: m.id === "chloroplast" && i === m.layers.length - 1 ? [6.3, 6.9, 0.35] : null,
+      build: buildPicture,
+    })),
+  ),
   { id: "ribosome", e: -7.4, cover: false, fadeIn: [0.25, 0.5], build: buildRibosome },
 ];
 
@@ -760,7 +787,7 @@ const BYSA = {
 export const CREDITS = [
   { label: "The Milky Way's stand-in", title: "M83 (eso0825a)", source: "https://www.eso.org/public/images/eso0825a/", author: "ESO", ...BY }, // prettier-ignore
   { label: "Stars within 1,600 light-years", title: "HYG database v4.4", source: "https://codeberg.org/astronexus/hyg", author: "David Nash (astronexus)", ...BYSA }, // prettier-ignore
-  { label: "Stars within 65 light-years", title: "Gaia Catalogue of Nearby Stars (Smart et al. 2021)", source: "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/649/A6", author: "ESA/Gaia/DPAC", license: "CC BY-SA 3.0 IGO", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/igo/" }, // prettier-ignore
+  { label: "Stars within 65 light-years", title: "Gaia nearby-star catalog, GCNS (Smart et al. 2021)", source: "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/649/A6", author: "ESA/Gaia/DPAC", license: "CC BY-SA 3.0 IGO", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/igo/" }, // prettier-ignore
   { label: "Planets", title: "Approximate Positions of the Planets (Table 1)", source: "https://ssd.jpl.nasa.gov/planets/approx_pos.html", author: "E. M. Standish, JPL", ...PD }, // prettier-ignore
   { label: "The Moon", title: "CGI Moon Kit (LRO LROC color mosaic)", source: "https://svs.gsfc.nasa.gov/4720", author: "NASA's Scientific Visualization Studio; LRO LROC team", ...PD }, // prettier-ignore
   { label: "The Earth", title: "Blue Marble: Next Generation (via USGS The National Map, USGS Imagery Only)", source: "https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation", author: "NASA Earth Observatory (Reto Stöckli)", ...PD }, // prettier-ignore

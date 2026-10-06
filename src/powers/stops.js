@@ -51,7 +51,7 @@ export const STOPS = [
     size: 6.15e17,
     label: "Every known star within 65 light-years of the Sun: about 2,200.",
     source:
-      "Gaia Catalogue of Nearby Stars (ESA/Gaia/DPAC), CC BY-SA 3.0 IGO; HYG v4.4, CC BY-SA 4.0.",
+      "Gaia nearby-star catalog, GCNS (ESA/Gaia/DPAC), CC BY-SA 3.0 IGO; HYG v4.4, CC BY-SA 4.0.",
   },
   {
     id: "sun-alone",
@@ -132,6 +132,24 @@ export const STOPS = [
     source: "3D capture “Golden Fullmoon Maple” by Joshua Trapani, CC BY 4.0 (made elsewhere).",
   },
   {
+    id: "cells",
+    e: -4,
+    size: 200e-6,
+    label:
+      "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",
+    source:
+      "“Arabidopsis thaliana plant cells containing chloroplasts” by Fernán Federici (Wellcome Collection), CC BY 4.0.",
+  },
+  {
+    id: "chloroplast",
+    e: -5.6,
+    size: 3.5e-6,
+    label:
+      "A chloroplast, where a leaf turns light into food, about 3.5 µm long: an electron micrograph (false color).",
+    source:
+      "“Chloroplast in a bean leaf, TEM” by Kevin Mackenzie, University of Aberdeen (Wellcome Collection), CC BY 4.0.",
+  },
+  {
     id: "ribosome",
     e: -7.4,
     size: 20e-9,
@@ -148,3 +166,29 @@ export function stopAt(z) {
   for (const s of STOPS) if (Math.abs(z - s.e) < Math.abs(z - best.e)) best = s;
   return best;
 }
+
+// The pictures under the microscope (tools/pot-micro.mjs cuts them): the
+// source, its full width in meters (as its page states), the point the zoom
+// goes into (as shares of its width and height) and a square every half
+// decade (e: log10 of the square's side in meters).
+const micro = (id, e) => ({ e, file: `micro-${id}-${String(e).replace("-", "m").replace(".", "_")}.jpg` }); // prettier-ignore
+export const MICRO = [
+  {
+    id: "cells",
+    url: "https://iiif.wellcomecollection.org/image/B0009986/full/full/0/default.jpg",
+    page: "https://wellcomecollection.org/works/gwmfux6b",
+    width: 200e-6,
+    // A chloroplast near the middle, about 3.6 µm across here.
+    center: [0.4795, 0.4445],
+    layers: [-3.8, -4.3, -4.8].map((e) => micro("cells", e)),
+  },
+  {
+    id: "chloroplast",
+    url: "https://iiif.wellcomecollection.org/image/B0009849/full/full/0/default.jpg",
+    page: "https://wellcomecollection.org/works/bx3dctp2",
+    width: 4.5e-6,
+    // In the chloroplast's stroma, between its stacks of membranes.
+    center: [0.6, 0.5],
+    layers: [-5.5, -6].map((e) => micro("chloroplast", e)),
+  },
+];
