@@ -170,6 +170,9 @@ export class OrbitCamera {
   }
 
   zoomBy(factor) {
+    // Lane Powers of ten: a toy may take the zoom itself (zoomTaker returns
+    // true), so the camera keeps still.
+    if (this.zoomTaker?.(factor)) return this.interact();
     this.tgt.distance = Math.min(
       this.maxDistance,
       Math.max(this.minDistance, this.tgt.distance * factor),

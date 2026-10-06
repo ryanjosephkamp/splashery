@@ -500,6 +500,27 @@ like any other splat (parts, the body, leaves).
 - `tools/pic-clip.mjs` records clips of picture toys (pages are built in real time).
 - `tools/pic-samples.mjs` makes the samples and the test fixtures from our own text.
 
+### Chunks, the zoom gesture and the scale bar (lane Powers of ten)
+
+From lane Powers of ten (October 6, 2026; `src/chunks.js`). A toy that shows many scenes, a few at a
+time (the Powers of ten zoom), can load each one only when it comes near:
+
+- `chunks: { async build(k, id, help) }` builds one chunk with a Kit that keeps the recipe's
+  coordinates (no fit); it may fetch its data first (`help.profile` is the device tier).
+- In `drive`, `info.chunks.want(id)` builds it (one at a time, in the order asked),
+  `info.chunks.state(id)` is `"none"`, `"loading"`, `"ready"` or `"failed"`, and
+  `info.chunks.drop(id)` frees it.
+- `out.chunks = { [id]: { scale, offset: [x, y, z], fade } }` places the chunks shown this frame, in
+  recipe coordinates (a splat at `p` shows at `p * scale + offset`). A chunk left out, or with a
+  `fade` of 0, is switched off (not drawn or sorted). `fade` is the chunk's own first morph channel,
+  so splats built with `kind: "fade"` and `params: [0, -0.99]` take it as their opacity. Each chunk
+  is its own splat entity, so chunks sort where they show, at any scale.
+- `zoom: true` hands the pinch, the wheel and the + and − keys to the toy instead of the camera:
+  `info.zoom = { log, n, resets }` (the sum of the gestures' natural logs, above 0 zooming out; how
+  many; how many times Reset view was pressed).
+- A legend item (`out.legend`, lane Anatomy) may carry `ruler: { size }`: a scale bar that long in
+  recipe units at the toy's center as the camera sees it (at most 140 px), its text under it.
+
 ## 5c. The tilt lock
 
 From lane Viewer (September 29, 2026). A flat toy (a page, a photo, a screen, a frame) reads best
