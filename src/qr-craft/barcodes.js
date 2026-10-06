@@ -2,7 +2,7 @@
 // and EAN-13 and UPC-A (ISO/IEC 15420, GS1 General Specifications). Each
 // encoder returns the bars as a list of module widths, bar first, plus the
 // quiet zones the standards ask for, so the toy and the tests draw exactly
-// the same thing. docs/evidence/qr-craft-barcodes.md has the tables, the
+// the same thing. docs/evidence/barcodes.json has the tables, the
 // check digit arithmetic and the reference values the tests use.
 //
 // A symbol: { kind, text (what it holds), human (the line printed under it),
@@ -110,12 +110,16 @@ export function code128Values(text) {
     vals.push(valueIn(set, cs[i]));
     i++;
   }
-  // The check symbol: the start value plus each value times its position,
-  // modulo 103.
+  const check = code128Check(vals);
+  return { values: [...vals, check], check };
+}
+
+// The check symbol: the start value plus each value times its position,
+// modulo 103.
+export function code128Check(vals) {
   let sum = vals[0];
   for (let j = 1; j < vals.length; j++) sum += vals[j] * j;
-  const check = sum % 103;
-  return { values: [...vals, check], check };
+  return sum % 103;
 }
 
 const widthsOf = (vals) => vals.flatMap((v) => Array.from(C128[v], Number));

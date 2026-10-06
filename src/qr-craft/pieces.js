@@ -9,10 +9,13 @@
 //             bar pushes the first domino of every row: each row topples in a
 //             chain, left to right, each domino knocking the next, and lies
 //             down as the code.
-//   marbles   A dark glass marble rolls in from the right along its row into
-//             each dark module and settles in it, the leftmost first, so none
-//             passes another. It turns as it rolls (its distance over its
-//             radius).
+//   marbles   First the code's three eyes and its alignment marks, dark
+//             wooden frames, drop into the tray; then a dark glass marble
+//             rolls in from the right along its row into each other dark
+//             module and settles in it, the leftmost first, so none passes
+//             another. It turns as it rolls (its distance over its radius).
+//             (Round dots alone make jsQR's finder search unreliable; solid
+//             eyes and alignment marks read at every size we tried.)
 //   tiles     Every module is a square tile, light on one side and dark on
 //             the other, all light side up; the dark modules' tiles flip over,
 //             each about its own middle, in a wave out from the tap.
@@ -39,7 +42,11 @@ export const FALL_SECS = 0.42; // a domino from standing to flat
 export const ROLL_SECS = 1.5; // a marble from the edge to its module
 export const FLIP_SECS = 0.7; // a tile turning over
 
-export const KIND = { board: 0, domino: 3, marble: 4, tile: 5, bar: 6 };
+// A tile's top is kind 5, its bottom 8 and its sides 9: a splat shows from
+// both sides, and WebGL2 sorts the splats as they lie at rest, so a turned
+// tile's faces are hidden while they face away.
+export const KIND = { board: 0, domino: 3, marble: 4, tile: 5, bar: 6, frame: 7, tileBottom: 8, tileSide: 9 }; // prettier-ignore
+export const DROP_SECS = 0.55; // a frame dropping into the tray
 export const COLORS = {
   board: [0.97, 0.96, 0.93],
   ebony: [0.075, 0.075, 0.085],
@@ -48,10 +55,11 @@ export const COLORS = {
   swirl: [0.12, 0.2, 0.42],
   tileDark: [0.09, 0.1, 0.13],
   tileLight: [0.98, 0.97, 0.94],
+  walnut: [0.085, 0.07, 0.065],
   bar: [0.55, 0.36, 0.2],
 };
 export const DOMINO_T = 0.3; // a domino's thickness (modules)
-export const MARBLE_R = 0.45;
+export const MARBLE_R = 0.49; // nearly touching, so the eyes read as rings
 export const TILE_T = 0.12;
 
 const mul = (c, f) => [c[0] * f, c[1] * f, c[2] * f];
@@ -107,13 +115,15 @@ function board(out, N, spacing = 0.34, right = 0) {
 }
 
 // A box from (x0, y0, z0) to (x1, y1, z1) with each face's color.
-function box(out, x0, y0, z0, x1, y1, z1, s, cols, params) {
+// `fp`: other params for the bottom and the sides ({ bottom, side }), for a
+// piece whose faces the GPU program shows only while they face the viewer.
+function box(out, x0, y0, z0, x1, y1, z1, s, cols, params, fp = {}) {
   face(out, "z+", z1, x0, x1, y0, y1, s, cols.top, params);
-  if (cols.bottom) face(out, "z-", z0, x0, x1, y0, y1, s * 1.3, cols.bottom, params);
-  face(out, "x+", x1, y0, y1, z0, z1, s, cols.side, params, false);
-  face(out, "x-", x0, y0, y1, z0, z1, s, cols.side, params, false);
-  face(out, "y+", y1, x0, x1, z0, z1, s, cols.end, params, false);
-  face(out, "y-", y0, x0, x1, z0, z1, s, cols.end, params, false);
+  if (cols.bottom) face(out, "z-", z0, x0, x1, y0, y1, s * 1.3, cols.bottom, fp.bottom || params);
+  face(out, "x+", x1, y0, y1, z0, z1, s, cols.side, fp.side || params, false);
+  face(out, "x-", x0, y0, y1, z0, z1, s, cols.side, fp.side || params, false);
+  face(out, "y+", y1, x0, x1, z0, z1, s, cols.end, fp.side || params, false);
+  face(out, "y-", y0, x0, x1, z0, z1, s, cols.end, fp.side || params, false);
 }
 
 // ---- Layouts -----------------------------------------------------------------------------
@@ -141,16 +151,24 @@ export function dominoLayout(code) {
   }
   return fit(list, FALL_SECS + 0.25);
 }
-// The marbles: one per dark module; per row the leftmost rolls first.
+// The marbles: one per dark module outside the eyes and alignment marks; per
+// row the leftmost rolls first, after the frames are in.
 export function marbleLayout(code) {
   const N = code.size;
   const list = [];
   for (let r = 0; r < N; r++) {
     let j = 0;
     for (let c = 0; c < N; c++)
-      if (code.dark[r * N + c]) list.push({ r, c, start: 0.05 * ((r * 7) % N) + 0.16 * j++ });
+      if (code.dark[r * N + c] && code.piece[r * N + c] < 0) list.push({ r, c, start: 0.05 * ((r * 7) % N) + 0.16 * j++ }); // prettier-ignore
   }
-  return fit(list, ROLL_SECS + 0.4);
+  fit(list, ROLL_SECS + 0.4 + 0.9);
+  for (const m of list) m.start += 0.9;
+  return list;
+}
+// The frames: each eye and alignment mark of the code, one piece each,
+// dropping in one after another.
+export function frameLayout(code) {
+  return code.pieces.map((p, i) => ({ ...p, start: 0.12 * i }));
 }
 // The tiles: every module; the dark ones flip in a wave from (tx, ty).
 export function tileLayout(code, tap = [0, 0]) {
@@ -195,6 +213,17 @@ export function buildPieces(code, material, budget = 200000, { tap = [0, 0] } = 
     let layout;
     if (material === "marbles") {
       layout = marbleLayout(code);
+      // The frames: the dark modules of each eye and alignment mark as one
+      // solid walnut piece (its pivot the pattern's middle module).
+      for (const f of frameLayout(code)) {
+        const h = (f.n - 1) / 2;
+        const params = [1 + (f.row + h) * N + (f.col + h), KIND.frame + 16 * ms(f.start)];
+        for (let r = f.row; r < f.row + f.n; r++)
+          for (let c = f.col; c < f.col + f.n; c++) {
+            if (!code.dark[r * N + c]) continue;
+            box(out, cx(c), cy(r) - 1, 0, cx(c) + 1, cy(r), 0.6, s, { top: COLORS.walnut, side: mul(COLORS.walnut, 1.7), end: mul(COLORS.walnut, 1.4) }, params); // prettier-ignore
+          }
+      }
       const n = Math.max(40, Math.round((4 * Math.PI * MARBLE_R * MARBLE_R) / (s * s * 0.55)));
       for (const m of layout) {
         const id = 1 + m.r * N + m.c;
@@ -230,8 +259,10 @@ export function buildPieces(code, material, budget = 200000, { tap = [0, 0] } = 
         const up = t.dark ? COLORS.tileDark : COLORS.tileLight;
         const down = t.dark ? COLORS.tileLight : COLORS.tileDark;
         // Only the dark modules' tiles flip; the others lie still.
-        const params = t.dark ? [1 + t.r * N + t.c, KIND.tile + 16 * ms(t.start)] : [0, KIND.board];
-        box(out, x0, y0, 0, x1, y1, TILE_T, s, { top: up, bottom: down, side: mul(COLORS.tileLight, 0.86), end: mul(COLORS.tileLight, 0.8) }, params); // prettier-ignore
+        const id = 1 + t.r * N + t.c;
+        const params = t.dark ? [id, KIND.tile] : [0, KIND.board];
+        const fp = t.dark ? { bottom: [id, KIND.tileBottom], side: [id, KIND.tileSide] } : {};
+        box(out, x0, y0, 0, x1, y1, TILE_T, s, { top: up, bottom: t.dark ? down : null, side: mul(COLORS.tileLight, 0.86), end: mul(COLORS.tileLight, 0.8) }, params, fp); // prettier-ignore
       }
     } else {
       layout = dominoLayout(code);

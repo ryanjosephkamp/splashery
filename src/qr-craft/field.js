@@ -161,6 +161,7 @@ export function buildModifier(o, fit) {
   const k = head(o, fit);
   const body = (W) => {
     // W: the WGSL spelling switches (uniform. prefix, let/var, select).
+    const W0 = (n) => (W ? `var ${n}` : `float ${n}`);
     const U = W ? "uniform." : "";
     const v = W ? "var" : "float";
     const vv = W ? "var" : "vec3";
@@ -212,7 +213,15 @@ export function buildModifier(o, fit) {
     qcShade = (0.55 + 0.45 * max(0.0, dot(nn, Ld))) / (0.55 + 0.45 * max(0.0, dot(nr, Ld)));
     u = ${c3}(x, piv.y, ${num(o.marbleR)}) + qcRot(q, rel);
   }
-  if (kind > 4.5 && kind < 5.5) {
+  if (kind > 6.5 && kind < 7.5) {
+    // A frame drops into the tray from above, lands and bounces once.
+    ${f} s = qcSat((tau - start) / ${num(o.drop)});
+    ${W0("h")} = 0.35 * sin(3.1415927 * qcSat((s - 0.7) / 0.3));
+    if (s < 0.7) { h = 7.0 * (1.0 - (s / 0.7) * (s / 0.7)); }
+    u.z += h;
+    qcAlpha = select(1.0, 0.0, tau < start);
+  }
+  if ((kind > 4.5 && kind < 5.5) || (kind > 7.5 && kind < 9.5)) {
     // A tile turns over about its middle, lifting as it turns, in a wave out
     // from the tap.
     // The wave reaches the farthest corner just in time for its last flip.
@@ -224,12 +233,17 @@ export function buildModifier(o, fit) {
     q = qcAxis(${c3}(1.0, 0.0, 0.0), 3.1415927 * (1.0 - s));
     u = c0 + qcRot(q, u - c0) + ${c3}(0.0, 0.0, 0.9 * sin(3.1415927 * s));
     qcShade = 0.8 + 0.2 * abs(cos(3.1415927 * s));
+    // The top faces the viewer while cos > 0, the bottom while cos < 0.
+    ${f} up = cos(3.1415927 * (1.0 - s));
+    if (kind < 5.5 && up < 0.0) { qcAlpha = 0.0; }
+    if (kind > 7.5 && kind < 8.5 && up > 0.0) { qcAlpha = 0.0; }
   }
   qcQ = q;
   ${W ? "*center" : "center"} = (u - QC) * QS;
 `;
   };
   const glsl = `${GLSL_HEAD(k)}
+float select(float a, float b, bool c) { return c ? b : a; }
 void modifySplatCenter(inout vec3 center) {${body(false)}}
 `;
   const wgsl = `${WGSL_HEAD(k)}

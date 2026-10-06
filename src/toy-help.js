@@ -1710,6 +1710,16 @@ export const TOY_HELP = {
     about:
       "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the picture fills the rest, darkened in dark modules and lightened in light ones. The eyes, the timing lines and the format information stay plain, so a reader still finds the code.\n\nThe toy measures the contrast and reads its own code at phone size and smaller. If it won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot or a higher error correction level. Your picture never leaves your device.",
   },
+  "qr-build": {
+    howTo: "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
+    about:
+      "A QR code is only dark and light squares, so it can be built from real things. Here dominoes stand on end, and a push sends every row toppling, each domino knocking the next, until they lie flat as the code: ebony over dark modules, ivory over light ones. Or marbles roll in along their rows and settle into the dark modules, or two-sided tiles flip over in a wave.\n\nEvery piece is solid and moves as the real thing would. Each build ends on a code that scans, and the toy reads its own last frame to check. Type your own text in the Toy tab.",
+  },
+  barcodes: {
+    howTo: "Pick a kind of barcode in the Toy tab and type what it holds. Tap to scan it.",
+    about:
+      "Barcodes came before QR codes. Code 128 packs any plain text into bars and spaces one to four modules wide, with a check symbol worked out modulo 103. EAN-13 and UPC-A hold the numbers on things in shops, with a check digit from weights of 3 and 1, and quiet zones of blank space either side.\n\nHere those three are drawn by Splashery's own code, and Data Matrix and Aztec, two square codes of their own, come from the open-source ZXing library. Tap to sweep a scanner's red line across. The toy reads its own picture back to check that it scans.",
+  },
   // Lane Live input.
   "room-echo": {
     howTo:

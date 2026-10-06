@@ -55,6 +55,7 @@ import {
   DOMINO_T,
   MARBLE_R,
   TILE_T,
+  DROP_SECS,
 } from "../qr-craft/pieces.js";
 
 const DEFAULT_TEXT = "https://ryanjosephkamp.github.io/splashery/";
@@ -585,7 +586,7 @@ const BUILD = {
     const N = BLD.code.size;
     // The wave of flipping tiles crosses the code in what's left after one flip.
     const span = BUILD_SECS - FLIP_SECS - 0.35;
-    return buildModifier({ size: N, fg: COLORS.tileDark, bg: COLORS.tileLight, secs: BUILD_SECS, fall: FALL_SECS, roll: ROLL_SECS, flip: FLIP_SECS, dominoT: DOMINO_T, marbleR: MARBLE_R, tileT: TILE_T, startX: N / 2 + QUIET + 1.2, span }, fit); // prettier-ignore
+    return buildModifier({ size: N, fg: COLORS.tileDark, bg: COLORS.tileLight, secs: BUILD_SECS, fall: FALL_SECS, roll: ROLL_SECS, flip: FLIP_SECS, dominoT: DOMINO_T, marbleR: MARBLE_R, tileT: TILE_T, startX: N / 2 + QUIET + 1.2, span, drop: DROP_SECS }, fit); // prettier-ignore
   },
   build(k, o) {
     const text = o.text ?? DEFAULT_TEXT;
@@ -932,6 +933,7 @@ if (typeof window !== "undefined" && window.__splashery) {
     lastShot: () => PIC.lastShot?.toDataURL("image/png") ?? null,
     build: () => ({ code: BLD.code, options: BLD.options, check: BLD.check, error: BLD.error }),
     checkBuild: () => checkBuild(),
+    lastBuildShot: () => BLD.lastShot?.toDataURL("image/png") ?? null,
     // The build at progress p (0..1), held there (null lets it run again).
     barcode: () => ({ sym: BC.sym, options: BC.options, check: BC.check }),
     checkBarcode: () => checkBarcode(),

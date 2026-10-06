@@ -6,61 +6,103 @@ You are a Splashery worker session, started by the Operator (the coordinating se
 October push. Repo: ryanjosephkamp/splashery. Your lane: QR craft (id `QRcraft`, prefix `qrc`).
 Branch: `claude/lane-qr-craft` (and `claude/lane-qr-craft-engine` for any change to the app outside
 your own files, as an "Engine: …" PR merged first). PR title: "Phase QR craft: picture codes, codes
-built from real things, and other barcodes". Handoff file: docs/handoff/QRcraft.md (create it;
-start it with this brief, word for word, under "## Brief", then keep "## State", "## Notes", "##
-Known issues" and "## For the Operator" current). Model: Opus 5.5, at the default effort.
+built from real things, and other barcodes". Handoff file: docs/handoff/QRcraft.md (create it; start
+it with this brief, word for word, under "## Brief", then keep "## State
 
-### Brief (written by the Operator on October 6, 2026, from the owner's Push Plan picks)
+WORKING: all three items built and tested (October 6, 2026, Opus 5.5, default effort); clips
+rendering for Effect review page 2. Draft PR #349.
 
-The owner's QR picks Q5 ("a hard yes, or a strong yes"), Q13 ("Absolutely. This is really, really
-cool") and Q12 ("I like the other barcodes idea"). Read docs/handoff/QRr3.md and docs/handoff/QR*.md
-first: the QR code toy, the QR lab and the damage lab already exist (src/qr/, src/qr-lab/, their
-packs), with Project Nayuki's encoder and jsQR vendored. Build in this order and push each part as
-it works:
+Three new labs toys on the QR shelf (Studio), pack `src/packs/qr-craft.js`:
 
-1. **Picture QR (Q5).** A photo (a sample, or the person's own picture, which stays on the device)
-   woven into the modules as a halftone: each module's center keeps the bit, the rest carries the
-   picture. Measure the contrast and check that it scans with jsQR at phone size and at a smaller
-   size; if it won't, say so in plain words and offer the closest version that does (more contrast,
-   a bigger center dot, a higher error-correction level). Splats as crisp as the QR r3 polish made
-   them. Export a PNG.
-2. **Codes built from real things (Q13).** Real motion that ends on a code that scans: dominoes that
-   fall into place, marbles that roll into their modules, tiles that flip. Each piece is a solid
-   piece that moves like the real thing (the Physics engine in src/physics/ may help). The final
-   frame must decode with jsQR (test it), for the person's own text too.
-3. **Other barcodes (Q12).** Code 128 and EAN-13/UPC-A drawn by our own code (with check digits and
-   quiet zones, tested against known reference values), then Data Matrix and Aztec through a small
-   open-source library (an MIT or Apache-2.0 encoder, under 2 MB, vendored in `vendor/`, loaded only
-   when the toy opens, listed in LICENSES.md and named in your PR; anything copyleft or over 2 MB
-   goes to the Operator first). Each scans or decodes in a test.
+1. **Picture QR** (`qr-picture`, Q5). A photo woven into the code as a halftone
+   (`src/qr-craft/picture.js`): each module is cut into k × k cells; the middle c × c keep the
+   module's bit, the rest carry the picture, darkened in dark modules and lightened in light ones as
+   far as the contrast slider asks (keeping its hue). Finders, separators, timing, alignment, format
+   and version information stay plain. Options: picture (four CC0 samples already in the repo, the
+   Photo to 3D toy's, or your own, kept in memory only), contrast, center dot (a third, three
+   sevenths, three fifths of a module), error correction (H by default), color or dithered black and
+   white. The panel shows the measured contrast (mean dark against mean light module) and whether
+   jsQR reads the layout at 8 and 4 pixels a module, each a little out of focus (a blur of a fifth
+   of a module, without which any contrast reads), and whether the splats on the stage read at both
+   sizes. "Make it scan" tries the closest versions (more contrast, then a bigger dot, then a higher
+   level) and applies the first that reads. Save a PNG. Tap: every tile turns over in a wave from
+   the tap, its back the plain code (3.6 s).
+2. **QR from real things** (`qr-build`, Q13; `src/qr-craft/pieces.js`). Dominoes (ebony and ivory, 2
+   modules long where a row allows, standing on end; each row topples left to right, each domino
+   knocking the next, lands with a small bounce), marbles (the eyes and alignment marks are walnut
+   frames that drop in first; then a dark glass marble rolls in along its row into each other dark
+   module, turning by distance over radius, relit as it turns, rocking once in its cup) and flip
+   tiles (two-sided; the dark modules' tiles turn over in a wave from the tap). 6.5 s build; the toy
+   reads its last frame with jsQR at 8 and 4 pixels a module.
+3. **Other barcodes** (`barcodes`, Q12). Code 128 (code sets A, B and C, check symbol mod 103, 10X
+   quiet zones), EAN-13 (L/G/R tables, parity by first digit, 11X/7X) and UPC-A (9X) by our own code
+   (`src/qr-craft/barcodes.js`); Data Matrix (square) and Aztec from ZXing for JavaScript 0.21.3
+   (vendored `vendor/zxing-js/`, Apache-2.0, 332 KB, loaded when the toy opens). Tap: a red scan
+   line sweeps across and each bar lifts as it passes (2.6 s). The toy reads its own picture with
+   zxing-js. Evidence: `docs/evidence/barcodes.json`.
 
-New labs toys on the QR shelf (or one toy with modes, if that reads better on a phone). Don't edit
-the existing QR toys or src/qr/; import from them, and if you need a hook there, make it a small
-additive "Engine: …" PR. Tests in `tests/qrc*.spec.mjs`; how-to and About texts for each toy
-(help.spec and hta.spec limits); evidence files in docs/evidence/ for the barcode math (check
-digits, the standards you follow).
+Tests: `tests/qrc-picture.spec.mjs` (5), `tests/qrc-build.spec.mjs` (2),
+`tests/qrc-barcodes.spec.mjs` (5). Also run: `tests/help.spec.mjs` (list), `tests/hta.spec.mjs`,
+`tests/unit.spec.mjs`.
 
-You own: `src/packs/qr-craft.js` (new), `src/qr-craft/` (new helpers), `tools/qrc-*.mjs`, any new
-vendored encoder and its LICENSES.md entry, new assets, `tests/qrc*.spec.mjs`, your evidence files,
-your toys' lines in the shared lists, and your handoff file.
+Tools: `tools/qrc-picture.mjs` (thresholds and the scan lab's 9 phone-like captures),
+`tools/qrc-shot.mjs` (a screenshot of a toy with options), `tools/qrc-clip.mjs` (review clips).
 
-How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
-replace the prefix and lane record with yours). Labs: the Operator merges after a full test run (the
-Integrators run it); the owner decides when anything goes public. Finish every working turn with
-"READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for; for a long job, schedule a
-check-in with send_later instead of going idle. Clips at phone size go on Effect review page 2
-(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
-(no republish). Before READY, re-read CLAUDE.md's "Effect quality rules" and check each clip against
-them at phone size. The push ends Wednesday, October 7, 2026, 4 p.m. ET (20:00 UTC): aim for a
-first READY within about six hours, then polish rounds on the owner's marks.
+### Picture QR, measured
 
-## State
+`node tools/qrc-picture.mjs --phone` (October 6, 2026): each sample at level H, 50% contrast; the
+module contrast, the toy's own check, and how many of the scan lab's 9 phone-like captures both jsQR
+and zxing-js read exactly; then the lowest contrast the toy's check passes, and its captures.
 
-WORKING: lane started October 6, 2026 (Opus 5.5, default effort). Reading the QR toys; building item
-1 (Picture QR) first.
+| Sample        | Style | Dot   | Contrast | Check | Phone-like | Lowest that passes | Its captures |
+| ------------- | ----- | ----- | -------- | ----- | ---------- | ------------------ | ------------ |
+| still-life    | color | small | 5.30 : 1 | ✓     | 9/9        | 25%                | 9/9          |
+| still-life    | color | big   | 7.91 : 1 | ✓     | 8/9        | 0%                 | 9/9          |
+| still-life    | bw    | small | 5.93 : 1 | ✓     | 8/9        | 45%                | 8/9          |
+| still-life    | bw    | big   | 8.55 : 1 | ✓     | 8/9        | 0%                 | 8/9          |
+| wildflowers   | color | small | 3.38 : 1 | ✓     | 7/9        | 25%                | 8/9          |
+| wildflowers   | color | big   | 5.87 : 1 | ✓     | 8/9        | 0%                 | 8/9          |
+| wildflowers   | bw    | small | 3.49 : 1 | ✗     | 3/9        | 55%                | 3/9          |
+| wildflowers   | bw    | big   | 6.08 : 1 | ✓     | 8/9        | 0%                 | 8/9          |
+| spiral-stairs | color | small | 3.04 : 1 | ✓     | 8/9        | 0%                 | 8/9          |
+| spiral-stairs | color | big   | 5.39 : 1 | ✓     | 8/9        | 0%                 | 7/9          |
+| spiral-stairs | bw    | small | 3.18 : 1 | ✗     | 4/9        | 60%                | 8/9          |
+| spiral-stairs | bw    | big   | 5.73 : 1 | ✓     | 8/9        | 0%                 | 8/9          |
+| forest        | color | small | 3.40 : 1 | ✓     | 9/9        | 35%                | 8/9          |
+| forest        | color | big   | 5.89 : 1 | ✓     | 8/9        | 0%                 | 8/9          |
+| forest        | bw    | small | 3.72 : 1 | ✗     | 4/9        | 55%                | 7/9          |
+| forest        | bw    | big   | 6.45 : 1 | ✓     | 8/9        | 0%                 | 9/9          |
+
+What it says: a picture code is weaker than a plain one (QR r3's plain codes read 9 of 9); color
+with the small dot reads in 7 to 9 of 9 at the default; the dithered black and white with the small
+dot is the weak one, and the toy's own check says so and Make it scan moves it to a bigger dot or
+more contrast.
+
+### Marbles and jsQR
+
+Round dots alone make jsQR unreliable (zxing-js read every size): a simulated marble code read at 3
+to 6 of 8 sizes from 4 to 12 pixels a module. With the eyes solid, 4 to 8 of 8; with the eyes and
+the alignment marks solid, 8 of 8 for every text tried. So in the marble build the eyes and
+alignment marks are walnut frames that drop into the tray first.
 
 ## Notes
 
+- A splat shows from both sides, and WebGL2 sorts the splats as they lie at rest, so a tile turned
+  over showed its dark face through its light one. The flip tiles' faces are hidden while they face
+  away (their top, bottom and sides are their own kinds in the GPU program).
+- jsQR in Node on a big, busy picture (a 900-pixel Picture QR PNG) can take many minutes; the tests
+  shrink it to phone size first.
+
 ## Known issues
 
+- The EAN-13 quiet zones (11 and 7 modules) are as commonly cited from the GS1 General
+  Specifications; GS1's pages refused our reads (HTTP 403), so the evidence file marks that claim
+  "unverified".
+- The picture tile flip, mid-turn, can show a tile's face in the wrong order for a frame (the same
+  WebGL2 sort); it ends right.
+
 ## For the Operator
+
+- New vendored library: ZXing for JavaScript 0.21.3 (`vendor/zxing-js/zxing.min.js`, 332 KB,
+  Apache-2.0 per its LICENSE file; its package.json says MIT), loaded only when Other barcodes
+  opens. Already a pinned devDependency (the scan lab's reader). Listed in LICENSES.md.
