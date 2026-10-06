@@ -419,7 +419,9 @@ const REAL_ELEMENTS = {
     const yaw = swing + TAU * sp + 2 * rise * (1 - rise);
     const tilt = -0.18 * rise;
     const q = quatMul(quatAxisAngle([0, 1, 0], yaw), quatAxisAngle([1, 0, 0], tilt));
-    out.parts.lift = { offset: off, scale: sc, visible: vis, quat: q };
+    // (globalThis.__relHideLift: the side-view check draws the same frame without the sample.)
+    const hide = typeof globalThis !== "undefined" && globalThis.__relHideLift ? 0 : 1;
+    out.parts.lift = { offset: off, scale: sc, visible: vis * hide, quat: q };
     // Its place in the table empties while it is out.
     out.parts.home = { visible: rise > 0.01 ? 0 : 1 };
     // The splats are sorted where they stand while the sample turns.
@@ -591,8 +593,9 @@ function solidSample(pair, share, part, splat, relief = 1) {
   const size = pair.color.w;
   const { depth, color } = pair;
   const have = countPixels(pair, 0, 0, size);
-  // About a third of the share each for the front and the back, the rest for the fillers.
-  const step = Math.max(1, Math.sqrt(have / (share * 0.33)));
+  // About a fifth of the share each for the front and the back, the rest for the fillers that
+  // close the rim.
+  const step = Math.max(1, Math.sqrt(have / (share * 0.2)));
   const g = Math.max(1, Math.round(step));
   const px = (LIFT_SIDE / size) * g;
   // (A flat picture keeps a thin card's thickness.)
@@ -645,22 +648,58 @@ function solidSample(pair, share, part, splat, relief = 1) {
       if (x < W - 1 && y < W - 1) relax(i, i + W + 1, 1.414);
       if (x > 0 && y < W - 1) relax(i, i + W - 1, 1.414);
     }
-  // The swell: 0 at the rim, 1 a sixth of the width in (a quarter circle, so the rim rolls round).
-  const R = Math.max(3, W / 6);
+  // The photo's depth is mostly the slope of the ground it lies on (the top of the picture far,
+  // the bottom near), which made a wedge that read as hollow from the side. Take the best-fit
+  // plane off and keep what is left as the sample's own bumps.
+  let [n, sx, sy, sd, sxx, syy, sxy, sxd, syd] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   for (const p of cells) {
-    const t = Math.min(1, (dist[p.gy * W + p.gx] - 0.5) / R);
-    p.b = Math.sqrt(Math.max(0, 1 - (1 - t) * (1 - t)));
-    p.zf = LIFT_AT[2] + hz * p.b * (0.3 + 0.6 * p.d);
+    n++;
+    sx += p.gx;
+    sy += p.gy;
+    sd += p.d;
+    sxx += p.gx * p.gx;
+    syy += p.gy * p.gy;
+    sxy += p.gx * p.gy;
+    sxd += p.gx * p.d;
+    syd += p.gy * p.d;
+  }
+  const plane = solve3(
+    [
+      [n, sx, sy],
+      [sx, sxx, sxy],
+      [sy, sxy, syy],
+    ],
+    [sd, sxd, syd],
+  );
+  let spread = 0;
+  for (const p of cells) {
+    p.r = p.d - (plane[0] + plane[1] * p.gx + plane[2] * p.gy);
+    spread += p.r * p.r;
+  }
+  spread = Math.sqrt(spread / (n || 1)) || 1;
+  // The body: a rounded dome over the outline (an ellipse's profile from the rim in to most of
+  // the way to the middle), front and back, so it reads as one solid pebble from every side; the
+  // bumps ride on the front.
+  let far = 1;
+  for (const p of cells) far = Math.max(far, dist[p.gy * W + p.gx]);
+  const R = Math.max(3, far * 0.75);
+  for (const p of cells) {
+    // (The outermost cells sit on the seam itself, so front and back close there.)
+    const t = Math.min(1, Math.max(0, dist[p.gy * W + p.gx] - 1) / R);
+    p.b = Math.sqrt(1 - (1 - t) * (1 - t));
+    const bump = Math.max(-1, Math.min(1, p.r / (2.5 * spread)));
+    p.zf = LIFT_AT[2] + hz * p.b * (0.7 + 0.25 * bump);
     p.zb = LIFT_AT[2] - hz * 0.42 * p.b;
   }
   const at = (gx, gy) => (gx < 0 || gy < 0 || gx >= W || gy >= W ? null : cells[cell[gy * W + gx]] ?? null); // prettier-ignore
   const mixC = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
   const NB = [[1, 0], [0, 1]]; // prettier-ignore
   const BACK = 0.85;
-  // Baked light on the body's own shape (where the photo has none: the rolled rim and the back),
-  // so its roundness reads from the side. The light comes from the upper left front, as the
-  // photos' studio light mostly does.
-  const L = [-0.45, 0.7, 0.55];
+  // Baked light on the body's own shape, so its roundness reads from the side. The light comes
+  // from above (and a little in front): the turn is about the up axis, so it stays above at every
+  // turn. A light from the side turned with the sample and lit its rim like the lip of a bowl
+  // (the owner's "hollow from the sides").
+  const L = [-0.1, 0.9, 0.42];
   const shadeAt = (p, front) => {
     const zOf = (q) => (q ? (front ? q.zf : q.zb) : LIFT_AT[2]); // (past the rim: the seam)
     const zl = zOf(at(p.gx - 1, p.gy));
@@ -672,14 +711,49 @@ function solidSample(pair, share, part, splat, relief = 1) {
     const ln = Math.hypot(n[0], n[1], n[2]);
     // (The back has its own light, mirrored behind, so it reads as a dome, not a bowl.)
     const lit = Math.max(0, (n[0] * L[0] + n[1] * L[1] + n[2] * L[2] * sgn) / ln);
-    return 0.72 + 0.33 * lit;
+    // (1 where the face looks straight out, as the photo was lit.)
+    return (0.6 + 0.48 * lit) / 0.8;
+  };
+  // The rolled rim and the side wall take the colors from further in. The photo's outline
+  // pixels are dark (the cutout's edge, the shadow under the sample), and from the side a dark
+  // wall inside a lit rim read as a hole (the owner's "hollow from the sides"). An area mean of
+  // the inner cells' colors (a summed-area table over the grid), a quarter of the body's reach
+  // round each cell.
+  const sat = new Float64Array((W + 1) * (W + 1) * 4);
+  for (let gy = 0; gy < W; gy++)
+    for (let gx = 0; gx < W; gx++) {
+      const p = at(gx, gy);
+      const o = ((gy + 1) * (W + 1) + gx + 1) * 4;
+      const inner = p && p.b > 0.6;
+      for (let k = 0; k < 4; k++) {
+        const v = inner ? (k < 3 ? p.c[k] : 1) : 0;
+        sat[o + k] = v + sat[o - 4 + k] + sat[o - (W + 1) * 4 + k] - sat[o - (W + 2) * 4 + k];
+      }
+    }
+  const innerColor = (p) => {
+    for (let r = Math.max(2, Math.round(far * 0.25)); ; r *= 2) {
+      const [ax, ay] = [Math.max(0, p.gx - r), Math.max(0, p.gy - r)];
+      const [bx, by] = [Math.min(W, p.gx + r + 1), Math.min(W, p.gy + r + 1)];
+      const sum = (k) =>
+        sat[(by * (W + 1) + bx) * 4 + k] -
+        sat[(ay * (W + 1) + bx) * 4 + k] -
+        sat[(by * (W + 1) + ax) * 4 + k] +
+        sat[(ay * (W + 1) + ax) * 4 + k];
+      const nIn = sum(3);
+      if (nIn >= 4) return [sum(0) / nIn, sum(1) / nIn, sum(2) / nIn];
+      if (r > W) return p.c;
+    }
   };
   for (const p of cells) {
     const n = normalAt(pair, p.i, size, LIFT_SIDE);
-    // The front keeps the photo's colors where it faces the camera, and takes the baked light as
-    // it rolls over the rim.
-    const front = shadeArr(p.c, 1 + (shadeAt(p, true) - 1) * (1 - p.b));
-    const back = shadeArr(p.c, BACK * shadeAt(p, false));
+    const t = Math.min(1, Math.max(0, (p.b - 0.5) / 0.48));
+    const c = p.b > 0.95 ? p.c : mixC(innerColor(p), p.c, t * t * (3 - 2 * t));
+    // The front keeps most of the photo's colors where it faces the camera, and takes the baked
+    // light fully as it rolls over the rim.
+    const front = shadeArr(c, 1 + (shadeAt(p, true) - 1) * (0.8 + 0.2 * (1 - p.b)));
+    // The back (which no photo shows) takes the body's smoothed colors with a little of the
+    // photo's texture, so it matches the rim instead of showing the photo's dark spots inside it.
+    const back = shadeArr(mixC(innerColor(p), c, 0.35), BACK * shadeAt(p, false));
     p.cf = front;
     p.cb = back;
     out.push(splat([p.x, p.y, p.zf], front, px * 0.82, { part, n, flat: 0.75 }));
@@ -694,15 +768,28 @@ function solidSample(pair, share, part, splat, relief = 1) {
         [p.zf, q.zf, p.cf, q.cf],
         [p.zb, q.zb, p.cb, q.cb],
       ]) {
-        const k = Math.min(5, Math.floor(Math.abs(zb - za) / px));
+        // (Enough of them, and big enough, to close the steep rim with no slit between them: the
+        // owner's "a thin vertical strip of hollowness".)
+        const k = Math.min(24, Math.floor(Math.abs(zb - za) / (px * 0.55)));
         for (let j = 1; j <= k; j++) {
           const f = j / (k + 1);
-          out.push(splat([p.x + (q.x - p.x) * f, p.y + (q.y - p.y) * f, za + (zb - za) * f], mixC(ca, cb, f), px * 0.82, { part, flat: 0.85 })); // prettier-ignore
+          out.push(splat([p.x + (q.x - p.x) * f, p.y + (q.y - p.y) * f, za + (zb - za) * f], mixC(ca, cb, f), px * 0.9, { part, flat: 1 })); // prettier-ignore
         }
       }
     }
   }
   return out;
+}
+
+// Solves a 3 x 3 linear system (Cramer's rule); zeros when it is singular.
+function solve3(a, b) {
+  const det = (m) =>
+    m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
+    m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
+    m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+  const d = det(a);
+  if (Math.abs(d) < 1e-9) return [0, 0, 0];
+  return [0, 1, 2].map((k) => det(a.map((row, i) => row.map((v, j) => (j === k ? b[i] : v)))) / d);
 }
 
 function shadeArr(c, f) {

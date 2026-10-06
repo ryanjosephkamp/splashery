@@ -12,6 +12,8 @@ import { RECIPES, ELEMENTS, elementOf, factsOf } from "../src/packs/real-element
 import { FACTS } from "../src/elements-real/facts.js";
 import { SAMPLES, WITH_PHOTO, PICTURED, STANDINS, LICENSE_URL, pictureOf } from "../src/elements-real/samples.js"; // prettier-ignore
 import { cellOf, blockOf } from "../src/elements-real/layout.js";
+import { seeThrough, SIDE_VIEWS } from "../src/elements-real/see-through.js";
+import { PNG } from "pngjs";
 import { PERIODIC } from "../src/chem/periodic.js";
 import { buildRecipe } from "../src/kit.js";
 import { applyClay } from "../src/generators.js";
@@ -288,6 +290,45 @@ test.describe("the toy in the app", () => {
     expect(r.up).toBe(1);
     expect(r.legend).toContain("83 Bi · Bismuth");
     expect(r.legend).toContain("Density 9.807 g/cm³");
+  });
+
+  // The owner's "hollow from the sides" (October 6, 2026): the lifted sample, held side-on and at
+  // 10 degrees either side, drawn with and without it; no background may show through its
+  // silhouette (tools/rel-side.mjs writes the same views as stills to look at).
+  test("the lifted sample is solid from the side", async ({ page }) => {
+    test.setTimeout(300_000);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await open(page);
+    for (const el of ["Cu", "Rn"]) {
+      await page.evaluate(async (el) => {
+        const { app, player } = window.__splashery;
+        await app.setToyOption("element", el);
+        player.motion.setControl("up", 1, { snap: true });
+      }, el);
+      await page.waitForFunction((el) => window.__splashery.player.motion?.ctx?.kit?.data?.element === el, el, { timeout: 120_000 }); // prettier-ignore
+      await page.waitForTimeout(1500);
+      for (const [name, spin] of SIDE_VIEWS) {
+        const shot = async (hide) => {
+          await page.evaluate(
+            ({ spin, hide }) => {
+              globalThis.__relHideLift = hide;
+              const { player } = window.__splashery;
+              player.motion.setControl("spin", spin, { snap: true });
+              player.stage.requestRender();
+            },
+            { spin, hide },
+          );
+          await page.waitForTimeout(900);
+          return PNG.sync.read(await page.screenshot());
+        };
+        const withS = await shot(false);
+        const without = await shot(true);
+        await page.evaluate(() => (globalThis.__relHideLift = false));
+        const r = seeThrough(withS, without);
+        expect(r.silhouette, `${el} at ${name} degrees`).toBeGreaterThan(1500);
+        expect(r.ratio, `${el} at ${name} degrees: ${r.holes} px show through`).toBeLessThan(0.01);
+      }
+    }
   });
 
   for (const [w, h] of [
