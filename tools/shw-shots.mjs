@@ -13,7 +13,11 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs";
 
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
-const [w, h, only] = [Number(process.argv[2] || 390), Number(process.argv[3] || 844), process.argv[4]];
+const [w, h, only] = [
+  Number(process.argv[2] || 390),
+  Number(process.argv[3] || 844),
+  process.argv[4],
+];
 const out = process.env.OUT || ".cache/shw-shots";
 const AT = (process.env.AT || "1.2,2.6,4.2").split(",").map(Number);
 fs.mkdirSync(out, { recursive: true });
