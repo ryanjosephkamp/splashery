@@ -751,10 +751,10 @@ export function drawSurface(L, m, { use, color, max, rand }) {
 
 // The measuring marks are flat and face the camera (the recipe turns them,
 // as tokens, toward where it stands), drawn at the origin in their own plane
-// (x, y; +z toward the camera). A bright band with a dark rim on both sides,
-// so it reads against any color: white hydrogens, gray carbons, the surface.
-// Rim and band lie side by side, never over each other, so they read the same
-// in any depth order.
+// (x, y; +z toward the camera). A bright band on a wider dark one just behind
+// it, so it reads against any color: white hydrogens, gray carbons, the
+// surface. (The recipe sorts the marks again as the camera turns, so the
+// bright one stays in front.)
 const RIM = [0.07, 0.07, 0.09];
 function annulus(out, r0, r1, color, step, z = 0) {
   const rows = Math.max(1, Math.round((r1 - r0) / step));
@@ -765,7 +765,7 @@ function annulus(out, r0, r1, color, step, z = 0) {
     const w = (TAU * r) / n;
     for (let q = 0; q < n; q++) {
       const a = (q / n) * TAU;
-      out.push({ p: [r * Math.cos(a), r * Math.sin(a), z], scales: [w * 0.62, dr * 0.62, dr * 0.1], quat: [0, 0, Math.sin((a + Math.PI / 2) / 2), Math.cos((a + Math.PI / 2) / 2)], color, opacity: 1, jitter: 0 }); // prettier-ignore
+      out.push({ p: [r * Math.cos(a), r * Math.sin(a), z], scales: [w * 1.0, dr * 0.9, dr * 0.1], quat: [0, 0, Math.sin((a + Math.PI / 2) / 2), Math.cos((a + Math.PI / 2) / 2)], color, opacity: 1, jitter: 0 }); // prettier-ignore
     }
   }
 }
@@ -774,11 +774,10 @@ function annulus(out, r0, r1, color, step, z = 0) {
 export function markerSplats(R, color) {
   const out = [];
   const b = R * 0.15; // half the band
-  const e = R * 0.07; // each rim
-  const step = b / 2; // about 500 splats a ring, at any size
-  annulus(out, R - b - e, R - b, RIM, step);
+  const e = R * 0.08; // the rim on each side
+  const step = b / 2; // about 400 splats a ring, at any size
   annulus(out, R - b, R + b, color, step);
-  annulus(out, R + b, R + b + e, RIM, step);
+  annulus(out, R - b - e, R + b + e, RIM, step * 1.3, -R * 0.2);
   return out;
 }
 

@@ -28,7 +28,7 @@ sharper".
   rim on both sides of the bright band, standing just in front of the atom (its ball, or the
   surface) toward the camera; the measuring line and arc are bright dots with a dark edge, lifted
   the same way. This needs engine PR #326 (`about.eye`: the camera in the recipe's frame), merged
-  first. Clips `molm-*` (six, beside the first cards).
+  first. Clips `molm-*` (six) replace the six first cards on page 2.
 
 ## Notes
 
@@ -58,7 +58,7 @@ sharper".
   with a dark rim, that flips over once); two give the distance (a line of beads), three the angle
   (and an arc). The words show as a message (the engine PR's `say`) and in the Toy tab. The Play
   button measures across a bond angle near the middle, then the angle, then clears. Marks are
-  tokens, re-sorted when the picks change and when the camera has turned about 10 degrees from where
+  tokens, re-sorted when the picks change and when the camera has turned about 5 degrees from where
   they were last sorted.
 - The toy holds still (`turntable: false`) so atoms can be tapped.
 

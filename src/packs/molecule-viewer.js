@@ -428,7 +428,7 @@ const VIEWER = {
     // where they were last sorted (the player's resortTokens).
     const look = P.length ? toEye(pos(m, P[0])) : null;
     const key = `${S.splats}:${P.join(",")}`;
-    const turned = look && MV.look && look[0] * MV.look[0] + look[1] * MV.look[1] + look[2] * MV.look[2] < 0.985; // prettier-ignore
+    const turned = look && MV.look && look[0] * MV.look[0] + look[1] * MV.look[1] + look[2] * MV.look[2] < 0.996; // prettier-ignore
     if (key !== MV.sorted || (turned && info.time - (MV.sortedAt ?? 0) > 0.3)) {
       MV.sorted = key;
       MV.look = look;
@@ -469,7 +469,7 @@ const VIEWER = {
       const w = unitTo(pos(m, P[1]), pos(m, P[2]));
       // Outside the middle atom's ring, inside the shorter arm.
       const arm = Math.min(distance(m, P[0], P[1]), distance(m, P[1], P[2]));
-      const r = Math.min(0.8 * arm, Math.max(0.4 * arm, S.markR * 1.3));
+      const r = Math.min(0.8 * arm, Math.max(0.4 * arm, S.markR * 1.5));
       const th = Math.acos(Math.max(-1, Math.min(1, u[0] * w[0] + u[1] * w[1] + u[2] * w[2])));
       for (let j = 0; j < ARC; j++) {
         const f = (j + 0.5) / ARC;
@@ -594,7 +594,7 @@ const VIEWER = {
       for (const i of all) pickable[i] = 1;
       drawnBonds = bondList(() => true);
       reach = 2.4;
-      markR = 1;
+      markR = 1.25;
       lift = (i) => vdwRadius(m.el[i]) + 0.2;
     } else if (style === "surface") {
       const inSurface = isMacro(m) ? macro : (i) => kindOf(i) !== KIND.water;
@@ -612,7 +612,7 @@ const VIEWER = {
       for (const i of outside) pickable[i] = 1;
       notes.push(`The surface is a blobby (Gaussian) surface over the heavy atoms at their van der Waals radii, sampled every ${sf.h.toFixed(2)} Å: close to the solvent-excluded surface, but smoother in deep crevices.`); // prettier-ignore
       reach = 3.4;
-      markR = 1.15;
+      markR = 1.4;
       lift = (i) => vdwRadius(m.el[i]) + 0.9;
     } else {
       // Cartoon: ribbons for the chains, balls and sticks for the rest.
@@ -659,7 +659,7 @@ const VIEWER = {
       markR = big;
     }
     // Beads wider than a stick, so a line along a bond still shows.
-    const bead = Math.max(0.17, ext * 0.005, markR * 0.16);
+    const bead = Math.max(0.09, ext * 0.003, markR * 0.12);
     if (!L.n)
       throw new Error("Nothing to show: every atom is hidden. Switch Hydrogens or Water on.");
     k.cloud({ count: ((L.n + 0.4) * 160000) / k.count, jitter: 0 }, (_r, i) => L.sample(i));
