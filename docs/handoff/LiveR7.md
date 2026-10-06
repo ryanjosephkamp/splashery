@@ -118,7 +118,7 @@ PR (#336); the long videos are their own PR on `claude/lane-live-r7-long-video`.
   outline is crisp with no holes. The hidden wall is filled along its rows (`rowFill`), and the
   color filter holds small noise and lets real changes through at once. The background layer is
   sized from the depth's grid: on the fine grid a few of its splats stood below the frame as brown
-  dots. Against Photo to 3D on the same frame: 0.59 of its sharpness (was 0.22). Mannequin measures:
+  dots. Against Photo to 3D on the same frame: 0.58 of its sharpness (was 0.22). Mannequin measures:
   sharpness 0.62, color jitter 1.05 face on, turned 2.96, draw 158 ms (hologram: 0.42, overFace
   5.4).
 
