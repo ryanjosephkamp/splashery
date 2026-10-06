@@ -8,11 +8,13 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-import { RECIPES, ELEMENTS, elementOf, factsOf } from "../src/packs/real-elements.js";
+import { RECIPES, ELEMENTS, elementOf, factsOf, solidSample } from "../src/packs/real-elements.js";
 import { FACTS } from "../src/elements-real/facts.js";
-import { SAMPLES, WITH_PHOTO, PICTURED, STANDINS, LICENSE_URL, pictureOf } from "../src/elements-real/samples.js"; // prettier-ignore
+import { SAMPLES, WITH_PHOTO, PICTURED, STANDINS, LICENSE_URL, pictureOf, reliefOf } from "../src/elements-real/samples.js"; // prettier-ignore
 import { cellOf, blockOf } from "../src/elements-real/layout.js";
 import { seeThrough, SIDE_VIEWS } from "../src/elements-real/see-through.js";
+import { insideShows } from "../src/elements-real/watertight.js";
+import jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import { PERIODIC } from "../src/chem/periodic.js";
 import { buildRecipe } from "../src/kit.js";
@@ -228,6 +230,27 @@ test.describe("the samples", () => {
     const og = await build(count, { element: "Og" });
     expect(og.kit.data.legend.title).toBe("118 Og · Oganesson");
     expect(og.kit.data.splats.lift).toBeGreaterThan(1000);
+  });
+
+  // The owner's "the outer shell isn't solid" (October 6, 2026): up close, the side wall's
+  // filler columns showed gaps onto the inside of the far wall. Every lifted sample, drawn from
+  // 120 directions by a small software splatter, must show its inside on under 1% of its pixels
+  // (the filler build scored 2 to 5 percent).
+  test("every lifted sample is solid from every direction", () => {
+    test.setTimeout(300_000);
+    const bad = [];
+    for (const z of PICTURED) {
+      const d = PNG.sync.read(fs.readFileSync(path.join(ASSETS, `${z}.png`)));
+      const c = jpeg.decode(fs.readFileSync(path.join(ASSETS, `${z}.jpg`)), { useTArray: true });
+      const pair = {
+        depth: { w: d.width, h: d.height, data: d.data },
+        color: { w: c.width, h: c.height, data: c.data },
+      };
+      const S = solidSample(pair, 14_400, 1, (p, col, size, x = {}) => ({ p, size, ...x }), reliefOf(z)); // prettier-ignore
+      const r = insideShows(S);
+      if (r.ratio >= 0.01) bad.push(`${z}: ${(r.ratio * 100).toFixed(2)}%`);
+    }
+    expect(bad).toEqual([]);
   });
 
   test("a tap on a tile picks its element; on the lifted sample, turns it", () => {

@@ -41,6 +41,16 @@ polish: sharper samples and a smoother lift":
     silhouette (`src/elements-real/see-through.js`; it flags an open half shell at 25 to 32 percent,
     the real body at 0.5 percent or less). Clips: rel-copper-polish-r4, rel-radon-r3, and side-on
     stills rel-copper-side-r4 and rel-radon-side-r3.
+  - October 6, the owner's up-close screenshots ("the outer shell isn't solid", all elements): the
+    side wall was a band of filler columns between grid rows, and up close they showed as streaks
+    with gaps onto the inside. Rebuilt: front and back are one closed mesh over the grid that meets
+    at the outline, and the splats are spread evenly over its real area (the steep side as much as
+    the face), each a disc lying in the surface, colored from the photo's own pixels.
+    `src/elements-real/watertight.js` draws a lifted sample's splats from 120 directions in a small
+    software splatter and counts pixels where the nearest splat faces away (the inside showing). A
+    test runs it on all 118: the filler build fails on every one (1 to 10 percent), the new one
+    passes on every one (under 1 percent, at the outline). Clips rel-copper-polish-r5, rel-radon-r4;
+    up-close stills rel-copper-close-r5, rel-radon-close-r4.
   - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
     Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
     coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
@@ -115,8 +125,6 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 - Depth is the model's estimate from one photo, and a lifted sample's back is made up from its own
   colors (said in the About text and the evidence file).
-- Up close on a desktop, copper held side-on still shows a crease where its side wall turns into its
-  face; nothing shows through it (the side-view test), but the owner should judge it in the clip.
 - A few photos can't be cut cleanly and show as cropped cards (fluorine, sodium, uranium) or an oval
   (neptunium); samples in glass tubes keep the whole tube.
 - The tiles are small on a phone (the whole 18-column table fits the width); a tap needs aim.
@@ -125,9 +133,9 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 ## For the Operator
 
-- Ready for the full test run and a labs merge. I ran `tests/rel.spec.mjs` (27 pass, with the
-  side-view test), `tests/help.spec.mjs`, `tests/kit.spec.mjs` and the toy's row of
-  `tests/taps.spec.mjs`; not the full suite (the "embed transfer" test measures a captured toy's
+- Ready for the full test run and a labs merge. I ran `tests/rel.spec.mjs` (28 pass, with the
+  side-view and solid-surface tests), `tests/help.spec.mjs`, `tests/kit.spec.mjs` and the toy's row
+  of `tests/taps.spec.mjs`; not the full suite (the "embed transfer" test measures a captured toy's
   embed, which this lazy pack doesn't touch).
 - Thorium, actinium and curium have no tile photo: the only photos found are FAL-only (thorium,
   Alchemist-hp), all rights reserved (actinium, Los Alamos) or EU copyright not confirmed open

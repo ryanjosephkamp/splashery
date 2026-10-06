@@ -272,20 +272,6 @@ const atlasSpot = (z) => {
   return [(k % ATLAS_COLS) * ATLAS_CELL, Math.floor(k / ATLAS_COLS) * ATLAS_CELL];
 };
 
-// The depth's surface normal at a pixel (for the lifted sample's splats to face the right way).
-function normalAt(pair, i, size, side) {
-  const { depth } = pair;
-  const w = depth.w;
-  const at = (j) => depth.data[j * 4];
-  const g0 = at(i);
-  const gx = (at(i + 1) || g0) - (at(i - 1) || g0);
-  const gy = (at(i + w) || g0) - (at(i - w) || g0);
-  const k = (RELIEF * side) / 254 / ((2 * side) / size);
-  const n = [-gx * k, gy * k, 1];
-  const l = Math.hypot(n[0], n[1], n[2]);
-  return [n[0] / l, n[1] / l, n[2] / l];
-}
-
 // ---- The toy ----------------------------------------------------------------------------------
 
 const MEM = new WeakMap();
@@ -588,16 +574,15 @@ const REAL_ELEMENTS = {
 // from the side, the photo's texture rolls over the edge into the back (a darker mirror of the
 // front, since no photo saw it) instead of ending at a thin shell or a striped wall. Fillers close
 // the steps between neighbors, and the splats are nearly round, so none turns edge-on into a gap.
-function solidSample(pair, share, part, splat, relief = 1) {
+export function solidSample(pair, share, part, splat, relief = 1) {
   const out = [];
   const size = pair.color.w;
   const { depth, color } = pair;
+  // The body's shape on a grid with a cell for about every sixth of the share's splats (its
+  // splats are spread over its surface separately, below, by area; the colors come from the
+  // photo's own pixels).
   const have = countPixels(pair, 0, 0, size);
-  // About a fifth of the share each for the front and the back, the rest for the fillers that
-  // close the rim.
-  const step = Math.max(1, Math.sqrt(have / (share * 0.2)));
-  const g = Math.max(1, Math.round(step));
-  const px = (LIFT_SIDE / size) * g;
+  const g = Math.max(1, Math.round(Math.sqrt(have / Math.max(1, share / 6))));
   // (A flat picture keeps a thin card's thickness.)
   const hz = RELIEF * LIFT_SIDE * Math.max(0.12, relief);
   const W = Math.ceil(size / g);
@@ -683,6 +668,27 @@ function solidSample(pair, share, part, splat, relief = 1) {
   let far = 1;
   for (const p of cells) far = Math.max(far, dist[p.gy * W + p.gx]);
   const R = Math.max(3, far * 0.75);
+  // (The distance comes in chamfer steps, which showed as terraces on the side: two passes of a
+  // 3 x 3 mean over the inside smooth it; the outline keeps its 1.)
+  for (let pass = 0; pass < 2; pass++) {
+    const next = dist.slice();
+    for (const p of cells) {
+      const i = p.gy * W + p.gx;
+      if (dist[i] <= 1) continue;
+      let sum = 0;
+      let k = 0;
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dx = -1; dx <= 1; dx++) {
+          const x = p.gx + dx;
+          const y = p.gy + dy;
+          if (x < 0 || y < 0 || x >= W || y >= W) continue;
+          sum += Math.max(1, dist[y * W + x]);
+          k++;
+        }
+      next[i] = Math.max(1.001, sum / k);
+    }
+    dist.set(next);
+  }
   for (const p of cells) {
     // (The outermost cells sit on the seam itself, so front and back close there.)
     const t = Math.min(1, Math.max(0, dist[p.gy * W + p.gx] - 1) / R);
@@ -693,27 +699,7 @@ function solidSample(pair, share, part, splat, relief = 1) {
   }
   const at = (gx, gy) => (gx < 0 || gy < 0 || gx >= W || gy >= W ? null : cells[cell[gy * W + gx]] ?? null); // prettier-ignore
   const mixC = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
-  const NB = [[1, 0], [0, 1]]; // prettier-ignore
   const BACK = 0.85;
-  // Baked light on the body's own shape, so its roundness reads from the side. The light comes
-  // from above (and a little in front): the turn is about the up axis, so it stays above at every
-  // turn. A light from the side turned with the sample and lit its rim like the lip of a bowl
-  // (the owner's "hollow from the sides").
-  const L = [-0.1, 0.9, 0.42];
-  const shadeAt = (p, front) => {
-    const zOf = (q) => (q ? (front ? q.zf : q.zb) : LIFT_AT[2]); // (past the rim: the seam)
-    const zl = zOf(at(p.gx - 1, p.gy));
-    const zr = zOf(at(p.gx + 1, p.gy));
-    const zu = zOf(at(p.gx, p.gy - 1));
-    const zd = zOf(at(p.gx, p.gy + 1));
-    const sgn = front ? 1 : -1;
-    const n = [-(zr - zl) / (2 * px), (zu - zd) / (2 * px), sgn];
-    const ln = Math.hypot(n[0], n[1], n[2]);
-    // (The back has its own light, mirrored behind, so it reads as a dome, not a bowl.)
-    const lit = Math.max(0, (n[0] * L[0] + n[1] * L[1] + n[2] * L[2] * sgn) / ln);
-    // (1 where the face looks straight out, as the photo was lit.)
-    return (0.6 + 0.48 * lit) / 0.8;
-  };
   // The rolled rim and the side wall take the colors from further in. The photo's outline
   // pixels are dark (the cutout's edge, the shadow under the sample), and from the side a dark
   // wall inside a lit rim read as a hole (the owner's "hollow from the sides"). An area mean of
@@ -746,38 +732,150 @@ function solidSample(pair, share, part, splat, relief = 1) {
       if (r > W) return p.c;
     }
   };
-  for (const p of cells) {
-    const n = normalAt(pair, p.i, size, LIFT_SIDE);
-    const t = Math.min(1, Math.max(0, (p.b - 0.5) / 0.48));
-    const c = p.b > 0.95 ? p.c : mixC(innerColor(p), p.c, t * t * (3 - 2 * t));
-    // The front keeps most of the photo's colors where it faces the camera, and takes the baked
-    // light fully as it rolls over the rim.
-    const front = shadeArr(c, 1 + (shadeAt(p, true) - 1) * (0.8 + 0.2 * (1 - p.b)));
-    // The back (which no photo shows) takes the body's smoothed colors with a little of the
-    // photo's texture, so it matches the rim instead of showing the photo's dark spots inside it.
-    const back = shadeArr(mixC(innerColor(p), c, 0.35), BACK * shadeAt(p, false));
-    p.cf = front;
-    p.cb = back;
-    out.push(splat([p.x, p.y, p.zf], front, px * 0.82, { part, n, flat: 0.75 }));
-    out.push(splat([p.x, p.y, p.zb], back, px * 0.82, { part, n: [0, 0, -1], flat: 0.75 }));
-  }
-  for (const p of cells) {
-    // Fillers where the surface steps steeply to a neighbor (front and back): mostly at the rim.
-    for (const [dx, dy] of NB) {
-      const q = at(p.gx + dx, p.gy + dy);
-      if (!q) continue;
-      for (const [za, zb, ca, cb] of [
-        [p.zf, q.zf, p.cf, q.cf],
-        [p.zb, q.zb, p.cb, q.cb],
-      ]) {
-        // (Enough of them, and big enough, to close the steep rim with no slit between them: the
-        // owner's "a thin vertical strip of hollowness".)
-        const k = Math.min(24, Math.floor(Math.abs(zb - za) / (px * 0.55)));
-        for (let j = 1; j <= k; j++) {
-          const f = j / (k + 1);
-          out.push(splat([p.x + (q.x - p.x) * f, p.y + (q.y - p.y) * f, za + (zb - za) * f], mixC(ca, cb, f), px * 0.9, { part, flat: 1 })); // prettier-ignore
+  for (const p of cells) p.inner = innerColor(p);
+
+  // The surface: front and back as two meshes over the grid that share the outline (the
+  // outermost cells sit on the seam), so together they close. The owner saw the earlier rim of
+  // filler columns as streaks with gaps between them up close; now every part of the surface,
+  // the steep side wall included, gets splats spread evenly over its own area, each a disc lying
+  // in the surface.
+  const quads = [];
+  let area = 0;
+  const P = (p, front) => [p.x, p.y, front ? p.zf : p.zb];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; // prettier-ignore
+  const len = (a) => Math.hypot(a[0], a[1], a[2]);
+  for (let gy = 0; gy < W - 1; gy++)
+    for (let gx = 0; gx < W - 1; gx++) {
+      // Corners in order round the quad; a missing corner makes a triangle (the outline's steps).
+      const q = [at(gx, gy), at(gx + 1, gy), at(gx + 1, gy + 1), at(gx, gy + 1)];
+      const n = q.filter(Boolean).length;
+      if (n < 3) continue;
+      for (const front of [true, false]) {
+        const v = q.map((c) => c && P(c, front));
+        if (n === 4)
+          area += (len(cross(sub(v[1], v[0]), sub(v[3], v[0]))) + len(cross(sub(v[1], v[2]), sub(v[3], v[2])))) / 2; // prettier-ignore
+        else {
+          const k = q.findIndex((c) => !c);
+          const [a, b, c] = [v[(k + 1) % 4], v[(k + 2) % 4], v[(k + 3) % 4]];
+          area += len(cross(sub(a, b), sub(c, b))) / 2;
         }
+        quads.push({ gx, gy, q, n, front });
       }
+    }
+  // The splats' spacing: as many as the share allows (each quad rounds its rows and columns up,
+  // so the spacing is fitted to the count over a few passes), and a size that closes it.
+  const countAt = (sp) => {
+    let k = 0;
+    for (const { q, n, front } of quads) {
+      const v = q.map((c) => c && P(c, front));
+      if (n === 4) {
+        const ns = Math.max(
+          1,
+          Math.ceil(Math.max(len(sub(v[1], v[0])), len(sub(v[2], v[3]))) / sp),
+        );
+        const nt = Math.max(
+          1,
+          Math.ceil(Math.max(len(sub(v[3], v[0])), len(sub(v[2], v[1]))) / sp),
+        );
+        k += ns * nt;
+      } else k += 1;
+    }
+    return k;
+  };
+  let s = Math.sqrt(area / Math.max(1, share));
+  for (let i = 0; i < 4; i++) s *= Math.sqrt(Math.max(0.5, countAt(s) / Math.max(1, share)));
+  // Light baked on the body's own shape, so its roundness reads from the side. It comes from
+  // above (and a little in front): the turn is about the up axis, so it stays above at every turn.
+  // A light from the side turned with the sample and lit its rim like the lip of a bowl. The back
+  // has its own, mirrored behind, so it reads as a dome.
+  const LF = [-0.1, 0.9, 0.42];
+  const LB = [-0.1, 0.9, -0.42];
+  const LN = Math.hypot(...LF);
+  const smooth = (t) => t * t * (3 - 2 * t);
+  const pixel = (u, v) => {
+    const x = Math.min(size - 1, Math.max(0, Math.round(u * g)));
+    const y = Math.min(size - 1, Math.max(0, Math.round(v * g)));
+    const i = y * size + x;
+    return depth.data[i * 4] ? [color.data[i * 4] / 255, color.data[i * 4 + 1] / 255, color.data[i * 4 + 2] / 255] : null; // prettier-ignore
+  };
+  const emit = (pos, nrm, front, b, inner, cFall, gu, gv) => {
+    const nl = len(nrm) || 1;
+    // (Outward: the grid's x runs right and its rows run down, so the front's normal is the
+    // negative of the cross product.)
+    const sg = front ? -1 : 1;
+    const nn = [(sg * nrm[0]) / nl, (sg * nrm[1]) / nl, (sg * nrm[2]) / nl];
+    const L = front ? LF : LB;
+    const lit = Math.max(0, (nn[0] * L[0] + nn[1] * L[1] + nn[2] * L[2]) / LN);
+    // (1 where the face looks straight out, as the photo was lit.)
+    const shade = (0.6 + 0.48 * lit) / (0.6 + (0.48 * (L[2] * (front ? 1 : -1))) / LN);
+    const cImg = pixel(gu, gv) || cFall;
+    let c;
+    if (front) {
+      const t = smooth(Math.min(1, Math.max(0, (b - 0.5) / 0.48)));
+      const base = b > 0.95 ? cImg : mixC(inner, cImg, t);
+      c = shadeArr(base, 1 + (shade - 1) * (0.8 + 0.2 * (1 - b)));
+    } else {
+      // The back (which no photo shows) takes the body's smoothed colors with a little of the
+      // photo's texture.
+      c = shadeArr(mixC(inner, cImg, 0.35), BACK * shade);
+    }
+    out.push(splat(pos, c, s, { part, n: nn, flat: 0.45 }));
+  };
+  const bil = (a, b, c, d, u, v) => (k) =>
+    (a[k] * (1 - u) + b[k] * u) * (1 - v) + (d[k] * (1 - u) + c[k] * u) * v;
+  for (const { gx, gy, q, n, front } of quads) {
+    const v = q.map((c) => c && P(c, front));
+    if (n === 4) {
+      const [A, B, C, D] = v;
+      const ns = Math.max(1, Math.ceil(Math.max(len(sub(B, A)), len(sub(C, D))) / s));
+      const nt = Math.max(1, Math.ceil(Math.max(len(sub(D, A)), len(sub(C, B))) / s));
+      for (let i = 0; i < ns; i++)
+        for (let j = 0; j < nt; j++) {
+          const u = (i + 0.5) / ns;
+          const w = (j + 0.5) / nt;
+          const f = bil(A, B, C, D, u, w);
+          // Tangents of the bilinear patch at (u, w).
+          const tu = [0, 1, 2].map((k) => (B[k] - A[k]) * (1 - w) + (C[k] - D[k]) * w);
+          const tv = [0, 1, 2].map((k) => (D[k] - A[k]) * (1 - u) + (C[k] - B[k]) * u);
+          const bq = [q[0].b, q[1].b, q[2].b, q[3].b];
+          const b = (bq[0] * (1 - u) + bq[1] * u) * (1 - w) + (bq[3] * (1 - u) + bq[2] * u) * w;
+          const inner = [0, 1, 2].map((k) => (q[0].inner[k] * (1 - u) + q[1].inner[k] * u) * (1 - w) + (q[3].inner[k] * (1 - u) + q[2].inner[k] * u) * w); // prettier-ignore
+          const cFall = [0, 1, 2].map((k) => (q[0].c[k] * (1 - u) + q[1].c[k] * u) * (1 - w) + (q[3].c[k] * (1 - u) + q[2].c[k] * u) * w); // prettier-ignore
+          emit([f(0), f(1), f(2)], cross(tu, tv), front, b, inner, cFall, gx + u, gy + w);
+        }
+    } else {
+      // A triangle: its corner opposite the missing one is the right angle on the grid.
+      const k = q.findIndex((c) => !c);
+      const [ia, ib, ic] = [(k + 1) % 4, (k + 2) % 4, (k + 3) % 4];
+      const [a, b0, c0] = [q[ia], q[ib], q[ic]];
+      const [Pa, Pb, Pc] = [v[ia], v[ib], v[ic]];
+      // (Corner offsets on the grid, in the quad's order: (0,0), (1,0), (1,1), (0,1).)
+      const OFF = [[0, 0], [1, 0], [1, 1], [0, 1]]; // prettier-ignore
+      const e1 = sub(Pa, Pb);
+      const e2 = sub(Pc, Pb);
+      const n1 = Math.max(1, Math.ceil(len(e1) / s));
+      const n2 = Math.max(1, Math.ceil(len(e2) / s));
+      const nrm = cross(e1, e2);
+      // (Keep the quads' winding: e1 x e2 from the right-angle corner turns one way or the
+      // other depending on which corner is missing.)
+      const ref = cross(sub([OFF[ia][0], -OFF[ia][1], 0], [OFF[ib][0], -OFF[ib][1], 0]), sub([OFF[ic][0], -OFF[ic][1], 0], [OFF[ib][0], -OFF[ib][1], 0])); // prettier-ignore
+      const flip = ref[2] > 0 ? -1 : 1;
+      const nn = [nrm[0] * flip, nrm[1] * flip, nrm[2] * flip];
+      for (let i = 0; i < n1; i++)
+        for (let j = 0; j < n2; j++) {
+          const u = (i + 0.5) / n1;
+          const w = (j + 0.5) / n2;
+          if (u + w > 1) continue;
+          const mix3 = (x, y, z) => x * (1 - u - w) + y * u + z * w;
+          const pos = [0, 1, 2].map((t) => mix3(Pb[t], Pa[t], Pc[t]));
+          const bb = mix3(b0.b, a.b, c0.b);
+          const inner = [0, 1, 2].map((t) => mix3(b0.inner[t], a.inner[t], c0.inner[t]));
+          const cFall = [0, 1, 2].map((t) => mix3(b0.c[t], a.c[t], c0.c[t]));
+          const gu = gx + mix3(OFF[ib][0], OFF[ia][0], OFF[ic][0]);
+          const gv = gy + mix3(OFF[ib][1], OFF[ia][1], OFF[ic][1]);
+          emit(pos, nn, front, bb, inner, cFall, gu, gv);
+        }
     }
   }
   return out;

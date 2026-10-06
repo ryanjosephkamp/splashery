@@ -12,7 +12,7 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { PNG } from "pngjs";
-import { seeThrough, SIDE_VIEWS } from "../src/elements-real/see-through.js";
+import { seeThrough, SIDE_VIEWS, CLOSE_VIEWS } from "../src/elements-real/see-through.js";
 
 const args = process.argv.slice(2);
 const outDir = args[0] && !/^[A-Z]/.test(args[0]) ? args.shift() : ".cache/rel/side";
@@ -42,16 +42,18 @@ for (const [vw, vh, profile] of [
     }, el);
     await page.waitForFunction((el) => window.__splashery.player.motion?.ctx?.kit?.data?.element === el, el, { timeout: 120_000 }); // prettier-ignore
     await page.waitForTimeout(1500);
-    for (const [name, spin] of SIDE_VIEWS) {
+    for (const [name, spin, cam] of [...SIDE_VIEWS, ...CLOSE_VIEWS]) {
       const shot = async (hide) => {
         await page.evaluate(
-          ({ spin, hide }) => {
+          ({ spin, hide, cam }) => {
             globalThis.__relHideLift = hide;
             const { player } = window.__splashery;
             player.motion.setControl("spin", spin, { snap: true });
+            player.__relHome ??= player.camera.getState();
+            player.camera.setState(cam || player.__relHome);
             player.stage.requestRender();
           },
-          { spin, hide },
+          { spin, hide, cam },
         );
         await page.waitForTimeout(900);
         return PNG.sync.read(await page.screenshot());

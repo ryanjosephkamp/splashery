@@ -9,6 +9,17 @@
 // 1 to 0, and the turn (turnPath in src/packs/real-elements.js) holds a quarter turn while 1 - spin
 // is between 0.18 and 0.36 and three quarters between 0.64 and 0.82; the others are 10 degrees to
 // either side of those, on the way in and out.
+// Up close, from the angles the owner looked from (October 6, 2026): [name, spin, the camera's
+// yaw, pitch and distance (in toy radii), and its pan to the lifted sample]. The filler columns
+// the side wall used to be made of only showed their gaps this close.
+export const CLOSE_VIEWS = [
+  ["close-a", 0.73, 0.5, 0.25],
+  ["close-b", 0.73, -0.6, -0.1],
+  ["close-c", 0.27, 0.9, 0.4],
+  ["close-d", 0.27, -0.3, 0.6],
+  ["close-e", 1, -1.2, 0.3],
+].map(([name, spin, yaw, pitch]) => [name, spin, { yaw, pitch, distance: 1.1, pan: [0.4, 0.03, 0.35] }]); // prettier-ignore
+
 export const SIDE_VIEWS = [
   ["80", 0.8663],
   ["90", 0.73],
