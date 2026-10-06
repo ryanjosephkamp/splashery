@@ -722,6 +722,61 @@
       "license": "CC0 1.0",
       "checked": "September 29, 2026",
       "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "camera",
+      "file": "assets/toys/model-splats/camera.glb",
+      "toy": "model-splats",
+      "name": "Camera 01",
+      "author": "Rajil Jose Macatangay",
+      "page": "https://polyhaven.com/a/Camera_01",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "boombox",
+      "file": "assets/toys/model-splats/boombox.glb",
+      "toy": "model-splats",
+      "name": "Boombox",
+      "author": "Thomas Paul Mouilleron",
+      "page": "https://polyhaven.com/a/boombox",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "lantern",
+      "file": "assets/toys/model-splats/lantern.glb",
+      "toy": "model-splats",
+      "name": "Lantern 01",
+      "author": "Rajil Jose Macatangay",
+      "page": "https://polyhaven.com/a/Lantern_01",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "whale",
+      "file": "assets/toys/model-splats/whale.glb",
+      "toy": "model-splats",
+      "name": "Bronze Whale Statue",
+      "author": "Tina",
+      "page": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
+    },
+    {
+      "id": "rocker",
+      "file": "assets/toys/model-splats/rocker.glb",
+      "toy": "model-splats",
+      "name": "Rockingchair 01",
+      "author": "Jorge Camacho",
+      "page": "https://polyhaven.com/a/Rockingchair_01",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
     }
   ],
   "worlds": [
@@ -912,6 +967,42 @@
       "license": "CC0 1.0",
       "checked": "September 29, 2026",
       "note": "A painting in the public domain, CC0 from the Met's Open Access program on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "spiral-stairs",
+      "file": "assets/toys/photo-3d/spiral-stairs.jpg",
+      "depth": "assets/toys/photo-3d/spiral-stairs.depth",
+      "toy": "photo-3d",
+      "name": "Spiral Staircase, Keck Center (U.S. National Academies)",
+      "author": "Jorge Mendoza",
+      "page": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "palace-stairs",
+      "file": "assets/toys/photo-3d/palace-stairs.jpg",
+      "depth": "assets/toys/photo-3d/palace-stairs.depth",
+      "toy": "photo-3d",
+      "name": "Escalier monumental, Neue Burg, Vienna",
+      "author": "Jebulon",
+      "page": "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "wildflowers",
+      "file": "assets/toys/photo-3d/wildflowers.jpg",
+      "depth": "assets/toys/photo-3d/wildflowers.depth",
+      "toy": "photo-3d",
+      "name": "Wildflowers in foreground",
+      "author": "PookieFugglestein",
+      "page": "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
     }
   ],
   "soundSamples": [
@@ -2082,7 +2173,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped."
+      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (liberty-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 3 minutes 48 seconds long."
     },
     {
       "id": "edinburgh",
@@ -2094,7 +2185,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "10 seconds from 7:32 (the 480p transcode on Commons), 28 frames, trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped."
+      "note": "10 seconds from 7:32 (the 480p transcode on Commons), 28 frames, trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (edinburgh-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 67 minutes long."
     }
   ],
   "movingSamples": [
@@ -2108,7 +2199,55 @@
       "page": "https://peach.blender.org/",
       "license": "CC BY 3.0",
       "checked": "October 2, 2026",
-      "note": "The Screen toy's six-second clip (assets/toys/screen/bunny.mp4) at 8 frames a second, 640 by 360, tiled 3 by 5 into four JPEGs (bunny-sheet-1.jpg to -4.jpg); each frame's depth worked out by tools/live3-depth.mjs with the vendored depth model."
+      "note": "The Screen toy's six-second clip (assets/toys/screen/bunny.mp4) at 16 frames a second (96 frames; 8 until October 5, 2026), 640 by 360, tiled 3 by 5 into seven JPEGs (bunny-sheet-1.jpg to -7.jpg); each frame's depth worked out by tools/live3-depth.mjs with the vendored depth model."
+    },
+    {
+      "id": "horse",
+      "file": "assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/horse.depth",
+      "toy": "moving-photo-3d",
+      "name": "Race horse galloping (Muybridge, 1887)",
+      "author": "Eadweard Muybridge",
+      "page": "https://commons.wikimedia.org/wiki/File:Muybridge_race_horse_animated.gif",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "The Screen toy's GIF (assets/toys/screen/horse.gif), unchanged, 15 frames of a tenth of a second at 300 by 200 in one JPEG sheet; each frame's depth worked out by tools/live3-depth.mjs."
+    },
+    {
+      "id": "dragon",
+      "file": "assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/sintel.depth",
+      "toy": "moving-photo-3d",
+      "name": "Sintel (trailer, 29.5 to 35.5 s)",
+      "author": "Blender Foundation",
+      "page": "https://durian.blender.org/",
+      "license": "CC BY 3.0",
+      "checked": "October 5, 2026",
+      "note": "From the 720p trailer on download.blender.org/durian/trailer, cropped to 1280 by 544 and scaled to 640 by 272, 16 frames a second (96 frames), five JPEG sheets, with its sound as a 56 kbps mono MP3 (sintel.mp3); each frame's depth by tools/live3-depth.mjs."
+    },
+    {
+      "id": "bridge",
+      "file": "assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/tears.depth",
+      "toy": "moving-photo-3d",
+      "name": "Tears of Steel (8:30.5 to 8:36.5)",
+      "author": "Blender Foundation",
+      "page": "https://mango.blender.org/",
+      "license": "CC BY 3.0",
+      "checked": "October 5, 2026",
+      "note": "From the 720p download on download.blender.org/demo/movies/ToS, 640 by 267, 16 frames a second (96 frames), five JPEG sheets, with its sound as a 56 kbps mono MP3 (tears.mp3); each frame's depth by tools/live3-depth.mjs."
+    },
+    {
+      "id": "machine",
+      "file": "assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+      "path": "assets/toys/moving-photo-3d/elephants.depth",
+      "toy": "moving-photo-3d",
+      "name": "Elephants Dream (5:29.7 to 5:35.7)",
+      "author": "Blender Foundation",
+      "page": "https://orange.blender.org/",
+      "license": "CC BY 2.5",
+      "checked": "October 5, 2026",
+      "note": "From the 1024 by 576 download on download.blender.org/ED, 640 by 360, 16 frames a second (96 frames), seven JPEG sheets, with its sound as a 56 kbps mono MP3 (elephants.mp3); each frame's depth by tools/live3-depth.mjs."
     }
   ],
   "splatTrainer": {
@@ -2526,6 +2665,39 @@
       "name": "NAD+, a helper molecule in every cell (COD 1507221)",
       "author": "B. Guillot, N. Muzet, E. Artacho et al.",
       "page": "https://www.crystallography.net/cod/1507221.html",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
+    },
+    {
+      "id": "sci3-alanine",
+      "file": "assets/toys/thermal-ellipsoids/alanine-cod-8000310.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Alanine, the simplest amino acid with a side chain (COD 8000310)",
+      "author": "L. A. Malaspina, E. K. Wieduwilt, J. Bergmann et al.",
+      "page": "https://www.crystallography.net/cod/8000310.html",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
+    },
+    {
+      "id": "sci3-histidine",
+      "file": "assets/toys/thermal-ellipsoids/histidine-cod-2108879.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Histidine, an amino acid (neutron, 5 K) (COD 2108879)",
+      "author": "G. Novelli, C. J. McMonagle, F. Kleemiss et al.",
+      "page": "https://www.crystallography.net/cod/2108879.html",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
+    },
+    {
+      "id": "sci3-thymidine",
+      "file": "assets/toys/thermal-ellipsoids/thymidine-cod-2104143.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Thymidine, a building block of DNA (COD 2104143)",
+      "author": "C. B. Hübschle, B. Dittrich, S. Grabowsky et al.",
+      "page": "https://www.crystallography.net/cod/2104143.html",
       "license": "CC0 1.0",
       "checked": "October 5, 2026",
       "note": "The CIF, with the embedded refinement files (reflections, SHELX .res and .hkl) left out by tools/sci3-structures.mjs."
@@ -4421,6 +4593,107 @@
       "license": "CC0 (NASA mission data; https://science.data.nasa.gov/about/license)",
       "checked": "October 5, 2026",
       "note": "Made by tools/sp2-systems.mjs through the archive's TAP service; the inner Solar System from NSSDC fact sheets."
+    }
+  ],
+  "geoData": [
+    {
+      "id": "grand-canyon-terrain",
+      "file": "assets/toys/grand-canyon/terrain.bin",
+      "toy": "grand-canyon",
+      "name": "Grand Canyon heights (3DEP) and aerial imagery (The National Map)",
+      "author": "U.S. Geological Survey; USDA Farm Service Agency (NAIP); NASA (Landsat)",
+      "page": "https://www.usgs.gov/3d-elevation-program",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: the 3DEP ImageServer and the USGSImageryOnly basemap, resampled to 192 x 192 heights and 320 x 320 colors."
+    },
+    {
+      "id": "st-helens-terrain",
+      "file": "assets/toys/st-helens/terrain.bin",
+      "toy": "st-helens",
+      "name": "Mount St. Helens before 1980 (USGS pre-eruption DEM) and today (3DEP, imagery)",
+      "author": "J. A. Bard and R. Phillips-Netherton, U.S. Geological Survey (doi:10.5066/P91W7C1L); U.S. Geological Survey (3DEP); USDA FSA (NAIP)",
+      "page": "https://doi.org/10.5066/P91W7C1L",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: an 11 km square round the summit on the UTM zone 10 grid; outside the pre-eruption DEM's 196 km² the 1979 surface is today's."
+    },
+    {
+      "id": "sea-floor-terrain",
+      "file": "assets/toys/sea-floor/terrain.bin",
+      "toy": "sea-floor",
+      "name": "Mariana Trench relief (ETOPO1 bedrock)",
+      "author": "NOAA National Centers for Environmental Information",
+      "page": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: 141.5–148.5° E, 9.5–16.5° N, 192 x 192."
+    },
+    {
+      "id": "tide-harbor-terrain",
+      "file": "assets/toys/tide-harbor/terrain.bin",
+      "toy": "tide-harbor",
+      "name": "Bar Harbor heights (NCEI coastal DEMs), imagery and tide predictions (CO-OPS 8413320)",
+      "author": "NOAA NCEI; NOAA CO-OPS; U.S. Geological Survey; USDA FSA (NAIP)",
+      "page": "https://tidesandcurrents.noaa.gov/stationhome.html?id=8413320",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: six-minute predictions relative to mean sea level, October 28, 2026, 00:00 UTC, for 24 h 54 min; the DEM's NAVD88 heights are taken as mean sea level."
+    },
+    {
+      "id": "hurricane-polo",
+      "file": "assets/toys/hurricane/storm.bin",
+      "toy": "hurricane",
+      "name": "Hurricane Polo (EP17, 2026): GOES-East band 13 at 18 UTC on September 21 and 22, the best track, Blue Marble and ETOPO1",
+      "author": "NOAA NESDIS (GOES), NOAA NHC (best track), NASA Earth Observatory (Blue Marble, through NASA GIBS), NOAA NCEI (ETOPO1)",
+      "page": "https://ftp.nhc.noaa.gov/atcf/btk/",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-storm.mjs: GIBS's colored infrared turned back into cloud-top temperatures through the layer's color map."
+    },
+    {
+      "id": "relief-map-terrain",
+      "file": "assets/toys/relief-map/terrain.bin",
+      "toy": "relief-map",
+      "name": "Yosemite Valley heights (3DEP), imagery, NLCD 2021 land cover and NHD streams",
+      "author": "U.S. Geological Survey; MRLC consortium (NLCD); USDA FSA (NAIP)",
+      "page": "https://www.mrlc.gov/data/nlcd-2021-land-cover-conus",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-terrain.mjs: the named NHD flowlines (layer 6), in flow direction."
+    },
+    {
+      "id": "stork-tracks",
+      "file": "assets/toys/stork-migration/migration.bin",
+      "toy": "stork-migration",
+      "name": "Fall migrations of juvenile vs. adult white storks (Rotics et al. 2016), fall 2013, and ETOPO1",
+      "author": "S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers, A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan; NOAA NCEI (ETOPO1)",
+      "page": "https://doi.org/10.5441/001/1.hn1bd23k",
+      "license": "CC0 1.0",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-migration.mjs: 30 birds that reached Africa south of 15° N, one fix every six hours."
+    },
+    {
+      "id": "earthquakes-snapshot",
+      "file": "assets/toys/earthquakes/snapshot.json",
+      "toy": "earthquakes",
+      "name": "USGS earthquake feeds (past week M2.5+, past month M4.5+) and a year of the catalog (M5+, October 2025 to September 2026)",
+      "author": "U.S. Geological Survey",
+      "page": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-quakes.mjs: only records of networks us, hv, at and pt (USGS and NOAA authored); the live feed is read in the page, never stored."
+    },
+    {
+      "id": "earthquakes-globe",
+      "file": "assets/toys/earthquakes/globe.bin",
+      "toy": "earthquakes",
+      "name": "ETOPO1 global relief, 360 x 180",
+      "author": "NOAA National Centers for Environmental Information",
+      "page": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+      "license": "Public domain",
+      "checked": "October 5, 2026",
+      "note": "tools/geo-quakes.mjs."
     }
   ]
 }

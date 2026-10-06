@@ -70,10 +70,13 @@ test("every theme keeps 4.5 : 1, and a flag's pale colors never become modules",
 test("crisp edges: thin ring splats, within the budget, and the old lattice when asked", () => {
   const code = encodeQR(URL0, "M");
   const o = { style: "classic", ...PRESETS.classic };
-  const r = buildCode(code, o, 133000);
-  expect(r.scale).toBe(1);
-  expect(r.splats.length).toBeLessThanOrEqual(133000);
-  // The outermost rings are 0.03 of a module across (0.55 × 0.03 as a scale).
+  // The toy's budget at the mid tier (density 2: 240,000 × 0.95): the finest rings fit.
+  const r = buildCode(code, o, 228000);
+  expect(r.scale).toBe(0.6);
+  expect(r.splats.length).toBeLessThanOrEqual(228000);
+  // A smaller budget coarsens the rings instead of overflowing.
+  expect(buildCode(code, o, 133000).scale).toBeGreaterThan(0.6);
+  // The outermost rings are 0.018 of a module across (0.03 × 0.6; a scale of 0.55 of that).
   const thin = r.splats.filter((s) => s.params[0] > 0 && Math.min(s.scales[0], s.scales[1]) < 0.02);
   expect(thin.length).toBeGreaterThan(5000);
   // A big code at a small budget coarsens instead of overflowing.

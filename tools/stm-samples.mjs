@@ -9,6 +9,13 @@
 //   vase.glb    Poly Haven's "Antique Ceramic Vase 01" by James Ray Cock, 1k glTF
 //               (https://polyhaven.com/a/antique_ceramic_vase_01, CC0); only the color
 //               texture is kept, at 1024 pixels.
+// Studio media lane (October 5, 2026), more Poly Haven models (all CC0, checked on their live pages
+// on October 5, 2026), each made like the vase (the 1k glTF, only the color texture kept):
+//   camera.glb      "Camera 01"          (https://polyhaven.com/a/Camera_01)
+//   boombox.glb     "Boombox"            (https://polyhaven.com/a/boombox)
+//   lantern.glb     "Lantern 01"         (https://polyhaven.com/a/Lantern_01)
+//   whale.glb       "Bronze Whale Statue" (https://polyhaven.com/a/bronze_whale_statue)
+//   rocker.glb      "Rockingchair 01"    (https://polyhaven.com/a/Rockingchair_01)
 // Build-time only: @gltf-transform/core (MIT) is a devDependency.
 
 import fs from "node:fs";
@@ -48,16 +55,22 @@ const io = new NodeIO();
   fs.writeFileSync(path.join(out, "burger.glb"), await io.writeBinary(doc));
 }
 
-// Poly Haven's vase: the 1k glTF, only its color texture.
-{
+// Poly Haven's models: the 1k glTF, only its color texture.
+const POLY = [
+  ["vase", "antique_ceramic_vase_01"],
+  ["camera", "Camera_01"],
+  ["boombox", "boombox"],
+  ["lantern", "Lantern_01"],
+  ["whale", "bronze_whale_statue"],
+  ["rocker", "Rockingchair_01"],
+];
+for (const [name, id] of POLY) {
   const api = await (
-    await fetch("https://api.polyhaven.com/files/antique_ceramic_vase_01", {
-      headers: { "User-Agent": UA },
-    })
+    await fetch(`https://api.polyhaven.com/files/${id}`, { headers: { "User-Agent": UA } })
   ).json();
   const g = api.gltf["1k"].gltf;
-  const dir = path.join(cache, "vase");
-  const main = path.join(dir, "vase.gltf");
+  const dir = path.join(cache, name);
+  const main = path.join(dir, `${name}.gltf`);
   await get(g.url, main);
   for (const [rel, f] of Object.entries(g.include)) await get(f.url, path.join(dir, rel));
   const doc = await io.read(main);
@@ -65,8 +78,9 @@ const io = new NodeIO();
     mat.setNormalTexture(null);
     mat.setMetallicRoughnessTexture(null);
     mat.setOcclusionTexture(null);
+    mat.setEmissiveTexture(null);
   }
   for (const t of doc.getRoot().listTextures()) if (t.listParents().every((p) => p.propertyType === "Root")) t.dispose(); // prettier-ignore
-  fs.writeFileSync(path.join(out, "vase.glb"), await io.writeBinary(doc));
+  fs.writeFileSync(path.join(out, `${name}.glb`), await io.writeBinary(doc));
 }
 for (const f of fs.readdirSync(out)) if (f.endsWith(".glb")) console.log(f, fs.statSync(path.join(out, f)).size, "bytes"); // prettier-ignore

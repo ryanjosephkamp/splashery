@@ -111,10 +111,16 @@ export function atomLabel(m, i) {
 // Returns { points: Float32Array (x, y, z), normals: Float32Array, count, h }
 // with at most about `max` points (a coarser grid when there would be more).
 export const BLOBBY = 1.6;
-export function blobbySurface(
-  m,
-  { radius, use, max = 120000, h: h0 = 0.42, maxVoxels = 3e6 } = {},
-) {
+export function blobbySurface(m, opts = {}) {
+  const max = opts.max ?? 120000;
+  const first = surfaceAt(m, opts);
+  // A porous entry (RNA, a ribosome) has more surface than the estimate
+  // allows for: once more, on a coarser grid, rather than draw a third of it.
+  if (first.count <= 1.5 * max) return first;
+  return surfaceAt(m, { ...opts, h: first.h * Math.sqrt(first.count / max) });
+}
+
+function surfaceAt(m, { radius, use, max = 120000, h: h0 = 0.34, maxVoxels = 3e6 } = {}) {
   const idx = [];
   for (let i = 0; i < m.n; i++) if (use(i)) idx.push(i);
   if (!idx.length)
@@ -201,6 +207,69 @@ export function blobbySurface(
           nrm.push(g[0] / l, g[1] / l, g[2] / l);
         }
       }
+  // Polish: the grid's linear guesses leave a faint grid pattern in the
+  // points and their shading. Each point takes a Newton step onto the true
+  // level-1 surface, and its normal is the exact gradient there.
+  const cell = reachOf(rmax);
+  const buckets = new Map();
+  const key = (x, y, z) => ((Math.floor(x / cell) + 4096) * 8192 + (Math.floor(y / cell) + 4096)) * 8192 + (Math.floor(z / cell) + 4096); // prettier-ignore
+  for (const i of idx) {
+    const k = key(m.x[i], m.y[i], m.z[i]);
+    let list = buckets.get(k);
+    if (!list) buckets.set(k, (list = []));
+    list.push(i);
+  }
+  const field = (q) => {
+    let f = 0;
+    const g = [0, 0, 0];
+    const cx = Math.floor(q[0] / cell);
+    const cy = Math.floor(q[1] / cell);
+    const cz = Math.floor(q[2] / cell);
+    for (let dx = -1; dx <= 1; dx++)
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dz = -1; dz <= 1; dz++) {
+          const list = buckets.get(((cx + dx + 4096) * 8192 + (cy + dy + 4096)) * 8192 + (cz + dz + 4096)); // prettier-ignore
+          if (!list) continue;
+          for (const i of list) {
+            const R = radius(i);
+            const ex = q[0] - m.x[i];
+            const ey = q[1] - m.y[i];
+            const ez = q[2] - m.z[i];
+            const d2 = ex * ex + ey * ey + ez * ez;
+            const reach = reachOf(R);
+            if (d2 > reach * reach) continue;
+            const k = B / (R * R);
+            const v = Math.exp(B - k * d2);
+            f += v;
+            g[0] -= 2 * k * ex * v;
+            g[1] -= 2 * k * ey * v;
+            g[2] -= 2 * k * ez * v;
+          }
+        }
+    return { f, g };
+  };
+  // On a big entry (over 80,000 points) the pattern is below a pixel and the
+  // grid's own normals are kept: the refinement would take seconds on a phone.
+  for (let n = 0; n < (pts.length <= 240000 ? pts.length : 0); n += 3) {
+    const q = [pts[n], pts[n + 1], pts[n + 2]];
+    let F = null;
+    for (let step = 0; step < 1; step++) {
+      F = field(q);
+      const g2 = F.g[0] ** 2 + F.g[1] ** 2 + F.g[2] ** 2;
+      if (g2 < 1e-12) break;
+      const s = Math.max(-h, Math.min(h, (F.f - 1) / Math.sqrt(g2))) / Math.sqrt(g2);
+      for (let a = 0; a < 3; a++) q[a] -= s * F.g[a];
+    }
+    F = field(q);
+    const l = Math.hypot(F.g[0], F.g[1], F.g[2]);
+    if (l < 1e-9) continue;
+    pts[n] = q[0];
+    pts[n + 1] = q[1];
+    pts[n + 2] = q[2];
+    nrm[n] = -F.g[0] / l;
+    nrm[n + 1] = -F.g[1] / l;
+    nrm[n + 2] = -F.g[2] / l;
+  }
   return { points: Float32Array.from(pts), normals: Float32Array.from(nrm), count: pts.length / 3, h }; // prettier-ignore
 }
 
