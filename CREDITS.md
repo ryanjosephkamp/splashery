@@ -1123,9 +1123,21 @@ feature (`assets/toys/real-worlds/`). Feature positions are from the
   Galaxy, M74 ([heic0719a](https://esahubble.org/images/heic0719a/); NASA, ESA, and The Hubble
   Heritage (STScI/AURA)-ESA/Hubble Collaboration); and the Southern Pinwheel Galaxy, M83
   ([eso0825a](https://www.eso.org/public/images/eso0825a/); ESO).
-- Saturn V: NASA's [Saturn V 3D model](https://science.nasa.gov/3d-resources/saturn-v/) (NASA 3D
-  Resources, "free to download and use" under NASA's
-  [media guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+- Saturn V: NASA's [Saturn V 3D model](https://science.nasa.gov/3d-resources/saturn-v/)
+  (NASA/Michael D. Carbajal), NASA 3D Resources, used under NASA's
+  [media guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/).
+- Space Launch System: NASA's printable
+  [Space Launch System (SLS) model](https://science.nasa.gov/3d-resources/space-launch-system-sls/),
+  NASA 3D Resources, used under NASA's media guidelines. Cut into its pieces, colored as it flew on
+  Artemis I and simplified by `tools/sp2-rockets.mjs`; Orion's crew module, hidden in the model, is
+  drawn as a cone.
+- Space Shuttle: NASA's
+  [Space Shuttle (A) model](https://science.nasa.gov/3d-resources/space-shuttle-a/) (NASA/Michael D.
+  Carbajal), NASA 3D Resources, used under NASA's media guidelines. Decoded from Draco, cut into its
+  pieces and colored by `tools/sp2-rockets.mjs` (its cockpit windows' frames, finer than a splat,
+  are left out).
+- None of the three models has a texture, so none carries a logo or insignia (the Saturn V's
+  lettering reads "UNITED STATES" and "USA", with small U.S. flags).
 
 ## Data and climate (lane Data and climate)
 
