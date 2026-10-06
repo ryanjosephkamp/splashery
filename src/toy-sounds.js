@@ -2909,6 +2909,19 @@ export const TOY_SOUNDS = {
     { voice: "tine", f: 660, decay: 1.2, vol: 0.7 },
     { voice: "breath", at: 0.03, f: 700, to: 1.1, decay: 1.2, vol: 0.12 },
   ],
+  // ---- Space r2 (lane Space r2): real worlds --------------------------------------------
+  // Space is silent: a soft breath as the view flies in to a feature.
+  "real-moon": { voice: "breath", f: 340, to: 0.7, decay: 2.2, vol: 0.32 },
+  "real-mars": { voice: "breath", f: 300, to: 0.75, decay: 2.4, vol: 0.34 },
+  "real-earth": { voice: "breath", f: 380, to: 0.65, decay: 2.1, vol: 0.3 },
+  "real-mercury": { voice: "breath", f: 360, to: 0.8, decay: 1.9, vol: 0.3 },
+  "real-venus": { voice: "breath", f: 260, to: 0.7, decay: 2.6, vol: 0.34 },
+  "nearby-stars": { voice: "breath", f: 420, to: 0.6, decay: 2.0, vol: 0.28 },
+  "real-galaxies": { voice: "breath", f: 320, to: 0.85, decay: 2.8, vol: 0.3 },
+  "saturn-v": { voice: "rumble", f: 52, rate: 4, decay: 2.4, vol: 0.85 },
+  "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
+  "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },
+  "star-systems": { voice: "breath", f: 450, to: 0.7, decay: 2.5, vol: 0.27 },
   // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
   "data-in-3d": [
     { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },
