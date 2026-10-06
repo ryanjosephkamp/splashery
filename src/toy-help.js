@@ -722,10 +722,25 @@ export const TOY_HELP = {
     about:
       "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of a typical isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
   },
+  // Lane Elements: the periodic table of real samples (labs).
+  "real-elements": {
+    howTo:
+      "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
+    about:
+      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. About 27 elements have no photo of a real sample, because the heaviest exist only a few atoms at a time; their tiles are hatched. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+  },
+
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
     about:
       "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
+  },
+
+  // Lane Molecule viewer (labs).
+  "molecule-viewer": {
+    howTo: "Tap two atoms for their distance, a third for the angle.",
+    about:
+      "Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA in the Protein Data Bank, small molecules as SDF, MOL or XYZ files. This viewer draws every atom of such a file with splats, in the usual colors: carbon gray, oxygen red, nitrogen blue.\n\nPick a sample, open your own file, or type a PDB code such as 1MBN and press Fetch in the Toy tab; the entry is read only when you ask, and its title, authors and fetch time show beside it. Draw it as a cartoon, balls and sticks, space-filling atoms or a smooth surface, colored by element, chain, residue or B-factor. Tap two atoms for the distance between their centers in ångströms, a third for the angle in degrees. Positions are an experiment's best fit, not a photograph.",
   },
 
   // ---- Gems -----------------------------------------------------------------------------
@@ -1529,7 +1544,7 @@ export const TOY_HELP = {
   perceptron: {
     howTo: "Tap it to watch it try an example, get it wrong, and learn.",
     about:
-      "A perceptron is the simplest artificial neuron, invented by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab. This repeats a scripted learning example; it does not keep training on your taps.",
+      "A perceptron is the simplest artificial neuron, described by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab. This repeats a scripted learning example; it does not keep training on your taps.",
   },
   "multilayer-perceptron": {
     howTo: "Tap it to try all four inputs and fill in the XOR truth table.",
@@ -1552,9 +1567,10 @@ export const TOY_HELP = {
       "A recurrent network, or RNN, reads a sequence, like the words of a sentence, one piece at a time. It keeps a memory called the hidden state: after each word, the state loops back in with the next word, so what it knows builds up as it reads. An LSTM (long short-term memory) adds gates that decide what to forget, what to take in and what to pass on.\n\nTap it: THE, CAT and SAT rise into the cell one at a time. The cell flashes, and the glowing orb, the hidden state, takes on the word's color mixed with what it carried and runs around the loop. In the Toy tab, pick the LSTM style to see its three gates open and shut like shutters, or a 3D model. This is a scripted sequence, not a trained sentence reader.",
   },
   transformer: {
-    howTo: "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
+    howTo:
+      "Tap it to watch a prepared next-word example. Try the Encoder–decoder diagram in the Toy tab.",
     about:
-      "A transformer is a neural network first described in 2017, for translating text. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. Language models built this way predict the next token.\n\nTap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in. The Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, it predicts MUNDO.",
+      "A transformer is a neural network first described in 2017, for translating text. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. Language models built this way predict the next token.\n\nTap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in. The Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, the prepared example ends with MUNDO. The words and attention strengths are prepared; this view does not calculate attention or predict text.",
   },
   "looped-transformer": {
     howTo: "Tap it: the tiles loop through one block, sharper each lap, until 3 + 4 = 7.",
@@ -1582,9 +1598,10 @@ export const TOY_HELP = {
       "Word vectors turn each word into a list of numbers, a point in a space with many directions, so that words used in similar ways land near each other. These have 50 numbers per word, learned from a huge amount of text. Directions in the space can carry meaning: the step from man to woman is much like the step from king to queen.\n\nTap it: an arrow runs out to KING, the step from MAN to WOMAN is added on from there, and it lands right next to QUEEN, which lights up. Type your own A − B + C in the Toy tab, with any of 24,000 common words, and it finds the nearest of the 10,000 most common words, with the runner-up in gray. A text file containing A − B + C works too. These relationships are approximate and can reflect biases in the training text.",
   },
   "sorting-machine": {
-    howTo: "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
+    howTo:
+      "Tap it to sort the bars. Pick one of eight ways to sort, and how to watch it, in the Toy tab.",
     about:
-      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. There are many: bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars of different heights sort themselves, each bar gliding to its new place, while a counter counts the swaps; then they shuffle back. Pick one of eight algorithms in the Toy tab, from bubble sort to heap sort, and watch how differently they work.",
+      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. Bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars sort themselves, each gliding to its new place, while a counter counts the swaps, or moves for merge sort; then they shuffle back. Pick one of eight algorithms in the Toy tab. Listen too: each comparison plays the two bars' notes softly, each swap the moving bar's note, every algorithm on its own instrument, so you hear how it works. The View option shows the same steps as crates of different sizes, a ring of colored pucks that sorts into a color wheel, or the classic dots. The steps come from each algorithm's real code, checked step by step against separate reference code.",
   },
   "half-adder": {
     howTo: "Tap it to add 1 + 1 in binary: the answer is 10.",
@@ -1605,9 +1622,9 @@ export const TOY_HELP = {
   },
   "enigma-machine": {
     howTo:
-      "Tap the keys or type to code letters. Tap the machine to decode. Tap the pad to clear it.",
+      "Tap the keys or type to code letters; tap the machine to decode. Set the rotors in the Toy tab.",
     about:
-      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad under yours. Tap the machine off the keys: the coded letters, typed from the same start, give your message back. With nothing typed, it types the stored message (HELLO, or yours from the Toy tab). Tap the pad for a clean sheet. The real machine had no delete key: tap the rotors, or press Backspace, to turn them back a letter. On a keyboard, hold Shift for P and R. Its rotors and reflector have the historical wirings.",
+      "The Enigma was a cipher machine German forces used to keep radio messages secret in World War II. Each key press steps the rotors, including an occasional double step, and a current runs through the plugboard, three wired rotors and a reflector, lighting a different letter. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the rotors step (with the middle rotor's real double step) and the coded letter lights and goes on the pad. Tap the machine off the keys to decode, or to type the stored message. Tap the pad for a clean sheet; tap the rotors, or press Backspace, to take a letter back. On a keyboard, hold Shift for P and R. Set it in the Toy tab as from a key sheet: three of five rotors, reflector B or C, rings, start letters and up to ten plugboard pairs, shown on the pad. Or pick Barbarossa, 1941, and decode a real German Army message with its published key.",
   },
   bombe: {
     howTo: "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
@@ -1618,21 +1635,21 @@ export const TOY_HELP = {
   // ---- Pictures and pages ---------------------------------------------------------------
   "picture-lab": {
     howTo:
-      "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
+      "Tap the right of the page to go on, the left to go back. With Pop out on (top bar), tap a figure to raise it.",
     about:
-      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nDouble-tap the page to fill the screen with it. Zoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded. Sample chooses a PDF article or a photo before you open your own file.",
+      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nDouble-tap the page to fill the screen with it; zoom in and it is rebuilt sharper. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded. Sample picks a PDF or a photo.\n\nTurn on Pop out in the top bar and tap a picture to raise it off the page in 3D; tap it again to lay it back. Draw a box raises anything else, and Pop-up layers splits one into cutout cards. Drag a risen figure to tilt the view; the Depth slider adds relief.",
   },
   "your-book": {
     howTo:
-      "Tap the right page to turn on, the left to go back. Tap a link to follow it; Pop out lifts a picture.",
+      "Tap the right page to turn on, the left to go back. With Pop out on (top bar), tap a picture to raise it.",
     about:
-      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab and tap to turn its pages (the right page goes forward, the left back), or pull a page over by its edge. Double-tap a page to fill the screen with it; Reading: One page goes a page at a time. Only the pages you reach become splats, so a long book stays light. Pick one of five styles.\n\nLinks work: a link to a website shows its address and opens only if you say so, and a link to another page turns there. Pop out lifts the picture on the page toward you: a photo with its depth, worked out on this device; a chart or diagram as a card. Draw a box lifts anything else; a tap lays it back. Your file stays on your device.",
+      "A book is a stack of pages bound along one edge, so you can turn them one at a time. Before books, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab and tap to turn its pages (the right page goes forward, the left back), or pull a page over by its edge. Double-tap a page to fill the screen with it; Reading: One page goes a page at a time. Pick one of five styles.\n\nLinks work: a web link shows its address and opens only if you say so; a page link turns there. Turn on Pop out in the top bar, then tap a picture to raise it: a photo with its depth, worked out on this device; a chart as a card. Raise up to three; tap one to lay it back. Draw a box raises anything else; Pop-up layers cuts one into cards. Drag a risen figure to tilt the book; the Depth slider sets its depth. Your file stays on your device.",
   },
   "photo-album": {
     howTo:
-      "Tap the right page to turn on, the left to go back, or pull one over. Pop out lifts a photo off the page.",
+      "Tap the right page to turn on, the left to go back. With Pop out on (top bar), tap a photo to raise it.",
     about:
-      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand: two wide photos share a page, one above the other, and two tall ones sit side by side. Double-tap a page to fill the screen with it, or set Reading to One page. Pick a leather, linen or scrapbook cover, and turn the file names on or off.\n\nPop out lifts the photo on the page out of its corners toward you, with its depth worked out on this device. Tap the other photo to lift it instead, or the album to lay it back. Your photos stay on your device.",
+      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand: two wide photos share a page, two tall ones sit side by side. Double-tap a page to fill the screen with it, or set Reading to One page. Pick a leather, linen or scrapbook cover.\n\nTurn on Pop out in the top bar, then tap a photo to lift it out of its corners toward you, with its depth worked out on this device. Tap another to lift it too, or a lifted one to lay it back. Pop-up layers splits it into cutout cards. Drag a lifted photo to tilt the album; the Depth slider sets its depth. Your photos stay on your device.",
   },
   "picture-frame": {
     howTo:
@@ -1652,13 +1669,25 @@ export const TOY_HELP = {
     howTo:
       "Tap to bow the plate and watch the sand find its still lines. In the Toy tab, sing to it or play your audio.",
     about:
-      "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the nearest mode, and a new note clearly held brings a new pattern with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+      "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the plate's nearest mode, and the sand sets off for that figure at once; a new note moves it on, and silence leaves it put. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+  },
+  // Lane Data and climate.
+  "data-in-3d": {
+    howTo:
+      "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
+    about:
+      "A table becomes a 3D chart you can turn: each row a point in a scatter, or rows gathered into bars or a surface whose heights are the mean of the rows in each cell. The labels turn to face you as you go round.\n\nYour file is read in your browser and never uploaded. Headers, quoted fields, dates, categories and missing cells are understood; a very big table is shown as an even random sample, and the Toy tab says so. Save a picture or a turning video from the Toy tab. The samples are a month of earthquakes (USGS), Fisher's 150 iris flowers (UCI, CC BY 4.0) and the CO2 record at Mauna Loa (NOAA).",
+  },
+  "climate-records": {
+    howTo: "Pick a record in the Toy tab and turn it; tap to play the record again.",
+    about:
+      "Two of the clearest measurements of a changing climate, from dated snapshots taken October 5, 2026 (nothing is fetched live).\n\nThe CO2 spiral is NOAA's monthly mean CO2 at Mauna Loa, Hawaii, from May 1974 to August 2026: one turn a year climbing upward, its distance from the middle the CO2 in parts per million. It widens as CO2 rises from 333 to over 427 ppm, faster in later years, and every turn leans toward May, when the air holds the most CO2 before northern plants draw it down. NOAA's record goes back to March 1958, but those early months come from the Scripps Institution of Oceanography, whose terms don't allow reuse here, so they are left out.\n\nThe temperature charts are NASA's GISTEMP v4: how much warmer or cooler each month (bars) or each year (a wall) was across the globe than the 1951–1980 average, from 1880. Blue is cooler, red warmer; 2024 averaged 1.29 °C above that baseline.",
   },
   // Lane QR.
   "qr-code": {
-    howTo: "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
+    howTo: "Type a link in the Toy tab, pick a style or a theme, and tap the code.",
     about:
-      "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles. “Scan view” turns it flat to the camera, and the toy reads its own picture back to check that it still scans. Tap it and the modules burst, fall and fly back to their places. Your text never leaves your device.",
+      "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles and in a color theme or a country's flag colors, always with the contrast a camera needs. The toy reads its own picture back to check that it scans. Tap it and the modules around your finger are knocked loose and snap back; the Toy tab has eight more motions, each ending on a code that scans. Alive moves colors through the code at the speed you choose, and every frame still scans, because each module keeps nearly the same lightness. Your text never leaves your device.",
   },
   // Lane QR lab r2.
   "qr-anatomy": {
@@ -1687,40 +1716,67 @@ export const TOY_HELP = {
     howTo:
       "Tap “Start camera” to see yourself in splats; turn it to see the depth. More in the Toy tab.",
     about:
-      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
+      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan: you stay clear, while scanlines run across the room behind you and a soft glow rims your outline. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
+  },
+  // Lane Sound and light lab.
+  "sound-lab": {
+    howTo:
+      "Tap to play or stop a tone. The Toy tab changes it, starts the metronome, or uses your microphone.",
+    about:
+      "Sound is air pressure going up and down, and this bench shows it four ways. The oscilloscope draws the wave over a few thousandths of a second. The spectrum splits it into frequencies and names the loudest. The spectrogram keeps eight seconds of spectra side by side: a whistle is a bright line, a clap a column. The level is in decibels below full scale (dBFS).\n\nTap to play the tone generator, a sine, square, saw or noise from 20 Hz to 20 kHz, through the speaker when the site's sound is on. Two close tones beat: 440 and 443 Hz swell and fade three times a second. A square wave's extra lines are its odd harmonics. Tap “Use my microphone” to see your voice instead; the sound goes only to the screen. The dB SPL figure is an uncalibrated estimate that assumes a typical phone microphone. The metronome clicks once a beat as it swings from side to side.",
+  },
+  "sound-recorder": {
+    howTo:
+      "Tap Record in the Toy tab, make your sound, then Stop. Tap the toy to play it; trim and save it there.",
+    about:
+      "A recorder for sound effects and ideas. Tap Record and the page keeps what your microphone hears, up to ten minutes. Stop shows the recording as a waveform (how loud, moment by moment) over a spectrogram (which pitches, from 40 Hz at the bottom to 16 kHz at the top). Drag Start and End, or tap Trim the silence, to keep just the part you want, and tap the toy to hear it.\n\nSave as WAV keeps every sample exactly as it was recorded (16-bit, the microphone's rate). Save as a smaller file uses your browser's own compression (Opus or AAC) and takes as long as the sound to make. The recording stays in this page's memory on your device and goes when you close the page; nothing is sent anywhere, and it's saved only to a file you choose. To show the Operator a sound you want, attach the file to a message in the chat.",
   },
   "moving-photo-3d": {
     howTo:
       "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
     about:
-      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model, a small neural network (Depth Anything V2 Small), looks at each frame and gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow and the sky stay back, and as the clip plays the relief moves with it. Turn the picture to see it from the side.\n\nOpen a GIF or a short video in the Toy tab: its first eight seconds are read on your device at the video's own speed (up to 24 frames a second, fewer on a phone), the model (about 27 MB) loads the first time, and each frame takes a moment. Nothing is uploaded. Depth sets how deep the relief is. The sample is a scene from Big Buck Bunny (Blender Foundation, CC BY 3.0).",
+      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model (Depth Anything V2 Small) gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow stays back, and the relief moves with the clip. Turn the picture to see it from the side.\n\nPick a sample clip in the Toy tab (the bunny, Muybridge's horse, a dragon, a bridge and robot, or a machine; Blender Foundation, CC BY, and the horse is public domain), or open your own GIF or video. Its first eight seconds are read on your device at its own speed, the model (about 27 MB) loads the first time, and nothing is uploaded. Depth sets the relief, and Speed plays the clip slower or faster, sound included. Show the original puts the flat clip in a corner, frame for frame.",
   },
   "song-landscape": {
     howTo:
-      "Tap to play or pause; drag to turn or tilt. The Toy tab starts over, scrubs, changes the look or uses the mic.",
+      "Tap to play and watch the land rise with the song; drag to turn or tilt. More in the Toy tab.",
     about:
-      "A song is a wave, but you can also see what it is made of. This toy measures each 40-millisecond slice of it: how loud each pitch is, how loud it is overall, its pitch and its brightness. Open your own song in the Toy tab (it stays on your device), or use the microphone: what it hears is kept in the page's memory to play back, and saved only if you tap Save.\n\nLive (the start) brings the newest sound to the bright line at the front; Whole song shows it all at once. Pitch: low notes on the left, high on the right, louder pitches as higher hills, colored like a rainbow. Loudness: the same, dark blue for quiet to white for loud. Ribbons: six bands, bass at the bottom (teal) to treble at the top (orange), each wider when louder. Tube: a ring per slice, wider when louder, tilted by pitch, turning orange when bright. Lines: one line per slice, like stacked mountain outlines. Mesh: the same as a wire net.",
+      "A song is a wave, but you can also see what it is made of. This toy measures each 40-millisecond slice of it: how loud each pitch is, how loud it is overall, its pitch and its brightness. Open your own song in the Toy tab (it stays on your device), or use the microphone: what it hears is kept in the page's memory to play back, and saved only if you tap Save.\n\nLive opens on an empty plain: each moment rises at the bright line at the front as it plays and moves back. Whole song shows it all at once. Pitch: low notes on the left, high on the right, louder pitches as higher hills, colored like a rainbow. Loudness: the same, dark blue for quiet to white for loud. Ribbons: six bands, bass (teal) to treble (orange), each wider when louder. Tube: a ring per slice, wider when louder, tilted by pitch, turning orange when bright. Lines: one line per slice, like stacked mountain outlines. Mesh: the same as a wire net.",
   },
 
   "model-splats": {
     howTo:
-      "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
+      "Tap to lift the splats off the model; they settle back. Pick or open a model in the Toy tab.",
     about:
       "A 3D model is usually a mesh: a net of flat triangles with colors or a picture (a texture) painted on them. This toy turns a mesh into splats. It scatters points across the surface, more of them where the shape bends sharply or is finely made, and lays a small flat splat on each one, facing the way the surface does. Each splat is sized to its neighbors so the surface closes with no gaps, and takes its color from the texture at that spot. Sharp edges stay sharp.\n\nTap to lift every splat into a loose cloud and watch each one settle back into its own place. Show: Wireframe draws the mesh's own edges as thin splats, so you can see what the splats were made from. Open a .glb, .gltf, .obj or .stl in the Toy tab (select a model's other files with it); it is converted on your device and never uploaded.",
   },
 
   "photo-3d": {
     howTo:
-      "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
+      "Tap to lift the picture's depth, then tap to lay it flat. Pick or open a photo in the Toy tab.",
     about:
-      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose the forest path, cobbled street or still life, or open your own photo in the Toy tab. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
+      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose a sample photo or open your own in the Toy tab. Show the original puts the flat photo in a corner, so you can see what the depth did. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
   },
 
   "video-3d": {
     howTo:
-      "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
+      "Tap to fly the video's path; drag to look around. Show the original plays the flat video beside it.",
     about:
-      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
+      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.\n\nShow the original plays the sample's flat video in step with Replay flight.",
+  },
+
+  // ---- Viewers (lane Viewers) -------------------------------------------------------------
+  "splat-toolkit": {
+    howTo:
+      "Tap to spin it round. Open your own splat file in the Toy tab to crop, clean, shrink or convert it.",
+    about:
+      "A 3D Gaussian splat file is a long list of soft colored blobs, each with a place, a size in three directions, a turn, an opacity and a color (sometimes a color that changes with the viewing angle, called spherical harmonics). This toolkit opens the common formats (PLY, compressed PLY, .splat, SPZ and SOG) and shows what is inside: how many splats, how big the scene is, the harmonics' degree, and the memory it takes.\n\nCrop keeps what is inside a box. Remove floaters finds the stray blobs a capture leaves in the air: for each splat it measures the average distance to its nearest neighbors, and those much farther out than the rest (a statistical outlier filter) are removed; show them in red, or before and after side by side. Shrink keeps the splats that show most. Save writes the result in the format you choose, and Compare puts a second splat beside the first, turning in step. Everything runs on your device in the background; nothing is uploaded.",
+  },
+  "point-clouds": {
+    howTo:
+      "Tap to sweep a lidar scan line across it. Turn on Measure in the Toy tab, then tap two points.",
+    about:
+      "A lidar scanner sends out laser pulses and times their echoes, so each echo becomes a point with its place, how strongly it reflected (intensity) and often a class (ground, vegetation, building, water). Millions of points make a point cloud. This toy opens LAS, LAZ (compressed LAS), PLY, XYZ and PTS files and draws every point as a small splat, colored by height, intensity, classification or the file's own colors.\n\nThe samples are real airborne lidar from the U.S. Geological Survey's 3D Elevation Program, which is mapping the whole country: San Francisco's Palace of Fine Arts, the Golden Gate Bridge's south end with Fort Point, and Meteor Crater in Arizona, a hole 1.2 kilometers wide blasted by an iron meteorite about 50,000 years ago. Measure gives the straight distance between two points, the distance along the ground and the rise. Crop and Thin work on every point, and Save writes PLY, LAS or XYZ. Your files stay on your device.",
   },
 
   // ---- Lab (lane Lab) -------------------------------------------------------------------
@@ -1735,7 +1791,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
     about:
-      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid represents a Gaussian approximation to that spread, which can include vibration and static disorder. Its long axis shows the direction of greatest spread. It is not an exact photograph of an atom's motion.\n\nChoose aspirin at 300 K, the protein crambin, or open a CIF, mmCIF or PDB with displacement records. Probability selects an ellipsoid enclosing 30%, 50% or 90% of the modeled distribution. Draw solid ellipsoids or one soft Gaussian per atom; toggle bonds. Hydrogens can be small spheres, drawn as refined, or hidden. Atoms with only isotropic displacement appear as spheres. Tap to switch illustrative jiggles on or off; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore a structure, not to measure vibration rates.",
+      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid is a Gaussian picture of that spread, which can include vibration and static disorder; its long axis shows the direction of greatest spread. It is not a photograph of an atom's motion.\n\nPick one of 41 measured structures in seven groups (everyday molecules, medicines, molecules of life, minerals and gems, ice and salts, proteins, and DNA and RNA) from the Crystallography Open Database or the Protein Data Bank, or open a CIF, mmCIF or PDB file. Show fills the unit cell with the atoms' symmetry copies, as minerals show by default. Probability sets the ellipsoid to enclose 30%, 50% or 90% of the spread; hard minerals and cold crystals have small ones. Draw solid ellipsoids or one Gaussian per atom, with or without bonds; hydrogens can be small spheres, as refined, or hidden. Tap to jiggle; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore, not to measure.",
   },
   "smlm-microscope": {
     howTo:
@@ -1743,10 +1799,43 @@ export const TOY_HELP = {
     about:
       "Ordinary light microscopy struggles to separate nearby objects about 200 to 300 nanometers apart. Single-molecule localization microscopy finds the centers of isolated fluorescent blinks more precisely, then builds a picture from many positions. Localization precision is not the same as the final image's resolution, and several blinks may come from one molecule. Here each blink is drawn as a Gaussian whose width represents its reported uncertainty.\n\nChoose microtubules and clathrin in a 12 µm cell region, a whole nucleus in 3D, or open a .smlm file or a CSV with positions and uncertainties in nanometers. Color by depth, time frame or channel. Depth scale shows true coordinates or stretches depth fourfold. Precision keeps all localizations or only those better than 5 or 3 nm. Pinch or scroll to zoom; tap for a 200 nm slice at that depth, then tap to restore all depths. Files stay on your device. This is a viewer, not a measurement tool.",
   },
-  "galaxy-box": {
-    howTo: "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
+  "cryoem-map": {
+    howTo:
+      "Tap to cut it open; tap again to close it. Pick a map, a level and the fitted model in the Toy tab.",
     about:
-      "Galaxy simulations follow gas with particles that carry mass, temperature, density and a smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated present day, not a telescope image.\n\nEach particle is shown with a Gaussian whose spread approximates the simulation's smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue and hot orange or red, or by Density to compare the gas concentration. Brightness also increases with density. Switch The box to show or hide the frame. Pinch or scroll to zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the gas's shape but do not give a quantitative column-density measurement.",
+      "Cryo-electron microscopy freezes thousands of copies of a molecule in thin ice, photographs them with electrons and averages the pictures into a 3D map of density. Scientists look at the map as a surface at one density level and build an atomic model into it.\n\nThis toy reads three real maps from the Electron Microscopy Data Bank: apoferritin, a ribosome and a virus shell. It draws the surface at the level EMDB recommends, one small flat splat wherever the density crosses that level, on a grid of about 1 to 1.6 Å voxels that fits a phone. Choose a lower or higher level, color by the fitted model's chains or by distance from the center, and show the model's backbone inside a see-through map. Tap to cut the front half away and see inside. It is for looking, not for measuring or model building.",
+  },
+  "contour-lab": {
+    howTo: "Tap to pull the layers apart; tap again to stack them. Pick a place in the Toy tab.",
+    about:
+      "A contour line joins places at the same height, and a map with them shows a 3D shape on flat paper. This lab cuts real land into layers, one for each step of height, so you can see where the lines come from.\n\nThe land is measured: the U.S. Geological Survey's elevation data for Mount St. Helens, the Grand Canyon or Yosemite Valley, about 35 m between samples. Each layer's edge is a contour line. Tap to lift the layers apart and see each edge on its own; seen from straight above, the edges are the nested rings of a contour map. Lines close together mean steep ground; far apart, gentle. Choose the place and how much the heights are stretched.",
+  },
+  "terrain-box": {
+    howTo: "Tap to fill the land with water; tap again to drain it. Pick a place in the Toy tab.",
+    about:
+      "This is real land in a box: the U.S. Geological Survey's measured heights for Mount St. Helens, the Grand Canyon or Yosemite Valley, a square about 10 km across with a sample every 35 m. Each sample is a small splat, tinted by height and shaded by the sun, and the box's walls show the land cut through.\n\nTap to fill the land with water to a level and watch which valleys flood first, then tap to drain it. It is a level rising, not a model of how real floods flow. Choose the place, stretch the heights to see gentle slopes, and turn on contour lines. The Contour lab next to it shows how those lines are made.",
+  },
+  "galaxy-box": {
+    howTo:
+      "Pinch to zoom into the gas; tap to peel the hot gas. Through the telescope, tap for a new exposure.",
+    about:
+      "Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2 simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4 billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't Gaussian), colored by temperature or density; tap to keep only the cold gas.\n\nThrough a telescope (simulated) shows what an observer might record if the galaxy were 160 million light-years away: its star particles, bluer and brighter when young, blurred by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a filter; each tap starts a new exposure whose grainy photon noise smooths out as light builds up. The colors use a rough rule for how starlight fades with age, so it is a picture to explore, not a measurement.",
+  },
+
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  "ripple-tank": {
+    howTo:
+      "Tap the water to drop a pebble. Pick a setup and slide the frequency and speed in the Toy tab.",
+    about:
+      "A ripple tank shows how waves spread, bend round edges and add up. This one solves the real two-dimensional wave equation on a grid of 216 × 216 cells (finite differences, with a time step small enough to stay stable), drawn as a fine surface of splats lifted by the water's height and lit so the crests catch the light. Sloping beaches at the edges soak the waves up, as in a real tank.\n\nThrough two slits, the waves add where their paths differ by whole wavelengths, so bright lines fan out at the angles d·sin θ = m·λ gives; the dotted lines mark them. Through one slit, the beam spreads wider as the slit gets narrower. The bars on the back wall show how strong the waves are along the far side. The numbers are in the Toy tab.\n\nWhat it simplifies: real ripples on shallow water change speed a little with their wavelength; here every wavelength moves at the speed you set. The heights are exaggerated and the motion is four times slower than real.",
+  },
+
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  "light-bench": {
+    howTo:
+      "Drag a part to move it; turn it by its yellow knob. Tap to change the light. Numbers in the Toy tab.",
+    about:
+      "An optical bench: light traced as rays through real glass. At every surface a ray bends by Snell's law, n₁ sin θ₁ = n₂ sin θ₂, or reflects, from a mirror or totally inside glass past the critical angle. Lenses have real spherical faces, so their edges focus a little off their middles, as real lenses do.\n\nThe glass is Schott N-BK7 (a crown glass) and N-SF11 (a dense flint), with their published Sellmeier formulas for how the index changes with wavelength. Glass bends blue more than red, so the prism fans white light into its colors. The light guide traps light by total internal reflection until a bend is too tight.\n\nThe Toy tab shows the angles, the lensmaker's focal length, the image distance from 1/f = 1/d_o + 1/d_i beside where the traced rays cross, and the prism's deviation for each color.\n\nWhat it simplifies: the bench is flat, white light is nine wavelengths, and the weak reflections at glass surfaces are left out.",
   },
 
   // ---- Imaging (lane Imaging) -----------------------------------------------------------
@@ -1758,17 +1847,18 @@ export const TOY_HELP = {
   "how-ct": {
     howTo: "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
     about:
-      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.",
+      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.\n\nChoose another toy to put in the scanner in the Toy tab. Its CT volume is worked out from its shape: a dense skin around a softer, even inside, since the toy has no real inside to measure.",
   },
   "fruit-mri": {
     howTo: "Drag up or down to scroll through the slices. Tap to play through them all.",
     about:
-      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit in the Toy tab. The faint outline shows where the slice is.",
+      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit and the vision (the realistic gray, night vision or infrared) in the Toy tab. The faint outline shows where the slice is.",
   },
   "electron-microscope": {
-    howTo: "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
+    howTo:
+      "Tap to zoom in a step; the third tap goes back out. Choose the sample and the vision in the Toy tab.",
     about:
-      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface.",
+      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface. Vision in the Toy tab recolors the picture: the realistic gray, a night-vision scope's green, or an infrared camera's colors (for fun: an electron microscope sees no color).",
   },
   "thermal-camera": {
     howTo: "Tap to switch the thermal camera on or off, and watch the tea cool.",
@@ -1778,15 +1868,102 @@ export const TOY_HELP = {
   "walnut-ct": {
     howTo: "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
     about:
-      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
+      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors (CT gray, warm, night vision or infrared) in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
+  // Lane Sound and light lab.
+  "light-lab": {
+    howTo:
+      "Tap for the next element or lamp. The Toy tab picks a prism, a grating or your camera as a spectrometer.",
+    about:
+      "Every element glows in its own colors. Its electrons jump up and fall back, each fall giving off light of one exact wavelength, so an element's light split by a prism is a few sharp lines, as unique as a fingerprint. These are the strong visible lines of sixteen elements measured by NIST, brightness from NIST's relative intensities.\n\nThe prism bends each color by Snell's law, from the glass maker's formula for its index: blue bends most. A grating (a CD, a DVD or a slide) sends each color off where d sin θ = m λ: red bends most, in several orders. Tap to change the lamp and every ray moves. Home spectrometer: hold an old CD or DVD near your camera under a fluorescent lamp, find the rainbow in it and tap “Use my camera”. It calibrates on mercury's 436 and 546 nm lines. Simplified: screens can't show pure spectral colors, and a real lamp's line strengths depend on its pressure and heat.",
+  },
   "fluid-lab": {
     howTo:
       "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
     about:
-      "Everything that flows here is a crowd of small particles, each drawn as a splat. For the liquids, the computer keeps every particle from crowding its neighbors, so the crowd keeps its volume the way water does, and evens out their speeds to make them thick: a little for water, a lot for honey and lava. Where the flow is fast and breaks up, it throws off drops, foam and, for soda, rising bubbles. Smoke and steam are lighter particles that rise, swirl, spread and fade. A flame is a stream of short-lived hot particles that rise and cool from blue at the base to yellow, orange and dull red.\n\nPick a Scene: pour into a glass (the third tap empties it first), splash into a basin, blow out a candle, or blow across a hot cup. Pick a Liquid to see how thickness changes a pour. This is graphics physics: it moves believably, but it is not a validated scientific simulation.\n\nThis lab runs best on a computer. On a phone, choose Auto detail.",
+      "The liquids move as particles. Smoke and steam can use particles or a grid, depending on the rendering path. For the liquids, the computer keeps every particle from crowding its neighbors, so the crowd keeps its volume the way water does, and evens out their speeds to make them thick: a little for water, a lot for honey and lava. Where the flow is fast and breaks up, it throws off drops, foam and, for soda, rising bubbles. Smoke and steam rise, swirl, spread and fade. The flame rises and fades through blue, yellow, orange and dull red.\n\nPick a Scene: pour into a glass (the third tap empties it first), splash into a basin, blow out a candle, or blow across a hot cup. Pick a Liquid to see how thickness changes a pour. This is graphics physics: it moves believably, but it is not a validated scientific simulation.\n\nThis lab runs best on a computer. On a phone, choose Auto detail.",
+  },
+
+  // ---- Arcade (lane Arcade) ------------------------------------------------------------
+  shardball: {
+    howTo:
+      "Tap or press Space to play. Steer with the mouse, a finger or the arrow keys; press 3D for the 3D view.",
+    about:
+      "A ball, a paddle and a wall of bricks. Keep the ball in play and break every brick: where it meets the paddle sets its angle, glazed bricks break at one hit and stone bricks crack first and break at the second. Each brick that breaks falls apart into real pieces that tumble, bounce and fade.\n\nThe 3D button (or V) slides the game into 3D and back. Flat board tips the same board back into a table you look along, and play goes on. Dome takes the paddle down to the bottom of an invisible sphere and spreads the bricks over a dome around and above it; the ball then bounces in three dimensions, with a gentle pull down toward the paddle, and its shadow shows where it will land. Pick a Style and a starting Level in the Toy tab. ⛶ Play fills the whole page; P pauses, R starts again, Esc leaves. The best score stays on this device.",
+  },
+
+  longtail: {
+    howTo:
+      "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+    about:
+      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. Arrow keys, a swipe or the pad turn it toward that side of the screen.\n\nThe tiles are a world you can fold. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube you steer around. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
+  },
+  "grain-garden": {
+    howTo:
+      "Pick sand, water, oil, fire, seeds or stone, then hold and move to pour. Press 3D to tip the box.",
+    about:
+      "Every grain here is one splat, moved by a simple rule sixty times a second. Sand falls and slides off a pile at a slant. Water and oil fall and spread sideways to find their level; oil is lighter, so water sinks under it. Fire flickers upward and dies down to smoke, lighting oil, plants and seeds, and water puts it out. A seed resting by water sprouts a plant that grows up toward the light and sometimes flowers. Stone stays where it is put, for ledges and bowls; Erase clears.\n\nThe box has depth. In 2D you see it face on and pour through its whole depth; the 3D button tips it round so the grains show in 3D, still running by the same rules (Q and E turn it).",
+  },
+  "page-breaker": {
+    howTo:
+      "Open a PDF or a photo in the Toy tab, then tap to play. Steer the paddle; break every word.",
+    about:
+      "Shardball with your own page. Every word on the page (found from its ink) becomes a brick, and so does each piece of its pictures; a photo is cut into tiles. Each brick is made of that piece of the page, splat by splat, so a word that breaks falls apart into pieces of its letters. Each page of a PDF is the next level.\n\nOpen a file in the Toy tab, or play the sample article or photo. The file is read on this device and never leaves it. Flat board and Dome work as in Shardball: the 3D button tips the page back, or spreads its words over a dome.",
+  },
+
+  strata: {
+    howTo:
+      "Tap or press Space to play. Arrows move the falling stone, X turns it, Q and E tip it, Space drops it.",
+    about:
+      "Stones of our own shapes fall down a square well: a tripod, two screws, a plus, a slab and more, most of them shapes that only work in 3D. Move each one across the well and turn it as it falls; when a whole layer of the well is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more layers at once, the more points; every four layers the stones fall faster.\n\n3D looks down into the well from above its rim; 2D is the side view, straight in from the front. Pick a Well in the Toy tab: deep, wide, or a flat slot one stone deep that plays like a flat game. P pauses, R starts again.",
+  },
+  "volley-table": {
+    howTo:
+      "Tap or press Space to serve. Steer your paddle with the mouse, a finger or the arrow keys.",
+    about:
+      "A rally on a felt table against the computer. Where the ball meets your paddle sets its angle, and a paddle moving as it hits puts spin on the ball, so it curves on its way. A ball that gets past a paddle is a point; first to seven wins. The 3D button tilts the table toward you, with the camera low behind your paddle, and the rally goes on. Set how quick the computer is in the Toy tab.",
+  },
+  "stone-belt": {
+    howTo:
+      "Tap or press Space to play. ← → turn, ↑ thrusts, Space fires. On a phone, hold a finger where to go.",
+    about:
+      "The rocks here are the real shapes of seven asteroids, Bennu, Itokawa, Eros, Kleopatra, Geographos, Toutatis and Golevka, from NASA's public-domain models. They drift and tumble across a field that wraps round at its edges. A shot splits a big rock into two smaller ones and a small one into dust, with chips flying off each time; a rock that hits your ship costs a ship. The 3D button drops the camera in behind your ship, so the rocks show their real shapes as they tumble past.",
+  },
+
+  "soft-landing": {
+    howTo:
+      "Tap or press Space to play. ← → tip the lander, ↑ or Space fires. Land slowly and upright on level ground.",
+    about:
+      "The ground here is real. On the Moon it comes from the laser altimeter and camera of NASA's Lunar Reconnaissance Orbiter (the CGI Moon Kit): Tycho crater, Copernicus crater and the Sea of Tranquility, where Apollo 11 landed. On Mars it comes from Mars Global Surveyor's laser altimeter: Gale crater, Jezero crater, Valles Marineris and Olympus Mons, colored by height. Heights are drawn taller than life so the shapes read; the site's card says how much.\n\nGravity pulls the lander down and the engine pushes it the way it points. Touch down slowly, upright and on level ground (the green lights mark flat spots) to score, with more for fuel left; land badly and it breaks apart. 2D is a true slice through the ground; the 3D button lifts the camera to show the whole patch of terrain around the slice, and the flight goes on.",
+  },
+
+  "night-owl-pinball": {
+    howTo:
+      "Hold Space to pull the plunger, let go to launch. ← → work the flippers; on a phone, hold either side.",
+    about:
+      "A pinball table whose steel ball is moved by Splashery's own physics engine, the same one the Hands-on switch uses. The ball rolls down the sloped table under gravity, bounces off the rails and posts as hard as they give back, and the flippers are solid paddles: a flipper swinging as it meets the ball hits it harder than a still one. The three pop bumpers kick the ball away and light up, 100 points each. Keep the ball out of the drain between the flippers; you have three balls. The 3D button moves the view from straight above to the player's end of the table, looking up the slope.",
+  },
+
+  "cast-a-shadow": {
+    howTo:
+      "Drag or use the arrow keys to turn the block until its shadow fills the outline. Q and E roll it.",
+    about:
+      "A carved block hangs between a lamp and a wall, and every piece of it casts its own small shadow. Each block is carved so that from one way its shadow is a picture, a heart, a fish, a key, a house, a star, a tree or a bird, and from the side it is another; from most turns it is a jumble. Turn it until its shadow fills the outline drawn on the wall; the Match chip says how close you are. In 2D you see only the wall, as if you stood at the lamp, and turn the block by its shadow alone; the 3D button steps to the side so the lamp and the block show.",
+  },
+
+  "photo-dash": {
+    howTo: "Tap or press Space to jump. Open your own photo in the Toy tab to run across it.",
+    about:
+      "Your photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track. A glass marble rolls along it by itself, a little faster each lap; tap or press Space to jump the gaps, and catch the sparks on the way. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
+  },
+
+  "note-rider": {
+    howTo:
+      "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+    about:
+      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open a MIDI file of your own. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------
@@ -2028,6 +2205,125 @@ export const TOY_HELP = {
     howTo: "Tap it for a gust of wind that spins the sails hard.",
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
+  },
+
+  // ---- Earth and maps (lane Geo) ------------------------------------------------------
+  "grand-canyon": {
+    howTo:
+      "Tap to flood the canyon from the river up, and watch it drain. Height in the Toy tab sets how tall it stands.",
+    about:
+      "The Grand Canyon in Arizona is about 1,800 meters (a mile) deep, cut by the Colorado River over the last five or six million years through layers of rock laid down over almost two billion years. This block is a 20 by 20 kilometer piece around Grand Canyon Village, the Bright Angel and Garden Creek side canyons and the river below them. Its shape comes from the U.S. Geological Survey's 3D Elevation Program, and its colors from aerial photographs; the cut sides show the canyon's rock layers in their usual order, from the cream Kaibab limestone at the rim to the dark Vishnu schist at the bottom.\n\nTap it and water rises from the river until the canyon is half full, leaving the buttes as islands, then drains away. The flood is imaginary, a way to read the canyon's depth. Height in the Toy tab shows it at true scale or stretched up two or three times.",
+  },
+  "st-helens": {
+    howTo: "Tap to play May 18, 1980; tap again to go back to 1979.",
+    about:
+      "Mount St. Helens, a volcano in Washington State, erupted on May 18, 1980. An earthquake set off the largest landslide ever recorded: the bulging north side of the mountain slid away, a sideways blast flattened the forest for miles, and a column of ash rose about 24 kilometers into the sky. The summit was about 400 meters lower afterward, with a horseshoe-shaped crater open to the north.\n\nThis block shows the mountain before the eruption, from a U.S. Geological Survey model made from 1950s topographic maps, and today, from the 3D Elevation Program and aerial photographs, seen from the north. Tap it to watch the summit fall away while the blast races north and the ash column rises and drifts east; tap again to go back to 1979. The heights are real; the timing and the ash are shortened to a few seconds.",
+  },
+  "sea-floor": {
+    howTo: "Tap to drain the ocean and fill it back.",
+    about:
+      "The Mariana Trench in the western Pacific is the deepest place in the ocean: its Challenger Deep is nearly 11 kilometers (about 7 miles) down. It forms where the Pacific Plate sinks beneath the Mariana Plate, and the same collision built the arc of islands beside it, including Guam. This block covers about 750 kilometers, with heights from NOAA's ETOPO1 relief model, stretched up nine times so the trench and the seamounts show.\n\nTap it and the ocean drains away to bare the sea floor: the plains, the seamounts and the long curve of the trench, which empties last. Then the sea comes back. Colors darken with depth, as on a chart.",
+  },
+  "tide-harbor": {
+    howTo: "Tap to play a day of tides: watch the bar to Bar Island dry out and flood.",
+    about:
+      "Tides are the slow rise and fall of the sea, pulled by the Moon and the Sun. Bar Harbor, Maine, has a range of about 3 to 4 meters, and at low tide a gravel bar appears between the town and Bar Island, so you can walk across for a few hours before the water covers it again.\n\nThis block is a kilometer of that shore, from NOAA's coastal elevation models and aerial photographs, with the heights stretched up six times. Tap it to play NOAA's tide predictions for the spring tide of October 28, 2026: about 25 hours in 12 seconds, two highs and two lows. The curve on the plaque is the prediction, and its dot marks the moment shown; the moored boats ride up and down with the water, and small waves move on the surface.",
+  },
+  hurricane: {
+    howTo: "Tap to play the day Polo grew from 70 to 155 knots; tap again to go back to the start.",
+    about:
+      "Hurricane Polo grew over the warm eastern Pacific, off the coast of Mexico, in September 2026. In the 24 hours from September 21 to 22 its strongest winds rose from 70 to 155 knots (about 290 kilometers an hour), a burst forecasters call rapid intensification, and a clear eye formed in its center.\n\nThe clouds are built from infrared pictures from NOAA's GOES-East satellite at the start and end of that day: colder cloud tops are higher, so each cloud stands as tall as its temperature says. They turn counterclockwise around the eye, faster near the center, with rain falling and low winds spiraling in. Tap it to play the day: the storm follows its best track from the National Hurricane Center, the early ragged clouds give way to the later ones, and it spins faster as it strengthens. The two pictures are real; the change between them is a blend.",
+  },
+  "relief-map": {
+    howTo:
+      "Tap to send a contour line up the cliffs and water down the streams. Change the map and layers in the Toy tab.",
+    about:
+      "A relief map shows the shape of the land. Contour lines join points of the same height: here one every 100 meters, with a heavier line every 500, so lines close together mean a steep slope. This is Yosemite Valley in California, about 18 by 11 kilometers, with El Capitan and Half Dome rising more than 1,000 meters above the Merced River.\n\nThe heights come from the U.S. Geological Survey's 3D Elevation Program, and the streams from the National Hydrography Dataset. In the Toy tab, Map switches between height colors, the aerial photo and land cover (forest, meadow, bare rock and buildings, from the National Land Cover Database), and the switches turn the contour lines and streams on and off. Tap it and a glowing contour climbs from the valley floor to the rim while light runs down every stream, the way the water flows.",
+  },
+  "living-city": {
+    howTo: "Tap for night (the street lamps and windows come on); tap again for day.",
+    about:
+      "A real block of central Helsinki, Finland, from the city's own 3D model, made in 2017 from thousands of aerial photographs. The white Cathedral stands above Senate Square at the top; below are the Market Square and the South Harbor, with its sea pool, and the red-brick Uspenski Cathedral on its rock at the right edge. The block is about 550 meters across.\n\nTap it and the sun goes down: the city darkens under a blue sky as the street lamps and windows come on one by one, each lamp lighting a pool of the street. Tap again for morning. The City of Helsinki shares the model under the CC BY 4.0 license.",
+  },
+
+  "stork-migration": {
+    howTo: "Tap to play the storks' fall migration from Germany to Africa.",
+    about:
+      "White storks fly thousands of kilometers each fall from Europe to Africa, and back in spring. They soar on rising warm air and avoid long sea crossings, so storks from eastern Germany go round the Mediterranean by the Bosporus, Turkey, Israel and the Nile valley.\n\nThese are 30 real storks, juveniles and adults, tracked by GPS in 2013 by S. Rotics and colleagues and published on Movebank under a CC0 license, one position every six hours. Tap it to play July to October in about 12 seconds: each stork leaves its nest when it really did and draws its own trail behind it. Then the season rewinds, and the storks fly their tracks back to their nests. The map is NASA's Blue Marble picture of the Earth's true colors, on heights from NOAA's ETOPO1 stretched up 45 times.",
+  },
+  earthquakes: {
+    howTo: "Tap to play the quakes in time order. Tap the plaque to refresh the live feed.",
+    about:
+      "Every day the U.S. Geological Survey publishes the earthquakes it has located around the world. This globe, in the true colors of NASA's Blue Marble pictures, reads its feed when the toy opens: each dot is a quake, bigger for a stronger one, colored by depth (red and orange shallow, yellow and green deeper, blue deepest). Most lie along the edges of tectonic plates, such as the Pacific's Ring of Fire facing you.\n\nTap the globe to play the quakes in time order: each flashes at its moment. Tap the plaque to fetch the feed again; it shows when the data was fetched. Pick the past week, the past month or a year of the catalog in the Toy tab. If the feed can't be reached, the toy shows a saved snapshot and says so. Nothing is stored or sent.",
+  },
+
+  // Lane Night sky.
+  "night-sky": {
+    howTo: "Drag to look around the sky. Tap a star or a planet to name it.",
+    about:
+      "The sky over a place at a moment: about 5,000 stars down to magnitude 6, the faintest you can see from a dark place, each sized by its brightness and colored by its temperature. The Sun, the Moon and the planets are placed by JPL's formulas for their orbits, and the Moon is a small ball lit from the Sun's side, so you see its real phase. As the Sun rises the faint stars go out first.\n\nPick a city in the Toy tab, type a latitude and longitude, or tap “Use my location” (your browser asks first; the place stays on your device). Set a date from 1800 to 2050, or speed time up to watch the sky turn. The Sun and the Moon are drawn three times their real size.",
+  },
+  // ---- Space r2 (lane Space r2): real worlds ---------------------------------------------
+  "real-moon": {
+    howTo:
+      "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    about:
+      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. Close up, the relief eases to at most twice its height. There are no shadows, and the colors are a little enhanced, as in NASA's map.",
+  },
+  "real-mars": {
+    howTo:
+      "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    about:
+      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air; there are no shadows.",
+  },
+  "real-earth": {
+    howTo:
+      "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    about:
+      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. Close up, the relief eases to at most twice its height. There are no clouds or shadows.",
+  },
+  "real-mercury": {
+    howTo:
+      "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    about:
+      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. There are no shadows.",
+  },
+  "real-venus": {
+    howTo:
+      "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    about:
+      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. There are no shadows.",
+  },
+  "nearby-stars": {
+    howTo: "Tap to fly to Alpha Centauri, Sirius, Barnard's Star, Vega or Arcturus and back.",
+    about:
+      "Every star within about 65 light-years (20 parsecs) of the Sun, where it really is: about 2,200 stars measured by ESA's Gaia spacecraft, from the tiny shift of each star's position as Earth goes round the Sun. About 35 of the brightest, which Gaia cannot measure, like Sirius and Vega, come from the older Hipparcos survey (via the HYG database).\n\nThe Sun is in the middle; the faint rings lie in our Galaxy's plane, and the line points to its center. Each star's color comes from its temperature: red dwarfs, the most common stars, are orange-red; hot stars are blue-white. The sizes show brightness, not size. Tap to fly to a named star and see its distance; the first is Alpha Centauri, with Proxima Centauri, the nearest star of all, beside it.",
+  },
+  "real-galaxies": {
+    howTo: "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
+    about:
+      "Four real galaxies from telescope pictures: the Whirlpool (M51), the Pinwheel (M101) and the Phantom (M74) from the Hubble Space Telescope, and the Southern Pinwheel (M83) from the European Southern Observatory's Very Large Telescope. Every splat takes its color from the picture, so the arms, the pink clouds where stars are born and the dark lanes of dust are where the telescope saw them.\n\nA picture shows nothing of how thick a galaxy is, so the thickness is a guess from galaxies seen edge on: a thin disk and a round bulge at the center. Tap to turn the galaxy edge on and see the guess. Foreground stars of our own Galaxy, and more distant galaxies, are drawn in its disk too.",
+  },
+  "saturn-v": {
+    howTo: "Tap to fire its stages in the order of a real flight.",
+    about:
+      "The Saturn V, the rocket that sent astronauts to the Moon from 1968 to 1972, as splats from NASA's 3D model. Its three stages were the S-IC with five F-1 engines, the S-II with five J-2s and the S-IVB with one J-2; the Apollo spacecraft rode on top under its escape tower.\n\nTap to stage it in the order of Apollo 11's flight, much faster than real: the first stage falls away at 2 minutes 40 seconds, then the ring below the second stage and the escape tower; the second stage at 9 minutes 8 seconds; the spacecraft leaves the third stage about three and a half hours after launch. The model paints a band of the first stage navy; the real one was white, so it is drawn white.",
+  },
+  "real-moons": {
+    howTo:
+      "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    about:
+      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second.",
+  },
+  "real-small-worlds": {
+    howTo: "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    about:
+      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them.",
+  },
+  "star-systems": {
+    howTo: "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",
+    about:
+      "Real planets round other stars, from the NASA Exoplanet Archive: TRAPPIST-1, a cool red dwarf 40 light-years away with seven rocky planets, all closer to it than Mercury is to the Sun; TOI-178, whose six planets go round in a chain of near-simple ratios; and 55 Cancri, with a planet whose year is shorter than a day. The inner Solar System is there to compare.\n\nThe orbits' sizes and periods are measured, and the planets move at those rates, sped up. Star and planets are drawn far larger than to scale. Nobody knows these planets' colors, so they show their size: gray-brown for rocky, blue for mid-sized, tan for giants. Tap to see the system edge on, as we see TRAPPIST-1 and TOI-178: their planets were found as they passed in front of their stars.",
   },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {

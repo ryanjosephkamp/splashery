@@ -1,3 +1,16 @@
+- Clips on Effect review page 2 (lane `PagesR6`), all six posted October 5, 2026, rendered with
+  `tools/pg6-clip.mjs` at 390x844 and watched: `pg6-two-up`, `pg6-turn`, `pg6-tilt`, `pg6-lab`,
+  `pg6-terrain` (a NASA photo opened only for the clip, never in the repo) and `pg6-layers` (P1, the
+  album's tulips).
+- The owner's marks (October 5, 2026): `pg6-turn` good; `pg6-two-up`, `pg6-tilt` and `pg6-lab` "fix"
+  ("popped out images shouldn't overlap"). Fixed: with more than one figure up, each rises straight
+  off its own place, a little less far toward you, and grows only as far as keeps it clear of the
+  others and on its page; a figure up alone still comes toward the middle, and eases back over its
+  place as a second one rises (`pgCrowd`; a Node test checks every frame that two risen figures
+  never overlap). Redone clips posted: `pg6-two-up-r2`, `pg6-tilt-r2`, `pg6-lab-r2` (the old cards
+  marked replaced).
+- READY for the Integrators' full run (October 5, 2026).
+
 # Lane Pages r6: pop-up for every page, and figures you choose (prefix `pg6`)
 
 ## Brief
@@ -123,11 +136,62 @@ unchanged; if they need a change, tell the Operator.
 - Language: American English for every new text (color, center, gray, license, toward, -ize endings,
   dates like "October 5, 2026").
 - Your handoff file: start it with this brief, word for word, under "## Brief", then keep "##
-  State", "## Notes", "## Known issues" and "## For the Operator" current.
-- PR: one draft PR against main (five sections: Summary, Verification, Deviations, Known issues,
-  What was cut), opened early and pushed after each finished item. Finish every working turn with a
-  final message that starts "READY:", "WORKING:" or "BLOCKED:".
+  State", "## Notes
 
-## State
+- **Depth Anything V2 Small on top-down photos** (tested October 5, 2026 with public-domain NASA
+  photos from Wikimedia Commons: "Anti-Atlas Mountains, Morocco (2178).jpg", straight down from
+  orbit, and "Neve Glacier North Cascades USGS.jpg", an oblique aerial; neither is in the repo). The
+  model reads a straight-down photo of land as ground running away from the camera: its depth is a
+  smooth ramp from the top (far) to the bottom (near), and a plane fits it with R^2 = 0.97. The
+  terrain is there, but faint: once the ramp and a wide blur are taken off, what is left (2 to 6% of
+  the range) lines up with the ridges and the dry valleys. So more depth alone would only tilt the
+  photo further. What the toys do: a photo whose depth a plane fits (R^2 over 0.9) keeps its slope
+  when made deeper and gains its local relief instead (the depth less the plane, less a blur 6% of
+  its size wide, scaled up), so it rises as terrain; any other photo simply gets deeper. Depth from
+  shading or a model trained on aerial height maps would do better; neither is vendored (BACKLOG
+  material).
+- The depth model takes about 4 to 5 s a photo here (SwiftShader, one thread), after its first load.
+- P1 (layered pop-up scenes), behind a Toy tab switch, **Pop-up layers**, on all three toys: a
+  raised figure becomes flat cutout cards on the three pop parts: the whole picture behind, then its
+  nearer half and its nearest fifth (cut by the depth model's map at the 50th and 80th percentiles),
+  each a gap in front of the one behind (7% of the figure's shorter side, times the Depth slider).
+  The cards part as the figure rises, and a tilt shows the gaps. A graphic splits into its card and
+  its strongest shapes. One figure at a time in layers (it takes all three pop sheets); raising it
+  lays the others back.
+- The maybes, not built (time went to items 1 to 6 and P1):
+  - **P2, peel a figure off onto a desk:** a long press on a risen figure would let it be dragged
+    off the page onto a plain desk plane beside the book, where it stays as a standing card while
+    the pages turn (a "desk" list in the scene, like `toy.figures`). Costs: a desk surface and a
+    second pose set, and the pop sheets stop being free for new figures.
+  - **P3, a magnifier lens:** the owner's note is right that Capture (Draw a box) already does most
+    of this. A lens would be a round box that follows the finger and lifts what is under it a
+    little, magnified, as a live crop sheet rebuilt as it moves (several times a second: heavy on a
+    phone). I'd skip it, or make Draw a box's rise optionally larger instead.
+  - **P4, folds that open with the page:** a figure marked to fold stands on the page as a V-shaped
+    fold (two halves on hinge parts) that opens to standing as the page lands open and folds flat as
+    it turns, like a pop-up book's V-fold. It needs the page turn's angle passed to the figure's
+    pose (all in the recipe) and figures kept up across turns, the opposite of item 2; so it would
+    be a mode of its own.
 
-WORKING: not started yet (October 4, 2026).
+## Known issues
+
+- A figure tapped before the page's figures have been found turns the page instead; they are found a
+  moment after the page settles.
+- Pop out takes effect on the next frame after the switch: a tap in the very same frame (only a
+  scripted one) misses.
+- A top-down photo made much deeper shows some fine streaks on bright, flat areas when tilted far;
+  the steepest steps are softened, but the depth model's relief there is weak.
+- P1 layers follow the depth model, so a landscape splits into bands (water, shore, sky) rather than
+  a subject in front of a background; a photo with a clear subject (the tulips) reads best.
+- The clip recorder takes about 15 to 30 minutes a clip here (SwiftShader).
+
+## For the Operator
+
+- `tests/bk5.spec.mjs` (lane Books r5's file) changed with the new behavior, only where it assumed a
+  figure rises by itself, one at a time, with the switch in the Toy tab (and the sheet `pop` is now
+  `pop0`); one sheet count in `tests/bk.spec.mjs` went from 41 to 43 (three pop sheets).
+- `tools/bk5-clip.mjs` (Books r5's recorder) still drives the old Toy tab switch; this lane's
+  recorder is `tools/pg6-clip.mjs`.
+- PACKS.md 5c documents the engine pieces: `global: "pop"` controls, `out.tiltFree`, `out.slider`
+  and `info.slider`, `info.figures` and `out.figures`, and the relief's `nearest` and `keep`.
+  SCENE-SCHEMA.md documents `toy.figures`.

@@ -8,7 +8,15 @@ import { TOY_SOUNDS } from "../src/toy-sounds.js";
 import { TOY_HELP } from "../src/toy-help.js";
 import { buildRecipe } from "../src/kit.js";
 import { KINDS } from "../src/effects.js";
-import { RECIPES, xrayColor, WALNUT, CUTS } from "../src/packs/imaging.js";
+import {
+  RECIPES,
+  xrayColor,
+  WALNUT,
+  CUTS,
+  CT_SPECIMENS,
+  visionColor,
+  VISIONS,
+} from "../src/packs/imaging.js";
 
 const IDS = [
   "airport-xray",
@@ -152,4 +160,32 @@ test("the thermal camera crossfades to false colors and the tea cools", async ()
   const later = at(40, 1);
   expect(later[3]).toBeGreaterThan(0.9); // cooled
   at(41, 0);
+});
+
+test("How CT works takes other toys: each builds, with an outside and a volume", async () => {
+  expect(CT_SPECIMENS.length).toBeGreaterThan(10);
+  for (const specimen of CT_SPECIMENS.slice(0, 6)) {
+    const { kit } = await build("how-ct", { specimen }, 60000);
+    const { anim, count: n } = kit.buf;
+    let vol = 0;
+    let fade = 0;
+    for (let i = 0; i < n; i++) {
+      if (anim[i * 4 + 1] === KINDS.volume) vol++;
+      if (anim[i * 4 + 1] === KINDS.fade) fade++;
+    }
+    expect(vol, specimen).toBeGreaterThan(5000);
+    expect(fade, specimen).toBeGreaterThan(5000);
+    expect(kit.data.zHalf, specimen).toBeGreaterThan(0.1);
+  }
+});
+
+test("the visions: gray by default, night vision green, infrared warm", () => {
+  expect(VISIONS[0].id).toBe("gray");
+  const [r, g, b] = visionColor("night", 0.8);
+  expect(g).toBeGreaterThan(2 * Math.max(r, b));
+  const hot = visionColor("infrared", 0.9);
+  expect(hot[0]).toBeGreaterThan(hot[2]);
+  expect(visionColor("gray", 0.5)[0]).toBeCloseTo(0.5, 5);
+  for (const id of ["electron-microscope", "fruit-mri"])
+    expect(RECIPES[id].options.find((o) => o.key === "vision").default).toBe("gray");
 });

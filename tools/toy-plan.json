@@ -2045,8 +2045,8 @@
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
       "effect": "A row of colored bars of different heights sorts itself, the bars swapping as solid pieces, by bubble sort, quicksort or merge sort (an option), with a swap counter; then it shuffles again (5 s).",
-      "sound": "Each bar plays its height as a note, so you hear the sort rise into a scale.",
-      "improved": "AI: eight bars sort by bubble sort, quicksort or merge sort, each a solid bar gliding past the others, with a SWAPS (or MOVES) counter; then they shuffle back (5 s). Owner's review: the algorithm's name is on the toy, and eight algorithms (insertion, selection, cocktail shaker, Shell and heap sort added)."
+      "sound": "Each algorithm has its own voice (lane Computing r2): every comparison plays the two compared bars' notes softly, every swap the moving bar's note, each timed to its step; then the sorted bars play their scale.",
+      "improved": "AI: eight bars sort by bubble sort, quicksort or merge sort, each a solid bar gliding past the others, with a SWAPS (or MOVES) counter; then they shuffle back (5 s). Owner's review: the algorithm's name is on the toy, and eight algorithms (insertion, selection, cocktail shaker, Shell and heap sort added). Computing r2: each algorithm sounds its comparisons and swaps in its own voice; a View option shows the same steps as crates by size, a 3D ring of colored pucks sorted by hue, or the classic dots; every step is checked against reference code (tests/cmp2-sort.spec.mjs)."
     },
     "half-adder": {
       "v": "keep",
@@ -2074,7 +2074,7 @@
       "owner": "The owner's own idea on the Toy Ideas page (lane Machines A).",
       "effect": "An Enigma cipher machine in its wooden box: tap and it types your message, each key going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard; a second tap types the coded text back and gets the message again (about 4 s).",
       "sound": "Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp lights.",
-      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step back, as an operator corrected a mistake (the real machine had no delete key): a tap on the rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its coded letter) off the pad and turns the rotors back to where they stood before it."
+      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step back, as an operator corrected a mistake (the real machine had no delete key): a tap on the rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its coded letter) off the pad and turns the rotors back to where they stood before it. Computing r2: set it like a real Enigma I in the Toy tab (three of rotors I to V in any order, reflector B or C, rings, start letters, up to ten plugboard pairs), the setting shown on the pad, the rotor plates and the cables; a Barbarossa, 1941, preset decodes a real message; proof in tests/cmp2-enigma.spec.mjs."
     },
     "bombe": {
       "v": "keep",
@@ -2087,14 +2087,15 @@
       "v": "new",
       "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
       "effect": "A flat sheet showing what you open: a tap on the right of the page turns to the next page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and pauses a video.",
-      "sound": "A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback."
+      "sound": "A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
+      "improved": "Pages r6 (October 5, 2026): Pop out (the top bar's switch) and Draw a box, as in Your book, for a PDF or a picture: a tap raises a figure (a picture in the PDF, or the whole photo), a drawn box raises anything else, a tap on a risen one lays it back, and a page step waits until they have laid back. A drag on a risen figure tilts the view, and a Depth slider sets its relief."
     },
     "your-book": {
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C, October 2, 2026).",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s).",
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s). Pages r6 (October 5, 2026, labs): Pop out is one switch for every page toy, in the top bar; with it on nothing rises by itself: a tap raises a figure, a tap on another raises that one too (up to three at once), a tap on a risen one lays it back, and a page turn (tap or drag) lays them all back quickly first. While figures stand up, a drag on one (or off the pages) tilts the book to see them from the side; the view comes back level when they lie down. A Depth slider sets a risen figure's relief, up to five times its own, and the depth is kept in the scene and in embeds. A page pulled over plays its page sound once.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
@@ -2102,7 +2103,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
       "sound": "A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
-      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop out lifts the photo on the page in view out of its corners toward you as one solid piece, with its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on the other photo of a page lifts that one instead, and a tap lays it back.",
+      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop out lifts the photo on the page in view out of its corners toward you as one solid piece, with its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on the other photo of a page lifts that one instead, and a tap lays it back. Pages r6 (October 5, 2026, labs): Pop out is one switch for every page toy, in the top bar; with it on nothing rises by itself: a tap raises a photo, a tap on another raises that one too (up to three at once), a tap on a risen one lays it back, and a page turn (tap or drag) lays them all back quickly first. While photos stand up, a drag on one (or off the pages) tilts the album to see them from the side; the view comes back level when they lie down. A Depth slider sets a risen photo's relief, up to five times its own, and the depth is kept in the scene and in embeds. A page pulled over plays its page sound once.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
     "picture-frame": {
@@ -2115,8 +2116,9 @@
     "qr-code": {
       "v": "new",
       "owner": "The owner's idea of October 1, 2026 (\"go hard on it\"), lane QR, October 3, 2026.",
-      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).",
-      "sound": "Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps)."
+      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap knocks the modules around your finger loose: they fly out toward you, tumble and snap back on a spring (2.8 s). The Toy tab adds Assemble, Flip, Burst and return, Ripple (tiles ride a ring wave), Split-flap (row by row, each tile flips round like a departure board), Fold (the code folds like paper and unfolds), Rain (pieces lift off and rain back down, bottom row first, stacking into place) and Point cloud (every splat shrinks to a point, the code dissolves into a drifting cloud and gathers back). Each moves solid pieces and ends on a code that scans.",
+      "sound": "Soft: a wooden knock and a puff for the tap, then the click of pieces snapping back (Burst: a muffled pop, a whoosh and a rush back; Split-flap: a run of light clicks; Rain: a patter; Fold: paper rustles and soft creases).",
+      "improved": "QR r3 (October 5, 2026): crisp module edges (rings of thin splats along each edge: the 10–90% edge about half as wide at phone and desktop size); six new motions and a tap that knocks modules loose; Alive grows to eight patterns (wave, sweep, pulse, flowing gradient, rainbow, current, charge, scan line) with a speed slider from a quarter to four times as fast, every frame scanning; twelve color themes and 24 countries' flag colors, each at least 4.5 : 1."
     },
     "qr-anatomy": {
       "v": "new",
@@ -2140,14 +2142,15 @@
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
       "effect": "A tap bows a square metal plate: every sand grain hops where the plate swings and slides to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.",
-      "sound": "The plate's hum with the sand sliding as it settles (no patter of clicks)."
+      "sound": "The plate's hum with the sand sliding as it settles (no patter of clicks).",
+      "improved": "Live r7 (the owner's report of October 5, 2026): the sand moves live, every grain on every frame. With your audio or the microphone the plate's modes ring as strongly as the sound drives them, so a new note sets the sand off for its figure at once, from where it lies (no new plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio open."
     },
     "song-landscape": {
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
       "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it. View: Live scrolls the landscape with the music like a waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward you, what has played fades away, and a row of caps rises with the loudness at the line.",
       "sound": "The song itself.",
-      "improved": "Live input r2: a long song plays from the file at once (no decoding first) and its picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its wireframe), on cream paper or alone, all on the audio clock."
+      "improved": "Live input r2: a long song plays from the file at once (no decoding first) and its picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its wireframe), on cream paper or alone, all on the audio clock. Live r7: Live opens on an empty plain and the land grows as the song plays: each moment rises at the line at the front as it is heard and moves back, for every song and look; Whole song shows it all."
     },
     "anatomy-atlas": {
       "v": "keep",
@@ -2182,7 +2185,7 @@
       "owner": "The owner's approval of lane Live input (\"live input go\", September 30, 2026; labs only).",
       "effect": "A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near each part is as often as the device allows, and the picture rises into a relief you can turn. Before the camera is on it shows a still life with its depth. A tap flattens the relief into its frame and the next raises it again (about 1.4 s); the picture itself keeps still.",
       "sound": "A soft rising whoosh as the depth comes up; a falling one as it flattens.",
-      "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a hologram look."
+      "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a hologram look. Live r7: steadier and cleaner (colors smoothed against the camera's noise, the depth smoothed within each surface and cut only at real jumps, along the outline in the picture, which follows a moving person between depth answers); the hologram keeps the person clear, with the scanlines and a soft glow only in the room behind."
     },
     "moving-photo-3d": {
       "v": "keep",
@@ -2266,7 +2269,7 @@
       "owner": "The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer \"Science yes\" (lane Science; labs only).",
       "effect": "Each atom of a crystal structure is the Gaussian of its measured displacement tensor U, drawn as a solid ellipsoid at a probability level (50% by default) with its three principal planes, or as one Gaussian splat. The tap makes every atom jiggle through places drawn from its own Gaussian while the bonds fade to a ghost of the mean structure; a second tap stills them. Zoom in with the slider and tap an atom to look there.",
       "sound": "Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer breath as they settle.",
-      "improved": "Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes), mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples: aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0). Science r2 (the owner's review of October 2, 2026: \"really, really big\" and slow on his phone): a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's count (36k on the low tier)."
+      "improved": "Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes), mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples: aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0). Science r2 (the owner's review of October 2, 2026: \"really, really big\" and slow on his phone): a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's count (36k on the low tier). Science r3 (the owner's push notes of October 4, 2026: \"we could maybe add quite a number\", and his \"could you add even more molecules?\" of October 5): 38 structures in seven groups (everyday molecules, medicines, molecules of life, minerals and gems, ice and salts, proteins at atomic resolution, DNA and RNA), all from COD or the PDB (CC0) with real anisotropic U; a Show option fills the unit cell from the space group's symmetry operations (each copy's U turned with it), minerals and salts by default, and completes a molecule split by symmetry. Science r3 r2: three more structures (41): alanine, histidine (neutron, 5 K) and thymidine, a building block of DNA, all from COD (CC0)."
     },
     "smlm-microscope": {
       "v": "keep",
@@ -2280,7 +2283,7 @@
       "owner": "The owner's question of September 29, 2026 (can splats be a real science tool?) and his answer \"Science yes\" (lane Science; labs only).",
       "effect": "The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature and brighter where denser, in a box with a dark floor. Pinch or scroll zooms the camera far into the gas (about 60 times closer) and back out. The tap peels the hot gas away (a second tap brings it back).",
       "sound": "Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it comes back.",
-      "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral)."
+      "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral). Science r3: two more galaxies (m12i 10.4 billion years ago, z = 2; the dwarf m11h), and a telescope view (simulated): the star particles as if 50 Mpc away (100 Mpc before r3), blurred by the seeing (0.1″, 1″ or 2.5″), through blue, red or three filters (starlight fading with age, an approximation), cold dense gas as dust, and a tap that starts an exposure whose photon grain smooths out (tools/sci3-galaxy.mjs). r2 (the owner's \"sharper\", October 5): more stars, and the clip at twice the size (0.1″ seeing was tried as the default: with 250,000 particles standing in for millions of stars, the light shrank to a dim core, so 1″ stays). r3 (\"make sharper\" on the filters): the galaxy moved to 50 Mpc (1″ is 0.24 kpc), so the seeing blurs half as much; thinned dust no longer widens into soft blobs; fainter stars a little brighter."
     },
     "fluid-lab": {
       "v": "keep",
@@ -2469,6 +2472,18 @@
       "effect": "A hop. The capture is one solid piece, so no part moves.",
       "sound": "A short sound that suits the object."
     },
+    "data-in-3d": {
+      "v": "new",
+      "owner": "Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes, ticks and labels that turn to face the camera. A tap drops every point, bar or the surface to the floor and lets it rise back into place with a small overshoot (2.4 s).",
+      "sound": "A soft thud as the marks land, a light knock, and a breath as they rise."
+    },
+    "climate-records": {
+      "v": "new",
+      "owner": "Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.",
+      "effect": "NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a year; GISTEMP temperature anomalies as a field of monthly bars or a wall of yearly stripes. A tap redraws the CO2 record from 1974 behind a bright bead (8 s), or lets the bars sink to zero and grow back.",
+      "sound": "A long, low breath under a soft thud."
+    },
     "dna-to-protein": {
       "v": "keep",
       "owner": "Push Plan pick S13 (October 5, 2026): “DNA to protein is awesome.”",
@@ -2502,42 +2517,356 @@
       "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
       "effect": "Kit-built bags (a suitcase, a backpack in a tray, a cardboard box and a toolbox) ride the belt through the scanner, pushing its lead curtains aside; the screen on top builds each bag's X-ray picture line by line as it crosses the beam, in the scanner's colors (organic orange, inorganic green, metal blue, dense black). A tap sends the next bag.",
       "sound": "The belt's low rumble, the curtains' slap and the scanner's soft beep when the picture is done.",
-      "improved": "Imaging: new toy."
+      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, a 180 by 120 X-ray picture on an even pale screen). Polish (r3): framed closer."
     },
     "how-ct": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026 (lane Imaging; labs only).",
       "effect": "A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and detector arc turn; behind the ring the shell becomes its gray CT volume (the engine's cutting plane). Once scanned, a drag cuts into the volume and shows the chambers and septa. A second tap sweeps back.",
       "sound": "The gantry's knock as it starts and its motor's low run, lower on the way back.",
-      "improved": "Imaging: new toy."
+      "improved": "Imaging: new toy. Imaging r2 (the owner's notes of October 5, 2026): sharper (the labs sharp kernel, twice the splats); 19 other toys can lie in the scanner instead of the shell (In the scanner), each voxelized into a volume with a dense skin. Polish (r3): a finer X-ray fan."
     },
     "walnut-ct": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: a real CT scan of a natural specimen from an openly licensed dataset (lane Imaging; labs only).",
       "effect": "A real cone-beam CT scan of a walnut (CWI, CC BY 4.0) as volume splats, one per 0.3 mm block (resampled to the device's budget). A drag moves a cutting plane through it (front to back, top down or side to side) and shows the shell, the kernel's lobes and the air between them. The tap raises the density window so the kernel melts away and only the shell stays; a second tap brings it back.",
       "sound": "A nutshell's hollow knock as the kernel falls away, a softer one as it comes back.",
-      "improved": "Imaging: new toy, with tools/img-walnut.mjs."
+      "improved": "Imaging: new toy, with tools/img-walnut.mjs. Imaging r2: sharper (the labs sharp kernel, twice the splats); night-vision and infrared colors. Polish (r3): finer splats, a lighter tint on the cut face."
     },
     "fruit-mri": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).",
       "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back.",
       "sound": "An MRI scanner's knocking as it steps through the slices.",
-      "improved": "Imaging: new toy."
+      "improved": "Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a Vision option (gray, night vision, infrared). Polish (r3): finer splats."
     },
     "electron-microscope": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom and a snowflake (lane Imaging; labs only).",
       "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out.",
       "sound": "The stage motor's two soft steps and a low vacuum hum.",
-      "improved": "Imaging: new toy."
+      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats."
     },
     "thermal-camera": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea cooling and a hand warmer (lane Imaging; labs only).",
       "effect": "A kit-built mug of tea, a hand warmer and a glass of ice water on a table. The tap crossfades from normal colors to the thermal camera's false colors (the iron palette), and the tea cools from about 72 to 34 °C over about 24 seconds while its steam thins; the warmer stays warm and the ice water cold. A second tap goes back to normal colors.",
       "sound": "The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it turns off.",
-      "improved": "Imaging: new toy."
+      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats); the tea steps from hot to warm to cooled with short blends (a long crossfade of two copies looked grainy). Polish (r3): one thermal copy of the scene plus three of the mug (four full copies split the budget), so each view is sharper."
+    },
+    "sound-lab": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "A bench instrument whose screen is a panel of splats: a scrolling spectrogram, the spectrum with its loudest frequency, an oscilloscope and a level meter (dBFS, with an uncalibrated dB SPL estimate). A tap plays or stops the tone generator (sine, square, saw or noise; two tones beat), measured on the screen as the speaker plays it; the speaker's cone moves with the signal. A metronome swings from side to side, one beat a swing, and clicks on each beat. The microphone, on a tap, takes over the screens.",
+      "sound": "A soft switch; the tone itself plays from the toy while the site's sound is on.",
+      "improved": "Sound and light lab: new toy. The screens are measured from samples (the generator's own, or the microphone's); tested: a known tone's spectrogram peak, the beat frequency, the metronome's clicks."
+    },
+    "sound-recorder": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "A studio microphone before a screen of splats showing the recording's waveform over its spectrogram, the kept span bright and the trimmed ends dimmed, with a play head. Record (in the Toy tab, from the microphone, kept in memory) lights the microphone's lamp; a tap plays or stops the recording. Trim, then save as WAV or a smaller Opus or AAC file.",
+      "sound": "A soft click.",
+      "improved": "Sound and light lab: new toy; the WAV file round-trips sample for sample (tested)."
+    },
+    "light-lab": {
+      "v": "keep",
+      "owner": "The owner's Push Plan picks S6 and S7 (October 4, 2026; lane Sound and light lab; labs only).",
+      "effect": "Line spectra of sixteen elements from NIST to compare (a tap labels the next element's strongest lines); an optical bench where a lamp's beam passes a 60° prism (Snell's law, Schott's Sellmeier index) or a grating (CD, DVD or slide; d sin θ = m λ, orders −2 to +2), every ray traced onto a card, a tap changing the lamp from white light to each element; and a home spectrometer reading a camera picture (a CD or DVD and a fluorescent lamp), calibrated on mercury's 436 and 546 nm lines.",
+      "sound": "The click of a slide changer.",
+      "improved": "Sound and light lab: new toy; the lines match NIST's tables, the prism's minimum deviation and the grating angles match their formulas, and the spectrometer finds the lines of a made-up picture within 2 nm (tested)."
+    },
+    "real-elements": {
+      "v": "keep",
+      "owner": "The owner's new-ideas pick N2 (yes) on the Push Plan (October 5, 2026; lane Elements; labs only).",
+      "effect": "The 118 elements as real samples on their tiles: open photos of the real elements cut out of their background and raised in 3D by the Photo to 3D depth model. A tap lifts the sample out of its tile toward the viewer (about 2 s), larger and in finer detail, with a back and rim so it turns as a solid piece, swings it slowly and shows its facts beside the stage; a tap on the sample turns it once around; a tap on its tile sets it back. Elements with no photo of a real sample have hatched tiles, and their facts say why. Tile colors by category or block on demand.",
+      "sound": "A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down, a rising blip as it turns.",
+      "improved": "Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons) cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table and a 256 x 256 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab and Los Alamos (tools/rel-facts.mjs), checked by tests against a saved snapshot of the references."
+    },
+    "molecule-viewer": {
+      "v": "keep",
+      "owner": "Push Plan S1, approved by the owner with \"PDB fetch yes\" (October 5, 2026; lane Molecule viewer, labs).",
+      "effect": "A molecule viewer made of splats: open a PDB, mmCIF, SDF/MOL or XYZ file, or fetch an entry from the Protein Data Bank by its code. Draw it as a cartoon, balls and sticks, space-filling atoms or a molecular surface, colored by element, chain, residue, B-factor, along the chain or by secondary structure. A tap on an atom picks it: a ring marker turns round it; a second pick draws a dotted line and gives the distance in ångströms, a third an arc and the angle in degrees. The Play button measures the distance across a bond angle near the middle, then the angle, then clears.",
+      "sound": "Quiet: one soft, low click as an atom is picked.",
+      "improved": "Lane Molecule viewer: readers for PDB, mmCIF, SDF/MOL and XYZ (src/molview/parse.js) in a Web Worker; bonds from the file or from covalent radii; helices and strands from the file or inferred (and labeled so); a blobby Gaussian surface; a splat budget that falls to one Gaussian per atom on big structures (tested up to the human 80S ribosome, 4V6X, 237,685 atoms). Samples (snapshot of October 5, 2026, CC0): 1CRN, 1EMA, 1LYZ, 1BNA and caffeine (CCD CFF)."
+    },
+    "night-sky": {
+      "v": "new",
+      "owner": "Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.",
+      "effect": "The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6 (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star or planet with a ring around it and a few facts beside the stage.",
+      "sound": "One soft, low tine and a faint breath as the ring marks it."
+    },
+    "cryoem-map": {
+      "v": "new",
+      "owner": "The owner's push notes of October 4, 2026 (S17, \"100%\"; the brief's \"a new cryo-EM toy\"; lane Science r3; labs only).",
+      "effect": "A cryo-EM density map from EMDB (apoferritin at 2.6 Å, an E. coli ribosome with an antibiotic at 3.2 Å, an AAV2 capsid at 3.0 Å) as its isosurface at EMDB's recommended level: a small flat splat at each place the density crosses the level (marching cubes' vertices), facing out of the density, colored by the fitted model's nearest chain or by distance from the center. The fitted model's backbone can show inside a see-through map. The tap sweeps a clipping plane in to cut the front half away and show the inside; a second tap closes it.",
+      "sound": "A soft, low whoosh as the cut sweeps in, and a softer one as it closes.",
+      "improved": "Science r3: tools/sci3-cryoem.mjs reads each map (MRC) and EMDB's recommended contour, crops to the density, blurs against aliasing and resamples to at most 128 to 160 voxels a side and stores 8-bit volumes; maps at 2.6 to 3.2 Å, so the new voxels are about half the resolution and EMDB's level keeps its meaning (an atomic-resolution map, 1.2 Å, was tried: blurred to a phone's grid, its peaks fell below the level); the fitted model's Cα and P backbone with the assembly's operators. r2 (the owner's \"sharper\", October 5, 2026): more, smaller and flatter splats (density 1.5, 0.8 of a voxel) and ambient occlusion from the density round each point, which darkens grooves and pockets. r3 (\"keep making it sharper\" on the capsid): one splat per voxel the surface crosses (its crossings averaged), so the edges no longer pile up into a soft rim, and density 2. Science r3 r2 (the owner's \"sharper, polish\" round, October 5): the sharp splat kernel (labs), which crisps each splat's edge (Tenengrad on the AAV capsid 238 → 321)."
+    },
+    "contour-lab": {
+      "v": "new",
+      "owner": "The owner's picks on the Push Plan, October 5, 2026: \"In a box\" yes, terrain first, each after a small lab that teaches what it needs (lane Science r3; labs only).",
+      "effect": "Real land (USGS 3DEP heights of Mount St. Helens, the Grand Canyon or Yosemite Valley) cut into contour layers, each a solid piece with its edge a contour line. The tap lifts the layers apart (a second tap stacks them).",
+      "sound": "A soft wooden slide as the layers lift; a lower one as they settle.",
+      "improved": "Science r3: tools/sci3-terrain.mjs (geotiff.js range reads of the public-domain 1/3″ tiles), src/science/terrain.js; the layers are kit parts. Science r3 r2: the sharp splat kernel (Tenengrad 228 → 252), and the slope fill lit like the slope (no dark dots)."
+    },
+    "terrain-box": {
+      "v": "new",
+      "owner": "The owner's picks on the Push Plan, October 5, 2026: \"In a box\" yes, terrain first (lane Science r3; labs only).",
+      "effect": "Real land in a box (USGS 3DEP heights, a square about 10 km across, 256 × 256 samples), tinted by height and shaded by the sun, with cliffs filled and the box's walls showing the cross-section. The tap raises a sheet of water to 45% of the relief, flooding the valleys first (a level, not a flood model); a second tap drains it.",
+      "sound": "A gentle rush as the water rises; a lower one as it drains.",
+      "improved": "Science r3: the water is a kit part rising; contour lines, a height stretch (1×, 2×, 4×), three places. Science r3 r2: the sharp splat kernel (Tenengrad 209 → 221 on St. Helens), and the splats that fill steep slopes are lit like the slope itself; lit by their own sideways normal they showed as rows of dark dots."
+    },
+    "splat-toolkit": {
+      "v": "new",
+      "owner": "The owner's Push Plan pick S3, \"Useful to everyone who makes splats\" (October 4, 2026; lane Viewers; labs only).",
+      "effect": "A splat file opened on the device: its numbers (splat count, size, harmonics degree, file size, memory); crop with a box (its outline drawn), remove floaters with a statistical outlier filter you tune (removed splats in red, or before and after side by side), shrink to a share of the splats, save as PLY, SPZ, SOG or .splat, and compare two splats side by side. The tap spins it round once, each splat about its own middle, both in step (3 s).",
+      "sound": "A soft swish of air as it spins.",
+      "improved": "Viewers: readers for PLY (binary, text and compressed), .splat, SPZ 1 to 3 and SOG 2 (zipped or as meta.json with its pictures); writers for PLY, SPZ 3, SOG 2 (base colors) and .splat; everything in a worker; the preview draws the most visible splats within the device's budget. Samples: the cactus, strawberry and bee captures, and the cactus with 0.6% stray splats added. Viewers r3 (the owner's \"the toys could still be sharper\", October 5, 2026): as many splats as each device draws smoothly, splats left at their own size (a preview grows them by at most a quarter), two splats stacked one above the other on a phone held upright, and far strays left out of the view so the splat fills the screen."
+    },
+    "point-clouds": {
+      "v": "new",
+      "owner": "The owner's Push Plan pick S2, \"Absolutely, yes ... maybe even a little bit more\" (October 4, 2026; lane Viewers; labs only).",
+      "effect": "LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity, classification (with a legend) or the file's own colors; measure the distance between two tapped points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line across the points from west to east, like a scanner's pass over the ground (2.6 s).",
+      "sound": "An airy rising tone with faint ticks as the scan line crosses.",
+      "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, Meteor Crater. Viewers r2 (the owner's \"Please make sharper\" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's sharper falloff, shaded relief baked into their colors (lit by the slope under each point, darker under canopies), the preview picks one point per small cube instead of a random share (no more holes), and up to the device's full budget. Viewers r3 (the owner's \"the toys could still be sharper\", October 5, 2026): the samples remade with even thinning (one point per small cube, so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or cliff, so edges read crisply."
+    },
+    "real-moon": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Moon as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's landing site) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-mars": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Mars as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and Gale crater) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-earth": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Earth as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-mercury": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Mercury as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "real-venus": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
+      "effect": "The real Venus as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis Corona) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+    },
+    "nearby-stars": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more galaxies, more stellar systems, more planets\"; rockets; lane Space r2; labs only).",
+      "effect": "About 2,240 real stars within 65 light-years of the Sun (ESA Gaia's Catalogue of Nearby Stars, plus the brightest few from Hipparcos), colored by temperature and sized by brightness, round the Sun on faint rings in the Galaxy's plane. A tap flies to the next named star (Alpha Centauri with Proxima beside it, Sirius, Barnard's Star, Vega, Arcturus) with its name and distance in light-years, and back (8 s).",
+      "sound": "Space is silent: a soft breath as the view flies.",
+      "improved": "Space r2: new toy (labs); tools/sp2-stars.mjs reads GCNS from CDS VizieR (CC BY-SA 3.0 IGO) and HYG v4.4 (CC BY-SA 4.0), temperatures from Mamajek's color table."
+    },
+    "real-galaxies": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more galaxies, more stellar systems, more planets\"; rockets; lane Space r2; labs only).",
+      "effect": "M51, M101, M74 and M83 from ESA/Hubble and ESO pictures (CC BY 4.0): every splat takes its picture's color where the telescope saw it; the depth is a labeled guess (a thin exponential disk and a round bulge). A tap turns the galaxy edge on to show the guessed thickness, and back (7 s).",
+      "sound": "Space is silent: a long soft breath as it turns.",
+      "improved": "Space r2: new toy (labs); tools/sp2-galaxies.mjs crops each picture round its galaxy."
+    },
+    "saturn-v": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more galaxies, more stellar systems, more planets\"; rockets; lane Space r2; labs only).",
+      "effect": "NASA's 3D model of the Saturn V as splats. A tap fires its stages in Apollo 11's order, much faster: the S-IC burns and falls away, the interstage ring drops, the escape tower flies off, the S-II burns and falls away, the S-IVB burns, and the spacecraft pulls away from it; then it comes back together (12 s).",
+      "sound": "A low rumble as the engines light, and a thud at each separation.",
+      "improved": "Space r2: new toy (labs) from NASA 3D Resources, sampled with the Studio's model-to-splats code; the pieces are cut where the model's width steps."
+    },
+    "real-moons": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more planets\", photoreal from NASA data; lane Space r2; labs only).",
+      "effect": "Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back.",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice."
+    },
+    "real-small-worlds": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more planets\", photoreal from NASA data; lane Space r2; labs only).",
+      "effect": "Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.",
+      "sound": "Space is silent: a soft breath as the view flies in.",
+      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice."
+    },
+    "star-systems": {
+      "v": "keep",
+      "owner": "The owner's push notes of October 5, 2026 (\"more stellar systems, more planets\"; lane Space r2; labs only).",
+      "effect": "TRAPPIST-1, TOI-178 and 55 Cancri (and the inner Solar System to compare) from the NASA Exoplanet Archive: planets on their measured orbits at their measured periods (sped up, labeled), star and planets drawn larger than to scale (said). A tap turns the system edge on, as Earth sees it, and back (7 s).",
+      "sound": "Space is silent: a soft breath as it turns.",
+      "improved": "Space r2: new toy (labs); tools/sp2-systems.mjs reads pscomppars through the archive's TAP service."
+    },
+    "grand-canyon": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A 20 km block of the Grand Canyon round Grand Canyon Village (USGS 3DEP heights, aerial imagery, the rock layers on its cut sides). The tap floods it from the river to half its depth, leaving the buttes as islands, and drains it (about 8 s).",
+      "sound": "A rush of water rising and a wave as it drains.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs; the water is a sheet that rises as one piece, with cut faces that appear as the level passes them."
+    },
+    "st-helens": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Mount St. Helens from the north, as in 1979 (the USGS pre-eruption DEM). The tap plays May 18, 1980: the summit and north flank fall to today's crater (3DEP and imagery spread out from the crater), a lateral blast races north and an ash column rises and drifts east (about 6 s); a second tap goes back to 1979.",
+      "sound": "A deep thud and rumble, then the eruption's roar; a low rumble going back.",
+      "improved": "Geo r3 (the owner: \"Smoke isn't realistic\"): the ash column is ten stacked segments of cauliflower billows that rise from the vent and swell as they rise, dark and dense near the vent and paler above, shaded by the sun, spreading at the top and drifting east on the wind; the blast's clouds race out and settle as ash."
+    },
+    "sea-floor": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "The Mariana Trench and Mariana Islands (NOAA ETOPO1, nine times taller) under a heaving ocean. The tap drains the ocean (the trench empties last), shows the bare floor and fills it back (about 9 s).",
+      "sound": "A low roar of draining water and a wave as it returns.",
+      "improved": "Geo: new toy; the ocean is a sheet that sinks as one piece, with cut faces that drop away."
+    },
+    "tide-harbor": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026 (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the water, and a dot follows the curve on the plaque (and slides back to its start at the end).",
+      "sound": "Three soft waves through the day.",
+      "improved": "Geo r3 (the owner: \"sharper, especially the tide meter\"): the tide meter is a chart of square pixels leaning toward the viewer, with the water under the curve filled, lines every six hours and the hours written under it, and a crisp dot riding the curve."
+    },
+    "hurricane": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Hurricane Polo (EP17, September 2026) over a Blue Marble map of the Mexican coast: GOES-East infrared cloud tops as tall as their temperature, in rings that turn counterclockwise round the eye (faster inside), with rain and low wind lines. The tap plays September 21 to 22, when it grew from 70 to 155 knots: it follows its best track, the start's clouds give way to the end's (with a clear eye), and it spins faster (about 10 s); a second tap goes back.",
+      "sound": "Wind and rain, then a low rumble; a softer wind going back.",
+      "improved": "Geo: new toy from tools/geo-storm.mjs (GIBS colors turned back into temperatures)."
+    },
+    "relief-map": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Yosemite Valley as a relief map: contour lines every 100 m (heavier every 500), height colors, the aerial photo or NLCD land cover, and the NHD's named streams. The tap sends a glowing contour from the valley floor to the rim while light runs down every stream (about 7 s).",
+      "sound": "A soft scrape and a few drips.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs."
+    },
+    "living-city": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A real 550 m block of central Helsinki (the City of Helsinki's 2017 reality mesh, CC BY 4.0): Senate Square and the Cathedral, the Market Square, the South Harbor and the Uspenski Cathedral. The tap turns day to night (the city dims under a blue sky, each street lamp and window comes on at its own moment, the lamps lighting pools of street, about 4.5 s); a second tap brings the day back.",
+      "sound": "A light switch and the city's low hum, darker at night.",
+      "improved": "Geo r3: rebuilt from the Helsinki reality mesh (the owner: \"was expecting something closer to a photoreal city\"; \"I'm fine with the Helsinki open reality mesh\")."
+    },
+    "stork-migration": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each stork (a white dot, as on a tracking map) moves along its real track and draws a thin trail behind it; month labels and a bar mark the time. Then the season rewinds in 2 s (the storks fly their tracks back to their nests).",
+      "sound": "Wing beats and a stork's bill clatter.",
+      "improved": "Geo r3 (the owner: \"too cartoonish\"): drawn like a real tracking map: thin tracks on the ground (gaps in the fixes left blank), each bird a small white dot with a dark rim, and crisp month labels."
+    },
+    "earthquakes": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A relief globe (NOAA ETOPO1) turning slowly with the USGS earthquake feed on it, read live when the toy opens (a dated snapshot when it can't be reached): a dot per quake, sized by magnitude and colored by depth. A plaque shows the source, the feed and when it was fetched. The tap flashes the quakes in time order (about 8 s); a tap on the plaque fetches the feed again. The Toy tab picks the past week, the past month or a year of the catalog.",
+      "sound": "A low rumble, and a second one.",
+      "improved": "Geo r3 (the owner: \"still needs to be sharper\"; the text below the planet too): about one globe point per picture pixel, a thin layer of air at the limb, crisp quake dots with no glow at rest, and the plaque's text in square pixels."
+    },
+    "ripple-tank": {
+      "v": "keep",
+      "owner": "Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane Optics; labs only).",
+      "effect": "A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the beaches. Bars on the back wall graph the waves' strength.",
+      "sound": "The pebble's plop as it lands, and the soft lap of its rings.",
+      "improved": "Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave speed and the beaches (docs/evidence/ripple-tank.json)."
+    },
+    "light-bench": {
+      "v": "keep",
+      "owner": "Push Plan S9 (yes), October 5, 2026: a light bench with rays traced through real glass (lane Optics; labs only).",
+      "effect": "Rays as thin bright splat lines on a dark bench, traced with Snell's law through parts you drag and turn: a prism that fans white light into its colors on a screen, a lens with the image the lens equation predicts, a flat and a curved mirror, a glass block and a light guide that traps light by total internal reflection. The tap changes the light (white, red, green, blue).",
+      "sound": "The lamp's switch clicks.",
+      "improved": "Optics: new toy (labs). N-BK7 and N-SF11 from Schott's Sellmeier coefficients; the numbers in the Toy tab; tests check Snell's law, the lens equation, the prism's deviation, a mirror's focus and the guide's acceptance angle (docs/evidence/light-bench.json)."
+    },
+    "shardball": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).",
+      "effect": "A brick-breaking game: tap to play; every brick that breaks shatters into real pieces that tumble, bounce and fade. The 3D switch tips the Flat board back into a table, or takes the Dome style's paddle to the bottom of a sphere under a dome of bricks, where the ball bounces in 3D.",
+      "sound": "Knocks off the paddle and the rails, a glassy break for glazed bricks, a crack and clatter for stone, a thud for a lost ball, a rising chime for a new level.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "longtail": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G2 (labs only).",
+      "effect": "A growing-trail game: tap to play; a string of glass beads crawls tile to tile and grows with each berry. The 3D switch folds the flat cross of tiles into a cube, rounds it into a Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.",
+      "sound": "A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone through a tunnel, a thud when it runs into itself.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "grain-garden": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G6 (labs only).",
+      "effect": "A falling-sand box where every grain is a splat: pour sand, water, oil, fire, seeds or stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.",
+      "sound": "A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water puts it out, a pop when a seed sprouts.",
+      "improved": "Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "page-breaker": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G7 (labs only).",
+      "effect": "Shardball whose bricks are the words and pictures of your own PDF page or photo, made of that piece of the page; a word that breaks falls apart into pieces of its letters. Each page of a PDF is a level.",
+      "sound": "Shardball's knocks and breaks.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the picture engine's figure finder."
+    },
+    "strata": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G3 (labs only).",
+      "effect": "Falling stones in a deep well you look down into: our own stone shapes (a tripod, two screws, a plus, a slab), moved and turned as they fall; a full layer crumbles into rubble that falls and fades, and the stones above drop in. 2D is the side view.",
+      "sound": "A soft click as a stone moves, a wooden knock when it turns, a stony thud when it lands, a crunch and rumble when a layer crumbles.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "volley-table": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G4 (labs only).",
+      "effect": "A two-paddle rally against the computer: the paddle sets the angle and a moving paddle puts curving spin on the ball; first to seven. The 3D switch tilts the table toward you.",
+      "sound": "A knock off each paddle, a wooden tap off the rails, a two-note chime for your point, a thud for theirs.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "stone-belt": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G5 (labs only).",
+      "effect": "Blast drifting, tumbling rocks shaped like real asteroids (NASA's public-domain models): big ones split into two smaller ones and small ones into dust, with chips flying each time. The 3D switch drops the camera in behind the ship.",
+      "sound": "A short zap for each shot, a crack and rumble for a big rock, a crunch for a small one, an engine rumble while thrusting.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "soft-landing": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G11 (labs only): the Moon first, then Mars.",
+      "effect": "Land a lander on real ground from NASA's elevation maps (Tycho, Copernicus and the Sea of Tranquility on the Moon; Gale, Jezero, Valles Marineris and Olympus Mons on Mars): slow, upright and level, or it breaks apart into real pieces. 2D is a true slice through the ground; the 3D switch shows the whole patch around it.",
+      "sound": "An engine rumble while thrusting, a soft thud and a three-note chime on touchdown, a crack and clatter on a crash.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "night-owl-pinball": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G13 (labs only).",
+      "effect": "A pinball table moved by Splashery's own rigid-body engine: the steel ball rolls down the slope, bounces off rails and posts, the flippers swing and strike it, pop bumpers kick it away and light up, and the plunger launches it. 2D from above; 3D from the player's end.",
+      "sound": "A clack for each flipper, a bright ding for each bumper, small clicks off the rails, a thud for the plunger and a low thud for a drained ball.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and src/physics/world.js."
+    },
+    "cast-a-shadow": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G9 (labs only).",
+      "effect": "A shadow puzzle: turn a carved block between a lamp and a wall until its shadow (each piece casting its own dark splat) fills the outline of a picture; the block is carved to cast a different picture from the side. 2D shows only the wall; 3D shows the lamp and the block too.",
+      "sound": "A soft rising tine as the shadow gets closer, a four-note chime when it matches.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "photo-dash": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G8 (labs only).",
+      "effect": "A run across your own photo: the line where its sky meets its ground becomes the track, and a glass marble rolls along it, faster each lap; tap to jump the gaps and catch the sparks. The 3D switch raises the photo into a relief by its brightness, and the marble rolls on it.",
+      "sound": "A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a rising three-note chime each lap.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+    },
+    "note-rider": {
+      "v": "keep",
+      "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G10 (labs only).",
+      "effect": "A song's melody comes down a three-lane track as glowing notes, low to high by pitch; steer the sled into each note's lane as it arrives and the note plays, so catching them all plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or your own MIDI file.",
+      "sound": "Each caught note plays on the grand piano at its own pitch; a missed note is silent.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
     }
   }
 }

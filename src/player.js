@@ -13,6 +13,7 @@ import { buildRecipe, meanLuminance, Kit } from "./kit.js";
 import { MotionDriver } from "./motion.js";
 import { rigLayout, tagRig } from "./rig.js";
 import { posePass } from "./pose.js";
+import { poseUniforms, poseUp, poseGravity } from "./effects-pose.js"; // lane Any pose
 import { fxTable } from "./rig-fx.js";
 import { RIGS } from "./rigs.js";
 import { drawPattern, patternUniforms } from "./patterns.js";
@@ -36,7 +37,7 @@ export function ui2On() {
 }
 import { pickKernel } from "./kernels.js"; // Lab
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
-import { createScene, THEMES } from "./state.js";
+import { createScene, THEMES, normalizeFigures } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
 import { HandsOn } from "./physics/hands-on.js"; // lane Physics
@@ -256,6 +257,8 @@ export class Player {
 
   async loadToyNow(toy, { file = null, onProgress } = {}) {
     const token = ++this.loadToken;
+    this.tiltAsk = false; // lane Pages r6 (the app sets the new toy's tilt lock)
+    this.tiltFreed = false;
     const progress = (f, label) => onProgress?.(f, label);
     this.stroke = null;
     this.painter.detach();
@@ -392,6 +395,8 @@ export class Player {
     const close = info.closeUp?.minDistance;
     this.stage.nearFollow = Number.isFinite(close) && close > 0;
     if (this.stage.nearFollow) this.camera.minDistance = info.radius * close;
+    // Lane Night sky: a recipe's inside ({ fov }) shows the toy from its center.
+    this.camera.setInside(info.inside || null);
     this.time = 0;
     this.idle.pokeAt = 0;
     this.idle.pokes = 0;
@@ -535,6 +540,7 @@ export class Player {
     }
     this.startPictures(ctx, toy, recipe, options); // Pictures
     this.startFluids(ctx, token); // Fluids
+    this.startArcade(ctx, token, recipe, options); // Arcade
     const b = ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
@@ -552,6 +558,7 @@ export class Player {
       kernel: recipe.kernel, // Lab
       pickAlpha: recipe.pickAlpha, // Lab r2
       closeUp: recipe.closeUp || null, // Science r2
+      inside: recipe.inside || null, // Night sky
       recipe,
       options,
       credit: def.credit || null,
@@ -717,7 +724,10 @@ export class Player {
     const parts = this.motion.partsData;
     let n = 0;
     const { buf } = proc.ctx;
-    n += posePass(buf.pos, buf.anim, buf.count, proc.container.centers, leaf, parts);
+    // Lane Live r7: relief splats moved by the toy's screen sort where it puts them.
+    const scr = this.screen?.canvas;
+    const relief = scr?.width ? { data: this.screen.g.getImageData(0, 0, scr.width, scr.height).data, width: scr.width, height: scr.height } : null; // prettier-ignore
+    n += posePass(buf.pos, buf.anim, buf.count, proc.container.centers, leaf, parts, relief);
     if (n) proc.container.update(buf.count, true);
     for (const sh of this.pictures?.sheets || []) {
       const d = sh.shown?.data;
@@ -732,6 +742,9 @@ export class Player {
 
   disposeProcedural() {
     this.proc = null;
+    // Arcade: the old game stops with its toy.
+    this.arcade?.destroy();
+    this.arcade = null;
     // Fluids: the old toy's fluids stop with it.
     this.fluids?.destroy();
     this.fluids = null;
@@ -761,6 +774,17 @@ export class Player {
       phone: envelopeOn(),
       onNotice: (text) => this.emit("message", text),
     });
+  }
+
+  // ---- Arcade (lane Arcade) --------------------------------------------------------------
+  // A kit toy whose recipe has an `arcade` block is a game (src/arcade/):
+  // its runtime draws its splats, takes the controls and the camera, and
+  // runs its clock. The module loads only then.
+  async startArcade(ctx, token, recipe, options) {
+    if (!recipe.arcade) return;
+    const { ArcadeRuntime } = await import("./arcade/runtime.js");
+    if (token !== this.loadToken || this.proc?.ctx !== ctx) return;
+    this.arcade = new ArcadeRuntime(this, recipe, options, ctx);
   }
 
   // ---- Pictures (lane Pictures) ----------------------------------------------------
@@ -1209,6 +1233,56 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // Lane Pages r6: a control the top bar sets for every toy that has it (a
+  // recipe control with `global`, such as the page toys' Pop out): on (1)
+  // or off (left out of the scene's controls).
+  setGlobalControl(key, on) {
+    this.motion.setControl(key, on ? 1 : 0, { snap: true });
+    const controls = { ...this.scene.motion.controls };
+    if (on) controls[key] = 1;
+    else delete controls[key];
+    this.scene.motion.controls = controls;
+    this.stage.requestRender();
+  }
+
+  // Lane Pages r6: the slider over the stage (a drive's out.slider) moved.
+  sliderInput(id, value) {
+    const n = (this.motion.sliderIn?.n || 0) + 1;
+    this.motion.sliderIn = { id, value: Math.min(1, Math.max(0, Number(value) || 0)), n };
+    this.stage.requestRender();
+  }
+
+  // Lane Pages r6, each frame: a drive's figure depths go into the scene
+  // (out.figures, a list; an empty one clears them), and its out.tiltFree
+  // frees the tilt of a toy whose tilt is locked while it is set (a book
+  // with figures standing up, to see them from the side). When it ends the
+  // view eases back level and square to the toy, and the lock comes back.
+  pagesR6(out) {
+    if (Array.isArray(out?.figures) && this.scene.toy?.kind === "builtin") {
+      const list = normalizeFigures(out.figures);
+      if (list.length) this.scene.toy.figures = list;
+      else delete this.scene.toy.figures;
+    }
+    const ask = !!out?.tiltFree;
+    if (ask === !!this.tiltAsk) return;
+    this.tiltAsk = ask;
+    const cam = this.camera;
+    if (ask && cam.tiltLock) {
+      cam.tiltLock = false;
+      this.tiltFreed = true;
+      this.emit("tilt", false);
+    } else if (!ask && this.tiltFreed) {
+      this.tiltFreed = false;
+      if (cam.tiltLock) return;
+      cam.setTiltLock(true);
+      const turn = (x) => x - 2 * Math.PI * Math.round(x / (2 * Math.PI));
+      cam.tgt.yaw = cam.cur.yaw + turn(cam.home.yaw - cam.cur.yaw);
+      cam.interact();
+      this.stage.requestRender();
+      this.emit("tilt", true);
+    }
+  }
+
   // A typed character (a real keyboard, while a toy that takes typing is
   // shown): the recipe's `typeKey(ch)` names the control and key it presses.
   // Returns false when the toy does not take that character.
@@ -1228,6 +1302,9 @@ export class Player {
     // Lane Physics: pieces moved in Hands-on go home before the toy's tap.
     if (this.handsOn.mode === "pieces") this.handsOn.reset();
     const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);
+    // Lane Molecule viewer (engine): a tap that has something to say (a
+    // measurement) shows it as a message.
+    if (this.motion.said) this.emit("say", this.motion.said);
     if (r.options) {
       this.switchTo(r);
       return r;
@@ -1342,7 +1419,7 @@ export class Player {
       this.camera.follow = this.handsOn.follow() || [0, 0, 0];
     }
     const moving = this.frozen ? false : this.camera.update(dt);
-    const pose = this.camera.pose();
+    const pose = this.arcade?.pose(this.frozen ? 0 : dt) || this.camera.pose(); // Arcade
     this.camera.viewportHeight = this.canvas.clientHeight || 600;
     this.stage.setCameraPose(pose);
     const key =
@@ -1389,6 +1466,8 @@ export class Player {
       camera: pose,
     });
     const motion = this.effectiveMotion();
+    this.motion.figures = this.scene.toy?.figures || []; // lane Pages r6
+    this.motion.poseUp = poseUp(this.stage); // lane Any pose
     Object.assign(
       u,
       this.motion.compute({
@@ -1398,12 +1477,17 @@ export class Player {
         info,
         cameraPos: pose.position,
         cameraDistance: pose.distance, // Science r2
+        eye: this.motion.recipe?.drive ? this.toRecipe(pose.position) : null, // lane Molecule viewer
       }),
       patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
     );
     const sq = this.handsOn.squishUniforms(); // lane Physics
     u.uSpBodyS = sq ? [sq.axis[0], sq.axis[1], sq.axis[2], sq.amount] : [0, 1, 0, 0];
     u.uSpBodyP = sq ? [sq.pivot[0], sq.pivot[1], sq.pivot[2], 0] : [0, 0, 0, 0];
+    // Lane Any pose: a toy posed whole (Hands-on) has its effects worked out in its own frame.
+    const hs = this.handsOn.mode === "toy" ? this.handsOn.squish : null;
+    const grav = poseGravity(info, info.id ? findToy(info.id) : null);
+    poseUniforms(u, this.stage.toyPose, hs && { axis: hs.axis, point: hs.point, amount: this.handsOn.squishAmp() }, grav, info.half); // prettier-ignore
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);
@@ -1426,9 +1510,11 @@ export class Player {
       this.switchTo({ ...next, echo: true }).finally(() => (this.movingOn = false));
     }
     this.pictures?.update(this.motion.out, this.time); // Pictures
+    this.pagesR6(this.motion.out); // lane Pages r6
     const gliding = this.followView(); // Page focus
     // Fluids: step the toy's fluids on its own clock, steered by out.fluid.
     if (this.fluids && info.kind === "kit") this.fluids.frame(u.uSpKit[0], this.motion.out?.fluid);
+    if (this.arcade && info.kind === "kit") this.arcade.frame(this.frozen ? 0 : dt); // Arcade
     if (this.motion.addonU) {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }

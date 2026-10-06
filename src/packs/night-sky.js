@@ -1,0 +1,937 @@
+// Lane Night sky (docs/handoff/NightSky.md): the stars and planets over you, for any date, time
+// and place, seen from the ground (the camera stands at the dome's center: recipe.inside).
+//
+// - Stars: the HYG database v4.1 to magnitude 6 (CC BY-SA 4.0), one splat each, sized by
+//   brightness and colored by temperature (from B-V). They sit on the sky at their J2000
+//   positions and turn as one part: precession to the date, then the sky's turn for the place's
+//   sidereal time (src/sky/astro.js).
+// - Constellation lines: the Stellarium team's Western sky culture (CC BY-SA), a second part.
+// - The Sun, the Moon and the seven planets: one part each, placed every frame by JPL's
+//   approximate elements and the Astronomical Almanac's lunar series. The Moon is a small ball
+//   lit on the side that faces the Sun, so its phase is the real geometry seen from here.
+// - Daylight and twilight: fade layers on channels 0 and 1, so stars go out faintest first as
+//   the Sun rises, and a glow on the horizon follows the Sun's azimuth.
+// - The place lives in memory only. "Use my location" asks the browser when tapped; the
+//   coordinates are never saved, put in a link or sent anywhere (CLAUDE.md, "Live data").
+
+import { quatAxisAngle, quatFromTo } from "../kit.js";
+import { BITMAP } from "../font.js";
+import {
+  sky,
+  lst,
+  julianDay,
+  SOLAR_DAY_LST,
+  fromRaDec,
+  bvToKelvin,
+  kelvinToRgb,
+  phaseName,
+  TABLE_YEARS,
+  PLANETS,
+} from "../sky/astro.js";
+import {
+  CITIES,
+  DEFAULT_CITY,
+  cityById,
+  deviceZone,
+  toLocalInput,
+  fromLocalInput,
+  formatWhen,
+  formatLatLon,
+  compass,
+} from "../sky/places.js";
+
+const D2R = Math.PI / 180;
+const R2D = 180 / Math.PI;
+
+// Layer radii (recipe units). Splats sort in their built pose, not where a part has turned them,
+// so the backdrop sits far out (it always sorts behind whatever turns in front of it), and the
+// Sun, the Moon, the planets and the marker are built near the center (they always sort in
+// front of the stars) and moved out to R.body by their parts.
+const R = { night: 8, day: 7, glow: 1.3, milky: 0.985, lines: 0.975, stars: 0.96, body: 0.93, mark: 0.925, ground: 0.9, letters: 0.895 }; // prettier-ignore
+const C0 = [0, 0.05, 0]; // where the Sun, the Moon and the planets are built
+const CM = [0, 0.04, 0]; // and the marker
+
+// Horizontal (ENU: east, north, up) to the scene (+X east, +Y up, +Z south) and back.
+const sc = (e) => [e[0], e[2], -e[1]];
+const enuOf = (s) => [s[0], -s[2], s[1]];
+const norm = (v) => {
+  const n = Math.hypot(v[0], v[1], v[2]) || 1;
+  return [v[0] / n, v[1] / n, v[2] / n];
+};
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const smooth = (a, b, x) => {
+  const t = clamp((x - a) / (b - a), 0, 1);
+  return t * t * (3 - 2 * t);
+};
+const mix = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+
+// A rotation matrix (row-major) as a quaternion [x, y, z, w].
+function quatFromMatrix(m) {
+  const [a, b, c, d, e, f, g, h, i] = m;
+  const tr = a + e + i;
+  if (tr > 0) {
+    const s = Math.sqrt(tr + 1) * 2;
+    return [(h - f) / s, (c - g) / s, (d - b) / s, 0.25 * s];
+  }
+  if (a > e && a > i) {
+    const s = Math.sqrt(1 + a - e - i) * 2;
+    return [0.25 * s, (b + d) / s, (c + g) / s, (h - f) / s];
+  }
+  if (e > i) {
+    const s = Math.sqrt(1 + e - a - i) * 2;
+    return [(b + d) / s, 0.25 * s, (f + h) / s, (c - g) / s];
+  }
+  const s = Math.sqrt(1 + i - a - e) * 2;
+  return [(c + g) / s, (f + h) / s, 0.25 * s, (d - b) / s];
+}
+
+// The J2000-to-scene matrix: the sky's turn for a time and place, in scene axes.
+const sceneMatrix = (M) => [M[0], M[1], M[2], M[6], M[7], M[8], -M[3], -M[4], -M[5]];
+
+// A unit vector's frame as a quaternion: x along `along`, z along `out` (made perpendicular).
+function quatFrame(along, out) {
+  const z = norm(out);
+  const x = norm(along.map((v, i) => v - z[i] * dot(along, z)));
+  const y = [z[1] * x[2] - z[2] * x[1], z[2] * x[0] - z[0] * x[2], z[0] * x[1] - z[1] * x[0]];
+  return quatFromMatrix([x[0], y[0], z[0], x[1], y[1], z[1], x[2], y[2], z[2]]);
+}
+
+// Angular size (degrees, a Gaussian's sigma) and opacity of a point of light by magnitude.
+// Polish (October 5, 2026: "the toys could still be sharper"): a tight core, so a star reads as a
+// point; the brightest get a faint halo of their own instead of a bigger blob.
+export const starSigma = (mag) => clamp(0.065 * Math.pow(10, -0.07 * (mag - 6)), 0.065, 0.2);
+export const starAlpha = (mag) => clamp(1.05 - (mag - 0.5) * 0.1, 0.62, 1);
+// The daylight level (channel 0) at which a point of that magnitude goes out.
+const fadeAt = (mag) => clamp(0.03 + (6 - mag) * 0.075, 0.03, 0.9);
+
+// Daylight (0 night .. 1 full day) and twilight glow for the Sun's altitude.
+export function skyLight(sunAlt) {
+  const day = clamp((sunAlt + 18) / 22, 0, 1);
+  const glow = sunAlt > 8 || sunAlt < -18 ? 0 : Math.exp(-(((sunAlt + 3) / 6.5) ** 2));
+  return { day, glow };
+}
+
+// ---- The catalog ------------------------------------------------------------------------------
+
+const CAT = { data: null, vec: null, conName: new Map() };
+
+async function readCatalog() {
+  if (CAT.data) return CAT.data;
+  const url = new URL("../../assets/toys/night-sky/sky.json", import.meta.url);
+  let text;
+  if (url.protocol === "file:") {
+    const fs = await import("node:fs/promises");
+    text = await fs.readFile(url, "utf8");
+  } else {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error("Could not load the star catalog.");
+    text = await r.text();
+  }
+  const d = JSON.parse(text);
+  CAT.data = d;
+  CAT.vec = d.ra.map((ra, i) => fromRaDec(ra, d.dec[i]));
+  for (const c of d.constellations) CAT.conName.set(c.iau, c.name);
+  return d;
+}
+
+// ---- State (memory only) ----------------------------------------------------------------------
+
+const SPEEDS = [
+  { id: "1", label: "Real time", rate: 1 },
+  { id: "60", label: "1 minute a second", rate: 60 },
+  { id: "600", label: "10 minutes a second", rate: 600 },
+  { id: "3600", label: "1 hour a second", rate: 3600 },
+  // The owner, October 5, 2026: slower by default, and a choice of speed. These hold the clock
+  // at one time of night while the days go by, so the sky stays still and the Moon walks
+  // through its phases (each whole day is the real sky; in between, the days are blended).
+  { id: "day2", label: "Same time each day: a day every 2 seconds", rate: 43200, daily: true },
+  { id: "day1", label: "Same time each day: a day a second", rate: 86400, daily: true },
+  { id: "day4", label: "Same time each day: 4 days a second (fast)", rate: 345600, daily: true },
+  { id: "0", label: "Stopped", rate: 0 },
+];
+
+const MIN_MS = Date.UTC(TABLE_YEARS[0], 0, 1);
+const MAX_MS = Date.UTC(TABLE_YEARS[1], 11, 31, 23, 59);
+
+export const SKY = {
+  place: { ...cityById(DEFAULT_CITY) },
+  ms: null, // the sky's time now (ms)
+  lastT: null, // the toy clock at the last frame
+  t: 0,
+  rate: 1, // sky seconds a second now; it eases toward target
+  target: 1,
+  glide: null, // { from, to, t0, dur }: a short glide to a time picked in the panel
+  dailyAnchor: null, // the moment whose clock time a "same time each day" speed holds
+  daily: false,
+  speed: "1",
+  picked: null, // { kind: "star" | "body", i | name }
+  pickedAt: 0,
+  last: null, // the last frame's sky (for taps and the panel)
+  locating: false,
+  locError: "",
+};
+
+const skyTime = () => clamp(SKY.ms ?? Date.now(), MIN_MS, MAX_MS);
+
+// A new time. From the panel, a jump of under two days glides there in a second (the sky turns
+// to it); a longer one, or one from the test hook, is instant.
+function setTime(ms, glide = false) {
+  const to = clamp(ms, MIN_MS, MAX_MS);
+  SKY.dailyAnchor = to;
+  if (glide && SKY.ms !== null && Math.abs(to - SKY.ms) < 2 * 86400000)
+    SKY.glide = { from: SKY.ms, to, t0: SKY.t, dur: 1 };
+  else {
+    SKY.glide = null;
+    SKY.ms = to;
+  }
+  refreshPanel();
+}
+
+// A new speed eases in (and out, to a stop) over about a second, so the sky never lurches.
+function setSpeed(id, instant = false) {
+  const s = SPEEDS.find((x) => x.id === id) || SPEEDS[0];
+  // The clock time a "same time each day" speed holds (kept while one of them stays chosen).
+  const was = SPEEDS.find((x) => x.id === SKY.speed);
+  if (s.daily && !was?.daily) SKY.dailyAnchor = SKY.ms ?? Date.now();
+  SKY.target = s.rate;
+  if (instant) SKY.rate = s.rate;
+  SKY.speed = s.id;
+  refreshPanel();
+}
+
+// The sky's clock, one frame on (dt in seconds of the toy's clock).
+function stepTime(t) {
+  const dt = SKY.lastT === null || t < SKY.lastT ? 0 : Math.min(0.25, t - SKY.lastT);
+  SKY.lastT = t;
+  SKY.t = t;
+  if (SKY.ms === null) SKY.ms = Date.now();
+  SKY.rate += (SKY.target - SKY.rate) * (1 - Math.exp(-dt / 0.35));
+  if (Math.abs(SKY.target - SKY.rate) < 1e-3 * Math.max(1, Math.abs(SKY.target)))
+    SKY.rate = SKY.target;
+  const g = SKY.glide;
+  if (g) {
+    const u = clamp((t - g.t0) / g.dur, 0, 1);
+    SKY.ms = g.from + (g.to - g.from) * u * u * (3 - 2 * u);
+    if (u >= 1) SKY.glide = null;
+  } else SKY.ms = clamp(SKY.ms + dt * SKY.rate * 1000, MIN_MS, MAX_MS);
+  return SKY.ms;
+}
+
+function setPlace(p) {
+  SKY.place = p;
+  SKY.picked = null;
+  refreshPanel();
+}
+
+// ---- Facts for a tap --------------------------------------------------------------------------
+
+const BODY_NAMES = { sun: "the Sun", moon: "the Moon", mercury: "Mercury", venus: "Venus", mars: "Mars", jupiter: "Jupiter", saturn: "Saturn", uranus: "Uranus", neptune: "Neptune" }; // prettier-ignore
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+const fmt = (n, d = 0) => n.toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d }); // prettier-ignore
+const where = (alt, az) =>
+  alt < 0
+    ? `Below the horizon (${fmt(-alt)}° under, toward ${compass(az)})`
+    : `${fmt(alt)}° up, toward ${compass(az)} (azimuth ${fmt(az)}°)`;
+
+function starTitle(i) {
+  const d = CAT.data;
+  return d.name[i] || d.des[i] || (d.hip[i] ? `HIP ${d.hip[i]}` : "A star");
+}
+
+function starFacts(i, s) {
+  const d = CAT.data;
+  const out = [];
+  const con = CAT.conName.get(d.con[i]);
+  const parts = [];
+  if (d.name[i] && d.des[i]) parts.push(d.des[i]);
+  if (con) parts.push(`in ${con}`);
+  if (parts.length) out.push(parts.join(", "));
+  out.push(`Magnitude ${fmt(d.mag[i], 2)}`);
+  if (d.dist[i]) {
+    const ly = d.dist[i] * 3.26156;
+    out.push(`${ly < 100 ? fmt(ly, 1) : fmt(Math.round(ly / 10) * 10)} light-years away`);
+  }
+  if (d.ci[i] !== null) out.push(`About ${fmt(Math.round(bvToKelvin(d.ci[i]) / 100) * 100)} K at its surface (B−V ${fmt(Math.abs(d.ci[i]) < 0.005 ? 0 : d.ci[i], 2)})`); // prettier-ignore
+  if (d.spect[i]) out.push(`Spectral type ${d.spect[i]}`);
+  const enu = mulMV(s.matrix, CAT.vec[i]);
+  const alt = Math.asin(clamp(enu[2], -1, 1)) * R2D;
+  const az = (((Math.atan2(enu[0], enu[1]) * R2D) % 360) + 360) % 360;
+  out.push(where(alt, az));
+  return out;
+}
+
+const mulMV = (m, v) => [
+  m[0] * v[0] + m[1] * v[1] + m[2] * v[2],
+  m[3] * v[0] + m[4] * v[1] + m[5] * v[2],
+  m[6] * v[0] + m[7] * v[1] + m[8] * v[2],
+];
+
+function bodyFacts(name, s) {
+  const b = s.bodies[name];
+  const out = [];
+  if (name === "moon") {
+    out.push(`${phaseName(b.illum, b.waxing)}, ${fmt(b.illum * 100)}% lit`);
+    out.push(`${fmt(Math.round(b.distKm / 100) * 100)} km away`);
+    out.push("Drawn three times its real size");
+  } else if (name === "sun") {
+    out.push(`${fmt(b.delta * 149.5978707, 1)} million km away`);
+    out.push(`Its light takes ${fmt(b.delta * 8.3167, 1)} minutes to reach us`);
+    out.push("Drawn three times its real size. Never look at the real Sun.");
+  } else {
+    out.push(`Magnitude ${fmt(b.mag, 1)}`);
+    out.push(`${fmt(b.delta, 2)} au from Earth (${fmt(b.delta * 149.5978707)} million km)`);
+    out.push(`Its light takes ${fmt(b.delta * 8.3167, 1)} minutes to reach us`);
+    if (name === "mercury" || name === "venus") out.push(`${fmt(((1 + Math.cos(b.phase * D2R)) / 2) * 100)}% lit`); // prettier-ignore
+  }
+  out.push(where(b.alt, b.az));
+  return out;
+}
+
+// The thing nearest a direction (scene), within a reach that grows with the field of view.
+export function pickAt(dirScene, s = SKY.last, reachDeg = 4) {
+  if (!s || !CAT.data) return null;
+  const e = norm(enuOf(dirScene));
+  let best = null;
+  const consider = (cand, ang, mag) => {
+    if (ang > reachDeg) return;
+    const score = ang - 0.35 * clamp(6 - mag, 0, 8) * (reachDeg / 4);
+    if (!best || score < best.score) best = { ...cand, score, ang };
+  };
+  for (const name of ["sun", "moon", ...PLANETS]) {
+    const b = s.bodies[name];
+    const ang = Math.acos(clamp(dot(e, b.enu), -1, 1)) * R2D;
+    consider({ kind: "body", name }, ang - (name === "sun" || name === "moon" ? 1 : 0), Math.min(b.mag, 0) - 2); // prettier-ignore
+  }
+  const d = CAT.data;
+  for (let i = 0; i < d.count; i++) {
+    if (d.mag[i] > 6.2) continue;
+    const v = mulMV(s.matrix, CAT.vec[i]);
+    const c = dot(e, v);
+    if (c < 0.99) continue; // within about 8 degrees
+    consider({ kind: "star", i }, Math.acos(clamp(c, -1, 1)) * R2D, d.mag[i]);
+  }
+  return best;
+}
+
+// ---- The panel ---------------------------------------------------------------------------------
+
+let panel = null;
+const refreshPanel = () => panel?.refresh();
+
+function renderPanel() {
+  const box = document.createElement("div");
+  box.className = "sky-panel";
+  box.id = "sky-panel";
+  const el = (tag, props = {}, ...kids) => {
+    const n = Object.assign(document.createElement(tag), props);
+    n.append(...kids);
+    return n;
+  };
+  const row = (label, ...kids) => el("label", { className: "row" }, el("span", { textContent: label }), ...kids); // prettier-ignore
+
+  // Place.
+  const city = el("select", { id: "sky-city" });
+  for (const c of CITIES) city.add(new Option(c.name, c.id));
+  city.add(new Option("Your location or a typed place", "other"));
+  city.addEventListener("change", () => {
+    if (city.value !== "other") setPlace({ ...cityById(city.value) });
+  });
+  const locate = el("button", { type: "button", id: "sky-locate", textContent: "Use my location" });
+  const locNote = el("p", { className: "note", id: "sky-loc-note" });
+  locate.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      SKY.locError = "This browser can't give a location. Pick a city or type one below.";
+      refreshPanel();
+      return;
+    }
+    SKY.locating = true;
+    SKY.locError = "";
+    refreshPanel();
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        SKY.locating = false;
+        const { latitude, longitude } = pos.coords;
+        setPlace({ id: "me", name: "Your location", lat: latitude, lon: longitude, tz: deviceZone() }); // prettier-ignore
+      },
+      (err) => {
+        SKY.locating = false;
+        SKY.locError =
+          err?.code === 1
+            ? "Location is off for this page. Pick a city or type a place instead."
+            : "Couldn't find your location. Pick a city or type a place instead.";
+        refreshPanel();
+      },
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 600000 },
+    );
+  });
+  const lat = el("input", { type: "number", id: "sky-lat", min: -90, max: 90, step: "any", placeholder: "Latitude", inputMode: "decimal" }); // prettier-ignore
+  const lon = el("input", { type: "number", id: "sky-lon", min: -180, max: 180, step: "any", placeholder: "Longitude", inputMode: "decimal" }); // prettier-ignore
+  lat.setAttribute("aria-label", "Latitude (north positive)");
+  lon.setAttribute("aria-label", "Longitude (east positive)");
+  const typed = el("form", { className: "input-row", id: "sky-typed" }, lat, lon, el("button", { type: "submit", textContent: "Go" })); // prettier-ignore
+  typed.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const a = Number(lat.value);
+    const o = Number(lon.value);
+    if (!(lat.value !== "" && lon.value !== "" && Math.abs(a) <= 90 && Math.abs(o) <= 180)) {
+      SKY.locError =
+        "Type a latitude from −90 to 90 and a longitude from −180 to 180 (east positive).";
+      refreshPanel();
+      return;
+    }
+    SKY.locError = "";
+    setPlace({ id: "typed", name: formatLatLon(a, o), lat: a, lon: o, tz: deviceZone() });
+  });
+
+  // Time.
+  const now = el("button", { type: "button", id: "sky-now", textContent: "Now" });
+  now.addEventListener("click", () => {
+    setTime(Date.now(), true);
+    setSpeed("1");
+  });
+  const speed = el("select", { id: "sky-speed" });
+  for (const s of SPEEDS) speed.add(new Option(s.label, s.id));
+  speed.addEventListener("change", () => setSpeed(speed.value));
+  const when = el("input", { type: "datetime-local", id: "sky-when" });
+  when.min = `${TABLE_YEARS[0]}-01-01T00:00`;
+  when.max = `${TABLE_YEARS[1]}-12-31T23:59`;
+  const whenForm = el("form", { className: "input-row", id: "sky-when-form" }, when, el("button", { type: "submit", textContent: "Go" })); // prettier-ignore
+  whenForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ms = fromLocalInput(when.value, SKY.place.tz);
+    if (Number.isFinite(ms)) setTime(ms, true);
+  });
+  const readout = el("p", { className: "note", id: "sky-readout" });
+
+  box.append(
+    row("Place", city),
+    el("div", { className: "button-row" }, locate),
+    typed,
+    locNote,
+    el("div", { className: "button-row" }, now),
+    row("Speed", speed),
+    whenForm,
+    readout,
+    el("p", {
+      className: "note",
+      textContent: `Drag to look around; pinch to zoom. Tap a star or a planet to name it. Dates from ${TABLE_YEARS[0]} to ${TABLE_YEARS[1]}, the years JPL's planet table is made for.`,
+    }),
+  );
+  panel = {
+    refresh() {
+      const p = SKY.place;
+      city.value = p.id === "me" || p.id === "typed" ? "other" : p.id;
+      speed.value = SKY.speed;
+      locate.disabled = SKY.locating;
+      locate.textContent = SKY.locating ? "Finding you…" : "Use my location";
+      if (SKY.locError) locNote.textContent = SKY.locError;
+      else if (p.id === "me")
+        locNote.textContent = `Using your location (about ${formatLatLon(p.lat, p.lon)}). It stays on this device: never saved, put in a link or sent anywhere.`; // prettier-ignore
+      else if (p.id === "typed") locNote.textContent = `Showing ${p.name}, in your own time zone.`;
+      else locNote.textContent = `${p.name}: ${formatLatLon(p.lat, p.lon)}.`;
+      if (document.activeElement !== when && SKY.ms !== null) when.value = toLocalInput(skyTime(), p.tz); // prettier-ignore
+      if (SKY.ms !== null) readout.textContent = formatWhen(skyTime(), p.tz);
+    },
+  };
+  panel.refresh();
+  return box;
+}
+
+// ---- Building the sky -------------------------------------------------------------------------
+
+// Even points on the sphere between two altitudes (degrees), by the golden angle.
+function* band(n, altLo, altHi) {
+  const lo = Math.sin(altLo * D2R);
+  const hi = Math.sin(altHi * D2R);
+  const g = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < n; i++) {
+    const z = lo + (hi - lo) * ((i + 0.5) / n);
+    const r = Math.sqrt(1 - z * z);
+    const a = i * g;
+    yield { enu: [r * Math.sin(a), r * Math.cos(a), z], alt: Math.asin(z) * R2D, az: ((a * R2D) % 360 + 360) % 360 }; // prettier-ignore
+  }
+}
+
+// A point splat: an explicit round size (sigma) in recipe units.
+const dotSplat = (p, sigma, color, opacity, extra = {}) => ({
+  p,
+  scales: [sigma, sigma, sigma],
+  quat: [0, 0, 0, 1],
+  color,
+  opacity,
+  ...extra,
+});
+
+// A splat lying flat on the dome, facing the center.
+const sheetSplat = (p, sigma, color, opacity, extra = {}) => ({
+  p,
+  scales: [sigma, sigma, sigma * 0.25],
+  quat: quatFromTo([0, 0, 1], norm(p)),
+  color,
+  opacity,
+  ...extra,
+});
+
+// The skyline: low hills, a degree or two high, from a few sines (the same for every place).
+const skyline = (az) => {
+  const a = az * D2R;
+  return 0.55 + 0.45 * Math.sin(3 * a + 1.3) + 0.35 * Math.sin(7 * a + 0.4) + 0.2 * Math.sin(17 * a + 2.1) + 0.12 * Math.sin(41 * a); // prettier-ignore
+};
+
+// Fade params for the kit's "fade" kind: [level, width], a negative width fades in.
+const FADE = "fade";
+
+function buildSky(k, o) {
+  const d = CAT.data;
+  const N = k.count;
+  const out = [];
+  const push = (s) => out.push(s);
+  const P = (name, pivot = [0, 0, 0]) => k.part(name, { pivot });
+  const parts = {
+    stars: P("stars"),
+    milky: P("milky"),
+    lines: P("lines"),
+    glow: P("glow"),
+    mark: P("mark", CM),
+  };
+  const c0 = C0;
+  for (const b of ["sun", "moon", ...PLANETS]) parts[b] = P(b, c0);
+
+  // The night sky, a gradient from the zenith to a faint glow at the horizon.
+  const nNight = Math.round(N * 0.24);
+  const spacing = (n, altLo, altHi) => Math.sqrt((2 * Math.PI * (Math.sin(altHi * D2R) - Math.sin(altLo * D2R))) / n); // prettier-ignore
+  let sig = spacing(nNight, -4, 90) * 0.85;
+  for (const q of band(nNight, -4, 90)) {
+    const h = clamp(q.alt / 90, 0, 1);
+    const col = mix([0.07, 0.075, 0.11], [0.008, 0.012, 0.035], Math.pow(h, 0.45));
+    push(
+      sheetSplat(
+        sc(q.enu).map((v) => v * R.night),
+        sig * R.night,
+        col,
+        1,
+      ),
+    );
+  }
+  // The day sky fades in over it as the Sun comes up (channel 0).
+  const nDay = Math.round(N * 0.12);
+  sig = spacing(nDay, -4, 90) * 0.9;
+  for (const q of band(nDay, -4, 90)) {
+    const h = clamp(q.alt / 90, 0, 1);
+    const col = mix([0.7, 0.8, 0.92], [0.2, 0.42, 0.82], Math.pow(h, 0.5));
+    push(sheetSplat(sc(q.enu).map((v) => v * R.day), sig * R.day, col, 1, { kind: FADE, params: [0.3, -0.69], channel: 0 })); // prettier-ignore
+  }
+  // Twilight: a glow on the horizon, made around north and turned to the Sun (channel 1).
+  const nGlow = Math.round(N * 0.06);
+  sig = spacing(nGlow, 0, 35) * 0.9;
+  for (const q of band(nGlow, 0, 35)) {
+    const daz = Math.min(q.az, 360 - q.az);
+    const g = Math.exp(-((daz / 50) ** 2)) * Math.exp(-Math.max(0, q.alt) / 9) + 0.22 * Math.exp(-Math.max(0, q.alt) / 5); // prettier-ignore
+    if (g < 0.03) continue;
+    const col = mix([1.0, 0.5, 0.2], [0.6, 0.42, 0.7], clamp(q.alt / 25, 0, 1));
+    push(sheetSplat(sc(q.enu).map((v) => v * R.glow), sig * R.glow, col, clamp(g, 0, 0.92), { part: parts.glow, kind: FADE, params: [0, -0.99], channel: 1 })); // prettier-ignore
+  }
+
+  // The Milky Way: a soft band along the galactic plane, brightest toward the center in
+  // Sagittarius, with the stars (J2000; the north galactic pole at RA 192.859, Dec 27.128).
+  const nMilky = Math.round(N * 0.1);
+  const gp = fromRaDec(192.85948, 27.12825);
+  const gc = fromRaDec(266.405, -28.936);
+  const gy = norm([gp[1] * gc[2] - gp[2] * gc[1], gp[2] * gc[0] - gp[0] * gc[2], gp[0] * gc[1] - gp[1] * gc[0]]); // prettier-ignore
+  let placed = 0;
+  for (let i = 0; placed < nMilky && i < nMilky * 6; i++) {
+    const r = k.rand();
+    const l = k.rand() * 2 * Math.PI;
+    const b = (k.rand() + k.rand() + k.rand() - 1.5) * 0.17 * (1 + 0.6 * Math.cos(l)); // radians
+    const v = norm(gc.map((c, j) => Math.cos(b) * (Math.cos(l) * c + Math.sin(l) * gy[j]) + Math.sin(b) * gp[j])); // prettier-ignore
+    // Patchy, as star clouds and dust lanes make it; the dark rift splits it near the center.
+    const patch = clamp(0.55 + 0.9 * k.noise.fbm(v[0] * 3.2, v[1] * 3.2, v[2] * 3.2, 4), 0.05, 1);
+    const lane = Math.abs(b - 0.03 * Math.sin(3 * l)) < 0.035 && Math.cos(l) > 0.1 ? 0.25 : 1;
+    const bright = (0.3 + 0.7 * Math.max(0, Math.cos(l)) ** 2) * lane * patch * (0.7 + 0.3 * r);
+    push(sheetSplat(v.map((x) => x * R.milky), (0.25 + 0.35 * k.rand()) * D2R * R.milky, [0.8, 0.84, 0.96], 0.012 + 0.05 * bright, { part: parts.milky, kind: FADE, params: [0.02, 0.12], channel: 0 })); // prettier-ignore
+    placed++;
+  }
+
+  // The stars, at their J2000 places, turned by their part.
+  for (let i = 0; i < d.count; i++) {
+    const m = d.mag[i];
+    if (m > 6.0) continue;
+    const ci = d.ci[i] ?? 0.6;
+    const col = kelvinToRgb(bvToKelvin(clamp(ci, -0.4, 2.0)));
+    const p = CAT.vec[i].map((x) => x * R.stars);
+    const fade = { part: parts.stars, kind: FADE, params: [fadeAt(m), 0.08], channel: 0 };
+    push(dotSplat(p, starSigma(m) * D2R * R.stars, col, starAlpha(m), fade));
+    // A soft halo round the brightest.
+    if (m < 2.5) push(dotSplat(p.map((x) => x * 1.002), starSigma(m) * 3.4 * D2R * R.stars, col, Math.min(0.3, 0.08 + 0.06 * (2.5 - m)), fade)); // prettier-ignore
+  }
+
+  // Constellation lines, along great circles, with a gap at each star.
+  let arc = 0;
+  for (const c of d.constellations)
+    for (let j = 0; j < c.lines.length; j += 2)
+      arc += Math.acos(clamp(dot(CAT.vec[c.lines[j]], CAT.vec[c.lines[j + 1]]), -1, 1)) * R2D;
+  const step = Math.max(0.22, arc / Math.max(1000, N * 0.12)); // degrees between splats
+  for (const c of d.constellations) {
+    for (let j = 0; j < c.lines.length; j += 2) {
+      const a = CAT.vec[c.lines[j]];
+      const b = CAT.vec[c.lines[j + 1]];
+      const ang = Math.acos(clamp(dot(a, b), -1, 1));
+      const gap = 0.7 * D2R;
+      if (ang < 2 * gap + step * D2R) continue;
+      const n = Math.max(1, Math.round((ang - 2 * gap) / (step * D2R)));
+      const s = Math.sin(ang);
+      for (let u = 0; u <= n; u++) {
+        const t = (gap + ((ang - 2 * gap) * u) / n) / ang;
+        const w0 = Math.sin((1 - t) * ang) / s;
+        const w1 = Math.sin(t * ang) / s;
+        const v = norm(a.map((x, q) => w0 * x + w1 * b[q]));
+        const tan = b.map((x, q) => x - a[q]);
+        push({ p: v.map((x) => x * R.lines), scales: [step * 0.75 * D2R * R.lines, 0.035 * D2R * R.lines, 0.02 * D2R], quat: quatFrame(tan, v), color: [0.36, 0.52, 0.86], opacity: 0.45, part: parts.lines, kind: FADE, params: [0.2, 0.25], channel: 0 }); // prettier-ignore
+      }
+    }
+  }
+
+  // The Sun: a bright ball (three times its real size) with a soft glow round it.
+  const ballR = R.body * Math.tan(0.8 * D2R);
+  const sphere = (n, rr, fn) => {
+    const g = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < n; i++) {
+      const z = 1 - (2 * (i + 0.5)) / n;
+      const r = Math.sqrt(1 - z * z);
+      const nv = [r * Math.cos(i * g), z, r * Math.sin(i * g)];
+      fn(
+        nv,
+        c0.map((c, q) => c + nv[q] * rr),
+      );
+    }
+  };
+  const ballSig = (n, rr) => Math.sqrt((4 * Math.PI * rr * rr) / n) * 0.72;
+  sphere(700, ballR, (nv, p) => push(dotSplat(p, ballSig(700, ballR), [1, 0.96, 0.84], 1, { part: parts.sun }))); // prettier-ignore
+  // Polish: a crisp disc in a fainter, wider glow (it was a soft blob).
+  for (let i = 0; i < 120; i++) {
+    const rr = ballR * (1.1 + 1.6 * Math.sqrt(k.rand()));
+    const nv = norm([k.rand() - 0.5, k.rand() - 0.5, k.rand() - 0.5]);
+    push(dotSplat(c0.map((c, q) => c + nv[q] * rr * 0.7), ballR * (0.5 + 0.5 * k.rand()), [1, 0.86, 0.6], 0.06, { part: parts.sun })); // prettier-ignore
+  }
+
+  // The Moon: a ball lit on its +X side; drive turns +X toward the Sun.
+  // Its night side is close to the night sky's own color, so no dark rim shows round a full Moon
+  // and it hides the stars behind it as the real one does.
+  // Polish: 5,000 small splats and a terminator that shades over a narrow band, not a ragged edge.
+  const NM = 5000;
+  const night = [0.035, 0.04, 0.065];
+  sphere(NM, ballR, (nv, p) => {
+    const lit = nv[0];
+    const shade = 0.78 + 0.22 * Math.sqrt(Math.max(0, lit));
+    const day = [0.94 * shade, 0.92 * shade, 0.86 * shade];
+    const w = smooth(-0.05, 0.07, lit);
+    if (w > 0.02) push(dotSplat(p, ballSig(NM, ballR), mix(night, day, w), 1, { part: parts.moon }));
+    else push(dotSplat(p, ballSig(NM, ballR), night, 1, { part: parts.moon, kind: FADE, params: [0.2, 0.3], channel: 0 })); // prettier-ignore
+  });
+
+  // The planets: points of light, sized for magnitude 0 (drive scales them for their own).
+  const PLANET_COLORS = { mercury: [0.88, 0.82, 0.74], venus: [1, 0.97, 0.88], mars: [1, 0.62, 0.4], jupiter: [0.99, 0.93, 0.82], saturn: [0.96, 0.88, 0.66], uranus: [0.72, 0.9, 0.95], neptune: [0.58, 0.72, 1] }; // prettier-ignore
+  const PLANET_MAG = { mercury: 0, venus: -4, mars: 0.5, jupiter: -2.3, saturn: 0.6, uranus: 5.7, neptune: 7.8 }; // prettier-ignore
+  for (const name of PLANETS) {
+    const sg = starSigma(0) * 1.2 * D2R * R.body;
+    const fade = { part: parts[name], kind: FADE, params: [fadeAt(PLANET_MAG[name] - 0.5), 0.08], channel: 0 }; // prettier-ignore
+    push(dotSplat(c0, sg, PLANET_COLORS[name], 1, fade));
+    push(dotSplat(c0, sg * 3.2, PLANET_COLORS[name], 0.14, fade));
+  }
+
+  // The marker round a tapped thing: a ring facing up, turned and moved to it.
+  for (let i = 0; i < 40; i++) {
+    const a = (i / 40) * 2 * Math.PI;
+    const rr = R.mark * Math.tan(1.7 * D2R);
+    push(dotSplat([CM[0] + Math.cos(a) * rr, CM[1], CM[2] + Math.sin(a) * rr], 0.1 * D2R * R.mark, [1, 0.84, 0.42], 0.95, { part: parts.mark })); // prettier-ignore
+  }
+
+  // The ground, up to a low skyline, and its daylight color. Polish (the owner's "please make
+  // this sharper" on the sunrise): most of the ground's splats sit near the horizon, where the
+  // view looks, each nudged a little off the even pattern (no moiré); and a row of small splats
+  // traces the skyline, so the hills have a crisp edge against the dawn.
+  const groundLayer = (n, lo, hi, rr, color, extra = {}, edge = 0, overlap = 1.15) => {
+    const sg = spacing(n, lo, hi) * overlap;
+    for (const q of band(n, lo, hi)) {
+      const j = sg * R2D * 0.35;
+      const alt = q.alt + (k.rand() - 0.5) * j;
+      const az = q.az + ((k.rand() - 0.5) * j) / Math.max(0.2, Math.cos(alt * D2R));
+      if (alt > skyline(az) - edge) continue;
+      const e = [Math.cos(alt * D2R) * Math.sin(az * D2R), Math.cos(alt * D2R) * Math.cos(az * D2R), Math.sin(alt * D2R)]; // prettier-ignore
+      push(
+        sheetSplat(
+          sc(e).map((v) => v * rr),
+          sg * rr,
+          color(alt),
+          1,
+          extra,
+        ),
+      );
+    }
+  };
+  const ridge = (rr, color, extra = {}) => {
+    for (let a = 0; a < 360; a += 0.12) {
+      for (const dh of [0.1, 0.3]) {
+        const alt = skyline(a) - dh;
+        const e = [Math.cos(alt * D2R) * Math.sin(a * D2R), Math.cos(alt * D2R) * Math.cos(a * D2R), Math.sin(alt * D2R)]; // prettier-ignore
+        push(
+          sheetSplat(
+            sc(e).map((v) => v * rr),
+            0.11 * D2R * rr,
+            color(alt),
+            1,
+            extra,
+          ),
+        );
+      }
+    }
+  };
+  const nightGround = (alt) => mix([0.03, 0.033, 0.04], [0.012, 0.014, 0.018], clamp(-alt / 30, 0, 1)); // prettier-ignore
+  const dayGround = (alt) => mix([0.2, 0.24, 0.17], [0.1, 0.12, 0.08], clamp(-alt / 30, 0, 1));
+  // The daylight ground comes in over a short stretch of the dawn, and its splats overlap more:
+  // while it is half faded in, uneven overlap shows as mottling.
+  const dayFade = { kind: FADE, params: [0.55, -0.3], channel: 0 };
+  groundLayer(Math.round(N * 0.07), -14, 4, R.ground, nightGround);
+  groundLayer(Math.round(N * 0.03), -90, -13, R.ground, nightGround);
+  ridge(R.ground - 0.001, nightGround);
+  groundLayer(Math.round(N * 0.035), -14, 4, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
+  groundLayer(Math.round(N * 0.012), -90, -13, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
+  ridge(R.ground - 0.004, dayGround, dayFade);
+
+  // N, E, S and W on the horizon, in the kit's bitmap font.
+  const px = 0.3; // degrees per font pixel
+  for (const [ch, az] of [
+    ["N", 0],
+    ["E", 90],
+    ["S", 180],
+    ["W", 270],
+  ]) {
+    const rows = BITMAP[ch];
+    for (let y = 0; y < 7; y++)
+      for (let x = 0; x < 5; x++) {
+        if (!((rows[y] >> (4 - x)) & 1)) continue;
+        // Polish: four small splats per font pixel, so the letters have crisp edges.
+        for (const [sx, sy] of [
+          [-0.25, -0.25],
+          [0.25, -0.25],
+          [-0.25, 0.25],
+          [0.25, 0.25],
+        ]) {
+          const a = az + (x - 2 + sx) * px;
+          const h = 3.6 + (6 - y + sy) * px;
+          const e = [Math.cos(h * D2R) * Math.sin(a * D2R), Math.cos(h * D2R) * Math.cos(a * D2R), Math.sin(h * D2R)]; // prettier-ignore
+          push(dotSplat(sc(e).map((v) => v * R.letters), px * 0.3 * D2R * R.letters, [0.98, 0.66, 0.34], 0.95)); // prettier-ignore
+        }
+      }
+  }
+
+  // Keep the fit centered on the viewer: the backdrop covers only the upper sky.
+  k.reach([R.night, R.night, R.night]);
+  k.reach([-R.night, -R.night, -R.night]);
+  k.data = { parts: Object.keys(parts) };
+  k.cloud({ count: (out.length * 160000) / N, jitter: 0, pattern: false }, (rand, i) => out[i] || null); // prettier-ignore
+}
+
+// ---- The recipe -------------------------------------------------------------------------------
+
+export const RECIPES = {
+  "night-sky": {
+    alive: true,
+    turntable: false,
+    tiltLock: false,
+    // From inside: the camera stands at the center; a drag looks around.
+    inside: { fov: 72 },
+    // Polish (labs only): the sharper splat falloff and no culling of small splats, so faint
+    // stars stay and every point of light has a crisp edge (docs/lab/KERNELS.md, SHARPNESS.md).
+    kernel: "sharp",
+    render: { cull: "off", dpr: "native" },
+    pitchRange: [-0.12, 1.45],
+    options: [],
+    controls: [
+      { key: "lines", label: "Constellation lines", type: "toggle", default: 1, ease: 0.6 },
+      { key: "name", label: "Name it", type: "pulse", ease: 1.2 },
+    ],
+    action: {
+      key: "name",
+      label: "Name a star",
+      at(point) {
+        const v = norm(point);
+        const cam = globalThis.window?.__splashery?.player?.camera;
+        const fov = cam?.pose?.().fov ?? 72;
+        SKY.picked = pickAt(v, SKY.last, clamp((4 * fov) / 72, 1.2, 6));
+        SKY.pickedAt = SKY.t;
+        return { key: "name" };
+      },
+    },
+    input: {
+      title: "The sky over…",
+      fileButton: false,
+      live: [{ render: renderPanel }],
+      note: "",
+      read: async () => ({}),
+      shown: () => "",
+    },
+    credits: [
+      { label: "Stars", title: "HYG database v4.1", source: "https://github.com/astronexus/HYG-Database", author: "David Nash (astronexus.com)", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" }, // prettier-ignore
+      { label: "Constellation lines", title: "Western sky culture", source: "https://github.com/Stellarium/stellarium-skycultures/tree/master/western", author: "The Stellarium team", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" }, // prettier-ignore
+      { label: "Planets", title: "Approximate Positions of the Planets (E. M. Standish)", source: "https://ssd.jpl.nasa.gov/planets/approx_pos.html", author: "JPL Solar System Dynamics", license: "Published formulas" }, // prettier-ignore
+    ],
+    async prepare() {
+      await readCatalog();
+    },
+    drive(t, c, out) {
+      const ms = stepTime(t);
+      const p = SKY.place;
+      // "Same time each day": the sidereal time moves on only by the days gone by.
+      const daily = SPEEDS.find((x) => x.id === SKY.speed)?.daily && SKY.dailyAnchor != null;
+      const anchorLst = daily ? lst(julianDay(SKY.dailyAnchor), p.lon) : null;
+      const s = sky(ms, p.lat, p.lon, daily ? anchorLst + ((ms - SKY.dailyAnchor) / 86400000) * SOLAR_DAY_LST : null); // prettier-ignore
+      SKY.daily = daily;
+      SKY.last = s;
+      SKY.drawn = ms;
+      const q = quatFromMatrix(sceneMatrix(s.matrix));
+      const sun = s.bodies.sun;
+      const light = skyLight(sun.alt);
+      out.morph = [light.day, light.glow, 0, 0];
+      // The stars, the Milky Way and the lines set behind the horizon (cull "below").
+      // Points of light keep their size on the screen as a pinch zooms in (a splat part's
+      // visibility scales its splats, not their places).
+      const fov = globalThis.window?.__splashery?.player?.camera?.pose?.().fov ?? 72;
+      const zf = clamp(fov / 72, 0.4, 1.2);
+      out.parts.stars = { quat: q, cull: "below", visible: zf };
+      out.parts.milky = { quat: q, cull: "below" };
+      out.parts.lines = { quat: q, visible: c.lines ?? 1, cull: "below" };
+      out.parts.glow = { quat: quatAxisAngle([0, 1, 0], -sun.az * D2R), cull: "below" };
+      for (const name of ["sun", "moon", ...PLANETS]) {
+        const b = s.bodies[name];
+        const dir = sc(b.enu);
+        const offset = dir.map((v, i) => v * R.body - C0[i]);
+        // Gone once its center is a little under the horizon.
+        const up = b.alt > -0.9 ? 1 : 0;
+        const part = { offset, visible: name === "sun" || name === "moon" ? up : up * zf };
+        if (name === "moon" || name === "sun") part.cull = true; // a ball: its back never draws over its front
+        if (name === "moon") part.quat = quatFromTo([1, 0, 0], sc(sun.enu));
+        else if (name !== "sun") part.scale = starSigma(b.mag) / starSigma(0);
+        out.parts[name] = part;
+      }
+      // The marker follows what was tapped.
+      const pk = SKY.picked;
+      let dir = null;
+      if (pk?.kind === "body") dir = sc(s.bodies[pk.name].enu);
+      else if (pk?.kind === "star") dir = sc(norm(mulMV(s.matrix, CAT.vec[pk.i])));
+      if (dir && dir[1] < -0.015) dir = null; // under the horizon: no ring on the ground
+      // A tap's ring closes in on its target (the "name" pulse eases from 1 to 0).
+      const lock = 1 + 1.6 * (c.name ?? 0) ** 2;
+      out.parts.mark = dir ? { quat: quatFromTo([0, 1, 0], dir), offset: dir.map((v, i) => v * R.mark - CM[i]), scale: lock * Math.max(0.35, zf), visible: 1 } : { visible: 0 }; // prettier-ignore
+      out.legend = legend(s, ms);
+      if (Math.floor(t * 2) !== SKY.panelTick) {
+        SKY.panelTick = Math.floor(t * 2);
+        refreshPanel();
+      }
+    },
+    build(k) {
+      buildSky(k);
+    },
+  },
+};
+
+// The words beside the stage: what was tapped, then the place and time.
+function legend(s, ms) {
+  const items = [];
+  const pk = SKY.picked;
+  let title;
+  if (pk && CAT.data) {
+    if (pk.kind === "star") {
+      title = starTitle(pk.i);
+      for (const f of starFacts(pk.i, s)) items.push({ text: f });
+    } else {
+      title = cap(BODY_NAMES[pk.name]);
+      for (const f of bodyFacts(pk.name, s)) items.push({ text: f });
+    }
+    items.push({ text: "", head: true });
+  }
+  const p = SKY.place;
+  items.push({ text: p.name, head: true });
+  // On a "same time each day" speed the clock shows the time held, on the day reached.
+  const shown = SKY.daily ? SKY.dailyAnchor + Math.floor((ms - SKY.dailyAnchor) / 86400000) * 86400000 : ms; // prettier-ignore
+  items.push({ text: formatWhen(Math.floor(shown / 60000) * 60000, p.tz) });
+  if (SKY.rate !== 1) items.push({ text: SPEEDS.find((x) => x.id === SKY.speed)?.label ?? `${fmt(SKY.rate)} times real time` }); // prettier-ignore
+  const sun = s.bodies.sun;
+  const moon = s.bodies.moon;
+  items.push({ text: sun.alt > -0.83 ? `The Sun is up (${fmt(sun.alt)}°)` : sun.alt > -18 ? "Twilight" : "Night" }); // prettier-ignore
+  items.push({ text: `Moon: ${phaseName(moon.illum, moon.waxing).toLowerCase()}, ${moon.alt > 0 ? "up" : "down"}` }); // prettier-ignore
+  const up = PLANETS.filter((n) => s.bodies[n].alt > 0 && s.bodies[n].mag < 6).map(
+    (n) => BODY_NAMES[n],
+  );
+  if (up.length) items.push({ text: `Up now: ${up.join(", ")}` });
+  return { title: title || "The sky", items };
+}
+
+// ---- The test hook ------------------------------------------------------------------------------
+// window.__splashery.sky (docs/handoff/NightSky.md):
+//   sky.set({ city | lat, lon, time (ms or ISO), speed })   place and time, as the panel does
+//   sky.state()     { place, ms, sun, moon, planets, lst }
+//   sky.pick(name)  marks a star or body by name (as a tap on it would)
+//   sky.dirOf(name) its direction in the scene, for a tap
+if (typeof window !== "undefined" && window.__splashery) {
+  const find = (name) => {
+    const n = String(name).toLowerCase();
+    if (["sun", "moon", ...PLANETS].includes(n)) return { kind: "body", name: n };
+    const i = CAT.data?.name.findIndex((x) => x.toLowerCase() === n);
+    return i >= 0 ? { kind: "star", i } : null;
+  };
+  window.__splashery.sky = {
+    set({ city, lat, lon, time, speed, rate } = {}) {
+      if (city) setPlace({ ...cityById(city) });
+      else if (Number.isFinite(lat) && Number.isFinite(lon))
+        setPlace({ id: "typed", name: formatLatLon(lat, lon), lat, lon, tz: "UTC" });
+      if (time !== undefined) setTime(typeof time === "number" ? time : Date.parse(time));
+      if (speed !== undefined) setSpeed(String(speed), true);
+      // Any rate (sky seconds per second), for the clip tool (tools/sky-clip.mjs).
+      if (Number.isFinite(rate)) {
+        SKY.rate = SKY.target = rate;
+        SKY.speed = "custom"; // not one of the panel's speeds (and never "same time each day")
+      }
+      return this.state();
+    },
+    state() {
+      const s = SKY.last;
+      const b = s?.bodies;
+      return {
+        place: { ...SKY.place },
+        ms: SKY.ms === null ? null : skyTime(),
+        drawn: SKY.drawn ?? null, // the time the last frame showed
+        rate: SKY.rate,
+        target: SKY.target,
+        lst: s?.lst,
+        picked: SKY.picked,
+        bodies: b ? Object.fromEntries(Object.entries(b).map(([k, v]) => [k, { alt: v.alt, az: v.az, mag: v.mag, illum: v.illum }])) : null, // prettier-ignore
+      };
+    },
+    dirOf(name) {
+      const f = find(name);
+      const s = SKY.last;
+      if (!f || !s) return null;
+      return f.kind === "body" ? sc(s.bodies[f.name].enu) : sc(norm(mulMV(s.matrix, CAT.vec[f.i])));
+    },
+    // Turns the view to look at it (the inside camera's yaw and pitch).
+    look(name, fovScale = 1) {
+      const d = this.dirOf(name);
+      const cam = window.__splashery.player.camera;
+      if (!d) return null;
+      const pose = {
+        yaw: Math.atan2(d[0], d[2]),
+        pitch: Math.asin(clamp(d[1], -1, 1)),
+        roll: 0,
+        distance: 5 * fovScale,
+      };
+      cam.setState(pose);
+      return pose;
+    },
+    pick(name) {
+      SKY.picked = find(name);
+      return SKY.picked;
+    },
+  };
+}

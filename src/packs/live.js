@@ -370,7 +370,7 @@ const SPLAT_MIRROR = {
       default: "plain",
       choices: [
         { id: "plain", label: "Plain" },
-        { id: "hologram", label: "Hologram (cyan, scanlines, glowing edges)" },
+        { id: "hologram", label: "Hologram (cyan, lines behind you, a glowing outline)" }, // Live r7
       ],
     },
   ],
@@ -418,13 +418,20 @@ const SPLAT_MIRROR = {
     const f = 0.07;
     const w = 1 + f;
     const h = height / 2 + f;
-    const frame = (x, y, sx, sy) =>
-      k.add(k.box(sx, sy, 0.06), {
-        pos: [x, y, -0.03],
-        color: (cc) => shade("#2b2f36", 0.8 + 0.3 * Math.abs(cc.n[2])),
-        share: 0.01,
-        even: true,
-      });
+    // Live r7 (the owner's "a little bit more seamless"): the frame's bars
+    // are flat sheets of exact discs, front and back, so their edges are
+    // straight and clean instead of a box's fuzz of random splats.
+    const frame = (x, y, sx, sy) => {
+      const step = 0.011;
+      const nx = Math.max(2, Math.round(sx / step));
+      const ny = Math.max(2, Math.round(sy / step));
+      const bar = [];
+      for (const [z, n, tone] of [[0, [0, 0, 1], 1], [-0.03, [0, 0, 1], 0.85], [-0.06, [0, 0, -1], 0.8]])
+        for (let j = 0; j < ny; j++)
+          for (let i = 0; i < nx; i++)
+            bar.push({ p: [x + ((i + 0.5) / nx - 0.5) * sx, y + ((j + 0.5) / ny - 0.5) * sy, z], n, flat: 0.03, size: (step * 1.5) / 0.01, color: shade("#2b2f36", tone * (0.95 + 0.1 * (j / ny))), opacity: 1, pattern: false }); // prettier-ignore
+      k.cloud({ share: bar.length / k.count, pattern: false, jitter: 0 }, (rand, i) => bar[i] || null); // prettier-ignore
+    };
     frame(0, h - f / 2, 2 * w, f);
     frame(0, -h + f / 2, 2 * w, f);
     frame(-w + f / 2, 0, f, 2 * h);

@@ -1218,6 +1218,15 @@ export const TOY_SOUNDS = {
       { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.4 },
     ],
   },
+  // Lane Elements: the sample lifting off its tile, and setting down with a small click; the lift's
+  // tine and the turn's blip come from the recipe (src/packs/real-elements.js).
+  "real-elements": {
+    on: [{ voice: "whoosh", f: 380, to: 1.4, decay: 1.1, vol: 0.1 }],
+    off: [
+      { voice: "whoosh", f: 600, to: 0.5, decay: 0.8, vol: 0.1 },
+      { voice: "clack", at: 0.8, f: 1100, decay: 0.25, vol: 0.3 },
+    ],
+  },
   // ---- Gems -------------------------------------------------------------------------
   diamond: [
     {
@@ -2607,7 +2616,11 @@ export const TOY_SOUNDS = {
     { voice: "ding", at: 2.25, f: "C7", decay: 1.2 },
   ],
   // Each swap plays the height of the bar moving right (bubble sort, a swap
-  // every 0.225 s), then the sorted bars play their rising scale.
+  // every 0.225 s), then the sorted bars play their rising scale. Lane
+  // Computing r2: on the toy, the sort plays its own notes (cues from
+  // src/packs/computing.js, sortCues), every comparison and swap in each
+  // algorithm's own voice, so the tap is quiet; this is bubble sort's swaps
+  // for the Sound Board.
   "sorting-machine": [
     { voice: "marimba", at: 0.44, notes: "A4 C5 C5 C5 C5 C5 A4 B4 B4 B4 E4 A4 A4 A4 F4 E4", step: 0.225, decay: 0.6 }, // prettier-ignore
     { voice: "marimba", at: 3.95, notes: "C4 D4 E4 F4 G4 A4 B4 C5", step: 0.06, decay: 0.8 },
@@ -2699,6 +2712,17 @@ export const TOY_SOUNDS = {
     off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.2, vol: 0.45 },
   },
   // Lane Live input r3: Moving photo to 3D pauses and plays with a soft click.
+  // Lane Sound and light lab: the Sound lab's switch (the tone itself plays
+  // from the toy), the recorder's soft button, the Light lab's slide changer.
+  "sound-lab": {
+    on: { voice: "switch", f: 2400, vol: 0.4 },
+    off: { voice: "switch", f: 1900, vol: 0.35 },
+  },
+  "sound-recorder": [{ voice: "click", f: 1500, decay: 0.04, vol: 0.3 }],
+  "light-lab": [
+    { voice: "click", f: 700, decay: 0.08, vol: 0.4 },
+    { voice: "click", at: 0.09, f: 950, decay: 0.05, vol: 0.3 },
+  ],
   "moving-photo-3d": {
     on: { voice: "click", f: 1200, decay: 0.05, vol: 0.35 },
     off: { voice: "click", f: 900, decay: 0.05, vol: 0.3 },
@@ -2721,6 +2745,14 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 700, to: 1, decay: 1.2, vol: 0.22 },
     off: { voice: "whoosh", f: 600, to: 1, decay: 1.0, vol: 0.18 },
   },
+  // ---- Viewers (lane Viewers) ---------------------------------------------------------
+  // The Splat toolkit's spin: a soft swish of air as the splats turn round together.
+  "splat-toolkit": { voice: "whoosh", f: 520, to: 1.3, decay: 2.2, vol: 0.2 },
+  // Point clouds: a lidar sweep, a rising airy tone with faint ticks as the scan line crosses.
+  "point-clouds": [
+    { voice: "whoosh", f: 380, to: 2.2, decay: 2.4, vol: 0.18 },
+    { voice: "sparkle", at: 0.1, f: 4200, n: 6, decay: 2, vol: 0.12 },
+  ],
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
@@ -2743,11 +2775,13 @@ export const TOY_SOUNDS = {
   // for the ocean, a warm swelling tone for the knot. This is the galaxy's.
   // Lane QR: the tap bursts the code (a soft pop, a whoosh, pieces landing);
   // Assemble and Flip play their own through the recipe's cues.
+  // Lane QR r3: the tap knocks modules loose (a knock, a puff, the click of
+  // pieces snapping back); each Toy-tab motion sends its own sound as cues.
   "qr-code": [
-    { voice: "thud", f: 110, decay: 0.3, vol: 0.4 },
-    { voice: "breath", f: 700, to: 0.5, decay: 0.9, vol: 0.2 },
-    { voice: "wood", at: 1.05, f: 900, decay: 0.12, vol: 0.12 },
-    { voice: "breath", at: 2.15, f: 600, to: 1.2, decay: 1.0, vol: 0.16 },
+    { voice: "wood", f: 420, decay: 0.12, vol: 0.3 },
+    { voice: "breath", f: 800, to: 0.6, decay: 0.5, vol: 0.14 },
+    { voice: "wood", at: 1.05, f: 900, decay: 0.08, vol: 0.12 },
+    { voice: "wood", at: 1.2, f: 1100, decay: 0.06, vol: 0.08 },
   ],
   // Lane QR lab r2: soft, not electronic. A light knock as a part lifts; a
   // scrape and a soft thud as damage lands; a slide out and a knock back.
@@ -2786,6 +2820,33 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // A cryo-EM map cut open: a soft, low whoosh as the clipping plane sweeps
+  // in, and a softer one as it closes (Science r3).
+  "cryoem-map": {
+    on: { voice: "whoosh", f: 380, decay: 1.1, vol: 0.3 },
+    off: { voice: "whoosh", f: 300, decay: 1, vol: 0.25 },
+  },
+  // The contour layers lifting apart: a soft wooden slide; settling back, a
+  // lower one (Science r3).
+  "contour-lab": {
+    on: { voice: "wood", f: 520, decay: 0.5, vol: 0.3 },
+    off: { voice: "wood", f: 420, decay: 0.5, vol: 0.28 },
+  },
+  // Water filling the land: a gentle rush rising; draining, a lower one.
+  "terrain-box": {
+    on: { voice: "whoosh", f: 300, decay: 2.4, vol: 0.3 },
+    off: { voice: "whoosh", f: 240, decay: 2.2, vol: 0.25 },
+  },
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
+  // its rings.
+  "ripple-tank": [
+    { voice: "drip", f: 640, n: 1, at: 0.3, vol: 0.8 },
+    { voice: "wave", f: 420, decay: 1.2, at: 0.36, vol: 0.16 },
+  ],
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  // A tap changes the light: the lamp's switch clicks.
+  "light-bench": { voice: "switch", f: 2900, vol: 0.7 },
   // ---- Imaging (lane Imaging) ---------------------------------------------------------
   // The belt's low rumble as the bag rides through, the curtains' slap, and
   // the scanner's soft beep when its picture is done.
@@ -2846,12 +2907,157 @@ export const TOY_SOUNDS = {
     ],
     off: [{ voice: "wood", f: 1100, vol: 0.28 }],
   },
+  // ---- Molecule viewer (lane Molecule viewer) ---------------------------------------
+  // Quiet (PACKS.md 7e): one soft, low click as an atom is picked.
+  "molecule-viewer": { voice: "clack", f: 1500, decay: 0.18, bright: 0.1, vol: 0.4 },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
   "fluid-lab": [
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
+  ],
+  // ---- Earth and maps (lane Geo) ------------------------------------------------------
+  // Water rushing in and draining out, the eruption's blast and roar, the
+  // storm's rumble and wind, the city's hum, a stork's bill clatter, and the
+  // ground's rumble: quiet and low.
+  "grand-canyon": [
+    { voice: "roar", f: 140, bright: 0.25, decay: 2.2, vol: 0.4 },
+    { voice: "wave", at: 0.4, f: 380, decay: 1.6, vol: 0.35 },
+    { voice: "wave", at: 2.2, f: 300, decay: 1.0, vol: 0.28 },
+  ],
+  "st-helens": {
+    on: [
+      { voice: "rumble", f: 60, rate: 6, decay: 1.6, vol: 0.7 },
+      { voice: "roar", at: 0.7, f: 120, bright: 0.3, decay: 3, vol: 0.55 },
+      { voice: "thud", at: 0.55, f: 55, decay: 1.4, vol: 0.6 },
+    ],
+    off: { voice: "rumble", f: 75, rate: 3, decay: 1.2, vol: 0.35 },
+  },
+  "sea-floor": [
+    { voice: "roar", f: 110, bright: 0.2, decay: 2.4, vol: 0.38 },
+    { voice: "wave", at: 2.1, f: 260, decay: 1.0, vol: 0.32 },
+  ],
+  "tide-harbor": [
+    { voice: "wave", f: 420, decay: 1.4, vol: 0.32 },
+    { voice: "wave", at: 1.3, f: 360, decay: 1.2, vol: 0.26 },
+    { voice: "wave", at: 2.4, f: 420, decay: 0.9, vol: 0.3 },
+  ],
+  hurricane: {
+    on: [
+      { voice: "rumble", f: 80, rate: 4, decay: 2.2, vol: 0.6 },
+      { voice: "wind", at: 0.3, f: 380, rate: 0.9, decay: 2.6, vol: 0.14 },
+    ],
+    off: [
+      { voice: "rumble", f: 95, rate: 3, decay: 1.4, vol: 0.4 },
+      { voice: "wind", at: 0.2, f: 300, rate: 0.5, decay: 1.8, vol: 0.1 },
+    ],
+  },
+  "relief-map": [
+    { voice: "scrape", f: 300, rate: 6, decay: 0.8, vol: 0.18 },
+    { voice: "drip", at: 1.2, f: 900, n: 6, rate: 4, vol: 0.3 },
+  ],
+  "living-city": {
+    on: { voice: "roar", f: 90, bright: 0.15, decay: 2.4, vol: 0.3 },
+    off: { voice: "roar", f: 130, bright: 0.3, decay: 2.4, vol: 0.34 },
+  },
+  "stork-migration": [
+    { voice: "flutter", n: 6, rate: 7, decay: 1.2, vol: 0.4 },
+    { voice: "clack", at: 0.6, f: 1400, notes: "C5 C5 C5 C5 C5 C5", step: 0.07, vol: 0.25 },
+  ],
+  earthquakes: [
+    { voice: "rumble", f: 70, rate: 7, decay: 1.8, vol: 0.6 },
+    { voice: "rumble", at: 2.5, f: 90, rate: 10, decay: 1.2, vol: 0.4 },
+  ],
+  // ---- Arcade (lane Arcade) --------------------------------------------------------------
+  // Play: the ball's first knock off the paddle (the game plays its own
+  // sounds as it goes: knocks, glassy breaks, stone cracks).
+  shardball: [
+    { voice: "pock", f: 520, vol: 0.6 },
+    { voice: "glass", at: 0.12, f: 960, decay: 0.5, vol: 0.35 },
+  ],
+  // A berry's pop and a bead's soft knock.
+  longtail: [
+    { voice: "pop", f: 760, vol: 0.55 },
+    { voice: "wood", at: 0.1, f: 900, decay: 0.4, vol: 0.3 },
+  ],
+  // A pour of sand.
+  "grain-garden": { voice: "patter", decay: 0.8, vol: 0.5 },
+  // A stone landing in the well.
+  strata: [
+    { voice: "stone", f: 220, vol: 0.6, decay: 0.6 },
+    { voice: "patter", at: 0.08, vol: 0.25, decay: 0.4 },
+  ],
+  // A serve off the paddle and a tap off the rail.
+  "volley-table": [
+    { voice: "pock", f: 640, vol: 0.55 },
+    { voice: "wood", at: 0.2, f: 520, decay: 0.4, vol: 0.3 },
+  ],
+  // A rock cracking apart.
+  "stone-belt": [
+    { voice: "crack", vol: 0.7 },
+    { voice: "rumble", at: 0.03, vol: 0.35, decay: 0.6 },
+  ],
+  // A touchdown: a soft thud on the ground.
+  "soft-landing": [
+    { voice: "thud", f: 140, vol: 0.55 },
+    { voice: "hollow", at: 0.12, f: 330, decay: 0.5, vol: 0.3 },
+  ],
+  // A pop bumper's ding and a flipper's clack.
+  "night-owl-pinball": [
+    { voice: "clack", f: 900, vol: 0.45 },
+    { voice: "ding", at: 0.12, f: 1150, vol: 0.4 },
+  ],
+  // A shadow puzzle solved: a soft knock and a chime.
+  "cast-a-shadow": [
+    { voice: "wood", f: 420, decay: 0.5, vol: 0.4 },
+    { voice: "tine", at: 0.15, f: 1320, decay: 0.8, vol: 0.3 },
+  ],
+  // A marble's jump and landing.
+  "photo-dash": [
+    { voice: "boing", f: 420, vol: 0.35, decay: 0.4 },
+    { voice: "glass", at: 0.2, f: 1500, vol: 0.2, decay: 0.3 },
+  ],
+  // A caught note: a piano note and its fifth.
+  "note-rider": [
+    { voice: "grand", f: 523.25, vol: 0.5, decay: 0.8 },
+    { voice: "grand", at: 0.18, f: 783.99, vol: 0.4, decay: 0.9 },
+  ],
+  // A word's brick breaking: a paper tear and a knock.
+  "page-breaker": [
+    { voice: "pock", f: 480, vol: 0.55 },
+    { voice: "tear", at: 0.1, decay: 0.5, vol: 0.4 },
+  ],
+  // ---- Night sky (lane Night sky) ---------------------------------------------------
+  // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
+  "night-sky": [
+    { voice: "tine", f: 660, decay: 1.2, vol: 0.7 },
+    { voice: "breath", at: 0.03, f: 700, to: 1.1, decay: 1.2, vol: 0.12 },
+  ],
+  // ---- Space r2 (lane Space r2): real worlds --------------------------------------------
+  // Space is silent: a soft breath as the view flies in to a feature.
+  "real-moon": { voice: "breath", f: 340, to: 0.7, decay: 2.2, vol: 0.32 },
+  "real-mars": { voice: "breath", f: 300, to: 0.75, decay: 2.4, vol: 0.34 },
+  "real-earth": { voice: "breath", f: 380, to: 0.65, decay: 2.1, vol: 0.3 },
+  "real-mercury": { voice: "breath", f: 360, to: 0.8, decay: 1.9, vol: 0.3 },
+  "real-venus": { voice: "breath", f: 260, to: 0.7, decay: 2.6, vol: 0.34 },
+  "nearby-stars": { voice: "breath", f: 420, to: 0.6, decay: 2.0, vol: 0.28 },
+  "real-galaxies": { voice: "breath", f: 320, to: 0.85, decay: 2.8, vol: 0.3 },
+  "saturn-v": { voice: "rumble", f: 52, rate: 4, decay: 2.4, vol: 0.85 },
+  "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
+  "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },
+  "star-systems": { voice: "breath", f: 450, to: 0.7, decay: 2.5, vol: 0.27 },
+  // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
+  "data-in-3d": [
+    { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },
+    { voice: "wood", at: 0.42, f: 700, decay: 0.12, vol: 0.2 },
+    { voice: "breath", at: 0.85, f: 520, to: 1.15, decay: 1.1, vol: 0.08 },
+  ],
+  // The record playing back: a long, low breath under a soft pen.
+  "climate-records": [
+    { voice: "thud", f: 70, decay: 0.5, vol: 0.7 },
+    { voice: "wood", at: 0.08, f: 820, decay: 0.1, vol: 0.18 },
+    { voice: "breath", at: 0.1, f: 360, to: 1.1, decay: 2.4, vol: 0.07 },
   ],
   // ---- Tiny world r2 (lane Tiny world r2) ----
   // The story's own cues (tRNAs docking, the stop codon, the fold) come from

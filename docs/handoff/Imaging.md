@@ -9,9 +9,12 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-READY: October 5, 2026 (cloud session, Opus 5.5). Items 1 to 6 of the brief are built, with clips on
-Effect review page 2 (cards `img-*`, lane id `Imaging`). Item 7 (ideas of my own) is not built. The
-engine PR #274 merged on October 5, 2026, and main is merged into this branch.
+READY: polish round r3 (October 5, 2026, Opus 5.5) on `claude/lane-imaging-polish`. Imaging r2
+(#304, 478f39cb) reached main through the Operator's #319, and main is merged here. Done: the
+thermal camera keeps one thermal copy plus three of the mug (sharper views); finer splats for the
+walnut, MRI and microscope; a finer X-ray fan in How CT works; the airport scanner framed closer.
+Six `-r3` cards are on Effect review page 2 beside the r2 ones. Specs run after the merge:
+`tests/img.spec.mjs`, `kit`, `taps` (69 passed); Prettier and the American English check clean.
 
 - [x] 1. Airport X-ray scanner (`airport-xray`)
 - [x] 2. How CT works (`how-ct`): a kit-built nautilus shell
@@ -24,6 +27,12 @@ engine PR #274 merged on October 5, 2026, and main is merged into this branch.
      ultrasound of an egg).
 
 ## Notes
+
+- r2: every toy has `kernel: "sharp"` (labs) and `density: 2`. Visions: `VISIONS` and
+  `visionColor()` (gray, night, infrared) behind a Vision option (the walnut's Colors option). How
+  CT works: `CT_SPECIMENS` (the nautilus and 19 kit toys); `loadSpecimen()` builds the toy at rest
+  (parts hidden at rest left out) and `specimenVolume()` voxelizes its splats on a 72³ grid (skin,
+  plus a flood fill from the border for the inside).
 
 - The engine piece (#274): kit kind `volume` (`params: [density]`), driven by
   `out.volume = { normal, at, slab, window, glow, glowWidth }` (recipe coordinates). The cut is
@@ -48,6 +57,11 @@ engine PR #274 merged on October 5, 2026, and main is merged into this branch.
 
 ## Known issues
 
+- r3 tried letting the belt carry the bags in and out of view (the belt running on past the frame,
+  `fit: false`), but the player frames kit toys by all their splats (`ctx.buf.bounds()`), not the
+  kit's fit, so the scanner came out small. That needs an engine change; the next bag still appears
+  just above the belt.
+
 - The airport scanner's next bag is set down from just above the belt and appears there (a short
   pop), and the last bag is lifted out of view; a real person's hands are not shown.
 - The electron microscope's pictures are shaded for the view from above; turned far to the side the
@@ -56,7 +70,11 @@ engine PR #274 merged on October 5, 2026, and main is merged into this branch.
 
 ## For the Operator
 
-- Effect review page 2 has no `lanes/Imaging` record yet; the cards use lane id `Imaging`.
+- r2 lessons for PACKS.md: a flat panel behind a picture of splats must sit clearly in front of what
+  is behind it (the X-ray screen's background z-fought the bezel and showed as static), and a
+  picture layer needs a few hundredths of a unit in front of its background, or the sort lets the
+  background wash it out. Crossfading two copies of a scene built from different random samples
+  looks grainy halfway; keep such blends short.
 - For PACKS.md (section 5, after the levers): the `volume` kind and `out.volume`, as in the Notes
   above; and that `out.view` zoom steps need `focus: () => false` when the toy has no focus of its
   own.

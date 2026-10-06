@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>DNA to protein · Splashery</title>
+    <meta
+      name="description"
+      content="DNA to protein, a Splashery toy made of 3D Gaussian splats: Tap to make the protein."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/toys/dna-to-protein/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="DNA to protein · Splashery" />
+    <meta
+      property="og:description"
+      content="DNA to protein, a Splashery toy made of 3D Gaussian splats: Tap to make the protein."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/dna-to-protein/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/dna-to-protein/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="DNA to protein, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+      <div class="labs-off" data-labs-off>
+        <p class="eyebrow">In the labs</p>
+        <h1>DNA to protein</h1>
+        <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
+        <p class="actions">
+          <a class="button primary" href="./?labs=1">Turn the labs on</a
+          ><a class="button" href="../../toys/">Every toy</a>
+        </p>
+      </div>
+      <article class="toy-page" data-labs>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-tiny">Tiny world</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>DNA to protein <span class="badge">labs</span></h1>
+            <p class="lead how-to">
+              Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.
+            </p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  Transcription, then translation codon by codon, then the chain folds into its real
+                  structure.
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>
+                  A soft glass swell at the tap, a wooden knock as each tRNA docks, a bell at the
+                  stop codon and a low glass note as the protein settles.
+                </dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRuYS10by1wcm90ZWluIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA2LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="
+                  background-image: url(&quot;../../../assets/toys/dna-to-protein/thumb.webp&quot;);
+                "
+              ></span>
+              <iframe
+                data-src="../../play/?toy=dna-to-protein"
+                title="DNA to protein, live: drag to turn it"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>Drag to turn it; tap to play.</figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            A gene is a stretch of DNA that spells out a protein. Tap and RNA polymerase opens the
+            double helix and reads the template strand, building messenger RNA that matches the
+            coding strand (with U for T). A ribosome then reads the mRNA three bases (a codon) at a
+            time from the start codon AUG; each tRNA whose anticodon pairs with the codon brings its
+            amino acid, and the chain grows until a stop codon. The chain then folds into the
+            protein's real shape from the Protein Data Bank.
+          </p>
+          <p>
+            The genes are real (NCBI); only the start and end are drawn base by base. Try a
+            mutation: changing base 2 of codon 7 in hemoglobin beta to T is the sickle-cell change
+            (glutamic acid to valine).
+          </p>
+        </section>
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The toy shows a real gene being transcribed into mRNA and translated into a protein,
+            which then folds into its measured structure. The bases, codons, amino acids and
+            structures are real data, and the genetic code is the standard one, checked by tests.
+            The machines (RNA polymerase, the ribosome, tRNAs) are drawn as simple shapes, much
+            smaller and much faster than the real ones, and most of each gene is shortened.
+            <span class="note">Checked October 5, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The genetic code is the
+                standard code: 64 codons, 61 for amino acids and 3 stop codons (UAA, UAG, UGA); AUG
+                codes for methionine and starts the protein.
+              </p>
+              <p>
+                The code table is NCBI's translation table 1 written in its usual order; translation
+                starts at the first ATG and reads in threes to the first stop codon in the same
+                frame.
+              </p>
+              <p class="note">
+                NCBI also lists TTG and CTG as rare alternative starts; the toy always starts at
+                ATG, as nearly all human genes do.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi"
+                    >The Genetic Codes: 1. The Standard Code</a
+                  >, NCBI Taxonomy:
+                  <q>AAs = FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Each sample gene's coding
+                sequence translates exactly into its protein: hemoglobin beta (147 amino acids),
+                preproinsulin (110), lysozyme (148) and green fluorescent protein (238).
+              </p>
+              <p>
+                tools/tw2-genes.mjs takes the CDS from each NCBI record and stops unless the toy's
+                own translation equals the record's /translation; a test checks it again.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_000518.5"
+                    >Homo sapiens hemoglobin subunit beta (HBB), mRNA, NM_000518.5</a
+                  >, NCBI Nucleotide:
+                  <q>CDS 51..494, /translation=&quot;MVHLTPEEKSAVTALWGKVNVDEVGG…&quot;</q>
+                </li>
+                <li>
+                  <a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_000207.3"
+                    >Homo sapiens insulin (INS), transcript variant 1, mRNA, NM_000207.3</a
+                  >, NCBI Nucleotide:
+                  <q>CDS 60..392, /translation=&quot;MALWMRLLPLLALLALWGPDPAAAFVNQHLCG…&quot;</q>
+                </li>
+                <li>
+                  <a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_000239.3"
+                    >Homo sapiens lysozyme (LYZ), mRNA, NM_000239.3</a
+                  >, NCBI Nucleotide: <q>CDS 29..475; sig_peptide 29..82; mat_peptide 83..472.</q>
+                </li>
+                <li>
+                  <a href="https://www.ncbi.nlm.nih.gov/nuccore/M62653.1"
+                    >Aequorea victoria green-fluorescent protein mRNA, complete cds, M62653.1</a
+                  >, NCBI Nucleotide (Prasher and others, Gene 111:229-233, 1992):
+                  <q>CDS 26..742, /translation=&quot;MSKGEELFTGVVPILVELDGDVNGHKFSVSG…&quot;</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> RNA polymerase reads the
+                template strand; the mRNA is built 5′ to 3′, complementary to the template, so it
+                matches the coding strand with U in place of T.
+              </p>
+              <p>
+                The coding strand is drawn on top (5′ at the left), the template under it (3′ at the
+                left), and each mRNA base appears under its template base as the complementary RNA
+                base.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://openstax.org/books/biology-2e/pages/15-2-prokaryotic-transcription"
+                    >Biology 2e, 15.2 Prokaryotic Transcription</a
+                  >, OpenStax:
+                  <q
+                    >The mRNA product is complementary to the template strand and is almost
+                    identical to the other DNA strand, called the nontemplate strand, or the coding
+                    strand.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The ribosome's small
+                subunit with the initiator tRNA (methionine) binds near the mRNA's 5′ cap and scans
+                to the first AUG; the large subunit then joins.
+              </p>
+              <p>
+                The small subunit and the first tRNA come to the 5′ end together, move along the
+                leader to the start codon, and the large subunit comes down onto them.
+              </p>
+              <p class="note">The initiation factors are left out.</p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+                    >Biology 2e, 15.5 Ribosomes and Protein Synthesis</a
+                  >, OpenStax:
+                  <q
+                    >The eukaryotic initiation complex recognizes the 7-methylguanosine cap at the
+                    5' end of the mRNA … tracks along the mRNA in the 5' to 3' direction, searching
+                    for the AUG start codon … the 60S subunit binds to the complex of Met-tRNAi,
+                    mRNA, and the 40S subunit.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> Each tRNA's anticodon
+                pairs with its codon in the A site; the chain moves onto it (a peptide bond), the
+                ribosome moves one codon, and the empty tRNA leaves from the E site.
+              </p>
+              <p>
+                A tRNA carrying the codon's amino acid docks with its anticodon on the codon, the
+                chain shifts from the P-site tRNA to it, the ribosome moves three bases along, and
+                the tRNA two places back leaves.
+              </p>
+              <p class="note">
+                Each anticodon is drawn as the exact complement of its codon. Real cells read some
+                codons with fewer tRNAs by wobble pairing at the codon's third base (inosine in the
+                anticodon can pair with U, C or A).
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+                    >Biology 2e, 15.5 Ribosomes and Protein Synthesis</a
+                  >, OpenStax:
+                  <q
+                    >The A (aminoacyl) site binds incoming charged aminoacyl tRNAs. The P (peptidyl)
+                    site binds charged tRNAs carrying amino acids that have formed peptide bonds
+                    with the growing polypeptide chain … The E (exit) site releases dissociated
+                    tRNAs.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> At a stop codon no tRNA binds;
+                a release factor frees the finished chain.
+              </p>
+              <p>
+                When the stop codon reaches the A site, a tRNA-shaped release factor comes in, the
+                chain leaves the tunnel, and the subunits come apart.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+                    >Biology 2e, 15.5 Ribosomes and Protein Synthesis</a
+                  >, OpenStax:
+                  <q
+                    >When a nonsense codon (UAA, UAG, or UGA) is encountered … release factors cause
+                    the polypeptide to detach from its tRNA.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The finished chain folds
+                into the protein's measured structure (hemoglobin beta from PDB 4HHB, insulin from
+                1MSO, lysozyme from 1LZ1, GFP from 1GFL).
+              </p>
+              <p>
+                Each amino acid moves to the place of its alpha carbon in the PDB entry, matched to
+                the protein by sequence (GFP by residue number); amino acids missing from a crystal
+                (GFP's first residue and last eight) hang loosely from their neighbors.
+              </p>
+              <p class="note">
+                The crystallized GFP has arginine at residue 80 where the mRNA record has glutamine,
+                a harmless difference in the widely used cDNA clone; the toy draws the record's
+                sequence on the crystal's shape.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.rcsb.org/structure/4HHB"
+                    >4HHB: the crystal structure of human deoxyhaemoglobin at 1.74 Å resolution</a
+                  >, RCSB Protein Data Bank: <q>Fermi, G., Perutz, M.F. (1984); X-ray, 1.74 Å.</q>
+                </li>
+                <li>
+                  <a href="https://www.rcsb.org/structure/1MSO"
+                    >1MSO: T6 human insulin at 1.0 Å resolution</a
+                  >, RCSB Protein Data Bank:
+                  <q>Smith, G.D., Pangborn, W.A., Blessing, R.H. (2003); X-ray, 1.0 Å.</q>
+                </li>
+                <li>
+                  <a href="https://www.rcsb.org/structure/1LZ1"
+                    >1LZ1: refinement of human lysozyme at 1.5 Å resolution</a
+                  >, RCSB Protein Data Bank:
+                  <q>Artymiuk, P.J., Blake, C.C.F. (1981); X-ray, 1.5 Å.</q>
+                </li>
+                <li>
+                  <a href="https://www.rcsb.org/structure/1GFL"
+                    >1GFL: structure of green fluorescent protein</a
+                  >, RCSB Protein Data Bank:
+                  <q>Yang, F., Moss, L.G., Phillips, G.N. Jr. (1996); X-ray, 1.9 Å.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The cell cuts pieces
+                away: hemoglobin beta's first methionine, insulin's signal peptide (1-24) and its
+                C-peptide with the basic pairs around it (55-89), and lysozyme's signal peptide
+                (1-18).
+              </p>
+              <p>These amino acids drift away as one piece while the rest folds.</p>
+              <p class="note">
+                In the cell these cuts happen at different times and places (signal peptides in the
+                endoplasmic reticulum as the chain is made, insulin's C-peptide in secretory
+                granules after folding). The toy makes all the cuts at once, as the chain folds.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.uniprot.org/uniprotkb/P68871">P68871 (HBB_HUMAN)</a>,
+                  UniProt: <q>INIT_MET 1, Removed; CHAIN 2..147, Hemoglobin subunit beta.</q>
+                </li>
+                <li>
+                  <a href="https://www.uniprot.org/uniprotkb/P01308">P01308 (INS_HUMAN)</a>,
+                  UniProt:
+                  <q
+                    >SIGNAL 1..24; PEPTIDE 25..54 Insulin B chain; PROPEP 57..87 C peptide; PEPTIDE
+                    90..110 Insulin A chain.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://www.uniprot.org/uniprotkb/P61626">P61626 (LYSC_HUMAN)</a>,
+                  UniProt: <q>SIGNAL 1..18; CHAIN 19..148, Lysozyme C.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Changing base 2 of codon 7 of
+                HBB from A to T turns GAG (glutamic acid) into GTG (valine): the sickle-cell change,
+                Glu6Val in the finished protein's numbering.
+              </p>
+              <p>
+                The mutation is made in the sequence before transcription, so it shows in the DNA,
+                the mRNA, the codon, the tRNA and the amino acid; the panel line gives both numbers.
+              </p>
+              <p class="note">
+                The folded hemoglobin S chain is drawn with the same shape; the change is on its
+                surface.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://medlineplus.gov/genetics/gene/hbb/">HBB gene</a>, MedlinePlus
+                  Genetics (U.S. National Library of Medicine):
+                  <q
+                    >the amino acid glutamic acid is replaced with the amino acid valine at position
+                    6 in beta-globin, written as Glu6Val (E6V)</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Adding or removing one base
+                shifts the reading frame: every codon after it changes, and translation usually
+                stops early at a new stop codon.
+              </p>
+              <p>
+                The toy reads the changed sequence (on into the real 3′ untranslated region if it
+                must) to the first stop in the new frame; a chain cut short like this is not folded.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code"
+                    >Biology 2e, 15.1 The Genetic Code</a
+                  >, OpenStax:
+                  <q
+                    >The insertion of one or two nucleotides completely changed the triplet reading
+                    frame, thereby altering the message for every subsequent amino acid.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              Only the start and end of each gene are drawn base by base: five bases before the
+              start codon, the first seven codons, the last codon and the stop codon. The codons in
+              between are drawn as plain bases and go by quickly, and a label says how many there
+              are.
+            </li>
+            <li>
+              The genes are drawn as coding sequences (like a cDNA). The real human genes have
+              introns, which are spliced out of the RNA in the nucleus before it leaves for the
+              cytoplasm; the toy leaves out splicing, the poly(A) tail and the trip through the
+              nuclear pore, and most of the 5′ leader.
+            </li>
+            <li>
+              DNA is drawn as a flat ladder; the real double helix turns once every 10.5 base pairs.
+              The transcription bubble is drawn a few bases wide; in the cell it is about a dozen.
+            </li>
+            <li>
+              RNA polymerase and the ribosome are drawn far smaller than they are next to the DNA
+              and mRNA (a real ribosome covers about 30 bases of mRNA), as clear shells so you can
+              see inside. The exit tunnel is drawn holding about five amino acids; a real one holds
+              30 or more.
+            </li>
+            <li>
+              The new chain gathers in a loose ball over the ribosome and folds after its release.
+              In the cell, many proteins begin to fold while they are being made, often helped by
+              chaperones, and hemoglobin and insulin finish as parts of larger assemblies (with
+              heme, zinc and partner chains).
+            </li>
+            <li>
+              The story takes about half a minute. A cell makes a protein of 150 amino acids in well
+              under a minute, and the transcription and translation of one gene happen many times
+              over, by many polymerases and ribosomes at once.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              GFP's first methionine was first drawn as cut away; UniProt P42212 marks the chain as
+              1-238 with no removed methionine, so it now stays.
+              <span class="note">(fixed in this PR)</span>
+            </li>
+          </ul>
+        </section>
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/tiny-r2.js"
+              ><code>src/packs/tiny-r2.js</code></a
+            >.
+          </p>
+          <ul class="toy-credits">
+            <li>
+              <b>Genes</b>:
+              <a href="https://www.ncbi.nlm.nih.gov/nuccore/"
+                >NCBI RefSeq NM_000518.5 (HBB), NM_000207.3 (INS), NM_000239.3 (LYZ) and GenBank
+                M62653.1 (GFP)</a
+              >
+              by the National Center for Biotechnology Information,
+              <a href="https://www.ncbi.nlm.nih.gov/home/about/policies/">Public domain</a>.
+            </li>
+            <li>
+              <b>Protein structures</b>:
+              <a href="https://www.rcsb.org/"
+                >RCSB Protein Data Bank entries 4HHB, 1MSO, 1LZ1 and 1GFL (alpha carbons)</a
+              >
+              by the wwPDB and the structures' authors,
+              <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.
+            </li>
+          </ul>
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
+            >.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="2" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/dna-to-protein/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=dna-to-protein&quot; title=&quot;Splashery: DNA to protein&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;dna-to-protein&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle. Every option is in the
+            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-tiny"
+              >The Tiny world shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card">
+              <a href="../../toys/chromosome/"
+                ><img
+                  src="../../../assets/toys/chromosome/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Chromosome</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/animal-cell/"
+                ><img
+                  src="../../../assets/toys/animal-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Animal cell</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/apoptosis/"
+                ><img
+                  src="../../../assets/toys/apoptosis/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Apoptosis <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/astrocyte/"
+                ><img
+                  src="../../../assets/toys/astrocyte/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Astrocyte</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/bacteriophage/"
+                ><img
+                  src="../../../assets/toys/bacteriophage/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Bacteriophage</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/mitosis/"
+                ><img
+                  src="../../../assets/toys/mitosis/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Cell division <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/dna/"
+                ><img
+                  src="../../../assets/toys/dna/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">DNA</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/microglia/"
+                ><img
+                  src="../../../assets/toys/microglia/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Microglia</span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+{
+  "toy": "word-vectors",
+  "checked": "2026-10-04",
+  "summary": "The asset is a quantized subset of Stanford’s 50-dimensional GloVe vectors. The analogy calculation really uses all 50 dimensions and finds queen for king − man + woman. The nearest-word score approximates cosine similarity, and the 3D picture preserves the arrows rather than all distances.",
+  "claims": [
+    {
+      "claim": "These are named, real 50-dimensional word vectors.",
+      "how": "Rebuilding the asset from the first 40,000 rows of Stanford’s official GloVe 6B 50D release gives identical bytes. Four original source vectors are also checked directly.",
+      "where": "src/packs/computing.js:882",
+      "sources": [
+        {
+          "title": "GloVe: Global Vectors for Word Representation",
+          "publisher": "Stanford NLP; Pennington, Socher, and Manning",
+          "url": "https://nlp.stanford.edu/projects/glove/",
+          "says": "The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and provides 50-dimensional word vectors. Vector relationships are approximate."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:663",
+      "note": ""
+    },
+    {
+      "claim": "A − B + C is computed over all 50 dimensions.",
+      "how": "Independent dot-product rankings match queen/throne, rome/milan, large/one, and swimming/diving for four analogies. The input vocabulary has 24,000 entries and the answer search uses 10,000.",
+      "where": "src/packs/computing.js:928",
+      "sources": [
+        {
+          "title": "GloVe: Global Vectors for Word Representation",
+          "publisher": "Stanford NLP; Pennington, Socher, and Manning",
+          "url": "https://nlp.stanford.edu/projects/glove/",
+          "says": "The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and provides 50-dimensional word vectors. Vector relationships are approximate."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:663",
+      "note": ""
+    },
+    {
+      "claim": "The nearest-word score approximates cosine similarity.",
+      "how": "Only the query is normalized after loading. Quantized candidate lengths range from 0.99153 to 1.00849, so their dot products can differ from cosine by less than 0.009.",
+      "where": "src/packs/computing.js:936",
+      "sources": [
+        {
+          "title": "GloVe: Global Vectors for Word Representation",
+          "publisher": "Stanford NLP; Pennington, Socher, and Manning",
+          "url": "https://nlp.stanford.edu/projects/glove/",
+          "says": "The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and provides 50-dimensional word vectors. Vector relationships are approximate."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/evidence-computing.spec.mjs:663",
+      "note": "The same four examples keep their first two words under exact cosine, but this does not prove identical rankings for every query."
+    },
+    {
+      "claim": "The 3D arrows preserve the analogy parallelogram.",
+      "how": "The linear projection gives sum = A − B + C in the displayed coordinates for all four checked queries.",
+      "where": "src/packs/computing.js:947",
+      "sources": [
+        {
+          "title": "GloVe: Global Vectors for Word Representation",
+          "publisher": "Stanford NLP; Pennington, Socher, and Manning",
+          "url": "https://nlp.stanford.edu/projects/glove/",
+          "says": "The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and provides 50-dimensional word vectors. Vector relationships are approximate."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:663",
+      "note": "Nonuniform axis scaling and discarded directions mean other distances are not generally preserved."
+    },
+    {
+      "claim": "Word relationships are approximate rather than universal truths.",
+      "how": "The retained vocabulary and training corpus determine the answers; queen is the nearest example, not an exact equality or a rule for all words.",
+      "where": "src/toy-help.js:1583",
+      "sources": [
+        {
+          "title": "GloVe: Global Vectors for Word Representation",
+          "publisher": "Stanford NLP; Pennington, Socher, and Manning",
+          "url": "https://nlp.stanford.edu/projects/glove/",
+          "says": "The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and provides 50-dimensional word vectors. Vector relationships are approximate."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:663",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The source is filtered to 24,000 lowercase words and quantized to signed bytes. Answers search only the first 10,000 retained words and exclude the three inputs. The 3D projection rescales axes; it is not a map of every high-dimensional distance."
+  ],
+  "fixes": [
+    {
+      "what": "Normalize each loaded candidate after byte decoding if a future view promises exact cosine ranking.",
+      "where": "src/packs/computing.js:936",
+      "status": "proposed"
+    }
+  ]
+}
