@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sound lab · Splashery</title>
+    <meta
+      name="description"
+      content="Sound lab, a Splashery toy made of 3D Gaussian splats: Tap to play or stop a tone."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/sound-lab/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Sound lab · Splashery" />
+    <meta
+      property="og:description"
+      content="Sound lab, a Splashery toy made of 3D Gaussian splats: Tap to play or stop a tone."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/sound-lab/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/sound-lab/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="Sound lab, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+      <div class="labs-off" data-labs-off>
+        <p class="eyebrow">In the labs</p>
+        <h1>Sound lab</h1>
+        <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
+        <p class="actions">
+          <a class="button primary" href="./?labs=1">Turn the labs on</a
+          ><a class="button" href="../../toys/">Every toy</a>
+        </p>
+      </div>
+      <article class="toy-page" data-labs>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-studio">Studio</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>Sound lab <span class="badge">labs</span></h1>
+            <p class="lead how-to">
+              Tap to play or stop a tone. The Toy tab changes it, starts the metronome, or uses your
+              microphone.
+            </p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  A bench instrument whose screen is a panel of splats: a scrolling spectrogram, the
+                  spectrum with its loudest frequency, an oscilloscope and a level meter (dBFS, with
+                  an uncalibrated dB SPL estimate).
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>
+                  A soft switch; the tone itself plays from the toy while the site's sound is on.
+                </dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvdW5kLWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="background-image: url(&quot;../../../assets/toys/sound-lab/thumb.webp&quot;)"
+              ></span>
+              <iframe
+                data-src="../../play/?toy=sound-lab"
+                title="Sound lab, live: drag to turn it"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>Drag to turn it; tap to play.</figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            Sound is air pressure going up and down, and this bench shows it four ways. The
+            oscilloscope draws the wave over a few thousandths of a second. The spectrum splits it
+            into frequencies and names the loudest. The spectrogram keeps eight seconds of spectra
+            side by side: a whistle is a bright line, a clap a column. The level is in decibels
+            below full scale (dBFS).
+          </p>
+          <p>
+            Tap to play the tone generator, a sine, square, saw or noise from 20 Hz to 20 kHz,
+            through the speaker when the site's sound is on. Two close tones beat: 440 and 443 Hz
+            swell and fade three times a second. A square wave's extra lines are its odd harmonics.
+            Tap “Use my microphone” to see your voice instead; the sound goes only to the screen.
+            The dB SPL figure is an uncalibrated estimate that assumes a typical phone microphone.
+            The metronome clicks once a beat as it swings from side to side.
+          </p>
+        </section>
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The Sound lab measures sound: a spectrogram, the spectrum with its loudest frequency, an
+            oscilloscope and a level in dBFS, from the microphone's samples or from the tone
+            generator's own signal, computed exactly as the speaker plays it. The measurements are
+            real and tested on known tones; the sound pressure level in dB SPL is an uncalibrated
+            estimate. <span class="note">Checked October 5, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The spectrum's peak is the
+                frequency of the tone being played or heard.
+              </p>
+              <p>
+                A 4096-sample Hann-windowed FFT (the song landscape's), scaled so a full-scale sine
+                reads 0 dB, with the peak refined by a parabola through the loudest bin and its
+                neighbors.
+              </p>
+              <p class="note">
+                Within 0.5% from 100 Hz to 12 kHz; the in-page test checks 440 Hz, 3 kHz and a 1 kHz
+                microphone signal.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Spectrogram">Spectrogram</a>, Wikipedia:
+                  <q
+                    >Windowing the signal and taking the squared magnitude of its short-time Fourier
+                    transform gives the spectrum at each moment.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A square wave has only odd
+                harmonics, at 1/3, 1/5 … of the fundamental's amplitude.
+              </p>
+              <p>
+                The generator's square wave is analyzed like any other sound; its spectrum shows
+                lines at 3f and 5f about 9.5 and 14 dB down and none at 2f.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Square_wave">Square wave</a>, Wikipedia:
+                  <q
+                    >An ideal square wave contains only odd-integer harmonic frequencies, the nth
+                    with amplitude 1/n of the fundamental.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Two tones close in frequency
+                beat at the difference of their frequencies.
+              </p>
+              <p>
+                The second tone adds to the first; the level and the spectrogram swell and fade |f1
+                − f2| times a second.
+              </p>
+              <p class="note">
+                Two tones 3 Hz apart are closer than one bin of the spectrum (11.7 Hz), so they show
+                as one peak that pulses, as they would on any analyzer of that resolution.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Beat_(acoustics)">Beat (acoustics)</a>,
+                  Wikipedia:
+                  <q
+                    >An interference pattern between two sounds of slightly different frequencies,
+                    perceived as a periodic variation in volume, the rate of which is the difference
+                    of the two frequencies.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The level is the RMS of the
+                last 50 ms in decibels below full scale (dBFS): a full-scale sine reads −3 dB.
+              </p>
+              <p>20 log10 of the RMS of the samples.</p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/DBFS">DBFS</a>, Wikipedia:
+                  <q
+                    >In the convention where the RMS value of a full-scale square wave is 0 dB, a
+                    sine wave cannot exist at a larger RMS value than −3 dB without clipping.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The dB SPL figure is
+                about dBFS + 120.
+              </p>
+              <p>
+                A typical digital MEMS microphone has a sensitivity of −26 dBFS at 94 dB SPL, so
+                full scale is about 120 dB SPL. The Toy tab can change the 120.
+              </p>
+              <p class="note">
+                Browsers and phones apply their own gain (the page turns off automatic gain control
+                where the browser allows), so the figure is an estimate, labeled uncalibrated on
+                screen.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://www-cce.cldnet.analog.com/media/en/analog-dialogue/volume-46/number-2/articles/understanding_microphone_sensitivity.pdf"
+                    >Understanding Microphone Sensitivity (Analog Dialogue 46-05)</a
+                  >, Analog Devices:
+                  <q
+                    >If a digital microphone's maximum SPL is 120 dB, its sensitivity is −26 dBFS
+                    (94 dB − 120 dB); typical MEMS sensitivity is −26 dBFS.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The metronome clicks once
+                a beat at the tempo set.
+              </p>
+              <p>
+                Clicks are scheduled on the audio clock at (k + ½) × 60 / bpm seconds; the
+                pendulum's angle is A sin(π t bpm / 60), one swing a beat.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Metronome">Metronome</a>, Wikipedia:
+                  <q
+                    >A device that produces a sound at a regular interval, set in beats per
+                    minute.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The click falls at each end of the pendulum's swing. A mechanical metronome's
+              escapement ticks at a set angle of its swing, which differs from model to model.
+            </li>
+            <li>The dB SPL figure is uncalibrated and unweighted (no A weighting).</li>
+            <li>
+              The speaker's cone moves with the signal at the frame's moment, scaled up so it shows;
+              at audio frequencies a real cone's motion is far too fast and small to see.
+            </li>
+            <li>
+              Screens show the generator's signal as computed here; the speaker plays the browser's
+              oscillators, whose square and saw waves are band-limited (they differ only above the
+              highest harmonic the sample rate can carry).
+            </li>
+          </ul>
+        </section>
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe and a seed: nothing in it comes from outside files.
+            Its recipe is in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/sound-lab.js"
+              ><code>src/packs/sound-lab.js</code></a
+            >.
+          </p>
+
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
+            >.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="1" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/sound-lab/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=sound-lab&quot; title=&quot;Splashery: Sound lab&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;sound-lab&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle. Every option is in the
+            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-studio"
+              >The Studio shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/song-landscape/"
+                ><img
+                  src="../../../assets/toys/song-landscape/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Song landscape <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/sound-recorder/"
+                ><img
+                  src="../../../assets/toys/sound-recorder/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Sound recorder <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/chladni-plate/"
+                ><img
+                  src="../../../assets/toys/chladni-plate/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Chladni plate <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/room-echo/"
+                ><img
+                  src="../../../assets/toys/room-echo/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Room echo meter <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/qr-code/"
+                ><img
+                  src="../../../assets/toys/qr-code/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">QR code <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/qr-damage/"
+                ><img
+                  src="../../../assets/toys/qr-damage/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">QR damage lab <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/data-in-3d/"
+                ><img
+                  src="../../../assets/toys/data-in-3d/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Data in 3D <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/qr-anatomy/"
+                ><img
+                  src="../../../assets/toys/qr-anatomy/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >How a QR code works <span class="badge">labs</span></span
+                ></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

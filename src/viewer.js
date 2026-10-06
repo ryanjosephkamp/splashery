@@ -165,9 +165,11 @@ export class Viewer {
     this.player.interact();
   }
 
+  // A host page's theme can arrive before the player has started: it is kept,
+  // and init() applies it.
   setTheme(theme) {
     this.player.hostTheme = theme === "dark" || theme === "light" ? theme : null;
-    this.player.applyLook();
+    if (this.player.stage) this.player.applyLook();
   }
 
   // Link back to the full app with the same scene.

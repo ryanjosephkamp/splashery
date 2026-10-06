@@ -8,7 +8,7 @@
 // seven-segment digits.
 
 import { mix, shade, clamp, ramp } from "../kit.js";
-import { evenBox } from "./even.js";
+import { evenBox, evenCylinder } from "./even.js";
 import { FONT } from "../font.js";
 import { CNN_NET, CNN_SAMPLES, CNN_ACCURACY } from "./computing-cnn.js";
 
@@ -1045,131 +1045,157 @@ function quatFromY(d) {
   return [c[0] / l, 0, c[2] / l, w / l];
 }
 
-// The sorting machine: eight bars (heights 1 to 8), shuffled, and the
-// arrangements each algorithm passes through. Bubble sort and quicksort
-// swap two bars at a time; merge sort merges runs, moving one bar at a time
-// into place while the rest shift over.
-const SORT = (() => {
-  const start = [5, 2, 7, 0, 6, 3, 1, 4];
-  const steps = {};
-  // Bubble sort: every swap.
-  {
-    const a = start.slice();
-    const out = [];
-    for (let n = a.length; n > 1; n--)
-      for (let i = 0; i < n - 1; i++)
-        if (a[i] > a[i + 1]) {
-          [a[i], a[i + 1]] = [a[i + 1], a[i]];
-          out.push(a.slice());
-        }
-    steps.bubble = out;
-  }
-  // Quicksort (Lomuto partition, last bar as pivot): every real swap.
-  {
-    const a = start.slice();
-    const out = [];
-    const swap = (i, j) => {
-      if (i === j) return;
-      [a[i], a[j]] = [a[j], a[i]];
-      out.push(a.slice());
-    };
-    const qs = (lo, hi) => {
-      if (lo >= hi) return;
-      const p = a[hi];
-      let i = lo;
-      for (let j = lo; j < hi; j++) if (a[j] < p) swap(i++, j);
-      swap(i, hi);
-      qs(lo, i - 1);
-      qs(i + 1, hi);
-    };
-    qs(0, a.length - 1);
-    steps.quick = out;
-  }
-  // The swap sorts: each records the arrangement after every swap.
-  const swaps = (sort) => {
-    const a = start.slice();
-    const out = [];
-    const swap = (i, j) => {
-      if (i === j) return;
-      [a[i], a[j]] = [a[j], a[i]];
-      out.push(a.slice());
-    };
-    sort(a, swap);
-    return out;
+// The sorting machine: eight bars (heights 1 to 8), shuffled, and sorted by
+// the real code of each algorithm (lane Computing r2). The code runs on the
+// bars as they stand and writes down every step as it happens: each
+// comparison of two bars, each swap of two bars and, in merge sort, each
+// move of a bar into place while the rest shift over. The pieces play the
+// arrangements after each swap or move; the sound plays every comparison and
+// every swap at the bars' own notes, in each algorithm's own voice.
+// tests/cmp2-sort.spec.mjs checks every step against reference code.
+const SORT_ALGOS = ["bubble", "quick", "merge", "insertion", "selection", "cocktail", "shell", "heap"]; // prettier-ignore
+
+// Runs one algorithm on a copy of `input` (any numbers, equal ones too).
+// Returns the arrangement after every swap or move (frames), every step in
+// order (events: { op: "compare" | "swap" | "move", i, j, vals }; a move
+// takes the bar at i to j), the comparisons and swaps (or moves) counted,
+// and the sorted list. A swap of a bar with itself moves nothing and isn't
+// counted.
+function sortRun(algo, input) {
+  const a = input.slice();
+  const frames = [];
+  const events = [];
+  let compares = 0;
+  // Compares the bars at i and j: below zero when a[i] is the smaller.
+  const cmp = (i, j) => {
+    compares++;
+    events.push({ op: "compare", i, j, vals: [a[i], a[j]] });
+    return a[i] - a[j];
   };
-  // Insertion sort: each bar swaps down past the bigger ones before it.
-  steps.insertion = swaps((a, swap) => {
-    for (let i = 1; i < a.length; i++)
-      for (let j = i; j > 0 && a[j - 1] > a[j]; j--) swap(j - 1, j);
-  });
-  // Selection sort: the smallest bar left swaps to the front.
-  steps.selection = swaps((a, swap) => {
-    for (let i = 0; i < a.length - 1; i++) {
-      let m = i;
-      for (let j = i + 1; j < a.length; j++) if (a[j] < a[m]) m = j;
-      swap(i, m);
-    }
-  });
-  // Cocktail shaker sort: bubble sort passes left to right, then back.
-  steps.cocktail = swaps((a, swap) => {
-    let lo = 0;
-    let hi = a.length - 1;
-    while (lo < hi) {
-      for (let i = lo; i < hi; i++) if (a[i] > a[i + 1]) swap(i, i + 1);
-      hi--;
-      for (let i = hi; i > lo; i--) if (a[i - 1] > a[i]) swap(i - 1, i);
-      lo++;
-    }
-  });
-  // Shell sort (gaps 4, 2, 1): insertion sort over bars a gap apart.
-  steps.shell = swaps((a, swap) => {
-    for (const gap of [4, 2, 1])
-      for (let i = gap; i < a.length; i++)
-        for (let j = i; j >= gap && a[j - gap] > a[j]; j -= gap) swap(j - gap, j);
-  });
-  // Heap sort: build a max-heap, then swap the top to the end and sift.
-  steps.heap = swaps((a, swap) => {
-    const sift = (i, n) => {
-      for (;;) {
-        let m = i;
-        const l = 2 * i + 1;
-        const r = l + 1;
-        if (l < n && a[l] > a[m]) m = l;
-        if (r < n && a[r] > a[m]) m = r;
-        if (m === i) return;
-        swap(i, m);
-        i = m;
-      }
-    };
-    for (let i = Math.floor(a.length / 2) - 1; i >= 0; i--) sift(i, a.length);
-    for (let n = a.length - 1; n > 0; n--) {
-      swap(0, n);
-      sift(0, n);
-    }
-  });
-  // Merge sort (bottom up, in place): each bar taken from the right run
-  // ahead of the left run's bars is one move.
-  {
-    const a = start.slice();
-    const out = [];
-    for (let w = 1; w < a.length; w *= 2)
-      for (let lo = 0; lo < a.length; lo += 2 * w) {
+  const swap = (i, j) => {
+    if (i === j) return;
+    events.push({ op: "swap", i, j, vals: [a[i], a[j]] });
+    [a[i], a[j]] = [a[j], a[i]];
+    frames.push(a.slice());
+  };
+  const move = (i, j) => {
+    events.push({ op: "move", i, j, vals: [a[i]] });
+    const [v] = a.splice(i, 1);
+    a.splice(j, 0, v);
+    frames.push(a.slice());
+  };
+  const n = a.length;
+  const sorts = {
+    // Bubble sort: passes left to right, each one shorter by a bar.
+    bubble() {
+      for (let m = n; m > 1; m--) for (let i = 0; i < m - 1; i++) if (cmp(i, i + 1) > 0) swap(i, i + 1); // prettier-ignore
+    },
+    // Quicksort (Lomuto partition, the last bar as the pivot).
+    quick() {
+      const qs = (lo, hi) => {
+        if (lo >= hi) return;
         let i = lo;
-        let mid = Math.min(lo + w, a.length);
-        const hi = Math.min(lo + 2 * w, a.length);
-        while (i < mid && mid < hi) {
-          if (a[i] <= a[mid]) i++;
-          else {
-            const v = a[mid];
-            a.splice(mid, 1);
-            a.splice(i, 0, v);
-            out.push(a.slice());
-            i++;
-            mid++;
+        for (let j = lo; j < hi; j++) if (cmp(j, hi) < 0) swap(i++, j);
+        swap(i, hi);
+        qs(lo, i - 1);
+        qs(i + 1, hi);
+      };
+      qs(0, n - 1);
+    },
+    // Merge sort (bottom up, in place): runs of 1, 2, 4 … merged; a bar
+    // taken from the right run ahead of the left run's bars is one move.
+    merge() {
+      for (let w = 1; w < n; w *= 2)
+        for (let lo = 0; lo < n; lo += 2 * w) {
+          let i = lo;
+          let mid = Math.min(lo + w, n);
+          const hi = Math.min(lo + 2 * w, n);
+          while (i < mid && mid < hi) {
+            if (cmp(i, mid) <= 0) i++;
+            else {
+              move(mid, i);
+              i++;
+              mid++;
+            }
           }
         }
+    },
+    // Insertion sort: each bar swaps down past the bigger ones before it.
+    insertion() {
+      for (let i = 1; i < n; i++) for (let j = i; j > 0 && cmp(j - 1, j) > 0; j--) swap(j - 1, j);
+    },
+    // Selection sort: the smallest bar left swaps to the front.
+    selection() {
+      for (let i = 0; i < n - 1; i++) {
+        let m = i;
+        for (let j = i + 1; j < n; j++) if (cmp(j, m) < 0) m = j;
+        swap(i, m);
       }
-    steps.merge = out;
+    },
+    // Cocktail shaker sort: a bubble pass left to right, then one back.
+    cocktail() {
+      let lo = 0;
+      let hi = n - 1;
+      while (lo < hi) {
+        for (let i = lo; i < hi; i++) if (cmp(i, i + 1) > 0) swap(i, i + 1);
+        hi--;
+        for (let i = hi; i > lo; i--) if (cmp(i - 1, i) > 0) swap(i - 1, i);
+        lo++;
+      }
+    },
+    // Shell sort (gaps 4, 2, 1): insertion sort over bars a gap apart.
+    shell() {
+      for (const gap of [4, 2, 1])
+        for (let i = gap; i < n; i++)
+          for (let j = i; j >= gap && cmp(j - gap, j) > 0; j -= gap) swap(j - gap, j);
+    },
+    // Heap sort: build a max-heap, then swap the top to the end and sift.
+    heap() {
+      const sift = (i, end) => {
+        for (;;) {
+          let m = i;
+          const l = 2 * i + 1;
+          const r = l + 1;
+          if (l < end && cmp(l, m) > 0) m = l;
+          if (r < end && cmp(r, m) > 0) m = r;
+          if (m === i) return;
+          swap(i, m);
+          i = m;
+        }
+      };
+      for (let i = Math.floor(n / 2) - 1; i >= 0; i--) sift(i, n);
+      for (let end = n - 1; end > 0; end--) {
+        swap(0, end);
+        sift(0, end);
+      }
+    },
+  };
+  sorts[algo]();
+  return { frames, events, compares, swaps: frames.length, sorted: a };
+}
+
+// Each algorithm's voice (from src/voices.js), so you can hear which one is
+// running; `up` lifts it an octave. Every bar has its note on the C major
+// scale, the shortest bar C, the tallest the C above.
+const SORT_VOICES = {
+  bubble: { voice: "marimba", up: 0 },
+  quick: { voice: "pluck", up: 0 },
+  merge: { voice: "harp", up: 0 },
+  insertion: { voice: "wood", up: 1 },
+  selection: { voice: "tine", up: 1 },
+  cocktail: { voice: "bar", up: 1 },
+  shell: { voice: "glass", up: 1 },
+  heap: { voice: "synth", up: 0, hold: 0.08 },
+};
+const sortNote = (v, up = 0) => `${"CDEFGABC"[v]}${4 + up + (v === 7 ? 1 : 0)}`;
+
+const SORT = (() => {
+  const start = [5, 2, 7, 0, 6, 3, 1, 4];
+  const runs = {};
+  const steps = {};
+  for (const algo of SORT_ALGOS) {
+    runs[algo] = sortRun(algo, start);
+    steps[algo] = runs[algo].frames;
   }
   const colors = ["#e8413c", "#f07a2c", "#f5b72a", "#b8d63a", "#46c46a", "#2fb3c9", "#3d78e0", "#8a55d9"]; // prettier-ignore
   const x = (slot) => (slot - 3.5) * 0.24;
@@ -1184,8 +1210,268 @@ const SORT = (() => {
     shell: "SHELL SORT",
     heap: "HEAP SORT",
   };
-  return { start, steps, names, colors, x, height, t0: 0.25, t1: 3.85 };
+  return { start, runs, steps, names, colors, x, height, t0: 0.25, t1: 3.85 };
 })();
+
+// When each step sounds, for a sort whose swaps (or moves) come every `dt`
+// seconds from t0 (the bars glide for 0.85 of each step): a swap's note
+// plays as its bars land (the bar that moves right; a move's own bar),
+// loud; the comparisons made between two swaps play softly in between, each
+// the two compared bars' notes together; then the sorted bars play their
+// scale. Returns [time, spec] in time order.
+function sortCues(algo, run, dt) {
+  const sv = SORT_VOICES[algo] || SORT_VOICES.bubble;
+  const base = { voice: sv.voice, ...(sv.hold ? { hold: sv.hold } : {}) };
+  const out = [];
+  let pending = [];
+  const flush = (a, b) => {
+    pending.forEach((e, k) => {
+      const notes = `${sortNote(e.vals[0], sv.up)}+${sortNote(e.vals[1], sv.up)}`;
+      out.push([a + ((b - a) * (k + 0.5)) / pending.length, { ...base, notes, decay: 0.35, vol: 0.28 }]); // prettier-ignore
+    });
+    pending = [];
+  };
+  let m = 0;
+  let land = 0.05;
+  for (const e of run.events) {
+    if (e.op === "compare") {
+      pending.push(e);
+      continue;
+    }
+    const next = SORT.t0 + m * dt + 0.85 * dt;
+    flush(land + 0.03, next - 0.03);
+    const v = e.op === "move" ? e.vals[0] : Math.max(e.vals[0], e.vals[1]);
+    out.push([next, { ...base, notes: sortNote(v, sv.up), decay: 0.6, vol: 0.85 }]);
+    land = next;
+    m++;
+  }
+  if (pending.length) flush(land + 0.03, Math.min(SORT.t1 + 0.05, land + 0.03 + 0.08 * pending.length)); // prettier-ignore
+  out.push([3.95, { ...base, notes: [0, 1, 2, 3, 4, 5, 6, 7].map((v) => sortNote(v, sv.up)).join(" "), step: 0.06, decay: 0.8 }]); // prettier-ignore
+  return out.sort((p, q) => p[0] - q[0]);
+}
+
+// ---- The sorting machine's views (lane Computing r2) ------------------------------------
+// Each view is driven by the same steps: at(v, slot) is where the piece of
+// value v stands in a slot; swap(v, a, b, f) where it is a fraction f of its
+// way from slot a to slot b in one swap or move (the others' paths kept
+// clear of it); back(v, a, b, f) the same for the shuffle back after the
+// sort, when every piece moves at once.
+const SORT_RING = { r: 0.7, puck: 0.11, h: 0.13 };
+const ringAngle = (s) => -Math.PI / 8 - (s * Math.PI) / 4;
+const crateSize = (v) => 0.1 + 0.02 * v;
+// The crates stand further apart than the bars, as the biggest is wider.
+const crateX = (slot) => (slot - 3.5) * 0.3;
+// Out to a side lane, across, and back in: 0 to 1 to 0 as f runs.
+const lane = (f) => ease(band(f, 0, 0.25)) * (1 - ease(band(f, 0.75, 1)));
+const across = (a, b, f) => a + (b - a) * ease(band(f, 0.25, 0.75));
+const SORT_VIEWS = {
+  // The bars (as they always were): a bar going right passes in front, one
+  // going left behind; on the shuffle back each has its own lane.
+  bars: {
+    at: (v, s) => [SORT.x(s), 0, 0],
+    swap(v, a, b, f) {
+      return [SORT.x(a + (b - a) * f), 0, Math.sign(b - a) * 0.2 * Math.sin(Math.PI * f)];
+    },
+    back(v, a, b, f) {
+      const w = Math.sin(Math.PI * f);
+      return [SORT.x(a + (b - a) * f), 0.08 * w, Math.sign(b - a) * (0.12 + 0.03 * v) * w];
+    },
+  },
+  // Crates, bigger for bigger values: a crate going left slides out to the
+  // front and along; one going right further than the next place is lifted
+  // over the others. On the shuffle back each crate slides out to its own
+  // lane (front or back, by size), across, and in.
+  crates: {
+    at: (v, s) => [crateX(s), 0, 0],
+    swap(v, a, b, f) {
+      const x = crateX(across(a, b, f));
+      if (b < a) return [x, 0, 0.3 * lane(f)];
+      return [x, b - a > 1 ? 0.3 * lane(f) : 0, 0];
+    },
+    back(v, a, b, f) {
+      return [crateX(across(a, b, f)), 0, (v - 3.5) * 0.26 * lane(f)];
+    },
+  },
+  // A ring of colored pucks on a turntable, sorted by hue into a color
+  // wheel: a puck going forward in the order takes the outer lane, one going
+  // back the inner. On the shuffle back each rises to its own height, goes
+  // round and comes down.
+  ring: {
+    at(v, s) {
+      const a = ringAngle(s);
+      return [SORT_RING.r * Math.sin(a), 0, SORT_RING.r * Math.cos(a)];
+    },
+    swap(v, a, b, f) {
+      const s = across(a, b, f);
+      const r = SORT_RING.r + Math.sign(b - a) * 0.24 * lane(f);
+      return [r * Math.sin(ringAngle(s)), 0, r * Math.cos(ringAngle(s))];
+    },
+    back(v, a, b, f) {
+      const p = this.at(v, across(a, b, f));
+      p[1] = (v + 1) * 0.15 * lane(f);
+      return p;
+    },
+  },
+  // The classic dots: each value a dot at its own height, so the sort draws
+  // the rising diagonal. Dots never meet (each has its own row); a dot that
+  // moves leans out from the board as it goes.
+  dots: {
+    at: (v, s) => [SORT.x(s), 0, 0],
+    swap(v, a, b, f) {
+      return [SORT.x(a + (b - a) * f), 0, 0.08 * Math.sin(Math.PI * f)];
+    },
+    back(v, a, b, f) {
+      return [SORT.x(a + (b - a) * f), 0, 0.08 * Math.sin(Math.PI * f)];
+    },
+  },
+};
+
+// The algorithm's name and the counter, on a panel on a post at depth z,
+// its counter at height cy.
+function sortPanel(k, algo, z, cy = 1.34) {
+  const pw = 1.7;
+  const ph = 0.6;
+  k.add(k.box(pw, ph, 0.05), {
+    pos: [0, cy + 0.12, z],
+    flat: 0.2,
+    even: true,
+    pattern: false,
+    color: (c) =>
+      keep(Math.abs(c.p[1] - cy - 0.12) > ph / 2 - 0.03 || Math.abs(c.p[0]) > pw / 2 - 0.03 ? BOARD_RIM : "#0b1020"), // prettier-ignore
+  });
+  k.add(k.box(0.05, cy - 0.24, 0.05), { pos: [0, (cy - 0.24) / 2, z], flat: 0.3, pattern: false, color: () => keep(BOARD_RIM) }); // prettier-ignore
+  text(k, SORT.names[algo], [0, cy + 0.27, z + 0.045], 0.018, "#ffd34d");
+  text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, cy, z + 0.045], 0.022, "#9fb0d6");
+  sevenSeg(k, [0.26, cy, z + 0.03], 0.22, 8);
+  sevenSeg(k, [0.44, cy, z + 0.03], 0.22, 15);
+}
+
+// A dark plinth, depth d, with a slot (of size w) for each piece at x(slot).
+function sortPlinth(k, d, x = SORT.x, w = 0.2, wide = 2.2) {
+  k.add(k.box(wide, 0.12, d), {
+    pos: [0, -0.06, 0],
+    even: true,
+    flat: 0.25,
+    color: (c) => lit(c.s.face === 2 ? "#1e2740" : "#2a3552", c.n, { amb: 0.75, dif: 0.35, spec: 0.15 }), // prettier-ignore
+  });
+  for (let slot = 0; slot < 8; slot++)
+    k.add(k.box(w, 0.004, w), {
+      pos: [x(slot), 0.002, 0],
+      flat: 0.2,
+      pattern: false,
+      color: () => keep("#141b2b"),
+    });
+}
+
+const SORT_BUILD = {
+  bars(k, algo) {
+    // The base: a dark plinth with a slot for each bar.
+    sortPlinth(k, 0.7);
+    // The bars (token = the bar's height, 0 to 7), in their shuffled order.
+    SORT.start.forEach((v, slot) => {
+      const h = SORT.height(v);
+      k.add(k.box(0.17, h, 0.17), {
+        pos: [SORT.x(slot), 0.004 + h / 2, 0],
+        even: true,
+        flat: 0.25,
+        weight: 1.3,
+        pattern: false,
+        kind: "token",
+        params: [v, 0],
+        color: (c) => keep(lit(SORT.colors[v], c.n, { amb: 0.7, dif: 0.4, spec: 0.3 })),
+      });
+    });
+    sortPanel(k, algo, -0.3);
+  },
+  crates(k, algo) {
+    // A deeper plinth: the crates' lanes for the shuffle back are on it.
+    sortPlinth(k, 2.05, crateX, 0.26, 2.65);
+    // Wooden crates, each a cube as big as its value (token = the value):
+    // a dark frame round every edge, planks across, and a painted band in
+    // the value's color.
+    SORT.start.forEach((v, slot) => {
+      const w = crateSize(v);
+      const at = [crateX(slot), 0.004 + w / 2, 0];
+      k.add(k.box(w, w, w), {
+        pos: at,
+        even: true,
+        flat: 0.3,
+        weight: 1.3,
+        pattern: false,
+        kind: "token",
+        params: [v, 0],
+        color: (c) => {
+          const q = sub(c.p, at).map((x) => Math.abs(x) / (w / 2));
+          const edge = q.filter((x) => x > 1 - 0.024 / w).length >= 2;
+          const y = (c.p[1] - at[1]) / w + 0.5;
+          let col = "#c08a50";
+          if (edge) col = "#6b4423";
+          else if (Math.abs(y - 0.5) < 0.12) col = SORT.colors[v];
+          else if ((y * 4) % 1 < 0.08) col = "#8a5a2e";
+          return keep(lit(col, c.n, { amb: 0.68, dif: 0.42, spec: 0.12 }));
+        },
+      });
+    });
+    sortPanel(k, algo, -1.2, 0.95);
+  },
+  ring(k, algo) {
+    // The turntable: a dark round plate with a ring of slots and a white
+    // mark at the front between the last place and the first.
+    const { r, puck, h } = SORT_RING;
+    k.add(evenCylinder(1.07, 1.07, 0.06, true), {
+      pos: [0, -0.03, 0],
+      even: true,
+      flat: 0.25,
+      color: (c) => lit(c.s.cap ? "#1e2740" : "#2a3552", c.n, { amb: 0.75, dif: 0.35, spec: 0.15 }), // prettier-ignore
+    });
+    for (let slot = 0; slot < 8; slot++) {
+      const p = SORT_VIEWS.ring.at(0, slot);
+      k.add(evenCylinder(puck + 0.015, puck + 0.015, 0.004, true), { pos: [p[0], 0.002, p[2]], even: true, pattern: false, color: () => keep("#141b2b") }); // prettier-ignore
+    }
+    k.add(k.box(0.025, 0.006, 0.12), { pos: [0, 0.003, r + 0.02], flat: 0.2, pattern: false, color: () => keep("#e8ecf4") }); // prettier-ignore
+    // The pucks (token = the value), each its own hue.
+    SORT.start.forEach((v, slot) => {
+      const p = SORT_VIEWS.ring.at(v, slot);
+      k.add(evenCylinder(puck, puck, h, true), {
+        pos: [p[0], 0.004 + h / 2, p[2]],
+        even: true,
+        flat: 0.25,
+        weight: 1.3,
+        pattern: false,
+        kind: "token",
+        params: [v, 0],
+        color: (c) => keep(lit(c.s.cap ? shade(SORT.colors[v], 1.15) : SORT.colors[v], c.n, { amb: 0.7, dif: 0.4, spec: 0.3 })), // prettier-ignore
+      });
+    });
+    sortPanel(k, algo, -1.3, 1.0);
+  },
+  dots(k, algo) {
+    // A dark board standing up, with a faint axis along its foot and side:
+    // the place across, the value up.
+    const W = 2.2;
+    const H = 1.85;
+    board(k, W, H, { at: [0, H / 2], even: true });
+    k.add(k.box(1.86, 0.008, 0.004), { pos: [0, 0.12, 0.004], flat: 0.2, pattern: false, color: () => keep("#3a4a6e") }); // prettier-ignore
+    k.add(k.box(0.008, 1.1, 0.004), { pos: [-0.96, 0.67, 0.004], flat: 0.2, pattern: false, color: () => keep("#3a4a6e") }); // prettier-ignore
+    // The dots (token = the value), at the value's height.
+    SORT.start.forEach((v, slot) => {
+      k.add(k.sphere(0.05), {
+        pos: [SORT.x(slot), 0.22 + v * 0.14, 0.07],
+        flat: 0.2,
+        weight: 1.6,
+        pattern: false,
+        kind: "token",
+        params: [v, 0],
+        color: (c) => keep(lit(SORT.colors[v], c.n, { amb: 0.8, dif: 0.35, spec: 0.4 })),
+      });
+    });
+    // The name and the counter, along the board's top.
+    text(k, SORT.names[algo], [0, 1.68, 0.02], 0.018, "#ffd34d");
+    text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, 1.4, 0.02], 0.022, "#9fb0d6");
+    sevenSeg(k, [0.26, 1.4, 0.005], 0.22, 8);
+    sevenSeg(k, [0.44, 1.4, 0.005], 0.22, 15);
+  },
+};
 
 // The half adder: switches A and B, wires to an XOR gate (the sum) and an
 // AND gate (the carry), and a lamp for each. 1 + 1 = 10 in binary.
@@ -3748,16 +4034,33 @@ export const RECIPES = {
           { id: "heap", label: "Heap sort" },
         ],
       },
+      // Lane Computing r2: other ways to watch the same steps.
+      {
+        key: "view",
+        label: "View",
+        type: "select",
+        default: "bars",
+        choices: [
+          { id: "bars", label: "Bars" },
+          { id: "crates", label: "Crates by size" },
+          { id: "ring", label: "Ring of colors (3D)" },
+          { id: "dots", label: "Dots" },
+        ],
+      },
     ],
     controls: [{ key: "go", label: "Sort", type: "pulse", ease: 5 }],
-    action: { key: "go", label: "Sort the bars" },
-    // The bars sort themselves, each swap or move a solid bar gliding to its
-    // new place (bars going right pass in front, bars going left behind),
-    // and the counter counts them; then the bars shuffle back.
+    // The sound is the sort's own (cues, below), so the tap itself is quiet.
+    action: { key: "go", label: "Sort the bars", quiet: ["go"] },
+    // The pieces sort themselves, each swap or move a solid piece gliding to
+    // its new place, and the counter counts them; then they shuffle back.
+    // Each comparison and each swap sounds (sortCues), a little ahead, each
+    // note timed to its step.
     drive(t, c, out, info) {
       const s = since(c.go, 5);
       const on = s >= 0;
-      const list = info.data?.steps || SORT.steps.bubble;
+      const data = info.data || {};
+      const list = data.steps || SORT.steps.bubble;
+      const view = SORT_VIEWS[data.view] || SORT_VIEWS.bars;
       const n = list.length;
       const dt = Math.min(0.34, (SORT.t1 - SORT.t0) / n);
       const k = on ? (s - SORT.t0) / dt : -1;
@@ -3769,76 +4072,45 @@ export const RECIPES = {
       const sorted = list[n - 1];
       out.tokens = [];
       for (let v = 0; v < 8; v++) {
-        const home = SORT.x(SORT.start.indexOf(v));
-        let x;
-        let y = 0;
-        let z = 0;
-        if (back > 0) {
-          const a = SORT.x(sorted.indexOf(v));
-          x = a + (home - a) * back;
-          y = 0.08 * Math.sin(Math.PI * back);
-          z = Math.sign(home - a) * (0.12 + 0.03 * v) * Math.sin(Math.PI * back);
-        } else {
-          const a = SORT.x(from.indexOf(v));
-          const b = SORT.x(to.indexOf(v));
-          x = a + (b - a) * f;
-          z = Math.sign(b - a) * 0.2 * Math.sin(Math.PI * f);
+        const slot = SORT.start.indexOf(v);
+        const home = view.at(v, slot);
+        let p;
+        if (back > 0) p = view.back(v, sorted.indexOf(v), slot, back);
+        else {
+          const a = from.indexOf(v);
+          const b = to.indexOf(v);
+          p = a === b ? view.at(v, a) : view.swap(v, a, b, f);
         }
-        out.tokens[v] = { offset: [x - home, y, z], visible: 1 };
+        out.tokens[v] = { offset: sub(p, home), visible: 1 };
       }
       const count = back > 0 ? 0 : i;
       showDigit(out.tokens, 8, count >= 10 ? Math.floor(count / 10) : -1);
       showDigit(out.tokens, 15, count % 10);
       out.resort = resortSteps(this, "sort", on ? s : -1, SORT.t0, 4.95, dt);
+      // The sound: the next 0.35 s of notes, sent about every 0.25 s (the
+      // site spaces a toy's cues 60 ms apart), each at its own time.
+      const algo = SORT.runs[data.algo] ? data.algo : "bubble";
+      const snd = (data.sound ||= { s: -1, sent: 0, list: null });
+      if (!on) snd.s = -1;
+      else {
+        if (s < snd.s) snd.sent = 0;
+        snd.s = s;
+        snd.list ||= sortCues(algo, SORT.runs[algo], dt);
+        if (s >= snd.sent - 0.1) {
+          const reach = s + 0.35;
+          const batch = snd.list
+            .filter(([at]) => at > snd.sent && at <= reach)
+            .map(([at, spec]) => ({ ...spec, at: Math.max(0, at - s) }));
+          snd.sent = reach;
+          if (batch.length) (out.cues ||= []).push(batch);
+        }
+      }
     },
     build(k, o) {
       const algo = SORT.steps[o.algo] ? o.algo : "bubble";
-      k.data = { steps: SORT.steps[algo] };
-      // The base: a dark plinth with a slot for each bar.
-      k.add(k.box(2.2, 0.12, 0.7), {
-        pos: [0, -0.06, 0],
-        even: true,
-        flat: 0.25,
-        color: (c) => lit(c.s.face === 2 ? "#1e2740" : "#2a3552", c.n, { amb: 0.75, dif: 0.35, spec: 0.15 }), // prettier-ignore
-      });
-      for (let slot = 0; slot < 8; slot++)
-        k.add(k.box(0.2, 0.004, 0.2), {
-          pos: [SORT.x(slot), 0.002, 0],
-          flat: 0.2,
-          pattern: false,
-          color: () => keep("#141b2b"),
-        });
-      // The bars (token = the bar's height, 0 to 7), in their shuffled order.
-      SORT.start.forEach((v, slot) => {
-        const h = SORT.height(v);
-        k.add(k.box(0.17, h, 0.17), {
-          pos: [SORT.x(slot), 0.004 + h / 2, 0],
-          even: true,
-          flat: 0.25,
-          weight: 1.3,
-          pattern: false,
-          kind: "token",
-          params: [v, 0],
-          color: (c) => keep(lit(SORT.colors[v], c.n, { amb: 0.7, dif: 0.4, spec: 0.3 })),
-        });
-      });
-      // The algorithm's name and the counter, on a panel behind the bars.
-      const cy = 1.34;
-      const pw = 1.7;
-      const ph = 0.6;
-      k.add(k.box(pw, ph, 0.05), {
-        pos: [0, cy + 0.12, -0.3],
-        flat: 0.2,
-        even: true,
-        pattern: false,
-        color: (c) =>
-          keep(Math.abs(c.p[1] - cy - 0.12) > ph / 2 - 0.03 || Math.abs(c.p[0]) > pw / 2 - 0.03 ? BOARD_RIM : "#0b1020"), // prettier-ignore
-      });
-      k.add(k.box(0.05, 1.1, 0.05), { pos: [0, 0.55, -0.3], flat: 0.3, pattern: false, color: () => keep(BOARD_RIM) }); // prettier-ignore
-      text(k, SORT.names[algo], [0, cy + 0.27, -0.255], 0.018, "#ffd34d");
-      text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, cy, -0.255], 0.022, "#9fb0d6");
-      sevenSeg(k, [0.26, cy, -0.27], 0.22, 8);
-      sevenSeg(k, [0.44, cy, -0.27], 0.22, 15);
+      const view = SORT_VIEWS[o.view] ? o.view : "bars";
+      k.data = { steps: SORT.steps[algo], algo, view };
+      SORT_BUILD[view](k, algo);
     },
   },
   "half-adder": {
@@ -3988,3 +4260,6 @@ export const RECIPES = {
     },
   },
 };
+
+// Exposed for the sorting machine's proof (tests/cmp2-sort.spec.mjs).
+export const SORTING = { run: sortRun, cues: sortCues, ALGOS: SORT_ALGOS, VOICES: SORT_VOICES, SORT, VIEWS: SORT_VIEWS, RING: SORT_RING }; // prettier-ignore

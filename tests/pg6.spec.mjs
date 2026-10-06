@@ -567,6 +567,8 @@ test.describe("Pop out (in the app)", () => {
   test("Your book: two figures up at once, one laid back; the switch holds across a page turn and a toy switch", async ({
     page,
   }) => {
+    // It opens three page toys and reloads once, so it runs close to 300 s on a slow machine (Ops, October 6, 2026).
+    test.setTimeout(600_000);
     await page.setViewportSize({ width: 1440, height: 900 });
     await ready(page);
     await page.evaluate(() => window.__splashery.app.chooseToy("your-book"));
