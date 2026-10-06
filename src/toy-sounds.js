@@ -2833,6 +2833,16 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 300, decay: 2.4, vol: 0.3 },
     off: { voice: "whoosh", f: 240, decay: 2.2, vol: 0.25 },
   },
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
+  // its rings.
+  "ripple-tank": [
+    { voice: "drip", f: 640, n: 1, at: 0.3, vol: 0.8 },
+    { voice: "wave", f: 420, decay: 1.2, at: 0.36, vol: 0.16 },
+  ],
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  // A tap changes the light: the lamp's switch clicks.
+  "light-bench": { voice: "switch", f: 2900, vol: 0.7 },
   // ---- Imaging (lane Imaging) ---------------------------------------------------------
   // The belt's low rumble as the bag rides through, the curtains' slap, and
   // the scanner's soft beep when its picture is done.
@@ -2954,6 +2964,65 @@ export const TOY_SOUNDS = {
   earthquakes: [
     { voice: "rumble", f: 70, rate: 7, decay: 1.8, vol: 0.6 },
     { voice: "rumble", at: 2.5, f: 90, rate: 10, decay: 1.2, vol: 0.4 },
+  ],
+  // ---- Arcade (lane Arcade) --------------------------------------------------------------
+  // Play: the ball's first knock off the paddle (the game plays its own
+  // sounds as it goes: knocks, glassy breaks, stone cracks).
+  shardball: [
+    { voice: "pock", f: 520, vol: 0.6 },
+    { voice: "glass", at: 0.12, f: 960, decay: 0.5, vol: 0.35 },
+  ],
+  // A berry's pop and a bead's soft knock.
+  longtail: [
+    { voice: "pop", f: 760, vol: 0.55 },
+    { voice: "wood", at: 0.1, f: 900, decay: 0.4, vol: 0.3 },
+  ],
+  // A pour of sand.
+  "grain-garden": { voice: "patter", decay: 0.8, vol: 0.5 },
+  // A stone landing in the well.
+  strata: [
+    { voice: "stone", f: 220, vol: 0.6, decay: 0.6 },
+    { voice: "patter", at: 0.08, vol: 0.25, decay: 0.4 },
+  ],
+  // A serve off the paddle and a tap off the rail.
+  "volley-table": [
+    { voice: "pock", f: 640, vol: 0.55 },
+    { voice: "wood", at: 0.2, f: 520, decay: 0.4, vol: 0.3 },
+  ],
+  // A rock cracking apart.
+  "stone-belt": [
+    { voice: "crack", vol: 0.7 },
+    { voice: "rumble", at: 0.03, vol: 0.35, decay: 0.6 },
+  ],
+  // A touchdown: a soft thud on the ground.
+  "soft-landing": [
+    { voice: "thud", f: 140, vol: 0.55 },
+    { voice: "hollow", at: 0.12, f: 330, decay: 0.5, vol: 0.3 },
+  ],
+  // A pop bumper's ding and a flipper's clack.
+  "night-owl-pinball": [
+    { voice: "clack", f: 900, vol: 0.45 },
+    { voice: "ding", at: 0.12, f: 1150, vol: 0.4 },
+  ],
+  // A shadow puzzle solved: a soft knock and a chime.
+  "cast-a-shadow": [
+    { voice: "wood", f: 420, decay: 0.5, vol: 0.4 },
+    { voice: "tine", at: 0.15, f: 1320, decay: 0.8, vol: 0.3 },
+  ],
+  // A marble's jump and landing.
+  "photo-dash": [
+    { voice: "boing", f: 420, vol: 0.35, decay: 0.4 },
+    { voice: "glass", at: 0.2, f: 1500, vol: 0.2, decay: 0.3 },
+  ],
+  // A caught note: a piano note and its fifth.
+  "note-rider": [
+    { voice: "grand", f: 523.25, vol: 0.5, decay: 0.8 },
+    { voice: "grand", at: 0.18, f: 783.99, vol: 0.4, decay: 0.9 },
+  ],
+  // A word's brick breaking: a paper tear and a knock.
+  "page-breaker": [
+    { voice: "pock", f: 480, vol: 0.55 },
+    { voice: "tear", at: 0.1, decay: 0.5, vol: 0.4 },
   ],
   // ---- Night sky (lane Night sky) ---------------------------------------------------
   // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
