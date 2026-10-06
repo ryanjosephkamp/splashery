@@ -38,6 +38,7 @@ export function reliefGrid(
     opacity = 1,
     v0 = 0,
     vs = 1,
+    spread = 1.45, // Live r7: a splat's diameter over its cell's width
   },
 ) {
   // prettier-ignore
@@ -52,7 +53,7 @@ export function reliefGrid(
         items.push({
           p,
           n: l === 0 ? n : [0, 0, 1],
-          size: (size * (l === 0 ? 1.45 : 1.2)) / 0.01,
+          size: (size * (l === 0 ? spread : 1.2)) / 0.01,
           flat,
           opacity,
           color: "#808080",
@@ -181,8 +182,9 @@ export class CameraDepth {
     g.drawImage(v, 0, 0, w, h);
     const data = g.getImageData(0, 0, w, h).data;
     // r5: the background layer learns the wall from this same frame, when
-    // its depth comes back (the colors of a later frame wouldn't match it).
-    if (this.back) this.sent = { w, h, data: data.slice(), crop: this.crop.slice() };
+    // its depth comes back (the colors of a later frame wouldn't match it);
+    // Live r7: and the depth's edges follow its colors.
+    this.sent = { w, h, data: data.slice(), crop: this.crop.slice() };
     this.busy = true;
     this.worker.postMessage({ type: "frame", id: ++this.id, w, h, data }, [data.buffer]);
   }
@@ -225,8 +227,19 @@ export class CameraDepth {
     const sorted = Float32Array.from(t).sort();
     const lo = sorted[Math.floor(sorted.length * 0.02)];
     const hi = sorted[Math.floor(sorted.length * 0.98)];
-    this.lo = this.lo === null ? lo : this.lo + (lo - this.lo) * 0.3;
-    this.hi = this.hi === null ? hi : this.hi + (hi - this.hi) * 0.3;
+    // (Live r7: the range wobbles a percent or two with the model's guess, and
+    // every height with it, so a change within 5% of the span eases by 0.04
+    // an answer; a bigger one, someone stepping nearer, by 0.3 as before.)
+    const warm = this.answers <= 6; // the first answers settle quickly
+    const ease = (was, now) => {
+      if (was === null) return now;
+      const span = Math.max(1e-6, (this.hi ?? hi) - (this.lo ?? lo));
+      if (warm) return was + (now - was) * 0.5;
+      return was + (now - was) * (Math.abs(now - was) < span * 0.05 ? 0.04 : 0.3);
+    };
+    const nlo = ease(this.lo, lo);
+    this.hi = ease(this.hi, hi);
+    this.lo = nlo;
     const span = Math.max(1e-6, this.hi - this.lo);
     for (let i = 0; i < t.length; i++) t[i] = Math.max(0, Math.min(1, (t[i] - this.lo) / span));
     // r5: where a near person stands before a far wall, the depth ramps
@@ -238,11 +251,31 @@ export class CameraDepth {
     // model's guess wanders from frame to frame), and keeps a real move
     // (over a quarter) as it is; then the edges are cut. Cells along an
     // outline used to flip between near and far from one answer to the next.
+    //
+    // Live r7 (the owner's push notes of October 4: "still a little bit too
+    // grainy"): a steadier blend (0.15 of a change within the model's
+    // wobble, rising smoothly to all of a clear move; was 0.4 below a quarter,
+    // which let the wobble through and held a move back); then each
+    // surface is smoothed within itself (smoothSurface: the model's guess
+    // wobbles from cell to cell, and the splats, lifted by it, showed that
+    // wobble as grain once turned), and only real jumps are cut, each cell
+    // going with the side whose colors it has (snapEdges with the frame's
+    // colors), so the cut follows the person's outline in the picture.
     const prev = this.smooth;
     if (prev && prev.length === t.length)
-      for (let i = 0; i < t.length; i++) if (Math.abs(t[i] - prev[i]) < 0.25) t[i] = prev[i] + (t[i] - prev[i]) * 0.4; // prettier-ignore
+      for (let i = 0; i < t.length; i++) {
+        const d = Math.abs(t[i] - prev[i]);
+        const a = warm ? 0.6 : d <= 0.03 ? 0.15 : d >= 0.25 ? 1 : 0.15 + (0.85 * (d - 0.03)) / 0.22;
+        t[i] = prev[i] + (t[i] - prev[i]) * a;
+      }
     this.smooth = Float32Array.from(t);
-    t.set(snapEdges(t, cols, rows));
+    const colors = this.sent ? gridColors(this.sent, cols, rows, this.mirror) : null;
+    t.set(snapEdges(smoothSurface(t, cols, rows), cols, rows, colors));
+    // Live r7: the cells near an outline, with no lone cell on the wrong side.
+    // (A per-frame step that moved the outline by each frame's colors between
+    // answers was tried and left patches on a moving face; it is gone.)
+    this.band = colors ? edgeBand(t, cols, rows) : null;
+    if (this.band) tidyBand(this.band, t);
     if (this.back && this.sent) this.back.learn(this.sent, t, cols, rows, this.mirror);
     if (!this.have) this.heights.set(t);
     this.have = true;
@@ -269,24 +302,40 @@ export class CameraDepth {
     if (va > a) sw = sh * a;
     else sh = sw / a;
     this.crop = [(1 - sw / v.videoWidth) / 2, (1 - sh / v.videoHeight) / 2, sw / v.videoWidth, sh / v.videoHeight]; // prettier-ignore
+    // Live r7: the frame shrinks with the browser's best filter (its default
+    // samples a few pixels per cell, and the camera's noise came through as
+    // grain).
+    sg.imageSmoothingEnabled = true;
+    sg.imageSmoothingQuality = "high";
     sg.drawImage(v, (v.videoWidth - sw) / 2, (v.videoHeight - sh) / 2, sw, sh, 0, 0, cols, rows);
     sg.restore();
     // r6: steadier colors. A small change from the last frame (a camera's
     // noise, which made the picture shimmer) moves only part of the way;
-    // a bigger one (something moving) shows at once.
+    // a bigger one (something moving) shows at once. Live r7: kept as
+    // floats (rounding each step held a pixel a level or two off, then let
+    // it jump), and the share follows the size of the change smoothly: a
+    // fifth of a change within the noise, all of a clear one.
     const cur = sg.getImageData(0, 0, cols, rows);
     const cp = cur.data;
-    const last = this.lastColors;
-    if (last && last.length === cp.length)
+    let last = this.lastSmooth;
+    if (!last || last.length !== cp.length) last = this.lastSmooth = Float32Array.from(cp);
+    else
       for (let i = 0; i < cp.length; i += 4) {
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
-        if (d < 20) {
-          cp[i] = last[i] + (cp[i] - last[i]) * 0.5;
-          cp[i + 1] = last[i + 1] + (cp[i + 1] - last[i + 1]) * 0.5;
-          cp[i + 2] = last[i + 2] + (cp[i + 2] - last[i + 2]) * 0.5;
-        }
+        const a = d <= 18 ? 0.2 : d >= 72 ? 1 : 0.2 + (0.8 * (d - 18)) / 54;
+        last[i] += (cp[i] - last[i]) * a;
+        last[i + 1] += (cp[i + 1] - last[i + 1]) * a;
+        last[i + 2] += (cp[i + 2] - last[i + 2]) * a;
+        cp[i] = last[i];
+        cp[i + 1] = last[i + 1];
+        cp[i + 2] = last[i + 2];
       }
     this.lastColors = cp.slice();
+    // Live r7: a light unsharp mask on what is drawn (the colors above stay
+    // as they are, for the next frame): each cell moves away from the mean
+    // of its 3 by 3 neighborhood by half the difference, so edges a cell or
+    // two wide read crisply at phone size. The noise is smoothed first.
+    sharpen(cp, cols, rows, 0.5, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
     g.putImageData(cur, 0, 0);
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
@@ -326,6 +375,7 @@ export class CameraDepth {
 // person's own colors, so no second copy of them shows behind.
 const FAR = 0.35; // a cell is wall below this (0 far .. 1 near)
 const BACK_GAP = 0.06; // r6: how far behind the wall it sits (recipe units)
+const GUARD = 4; // Live r7: its cells this near a person never learn the wall
 export class BackPlate {
   constructor(cols, rows) {
     this.cols = cols;
@@ -369,9 +419,14 @@ export class BackPlate {
     for (let y = 0; y < br; y++)
       for (let x = 0; x < bc; x++) {
         const c = y * bc + x;
+        // Live r7: GUARD cells clear of the person (was one), so the rim of
+        // their outline isn't learned as wall: the depth model draws a
+        // person's outline a little inside their hair and ears, and those
+        // colors, learned as wall, showed as a ghost of the person beside
+        // them, seen from the side.
         let edge = false;
-        for (let j = Math.max(0, y - 1); j <= Math.min(br - 1, y + 1) && !edge; j++)
-          for (let i = Math.max(0, x - 1); i <= Math.min(bc - 1, x + 1); i++)
+        for (let j = Math.max(0, y - GUARD); j <= Math.min(br - 1, y + GUARD) && !edge; j++)
+          for (let i = Math.max(0, x - GUARD); i <= Math.min(bc - 1, x + GUARD); i++)
             if (near[j * bc + i]) edge = true;
         if (edge) continue;
         // The cell's colors: the frame's pixels under it (mirrored with the
@@ -538,22 +593,265 @@ export function fillHoles(vals, w, W, H, ch) {
 // model's depth ramps over several cells once it is scaled up to the grid),
 // each cell takes the nearer or the farther value, whichever it is closer
 // to, so the jump is a clean cut instead of a ramp of hanging splats (r5).
+//
+// Live r7: only where the window holds a steep step (STEP between two
+// neighboring cells): a face's own gentle relief (a nose, a cheek) spans
+// more than EDGE across nine cells too, and cutting it there made terraces,
+// grain once turned. And given the grid's colors (cols x rows, r, g, b), a
+// cell goes with the side whose colors are nearer its own as well as its
+// depth, so the cut follows the outline in the picture.
 const EDGE = 0.15;
-const REACH = 4;
-export function snapEdges(d, w, h) {
+const STEP = 0.06;
+const REACH = 7; // Live r7: was 4; the model draws an outline a few cells inside the hair
+export function snapEdges(d, w, h, colors = null) {
   const out = new Float32Array(d.length);
+  // Cells beside a steep step, then grown by REACH (a running count per row,
+  // then per column).
+  const steep = new Uint8Array(w * h);
   for (let y = 0; y < h; y++)
     for (let x = 0; x < w; x++) {
+      const v = d[y * w + x];
+      if (x + 1 < w && Math.abs(d[y * w + x + 1] - v) > STEP) steep[y * w + x] = steep[y * w + x + 1] = 1; // prettier-ignore
+      if (y + 1 < h && Math.abs(d[(y + 1) * w + x] - v) > STEP) steep[y * w + x] = steep[(y + 1) * w + x] = 1; // prettier-ignore
+    }
+  const rowNear = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++) {
+    let last = -Infinity;
+    for (let x = 0; x < w; x++) {
+      if (steep[y * w + x]) last = x;
+      if (x - last <= REACH) rowNear[y * w + x] = 1;
+    }
+    last = Infinity;
+    for (let x = w - 1; x >= 0; x--) {
+      if (steep[y * w + x]) last = x;
+      if (last - x <= REACH) rowNear[y * w + x] = 1;
+    }
+  }
+  const near = new Uint8Array(w * h);
+  for (let x = 0; x < w; x++) {
+    let last = -Infinity;
+    for (let y = 0; y < h; y++) {
+      if (rowNear[y * w + x]) last = y;
+      if (y - last <= REACH) near[y * w + x] = 1;
+    }
+    last = Infinity;
+    for (let y = h - 1; y >= 0; y--) {
+      if (rowNear[y * w + x]) last = y;
+      if (last - y <= REACH) near[y * w + x] = 1;
+    }
+  }
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const v = d[y * w + x];
+      if (!near[y * w + x]) {
+        out[y * w + x] = v;
+        continue;
+      }
       let lo = Infinity;
       let hi = -Infinity;
       for (let j = Math.max(0, y - REACH); j <= Math.min(h - 1, y + REACH); j++)
         for (let i = Math.max(0, x - REACH); i <= Math.min(w - 1, x + REACH); i++) {
-          const v = d[j * w + i];
-          if (v < lo) lo = v;
-          if (v > hi) hi = v;
+          const u = d[j * w + i];
+          if (u < lo) lo = u;
+          if (u > hi) hi = u;
         }
+      if (hi - lo <= EDGE) {
+        out[y * w + x] = v;
+        continue;
+      }
+      // By depth alone: the nearer of the two sides (0 the far side .. 1).
+      let toNear = (v - lo) / (hi - lo);
+      if (colors) {
+        // How near the cell's colors come to any cell clearly on each side
+        // (a person is many colors, so not their mean).
+        const pick = sideByColor(d, w, h, colors, x, y, REACH, 1, lo, hi, colors, (y * w + x) * 3);
+        if (pick) toNear = toNear * (1 - pick.trust) + pick.near * pick.trust;
+      }
+      // A cell already on its side, where the depth around it is gentle (a
+      // face beside its outline), keeps its own depth: only the ramp of the
+      // model's soft edge is cut to the side's far or near value.
+      const side = toNear >= 0.5 ? hi : lo;
+      const own = toNear >= 0.5 ? v > (lo + hi) / 2 : v <= (lo + hi) / 2;
+      out[y * w + x] = own && !steep[y * w + x] ? v : side;
+    }
+  return out;
+}
+
+// Live r7: how a cell's colors (cc[o..o+2]) side with the near or the far
+// side of a jump (lo, hi) around (x, y): the nearest color among the cells
+// clearly on each side (every `step` cells within `R`). Returns null when a
+// side has no cells, else { near: 1 near .. 0 far, trust: 0..1, how clearly
+// the colors tell }.
+export function sideByColor(d, w, h, colors, x, y, R, step, lo, hi, cc, o) {
+  const nearAt = hi - (hi - lo) * 0.25;
+  const farAt = lo + (hi - lo) * 0.25;
+  let dn = Infinity;
+  let df = Infinity;
+  const r = cc[o];
+  const g = cc[o + 1];
+  const b = cc[o + 2];
+  for (let j = Math.max(0, y - R); j <= Math.min(h - 1, y + R); j += step)
+    for (let i = Math.max(0, x - R); i <= Math.min(w - 1, x + R); i += step) {
+      const k = j * w + i;
+      if (i === x && j === y) continue;
+      const u = d[k];
+      if (u < nearAt && u > farAt) continue;
+      const e = (colors[k * 3] - r) ** 2 + (colors[k * 3 + 1] - g) ** 2 + (colors[k * 3 + 2] - b) ** 2; // prettier-ignore
+      if (u >= nearAt) {
+        if (e < dn) dn = e;
+      } else if (e < df) df = e;
+    }
+  if (dn === Infinity || df === Infinity) return null;
+  dn = Math.sqrt(dn);
+  df = Math.sqrt(df);
+  return { near: df / Math.max(1e-6, dn + df), trust: Math.min(1, Math.abs(dn - df) / 30) };
+}
+
+// Live r7: the cells within BAND of a jump in the depth (d, after snapEdges,
+// so a jump is a clean step), with the depth on each side around them.
+const BAND = 8;
+export function edgeBand(d, w, h) {
+  const jump = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
       const v = d[y * w + x];
-      out[y * w + x] = hi - lo > EDGE ? (v - lo < hi - v ? lo : hi) : v;
+      if (x + 1 < w && Math.abs(d[y * w + x + 1] - v) > EDGE) jump[y * w + x] = jump[y * w + x + 1] = 1; // prettier-ignore
+      if (y + 1 < h && Math.abs(d[(y + 1) * w + x] - v) > EDGE) jump[y * w + x] = jump[(y + 1) * w + x] = 1; // prettier-ignore
+    }
+  // Within BAND of a jump (a box, by running distances along rows then columns).
+  const row = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++) {
+    let last = -Infinity;
+    for (let x = 0; x < w; x++) {
+      if (jump[y * w + x]) last = x;
+      if (x - last <= BAND) row[y * w + x] = 1;
+    }
+    last = Infinity;
+    for (let x = w - 1; x >= 0; x--) {
+      if (jump[y * w + x]) last = x;
+      if (last - x <= BAND) row[y * w + x] = 1;
+    }
+  }
+  const idx = [];
+  const lo = [];
+  const hi = [];
+  for (let x = 0; x < w; x++) {
+    let last = -Infinity;
+    const inCol = new Uint8Array(h);
+    for (let y = 0; y < h; y++) {
+      if (row[y * w + x]) last = y;
+      if (y - last <= BAND) inCol[y] = 1;
+    }
+    last = Infinity;
+    for (let y = h - 1; y >= 0; y--) {
+      if (row[y * w + x]) last = y;
+      if (last - y <= BAND) inCol[y] = 1;
+    }
+    for (let y = 0; y < h; y++) {
+      if (!inCol[y]) continue;
+      let a = Infinity;
+      let b = -Infinity;
+      for (let j = Math.max(0, y - BAND); j <= Math.min(h - 1, y + BAND); j += 2)
+        for (let k = Math.max(0, x - BAND); k <= Math.min(w - 1, x + BAND); k += 2) {
+          const u = d[j * w + k];
+          if (u < a) a = u;
+          if (u > b) b = u;
+        }
+      if (b - a <= EDGE) continue;
+      idx.push(y * w + x);
+      lo.push(a);
+      hi.push(b);
+    }
+  }
+  return { w, h, idx: Int32Array.from(idx), lo: Float32Array.from(lo), hi: Float32Array.from(hi) }; // prettier-ignore
+}
+
+// Live r7: no lone cell on the wrong side of an outline (hair the depth
+// model took for wall showed as dark specks on it, seen from the side): each
+// band cell (edgeBand) takes the side most of its eight neighbors are on.
+export function tidyBand(band, d) {
+  const { w, h, idx, lo, hi } = band;
+  const was = (band.was ||= new Float32Array(idx.length));
+  for (let b = 0; b < idx.length; b++) was[b] = d[idx[b]];
+  for (let b = 0; b < idx.length; b++) {
+    const i = idx[b];
+    const x = i % w;
+    const y = (i - x) / w;
+    if (x === 0 || y === 0 || x === w - 1 || y === h - 1) continue;
+    const mid = (lo[b] + hi[b]) / 2;
+    let near = 0;
+    for (let j = -1; j <= 1; j++)
+      for (let k = -1; k <= 1; k++) if ((j || k) && d[i + j * w + k] > mid) near++;
+    const self = was[b] > mid;
+    if (self && near <= 2) d[i] = lo[b];
+    else if (!self && near >= 6) d[i] = hi[b];
+  }
+}
+
+// Live r7: an unsharp mask on RGBA pixels (w x h) in place: c + amount (c -
+// the 3 by 3 box mean), by rows then columns.
+export function sharpen(px, w, h, amount, tmp) {
+  for (let ch = 0; ch < 3; ch++) {
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const a = px[(y * w + Math.max(0, x - 1)) * 4 + ch];
+        const b = px[(y * w + x) * 4 + ch];
+        const c = px[(y * w + Math.min(w - 1, x + 1)) * 4 + ch];
+        tmp[(y * w + x) * 3 + ch] = (a + b + c) / 3;
+      }
+  }
+  for (let y = 0; y < h; y++) {
+    const y0 = Math.max(0, y - 1);
+    const y1 = Math.min(h - 1, y + 1);
+    for (let x = 0; x < w; x++)
+      for (let ch = 0; ch < 3; ch++) {
+        const m = (tmp[(y0 * w + x) * 3 + ch] + tmp[(y * w + x) * 3 + ch] + tmp[(y1 * w + x) * 3 + ch]) / 3; // prettier-ignore
+        const o = (y * w + x) * 4 + ch;
+        px[o] = px[o] + amount * (px[o] - m);
+      }
+  }
+}
+
+// Live r7: smooths the depth within each surface and never across a jump (a
+// small bilateral filter, 5 by 5): the model's guess wobbles a little from
+// cell to cell over a face, and the splats lifted by it read as grain.
+const SMOOTH_R = 2;
+const SMOOTH_RANGE = 0.05; // depth differences beyond about this count as another surface
+export function smoothSurface(d, w, h) {
+  const out = new Float32Array(d.length);
+  const inv = 1 / (2 * SMOOTH_RANGE * SMOOTH_RANGE);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const v = d[y * w + x];
+      let s = 0;
+      let n = 0;
+      for (let j = Math.max(0, y - SMOOTH_R); j <= Math.min(h - 1, y + SMOOTH_R); j++)
+        for (let i = Math.max(0, x - SMOOTH_R); i <= Math.min(w - 1, x + SMOOTH_R); i++) {
+          const u = d[j * w + i];
+          const k = Math.exp(-(u - v) * (u - v) * inv);
+          s += u * k;
+          n += k;
+        }
+      out[y * w + x] = s / n;
+    }
+  return out;
+}
+
+// The colors of a frame the depth model saw ({ w, h, data, crop }) at the
+// grid's cells (r, g, b each, mirrored with the picture).
+export function gridColors(frame, cols, rows, mirror) {
+  const out = new Float32Array(cols * rows * 3);
+  const [cx, cy, cw, ch] = frame.crop;
+  for (let j = 0; j < rows; j++)
+    for (let i = 0; i < cols; i++) {
+      const u = mirror ? 1 - (i + 0.5) / cols : (i + 0.5) / cols;
+      const fx = Math.min(frame.w - 1, Math.floor((cx + u * cw) * frame.w));
+      const fy = Math.min(frame.h - 1, Math.floor((cy + ((j + 0.5) / rows) * ch) * frame.h));
+      const o = (fy * frame.w + fx) * 4;
+      const c = (j * cols + i) * 3;
+      out[c] = frame.data[o];
+      out[c + 1] = frame.data[o + 1];
+      out[c + 2] = frame.data[o + 2];
     }
   return out;
 }
@@ -562,6 +860,11 @@ export function snapEdges(d, w, h) {
 // A picture of relief splats facing the viewer: `cols` by `rows`, `width`
 // wide, rising toward the viewer by up to `lift` where the depth says it is
 // near. Its canvas (the recipe's screen) holds the colors and the depth.
+
+// Live r7 (the owner's "keep making it sharper" of October 5, 2026): a
+// picture splat's diameter over its cell's width. 1.45 blurred the picture;
+// at 1.2 neighbors still overlap, so no gaps show when it is turned.
+const SPREAD = 1.2;
 
 export const MIRROR = {
   cols: 128,
@@ -616,7 +919,8 @@ export function buildMirror(
   { width = 2, lift = 0.8, part = 0, look = "plain", back: wantBack = false } = {},
 ) {
   MIRROR.look = look;
-  const withBack = wantBack && look === "plain";
+  // Live r7: the hologram too (turned, it showed a hole beside the person).
+  const withBack = wantBack;
   MIRROR.back = withBack;
   const { cols, rows } = mirrorGrid(withBack ? k.count * 0.8 : k.count);
   MIRROR.cols = cols;
@@ -634,7 +938,7 @@ export function buildMirror(
       for (let i = 0; i < cols; i++) {
         const u = (i + 0.5) / cols;
         const v = (j + 0.5) / rows;
-        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, withBack ? v / 2 : v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * SPREAD) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, withBack ? v / 2 : v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
       }
     k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
     // r5: the still picture's background layer, learned once from the photo.
@@ -673,6 +977,7 @@ export function buildMirror(
     lift,
     n: [0, 0, 1],
     size: width / cols,
+    spread: SPREAD,
     part,
     vs: withBack ? 0.5 : 1,
   });
@@ -760,27 +1065,86 @@ function drawStillRested(g) {
 
 // r3: the hologram look (the owner's idea of October 2, 2026; the plain
 // look stays the default). The colors turn a cool cyan by their
-// brightness, every other row dims (scanlines that drift slowly upward),
-// and edges where the depth jumps glow.
+// brightness.
+//
+// Live r7 (the owner's push notes of October 4: "especially with the
+// hologram view. It's like stuff is kind of put on top of the face"): the
+// person (the near part, from the depth) is a clean cyan picture of
+// themselves, with no lines or glow on them. The scanlines (drifting slowly
+// upward) are only in the room behind, which is dimmer, and the glow is a
+// soft rim on the room just outside the person's outline, so it lies behind
+// and around them, never over them.
+const RIM = 4; // cells
 export function hologram(g, cols, rows, time) {
-  const img = g.getImageData(0, 0, cols * 2, rows);
+  const img = g.getImageData(0, 0, cols, rows);
   const px = img.data;
-  const W = cols * 2;
+  const n = cols * rows;
+  // How near each cell is (0 far .. 1 near).
+  let near = MIRROR.nearNow;
+  if (!near || near.length !== n) near = MIRROR.nearNow = new Float32Array(n);
+  if (MIRROR.cam?.have) near.set(MIRROR.cam.heights);
+  else if (MIRROR.cam) near.fill(0);
+  else if (MIRROR.stillAt && MIRROR.near?.length === n) near.set(MIRROR.near);
+  else {
+    const hgt = g.getImageData(cols, 0, cols, rows).data;
+    for (let i = 0; i < n; i++) near[i] = hgt[i * 4] / 255;
+  }
+  // The person (a soft 0..1), and each room cell's distance (in cells) to
+  // them, up to RIM (a chamfer pass each way).
+  const person = (MIRROR.personNow ||= new Float32Array(n));
+  const dist = (MIRROR.distNow ||= new Float32Array(n));
+  for (let i = 0; i < n; i++) {
+    const v = near[i];
+    person[i] = v <= 0.18 ? 0 : v >= 0.32 ? 1 : (v - 0.18) / 0.14;
+    dist[i] = person[i] >= 0.5 ? 0 : RIM + 1;
+  }
+  for (let j = 0; j < rows; j++)
+    for (let i = 0; i < cols; i++) {
+      const k = j * cols + i;
+      if (i > 0) dist[k] = Math.min(dist[k], dist[k - 1] + 1);
+      if (j > 0) dist[k] = Math.min(dist[k], dist[k - cols] + 1);
+    }
+  for (let j = rows - 1; j >= 0; j--)
+    for (let i = cols - 1; i >= 0; i--) {
+      const k = j * cols + i;
+      if (i < cols - 1) dist[k] = Math.min(dist[k], dist[k + 1] + 1);
+      if (j < rows - 1) dist[k] = Math.min(dist[k], dist[k + cols] + 1);
+    }
   const shift = Math.floor(time * 6) % 3;
   for (let j = 0; j < rows; j++)
     for (let i = 0; i < cols; i++) {
-      const o = (j * W + i) * 4;
+      const k = j * cols + i;
+      const o = k * 4;
       const y = (0.3 * px[o] + 0.59 * px[o + 1] + 0.11 * px[o + 2]) / 255;
-      // Depth jumps (the height channel, red, on the right half).
-      const h = (x, yy) => px[(Math.min(rows - 1, Math.max(0, yy)) * W + cols + Math.min(cols - 1, Math.max(0, x))) * 4 + (MIRROR.stillAt && !MIRROR.cam ? 2 : 0)]; // prettier-ignore
-      const edge = Math.min(1, (Math.abs(h(i + 1, j) - h(i - 1, j)) + Math.abs(h(i, j + 1) - h(i, j - 1))) / 40); // prettier-ignore
-      const scan = (j + shift) % 3 === 0 ? 0.55 : 1;
-      const v = Math.min(1, (0.15 + 0.85 * y) * scan + 0.7 * edge);
+      const m = person[k];
+      // The person: clean, with their own light and shade.
+      const vp = 0.12 + 0.88 * y;
+      // The room: dimmer, with scanlines, and a glow just outside the outline.
+      const scan = (j + shift) % 3 === 0 ? 0.6 : 1;
+      const rim = dist[k] > 0 && dist[k] <= RIM ? 0.3 * (1 - (dist[k] - 1) / RIM) ** 2 : 0;
+      const vr = (0.08 + 0.55 * y) * scan + rim;
+      const v = Math.min(1, m * vp + (1 - m) * vr);
       px[o] = Math.round(255 * v * 0.35);
       px[o + 1] = Math.round(255 * Math.min(1, v * 0.95 + 0.05));
       px[o + 2] = Math.round(255 * Math.min(1, v * 1.1 + 0.1));
     }
-  g.putImageData(img, 0, 0, 0, 0, cols, rows);
+  g.putImageData(img, 0, 0);
+  // The background layer (in the canvas's lower half, behind the person) is
+  // the room: dim cyan, with its scanlines.
+  if (MIRROR.back && g.canvas.height >= rows * 2) {
+    const bimg = g.getImageData(0, rows, cols, rows);
+    const bp = bimg.data;
+    for (let j = 0; j < rows; j++)
+      for (let i = 0; i < cols; i++) {
+        const o = (j * cols + i) * 4;
+        const y = (0.3 * bp[o] + 0.59 * bp[o + 1] + 0.11 * bp[o + 2]) / 255;
+        const v = (0.08 + 0.55 * y) * ((j + shift) % 3 === 0 ? 0.6 : 1);
+        bp[o] = Math.round(255 * v * 0.35);
+        bp[o + 1] = Math.round(255 * Math.min(1, v * 0.95 + 0.05));
+        bp[o + 2] = Math.round(255 * Math.min(1, v * 1.1 + 0.1));
+      }
+    g.putImageData(bimg, 0, rows);
+  }
 }
 
 export function mirrorStatus() {

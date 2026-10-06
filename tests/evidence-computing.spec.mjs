@@ -971,7 +971,7 @@ test("browser: production half-adder output agrees with the arithmetic", async (
 test("evidence: exact schema, complete shelf inventory, source and test locations resolve", async () => {
   const { TOYS } = await import("../src/toys.js");
   const toys = TOYS.filter((t) => ["computing", "lab"].includes(t.category));
-  expect(toys).toHaveLength(19);
+  expect(toys).toHaveLength(20);
   for (const toy of toys) {
     const evidence = JSON.parse(await read(`docs/evidence/${toy.id}.json`));
     expect(Object.keys(evidence).sort()).toEqual(
@@ -999,7 +999,7 @@ test("evidence: exact schema, complete shelf inventory, source and test location
         const lines = (await read(path)).split("\n");
         expect(Number(line)).toBeGreaterThan(0);
         expect(Number(line)).toBeLessThanOrEqual(lines.length);
-        if (path.startsWith("tests/")) expect(lines[Number(line) - 1]).toMatch(/^test\(/);
+        if (path.startsWith("tests/")) expect(lines[Number(line) - 1]).toMatch(/^\s*test\(/);
       }
       if (claim.verdict === "wrong") expect(evidence.fixes.length).toBeGreaterThan(0);
       if (claim.verdict === "simplified") expect(evidence.simplified.length).toBeGreaterThan(0);

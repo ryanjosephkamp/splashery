@@ -86,7 +86,8 @@ function column(name) {
     unit ||= m[1];
     s = s.slice(0, m.index);
   }
-  s = s.replace(/[\s-]+/g, "_");
+  // r3: and a bare trailing underscore ("frame_", ThunderSTORM's "frame [ ]").
+  s = s.replace(/[\s-]+/g, "_").replace(/_+$/, "");
   const key =
     {
       x: "x",

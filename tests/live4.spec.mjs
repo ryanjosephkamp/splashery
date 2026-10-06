@@ -1,5 +1,7 @@
 // Lane Live input r4: the Chladni plate plays your audio, and re-sorts its
 // sand when the note changes (the owner's question of October 2, 2026).
+// Lane Live r7 updated the mode checks: the sand now moves live to the new
+// figure on the same plate (no new plate per note).
 // Chromium's fake microphone plays WAV files made here.
 
 import { test, expect } from "@playwright/test";
@@ -128,9 +130,11 @@ test("a new sung note re-sorts the sand: the plate switches mode and the fresh s
     const a = await until(page, async (m) => { const s = (await import(m)).singState(); return s.p > 0.4 ? s : null; }, studio, 60_000); // prettier-ignore
     expect(a.builds).toBe(before);
     expect(a.mode).toMatch(/^2-3/);
-    // Then F♯4: a new plate (3, 4 at 375 Hz) with fresh sand, which settles too.
-    const b = await until(page, async (m) => { const s = (await import(m)).singState(); return s.builds > 0 && s.p > 0.3 && window.__splashery.player.scene.toy.options?.mode?.startsWith("3-4") ? s : null; }, studio, 60_000); // prettier-ignore
-    expect(b.builds).toBeGreaterThan(before);
+    // Then F♯4: the sand moves on to the 3, 4 figure (375 Hz) and settles
+    // there. (Live r7: on the same plate, from where it lies; until r7 a new
+    // plate with fresh sand.)
+    const b = await until(page, async (m) => { const s = (await import(m)).singState(); return s.lead?.startsWith("3-4") && s.p > 0.3 ? s : null; }, studio, 60_000); // prettier-ignore
+    expect(b.builds).toBe(before);
     // Stop the microphone: the sand it left holds, and still no bow.
     await page.evaluate(() => document.getElementById("live-mic").click());
     await until(page, async () => !(await import("/src/live/live.js")).live.on("mic"), null, 10_000).catch(() => {}); // prettier-ignore
@@ -160,17 +164,21 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   if (!(await page.evaluate(async (m) => (await import(m)).chladniFileState().playing, studio)))
     await page.evaluate(() => document.getElementById("chladni-play").click());
   await until(page, async (m) => (await import(m)).chladniFileState().playing, studio, 60_000);
-  // The first tune keeps the 195 Hz plate and settles its sand.
-  const a = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.p > 0.4 ? s : null; }, studio, 60_000); // prettier-ignore
-  expect(a.builds).toBeGreaterThan(before); // (opening the audio starts a fresh plate)
-  expect(await page.evaluate(() => window.__splashery.player.scene.toy.options?.mode ?? "2-3+")).toMatch(/^2-3/); // prettier-ignore
-  // The second tune (F♯4 and around it) takes the plate to 375 Hz, fresh sand.
-  await until(page, async () => window.__splashery.player.scene.toy.options?.mode?.startsWith("3-4"), null, 60_000); // prettier-ignore
-  const b = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.p > 0.3 ? s : null; }, studio, 60_000); // prettier-ignore
-  expect(b.builds).toBeGreaterThan(a.builds);
+  // The first tune keeps the 195 Hz plate and settles its sand. (Live r7: it
+  // waits for that mode to lead, as below for the second tune; on a loaded
+  // machine the sand could look settled while another mode led for a moment.)
+  const a = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.lead?.startsWith("2-3") && s.p > 0.4 ? s : null; }, studio, 90_000); // prettier-ignore
+  expect(a.builds).toBeGreaterThanOrEqual(before);
+  expect(a.lead).toMatch(/^2-3/);
+  // The second tune (F♯4 and around it) takes the sand to the 375 Hz figure.
+  // (Live r7: on the same plate, from where it lies; until r7 a new plate.)
+  const b = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.lead?.startsWith("3-4") && s.p > 0.3 ? s : null; }, studio, 60_000); // prettier-ignore
+  expect(b.builds).toBe(a.builds);
   expect(b.playing).toBe(true); // the audio played on through the switch
-  // Pause: the clock and the sand hold.
+  // Pause: the clock and the sand hold. (Live r7: the sand stops on the next
+  // frame; its settledness is read a moment later.)
   await page.evaluate(() => document.getElementById("chladni-play").click());
+  await page.waitForTimeout(400);
   const p0 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
   await page.waitForTimeout(1000);
   const p1 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
