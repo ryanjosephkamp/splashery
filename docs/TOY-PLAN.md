@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 419 toys. 389 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 403.
+- 433 toys. 403 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 417.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 16.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -64,10 +64,12 @@ Proposals below are suggestions; the owner may change them.
   Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
   code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
   Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
-  box, Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Grand Canyon, Mount St. Helens, The
-  sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes,
-  Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal
-  camera, Screen.
+  box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand
+  Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city,
+  Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -3252,7 +3254,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 
-## Science (7)
+## Science (9)
 
 - **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
@@ -3360,6 +3362,30 @@ Proposals below are suggestions; the owner may change them.
     and the splats that fill steep slopes are lit like the slope itself; lit by their own sideways
     normal they showed as rows of dark dots.
   - Sound: A gentle rush as the water rises; a lower one as it drains.
+- **Ripple tank** (`ripple-tank`). Now: tap: Drop a pebble. Plan: keep.
+  - Owner: Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane
+    Optics; labs only).
+  - Effect: A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave
+    equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on
+    dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a
+    pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the
+    beaches. Bars on the back wall graph the waves' strength.
+  - Improved: Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing
+    beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave
+    speed and the beaches (docs/evidence/ripple-tank.json).
+  - Sound: The pebble's plop as it lands, and the soft lap of its rings.
+- **Light bench** (`light-bench`). Now: tap: Change the light. Plan: keep.
+  - Owner: Push Plan S9 (yes), October 5, 2026: a light bench with rays traced through real glass
+    (lane Optics; labs only).
+  - Effect: Rays as thin bright splat lines on a dark bench, traced with Snell's law through parts
+    you drag and turn: a prism that fans white light into its colors on a screen, a lens with the
+    image the lens equation predicts, a flat and a curved mirror, a glass block and a light guide
+    that traps light by total internal reflection. The tap changes the light (white, red, green,
+    blue).
+  - Improved: Optics: new toy (labs). N-BK7 and N-SF11 from Schott's Sellmeier coefficients; the
+    numbers in the Toy tab; tests check Snell's law, the lens equation, the prism's deviation, a
+    mirror's focus and the guide's acceptance angle (docs/evidence/light-bench.json).
+  - Sound: The lamp's switch clicks.
 - **Climate records** (`climate-records`). Now: tap: Play the record. Plan: new effect (E6).
   - Owner: Push Plan S16 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: NOAA's Mauna Loa CO2 record (May 1974 to August 2026) as a widening spiral, one turn a
@@ -3384,8 +3410,10 @@ Proposals below are suggestions; the owner may change them.
     May 18, 1980: the summit and north flank fall to today's crater (3DEP and imagery spread out
     from the crater), a lateral blast races north and an ash column rises and drifts east (about 6
     s); a second tap goes back to 1979.
-  - Improved: Geo: new toy; the 1979 surface sinks onto today's heights while today's fades in from
-    the crater out, and is then hidden (sorting).
+  - Improved: Geo r3 (the owner: "Smoke isn't realistic"): the ash column is ten stacked segments of
+    cauliflower billows that rise from the vent and swell as they rise, dark and dense near the vent
+    and paler above, shaded by the sun, spreading at the top and drifting east on the wind; the
+    blast's clouds race out and settle as ash.
   - Sound: A deep thud and rumble, then the eruption's roar; a low rumble going back.
 - **The sea floor** (`sea-floor`). Now: tap: Drain the ocean. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
@@ -3401,8 +3429,9 @@ Proposals below are suggestions; the owner may change them.
     small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026
     (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the
     water, and a dot follows the curve on the plaque (and slides back to its start at the end).
-  - Improved: Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea
-    level).
+  - Improved: Geo r3 (the owner: "sharper, especially the tide meter"): the tide meter is a chart of
+    square pixels leaning toward the viewer, with the water under the curve filled, lines every six
+    hours and the hours written under it, and a crisp dot riding the curve.
   - Sound: Three soft waves through the day.
 - **Hurricane** (`hurricane`). Now: tap: Play the day it grew. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
@@ -3422,19 +3451,24 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft scrape and a few drips.
 - **Living city** (`living-city`). Now: tap: Day or night. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
-  - Effect: A kit-built city: cars go round their blocks on the right, an elevated train loops round
-    the edge, and a park. The tap turns day to night (walls and streets darken, each window lights
-    up at its own moment, about 4.5 s); a second tap brings the day back.
-  - Improved: Geo: new toy; cars and train are tokens on looping paths, re-sorted as they move.
+  - Effect: A real 550 m block of central Helsinki (the City of Helsinki's 2017 reality mesh, CC BY
+    4.0): Senate Square and the Cathedral, the Market Square, the South Harbor and the Uspenski
+    Cathedral. The tap turns day to night (the city dims under a blue sky, each street lamp and
+    window comes on at its own moment, the lamps lighting pools of street, about 4.5 s); a second
+    tap brings the day back.
+  - Improved: Geo r3: rebuilt from the Helsinki reality mesh (the owner: "was expecting something
+    closer to a photoreal city"; "I'm fine with the Helsinki open reality mesh").
   - Sound: A light switch and the city's low hum, darker at night.
 - **Stork migration** (`stork-migration`). Now: tap: Play the fall migration. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
   - Effect: Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief
     map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each
-    stork flies its real track, facing the way it goes, and draws its trail behind it; month labels
-    and a bar mark the time. Then the season rewinds in 2 s (the storks fly their tracks back to
-    their nests).
-  - Improved: Geo: new toy from tools/geo-migration.mjs.
+    stork (a white dot, as on a tracking map) moves along its real track and draws a thin trail
+    behind it; month labels and a bar mark the time. Then the season rewinds in 2 s (the storks fly
+    their tracks back to their nests).
+  - Improved: Geo r3 (the owner: "too cartoonish"): drawn like a real tracking map: thin tracks on
+    the ground (gaps in the fixes left blank), each bird a small white dot with a dark rim, and
+    crisp month labels.
   - Sound: Wing beats and a stork's bill clatter.
 - **Earthquakes** (`earthquakes`). Now: tap: Play the quakes in time order. Plan: keep.
   - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
@@ -3443,7 +3477,9 @@ Proposals below are suggestions; the owner may change them.
     magnitude and colored by depth. A plaque shows the source, the feed and when it was fetched. The
     tap flashes the quakes in time order (about 8 s); a tap on the plaque fetches the feed again.
     The Toy tab picks the past week, the past month or a year of the catalog.
-  - Improved: Geo: new toy (Push Plan S14); live feed approved by the owner on October 4, 2026.
+  - Improved: Geo r3 (the owner: "still needs to be sharper"; the text below the planet too): about
+    one globe point per picture pixel, a thin layer of air at the limb, crisp quake dots with no
+    glow at rest, and the plaque's text in square pixels.
   - Sound: A low rumble, and a second one.
 
 ## Imaging (6)
@@ -3514,3 +3550,103 @@ Proposals below are suggestions; the owner may change them.
     split the budget), so each view is sharper.
   - Sound: The camera's shutter clicking twice as it calibrates and a soft tick; a lower click as it
     turns off.
+
+## Arcade (12)
+
+- **Shardball** (`shardball`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).
+  - Effect: A brick-breaking game: tap to play; every brick that breaks shatters into real pieces
+    that tumble, bounce and fade. The 3D switch tips the Flat board back into a table, or takes the
+    Dome style's paddle to the bottom of a sphere under a dome of bricks, where the ball bounces in
+    3D.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: Knocks off the paddle and the rails, a glassy break for glazed bricks, a crack and
+    clatter for stone, a thud for a lost ball, a rising chime for a new level.
+- **Longtail** (`longtail`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G2 (labs only).
+  - Effect: A growing-trail game: tap to play; a string of glass beads crawls tile to tile and grows
+    with each berry. The 3D switch folds the flat cross of tiles into a cube, rounds it into a
+    Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone
+    through a tunnel, a thud when it runs into itself.
+- **Grain Garden** (`grain-garden`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G6 (labs only).
+  - Effect: A falling-sand box where every grain is a splat: pour sand, water, oil, fire, seeds or
+    stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.
+  - Improved: Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water
+    puts it out, a pop when a seed sprouts.
+- **Page Breaker** (`page-breaker`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G7 (labs only).
+  - Effect: Shardball whose bricks are the words and pictures of your own PDF page or photo, made of
+    that piece of the page; a word that breaks falls apart into pieces of its letters. Each page of
+    a PDF is a level.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the
+    picture engine's figure finder.
+  - Sound: Shardball's knocks and breaks.
+- **Strata** (`strata`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G3 (labs only).
+  - Effect: Falling stones in a deep well you look down into: our own stone shapes (a tripod, two
+    screws, a plus, a slab), moved and turned as they fall; a full layer crumbles into rubble that
+    falls and fades, and the stones above drop in. 2D is the side view.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A soft click as a stone moves, a wooden knock when it turns, a stony thud when it lands,
+    a crunch and rumble when a layer crumbles.
+- **Volley Table** (`volley-table`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G4 (labs only).
+  - Effect: A two-paddle rally against the computer: the paddle sets the angle and a moving paddle
+    puts curving spin on the ball; first to seven. The 3D switch tilts the table toward you.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A knock off each paddle, a wooden tap off the rails, a two-note chime for your point, a
+    thud for theirs.
+- **Stone Belt** (`stone-belt`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G5 (labs only).
+  - Effect: Blast drifting, tumbling rocks shaped like real asteroids (NASA's public-domain models):
+    big ones split into two smaller ones and small ones into dust, with chips flying each time. The
+    3D switch drops the camera in behind the ship.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A short zap for each shot, a crack and rumble for a big rock, a crunch for a small one,
+    an engine rumble while thrusting.
+- **Soft Landing** (`soft-landing`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G11 (labs only): the Moon
+    first, then Mars.
+  - Effect: Land a lander on real ground from NASA's elevation maps (Tycho, Copernicus and the Sea
+    of Tranquility on the Moon; Gale, Jezero, Valles Marineris and Olympus Mons on Mars): slow,
+    upright and level, or it breaks apart into real pieces. 2D is a true slice through the ground;
+    the 3D switch shows the whole patch around it.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: An engine rumble while thrusting, a soft thud and a three-note chime on touchdown, a
+    crack and clatter on a crash.
+- **Night Owl Pinball** (`night-owl-pinball`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G13 (labs only).
+  - Effect: A pinball table moved by Splashery's own rigid-body engine: the steel ball rolls down
+    the slope, bounces off rails and posts, the flippers swing and strike it, pop bumpers kick it
+    away and light up, and the plunger launches it. 2D from above; 3D from the player's end.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and
+    src/physics/world.js.
+  - Sound: A clack for each flipper, a bright ding for each bumper, small clicks off the rails, a
+    thud for the plunger and a low thud for a drained ball.
+- **Cast a Shadow** (`cast-a-shadow`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G9 (labs only).
+  - Effect: A shadow puzzle: turn a carved block between a lamp and a wall until its shadow (each
+    piece casting its own dark splat) fills the outline of a picture; the block is carved to cast a
+    different picture from the side. 2D shows only the wall; 3D shows the lamp and the block too.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A soft rising tine as the shadow gets closer, a four-note chime when it matches.
+- **Photo Dash** (`photo-dash`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G8 (labs only).
+  - Effect: A run across your own photo: the line where its sky meets its ground becomes the track,
+    and a glass marble rolls along it, faster each lap; tap to jump the gaps and catch the sparks.
+    The 3D switch raises the photo into a relief by its brightness, and the marble rolls on it.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a
+    rising three-note chime each lap.
+- **Note Rider** (`note-rider`). Now: tap: Play or pause. Plan: keep.
+  - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G10 (labs only).
+  - Effect: A song's melody comes down a three-lane track as glowing notes, low to high by pitch;
+    steer the sled into each note's lane as it arrives and the note plays, so catching them all
+    plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or
+    your own MIDI file.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Sound: Each caught note plays on the grand piano at its own pitch; a missed note is silent.
