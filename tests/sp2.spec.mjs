@@ -344,6 +344,71 @@ test.describe("lane Space r2: real worlds", () => {
     expect(order).toEqual(["s1", "ring", "les", "s2", "s3"]);
   });
 
+  // The SLS and the Space Shuttle (NASA 3D Resources, cut by tools/sp2-rockets.mjs).
+  for (const [id, order, pair] of [
+    ["sls", ["srb*", "las", "core", "icps"], "srb"],
+    ["space-shuttle", ["srb*", "et"], "srb"],
+  ]) {
+    test(`the ${id} stages in the order of a real flight, its boosters falling to both sides`, async () => {
+      const ctx = await build(id, 60000);
+      const pieces = ctx.kit.data.pieces;
+      expect(pieces).toContain(`${pair}L`);
+      expect(pieces).toContain(`${pair}R`);
+      const recipe = RECIPES[id];
+      const c = { launch: 0 };
+      const gone = {};
+      const info = { data: ctx.kit.data };
+      recipe.drive(0, c, { parts: {}, cues: [] }, info);
+      let lastBody = 0;
+      for (let s = 0; s <= 11; s += 0.1) {
+        c.launch = 1 - s / 12;
+        const out = { parts: {}, cues: [] };
+        recipe.drive(s, c, out, info);
+        for (const p of order) {
+          const name = p.endsWith("*") ? `${p.slice(0, -1)}R` : p;
+          const o = out.parts[name].offset;
+          if (gone[p] === undefined && Math.hypot(o[0], o[1], o[2]) > 0.01) gone[p] = s;
+        }
+        // The boosters move apart and tilt outward (each top away from the middle).
+        const L = out.parts[`${pair}L`];
+        const R = out.parts[`${pair}R`];
+        if (gone["srb*"] !== undefined && s > gone["srb*"] + 0.3 && s < gone["srb*"] + 1.5) {
+          expect(L.offset[0]).toBeLessThan(0);
+          expect(R.offset[0]).toBeGreaterThan(0);
+          expect(L.angle).toBeGreaterThan(0);
+          expect(R.angle).toBeLessThan(0);
+        }
+        lastBody = Math.max(lastBody, Math.abs(out.body.offset[1]));
+      }
+      const seen = Object.entries(gone)
+        .sort((a, b) => a[1] - b[1])
+        .map((e) => e[0]);
+      expect(seen).toEqual(order);
+      // The view follows what is still flying: the toy glides (down for the
+      // SLS's upper stage, up for the orbiter, whose middle is below the tank's).
+      expect(lastBody).toBeGreaterThan(0.05);
+    });
+  }
+
+  test("the NASA rocket models carry no texture (so no logo) and are colored by piece", () => {
+    for (const [file, want] of [
+      ["sls.glb", ["core", "srb", "icps", "orion", "las"]],
+      ["space-shuttle.glb", ["orbiter", "belly", "et", "srb"]],
+    ]) {
+      const b = fs.readFileSync(`assets/toys/real-rockets/${file}`);
+      const j = JSON.parse(b.subarray(20, 20 + b.readUInt32LE(12)).toString());
+      expect(j.images ?? [], file).toEqual([]);
+      expect(j.textures ?? [], file).toEqual([]);
+      const names = j.materials.map((m) => m.name);
+      for (const n of want) expect(names, file).toContain(n);
+      // The tanks' orange foam: red over green over blue.
+      const orange = j.materials.find((m) => m.name === (file === "sls.glb" ? "core" : "et"));
+      const [r, g, bl] = orange.pbrMetallicRoughness.baseColorFactor;
+      expect(r).toBeGreaterThan(g);
+      expect(g).toBeGreaterThan(bl);
+    }
+  });
+
   test("each real star system's planets go round at their measured periods", async () => {
     const D = JSON.parse(fs.readFileSync("assets/toys/star-systems/systems.json", "utf8"));
     const t1 = D.systems.find((x) => x.id === "trappist-1");
