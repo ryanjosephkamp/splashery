@@ -3993,5 +3993,65 @@
       "checked": "October 5, 2026",
       "note": "CFF_ideal.sdf from files.rcsb.org, unchanged. Fetched from files.rcsb.org on October 5, 2026."
     }
-  ]
+  ],
+  "pointCloudSamples": [
+    {
+      "id": "palace",
+      "file": "assets/toys/point-clouds/palace.laz",
+      "toy": "point-clouds",
+      "name": "USGS 3DEP lidar, project CA_SanFrancisco_1_B23: 300 m around the Palace of Fine Arts",
+      "author": "U.S. Geological Survey, 3D Elevation Program",
+      "page": "https://registry.opendata.aws/usgs-lidar/",
+      "license": "Public domain (U.S. Government work)",
+      "licenseUrl": "https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/vwr-samples.mjs from the USGS Entwine Point Tiles on AWS: the points in a 300 m box (noise classes dropped), a random 450,000 of its 8 million, moved from Web Mercator to UTM zone 10N meters, LAZ 1.4."
+    },
+    {
+      "id": "golden-gate",
+      "file": "assets/toys/point-clouds/golden-gate.laz",
+      "toy": "point-clouds",
+      "name": "USGS 3DEP lidar, project CA_SanFrancisco_1_B23: 340 m around Fort Point and the Golden Gate Bridge's south end",
+      "author": "U.S. Geological Survey, 3D Elevation Program",
+      "page": "https://registry.opendata.aws/usgs-lidar/",
+      "license": "Public domain (U.S. Government work)",
+      "licenseUrl": "https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/vwr-samples.mjs as above (450,000 points, UTM zone 10N)."
+    },
+    {
+      "id": "meteor-crater",
+      "file": "assets/toys/point-clouds/meteor-crater.laz",
+      "toy": "point-clouds",
+      "name": "USGS 3DEP lidar, project AZ_NorthEast_3_D23: 1.6 km around Barringer meteorite crater (Meteor Crater), Arizona",
+      "author": "U.S. Geological Survey, 3D Elevation Program",
+      "page": "https://registry.opendata.aws/usgs-lidar/",
+      "license": "Public domain (U.S. Government work)",
+      "licenseUrl": "https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map",
+      "checked": "October 5, 2026",
+      "note": "Made by tools/vwr-samples.mjs as above (450,000 of its 8.5 million points, UTM zone 12N)."
+    }
+  ],
+  "lazReader": {
+    "id": "laz-perf",
+    "file": "vendor/laz-perf/",
+    "toy": "point-clouds",
+    "name": "laz-perf 0.0.7",
+    "author": "Hobu, Inc.",
+    "page": "https://github.com/hobuinc/laz-perf",
+    "license": "Apache-2.0",
+    "checked": "October 5, 2026",
+    "note": "lib/worker/laz-perf.js (with a header and one export line added) and laz-perf.wasm from the npm package. Loaded only when someone opens a .laz file in the Point clouds toy."
+  },
+  "webpCodec": {
+    "id": "webp-wasm",
+    "file": "vendor/webp/",
+    "toy": "splat-toolkit",
+    "name": "WebP codec from @playcanvas/splat-transform 3.6.1 (libwebp compiled to WebAssembly)",
+    "author": "PlayCanvas Ltd. (the build); Google Inc. (libwebp)",
+    "page": "https://github.com/playcanvas/splat-transform",
+    "license": "MIT (the build); BSD-3-Clause (libwebp)",
+    "checked": "October 5, 2026",
+    "note": "lib/webp.mjs and lib/webp.wasm, unmodified. Loaded only when someone opens or saves a .sog file in the Splat toolkit."
+  }
 }

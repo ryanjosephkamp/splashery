@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 397 toys. 367 have a tap action today; the other 30 only hop.
+- 399 toys. 369 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 383.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 14.
+- **new** (needs its own effect): 16.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -60,10 +60,10 @@ Proposals below are suggestions; the owner may change them.
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, QR code,
-  Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat field, Light lab,
-  Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab,
-  Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen.
+  Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point
+  clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
+  Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut
+  CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -72,8 +72,8 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
-  a QR code works, QR damage lab, Three QR codes in one, Video to 3D, Cryo-EM map, Contour lab,
-  Terrain in a box, Data in 3D, Climate records
+  a QR code works, QR damage lab, Three QR codes in one, Video to 3D, Splat toolkit, Point clouds,
+  Cryo-EM map, Contour lab, Terrain in a box, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2853,7 +2853,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (15)
+## Studio (17)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -3011,6 +3011,45 @@ Proposals below are suggestions; the owner may change them.
     the recording. Trim, then save as WAV or a smaller Opus or AAC file.
   - Improved: Sound and light lab: new toy; the WAV file round-trips sample for sample (tested).
   - Sound: A soft click.
+- **Splat toolkit** (`splat-toolkit`). Now: tap: Spin it round (both, in step). Plan: new effect
+  (E6).
+  - Owner: The owner's Push Plan pick S3, "Useful to everyone who makes splats" (October 4, 2026;
+    lane Viewers; labs only).
+  - Effect: A splat file opened on the device: its numbers (splat count, size, harmonics degree,
+    file size, memory); crop with a box (its outline drawn), remove floaters with a statistical
+    outlier filter you tune (removed splats in red, or before and after side by side), shrink to a
+    share of the splats, save as PLY, SPZ, SOG or .splat, and compare two splats side by side. The
+    tap spins it round once, each splat about its own middle, both in step (3 s).
+  - Improved: Viewers: readers for PLY (binary, text and compressed), .splat, SPZ 1 to 3 and SOG 2
+    (zipped or as meta.json with its pictures); writers for PLY, SPZ 3, SOG 2 (base colors) and
+    .splat; everything in a worker; the preview draws the most visible splats within the device's
+    budget. Samples: the cactus, strawberry and bee captures, and the cactus with 0.6% stray splats
+    added. Viewers r3 (the owner's "the toys could still be sharper", October 5, 2026): as many
+    splats as each device draws smoothly, splats left at their own size (a preview grows them by at
+    most a quarter), two splats stacked one above the other on a phone held upright, and far strays
+    left out of the view so the splat fills the screen.
+  - Sound: A soft swish of air as it spins.
+- **Point clouds** (`point-clouds`). Now: tap: Sweep a lidar scan line over it. Plan: new effect
+  (E6).
+  - Owner: The owner's Push Plan pick S2, "Absolutely, yes ... maybe even a little bit more"
+    (October 4, 2026; lane Viewers; labs only).
+  - Effect: LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity,
+    classification (with a legend) or the file's own colors; measure the distance between two tapped
+    points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save
+    as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line across the points from west to
+    east, like a scanner's pass over the ground (2.6 s).
+  - Improved: Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf
+    (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ
+    writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of
+    Fine Arts, the Golden Gate Bridge's south end, Meteor Crater. Viewers r2 (the owner's "Please
+    make sharper" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's
+    sharper falloff, shaded relief baked into their colors (lit by the slope under each point,
+    darker under canopies), the preview picks one point per small cube instead of a random share (no
+    more holes), and up to the device's full budget. Viewers r3 (the owner's "the toys could still
+    be sharper", October 5, 2026): the samples remade with even thinning (one point per small cube,
+    so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or
+    cliff, so edges read crisply.
+  - Sound: An airy rising tone with faint ticks as the scan line crosses.
 - **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
   - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,

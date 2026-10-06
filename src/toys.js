@@ -3582,6 +3582,27 @@ export const TOYS = [
     camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.0 },
   },
   // ---- End of pack: sound-lab ----
+  // ---- Pack: viewers (lane Viewers) ----
+  {
+    id: "splat-toolkit",
+    label: "Splat toolkit",
+    category: "studio",
+    kind: "kit",
+    pack: "viewers",
+    labs: true,
+    tags: "gaussian splats ply splat spz sog compressed convert converter crop floaters outlier filter clean decimate shrink compare stats file tool",
+    camera: { yaw: 0.45, pitch: 0.2, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "point-clouds",
+    label: "Point clouds",
+    category: "studio",
+    kind: "kit",
+    pack: "viewers",
+    labs: true,
+    tags: "lidar las laz ply xyz pts point cloud survey usgs 3dep terrain classification intensity measure distance crop thin gis",
+    camera: { yaw: 0.6, pitch: 0.55, roll: 0, distance: 2.8 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
