@@ -25,6 +25,16 @@ it; start it with this brief, word for word, under "## Brief", then keep "## Sta
   - Specs: `tests/asc.spec.mjs` (5 tests, all pass), `tests/asc-unit.spec.mjs` (4, all pass),
     `tests/asc-repeat.spec.mjs` (ten jobs and five cancels).
   - `tools/asc-clips.mjs` renders the review clips.
+  - Evidence in `docs/audits/ascii-capture-2026-10/` (624 KB): the ten-job and five-Cancel
+    measurements (`repeat-jobs.json`, flat: 1 document, 31 listeners, JS heap 2.7 to 2.8 MB) and a
+    contact sheet of each preset's GIF.
+  - Clips posted on Effect review page 2 (lane record `AsciiCapture`): `asc-grapes`, `asc-orange`,
+    `asc-strawberry` (each preset's GIF, 72 columns, color) and `asc-lab-page` (the lab at 390 by
+    844 during a capture).
+  - Checks run: `tests/asc.spec.mjs` 5 of 5, `tests/asc-unit.spec.mjs` 4 of 4,
+    `tests/asc-repeat.spec.mjs` 1 of 1 (6.4 minutes), `tests/asc-core.spec.mjs` 4 of 4, the embed
+    transfer test (8.9 MB), `npx prettier --check .` and `node tools/us-english.mjs --diff` clean.
+    The full suite was not run here.
 
 ## Notes
 
