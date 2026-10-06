@@ -40,7 +40,7 @@ const asset = (name) => new URL(`../../assets/toys/powers-of-ten/${name}`, impor
 
 // Picture sides per device tier: a layer on show is about this many splats
 // square (two or three layers show at once while one fades into the next).
-const SIDE = { low: 360, mid: 560, high: 720, max: 800 };
+const SIDE = { low: 360, mid: 560, high: 600, max: 600 };
 
 async function pixels(name, side) {
   const r = await fetch(asset(name));
@@ -125,7 +125,7 @@ async function buildAerial(k, layer, profile) {
 // The half of the Earth that faces the target, from the hemisphere picture
 // (180 by 180 degrees of longitude and latitude round it).
 async function buildGlobe(k, layer, profile) {
-  const side = { low: 400, mid: 560, high: 800, max: 1024 }[profile] || 560;
+  const side = { low: 400, mid: 560, high: 600, max: 600 }[profile] || 560;
   const W = 1024;
   const data = await pixels("earth-hemisphere.jpg", W);
   const ku = U / 10 ** layer.e;
@@ -230,7 +230,7 @@ async function buildBed(k, layer, profile) {
     a[3] * b[2] + a[0] * b[1] - a[1] * b[0] + a[2] * b[3],
     a[3] * b[3] - a[0] * b[0] - a[1] * b[1] - a[2] * b[2],
   ];
-  const max = { low: 120000, mid: 220000, high: 400000, max: 600000 }[profile] || 220000;
+  const max = { low: 120000, mid: 220000, high: 300000, max: 360000 }[profile] || 220000;
   const step = Math.max(1, t.n / max);
   const n = Math.floor(t.n / step);
   k.cloud({ count: (n * 160000) / k.count, jitter: 0, pattern: false }, (_r, j) => {
@@ -510,6 +510,51 @@ async function buildGalaxy(k, layer, profile) {
   });
 }
 
+// ---- Pictures under the microscope ----------------------------------------------------------
+
+// A flat picture (a photo or a micrograph) `layer.width` meters across,
+// centered on the zoom's target. `key`: "light" or "dark" makes a plain
+// background of that kind clear, so the subject (a leaf on a white table)
+// lies on the scene round it.
+async function buildPicture(k, layer, profile) {
+  const side = SIDE[profile] || SIDE.mid;
+  const data = await pixels(layer.file, side);
+  const ku = U / 10 ** layer.e;
+  const w = layer.width * ku;
+  const c = layer.center || [0.5, 0.5];
+  if (layer.key) {
+    for (let i = 0; i < side * side; i++) {
+      const o = i * 4;
+      const r = data[o] / 255;
+      const g = data[o + 1] / 255;
+      const b = data[o + 2] / 255;
+      const hi = Math.max(r, g, b);
+      const lo = Math.min(r, g, b);
+      // Light: bright and gray; dark: dim.
+      const bg = layer.key === "light" ? smooth(0.12, 0.05, hi - lo) * smooth(0.6, 0.8, hi) : smooth(0.12, 0.05, hi); // prettier-ignore
+      data[o + 3] = Math.round(255 * (1 - bg));
+    }
+  }
+  const pitch = U / side;
+  const s0 = 0.62 * pitch * (w / U);
+  k.cloud({ count: (side * side * 160000) / k.count, jitter: 0, pattern: false }, (_r, i) => {
+    const o = i * 4;
+    const a = data[o + 3] / 255;
+    if (a < 0.03) return null;
+    const x = ((i % side) + 0.5) / side;
+    const y = (((i / side) | 0) + 0.5) / side;
+    return {
+      p: [(x - c[0]) * w, (c[1] - y) * w, 0],
+      scales: [s0, s0, s0 * 0.1],
+      quat: [0, 0, 0, 1],
+      color: [data[o] / 255, data[o + 1] / 255, data[o + 2] / 255],
+      opacity: a,
+      kind: "fade",
+      params: [0, -0.99],
+    };
+  });
+}
+
 // ---- The ribosome (a cryo-EM map) ----------------------------------------------------------
 
 // Science r3's map of a bacterial ribosome (E. coli 70S, EMD-48329, with its
@@ -614,6 +659,7 @@ export const LAYERS = [
     e: a.e,
     cover: true,
     fadeIn: a.e === 6 ? [0.08, 0.2] : [0.3, 0.55],
+    dim: a.e === 1.5 ? [-1.1, -0.5, 0.3] : null,
     build: (k, layer, profile) => buildAerial(k, a, profile),
   })),
   { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [6, 9], build: buildBed }, // prettier-ignore
@@ -629,11 +675,16 @@ export function layout(z) {
     const s = 10 ** (l.e - z);
     let f = smooth(l.fadeIn[0], l.fadeIn[1], s);
     if (l.fadeOut) f *= 1 - smooth(l.fadeOut[0], l.fadeOut[1], s);
-    return { l, s, f };
+    // `dim: [z0, z1, least]`: dimmed toward `least` as the zoom goes from z0
+    // in to z1 (the aerial picture round the garden bed, far past its own
+    // detail there).
+    const full = f;
+    if (l.dim) f *= 1 - (1 - l.dim[2]) * smooth(l.dim[0], l.dim[1], -z);
+    return { l, s, f, full };
   });
   // The finest cover that fills the view hides every layer coarser than it.
   let floor = -Infinity;
-  for (const x of shown) if (x.l.cover && x.f >= 0.999 && x.s >= 1.9) floor = Math.max(floor, -x.l.e); // prettier-ignore
+  for (const x of shown) if (x.l.cover && x.full >= 0.999 && x.s >= 1.9) floor = Math.max(floor, -x.l.e); // prettier-ignore
   for (const x of shown) {
     if (x.f <= 0.001 || -x.l.e < floor) continue;
     out[x.l.id] = { scale: x.s, fade: x.f };
@@ -682,6 +733,10 @@ export function rulerFor(m) {
 
 const JOURNEY = 70; // seconds for the whole journey (Play)
 
+// For tools and tests: a zoom to hold (tools/pot-clip.mjs steps it frame by
+// frame); null in the app.
+export const CLIP = { z: null };
+
 // The journey's zoom at progress p (0..1): out from the garden to the
 // galaxy, down through everything to the smallest stop, and back home.
 export function journey(p) {
@@ -696,8 +751,30 @@ export function journey(p) {
   return Z_MIN + c * ease((d - a - b) / c);
 }
 
+const PD = { license: "Public domain", licenseUrl: "https://www.usa.gov/government-copyright" };
+const BY = { license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/licenses/by/4.0/" };
+const BYSA = {
+  license: "CC BY-SA 4.0",
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+};
+export const CREDITS = [
+  { label: "The Milky Way's stand-in", title: "M83 (eso0825a)", source: "https://www.eso.org/public/images/eso0825a/", author: "ESO", ...BY }, // prettier-ignore
+  { label: "Stars within 1,600 light-years", title: "HYG database v4.4", source: "https://codeberg.org/astronexus/hyg", author: "David Nash (astronexus)", ...BYSA }, // prettier-ignore
+  { label: "Stars within 65 light-years", title: "Gaia Catalogue of Nearby Stars (Smart et al. 2021)", source: "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/649/A6", author: "ESA/Gaia/DPAC", license: "CC BY-SA 3.0 IGO", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/igo/" }, // prettier-ignore
+  { label: "Planets", title: "Approximate Positions of the Planets (Table 1)", source: "https://ssd.jpl.nasa.gov/planets/approx_pos.html", author: "E. M. Standish, JPL", ...PD }, // prettier-ignore
+  { label: "The Moon", title: "CGI Moon Kit (LRO LROC color mosaic)", source: "https://svs.gsfc.nasa.gov/4720", author: "NASA's Scientific Visualization Studio; LRO LROC team", ...PD }, // prettier-ignore
+  { label: "The Earth", title: "Blue Marble: Next Generation (via USGS The National Map, USGS Imagery Only)", source: "https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation", author: "NASA Earth Observatory (Reto Stöckli)", ...PD }, // prettier-ignore
+  { label: "From 1,000 km to 10 km", title: "Sentinel-2 cloudless 2016 (EOxCloudless)", source: "https://cloudless.eox.at", author: "EOX IT Services GmbH (contains modified Copernicus Sentinel data 2016)", ...BY }, // prettier-ignore
+  { label: "3 km", title: "USGS Imagery Only (NAIP)", source: "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer", author: "USDA, USGS The National Map", ...PD }, // prettier-ignore
+  { label: "From 1 km to 30 m", title: "Aerial Photography (Orthophoto) 2023, 3 inch", source: "https://opendata.dc.gov/", author: "District of Columbia, Office of the Chief Technology Officer", ...BY }, // prettier-ignore
+  { label: "The garden bed", title: "Golden Fullmoon Maple (3D capture)", source: "https://superspl.at/scene/f233b115", author: "Joshua Trapani", ...BY, changes: "Decimated, turned to be seen from above and set in the garden at an estimated 2 m long." }, // prettier-ignore
+  { label: "The ribosome", title: "Arbekacin-bound E. coli 70S ribosome, 3.2 Å (EMD-48329), with its model (PDB 9MKK)", source: "https://www.ebi.ac.uk/emdb/EMD-48329", author: "S. Majumdar, N. P. Parajuli, X. Ge, A. Emmerich and S. Sanyal (2025), via EMDB and the PDB", license: "Public domain (EMDB)", licenseUrl: "https://www.ebi.ac.uk/emdb/faq" }, // prettier-ignore
+];
+
 const RECIPE = {
   turntable: false,
+  note: "Every scene is a real picture or real data at its true size; the planets, the Moon and the stars are where they were at 12:54 p.m. EDT on October 7, 2026, straight up from the garden. The Milky Way can't be photographed from outside: M83, a galaxy much like it, stands in at its size and tilt.",
+  credits: CREDITS,
   tiltLock: true,
   zoom: true,
   kernel: "sharp",
@@ -750,6 +827,7 @@ const RECIPE = {
       m.goal = journey(1 - c.play);
       m.z = m.goal;
     } else m.z += (m.goal - m.z) * (1 - Math.exp(-dt / 0.18));
+    if (CLIP.z !== null) m.goal = m.z = CLIP.z;
     const z = m.z;
     // Which chunks: built near the view, freed far from it.
     const lay = layout(z);

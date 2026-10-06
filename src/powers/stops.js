@@ -41,14 +41,14 @@ export const STOPS = [
   {
     id: "stars-local",
     e: 19.4,
-    size: 3.0857e19,
+    size: 1.514e19,
     label: "About 98,000 stars within 1,600 light-years of the Sun, where they really are.",
     source: "HYG database v4.4 (David Nash; Hipparcos, Yale, Gliese), CC BY-SA 4.0.",
   },
   {
     id: "stars-near",
     e: 18,
-    size: 1.2343e18,
+    size: 6.15e17,
     label: "Every known star within 65 light-years of the Sun: about 2,200.",
     source:
       "Gaia Catalogue of Nearby Stars (ESA/Gaia/DPAC), CC BY-SA 3.0 IGO; HYG v4.4, CC BY-SA 4.0.",
@@ -67,7 +67,7 @@ export const STOPS = [
     size: 9.0e12,
     label: "The Sun and the planets' orbits out to Neptune's, about 60 AU (9 billion km) across.",
     source:
-      "Orbits and places at noon on October 7, 2026: JPL, Approximate Positions of the Planets (public domain).",
+      "Orbits, and places at 12:54 p.m. EDT on October 7, 2026: JPL, Approximate Positions of the Planets (public domain).",
   },
   {
     id: "inner",
@@ -81,7 +81,7 @@ export const STOPS = [
   {
     id: "moon",
     e: 9,
-    size: 7.688e8,
+    size: 3.844e8,
     label:
       "The Earth and the Moon, about 384,400 km apart on average, and the Moon's path for a month.",
     source:
@@ -97,8 +97,8 @@ export const STOPS = [
   {
     id: "region",
     e: 6,
-    size: 300e3,
-    label: "The Chesapeake Bay, about 300 km long, and the Mid-Atlantic coast.",
+    size: 322e3,
+    label: "The Chesapeake Bay, about 320 km long, and the Mid-Atlantic coast.",
     source: "Sentinel-2 cloudless 2016 by EOX (contains Copernicus Sentinel data), CC BY 4.0.",
   },
   {
@@ -111,8 +111,8 @@ export const STOPS = [
   {
     id: "mall",
     e: 3.3,
-    size: 3e3,
-    label: "The National Mall, about 3 km from the Capitol to the Lincoln Memorial.",
+    size: 3.2e3,
+    label: "The National Mall, about 3.2 km from the Capitol to the Lincoln Memorial.",
     source:
       "USGS The National Map (NAIP), public domain; D.C. 2023 aerial photo (OCTO), CC BY 4.0.",
   },
@@ -134,9 +134,9 @@ export const STOPS = [
   {
     id: "ribosome",
     e: -7.4,
-    size: 25e-9,
+    size: 20e-9,
     label:
-      "A ribosome, the machine that builds proteins, about 25 nm across: its RNA orange, its proteins blue.",
+      "A ribosome, the machine that builds proteins, about 20 nm across: its RNA orange, its proteins blue.",
     source:
       "Cryo-EM map EMD-48329 and model PDB 9MKK (E. coli 70S; Majumdar et al. 2025), public domain.",
   },
