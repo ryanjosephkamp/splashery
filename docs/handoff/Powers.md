@@ -25,7 +25,7 @@ size and real tilt), stars within 1,600 light-years 19.4 (HYG v4.4), within 65 l
 the Earth 7.1 (Blue Marble), the Chesapeake 6, Washington 4.6, the Mall 3.3, the Haupt Garden 2
 (D.C.'s 8 cm aerial), the garden bed 0.6 (3D capture), a Japanese maple leaf −1.2 (Flickr, CC BY),
 plant cells −4 and a chloroplast −5.6 (Wellcome, CC BY), the ribosome −7.4 (EMD-48329). New files:
-5.6 MB, loaded a few at a time (under 8 MB at open on a high tier, the garden capture's lite file
+5.5 MB, loaded a few at a time (under 8 MB at open on a high tier, the garden capture's lite file
 included).
 
 ## Notes", "## Known issues" and "##
