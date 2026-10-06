@@ -761,7 +761,14 @@ function driveR2(g, out, info) {
       // Live r7: the land slides back over the plain, which stays put; splats
       // sort where they were built, so they sort again as it slides (the
       // plain drew over the land otherwise).
-      const off = liveOffset(R2.land, now, duration);
+      //
+      // Before anything is heard no land shows, and it rests where it was
+      // built (no slide), so it sorts there too. The sort's centers are the
+      // toy's shape for Hands-on, which otherwise took the hidden land, slid
+      // ahead of the plain, as part of the toy (it came to rest tilted, part
+      // of it under the floor). The first moment heard rises at the front
+      // line, so the slide starting then doesn't show.
+      const off = now > 0 ? liveOffset(R2.land, now, duration) : 0;
       out.parts.look = { offset: [0, 0, off] };
       if (Math.abs(off - (R2.land.sortedAt ?? Infinity)) > 0.02) {
         R2.land.sortedAt = off;

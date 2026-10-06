@@ -46,18 +46,37 @@ export const glyphOf = (ch) => {
   return GLYPHS[plain.toUpperCase()] ?? GLYPHS["?"];
 };
 
-// The inked pixels of a line of text, and its size in font pixels (6 per
-// character, the last column blank).
-export function textPixels(text) {
+// The inked pixels of a text, and its size in font pixels (6 per character,
+// the last column blank). Lines split at "\n" sit 10 pixels apart, each
+// aligned within the block ("left", "center" or "right").
+export function textPixels(text, align = "left") {
+  const lines = String(text)
+    .split("\n")
+    .map((l) => [...l]);
+  const widths = lines.map((l) => Math.max(0, l.length * 6 - 1));
+  const width = Math.max(...widths);
   const ink = [];
-  const s = [...String(text)];
-  for (let i = 0; i < s.length; i++) {
-    const g = glyphOf(s[i]);
-    if (!g) continue;
-    for (let r = 0; r < 7; r++)
-      for (let c = 0; c < 5; c++) if (g[r] & (1 << (4 - c))) ink.push([i * 6 + c, r]);
-  }
-  return { ink, width: Math.max(0, s.length * 6 - 1), height: 7 };
+  lines.forEach((s, li) => {
+    const shift = align === "right" ? width - widths[li] : align === "center" ? Math.round((width - widths[li]) / 2) : 0; // prettier-ignore
+    for (let i = 0; i < s.length; i++) {
+      const g = glyphOf(s[i]);
+      if (!g) continue;
+      for (let r = 0; r < 7; r++)
+        for (let c = 0; c < 5; c++) if (g[r] & (1 << (4 - c))) ink.push([shift + i * 6 + c, li * 10 + r]); // prettier-ignore
+    }
+  });
+  return { ink, width, height: lines.length * 10 - 3 };
+}
+
+// Splits a long title into two lines at the space nearest its middle.
+export function wrapText(text, max = 12) {
+  const t = String(text);
+  if (t.length <= max || !t.includes(" ")) return t;
+  let best = -1;
+  for (let i = 0; i < t.length; i++)
+    if (t[i] === " " && (best < 0 || Math.abs(i - t.length / 2) < Math.abs(best - t.length / 2)))
+      best = i;
+  return `${t.slice(0, best)}\n${t.slice(best + 1)}`;
 }
 
 // Lays out a label: anchor in recipe units, px the size of a font pixel,
@@ -78,7 +97,7 @@ export function labelSplats(
   },
 ) {
   // prettier-ignore
-  const { ink, width, height } = textPixels(text);
+  const { ink, width, height } = textPixels(text, align);
   const ox = align === "left" ? 0 : align === "right" ? -width : -width / 2;
   const oy = valign === "top" ? 0 : valign === "bottom" ? height : height / 2;
   const on = new Set(ink.map(([x, y]) => `${x},${y}`));
@@ -95,7 +114,7 @@ export function labelSplats(
     anchor[1] + (oy - y - 0.5) * px,
     anchor[2],
   ];
-  const sigma = px * 0.62;
+  const sigma = px * 0.5;
   for (const key of rimSet) {
     const [x, y] = key.split(",").map(Number);
     out.push({
@@ -109,17 +128,30 @@ export function labelSplats(
       pattern: false,
     });
   }
+  // Polish rounds: each font pixel is nine small splats (3 x 3), so strokes
+  // have square, crisp edges instead of round blobs, and a diagonal step
+  // (ink at two corners, none on the sides) gets a bridge of splats between
+  // them, so slanted strokes (A, V, 2, 7) read as lines, not staircases.
+  // Small labels (captions, legends) use 2 x 2: splats much under about
+  // 0.003 units drop below a pixel on a phone (worse at the back of a chart) and vanish.
+  const fine = px * 0.2 >= 0.0032;
+  const ink2 = (p) => ({
+    p,
+    color,
+    opacity,
+    scales: fine ? [px * 0.2, px * 0.2, px * 0.05] : [px * 0.29, px * 0.29, px * 0.06],
+    quat: [0, 0, 0, 1],
+    kind: "token",
+    params: [token, 0],
+    pattern: false,
+  });
+  const sub = fine ? [-1 / 3, 0, 1 / 3] : [-0.25, 0.25];
+  for (const [x, y] of ink) for (const sy of sub) for (const sx of sub) out.push(ink2(place(x + sx, y + sy))); // prettier-ignore
   for (const [x, y] of ink)
-    out.push({
-      p: place(x, y),
-      color,
-      opacity,
-      scales: [sigma * 0.85, sigma * 0.85, px * 0.08],
-      quat: [0, 0, 0, 1],
-      kind: "token",
-      params: [token, 0],
-      pattern: false,
-    });
+    for (const dx of [-1, 1]) {
+      if (on.has(`${x + dx},${y + 1}`) && !on.has(`${x + dx},${y}`) && !on.has(`${x},${y + 1}`))
+        for (const t of [0.35, 0.5, 0.65]) out.push(ink2(place(x + dx * t, y + t)));
+    }
   return out;
 }
 

@@ -264,3 +264,56 @@ test("“Use my location” asks only when tapped, and the place stays on the de
   }
   await context.close();
 });
+
+// Polish (October 5, 2026): a new speed eases in instead of jumping, and the stars keep their
+// size on the screen as a pinch zooms in.
+test("a new speed eases in, and the stars keep their size on screen when zoomed", async ({
+  page,
+}) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await openSky(page, { city: "new-york", time: "2026-10-06T01:00:00Z", speed: "0" });
+  // The panel's speed choice (not the test hook, which is instant).
+  await page.evaluate(() => {
+    const sel = document.getElementById("sky-speed");
+    sel.value = "3600";
+    sel.dispatchEvent(new Event("change"));
+  });
+  const first = await page.evaluate(() => window.__splashery.sky.state());
+  expect(first.target).toBe(3600);
+  expect(first.rate).toBeLessThan(3600);
+  await expect
+    .poll(() => page.evaluate(() => window.__splashery.sky.state().rate), { timeout: 60_000 })
+    .toBe(3600);
+  // A pinch to half the field of view halves the stars' splats (the part's visibility).
+  const vis = await page.evaluate(async () => {
+    const { player } = window.__splashery;
+    player.camera.zoomBy(0.5);
+    player.camera.cur = { ...player.camera.tgt };
+    await new Promise((r) => setTimeout(r, 1500));
+    return player.motion.out.parts.stars.visible;
+  });
+  expect(vis).toBeCloseTo(0.5, 1);
+});
+
+// The owner's "slow it down" (October 5, 2026): the "same time each day" speeds hold the clock at
+// one time of night, so the stars stay put (their sidereal time moves on only 0.986° a day) while
+// the days go by.
+test("a “same time each day” speed holds the clock while the days go by", async ({ page }) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const t0 = "2026-10-14T23:30:00Z";
+  await openSky(page, { city: "new-york", time: t0, speed: "0" });
+  const lst0 = await page.evaluate(() => window.__splashery.sky.state().lst);
+  await page.evaluate(() => window.__splashery.sky.set({ speed: "day4" }));
+  await expect
+    .poll(() => page.evaluate(() => window.__splashery.sky.state().drawn), { timeout: 60_000 })
+    .toBeGreaterThan(Date.parse(t0) + 2 * 86400000);
+  const s = await page.evaluate(() => window.__splashery.sky.state());
+  const days = (s.drawn - Date.parse(t0)) / 86400000;
+  const want = (lst0 + days * 0.98564736629) % 360;
+  const diff = Math.abs(((((s.lst - want) % 360) + 540) % 360) - 180);
+  expect(diff).toBeLessThan(0.01);
+  // The real sky at that moment would have turned through days × 361°.
+  expect(days).toBeGreaterThan(2);
+});

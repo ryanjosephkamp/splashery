@@ -9,19 +9,16 @@ outside your own files, as an "Engine: …" PR merged first). PR title: "Phase N
 and planets over you". Handoff file: docs/handoff/NightSky.md (create it; start it with this brief,
 word for word, under "## Brief", then keep "## State
 
-READY (October 5, 2026): the Night sky toy is built (labs, Space shelf), with tests (sky,
-sky-engine, help, unit, kit, taps: all pass), evidence, credits and four clips on Effect review
-page 2. It needs the engine PR #297 merged first.
+WORKING (October 5, 2026, evening): the polish round, on `claude/lane-night-sky-polish` (draft
+#316). #293 (the toy) and #297 (its engine hooks) merged October 5, 2026.
 
-- Engine PR #297 (`claude/lane-night-sky-engine`): `recipe.inside` (the camera at the toy's center,
-  looking out, with its own field of view) and `cull: "below"` (a part's splats hidden under the
-  level plane through its center). Tests: `tests/sky-engine.spec.mjs`.
-- Toy PR #293: `src/packs/night-sky.js`, `src/sky/astro.js` (the sky math), `src/sky/places.js` (18
-  cities, time zones), `assets/toys/night-sky/sky.json` (5,071 HYG stars, 674 Stellarium line
-  segments; CC BY-SA 4.0), `tools/sky-catalog.mjs`, `tools/sky-horizons.mjs`, `tools/sky-clip.mjs`,
-  `tests/sky.spec.mjs`, `docs/evidence/night-sky.json`.
-- Clips (page 2, lane `NightSky`): `sky-night-sky-turn`, `sky-night-sky-tap`,
-  `sky-night-sky-sunrise`, `sky-night-sky-moon`.
+- Polish (the owner's "the toys could still be sharper"): pin-sharp stars (a tight core sized by
+  brightness, a faint halo only on the brightest), stars and planets that keep their size on the
+  screen when zoomed, sharper planets, a 5,000-splat Moon with a smooth terminator, a denser Sun,
+  crisp N/E/S/W letters, a speed change that eases in, and a short glide to a time picked in the
+  panel. The sharp kernel and `render: { cull: "off", dpr: "native" }` are on.
+- Clips on Effect review page 2, beside the first four: `sky-night-sky-turn-polish`,
+  `sky-night-sky-tap-polish`, `sky-night-sky-sunrise-polish`, `sky-night-sky-moon-polish`.
 
 ## Notes
 
@@ -55,6 +52,9 @@ page 2. It needs the engine PR #297 merged first.
 - In the GIF clips the day sky shows bands (the GIF palette); the MP4s and the app are smooth.
 
 ## For the Operator
+
+- Polish round: the thumbnail stays as it is on main (the thumbnail tool draws the sky at "now",
+  which was daytime when it ran). The polish adds no engine change.
 
 - Merge #297 (engine) before #293. #297 also had the lane's files committed by mistake and taken out
   again in its next commit; its final diff is engine only.

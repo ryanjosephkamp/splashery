@@ -21,7 +21,15 @@
 import { mix, shade, clamp } from "../kit.js";
 import { live, start as startLive, release as releaseLive } from "../live/live.js";
 import { MicRecorder, clock } from "./song-record.js";
-import { boxSplats, lit } from "../labs/splat-shapes.js";
+import {
+  boxSplats,
+  faceSplats,
+  lit,
+  budgetN,
+  surfSplats,
+  sphereSplats,
+  cylinderSplats,
+} from "../labs/splat-shapes.js";
 import { spectrogram } from "./studio-audio.js";
 import { WAVES, F_LO, F_HI, FULL_SCALE_SPL, toneSamples, spectrumDb, peakOf, rmsDb, splEstimate, beatHz, metronome, clickTimes, wavBytes, trimmed, soundSpan, logPos, logHz } from "../labs/sound-dsp.js"; // prettier-ignore
 
@@ -71,45 +79,6 @@ function panelSize(k, share, aspect, maxCols) {
   return { cols, rows: Math.round(cols / aspect) };
 }
 
-// A box made of even splats, lit softly from above and the front.
-function block(k, size, pos, base, { part = 0, weight = 1, rot } = {}) {
-  k.add(k.box(...size), {
-    pos,
-    rot,
-    part,
-    weight,
-    even: true,
-    jitter: 0.01,
-    color: (c) => shade(base, 0.72 + 0.2 * c.n[1] + 0.12 * c.n[2] + 0.04 * c.n[0]),
-  });
-}
-
-// A square frustum (a metronome's body): w0 × d0 at the bottom, w1 × d1 at
-// the top, h tall, its base at y0.
-function frustum(k, { w0, w1, d0, d1, h, y0 = 0, x = 0, z = 0, color, part = 0 }) {
-  const at = (u, y, side) => {
-    const t = y;
-    const w = w0 + (w1 - w0) * t;
-    const d = d0 + (d1 - d0) * t;
-    const a = (u - 0.5) * 2;
-    if (side === 0) return [x + (a * w) / 2, y0 + t * h, z + d / 2];
-    if (side === 1) return [x + (a * w) / 2, y0 + t * h, z - d / 2];
-    if (side === 2) return [x + w / 2, y0 + t * h, z + (a * d) / 2];
-    return [x - w / 2, y0 + t * h, z + (a * d) / 2];
-  };
-  for (let side = 0; side < 4; side++)
-    k.add(
-      k.param((u, v) => at(u, v, side), { grid: 24, flip: side === 1 || side === 2 }),
-      {
-        part,
-        even: true,
-        jitter: 0.012,
-        color: (c) => shade(color(c), 0.78 + 0.18 * c.n[2] + 0.1 * c.n[1] + 0.06 * c.n[0]),
-      },
-    );
-  k.add(k.box(w1, 0.01, d1), { pos: [x, y0 + h, z], part, color: (c) => shade(color(c), 1.05) }); // prettier-ignore
-}
-
 // ---- Drawing helpers -----------------------------------------------------------------
 
 // The spectrogram's colors: dark blue, violet, orange, pale yellow.
@@ -148,7 +117,7 @@ function box(g, r, title) {
   g.strokeStyle = "#1d2a38";
   g.lineWidth = 1;
   g.strokeRect(r.x + 0.5, r.y + 0.5, r.w - 1, r.h - 1);
-  if (title) label(g, title, r.x + 6, r.y + 14, { size: 12, color: "#6f8496" });
+  if (title) label(g, title, r.x + 6, r.y + 14, { size: 14, color: "#6f8496" });
 }
 
 // ---- The Sound lab --------------------------------------------------------------------
@@ -413,11 +382,11 @@ function drawSpectrogram(g, r) {
     const y = r.y + 4 + (1 - logPos(hz, ...F_AXIS)) * (r.h - 22);
     g.fillStyle = "rgba(255,255,255,0.18)";
     g.fillRect(r.x + ax, Math.round(y), r.w - ax - 4, 1);
-    label(g, hz >= 1000 ? `${hz / 1000}k` : String(hz), r.x + ax - 5, y + 4, { size: 11, align: "right", color: "#7d90a2" }); // prettier-ignore
+    label(g, hz >= 1000 ? `${hz / 1000}k` : String(hz), r.x + ax - 5, y + 4, { size: 13, align: "right", color: "#7d90a2" }); // prettier-ignore
   }
-  label(g, "Hz", r.x + 6, r.y + 15, { size: 11, color: "#7d90a2" });
-  label(g, `← ${COLS / COL_RATE} s`, r.x + ax + 2, r.y + r.h - 5, { size: 11, color: "#7d90a2" });
-  label(g, "now →", r.x + r.w - 6, r.y + r.h - 5, { size: 11, color: "#7d90a2", align: "right" });
+  label(g, "Hz", r.x + 6, r.y + 15, { size: 13, color: "#7d90a2" });
+  label(g, `← ${COLS / COL_RATE} s`, r.x + ax + 2, r.y + r.h - 5, { size: 13, color: "#7d90a2" });
+  label(g, "now →", r.x + r.w - 6, r.y + r.h - 5, { size: 13, color: "#7d90a2", align: "right" });
 }
 
 function drawSpectrum(g, r) {
@@ -447,7 +416,7 @@ function drawSpectrum(g, r) {
   g.stroke();
   for (const hz of [100, 1000, 10000]) {
     const x = x0 + logPos(hz, ...F_AXIS) * w;
-    label(g, hz >= 1000 ? `${hz / 1000}k` : String(hz), x, r.y + r.h - 6, { size: 11, align: "center", color: "#7d90a2" }); // prettier-ignore
+    label(g, hz >= 1000 ? `${hz / 1000}k` : String(hz), x, r.y + r.h - 6, { size: 13, align: "center", color: "#7d90a2" }); // prettier-ignore
   }
   if (SL.peak) {
     const x = x0 + logPos(clamp(SL.peak.hz, ...F_AXIS), ...F_AXIS) * w;
@@ -487,7 +456,7 @@ function drawScope(g, r) {
   g.lineWidth = 2;
   g.stroke();
   const ms = (span * 1000) / 4;
-  label(g, `${ms < 1 ? ms.toFixed(2) : ms.toFixed(1)} ms per square`, r.x + r.w - 8, r.y + 15, { size: 12, align: "right", color: "#7d90a2" }); // prettier-ignore
+  label(g, `${ms < 1 ? ms.toFixed(2) : ms.toFixed(1)} ms per square`, r.x + r.w - 8, r.y + 15, { size: 14, align: "right", color: "#7d90a2" }); // prettier-ignore
 }
 
 function drawLevel(g, r) {
@@ -501,8 +470,8 @@ function drawLevel(g, r) {
       ? `about ${Math.round(splEstimate(db, SL.fullScale))} dB SPL, uncalibrated`
       : "listening…";
   else if (SL.source === "tone") sub = "the generator's own level";
-  else sub = "tap to play a tone, or use the mic";
-  label(g, sub, r.x + 10, r.y + 64, { size: 12, color: "#9fb2c4" });
+  else sub = "tap for a tone, or use the mic";
+  label(g, sub, r.x + 10, r.y + 64, { size: 14, color: "#9fb2c4" });
   // A meter from −60 to 0 dBFS.
   const mx = r.x + 10;
   const mw = r.w - 20;
@@ -519,8 +488,8 @@ function drawLevel(g, r) {
   // The generator and the metronome.
   const t = SL.tone;
   const tone = t.wave === "noise" ? "noise" : t.two ? `${t.wave} ${hzText(t.f)} + ${hzText(t.f2)}, beats ${beatHz(t.f, t.f2).toFixed(1)} Hz` : `${t.wave} ${hzText(t.f)}`; // prettier-ignore
-  label(g, `${SL.toneOn ? "▶" : "■"} ${tone}`, r.x + 10, r.y + 104, { size: 12, color: SL.toneOn ? "#bfeaff" : "#6f8496" }); // prettier-ignore
-  label(g, `${SL.metroOn ? "▶" : "■"} metronome ${SL.bpm} bpm`, r.x + 10, r.y + 122, { size: 12, color: SL.metroOn ? "#bfeaff" : "#6f8496" }); // prettier-ignore
+  label(g, `${SL.toneOn ? "▶" : "■"} ${tone}`, r.x + 10, r.y + 104, { size: 14, color: SL.toneOn ? "#bfeaff" : "#6f8496" }); // prettier-ignore
+  label(g, `${SL.metroOn ? "▶" : "■"} metronome ${SL.bpm} bpm`, r.x + 10, r.y + 122, { size: 14, color: SL.metroOn ? "#bfeaff" : "#6f8496" }); // prettier-ignore
 }
 
 const SCRATCH = new Map();
@@ -661,7 +630,9 @@ const micStatus = () => {
 
 const SOUND_LAB = {
   alive: () => SL.toneOn || SL.metroOn || live.on("mic"),
-  density: 1.6,
+  density: 2, // r2: a higher budget and (labs) a sharper splat edge
+  kernel: "sharp",
+  render: { cull: "low", dpr: "native" },
   turntable: false,
   options: [
     {
@@ -738,26 +709,83 @@ const SOUND_LAB = {
     const { cols, rows } = panelSize(k, 0.5, SW / SH, SW);
     screenPanel(k, { center: [0, cy, 0.002], width: W, height: H, cols, rows });
     // The speaker (left): a cabinet, a cone that moves with the signal and a
-    // lamp that lights while the tone plays.
+    // lamp that lights while the tone plays. r2: every piece of exactly sized
+    // splats, so its edges stay crisp at phone size.
     const sx = -0.62;
     const sy = -0.8;
-    block(k, [0.78, 0.78, 0.36], [sx, sy, 0], "#5a3a24", {});
+    const wood = (base) => (u, v, n) => shade(mix(base, "#6c472c", 0.5 + 0.5 * Math.sin(v * 46 + u * 5)), 0.74 + 0.2 * n[1] + 0.1 * n[2] + 0.04 * n[0]); // prettier-ignore
+    boxSplats(k, { c: [sx, sy, 0], w: 0.78, h: 0.78, d: 0.36, skip: [4, 5], color: lit(shade, "#5a3a24") }); // prettier-ignore
+    // Its front, with the hole the driver sits in.
+    faceSplats(k, (u, v) => [sx + (u - 0.5) * 0.78, sy + (0.5 - v) * 0.78, 0.18], { nu: budgetN(k, 90), nv: budgetN(k, 90), n: [0, 0, 1], keep: (u, v) => Math.hypot(u - 0.5, v - 0.5) * 0.78 > 0.3, color: shade("#5a3a24", 0.86) }); // prettier-ignore
+    const fz = 0.181;
+    const ring = (r0, r1, z, color, part = 0) =>
+      surfSplats(k, (u, v) => { const r = r0 + (r1 - r0) * v; return [sx + r * Math.cos(u * 2 * Math.PI), sy + r * Math.sin(u * 2 * Math.PI), z]; }, () => [0, 0, 1], { nu: budgetN(k, 90), nv: budgetN(k, Math.max(3, Math.round(((r1 - r0) / 0.29) * 26))), color, part }); // prettier-ignore
+    ring(0.29, 0.31, fz, "#141416"); // the rim
+    ring(0.25, 0.29, fz + 0.004, (u, v) => shade("#232326", 0.8 + 0.35 * Math.sin(v * Math.PI))); // the rubber surround
     const cone = k.part("cone", { pivot: [sx, sy, 0.19] });
-    k.add(k.cone(0.27, 0.1, 0.1, { caps: false }), { pos: [sx, sy, 0.2], rot: [-90, 0, 0], part: cone, weight: 1.5, even: true, color: (c) => shade("#2b2b2e", 0.75 + 0.35 * (c.s.radial ?? 1)) }); // prettier-ignore
-    k.add(k.disc(0.27), { pos: [sx, sy, 0.181], rot: [90, 0, 0], color: "#1d1d20" });
-    k.add(k.sphere(0.07), { pos: [sx, sy, 0.24], part: cone, color: (c) => shade("#3a3a3e", 0.8 + 0.4 * c.n[1]) }); // prettier-ignore
-    k.add(k.torus(0.28, 0.018), { pos: [sx, sy, 0.19], rot: [90, 0, 0], color: "#141416" }); // prettier-ignore
+    // The cone: from the voice coil (r 0.07, set back 0.06) out to the surround.
+    surfSplats(
+      k,
+      (u, v) => {
+        const r = 0.07 + 0.18 * v;
+        return [
+          sx + r * Math.cos(u * 2 * Math.PI),
+          sy + r * Math.sin(u * 2 * Math.PI),
+          fz - 0.06 * (1 - v),
+        ];
+      },
+      (u) => [-0.32 * Math.cos(u * 2 * Math.PI), -0.32 * Math.sin(u * 2 * Math.PI), 0.95],
+      { nu: budgetN(k, 96), nv: budgetN(k, 22), part: cone, color: (u, v) => shade("#2b2b2e", 0.72 + 0.3 * v + 0.06 * Math.sin(u * 64)) }, // prettier-ignore
+    );
+    // The dust cap: a shallow dome over the coil.
+    surfSplats(
+      k,
+      (u, v) => {
+        const r = 0.07 * v;
+        return [
+          sx + r * Math.cos(u * 2 * Math.PI),
+          sy + r * Math.sin(u * 2 * Math.PI),
+          fz - 0.06 + 0.03 * Math.sqrt(1 - v * v),
+        ];
+      },
+      (u, v) => [0.5 * v * Math.cos(u * 2 * Math.PI), 0.5 * v * Math.sin(u * 2 * Math.PI), 1],
+      { nu: budgetN(k, 40), nv: budgetN(k, 8), part: cone, color: (u, v) => shade("#3a3a3e", 0.85 + 0.25 * (1 - v)) }, // prettier-ignore
+    );
     const lamp = k.part("lamp", { pivot: [sx + 0.3, sy + 0.3, 0.19] });
-    k.add(k.sphere(0.025), { pos: [sx + 0.3, sy + 0.3, 0.19], part: lamp, weight: 4, color: "#7a2a1a" }); // prettier-ignore
+    sphereSplats(k, { c: [sx + 0.3, sy + 0.3, 0.19], r: 0.025, n: budgetN(k, 24), part: lamp, color: "#7a2a1a" }); // prettier-ignore
     // The metronome (right): a wooden body and a rod that swings about its
     // foot, with the sliding weight.
     const mx = 0.66;
     const my = -1.2;
-    frustum(k, { w0: 0.56, w1: 0.16, d0: 0.34, d1: 0.12, h: 0.74, y0: my, x: mx, z: 0, color: (c) => mix("#7a4a26", "#9a6236", 0.5 + 0.5 * Math.sin(c.p[1] * 40 + c.p[0] * 6)) }); // prettier-ignore
-    block(k, [0.18, 0.5, 0.012], [mx, my + 0.38, 0.105], "#e9dcc0", {});
+    const fr = { w0: 0.56, w1: 0.16, d0: 0.34, d1: 0.12, h: 0.74 };
+    const at = (side, u, t) => {
+      const w = fr.w0 + (fr.w1 - fr.w0) * t;
+      const d = fr.d0 + (fr.d1 - fr.d0) * t;
+      const a = u - 0.5;
+      if (side === 0) return [mx + a * w, my + t * fr.h, d / 2];
+      if (side === 1) return [mx - a * w, my + t * fr.h, -d / 2];
+      if (side === 2) return [mx + w / 2, my + t * fr.h, -a * d];
+      return [mx - w / 2, my + t * fr.h, a * d];
+    };
+    const sideN = [
+      [0, (fr.d0 - fr.d1) / 2 / fr.h, 1],
+      [0, (fr.d0 - fr.d1) / 2 / fr.h, -1],
+      [1, (fr.w0 - fr.w1) / 2 / fr.h, 0],
+      [-1, (fr.w0 - fr.w1) / 2 / fr.h, 0],
+    ].map((v) => { const l = Math.hypot(...v); return v.map((x) => x / l); }); // prettier-ignore
+    for (let side = 0; side < 4; side++)
+      surfSplats(k, (u, v) => at(side, u, v), () => sideN[side], { nu: budgetN(k, side < 2 ? 48 : 30), nv: budgetN(k, 56), color: wood("#8a5530") }); // prettier-ignore
+    boxSplats(k, { c: [mx, my + fr.h + 0.006, 0], w: fr.w1, h: 0.012, d: fr.d1, color: lit(shade, "#9a6236") }); // prettier-ignore
+    boxSplats(k, {
+      c: [mx, my + 0.38, 0.105],
+      w: 0.18,
+      h: 0.5,
+      d: 0.012,
+      color: lit(shade, "#e9dcc0"),
+    }); // the scale
     const rod = k.part("rod", { pivot: [mx, my + 0.1, 0.13], axis: [0, 0, 1] });
-    block(k, [0.022, 0.7, 0.02], [mx, my + 0.1 + 0.35, 0.135], "#c9ccd2", { part: rod, weight: 3 }); // prettier-ignore
-    block(k, [0.1, 0.07, 0.05], [mx, my + 0.56, 0.15], "#d8b04a", { part: rod, weight: 3 });
+    boxSplats(k, { c: [mx, my + 0.1 + 0.35, 0.135], w: 0.02, h: 0.7, d: 0.016, gap: 0.006, part: rod, color: lit(shade, "#c9ccd2") }); // prettier-ignore
+    boxSplats(k, { c: [mx, my + 0.56, 0.15], w: 0.1, h: 0.07, d: 0.05, gap: 0.008, part: rod, color: lit(shade, "#d8b04a") }); // prettier-ignore
     k.reach([mx - 0.35, my + 0.8, 0.2]);
     k.reach([mx + 0.35, my + 0.8, 0.2]);
     k.data = { soundLab: true };
@@ -1136,7 +1164,7 @@ function drawRecorder(g) {
   }
   if (!t) return;
   label(g, t.name, 12, 22, { size: 15, color: "#e6eef5", weight: "700" });
-  label(g, `${t.duration.toFixed(2)} s · ${t.rate} Hz`, SW - 12, 22, { size: 13, color: "#9fb2c4", align: "right" }); // prettier-ignore
+  label(g, `${t.duration.toFixed(2)} s · ${t.rate} Hz`, SW - 12, 22, { size: 15, color: "#9fb2c4", align: "right" }); // prettier-ignore
   const wr = { x: 8, y: 32, w: SW - 16, h: 120 };
   const sr = { x: 8, y: 158, w: SW - 16, h: SH - 166 };
   box(g, wr, "");
@@ -1174,7 +1202,7 @@ function drawRecorder(g) {
     const y = sr.y + 2 + (1 - Math.log(hz / 40) / Math.log(16000 / 40)) * (sr.h - 4);
     g.fillStyle = "rgba(255,255,255,0.2)";
     g.fillRect(sr.x, Math.round(y), sr.w, 1);
-    label(g, hz >= 1000 ? `${hz / 1000} kHz` : `${hz} Hz`, sr.x + 6, y - 3, { size: 11, color: "#9fb2c4" }); // prettier-ignore
+    label(g, hz >= 1000 ? `${hz / 1000} kHz` : `${hz} Hz`, sr.x + 6, y - 3, { size: 13, color: "#9fb2c4" }); // prettier-ignore
   }
   // The trim marks and the play head.
   g.fillStyle = "#ffe9a8";
@@ -1191,7 +1219,9 @@ function drawRecorder(g) {
 
 const SOUND_RECORDER = {
   alive: () => !!REC.rec || !!REC.playing,
-  density: 1.6,
+  density: 2, // r2: a higher budget and (labs) a sharper splat edge
+  kernel: "sharp",
+  render: { cull: "low", dpr: "native" },
   turntable: false,
   controls: [{ key: "play", label: "Play", type: "pulse", ease: 0.3 }],
   action: { key: "play", label: "Play or stop the recording", quiet: ["play"] },
@@ -1237,22 +1267,28 @@ const SOUND_RECORDER = {
     screenPanel(k, { center: [0, cy, 0.002], width: W, height: H, cols, rows });
     // A studio microphone on a short stand, its lamp red while it records.
     const my = -1.18;
-    k.add(k.cylinder(0.2, 0.035), { pos: [0, my, 0], even: true, color: (c) => shade("#2c2e33", 0.8 + 0.3 * c.n[1]) }); // prettier-ignore
-    k.add(k.cylinder(0.018, 0.34), { pos: [0, my + 0.18, 0], weight: 2, color: (c) => shade("#8a8f98", 0.8 + 0.3 * c.n[0]) }); // prettier-ignore
-    k.add(k.cylinder(0.085, 0.2), { pos: [0, my + 0.44, 0], even: true, color: (c) => shade("#3a3d44", 0.85 + 0.25 * c.n[0] + 0.15 * c.n[2]) }); // prettier-ignore
-    k.add(k.sphere(0.1), {
-      pos: [0, my + 0.6, 0],
-      weight: 1.5,
-      even: true,
-      // The grille: a fine mesh of bright wires.
-      color: (c) => {
-        const a = Math.atan2(c.lp[2], c.lp[0]);
-        const wire = Math.abs(Math.sin(a * 14)) < 0.3 || Math.abs(Math.sin(c.lp[1] * 150)) < 0.3;
-        return shade(wire ? "#d5dae2" : "#6d737c", 0.85 + 0.25 * c.n[1]);
+    // r2: the microphone of exactly sized splats (a weighted base, a satin
+    // stem, the body and a wire-mesh grille), crisp at phone size.
+    const metal =
+      (base, k1 = 0.3) =>
+      (u, v, n) =>
+        shade(base, 0.82 + k1 * n[1] + 0.14 * n[2] + 0.08 * n[0]);
+    cylinderSplats(k, { c: [0, my, 0], r: 0.2, h: 0.035, n: budgetN(k, 120), color: metal("#2c2e33") }); // prettier-ignore
+    cylinderSplats(k, { c: [0, my + 0.18, 0], r: 0.018, h: 0.34, n: budgetN(k, 20), caps: "none", color: metal("#8a8f98", 0.1) }); // prettier-ignore
+    cylinderSplats(k, { c: [0, my + 0.44, 0], r: 0.085, h: 0.2, n: budgetN(k, 72), color: metal("#3a3d44", 0.15) }); // prettier-ignore
+    // The grille: a fine mesh of bright wires on a darker cage.
+    sphereSplats(k, {
+      c: [0, my + 0.6, 0],
+      r: 0.1,
+      n: budgetN(k, 96),
+      color: (u, v, n) => {
+        const wire =
+          Math.abs(Math.sin(u * Math.PI * 28)) < 0.3 || Math.abs(Math.sin(v * Math.PI * 16)) < 0.3;
+        return shade(wire ? "#d5dae2" : "#5d636c", 0.85 + 0.25 * n[1] + 0.1 * n[2]);
       },
     });
     const lamp = k.part("lamp", { pivot: [0, my + 0.44, 0.088] });
-    k.add(k.sphere(0.018), { pos: [0, my + 0.44, 0.088], part: lamp, weight: 4, color: "#5a1a14" }); // prettier-ignore
+    sphereSplats(k, { c: [0, my + 0.44, 0.088], r: 0.018, n: budgetN(k, 20), part: lamp, color: "#5a1a14" }); // prettier-ignore
     k.data = { recorder: true };
   },
 };
