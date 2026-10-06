@@ -31,6 +31,16 @@ polish: sharper samples and a smoother lift":
     so it reads as a dome). Fillers close steep steps, and the splats are nearly round. The earlier
     wall round the outline read as stripes from the side and is gone. A tap's turn now shows the
     sides: a quarter turn, a pause, on to the other side, a pause, and home (6 s).
+  - October 6, "still hollow from the sides ... a thin vertical strip": the side-on frames showed a
+    closed body (a projection of the splats and renders of each half confirmed it) that read as a
+    bowl. Fixed: the photo depth's ground slope (a best-fit plane) is taken off and the body is a
+    rounded dome over the outline; the rim, side wall and back take the sample's colors from further
+    in (the outline pixels are dark); the baked light comes from above, so it stays above at every
+    turn. `tools/rel-side.mjs` writes side-on stills (80 to 100 and 260 to 280 degrees, phone and
+    desktop), and a test in `tests/rel.spec.mjs` fails when background shows through the filled
+    silhouette (`src/elements-real/see-through.js`; it flags an open half shell at 25 to 32 percent,
+    the real body at 0.5 percent or less). Clips: rel-copper-polish-r4, rel-radon-r3, and side-on
+    stills rel-copper-side-r4 and rel-radon-side-r3.
   - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
     Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
     coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
@@ -103,8 +113,10 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 ## Known issues
 
-- Depth is the model's estimate from one photo, and a lifted sample's back is an invented, darker
-  mirror of its front (said in the About text and the evidence file).
+- Depth is the model's estimate from one photo, and a lifted sample's back is made up from its own
+  colors (said in the About text and the evidence file).
+- Up close on a desktop, copper held side-on still shows a crease where its side wall turns into its
+  face; nothing shows through it (the side-view test), but the owner should judge it in the clip.
 - A few photos can't be cut cleanly and show as cropped cards (fluorine, sodium, uranium) or an oval
   (neptunium); samples in glass tubes keep the whole tube.
 - The tiles are small on a phone (the whole 18-column table fits the width); a tap needs aim.
@@ -113,10 +125,10 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 ## For the Operator
 
-- Ready for the full test run and a labs merge. I ran `tests/rel.spec.mjs` (25 pass),
-  `tests/help.spec.mjs`, `tests/kit.spec.mjs` and the toy's row of `tests/taps.spec.mjs`; not the
-  full suite (the "embed transfer" test measures a captured toy's embed, which this lazy pack
-  doesn't touch).
+- Ready for the full test run and a labs merge. I ran `tests/rel.spec.mjs` (27 pass, with the
+  side-view test), `tests/help.spec.mjs`, `tests/kit.spec.mjs` and the toy's row of
+  `tests/taps.spec.mjs`; not the full suite (the "embed transfer" test measures a captured toy's
+  embed, which this lazy pack doesn't touch).
 - Thorium, actinium and curium have no tile photo: the only photos found are FAL-only (thorium,
   Alchemist-hp), all rights reserved (actinium, Los Alamos) or EU copyright not confirmed open
   (curium, JRC). If the owner wants them, a CC BY or CC0 photo is the unblocker.

@@ -103,7 +103,7 @@
     }
   ],
   "simplified": [
-    "The 3D samples are photos given depth by a depth model (Depth Anything V2 Small), which judges from one photo how far away each part is: the front is the real photo, the depth an estimate, and the back of a lifted sample a darker mirror of its front, since no photo saw it.",
+    "The 3D samples are photos given depth by a depth model (Depth Anything V2 Small), which judges from one photo how far away each part is: the front is the real photo, the depth an estimate, and the back of a lifted sample made up from its own colors, since no photo saw it.",
     "Samples are not to scale: each fills its tile, whether it is a 6 kg sphere (neptunium) or 1.7 micrograms (berkelium); the descriptions give the real sizes where the sources do.",
     "PubChem gives some values under special conditions: helium freezes only under pressure (the toy says so), arsenic sublimes at normal pressure (the toy says so), and carbon's listed melting point is for graphite under pressure."
   ],

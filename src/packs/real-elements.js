@@ -740,7 +740,9 @@ function solidSample(pair, share, part, splat, relief = 1) {
         sat[(by * (W + 1) + ax) * 4 + k] +
         sat[(ay * (W + 1) + ax) * 4 + k];
       const nIn = sum(3);
-      if (nIn >= 4) return [sum(0) / nIn, sum(1) / nIn, sum(2) / nIn];
+      // (Clamped: the table's sums leave round-off a hair below zero.)
+      const v = (k) => Math.min(1, Math.max(0, sum(k) / nIn));
+      if (nIn >= 4) return [v(0), v(1), v(2)];
       if (r > W) return p.c;
     }
   };
@@ -793,7 +795,8 @@ function solve3(a, b) {
 }
 
 function shadeArr(c, f) {
-  return [Math.min(1, c[0] * f), Math.min(1, c[1] * f), Math.min(1, c[2] * f)];
+  const v = (x) => Math.min(1, Math.max(0, x * f));
+  return [v(c[0]), v(c[1]), v(c[2])];
 }
 
 export const RECIPES = {
