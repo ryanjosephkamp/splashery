@@ -272,29 +272,54 @@
       "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
     },
     {
-      "id": "leaf",
-      "power": -1.2,
-      "label": "A Japanese maple leaf, about 7 cm across (an estimate: their leaves are 4 to 12 cm).",
-      "size_m": 0.07,
-      "sizeInLabel": "7 cm",
-      "how": "Watts's photo of a Japanese maple leaf, cut into squares 7.1 cm, 2.5 cm and 8 mm wide on the blade (tools/pot-micro.mjs). The photo gives no scale: the leaf spans about 1,800 of its 2,048 columns and is taken as 7 cm across, inside the species' range.",
+      "id": "crown",
+      "power": -0.5,
+      "label": "The golden full-moon maple's leaves, each about 9 cm across (an estimate: they are 6 to 12 cm).",
+      "size_m": 0.09,
+      "sizeInLabel": "9 cm",
+      "how": "Megan Hansen's photo of a golden full-moon maple's leaves seen from above (the same kind of tree as the garden bed's capture), cut 22 cm square on its middle leaf (tools/pot-micro.mjs). The photo gives no scale: its middle leaf spans about 200 of 1,023 columns and is taken as 9 cm across, inside the species' range.",
       "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
       "verdict": "simplified",
       "sources": [
         {
-          "title": "Japanese maple leaf - Richmond Virginia",
-          "publisher": "Flickr (Watts), CC BY 2.0",
-          "url": "https://www.flickr.com/photos/126288307@N05/53147954324",
+          "title": "Acer shirasawanum 'Aureum'",
+          "publisher": "Flickr (Megan Hansen), CC BY-SA 2.0",
+          "url": "https://www.flickr.com/photos/24495410@N03/4714538293",
+          "says": "The photo used; its page gives CC BY-SA 2.0 and no size."
+        },
+        {
+          "title": "Acer shirasawanum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad, palmately veined and lobed, with 9–13 (rarely 7) serrate shallowly incised lobes."
+        }
+      ],
+      "note": "The size is an estimate within the species' range."
+    },
+    {
+      "id": "leaf",
+      "power": -1.3,
+      "label": "One of its leaves, lit from behind: about 9 cm across, its veins fanning out.",
+      "size_m": 0.09,
+      "sizeInLabel": "9 cm",
+      "how": "susteph's photo of one golden full-moon maple leaf lit from behind, cut 7.1 cm and 2.5 cm square on its blade (tools/pot-micro.mjs); its blade spans about 680 of 1,024 columns, taken as 9 cm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "simplified",
+      "sources": [
+        {
+          "title": "Golden Full Moon Maple",
+          "publisher": "Flickr (susteph), CC BY 2.0",
+          "url": "https://www.flickr.com/photos/28012136@N08/2649442904",
           "says": "The photo used; its page gives CC BY 2.0 and no size."
         },
         {
-          "title": "Acer palmatum",
+          "title": "Acer shirasawanum",
           "publisher": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Acer_palmatum",
-          "says": "The leaves are 4–12 cm long and wide, palmately lobed with five, seven, or nine acutely pointed lobes."
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad."
         }
       ],
-      "note": "The size is an estimate within the species' range; a different maple's leaf than the garden bed's tree."
+      "note": "The size is an estimate within the species' range."
     },
     {
       "id": "cells",
@@ -594,26 +619,48 @@
       "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
     },
     {
-      "claim": "A Japanese maple leaf, about 7 cm across (an estimate: their leaves are 4 to 12 cm).",
-      "how": "Watts's photo of a Japanese maple leaf, cut into squares 7.1 cm, 2.5 cm and 8 mm wide on the blade (tools/pot-micro.mjs). The photo gives no scale: the leaf spans about 1,800 of its 2,048 columns and is taken as 7 cm across, inside the species' range.",
+      "claim": "The golden full-moon maple's leaves, each about 9 cm across (an estimate: they are 6 to 12 cm).",
+      "how": "Megan Hansen's photo of a golden full-moon maple's leaves seen from above (the same kind of tree as the garden bed's capture), cut 22 cm square on its middle leaf (tools/pot-micro.mjs). The photo gives no scale: its middle leaf spans about 200 of 1,023 columns and is taken as 9 cm across, inside the species' range.",
       "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
       "sources": [
         {
-          "title": "Japanese maple leaf - Richmond Virginia",
-          "publisher": "Flickr (Watts), CC BY 2.0",
-          "url": "https://www.flickr.com/photos/126288307@N05/53147954324",
-          "says": "The photo used; its page gives CC BY 2.0 and no size."
+          "title": "Acer shirasawanum 'Aureum'",
+          "publisher": "Flickr (Megan Hansen), CC BY-SA 2.0",
+          "url": "https://www.flickr.com/photos/24495410@N03/4714538293",
+          "says": "The photo used; its page gives CC BY-SA 2.0 and no size."
         },
         {
-          "title": "Acer palmatum",
+          "title": "Acer shirasawanum",
           "publisher": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Acer_palmatum",
-          "says": "The leaves are 4–12 cm long and wide, palmately lobed with five, seven, or nine acutely pointed lobes."
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad, palmately veined and lobed, with 9–13 (rarely 7) serrate shallowly incised lobes."
         }
       ],
       "verdict": "simplified",
       "test": "tests/pot.spec.mjs",
-      "note": "The size is an estimate within the species' range; a different maple's leaf than the garden bed's tree."
+      "note": "The size is an estimate within the species' range."
+    },
+    {
+      "claim": "One of its leaves, lit from behind: about 9 cm across, its veins fanning out.",
+      "how": "susteph's photo of one golden full-moon maple leaf lit from behind, cut 7.1 cm and 2.5 cm square on its blade (tools/pot-micro.mjs); its blade spans about 680 of 1,024 columns, taken as 9 cm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Golden Full Moon Maple",
+          "publisher": "Flickr (susteph), CC BY 2.0",
+          "url": "https://www.flickr.com/photos/28012136@N08/2649442904",
+          "says": "The photo used; its page gives CC BY 2.0 and no size."
+        },
+        {
+          "title": "Acer shirasawanum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/pot.spec.mjs",
+      "note": "The size is an estimate within the species' range."
     },
     {
       "claim": "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",

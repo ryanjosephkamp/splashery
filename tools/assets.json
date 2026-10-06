@@ -4764,19 +4764,29 @@
       "note": "tools/pot-stars.mjs; the file stays CC BY-SA 4.0."
     },
     {
+      "id": "pot-crown",
+      "files": ["assets/toys/powers-of-ten/micro-crown-m0_65.jpg"],
+      "toy": "powers-of-ten",
+      "name": "Acer shirasawanum 'Aureum'",
+      "author": "Megan Hansen (Flickr)",
+      "page": "https://www.flickr.com/photos/24495410@N03/4714538293",
+      "license": "CC BY-SA 2.0",
+      "checked": "October 6, 2026",
+      "note": "Its live Flickr page gives CC BY-SA 2.0; the cut stays CC BY-SA 2.0. No scale given: its middle leaf is taken as 9 cm. Cut by tools/pot-micro.mjs."
+    },
+    {
       "id": "pot-leaf",
       "files": [
         "assets/toys/powers-of-ten/micro-leaf-m1_15.jpg",
-        "assets/toys/powers-of-ten/micro-leaf-m1_6.jpg",
-        "assets/toys/powers-of-ten/micro-leaf-m2_1.jpg"
+        "assets/toys/powers-of-ten/micro-leaf-m1_6.jpg"
       ],
       "toy": "powers-of-ten",
-      "name": "Japanese maple leaf - Richmond Virginia",
-      "author": "Watts (Flickr)",
-      "page": "https://www.flickr.com/photos/126288307@N05/53147954324",
+      "name": "Golden Full Moon Maple",
+      "author": "susteph (Flickr)",
+      "page": "https://www.flickr.com/photos/28012136@N08/2649442904",
       "license": "CC BY 2.0",
       "checked": "October 6, 2026",
-      "note": "Its live Flickr page gives CC BY 2.0. No scale is given: the leaf is taken as 7 cm across. Cut by tools/pot-micro.mjs."
+      "note": "Its live Flickr page gives CC BY 2.0. No scale given: the leaf is taken as 9 cm across. Cut by tools/pot-micro.mjs."
     },
     {
       "id": "pot-cells",

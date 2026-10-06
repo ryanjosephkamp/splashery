@@ -556,12 +556,18 @@ async function buildPicture(k, layer, profile) {
     }
   }
   const pitch = U / side;
-  const s0 = 0.62 * pitch * (w / U);
+  // (The last picture of a set is shown far past its own detail before the
+  // next scene comes: its splats overlap more, so it softens instead of
+  // showing a grid.)
+  const s0 = (layer.soft ? 1.1 : 0.62) * pitch * (w / U);
   k.cloud({ count: (side * side * 160000) / k.count, jitter: 0, pattern: false }, (_r, i) => {
     const o = i * 4;
     const x = ((i % side) + 0.5) / side;
     const y = (((i / side) | 0) + 0.5) / side;
-    const a = (data[o + 3] / 255) * smooth(0, 0.06, Math.min(x, y, 1 - x, 1 - y));
+    const edge = layer.round
+      ? 1 - smooth(0.3, 0.5, Math.hypot(x - 0.5, y - 0.5))
+      : smooth(0, 0.06, Math.min(x, y, 1 - x, 1 - y));
+    const a = (data[o + 3] / 255) * edge;
     if (a < 0.03) return null;
     return {
       p: [(x - c[0]) * w, (c[1] - y) * w, 0],
@@ -683,7 +689,7 @@ export const LAYERS = [
     fadeOut: a.e === 1.5 ? [150, 400] : null,
     build: (k, layer, profile) => buildAerial(k, a, profile),
   })),
-  { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [3.5, 7], build: buildBed }, // prettier-ignore
+  { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [25, 45], build: buildBed }, // prettier-ignore
   ...MICRO.flatMap((m) =>
     m.layers.map((L, i) => ({
       id: `${m.id}${L.e}`,
@@ -691,10 +697,20 @@ export const LAYERS = [
       file: L.file,
       width: 10 ** L.e,
       cover: true,
-      fadeIn: i ? [0.3, 0.55] : m.id === "leaf" ? [0.06, 0.2] : [0.18, 0.4],
+      fadeIn: i
+        ? [0.3, 0.55]
+        : m.id === "crown"
+          ? [0.15, 0.4]
+          : m.id === "cells"
+            ? [0.1, 0.3]
+            : [0.18, 0.4],
+      // The first picture of a set comes in as a round, soft-edged patch
+      // where it sits in the scene round it (not a square photo).
+      round: !i && !!m.round,
+      soft: i === m.layers.length - 1,
       // The last of a set, far past its own detail before the next scene
       // comes, dims.
-      dim: i === m.layers.length - 1 ? ({ leaf: [2.9, 3.5, 0.1], chloroplast: [6.5, 7.0, 0] }[m.id] ?? null) : null, // prettier-ignore
+      dim: i === m.layers.length - 1 ? ({ leaf: [3.7, 4.3, 0], chloroplast: [6.5, 7.0, 0] }[m.id] ?? null) : null, // prettier-ignore
       build: buildPicture,
     })),
   ),
@@ -724,7 +740,7 @@ export function layout(z) {
   });
   // The finest cover that fills the view hides every layer coarser than it.
   let floor = -Infinity;
-  for (const x of shown) if (x.l.cover && x.full >= 0.999 && x.s >= 1.9) floor = Math.max(floor, -x.l.e); // prettier-ignore
+  for (const x of shown) if (x.l.cover && x.full >= 0.999 && x.s >= (x.l.round ? 3.2 : 1.9)) floor = Math.max(floor, -x.l.e); // prettier-ignore
   for (const x of shown) {
     if (x.f <= 0.001 || -x.l.e < floor) continue;
     out[x.l.id] = { scale: x.s, fade: x.f };
@@ -808,7 +824,8 @@ export const CREDITS = [
   { label: "3 km", title: "USGS Imagery Only (NAIP)", source: "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer", author: "USDA, USGS The National Map", ...PD }, // prettier-ignore
   { label: "From 1 km to 30 m", title: "Aerial Photography (Orthophoto) 2023, 3 inch", source: "https://opendata.dc.gov/", author: "District of Columbia, Office of the Chief Technology Officer", ...BY }, // prettier-ignore
   { label: "The garden bed", title: "Golden Fullmoon Maple (3D capture)", source: "https://superspl.at/scene/f233b115", author: "Joshua Trapani", ...BY, changes: "Decimated, turned to be seen from above and set in the garden at an estimated 2 m long." }, // prettier-ignore
-  { label: "The leaf", title: "Japanese maple leaf - Richmond Virginia", source: "https://www.flickr.com/photos/126288307@N05/53147954324", author: "Watts (Flickr)", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" }, // prettier-ignore
+  { label: "The maple's leaves", title: "Acer shirasawanum 'Aureum'", source: "https://www.flickr.com/photos/24495410@N03/4714538293", author: "Megan Hansen (Flickr)", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" }, // prettier-ignore
+  { label: "One leaf", title: "Golden Full Moon Maple", source: "https://www.flickr.com/photos/28012136@N08/2649442904", author: "susteph (Flickr)", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" }, // prettier-ignore
   { label: "Plant cells", title: "Arabidopsis thaliana plant cells containing chloroplasts, LM", source: "https://wellcomecollection.org/works/gwmfux6b", author: "Fernán Federici (Wellcome Collection)", ...BY }, // prettier-ignore
   { label: "A chloroplast", title: "Chloroplast in a bean leaf, TEM", source: "https://wellcomecollection.org/works/bx3dctp2", author: "Kevin Mackenzie, University of Aberdeen (Wellcome Collection)", ...BY }, // prettier-ignore
   { label: "The ribosome", title: "Arbekacin-bound E. coli 70S ribosome, 3.2 Å (EMD-48329), with its model (PDB 9MKK)", source: "https://www.ebi.ac.uk/emdb/EMD-48329", author: "S. Majumdar, N. P. Parajuli, X. Ge, A. Emmerich and S. Sanyal (2025), via EMDB and the PDB", license: "Public domain (EMDB)", licenseUrl: "https://www.ebi.ac.uk/emdb/faq" }, // prettier-ignore

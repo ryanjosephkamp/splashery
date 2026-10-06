@@ -132,11 +132,19 @@ export const STOPS = [
     source: "3D capture “Golden Fullmoon Maple” by Joshua Trapani, CC BY 4.0 (made elsewhere).",
   },
   {
+    id: "crown",
+    e: -0.5,
+    size: 0.09,
+    label:
+      "The golden full-moon maple's leaves, each about 9 cm across (an estimate: they are 6 to 12 cm).",
+    source: "“Acer shirasawanum 'Aureum'” by Megan Hansen (Flickr), CC BY-SA 2.0.",
+  },
+  {
     id: "leaf",
-    e: -1.2,
-    size: 0.07,
-    label: "A Japanese maple leaf, about 7 cm across (an estimate: their leaves are 4 to 12 cm).",
-    source: "“Japanese maple leaf - Richmond Virginia” by Watts (Flickr), CC BY 2.0.",
+    e: -1.3,
+    size: 0.09,
+    label: "One of its leaves, lit from behind: about 9 cm across, its veins fanning out.",
+    source: "“Golden Full Moon Maple” by susteph (Flickr), CC BY 2.0.",
   },
   {
     id: "cells",
@@ -181,15 +189,29 @@ export function stopAt(z) {
 const micro = (id, e) => ({ e, file: `micro-${id}-${String(e).replace("-", "m").replace(".", "_")}.jpg` }); // prettier-ignore
 export const MICRO = [
   {
+    id: "crown",
+    url: "https://live.staticflickr.com/4064/4714538293_b101a404b2_b.jpg",
+    page: "https://www.flickr.com/photos/24495410@N03/4714538293",
+    // Golden full-moon maple leaves from above: the leaf in the middle spans
+    // about 200 of the picture's 1,023 columns; at 9 cm across (the species'
+    // leaves are 6 to 12 cm broad) the picture is about 46 cm wide.
+    width: 0.46,
+    // On the leaf in the middle.
+    center: [0.44, 0.426],
+    round: true,
+    layers: [-0.65].map((e) => micro("crown", e)),
+  },
+  {
     id: "leaf",
-    url: "https://live.staticflickr.com/65535/53147954324_3eda9187f6_k.jpg",
-    page: "https://www.flickr.com/photos/126288307@N05/53147954324",
-    // The leaf spans about 1,800 of the picture's 2,048 columns; at 7 cm
-    // across (a typical leaf: 4 to 12 cm) the picture is about 7.9 cm wide.
-    width: 0.079,
-    // On the blade, where the cells sit.
-    center: [0.47, 0.45],
-    layers: [-1.15, -1.6, -2.1].map((e) => micro("leaf", e)),
+    url: "https://live.staticflickr.com/3110/2649442904_c7238a0ce8_b.jpg",
+    page: "https://www.flickr.com/photos/28012136@N08/2649442904",
+    // One golden full-moon maple leaf, lit from behind: its blade spans about
+    // 680 of 1,024 columns; at 9 cm across the picture is about 13.5 cm wide.
+    width: 0.135,
+    // On the blade, between its veins.
+    center: [0.322, 0.52],
+    round: true,
+    layers: [-1.15, -1.6].map((e) => micro("leaf", e)),
   },
   {
     id: "cells",
@@ -198,6 +220,7 @@ export const MICRO = [
     width: 200e-6,
     // A chloroplast near the middle, about 3.6 µm across here.
     center: [0.4795, 0.4445],
+    round: true,
     layers: [-3.8, -4.3, -4.8].map((e) => micro("cells", e)),
   },
   {
@@ -207,6 +230,7 @@ export const MICRO = [
     width: 4.5e-6,
     // In the chloroplast's stroma, between its stacks of membranes.
     center: [0.6, 0.5],
+    round: true,
     layers: [-5.5, -6].map((e) => micro("chloroplast", e)),
   },
 ];

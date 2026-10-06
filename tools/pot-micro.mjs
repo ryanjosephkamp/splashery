@@ -12,7 +12,18 @@ import { MICRO } from "../src/powers/stops.js";
 
 const OUT = new URL("../assets/toys/powers-of-ten/", import.meta.url);
 
+// POT_CACHE=<dir>: a source already saved there under its file name is read
+// from it instead (the hosts rate-limit repeated downloads).
 async function source(url) {
+  const cached = process.env.POT_CACHE && new URL(url).pathname.split("/").pop();
+  if (cached) {
+    try {
+      const b = await fs.readFile(`${process.env.POT_CACHE}/${cached}`);
+      return jpeg.decode(b, { useTArray: true, maxMemoryUsageInMB: 2048 });
+    } catch {
+      // not there: fetch it
+    }
+  }
   const r = await fetch(url);
   if (!r.ok) throw new Error(`${url}: ${r.status}`);
   return jpeg.decode(Buffer.from(await r.arrayBuffer()), { useTArray: true, maxMemoryUsageInMB: 2048 }); // prettier-ignore

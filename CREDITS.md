@@ -1154,9 +1154,12 @@ reads the files of the Space r2, Science r3 and photoreal toys named below.
   (NASA, public domain; Space r2), the ribosome's cryo-EM map EMD-48329 and model PDB 9MKK (public
   domain; Science r3) and the "Golden Fullmoon Maple" capture by Joshua Trapani
   ([CC BY 4.0](https://superspl.at/scene/f233b115)).
-- A Japanese maple leaf: "Japanese maple leaf - Richmond Virginia" by Watts
-  ([Flickr](https://www.flickr.com/photos/126288307@N05/53147954324)),
-  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) (its live page, checked October 6,
+- The golden full-moon maple's leaves: "Acer shirasawanum 'Aureum'" by Megan Hansen
+  ([Flickr](https://www.flickr.com/photos/24495410@N03/4714538293)),
+  [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) (its cut, `micro-crown-*.jpg`,
+  stays CC BY-SA 2.0), and one leaf: "Golden Full Moon Maple" by susteph
+  ([Flickr](https://www.flickr.com/photos/28012136@N08/2649442904)),
+  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) (their live pages, checked October 6,
   2026). Cut by `tools/pot-micro.mjs`.
 - Plant cells: "Arabidopsis thaliana plant cells containing chloroplasts, LM" by Fernán Federici,
   and a chloroplast: "Chloroplast in a bean leaf, TEM" by Kevin Mackenzie, University of Aberdeen,
