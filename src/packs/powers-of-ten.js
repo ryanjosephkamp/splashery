@@ -83,12 +83,16 @@ function pictureCloud(k, data, side, place, { alpha = 1 } = {}) {
     const x = i % side;
     const y = (i / side) | 0;
     const o = i * 4;
+    const u = (x + 0.5) / side;
+    const v = (y + 0.5) / side;
+    // Soft edges, so a finer picture fades into the one round it with no seam.
+    const edge = smooth(0, 0.06, Math.min(u, v, 1 - u, 1 - v));
     return {
-      p: place((x + 0.5) / side, (y + 0.5) / side),
+      p: place(u, v),
       scales: [s, s, s * 0.1],
       quat: [0, 0, 0, 1],
       color: [data[o] / 255, data[o + 1] / 255, data[o + 2] / 255],
-      opacity: alpha,
+      opacity: alpha * edge,
       kind: "fade",
       params: [0, -0.99],
     };
@@ -553,10 +557,10 @@ async function buildPicture(k, layer, profile) {
   const s0 = 0.62 * pitch * (w / U);
   k.cloud({ count: (side * side * 160000) / k.count, jitter: 0, pattern: false }, (_r, i) => {
     const o = i * 4;
-    const a = data[o + 3] / 255;
-    if (a < 0.03) return null;
     const x = ((i % side) + 0.5) / side;
     const y = (((i / side) | 0) + 0.5) / side;
+    const a = (data[o + 3] / 255) * smooth(0, 0.06, Math.min(x, y, 1 - x, 1 - y));
+    if (a < 0.03) return null;
     return {
       p: [(x - c[0]) * w, (c[1] - y) * w, 0],
       scales: [s0, s0, s0 * 0.1],
@@ -795,6 +799,8 @@ export const CREDITS = [
   { label: "3 km", title: "USGS Imagery Only (NAIP)", source: "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer", author: "USDA, USGS The National Map", ...PD }, // prettier-ignore
   { label: "From 1 km to 30 m", title: "Aerial Photography (Orthophoto) 2023, 3 inch", source: "https://opendata.dc.gov/", author: "District of Columbia, Office of the Chief Technology Officer", ...BY }, // prettier-ignore
   { label: "The garden bed", title: "Golden Fullmoon Maple (3D capture)", source: "https://superspl.at/scene/f233b115", author: "Joshua Trapani", ...BY, changes: "Decimated, turned to be seen from above and set in the garden at an estimated 2 m long." }, // prettier-ignore
+  { label: "Plant cells", title: "Arabidopsis thaliana plant cells containing chloroplasts, LM", source: "https://wellcomecollection.org/works/gwmfux6b", author: "Fernán Federici (Wellcome Collection)", ...BY }, // prettier-ignore
+  { label: "A chloroplast", title: "Chloroplast in a bean leaf, TEM", source: "https://wellcomecollection.org/works/bx3dctp2", author: "Kevin Mackenzie, University of Aberdeen (Wellcome Collection)", ...BY }, // prettier-ignore
   { label: "The ribosome", title: "Arbekacin-bound E. coli 70S ribosome, 3.2 Å (EMD-48329), with its model (PDB 9MKK)", source: "https://www.ebi.ac.uk/emdb/EMD-48329", author: "S. Majumdar, N. P. Parajuli, X. Ge, A. Emmerich and S. Sanyal (2025), via EMDB and the PDB", license: "Public domain (EMDB)", licenseUrl: "https://www.ebi.ac.uk/emdb/faq" }, // prettier-ignore
 ];
 

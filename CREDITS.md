@@ -1154,6 +1154,12 @@ reads the files of the Space r2, Science r3 and photoreal toys named below.
   (NASA, public domain; Space r2), the ribosome's cryo-EM map EMD-48329 and model PDB 9MKK (public
   domain; Science r3) and the "Golden Fullmoon Maple" capture by Joshua Trapani
   ([CC BY 4.0](https://superspl.at/scene/f233b115)).
+- Plant cells: "Arabidopsis thaliana plant cells containing chloroplasts, LM" by Fernán Federici,
+  and a chloroplast: "Chloroplast in a bean leaf, TEM" by Kevin Mackenzie, University of Aberdeen,
+  both from the [Wellcome Collection](https://wellcomecollection.org/works/gwmfux6b)
+  ([and](https://wellcomecollection.org/works/bx3dctp2)),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (their live pages, checked October 6,
+  2026). Cut by `tools/pot-micro.mjs`.
 - The planets' places: JPL's
   [Approximate Positions of the Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html) (E. M.
   Standish). Public domain.
