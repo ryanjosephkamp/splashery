@@ -101,6 +101,10 @@ function worldRecipe(ids, extra = {}) {
   const def = worldById(list[0]);
   const relief = list.some((id) => worldById(id).maps.height);
   return {
+    // Polish round: the labs sharp kernel and twice the tier's splats (capped
+    // by the tier), most of the extra going to the feature close-ups.
+    kernel: "sharp",
+    density: 2,
     alive: true,
     turntable: false,
     options: [
@@ -247,7 +251,7 @@ function buildWorld(k, W, o, extra) {
   const air = def.atmosphere;
   const shares = {
     air: air ? 0.07 : 0,
-    patches: patches.length ? 0.3 : 0,
+    patches: patches.length ? 0.42 : 0,
     labels: 0.012 * patches.length,
   };
   const nGround = Math.floor(N * (1 - shares.air - shares.patches - shares.labels));
@@ -357,7 +361,7 @@ function buildWorld(k, W, o, extra) {
     const text = labelText(f);
     const east = unit(cross([0, 1, 0], d));
     const north = cross(d, east);
-    const px = (view * 0.55) / Math.max(12, text.length * 6);
+    const px = (view * 0.55) / Math.max(66, text.length * 6); // (short names no bigger than 11 letters' worth)
     const across = text.length * 6 - 1;
     const top = view * 0.4;
     const dots = [];
@@ -560,6 +564,8 @@ const STAR_FLY = 8;
 const STAR_R = 20; // parsecs to the edge
 
 const starsRecipe = {
+  // Polish round: the labs sharp kernel for crisper stars and lines.
+  kernel: "sharp",
   alive: true,
   turntable: true,
   controls: [{ key: "fly", label: "Fly to a star", type: "pulse", ease: STAR_FLY }],
@@ -745,6 +751,10 @@ const GAL_TURN = 7;
 const DISK_HEIGHT = 0.035;
 
 const galaxyRecipe = {
+  // Polish round: the labs sharp kernel and twice the tier's splats (capped
+  // by the tier) for crisper edges.
+  kernel: "sharp",
+  density: 2,
   alive: true,
   turntable: false,
   options: [
@@ -822,10 +832,13 @@ const galaxyRecipe = {
           ? gauss * 0.45 * Math.sqrt(g * g - r * r) + lap * DISK_HEIGHT * 0.5
           : lap * DISK_HEIGHT;
       const expected = (N * weight[q]) / total;
-      const sz = Math.min(8, Math.max(0.5, 1 / Math.sqrt(Math.max(expected, 1e-3)))) * pix * 1.05;
+      // (No bigger than 4 pixels, so the sparse outskirts stay fine dust, not blobs.)
+      const sz = Math.min(4, Math.max(0.5, 1 / Math.sqrt(Math.max(expected, 1e-3)))) * pix * 1.05;
       const c = q * 3;
-      // Faint light is drawn see-through, so the dark sky between the arms stays dark.
-      const op = Math.min(0.9, Math.max(0.06, (lum[q] - sky) * 2.6));
+      // Faint light is drawn see-through, so the dark sky between the arms
+      // stays dark; the picture's last fifth fades out, so no edge shows.
+      const fade = 1 - smooth01((r - 0.78) / 0.22);
+      const op = Math.min(0.9, Math.max(0.06, (lum[q] - sky) * 2.6)) * fade;
       // (Flat in the disk, so it stays thin seen edge on; round in the bulge.)
       const flat = r < g ? 0.7 : 0.25;
       return { p: [x, y, z], scales: [sz, sz, sz * flat], color: [rgb[c] / 255, rgb[c + 1] / 255, rgb[c + 2] / 255], opacity: op }; // prettier-ignore
@@ -855,6 +868,8 @@ const sizeColor = (re) => (re < 1.6 ? [0.62, 0.55, 0.5] : re < 4 ? [0.52, 0.68, 
 const SOLAR_COLORS = { Mercury: [0.62, 0.6, 0.58], Venus: [0.9, 0.82, 0.62], Earth: [0.35, 0.55, 0.85], Mars: [0.8, 0.45, 0.28] }; // prettier-ignore
 
 const systemsRecipe = {
+  // Polish round: the labs sharp kernel for crisper stars and lines.
+  kernel: "sharp",
   alive: true,
   // focus lets the drive glide the view to the side (out.view).
   focus: () => false,
@@ -1024,6 +1039,10 @@ const BURNS = [
 ];
 
 const rocketRecipe = {
+  // Polish round: the labs sharp kernel and twice the tier's splats (capped
+  // by the tier) for crisper edges.
+  kernel: "sharp",
+  density: 2,
   alive: true,
   turntable: true,
   controls: [{ key: "launch", label: "Stage it", type: "pulse", ease: STAGE_SECS }],
@@ -1052,7 +1071,7 @@ const rocketRecipe = {
     const was = m.s ?? 0;
     m.s = s;
     const crossed = (x) => on && was < x && s >= x;
-    const back = band(s, STAGE_SECS - 1.4, STAGE_SECS - 0.2);
+    const back = band(s, STAGE_SECS - 1.0, STAGE_SECS - 0.2);
     for (const st of STAGING) {
       if (crossed(st.at)) out.cues.push({ voice: "thud", f: 90, decay: 0.6, vol: 0.6 });
       const dt = on ? Math.max(0, s - st.at) : 0;
@@ -1074,6 +1093,23 @@ const rocketRecipe = {
       if (back > 0) vis = back;
       out.parts[st.part] = { offset: off, angle, visible: vis };
     }
+    // Follow the climbing vehicle: as each stage drops, the whole toy glides
+    // down so what is still flying stays in the middle of the view (the
+    // middle of the stack that is left, as a share of the rocket's height;
+    // the toy is fit to about 1.9 tall).
+    const mid = (from, to) => (from + to) / 2;
+    const follow = [
+      [1.3, mid(0.383, 1.01)],
+      [2.8, mid(0.43, 0.895)],
+      [5.3, mid(0.61, 0.895)],
+      [8.2, mid(0.8, 0.895)],
+    ];
+    let fc = 0.5;
+    for (const [at, f] of follow) fc += (f - fc) * ease(band(s, at + 0.2, at + 1.4));
+    // (Home again before the stages fade back in.)
+    const home = ease(band(s, STAGE_SECS - 1.7, STAGE_SECS - 1.0));
+    const glide = on ? -(fc - 0.5) * 1.9 * 0.85 * (1 - home) : 0;
+    out.body = { offset: [0, glide, 0] };
     // The spacecraft pulls away from the third stage at the end.
     const sep = on && back <= 0 ? Math.max(0, s - 8.2) : 0;
     out.parts.csm = { offset: [0, 0.05 * sep, 0] };
