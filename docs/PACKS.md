@@ -515,9 +515,10 @@ time (the Powers of ten zoom), can load each one only when it comes near:
   `fade` of 0, is switched off (not drawn or sorted). `fade` is the chunk's own first morph channel,
   so splats built with `kind: "fade"` and `params: [0, -0.99]` take it as their opacity. Each chunk
   is its own splat entity, so chunks sort where they show, at any scale.
-- `zoom: true` hands the pinch, the wheel and the + and − keys to the toy instead of the camera:
-  `info.zoom = { log, n, resets }` (the sum of the gestures' natural logs, above 0 zooming out; how
-  many; how many times Reset view was pressed).
+- `zoom: true` hands the pinch, the wheel, the + and − keys and a one-finger drag (up zooms in; a
+  sideways drag does nothing) to the toy instead of the camera: `info.zoom = { log, n, resets }`
+  (the sum of the gestures' natural logs, above 0 zooming out; how many; how many times Reset view
+  was pressed).
 - A legend item (`out.legend`, lane Anatomy) may carry `ruler: { size }`: a scale bar that long in
   recipe units at the toy's center as the camera sees it (at most 140 px), its text under it.
 

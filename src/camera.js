@@ -125,6 +125,14 @@ export class OrbitCamera {
 
   // Drag in CSS pixels. A full viewport-height drag turns about 1.4 turns.
   rotateBy(dx, dy, dt = 1 / 60) {
+    // Lane Powers of ten: a toy that takes the zoom takes a drag as a zoom
+    // too (up zooms in, a viewport height about a hundredfold), and the
+    // view keeps still.
+    if (this.zoomTaker && dy) {
+      this.zoomBy(Math.exp((dy * 4.6) / Math.max(200, this.viewportHeight)));
+      return;
+    }
+    if (this.zoomTaker) return;
     const k = (TAU * 1.4) / Math.max(200, this.viewportHeight);
     const c = Math.cos(-this.cur.roll);
     const s = Math.sin(-this.cur.roll);

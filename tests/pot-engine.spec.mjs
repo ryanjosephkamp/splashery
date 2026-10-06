@@ -112,7 +112,7 @@ test("chunks build when asked, show where out.chunks puts them and go when dropp
   expect(await page.evaluate(() => window.__splashery.player.chunks)).toBe(null);
 });
 
-test("a toy with zoom: true takes the pinch and the wheel; others move the camera", async ({
+test("a toy with zoom: true takes the pinch, the wheel and a drag; others move the camera", async ({
   page,
 }) => {
   await ready(page);
@@ -138,6 +138,13 @@ test("a toy with zoom: true takes the pinch and the wheel; others move the camer
   expect(z2.n).toBeGreaterThan(2);
   expect(z2.log).toBeGreaterThan(Math.log(0.4));
   expect(await dist()).toBeCloseTo(d0, 6);
+  // A drag zooms too (up zooms in) and never turns the view.
+  const yaw0 = await page.evaluate(() => window.__splashery.player.camera.tgt.yaw);
+  const before = await page.evaluate(() => window.__potInfo.zoom.log);
+  await page.evaluate(() => window.__splashery.player.camera.rotateBy(40, -120));
+  await frames(page);
+  expect(await page.evaluate(() => window.__potInfo.zoom.log)).toBeLessThan(before);
+  expect(await page.evaluate(() => window.__splashery.player.camera.tgt.yaw)).toBeCloseTo(yaw0, 6);
   // Reset view counts.
   await page.evaluate(() => window.__splashery.player.resetCamera());
   await frames(page);
