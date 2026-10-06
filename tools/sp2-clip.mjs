@@ -65,7 +65,8 @@ const browser = await chromium.launch({
     "--enable-webgl",
   ],
 });
-const page = await browser.newPage({ viewport: { width: 1000, height: 700 } });
+// (A portrait clip is made in a phone's page, so the view fits a phone.)
+const page = await browser.newPage({ viewport: high > size ? { width: 390, height: 844 } : { width: 1000, height: 700 } }); // prettier-ignore
 page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
