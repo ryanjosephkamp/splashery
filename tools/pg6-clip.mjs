@@ -12,7 +12,8 @@
 // Picture lab raising a PDF figure and a drawn box), terrain (a top-down
 // photo raised in the Picture lab, then deeper with the Depth slider; the
 // photo is a file given with --photo=<path>, never part of the site),
-// layers (P1: an album photo raised as pop-up layers, then tilted).
+// layers (P1: an album photo raised as pop-up layers, then tilted),
+// album (an album photo rising, then turned).
 // --dpr=1 renders at one device pixel per CSS pixel (default 2). Writes
 // <out-dir>/pg6-<scene>.gif and a strip of six frames. The test PDF is made
 // by tests/fixtures/pg6/make-pdf.mjs.
@@ -31,7 +32,7 @@ const opt = (name, def) => {
 };
 const [outDir, ...scenes] = args.filter((a) => !a.startsWith("--"));
 if (!outDir) throw new Error("Usage: node tools/pg6-clip.mjs <out-dir> [scene ...]");
-const ALL = ["two-up", "turn", "tilt", "lab", "terrain", "layers"];
+const ALL = ["two-up", "turn", "tilt", "lab", "terrain", "layers", "album"];
 const list = scenes.length ? scenes : ALL;
 fs.mkdirSync(outDir, { recursive: true });
 const STEP = 1 / 12;
@@ -338,6 +339,21 @@ async function record(scene) {
     await turn(0.6, 0.2, 1.6);
     await turn(-0.6, 0.35, 2.4);
     await turn(0, 0.7, 1.6);
+    await turn(0, 0, 1.2);
+    await hold(1200);
+  } else if (scene === "album") {
+    // (Polish: an album photo rising, sharp, then turned.)
+    await warm();
+    await open("photo-album", { reading: "one" });
+    await run(() => window.__splashery.app.pictureStep(1));
+    await play(2);
+    await popOn();
+    await play(0.25);
+    await hold(800);
+    const n = await run(() => window.__splashery.player.pictures.page);
+    await raise(n, [0, 0, 1, 1]);
+    await turn(0.5, 0.25, 1.6);
+    await turn(-0.4, 0.3, 2);
     await turn(0, 0, 1.2);
     await hold(1200);
   } else if (scene === "terrain") {
