@@ -89,8 +89,9 @@ test("pausing and playing with a tap keep the sound's place; so do a scrub and S
   await page.waitForTimeout(400);
   const s0 = await state(page);
   expect(s0.playing).toBe(true);
-  expect(s0.sound).toBeGreaterThan(3.9);
-  expect(s0.sound).toBeLessThan(4.8);
+  // (Live r7: the 10-second video plays whole now, so the middle is 5 s.)
+  expect(s0.sound).toBeGreaterThan(4.9);
+  expect(s0.sound).toBeLessThan(5.8);
   // Start over: the sound from the top.
   await page.evaluate(() => document.getElementById("moving-start").click());
   await page.waitForTimeout(300);
@@ -106,14 +107,15 @@ test("a clip plays at its source's speed: a video's frame rate and length, a GIF
   test.setTimeout(400_000);
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  // The video: its first 8 seconds of 10, at the low profile's 12 frames a
-  // second (r5 took 48 frames, 6 a second), and the line says so.
+  // The video: (Live r7) all 10 seconds of it now (a video longer than 8
+  // seconds plays whole), at the low profile's 12 frames a second, and the
+  // line says so. (r6 took its first 8 seconds; r5 48 frames, 6 a second.)
   await open(page, "tests/fixtures/live6/long.webm", "long");
   const v = await state(page);
-  expect(v.duration).toBeCloseTo(8, 1);
+  expect(v.duration).toBeCloseTo(10, 1);
   expect(v.source).toBeCloseTo(10, 0);
-  expect(v.n).toBe(96);
-  expect(v.line).toContain("8.0 s of 10.0 s");
+  expect(v.n).toBe(120);
+  expect(v.line).toContain("10.0 s, 120 frames");
   // The GIF (no sound): 2 seconds at 20 frames a second, kept at 12 a second
   // here; its clock keeps real time though this container's software
   // renderer draws only a few frames a second (it used to step at most a
