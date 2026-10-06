@@ -101,6 +101,27 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
+October 6, 2026, 06:40 UTC (Opus 5.5): **sharpness round 2** (the Operator's brief of 04:34 UTC, the
+owner's "the moving photo to 3d is also still too grainy and needs to be much sharper ... the splat
+mirror also needs to improve"), still on `claude/lane-live-r7-polish` (#333). The hl1 fix is its own
+PR (#336); the long videos are their own PR on `claude/lane-live-r7-long-video`.
+
+- **Moving photo to 3D** (`live-moving-sharp-r3` and its still): each splat is sized the way Photo
+  to 3D sizes its own (`FILL` times the mean distance to its neighbors on the same surface, smaller
+  beside a cut), with the labs' sharp kernel at density 1.5, so high gets 640 by 360 (one splat a
+  pixel). The frame round the picture is clean flat strips. Measured with the new
+  `tools/lv7-sharp-compare.mjs` (the Laplacian's variance of the same frame at phone size, higher is
+  sharper): mid 8.3 against Photo to 3D's 4.5 (the frame itself 7.3); high 9.7 against 6.5 (11.5).
+- **Splat mirror** (`lv7-splat-mirror-r4`, `-hologram-r4`, `-r4-still`): a finer picture, up to
+  140,000 cells at density 1.5. The depth is still worked out on a grid of at most 60,000 cells (no
+  slower) and brought up to the fine grid along the picture's colors (`upsampleSnap`), so the
+  outline is crisp with no holes. The hidden wall is filled along its rows (`rowFill`), and the
+  color filter holds small noise and lets real changes through at once. The background layer is
+  sized from the depth's grid: on the fine grid a few of its splats stood below the frame as brown
+  dots. Against Photo to 3D on the same frame: 0.59 of its sharpness (was 0.22). Mannequin measures:
+  sharpness 0.62, color jitter 1.05 face on, turned 2.96, draw 158 ms (hologram: 0.42, overFace
+  5.4).
+
 October 5, 2026, 17:00 UTC (Opus 5.5): **the polish round** (the Operator's brief of 15:40 UTC: the
 owner's "the toys could still be sharper"), on `claude/lane-live-r7-polish` (from the lane's head;
 #263 and #284 are frozen for the Integrator's run). #263 merged through the Operator (#332, October
