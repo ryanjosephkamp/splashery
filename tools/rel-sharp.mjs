@@ -28,8 +28,10 @@ export function sharpness(png) {
     for (let x = 1; x < w - 1; x++) {
       const i = y * w + x;
       if (Math.abs(L[i] - bg) < 2) continue;
-      const gx = L[i - w + 1] + 2 * L[i + 1] + L[i + w + 1] - L[i - w - 1] - 2 * L[i - 1] - L[i + w - 1];
-      const gy = L[i + w - 1] + 2 * L[i + w] + L[i + w + 1] - L[i - w - 1] - 2 * L[i - w] - L[i - w + 1];
+      const gx =
+        L[i - w + 1] + 2 * L[i + 1] + L[i + w + 1] - L[i - w - 1] - 2 * L[i - 1] - L[i + w - 1];
+      const gy =
+        L[i + w - 1] + 2 * L[i + w] + L[i + w + 1] - L[i - w - 1] - 2 * L[i - w] - L[i - w + 1];
       sum += gx * gx + gy * gy;
       n++;
     }
