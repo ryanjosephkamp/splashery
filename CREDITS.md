@@ -1262,6 +1262,24 @@ September 30, 2026), decimated into three levels of detail each:
 | Driftwood          | [Dead Tree Trunk 02](https://polyhaven.com/a/dead_tree_trunk_02)         | Jenelle van Heerden, Rico Cilliers | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Stumps             | [Tree Stump 01](https://polyhaven.com/a/tree_stump_01)                   | Rob Tuytel                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
+## Arcade (lane Arcade)
+
+- Stone Belt: the shapes of the asteroids 101955 Bennu, 25143 Itokawa, 433 Eros, 216 Kleopatra, 1620
+  Geographos, 4179 Toutatis and 6489 Golevka, from
+  [NASA 3D Resources](https://github.com/nasa/NASA-3D-Resources) ("3D Printing"), by NASA, in the
+  public domain (the collection's README: "free and without copyright"; checked October 5, 2026).
+  Each model was sampled to 1,600 surface points with their normals by `tools/arc-rocks.mjs`
+  (`assets/toys/stone-belt/rocks.json`).
+- Soft Landing: the Moon's ground from the [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720) (NASA's
+  Scientific Visualization Studio, Ernie Wright; LRO's LOLA elevation, `ldem_16_uint.tif`, and LROC
+  color, `lroc_color_2k.jpg`), and Mars's from Mars Global Surveyor's MOLA
+  ([MEGDR](https://pds-geosciences.wustl.edu/missions/mgs/megdr.html), `megt90n000eb.img`, NASA's
+  Planetary Data System), both NASA works in the public domain (checked October 5, 2026). Patches
+  around seven sites were cut out by `tools/arc-terrain.mjs`
+  (`assets/toys/soft-landing/terrain.json`).
+- Page Breaker: the photo sample is the Picture lab's tulip field (see "Pictures and pages"), and
+  the article sample is the Picture lab's.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
