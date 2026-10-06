@@ -281,6 +281,143 @@ export async function measure(page, { answers = 10, turn = 0.35, dump = null } =
   };
 }
 
+// Live r7 (the owner's "Please improve stability" of October 6, on the r4
+// clips): how still the mirror holds while nothing in front of the camera
+// moves, over the whole picture, not only the face. For `secs`, every frame
+// the mirror draws is compared with the one before (what the splats are
+// given: their colors, their heights, and the background layer's colors,
+// heights and which of its splats show), then the drawn picture is
+// screenshotted `shots` times, face on and turned, each shot against the one
+// before. All are means per frame or per shot (0 is perfectly still):
+//
+//   color        the picture's colors (0..255, mean of r, g, b)
+//   height       the picture's heights (thousandths of the relief)
+//   moved        the share of the picture's splats (per thousand) whose
+//                height moved more than a hundredth in a frame
+//   backColor, backHeight, backShown   the background layer's (backShown:
+//                the share of its splats, per thousand, that appeared or hid)
+//   shown, shownTurned   the drawn page (0..255), face on and turned
+//   flicker, flickerTurned   the share of the drawn page's pixels (per
+//                thousand) that changed by more than 24 levels
+export async function stillness(page, { secs = 6, shots = 6, turn = 0.35 } = {}) {
+  await page.evaluate(async () => {
+    const { MIRROR, mirrorScreen } = await import("/src/live/relief.js");
+    const S = (window.__still = { n: 0, color: 0, height: 0, moved: 0, backColor: 0, backHeight: 0, backShown: 0, prev: null }); // prettier-ignore
+    const draw = mirrorScreen.draw;
+    window.__stillDraw = draw;
+    mirrorScreen.draw = function (g, time) {
+      draw.call(this, g, time);
+      const W = g.canvas.width;
+      const H = g.canvas.height;
+      const { cols, rows } = MIRROR;
+      const d = g.getImageData(0, 0, W, H).data;
+      const p = S.prev;
+      S.prev = d;
+      if (!p || p.length !== d.length) return;
+      let c = 0;
+      let h = 0;
+      let mv = 0;
+      let bc = 0;
+      let bh = 0;
+      let bs = 0;
+      let nb = 0;
+      for (let j = 0; j < rows; j++)
+        for (let i = 0; i < cols; i++) {
+          const o = (j * W + i) * 4;
+          c += (Math.abs(d[o] - p[o]) + Math.abs(d[o + 1] - p[o + 1]) + Math.abs(d[o + 2] - p[o + 2])) / 3; // prettier-ignore
+          const q = o + cols * 4;
+          const dh = Math.abs(d[q] - p[q]) / 255;
+          h += dh;
+          if (dh > 0.01) mv++;
+          if (H >= rows * 2) {
+            const b = ((j + rows) * W + i) * 4;
+            const bq = b + cols * 4;
+            if (d[bq + 3] !== p[bq + 3]) bs++;
+            if (d[bq + 3] && p[bq + 3]) {
+              bc += (Math.abs(d[b] - p[b]) + Math.abs(d[b + 1] - p[b + 1]) + Math.abs(d[b + 2] - p[b + 2])) / 3; // prettier-ignore
+              bh += Math.abs(d[bq + 2] - p[bq + 2]) / 255;
+              nb++;
+            }
+          }
+        }
+      const n = cols * rows;
+      S.n++;
+      S.color += c / n;
+      S.height += (1000 * h) / n;
+      S.moved += (1000 * mv) / n;
+      S.backColor += nb ? bc / nb : 0;
+      S.backHeight += nb ? (1000 * bh) / nb : 0;
+      S.backShown += (1000 * bs) / n;
+    };
+  });
+  await page.waitForTimeout(secs * 1000);
+  const frames = await page.evaluate(async () => {
+    const { mirrorScreen } = await import("/src/live/relief.js");
+    mirrorScreen.draw = window.__stillDraw;
+    const S = window.__still;
+    const k = Math.max(1, S.n);
+    return { frames: S.n, color: S.color / k, height: S.height / k, moved: S.moved / k, backColor: S.backColor / k, backHeight: S.backHeight / k, backShown: S.backShown / k }; // prettier-ignore
+  });
+  const box = await pictureBox(page);
+  const yaw = (d) =>
+    page.evaluate((d) => {
+      const c = window.__splashery.player.camera;
+      const s = c.getState();
+      c.setState({ ...s, yaw: s.yaw + d }, { snap: true });
+    }, d);
+  const diff = (a, b) => {
+    let s = 0;
+    let f = 0;
+    for (let i = 0; i < a.data.length; i += 4) {
+      const v = (Math.abs(a.data[i] - b.data[i]) + Math.abs(a.data[i + 1] - b.data[i + 1]) + Math.abs(a.data[i + 2] - b.data[i + 2])) / 3; // prettier-ignore
+      s += v;
+      if (v > 24) f++;
+    }
+    const n = a.data.length / 4;
+    return [s / n, (1000 * f) / n];
+  };
+  const on = [];
+  const off = [];
+  let lastOn = null;
+  let lastOff = null;
+  for (let k = 0; k < shots; k++) {
+    await page.waitForTimeout(500);
+    const a = await shot(page, box);
+    await yaw(turn);
+    const b = await shot(page, box);
+    await yaw(-turn);
+    if (lastOn) {
+      on.push(diff(a, lastOn));
+      off.push(diff(b, lastOff));
+    }
+    lastOn = a;
+    lastOff = b;
+  }
+  const avg = (a, i) => a.reduce((s, v) => s + v[i], 0) / Math.max(1, a.length);
+  return { ...frames, shown: avg(on, 0), flicker: avg(on, 1), shownTurned: avg(off, 0), flickerTurned: avg(off, 1) }; // prettier-ignore
+}
+
+// The whole picture's box on the page (CSS pixels).
+async function pictureBox(page) {
+  return page.evaluate(async () => {
+    const { MIRROR } = await import("/src/live/relief.js");
+    const p = window.__splashery.player;
+    const height = (2 * MIRROR.rows) / MIRROR.cols;
+    const pts = [
+      [0, 0],
+      [1, 0],
+      [0, 1],
+      [1, 1],
+    ].map(([u, v]) => p.screenPoint([(u - 0.5) * 2, (0.5 - v) * height, 0]));
+    const r = document.getElementById("stage").getBoundingClientRect();
+    const xs = pts.map((q) => q[0] + r.left);
+    const ys = pts.map((q) => q[1] + r.top);
+    const x = Math.max(0, Math.min(...xs));
+    const y = Math.max(0, Math.min(...ys));
+    return { x, y, width: Math.min(r.right, Math.max(...xs)) - x, height: Math.min(r.bottom, Math.max(...ys)) - y }; // prettier-ignore
+  });
+}
+
 // The hologram's additions over the face: each face cell against a plain
 // cyan tint of its colors (what the look would be with nothing on top).
 export async function overFace(page) {
@@ -338,8 +475,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); // prettier-ignore
   page.on("pageerror", (e) => console.error("page error:", e.message));
   await openMirror(page, process.env.SPLASHERY_URL || "http://127.0.0.1:4173/", { look, query: opt("query", "") }); // prettier-ignore
-  const m = await measure(page, { answers: Number(opt("answers", 10)), dump: opt("dump", null) });
-  if (look === "hologram") m.overFace = await overFace(page);
+  const m = args.includes("--still-only") ? {} : await measure(page, { answers: Number(opt("answers", 10)), dump: opt("dump", null) }); // prettier-ignore
+  if (look === "hologram" && !args.includes("--still-only")) m.overFace = await overFace(page);
+  // (--still-secs=6: also how still it holds, the whole picture; see stillness.)
+  if (opt("still-secs", ""))
+    m.still = await stillness(page, { secs: Number(opt("still-secs", 6)) });
   console.log(JSON.stringify({ look, ...m }, null, 1));
   await browser.close();
 }

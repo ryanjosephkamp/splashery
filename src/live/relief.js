@@ -129,6 +129,10 @@ export const DEPTH_SIDE = { low: 140, mid: 196, high: 252, max: 308 };
 // eased too, so a person stepping nearer doesn't make the room flicker.
 // Live r7: the depth's own grid holds at most this many cells (CameraDepth).
 const DEPTH_CELLS = 60000;
+// Live r7 (stability, October 6): a cell is still once it has held this long
+// (seconds), and a still cell's depth jumps only when HOLD answers agree.
+const STILL = 0.6;
+const HOLD = 3;
 
 // Live r7: a depth worked out on a dw by dh grid (d, 0..1, its jumps clean
 // steps after snapEdges), brought up to a gw by gh grid. Where the four
@@ -227,6 +231,15 @@ export class CameraDepth {
     this.dcols = Math.max(16, Math.round(cols * ds));
     this.drows = Math.max(12, Math.round(rows * ds));
     this.dt = new Float32Array(this.dcols * this.drows);
+    // Live r7 (the owner's "Please improve stability", October 6): how long
+    // each cell of the picture has held still (seconds; STILL), and for the
+    // depth's grid, how many answers in a row a still cell's depth has
+    // jumped (a jump is taken only when it holds; HOLD).
+    this.stillT = new Float32Array(cols * rows);
+    this.dstill = new Uint8Array(this.dcols * this.drows);
+    this.djump = new Uint8Array(this.dcols * this.drows);
+    this.fjump = new Uint8Array(cols * rows);
+    this.moving = 0; // the share of the picture moving now
     this.have = false; // any depth yet
     this.lo = null;
     this.hi = null;
@@ -320,7 +333,9 @@ export class CameraDepth {
       if (was === null) return now;
       const span = Math.max(1e-6, (this.hi ?? hi) - (this.lo ?? lo));
       if (warm) return was + (now - was) * 0.5;
-      return was + (now - was) * (Math.abs(now - was) < span * 0.05 ? 0.04 : 0.3);
+      // (Live r7, stability: still less while nothing moves.)
+      const small = this.moving < 0.005 ? 0.01 : 0.04;
+      return was + (now - was) * (Math.abs(now - was) < span * 0.05 ? small : 0.3);
     };
     const nlo = ease(this.lo, lo);
     this.hi = ease(this.hi, hi);
@@ -347,10 +362,20 @@ export class CameraDepth {
     // going with the side whose colors it has (snapEdges with the frame's
     // colors), so the cut follows the person's outline in the picture.
     const prev = this.smooth;
+    // Live r7 (stability, October 6): where the picture has held still, the
+    // depth hardly moves: a change within the model's wobble moves a
+    // twentieth of the way, and a bigger one (the model's guess flipping
+    // along an outline) only once it has come HOLD answers in a row.
+    // Where anything moves, the depth follows as before.
+    this.markStill();
     if (prev && prev.length === t.length)
       for (let i = 0; i < t.length; i++) {
         const d = Math.abs(t[i] - prev[i]);
-        const a = warm ? 0.6 : d <= 0.03 ? 0.15 : d >= 0.25 ? 1 : 0.15 + (0.85 * (d - 0.03)) / 0.22;
+        let a = warm ? 0.6 : d <= 0.03 ? 0.15 : d >= 0.25 ? 1 : 0.15 + (0.85 * (d - 0.03)) / 0.22;
+        if (!warm && this.dstill[i]) {
+          this.djump[i] = d > 0.12 ? Math.min(255, this.djump[i] + 1) : 0;
+          a = this.djump[i] >= HOLD ? 1 : 0.05;
+        } else this.djump[i] = 0;
         t[i] = prev[i] + (t[i] - prev[i]) * a;
       }
     this.smooth = Float32Array.from(t);
@@ -363,8 +388,26 @@ export class CameraDepth {
     if (this.band) tidyBand(this.band, t);
     // Up to the picture's grid, its edges following the picture's own colors.
     const fine = this.target;
-    if (cols === this.cols && rows === this.rows) fine.set(t);
-    else fine.set(upsampleSnap(t, cols, rows, this.cols, this.rows, this.lastColors));
+    const up = cols === this.cols && rows === this.rows ? t : upsampleSnap(t, cols, rows, this.cols, this.rows, this.lastColors); // prettier-ignore
+    // Live r7 (stability): a still cell of the picture keeps its depth unless
+    // the new one holds (a cell along the outline otherwise flipped between
+    // the person and the wall as the camera's noise moved the cut).
+    if (this.have && !warm)
+      for (let i = 0; i < up.length; i++) {
+        if (this.stillT[i] < STILL) {
+          this.fjump[i] = 0;
+          continue;
+        }
+        const d = up[i] - fine[i];
+        if (Math.abs(d) > 0.12) {
+          this.fjump[i] = Math.min(255, this.fjump[i] + 1);
+          if (this.fjump[i] < HOLD) up[i] = fine[i];
+        } else {
+          this.fjump[i] = 0;
+          up[i] = fine[i] + d * 0.3;
+        }
+      }
+    fine.set(up);
     if (this.back && this.sent) this.back.learn(this.sent, fine, this.cols, this.rows, this.mirror); // prettier-ignore
     if (!this.have) this.heights.set(fine);
     this.have = true;
@@ -407,14 +450,36 @@ export class CameraDepth {
     const cur = sg.getImageData(0, 0, cols, rows);
     const cp = cur.data;
     let last = this.lastSmooth;
+    const still = this.stillT;
     if (!last || last.length !== cp.length) last = this.lastSmooth = Float32Array.from(cp);
-    else
+    else {
+      // Live r7 (stability, October 6): which cells changed clearly (and
+      // their neighbors) start over; every other cell has held still a
+      // little longer, and the longer it holds, the longer its colors
+      // average (a quarter of a second at first, up to two seconds), so the
+      // camera's noise stops showing; anything that moves shows at once.
+      const n = cols * rows;
+      const moved = (this.movedBuf ||= new Uint8Array(n));
+      let m = 0;
+      for (let k = 0; k < n; k++) {
+        const i = k * 4;
+        const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
+        moved[k] = d > 40 ? 1 : 0;
+        m += moved[k];
+      }
+      this.moving = m / n;
+      const near = grow(moved, cols, rows, 1);
+      for (let k = 0; k < n; k++) still[k] = near[k] ? 0 : Math.min(60, still[k] + dt);
       for (let i = 0; i < cp.length; i += 4) {
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
         // (Live r7, the finer grid of October 6: each cell averages fewer of
         // the camera's pixels, so a little steadier: an eighth of a change
-        // within the noise, was a fifth.)
-        const a = d <= 24 ? 0.12 : d >= 80 ? 1 : 0.12 + (0.88 * (d - 24)) / 56;
+        // within the noise, was a fifth. Stability: that eighth is now
+        // a quarter-second average at 30 frames a second, longer as the cell
+        // holds still.)
+        const tau = 0.25 + Math.min(1.75, still[i >> 2] * 0.9);
+        const calm = 1 - Math.exp(-dt / tau);
+        const a = d <= 24 ? calm : d >= 80 ? 1 : calm + ((1 - calm) * (d - 24)) / 56;
         last[i] += (cp[i] - last[i]) * a;
         last[i + 1] += (cp[i + 1] - last[i + 1]) * a;
         last[i + 2] += (cp[i + 2] - last[i + 2]) * a;
@@ -422,6 +487,7 @@ export class CameraDepth {
         cp[i + 1] = last[i + 1];
         cp[i + 2] = last[i + 2];
       }
+    }
     this.lastColors = cp.slice();
     // Live r7: a light unsharp mask on what is drawn (the colors above stay
     // as they are, for the next frame): each cell moves away from the mean
@@ -449,8 +515,20 @@ export class CameraDepth {
       px[o + 3] = 255;
     }
     g.putImageData(img, cols, 0);
-    if (this.back) this.back.draw(g, cols, rows, gain, hts);
+    if (this.back) this.back.draw(g, cols, rows, gain, hts, dt);
     return true;
+  }
+
+  // Live r7 (stability): a cell of the depth's grid is still where every
+  // cell of the picture under it has held still STILL seconds.
+  markStill() {
+    const { dcols, drows, cols, rows, stillT, dstill } = this;
+    dstill.fill(1);
+    for (let j = 0; j < rows; j++) {
+      const y = Math.min(drows - 1, Math.floor((j * drows) / rows));
+      for (let i = 0; i < cols; i++)
+        if (stillT[j * cols + i] < STILL) dstill[y * dcols + Math.min(dcols - 1, Math.floor((i * dcols) / cols))] = 0; // prettier-ignore
+    }
   }
 
   close() {
@@ -574,11 +652,14 @@ export class BackPlate {
             m++;
           }
         if (!m) continue;
-        const k = seen[c] ? 0.5 : 1;
+        // (Live r7, stability: the wall's colors and depth average over
+        // several answers once seen; they took half of each, and all of its
+        // depth, so the layer's splats moved with the camera's noise.)
+        const k = seen[c] ? 0.2 : 1;
         col[c * 3] += (r / m - col[c * 3]) * k;
         col[c * 3 + 1] += (g / m - col[c * 3 + 1]) * k;
         col[c * 3 + 2] += (b / m - col[c * 3 + 2]) * k;
-        dep[c] = mean[c];
+        dep[c] = seen[c] ? dep[c] + (mean[c] - dep[c]) * 0.25 : mean[c];
         seen[c] = 1;
       }
     for (let c = 0; c < bc * br; c++) {
@@ -609,7 +690,7 @@ export class BackPlate {
   // stands and just beside), everywhere else they hide; and they sit
   // BACK_GAP behind the wall (a signed offset, relief axis 3). hts: the
   // picture's heights now (0 far .. 1 near).
-  draw(g, cols, rows, gain, hts) {
+  draw(g, cols, rows, gain, hts, dt = 1 / 60) {
     const { cols: bc, rows: br, vals } = this;
     if (!this.img || this.img.width !== cols * 2 || this.img.height !== rows) this.img = g.createImageData(cols * 2, rows); // prettier-ignore
     const px = this.img.data;
@@ -629,6 +710,13 @@ export class BackPlate {
         for (let j = Math.max(0, y - 2); j <= Math.min(br - 1, y + 2); j++)
           for (let i = Math.max(0, x - 2); i <= Math.min(bc - 1, x + 2); i++) show[j * bc + i] = 1;
       }
+    // (Live r7, stability: a splat that shows stays a moment, so one along
+    // the outline doesn't blink on and off as the person's edge wavers.)
+    const hold = (this.hold ||= new Float32Array(bc * br));
+    for (let b = 0; b < bc * br; b++) {
+      hold[b] = show[b] ? 1 : Math.max(0, hold[b] - dt);
+      if (hold[b] > 0) show[b] = 1;
+    }
     for (let j = 0; j < rows; j++) {
       const y = Math.min(br - 1, Math.floor((j * br) / rows));
       for (let i = 0; i < cols; i++) {
@@ -1284,10 +1372,10 @@ function drawStillRested(g) {
 // Live r7 (the owner's push notes of October 4: "especially with the
 // hologram view. It's like stuff is kind of put on top of the face"): the
 // person (the near part, from the depth) is a clean cyan picture of
-// themselves, with no lines or glow on them. The scanlines (drifting slowly
-// upward) are only in the room behind, which is dimmer, and the glow is a
-// soft rim on the room just outside the person's outline, so it lies behind
-// and around them, never over them.
+// themselves, with no lines or glow on them. The scanlines are only in the
+// room behind, which is dimmer, and the glow is a soft rim on the room just
+// outside the person's outline, so it lies behind and around them, never
+// over them.
 const RIM = 4; // cells
 export function hologram(g, cols, rows, time) {
   const img = g.getImageData(0, 0, cols, rows);
@@ -1324,7 +1412,9 @@ export function hologram(g, cols, rows, time) {
       if (i < cols - 1) dist[k] = Math.min(dist[k], dist[k + 1] + 1);
       if (j < rows - 1) dist[k] = Math.min(dist[k], dist[k + cols] + 1);
     }
-  const shift = Math.floor(time * 6) % 3;
+  // (Live r7, stability, October 6: the scanlines stand still; stepping a
+  // row six times a second, they made the room flicker.)
+  const shift = 0;
   for (let j = 0; j < rows; j++)
     for (let i = 0; i < cols; i++) {
       const k = j * cols + i;
