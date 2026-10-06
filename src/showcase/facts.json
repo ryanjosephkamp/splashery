@@ -1,9 +1,9 @@
 {
   "note": "Measured by tools/shw-facts.mjs; regenerate after a toy or its pack changes.",
   "shelf": {
-    "toys": 433,
+    "toys": 435,
     "public": 319,
-    "kit": 367
+    "kit": 369
   },
   "depthModelMB": 27.3,
   "toys": {
@@ -66,9 +66,9 @@
     "real-moon": {
       "kind": "kit",
       "recipeFile": "src/packs/space-r2.js",
-      "recipeKB": 48.2,
-      "recipeGzipKB": 16.3,
-      "sharedBy": 11
+      "recipeKB": 66,
+      "recipeGzipKB": 21.1,
+      "sharedBy": 13
     },
     "galaxy-box": {
       "kind": "kit",
