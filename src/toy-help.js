@@ -1734,7 +1734,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
     about:
-      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model, a small neural network (Depth Anything V2 Small), looks at each frame and gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow and the sky stay back, and as the clip plays the relief moves with it. Turn the picture to see it from the side.\n\nOpen a GIF or a short video in the Toy tab: its first eight seconds are read on your device at the video's own speed (up to 24 frames a second, fewer on a phone), the model (about 27 MB) loads the first time, and each frame takes a moment. Nothing is uploaded. Depth sets how deep the relief is. The sample is a scene from Big Buck Bunny (Blender Foundation, CC BY 3.0).",
+      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model (Depth Anything V2 Small) gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow stays back, and the relief moves with the clip. Turn the picture to see it from the side.\n\nPick a sample clip in the Toy tab (the bunny, Muybridge's horse, a dragon, a bridge and robot, or a machine; Blender Foundation, CC BY, and the horse is public domain), or open your own GIF or video. Its first eight seconds are read on your device at its own speed, the model (about 27 MB) loads the first time, and nothing is uploaded. Depth sets the relief, and Speed plays the clip slower or faster, sound included. Show the original puts the flat clip in a corner, frame for frame.",
   },
   "song-landscape": {
     howTo:
@@ -1745,23 +1745,23 @@ export const TOY_HELP = {
 
   "model-splats": {
     howTo:
-      "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
+      "Tap to lift the splats off the model; they settle back. Pick or open a model in the Toy tab.",
     about:
       "A 3D model is usually a mesh: a net of flat triangles with colors or a picture (a texture) painted on them. This toy turns a mesh into splats. It scatters points across the surface, more of them where the shape bends sharply or is finely made, and lays a small flat splat on each one, facing the way the surface does. Each splat is sized to its neighbors so the surface closes with no gaps, and takes its color from the texture at that spot. Sharp edges stay sharp.\n\nTap to lift every splat into a loose cloud and watch each one settle back into its own place. Show: Wireframe draws the mesh's own edges as thin splats, so you can see what the splats were made from. Open a .glb, .gltf, .obj or .stl in the Toy tab (select a model's other files with it); it is converted on your device and never uploaded.",
   },
 
   "photo-3d": {
     howTo:
-      "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
+      "Tap to lift the picture's depth, then tap to lay it flat. Pick or open a photo in the Toy tab.",
     about:
-      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose the forest path, cobbled street or still life, or open your own photo in the Toy tab. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
+      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose a sample photo or open your own in the Toy tab. Show the original puts the flat photo in a corner, so you can see what the depth did. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
   },
 
   "video-3d": {
     howTo:
-      "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
+      "Tap to fly the video's path; drag to look around. Show the original plays the flat video beside it.",
     about:
-      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
+      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.\n\nShow the original plays the sample's flat video in step with Replay flight.",
   },
 
   // ---- Viewers (lane Viewers) -------------------------------------------------------------

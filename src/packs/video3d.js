@@ -160,6 +160,8 @@ export async function openVideoFile(file, name) {
   const { openVideo, closeVideo } = await import("../video3d/extract.js");
   const v = await openVideo(file);
   closeVideo(v);
+  if (V3D.fileUrl) URL.revokeObjectURL(V3D.fileUrl);
+  V3D.fileUrl = null;
   V3D.file = file;
   V3D.fileUid++;
   V3D.videoName = name;
@@ -182,6 +184,45 @@ function buildFilmStrip(k) {
     const c = band || frame ? [0.12, 0.12, 0.13] : [0.55 + 0.2 * (y / H), 0.62, 0.72 - 0.2 * (y / H)]; // prettier-ignore
     return { p: [x, y, 0], n: [0, 0, 1], size: 1.1, flat: 0.2, color: c, opacity: 0.95, jitter: 0 };
   });
+}
+
+// Studio media: "Show the original". The sample's own span of the video (480p, in MP4 and WebM), or the
+// video somebody opened, in a corner card (src/compare.js, loaded only when it is switched on), at the
+// time the flight is at: playing while Replay flight plays, holding when it holds, the start otherwise.
+const ORIG_TYPES = { mp4: 'video/mp4; codecs="avc1.42E01E"', webm: 'video/webm; codecs="vp9"' };
+const originalSources = (src) =>
+  src === V3D.custom
+    ? V3D.file
+      ? [{ url: (V3D.fileUrl ||= URL.createObjectURL(V3D.file)), type: V3D.file.type || ORIG_TYPES.mp4 }]
+      : []
+    : ["mp4", "webm"].map((e) => ({ url: new URL(`../../assets/toys/video-3d/${src.uid}-source.${e}`, import.meta.url).href, type: ORIG_TYPES[e] })); // prettier-ignore
+function showOriginal(flight) {
+  if (!isBrowser()) return;
+  const mod = V3D.compare;
+  if (!V3D.original || !V3D.shown) {
+    if (mod) mod.original("video-3d").hide();
+    V3D.cardKey = null;
+    return;
+  }
+  if (!mod) {
+    V3D.compare = false;
+    import("../compare.js").then((m) => (V3D.compare = m));
+    return;
+  }
+  if (!mod.original) return;
+  const card = mod.original("video-3d");
+  const src = V3D.shown;
+  if (V3D.cardKey !== src.uid || !card.state.kind) {
+    V3D.cardKey = src.uid;
+    card.video({ srcs: originalSources(src), label: `Original: ${src.name}` });
+  }
+  const st = flight?.state;
+  const t = st
+    ? st.active
+      ? (st.time ?? flight.path.start)
+      : (st.pausedAt ?? flight.path.start)
+    : 0;
+  card.sync({ time: t, playing: !!st?.active && !st?.done });
 }
 
 const VIDEO_3D = {
@@ -238,6 +279,16 @@ const VIDEO_3D = {
         { id: "high", label: "High (a computer with a graphics card)" },
       ],
     },
+    {
+      key: "original",
+      label: "Show the original",
+      type: "select",
+      default: "off",
+      choices: [
+        { id: "off", label: "Off" },
+        { id: "on", label: "On: the flat video in a corner, in step with the flight" },
+      ],
+    },
     { key: "videoName", label: "Video name", type: "text", default: "", hidden: true },
   ],
   controls: [{ key: "replay", label: "Replay flight", type: "toggle", default: 0, ease: 0.6 }],
@@ -289,11 +340,14 @@ const VIDEO_3D = {
   },
   drive(t, c, out, info) {
     info?.data?.flight?.(c.replay ?? 0, info);
+    showOriginal(info?.data?.flight);
   },
   build(k, o) {
     V3D.flight?.dispose?.();
     V3D.flight = null;
     const src = V3D.want;
+    V3D.shown = null;
+    V3D.original = o.original === "on";
     if (!src) {
       buildFilmStrip(k);
       V3D.info = { placeholder: true, splats: 0 };
@@ -338,6 +392,8 @@ const VIDEO_3D = {
       timings: src.timings,
     };
     k.data = { video: V3D.info };
+    V3D.shown = src;
+    V3D.original = o.original === "on";
     if (isBrowser() && src.path.length) {
       V3D.flight = makeFlight(src.path, src === V3D.custom ? { file: V3D.file } : null);
       k.data.flight = V3D.flight;

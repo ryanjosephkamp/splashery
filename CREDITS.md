@@ -464,10 +464,24 @@ The Screen (a labs toy, lane Screens) opens with two samples:
 
 Moving photo to 3D (a labs toy, lane Live input r3) opens with the same Big Buck Bunny scene (©
 Blender Foundation, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), checked on
-peach.blender.org on October 2, 2026): 48 frames of it at 640 by 360, tiled into
-`assets/toys/moving-photo-3d/bunny-sheet-1.jpg` to `-4.jpg`, with each frame's depth worked out by
+peach.blender.org on October 2, 2026): 96 frames of it (16 a second) at 640 by 360, tiled into
+`assets/toys/moving-photo-3d/bunny-sheet-1.jpg` to `-7.jpg`, with each frame's depth worked out by
 the vendored depth model (`bunny.depth`, made by `tools/live3-depth.mjs`). GIFs and videos people
-open in it are read in their browser and never uploaded.
+open in it are read in their browser and never uploaded. Four more samples (Studio media lane, each
+license checked on its live source page on October 5, 2026), each a few seconds tiled into JPEG
+sheets with each frame's depth (`assets/toys/moving-photo-3d/<name>-sheet-N.jpg` and `<name>.depth`,
+made by `tools/live3-depth.mjs`) and, for the videos, their sound as a mono MP3:
+
+- The race horse GIF above (Muybridge, 1887, public domain), unchanged.
+- "Sintel" (trailer, 29.5 to 35.5 s), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the trailer on
+  download.blender.org ([durian.blender.org](https://durian.blender.org/)).
+- "Tears of Steel" (8:30.5 to 8:36.5), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the 720p download on
+  download.blender.org ([mango.blender.org](https://mango.blender.org/)).
+- "Elephants Dream" (5:29.7 to 5:35.7), © Blender Foundation,
+  [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/), from the download on
+  download.blender.org ([orange.blender.org](https://orange.blender.org/)).
 
 The Gaussian splatting toy (a labs toy, lane Screens) learns the photo "Strawberry on white
 background" by Joselodos
@@ -493,14 +507,30 @@ GLB in `assets/toys/model-splats/` that the toy converts to splats in the browse
   [Poly Haven](https://polyhaven.com/a/antique_ceramic_vase_01),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on
   September 29, 2026). Its 1k glTF with only the color texture kept.
+- "Camera 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Camera_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Boombox" by Thomas Paul Mouilleron on [Poly Haven](https://polyhaven.com/a/boombox),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Lantern 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Lantern_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Bronze Whale Statue" by Tina on [Poly Haven](https://polyhaven.com/a/bronze_whale_statue),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Rockingchair 01" by Jorge Camacho on [Poly Haven](https://polyhaven.com/a/Rockingchair_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
 
 `tools/stm-samples.mjs` fetches and packs them. The test models in `tests/fixtures/stm/` are made
 from numbers by `tools/stm-fixtures.mjs` and released under CC0 1.0. Models people open are
 converted in their browser and never uploaded.
 
-The Photo to 3D toy (a labs toy, lane Photo to 3D) ships three CC0 sample photos in
+The Photo to 3D toy (a labs toy, lane Photo to 3D) ships six CC0 sample photos in
 `assets/toys/photo-3d/`, each with a depth map made by `tools/p3d-depth.mjs`. Each license was
-checked on its live Wikimedia Commons page on September 29, 2026:
+checked on its live Wikimedia Commons page on September 29, 2026 (the last three on October 5,
+2026):
 
 - "Forest Away Path" by Seaq68 (from Pixabay, 2017),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
@@ -511,6 +541,15 @@ checked on its live Wikimedia Commons page on September 29, 2026:
 - "Still Life with Cheese" by Antoine Vollon, from the Metropolitan Museum of Art's Open Access
   program, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg).
+- "Spiral Staircase, Keck Center (U.S. National Academies)" by Jorge Mendoza,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](<https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg>).
+- "Escalier monumental, Neue Burg, Vienna" by Jebulon,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg).
+- "Wildflowers in foreground" by PookieFugglestein,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG).
 
 The depth is worked out on the device by
 [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small) (Lihe Yang
@@ -560,8 +599,11 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 
 The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
 each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
-and the solved camera path only; the videos are not shipped). Each license was checked on its live
-Commons page on September 30, 2026:
+and the solved camera path). Since October 5, 2026 (lane Studio media) each also ships that same
+stretch of its video at 480p, without sound (`liberty-source.mp4` and `.webm`,
+`edinburgh-source.mp4` and `.webm`, cut by `tools/smd-source.mjs` from Commons' own 480p transcode),
+for the toy's "Show the original" option, under the same CC BY 3.0 license and credit. Each license
+was checked on its live Commons page on September 30, 2026 (and again on October 5, 2026):
 
 - "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
