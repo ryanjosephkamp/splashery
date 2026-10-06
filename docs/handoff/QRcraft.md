@@ -13,7 +13,8 @@ READY: all three items built, tested and on Effect review page 2 (October 6, 202
 effort). Draft PR #349. Cards (lane record `QRcraft`, groups `picture`, `build`, `barcodes`):
 `qrc-qr-picture`, `qrc-qr-build-dominoes`, `qrc-qr-build-marbles`, `qrc-qr-build-tiles`,
 `qrc-barcodes-code128`, `qrc-barcodes-ean13`, `qrc-barcodes-datamatrix`, `qrc-barcodes-aztec`. Each
-QR clip's last frame reads with jsQR. Waiting for the owner's marks.
+QR clip's last frame reads with jsQR. The owner marked all eight cards good (October 6, 2026, by
+17:30 UTC).
 
 Three new labs toys on the QR shelf (Studio), pack `src/packs/qr-craft.js`:
 
