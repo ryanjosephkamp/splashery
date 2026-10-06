@@ -59,11 +59,11 @@ Proposals below are suggestions; the owner may change them.
   Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, QR code,
-  Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point
-  clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut
-  CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
+  album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to
+  splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat
+  toolkit, Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope,
+  Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How
+  CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2864,12 +2864,19 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Live input r2: a long song plays from the file at once (no decoding first) and its
     picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six
     bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its
-    wireframe), on cream paper or alone, all on the audio clock.
+    wireframe), on cream paper or alone, all on the audio clock. Live r7: Live opens on an empty
+    plain and the land grows as the song plays: each moment rises at the line at the front as it is
+    heard and moves back, for every song and look; Whole song shows it all.
   - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
   - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
     to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
+  - Improved: Live r7 (the owner's report of October 5, 2026): the sand moves live, every grain on
+    every frame. With your audio or the microphone the plate's modes ring as strongly as the sound
+    drives them, so a new note sets the sand off for its figure at once, from where it lies (no new
+    plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio
+    open.
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
@@ -2893,7 +2900,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Live input: relief splats (a new kind) take their color and lift from a canvas drawn
     each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so
     it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a
-    hologram look.
+    hologram look. Live r7: steadier and cleaner (colors smoothed against the camera's noise, the
+    depth smoothed within each surface and cut only at real jumps, along the outline in the picture,
+    which follows a moving person between depth answers); the hologram keeps the person clear, with
+    the scanlines and a soft glow only in the room behind.
   - Sound: A soft rising whoosh as the depth comes up; a falling one as it flattens.
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.
