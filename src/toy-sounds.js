@@ -3039,6 +3039,7 @@ export const TOY_SOUNDS = {
   "real-venus": { voice: "breath", f: 260, to: 0.7, decay: 2.6, vol: 0.34 },
   "nearby-stars": { voice: "breath", f: 420, to: 0.6, decay: 2.0, vol: 0.28 },
   "real-galaxies": { voice: "breath", f: 320, to: 0.85, decay: 2.8, vol: 0.3 },
+  "powers-of-ten": { voice: "breath", f: 260, to: 0.7, decay: 3.2, vol: 0.26 },
   "saturn-v": { voice: "rumble", f: 52, rate: 4, decay: 2.4, vol: 0.85 },
   "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
   "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },

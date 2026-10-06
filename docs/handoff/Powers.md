@@ -1,0 +1,84 @@
+# Lane Powers of ten
+
+## Brief
+
+You are a Splashery worker session, started by the Operator (the coordinating session) for the
+October push. Repo: ryanjosephkamp/splashery. Your lane: Powers of ten (id `Powers`, prefix `pot`).
+Branch: `claude/lane-powers-of-ten` (and `claude/lane-powers-of-ten-engine` for any change to the
+app outside your own files, as an "Engine: …" PR merged first). PR title: "Phase Powers of ten: one
+zoom through real scales". Handoff file: docs/handoff/Powers.md (create it; start it with this
+brief, word for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "##
+For the Operator" current). Model: Opus 5.5, at the default effort.
+
+### Brief (written by the Operator on October 6, 2026, from the owner's Push Plan picks)
+
+The owner's science pick S12: "One continuous zoom from a virus to a galaxy through existing toys,
+with real scale labels at each step." He called it "one of the best ideas", "but very importantly, I
+don't want it to look like a cartoon": photoreal, or as close as we can make it (a fully kit-built
+version would be acceptable only as a clearly separate style). See
+docs/reviews/2026-10-04-push-alignment/notes.md, around line 630.
+
+1. **The steps.** About 12 to 16 stops from roughly 10⁻⁸ m to 10²¹ m and beyond, each a real splat
+   built from real data or real captures, preferring what the site already has: cryo-EM maps
+   (Science r3's cryo-EM toy), the microscope and electron-microscope pictures (Science r3,
+   Imaging), photoreal captures for human scale, the Earth and maps (Geo, Space r2's real Earth),
+   the Moon and planets, the nearby stars and the real galaxies (Space r2). Import their data and
+   loaders; don't edit their packs (a small additive "Engine: …" PR if you need an export). Fill
+   gaps with new assets under the allowed licenses (CLAUDE.md, "Ground rules"; NASA imagery and NASA
+   3D Resources are fine, without insignia). Never AI-made pictures: this is a science toy.
+2. **One continuous zoom.** Scroll, pinch or drag to zoom, or press play for the whole journey; each
+   stop blends into the next (the smaller scene sits inside the larger one, then fades in as it
+   fills the view), never a cut to a black screen. A scale bar and a label at every stop ("10⁻⁷ m: a
+   virus, about 100 nm across"), with the real size and its source.
+3. **Looks real.** Sharp at phone size, the sharp kernel, no blur or speckle; judge it as motion,
+   not stills.
+4. **Weight.** Lazy-load each stop as the zoom nears it so the toy opens fast on a phone; keep the
+   "embed transfer ≤ 30 MB" test green; say the total size.
+5. **Evidence.** docs/evidence/<toy id>.json: every stop's real size and its source, with a test
+   that checks the labels against it.
+
+A new labs toy on the Space shelf (or Science, if it reads better). Tests in `tests/pot*.spec.mjs`;
+how-to and About texts; clips at phone size on Effect review page 2 (the full zoom, and a few stops
+up close).
+
+You own: `src/packs/powers-of-ten.js` (new), `src/powers/` (new helpers), `tools/pot-*.mjs`, the new
+assets, `tests/pot*.spec.mjs`, your toy's evidence file, its lines in the shared lists, and your
+handoff file.
+
+How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
+replace the prefix and lane record with yours). Labs: the Operator merges after a full test run (the
+Integrators run it); the owner decides when anything goes public. Finish every working turn with
+"READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for; for a long job, schedule a
+check-in with send_later instead of going idle. Clips at phone size go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+(no republish). Before READY, re-read CLAUDE.md's "Effect quality rules" and check each clip against
+them at phone size. The push ends Wednesday, October 7, 2026, 4 p.m. ET (20:00 UTC): aim for a first
+READY within about six hours, then polish rounds on the owner's marks.
+
+## State
+
+Model: Opus 5.5 (claude-opus-5-5), default effort. Engine PR #351 ("Engine: chunks a kit toy loads
+when it asks, the zoom gesture for a toy, a scale bar"; merge it first).
+
+- October 6, 2026: the engine part is done and pushed (chunks, the zoom gesture and drag, the
+  ruler). The toy is being built: the zoom, the labels and scale bar, and the first stops (the
+  Earth, ten aerial pictures from 1,000 km to 30 m, the garden bed capture).
+
+## Notes
+
+- The zoom's target: a small tree in the Enid A. Haupt Garden beside the Smithsonian Castle,
+  Washington, D.C. (D.C.'s 2023 aerial photo is 8 cm per pixel, CC BY 4.0, so the zoom stays real
+  down to the garden; Sentinel-2 cloudless 2016, CC BY 4.0, from 1,000 km to 10 km; the USGS NAIP
+  mosaic, public domain, at 3 km. The USGS mosaic has holes over the Chesapeake at 30 to 300 km, and
+  EOX's 2017 and later cloudless years are NC: not used.)
+- Every scene is a chunk (src/chunks.js), its own splat entity, scaled each frame; finer layers sit
+  a hair nearer the camera, so each draws over the one it sits in. The camera never moves: the
+  pinch, the wheel and a drag go to the toy (`zoom: true`).
+
+## Known issues
+
+- (None yet.)
+
+## For the Operator
+
+- Merge engine PR #351 first.

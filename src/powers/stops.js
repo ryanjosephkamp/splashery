@@ -1,0 +1,150 @@
+// Lane Powers of ten: where the zoom goes, and the aerial pictures it uses.
+// Shared by the toy (src/packs/powers-of-ten.js), its tools (tools/pot-*.mjs)
+// and its evidence test (docs/evidence/powers-of-ten.json).
+
+// The zoom's target: a small tree in the Enid A. Haupt Garden, beside the
+// Smithsonian Castle on the National Mall, Washington, D.C.
+export const TARGET = { lat: 38.888321, lon: -77.025649, name: "the Enid A. Haupt Garden, Washington, D.C." }; // prettier-ignore
+
+// The aerial pictures, every half decade: e is log10 of the width in meters.
+export const AERIAL = [];
+for (let e = 6; e >= 1.5 - 1e-9; e -= 0.5) {
+  const r = Math.round(e * 10) / 10;
+  AERIAL.push({
+    e: r,
+    width: 10 ** r,
+    px: 1024,
+    source: r <= 3 ? "dc" : r <= 3.5 ? "usgs" : "s2",
+    file: `aerial-${r.toFixed(1).replace(".", "_")}.jpg`,
+  });
+}
+
+// The zoom's range: z is log10 of the view's height in meters.
+export const Z_HOME = 0.3;
+export const Z_MIN = -7.6;
+export const Z_MAX = 21.6;
+
+// The stops, smallest last: e is where the stop's label takes over (log10 of
+// the view's height in meters), `size` the real size the label gives (meters),
+// with its source; docs/evidence/powers-of-ten.json lists the same, and
+// tests/pot.spec.mjs checks the labels against it.
+export const STOPS = [
+  {
+    id: "galaxy",
+    e: 21,
+    size: 9.4607e20,
+    label:
+      "The Milky Way, about 100,000 light-years across. No one can photograph it from outside: this is M83, a spiral galaxy much like it, set at our galaxy's size and tilt.",
+    source:
+      "M83: ESO (CC BY 4.0). The galactic center 26,700 light-years away: GRAVITY Collaboration 2019.",
+  },
+  {
+    id: "stars-local",
+    e: 19.4,
+    size: 3.0857e19,
+    label: "About 98,000 stars within 1,600 light-years of the Sun, where they really are.",
+    source: "HYG database v4.4 (David Nash; Hipparcos, Yale, Gliese), CC BY-SA 4.0.",
+  },
+  {
+    id: "stars-near",
+    e: 18,
+    size: 1.2343e18,
+    label: "Every known star within 65 light-years of the Sun: about 2,200.",
+    source:
+      "Gaia Catalogue of Nearby Stars (ESA/Gaia/DPAC), CC BY-SA 3.0 IGO; HYG v4.4, CC BY-SA 4.0.",
+  },
+  {
+    id: "sun-alone",
+    e: 16,
+    size: 9.4607e15,
+    label:
+      "One light-year: the Sun alone. Its Oort cloud of comets may reach this far, too small and dark to see.",
+    source: "Light-year: IAU. The Sun's place: JPL's planetary elements (public domain).",
+  },
+  {
+    id: "outer",
+    e: 13.3,
+    size: 9.0e12,
+    label: "The Sun and the planets' orbits out to Neptune's, about 60 AU (9 billion km) across.",
+    source:
+      "Orbits and places at noon on October 7, 2026: JPL, Approximate Positions of the Planets (public domain).",
+  },
+  {
+    id: "inner",
+    e: 11.9,
+    size: 4.56e11,
+    label:
+      "Mercury, Venus, the Earth and Mars: Mars's orbit is about 3 AU (456 million km) across.",
+    source:
+      "JPL, Approximate Positions of the Planets (public domain). The dots mark places: the planets are far smaller.",
+  },
+  {
+    id: "moon",
+    e: 9,
+    size: 7.688e8,
+    label:
+      "The Earth and the Moon, about 384,400 km apart on average, and the Moon's path for a month.",
+    source:
+      "Moon: NASA LRO (public domain); its orbit after Meeus's lunar theory. Earth: NASA Blue Marble.",
+  },
+  {
+    id: "earth",
+    e: 7.1,
+    size: 12742e3,
+    label: "The Earth, about 12,700 km across.",
+    source: "NASA Blue Marble: Next Generation (via USGS The National Map), public domain.",
+  },
+  {
+    id: "region",
+    e: 6,
+    size: 300e3,
+    label: "The Chesapeake Bay, about 300 km long, and the Mid-Atlantic coast.",
+    source: "Sentinel-2 cloudless 2016 by EOX (contains Copernicus Sentinel data), CC BY 4.0.",
+  },
+  {
+    id: "city",
+    e: 4.6,
+    size: 16e3,
+    label: "Washington, D.C., on the Potomac River, about 16 km across.",
+    source: "Sentinel-2 cloudless 2016 by EOX (contains Copernicus Sentinel data), CC BY 4.0.",
+  },
+  {
+    id: "mall",
+    e: 3.3,
+    size: 3e3,
+    label: "The National Mall, about 3 km from the Capitol to the Lincoln Memorial.",
+    source:
+      "USGS The National Map (NAIP), public domain; D.C. 2023 aerial photo (OCTO), CC BY 4.0.",
+  },
+  {
+    id: "garden",
+    e: 2,
+    size: 130,
+    label:
+      "The Enid A. Haupt Garden beside the Smithsonian Castle, about 130 m across (4.2 acres).",
+    source: "District of Columbia 2023 aerial photo, 8 cm (OCTO), CC BY 4.0.",
+  },
+  {
+    id: "bed",
+    e: 0.6,
+    size: 2,
+    label: "A garden bed with a young full-moon maple, about 2 m long.",
+    source: "3D capture “Golden Fullmoon Maple” by Joshua Trapani, CC BY 4.0 (made elsewhere).",
+  },
+  {
+    id: "ribosome",
+    e: -7.4,
+    size: 25e-9,
+    label:
+      "A ribosome, the machine that builds proteins, about 25 nm across: its RNA orange, its proteins blue.",
+    source:
+      "Cryo-EM map EMD-48329 and model PDB 9MKK (E. coli 70S; Majumdar et al. 2025), public domain.",
+  },
+];
+
+// The stop whose label shows at zoom z: the nearest.
+export function stopAt(z) {
+  let best = STOPS[0];
+  for (const s of STOPS) if (Math.abs(z - s.e) < Math.abs(z - best.e)) best = s;
+  return best;
+}
