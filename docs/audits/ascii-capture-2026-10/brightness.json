@@ -1,46 +1,46 @@
 {
-  "note": "Mean luminance (0-255) over every fourth frame of each preset's GIF at 72 columns in color, before (head c319c834) and after the levels (levels.js: contrast from the first frame, glyph colors lifted to a 250 top channel with a 15% white tint). glyphLuminance: pixels above 40 in the art area; litPercent: their share of it; frameLuminance: the whole art area; footerTextLuminance: the credit's text pixels (unchanged).",
+  "note": "Mean luminance (0-255) of glyph pixels (above 40) in the art area, and their share of it, over every fourth frame of each preset's GIF at 72 columns in color. original: head c319c834. r2: contrast up to 3 and a 15% white tint (the owner: brighter but grainy). r3, what the lab makes now: contrast capped at 1.6, glyph colors lifted to a 250 top channel, hue kept, no tint.",
   "presets": {
     "grapes": {
-      "before": {
+      "original": {
         "glyphLuminance": 60,
-        "litPercent": 1.7,
-        "frameLuminance": 17.9,
-        "footerTextLuminance": 183
+        "litPercent": 1.7
       },
-      "after": {
+      "r2": {
         "glyphLuminance": 103,
-        "litPercent": 6.2,
-        "frameLuminance": 22.4,
-        "footerTextLuminance": 183
+        "litPercent": 6.2
+      },
+      "r3": {
+        "glyphLuminance": 97,
+        "litPercent": 3.9
       }
     },
     "orange": {
-      "before": {
+      "original": {
         "glyphLuminance": 94,
-        "litPercent": 14.7,
-        "frameLuminance": 28.7,
-        "footerTextLuminance": 186
+        "litPercent": 14.7
       },
-      "after": {
+      "r2": {
         "glyphLuminance": 109,
-        "litPercent": 17.7,
-        "frameLuminance": 33.6,
-        "footerTextLuminance": 186
+        "litPercent": 17.7
+      },
+      "r3": {
+        "glyphLuminance": 103,
+        "litPercent": 17.5
       }
     },
     "strawberry": {
-      "before": {
+      "original": {
         "glyphLuminance": 66,
-        "litPercent": 3.5,
-        "frameLuminance": 19,
-        "footerTextLuminance": 182
+        "litPercent": 3.5
       },
-      "after": {
+      "r2": {
         "glyphLuminance": 100,
-        "litPercent": 7.2,
-        "frameLuminance": 23.1,
-        "footerTextLuminance": 182
+        "litPercent": 7.2
+      },
+      "r3": {
+        "glyphLuminance": 90,
+        "litPercent": 5.8
       }
     }
   }

@@ -6,7 +6,7 @@
 // change; src/export/ascii.js is as it was.
 
 export const BASE_CONTRAST = 1.3; // the core's default
-const MAX_CONTRAST = 3;
+const MAX_CONTRAST = 1.6; // higher looked grainy (the owner, October 6, 2026)
 const BLACK = 17; // the core's default black point (the #111111 background)
 
 // The contrast for a job, from its first frame's RGBA pixels: the 95th
@@ -35,7 +35,7 @@ export function colorGain(contrast) {
 // white (a lighter tint of the same hue); channels clamp at 255. Cells drawn
 // as a space have no glyph, so their colors don't show.
 export const LIFT_TO = 250;
-export const WHITE_MIX = 0.15;
+export const WHITE_MIX = 0; // a white tint flattened the colors
 
 export function brighten(frame, gain = 1) {
   const lift = (c) => {
