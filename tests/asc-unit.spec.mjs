@@ -148,7 +148,15 @@ test("levels lift a dark toy and leave a bright one at the core's default", asyn
   expect(dark).toBeLessThanOrEqual(3);
   expect(jobContrast(fill(0, [0, 0, 0]))).toBe(BASE_CONTRAST);
   expect(colorGain(BASE_CONTRAST)).toBe(1);
-  const frame = { rows: ["@"], colors: [[0x402080, 0xc0c0c0]] };
-  expect(brighten(frame, 1)).toBe(frame);
-  expect(brighten(frame, 2).colors[0]).toEqual([0x8040ff, 0xffffff]);
+  const frame = { rows: ["@"], colors: [[0x402080, 0xf0f0f0, 0x000000]] };
+  // Lifted until the top channel reaches 250 (at most 3 times), then a 15%
+  // tint toward white; the hue order holds, and black (no glyph) stays black.
+  const [purple, gray, black] = brighten(frame, 1).colors[0];
+  const rgb = (c) => [(c >> 16) & 255, (c >> 8) & 255, c & 255];
+  expect(rgb(purple)[2]).toBe(251);
+  expect(rgb(purple)[0]).toBeGreaterThan(rgb(purple)[1]);
+  expect(rgb(purple)[2]).toBeGreaterThan(rgb(purple)[0]);
+  expect(rgb(gray)).toEqual([255, 255, 255].map(() => rgb(gray)[0]));
+  expect(black).toBe(0);
+  expect(brighten(frame, 2).colors[0][1]).toBe(0xffffff);
 });

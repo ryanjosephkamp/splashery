@@ -1,0 +1,47 @@
+{
+  "note": "Mean luminance (0-255) over every fourth frame of each preset's GIF at 72 columns in color, before (head c319c834) and after the levels (levels.js: contrast from the first frame, glyph colors lifted to a 250 top channel with a 15% white tint). glyphLuminance: pixels above 40 in the art area; litPercent: their share of it; frameLuminance: the whole art area; footerTextLuminance: the credit's text pixels (unchanged).",
+  "presets": {
+    "grapes": {
+      "before": {
+        "glyphLuminance": 60,
+        "litPercent": 1.7,
+        "frameLuminance": 17.9,
+        "footerTextLuminance": 183
+      },
+      "after": {
+        "glyphLuminance": 103,
+        "litPercent": 6.2,
+        "frameLuminance": 22.4,
+        "footerTextLuminance": 183
+      }
+    },
+    "orange": {
+      "before": {
+        "glyphLuminance": 94,
+        "litPercent": 14.7,
+        "frameLuminance": 28.7,
+        "footerTextLuminance": 186
+      },
+      "after": {
+        "glyphLuminance": 109,
+        "litPercent": 17.7,
+        "frameLuminance": 33.6,
+        "footerTextLuminance": 186
+      }
+    },
+    "strawberry": {
+      "before": {
+        "glyphLuminance": 66,
+        "litPercent": 3.5,
+        "frameLuminance": 19,
+        "footerTextLuminance": 182
+      },
+      "after": {
+        "glyphLuminance": 100,
+        "litPercent": 7.2,
+        "frameLuminance": 23.1,
+        "footerTextLuminance": 182
+      }
+    }
+  }
+}

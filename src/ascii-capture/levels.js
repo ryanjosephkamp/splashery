@@ -29,15 +29,24 @@ export function colorGain(contrast) {
   return Math.min(2.5, contrast / BASE_CONTRAST);
 }
 
-// A frame whose character colors are lifted by `gain` (each channel scaled,
-// clamped to 255, so the hue holds).
-export function brighten(frame, gain) {
-  if (!(gain > 1)) return frame;
+// A frame whose character colors are lifted: each color is scaled (so the
+// hue holds) by at least `gain`, and far enough that its brightest channel
+// reaches LIFT_TO, at most 3 times, then mixed WHITE_MIX of the way toward
+// white (a lighter tint of the same hue); channels clamp at 255. Cells drawn
+// as a space have no glyph, so their colors don't show.
+export const LIFT_TO = 250;
+export const WHITE_MIX = 0.15;
+
+export function brighten(frame, gain = 1) {
   const lift = (c) => {
-    const r = Math.min(255, Math.round(((c >> 16) & 255) * gain));
-    const g = Math.min(255, Math.round(((c >> 8) & 255) * gain));
-    const b = Math.min(255, Math.round((c & 255) * gain));
-    return (r << 16) | (g << 8) | b;
+    const r = (c >> 16) & 255;
+    const g = (c >> 8) & 255;
+    const b = c & 255;
+    const top = Math.max(r, g, b);
+    if (!top) return c;
+    const k = Math.min(3, Math.max(gain, LIFT_TO / top, 1));
+    const ch = (v) => Math.round(Math.min(255, v * k) * (1 - WHITE_MIX) + 255 * WHITE_MIX);
+    return (ch(r) << 16) | (ch(g) << 8) | ch(b);
   };
   return { ...frame, colors: frame.colors.map((row) => row.map(lift)) };
 }

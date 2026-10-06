@@ -73,10 +73,11 @@ it; start it with this brief, word for word, under "## Brief", then keep "## Sta
 - Levels (the owner's note of October 6, 2026, on the grapes, orange and strawberry clips: "seems
   visually dim or dark. Can we make this brighter somehow?"): `src/ascii-capture/levels.js`. The
   first frame sets the job's `contrast` (the 95th percentile of its lit pixels maps to 95% of the
-  character ramp, between the core's 1.3 and 3), and color mode lifts the drawn characters by the
-  same gain. The orange stays at 1.3; the grapes and strawberry come out denser and brighter. The
-  core is unchanged (only its `contrast` option is passed), and the GIF's comment records the
-  contrast.
+  character ramp, between the core's 1.3 and 3); in color mode every glyph color is scaled (hue
+  kept) until its top channel reaches 250, then tinted 15% toward white. The core is unchanged (only
+  its `contrast` option is passed), and the GIF's comment records the contrast. Mean glyph luminance
+  before and after: grapes 60 to 103, orange 94 to 109, strawberry 66 to 100; the credit footer is
+  unchanged (`docs/audits/ascii-capture-2026-10/brightness.json`).
 
 ## Known issues
 
