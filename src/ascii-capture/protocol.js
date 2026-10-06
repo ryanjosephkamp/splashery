@@ -4,7 +4,7 @@
 // toy id, the whole-orange option, the fixed capture settings and frame pixels.
 //
 // lab -> host: start { toy, options, capture }, next { index } (one frame at a time)
-// host -> lab: ready, loaded { renderer }, frame { index, width, height, pixels }, error { reason }
+// host -> lab: ready, loaded { renderer, profile }, frame { index, width, height, pixels }, error { reason }
 
 // The three presets, each a fresh toy animation.
 export const PRESETS = Object.freeze({
@@ -16,6 +16,17 @@ export const PRESETS = Object.freeze({
 // Fixed capture settings: 420 pixels square, 40 frames at 10 fps (four
 // seconds), one tap at frame 4, the home camera.
 export const CAPTURE = Object.freeze({ size: 420, fps: 10, frames: 40, tapFrame: 4 });
+
+// The detail profiles a player can run at (src/player.js TIERS). The host uses
+// the one the app would pick on this device, held for the whole job; tests and
+// diagnosis may force one with ?profile= on the lab URL, passed to the host.
+export const PROFILES = Object.freeze(["low", "mid", "high", "max"]);
+
+export function profileParam(search) {
+  const v = new URLSearchParams(search).get("profile");
+  const tier = { weak: "low", strong: "high" }[v] || v;
+  return PROFILES.includes(tier) ? tier : null;
+}
 
 export const FRAME_BYTES = CAPTURE.size * CAPTURE.size * 4;
 export const ERROR_REASONS = Object.freeze(["no-webgl2", "load", "render", "start"]);
@@ -93,9 +104,10 @@ export function readHostMessage(data, job) {
     case "ready":
       return Object.keys(data).length === 2 ? "ready" : null;
     case "loaded":
-      return Object.keys(data).length === 3 &&
+      return Object.keys(data).length === 4 &&
         typeof data.renderer === "string" &&
-        data.renderer.length <= 200
+        data.renderer.length <= 200 &&
+        PROFILES.includes(data.profile)
         ? "loaded"
         : null;
     case "frame":

@@ -3,7 +3,7 @@
 // device check the owner screenshots on a phone. Labs only; nothing links here.
 
 import { startCapture, isRunning, COLUMNS, JOB_MS, JOB_MS_RANGE } from "./job.js";
-import { CAPTURE } from "./protocol.js";
+import { CAPTURE, profileParam } from "./protocol.js";
 
 const $ = (id) => document.getElementById(id);
 const ui = {
@@ -23,6 +23,8 @@ const ui = {
 // The job's time limit: 30 seconds, or ?deadline= seconds (30 to 180) on a slow test machine.
 const asked = Number(new URLSearchParams(location.search).get("deadline")) * 1000;
 const jobMs = asked >= JOB_MS_RANGE[0] && asked <= JOB_MS_RANGE[1] ? asked : JOB_MS;
+// A forced detail profile (?profile=), for tests and diagnosis only.
+const profile = profileParam(location.search);
 let current = null; // { cancel, done } while a job runs
 let outputURL = null; // the one finished GIF
 
@@ -110,6 +112,7 @@ async function capture() {
       color,
       mount: ui.mount,
       jobMs,
+      profile,
       onProgress: ({ stage, done, total }) => {
         if (stage === "capture") {
           ui.progress.value = (0.8 * done) / total;
@@ -140,6 +143,7 @@ async function capture() {
     ui.progress.value = 1;
     say(`Done: ${out.label}, ${out.settings.columns} by ${out.settings.rows} characters, ${out.settings.color ? "color" : "mono"}. ${kb(out.blob.size)}.`); // prettier-ignore
     $("dev-renderer").textContent = out.renderer;
+    $("dev-profile").textContent = out.profile;
     $("dev-time").textContent = `${(out.ms / 1000).toFixed(1)} seconds`;
     $("dev-output").textContent = `${out.width} by ${out.height} pixels, ${CAPTURE.frames} frames, ${kb(out.blob.size)}`; // prettier-ignore
     $("dev-decode").textContent = "Checking…";

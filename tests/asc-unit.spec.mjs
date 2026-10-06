@@ -6,6 +6,7 @@ import {
   isJobId,
   newJobId,
   presetFor,
+  profileParam,
   readHostMessage,
   readLabMessage,
   startMessage,
@@ -43,6 +44,10 @@ test("the host accepts only a known preset, the fixed settings and its own job",
   for (const index of [-1, 40, 1.5, "3"])
     expect(readLabMessage({ type: "next", job, index }, job)).toBeNull();
   expect(presetFor("strawberry", null)).toBe(PRESETS.strawberry);
+  expect(profileParam("?profile=mid")).toBe("mid");
+  expect(profileParam("?deadline=180&profile=strong")).toBe("high");
+  expect(profileParam("?profile=ultra")).toBeNull();
+  expect(profileParam("")).toBeNull();
   expect(presetFor("strawberry", { style: "whole" })).toBeNull();
 });
 
@@ -59,8 +64,10 @@ test("the lab accepts only bounded frames and known replies from its job", () =>
   ])
     expect(readHostMessage(bad, job)).toBeNull();
   expect(readHostMessage({ type: "ready", job }, job)).toBe("ready");
-  expect(readHostMessage({ type: "loaded", job, renderer: "webgl2" }, job)).toBe("loaded");
-  expect(readHostMessage({ type: "loaded", job, renderer: "x".repeat(201) }, job)).toBeNull();
+  expect(readHostMessage({ type: "loaded", job, renderer: "webgl2", profile: "mid" }, job)).toBe("loaded"); // prettier-ignore
+  expect(readHostMessage({ type: "loaded", job, renderer: "webgl2" }, job)).toBeNull();
+  expect(readHostMessage({ type: "loaded", job, renderer: "webgl2", profile: "ultra" }, job)).toBeNull(); // prettier-ignore
+  expect(readHostMessage({ type: "loaded", job, renderer: "x".repeat(201), profile: "high" }, job)).toBeNull(); // prettier-ignore
   expect(readHostMessage({ type: "error", job, reason: "no-webgl2" }, job)).toBe("error");
   expect(readHostMessage({ type: "error", job, reason: "<b>" }, job)).toBeNull();
   expect(readHostMessage({ type: "done", job }, job)).toBeNull();

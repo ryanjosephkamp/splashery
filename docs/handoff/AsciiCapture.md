@@ -46,16 +46,17 @@ it; start it with this brief, word for word, under "## Brief", then keep "## Sta
   `inert`, `pointer-events: none`, `allow` denying camera, microphone, display capture, location,
   the motion sensors and fullscreen). The host says `ready` (its job id comes in the URL hash), the
   lab sends `start` (toy id, the whole-orange option, the fixed settings), the host loads a fresh
-  player (WebGL2, profile "high", no adaptive step-down) and says `loaded` with the renderer, then
-  sends one frame's pixels at a time (a transferred 420 by 420 RGBA buffer) and waits for the lab's
-  `next`. The lab checks source, origin, job id, type, shape and order, at most 43 messages a job,
-  converts each frame at once (`characterAspect` 0.5) and drops its pixels, removes the iframe after
-  frame 40, encodes the GIF and offers one download. Every ending (success, Cancel, a deadline, a
-  host error, a protocol error, `visibilitychange` to hidden, `pagehide`) goes through one
-  idempotent teardown: both timers cleared, the AbortController that owns every listener aborted,
-  the iframe removed.
-- Deadlines: 8 seconds a frame once the toy has loaded; 30 seconds for the whole job, or
-  `?deadline=` seconds (30 to 180) on the lab URL. This container renders on SwiftShader (CPU): a
+  player (WebGL2, the device's own profile, no adaptive step-down) and says `loaded` with the
+  renderer and profile, then sends one frame's pixels at a time (a transferred 420 by 420 RGBA
+  buffer) and waits for the lab's `next`. The lab checks source, origin, job id, type, shape and
+  order, at most 43 messages a job, converts each frame at once (`characterAspect` 0.5) and drops
+  its pixels, removes the iframe after frame 40, encodes the GIF and offers one download. Every
+  ending (success, Cancel, a deadline, a host error, a protocol error, `visibilitychange` to hidden,
+  `pagehide`) goes through one idempotent teardown: both timers cleared, the AbortController that
+  owns every listener aborted, the iframe removed.
+- Deadlines: 8 seconds a frame once the toy has loaded; 30 seconds for the whole job. `?deadline=`
+  (30 to 180 seconds) and `?profile=` on the lab URL are test and diagnosis knobs, not settings for
+  people (the Operator's call of October 6, 2026). This container renders on SwiftShader (CPU): a
   job takes about 35 seconds (grapes, orange) and about 106 (strawberry, about 2.5 seconds a frame),
   so the tests use `?deadline=180`.
 - The lab page has no live preview player of its own (acceptance 8 then holds by construction): the
@@ -71,9 +72,10 @@ it; start it with this brief, word for word, under "## Brief", then keep "## Sta
 
 ## Known issues
 
-- The capture uses the "high" profile on every device (as the prototype did), so a phone loads the
-  full strawberry (5.9 MB) rather than its light version. Using the device's own profile would make
-  the output differ between devices.
+- (Fixed October 6, 2026, the Operator's call) The capture used to force the "high" profile. It now
+  uses the profile the app would pick for the device at start (`detectProfile()` in `src/player.js`,
+  read-only), held for the whole job (no adaptive step-down) and shown in the Device check, so a
+  phone loads the light strawberry. Tests force `?profile=high` for repeatable output.
 - The capture iframe logs "Potential permissions policy violation" lines in the console (one per
   denied feature) and "devicemotion events are blocked": that is the `allow` policy working.
 
@@ -88,5 +90,5 @@ it; start it with this brief, word for word, under "## Brief", then keep "## Sta
 ## For the Operator
 
 - #356 and #357 are ready for a full run and merge. #358 merges main after #356.
-- Deviation to confirm: the `?deadline=` override (30 to 180 seconds) on the lab URL, needed because
-  this container can't meet 30 seconds in software rendering.
+- The `?deadline=` override is confirmed (the Operator, October 6, 2026) as a test and diagnosis
+  knob.

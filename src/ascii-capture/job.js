@@ -6,7 +6,7 @@
 // reply from the iframe. Only one job runs at a time.
 
 import { pixelsToText } from "../export/ascii.js";
-import { CAPTURE, newJobId, readHostMessage, startMessage, PRESETS } from "./protocol.js";
+import { CAPTURE, PROFILES, newJobId, readHostMessage, startMessage, PRESETS } from "./protocol.js";
 import { creditFooter, creditMetadata } from "./credit.js";
 import { encodeAsciiGif } from "./gif.js";
 
@@ -60,6 +60,7 @@ export function startCapture({
   color,
   mount,
   jobMs = JOB_MS,
+  profile = null,
   onProgress = () => {},
 }) {
   if (running) throw new CaptureError("busy", MESSAGES.busy);
@@ -68,10 +69,11 @@ export function startCapture({
     !COLUMNS.includes(columns) ||
     typeof color !== "boolean" ||
     !mount ||
-    !(jobMs >= JOB_MS_RANGE[0] && jobMs <= JOB_MS_RANGE[1])
+    !(jobMs >= JOB_MS_RANGE[0] && jobMs <= JOB_MS_RANGE[1]) ||
+    (profile !== null && !PROFILES.includes(profile))
   )
     throw new RangeError("Unknown capture settings");
-  const job = new Job({ preset, columns, color, mount, jobMs, onProgress });
+  const job = new Job({ preset, columns, color, mount, jobMs, profile, onProgress });
   running = job;
   const release = () => {
     if (running === job) running = null;
@@ -81,7 +83,7 @@ export function startCapture({
 }
 
 class Job {
-  constructor({ preset, columns, color, mount, jobMs, onProgress }) {
+  constructor({ preset, columns, color, mount, jobMs, profile, onProgress }) {
     this.id = newJobId();
     this.preset = preset;
     this.toy = PRESETS[preset].toy;
@@ -92,6 +94,7 @@ class Job {
     this.frames = [];
     this.messages = 0;
     this.renderer = "";
+    this.profile = "";
     this.started = performance.now();
     this.finished = false;
     this.life = new AbortController(); // listeners, and the encoder's stop
@@ -119,7 +122,7 @@ class Job {
     frame.setAttribute("aria-hidden", "true");
     frame.setAttribute("allow", DENY.map((p) => `${p} 'none'`).join("; "));
     frame.width = frame.height = "140";
-    frame.src = `${HOST.href}#${this.id}`;
+    frame.src = `${HOST.pathname}${profile ? `?profile=${profile}` : ""}#${this.id}`;
     this.iframe = frame; // kept until teardown, which always removes it
     mount.append(frame);
   }
@@ -144,6 +147,7 @@ class Job {
     } else if (type === "loaded") {
       if (this.messages !== 2) return this.fail("protocol");
       this.renderer = event.data.renderer;
+      this.profile = event.data.profile;
       this.armFrameTimer();
     } else if (type === "error") {
       this.fail(event.data.reason);
@@ -194,6 +198,7 @@ class Job {
         footer,
         settings,
         renderer: this.renderer,
+        profile: this.profile,
         ms: Math.round(performance.now() - this.started),
         firstRows: this.frames[0].rows,
         lastRows: this.frames[this.frames.length - 1].rows,

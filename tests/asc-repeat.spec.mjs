@@ -7,7 +7,7 @@ import fs from "node:fs/promises";
 // not promised; GPU memory is not visible here. The numbers go to
 // test-results/asc-repeat.json and the test's attachments.
 
-const LAB = "/ascii-lab.html?deadline=180";
+const LAB = "/ascii-lab.html?deadline=180&profile=high";
 const JOB = 200_000;
 
 function handles() {

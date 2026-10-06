@@ -8,7 +8,7 @@
 // the toy's update handlers run only with the step given here, and the camera
 // is held with camera.setState() before every render.
 
-import { Player, NoGPUError } from "../player.js";
+import { Player, NoGPUError, detectProfile } from "../player.js";
 import { createScene, normalizeLook } from "../state.js";
 import { findToy } from "../toys.js";
 import { CAPTURE, isJobId, presetFor, readLabMessage } from "./protocol.js";
@@ -75,10 +75,12 @@ async function run({ toy, options }) {
   const info = findToy(toy);
   if (!preset || !info) throw failure("start");
   const canvas = document.getElementById("stage");
-  // A fixed profile and no adaptive step-down: the same capture on every device.
+  // The profile the app would pick on this device at start (or ?profile= from
+  // the lab, for tests), held for the whole job: no adaptive step-down.
+  const profile = detectProfile();
   const player = new Player(canvas, {
     prefer: "webgl2",
-    profile: "high",
+    profile,
     reducedMotion: false,
     idleDelay: 1e9,
   });
@@ -99,7 +101,7 @@ async function run({ toy, options }) {
     throw failure("load", err);
   }
   player.applySettings(scene);
-  send({ type: "loaded", renderer: rendererName(player) });
+  send({ type: "loaded", renderer: rendererName(player), profile: player.profile });
 
   const { size, fps, frames, tapFrame } = CAPTURE;
   const stage = player.stage;

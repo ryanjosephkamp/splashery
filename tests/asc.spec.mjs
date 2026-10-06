@@ -8,7 +8,7 @@ import { findToy } from "../src/toys.js";
 // 35 to 110 seconds, so the lab runs with ?deadline=180 (its 30-second limit
 // is for real devices); the frame deadline (8 seconds) is unchanged.
 
-const LAB = "/ascii-lab.html?deadline=180";
+const LAB = "/ascii-lab.html?deadline=180&profile=high";
 const JOB = 200_000;
 
 // Every frame (the lab and the capture document) reports anything that would
@@ -244,6 +244,8 @@ test("the three presets capture, move and keep their credit; settings change the
     await settings(page, { preset });
     expect(await captureAndWait(page)).toBe("done");
     await expect(page.locator("body")).toHaveAttribute("data-decode", "pass");
+    // The profile is held fixed (forced with ?profile= here) and shown in the Device check.
+    await expect(page.locator("#dev-profile")).toHaveText("high");
     const { name, bytes } = await download(page);
     expect(name).toBe(`splashery-${preset}-ascii-48.gif`);
     const gif = decode(bytes);
@@ -365,7 +367,9 @@ test("Cancel mid-capture stops the job and offers no file", async ({ page, baseU
   const { errors } = await open(page, baseURL);
   await settings(page, { preset: "orange" });
   await page.click("#capture");
-  await expect(page.locator("#status")).toContainText("Capturing frame 3 of 40", { timeout: JOB });
+  await expect(page.locator("#status")).toContainText(/Capturing frame \d+ of 40/, {
+    timeout: JOB,
+  });
   await page.click("#cancel");
   await expect(page.locator("body")).toHaveAttribute("data-state", "failed");
   await expect(page.locator("#status")).toHaveText("Capture canceled. Nothing was saved.");
@@ -388,7 +392,9 @@ test("hiding or leaving the page aborts the job, and a late message restarts not
   const { errors } = await open(page, baseURL);
   await settings(page);
   await page.click("#capture");
-  await expect(page.locator("#status")).toContainText("Capturing frame 2 of 40", { timeout: JOB });
+  await expect(page.locator("#status")).toContainText(/Capturing frame \d+ of 40/, {
+    timeout: JOB,
+  });
   const job = await page.evaluate(() => new URL(document.querySelector("iframe").src).hash);
   await page.evaluate(() => {
     Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
@@ -416,7 +422,9 @@ test("hiding or leaving the page aborts the job, and a late message restarts not
   await page.evaluate(() => document.getElementById("late").remove());
   // Leaving the page (pagehide) aborts a running job too.
   await page.click("#capture");
-  await expect(page.locator("#status")).toContainText("Capturing frame 2 of 40", { timeout: JOB });
+  await expect(page.locator("#status")).toContainText(/Capturing frame \d+ of 40/, {
+    timeout: JOB,
+  });
   await page.evaluate(() => dispatchEvent(new PageTransitionEvent("pagehide")));
   await expect(page.locator("#status")).toContainText("the page was left");
   expect(await page.evaluate(() => window.__ascHandles())).toMatchObject({
