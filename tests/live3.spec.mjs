@@ -177,10 +177,11 @@ test.describe("the Chladni plate, sung to", () => {
         studio,
         60_000,
       );
-      // 125 Hz is nearest the 150 Hz mode (1, 3): the plate switched to it
-      // once and its sand settled.
+      // 125 Hz is nearest the 150 Hz mode (1, 3): its sand settled. (Live r7:
+      // the sand moves to it on the plate on show; no new plate.)
       expect(s.mode).toMatch(/^1-3/);
-      expect(s.builds - before).toBe(1);
+      expect(s.lead).toMatch(/^1-3/);
+      expect(s.builds - before).toBe(0);
       expect(errors).toEqual([]);
     } finally {
       await close();

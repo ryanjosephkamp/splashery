@@ -3,7 +3,7 @@
 // spectrogram of a song you open, as a 3D field of splats) and the Chladni
 // plate (sand on a bowed metal plate finding the plate's still lines).
 
-import { mix, shade, clamp, smoothstep, ramp } from "../kit.js";
+import { mix, shade, clamp, ramp } from "../kit.js";
 import {
   spectrogram,
   landscapePlan,
@@ -20,9 +20,11 @@ import { reliefGrid } from "../live/relief.js";
 // Lane Live input r2: a long song plays at once and is measured in a worker;
 // the measured looks (Ribbons, Tube, Lines, Mesh).
 import { Track, SongAnalysis } from "./song-stream.js";
-import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps } from "./song-looks.js"; // prettier-ignore
+import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps, liveOffset } from "./song-looks.js"; // prettier-ignore
 import { HOP as FRAME, F as FIELD, FIELDS } from "./song-analysis.js";
 import { MicRecorder, wavBlob, saveBlob, songTransport } from "./song-record.js";
+// Lane Live r7: the Chladni plate's sand moves live, every frame.
+import { Sand } from "./chladni-sand.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
 // The classic model of a square plate of side L = 1 (x, y from 0 to 1) in one
@@ -169,9 +171,78 @@ const PLATE_T = 0.06; // its thickness
 const GRAIN_LIFT = 0.012;
 const HOP = 0.09; // the highest hop, in recipe units
 const BOW_SECS = 3.6;
+const STIR_SECS = 1.2; // Live r7: a tap on a formed figure stirs the sand this long
+const SAND_LIFT = PLATE + 0.06; // the grains' offsets reach this far (recipe units)
 
 // Sound and drive state for the tap (one toy at a time).
-const CH = { was: 0, bowAtSing: null };
+const CH = { last: null, taps: 0, bowUntil: 0, stirUntil: 0, frames: 0, amp: new Map(), sorted: -1, unsorted: false }; // prettier-ignore
+
+// Live r7: the live sand and its canvas (the toy's screen: each grain's
+// color on the left, its offset from where it rests on the right).
+const SAND = { sand: null, cols: 1, rows: 1, home: null, colors: null, img: null, version: 0 };
+
+// The modes' strengths follow the sound within about 80 ms, so the sand
+// answers a new note at once and stops when the sound does. want: the
+// strengths the sound asks for now ([{ mode, a }]); modes that ring at one
+// frequency are one entry. Returns them as the sand takes them.
+function followDrive(want, dt) {
+  const k = 1 - Math.exp(-dt / 0.08);
+  const seen = new Set();
+  for (const w of want) {
+    const key = w.mode.id;
+    seen.add(key);
+    const was = CH.amp.get(key) ?? { mode: w.mode, a: 0 };
+    was.mode = w.mode;
+    was.a += (w.a - was.a) * k;
+    CH.amp.set(key, was);
+  }
+  for (const [key, v] of CH.amp) {
+    if (seen.has(key)) continue;
+    v.a -= v.a * k;
+    if (v.a < 1e-3) CH.amp.delete(key);
+  }
+  return [...CH.amp.values()].map((v) => ({ n: v.mode.n, m: v.mode.m, s: v.mode.s, a: v.a, mode: v.mode })); // prettier-ignore
+}
+
+// The sand's canvas: colors once, offsets on every change.
+const sandScreen = {
+  get width() {
+    return SAND.cols * 2;
+  },
+  get height() {
+    return SAND.rows;
+  },
+  version: (time) =>
+    SAND.sand?.moving ? `${SAND.version}|${Math.floor(time * 60)}` : SAND.version,
+  draw(g, time) {
+    const { sand, cols, rows, home, colors } = SAND;
+    if (!sand) return;
+    if (!SAND.img || SAND.img.width !== cols * 2 || SAND.img.height !== rows) {
+      SAND.img = g.createImageData(cols * 2, rows);
+      const px = SAND.img.data;
+      for (let i = 0; i < sand.n; i++) {
+        const c = mix("#e9d8ac", "#f8efd2", colors[i]).map((v) => Math.round(v * 255));
+        const o = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
+        px[o] = c[0];
+        px[o + 1] = c[1];
+        px[o + 2] = c[2];
+        px[o + 3] = 255;
+      }
+    }
+    const px = SAND.img.data;
+    const q = 255 / (2 * SAND_LIFT);
+    const { X, Y, hop, phase } = sand;
+    for (let i = 0; i < sand.n; i++) {
+      const o = (Math.floor(i / cols) * cols * 2 + cols + (i % cols)) * 4;
+      const up = hop[i] > 0 ? HOP * hop[i] * Math.abs(Math.sin(phase[i] + time * 23)) : 0;
+      px[o] = 127.5 + ((X[i] * 2 - 1) * PLATE - home[i * 2]) * q;
+      px[o + 1] = 127.5 + up * q;
+      px[o + 2] = 127.5 + ((Y[i] * 2 - 1) * PLATE - home[i * 2 + 1]) * q;
+      px[o + 3] = 255;
+    }
+    g.putImageData(SAND.img, 0, 0);
+  },
+};
 
 function chladniCue(mode, on) {
   const f = modeFreq(mode);
@@ -189,7 +260,9 @@ const CHLADNI = {
   // Lane Live input r3: tilt to see the plate from the side (above the stage only).
   tiltLock: false,
   pitchRange: [0.05, 1.35],
-  alive: (c) => (c.bow > 0.001 && c.bow < 0.999) || liveIn.on("mic") || !!CHF.song?.track?.playing, // lane Live input: sung to, r4 played to
+  // Live r7: while the sand moves, a tap bows or stirs it, or sound drives it.
+  alive: () => !!SAND.sand?.moving || CH.bowUntil > (CH.last ?? 0) || CH.stirUntil > (CH.last ?? 0) || liveIn.on("mic") || !!CHF.song?.track?.playing || CH.amp.size > 0, // prettier-ignore
+  screen: sandScreen,
   // Sand grains take most of the budget (in twelve copies of which one shows).
   density: 2,
   options: [
@@ -230,55 +303,90 @@ const CHLADNI = {
       { render: () => songTransport(chladniTransport) },
       { kind: "mic", rebuild: false, status: singStatus },
     ],
-    note: "Tap “Use my microphone” and sing a steady note, or open a song or any sound file. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest the note rings, and the sand settles into its figure. Change the note and another mode takes over, with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, drives it as it plays; the file stays on your device.",
+    note: "Tap “Use my microphone” and sing a steady note, or open a song or any sound file. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest the note rings, and the sand sets off for its figure at once. Change the note and it moves on to the next figure; when the sound stops it stays put. A song's strongest pitch, moved by octaves into the plate's range, drives it as it plays; the file stays on your device.",
   },
   drive(t, c, out, info) {
     const g = info?.data?.chladni;
     if (!g) return;
     if (info?.sound) CHF.sound = info.sound; // r4: for a tap's onAct
-    // Lane Live input: while the microphone is on, your voice bows the plate;
-    // r4: otherwise your audio, while it is open.
+    const time = info.time ?? t;
+    const dt = CH.last === null ? 0 : Math.min(0.1, Math.max(0, time - CH.last));
+    CH.last = time;
+    // Lane Live input: while the microphone is on, your voice drives the
+    // plate; r4: otherwise your audio, while it is open.
     const sung = liveIn.on("mic");
     if (sung && CHF.song?.track?.playing) CHF.song.track.pause();
     const played = !sung && !!CHF.song;
-    // After the microphone stops, the sung sand stays as it is until the
-    // next tap (the bow's own state takes over then), rather than jumping to
-    // wherever a tap made while singing had left the bow.
-    if (sung || played) CH.bowAtSing = c.bow ?? 0;
-    else if (CH.bowAtSing !== null && (c.bow ?? 0) !== CH.bowAtSing) CH.bowAtSing = null;
-    const keep = !sung && !played && CH.bowAtSing !== null && SING.p > 0;
-    const time = info.time ?? t;
-    const p = sung ? singDrive(time, g.mode) : played ? fileDrive(time, g.mode) : keep ? SING.p : clamp01(c.bow ?? 0); // prettier-ignore
-    // The sound: the hum when the bowing starts, a hiss when it is stirred.
-    if (sung || played) CH.was = p; // your voice (or audio) is the sound
-    else if (CH.was <= 0.001 && p > 0.001) for (const s of chladniCue(g.mode, true)) out.cues.push(s);
-    else if (CH.was >= 0.999 && p < 0.999) for (const s of chladniCue(g.mode, false)) out.cues.push(s); // prettier-ignore
-    CH.was = p;
-    // Which of the twelve copies of the sand shows, and how far it has
-    // moved on toward the next.
-    const pos = p * KEYS;
-    const j = Math.min(KEYS - 1, Math.floor(pos));
-    for (let i = 0; i < KEYS; i++) out.parts[`sand${i}`] = { visible: i === j ? 1 : 0 };
-    out.morph = [pos - j, 0, 0, 0];
-    // The bow is drawn along the front edge while it moves the sand: never
-    // while your voice or audio drives the plate, nor while the sand they
-    // left holds after they stop.
-    const bowing = !sung && !played && !keep && p > 0.001 && p < 0.999;
-    const ramp =
-      sung || played ? SING.r : Math.min(smoothstep(0, 0.06, p), 1 - smoothstep(0.94, 1, p));
+    // Live r7: a tap bows the plate (or, once its figure has formed, stirs
+    // the sand up again), but only with no audio and no microphone: then the
+    // tap plays or pauses the audio, and the bow never shows (the owner's
+    // report of October 5, 2026).
+    const n = info.tap?.n ?? 0;
+    if (n < CH.taps) CH.taps = 0;
+    if (n > CH.taps) {
+      CH.taps = n;
+      if (!sung && !played) {
+        const settled = SAND.sand ? SAND.sand.settled(g.mode) : 0;
+        if (settled > 0.6) {
+          CH.stirUntil = time + STIR_SECS;
+          CH.bowUntil = 0;
+          for (const q of chladniCue(g.mode, false)) out.cues.push(q);
+        } else {
+          CH.bowUntil = time + BOW_SECS;
+          CH.stirUntil = 0;
+          for (const q of chladniCue(g.mode, true)) out.cues.push(q);
+        }
+      }
+    }
+    if (sung || played) CH.bowUntil = CH.stirUntil = 0;
+    // Paused audio stops the plate at once: the sand stays where it is.
+    if (played && !CHF.song.track.playing) CH.amp.clear();
+    const bowing = time < CH.bowUntil;
+    const stirring = time < CH.stirUntil;
+    // The modes as the sound drives them (or the bow, its own mode).
+    const want = sung ? singDrive(time, g.mode) : played ? fileDrive(time, g.mode) : null;
+    const drive = followDrive(want ?? (bowing ? [{ mode: g.mode, a: 1 }] : []), dt);
+    const stir = stirring ? Math.min(1, (CH.stirUntil - time) / 0.4) : 0;
+    if (SAND.sand && SAND.sand.step(dt, drive, stir)) {
+      SAND.version++;
+      // The grains sort where they are now, not where they rest (the engine
+      // reads their offsets from the screen), a few times a second while
+      // they move and once when they stop.
+      if (time - CH.sorted > 0.15) {
+        CH.sorted = time;
+        out.resortPose = true;
+      }
+      CH.unsorted = true;
+    } else if (CH.unsorted) {
+      CH.unsorted = false;
+      out.resortPose = true;
+    }
+    // How settled the sand is on the leading mode (for the status line and
+    // the tests), now and then.
+    if (SAND.sand && (CH.frames++ % 8 === 0 || !SAND.sand.moving)) {
+      const lead = drive.reduce((b, d) => (!b || d.a > b.a ? d : b), null);
+      if (lead && lead.a > 0.05) SING.lead = lead.mode;
+      SING.p = SAND.sand.settled(SING.lead || g.mode);
+    }
+    // The bow is drawn along the front edge only while a tap bows or stirs.
+    // Its splats fade in by morph channel 1, which is 0 until the drive says
+    // so, so a plate just built never shows it either.
+    const show = bowing || stirring;
+    out.morph = [0, show ? 1 : 0, 0, 0];
     out.parts.bow = {
-      visible: bowing ? 1 : 0,
-      offset: [0, 0.38 * Math.sin(t * 7) * ramp, 0],
+      visible: show ? 1 : 0,
+      offset: [0, 0.38 * Math.sin(t * 7) * (show ? 1 : 0), 0],
     };
-    // The plate itself shivers a hair.
-    out.parts.plate = { offset: [0, 0.006 * Math.sin(t * 90) * ramp, 0] };
+    // The plate itself shivers a hair while it rings.
+    const ring = drive.reduce((s2, d) => Math.max(s2, d.a), 0);
+    out.parts.plate = { offset: [0, 0.006 * Math.sin(t * 90) * ring, 0] };
   },
   build(k, o) {
     const mode = modeById(o.mode);
     // Lane Live input: a new plate's sand starts scattered.
-    Object.assign(SING, { p: 0, want: null, asked: false, last: null });
+    Object.assign(SING, { p: 0, want: null, asked: false, last: null, lead: null });
     SING.builds++;
-    CH.bowAtSing = null;
+    Object.assign(CH, { last: null, bowUntil: 0, stirUntil: 0, frames: 0, amp: new Map(), sorted: -1, unsorted: true }); // prettier-ignore
     // The stand: a base, a post, and the plate clamped on top.
     const plate = k.part("plate", { pivot: [0, 0, 0], axis: [0, 1, 0] });
     k.add(k.cylinder(0.5, 0.1, { caps: true }), {
@@ -314,44 +422,45 @@ const CHLADNI = {
     });
     // The bow: a slim stick with a pale ribbon of hair against the front edge.
     const bow = k.part("bow");
+    // Live r7: it fades in by morph channel 1, which stays 0 unless a tap
+    // bows the plate, so it never shows by default (not on a rebuild's first
+    // frames either).
+    const hidden = { kind: "fade", params: [0.5, -0.02], channel: 1 };
     k.add(k.box(0.05, 1.5, 0.05), {
       pos: [0.15, 0.0, PLATE + 0.16],
       rot: [0, 0, 0],
       color: "#6a4a30",
       part: bow,
       share: 0.02,
+      ...hidden,
     });
     k.add(k.box(0.012, 1.45, 0.11), {
       pos: [0.15, 0.0, PLATE + 0.06],
       color: "#efe6d0",
       part: bow,
       share: 0.015,
+      ...hidden,
     });
-    // The sand: one splat per grain in each of the twelve copies.
-    const copies = KEYS;
-    const n = Math.max(200, Math.floor((k.count * 0.6) / copies));
-    const snaps = settle(mode, n, () => k.rand());
-    const at = (s, i) => [
-      (s[i * 3] * 2 - 1) * PLATE,
-      GRAIN_LIFT + s[i * 3 + 2] * HOP,
-      (s[i * 3 + 1] * 2 - 1) * PLATE,
-    ];
-    const tone = Array.from({ length: n }, () => k.rand());
-    for (let j = 0; j < copies; j++) {
-      const part = k.part(`sand${j}`);
-      k.cloud({ share: n / k.count, size: 0.5, pattern: false }, (rand, i) => ({
-        p: at(snaps[j], i),
-        to: at(snaps[j + 1], i),
-        channel: 0,
-        color: mix("#e9d8ac", "#f8efd2", tone[i]),
-        size: 0.5 + 0.4 * tone[i],
-        opacity: 0.98,
-        part,
-        pattern: false,
-      }));
+    // Live r7: the sand, one relief splat per grain (chladni-sand.js moves
+    // them). Each rests a hair from the plate's middle (a different hair for
+    // each, so the canvas's steps of 1/255 don't line grains up) and the
+    // screen canvas moves it to its place: a signed offset of up to SAND_LIFT.
+    const n = Math.max(2500, Math.min(10000, Math.floor(k.count * 0.06)));
+    const sand = new Sand(n, () => k.rand());
+    const cols = Math.min(256, Math.ceil(Math.sqrt(n * 2)));
+    const rows = Math.ceil(n / cols);
+    const home = new Float32Array(n * 2);
+    const items = [];
+    for (let i = 0; i < n; i++) {
+      home[i * 2] = (k.rand() - 0.5) * 0.06;
+      home[i * 2 + 1] = (k.rand() - 0.5) * 0.06;
+      const tone = k.rand();
+      items.push({ p: [home[i * 2], GRAIN_LIFT, home[i * 2 + 1]], color: mix("#e9d8ac", "#f8efd2", tone), tone, size: 0.5 + 0.4 * tone, opacity: 0.98, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, SAND_LIFT], part: plate, pattern: false }); // prettier-ignore
     }
+    k.cloud({ share: n / k.count, size: 0.5, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
+    Object.assign(SAND, { sand, cols, rows, home, colors: items.map((it) => it.tone), img: null, version: SAND.version + 1 }); // prettier-ignore
     k.reach([0, HOP + 0.3, 0]);
-    k.data = { chladni: { mode, copies } };
+    k.data = { chladni: { mode } };
   },
 };
 
@@ -370,6 +479,12 @@ const CHLADNI = {
 // the back. What has played fades away as it crosses the line (the fade kind, driven by
 // morph channel 0 = how far through the song). Loud bands rise at the line: 48 small
 // caps (tokens) ride the loudness the song has at that moment.
+//
+// Live r7: in the browser, Live now grows the land as the song plays instead
+// (song-looks.js buildLandscapeLong): it opens on an empty plain, each moment
+// rises at the line at the front as it is heard, and what has played
+// recedes behind it. The scrolling build below remains for a build without a
+// worker (the Node tools); Whole song is unchanged.
 
 export const DB_RANGE = 45;
 const W = 2; // width (pitch axis)
@@ -480,6 +595,7 @@ const R2 = { look: null, land: null, an: null, anFor: null, actN: 0, lastShown: 
 export const songAnalysisStarted = () => R2.an?.started;
 // For the sync test: what the look last drew at its "now" mark.
 export const songShown = () => R2.look?.shown ?? null;
+export const r2Land = () => R2.land;
 export const songTest = () => ({
   track: SONG.current?.track ?? null,
   features: R2.an?.features ?? null,
@@ -642,7 +758,15 @@ function driveR2(g, out, info) {
   } else if (R2.land) {
     const f = clamp01(now / duration);
     if (g.live) {
-      out.parts.look = { offset: [0, 0, f * g.D] };
+      // Live r7: the land slides back over the plain, which stays put; splats
+      // sort where they were built, so they sort again as it slides (the
+      // plain drew over the land otherwise).
+      const off = liveOffset(R2.land, now, duration);
+      out.parts.look = { offset: [0, 0, off] };
+      if (Math.abs(off - (R2.land.sortedAt ?? Infinity)) > 0.02) {
+        R2.land.sortedAt = off;
+        out.resortPose = true;
+      }
       const caps = landscapeCaps(R2.land, R2.an, now);
       if (caps) out.tokens = caps;
     } else out.parts.marker = { offset: [0, 0, -f * g.D] };
@@ -909,7 +1033,8 @@ const SONG_LANDSCAPE = {
     version(time) {
       if (liveIn.on("mic")) return Math.floor(time * LIVE_SONG.rate);
       if (R2.look) return lookVersion(R2.look, R2.an, heardNow());
-      if (R2.land) return `${R2.an?.version ?? -1}|${R2.land.live ? Math.floor((heardNow() / Math.max(1, SONG.current?.duration || 1)) * R2.land.nt) : 0}`; // prettier-ignore
+      // Live r7: in Live the land grows with every frame heard.
+      if (R2.land) return `${R2.an?.version ?? -1}|${R2.land.live ? Math.floor(heardNow() / FRAME) : 0}`; // prettier-ignore
       return "off";
     },
     draw(g, time) {
@@ -1000,7 +1125,12 @@ const SONG_LANDSCAPE = {
     R2.look = null;
     R2.land = null;
     if (liveIn.on("mic")) return liveSongBuild(k, o); // lane Live input
-    if (LOOKS.includes(o.look) || song.long) return buildR2(k, o, song); // lane Live input r2
+    // Live r7: Live grows the land as the song plays (the owner's push notes
+    // of October 4, 2026), for every song: a short one too is measured by
+    // the worker and drawn frame by frame as it is heard. (Without a worker,
+    // as in the Node tools, it builds whole as before.)
+    const grow = o.view === "live" && typeof Worker !== "undefined";
+    if (LOOKS.includes(o.look) || song.long || grow) return buildR2(k, o, song); // lane Live input r2
     // A new build (another song, a look) starts stopped.
     try {
       PLAY.src?.stop();
@@ -1221,8 +1351,8 @@ function liveSongDraw(g, time) {
 // that rings; how strongly follows a resonance curve (half as strong about
 // SING_WIDTH cents away), times how loud you sing. While it rings the sand hops
 // and drifts to its still lines, as when it is bowed; when you stop, the
-// sand stays where it is. A different mode, held for a moment, gets its
-// own plate of scattered sand.
+// sand stays where it is. Live r7: another note sets the sand off for its
+// mode's figure at once, from where it lies (no new plate).
 export const SING_F0 = F0 / 4;
 // Half strength this many cents off a mode: wide enough that any note from
 // about 60 to 450 Hz rings the nearest mode (an ordinary voice lands between
@@ -1230,7 +1360,7 @@ export const SING_F0 = F0 / 4;
 const SING_WIDTH = 150;
 export const singFreq = (mode) => SING_F0 * (mode.n * mode.n + mode.m * mode.m);
 const SING = { p: 0, want: null, since: 0, last: null, built: 0, note: null, near: null, r: 0, builds: 0 }; // prettier-ignore
-export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null, builds: SING.builds }); // prettier-ignore
+export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null, lead: SING.lead?.id ?? null, builds: SING.builds }); // prettier-ignore
 
 // The mode nearest a sung frequency (keeping the sign of the one on show
 // when the pair shares a frequency), and how strongly it rings (0..1).
@@ -1255,48 +1385,41 @@ function singStatus() {
   return `You: ${n.name} (${Math.round(n.hz)} Hz). Nearest mode ${near.mode.n}, ${near.mode.m} rings at ${hz} Hz on this plate.${side}`; // prettier-ignore
 }
 
-// One frame of the sung plate: how far the sand has settled (0..1). The
-// plate on show rings with its own resonance to whatever is sung, so the
-// sand moves whenever the note is anywhere near its mode (a real voice
-// wavers). Another mode takes over only when it is clearly nearer and held
-// for a second, and not within two seconds of the last change: a new mode is
-// a new plate of scattered sand, so switching on every waver kept the sand
-// from ever settling (lane Live input r3, the owner's review of October 2).
-const SWITCH_HOLD = 1; // seconds another mode must be held
-const SWITCH_REST = 2; // seconds after a build before another switch
+// Live r7: what a pitch (Hz, moved by octaves into the plate's range) at a
+// loudness (0..1) asks of the plate: every mode rings by its own resonance
+// to it, so the nearest rings most and the sand heads for its figure at
+// once; a waver between two modes rings both a little. Modes that share a
+// frequency (the + and − of one n, m) ring as the one the Mode choice names,
+// else as +.
+function modesFor(hz, loud, chosen) {
+  const out = [];
+  const seen = new Set();
+  for (const m of MODES) {
+    const key = m.n * m.n + m.m * m.m;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const pick = chosen.n === m.n && chosen.m === m.m ? chosen : MODES.find((q) => q.n === m.n && q.m === m.m && q.s > 0) || m; // prettier-ignore
+    const x = (1200 * Math.log2(hz / singFreq(pick))) / SING_WIDTH;
+    const a = loud / (1 + x * x);
+    if (a > 0.02) out.push({ mode: pick, a });
+  }
+  return out;
+}
+
+// One frame of the sung plate (Live r7: no more switching plates; the modes
+// follow the voice, see modesFor). Returns the modes it drives.
 function singDrive(time, mode) {
-  const dt = SING.last === null ? 0 : Math.min(0.1, Math.max(0, time - SING.last));
-  if (SING.last === null) SING.built = time;
   SING.last = time;
   const pitch = liveIn.mic?.pitch;
   const loud = clamp01((liveIn.mic?.db ?? -120) / 30 + 1.8); // −54 dBFS nothing, −24 full
   if (pitch && loud > 0) {
     SING.note = pitch.note && { name: pitch.note.name, hz: pitch.hz };
-    SING.near = singMode(pitch.hz, mode);
-    // This plate's own response to the note.
-    const x = (1200 * Math.log2(pitch.hz / singFreq(mode))) / SING_WIDTH;
-    const own = 1 / (1 + x * x);
-    SING.r = own * loud;
-    SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
-    const other = SING.near.mode.id !== mode.id;
-    if (other && SING.near.response > own * 1.5) {
-      if (SING.want !== SING.near.mode.id) {
-        SING.want = SING.near.mode.id;
-        SING.since = time;
-      } else if (
-        time - SING.since > SWITCH_HOLD &&
-        time - SING.built > SWITCH_REST &&
-        !SING.asked
-      ) {
-        SING.asked = true;
-        liveIn.setOptions?.({ mode: SING.want });
-      }
-    } else SING.want = null;
-  } else {
-    SING.r = 0;
-    SING.want = null;
+    SING.near = singMode(foldHz(pitch.hz), mode);
+    SING.r = SING.near.response * loud;
+    return modesFor(foldHz(pitch.hz), loud, mode);
   }
-  return SING.p;
+  SING.r = 0;
+  return [];
 }
 // ---- Lane Live input r4: the Chladni plate plays your audio ---------------------------
 // A song or any sound file opened on the plate plays from the file itself
@@ -1304,15 +1427,10 @@ function singDrive(time, mode) {
 // the Song landscape's worker (song-analysis.js: pitch and loudness every
 // 40 ms). Each moment's strongest pitch (the voiced pitch where there is
 // one, else the loudest band) is moved by octaves into the plate's range
-// and rings the modes as a sung note does. A song changes note far faster
-// than a voice, so the modes keep a running score (each mode's response to
-// the music, fading over about a second); the plate on show rings by its
-// own response, and the top-scoring mode takes over, with fresh sand, when
-// it clearly leads (1.5 times the plate's own score) and the plate has had
-// FILE_REST seconds to settle. Nothing is uploaded.
+// and rings the modes as a sung note does (Live r7: at once, every frame,
+// the sand moving on from where it lies; until r7 a running score picked a
+// mode and a new plate with fresh sand). Nothing is uploaded.
 const CHF = { song: null, an: null, sound: null, score: new Map(), now: null };
-const FILE_REST = 2.5; // seconds a plate rings before the music may switch it
-const SCORE_FADE = 1.2; // seconds
 const BAND_HZ = bands(12).centers; // the analysis' bands (song-analysis.js NF)
 
 // For the clip tool: the open audio's track (its clock is stepped with the clip's).
@@ -1326,6 +1444,16 @@ export const chladniFileState = () => ({
   now: CHF.now,
   p: SING.p,
   builds: SING.builds,
+  lead: SING.lead?.id ?? null, // Live r7: the mode the sand is settling on
+});
+
+// Live r7: the sand, for the tests: how many grains, and whether they move.
+export const chladniSand = () => ({
+  n: SAND.sand?.n ?? 0,
+  moving: !!SAND.sand?.moving,
+  steps: SAND.sand?.steps ?? 0,
+  at: SAND.sand ? Array.from(SAND.sand.X.subarray(0, 50)).concat(Array.from(SAND.sand.Y.subarray(0, 50))) : [], // prettier-ignore
+  amps: Object.fromEntries([...CH.amp].map(([k, v]) => [k, v.a])), // each driven mode's strength
 });
 
 // Into the plate's range, by octaves (60 to 400 Hz).
@@ -1356,57 +1484,29 @@ function strongest(i) {
   return hz > 0 ? { hz, db } : null;
 }
 
+// Live r7: the audio's strongest pitch now drives the modes as a voice
+// does (modesFor), frame by frame; no running score, no switching plates.
 function fileDrive(time, mode) {
-  const dt = SING.last === null ? 0 : Math.min(0.1, Math.max(0, time - SING.last));
-  if (SING.last === null) SING.built = time;
   SING.last = time;
   const t = CHF.song.track;
   if (!t.playing) {
     SING.r = 0;
-    return SING.p;
+    return [];
   }
   const i = Math.floor(t.time() / FRAME);
   CHF.an?.focus(i);
   const s = strongest(i);
-  const fade = Math.exp(-dt / SCORE_FADE);
-  for (const [k, v] of CHF.score) CHF.score.set(k, v * fade);
   if (!s) {
     SING.r = 0;
-    return SING.p;
+    return [];
   }
   const hz = foldHz(s.hz);
   const loud = clamp01((s.db + 54) / 30);
-  // Each mode's running score (modes that share a frequency share a score).
-  const respond = (m) => {
-    const x = (1200 * Math.log2(hz / singFreq(m))) / SING_WIDTH;
-    return 1 / (1 + x * x);
-  };
-  for (const m of MODES) {
-    const key = m.n * m.n + m.m * m.m;
-    if (m !== MODES.find((q) => q.n * q.n + q.m * q.m === key)) continue;
-    CHF.score.set(key, (CHF.score.get(key) ?? 0) + respond(m) * loud * dt);
-  }
-  const own = respond(mode);
-  SING.r = own * loud;
-  SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
   SING.note = { name: noteOf(s.hz).name, hz: s.hz };
   SING.near = singMode(hz, mode);
-  const ownKey = mode.n * mode.n + mode.m * mode.m;
-  let lead = ownKey;
-  for (const [k, v] of CHF.score) if (v > (CHF.score.get(lead) ?? 0)) lead = k;
-  CHF.now = { hz: s.hz, folded: hz, loud, lead, own: ownKey };
-  if (
-    lead !== ownKey &&
-    CHF.score.get(lead) > 1.5 * (CHF.score.get(ownKey) ?? 0) &&
-    time - SING.built > FILE_REST &&
-    !SING.asked
-  ) {
-    // prettier-ignore
-    SING.asked = true;
-    const next = singMode(SING_F0 * lead, mode).mode;
-    liveIn.setOptions?.({ mode: next.id });
-  }
-  return SING.p;
+  SING.r = SING.near.response * loud;
+  CHF.now = { hz: s.hz, folded: hz, loud, lead: SING.near.mode.id };
+  return modesFor(hz, loud, mode);
 }
 
 function closeChladniAudio() {
