@@ -220,7 +220,111 @@
             find the lowest valley of every landscape.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The paths are computed from a real loss function, finite-difference gradients, and
+            momentum. They closely match independently derived analytic paths. They are then
+            replayed, with hard boundaries and different momentum as well as learning rate.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-close">Close</span> The ball follows negative loss
+                gradients with momentum.
+              </p>
+              <p>
+                All 22 points in each of the three paths agree with analytic-gradient trajectories
+                to absolute error below 0.000006 in position and plotted height.
+              </p>
+              <p class="note">
+                Central differences with spacing 0.0001 explain the small numerical error; 22 points
+                make 21 displayed steps.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_optimization/gd.html">Gradient descent</a>, Dive
+                  into Deep Learning authors:
+                  <q
+                    >Gradient descent moves against the gradient with a chosen step size; its
+                    convergence depends on the objective and step size.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://d2l.ai/chapter_optimization/momentum.html">Momentum</a>, Dive
+                  into Deep Learning authors:
+                  <q
+                    >Momentum retains part of previous updates while incorporating the current
+                    gradient.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Momentum carries part of the
+                previous update.
+              </p>
+              <p>
+                The presets use learning rate and momentum pairs 0.035/0.3, 0.17/0.5, and 0.95/0.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_optimization/momentum.html">Momentum</a>, Dive
+                  into Deep Learning authors:
+                  <q
+                    >Momentum retains part of previous updates while incorporating the current
+                    gradient.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The three paths are a
+                limited example of learning-rate effects.
+              </p>
+              <p>
+                The large step is clipped at the walls, and each choice can also change momentum;
+                the graphic is not a guarantee of convergence on arbitrary losses.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_optimization/gd.html">Gradient descent</a>, Dive
+                  into Deep Learning authors:
+                  <q
+                    >Gradient descent moves against the gradient with a chosen step size; its
+                    convergence depends on the objective and step size.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://d2l.ai/chapter_optimization/momentum.html">Momentum</a>, Dive
+                  into Deep Learning authors:
+                  <q
+                    >Momentum retains part of previous updates while incorporating the current
+                    gradient.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The path is computed once and replayed, not optimized during each tap. Positions are
+              clipped to a fixed square. The learning-rate choices also change momentum, so they are
+              not a controlled comparison of step size alone.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              Label both learning rate and momentum, or hold momentum fixed in a future comparison.
+              <span class="note">(proposed)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

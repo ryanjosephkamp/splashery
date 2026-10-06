@@ -213,7 +213,89 @@
             sentence reader.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The diagram shows the idea of passing a hidden state through a sequence. Its colors and
+            LSTM shutters are scripted, and it has no learned recurrent weights or numerical cell
+            state. <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> An RNN carries a hidden
+                state from one sequence item to the next.
+              </p>
+              <p>
+                The diagram loops an orb between THE, CAT, and SAT, matching the flow of a recurrent
+                state.
+              </p>
+              <p class="note">
+                Color mixing is a visual analogy, not the recurrent matrix equation.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_recurrent-neural-networks/rnn.html"
+                    >Recurrent neural networks</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >A recurrent network updates a hidden state from the previous state and the
+                    current input.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> An LSTM uses forget, input, and
+                output gates.
+              </p>
+              <p>The three shutter labels are F, I, and O, matching those gate roles.</p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_recurrent-modern/lstm.html"
+                    >Long short-term memory</a
+                  >, Dive into Deep Learning authors:
+                  <q>An LSTM uses input, forget, and output gates with a separate cell state.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The toy illustrates gate
+                operation without reading a sentence.
+              </p>
+              <p>
+                The colors and shutters are stored animation values. The About text explicitly calls
+                this a scripted sequence.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_recurrent-neural-networks/rnn.html"
+                    >Recurrent neural networks</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >A recurrent network updates a hidden state from the previous state and the
+                    current input.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://d2l.ai/chapter_recurrent-modern/lstm.html"
+                    >Long short-term memory</a
+                  >, Dive into Deep Learning authors:
+                  <q>An LSTM uses input, forget, and output gates with a separate cell state.</q>
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              THE CAT SAT, the orb colors, and the gate openings repeat a stored sequence. The LSTM
+              view has no numerical cell-state update or sigmoid gate values.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

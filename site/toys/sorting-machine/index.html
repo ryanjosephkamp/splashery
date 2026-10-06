@@ -215,12 +215,276 @@
           </p>
           <p>
             Tap it: eight bars of different heights sort themselves, each bar gliding to its new
-            place, while a counter counts the swaps; then they shuffle back. Pick one of eight
-            algorithms in the Toy tab, from bubble sort to heap sort, and watch how differently they
-            work.
+            place, while a counter counts the swaps, or moves for merge sort; then they shuffle
+            back. Pick one of eight algorithms in the Toy tab, from bubble sort to heap sort, and
+            watch how differently they work.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            All eight implementations match independent comparison and array-change traces. The
+            display counts swaps, except that merge sort counts single-item moves. The bar animation
+            omits comparisons that do not change the array.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Bubble sort compares adjacent
+                items in shrinking passes.
+              </p>
+              <p>It runs all shrinking passes, including any pass with no swaps.</p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://xlinux.nist.gov/dads/HTML/bubblesort.html">Bubble sort</a>, NIST
+                  Dictionary of Algorithms and Data Structures:
+                  <q
+                    >Bubble sort compares neighboring items and exchanges items that are out of
+                    order.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Quicksort uses the Lomuto
+                partition.
+              </p>
+              <p>
+                The last item is the pivot, values strictly below it move left, self-swaps are
+                omitted, and left partitions run first.
+              </p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://algs4.cs.princeton.edu/23quicksort/">Quicksort</a>, Sedgewick and
+                  Wayne, Princeton Algorithms:
+                  <q
+                    >Quicksort partitions around a pivot and recursively sorts the resulting
+                    subarrays.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Merge sort combines runs bottom
+                up and stably.
+              </p>
+              <p>
+                Runs double in size. Equal values stay left; each needed right item is moved ahead
+                of a left item.
+              </p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://algs4.cs.princeton.edu/22mergesort/">Mergesort</a>, Sedgewick and
+                  Wayne, Princeton Algorithms:
+                  <q
+                    >Bottom-up mergesort combines adjacent sorted runs of increasing size; merge
+                    ordering can be stable.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Insertion sort moves each new
+                value into the sorted prefix.
+              </p>
+              <p>Adjacent swaps move the value left until it is in order.</p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://xlinux.nist.gov/dads/HTML/insertionSort.html">Insertion sort</a>,
+                  NIST Dictionary of Algorithms and Data Structures:
+                  <q
+                    >Insertion sort inserts each item into the sorted prefix; an adjacent-swap
+                    version is also described.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Selection sort selects the
+                minimum of each remaining suffix.
+              </p>
+              <p>
+                It exchanges the selected minimum with the current destination, omitting self-swaps.
+              </p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://xlinux.nist.gov/dads/HTML/selectionSort.html">Selection sort</a>,
+                  NIST Dictionary of Algorithms and Data Structures:
+                  <q
+                    >Selection sort repeatedly selects the smallest remaining item and moves it into
+                    place.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Cocktail sort alternates
+                forward and backward sweeps.
+              </p>
+              <p>Both sweeps shrink the active bounds and compare neighboring values.</p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://xlinux.nist.gov/dads/HTML/bidirectionalBubbleSort.html"
+                    >Bidirectional bubble sort</a
+                  >, NIST Dictionary of Algorithms and Data Structures:
+                  <q
+                    >Bidirectional bubble sort alternates forward and backward sweeps of adjacent
+                    comparisons.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Shell sort uses gaps 4, 2, 1.
+              </p>
+              <p>Each gap performs insertion by exchanges within the interleaved subsequences.</p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://xlinux.nist.gov/dads/HTML/shellsort.html">Shell sort</a>, NIST
+                  Dictionary of Algorithms and Data Structures:
+                  <q
+                    >Shell sort sorts interleaved subsequences at decreasing gaps, ending with gap
+                    one.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Heap sort builds and drains a
+                max heap.
+              </p>
+              <p>
+                Heap construction starts from the last parent and repeated extraction moves the
+                maximum to the sorted suffix.
+              </p>
+              <p class="note">
+                All comparison values/operators and every array snapshot match the independent
+                reference on 384 inputs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://algs4.cs.princeton.edu/24pq/">Priority queues and heapsort</a>,
+                  Sedgewick and Wayne, Princeton Algorithms:
+                  <q
+                    >Heapsort builds a heap and repeatedly removes the maximum into the end of the
+                    array.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The counter counts swaps or
+                merge moves.
+              </p>
+              <p>
+                For every recorded stage of all eight default traces, the seven-segment display
+                shows the stage count and uses MOVES for merge, SWAPS otherwise.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://algs4.cs.princeton.edu/22mergesort/">Mergesort</a>, Sedgewick and
+                  Wayne, Princeton Algorithms:
+                  <q
+                    >Bottom-up mergesort combines adjacent sorted runs of increasing size; merge
+                    ordering can be stable.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://xlinux.nist.gov/dads/HTML/bubblesort.html">Bubble sort</a>, NIST
+                  Dictionary of Algorithms and Data Structures:
+                  <q
+                    >Bubble sort compares neighboring items and exchanges items that are out of
+                    order.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> Animated bar movements
+                show only the exchanges or moves.
+              </p>
+              <p>
+                Only changed arrays are saved; comparisons with no array change have no visible
+                step. Merge insertion is one move, not a count of every write.
+              </p>
+              <p class="note">
+                The counter is not total running time, comparison count, or a fair memory-write
+                benchmark across algorithms.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://algs4.cs.princeton.edu/22mergesort/">Mergesort</a>, Sedgewick and
+                  Wayne, Princeton Algorithms:
+                  <q
+                    >Bottom-up mergesort combines adjacent sorted runs of increasing size; merge
+                    ordering can be stable.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://xlinux.nist.gov/dads/HTML/bubblesort.html">Bubble sort</a>, NIST
+                  Dictionary of Algorithms and Data Structures:
+                  <q
+                    >Bubble sort compares neighboring items and exchanges items that are out of
+                    order.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              There are eight fixed bars in the picture. Comparison-only work is invisible. Merge
+              counts one insertion move even when that move rewrites several array slots, so its
+              counter is not comparable to a count of memory writes.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              Make the About counter description say swaps, or moves for merge sort, matching the
+              actual display. <span class="note">(fixed in #278)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

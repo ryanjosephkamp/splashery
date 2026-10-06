@@ -6,7 +6,7 @@
     <title>Galaxy in a box · Splashery</title>
     <meta
       name="description"
-      content="Galaxy in a box, a Splashery toy made of 3D Gaussian splats: Pinch or scroll to zoom into the gas."
+      content="Galaxy in a box, a Splashery toy made of 3D Gaussian splats: Pinch to zoom into the gas; tap to peel the hot gas."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/galaxy-box/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Galaxy in a box · Splashery" />
     <meta
       property="og:description"
-      content="Galaxy in a box, a Splashery toy made of 3D Gaussian splats: Pinch or scroll to zoom into the gas."
+      content="Galaxy in a box, a Splashery toy made of 3D Gaussian splats: Pinch to zoom into the gas; tap to peel the hot gas."
     />
     <meta
       property="og:url"
@@ -150,7 +150,8 @@
           <div class="toy-head">
             <h1>Galaxy in a box <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.
+              Pinch to zoom into the gas; tap to peel the hot gas. Through the telescope, tap for a
+              new exposure.
             </p>
             <dl class="does">
               <div>
@@ -212,18 +213,19 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            Galaxy simulations follow gas with particles that carry mass, temperature, density and a
-            smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of
-            roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated
-            present day, not a telescope image.
+            Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2
+            simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4
+            billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each
+            gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't
+            Gaussian), colored by temperature or density; tap to keep only the cold gas.
           </p>
           <p>
-            Each particle is shown with a Gaussian whose spread approximates the simulation's
-            smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue
-            and hot orange or red, or by Density to compare the gas concentration. Brightness also
-            increases with density. Switch The box to show or hide the frame. Pinch or scroll to
-            zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the
-            gas's shape but do not give a quantitative column-density measurement.
+            Through a telescope (simulated) shows what an observer might record if the galaxy were
+            160 million light-years away: its star particles, bluer and brighter when young, blurred
+            by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a
+            filter; each tap starts a new exposure whose grainy photon noise smooths out as light
+            builds up. The colors use a rough rule for how starlight fades with age, so it is a
+            picture to explore, not a measurement.
           </p>
         </section>
 
@@ -237,7 +239,7 @@
           </p>
           <ul class="toy-credits">
             <li>
-              <b>Galaxy</b>:
+              <b>A Milky Way–mass galaxy today</b>:
               <a href="https://flathub.flatironinstitute.org/fire"
                 >FIRE-2 cosmological zoom-in simulation m12i, snapshot 600 (z = 0), gas</a
               >
@@ -364,6 +366,42 @@ https://ryanjosephkamp.github.io/splashery/site/toys/galaxy-box/</textarea
           </div>
           <ul class="toy-grid">
             <li class="toy-card" data-labs>
+              <a href="../../toys/climate-records/"
+                ><img
+                  src="../../../assets/toys/climate-records/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Climate records <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/contour-lab/"
+                ><img
+                  src="../../../assets/toys/contour-lab/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Contour lab <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/cryoem-map/"
+                ><img
+                  src="../../../assets/toys/cryoem-map/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Cryo-EM map <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/smlm-microscope/"
                 ><img
                   src="../../../assets/toys/smlm-microscope/thumb.webp"
@@ -375,6 +413,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/galaxy-box/</textarea
                 /><span class="toy-name"
                   >Super-resolution microscope <span class="badge">labs</span></span
                 ></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/terrain-box/"
+                ><img
+                  src="../../../assets/toys/terrain-box/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Terrain in a box <span class="badge">labs</span></span></a
               >
             </li>
             <li class="toy-card" data-labs>

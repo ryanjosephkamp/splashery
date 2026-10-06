@@ -222,7 +222,97 @@
             changing wires illustrate training; this toy repeats a prepared example.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The activations come from a real sigmoid forward pass for every supported size. The
+            backward pulses and changing wire widths illustrate training, but they do not calculate
+            a loss gradient. <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Each neuron applies an
+                activation to a weighted sum.
+              </p>
+              <p>
+                Every layer is checked independently as sigmoid of the incoming weighted sum plus
+                its bias, including the default 3-4-2 network.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html"
+                    >Multilayer perceptrons</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >Hidden layers with nonlinear activations extend the functions a linear
+                    classifier can represent.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The size controls choose a
+                small multilayer network.
+              </p>
+              <p>
+                The 108 control combinations stay within the 14-neuron cap and use the same forward
+                calculation.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html"
+                    >Multilayer perceptrons</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >Hidden layers with nonlinear activations extend the functions a linear
+                    classifier can represent.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> Backward pulses and wire
+                changes are a prepared training illustration.
+              </p>
+              <p>
+                Wire changes use a repeating index-based pattern; no target, loss, chain rule, or
+                updated forward pass is used.
+              </p>
+              <p class="note">
+                The About text already identifies the prepared example. A real training view would
+                need a loss and gradients.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_multilayer-perceptrons/backprop.html"
+                    >Backpropagation</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >Backpropagation applies the chain rule to compute loss gradients for network
+                    parameters.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              Inputs and weights are deterministic examples. The apparent backward update uses fixed
+              wire changes rather than backpropagation; the total size is capped at 14 neurons.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              A future training view could compute a loss, backpropagate its derivatives, and show
+              the changed forward prediction. <span class="note">(proposed)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

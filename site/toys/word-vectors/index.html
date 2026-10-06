@@ -217,7 +217,147 @@
             relationships are approximate and can reflect biases in the training text.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The asset is a quantized subset of Stanford’s 50-dimensional GloVe vectors. The analogy
+            calculation really uses all 50 dimensions and finds queen for king − man + woman. The
+            nearest-word score approximates cosine similarity, and the 3D picture preserves the
+            arrows rather than all distances. <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> These are named, real
+                50-dimensional word vectors.
+              </p>
+              <p>
+                Rebuilding the asset from the first 40,000 rows of Stanford’s official GloVe 6B 50D
+                release gives identical bytes. Four original source vectors are also checked
+                directly.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://nlp.stanford.edu/projects/glove/"
+                    >GloVe: Global Vectors for Word Representation</a
+                  >, Stanford NLP; Pennington, Socher, and Manning:
+                  <q
+                    >The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and
+                    provides 50-dimensional word vectors. Vector relationships are approximate.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A − B + C is computed over all
+                50 dimensions.
+              </p>
+              <p>
+                Independent dot-product rankings match queen/throne, rome/milan, large/one, and
+                swimming/diving for four analogies. The input vocabulary has 24,000 entries and the
+                answer search uses 10,000.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://nlp.stanford.edu/projects/glove/"
+                    >GloVe: Global Vectors for Word Representation</a
+                  >, Stanford NLP; Pennington, Socher, and Manning:
+                  <q
+                    >The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and
+                    provides 50-dimensional word vectors. Vector relationships are approximate.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-close">Close</span> The nearest-word score approximates
+                cosine similarity.
+              </p>
+              <p>
+                Only the query is normalized after loading. Quantized candidate lengths range from
+                0.99153 to 1.00849, so their dot products can differ from cosine by less than 0.009.
+              </p>
+              <p class="note">
+                The same four examples keep their first two words under exact cosine, but this does
+                not prove identical rankings for every query.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://nlp.stanford.edu/projects/glove/"
+                    >GloVe: Global Vectors for Word Representation</a
+                  >, Stanford NLP; Pennington, Socher, and Manning:
+                  <q
+                    >The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and
+                    provides 50-dimensional word vectors. Vector relationships are approximate.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The 3D arrows preserve the
+                analogy parallelogram.
+              </p>
+              <p>
+                The linear projection gives sum = A − B + C in the displayed coordinates for all
+                four checked queries.
+              </p>
+              <p class="note">
+                Nonuniform axis scaling and discarded directions mean other distances are not
+                generally preserved.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://nlp.stanford.edu/projects/glove/"
+                    >GloVe: Global Vectors for Word Representation</a
+                  >, Stanford NLP; Pennington, Socher, and Manning:
+                  <q
+                    >The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and
+                    provides 50-dimensional word vectors. Vector relationships are approximate.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> Word relationships are
+                approximate rather than universal truths.
+              </p>
+              <p>
+                The retained vocabulary and training corpus determine the answers; queen is the
+                nearest example, not an exact equality or a rule for all words.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://nlp.stanford.edu/projects/glove/"
+                    >GloVe: Global Vectors for Word Representation</a
+                  >, Stanford NLP; Pennington, Socher, and Manning:
+                  <q
+                    >The released Wikipedia 2014 and Gigaword 5 corpus contains 6 billion tokens and
+                    provides 50-dimensional word vectors. Vector relationships are approximate.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The source is filtered to 24,000 lowercase words and quantized to signed bytes.
+              Answers search only the first 10,000 retained words and exclude the three inputs. The
+              3D projection rescales axes; it is not a map of every high-dimensional distance.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              Normalize each loaded candidate after byte decoding if a future view promises exact
+              cosine ranking. <span class="note">(proposed)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

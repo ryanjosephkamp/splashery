@@ -6,7 +6,7 @@
     <title>Video to 3D · Splashery</title>
     <meta
       name="description"
-      content="Video to 3D, a Splashery toy made of 3D Gaussian splats: Tap to fly the video's path; drag while it flies, tap again to pause."
+      content="Video to 3D, a Splashery toy made of 3D Gaussian splats: Tap to fly the video's path; drag to look around."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/video-3d/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Video to 3D · Splashery" />
     <meta
       property="og:description"
-      content="Video to 3D, a Splashery toy made of 3D Gaussian splats: Tap to fly the video's path; drag while it flies, tap again to pause."
+      content="Video to 3D, a Splashery toy made of 3D Gaussian splats: Tap to fly the video's path; drag to look around."
     />
     <meta
       property="og:url"
@@ -150,8 +150,8 @@
           <div class="toy-head">
             <h1>Video to 3D <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in
-              the Toy tab.
+              Tap to fly the video's path; drag to look around. Show the original plays the flat
+              video beside it.
             </p>
             <dl class="does">
               <div>
@@ -213,11 +213,11 @@
           <p>
             A video is a string of photos from a moving camera. If the scene stands still, each
             frame shows it from a slightly different place, and that is enough to rebuild it in 3D.
-            This toy picks the sharpest frames of your stretch, finds the same small details
-            (corners, specks, edges) in many of them and works out where the camera was for each
-            one. That is structure from motion. Then it trains 3D Gaussian splats: starting from
-            those points, it nudges each splat's place, size, shape and color until the scene, seen
-            from each camera, looks like that frame.
+            This toy picks the sharpest frames of your stretch, finds the same small details in many
+            of them and works out where the camera was for each one. That is structure from motion.
+            Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's
+            place, size, shape and color until the scene, seen from each camera, looks like that
+            frame.
           </p>
           <p>
             It all runs on your device's graphics card, and nothing is uploaded. Film by walking
@@ -226,6 +226,7 @@
             and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and
             cool.
           </p>
+          <p>Show the original plays the sample's flat video in step with Replay flight.</p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
@@ -385,6 +386,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/video-3d/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
+              <a href="../../toys/splat-toolkit/"
+                ><img
+                  src="../../../assets/toys/splat-toolkit/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Splat toolkit <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/model-splats/"
                 ><img
                   src="../../../assets/toys/model-splats/thumb.webp"
@@ -433,6 +446,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/video-3d/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
+              <a href="../../toys/sound-recorder/"
+                ><img
+                  src="../../../assets/toys/sound-recorder/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Sound recorder <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/chladni-plate/"
                 ><img
                   src="../../../assets/toys/chladni-plate/thumb.webp"
@@ -442,32 +467,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/video-3d/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Chladni plate <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/qr-anatomy/"
-                ><img
-                  src="../../../assets/toys/qr-anatomy/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name"
-                  >How a QR code works <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/qr-damage/"
-                ><img
-                  src="../../../assets/toys/qr-damage/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">QR damage lab <span class="badge">labs</span></span></a
               >
             </li>
           </ul>

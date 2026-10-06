@@ -202,9 +202,9 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            A perceptron is the simplest artificial neuron, invented by Frank Rosenblatt in 1958. It
-            takes a few inputs, multiplies each by a weight (how much that input counts), and adds
-            them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It
+            A perceptron is the simplest artificial neuron, described by Frank Rosenblatt in 1958.
+            It takes a few inputs, multiplies each by a weight (how much that input counts), and
+            adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It
             learns by nudging its weights each time it gets an answer wrong.
           </p>
           <p>
@@ -215,7 +215,96 @@
             learning example; it does not keep training on your taps.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The weighted sum and threshold example are consistent with a perceptron. The weight
+            change is a prepared learning example, and tapping does not train a new model.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A perceptron sums weighted
+                inputs and applies a threshold.
+              </p>
+              <p>Inputs 1, 0, 1 give sums 0.35 before and 1.35 after, with threshold 1.</p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf"
+                    >The perceptron (1958)</a
+                  >, Frank Rosenblatt, Psychological Review:
+                  <q
+                    >Rosenblatt published a probabilistic perceptron model and learning procedure in
+                    1958.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The weight change
+                illustrates a learning update.
+              </p>
+              <p>
+                Adding 0.5 times each active input gives the stored second weight set, but the
+                update is not calculated from a live training example.
+              </p>
+              <p class="note">
+                It demonstrates a rule-consistent update once, rather than learning on each tap.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf"
+                    >The perceptron (1958)</a
+                  >, Frank Rosenblatt, Psychological Review:
+                  <q
+                    >Rosenblatt published a probabilistic perceptron model and learning procedure in
+                    1958.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Rosenblatt described the
+                perceptron in 1958.
+              </p>
+              <p>
+                The About text now dates the published description, instead of asserting a precise
+                invention year.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf"
+                    >The perceptron (1958)</a
+                  >, Frank Rosenblatt, Psychological Review:
+                  <q
+                    >Rosenblatt published a probabilistic perceptron model and learning procedure in
+                    1958.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              Three fixed inputs and two stored weight sets repeat on each tap. There is no training
+              dataset, learned bias, or ongoing optimizer.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              Replace the unsupported invention-year wording with the date of Rosenblatt’s published
+              description. <span class="note">(fixed in #278)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

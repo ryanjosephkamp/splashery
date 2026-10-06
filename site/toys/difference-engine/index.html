@@ -219,7 +219,130 @@
             historical engine.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The addition-and-carry mechanism gives correct polynomial values modulo 100,000 for
+            supported cubic inputs. Its historical dates are supported. The input validator can
+            accept higher-degree expressions that match eight sampled points, after which the engine
+            gives the wrong value. <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Difference Engine No. 2 was
+                designed in the 1840s and its calculating section was reconstructed in 1991.
+              </p>
+              <p>
+                The About text matches the 1847–1849 design and the Science Museum’s 1991
+                calculating engine.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.computerhistory.org/babbage/engines/">The engines</a>,
+                  Computer History Museum:
+                  <q
+                    >Difference Engine No. 2 was designed in 1847 to 1849 and uses finite
+                    differences and addition. The full engine has 31-digit precision and supports
+                    seventh-order differences.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://www.computerhistory.org/babbage/modernsequel/">A Modern Sequel</a
+                  >, Computer History Museum:
+                  <q
+                    >The Science Museum reconstructed the calculating engine from the original
+                    drawings and completed it in 1991; the printer followed later.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Finite differences calculate
+                polynomial values using additions and carries.
+              </p>
+              <p>
+                The actual phases match 128 independently evaluated cubic polynomials over 32 turns
+                each, including wrap and every decimal carry.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.computerhistory.org/babbage/engines/">The engines</a>,
+                  Computer History Museum:
+                  <q
+                    >Difference Engine No. 2 was designed in 1847 to 1849 and uses finite
+                    differences and addition. The full engine has 31-digit precision and supports
+                    seventh-order differences.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> Five-digit values wrap at
+                100,000.
+              </p>
+              <p>
+                The implementation uses modulo 100,000; this deliberately differs from the full
+                historical engine’s capacity.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.computerhistory.org/babbage/engines/">The engines</a>,
+                  Computer History Museum:
+                  <q
+                    >Difference Engine No. 2 was designed in 1847 to 1849 and uses finite
+                    differences and addition. The full engine has 31-digit precision and supports
+                    seventh-order differences.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-wrong">Being fixed</span> The input reader reliably
+                restricts expressions to degree three.
+              </p>
+              <p>
+                It checks only eight consecutive values. x² + (x−1)(x−2)…(x−8) passes at x=1, but
+                the ninth value should be 40,401 while the machine produces 81.
+              </p>
+              <p class="note">
+                Sampling cannot prove an expression’s polynomial degree. Keep this counterexample
+                until the reader checks the expression itself.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.computerhistory.org/babbage/engines/">The engines</a>,
+                  Computer History Museum:
+                  <q
+                    >Difference Engine No. 2 was designed in 1847 to 1849 and uses finite
+                    differences and addition. The full engine has 31-digit precision and supports
+                    seventh-order differences.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              Five decimal digits and third-order differences replace the historical engine’s 31
+              digits and seventh-order differences. Negative values are displayed modulo 100,000.
+              Accepted inputs must not be assumed valid solely because their first eight values pass
+              the current check.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              Check polynomial degree from the parsed expression, allowing integer-valued
+              polynomials such as n(n+1)/2, and reject unsupported functions or high-degree terms.
+              <span class="note">(proposed)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

@@ -1084,7 +1084,7 @@
   },
   {
     "t": "The real Moon",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbW9vbiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "u": "toys/real-moon/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
@@ -1094,7 +1094,7 @@
   },
   {
     "t": "The real Mars",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbWFycyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "u": "toys/real-mars/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
@@ -1104,7 +1104,7 @@
   },
   {
     "t": "The real Earth",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZWFydGgifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/real-earth/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
@@ -1114,7 +1114,7 @@
   },
   {
     "t": "The real Mercury",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbWVyY3VyeSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "u": "toys/real-mercury/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
@@ -1124,7 +1124,7 @@
   },
   {
     "t": "The real Venus",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtdmVudXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/real-venus/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
@@ -1134,7 +1134,7 @@
   },
   {
     "t": "Real moons",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbW9vbnMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/real-moons/",
     "k": "toy",
     "s": "Space",
     "d": "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
@@ -1144,7 +1144,7 @@
   },
   {
     "t": "Pluto, Ceres and Vesta",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtc21hbGwtd29ybGRzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozfX0",
+    "u": "toys/real-small-worlds/",
     "k": "toy",
     "s": "Space",
     "d": "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
@@ -1154,7 +1154,7 @@
   },
   {
     "t": "Stars near the Sun",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lYXJieS1zdGFycyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "u": "toys/nearby-stars/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to fly to Alpha Centauri, Sirius, Barnard's Star, Vega or Arcturus and back.",
@@ -1164,7 +1164,7 @@
   },
   {
     "t": "Real star systems",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItc3lzdGVtcyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "u": "toys/star-systems/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",
@@ -1174,7 +1174,7 @@
   },
   {
     "t": "Real galaxies",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZ2FsYXhpZXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjoyLjZ9fQ",
+    "u": "toys/real-galaxies/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
@@ -1184,7 +1184,7 @@
   },
   {
     "t": "Saturn V",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhdHVybi12In0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjoyLjR9fQ",
+    "u": "toys/saturn-v/",
     "k": "toy",
     "s": "Space",
     "d": "Tap to fire its stages in the order of a real flight.",
@@ -1356,7 +1356,7 @@
   },
   {
     "t": "DNA to protein",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRuYS10by1wcm90ZWluIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA2LCJyb2xsIjowLCJkaXN0YW5jZSI6My4zfX0",
+    "u": "toys/dna-to-protein/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
@@ -1366,7 +1366,7 @@
   },
   {
     "t": "Cell division",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1pdG9zaXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/mitosis/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap the cell to watch it divide in two, phase by phase.",
@@ -1376,7 +1376,7 @@
   },
   {
     "t": "Apoptosis",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImFwb3B0b3NpcyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "u": "toys/apoptosis/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap the cell to watch it take itself apart, step by step.",
@@ -1386,7 +1386,7 @@
   },
   {
     "t": "Phagocytosis",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBoYWdvY3l0b3NpcyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "u": "toys/phagocytosis/",
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap to watch the neutrophil catch and digest the bacterium.",
@@ -1441,7 +1441,7 @@
   },
   {
     "t": "Molecule viewer",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "u": "toys/molecule-viewer/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap two atoms for their distance, a third for the angle.",
@@ -1460,7 +1460,7 @@
   },
   {
     "t": "Real elements",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZWxlbWVudHMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMDYsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
+    "u": "toys/real-elements/",
     "k": "toy",
     "s": "Atoms",
     "d": "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
@@ -3552,7 +3552,7 @@
   },
   {
     "t": "Sound lab",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvdW5kLWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/sound-lab/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to play or stop a tone. The Toy tab changes it, starts the metronome, or uses your microphone.",
@@ -3562,7 +3562,7 @@
   },
   {
     "t": "Sound recorder",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvdW5kLXJlY29yZGVyIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA2LCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "u": "toys/sound-recorder/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap Record in the Toy tab, make your sound, then Stop. Tap the toy to play it; trim and save it there.",
@@ -3572,7 +3572,7 @@
   },
   {
     "t": "Splat toolkit",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LXRvb2xraXQifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "u": "toys/splat-toolkit/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to spin it round. Open your own splat file in the Toy tab to crop, clean, shrink or convert it.",
@@ -3582,7 +3582,7 @@
   },
   {
     "t": "Point clouds",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0",
+    "u": "toys/point-clouds/",
     "k": "toy",
     "s": "Studio",
     "d": "Tap to sweep a lidar scan line across it. Turn on Measure in the Toy tab, then tap two points.",
@@ -3602,7 +3602,7 @@
   },
   {
     "t": "Light lab",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxpZ2h0LWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC41LCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0",
+    "u": "toys/light-lab/",
     "k": "toy",
     "s": "Lab",
     "d": "Tap for the next element or lamp. The Toy tab picks a prism, a grating or your camera as a spectrometer.",
@@ -3642,7 +3642,7 @@
   },
   {
     "t": "Cryo-EM map",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNyeW9lbS1tYXAifSwiY2FtZXJhIjp7InlhdyI6MC40LCJwaXRjaCI6MC4zNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "u": "toys/cryoem-map/",
     "k": "toy",
     "s": "Science",
     "d": "Tap to cut it open; tap again to close it. Pick a map, a level and the fitted model in the Toy tab.",
@@ -3652,7 +3652,7 @@
   },
   {
     "t": "Contour lab",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbnRvdXItbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuNTUsInJvbGwiOjAsImRpc3RhbmNlIjozfX0",
+    "u": "toys/contour-lab/",
     "k": "toy",
     "s": "Science",
     "d": "Tap to pull the layers apart; tap again to stack them. Pick a place in the Toy tab.",
@@ -3662,7 +3662,7 @@
   },
   {
     "t": "Terrain in a box",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRlcnJhaW4tYm94In0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuNSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "u": "toys/terrain-box/",
     "k": "toy",
     "s": "Science",
     "d": "Tap to fill the land with water; tap again to drain it. Pick a place in the Toy tab.",
@@ -3682,7 +3682,7 @@
   },
   {
     "t": "Grand Canyon",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYW5kLWNhbnlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My43fX0",
+    "u": "toys/grand-canyon/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to flood the canyon from the river up, and watch it drain. Height in the Toy tab sets how tall it stands.",
@@ -3692,7 +3692,7 @@
   },
   {
     "t": "Mount St. Helens",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0LWhlbGVucyJ9LCJjYW1lcmEiOnsieWF3IjoyLjg1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319",
+    "u": "toys/st-helens/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to play May 18, 1980; tap again to go back to 1979.",
@@ -3702,7 +3702,7 @@
   },
   {
     "t": "The sea floor",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYS1mbG9vciJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0",
+    "u": "toys/sea-floor/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to drain the ocean and fill it back.",
@@ -3712,7 +3712,7 @@
   },
   {
     "t": "Tides at Bar Harbor",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRpZGUtaGFyYm9yIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn19",
+    "u": "toys/tide-harbor/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to play a day of tides: watch the bar to Bar Island dry out and flood.",
@@ -3722,7 +3722,7 @@
   },
   {
     "t": "Hurricane",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh1cnJpY2FuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "u": "toys/hurricane/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to play the day Polo grew from 70 to 155 knots; tap again to go back to the start.",
@@ -3732,7 +3732,7 @@
   },
   {
     "t": "Relief map",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlbGllZi1tYXAifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuNywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319",
+    "u": "toys/relief-map/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to send a contour line up the cliffs and water down the streams. Change the map and layers in the Toy tab.",
@@ -3742,7 +3742,7 @@
   },
   {
     "t": "Living city",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxpdmluZy1jaXR5In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0",
+    "u": "toys/living-city/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap for night (the windows light up one by one); tap again for day.",
@@ -3752,7 +3752,7 @@
   },
   {
     "t": "Stork migration",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b3JrLW1pZ3JhdGlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjEsInBpdGNoIjowLjg1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0",
+    "u": "toys/stork-migration/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to play the storks' fall migration from Germany to Africa.",
@@ -3762,7 +3762,7 @@
   },
   {
     "t": "Earthquakes",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRocXVha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0",
+    "u": "toys/earthquakes/",
     "k": "toy",
     "s": "Earth and maps",
     "d": "Tap to play the quakes in time order. Tap the plaque to refresh the live feed.",
@@ -3842,7 +3842,7 @@
   },
   {
     "t": "Night sky",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5pZ2h0LXNreSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19",
+    "u": "toys/night-sky/",
     "k": "toy",
     "s": "Space",
     "d": "Drag to look around the sky. Tap a star or a planet to name it.",
@@ -3852,7 +3852,7 @@
   },
   {
     "t": "Data in 3D",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjIuOX19",
+    "u": "toys/data-in-3d/",
     "k": "toy",
     "s": "Studio",
     "d": "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
@@ -3862,7 +3862,7 @@
   },
   {
     "t": "Climate records",
-    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsaW1hdGUtcmVjb3JkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319",
+    "u": "toys/climate-records/",
     "k": "toy",
     "s": "Science",
     "d": "Pick a record in the Toy tab and turn it; tap to play the record again.",

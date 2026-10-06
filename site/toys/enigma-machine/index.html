@@ -211,10 +211,10 @@
           <h2 id="h-about">About this toy</h2>
           <p>
             The Enigma was a cipher machine that German forces used to keep radio messages secret in
-            World War II. Each key press steps the rotors on like an odometer, and an electric
-            current runs through the plugboard, three wired rotors and a reflector, lighting a
-            different letter on the lampboard. Because the rotors keep turning, the same letter
-            comes out differently each time. Polish mathematicians first broke it in 1932.
+            World War II. Each key press steps the rotors, including an occasional double step, and
+            an electric current runs through the plugboard, three wired rotors and a reflector,
+            lighting a different letter on the lampboard. Because the rotors keep turning, the same
+            letter comes out differently each time. Polish mathematicians first broke it in 1932.
           </p>
           <p>
             Tap a key, or type: the key goes down, the rotors step (with the middle rotor's real
@@ -226,7 +226,203 @@
             and R. Its rotors and reflector have the historical wirings.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The I–II–III wirings, reflector B, plugboard transformation, and double step agree with
+            published references. Independent encryption matches all six supported rotor orders and
+            nonzero rings in the calculation helper. The interactive toy exposes only one fixed
+            configuration and cannot yet decode the published historical example.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Rotors I, II, III and reflector
+                B use the historical wiring.
+              </p>
+              <p>
+                The stored permutations and notch letters Q, E, V match the museum table; the
+                independent reference uses separately written string permutations.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/enigma/wiring.htm">Enigma wiring</a>,
+                  Crypto Museum:
+                  <q
+                    >The published tables specify rotors I through V, their notches, and reflector
+                    B.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Stepping occurs before
+                encryption and includes the middle rotor’s double step.
+              </p>
+              <p>
+                Published double-step sequences and 384 independent 100-letter messages match every
+                intermediate rotor position and output.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/enigma/working.htm"
+                    >How Enigma works</a
+                  >, Crypto Museum:
+                  <q
+                    >The pawl mechanism steps before encryption and causes the middle rotor to step
+                    on consecutive presses. The plugboard and reflector give reciprocal
+                    encryption.</q
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/gremmie/enigma/blob/master/enigma/tests/test_enigma.py"
+                    >Enigma test examples</a
+                  >, Py-Enigma maintainer Brian Neal:
+                  <q
+                    >The tests publish cipher and stepping examples and a wartime message using
+                    II-IV-V, rings B-U-L, ten plug pairs, and indicator WXC/KCH.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The plugboard and reflector
+                make encryption reciprocal.
+              </p>
+              <p>
+                No-plug and two nontrivial plugboards are checked across all rotor orders and
+                nonzero rings; resetting and enciphering ciphertext recovers the input, and no
+                letter encrypts to itself.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/enigma/working.htm"
+                    >How Enigma works</a
+                  >, Crypto Museum:
+                  <q
+                    >The pawl mechanism steps before encryption and causes the middle rotor to step
+                    on consecutive presses. The plugboard and reflector give reciprocal
+                    encryption.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Polish mathematicians broke
+                military Enigma in 1932.
+              </p>
+              <p>
+                The About date agrees with Rejewski’s recovery of the wiring and subsequent Polish
+                cryptanalysis.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/enigma/hist.htm">Enigma history</a>,
+                  Crypto Museum:
+                  <q
+                    >Rejewski recovered the military Enigma wiring in 1932, with Polish
+                    cryptanalytic work by Różycki and Zygalski.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The interface represents
+                only a fixed Enigma configuration.
+              </p>
+              <p>
+                It resets to AAA with default rotors and plug pairs. Historical rotor selection,
+                rings, plugs, and starting windows are not selectable.
+              </p>
+              <p class="note">
+                A helper’s optional settings are not features the reader can choose in the toy.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/enigma/wiring.htm">Enigma wiring</a>,
+                  Crypto Museum:
+                  <q
+                    >The published tables specify rotors I through V, their notches, and reflector
+                    B.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/enigma/working.htm"
+                    >How Enigma works</a
+                  >, Crypto Museum:
+                  <q
+                    >The pawl mechanism steps before encryption and causes the middle rotor to step
+                    on consecutive presses. The plugboard and reflector give reciprocal
+                    encryption.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> A historical message
+                would require additional settings.
+              </p>
+              <p>
+                An independent extended reference decodes KCH at WXC to BLA, then the published
+                wartime message using II-IV-V, rings B-U-L, and ten plug pairs. IV/V exist only in
+                the test reference.
+              </p>
+              <p class="note">
+                The current toy cannot run that configuration or fit its full message on the short
+                pad.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://github.com/gremmie/enigma/blob/master/enigma/tests/test_enigma.py"
+                    >Enigma test examples</a
+                  >, Py-Enigma maintainer Brian Neal:
+                  <q
+                    >The tests publish cipher and stepping examples and a wartime message using
+                    II-IV-V, rings B-U-L, ten plug pairs, and indicator WXC/KCH.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://py-enigma.readthedocs.io/en/latest/guide.html"
+                    >Py-Enigma user guide</a
+                  >, Py-Enigma maintainer Brian Neal:
+                  <q
+                    >The example decodes indicator KCH at WXC to message key BLA, then resets the
+                    rotors to decode the body.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The interface fixes order I–II–III, rings A–A–A, starting windows A–A–A, and plug
+              pairs A–R, G–K, O–X. The helper supports the six I/II/III orders and rings, but those
+              controls are not exposed. Rotors IV and V are absent. Backspace, reversing a key
+              press, and the short pad are conveniences rather than historical machine features.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              Replace the odometer analogy with wording that names the occasional double step.
+              <span class="note">(fixed in #278)</span>
+            </li>
+            <li>
+              Expose rotor order, rotors IV/V, rings, plug pairs, start windows, and a longer
+              message area; then use the published WXC/KCH message procedure and full ciphertext as
+              an acceptance example. <span class="note">(proposed)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

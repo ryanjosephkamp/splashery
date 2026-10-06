@@ -217,7 +217,91 @@
             3D model in the Toy tab.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The About text describes the broad idea of learning to reverse a noise process. The toy
+            morphs a fixed noise cloud into a known duck in ten stages; its 50-to-0 counter is a
+            visual scale, not 50 calculated denoising steps.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Diffusion generation uses a
+                learned reverse noise process.
+              </p>
+              <p>
+                The About text gives an introductory description of adding noise for training and
+                reversing it to generate a picture.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://arxiv.org/abs/2006.11239"
+                    >Denoising Diffusion Probabilistic Models</a
+                  >, Ho, Jain, and Abbeel, 2020:
+                  <q
+                    >A learned reverse process generates data from noise after training on a forward
+                    noise process.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The toy has ten visual
+                stages while the counter goes from 50 to 0.
+              </p>
+              <p>
+                The stage helper selects ten morph values and the actual display reports 50 minus
+                five times the stage.
+              </p>
+              <p class="note">
+                The number on the counter is illustrative and does not count learned network
+                evaluations.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://arxiv.org/abs/2006.11239"
+                    >Denoising Diffusion Probabilistic Models</a
+                  >, Ho, Jain, and Abbeel, 2020:
+                  <q
+                    >A learned reverse process generates data from noise after training on a forward
+                    noise process.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The clearing duck is a
+                prepared illustration of generation.
+              </p>
+              <p>
+                The morph blends fixed particle positions toward a known duck. No model predicts the
+                noise to remove.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://arxiv.org/abs/2006.11239"
+                    >Denoising Diffusion Probabilistic Models</a
+                  >, Ho, Jain, and Abbeel, 2020:
+                  <q
+                    >A learned reverse process generates data from noise after training on a forward
+                    noise process.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The duck is supplied in advance and there is no denoising network, training objective,
+              or sampled reverse process. Ten visual stages decrease the counter by five each time.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

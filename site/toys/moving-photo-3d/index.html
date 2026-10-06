@@ -213,18 +213,18 @@
           <h2 id="h-about">About this toy</h2>
           <p>
             A video is a string of photos, and a computer can guess how far away each part of a
-            photo is. This toy does that for every frame: a depth model, a small neural network
-            (Depth Anything V2 Small), looks at each frame and gives every spot a distance, and the
-            frames play back as splats that move toward you by as much as they are near. The bunny
-            comes forward, the meadow and the sky stay back, and as the clip plays the relief moves
-            with it. Turn the picture to see it from the side.
+            photo is. This toy does that for every frame: a depth model (Depth Anything V2 Small)
+            gives every spot a distance, and the frames play back as splats that move toward you by
+            as much as they are near. The bunny comes forward, the meadow stays back, and the relief
+            moves with the clip. Turn the picture to see it from the side.
           </p>
           <p>
-            Open a GIF or a short video in the Toy tab: its first eight seconds are read on your
-            device at the video's own speed (up to 24 frames a second, fewer on a phone), the model
-            (about 27 MB) loads the first time, and each frame takes a moment. Nothing is uploaded.
-            Depth sets how deep the relief is. The sample is a scene from Big Buck Bunny (Blender
-            Foundation, CC BY 3.0).
+            Pick a sample clip in the Toy tab (the bunny, Muybridge's horse, a dragon, a bridge and
+            robot, or a machine; Blender Foundation, CC BY, and the horse is public domain), or open
+            your own GIF or video. Its first eight seconds are read on your device at its own speed,
+            the model (about 27 MB) loads the first time, and nothing is uploaded. Depth sets the
+            relief, and Speed plays the clip slower or faster, sound included. Show the original
+            puts the flat clip in a corner, frame for frame.
           </p>
         </section>
 
@@ -238,12 +238,41 @@
           </p>
           <ul class="toy-credits">
             <li>
-              <b>Moving photo to 3D</b>:
+              <b>Big Buck Bunny</b>:
               <a href="https://peach.blender.org/"
                 >Big Buck Bunny (a six-second scene, the sample clip)</a
               >
               by Blender Foundation,
               <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Galloping horse (1887)</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Muybridge_race_horse_animated.gif"
+                >Race horse galloping (Muybridge, 1887, a GIF)</a
+              >
+              by Eadweard Muybridge,
+              <a
+                href="https://commons.wikimedia.org/wiki/Commons:Licensing#Material_in_the_public_domain"
+                >Public domain</a
+              >.
+            </li>
+            <li>
+              <b>Sintel and the dragon</b>:
+              <a href="https://durian.blender.org/">Sintel (trailer, six seconds from 0:29.5)</a> by
+              Blender Foundation,
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>The bridge and the robot</b>:
+              <a href="https://mango.blender.org/">Tears of Steel (six seconds from 8:30.5)</a> by
+              Blender Foundation,
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Inside the machine</b>:
+              <a href="https://orange.blender.org/">Elephants Dream (six seconds from 5:29.7)</a> by
+              Blender Foundation,
+              <a href="https://creativecommons.org/licenses/by/2.5/">CC BY 2.5</a>.
             </li>
           </ul>
           <p class="note">
@@ -411,6 +440,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/moving-photo-3d/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
+              <a href="../../toys/splat-toolkit/"
+                ><img
+                  src="../../../assets/toys/splat-toolkit/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Splat toolkit <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/qr-code/"
                 ><img
                   src="../../../assets/toys/qr-code/thumb.webp"
@@ -435,29 +476,15 @@ https://ryanjosephkamp.github.io/splashery/site/toys/moving-photo-3d/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
-              <a href="../../toys/qr-anatomy/"
+              <a href="../../toys/data-in-3d/"
                 ><img
-                  src="../../../assets/toys/qr-anatomy/thumb.webp"
+                  src="../../../assets/toys/data-in-3d/thumb.webp"
                   alt=""
                   width="96"
                   height="96"
                   loading="lazy"
                   decoding="async"
-                /><span class="toy-name"
-                  >How a QR code works <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/qr-damage/"
-                ><img
-                  src="../../../assets/toys/qr-damage/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">QR damage lab <span class="badge">labs</span></span></a
+                /><span class="toy-name">Data in 3D <span class="badge">labs</span></span></a
               >
             </li>
           </ul>

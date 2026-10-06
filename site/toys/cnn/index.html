@@ -210,7 +210,152 @@
             starts with the sample 7.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The drawing pad runs a real small convolutional network with stored trained weights. Its
+            test-set result reproduces the displayed 97.0%. The separate 7 diagram uses real
+            filtering and pooling but prepared final digit scores.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The drawing pad runs
+                convolution, ReLU, pooling, dense scoring, and softmax.
+              </p>
+              <p>
+                An independent tensor implementation matches every layer on ten samples and 64
+                random drawings to absolute error below 1e-10.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html"
+                    >Convolutions for images</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >The usual neural-network convolution operation slides a learned kernel using
+                    cross-correlation.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://d2l.ai/chapter_convolutional-neural-networks/pooling.html"
+                    >Pooling</a
+                  >, Dive into Deep Learning authors:
+                  <q>Max pooling keeps the maximum value within each local window.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The network reads 8-by-8 images
+                from a named digit dataset.
+              </p>
+              <p>
+                The asset identifies UCI Optical Recognition of Handwritten Digits; pixel values are
+                scaled from 0–16. All ten stored samples classify correctly.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"
+                    >Optical Recognition of Handwritten Digits</a
+                  >, UCI Machine Learning Repository; Alpaydin and Kaynak:
+                  <q
+                    >The data contains 8-by-8 digit images with pixel values from 0 to 16 and a
+                    separate test file.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-close">Close</span> The displayed test accuracy is
+                97.0%.
+              </p>
+              <p>
+                The exported network correctly classifies 1,743 of 1,797 original UCI test rows:
+                96.99499%, which rounds to 97.0%.
+              </p>
+              <p class="note">
+                The tolerance is display rounding to one decimal percent. It is dataset accuracy,
+                not a promise for arbitrary handwriting.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"
+                    >Optical Recognition of Handwritten Digits</a
+                  >, UCI Machine Learning Repository; Alpaydin and Kaynak:
+                  <q
+                    >The data contains 8-by-8 digit images with pixel values from 0 to 16 and a
+                    separate test file.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The introductory filter and
+                pooling calculate feature values.
+              </p>
+              <p>
+                The 3-by-3 cross-correlation and ReLU produce a 5-by-5 map. Max pooling includes
+                smaller windows at the edges.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html"
+                    >Convolutions for images</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >The usual neural-network convolution operation slides a learned kernel using
+                    cross-correlation.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://d2l.ai/chapter_convolutional-neural-networks/pooling.html"
+                    >Pooling</a
+                  >, Dive into Deep Learning authors:
+                  <q>Max pooling keeps the maximum value within each local window.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The introductory digit
+                scores are an illustration.
+              </p>
+              <p>
+                The score array is stored separately from the filter and pooled values; its winning
+                7 is not inferred from that map.
+              </p>
+              <p class="note">
+                Keep the prepared-score disclosure beside the diagram; the drawing view is actual
+                inference.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html"
+                    >Convolutions for images</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >The usual neural-network convolution operation slides a learned kernel using
+                    cross-correlation.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The introductory diagram uses one fixed filter on a 7-by-7 sample, a normalized
+              feature map, partial edge pooling windows, and stored digit scores. The drawing
+              network reads 8-by-8 grayscale pixels and does not retrain while drawing.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

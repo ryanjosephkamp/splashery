@@ -216,7 +216,83 @@
             Toy tab.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The hidden units produce the XOR truth table correctly. The toy demonstrates a fixed
+            nonlinear circuit; it does not learn XOR from examples.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A single linear decision
+                boundary cannot represent XOR; hidden nonlinear units can.
+              </p>
+              <p>
+                The fixed hidden units compute OR and NAND; their final threshold computes XOR for
+                all four input pairs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html"
+                    >Multilayer perceptrons</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >Hidden layers with nonlinear activations extend the functions a linear
+                    classifier can represent.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The XOR output is one when
+                exactly one input is one.
+              </p>
+              <p>The actual XOR helper returns 0, 1, 1, 0 for 00, 01, 10, 11.</p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/"
+                    >Half adder</a
+                  >, All About Circuits textbook:
+                  <q
+                    >A half adder produces XOR for the sum and AND for the carry. Two half adders
+                    and an OR gate form a full adder.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The picture illustrates a
+                multilayer network, not a trained model.
+              </p>
+              <p>
+                The weights and thresholds are stored constants; tapping cycles the four input
+                cases.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html"
+                    >Multilayer perceptrons</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >Hidden layers with nonlinear activations extend the functions a linear
+                    classifier can represent.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The XOR network uses fixed threshold units. Its truth table is real, but there is no
+              loss calculation or training step.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

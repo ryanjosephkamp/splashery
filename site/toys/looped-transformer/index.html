@@ -216,7 +216,88 @@
             + 4 = 7” settles with the 7 in gold. Pick the poster or a 3D model in the Toy tab.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            Repeating one block is a valid idea in recurrent transformer designs. Here three laps
+            reveal stored pictures of 3 + 4 = 7; no transformer block or arithmetic inference runs.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> Transformer computation
+                can repeat across depth.
+              </p>
+              <p>The single block and returning track illustrate a recurrent-depth architecture.</p>
+              <p class="note">
+                This is the general idea; it does not reproduce every mechanism of a Universal
+                Transformer.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://arxiv.org/abs/1807.03819">Universal Transformers</a>, Dehghani
+                  and coauthors, 2018:
+                  <q
+                    >Transformer computation can recur across depth, with an optional mechanism that
+                    adapts the number of updates.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The toy ends with the correct
+                arithmetic statement 3 + 4 = 7.
+              </p>
+              <p>
+                The five stored marks are 3, +, 4, =, 7; the last tile images contain only finished
+                bitmap values.
+              </p>
+              <p class="note">
+                The answer is supplied to the picture, not discovered by a network.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html"
+                    >Multilayer perceptrons</a
+                  >, Dive into Deep Learning authors:
+                  <q
+                    >Hidden layers with nonlinear activations extend the functions a linear
+                    classifier can represent.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The three laps illustrate
+                refinement rather than learned reasoning.
+              </p>
+              <p>
+                Each lap chooses another stored bitmap level, with no attention, recurrent tensor
+                update, or learned stopping rule.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://arxiv.org/abs/1807.03819">Universal Transformers</a>, Dehghani
+                  and coauthors, 2018:
+                  <q
+                    >Transformer computation can recur across depth, with an optional mechanism that
+                    adapts the number of updates.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The noise, coarse, nearly finished, and exact tile images are prepared stages. The lap
+              count is fixed at three and is not chosen by difficulty.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

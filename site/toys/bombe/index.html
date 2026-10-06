@@ -213,7 +213,129 @@
             slower than the real ones.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The toy really searches rotor starts using its Enigma calculation and stops at the first
+            matching crib. It assumes the plugboard is known and supplies the message itself. It
+            illustrates a search, rather than reproducing the historical Bombe’s menu and
+            diagonal-board logic. <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Turing’s 1939 design and
+                Welchman’s diagonal board contributed to the British Bombe.
+              </p>
+              <p>
+                The About attribution and approximate count of 200 machines are supported; the
+                museum gives 202 established machines and predominantly Wrens as operators.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.tnmoc.org/bh-1-bombe-historical-background"
+                    >Bombe historical background</a
+                  >, The National Museum of Computing; John Jackson:
+                  <q
+                    >Turing proposed the design in 1939, Welchman added the diagonal board, and 202
+                    machines were established with large numbers of Wrens as operators.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The toy tests rotor starting
+                positions against a crib.
+              </p>
+              <p>
+                An independent implementation agrees with the first matching setting and decrypted
+                output for four messages, including a one-letter ambiguous crib.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/enigma/working.htm"
+                    >How Enigma works</a
+                  >, Crypto Museum:
+                  <q
+                    >The pawl mechanism steps before encryption and causes the middle rotor to step
+                    on consecutive presses. The plugboard and reflector give reciprocal
+                    encryption.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/bombe/">British Bombe</a>, Crypto
+                  Museum:
+                  <q
+                    >The Bombe tests logical relations derived from a crib and a menu, including
+                    constraints on an unknown plugboard.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The toy simplifies the
+                historical search.
+              </p>
+              <p>
+                It knows the plugs and derives a crib of up to 12 letters from the supplied
+                plaintext. It has no menu loops or diagonal-board deductions for unknown plugs.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/bombe/">British Bombe</a>, Crypto
+                  Museum:
+                  <q
+                    >The Bombe tests logical relations derived from a crib and a menu, including
+                    constraints on an unknown plugboard.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> A crib match is not proof
+                of a unique original key.
+              </p>
+              <p>
+                The enumeration stops at the first matching start. Short cribs can match several
+                settings, even when the shown plaintext is recovered.
+              </p>
+              <p class="note">
+                A future result should show ambiguity and distinguish a candidate stop from an
+                independently verified key.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.cryptomuseum.com/crypto/bombe/">British Bombe</a>, Crypto
+                  Museum:
+                  <q
+                    >The Bombe tests logical relations derived from a crib and a menu, including
+                    constraints on an unknown plugboard.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The plaintext is used to generate a ciphertext and its crib. Only fixed I–II–III,
+              rings AAA, and known plugs AR GK OX are searched. It enumerates 17,576 starts and
+              accepts the first crib match, which need not identify a unique key. Drum movement is a
+              slowed animation rather than the search’s mechanical timing.
+            </li>
+          </ul>
+          <h3>What is being fixed</h3>
+          <ul>
+            <li>
+              Show candidate ambiguity and a crib chosen without revealing the plaintext; a
+              historical-machine view would need menu constraints and unknown-plugboard logic.
+              <span class="note">(proposed)</span>
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

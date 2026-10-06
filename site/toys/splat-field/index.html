@@ -229,7 +229,118 @@
             adds its own: tap the sea in a few places and the rings cross.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The ocean and knot follow actual analytic coordinate formulas. The galaxy is prescribed
+            orbital art and the taps add visual pulses. These fields demonstrate many parallel splat
+            calculations, rather than validated galaxy or ocean dynamics.
+            <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The ocean adds four wave
+                displacements.
+              </p>
+              <p>
+                An independent four-wave formula matches 100 sampled positions to 12 decimal places,
+                including the slowed time and horizontal scale.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models"
+                    >Effective Water Simulation from Physical Models</a
+                  >, Mark Finch, GPU Gems, NVIDIA:
+                  <q
+                    >Summed waves and Gerstner-style displacements provide practical water geometry
+                    for graphics.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The knot is a periodic flow
+                around a knotted tube.
+              </p>
+              <p>
+                Its centerline winds twice around one direction and three times around the other.
+                Sampled positions repeat after 1/0.03 time units.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://mathworld.wolfram.com/TorusKnot.html">Torus Knot</a>, Eric
+                  Weisstein, Wolfram MathWorld:
+                  <q
+                    >A torus knot winds around a torus in two relatively prime counts; the (2,3)
+                    knot is a trefoil.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The galaxy is an
+                illustrative field rather than an astronomical simulation.
+              </p>
+              <p>
+                Its coordinates use prescribed ellipses, rotation, and a small bulge. No masses or
+                gravitational forces are integrated.
+              </p>
+              <p class="note">
+                The source supports the oval geometry, not a claim that this galaxy obeys
+                gravitational dynamics.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://mathworld.wolfram.com/Ellipse.html">Ellipse</a>, Eric Weisstein,
+                  Wolfram MathWorld:
+                  <q
+                    >An ellipse can be parameterized as x = a cos(t), y = b sin(t), with different
+                    scalings on its two axes.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> GPU programs calculate
+                field coordinates from u, v, and time.
+              </p>
+              <p>
+                The pack supplies both shader languages and per-splat parameters; the CPU coordinate
+                functions are checked independently.
+              </p>
+              <p class="note">
+                This validates the analytic formulas, not every shader output on every GPU or a
+                universal performance claim.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models"
+                    >Effective Water Simulation from Physical Models</a
+                  >, Mark Finch, GPU Gems, NVIDIA:
+                  <q
+                    >Summed waves and Gerstner-style displacements provide practical water geometry
+                    for graphics.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The galaxy follows prescribed rotated ellipses and a small bulge, without gravity or
+              interactions. Four wave formulas animate the ocean with slowed time and adjusted
+              horizontal displacement. Tap ripples are added visual pulses. Smooth performance and
+              particle count depend on the device and settings.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>
@@ -376,6 +487,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/splat-field/</textarea
                 /><span class="toy-name">Fluid lab <span class="badge">labs</span></span></a
               >
             </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/light-lab/"
+                ><img
+                  src="../../../assets/toys/light-lab/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Light lab <span class="badge">labs</span></span></a
+              >
+            </li>
             <li class="toy-card">
               <a href="../../toys/nautilus/"
                 ><img
@@ -386,6 +509,20 @@ https://ryanjosephkamp.github.io/splashery/site/toys/splat-field/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Nautilus</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/tide-harbor/"
+                ><img
+                  src="../../../assets/toys/tide-harbor/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >Tides at Bar Harbor <span class="badge">labs</span></span
+                ></a
               >
             </li>
             <li class="toy-card">
@@ -434,30 +571,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/splat-field/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Jellyfish</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/kelp/"
-                ><img
-                  src="../../../assets/toys/kelp/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Kelp</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/octopus/"
-                ><img
-                  src="../../../assets/toys/octopus/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Octopus</span></a
               >
             </li>
           </ul>

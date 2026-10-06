@@ -212,7 +212,107 @@
             numbers.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The gate explanation and fixed 1 + 1 example are correct. The animation lights the carry
+            and leaves the sum dark, giving binary 10. It does not let the reader choose all four
+            input pairs. <span class="note">Checked October 4, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> XOR produces the sum and AND
+                produces the carry.
+              </p>
+              <p>
+                The About truth table gives 00, 01, 01, 10 for 0+0, 0+1, 1+0, 1+1; the actual fixed
+                animation ends at carry 1 and sum 0.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/"
+                    >Half adder</a
+                  >, All About Circuits textbook:
+                  <q
+                    >A half adder produces XOR for the sum and AND for the carry. Two half adders
+                    and an OR gate form a full adder.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The animated answer for 1 + 1
+                is binary 10.
+              </p>
+              <p>
+                Both input lamps become one, only the carry output lights, and the sequence then
+                resets. This also runs in the browser.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/"
+                    >Half adder</a
+                  >, All About Circuits textbook:
+                  <q
+                    >A half adder produces XOR for the sum and AND for the carry. Two half adders
+                    and an OR gate form a full adder.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A half adder has no incoming
+                carry; a full adder can combine two half adders and an OR gate.
+              </p>
+              <p>
+                The About text distinguishes the two circuits; no full adder is presented as part of
+                this toy.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/"
+                    >Half adder</a
+                  >, All About Circuits textbook:
+                  <q
+                    >A half adder produces XOR for the sum and AND for the carry. Two half adders
+                    and an OR gate form a full adder.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The circuit picture
+                repeats a fixed worked example.
+              </p>
+              <p>
+                The driver selects display stages; there is no input-dependent Boolean evaluator for
+                all four cases.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/"
+                    >Half adder</a
+                  >, All About Circuits textbook:
+                  <q
+                    >A half adder produces XOR for the sum and AND for the carry. Two half adders
+                    and an OR gate form a full adder.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              Only the fixed 1 + 1 sequence is animated. The other truth-table rows are explained in
+              the About text, not computed by interactive inputs.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>
