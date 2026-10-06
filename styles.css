@@ -1282,7 +1282,8 @@ input[type="range"] {
 
 select,
 textarea,
-input[type="number"] {
+input[type="number"],
+input.option-text {
   width: 100%;
   min-width: 0;
   padding: 4px 8px;

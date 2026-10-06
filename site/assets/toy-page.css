@@ -1,0 +1,225 @@
+/* A page for every toy (lane Toy pages): site/toys/<id>/. Uses site.css's
+   tokens; loaded only by the toy pages. */
+
+html.labs [data-labs-off] {
+  display: none;
+}
+.labs-off {
+  padding: 40px 0;
+}
+.labs-off h1 {
+  font: 800 clamp(2.2rem, 7vw, 3.2rem) / 1.05 var(--font-display);
+  letter-spacing: -0.035em;
+  margin: 0 0 12px;
+}
+
+.crumbs {
+  padding: 18px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.crumbs a {
+  color: var(--muted);
+}
+
+.toy-hero {
+  display: grid;
+  gap: 20px;
+  padding: 12px 0 8px;
+}
+.toy-head h1 {
+  font: 800 clamp(2.2rem, 7vw, 3.4rem) / 1.05 var(--font-display);
+  letter-spacing: -0.035em;
+  margin: 0 0 12px;
+}
+.toy-head .lead {
+  margin-bottom: 16px;
+}
+.toy-stage {
+  margin: 0;
+}
+
+.does {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 20px;
+  max-width: 40em;
+}
+.does > div {
+  display: grid;
+  grid-template-columns: 4.5em 1fr;
+  gap: 12px;
+  align-items: baseline;
+}
+.does dt {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.does dd {
+  margin: 0;
+}
+
+/* On a phone the live toy comes right under the name, inside the first screen. */
+@media (max-width: 859px) {
+  .toy-hero {
+    gap: 0;
+  }
+  .toy-head {
+    display: contents;
+  }
+  .toy-head h1 {
+    order: 1;
+  }
+  .toy-stage {
+    order: 2;
+    margin-bottom: 18px;
+  }
+  .toy-head .lead {
+    order: 3;
+  }
+  .does {
+    order: 4;
+  }
+  .toy-head .actions {
+    order: 5;
+    margin: 0;
+  }
+  .toy-head .button {
+    flex: 1 1 auto;
+  }
+}
+@media (min-width: 860px) {
+  .toy-hero {
+    grid-template-columns: 5fr 6fr;
+    gap: 48px;
+    align-items: center;
+    min-height: min(560px, calc(100vh - 140px));
+  }
+}
+
+.toy-section {
+  padding-top: 40px;
+}
+.toy-section > p,
+.toy-section > ul,
+.toy-section > ol {
+  max-width: 46em;
+}
+.toy-section h3 {
+  font-size: 1.1rem;
+  margin: 24px 0 8px;
+}
+
+.toy-credits {
+  padding-left: 1.2em;
+}
+.toy-credits li {
+  margin: 6px 0;
+}
+.license-notice {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.claims {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.claim {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--raised);
+}
+.claim p {
+  margin: 0 0 6px;
+}
+.claim-head {
+  font-weight: 650;
+}
+.claim .sources {
+  margin: 6px 0 0;
+  padding-left: 1.2em;
+  font-size: 0.92rem;
+}
+.verdict {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+.verdict-correct,
+.verdict-close {
+  border-color: #1d7a3a;
+  color: #1d7a3a;
+}
+.verdict-wrong {
+  border-color: #a4262c;
+  color: #a4262c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .verdict-correct,
+  :root:not([data-theme="light"]) .verdict-close {
+    border-color: #7fd69a;
+    color: #7fd69a;
+  }
+  :root:not([data-theme="light"]) .verdict-wrong {
+    border-color: #ff9a9f;
+    color: #ff9a9f;
+  }
+}
+:root[data-theme="dark"] .verdict-correct,
+:root[data-theme="dark"] .verdict-close {
+  border-color: #7fd69a;
+  color: #7fd69a;
+}
+:root[data-theme="dark"] .verdict-wrong {
+  border-color: #ff9a9f;
+  color: #ff9a9f;
+}
+
+.snippet {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 10px;
+  align-items: start;
+  max-width: 46em;
+  margin: 0 0 16px;
+}
+.snippet label {
+  grid-column: 1 / -1;
+  font-weight: 650;
+}
+.snippet textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  font: 0.82rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  resize: vertical;
+  word-break: break-all;
+}
+.snippet .copy {
+  padding: 8px 14px;
+}
+
+.toy-section .band-head h2 {
+  margin-bottom: 14px;
+}

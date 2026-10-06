@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>The real Earth · Splashery</title>
+    <meta
+      name="description"
+      content="The real Earth, a Splashery toy made of 3D Gaussian splats: Tap to fly to Everest, the Grand Canyon or Hawaii and back."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/real-earth/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="The real Earth · Splashery" />
+    <meta
+      property="og:description"
+      content="The real Earth, a Splashery toy made of 3D Gaussian splats: Tap to fly to Everest, the Grand Canyon or Hawaii and back."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/real-earth/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/real-earth/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="The real Earth, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+      <div class="labs-off" data-labs-off>
+        <p class="eyebrow">In the labs</p>
+        <h1>The real Earth</h1>
+        <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
+        <p class="actions">
+          <a class="button primary" href="./?labs=1">Turn the labs on</a
+          ><a class="button" href="../../toys/">Every toy</a>
+        </p>
+      </div>
+      <article class="toy-page" data-labs>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-space">Space</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>The real Earth <span class="badge">labs</span></h1>
+            <p class="lead how-to">
+              Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city
+              lights.
+            </p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  The real Earth as splats on its real elevation and color maps, turning at its real
+                  rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the
+                  relief can be exaggerated (labeled).
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>Space is silent: a soft breath as the view flies in.</dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZWFydGgifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="
+                  background-image: url(&quot;../../../assets/toys/real-earth/thumb.webp&quot;);
+                "
+              ></span>
+              <iframe
+                data-src="../../play/?toy=real-earth"
+                title="The real Earth, live: drag to turn it"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>Drag to turn it; tap to play.</figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free
+            mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from
+            NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and
+            leans with its ground, so the sun lights the slopes facing it.
+          </p>
+          <p>
+            The relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a
+            thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth
+            turns once every 23 hours 56 minutes; here an hour passes each second. Close up, the
+            relief eases to at most twice its height. There are no clouds or shadows.
+          </p>
+        </section>
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            Earth drawn from real maps: every splat sits at its place's measured height and has its
+            place's measured color, and each named feature is where the planetary gazetteer puts it.
+            The relief, the turning speed and the lighting are simplified, and each simplification
+            is labeled in the toy. <span class="note">Checked October 5, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The color map is Blue Marble:
+                Next Generation (July 2004).
+              </p>
+              <p>
+                tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages
+                it into the toy's smaller maps (east longitudes from -180° to 180°).
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation"
+                    >Blue Marble: Next Generation (July 2004)</a
+                  >, NASA Earth Observatory (Reto Stöckli): <q>Public domain (NASA).</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The elevation map is ETOPO 2022
+                Global Relief Model (60 and 15 arc-seconds).
+              </p>
+              <p>
+                tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages
+                it into the toy's smaller maps (east longitudes from -180° to 180°).
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+                    >ETOPO 2022 Global Relief Model (60 and 15 arc-seconds)</a
+                  >, NOAA National Centers for Environmental Information:
+                  <q>Public domain (NOAA).</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The lights at night is Black
+                Marble 2016 (Earth at Night).
+              </p>
+              <p>
+                tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages
+                it into the toy's smaller maps (east longitudes from -180° to 180°).
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://earthobservatory.nasa.gov/features/NightLights"
+                    >Black Marble 2016 (Earth at Night)</a
+                  >, NASA Earth Observatory (Joshua Stevens, Miguel Román):
+                  <q>Public domain (NASA).</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Earth turns once every 23.9345
+                hours (its sidereal day), sped up by the chosen factor.
+              </p>
+              <p>
+                Each frame the drive adds the elapsed time times the speed-up, over the day's
+                length, to the turn.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html"
+                    >Earth Fact Sheet</a
+                  >, NASA Space Science Data Coordinated Archive:
+                  <q>Sidereal rotation period (hrs) 23.9345; volumetric mean radius 6371.0 km.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A tap flies to Mount Everest
+                and the Himalayas at 27.988°, 86.925° east, and the map shows it there. Its summit
+                on the map is over 8,000 m, within 15 km (ETOPO's 15-arc-second cells, about 450 m,
+                average the very top).
+              </p>
+              <p>
+                The drive turns the feature's direction to face the viewer and glides the camera to
+                it; the test checks the turn and the map's heights round the listed center.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Mount_Everest">Mount Everest</a>,
+                  Wikipedia: <q>Its height was most recently measured in 2020 ... as 8,848.86 m</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A tap flies to The Grand Canyon
+                (at Phantom Ranch, on the canyon floor) at 36.106°, -112.095° east, and the map
+                shows it there. On the map, the rim within 14 km of Phantom Ranch stands more than
+                1,400 m above the canyon floor.
+              </p>
+              <p>
+                The drive turns the feature's direction to face the viewer and glides the camera to
+                it; the test checks the turn and the map's heights round the listed center.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Grand_Canyon"
+                    >Grand Canyon; Phantom Ranch</a
+                  >, Wikipedia:
+                  <q
+                    >attains a depth of over a mile (Phantom Ranch, on the canyon floor, is at
+                    36.10605, -112.09469)</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A tap flies to Hawaii, with
+                Mauna Kea and Mauna Loa at 19.6°, -155.5° east, and the map shows it there. The
+                island's highest point on the map is over 4,000 m, within 50 km of the listed point.
+              </p>
+              <p>
+                The drive turns the feature's direction to face the viewer and glides the camera to
+                it; the test checks the turn and the map's heights round the listed center.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Mauna_Kea">Mauna Kea</a>, Wikipedia:
+                  <q>Its peak is 13,803 feet (4,207.3 m) above sea level</q>
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The relief is exaggerated by default (ten or twenty times; Pluto, Ceres and Vesta are
+              drawn at true height), as chosen and labeled in the Toy tab; close up during a fly it
+              eases to at most twice its height. True height is one choice away.
+            </li>
+            <li>
+              The world turns thousands of times faster than real (labeled in the Toy tab: an hour
+              or a day each second).
+            </li>
+            <li>
+              North is always up and the sun stays near the equator's plane: the axial tilt and the
+              seasons are left out.
+            </li>
+            <li>
+              The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and
+              leaves the night side dark, but nothing casts a shadow, and real surfaces scatter
+              light in more complicated ways.
+            </li>
+            <li>
+              The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the
+              patches round the named features are sharper.
+            </li>
+            <li>
+              The oceans are drawn flat at sea level; there are no clouds; the blue rim of air is a
+              drawn glow.
+            </li>
+            <li>The city lights are NASA's 2016 composite of cloud-free nights, not one night.</li>
+          </ul>
+        </section>
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/space-r2.js"
+              ><code>src/packs/space-r2.js</code></a
+            >.
+          </p>
+          <ul class="toy-credits">
+            <li>
+              <b>Color map</b>:
+              <a href="https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation"
+                >Blue Marble: Next Generation (July 2004)</a
+              >
+              by NASA Earth Observatory (Reto Stöckli),
+              <a href="https://earthobservatory.nasa.gov/image-use-policy">Public domain (NASA)</a>.
+            </li>
+            <li>
+              <b>Elevation map</b>:
+              <a href="https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+                >ETOPO 2022 Global Relief Model (60 and 15 arc-seconds)</a
+              >
+              by NOAA National Centers for Environmental Information,
+              <a href="https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+                >Public domain (NOAA)</a
+              >.
+            </li>
+            <li>
+              <b>Lights at night</b>:
+              <a href="https://earthobservatory.nasa.gov/features/NightLights"
+                >Black Marble 2016 (Earth at Night)</a
+              >
+              by NASA Earth Observatory (Joshua Stevens, Miguel Román),
+              <a href="https://earthobservatory.nasa.gov/image-use-policy">Public domain (NASA)</a>.
+            </li>
+          </ul>
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
+            >.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="1" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/real-earth/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=real-earth&quot; title=&quot;Splashery: The real Earth&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;real-earth&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle. Every option is in the
+            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-space"
+              >The Space shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-small-worlds/"
+                ><img
+                  src="../../../assets/toys/real-small-worlds/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >Pluto, Ceres and Vesta <span class="badge">labs</span></span
+                ></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-mars/"
+                ><img
+                  src="../../../assets/toys/real-mars/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Mars <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-mercury/"
+                ><img
+                  src="../../../assets/toys/real-mercury/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Mercury <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-moon/"
+                ><img
+                  src="../../../assets/toys/real-moon/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Moon <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-venus/"
+                ><img
+                  src="../../../assets/toys/real-venus/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Venus <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/aurora-planet/"
+                ><img
+                  src="../../../assets/toys/aurora-planet/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Aurora world</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/earth/"
+                ><img
+                  src="../../../assets/toys/earth/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Earth</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/grand-canyon/"
+                ><img
+                  src="../../../assets/toys/grand-canyon/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Grand Canyon <span class="badge">labs</span></span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
