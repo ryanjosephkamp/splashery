@@ -70,6 +70,14 @@ it; start it with this brief, word for word, under "## Brief", then keep "## Sta
 - Desktop browsers run: Chromium 141.0.7390.37 (Playwright's, on Linux, SwiftShader). No other
   browser was available here.
 
+- Levels (the owner's note of October 6, 2026, on the grapes, orange and strawberry clips: "seems
+  visually dim or dark. Can we make this brighter somehow?"): `src/ascii-capture/levels.js`. The
+  first frame sets the job's `contrast` (the 95th percentile of its lit pixels maps to 95% of the
+  character ramp, between the core's 1.3 and 3), and color mode lifts the drawn characters by the
+  same gain. The orange stays at 1.3; the grapes and strawberry come out denser and brighter. The
+  core is unchanged (only its `contrast` option is passed), and the GIF's comment records the
+  contrast.
+
 ## Known issues
 
 - (Fixed October 6, 2026, the Operator's call) The capture used to force the "high" profile. It now

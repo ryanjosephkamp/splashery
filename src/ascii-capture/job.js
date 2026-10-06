@@ -9,6 +9,7 @@ import { pixelsToText } from "../export/ascii.js";
 import { CAPTURE, PROFILES, newJobId, readHostMessage, startMessage, PRESETS } from "./protocol.js";
 import { creditFooter, creditMetadata } from "./credit.js";
 import { encodeAsciiGif } from "./gif.js";
+import { jobContrast, colorGain, BASE_CONTRAST } from "./levels.js";
 
 export const JOB_MS = 30_000; // the whole job, from Capture to the finished GIF
 // A slow test machine (software rendering) may lengthen it with ?deadline=, within these bounds.
@@ -95,6 +96,7 @@ class Job {
     this.messages = 0;
     this.renderer = "";
     this.profile = "";
+    this.contrast = BASE_CONTRAST;
     this.started = performance.now();
     this.finished = false;
     this.life = new AbortController(); // listeners, and the encoder's stop
@@ -153,10 +155,13 @@ class Job {
       this.fail(event.data.reason);
     } else if (type === "frame") {
       if (event.data.index !== this.frames.length || !this.renderer) return this.fail("protocol");
-      // Convert now; the pixels go when this message does.
+      // Convert now; the pixels go when this message does. The first frame
+      // sets the job's contrast (levels.js).
+      const data = new Uint8ClampedArray(event.data.pixels);
+      if (this.frames.length === 0) this.contrast = jobContrast(data);
       const ascii = pixelsToText(
-        { width: CAPTURE.size, height: CAPTURE.size, data: new Uint8ClampedArray(event.data.pixels) }, // prettier-ignore
-        { columns: this.columns, characterAspect: CHARACTER_ASPECT },
+        { width: CAPTURE.size, height: CAPTURE.size, data },
+        { columns: this.columns, characterAspect: CHARACTER_ASPECT, contrast: this.contrast },
       );
       this.frames.push(ascii);
       this.onProgress({ stage: "capture", done: this.frames.length, total: CAPTURE.frames });
@@ -179,10 +184,12 @@ class Job {
         rows: this.frames[0].rowCount,
         color: this.color,
         characterAspect: CHARACTER_ASPECT,
+        contrast: this.contrast,
       };
       const out = await encodeAsciiGif(this.frames, {
         fps: CAPTURE.fps,
         color: this.color,
+        gain: colorGain(this.contrast),
         footer,
         metadata: creditMetadata(this.toy, this.label, settings),
         signal: this.life.signal,

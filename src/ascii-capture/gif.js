@@ -6,6 +6,7 @@
 
 import { GIFEncoder, quantize, applyPalette } from "gifenc";
 import { renderTextCanvas } from "../export/ascii.js";
+import { brighten } from "./levels.js";
 
 export const MAX_PIXELS = 1_500_000;
 
@@ -54,7 +55,7 @@ const yieldTask = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 export async function encodeAsciiGif(
   frames,
-  { fps, color = false, footer = [], metadata = {}, signal, onProgress = () => {} } = {},
+  { fps, color = false, gain = 1, footer = [], metadata = {}, signal, onProgress = () => {} } = {},
 ) {
   validateFrames(frames, fps);
   const gif = GIFEncoder();
@@ -65,7 +66,7 @@ export async function encodeAsciiGif(
   try {
     for (let i = 0; i < frames.length; i++) {
       signal?.throwIfAborted();
-      renderTextCanvas(canvas, frames[i], { color, footer });
+      renderTextCanvas(canvas, color ? brighten(frames[i], gain) : frames[i], { color, footer });
       if (canvas.width * canvas.height > MAX_PIXELS)
         throw new RangeError("The GIF would be too large");
       width = canvas.width;

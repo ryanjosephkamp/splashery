@@ -128,3 +128,27 @@ test("GIF delays add up to the exact timeline and the comment sits before the fr
   expect(out.tail).toBe(59);
   expect(out.bad).toBe(true);
 });
+
+test("levels lift a dark toy and leave a bright one at the core's default", async () => {
+  const { jobContrast, colorGain, brighten, BASE_CONTRAST } =
+    await import("../src/ascii-capture/levels.js");
+  const fill = (lit, rgb) => {
+    const px = new Uint8ClampedArray(420 * 420 * 4);
+    for (let i = 0; i < px.length; i += 4) {
+      const on = i / 4 < lit;
+      px.set(on ? rgb : [17, 17, 17], i);
+      px[i + 3] = 255;
+    }
+    return px;
+  };
+  const bright = jobContrast(fill(40_000, [250, 220, 180]));
+  const dark = jobContrast(fill(40_000, [70, 40, 90]));
+  expect(bright).toBe(BASE_CONTRAST);
+  expect(dark).toBeGreaterThan(2);
+  expect(dark).toBeLessThanOrEqual(3);
+  expect(jobContrast(fill(0, [0, 0, 0]))).toBe(BASE_CONTRAST);
+  expect(colorGain(BASE_CONTRAST)).toBe(1);
+  const frame = { rows: ["@"], colors: [[0x402080, 0xc0c0c0]] };
+  expect(brighten(frame, 1)).toBe(frame);
+  expect(brighten(frame, 2).colors[0]).toEqual([0x8040ff, 0xffffff]);
+});
