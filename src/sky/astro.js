@@ -38,6 +38,9 @@ export function gmst(jd) {
   );
 }
 
+// How far the sidereal time moves in one solar day (degrees): the stars' shift at a fixed clock time.
+export const SOLAR_DAY_LST = 0.98564736629;
+
 // Local mean sidereal time in degrees, for an east longitude in degrees.
 export const lst = (jd, lonEast) => wrap360(gmst(jd) + lonEast);
 
@@ -266,10 +269,12 @@ export const PLANETS = ["mercury", "venus", "mars", "jupiter", "saturn", "uranus
 
 // The Sun, the Moon and the planets for a time and place: horizontal (ENU) directions, altitude
 // and azimuth, and the Moon's phase. `matrix` takes J2000 equatorial to horizontal (the stars).
-export function sky(ms, latDeg, lonEast) {
+// `lstOverride` (degrees) turns the sky to another sidereal time than the moment's own: the
+// toy's "same time each day" speeds hold the clock while the days go by.
+export function sky(ms, latDeg, lonEast, lstOverride = null) {
   const jd = julianDay(ms);
   const P = precession(jd);
-  const lstDeg = lst(jd, lonEast);
+  const lstDeg = Number.isFinite(lstOverride) ? wrap360(lstOverride) : lst(jd, lonEast);
   const H = horizonMatrix(latDeg, lstDeg);
   const matrix = mulMM(H, P);
   const bodies = {};
