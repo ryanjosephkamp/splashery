@@ -9,8 +9,11 @@ your own files, as an "Engine: …" PR merged first). PR title: "Phase QR craft:
 built from real things, and other barcodes". Handoff file: docs/handoff/QRcraft.md (create it; start
 it with this brief, word for word, under "## Brief", then keep "## State
 
-WORKING: all three items built and tested (October 6, 2026, Opus 5.5, default effort); clips
-rendering for Effect review page 2. Draft PR #349.
+READY: all three items built, tested and on Effect review page 2 (October 6, 2026, Opus 5.5, default
+effort). Draft PR #349. Cards (lane record `QRcraft`, groups `picture`, `build`, `barcodes`):
+`qrc-qr-picture`, `qrc-qr-build-dominoes`, `qrc-qr-build-marbles`, `qrc-qr-build-tiles`,
+`qrc-barcodes-code128`, `qrc-barcodes-ean13`, `qrc-barcodes-datamatrix`, `qrc-barcodes-aztec`. Each
+QR clip's last frame reads with jsQR. Waiting for the owner's marks.
 
 Three new labs toys on the QR shelf (Studio), pack `src/packs/qr-craft.js`:
 
@@ -90,6 +93,11 @@ alignment marks are walnut frames that drop into the tray first.
 - A splat shows from both sides, and WebGL2 sorts the splats as they lie at rest, so a tile turned
   over showed its dark face through its light one. The flip tiles' faces are hidden while they face
   away (their top, bottom and sides are their own kinds in the GPU program).
+- Clips: `tools/qrc-clip.mjs` at 540 × 720 and 20 fps (720 × 960 took about five frames a minute in
+  the software renderer); at a closer distance the frame cut off the quiet zone, so the build clips
+  use the toy's own distance.
+- Barcodes seen at an angle were hatched: the paper's splats, only 0.12 of a module behind, sorted
+  in front of some bars' splats. The paper (and Picture QR's sheet) now sits well behind.
 - jsQR in Node on a big, busy picture (a 900-pixel Picture QR PNG) can take many minutes; the tests
   shrink it to phone size first.
 
