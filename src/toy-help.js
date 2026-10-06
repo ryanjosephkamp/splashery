@@ -727,7 +727,7 @@ export const TOY_HELP = {
     howTo:
       "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
     about:
-      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. 26 elements have no photo of a real sample, because the heaviest exist only a few atoms at a time; their hatched tiles show a stand-in, said plainly to be one. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. 26 elements have no photo of a real sample, as the heaviest exist only a few atoms at a time; their hatched tiles show a stand-in. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
   },
 
   "crystal-lattice": {
