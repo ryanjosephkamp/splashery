@@ -208,19 +208,22 @@ function decode(bytes) {
   return { width: reader.width, height: reader.height, frames, comment };
 }
 
-// The footer band (the bottom `lines` text lines of each frame): the same in
-// every frame, and with text in it.
+// The footer band (the bottom `lines` text lines of each frame): the same
+// text in every frame (as a mask of bright pixels, since each frame has its
+// own palette), and with text in it.
 function footerBand({ width, height, frames }, lines) {
-  const top = height - lines * 14 - 2;
-  const bands = frames.map(({ rgba }) => rgba.subarray(top * width * 4));
-  const bright = (band) => {
-    let n = 0;
-    for (let i = 0; i < band.length; i += 4) if (band[i] + band[i + 1] + band[i + 2] > 300) n++;
-    return n;
+  const top = height - lines * 14;
+  const mask = ({ rgba }) => {
+    const band = rgba.subarray(top * width * 4);
+    const bits = new Uint8Array(band.length / 4);
+    for (let i = 0; i < bits.length; i++)
+      bits[i] = band[i * 4] + band[i * 4 + 1] + band[i * 4 + 2] > 384 ? 1 : 0;
+    return bits;
   };
+  const masks = frames.map(mask);
   return {
-    same: bands.every((b) => Buffer.compare(Buffer.from(b), Buffer.from(bands[0])) === 0),
-    text: bright(bands[0]),
+    same: masks.every((m) => Buffer.compare(Buffer.from(m), Buffer.from(masks[0])) === 0),
+    text: masks[0].reduce((a, b) => a + b, 0),
   };
 }
 
