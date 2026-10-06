@@ -101,8 +101,8 @@
     "photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/photo-3d.js",
-      "recipeKB": 16.1,
-      "recipeGzipKB": 6,
+      "recipeKB": 19.4,
+      "recipeGzipKB": 7.1,
       "sharedBy": 1
     },
     "moving-photo-3d": {
@@ -115,15 +115,15 @@
     "your-book": {
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
-      "recipeKB": 126.7,
-      "recipeGzipKB": 40.7,
+      "recipeKB": 127.4,
+      "recipeGzipKB": 40.9,
       "sharedBy": 4
     },
     "model-splats": {
       "kind": "kit",
       "recipeFile": "src/packs/studio-models.js",
-      "recipeKB": 16.4,
-      "recipeGzipKB": 6.2,
+      "recipeKB": 16.6,
+      "recipeGzipKB": 6.3,
       "sharedBy": 1
     },
     "chladni-plate": {
@@ -178,8 +178,8 @@
     "neural-network": {
       "kind": "kit",
       "recipeFile": "src/packs/computing.js",
-      "recipeKB": 153.8,
-      "recipeGzipKB": 46.1,
+      "recipeKB": 165.5,
+      "recipeGzipKB": 50.1,
       "sharedBy": 12
     },
     "qr-code": {
