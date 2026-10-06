@@ -180,6 +180,38 @@ function signedVolume(mesh, m) {
   return vol;
 }
 
+// Cuts every triangle tagged `tag` that crosses the plane z = z0 into
+// pieces on either side (new vertices on the plane). pos, idx and tags are
+// plain arrays, changed in place.
+function splitAt(pos, idx, tags, tag, z0) {
+  const n = idx.length / 3;
+  const at = (v) => [pos[v * 3], pos[v * 3 + 1], pos[v * 3 + 2]];
+  const add = (p) => (pos.push(...p), pos.length / 3 - 1);
+  const cut = (a, b) => {
+    const pa = at(a);
+    const pb = at(b);
+    const t = (z0 - pa[2]) / (pb[2] - pa[2]);
+    return add([0, 1, 2].map((k) => pa[k] + (pb[k] - pa[k]) * t));
+  };
+  for (let t = 0; t < n; t++) {
+    if (tags[t] !== tag) continue;
+    const v = [idx[t * 3], idx[t * 3 + 1], idx[t * 3 + 2]];
+    const side = v.map((x) => pos[x * 3 + 2] >= z0);
+    const up = side.filter(Boolean).length;
+    if (up === 0 || up === 3) continue;
+    // Rotate so v[0] is the one alone on its side.
+    const lone = side.findIndex((x) => side.filter((y) => y === x).length === 1);
+    const [a, b, c] = [v[lone], v[(lone + 1) % 3], v[(lone + 2) % 3]];
+    const ab = cut(a, b);
+    const ac = cut(a, c);
+    idx[t * 3] = a;
+    idx[t * 3 + 1] = ab;
+    idx[t * 3 + 2] = ac;
+    idx.push(ab, b, c, ab, c, ac);
+    tags.push(tag, tag);
+  }
+}
+
 fs.mkdirSync(OUT, { recursive: true });
 
 // ---- SLS ----------------------------------------------------------------------------
@@ -206,7 +238,7 @@ fs.mkdirSync(OUT, { recursive: true });
     return "las";
   });
   // (The engines: the four RS-25s under the core; "nozzle": the boosters'.)
-  await writeGlb(`${OUT}/sls.glb`, simplifyPieces(pos, pieces, 110000));
+  await writeGlb(`${OUT}/sls.glb`, simplifyPieces(pos, pieces, 400000));
 }
 
 // ---- Space Shuttle --------------------------------------------------------------------
@@ -264,6 +296,9 @@ fs.mkdirSync(OUT, { recursive: true });
         }
       }
     });
+  // The belly's edge (z 0.3, just above the wings' plane) cuts straight
+  // through the orbiter's triangles, so the black ends on a clean line.
+  splitAt(pos, idx, tags, "orbiter", 0.3);
   let tagAt = 0;
   const P = new Float32Array(pos);
   // The orbiter's wings are one mesh wound both ways, so its flat faces are

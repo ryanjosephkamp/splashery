@@ -34,6 +34,8 @@ const opt = (name, def) => {
 const [outDir, ...ids] = args.filter((a) => !a.startsWith("--"));
 if (!outDir || !ids.length) throw new Error("Usage: node tools/effect-clip.mjs <out-dir> id ...");
 const size = Number(opt("size", 320));
+// --h: a taller clip (a phone's shape), size wide and h high.
+const high = Number(opt("h", 0)) || size;
 const secsAll = Number(opt("secs", 3.5));
 const fps = Number(opt("fps", 15));
 const before = Number(opt("before", 0.4));
@@ -98,6 +100,7 @@ for (const spec of ids) {
       stripN,
       sun,
       mp4,
+      high,
     }) => {
       const { app, player } = window.__splashery;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
@@ -122,8 +125,10 @@ for (const spec of ids) {
         pending = 0;
         for (const h of handlers) h(d);
       });
-      stage.setFixedSize([size, size]);
+      stage.setFixedSize([size, high]);
+      // (A toy that sets its own view, out.view, keeps it.)
       const home = () => {
+        if (player.toyInfo?.recipe?.focus) return;
         player.camera.cur = { ...player.camera.home };
         player.camera.tgt = { ...player.camera.home };
       };
@@ -155,9 +160,9 @@ for (const spec of ids) {
           return;
         }
         n++;
-        const rgba = c.getContext("2d").getImageData(0, 0, size, size).data;
+        const rgba = c.getContext("2d").getImageData(0, 0, size, high).data;
         const palette = quantize(rgba, 256, { format: "rgb565" });
-        gif.writeFrame(applyPalette(rgba, palette, "rgb565"), size, size, { palette, delay, repeat: 0 }); // prettier-ignore
+        gif.writeFrame(applyPalette(rgba, palette, "rgb565"), size, high, { palette, delay, repeat: 0 }); // prettier-ignore
       };
       const tf = player.motion.ctx?.transform;
       const toWorld = (p) => (tf ? p.map((v, i) => (v - tf.center[i]) * tf.scale) : p);
@@ -184,21 +189,39 @@ for (const spec of ids) {
       if (shots.length) {
         const out = document.createElement("canvas");
         out.width = size * shots.length;
-        out.height = size + 18;
+        out.height = high + 18;
         const ctx = out.getContext("2d");
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, out.width, out.height);
         ctx.font = "12px sans-serif";
         ctx.fillStyle = "#bbb";
         shots.forEach((s, i) => {
-          ctx.drawImage(s.bmp, i * size, 0, size, size);
-          ctx.fillText(s.t < 0 ? "before" : `${s.t.toFixed(1)}s`, i * size + 6, size + 13);
+          ctx.drawImage(s.bmp, i * size, 0, size, high);
+          ctx.fillText(s.t < 0 ? "before" : `${s.t.toFixed(1)}s`, i * size + 6, high + 13);
         });
         strip = out.toDataURL("image/png");
       }
       return { bytes: Array.from(gif.bytes()), strip };
     },
-    { id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn, stripN, sun, mp4 },
+    {
+      id,
+      size,
+      secs,
+      fps,
+      before,
+      bg,
+      taps,
+      gap,
+      toyOpt,
+      at,
+      seq,
+      keys,
+      pgn,
+      stripN,
+      sun,
+      mp4,
+      high,
+    },
   );
   let out = path.join(outDir, `${id}.gif`);
   if (mp4) {

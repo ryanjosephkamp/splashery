@@ -1222,6 +1222,13 @@ function stackRecipe(spec) {
   return {
     kernel: "sharp",
     density: 2,
+    // (Labs: the small splats kept and a 3x phone's full resolution, as the
+    // other photoreal toys have.)
+    render: { cull: "low", dpr: "native" },
+    // The view fits the whole rocket on any screen (out.view, below): tall
+    // and thin, it would otherwise be framed by its width on a phone and
+    // stand small in the middle.
+    focus: () => false,
     alive: true,
     turntable: true,
     controls: [{ key: "launch", label: "Stage it", type: "pulse", ease: STAGE_SECS }],
@@ -1246,6 +1253,7 @@ function stackRecipe(spec) {
     drive(t, c, out, info) {
       const d = info?.data;
       if (!d) return;
+      out.view = { key: "stack", center: [0, (d.bottom + d.top) / 2, 0], size: [d.width * 1.2, (d.top - d.bottom) * 1.06] }; // prettier-ignore
       const m = mem(c);
       const on = c.launch > 0;
       const s = on ? progress(c.launch) * STAGE_SECS : 0;
@@ -1299,7 +1307,9 @@ function stackRecipe(spec) {
       const box = new Map();
       let bottom = Infinity;
       let top = -Infinity;
+      let width = 0;
       for (let i = 0; i < S.n; i++) {
+        width = Math.max(width, 2 * Math.abs(S.pos[i * 3]));
         const p = pieceAt(i);
         const x = S.pos[i * 3];
         const y = S.pos[i * 3 + 1];
@@ -1315,15 +1325,52 @@ function stackRecipe(spec) {
       const mid = (b) => b.lo.map((v, i) => (v + b.hi[i]) / 2);
       const parts = {};
       for (const [p, b] of box) parts[p] = k.part(p, { pivot: [mid(b)[0], b.lo[1], mid(b)[2]], axis: spec.axis?.[p.replace(/[LR]$/, "*")] ?? spec.axis?.[p] ?? [0, 0, 1] }); // prettier-ignore
+      // Smooth shading on the round tanks and boosters (spec.smooth): their
+      // ribs and stringers are far finer than a splat and light as blotches,
+      // so a splat whose face leans away from the cylinder takes the shade
+      // of the smooth splats at its angle round the piece's axis.
+      const rgb = S.rgb.slice();
+      for (const name of spec.smooth ?? []) {
+        for (const p of name.endsWith("*")
+          ? [`${name.slice(0, -1)}L`, `${name.slice(0, -1)}R`]
+          : [name]) {
+          const b = box.get(p);
+          if (!b) continue;
+          const [cx, , cz] = mid(b);
+          const N = 96;
+          const sum = new Float64Array(N * 4);
+          const lean = new Uint8Array(S.n);
+          // (Only the piece's own material: not its engines.)
+          const own = name.replace("*", "");
+          for (let i = 0; i < S.n; i++) {
+            if (pieceAt(i) !== p || prep.materials[prep.mat[S.triangle[i]]].name !== own) continue;
+            const dx = S.pos[i * 3] - cx;
+            const dz = S.pos[i * 3 + 2] - cz;
+            const r = Math.hypot(dx, dz) || 1;
+            const radial = (S.nrm[i * 3] * dx + S.nrm[i * 3 + 2] * dz) / r;
+            const k2 = Math.floor(((Math.atan2(dz, dx) / TAU + 1) % 1) * N);
+            if (radial > 0.97) {
+              for (let c = 0; c < 3; c++) sum[k2 * 4 + c] += S.rgb[i * 3 + c];
+              sum[k2 * 4 + 3]++;
+            } else lean[i] = 1 + k2;
+          }
+          for (let i = 0; i < S.n; i++) {
+            const k2 = lean[i] - 1;
+            if (k2 < 0 || !sum[k2 * 4 + 3]) continue;
+            for (let c = 0; c < 3; c++) rgb[i * 3 + c] = sum[k2 * 4 + c] / sum[k2 * 4 + 3];
+          }
+        }
+      }
+      const matOf = (i) => prep.materials[prep.mat[S.triangle[i]]].name;
       k.cloud({ count: (S.n * 160000) / k.count + 1, jitter: 0 }, (_r, i) => {
         if (i >= S.n) return null;
         const n = [S.nrm[i * 3], S.nrm[i * 3 + 1], S.nrm[i * 3 + 2]];
-        const sg = S.sigma[i];
+        const sg = S.sigma[i] * (spec.sigmaBy?.[matOf(i)] ?? spec.sigma ?? 1);
         return {
           p: [S.pos[i * 3], S.pos[i * 3 + 1], S.pos[i * 3 + 2]],
           scales: [sg, sg, sg * SPLAT_FLAT],
           quat: discQuat(n),
-          color: [S.rgb[i * 3], S.rgb[i * 3 + 1], S.rgb[i * 3 + 2]],
+          color: [rgb[i * 3], rgb[i * 3 + 1], rgb[i * 3 + 2]],
           opacity: 0.98,
           part: parts[pieceAt(i)],
         };
@@ -1356,7 +1403,7 @@ function stackRecipe(spec) {
           };
         });
       }
-      k.data = { pieces: [...box.keys()], bottom, top, plumes };
+      k.data = { pieces: [...box.keys()], bottom, top, width, plumes };
     },
   };
 }
@@ -1369,6 +1416,8 @@ function stackRecipe(spec) {
 // the abort system's fairing in the model, is drawn here as a plain cone.
 RECIPES.sls = stackRecipe({
   file: "sls.glb",
+  sigma: 0.8,
+  smooth: ["core", "srb*"],
   title: "Space Launch System (SLS)",
   source: "https://science.nasa.gov/3d-resources/space-launch-system-sls/",
   author: "NASA",
@@ -1424,6 +1473,9 @@ RECIPES.sls = stackRecipe({
 // small maneuvering engines.
 RECIPES["space-shuttle"] = stackRecipe({
   file: "space-shuttle.glb",
+  sigma: 0.9,
+  sigmaBy: { orbiter: 1, belly: 1 },
+  smooth: ["et", "srb*"],
   title: "Space Shuttle (A)",
   source: "https://science.nasa.gov/3d-resources/space-shuttle-a/",
   author: "NASA (Michael D. Carbajal)",
