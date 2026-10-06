@@ -18,7 +18,7 @@
 // toy out of Hands-on (a picture toy). Pure JavaScript, no DOM.
 
 import { World, Body, boundOf, quat, v3 } from "./world.js";
-import { extrasFor, poseKitUniforms } from "./fields.js"; // lane Hands engine A
+import { extrasFor } from "./fields.js"; // lane Hands engine A
 import { makeJoints } from "./joints.js"; // lane Hands engine B
 import { SoftParts, hasSoft } from "./soft.js"; // lane Hands engine C
 
@@ -881,9 +881,10 @@ export class HandsOn {
       const t = v3.sub(b.pos, c);
       const home = !this.moved && !this.homing;
       player.stage.setToyPose?.(home ? null : { pivot: c, q: dq, t });
-      // Lane Hands engine A: a kit toy's parts and tokens move with it.
-      const pose = { pivot: c, q: dq, t };
-      player.motion.handsFix = home || !player.motion.ctx?.kit ? null : (u) => poseKitUniforms(u, pose); // prettier-ignore
+      // Lane Any pose: the shader works every effect out in the toy's own
+      // frame now (src/effects-pose.js), parts and tokens included, so the
+      // kit's uniforms are no longer posed here (poseKitUniforms).
+      player.motion.handsFix = null;
       return;
     }
     if (this.mode === "pieces") {

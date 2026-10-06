@@ -42,10 +42,14 @@ for a long job, schedule a check-in with send_later instead of going idle.
 
 ## State
 
-READY for review (October 5, 2026): all four toys built, tested and documented; clips posted on
-Effect review page 2 (cards tw2-dna-to-protein, tw2-mitosis, tw2-apoptosis, tw2-phagocytosis; lane
-record TinyR2). An hourly check-in reads the owner's marks.
+STOOD DOWN (October 5, 2026): PR #291 merged into main at 9e8c45e3 (head e31ede95); all four toys
+are labs. The owner had not marked the four clips on Effect review page 2 (cards tw2-dna-to-protein,
+tw2-mitosis, tw2-apoptosis, tw2-phagocytosis; lane record TinyR2) when the lane stood down; the
+Operator starts a follow-up round when the marks come in. Check-ins stopped.
 
+- Last fix before the merge (Integrator 5's run): with "Your own" picked and no sequence, an
+  unreadable one or one with no ATG, the DNA toy shows the default gene (HBB) and says why, instead
+  of throwing (kit.spec builds every select choice). Tested in tests/tw2-dna.spec.mjs.
 - **DNA to protein** (`dna-to-protein`): four NCBI genes (HBB, INS, LYZ, GFP) with the alpha carbons
   of PDB 4HHB, 1MSO, 1LZ1, 1GFL in `src/tiny/genes.js` (`node tools/tw2-genes.mjs` rebuilds it and
   checks each translation against the record). Mutations in codons 2 to 7 and typed DNA. About 34 s;

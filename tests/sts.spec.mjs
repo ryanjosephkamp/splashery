@@ -195,6 +195,9 @@ test.describe("your own song and the speaker button", () => {
     await page.goto(APP);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("song-landscape"));
+    // (Live r7: the Whole song view, which builds the short song's landscape
+    // at once and reports its top; Live now grows it as it plays.)
+    await page.evaluate(() => window.__splashery.app.setToyOptions({ view: "whole" }));
     await page.waitForTimeout(1500);
     await page.locator("#toy-input-file").setInputFiles({ name: "beep.wav", mimeType: "audio/wav", buffer: wav() }); // prettier-ignore
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.song?.name === "beep", null, { timeout: 60_000 }); // prettier-ignore
