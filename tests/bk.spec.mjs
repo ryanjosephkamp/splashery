@@ -512,7 +512,7 @@ test.describe("your book, the album and the frame (no browser)", () => {
 
   test("the album puts two wide or two tall photos on a side, and the sample fills four sides", async () => {
     const b = await play("photo-album", {}, null);
-    expect(b.kit.sheets.length).toBe(41); // (lane Books r5: and the pop-out sheet)
+    expect(b.kit.sheets.length).toBe(43); // (lane Books r5: and the pop-out sheets, three since lane Pages r6)
     const { RECIPES } = await import("../src/packs/pictures.js");
     const pics = fakePics(6);
     const a = await play("photo-album", {}, pics);
