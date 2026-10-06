@@ -465,7 +465,15 @@ export class BackPlate {
       vals[c * 4 + 2] = col[c * 3 + 2];
       vals[c * 4 + 3] = dep[c];
     }
-    fillHoles(vals, seen, bc, br, 4);
+    // Live r7 (the owner's "the splat mirror also needs to improve" of
+    // October 6): the wall the person hides is filled along its rows, from
+    // the wall seen to the left and right, so a shelf or the line where the
+    // wall meets the floor runs on behind them; the coarse fill alone made a
+    // soft blob of the colors all round (the door's white edge, the
+    // picture's), which showed as a pale ghost of the person, seen turned.
+    const w = Float32Array.from(seen); // (a copy: what was filled isn't seen)
+    rowFill(vals, w, bc, br);
+    fillHoles(vals, w, bc, br, 4);
   }
 
   // Into the canvas's lower half: the colors on the left, the heights (a
@@ -545,6 +553,74 @@ BackPlate.prototype.drawRested = function (g, cols, rows, f) {
 // Fills the cells whose weight is 0 from their weighted neighbors, coarse
 // to fine (push-pull): each coarser level averages the known cells under
 // it, and each unknown cell takes the level above it.
+// Live r7: fills each unseen cell of a W by H grid of r, g, b, depth (vals,
+// 4 a cell; seen 0 or 1) from the seen cells nearest it on its row, left and
+// right, the nearer counting more (by the inverse of the distance squared).
+// Each end is the mean of the seen cells within a row or two (so one odd cell
+// doesn't streak), and the filled cells are then smoothed a little down each
+// column. A cell with seen wall on neither side is left for fillHoles.
+export function rowFill(vals, seen, W, H) {
+  const at = (x, y) => (y < 0 || y >= H || x < 0 || x >= W ? 0 : seen[y * W + x]);
+  const filled = new Uint8Array(W * H);
+  const out = new Float32Array(W * H * 4);
+  const end = (x, y, o) => {
+    let n = 0;
+    o[0] = o[1] = o[2] = o[3] = 0;
+    for (let j = y - 2; j <= y + 2; j++)
+      for (let i = x - 1; i <= x + 1; i++) {
+        if (!at(i, j)) continue;
+        const c = (j * W + i) * 4;
+        for (let k = 0; k < 4; k++) o[k] += vals[c + k];
+        n++;
+      }
+    for (let k = 0; k < 4; k++) o[k] /= n;
+  };
+  const L = [0, 0, 0, 0];
+  const R = [0, 0, 0, 0];
+  for (let y = 0; y < H; y++) {
+    let x = 0;
+    while (x < W) {
+      if (seen[y * W + x]) {
+        x++;
+        continue;
+      }
+      let x1 = x;
+      while (x1 < W && !seen[y * W + x1]) x1++;
+      const hasL = x > 0;
+      const hasR = x1 < W;
+      if (hasL) end(x - 1, y, L);
+      if (hasR) end(x1, y, R);
+      for (let i = x; i < x1; i++) {
+        if (!hasL && !hasR) break;
+        const dl = i - x + 1;
+        const dr = x1 - i;
+        const wl = hasL ? 1 / (dl * dl) : 0;
+        const wr = hasR ? 1 / (dr * dr) : 0;
+        const c = (y * W + i) * 4;
+        for (let k = 0; k < 4; k++) out[c + k] = (L[k] * wl + R[k] * wr) / (wl + wr);
+        filled[y * W + i] = 1;
+      }
+      x = x1;
+    }
+  }
+  // Down each column, over the filled cells only (a 5-row mean).
+  for (let x = 0; x < W; x++)
+    for (let y = 0; y < H; y++) {
+      const c = y * W + x;
+      if (!filled[c]) continue;
+      const acc = [0, 0, 0, 0];
+      let n = 0;
+      for (let j = Math.max(0, y - 2); j <= Math.min(H - 1, y + 2); j++) {
+        const q = j * W + x;
+        if (!filled[q]) continue;
+        for (let k = 0; k < 4; k++) acc[k] += out[q * 4 + k];
+        n++;
+      }
+      for (let k = 0; k < 4; k++) vals[c * 4 + k] = acc[k] / n;
+    }
+  for (let c = 0; c < W * H; c++) if (filled[c]) seen[c] = 0.999;
+}
+
 export function fillHoles(vals, w, W, H, ch) {
   if (W <= 1 && H <= 1) return;
   const cw = Math.ceil(W / 2);
