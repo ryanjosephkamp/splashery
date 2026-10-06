@@ -725,7 +725,7 @@ export const TOY_HELP = {
   // Lane Elements: the periodic table of real samples (labs).
   "real-elements": {
     howTo:
-      "Tap a tile to lift its sample and read its facts; tap the sample to turn it, its tile to set it back.",
+      "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
     about:
       "Every element as a real sample, like the classic photographic periodic tables: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model that judged from the photo how far away each part is. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out toward you and swings so you see its shape. Its facts show beside it: mass, group and period, state, density, melting and boiling points, discovery and real uses, from PubChem. Tap the sample to turn it around, or its tile to set it back. About 27 elements have no photo of a real sample: the heaviest exist only a few atoms at a time. Their tiles are hatched, and their facts say why. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
   },
