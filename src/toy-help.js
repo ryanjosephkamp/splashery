@@ -725,9 +725,9 @@ export const TOY_HELP = {
   // Lane Elements: the periodic table of real samples (labs).
   "real-elements": {
     howTo:
-      "Tap a tile to lift its sample and read its facts; tap the sample to turn it, its tile to set it back.",
+      "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
     about:
-      "Every element as a real sample, like the classic photographic periodic tables: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model that judged from the photo how far away each part is. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out toward you and swings so you see its shape. Its facts show beside it: mass, group and period, state, density, melting and boiling points, discovery and real uses, from PubChem. Tap the sample to turn it around, or its tile to set it back. About 27 elements have no photo of a real sample: the heaviest exist only a few atoms at a time. Their tiles are hatched, and their facts say why. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. About 27 elements have no photo of a real sample, because the heaviest exist only a few atoms at a time; their tiles are hatched. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
   },
 
   "crystal-lattice": {
@@ -1669,7 +1669,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to bow the plate and watch the sand find its still lines. In the Toy tab, sing to it or play your audio.",
     about:
-      "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the nearest mode, and a new note clearly held brings a new pattern with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+      "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the plate's nearest mode, and the sand sets off for that figure at once; a new note moves it on, and silence leaves it put. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
   },
   // Lane Data and climate.
   "data-in-3d": {
@@ -1716,7 +1716,7 @@ export const TOY_HELP = {
     howTo:
       "Tap “Start camera” to see yourself in splats; turn it to see the depth. More in the Toy tab.",
     about:
-      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
+      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. Tap to flatten it or raise it again. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan: you stay clear, while scanlines run across the room behind you and a soft glow rims your outline. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
   },
   // Lane Sound and light lab.
   "sound-lab": {
@@ -1739,9 +1739,9 @@ export const TOY_HELP = {
   },
   "song-landscape": {
     howTo:
-      "Tap to play or pause; drag to turn or tilt. The Toy tab starts over, scrubs, changes the look or uses the mic.",
+      "Tap to play and watch the land rise with the song; drag to turn or tilt. More in the Toy tab.",
     about:
-      "A song is a wave, but you can also see what it is made of. This toy measures each 40-millisecond slice of it: how loud each pitch is, how loud it is overall, its pitch and its brightness. Open your own song in the Toy tab (it stays on your device), or use the microphone: what it hears is kept in the page's memory to play back, and saved only if you tap Save.\n\nLive (the start) brings the newest sound to the bright line at the front; Whole song shows it all at once. Pitch: low notes on the left, high on the right, louder pitches as higher hills, colored like a rainbow. Loudness: the same, dark blue for quiet to white for loud. Ribbons: six bands, bass at the bottom (teal) to treble at the top (orange), each wider when louder. Tube: a ring per slice, wider when louder, tilted by pitch, turning orange when bright. Lines: one line per slice, like stacked mountain outlines. Mesh: the same as a wire net.",
+      "A song is a wave, but you can also see what it is made of. This toy measures each 40-millisecond slice of it: how loud each pitch is, how loud it is overall, its pitch and its brightness. Open your own song in the Toy tab (it stays on your device), or use the microphone: what it hears is kept in the page's memory to play back, and saved only if you tap Save.\n\nLive opens on an empty plain: each moment rises at the bright line at the front as it plays and moves back. Whole song shows it all at once. Pitch: low notes on the left, high on the right, louder pitches as higher hills, colored like a rainbow. Loudness: the same, dark blue for quiet to white for loud. Ribbons: six bands, bass (teal) to treble (orange), each wider when louder. Tube: a ring per slice, wider when louder, tilted by pitch, turning orange when bright. Lines: one line per slice, like stacked mountain outlines. Mesh: the same as a wire net.",
   },
 
   "model-splats": {
@@ -1765,6 +1765,20 @@ export const TOY_HELP = {
       "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
   },
 
+  // ---- Viewers (lane Viewers) -------------------------------------------------------------
+  "splat-toolkit": {
+    howTo:
+      "Tap to spin it round. Open your own splat file in the Toy tab to crop, clean, shrink or convert it.",
+    about:
+      "A 3D Gaussian splat file is a long list of soft colored blobs, each with a place, a size in three directions, a turn, an opacity and a color (sometimes a color that changes with the viewing angle, called spherical harmonics). This toolkit opens the common formats (PLY, compressed PLY, .splat, SPZ and SOG) and shows what is inside: how many splats, how big the scene is, the harmonics' degree, and the memory it takes.\n\nCrop keeps what is inside a box. Remove floaters finds the stray blobs a capture leaves in the air: for each splat it measures the average distance to its nearest neighbors, and those much farther out than the rest (a statistical outlier filter) are removed; show them in red, or before and after side by side. Shrink keeps the splats that show most. Save writes the result in the format you choose, and Compare puts a second splat beside the first, turning in step. Everything runs on your device in the background; nothing is uploaded.",
+  },
+  "point-clouds": {
+    howTo:
+      "Tap to sweep a lidar scan line across it. Turn on Measure in the Toy tab, then tap two points.",
+    about:
+      "A lidar scanner sends out laser pulses and times their echoes, so each echo becomes a point with its place, how strongly it reflected (intensity) and often a class (ground, vegetation, building, water). Millions of points make a point cloud. This toy opens LAS, LAZ (compressed LAS), PLY, XYZ and PTS files and draws every point as a small splat, colored by height, intensity, classification or the file's own colors.\n\nThe samples are real airborne lidar from the U.S. Geological Survey's 3D Elevation Program, which is mapping the whole country: San Francisco's Palace of Fine Arts, the Golden Gate Bridge's south end with Fort Point, and Meteor Crater in Arizona, a hole 1.2 kilometers wide blasted by an iron meteorite about 50,000 years ago. Measure gives the straight distance between two points, the distance along the ground and the rise. Crop and Thin work on every point, and Save writes PLY, LAS or XYZ. Your files stay on your device.",
+  },
+
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
     howTo: "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
@@ -1777,7 +1791,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
     about:
-      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid represents a Gaussian approximation to that spread, which can include vibration and static disorder. Its long axis shows the direction of greatest spread. It is not an exact photograph of an atom's motion.\n\nChoose aspirin at 300 K, the protein crambin, or open a CIF, mmCIF or PDB with displacement records. Probability selects an ellipsoid enclosing 30%, 50% or 90% of the modeled distribution. Draw solid ellipsoids or one soft Gaussian per atom; toggle bonds. Hydrogens can be small spheres, drawn as refined, or hidden. Atoms with only isotropic displacement appear as spheres. Tap to switch illustrative jiggles on or off; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore a structure, not to measure vibration rates.",
+      "Crystallography describes an atom's average position and spread with a displacement tensor. An ellipsoid is a Gaussian picture of that spread, which can include vibration and static disorder; its long axis shows the direction of greatest spread. It is not a photograph of an atom's motion.\n\nPick one of 38 measured structures in seven groups (everyday molecules, medicines, molecules of life, minerals and gems, ice and salts, proteins, and DNA and RNA) from the Crystallography Open Database or the Protein Data Bank, or open a CIF, mmCIF or PDB file. Show fills the unit cell with the atoms' symmetry copies, as minerals show by default. Probability sets the ellipsoid to enclose 30%, 50% or 90% of the spread; hard minerals and cold crystals have small ones. Draw solid ellipsoids or one Gaussian per atom, with or without bonds; hydrogens can be small spheres, as refined, or hidden. Tap to jiggle; zoom in, then tap an atom to focus there. Files stay on your device. Use it to explore, not to measure.",
   },
   "smlm-microscope": {
     howTo:
@@ -1785,10 +1799,27 @@ export const TOY_HELP = {
     about:
       "Ordinary light microscopy struggles to separate nearby objects about 200 to 300 nanometers apart. Single-molecule localization microscopy finds the centers of isolated fluorescent blinks more precisely, then builds a picture from many positions. Localization precision is not the same as the final image's resolution, and several blinks may come from one molecule. Here each blink is drawn as a Gaussian whose width represents its reported uncertainty.\n\nChoose microtubules and clathrin in a 12 µm cell region, a whole nucleus in 3D, or open a .smlm file or a CSV with positions and uncertainties in nanometers. Color by depth, time frame or channel. Depth scale shows true coordinates or stretches depth fourfold. Precision keeps all localizations or only those better than 5 or 3 nm. Pinch or scroll to zoom; tap for a 200 nm slice at that depth, then tap to restore all depths. Files stay on your device. This is a viewer, not a measurement tool.",
   },
-  "galaxy-box": {
-    howTo: "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
+  "cryoem-map": {
+    howTo:
+      "Tap to cut it open; tap again to close it. Pick a map, a level and the fitted model in the Toy tab.",
     about:
-      "Galaxy simulations follow gas with particles that carry mass, temperature, density and a smoothing length. This sample is a subset of the FIRE-2 m12i simulation, a galaxy of roughly the Milky Way's mass. Its gas particles come from a snapshot of the simulated present day, not a telescope image.\n\nEach particle is shown with a Gaussian whose spread approximates the simulation's smoothing kernel; the actual kernel is not Gaussian. Color by Temperature for cold blue and hot orange or red, or by Density to compare the gas concentration. Brightness also increases with density. Switch The box to show or hide the frame. Pinch or scroll to zoom; tap to keep only cold gas, then tap to restore the rest. Blended splats reveal the gas's shape but do not give a quantitative column-density measurement.",
+      "Cryo-electron microscopy freezes thousands of copies of a molecule in thin ice, photographs them with electrons and averages the pictures into a 3D map of density. Scientists look at the map as a surface at one density level and build an atomic model into it.\n\nThis toy reads three real maps from the Electron Microscopy Data Bank: apoferritin, a ribosome and a virus shell. It draws the surface at the level EMDB recommends, one small flat splat wherever the density crosses that level, on a grid of about 1 to 1.6 Å voxels that fits a phone. Choose a lower or higher level, color by the fitted model's chains or by distance from the center, and show the model's backbone inside a see-through map. Tap to cut the front half away and see inside. It is for looking, not for measuring or model building.",
+  },
+  "contour-lab": {
+    howTo: "Tap to pull the layers apart; tap again to stack them. Pick a place in the Toy tab.",
+    about:
+      "A contour line joins places at the same height, and a map with them shows a 3D shape on flat paper. This lab cuts real land into layers, one for each step of height, so you can see where the lines come from.\n\nThe land is measured: the U.S. Geological Survey's elevation data for Mount St. Helens, the Grand Canyon or Yosemite Valley, about 35 m between samples. Each layer's edge is a contour line. Tap to lift the layers apart and see each edge on its own; seen from straight above, the edges are the nested rings of a contour map. Lines close together mean steep ground; far apart, gentle. Choose the place and how much the heights are stretched.",
+  },
+  "terrain-box": {
+    howTo: "Tap to fill the land with water; tap again to drain it. Pick a place in the Toy tab.",
+    about:
+      "This is real land in a box: the U.S. Geological Survey's measured heights for Mount St. Helens, the Grand Canyon or Yosemite Valley, a square about 10 km across with a sample every 35 m. Each sample is a small splat, tinted by height and shaded by the sun, and the box's walls show the land cut through.\n\nTap to fill the land with water to a level and watch which valleys flood first, then tap to drain it. It is a level rising, not a model of how real floods flow. Choose the place, stretch the heights to see gentle slopes, and turn on contour lines. The Contour lab next to it shows how those lines are made.",
+  },
+  "galaxy-box": {
+    howTo:
+      "Pinch to zoom into the gas; tap to peel the hot gas. Through the telescope, tap for a new exposure.",
+    about:
+      "Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2 simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4 billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't Gaussian), colored by temperature or density; tap to keep only the cold gas.\n\nThrough a telescope (simulated) shows what an observer might record if the galaxy were 160 million light-years away: its star particles, bluer and brighter when young, blurred by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a filter; each tap starts a new exposure whose grainy photon noise smooths out as light builds up. The colors use a rough rule for how starlight fades with age, so it is a picture to explore, not a measurement.",
   },
 
   // ---- Imaging (lane Imaging) -----------------------------------------------------------
@@ -1800,17 +1831,18 @@ export const TOY_HELP = {
   "how-ct": {
     howTo: "Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.",
     about:
-      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.",
+      "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.\n\nChoose another toy to put in the scanner in the Toy tab. Its CT volume is worked out from its shape: a dense skin around a softer, even inside, since the toy has no real inside to measure.",
   },
   "fruit-mri": {
     howTo: "Drag up or down to scroll through the slices. Tap to play through them all.",
     about:
-      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit in the Toy tab. The faint outline shows where the slice is.",
+      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit and the vision (the realistic gray, night vision or infrared) in the Toy tab. The faint outline shows where the slice is.",
   },
   "electron-microscope": {
-    howTo: "Tap to zoom in a step; the third tap goes back out. Choose the sample in the Toy tab.",
+    howTo:
+      "Tap to zoom in a step; the third tap goes back out. Choose the sample and the vision in the Toy tab.",
     about:
-      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface.",
+      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface. Vision in the Toy tab recolors the picture: the realistic gray, a night-vision scope's green, or an infrared camera's colors (for fun: an electron microscope sees no color).",
   },
   "thermal-camera": {
     howTo: "Tap to switch the thermal camera on or off, and watch the tea cool.",
@@ -1820,7 +1852,7 @@ export const TOY_HELP = {
   "walnut-ct": {
     howTo: "Drag up or down on the walnut to cut into it. Tap to see only its shell.",
     about:
-      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
+      "This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures taken from all around it, worked back into a volume of how dense the walnut is at every point. Each splat here is one small block of that volume, 0.3 mm across, bright where the walnut is dense.\n\nDrag up or down to cut into it and see the woody shell, the kernel's folded lobes and the air between them. Choose the cut's direction and the colors (CT gray, warm, night vision or infrared) in the Toy tab. Tap to show only the densest parts: the kernel melts away and the shell stays. The scan is Walnut 1 of a dataset by Der Sarkissian, Lucka, van Eijnatten, Colacicco, Coban and Batenburg (CC BY 4.0).",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
@@ -2083,6 +2115,68 @@ export const TOY_HELP = {
     howTo: "Drag to look around the sky. Tap a star or a planet to name it.",
     about:
       "The sky over a place at a moment: about 5,000 stars down to magnitude 6, the faintest you can see from a dark place, each sized by its brightness and colored by its temperature. The Sun, the Moon and the planets are placed by JPL's formulas for their orbits, and the Moon is a small ball lit from the Sun's side, so you see its real phase. As the Sun rises the faint stars go out first.\n\nPick a city in the Toy tab, type a latitude and longitude, or tap “Use my location” (your browser asks first; the place stays on your device). Set a date from 1800 to 2050, or speed time up to watch the sky turn. The Sun and the Moon are drawn three times their real size.",
+  },
+  // ---- Space r2 (lane Space r2): real worlds ---------------------------------------------
+  "real-moon": {
+    howTo:
+      "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    about:
+      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. Close up, the relief eases to at most twice its height. There are no shadows, and the colors are a little enhanced, as in NASA's map.",
+  },
+  "real-mars": {
+    howTo:
+      "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    about:
+      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air; there are no shadows.",
+  },
+  "real-earth": {
+    howTo:
+      "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    about:
+      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. Close up, the relief eases to at most twice its height. There are no clouds or shadows.",
+  },
+  "real-mercury": {
+    howTo:
+      "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    about:
+      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. There are no shadows.",
+  },
+  "real-venus": {
+    howTo:
+      "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    about:
+      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. There are no shadows.",
+  },
+  "nearby-stars": {
+    howTo: "Tap to fly to Alpha Centauri, Sirius, Barnard's Star, Vega or Arcturus and back.",
+    about:
+      "Every star within about 65 light-years (20 parsecs) of the Sun, where it really is: about 2,200 stars measured by ESA's Gaia spacecraft, from the tiny shift of each star's position as Earth goes round the Sun. About 35 of the brightest, which Gaia cannot measure, like Sirius and Vega, come from the older Hipparcos survey (via the HYG database).\n\nThe Sun is in the middle; the faint rings lie in our Galaxy's plane, and the line points to its center. Each star's color comes from its temperature: red dwarfs, the most common stars, are orange-red; hot stars are blue-white. The sizes show brightness, not size. Tap to fly to a named star and see its distance; the first is Alpha Centauri, with Proxima Centauri, the nearest star of all, beside it.",
+  },
+  "real-galaxies": {
+    howTo: "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
+    about:
+      "Four real galaxies from telescope pictures: the Whirlpool (M51), the Pinwheel (M101) and the Phantom (M74) from the Hubble Space Telescope, and the Southern Pinwheel (M83) from the European Southern Observatory's Very Large Telescope. Every splat takes its color from the picture, so the arms, the pink clouds where stars are born and the dark lanes of dust are where the telescope saw them.\n\nA picture shows nothing of how thick a galaxy is, so the thickness is a guess from galaxies seen edge on: a thin disk and a round bulge at the center. Tap to turn the galaxy edge on and see the guess. Foreground stars of our own Galaxy, and more distant galaxies, are drawn in its disk too.",
+  },
+  "saturn-v": {
+    howTo: "Tap to fire its stages in the order of a real flight.",
+    about:
+      "The Saturn V, the rocket that sent astronauts to the Moon from 1968 to 1972, as splats from NASA's 3D model. Its three stages were the S-IC with five F-1 engines, the S-II with five J-2s and the S-IVB with one J-2; the Apollo spacecraft rode on top under its escape tower.\n\nTap to stage it in the order of Apollo 11's flight, much faster than real: the first stage falls away at 2 minutes 40 seconds, then the ring below the second stage and the escape tower; the second stage at 9 minutes 8 seconds; the spacecraft leaves the third stage about three and a half hours after launch. The model paints a band of the first stage navy; the real one was white, so it is drawn white.",
+  },
+  "real-moons": {
+    howTo:
+      "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    about:
+      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second.",
+  },
+  "real-small-worlds": {
+    howTo: "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    about:
+      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them.",
+  },
+  "star-systems": {
+    howTo: "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",
+    about:
+      "Real planets round other stars, from the NASA Exoplanet Archive: TRAPPIST-1, a cool red dwarf 40 light-years away with seven rocky planets, all closer to it than Mercury is to the Sun; TOI-178, whose six planets go round in a chain of near-simple ratios; and 55 Cancri, with a planet whose year is shorter than a day. The inner Solar System is there to compare.\n\nThe orbits' sizes and periods are measured, and the planets move at those rates, sped up. Star and planets are drawn far larger than to scale. Nobody knows these planets' colors, so they show their size: gray-brown for rocky, blue for mid-sized, tan for giants. Tap to see the system edge on, as we see TRAPPIST-1 and TOI-178: their planets were found as they passed in front of their stars.",
   },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {
