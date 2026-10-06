@@ -27,8 +27,10 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first). Lane PR
   ribosome now comes in as one of the chloroplast micrograph's dark stromal grains, beside a
   thylakoid, in the micrograph's own olive gray (the same map, flat, as an electron micrograph shows
   it); the micrograph stays until the grain fills a good part of the view, fades to black round it,
-  and the grain then turns into the colored map. (Chloroplast ribosomes are 70S like the E. coli
-  map's.) Main 43b4d0b0 merged into both branches; posted as `pot-zoom-in-r3`.
+  and the grain then turns into the colored map over about a second (a `solid: n` fade sets each
+  splat's opacity so the grain's overlapping splats fade evenly). (Chloroplast ribosomes are 70S
+  like the E. coli map's.) Main 37f9eefd merged into both branches; posted as `pot-zoom-in-r3` (40
+  s; its last 10 s rendered with `pot-clip.mjs --start=30` and joined to the first 30 s).
 
 The stops (log10 of the view's height in meters): the Milky Way 21 (M83, ESO, at the Milky Way's
 size and real tilt), stars within 1,600 light-years 19.4 (HYG v4.4), within 65 light-years 18
