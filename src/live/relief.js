@@ -593,9 +593,11 @@ export class BackPlate {
     // wall meets the floor runs on behind them; the coarse fill alone made a
     // soft blob of the colors all round (the door's white edge, the
     // picture's), which showed as a pale ghost of the person, seen turned.
-    const w = Float32Array.from(seen); // (a copy: what was filled isn't seen)
-    rowFill(vals, w, bc, br);
-    fillHoles(vals, w, bc, br, 4);
+    // (Only its colors: the coarse fill's smooth depth stays, as a row's
+    // ends can be the near floor, and those splats stood out below the
+    // picture.)
+    fillHoles(vals, Float32Array.from(seen), bc, br, 4);
+    rowFill(vals, seen, bc, br);
   }
 
   // Into the canvas's lower half: the colors on the left, the heights (a
@@ -675,8 +677,8 @@ BackPlate.prototype.drawRested = function (g, cols, rows, f) {
 // Fills the cells whose weight is 0 from their weighted neighbors, coarse
 // to fine (push-pull): each coarser level averages the known cells under
 // it, and each unknown cell takes the level above it.
-// Live r7: fills each unseen cell of a W by H grid of r, g, b, depth (vals,
-// 4 a cell; seen 0 or 1) from the seen cells nearest it on its row, left and
+// Live r7: fills the colors of each unseen cell of a W by H grid of r, g, b,
+// depth (vals, 4 a cell; seen 0 or 1) from the seen cells nearest it on its row, left and
 // right, the nearer counting more (by the inverse of the distance squared).
 // Each end is the mean of the seen cells within a row or two (so one odd cell
 // doesn't streak), and the filled cells are then smoothed a little down each
@@ -719,7 +721,7 @@ export function rowFill(vals, seen, W, H) {
         const wl = hasL ? 1 / (dl * dl) : 0;
         const wr = hasR ? 1 / (dr * dr) : 0;
         const c = (y * W + i) * 4;
-        for (let k = 0; k < 4; k++) out[c + k] = (L[k] * wl + R[k] * wr) / (wl + wr);
+        for (let k = 0; k < 3; k++) out[c + k] = (L[k] * wl + R[k] * wr) / (wl + wr);
         filled[y * W + i] = 1;
       }
       x = x1;
@@ -738,9 +740,8 @@ export function rowFill(vals, seen, W, H) {
         for (let k = 0; k < 4; k++) acc[k] += out[q * 4 + k];
         n++;
       }
-      for (let k = 0; k < 4; k++) vals[c * 4 + k] = acc[k] / n;
+      for (let k = 0; k < 3; k++) vals[c * 4 + k] = acc[k] / n;
     }
-  for (let c = 0; c < W * H; c++) if (filled[c]) seen[c] = 0.999;
 }
 
 export function fillHoles(vals, w, W, H, ch) {
@@ -1191,7 +1192,10 @@ export function buildMirror(
     part,
     vs: withBack ? 0.5 : 1,
   });
-  const back = withBack && live.camera?.video ? { cols: Math.ceil(cols / 2), rows: Math.ceil(rows / 2) } : null; // prettier-ignore
+  // (Live r7: half the depth's grid each way, as before the picture's grid
+  // grew finer: the wall it learns is no finer than the depth it learns from.)
+  const ds = Math.min(1, Math.sqrt(DEPTH_CELLS / (cols * rows)));
+  const back = withBack && live.camera?.video ? { cols: Math.ceil((cols * ds) / 2), rows: Math.ceil((rows * ds) / 2) } : null; // prettier-ignore
   if (back)
     reliefGrid(k, {
       cols: back.cols,
