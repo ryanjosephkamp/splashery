@@ -2613,6 +2613,20 @@
       "effect": "Real land in a box (USGS 3DEP heights, a square about 10 km across, 256 × 256 samples), tinted by height and shaded by the sun, with cliffs filled and the box's walls showing the cross-section. The tap raises a sheet of water to 45% of the relief, flooding the valleys first (a level, not a flood model); a second tap drains it.",
       "sound": "A gentle rush as the water rises; a lower one as it drains.",
       "improved": "Science r3: the water is a kit part rising; contour lines, a height stretch (1×, 2×, 4×), three places."
+    },
+    "splat-toolkit": {
+      "v": "new",
+      "owner": "The owner's Push Plan pick S3, \"Useful to everyone who makes splats\" (October 4, 2026; lane Viewers; labs only).",
+      "effect": "A splat file opened on the device: its numbers (splat count, size, harmonics degree, file size, memory); crop with a box (its outline drawn), remove floaters with a statistical outlier filter you tune (removed splats in red, or before and after side by side), shrink to a share of the splats, save as PLY, SPZ, SOG or .splat, and compare two splats side by side. The tap spins it round once, each splat about its own middle, both in step (3 s).",
+      "sound": "A soft swish of air as it spins.",
+      "improved": "Viewers: readers for PLY (binary, text and compressed), .splat, SPZ 1 to 3 and SOG 2 (zipped or as meta.json with its pictures); writers for PLY, SPZ 3, SOG 2 (base colors) and .splat; everything in a worker; the preview draws the most visible splats within the device's budget. Samples: the cactus, strawberry and bee captures, and the cactus with 0.6% stray splats added. Viewers r3 (the owner's \"the toys could still be sharper\", October 5, 2026): as many splats as each device draws smoothly, splats left at their own size (a preview grows them by at most a quarter), two splats stacked one above the other on a phone held upright, and far strays left out of the view so the splat fills the screen."
+    },
+    "point-clouds": {
+      "v": "new",
+      "owner": "The owner's Push Plan pick S2, \"Absolutely, yes ... maybe even a little bit more\" (October 4, 2026; lane Viewers; labs only).",
+      "effect": "LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity, classification (with a legend) or the file's own colors; measure the distance between two tapped points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line across the points from west to east, like a scanner's pass over the ground (2.6 s).",
+      "sound": "An airy rising tone with faint ticks as the scan line crosses.",
+      "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, Meteor Crater. Viewers r2 (the owner's \"Please make sharper\" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's sharper falloff, shaded relief baked into their colors (lit by the slope under each point, darker under canopies), the preview picks one point per small cube instead of a random share (no more holes), and up to the device's full budget. Viewers r3 (the owner's \"the toys could still be sharper\", October 5, 2026): the samples remade with even thinning (one point per small cube, so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or cliff, so edges read crisply."
     }
   }
 }
