@@ -783,6 +783,10 @@ function longFrame(clip, t) {
   return { w, h, colors: [colors], near: [L.bytes], mean: clip.mean };
 }
 
+// What a long clip's shown picture depends on beyond its frame: whether its
+// copy has a picture, the copy's own frame and how much depth is in.
+const longVersion = (clip) => (clip?.long ? `${clip.video.readyState >= 2 ? 1 : 0}|${Math.round(clip.video.currentTime * clip.fps)}|${clip.depth.ready}` : ""); // prettier-ignore
+
 // Keeps the muted copy on the clip's clock: playing with it, or paused at it.
 function syncVideo(clip, playing, t) {
   const v = clip.video;
@@ -1202,7 +1206,9 @@ export const MOVING_PHOTO = {
     get height() {
       return MOVING.grid?.rows || 12;
     },
-    version: () => `${MOVING.clip?.name}|${MOVING.frame}|${MOVING.grid?.cols}`,
+    // (Live r7: a long clip's picture also changes as its copy gets a frame
+    // and its depth arrives.)
+    version: () => `${MOVING.clip?.name}|${MOVING.frame}|${MOVING.grid?.cols}|${longVersion(MOVING.clip)}`, // prettier-ignore
     draw(g) {
       const clip = MOVING.clip;
       if (!clip || !MOVING.grid) return;
@@ -1227,7 +1233,12 @@ export const MOVING_PHOTO = {
     const on = globalThis.window?.__splashery?.player?.motion ? playTarget() : (c.play ?? 1) > 0.5;
     const tr = track();
     if (!on) {
-      if (tr?.playing) soundTo(false);
+      if (tr?.playing) {
+        // (Live r7: the picture stops where the sound stops, though the last
+        // frame drawn may be a moment behind it.)
+        MOVING.t = Math.min(clip.duration - 0.02, Math.max(0, tr.time()));
+        soundTo(false);
+      }
       MOVING.anchor = null;
     } else if (tr?.playing) {
       // r5: the frames follow the sound's clock (looping at the clip's end).

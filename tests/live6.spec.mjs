@@ -66,12 +66,16 @@ test("pausing and playing with a tap keep the sound's place; so do a scrub and S
   expect(Math.abs(p1.t - p0.t)).toBeLessThan(0.05);
   // Another tap plays both on from that place (the sound used to stay off
   // until Start over, then begin again from the start).
-  await tap(page);
+  const w1 = await page.evaluate(() => {
+    window.__splashery.app.act();
+    return performance.now() / 1000;
+  });
   await page.waitForTimeout(400);
   const r0 = await state(page);
   expect(r0.playing).toBe(true);
   expect(r0.sound).toBeGreaterThan(p1.t - 0.05);
-  expect(r0.sound).toBeLessThan(p1.t + 0.8);
+  // (Live r7: against the time since the tap; see the scrub below.)
+  expect(r0.sound).toBeLessThan(p1.t + (r0.wall - w1) + 0.4);
   await page.waitForTimeout(1500);
   const r1 = await state(page);
   expect(r1.playing).toBe(true);
@@ -85,13 +89,18 @@ test("pausing and playing with a tap keep the sound's place; so do a scrub and S
     s.dispatchEvent(new Event("input"));
     s.dispatchEvent(new Event("change"));
   });
-  await page.evaluate(() => document.getElementById("moving-play").click());
+  const w0 = await page.evaluate(() => {
+    document.getElementById("moving-play").click();
+    return performance.now() / 1000;
+  });
   await page.waitForTimeout(400);
   const s0 = await state(page);
   expect(s0.playing).toBe(true);
-  // (Live r7: the 10-second video plays whole now, so the middle is 5 s.)
+  // (Live r7: the 10-second video plays whole now, so the middle is 5 s; and
+  // the sound is checked against the time since Play, as the page can stall
+  // a moment while a long video's depth is worked out.)
   expect(s0.sound).toBeGreaterThan(4.9);
-  expect(s0.sound).toBeLessThan(5.8);
+  expect(s0.sound).toBeLessThan(5 + (s0.wall - w0) + 0.4);
   // Start over: the sound from the top.
   await page.evaluate(() => document.getElementById("moving-start").click());
   await page.waitForTimeout(300);

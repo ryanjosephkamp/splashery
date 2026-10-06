@@ -88,6 +88,15 @@ test("a 60-second video plays whole as its depth is worked out, on one clock wit
   expect(p.sound).toBeGreaterThan(1);
   expect(Math.abs(p.t - p.sound)).toBeLessThan(0.6);
   expect(Math.abs(p.video - p.sound)).toBeLessThan(0.6);
+  // The picture shown is the copy's (not a black frame drawn before it had one).
+  const lit = await page.evaluate(async (m) => {
+    const c = (await import(m)).MOVING.clip;
+    const d = c.scratch.g.getImageData(0, 0, c.w, c.h).data;
+    let s = 0;
+    for (let i = 0; i < d.length; i += 4) s += d[i] + d[i + 1] + d[i + 2];
+    return s / ((d.length / 4) * 3);
+  }, mp);
+  expect(lit).toBeGreaterThan(20);
   // A scrub far into it: the sound and the copy go there.
   await page.evaluate(() => {
     const s = document.getElementById("moving-seek");
