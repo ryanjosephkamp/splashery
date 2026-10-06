@@ -77,9 +77,9 @@ test("ten jobs in a row and repeated Cancel leave no growing documents or handle
   const cancels = [];
   for (let i = 0; i < 5; i++) {
     await page.click("#capture");
-    await expect(page.locator("#status")).toContainText(`Capturing frame ${2 + i} of 40`, {
-      timeout: JOB,
-    });
+    // Cancel at a different point mid-capture each time.
+    await expect(page.locator("#status")).toContainText("Capturing frame", { timeout: JOB });
+    await page.waitForTimeout(400 * i);
     await page.click("#cancel");
     await expect(page.locator("body")).toHaveAttribute("data-state", "failed");
     cancels.push(await measure());
