@@ -176,6 +176,89 @@ export function colorer(m, scheme, use) {
   return (i) => cpk(m.el[i]);
 }
 
+// ---- Ambient occlusion ------------------------------------------------------------------------------
+
+// How open each atom is (0 buried .. 1 on the outside), from how crowded its
+// neighborhood is: atoms are counted on a 3 Å grid, the counts are blurred
+// over about 9 Å, and each atom reads the blurred count where it sits.
+// Crevices and the insides of folds get less light, as in ambient occlusion,
+// so a space-filling model or a surface reads in depth.
+export function openness(m, atoms) {
+  const out = new Float32Array(m.n).fill(1);
+  if (!atoms.length) return out;
+  const cell = 3;
+  const lo = [Infinity, Infinity, Infinity];
+  const hi = [-Infinity, -Infinity, -Infinity];
+  for (const i of atoms) {
+    const p = [m.x[i], m.y[i], m.z[i]];
+    for (let a = 0; a < 3; a++) {
+      lo[a] = Math.min(lo[a], p[a]);
+      hi[a] = Math.max(hi[a], p[a]);
+    }
+  }
+  const o = lo.map((v) => v - 2 * cell);
+  const N = [0, 1, 2].map((a) => Math.ceil((hi[a] - o[a]) / cell) + 3);
+  const idx = (x, y, z) => (z * N[1] + y) * N[0] + x;
+  let grid = new Float32Array(N[0] * N[1] * N[2]);
+  for (const i of atoms) {
+    const x = Math.floor((m.x[i] - o[0]) / cell);
+    const y = Math.floor((m.y[i] - o[1]) / cell);
+    const z = Math.floor((m.z[i] - o[2]) / cell);
+    grid[idx(x, y, z)]++;
+  }
+  // Three box blurs along each axis (about a Gaussian over 3 cells).
+  for (let pass = 0; pass < 3; pass++)
+    for (let axis = 0; axis < 3; axis++) {
+      const next = new Float32Array(grid.length);
+      const step = axis === 0 ? 1 : axis === 1 ? N[0] : N[0] * N[1];
+      for (let k = 0; k < grid.length; k++) {
+        const c = axis === 0 ? k % N[0] : axis === 1 ? Math.floor(k / N[0]) % N[1] : Math.floor(k / (N[0] * N[1])); // prettier-ignore
+        let sum = grid[k];
+        if (c > 0) sum += grid[k - step];
+        if (c < N[axis] - 1) sum += grid[k + step];
+        next[k] = sum / 3;
+      }
+      grid = next;
+    }
+  // Trilinear reads, so the shading has no steps.
+  const read = (p) => {
+    const f = [0, 1, 2].map((a) => (p[a] - o[a]) / cell - 0.5);
+    const b = f.map((v) => Math.floor(v));
+    const t = f.map((v, a) => v - b[a]);
+    let v = 0;
+    for (let dz = 0; dz < 2; dz++)
+      for (let dy = 0; dy < 2; dy++)
+        for (let dx = 0; dx < 2; dx++) {
+          const x = Math.min(N[0] - 1, Math.max(0, b[0] + dx));
+          const y = Math.min(N[1] - 1, Math.max(0, b[1] + dy));
+          const z = Math.min(N[2] - 1, Math.max(0, b[2] + dz));
+          const w = (dx ? t[0] : 1 - t[0]) * (dy ? t[1] : 1 - t[1]) * (dz ? t[2] : 1 - t[2]);
+          v += w * grid[idx(x, y, z)];
+        }
+    return v;
+  };
+  const crowd = new Float32Array(m.n);
+  let mn = Infinity;
+  let mx = 0;
+  for (const i of atoms) {
+    const v = read([m.x[i], m.y[i], m.z[i]]);
+    crowd[i] = v;
+    if (v < mn) mn = v;
+    if (v > mx) mx = v;
+  }
+  if (mx > mn) for (const i of atoms) out[i] = 1 - (crowd[i] - mn) / (mx - mn);
+  return out;
+}
+
+// A color function darkened where atoms are buried (by up to `strength`).
+export function occluded(color, open, strength = 0.38) {
+  return (i) => {
+    const k = 1 - strength * (1 - open[i]) ** 1.5;
+    const c = color(i);
+    return [c[0] * k, c[1] * k, c[2] * k];
+  };
+}
+
 // ---- Atoms ------------------------------------------------------------------------------------
 
 // A grid of atoms for "is this point inside another atom?" (spacefill culls
@@ -228,11 +311,18 @@ function atomGrid(m, atoms, radius) {
     },
     // The nearest atom to p, among these (for coloring a surface point).
     nearest(p) {
+      return this.nearest2(p)[0];
+    },
+    // The two nearest atoms to p and how much nearer the first is, in Å
+    // (measured from each atom's own surface, so a big atom wins its patch).
+    nearest2(p) {
       const a = Math.floor(p[0] / cell);
       const b = Math.floor(p[1] / cell);
       const c = Math.floor(p[2] / cell);
       let best = -1;
       let bd = Infinity;
+      let second = -1;
+      let sd = Infinity;
       for (let reach = 1; reach <= 3 && best < 0; reach++)
         for (let dx = -reach; dx <= reach; dx++)
           for (let dy = -reach; dy <= reach; dy++)
@@ -243,15 +333,19 @@ function atomGrid(m, atoms, radius) {
                 const ex = p[0] - m.x[j];
                 const ey = p[1] - m.y[j];
                 const ez = p[2] - m.z[j];
-                // Measured from the atom's own surface, so a big atom wins its patch.
                 const d = Math.sqrt(ex * ex + ey * ey + ez * ez) - radius(j);
                 if (d < bd) {
+                  second = best;
+                  sd = bd;
                   bd = d;
                   best = j;
+                } else if (d < sd) {
+                  sd = d;
+                  second = j;
                 }
               }
             }
-      return best;
+      return [best, second, sd - bd];
     },
   };
 }
@@ -492,7 +586,7 @@ export function drawCartoon(L, m, { colorRes, density, rand }) {
     };
     if (chain.residues.filter((r) => r.atoms.some((a) => a.name === "CA")).length < 2) continue;
     // Path points per residue step (3.8 Å): enough for the budget, at least 3.
-    let per = Math.max(1, Math.min(16, Math.round(Math.sqrt(density) * 3.8)));
+    let per = Math.max(1, Math.min(24, Math.round(Math.sqrt(density) * 3.8)));
     // Too few splats for rings round the ribbon (a big structure): one flat
     // Gaussian per path point, as many points per residue as the budget allows.
     const single = 4 * (3.8 / per) * density < 5;
@@ -514,7 +608,7 @@ export function drawCartoon(L, m, { colorRes, density, rand }) {
       const next = pts[k + 1]?.seg === pt.seg ? pts[k + 1] : pts[k - 1];
       const stepLen = next ? len(sub(next.p, pt.p)) : 3.8 / per;
       const perim = Math.PI * (w + h) * 1.1;
-      const ring = Math.min(72, Math.round(perim * stepLen * density));
+      const ring = Math.min(110, Math.round(perim * stepLen * density));
       const resIndex = chain.residues[pt.res].ri;
       const c = colorRes(resIndex, pt.res / Math.max(1, n - 1));
       if (single || ring < 5) {
@@ -632,14 +726,21 @@ export function drawSurface(L, m, { use, color, max, rand }) {
   const surf = blobbySurface(m, { radius: (i) => vdwRadius(m.el[i]), use, max });
   const grid = atomGrid(m, atoms, (i) => vdwRadius(m.el[i]));
   const keep = Math.min(1, max / Math.max(1, surf.count));
-  const sz = surf.h * 0.62 * Math.sqrt(1 / keep);
+  const sz = surf.h * 0.7 * Math.sqrt(1 / keep);
   let drawn = 0;
   for (let k = 0; k < surf.count; k++) {
     if (keep < 1 && rand() > keep) continue;
     const p = [surf.points[k * 3], surf.points[k * 3 + 1], surf.points[k * 3 + 2]];
     const n = [surf.normals[k * 3], surf.normals[k * 3 + 1], surf.normals[k * 3 + 2]];
-    const j = grid.nearest(p);
-    const c = j >= 0 ? color(j) : [0.8, 0.8, 0.8];
+    // Each patch takes its atom's color, blended over 0.3 Å into the next
+    // atom's at the seam (no stair-stepped color edges).
+    const [j, j2, gap] = grid.nearest2(p);
+    let c = j >= 0 ? color(j) : [0.8, 0.8, 0.8];
+    if (j2 >= 0 && gap < 0.3) {
+      const c2 = color(j2);
+      const w = 0.5 * (1 - gap / 0.3);
+      c = [0, 1, 2].map((q) => c[q] + (c2[q] - c[q]) * w);
+    }
     L.push(p, [sz, sz, sz * 0.3], discQuat(n), lit(c, n, 0.25));
     drawn++;
   }
@@ -648,41 +749,47 @@ export function drawSurface(L, m, { use, color, max, rand }) {
 
 // ---- Measuring marks ----------------------------------------------------------------------------
 
-// A marker round a picked atom: three rings at right angles (it reads from
-// any side), radius R, drawn at the origin (the recipe moves it as a token).
-export function markerSplats(R, color) {
-  const out = [];
-  const ringN = Math.max(24, Math.round((TAU * R) / 0.08));
-  const w = (TAU * R) / ringN;
-  const axes = [
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1],
-  ];
-  for (const ax of axes) {
-    const u = across(ax);
-    const v = cross(ax, u);
-    for (let q = 0; q < ringN; q++) {
-      const a = (q / ringN) * TAU;
-      const n = add(mul(u, Math.cos(a)), mul(v, Math.sin(a)));
-      const tan = cross(ax, n);
-      out.push({ p: mul(n, R), scales: [w * 0.9, R * 0.06, R * 0.06], quat: alongQuat(tan), color, opacity: 1, jitter: 0 }); // prettier-ignore
+// The measuring marks are flat and face the camera (the recipe turns them,
+// as tokens, toward where it stands), drawn at the origin in their own plane
+// (x, y; +z toward the camera). A bright band on a wider dark one just behind
+// it, so it reads against any color: white hydrogens, gray carbons, the
+// surface. (The recipe sorts the marks again as the camera turns, so the
+// bright one stays in front.)
+const RIM = [0.07, 0.07, 0.09];
+function annulus(out, r0, r1, color, step, z = 0) {
+  const rows = Math.max(1, Math.round((r1 - r0) / step));
+  const dr = (r1 - r0) / rows;
+  for (let k = 0; k < rows; k++) {
+    const r = r0 + dr * (k + 0.5);
+    const n = Math.max(8, Math.round((TAU * r) / step));
+    const w = (TAU * r) / n;
+    for (let q = 0; q < n; q++) {
+      const a = (q / n) * TAU;
+      out.push({ p: [r * Math.cos(a), r * Math.sin(a), z], scales: [w * 1.0, dr * 0.9, dr * 0.1], quat: [0, 0, Math.sin((a + Math.PI / 2) / 2), Math.cos((a + Math.PI / 2) / 2)], color, opacity: 1, jitter: 0 }); // prettier-ignore
     }
   }
+}
+
+// A ring marker of radius R (the middle of its band).
+export function markerSplats(R, color) {
+  const out = [];
+  const b = R * 0.15; // half the band
+  const e = R * 0.08; // the rim on each side
+  const step = b / 2; // about 400 splats a ring, at any size
+  annulus(out, R - b, R + b, color, step);
+  annulus(out, R - b - e, R + b + e, RIM, step * 1.3, -R * 0.2);
   return out;
 }
 
-// One bead of a measuring line or arc: a small solid ball of radius r at the
-// origin (lit like the atoms, so it reads as a crisp dot, not a haze).
+// One bead of a measuring line or arc: a flat dot of radius r. Its dark rim
+// is a wider disc just behind it, so the beads of a line run together into
+// one bright line with a dark edge (the recipe sorts the marks again as the
+// camera turns).
 export function beadSplats(r, color) {
-  const n = 36;
-  const sz = 1.3 * Math.sqrt((4 * Math.PI * r * r) / (n * Math.PI));
-  return spherePoints(n, 0.3).map((d) => ({
-    p: mul(d, r),
-    scales: [sz, sz, sz * 0.35],
-    quat: discQuat(d),
-    color: lit(color, d, 0.4),
-    opacity: 1,
-    jitter: 0,
-  }));
+  const out = [];
+  const step = r / 2;
+  out.push({ p: [0, 0, 0], scales: [step * 0.7, step * 0.7, step * 0.1], quat: [0, 0, 0, 1], color, opacity: 1, jitter: 0 }); // prettier-ignore
+  annulus(out, step * 0.6, r, color, step);
+  annulus(out, 0, r * 1.4, RIM, step * 1.2, -r * 0.5);
+  return out;
 }

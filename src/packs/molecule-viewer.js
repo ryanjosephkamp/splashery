@@ -12,7 +12,7 @@
 //   src/molview/geom.js    turning, measuring, picking and the surface
 //   src/molview/draw.js    the splats (with a budget: the level of detail)
 
-import { quatAxisAngle, smoothstep } from "../kit.js";
+import { quatAxisAngle, quatFromTo, quatMul, smoothstep } from "../kit.js";
 import { readModel, fetchEntry, pdbCode, RCSB, MAX_FETCH_BYTES } from "../molview/load.js";
 import { KIND, MAX_ATOMS } from "../molview/parse.js";
 import { distance, angle, nearestAtom, atomLabel, pos, outerAtoms } from "../molview/geom.js";
@@ -26,6 +26,8 @@ import {
   markerSplats,
   beadSplats,
   colorer,
+  openness,
+  occluded,
   CHAIN_COLORS,
   residueColor,
 } from "../molview/draw.js";
@@ -232,9 +234,10 @@ const styleFor = (o, m) => (o.style === "auto" || !o.style ? (isMacro(m) ? "cart
 
 // ---- Splat budget --------------------------------------------------------------------------------------
 
-// The toy draws 1.2 of the kit's count (72k, 168k, 240k and 336k splats by
-// tier). Big structures spread these thinner, down to one Gaussian per atom.
-export const VIEWER_DENSITY = 1.2;
+// The toy draws twice the kit's count, within each tier's cap (120k, 240k,
+// 300k and 400k splats: the polish round, for sharper atoms and ribbons). Big
+// structures spread these thinner, down to one Gaussian per atom.
+export const VIEWER_DENSITY = 2;
 const BALL = 0.25; // ball-and-stick: a ball is this share of the van der Waals radius
 const STICK = 0.13; // ball-and-stick: the stick's radius, Å
 const SS_COLORS = { H: [0.9, 0.3, 0.38], E: [0.95, 0.78, 0.22], C: [0.82, 0.83, 0.8] };
@@ -268,6 +271,7 @@ const PICK_COLORS = [
 const VIEWER = {
   density: VIEWER_DENSITY,
   turntable: false, // it holds still for measuring (drag to turn it)
+  kernel: "sharp", // crisper edges on the bigger splats (labs; src/kernels.js)
   options: [
     {
       key: "structure",
@@ -402,57 +406,76 @@ const VIEWER = {
     if (!S) return;
     const m = S.model;
     const P = MV.picks.filter((i) => i < m.n);
+    // The marks face the camera and stand just in front of their atom (on the
+    // camera's side of its ball or of the surface), so nothing hides them.
+    // info.eye is the camera in this frame; without it, the camera's turn and
+    // its usual tilt.
+    const eye = info.eye;
+    const tilt = 0.28;
+    const yaw = info.view ?? 0.55;
+    const toEye = (p) =>
+      eye
+        ? unitTo(p, eye)
+        : [Math.sin(yaw) * Math.cos(tilt), Math.sin(tilt), Math.cos(yaw) * Math.cos(tilt)];
+    const lifted = (a) => {
+      const p = pos(m, a);
+      const d = toEye(p);
+      const h = S.lift(a);
+      return [p[0] + d[0] * h, p[1] + d[1] * h, p[2] + d[2] * h];
+    };
     // The marks are drawn in depth order where they stand: sort them again
-    // when the picks change (the player's resortTokens).
+    // when the picks change, and when the camera has turned well away from
+    // where they were last sorted (the player's resortTokens).
+    const look = P.length ? toEye(pos(m, P[0])) : null;
     const key = `${S.splats}:${P.join(",")}`;
-    if (key !== MV.sorted) {
+    const turned = look && MV.look && look[0] * MV.look[0] + look[1] * MV.look[1] + look[2] * MV.look[2] < 0.996; // prettier-ignore
+    if (key !== MV.sorted || (turned && info.time - (MV.sortedAt ?? 0) > 0.3)) {
       MV.sorted = key;
+      MV.look = look;
+      MV.sortedAt = info.time;
       out.resort = true;
     }
-    // The newest pick's marks arrive as the tap's pulse runs out: its marker
-    // turns a full circle, its line runs out from the last atom.
+    // The newest pick's marker flips over once as the tap's pulse runs out;
+    // its line runs out from the last atom.
     const run = 1 - Math.max(0, Math.min(1, c.pick ?? 0));
     const grow = smoothstep(0, 0.55, run);
+    const flat = (p) => quatFromTo([0, 0, 1], toEye(p));
     P.forEach((a, k) => {
       const newest = k === P.length - 1;
+      const at = lifted(a);
+      const q = flat(at);
       tokens[k] = {
         base: [0, 0, 0],
-        offset: pos(m, a),
-        quat: newest ? quatAxisAngle([0.35, 1, 0.2], Math.PI * 2 * smoothstep(0, 1, run)) : [0, 0, 0, 1], // prettier-ignore
+        offset: at,
+        quat: newest ? quatMul(q, quatAxisAngle([0, 1, 0], Math.PI * 2 * smoothstep(0, 1, run))) : q, // prettier-ignore
         visible: 1,
       };
     });
     const line = (from, to, first, reveal) => {
-      const A = pos(m, from);
-      const B = pos(m, to);
+      const A = lifted(from);
+      const B = lifted(to);
       for (let j = 0; j < BEADS; j++) {
         const f = (j + 0.5) / BEADS;
-        tokens[first + j] = {
-          base: [0, 0, 0],
-          offset: [A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f, A[2] + (B[2] - A[2]) * f],
-          visible: f <= reveal ? 1 : 0,
-        };
+        const at = [A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f, A[2] + (B[2] - A[2]) * f]; // prettier-ignore
+        tokens[first + j] = { base: [0, 0, 0], offset: at, quat: flat(at), visible: f <= reveal ? 1 : 0 }; // prettier-ignore
       }
     };
     if (P.length >= 2) line(P[0], P[1], MARKERS, P.length === 2 ? grow : 1);
     if (P.length >= 3) {
       line(P[1], P[2], MARKERS + BEADS, grow);
-      // The arc of the angle, round the middle atom.
-      const B = pos(m, P[1]);
-      const u = unitTo(B, pos(m, P[0]));
-      const w = unitTo(B, pos(m, P[2]));
-      // Outside the middle atom's ball, inside the shorter arm.
+      // The arc of the angle, round the middle atom (lifted with it).
+      const B = lifted(P[1]);
+      const u = unitTo(pos(m, P[1]), pos(m, P[0]));
+      const w = unitTo(pos(m, P[1]), pos(m, P[2]));
+      // Outside the middle atom's ring, inside the shorter arm.
       const arm = Math.min(distance(m, P[0], P[1]), distance(m, P[1], P[2]));
-      const r = Math.min(0.8 * arm, Math.max(0.4 * arm, S.markR * 0.95));
+      const r = Math.min(0.8 * arm, Math.max(0.4 * arm, S.markR * 1.5));
       const th = Math.acos(Math.max(-1, Math.min(1, u[0] * w[0] + u[1] * w[1] + u[2] * w[2])));
       for (let j = 0; j < ARC; j++) {
         const f = (j + 0.5) / ARC;
         const d = slerp(u, w, th, f);
-        tokens[MARKERS + 2 * BEADS + j] = {
-          base: [0, 0, 0],
-          offset: [B[0] + d[0] * r, B[1] + d[1] * r, B[2] + d[2] * r],
-          visible: f <= grow ? 1 : 0,
-        };
+        const at = [B[0] + d[0] * r, B[1] + d[1] * r, B[2] + d[2] * r];
+        tokens[MARKERS + 2 * BEADS + j] = { base: [0, 0, 0], offset: at, quat: flat(at), visible: f <= grow ? 1 : 0 }; // prettier-ignore
       }
     }
   },
@@ -476,6 +499,8 @@ const VIEWER = {
     const notes = [];
     let reach = 2.5; // a tap counts on an atom within this many Å of it
     let markR = 0.8;
+    // How far in front of its atom a mark stands (Å), toward the camera.
+    let lift = (i) => BALL * vdwRadius(m.el[i]) + 0.15;
     // Bonds between shown atoms.
     const bondList = (keep) => {
       const out = [];
@@ -512,8 +537,8 @@ const VIEWER = {
       let area = 0;
       for (const i of atoms) area += 4 * Math.PI * radius(i) ** 2;
       for (const [i, j] of bonds) area += 2 * Math.PI * STICK * Math.max(0.1, distance(m, i, j) - radius(i) - radius(j)); // prettier-ignore
-      // A small molecule needs no more than about 300 splats per Å² to look solid.
-      const density = Math.min(300, cap / Math.max(1, area));
+      // A small molecule needs no more than about 700 splats per Å² to look solid.
+      const density = Math.min(700, cap / Math.max(1, area));
       const lines = bonds.reduce((n, b) => n + (b[2] === 1 ? 1 : 2), 0);
       let mode = "full";
       if ((density * area) / Math.max(1, atoms.length) < 8) {
@@ -551,7 +576,7 @@ const VIEWER = {
       );
       drawnBonds = r.bonds;
       reach = 1.2;
-      markR = 0.75;
+      markR = 0.62;
     } else if (style === "spacefill") {
       const radius = (i) => vdwRadius(m.el[i]);
       const all = thin(
@@ -562,24 +587,33 @@ const VIEWER = {
       // Most of each sphere is buried in its neighbors: the buried splats are
       // left out (up to 30,000 atoms) and the budget goes to the rest.
       const cull = all.length <= 30000;
-      const r = drawAtoms(L, m, all, { radius, color, density: 300, budget, cull, rand });
+      // Buried atoms a little darker (ambient occlusion), so the shape reads in depth.
+      const shade = occluded(color, openness(m, all));
+      const r = drawAtoms(L, m, all, { radius, color: shade, density: 700, budget, cull, rand });
       if (r.single) lodNotes.push("one Gaussian per atom");
       for (const i of all) pickable[i] = 1;
       drawnBonds = bondList(() => true);
       reach = 2.4;
-      markR = 2.1;
+      markR = 1.25;
+      lift = (i) => vdwRadius(m.el[i]) + 0.2;
     } else if (style === "surface") {
       const inSurface = isMacro(m) ? macro : (i) => kindOf(i) !== KIND.water;
       const use = (i) => inSurface(i) && m.el[i] !== "H";
       const others = atomsWhere((i) => !inSurface(i));
       const share = others.length ? Math.min(0.25, (others.length * 30) / budget) : 0;
-      const sf = drawSurface(L, m, { use, color, max: budget * (1 - share), rand });
+      const inside = atomsWhere(use);
+      const shade = occluded(color, openness(m, inside));
+      const sf = drawSurface(L, m, { use, color: shade, max: budget * (1 - share), rand });
       if (others.length) drawnBonds = ballstick(others, share).bonds;
-      // Only atoms on the outside can be tapped: their markers show through the surface.
-      for (const i of outerAtoms(m, atomsWhere(use), (i) => vdwRadius(m.el[i]))) pickable[i] = 1;
+      // Only atoms on the outside can be tapped: their markers show through the
+      // surface. (A very big entry skips the search; at that scale a tap lands
+      // on the outside anyway.)
+      const outside = inside.length <= 60000 ? outerAtoms(m, inside, (i) => vdwRadius(m.el[i])) : inside; // prettier-ignore
+      for (const i of outside) pickable[i] = 1;
       notes.push(`The surface is a blobby (Gaussian) surface over the heavy atoms at their van der Waals radii, sampled every ${sf.h.toFixed(2)} Å: close to the solvent-excluded surface, but smoother in deep crevices.`); // prettier-ignore
       reach = 3.4;
-      markR = 2.9;
+      markR = 1.4;
+      lift = (i) => vdwRadius(m.el[i]) + 0.9;
     } else {
       // Cartoon: ribbons for the chains, balls and sticks for the rest.
       const residueAtom = (ri) => {
@@ -610,16 +644,22 @@ const VIEWER = {
       for (const i of cd.backbone) pickable[i] = 1;
       if (others.length) drawnBonds = ballstick(others, share).bonds;
       reach = 3;
-      markR = 1.5;
+      markR = 1.2;
+      lift = (i) => (macro(i) ? 1 : BALL * vdwRadius(m.el[i]) + 0.15);
       if (scheme === "element")
         notes.push("A ribbon has no element: it is colored by its secondary structure (helix red, strand yellow, coil gray), the rest by element."); // prettier-ignore
     }
     // Bigger marks on a big structure, so they show from the home view.
     let ext = 0;
     for (let i = 0; i < m.n; i += Math.max(1, Math.floor(m.n / 20000))) if (shown[i]) ext = Math.max(ext, Math.abs(m.x[i]), Math.abs(m.y[i]), Math.abs(m.z[i])); // prettier-ignore
-    markR = Math.max(markR, ext * 0.03);
+    const big = ext * 0.025;
+    if (big > markR) {
+      const base = lift;
+      lift = (i) => base(i) + big - markR;
+      markR = big;
+    }
     // Beads wider than a stick, so a line along a bond still shows.
-    const bead = Math.max(0.17, ext * 0.005, markR * 0.11);
+    const bead = Math.max(0.09, ext * 0.003, markR * 0.12);
     if (!L.n)
       throw new Error("Nothing to show: every atom is hidden. Switch Hydrogens or Water on.");
     k.cloud({ count: ((L.n + 0.4) * 160000) / k.count, jitter: 0 }, (_r, i) => L.sample(i));
@@ -645,6 +685,7 @@ const VIEWER = {
       pickable,
       reach,
       markR,
+      lift,
       demo,
       lod: lodNotes.join(", "),
       notes,

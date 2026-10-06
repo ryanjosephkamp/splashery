@@ -495,7 +495,7 @@ function raySplats(list, p0, p1, k, { w = 0.008 } = {}) {
 function emitRays(k, segs, share = 0.3) {
   const len = (s) => Math.hypot(s.p1[0] - s.p0[0], s.p1[1] - s.p0[1], s.p1[2] - s.p0[2]);
   const total = segs.reduce((a, s) => a + len(s), 0);
-  const gap = Math.max(0.012, total / Math.max(1000, k.count * share));
+  const gap = Math.max(0.008, total / Math.max(1000, k.count * share));
   const list = [];
   for (const sg of segs) {
     const d = [sg.p1[0] - sg.p0[0], sg.p1[1] - sg.p0[1], sg.p1[2] - sg.p0[2]];
@@ -566,16 +566,16 @@ function buildPrism(k, o) {
     if (!t) continue;
     hits[r.i] = t.p3[0];
     const y = 0;
-    raySplats(list, [t.p1[0], y, t.p1[1]], [t.p2[0], y, t.p2[1]], r.k, { w: 0.008 });
-    raySplats(list, [t.p2[0], y, t.p2[1]], [t.p3[0], y, t.p3[1]], r.k, { w: 0.008 });
+    raySplats(list, [t.p1[0], y, t.p1[1]], [t.p2[0], y, t.p2[1]], r.k, { w: 0.005 });
+    raySplats(list, [t.p2[0], y, t.p2[1]], [t.p3[0], y, t.p3[1]], r.k, { w: 0.005 });
   }
   const t4 = prismRay(400, { prism: P, ...beam, zCard, n: glassIndex(LL.glass, 400) });
   const t7 = prismRay(700, { prism: P, ...beam, zCard, n: glassIndex(LL.glass, 700) });
   if (t4 && t7) devs = [(t4.deviation * 180) / Math.PI, (t7.deviation * 180) / Math.PI];
   // The beam from the lamp to the prism (k = MAX_RAYS − 1: the lamp's color).
   const enter = prismRay(550, { prism: P, ...beam, zCard, n: glassIndex(LL.glass, 550) });
-  raySplats(list, [beam.from[0], 0, beam.from[1]], [enter.p1[0], 0, enter.p1[1]], MAX_RAYS - 1, { w: 0.012 }); // prettier-ignore
-  emitRays(k, list, 0.22);
+  raySplats(list, [beam.from[0], 0, beam.from[1]], [enter.p1[0], 0, enter.p1[1]], MAX_RAYS - 1, { w: 0.008 }); // prettier-ignore
+  emitRays(k, list, 0.24);
   // Where the card must be: across every ray's landing, with a margin.
   const xs = hits.filter((x) => x !== null);
   const span = Math.max(...xs) - Math.min(...xs);
@@ -586,7 +586,7 @@ function buildPrism(k, o) {
     x0,
     x1,
     z: zCard,
-    cols: colsFor(k, 0.14, x1 - x0, ((x1 - x0) * CARD.h) / CARD.w, 280),
+    cols: colsFor(k, 0.14, x1 - x0, ((x1 - x0) * CARD.h) / CARD.w, 360),
   });
   // The prism: glass, nearly clear face on and denser where its faces turn
   // away (behaviour "rim"), with brighter edges, standing on the table.
@@ -603,7 +603,7 @@ function buildPrism(k, o) {
     const m = [(a[0] + b[0]) / 2 - ctr[0], (a[1] + b[1]) / 2 - ctr[1]];
     if (n[0] * m[0] + n[2] * m[1] < 0) n = n.map((x) => -x);
     const l = Math.hypot(...n);
-    faceSplats(k, (u, v) => [a[0] + (b[0] - a[0]) * u, y0 + v * H, a[1] + (b[1] - a[1]) * u], { nu: budgetN(k, 40), nv: budgetN(k, 22), n: n.map((x) => x / l), ...glass }); // prettier-ignore
+    faceSplats(k, (u, v) => [a[0] + (b[0] - a[0]) * u, y0 + v * H, a[1] + (b[1] - a[1]) * u], { nu: budgetN(k, 56), nv: budgetN(k, 31), n: n.map((x) => x / l), ...glass }); // prettier-ignore
   }
   for (const [yy, ny] of [
     [y0, -1],
@@ -626,11 +626,11 @@ function buildPrism(k, o) {
   const edge = (a, b) => {
     const d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
     const l = Math.hypot(...d);
-    const n = Math.ceil(l / 0.006);
+    const n = Math.ceil(l / 0.004);
     const q = quatFromTo([1, 0, 0], d);
     for (let i = 0; i < n; i++) {
       const t = (i + 0.5) / n;
-      edges.push({ p: [a[0] + d[0] * t, a[1] + d[1] * t, a[2] + d[2] * t], scales: [l / n, 0.004, 0.004], quat: q, color: "#f4fcff", opacity: 0.95, part: prism, pattern: false }); // prettier-ignore
+      edges.push({ p: [a[0] + d[0] * t, a[1] + d[1] * t, a[2] + d[2] * t], scales: [l / n, 0.0028, 0.0028], quat: q, color: "#f4fcff", opacity: 0.95, part: prism, pattern: false }); // prettier-ignore
     }
   };
   for (let f = 0; f < 3; f++)
@@ -664,16 +664,16 @@ function buildGrating(k) {
     // A ray beyond the card's edge stops at the edge of the table.
     if (Math.abs(x) > half) {
       const s = half / Math.abs(x);
-      raySplats(list, [0, 0, zG], [x * s, 0, zG - L * s], r.k, { w: 0.007 });
+      raySplats(list, [0, 0, zG], [x * s, 0, zG - L * s], r.k, { w: 0.0045 });
       continue;
     }
     hits[r.i] = x;
-    raySplats(list, [0, 0, zG], [x, 0, zCard], r.k, { w: 0.007 });
+    raySplats(list, [0, 0, zG], [x, 0, zCard], r.k, { w: 0.0045 });
   }
   // The beam in, and straight on through (the zero order: every color).
-  raySplats(list, [0, 0, 1.25], [0, 0, zG], MAX_RAYS - 1, { w: 0.012 });
-  raySplats(list, [0, 0, zG], [0, 0, zCard], MAX_RAYS - 1, { w: 0.008 });
-  emitRays(k, list, 0.22);
+  raySplats(list, [0, 0, 1.25], [0, 0, zG], MAX_RAYS - 1, { w: 0.008 });
+  raySplats(list, [0, 0, zG], [0, 0, zCard], MAX_RAYS - 1, { w: 0.006 });
+  emitRays(k, list, 0.24);
   const labels = [-2, -1, 0, 1, 2].map((m) => {
     if (m === 0) return { x: 0, text: "0" };
     const th = gratingAngle(550, gr.d, m);
@@ -684,18 +684,18 @@ function buildGrating(k) {
     x0: -half,
     x1: half,
     z: zCard,
-    cols: colsFor(k, 0.14, 2 * half, (2 * half * CARD.h) / CARD.w, 340),
+    cols: colsFor(k, 0.14, 2 * half, (2 * half * CARD.h) / CARD.w, 440),
   });
   // The grating: a disc (a CD or DVD) or a slide in its frame, upright.
   if (LL.grating === "slide") {
     boxSplats(k, { c: [0, 0.02, zG], w: 0.5, h: 0.36, d: 0.02, color: lit(shade, "#e8e4da") });
-    faceSplats(k, (u, v) => [(u - 0.5) * 0.34, 0.02 + (0.5 - v) * 0.24, zG + 0.012], { nu: budgetN(k, 40), nv: budgetN(k, 28), n: [0, 0, 1], color: "#8fa6b4" }); // prettier-ignore
+    faceSplats(k, (u, v) => [(u - 0.5) * 0.34, 0.02 + (0.5 - v) * 0.24, zG + 0.012], { nu: budgetN(k, 56), nv: budgetN(k, 40), n: [0, 0, 1], color: "#8fa6b4" }); // prettier-ignore
   } else {
     const r0 = 0.3;
     // Silver with a rainbow sheen, as a disc looks under a lamp; a clear hub.
     faceSplats(k, (u, v) => [(u - 0.5) * 2 * r0, r0 - 0.17 + (0.5 - v) * 2 * r0, zG], {
-      nu: budgetN(k, 60),
-      nv: budgetN(k, 60),
+      nu: budgetN(k, 84),
+      nv: budgetN(k, 84),
       n: [0, 0, 1],
       keep: (u, v) => {
         const rr = Math.hypot(u - 0.5, v - 0.5) * 2;
@@ -704,8 +704,8 @@ function buildGrating(k) {
       color: "#c8ccd2",
     });
     faceSplats(k, (u, v) => [(u - 0.5) * 2 * r0, r0 - 0.17 + (0.5 - v) * 2 * r0, zG - 0.004], {
-      nu: budgetN(k, 60),
-      nv: budgetN(k, 60),
+      nu: budgetN(k, 84),
+      nv: budgetN(k, 84),
       n: [0, 0, -1],
       keep: (u, v) => {
         const rr = Math.hypot(u - 0.5, v - 0.5) * 2;
@@ -825,11 +825,14 @@ async function readPhoto(file) {
 
 const LIGHT_LAB = {
   alive: () => LL.view === "camera" && live.on("camera") && !LL.frozen,
-  density: 1.6,
+  density: 2, // r2: a higher budget (the owner's "Please make sharper")
   turntable: false,
   // Labs only: the sharper splat falloff (docs/lab/KERNELS.md), for crisp text and lines
   // (the owner's "Please make sharper", October 5, 2026).
   kernel: "sharp",
+  // r2, labs only: the splat cull at 1 pixel and the device's full pixel ratio, so the finer
+  // splats of the panels, rays and edges reach the screen (src/sharpness.js).
+  render: { cull: "low", dpr: "native" },
   options: [
     {
       key: "view",
@@ -941,10 +944,10 @@ const LIGHT_LAB = {
     LL.rays = benchRays(LL.view);
     const { infoAt } = LL.view === "prism" ? buildPrism(k, o) : buildGrating(k, o);
     // The info panel above the bench, facing the viewer.
-    // Capped at 420 columns: smaller splats fall under the engine's two-pixel cull at a
-    // high budget (the panel went blank).
+    // Capped at 560 columns: with the default two-pixel cull smaller splats vanished at a high
+    // budget (the panel went blank); `render.cull` lowers the cull to one pixel.
     const W = 2.6;
-    panel(k, { center: infoAt, up: FACE_UP, width: W, height: (W * 280) / LW, region: { x: 0, y: 0, w: LW, h: 280 }, cols: colsFor(k, 0.26, W, (W * 280) / LW, 420) }); // prettier-ignore
+    panel(k, { center: infoAt, up: FACE_UP, width: W, height: (W * 280) / LW, region: { x: 0, y: 0, w: LW, h: 280 }, cols: colsFor(k, 0.26, W, (W * 280) / LW, 560) }); // prettier-ignore
     boxSplats(k, { c: [infoAt[0], infoAt[1] - 0.025 * Math.sin(PITCH), infoAt[2] - 0.025 * Math.cos(PITCH)], w: W + 0.08, h: (W * 280) / LW + 0.08, d: 0.04, tilt: PITCH, skip: [5], color: lit(shade, "#2a3038") }); // prettier-ignore
     k.data = { lightLab: LL.view };
   },

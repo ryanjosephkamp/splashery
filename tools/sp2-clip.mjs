@@ -16,11 +16,14 @@
 // --pgn loads a game into a game toy (the chess set) before the tap.
 // "star:8.5" gives that toy its own length. --strip=8 also writes
 // <out-dir>/<id>-strip.png: 8 frames from the clip side by side (the first
-// before the tap), for checking a clip without playing it.
+// before the tap), for checking a clip without playing it. --mp4 writes
+// <out-dir>/<id>.mp4 instead, straight from the rendered frames (H.264 through
+// ffmpeg), so the clip keeps every color a GIF's 256 would band.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
 const args = process.argv.slice(2);
@@ -48,6 +51,7 @@ const seq = opt("seq", "")
 const keys = opt("keys", "");
 const stripN = Number(opt("strip", 0));
 const sun = opt("sun", "");
+const mp4 = args.includes("--mp4");
 
 fs.mkdirSync(outDir, { recursive: true });
 const browser = await chromium.launch({
@@ -63,9 +67,19 @@ const page = await browser.newPage({ viewport: { width: 1000, height: 700 } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+// --mp4: each frame comes back as a PNG, numbered, for ffmpeg.
+let frameDir = null;
+await page.exposeFunction("__sp2Frame", (n, url) => {
+  fs.writeFileSync(path.join(frameDir, `${String(n).padStart(5, "0")}.png`), Buffer.from(url.split(",")[1], "base64")); // prettier-ignore
+});
 for (const spec of ids) {
   const [id, own] = spec.split(":");
   const secs = own ? Number(own) : secsAll;
+  if (mp4) {
+    frameDir = path.join(outDir, `${id}-frames`);
+    fs.rmSync(frameDir, { recursive: true, force: true });
+    fs.mkdirSync(frameDir, { recursive: true });
+  }
   const { bytes, strip } = await page.evaluate(
     async ({
       id,
@@ -83,6 +97,7 @@ for (const spec of ids) {
       pgn,
       stripN,
       sun,
+      mp4,
     }) => {
       const { app, player } = window.__splashery;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
@@ -135,6 +150,10 @@ for (const spec of ids) {
         pending = 0;
         const c = await stage.captureFrame();
         if (pickAt.has(n)) shots.push({ bmp: await createImageBitmap(c), t: n * step - before });
+        if (mp4) {
+          await window.__sp2Frame(n++, c.toDataURL("image/png"));
+          return;
+        }
         n++;
         const rgba = c.getContext("2d").getImageData(0, 0, size, size).data;
         const palette = quantize(rgba, 256, { format: "rgb565" });
@@ -179,11 +198,16 @@ for (const spec of ids) {
       }
       return { bytes: Array.from(gif.bytes()), strip };
     },
-    { id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn, stripN, sun },
+    { id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn, stripN, sun, mp4 },
   );
-  const out = path.join(outDir, `${id}.gif`);
-  fs.writeFileSync(out, Buffer.from(bytes));
+  let out = path.join(outDir, `${id}.gif`);
+  if (mp4) {
+    out = path.join(outDir, `${id}.mp4`);
+    const ff = spawnSync("ffmpeg", ["-v", "error", "-y", "-framerate", String(fps), "-i", path.join(frameDir, "%05d.png"), "-c:v", "libx264", "-crf", "18", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out]); // prettier-ignore
+    if (ff.status !== 0) throw new Error(`ffmpeg: ${ff.stderr}`);
+    fs.rmSync(frameDir, { recursive: true, force: true });
+  } else fs.writeFileSync(out, Buffer.from(bytes));
   if (strip) fs.writeFileSync(path.join(outDir, `${id}-strip.png`), Buffer.from(strip.split(",")[1], "base64")); // prettier-ignore
-  console.log(`${id}: ${out} (${(bytes.length / 1024).toFixed(0)} KB)`);
+  console.log(`${id}: ${out} (${(fs.statSync(out).size / 1024).toFixed(0)} KB)`);
 }
 await browser.close();
