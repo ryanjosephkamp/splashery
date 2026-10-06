@@ -272,6 +272,31 @@
       "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
     },
     {
+      "id": "leaf",
+      "power": -1.2,
+      "label": "A Japanese maple leaf, about 7 cm across (an estimate: their leaves are 4 to 12 cm).",
+      "size_m": 0.07,
+      "sizeInLabel": "7 cm",
+      "how": "Watts's photo of a Japanese maple leaf, cut into squares 7.1 cm, 2.5 cm and 8 mm wide on the blade (tools/pot-micro.mjs). The photo gives no scale: the leaf spans about 1,800 of its 2,048 columns and is taken as 7 cm across, inside the species' range.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "simplified",
+      "sources": [
+        {
+          "title": "Japanese maple leaf - Richmond Virginia",
+          "publisher": "Flickr (Watts), CC BY 2.0",
+          "url": "https://www.flickr.com/photos/126288307@N05/53147954324",
+          "says": "The photo used; its page gives CC BY 2.0 and no size."
+        },
+        {
+          "title": "Acer palmatum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_palmatum",
+          "says": "The leaves are 4–12 cm long and wide, palmately lobed with five, seven, or nine acutely pointed lobes."
+        }
+      ],
+      "note": "The size is an estimate within the species' range; a different maple's leaf than the garden bed's tree."
+    },
+    {
       "id": "cells",
       "power": -4,
       "label": "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",
@@ -567,6 +592,28 @@
       "verdict": "simplified",
       "test": "tests/pot.spec.mjs",
       "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
+    },
+    {
+      "claim": "A Japanese maple leaf, about 7 cm across (an estimate: their leaves are 4 to 12 cm).",
+      "how": "Watts's photo of a Japanese maple leaf, cut into squares 7.1 cm, 2.5 cm and 8 mm wide on the blade (tools/pot-micro.mjs). The photo gives no scale: the leaf spans about 1,800 of its 2,048 columns and is taken as 7 cm across, inside the species' range.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Japanese maple leaf - Richmond Virginia",
+          "publisher": "Flickr (Watts), CC BY 2.0",
+          "url": "https://www.flickr.com/photos/126288307@N05/53147954324",
+          "says": "The photo used; its page gives CC BY 2.0 and no size."
+        },
+        {
+          "title": "Acer palmatum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_palmatum",
+          "says": "The leaves are 4–12 cm long and wide, palmately lobed with five, seven, or nine acutely pointed lobes."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/pot.spec.mjs",
+      "note": "The size is an estimate within the species' range; a different maple's leaf than the garden bed's tree."
     },
     {
       "claim": "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",

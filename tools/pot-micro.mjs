@@ -13,7 +13,7 @@ import { MICRO } from "../src/powers/stops.js";
 const OUT = new URL("../assets/toys/powers-of-ten/", import.meta.url);
 
 async function source(url) {
-  const r = await fetch(url, { headers: { "User-Agent": "SplasheryBot/1.0 (schwingularity research)" } }); // prettier-ignore
+  const r = await fetch(url);
   if (!r.ok) throw new Error(`${url}: ${r.status}`);
   return jpeg.decode(Buffer.from(await r.arrayBuffer()), { useTArray: true, maxMemoryUsageInMB: 2048 }); // prettier-ignore
 }

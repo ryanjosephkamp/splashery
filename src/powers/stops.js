@@ -132,6 +132,13 @@ export const STOPS = [
     source: "3D capture “Golden Fullmoon Maple” by Joshua Trapani, CC BY 4.0 (made elsewhere).",
   },
   {
+    id: "leaf",
+    e: -1.2,
+    size: 0.07,
+    label: "A Japanese maple leaf, about 7 cm across (an estimate: their leaves are 4 to 12 cm).",
+    source: "“Japanese maple leaf - Richmond Virginia” by Watts (Flickr), CC BY 2.0.",
+  },
+  {
     id: "cells",
     e: -4,
     size: 200e-6,
@@ -173,6 +180,17 @@ export function stopAt(z) {
 // decade (e: log10 of the square's side in meters).
 const micro = (id, e) => ({ e, file: `micro-${id}-${String(e).replace("-", "m").replace(".", "_")}.jpg` }); // prettier-ignore
 export const MICRO = [
+  {
+    id: "leaf",
+    url: "https://live.staticflickr.com/65535/53147954324_3eda9187f6_k.jpg",
+    page: "https://www.flickr.com/photos/126288307@N05/53147954324",
+    // The leaf spans about 1,800 of the picture's 2,048 columns; at 7 cm
+    // across (a typical leaf: 4 to 12 cm) the picture is about 7.9 cm wide.
+    width: 0.079,
+    // On the blade, where the cells sit.
+    center: [0.47, 0.45],
+    layers: [-1.15, -1.6, -2.1].map((e) => micro("leaf", e)),
+  },
   {
     id: "cells",
     url: "https://iiif.wellcomecollection.org/image/B0009986/full/full/0/default.jpg",

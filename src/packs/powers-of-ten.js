@@ -671,8 +671,8 @@ export const LAYERS = [
   { id: "stars-near", e: 18, cover: false, fadeIn: [0.02, 0.06], fadeOut: [3, 6], build: buildNearStars }, // prettier-ignore
   { id: "sun-alone", e: 16, cover: false, fadeIn: [0.002, 0.005], fadeOut: [8, 16], build: buildSunAlone }, // prettier-ignore
   { id: "outer", e: 13.3, line: 0.0045, cover: false, fadeIn: [0.004, 0.012], fadeOut: [6, 10], build: (k, l) => buildPlanets(k, l, SKY.PLANETS) }, // prettier-ignore
-  { id: "inner", e: 11.9, line: 0.0042, cover: false, fadeIn: [0.01, 0.03], fadeOut: [4, 8], build: (k, l) => buildPlanets(k, l, SKY.PLANETS.slice(0, 4)) }, // prettier-ignore
-  { id: "moon", e: 9, cover: false, fadeIn: [0.012, 0.03], fadeOut: [3, 5], build: buildMoon },
+  { id: "inner", e: 11.9, line: 0.0042, cover: false, fadeIn: [0.01, 0.03], fadeOut: [6, 12], build: (k, l) => buildPlanets(k, l, SKY.PLANETS.slice(0, 4)) }, // prettier-ignore
+  { id: "moon", e: 9, cover: false, fadeIn: [0.008, 0.02], fadeOut: [3, 5], build: buildMoon },
   { id: "earth", e: 7.3, cover: false, fadeIn: [0.04, 0.08], fadeOut: [24, 30], build: buildGlobe }, // prettier-ignore
   ...AERIAL.map((a) => ({
     id: `aerial-${a.e.toFixed(1)}`,
@@ -683,7 +683,7 @@ export const LAYERS = [
     fadeOut: a.e === 1.5 ? [150, 400] : null,
     build: (k, layer, profile) => buildAerial(k, a, profile),
   })),
-  { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [6, 9], build: buildBed }, // prettier-ignore
+  { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [12, 20], build: buildBed }, // prettier-ignore
   ...MICRO.flatMap((m) =>
     m.layers.map((L, i) => ({
       id: `${m.id}${L.e}`,
@@ -691,12 +691,14 @@ export const LAYERS = [
       file: L.file,
       width: 10 ** L.e,
       cover: true,
-      fadeIn: i ? [0.3, 0.55] : [0.25, 0.5],
-      dim: m.id === "chloroplast" && i === m.layers.length - 1 ? [6.3, 6.9, 0.35] : null,
+      fadeIn: i ? [0.3, 0.55] : [0.18, 0.4],
+      // The last of a set, far past its own detail before the next scene
+      // comes, dims.
+      dim: i === m.layers.length - 1 ? ({ leaf: [2.9, 3.5, 0.35], chloroplast: [6.5, 7.0, 0.35] }[m.id] ?? null) : null, // prettier-ignore
       build: buildPicture,
     })),
   ),
-  { id: "ribosome", e: -7.4, cover: false, fadeIn: [0.25, 0.5], build: buildRibosome },
+  { id: "ribosome", e: -7.4, cover: false, fadeIn: [0.15, 0.35], build: buildRibosome },
 ];
 
 const byId = new Map(LAYERS.map((l) => [l.id, l]));
@@ -707,11 +709,16 @@ export function layout(z) {
   const shown = LAYERS.map((l) => {
     const s = 10 ** (l.e - z);
     let f = smooth(l.fadeIn[0], l.fadeIn[1], s);
+    // (A cover hides what is under it once it has faded in, whatever its
+    // fading out or dimming later.)
+    const covered = f;
     if (l.fadeOut) f *= 1 - smooth(l.fadeOut[0], l.fadeOut[1], s);
+    // Nothing shows magnified past a thousandfold.
+    if (s > 1000) f = 0;
     // `dim: [z0, z1, least]`: dimmed toward `least` as the zoom goes from z0
     // in to z1 (the aerial picture round the garden bed, far past its own
     // detail there).
-    const full = f;
+    const full = covered;
     if (l.dim) f *= 1 - (1 - l.dim[2]) * smooth(l.dim[0], l.dim[1], -z);
     return { l, s, f, full };
   });
@@ -801,6 +808,7 @@ export const CREDITS = [
   { label: "3 km", title: "USGS Imagery Only (NAIP)", source: "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer", author: "USDA, USGS The National Map", ...PD }, // prettier-ignore
   { label: "From 1 km to 30 m", title: "Aerial Photography (Orthophoto) 2023, 3 inch", source: "https://opendata.dc.gov/", author: "District of Columbia, Office of the Chief Technology Officer", ...BY }, // prettier-ignore
   { label: "The garden bed", title: "Golden Fullmoon Maple (3D capture)", source: "https://superspl.at/scene/f233b115", author: "Joshua Trapani", ...BY, changes: "Decimated, turned to be seen from above and set in the garden at an estimated 2 m long." }, // prettier-ignore
+  { label: "The leaf", title: "Japanese maple leaf - Richmond Virginia", source: "https://www.flickr.com/photos/126288307@N05/53147954324", author: "Watts (Flickr)", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" }, // prettier-ignore
   { label: "Plant cells", title: "Arabidopsis thaliana plant cells containing chloroplasts, LM", source: "https://wellcomecollection.org/works/gwmfux6b", author: "Fernán Federici (Wellcome Collection)", ...BY }, // prettier-ignore
   { label: "A chloroplast", title: "Chloroplast in a bean leaf, TEM", source: "https://wellcomecollection.org/works/bx3dctp2", author: "Kevin Mackenzie, University of Aberdeen (Wellcome Collection)", ...BY }, // prettier-ignore
   { label: "The ribosome", title: "Arbekacin-bound E. coli 70S ribosome, 3.2 Å (EMD-48329), with its model (PDB 9MKK)", source: "https://www.ebi.ac.uk/emdb/EMD-48329", author: "S. Majumdar, N. P. Parajuli, X. Ge, A. Emmerich and S. Sanyal (2025), via EMDB and the PDB", license: "Public domain (EMDB)", licenseUrl: "https://www.ebi.ac.uk/emdb/faq" }, // prettier-ignore
