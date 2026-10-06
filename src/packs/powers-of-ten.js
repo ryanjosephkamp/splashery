@@ -213,7 +213,9 @@ function quatToward(n) {
 // The capture's own units per meter: the bed is about 2 meters long
 // (see src/powers/stops.js, "bed").
 async function buildBed(k, layer, profile) {
-  const rel = `../../assets/toys/maple-tree/maple-tree${profile === "low" || profile === "mid" ? "-lite" : ""}.sog`; // prettier-ignore
+  // The lite file on every device: its 300,000 splats are as many as a
+  // scene here may have, and it is a quarter of the full file's size.
+  const rel = "../../assets/toys/maple-tree/maple-tree-lite.sog";
   const t = await loadTrained(rel);
   // Its long side and height, from where most of its splats are.
   const lo = [Infinity, Infinity, Infinity];

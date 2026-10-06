@@ -7,7 +7,30 @@ October push. Repo: ryanjosephkamp/splashery. Your lane: Powers of ten (id `Powe
 Branch: `claude/lane-powers-of-ten` (and `claude/lane-powers-of-ten-engine` for any change to the
 app outside your own files, as an "Engine: …" PR merged first). PR title: "Phase Powers of ten: one
 zoom through real scales". Handoff file: docs/handoff/Powers.md (create it; start it with this
-brief, word for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "##
+brief, word for word, under "## Brief", then keep "## State
+
+Model: Opus 5.5 (claude-opus-5-5), default effort. Engine PR #351 ("Engine: chunks a kit toy loads
+when it asks, the zoom gesture for a toy, a scale bar"; merge it first). Lane PR #353 (draft).
+
+- October 6, 2026: the engine part is done and pushed (chunks, the zoom gesture and drag, the ruler,
+  the status line's count). The toy works end to end: 16 stops from the Milky Way to a ribosome,
+  each a chunk loaded as the zoom nears it, with its label, source and scale bar; Play, the slider,
+  pinch, wheel and drag zoom; evidence file and tests (`tests/pot.spec.mjs`, 8 tests;
+  `tests/pot-engine.spec.mjs`, 3 tests) pass. Clips are being rendered for Effect review page 2.
+- Open: the leaf between the garden bed and the plant cells (Wikimedia rate-limited this container;
+  the pick is "Acer platanoides scanned leaf", CC BY-SA 3.0, or "Acer scanned leaf.png", CC0).
+  Without it the zoom from 10⁻¹ to 10⁻³ m crosses a dimmed, blurred aerial picture.
+
+The stops (log10 of the view's height in meters): the Milky Way 21 (M83, ESO, at the Milky Way's
+size and real tilt), stars within 1,600 light-years 19.4 (HYG v4.4), within 65 light-years 18
+(Gaia), the Sun alone 16, the planets' orbits 13.3 and 11.9 (JPL elements), the Earth and Moon 9,
+the Earth 7.1 (Blue Marble), the Chesapeake 6, Washington 4.6, the Mall 3.3, the Haupt Garden 2
+(D.C.'s 8 cm aerial), the garden bed 0.6 (3D capture), plant cells −4 and a chloroplast −5.6
+(Wellcome, CC BY), the ribosome −7.4 (EMD-48329). Total new files: 5.2 MB, loaded a few at a
+time.
+
+## Notes", "## Known issues" and "##
+
 For the Operator" current). Model: Opus 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 6, 2026, from the owner's Push Plan picks)
@@ -77,8 +100,15 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first).
 
 ## Known issues
 
-- (None yet.)
+- A single chunk over about 360,000 splats draws nothing (somewhere between 360k and 410k in this
+  PlayCanvas build); every scene is capped at 600 by 600 pixels or 360k splats.
+- Far scenes need splats under a pixel: the recipe lowers the engine's pixel cull (`render.cull`
+  0.5, labs only), as the picture toys do.
+- The Moon and the planets are placed for one moment (16:54 UTC, October 7, 2026) by short formulas,
+  good to about a degree.
 
 ## For the Operator
 
 - Merge engine PR #351 first.
+- Wikimedia answered 429 (too many requests) to this container for an hour on October 6 (a helper
+  searched it too hard); the leaf stop waits on it.

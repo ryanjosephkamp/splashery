@@ -117,6 +117,27 @@ async function settle(page) {
 }
 
 test.describe("Powers of ten in the app", () => {
+  test("opens light: only the files of the scenes near home (under 8 MB)", async ({ page }) => {
+    const sizes = new Map();
+    page.on("response", async (res) => {
+      if (!/\/assets\//.test(res.url())) return;
+      try {
+        sizes.set(res.url(), (await res.body()).length);
+      } catch {
+        // redirects have no body
+      }
+    });
+    await page.goto("/?renderer=webgl2&adapt=off&profile=high&labs=1");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    sizes.clear();
+    await page.evaluate(() => window.__splashery.app.chooseToy("powers-of-ten"));
+    await settle(page);
+    const total = [...sizes.values()].reduce((a, b) => a + b, 0);
+    const names = [...sizes.keys()].map((u) => u.split("/").pop());
+    expect(names.some((n) => n.startsWith("micro-") || n.includes("stars") || n === "m83.jpg")).toBe(false); // prettier-ignore
+    expect(total).toBeLessThan(8e6);
+  });
+
   test("opens at the garden with only the scenes near it, and labels them", async ({ page }) => {
     await open(page);
     await settle(page);
