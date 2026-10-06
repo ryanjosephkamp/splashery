@@ -216,6 +216,29 @@ const SCENES = {
     { move: { y: 1 }, secs: 1.4 },
     { hold: 0.6 },
   ],
+  // Round 4: the character's new walk and run along the west beach. The
+  // camera comes round to its side (the sea side) and it walks across the
+  // view, so the arms and legs read in profile: a walk, a run, a walk.
+  "beach-r4": [
+    { place: [-26, -12, 10], camera: { distance: 3.6, pitch: 0.12 }, noCards: true },
+    { hold: 0.4 },
+    { look: [-Math.PI / 2, 0], secs: 1.0 },
+    { move: { x: -1 }, secs: 3.2 },
+    { move: { x: -1, run: true }, secs: 3.0 },
+    { move: { x: -1 }, secs: 2.0 },
+    { hold: 0.8 },
+  ],
+  // Round 4: through the boulder garden (round 3's walk), seen from the
+  // side away from the trees, the boulders behind it: a walk, then a run.
+  "props-r4": [
+    { place: [7, 12.5, 90], camera: { distance: 4.2, pitch: 0.3 }, noCards: true },
+    { hold: 0.4 },
+    { look: [Math.PI / 2, 0], secs: 1.0 },
+    { move: { x: 1 }, secs: 2.8 },
+    // (It ends mid-run: a little further on, the boulder garden's sign
+    // stands in the way.)
+    { move: { x: 1, run: true }, secs: 1.7 },
+  ],
   // Depth, close up: a bush half behind a hill, then the character wading.
   "hybrid-depth": [
     { place: [-17.2, 0.8, 180], camera: { distance: 3.2, pitch: 0.08 } },

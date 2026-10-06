@@ -73,7 +73,7 @@ class Page {
     // ?frame=0|1 turns hybrid mode's camera frame (bloom, grade, ambient
     // occlusion) off or on whatever the tier.
     const frame = params.has("frame") ? params.get("frame") === "1" : null;
-    const world = new World(this.view, def, this.tier, { reducedMotion, mode, shadows: params.get("shadows") !== "0", characterModel, frame }); // prettier-ignore
+    const world = new World(this.view, def, this.tier, { reducedMotion, mode, shadows: params.get("shadows") !== "0", characterModel, frame, tuning: params.get("tuning") !== "0" }); // prettier-ignore
     this.world = world;
     // A wide view behind the start screen.
     world.overview = true;

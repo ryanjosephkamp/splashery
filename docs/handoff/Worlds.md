@@ -3,6 +3,156 @@
 Prefix `wd`. Branch `claude/lane-worlds-engine`, PR "Engine: Worlds, the world engine and a sandbox
 island". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](history.md).
 
+## Start here (paused after r4, October 2, 2026)
+
+The owner paused Worlds on October 2, 2026 (his review that night) while the team closes out the
+toys: a pause, not a stop. He liked the island and the character lab. Written by the r1–r4 session
+(Opus 5.5) for whoever picks Worlds up next.
+
+**State.** Main has r1–r3 (r3 is #135, merged October 1). Round 4 is PR #168 on
+`claude/lane-worlds-r4` (draft, "Phase Worlds r4: the controls (paused)"), not merged. Everything is
+behind the labs switch (`?labs=1`).
+
+**What works (r4):**
+
+- The character lab, `worlds/lab/?labs=1` (`src/worlds/lab.js`, `worlds/lab/`): the person on a
+  treadmill; stand, walk, run or any speed; side, front and three-quarter views; slow motion; a
+  chart of hip, knee, ankle, shoulder and elbow angles, live from the bones, over measured people
+  (`assets/worlds/lab/gait-reference.json`, built by `tools/wd-gait-refs.py` from the Fukuchi
+  datasets, CC BY 4.0; sources in docs/WORLDS.md, "The character lab").
+- The walk and run shaped to that data in the build (`tools/wd-character.py`, `GAIT`, `Shaper`,
+  `shape_cycle`): upright posture, arms at the sides swinging opposite the legs; the run with knee
+  drive, pumping elbows, a flight phase, 2.5 m/s. Rebuild with
+  `/opt/bpyenv/bin/python tools/wd-character.py` (Blender 5.0.1 as a module, MPFB 2.0.17; the
+  MakeHuman assets and 100STYLE in `.cache/worlds/r3/`, the gait data in `.cache/worlds/r4/`,
+  neither committed; the tool's header says where they come from).
+- Tuning (the owner's ask on the lab cards): the lab's Tune panel, a control per gait setting for
+  stand, walk and run, plus height and clothing colors; Reset; Copy, Save file, Open file and paste
+  of a small JSON (`"format": "splashery-gait"`, version 1; docs/WORLDS.md, "Tuning the gait", has
+  the format). `src/worlds/gait-tuner.js` applies it to the bones after the clips play and keeps the
+  feet down; the defaults are the measured gait (no change). Worlds reads
+  `assets/worlds/character/tuning.json` (shipped as the measured gait).
+- The island (r3, on main): the hybrid island, the realistic person by default, the scanned props,
+  `?stats=1`. Marked good by the owner: `wd-island-r3`, `wd-island-r3-desktop`, the rocks.
+
+**Open items (for the next round):**
+
+1. The owner's tuning file: when he sends his export, replace `assets/worlds/character/tuning.json`
+   with it (it is validated and clamped on load), then render `beach-r4` again
+   (`tools/world-clip.mjs`) and post it.
+2. Unmarked cards on Effect review page 2: `wd-beach-r4`, `wd-props-r4`, `wd-lab-controls-r5`. The
+   three lab cards are marked "fix" but the note is a yes (it asked for the controls, now built).
+3. The walking pelvis bobs 2.2 cm against a published 4–4.8 cm (a tuning setting can raise it).
+4. More customizable characters (body shapes beyond height, skin tones) and sharper: only height,
+   clothing colors and texture filtering are done.
+5. `wd-character-splats-r3` (the splat person) was not re-clipped; it plays the same clips.
+6. The last full run on the final head (`c497b65`: the `wd.spec` screenshot split and main with
+   #150) was stopped at 410 of 711 for the pause, with no failures; the head before it (`31319cf`)
+   ran 695 of 696 (the one failure, `smoke.spec.mjs:694`, is in the toy app and passed alone). Run
+   the full suite on #168's head before it merges.
+
+**How to test:**
+
+- `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/wd.spec.mjs tests/wdh.spec.mjs tests/wdr3.spec.mjs tests/wdr4.spec.mjs`
+  (about an hour in the software renderer; the island tests are the slow ones).
+- The lab by hand: `worlds/lab/?labs=1` (add `&tuning=default` to start from the measured gait). The
+  island: `worlds/?labs=1&render=hybrid&stats=1`.
+- Clips: `tools/wd-lab-clip.mjs` (the lab: `stand walk run controls`) and `tools/world-clip.mjs`
+  (the island scenes, e.g. `beach-r4 props-r4`), then `tools/wd-webm.mjs` for a small WebM. The
+  island renders at about 3 minutes per clip-second here; the lab at about 10 seconds.
+
+## Brief (r4)
+
+(From the Operator's message of October 1, 2026, with the owner's marks)
+
+Good: `wd-island-r3`, `wd-island-r3-desktop` and the rocks. Fix: `wd-character-r3`,
+`wd-character-walk-r3`, `wd-character-splats-r3` and `wd-props-r3`. The owner's words: "Standing and
+walking: looks too much like a zombie (arms unnaturally hanging in front of torso, etc. Running:
+needs to look much more realistic; legs and arms don't move enough, etc." and, on running, "seems to
+bounce left and right too much". He approved a dedicated character lab.
+
+Round 4, on `claude/lane-worlds-r4` (cut from r3; merges after #135), one draft PR "Phase Worlds r4:
+a character lab, and a character who moves like a person":
+
+- The lab, behind the labs switch: the character alone on a plain floor or treadmill; stand, walk
+  and run; side, front and three-quarter views; slow motion and a speed control.
+- Checked against measured gait data: hip, knee, ankle, shoulder and elbow over one stride; arm
+  swing opposite the legs; the pelvis's sway and bob. Sources cited here; the reference shown beside
+  the character; anything shipped CC0 or CC BY, checked on its live page.
+- Standing and walking: the arms at the sides (relaxed shoulders, elbows slightly bent, hands by the
+  thighs), swinging from the shoulder opposite the legs.
+- Running: knee drive and heel recovery, elbows near 90° and pumping, a short flight phase, a slight
+  forward lean, the bounce mostly vertical with little side-to-side sway.
+- Cards on Effect review page 2 (lane record "Worlds"): the lab clips (stand, walk, run beside the
+  reference), then the character on the island (walk and run on the beach, the boulder garden) as
+  `-r4` cards, each naming the r3 card it replaces in its note.
+
+### Brief (r4, part 2: tuning)
+
+(The Operator's message of October 1, 2026, 19:20 UTC.) The owner marked the three lab cards "fix",
+but his note is a yes: "This is fantastic. The lab seems excellent to me. We could expand the
+characters (more customizable, etc.) and make them a bit sharper, but this seems nearly perfect. I'd
+like to be able to control all of the movement parameters (hip, knee, ankle, shoulder, elbow, maybe
+even more?) in the lab, find a config that looks the best, and then export a JSON or something to
+give you (or save/upload it somewhere and have you use it) to implement in the Worlds, etc."
+
+1. Every gait parameter as a lab control (per joint, torso lean, pelvis sway and bob, stride and
+   cadence, arm swing; stand, walk and run separately), Reset to the measured reference, the
+   reference overlay kept on.
+2. Export and import as a small JSON (Copy, file save, paste or file open; files stay on the
+   device). Worlds reads that config. The format in docs/WORLDS.md and here.
+3. A bit sharper, and a first step toward a more customizable character (proportions, clothing
+   colors), as far as fits this round.
+4. Post the new lab clip, controls visible, as `wd-lab-controls-r5` on page 2.
+
+Model: Opus 5.5 (default effort). Branch `claude/lane-worlds-r4`.
+
+- October 1, 2026: #135 refreshed (main merged, Worlds specs green); r4 cut from it.
+- **Sources** (all in docs/WORLDS.md, "The character lab"): walking angles from Fukuchi, Fukuchi and
+  Duarte (2018, PeerJ 6:e4640; figshare 10.6084/m9.figshare.5722711, CC BY 4.0), nine people at 1.26
+  m/s; running angles and the running pelvis from Fukuchi, Fukuchi and Duarte (2017, PeerJ 5:e3298;
+  figshare 10.6084/m9.figshare.4543435, CC BY 4.0), 31 runners at 2.5 m/s; arm ranges from Kang et
+  al. (2023) and Tartaruga et al. (cited in Wilk et al. 2024); arms opposite the legs from Pontzer
+  et al. (2009); the walking pelvis from Orendurff et al. (2004). The datasets were downloaded to
+  `.cache/worlds/r4/` (not committed); only the means and SDs ship (4 KB).
+- **The gait** (`tools/wd-character.py`, `GAIT`, `Shaper`, `shape_cycle`): legs follow the reference
+  means exactly (by construction); arms from the shoulder, opposite the legs. Built: walk stride
+  1.32 m, shoulder range 44° (people 56 ± 13°), elbow 7–37° (range 30°, people 30 ± 10°), pelvis bob
+  2.2 cm (people 4.0–4.8), sway 4.2 cm (3.9–4.6); run at 2.5 m/s (was 2.7), stride 1.64 m, elbow
+  69–101° (range 32°, people 39 ± 13°), pelvis bob 7.7 cm (runners 9.7), sway 2.2 cm (2.2), forward
+  lean 8°, a flight phase between stances.
+- **The lab** (`worlds/lab/`, `src/worlds/lab.js`): see docs/WORLDS.md.
+- **Posture:** the capture's spine, neck and collarbones were stooped (r3's hands hung 17 cm in
+  front of the hips). The shaper now aims the spine, neck, head and collarbones from the model's
+  upright rest pose plus the gait's lean; standing, the hands are 2 cm behind the hip line.
+- **Cards** (page 2, lane record "Worlds", groups "lab" and "island"; WebM): `wd-lab-stand-r4`,
+  `wd-lab-walk-r4`, `wd-lab-run-r4` (`tools/wd-lab-clip.mjs`), `wd-beach-r4` (replaces
+  `wd-character-walk-r3` and `wd-character-r3`) and `wd-props-r4` (replaces `wd-props-r3`), from
+  `tools/world-clip.mjs`'s `beach-r4` and `props-r4` scenes. `wd-character-splats-r3` was not
+  redone: the splat person plays the same clips, so it moves the same way now.
+- **Tuning** (part 2; docs/WORLDS.md, "Tuning the gait"): `src/worlds/gait-tuner.js` changes the
+  baked gait on the bones every frame (legs: swing × scale + offset about the measured range's
+  middle; arms: shoulder and elbow middle and swing, arms out; torso lean, head tilt; pelvis bob and
+  sway ×; stride ×, so cadence = speed ÷ stride; standing: arms, torso, hip and knee offsets), then
+  puts the lowest foot back on the ground. Defaults = the measured gait = no change. The lab's
+  **Tune** panel has a slider per setting (16 for walk and run, 7 for stand) and the look (height
+  1.5–2.0 m, shirt, jeans and shoe colors), Reset this gait and Reset all, Copy, Save file, Open
+  file and paste. The format is
+  `{ "format": "splashery-gait", "version": 1, look, stand, walk, run }`. Worlds reads
+  `assets/worlds/character/tuning.json` (shipped as the measured gait): to use the owner's settings,
+  replace that file with his export. It takes the gait, height and jeans and shoe tints; each world
+  keeps its shirt. `?tuning=0` ignores it. `human.json` now records the baked arm and torso values
+  (`gait.base`), which the tuner starts from.
+- **Sharper:** the lab loads the detailed body (2K) on every tier; textures are filtered
+  anisotropically (8×) in the lab and the world.
+- `tests/wdr4.spec.mjs`: 9 tests (r4's 7, the tuning controls with export and import, and the
+  shipped tuning file). Before part 2: 7 tests (the reference and credits, the built clips against
+  it, the lab behind the switch, its live curves, hands by the thighs, controls, screenshots
+  `wdr4-lab-*`).
+- **Fixed on the way:** the r3 clips' keys started at frame 1, so every loop held its first pose for
+  a frame and lasted 1.033 s (a small hitch each stride, and the feet slid 3% more). Keys now start
+  at 0; each loop is exactly 1 s. The lab found it: its measured curves drifted against the build's.
+
 ## Brief (r3)
 
 (Written by the Operator on September 30, 2026, from the owner's marks of September 29 and 30)
