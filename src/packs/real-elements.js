@@ -24,6 +24,13 @@ const ease = (x) => x * x * (3 - 2 * x);
 const ease5 = (x) => x * x * x * (x * (x * 6 - 15) + 10);
 const band = (x, a, b) => clamp01((x - a) / (b - a));
 
+// The turn's path (fraction of a whole turn) over its time u: 0 to 1/4, hold, 1/4 to 3/4, hold,
+// 3/4 to 1.
+function turnPath(u) {
+  const seg = (a, b, x) => ease5(Math.min(1, Math.max(0, (u - a) / (b - a)))) * x;
+  return seg(0, 0.18, 0.25) + seg(0.36, 0.64, 0.5) + seg(0.82, 1, 0.25);
+}
+
 // ---- The facts ------------------------------------------------------------------------------
 
 export const ELEMENTS = FACTS.map(
@@ -321,7 +328,7 @@ const REAL_ELEMENTS = {
   ],
   controls: [
     { key: "up", label: "Lift the sample", type: "toggle", default: 0, ease: 2.4 },
-    { key: "spin", label: "Turn it around", type: "pulse", ease: 3.6 },
+    { key: "spin", label: "Turn it around", type: "pulse", ease: 6 },
   ],
   action: {
     key: "up",
@@ -399,8 +406,16 @@ const REAL_ELEMENTS = {
     if (u > 0.98 && m.swing0 === undefined) m.swing0 = t;
     if (u < 0.98) m.swing0 = undefined;
     const sw = m.swing0 === undefined ? 0 : t - m.swing0;
-    const swing = 0.62 * Math.sin(0.55 * sw) * ease(Math.min(1, sw / 3));
-    const sp = c.spin > 0 ? ease5(1 - c.spin) : 0;
+    let swing = 0.62 * Math.sin(0.55 * sw) * ease(Math.min(1, sw / 3));
+    // During a turn the swing settles out (so the side views hold still), and starts again after.
+    if (c.spin > 0) {
+      if (m.spinFrom === undefined) m.spinFrom = swing;
+      swing = m.spinFrom * (1 - ease(Math.min(1, (1 - c.spin) / 0.12)));
+      if (m.swing0 !== undefined) m.swing0 = t;
+    } else m.spinFrom = undefined;
+    // The turn shows the sides: a quarter turn, a pause on the side, on round to the other side,
+    // a pause, and home.
+    const sp = c.spin > 0 ? turnPath(1 - c.spin) : 0;
     const yaw = swing + TAU * sp + 2 * rise * (1 - rise);
     const tilt = -0.18 * rise;
     const q = quatMul(quatAxisAngle([0, 1, 0], yaw), quatAxisAngle([1, 0, 0], tilt));
@@ -563,18 +578,21 @@ const REAL_ELEMENTS = {
   },
 };
 
-// The lifted sample as a closed solid (polish, the owner's note of October 5, 2026: "it is hollow
-// and has a hole in it when it's turned to the side"): the photo's relief in front, a shallower,
-// darker mirror of it behind, a wall all round its outline from the back to the front, and fillers
-// wherever the relief steps steeply between neighbors, so no side view looks through it. The back
-// and the walls take the colors of the nearest front surface (darker, since no photo saw them).
+// The lifted sample as a solid body (the owner's notes of October 5 and 6, 2026: "it is hollow
+// and has a hole in it when it's turned to the side", "still appears hollow from the sides"). A
+// photo only sees the front, so the body is built like a pebble: front and back both swell from
+// the outline inward (by the distance to the outline, rounded off over about a sixth of the
+// sample's width), the front also carries the photo's own relief, and the two meet at the rim. Seen
+// from the side, the photo's texture rolls over the edge into the back (a darker mirror of the
+// front, since no photo saw it) instead of ending at a thin shell or a striped wall. Fillers close
+// the steps between neighbors, and the splats are nearly round, so none turns edge-on into a gap.
 function solidSample(pair, share, part, splat, relief = 1) {
   const out = [];
   const size = pair.color.w;
   const { depth, color } = pair;
   const have = countPixels(pair, 0, 0, size);
-  // About two fifths of the share each for the front and the back, the rest for walls and fillers.
-  const step = Math.max(1, Math.sqrt(have / (share * 0.4)));
+  // About a third of the share each for the front and the back, the rest for the fillers.
+  const step = Math.max(1, Math.sqrt(have / (share * 0.33)));
   const g = Math.max(1, Math.round(step));
   const px = (LIFT_SIDE / size) * g;
   // (A flat picture keeps a thin card's thickness.)
@@ -589,62 +607,99 @@ function solidSample(pair, share, part, splat, relief = 1) {
       const i = y * size + x;
       const v = depth.data[i * 4];
       if (!v) continue;
-      const d = (v - 1) / 254;
       cell[gy * W + gx] = cells.length;
       cells.push({
         gx,
         gy,
         i,
+        d: (v - 1) / 254,
         x: LIFT_AT[0] + ((x + 0.5) / size - 0.5) * LIFT_SIDE,
         y: LIFT_AT[1] + (0.5 - (y + 0.5) / size) * LIFT_SIDE,
-        zf: LIFT_AT[2] + hz * (d - 0.5),
-        zb: LIFT_AT[2] - hz * 0.5 - hz * 0.35 * d,
         c: [color.data[i * 4] / 255, color.data[i * 4 + 1] / 255, color.data[i * 4 + 2] / 255],
       });
     }
+  // Each cell's distance to the outline (in cells; a chamfer transform, two passes).
+  const BIG = 1e9;
+  const dist = new Float32Array(W * W).fill(0);
+  for (let i = 0; i < W * W; i++) dist[i] = cell[i] >= 0 ? BIG : 0;
+  const relax = (i, j, w) => {
+    if (dist[j] + w < dist[i]) dist[i] = dist[j] + w;
+  };
+  for (let y = 0; y < W; y++)
+    for (let x = 0; x < W; x++) {
+      const i = y * W + x;
+      if (!dist[i]) continue;
+      if (x === 0 || y === 0) dist[i] = Math.min(dist[i], 1);
+      if (x > 0) relax(i, i - 1, 1);
+      if (y > 0) relax(i, i - W, 1);
+      if (x > 0 && y > 0) relax(i, i - W - 1, 1.414);
+      if (x < W - 1 && y > 0) relax(i, i - W + 1, 1.414);
+    }
+  for (let y = W - 1; y >= 0; y--)
+    for (let x = W - 1; x >= 0; x--) {
+      const i = y * W + x;
+      if (!dist[i]) continue;
+      if (x === W - 1 || y === W - 1) dist[i] = Math.min(dist[i], 1);
+      if (x < W - 1) relax(i, i + 1, 1);
+      if (y < W - 1) relax(i, i + W, 1);
+      if (x < W - 1 && y < W - 1) relax(i, i + W + 1, 1.414);
+      if (x > 0 && y < W - 1) relax(i, i + W - 1, 1.414);
+    }
+  // The swell: 0 at the rim, 1 a sixth of the width in (a quarter circle, so the rim rolls round).
+  const R = Math.max(3, W / 6);
+  for (const p of cells) {
+    const t = Math.min(1, (dist[p.gy * W + p.gx] - 0.5) / R);
+    p.b = Math.sqrt(Math.max(0, 1 - (1 - t) * (1 - t)));
+    p.zf = LIFT_AT[2] + hz * p.b * (0.3 + 0.6 * p.d);
+    p.zb = LIFT_AT[2] - hz * 0.42 * p.b;
+  }
   const at = (gx, gy) => (gx < 0 || gy < 0 || gx >= W || gy >= W ? null : cells[cell[gy * W + gx]] ?? null); // prettier-ignore
   const mixC = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
   const NB = [[1, 0], [0, 1]]; // prettier-ignore
-  const AROUND = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]; // prettier-ignore
+  const BACK = 0.85;
+  // Baked light on the body's own shape (where the photo has none: the rolled rim and the back),
+  // so its roundness reads from the side. The light comes from the upper left front, as the
+  // photos' studio light mostly does.
+  const L = [-0.45, 0.7, 0.55];
+  const shadeAt = (p, front) => {
+    const zOf = (q) => (q ? (front ? q.zf : q.zb) : LIFT_AT[2]); // (past the rim: the seam)
+    const zl = zOf(at(p.gx - 1, p.gy));
+    const zr = zOf(at(p.gx + 1, p.gy));
+    const zu = zOf(at(p.gx, p.gy - 1));
+    const zd = zOf(at(p.gx, p.gy + 1));
+    const sgn = front ? 1 : -1;
+    const n = [-(zr - zl) / (2 * px), (zu - zd) / (2 * px), sgn];
+    const ln = Math.hypot(n[0], n[1], n[2]);
+    // (The back has its own light, mirrored behind, so it reads as a dome, not a bowl.)
+    const lit = Math.max(0, (n[0] * L[0] + n[1] * L[1] + n[2] * L[2] * sgn) / ln);
+    return 0.72 + 0.33 * lit;
+  };
   for (const p of cells) {
-    // The front, each splat along the surface's normal; the back, facing away.
     const n = normalAt(pair, p.i, size, LIFT_SIDE);
-    out.push(splat([p.x, p.y, p.zf], p.c, px * 0.8, { part, n, flat: 0.3 }));
-    out.push(splat([p.x, p.y, p.zb], shadeArr(p.c, 0.6), px * 0.8, { part, n: [0, 0, -1], flat: 0.3 })); // prettier-ignore
-    // Fillers where the relief steps steeply to a neighbor (front and back).
+    // The front keeps the photo's colors where it faces the camera, and takes the baked light as
+    // it rolls over the rim.
+    const front = shadeArr(p.c, 1 + (shadeAt(p, true) - 1) * (1 - p.b));
+    const back = shadeArr(p.c, BACK * shadeAt(p, false));
+    p.cf = front;
+    p.cb = back;
+    out.push(splat([p.x, p.y, p.zf], front, px * 0.82, { part, n, flat: 0.75 }));
+    out.push(splat([p.x, p.y, p.zb], back, px * 0.82, { part, n: [0, 0, -1], flat: 0.75 }));
+  }
+  for (const p of cells) {
+    // Fillers where the surface steps steeply to a neighbor (front and back): mostly at the rim.
     for (const [dx, dy] of NB) {
       const q = at(p.gx + dx, p.gy + dy);
       if (!q) continue;
-      for (const [za, zb, dark] of [
-        [p.zf, q.zf, 0.9],
-        [p.zb, q.zb, 0.6],
+      for (const [za, zb, ca, cb] of [
+        [p.zf, q.zf, p.cf, q.cf],
+        [p.zb, q.zb, p.cb, q.cb],
       ]) {
-        // prettier-ignore
-        const k = Math.min(3, Math.floor(Math.abs(zb - za) / (px * 1.2)));
+        const k = Math.min(5, Math.floor(Math.abs(zb - za) / px));
         for (let j = 1; j <= k; j++) {
-          const t = j / (k + 1);
-          out.push(splat([p.x + (q.x - p.x) * t, p.y + (q.y - p.y) * t, za + (zb - za) * t], shadeArr(mixC(p.c, q.c, t), dark), px * 0.8, { part, flat: 0.5 })); // prettier-ignore
+          const f = j / (k + 1);
+          out.push(splat([p.x + (q.x - p.x) * f, p.y + (q.y - p.y) * f, za + (zb - za) * f], mixC(ca, cb, f), px * 0.82, { part, flat: 0.85 })); // prettier-ignore
         }
       }
-    }
-    // The wall: an outline cell is closed from the back to the front with tall, thin splats.
-    if (AROUND.every(([dx, dy]) => at(p.gx + dx, p.gy + dy))) continue;
-    // (Overlapping layers, their color shading from the back's to the front's, so the wall reads
-    // as one face, not stacked plates.)
-    const layer = px * 1.4;
-    const k = Math.max(1, Math.ceil((p.zf - p.zb) / layer));
-    const h = (p.zf - p.zb) / k;
-    for (let j = 0; j < k; j++) {
-      const t = (j + 0.5) / k;
-      out.push({
-        p: [p.x, p.y, p.zb + h * (j + 0.5)],
-        scales: [px * 0.6, px * 0.6, h * 0.85],
-        quat: [0, 0, 0, 1],
-        color: shadeArr(p.c, 0.6 + 0.3 * t),
-        opacity: 1,
-        pattern: false,
-        part,
-      });
     }
   }
   return out;

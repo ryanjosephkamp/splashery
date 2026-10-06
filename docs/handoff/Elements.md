@@ -23,9 +23,14 @@ polish: sharper samples and a smoother lift":
 - Kept: tiles at every third atlas pixel and one splat per font pixel (finer splats vanish in the
   256 px shelf picture, which draws without the labs' low cull).
 - The owner's marks (October 5, 2026), in the same PR:
-  - "Hollow ... a hole in it when it's turned to the side": the lifted sample is now a closed solid
-    (front relief, a darker mirror behind, a wall round the outline from back to front shading
-    between the two, and fillers at steep steps). I chose filling over limiting the turn.
+  - "Hollow ... a hole in it when it's turned to the side", then (October 6) "still appears hollow
+    from the sides": the lifted sample is now built like a pebble. Front and back both swell from
+    the outline inward (by the distance to the outline), the front also carries the photo's relief,
+    and they meet at the rim, so the photo's texture rolls over the edge. Light is baked on the
+    body's own shape where the photo has none (the rolled rim; the back with its own mirrored light,
+    so it reads as a dome). Fillers close steep steps, and the splats are nearly round. The earlier
+    wall round the outline read as stripes from the side and is gone. A tap's turn now shows the
+    sides: a quarter turn, a pause, on to the other side, a pause, and home (6 s).
   - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
     Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
     coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
