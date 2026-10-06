@@ -51,6 +51,25 @@ polish: sharper samples and a smoother lift":
     test runs it on all 118: the filler build fails on every one (1 to 10 percent), the new one
     passes on every one (under 1 percent, at the outline). Clips rel-copper-polish-r5, rel-radon-r4;
     up-close stills rel-copper-close-r5, rel-radon-close-r4.
+  - October 6, "still not closed from some angles": an engine bug. Player.resortPose sorted a turned
+    part's splats as if it had turned the other way (right only at 0 and 180 degrees), so while the
+    sample turned its far side drew over its near side. Shown on a test ellipsoid on the lift part
+    (45 degrees about x, about y, 90 about a slanted axis); the inverse matches a depth-correct
+    software render. Fix: Engine PR #361 (`claude/lane-real-elements-engine`, one line in
+    `src/pose.js` and `tests/rel-engine.spec.mjs`), to merge before #318. In the lane: the thickness
+    is one dome over the outline (an ellipsoid fitted to it, so lobed samples are not waisted) with
+    a rounded edge and walls joining front and back along the outline; one-cell spikes pruned; the
+    photo's bumps smoothed. `tools/rel-sweep.mjs` checks a whole turn in 5-degree steps at three
+    heights, close and far; `tools/rel-settle.mjs` draws a few frames after each change (the splats
+    sort where the previous frame's pose put them, so a single frame after a snap is sorted in the
+    old pose). Still open: at the exact side-on holds (90 and 270 degrees) copper can still read as
+    a shallow dish in color.
+  - October 6, "a little bit sharper overall": `render.dpr: "native"` (labs; the phone tier drew at
+    1.5 device pixels per point), density 2, the lifted sample takes what the table leaves (up to 42
+    percent), finer splats along each tile sample's outline. `tools/rel-sharp.mjs` measures it: at
+    390 x 844 at 3x the table 15,083 to 24,170 and the lifted copper 12,812 to 20,513 (+60 percent);
+    desktop +2 percent. `tools/rel-table-clip.mjs` records the phone-size table clip. Cards:
+    rel-copper-polish-r6, rel-radon-r5, rel-table-r2, rel-sharp-r1.
   - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
     Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
     coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
