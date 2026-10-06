@@ -209,6 +209,9 @@ export function liftShape(p, channel = 0) {
 
 const MODEL_SPLATS = {
   density: MODEL_DENSITY,
+  // Smd r2: the Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): the textures and the
+  // edges of a model read crisper (the burger's edge 2.37 to 2.03 px at phone size).
+  kernel: "sharp",
   options: [
     {
       key: "source",

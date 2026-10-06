@@ -6,7 +6,7 @@
     <title>Learn · Splashery</title>
     <meta
       name="description"
-      content="How splats work, and how to program your own Splashery toys."
+      content="How 3D Gaussian splats work, the Tinkerer's Manual, the lab notebook and how Splashery is made."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/learn/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Learn · Splashery" />
     <meta
       property="og:description"
-      content="How splats work, and how to program your own Splashery toys."
+      content="How 3D Gaussian splats work, the Tinkerer's Manual, the lab notebook and how Splashery is made."
     />
     <meta property="og:url" content="https://ryanjosephkamp.github.io/splashery/site/learn/" />
     <meta
@@ -53,6 +53,7 @@
       })();
     </script>
     <link rel="stylesheet" href="../assets/site.css" />
+    <link rel="stylesheet" href="../assets/hubs.css" />
     <script type="module" src="../assets/site.js"></script>
   </head>
   <body>
@@ -133,34 +134,217 @@
     <main id="main" tabindex="-1">
       <div class="page-intro">
         <h1>Learn</h1>
-        <p class="lead">How the toys work, and how to make your own.</p>
+        <p class="lead">
+          How the toys work, how to make your own, and how Splashery itself is made.
+        </p>
       </div>
-      <ul class="link-list">
-        <li>
-          <a href="../../manual/">The Tinkerer's Manual</a>
-          <p>How to program splats, from the math of one splat to your own equations.</p>
+      <ul class="learn-cards">
+        <li class="learn-card main">
+          <a href="../../manual/"
+            ><svg class="hub-icon" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <path
+                d="M5 4.5h6.5a1 1 0 0 1 1 1V20a2 2 0 0 0-2-2H5zM19 4.5h-6.5v15.5a2 2 0 0 1 2-2H19z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              /></svg
+            ><span class="learn-title"
+              >The Tinkerer's Manual<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></span
+            ><span class="learn-text"
+              >How to program splats, from the math of one splat to your own equations, toys and
+              pictures. Start here if you want to make something.</span
+            ></a
+          ><a class="learn-also" href="../../manual/tinkerers-manual.pdf">Download the PDF</a>
         </li>
-        <li>
-          <a href="../../manual/tinkerers-manual.pdf">The Manual as a PDF</a>
-          <p>The same manual, to read offline or print.</p>
-        </li>
-        <li>
-          <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
-            >Writing toy recipes</a
+        <li class="learn-card">
+          <a href="../learn/splats/"
+            ><svg class="hub-icon" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <ellipse
+                cx="12"
+                cy="12"
+                rx="8"
+                ry="5.5"
+                transform="rotate(-25 12 12)"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              />
+              <ellipse
+                cx="12"
+                cy="12"
+                rx="4"
+                ry="2.7"
+                transform="rotate(-25 12 12)"
+                fill="currentColor"
+                opacity=".45"
+              /></svg
+            ><span class="learn-title"
+              >How 3D Gaussian splats work<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></span
+            ><span class="learn-text"
+              >A soft colored blob, hundreds of thousands of them, sorted and blended: what a splat
+              is and what a recipe is, with small drawings.</span
+            ></a
           >
-          <p>How a toy's recipe says which parts move, and how.</p>
         </li>
-        <li>
-          <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md"
-            >The scene format</a
+        <li class="learn-card">
+          <a href="../learn/notebook/"
+            ><svg class="hub-icon" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <rect
+                x="5"
+                y="3.5"
+                width="14"
+                height="17"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              />
+              <path
+                d="M9 8h6M9 12h6M9 16h3"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              /></svg
+            ><span class="learn-title"
+              >The lab notebook<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></span
+            ><span class="learn-text"
+              >What each lane built, which model built it, and what the team learned along the
+              way.</span
+            ></a
           >
-          <p>What a shared link or a saved scene holds.</p>
         </li>
-        <li>
-          <a href="https://github.com/ryanjosephkamp/splashery#embedding">Embedding a toy</a>
-          <p>The iframe and the custom element, with every option.</p>
+        <li class="learn-card">
+          <a href="../learn/made/"
+            ><svg class="hub-icon" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <path
+                d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              /></svg
+            ><span class="learn-title"
+              >How Splashery is made<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></span
+            ><span class="learn-text"
+              >Lanes, the Operator, the reviews and the rules, in plain words.</span
+            ></a
+          >
+        </li>
+        <li class="learn-card">
+          <a href="../share/"
+            ><svg class="hub-icon" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" />
+              <circle
+                cx="18"
+                cy="18"
+                r="2.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              />
+              <path
+                d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6"
+                stroke="currentColor"
+                stroke-width="1.8"
+              /></svg
+            ><span class="learn-title"
+              >Embed and share<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></span
+            ><span class="learn-text"
+              >Put a toy on your own page, and how a scene link carries a toy and its
+              settings.</span
+            ></a
+          >
         </li>
       </ul>
+      <section aria-labelledby="h-more">
+        <h2 id="h-more">More to read</h2>
+        <ul class="link-list">
+          <li>
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+              >Writing toy recipes</a
+            >
+            <p>How a toy's recipe says which parts move, and how.</p>
+          </li>
+          <li>
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md"
+              >The scene format</a
+            >
+            <p>What a shared link or a saved scene holds.</p>
+          </li>
+        </ul>
+      </section>
     </main>
     <footer class="site-footer">
       <div class="footer-grid">
@@ -199,9 +383,10 @@
             <li><a href="../search/">Search</a></li>
             <li><a href="../../manual/">The Tinkerer's Manual</a></li>
             <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
-            <li>
-              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
-            </li>
+            <li><a href="../share/">Embed and share</a></li>
+            <li><a href="../about/credits/">Credits</a></li>
+            <li><a href="../about/privacy/">Privacy</a></li>
+            <li><a href="../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
