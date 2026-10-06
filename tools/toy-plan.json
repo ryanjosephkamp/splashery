@@ -2087,14 +2087,15 @@
       "v": "new",
       "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
       "effect": "A flat sheet showing what you open: a tap on the right of the page turns to the next page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and pauses a video.",
-      "sound": "A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback."
+      "sound": "A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
+      "improved": "Pages r6 (October 5, 2026): Pop out (the top bar's switch) and Draw a box, as in Your book, for a PDF or a picture: a tap raises a figure (a picture in the PDF, or the whole photo), a drawn box raises anything else, a tap on a risen one lays it back, and a page step waits until they have laid back. A drag on a risen figure tilts the view, and a Depth slider sets its relief."
     },
     "your-book": {
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C, October 2, 2026).",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s).",
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s). Pages r6 (October 5, 2026, labs): Pop out is one switch for every page toy, in the top bar; with it on nothing rises by itself: a tap raises a figure, a tap on another raises that one too (up to three at once), a tap on a risen one lays it back, and a page turn (tap or drag) lays them all back quickly first. While figures stand up, a drag on one (or off the pages) tilts the book to see them from the side; the view comes back level when they lie down. A Depth slider sets a risen figure's relief, up to five times its own, and the depth is kept in the scene and in embeds. A page pulled over plays its page sound once.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
@@ -2102,7 +2103,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
       "sound": "A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
-      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop out lifts the photo on the page in view out of its corners toward you as one solid piece, with its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on the other photo of a page lifts that one instead, and a tap lays it back.",
+      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop out lifts the photo on the page in view out of its corners toward you as one solid piece, with its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on the other photo of a page lifts that one instead, and a tap lays it back. Pages r6 (October 5, 2026, labs): Pop out is one switch for every page toy, in the top bar; with it on nothing rises by itself: a tap raises a photo, a tap on another raises that one too (up to three at once), a tap on a risen one lays it back, and a page turn (tap or drag) lays them all back quickly first. While photos stand up, a drag on one (or off the pages) tilts the album to see them from the side; the view comes back level when they lie down. A Depth slider sets a risen photo's relief, up to five times its own, and the depth is kept in the scene and in embeds. A page pulled over plays its page sound once.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
     "picture-frame": {
@@ -2705,6 +2706,69 @@
       "effect": "TRAPPIST-1, TOI-178 and 55 Cancri (and the inner Solar System to compare) from the NASA Exoplanet Archive: planets on their measured orbits at their measured periods (sped up, labeled), star and planets drawn larger than to scale (said). A tap turns the system edge on, as Earth sees it, and back (7 s).",
       "sound": "Space is silent: a soft breath as it turns.",
       "improved": "Space r2: new toy (labs); tools/sp2-systems.mjs reads pscomppars through the archive's TAP service."
+    },
+    "grand-canyon": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A 20 km block of the Grand Canyon round Grand Canyon Village (USGS 3DEP heights, aerial imagery, the rock layers on its cut sides). The tap floods it from the river to half its depth, leaving the buttes as islands, and drains it (about 8 s).",
+      "sound": "A rush of water rising and a wave as it drains.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs; the water is a sheet that rises as one piece, with cut faces that appear as the level passes them."
+    },
+    "st-helens": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Mount St. Helens from the north, as in 1979 (the USGS pre-eruption DEM). The tap plays May 18, 1980: the summit and north flank fall to today's crater (3DEP and imagery spread out from the crater), a lateral blast races north and an ash column rises and drifts east (about 6 s); a second tap goes back to 1979.",
+      "sound": "A deep thud and rumble, then the eruption's roar; a low rumble going back.",
+      "improved": "Geo: new toy; the 1979 surface sinks onto today's heights while today's fades in from the crater out, and is then hidden (sorting)."
+    },
+    "sea-floor": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "The Mariana Trench and Mariana Islands (NOAA ETOPO1, nine times taller) under a heaving ocean. The tap drains the ocean (the trench empties last), shows the bare floor and fills it back (about 9 s).",
+      "sound": "A low roar of draining water and a wave as it returns.",
+      "improved": "Geo: new toy; the ocean is a sheet that sinks as one piece, with cut faces that drop away."
+    },
+    "tide-harbor": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026 (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the water, and a dot follows the curve on the plaque (and slides back to its start at the end).",
+      "sound": "Three soft waves through the day.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea level)."
+    },
+    "hurricane": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Hurricane Polo (EP17, September 2026) over a Blue Marble map of the Mexican coast: GOES-East infrared cloud tops as tall as their temperature, in rings that turn counterclockwise round the eye (faster inside), with rain and low wind lines. The tap plays September 21 to 22, when it grew from 70 to 155 knots: it follows its best track, the start's clouds give way to the end's (with a clear eye), and it spins faster (about 10 s); a second tap goes back.",
+      "sound": "Wind and rain, then a low rumble; a softer wind going back.",
+      "improved": "Geo: new toy from tools/geo-storm.mjs (GIBS colors turned back into temperatures)."
+    },
+    "relief-map": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Yosemite Valley as a relief map: contour lines every 100 m (heavier every 500), height colors, the aerial photo or NLCD land cover, and the NHD's named streams. The tap sends a glowing contour from the valley floor to the rim while light runs down every stream (about 7 s).",
+      "sound": "A soft scrape and a few drips.",
+      "improved": "Geo: new toy from tools/geo-terrain.mjs."
+    },
+    "living-city": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A kit-built city: cars go round their blocks on the right, an elevated train loops round the edge, and a park. The tap turns day to night (walls and streets darken, each window lights up at its own moment, about 4.5 s); a second tap brings the day back.",
+      "sound": "A light switch and the city's low hum, darker at night.",
+      "improved": "Geo: new toy; cars and train are tokens on looping paths, re-sorted as they move."
+    },
+    "stork-migration": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each stork flies its real track, facing the way it goes, and draws its trail behind it; month labels and a bar mark the time. Then the season rewinds in 2 s (the storks fly their tracks back to their nests).",
+      "sound": "Wing beats and a stork's bill clatter.",
+      "improved": "Geo: new toy from tools/geo-migration.mjs."
+    },
+    "earthquakes": {
+      "v": "keep",
+      "owner": "The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).",
+      "effect": "A relief globe (NOAA ETOPO1) turning slowly with the USGS earthquake feed on it, read live when the toy opens (a dated snapshot when it can't be reached): a dot per quake, sized by magnitude and colored by depth. A plaque shows the source, the feed and when it was fetched. The tap flashes the quakes in time order (about 8 s); a tap on the plaque fetches the feed again. The Toy tab picks the past week, the past month or a year of the catalog.",
+      "sound": "A low rumble, and a second one.",
+      "improved": "Geo: new toy (Push Plan S14); live feed approved by the owner on October 4, 2026."
     }
   }
 }

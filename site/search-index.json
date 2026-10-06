@@ -1083,6 +1083,116 @@
     "i": "../assets/toys/spiral-galaxy/thumb.webp"
   },
   {
+    "t": "The real Moon",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbW9vbiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    "w": "the real moon space space moon lunar lro lola nasa real map elevation relief craters tycho copernicus apollo real-moon",
+    "i": "../assets/toys/real-moon/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "The real Mars",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbWFycyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    "w": "the real mars space space mars red planet viking mola nasa usgs real map elevation relief olympus mons valles marineris gale curiosity real-mars",
+    "i": "../assets/toys/real-mars/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "The real Earth",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZWFydGgifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    "w": "the real earth space space earth world globe blue marble etopo nasa noaa real map elevation relief night lights everest himalaya grand canyon hawaii real-earth",
+    "i": "../assets/toys/real-earth/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "The real Mercury",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbWVyY3VyeSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    "w": "the real mercury space space mercury planet messenger nasa usgs real map elevation relief caloris rachmaninoff hokusai craters real-mercury",
+    "i": "../assets/toys/real-mercury/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "The real Venus",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtdmVudXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    "w": "the real venus space space venus planet magellan radar nasa usgs real map elevation relief maxwell montes maat mons artemis corona real-venus",
+    "i": "../assets/toys/real-venus/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Real moons",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbW9vbnMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMSwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    "w": "real moons space space moons io europa ganymede callisto titan jupiter saturn galileo voyager cassini nasa usgs real map volcano ice real-moons",
+    "i": "../assets/toys/real-moons/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Pluto, Ceres and Vesta",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtc21hbGwtd29ybGRzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjEsInJvbGwiOjAsImRpc3RhbmNlIjozfX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    "w": "pluto, ceres and vesta space space dwarf planet pluto ceres vesta asteroid new horizons dawn nasa usgs real map elevation relief sputnik heart occator real-small-worlds",
+    "i": "../assets/toys/real-small-worlds/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Stars near the Sun",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5lYXJieS1zdGFycyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to Alpha Centauri, Sirius, Barnard's Star, Vega or Arcturus and back.",
+    "w": "stars near the sun space space stars neighborhood gaia hipparcos nearby proxima centauri sirius barnard vega arcturus light-years map galaxy real data nearby-stars",
+    "i": "../assets/toys/nearby-stars/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Real star systems",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItc3lzdGVtcyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",
+    "w": "real star systems space space exoplanets planets star system trappist-1 toi-178 55 cancri orbits nasa exoplanet archive transit real data star-systems",
+    "i": "../assets/toys/star-systems/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Real galaxies",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZ2FsYXhpZXMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjoyLjZ9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
+    "w": "real galaxies space space galaxy galaxies hubble eso telescope whirlpool m51 pinwheel m101 phantom m74 m83 spiral real picture real-galaxies",
+    "i": "../assets/toys/real-galaxies/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Saturn V",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhdHVybi12In0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjoyLjR9fQ",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fire its stages in the order of a real flight.",
+    "w": "saturn v space space rocket saturn v apollo moon launch stages staging nasa model s-ic s-ii s-ivb escape tower saturn-v",
+    "i": "../assets/toys/saturn-v/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Virus",
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpcnVzIn19",
     "k": "toy",
@@ -1353,7 +1463,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZWxlbWVudHMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMDYsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19",
     "k": "toy",
     "s": "Atoms",
-    "d": "Tap a tile to lift its sample and read its facts; tap the sample to turn it, its tile to set it back.",
+    "d": "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
     "w": "real elements atoms atoms elements periodic table real samples photos metals gases crystals chemistry real-elements",
     "i": "../assets/toys/real-elements/thumb.webp",
     "l": 1
@@ -3285,7 +3395,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0",
     "k": "toy",
     "s": "Pictures and pages",
-    "d": "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
+    "d": "Tap the right of the page to go on, the left to go back. With Pop out on (top bar), tap a figure to raise it.",
     "w": "picture lab pictures and pages pictures and pages pdf page document article photo picture image gif video open file picture-lab",
     "i": "../assets/toys/picture-lab/thumb.webp",
     "l": 1
@@ -3295,7 +3405,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19",
     "k": "toy",
     "s": "Pictures and pages",
-    "d": "Tap the right page to turn on, the left to go back. Tap a link to follow it; Pop out lifts a picture.",
+    "d": "Tap the right page to turn on, the left to go back. With Pop out on (top bar), tap a picture to raise it.",
     "w": "your book pictures and pages pictures and pages book pdf pages flip turn read hardcover paperback magazine notebook spiral stapled your-book",
     "i": "../assets/toys/your-book/thumb.webp",
     "l": 1
@@ -3305,7 +3415,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
     "k": "toy",
     "s": "Pictures and pages",
-    "d": "Tap the right page to turn on, the left to go back, or pull one over. Pop out lifts a photo off the page.",
+    "d": "Tap the right page to turn on, the left to go back. With Pop out on (top bar), tap a photo to raise it.",
     "w": "photo album pictures and pages pictures and pages photo album scrapbook pictures family photos leather linen pages turn photo-album",
     "i": "../assets/toys/photo-album/thumb.webp",
     "l": 1
@@ -3325,7 +3435,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0",
     "k": "toy",
     "s": "Studio",
-    "d": "Tap to play or pause; drag to turn or tilt. The Toy tab starts over, scrubs, changes the look or uses the mic.",
+    "d": "Tap to play and watch the land rise with the song; drag to turn or tilt. More in the Toy tab.",
     "w": "song landscape studio studio song music audio sound spectrogram spectrum frequency pitch loudness fourier waveform mp3 wav landscape song-landscape",
     "i": "../assets/toys/song-landscape/thumb.webp",
     "l": 1
@@ -3365,7 +3475,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0",
     "k": "toy",
     "s": "Studio",
-    "d": "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
+    "d": "Tap to lift the splats off the model; they settle back. Pick or open a model in the Toy tab.",
     "w": "model to splats studio studio 3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print model-splats",
     "i": "../assets/toys/model-splats/thumb.webp",
     "l": 1
@@ -3415,7 +3525,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
     "k": "toy",
     "s": "Studio",
-    "d": "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
+    "d": "Tap to lift the picture's depth, then tap to lay it flat. Pick or open a photo in the Toy tab.",
     "w": "photo to 3d studio studio photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp photo-3d",
     "i": "../assets/toys/photo-3d/thumb.webp",
     "l": 1
@@ -3435,7 +3545,7 @@
     "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0",
     "k": "toy",
     "s": "Studio",
-    "d": "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
+    "d": "Tap to fly the video's path; drag to look around. Show the original plays the flat video beside it.",
     "w": "video to 3d studio studio video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm video-3d",
     "i": "../assets/toys/video-3d/thumb.webp",
     "l": 1
@@ -3458,6 +3568,26 @@
     "d": "Tap Record in the Toy tab, make your sound, then Stop. Tap the toy to play it; trim and save it there.",
     "w": "sound recorder studio studio record recorder recording microphone voice sound effect wav webm m4a trim waveform spectrogram save audio sound-recorder",
     "i": "../assets/toys/sound-recorder/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Splat toolkit",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LXRvb2xraXQifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to spin it round. Open your own splat file in the Toy tab to crop, clean, shrink or convert it.",
+    "w": "splat toolkit studio studio gaussian splats ply splat spz sog compressed convert converter crop floaters outlier filter clean decimate shrink compare stats file tool splat-toolkit",
+    "i": "../assets/toys/splat-toolkit/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Point clouds",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to sweep a lidar scan line across it. Turn on Measure in the Toy tab, then tap two points.",
+    "w": "point clouds studio studio lidar las laz ply xyz pts point cloud survey usgs 3dep terrain classification intensity measure distance crop thin gis point-clouds",
+    "i": "../assets/toys/point-clouds/thumb.webp",
     "l": 1
   },
   {
@@ -3548,6 +3678,96 @@
     "d": "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
     "w": "fluid lab lab lab fluid liquid water soda honey lava pour glass splash drops viscosity smoke steam candle flame fire physics simulation lab fluid-lab",
     "i": "../assets/toys/fluid-lab/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Grand Canyon",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYW5kLWNhbnlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC42LCJyb2xsIjowLCJkaXN0YW5jZSI6My43fX0",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to flood the canyon from the river up, and watch it drain. Height in the Toy tab sets how tall it stands.",
+    "w": "grand canyon earth and maps earth and maps grand canyon arizona colorado river terrain elevation usgs 3dep landscape relief flood map earth geography grand-canyon",
+    "i": "../assets/toys/grand-canyon/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Mount St. Helens",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0LWhlbGVucyJ9LCJjYW1lcmEiOnsieWF3IjoyLjg1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to play May 18, 1980; tap again to go back to 1979.",
+    "w": "mount st. helens earth and maps earth and maps mount st helens volcano eruption 1980 washington landslide ash terrain elevation usgs before after earth geography st-helens",
+    "i": "../assets/toys/st-helens/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "The sea floor",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYS1mbG9vciJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to drain the ocean and fill it back.",
+    "w": "the sea floor earth and maps earth and maps sea floor ocean mariana trench challenger deep bathymetry noaa etopo pacific guam drain depth earth geography sea-floor",
+    "i": "../assets/toys/sea-floor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Tides at Bar Harbor",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRpZGUtaGFyYm9yIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn19",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to play a day of tides: watch the bar to Bar Island dry out and flood.",
+    "w": "tides at bar harbor earth and maps earth and maps tide tides waves harbor bar harbor maine bar island sandbar noaa ocean sea level boats coast earth geography tide-harbor",
+    "i": "../assets/toys/tide-harbor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Hurricane",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh1cnJpY2FuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to play the day Polo grew from 70 to 155 knots; tap again to go back to the start.",
+    "w": "hurricane earth and maps earth and maps hurricane polo storm cyclone typhoon weather goes satellite infrared clouds eye rain wind track noaa pacific mexico earth geography hurricane",
+    "i": "../assets/toys/hurricane/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Relief map",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlbGllZi1tYXAifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuNywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to send a contour line up the cliffs and water down the streams. Change the map and layers in the Toy tab.",
+    "w": "relief map earth and maps earth and maps relief map contour lines topographic topo yosemite valley half dome el capitan merced river streams land cover usgs map earth geography relief-map",
+    "i": "../assets/toys/relief-map/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Living city",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImxpdmluZy1jaXR5In0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap for night (the windows light up one by one); tap again for day.",
+    "w": "living city earth and maps earth and maps city town buildings streets cars traffic train metro elevated rail night lights windows skyline urban map earth geography living-city",
+    "i": "../assets/toys/living-city/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Stork migration",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b3JrLW1pZ3JhdGlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjEsInBpdGNoIjowLjg1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to play the storks' fall migration from Germany to Africa.",
+    "w": "stork migration earth and maps earth and maps stork storks bird birds migration flyway gps tracking movebank africa europe bosporus animal movement map earth geography stork-migration",
+    "i": "../assets/toys/stork-migration/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Earthquakes",
+    "u": "../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRocXVha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0",
+    "k": "toy",
+    "s": "Earth and maps",
+    "d": "Tap to play the quakes in time order. Tap the plaque to refresh the live feed.",
+    "w": "earthquakes earth and maps earth and maps earthquakes quakes usgs live feed globe ring of fire seismology magnitude depth plates timeline earth geography earthquakes",
+    "i": "../assets/toys/earthquakes/thumb.webp",
     "l": 1
   },
   {
