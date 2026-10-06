@@ -11,6 +11,10 @@ import { execFileSync } from "node:child_process";
 import { TOYS } from "../src/toys.js";
 import { PAGES, MENU, HOME_TOY } from "../tools/site-pages.mjs";
 
+// The toy pages (one per toy, about 390) are checked in tests/tpg.spec.mjs:
+// statically in Node, and a sample in the browser.
+const SHELL_PAGES = PAGES.filter((p) => p.type !== "toy");
+
 const ORIGIN = `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}`;
 const SHOTS = path.resolve("tests/screenshots");
 
@@ -65,7 +69,7 @@ test.describe("site", () => {
   test("every page loads with the one menu, a title and a link preview", async ({ page }) => {
     const problems = watchConsole(page);
     const sitemap = fs.readFileSync("site/sitemap.xml", "utf8");
-    for (const p of PAGES) {
+    for (const p of SHELL_PAGES) {
       expect(sitemap.includes(`/splashery/site/${p.path}<`), `sitemap has ${p.path || "home"}`).toBe(true); // prettier-ignore
       const res = await page.goto(`/site/${p.path}`);
       expect(res.status(), p.path).toBe(200);
@@ -105,7 +109,7 @@ test.describe("site", () => {
 
   test("the links on every page lead somewhere", async ({ page }) => {
     const seen = new Set();
-    for (const p of [...PAGES.map((x) => x.path), "404.html"]) {
+    for (const p of [...SHELL_PAGES.map((x) => x.path), "404.html"]) {
       await page.goto(`/site/${p}`);
       const hrefs = await page.$$eval("a[href]", (as) => as.map((a) => a.href));
       for (const h of hrefs) {
@@ -141,7 +145,7 @@ test.describe("site", () => {
     await expect(page).toHaveURL(/\/site\/toys\/$/);
     await expect(page.locator("h1")).toHaveText("Toys");
     // No sideways scrolling on a phone, on any page.
-    for (const p of PAGES) {
+    for (const p of SHELL_PAGES) {
       await page.goto(`/site/${p.path}`);
       const wide = await page.evaluate(() => document.documentElement.scrollWidth);
       expect(wide, p.path || "home").toBeLessThanOrEqual(390);
@@ -149,7 +153,7 @@ test.describe("site", () => {
     await ctx.close();
   });
 
-  test("search finds a toy by its tag and opens it in the gallery", async ({ page }) => {
+  test("search finds a toy by its tag and opens its page, then the gallery", async ({ page }) => {
     // A tag that isn't in the toy's name and belongs to no other entry.
     const { toy, tag } = uniqueTag();
     await page.goto("/site/");
@@ -169,11 +173,14 @@ test.describe("site", () => {
     await page.waitForTimeout(400);
     const names = await page.locator(".result-name").allTextContents();
     expect(names).not.toContain(labsToy.label);
-    // The result opens that toy in the gallery.
+    // The result opens the toy's page, whose button opens it in the gallery.
     await page.fill("#q", tag);
     await expect(first.locator(".result-name")).toHaveText(toy.label);
     const href = await first.locator("a").getAttribute("href");
-    const url = new URL(href, page.url());
+    expect(new URL(href, page.url()).pathname).toBe(`/site/toys/${toy.id}/`);
+    await page.goto(`/site/toys/${toy.id}/`);
+    const open = await page.getByRole("link", { name: "Open in the gallery" }).getAttribute("href");
+    const url = new URL(open, page.url());
     expect(url.pathname).toBe("/");
     await page.goto(`/?renderer=webgl2${url.hash}`);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
@@ -303,7 +310,7 @@ test.describe("site", () => {
   });
 
   test("pages are labeled, keyboard friendly and readable in both themes", async ({ page }) => {
-    for (const p of [...PAGES.map((x) => x.path), "404.html"]) {
+    for (const p of [...SHELL_PAGES.map((x) => x.path), "404.html"]) {
       await page.goto(`/site/${p}`);
       const issues = await page.evaluate(() => {
         const out = [];

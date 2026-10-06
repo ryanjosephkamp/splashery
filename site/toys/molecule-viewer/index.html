@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Molecule viewer · Splashery</title>
+    <meta
+      name="description"
+      content="Molecule viewer, a Splashery toy made of 3D Gaussian splats: Tap two atoms for their distance, a third for the angle."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/toys/molecule-viewer/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Molecule viewer · Splashery" />
+    <meta
+      property="og:description"
+      content="Molecule viewer, a Splashery toy made of 3D Gaussian splats: Tap two atoms for their distance, a third for the angle."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/molecule-viewer/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/molecule-viewer/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="Molecule viewer, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+      <div class="labs-off" data-labs-off>
+        <p class="eyebrow">In the labs</p>
+        <h1>Molecule viewer</h1>
+        <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
+        <p class="actions">
+          <a class="button primary" href="./?labs=1">Turn the labs on</a
+          ><a class="button" href="../../toys/">Every toy</a>
+        </p>
+      </div>
+      <article class="toy-page" data-labs>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-atoms">Atoms</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>Molecule viewer <span class="badge">labs</span></h1>
+            <p class="lead how-to">Tap two atoms for their distance, a third for the angle.</p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  A molecule viewer made of splats: open a PDB, mmCIF, SDF/MOL or XYZ file, or fetch
+                  an entry from the Protein Data Bank by its code.
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>Quiet: one soft, low click as an atom is picked.</dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="
+                  background-image: url(&quot;../../../assets/toys/molecule-viewer/thumb.webp&quot;);
+                "
+              ></span>
+              <iframe
+                data-src="../../play/?toy=molecule-viewer"
+                title="Molecule viewer, live: drag to turn it"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>Drag to turn it; tap to play.</figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            Scientists share the 3D shapes of molecules as files of atom positions: proteins and DNA
+            in the Protein Data Bank, small molecules as SDF, MOL or XYZ files. This viewer draws
+            every atom of such a file with splats, in the usual colors: carbon gray, oxygen red,
+            nitrogen blue.
+          </p>
+          <p>
+            Pick a sample, open your own file, or type a PDB code such as 1MBN and press Fetch in
+            the Toy tab; the entry is read only when you ask, and its title, authors and fetch time
+            show beside it. Draw it as a cartoon, balls and sticks, space-filling atoms or a smooth
+            surface, colored by element, chain, residue or B-factor. Tap two atoms for the distance
+            between their centers in ångströms, a third for the angle in degrees. Positions are an
+            experiment's best fit, not a photograph.
+          </p>
+        </section>
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The viewer draws the atom positions a structure file gives (PDB, mmCIF, SDF/MOL or XYZ),
+            and measures distances and angles between atom centers from those positions. The readers
+            are checked against known values: atom counts, the same structure read from two formats,
+            crambin's peptide bonds, backbone angles and disulfide bridges, and caffeine's C=O
+            bonds. The cartoon, the surface and the colors are drawings of that data; where they
+            simplify, it is said below. <span class="note">Checked October 5, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Atoms are where the file puts
+                them: the first model, the first alternate location, the same positions whether the
+                structure comes as PDB or mmCIF.
+              </p>
+              <p>
+                The PDB reader takes the fixed columns of ATOM and HETATM records; the mmCIF reader
+                takes the _atom_site table. Crambin (1CRN) read both ways gives the same 327 atoms,
+                elements, positions and B-factors.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://www.wwpdb.org/documentation/file-format-content/format33/sect9.html"
+                    >Atomic Coordinate Entry Format Version 3.3, Coordinate Section</a
+                  >, wwPDB:
+                  <q
+                    >ATOM record, columns 31–38: orthogonal coordinates for X in Angstroms (Y and Z
+                    follow, then occupancy and temperature factor).</q
+                  >
+                </li>
+                <li>
+                  <a href="https://www.rcsb.org/structure/1CRN"
+                    >1CRN: Water structure of a hydrophobic protein at atomic resolution</a
+                  >, RCSB Protein Data Bank:
+                  <q>Crambin, 46 residues, X-ray diffraction at 1.5 Å.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Distances are in ångströms and
+                angles in degrees, between atom centers; crambin's peptide bonds measure 1.33 Å and
+                its N–CA–C angles 111°, as standard protein geometry says.
+              </p>
+              <p>
+                A distance is the straight line between two atoms' positions; an angle is taken at
+                the middle atom from the two directions to the others. Across crambin's 45 peptide
+                bonds the mean C–N length is within 0.01 Å of 1.329 Å, and the mean N–CA–C angle
+                within 1° of 111.2°.
+              </p>
+              <p class="note">
+                The measured values are the experiment's model; the toy adds no uncertainty to them.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://smb.slac.stanford.edu/facilities/software/ccp4/html/procheck_man/manappa.html"
+                    >PROCHECK Operating Manual, Appendix A: Engh &amp; Huber parameters</a
+                  >, CCP4 (SLAC mirror):
+                  <q
+                    >Main-chain bond lengths and bond angles as observed in small molecules (Engh
+                    &amp; Huber, 1991): C–N 1.329 Å (σ 0.014); N–Cα–C 111.2° (σ 2.8).</q
+                  >
+                </li>
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Angstrom">Ångström</a>, Wikipedia:
+                  <q>One ångström is 10⁻¹⁰ m, 0.1 nanometer.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Bonds come from the file where
+                it lists them, and otherwise from distances with standard covalent radii.
+              </p>
+              <p>
+                SDF/MOL bond blocks and PDB CONECT records are read as given. Otherwise two atoms
+                are bonded when they are closer than the sum of their covalent radii (Cordero et al.
+                2008) plus 0.45 Å, and a hydrogen keeps only its nearest partner. In crambin this
+                finds exactly its three disulfide bridges (Cys 3–40, 4–32 and 16–26), each about
+                2.04 Å; caffeine read as XYZ gets the same 25 bonds its SDF lists.
+              </p>
+              <p class="note">
+                Distance rules can miss unusual bonds or join atoms that are only crowded; the Toy
+                tab says which way the bonds were found.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Covalent_radius">Covalent radius</a>,
+                  Wikipedia:
+                  <q
+                    >Cites B. Cordero et al., &quot;Covalent radii revisited&quot;, Dalton Trans.
+                    (21), 2832–2838 (2008), for single-bond covalent radii.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://rest.uniprot.org/uniprotkb/P01542.txt">UniProt P01542, Crambin</a
+                  >, UniProt: <q>DISULFID 3..40, 4..32 and 16..26.</q>
+                </li>
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Disulfide">Disulfide</a>, Wikipedia:
+                  <q>The disulfide bond is about 2.05 Å in length.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Double bonds from an SDF file
+                are drawn as two sticks; caffeine's two C=O bonds are 1.22 Å long.
+              </p>
+              <p>
+                The bond order is read from the file's bond block; caffeine's ideal coordinates from
+                the PDB's Chemical Component Dictionary give C=O bonds of 1.216 and 1.218 Å.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Carbonyl_group">Carbonyl group</a>,
+                  Wikipedia:
+                  <q
+                    >For organic compounds, the length of the C–O bond does not vary widely from 120
+                    picometers.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://www.rcsb.org/ligand/CFF">CFF, caffeine</a>, RCSB Protein Data
+                  Bank (Chemical Component Dictionary):
+                  <q>Caffeine, C8 H10 N4 O2, with ideal coordinates.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> Helices and strands come
+                from the file's records; when a file has none they are worked out from backbone
+                hydrogen bonds, and the toy says so.
+              </p>
+              <p>
+                HELIX and SHEET records (PDB) or _struct_conf and _struct_sheet_range (mmCIF) mark
+                the residues. Without them, a simplified DSSP finds backbone hydrogen bonds with
+                Kabsch and Sander's electrostatic energy (below -0.5 kcal/mol) and builds helices
+                from turns and strands from bridges, up to 3,000 amino acids. For crambin the file
+                gives helices 7–19 and 23–30 and strands 1–4 and 32–35; with the records removed,
+                the worked-out version agrees on more than three quarters of the residues.
+              </p>
+              <p class="note">
+                The worked-out version is a simplified DSSP (no 3-10 or pi helix types of their own,
+                no turns or bends), labeled as inferred.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/DSSP_(algorithm)">DSSP (algorithm)</a>,
+                  Wikipedia:
+                  <q
+                    >A hydrogen bond is identified if E = 0.084 {1/rON + 1/rCH − 1/rOH − 1/rCN} ·
+                    332 kcal/mol is less than −0.5 kcal/mol.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Space-filling atoms are drawn
+                at their van der Waals radii (Bondi), in the familiar CPK colors.
+              </p>
+              <p>
+                Radii from Bondi (1964): H 1.20, C 1.70, N 1.55, O 1.52, S 1.80 Å and so on; Mantina
+                et al. (2009) for main-group elements Bondi left out; 2.0 Å for elements with
+                neither (the toy says so). Colors are Jmol's CPK colors, carbon a little lighter for
+                the dark stage.
+              </p>
+              <p class="note">
+                Ball-and-stick balls are a quarter of the van der Waals radius, a drawing
+                convention.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Van_der_Waals_radius"
+                    >Van der Waals radius</a
+                  >, Wikipedia:
+                  <q
+                    >Hydrogen 1.2, carbon 1.7, nitrogen 1.55, oxygen 1.52, sulfur 1.8 Å: van der
+                    Waals radii taken from Bondi's compilation (1964).</q
+                  >
+                </li>
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/CPK_coloring">CPK coloring</a>, Wikipedia:
+                  <q>Column J is the color scheme used by the molecular visualizer Jmol.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The molecular surface is
+                close to the surface a water molecule can touch, but smoothed.
+              </p>
+              <p>
+                Each heavy atom adds exp(B(1 − d²/R²)) with R its van der Waals radius, so a lone
+                atom's surface lies exactly at R; the surface is drawn where the sum reaches 1,
+                sampled on a grid. Between crowded atoms the sum fills the gaps, as the
+                solvent-excluded surface of a 1.4 Å probe does, but deep crevices come out
+                shallower.
+              </p>
+              <p class="note">Not a rolled-probe surface: an approximation, said in the Toy tab.</p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Accessible_surface_area"
+                    >Accessible surface area</a
+                  >, Wikipedia:
+                  <q
+                    >The accessible surface is created by tracing the center of the probe sphere as
+                    it rolls along the van der Waals surface; the typical probe radius is 1.4 Å.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The cartoon is a drawing: a ribbon through the CA atoms (phosphates for DNA and RNA)
+              with set widths, not a measured shape.
+            </li>
+            <li>
+              The surface is a blobby Gaussian surface over the heavy atoms, close to the
+              solvent-excluded surface but smoother.
+            </li>
+            <li>
+              Big structures are drawn with fewer splats: one Gaussian per atom, and past the budget
+              only the atoms on the outside (said in the Toy tab).
+            </li>
+            <li>
+              Only the first model and the first alternate location of each residue are shown.
+            </li>
+            <li>
+              A flat 2D drawing opened as MOL or SDF gets a 3D shape built by Splashery's embedder;
+              its lengths and angles are estimates, and the toy says so.
+            </li>
+          </ul>
+        </section>
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/molecule-viewer.js"
+              ><code>src/packs/molecule-viewer.js</code></a
+            >.
+          </p>
+          <ul class="toy-credits">
+            <li>
+              <b>Crambin (1CRN), a small plant protein</b>:
+              <a href="https://www.rcsb.org/structure/1CRN">Crambin, snapshot of October 5, 2026</a>
+              by W. A. Hendrickson and M. M. Teeter (the structure); M. M. Teeter, PNAS 81, 6014
+              (1984),
+              <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 (wwPDB data)</a>.
+            </li>
+            <li>
+              <b>Green fluorescent protein (1EMA)</b>:
+              <a href="https://www.rcsb.org/structure/1EMA"
+                >Green fluorescent protein, snapshot of October 5, 2026</a
+              >
+              by M. Ormö and S. J. Remington (the structure); M. Ormö, A. B. Cubitt, K. Kallio, L.
+              A. Gross, R. Y. Tsien and S. J. Remington, Science 273, 1392 (1996),
+              <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 (wwPDB data)</a>.
+            </li>
+            <li>
+              <b>Hen egg-white lysozyme (1LYZ)</b>:
+              <a href="https://www.rcsb.org/structure/1LYZ"
+                >Hen egg-white lysozyme, snapshot of October 5, 2026</a
+              >
+              by R. Diamond, D. C. Phillips, C. C. F. Blake and A. C. T. North (the structure); R.
+              Diamond, J. Mol. Biol. 82, 371 (1974),
+              <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 (wwPDB data)</a>.
+            </li>
+            <li>
+              <b>B-DNA, twelve base pairs (1BNA)</b>:
+              <a href="https://www.rcsb.org/structure/1BNA"
+                >B-DNA, twelve base pairs, snapshot of October 5, 2026</a
+              >
+              by H. R. Drew, R. M. Wing, T. Takano, C. Broka, S. Tanaka, K. Itakura and R. E.
+              Dickerson (PNAS 78, 2179, 1981),
+              <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 (wwPDB data)</a>.
+            </li>
+            <li>
+              <b>Caffeine (PDB chemical component CFF)</b>:
+              <a href="https://www.rcsb.org/ligand/CFF">Caffeine, snapshot of October 5, 2026</a> by
+              the wwPDB Chemical Component Dictionary (ideal coordinates),
+              <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 (wwPDB data)</a>.
+            </li>
+          </ul>
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
+            >.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="2" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/molecule-viewer/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=molecule-viewer&quot; title=&quot;Splashery: Molecule viewer&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;molecule-viewer&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle. Every option is in the
+            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-atoms"
+              >The Atoms shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card">
+              <a href="../../toys/molecule/"
+                ><img
+                  src="../../../assets/toys/molecule/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Molecule</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/protein/"
+                ><img
+                  src="../../../assets/toys/protein/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Protein</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/atom/"
+                ><img
+                  src="../../../assets/toys/atom/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Atom</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/crystal-lattice/"
+                ><img
+                  src="../../../assets/toys/crystal-lattice/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Crystal lattice</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/dna-to-protein/"
+                ><img
+                  src="../../../assets/toys/dna-to-protein/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">DNA to protein <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/orbital/"
+                ><img
+                  src="../../../assets/toys/orbital/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Electron orbital</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/periodic-table/"
+                ><img
+                  src="../../../assets/toys/periodic-table/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Periodic table</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-elements/"
+                ><img
+                  src="../../../assets/toys/real-elements/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Real elements <span class="badge">labs</span></span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
