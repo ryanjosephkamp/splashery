@@ -11,9 +11,9 @@ word for word, under "## Brief", then keep "## State
 
 READY (October 6, 2026, about 18:20 UTC): the reel, its playlist, facts, tools and tests are done on
 a head with main (a56cd61e) merged in. `tests/shw.spec.mjs` (11 tests) and the embed 30 MB test
-pass. All six chapter clips are on Effect review page 2 (`shw-apart`, `shw-played`, `shw-real` and
-`shw-yours` marked good by the owner; `shw-science` and `shw-recipes` posted after). Next: the
-Integrator's full run, then the owner's marks on the last two clips.
+pass. All six chapter clips are on Effect review page 2, and the owner marked all six good
+(`shw-apart`, `shw-played`, `shw-real`, `shw-yours`, `shw-science`, `shw-recipes`; checked at 19:11
+UTC). Next: the Integrator's full run and the Operator's merge.
 
 ## The picks
 
