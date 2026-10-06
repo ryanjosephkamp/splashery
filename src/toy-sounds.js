@@ -2833,6 +2833,16 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 300, decay: 2.4, vol: 0.3 },
     off: { voice: "whoosh", f: 240, decay: 2.2, vol: 0.25 },
   },
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
+  // its rings.
+  "ripple-tank": [
+    { voice: "drip", f: 640, n: 1, at: 0.3, vol: 0.8 },
+    { voice: "wave", f: 420, decay: 1.2, at: 0.36, vol: 0.16 },
+  ],
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  // A tap changes the light: the lamp's switch clicks.
+  "light-bench": { voice: "switch", f: 2900, vol: 0.7 },
   // ---- Imaging (lane Imaging) ---------------------------------------------------------
   // The belt's low rumble as the bag rides through, the curtains' slap, and
   // the scanner's soft beep when its picture is done.

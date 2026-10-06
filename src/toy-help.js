@@ -1821,6 +1821,22 @@ export const TOY_HELP = {
       "Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2 simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4 billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't Gaussian), colored by temperature or density; tap to keep only the cold gas.\n\nThrough a telescope (simulated) shows what an observer might record if the galaxy were 160 million light-years away: its star particles, bluer and brighter when young, blurred by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a filter; each tap starts a new exposure whose grainy photon noise smooths out as light builds up. The colors use a rough rule for how starlight fades with age, so it is a picture to explore, not a measurement.",
   },
 
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  "ripple-tank": {
+    howTo:
+      "Tap the water to drop a pebble. Pick a setup and slide the frequency and speed in the Toy tab.",
+    about:
+      "A ripple tank shows how waves spread, bend round edges and add up. This one solves the real two-dimensional wave equation on a grid of 216 × 216 cells (finite differences, with a time step small enough to stay stable), and each cell is a splat lifted by the water's height and lit so the crests catch the light. Sloping beaches at the edges soak the waves up, as in a real tank.\n\nThrough two slits, the waves add where their paths differ by whole wavelengths, so bright lines fan out at the angles d·sin θ = m·λ gives; the dotted lines mark them. Through one slit, the beam spreads wider as the slit gets narrower. The bars on the back wall show how strong the waves are along the far side. The numbers are in the Toy tab.\n\nWhat it simplifies: real ripples on shallow water change speed a little with their wavelength; here every wavelength moves at the speed you set. The heights are exaggerated and the motion is four times slower than real.",
+  },
+
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  "light-bench": {
+    howTo:
+      "Drag a part to move it; turn it by its yellow knob. Tap to change the light. Numbers in the Toy tab.",
+    about:
+      "An optical bench: light traced as rays through real glass. At every surface a ray bends by Snell's law, n₁ sin θ₁ = n₂ sin θ₂, or reflects, from a mirror or totally inside glass past the critical angle. Lenses have real spherical faces, so their edges focus a little off their middles, as real lenses do.\n\nThe glass is Schott N-BK7 (a crown glass) and N-SF11 (a dense flint), with their published Sellmeier formulas for how the index changes with wavelength. Glass bends blue more than red, so the prism fans white light into its colors. The light guide traps light by total internal reflection until a bend is too tight.\n\nThe Toy tab shows the angles, the lensmaker's focal length, the image distance from 1/f = 1/d_o + 1/d_i beside where the traced rays cross, and the prism's deviation for each color.\n\nWhat it simplifies: the bench is flat, white light is nine wavelengths, and the weak reflections at glass surfaces are left out.",
+  },
+
   // ---- Imaging (lane Imaging) -----------------------------------------------------------
   "airport-xray": {
     howTo: "Tap to send the next bag through the scanner and watch its X-ray picture build.",
