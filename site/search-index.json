@@ -3341,7 +3341,7 @@
     "u": "toys/sorting-machine/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
+    "d": "Tap it to sort the bars. Pick one of eight ways to sort, and how to watch it, in the Toy tab.",
     "w": "sorting machine ai and computing ai and computing sort algorithm bubble sort quicksort merge sort bars swaps computer science sorting-machine",
     "i": "../assets/toys/sorting-machine/thumb.webp"
   },
@@ -3377,7 +3377,7 @@
     "u": "toys/enigma-machine/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap the keys or type to code letters. Tap the machine to decode. Tap the pad to clear it.",
+    "d": "Tap the keys or type to code letters; tap the machine to decode. Set the rotors in the Toy tab.",
     "w": "enigma machine ai and computing ai and computing cipher code secret message rotors plugboard lamps keyboard cryptography bletchley park turing history enigma-machine",
     "i": "../assets/toys/enigma-machine/thumb.webp"
   },
@@ -3671,6 +3671,26 @@
     "l": 1
   },
   {
+    "t": "Ripple tank",
+    "u": "toys/ripple-tank/",
+    "k": "toy",
+    "s": "Science",
+    "d": "Tap the water to drop a pebble. Pick a setup and slide the frequency and speed in the Toy tab.",
+    "w": "ripple tank science science wave waves ripple tank water interference diffraction slit double single young fringes wavelength frequency physics optics ripple-tank",
+    "i": "../assets/toys/ripple-tank/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Light bench",
+    "u": "toys/light-bench/",
+    "k": "toy",
+    "s": "Science",
+    "d": "Drag a part to move it; turn it by its yellow knob. Tap to change the light. Numbers in the Toy tab.",
+    "w": "light bench science science light ray optics lens mirror prism spectrum rainbow refraction reflection snell glass fiber total internal reflection focal length physics light-bench",
+    "i": "../assets/toys/light-bench/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Fluid lab",
     "u": "toys/fluid-lab/",
     "k": "toy",
@@ -3745,8 +3765,8 @@
     "u": "toys/living-city/",
     "k": "toy",
     "s": "Earth and maps",
-    "d": "Tap for night (the windows light up one by one); tap again for day.",
-    "w": "living city earth and maps earth and maps city town buildings streets cars traffic train metro elevated rail night lights windows skyline urban map earth geography living-city",
+    "d": "Tap for night (the street lamps and windows come on); tap again for day.",
+    "w": "living city earth and maps earth and maps city helsinki finland senate square cathedral market harbor reality mesh photogrammetry 3d model buildings streets night lights windows street lamps urban map earth geography living-city",
     "i": "../assets/toys/living-city/thumb.webp",
     "l": 1
   },
@@ -3838,6 +3858,126 @@
     "d": "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
     "w": "screen pictures and pages pictures and pages tv television video gif movie cinema theater hologram screen curtains play watch screen",
     "i": "../assets/toys/screen/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Shardball",
+    "u": "toys/shardball/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Tap or press Space to play. Steer with the mouse, a finger or the arrow keys; press 3D for the 3D view.",
+    "w": "shardball arcade arcade game arcade brick breaker paddle ball bricks shatter dome 3d play shardball",
+    "i": "../assets/toys/shardball/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Longtail",
+    "u": "toys/longtail/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+    "w": "longtail arcade arcade game arcade grow trail beads berries grid cube net fold planet mars moon earth torus ring tunnels 3d play longtail",
+    "i": "../assets/toys/longtail/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Grain Garden",
+    "u": "toys/grain-garden/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Pick sand, water, oil, fire, seeds or stone, then hold and move to pour. Press 3D to tip the box.",
+    "w": "grain garden arcade arcade game arcade falling sand powder water oil fire seeds plants grow burn flow pile glass box 3d sandbox grain-garden",
+    "i": "../assets/toys/grain-garden/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Page Breaker",
+    "u": "toys/page-breaker/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Open a PDF or a photo in the Toy tab, then tap to play. Steer the paddle; break every word.",
+    "w": "page breaker arcade arcade game arcade brick breaker paddle ball your own pdf page photo words pictures shatter page-breaker",
+    "i": "../assets/toys/page-breaker/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Strata",
+    "u": "toys/strata/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Tap or press Space to play. Arrows move the falling stone, X turns it, Q and E tip it, Space drops it.",
+    "w": "strata arcade arcade game arcade falling stones blocks well layers stack puzzle crumble 3d strata",
+    "i": "../assets/toys/strata/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Volley Table",
+    "u": "toys/volley-table/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Tap or press Space to serve. Steer your paddle with the mouse, a finger or the arrow keys.",
+    "w": "volley table arcade arcade game arcade paddle rally table ball two paddles spin computer 3d volley-table",
+    "i": "../assets/toys/volley-table/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Stone Belt",
+    "u": "toys/stone-belt/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Tap or press Space to play. ← → turn, ↑ thrusts, Space fires. On a phone, hold a finger where to go.",
+    "w": "stone belt arcade arcade game arcade space rocks asteroids real nasa bennu itokawa eros ship blast split dust 3d stone-belt",
+    "i": "../assets/toys/stone-belt/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Soft Landing",
+    "u": "toys/soft-landing/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Tap or press Space to play. ← → tip the lander, ↑ or Space fires. Land slowly and upright on level ground.",
+    "w": "soft landing arcade arcade game arcade lander land moon mars real terrain elevation nasa lola mola tycho copernicus apollo gale jezero olympus valles 3d soft-landing",
+    "i": "../assets/toys/soft-landing/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Night Owl Pinball",
+    "u": "toys/night-owl-pinball/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Hold Space to pull the plunger, let go to launch. ← → work the flippers; on a phone, hold either side.",
+    "w": "night owl pinball arcade arcade game arcade pinball flippers bumpers plunger steel ball table physics 3d night-owl-pinball",
+    "i": "../assets/toys/night-owl-pinball/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cast a Shadow",
+    "u": "toys/cast-a-shadow/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Drag or use the arrow keys to turn the block until its shadow fills the outline. Q and E roll it.",
+    "w": "cast a shadow arcade arcade game arcade puzzle shadow light lamp wall silhouette turn rotate carved block 3d cast-a-shadow",
+    "i": "../assets/toys/cast-a-shadow/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Photo Dash",
+    "u": "toys/photo-dash/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Tap or press Space to jump. Open your own photo in the Toy tab to run across it.",
+    "w": "photo dash arcade arcade game arcade runner run jump marble your own photo skyline relief 3d photo-dash",
+    "i": "../assets/toys/photo-dash/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Note Rider",
+    "u": "toys/note-rider/",
+    "k": "toy",
+    "s": "Arcade",
+    "d": "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+    "w": "note rider arcade arcade game arcade music song notes rhythm catch lanes melody midi your own song ode to joy 3d note-rider",
+    "i": "../assets/toys/note-rider/thumb.webp",
     "l": 1
   },
   {

@@ -6,7 +6,7 @@
     <title>Living city · Splashery</title>
     <meta
       name="description"
-      content="Living city, a Splashery toy made of 3D Gaussian splats: Tap for night (the windows light up one by one); tap again for day."
+      content="Living city, a Splashery toy made of 3D Gaussian splats: Tap for night (the street lamps and windows come on); tap again for day."
     />
     <meta name="robots" content="noindex" />
     <link
@@ -18,7 +18,7 @@
     <meta property="og:title" content="Living city · Splashery" />
     <meta
       property="og:description"
-      content="Living city, a Splashery toy made of 3D Gaussian splats: Tap for night (the windows light up one by one); tap again for day."
+      content="Living city, a Splashery toy made of 3D Gaussian splats: Tap for night (the street lamps and windows come on); tap again for day."
     />
     <meta
       property="og:url"
@@ -153,14 +153,15 @@
           <div class="toy-head">
             <h1>Living city <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Tap for night (the windows light up one by one); tap again for day.
+              Tap for night (the street lamps and windows come on); tap again for day.
             </p>
             <dl class="does">
               <div>
                 <dt>Tap</dt>
                 <dd>
-                  A kit-built city: cars go round their blocks on the right, an elevated train loops
-                  round the edge, and a park.
+                  A real 550 m block of central Helsinki (the City of Helsinki's 2017 reality mesh,
+                  CC BY 4.0): Senate Square and the Cathedral, the Market Square, the South Harbor
+                  and the Uspenski Cathedral.
                 </dd>
               </div>
               <div>
@@ -211,26 +212,37 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            A city made of blocks: streets with traffic going round the blocks, a park, and an
-            elevated train looping around the edge. The buildings are taller toward the center, as
-            in many downtowns. It is built from simple pieces rather than a real place.
+            A real block of central Helsinki, Finland, from the city's own 3D model, made in 2017
+            from thousands of aerial photographs. The white Cathedral stands above Senate Square at
+            the top; below are the Market Square and the South Harbor, with its sea pool, and the
+            red-brick Uspenski Cathedral on its rock at the right edge. The block is about 550
+            meters across.
           </p>
           <p>
-            Tap it and the sun goes down: walls and streets darken and the windows light up one at a
-            time, while the cars and the train keep moving. Tap again for morning.
+            Tap it and the sun goes down: the city darkens under a blue sky as the street lamps and
+            windows come on one by one, each lamp lighting a pool of the street. Tap again for
+            morning. The City of Helsinki shares the model under the CC BY 4.0 license.
           </p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>
-            Built in your browser from a recipe and a seed: nothing in it comes from outside files.
-            Its recipe is in
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
             <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/geo.js"
               ><code>src/packs/geo.js</code></a
             >.
           </p>
-
+          <ul class="toy-credits">
+            <li>
+              <b>City</b>:
+              <a href="https://hri.fi/data/en_GB/dataset/helsingin-3d-kaupunkimalli"
+                >Helsinki 3D reality mesh (2017), central Helsinki</a
+              >
+              by City of Helsinki,
+              <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+            </li>
+          </ul>
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
             credit is also in
@@ -384,6 +396,20 @@ https://ryanjosephkamp.github.io/splashery/site/toys/living-city/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
+              <a href="../../toys/tide-harbor/"
+                ><img
+                  src="../../../assets/toys/tide-harbor/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >Tides at Bar Harbor <span class="badge">labs</span></span
+                ></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/earthquakes/"
                 ><img
                   src="../../../assets/toys/earthquakes/thumb.webp"
@@ -429,20 +455,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/living-city/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">The sea floor <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/tide-harbor/"
-                ><img
-                  src="../../../assets/toys/tide-harbor/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name"
-                  >Tides at Bar Harbor <span class="badge">labs</span></span
-                ></a
               >
             </li>
           </ul>
