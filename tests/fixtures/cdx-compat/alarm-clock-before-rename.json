@@ -1,0 +1,189 @@
+{
+  "$comment": "Source: 4a9f88a9f03b1a762378c066f25f569825f2ef1c:src/toys.js. Alarm clock was labeled Alarm clock before ff639f4e renamed it Real alarm clock; historical default scene.",
+  "$compat": {
+    "commit": "4a9f88a9f03b1a762378c066f25f569825f2ef1c",
+    "file": "src/toys.js",
+    "description": "Alarm clock was labeled Alarm clock before ff639f4e renamed it Real alarm clock; historical default scene.",
+    "origin": "historical shelf reconstruction",
+    "hash": "d.fVNNk5swDP0v2ivJsPnahlt_Q3tqZw_CiMTF2B5bhKQZ_ntlJ2wz2Wm5YJn3JL0ncQX0HiqI3mA8UrhAAScKUTsL1boAFQiZmq8smFW52i3K_WK1_v66qTZv1Xq9LMvyh1AiUQPVvgB2F6iu0GkrMdSDNqytAHQK0WDoF8o41cFUgHGuS-AaVXcIbsgUjwcSPB-pp0QZ2EmISpHlv3Fql78pNIJ5LYDO3sUhpEDyUtuS4phSe9dReic1LZpIQuVA9sBHqMrlroDR1XXKUi63Qh1z3__Eb7cFNDpI9uxPOaUwRmdOn6p4Ma6ZOdFnf241muD8E7oW8So3sUlohcwUZnyPB0v8n67eCgjY6CHeEgiFRx2fGdhLEc5JH1XLjPGshQqXNJNotHrWIt7qu2ABjEQ-E7cfzHNietT2U5f6N90r3hbsHihnnOiDF9qt6xXB9MiPjL2XtD_f5VZhTwHT9QXH2U6vWeVUqy8i3RmTO5NJMGYbkwVpUaRk3kYegmXMgjkMNG-INGCdpVvzyXGbwHlT830BrcGDRHLywf2axw5jQC93gbz8HDFvYFaUmoaXNj_yfVYnp7LetHsF73m4ZvZkHonwG2LUJu9kGrm7VbrKL6NPH233Lp3FIC2SH7cq1bcsTqSln6bpDw",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 9,
+      "toy": {
+        "kind": "builtin",
+        "id": "alarm-clock"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-23T14:47:33.000Z",
+  "seed": 9,
+  "toy": {
+    "kind": "builtin",
+    "id": "alarm-clock"
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "none",
+    "flag": "",
+    "projection": "wrap",
+    "repeats": 1,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}

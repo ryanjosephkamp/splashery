@@ -1,0 +1,193 @@
+{
+  "$comment": "Source: 79a24ecc7ae24af8c407bc0f94106ee253efcf89:docs/SCENE-SCHEMA.md. Copied complete JSON document in the Shape section.",
+  "$compat": {
+    "commit": "79a24ecc7ae24af8c407bc0f94106ee253efcf89",
+    "file": "docs/SCENE-SCHEMA.md",
+    "description": "Copied complete JSON document in the Shape section.",
+    "origin": "copied JSON example",
+    "hash": "d.fVPLjtswDPwX5uoNHOdRxLd-Q3vqIgdaprNqZEmQ6DhpkH8vJcfbIAvUF5vGDMUZjm6A3kMN0RuMHxSuUMCZQtTOQr0uQAVCpvY7C6Yqq91buX-rqp-rfb3Z1-tyWZblL6FEohbqVbXebHcFsLtCfYOTtvITmkEb1lZQOpUKFQ8R7gUY504J16A6HYMbMtrjkQTKH9STlDiwkxKVIsv_6jQu_1BoBLMqgC7exSGkQvpS15HimFp7d6L0Tmo6NJGEyoHskT-gLpcy6-iaJnUpl1uhjnnkCc9heIFvtwW0OkjzbE95T2WMzpy_HOLFt3bmRJ_tmY5og_Mv6Ea0qzzDJqEVMlOY8T0eLfF_RHwrIGCrxdPcQCg86vjKwF4O4dz0WbSsGC9aqHBNK4lGq1ctYq1-CBbASOQzcfvJvCSmR22_TKn_0OPEKV-PQjnjRB8saLduKoL7Mz8y9l7avr-Xy1VVpBGzi5I1WddMKVaHg7AU9hQw0a44znZ7zSofta7EGmdMnlw2xZht3mRfU5JkqJxUHoJlzJZMW58iJCNaZ2mSl3ZiEzinuDN4lBzml1RBvn1wv-dowBjQy79AXu6PqKkeqpMwWHT5gSc5sCibTbdXcMgBMLNv89ok5C0xapNjm2LhppNugEafPwfvXfqeE_UcvTSAZbEjXwznyabbcr__BQ",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 123456,
+      "toy": {
+        "kind": "builtin",
+        "id": "cactus"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": true,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": [[0.12, 0.3, 0.55, 0.06, "#e63b2e", 1]]
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.32,
+        "roll": 0,
+        "distance": 4.5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "flag",
+        "flag": "fr",
+        "projection": "wrap",
+        "repeats": 2,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "bounce",
+        "speed": 0.5,
+        "controls": {
+          "open": 1
+        }
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-22T19:49:30.000Z",
+  "seed": 123456,
+  "toy": {
+    "kind": "builtin",
+    "id": "cactus"
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": true,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": [[0.12, 0.3, 0.55, 0.06, "#e63b2e", 1]]
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.32,
+    "roll": 0,
+    "distance": 4.5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "flag",
+    "flag": "fr",
+    "projection": "wrap",
+    "repeats": 2,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "bounce",
+    "speed": 0.5,
+    "controls": {
+      "open": 1
+    }
+  }
+}

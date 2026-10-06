@@ -1,0 +1,198 @@
+{
+  "$comment": "Source: d179764baf49821d1829a5891f6488de955c7d3e:manual/index.html. Saved Manual example: sphere.",
+  "$compat": {
+    "commit": "d179764baf49821d1829a5891f6488de955c7d3e",
+    "file": "manual/index.html",
+    "description": "Saved Manual example: sphere.",
+    "origin": "copied saved link",
+    "hash": "d.dVLLctswDPyXzRXxyLKdB2_9hvbUTg4QBdusaZIlqThuRv_eIWW5GWeiCwkKwGIX-w4OAQopWE57iWcQXiUm4x3UiqCjcJb-W4ZC27QP983zffv0o21Vs1LL1eKxWf8EIYn0UKv1cr1eErI_Q73jYFwPhW4wNhsHgukvSPle_gycCwjBh3JJpSJESZJr0l6iYBwJ1vtD-dexPuyiH2rPwDsBIe_lKFDgIXsQWGtx-X9cob5rtgK1JMhb8GmIJRgJst2KzhOsP0g5C-ct2ySElKO4Xd5DNYsHwsl3XenSLDYj4VSJfZm_2RB6E0VXgqoZS5iSt6-fUEIU7ueaFKqKE0YffbjJ7vzgdB1iXbI15yxxzj_yzhXpvpzqkRC5N0OaGoyEfDLptoKPfigSNovNR9YrAr-ZBIUzRkKyRt9yCT6ZC2FCOomEWri5Vr6VysDGfZrS_JUL4mTDS6C99REKd_Kw6trJDdf6lPkYEtSvl5Gg-SiRy_OZT7OcwWRdW7VPhOitrZP1JmWuMhYJilGC5WrXPESXuRLOcZDZIVBw3sk0fFHcleRq5fpO2FreQQGEEP3vee04RQ4gRAnCxWfLC6MyNO629QNd2RHumm69fdZ4qcu1sybzSpaEXjIbWz1ZVu4npHewNa_XsY--3JGysRYfXVXwXY7eFtOP4_gP",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 341441,
+      "toy": {
+        "kind": "builtin",
+        "id": "splat-equation",
+        "options": {
+          "preset": "sphere"
+        }
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "builtOptions": {
+      "preset": "sphere"
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-28T22:03:13.704Z",
+  "seed": 341441,
+  "toy": {
+    "kind": "builtin",
+    "id": "splat-equation",
+    "options": {
+      "preset": "sphere"
+    }
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "none",
+    "flag": "",
+    "projection": "wrap",
+    "repeats": 1,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}

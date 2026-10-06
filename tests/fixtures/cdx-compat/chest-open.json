@@ -1,0 +1,193 @@
+{
+  "$comment": "Source: 79a24ecc7ae24af8c407bc0f94106ee253efcf89:tests/smoke.spec.mjs. Replayed exported/shared visitor state from the named smoke flow; default seed/timestamp pinned.",
+  "$compat": {
+    "commit": "79a24ecc7ae24af8c407bc0f94106ee253efcf89",
+    "file": "tests/smoke.spec.mjs",
+    "description": "Replayed exported/shared visitor state from the named smoke flow; default seed/timestamp pinned.",
+    "origin": "historical interaction replay",
+    "hash": "d.fVPBktowDP0X7TXLuGGhS279hvbUzh4URwEvju2xFQJl-PfKhmwZdtpcYjnvSXpPyhkwBGggBYtpR_EEFRwoJuMdNMsKdCRk6r6xYGpVr5_V5rle_lCqqV-berlQSv0USiLqoNlUwP4EzRn2xkkM7WgsGycAk0O9o8RwqcB6v8-wFvV-G_1YwAG3JEje0UAS4sheQtSaHP-Nc6P8XaMVzJcK6Bh8GmMOJC_1PWlOOXXwe8rvrKNHm0ioHMlteQeNWqwrmHzb5ixqsRLqVDr-J361qqAzUbIXZ9Qlhyl5e_hUJYhl3cxJoThzrdFFHx7QrYjXpYmXjNbITHHGD7h1xP_p6msFETszpmsCofBk0iMDBynCJem9apkuHo1Q4ZRnkqzRj1rEW3MTLICJKBTi6oN5zMyAxn3q0vymW8Xrat0C7a0XffBE62VbE1zu-YlxCJL215vcahwoYr4-4TTbGQzrkqp-Fene2tKZTIKx2JgtyIsiJcse8hgdYxHMcaR5Q6QB5x1dm8-OuwwuO1ruK-gtbiWSU4j-fR47TBGD3EUK8luksoFFUW4anvryyPdZnZxU-9JvNLyV4drZk3kkwu-I0diyk3nk_lrpDGjN4aPtweezGGRE8v1W5fqOxYmy9D6Qy3_C5fIH",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 9,
+      "toy": {
+        "kind": "builtin",
+        "id": "chest"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {
+          "open": 1
+        }
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-23T00:28:23.000Z",
+  "seed": 9,
+  "toy": {
+    "kind": "builtin",
+    "id": "chest"
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "none",
+    "flag": "",
+    "projection": "wrap",
+    "repeats": 1,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {
+      "open": 1
+    }
+  }
+}
