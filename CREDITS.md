@@ -464,10 +464,24 @@ The Screen (a labs toy, lane Screens) opens with two samples:
 
 Moving photo to 3D (a labs toy, lane Live input r3) opens with the same Big Buck Bunny scene (©
 Blender Foundation, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), checked on
-peach.blender.org on October 2, 2026): 48 frames of it at 640 by 360, tiled into
-`assets/toys/moving-photo-3d/bunny-sheet-1.jpg` to `-4.jpg`, with each frame's depth worked out by
+peach.blender.org on October 2, 2026): 96 frames of it (16 a second) at 640 by 360, tiled into
+`assets/toys/moving-photo-3d/bunny-sheet-1.jpg` to `-7.jpg`, with each frame's depth worked out by
 the vendored depth model (`bunny.depth`, made by `tools/live3-depth.mjs`). GIFs and videos people
-open in it are read in their browser and never uploaded.
+open in it are read in their browser and never uploaded. Four more samples (Studio media lane, each
+license checked on its live source page on October 5, 2026), each a few seconds tiled into JPEG
+sheets with each frame's depth (`assets/toys/moving-photo-3d/<name>-sheet-N.jpg` and `<name>.depth`,
+made by `tools/live3-depth.mjs`) and, for the videos, their sound as a mono MP3:
+
+- The race horse GIF above (Muybridge, 1887, public domain), unchanged.
+- "Sintel" (trailer, 29.5 to 35.5 s), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the trailer on
+  download.blender.org ([durian.blender.org](https://durian.blender.org/)).
+- "Tears of Steel" (8:30.5 to 8:36.5), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the 720p download on
+  download.blender.org ([mango.blender.org](https://mango.blender.org/)).
+- "Elephants Dream" (5:29.7 to 5:35.7), © Blender Foundation,
+  [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/), from the download on
+  download.blender.org ([orange.blender.org](https://orange.blender.org/)).
 
 The Gaussian splatting toy (a labs toy, lane Screens) learns the photo "Strawberry on white
 background" by Joselodos
@@ -493,14 +507,30 @@ GLB in `assets/toys/model-splats/` that the toy converts to splats in the browse
   [Poly Haven](https://polyhaven.com/a/antique_ceramic_vase_01),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on
   September 29, 2026). Its 1k glTF with only the color texture kept.
+- "Camera 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Camera_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Boombox" by Thomas Paul Mouilleron on [Poly Haven](https://polyhaven.com/a/boombox),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Lantern 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Lantern_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Bronze Whale Statue" by Tina on [Poly Haven](https://polyhaven.com/a/bronze_whale_statue),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Rockingchair 01" by Jorge Camacho on [Poly Haven](https://polyhaven.com/a/Rockingchair_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
 
 `tools/stm-samples.mjs` fetches and packs them. The test models in `tests/fixtures/stm/` are made
 from numbers by `tools/stm-fixtures.mjs` and released under CC0 1.0. Models people open are
 converted in their browser and never uploaded.
 
-The Photo to 3D toy (a labs toy, lane Photo to 3D) ships three CC0 sample photos in
+The Photo to 3D toy (a labs toy, lane Photo to 3D) ships six CC0 sample photos in
 `assets/toys/photo-3d/`, each with a depth map made by `tools/p3d-depth.mjs`. Each license was
-checked on its live Wikimedia Commons page on September 29, 2026:
+checked on its live Wikimedia Commons page on September 29, 2026 (the last three on October 5,
+2026):
 
 - "Forest Away Path" by Seaq68 (from Pixabay, 2017),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
@@ -511,6 +541,15 @@ checked on its live Wikimedia Commons page on September 29, 2026:
 - "Still Life with Cheese" by Antoine Vollon, from the Metropolitan Museum of Art's Open Access
   program, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg).
+- "Spiral Staircase, Keck Center (U.S. National Academies)" by Jorge Mendoza,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](<https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg>).
+- "Escalier monumental, Neue Burg, Vienna" by Jebulon,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg).
+- "Wildflowers in foreground" by PookieFugglestein,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG).
 
 The depth is worked out on the device by
 [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small) (Lihe Yang
@@ -560,8 +599,11 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 
 The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
 each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
-and the solved camera path only; the videos are not shipped). Each license was checked on its live
-Commons page on September 30, 2026:
+and the solved camera path). Since October 5, 2026 (lane Studio media) each also ships that same
+stretch of its video at 480p, without sound (`liberty-source.mp4` and `.webm`,
+`edinburgh-source.mp4` and `.webm`, cut by `tools/smd-source.mjs` from Commons' own 480p transcode),
+for the toy's "Show the original" option, under the same CC BY 3.0 license and credit. Each license
+was checked on its live Commons page on September 30, 2026 (and again on October 5, 2026):
 
 - "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
@@ -777,6 +819,49 @@ strand is added from its biological assembly (`tools/sci3-structures.mjs`).
   [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
 
 Files people open in these toys are read in their browser and never uploaded.
+
+## Earth and maps (lane Geo)
+
+The Earth and maps toys (labs, lane Geo) are built from public data snapshots that `tools/geo-*.mjs`
+fetch at build time. Each license was checked on the live source page on October 5, 2026. U.S.
+government works are in the public domain.
+
+- Elevation: the U.S. Geological Survey's
+  [3D Elevation Program](https://www.usgs.gov/3d-elevation-program) ("All 3DEP products are public
+  domain"), for the Grand Canyon, Mount St. Helens today and Yosemite Valley.
+- Mount St. Helens before 1980: J. A. Bard and R. Phillips-Netherton (2024),
+  [Digital elevation model of Mount St. Helens, Washington and vicinity prior to the 1980 eruption](https://doi.org/10.5066/P91W7C1L),
+  U.S. Geological Survey data release, public domain.
+- Aerial imagery: The National Map's
+  [orthoimagery basemap](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
+  (USDA Farm Service Agency NAIP, with NASA Landsat at small scales), public domain.
+- Relief of the sea floor and the maps: NOAA NCEI's
+  [ETOPO1 Global Relief Model](https://www.ncei.noaa.gov/products/etopo-global-relief-model) and
+  [coastal elevation models](https://www.ncei.noaa.gov/products/coastal-elevation-models) (Bar
+  Harbor), public domain.
+- Tides: NOAA CO-OPS
+  [tide predictions for Bar Harbor, Maine (8413320)](https://tidesandcurrents.noaa.gov/stationhome.html?id=8413320),
+  public domain ([disclaimers](https://tidesandcurrents.noaa.gov/disclaimers.html)).
+- Hurricane Polo: GOES-East ABI band 13 imagery (NOAA NESDIS), served by NASA's
+  [Global Imagery Browse Services](https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy);
+  the [NHC best track](https://ftp.nhc.noaa.gov/atcf/btk/) (NOAA); the map from NASA's
+  [Blue Marble](https://visibleearth.nasa.gov/collection/1484/blue-marble) shaded relief and
+  bathymetry. All public domain.
+- Yosemite Valley's streams and land cover: the USGS
+  [National Hydrography Dataset](https://www.usgs.gov/national-hydrography/national-hydrography-dataset)
+  and the [National Land Cover Database 2021](https://www.mrlc.gov/data/nlcd-2021-land-cover-conus)
+  (USGS and the MRLC consortium), public domain.
+- Earthquakes: the USGS
+  [earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ("USGS-authored
+  or produced data and information are considered to be in the U.S. Public Domain"). The toy reads
+  the live feed when it opens or its plaque is tapped, and shows its source and time beside it;
+  nothing is stored or sent. The shipped snapshot keeps only records of networks us, hv, at and pt
+  (USGS and NOAA authored).
+- White storks: S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers,
+  A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan (2016),
+  [Data from: The challenges of the first migration](https://doi.org/10.5441/001/1.hn1bd23k),
+  Movebank Data Repository, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). The
+  paper: Journal of Animal Ecology, doi:10.1111/1365-2656.12525.
 
 Thirteen more structures (the owner's "could you add even more molecules?", October 5, 2026), each
 checked on its live page that day:
