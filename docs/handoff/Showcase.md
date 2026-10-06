@@ -72,4 +72,24 @@ replaced by a newer card (checked against both pages' `verdicts` and `cards` on 
 
 ## Known issues
 
+- The Gaussian splatting scene trains its 2,400 splats while it builds: about 19 s in the headless
+  test browser (software graphics), so the reel waits on "Building it on this device…" that long
+  there. A real device is much faster; the video tool doesn't record build time.
+- "Fetched" counts only what that scene downloaded. A recipe file the reel fetched ahead (while the
+  scene before played) or that the browser already had counts as nothing, so many kit scenes show no
+  download figure; that is true of what happened, not a missing number.
+- The sound follows the app's tap sounds and cues, but it was checked only for errors (the test
+  browser has no speakers). Sound starts off, and its modules load only when it is turned on.
+- On a phone the toys are framed to fit across the screen, so tall ones leave room above and below.
+- "Your book" fills a phone's screen with its page, as the toy does in the app.
+
 ## For the Operator
+
+- Please make the lane record `lanes/Showcase` on Effect review page 2; my cards use lane `Showcase`
+  (they show under that id until the record exists).
+- A labs link to the reel (for example in the About tab next to the Worlds link, shown only with the
+  labs switch on) would need a line in `index.html`, which I don't own. Suggested text: "What
+  Splashery can do: a live reel of the best effects (labs)", linking to `showcase/?labs=1`.
+- The playlist is `src/showcase/playlist.json`; after changing toys in it, run
+  `node tools/shw-facts.mjs` (the test checks facts.json is current).
+- `tools/shw-video.mjs` makes the videos for the owner (MP4, kept out of the repo).
