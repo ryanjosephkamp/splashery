@@ -1,0 +1,87 @@
+{
+  "toy": "difference-engine",
+  "checked": "2026-10-04",
+  "summary": "The addition-and-carry mechanism gives correct polynomial values modulo 100,000 for supported cubic inputs. Its historical dates are supported. The input validator can accept higher-degree expressions that match eight sampled points, after which the engine gives the wrong value.",
+  "claims": [
+    {
+      "claim": "Difference Engine No. 2 was designed in the 1840s and its calculating section was reconstructed in 1991.",
+      "how": "The About text matches the 1847–1849 design and the Science Museum’s 1991 calculating engine.",
+      "where": "src/toy-help.js:1605",
+      "sources": [
+        {
+          "title": "The engines",
+          "publisher": "Computer History Museum",
+          "url": "https://www.computerhistory.org/babbage/engines/",
+          "says": "Difference Engine No. 2 was designed in 1847 to 1849 and uses finite differences and addition. The full engine has 31-digit precision and supports seventh-order differences."
+        },
+        {
+          "title": "A Modern Sequel",
+          "publisher": "Computer History Museum",
+          "url": "https://www.computerhistory.org/babbage/modernsequel/",
+          "says": "The Science Museum reconstructed the calculating engine from the original drawings and completed it in 1991; the printer followed later."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "Finite differences calculate polynomial values using additions and carries.",
+      "how": "The actual phases match 128 independently evaluated cubic polynomials over 32 turns each, including wrap and every decimal carry.",
+      "where": "src/packs/computing-history.js:820",
+      "sources": [
+        {
+          "title": "The engines",
+          "publisher": "Computer History Museum",
+          "url": "https://www.computerhistory.org/babbage/engines/",
+          "says": "Difference Engine No. 2 was designed in 1847 to 1849 and uses finite differences and addition. The full engine has 31-digit precision and supports seventh-order differences."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:405",
+      "note": ""
+    },
+    {
+      "claim": "Five-digit values wrap at 100,000.",
+      "how": "The implementation uses modulo 100,000; this deliberately differs from the full historical engine’s capacity.",
+      "where": "src/packs/computing-history.js:738",
+      "sources": [
+        {
+          "title": "The engines",
+          "publisher": "Computer History Museum",
+          "url": "https://www.computerhistory.org/babbage/engines/",
+          "says": "Difference Engine No. 2 was designed in 1847 to 1849 and uses finite differences and addition. The full engine has 31-digit precision and supports seventh-order differences."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:405",
+      "note": ""
+    },
+    {
+      "claim": "The input reader reliably restricts expressions to degree three.",
+      "how": "It checks only eight consecutive values. x² + (x−1)(x−2)…(x−8) passes at x=1, but the ninth value should be 40,401 while the machine produces 81.",
+      "where": "src/packs/computing-history.js:763",
+      "sources": [
+        {
+          "title": "The engines",
+          "publisher": "Computer History Museum",
+          "url": "https://www.computerhistory.org/babbage/engines/",
+          "says": "Difference Engine No. 2 was designed in 1847 to 1849 and uses finite differences and addition. The full engine has 31-digit precision and supports seventh-order differences."
+        }
+      ],
+      "verdict": "wrong",
+      "test": "tests/evidence-computing.spec.mjs:405",
+      "note": "Sampling cannot prove an expression’s polynomial degree. Keep this counterexample until the reader checks the expression itself."
+    }
+  ],
+  "simplified": [
+    "Five decimal digits and third-order differences replace the historical engine’s 31 digits and seventh-order differences. Negative values are displayed modulo 100,000. Accepted inputs must not be assumed valid solely because their first eight values pass the current check."
+  ],
+  "fixes": [
+    {
+      "what": "Check polynomial degree from the parsed expression, allowing integer-valued polynomials such as n(n+1)/2, and reject unsupported functions or high-degree terms.",
+      "where": "src/packs/computing-history.js:763",
+      "status": "proposed"
+    }
+  ]
+}

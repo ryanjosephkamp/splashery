@@ -105,4 +105,100 @@ this file.
 
 ## State
 
-WORKING: not started yet (October 4, 2026).
+Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #270 (lane) and #272 ("Engine: grouped
+choices in a toy's select options", needed by the structure picker; merge it first).
+
+- October 5, 2026: items 1 to 3 done and pushed; item 4's three proposals written (below) and its
+  first box built: **Terrain in a box** and the **Contour lab** before it (USGS 3DEP, public domain;
+  `tools/sci3-terrain.mjs`, `src/science/terrain.js`; the water and the layers are kit parts).
+  1. **Structures**: 25 in six groups, COD or PDB (CC0) with real anisotropic U; Show fills the unit
+     cell (`src/science/symmetry.js`); split molecules are completed; the B-DNA duplex comes from
+     its biological assembly.
+  2. **Microscopy**: four ShareLoc.XYZ sets, NeNA precision where a record has none. **Cryo-EM map**
+     (new toy): apoferritin, a ribosome with an antibiotic, an AAV2 capsid (EMDB, with the fitted
+     PDB models); the isosurface at EMDB's recommended level; the tap cuts it open.
+  3. **Galaxies**: m12i at z = 2 and the dwarf m11h; a telescope view (simulated).
+- Clips: all 15 cards are on Effect review page 2 (lane record `ScienceR3`, five groups: structures,
+  cryo-EM, microscope, galaxy, terrain), each built by Opus 5.5, waiting for the owner's marks.
+  Screenshots `tests/screenshots/sci3-*-390x844.png` and `…-1440x900.png`.
+
+- October 5, 2026, 04:10 UTC, the owner's first marks: `sci3-molecules` good. `sci3-cryoem-*` (all
+  three): "outstanding ... cool as hell", "make it sharper, and keep iterating"; `sci3-minerals`:
+  "keep enhancing this and making it sharper"; `sci3-dna`: "virtually perfect ... could you add even
+  more molecules?". Done in r2 (commit 81523da7): the cryo-EM map draws more, smaller, flatter
+  splats with ambient occlusion (Tenengrad 172 → 216, 179 → 232), and 13 more structures (38 in
+  seven groups, with Molecules of life and DNA and RNA). The r2 clips render at 2× (780 × 1688), as
+  r2 of lane Science found sharper on the phone. Posted October 5, 05:30 UTC: `sci3-cryoem-*-r2`,
+  `sci3-minerals-r2`, `sci3-dna-r2` (replacing their cards) and `sci3-life` (new).
+
+- October 5, 2026, 05:28 UTC, more marks: good: `sci3-contour-lab`, `sci3-galaxies`,
+  `sci3-microscope-pores`, `sci3-microscope-sets`, `sci3-terrain`, `sci3-terrain-helens`; "good, but
+  please try to make it sharper": `sci3-cryoem-model` and `sci3-telescope`. Done: finer backbone
+  beads; more stars in the telescope (a 0.1″ default was tried and reverted: each star particle
+  shrank to a pixel and the arms were lost); both clips at 2×, posted as `sci3-cryoem-model-r2` and
+  `sci3-telescope-r2` (05:55 UTC). Waiting for marks on the r2 cards, `sci3-life` and
+  `sci3-telescope-filters`.
+
+- October 5, 2026, 06:57 UTC, more marks: good: `sci3-cryoem-apoferritin-r2`, `-ribosome-r2`,
+  `sci3-dna-r2`, `sci3-minerals-r2`, `sci3-life`; fix: `sci3-cryoem-capsid-r2` ("keep making it
+  sharper if possible") and `sci3-telescope-filters` ("Please make sharper"). Done: the map draws
+  one splat per voxel the surface crosses (its crossings averaged; `isoPointsPerVoxel`) at density 2
+  (capsid Tenengrad 208 → 238); the telescope's galaxy moved from 100 to 50 Mpc, so the seeing blurs
+  half as much, and thinned dust no longer widens into soft blobs. Cards `sci3-cryoem-capsid-r3` and
+  `sci3-telescope-filters-r2` at 2×, posted 07:35 UTC with `replacedBy` on the old cards. Still
+  waiting: `sci3-cryoem-model-r2`, `sci3-telescope-r2`.
+
+## Proposals: more "in a box" (item 4)
+
+The owner marked "In a box" yes on October 5, 2026 (wildfire, tornado and terrain, each after a
+small lab that teaches what it needs). Each license below was read on the live source on October
+5, 2026. All three are honest models or measurements, labeled as such; none forecasts anything.
+
+1. **Terrain in a box** (build first). Lab before it: a **contour lab**, a hill sliced into contour
+   layers that slide apart and back, so a contour map reads as a 3D shape. The box: a real 10 km
+   square of land as a surface of flat splats, one per elevation sample, colored by height with the
+   sun's shading, in a box whose walls show the land's cross-section; options for the place (the
+   Grand Canyon, Mount St. Helens's crater, a river delta), vertical exaggeration (true, 2×, 5×) and
+   contour lines. The tap fills it with water to a level, rising and draining (a level, not a flood
+   model). Data: the USGS 3D Elevation Program's 1/3″ (about 10 m) tiles, GeoTIFF on The National
+   Map's S3 bucket; the tile's metadata says "All 3DEP products are public domain." Color, if
+   wanted: Landsat (USGS, public domain). Build tool: `geotiff` (MIT) as a pinned devDependency to
+   read the tile; a 256 × 256 crop (about 40 m samples) is about 130 kB.
+2. **Wildfire in a box.** Lab before it: a **fire-spread lab**, a grid of fuel that burns cell to
+   cell, faster uphill and downwind (the rate of spread grows with slope and wind, as in Rothermel's
+   1972 model), so the person sees why fires run up slopes. The box: real terrain (3DEP, above) and
+   real fuels (LANDFIRE's 40 Scott and Burgan fuel models, 30 m; a US federal product, its
+   public-domain status still to be confirmed on landfire.gov, whose pages didn't say it in this
+   check), a fire started where you tap, spreading as a glowing front with embers and a smoke plume,
+   and, for one real fire, its mapped perimeter from the National Interagency Fire Center's open
+   data (public domain) to compare. Told plainly: a teaching model of spread, not a prediction.
+3. **Tornado in a box.** Lab before it: a **wind lab**, the classic vortex models (a Rankine and a
+   Burgers–Rott vortex) as streamlines of splats, with the inflow, the updraft and why the wind is
+   fastest at the core's edge. The box: a real radar scan of a tornadic supercell, the May 20, 2013
+   Moore, Oklahoma storm from the KTLX radar (NEXRAD Level II on NOAA's open data on AWS: "open to
+   the public and can be used as desired", attribution requested, and no claim of NOAA's
+   endorsement): the reflectivity volume as splats (its hook echo and the debris ball), the Doppler
+   velocity couplet in red and green, and a model funnel with debris particles, labeled as a model.
+   Each volume scan is about 10 MB compressed; a build tool would grid one scan.
+
+Why terrain first: its data are public domain and ready (a GeoTIFF tile, checked), it needs no new
+physics, and both other boxes stand on terrain (the fire burns across it; the storm's radar sits
+over it), so it is the base the later lane builds on.
+
+## Notes
+
+## Known issues
+
+## For the Operator
+
+- October 5, 2026, 08:20 UTC: the Operator accepted the small edits to `src/science/field.js`,
+  `crystal.js` and `smlm.js` (listed under "Deviations" in #270). On the branch,
+  `tests/sci.spec.mjs` and `tests/sci-engine.spec.mjs` pass together with both sci3 specs (48
+  passed).
+- An elliptical galaxy and a merger (IllustrisTNG or EAGLE): not pursued. Both need a personal
+  account and an API key, and CLAUDE.md approves only `HF_TOKEN` as a build-time secret; FIRE-2's
+  public release (no key) has neither. Listed under "Deviations" in #270. If the owner wants them,
+  he would register for the TNG public data and add its key as a build-time secret; a later lane
+  could then cut a merger the same way `tools/sci3-galaxy.mjs` cuts FIRE-2.
+- Open marks rounds: waiting for the owner on `sci3-cryoem-model-r2`, `sci3-telescope-r2`,
+  `sci3-cryoem-capsid-r3` and `sci3-telescope-filters-r2`; every other card is marked good.

@@ -66,6 +66,46 @@ export const SAMPLES = [
     author: "James Ray Cock",
     source: "https://polyhaven.com/a/antique_ceramic_vase_01",
   },
+  {
+    id: "camera",
+    file: "camera.glb",
+    label: "Camera",
+    title: "Camera 01",
+    author: "Rajil Jose Macatangay",
+    source: "https://polyhaven.com/a/Camera_01",
+  },
+  {
+    id: "boombox",
+    file: "boombox.glb",
+    label: "Boombox",
+    title: "Boombox",
+    author: "Thomas Paul Mouilleron",
+    source: "https://polyhaven.com/a/boombox",
+  },
+  {
+    id: "lantern",
+    file: "lantern.glb",
+    label: "Lantern",
+    title: "Lantern 01",
+    author: "Rajil Jose Macatangay",
+    source: "https://polyhaven.com/a/Lantern_01",
+  },
+  {
+    id: "whale",
+    file: "whale.glb",
+    label: "Bronze whale statue",
+    title: "Bronze Whale Statue",
+    author: "Tina",
+    source: "https://polyhaven.com/a/bronze_whale_statue",
+  },
+  {
+    id: "rocker",
+    file: "rocker.glb",
+    label: "Rocking chair",
+    title: "Rockingchair 01",
+    author: "Jorge Camacho",
+    source: "https://polyhaven.com/a/Rockingchair_01",
+  },
 ];
 
 const MODEL = {
