@@ -1,0 +1,61 @@
+{
+  "toy": "sls",
+  "checked": "2026-10-06",
+  "summary": "NASA's 3D model of the Space Launch System, cut into its pieces by its profile, colored as it flew on Artemis I, staging in the flight's order, much faster than real.",
+  "claims": [
+    {
+      "claim": "The pieces separate in the order of Artemis I: the two boosters, the launch abort system, the core stage, then Orion leaves the upper stage (the ICPS).",
+      "how": "The drive moves each piece at its time on a 12-second clock; the test checks the order and that the boosters fall away to both sides, tilting outward.",
+      "where": "src/packs/space-r2.js:1370",
+      "sources": [
+        {
+          "title": "Space Launch System Solid Rocket Booster",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/reference/space-launch-system-solid-rocket-booster/",
+          "says": "After launch, the boosters operate for about two minutes before separating from the core stage and landing in the Atlantic Ocean."
+        },
+        {
+          "title": "Artemis I",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Artemis_I",
+          "says": "The Orion spacecraft and ICPS were both placed into a nominal orbit after separating from the Space Launch System, achieving orbit approximately 8 1/2 minutes after launch. Eighty-nine minutes after liftoff, the ICPS fired for approximately eighteen minutes in a trans-lunar injection (TLI) maneuver. Orion then separated from the expended stage."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:352",
+      "note": "The abort system's jettison comes after the boosters' separation, as on every SLS flight; its exact time is not given in these sources."
+    },
+    {
+      "claim": "The core stage is orange and the boosters, upper stage and Orion white, as on Artemis I.",
+      "how": "tools/sp2-rockets.mjs colors the model's pieces (the printable model has no color).",
+      "where": "tools/sp2-rockets.mjs:65",
+      "sources": [],
+      "verdict": "close",
+      "test": "tests/sp2.spec.mjs:393",
+      "note": "From NASA photographs of Artemis I on the pad and in flight (orange foam on the core stage, white boosters and fairings); no text source quoted. The shades are chosen by eye."
+    },
+    {
+      "claim": "The model is NASA's, used under NASA's media guidelines, and carries no logo.",
+      "how": "The printable model is one untextured solid; the test checks the GLB has no image or texture.",
+      "where": "tools/sp2-rockets.mjs:1",
+      "sources": [
+        {
+          "title": "Images and media usage guidelines",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+          "says": "NASA content (images, audio, video, and computer files used in the rendition of 3-dimensional models...) generally are not subject to copyright in the United States."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:393",
+      "note": "The owner's call of October 6, 2026."
+    }
+  ],
+  "simplified": [
+    "Staging that took hours is shown in 12 seconds.",
+    "The flames are glowing cones, not a simulation of the exhaust.",
+    "Orion's crew module, hidden under the abort system's fairing in the model, is drawn as a plain cone.",
+    "The model is simplified to about 48,000 triangles."
+  ],
+  "fixes": []
+}
