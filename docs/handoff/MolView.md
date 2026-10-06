@@ -10,24 +10,31 @@ Molecule viewer: open a molecule, or fetch one by its PDB code". Handoff file:
 docs/handoff/MolView.md (create it; start it with this brief, word for word, under "## Brief", then
 keep "## State
 
-READY (October 5, 2026): built, tested and the clips posted. Waiting on the owner's marks and the
-merges (engine PR #300 first, then #295).
+READY (October 5, 2026, evening): #300 (engine) and #295 (the toy) merged. Polish round on
+`claude/lane-molecule-viewer-polish`, PR #317 ("Phase Molecule viewer polish: sharper atoms, ribbons
+and surface"), from the Operator's message of 15:42 UTC quoting the owner: "the toys could still be
+sharper".
 
-- Clips on Effect review page 2 (lane record `MolView`, which the Operator still has to create):
-  `mol-measure-crambin`, `mol-measure-caffeine`, `mol-fetch-1ema`, `mol-dna-1bna`,
-  `mol-surface-1lyz`, `mol-spacefill-1crn`, `mol-big-1aon-phone`.
-- Engine PR #300 ("Engine: a tap can say something, and a toy's panel can take dropped files",
-  branch `claude/lane-molecule-viewer-engine`) should merge first; this branch has it merged in.
-- The toy `molecule-viewer` (labs, Atoms shelf): `src/packs/molecule-viewer.js` and `src/molview/`
-  (parse, worker, load, geom, draw, radii).
-- Samples (a dated snapshot, fetched October 5, 2026, CC0): 1CRN, 1EMA, 1LYZ, 1BNA (DNA) and
-  caffeine (Chemical Component CFF, ideal coordinates), in `assets/toys/molecule-viewer/`.
-- Tests: `tests/mol.spec.mjs` (27; the RCSB fetch mocked twice, in Node and with `page.route`),
-  `tests/mol-engine.spec.mjs` (2). Evidence: `docs/evidence/molecule-viewer.json`.
-- Tools: `tools/mol-clip.mjs` (phone-size MP4 clips of the whole page, the toast included),
-  `tools/mol-shot.mjs` (stills).
+- Done: twice the kit's splat budget (within the tier caps), the labs sharp kernel, denser ribbons
+  and balls, a surface refined onto its true level with exact normals and blended color seams,
+  ambient occlusion for space-filling and surface, clips and stills at a phone's device pixel ratio
+  of 2.
+- Clips beside the old ones on Effect review page 2: `molp-measure-crambin`,
+  `molp-measure-caffeine`, `molp-fetch-1ema`, `molp-dna-1bna`, `molp-surface-1lyz`,
+  `molp-spacefill-1crn`, `molp-big-1aon-phone`. Thumbnail and screenshots re-rendered.
+- The owner's marks (Operator, 22:49 UTC): every molp card good; on the first cards "Please make the
+  colored markers sharper", and on space-filling and surface "these markers aren't easy to see". The
+  polish hadn't changed the markers, so they are redone: flat rings that face the camera with a dark
+  rim on both sides of the bright band, standing just in front of the atom (its ball, or the
+  surface) toward the camera; the measuring line and arc are bright dots with a dark edge, lifted
+  the same way. This needs engine PR #326 (`about.eye`: the camera in the recipe's frame), merged
+  first. Clips `molm-*` (six) replace the six first cards on page 2.
 
 ## Notes
+
+- Polish round: phones draw the canvas at a device pixel ratio of up to 2 (the stage's cap), so
+  `tools/mol-clip.mjs` and `tools/mol-shot.mjs` render at 2 by default (`--dpr=1` / `DPR=1` for the
+  old size). The first round's clips were at 1 and looked softer than a phone shows.
 
 - Readers: PDB (fixed columns, HELIX/SHEET, CONECT, JRNL, AUTHOR, REMARK 2), mmCIF (streamed through
   `eachCifToken`/`readCif` from `src/chem/protein.js`; `_struct_conf`, `_struct_sheet_range`,
@@ -47,18 +54,19 @@ merges (engine PR #300 first, then #295).
   path point. Largest tested: the human 80S ribosome, 4V6X, 237,685 atoms (read in 2.1 s in Node;
   each style builds in 0.4 to 2.2 s inside the phone budget of 72k splats; the surface at the max
   tier takes about 4 s).
-- Taps: a tap on an atom picks it (a ring marker in yellow, cyan, magenta that turns once); two give
-  the distance (a line of beads), three the angle (and an arc). The words show as a message (the
-  engine PR's `say`) and in the Toy tab. The Play button measures across a bond angle near the
-  middle, then the angle, then clears. Marks are tokens, re-sorted when the picks change.
+- Taps: a tap on an atom picks it (a flat ring marker facing the camera, yellow, cyan or magenta
+  with a dark rim, that flips over once); two give the distance (a line of beads), three the angle
+  (and an arc). The words show as a message (the engine PR's `say`) and in the Toy tab. The Play
+  button measures across a bond angle near the middle, then the angle, then clears. Marks are
+  tokens, re-sorted when the picks change and when the camera has turned about 5 degrees from where
+  they were last sorted.
 - The toy holds still (`turntable: false`) so atoms can be tapped.
 
 ## Known issues
 
-- Along a bond the measuring line runs inside the stick and shows only between the balls; the
-  markers and the message carry it there.
-- In the surface style only atoms on the outside can be picked; their markers poke partly through
-  the surface.
+- In the surface style only atoms on the outside can be picked.
+- Markers on bonded atoms overlap (the atoms are 1.3 to 1.5 Å apart); the colors and rims keep each
+  readable.
 - The fetch clips used a saved copy of RCSB's answer: this sandbox's headless browser has no
   internet. The live fetch was checked with curl (CORS `access-control-allow-origin: *`).
 - Titles of old entries show in capitals, as the PDB gives them.
@@ -66,6 +74,7 @@ merges (engine PR #300 first, then #295).
 
 ## For the Operator
 
-- Merge order: #300 (engine) first, then this PR.
+- Merge order: #326 (engine, `about.eye`) first, then #317. (#300 is merged.) Without #326 the
+  markers fall back to the camera's turn and its usual tilt.
 - The `say` field and `input.drop` could go in docs/PACKS.md, section 5 ("Action" and "Your own
   input").
