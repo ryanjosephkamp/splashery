@@ -134,7 +134,8 @@ test.describe("Powers of ten in the app", () => {
     await settle(page);
     const total = [...sizes.values()].reduce((a, b) => a + b, 0);
     const names = [...sizes.keys()].map((u) => u.split("/").pop());
-    expect(names.some((n) => n.startsWith("micro-") || n.includes("stars") || n === "m83.jpg")).toBe(false); // prettier-ignore
+    // (The leaf, just below home, may come early; the cells, space and the galaxy never.)
+    expect(names.some((n) => /^micro-(cells|chloroplast)/.test(n) || n.includes("stars") || n === "m83.jpg")).toBe(false); // prettier-ignore
     expect(total).toBeLessThan(8e6);
   });
 
