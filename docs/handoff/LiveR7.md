@@ -101,6 +101,26 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 ## State
 
+October 6, 2026, 15:40 UTC (Opus 5.5): **mirror stability, round 5** (the owner's "Please improve
+stability" on `lv7-splat-mirror-r4` and its hologram; the Operator's brief of 14:26 UTC), on #333.
+
+- Each cell of the picture keeps how long it has held still (`stillT`). A still cell's colors
+  average longer (a quarter of a second at first, up to two), its depth moves a twentieth of a
+  change within the model's wobble, and a jump (an outline cell flipping between the person and the
+  wall) is taken only when three answers agree (`HOLD`), on the depth's grid and on the picture's. A
+  clear change (and its neighbors) starts the cell over, so motion follows at once.
+- The depth's range eases a quarter as fast while nothing moves. The background layer averages the
+  wall's colors and depth over answers and keeps a splat that shows for a second. The hologram's
+  scanlines stand still.
+- `stillness()` in `tools/lv7-mirror-measure.mjs` measures the whole picture held still (every frame
+  drawn, against the one before, then shots face on and turned); `tests/lv7.spec.mjs` checks it. On
+  the still mannequin, r4 against r5: splats moving 5.9 against 0.1 per thousand a frame, heights
+  0.69 against 0.09 to 0.14 thousandths, turned flicker 5.3 against 0.7 to 1.1 per thousand pixels
+  (hologram: colors 10.3 against 0.16). Moving parts lag the camera as before (12.4 against 12.6).
+  Sharpness 0.62, as r4. Clips `lv7-splat-mirror-r5` and `-hologram-r5`.
+- Not changed: seen turned, the wall hidden behind the head shows as a soft pale patch (the filled
+  wall), in r4 and r5 alike.
+
 October 6, 2026, 06:40 UTC (Opus 5.5): **sharpness round 2** (the Operator's brief of 04:34 UTC, the
 owner's "the moving photo to 3d is also still too grainy and needs to be much sharper ... the splat
 mirror also needs to improve"), still on `claude/lane-live-r7-polish` (#333). The hl1 fix is its own
