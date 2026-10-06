@@ -1287,6 +1287,26 @@ export const TOYS = [
     tags: "rocket saturn v apollo moon launch stages staging nasa model s-ic s-ii s-ivb escape tower",
     camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 2.4 },
   },
+  {
+    id: "sls",
+    label: "Space Launch System",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "rocket sls space launch system artemis orion moon launch stages staging nasa model boosters core stage",
+    camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
+  {
+    id: "space-shuttle",
+    label: "Space Shuttle",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "rocket space shuttle orbiter external tank boosters launch stages staging nasa model",
+    camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
   // ---- End of pack: space-r2 ----
 
   // ---- Pack: tiny ----

@@ -2315,6 +2315,16 @@ export const TOY_HELP = {
     about:
       "The Saturn V, the rocket that sent astronauts to the Moon from 1968 to 1972, as splats from NASA's 3D model. Its three stages were the S-IC with five F-1 engines, the S-II with five J-2s and the S-IVB with one J-2; the Apollo spacecraft rode on top under its escape tower.\n\nTap to stage it in the order of Apollo 11's flight, much faster than real: the first stage falls away at 2 minutes 40 seconds, then the ring below the second stage and the escape tower; the second stage at 9 minutes 8 seconds; the spacecraft leaves the third stage about three and a half hours after launch. The model paints a band of the first stage navy; the real one was white, so it is drawn white.",
   },
+  sls: {
+    howTo: "Tap to fire its stages in the order of a real flight.",
+    about:
+      "The Space Launch System, NASA's rocket for the Artemis missions back to the Moon, as splats from NASA's 3D model, colored as it flew on Artemis I in November 2022. Its orange core stage burns four RS-25 engines once flown on the Space Shuttle, and two solid rocket boosters give most of the push at liftoff. On top ride the upper stage and the Orion spacecraft under its launch abort system.\n\nTap to stage it in Artemis I's order, much faster than real: the boosters fall away about two minutes after launch, then the abort tower; the core stage goes about eight and a half minutes in, at orbit; the upper stage then sends Orion toward the Moon, and Orion leaves it. Orion's capsule, hidden in the model, is drawn as a plain cone.",
+  },
+  "space-shuttle": {
+    howTo: "Tap to fire its stages in the order of a real flight.",
+    about:
+      "The Space Shuttle at launch, as splats from NASA's 3D model: the winged orbiter, the big orange external tank that fed its three main engines with liquid hydrogen and oxygen, and the two white solid rocket boosters. The Shuttles flew 135 missions from 1981 to 2011, carrying astronauts, satellites and the pieces of the International Space Station.\n\nTap to stage it in a flight's order, much faster than real: the boosters fall away about two minutes after launch, to be fished from the sea and used again; the main engines stop at about eight and a half minutes and the empty tank drops away, the only part not reused; the orbiter flies on with its two small maneuvering engines. The model's black and white tiles are drawn simply.",
+  },
   "real-moons": {
     howTo:
       "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",

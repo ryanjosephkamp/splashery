@@ -6,16 +6,37 @@ You are a Splashery worker session, started by the Operator (the coordinating se
 October push. Repo: ryanjosephkamp/splashery. Your lane: Space r2 (id `SpaceR2`, prefix `sp2`).
 Branches: `claude/lane-space-r2` (and `-engine` if needed). PR title: "Phase Space r2: real planets,
 moons, galaxies and rockets". Handoff file: docs/handoff/SpaceR2.md (create it; start it with this
-brief, word for word, under "## Brief", then keep "## State",Polish round (October 5, 2026, 17:40
-UTC, on `claude/lane-space-r2-polish`): every toy uses the labs sharp kernel; the worlds, galaxies
-and the Saturn V take twice the tier's splats (300k on desktop, 240k on phones; every build under
-1.5 s at 300k), the worlds giving the feature close-ups 42% of them. Also: the Saturn V's view
-follows the flying stack; Earth's and Mars's air is a thin limb; the galaxies fade at the picture's
-edge; short feature names are no larger than an 11-letter one; Pluto opens on the heart.
-`tools/sp2-clip.mjs --mp4` writes clips straight from the frames. Clips `sp2-<toy>-r2` for all
-eleven are on Effect review page 2. Waiting on #288's merge to open the polish PR.
+brief, word for word, under "## Brief", then keep "## State",Rockets round (October 6, 2026, on
+`claude/lane-space-r2-rockets`, stacked on the polish PR #337): the owner's call "NASA source is
+fine, add the SLS and Space Shuttle". New labs toys `sls` and `space-shuttle`, built like the Saturn
+V from NASA 3D Resources models that `tools/sp2-rockets.mjs` cuts into their pieces and colors; a
+tap stages each in a real flight's order with the view following what still flies. The Saturn V's
+credit now reads "NASA 3D Resources, used under NASA's media guidelines". Clips `sp2-sls` and
+`sp2-space-shuttle` on Effect review page 2.
 
-"## Notes", "## Known issues" and "## For the Operator" current). Model: Opus 5.5.
+Polish round (October 5, 2026, 17:40 UTC, on `claude/lane-space-r2-polish`): every toy uses the labs
+sharp kernel; the worlds, galaxies and the Saturn V take twice the tier's splats (300k on desktop,
+240k on phones; every build under 1.5 s at 300k), the worlds giving the feature close-ups 42% of
+them. Also: the Saturn V's view follows the flying stack; Earth's and Mars's air is a thin limb; the
+galaxies fade at the picture's edge; short feature names are no larger than an 11-letter one; Pluto
+opens on the heart. `tools/sp2-clip.mjs --mp4` writes clips straight from the frames. Clips
+`sp2-<toy>-r2` for all eleven are on Effect review page 2. Waiting on #288's merge to open the
+polish PR.
+
+"## Notes", "## Known issues" and "## NASA 3D Resources models checked (October 6, 2026)
+
+- Saturn V (https://science.nasa.gov/3d-resources/saturn-v/): "Source: NASA/Michael D. Carbajal"; no
+  license or other holder named; the repository's README calls the collection "free and without
+  copyright". Its eight textures carry only "UNITED STATES" and "USA" lettering and small U.S.
+  flags.
+- Space Launch System (https://science.nasa.gov/3d-resources/space-launch-system-sls/): a printable
+  STL with a readme (printing advice only); no license or other holder named. One untextured solid,
+  so no logo.
+- Space Shuttle (A) (https://science.nasa.gov/3d-resources/space-shuttle-a/): "Source: NASA/Michael
+  D. Carbajal"; no license or other holder named. A Draco-compressed GLB, all one gray, no texture,
+  so no logo. (Space Shuttle (B), by NASA/Johnson Space Center, is an 11 KB model, too coarse.)
+
+## For the Operator" current). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 5, 2026, from the owner's push notes)
 
