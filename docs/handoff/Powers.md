@@ -23,6 +23,12 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first). Lane PR
   zoom now stays on the same golden full-moon maple (its leaves from above, then one leaf), each new
   picture comes in as a round soft patch over the one before, which stays behind softly until the
   new one fills the view; posted as `pot-zoom-in-r2`.
+- `pot-zoom-in-r2` fix ("the zoom sort of just jumps from microscope view to a molecule"): the
+  ribosome now comes in as one of the chloroplast micrograph's dark stromal grains, beside a
+  thylakoid, in the micrograph's own olive gray (the same map, flat, as an electron micrograph shows
+  it); the micrograph stays until the grain fills a good part of the view, fades to black round it,
+  and the grain then turns into the colored map. (Chloroplast ribosomes are 70S like the E. coli
+  map's.) Main 43b4d0b0 merged into both branches; posted as `pot-zoom-in-r3`.
 
 The stops (log10 of the view's height in meters): the Milky Way 21 (M83, ESO, at the Milky Way's
 size and real tilt), stars within 1,600 light-years 19.4 (HYG v4.4), within 65 light-years 18

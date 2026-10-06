@@ -588,17 +588,32 @@ async function buildPicture(k, layer, profile) {
 // level, one splat per surface voxel: the RNA warm, the proteins cool (by
 // the nearest chain of the fitted model), lit from above left with its
 // pockets shaded. About 25 nm across; Å are 1e-10 m.
+//
+// `layer.em`: the same map in the chloroplast micrograph's own olive grays,
+// with fewer splats, as a ribosome looks in the electron micrograph (one of
+// the dark grains of its stroma): it comes in among them, then turns into
+// the colored map as it grows.
+let ribosomeData = null;
+function ribosomeMap() {
+  ribosomeData ??= (async () => {
+    const get = async (name) => {
+      const r = await fetch(new URL(`../../assets/toys/cryoem-map/${name}`, import.meta.url));
+      if (!r.ok) throw new Error(`Could not load ${name}.`);
+      return new Uint8Array(await r.arrayBuffer());
+    };
+    const [vol, mod] = await Promise.all([get("ribosome.vol.gz"), get("ribosome-model.bin")]);
+    const D = await readDensity(vol);
+    return { D, model: await readBackbone(mod), S: isoPointsPerVoxel(D, D.head.level) };
+  })().catch((e) => {
+    ribosomeData = null;
+    throw e;
+  });
+  return ribosomeData;
+}
+
 async function buildRibosome(k, layer, profile) {
   const ku = U / 10 ** layer.e;
-  const get = async (name) => {
-    const r = await fetch(new URL(`../../assets/toys/cryoem-map/${name}`, import.meta.url));
-    if (!r.ok) throw new Error(`Could not load ${name}.`);
-    return new Uint8Array(await r.arrayBuffer());
-  };
-  const [vol, mod] = await Promise.all([get("ribosome.vol.gz"), get("ribosome-model.bin")]);
-  const D = await readDensity(vol);
-  const model = await readBackbone(mod);
-  const S = isoPointsPerVoxel(D, D.head.level);
+  const { D, model, S } = await ribosomeMap();
   const P = S.p;
   const c = [0, 0, 0];
   for (let i = 0; i < S.count; i++) for (let a = 0; a < 3; a++) c[a] += P[3 * i + a] / S.count;
@@ -624,7 +639,9 @@ async function buildRibosome(k, layer, profile) {
           }
     return best;
   };
-  const max = { low: 90000, mid: 160000, high: 260000, max: 360000 }[profile] || 160000;
+  const max = layer.em
+    ? { low: 30000, mid: 40000, high: 50000, max: 60000 }[profile] || 40000
+    : { low: 90000, mid: 160000, high: 260000, max: 360000 }[profile] || 160000;
   const keep = Math.min(1, max / S.count);
   const pick = [];
   for (let i = 0; i < S.count; i++) if ((i * 0.618034) % 1 < keep) pick.push(i);
@@ -634,14 +651,22 @@ async function buildRibosome(k, layer, profile) {
     const i = pick[j];
     const p = [P[3 * i], P[3 * i + 1], P[3 * i + 2]];
     const n = [S.n[3 * i], S.n[3 * i + 1], S.n[3 * i + 2]];
-    const rna = isRna(p);
-    const base = rna === null ? [0.72, 0.73, 0.76] : rna ? [0.93, 0.62, 0.36] : [0.42, 0.62, 0.86];
-    const lit = 0.32 + 0.68 * Math.max(0, n[0] * L[0] + n[1] * L[1] + n[2] * L[2]);
+    const rna = layer.em ? null : isRna(p);
+    // (The micrograph's darkest grains are about [0.23, 0.24, 0.09], its
+    // stroma about [0.47, 0.48, 0.32].)
+    const base = layer.em
+      ? [0.3, 0.31, 0.15]
+      : rna === null ? [0.72, 0.73, 0.76] : rna ? [0.93, 0.62, 0.36] : [0.42, 0.62, 0.86]; // prettier-ignore
+    const lit = layer.em
+      ? 0.75 + 0.25 * Math.max(0, n[0] * L[0] + n[1] * L[1] + n[2] * L[2])
+      : 0.32 + 0.68 * Math.max(0, n[0] * L[0] + n[1] * L[1] + n[2] * L[2]);
     return {
-      // Its front at the zoom's plane, so the view never goes inside it.
-      p: [(p[0] - c[0]) * 1e-10 * ku, (p[1] - c[1]) * 1e-10 * ku, (p[2] - c[2] - zMax) * 1e-10 * ku], // prettier-ignore
+      // Its front at the zoom's plane, so the view never goes inside it; the
+      // micrograph's grain flat on the picture, as a micrograph shows it
+      // (over the colored map, which shows as the grain fades).
+      p: [(p[0] - c[0]) * 1e-10 * ku, (p[1] - c[1]) * 1e-10 * ku, layer.em ? (p[2] - c[2] - zMax) * 1e-12 * ku + 0.002 : (p[2] - c[2] - zMax) * 1e-10 * ku], // prettier-ignore
       scales: [size, size, size * 0.15],
-      quat: quatToward(n),
+      quat: layer.em ? [0, 0, 0, 1] : quatToward(n),
       color: base.map((v) => v * lit),
       opacity: 1,
       kind: "fade",
@@ -710,11 +735,15 @@ export const LAYERS = [
       soft: i === m.layers.length - 1,
       // The last of a set, far past its own detail before the next scene
       // comes, dims.
-      dim: i === m.layers.length - 1 ? ({ leaf: [3.7, 4.3, 0], chloroplast: [6.5, 7.0, 0] }[m.id] ?? null) : null, // prettier-ignore
+      dim: i === m.layers.length - 1 ? ({ leaf: [3.7, 4.3, 0], chloroplast: [6.85, 7.25, 0] }[m.id] ?? null) : null, // prettier-ignore
       build: buildPicture,
     })),
   ),
-  { id: "ribosome", e: -7.4, cover: false, fadeIn: [0.15, 0.35], build: buildRibosome },
+  // The ribosome comes in as one of the micrograph's grains, beside a
+  // thylakoid, then turns into its colored map as it fills the view (the
+  // colored one comes in behind it, and shows as it fades).
+  { id: "ribosome-em", e: -7.4, em: true, cover: false, fadeIn: [0.03, 0.07], fadeOut: [0.9, 1.3], build: buildRibosome }, // prettier-ignore
+  { id: "ribosome", e: -7.4, cover: false, fadeIn: [0.3, 0.6], build: buildRibosome },
 ];
 
 const byId = new Map(LAYERS.map((l) => [l.id, l]));
