@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>The real Mars · Splashery</title>
+    <meta
+      name="description"
+      content="The real Mars, a Splashery toy made of 3D Gaussian splats: Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/real-mars/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="The real Mars · Splashery" />
+    <meta
+      property="og:description"
+      content="The real Mars, a Splashery toy made of 3D Gaussian splats: Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/real-mars/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/real-mars/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="The real Mars, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+      <div class="labs-off" data-labs-off>
+        <p class="eyebrow">In the labs</p>
+        <h1>The real Mars</h1>
+        <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
+        <p class="actions">
+          <a class="button primary" href="./?labs=1">Turn the labs on</a
+          ><a class="button" href="../../toys/">Every toy</a>
+        </p>
+      </div>
+      <article class="toy-page" data-labs>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-space">Space</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>The real Mars <span class="badge">labs</span></h1>
+            <p class="lead how-to">
+              Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to
+              relight.
+            </p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  The real Mars as splats on its real elevation and color maps, turning at its real
+                  rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the
+                  relief can be exaggerated (labeled).
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>Space is silent: a soft breath as the view flies in.</dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtbWFycyJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4xLCJyb2xsIjowLCJkaXN0YW5jZSI6M319"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="background-image: url(&quot;../../../assets/toys/real-mars/thumb.webp&quot;)"
+              ></span>
+              <iframe
+                data-src="../../play/?toy=real-mars"
+                title="The real Mars, live: drag to turn it"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>Drag to turn it; tap to play.</figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its
+            heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's
+            sea level. Each splat sits at its height and leans with its ground, so the sun lights
+            the slopes facing it.
+          </p>
+          <p>
+            Olympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles
+            Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale
+            crater. The relief is exaggerated ten times by default; pick True height in the Toy tab
+            to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The
+            thin rim is its dusty air; there are no shadows.
+          </p>
+        </section>
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            Mars drawn from real maps: every splat sits at its place's measured height and has its
+            place's measured color, and each named feature is where the planetary gazetteer puts it.
+            The relief, the turning speed and the lighting are simplified, and each simplification
+            is labeled in the toy. <span class="note">Checked October 5, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The color map is Mars Viking
+                Colorized Global Mosaic 925m.
+              </p>
+              <p>
+                tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages
+                it into the toy's smaller maps (east longitudes from -180° to 180°).
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m"
+                    >Mars Viking Colorized Global Mosaic 925m</a
+                  >, NASA, JPL, Viking orbiters (Planetary Data System); USGS Astrogeology Science
+                  Center: <q>Public domain (USGS and NASA).</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The elevation map is Mars MGS
+                MOLA DEM 463m.
+              </p>
+              <p>
+                tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages
+                it into the toy's smaller maps (east longitudes from -180° to 180°).
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m"
+                    >Mars MGS MOLA DEM 463m</a
+                  >, MOLA Science Team (NASA Goddard Space Flight Center); USGS Astrogeology Science
+                  Center: <q>Public domain (USGS and NASA).</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Mars turns once every 24.6229
+                hours (its sidereal day), sped up by the chosen factor.
+              </p>
+              <p>
+                Each frame the drive adds the elapsed time times the speed-up, over the day's
+                length, to the turn.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html"
+                    >Mars Fact Sheet</a
+                  >, NASA Space Science Data Coordinated Archive:
+                  <q>Sidereal rotation period (hrs) 24.6229; volumetric mean radius 3389.5 km.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A tap flies to Olympus Mons at
+                18.65°, -133.8° east, and the map shows it there. Its summit on the map is over
+                20,500 m, within 60 km of the listed center (the map averages over cells about 1.6
+                km wide).
+              </p>
+              <p>
+                The drive turns the feature's direction to face the viewer and glides the camera to
+                it; the test checks the turn and the map's heights round the listed center.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://planetarynames.wr.usgs.gov/Feature/4453"
+                    >Gazetteer of Planetary Nomenclature</a
+                  >, USGS, IAU:
+                  <q
+                    >Olympus Mons: diameter 610.13 km, center latitude 18.65, center longitude
+                    226.20 (+East, 0 to 360).</q
+                  >
+                </li>
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Olympus_Mons">Olympus Mons</a>, Wikipedia:
+                  <q
+                    >As measured by the Mars Orbiter Laser Altimeter (MOLA), it is 21.287 kilometres
+                    (69,840 ft) high</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A tap flies to Valles Marineris
+                at -14.01°, -58.59° east, and the map shows it there. Its listed center lies more
+                than 4,000 m below Mars's datum on the map.
+              </p>
+              <p>
+                The drive turns the feature's direction to face the viewer and glides the camera to
+                it; the test checks the turn and the map's heights round the listed center.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://planetarynames.wr.usgs.gov/Feature/6288"
+                    >Gazetteer of Planetary Nomenclature</a
+                  >, USGS, IAU:
+                  <q
+                    >Valles Marineris: 3761.28 km, center latitude -14.01, center longitude 301.41
+                    (+East, 0 to 360).</q
+                  >
+                </li>
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Valles_Marineris">Valles Marineris</a>,
+                  Wikipedia: <q>more than 4,000 km long, 200 km wide and up to 7 km deep</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> A tap flies to Gale crater (the
+                Curiosity rover) at -5.37°, 137.81° east, and the map shows it there. On the map,
+                the mound rises more than 4,000 m above the crater's lowest floor.
+              </p>
+              <p>
+                The drive turns the feature's direction to face the viewer and glides the camera to
+                it; the test checks the turn and the map's heights round the listed center.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://planetarynames.wr.usgs.gov/Feature/2071"
+                    >Gazetteer of Planetary Nomenclature</a
+                  >, USGS, IAU:
+                  <q
+                    >Gale: diameter 154.08 km, center latitude -5.37, center longitude 137.81
+                    (+East).</q
+                  >
+                </li>
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Aeolis_Mons">Aeolis Mons</a>, Wikipedia:
+                  <q
+                    >It forms the central peak within Gale crater ... rising 5.5 km (18,000 ft) high
+                    from the valley floor</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The relief is exaggerated by default (ten or twenty times; Pluto, Ceres and Vesta are
+              drawn at true height), as chosen and labeled in the Toy tab; close up during a fly it
+              eases to at most twice its height. True height is one choice away.
+            </li>
+            <li>
+              The world turns thousands of times faster than real (labeled in the Toy tab: an hour
+              or a day each second).
+            </li>
+            <li>
+              North is always up and the sun stays near the equator's plane: the axial tilt and the
+              seasons are left out.
+            </li>
+            <li>
+              The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and
+              leaves the night side dark, but nothing casts a shadow, and real surfaces scatter
+              light in more complicated ways.
+            </li>
+            <li>
+              The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the
+              patches round the named features are sharper.
+            </li>
+            <li>The thin rim of air is a drawn glow, not a model of Mars's atmosphere.</li>
+          </ul>
+        </section>
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/space-r2.js"
+              ><code>src/packs/space-r2.js</code></a
+            >.
+          </p>
+          <ul class="toy-credits">
+            <li>
+              <b>Color map</b>:
+              <a
+                href="https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m"
+                >Mars Viking Colorized Global Mosaic 925m</a
+              >
+              by NASA, JPL, Viking orbiters (Planetary Data System); USGS Astrogeology Science
+              Center,
+              <a
+                href="https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+                >Public domain (USGS and NASA)</a
+              >.
+            </li>
+            <li>
+              <b>Elevation map</b>:
+              <a href="https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m"
+                >Mars MGS MOLA DEM 463m</a
+              >
+              by MOLA Science Team (NASA Goddard Space Flight Center); USGS Astrogeology Science
+              Center,
+              <a
+                href="https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+                >Public domain (USGS and NASA)</a
+              >.
+            </li>
+          </ul>
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
+            >.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="1" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/real-mars/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=real-mars&quot; title=&quot;Splashery: The real Mars&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;real-mars&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle. Every option is in the
+            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-space"
+              >The Space shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-venus/"
+                ><img
+                  src="../../../assets/toys/real-venus/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Venus <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-small-worlds/"
+                ><img
+                  src="../../../assets/toys/real-small-worlds/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >Pluto, Ceres and Vesta <span class="badge">labs</span></span
+                ></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-mercury/"
+                ><img
+                  src="../../../assets/toys/real-mercury/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Mercury <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/soft-landing/"
+                ><img
+                  src="../../../assets/toys/soft-landing/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Soft Landing <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-earth/"
+                ><img
+                  src="../../../assets/toys/real-earth/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Earth <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-moon/"
+                ><img
+                  src="../../../assets/toys/real-moon/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">The real Moon <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/real-moons/"
+                ><img
+                  src="../../../assets/toys/real-moons/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Real moons <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/jupiter/"
+                ><img
+                  src="../../../assets/toys/jupiter/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Jupiter</span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

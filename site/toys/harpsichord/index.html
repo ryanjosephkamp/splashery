@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Harpsichord · Splashery</title>
+    <meta
+      name="description"
+      content="Harpsichord, a Splashery toy made of 3D Gaussian splats: Tap a key to pluck its string, or drag along the keys."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/toys/harpsichord/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Harpsichord · Splashery" />
+    <meta
+      property="og:description"
+      content="Harpsichord, a Splashery toy made of 3D Gaussian splats: Tap a key to pluck its string, or drag along the keys."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/harpsichord/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/harpsichord/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="Harpsichord, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+
+      <article class="toy-page">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-music">Music</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>Harpsichord</h1>
+            <p class="lead how-to">
+              Tap a key to pluck its string, or drag along the keys. Tap anywhere else for a minuet.
+            </p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  Tap a key: its jack rises and the quill plucks the string, which you see quiver.
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>A bright, plucked harpsichord voice, made in the page.</dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhhcnBzaWNob3JkIn0sImNhbWVyYSI6eyJ5YXciOjAuNiwicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="
+                  background-image: url(&quot;../../../assets/toys/harpsichord/thumb.webp&quot;);
+                "
+              ></span>
+              <iframe
+                src="../../play/?toy=harpsichord&turntable=off"
+                title="Harpsichord, live: drag to turn it"
+                loading="eager"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>Drag to look around it; tap to play.</figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            A harpsichord plucks its strings instead of striking them. Each key lifts a thin wooden
+            jack, and a small quill on the jack catches the string on the way up. Because a pluck
+            sounds the same however hard you press, players shape their music by timing.
+            Harpsichords were the main keyboard of the 1600s and 1700s.
+          </p>
+          <p>
+            This one is painted in the French style, with black naturals and pale sharps. Tap a key
+            and its jack rises, plucks, and the string quivers until the jack's felt stops it. Tap
+            anywhere else for the Minuet in G from the notebook Bach kept for his wife, Anna
+            Magdalena. Open a MIDI file of your own in the Toy tab.
+          </p>
+        </section>
+
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe and a seed: nothing in it comes from outside files.
+            Its recipe is in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/pianos.js"
+              ><code>src/packs/pianos.js</code></a
+            >.
+          </p>
+
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
+            >.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="2" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/harpsichord/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=harpsichord&amp;turntable=off&quot; title=&quot;Splashery: Harpsichord&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;harpsichord&quot; turntable=&quot;off&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle. Every option is in the
+            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-music"
+              >The Music shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card">
+              <a href="../../toys/electronic-keyboard/"
+                ><img
+                  src="../../../assets/toys/electronic-keyboard/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Electronic keyboard</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/grand-piano/"
+                ><img
+                  src="../../../assets/toys/grand-piano/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Grand piano</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/upright-piano/"
+                ><img
+                  src="../../../assets/toys/upright-piano/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Upright piano</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/guitar/"
+                ><img
+                  src="../../../assets/toys/guitar/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Acoustic guitar</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/toy-piano/"
+                ><img
+                  src="../../../assets/toys/toy-piano/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Toy piano</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/drum/"
+                ><img
+                  src="../../../assets/toys/drum/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Snare drum</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/xylophone/"
+                ><img
+                  src="../../../assets/toys/xylophone/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Xylophone</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/ukulele/"
+                ><img
+                  src="../../../assets/toys/ukulele/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Ukulele</span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
