@@ -4,11 +4,13 @@
 // scale bar drawn in, as the toy shows them beside the view.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pot-clip.mjs out.mp4 [--w=360] [--h=640] [--fps=20] [--profile=high] [--z=a,b,c,...] [--secs=40]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pot-clip.mjs out.mp4 [--w=360] [--h=640] [--fps=20] [--profile=high] [--z=a,b,c,...] [--secs=40] [--start=0]
 //
 // --z gives the zoom's keyframes (log10 of the view's height in meters),
 // eased between and spread evenly over --secs; without it, the toy's own
-// journey (Play). Needs imageio-ffmpeg (pip install imageio-ffmpeg).
+// journey (Play). --start renders only from that second on (to redo the end
+// of a clip and join it to the frames before). Needs imageio-ffmpeg (pip
+// install imageio-ffmpeg).
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -27,6 +29,7 @@ const W = Number(opt("w", 360));
 const H = Number(opt("h", 640));
 const fps = Number(opt("fps", 20));
 const secs = Number(opt("secs", 40));
+const start = Number(opt("start", 0));
 const keys = opt("z", "") ? opt("z", "").split(",").map(Number) : null;
 const profile = opt("profile", "high");
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pot-clip-"));
@@ -58,7 +61,7 @@ const zAt = async (t) => {
 };
 
 const n = Math.round(secs * fps);
-for (let i = 0; i <= n; i++) {
+for (let i = Math.round(start * fps); i <= n; i++) {
   const z = await zAt(i / fps);
   const png = await page.evaluate(
     async ({ z, W, H }) => {
@@ -139,6 +142,6 @@ for (let i = 0; i <= n; i++) {
 }
 await browser.close();
 const ffmpeg = execFileSync("python3", ["-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]).toString().trim(); // prettier-ignore
-execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(fps), "-i", path.join(dir, "f%05d.png"), "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2", "-c:v", "libx264", "-crf", "23", out]); // prettier-ignore
+execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(fps), "-start_number", String(Math.round(start * fps)), "-i", path.join(dir, "f%05d.png"), "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2", "-c:v", "libx264", "-crf", "23", out]); // prettier-ignore
 fs.rmSync(dir, { recursive: true, force: true });
 console.log(`${out}: ${(fs.statSync(out).size / 1024).toFixed(0)} KB, ${n + 1} frames`);

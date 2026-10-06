@@ -735,18 +735,33 @@ export const LAYERS = [
       soft: i === m.layers.length - 1,
       // The last of a set, far past its own detail before the next scene
       // comes, dims.
-      dim: i === m.layers.length - 1 ? ({ leaf: [3.7, 4.3, 0], chloroplast: [6.85, 7.25, 0] }[m.id] ?? null) : null, // prettier-ignore
+      dim: i === m.layers.length - 1 ? ({ leaf: [3.7, 4.3, 0], chloroplast: [6.8, 7.2, 0] }[m.id] ?? null) : null, // prettier-ignore
       build: buildPicture,
     })),
   ),
   // The ribosome comes in as one of the micrograph's grains, beside a
   // thylakoid, then turns into its colored map as it fills the view (the
   // colored one comes in behind it, and shows as it fades).
-  { id: "ribosome-em", e: -7.4, em: true, cover: false, fadeIn: [0.03, 0.07], fadeOut: [0.9, 1.3], build: buildRibosome }, // prettier-ignore
+  { id: "ribosome-em", e: -7.4, em: true, solid: 12, cover: false, fadeIn: [0.03, 0.07], fadeOut: [0.6, 1.3], build: buildRibosome }, // prettier-ignore
   { id: "ribosome", e: -7.4, cover: false, fadeIn: [0.3, 0.6], build: buildRibosome },
 ];
 
 const byId = new Map(LAYERS.map((l) => [l.id, l]));
+
+// The chunk fade that makes each splat's opacity 1 - (1 - f)^(1/n): the
+// fade kind takes smoothstep(0, 0.99, fade) as the splat's opacity.
+function solidFade(f, n) {
+  if (f <= 0 || f >= 1) return f;
+  const a = 1 - (1 - f) ** (1 / n);
+  let lo = 0;
+  let hi = 0.99;
+  for (let i = 0; i < 24; i++) {
+    const m = (lo + hi) / 2;
+    if (smooth(0, 0.99, m) < a) lo = m;
+    else hi = m;
+  }
+  return (lo + hi) / 2;
+}
 
 // How each layer shows at zoom z: { scale, fade } (fade 0: off).
 export function layout(z) {
@@ -765,6 +780,10 @@ export function layout(z) {
     // detail there).
     const full = covered;
     if (l.dim) f *= 1 - (1 - l.dim[2]) * smooth(l.dim[0], l.dim[1], -z);
+    // `solid: n`: a solid where about n splats overlap stays opaque until its
+    // fade is nearly 0; each splat's fade is set so n of them cover the
+    // fade's share of what is behind.
+    if (l.solid) f = solidFade(f, l.solid);
     return { l, s, f, full };
   });
   // The finest cover that fills the view hides every layer coarser than it.
