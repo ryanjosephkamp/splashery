@@ -1,0 +1,558 @@
+/* The hubs and long pages (lane Site pages): Tools, Science, Learn, About,
+   Credits, Privacy, What's new, the notebook and the embed guide. Loaded only
+   by those pages, after site.css, and uses its tokens. */
+
+.muted,
+.muted-code {
+  color: var(--muted);
+}
+.visually-hidden-note {
+  position: absolute;
+  left: -9999px;
+}
+.section-lead {
+  color: var(--muted);
+  max-width: 46em;
+  margin: 4px 0 16px;
+}
+.inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding: 0;
+  margin: 0 0 12px;
+  list-style: none;
+}
+
+/* ---- Prose pages ---- */
+
+.prose {
+  max-width: 46em;
+}
+.prose h2 {
+  font: 750 1.5rem / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  margin: 8px 0 8px;
+  scroll-margin-top: 90px;
+}
+.prose h3 {
+  font-size: 1.15rem;
+  margin: 28px 0 6px;
+  scroll-margin-top: 90px;
+}
+.prose h4 {
+  font-size: 1rem;
+  margin: 20px 0 4px;
+  scroll-margin-top: 90px;
+}
+.prose p,
+.prose li {
+  line-height: 1.6;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+}
+.prose li {
+  margin: 6px 0;
+}
+.prose code {
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--card);
+  overflow-wrap: anywhere;
+}
+.prose pre {
+  margin: 12px 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.prose pre code {
+  padding: 0;
+  background: none;
+  overflow-wrap: normal;
+}
+.prose blockquote {
+  margin: 12px 0;
+  padding: 2px 16px;
+  border-left: 3px solid var(--line-strong);
+  color: var(--muted);
+}
+.prose details.long-text {
+  margin: 12px 0;
+}
+.prose details.long-text summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+}
+main > article.prose {
+  max-width: none;
+}
+main > article.prose > section {
+  max-width: 46em;
+}
+.md-file {
+  max-width: none;
+}
+.md-file .prose {
+  max-width: 62em;
+}
+.file-title {
+  font: 800 clamp(1.8rem, 4.5vw, 2.4rem) / 1.1 var(--font-display);
+  letter-spacing: -0.03em;
+  margin: 48px 0 6px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 90px;
+}
+
+/* Tables scroll sideways on a phone instead of breaking the page. */
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 12px 0 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--raised);
+}
+.table-wrap:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.table-wrap table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 36em;
+  font-size: 0.9rem;
+}
+.table-wrap th,
+.table-wrap td {
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.table-wrap thead th {
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.table-wrap tbody th {
+  font-weight: 650;
+  min-width: 8em;
+}
+.table-wrap tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+/* The table of contents at the top of a long page. */
+.toc {
+  margin: 20px 0 8px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.toc h2 {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 16em;
+  column-gap: 28px;
+}
+.toc ul ul {
+  columns: auto;
+  padding-left: 0;
+}
+.toc li {
+  break-inside: avoid;
+  padding: 3px 0;
+}
+.toc > ul > li > a {
+  font-weight: 700;
+}
+.toc a {
+  display: inline-block;
+  padding: 2px 0;
+}
+
+/* ---- Drawings ---- */
+
+.figure {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+}
+.figure-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  color: var(--ink);
+}
+.figure figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.fig-note {
+  font-family: var(--font-body);
+}
+.recipe-figure pre {
+  margin: 0;
+}
+
+/* ---- Tools ---- */
+
+.tool-hub {
+  padding-top: 40px;
+}
+.hub-head {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.hub-icon {
+  flex: none;
+  margin-top: 4px;
+  color: var(--accent);
+}
+.hub-head h2 {
+  margin: 0;
+  font: 750 1.5rem / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+}
+.hub-head p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  max-width: 44em;
+}
+.tool-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+.tool-card a {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  height: 100%;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--raised);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.18s var(--ease),
+    box-shadow 0.18s var(--ease),
+    transform 0.18s var(--ease);
+}
+.tool-card a:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.tool-art {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--accent);
+  overflow: hidden;
+}
+.tool-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tool-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.tool-name {
+  font-weight: 750;
+  font-size: 1.05rem;
+}
+.tool-text {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+.tool-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--accent);
+  font-weight: 650;
+  font-size: 0.9rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-card a {
+    transition: none;
+  }
+  .tool-card a:hover {
+    transform: none;
+  }
+}
+
+/* ---- Science ---- */
+
+.datasets {
+  min-width: 52em;
+}
+.datasets td,
+.datasets th {
+  font-size: 0.88rem;
+}
+
+/* ---- Learn ---- */
+
+.learn-cards {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+.learn-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+}
+.learn-card.main {
+  background: var(--accent-soft);
+}
+@media (min-width: 700px) {
+  .learn-card.main {
+    grid-column: span 2;
+  }
+}
+.learn-card > a:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  flex: 1;
+}
+.learn-card .hub-icon {
+  margin: 0;
+}
+.learn-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 750 1.25rem / 1.2 var(--font-display);
+  color: var(--accent);
+}
+.learn-text {
+  color: var(--muted);
+  line-height: 1.5;
+}
+.learn-also {
+  margin-top: 12px;
+  font-weight: 650;
+}
+
+/* ---- What's new ---- */
+
+.news-day {
+  max-width: 46em;
+  padding-top: 32px !important;
+}
+.news-day h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.news-title {
+  margin: 4px 0 8px;
+  font: 750 1.4rem / 1.25 var(--font-display);
+  letter-spacing: -0.015em;
+}
+.news-items {
+  margin: 0;
+  padding-left: 1.2em;
+}
+.news-items li {
+  margin: 6px 0;
+  line-height: 1.55;
+}
+.pr-list {
+  margin-top: 10px;
+}
+.pr-list summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 6px 0;
+}
+.pr-list ul,
+.pr-plain {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+.pr-list li,
+.pr-plain li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.93rem;
+}
+.pr-list a,
+.pr-plain a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.pr-list a:hover,
+.pr-plain a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ---- The embed guide ---- */
+
+.embed-lab {
+  margin: 16px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+.embed-form {
+  display: grid;
+  gap: 12px 16px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  margin-bottom: 16px;
+}
+.embed-lab label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: var(--muted);
+}
+.embed-lab label.check {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.embed-lab label.wide {
+  max-width: 28em;
+  margin-bottom: 8px;
+}
+.embed-lab select,
+.embed-lab input[type="range"] {
+  min-height: 44px;
+  width: 100%;
+  font: inherit;
+  font-weight: 400;
+  color: var(--ink);
+}
+.embed-lab select {
+  padding: 0 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--raised);
+}
+.embed-lab input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+}
+.embed-stage {
+  margin: 0 0 8px;
+}
+.embed-frame {
+  max-width: 100%;
+}
+.embed-frame iframe,
+.embed-frame splashery-toy {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: 12px;
+  background: var(--raised);
+}
+.element-frame {
+  margin-top: 12px;
+}
+.snippet {
+  position: relative;
+  margin: 8px 0 16px;
+}
+.snippet pre {
+  margin: 0;
+  padding: 14px 16px;
+  padding-right: 84px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--raised);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+.snippet pre code {
+  padding: 0;
+  background: none;
+  white-space: pre;
+}
+.snippet .copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 0.85rem;
+}
+.guide td code,
+.guide th code {
+  white-space: normal;
+}
+code.code,
+pre.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
