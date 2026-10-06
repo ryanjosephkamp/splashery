@@ -127,6 +127,82 @@ export const DEPTH_SIDE = { low: 140, mid: 196, high: 252, max: 308 };
 // fast as the device allows; between answers the heights ease toward the
 // newest depth. The depth is scaled by its own 2nd and 98th percentiles,
 // eased too, so a person stepping nearer doesn't make the room flicker.
+// Live r7: the depth's own grid holds at most this many cells (CameraDepth).
+const DEPTH_CELLS = 60000;
+
+// Live r7: a depth worked out on a dw by dh grid (d, 0..1, its jumps clean
+// steps after snapEdges), brought up to a gw by gh grid. Where the four
+// depth cells around a fine cell are one surface it is bilinear; across a
+// jump the fine cell takes the side whose cell's colors are nearest its own
+// (guide: the fine grid's RGBA colors; the depth cells' colors are their
+// means), so the outline is as fine as the picture. No guide: bilinear.
+export function upsampleSnap(d, dw, dh, gw, gh, guide = null) {
+  const out = new Float32Array(gw * gh);
+  let gc = null;
+  if (guide && guide.length >= gw * gh * 4) {
+    gc = new Float32Array(dw * dh * 3);
+    const n = new Float32Array(dw * dh);
+    for (let j = 0; j < gh; j++) {
+      const y = Math.min(dh - 1, Math.floor((j * dh) / gh));
+      for (let i = 0; i < gw; i++) {
+        const x = Math.min(dw - 1, Math.floor((i * dw) / gw));
+        const c = y * dw + x;
+        const o = (j * gw + i) * 4;
+        gc[c * 3] += guide[o];
+        gc[c * 3 + 1] += guide[o + 1];
+        gc[c * 3 + 2] += guide[o + 2];
+        n[c]++;
+      }
+    }
+    for (let c = 0; c < dw * dh; c++) for (let k = 0; k < 3; k++) gc[c * 3 + k] /= Math.max(1, n[c]); // prettier-ignore
+  }
+  for (let j = 0; j < gh; j++) {
+    const v = Math.max(0, Math.min(dh - 1, ((j + 0.5) * dh) / gh - 0.5));
+    const y0 = Math.floor(v);
+    const y1 = Math.min(dh - 1, y0 + 1);
+    const ay = v - y0;
+    for (let i = 0; i < gw; i++) {
+      const u = Math.max(0, Math.min(dw - 1, ((i + 0.5) * dw) / gw - 0.5));
+      const x0 = Math.floor(u);
+      const x1 = Math.min(dw - 1, x0 + 1);
+      const ax = u - x0;
+      const a = d[y0 * dw + x0];
+      const b = d[y0 * dw + x1];
+      const c = d[y1 * dw + x0];
+      const e = d[y1 * dw + x1];
+      const lo = Math.min(a, b, c, e);
+      const hi = Math.max(a, b, c, e);
+      const k = j * gw + i;
+      if (hi - lo <= EDGE || !gc) {
+        out[k] = (a * (1 - ax) + b * ax) * (1 - ay) + (c * (1 - ax) + e * ax) * ay;
+        continue;
+      }
+      const o = k * 4;
+      const r = guide[o];
+      const g = guide[o + 1];
+      const bl = guide[o + 2];
+      let best = Infinity;
+      let pick = a;
+      for (const [x, y] of [
+        [x0, y0],
+        [x1, y0],
+        [x0, y1],
+        [x1, y1],
+      ]) {
+        const q = (y * dw + x) * 3;
+        // (The nearer depth cell wins a tie, by a little distance.)
+        const dist = (gc[q] - r) ** 2 + (gc[q + 1] - g) ** 2 + (gc[q + 2] - bl) ** 2 + 40 * ((x - u) ** 2 + (y - v) ** 2); // prettier-ignore
+        if (dist < best) {
+          best = dist;
+          pick = d[y * dw + x];
+        }
+      }
+      out[k] = pick;
+    }
+  }
+  return out;
+}
+
 export class CameraDepth {
   constructor(video, { cols, rows, tier = "mid", mirror = true, depth = true, back = null } = {}) {
     this.video = video;
@@ -143,6 +219,14 @@ export class CameraDepth {
     this.sg = this.small.getContext("2d", { willReadFrequently: true });
     this.heights = new Float32Array(cols * rows); // eased, 0..1
     this.target = new Float32Array(cols * rows);
+    // Live r7 (the mirror's finer grid of October 6): the depth is worked
+    // out on a grid of at most DEPTH_CELLS (what its steps were tuned on, and
+    // what a phone can do on every answer), then brought up to the picture's
+    // grid by upsampleSnap.
+    const ds = Math.min(1, Math.sqrt(DEPTH_CELLS / (cols * rows)));
+    this.dcols = Math.max(16, Math.round(cols * ds));
+    this.drows = Math.max(12, Math.round(rows * ds));
+    this.dt = new Float32Array(this.dcols * this.drows);
     this.have = false; // any depth yet
     this.lo = null;
     this.hi = null;
@@ -203,9 +287,10 @@ export class CameraDepth {
     this.ms = m.ms;
     this.answers++;
     this.status = "";
-    // Resample to the grid (mirrored with the picture) and find the range.
-    const { cols, rows } = this;
-    const t = this.target;
+    // Resample to the depth's grid (mirrored with the picture) and find the
+    // range.
+    const { dcols: cols, drows: rows } = this;
+    const t = this.dt;
     for (let j = 0; j < rows; j++)
       for (let i = 0; i < cols; i++) {
         const u = this.mirror ? 1 - (i + 0.5) / cols : (i + 0.5) / cols;
@@ -276,8 +361,12 @@ export class CameraDepth {
     // answers was tried and left patches on a moving face; it is gone.)
     this.band = colors ? edgeBand(t, cols, rows) : null;
     if (this.band) tidyBand(this.band, t);
-    if (this.back && this.sent) this.back.learn(this.sent, t, cols, rows, this.mirror);
-    if (!this.have) this.heights.set(t);
+    // Up to the picture's grid, its edges following the picture's own colors.
+    const fine = this.target;
+    if (cols === this.cols && rows === this.rows) fine.set(t);
+    else fine.set(upsampleSnap(t, cols, rows, this.cols, this.rows, this.lastColors));
+    if (this.back && this.sent) this.back.learn(this.sent, fine, this.cols, this.rows, this.mirror); // prettier-ignore
+    if (!this.have) this.heights.set(fine);
     this.have = true;
   }
 
@@ -322,7 +411,10 @@ export class CameraDepth {
     else
       for (let i = 0; i < cp.length; i += 4) {
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
-        const a = d <= 18 ? 0.2 : d >= 72 ? 1 : 0.2 + (0.8 * (d - 18)) / 54;
+        // (Live r7, the finer grid of October 6: each cell averages fewer of
+        // the camera's pixels, so a little steadier: an eighth of a change
+        // within the noise, was a fifth.)
+        const a = d <= 24 ? 0.12 : d >= 80 ? 1 : 0.12 + (0.88 * (d - 24)) / 56;
         last[i] += (cp[i] - last[i]) * a;
         last[i + 1] += (cp[i + 1] - last[i + 1]) * a;
         last[i + 2] += (cp[i + 2] - last[i + 2]) * a;
@@ -376,6 +468,37 @@ export class CameraDepth {
 // covered are filled from the wall around them (fillHoles), never from the
 // person's own colors, so no second copy of them shows behind.
 const FAR = 0.35; // a cell is wall below this (0 far .. 1 near)
+// Live r7: a mask (w x h, 0 or 1) grown by r cells each way (a box).
+export function grow(m, w, h, r) {
+  const row = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++) {
+    let last = -Infinity;
+    for (let x = 0; x < w; x++) {
+      if (m[y * w + x]) last = x;
+      if (x - last <= r) row[y * w + x] = 1;
+    }
+    last = Infinity;
+    for (let x = w - 1; x >= 0; x--) {
+      if (m[y * w + x]) last = x;
+      if (last - x <= r) row[y * w + x] = 1;
+    }
+  }
+  const out = new Uint8Array(w * h);
+  for (let x = 0; x < w; x++) {
+    let last = -Infinity;
+    for (let y = 0; y < h; y++) {
+      if (row[y * w + x]) last = y;
+      if (y - last <= r) out[y * w + x] = 1;
+    }
+    last = Infinity;
+    for (let y = h - 1; y >= 0; y--) {
+      if (row[y * w + x]) last = y;
+      if (last - y <= r) out[y * w + x] = 1;
+    }
+  }
+  return out;
+}
+
 const BACK_GAP = 0.06; // r6: how far behind the wall it sits (recipe units)
 const GUARD = 4; // Live r7: its cells this near a person never learn the wall
 export class BackPlate {
@@ -417,6 +540,9 @@ export class BackPlate {
         near[y * bc + x] = top >= FAR ? 1 : 0;
         mean[y * bc + x] = sum / m;
       }
+    // (Live r7: the cells within GUARD of a near one, by running distances
+    // along rows then columns, rather than a box search for each cell.)
+    const guard = grow(near, bc, br, GUARD);
     const [cx, cy, cw, ch] = frame.crop;
     for (let y = 0; y < br; y++)
       for (let x = 0; x < bc; x++) {
@@ -426,11 +552,7 @@ export class BackPlate {
         // person's outline a little inside their hair and ears, and those
         // colors, learned as wall, showed as a ghost of the person beside
         // them, seen from the side.
-        let edge = false;
-        for (let j = Math.max(0, y - GUARD); j <= Math.min(br - 1, y + GUARD) && !edge; j++)
-          for (let i = Math.max(0, x - GUARD); i <= Math.min(bc - 1, x + GUARD); i++)
-            if (near[j * bc + i]) edge = true;
-        if (edge) continue;
+        if (guard[c]) continue;
         // The cell's colors: the frame's pixels under it (mirrored with the
         // picture, in the same crop).
         const ua = mirror ? 1 - (x + 1) / bc : x / bc;
@@ -967,7 +1089,7 @@ export const MIRROR = {
 
 // The grid for a splat budget (4 : 3, like most cameras).
 export function mirrorGrid(count) {
-  const n = Math.max(3000, Math.min(60000, Math.floor(count * 0.8)));
+  const n = Math.max(3000, Math.min(140000, Math.floor(count * 0.8)));
   const cols = Math.max(64, Math.round(Math.sqrt((n * 4) / 3)));
   return { cols, rows: Math.round((cols * 3) / 4) };
 }
