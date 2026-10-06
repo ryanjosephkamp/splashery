@@ -238,7 +238,7 @@ async function loadDetail(z) {
 }
 
 // The pixels of one sample: a size x size window of an image pair at (ox, oy).
-function samplePixels(pair, ox, oy, size, step) {
+function samplePixels(pair, ox, oy, size, step, fine = false) {
   const out = [];
   const { color, depth } = pair;
   const w = color.w;
@@ -253,6 +253,29 @@ function samplePixels(pair, ox, oy, size, step) {
         d: (g - 1) / 254,
         c: [color.data[i * 4] / 255, color.data[i * 4 + 1] / 255, color.data[i * 4 + 2] / 255],
         i,
+      });
+    }
+  if (!fine) return out;
+  // The outline in finer splats (the owner's "a little bit sharper overall"): a cell the cutout
+  // only partly covers gets a splat at each covered quarter, half the size.
+  const h = step / 2;
+  for (let y = 0; y < size; y += step)
+    for (let x = 0; x < size; x += step) {
+      const at = (xx, yy) => depth.data[((oy + Math.min(size - 1, Math.floor(yy))) * w + ox + Math.min(size - 1, Math.floor(xx))) * 4]; // prettier-ignore
+      const q = [
+        [x + h / 2, y + h / 2],
+        [x + h * 1.5, y + h / 2],
+        [x + h / 2, y + h * 1.5],
+        [x + h * 1.5, y + h * 1.5],
+      ];
+      const inside = q.map(([xx, yy]) => at(xx, yy));
+      const n = inside.filter(Boolean).length;
+      if (n === 0 || n === 4) continue;
+      q.forEach(([xx, yy], k) => {
+        const g = inside[k];
+        if (!g) return;
+        const i = (oy + Math.floor(yy)) * w + ox + Math.floor(xx);
+        out.push({ u: xx / size, v: yy / size, d: (g - 1) / 254, c: [color.data[i * 4] / 255, color.data[i * 4 + 1] / 255, color.data[i * 4 + 2] / 255], i, fine: true }); // prettier-ignore
       });
     }
   return out;
@@ -286,11 +309,13 @@ const SHOWN = { symbol: "Cu" };
 const REAL_ELEMENTS = {
   alive: true,
   turntable: false,
-  density: 1.6,
+  density: 2,
   // Polish (labs only): the Lab lane's sharper splat falloff, the low cull so the tiles' fine
   // splats and lettering reach a phone's screen, and room to pinch in on a tile.
   kernel: "sharp",
-  render: { cull: "low" },
+  // (dpr: the phone tier draws at its screen's own pixel ratio, not 1.5: the table's detail is fine
+  // enough to need it; the owner's "a little bit sharper overall".)
+  render: { cull: "low", dpr: "native" },
   closeUp: { minDistance: 0.12 },
   options: [
     {
@@ -446,7 +471,9 @@ const REAL_ELEMENTS = {
     const inkPx = (list, cells, z, col, px) => {
       for (const [x, y] of cells) list.push(splat([x, y, z], col, px * 0.62, { flat: 0.2 }));
     };
+    let used = 0;
     const cloud = (list, opts = {}) => {
+      used += list.length;
       if (!list.length) return;
       k.cloud({ share: list.length / N, pattern: false, jitter: 0, ...opts }, (_r, i) => list[i] ?? null); // prettier-ignore
     };
@@ -518,11 +545,14 @@ const REAL_ELEMENTS = {
       // (At least every third pixel: finer splats vanish in the shelf picture.)
       const step = Math.max(3, Math.sqrt(have / per));
       const px = (SAMPLE_SIDE / ATLAS_CELL) * step;
-      for (const s of samplePixels(atlas, ox, oy, ATLAS_CELL, step)) {
+      // (The finer outline only where the tile's share has room for it.)
+      let picked = samplePixels(atlas, ox, oy, ATLAS_CELL, step, true);
+      if (picked.length > per * 1.1) picked = samplePixels(atlas, ox, oy, ATLAS_CELL, step);
+      for (const s of picked) {
         const x = tx + (s.u - 0.5) * SAMPLE_SIDE;
         const y = ty + SAMPLE_DY + (0.5 - s.v) * SAMPLE_SIDE;
         const zz = 0.015 + RELIEF * reliefOf(z) * SAMPLE_SIDE * s.d;
-        tileList.push(splat([x, y, zz], s.c, px * 0.85, { part: el === e ? home : 0, flat: 0.3 }));
+        tileList.push(splat([x, y, zz], s.c, px * (s.fine ? 0.5 : 0.85), { part: el === e ? home : 0, flat: 0.3 })); // prettier-ignore
       }
     }
     cloud(tileList);
@@ -532,7 +562,10 @@ const REAL_ELEMENTS = {
     if (pictureOf(e.z)) {
       const pair = RE.ready.get(e.z);
       if (pair) {
-        for (const sp of solidSample(pair, N * 0.24, lift, splat, reliefOf(e.z))) liftList.push(sp);
+        // (What the table leaves, up to 42 percent: at a small budget the tiles keep at least
+        // every third pixel.)
+        const share = Math.max(N * 0.12, Math.min(N * 0.42, N * 0.98 - used));
+        for (const sp of solidSample(pair, share, lift, splat, reliefOf(e.z))) liftList.push(sp);
       }
     } else {
       // No photo: a frosted glass slab with the symbol, so the lift still says which element.
