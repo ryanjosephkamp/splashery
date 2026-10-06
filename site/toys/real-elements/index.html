@@ -1,0 +1,1426 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Real elements · Splashery</title>
+    <meta
+      name="description"
+      content="Real elements, a Splashery toy made of 3D Gaussian splats: Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/toys/real-elements/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Real elements · Splashery" />
+    <meta
+      property="og:description"
+      content="Real elements, a Splashery toy made of 3D Gaussian splats: Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/real-elements/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/real-elements/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="Real elements, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+      <div class="labs-off" data-labs-off>
+        <p class="eyebrow">In the labs</p>
+        <h1>Real elements</h1>
+        <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
+        <p class="actions">
+          <a class="button primary" href="./?labs=1">Turn the labs on</a
+          ><a class="button" href="../../toys/">Every toy</a>
+        </p>
+      </div>
+      <article class="toy-page" data-labs>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-atoms">Atoms</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>Real elements <span class="badge">labs</span></h1>
+            <p class="lead how-to">
+              Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it
+              back.
+            </p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  The 118 elements as real samples on their tiles: open photos of the real elements
+                  cut out of their background and raised in 3D by the Photo to 3D depth model.
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>
+                  A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it
+                  sets down, a rising blip as it turns.
+                </dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJlYWwtZWxlbWVudHMifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAuMDYsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="
+                  background-image: url(&quot;../../../assets/toys/real-elements/thumb.webp&quot;);
+                "
+              ></span>
+              <iframe
+                data-src="../../play/?toy=real-elements&turntable=off"
+                title="Real elements, live: drag to turn it"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>Drag to look around it; tap to play.</figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in
+            sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D
+            by a depth model. The front is real; the depth is an estimate, and the back of a lifted
+            sample is a darker mirror of its front.
+          </p>
+          <p>
+            Tap a tile and its sample lifts out and turns toward you, with its facts from PubChem:
+            mass, group and period, state, density, melting and boiling points, discovery and uses.
+            Tap the sample to turn it, or its tile to set it back. About 27 elements have no photo
+            of a real sample, because the heaviest exist only a few atoms at a time; their tiles are
+            hatched. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.
+          </p>
+        </section>
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The toy shows each element's facts (atomic mass, group and period, state at room
+            temperature, density, melting and boiling points, discovery and one or two uses) and,
+            for 91 elements, a photo of a real sample raised in 3D. The facts are PubChem's, copied
+            by a build tool and checked against a saved copy of PubChem's table for all 118
+            elements; each use is our own short sentence backed by the words of Jefferson Lab or Los
+            Alamos National Laboratory as PubChem quotes them. The samples' fronts are real photos;
+            their depth is a depth model's estimate and their backs are invented.
+            <span class="note">Checked October 5, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> All 118 elements are in the
+                standard 18-column layout, with the right atomic numbers, symbols and names.
+              </p>
+              <p>
+                The facts table is written from PubChem's periodic table by tools/rel-facts.mjs; the
+                tile places come from the period lengths (2, 8, 8, 18, 18, 32, 32), with the
+                lanthanoids and actinoids in two rows below.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://pubchem.ncbi.nlm.nih.gov/periodic-table/"
+                    >Periodic Table of Elements</a
+                  >, PubChem (NCBI, U.S. National Library of Medicine):
+                  <q
+                    >The table of the 118 elements with their atomic numbers, symbols, names and
+                    group blocks (served as JSON at
+                    https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON).</q
+                  >
+                </li>
+                <li>
+                  <a href="https://iupac.org/what-we-do/periodic-table-of-elements/"
+                    >Periodic Table of the Elements</a
+                  >, IUPAC:
+                  <q
+                    >The standard layout of the 118 named elements; the symbols agree with the table
+                    the Periodic table toy uses (src/chem/periodic.js, from NIST and IUPAC).</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Atomic mass, state at room
+                temperature, density, melting and boiling points, year of discovery and category are
+                PubChem's values.
+              </p>
+              <p>
+                Each value is copied from PubChem's table at build time; the test compares every one
+                of them for all 118 elements with the saved snapshot (tools/rel-reference.json), and
+                ten elements' values typed in by hand from their PubChem element pages.
+              </p>
+              <p class="note">
+                Temperatures are shown in °C (K − 273.15, rounded to 0.1). A whole-number mass is
+                the mass number of the longest-lived isotope (shown in brackets). Gas densities are
+                shown per liter.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON"
+                    >PubChem periodic table (JSON)</a
+                  >, PubChem (NCBI):
+                  <q
+                    >Columns AtomicMass, StandardState, MeltingPoint (K), BoilingPoint (K), Density
+                    (g/cm³), GroupBlock and YearDiscovered for each element.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://pubchem.ncbi.nlm.nih.gov/element/26">Iron</a>, PubChem (NCBI):
+                  <q
+                    >Atomic mass 55.84; density 7.874 g/cm³; melting point 1811 K; boiling point
+                    3134 K; known since ancient times.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Each use shown is a real use of
+                the element.
+              </p>
+              <p>
+                Every use is a short sentence of our own with an exact quote from the element's
+                'Uses' section on PubChem (from Jefferson Lab's 'It's Elemental' or Los Alamos
+                National Laboratory's periodic table); the build stops if a quote is not in its
+                source, and the test checks each quote against the saved source sentence.
+              </p>
+              <p class="note">
+                A few uses the sources give are older (radium paint on dials, red phosphors in color
+                TV screens); they are worded in the past tense or as the sources say. Uses the
+                sources don't mention (neodymium magnets, for one) are left out rather than added
+                without a source.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://education.jlab.org/itselemental/">It's Elemental</a>, Jefferson
+                  Lab, U.S. Department of Energy:
+                  <q
+                    >For example, iron: 'Huge amounts of iron are used to make steel, an alloy of
+                    iron and carbon.'.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://periodic.lanl.gov/">Periodic Table of Elements</a>, Los Alamos
+                  National Laboratory, U.S. Department of Energy:
+                  <q
+                    >For example, americium: 'americium has been employed to gauge glass thickness
+                    to help create flat glass' (quoted on PubChem's element page).</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Group and period follow the
+                element's place in the table.
+              </p>
+              <p>
+                The period is the row; the group is the column of the 18-column table. Lanthanoids
+                and actinoids are shown as 'Lanthanoid' or 'Actinoid' with their period, not given a
+                group number.
+              </p>
+              <p class="note">
+                Which elements sit in group 3 (La and Ac, or Lu and Lr) is debated; the toy follows
+                the common layout and gives no group number to the f-block.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://iupac.org/what-we-do/periodic-table-of-elements/"
+                    >Periodic Table of the Elements</a
+                  >, IUPAC:
+                  <q>Groups 1 to 18 and periods 1 to 7, with the f-block shown below the table.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Each sample is a photo of the
+                real element, and elements with no such photo say why.
+              </p>
+              <p>
+                91 photos of real samples (Images of Elements, CC BY 3.0; Wikimedia Commons, public
+                domain, CC BY or CC BY-SA), each license read on its live page; 27 elements have
+                none: the sources show only illustrations (promethium, polonium, astatine, radon,
+                francium, mendelevium to lawrencium), the only photos found aren't openly licensed
+                (actinium, thorium, curium), or no visible amount has ever been made (fermium and
+                everything from rutherfordium on).
+              </p>
+              <p class="note">
+                Some samples are compounds or mixtures, said in their description: iron is a
+                fragment of an iron meteorite (about 92% iron), radium is plated on copper foil,
+                protactinium-233 sits on a support. Sodium and others are kept under oil or argon,
+                and the gases are shown glowing in sealed vials.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://images-of-elements.com/">Images of Elements</a>, Jumk.de
+                  Webprojects:
+                  <q
+                    >The images are licensed under a Creative Commons Attribution 3.0 Unported
+                    License, unless otherwise noted; pages like promethium's say 'This is only an
+                    illustration'.</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              The 3D samples are photos given depth by a depth model (Depth Anything V2 Small),
+              which judges from one photo how far away each part is: the front is the real photo,
+              the depth an estimate, and the back of a lifted sample a darker mirror of its front,
+              since no photo saw it.
+            </li>
+            <li>
+              Samples are not to scale: each fills its tile, whether it is a 6 kg sphere (neptunium)
+              or 1.7 micrograms (berkelium); the descriptions give the real sizes where the sources
+              do.
+            </li>
+            <li>
+              PubChem gives some values under special conditions: helium freezes only under pressure
+              (the toy says so), arsenic sublimes at normal pressure (the toy says so), and carbon's
+              listed melting point is for graphite under pressure.
+            </li>
+          </ul>
+        </section>
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/real-elements.js"
+              ><code>src/packs/real-elements.js</code></a
+            >.
+          </p>
+          <ul class="toy-credits">
+            <li>
+              <b>Sample photos (most elements)</b>:
+              <a href="https://images-of-elements.com/"
+                >Images of Elements: a photo of each element; credit links to each element's page</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Fluorine sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Liquid_fluorine.jpg"
+                >Liquid fluorine.jpg</a
+              >
+              by Prof B. G. Mueller,
+              <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.<span
+                class="license-notice"
+                >ShareAlike: anything made from it, including this toy's splats, keeps the same
+                license.</span
+              >
+            </li>
+            <li>
+              <b>Technetium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Technetium-sample.jpg"
+                >Technetium-sample.jpg</a
+              >
+              by Marco Cardin,
+              <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<span
+                class="license-notice"
+                >ShareAlike: anything made from it, including this toy's splats, keeps the same
+                license.</span
+              >
+            </li>
+            <li>
+              <b>Radium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Radium226.jpg">Radium226.jpg</a> by
+              grenadier, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Protactinium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Protactinium-233.jpg"
+                >Protactinium-233.jpg</a
+              >
+              by U.S. Department of Energy,
+              <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+            </li>
+            <li>
+              <b>Uranium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Depleted_Uranium.jpg"
+                >Depleted Uranium.jpg</a
+              >
+              by 范皓程, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+            </li>
+            <li>
+              <b>Neptunium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Neptunium2.jpg">Neptunium2.jpg</a> by
+              Los Alamos National Laboratory,
+              <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+            </li>
+            <li>
+              <b>Plutonium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Plutonium3.jpg">Plutonium3.jpg</a> by
+              U.S. Department of Energy,
+              <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+            </li>
+            <li>
+              <b>Americium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Americium_microscope.jpg"
+                >Americium microscope.jpg</a
+              >
+              by Bionerd, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Berkelium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Berkelium_metal.jpg"
+                >Berkelium metal.jpg</a
+              >
+              by Oak Ridge National Laboratory, U.S. Department of Energy,
+              <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+            </li>
+            <li>
+              <b>Californium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:Californium.jpg">Californium.jpg</a>
+              by U.S. Department of Energy,
+              <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+            </li>
+            <li>
+              <b>Einsteinium sample</b>:
+              <a href="https://commons.wikimedia.org/wiki/File:EinsteiniumGlow.JPG"
+                >EinsteiniumGlow.JPG</a
+              >
+              by R. G. Haire, U.S. Department of Energy,
+              <a href="https://creativecommons.org/publicdomain/mark/1.0/">Public domain</a>.
+            </li>
+            <li>
+              <b>Element facts</b>:
+              <a href="https://pubchem.ncbi.nlm.nih.gov/periodic-table/"
+                >PubChem Periodic Table of Elements and element pages (uses quoted there from
+                Jefferson Lab and Los Alamos National Laboratory, U.S. Department of Energy)</a
+              >
+              by NCBI PubChem,
+              <a href="https://www.ncbi.nlm.nih.gov/home/about/policies/"
+                >Public domain (U.S. government data)</a
+              >.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/hydrogen.php"
+                >Hydrogen: Ultrapure hydrogen gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/helium.php"
+                >Helium: Ultrapure helium gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/lithium.php"
+                >Lithium: Half a gram of lithium rods kept under argon</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/beryllium.php"
+                >Beryllium: A bead of pure beryllium, 2.5 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/boron.php"
+                >Boron: A piece of pure crystalline boron</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/carbon.php"
+                >Carbon: Ultrapure carbon as a rod of graphite</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/nitrogen.php"
+                >Nitrogen: Ultrapure nitrogen gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/oxygen.php"
+                >Oxygen: Ultrapure oxygen gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/neon.php"
+                >Neon: Ultrapure neon gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/sodium.php"
+                >Sodium: Half a gram of sodium under paraffin oil, with a white crust</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/magnesium.php"
+                >Magnesium: An ultrapure magnesium crystal</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/aluminium.php"
+                >Aluminum: A ball of pure aluminum foil</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/silicon.php"
+                >Silicon: A chunk of ultrapure silicon</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/phosphorus.php"
+                >Phosphorus: Two pieces of purple phosphorus in a glass tube</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/sulfur.php"
+                >Sulfur: A natural sulfur crystal, 5 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/chlorine.php"
+                >Chlorine: Liquid chlorine in a sealed tube under pressure</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/argon.php"
+                >Argon: Ultrapure argon gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/potassium.php"
+                >Potassium: Pearls of potassium under paraffin oil</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/calcium.php"
+                >Calcium: Half a gram of calcium pieces in a glass tube</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/scandium.php"
+                >Scandium: Ultrapure crystalline scandium, 5 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/titanium.php"
+                >Titanium: A titanium crystal bar, 87 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/vanadium.php"
+                >Vanadium: Pieces of pure vanadium with a colored oxide layer</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/chromium.php"
+                >Chromium: A piece of pure chromium, about 20 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/manganese.php"
+                >Manganese: Chips of ultrapure manganese</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/iron.php"
+                >Iron: Fragments of an iron meteorite, about 92% iron</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/cobalt.php"
+                >Cobalt: A fragment of a cobalt cathode</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/nickel.php"
+                >Nickel: A button of pure nickel, about 20 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/copper.php"
+                >Copper: A natural copper nugget, 44 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/zinc.php">Zinc: A piece of zinc, 30 grams</a>
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/gallium.php"
+                >Gallium: Ultrapure gallium, part liquid and part crystal</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/germanium.php"
+                >Germanium: A chunk of polycrystalline germanium, 12 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/arsenic.php"
+                >Arsenic: Metallic arsenic sealed under argon</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/selenium.php"
+                >Selenium: A disc of black, amorphous selenium</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/bromine.php"
+                >Bromine: Liquid bromine in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/krypton.php"
+                >Krypton: Ultrapure krypton gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/rubidium.php"
+                >Rubidium: One gram of rubidium in a sealed glass ampoule</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/strontium.php"
+                >Strontium: Strontium with a dark nitride layer, kept under oil</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/yttrium.php"
+                >Yttrium: An ultrapure yttrium crystal</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/zirconium.php"
+                >Zirconium: Two pieces of ultrapure zirconium, 2.5 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/niobium.php"
+                >Niobium: A bead of ultrapure niobium</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/molybdenum.php"
+                >Molybdenum: A crystal of pure molybdenum, about 20 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/ruthenium.php"
+                >Ruthenium: A piece of pure etched ruthenium, 1.8 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/rhodium.php"
+                >Rhodium: A bead of pure rhodium, 1 gram</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/palladium.php"
+                >Palladium: A palladium crystal, about 1 gram</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/silver.php"
+                >Silver: A piece of pure silver, about 1 gram</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/cadmium.php"
+                >Cadmium: Pieces of pure cadmium</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/indium.php"
+                >Indium: An ingot of indium, 40 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/tin.php">Tin: A blob of ultrapure tin</a> by
+              Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/antimony.php"
+                >Antimony: A piece of ultrapure metallic antimony</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/tellurium.php"
+                >Tellurium: A disc of metallic tellurium, 3.5 cm across</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/iodine.php"
+                >Iodine: Crystals of pure iodine</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/xenon.php"
+                >Xenon: Ultrapure xenon gas glowing in a sealed glass vial</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/caesium.php"
+                >Cesium: One gram of cesium in a sealed glass ampoule</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/barium.php"
+                >Barium: Barium with a gray oxide layer, under argon</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/lanthanum.php"
+                >Lanthanum: Pure lanthanum, 1.5 grams, in a glass tube</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/cerium.php"
+                >Cerium: Ultrapure cerium under argon, 1.5 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/praseodymium.php"
+                >Praseodymium: Ultrapure praseodymium pieces under argon</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/neodymium.php"
+                >Neodymium: Ultrapure neodymium under argon, 5 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/samarium.php"
+                >Samarium: Ultrapure samarium, 2 grams, in a glass tube</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/europium.php"
+                >Europium: A strongly oxidized piece of europium, 1 gram</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/gadolinium.php"
+                >Gadolinium: Ultrapure gadolinium, 12 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/terbium.php"
+                >Terbium: Pure terbium, 3 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/dysprosium.php"
+                >Dysprosium: Dendrites of ultrapure dysprosium</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/holmium.php"
+                >Holmium: Ultrapure holmium, 17 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/erbium.php"
+                >Erbium: Ultrapure erbium, 25 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/thulium.php"
+                >Thulium: Ultrapure crystalline thulium, 22 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/ytterbium.php"
+                >Ytterbium: Ultrapure ytterbium, 2 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/lutetium.php"
+                >Lutetium: A piece of ultrapure lutetium, 3 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/hafnium.php"
+                >Hafnium: Electrolytic hafnium, 22 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/tantalum.php"
+                >Tantalum: Pieces of tantalum, 20 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/tungsten.php"
+                >Tungsten: A tungsten rod with an oxidized surface, 80 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/rhenium.php"
+                >Rhenium: An arc-melted bead of pure rhenium, 21 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/osmium.php"
+                >Osmium: A bead of pure osmium, about 4 grams</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/iridium.php"
+                >Iridium: Pieces of pure iridium, 1 gram</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/platinum.php"
+                >Platinum: Two ultrapure platinum crystals</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/gold.php"
+                >Gold: Leaves of ultrapure gold, 0.5 to 1 cm long</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/mercury.php"
+                >Mercury: Six grams of liquid mercury in a dish</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/thallium.php"
+                >Thallium: Pure thallium, 8 grams, sealed under argon</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/lead.php">Lead: A bead of ultrapure lead</a>
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://images-of-elements.com/bismuth.php"
+                >Bismuth: A bismuth crystal with a thin colored oxide</a
+              >
+              by Images of Elements (Jumk.de Webprojects),
+              <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            </li>
+          </ul>
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in
+            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
+            >.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="2" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/real-elements/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=real-elements&amp;turntable=off&quot; title=&quot;Splashery: Real elements&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;real-elements&quot; turntable=&quot;off&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle. Every option is in the
+            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-atoms"
+              >The Atoms shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card">
+              <a href="../../toys/periodic-table/"
+                ><img
+                  src="../../../assets/toys/periodic-table/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Periodic table</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/atom/"
+                ><img
+                  src="../../../assets/toys/atom/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Atom</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/crystal-lattice/"
+                ><img
+                  src="../../../assets/toys/crystal-lattice/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Crystal lattice</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/orbital/"
+                ><img
+                  src="../../../assets/toys/orbital/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Electron orbital</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/molecule/"
+                ><img
+                  src="../../../assets/toys/molecule/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Molecule</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/molecule-viewer/"
+                ><img
+                  src="../../../assets/toys/molecule-viewer/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Molecule viewer <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/protein/"
+                ><img
+                  src="../../../assets/toys/protein/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Protein</span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">Credits</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Code under the MIT license; each toy's assets keep their own licenses. Built on the
+        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
+        <a href="../../../">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
