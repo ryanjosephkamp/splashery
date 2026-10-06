@@ -9,8 +9,11 @@ your own files, as an "Engine: …" PR merged first). PR title: "Phase Showcase:
 and recipes can do". Handoff file: docs/handoff/Showcase.md (create it; start it with this brief,
 word for word, under "## Brief", then keep "## State
 
-WORKING (October 6, 2026): the page, playlist, facts tool, stills tool, video tool and tests are
-written; tuning scenes at phone size, then the full checks, the clips and the videos.
+READY (October 6, 2026, about 18:20 UTC): the reel, its playlist, facts, tools and tests are done on
+a head with main (a56cd61e) merged in. `tests/shw.spec.mjs` (11 tests) and the embed 30 MB test
+pass. All six chapter clips are on Effect review page 2 (`shw-apart`, `shw-played`, `shw-real` and
+`shw-yours` marked good by the owner; `shw-science` and `shw-recipes` posted after). Next: the
+Integrator's full run, then the owner's marks on the last two clips.
 
 ## The picks
 
