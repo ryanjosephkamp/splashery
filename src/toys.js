@@ -3642,6 +3642,37 @@ export const TOYS = [
     tags: "qr code color rgb red green blue three codes multiplex channels",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
+  // ---- Pack: qr-craft (lane QR craft) ----
+  {
+    id: "qr-picture",
+    label: "Picture QR",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code picture photo halftone image art custom scan png",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-build",
+    label: "QR from real things",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code dominoes marbles tiles flip build physics chain reaction scan",
+    camera: { yaw: 0, pitch: 0.45, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "barcodes",
+    label: "Other barcodes",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "barcode code 128 ean-13 upc-a data matrix aztec check digit scanner laser",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.2 },
+  },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {
     id: "photo-3d",

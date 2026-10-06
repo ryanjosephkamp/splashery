@@ -1704,6 +1704,12 @@ export const TOY_HELP = {
     about:
       "One square holds three QR codes here: the first sets each module's red, the second its green and the third its blue. So each module is one of eight colors, from white to black.\n\nSplashery's reader splits the picture into its red, green and blue and reads each one as an ordinary code, for three times the data in the same square. An ordinary phone reader sees only gray, which comes mostly from green, so it usually reads the green code or nothing. Tap the square to pull its three codes apart and back. Type your own three texts in the Toy tab.",
   },
+  // Lane QR craft.
+  "qr-picture": {
+    howTo: "Pick a picture or open your own, then tap to turn the tiles over.",
+    about:
+      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the picture fills the rest, darkened in dark modules and lightened in light ones. The eyes, the timing lines and the format information stay plain, so a reader still finds the code.\n\nThe toy measures the contrast and reads its own code at phone size and smaller. If it won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot or a higher error correction level. Your picture never leaves your device.",
+  },
   // Lane Live input.
   "room-echo": {
     howTo:

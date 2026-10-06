@@ -2793,6 +2793,14 @@ export const TOY_SOUNDS = {
     { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.12 },
     { voice: "wood", at: 2.6, f: 660, decay: 0.15, vol: 0.12 },
   ],
+  // Lane QR craft: soft and wooden, not electronic. Tiles turning over: a
+  // run of light wooden clicks under a soft breath.
+  "qr-picture": [
+    { voice: "breath", f: 760, to: 0.9, decay: 0.9, vol: 0.08 },
+    { voice: "wood", at: 0.5, f: 940, decay: 0.08, vol: 0.1 },
+    { voice: "wood", at: 1.4, f: 880, decay: 0.08, vol: 0.09 },
+    { voice: "wood", at: 2.3, f: 980, decay: 0.08, vol: 0.08 },
+  ],
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint

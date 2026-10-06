@@ -2138,6 +2138,12 @@
       "effect": "Three QR codes in the red, green and blue of one square (eight colors). A tap pulls the square apart into its three codes, each in its own color, which slide back and out to the sides and come back together. Read all three splits the picture into its channels and reads each code; an ordinary reader's result is shown beside them.",
       "sound": "A soft breath as the codes slide apart and a light knock as they meet again."
     },
+    "qr-picture": {
+      "v": "new",
+      "owner": "The owner's Push Plan pick Q5 (\"a hard yes, or a strong yes\"), lane QR craft, October 6, 2026.",
+      "effect": "Picture QR: a photo woven into a QR code as a halftone (each module's center keeps its bit, the rest carries the picture). A tap turns every module's tile over in a wave out from the tap; its back is the plain code, and it comes round to the picture again (3.6 s). The toy measures the contrast and reads its code with jsQR at phone size and smaller; Make it scan finds the closest version that scans; Save a PNG.",
+      "sound": "A soft breath with a run of light wooden clicks as the tiles turn."
+    },
     "chladni-plate": {
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
