@@ -934,7 +934,7 @@ function buildCT(k) {
     },
   );
   // The fan beam: faint orange from the tube's focus to the arc.
-  k.cloud({ share: 0.008, jitter: 0.3, size: 0.5 }, (rand) => {
+  k.cloud({ share: 0.014, jitter: 0, size: 0.32 }, (rand) => {
     const a = -Math.PI / 2 + (rand() - 0.5) * 1.3;
     const t = rand();
     const top = [0, R - 0.14, 0];
@@ -943,7 +943,7 @@ function buildCT(k) {
       [CT.x0 + (rand() - 0.5) * 0.02, 0, 0],
       vec.add(vec.mul(top, 1 - t), vec.mul(bot, t)),
     );
-    return { p, color: "#ffb24a", opacity: 0.1 + 0.12 * rand(), part: spin, kind: "fade", params: [0.5, -0.2], channel: 1, pattern: false }; // prettier-ignore
+    return { p, color: "#ffb24a", opacity: 0.08 + 0.06 * rand(), part: spin, kind: "fade", params: [0.5, -0.2], channel: 1, pattern: false }; // prettier-ignore
   });
   // The table the shell lies on, which the ring passes over, on a column
   // past the ring's travel.
@@ -1256,7 +1256,7 @@ function buildVolume(k, V, { budget, air, color, rand = Math.random }) {
   const cx = (V.nx - 1) / 2;
   const cy = (V.ny - 1) / 2;
   const cz = (V.nz - 1) / 2;
-  const s = pitch * 0.78;
+  const s = pitch * 0.68;
   const pts = [];
   for (let z = 0; z < V.nz - 1; z += pitch)
     for (let y = 0; y < V.ny - 1; y += pitch)
@@ -1355,7 +1355,7 @@ function driveWalnut(t, c, out, info) {
   if (walnutCut.at < 0.999) {
     vol.normal = dir.normal;
     vol.at = -ext + 2 * ext * walnutCut.at;
-    vol.glow = [0.1, 0.07, 0.02];
+    vol.glow = [0.05, 0.035, 0.01];
     vol.glowWidth = 0.6 * data.mm * data.pitch;
   }
   out.volume = vol;
@@ -1462,7 +1462,7 @@ function buildMRI(k, fruit, vision = "gray") {
       }
   }
   const n = pts.length / 4;
-  const s = q * 0.75;
+  const s = q * 0.68;
   k.cloud({ count: n * (160000 / k.count), jitter: 0 }, (r, i) => {
     if (i >= n) return null;
     const g = pts[i * 4 + 3];
@@ -1835,7 +1835,7 @@ function buildSEM(k, name, vision = "gray") {
   for (const part of spec.parts) {
     // (Smaller splats than before, twice as many: the owner asked for it sharper.)
     k.cloud(
-      { share: part.share * 0.97, jitter: 0.2, flat: 0.2, size: (part.size ?? 0.75) * 0.8 },
+      { share: part.share * 0.97, jitter: 0.2, flat: 0.2, size: (part.size ?? 0.75) * 0.72 },
       (rand) => {
         const s = part.sample(rand);
         if (!s) return null;
@@ -1886,7 +1886,12 @@ const GLASS = { x: 0.55, z: -0.5, r: 0.26, h: 0.72, level: 0.55 };
 
 // The scene in one look: "visible" or a tea temperature for the thermal
 // copies. fade gives each copy's fade (channel and direction).
-function thermalScene(k, look, fade) {
+function thermalScene(k, look, fade, only = "all") {
+  // Only the mug changes as the tea cools, so the cooling copies hold just
+  // the mug ("mug") and one thermal copy holds the rest ("rest"): each view
+  // keeps most of the splat budget (the owner's sharpness round).
+  const add = (group, shape, opts) =>
+    only === "all" || only === group ? k.add(shape, opts) : null;
   const thermal = look !== "visible";
   const Tt = thermal ? look : 0;
   const o = { even: true, flat: 0.2, jitter: thermal ? 0.01 : 0.012, pattern: false, kind: "fade", params: fade.params, channel: fade.channel, share: undefined }; // prettier-ignore
@@ -1895,7 +1900,7 @@ function thermalScene(k, look, fade) {
   const T2 = (T, c) => ironColor(T + 0.6 * noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 14));
   // The table: the room's temperature, warmed under the mug and the
   // warmer, chilled under the glass.
-  k.add(evenBox(3.0, 0.08, 1.9), {
+  add("rest", evenBox(3.0, 0.08, 1.9), {
     ...o,
     pos: [0, -0.04, 0],
     weight: 0.6,
@@ -1912,25 +1917,25 @@ function thermalScene(k, look, fade) {
   // The mug: its wall warm from the tea, warmest at the tea's level; the
   // handle cooler.
   const mugT = (y) => TH.room + (Tt - TH.room) * (0.55 + 0.3 * smoothstep(0, MUG.level, y));
-  k.add(evenCylinder(MUG.r, MUG.r, MUG.h, false), {
+  add("mug", evenCylinder(MUG.r, MUG.r, MUG.h, false), {
     ...o,
     pos: [MUG.x, MUG.h / 2, MUG.z],
     color: (c) => (thermal ? T2(mugT(c.p[1]), c) : lit("#2f6e8e", c.n, 0.45)),
   });
-  k.add(evenCylinder(MUG.r - 0.035, MUG.r - 0.035, MUG.h - MUG.level, false), {
+  add("mug", evenCylinder(MUG.r - 0.035, MUG.r - 0.035, MUG.h - MUG.level, false), {
     ...o,
     pos: [MUG.x, (MUG.h + MUG.level) / 2, MUG.z],
     weight: 0.7,
     color: (c) => (thermal ? T2(mugT(MUG.level) + 2, c) : lit("#e9e4da", vec.mul(c.n, -1), 0.3)),
   });
-  k.add(k.torus(MUG.r - 0.017, 0.018), {
+  add("mug", k.torus(MUG.r - 0.017, 0.018), {
     ...o,
     pos: [MUG.x, MUG.h, MUG.z],
     weight: 5,
     color: (c) => (thermal ? T2(mugT(MUG.level) - 2, c) : lit("#3a7fa1", c.n, 0.5)),
   });
   // The tea's surface: hottest at the middle.
-  k.add(k.disc(MUG.r - 0.035), {
+  add("mug", k.disc(MUG.r - 0.035), {
     ...o,
     pos: [MUG.x, MUG.level, MUG.z],
     weight: 1.6,
@@ -1940,7 +1945,8 @@ function thermalScene(k, look, fade) {
       return T2(Tt - 3 * r * r, c);
     },
   });
-  k.add(
+  add(
+    "mug",
     k.tube((t) => {
       const a = -Math.PI / 2 + Math.PI * t;
       return [MUG.x - MUG.r - 0.16 * Math.cos(a), 0.45 - 0.22 * Math.sin(a), MUG.z];
@@ -1953,7 +1959,7 @@ function thermalScene(k, look, fade) {
   );
   // A hand warmer: a fabric pouch of iron powder, warm throughout, a little
   // lumpy.
-  k.add(evenRoundBox(0.72, 0.13, 0.52, 0.06), {
+  add("rest", evenRoundBox(0.72, 0.13, 0.52, 0.06), {
     ...o,
     pos: [WARM.x, 0.065, WARM.z],
     rot: [0, -18, 0],
@@ -1967,13 +1973,13 @@ function thermalScene(k, look, fade) {
     },
   });
   // A glass of ice water: cold.
-  k.add(evenCylinder(GLASS.r, GLASS.r * 0.9, GLASS.h, false), {
+  add("rest", evenCylinder(GLASS.r, GLASS.r * 0.9, GLASS.h, false), {
     ...o,
     pos: [GLASS.x, GLASS.h / 2, GLASS.z],
     opacity: thermal ? 0.95 : 0.35,
     color: (c) => (thermal ? T2(TH.water + 6 * smoothstep(GLASS.level, GLASS.h, c.p[1]), c) : lit("#d8eef5", c.n, 0.7)), // prettier-ignore
   });
-  k.add(k.disc(GLASS.r * 0.97), {
+  add("rest", k.disc(GLASS.r * 0.97), {
     ...o,
     pos: [GLASS.x, GLASS.level, GLASS.z],
     color: (c) => (thermal ? T2(TH.water, c) : mix("#bfe3ef", "#e8f6fa", 0.5 + 0.5 * noise(c.p[0] * 9, c.p[2] * 9, 0))), // prettier-ignore
@@ -1983,7 +1989,7 @@ function thermalScene(k, look, fade) {
     [0.09, -0.04, -35],
     [0.0, -0.1, 60],
   ])
-    k.add(evenRoundBox(0.12, 0.1, 0.12, 0.02), {
+    add("rest", evenRoundBox(0.12, 0.1, 0.12, 0.02), {
       ...o,
       pos: [GLASS.x + dx, GLASS.level + 0.02, GLASS.z + dz],
       rot: [8, a, 5],
@@ -1993,10 +1999,12 @@ function thermalScene(k, look, fade) {
 }
 
 function buildThermal(k) {
-  // The camera's view (visible light) fades out on channel 0; the thermal
-  // copies (hot, warm, cooled tea) fade in on channels 1, 2 and 3.
+  // The camera's view (visible light) fades out on channel 0 as the thermal
+  // view of everything but the mug fades in; the mug's thermal copies (hot,
+  // warm, cooled tea) fade in on channels 1, 2 and 3.
   thermalScene(k, "visible", { channel: 0, params: [0, 0.99] });
-  TH.tea.forEach((T, i) => thermalScene(k, T, { channel: i + 1, params: [0, -0.99] }));
+  thermalScene(k, TH.tea[1], { channel: 0, params: [0, -0.99] }, "rest");
+  TH.tea.forEach((T, i) => thermalScene(k, T, { channel: i + 1, params: [0, -0.99] }, "mug"));
   // Steam over the tea while it is hot.
   k.cloud({ share: 0.01, jitter: 0.4, size: 1.4 }, (rand) => {
     const a = rand() * 2 * Math.PI;
