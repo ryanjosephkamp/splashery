@@ -26,8 +26,7 @@ size and real tilt), stars within 1,600 light-years 19.4 (HYG v4.4), within 65 l
 (Gaia), the Sun alone 16, the planets' orbits 13.3 and 11.9 (JPL elements), the Earth and Moon 9,
 the Earth 7.1 (Blue Marble), the Chesapeake 6, Washington 4.6, the Mall 3.3, the Haupt Garden 2
 (D.C.'s 8 cm aerial), the garden bed 0.6 (3D capture), plant cells −4 and a chloroplast −5.6
-(Wellcome, CC BY), the ribosome −7.4 (EMD-48329). Total new files: 5.2 MB, loaded a few at a
-time.
+(Wellcome, CC BY), the ribosome −7.4 (EMD-48329). Total new files: 5.2 MB, loaded a few at a time.
 
 ## Notes", "## Known issues" and "##
 
