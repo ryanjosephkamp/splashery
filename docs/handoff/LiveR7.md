@@ -103,8 +103,9 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 
 October 5, 2026, 17:00 UTC (Opus 5.5): **the polish round** (the Operator's brief of 15:40 UTC: the
 owner's "the toys could still be sharper"), on `claude/lane-live-r7-polish` (from the lane's head;
-#263 and #284 are frozen for the Integrator's run). No PR yet: it opens as "Phase Live r7 polish: …"
-once #263 merges and main is merged in. No engine change was needed. Hourly check-ins stopped.
+#263 and #284 are frozen for the Integrator's run). #263 merged through the Operator (#332, October
+6); the polish round is draft PR #333, with main merged in. No engine change was needed. Hourly
+check-ins stopped.
 
 - **Chladni plate** (`lv7-chladni-plate-r3`): the labs' sharp kernel, so each grain is a crisp
   speck. The plate's rim and sides are fine strips of small discs, so its edge is straight and clean
