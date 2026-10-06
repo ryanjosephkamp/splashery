@@ -60,12 +60,12 @@ Proposals below are suggestions; the owner may change them.
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
-  Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to
-  3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI
-  of a fruit, Electron microscope, Thermal camera, Screen.
+  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
+  Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
+  code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
+  Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
+  box, Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works,
+  Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2891,6 +2891,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
     page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
     pauses a video.
+  - Improved: Pages r6 (October 5, 2026): Pop out (the top bar's switch) and Draw a box, as in Your
+    book, for a PDF or a picture: a tap raises a figure (a picture in the PDF, or the whole photo),
+    a drawn box raises anything else, a tap on a risen one lays it back, and a page step waits until
+    they have laid back. A drag on a risen figure tilts the view, and a Depth slider sets its
+    relief.
   - Sound: A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound
     as a fallback.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
@@ -2922,7 +2927,13 @@ Proposals below are suggestions; the owner may change them.
     turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page;
     a photo rises with its depth from the on-device depth model, a chart or diagram as a card with
     its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift
-    it out. A tap lays it back (0.7 s).
+    it out. A tap lays it back (0.7 s). Pages r6 (October 5, 2026, labs): Pop out is one switch for
+    every page toy, in the top bar; with it on nothing rises by itself: a tap raises a figure, a tap
+    on another raises that one too (up to three at once), a tap on a risen one lays it back, and a
+    page turn (tap or drag) lays them all back quickly first. While figures stand up, a drag on one
+    (or off the pages) tilts the book to see them from the side; the view comes back level when they
+    lie down. A Depth slider sets a risen figure's relief, up to five times its own, and the depth
+    is kept in the scene and in embeds. A page pulled over plays its page sound once.
   - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback
     (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C,
     October 2, 2026).
@@ -2941,7 +2952,14 @@ Proposals below are suggestions; the owner may change them.
     Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop
     out lifts the photo on the page in view out of its corners toward you as one solid piece, with
     its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on
-    the other photo of a page lifts that one instead, and a tap lays it back.
+    the other photo of a page lifts that one instead, and a tap lays it back. Pages r6 (October 5,
+    2026, labs): Pop out is one switch for every page toy, in the top bar; with it on nothing rises
+    by itself: a tap raises a photo, a tap on another raises that one too (up to three at once), a
+    tap on a risen one lays it back, and a page turn (tap or drag) lays them all back quickly first.
+    While photos stand up, a drag on one (or off the pages) tilts the album to see them from the
+    side; the view comes back level when they lie down. A Depth slider sets a risen photo's relief,
+    up to five times its own, and the depth is kept in the scene and in embeds. A page pulled over
+    plays its page sound once.
   - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
