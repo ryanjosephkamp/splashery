@@ -106,6 +106,7 @@ export class ChunkHost {
     const T = this.transform;
     const s0 = T.scale ?? 1;
     const c = T.center || [0, 0, 0];
+    let shown = "";
     for (const [id, it] of this.items) {
       if (!it.slot) continue;
       const o = out?.chunks?.[id];
@@ -115,11 +116,17 @@ export class ChunkHost {
       const e = it.slot.entity;
       if (e.enabled !== on) e.enabled = on;
       if (!on) continue;
+      shown += `${id},`;
       const off = o.offset || [0, 0, 0];
       // Recipe coordinates to the toy's: (p * scale + offset - center) * fit.
       e.setLocalScale(s0 * sc, s0 * sc, s0 * sc);
       e.setLocalPosition(s0 * (off[0] - c[0]), s0 * (off[1] - c[1]), s0 * (off[2] - c[2]));
       e.gsplat.setParameter("uSpMorph", [fade, fade, fade, fade]);
+    }
+    // The status line counts the chunks on show: it hears when they change.
+    if (shown !== this.shown) {
+      this.shown = shown;
+      this.player.emit("chunks", shown);
     }
   }
 
