@@ -1598,9 +1598,10 @@ export const TOY_HELP = {
       "Word vectors turn each word into a list of numbers, a point in a space with many directions, so that words used in similar ways land near each other. These have 50 numbers per word, learned from a huge amount of text. Directions in the space can carry meaning: the step from man to woman is much like the step from king to queen.\n\nTap it: an arrow runs out to KING, the step from MAN to WOMAN is added on from there, and it lands right next to QUEEN, which lights up. Type your own A − B + C in the Toy tab, with any of 24,000 common words, and it finds the nearest of the 10,000 most common words, with the runner-up in gray. A text file containing A − B + C works too. These relationships are approximate and can reflect biases in the training text.",
   },
   "sorting-machine": {
-    howTo: "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
+    howTo:
+      "Tap it to sort the bars. Pick one of eight ways to sort, and how to watch it, in the Toy tab.",
     about:
-      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. There are many: bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars of different heights sort themselves, each bar gliding to its new place, while a counter counts the swaps, or moves for merge sort; then they shuffle back. Pick one of eight algorithms in the Toy tab, from bubble sort to heap sort, and watch how differently they work.",
+      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. Bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars sort themselves, each gliding to its new place, while a counter counts the swaps, or moves for merge sort; then they shuffle back. Pick one of eight algorithms in the Toy tab. Listen too: each comparison plays the two bars' notes softly, each swap the moving bar's note, every algorithm on its own instrument, so you hear how it works. The View option shows the same steps as crates of different sizes, a ring of colored pucks that sorts into a color wheel, or the classic dots. The steps come from each algorithm's real code, checked step by step against separate reference code.",
   },
   "half-adder": {
     howTo: "Tap it to add 1 + 1 in binary: the answer is 10.",
@@ -1621,9 +1622,9 @@ export const TOY_HELP = {
   },
   "enigma-machine": {
     howTo:
-      "Tap the keys or type to code letters. Tap the machine to decode. Tap the pad to clear it.",
+      "Tap the keys or type to code letters; tap the machine to decode. Set the rotors in the Toy tab.",
     about:
-      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors, including an occasional double step, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad under yours. Tap the machine off the keys: the coded letters, typed from the same start, give your message back. With nothing typed, it types the stored message (HELLO, or yours from the Toy tab). Tap the pad for a clean sheet. The real machine had no delete key: tap the rotors, or press Backspace, to turn them back a letter. On a keyboard, hold Shift for P and R. Its rotors and reflector have the historical wirings.",
+      "The Enigma was a cipher machine German forces used to keep radio messages secret in World War II. Each key press steps the rotors, including an occasional double step, and a current runs through the plugboard, three wired rotors and a reflector, lighting a different letter. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the rotors step (with the middle rotor's real double step) and the coded letter lights and goes on the pad. Tap the machine off the keys to decode, or to type the stored message. Tap the pad for a clean sheet; tap the rotors, or press Backspace, to take a letter back. On a keyboard, hold Shift for P and R. Set it in the Toy tab as from a key sheet: three of five rotors, reflector B or C, rings, start letters and up to ten plugboard pairs, shown on the pad. Or pick Barbarossa, 1941, and decode a real German Army message with its published key.",
   },
   bombe: {
     howTo: "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
@@ -1821,6 +1822,22 @@ export const TOY_HELP = {
       "Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2 simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4 billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't Gaussian), colored by temperature or density; tap to keep only the cold gas.\n\nThrough a telescope (simulated) shows what an observer might record if the galaxy were 160 million light-years away: its star particles, bluer and brighter when young, blurred by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a filter; each tap starts a new exposure whose grainy photon noise smooths out as light builds up. The colors use a rough rule for how starlight fades with age, so it is a picture to explore, not a measurement.",
   },
 
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  "ripple-tank": {
+    howTo:
+      "Tap the water to drop a pebble. Pick a setup and slide the frequency and speed in the Toy tab.",
+    about:
+      "A ripple tank shows how waves spread, bend round edges and add up. This one solves the real two-dimensional wave equation on a grid of 216 × 216 cells (finite differences, with a time step small enough to stay stable), drawn as a fine surface of splats lifted by the water's height and lit so the crests catch the light. Sloping beaches at the edges soak the waves up, as in a real tank.\n\nThrough two slits, the waves add where their paths differ by whole wavelengths, so bright lines fan out at the angles d·sin θ = m·λ gives; the dotted lines mark them. Through one slit, the beam spreads wider as the slit gets narrower. The bars on the back wall show how strong the waves are along the far side. The numbers are in the Toy tab.\n\nWhat it simplifies: real ripples on shallow water change speed a little with their wavelength; here every wavelength moves at the speed you set. The heights are exaggerated and the motion is four times slower than real.",
+  },
+
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  "light-bench": {
+    howTo:
+      "Drag a part to move it; turn it by its yellow knob. Tap to change the light. Numbers in the Toy tab.",
+    about:
+      "An optical bench: light traced as rays through real glass. At every surface a ray bends by Snell's law, n₁ sin θ₁ = n₂ sin θ₂, or reflects, from a mirror or totally inside glass past the critical angle. Lenses have real spherical faces, so their edges focus a little off their middles, as real lenses do.\n\nThe glass is Schott N-BK7 (a crown glass) and N-SF11 (a dense flint), with their published Sellmeier formulas for how the index changes with wavelength. Glass bends blue more than red, so the prism fans white light into its colors. The light guide traps light by total internal reflection until a bend is too tight.\n\nThe Toy tab shows the angles, the lensmaker's focal length, the image distance from 1/f = 1/d_o + 1/d_i beside where the traced rays cross, and the prism's deviation for each color.\n\nWhat it simplifies: the bench is flat, white light is nine wavelengths, and the weak reflections at glass surfaces are left out.",
+  },
+
   // ---- Imaging (lane Imaging) -----------------------------------------------------------
   "airport-xray": {
     howTo: "Tap to send the next bag through the scanner and watch its X-ray picture build.",
@@ -1867,6 +1884,86 @@ export const TOY_HELP = {
       "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
     about:
       "The liquids move as particles. Smoke and steam can use particles or a grid, depending on the rendering path. For the liquids, the computer keeps every particle from crowding its neighbors, so the crowd keeps its volume the way water does, and evens out their speeds to make them thick: a little for water, a lot for honey and lava. Where the flow is fast and breaks up, it throws off drops, foam and, for soda, rising bubbles. Smoke and steam rise, swirl, spread and fade. The flame rises and fades through blue, yellow, orange and dull red.\n\nPick a Scene: pour into a glass (the third tap empties it first), splash into a basin, blow out a candle, or blow across a hot cup. Pick a Liquid to see how thickness changes a pour. This is graphics physics: it moves believably, but it is not a validated scientific simulation.\n\nThis lab runs best on a computer. On a phone, choose Auto detail.",
+  },
+
+  // ---- Arcade (lane Arcade) ------------------------------------------------------------
+  shardball: {
+    howTo:
+      "Tap or press Space to play. Steer with the mouse, a finger or the arrow keys; press 3D for the 3D view.",
+    about:
+      "A ball, a paddle and a wall of bricks. Keep the ball in play and break every brick: where it meets the paddle sets its angle, glazed bricks break at one hit and stone bricks crack first and break at the second. Each brick that breaks falls apart into real pieces that tumble, bounce and fade.\n\nThe 3D button (or V) slides the game into 3D and back. Flat board tips the same board back into a table you look along, and play goes on. Dome takes the paddle down to the bottom of an invisible sphere and spreads the bricks over a dome around and above it; the ball then bounces in three dimensions, with a gentle pull down toward the paddle, and its shadow shows where it will land. Pick a Style and a starting Level in the Toy tab. ⛶ Play fills the whole page; P pauses, R starts again, Esc leaves. The best score stays on this device.",
+  },
+
+  longtail: {
+    howTo:
+      "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+    about:
+      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. Arrow keys, a swipe or the pad turn it toward that side of the screen.\n\nThe tiles are a world you can fold. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube you steer around. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
+  },
+  "grain-garden": {
+    howTo:
+      "Pick sand, water, oil, fire, seeds or stone, then hold and move to pour. Press 3D to tip the box.",
+    about:
+      "Every grain here is one splat, moved by a simple rule sixty times a second. Sand falls and slides off a pile at a slant. Water and oil fall and spread sideways to find their level; oil is lighter, so water sinks under it. Fire flickers upward and dies down to smoke, lighting oil, plants and seeds, and water puts it out. A seed resting by water sprouts a plant that grows up toward the light and sometimes flowers. Stone stays where it is put, for ledges and bowls; Erase clears.\n\nThe box has depth. In 2D you see it face on and pour through its whole depth; the 3D button tips it round so the grains show in 3D, still running by the same rules (Q and E turn it).",
+  },
+  "page-breaker": {
+    howTo:
+      "Open a PDF or a photo in the Toy tab, then tap to play. Steer the paddle; break every word.",
+    about:
+      "Shardball with your own page. Every word on the page (found from its ink) becomes a brick, and so does each piece of its pictures; a photo is cut into tiles. Each brick is made of that piece of the page, splat by splat, so a word that breaks falls apart into pieces of its letters. Each page of a PDF is the next level.\n\nOpen a file in the Toy tab, or play the sample article or photo. The file is read on this device and never leaves it. Flat board and Dome work as in Shardball: the 3D button tips the page back, or spreads its words over a dome.",
+  },
+
+  strata: {
+    howTo:
+      "Tap or press Space to play. Arrows move the falling stone, X turns it, Q and E tip it, Space drops it.",
+    about:
+      "Stones of our own shapes fall down a square well: a tripod, two screws, a plus, a slab and more, most of them shapes that only work in 3D. Move each one across the well and turn it as it falls; when a whole layer of the well is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more layers at once, the more points; every four layers the stones fall faster.\n\n3D looks down into the well from above its rim; 2D is the side view, straight in from the front. Pick a Well in the Toy tab: deep, wide, or a flat slot one stone deep that plays like a flat game. P pauses, R starts again.",
+  },
+  "volley-table": {
+    howTo:
+      "Tap or press Space to serve. Steer your paddle with the mouse, a finger or the arrow keys.",
+    about:
+      "A rally on a felt table against the computer. Where the ball meets your paddle sets its angle, and a paddle moving as it hits puts spin on the ball, so it curves on its way. A ball that gets past a paddle is a point; first to seven wins. The 3D button tilts the table toward you, with the camera low behind your paddle, and the rally goes on. Set how quick the computer is in the Toy tab.",
+  },
+  "stone-belt": {
+    howTo:
+      "Tap or press Space to play. ← → turn, ↑ thrusts, Space fires. On a phone, hold a finger where to go.",
+    about:
+      "The rocks here are the real shapes of seven asteroids, Bennu, Itokawa, Eros, Kleopatra, Geographos, Toutatis and Golevka, from NASA's public-domain models. They drift and tumble across a field that wraps round at its edges. A shot splits a big rock into two smaller ones and a small one into dust, with chips flying off each time; a rock that hits your ship costs a ship. The 3D button drops the camera in behind your ship, so the rocks show their real shapes as they tumble past.",
+  },
+
+  "soft-landing": {
+    howTo:
+      "Tap or press Space to play. ← → tip the lander, ↑ or Space fires. Land slowly and upright on level ground.",
+    about:
+      "The ground here is real. On the Moon it comes from the laser altimeter and camera of NASA's Lunar Reconnaissance Orbiter (the CGI Moon Kit): Tycho crater, Copernicus crater and the Sea of Tranquility, where Apollo 11 landed. On Mars it comes from Mars Global Surveyor's laser altimeter: Gale crater, Jezero crater, Valles Marineris and Olympus Mons, colored by height. Heights are drawn taller than life so the shapes read; the site's card says how much.\n\nGravity pulls the lander down and the engine pushes it the way it points. Touch down slowly, upright and on level ground (the green lights mark flat spots) to score, with more for fuel left; land badly and it breaks apart. 2D is a true slice through the ground; the 3D button lifts the camera to show the whole patch of terrain around the slice, and the flight goes on.",
+  },
+
+  "night-owl-pinball": {
+    howTo:
+      "Hold Space to pull the plunger, let go to launch. ← → work the flippers; on a phone, hold either side.",
+    about:
+      "A pinball table whose steel ball is moved by Splashery's own physics engine, the same one the Hands-on switch uses. The ball rolls down the sloped table under gravity, bounces off the rails and posts as hard as they give back, and the flippers are solid paddles: a flipper swinging as it meets the ball hits it harder than a still one. The three pop bumpers kick the ball away and light up, 100 points each. Keep the ball out of the drain between the flippers; you have three balls. The 3D button moves the view from straight above to the player's end of the table, looking up the slope.",
+  },
+
+  "cast-a-shadow": {
+    howTo:
+      "Drag or use the arrow keys to turn the block until its shadow fills the outline. Q and E roll it.",
+    about:
+      "A carved block hangs between a lamp and a wall, and every piece of it casts its own small shadow. Each block is carved so that from one way its shadow is a picture, a heart, a fish, a key, a house, a star, a tree or a bird, and from the side it is another; from most turns it is a jumble. Turn it until its shadow fills the outline drawn on the wall; the Match chip says how close you are. In 2D you see only the wall, as if you stood at the lamp, and turn the block by its shadow alone; the 3D button steps to the side so the lamp and the block show.",
+  },
+
+  "photo-dash": {
+    howTo: "Tap or press Space to jump. Open your own photo in the Toy tab to run across it.",
+    about:
+      "Your photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track. A glass marble rolls along it by itself, a little faster each lap; tap or press Space to jump the gaps, and catch the sparks on the way. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
+  },
+
+  "note-rider": {
+    howTo:
+      "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+    about:
+      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open a MIDI file of your own. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------
@@ -2144,19 +2241,20 @@ export const TOY_HELP = {
       "A relief map shows the shape of the land. Contour lines join points of the same height: here one every 100 meters, with a heavier line every 500, so lines close together mean a steep slope. This is Yosemite Valley in California, about 18 by 11 kilometers, with El Capitan and Half Dome rising more than 1,000 meters above the Merced River.\n\nThe heights come from the U.S. Geological Survey's 3D Elevation Program, and the streams from the National Hydrography Dataset. In the Toy tab, Map switches between height colors, the aerial photo and land cover (forest, meadow, bare rock and buildings, from the National Land Cover Database), and the switches turn the contour lines and streams on and off. Tap it and a glowing contour climbs from the valley floor to the rim while light runs down every stream, the way the water flows.",
   },
   "living-city": {
-    howTo: "Tap for night (the windows light up one by one); tap again for day.",
+    howTo: "Tap for night (the street lamps and windows come on); tap again for day.",
     about:
-      "A city made of blocks: streets with traffic going round the blocks, a park, and an elevated train looping around the edge. The buildings are taller toward the center, as in many downtowns. It is built from simple pieces rather than a real place.\n\nTap it and the sun goes down: walls and streets darken and the windows light up one at a time, while the cars and the train keep moving. Tap again for morning.",
+      "A real block of central Helsinki, Finland, from the city's own 3D model, made in 2017 from thousands of aerial photographs. The white Cathedral stands above Senate Square at the top; below are the Market Square and the South Harbor, with its sea pool, and the red-brick Uspenski Cathedral on its rock at the right edge. The block is about 550 meters across.\n\nTap it and the sun goes down: the city darkens under a blue sky as the street lamps and windows come on one by one, each lamp lighting a pool of the street. Tap again for morning. The City of Helsinki shares the model under the CC BY 4.0 license.",
   },
+
   "stork-migration": {
     howTo: "Tap to play the storks' fall migration from Germany to Africa.",
     about:
-      "White storks fly thousands of kilometers each fall from Europe to Africa, and back in spring. They soar on rising warm air and avoid long sea crossings, so storks from eastern Germany go round the Mediterranean by the Bosporus, Turkey, Israel and the Nile valley.\n\nThese are 30 real storks, juveniles and adults, tracked by GPS in 2013 by S. Rotics and colleagues and published on Movebank under a CC0 license, one position every six hours. Tap it to play July to October in about 12 seconds: each stork leaves its nest when it really did and draws its own trail behind it. Then the season rewinds, and the storks fly their tracks back to their nests. The map's heights come from NOAA's ETOPO1, stretched up 45 times.",
+      "White storks fly thousands of kilometers each fall from Europe to Africa, and back in spring. They soar on rising warm air and avoid long sea crossings, so storks from eastern Germany go round the Mediterranean by the Bosporus, Turkey, Israel and the Nile valley.\n\nThese are 30 real storks, juveniles and adults, tracked by GPS in 2013 by S. Rotics and colleagues and published on Movebank under a CC0 license, one position every six hours. Tap it to play July to October in about 12 seconds: each stork leaves its nest when it really did and draws its own trail behind it. Then the season rewinds, and the storks fly their tracks back to their nests. The map is NASA's Blue Marble picture of the Earth's true colors, on heights from NOAA's ETOPO1 stretched up 45 times.",
   },
   earthquakes: {
     howTo: "Tap to play the quakes in time order. Tap the plaque to refresh the live feed.",
     about:
-      "Every day the U.S. Geological Survey publishes the earthquakes it has located around the world. This globe reads its feed when the toy opens: each dot is a quake, bigger for a stronger one, colored by depth (red and orange shallow, yellow and green deeper, blue deepest). Most lie along the edges of tectonic plates, such as the Pacific's Ring of Fire facing you.\n\nTap the globe to play the quakes in time order: each flashes at its moment. Tap the plaque to fetch the feed again; it shows when the data was fetched. Pick the past week, the past month or a year of the catalog in the Toy tab. If the feed can't be reached, the toy shows a saved snapshot and says so. Nothing is stored or sent.",
+      "Every day the U.S. Geological Survey publishes the earthquakes it has located around the world. This globe, in the true colors of NASA's Blue Marble pictures, reads its feed when the toy opens: each dot is a quake, bigger for a stronger one, colored by depth (red and orange shallow, yellow and green deeper, blue deepest). Most lie along the edges of tectonic plates, such as the Pacific's Ring of Fire facing you.\n\nTap the globe to play the quakes in time order: each flashes at its moment. Tap the plaque to fetch the feed again; it shows when the data was fetched. Pick the past week, the past month or a year of the catalog in the Toy tab. If the feed can't be reached, the toy shows a saved snapshot and says so. Nothing is stored or sent.",
   },
 
   // Lane Night sky.

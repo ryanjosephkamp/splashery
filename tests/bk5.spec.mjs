@@ -188,7 +188,7 @@ test.describe("links and pop-out (no browser)", () => {
     expect(POP.phase).toBe("up");
     // It came toward the reader (z up about 0.3) and grew.
     expect(Math.max(...seen)).toBeGreaterThan(0.25);
-    expect(b.out.parts.bk5pop0.scale).toBeGreaterThan(1);
+    expect(b.out.parts.bk5pop0.scale * BOOKS_R5.POP_DETAIL).toBeGreaterThan(1);
     // A tap on the risen figure lays it back (lane Pages r6), and it goes.
     const F = BOOKS_R5.POP;
     const out = b.tap([F.at.cx, F.at.cy, 0.3]);
