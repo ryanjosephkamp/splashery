@@ -75,10 +75,18 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   money; and anything made from it keeps its license. Never merge an NC asset and a BY-SA asset into
   one asset (side by side in a scene is fine). Check the license on the live source page. Record it
   in `CREDITS.md`, in `tools/assets.json` or `tools/models.json`, and in the toy's in-app credit.
-  One exception (the owner's call of September 30, 2026): the Wikipedia book fetches an article live
-  from Wikipedia's REST API when the reader asks for it (CC BY-SA text). It is never stored in the
-  repo, shipped with the site or saved in a scene, and the article's credit and license show beside
-  it.
+  NASA 3D Resources models are allowed too, under NASA's media guidelines (the owner's call of
+  October 6, 2026): take any NASA insignia off the model and credit its source page. One exception
+  (the owner's call of September 30, 2026): the Wikipedia book fetches an article live from
+  Wikipedia's REST API when the reader asks for it (CC BY-SA text). It is never stored in the repo,
+  shipped with the site or saved in a scene, and the article's credit and license show beside it.
+- AI-made samples (the owner's calls of October 5, 2026, Push Plan AI1 to AI5): pictures and video
+  the owner makes with his own AI image or video plan may ship as Studio samples (Photo to 3D, Video
+  to 3D, Moving photo to 3D), labeled as AI-made beside them, with no people, logos or text, and
+  never presented as real captures or real places. Record each in `CREDITS.md` and
+  `tools/assets.json` as AI-made by the owner. AI-made pictures and video are never used for
+  science, math or engineering toys, the photoreal shelves, or landmarks shown as real; those keep
+  real data and real captures.
 - Photoreal captures under licenses the site can't use (ND, no license) may be viewed privately, on
   a private page, for comparison (the owner's call of October 2, 2026). They never go into the repo
   or the site.

@@ -7,41 +7,7 @@ October push. Repo: ryanjosephkamp/splashery. Your lane: Computing r2 (id `Compu
 `cmp2`). Branch: `claude/lane-computing-r2` (engine PR, if needed, on
 `claude/lane-computing-r2-engine`). PR title: "Phase Computing r2: sorting you can hear and see, and
 an Enigma you can set". Handoff file: docs/handoff/ComputingR2.md (create it; start it with this
-brief, word for word, under "## Brief", then keep "## State
-
-- Engine PR #289 ("Engine: a shown text option is a text box in the Toy tab"), draft, on
-  `claude/lane-computing-r2-engine`: a kit toy's `type: "text"` option without `hidden: true` shows
-  as a text box (for the Enigma's plugboard). Merged into the lane branch; it must merge first. Its
-  test runs on the Bombe (whose options stay fixed).
-- Lane PR #290, draft. Sorting machine and Enigma done; proof in `tests/cmp2-sort.spec.mjs` (6
-  passed) and `tests/cmp2-enigma.spec.mjs` (8 passed); `tests/cmp2-shots.spec.mjs` (5 passed:
-  screenshots and the Enigma's setting typed in the Toy tab).
-- Run on October 5, 2026: ai, mca, unit and cmp2 specs, 102 passed (the one failure, the engine test
-  on this branch, is fixed and passes). The full suite is for the Integrator.
-- Clips: 13 posted on Effect review page 2 (lane record `ComputingR2`, cards `cmp2-*`), the eight
-  algorithms' sounds in the bars view, the crates, ring and dots views, the Barbarossa decode and a
-  setting of one's own. The owner marked 12 good (October 5, 2026); the Enigma setting clip came
-  back "Cool. Please make wheels sharper": the rotors' rings, letters, thumb wheels and end wheels
-  now carry more, finer splats, and the rotor plates (hidden under the lampboard, a bug of mine) now
-  show; posted as `cmp2-enigma-own-r2`. Main merged in.
-- After the Operator's note of 14:10 UTC: the Enigma also uses the sharp splat kernel
-  (`kernel: "sharp"`), posted as `cmp2-enigma-own-r3` (it replaces the two earlier cards). The help
-  texts were over the limits in tests/help.spec.mjs (the Enigma's how-to 141 characters, both About
-  texts over 180 words); both are rewritten within them. Ran on the new head: cmp2-sort,
-  cmp2-enigma, cmp2-engine, cmp2-shots, kit, taps, help, mca, unit (all pass; help after the
-  rewrite).
-
-- Polish round (the Operator's note of 15:40 UTC, from the owner's "the toys could still be
-  sharper"), on `claude/lane-computing-r2-polish` from `3f209628`, PR to open after #290 merges: the
-  sorting machine uses the sharp kernel, with finer splats on bars, crates, pucks, dots and panel
-  letters; two small lights show the compared places as each comparison sounds (sortMarks, timed
-  with the sound by sortTimes); the crates' shuffle-back lanes are packed by size (the plinth 1.55
-  deep, was 2.05); the crates' and ring's panels sit lower; the Enigma's key and lamp letters carry
-  finer splats. Clips `cmp2p-*` on Effect review page 2 (group "polish"). Ran: cmp2-sort,
-  cmp2-enigma, cmp2-engine, cmp2-shots, ai, mca, help, unit, kit (132 passed).
-
-## Notes", "## Known issues" and "##
-
+brief, word for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "##
 For the Operator" current). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 5, 2026, from the owner's push notes, docs/reviews/2026-10-04-push-alignment/notes.md)
@@ -94,15 +60,27 @@ instead of going idle.
 
 ## State
 
-- Engine PR #289 ("Engine: a shown text option is a text box in the Toy tab"), draft, on
-  `claude/lane-computing-r2-engine`: a kit toy's `type: "text"` option without `hidden: true` shows
-  as a text box (for the Enigma's plugboard). Merged into the lane branch; it must merge first.
-- Sorting machine: done (steps engine with every comparison, per-algorithm voices, View option:
-  bars, crates by size, ring of colors (3D), dots). Proof in `tests/cmp2-sort.spec.mjs`.
-- Enigma: done (rotors I to V, reflector B or C, rings, start, up to ten plugboard pairs, the
-  setting on the pad, rotor plates and cables; Barbarossa presets). Proof in
-  `tests/cmp2-enigma.spec.mjs`.
-- Clips: to post on Effect review page 2 (lane record `ComputingR2`).
+- Merged on October 6, 2026: engine PR #289 (a shown text option is a text box in the Toy tab) and
+  lane PR #290 (the sorting machine's sounds and views, the settable Enigma, the readable wheels,
+  the proof tests). The owner marked every card good, the last being `cmp2-enigma-own-r4` (rotors of
+  radius 0.3, upright bold letters).
+- Fixes made for the Integrators' runs: the hidden-options check reads toy options only (QR lab);
+  help texts within their limits (how-to 95 characters; About 165 and 179 words), with Codex's
+  corrected facts from #278 (swaps "or moves for merge sort"; the Enigma's "occasional double
+  step"); `tests/evidence-computing.spec.mjs:168` reads the new `sortRun` (10 comparison sites, same
+  384 inputs and references, same line count; a planted bug fails it).
+- hl1 (N6): the jellyfish rest-height and waterfall floor checks are timing-sensitive, not this
+  lane's change: with #289 it failed 5 of 6 runs, main passed 4 of 4 and main with 14 comment lines
+  3 of 3, but main with the same 14 lines of code under an option type nothing uses (so it never
+  runs) failed 1 of 3. No toy in hl1's sample shows a text box with #289 (checked in the browser).
+- Polish round (the Operator's note of October 5, 15:40 UTC, from the owner's "the toys could still
+  be sharper"), on `claude/lane-computing-r2-polish`, PR "Phase Computing r2 polish: …" opened after
+  #290 merged: the sorting machine uses the sharp kernel, with finer splats on bars, crates, pucks,
+  dots and panel letters; two small lights show the compared places as each comparison sounds
+  (sortMarks, timed with the sound by sortTimes); the crates' shuffle-back lanes are packed by size
+  (the plinth 1.55 deep, was 2.05); the crates' and ring's panels sit lower; the Enigma's key and
+  lamp letters carry finer splats. Clips `cmp2p-*` on Effect review page 2 (group "polish"): the
+  owner marked the sorting ones good; the Enigma's wheels were then made readable in #290.
 
 ## Notes
 
@@ -125,8 +103,8 @@ instead of going idle.
 
 - The review page plays clips muted with no controls, so the sound in the sorting clips (MP4 with
   audio, rendered by `tools/cmp2-sound.mjs`) is not heard there. The owner hears it in the toy.
-- The crates view reads small at phone size (its plinth is deep, to hold the lanes of the shuffle
-  back).
+- The crates view reads smallish at phone size: eight crates in a row can only be as wide as their
+  spacing (the polish round made the plinth shallower and the panel lower).
 
 - Reflector C has no published historical message in the tests; it is checked against the reference
   code (wiring from the Crypto Museum and Wikipedia tables) on random settings.

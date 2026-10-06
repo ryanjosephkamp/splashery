@@ -61,7 +61,117 @@ export const SAMPLES = [
     license: "CC0 1.0",
     licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
   },
+  {
+    id: "spiral-stairs",
+    label: "Spiral staircase",
+    title: "Spiral Staircase, Keck Center (U.S. National Academies)",
+    author: "Jorge Mendoza",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  {
+    id: "palace-stairs",
+    label: "Palace staircase",
+    title: "Escalier monumental, Neue Burg, Vienna",
+    author: "Jebulon",
+    source: "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  {
+    id: "wildflowers",
+    label: "Wildflowers up close",
+    title: "Wildflowers in foreground",
+    author: "PookieFugglestein",
+    source: "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
 ];
+
+// Smd r2: the backing layer of a built photo: a coarse grid of splats, each at the deepest depth of
+// the splats near it and in their color (the far side of a depth edge), a little behind them.
+// Seen face-on they are hidden; seen from the side they fill what a near part uncovers.
+export function backingOf(s, rows = 56, reach = Math.round(rows * 0.22)) {
+  const cols = Math.max(2, Math.round(rows * s.aspect));
+  const w = s.aspect / cols; // a cell's width, in picture heights
+  const h = 1 / rows;
+  const size = 0.9 * Math.max(w, h);
+  const half = 2.4 * size; // (a splat reaches about 2.4 of its sizes)
+  const zmin = new Float32Array(cols * rows).fill(Infinity);
+  const col = new Float32Array(cols * rows * 3);
+  for (let i = 0; i < s.n; i++) {
+    const cx = Math.min(
+      cols - 1,
+      Math.max(0, Math.floor((s.relief[i * 3] / s.aspect + 0.5) * cols)),
+    );
+    const cy = Math.min(rows - 1, Math.max(0, Math.floor((0.5 - s.relief[i * 3 + 1]) * rows)));
+    const c = cy * cols + cx;
+    if (s.relief[i * 3 + 2] < zmin[c]) {
+      zmin[c] = s.relief[i * 3 + 2];
+      col.set([s.rgb[i * 3], s.rgb[i * 3 + 1], s.rgb[i * 3 + 2]], c * 3);
+    }
+  }
+  const pos = new Float32Array(cols * rows * 3);
+  const rgb = new Float32Array(cols * rows * 3);
+  let n = 0;
+  for (let j = 0; j < rows; j++)
+    for (let i = 0; i < cols; i++) {
+      let best = Infinity;
+      let from = -1;
+      for (let dj = -reach; dj <= reach; dj++)
+        for (let di = -reach; di <= reach; di++) {
+          const x = i + di;
+          const y = j + dj;
+          if (x < 0 || y < 0 || x >= cols || y >= rows) continue;
+          const c = y * cols + x;
+          if (zmin[c] < best) {
+            best = zmin[c];
+            from = c;
+          }
+        }
+      if (from < 0) continue;
+      // (kept inside the picture: a splat on the edge would otherwise reach past it)
+      const x = ((i + 0.5) / cols - 0.5) * s.aspect;
+      const y = 0.5 - (j + 0.5) / rows;
+      const ex = s.aspect / 2 - half;
+      const ey = 0.5 - half;
+      pos.set(
+        [Math.max(-ex, Math.min(ex, x)), Math.max(-ey, Math.min(ey, y)), best - 0.012],
+        n * 3,
+      );
+      rgb.set(col.subarray(from * 3, from * 3 + 3), n * 3);
+      n++;
+    }
+  return { n, pos, rgb, size };
+}
+
+// Studio media: "Show the original": the flat photo in a corner card (src/compare.js, loaded only when
+// it is switched on).
+function showOriginal() {
+  if (typeof document === "undefined") return;
+  const mod = P3D.compare;
+  if (!P3D.original) {
+    if (mod?.original) mod.original("photo-3d").hide();
+    P3D.cardKey = null;
+    return;
+  }
+  if (!mod) {
+    P3D.compare = false;
+    import("../compare.js").then((m) => (P3D.compare = m));
+    return;
+  }
+  if (!mod.original) return;
+  const card = mod.original("photo-3d");
+  const src = P3D.original;
+  if (P3D.cardKey !== src.uid || !card.state.kind) {
+    P3D.cardKey = src.uid;
+    card.image({ ...src.photo, label: `Original: ${src.name}` });
+  }
+  card.sync();
+}
 
 const P3D = {
   samples: new Map(), // sample id -> { photo, depth, uid, name }
@@ -213,6 +323,9 @@ export function layerMorph(r, layer) {
 
 const PHOTO_3D = {
   density: PHOTO_DENSITY,
+  // Smd r2: the Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): edges 13 to 19% crisper
+  // on the relief at phone size (2.72 to 2.36 px, 3.45 to 2.78 px zoomed in).
+  kernel: "sharp",
   turntable: false,
   options: [
     {
@@ -226,6 +339,16 @@ const PHOTO_3D = {
       ],
     },
     { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
+    {
+      key: "original",
+      label: "Show the original",
+      type: "select",
+      default: "off",
+      choices: [
+        { id: "off", label: "Off" },
+        { id: "on", label: "On: the flat photo in a corner" },
+      ],
+    },
     { key: "photoName", label: "Photo name", type: "text", default: "", hidden: true },
   ],
   controls: [
@@ -273,6 +396,7 @@ const PHOTO_3D = {
   },
   screen: mirrorScreen, // lane Live input: the live view's colors and depth
   drive(t, c, out) {
+    showOriginal();
     if (liveOn() && MIRROR.cam) {
       // Lane Live input: the live view shows its depth at once; a tap flattens it.
       MIRROR.gain = Math.min(1, 1.6 * MIRROR.depth) * (c.flat ?? 1);
@@ -289,6 +413,7 @@ const PHOTO_3D = {
     for (let b = 0; b < LAYERS; b++) out.parts[`layer${b}`] = { offset: [0, 0, (b - (LAYERS - 1) / 2) * 0.22 * L] }; // prettier-ignore
   },
   build(k, o) {
+    P3D.original = null;
     if (liveOn()) {
       // Lane Live input: the camera's live view.
       MIRROR.depth = o.depth ?? 0.5;
@@ -303,7 +428,8 @@ const PHOTO_3D = {
     MIRROR.stillBack = null;
     const src = P3D.want;
     if (!src) throw new Error("There is no photo to show.");
-    const budget = Math.max(100, Math.floor(k.count * 0.98));
+    P3D.original = o.original === "on" ? src : null;
+    const budget = Math.max(100, Math.floor(k.count * 0.95));
     const key = `${src.uid}/${budget}/${o.depth}`;
     let s = P3D.cache.get(key);
     if (!s) {
@@ -332,10 +458,32 @@ const PHOTO_3D = {
         pattern: false,
       };
     });
+    // Smd r2: a backing layer (see backingOf): where a near part pulls away from what is behind it
+    // as the view turns, the gap shows that part of the picture, stretched, instead of empty space.
+    const back = backingOf(
+      s,
+      Math.max(24, Math.min(72, Math.round(Math.sqrt((0.035 * k.count) / s.aspect)))),
+    );
+    k.cloud({ share: Math.min(1, back.n / k.count), pattern: false }, (_r, i) => {
+      if (i >= back.n) return null;
+      return {
+        p: [back.pos[i * 3], back.pos[i * 3 + 1], back.pos[i * 3 + 2]],
+        to: [back.pos[i * 3], back.pos[i * 3 + 1], -0.01],
+        channel: 0,
+        part: parts[0],
+        n: [0, 0, 1],
+        size: back.size * unit,
+        flat: SPLAT_FLAT,
+        color: [back.rgb[i * 3], back.rgb[i * 3 + 1], back.rgb[i * 3 + 2]],
+        opacity: SPLAT_OPACITY,
+        pattern: false,
+      };
+    });
     P3D.info = {
       name: src.name,
       uid: src.uid,
       splats: s.n,
+      backing: back.n,
       grid: [s.gx, s.gy],
       pieces: s.stats.bigPieces,
       cutEdges: s.stats.cutEdges,

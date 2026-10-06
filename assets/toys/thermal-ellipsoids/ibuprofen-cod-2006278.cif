@@ -1,0 +1,203 @@
+#------------------------------------------------------------------------------
+#$Date: 2025-08-19 01:52:38 +0300 (Tue, 19 Aug 2025) $
+#$Revision: 301791 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/2/00/62/2006278.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/
+#
+# All data on this site have been placed in the public domain by the
+# contributors.
+#
+data_2006278
+loop_
+_publ_author_name
+'Shankland, Norman'
+'Wilson, Chick C.'
+'Florence, Alastair J.'
+'Cox, Philip J.'
+_publ_section_title
+;
+Refinement of Ibuprofen at 100 K by Single-Crystal
+Pulsed Neutron Diffraction
+;
+_journal_coeditor_code           BM1126
+_journal_name_full               'Acta Crystallographica Section C'
+_journal_page_first              951
+_journal_page_last               954
+_journal_paper_doi               10.1107/S0108270197003193
+_journal_volume                  53
+_journal_year                    1997
+_chemical_formula_sum            'C13 H18 O2'
+_chemical_formula_weight         206.3
+_chemical_name_common            ibuprofen
+_chemical_name_systematic        '2-(4-Isobutylphenyl)propanoic acid'
+_space_group_IT_number           14
+_symmetry_cell_setting           monoclinic
+_symmetry_space_group_name_Hall  '-P 2ybc'
+_symmetry_space_group_name_H-M   'P 1 21/c 1'
+_cell_angle_alpha                90
+_cell_angle_beta                 99.70(3)
+_cell_angle_gamma                90
+_cell_formula_units_Z            4
+_cell_length_a                   14.397(8)
+_cell_length_b                   7.818(4)
+_cell_length_c                   10.506(6)
+_cell_measurement_temperature    100
+_cell_volume                     1165.6(11)
+_diffrn_ambient_temperature      100
+_exptl_crystal_density_diffrn    1.175
+_refine_ls_R_factor_obs          .077
+_refine_ls_wR_factor_obs         .053
+_cod_depositor_comments
+;
+The following automatic conversions were performed:
+'_geom_bond_publ_flag' value 'Y' changed to 'y' according to
+'/home/saulius/struct/CIF-dictionaries/cif_core.dic' dictionary named
+'cif_core.dic' version 2.4.1 from 2010-06-29 (33 times).
+
+Automatic conversion script
+Id: cif_fix_enum 1527 2010-12-29 10:47:43Z saulius 
+;
+_cod_original_sg_symbol_H-M      'P 21/c'
+_cod_database_code               2006278
+loop_
+_symmetry_equiv_pos_as_xyz
+x,y,z
+'-x, 1/2+y, 1/2-z'
+'-x, -y, -z'
+'x, -y+1/2, z+1/2'
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+O1 .023(2) .017(3) .025(3) .004(2) -.007(2) -.003(3)
+O2 .020(2) .023(3) .041(3) .0067(17) -.002(2) -.005(3)
+C1 .0210(18) .014(2) .010(2) -.0008(15) -.0019(15) -.0002(19)
+C2 .0235(19) .020(3) .013(2) -.0015(16) -.0024(17) .005(2)
+C3 .043(3) .038(4) .018(3) -.009(3) .007(2) -.008(3)
+C4 .0162(17) .010(2) .014(2) -.0007(13) -.0035(14) .0051(19)
+C5 .0209(19) .023(3) .024(2) .0032(16) -.0006(17) .006(2)
+C6 .019(2) .024(3) .030(3) .0037(15) .0028(19) .006(2)
+C7 .0151(17) .013(3) .020(2) -.0043(13) .0009(15) -.000(2)
+C8 .022(2) .020(3) .028(3) .0050(16) .0059(19) .008(2)
+C9 .021(2) .020(3) .029(3) .0013(17) .0069(18) .008(2)
+C10 .025(2) .036(3) .017(3) -.0069(19) .007(2) -.001(3)
+C11 .020(2) .024(3) .026(3) -.0067(16) .002(2) .007(2)
+C12 .038(3) .034(4) .041(4) -.006(3) .018(3) .002(3)
+C13 .044(3) .026(3) .040(3) -.009(2) .011(3) -.009(3)
+H1 .028(4) .040(6) .037(5) .010(3) .004(4) -.006(5)
+H2 .040(4) .029(5) .035(5) -.001(3) -.012(4) .016(4)
+H3 .066(6) .049(7) .057(7) .025(5) .016(6) .003(6)
+H4 .092(8) .079(10) .038(7) -.015(6) .015(6) -.019(7)
+H5 .071(7) .076(9) .060(8) -.019(5) .002(6) -.033(7)
+H6 .048(5) .045(7) .061(7) .023(4) .006(5) .029(6)
+H7 .028(5) .083(8) .081(8) .012(4) .024(5) .007(7)
+H8 .041(4) .053(7) .062(7) .024(4) .014(4) .045(6)
+H9 .035(5) .060(7) .058(6) .019(4) .014(4) .029(6)
+H10 .045(5) .054(7) .018(5) -.004(4) -.005(4) .012(5)
+H11 .053(5) .056(8) .046(6) -.007(4) .021(5) -.014(6)
+H12 .034(4) .055(7) .044(5) .002(4) -.006(4) .020(5)
+H13 .071(7) .108(12) .048(7) -.001(6) .009(6) .017(8)
+H14 .086(8) .062(10) .116(11) .009(6) .060(8) .004(8)
+H15 .054(6) .077(9) .102(10) -.018(6) .028(6) .003(8)
+H16 .081(7) .058(8) .056(7) -.007(5) .027(6) -.021(6)
+H17 .071(7) .070(9) .067(8) -.027(5) -.001(6) -.029(7)
+H18 .061(6) .064(8) .076(8) .025(5) .006(6) -.003(7)
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_U_iso_or_equiv
+_atom_site_thermal_displace_type
+_atom_site_calc_flag
+_atom_site_refinement_flags
+_atom_site_occupancy
+_atom_site_disorder_group
+_atom_site_type_symbol
+O1 .3792(3) .4968(7) .4148(5) .0230 Uani d . 1 . O
+O2 .4969(3) .3117(6) .4375(5) .0286 Uani d . 1 . O
+C1 .4162(2) .3483(5) .3962(4) .0152 Uani d . 1 . C
+C2 .3501(3) .2207(5) .3217(4) .0195 Uani d . 1 . C
+C3 .3996(4) .1089(8) .2383(5) .0323 Uani d . 1 . C
+C4 .3038(2) .1238(5) .4203(4) .0141 Uani d . 1 . C
+C5 .2173(2) .1726(6) .4466(4) .0230 Uani d . 1 . C
+C6 .1760(3) .0902(6) .5385(4) .0241 Uani d . 1 . C
+C7 .2203(2) -.0484(5) .6065(4) .0161 Uani d . 1 . C
+C8 .3079(2) -.0965(6) .5821(4) .0231 Uani d . 1 . C
+C9 .3486(3) -.0127(5) .4879(4) .0233 Uani d . 1 . C
+C10 .1741(3) -.1385(7) .7045(4) .0255 Uani d . 1 . C
+C11 .0970(3) -.2639(6) .6467(4) .0237 Uani d . 1 . C
+C12 .0414(4) -.3210(8) .7486(6) .0363 Uani d . 1 . C
+C13 .1373(4) -.4152(7) .5836(6) .0362 Uani d . 1 . C
+H1 .4247(5) .5665(11) .4693(9) .0352 Uani d . 1 . H
+H2 .2948(5) .2919(10) .2600(8) .0364 Uani d . 1 . H
+H3 .4571(7) .0403(13) .2956(11) .0562 Uani d . 1 . H
+H4 .4299(8) .1810(17) .1712(11) .0685 Uani d . 1 . H
+H5 .3514(7) .0176(17) .1875(11) .0698 Uani d . 1 . H
+H6 .1812(5) .2830(12) .3945(10) .0513 Uani d . 1 . H
+H7 .1097(5) .1262(14) .5560(10) .0625 Uani d . 1 . H
+H8 .3458(5) -.1972(12) .6359(10) .0513 Uani d . 1 . H
+H9 .4175(6) -.0544(12) .4738(9) .0502 Uani d . 1 . H
+H10 .2270(6) -.2108(12) .7714(8) .0397 Uani d . 1 . H
+H11 .1455(6) -.0431(13) .7647(9) .0503 Uani d . 1 . H
+H12 .0510(5) -.1936(12) .5721(10) .0457 Uani d . 1 . H
+H13 .0865(8) -.384(2) .8247(12) .0755 Uani d . 1 . H
+H14 .0101(8) -.2159(17) .7895(14) .0831 Uani d . 1 . H
+H15 -.0163(7) -.4031(16) .7025(12) .0760 Uani d . 1 . H
+H16 .1799(7) -.3750(15) .5153(11) .0628 Uani d . 1 . H
+H17 .0799(7) -.4965(16) .5345(11) .0705 Uani d . 1 . H
+H18 .1806(7) -.4871(16) .6535(13) .0675 Uani d . 1 . H
+loop_
+_geom_bond_atom_site_label_1
+_geom_bond_atom_site_label_2
+_geom_bond_site_symmetry_1
+_geom_bond_site_symmetry_2
+_geom_bond_distance
+_geom_bond_publ_flag
+C1 O1 . . 1.306(6) y
+C1 O2 . . 1.204(5) y
+C1 C2 . . 1.503(5) y
+C2 C3 . . 1.500(6) y
+C2 C4 . . 1.525(5) y
+C4 C5 . . 1.374(5) y
+C5 C6 . . 1.376(6) y
+C6 C7 . . 1.392(5) y
+C7 C8 . . 1.380(5) y
+C8 C9 . . 1.396(6) y
+C9 C4 . . 1.380(5) y
+C7 C10 . . 1.493(6) y
+C10 C11 . . 1.529(6) y
+C11 C12 . . 1.508(6) y
+C11 C13 . . 1.519(7) y
+O1 H1 . . .963(13) y
+C2 H2 . . 1.091(10) y
+C3 H3 . . 1.081(15) y
+C3 H4 . . 1.053(17) y
+C3 H5 . . 1.073(15) y
+C5 H6 . . 1.103(11) y
+C6 H7 . . 1.041(10) y
+C8 H8 . . 1.065(11) y
+C9 H9 . . 1.077(9) y
+C10 H10 . . 1.101(12) y
+C10 H11 . . 1.102(13) y
+C11 H12 . . 1.085(13) y
+C12 H13 . . 1.061(19) y
+C12 H14 . . 1.062(17) y
+C12 H15 . . 1.097(15) y
+C13 H16 . . 1.067(16) y
+C13 H17 . . 1.099(13) y
+C13 H18 . . 1.044(18) y
+loop_
+_cod_related_entry_id
+_cod_related_entry_database
+_cod_related_entry_code
+1 ChemSpider 3544
+2 DrugBank DB01050
+3 PubChem 39912

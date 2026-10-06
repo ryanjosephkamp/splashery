@@ -70,6 +70,8 @@ export class MotionDriver {
     this.addon = null; // { parts, data } of a rig's kit-built add-on
     this.addonU = null;
     this.out = null;
+    this.sliderIn = null; // lane Pages r6: the stage slider's value
+    this.figures = []; // lane Pages r6: the scene's figure depths
     // UI r3: a long tap effect pauses on the next tap and resumes on the one
     // after (pausedAt is the clock time it paused at, pausedKey its control).
     this.pausedAt = null;
@@ -102,6 +104,7 @@ export class MotionDriver {
     this.pausedAt = null; // UI r3
     this.pausedKey = null;
     this.unseen = null;
+    this.sliderIn = null; // lane Pages r6
   }
 
   // A rig's add-on (a small kit-built splat cloud with its own parts).
@@ -163,6 +166,9 @@ export class MotionDriver {
   // tap as info.tap = { point, key, pick, time, n }.
   act(time, point = null, forced = null) {
     const a = this.recipe?.action;
+    // Lane Molecule viewer (engine): what the tap's `action.at` asked to tell
+    // the person ({ say: "…" } in its result), for the player to show.
+    this.said = null;
     // Lane Live input r2: a recipe may act inside the person's own gesture
     // (a song's audio may start playing only there, on a phone).
     a?.onAct?.(point, this.state);
@@ -173,6 +179,7 @@ export class MotionDriver {
       pick = forced.pick ?? null;
     } else if (a?.at && point) {
       const r = a.at(point, this.state);
+      if (r && typeof r === "object" && r.say) this.said = String(r.say);
       if (typeof r === "string") key = r;
       else if (r?.options) {
         // A tap that switches the toy ({ options, key, pick }): the player
@@ -252,8 +259,9 @@ export class MotionDriver {
   }
 
   // ctx: { time, dt, motion, info: { center, half, radius }, cameraPos,
-  // cameraDistance (to the point it looks at), reducedMotion }. Returns the uniforms.
-  compute({ time: clock, dt, motion, info, cameraPos, cameraDistance }) {
+  // cameraDistance (to the point it looks at), eye (the camera in the recipe's
+  // frame), reducedMotion }. Returns the uniforms.
+  compute({ time: clock, dt, motion, info, cameraPos, cameraDistance, eye }) {
     // UI r3: while a tap effect is paused, its controls and clocks hold still
     // at the moment it paused (a whole-toy move from the Toy tab carries on).
     this.unseen = null; // this frame draws it
@@ -318,8 +326,20 @@ export class MotionDriver {
     // the vertical), so a toy can tell when a drag spins it (the spinning top).
     const view = cameraPos && info?.center ? Math.atan2(cameraPos[0] - info.center[0], cameraPos[2] - info.center[2]) : null; // prettier-ignore
     const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
+    // Lane Pages r6: the slider over the stage (out.slider) as the visitor
+    // last set it ({ id, value, n }, n counting the changes), and the scene's
+    // figure depths (toy.figures; a drive may hand back a new list in
+    // out.figures, which the player keeps in the scene).
+    about.slider = this.sliderIn;
+    about.figures = this.figures;
+    // Lane Molecule viewer (engine): info.eye is where the camera stands in the
+    // recipe's own frame, so a mark can face the camera (a measuring ring).
+    if (eye) about.eye = eye;
     // Lane Hands engine A: Hands-on's shake, finger and wheels (src/physics/fields.js).
     if (this.hands) about.hands = this.hands;
+    // Lane Any pose: the world's up in the recipe's frame while Hands-on has
+    // the toy turned (absent upright), for effects that fall or pour.
+    if (this.poseUp) about.up = this.poseUp;
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     // Lane Physics: pieces picked up in Hands-on go where the physics puts
     // them (src/physics/hands-on.js), and are sorted again now and then.
@@ -407,7 +427,7 @@ export class MotionDriver {
 
 // Packs part transforms for uSpParts: per part a rotation, the pivot (w =
 // scale - 1 about the pivot) and an offset (w = splat visibility).
-function packParts(data, parts, driven, scale) {
+export function packParts(data, parts, driven, scale) {
   for (let i = 0; i < 16; i++) {
     const o = i * 12;
     const def = parts[i];
@@ -423,14 +443,17 @@ function packParts(data, parts, driven, scale) {
       if (pd.offset) po = [pd.offset[0] * scale, pd.offset[1] * scale, pd.offset[2] * scale];
       if (pd.visible !== undefined) vis = pd.visible;
       if (pd.scale !== undefined) grow = pd.scale - 1;
-      cull = !!pd.cull;
+      cull = pd.cull === "below" ? "below" : !!pd.cull;
     }
     const pv = def ? def.pivot : [0, 0, 0];
     data.set(pq, o);
     data.set([pv[0], pv[1], pv[2], grow], o + 4);
     // A culled part hides its splats on the far side of its centre (the
-    // kit shader reads visibility -w - 1 from a w of -1 or less).
-    data.set([po[0], po[1], po[2], cull ? -1 - Math.max(0, vis) : vis], o + 8);
+    // kit shader reads visibility -w - 1 from a w of -1 or less); cull:
+    // "below" hides those under the level plane through it (lane Night sky,
+    // -w - 10 from a w of -10 or less).
+    const w = cull === "below" ? -10 - Math.max(0, vis) : cull ? -1 - Math.max(0, vis) : vis;
+    data.set([po[0], po[1], po[2], w], o + 8);
   }
   return data;
 }
