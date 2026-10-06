@@ -104,3 +104,56 @@ export function faceSplats(
     (rand, i) => list[i] || null,
   );
 }
+
+// A curved surface f(u, v) (u, v in 0..1) covered by an nu × nv grid of flat
+// splats, each facing nrm(u, v) and sized to its own cell (so a sphere's
+// splats shrink toward its poles); `color(u, v, n)` colors it.
+export function surfSplats(k, f, nrm, { nu, nv, color, opacity = 1, part = 0, keep = null }) {
+  const list = [];
+  const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  for (let i = 0; i < nu; i++)
+    for (let j = 0; j < nv; j++) {
+      const u = (i + 0.5) / nu;
+      const v = (j + 0.5) / nv;
+      if (keep && !keep(u, v)) continue;
+      const p = f(u, v);
+      const du = dist(f(u - 0.5 / nu, v), f(u + 0.5 / nu, v));
+      const dv = dist(f(u, v - 0.5 / nv), f(u, v + 0.5 / nv));
+      const s = Math.max(1e-4, Math.max(du, dv) * 0.62);
+      const n = nrm(u, v);
+      list.push({ p, scales: [s, s, s * 0.05], quat: quatToNormal(n), color: typeof color === "function" ? color(u, v, n) : color, opacity, part, pattern: false }); // prettier-ignore
+    }
+  k.cloud(
+    { share: list.length / k.count, pattern: false, jitter: 0 },
+    (rand, i) => list[i] || null,
+  );
+}
+
+const unit3 = (v) => {
+  const l = Math.hypot(v[0], v[1], v[2]) || 1;
+  return [v[0] / l, v[1] / l, v[2] / l];
+};
+
+// A cylinder along the axis `dir` ("y" or "z") at c, radius r, length h,
+// with its end caps (`caps`: "both", "front" for +axis only, or "none").
+export function cylinderSplats(k, { c, r, h, axis = "y", n = 48, caps = "both", color, part = 0 }) {
+  const toWorld = (x, a, y) => (axis === "y" ? [c[0] + x, c[1] + a, c[2] + y] : [c[0] + x, c[1] + y, c[2] + a]); // prettier-ignore
+  const toN = (x, a, y) => (axis === "y" ? [x, a, y] : [x, y, a]);
+  const around = Math.max(12, n);
+  const along = Math.max(2, Math.round((around * h) / (2 * Math.PI * r)));
+  surfSplats(k, (u, v) => toWorld(r * Math.cos(u * 2 * Math.PI), (v - 0.5) * h, r * Math.sin(u * 2 * Math.PI)), (u) => toN(Math.cos(u * 2 * Math.PI), 0, Math.sin(u * 2 * Math.PI)), { nu: around, nv: along, color, part }); // prettier-ignore
+  for (const side of caps === "none" ? [] : caps === "front" ? [1] : [1, -1]) {
+    const rings = Math.max(2, Math.round(around / 6));
+    surfSplats(k, (u, v) => toWorld(r * v * Math.cos(u * 2 * Math.PI), (side * h) / 2, r * v * Math.sin(u * 2 * Math.PI)), () => toN(0, side, 0), { nu: around, nv: rings, color, part }); // prettier-ignore
+  }
+}
+
+// A sphere at c of radius r (n splats around its equator).
+export function sphereSplats(k, { c, r, n = 48, color, part = 0 }) {
+  const at = (u, v) => {
+    const th = u * 2 * Math.PI;
+    const ph = v * Math.PI;
+    return [Math.sin(ph) * Math.cos(th), Math.cos(ph), Math.sin(ph) * Math.sin(th)];
+  };
+  surfSplats(k, (u, v) => at(u, v).map((x, i) => c[i] + r * x), (u, v) => unit3(at(u, v)), { nu: n, nv: Math.max(6, Math.round(n / 2)), color, part }); // prettier-ignore
+}
