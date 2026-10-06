@@ -1053,8 +1053,8 @@ const rocketRecipe = {
       label: "Model",
       title: "Saturn V (NASA 3D Resources)",
       source: "https://science.nasa.gov/3d-resources/saturn-v/",
-      author: "NASA",
-      license: "NASA 3D Resources: free to download and use (NASA media guidelines)",
+      author: "NASA (Michael D. Carbajal)",
+      license: "NASA 3D Resources, used under NASA's media guidelines",
       licenseUrl: "https://www.nasa.gov/nasa-brand-center/images-and-media/",
     },
   ],
@@ -1206,6 +1206,402 @@ function paint(r, g, b) {
 }
 
 RECIPES["saturn-v"] = rocketRecipe;
+
+// ---- More rockets: the SLS and the Space Shuttle (NASA 3D Resources) ----------------------
+// Built like the Saturn V, from NASA's models cut into their pieces by
+// tools/sp2-rockets.mjs: each piece is a material in the model (its name).
+// A spec: the model file, which piece each material belongs to (a piece
+// named with "*" is split in two by the side it is on, left and right, so a
+// pair of boosters falls away to both sides), when each piece goes
+// (seconds after the tap) and how, which engines burn when, and where the
+// view's middle goes once a piece has gone.
+
+const STACKS = new Map();
+
+// Painted detail for the rockets (stackRecipe's spec.paint). A thin ring
+// round a piece at height h0 (as a share of the piece's height), w wide.
+const ring = (h, h0, w) => Math.abs(h - h0) < w / 2;
+// Vertical ribs in a band: k of them round the piece, each a share `on` of
+// its pitch.
+const ribbed = (c, k, on) => (c.turn * k) % 1 < on;
+
+function stackRecipe(spec) {
+  return {
+    kernel: "sharp",
+    density: 2,
+    // (Labs: the small splats kept and a 3x phone's full resolution, as the
+    // other photoreal toys have.)
+    render: { cull: "low", dpr: "native" },
+    // The view fits the whole rocket on any screen (out.view, below): tall
+    // and thin, it would otherwise be framed by its width on a phone and
+    // stand small in the middle.
+    focus: () => false,
+    alive: true,
+    turntable: true,
+    controls: [{ key: "launch", label: "Stage it", type: "pulse", ease: STAGE_SECS }],
+    action: { key: "launch", label: "Fire the stages in order" },
+    note: spec.note,
+    credits: [
+      {
+        label: "Model",
+        title: `${spec.title} (NASA 3D Resources)`,
+        source: spec.source,
+        author: spec.author,
+        license: "NASA 3D Resources, used under NASA's media guidelines",
+        licenseUrl: "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      },
+    ],
+    async prepare() {
+      if (!STACKS.has(spec.file)) {
+        const bytes = await readBytes(`../../assets/toys/real-rockets/${spec.file}`);
+        STACKS.set(spec.file, await prepareModel(parseModel(bytes, spec.file), { decodeImage }));
+      }
+    },
+    drive(t, c, out, info) {
+      const d = info?.data;
+      if (!d) return;
+      out.view = { key: "stack", center: [0, (d.bottom + d.top) / 2, 0], size: [d.width * 1.2, (d.top - d.bottom) * 1.06] }; // prettier-ignore
+      const m = mem(c);
+      const on = c.launch > 0;
+      const s = on ? progress(c.launch) * STAGE_SECS : 0;
+      const was = m.s ?? 0;
+      m.s = s;
+      const back = band(s, STAGE_SECS - 1.0, STAGE_SECS - 0.2);
+      for (const st of spec.staging) {
+        if (on && was < st.at && s >= st.at)
+          out.cues.push({ voice: "thud", f: 90, decay: 0.6, vol: 0.6 });
+        const dt = on && back <= 0 ? Math.max(0, s - st.at) : 0;
+        for (const side of st.part.endsWith("*") ? [-1, 1] : [0]) {
+          const name = side ? `${st.part.slice(0, -1)}${side < 0 ? "L" : "R"}` : st.part;
+          let off = [0, 0, 0];
+          let angle = 0;
+          let vis = 1;
+          if (dt > 0) {
+            const [ax, ay, az] = st.away;
+            // Pushed away, then falling (or, for an escape tower, flying off).
+            off = [ax * dt * (side || 1), ay * dt - st.fall * 0.22 * dt * dt, az * dt];
+            // (A pair tilts outward: its top away from the middle.)
+            angle = st.spin * dt * (side ? -side : 1);
+            vis = 1 - band(dt, st.fade, st.fade + 1);
+          }
+          if (back > 0) vis = back;
+          out.parts[name] = { offset: off, angle, visible: vis };
+        }
+      }
+      // The view follows what is still flying (as the Saturn V's does).
+      let fc = 0.5;
+      for (const [at, f] of spec.follow) fc += (f - fc) * ease(band(s, at + 0.2, at + 1.4));
+      const home = ease(band(s, STAGE_SECS - 1.7, STAGE_SECS - 1.0));
+      const span = d.top - d.bottom;
+      out.body = { offset: [0, on ? -(d.bottom + fc * span) * 0.85 * (1 - home) : 0, 0] };
+      for (const [plume, a, b] of spec.burns) {
+        const lit = on ? band(s, a, a + 0.15) * (1 - band(s, b - 0.1, b)) : 0;
+        const flick = 1 + 0.08 * Math.sin(t * 37 + a * 5) + 0.05 * Math.sin(t * 61);
+        const ride = out.parts[d.plumes[plume]?.rides];
+        out.parts[plume] = { scale: lit > 0 ? flick : 0.001, visible: lit, offset: ride?.offset, angle: ride?.angle }; // prettier-ignore
+      }
+    },
+    build(k) {
+      const prep = STACKS.get(spec.file);
+      if (!prep) throw new Error("The rocket hasn't loaded.");
+      // (spec.weightBy: a piece of fine detail, such as the orbiter, gets more
+      // of the splats, so they are smaller and closer there; the plain tanks
+      // and boosters fewer.)
+      let sp = prep;
+      if (spec.weightBy) {
+        const weight = prep.weight.slice();
+        const by = prep.materials.map((mt) => spec.weightBy[mt.name] ?? 1);
+        for (let t = 0; t < prep.nt; t++) weight[t] *= by[prep.mat[t]];
+        sp = { ...prep, weight };
+      }
+      const S = sampleSurface(sp, Math.floor(k.count * (spec.share ?? 0.92)), { seed: 1, up: "y" });
+      const names = prep.materials.map((mt) => spec.pieces[mt.name] ?? spec.pieces.default);
+      // Each splat's piece and material, worked out once (a pair's piece by
+      // its side).
+      const sideNames = names.map((p) => (p.endsWith("*") ? [`${p.slice(0, -1)}L`, `${p.slice(0, -1)}R`] : [p, p])); // prettier-ignore
+      const matNames = prep.materials.map((mt) => mt.name);
+      const pieceOf = new Array(S.n);
+      const matOfI = new Array(S.n);
+      for (let i = 0; i < S.n; i++) {
+        const m = prep.mat[S.triangle[i]];
+        pieceOf[i] = sideNames[m][S.pos[i * 3] < 0 ? 0 : 1];
+        matOfI[i] = matNames[m];
+      }
+      const pieceAt = (i) => pieceOf[i];
+      // Each piece's box, for its pivot and for the engines' flames.
+      const box = new Map();
+      let bottom = Infinity;
+      let top = -Infinity;
+      let width = 0;
+      for (let i = 0; i < S.n; i++) {
+        width = Math.max(width, 2 * Math.abs(S.pos[i * 3]));
+        const p = pieceAt(i);
+        const x = S.pos[i * 3];
+        const y = S.pos[i * 3 + 1];
+        const z = S.pos[i * 3 + 2];
+        const b = box.get(p) || { lo: [x, y, z], hi: [x, y, z], n: 0 };
+        b.lo = [Math.min(b.lo[0], x), Math.min(b.lo[1], y), Math.min(b.lo[2], z)];
+        b.hi = [Math.max(b.hi[0], x), Math.max(b.hi[1], y), Math.max(b.hi[2], z)];
+        b.n++;
+        box.set(p, b);
+        bottom = Math.min(bottom, y);
+        top = Math.max(top, y);
+      }
+      const mid = (b) => b.lo.map((v, i) => (v + b.hi[i]) / 2);
+      const parts = {};
+      for (const [p, b] of box) parts[p] = k.part(p, { pivot: [mid(b)[0], b.lo[1], mid(b)[2]], axis: spec.axis?.[p.replace(/[LR]$/, "*")] ?? spec.axis?.[p] ?? [0, 0, 1] }); // prettier-ignore
+      // Smooth shading on the round tanks and boosters (spec.smooth): their
+      // ribs and stringers are far finer than a splat and light as blotches,
+      // so a splat whose face leans away from the cylinder takes the shade
+      // of the smooth splats at its angle round the piece's axis.
+      const rgb = S.rgb.slice();
+      for (const name of spec.smooth ?? []) {
+        for (const p of name.endsWith("*")
+          ? [`${name.slice(0, -1)}L`, `${name.slice(0, -1)}R`]
+          : [name]) {
+          const b = box.get(p);
+          if (!b) continue;
+          const [cx, , cz] = mid(b);
+          const N = 96;
+          const sum = new Float64Array(N * 4);
+          const lean = new Uint8Array(S.n);
+          // (Only the piece's own material: not its engines.)
+          const own = name.replace("*", "");
+          for (let i = 0; i < S.n; i++) {
+            if (pieceOf[i] !== p || matOfI[i] !== own) continue;
+            const dx = S.pos[i * 3] - cx;
+            const dz = S.pos[i * 3 + 2] - cz;
+            const r = Math.hypot(dx, dz) || 1;
+            const radial = (S.nrm[i * 3] * dx + S.nrm[i * 3 + 2] * dz) / r;
+            const k2 = Math.floor(((Math.atan2(dz, dx) / TAU + 1) % 1) * N);
+            if (radial > 0.97) {
+              for (let c = 0; c < 3; c++) sum[k2 * 4 + c] += S.rgb[i * 3 + c];
+              sum[k2 * 4 + 3]++;
+            } else lean[i] = 1 + k2;
+          }
+          for (let i = 0; i < S.n; i++) {
+            const k2 = lean[i] - 1;
+            if (k2 < 0 || !sum[k2 * 4 + 3]) continue;
+            for (let c = 0; c < 3; c++) rgb[i * 3 + c] = sum[k2 * 4 + c] / sum[k2 * 4 + 3];
+          }
+        }
+      }
+      const matOf = (i) => matOfI[i];
+      // Painted detail (spec.paint): the real vehicles' seams, joints, ribs
+      // and panel lines, drawn crisply where the model has none. Each splat gets
+      // its piece, material, height within the piece (0 at its bottom, 1 at
+      // its top), turn round the piece's axis (0..1) and normal, and returns
+      // a brightness factor (or nothing).
+      const baseOf = Object.fromEntries([...box.keys()].map((p) => [p, p.replace(/[LR]$/, "")]));
+      if (spec.paint)
+        for (let i = 0; i < S.n; i++) {
+          const piece = pieceAt(i);
+          const b = box.get(piece);
+          const [cx, , cz] = mid(b);
+          const x = S.pos[i * 3];
+          const y = S.pos[i * 3 + 1];
+          const z = S.pos[i * 3 + 2];
+          const f = spec.paint({
+            piece: baseOf[piece],
+            mat: matOf(i),
+            x,
+            y,
+            z,
+            h: (y - b.lo[1]) / (b.hi[1] - b.lo[1] || 1),
+            turn: (Math.atan2(z - cz, x - cx) / TAU + 1) % 1,
+            n: [S.nrm[i * 3], S.nrm[i * 3 + 1], S.nrm[i * 3 + 2]],
+            box: b,
+          });
+          // (A color, or a brightness factor.)
+          if (Array.isArray(f)) for (let c = 0; c < 3; c++) rgb[i * 3 + c] = f[c];
+          else if (f != null)
+            for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.min(1, rgb[i * 3 + c] * f);
+        }
+      k.cloud({ count: (S.n * 160000) / k.count + 1, jitter: 0 }, (_r, i) => {
+        if (i >= S.n) return null;
+        const n = [S.nrm[i * 3], S.nrm[i * 3 + 1], S.nrm[i * 3 + 2]];
+        const sg = S.sigma[i] * (spec.sigmaBy?.[matOf(i)] ?? spec.sigma ?? 1);
+        return {
+          p: [S.pos[i * 3], S.pos[i * 3 + 1], S.pos[i * 3 + 2]],
+          scales: [sg, sg, sg * SPLAT_FLAT],
+          quat: discQuat(n),
+          color: [rgb[i * 3], rgb[i * 3 + 1], rgb[i * 3 + 2]],
+          opacity: 0.98,
+          part: parts[pieceAt(i)],
+        };
+      });
+      // Anything a spec adds (a piece the model hides, such as Orion's capsule).
+      spec.extra?.(k, { parts, box, bottom, top });
+      // The engines' flames: a glowing cone under each burning piece, at the
+      // bottom of the piece named (or of its engines), as wide as asked.
+      const plumes = {};
+      for (const [name, at, w, len, rides] of spec.plumes) {
+        const b = box.get(at);
+        if (!b) continue;
+        const c = mid(b);
+        const y0 = b.lo[1];
+        const width = w * (b.hi[0] - b.lo[0]);
+        const part = k.part(name, { pivot: [c[0], y0, c[2]], axis: [0, 0, 1] });
+        plumes[name] = { rides };
+        k.cloud({ share: 0.012, jitter: 0, part, pattern: false }, (rand) => {
+          const u = Math.pow(rand(), 0.7);
+          const r = width * (1 - 0.55 * u) * Math.sqrt(rand());
+          const a = rand() * TAU;
+          const hot = 1 - u;
+          return {
+            p: [c[0] + r * Math.cos(a), y0 - 0.01 - u * len, c[2] + r * Math.sin(a)],
+            dir: [0, 1, 0],
+            stretch: 3,
+            size: 1.2,
+            color: [1, 0.55 + 0.4 * hot, 0.15 + 0.6 * hot * hot],
+            opacity: 0.35 + 0.4 * hot,
+          };
+        });
+      }
+      k.data = { pieces: [...box.keys()], bottom, top, width, plumes };
+    },
+  };
+}
+
+// The Space Launch System (Block 1, as Artemis I flew on November 16, 2022):
+// its two boosters go after about two minutes (NASA: they "operate for about
+// two minutes"), then the launch abort system; the core stage goes at orbit,
+// about 8½ minutes in; the upper stage (the ICPS) then burns for the Moon
+// (89 minutes after liftoff), and Orion leaves it. Orion's crew module, under
+// the abort system's fairing in the model, is drawn here as a plain cone.
+RECIPES.sls = stackRecipe({
+  file: "sls.glb",
+  sigma: 0.8,
+  smooth: ["core", "srb*"],
+  title: "Space Launch System (SLS)",
+  source: "https://science.nasa.gov/3d-resources/space-launch-system-sls/",
+  author: "NASA",
+  note: "NASA's model of the Space Launch System, colored as it flew on Artemis I. A tap fires its stages in the order of the flight, much faster: the boosters, the abort tower, the core stage, then Orion leaves the upper stage.",
+  pieces: { engine: "core", nozzle: "srb*", core: "core", srb: "srb*", icps: "icps", orion: "orion", las: "las", default: "core" }, // prettier-ignore
+  axis: { "srb*": [0, 0, 1], core: [1, 0, 0], icps: [1, 0, 0] },
+  // The core stage's welds, its intertank's ribs (where the model is ribbed)
+  // and the boosters' segment joints, as on Artemis I (no logos).
+  paint(c) {
+    if (c.mat === "core") {
+      // (The intertank: where the model's core is ribbed, 0.60 to 0.70 of
+      // its height, measured on the model.)
+      if (c.h > 0.603 && c.h < 0.7) return ribbed(c, 36, 0.4) ? 0.82 : 1.03;
+      if (ring(c.h, 0.603, 0.005) || ring(c.h, 0.7, 0.005)) return 0.62;
+      if (ring(c.h, 0.13, 0.006) || ring(c.h, 0.4, 0.004) || ring(c.h, 0.905, 0.006)) return 0.7;
+      return null;
+    }
+    if (c.mat === "srb") {
+      for (const h0 of [0.085, 0.24, 0.395, 0.55, 0.705, 0.84])
+        if (ring(c.h, h0, 0.007)) return 0.66;
+    }
+    return null;
+  },
+  staging: [
+    { part: "srb*", at: 1.4, away: [0.12, 0.02, 0], fall: 1, spin: 0.35, fade: 1.7 },
+    { part: "las", at: 2.3, away: [0.05, 0.45, 0], fall: -1.2, spin: -0.3, fade: 1.0 },
+    { part: "core", at: 5.0, away: [0, -0.02, 0], fall: 1, spin: 0.1, fade: 2.0 },
+    { part: "icps", at: 8.2, away: [0, -0.02, 0], fall: 0.25, spin: 0.08, fade: 2.6 },
+  ],
+  plumes: [
+    ["flameCore", "core", 0.32, 0.3, "core"],
+    ["flameL", "srbL", 0.55, 0.42, "srbL"],
+    ["flameR", "srbR", 0.55, 0.42, "srbR"],
+    ["flameUpper", "icps", 0.25, 0.14, "icps"],
+  ],
+  burns: [
+    ["flameL", 0, 1.4],
+    ["flameR", 0, 1.4],
+    ["flameCore", 0, 4.9],
+    ["flameUpper", 5.3, 7.4],
+  ],
+  // (Shares of the stack's height, measured on the model.)
+  follow: [
+    [5.0, 0.8],
+    [8.2, 0.82],
+  ],
+  extra(k, { parts, box }) {
+    // Orion's crew module: a cone from the service module's top, inside the
+    // abort system's fairing, so it shows once the fairing has gone.
+    const o = box.get("orion");
+    const l = box.get("las");
+    if (!o || !l) return;
+    const y0 = o.hi[1];
+    const r0 = (o.hi[0] - o.lo[0]) * 0.44;
+    const h = (l.hi[1] - l.lo[1]) * 0.22;
+    const cx = (o.lo[0] + o.hi[0]) / 2;
+    const cz = (o.lo[2] + o.hi[2]) / 2;
+    k.cloud({ share: 0.006, jitter: 0, part: parts.orion }, (rand) => {
+      const v = rand();
+      const r = r0 * (1 - 0.62 * v);
+      const a = rand() * TAU;
+      const n = [Math.cos(a) * 0.85, 0.5, Math.sin(a) * 0.85];
+      return { p: [cx + r * Math.cos(a), y0 + v * h, cz + r * Math.sin(a)], quat: discQuat(n), size: 0.9, color: [0.82, 0.83, 0.85], opacity: 0.98 }; // prettier-ignore
+    });
+  },
+});
+
+// The Space Shuttle: its two boosters go at 2 min 4 s, the external tank at
+// 8 min 50 s after the main engines stop, and the orbiter goes on with its
+// small maneuvering engines.
+RECIPES["space-shuttle"] = stackRecipe({
+  file: "space-shuttle.glb",
+  sigma: 0.9,
+  sigmaBy: { orbiter: 1, belly: 0.8, window: 0.85 },
+  weightBy: { orbiter: 2.2, belly: 2.2, window: 2.2 },
+  // (A little under the usual share, to keep its build under 1.5 s.)
+  share: 0.84,
+  smooth: ["et", "srb*"],
+  title: "Space Shuttle (A)",
+  source: "https://science.nasa.gov/3d-resources/space-shuttle-a/",
+  author: "NASA (Michael D. Carbajal)",
+  note: "NASA's model of the Space Shuttle at launch. A tap fires its stages in the order of a flight, much faster: the two boosters, then the external tank, and the orbiter flies on.",
+  pieces: { srb: "srb*", et: "et", orbiter: "orbiter", belly: "orbiter", window: "orbiter", engine: "orbiter", default: "orbiter" }, // prettier-ignore
+  axis: { "srb*": [0, 0, 1], et: [1, 0, 0] },
+  // The tank's intertank ribs and joints, the boosters' segment joints and
+  // the seam down the orbiter's payload-bay doors (no logos).
+  paint(c) {
+    if (c.mat === "et") {
+      // (The struts that hold the orbiter stand off the tank: light gray,
+      // not orange.)
+      // (The tank's axis: half its width in from its back, since the struts
+      // stretch its box toward the orbiter.)
+      const radius = (c.box.hi[0] - c.box.lo[0]) / 2;
+      const cx = (c.box.lo[0] + c.box.hi[0]) / 2;
+      const cz = c.box.lo[2] + radius;
+      if (Math.hypot(c.x - cx, c.z - cz) > radius * 1.06) return [0.78, 0.78, 0.76];
+      // (The intertank, between the hydrogen tank, 29.5 m of the tank's
+      // 46.9, and the oxygen tank: the model has no ribs, so they are drawn.)
+      if (c.h > 0.64 && c.h < 0.76) return ribbed(c, 36, 0.4) ? 0.82 : 1.03;
+      if (ring(c.h, 0.64, 0.005) || ring(c.h, 0.76, 0.005)) return 0.66;
+      return null;
+    }
+    if (c.mat === "srb") {
+      for (const h0 of [0.09, 0.25, 0.41, 0.57, 0.73]) if (ring(c.h, h0, 0.008)) return 0.66;
+      return null;
+    }
+    // (The seam down the middle of the payload-bay doors, on top.)
+    if (c.mat === "orbiter" && c.n[2] > 0.6 && Math.abs(c.x) < 0.0035 && c.h > 0.2 && c.h < 0.72)
+      return 0.62;
+    return null;
+  },
+  staging: [
+    { part: "srb*", at: 2.0, away: [0.12, 0.02, 0], fall: 1, spin: 0.35, fade: 1.7 },
+    { part: "et", at: 6.6, away: [0, -0.03, -0.08], fall: 0.6, spin: -0.15, fade: 2.6 },
+  ],
+  plumes: [
+    ["flameMain", "orbiter", 0.2, 0.26, "orbiter"],
+    ["flameL", "srbL", 0.55, 0.45, "srbL"],
+    ["flameR", "srbR", 0.55, 0.45, "srbR"],
+    ["flameOms", "orbiter", 0.08, 0.08, "orbiter"],
+  ],
+  burns: [
+    ["flameL", 0, 2.0],
+    ["flameR", 0, 2.0],
+    ["flameMain", 0, 6.4],
+    ["flameOms", 7.2, 8.8],
+  ],
+  follow: [[6.6, 0.42]],
+});
 
 // For other packs: every real world's id.
 export const REAL_WORLDS = WORLDS.map((w) => w.id);

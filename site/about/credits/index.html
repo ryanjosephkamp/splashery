@@ -2942,10 +2942,33 @@
             </li>
             <li>
               Saturn V: NASA's
-              <a href="https://science.nasa.gov/3d-resources/saturn-v/">Saturn V 3D model</a> (NASA
-              3D Resources, &quot;free to download and use&quot; under NASA's
+              <a href="https://science.nasa.gov/3d-resources/saturn-v/">Saturn V 3D model</a>
+              (NASA/Michael D. Carbajal), NASA 3D Resources, used under NASA's
               <a href="https://www.nasa.gov/nasa-brand-center/images-and-media/">media guidelines</a
-              >).
+              >.
+            </li>
+            <li>
+              Space Launch System: NASA's printable
+              <a href="https://science.nasa.gov/3d-resources/space-launch-system-sls/"
+                >Space Launch System (SLS) model</a
+              >, NASA 3D Resources, used under NASA's media guidelines. Cut into its pieces, colored
+              as it flew on Artemis I and simplified by <code>tools/sp2-rockets.mjs</code>; Orion's
+              crew module, hidden in the model, is drawn as a cone.
+            </li>
+            <li>
+              Space Shuttle: NASA's
+              <a href="https://science.nasa.gov/3d-resources/space-shuttle-a/"
+                >Space Shuttle (A) model</a
+              >
+              (NASA/Michael D. Carbajal), NASA 3D Resources, used under NASA's media guidelines.
+              Decoded from Draco, cut into its pieces and colored by
+              <code>tools/sp2-rockets.mjs</code> (its cockpit windows' frames, finer than a splat,
+              are left out).
+            </li>
+            <li>
+              None of the three models has a texture, so none carries a logo or insignia (the Saturn
+              V's lettering reads &quot;UNITED STATES&quot; and &quot;USA&quot;, with small U.S.
+              flags).
             </li>
           </ul>
           <h2 id="data-and-climate-lane-data-and-climate">
@@ -4107,6 +4130,16 @@ subject to the following conditions:
               <a href="https://github.com/donmccurdy/glTF-Transform"
                 >https://github.com/donmccurdy/glTF-Transform</a
               >: reads the glTF models that <code>tools/mesh-to-splats.mjs</code> turns into splats.
+            </li>
+            <li>
+              <code>@gltf-transform/extensions</code> 4.5.0 (MIT),
+              <a href="https://github.com/donmccurdy/glTF-Transform"
+                >https://github.com/donmccurdy/glTF-Transform</a
+              >, and <code>draco3dgltf</code> 1.5.7 (Apache-2.0),
+              <a href="https://github.com/google/draco">https://github.com/google/draco</a>: decode
+              NASA's Draco-compressed Space Shuttle model in
+              <code>tools/sp2-rockets.mjs</code> (lane Space r2), which writes it again
+              uncompressed. Nothing of them is served.
             </li>
             <li>
               <code>jpeg-js</code> 0.4.4 (BSD-3-Clause),
