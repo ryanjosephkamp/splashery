@@ -1906,6 +1906,10 @@ export const RECIPES = {
   },
 
   "gift-box": {
+    // Lane Any pose: turned over in Hands-on, its rising splats keep to the
+    // toy's own frame (the confetti bursts out of the open lid), not the
+    // world's up.
+    gravity: false,
     alive: true,
     options: [
       { key: "paper", label: "Paper", type: "color", default: "#e8435a" },
@@ -2559,6 +2563,9 @@ export const RECIPES = {
   },
 
   "potion-bottle": {
+    // Lane Any pose: turned over in Hands-on, its rising splats keep to the
+    // toy's own frame (the puff leaves the neck), not the world's up.
+    gravity: false,
     alive: true,
     options: [{ key: "color", label: "Potion", type: "color", default: "#b44cff" }],
     controls: [{ key: "pop", label: "Pop the cork", type: "pulse", ease: 1.8 }],

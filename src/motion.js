@@ -70,6 +70,8 @@ export class MotionDriver {
     this.addon = null; // { parts, data } of a rig's kit-built add-on
     this.addonU = null;
     this.out = null;
+    this.sliderIn = null; // lane Pages r6: the stage slider's value
+    this.figures = []; // lane Pages r6: the scene's figure depths
     // UI r3: a long tap effect pauses on the next tap and resumes on the one
     // after (pausedAt is the clock time it paused at, pausedKey its control).
     this.pausedAt = null;
@@ -102,6 +104,7 @@ export class MotionDriver {
     this.pausedAt = null; // UI r3
     this.pausedKey = null;
     this.unseen = null;
+    this.sliderIn = null; // lane Pages r6
   }
 
   // A rig's add-on (a small kit-built splat cloud with its own parts).
@@ -163,6 +166,9 @@ export class MotionDriver {
   // tap as info.tap = { point, key, pick, time, n }.
   act(time, point = null, forced = null) {
     const a = this.recipe?.action;
+    // Lane Molecule viewer (engine): what the tap's `action.at` asked to tell
+    // the person ({ say: "…" } in its result), for the player to show.
+    this.said = null;
     // Lane Live input r2: a recipe may act inside the person's own gesture
     // (a song's audio may start playing only there, on a phone).
     a?.onAct?.(point, this.state);
@@ -173,6 +179,7 @@ export class MotionDriver {
       pick = forced.pick ?? null;
     } else if (a?.at && point) {
       const r = a.at(point, this.state);
+      if (r && typeof r === "object" && r.say) this.said = String(r.say);
       if (typeof r === "string") key = r;
       else if (r?.options) {
         // A tap that switches the toy ({ options, key, pick }): the player
@@ -318,8 +325,17 @@ export class MotionDriver {
     // the vertical), so a toy can tell when a drag spins it (the spinning top).
     const view = cameraPos && info?.center ? Math.atan2(cameraPos[0] - info.center[0], cameraPos[2] - info.center[2]) : null; // prettier-ignore
     const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
+    // Lane Pages r6: the slider over the stage (out.slider) as the visitor
+    // last set it ({ id, value, n }, n counting the changes), and the scene's
+    // figure depths (toy.figures; a drive may hand back a new list in
+    // out.figures, which the player keeps in the scene).
+    about.slider = this.sliderIn;
+    about.figures = this.figures;
     // Lane Hands engine A: Hands-on's shake, finger and wheels (src/physics/fields.js).
     if (this.hands) about.hands = this.hands;
+    // Lane Any pose: the world's up in the recipe's frame while Hands-on has
+    // the toy turned (absent upright), for effects that fall or pour.
+    if (this.poseUp) about.up = this.poseUp;
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     // Lane Physics: pieces picked up in Hands-on go where the physics puts
     // them (src/physics/hands-on.js), and are sorted again now and then.
@@ -367,6 +383,9 @@ export class MotionDriver {
       // (always set, like the tokens).
       u["uSpLever[0]"] = packLeverGroups(this.leverGroupData, this.ctx?.kit?.levers);
       u["uSpLevers[0]"] = packLevers(this.leverData, drive.levers);
+      // Volumes (lane Imaging): the cutting plane and density window of
+      // the volume kind (always set, like the tokens).
+      Object.assign(u, packVolume(drive.volume, this.ctx?.transform));
       if (this.ctx?.rig) {
         const td = this.tintData.fill(0);
         (this.ctx.parts || []).forEach((def, i) => {
@@ -404,7 +423,7 @@ export class MotionDriver {
 
 // Packs part transforms for uSpParts: per part a rotation, the pivot (w =
 // scale - 1 about the pivot) and an offset (w = splat visibility).
-function packParts(data, parts, driven, scale) {
+export function packParts(data, parts, driven, scale) {
   for (let i = 0; i < 16; i++) {
     const o = i * 12;
     const def = parts[i];
@@ -420,14 +439,17 @@ function packParts(data, parts, driven, scale) {
       if (pd.offset) po = [pd.offset[0] * scale, pd.offset[1] * scale, pd.offset[2] * scale];
       if (pd.visible !== undefined) vis = pd.visible;
       if (pd.scale !== undefined) grow = pd.scale - 1;
-      cull = !!pd.cull;
+      cull = pd.cull === "below" ? "below" : !!pd.cull;
     }
     const pv = def ? def.pivot : [0, 0, 0];
     data.set(pq, o);
     data.set([pv[0], pv[1], pv[2], grow], o + 4);
     // A culled part hides its splats on the far side of its centre (the
-    // kit shader reads visibility -w - 1 from a w of -1 or less).
-    data.set([po[0], po[1], po[2], cull ? -1 - Math.max(0, vis) : vis], o + 8);
+    // kit shader reads visibility -w - 1 from a w of -1 or less); cull:
+    // "below" hides those under the level plane through it (lane Night sky,
+    // -w - 10 from a w of -10 or less).
+    const w = cull === "below" ? -10 - Math.max(0, vis) : cull ? -1 - Math.max(0, vis) : vis;
+    data.set([po[0], po[1], po[2], w], o + 8);
   }
   return data;
 }
@@ -465,6 +487,31 @@ function packLevers(data, levers) {
   for (let i = 0; i < MAX_LEVERS; i++)
     data[i] = q(levers[0], i) + 256 * q(levers[1], i) + 65536 * q(levers[2], i);
   return data;
+}
+
+// The volume kind's uniforms (lane Imaging) from out.volume = { normal,
+// at, slab, window: [lo, hi], glow: [r, g, b], glowWidth }, in recipe
+// coordinates: splats beyond the plane through at * normal (on the side the
+// normal points to) are hidden, or, with a slab width, all but those within
+// half of it; only densities inside the window show; splats within glowWidth
+// of the cut face take the glow. Without out.volume nothing is cut.
+function packVolume(v, transform) {
+  const c = transform?.center || [0, 0, 0];
+  const s = transform?.scale ?? 1;
+  const w = v?.window || [0, 1];
+  const lo = Number.isFinite(w[0]) ? w[0] : 0;
+  const hi = Number.isFinite(w[1]) ? w[1] : 1;
+  const len = v?.normal ? Math.hypot(...v.normal) : 0;
+  if (!(len > 0) || !Number.isFinite(len))
+    return { uSpVol: [1, 0, 0, 0], uSpVolP: [0, 0, lo, hi], uSpVolC: [0, 0, 0, 0] };
+  const n = v.normal.map((x) => x / len);
+  const off = s * ((v.at ?? 0) - (n[0] * c[0] + n[1] * c[1] + n[2] * c[2]));
+  const g = v.glow || [0, 0, 0];
+  return {
+    uSpVol: [n[0], n[1], n[2], off],
+    uSpVolP: [1, Math.max(0, (v.slab ?? 0) * 0.5 * s), lo, hi],
+    uSpVolC: [g[0], g[1], g[2], v.glow ? Math.max(0, (v.glowWidth ?? 0.03) * s) : 0],
+  };
 }
 
 // Game pieces (tokens) the kit shader can move: 32 chess pieces and 16

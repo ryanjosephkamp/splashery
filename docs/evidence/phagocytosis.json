@@ -1,0 +1,78 @@
+{
+  "toy": "phagocytosis",
+  "checked": "2026-10-05",
+  "summary": "The toy shows a neutrophil eating a bacterium in the steps a microbiology textbook gives: pseudopods wrap it into a phagosome, lysosomes fuse to make a phagolysosome, it is digested and the waste is released. The cell and its parts are a clear diagram.",
+  "claims": [
+    {
+      "claim": "The phagocyte wraps the bacterium in pseudopods and pinches it off into a membrane vesicle, the phagosome.",
+      "how": "The membrane near the bacterium reaches round it in two layers until the opening closes; a phagosome around the bacterium is then drawn into the cell.",
+      "where": "src/packs/tiny-r2.js (wrapPoint)",
+      "sources": [
+        {
+          "title": "Microbiology, 17.4 Pathogen Recognition and Phagocytosis",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/microbiology/pages/17-4-pathogen-recognition-and-phagocytosis",
+          "says": "the phagocyte forms a pseudopod that wraps around the pathogen and then pinches it off into a membrane vesicle called a phagosome."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "Lysosomes fuse with the phagosome to form a phagolysosome, where enzymes digest the bacterium.",
+      "how": "Five lysosomes travel to the phagosome one after another and join it; it turns pink (a phagolysosome); the bacterium comes apart into six pieces that shrink.",
+      "where": "src/packs/tiny-r2.js (phagocytosis drive)",
+      "sources": [
+        {
+          "title": "Microbiology, 17.4 Pathogen Recognition and Phagocytosis",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/microbiology/pages/17-4-pathogen-recognition-and-phagocytosis",
+          "says": "The phagosome containing the pathogen fuses with one or more lysosomes, forming a phagolysosome … Lysosomal enzymes such as lysozyme, phospholipase, and proteases digest the pathogen."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": "The bacterium breaks into a few solid pieces; real digestion takes it apart molecule by molecule."
+    },
+    {
+      "claim": "The leftover waste is released from the cell.",
+      "how": "The phagolysosome moves to the membrane and its remains go out of the cell.",
+      "where": "src/packs/tiny-r2.js (phagocytosis drive)",
+      "sources": [
+        {
+          "title": "Microbiology, 17.4 Pathogen Recognition and Phagocytosis",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/microbiology/pages/17-4-pathogen-recognition-and-phagocytosis",
+          "says": "Once degradation is complete, leftover waste products are excreted from the cell in an exocytic vesicle."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "Neutrophils are the most common white blood cells, have a lobed nucleus and prefer to eat bacteria.",
+      "how": "The cell has a nucleus of three joined lobes.",
+      "where": "src/packs/tiny-r2.js (phagocytosis build)",
+      "sources": [
+        {
+          "title": "Anatomy and Physiology 2e, 18.4 Leukocytes and Platelets",
+          "publisher": "OpenStax",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-4-leukocytes-and-platelets",
+          "says": "The nucleus has a distinct lobed appearance and may have two to five lobes … efficient phagocytes with a preference for bacteria."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The bacterium swims to the cell; in the body the neutrophil also crawls toward it, following chemical signals (chemotaxis).",
+    "The phagosome's acidification and the burst of reactive oxygen that neutrophils use to kill bacteria are left out.",
+    "New lysosomes bud from the Golgi and a new bacterium arrives at the end, so the toy can play again.",
+    "The cell is drawn about three times the bacterium's length; a real neutrophil (about 12 micrometers) is about six times a 2-micrometer bacterium."
+  ],
+  "fixes": []
+}

@@ -5,6 +5,7 @@
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
+import { labsOn } from "./toys.js"; // lane PDF lab
 import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
@@ -39,6 +40,8 @@ function pct(v) {
 }
 
 export function createUI(app) {
+  let inputDrop = null; // lane Molecule viewer (engine): the toy's own drop, or null
+  let inputShown = null; // and its "what is showing" line
   initLive(app); // lane Live input: the live sources, and Clap to tap (labs)
   const els = {
     panel: $("panel"),
@@ -56,6 +59,10 @@ export function createUI(app) {
     flagToggle: $("flag-toggle"), // UI r3
     flagPop: $("flag-pop"), // UI r3
     flagGlobal: $("flag-global"), // UI r3
+    popToggle: $("pop-toggle"), // lane Pages r6
+    toySlider: $("toy-slider"), // lane Pages r6
+    toySliderLabel: $("toy-slider-label"),
+    toySliderInput: $("toy-slider-input"),
     tabs: $("tabs"),
     panes: $("panes"),
     shelf: $("shelf"),
@@ -171,6 +178,8 @@ export function createUI(app) {
     webmRow: $("webm-row"),
     webmSeconds: $("webm-seconds"),
     exportWebm: $("export-webm"),
+    pdfRow: $("pdf-row"), // lane PDF lab
+    exportPdf: $("export-pdf"), // lane PDF lab
     webmUnavailable: $("webm-unavailable"),
     recordRow: $("record-row"), // UI r5
     recordStart: $("record-start"),
@@ -513,6 +522,7 @@ export function createUI(app) {
     controlInputs.clear();
     for (const c of recipe?.controls || []) {
       if (c.type === "pulse") continue;
+      if (c.global) continue; // lane Pages r6: set from the top bar
       if (c.type === "toggle") {
         if (recipe.action?.key === c.key) continue;
         const row = document.createElement("label");
@@ -566,7 +576,16 @@ export function createUI(app) {
       let input;
       if (o.type === "select") {
         input = document.createElement("select");
-        for (const ch of o.choices) input.add(new Option(ch.label, ch.id));
+        // Choices with a `group` are listed under that heading (an optgroup).
+        let group = null;
+        for (const ch of o.choices) {
+          if (ch.group && ch.group !== group?.label) {
+            group = document.createElement("optgroup");
+            group.label = ch.group;
+            input.appendChild(group);
+          } else if (!ch.group) group = null;
+          (group ?? input).appendChild(new Option(ch.label, ch.id));
+        }
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "flag") {
@@ -611,6 +630,8 @@ export function createUI(app) {
       row.appendChild(input);
       els.toyOptions.appendChild(row);
     }
+    inputDrop = null;
+    inputShown = null;
     if (recipe?.input) renderInputPanel(recipe.input);
     els.toyNote.textContent = recipe
       ? recipe.note || ""
@@ -1554,10 +1575,9 @@ export function createUI(app) {
     open.textContent = input.fileButton || "Open a file…";
     open.addEventListener("click", () => file.click());
     fileRow.append(open);
-    file.addEventListener("change", async () => {
-      const files = [...(file.files || [])];
+    // Lane Molecule viewer (engine): the same path for picked and dropped files.
+    const take = async (files) => {
       const f = files[0];
-      file.value = "";
       if (!f) return;
       // input.maxBytes: a recipe's own cap, a number (the song landscape, lane
       // Live input r2, which streams its file) or a function of nothing (UI r5:
@@ -1571,7 +1591,30 @@ export function createUI(app) {
       }
       if (input.binary) apply("", f.name, f, files);
       else apply(await f.text(), f.name);
+    };
+    file.addEventListener("change", () => {
+      const files = [...(file.files || [])];
+      file.value = "";
+      take(files);
     });
+    // A recipe with input.drop takes a file dropped anywhere on the page when
+    // its extension is one input.accept lists; other toys never see drops.
+    const kinds = String(input.accept || "")
+      .split(",")
+      .map((x) => x.trim().toLowerCase())
+      .filter((x) => x.startsWith("."));
+    inputDrop = input.drop
+      ? (f) => {
+          const ext = (/\.[^.]+$/.exec(f.name)?.[0] ?? "").toLowerCase();
+          if (!kinds.includes(ext)) return false;
+          take([f]);
+          return true;
+        }
+      : null;
+    inputShown = () => {
+      shown.textContent = input.shown?.() || "";
+      shown.hidden = !shown.textContent;
+    };
     const note = document.createElement("p");
     note.className = "note";
     note.textContent = input.note || "";
@@ -1893,6 +1936,13 @@ export function createUI(app) {
     showFlagPop(false);
     els.flagToggle.focus();
   });
+  els.popToggle.addEventListener("click", () => app.togglePopOut()); // lane Pages r6
+  // On a phone, where the row of round buttons is full, Pop out takes the
+  // turntable button's place (a page toy holds still).
+  function placePopToggle() {
+    els.popToggle.style.right = narrow.matches ? getComputedStyle(els.turntableToggle).right : "";
+  }
+  addEventListener("resize", placePopToggle);
   els.flagGlobal.addEventListener("change", () => {
     app.setGlobalFlag(els.flagGlobal.value);
     showFlagPop(false);
@@ -2092,6 +2142,9 @@ export function createUI(app) {
     }),
   );
   els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  // Lane PDF lab: Save as PDF (labs).
+  els.pdfRow.hidden = !labsOn();
+  els.exportPdf.addEventListener("click", () => app.openPdfExport());
   // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
   els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
@@ -2585,6 +2638,28 @@ export function createUI(app) {
     legendBox.appendChild(list);
   });
 
+  // ---- The slider over the stage (lane Pages r6) ------------------------------------
+  // A kit toy's drive() may set out.slider = { id, label, value } (value 0
+  // to 1): a slider shown over the stage while it is set (a risen figure's
+  // depth). Its value is set from the drive when the id changes; moving it
+  // hands { id, value } to the next drive as info.slider.
+  let sliderId = null;
+  app.player?.on("frame", () => {
+    const sl = app.player.motion?.out?.slider || null;
+    const id = sl ? String(sl.id) : null;
+    els.toySlider.hidden = !sl;
+    if (id === sliderId) return;
+    sliderId = id;
+    if (!sl) return;
+    els.toySliderLabel.textContent = sl.label || "";
+    els.toySliderInput.value = String(Math.round(1000 * Math.min(1, Math.max(0, sl.value || 0))));
+    els.toySliderInput.setAttribute("aria-label", sl.label || "Amount");
+  });
+  els.toySliderInput.addEventListener("input", () => {
+    if (sliderId !== null)
+      app.player.sliderInput(sliderId, Number(els.toySliderInput.value) / 1000);
+  });
+
   // ---- Toy help (lane Help) ---------------------------------------------------------
   // A short how-to-play line when a new toy opens (picked from the shelf,
   // opened from a link or after a refresh). It fades after a few seconds and
@@ -3073,6 +3148,15 @@ export function createUI(app) {
     showDrop(on) {
       els.dropOverlay.hidden = !on;
     },
+    // Lane Molecule viewer (engine): a dropped file for the toy's own panel
+    // (input.drop); true when the toy took it.
+    dropOnToy(f) {
+      return inputDrop ? inputDrop(f) : false;
+    },
+    // Lane Molecule viewer (engine): updates the panel's "what is showing" line.
+    refreshInputShown() {
+      inputShown?.();
+    },
     collapseSheet() {
       setMode("row");
     },
@@ -3089,6 +3173,16 @@ export function createUI(app) {
       else setMode(stop);
     },
     toggleFocus: () => setFocus(!focusOn),
+    // Lane Pages r6: the top bar's Pop out, shown while a page toy is open.
+    setPopOut(available, on) {
+      els.popToggle.hidden = !available;
+      document.body.classList.toggle("pop-toy", !!available);
+      placePopToggle();
+      els.popToggle.setAttribute("aria-pressed", String(!!on));
+      els.popToggle.title = on
+        ? "Pop out: on (tap a figure to raise it)"
+        : "Pop out: off (turn it on, then tap a figure)";
+    },
     // UI r3: the flag button shows whether a flag is set for every toy.
     setGlobalFlag(code) {
       els.flagToggle.setAttribute("aria-pressed", String(!!code));

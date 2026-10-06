@@ -1,0 +1,65 @@
+{
+  "toy": "perceptron",
+  "checked": "2026-10-04",
+  "summary": "The weighted sum and threshold example are consistent with a perceptron. The weight change is a prepared learning example, and tapping does not train a new model.",
+  "claims": [
+    {
+      "claim": "A perceptron sums weighted inputs and applies a threshold.",
+      "how": "Inputs 1, 0, 1 give sums 0.35 before and 1.35 after, with threshold 1.",
+      "where": "src/packs/computing.js:372",
+      "sources": [
+        {
+          "title": "The perceptron (1958)",
+          "publisher": "Frank Rosenblatt, Psychological Review",
+          "url": "https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf",
+          "says": "Rosenblatt published a probabilistic perceptron model and learning procedure in 1958."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:464",
+      "note": ""
+    },
+    {
+      "claim": "The weight change illustrates a learning update.",
+      "how": "Adding 0.5 times each active input gives the stored second weight set, but the update is not calculated from a live training example.",
+      "where": "src/packs/computing.js:372",
+      "sources": [
+        {
+          "title": "The perceptron (1958)",
+          "publisher": "Frank Rosenblatt, Psychological Review",
+          "url": "https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf",
+          "says": "Rosenblatt published a probabilistic perceptron model and learning procedure in 1958."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:464",
+      "note": "It demonstrates a rule-consistent update once, rather than learning on each tap."
+    },
+    {
+      "claim": "Rosenblatt described the perceptron in 1958.",
+      "how": "The About text now dates the published description, instead of asserting a precise invention year.",
+      "where": "src/toy-help.js:1532",
+      "sources": [
+        {
+          "title": "The perceptron (1958)",
+          "publisher": "Frank Rosenblatt, Psychological Review",
+          "url": "https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf",
+          "says": "Rosenblatt published a probabilistic perceptron model and learning procedure in 1958."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Three fixed inputs and two stored weight sets repeat on each tap. There is no training dataset, learned bias, or ongoing optimizer."
+  ],
+  "fixes": [
+    {
+      "what": "Replace the unsupported invention-year wording with the date of Rosenblatt’s published description.",
+      "where": "src/toy-help.js:1532",
+      "status": "fixed in #278"
+    }
+  ]
+}

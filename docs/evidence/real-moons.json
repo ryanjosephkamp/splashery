@@ -1,0 +1,405 @@
+{
+  "toy": "real-moons",
+  "checked": "2026-10-05",
+  "summary": "5 worlds drawn from real maps (Io, Europa, Ganymede, Callisto, Titan): every splat has its place's measured color, and each named feature is where the planetary gazetteer puts it. The turning speed and the lighting are simplified, and labeled.",
+  "claims": [
+    {
+      "claim": "The color map is Io Galileo SSI / Voyager Global Mosaic, color merge, 1 km.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Io Galileo SSI / Voyager Global Mosaic, color merge, 1 km",
+          "publisher": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/io_galileo_ssi_global_color_merge_mosaic_1km",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Io turns once every 42.459 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Jovian Satellite Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/joviansatfact.html",
+          "says": "Io: radius 1821.5 km; orbital period 1.769138 days, rotation synchronous (S)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Pele, a volcano and its red ring of fallout at -18.71°, 104.72° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/4638",
+          "says": "Pele: diameter 1200 km, center latitude -18.71, center longitude 104.72 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Loki Patera, a lava lake at 13.01°, 51.21° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/3459",
+          "says": "Loki Patera: diameter 227 km, center latitude 13.01, center longitude 51.21 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Prometheus, a volcano at -1.52°, -153.94° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/4836",
+          "says": "Prometheus: diameter 439 km, center latitude -1.52, center longitude -153.94 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "The map is Europa Voyager / Galileo SSI Global Mosaic 500m.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Europa Voyager / Galileo SSI Global Mosaic 500m",
+          "publisher": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Europa turns once every 85.228 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Jovian Satellite Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/joviansatfact.html",
+          "says": "Europa: radius 1560.8 km; orbital period 3.551181 days, rotation synchronous (S)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Pwyll crater and its rays at -25.2°, 88.6° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/4878",
+          "says": "Pwyll: diameter 45 km, center latitude -25.2, center longitude 88.6 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Conamara Chaos, broken plates of ice at 9.7°, 87.3° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/1282",
+          "says": "Conamara Chaos: diameter 144 km, center latitude 9.7, center longitude 87.3 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Tyre, a ringed impact scar at 33.6°, -146.6° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/6170",
+          "says": "Tyre: diameter 149 km, center latitude 33.6, center longitude -146.6 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "The color map is Ganymede Voyager / Galileo SSI Global Color Mosaic 1435m.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Ganymede Voyager / Galileo SSI Global Color Mosaic 1435m",
+          "publisher": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Ganymede turns once every 171.71 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Jovian Satellite Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/joviansatfact.html",
+          "says": "Ganymede: radius 2631.2 km; orbital period 7.154553 days, rotation synchronous (S)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Galileo Regio, old dark ground at 45°, -127° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/2076",
+          "says": "Galileo Regio: diameter 3200 km, center latitude 45, center longitude -127 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Osiris, a young rayed crater at -38°, -166.31° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/4509",
+          "says": "Osiris: diameter 107 km, center latitude -38, center longitude -166.31 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Tros, a young rayed crater at 11.14°, -27.26° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/6091",
+          "says": "Tros: diameter 94 km, center latitude 11.14, center longitude -27.26 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "The map is Callisto Voyager / Galileo SSI Global Mosaic 1km.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Callisto Voyager / Galileo SSI Global Mosaic 1km",
+          "publisher": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/callisto_voyager_galileo_ssi_global_mosaic_1km",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Callisto turns once every 400.54 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Jovian Satellite Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/joviansatfact.html",
+          "says": "Callisto: radius 2410.3 km; orbital period 16.689017 days, rotation synchronous (S)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Valhalla, a giant ringed basin at 14.7°, -56° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/6284",
+          "says": "Valhalla: diameter 3000 km, center latitude 14.7, center longitude -56 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Asgard, a ringed basin at 32.2°, -139.9° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/420",
+          "says": "Asgard: diameter 1400 km, center latitude 32.2, center longitude -139.9 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "The map is Titan Cassini ISS Global Mosaic 4km.",
+      "how": "tools/sp2-maps.mjs reads the source file named in src/space/worlds.js and averages it into the toy's smaller maps (east longitudes from -180° to 180°).",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Titan Cassini ISS Global Mosaic 4km",
+          "publisher": "NASA, JPL, Space Science Institute, Cassini mission; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/titan_cassini_iss_global_mosaic_4005m",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "Titan turns once every 382.69 hours (its sidereal day), sped up by the chosen factor.",
+      "how": "Each frame the drive adds the elapsed time times the speed-up, over the day's length, to the turn.",
+      "where": "src/packs/space-r2.js:150",
+      "sources": [
+        {
+          "title": "Saturnian Satellite Fact Sheet",
+          "publisher": "NASA Space Science Data Coordinated Archive",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturniansatfact.html",
+          "says": "Titan: radius 2,575 km; orbital period 15.945421 days, rotation synchronous (S)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Kraken Mare, a sea of liquid methane and ethane at 68°, 50° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/14399",
+          "says": "Kraken Mare: diameter 1170 km, center latitude 68, center longitude 50 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Xanadu, a bright highland at -15°, -100° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/6958",
+          "says": "Xanadu: diameter 3400 km, center latitude -15, center longitude -100 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    },
+    {
+      "claim": "A tap flies to Selk crater, where the Dragonfly lander is headed at 7°, 161° east, and the map shows it there.",
+      "how": "The drive turns the feature's direction to face the viewer and glides the camera to it; the test checks the turn and the map's heights round the listed center.",
+      "where": "src/space/worlds.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "USGS, IAU",
+          "url": "https://planetarynames.wr.usgs.gov/Feature/14334",
+          "says": "Selk: diameter 80 km, center latitude 7, center longitude 161 (east, -180 to 180; converted where the Gazetteer lists west longitudes)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:164",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The world turns thousands of times faster than real (labeled in the Toy tab: an hour or a day each second).",
+    "North is always up and the sun stays near the equator's plane: the axial tilt and the seasons are left out.",
+    "The sun shades each slope by the cosine of its angle to the sun (Lambert's law) and leaves the night side dark, but nothing casts a shadow, and real surfaces scatter light in more complicated ways.",
+    "The global map has about 1,000 by 500 heights and 2,000 by 1,000 colors; only the patches round the named features are sharper.",
+    "Seams between pictures taken under different light show on the map.",
+    "Io has no global elevation map, so its ground is drawn smooth and the relief choice does not apply.",
+    "Europa has no global elevation map, so its ground is drawn smooth and the relief choice does not apply.",
+    "Ganymede has no global elevation map, so its ground is drawn smooth and the relief choice does not apply.",
+    "Callisto has no global elevation map, so its ground is drawn smooth and the relief choice does not apply.",
+    "Titan's thick haze is left out; its map was taken through the haze in near-infrared light, and seams between pictures taken under different light show.",
+    "Titan has no global elevation map, so its ground is drawn smooth and the relief choice does not apply."
+  ],
+  "fixes": []
+}

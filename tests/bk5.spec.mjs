@@ -153,7 +153,6 @@ test.describe("links and pop-out (no browser)", () => {
 
   test("Pop out lifts the page's figure as one piece and lays it back; the page shows its place empty", async () => {
     const { BOOKS_R5 } = await import("../src/packs/pictures.js");
-    const { POP } = BOOKS_R5;
     const pics = fakePics(9);
     const b = await play("your-book", {}, pics);
     b.tap([0.4, 0, 0.02]);
@@ -163,8 +162,11 @@ test.describe("links and pop-out (no browser)", () => {
     b.set("pop", 1);
     await b.settle();
     b.run(0.1);
+    // (Lane Pages r6: nothing rises by itself; a tap on the figure raises it.)
+    b.tap(BOOKS_R5.point(1, [(FIG[0] + FIG[2]) / 2, (FIG[1] + FIG[3]) / 2]));
     await b.settle();
     // A graphic (a plain background): its layers, the card a little raised.
+    const POP = BOOKS_R5.POP;
     expect(POP.kind).toBe("graphic");
     expect(POP.relief.d.some((v) => v > 0.5)).toBe(true);
     expect(POP.relief.d.some((v) => v < 0.1)).toBe(true);
@@ -173,33 +175,34 @@ test.describe("links and pop-out (no browser)", () => {
     const seen = [];
     for (let i = 0; i < 40; i++) {
       const out = b.run(0.05);
-      const p = out.parts.bk5pop;
+      const p = out.parts.bk5pop0;
       expect(p.visible).toBe(1);
       for (const v of [...p.quat, ...p.offset, p.scale]) expect(Number.isFinite(v)).toBe(true);
       expect(Math.hypot(...p.quat)).toBeCloseTo(1, 5);
       // The page under it is drawn with the figure's place empty.
       const hole = Object.values(out.sheets).find((s) => s.variant);
       expect(hole?.variant).toBe(`hole:${FIG.map((v) => v.toFixed(4)).join(",")}`);
-      expect(out.sheets.pop).toMatchObject({ page: 1, crop: FIG, visible: 1 });
+      expect(out.sheets.pop0).toMatchObject({ page: 1, crop: FIG, visible: 1 });
       seen.push(p.offset[2]);
     }
     expect(POP.phase).toBe("up");
     // It came toward the reader (z up about 0.3) and grew.
     expect(Math.max(...seen)).toBeGreaterThan(0.25);
-    expect(b.out.parts.bk5pop.scale).toBeGreaterThan(1);
-    // A tap on the book switches Pop out off: it lies back and goes.
-    const out = b.tap(BOOKS_R5.point(1, [0.3, 0.9]));
-    expect(out.parts.bk5pop.visible).toBe(1);
+    expect(b.out.parts.bk5pop0.scale).toBeGreaterThan(1);
+    // A tap on the risen figure lays it back (lane Pages r6), and it goes.
+    const F = BOOKS_R5.POP;
+    const out = b.tap([F.at.cx, F.at.cy, 0.3]);
+    expect(out.parts.bk5pop0.visible).toBe(1);
     b.run(1.2);
-    expect(POP.phase).toBe("idle");
-    expect(b.out.parts.bk5pop.visible).toBe(0);
+    expect(BOOKS_R5.POP.phase).toBe("idle");
+    expect(b.out.parts.bk5pop0.visible).toBe(0);
     expect(Object.values(b.out.sheets).some((s) => s.variant)).toBe(false);
     expect(pics.page).toBe(1); // (the tap did not turn the page)
   });
 
   test("a box drawn on the page rises; a page turn puts it back at once", async () => {
     const { BOOKS_R5 } = await import("../src/packs/pictures.js");
-    const { POP, BK5 } = BOOKS_R5;
+    const { BK5 } = BOOKS_R5;
     const pics = fakePics(9);
     const b = await play("your-book", {}, pics);
     b.tap([0.4, 0, 0.02]);
@@ -224,20 +227,20 @@ test.describe("links and pop-out (no browser)", () => {
     b.run(0.1);
     await b.settle();
     b.run(1.5);
-    expect(POP.phase).toBe("up");
-    POP.target.box.forEach((v, i) => expect(v).toBeCloseTo([0.1, 0.1, 0.6, 0.35][i], 5));
-    // Next (the Toy tab) while it is up: the book turns, the figure is back at once.
+    expect(BOOKS_R5.POP.phase).toBe("up");
+    BOOKS_R5.POP.target.box.forEach((v, i) => expect(v).toBeCloseTo([0.1, 0.1, 0.6, 0.35][i], 5));
+    // Next (the Toy tab) while it is up: the figure lays back quickly, then
+    // the book turns (lane Pages r6).
     pics.next();
-    b.frame();
-    expect(POP.phase).toBe("idle");
-    expect(b.out.parts.bk5pop.visible).toBe(0);
+    b.run(0.7);
+    expect(BOOKS_R5.POP.phase).toBe("idle");
+    expect(b.out.parts.bk5pop0.visible).toBe(0);
     b.run(1.6);
     expect(pics.page).toBe(3);
   });
 
-  test("the album lifts the photo on the page in view, and a tap on the other photo lifts that one", async () => {
+  test("the album lifts a photo tapped, and a tap on the other photo lifts that one too", async () => {
     const { BOOKS_R5 } = await import("../src/packs/pictures.js");
-    const { POP } = BOOKS_R5;
     // Two wide photos: they share a page, one above the other.
     const pics = { ...fakePics(4, "image"), aspect: () => 1.5, crop: async () => null };
     const b = await play("photo-album", {}, pics);
@@ -245,23 +248,28 @@ test.describe("links and pop-out (no browser)", () => {
     b.run(1.8);
     b.set("pop", 1);
     await b.settle();
+    // (Lane Pages r6: a tap on the photo raises it.)
+    b.tap(BOOKS_R5.point(0, [0.5, 0.5]));
     // (No depth model here: it waits its 2.5 s at rest, then rises flat.)
     b.run(4.2);
+    let POP = BOOKS_R5.POP;
     expect(POP.kind).toBe("photo");
     expect(POP.phase).toBe("up");
     expect(POP.target.page).toBe(0);
-    expect(b.out.sheets.pop).toMatchObject({ page: 0, crop: [0, 0, 1, 1], visible: 1 });
+    expect(b.out.sheets.pop0).toMatchObject({ page: 0, crop: [0, 0, 1, 1], visible: 1 });
     const hole = Object.entries(b.out.sheets).find(([, s]) => s.variant === "hole");
     expect(hole[0]).toMatch(/^a1ft$/);
-    // The other photo (below it) is tapped: the first lies back, then it rises.
+    // The other photo (below it) is tapped: it rises too (lane Pages r6).
     const other = BOOKS_R5.point(1, [0.5, 0.5]);
     b.tap(other);
     b.run(5.5);
+    POP = BOOKS_R5.POP;
     expect(POP.phase).toBe("up");
     expect(POP.target.page).toBe(1);
+    expect(BOOKS_R5.PG.pops.length).toBe(2);
     b.set("pop", 0);
     b.run(2.5);
-    expect(POP.phase).toBe("idle");
+    expect(BOOKS_R5.POP.phase).toBe("idle");
   });
 });
 
@@ -327,6 +335,19 @@ async function popTo(page, phase, depth = false) {
   throw new Error(`The pop-out never reached ${phase}.`);
 }
 const mid = (b) => [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2];
+// Lane Pages r6: clicks the biggest figure found on a page (once found).
+async function clickFigure(page, n) {
+  const box = await page.waitForFunction(
+    async (n) => {
+      const { BK5 } = (await import("/src/packs/pictures.js")).BOOKS_R5;
+      window.__splashery.player.stage.requestRender();
+      return BK5.figs.get(n)?.[0]?.box || false;
+    },
+    n,
+    { timeout: 60_000 },
+  );
+  await clickPage(page, n, mid(await box.jsonValue()));
+}
 // Screenshots at both sizes, the given one first.
 async function shots(page, name, first = "1440x900") {
   const sizes =
@@ -410,14 +431,15 @@ test.describe("links and pop-out (in the app)", () => {
     await waitSheets(page);
     await page.evaluate(() => window.__splashery.app.pictureStep(1));
     await step(page, 2.5);
-    await page.click("#tab-play");
-    await page.click('label.check-row:has-text("Pop out") input');
+    // (Lane Pages r6: Pop out is the top bar's switch; a click on the figure raises it.)
+    await page.click("#pop-toggle");
+    await clickFigure(page, 1);
     const up = await popTo(page, "up", true);
     expect(up).toMatchObject({ kind: "photo", page: 1 });
     // The figure's sheet is a raised part of page 2, and page 2 shows its place empty.
     const s = await page.evaluate(() => {
       const p = window.__splashery.player.pictures;
-      const pop = p.sheets.find((x) => x.def.id === "pop");
+      const pop = p.sheets.find((x) => x.def.id === "pop0");
       return { pop: pop.shown.key, hole: p.sheets.some((x) => x.shown?.key.includes("|vhole:")) };
     });
     expect(s.pop).toContain("|c0.5000,");
@@ -427,7 +449,7 @@ test.describe("links and pop-out (in the app)", () => {
     await shots(page, "pop");
     await page.setViewportSize({ width: 1440, height: 900 });
     await step(page, 0.3);
-    await page.click('label.check-row:has-text("Pop out") input');
+    await clickFigure(page, 1);
     await popTo(page, "idle");
     const after = await page.evaluate(() => window.__splashery.player.pictures.sheets.some((x) => x.shown?.key.includes("|vhole:") && x.slot?.entity.enabled)); // prettier-ignore
     expect(after).toBe(false);
@@ -442,12 +464,13 @@ test.describe("links and pop-out (in the app)", () => {
     await waitSheets(page);
     await page.evaluate(() => window.__splashery.app.pictureStep(1));
     await step(page, 2.5);
-    await page.evaluate(() => window.__splashery.app.setControl("pop", 1));
+    await page.evaluate(() => window.__splashery.app.togglePopOut());
+    await clickPage(page, 0, [0.5, 0.5]);
     const up = await popTo(page, "up", true);
     expect(up).toMatchObject({ kind: "photo", page: 0 });
     await step(page, 1);
     await shots(page, "album-pop", "390x844");
-    await page.evaluate(() => window.__splashery.app.setControl("pop", 0));
+    await page.evaluate(() => window.__splashery.app.togglePopOut());
     await popTo(page, "idle");
   });
 

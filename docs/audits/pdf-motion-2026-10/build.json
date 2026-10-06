@@ -1,0 +1,52 @@
+{
+  "artifacts": [
+    {
+      "file": "01-animate-ocg.pdf",
+      "bytes": 543675,
+      "pages": 1,
+      "sha256": "d9aa5df1d79364f498aaac312ce0d309baa701bd1a5e2098e2c7a7eb5db1b52d"
+    },
+    {
+      "file": "01-animate-widget.pdf",
+      "bytes": 533858,
+      "pages": 1,
+      "sha256": "f67378b74c0bb1913954d188c0b72844cbdf770c52d7720780f16cf5f1e48c52"
+    },
+    {
+      "file": "02-pdfium-fields.pdf",
+      "bytes": 509656,
+      "pages": 1,
+      "sha256": "9763c56c21f188a5be17f926fd40920746f053165854980e8433cbc379a374a7"
+    },
+    {
+      "file": "03-point-cloud.pdf",
+      "bytes": 2431794,
+      "pages": 1,
+      "sha256": "5aa73b06f073a84302889eaac6b23189b8e879e3e21283a97194dc5b94c951a0"
+    },
+    {
+      "file": "04-embedded-video.pdf",
+      "bytes": 153044,
+      "pages": 1,
+      "sha256": "7e7f27ef23b8d0e7c2852fd47ec40094bf5cadf1ec271dcd4c0fe30712fd9d35"
+    },
+    {
+      "file": "05-still-link-qr.pdf",
+      "bytes": 41793,
+      "pages": 1,
+      "sha256": "fa7cf2fcca18361a611ebf13fbad6656aed6896df752db65470a1cc7f1a9177b"
+    },
+    {
+      "file": "06-html-attachment.pdf",
+      "bytes": 18364,
+      "pages": 1,
+      "sha256": "b3fd17f2d969ab4bffbff0445a33195ba1af9a720f53482a31ef56875d139993"
+    },
+    {
+      "file": "07-page-flip.pdf",
+      "bytes": 179581,
+      "pages": 10,
+      "sha256": "699c28aca70773807137c7c535a086bec04b89f8e9b5e64cf43d802fbfd123b9"
+    }
+  ]
+}

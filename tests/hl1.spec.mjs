@@ -62,9 +62,12 @@ test("the Level 1 sample covers every shelf and material family", () => {
   expect(SAMPLE).toHaveLength(40);
   expect(new Set(SAMPLE).size).toBe(SAMPLE.length);
   expect(selected.every(Boolean)).toBe(true);
-  expect([...new Set(TOYS.map((t) => t.category))].sort()).toEqual(
-    [...new Set(SAMPLE.map((id) => TOYS.find((t) => t.id === id)?.category))].sort(),
-  );
+  // Every shelf the public sees has a toy in the sample. A shelf whose toys are all labs (Imaging,
+  // Arcade and the other new shelves of the October push) joins the sample when the owner makes it
+  // public, so a lane that adds a labs shelf doesn't have to trade away another shelf's toy.
+  const sampled = new Set(SAMPLE.map((id) => TOYS.find((t) => t.id === id)?.category));
+  const publicShelves = [...new Set(TOYS.filter((t) => !t.labs).map((t) => t.category))];
+  expect(publicShelves.filter((c) => !sampled.has(c)).sort()).toEqual([]);
   for (const kind of ["captured", "kit", "procedural"])
     expect(SAMPLE.some((id) => TOYS.find((t) => t.id === id)?.kind === kind)).toBe(true);
 });
