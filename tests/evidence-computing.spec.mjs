@@ -166,15 +166,15 @@ function permutations(a) {
 }
 
 test("sorting: eight independent traces, 384 edge, exhaustive and random inputs", async () => {
-  const text = await read("src/packs/computing.js");
-  const block = text.slice(text.indexOf("const SORT ="), text.indexOf("// The half adder:"));
+  const text = await read("src/packs/computing.js"); // each sortRun comparison: cmp(i, j) <op> 0
+  const block = text.slice(text.indexOf("const SORT_ALGOS ="), text.indexOf("// When each step"));
   expect(block.match(/const start = \[5, 2, 7, 0, 6, 3, 1, 4\];/g)).toHaveLength(1);
   let sites = 0;
   const instrumented = block
     .replace("const start = [5, 2, 7, 0, 6, 3, 1, 4];", "const start = input.slice();")
-    .replace(/(a\[[^\]]+\])\s*(<=|>|<)\s*(a\[[^\]]+\]|p\b)/g, (_, x, op, y) => {
+    .replace(/cmp\(([^,()]+), ([^()]+?)\) (<=|>|<) 0/g, (_, i, j, op) => {
       sites++;
-      return `compare(${x}, ${y}, '${op}')`;
+      return `compare(a[${i}], a[${j}], '${op}')`;
     });
   expect(sites).toBe(10);
   const execute = new Function("input", "compare", `${instrumented}\nreturn SORT;`);
