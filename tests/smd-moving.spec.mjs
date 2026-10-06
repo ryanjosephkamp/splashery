@@ -190,7 +190,7 @@ test.describe("the speed", () => {
     ]) {
       await page.evaluate((s) => window.__splashery.app.setMotion({ speed: s }), speed);
       const r = await played(page, 4000);
-      expect(Math.abs(r.clip / r.real / rate - 1), `speed ${speed}`).toBeLessThan(0.05);
+      expect(Math.abs(r.clip / r.real / rate - 1), `speed ${speed}`).toBeLessThan(0.08); // (a 1.5 s loop at up to 1.75 times: a frame's lag is a few percent)
     }
   });
 

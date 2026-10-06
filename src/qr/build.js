@@ -163,12 +163,55 @@ function lit(c, n, { amb = 0.55, dif = 0.55, spec = 0, shine = 30 } = {}) {
   return addc(mulc(c, amb + dif * d), s);
 }
 
+// ---- Crisp edges (lane QR r3) ---------------------------------------------------------
+// The owner found the modules a little blurry. A lattice of round splats can
+// only end in a soft edge as wide as its splats, so a shape's edges are now
+// drawn by rings of thin splats laid along them: narrow across the edge (the
+// outermost ring 0.03 of a module), longer along it, and finer toward sharp
+// corners; the middle is the even lattice. TUNE holds the knobs (tools/qr3-
+// sharp.mjs measures them); `scale` coarsens them all when a big code would
+// not fit the splat budget.
+export const TUNE = {
+  crisp: true,
+  rings: [0.03, 0.06, 0.11], // each ring's width across the edge (modules)
+  stretch: 3, // a ring splat's length along the edge, in ring widths
+  minLength: 0.12, // and at least this long (shorter splats vanish on a phone)
+  inner: 0.2, // the lattice spacing in the middle
+  sheet: 0.34, // the light sheet's lattice spacing
+};
+
+// Signed distance to a rectangle with rounded corners (positive outside).
+// r: { x0, y0, x1, y1, rad: [top-left, top-right, bottom-right, bottom-left] }.
+function rrectSDF(r, px, py) {
+  const cx = (r.x0 + r.x1) / 2;
+  const cy = (r.y0 + r.y1) / 2;
+  const k = px < cx ? (py > cy ? 0 : 3) : py > cy ? 1 : 2;
+  const rr = r.rad?.[k] || 0;
+  const qx = Math.abs(px - cx) - ((r.x1 - r.x0) / 2 - rr);
+  const qy = Math.abs(py - cy) - ((r.y1 - r.y0) / 2 - rr);
+  return Math.min(Math.max(qx, qy), 0) + Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) - rr;
+}
+
 // ---- The builder ---------------------------------------------------------------------
 
 // code: from encodeQR. o: the toy's options. budget: about how many splats to
 // use. Returns { splats, half, depth }: half is the half-width of the quiet
 // zone's square (modules), depth how far the code stands out in front.
 export function buildCode(code, o, budget = 120000) {
+  if (!TUNE.crisp) return buildOnce(code, o, budget, 0);
+  // The finest edges first; when that is over the budget, one more try at
+  // the coarser scale that should fit (the splats go roughly as the scale to
+  // the power -1.5), and the old lattice (scale 0) if that is smaller still.
+  const r1 = buildOnce(code, o, budget, 1);
+  if (r1.splats.length <= budget) return r1;
+  const s2 = Math.min(4, 1.1 * Math.pow(r1.splats.length / budget, 1 / 1.5));
+  const r2 = buildOnce(code, o, budget, s2);
+  if (r2.splats.length <= budget * 1.15) return r2;
+  const r0 = buildOnce(code, o, budget, 0);
+  return r0.splats.length < r2.splats.length ? r0 : r2;
+}
+
+function buildOnce(code, o, budget, scale) {
   const style = STYLES.some((s) => s.id === o.style) ? o.style : "classic";
   const N = code.size;
   const H = N / 2 + QUIET; // half the width of the code with its quiet zone
@@ -196,12 +239,16 @@ export function buildCode(code, o, budget = 120000) {
   const cx = (c) => c - N / 2 + 0.5;
   const cy = (r) => N / 2 - 0.5 - r;
   // The piece each module moves with.
+  // Lane QR r3: + 100 × how far along its dark path the module is (in
+  // modules, from where the path starts), for Alive's current.
+  const path = pathDistances(code);
   const pieceOf = (r, c) => {
     const id = code.piece[r * N + c];
-    if (id < 0) return [1 + r * N + c, 1];
+    const along = 100 * path[r * N + c];
+    if (id < 0) return [1 + r * N + c, 1 + along];
     const p = code.pieces[id];
     const h = (p.n - 1) / 2;
-    return [1 + (p.row + h) * N + (p.col + h), p.n + (p.kind === "finder" ? 10 : 0)];
+    return [1 + (p.row + h) * N + (p.col + h), p.n + (p.kind === "finder" ? 10 : 0) + along];
   };
   const isEye = (r, c) => {
     const id = code.piece[r * N + c];
@@ -257,15 +304,162 @@ export function buildCode(code, o, budget = 120000) {
   const dot = (p, n, s, col, params, opacity = 1) =>
     out.push({ p, scales: [0.62 * s, 0.62 * s, 0.03 * s], quat: quatTo(n), color: col, opacity, params, pattern: false }); // prettier-ignore
 
+  // A crisp shape (lane QR r3): the rectangle [x0, x1] x [y0, y1] with
+  // rounded corners `rad` (top-left, top-right, bottom-right, bottom-left;
+  // only where both sides of the corner are open) and an optional hole of
+  // the same kind. `open` says which sides are real edges: a side that runs
+  // into a dark neighbor gets no ring, and the lattice runs to it. Rings of
+  // thin splats lie along every open edge (and the hole's), the outermost
+  // narrowest; the lattice fills the middle.
+  const OPEN = { l: true, r: true, t: true, b: true };
+  const rotZ = (a) => [0, 0, Math.sin(a / 2), Math.cos(a / 2)];
+  const crisp = ({
+    x0,
+    y0,
+    x1,
+    y1,
+    open = OPEN,
+    rad = [0, 0, 0, 0],
+    hole = null,
+    notches = [],
+    z,
+    color,
+    params,
+  }) => {
+    // prettier-ignore
+    const sides = [open.t && open.l, open.t && open.r, open.b && open.r, open.b && open.l];
+    rad = rad.map((v, i) => (sides[i] ? v : 0));
+    const dist = (px, py) => {
+      let d = Infinity;
+      if (open.l) d = Math.min(d, px - x0);
+      if (open.r) d = Math.min(d, x1 - px);
+      if (open.b) d = Math.min(d, py - y0);
+      if (open.t) d = Math.min(d, y1 - py);
+      const cs = [[x0 + rad[0], y1 - rad[0], -1, 1], [x1 - rad[1], y1 - rad[1], 1, 1], [x1 - rad[2], y0 + rad[2], 1, -1], [x0 + rad[3], y0 + rad[3], -1, -1]]; // prettier-ignore
+      cs.forEach(([ccx, ccy, sx, sy], i) => {
+        if (rad[i] > 0 && (px - ccx) * sx > 0 && (py - ccy) * sy > 0)
+          d = Math.min(d, rad[i] - Math.hypot(px - ccx, py - ccy));
+      });
+      if (hole) d = Math.min(d, rrectSDF(hole, px, py));
+      // An inside corner: the light module lies beyond it, across both
+      // padded sides.
+      for (const [nx, ny, sx, sy] of notches)
+        d = Math.min(d, (px - nx) * sx > 0 && (py - ny) * sy > 0 ? -1 : Math.hypot(px - nx, py - ny)); // prettier-ignore
+      return d;
+    };
+    if (!scale) {
+      flat(x0, y0, x1, y1, z, sp, (px, py) => dist(px, py) >= 0, color, params);
+      return;
+    }
+    const rings = TUNE.rings.map((v) => v * scale);
+    const minLen = TUNE.minLength * scale;
+    const put = (x, y, along, across, ang) => {
+      const col = typeof color === "function" ? color(x, y) : color;
+      if (!col) return;
+      out.push({ p: [x, y, z], scales: [0.55 * along, 0.55 * across, 0.01], quat: rotZ(ang), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
+    };
+    // A straight run from a to b; ends at a sharp corner step down to the
+    // rings' widths, so the corner stays square.
+    const line = (ax, ay, bx, by, across, len, gradeA, gradeB) => {
+      const L = Math.hypot(bx - ax, by - ay);
+      if (L < 1e-6) return;
+      const ang = Math.atan2(by - ay, bx - ax);
+      const steps = rings.filter((v) => v < len);
+      let sa = gradeA ? steps.slice() : [];
+      let sb = gradeB ? steps.slice() : [];
+      const sum = (a) => a.reduce((x, y) => x + y, 0);
+      while (sum(sa) + sum(sb) > L && (sa.length || sb.length)) {
+        if (sa.length >= sb.length) sa.pop();
+        else sb.pop();
+      }
+      const mid = L - sum(sa) - sum(sb);
+      const n = mid > 1e-6 ? Math.max(1, Math.ceil(mid / len - 0.15)) : 0;
+      const cuts = [...sa, ...Array(n).fill(mid / Math.max(n, 1)), ...sb.reverse()];
+      let u = 0;
+      for (const w of cuts) {
+        const c = (u + w / 2) / L;
+        put(ax + (bx - ax) * c, ay + (by - ay) * c, w, across, ang);
+        u += w;
+      }
+    };
+    const arc = (cx0, cy0, rr, a0, a1, across, len) => {
+      if (rr <= 1e-6) return;
+      const n = Math.max(1, Math.ceil((rr * Math.abs(a1 - a0)) / len - 0.15));
+      const w = (rr * Math.abs(a1 - a0)) / n;
+      for (let i = 0; i < n; i++) {
+        const a = a0 + ((i + 0.5) / n) * (a1 - a0);
+        put(cx0 + rr * Math.cos(a), cy0 + rr * Math.sin(a), w, across, a + Math.PI / 2);
+      }
+    };
+    // A closed (or partly open) contour of a rounded rectangle, clockwise
+    // from the top-left: sides only where `op` says, arcs at rounded corners.
+    const contour = (X0, Y0, X1, Y1, rr, op, across, len) => {
+      const sharp = [0, 1, 2, 3].map((i) => !rr[i] && [op.t && op.l, op.t && op.r, op.b && op.r, op.b && op.l][i]); // prettier-ignore
+      const P = Math.PI;
+      if (op.t) line(X0 + rr[0], Y1, X1 - rr[1], Y1, across, len, sharp[0], sharp[1]);
+      arc(X1 - rr[1], Y1 - rr[1], rr[1], P / 2, 0, across, len);
+      if (op.r) line(X1, Y1 - rr[1], X1, Y0 + rr[2], across, len, sharp[1], sharp[2]);
+      arc(X1 - rr[2], Y0 + rr[2], rr[2], 0, -P / 2, across, len);
+      if (op.b) line(X1 - rr[2], Y0, X0 + rr[3], Y0, across, len, sharp[2], sharp[3]);
+      arc(X0 + rr[3], Y0 + rr[3], rr[3], -P / 2, -P, across, len);
+      if (op.l) line(X0, Y0 + rr[3], X0, Y1 - rr[0], across, len, sharp[3], sharp[0]);
+      arc(X0 + rr[0], Y1 - rr[0], rr[0], P, P / 2, across, len);
+    };
+    let d = 0;
+    for (const w of rings) {
+      const at = d + w / 2; // the ring's middle, in from the edge
+      const len = Math.max(minLen, w * TUNE.stretch);
+      contour(
+        open.l ? x0 + at : x0,
+        open.b ? y0 + at : y0,
+        open.r ? x1 - at : x1,
+        open.t ? y1 - at : y1,
+        rad.map((v) => (v > 0 ? Math.max(v - at, 1e-4) : 0)),
+        open,
+        w,
+        len,
+      );
+      if (hole)
+        contour(hole.x0 - at, hole.y0 - at, hole.x1 + at, hole.y1 + at, (hole.rad || [0, 0, 0, 0]).map((v) => (v > 0 ? v + at : 0)), OPEN, w, len); // prettier-ignore
+      d += w;
+    }
+    // The middle: the even lattice, from just inside the rings.
+    const s = TUNE.inner * scale;
+    flat(x0, y0, x1, y1, z, s, (px, py) => dist(px, py) >= d - 0.25 * s, color, params);
+  };
+  // A module's open sides (where its neighbor is light).
+  const openOf = (r, c) => ({ l: !dark(r, c - 1), r: !dark(r, c + 1), t: !dark(r - 1, c), b: !dark(r + 1, c) }); // prettier-ignore
+  // A module's inside corners: where both neighbors are dark but the module
+  // across the corner is light. The lattice keeps clear of them (the
+  // neighbors' rings reach in and draw the corner square).
+  const notchesOf = (r, c) => {
+    const out2 = [];
+    for (const [dr, dc] of [[-1, -1], [-1, 1], [1, 1], [1, -1]]) // prettier-ignore
+      if (dark(r + dr, c) && dark(r, c + dc) && !dark(r + dr, c + dc)) out2.push([cx(c) + dc * 0.5, cy(r) - dr * 0.5, dc, -dr]); // prettier-ignore
+    return out2;
+  };
+  // roundCell's corner radii, for crisp().
+  const roundRad = (r, c, rad = 0.5) => {
+    const o = openOf(r, c);
+    return [o.t && o.l, o.t && o.r, o.b && o.r, o.b && o.l].map((b) => (b ? rad : 0));
+  };
+
   // ---- The sheet: the light modules and the quiet zone, one flat square.
-  const sheetZ = 0;
+  // Lane QR r3: the coarser sheet sits a little further behind the modules
+  // (0.26 of a module), so seen at an angle none of its splats sorts in
+  // front of a module's edge (that turned the code gray and hatched).
+  const sheetZ = scale ? -0.12 : 0;
 
   // ---- The plate under it.
   buildPlate(o.plate || "paper", H, pal, out, flat, dot);
 
   // A module's cell, reaching `pad` into each dark neighbor so a run of
   // modules closes up with no seam (each module still moves on its own).
-  const cell = (r, c, pad = sp * 0.75) => {
+  const cell = (
+    r,
+    c,
+    pad = scale ? TUNE.rings.reduce((a, b) => a + b, 0) * scale + 0.03 : sp * 0.75,
+  ) => {
     const x = cx(c);
     const y = cy(r);
     return [
@@ -302,7 +496,7 @@ export function buildCode(code, o, budget = 120000) {
   // run of modules reads as one dark area (readers need that).
   const setting = (r, c, rad, params, eye) => {
     const [x0, y0, x1, y1] = cell(r, c);
-    flat(x0, y0, x1, y1, 0.12, sp, rad ? roundCell(r, c, rad) : null, (px, py) => { const b = codeColor(px, py, eye); return steady(b, mulc(b, 0.55)); }, params); // prettier-ignore
+    crisp({ x0, y0, x1, y1, open: openOf(r, c), rad: roundRad(r, c, rad), notches: notchesOf(r, c), z: 0.12, color: (px, py) => { const b = codeColor(px, py, eye); return steady(b, mulc(b, 0.55)); }, params }); // prettier-ignore
   };
 
   // A finder or alignment pattern's module in a 3D style: one smooth, solid
@@ -318,13 +512,13 @@ export function buildCode(code, o, budget = 120000) {
     const bev = 0.12;
     const hi = steady(base, lit(base, [-0.45, 0.5, 0.74], { amb: 0.8, dif: 0.4 }));
     const lo = steady(base, mulc(base, 0.72));
-    flat(x0, y0, x1, y1, z, sp, round ? roundCell(r, c, round) : null, (px, py) => {
+    crisp({ x0, y0, x1, y1, open, rad: roundRad(r, c, round), notches: notchesOf(r, c), z, params, color: (px, py) => {
       const dx = px - x;
       const dy = py - y;
       if ((open.l && dx < -0.5 + bev) || (open.t && dy > 0.5 - bev)) return hi;
       if ((open.r && dx > 0.5 - bev) || (open.b && dy < -0.5 + bev)) return lo;
       return base;
-    }, params); // prettier-ignore
+    } }); // prettier-ignore
     if (z < 0.05) return;
     const rows = Math.max(2, Math.round(z / sp));
     for (const [show, n] of [
@@ -336,14 +530,38 @@ export function buildCode(code, o, budget = 120000) {
       // prettier-ignore
       if (!show) continue;
       const col = mulc(lit(base, n, { amb: 0.6, dif: 0.5 }), 0.8);
-      for (let j = 0; j < rows; j++)
-        for (let i = 0; i < m; i++) {
-          const t = -0.5 + (i + 0.5) / m;
-          const zz = ((j + 0.5) / rows) * z;
-          dot(n[0] ? [x + n[0] * 0.5, y + t, zz] : [x + t, y + n[1] * 0.5, zz], n, sp, col, params);
-        }
+      // The ends of this side that are outer corners (and how much a rounded
+      // corner cuts off them).
+      const ends = n[0] ? [open.b, open.t] : [open.l, open.r];
+      sideDots(x, y, n, 0.5, z, rows, col, params, ends, round);
     }
   };
+  // A side wall of splats along one edge of a module (normal n, half its
+  // length, height z). Lane QR r3: at an outer corner the splats shrink so
+  // none pokes past the corner (seen front on they showed as small spikes),
+  // and a rounded corner's part of the wall is left out.
+  function sideDots(x, y, n, half, z, rows, col, params, ends = [true, true], cut = 0) {
+    const lo = -half + (ends[0] ? cut : 0);
+    const hi = half - (ends[1] ? cut : 0);
+    const k = Math.max(2, Math.round((m * (hi - lo)) / (2 * half)));
+    for (let j = 0; j < rows; j++)
+      for (let i = 0; i < k; i++) {
+        const t = lo + ((i + 0.5) / k) * (hi - lo);
+        const zz = ((j + 0.5) / rows) * z;
+        const p = n[0] ? [x + n[0] * half, y + t, zz] : [x + t, y + n[1] * half, zz];
+        if (!scale) {
+          dot(p, n, sp, col, params);
+          continue;
+        }
+        // The size along the edge: no further than the corner.
+        let along = 0.62 * sp;
+        if (ends[0]) along = Math.min(along, (t - lo) / 1.6);
+        if (ends[1]) along = Math.min(along, (hi - t) / 1.6);
+        along = Math.max(along, 0.012);
+        const sc = n[0] ? [0.62 * sp, along, 0.03 * sp] : [along, 0.62 * sp, 0.03 * sp];
+        out.push({ p, scales: sc, quat: quatTo(n), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
+      }
+  }
   const inPattern = (r, c) => code.piece[r * N + c] >= 0;
 
   // ---- The dark modules, style by style.
@@ -356,7 +574,7 @@ export function buildCode(code, o, budget = 120000) {
           const y = cy(r);
           const eye = isEye(r, c);
           const [x0, y0, x1, y1] = cell(r, c);
-          flat(x0, y0, x1, y1, 0.14, sp, null, (px, py) => codeColor(px, py, eye), pieceOf(r, c)); // prettier-ignore
+          crisp({ x0, y0, x1, y1, open: openOf(r, c), notches: notchesOf(r, c), z: 0.14, color: (px, py) => codeColor(px, py, eye), params: pieceOf(r, c) }); // prettier-ignore
         }
     },
     dots() {
@@ -368,7 +586,7 @@ export function buildCode(code, o, budget = 120000) {
           if (!dark(r, c) || code.piece[r * N + c] >= 0) continue;
           const x = cx(c);
           const y = cy(r);
-          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.14, sp * 0.85, (px, py) => Math.hypot(px - x, py - y) <= 0.44, (px, py) => codeColor(px, py, false), pieceOf(r, c)); // prettier-ignore
+          crisp({ x0: x - 0.44, y0: y - 0.44, x1: x + 0.44, y1: y + 0.44, rad: [0.44, 0.44, 0.44, 0.44], z: 0.14, color: (px, py) => codeColor(px, py, false), params: pieceOf(r, c) }); // prettier-ignore
         }
       for (const p of code.pieces) {
         const h = (p.n - 1) / 2;
@@ -387,7 +605,14 @@ export function buildCode(code, o, budget = 120000) {
         const inRing = (px, py) =>
           rbox(px, py, ring[0], ring[2]) && !rbox(px, py, ring[1], ring[3]);
         const inCore = (px, py) => rbox(px, py, inner[0], inner[1]);
-        flat(x - R, y - R, x + R, y + R, 0.14, sp * 0.85, (px, py) => inRing(px, py) || inCore(px, py), (px, py) => codeColor(px, py, eye), params); // prettier-ignore
+        const col = (px, py) => codeColor(px, py, eye);
+        const box = (h, rad) => ({ x0: x - h, y0: y - h, x1: x + h, y1: y + h, rad: [rad, rad, rad, rad] }); // prettier-ignore
+        if (!scale)
+          flat(x - R, y - R, x + R, y + R, 0.14, sp * 0.85, (px, py) => inRing(px, py) || inCore(px, py), col, params); // prettier-ignore
+        else {
+          crisp({ ...box(ring[0], ring[2]), hole: box(ring[1], ring[3]), z: 0.14, color: col, params }); // prettier-ignore
+          crisp({ ...box(inner[0], inner[1]), z: 0.14, color: col, params });
+        }
       }
     },
     rounded() {
@@ -398,10 +623,9 @@ export function buildCode(code, o, budget = 120000) {
           if (!dark(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
-          const inside = roundCell(r, c);
           const eye = isEye(r, c);
           const [x0, y0, x1, y1] = cell(r, c);
-          flat(x0, y0, x1, y1, 0.14, sp, inside, (px, py) => codeColor(px, py, eye), pieceOf(r, c)); // prettier-ignore
+          crisp({ x0, y0, x1, y1, open: openOf(r, c), rad: roundRad(r, c), notches: notchesOf(r, c), z: 0.14, color: (px, py) => codeColor(px, py, eye), params: pieceOf(r, c) }); // prettier-ignore
         }
     },
     bricks() {
@@ -425,13 +649,13 @@ export function buildCode(code, o, budget = 120000) {
           const a = 0.5 - e;
           setting(r, c, 0, params, eye);
           // The top: flat, with a lighter bevel on the edges toward the light.
-          flat(x - a, y - a, x + a, y + a, Hb, sp, null, (px, py) => {
+          crisp({ x0: x - a, y0: y - a, x1: x + a, y1: y + a, z: Hb, params, color: (px, py) => {
             const dx = px - x;
             const dy = py - y;
             if (dx < -a + bev || dy > a - bev) return steady(base, lit(base, [-0.5, 0.5, 0.7].map((v) => v / 0.99), { amb: 0.75, dif: 0.45 })); // prettier-ignore
             if (dx > a - bev || dy < -a + bev) return steady(base, mulc(base, 0.7));
             return base;
-          }, params); // prettier-ignore
+          } }); // prettier-ignore
           // The sides that show (the neighbor there is light).
           const sides = [
             [!dark(r - 1, c), [0, 1, 0]],
@@ -443,14 +667,7 @@ export function buildCode(code, o, budget = 120000) {
             if (!show) continue;
             const col = mulc(lit(base, n, { amb: 0.6, dif: 0.5 }), 0.8);
             const rows = Math.max(2, Math.round(Hb / sp));
-            for (let j = 0; j < rows; j++) {
-              const z = ((j + 0.5) / rows) * Hb;
-              for (let i = 0; i < m; i++) {
-                const t = -a + ((i + 0.5) / m) * 2 * a;
-                const p = n[0] ? [x + n[0] * a, y + t, z] : [x + t, y + n[1] * a, z];
-                dot(p, n, sp, col, params);
-              }
-            }
+            sideDots(x, y, n, a, Hb, rows, col, params);
           }
         }
     },
@@ -532,7 +749,10 @@ export function buildCode(code, o, budget = 120000) {
               // Splats on the steep rim are stretched by the slope: size them
               // by it so the dome stays closed.
               const tilt = 1 / Math.max(0.6, n[2]);
-              out.push({ p: [x + dx, y + dy, 0.17 + dz * 0.6], scales: [0.62 * s * tilt, 0.62 * s * tilt, 0.03 * s], quat: quatTo(n), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
+              // Lane QR r3: no rim splat reaches past the module's edge (a
+              // soft halo there blurred the bubble's outline).
+              const sc = scale ? Math.min(0.62 * s * tilt, Math.max(0.025, (0.5 - rr) / 1.4)) : 0.62 * s * tilt; // prettier-ignore
+              out.push({ p: [x + dx, y + dy, 0.17 + dz * 0.6], scales: [sc, sc, 0.03 * s], quat: quatTo(n), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
             }
         }
     },
@@ -565,7 +785,7 @@ export function buildCode(code, o, budget = 120000) {
             // Solid, with the core's light inset from the outer edges.
             const [x0, y0, x1, y1] = cell(r, c);
             const open = { l: !dark(r, c - 1), r: !dark(r, c + 1), t: !dark(r - 1, c), b: !dark(r + 1, c) }; // prettier-ignore
-            flat(x0, y0, x1, y1, 0.14, sp, roundCell(r, c, 0.3), (px, py) => {
+            crisp({ x0, y0, x1, y1, open, rad: roundRad(r, c, 0.3), notches: notchesOf(r, c), z: 0.14, params, color: (px, py) => {
               const dx = px - x;
               const dy = py - y;
               let e = 1;
@@ -574,7 +794,7 @@ export function buildCode(code, o, budget = 120000) {
               if (open.t) e = Math.min(e, 0.5 - dy);
               if (open.b) e = Math.min(e, dy + 0.5);
               return mixc(glass, core, 0.55 * smoothstep01(clamp01((e - 0.08) / 0.3)));
-            }, params); // prettier-ignore
+            } }); // prettier-ignore
             continue;
           }
           const links = [
@@ -594,7 +814,25 @@ export function buildCode(code, o, budget = 120000) {
             }
             return d;
           };
-          flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.14, sp * 0.8, (px, py) => dist(px, py) <= w, (px, py) => across(dist(px, py)), params); // prettier-ignore
+          const tube = (px, py) => across(dist(px, py));
+          if (!scale)
+            flat(x - 0.5, y - 0.5, x + 0.5, y + 0.5, 0.14, sp * 0.8, (px, py) => dist(px, py) <= w, tube, params); // prettier-ignore
+          else {
+            // Lane QR r3: the tube as crisp pieces (a round end and a
+            // straight run to each dark neighbor), the same colors.
+            crisp({ x0: x - w, y0: y - w, x1: x + w, y1: y + w, rad: [w, w, w, w], z: 0.14, color: tube, params }); // prettier-ignore
+            const reach = 0.56;
+            for (const [on, lx, ly] of links) {
+              if (!on) continue;
+              const bx = lx
+                ? [x + Math.min(0, lx * reach), x + Math.max(0, lx * reach)]
+                : [x - w, x + w];
+              const by = ly
+                ? [y + Math.min(0, ly * reach), y + Math.max(0, ly * reach)]
+                : [y - w, y + w];
+              crisp({ x0: bx[0], y0: by[0], x1: bx[1], y1: by[1], open: { l: !lx, r: !lx, t: !ly, b: !ly }, z: 0.14, color: tube, params }); // prettier-ignore
+            }
+          }
           // The halo on the dark wall: faint, wide splats behind the tube.
           if (!light) out.push({ p: [x, y, 0.1], scales: [0.3, 0.3, 0.01], quat: Q_FLAT, color: glass, opacity: 0.16, params, pattern: false }); // prettier-ignore
         }
@@ -605,9 +843,71 @@ export function buildCode(code, o, budget = 120000) {
   // the modules', with the flat styles' modules standing 0.14 of a module in
   // front of it. Seen at an angle, a sheet splat that reached out from under
   // a module sorted in front of it, and the code turned gray and hatched.
-  flat(-H, -H, H, H, sheetZ, sp, null, pal.bg, [0, 0], { sigma: 0.6 });
+  // Lane QR r3: the sheet is coarser now, and leaves out what the dark
+  // modules cover well inside their edges (front on, the modules hide it;
+  // seen at an angle, nothing of it can sort in front of them).
+  const roundish = style === "dots" || style === "neon";
+  const covered = (px, py) => {
+    const c = Math.floor(px + N / 2);
+    const r = Math.floor(N / 2 - py);
+    if (!dark(r, c)) return false;
+    const dx = px - cx(c);
+    const dy = py - cy(r);
+    if (roundish) return Math.hypot(dx, dy) < 0.28;
+    const m = 0.5 - 0.16;
+    if (dx < -m && !dark(r, c - 1)) return false;
+    if (dx > m && !dark(r, c + 1)) return false;
+    if (dy > m && !dark(r - 1, c)) return false;
+    if (dy < -m && !dark(r + 1, c)) return false;
+    return Math.hypot(Math.max(Math.abs(dx) - 0.2, 0), Math.max(Math.abs(dy) - 0.2, 0)) < 0.2;
+  };
+  // Lane QR r3: an underlay in the light color just behind the sheet, so
+  // whatever moves away (a module bursting off, the paper folding) shows
+  // light paper behind it, never a hole through to the plate's back.
+  if (scale) flat(-H, -H, H, H, sheetZ - 0.06, 0.6, null, pal.bg, [0, 0], { sigma: 0.6 });
+  // params [0, 20]: the sheet (it folds with the code in the Fold motion).
+  if (scale)
+    flat(-H, -H, H, H, sheetZ, TUNE.sheet * scale, (px, py) => !covered(px, py), pal.bg, [0, 20], { sigma: 0.6 }); // prettier-ignore
+  else flat(-H, -H, H, H, sheetZ, sp, null, pal.bg, [0, 20], { sigma: 0.6 });
   const depth = { bricks: 0.5, gems: 0.44, bubbles: 0.42, neon: 0.14 }[style] ?? 0.14;
-  return { splats: out, half: H, depth, perModule: m };
+  return { splats: out, half: H, depth, perModule: m, scale };
+}
+
+// How far along its dark path each dark module is: a breadth-first walk over
+// dark modules joined edge to edge, from the first module (in reading order)
+// of each joined group (lane QR r3, Alive's current). Light modules: 0.
+export function pathDistances(code) {
+  const N = code.size;
+  const dist = new Int32Array(N * N).fill(-1);
+  const queue = new Int32Array(N * N);
+  for (let start = 0; start < N * N; start++) {
+    if (!code.dark[start] || dist[start] >= 0) continue;
+    let head = 0;
+    let tail = 0;
+    dist[start] = 0;
+    queue[tail++] = start;
+    while (head < tail) {
+      const i = queue[head++];
+      const r = Math.floor(i / N);
+      const c = i - r * N;
+      for (const [dr, dc] of [
+        [0, 1],
+        [1, 0],
+        [0, -1],
+        [-1, 0],
+      ]) {
+        // prettier-ignore
+        const rr = r + dr;
+        const cc = c + dc;
+        if (rr < 0 || cc < 0 || rr >= N || cc >= N) continue;
+        const j = rr * N + cc;
+        if (!code.dark[j] || dist[j] >= 0) continue;
+        dist[j] = dist[i] + 1;
+        queue[tail++] = j;
+      }
+    }
+  }
+  return Array.from(dist, (d) => Math.max(0, d));
 }
 
 // ---- Plates -------------------------------------------------------------------------

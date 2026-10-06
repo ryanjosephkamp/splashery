@@ -111,7 +111,14 @@ One of three kinds:
     `page` is the page showing, counted from 0 (left out on the first page). Scenes without `media`
     load exactly as before.
 
-  All three are left out when empty.
+  - `figures` (page toys, such as Your book; added October 5, 2026, lane Pages r6): the figures an
+    author raised deeper than the toy's own depth, so a page opens with them at that depth:
+    `[{ "page": 3, "box": [0.1, 0.2, 0.6, 0.55], "depth": 2.5 }]`. `page` counts from 0; `box` is
+    `[x0, y0, x1, y1]` in fractions of the page from its top-left corner; `depth` multiplies the
+    toy's own depth, from 1 to 6. At most 64; anything else is dropped. Scenes without it (every
+    scene saved before) raise every figure at the toy's own depth, as before.
+
+  All four are left out when empty.
 
 - `{ "kind": "procedural", "id": null, "generator": {…}, "clay": […] }`: a generated toy.
   - `generator.shape`: `sphere`, `blob`, `torus`, `capsule` or `knot`.

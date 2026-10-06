@@ -190,6 +190,45 @@ subject to the following conditions:
 - License: Apache License 2.0 (checked on the npm package and the live repository page on October 3,
   2026; the full text is in `vendor/jsqr/LICENSE`).
 
+## pdf-lib 1.17.1 (lane PDF lab)
+
+- Package: `pdf-lib@1.17.1` (file: `vendor/pdf-lib/pdf-lib.esm.min.js`, the package's
+  `dist/pdf-lib.esm.min.js`, unchanged, 523 KB; the license is copied to
+  `vendor/pdf-lib/LICENSE.md`).
+- Source: https://github.com/Hopding/pdf-lib (Andrew Dillon).
+- Loaded only when someone makes a PDF with Save PDF in the Share tab (labs; a dynamic import in
+  `src/pdf-export/pdf.js`), and by the lane's tools and tests in Node. Never on first paint, on the
+  shelf or in an embed.
+- License: MIT (checked on the npm package and the live repository page on October 5, 2026; the full
+  text is in `vendor/pdf-lib/LICENSE.md`). The bundle includes its dependencies, all permissive:
+  `pako` (MIT and Zlib), `@pdf-lib/standard-fonts` and `@pdf-lib/upng` (MIT), and `tslib` (Apache
+  License 2.0, its notice kept at the top of the file). It uses only the 14 standard PDF fonts; no
+  font file is embedded.
+
+## laz-perf 0.0.7 (lane Viewers)
+
+- Package: `laz-perf@0.0.7` (files: `vendor/laz-perf/laz-perf.js` and
+  `vendor/laz-perf/laz-perf.wasm`, the package's `lib/worker/` build, with two comment lines added
+  at the top of the JavaScript and one `export default createLazPerf;` line at its end, so it loads
+  as an ES module; nothing else changed).
+- Source: https://github.com/hobuinc/laz-perf (Hobu, Inc.), a LAZ (compressed LAS) reader compiled
+  to WebAssembly. It is the permissive choice the brief asked for, so no LGPL library is used.
+- Loaded only when someone opens a .laz file in the Point clouds toy (inside its worker). Labs only.
+- License: Apache License 2.0 (checked on the npm package and the live repository's COPYING on
+  October 5, 2026; the full text is in `vendor/laz-perf/LICENSE`).
+
+## WebP codec from splat-transform 3.6.1 (lane Viewers)
+
+- Files: `vendor/webp/webp.mjs` and `vendor/webp/webp.wasm`, copied unchanged from
+  `@playcanvas/splat-transform@3.6.1` (`lib/`), which compiles libwebp to WebAssembly.
+- Sources: https://github.com/playcanvas/splat-transform (PlayCanvas Ltd.) and
+  https://chromium.googlesource.com/webm/libwebp (Google Inc.).
+- Loaded only when someone opens or saves a .sog file in the Splat toolkit (inside its worker). SOG
+  keeps splats in lossless WebP pictures whose bytes must come back exactly; the browser's own
+  decoder, read through a canvas, premultiplies alpha and changes them. Labs only.
+- Licenses: MIT (splat-transform) and BSD-3-Clause with Google's patent grant (libwebp), checked on
+  October 5, 2026; both texts are in `vendor/webp/LICENSE`.
+
 ## Development tools (not shipped)
 
 These are `devDependencies` used to prepare assets and run tests; nothing from them is served.
@@ -212,6 +251,15 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   lab (`tools/qr-scan-lab.mjs`, `tests/qrl.spec.mjs`). `qrcode-generator` 2.0.4 (MIT),
   https://github.com/kazuhikoarase/qrcode-generator: draws its reference codes. Nothing of them is
   served.
+- Python 3 with `laspy` 2.7.0 (BSD-2-Clause), https://github.com/laspy/laspy, `lazrs` 0.8.2 (MIT),
+  https://github.com/laz-rs/laz-rs-python, and `pyproj` 3.7.2 (MIT),
+  https://github.com/pyproj4/pyproj: make the Point clouds samples (`tools/vwr-samples.mjs`) and the
+  LAZ test files (`tools/vwr-fixtures.mjs`). Nothing of them is served.
+- `zxing-wasm` 3.1.4 (MIT), https://github.com/Sec-ant/zxing-wasm, zxing-cpp (Apache-2.0) compiled
+  to WebAssembly: the third QR reader and a Micro QR and rMQR writer in the study of splat QR codes
+  (`tools/qrs-study.mjs`, `tests/qrs-study.spec.mjs`, lane QR lab r2). Nothing of it is served.
+- `bwip-js` 4.11.4 (MIT), https://github.com/metafloor/bwip-js, with BWIPP (MIT): an independent
+  Micro QR and rMQR writer in the same study. Nothing of it is served.
 - `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
   the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
   Chromium at build time. Nothing of three.js is served.
@@ -232,6 +280,16 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   https://github.com/nodeca/pako: reads the FIRE-2 simulation's HDF5 snapshot in
   `tools/sci-galaxy.mjs` (lane Science). The site never loads them. `pngjs` (above) also writes that
   tool's picture of the source data (`--map`).
+- `geotiff` 3.0.5 (MIT), https://github.com/geotiffjs/geotiff.js, with its dependencies
+  `@petamoriken/float16` 3.9.3 (MIT), `lerc` 3.0.0 (Apache-2.0), `parse-headers` 2.0.6 (MIT),
+  `quick-lru` 6.1.2 (MIT), `web-worker` 1.5.0 (Apache-2.0), `xml-utils` 1.10.2 (CC0-1.0) and
+  `zstddec` 0.2.0 (MIT AND BSD-3-Clause): reads the USGS 3DEP elevation tiles (GeoTIFF) by range
+  requests in `tools/sci3-terrain.mjs` (lane Science r3). The site never loads them.
+- `pdfjs-dist` 6.3.289 (Apache-2.0), https://github.com/mozilla/pdf.js: the same version as
+  `vendor/pdfjs/`, with its viewer and scripting sandbox (QuickJS, MIT), which the site doesn't
+  ship. `tests/pdf.spec.mjs` and `tools/pdf-clip.mjs` (lane PDF lab) open a made PDF in it with its
+  scripting on, the engine inside Firefox's PDF viewer, to check that the flip book plays. Nothing
+  of it is served.
 
 ## Build tools outside npm (not shipped)
 
@@ -248,3 +306,38 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
 - msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
   Silicon, if Brush can't run.
+
+## PDF motion audit build tools (Codex task 21; not shipped)
+
+`tools/pdf-motion/` uses these programs/libraries to build the sample PDFs under
+`docs/audits/pdf-motion-2026-10/`. They do not become site runtime dependencies. License sources
+were opened on October 4, 2026; installed package notices were also inspected where available.
+
+- ReportLab 4.4.9 (BSD-3-Clause), https://www.reportlab.com/docs/reportlab-userguide.pdf: lays out
+  the static sample pages. Existing bundled Python package; no ReportLab program is vendored.
+- pypdf 6.10.0 (BSD-3-Clause), https://raw.githubusercontent.com/py-pdf/pypdf/main/LICENSE: writes
+  annotations, document scripts and attachments, and checks the resulting objects.
+- Pillow 12.3.0 (MIT-CMU), https://pillow.readthedocs.io/en/stable/about.html: reduces captured
+  frames to grayscale and assembles verification images. Already listed above for Blender tools;
+  this audit uses the existing bundled Python copy.
+- TeX Live 2026 / pdfTeX 1.40.29 (TeX Live's component licenses; CTAN lists pdfTeX as GPL and the
+  installed executable also reports LGPL component notices), https://ctan.org/pkg/texlive and
+  https://ctan.org/pkg/pdftex, with `animate` dated October 14, 2024 (LPPL-1.3c),
+  https://ctan.org/pkg/animate: builds the color widget and OCG flip books. The generated PDF
+  animation scripts come from `animate`; both LaTeX sources are included. Existing installation.
+- Asymptote 3.15 (core LGPL-3.0-or-later, with separately licensed dependencies including GPL
+  GSL/Readline), https://raw.githubusercontent.com/vectorgraphics/asymptote/master/README: exports
+  the sampled centers as colored PRC markers. Installed through Homebrew after the existing MacTeX
+  3.09 binary crashed. The generated geometry and its `.asy` source are included; the exporter
+  itself is not copied into the repository.
+- FFmpeg / ffprobe 9.0.2 (this installed build reports GPL-3.0-or-later; FFmpeg's base license is
+  LGPL-2.1-or-later, with optional GPL parts), https://ffmpeg.org/legal.html: encodes and inspects
+  the H.264 clip using the existing build's libx264 encoder. No FFmpeg or x264 executable is
+  shipped.
+- Poppler `pdftoppm` 26.05.0 (GPL-2.0-or-later), https://poppler.freedesktop.org/ and
+  https://raw.githubusercontent.com/tsdgeos/poppler_mirror/master/COPYING: renders static first-page
+  posters for inspection, using the bundled runtime. It does not verify active playback.
+
+The existing Playwright, qrcode-generator, jsQR and pngjs tools listed above capture the toy and
+build/check its QR. No DoomPDF, PDF Tetris, Flash player or outside game asset is copied. All image,
+video and point payloads in these samples come from Splashery's procedural grapes toy.

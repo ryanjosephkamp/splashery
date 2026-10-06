@@ -1,0 +1,75 @@
+{
+  "toy": "half-adder",
+  "checked": "2026-10-04",
+  "summary": "The gate explanation and fixed 1 + 1 example are correct. The animation lights the carry and leaves the sum dark, giving binary 10. It does not let the reader choose all four input pairs.",
+  "claims": [
+    {
+      "claim": "XOR produces the sum and AND produces the carry.",
+      "how": "The About truth table gives 00, 01, 01, 10 for 0+0, 0+1, 1+0, 1+1; the actual fixed animation ends at carry 1 and sum 0.",
+      "where": "src/packs/computing.js:1192",
+      "sources": [
+        {
+          "title": "Half adder",
+          "publisher": "All About Circuits textbook",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/",
+          "says": "A half adder produces XOR for the sum and AND for the carry. Two half adders and an OR gate form a full adder."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:949",
+      "note": ""
+    },
+    {
+      "claim": "The animated answer for 1 + 1 is binary 10.",
+      "how": "Both input lamps become one, only the carry output lights, and the sequence then resets. This also runs in the browser.",
+      "where": "src/packs/computing.js:3844",
+      "sources": [
+        {
+          "title": "Half adder",
+          "publisher": "All About Circuits textbook",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/",
+          "says": "A half adder produces XOR for the sum and AND for the carry. Two half adders and an OR gate form a full adder."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:960",
+      "note": ""
+    },
+    {
+      "claim": "A half adder has no incoming carry; a full adder can combine two half adders and an OR gate.",
+      "how": "The About text distinguishes the two circuits; no full adder is presented as part of this toy.",
+      "where": "src/toy-help.js:1593",
+      "sources": [
+        {
+          "title": "Half adder",
+          "publisher": "All About Circuits textbook",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/",
+          "says": "A half adder produces XOR for the sum and AND for the carry. Two half adders and an OR gate form a full adder."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The circuit picture repeats a fixed worked example.",
+      "how": "The driver selects display stages; there is no input-dependent Boolean evaluator for all four cases.",
+      "where": "src/packs/computing.js:1192",
+      "sources": [
+        {
+          "title": "Half adder",
+          "publisher": "All About Circuits textbook",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-9/half-adder/",
+          "says": "A half adder produces XOR for the sum and AND for the carry. Two half adders and an OR gate form a full adder."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:949",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Only the fixed 1 + 1 sequence is animated. The other truth-table rows are explained in the About text, not computed by interactive inputs."
+  ],
+  "fixes": []
+}

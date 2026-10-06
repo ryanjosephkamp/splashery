@@ -1,0 +1,103 @@
+shape,label,level,cond,n,jsqr,jsqr_ci,zxing,zxing_ci,zxingcpp,zxingcpp_ci
+square,Square modules (the baseline),M,front,5,5,57–100%,5,57–100%,5,57–100%
+square,Square modules (the baseline),M,phone,5,5,57–100%,5,57–100%,5,57–100%
+square,Square modules (the baseline),M,hard,5,5,57–100%,1,4–62%,5,57–100%
+square,Square modules (the baseline),H,front,5,4,38–96%,3,23–88%,5,57–100%
+square,Square modules (the baseline),H,phone,5,5,57–100%,5,57–100%,5,57–100%
+square,Square modules (the baseline),H,hard,5,4,38–96%,2,12–77%,5,57–100%
+rounded,Rounded modules,M,front,5,5,57–100%,5,57–100%,5,57–100%
+rounded,Rounded modules,M,phone,5,5,57–100%,5,57–100%,5,57–100%
+rounded,Rounded modules,M,hard,5,5,57–100%,4,38–96%,5,57–100%
+rounded,Rounded modules,H,front,5,5,57–100%,5,57–100%,5,57–100%
+rounded,Rounded modules,H,phone,5,5,57–100%,5,57–100%,5,57–100%
+rounded,Rounded modules,H,hard,5,5,57–100%,5,57–100%,5,57–100%
+dots,"Dots, finders too",M,front,5,5,57–100%,5,57–100%,5,57–100%
+dots,"Dots, finders too",M,phone,5,5,57–100%,5,57–100%,5,57–100%
+dots,"Dots, finders too",M,hard,5,5,57–100%,5,57–100%,5,57–100%
+dots,"Dots, finders too",H,front,5,5,57–100%,5,57–100%,5,57–100%
+dots,"Dots, finders too",H,phone,5,5,57–100%,5,57–100%,5,57–100%
+dots,"Dots, finders too",H,hard,5,5,57–100%,5,57–100%,5,57–100%
+dots-eyes,"Dots, solid square finders",M,front,5,4,38–96%,5,57–100%,5,57–100%
+dots-eyes,"Dots, solid square finders",M,phone,5,5,57–100%,5,57–100%,5,57–100%
+dots-eyes,"Dots, solid square finders",M,hard,5,3,23–88%,1,4–62%,5,57–100%
+dots-eyes,"Dots, solid square finders",H,front,5,4,38–96%,3,23–88%,5,57–100%
+dots-eyes,"Dots, solid square finders",H,phone,5,5,57–100%,5,57–100%,5,57–100%
+dots-eyes,"Dots, solid square finders",H,hard,5,4,38–96%,2,12–77%,5,57–100%
+round-eyes,Round finders (rings and a disk),M,front,5,5,57–100%,5,57–100%,5,57–100%
+round-eyes,Round finders (rings and a disk),M,phone,5,5,57–100%,3,23–88%,5,57–100%
+round-eyes,Round finders (rings and a disk),M,hard,5,3,23–88%,0,0–43%,2,12–77%
+round-eyes,Round finders (rings and a disk),H,front,5,5,57–100%,5,57–100%,5,57–100%
+round-eyes,Round finders (rings and a disk),H,phone,5,5,57–100%,4,38–96%,5,57–100%
+round-eyes,Round finders (rings and a disk),H,hard,5,1,4–62%,0,0–43%,0,0–43%
+circle-frame,Framed in a circle (quiet zone kept),M,front,5,5,57–100%,5,57–100%,5,57–100%
+circle-frame,Framed in a circle (quiet zone kept),M,phone,5,5,57–100%,5,57–100%,5,57–100%
+circle-frame,Framed in a circle (quiet zone kept),M,hard,5,5,57–100%,3,23–88%,5,57–100%
+circle-frame,Framed in a circle (quiet zone kept),H,front,5,5,57–100%,5,57–100%,5,57–100%
+circle-frame,Framed in a circle (quiet zone kept),H,phone,5,5,57–100%,5,57–100%,5,57–100%
+circle-frame,Framed in a circle (quiet zone kept),H,hard,5,4,38–96%,1,4–62%,5,57–100%
+circle-tight,Cut to a circle through the code's corners,M,front,5,5,57–100%,5,57–100%,5,57–100%
+circle-tight,Cut to a circle through the code's corners,M,phone,5,5,57–100%,5,57–100%,5,57–100%
+circle-tight,Cut to a circle through the code's corners,M,hard,5,5,57–100%,4,38–96%,5,57–100%
+circle-tight,Cut to a circle through the code's corners,H,front,5,4,38–96%,3,23–88%,5,57–100%
+circle-tight,Cut to a circle through the code's corners,H,phone,5,5,57–100%,5,57–100%,5,57–100%
+circle-tight,Cut to a circle through the code's corners,H,hard,5,5,57–100%,3,23–88%,5,57–100%
+circle-clip,Cut to a circle inside the code (finders cut),M,front,5,0,0–43%,0,0–43%,0,0–43%
+circle-clip,Cut to a circle inside the code (finders cut),M,phone,5,0,0–43%,0,0–43%,0,0–43%
+circle-clip,Cut to a circle inside the code (finders cut),M,hard,5,0,0–43%,0,0–43%,0,0–43%
+circle-clip,Cut to a circle inside the code (finders cut),H,front,5,0,0–43%,0,0–43%,0,0–43%
+circle-clip,Cut to a circle inside the code (finders cut),H,phone,5,0,0–43%,0,0–43%,0,0–43%
+circle-clip,Cut to a circle inside the code (finders cut),H,hard,5,0,0–43%,0,0–43%,0,0–43%
+decoys-4,"Circle of decoy modules, 4-module quiet zone",M,front,5,5,57–100%,5,57–100%,5,57–100%
+decoys-4,"Circle of decoy modules, 4-module quiet zone",M,phone,5,5,57–100%,5,57–100%,5,57–100%
+decoys-4,"Circle of decoy modules, 4-module quiet zone",M,hard,5,3,23–88%,1,4–62%,5,57–100%
+decoys-4,"Circle of decoy modules, 4-module quiet zone",H,front,5,5,57–100%,5,57–100%,5,57–100%
+decoys-4,"Circle of decoy modules, 4-module quiet zone",H,phone,5,5,57–100%,4,38–96%,5,57–100%
+decoys-4,"Circle of decoy modules, 4-module quiet zone",H,hard,5,4,38–96%,0,0–43%,5,57–100%
+decoys-1,"Circle of decoy modules, 1-module quiet zone",M,front,5,5,57–100%,5,57–100%,5,57–100%
+decoys-1,"Circle of decoy modules, 1-module quiet zone",M,phone,5,5,57–100%,5,57–100%,5,57–100%
+decoys-1,"Circle of decoy modules, 1-module quiet zone",M,hard,5,5,57–100%,3,23–88%,5,57–100%
+decoys-1,"Circle of decoy modules, 1-module quiet zone",H,front,5,5,57–100%,5,57–100%,5,57–100%
+decoys-1,"Circle of decoy modules, 1-module quiet zone",H,phone,5,5,57–100%,5,57–100%,5,57–100%
+decoys-1,"Circle of decoy modules, 1-module quiet zone",H,hard,5,5,57–100%,5,57–100%,5,57–100%
+quiet-2,Quiet zone of 2 modules,M,front,5,5,57–100%,5,57–100%,5,57–100%
+quiet-2,Quiet zone of 2 modules,M,phone,5,5,57–100%,5,57–100%,5,57–100%
+quiet-2,Quiet zone of 2 modules,M,hard,5,5,57–100%,5,57–100%,5,57–100%
+quiet-2,Quiet zone of 2 modules,H,front,5,5,57–100%,5,57–100%,5,57–100%
+quiet-2,Quiet zone of 2 modules,H,phone,5,3,23–88%,5,57–100%,5,57–100%
+quiet-2,Quiet zone of 2 modules,H,hard,5,5,57–100%,4,38–96%,5,57–100%
+quiet-1,Quiet zone of 1 module,M,front,5,5,57–100%,4,38–96%,5,57–100%
+quiet-1,Quiet zone of 1 module,M,phone,5,5,57–100%,5,57–100%,5,57–100%
+quiet-1,Quiet zone of 1 module,M,hard,5,5,57–100%,3,23–88%,5,57–100%
+quiet-1,Quiet zone of 1 module,H,front,5,5,57–100%,5,57–100%,5,57–100%
+quiet-1,Quiet zone of 1 module,H,phone,5,5,57–100%,5,57–100%,5,57–100%
+quiet-1,Quiet zone of 1 module,H,hard,5,5,57–100%,5,57–100%,5,57–100%
+quiet-0,No quiet zone (on the dark screen),M,front,5,1,4–62%,5,57–100%,0,0–43%
+quiet-0,No quiet zone (on the dark screen),M,phone,5,0,0–43%,0,0–43%,0,0–43%
+quiet-0,No quiet zone (on the dark screen),M,hard,5,0,0–43%,0,0–43%,0,0–43%
+quiet-0,No quiet zone (on the dark screen),H,front,5,1,4–62%,5,57–100%,0,0–43%
+quiet-0,No quiet zone (on the dark screen),H,phone,5,0,0–43%,0,0–43%,0,0–43%
+quiet-0,No quiet zone (on the dark screen),H,hard,5,0,0–43%,0,0–43%,0,0–43%
+quiet-0-white,"No quiet zone, on a white screen",M,front,5,5,57–100%,5,57–100%,5,57–100%
+quiet-0-white,"No quiet zone, on a white screen",M,phone,5,5,57–100%,5,57–100%,5,57–100%
+quiet-0-white,"No quiet zone, on a white screen",M,hard,5,5,57–100%,0,0–43%,5,57–100%
+quiet-0-white,"No quiet zone, on a white screen",H,front,5,5,57–100%,5,57–100%,5,57–100%
+quiet-0-white,"No quiet zone, on a white screen",H,phone,5,3,23–88%,4,38–96%,5,57–100%
+quiet-0-white,"No quiet zone, on a white screen",H,hard,5,5,57–100%,0,0–43%,5,57–100%
+quiet-pattern,Quiet zone filled with a pattern,M,front,5,0,0–43%,0,0–43%,0,0–43%
+quiet-pattern,Quiet zone filled with a pattern,M,phone,5,0,0–43%,0,0–43%,0,0–43%
+quiet-pattern,Quiet zone filled with a pattern,M,hard,5,0,0–43%,0,0–43%,0,0–43%
+quiet-pattern,Quiet zone filled with a pattern,H,front,5,0,0–43%,0,0–43%,0,0–43%
+quiet-pattern,Quiet zone filled with a pattern,H,phone,5,0,0–43%,0,0–43%,0,0–43%
+quiet-pattern,Quiet zone filled with a pattern,H,hard,5,0,0–43%,0,0–43%,0,0–43%
+stretch-2x1,Stretched 2:1 sideways,M,front,5,5,57–100%,0,0–43%,5,57–100%
+stretch-2x1,Stretched 2:1 sideways,M,phone,5,5,57–100%,0,0–43%,5,57–100%
+stretch-2x1,Stretched 2:1 sideways,M,hard,5,5,57–100%,0,0–43%,5,57–100%
+stretch-2x1,Stretched 2:1 sideways,H,front,5,3,23–88%,0,0–43%,5,57–100%
+stretch-2x1,Stretched 2:1 sideways,H,phone,5,3,23–88%,0,0–43%,5,57–100%
+stretch-2x1,Stretched 2:1 sideways,H,hard,5,5,57–100%,0,0–43%,5,57–100%
+turn-45,Turned 45° (a diamond),M,front,5,5,57–100%,5,57–100%,5,57–100%
+turn-45,Turned 45° (a diamond),M,phone,5,1,4–62%,0,0–43%,5,57–100%
+turn-45,Turned 45° (a diamond),M,hard,5,3,23–88%,3,23–88%,5,57–100%
+turn-45,Turned 45° (a diamond),H,front,5,5,57–100%,5,57–100%,5,57–100%
+turn-45,Turned 45° (a diamond),H,phone,5,1,4–62%,0,0–43%,5,57–100%
+turn-45,Turned 45° (a diamond),H,hard,5,0,0–43%,0,0–43%,4,38–96%

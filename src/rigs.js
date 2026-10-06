@@ -393,16 +393,63 @@ function panel(k, at, n, w, h, share, part, fn, { size = 0.6 } = {}) {
 
 // ---- Rigs -----------------------------------------------------------------------
 
-// Lane Fix5: where the scanned alarm clock's second hand lies at rest (read
-// from renders face on and from the side): from the center of the dial, which
-// sits at z = 0.21 behind the bezel, toward "I".
-const CLOCK_HAND = {
-  pivot: [0, -0.18, 0.21],
-  dir: [0.405, 0.914, 0],
-  len: 0.63,
-  tail: 0.1,
-  z: 0.03,
+// Lane Fix8: the scanned alarm clock's hands, measured from the splats. All
+// three turn about the center of the dial (the dial's face is at z = 0.193,
+// the scanned hands lie just in front of it, below z = 0.215, and the bezel
+// starts at a radius of 0.64). Each kit-built hand is given as a half-width
+// along its length (from the pivot, in toy units): the hour hand a thin
+// shaft with a spade near its tip, the minute hand a longer one with a
+// slimmer lozenge, the second hand Lane Fix5's red needle with a short tail.
+// They are built pointing at twelve and stacked hour, minute, second, a
+// little off the dial so the dial's big splats never sort in front of them.
+const CLOCK = {
+  pivot: [0, -0.186, 0.21],
+  hands: [
+    {
+      name: "hour",
+      z: 0.014,
+      len: 0.48,
+      tail: 0,
+      color: ["#262626", "#161616"],
+      half: (a) =>
+        a < 0.25 ? 0.009 : a < 0.31 ? 0.009 + 0.034 * ease(band(a, 0.25, 0.31)) : a < 0.38 ? 0.043 - 0.034 * ease(band(a, 0.31, 0.38)) : 0.009 - 0.0065 * band(a, 0.38, 0.48), // prettier-ignore
+    },
+    {
+      name: "minute",
+      z: 0.022,
+      len: 0.62,
+      tail: 0,
+      color: ["#262626", "#161616"],
+      half: (a) =>
+        a < 0.34 ? 0.009 : a < 0.4 ? 0.009 + 0.017 * ease(band(a, 0.34, 0.4)) : a < 0.46 ? 0.026 - 0.017 * ease(band(a, 0.4, 0.46)) : 0.009 - 0.0065 * band(a, 0.46, 0.62), // prettier-ignore
+    },
+    {
+      name: "second",
+      z: 0.03,
+      len: 0.63,
+      tail: 0.1,
+      color: ["#e2432c", "#c83322"],
+      half: (a) => (a < 0 ? 0.009 : 0.007 * (1 - 0.4 * (a / 0.63))),
+    },
+  ],
 };
+
+// The real alarm clock's hands at this device's time (lane Fix8), as angles
+// clockwise from twelve. The second hand steps once a second, snapping onto
+// each mark with a little overshoot, and the minute and hour hands move on
+// with it, as the gears carry them.
+export function clockHands(d) {
+  const s = d.getSeconds();
+  const f = d.getMilliseconds() / 1000;
+  const tick = s - Math.exp(-f * 30) * Math.cos(f * 40);
+  const m = d.getMinutes() + s / 60;
+  const h = (d.getHours() % 12) + m / 60;
+  return {
+    hour: { angle: (h / 12) * TAU },
+    minute: { angle: (m / 60) * TAU },
+    second: { angle: (tick / 60) * TAU },
+  };
+}
 
 export const RIGS = {
   // ---- Scans ----------------------------------------------------------------------
@@ -1371,15 +1418,25 @@ export const RIGS = {
     },
   },
 
-  // The second hand ticks all the time; a tap makes it ring and rattle.
+  // The hands show the real time; a tap makes it ring and rattle.
   "alarm-clock": {
     alive: true,
     parts: [
       {
+        // Lane Fix8: all three scanned hands, hidden. They lie in a thin
+        // layer in front of the dial (z 0.1937 to 0.215, nothing else there
+        // inside the bezel), so a flat region keyed to their near-black cuts
+        // the hour and minute hands out with hard edges, a small one takes
+        // the silver pin at the center, and Lane Fix5's region keyed to red
+        // takes the second hand. The dial is whole under them.
         name: "second",
         pivot: [0, -0.18, 0.4],
         axis: [0, 0, -1],
-        regions: [{ at: [0, -0.18, 0.21], r: [0.75, 0.75, 0.15], soft: 0.05, color: "#d84a34", tol: 0.55 }], // prettier-ignore
+        regions: [
+          { at: [0, -0.18, 0.21], r: [0.75, 0.75, 0.15], soft: 0.05, color: "#d84a34", tol: 0.55 }, // prettier-ignore
+          { at: [0, -0.18, 0.2046], r: [1.12, 1.12, 0.0109], soft: 0.001, color: "#212121", tol: 0.5 }, // prettier-ignore
+          { at: [0, -0.18, 0.2046], r: [0.12, 0.12, 0.0109], soft: 0.001 },
+        ],
       },
       {
         name: "bells",
@@ -1391,58 +1448,68 @@ export const RIGS = {
         ],
       },
     ],
-    // Lane Fix5: the scanned second hand is too thin to cut out cleanly (its
-    // pale edge splats only half belonged to it, so they lagged behind as it
-    // turned). It is hidden (the dial is whole under it), and a kit-built hand
-    // turns in its place as one solid piece, lifted a little off the dial so
-    // the dial's big splats never sort in front of it.
+    // Kit-built hands turn in place of the scanned ones, each as one solid
+    // piece (Lane Fix5 did the second hand first: the scanned one was too
+    // thin to cut out cleanly). They share the toy's body, so they rattle
+    // with the clock on a tap.
     addon: {
-      count: 2000,
+      count: 8000,
       build(k) {
-        const { pivot, dir, len, tail, z } = CLOCK_HAND;
-        const side = [dir[1], -dir[0], 0];
-        const at = (a, w, dz) => [
-          pivot[0] + dir[0] * a + side[0] * w,
-          pivot[1] + dir[1] * a + side[1] * w,
-          pivot[2] + dz,
-        ];
-        // The hand: a thin red needle with a short tail and a round boss.
-        const hand = k.part("hand", { pivot, axis: [0, 0, -1] });
-        k.cloud({ share: 0.85, part: hand, pattern: false }, (rand) => {
-          const a = -tail + rand() * (len + tail);
-          const half = a < 0 ? 0.009 : 0.007 * (1 - 0.4 * (a / len));
-          return {
-            p: at(a, (rand() - 0.5) * 2 * half, z),
-            n: [0, 0, 1],
-            color: mix("#e2432c", "#c83322", rand() * 0.5),
-            size: 0.5,
-            flat: 0.15,
-            opacity: 1,
-          };
+        const { pivot } = CLOCK;
+        const area = CLOCK.hands.map((h) => {
+          let s = 0;
+          for (let a = -h.tail; a < h.len; a += 0.005) s += 2 * h.half(a) * 0.005;
+          return s;
         });
-        k.cloud({ share: 0.15, part: hand, pattern: false }, (rand) => {
-          const r = 0.024 * Math.sqrt(rand());
-          const t = rand() * TAU;
-          return {
-            p: [pivot[0] + r * Math.cos(t), pivot[1] + r * Math.sin(t), pivot[2] + z + 0.002],
-            n: [0, 0, 1],
-            color: "#d23b27",
-            size: 0.5,
-            flat: 0.15,
-            opacity: 1,
-          };
+        const hub = Math.PI * 0.05 * 0.05;
+        const total = area.reduce((s, x) => s + x, 0) + hub;
+        CLOCK.hands.forEach((h, i) => {
+          const part = k.part(h.name, { pivot, axis: [0, 0, -1] });
+          const most = Math.max(...Array.from({ length: 50 }, (_, j) => h.half(-h.tail + ((h.len + h.tail) * j) / 49))); // prettier-ignore
+          k.cloud({ share: area[i] / total, part, pattern: false }, (rand) => {
+            // Even over the hand's outline (a point under its half-width).
+            let a, w;
+            do {
+              a = -h.tail + rand() * (h.len + h.tail);
+              w = (rand() * 2 - 1) * most;
+            } while (Math.abs(w) > h.half(a));
+            return {
+              p: [pivot[0] + w, pivot[1] + a, pivot[2] + h.z],
+              n: [0, 0, 1],
+              color: mix(h.color[0], h.color[1], rand() * 0.5),
+              size: 0.5,
+              flat: 0.15,
+              opacity: 1,
+            };
+          });
         });
+        // The round hub the hour and minute hands share, and the second
+        // hand's red boss with a silver pin, round so they turn unseen.
+        const hour = k.part("hour");
+        const second = k.part("second");
+        const disc = (part, r, dz, color, share) =>
+          k.cloud({ share, part, pattern: false }, (rand) => {
+            const rr = r * Math.sqrt(rand());
+            const t = rand() * TAU;
+            return {
+              p: [pivot[0] + rr * Math.cos(t), pivot[1] + rr * Math.sin(t), pivot[2] + dz],
+              n: [0, 0, 1],
+              color: typeof color === "function" ? color(rand) : color,
+              size: 0.5,
+              flat: 0.15,
+              opacity: 1,
+            };
+          });
+        disc(hour, 0.05, 0.0145, (rand) => mix("#262626", "#161616", rand() * 0.5), hub / total);
+        disc(second, 0.024, 0.032, "#d23b27", 0.015);
+        disc(second, 0.012, 0.034, (rand) => mix("#c9c9c9", "#9a9a9a", rand()), 0.005);
       },
     },
     controls: [pulse("ring", "Ring", 2.4)],
     action: { key: "ring", label: "Ring" },
     drive(t, c, out, info) {
-      // One tick a second with a little overshoot.
-      const s = Math.floor(t);
-      const f = t - s;
-      const tick = s + 1 - Math.exp(-f * 30) * Math.cos(f * 40);
       out.parts.second = { angle: 0, visible: 0 };
-      out.addon = { parts: { hand: { angle: (tick / 60) * TAU } } };
+      out.addon = { parts: clockHands(new Date()) };
       const e = since(c, "ring", 2.4);
       if (e < 0) return;
       const ring = env(e, 0, 0.05, 1.8, 2.3);

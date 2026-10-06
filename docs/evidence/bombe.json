@@ -1,0 +1,87 @@
+{
+  "toy": "bombe",
+  "checked": "2026-10-04",
+  "summary": "The toy really searches rotor starts using its Enigma calculation and stops at the first matching crib. It assumes the plugboard is known and supplies the message itself. It illustrates a search, rather than reproducing the historical Bombe’s menu and diagonal-board logic.",
+  "claims": [
+    {
+      "claim": "Turing’s 1939 design and Welchman’s diagonal board contributed to the British Bombe.",
+      "how": "The About attribution and approximate count of 200 machines are supported; the museum gives 202 established machines and predominantly Wrens as operators.",
+      "where": "src/toy-help.js:1616",
+      "sources": [
+        {
+          "title": "Bombe historical background",
+          "publisher": "The National Museum of Computing; John Jackson",
+          "url": "https://www.tnmoc.org/bh-1-bombe-historical-background",
+          "says": "Turing proposed the design in 1939, Welchman added the diagonal board, and 202 machines were established with large numbers of Wrens as operators."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The toy tests rotor starting positions against a crib.",
+      "how": "An independent implementation agrees with the first matching setting and decrypted output for four messages, including a one-letter ambiguous crib.",
+      "where": "src/packs/computing-history.js:1680",
+      "sources": [
+        {
+          "title": "How Enigma works",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/enigma/working.htm",
+          "says": "The pawl mechanism steps before encryption and causes the middle rotor to step on consecutive presses. The plugboard and reflector give reciprocal encryption."
+        },
+        {
+          "title": "British Bombe",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/bombe/",
+          "says": "The Bombe tests logical relations derived from a crib and a menu, including constraints on an unknown plugboard."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:437",
+      "note": ""
+    },
+    {
+      "claim": "The toy simplifies the historical search.",
+      "how": "It knows the plugs and derives a crib of up to 12 letters from the supplied plaintext. It has no menu loops or diagonal-board deductions for unknown plugs.",
+      "where": "src/packs/computing-history.js:1680",
+      "sources": [
+        {
+          "title": "British Bombe",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/bombe/",
+          "says": "The Bombe tests logical relations derived from a crib and a menu, including constraints on an unknown plugboard."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:437",
+      "note": ""
+    },
+    {
+      "claim": "A crib match is not proof of a unique original key.",
+      "how": "The enumeration stops at the first matching start. Short cribs can match several settings, even when the shown plaintext is recovered.",
+      "where": "src/packs/computing-history.js:1680",
+      "sources": [
+        {
+          "title": "British Bombe",
+          "publisher": "Crypto Museum",
+          "url": "https://www.cryptomuseum.com/crypto/bombe/",
+          "says": "The Bombe tests logical relations derived from a crib and a menu, including constraints on an unknown plugboard."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:437",
+      "note": "A future result should show ambiguity and distinguish a candidate stop from an independently verified key."
+    }
+  ],
+  "simplified": [
+    "The plaintext is used to generate a ciphertext and its crib. Only fixed I–II–III, rings AAA, and known plugs AR GK OX are searched. It enumerates 17,576 starts and accepts the first crib match, which need not identify a unique key. Drum movement is a slowed animation rather than the search’s mechanical timing."
+  ],
+  "fixes": [
+    {
+      "what": "Show candidate ambiguity and a crib chosen without revealing the plaintext; a historical-machine view would need menu constraints and unknown-plugboard logic.",
+      "where": "src/packs/computing-history.js:1680",
+      "status": "proposed"
+    }
+  ]
+}

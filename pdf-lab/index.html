@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Can a toy move in a PDF?</title>
+    <meta
+      name="description"
+      content="What a PDF can do with a Splashery toy: a still with a live link, a recording that plays in some apps, and what stays out of reach. With sample PDFs to try."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="pdf-lab.css" />
+  </head>
+  <body>
+    <main>
+      <p class="kicker"><a href="../?labs=1">Splashery</a> · Labs · October 5, 2026</p>
+      <h1>Can a toy move in a PDF?</h1>
+      <p class="lead">
+        A little. A PDF can carry a <strong>recording</strong> of a toy with play and step buttons,
+        and some PDF apps play it. The <strong>toy itself</strong>, the 3D one you turn and tap,
+        can't run inside a PDF: it needs a web browser. So every Splashery PDF also carries a still
+        picture and a link and QR code that open the live toy.
+      </p>
+
+      <section aria-labelledby="h-short">
+        <h2 id="h-short">The short answer</h2>
+        <div class="cards">
+          <article class="card yes">
+            <h3>Works everywhere</h3>
+            <p>
+              A sharp still of the toy, what it is and how to play, its credits, and a link and QR
+              code to the live toy. Every PDF app shows it, and it prints.
+            </p>
+          </article>
+          <article class="card some">
+            <h3>Moves in some apps</h3>
+            <p>
+              A flip book: one tap recorded as pictures, played by the PDF's own script with play
+              and step buttons. It played in desktop Firefox. Adobe Acrobat on a computer is
+              documented to play it too; it hasn't been tried yet.
+            </p>
+          </article>
+          <article class="card no">
+            <h3>Out of reach</h3>
+            <p>
+              The live 3D toy. A PDF's script can show and hide pictures and fill in boxes, but it
+              has no 3D drawing, so the toy's engine can't run there. Turning it or tapping it for a
+              new result needs the browser.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-save">
+        <h2 id="h-save">Make one from any toy</h2>
+        <p>
+          With labs on, the <strong>Share</strong> tab has <strong>Save PDF</strong>. Pick
+          <em>Still + live toy</em> (the default) for a page that works anywhere, or
+          <em>Moving recording (desktop Firefox and Acrobat)</em> to add a second page that plays
+          one tap. The dialog shows the most the recording can add before you save.
+        </p>
+        <p>Two made that way, from the grapes:</p>
+        <ul class="files">
+          <li>
+            <a href="samples/grapes-still.pdf" download>grapes-still.pdf</a>
+            (80 KB): the still, the link and the QR code.
+          </li>
+          <li>
+            <a href="samples/grapes-moving.pdf" download>grapes-moving.pdf</a>
+            (627 KB): the same page, then a recording of one tap (36 pictures). Open it in desktop
+            Firefox and press play on page 2.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="h-ways">
+        <h2 id="h-ways">Seven ways a PDF can move or respond</h2>
+        <p>
+          On October 4, 2026, Codex built eight sample PDFs from the real grapes toy and opened them
+          in the apps on a Mac. Each sample tries one way. Download them and try them in your own
+          apps.
+        </p>
+        <ol class="ways">
+          <li>
+            <strong>Flip book (W)</strong>: 40 color pictures with play, pause and step buttons,
+            played by the PDF's script. The method of the <code>animate</code> LaTeX package.
+            <a href="../docs/audits/pdf-motion-2026-10/01-animate-widget.pdf" download
+              >01-animate-widget.pdf</a
+            >
+            (534 KB)
+          </li>
+          <li>
+            <strong>Flip book with layers (O)</strong>: the same pictures as layers switched on and
+            off.
+            <a href="../docs/audits/pdf-motion-2026-10/01-animate-ocg.pdf" download
+              >01-animate-ocg.pdf</a
+            >
+            (544 KB)
+          </li>
+          <li>
+            <strong>Text-box animation (F)</strong>: 64 rows of letters redrawn by the script, in
+            gray, like the Doom and Tetris PDFs. Click the empty box under the instructions and type
+            <kbd>n</kbd>, then <kbd>p</kbd>.
+            <a href="../docs/audits/pdf-motion-2026-10/02-pdfium-fields.pdf" download
+              >02-pdfium-fields.pdf</a
+            >
+            (510 KB)
+          </li>
+          <li>
+            <strong>3D points (D)</strong>: 2,382 colored points of the grapes as a real 3D model
+            for Acrobat's 3D viewer. Only points: no splat look and no tap.
+            <a href="../docs/audits/pdf-motion-2026-10/03-point-cloud.pdf" download
+              >03-point-cloud.pdf</a
+            >
+            (2.4 MB)
+          </li>
+          <li>
+            <strong>Embedded video (V)</strong>: a five-second video of the tap inside the PDF, with
+            the video also attached as a file.
+            <a href="../docs/audits/pdf-motion-2026-10/04-embedded-video.pdf" download
+              >04-embedded-video.pdf</a
+            >
+            (153 KB)
+          </li>
+          <li>
+            <strong>Still, link and QR code (L)</strong>: the plain page; the link opens the live
+            toy.
+            <a href="../docs/audits/pdf-motion-2026-10/05-still-link-qr.pdf" download
+              >05-still-link-qr.pdf</a
+            >
+            (42 KB)
+          </li>
+          <li>
+            <strong>Attached web page (H)</strong>: a small web page inside the PDF that links to
+            the toy. Save it from the attachments panel and open it in a browser.
+            <a href="../docs/audits/pdf-motion-2026-10/06-html-attachment.pdf" download
+              >06-html-attachment.pdf</a
+            >
+            (18 KB)
+          </li>
+          <li>
+            <strong>Page flip (P)</strong>: ten pages, one picture each, timed for a slide show.
+            <a href="../docs/audits/pdf-motion-2026-10/07-page-flip.pdf" download
+              >07-page-flip.pdf</a
+            >
+            (180 KB)
+          </li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="h-table">
+        <h2 id="h-table">Which apps move, respond or stay still</h2>
+        <p>
+          What was seen on a Mac on October 4, 2026. <span class="tag moves">moves</span> the
+          picture changed when played; <span class="tag responds">responds</span> an action worked
+          (the link opened the toy); <span class="tag still">still only</span> play was tried and
+          the picture stayed; <span class="tag untested">untested</span> nobody has tried it yet.
+          Untested is not a no.
+        </p>
+        <div class="table-wrap" role="region" aria-labelledby="h-table" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">App</th>
+                <th scope="col" title="Flip book">W</th>
+                <th scope="col" title="Flip book with layers">O</th>
+                <th scope="col" title="Text-box animation">F</th>
+                <th scope="col" title="3D points">D</th>
+                <th scope="col" title="Embedded video">V</th>
+                <th scope="col" title="Still, link and QR code">L</th>
+                <th scope="col" title="Attached web page">H</th>
+                <th scope="col" title="Page flip">P</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Acrobat desktop / macOS</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Acrobat Reader desktop / macOS</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Acrobat desktop / Windows</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Acrobat Reader desktop / Windows</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Acrobat mobile / iPhone or iPad</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Acrobat mobile / Android</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Preview 11.0 / macOS</th>
+                <td><span class="tag still">still only</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Files Quick Look / iPhone or iPad</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Chrome 154 built-in / macOS</th>
+                <td><span class="tag still">still only</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag moves">moves</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag responds">responds</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Edge 154 built-in / macOS</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag moves">moves</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Firefox 156 built-in / macOS</th>
+                <td><span class="tag moves">moves</span></td>
+                <td><span class="tag still">still only</span></td>
+                <td><span class="tag moves">moves</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Foxit PDF Reader / Windows</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Foxit PDF Reader / macOS</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">PDF-XChange Editor / Windows</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Okular / Linux</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+              <tr>
+                <th scope="row">SumatraPDF / Windows</th>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+                <td><span class="tag untested">untested</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">
+          Our own flip book (grapes-moving.pdf) also plays in an automated test of PDF.js 6.3, the
+          PDF engine inside Firefox: play, pause, step and the picture counter all work there. That
+          test runs PDF.js in a test browser, not Firefox itself, so its row is kept apart from the
+          table above.
+        </p>
+      </section>
+
+      <section aria-labelledby="h-owner">
+        <h2 id="h-owner">What to try on your devices</h2>
+        <p>
+          Download each PDF first (don't judge a preview in mail or on GitHub). For each app, write
+          down its name and version, the PDF, and what happened.
+        </p>
+        <ol class="steps">
+          <li>
+            <strong>Mac or Windows, Adobe Acrobat Reader</strong> (free): open
+            <em>grapes-moving.pdf</em> and <em>01-animate-widget.pdf</em>. Go to the recording,
+            press play. Does a grape fall? Try step forward and back. If Acrobat asks to trust the
+            document, allow it for this document only.
+          </li>
+          <li>
+            <strong>Same app, 3D and video</strong>: open <em>03-point-cloud.pdf</em>, click the
+            picture and drag (does a 3D model turn?), then <em>04-embedded-video.pdf</em>, click the
+            picture (does it play?).
+          </li>
+          <li>
+            <strong>Desktop Firefox</strong>: drag <em>grapes-moving.pdf</em> into a window and
+            press play on page 2. This is the one that should work.
+          </li>
+          <li>
+            <strong>Chrome or Edge</strong>: open <em>02-pdfium-fields.pdf</em>, click the empty box
+            and type <kbd>n</kbd> then <kbd>p</kbd>. Then open <em>grapes-still.pdf</em> and click
+            the link.
+          </li>
+          <li>
+            <strong>iPhone</strong>: save <em>grapes-moving.pdf</em> to Files and open it (expect a
+            still first page). Then scan the QR code on a printed or on-screen
+            <em>grapes-still.pdf</em> with the Camera: does the grapes toy open, set up as in the
+            picture?
+          </li>
+          <li>
+            <strong>If you have them</strong>: Foxit Reader, PDF-XChange, Okular, SumatraPDF and
+            Acrobat on a phone, with the same steps.
+          </li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="h-more">
+        <h2 id="h-more">More</h2>
+        <p>
+          The full report, with sources for every claim:
+          <a
+            href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/audits/pdf-motion-2026-10.md"
+            >Can a Splashery toy move inside a PDF?</a
+          >
+          A recording made this way is pictures of the toy, not the toy: the live one is a link
+          away.
+        </p>
+        <p><a href="../?labs=1">Back to Splashery</a></p>
+      </section>
+    </main>
+  </body>
+</html>

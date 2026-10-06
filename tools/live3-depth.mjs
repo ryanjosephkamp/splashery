@@ -43,7 +43,7 @@ for (const s of todo) {
   const cutArgs = [...(ss ? ["-ss", String(ss)] : []), ...(t ? ["-t", String(t)] : []), "-i", src];
   const vf = [crop && `crop=${crop}`, `fps=${s.fps}`, `scale=${s.w}:${s.h}:flags=lanczos`, `tile=${s.cols}x${s.rows}`].filter(Boolean).join(","); // prettier-ignore
   run(...cutArgs, "-vf", vf, "-frames:v", String(s.sheets), "-q:v", "3", `${dir}/${s.file}-sheet-%d.jpg`); // prettier-ignore
-  if (s.sound) run(...cutArgs, "-vn", "-ac", "1", "-c:a", "libmp3lame", "-b:a", "56k", `${dir}/${s.sound}`); // prettier-ignore
+  if (s.sound) run(...cutArgs, "-vn", "-ac", "1", "-c:a", "libmp3lame", "-b:a", "56k", `${dir}/${s.sound}.mp3`); // prettier-ignore
   const r = await page.evaluate(async (id) => {
     const mp = await import("/src/packs/moving-photo.js");
     const { packDepth, decodePhoto } = await import("/src/packs/photo-3d.js");

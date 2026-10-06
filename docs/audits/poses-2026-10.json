@@ -1,0 +1,6722 @@
+{
+  "torus": {
+    "kind": "kit",
+    "shelf": "shapes",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 97.7,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "sushi-boat": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 116.4,
+    "side": {
+      "err": 0,
+      "floor": 2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2,
+      "rel": 0
+    }
+  },
+  "steak": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 57.6,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "orange-photo": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 53.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "crystal-gem": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 139,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "puffin": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 129.6,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "monkey-doll": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 110.1,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "turtle-souvenir": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 72.9,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "dog-plush": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 90.4,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "murex-shell": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 111.8,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "white-roses": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 114.6,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "mushroom-photo": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 72.9,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "crochet-earth": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 67.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "cherry-blossom-photo": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 85.2,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "peony": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 71.5,
+    "side": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "knight-horse": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 97.1,
+    "side": {
+      "err": 0,
+      "floor": 1.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "soccer-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 129.1,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "tennis-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 67.1,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "softball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 119.3,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "golf-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 122.8,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "volleyball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 108.6,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "ping-pong-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 101.9,
+    "side": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "bowling-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 127.2,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "pickleball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 83.8,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "medicine-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 35.9,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "squash-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 26.6,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "marble": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 115.1,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "shuttlecock": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 159.9,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "heart": {
+    "kind": "kit",
+    "shelf": "anatomy",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 43.3,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "chest": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 44.6,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "solar-system": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 3.5,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "venus": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 31.6,
+    "side": {
+      "err": 0,
+      "floor": 1.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.8,
+      "rel": 0
+    }
+  },
+  "moon": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 1.6,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "jupiter": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 19.1,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "uranus": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 127.9,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "asteroid": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 68.7,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "meteor": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 81.4,
+    "side": {
+      "err": 0,
+      "floor": 18.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.3,
+      "floor": 24.6,
+      "rel": 0
+    }
+  },
+  "pulsar": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 101.8,
+    "side": {
+      "err": 0,
+      "floor": 89.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 89.3,
+      "rel": 0
+    }
+  },
+  "star-cluster": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 66.1,
+    "side": {
+      "err": 0.1,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "nebula": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13.8,
+    "side": {
+      "err": 0,
+      "floor": 4.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 4.1,
+      "rel": 0
+    }
+  },
+  "spiral-galaxy": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 49.1,
+    "side": {
+      "err": 0,
+      "floor": 5.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 5.1,
+      "rel": 0
+    }
+  },
+  "bacteriophage": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 42.1,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "red-blood-cell": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 66,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "astrocyte": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 14.8,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "dna": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 126,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "microglia": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.1,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "tardigrade": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 20.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "snowflake": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 191.1,
+    "side": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "mitochondrion": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 24,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "amoeba": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 57.4,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "protein": {
+    "kind": "kit",
+    "shelf": "atoms",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 60.2,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "periodic-table": {
+    "kind": "kit",
+    "shelf": "atoms",
+    "labs": false,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 5.5,
+    "side": {
+      "err": 0,
+      "floor": 4.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 4.1,
+      "rel": 0
+    }
+  },
+  "ruby": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 28.2,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "amethyst-geode": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 101.5,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "quartz-cluster": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 16.9,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "pearl": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 141.3,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "eye": {
+    "kind": "kit",
+    "shelf": "anatomy",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 54,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "tooth": {
+    "kind": "kit",
+    "shelf": "anatomy",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 7.6,
+    "side": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "anatomy-atlas": {
+    "kind": "kit",
+    "shelf": "anatomy",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 113.2,
+    "side": {
+      "err": 0,
+      "floor": 1.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.8,
+      "rel": 0
+    }
+  },
+  "bonsai": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.4,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "sunflower": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 45.7,
+    "side": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    }
+  },
+  "dandelion": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 112.7,
+    "side": {
+      "err": 0,
+      "floor": 13.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 20.2,
+      "rel": 0
+    }
+  },
+  "daisy": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13.6,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "mushroom": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 23.2,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "saguaro": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 16.1,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "pinecone": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 41.7,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "succulent": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 34.8,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "rocks": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 55.9,
+    "side": {
+      "err": 0,
+      "floor": 1.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    }
+  },
+  "ice-statue": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 28,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "iceberg": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 29.2,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "ocean-wave": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 121.1,
+    "side": {
+      "err": 0,
+      "floor": 29.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 38.2,
+      "rel": 0
+    }
+  },
+  "ice-cream": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 80.2,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "jelly": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 26.4,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "cupcake": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.6,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "candy-cane": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 118.3,
+    "side": {
+      "err": 0,
+      "floor": 158.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.6,
+      "rel": 0
+    }
+  },
+  "pretzel": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 68,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "pizza": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 19.9,
+    "side": {
+      "err": 0,
+      "floor": 2.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.1,
+      "rel": 0
+    }
+  },
+  "sushi": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 23.1,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "egg": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 39.9,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "apple": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 22.7,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "orange": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 44.8,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "pineapple": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 61.8,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "grapes": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 22.9,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "bricks": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 11.6,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "newtons-cradle": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.9,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "yo-yo": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 92.8,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "spring-toy": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 74.8,
+    "side": {
+      "err": 0,
+      "floor": 57,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 66.8,
+      "rel": 0
+    }
+  },
+  "paper-plane": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 133.5,
+    "side": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    }
+  },
+  "balloon-dog": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 77.3,
+    "side": {
+      "err": 0.2,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "robot": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 25.9,
+    "side": {
+      "err": 1,
+      "floor": 1.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 1,
+      "floor": 1.3,
+      "rel": 0
+    }
+  },
+  "lorenz": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 52.2,
+    "side": {
+      "err": 0,
+      "floor": 2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2,
+      "rel": 0
+    }
+  },
+  "klein-bottle": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 58.1,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "hypercube": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0,
+    "side": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "gyroid": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 38.6,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "sierpinski": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 73.1,
+    "side": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    }
+  },
+  "seashell-spiral": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 25.3,
+    "side": {
+      "err": 0,
+      "floor": 4.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 4.3,
+      "rel": 0
+    }
+  },
+  "surface-plotter": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.2,
+    "side": {
+      "err": 0,
+      "floor": 1.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.9,
+      "rel": 0
+    }
+  },
+  "fourier-circles": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13.7,
+    "side": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "splat-equation": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 119.3,
+    "side": {
+      "err": 0,
+      "floor": 3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 3,
+      "rel": 0
+    }
+  },
+  "laptop": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 84.7,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "clock": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13.2,
+    "side": {
+      "err": 0,
+      "floor": 3.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 3.2,
+      "rel": 0
+    }
+  },
+  "umbrella": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 121.9,
+    "side": {
+      "err": 0.5,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.7,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "lamp": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 130,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "telescope": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 32.1,
+    "side": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    }
+  },
+  "water-bottle": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 91.3,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "running-shoe": {
+    "kind": "kit",
+    "shelf": "clothing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 1.9,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "sunglasses": {
+    "kind": "kit",
+    "shelf": "clothing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 78.5,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    }
+  },
+  "sword-in-stone": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 23.3,
+    "side": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    }
+  },
+  "bow-and-target": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 1.8,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    }
+  },
+  "crossbow": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.8,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "wizards-orb": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 28.2,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "jellyfish": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 125,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "butterfly": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0,
+    "side": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "nautilus": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 81.2,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "snail": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 34.1,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "starfish": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 26.8,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "frog": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 11.8,
+    "side": {
+      "err": 0,
+      "floor": 1.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.9,
+      "rel": 0
+    }
+  },
+  "owl": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 21.9,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "decorated-tree": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 29,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "paper-lantern": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 39.9,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "menorah": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 6.5,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "drum": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 17.4,
+    "side": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    }
+  },
+  "toy-piano": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 1.6,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "upright-piano": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.4,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "electronic-keyboard": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 3.6,
+    "side": {
+      "err": 0,
+      "floor": 2.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2,
+      "rel": 0
+    }
+  },
+  "helicopter": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 57,
+    "side": {
+      "err": 0,
+      "floor": 1.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.5,
+      "rel": 0
+    }
+  },
+  "propeller-plane": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 104.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "bicycle": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "ufo": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 78.1,
+    "side": {
+      "err": 0,
+      "floor": 27.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 22.5,
+      "rel": 0
+    }
+  },
+  "washington-monument": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13.1,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "supertall": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 14,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "statue-of-liberty": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 28.9,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "leaning-tower": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.3,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "parthenon": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 1.4,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "big-ben": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 11.8,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "castle": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.4,
+    "side": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    }
+  },
+  "windmill": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 73.1,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "multilayer-perceptron": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 7.5,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "cnn": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 4.6,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "transformer": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 10.5,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "diffusion-model": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 36.6,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "sorting-machine": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 47.3,
+    "side": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    }
+  },
+  "turing-machine": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.7,
+    "side": {
+      "err": 0,
+      "floor": 1.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.6,
+      "rel": 0
+    }
+  },
+  "enigma-machine": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 4,
+    "side": {
+      "err": 0,
+      "floor": 88.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 3.1,
+      "rel": 0
+    }
+  },
+  "song-landscape": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 20.6,
+    "side": {
+      "err": 0,
+      "floor": 22.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 22.6,
+      "rel": 0
+    }
+  },
+  "room-echo": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 0.4,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "model-splats": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 83.9,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "photo-3d": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 23.6,
+    "side": {
+      "err": 0,
+      "floor": 8.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 8.9,
+      "rel": 0
+    }
+  },
+  "thermal-ellipsoids": {
+    "kind": "kit",
+    "shelf": "science",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 2.5,
+    "side": {
+      "err": 0,
+      "floor": 2.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.5,
+      "rel": 0
+    }
+  },
+  "galaxy-box": {
+    "kind": "kit",
+    "shelf": "science",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.1,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "screen": {
+    "kind": "kit",
+    "shelf": "pictures",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 47.3,
+    "side": {
+      "err": 2.1,
+      "floor": 2.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 2.3,
+      "floor": 2.7,
+      "rel": 0
+    }
+  },
+  "cactus": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.2,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "cookie": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 2.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "knot": {
+    "kind": "procedural",
+    "shelf": "shapes",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 100,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "may-beetle": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.6,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "bumblebee": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 52.1,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "blackberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 32.3,
+    "side": {
+      "err": 31.7,
+      "floor": 0.1,
+      "rel": 1
+    },
+    "down": {
+      "err": 31.3,
+      "floor": 0.1,
+      "rel": 1
+    }
+  },
+  "grape": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 45.6,
+    "side": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "tomatoes": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 8.1,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "basket": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 11.6,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "garden-gnome": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 18.1,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "size": 256
+  },
+  "marble-bust": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 43.3,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "size": 256
+  },
+  "alarm-clock": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 50.5,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "boombox": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 22,
+    "side": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "carrot-cake": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 34.8,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "lantern": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 12.6,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "horse-statue": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 55.9,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "size": 256
+  },
+  "tin-can-real": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 54,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "planet": {
+    "kind": "procedural",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 74.7,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "atom": {
+    "kind": "kit",
+    "shelf": "atoms",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 46.1,
+    "side": {
+      "err": 0,
+      "floor": 26.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 28.2,
+      "rel": 0
+    },
+    "size": 256
+  },
+  "pine": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 56.4,
+    "side": {
+      "err": 0.3,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.3,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "cherry-blossom": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 82.4,
+    "side": {
+      "err": 54.7,
+      "floor": 16.5,
+      "rel": 0.7
+    },
+    "down": {
+      "err": 61.9,
+      "floor": 15.1,
+      "rel": 0.8
+    }
+  },
+  "birthday-cake": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 7.3,
+    "side": {
+      "err": 7.1,
+      "floor": 2.4,
+      "rel": 1
+    },
+    "down": {
+      "err": 4.4,
+      "floor": 2.5,
+      "rel": 0.6
+    }
+  },
+  "donut": {
+    "kind": "procedural",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 121.7,
+    "side": {
+      "err": 118.2,
+      "floor": 0.1,
+      "rel": 1
+    },
+    "down": {
+      "err": 153.2,
+      "floor": 0.1,
+      "rel": 1.3
+    }
+  },
+  "spinning-top": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 82.3,
+    "side": {
+      "err": 19.7,
+      "floor": 34.2,
+      "rel": 0.2
+    },
+    "down": {
+      "err": 19.8,
+      "floor": 34.1,
+      "rel": 0.2
+    }
+  },
+  "crown": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 98.5,
+    "side": {
+      "err": 7.7,
+      "floor": 0.1,
+      "rel": 0.1
+    },
+    "down": {
+      "err": 7.2,
+      "floor": 0.1,
+      "rel": 0.1
+    }
+  },
+  "snowman": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 132,
+    "side": {
+      "err": 4.5,
+      "floor": 5,
+      "rel": 0
+    },
+    "down": {
+      "err": 4.8,
+      "floor": 4.9,
+      "rel": 0
+    }
+  },
+  "steam-train": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 43.2,
+    "side": {
+      "err": 25.1,
+      "floor": 57.4,
+      "rel": 0.6
+    },
+    "down": {
+      "err": 30.7,
+      "floor": 59.4,
+      "rel": 0.7
+    }
+  },
+  "sports-car": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 36,
+    "side": {
+      "err": 24.3,
+      "floor": 0.1,
+      "rel": 0.7
+    },
+    "down": {
+      "err": 26.6,
+      "floor": 0.1,
+      "rel": 0.7
+    }
+  },
+  "sailboat": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 70.8,
+    "side": {
+      "err": 30.6,
+      "floor": 0.2,
+      "rel": 0.4
+    },
+    "down": {
+      "err": 35.8,
+      "floor": 0.2,
+      "rel": 0.5
+    }
+  },
+  "gaussian-splatting": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 63.4,
+    "side": {
+      "err": 0.1,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "picture-lab": {
+    "kind": "kit",
+    "shelf": "pictures",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 0,
+    "side": {
+      "err": 0,
+      "floor": 32.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 32,
+      "floor": 0.1,
+      "rel": 32
+    }
+  },
+  "photo-album": {
+    "kind": "kit",
+    "shelf": "pictures",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 50.4,
+    "side": {
+      "err": 9.4,
+      "floor": 0.1,
+      "rel": 0.2
+    },
+    "down": {
+      "err": 9.4,
+      "floor": 0.1,
+      "rel": 0.2
+    }
+  },
+  "video-3d": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 47.2,
+    "side": {
+      "err": 21.3,
+      "floor": 0.2,
+      "rel": 0.5
+    },
+    "down": {
+      "err": 18.2,
+      "floor": 0.2,
+      "rel": 0.4
+    }
+  },
+  "heart-donut": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 92.5,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "seeded-loaf": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 61.3,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.4,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "stollen": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 91.6,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "physalis": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 104.6,
+    "side": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "alum-crystal": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 67.7,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "toy-trex": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 82.4,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "elephant-souvenir": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 64.4,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "cave-lioness": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 43.6,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "bmx-bike": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 114.1,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "sunflower-photo": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 74,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "bonsai-photo": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 119.3,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "cactus-real": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 77.4,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "desk-globe": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 70.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "maple-tree": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 51.1,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "money-tree": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 71.1,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "basketball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 63.9,
+    "side": {
+      "err": 0,
+      "floor": 1.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.5,
+      "rel": 0
+    }
+  },
+  "american-football": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 55.2,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "baseball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 164.3,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "beach-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 121.9,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 57.3,
+      "rel": 0
+    }
+  },
+  "rugby-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 136.7,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "water-polo-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 74.3,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "cricket-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 46.1,
+    "side": {
+      "err": 0.1,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "pool-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 87.9,
+    "side": {
+      "err": 0.1,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "dodgeball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 41.3,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "lacrosse-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 54.2,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "bouncy-ball": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 109.4,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "hockey-puck": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 19,
+    "side": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "flying-disc": {
+    "kind": "kit",
+    "shelf": "balls",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 108.8,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "sun": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 16.7,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "mercury": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 55.7,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "earth": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 78.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "mars": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 53.2,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "saturn": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 15.9,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "neptune": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.9,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "aurora-planet": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 22.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "comet": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 103.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "star": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 42.4,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "black-hole": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 28.8,
+    "side": {
+      "err": 0,
+      "floor": 3.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 3.4,
+      "rel": 0
+    }
+  },
+  "planetary-nebula": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 15.3,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "supernova": {
+    "kind": "kit",
+    "shelf": "space",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 79,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "virus": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 71.4,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "bacterium": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 51.1,
+    "side": {
+      "err": 1.2,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "neuron": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 126.1,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "animal-cell": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 87,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "white-blood-cell": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.4,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "diatom": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 51.7,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "pollen": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 55.6,
+    "side": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1,
+      "rel": 0
+    }
+  },
+  "chromosome": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 110.9,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "paramecium": {
+    "kind": "kit",
+    "shelf": "tiny",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 89.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "orbital": {
+    "kind": "kit",
+    "shelf": "atoms",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 82.5,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "molecule": {
+    "kind": "kit",
+    "shelf": "atoms",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 38.5,
+    "side": {
+      "err": 0.2,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "crystal-lattice": {
+    "kind": "kit",
+    "shelf": "atoms",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 29.1,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "diamond": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 45.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "emerald": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 2.7,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "sapphire": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 2.6,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "opal": {
+    "kind": "kit",
+    "shelf": "gems",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.4,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "brain": {
+    "kind": "kit",
+    "shelf": "anatomy",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 8.4,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "lungs": {
+    "kind": "kit",
+    "shelf": "anatomy",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 82.7,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "kidney": {
+    "kind": "kit",
+    "shelf": "anatomy",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 41.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "oak": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 11.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "palm": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 10.2,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "maple": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 30.8,
+    "side": {
+      "err": 0,
+      "floor": 6.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 6.6,
+      "rel": 0
+    }
+  },
+  "willow": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 14.4,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "rose": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 21.3,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "tulip": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 25.4,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "lotus": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 41.5,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "fern": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 12.6,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "coral": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 22.3,
+    "side": {
+      "err": 0.9,
+      "floor": 15.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.8,
+      "floor": 13.3,
+      "rel": 0
+    }
+  },
+  "acorn": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 60.8,
+    "side": {
+      "err": 0,
+      "floor": 1.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.8,
+      "rel": 0
+    }
+  },
+  "bamboo": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 24.3,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "kelp": {
+    "kind": "kit",
+    "shelf": "nature",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 25.6,
+    "side": {
+      "err": 0.5,
+      "floor": 7.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.4,
+      "floor": 4.5,
+      "rel": 0
+    }
+  },
+  "lava-lamp": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13.3,
+    "side": {
+      "err": 0.1,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "rainbow": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 74,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "waterfall": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13.6,
+    "side": {
+      "err": 0,
+      "floor": 13.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 21.2,
+      "rel": 0
+    }
+  },
+  "watermelon": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 63.1,
+    "side": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "popcorn": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 14.3,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "pancakes": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 46.1,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "lollipop": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 98.5,
+    "side": {
+      "err": 0,
+      "floor": 2.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.3,
+      "rel": 0
+    }
+  },
+  "macarons": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 106.4,
+    "side": {
+      "err": 0,
+      "floor": 1.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.5,
+      "rel": 0
+    }
+  },
+  "gummy-bear": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 16.8,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "croissant": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 39.2,
+    "side": {
+      "err": 0,
+      "floor": 8.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 8.1,
+      "rel": 0
+    }
+  },
+  "burger": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 90.6,
+    "side": {
+      "err": 0,
+      "floor": 2.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.1,
+      "rel": 0
+    }
+  },
+  "taco": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 53.9,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "banana": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 133.9,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "kiwi": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.5,
+    "side": {
+      "err": 0,
+      "floor": 3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.9,
+      "rel": 0
+    }
+  },
+  "cherries": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 53.6,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "avocado": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 31.1,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "rubber-duck": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 31.8,
+    "side": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "dice": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 83.6,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "teddy-bear": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 19.8,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "puzzle-cube": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 59.5,
+    "side": {
+      "err": 0,
+      "floor": 1.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.6,
+      "rel": 0
+    }
+  },
+  "kite": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 50.3,
+    "side": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.2,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "origami-crane": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 63.2,
+    "side": {
+      "err": 0.1,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.3,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "soap-bubbles": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 31.4,
+    "side": {
+      "err": 0.5,
+      "floor": 5.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 2.3,
+      "floor": 22.7,
+      "rel": 0.1
+    }
+  },
+  "chess-set": {
+    "kind": "kit",
+    "shelf": "toys",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 2.5,
+    "side": {
+      "err": 0,
+      "floor": 2.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 4.1,
+      "rel": 0
+    }
+  },
+  "mobius": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 59.8,
+    "side": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.9,
+      "rel": 0
+    }
+  },
+  "menger-sponge": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.7,
+    "side": {
+      "err": 0,
+      "floor": 2.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.7,
+      "rel": 0
+    }
+  },
+  "torus-knot": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 66.1,
+    "side": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.2,
+      "rel": 0
+    }
+  },
+  "mandelbulb": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.4,
+    "side": {
+      "err": 0,
+      "floor": 2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.9,
+      "rel": 0
+    }
+  },
+  "platonic": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 85.8,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "graph-plotter": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 11.6,
+    "side": {
+      "err": 0,
+      "floor": 2.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.2,
+      "rel": 0
+    }
+  },
+  "unit-circle": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.2,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "pythagoras-proof": {
+    "kind": "kit",
+    "shelf": "maths",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 41.4,
+    "side": {
+      "err": 0,
+      "floor": 2.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.9,
+      "rel": 0
+    }
+  },
+  "book": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 103.9,
+    "side": {
+      "err": 0,
+      "floor": 2.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2,
+      "rel": 0
+    }
+  },
+  "music-box": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 72.2,
+    "side": {
+      "err": 0,
+      "floor": 1.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.8,
+      "rel": 0
+    }
+  },
+  "desk-fan": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 58.4,
+    "side": {
+      "err": 0,
+      "floor": 30.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 30.5,
+      "rel": 0
+    }
+  },
+  "fountain-pen": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 30.5,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "soda-can": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 26.7,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    }
+  },
+  "hoodie": {
+    "kind": "kit",
+    "shelf": "clothing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 35.4,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "baseball-cap": {
+    "kind": "kit",
+    "shelf": "clothing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 92.3,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "shield": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 33.6,
+    "side": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "trebuchet": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 24.2,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "knights-helmet": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 49.6,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "crystal-ball": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 14.3,
+    "side": {
+      "err": 0.3,
+      "floor": 11.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 1,
+      "floor": 10.2,
+      "rel": 0.1
+    }
+  },
+  "pufferfish": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 79.1,
+    "side": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "ladybug": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 44.8,
+    "side": {
+      "err": 0,
+      "floor": 0.8,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "octopus": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 63.6,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "sea-urchin": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 38.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "penguin": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 10.5,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "jack-o-lantern": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 38.6,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "fireworks": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 46,
+    "side": {
+      "err": 0.4,
+      "floor": 48.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.3,
+      "floor": 48.2,
+      "rel": 0
+    }
+  },
+  "patterned-egg": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 62,
+    "side": {
+      "err": 0,
+      "floor": 1.9,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.9,
+      "rel": 0
+    }
+  },
+  "guitar": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 101.3,
+    "side": {
+      "err": 0.6,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.2,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "xylophone": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 18,
+    "side": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    }
+  },
+  "grand-piano": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.5,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "harpsichord": {
+    "kind": "kit",
+    "shelf": "music",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "bus": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 16.2,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "jet": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 93.7,
+    "side": {
+      "err": 0.2,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "tractor": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 16,
+    "side": {
+      "err": 0.3,
+      "floor": 11.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.7,
+      "floor": 11.1,
+      "rel": 0
+    }
+  },
+  "eiffel-tower": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 88.5,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "pyramids": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 4.2,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "lighthouse": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 43.9,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "white-house": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 4.8,
+    "side": {
+      "err": 1.1,
+      "floor": 1.4,
+      "rel": 0.2
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "colosseum": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 4.8,
+    "side": {
+      "err": 0,
+      "floor": 0.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "stonehenge": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 17.6,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "taj-mahal": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 74.6,
+    "side": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    }
+  },
+  "pagoda": {
+    "kind": "kit",
+    "shelf": "landmarks",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 3.6,
+    "side": {
+      "err": 0,
+      "floor": 1.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 1.1,
+      "rel": 0
+    }
+  },
+  "perceptron": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 3.6,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "neural-network": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 6,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "rnn": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.1,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "looped-transformer": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 8.7,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "gradient-descent": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.7,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "word-vectors": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 8.4,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "half-adder": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 10.3,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "difference-engine": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 2.4,
+    "side": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.6,
+      "rel": 0
+    }
+  },
+  "bombe": {
+    "kind": "kit",
+    "shelf": "computing",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 8.7,
+    "side": {
+      "err": 0,
+      "floor": 2.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.1,
+      "rel": 0
+    }
+  },
+  "your-book": {
+    "kind": "kit",
+    "shelf": "pictures",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 134.8,
+    "side": {
+      "err": 0,
+      "floor": 152.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 177.2,
+      "rel": 0
+    }
+  },
+  "chladni-plate": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 11.7,
+    "side": {
+      "err": 0,
+      "floor": 2.7,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.7,
+      "rel": 0
+    }
+  },
+  "splat-mirror": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 21.5,
+    "side": {
+      "err": 0,
+      "floor": 14,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 14,
+      "rel": 0
+    }
+  },
+  "qr-code": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 0,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "moving-photo-3d": {
+    "kind": "kit",
+    "shelf": "studio",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 14.1,
+    "side": {
+      "err": 0,
+      "floor": 14.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 14,
+      "rel": 0
+    }
+  },
+  "splat-field": {
+    "kind": "kit",
+    "shelf": "lab",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 0.4,
+    "side": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.4,
+      "rel": 0
+    }
+  },
+  "smlm-microscope": {
+    "kind": "kit",
+    "shelf": "science",
+    "labs": true,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 2.6,
+    "side": {
+      "err": 0,
+      "floor": 2.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.6,
+      "rel": 0
+    }
+  },
+  "strawberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 20.2,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "bee": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 96.1,
+    "side": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.5,
+      "rel": 0
+    }
+  },
+  "blob": {
+    "kind": "procedural",
+    "shelf": "shapes",
+    "labs": false,
+    "canPlay": true,
+    "mode": "pieces",
+    "move": 121.7,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "cluster-fly": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 5.1,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "millipede": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 37.7,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "raspberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 28,
+    "side": {
+      "err": 31.7,
+      "floor": 0.1,
+      "rel": 1.1
+    },
+    "down": {
+      "err": 38.1,
+      "floor": 0.1,
+      "rel": 1.4
+    }
+  },
+  "blueberry": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 38.9,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "star-cookie": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 46.7,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "mandeltorus": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 30.8,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    }
+  },
+  "rubber-duck-real": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.8,
+    "side": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0,
+      "rel": 0
+    }
+  },
+  "wooden-elephant": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 13,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "ukulele": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 10.9,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "size": 256
+  },
+  "vintage-camera": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 86.7,
+    "side": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "croissant-real": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 48.4,
+    "side": {
+      "err": 14.1,
+      "floor": 0.1,
+      "rel": 0.3
+    },
+    "down": {
+      "err": 17,
+      "floor": 0.1,
+      "rel": 0.4
+    },
+    "size": 256
+  },
+  "pomegranate": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 32.5,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "cat-statue": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 23.3,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "pencil-real": {
+    "kind": "captured",
+    "shelf": "scans",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 136.5,
+    "side": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "campfire": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 8.7,
+    "side": {
+      "err": 3.7,
+      "floor": 12.6,
+      "rel": 0.4
+    },
+    "down": {
+      "err": 6.8,
+      "floor": 12.7,
+      "rel": 0.8
+    }
+  },
+  "candle": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 8.6,
+    "side": {
+      "err": 5.2,
+      "floor": 0.1,
+      "rel": 0.6
+    },
+    "down": {
+      "err": 4.1,
+      "floor": 0.1,
+      "rel": 0.5
+    }
+  },
+  "coffee": {
+    "kind": "kit",
+    "shelf": "food",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 24.8,
+    "side": {
+      "err": 23,
+      "floor": 16.1,
+      "rel": 0.9
+    },
+    "down": {
+      "err": 17.8,
+      "floor": 11.9,
+      "rel": 0.7
+    }
+  },
+  "dragon-egg": {
+    "kind": "kit",
+    "shelf": "medieval",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 46.6,
+    "side": {
+      "err": 15.3,
+      "floor": 0.1,
+      "rel": 0.3
+    },
+    "down": {
+      "err": 13.8,
+      "floor": 0.1,
+      "rel": 0.3
+    }
+  },
+  "fish-school": {
+    "kind": "kit",
+    "shelf": "animals",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 112.6,
+    "side": {
+      "err": 4.8,
+      "floor": 16.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 5.1,
+      "floor": 16.2,
+      "rel": 0
+    }
+  },
+  "diya": {
+    "kind": "kit",
+    "shelf": "holidays",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 9.4,
+    "side": {
+      "err": 7.1,
+      "floor": 2.4,
+      "rel": 0.8
+    },
+    "down": {
+      "err": 8.6,
+      "floor": 2.7,
+      "rel": 0.9
+    }
+  },
+  "hot-air-balloon": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 75.4,
+    "side": {
+      "err": 4.9,
+      "floor": 1.3,
+      "rel": 0.1
+    },
+    "down": {
+      "err": 5.4,
+      "floor": 0.8,
+      "rel": 0.1
+    }
+  },
+  "ocean-liner": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 32.6,
+    "side": {
+      "err": 25.2,
+      "floor": 38.8,
+      "rel": 0.8
+    },
+    "down": {
+      "err": 25,
+      "floor": 45.6,
+      "rel": 0.8
+    }
+  },
+  "submarine": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 69.6,
+    "side": {
+      "err": 25.5,
+      "floor": 14.7,
+      "rel": 0.4
+    },
+    "down": {
+      "err": 23.8,
+      "floor": 13.6,
+      "rel": 0.3
+    }
+  },
+  "picture-frame": {
+    "kind": "kit",
+    "shelf": "pictures",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 34.9,
+    "side": {
+      "err": 2.8,
+      "floor": 0.1,
+      "rel": 0.1
+    },
+    "down": {
+      "err": 0,
+      "floor": 19.5,
+      "rel": 0
+    }
+  },
+  "fluid-lab": {
+    "kind": "kit",
+    "shelf": "lab",
+    "labs": true,
+    "canPlay": false,
+    "mode": "toy",
+    "move": 23.5,
+    "side": {
+      "err": 29,
+      "floor": 8,
+      "rel": 1.2
+    },
+    "down": {
+      "err": 2.3,
+      "floor": 4,
+      "rel": 0.1
+    }
+  },
+  "storm-cloud": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 19.4,
+    "side": {
+      "err": 0.2,
+      "floor": 64.6,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.2,
+      "floor": 64.6,
+      "rel": 0
+    }
+  },
+  "snow-globe": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 14.6,
+    "side": {
+      "err": 0,
+      "floor": 2.5,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 2.5,
+      "rel": 0
+    }
+  },
+  "volcano": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 19.1,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "tornado": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 26.5,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "geyser": {
+    "kind": "kit",
+    "shelf": "weather",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 56.9,
+    "side": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "gift-box": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 62.3,
+    "side": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    },
+    "down": {
+      "err": 0.1,
+      "floor": 0.1,
+      "rel": 0
+    }
+  },
+  "potion-bottle": {
+    "kind": "kit",
+    "shelf": "objects",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 35.8,
+    "side": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.3,
+      "rel": 0
+    }
+  },
+  "rocket": {
+    "kind": "kit",
+    "shelf": "vehicles",
+    "labs": false,
+    "canPlay": true,
+    "mode": "toy",
+    "move": 89.9,
+    "side": {
+      "err": 0,
+      "floor": 0.2,
+      "rel": 0
+    },
+    "down": {
+      "err": 0,
+      "floor": 0.1,
+      "rel": 0
+    }
+  }
+}

@@ -7,6 +7,9 @@
 // With the tilt locked (lane Viewer), a drag only spins the toy around its
 // vertical axis: pitch and roll stay at the toy's home pose. A toy may also
 // keep the tilt within its own range (setPitchRange, lane Live input r3).
+// A toy seen from inside (setInside, lane Night sky) puts the camera at the
+// target, looking out the way the orbit camera would look in, so a drag still
+// moves the view the way the finger goes and a pinch narrows the field of view.
 
 const TAU = Math.PI * 2;
 const PITCH_LIMIT = 1.45;
@@ -44,6 +47,7 @@ export class OrbitCamera {
     this.turntable = !reducedMotion;
     this.tiltLock = false;
     this.pitchRange = null; // [low, high] radians, or the usual limits
+    this.inside = null; // { fov } in degrees for a toy seen from inside, or null (lane Night sky)
     this.turntableSpeed = 0.18;
     this.idleDelay = 2.5;
     this.idleFor = 0;
@@ -64,6 +68,13 @@ export class OrbitCamera {
     const ok = Array.isArray(range) && range.length === 2 && range.every(Number.isFinite);
     this.pitchRange = ok ? [Math.max(-PITCH_LIMIT, range[0]), Math.min(PITCH_LIMIT, range[1])] : null; // prettier-ignore
     this.tgt.pitch = this.clampPitch(this.tgt.pitch);
+  }
+
+  // Lane Night sky: a toy seen from inside ({ fov } in degrees at the home
+  // distance; a pinch scales it with the distance), or null for the usual orbit.
+  setInside(opts) {
+    const fov = Number(opts?.fov ?? 70);
+    this.inside = opts && Number.isFinite(fov) && fov > 0 ? { fov: Math.min(120, fov) } : null;
   }
 
   clampPitch(p) {
@@ -170,6 +181,7 @@ export class OrbitCamera {
   // the toy follows the finger. The aim stays within the toy's bounds (a box
   // of its radius round its center), so the toy never leaves the screen.
   panBy(dx, dy) {
+    if (this.inside) return; // lane Night sky: the view from inside stays at its center
     const pose = this.pose();
     const k = (2 * this.cur.distance * Math.tan((19 * Math.PI) / 180)) / Math.max(200, this.viewportHeight); // prettier-ignore
     const R = this.radius;
@@ -314,6 +326,22 @@ export class OrbitCamera {
       this.target[1] + this.offset[1],
       this.target[2] + this.offset[2],
     ];
+    // Lane Night sky: from inside, the camera stands at the target and looks
+    // out along `back` (a half turn about its own up), with a field of view
+    // that a pinch narrows or widens.
+    if (this.inside) {
+      const qi = quatMul(q, [0, 1, 0, 0]);
+      const fov = this.inside.fov * (distance / Math.max(1e-6, this.home.distance));
+      return {
+        distance,
+        position: t,
+        rotation: qi,
+        right: rotate(qi, [1, 0, 0]),
+        up: rotate(qi, [0, 1, 0]),
+        forward: back,
+        fov: Math.min(120, Math.max(10, fov)),
+      };
+    }
     return {
       distance,
       position: [t[0] + back[0] * distance, t[1] + back[1] * distance, t[2] + back[2] * distance],
