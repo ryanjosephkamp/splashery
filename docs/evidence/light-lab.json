@@ -34,7 +34,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sll.spec.mjs:101",
+      "test": "tests/sll.spec.mjs:106",
       "note": "`node tools/sll-nist.mjs --check` compares the shipped file with NIST's tables again. Components closer than 0.05 nm (hydrogen's fine structure) are drawn as one line at their intensity-weighted wavelength."
     },
     {
@@ -56,7 +56,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sll.spec.mjs:118",
+      "test": "tests/sll.spec.mjs:133",
       "note": "The traced deviation equals the textbook minimum within 10⁻⁶ rad (tests/sll.spec.mjs:125)."
     },
     {
@@ -84,7 +84,7 @@
         }
       ],
       "verdict": "correct",
-      "test": "tests/sll.spec.mjs:140",
+      "test": "tests/sll.spec.mjs:148",
       "note": ""
     },
     {
@@ -106,7 +106,7 @@
         }
       ],
       "verdict": "close",
-      "test": "tests/sll.spec.mjs:147",
+      "test": "tests/sll.spec.mjs:155",
       "note": "Within 2 nm on made-up pictures at two scales and both directions; a real camera adds its own color response, and a disc's spread is only nearly linear in wavelength."
     }
   ],
