@@ -2016,6 +2016,23 @@ body.embed #stage {
   border-radius: 999px;
 }
 
+.sound-toggle {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  min-height: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
 .embed-status {
   position: fixed;
   left: 8px;
