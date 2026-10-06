@@ -1,0 +1,125 @@
+[
+  {
+    "toy": "grapes",
+    "fps": 8,
+    "seconds": 5,
+    "metrics": {
+      "font": "Courier New Bold",
+      "fontSize": 10,
+      "advance": 6.0009765625,
+      "lineHeight": 12,
+      "characterAspect": 0.5000813802083334
+    },
+    "metadata": {
+      "baseline": "19f8d720b77df087f1aba2e807fc3a490725a936",
+      "toy": "grapes",
+      "source": "src/packs/food.js",
+      "browser": "154.0.8037.95",
+      "renderer": "WebGL2 / ANGLE Metal",
+      "fps": 8,
+      "frames": 40,
+      "size": [420, 420],
+      "tapFrame": 4,
+      "simulationStepSeconds": 0.125,
+      "splats": 200012,
+      "sampledPoints": 2382,
+      "stride": 84,
+      "camera": {
+        "yaw": 0.45,
+        "pitch": 0.25,
+        "roll": 0,
+        "distance": 2.8862162113189695
+      },
+      "pageErrors": []
+    },
+    "credits": [
+      "Splashery grapes | procedural source",
+      "Fixed-view capture converted to characters"
+    ],
+    "frameCount": 40
+  },
+  {
+    "toy": "orange",
+    "fps": 10,
+    "seconds": 3.6,
+    "metrics": {
+      "font": "Courier New Bold",
+      "fontSize": 10,
+      "advance": 6.0009765625,
+      "lineHeight": 12,
+      "characterAspect": 0.5000813802083334
+    },
+    "metadata": {
+      "toy": "orange",
+      "baseline": "f95ceca357798aeaba7ac31801187f81b616c4b7",
+      "renderer": "WebGL2 / ANGLE Metal",
+      "browser": "154.0.8037.98",
+      "size": [420, 420],
+      "fps": 10,
+      "frames": 36,
+      "tapFrame": 4,
+      "seconds": 3.6,
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.36,
+        "roll": 0,
+        "distance": 3.758174049854279
+      },
+      "splats": 199998,
+      "errors": [],
+      "effect": "open wedges; whole style",
+      "credit": null
+    },
+    "credits": [
+      "Splashery orange | procedural source",
+      "Fixed-view capture converted to characters"
+    ],
+    "frameCount": 36
+  },
+  {
+    "toy": "strawberry",
+    "fps": 10,
+    "seconds": 3.6,
+    "metrics": {
+      "font": "Courier New Bold",
+      "fontSize": 10,
+      "advance": 6.0009765625,
+      "lineHeight": 12,
+      "characterAspect": 0.5000813802083334
+    },
+    "metadata": {
+      "toy": "strawberry",
+      "baseline": "f95ceca357798aeaba7ac31801187f81b616c4b7",
+      "renderer": "WebGL2 / ANGLE Metal",
+      "browser": "154.0.8037.98",
+      "size": [420, 420],
+      "fps": 10,
+      "frames": 36,
+      "tapFrame": 4,
+      "seconds": 3.6,
+      "camera": {
+        "yaw": 0.25,
+        "pitch": 0.3,
+        "roll": 0,
+        "distance": 4.884746313095093
+      },
+      "splats": null,
+      "errors": [],
+      "effect": "pop seeds; captured toy rig",
+      "credit": {
+        "title": "Strawberry",
+        "author": "Dany Bittel",
+        "source": "https://superspl.at/scene/84df8849",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "changes": "Splashery: converted, decimated, SH removed, recentered and scaled. Prototype: fixed-view capture, downsampled and converted to characters."
+      }
+    },
+    "credits": [
+      "Strawberry - Dany Bittel - CC BY 4.0",
+      "superspl.at/scene/84df8849 | Modified to text",
+      "creativecommons.org/licenses/by/4.0/"
+    ],
+    "frameCount": 36
+  }
+]

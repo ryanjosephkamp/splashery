@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASCII export prototype · Splashery</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, sans-serif;
+        background: #101719;
+        color: #eff3ef;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 960px;
+        margin: auto;
+        padding: 32px 20px 60px;
+      }
+      h1 {
+        font-size: clamp(2rem, 6vw, 3.8rem);
+        letter-spacing: -0.045em;
+        margin: 14px 0;
+        line-height: 1.06;
+      }
+      h2 {
+        font-size: 1.35rem;
+        margin-top: 32px;
+      }
+      p {
+        line-height: 1.6;
+        max-width: 72ch;
+      }
+      .eyebrow {
+        color: #a3d7b1;
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .intro {
+        color: #c4d4cc;
+        max-width: 720px;
+      }
+      .panel {
+        background: #1b2528;
+        padding: 18px;
+        border: 1px solid #354446;
+        border-radius: 16px;
+        margin-top: 22px;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: end;
+      }
+      label {
+        display: grid;
+        gap: 7px;
+        font-size: 0.9rem;
+        color: #c4d4cc;
+      }
+      .check {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+      }
+      select,
+      button,
+      .download {
+        font: inherit;
+        color: #eff3ef;
+        background: #263538;
+        border: 1px solid #5a7771;
+        border-radius: 8px;
+        padding: 11px 14px;
+        min-height: 44px;
+      }
+      button,
+      select,
+      input {
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      button:hover:enabled,
+      .download:hover {
+        background: #354b45;
+      }
+      :focus-visible {
+        outline: 3px solid #a3d7b1;
+        outline-offset: 3px;
+      }
+      a {
+        color: #ade6bc;
+      }
+      .stage {
+        background: #111;
+        border-radius: 10px;
+        margin-top: 18px;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      #source {
+        width: 140px;
+        max-width: 40%;
+        height: auto;
+        border-radius: 8px;
+        float: right;
+        margin: 0 0 8px 16px;
+      }
+      #status,
+      #position {
+        font-variant-numeric: tabular-nums;
+        color: #c4d4cc;
+        font-size: 0.9rem;
+      }
+      #timeline {
+        width: 100%;
+        min-height: 44px;
+        margin: 0;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      #credit {
+        clear: both;
+        font-size: 0.86rem;
+        color: #c4d4cc;
+        line-height: 1.6;
+      }
+      textarea {
+        width: 100%;
+        height: 220px;
+        background: #111;
+        color: #eee;
+        font:
+          10px/12px "Courier New",
+          monospace;
+        white-space: pre;
+        overflow: auto;
+        border: 1px solid #5a7771;
+        border-radius: 8px;
+        padding: 10px;
+      }
+      summary {
+        cursor: pointer;
+        padding: 14px 0;
+      }
+      code {
+        color: #a3d7b1;
+      }
+      .download {
+        display: inline-block;
+        text-decoration: none;
+      }
+      .note {
+        color: #c4d4cc;
+        font-size: 0.9rem;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto;
+        }
+      }
+      @media (max-width: 480px) {
+        main {
+          padding: 24px 14px 40px;
+        }
+        .panel {
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">Splashery · Prototype · October 6, 2026</div>
+      <h1>Motion, made of characters.</h1>
+      <p class="intro">
+        A recorded toy becomes a grid of plain ASCII. Each image is converted on your device using a
+        fixed brightness rule. No AI model is needed to make the frames.
+      </p>
+      <section class="panel" aria-label="ASCII animation demo">
+        <div class="controls">
+          <label
+            >Example
+            <select id="toy" aria-label="Example">
+              <option value="grapes">Grapes · procedural</option>
+              <option value="orange">Orange · procedural</option>
+              <option value="strawberry">Strawberry · photographed source</option>
+            </select></label
+          >
+          <label
+            >Detail
+            <select id="columns" aria-label="Detail" disabled>
+              <option value="48">48 columns</option>
+              <option value="72">72 columns</option>
+              <option value="96" selected>96 columns</option>
+              <option value="144">144 columns</option>
+            </select></label
+          >
+          <label
+            >Contrast
+            <select id="contrast" aria-label="Contrast" disabled>
+              <option value="1">Soft</option>
+              <option value="1.3" selected>Original</option>
+              <option value="1.8">Strong</option>
+            </select></label
+          >
+          <label class="check"
+            ><input id="color" type="checkbox" disabled /> Color characters</label
+          >
+        </div>
+        <p id="status" role="status">Loading the local example…</p>
+        <div class="stage">
+          <canvas
+            id="preview"
+            width="594"
+            height="620"
+            role="img"
+            aria-label="ASCII toy frame"
+          ></canvas>
+        </div>
+        <label for="timeline"
+          >Frame <input id="timeline" type="range" min="0" max="39" value="0" disabled
+        /></label>
+        <div id="position">0 / 0</div>
+        <div class="actions">
+          <button id="play" disabled>Play</button><button id="reset" disabled>Reset</button
+          ><button id="text-download" disabled>Save text frame</button
+          ><button id="json-download" disabled>Save frame sequence</button
+          ><button id="png-download" disabled>Save PNG frame</button>
+        </div>
+        <details>
+          <summary>Plain text frame · select and copy</summary>
+          <textarea
+            id="text"
+            readonly
+            aria-label="Copyable plain ASCII frame"
+            spellcheck="false"
+          ></textarea>
+          <p class="note">
+            The text contains printable ASCII and line breaks. Keep a monospace font and preserve
+            spaces. Attribution is included in the saved text file.
+          </p>
+        </details>
+        <details>
+          <summary>Original capture and attribution</summary>
+          <img id="source" alt="Original recorded toy frame" />
+          <div id="credit"></div>
+        </details>
+      </section>
+      <h2>Fixed GIF and video exports</h2>
+      <p>
+        These are the original 96-column monochrome exports. They keep their original font, contrast
+        and credits; the controls above change the live preview and its text, JSON and PNG
+        downloads.
+      </p>
+      <div class="actions">
+        <a id="gif" class="download" download>Download GIF</a
+        ><a id="mp4" class="download" download>Download MP4</a>
+      </div>
+      <h2>What this demonstrates</h2>
+      <p>
+        The converter averages each cell’s pixels, accounts for transparent pixels, and maps
+        brightness to a character. Repeating that step over a captured sequence produces the
+        animation. Color is optional; the underlying text stays the same.
+      </p>
+      <p>
+        Grapes preserve the bunch and falling fruit clearly. The orange keeps its moving wedges. The
+        strawberry is a useful harder case: its outline survives, but fine seeds and subtle texture
+        lose detail. Color can help distinguish those regions.
+      </p>
+      <p class="note">
+        These are recorded examples from earlier source revisions, not live toys from current main.
+        This prototype does not add an export-menu option. A later integration needs a capture
+        adapter and encoding step; PDF and text QR work remain separate.
+      </p>
+      <noscript><p>Enable JavaScript to convert and play the recorded examples.</p></noscript>
+    </main>
+    <script type="module" src="./demo.js"></script>
+  </body>
+</html>
