@@ -17,7 +17,8 @@
 // The volume toys use the engine's volume kind (src/effects.js, KINDS.volume)
 // and out.volume: a cutting plane and a density window.
 
-import { mix, shade, smoothstep, clamp, vec } from "../kit.js";
+import { mix, shade, smoothstep, clamp, vec, buildRecipe } from "../kit.js";
+import { TOYS } from "../toys.js";
 import { evenBox, evenCylinder, evenRoundBox } from "./even.js";
 
 // ---- Shared ------------------------------------------------------------------------------
@@ -40,12 +41,13 @@ const span = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 // screen: its center, its right and up directions (unit) and its width.
 // pixel(i, j) gives [r, g, b] (0..1) or null; extra fields go on each splat
 // (part, kind, params, channel).
-function screenSplats(k, { W, H, center, right, up, width, share, pixel, extra }) {
+function screenSplats(k, { W, H, center, right, up, width, pixel, extra, fill = 0.62 }) {
   const pitch = width / W;
   const n = vec.unit(vec.cross(right, up));
   const q = basisQuat(right, up, n);
-  const s = pitch * 0.62;
-  k.cloud({ share, jitter: 0 }, (rand, idx) => {
+  const s = pitch * fill;
+  // Exactly one splat per pixel, whatever the budget.
+  k.cloud({ count: W * H * (160000 / k.count), jitter: 0 }, (rand, idx) => {
     const i = idx % W;
     const j = Math.floor(idx / W);
     if (j >= H) return null;
@@ -420,8 +422,8 @@ const XR = {
   tunnel: 0.75, // the tunnel's half length
   stripe: 0.116, // the belt's ribs (2.9 / 25, so a ride ends where it began)
   screen: { center: [0, 2.32, 0.18], w: 1.72, h: 1.08, tilt: 12 },
-  W: 120,
-  H: 80,
+  W: 180,
+  H: 120,
   win: 1.0, // the picture's window across the bag, in bag units
 };
 
@@ -565,20 +567,21 @@ function buildXray(k) {
     color: (c) => lit("#2a2d31", c.n, 0.3),
     even: true,
   });
-  // The screen's pale background, under the pictures.
-  k.add(evenBox(S.w, S.h, 0.004), {
-    pos: vec.add(S.center, vec.mul(normal, -0.004)),
-    rot: [-S.tilt, 0, 0],
-    color: XR_BG.map((v) => v * 0.97),
-    even: true,
-    flat: 0.1,
-    jitter: 0,
-    pattern: false,
+  // The screen's pale background, under the pictures: an even grid (a
+  // sampled box left grain between the pictures).
+  screenSplats(k, {
+    W: XR.W / 2,
+    H: XR.H / 2,
+    center: vec.add(S.center, vec.mul(normal, -0.001)),
+    right,
+    up,
+    width: S.w,
+    pixel: () => XR_BG.map((v) => v * 0.97),
+    fill: 0.9,
   });
   // The pictures, one part each; each builds in as its bag crosses the beam
   // (a fade on channel i % 2, so one picture can show while the next builds).
-  const face = vec.add(S.center, vec.mul(normal, 0.004));
-  const shareEach = 0.075;
+  const face = vec.add(S.center, vec.mul(normal, 0.03));
   BAGS.forEach((bag, b) => {
     const pic = xrayPicture(bag, XR.W, XR.H, XR.win, (x, y, z) => k.noise.fbm(x, y, z + b * 7, 3));
     const part = k.part(`pic${b}`);
@@ -589,7 +592,6 @@ function buildXray(k) {
       right,
       up,
       width: S.w,
-      share: shareEach,
       pixel: (i, j) => pic[j * XR.W + i],
       // The bag's leading (right) edge crosses the beam first.
       extra: (i) => ({ part, kind: "fade", params: [1 - (i + 0.5) / XR.W, -0.04], channel: b % 2 }),
@@ -974,13 +976,180 @@ function ctPointer(p) {
   return p[1];
 }
 
-function buildHowCT(k) {
-  // The shell's outside, fading as the ring passes (fade on channel 0).
-  buildNautilusShell(k, 0.32, {
-    extra: (p) => ({ kind: "fade", params: [clamp((p[0] - CT.x0) / (CT.x1 - CT.x0), 0, 1), 0.03], channel: 0 }), // prettier-ignore
+// Other toys can lie in the scanner instead of the shell (the owner's note
+// of October 5, 2026: "virtually any toy"). Each is built at rest, its splats
+// copied as its outside, and its volume found by voxelizing those splats:
+// the cells they touch are its skin, and every cell the outside cannot reach
+// is its inside.
+export const CT_SPECIMENS = ["nautilus", "apple", "pineapple", "avocado", "egg", "orange", "cupcake", "croissant", "rubber-duck", "teddy-bear", "robot", "gift-box", "pinecone", "acorn", "snail", "pufferfish", "baseball", "diamond", "potion-bottle", "music-box"]; // prettier-ignore
+const specimens = new Map();
+
+async function loadSpecimen(id) {
+  if (id === "nautilus" || specimens.has(id)) return specimens.get(id) ?? null;
+  const def = TOYS.find((t) => t.id === id && t.kind === "kit");
+  if (!def) return null;
+  const { RECIPES: R } = await import(`./${def.pack}.js`);
+  const r = R[id];
+  if (!r) return null;
+  const options = Object.fromEntries((r.options || []).map((o) => [o.key, o.default]));
+  if (r.prepare) await r.prepare(options);
+  const it = buildRecipe(r, { seed: 7, count: 70000, options }, () => {});
+  let b = it.next();
+  while (!b.done) b = it.next();
+  const { kit } = b.value;
+  // Its rest pose: parts hidden at rest stay out.
+  const c = Object.fromEntries((r.controls || []).map((x) => [x.key, x.default ?? 0]));
+  const out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {}, tokens: null };
+  try {
+    r.drive?.(0, c, out, { time: 0, R: 1, tap: null, data: kit.data });
+  } catch {
+    // (A drive that needs the app's player: the toy as built.)
+  }
+  const buf = kit.buf;
+  const keep = [];
+  for (let i = 0; i < buf.count; i++) {
+    const part = kit.parts[Math.round(buf.anim[i * 4]) & 15];
+    const pd = part && out.parts[part.name];
+    if (pd && (pd.visible ?? 1) * (pd.scale ?? 1) < 0.5) continue;
+    if (buf.color[i * 4 + 3] < 0.05) continue;
+    keep.push(i);
+  }
+  const s = {
+    n: keep.length,
+    pos: new Float32Array(keep.length * 3),
+    scale: new Float32Array(keep.length * 3),
+    rot: new Float32Array(keep.length * 4),
+    color: new Float32Array(keep.length * 4),
+  };
+  keep.forEach((i, j) => {
+    s.pos.set(buf.pos.subarray(i * 3, i * 3 + 3), j * 3);
+    s.scale.set(buf.scale.subarray(i * 3, i * 3 + 3), j * 3);
+    s.rot.set(buf.rot.subarray(i * 4, i * 4 + 4), j * 4);
+    s.color.set(buf.color.subarray(i * 4, i * 4 + 4), j * 4);
   });
-  // The volume that the scan builds behind the ring.
-  buildNautilusVolume(k, 0.44);
+  specimens.set(id, s);
+  return s;
+}
+
+// A specimen's volume: a grid over its splats, the skin (the cells its
+// splats touch, thickened by one), and the inside (every cell a flood from
+// the grid's border cannot reach).
+function specimenVolume(s, G = 72) {
+  const lo = [Infinity, Infinity, Infinity];
+  const hi = [-Infinity, -Infinity, -Infinity];
+  for (let i = 0; i < s.n; i++)
+    for (let a = 0; a < 3; a++) {
+      lo[a] = Math.min(lo[a], s.pos[i * 3 + a]);
+      hi[a] = Math.max(hi[a], s.pos[i * 3 + a]);
+    }
+  const size = Math.max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]) || 1;
+  const cell = size / (G - 4);
+  const o = lo.map((v) => v - 2 * cell);
+  const idx = (x, y, z) => (z * G + y) * G + x;
+  const skin = new Uint8Array(G * G * G);
+  for (let i = 0; i < s.n; i++) {
+    const g = [0, 1, 2].map((a) => Math.floor((s.pos[i * 3 + a] - o[a]) / cell));
+    for (let dz = -1; dz <= 1; dz++)
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dx = -1; dx <= 1; dx++) {
+          const [x, y, z] = [g[0] + dx, g[1] + dy, g[2] + dz];
+          if (x >= 0 && y >= 0 && z >= 0 && x < G && y < G && z < G && Math.abs(dx) + Math.abs(dy) + Math.abs(dz) <= 1) skin[idx(x, y, z)] = 1; // prettier-ignore
+        }
+  }
+  // Flood the outside from the border.
+  const outside = new Uint8Array(G * G * G);
+  const stack = [];
+  for (let z = 0; z < G; z++)
+    for (let y = 0; y < G; y++)
+      for (let x = 0; x < G; x++)
+        if (
+          (x === 0 || y === 0 || z === 0 || x === G - 1 || y === G - 1 || z === G - 1) &&
+          !skin[idx(x, y, z)]
+        ) {
+          outside[idx(x, y, z)] = 1;
+          stack.push(idx(x, y, z));
+        }
+  while (stack.length) {
+    const i = stack.pop();
+    const x = i % G;
+    const y = Math.floor(i / G) % G;
+    const z = Math.floor(i / (G * G));
+    for (const [dx, dy, dz] of NEAR) {
+      const [a, b, c] = [x + dx, y + dy, z + dz];
+      if (a < 0 || b < 0 || c < 0 || a >= G || b >= G || c >= G) continue;
+      const j = idx(a, b, c);
+      if (outside[j] || skin[j]) continue;
+      outside[j] = 1;
+      stack.push(j);
+    }
+  }
+  // Densities: the skin dense, the inside softer, a little texture.
+  const d = new Uint8Array(G * G * G);
+  for (let i = 0; i < d.length; i++) d[i] = skin[i] ? 235 : outside[i] ? 0 : 150;
+  return { nx: G, ny: G, nz: G, d, cell, o };
+}
+
+function buildHowCT(k, specimen) {
+  const s = specimens.get(specimen);
+  if (!s) {
+    // The shell's outside, fading as the ring passes (fade on channel 0).
+    buildNautilusShell(k, 0.32, {
+      extra: (p) => ({ kind: "fade", params: [clamp((p[0] - CT.x0) / (CT.x1 - CT.x0), 0, 1), 0.03], channel: 0 }), // prettier-ignore
+    });
+    // The volume that the scan builds behind the ring.
+    buildNautilusVolume(k, 0.44);
+    k.data = { zHalf: 1.25 * NAUT.rho * NAUT.R0 };
+  } else {
+    // The toy, scaled to the shell's size and set on the table.
+    let [lo, hi] = [[9, 9, 9], [-9, -9, -9]]; // prettier-ignore
+    for (let i = 0; i < s.n; i++)
+      for (let a = 0; a < 3; a++) {
+        lo[a] = Math.min(lo[a], s.pos[i * 3 + a]);
+        hi[a] = Math.max(hi[a], s.pos[i * 3 + a]);
+      }
+    const f = 1.3 / Math.max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]);
+    const at = (p) => [(p[0] - (lo[0] + hi[0]) / 2) * f, (p[1] - lo[1]) * f - 0.485, (p[2] - (lo[2] + hi[2]) / 2) * f]; // prettier-ignore
+    const fx = (p) => clamp((p[0] - CT.x0) / (CT.x1 - CT.x0), 0, 1);
+    k.cloud({ count: s.n * (160000 / k.count), jitter: 0 }, (rand, i) => {
+      if (i >= s.n) return null;
+      const p = at([s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]]);
+      return {
+        p,
+        color: [s.color[i * 4], s.color[i * 4 + 1], s.color[i * 4 + 2]],
+        opacity: s.color[i * 4 + 3],
+        scales: [s.scale[i * 3] * f, s.scale[i * 3 + 1] * f, s.scale[i * 3 + 2] * f],
+        quat: [s.rot[i * 4], s.rot[i * 4 + 1], s.rot[i * 4 + 2], s.rot[i * 4 + 3]],
+        kind: "fade",
+        params: [fx(p), 0.03],
+        channel: 0,
+        pattern: false,
+      };
+    });
+    const V = specimenVolume(s);
+    // Its volume, as the walnut's is drawn, in the specimen's place.
+    const budget = k.count * 0.45;
+    let solid = 0;
+    for (let i = 0; i < V.d.length; i++) if (V.d[i]) solid++;
+    const pitch = Math.max(0.5, Math.cbrt(solid / budget));
+    const sz = pitch * V.cell * f * 0.75;
+    const pts = [];
+    for (let z = 0; z < V.nz - 1; z += pitch)
+      for (let y = 0; y < V.ny - 1; y += pitch)
+        for (let x = 0; x < V.nx - 1; x += pitch) {
+          const v = volAt(V, x, y, z);
+          if (v < 60) continue;
+          pts.push(at([V.o[0] + x * V.cell, V.o[1] + y * V.cell, V.o[2] + z * V.cell]), v / 255);
+        }
+    const n = pts.length / 2;
+    k.cloud({ count: n * (160000 / k.count), jitter: 0 }, (rand, i) => {
+      if (i >= n) return null;
+      const d = pts[i * 2 + 1];
+      const j = (rand() - 0.5) * pitch * V.cell * f * 0.3;
+      const p = pts[i * 2].map((c) => c + j);
+      return { p, color: ctGray(0.55 + 0.45 * d), scales: [sz, sz, sz], opacity: 0.25 + 0.75 * smoothstep(0.23, 0.5, d), kind: "volume", params: [d, 0], pattern: false }; // prettier-ignore
+    });
+    k.data = { zHalf: ((hi[2] - lo[2]) / 2) * f + 0.02 };
+  }
   buildCT(k);
   for (const x of [CT.x0 - 0.2, CT.x1 + 0.2])
     for (const [y, z] of [
@@ -1007,7 +1176,7 @@ function driveHowCT(t, c, out, info) {
     ctCut.at = 1;
   }
   // The volume shows behind the ring; once scanned, a drag cuts into it.
-  const depth = 1.25 * NAUT.rho * NAUT.R0; // the shell's half depth
+  const depth = info.data?.zHalf ?? 1.25 * NAUT.rho * NAUT.R0; // the specimen's half depth
   if (v < 0.999) out.volume = { normal: [1, 0, 0], at: x, glow: [0.25, 0.12, 0], glowWidth: 0.05 };
   else if (ctCut.at < 0.999)
     out.volume = { normal: [0, 0, 1], at: -depth + 2 * depth * ctCut.at, glow: [0.14, 0.07, 0], glowWidth: 0.03 }; // prettier-ignore
@@ -1134,8 +1303,7 @@ function walnutColor(style) {
     };
   return (d) => {
     const v = clamp((d - 0.2) / 0.8, 0, 1);
-    const g = 0.18 + 0.82 * v ** 0.9;
-    return [g, g, g * 0.98];
+    return visionColor(style, 0.18 + 0.82 * v ** 0.9);
   };
 }
 
@@ -1269,7 +1437,7 @@ function orangeSignal(x, y, z, noise) {
   return 0.8 + 0.12 * ves;
 }
 
-function buildMRI(k, fruit) {
+function buildMRI(k, fruit, vision = "gray") {
   const signal = fruit === "orange" ? orangeSignal : kiwiSignal;
   const half = fruit === "orange" ? MRI.orange.r : MRI.kiwi.a;
   const across = fruit === "orange" ? MRI.orange.r : MRI.kiwi.b;
@@ -1288,7 +1456,8 @@ function buildMRI(k, fruit) {
         const v = signal(x, y, z, noise);
         if (v < 0) continue;
         // Rician-looking noise: a grain that lifts the dark parts most.
-        const g = clamp(Math.hypot(v, 0.05 * (1 + grain(x, y, z))), 0, 1);
+        // (Lighter than before: the owner found it grainy.)
+        const g = clamp(Math.hypot(v, 0.02 * (1 + grain(x, y, z))), 0, 1);
         pts.push(x, y, z, g);
       }
   }
@@ -1300,7 +1469,7 @@ function buildMRI(k, fruit) {
     const v = 0.04 + 0.96 * g;
     return {
       p: [pts[i * 4], pts[i * 4 + 1], pts[i * 4 + 2]],
-      color: [v, v, v],
+      color: visionColor(vision, v),
       scales: [s, s, gap * 0.12],
       opacity: 1,
       kind: "volume",
@@ -1309,13 +1478,13 @@ function buildMRI(k, fruit) {
     };
   });
   // A faint outline of the whole fruit, so the slice's place reads.
-  k.cloud({ share: 0.05, jitter: 0.2, size: 0.8 }, (rand) => {
+  k.cloud({ share: 0.04, jitter: 0, size: 0.55 }, (rand) => {
     const u = rand() * 2 - 1;
     const a = rand() * 2 * Math.PI;
     const w = Math.sqrt(1 - u * u);
     const d = [w * Math.cos(a), w * Math.sin(a), u];
     const p = fruit === "orange" ? vec.mul(d, MRI.orange.r) : [d[0] * MRI.kiwi.b, d[1] * MRI.kiwi.b, d[2] * MRI.kiwi.a]; // prettier-ignore
-    return { p, color: "#7fb3d9", opacity: 0.05, n: d, pattern: false };
+    return { p, color: "#7fb3d9", opacity: 0.04, n: d, pattern: false };
   });
   return { S, gap, half };
 }
@@ -1660,17 +1829,18 @@ function mulberry(a) {
   };
 }
 
-function buildSEM(k, name) {
+function buildSEM(k, name, vision = "gray") {
   const noise = (x, y, z) => k.noise(x, y, z);
   const spec = semSpecimen(name, noise);
   for (const part of spec.parts) {
+    // (Smaller splats than before, twice as many: the owner asked for it sharper.)
     k.cloud(
-      { share: part.share * 0.97, jitter: 0.3, flat: 0.2, size: part.size ?? 0.75 },
+      { share: part.share * 0.97, jitter: 0.2, flat: 0.2, size: (part.size ?? 0.75) * 0.8 },
       (rand) => {
         const s = part.sample(rand);
         if (!s) return null;
-        const g = 0.06 * noise(s.p[0] * 140, s.p[1] * 140, s.p[2] * 140);
-        return { p: s.p, n: s.n, color: semTone(s.n, s.extra ?? 0, g), pattern: false };
+        const g = 0.03 * noise(s.p[0] * 140, s.p[1] * 140, s.p[2] * 140);
+        return { p: s.p, n: s.n, color: visionColor(vision, semTone(s.n, s.extra ?? 0, g)[0]), pattern: false }; // prettier-ignore
       },
     );
   }
@@ -1853,17 +2023,57 @@ function driveThermal(t, c, out, info) {
   // The tea cools from 72 to 34 degrees over about 24 seconds (minutes in
   // real life), sped up.
   const x = thermalOn.at === null ? 0 : clamp((t - thermalOn.at) / 24, 0, 1);
-  const w1 = x < 0.5 ? 1 - 2 * x : 0;
-  const w2 = x < 0.5 ? 2 * x : 2 - 2 * x;
-  const w3 = x < 0.5 ? 0 : 2 * x - 1;
+  // Each step blends into the next quickly: two copies half shown at once
+  // look grainy (the owner's note of October 5, 2026).
+  const a = smoothstep(0.4, 0.48, x);
+  const b = smoothstep(0.82, 0.9, x);
+  const w1 = 1 - a;
+  const w2 = a - b;
+  const w3 = b;
   out.morph = [v, v * w1, v * w2, v * w3];
   out.amount = 1 - 0.85 * x;
 }
+
+// ---- Visions --------------------------------------------------------------------------------
+
+// The owner's note of October 5, 2026: keep each picture's realistic gray as
+// the default, and offer themed visions. Each maps a gray level (0..1) to a
+// color: a night-vision scope's green phosphor, or a thermal camera's iron
+// palette (bright as hot).
+export const VISIONS = [
+  { id: "gray", label: "Gray (realistic)" },
+  { id: "night", label: "Night vision" },
+  { id: "infrared", label: "Infrared" },
+];
+export function visionColor(style, v) {
+  v = clamp(v, 0, 1);
+  if (style === "night") {
+    const g = v ** 0.85;
+    return [0.1 * g + 0.01, 0.94 * g + 0.04, 0.22 * g + 0.02];
+  }
+  if (style === "infrared") return rgbOf(ironColor(TH.lo + (TH.hi - TH.lo) * v));
+  return [v, v, v * 0.98];
+}
+// A color as [r, g, b] (0..1).
+function rgbOf(c) {
+  if (Array.isArray(c)) return c;
+  const n = parseInt(String(c).slice(1), 16);
+  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+}
+const visionOption = (label = "Vision") => ({
+  key: "vision",
+  label,
+  type: "select",
+  default: "gray",
+  choices: VISIONS,
+});
 
 // ---- Recipes ------------------------------------------------------------------------------
 
 export const RECIPES = {
   "airport-xray": {
+    kernel: "sharp", // labs: a sharper splat edge (src/kernels.js)
+    density: 2,
     turntable: false,
     controls: [{ key: "send", label: "Send a bag", type: "pulse", ease: 7 }],
     action: { key: "send", label: "Send the next bag" },
@@ -1874,6 +2084,8 @@ export const RECIPES = {
     },
   },
   "how-ct": {
+    kernel: "sharp", // labs: a sharper splat edge (src/kernels.js)
+    density: 2,
     turntable: false,
     alive: (c) => c.scan > 0.001 && c.scan < 0.999,
     controls: [{ key: "scan", label: "Scan", type: "toggle", ease: 6 }],
@@ -1893,13 +2105,26 @@ export const RECIPES = {
         ctCut.grab = null;
       },
     },
+    options: [
+      {
+        key: "specimen",
+        label: "In the scanner",
+        type: "select",
+        default: "nautilus",
+        choices: CT_SPECIMENS.map((id) => ({ id, label: id === "nautilus" ? "Nautilus shell" : TOYS.find((t) => t.id === id)?.label || id })), // prettier-ignore
+      },
+    ],
+    async prepare(o) {
+      await loadSpecimen(o.specimen);
+    },
     drive: driveHowCT,
-    build(k) {
-      k.data = {};
-      buildHowCT(k);
+    build(k, o) {
+      buildHowCT(k, o.specimen);
     },
   },
   "walnut-ct": {
+    kernel: "sharp", // labs: a sharper splat edge (src/kernels.js)
+    density: 2,
     options: [
       {
         key: "cut",
@@ -1916,6 +2141,8 @@ export const RECIPES = {
         choices: [
           { id: "gray", label: "CT gray" },
           { id: "warm", label: "Warm" },
+          { id: "night", label: "Night vision" },
+          { id: "infrared", label: "Infrared" },
         ],
       },
     ],
@@ -1947,6 +2174,8 @@ export const RECIPES = {
     },
   },
   "fruit-mri": {
+    kernel: "sharp", // labs: a sharper splat edge (src/kernels.js)
+    density: 2,
     options: [
       {
         key: "fruit",
@@ -1958,6 +2187,7 @@ export const RECIPES = {
           { id: "orange", label: "Orange" },
         ],
       },
+      visionOption(),
     ],
     controls: [{ key: "play", label: "Play the slices", type: "pulse", ease: 6 }],
     action: { key: "play", label: "Play through the slices" },
@@ -1965,10 +2195,12 @@ export const RECIPES = {
     drag: cutDrag(mriScroll, (p) => p[1]),
     drive: driveMRI,
     build(k, o) {
-      k.data = buildMRI(k, o.fruit);
+      k.data = buildMRI(k, o.fruit, o.vision);
     },
   },
   "electron-microscope": {
+    kernel: "sharp", // labs: a sharper splat edge (src/kernels.js)
+    density: 2,
     turntable: false,
     options: [
       {
@@ -1982,6 +2214,7 @@ export const RECIPES = {
           { id: "snow", label: "Snowflake" },
         ],
       },
+      visionOption(),
     ],
     controls: [{ key: "zoom", label: "Zoom", type: "pulse", ease: 1.2 }],
     action: { key: "zoom", label: "Zoom in a step (the third goes back out)" },
@@ -1990,10 +2223,12 @@ export const RECIPES = {
     focus: () => false,
     drive: driveSEM,
     build(k, o) {
-      k.data = buildSEM(k, o.sample);
+      k.data = buildSEM(k, o.sample, o.vision);
     },
   },
   "thermal-camera": {
+    kernel: "sharp", // labs: a sharper splat edge (src/kernels.js)
+    density: 2,
     alive: true,
     controls: [{ key: "thermal", label: "Thermal view", type: "toggle", ease: 1.2 }],
     action: { key: "thermal", label: "Thermal camera on or off" },
