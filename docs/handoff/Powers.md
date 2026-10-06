@@ -18,15 +18,20 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first). Lane PR
   `tests/pot-engine.spec.mjs`, 3). Clips on Effect review page 2, lane "Powers": `pot-zoom-out-r2`
   (garden to galaxy; its first version `pot-zoom-out` was marked good) and `pot-zoom-in` (garden to
   ribosome). Screenshots `pot-garden-*` and `pot-earth-*`.
+- The owner's marks: `pot-zoom-out` and `pot-zoom-out-r2` good. `pot-zoom-in` fix ("the leaf is a
+  different color from those on the tree ... moving from one image into another flat image"): the
+  zoom now stays on the same golden full-moon maple (its leaves from above, then one leaf), each new
+  picture comes in as a round soft patch over the one before, which stays behind softly until the
+  new one fills the view; posted as `pot-zoom-in-r2`.
 
 The stops (log10 of the view's height in meters): the Milky Way 21 (M83, ESO, at the Milky Way's
 size and real tilt), stars within 1,600 light-years 19.4 (HYG v4.4), within 65 light-years 18
 (Gaia), the Sun alone 16, the planets' orbits 13.3 and 11.9 (JPL elements), the Earth and Moon 9,
 the Earth 7.1 (Blue Marble), the Chesapeake 6, Washington 4.6, the Mall 3.3, the Haupt Garden 2
-(D.C.'s 8 cm aerial), the garden bed 0.6 (3D capture), a Japanese maple leaf −1.2 (Flickr, CC BY),
-plant cells −4 and a chloroplast −5.6 (Wellcome, CC BY), the ribosome −7.4 (EMD-48329). New files:
-5.5 MB, loaded a few at a time (under 8 MB at open on a high tier, the garden capture's lite file
-included).
+(D.C.'s 8 cm aerial), the garden bed 0.6 (3D capture), the golden full-moon maple's leaves −0.5 and
+one leaf −1.3 (Flickr, CC BY-SA 2.0 and CC BY 2.0), plant cells −4 and a chloroplast −5.6 (Wellcome,
+CC BY), the ribosome −7.4 (EMD-48329). New files: 5.5 MB, loaded a few at a time (under 8 MB at open
+on a high tier, the garden capture's lite file included).
 
 ## Notes", "## Known issues" and "##
 
