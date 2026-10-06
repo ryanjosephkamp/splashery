@@ -255,6 +255,10 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   inputs or outputs) and push them to `grooph-events/*` branches. Nothing of it is served.
 - `@gltf-transform/core` 4.5.0 (MIT), https://github.com/donmccurdy/glTF-Transform: reads the glTF
   models that `tools/mesh-to-splats.mjs` turns into splats.
+- `@gltf-transform/extensions` 4.5.0 (MIT), https://github.com/donmccurdy/glTF-Transform, and
+  `draco3dgltf` 1.5.7 (Apache-2.0), https://github.com/google/draco: decode NASA's Draco-compressed
+  Space Shuttle model in `tools/sp2-rockets.mjs` (lane Space r2), which writes it again
+  uncompressed. Nothing of them is served.
 - `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
   https://github.com/pngjs/pngjs: decode those models' textures in `tools/mesh-to-splats.mjs`, and
   put the before-and-after sharpness crops side by side in `tools/sharpness-pairs.mjs`.

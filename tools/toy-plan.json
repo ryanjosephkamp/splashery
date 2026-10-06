@@ -2704,6 +2704,20 @@
       "sound": "A low rumble as the engines light, and a thud at each separation.",
       "improved": "Space r2: new toy (labs) from NASA 3D Resources, sampled with the Studio's model-to-splats code; the pieces are cut where the model's width steps."
     },
+    "sls": {
+      "v": "keep",
+      "owner": "The owner's call of October 6, 2026 (\"NASA source is fine, add the SLS and Space Shuttle\"; lane Space r2; labs only).",
+      "effect": "NASA's 3D model of the Space Launch System as splats, colored as on Artemis I. A tap fires its stages in the flight's order, much faster: the boosters burn and fall away to both sides, the abort tower flies off, the core stage burns and falls away, the upper stage burns, and Orion pulls away from it; the view follows what is still flying, then it comes back together (12 s).",
+      "sound": "A deep rumble as the engines light, and a thud at each separation.",
+      "improved": "Space r2: new toy (labs) from NASA 3D Resources; tools/sp2-rockets.mjs cuts the printable model into its pieces and colors them."
+    },
+    "space-shuttle": {
+      "v": "keep",
+      "owner": "The owner's call of October 6, 2026 (\"NASA source is fine, add the SLS and Space Shuttle\"; lane Space r2; labs only).",
+      "effect": "NASA's 3D model of the Space Shuttle at launch as splats. A tap fires its stages in a flight's order, much faster: the two boosters burn and fall away to both sides, the main engines stop and the external tank drops away, and the orbiter flies on with its small engines; the view follows the orbiter, then it comes back together (12 s).",
+      "sound": "A rumble as the engines light, and a thud at each separation.",
+      "improved": "Space r2: new toy (labs) from NASA 3D Resources; tools/sp2-rockets.mjs decodes the Draco-compressed model, cuts it into its pieces and colors them."
+    },
     "real-moons": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"more planets\", photoreal from NASA data; lane Space r2; labs only).",
