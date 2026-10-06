@@ -102,11 +102,14 @@ test("pausing and playing with a tap keep the sound's place; so do a scrub and S
   expect(s0.sound).toBeGreaterThan(4.9);
   expect(s0.sound).toBeLessThan(5 + (s0.wall - w0) + 0.4);
   // Start over: the sound from the top.
-  await page.evaluate(() => document.getElementById("moving-start").click());
+  const w2 = await page.evaluate(() => {
+    document.getElementById("moving-start").click();
+    return performance.now() / 1000;
+  });
   await page.waitForTimeout(300);
   const z = await state(page);
   expect(z.playing).toBe(true);
-  expect(z.sound).toBeLessThan(0.8);
+  expect(z.sound).toBeLessThan(z.wall - w2 + 0.5);
   expect(errors).toEqual([]);
 });
 
