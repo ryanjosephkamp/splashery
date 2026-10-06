@@ -1,0 +1,200 @@
+{
+  "note": "Measured by tools/shw-facts.mjs; regenerate after a toy or its pack changes.",
+  "shelf": {
+    "toys": 433,
+    "public": 319,
+    "kit": 367
+  },
+  "depthModelMB": 27.3,
+  "toys": {
+    "grapes": {
+      "kind": "kit",
+      "recipeFile": "src/packs/food.js",
+      "recipeKB": 229.8,
+      "recipeGzipKB": 62.6,
+      "sharedBy": 27
+    },
+    "orange": {
+      "kind": "kit",
+      "recipeFile": "src/packs/food.js",
+      "recipeKB": 229.8,
+      "recipeGzipKB": 62.6,
+      "sharedBy": 27
+    },
+    "watermelon": {
+      "kind": "kit",
+      "recipeFile": "src/packs/food.js",
+      "recipeKB": 229.8,
+      "recipeGzipKB": 62.6,
+      "sharedBy": 27
+    },
+    "pizza": {
+      "kind": "kit",
+      "recipeFile": "src/packs/food.js",
+      "recipeKB": 229.8,
+      "recipeGzipKB": 62.6,
+      "sharedBy": 27
+    },
+    "grand-piano": {
+      "kind": "kit",
+      "recipeFile": "src/packs/pianos.js",
+      "recipeKB": 79.9,
+      "recipeGzipKB": 24.3,
+      "sharedBy": 4
+    },
+    "guitar": {
+      "kind": "kit",
+      "recipeFile": "src/packs/music.js",
+      "recipeKB": 43.1,
+      "recipeGzipKB": 13.5,
+      "sharedBy": 4
+    },
+    "xylophone": {
+      "kind": "kit",
+      "recipeFile": "src/packs/music.js",
+      "recipeKB": 43.1,
+      "recipeGzipKB": 13.5,
+      "sharedBy": 4
+    },
+    "music-box": {
+      "kind": "kit",
+      "recipeFile": "src/packs/objects.js",
+      "recipeKB": 92.1,
+      "recipeGzipKB": 25.3,
+      "sharedBy": 11
+    },
+    "real-moon": {
+      "kind": "kit",
+      "recipeFile": "src/packs/space-r2.js",
+      "recipeKB": 48.2,
+      "recipeGzipKB": 16.3,
+      "sharedBy": 11
+    },
+    "galaxy-box": {
+      "kind": "kit",
+      "recipeFile": "src/packs/science.js",
+      "recipeKB": 68.8,
+      "recipeGzipKB": 22.2,
+      "sharedBy": 6
+    },
+    "smlm-microscope": {
+      "kind": "kit",
+      "recipeFile": "src/packs/science.js",
+      "recipeKB": 68.8,
+      "recipeGzipKB": 22.2,
+      "sharedBy": 6
+    },
+    "st-helens": {
+      "kind": "kit",
+      "recipeFile": "src/packs/geo.js",
+      "recipeKB": 77.8,
+      "recipeGzipKB": 24.9,
+      "sharedBy": 9
+    },
+    "cryoem-map": {
+      "kind": "kit",
+      "recipeFile": "src/packs/science.js",
+      "recipeKB": 68.8,
+      "recipeGzipKB": 22.2,
+      "sharedBy": 6
+    },
+    "photo-3d": {
+      "kind": "kit",
+      "recipeFile": "src/packs/photo-3d.js",
+      "recipeKB": 16.1,
+      "recipeGzipKB": 6,
+      "sharedBy": 1
+    },
+    "moving-photo-3d": {
+      "kind": "kit",
+      "recipeFile": "src/packs/live.js",
+      "recipeKB": 19.4,
+      "recipeGzipKB": 7.3,
+      "sharedBy": 3
+    },
+    "your-book": {
+      "kind": "kit",
+      "recipeFile": "src/packs/pictures.js",
+      "recipeKB": 126.7,
+      "recipeGzipKB": 40.7,
+      "sharedBy": 4
+    },
+    "model-splats": {
+      "kind": "kit",
+      "recipeFile": "src/packs/studio-models.js",
+      "recipeKB": 16.4,
+      "recipeGzipKB": 6.2,
+      "sharedBy": 1
+    },
+    "chladni-plate": {
+      "kind": "kit",
+      "recipeFile": "src/packs/studio.js",
+      "recipeKB": 64.6,
+      "recipeGzipKB": 21.6,
+      "sharedBy": 2
+    },
+    "light-lab": {
+      "kind": "kit",
+      "recipeFile": "src/packs/light-lab.js",
+      "recipeKB": 39.9,
+      "recipeGzipKB": 13.7,
+      "sharedBy": 1
+    },
+    "ripple-tank": {
+      "kind": "kit",
+      "recipeFile": "src/packs/optics.js",
+      "recipeKB": 42.2,
+      "recipeGzipKB": 14,
+      "sharedBy": 2
+    },
+    "fourier-circles": {
+      "kind": "kit",
+      "recipeFile": "src/packs/maths.js",
+      "recipeKB": 169.3,
+      "recipeGzipKB": 49.6,
+      "sharedBy": 16
+    },
+    "newtons-cradle": {
+      "kind": "kit",
+      "recipeFile": "src/packs/playthings.js",
+      "recipeKB": 112,
+      "recipeGzipKB": 33.5,
+      "sharedBy": 15
+    },
+    "gaussian-splatting": {
+      "kind": "kit",
+      "recipeFile": "src/packs/splatting.js",
+      "recipeKB": 32.8,
+      "recipeGzipKB": 11.5,
+      "sharedBy": 1
+    },
+    "splat-equation": {
+      "kind": "kit",
+      "recipeFile": "src/packs/splat-equation.js",
+      "recipeKB": 22.2,
+      "recipeGzipKB": 7.9,
+      "sharedBy": 1
+    },
+    "neural-network": {
+      "kind": "kit",
+      "recipeFile": "src/packs/computing.js",
+      "recipeKB": 153.8,
+      "recipeGzipKB": 46.1,
+      "sharedBy": 12
+    },
+    "qr-code": {
+      "kind": "kit",
+      "recipeFile": "src/packs/qr.js",
+      "recipeKB": 47.5,
+      "recipeGzipKB": 15.3,
+      "sharedBy": 1
+    },
+    "splat-field": {
+      "kind": "kit",
+      "recipeFile": "src/packs/lab.js",
+      "recipeKB": 23.6,
+      "recipeGzipKB": 7.7,
+      "sharedBy": 1
+    }
+  }
+}

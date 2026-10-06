@@ -1,0 +1,424 @@
+{
+  "title": "What Splashery can do",
+  "intro": "Real toys, playing live in your browser, one after another. Nothing here is a recording: each scene builds its toy on your device and runs its effect.",
+  "outro": "Every scene you saw was built and played live on your device. Open any toy to play it yourself.",
+  "chapters": [
+    {
+      "id": "apart",
+      "title": "Things that come apart",
+      "line": "Every piece is its own group of splats, so it can really move on its own.",
+      "scenes": [
+        {
+          "id": "grapes",
+          "toy": "grapes",
+          "card": "e5-grapes",
+          "what": "Ten grapes come off the bunch one after another, bounce and roll, each on its own path, then hop back.",
+          "why": "Each grape is a separate piece, not a picture that bends.",
+          "secs": 6
+        },
+        {
+          "id": "orange",
+          "toy": "orange",
+          "card": "shb-orange-tap",
+          "what": "Eight wedges fall open like a flower while juice squirts up, then the orange closes.",
+          "why": "The cut faces are built too, so the inside is there when it opens.",
+          "secs": 5
+        },
+        {
+          "id": "watermelon",
+          "toy": "watermelon",
+          "card": "e5-watermelon",
+          "options": {
+            "style": "whole"
+          },
+          "what": "A knife chops the melon five times and the six slices fan open: red flesh, pale rind, black seeds.",
+          "why": "The recipe builds the whole fruit, inside and out.",
+          "secs": 5.5
+        },
+        {
+          "id": "pizza",
+          "toy": "pizza",
+          "card": "shb-pizza-tap-r2",
+          "what": "A slice slides out with strings of melted cheese stretching behind it.",
+          "why": "The slice is its own piece, and the cheese strings stretch between it and the pie.",
+          "secs": 4.5
+        }
+      ]
+    },
+    {
+      "id": "played",
+      "title": "Instruments that are played",
+      "line": "Keys, hammers, strings and combs move with every note. Turn the sound on to hear them.",
+      "scenes": [
+        {
+          "id": "grand-piano",
+          "toy": "grand-piano",
+          "card": "pno-grand-song-r3",
+          "what": "The opening of Für Elise: each key dips, its hammer strikes and its damper lifts, with the pedal.",
+          "why": "The notes drive the parts, so what you see is what you hear.",
+          "steps": [
+            {
+              "at": 0.8,
+              "do": "fire",
+              "key": "song"
+            }
+          ],
+          "secs": 7
+        },
+        {
+          "id": "guitar",
+          "toy": "guitar",
+          "card": "fx6-guitar",
+          "what": "A strum: the six strings bend and shake one after another as it plays four chords.",
+          "why": "Each string is its own thin line of splats that vibrates on its own.",
+          "secs": 5
+        },
+        {
+          "id": "xylophone",
+          "toy": "xylophone",
+          "card": "fb-xylophone",
+          "what": "The mallet runs up the scale: each wooden bar jumps as it is struck and plays its note.",
+          "why": "Shorter bars, higher notes, as on a real xylophone.",
+          "steps": [
+            {
+              "at": 0.8,
+              "do": "fire",
+              "key": "play"
+            }
+          ],
+          "secs": 5
+        },
+        {
+          "id": "music-box",
+          "toy": "music-box",
+          "card": "sha-music-box-tap",
+          "what": "The lid closes and the tune stops; it opens again and the dancer rises and turns while it plays.",
+          "why": "Lid, dancer and notes are separate parts on their own hinges and paths.",
+          "steps": [
+            {
+              "at": 0.6,
+              "do": "tap"
+            },
+            {
+              "at": 2.2,
+              "do": "tap"
+            }
+          ],
+          "secs": 6.5
+        }
+      ]
+    },
+    {
+      "id": "real",
+      "title": "Real data and real captures",
+      "line": "Measured data and published science, drawn as splats you can turn and zoom.",
+      "scenes": [
+        {
+          "id": "real-moon",
+          "toy": "real-moon",
+          "card": "sp2-real-moon-r2",
+          "what": "The Moon from NASA's maps: colors from an orbiter's camera, heights from its laser altimeter. It turns to the far side.",
+          "why": "Each splat sits at its map's height and leans with the ground, so the sun lights real slopes.",
+          "steps": [
+            {
+              "at": 0.3,
+              "do": "turn",
+              "by": 2.4,
+              "over": 6
+            }
+          ],
+          "secs": 7
+        },
+        {
+          "id": "galaxy-box",
+          "toy": "galaxy-box",
+          "card": "sci-galaxy-r4",
+          "what": "Gas from a published galaxy simulation, each particle one Gaussian. A tap peels away the hot gas.",
+          "why": "Simulation particles are already smooth blobs, so splats draw them directly. A simulation, not a photo.",
+          "secs": 6.5,
+          "steps": [
+            {
+              "at": 0.2,
+              "do": "zoom",
+              "by": 0.55,
+              "over": 2.5
+            },
+            {
+              "at": 2.9,
+              "do": "tap"
+            }
+          ]
+        },
+        {
+          "id": "microscope",
+          "toy": "smlm-microscope",
+          "card": "sci-microscope-r3",
+          "what": "Real super-resolution microscopy: every blink of a single molecule is one splat, as wide as its measured uncertainty.",
+          "why": "The data is a list of Gaussians, so nothing is lost drawing it. Zoom in down to single molecules.",
+          "steps": [
+            {
+              "at": 0.6,
+              "do": "zoom",
+              "by": 0.35
+            }
+          ],
+          "secs": 6
+        },
+        {
+          "id": "st-helens",
+          "toy": "st-helens",
+          "card": "geo-st-helens-r4",
+          "what": "Mount St. Helens from U.S. Geological Survey elevation data. A tap plays May 18, 1980: the summit falls away and ash rises.",
+          "why": "The heights before and after are real; only the timing is shortened.",
+          "secs": 7.5
+        },
+        {
+          "id": "cryoem",
+          "toy": "cryoem-map",
+          "card": "sci3-cryoem-capsid-r4",
+          "options": {
+            "map": "aav"
+          },
+          "what": "A virus shell from a real cryo-electron microscopy map. A tap cuts the front half away to show the inside.",
+          "why": "One small flat splat wherever the measured density crosses the level the data bank recommends.",
+          "secs": 5.5
+        }
+      ]
+    },
+    {
+      "id": "yours",
+      "title": "Your own files, turned 3D on your device",
+      "line": "Open your own photo, video, PDF or model and it becomes splats in your browser. Nothing you open is uploaded.",
+      "scenes": [
+        {
+          "id": "photo-3d",
+          "toy": "photo-3d",
+          "card": "p3d-sample-r2",
+          "what": "A flat photo rises into depth and sways, so you see around the trees.",
+          "why": "With your own photo, a depth model ({depthModelMB} MB, loaded only then) runs on your device. This sample's depth was made ahead of time with the same model.",
+          "secs": 6,
+          "steps": [
+            {
+              "at": 0.1,
+              "do": "zoom",
+              "by": 0.75,
+              "over": 1
+            },
+            {
+              "at": 0.6,
+              "do": "tap"
+            }
+          ]
+        },
+        {
+          "id": "moving-photo",
+          "toy": "moving-photo-3d",
+          "card": "smd-r2-moving-horse",
+          "options": {
+            "clip": "horse"
+          },
+          "what": "Muybridge's galloping horse from 1887, a GIF, played back as moving splats with depth.",
+          "why": "Every frame gets its own depth; open your own GIF or video and it is read on your device.",
+          "steps": [
+            {
+              "at": 1.2,
+              "do": "turn",
+              "by": 0.6
+            }
+          ],
+          "secs": 6
+        },
+        {
+          "id": "your-book",
+          "toy": "your-book",
+          "card": "bk-book-taps-r2",
+          "what": "A PDF becomes a book: the cover opens and pages turn on their spine.",
+          "why": "Open any PDF of your own and its pages turn the same way. Links in it work.",
+          "steps": [
+            {
+              "at": 0.6,
+              "do": "tap"
+            },
+            {
+              "at": 2.4,
+              "do": "tap"
+            },
+            {
+              "at": 4.0,
+              "do": "tap"
+            }
+          ],
+          "secs": 6.5,
+          "zoom": 1.5
+        },
+        {
+          "id": "model-splats",
+          "toy": "model-splats",
+          "card": "stm-sample",
+          "what": "A 3D model, a mesh of triangles, turned into splats. A tap lifts every splat off and each settles back in its place.",
+          "why": "Open a .glb, .obj or .stl of your own and it is converted the same way, on your device.",
+          "secs": 5.5
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "title": "Science you can check",
+      "line": "The motion comes from the physics and the math, and each toy's About tab says how.",
+      "scenes": [
+        {
+          "id": "chladni",
+          "toy": "chladni-plate",
+          "card": "sts-chladni-r2",
+          "what": "A bow makes a metal plate hum; the sand hops off the parts that move and gathers on the still lines.",
+          "why": "Every grain of sand is a splat of its own, so the figure forms grain by grain, as in Chladni's experiment of 1787.",
+          "secs": 6
+        },
+        {
+          "id": "prism",
+          "toy": "light-lab",
+          "card": "sll-light-lab-prism-r3",
+          "options": {
+            "view": "prism"
+          },
+          "what": "White light fans into a rainbow through a prism, blue bent most. Each tap changes the lamp.",
+          "why": "Each color bends by Snell's law, with the glass's real index for that wavelength. The element lines are NIST's.",
+          "steps": [
+            {
+              "at": 0.1,
+              "do": "zoom",
+              "by": 0.6,
+              "over": 1.5
+            },
+            {
+              "at": 1.8,
+              "do": "tap"
+            },
+            {
+              "at": 3.4,
+              "do": "tap"
+            }
+          ],
+          "secs": 5.5
+        },
+        {
+          "id": "ripple-tank",
+          "toy": "ripple-tank",
+          "card": "opt-ripple-double-p1",
+          "what": "Waves pass two slits and add up into bright and dark fringes.",
+          "why": "It solves the real wave equation on a 216 × 216 grid; the fringes land where d·sin θ = m·λ says.",
+          "steps": [],
+          "secs": 6
+        },
+        {
+          "id": "fourier",
+          "toy": "fourier-circles",
+          "card": "math-fourier-circles-r2",
+          "options": {
+            "shape": "words",
+            "words": "SPLATS"
+          },
+          "what": "Chains of spinning circles write a word, one chain per letter.",
+          "why": "Each chain is a Fourier series of its letter's outline: circles on circles can draw any closed shape.",
+          "secs": 6
+        },
+        {
+          "id": "newtons-cradle",
+          "toy": "newtons-cradle",
+          "card": "fa-newtons-cradle",
+          "what": "The end ball strikes the row and the ball at the far end flies out; the middle barely moves.",
+          "why": "Momentum and energy both carry through the row, so as many balls leave as arrive.",
+          "secs": 5
+        }
+      ]
+    },
+    {
+      "id": "recipes",
+      "title": "Recipes: tiny, editable, any size",
+      "line": "Most toys are not files of splats but short recipes that build them on your device, at the size your device can show.",
+      "scenes": [
+        {
+          "id": "training",
+          "toy": "gaussian-splatting",
+          "card": "scr-splat-training",
+          "what": "Gaussian splatting for real: 2,400 random splats slide, stretch and recolor into a photo while the error falls.",
+          "why": "This is how a scan's splats are trained, by small gradient steps, here running in your browser.",
+          "secs": 7.5
+        },
+        {
+          "id": "equation",
+          "toy": "splat-equation",
+          "card": "man-equation-play",
+          "what": "Three equations place every splat; as time t runs, the torus rolls inside out.",
+          "why": "Type your own equations in the Toy tab and the shape follows.",
+          "steps": [
+            {
+              "at": 0.6,
+              "do": "fire",
+              "key": "play"
+            }
+          ],
+          "secs": 5
+        },
+        {
+          "id": "neural-network",
+          "toy": "neural-network",
+          "card": "ai-neural-network-sizes",
+          "options": {
+            "inputs": 3,
+            "layers": 2,
+            "neurons": 4,
+            "outputs": 2
+          },
+          "what": "A forward pass lights the network layer by layer, then red pulses run back as the weights change.",
+          "why": "Set its size in the Toy tab and the recipe builds the new network on the spot.",
+          "secs": 6,
+          "steps": [
+            {
+              "at": 0.1,
+              "do": "zoom",
+              "by": 0.75,
+              "over": 1
+            },
+            {
+              "at": 0.6,
+              "do": "tap"
+            }
+          ]
+        },
+        {
+          "id": "qr-code",
+          "toy": "qr-code",
+          "card": "qr-classic-burst",
+          "what": "A QR code made of splats: a tap bursts every module into a solid piece that falls, then flies back.",
+          "why": "It lands on a code that scans: the toy reads its own picture back to check.",
+          "secs": 5.5,
+          "steps": [
+            {
+              "at": 0.6,
+              "do": "fire",
+              "key": "burst"
+            }
+          ]
+        },
+        {
+          "id": "splat-field",
+          "toy": "splat-field",
+          "card": "lab-field-galaxy",
+          "options": {
+            "program": "galaxy"
+          },
+          "what": "Every star is a splat on its own oval orbit; the ovals crowd into two spiral arms. A tap sends a ring out from the core.",
+          "why": "A small program on the graphics chip moves every splat, every frame.",
+          "steps": [
+            {
+              "at": 0.8,
+              "do": "tap"
+            }
+          ],
+          "secs": 5.5
+        }
+      ]
+    }
+  ]
+}
