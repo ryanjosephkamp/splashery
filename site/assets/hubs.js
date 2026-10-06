@@ -10,20 +10,34 @@ const toySelect = document.getElementById("eo-toy");
 const root = new URL(document.documentElement.dataset.root || "./", location.href);
 const ORIGIN = lab.dataset.origin; // https://ryanjosephkamp.github.io/splashery/
 
-// The toy ids come from the search index (public toys; the id is in each link's scene).
+// The toy ids come from the search index. An entry links either to the toy's own
+// page (toys/<id>/) or to the gallery with a scene (#s=j.<payload>); both give an id,
+// and a scene payload is built from the id when the entry has none.
+const b64url = (text) =>
+  btoa(String.fromCharCode(...new TextEncoder().encode(text)))
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+const scenePayload = (id) =>
+  "j." + b64url(JSON.stringify({ app: "splashery", version: 3, toy: { kind: "builtin", id } }));
+
 async function loadToys() {
   const res = await fetch(new URL("search-index.json", root));
   const index = await res.json();
   const toys = [];
   for (const e of index) {
     if (e.k !== "toy" || e.l) continue;
-    const payload = (e.u.split("#s=")[1] || "").replace(/^j\./, "");
-    try {
-      const scene = JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));
-      toys.push({ id: scene.toy.id, name: e.t, payload: e.u.split("#s=")[1] });
-    } catch {
-      // A link in some other form: leave it out.
+    const hash = e.u.split("#s=")[1];
+    let id = /(?:^|\/)toys\/([^/#?]+)\/?$/.exec(e.u.split("#")[0])?.[1];
+    if (!id && hash) {
+      try {
+        const json = atob(hash.replace(/^j\./, "").replace(/-/g, "+").replace(/_/g, "/"));
+        id = JSON.parse(json).toy.id;
+      } catch {
+        // A compressed scene or some other form: leave it out.
+      }
     }
+    if (id) toys.push({ id, name: e.t, payload: hash || scenePayload(id) });
   }
   return toys.sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -95,6 +109,7 @@ async function showElement() {
 function updateLink(toys) {
   const sel = document.getElementById("lk-toy");
   const t = toys.find((x) => x.id === sel.value) || toys[0];
+  if (!t) return;
   document.getElementById("snip-link").textContent = `${ORIGIN}#s=${t.payload}`;
   document.getElementById("snip-embed-link").textContent = `${ORIGIN}embed/#s=${t.payload}`;
 }
@@ -123,7 +138,7 @@ const options_ = toys.map((t) => `<option value="${t.id}">${t.name}</option>`).j
 const wanted = new URLSearchParams(location.search).get("toy");
 toySelect.innerHTML = options_;
 document.getElementById("lk-toy").innerHTML = options_;
-toySelect.value = toys.some((t) => t.id === wanted) ? wanted : lab.dataset.home;
+toySelect.value = toys.some((t) => t.id === wanted) ? wanted : toys.some((t) => t.id === lab.dataset.home) ? lab.dataset.home : toys[0]?.id || lab.dataset.home; // prettier-ignore
 document.getElementById("lk-toy").value = toySelect.value;
 document.getElementById("lk-toy").addEventListener("input", () => updateLink(toys));
 toySelect.addEventListener("input", () => {
