@@ -679,7 +679,7 @@ export const LAYERS = [
     e: a.e,
     cover: true,
     fadeIn: a.e === 6 ? [0.08, 0.2] : [0.3, 0.55],
-    dim: a.e === 1.5 ? [-1.1, -0.5, 0.3] : null,
+    dim: a.e === 1.5 ? [-1.1, -0.5, 0] : null,
     fadeOut: a.e === 1.5 ? [150, 400] : null,
     build: (k, layer, profile) => buildAerial(k, a, profile),
   })),
