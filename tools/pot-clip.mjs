@@ -74,6 +74,8 @@ for (let i = 0; i <= n; i++) {
         await new Promise((r) => setTimeout(r, 100));
         c = await stage.captureFrame();
       }
+      // (A scene that just finished shows from the next frame, sorted the one after.)
+      await stage.captureFrame();
       c = await stage.captureFrame();
       // The label and the scale bar, as the toy shows them.
       const g = c.getContext("2d");
