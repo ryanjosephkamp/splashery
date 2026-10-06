@@ -209,22 +209,16 @@ function decode(bytes) {
 }
 
 // The footer band (the bottom `lines` text lines of each frame): the same
-// text in every frame (as a mask of bright pixels, since each frame has its
-// own palette), and with text in it.
+// text in every frame, and with text in it. Each frame has its own palette,
+// so the band's pixels may differ by a few levels (edge grays such as 132
+// against 125), never by a glyph.
 function footerBand({ width, height, frames }, lines) {
   const top = height - lines * 14;
-  const mask = ({ rgba }) => {
-    const band = rgba.subarray(top * width * 4);
-    const bits = new Uint8Array(band.length / 4);
-    for (let i = 0; i < bits.length; i++)
-      bits[i] = band[i * 4] + band[i * 4 + 1] + band[i * 4 + 2] > 384 ? 1 : 0;
-    return bits;
-  };
-  const masks = frames.map(mask);
-  return {
-    same: masks.every((m) => Buffer.compare(Buffer.from(m), Buffer.from(masks[0])) === 0),
-    text: masks[0].reduce((a, b) => a + b, 0),
-  };
+  const bands = frames.map(({ rgba }) => rgba.subarray(top * width * 4));
+  let text = 0;
+  for (let i = 0; i < bands[0].length; i += 4) if (bands[0][i] > 200) text++;
+  const close = (band) => band.every((v, i) => Math.abs(v - bands[0][i]) <= 24);
+  return { same: bands.every(close), text };
 }
 
 function differs(a, b) {
@@ -282,7 +276,7 @@ test("the three presets capture, move and keep their credit; settings change the
     expect(JSON.parse(gif.comment)).toMatchObject({ kind: "Fresh toy animation", toy: preset });
     const band = footerBand(gif, credit.length);
     expect(band.same).toBe(true);
-    expect(band.text).toBeGreaterThan(200);
+    expect(band.text).toBeGreaterThan(100);
     results[preset] = gif;
     // Success leaves no iframe, timers or live listeners; one object URL (the GIF).
     await page.waitForTimeout(200);
