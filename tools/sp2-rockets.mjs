@@ -72,6 +72,7 @@ const COLORS = {
   nozzle: [0.3, 0.3, 0.32],
   orbiter: [0.93, 0.93, 0.92],
   belly: [0.12, 0.12, 0.13],
+  window: [0.06, 0.06, 0.07],
   et: [0.78, 0.43, 0.19],
 };
 const lin = (c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
@@ -255,6 +256,7 @@ fs.mkdirSync(OUT, { recursive: true });
   const pos = [];
   const tags = [];
   const idx = [];
+  const windows = [];
   doc
     .getRoot()
     .listScenes()[0]
@@ -266,7 +268,12 @@ fs.mkdirSync(OUT, { recursive: true });
       // the stack's length, 150,000 triangles in all), far finer than a splat:
       // left out, so the simplifier keeps the rest of the orbiter's shape.
       const box = getBounds(node);
-      if (Math.max(...box.max.map((v, i) => v - box.min[i])) < 0.1) return;
+      if (Math.max(...box.max.map((v, i) => v - box.min[i])) < 0.1) {
+        // (Each frame's middle, stood up as below, marks a window.)
+        const c = box.min.map((v, i) => (v + box.max[i]) / 2);
+        windows.push([c[0], -c[2], c[1]]);
+        return;
+      }
       const piece = name === "pCylinder8" ? "et" : name === "polySur157" ? "srb" : name.startsWith("group13") ? "engine" : "orbiter"; // prettier-ignore
       const m = node.getWorldMatrix();
       // Some of the model's meshes are wound inside out (their normals point
@@ -328,7 +335,10 @@ fs.mkdirSync(OUT, { recursive: true });
   // toward the tank (−z now).
   const pieces = split(P, I, (cen) => {
     const tag = tags[tagAt++];
-    return tag === "orbiter" && cen[2] < 0.3 ? "belly" : tag;
+    if (tag !== "orbiter") return tag;
+    // The cockpit windows, black, where their frames were (within 0.3 m).
+    for (const w of windows) if (Math.hypot(cen[0] - w[0], cen[1] - w[1], cen[2] - w[2]) < 0.3) return "window"; // prettier-ignore
+    return cen[2] < 0.3 ? "belly" : tag;
   });
   await writeGlb(`${OUT}/space-shuttle.glb`, simplifyPieces(P, pieces, 120000));
 }
