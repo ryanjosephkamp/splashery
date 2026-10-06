@@ -2964,6 +2964,7 @@ export const TOY_SOUNDS = {
   earthquakes: [
     { voice: "rumble", f: 70, rate: 7, decay: 1.8, vol: 0.6 },
     { voice: "rumble", at: 2.5, f: 90, rate: 10, decay: 1.2, vol: 0.4 },
+  ],
   // ---- Arcade (lane Arcade) --------------------------------------------------------------
   // Play: the ball's first knock off the paddle (the game plays its own
   // sounds as it goes: knocks, glassy breaks, stone cracks).
