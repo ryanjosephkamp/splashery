@@ -155,7 +155,10 @@ test("Other barcodes in the browser: every kind reads back from the stage", asyn
     const p = window.__splashery.app.player;
     p.motion.act(p.time, null, { key: "scan" });
   });
-  await page.waitForTimeout(3200);
+  // The toy's clock runs slower than the wall clock in the software
+  // renderer: wait for the scan itself to end.
+  await page.waitForFunction(() => !(window.__splashery.app.player.motion.state.scan > 0), null, { timeout: 60_000 }); // prettier-ignore
+  await page.waitForTimeout(500);
   const after = await page.evaluate(() =>
     window.__splashery.qrCraft.checkBarcode().then((r) => r.ok),
   );

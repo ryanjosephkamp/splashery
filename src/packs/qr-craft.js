@@ -233,7 +233,7 @@ function pictureSplats(w, budget) {
   const make = (fine) => {
     const out = [];
     // The sheet behind, white, with the quiet zone.
-    patch(out, -H, -H, H, H, -0.08, 0.34, BG, [0, 0]);
+    patch(out, -H, -H, H, H, -0.6, 0.34, BG, [0, 0]);
     const cs = 1 / k; // a cell's width (modules)
     for (let r = 0; r < N; r++)
       for (let c = 0; c < N; c++) {
@@ -462,7 +462,7 @@ const PICTURE = {
     PIC.fix = PIC.fixKeep ? PIC.fix : null;
     const { splats, half } = pictureSplats(w, k.count);
     k.reach([half + 1, half + 1, 1]);
-    k.reach([-half - 1, -half - 1, -0.6]);
+    k.reach([-half - 1, -half - 1, -0.8]);
     k.cloud({ share: Math.min(1, splats.length / k.count), jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
     k.data = { size: w.code.size, version: w.code.version };
     PIC.kit = k;
@@ -703,7 +703,7 @@ const BC = { sym: null, options: null, kit: null, check: null, panel: null, half
 function barcodeSplats(S) {
   const out = [];
   // A rectangle of splats, its lattice sx across and sy along.
-  const rect = (x0, y0, x1, y1, z, sx, sy, color, params) => {
+  const rect = (x0, y0, x1, y1, z, sx, sy, color, params, sig = 0.55) => {
     const nx = Math.max(1, Math.round((x1 - x0) / sx));
     const ny = Math.max(1, Math.round((y1 - y0) / sy));
     const ax = (x1 - x0) / nx;
@@ -711,7 +711,7 @@ function barcodeSplats(S) {
     for (let layer = 0; layer < 2; layer++)
       for (let j = 0; j < ny - layer; j++)
         for (let i = 0; i < nx - layer; i++)
-          out.push({ p: [x0 + (i + 0.5 + layer * 0.5) * ax, y0 + (j + 0.5 + layer * 0.5) * ay, z], scales: [0.55 * ax, 0.55 * ay, 0.01], quat: [0, 0, 0, 1], color, opacity: 1, params, pattern: false }); // prettier-ignore
+          out.push({ p: [x0 + (i + 0.5 + layer * 0.5) * ax, y0 + (j + 0.5 + layer * 0.5) * ay, z], scales: [sig * ax, sig * ay, 0.01], quat: [0, 0, 0, 1], color, opacity: 1, params, pattern: false }); // prettier-ignore
   };
   const piece = (cx) => [1, 1 + 16 * (100000 + Math.round(cx * 100))];
   // Letters, 7 rows of pixels each `h / 7` tall, centered at (cx, cy).
@@ -737,7 +737,7 @@ function barcodeSplats(S) {
     const top = H / 2 - 3;
     for (const [a, b] of barSpans(sym)) {
       const long = guard[a] ? 5 : 0;
-      rect(x0 + a, top - h - long, x0 + b, top, 0, 0.25, 1.2, INK, piece(x0 + (a + b) / 2));
+      rect(x0 + a, top - h - long, x0 + b, top, 0, 0.25, 0.6, INK, piece(x0 + (a + b) / 2));
     }
     // The human-readable line under the bars. EAN-13: the first digit in
     // the left quiet zone, six under each half; UPC-A: the first and last
@@ -770,16 +770,20 @@ function barcodeSplats(S) {
     H = m.rows + 2 * q;
     const x0 = -m.cols / 2;
     const y1 = m.rows / 2;
+    // Each module its own piece (it lifts with its column), but drawn as
+    // runs along the row with the same lattice, so no seam shows.
     for (let r = 0; r < m.rows; r++)
       for (let c = 0; c < m.cols; c++)
-        if (m.dark[r * m.cols + c]) rect(x0 + c, y1 - r - 1, x0 + c + 1, y1 - r, 0, 0.25, 0.25, INK, piece(x0 + c + 0.5)); // prettier-ignore
+        if (m.dark[r * m.cols + c]) rect(x0 + c, y1 - r - 1, x0 + c + 1, y1 - r, 0, 0.2, 0.2, INK, piece(x0 + c + 0.5)); // prettier-ignore
   }
   // The paper behind, with the quiet zones.
   const PW = W / 2 + 1.5;
   const PH = H / 2 + 1.5;
-  rect(-PW, -PH, PW, PH, -0.12, 0.6, 0.6, PAPER, [0, 0]);
+  // Well behind the bars: seen at an angle, paper splats only 0.12 behind
+  // sorted in front of some bars' splats and hatched them.
+  rect(-PW, -PH, PW, PH, -0.9, 0.6, 0.6, PAPER, [0, 0]);
   // The scanner's line: a thin red bar across the whole height, in front.
-  rect(-0.08, -PH + 0.5, 0.08, PH - 0.5, 0.45, 0.16, 0.8, LASER, [1, 2]);
+  rect(-0.25, -PH + 0.5, 0.25, PH - 0.5, 0.45, 0.25, 0.8, LASER, [1, 2]);
   return { splats: out, half: Math.max(PW, PH), width: W, height: H };
 }
 
@@ -809,7 +813,10 @@ async function checkBarcode() {
       return null;
     }
   };
-  const sizes = [900, 450].map((px) => ({ px, text: read(px === 900 ? big : shrink(big, px)) }));
+  // Full size and smaller: half size for the square codes, two thirds for
+  // the long linear ones (about 3 pixels a module for Code 128).
+  const small = S.sym ? 600 : 450;
+  const sizes = [900, small].map((px) => ({ px, text: read(px === 900 ? big : shrink(big, px)) })); // prettier-ignore
   // UPC-A reads back as its 12 digits (zxing reads UPC-A as UPC-A when asked
   // for it).
   BC.check = { text: S.text, sizes, ok: sizes.every((s) => s.text === S.text) };
@@ -892,7 +899,8 @@ const BARCODES = {
   gpuField(o, fit) {
     if (!fit || !Number.isFinite(fit.scale) || !BC.sym) return null;
     const lin = !!BC.sym.sym;
-    return scanModifier({ half: BC.width / 2, width: lin ? 3 : 2.2, lift: lin ? 2.5 : 1.6 }, fit);
+    // On a long linear symbol the wave of lifting bars is wider, so it reads.
+    return scanModifier({ half: BC.width / 2, width: lin ? 9 : 2.2, lift: lin ? 6 : 1.6 }, fit);
   },
   build(k, o) {
     // In the Node tools there is no ZXing: a 2D kind shows Code 128.
@@ -905,7 +913,7 @@ const BARCODES = {
     BC.options = { ...o };
     BC.check = null;
     k.reach([half, half, 2.8]);
-    k.reach([-half, -half, -0.3]);
+    k.reach([-half, -half, -1]);
     k.cloud({ share: Math.min(1, splats.length / k.count), jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
     k.data = { kind: S.kind };
     BC.kit = k;
