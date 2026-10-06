@@ -845,12 +845,20 @@ government works are in the public domain.
 - Hurricane Polo: GOES-East ABI band 13 imagery (NOAA NESDIS), served by NASA's
   [Global Imagery Browse Services](https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy);
   the [NHC best track](https://ftp.nhc.noaa.gov/atcf/btk/) (NOAA); the map from NASA's
-  [Blue Marble](https://visibleearth.nasa.gov/collection/1484/blue-marble) shaded relief and
-  bathymetry. All public domain.
+  [Blue Marble Next Generation](https://visibleearth.nasa.gov/collection/1484/blue-marble) (true
+  color). All public domain.
+- The earthquakes' globe and the storks' map (round 2): NASA's
+  [Blue Marble Next Generation](https://visibleearth.nasa.gov/collection/1484/blue-marble) (true
+  color, through NASA GIBS), public domain.
 - Yosemite Valley's streams and land cover: the USGS
   [National Hydrography Dataset](https://www.usgs.gov/national-hydrography/national-hydrography-dataset)
   and the [National Land Cover Database 2021](https://www.mrlc.gov/data/nlcd-2021-land-cover-conus)
   (USGS and the MRLC consortium), public domain.
+- The living city (round 3): the City of Helsinki's
+  [Helsinki 3D reality mesh](https://hri.fi/data/en_GB/dataset/helsingin-3d-kaupunkimalli) (2017
+  aerial photogrammetry), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 550 m block
+  round Senate Square and the Market Square, cropped and turned into splats by `tools/geo-city.mjs`;
+  the night lights are added by the toy.
 - Earthquakes: the USGS
   [earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ("USGS-authored
   or produced data and information are considered to be in the U.S. Public Domain"). The toy reads

@@ -3844,7 +3844,7 @@ export const TOYS = [
     pack: "geo",
     labs: true,
     tags: "grand canyon arizona colorado river terrain elevation usgs 3dep landscape relief flood map earth geography",
-    camera: { yaw: 0.35, pitch: 0.6, roll: 0, distance: 3.7 },
+    camera: { yaw: 0.35, pitch: 0.62, roll: 0, distance: 4.1 },
   },
   {
     id: "st-helens",
@@ -3903,7 +3903,7 @@ export const TOYS = [
     kind: "kit",
     pack: "geo",
     labs: true,
-    tags: "city town buildings streets cars traffic train metro elevated rail night lights windows skyline urban map earth geography",
+    tags: "city helsinki finland senate square cathedral market harbor reality mesh photogrammetry 3d model buildings streets night lights windows street lamps urban map earth geography",
     camera: { yaw: 0.55, pitch: 0.55, roll: 0, distance: 3.2 },
   },
   {
