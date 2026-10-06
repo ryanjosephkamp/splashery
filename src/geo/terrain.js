@@ -97,3 +97,139 @@ export function addBlock(k, o) {
     },
   );
 }
+
+// ---- Round 2: the land as a grid of splats -----------------------------------------------
+// The owner's notes of October 5, 2026 ("please make sharper"): as Science
+// r3's terrain box does, every grid sample is one flat splat facing up its
+// slope, sized to the grid's spacing, with no random placement, and a steep
+// drop is filled down to its lower neighbor so cliffs stay solid.
+//
+// addGrid(k, o):
+//   F, height(u, v) meters, color(c) where c = { u, v, n, m (meters), wall }
+//   share        the budget's share for the grid (the samples per side follow)
+//   aspect-aware: the longer side gets more samples
+//   part, channel, kind(c), params(c), to(c) -> [x, y, z] (a morph target)
+//   cliffs       fill steep drops (default true)
+//   lift         raise every splat (recipe units), for a layer laid over another
+// Returns { n, spacing } in recipe units.
+function gridPoints(o, nxWant) {
+  const { F, height } = o;
+  const nx = Math.max(16, nxWant);
+  const nz = Math.max(16, Math.round((nx * F.sz) / F.sx));
+  const spacing = (2 * F.sx) / (nx - 1);
+  const pts = [];
+  const lift = o.lift || 0;
+  const Hs = new Float32Array(nx * nz);
+  for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) Hs[j * nx + i] = height(i / (nx - 1), j / (nz - 1)); // prettier-ignore
+  const hAt = (i, j) =>
+    Hs[Math.min(nz - 1, Math.max(0, j)) * nx + Math.min(nx - 1, Math.max(0, i))];
+  for (let j = 0; j < nz; j++)
+    for (let i = 0; i < nx; i++) {
+      const m = hAt(i, j);
+      const u = i / (nx - 1);
+      const v = j / (nz - 1);
+      const y = F.y(m) + lift;
+      const dx = (F.y(hAt(i + 1, j)) - F.y(hAt(i - 1, j))) / (2 * spacing);
+      const dz = (F.y(hAt(i, j + 1)) - F.y(hAt(i, j - 1))) / (2 * spacing);
+      const n = vec.unit([-dx, 1, -dz]);
+      pts.push({ p: [F.x(u), y, F.z(v)], n, u, v, m, wall: false });
+      if (o.cliffs === false) continue;
+      // A drop steeper than a spacing to a neighbor: fill the wall down to it.
+      for (const [a, b, dir] of [
+        [i + 1, j, [1, 0, 0]],
+        [i - 1, j, [-1, 0, 0]],
+        [i, j + 1, [0, 0, 1]],
+        [i, j - 1, [0, 0, -1]],
+      ]) {
+        // prettier-ignore
+        if (a < 0 || b < 0 || a >= nx || b >= nz) continue;
+        const yn = F.y(hAt(a, b)) + lift;
+        const drop = y - yn;
+        if (drop <= spacing * 0.9) continue;
+        const steps = Math.min(40, Math.floor(drop / (spacing * 0.75)));
+        for (let s = 1; s <= steps; s++) {
+          const f = s / (steps + 1);
+          const yy = y - drop * f;
+          pts.push({
+            p: [F.x(u) + dir[0] * spacing * 0.5, yy, F.z(v) + dir[2] * spacing * 0.5],
+            n: dir,
+            u: u + (dir[0] * 0.5) / (nx - 1),
+            v: v + (dir[2] * 0.5) / (nz - 1),
+            m: F.m(yy - lift),
+            wall: true,
+          });
+        }
+      }
+    }
+  return { pts, nx, nz, spacing };
+}
+
+export function addGrid(k, o) {
+  const want = Math.max(4000, (o.share ?? 0.7) * k.count);
+  // Steep land needs many wall splats: shrink the grid until it all fits.
+  let nx0 = Math.round(Math.sqrt((want * o.F.sx) / o.F.sz));
+  let g = gridPoints(o, nx0);
+  for (let tries = 0; tries < 4 && g.pts.length > want * 1.15; tries++) {
+    nx0 = Math.round(nx0 * Math.sqrt((want / g.pts.length) * 0.98));
+    g = gridPoints(o, nx0);
+  }
+  const { pts, nx, nz, spacing } = g;
+  const base = () => k.baseSize || 0.01;
+  const size = spacing * (o.sizeFactor ?? 1.0);
+  k.cloud({ count: (pts.length * 160000) / k.count, jitter: 0 }, (_r, idx) => {
+    const e = pts[Math.min(pts.length - 1, idx)];
+    const out = {
+      p: e.p,
+      n: e.n,
+      flat: 0.3,
+      size: size / base(),
+      color: o.color(e),
+      opacity: o.opacity ?? 1,
+    };
+    if (o.part !== undefined) out.part = o.part;
+    if (o.kind) {
+      out.kind = typeof o.kind === "function" ? o.kind(e) : o.kind;
+      out.params = typeof o.params === "function" ? o.params(e) : o.params;
+    }
+    if (o.channel !== undefined) out.channel = o.channel;
+    if (o.to) out.to = o.to(e);
+    if (o.pattern === false) out.pattern = false;
+    return out;
+  });
+  return { nx, nz, spacing, pts: pts.length };
+}
+
+// The block's four cut faces and its bottom as grids of splats, sized like
+// the land's (sharp edges, no random placement).
+export function addGridSides(k, F, height, { spacing, side, part, bottom = "#3f3529" }) {
+  const pts = [];
+  const nx = Math.round((2 * F.sx) / spacing) + 1;
+  const nz = Math.round((2 * F.sz) / spacing) + 1;
+  const edge = (u, v, nrm) => {
+    const top = F.y(height(u, v));
+    for (let y = F.bottom; y < top - spacing * 0.3; y += spacing * 0.8)
+      pts.push({ p: [F.x(u) + nrm[0] * 0.002, y, F.z(v) + nrm[2] * 0.002], n: nrm, m: F.m(y) });
+  };
+  for (let i = 0; i < nx; i++) {
+    const u = i / (nx - 1);
+    edge(u, 1, [0, 0, 1]);
+    edge(u, 0, [0, 0, -1]);
+  }
+  for (let j = 0; j < nz; j++) {
+    const v = j / (nz - 1);
+    edge(1, v, [1, 0, 0]);
+    edge(0, v, [-1, 0, 0]);
+  }
+  for (let j = 0; j < nz; j += 2)
+    for (let i = 0; i < nx; i += 2) pts.push({ p: [F.x(i / (nx - 1)), F.bottom, F.z(j / (nz - 1))], n: [0, -1, 0], m: null }); // prettier-ignore
+  const base = () => k.baseSize || 0.01;
+  const VIEW = vec.unit([-0.3, 0.2, 1]);
+  k.cloud({ count: (pts.length * 160000) / k.count, jitter: 0 }, (_r, idx) => {
+    const e = pts[Math.min(pts.length - 1, idx)];
+    const col =
+      e.m === null ? bottom : shade(side(e.m), 0.78 + 0.22 * Math.abs(vec.dot(e.n, VIEW)));
+    const out = { p: e.p, n: e.n, flat: 0.3, size: ((e.m === null ? 2 : 1) * spacing) / base(), color: col, opacity: 1 }; // prettier-ignore
+    if (part !== undefined) out.part = part;
+    return out;
+  });
+}

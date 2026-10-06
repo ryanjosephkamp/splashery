@@ -98,8 +98,11 @@ test.describe("in the browser", () => {
     const z = () =>
       page.evaluate(() => window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? 0);
     await page.waitForFunction(() => window.__splashery.player.motion.out?.parts?.look, null, { timeout: 90_000 }); // prettier-ignore
-    const still = await z();
+    // (Before anything is heard the land rests where it was built: no slide.)
+    expect(await z()).toBe(0);
     await page.evaluate(() => window.__splashery.app.act()); // play
+    await page.waitForFunction(() => (window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? 0) > 0, null, { timeout: 90_000 }); // prettier-ignore
+    const still = await z();
     await page.waitForFunction((s) => (window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? s) < s - 0.02, still, { timeout: 90_000 }); // prettier-ignore
     const moved = await z();
     expect(moved).toBeLessThan(still);

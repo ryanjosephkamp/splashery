@@ -935,12 +935,20 @@ government works are in the public domain.
 - Hurricane Polo: GOES-East ABI band 13 imagery (NOAA NESDIS), served by NASA's
   [Global Imagery Browse Services](https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy);
   the [NHC best track](https://ftp.nhc.noaa.gov/atcf/btk/) (NOAA); the map from NASA's
-  [Blue Marble](https://visibleearth.nasa.gov/collection/1484/blue-marble) shaded relief and
-  bathymetry. All public domain.
+  [Blue Marble Next Generation](https://visibleearth.nasa.gov/collection/1484/blue-marble) (true
+  color). All public domain.
+- The earthquakes' globe and the storks' map (round 2): NASA's
+  [Blue Marble Next Generation](https://visibleearth.nasa.gov/collection/1484/blue-marble) (true
+  color, through NASA GIBS), public domain.
 - Yosemite Valley's streams and land cover: the USGS
   [National Hydrography Dataset](https://www.usgs.gov/national-hydrography/national-hydrography-dataset)
   and the [National Land Cover Database 2021](https://www.mrlc.gov/data/nlcd-2021-land-cover-conus)
   (USGS and the MRLC consortium), public domain.
+- The living city (round 3): the City of Helsinki's
+  [Helsinki 3D reality mesh](https://hri.fi/data/en_GB/dataset/helsingin-3d-kaupunkimalli) (2017
+  aerial photogrammetry), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 550 m block
+  round Senate Square and the Market Square, cropped and turned into splats by `tools/geo-city.mjs`;
+  the night lights are added by the toy.
 - Earthquakes: the USGS
   [earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ("USGS-authored
   or produced data and information are considered to be in the U.S. Public Domain"). The toy reads
@@ -1351,6 +1359,24 @@ September 30, 2026), decimated into three levels of detail each:
 | Shells             | [Lambis Shell](https://polyhaven.com/a/lambis_shell)                     | Kuutti Siitonen                    | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Driftwood          | [Dead Tree Trunk 02](https://polyhaven.com/a/dead_tree_trunk_02)         | Jenelle van Heerden, Rico Cilliers | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Stumps             | [Tree Stump 01](https://polyhaven.com/a/tree_stump_01)                   | Rob Tuytel                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
+## Arcade (lane Arcade)
+
+- Stone Belt: the shapes of the asteroids 101955 Bennu, 25143 Itokawa, 433 Eros, 216 Kleopatra, 1620
+  Geographos, 4179 Toutatis and 6489 Golevka, from
+  [NASA 3D Resources](https://github.com/nasa/NASA-3D-Resources) ("3D Printing"), by NASA, in the
+  public domain (the collection's README: "free and without copyright"; checked October 5, 2026).
+  Each model was sampled to 1,600 surface points with their normals by `tools/arc-rocks.mjs`
+  (`assets/toys/stone-belt/rocks.json`).
+- Soft Landing: the Moon's ground from the [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720) (NASA's
+  Scientific Visualization Studio, Ernie Wright; LRO's LOLA elevation, `ldem_16_uint.tif`, and LROC
+  color, `lroc_color_2k.jpg`), and Mars's from Mars Global Surveyor's MOLA
+  ([MEGDR](https://pds-geosciences.wustl.edu/missions/mgs/megdr.html), `megt90n000eb.img`, NASA's
+  Planetary Data System), both NASA works in the public domain (checked October 5, 2026). Patches
+  around seven sites were cut out by `tools/arc-terrain.mjs`
+  (`assets/toys/soft-landing/terrain.json`).
+- Page Breaker: the photo sample is the Picture lab's tulip field (see "Pictures and pages"), and
+  the article sample is the Picture lab's.
 
 ## National flags
 

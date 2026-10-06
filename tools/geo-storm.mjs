@@ -5,23 +5,23 @@
 //
 //   node tools/geo-storm.mjs
 //
-// Writes assets/toys/hurricane/storm.bin:
+// Writes assets/toys/hurricane/storm.bin.gz (and color.jpg, the map):
 //   irA, irB   GOES-East ABI band 13 (clean infrared) cloud-top temperatures
 //              at the start and end of the day, each a 10-degree square round
 //              that time's eye (NOAA; through NASA GIBS), as °C + 100 in bytes
 //   height     NOAA NCEI ETOPO1 relief of the map
-//   color      NASA Blue Marble (shaded relief and bathymetry), through GIBS
+//   color.jpg  NASA Blue Marble Next Generation (true color), through GIBS
 // and the best track (NOAA NHC, ATCF b-deck) in its header.
 // All public domain.
 
 import fs from "node:fs";
-import { cached, decodeImage, readTiff, fillNoData, resample, rgbGrid, spanMeters, writeGeo } from "./geo-lib.mjs"; // prettier-ignore
+import { cached, decodeImage, readTiff, fillNoData, resample, spanMeters, writeGeo, blueMarble, writeJpeg } from "./geo-lib.mjs"; // prettier-ignore
 
 const START = "2026092118";
 const END = "2026092218";
 const MAP = [-108.4, 8.9, -96.4, 20.9]; // lon/lat box round the day's track
 const R = 5; // half-width of each infrared square, degrees
-const N = 256;
+const N = 384; // round 2: finer cloud tops
 
 // The best track: every six hours, position, wind (kt) and pressure (mb).
 const btk = await cached("bep172026.dat", "https://ftp.nhc.noaa.gov/atcf/btk/bep172026.dat", { text: true }); // prettier-ignore
@@ -143,11 +143,10 @@ const A = await infrared(START);
 const B = await infrared(END);
 const etopo = "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/ETOPO1_bedrock/ImageServer/exportImage?" + new URLSearchParams({ bbox: MAP.join(","), bboxSR: "4326", imageSR: "4326", size: "400,400", format: "tiff", pixelType: "F32", interpolation: "RSP_BilinearInterpolation", f: "image" }); // prettier-ignore
 const z = fillNoData(readTiff(await cached("polo-etopo1-400.tif", etopo)));
-const bm = "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?" + new URLSearchParams({ SERVICE: "WMS", VERSION: "1.1.1", REQUEST: "GetMap", LAYERS: "BlueMarble_ShadedRelief_Bathymetry", SRS: "EPSG:4326", BBOX: MAP.join(","), WIDTH: "1024", HEIGHT: "1024", FORMAT: "image/jpeg" }); // prettier-ignore
-const color = decodeImage(await cached("polo-bluemarble.jpg", bm));
+const color = await blueMarble("polo", MAP, 2048, 2048);
 const day = track.filter((p) => p.time >= START && p.time <= END);
 writeGeo(
-  "assets/toys/hurricane/storm.bin",
+  "assets/toys/hurricane/storm.bin.gz",
   {
     storm: "Hurricane Polo (EP17), eastern Pacific",
     map: MAP,
@@ -163,8 +162,8 @@ writeGeo(
     { name: "irA", type: "u8", w: N, h: N, data: A.data },
     { name: "irB", type: "u8", w: N, h: N, data: B.data },
     { name: "height", type: "height", w: 192, h: 192, data: resample(z, 192, 192) },
-    { name: "color", type: "rgb", w: 320, h: 320, data: rgbGrid(color, 320, 320) },
   ],
 );
+writeJpeg("assets/toys/hurricane/color.jpg", color, 1024, 1024, 90);
 console.log(day.map((p) => `${p.time} ${p.kt} kt ${p.mb} mb`).join("\n"));
 void fs;
