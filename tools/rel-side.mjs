@@ -12,7 +12,8 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { PNG } from "pngjs";
-import { seeThrough, SIDE_VIEWS, CLOSE_VIEWS } from "../src/elements-real/see-through.js";
+import { settle } from "./rel-settle.mjs";
+import { seeThrough, SIDE_VIEWS, CLOSE_VIEWS, spinFor } from "../src/elements-real/see-through.js";
 
 const args = process.argv.slice(2);
 const outDir = args[0] && !/^[A-Z]/.test(args[0]) ? args.shift() : ".cache/rel/side";
@@ -42,7 +43,11 @@ for (const [vw, vh, profile] of [
     }, el);
     await page.waitForFunction((el) => window.__splashery.player.motion?.ctx?.kit?.data?.element === el, el, { timeout: 120_000 }); // prettier-ignore
     await page.waitForTimeout(1500);
-    for (const [name, spin, cam] of [...SIDE_VIEWS, ...CLOSE_VIEWS]) {
+    // (DEGS=45,135: other turns instead, in degrees.)
+    const views = process.env.DEGS
+      ? process.env.DEGS.split(",").map((d) => [d, spinFor(Number(d))])
+      : [...SIDE_VIEWS, ...CLOSE_VIEWS];
+    for (const [name, spin, cam] of views) {
       const shot = async (hide) => {
         await page.evaluate(
           ({ spin, hide, cam }) => {
@@ -51,11 +56,10 @@ for (const [vw, vh, profile] of [
             player.motion.setControl("spin", spin, { snap: true });
             player.__relHome ??= player.camera.getState();
             player.camera.setState(cam || player.__relHome);
-            player.stage.requestRender();
           },
           { spin, hide, cam },
         );
-        await page.waitForTimeout(900);
+        await settle(page);
         return PNG.sync.read(await page.screenshot());
       };
       const withS = await shot(false);

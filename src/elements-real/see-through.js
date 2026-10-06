@@ -20,6 +20,23 @@ export const CLOSE_VIEWS = [
   ["close-e", 1, -1.2, 0.3],
 ].map(([name, spin, yaw, pitch]) => [name, spin, { yaw, pitch, distance: 1.1, pan: [0.4, 0.03, 0.35] }]); // prettier-ignore
 
+// The spin control's value that holds the sample turned by `deg` degrees: the turn's path
+// (turnPath in src/packs/real-elements.js) runs over 1 - spin, so this inverts it by search.
+export function spinFor(deg) {
+  const ease5 = (x) => x * x * x * (x * (x * 6 - 15) + 10);
+  const seg = (u, a, b, x) => ease5(Math.min(1, Math.max(0, (u - a) / (b - a)))) * x;
+  const path = (u) => seg(u, 0, 0.18, 0.25) + seg(u, 0.36, 0.64, 0.5) + seg(u, 0.82, 1, 0.25);
+  const want = (((deg % 360) + 360) % 360) / 360;
+  let best = 1;
+  let err = Infinity;
+  for (let k = 0; k <= 20000; k++) {
+    const s = k / 20000;
+    const e = Math.abs(path(1 - s) - want);
+    if (e < err) [best, err] = [s, e];
+  }
+  return best;
+}
+
 export const SIDE_VIEWS = [
   ["80", 0.8663],
   ["90", 0.73],

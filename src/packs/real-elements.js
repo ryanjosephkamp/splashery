@@ -606,6 +606,26 @@ export function solidSample(pair, share, part, splat, relief = 1) {
         c: [color.data[i * 4] / 255, color.data[i * 4 + 1] / 255, color.data[i * 4 + 2] / 255],
       });
     }
+  // Spikes and bridges one cell wide make no faces, so no walls, and showed pinholes onto the
+  // inside: cells with fewer than three of their eight neighbors go, twice over.
+  for (let pass = 0; pass < 2; pass++) {
+    const drop = [];
+    for (const p of cells) {
+      let k = 0;
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dx = -1; dx <= 1; dx++) {
+          if (!dx && !dy) continue;
+          const [x, y] = [p.gx + dx, p.gy + dy];
+          if (x >= 0 && y >= 0 && x < W && y < W && cell[y * W + x] >= 0) k++;
+        }
+      if (k < 3) drop.push(p);
+    }
+    for (const p of drop) cell[p.gy * W + p.gx] = -1;
+    if (!drop.length) break;
+  }
+  for (let i = cells.length - 1; i >= 0; i--)
+    if (cell[cells[i].gy * W + cells[i].gx] < 0) cells.splice(i, 1);
+  cells.forEach((p, i) => (cell[p.gy * W + p.gx] = i));
   // Each cell's distance to the outline (in cells; a chamfer transform, two passes).
   const BIG = 1e9;
   const dist = new Float32Array(W * W).fill(0);
@@ -662,6 +682,21 @@ export function solidSample(pair, share, part, splat, relief = 1) {
     spread += p.r * p.r;
   }
   spread = Math.sqrt(spread / (n || 1)) || 1;
+  // (A 3 x 3 mean over the bumps: some photos' depth comes in steps, whose sharp risers showed
+  // gaps between the splats when seen from low down.)
+  {
+    const rs = cells.map((p) => {
+      let [sum, k] = [0, 0];
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dx = -1; dx <= 1; dx++) {
+          const [x, y] = [p.gx + dx, p.gy + dy];
+          const j = x >= 0 && y >= 0 && x < W && y < W ? cell[y * W + x] : -1;
+          if (j >= 0) [sum, k] = [sum + cells[j].r, k + 1];
+        }
+      return sum / k;
+    });
+    cells.forEach((p, i) => (p.r = rs[i]));
+  }
   // The body: a rounded dome over the outline (an ellipse's profile from the rim in to most of
   // the way to the middle), front and back, so it reads as one solid pebble from every side; the
   // bumps ride on the front.
@@ -689,22 +724,48 @@ export function solidSample(pair, share, part, splat, relief = 1) {
     }
     dist.set(next);
   }
+  // The thickness: one dome over the whole outline (an ellipsoid fitted to the outline's spread),
+  // so the body is convex through its depth. A thickness that followed each point's distance to
+  // the outline made a lobed sample (copper's two lobes) thin at its waist, and from the side its
+  // far lobe showed round the near one like a bowl's lip (the owner's "still not closed from some
+  // angles"). Near the outline a short rounded bevel takes it down to just under half, and walls
+  // join the front and back there (below).
+  let [mx, my] = [0, 0];
+  for (const p of cells) [mx, my] = [mx + p.gx / n, my + p.gy / n];
+  let [cxx, cyy, cxy] = [0, 0, 0];
   for (const p of cells) {
-    // (The outermost cells sit on the seam itself, so front and back close there.)
-    const t = Math.min(1, Math.max(0, dist[p.gy * W + p.gx] - 1) / R);
+    const [dx, dy] = [p.gx - mx, p.gy - my];
+    [cxx, cyy, cxy] = [cxx + (dx * dx) / n, cyy + (dy * dy) / n, cxy + (dx * dy) / n];
+  }
+  const det = cxx * cyy - cxy * cxy || 1;
+  const spreadOf = (p) => {
+    const [dx, dy] = [p.gx - mx, p.gy - my];
+    return (dx * dx * cyy - 2 * dx * dy * cxy + dy * dy * cxx) / det;
+  };
+  let qmax = 1e-9;
+  for (const p of cells) qmax = Math.max(qmax, spreadOf(p));
+  const Rb = Math.max(3, far * 0.4);
+  for (const p of cells) {
+    const d = dist[p.gy * W + p.gx];
+    // (b: how far in from the rim, for the colors: the rim takes the colors from further in.)
+    const t = Math.min(1, Math.max(0, d - 1) / R);
     p.b = Math.sqrt(1 - (1 - t) * (1 - t));
+    const dome = Math.sqrt(1 - 0.8 * (spreadOf(p) / qmax));
+    const tb = Math.min(1, Math.max(0, d - 1) / Rb);
+    const thick = dome * (0.12 + 0.88 * Math.sqrt(1 - (1 - tb) * (1 - tb)));
     const bump = Math.max(-1, Math.min(1, p.r / (2.5 * spread)));
-    p.zf = LIFT_AT[2] + hz * p.b * (0.7 + 0.25 * bump);
-    p.zb = LIFT_AT[2] - hz * 0.42 * p.b;
+    p.zf = LIFT_AT[2] + hz * thick * (0.7 + 0.25 * bump);
+    p.zb = LIFT_AT[2] - hz * 0.42 * thick;
   }
   const at = (gx, gy) => (gx < 0 || gy < 0 || gx >= W || gy >= W ? null : cells[cell[gy * W + gx]] ?? null); // prettier-ignore
   const mixC = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
-  const BACK = 0.85;
+  const BACK = 0.92;
   // The rolled rim and the side wall take the colors from further in. The photo's outline
   // pixels are dark (the cutout's edge, the shadow under the sample), and from the side a dark
   // wall inside a lit rim read as a hole (the owner's "hollow from the sides"). An area mean of
-  // the inner cells' colors (a summed-area table over the grid), a quarter of the body's reach
-  // round each cell.
+  // the inner cells' colors (a summed-area table over the grid) close round each cell, so the
+  // photo's texture carries on over the rim and down the walls (a broad mean made a plain, light
+  // frame round the photo, which read as the lip of a bowl).
   const sat = new Float64Array((W + 1) * (W + 1) * 4);
   for (let gy = 0; gy < W; gy++)
     for (let gx = 0; gx < W; gx++) {
@@ -717,7 +778,7 @@ export function solidSample(pair, share, part, splat, relief = 1) {
       }
     }
   const innerColor = (p) => {
-    for (let r = Math.max(2, Math.round(far * 0.25)); ; r *= 2) {
+    for (let r = Math.max(2, Math.round(far * 0.08)); ; r *= 2) {
       const [ax, ay] = [Math.max(0, p.gx - r), Math.max(0, p.gy - r)];
       const [bx, by] = [Math.min(W, p.gx + r + 1), Math.min(W, p.gy + r + 1)];
       const sum = (k) =>
@@ -763,6 +824,31 @@ export function solidSample(pair, share, part, splat, relief = 1) {
         quads.push({ gx, gy, q, n, front });
       }
     }
+  // The walls: every edge of the front mesh that only one of its cells uses lies on the outline;
+  // a wall there runs from the front down to the back, facing out.
+  const edges = new Map();
+  for (const { q, front } of quads) {
+    if (!front) continue;
+    const ring = q.filter(Boolean);
+    const fx = ring.reduce((a, c) => a + c.x, 0) / ring.length;
+    const fy = ring.reduce((a, c) => a + c.y, 0) / ring.length;
+    for (let k = 0; k < ring.length; k++) {
+      const [a, b2] = [ring[k], ring[(k + 1) % ring.length]];
+      const key = a.gx * 1e6 + a.gy * 1e3 < b2.gx * 1e6 + b2.gy * 1e3 ? `${a.gx},${a.gy},${b2.gx},${b2.gy}` : `${b2.gx},${b2.gy},${a.gx},${a.gy}`; // prettier-ignore
+      const e = edges.get(key);
+      if (e) e.n++;
+      else edges.set(key, { a, b: b2, fx, fy, n: 1 });
+    }
+  }
+  const walls = [];
+  for (const e of edges.values()) {
+    if (e.n !== 1) continue;
+    const [A, B, C, D] = [P(e.a, true), P(e.b, true), P(e.b, false), P(e.a, false)];
+    // Outward: away from the cell the edge belongs to.
+    const out2 = [(A[0] + B[0]) / 2 - e.fx, (A[1] + B[1]) / 2 - e.fy];
+    walls.push({ e, v: [A, B, C, D], out2 });
+    area += (len(cross(sub(B, A), sub(D, A))) + len(cross(sub(B, C), sub(D, C)))) / 2;
+  }
   // The splats' spacing: as many as the share allows (each quad rounds its rows and columns up,
   // so the spacing is fitted to the count over a few passes), and a size that closes it.
   const countAt = (sp) => {
@@ -779,19 +865,23 @@ export function solidSample(pair, share, part, splat, relief = 1) {
           Math.ceil(Math.max(len(sub(v[3], v[0])), len(sub(v[2], v[1]))) / sp),
         );
         k += ns * nt;
-      } else k += 1;
+      } else k += 3;
+    }
+    for (const { v } of walls) {
+      const ns = Math.max(1, Math.ceil(Math.max(len(sub(v[1], v[0])), len(sub(v[2], v[3]))) / sp));
+      const nt = Math.max(1, Math.ceil(Math.max(len(sub(v[3], v[0])), len(sub(v[2], v[1]))) / sp));
+      k += ns * (nt + 1);
     }
     return k;
   };
   let s = Math.sqrt(area / Math.max(1, share));
   for (let i = 0; i < 4; i++) s *= Math.sqrt(Math.max(0.5, countAt(s) / Math.max(1, share)));
-  // Light baked on the body's own shape, so its roundness reads from the side. It comes from
-  // above (and a little in front): the turn is about the up axis, so it stays above at every turn.
-  // A light from the side turned with the sample and lit its rim like the lip of a bowl. The back
-  // has its own, mirrored behind, so it reads as a dome.
-  const LF = [-0.1, 0.9, 0.42];
-  const LB = [-0.1, 0.9, -0.42];
-  const LN = Math.hypot(...LF);
+  // Light baked on the body's own shape: from straight up only, so faces looking out sideways keep
+  // the photo's own light, the tops are brighter and the undersides darker, the cue the eye reads
+  // as a solid lit from above. The turn is about the up axis, so it holds at every turn. (Any
+  // light from the front turned with the sample, and once the sample was side-on it lit the rim
+  // brighter than the face it framed, which read as the lip of a bowl.)
+  const shadeOf = (nn) => Math.min(1.3, Math.max(0.65, 1 + 0.32 * nn[1]));
   const smooth = (t) => t * t * (3 - 2 * t);
   const pixel = (u, v) => {
     const x = Math.min(size - 1, Math.max(0, Math.round(u * g)));
@@ -805,22 +895,13 @@ export function solidSample(pair, share, part, splat, relief = 1) {
     // negative of the cross product.)
     const sg = front ? -1 : 1;
     const nn = [(sg * nrm[0]) / nl, (sg * nrm[1]) / nl, (sg * nrm[2]) / nl];
-    const L = front ? LF : LB;
-    const lit = Math.max(0, (nn[0] * L[0] + nn[1] * L[1] + nn[2] * L[2]) / LN);
-    // (1 where the face looks straight out, as the photo was lit.)
-    const shade = (0.6 + 0.48 * lit) / (0.6 + (0.48 * (L[2] * (front ? 1 : -1))) / LN);
     const cImg = pixel(gu, gv) || cFall;
-    let c;
-    if (front) {
-      const t = smooth(Math.min(1, Math.max(0, (b - 0.5) / 0.48)));
-      const base = b > 0.95 ? cImg : mixC(inner, cImg, t);
-      c = shadeArr(base, 1 + (shade - 1) * (0.8 + 0.2 * (1 - b)));
-    } else {
-      // The back (which no photo shows) takes the body's smoothed colors with a little of the
-      // photo's texture.
-      c = shadeArr(mixC(inner, cImg, 0.35), BACK * shade);
-    }
-    out.push(splat(pos, c, s, { part, n: nn, flat: 0.45 }));
+    const t = smooth(Math.min(1, Math.max(0, (b - 0.5) / 0.48)));
+    const base = b > 0.95 ? cImg : mixC(inner, cImg, t);
+    // The back (which no photo shows) carries the photo's texture too, mirrored, a little darker
+    // and softer, so it reads as the same stone.
+    const c = front ? base : mixC(inner, base, 0.6);
+    out.push(splat(pos, shadeArr(c, shadeOf(nn) * (front ? 1 : BACK)), s, { part, n: nn, flat: 0.75 })); // prettier-ignore
   };
   const bil = (a, b, c, d, u, v) => (k) =>
     (a[k] * (1 - u) + b[k] * u) * (1 - v) + (d[k] * (1 - u) + c[k] * u) * v;
@@ -862,11 +943,12 @@ export function solidSample(pair, share, part, splat, relief = 1) {
       const ref = cross(sub([OFF[ia][0], -OFF[ia][1], 0], [OFF[ib][0], -OFF[ib][1], 0]), sub([OFF[ic][0], -OFF[ic][1], 0], [OFF[ib][0], -OFF[ib][1], 0])); // prettier-ignore
       const flip = ref[2] > 0 ? -1 : 1;
       const nn = [nrm[0] * flip, nrm[1] * flip, nrm[2] * flip];
-      for (let i = 0; i < n1; i++)
-        for (let j = 0; j < n2; j++) {
-          const u = (i + 0.5) / n1;
-          const w = (j + 0.5) / n2;
-          if (u + w > 1) continue;
+      // (Its edges included: the long edge is the outline's diagonal step, with a wall on it.)
+      for (let i = 0; i <= n1; i++)
+        for (let j = 0; j <= n2; j++) {
+          const u = i / n1;
+          const w = j / n2;
+          if (u + w > 1 + 1e-9) continue;
           const mix3 = (x, y, z) => x * (1 - u - w) + y * u + z * w;
           const pos = [0, 1, 2].map((t) => mix3(Pb[t], Pa[t], Pc[t]));
           const bb = mix3(b0.b, a.b, c0.b);
@@ -877,6 +959,36 @@ export function solidSample(pair, share, part, splat, relief = 1) {
           emit(pos, nn, front, bb, inner, cFall, gu, gv);
         }
     }
+  }
+  for (const { e, v, out2 } of walls) {
+    const [A, B, C, D] = v;
+    const ns = Math.max(1, Math.ceil(Math.max(len(sub(B, A)), len(sub(C, D))) / s));
+    const nt = Math.max(1, Math.ceil(Math.max(len(sub(D, A)), len(sub(C, B))) / s));
+    // (Rows on the wall's top and bottom edges too, so the folds where it meets the front and
+    // back close.)
+    for (let i = 0; i < ns; i++)
+      for (let j = 0; j <= nt; j++) {
+        const u = (i + 0.5) / ns;
+        const w = j / nt;
+        const f = bil(A, B, C, D, u, w);
+        const tu = [0, 1, 2].map((k) => (B[k] - A[k]) * (1 - w) + (C[k] - D[k]) * w);
+        const tv = [0, 1, 2].map((k) => (D[k] - A[k]) * (1 - u) + (C[k] - B[k]) * u);
+        let nrm = cross(tu, tv);
+        if (nrm[0] * out2[0] + nrm[1] * out2[1] < 0) nrm = [-nrm[0], -nrm[1], -nrm[2]];
+        const nl = len(nrm) || 1;
+        const nn = [nrm[0] / nl, nrm[1] / nl, nrm[2] / nl];
+        // (The wall carries the photo's texture: each point reads the photo a little further in
+        // the further it is down the wall, toward the middle of the sample.)
+        const gu0 = e.a.gx + (e.b.gx - e.a.gx) * u;
+        const gv0 = e.a.gy + (e.b.gy - e.a.gy) * u;
+        const [dx, dy] = [mx - gu0, my - gv0];
+        const dl = Math.hypot(dx, dy) || 1;
+        const k = 2 + Math.min(1, Math.abs(w - 0.4)) * Math.max(3, far * 0.15);
+        const inner = mixC(e.a.inner, e.b.inner, u);
+        const cTex = pixel(gu0 + (dx / dl) * k, gv0 + (dy / dl) * k) || inner;
+        const c = mixC(inner, cTex, 0.7);
+        out.push(splat([f(0), f(1), f(2)], shadeArr(c, shadeOf(nn) * (1 - 0.08 * w)), s, { part, n: nn, flat: 0.75 })); // prettier-ignore
+      }
   }
   return out;
 }

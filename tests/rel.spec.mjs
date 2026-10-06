@@ -337,11 +337,17 @@ test.describe("the toy in the app", () => {
               globalThis.__relHideLift = hide;
               const { player } = window.__splashery;
               player.motion.setControl("spin", spin, { snap: true });
-              player.stage.requestRender();
             },
             { spin, hide },
           );
-          await page.waitForTimeout(900);
+          // (A few frames: the splats sort where the previous frame's pose put them.)
+          await page.evaluate(async () => {
+            for (let i = 0; i < 6; i++) {
+              window.__splashery.player.stage.requestRender();
+              await new Promise((ok) => requestAnimationFrame(() => setTimeout(ok, 30)));
+            }
+          });
+          await page.waitForTimeout(150);
           return PNG.sync.read(await page.screenshot());
         };
         const withS = await shot(false);
