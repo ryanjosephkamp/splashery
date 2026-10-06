@@ -654,8 +654,8 @@ function buildBackdrop(k) {
   k.cloud({ count: (nx * ny * 160000) / k.count, jitter: 0, pattern: false }, (_r, i) => {
     const x = ((i % nx) + 0.5) / nx - 0.5;
     const y = ((i / nx) | 0) / ny + 0.5 / ny - 0.5;
-    const s = 0.12;
-    return { p: [x * 14, y * 9, -6], scales: [s, s, 0.01], quat: [0, 0, 0, 1], color: [0, 0, 0], opacity: 1 }; // prettier-ignore
+    const s = 0.45;
+    return { p: [x * 48, y * 32, -8], scales: [s, s, 0.02], quat: [0, 0, 0, 1], color: [0, 0, 0], opacity: 1 }; // prettier-ignore
   });
 }
 

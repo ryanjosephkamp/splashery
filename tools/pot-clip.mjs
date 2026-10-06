@@ -65,9 +65,12 @@ for (let i = 0; i <= n; i++) {
       const { player } = window.__splashery;
       const stage = player.stage;
       window.__pot.CLIP.z = z;
-      const busy = () => [...(player.chunks?.items.values() || [])].some((x) => x.state === "loading"); // prettier-ignore
+      // Only the scenes this frame shows are waited for (the ones ahead
+      // keep building meanwhile).
+      const need = Object.keys(window.__pot.layout(z));
+      const busy = () => need.some((id) => !["ready", "failed"].includes(player.chunks?.items.get(id)?.state)); // prettier-ignore
       let c = await stage.captureFrame();
-      for (let k = 0; k < 200 && busy(); k++) {
+      for (let k = 0; k < 600 && busy(); k++) {
         await new Promise((r) => setTimeout(r, 100));
         c = await stage.captureFrame();
       }
