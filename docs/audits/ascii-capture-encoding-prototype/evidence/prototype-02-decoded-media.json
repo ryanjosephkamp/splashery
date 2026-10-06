@@ -1,0 +1,206 @@
+[
+  {
+    "path": "exports/grapes/96-color/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "3.956867",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 39,
+    "bytes": 123129
+  },
+  {
+    "path": "exports/grapes/96-color/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 40,
+    "bytes": 70954
+  },
+  {
+    "path": "exports/grapes/96-color/animation.gif",
+    "storedFrames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 35,
+    "maxMeanPixelError": 0.10770186222778293,
+    "creditAndSettingsRetained": true
+  },
+  {
+    "path": "exports/grapes/96-mono/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.065533",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 39,
+    "bytes": 177313
+  },
+  {
+    "path": "exports/grapes/96-mono/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 38,
+    "bytes": 85968
+  },
+  {
+    "path": "exports/grapes/96-mono/animation.gif",
+    "storedFrames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 35,
+    "maxMeanPixelError": 0.11305554044497634,
+    "creditAndSettingsRetained": true
+  },
+  {
+    "path": "exports/orange/96-color/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "3.965133",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 41,
+    "bytes": 457922
+  },
+  {
+    "path": "exports/orange/96-color/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 39,
+    "bytes": 457309
+  },
+  {
+    "path": "exports/orange/96-color/animation.gif",
+    "storedFrames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 24,
+    "maxMeanPixelError": 0.5093664436345174,
+    "creditAndSettingsRetained": true
+  },
+  {
+    "path": "exports/orange/96-mono/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "3.952400",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 37,
+    "bytes": 445978
+  },
+  {
+    "path": "exports/orange/96-mono/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 39,
+    "bytes": 349470
+  },
+  {
+    "path": "exports/orange/96-mono/animation.gif",
+    "storedFrames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 24,
+    "maxMeanPixelError": 0.4679840069629549,
+    "creditAndSettingsRetained": true
+  },
+  {
+    "path": "exports/strawberry/96-color/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "r_frame_rate": "119/12",
+      "duration": "3.970400",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 26,
+    "bytes": 220486
+  },
+  {
+    "path": "exports/strawberry/96-color/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 34,
+    "bytes": 160128
+  },
+  {
+    "path": "exports/strawberry/96-color/animation.gif",
+    "storedFrames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 23,
+    "maxMeanPixelError": 0.21990863160275534,
+    "creditAndSettingsRetained": true
+  },
+  {
+    "path": "exports/strawberry/96-mono/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "r_frame_rate": "10/1",
+      "duration": "3.955933",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 26,
+    "bytes": 197637
+  },
+  {
+    "path": "exports/strawberry/96-mono/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 28,
+    "bytes": 126621
+  },
+  {
+    "path": "exports/strawberry/96-mono/animation.gif",
+    "storedFrames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 22,
+    "maxMeanPixelError": 0.17060229302413762,
+    "creditAndSettingsRetained": true
+  }
+]

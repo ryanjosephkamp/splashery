@@ -1,0 +1,5 @@
+{
+  "source": "Splashery orange; procedural source",
+  "license": "MIT"
+}
+Fresh fixed-view capture; PNG source downsampled for the portable demo; converted to ASCII and encoded from these settings.

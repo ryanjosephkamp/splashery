@@ -1,0 +1,188 @@
+[
+  {
+    "path": "exports/grapes/96-mono/animation.gif",
+    "frames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 35,
+    "metadataVerified": true
+  },
+  {
+    "path": "exports/grapes/96-mono/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 38,
+    "containerMetadataVerified": true
+  },
+  {
+    "path": "exports/grapes/96-mono/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "4.065533",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 39,
+    "containerMetadataVerified": false
+  },
+  {
+    "path": "exports/grapes/96-color/animation.gif",
+    "frames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 35,
+    "metadataVerified": true
+  },
+  {
+    "path": "exports/grapes/96-color/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 40,
+    "containerMetadataVerified": true
+  },
+  {
+    "path": "exports/grapes/96-color/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "3.956867",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 39,
+    "containerMetadataVerified": false
+  },
+  {
+    "path": "exports/orange/96-mono/animation.gif",
+    "frames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 24,
+    "metadataVerified": true
+  },
+  {
+    "path": "exports/orange/96-mono/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 39,
+    "containerMetadataVerified": true
+  },
+  {
+    "path": "exports/orange/96-mono/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "3.952400",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 37,
+    "containerMetadataVerified": false
+  },
+  {
+    "path": "exports/orange/96-color/animation.gif",
+    "frames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 24,
+    "metadataVerified": true
+  },
+  {
+    "path": "exports/orange/96-color/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 39,
+    "containerMetadataVerified": true
+  },
+  {
+    "path": "exports/orange/96-color/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "duration": "3.965133",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 41,
+    "containerMetadataVerified": false
+  },
+  {
+    "path": "exports/strawberry/96-mono/animation.gif",
+    "frames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 22,
+    "metadataVerified": true
+  },
+  {
+    "path": "exports/strawberry/96-mono/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 28,
+    "containerMetadataVerified": true
+  },
+  {
+    "path": "exports/strawberry/96-mono/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "duration": "3.955933",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 26,
+    "containerMetadataVerified": false
+  },
+  {
+    "path": "exports/strawberry/96-color/animation.gif",
+    "frames": 40,
+    "durationMs": 4000,
+    "distinctDecodedFrames": 23,
+    "metadataVerified": true
+  },
+  {
+    "path": "exports/strawberry/96-color/animation.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "distinctDecodedFrames": 34,
+    "containerMetadataVerified": true
+  },
+  {
+    "path": "exports/strawberry/96-color/browser.mp4",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "duration": "3.970400",
+      "nb_read_frames": "41"
+    },
+    "distinctDecodedFrames": 26,
+    "containerMetadataVerified": false
+  }
+]

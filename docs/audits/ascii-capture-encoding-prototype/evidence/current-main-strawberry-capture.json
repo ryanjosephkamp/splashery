@@ -1,0 +1,35 @@
+{
+  "fps": 10,
+  "seconds": 4,
+  "frameCount": 40,
+  "size": 420,
+  "tapFrame": 4,
+  "camera": {
+    "yaw": 0.25,
+    "pitch": 0.3,
+    "roll": 0,
+    "distance": 4.884746313095093
+  },
+  "restored": {
+    "controlsEqual": true,
+    "handlersEqual": true,
+    "lockReleased": true
+  },
+  "renderer": "webgl2",
+  "credit": {
+    "title": "Strawberry",
+    "author": "Dany Bittel",
+    "source": "https://superspl.at/scene/84df8849",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+  },
+  "kind": "captured",
+  "toy": "strawberry",
+  "revision": "7488008708c6f6123b47a5abc8f634f84d37d3ec",
+  "source": "Fresh task-owned page; manual simulation clock, fixed home camera, lossless PNG frames",
+  "browser": "154.0.8037.98",
+  "captureWallMs": 2310,
+  "errors": [],
+  "blockedExternalRequests": []
+}

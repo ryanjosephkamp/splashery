@@ -1,0 +1,28 @@
+{
+  "fps": 10,
+  "seconds": 4,
+  "frameCount": 40,
+  "size": 420,
+  "tapFrame": 4,
+  "camera": {
+    "yaw": 0.45,
+    "pitch": 0.25,
+    "roll": 0,
+    "distance": 2.8862162113189695
+  },
+  "restored": {
+    "controlsEqual": true,
+    "handlersEqual": true,
+    "lockReleased": true
+  },
+  "renderer": "webgl2",
+  "credit": null,
+  "kind": "kit",
+  "toy": "grapes",
+  "revision": "f2f02656dc38b9fd15a9fc00158ea706c6effe1c",
+  "source": "Fresh task-owned page; manual simulation clock, fixed home camera, lossless PNG frames",
+  "browser": "154.0.8037.98",
+  "captureWallMs": 3865,
+  "errors": [],
+  "blockedExternalRequests": []
+}
