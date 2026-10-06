@@ -85,6 +85,12 @@ player, its GPU/memory lifetime, input privacy, and attribution for other toy/fi
 adapter here is not a state-safe recorder for an arbitrary live user scene. Integration and its
 device/browser coverage are the next design step; neither is silently added by this PR.
 
+The owner approved proceeding after reviewing the packaged handback. The resulting
+[integration brief](integration-brief.md) recommends a disposable capture document, defines the
+remaining acceptance checks, and includes a prepared Operator message for the owner to send. The
+[offline HTML brief](integration-brief.html) presents the same handoff. This documentation update
+does not implement the proposed host or change the existing export menu.
+
 ## Provenance, credits, and limits
 
 The bundled samples preserve the accepted local prototype's inputs and media. Each source had 40

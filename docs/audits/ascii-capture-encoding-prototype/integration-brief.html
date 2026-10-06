@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ASCII export — integration handoff</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --paper: #101b20;
+        --ink: #e4edf0;
+        --muted: #afc1c7;
+        --accent: #9be2bd;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          17px/1.65 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 820px;
+        margin: auto;
+        padding: 30px 22px 70px;
+      }
+      h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.13;
+        letter-spacing: -0.035em;
+      }
+      h2 {
+        font-size: 1.35rem;
+        margin-top: 2.6rem;
+      }
+      p {
+        margin: 1rem 0;
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 0.2em;
+        overflow-wrap: anywhere;
+      }
+      code {
+        font:
+          0.88em ui-monospace,
+          monospace;
+        overflow-wrap: anywhere;
+      }
+      li {
+        margin: 1rem 0;
+      }
+      ol,
+      ul {
+        padding-left: 1.4rem;
+      }
+      .status {
+        border: 1px solid #446058;
+        border-radius: 14px;
+        padding: 14px 18px;
+        background: #17332a;
+      }
+      .status strong {
+        display: block;
+        color: var(--accent);
+      }
+      .eyebrow {
+        color: var(--muted);
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid #344d57;
+        border-radius: 12px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 560px;
+        font-size: 0.92rem;
+      }
+      th,
+      td {
+        padding: 12px 14px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #344d57;
+      }
+      th {
+        color: var(--accent);
+        background: #1b3039;
+      }
+      tr:last-child td {
+        border: 0;
+      }
+      textarea {
+        display: block;
+        width: 100%;
+        height: 30rem;
+        margin: 12px 0;
+        border: 1px solid #607d86;
+        border-radius: 12px;
+        background: #192c34;
+        color: var(--ink);
+        font:
+          14px/1.6 ui-monospace,
+          monospace;
+        padding: 14px;
+        resize: vertical;
+      }
+      button {
+        background: var(--accent);
+        color: #10241c;
+        border: 0;
+        border-radius: 9px;
+        padding: 13px 17px;
+        font: 600 16px system-ui;
+        cursor: pointer;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      .table-wrap:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 4px;
+      }
+      label {
+        display: block;
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 40px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      @media (max-width: 480px) {
+        main {
+          padding: 24px 16px 50px;
+        }
+        body {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">Splashery / October 6, 2026</div>
+      <aside class="status">
+        <strong>Prototype accepted. Integration handoff prepared.</strong>The remaining work is
+        browser ownership, production integration, and device verification. This file works offline;
+        links open only when you choose them.
+      </aside>
+      <h1>ASCII export: integration brief</h1>
+      <p>
+        Prepared by Codex with GPT-6.1 Sol at Extra High effort on October 6, 2026. This is a design
+        and handoff update to the existing draft, not production integration.
+      </p>
+      <h2>Current position</h2>
+      <p>
+        The owner accepted the local capture/encoding demo and approved proceeding. The concrete
+        next step is to review capture ownership and implementation scope before connecting it to
+        Splashery. The earlier instruction to leave the existing export menu unchanged still
+        applies. Merging, deployment, Operator messaging, and other chats/agents remain outside this
+        task.
+      </p>
+      <div class="table-wrap" tabindex="0" aria-label="Scrollable comparison">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Piece</th>
+              <th scope="col">Position</th>
+              <th scope="col">Remaining work</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Deterministic ASCII core</td>
+              <td>
+                <a href="https://github.com/ryanjosephkamp/splashery/pull/335">PR #335</a>, open
+                draft
+              </td>
+              <td>Operator review and integration into main</td>
+            </tr>
+            <tr>
+              <td>Capture, encoding, and demo</td>
+              <td>
+                <a href="https://github.com/ryanjosephkamp/splashery/pull/352">PR #352</a>, open
+                draft
+              </td>
+              <td>Review the reusable parts and their production boundaries</td>
+            </tr>
+            <tr>
+              <td>Browser capture from a fresh toy</td>
+              <td>Proven by the local CLI in owned pages</td>
+              <td>Implement and verify browser-managed ownership and cleanup</td>
+            </tr>
+            <tr>
+              <td>Capture of an arbitrary live scene</td>
+              <td>Not supported</td>
+              <td>Separate design if it is wanted later</td>
+            </tr>
+            <tr>
+              <td>Site integration</td>
+              <td>Not implemented</td>
+              <td>
+                Scoped integration lane, browser/device checks, then owner/Operator release process
+              </td>
+            </tr>
+            <tr>
+              <td>PDF motion and text QR</td>
+              <td>Separate experiments</td>
+              <td>Resume only after their next step is explicitly selected</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        At this review, both drafts were open and main still pointed to
+        <code>7488008708c6f6123b47a5abc8f634f84d37d3ec</code>. The capture package before this
+        documentation update was <code>799f7f2791b28b1c9bf7485b1fc4fabfbe2f1537</code>. No GitHub
+        checks were listed for #352; its verification is the recorded local evidence, not a green CI
+        claim.
+      </p>
+      <h2>Recommended first integration</h2>
+      <p>
+        Start with a small lab that makes a fresh four-second example of grapes, whole orange, or
+        strawberry. Label it “Fresh toy animation.” Keep the original camera-home behavior and a
+        single tap at frame 4. Do not call it a recording of the person&#x27;s current interaction.
+        Initially omit user files, live inputs, sound, custom scenes, other toys, and camera
+        matching.
+      </p>
+      <p>
+        Use one disposable capture document with one player per job. A dedicated same-origin iframe
+        is the recommended browser prototype to test; the existing CLI uses separate browser pages,
+        so the iframe architecture itself has not been verified. Create it only after a Capture tap,
+        keep it renderable, and remove it after success, cancellation, timeout, navigation, or
+        failure. A separate document isolates lifetime; it is not a security boundary or proof that
+        GPU memory is released immediately. Measure repeated-job cleanup before choosing it for
+        production.
+      </p>
+      <p>
+        Use a minimal capture host, not the full app or the existing embed page. Pass only a
+        validated toy ID, the known whole-orange option, fixed capture settings, and an opaque job
+        ID. Do not send a <code>Player</code> object or the owner&#x27;s scene. Keep the capture
+        surface noninteractive. With an iframe, validate message source, origin, job ID, and message
+        type, and bound payloads and outstanding messages. Retain an iframe handle so teardown still
+        works when the child fails to reply.
+      </p>
+      <p>
+        The main page owns progress, Cancel, converted frames, encoders, attribution, and the final
+        explicit download. Video encoding remains in the visible main document. The capture document
+        owns only its fresh player and render loop. Keep conversion independent of engine internals
+        and reuse <code>src/export/ascii.js</code> after #335 is accepted; the copy in this audit is
+        for independent review.
+      </p>
+      <h2>Why ownership needs its own implementation</h2>
+      <p>
+        The current adapter takes a <code>Player</code>, changes its clock/camera/render controls,
+        runs its action, and restores the controls it changed in <code>finally</code>. It advances
+        toy history and cannot rewind an arbitrary live toy. The stage lock prevents competing
+        captures on that stage; it does not make a live player safe to borrow.
+      </p>
+      <p>
+        The inspected player also registers a theme listener and a window device-motion listener in
+        <code>init()</code> / <code>watchDeviceShake()</code>. Its current
+        <code>destroy()</code> calls picture/media/painter/stage cleanup but does not explicitly
+        remove those listeners. Repeatedly creating players in the main document therefore needs a
+        lifecycle audit. The separate-document recommendation avoids relying solely on that destroy
+        method; it still needs measured cleanup. No engine fix was made here.
+      </p>
+      <p>
+        Source anchors at the package&#x27;s main baseline:
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/7488008708c6f6123b47a5abc8f634f84d37d3ec/src/player.js"
+          >Player</a
+        >,
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/7488008708c6f6123b47a5abc8f634f84d37d3ec/src/viewer.js"
+          >Viewer</a
+        >,
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/7488008708c6f6123b47a5abc8f634f84d37d3ec/src/stage.js"
+          >Stage</a
+        >,
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/codex/ascii-capture-encoding-prototype/docs/audits/ascii-capture-encoding-prototype/capture-adapter.js"
+          >capture adapter</a
+        >, and
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/codex/ascii-capture-encoding-prototype/docs/audits/ascii-capture-encoding-prototype/capture.mjs"
+          >CLI ownership</a
+        >.
+      </p>
+      <h2>Resource and failure contract to verify</h2>
+      <ul>
+        <li>
+          Only one capture/export job at a time. Reject another start instead of queuing more
+          players.
+        </li>
+        <li>
+          Keep the tested first preset at 420 pixels, 40 frames, 10 fps, and four seconds. Existing
+          maximum bounds remain 512 pixels, 64 frames, and a 1.5-million-pixel export canvas; they
+          are validation limits, not measurements of mobile safety.
+        </li>
+        <li>
+          Convert each returned frame before accepting the next. Keep one converted sequence and one
+          output; release decoded source surfaces promptly. A source-sequence download can be an
+          explicit optional mode rather than always retaining every PNG and data URI.
+        </li>
+        <li>
+          Use a per-render deadline and a proposed 30-second whole-job deadline. If the browser
+          cannot finish, explain the failure and let the person retry; do not silently lower
+          settings or reuse an incomplete clip.
+        </li>
+        <li>
+          Abort when the main document becomes hidden. Always remove the capture document, end
+          recorder tracks, clear timers/listeners, and revoke replaced output URLs. Cleanup must be
+          idempotent and independent of a successful child reply.
+        </li>
+        <li>
+          Load existing local modules/assets only. Make no camera, microphone, device-motion
+          permission, upload, or unrelated network request. Do not write scene/settings to storage.
+          A same-origin document can access storage, so privacy requires implementation and tests,
+          not an iframe label.
+        </li>
+        <li>
+          Preserve visible source/author/license/change notices in every output frame. Structured
+          GIF metadata and reference MP4 comments are additional evidence. Browser video currently
+          relies on the visible credit; do not claim it carries those container comments.
+        </li>
+        <li>
+          Offer GIF first. Browser MP4/WebM remains a capability-checked, real-time option with
+          actual encode/decode validation. Do not label it an exact-frame video. FFmpeg references
+          stay build-time files; do not ship a new video encoder or binary merely to match their
+          exact timeline.
+        </li>
+      </ul>
+      <h2>Acceptance checks for the browser prototype</h2>
+      <div class="table-wrap" tabindex="0" aria-label="Scrollable comparison">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Check</th>
+              <th scope="col">Required result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Three presets</td>
+              <td>
+                Fresh captures load, move, and preserve attribution; selected ASCII settings change
+                the export
+              </td>
+            </tr>
+            <tr>
+              <td>Original player</td>
+              <td>
+                Scene/camera/settings references, controls, and storage receive no capture-induced
+                writes; a normally moving live toy need not freeze for byte comparisons
+              </td>
+            </tr>
+            <tr>
+              <td>Success/failure/cancel</td>
+              <td>
+                Capture document, tracks, timers, owned listeners, URLs, and in-flight work are
+                released; no partial download is offered
+              </td>
+            </tr>
+            <tr>
+              <td>Repeated jobs</td>
+              <td>
+                Ten sequential jobs and repeated mid-capture cancellation show no accumulating
+                documents or owned handles; measure resource use rather than promising a numeric GPU
+                cap
+              </td>
+            </tr>
+            <tr>
+              <td>Background/navigation</td>
+              <td>
+                Hidden page and page exit abort; no late child message restarts a finished job
+              </td>
+            </tr>
+            <tr>
+              <td>Unsupported renderer/recorder</td>
+              <td>
+                Clear failure or GIF option; no format-success claim based only on a support flag
+              </td>
+            </tr>
+            <tr>
+              <td>Privacy</td>
+              <td>
+                No permission prompts, unexpected external requests, uploads, or scene/storage
+                writes
+              </td>
+            </tr>
+            <tr>
+              <td>Physical devices</td>
+              <td>
+                Record exact device/browser versions, successful downloads and decoded playback; a
+                390 × 844 viewport alone is not phone evidence
+              </td>
+            </tr>
+            <tr>
+              <td>Production regressions</td>
+              <td>
+                Run the scoped ASCII checks and the required full suite after actual source
+                integration, including the existing embed-transfer limit
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The previous eight package tests and 36 decoded shipped/reproduced media files remain useful
+        prototype evidence. They do not establish the proposed iframe host, production UI,
+        repeated-job GPU lifetime, all-toy support, or a complete physical-device matrix. The owner
+        reported that the reviewed demo passed; individual checks and device/browser versions were
+        not supplied.
+      </p>
+      <h2>Work remaining, in order</h2>
+      <ol>
+        <li>
+          The Operator reviews #335 and #352 and assigns the browser-capture integration scope. This
+          brief is ready for the owner to pass along; Codex has not sent it.
+        </li>
+        <li>
+          Implement the minimal disposable capture host and job coordinator in an isolated
+          prototype. Prove the ownership, cancellation, resource, privacy, and download checks
+          above.
+        </li>
+        <li>
+          Promote only the reviewed core/encoders/host into the assigned production paths, with one
+          production ASCII core. Add a lab entry first if that is the selected route. Wiring the
+          existing export menu needs an explicit change to the standing instruction before Codex
+          does it.
+        </li>
+        <li>
+          Run production regression checks and physical-device review. The Operator handles review
+          and merges under repository rules; the owner decides public release. These drafts stay
+          drafts here.
+        </li>
+      </ol>
+      <p>
+        No additional AI model is needed to perform capture, conversion, or export. GPT-6.1 Sol can
+        implement the remaining lifecycle work in this task when it has a concrete scope. No other
+        model, chat, agent, installation, or large new capture bundle was used for this
+        documentation step.
+      </p>
+      <h2>Prepared Operator handoff</h2>
+      <p>This is text for the owner to send, not an automatically dispatched message:</p>
+      <label for="handoff">Prepared message</label
+      ><textarea id="handoff" readonly spellcheck="false">
+Please review the ASCII export work in draft PRs #335 and #352. Ryan accepted the local demo.
+Read docs/audits/ascii-capture-encoding-prototype/integration-brief.md in #352. Keep both drafts
+draft until your review process decides otherwise; this handoff does not authorize merging.
+
+Recommend and assign a narrow browser-capture integration lane. Begin with grapes, whole orange,
+and the credited strawberry, a fresh fixed-home-camera animation, no user files or live input,
+one disposable capture document/player per job, and GIF first. Verify the proposed iframe host
+rather than treating the separate-page CLI as proof of iframe behavior. Reuse the reviewed ASCII
+core instead of adding another production copy. Scope engine/lifecycle work separately if needed.
+
+Name the branch and exact allowed files before implementation. Preserve the existing export menu,
+other work, and current behavior. Keep PDF and text QR experiments separate. Include cancellation,
+hidden-page/timeout cleanup, repeated-job resource checks, main-player preservation, attribution,
+privacy, actual decoded media, and physical-device evidence in acceptance. Report what remains
+before any production release decision.</textarea
+      ><button type="button" id="select-prompt">Select message</button>
+      <p id="select-status" role="status"></p>
+      <footer>
+        Custom local HTML handback. No external fonts, scripts, images, or automatic requests.
+        Reports and proposals are separate from completed implementation.
+      </footer>
+    </main>
+    <script>
+      document.getElementById("select-prompt").addEventListener("click", () => {
+        const field = document.getElementById("handoff");
+        field.focus();
+        field.select();
+        document.getElementById("select-status").textContent =
+          "Message selected. Use your browser’s Copy command.";
+      });
+    </script>
+  </body>
+</html>
