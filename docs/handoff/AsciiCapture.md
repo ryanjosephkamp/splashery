@@ -36,6 +36,9 @@ it; start it with this brief, word for word, under "## Brief", then keep "## Sta
     transfer test (8.9 MB), `npx prettier --check .` and `node tools/us-english.mjs --diff` clean.
     The full suite was not run here.
 
+- The owner's marks (Effect review page 2, October 6, 2026): `asc-lab-page` good; `asc-grapes-r3`,
+  `asc-orange-r3` and `asc-strawberry-r3` (the clearer levels) good. Nothing open.
+
 ## Notes
 
 - Review of the core found no bug that needs a fix commit. Two observations, left as they are:
