@@ -104,7 +104,9 @@ samples in `src/packs/moving-photo.js` beside you; don't touch that file.
 October 6, 2026, 06:40 UTC (Opus 5.5): **sharpness round 2** (the Operator's brief of 04:34 UTC, the
 owner's "the moving photo to 3d is also still too grainy and needs to be much sharper ... the splat
 mirror also needs to improve"), still on `claude/lane-live-r7-polish` (#333). The hl1 fix is its own
-PR (#336); the long videos are their own PR on `claude/lane-live-r7-long-video`.
+PR (#336); the long videos are their own PR, #338 on `claude/lane-live-r7-long-video` (any length on
+the device: a muted copy of the video plays on the sound's clock, only the depth is kept, 24 MB on
+low to 160 MB on max, with progress and Cancel; clip `lv7-long-video`).
 
 - **Moving photo to 3D** (`live-moving-sharp-r3` and its still): each splat is sized the way Photo
   to 3D sizes its own (`FILL` times the mean distance to its neighbors on the same surface, smaller
