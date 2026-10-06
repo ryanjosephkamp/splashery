@@ -4881,9 +4881,31 @@
       "name": "Saturn V",
       "author": "NASA",
       "page": "https://science.nasa.gov/3d-resources/saturn-v/",
-      "license": "NASA 3D Resources: free to download and use (NASA media guidelines); not a CC license",
-      "checked": "October 5, 2026",
-      "note": "The GLB as downloaded (927 KB). The owner decides the NASA 3D Resources terms route (docs/audits/new-sources-2026-10.md, A9)."
+      "license": "NASA 3D Resources, used under NASA's media guidelines (the owner's call of October 6, 2026)",
+      "checked": "October 6, 2026",
+      "note": "The GLB as downloaded (927 KB). Source: NASA/Michael D. Carbajal. Textures: only the lettering \"UNITED STATES\" and \"USA\" and small U.S. flags; no insignia or logos."
+    },
+    {
+      "id": "sls",
+      "files": ["assets/toys/real-rockets/sls.glb"],
+      "toy": "sls",
+      "name": "Space Launch System (SLS) (printable)",
+      "author": "NASA",
+      "page": "https://science.nasa.gov/3d-resources/space-launch-system-sls/",
+      "license": "NASA 3D Resources, used under NASA's media guidelines (the owner's call of October 6, 2026)",
+      "checked": "October 6, 2026",
+      "note": "The STL (one gray solid, no texture) cut into its pieces, colored as on Artemis I and simplified to 48,000 triangles by tools/sp2-rockets.mjs. Its readme names no other holder or license."
+    },
+    {
+      "id": "space-shuttle",
+      "files": ["assets/toys/real-rockets/space-shuttle.glb"],
+      "toy": "space-shuttle",
+      "name": "Space Shuttle (A)",
+      "author": "NASA (Michael D. Carbajal)",
+      "page": "https://science.nasa.gov/3d-resources/space-shuttle-a/",
+      "license": "NASA 3D Resources, used under NASA's media guidelines (the owner's call of October 6, 2026)",
+      "checked": "October 6, 2026",
+      "note": "The Draco-compressed GLB (all gray, no texture) decoded, cut into its pieces and colored by tools/sp2-rockets.mjs; the cockpit windows' tiny frames left out."
     },
     {
       "id": "star-systems",
