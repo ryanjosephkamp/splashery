@@ -344,12 +344,18 @@ test.describe("the toy", () => {
     const m = S.shown.model;
     S.picks = [0, 1, 2];
     const out = { parts: {}, tokens: null };
-    recipe.drive(1, { pick: 0 }, out, { time: 1, tap: null });
+    const eye = [m.x[1], m.y[1], m.z[1] + 40];
+    recipe.drive(1, { pick: 0 }, out, { time: 1, tap: null, eye });
     const shown = out.tokens.filter((t) => t.visible).length;
     expect(shown).toBe(3 + 14 + 14 + 12);
-    expect(out.tokens[1].offset).toEqual([m.x[1], m.y[1], m.z[1]]);
+    // Each marker stands in front of its atom, toward the camera, and faces it.
+    const [x, y, z] = out.tokens[1].offset;
+    expect(x).toBeCloseTo(m.x[1], 5);
+    expect(y).toBeCloseTo(m.y[1], 5);
+    expect(z - m.z[1]).toBeCloseTo(S.shown.lift(1), 5);
+    expect(out.tokens[0].quat[3]).toBeCloseTo(1, 1);
     // Right after the tap the newest line has only begun.
-    recipe.drive(1, { pick: 0.95 }, out, { time: 1, tap: null });
+    recipe.drive(1, { pick: 0.95 }, out, { time: 1, tap: null, eye });
     expect(out.tokens.filter((t) => t.visible).length).toBeLessThan(shown - 10);
     S.picks = [];
   });
