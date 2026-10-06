@@ -231,3 +231,13 @@ samples now name them without the extension (`sound: "sintel"`), and `sampleSoun
 The files and their credits are unchanged. Ran on main 483242bf + this branch: snda, sndc, smoke,
 kit, taps and smd-moving (135 specs: all pass; one smd-moving speed check's tolerance widened to 8%
 for the 1.5 s horse loop).
+
+### N11 fixes (October 6, 2026)
+
+- `tests/help.spec.mjs`: the how-to line and About text of my four toys are within the limits (110
+  characters, 180 words): `model-splats` (92 characters), `moving-photo-3d` (173 words), `photo-3d`
+  and `video-3d` (both were over too, 94 and 99 characters, 164 and 173 words now).
+- `tests/live3.spec.mjs:518`: the bunny sample is now 16 frames a second, 96 frames in its six
+  seconds (it was 48 at 8 a second), an intended change, so the expectation is `96`.
+- Ran on main + this branch: help, live3, snda, sndc, stm, smd-moving, smd-models, smd-compare, p3d,
+  v3d (112 pass).
