@@ -9,10 +9,11 @@ port 4173 (no `SPLASHERY_PORT`), messages arrive in your session as "From the Op
 comments), you finish every working turn with a final message that starts "READY:", "WORKING:" or
 "BLOCKED:" (and keep the same line at the top of "## State
 
-WORKING (October 5, 2026, round 3 on `claude/lane-geo-r2`): the owner's marks of 22:48 UTC. Good:
-Grand Canyon r3, hurricane r2, relief map r2, sea floor r2. Fixed in round 3 (below): the living
-city (Helsinki's reality mesh), the earthquakes, St. Helens' plume, the storks and the tide meter.
-Left: the -r3/-r4 clips on Effect review page 2, the tests, then the PR. Model: Opus 5.5.
+READY (October 6, 2026, round 3 on `claude/lane-geo-r2`, a draft PR stacked on #268): the owner's
+marks of 22:48 UTC. Good: Grand Canyon r3, hurricane r2, relief map r2, sea floor r2. Fixed in round
+3 (below) and posted as cards `geo-living-city-r3`, `geo-earthquakes-r4`, `geo-st-helens-r4`,
+`geo-stork-migration-r4` and `geo-tide-harbor-r4` on Effect review page 2. Once #268 merges: merge
+main into the branch and point the PR at main. Model: Opus 5.5.
 
 ### Round 3: what changed (the owner's marks of October 5, 2026)
 
