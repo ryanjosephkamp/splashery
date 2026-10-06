@@ -683,7 +683,7 @@ export const LAYERS = [
     fadeOut: a.e === 1.5 ? [150, 400] : null,
     build: (k, layer, profile) => buildAerial(k, a, profile),
   })),
-  { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [12, 20], build: buildBed }, // prettier-ignore
+  { id: "bed", e: 0.5, size: 2.0, cover: false, fadeIn: [0.35, 0.6], fadeOut: [3.5, 7], build: buildBed }, // prettier-ignore
   ...MICRO.flatMap((m) =>
     m.layers.map((L, i) => ({
       id: `${m.id}${L.e}`,
@@ -691,10 +691,10 @@ export const LAYERS = [
       file: L.file,
       width: 10 ** L.e,
       cover: true,
-      fadeIn: i ? [0.3, 0.55] : [0.18, 0.4],
+      fadeIn: i ? [0.3, 0.55] : m.id === "leaf" ? [0.06, 0.2] : [0.18, 0.4],
       // The last of a set, far past its own detail before the next scene
       // comes, dims.
-      dim: i === m.layers.length - 1 ? ({ leaf: [2.9, 3.5, 0.35], chloroplast: [6.5, 7.0, 0.35] }[m.id] ?? null) : null, // prettier-ignore
+      dim: i === m.layers.length - 1 ? ({ leaf: [2.9, 3.5, 0.1], chloroplast: [6.5, 7.0, 0] }[m.id] ?? null) : null, // prettier-ignore
       build: buildPicture,
     })),
   ),
