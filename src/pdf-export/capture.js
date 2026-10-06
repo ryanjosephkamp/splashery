@@ -16,12 +16,52 @@ export function jpegOf(canvas, quality = 0.9) {
   );
 }
 
-// One frame at `size` pixels square, as the stage shows it now.
-export async function captureStill(app, { size = 1080, quality = 0.9 } = {}) {
+// The largest frame this device can render (its render buffer limit), within
+// a cap that keeps a phone's memory comfortable.
+export function renderCap(player, cap = 3072) {
+  const d = player.stage.device;
+  const max = d?.maxRenderBufferSize || d?.maxTextureSize || 4096;
+  return Math.max(256, Math.min(cap, max));
+}
+
+// Polish: a frame rendered `ss` times larger than `size` and brought down in
+// halving steps with smoothing, so splat edges and fine detail come out clean
+// instead of stair-stepped. ss is lowered to fit the device's limit.
+export function downscale(src, size) {
+  let c = src;
+  while (c.width / 2 >= size * 1.0001) {
+    const h = document.createElement("canvas");
+    h.width = Math.round(c.width / 2);
+    h.height = Math.round(c.height / 2);
+    const g = h.getContext("2d");
+    g.imageSmoothingEnabled = true;
+    g.imageSmoothingQuality = "high";
+    g.drawImage(c, 0, 0, h.width, h.height);
+    c = h;
+  }
+  if (c.width === size && c.height === size) return c;
+  const out = document.createElement("canvas");
+  out.width = out.height = size;
+  const g = out.getContext("2d");
+  g.imageSmoothingEnabled = true;
+  g.imageSmoothingQuality = "high";
+  g.drawImage(c, 0, 0, size, size);
+  return out;
+}
+
+export function sampleFactor(player, size, ss) {
+  return Math.max(1, Math.min(ss, renderCap(player) / size));
+}
+
+// One frame at `size` pixels square, as the stage shows it now, rendered at
+// up to twice that and downscaled.
+export async function captureStill(app, { size = 1440, quality = 0.92, ss = 2 } = {}) {
   const player = app.player;
-  return app.withCapture([size, size], async () => {
-    const c = await player.stage.captureFrame();
-    return { bytes: await jpegOf(c, quality), type: "jpeg", width: size, height: size };
+  const k = sampleFactor(player, size, ss);
+  const big = Math.round(size * k);
+  return app.withCapture([big, big], async () => {
+    const c = downscale(await player.stage.captureFrame(), size);
+    return { bytes: await jpegOf(c, quality), type: "jpeg", width: size, height: size, ss: k };
   });
 }
 
@@ -37,11 +77,12 @@ export function tapKind(player) {
 // Records one tap. Options: size (pixels), fps, maxSeconds, quality.
 // Returns { frames: [JPEG bytes], size, fps, seconds, tapFrame, settled }.
 export async function captureRecording(app, opts = {}) {
-  const { size = 420, fps = 8, maxSeconds = 6, quality = 0.82, lead = 0.25, tail = 0.35, onProgress } = opts; // prettier-ignore
+  const { size = 420, fps = 8, maxSeconds = 6, quality = 0.86, lead = 0.25, tail = 0.35, ss = 2, onProgress } = opts; // prettier-ignore
   const player = app.player;
   const stage = player.stage;
   const tap = tapKind(player);
-  return app.withCapture([size, size], async (base) => {
+  const big = Math.round(size * sampleFactor(player, size, ss));
+  return app.withCapture([big, big], async (base) => {
     // The clock moves only by the steps given here.
     const handlers = stage.updateHandlers.slice();
     let pending = 0;
@@ -64,7 +105,7 @@ export async function captureRecording(app, opts = {}) {
       pending = 0;
       hold();
       const c = await stage.captureFrame();
-      frames.push(await jpegOf(c, quality));
+      frames.push(await jpegOf(downscale(c, size), quality));
       onProgress?.(Math.min(0.99, frames.length / Math.ceil(maxSeconds * fps)));
     };
     // Settled: the tap's control has reached its goal and the hop is over

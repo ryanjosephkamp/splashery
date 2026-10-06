@@ -139,6 +139,10 @@ export function qrFor(text) {
 function drawQR(P, page, q, x, y, side) {
   const m = side / q.total;
   page.drawRectangle({ x, y, width: side, height: side, color: P.rgb(1, 1, 1) });
+  // Polish: every dark run is one subpath of a single filled path, so
+  // neighboring modules join without the hairline seams that separately
+  // filled squares leave when a viewer smooths their edges.
+  const ops = [P.pushGraphicsState(), P.setFillingRgbColor(0, 0, 0)];
   for (let r = 0; r < q.size; r++) {
     let c = 0;
     while (c < q.size) {
@@ -148,17 +152,12 @@ function drawQR(P, page, q, x, y, side) {
       }
       let e = c;
       while (e < q.size && q.dark[r * q.size + e]) e++;
-      // A hair wider than the module, so neighbors never show a seam.
-      page.drawRectangle({
-        x: x + (QUIET + c) * m,
-        y: y + side - (QUIET + r + 1) * m - 0.02,
-        width: (e - c) * m + 0.02,
-        height: m + 0.04,
-        color: P.rgb(0, 0, 0),
-      });
+      ops.push(P.rectangle(x + (QUIET + c) * m, y + side - (QUIET + r + 1) * m, (e - c) * m, m));
       c = e;
     }
   }
+  ops.push(P.fill(), P.popGraphicsState());
+  page.pushOperators(...ops);
 }
 
 // ---- The toy's page -------------------------------------------------------------

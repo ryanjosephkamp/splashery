@@ -14,6 +14,10 @@ export const SAMPLES = [
     id: "liberty",
     label: "Statue, flown around",
     title: "Statue Of Liberty 4k Drone (14 s from 3:24)",
+    // The source's own length, and the span the sample was made from (the original's file,
+    // assets/toys/video-3d/<id>-source.mp4 and .webm, is that span at 480p).
+    length: 228.2,
+    span: { start: 204, length: 14 },
     author: "the Dronalist",
     source: "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
     ...CC_BY_3,
@@ -22,6 +26,8 @@ export const SAMPLES = [
     id: "edinburgh",
     label: "Street, walked",
     title: "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD) (10 s from 7:32)",
+    length: 4020.3,
+    span: { start: 452, length: 10 },
     author: "POPtravel",
     source:
       "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",

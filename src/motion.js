@@ -70,6 +70,8 @@ export class MotionDriver {
     this.addon = null; // { parts, data } of a rig's kit-built add-on
     this.addonU = null;
     this.out = null;
+    this.sliderIn = null; // lane Pages r6: the stage slider's value
+    this.figures = []; // lane Pages r6: the scene's figure depths
     // UI r3: a long tap effect pauses on the next tap and resumes on the one
     // after (pausedAt is the clock time it paused at, pausedKey its control).
     this.pausedAt = null;
@@ -102,6 +104,7 @@ export class MotionDriver {
     this.pausedAt = null; // UI r3
     this.pausedKey = null;
     this.unseen = null;
+    this.sliderIn = null; // lane Pages r6
   }
 
   // A rig's add-on (a small kit-built splat cloud with its own parts).
@@ -256,8 +259,9 @@ export class MotionDriver {
   }
 
   // ctx: { time, dt, motion, info: { center, half, radius }, cameraPos,
-  // cameraDistance (to the point it looks at), reducedMotion }. Returns the uniforms.
-  compute({ time: clock, dt, motion, info, cameraPos, cameraDistance }) {
+  // cameraDistance (to the point it looks at), eye (the camera in the recipe's
+  // frame), reducedMotion }. Returns the uniforms.
+  compute({ time: clock, dt, motion, info, cameraPos, cameraDistance, eye }) {
     // UI r3: while a tap effect is paused, its controls and clocks hold still
     // at the moment it paused (a whole-toy move from the Toy tab carries on).
     this.unseen = null; // this frame draws it
@@ -322,6 +326,15 @@ export class MotionDriver {
     // the vertical), so a toy can tell when a drag spins it (the spinning top).
     const view = cameraPos && info?.center ? Math.atan2(cameraPos[0] - info.center[0], cameraPos[2] - info.center[2]) : null; // prettier-ignore
     const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
+    // Lane Pages r6: the slider over the stage (out.slider) as the visitor
+    // last set it ({ id, value, n }, n counting the changes), and the scene's
+    // figure depths (toy.figures; a drive may hand back a new list in
+    // out.figures, which the player keeps in the scene).
+    about.slider = this.sliderIn;
+    about.figures = this.figures;
+    // Lane Molecule viewer (engine): info.eye is where the camera stands in the
+    // recipe's own frame, so a mark can face the camera (a measuring ring).
+    if (eye) about.eye = eye;
     // Lane Hands engine A: Hands-on's shake, finger and wheels (src/physics/fields.js).
     if (this.hands) about.hands = this.hands;
     // Lane Any pose: the world's up in the recipe's frame while Hands-on has
