@@ -953,6 +953,75 @@ toy's About tab says so.
 The place the toy shows is never saved or sent: a city's coordinates are built in, and "Use my
 location" keeps the browser's answer in memory only.
 
+## Real worlds (lane Space r2)
+
+The real Moon, Mars, Earth, Mercury and Venus are built from public-domain maps made by NASA, the
+USGS and NOAA, cut by `tools/sp2-maps.mjs` into a global map and a sharper patch round each named
+feature (`assets/toys/real-worlds/`). Feature positions are from the
+[USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/).
+
+- The Moon: the [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720) by NASA's Scientific Visualization
+  Studio (Ernie Wright), from the Lunar Reconnaissance Orbiter's LROC color mosaic (2025 version)
+  and LOLA elevation. Public domain.
+- Mars:
+  [Mars Viking Colorized Global Mosaic 925m](https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m)
+  (NASA, JPL, Viking orbiters; USGS Astrogeology Science Center) and
+  [Mars MGS MOLA DEM 463m](https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m) (MOLA
+  Science Team, NASA Goddard Space Flight Center; USGS). Public domain.
+- Mercury: the MESSENGER MDIS basemap in three colors (1000, 750 and 430 nm; PDS data set
+  MESS-H-MDIS-5-RDR-MD3-V1.0) and the
+  [Mercury MESSENGER Global DEM 665m](https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m)
+  (Kris Becker, NASA, Arizona State University, Johns Hopkins APL, Carnegie Institution for Science;
+  USGS). Public domain.
+- Venus: the
+  [Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m)
+  (PDS Geosciences Node) and the
+  [Venus Magellan Global Topography 4641m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m)
+  (Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley; NASA, JPL; USGS). Public domain.
+- Earth:
+  [Blue Marble: Next Generation, July 2004](https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation)
+  (NASA Earth Observatory, Reto Stöckli), the
+  [ETOPO 2022 Global Relief Model](https://www.ncei.noaa.gov/products/etopo-global-relief-model) at
+  60 and 15 arc-seconds (NOAA National Centers for Environmental Information) and
+  [Black Marble 2016](https://earthobservatory.nasa.gov/features/NightLights) (NASA Earth
+  Observatory, Joshua Stevens and Miguel Román). Public domain.
+
+- The big moons, from the USGS Astrogeology Science Center's global mosaics (NASA, JPL; public
+  domain): Io (Galileo SSI and Voyager color merge, 1 km), Europa (Voyager and Galileo SSI, 500 m),
+  Ganymede (Voyager and Galileo SSI color, 1.4 km), Callisto (Voyager and Galileo SSI, 1 km) and
+  Titan (Cassini ISS, 4 km; Space Science Institute).
+- Pluto, Ceres and Vesta, from the USGS Astrogeology Science Center's maps (public domain): Pluto's
+  New Horizons LORRI and MVIC mosaic and DEM (NASA, Johns Hopkins APL, Southwest Research
+  Institute), and Ceres's and Vesta's Dawn Framing Camera mosaics and DTMs (NASA, JPL, MPS, DLR,
+  IDA).
+- Stars near the Sun: the
+  [Gaia Catalogue of Nearby Stars](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/649/A6)
+  (Gaia Collaboration, Smart et al. 2021, A&A 649, A6; ESA/Gaia/DPAC),
+  [CC BY-SA 3.0 IGO](https://creativecommons.org/licenses/by-sa/3.0/igo/), read through CDS VizieR,
+  and, for the brightest stars Gaia cannot measure and for star names, the
+  [HYG database v4.4](https://codeberg.org/astronexus/hyg) (David Nash, astronexus),
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The toy's star file
+  (`assets/toys/nearby-stars/stars.json`) is made from both and shares them alike under CC BY-SA
+  4.0. Temperatures from colors by E. Mamajek's
+  [table of mean dwarf colors](https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)
+  (Pecaut & Mamajek 2013).
+- Real star systems: the [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/)'s
+  Planetary Systems Composite Parameters (NASA Exoplanet Science Institute, Caltech/IPAC; NASA
+  mission data, [CC0](https://science.data.nasa.gov/about/license)): "This research has made use of
+  the NASA Exoplanet Archive, which is operated by the California Institute of Technology, under
+  contract with the National Aeronautics and Space Administration under the Exoplanet Exploration
+  Program." The inner Solar System from NASA's planetary fact sheets (NSSDC).
+- Real galaxies, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), cropped round each
+  galaxy: the Whirlpool Galaxy, M51 ([heic0506a](https://esahubble.org/images/heic0506a/); NASA,
+  ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)); the Pinwheel Galaxy, M101
+  ([heic0602a](https://esahubble.org/images/heic0602a/); European Space Agency & NASA); the Phantom
+  Galaxy, M74 ([heic0719a](https://esahubble.org/images/heic0719a/); NASA, ESA, and The Hubble
+  Heritage (STScI/AURA)-ESA/Hubble Collaboration); and the Southern Pinwheel Galaxy, M83
+  ([eso0825a](https://www.eso.org/public/images/eso0825a/); ESO).
+- Saturn V: NASA's [Saturn V 3D model](https://science.nasa.gov/3d-resources/saturn-v/) (NASA 3D
+  Resources, "free to download and use" under NASA's
+  [media guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+
 ## Data and climate (lane Data and climate)
 
 The Data in 3D toy (Studio) and the Climate records toy (Science) ship dated snapshots and never

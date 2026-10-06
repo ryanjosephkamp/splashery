@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 399 toys. 369 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 383.
+- 410 toys. 380 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 394.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 16.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -34,36 +34,38 @@ Proposals below are suggestions; the owner may change them.
   ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar
   system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora
   world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula,
-  Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell,
-  DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion,
-  Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis, Electron orbital,
-  Atom, Molecule, Protein, Crystal lattice, Molecule viewer, Periodic table, Real elements, Diamond,
-  Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney,
-  Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow,
-  Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone,
-  Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake,
-  Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco,
-  Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
-  Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
-  Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell
-  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
-  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
-  Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
-  orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
-  Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
-  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
-  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
-  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to
-  splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat
-  toolkit, Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How
-  CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen.
+  Spiral galaxy, The real Moon, The real Mars, The real Earth, The real Mercury, The real Venus,
+  Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real star systems, Real galaxies, Saturn
+  V, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White
+  blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium,
+  Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule,
+  Protein, Crystal lattice, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald,
+  Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas,
+  Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower,
+  Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns,
+  Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow,
+  Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy
+  cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple,
+  Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck,
+  Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip,
+  Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph
+  plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation,
+  Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses,
+  Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal
+  ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
+  Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano,
+  Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus,
+  Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
+  Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to
+  3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
+  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
+  Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI
+  of a fruit, Electron microscope, Thermal camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -912,7 +914,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (25)
+## Space (36)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -1085,6 +1087,124 @@ Proposals below are suggestions; the owner may change them.
     core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
+- **The real Moon** (`real-moon`). Now: tap: Fly to a feature and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Moon as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's
+    landing site) to face you, glides in close with its name lying on the ground, and glides back
+    (about 10 s).
+  - Improved: Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and
+    the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper
+    patch round each feature; src/space/field.js turns, lifts and lights the splats.
+  - Sound: Space is silent: a soft breath as the view flies in.
+- **The real Mars** (`real-mars`). Now: tap: Fly to a feature and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Mars as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and
+    Gale crater) to face you, glides in close with its name lying on the ground, and glides back
+    (about 10 s).
+  - Improved: Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser
+    altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch
+    round each feature; src/space/field.js turns, lifts and lights the splats.
+  - Sound: Space is silent: a soft breath as the view flies in.
+- **The real Earth** (`real-earth`). Now: tap: Fly to a feature and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Earth as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and
+    Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about
+    10 s).
+  - Improved: Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's
+    Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each
+    feature; src/space/field.js turns, lifts and lights the splats.
+  - Sound: Space is silent: a soft breath as the view flies in.
+- **The real Mercury** (`real-mercury`). Now: tap: Fly to a feature and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Mercury as splats on its real elevation and color maps, turning at its real
+    rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and
+    Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about
+    10 s).
+  - Improved: Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global
+    elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each
+    feature; src/space/field.js turns, lifts and lights the splats.
+  - Sound: Space is silent: a soft breath as the view flies in.
+- **The real Venus** (`real-venus`). Now: tap: Fly to a feature and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
+    data from, you know, NASA"; lane Space r2; labs only).
+  - Effect: The real Venus as splats on its real elevation and color maps, turning at its real rate
+    (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
+    exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis
+    Corona) to face you, glides in close with its name lying on the ground, and glides back (about
+    10 s).
+  - Improved: Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut
+    by tools/sp2-maps.mjs into a global map and a sharper patch round each feature;
+    src/space/field.js turns, lifts and lights the splats.
+  - Sound: Space is silent: a soft breath as the view flies in.
+- **Real moons** (`real-moons`). Now: tap: Fly to a feature and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane
+    Space r2; labs only).
+  - Effect: Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and
+    Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates
+    (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki
+    Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back.
+  - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice.
+  - Sound: Space is silent: a soft breath as the view flies in.
+- **Pluto, Ceres and Vesta** (`real-small-worlds`). Now: tap: Fly to a feature and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane
+    Space r2; labs only).
+  - Effect: Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true
+    shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik
+    Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.
+  - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice.
+  - Sound: Space is silent: a soft breath as the view flies in.
+- **Stars near the Sun** (`nearby-stars`). Now: tap: Fly to the next star and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
+    planets"; rockets; lane Space r2; labs only).
+  - Effect: About 2,240 real stars within 65 light-years of the Sun (ESA Gaia's Catalogue of Nearby
+    Stars, plus the brightest few from Hipparcos), colored by temperature and sized by brightness,
+    round the Sun on faint rings in the Galaxy's plane. A tap flies to the next named star (Alpha
+    Centauri with Proxima beside it, Sirius, Barnard's Star, Vega, Arcturus) with its name and
+    distance in light-years, and back (8 s).
+  - Improved: Space r2: new toy (labs); tools/sp2-stars.mjs reads GCNS from CDS VizieR (CC BY-SA 3.0
+    IGO) and HYG v4.4 (CC BY-SA 4.0), temperatures from Mamajek's color table.
+  - Sound: Space is silent: a soft breath as the view flies.
+- **Real star systems** (`star-systems`). Now: tap: Turn it to the view from Earth and back. Plan:
+  keep.
+  - Owner: The owner's push notes of October 5, 2026 ("more stellar systems, more planets"; lane
+    Space r2; labs only).
+  - Effect: TRAPPIST-1, TOI-178 and 55 Cancri (and the inner Solar System to compare) from the NASA
+    Exoplanet Archive: planets on their measured orbits at their measured periods (sped up,
+    labeled), star and planets drawn larger than to scale (said). A tap turns the system edge on, as
+    Earth sees it, and back (7 s).
+  - Improved: Space r2: new toy (labs); tools/sp2-systems.mjs reads pscomppars through the archive's
+    TAP service.
+  - Sound: Space is silent: a soft breath as it turns.
+- **Real galaxies** (`real-galaxies`). Now: tap: Turn it edge on and back. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
+    planets"; rockets; lane Space r2; labs only).
+  - Effect: M51, M101, M74 and M83 from ESA/Hubble and ESO pictures (CC BY 4.0): every splat takes
+    its picture's color where the telescope saw it; the depth is a labeled guess (a thin exponential
+    disk and a round bulge). A tap turns the galaxy edge on to show the guessed thickness, and back
+    (7 s).
+  - Improved: Space r2: new toy (labs); tools/sp2-galaxies.mjs crops each picture round its galaxy.
+  - Sound: Space is silent: a long soft breath as it turns.
+- **Saturn V** (`saturn-v`). Now: tap: Fire the stages in order. Plan: keep.
+  - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
+    planets"; rockets; lane Space r2; labs only).
+  - Effect: NASA's 3D model of the Saturn V as splats. A tap fires its stages in Apollo 11's order,
+    much faster: the S-IC burns and falls away, the interstage ring drops, the escape tower flies
+    off, the S-II burns and falls away, the S-IVB burns, and the spacecraft pulls away from it; then
+    it comes back together (12 s).
+  - Improved: Space r2: new toy (labs) from NASA 3D Resources, sampled with the Studio's
+    model-to-splats code; the pieces are cut where the model's width steps.
+  - Sound: A low rumble as the engines light, and a thud at each separation.
 - **Night sky** (`night-sky`). Now: tap: Name a star. Plan: new effect (E2).
   - Owner: Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.
   - Effect: The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6
