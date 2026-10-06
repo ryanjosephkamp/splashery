@@ -4,6 +4,7 @@
 // (a legend item's ruler). The browser tests lend them to the comet.
 
 import { test, expect } from "@playwright/test";
+import { formatCount } from "../src/state.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
@@ -22,7 +23,7 @@ async function ready(page) {
       async build(k, id) {
         await new Promise((r) => setTimeout(r, 20));
         if (id === "bad") throw new Error("no such chunk");
-        k.cloud({ count: (600 * 160000) / k.count }, (rand) => ({
+        k.cloud({ count: ((id === "a" ? 6000 : 600) * 160000) / k.count }, (rand) => ({
           p: [rand() - 0.5, rand() - 0.5, 0],
           color: id === "a" ? "#ff8040" : "#40a0ff",
           size: 2,
@@ -89,6 +90,10 @@ test("chunks build when asked, show where out.chunks puts them and go when dropp
   expect(on.scale).toBeCloseTo(2 * on.T.scale, 4);
   expect(on.x).toBeCloseTo(on.T.scale * (0.1 - on.T.center[0]), 4);
   expect(on.splats).toBeGreaterThan(300);
+  // The status line counts them.
+  const own = await page.evaluate(() => window.__splashery.player.toyInfo.splats);
+  await expect(page.locator("#toy-status")).toContainText(`${formatCount(own + on.splats)} splats`);
+  expect(formatCount(own + on.splats)).not.toBe(formatCount(own));
   // Faded out: off again.
   await page.evaluate(() => (window.__potOut = { chunks: { a: { scale: 2, fade: 0 } } }));
   await frames(page);
