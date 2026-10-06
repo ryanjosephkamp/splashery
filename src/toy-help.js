@@ -1634,21 +1634,21 @@ export const TOY_HELP = {
   // ---- Pictures and pages ---------------------------------------------------------------
   "picture-lab": {
     howTo:
-      "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
+      "Tap the right of the page to go on, the left to go back. With Pop out on (top bar), tap a figure to raise it.",
     about:
-      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nDouble-tap the page to fill the screen with it. Zoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded. Sample chooses a PDF article or a photo before you open your own file.",
+      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nDouble-tap the page to fill the screen with it; zoom in and it is rebuilt sharper. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded. Sample picks a PDF or a photo.\n\nTurn on Pop out in the top bar and tap a picture to raise it off the page in 3D; tap it again to lay it back. Draw a box raises anything else, and Pop-up layers splits one into cutout cards. Drag a risen figure to tilt the view; the Depth slider adds relief.",
   },
   "your-book": {
     howTo:
-      "Tap the right page to turn on, the left to go back. Tap a link to follow it; Pop out lifts a picture.",
+      "Tap the right page to turn on, the left to go back. With Pop out on (top bar), tap a picture to raise it.",
     about:
-      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab and tap to turn its pages (the right page goes forward, the left back), or pull a page over by its edge. Double-tap a page to fill the screen with it; Reading: One page goes a page at a time. Only the pages you reach become splats, so a long book stays light. Pick one of five styles.\n\nLinks work: a link to a website shows its address and opens only if you say so, and a link to another page turns there. Pop out lifts the picture on the page toward you: a photo with its depth, worked out on this device; a chart or diagram as a card. Draw a box lifts anything else; a tap lays it back. Your file stays on your device.",
+      "A book is a stack of pages bound along one edge, so you can turn them one at a time. Before books, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab and tap to turn its pages (the right page goes forward, the left back), or pull a page over by its edge. Double-tap a page to fill the screen with it; Reading: One page goes a page at a time. Pick one of five styles.\n\nLinks work: a web link shows its address and opens only if you say so; a page link turns there. Turn on Pop out in the top bar, then tap a picture to raise it: a photo with its depth, worked out on this device; a chart as a card. Raise up to three; tap one to lay it back. Draw a box raises anything else; Pop-up layers cuts one into cards. Drag a risen figure to tilt the book; the Depth slider sets its depth. Your file stays on your device.",
   },
   "photo-album": {
     howTo:
-      "Tap the right page to turn on, the left to go back, or pull one over. Pop out lifts a photo off the page.",
+      "Tap the right page to turn on, the left to go back. With Pop out on (top bar), tap a photo to raise it.",
     about:
-      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand: two wide photos share a page, one above the other, and two tall ones sit side by side. Double-tap a page to fill the screen with it, or set Reading to One page. Pick a leather, linen or scrapbook cover, and turn the file names on or off.\n\nPop out lifts the photo on the page out of its corners toward you, with its depth worked out on this device. Tap the other photo to lift it instead, or the album to lay it back. Your photos stay on your device.",
+      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand: two wide photos share a page, two tall ones sit side by side. Double-tap a page to fill the screen with it, or set Reading to One page. Pick a leather, linen or scrapbook cover.\n\nTurn on Pop out in the top bar, then tap a photo to lift it out of its corners toward you, with its depth worked out on this device. Tap another to lift it too, or a lifted one to lay it back. Pop-up layers splits it into cutout cards. Drag a lifted photo to tilt the album; the Depth slider sets its depth. Your photos stay on your device.",
   },
   "picture-frame": {
     howTo:
@@ -1734,7 +1734,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
     about:
-      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model, a small neural network (Depth Anything V2 Small), looks at each frame and gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow and the sky stay back, and as the clip plays the relief moves with it. Turn the picture to see it from the side.\n\nOpen a GIF or a video of any length in the Toy tab: it is read on your device, the model (about 27 MB) loads the first time, and each frame's depth takes a moment, so a long video plays while its depth is still being worked out. Nothing is uploaded. Depth sets how deep the relief is. The sample is a scene from Big Buck Bunny (Blender Foundation, CC BY 3.0).",
+      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model (Depth Anything V2 Small) gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow stays back, and the relief moves with the clip. Turn the picture to see it from the side.\n\nPick a sample clip in the Toy tab (the bunny, Muybridge's horse, a dragon, a bridge and robot, or a machine; Blender Foundation, CC BY, and the horse is public domain), or open your own GIF or video of any length. It is read on your device, the model (about 27 MB) loads the first time, and nothing is uploaded. A long video plays while its depth is still being worked out. Depth sets the relief, and Speed plays the clip slower or faster, sound included. Show the original puts the flat clip in a corner, frame for frame.",
   },
   "song-landscape": {
     howTo:
@@ -1745,23 +1745,23 @@ export const TOY_HELP = {
 
   "model-splats": {
     howTo:
-      "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
+      "Tap to lift the splats off the model; they settle back. Pick or open a model in the Toy tab.",
     about:
       "A 3D model is usually a mesh: a net of flat triangles with colors or a picture (a texture) painted on them. This toy turns a mesh into splats. It scatters points across the surface, more of them where the shape bends sharply or is finely made, and lays a small flat splat on each one, facing the way the surface does. Each splat is sized to its neighbors so the surface closes with no gaps, and takes its color from the texture at that spot. Sharp edges stay sharp.\n\nTap to lift every splat into a loose cloud and watch each one settle back into its own place. Show: Wireframe draws the mesh's own edges as thin splats, so you can see what the splats were made from. Open a .glb, .gltf, .obj or .stl in the Toy tab (select a model's other files with it); it is converted on your device and never uploaded.",
   },
 
   "photo-3d": {
     howTo:
-      "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
+      "Tap to lift the picture's depth, then tap to lay it flat. Pick or open a photo in the Toy tab.",
     about:
-      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose the forest path, cobbled street or still life, or open your own photo in the Toy tab. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
+      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose a sample photo or open your own in the Toy tab. Show the original puts the flat photo in a corner, so you can see what the depth did. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
   },
 
   "video-3d": {
     howTo:
-      "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
+      "Tap to fly the video's path; drag to look around. Show the original plays the flat video beside it.",
     about:
-      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
+      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.\n\nShow the original plays the sample's flat video in step with Replay flight.",
   },
 
   // ---- Viewers (lane Viewers) -------------------------------------------------------------
@@ -2109,6 +2109,56 @@ export const TOY_HELP = {
     about:
       "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
   },
+
+  // ---- Earth and maps (lane Geo) ------------------------------------------------------
+  "grand-canyon": {
+    howTo:
+      "Tap to flood the canyon from the river up, and watch it drain. Height in the Toy tab sets how tall it stands.",
+    about:
+      "The Grand Canyon in Arizona is about 1,800 meters (a mile) deep, cut by the Colorado River over the last five or six million years through layers of rock laid down over almost two billion years. This block is a 20 by 20 kilometer piece around Grand Canyon Village, the Bright Angel and Garden Creek side canyons and the river below them. Its shape comes from the U.S. Geological Survey's 3D Elevation Program, and its colors from aerial photographs; the cut sides show the canyon's rock layers in their usual order, from the cream Kaibab limestone at the rim to the dark Vishnu schist at the bottom.\n\nTap it and water rises from the river until the canyon is half full, leaving the buttes as islands, then drains away. The flood is imaginary, a way to read the canyon's depth. Height in the Toy tab shows it at true scale or stretched up two or three times.",
+  },
+  "st-helens": {
+    howTo: "Tap to play May 18, 1980; tap again to go back to 1979.",
+    about:
+      "Mount St. Helens, a volcano in Washington State, erupted on May 18, 1980. An earthquake set off the largest landslide ever recorded: the bulging north side of the mountain slid away, a sideways blast flattened the forest for miles, and a column of ash rose about 24 kilometers into the sky. The summit was about 400 meters lower afterward, with a horseshoe-shaped crater open to the north.\n\nThis block shows the mountain before the eruption, from a U.S. Geological Survey model made from 1950s topographic maps, and today, from the 3D Elevation Program and aerial photographs, seen from the north. Tap it to watch the summit fall away while the blast races north and the ash column rises and drifts east; tap again to go back to 1979. The heights are real; the timing and the ash are shortened to a few seconds.",
+  },
+  "sea-floor": {
+    howTo: "Tap to drain the ocean and fill it back.",
+    about:
+      "The Mariana Trench in the western Pacific is the deepest place in the ocean: its Challenger Deep is nearly 11 kilometers (about 7 miles) down. It forms where the Pacific Plate sinks beneath the Mariana Plate, and the same collision built the arc of islands beside it, including Guam. This block covers about 750 kilometers, with heights from NOAA's ETOPO1 relief model, stretched up nine times so the trench and the seamounts show.\n\nTap it and the ocean drains away to bare the sea floor: the plains, the seamounts and the long curve of the trench, which empties last. Then the sea comes back. Colors darken with depth, as on a chart.",
+  },
+  "tide-harbor": {
+    howTo: "Tap to play a day of tides: watch the bar to Bar Island dry out and flood.",
+    about:
+      "Tides are the slow rise and fall of the sea, pulled by the Moon and the Sun. Bar Harbor, Maine, has a range of about 3 to 4 meters, and at low tide a gravel bar appears between the town and Bar Island, so you can walk across for a few hours before the water covers it again.\n\nThis block is a kilometer of that shore, from NOAA's coastal elevation models and aerial photographs, with the heights stretched up six times. Tap it to play NOAA's tide predictions for the spring tide of October 28, 2026: about 25 hours in 12 seconds, two highs and two lows. The curve on the plaque is the prediction, and its dot marks the moment shown; the moored boats ride up and down with the water, and small waves move on the surface.",
+  },
+  hurricane: {
+    howTo: "Tap to play the day Polo grew from 70 to 155 knots; tap again to go back to the start.",
+    about:
+      "Hurricane Polo grew over the warm eastern Pacific, off the coast of Mexico, in September 2026. In the 24 hours from September 21 to 22 its strongest winds rose from 70 to 155 knots (about 290 kilometers an hour), a burst forecasters call rapid intensification, and a clear eye formed in its center.\n\nThe clouds are built from infrared pictures from NOAA's GOES-East satellite at the start and end of that day: colder cloud tops are higher, so each cloud stands as tall as its temperature says. They turn counterclockwise around the eye, faster near the center, with rain falling and low winds spiraling in. Tap it to play the day: the storm follows its best track from the National Hurricane Center, the early ragged clouds give way to the later ones, and it spins faster as it strengthens. The two pictures are real; the change between them is a blend.",
+  },
+  "relief-map": {
+    howTo:
+      "Tap to send a contour line up the cliffs and water down the streams. Change the map and layers in the Toy tab.",
+    about:
+      "A relief map shows the shape of the land. Contour lines join points of the same height: here one every 100 meters, with a heavier line every 500, so lines close together mean a steep slope. This is Yosemite Valley in California, about 18 by 11 kilometers, with El Capitan and Half Dome rising more than 1,000 meters above the Merced River.\n\nThe heights come from the U.S. Geological Survey's 3D Elevation Program, and the streams from the National Hydrography Dataset. In the Toy tab, Map switches between height colors, the aerial photo and land cover (forest, meadow, bare rock and buildings, from the National Land Cover Database), and the switches turn the contour lines and streams on and off. Tap it and a glowing contour climbs from the valley floor to the rim while light runs down every stream, the way the water flows.",
+  },
+  "living-city": {
+    howTo: "Tap for night (the windows light up one by one); tap again for day.",
+    about:
+      "A city made of blocks: streets with traffic going round the blocks, a park, and an elevated train looping around the edge. The buildings are taller toward the center, as in many downtowns. It is built from simple pieces rather than a real place.\n\nTap it and the sun goes down: walls and streets darken and the windows light up one at a time, while the cars and the train keep moving. Tap again for morning.",
+  },
+  "stork-migration": {
+    howTo: "Tap to play the storks' fall migration from Germany to Africa.",
+    about:
+      "White storks fly thousands of kilometers each fall from Europe to Africa, and back in spring. They soar on rising warm air and avoid long sea crossings, so storks from eastern Germany go round the Mediterranean by the Bosporus, Turkey, Israel and the Nile valley.\n\nThese are 30 real storks, juveniles and adults, tracked by GPS in 2013 by S. Rotics and colleagues and published on Movebank under a CC0 license, one position every six hours. Tap it to play July to October in about 12 seconds: each stork leaves its nest when it really did and draws its own trail behind it. Then the season rewinds, and the storks fly their tracks back to their nests. The map's heights come from NOAA's ETOPO1, stretched up 45 times.",
+  },
+  earthquakes: {
+    howTo: "Tap to play the quakes in time order. Tap the plaque to refresh the live feed.",
+    about:
+      "Every day the U.S. Geological Survey publishes the earthquakes it has located around the world. This globe reads its feed when the toy opens: each dot is a quake, bigger for a stronger one, colored by depth (red and orange shallow, yellow and green deeper, blue deepest). Most lie along the edges of tectonic plates, such as the Pacific's Ring of Fire facing you.\n\nTap the globe to play the quakes in time order: each flashes at its moment. Tap the plaque to fetch the feed again; it shows when the data was fetched. Pick the past week, the past month or a year of the catalog in the Toy tab. If the feed can't be reached, the toy shows a saved snapshot and says so. Nothing is stored or sent.",
+  },
+
   // Lane Night sky.
   "night-sky": {
     howTo: "Drag to look around the sky. Tap a star or a planet to name it.",

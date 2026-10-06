@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 410 toys. 380 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 394.
+- 419 toys. 389 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 403.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 16.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -60,12 +60,14 @@ Proposals below are suggestions; the owner may change them.
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
-  Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to
-  3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Fluid lab, Airport X-ray scanner, How CT works, Walnut CT scan, MRI
-  of a fruit, Electron microscope, Thermal camera, Screen.
+  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
+  Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
+  code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
+  Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
+  box, Cryo-EM map, Contour lab, Terrain in a box, Fluid lab, Grand Canyon, Mount St. Helens, The
+  sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes,
+  Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal
+  camera, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2891,6 +2893,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
     page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
     pauses a video.
+  - Improved: Pages r6 (October 5, 2026): Pop out (the top bar's switch) and Draw a box, as in Your
+    book, for a PDF or a picture: a tap raises a figure (a picture in the PDF, or the whole photo),
+    a drawn box raises anything else, a tap on a risen one lays it back, and a page step waits until
+    they have laid back. A drag on a risen figure tilts the view, and a Depth slider sets its
+    relief.
   - Sound: A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound
     as a fallback.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
@@ -2922,7 +2929,13 @@ Proposals below are suggestions; the owner may change them.
     turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page;
     a photo rises with its depth from the on-device depth model, a chart or diagram as a card with
     its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift
-    it out. A tap lays it back (0.7 s).
+    it out. A tap lays it back (0.7 s). Pages r6 (October 5, 2026, labs): Pop out is one switch for
+    every page toy, in the top bar; with it on nothing rises by itself: a tap raises a figure, a tap
+    on another raises that one too (up to three at once), a tap on a risen one lays it back, and a
+    page turn (tap or drag) lays them all back quickly first. While figures stand up, a drag on one
+    (or off the pages) tilts the book to see them from the side; the view comes back level when they
+    lie down. A Depth slider sets a risen figure's relief, up to five times its own, and the depth
+    is kept in the scene and in embeds. A page pulled over plays its page sound once.
   - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback
     (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C,
     October 2, 2026).
@@ -2941,7 +2954,14 @@ Proposals below are suggestions; the owner may change them.
     Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop
     out lifts the photo on the page in view out of its corners toward you as one solid piece, with
     its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on
-    the other photo of a page lifts that one instead, and a tap lays it back.
+    the other photo of a page lifts that one instead, and a tap lays it back. Pages r6 (October 5,
+    2026, labs): Pop out is one switch for every page toy, in the top bar; with it on nothing rises
+    by itself: a tap raises a photo, a tap on another raises that one too (up to three at once), a
+    tap on a risen one lays it back, and a page turn (tap or drag) lays them all back quickly first.
+    While photos stand up, a drag on one (or off the pages) tilts the album to see them from the
+    side; the view comes back level when they lie down. A Depth slider sets a risen photo's relief,
+    up to five times its own, and the depth is kept in the scene and in embeds. A page pulled over
+    plays its page sound once.
   - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
@@ -3342,6 +3362,84 @@ Proposals below are suggestions; the owner may change them.
     tap redraws the CO2 record from 1974 behind a bright bead (8 s), or lets the bars sink to zero
     and grow back.
   - Sound: A long, low breath under a soft thud.
+
+## Geo (9)
+
+- **Grand Canyon** (`grand-canyon`). Now: tap: Flood the canyon. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A 20 km block of the Grand Canyon round Grand Canyon Village (USGS 3DEP heights, aerial
+    imagery, the rock layers on its cut sides). The tap floods it from the river to half its depth,
+    leaving the buttes as islands, and drains it (about 8 s).
+  - Improved: Geo: new toy from tools/geo-terrain.mjs; the water is a sheet that rises as one piece,
+    with cut faces that appear as the level passes them.
+  - Sound: A rush of water rising and a wave as it drains.
+- **Mount St. Helens** (`st-helens`). Now: tap: Play May 18, 1980. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Mount St. Helens from the north, as in 1979 (the USGS pre-eruption DEM). The tap plays
+    May 18, 1980: the summit and north flank fall to today's crater (3DEP and imagery spread out
+    from the crater), a lateral blast races north and an ash column rises and drifts east (about 6
+    s); a second tap goes back to 1979.
+  - Improved: Geo: new toy; the 1979 surface sinks onto today's heights while today's fades in from
+    the crater out, and is then hidden (sorting).
+  - Sound: A deep thud and rumble, then the eruption's roar; a low rumble going back.
+- **The sea floor** (`sea-floor`). Now: tap: Drain the ocean. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: The Mariana Trench and Mariana Islands (NOAA ETOPO1, nine times taller) under a heaving
+    ocean. The tap drains the ocean (the trench empties last), shows the bare floor and fills it
+    back (about 9 s).
+  - Improved: Geo: new toy; the ocean is a sheet that sinks as one piece, with cut faces that drop
+    away.
+  - Sound: A low roar of draining water and a wave as it returns.
+- **Tides at Bar Harbor** (`tide-harbor`). Now: tap: Play a day of tides. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A kilometer of Bar Harbor, Maine (NOAA coastal DEM and imagery), with moored boats and
+    small waves. The tap plays NOAA's tide predictions for the spring tide of October 28, 2026
+    (about 25 hours in 12 s): the bar to Bar Island dries and floods twice, the boats ride the
+    water, and a dot follows the curve on the plaque (and slides back to its start at the end).
+  - Improved: Geo: new toy from tools/geo-terrain.mjs (CO-OPS predictions relative to mean sea
+    level).
+  - Sound: Three soft waves through the day.
+- **Hurricane** (`hurricane`). Now: tap: Play the day it grew. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Hurricane Polo (EP17, September 2026) over a Blue Marble map of the Mexican coast:
+    GOES-East infrared cloud tops as tall as their temperature, in rings that turn counterclockwise
+    round the eye (faster inside), with rain and low wind lines. The tap plays September 21 to 22,
+    when it grew from 70 to 155 knots: it follows its best track, the start's clouds give way to the
+    end's (with a clear eye), and it spins faster (about 10 s); a second tap goes back.
+  - Improved: Geo: new toy from tools/geo-storm.mjs (GIBS colors turned back into temperatures).
+  - Sound: Wind and rain, then a low rumble; a softer wind going back.
+- **Relief map** (`relief-map`). Now: tap: Sweep a contour and the streams. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Yosemite Valley as a relief map: contour lines every 100 m (heavier every 500), height
+    colors, the aerial photo or NLCD land cover, and the NHD's named streams. The tap sends a
+    glowing contour from the valley floor to the rim while light runs down every stream (about 7 s).
+  - Improved: Geo: new toy from tools/geo-terrain.mjs.
+  - Sound: A soft scrape and a few drips.
+- **Living city** (`living-city`). Now: tap: Day or night. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A kit-built city: cars go round their blocks on the right, an elevated train loops round
+    the edge, and a park. The tap turns day to night (walls and streets darken, each window lights
+    up at its own moment, about 4.5 s); a second tap brings the day back.
+  - Improved: Geo: new toy; cars and train are tokens on looping paths, re-sorted as they move.
+  - Sound: A light switch and the city's low hum, darker at night.
+- **Stork migration** (`stork-migration`). Now: tap: Play the fall migration. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: Thirty white storks GPS-tracked in 2013 (Rotics et al. 2016, Movebank, CC0) on a relief
+    map of Europe, the Middle East and Africa. The tap plays July to October in about 12 s: each
+    stork flies its real track, facing the way it goes, and draws its trail behind it; month labels
+    and a bar mark the time. Then the season rewinds in 2 s (the storks fly their tracks back to
+    their nests).
+  - Improved: Geo: new toy from tools/geo-migration.mjs.
+  - Sound: Wing beats and a stork's bill clatter.
+- **Earthquakes** (`earthquakes`). Now: tap: Play the quakes in time order. Plan: keep.
+  - Owner: The owner's geospatial idea of October 3, 2026 (lane Earth and maps; labs only).
+  - Effect: A relief globe (NOAA ETOPO1) turning slowly with the USGS earthquake feed on it, read
+    live when the toy opens (a dated snapshot when it can't be reached): a dot per quake, sized by
+    magnitude and colored by depth. A plaque shows the source, the feed and when it was fetched. The
+    tap flashes the quakes in time order (about 8 s); a tap on the plaque fetches the feed again.
+    The Toy tab picks the past week, the past month or a year of the catalog.
+  - Improved: Geo: new toy (Push Plan S14); live feed approved by the owner on October 4, 2026.
+  - Sound: A low rumble, and a second one.
 
 ## Imaging (6)
 

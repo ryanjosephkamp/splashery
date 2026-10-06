@@ -515,7 +515,7 @@ test.describe("Moving photo to 3D", () => {
     await open(page, "moving-photo-3d");
     await idle(page);
     const s0 = await page.evaluate(async (m) => (await import(m)).movingState(), mp);
-    expect(s0.clip.n).toBe(48);
+    expect(s0.clip.n).toBe(96); // (Smd: the sample is 16 frames a second, 96 in its six seconds; it was 8 a second, 48)
     // It plays: the frame moves on.
     const s1 = await until(page, async (m) => { const s = (await import(m)).movingState(); return s.t > 1 ? s : null; }, mp, 60_000); // prettier-ignore
     expect(s1.t).toBeGreaterThan(1);
