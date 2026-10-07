@@ -96,3 +96,6 @@ replaced by a newer card (checked against both pages' `verdicts` and `cards` on 
 - The playlist is `src/showcase/playlist.json`; after changing toys in it, run
   `node tools/shw-facts.mjs` (the test checks facts.json is current).
 - `tools/shw-video.mjs` makes the videos for the owner (MP4, kept out of the repo).
+- Rerun `node tools/shw-facts.mjs` (and commit `src/showcase/facts.json`) after any merge that
+  changes a showcase toy's pack file or the shelf's toy count, that is after most toy merges; the
+  `tests/shw.spec.mjs` "measured facts are current" test fails until you do.
