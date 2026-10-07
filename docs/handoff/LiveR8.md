@@ -55,7 +55,12 @@ Operator is session_012GmKRUMZLir2nb27Bo8Cu2.
 
 ## State
 
-October 7, 2026 (Opus 5.5): first round in progress.
+October 7, 2026, 06:30 UTC (Opus 5.5): first round built and posted; the specs of the files I touch
+are running.
+
+Cards on Effect review page 2 (lane record `LiveR8`): `lv8-chladni-plate` (before and after, side by
+side, the camera sweeping down to the side), `lv8-depth-slider` (a still of the mirror with the
+slider), `lv8-cell-cube`, `lv8-cell-cube-122`, `lv8-cell-flask-shells`, `lv8-cell-flask-cones`.
 
 1. **The plate, sharper** (`src/packs/studio.js`). Where the grain was: the plate's top was already
    smooth at phone size; the grain was in the stand (its base and post were sampled at random over a
@@ -70,7 +75,8 @@ October 7, 2026 (Opus 5.5): first round in progress.
    "Depth" button brings it back, remembered on the device. Photo to 3D and Moving photo to 3D opt
    in there; the Splat mirror opts in on this lane's PR once #383 merges.
 3. **The 3D look: honest, built** as a labs toy, "Sound in a box" (`chladni-cell`,
-   `src/packs/chladni-3d.js`). See Notes.
+   `src/packs/chladni-3d.js`). See Notes. The beads are dyed amber (labs often use colored or
+   fluorescent beads): white ones vanished on the light stage.
 
 ## Notes
 
