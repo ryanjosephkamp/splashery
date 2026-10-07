@@ -549,7 +549,12 @@ export class Player {
       this.motion.chunks = this.chunks.api;
     }
     if (recipe.zoom) this.camera.zoomTaker = (f) => this.motion.takeZoom(f);
-    const b = ctx.buf.bounds();
+    // Lane Powers of ten: frameReaches frames the camera on the recipe's
+    // k.reach points alone (its own splats are a backdrop far behind them).
+    const b =
+      recipe.frameReaches && ctx.reaches?.length
+        ? { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] }
+        : ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
         b.min[k] = Math.min(b.min[k], r[k]);

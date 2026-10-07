@@ -162,6 +162,39 @@ test("a toy with zoom: true takes the pinch, the wheel and a drag; others move t
   expect(await dist()).toBeCloseTo(r0 * 0.8, 4);
 });
 
+test("frameReaches frames the camera on the reaches, not on a backdrop far behind", async ({
+  page,
+}) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const radius = await page.evaluate(async () => {
+    const mod = await import("/src/packs/space.js");
+    const recipe = mod.RECIPES.comet;
+    const build = recipe.build;
+    recipe.build = (k, ...rest) => {
+      build(k, ...rest);
+      k.reach([1, 0, 0]);
+      k.cloud({ count: (400 * 160000) / k.count, fit: false }, (rand) => ({
+        p: [(rand() - 0.5) * 60, (rand() - 0.5) * 40, -30],
+        color: "#000000",
+        size: 2,
+      }));
+    };
+    const out = {};
+    for (const frame of [false, true]) {
+      recipe.frameReaches = frame;
+      await window.__splashery.app.chooseToy(frame ? "comet" : "rocket");
+      if (!frame) await window.__splashery.app.chooseToy("comet");
+      out[frame] = window.__splashery.player.toyInfo.radius;
+    }
+    return out;
+  });
+  // Without it the backdrop sets the frame; with it, the reaches (and the
+  // comet's own fit) do.
+  expect(radius.false).toBeGreaterThan(5);
+  expect(radius.true).toBeLessThan(2);
+});
+
 test("a legend item's ruler draws a scale bar as long as its size on screen", async ({ page }) => {
   await ready(page);
   await page.evaluate(() => {
