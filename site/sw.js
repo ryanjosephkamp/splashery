@@ -12,7 +12,7 @@
 //   refreshed in the background, so a toy played once keeps working offline.
 // - A page under site/ that isn't there gets site/404.html.
 
-const VERSION = "178e4e7ae53e";
+const VERSION = "3bd785533008";
 const PRECACHE = [
   "./",
   "toys/",

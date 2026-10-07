@@ -1017,6 +1017,54 @@ bat: [
               own text.
             </li>
           </ul>
+          <h3 id="chunks-the-zoom-gesture-and-the-scale-bar-lane-powers-of-ten">
+            Chunks, the zoom gesture and the scale bar (lane Powers of ten)
+          </h3>
+          <p>
+            From lane Powers of ten (October 6, 2026; <code>src/chunks.js</code>). A toy that shows
+            many scenes, a few at a time (the Powers of ten zoom), can load each one only when it
+            comes near:
+          </p>
+          <ul>
+            <li>
+              <code>chunks: { async build(k, id, help) }</code> builds one chunk with a Kit that
+              keeps the recipe's coordinates (no fit); it may fetch its data first (<code
+                >help.profile</code
+              >
+              is the device tier).
+            </li>
+            <li>
+              In <code>drive</code>, <code>info.chunks.want(id)</code> builds it (one at a time, in
+              the order asked), <code>info.chunks.state(id)</code> is <code>&quot;none&quot;</code>,
+              <code>&quot;loading&quot;</code>, <code>&quot;ready&quot;</code> or
+              <code>&quot;failed&quot;</code>, and <code>info.chunks.drop(id)</code> frees it.
+            </li>
+            <li>
+              <code>out.chunks = { [id]: { scale, offset: [x, y, z], fade } }</code> places the
+              chunks shown this frame, in recipe coordinates (a splat at <code>p</code> shows at
+              <code>p * scale + offset</code>). A chunk left out, or with a <code>fade</code> of 0,
+              is switched off (not drawn or sorted). <code>fade</code> is the chunk's own first
+              morph channel, so splats built with <code>kind: &quot;fade&quot;</code> and
+              <code>params: [0, -0.99]</code> take it as their opacity. Each chunk is its own splat
+              entity, so chunks sort where they show, at any scale.
+            </li>
+            <li>
+              <code>zoom: true</code> hands the pinch, the wheel, the + and − keys and a one-finger
+              drag (up zooms in; a sideways drag does nothing) to the toy instead of the camera:
+              <code>info.zoom = { log, n, resets }</code> (the sum of the gestures' natural logs,
+              above 0 zooming out; how many; how many times Reset view was pressed).
+            </li>
+            <li>
+              <code>frameReaches: true</code> frames the camera on the recipe's
+              <code>k.reach</code> points alone, not on its own splats: for a toy whose own splats
+              are only a backdrop far behind its scenes (built with <code>fit: false</code>).
+            </li>
+            <li>
+              A legend item (<code>out.legend</code>, lane Anatomy) may carry
+              <code>ruler: { size }</code>: a scale bar that long in recipe units at the toy's
+              center as the camera sees it (at most 140 px), its text under it.
+            </li>
+          </ul>
           <h2 id="5c-the-tilt-lock">5c. The tilt lock</h2>
           <p>
             From lane Viewer (September 29, 2026). A flat toy (a page, a photo, a screen, a frame)
