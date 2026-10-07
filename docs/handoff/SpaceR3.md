@@ -7,7 +7,31 @@ October push. Repo: ryanjosephkamp/splashery. Your lane: Space r3 (id `SpaceR3`,
 Branch: `claude/lane-space-r3` (and `claude/lane-space-r3-engine` for any change to the app outside
 your own files, as an "Engine: …" PR merged first). PR title: "Phase Space r3: sharper real planets,
 and a tap that zooms to a named place". Handoff file: docs/handoff/SpaceR3.md (create it; start it
-with this brief, word for word, under "## Brief", then keep "## State", "## Notes", "## Known
+with this brief, word for word, under "## Brief", then keep "## State
+
+READY for review (October 7, 2026, about 07:30 UTC). PR #380, all labs. Built on
+`claude/lane-space-r3`, all seven world toys:
+
+- **Sharper:** the globe now takes about 90% of the splats (the fixed feature patches took 42%
+  before), and each splat's color is the mean of the map over its own footprint (five samples), so a
+  map finer than the splats no longer speckles.
+- **Tap to zoom and name:** a tap turns the spot to face the camera, rebuilds the toy with a dense
+  patch round it (45% of the splats) from new 10° close-up tiles, and grows the world about the spot
+  on the GPU (src/space/field.js), smoothly, as if the camera came closer. A label of up to four
+  lines (the name, what it is or where, what it lies on, the source) shows over the view, and the
+  site's message gives the full text. A second tap, or a pinch out, goes back out. The play button
+  still flies to the named features.
+- Names: Earth from Natural Earth 1:10m (states and provinces, countries, cities, peaks, seas,
+  lakes, regions); the others from the IAU/USGS Gazetteer (all adopted features but the lettered
+  satellite craters). Both public domain, checked on their live pages October 7, 2026.
+- Tests (after merging main): `tests/sp3.spec.mjs` (9, including a tap on Paris, Everest, Tycho and
+  Olympus Mons in the browser), `tests/sp2.spec.mjs` (26), help and hta: 52 passed. Prettier and the
+  US English check are clean; thumbnails redone; screenshots `sp3-*`.
+- Clips: 14 on Effect review page 2 (lane record `SpaceR3`): an after clip of each world's tap zoom
+  and a before clip of main's fly, at phone size. Waiting on the owner's marks.
+
+## Notes", "## Known
+
 issues" and "## For the Operator" current). Model: Opus 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 7, 2026)
@@ -92,7 +116,8 @@ WORKING (October 7, 2026). Built on `claude/lane-space-r3`, all seven world toys
 - On a phone the zoom starts after the rebuild (about 1 to 3 s); the turn to the spot runs
   meanwhile.
 - A Gazetteer feature is treated as a circle of its listed size, so a long valley or a ridge is
-  named a little beyond its real outline.
+  named a little beyond its real outline (Pluto's heart, near its edge, is named as Viking Terra).
+- Io, Titan and the other moons have coarser maps, so their zoom is shallower (about 3 to 4 times).
 
 ## For the Operator
 
