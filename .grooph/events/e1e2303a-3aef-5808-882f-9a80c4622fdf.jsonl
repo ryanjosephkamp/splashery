@@ -310,3 +310,13 @@
 {"v":1,"t":"2026-10-07T03:06:36.181Z","harness":"claude-code","event":"session-end","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","cwd":"splashery"}
 {"v":1,"t":"2026-10-07T03:20:19.157Z","harness":"claude-code","event":"session-start","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","cwd":"splashery"}
 {"v":1,"t":"2026-10-07T03:20:19.270Z","harness":"claude-code","event":"turn-start","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:20:22.304Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:20:28.852Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:20:29.603Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:20:32.899Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:24:53.556Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:24:57.738Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:24:59.516Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"ToolSearch","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:25:03.254Z","harness":"claude-code","event":"tool","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:25:06.943Z","harness":"claude-code","event":"turn-end","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T03:25:08.750Z","harness":"claude-code","event":"subagent-stop","session":"e1e2303a-3aef-5808-882f-9a80c4622fdf","agent":"a2254638db8d236e8"}
