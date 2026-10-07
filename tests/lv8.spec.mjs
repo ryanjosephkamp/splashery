@@ -3,6 +3,12 @@
 // the toy in the browser.
 
 import { test, expect } from "@playwright/test";
+import { execFileSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import config from "../playwright.config.mjs";
+import { fakeCamera, openMirror, FACE } from "../tools/lv7-mirror-measure.mjs";
 import {
   CELL_MODES,
   Beads,
@@ -123,4 +129,55 @@ test.describe("in the browser", () => {
     );
     expect((await state()).mode).toBe("cube-012");
   });
+});
+
+// The Splat mirror's depth slider (Engine PR #383 draws it): shown over the
+// stage on a camera, clear of the face and of every other control. On a
+// generated mannequin (tools/lv7-mannequin.mjs), as lane Live r7 measures.
+test.describe("the Splat mirror's depth slider", () => {
+  test.describe.configure({ timeout: 600_000 });
+  let y4m;
+  test.beforeAll(() => {
+    y4m = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "splashery-lv8-")), "still.y4m");
+    execFileSync("node", ["tools/lv7-mannequin.mjs", y4m, "--still", "--frames=20"], { stdio: "ignore" }); // prettier-ignore
+  });
+
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ])
+    test(`at ${w}×${h}: present, clear of the face`, async ({ playwright, baseURL }) => {
+      const browser = await playwright.chromium.launch({ ...config.use.launchOptions, args: fakeCamera(y4m, config.use.launchOptions.args) }); // prettier-ignore
+      try {
+        const page = await browser.newPage({ viewport: { width: w, height: h } });
+        await openMirror(page, baseURL + "/");
+        const dial = page.locator("#stage-dial");
+        await expect(dial).toBeVisible();
+        await expect(page.locator("#stage-dial-input")).toHaveValue("0.5");
+        // The face's box on the page, from where the picture shows it.
+        const face = await page.evaluate(async (F) => {
+          const { MIRROR } = await import("/src/live/relief.js");
+          const p = window.__splashery.player;
+          const height = (2 * MIRROR.rows) / MIRROR.cols;
+          const z = 0.9 * MIRROR.gain * 0.8;
+          const r = document.getElementById("stage").getBoundingClientRect();
+          const pts = [
+            [F.x0, F.y0],
+            [F.x1, F.y1],
+            [F.x0, F.y1],
+            [F.x1, F.y0],
+          ].map(([u, v]) => p.screenPoint([(u - 0.5) * 2, (0.5 - v) * height, z]));
+          const xs = pts.map((q) => q[0] + r.left);
+          const ys = pts.map((q) => q[1] + r.top);
+          return { left: Math.min(...xs), right: Math.max(...xs), top: Math.min(...ys), bottom: Math.max(...ys) }; // prettier-ignore
+        }, FACE);
+        const box = await dial.boundingBox();
+        const apart =
+          box.x >= face.right || box.x + box.width <= face.left || box.y >= face.bottom || box.y + box.height <= face.top; // prettier-ignore
+        expect(apart, JSON.stringify({ box, face })).toBe(true);
+        await page.screenshot({ path: `tests/screenshots/lv8-mirror-dial-${w}x${h}.png` });
+      } finally {
+        await browser.close();
+      }
+    });
 });
