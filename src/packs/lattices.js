@@ -178,7 +178,10 @@ function buildUnitCells(k, o) {
       even: true,
       opacity: 1,
       jitter: 0.01,
-      flat: 0.3,
+      // Thin splats lying on the surface, overlapping a little more than the
+      // kit's: a smooth, solid ball (no mottle) under the sharp kernel.
+      flat: 0.2,
+      size: 1.25,
       weight: a.el === "H" ? 1.6 : 1,
       part: partOf(a),
       pattern: false,
@@ -436,11 +439,18 @@ function buildOrbitalAtlas(k, o) {
   k.add(k.radial(surfR, { grid: 112 }), {
     part: (c) => half(c.lp),
     flat: 0.15,
+    size: 1.2,
     even: true,
     jitter: 0.01,
-    opacity: lobes ? 0.95 : 0.28,
+    opacity: lobes ? 0.95 : 0.36,
     pattern: false,
     color: (c) => {
+      // Where the surface dips to the nucleus (along a nodal cone or plane)
+      // its splats crowd into lines: leave them out.
+      if (len(c.lp) < 0.09) return null;
+      // Nor the steep walls the one-radius-per-direction surface draws
+      // between lobes (they are not part of the real 90% surface).
+      if (Math.abs(dot(c.ln, unit(c.lp))) < 0.3) return null;
       const d = unplace(unit(c.lp));
       const r = len(c.lp) * E;
       const sign = orb.R(r) * orb.Y(d[0], d[1], d[2]) >= 0;
@@ -451,7 +461,7 @@ function buildOrbitalAtlas(k, o) {
   });
   // The cloud: sampled from |psi|², mostly inside the boundary surface so
   // its shape reads; bigger, fainter splats that hold still (a smooth haze).
-  k.cloud({ share: lobes ? 0.26 : 0.6, size: 1.9, pattern: false }, (rand) => {
+  k.cloud({ share: lobes ? 0.26 : 0.6, size: 1.5, pattern: false }, (rand) => {
     let r;
     let d;
     let y;
@@ -460,7 +470,7 @@ function buildOrbitalAtlas(k, o) {
       r = radial.sample(rand());
       ({ d, y } = sampleDirection(orb, rand));
       psi = orb.R(r) * y;
-      if (psi * psi > level * 0.6 || rand() < 0.08) break;
+      if (psi * psi > level * 0.9 || rand() < 0.02) break;
     }
     const tt = clamp((psi * psi) / peak, 0, 1);
     const base = psi >= 0 ? plus : minus;
@@ -480,7 +490,7 @@ function buildOrbitalAtlas(k, o) {
   // The cut face: |psi|² in the plane of the cut, on a fine even grid, in
   // the phase colors, brighter where the electron is likelier; dark at the
   // nodes. Just in front of the back half's cut.
-  const G = 170;
+  const G = 260;
   const pts = [];
   let fpeak = 0;
   for (let i = 0; i < G; i++)
@@ -496,7 +506,7 @@ function buildOrbitalAtlas(k, o) {
       pts.push([p, psi]);
     }
   const shown = pts.filter(([, psi]) => (psi * psi) / fpeak > 0.0015);
-  k.cloud({ share: 0.12, size: 1.1, pattern: false, part: C }, (rand, i) => {
+  k.cloud({ share: 0.14, size: 0.8, pattern: false, part: C }, (rand, i) => {
     const [p, psi] = shown[i % shown.length];
     const t = Math.sqrt((psi * psi) / fpeak);
     const base = psi >= 0 ? plus : minus;
@@ -536,6 +546,10 @@ export const RECIPES = {
   // ---- Unit cells ------------------------------------------------------------------
   "unit-cells": {
     alive: false,
+    // The owner's "Just sharper" (October 7, 2026): the sharp splat kernel
+    // (labs) and twice the splats.
+    kernel: "sharp",
+    density: 2,
     options: [
       {
         key: "crystal",
@@ -587,6 +601,8 @@ export const RECIPES = {
   // ---- Orbital atlas ---------------------------------------------------------------
   "orbital-atlas": {
     alive: false,
+    kernel: "sharp",
+    density: 2,
     // It keeps still, facing you, so the opened halves' cut faces face you.
     turntable: false,
     options: [
