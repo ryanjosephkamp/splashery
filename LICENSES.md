@@ -205,6 +205,18 @@ subject to the following conditions:
 - License: Apache License 2.0 (checked on the npm package and the live repository page on October 3,
   2026; the full text is in `vendor/jsqr/LICENSE`).
 
+## ZXing for JavaScript 0.21.3 (lane QR craft)
+
+- Package: `@zxing/library@0.21.3` (file: `vendor/zxing-js/zxing.min.js`, the package's
+  `umd/index.min.js`, unchanged, 332 KB; the license is copied to `vendor/zxing-js/LICENSE`).
+- Source: https://github.com/zxing-js/library (the ZXing for JS authors, a port of ZXing).
+- Loaded only when the "Other barcodes" toy opens (labs), for its Data Matrix and Aztec writers and
+  to read its codes back. The same version is already a pinned devDependency (the QR scan lab's
+  reader).
+- License: Apache License 2.0 (the package's LICENSE file and the live repository's, checked on
+  October 6, 2026; the full text is in `vendor/zxing-js/LICENSE`). The package's `package.json` says
+  "MIT"; both are permissive and allowed here, and we follow the LICENSE file.
+
 ## pdf-lib 1.17.1 (lane PDF lab)
 
 - Package: `pdf-lib@1.17.1` (file: `vendor/pdf-lib/pdf-lib.esm.min.js`, the package's
