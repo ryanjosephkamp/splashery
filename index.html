@@ -58,6 +58,23 @@
       <input type="range" id="toy-slider-input" min="0" max="1000" step="1" value="0" />
     </div>
 
+    <!-- Live r8: a toy's depth slider over the stage, hideable (remembered on this device). -->
+    <div id="stage-dial" class="stage-dial" hidden>
+      <button
+        type="button"
+        id="stage-dial-hide"
+        class="stage-dial-hide"
+        aria-label="Hide the slider"
+      >
+        ×
+      </button>
+      <div class="stage-dial-track">
+        <input type="range" id="stage-dial-input" min="0" max="1" step="0.05" value="0.5" />
+      </div>
+      <span id="stage-dial-label" class="stage-dial-label"></span>
+    </div>
+    <button type="button" id="stage-dial-show" class="stage-dial-show" hidden></button>
+
     <div id="game-bar" class="game-bar" hidden>
       <p id="game-bar-title" class="game-bar-title"></p>
       <input
