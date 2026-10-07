@@ -127,6 +127,86 @@ export const DEPTH_SIDE = { low: 140, mid: 196, high: 252, max: 308 };
 // fast as the device allows; between answers the heights ease toward the
 // newest depth. The depth is scaled by its own 2nd and 98th percentiles,
 // eased too, so a person stepping nearer doesn't make the room flicker.
+// Live r7: the depth's own grid holds at most this many cells (CameraDepth).
+const DEPTH_CELLS = 60000;
+// Live r7 (stability, October 6): a cell is still once it has held this long
+// (seconds), and a still cell's depth jumps only when HOLD answers agree.
+const STILL = 0.6;
+const HOLD = 3;
+
+// Live r7: a depth worked out on a dw by dh grid (d, 0..1, its jumps clean
+// steps after snapEdges), brought up to a gw by gh grid. Where the four
+// depth cells around a fine cell are one surface it is bilinear; across a
+// jump the fine cell takes the side whose cell's colors are nearest its own
+// (guide: the fine grid's RGBA colors; the depth cells' colors are their
+// means), so the outline is as fine as the picture. No guide: bilinear.
+export function upsampleSnap(d, dw, dh, gw, gh, guide = null) {
+  const out = new Float32Array(gw * gh);
+  let gc = null;
+  if (guide && guide.length >= gw * gh * 4) {
+    gc = new Float32Array(dw * dh * 3);
+    const n = new Float32Array(dw * dh);
+    for (let j = 0; j < gh; j++) {
+      const y = Math.min(dh - 1, Math.floor((j * dh) / gh));
+      for (let i = 0; i < gw; i++) {
+        const x = Math.min(dw - 1, Math.floor((i * dw) / gw));
+        const c = y * dw + x;
+        const o = (j * gw + i) * 4;
+        gc[c * 3] += guide[o];
+        gc[c * 3 + 1] += guide[o + 1];
+        gc[c * 3 + 2] += guide[o + 2];
+        n[c]++;
+      }
+    }
+    for (let c = 0; c < dw * dh; c++) for (let k = 0; k < 3; k++) gc[c * 3 + k] /= Math.max(1, n[c]); // prettier-ignore
+  }
+  for (let j = 0; j < gh; j++) {
+    const v = Math.max(0, Math.min(dh - 1, ((j + 0.5) * dh) / gh - 0.5));
+    const y0 = Math.floor(v);
+    const y1 = Math.min(dh - 1, y0 + 1);
+    const ay = v - y0;
+    for (let i = 0; i < gw; i++) {
+      const u = Math.max(0, Math.min(dw - 1, ((i + 0.5) * dw) / gw - 0.5));
+      const x0 = Math.floor(u);
+      const x1 = Math.min(dw - 1, x0 + 1);
+      const ax = u - x0;
+      const a = d[y0 * dw + x0];
+      const b = d[y0 * dw + x1];
+      const c = d[y1 * dw + x0];
+      const e = d[y1 * dw + x1];
+      const lo = Math.min(a, b, c, e);
+      const hi = Math.max(a, b, c, e);
+      const k = j * gw + i;
+      if (hi - lo <= EDGE || !gc) {
+        out[k] = (a * (1 - ax) + b * ax) * (1 - ay) + (c * (1 - ax) + e * ax) * ay;
+        continue;
+      }
+      const o = k * 4;
+      const r = guide[o];
+      const g = guide[o + 1];
+      const bl = guide[o + 2];
+      let best = Infinity;
+      let pick = a;
+      for (const [x, y] of [
+        [x0, y0],
+        [x1, y0],
+        [x0, y1],
+        [x1, y1],
+      ]) {
+        const q = (y * dw + x) * 3;
+        // (The nearer depth cell wins a tie, by a little distance.)
+        const dist = (gc[q] - r) ** 2 + (gc[q + 1] - g) ** 2 + (gc[q + 2] - bl) ** 2 + 40 * ((x - u) ** 2 + (y - v) ** 2); // prettier-ignore
+        if (dist < best) {
+          best = dist;
+          pick = d[y * dw + x];
+        }
+      }
+      out[k] = pick;
+    }
+  }
+  return out;
+}
+
 export class CameraDepth {
   constructor(video, { cols, rows, tier = "mid", mirror = true, depth = true, back = null } = {}) {
     this.video = video;
@@ -143,6 +223,23 @@ export class CameraDepth {
     this.sg = this.small.getContext("2d", { willReadFrequently: true });
     this.heights = new Float32Array(cols * rows); // eased, 0..1
     this.target = new Float32Array(cols * rows);
+    // Live r7 (the mirror's finer grid of October 6): the depth is worked
+    // out on a grid of at most DEPTH_CELLS (what its steps were tuned on, and
+    // what a phone can do on every answer), then brought up to the picture's
+    // grid by upsampleSnap.
+    const ds = Math.min(1, Math.sqrt(DEPTH_CELLS / (cols * rows)));
+    this.dcols = Math.max(16, Math.round(cols * ds));
+    this.drows = Math.max(12, Math.round(rows * ds));
+    this.dt = new Float32Array(this.dcols * this.drows);
+    // Live r7 (the owner's "Please improve stability", October 6): how long
+    // each cell of the picture has held still (seconds; STILL), and for the
+    // depth's grid, how many answers in a row a still cell's depth has
+    // jumped (a jump is taken only when it holds; HOLD).
+    this.stillT = new Float32Array(cols * rows);
+    this.dstill = new Uint8Array(this.dcols * this.drows);
+    this.djump = new Uint8Array(this.dcols * this.drows);
+    this.fjump = new Uint8Array(cols * rows);
+    this.moving = 0; // the share of the picture moving now
     this.have = false; // any depth yet
     this.lo = null;
     this.hi = null;
@@ -203,9 +300,10 @@ export class CameraDepth {
     this.ms = m.ms;
     this.answers++;
     this.status = "";
-    // Resample to the grid (mirrored with the picture) and find the range.
-    const { cols, rows } = this;
-    const t = this.target;
+    // Resample to the depth's grid (mirrored with the picture) and find the
+    // range.
+    const { dcols: cols, drows: rows } = this;
+    const t = this.dt;
     for (let j = 0; j < rows; j++)
       for (let i = 0; i < cols; i++) {
         const u = this.mirror ? 1 - (i + 0.5) / cols : (i + 0.5) / cols;
@@ -235,7 +333,9 @@ export class CameraDepth {
       if (was === null) return now;
       const span = Math.max(1e-6, (this.hi ?? hi) - (this.lo ?? lo));
       if (warm) return was + (now - was) * 0.5;
-      return was + (now - was) * (Math.abs(now - was) < span * 0.05 ? 0.04 : 0.3);
+      // (Live r7, stability: still less while nothing moves.)
+      const small = this.moving < 0.005 ? 0.01 : 0.04;
+      return was + (now - was) * (Math.abs(now - was) < span * 0.05 ? small : 0.3);
     };
     const nlo = ease(this.lo, lo);
     this.hi = ease(this.hi, hi);
@@ -262,10 +362,20 @@ export class CameraDepth {
     // going with the side whose colors it has (snapEdges with the frame's
     // colors), so the cut follows the person's outline in the picture.
     const prev = this.smooth;
+    // Live r7 (stability, October 6): where the picture has held still, the
+    // depth hardly moves: a change within the model's wobble moves a
+    // twentieth of the way, and a bigger one (the model's guess flipping
+    // along an outline) only once it has come HOLD answers in a row.
+    // Where anything moves, the depth follows as before.
+    this.markStill();
     if (prev && prev.length === t.length)
       for (let i = 0; i < t.length; i++) {
         const d = Math.abs(t[i] - prev[i]);
-        const a = warm ? 0.6 : d <= 0.03 ? 0.15 : d >= 0.25 ? 1 : 0.15 + (0.85 * (d - 0.03)) / 0.22;
+        let a = warm ? 0.6 : d <= 0.03 ? 0.15 : d >= 0.25 ? 1 : 0.15 + (0.85 * (d - 0.03)) / 0.22;
+        if (!warm && this.dstill[i]) {
+          this.djump[i] = d > 0.12 ? Math.min(255, this.djump[i] + 1) : 0;
+          a = this.djump[i] >= HOLD ? 1 : 0.05;
+        } else this.djump[i] = 0;
         t[i] = prev[i] + (t[i] - prev[i]) * a;
       }
     this.smooth = Float32Array.from(t);
@@ -276,8 +386,30 @@ export class CameraDepth {
     // answers was tried and left patches on a moving face; it is gone.)
     this.band = colors ? edgeBand(t, cols, rows) : null;
     if (this.band) tidyBand(this.band, t);
-    if (this.back && this.sent) this.back.learn(this.sent, t, cols, rows, this.mirror);
-    if (!this.have) this.heights.set(t);
+    // Up to the picture's grid, its edges following the picture's own colors.
+    const fine = this.target;
+    const up = cols === this.cols && rows === this.rows ? t : upsampleSnap(t, cols, rows, this.cols, this.rows, this.lastColors); // prettier-ignore
+    // Live r7 (stability): a still cell of the picture keeps its depth unless
+    // the new one holds (a cell along the outline otherwise flipped between
+    // the person and the wall as the camera's noise moved the cut).
+    if (this.have && !warm)
+      for (let i = 0; i < up.length; i++) {
+        if (this.stillT[i] < STILL) {
+          this.fjump[i] = 0;
+          continue;
+        }
+        const d = up[i] - fine[i];
+        if (Math.abs(d) > 0.12) {
+          this.fjump[i] = Math.min(255, this.fjump[i] + 1);
+          if (this.fjump[i] < HOLD) up[i] = fine[i];
+        } else {
+          this.fjump[i] = 0;
+          up[i] = fine[i] + d * 0.3;
+        }
+      }
+    fine.set(up);
+    if (this.back && this.sent) this.back.learn(this.sent, fine, this.cols, this.rows, this.mirror); // prettier-ignore
+    if (!this.have) this.heights.set(fine);
     this.have = true;
   }
 
@@ -318,11 +450,36 @@ export class CameraDepth {
     const cur = sg.getImageData(0, 0, cols, rows);
     const cp = cur.data;
     let last = this.lastSmooth;
+    const still = this.stillT;
     if (!last || last.length !== cp.length) last = this.lastSmooth = Float32Array.from(cp);
-    else
+    else {
+      // Live r7 (stability, October 6): which cells changed clearly (and
+      // their neighbors) start over; every other cell has held still a
+      // little longer, and the longer it holds, the longer its colors
+      // average (a quarter of a second at first, up to two seconds), so the
+      // camera's noise stops showing; anything that moves shows at once.
+      const n = cols * rows;
+      const moved = (this.movedBuf ||= new Uint8Array(n));
+      let m = 0;
+      for (let k = 0; k < n; k++) {
+        const i = k * 4;
+        const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
+        moved[k] = d > 40 ? 1 : 0;
+        m += moved[k];
+      }
+      this.moving = m / n;
+      const near = grow(moved, cols, rows, 1);
+      for (let k = 0; k < n; k++) still[k] = near[k] ? 0 : Math.min(60, still[k] + dt);
       for (let i = 0; i < cp.length; i += 4) {
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
-        const a = d <= 18 ? 0.2 : d >= 72 ? 1 : 0.2 + (0.8 * (d - 18)) / 54;
+        // (Live r7, the finer grid of October 6: each cell averages fewer of
+        // the camera's pixels, so a little steadier: an eighth of a change
+        // within the noise, was a fifth. Stability: that eighth is now
+        // a quarter-second average at 30 frames a second, longer as the cell
+        // holds still.)
+        const tau = 0.25 + Math.min(1.75, still[i >> 2] * 0.9);
+        const calm = 1 - Math.exp(-dt / tau);
+        const a = d <= 24 ? calm : d >= 80 ? 1 : calm + ((1 - calm) * (d - 24)) / 56;
         last[i] += (cp[i] - last[i]) * a;
         last[i + 1] += (cp[i + 1] - last[i + 1]) * a;
         last[i + 2] += (cp[i + 2] - last[i + 2]) * a;
@@ -330,12 +487,15 @@ export class CameraDepth {
         cp[i + 1] = last[i + 1];
         cp[i + 2] = last[i + 2];
       }
+    }
     this.lastColors = cp.slice();
     // Live r7: a light unsharp mask on what is drawn (the colors above stay
     // as they are, for the next frame): each cell moves away from the mean
-    // of its 3 by 3 neighborhood by half the difference, so edges a cell or
+    // of its 3 by 3 neighborhood by a share of the difference, so edges a cell or
     // two wide read crisply at phone size. The noise is smoothed first.
-    sharpen(cp, cols, rows, 0.5, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
+    // Live r7 polish (the owner's "the toys could still be sharper", October
+    // 5): 1.2, held to 28 levels (sharpen); was 0.5.
+    sharpen(cp, cols, rows, 1.2, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
     g.putImageData(cur, 0, 0);
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
@@ -355,8 +515,20 @@ export class CameraDepth {
       px[o + 3] = 255;
     }
     g.putImageData(img, cols, 0);
-    if (this.back) this.back.draw(g, cols, rows, gain, hts);
+    if (this.back) this.back.draw(g, cols, rows, gain, hts, dt);
     return true;
+  }
+
+  // Live r7 (stability): a cell of the depth's grid is still where every
+  // cell of the picture under it has held still STILL seconds.
+  markStill() {
+    const { dcols, drows, cols, rows, stillT, dstill } = this;
+    dstill.fill(1);
+    for (let j = 0; j < rows; j++) {
+      const y = Math.min(drows - 1, Math.floor((j * drows) / rows));
+      for (let i = 0; i < cols; i++)
+        if (stillT[j * cols + i] < STILL) dstill[y * dcols + Math.min(dcols - 1, Math.floor((i * dcols) / cols))] = 0; // prettier-ignore
+    }
   }
 
   close() {
@@ -374,6 +546,37 @@ export class CameraDepth {
 // covered are filled from the wall around them (fillHoles), never from the
 // person's own colors, so no second copy of them shows behind.
 const FAR = 0.35; // a cell is wall below this (0 far .. 1 near)
+// Live r7: a mask (w x h, 0 or 1) grown by r cells each way (a box).
+export function grow(m, w, h, r) {
+  const row = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++) {
+    let last = -Infinity;
+    for (let x = 0; x < w; x++) {
+      if (m[y * w + x]) last = x;
+      if (x - last <= r) row[y * w + x] = 1;
+    }
+    last = Infinity;
+    for (let x = w - 1; x >= 0; x--) {
+      if (m[y * w + x]) last = x;
+      if (last - x <= r) row[y * w + x] = 1;
+    }
+  }
+  const out = new Uint8Array(w * h);
+  for (let x = 0; x < w; x++) {
+    let last = -Infinity;
+    for (let y = 0; y < h; y++) {
+      if (row[y * w + x]) last = y;
+      if (y - last <= r) out[y * w + x] = 1;
+    }
+    last = Infinity;
+    for (let y = h - 1; y >= 0; y--) {
+      if (row[y * w + x]) last = y;
+      if (last - y <= r) out[y * w + x] = 1;
+    }
+  }
+  return out;
+}
+
 const BACK_GAP = 0.06; // r6: how far behind the wall it sits (recipe units)
 const GUARD = 4; // Live r7: its cells this near a person never learn the wall
 export class BackPlate {
@@ -415,6 +618,9 @@ export class BackPlate {
         near[y * bc + x] = top >= FAR ? 1 : 0;
         mean[y * bc + x] = sum / m;
       }
+    // (Live r7: the cells within GUARD of a near one, by running distances
+    // along rows then columns, rather than a box search for each cell.)
+    const guard = grow(near, bc, br, GUARD);
     const [cx, cy, cw, ch] = frame.crop;
     for (let y = 0; y < br; y++)
       for (let x = 0; x < bc; x++) {
@@ -424,11 +630,7 @@ export class BackPlate {
         // person's outline a little inside their hair and ears, and those
         // colors, learned as wall, showed as a ghost of the person beside
         // them, seen from the side.
-        let edge = false;
-        for (let j = Math.max(0, y - GUARD); j <= Math.min(br - 1, y + GUARD) && !edge; j++)
-          for (let i = Math.max(0, x - GUARD); i <= Math.min(bc - 1, x + GUARD); i++)
-            if (near[j * bc + i]) edge = true;
-        if (edge) continue;
+        if (guard[c]) continue;
         // The cell's colors: the frame's pixels under it (mirrored with the
         // picture, in the same crop).
         const ua = mirror ? 1 - (x + 1) / bc : x / bc;
@@ -450,11 +652,14 @@ export class BackPlate {
             m++;
           }
         if (!m) continue;
-        const k = seen[c] ? 0.5 : 1;
+        // (Live r7, stability: the wall's colors and depth average over
+        // several answers once seen; they took half of each, and all of its
+        // depth, so the layer's splats moved with the camera's noise.)
+        const k = seen[c] ? 0.2 : 1;
         col[c * 3] += (r / m - col[c * 3]) * k;
         col[c * 3 + 1] += (g / m - col[c * 3 + 1]) * k;
         col[c * 3 + 2] += (b / m - col[c * 3 + 2]) * k;
-        dep[c] = mean[c];
+        dep[c] = seen[c] ? dep[c] + (mean[c] - dep[c]) * 0.25 : mean[c];
         seen[c] = 1;
       }
     for (let c = 0; c < bc * br; c++) {
@@ -463,7 +668,17 @@ export class BackPlate {
       vals[c * 4 + 2] = col[c * 3 + 2];
       vals[c * 4 + 3] = dep[c];
     }
-    fillHoles(vals, seen, bc, br, 4);
+    // Live r7 (the owner's "the splat mirror also needs to improve" of
+    // October 6): the wall the person hides is filled along its rows, from
+    // the wall seen to the left and right, so a shelf or the line where the
+    // wall meets the floor runs on behind them; the coarse fill alone made a
+    // soft blob of the colors all round (the door's white edge, the
+    // picture's), which showed as a pale ghost of the person, seen turned.
+    // (Only its colors: the coarse fill's smooth depth stays, as a row's
+    // ends can be the near floor, and those splats stood out below the
+    // picture.)
+    fillHoles(vals, Float32Array.from(seen), bc, br, 4);
+    rowFill(vals, seen, bc, br);
   }
 
   // Into the canvas's lower half: the colors on the left, the heights (a
@@ -475,7 +690,7 @@ export class BackPlate {
   // stands and just beside), everywhere else they hide; and they sit
   // BACK_GAP behind the wall (a signed offset, relief axis 3). hts: the
   // picture's heights now (0 far .. 1 near).
-  draw(g, cols, rows, gain, hts) {
+  draw(g, cols, rows, gain, hts, dt = 1 / 60) {
     const { cols: bc, rows: br, vals } = this;
     if (!this.img || this.img.width !== cols * 2 || this.img.height !== rows) this.img = g.createImageData(cols * 2, rows); // prettier-ignore
     const px = this.img.data;
@@ -495,6 +710,13 @@ export class BackPlate {
         for (let j = Math.max(0, y - 2); j <= Math.min(br - 1, y + 2); j++)
           for (let i = Math.max(0, x - 2); i <= Math.min(bc - 1, x + 2); i++) show[j * bc + i] = 1;
       }
+    // (Live r7, stability: a splat that shows stays a moment, so one along
+    // the outline doesn't blink on and off as the person's edge wavers.)
+    const hold = (this.hold ||= new Float32Array(bc * br));
+    for (let b = 0; b < bc * br; b++) {
+      hold[b] = show[b] ? 1 : Math.max(0, hold[b] - dt);
+      if (hold[b] > 0) show[b] = 1;
+    }
     for (let j = 0; j < rows; j++) {
       const y = Math.min(br - 1, Math.floor((j * br) / rows));
       for (let i = 0; i < cols; i++) {
@@ -543,6 +765,73 @@ BackPlate.prototype.drawRested = function (g, cols, rows, f) {
 // Fills the cells whose weight is 0 from their weighted neighbors, coarse
 // to fine (push-pull): each coarser level averages the known cells under
 // it, and each unknown cell takes the level above it.
+// Live r7: fills the colors of each unseen cell of a W by H grid of r, g, b,
+// depth (vals, 4 a cell; seen 0 or 1) from the seen cells nearest it on its row, left and
+// right, the nearer counting more (by the inverse of the distance squared).
+// Each end is the mean of the seen cells within a row or two (so one odd cell
+// doesn't streak), and the filled cells are then smoothed a little down each
+// column. A cell with seen wall on neither side is left for fillHoles.
+export function rowFill(vals, seen, W, H) {
+  const at = (x, y) => (y < 0 || y >= H || x < 0 || x >= W ? 0 : seen[y * W + x]);
+  const filled = new Uint8Array(W * H);
+  const out = new Float32Array(W * H * 4);
+  const end = (x, y, o) => {
+    let n = 0;
+    o[0] = o[1] = o[2] = o[3] = 0;
+    for (let j = y - 2; j <= y + 2; j++)
+      for (let i = x - 1; i <= x + 1; i++) {
+        if (!at(i, j)) continue;
+        const c = (j * W + i) * 4;
+        for (let k = 0; k < 4; k++) o[k] += vals[c + k];
+        n++;
+      }
+    for (let k = 0; k < 4; k++) o[k] /= n;
+  };
+  const L = [0, 0, 0, 0];
+  const R = [0, 0, 0, 0];
+  for (let y = 0; y < H; y++) {
+    let x = 0;
+    while (x < W) {
+      if (seen[y * W + x]) {
+        x++;
+        continue;
+      }
+      let x1 = x;
+      while (x1 < W && !seen[y * W + x1]) x1++;
+      const hasL = x > 0;
+      const hasR = x1 < W;
+      if (hasL) end(x - 1, y, L);
+      if (hasR) end(x1, y, R);
+      for (let i = x; i < x1; i++) {
+        if (!hasL && !hasR) break;
+        const dl = i - x + 1;
+        const dr = x1 - i;
+        const wl = hasL ? 1 / (dl * dl) : 0;
+        const wr = hasR ? 1 / (dr * dr) : 0;
+        const c = (y * W + i) * 4;
+        for (let k = 0; k < 3; k++) out[c + k] = (L[k] * wl + R[k] * wr) / (wl + wr);
+        filled[y * W + i] = 1;
+      }
+      x = x1;
+    }
+  }
+  // Down each column, over the filled cells only (a 5-row mean).
+  for (let x = 0; x < W; x++)
+    for (let y = 0; y < H; y++) {
+      const c = y * W + x;
+      if (!filled[c]) continue;
+      const acc = [0, 0, 0, 0];
+      let n = 0;
+      for (let j = Math.max(0, y - 2); j <= Math.min(H - 1, y + 2); j++) {
+        const q = j * W + x;
+        if (!filled[q]) continue;
+        for (let k = 0; k < 4; k++) acc[k] += out[q * 4 + k];
+        n++;
+      }
+      for (let k = 0; k < 3; k++) vals[c * 4 + k] = acc[k] / n;
+    }
+}
+
 export function fillHoles(vals, w, W, H, ch) {
   if (W <= 1 && H <= 1) return;
   const cw = Math.ceil(W / 2);
@@ -790,6 +1079,7 @@ export function tidyBand(band, d) {
 
 // Live r7: an unsharp mask on RGBA pixels (w x h) in place: c + amount (c -
 // the 3 by 3 box mean), by rows then columns.
+const CORE = 4; // levels (sharpen)
 export function sharpen(px, w, h, amount, tmp) {
   for (let ch = 0; ch < 3; ch++) {
     for (let y = 0; y < h; y++)
@@ -807,7 +1097,14 @@ export function sharpen(px, w, h, amount, tmp) {
       for (let ch = 0; ch < 3; ch++) {
         const m = (tmp[(y0 * w + x) * 3 + ch] + tmp[(y * w + x) * 3 + ch] + tmp[(y1 * w + x) * 3 + ch]) / 3; // prettier-ignore
         const o = (y * w + x) * 4 + ch;
-        px[o] = px[o] + amount * (px[o] - m);
+        // (Live r7 polish: the push is held to 28 levels, so a strong edge
+        // (an eye's rim) gets no halo while fine detail still sharpens; and a
+        // difference within the camera's leftover noise, a few levels, gets
+        // little of it (coring), so the picture is no less steady.)
+        const d = px[o] - m;
+        const ad = d < 0 ? -d : d;
+        const push = amount * (ad < CORE ? (d * ad) / CORE : d);
+        px[o] = px[o] + (push > 28 ? 28 : push < -28 ? -28 : push);
       }
   }
 }
@@ -863,8 +1160,10 @@ export function gridColors(frame, cols, rows, mirror) {
 
 // Live r7 (the owner's "keep making it sharper" of October 5, 2026): a
 // picture splat's diameter over its cell's width. 1.45 blurred the picture;
-// at 1.2 neighbors still overlap, so no gaps show when it is turned.
-const SPREAD = 1.2;
+// at 1.2 neighbors still overlap, so no gaps show when it is turned. The
+// polish round: 1.1, a little sharper and as steady turned (1.0 was sharper
+// still, but less steady turned; docs/handoff/LiveR7.md).
+const SPREAD = 1.1;
 
 export const MIRROR = {
   cols: 128,
@@ -879,7 +1178,7 @@ export const MIRROR = {
 
 // The grid for a splat budget (4 : 3, like most cameras).
 export function mirrorGrid(count) {
-  const n = Math.max(3000, Math.min(60000, Math.floor(count * 0.8)));
+  const n = Math.max(3000, Math.min(140000, Math.floor(count * 0.8)));
   const cols = Math.max(64, Math.round(Math.sqrt((n * 4) / 3)));
   return { cols, rows: Math.round((cols * 3) / 4) };
 }
@@ -981,7 +1280,10 @@ export function buildMirror(
     part,
     vs: withBack ? 0.5 : 1,
   });
-  const back = withBack && live.camera?.video ? { cols: Math.ceil(cols / 2), rows: Math.ceil(rows / 2) } : null; // prettier-ignore
+  // (Live r7: half the depth's grid each way, as before the picture's grid
+  // grew finer: the wall it learns is no finer than the depth it learns from.)
+  const ds = Math.min(1, Math.sqrt(DEPTH_CELLS / (cols * rows)));
+  const back = withBack && live.camera?.video ? { cols: Math.ceil((cols * ds) / 2), rows: Math.ceil((rows * ds) / 2) } : null; // prettier-ignore
   if (back)
     reliefGrid(k, {
       cols: back.cols,
@@ -1070,10 +1372,10 @@ function drawStillRested(g) {
 // Live r7 (the owner's push notes of October 4: "especially with the
 // hologram view. It's like stuff is kind of put on top of the face"): the
 // person (the near part, from the depth) is a clean cyan picture of
-// themselves, with no lines or glow on them. The scanlines (drifting slowly
-// upward) are only in the room behind, which is dimmer, and the glow is a
-// soft rim on the room just outside the person's outline, so it lies behind
-// and around them, never over them.
+// themselves, with no lines or glow on them. The scanlines are only in the
+// room behind, which is dimmer, and the glow is a soft rim on the room just
+// outside the person's outline, so it lies behind and around them, never
+// over them.
 const RIM = 4; // cells
 export function hologram(g, cols, rows, time) {
   const img = g.getImageData(0, 0, cols, rows);
@@ -1110,7 +1412,9 @@ export function hologram(g, cols, rows, time) {
       if (i < cols - 1) dist[k] = Math.min(dist[k], dist[k + 1] + 1);
       if (j < rows - 1) dist[k] = Math.min(dist[k], dist[k + cols] + 1);
     }
-  const shift = Math.floor(time * 6) % 3;
+  // (Live r7, stability, October 6: the scanlines stand still; stepping a
+  // row six times a second, they made the room flicker.)
+  const shift = 0;
   for (let j = 0; j < rows; j++)
     for (let i = 0; i < cols; i++) {
       const k = j * cols + i;
