@@ -59,6 +59,11 @@ attractors, 4D shapes and Fourier text". All five items are built; clips go on E
    five letters at a time (the groups share the tokens and take turns, 2.6 s each); lighter, thinner
    circles behind words in 2D. Up to six letters behave as before.
 
+- Owner's marks (October 7, 2026): the riders, Mandelbulb variants and Fourier text "Looks right";
+  the attractors, the 4D shapes and the hypercube theme "Just sharper". Done: even splats, one color
+  round each thin tube (no per-splat light), `density: 1.6` on the attractors, the 4D shapes and the
+  hypercube; nine `-r2` cards posted.
+
 Tests: `tests/mt2.spec.mjs` (12 Node-side checks plus 7 screenshot tests). Evidence:
 `docs/evidence/{rossler,thomas,aizawa}-attractor.json`, `five-cell`, `sixteen-cell`,
 `twenty-four-cell`, `duoprism`.
@@ -77,6 +82,8 @@ Tests: `tests/mt2.spec.mjs` (12 Node-side checks plus 7 screenshot tests). Evide
   revolution, so the Julia points are off the axis.
 - **A control's ease can change per build**: motion.js reads `def.ease` each frame, so the Fourier
   build sets the spin's length for long text.
+- **Grain on thin tubes** came from light that changed splat by splat round a tube a few pixels
+  wide; one color round the tube, even placement and a higher density fixed it.
 - `tools/effect-clip.mjs --opt` takes one option; for clips with two I patched it locally
   (`key=value;key=value`) and did not commit that.
 
