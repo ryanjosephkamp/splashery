@@ -205,7 +205,7 @@ async function gazetteerPlaces(world, radiusKm) {
       } else if (nearest) {
         const f = nearest.f;
         title = `Near ${f[0]}`;
-        lines.push(`${km(Math.max(1, nd))} km from the ${kind(f[1])} ${f[0]}`);
+        lines.push(`${kind(f[1])}, ${km(Math.max(1, nd))} km away`);
       } else title = "Unnamed ground";
       // A bigger feature it lies on (a caldera on its volcano), and the broad
       // ground round it (a mare, a plain).
