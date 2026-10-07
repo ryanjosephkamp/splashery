@@ -18,6 +18,7 @@ import { quatAxisAngle, quatMul, quatFromTo, quatRotate, mix, shade } from "./ki
 import { inked } from "./font.js";
 import { evenBox, evenDisc, evenEllipsoid } from "./packs/even.js";
 import { rigPieces } from "./physics/joints.js"; // lane Hands engine B
+import { DOG_FILL } from "./packs/dog-plush-fill.js"; // lane Fix9
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -2023,6 +2024,50 @@ export const RIGS = {
         0.012 * Math.abs(spring(e - 2.3, 6, 40)) * band(e, 2.25, 2.35) * (1 - band(e, 2.45, 2.6));
       out.body = { quat: q, offset: [rim[0] - moved[0], rim[1] - moved[1] + drop, rim[2] - moved[2]] }; // prettier-ignore
     },
+  },
+
+  // Lane Fix9: the dog plush's hidden core. The capture never saw the plush's underside or the
+  // mat under it, so there were holes right through it where it meets the mat (dark gaps under
+  // its head and paws). A solid core fills the plush from the mat up to its lowest fur, cell by
+  // cell (tools/fx9-dog-fill.mjs), each the color of the fur above it and darker toward the mat,
+  // as in a crease. The fur covers it everywhere else, so it shows only through those gaps.
+  "dog-plush": {
+    addon: {
+      count: 24000,
+      build(k) {
+        const { grid: G, x0, mat } = DOG_FILL;
+        const cells = DOG_FILL.cells.split(";").map((c) => {
+          const [a, b, h, hex] = c.split(",");
+          return { x: x0 + Number(a) * G, z: x0 + Number(b) * G, h: Number(h) / 100, col: "#" + hex }; // prettier-ignore
+        });
+        // Each cell gets splats by its height (its column's volume).
+        const acc = [];
+        let total = 0;
+        for (const c of cells) acc.push((total += c.h + 0.02));
+        k.cloud({ share: 1, pattern: false }, (rand) => {
+          const r = rand() * total;
+          let lo = 0;
+          let hi = acc.length - 1;
+          while (lo < hi) {
+            const m = (lo + hi) >> 1;
+            if (acc[m] < r) lo = m + 1;
+            else hi = m;
+          }
+          const c = cells[lo];
+          const y = mat - 0.02 + (c.h + 0.02) * rand();
+          const up = Math.max(0, (y - mat) / Math.max(c.h, 0.01));
+          return {
+            p: [c.x + G * rand(), y, c.z + G * rand()],
+            n: [0, 1, 0],
+            flat: 0,
+            jitter: 0,
+            opacity: 1,
+            color: shade(c.col, 0.34 + 0.4 * up),
+          };
+        });
+      },
+    },
+    parts: [],
   },
 
   // ---- Shelf shapes (procedural) ------------------------------------------------------
