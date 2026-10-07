@@ -1597,7 +1597,7 @@
       "candidates": []
     },
     "periodic-table": {
-      "status": "ready",
+      "status": "site",
       "said": "(October 2, 2026, review) the whooshing sound ... doesn't need to be so loud ... I'd like for there to be, like, a faint synchronized sound that plays for each element as each of those subatomic particles gets packed into the nucleus. (October 6, 2026, walkthrough) the sound that plays as the subatomic particles are being added to the nucleus ... It's kind of like nails on a chalkboard ... maybe a little bit more like the sorting sound for the splat simulator.",
       "note": "The whoosh on tapping an element: keep it but much more subtle. Add a faint sound in sync with each proton and neutron packing into the nucleus (not bubbles, not plastic blocks). Then (October 6): the ticks grate like nails on a chalkboard; make them more like the splat simulator's sorting.",
       "plan": "Now: in the site and new to hear (lane Elements, October 6, 2026): for each proton and neutron as it packs into the nucleus, a soft pebble's click like the splat simulator's sorting, instead of the bright 2.7 to 3.3 kHz clacks (Sound C). On the board, iron's nucleus (26 protons, 30 neutrons): A, the new clicks; B, the old clacks to compare.",
