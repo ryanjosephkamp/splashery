@@ -25,6 +25,14 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #393.
      7p), grouped by shell. The tap cuts the orbital and lifts the front half away, and the cut face
      shows |ψ|² in that plane.
 
+- October 7, 2026, 21:30 UTC: the owner marked all 11 cards "Just sharper". Done (commit b2770fa8):
+  both toys use the sharp splat kernel (labs) and density 2. The atoms are thin, slightly larger
+  overlapping splats, so they are smooth, solid balls. The orbitals have a finer cut face, a more
+  solid shell without the false walls between lobes, and their haze stays inside the surface. All 11
+  clips were re-rendered at 2× (780 px) with `tools/lat-clip.mjs` (effect-clip with labs on) and
+  posted as `-r2` cards at about 22:50 UTC, with `replacedBy` set on the old cards.
+  `tests/lat.spec.mjs`: 13 passed. Thumbnails re-rendered.
+
 ## Notes
 
 - `src/lattice/cells.js` covers:
@@ -68,9 +76,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #393.
 ## For the Operator
 
 - No engine change is needed. The lane PR (#393) is labs only.
-- Clips: 11 cards on Effect review page 2, in the lane record `Lattices`. The unit-cell cards are
-  `lat-cells-diamond`, `-graphite`, `-ice`, `-copper`, `-iron`, `-magnesium` and `-thermal`; the
-  orbital cards are `lat-orbital-5f`, `-5g`, `-6d` and `-4d`. All were posted October 7, 2026 and
-  wait for the owner's marks.
+- Clips: 11 cards on Effect review page 2 (now their `-r2` versions), in the lane record `Lattices`.
+  The unit-cell cards are `lat-cells-diamond`, `-graphite`, `-ice`, `-copper`, `-iron`, `-magnesium`
+  and `-thermal`; the orbital cards are `lat-orbital-5f`, `-5g`, `-6d` and `-4d`. All were posted
+  October 7, 2026 and wait for the owner's marks.
 - Tests: `tests/lat.spec.mjs` (13 passed); the shared-list specs (help, unit, snda to sndd,
   evidence-computing, hl1) passed (89). The full suite is for the Integrator.
