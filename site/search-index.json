@@ -4055,7 +4055,7 @@
     "u": "toys/data-in-3d/",
     "k": "toy",
     "s": "Studio",
-    "d": "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
+    "d": "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap anywhere on the chart.",
     "w": "data in 3d studio studio data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel data-in-3d",
     "i": "../assets/toys/data-in-3d/thumb.webp",
     "l": 1
