@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 439 toys. 409 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
+- 446 toys. 416 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 427.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 19.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -50,7 +50,8 @@ Proposals below are suggestions; the owner may change them.
   Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
   cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
   Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
-  and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music box, Fountain pen,
+  and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
+  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
   Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
   Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
   Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
@@ -2111,7 +2112,7 @@ Proposals below are suggestions; the owner may change them.
     like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
     synthesized sound as a fallback.
 
-## Maths (17)
+## Maths (24)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
@@ -2244,6 +2245,76 @@ Proposals below are suggestions; the owner may change them.
     a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
     without turning, and one stays put.
   - Sound: Wooden slides, and a click as each piece lands.
+- **Rössler attractor** (`rossler-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Rössler attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **Thomas attractor** (`thomas-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Thomas attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **Aizawa attractor** (`aizawa-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Aizawa attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **5-cell** (`five-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **16-cell** (`sixteen-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 16-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **24-cell** (`twenty-four-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 24-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **Duoprism** (`duoprism`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the duoprism (3,4 by default; each polygon 3 to 6 sides). The
+    corners are true 4D points turned in the planes of x and w and of y and w and seen in
+    perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn
+    through the fourth dimension (about 5 s) and home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
   - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
     type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that

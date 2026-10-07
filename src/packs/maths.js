@@ -805,6 +805,27 @@ const PALETTES = {
   candy: ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"],
 };
 
+// Lane Math r2: color themes for the 4D shapes: [first, second, third, fourth]; the
+// hypercube uses the first for its outer cube and the second for its inner.
+const FOUR_D_THEMES = {
+  classic: ["#35c3f0", "#f72585", "#ffd166", "#7bf1a8"],
+  sunset: ["#ffb347", "#e8436f", "#ff7a3d", "#ffe08a"],
+  ocean: ["#5ee7ff", "#3f6ff0", "#22c3a6", "#b8f3ff"],
+  jewel: ["#c77dff", "#8f3bdb", "#ff5ca8", "#ffd700"],
+  candy: ["#ff595e", "#1982c4", "#ffca3a", "#8ac926"],
+  neon: ["#39ff14", "#ff2bd6", "#00e5ff", "#fff200"],
+  silver: ["#f2f4f8", "#8d9bb8", "#c9d1e0", "#aab6cc"],
+};
+const FOUR_D_THEME_CHOICES = [
+  { id: "classic", label: "Blue and pink" },
+  { id: "sunset", label: "Sunset" },
+  { id: "ocean", label: "Ocean" },
+  { id: "jewel", label: "Jewel" },
+  { id: "candy", label: "Candy" },
+  { id: "neon", label: "Neon" },
+  { id: "silver", label: "Silver" },
+];
+
 // The tesseract: 16 corners (x, y, z, w each +-1; corner i has w = +1 when
 // i >= 8) and the 32 edges joining corners that differ in one coordinate.
 // Seen in perspective from 4D, the w = +1 cube shows at 0.9 and the w = -1
@@ -1619,6 +1640,17 @@ export const RECIPES = {
 
   hypercube: {
     alive: true,
+    // Lane Math r2: color themes (FOUR_D_THEMES); the first is the
+    // tesseract's own blue and pink.
+    options: [
+      {
+        key: "colors",
+        label: "Colors",
+        type: "select",
+        default: "classic",
+        choices: FOUR_D_THEME_CHOICES,
+      },
+    ],
     controls: [
       { key: "turn", label: "4D turn", type: "slider", default: 0.85 },
       { key: "flip", label: "Turn inside out", type: "pulse", ease: 5 },
@@ -1639,9 +1671,10 @@ export const RECIPES = {
       out.tokens = TESS.map((v) => ({ offset: sub(tessShow(tessTurn(v, a)), tessShow(v)) }));
       out.body = { quat: quatAxisAngle(unit([0.25, 1, 0.12]), t * 0.28) };
     },
-    build(k) {
-      const outerCol = "#35c3f0";
-      const innerCol = "#f72585";
+    build(k, o) {
+      const theme = FOUR_D_THEMES[o?.colors] || FOUR_D_THEMES.classic;
+      const outerCol = theme[0];
+      const innerCol = theme[1];
       const colOf = (i) => (TESS[i][3] > 0 ? outerCol : innerCol);
       const glow = (col, n) => shade(col, 0.85 + 0.35 * Math.max(0, dot(n, LIGHT)));
       // Round splats: skinned splats keep their built orientation.
@@ -4649,3 +4682,462 @@ color: shade(tri.col, 0.7),
     },
   },
 });
+
+// ---- Lane Math r2: three more strange attractors ------------------------------------
+// Each is a flow dp/dt = f(p) in three dimensions, integrated with the
+// classic fourth-order Runge-Kutta method. The glowing path is one long
+// solution, built once; a tap drops a tracer, a point integrated live (fixed
+// steps of h in the system's own time, so the motion is the same at any
+// frame rate) that leaves a short trail behind it. Up to four tracers run
+// at once; a fifth replaces the oldest. A tap on the toy drops it where you
+// tapped (off the attractor it is pulled onto it: that is what makes it an
+// attractor); the Play button drops it at a point of the path.
+const rk4 = (f, p, h) => {
+  const k1 = f(p);
+  const k2 = f(add(p, mul(k1, h / 2)));
+  const k3 = f(add(p, mul(k2, h / 2)));
+  const k4 = f(add(p, mul(k3, h)));
+  return add(p, mul(add(add(k1, mul(k2, 2)), add(mul(k3, 2), k4)), h / 6));
+};
+// up: which of the system's axes points up in the toy (the others follow
+// round, so the picture is turned, never mirrored or stretched).
+const ATTRACTORS = {
+  // Otto Rössler, 1976: a = b = 0.2, c = 5.7.
+  "rossler-attractor": {
+    f: ([x, y, z]) => [-y - z, x + 0.2 * y, 0.2 + z * (x - 5.7)],
+    p0: [1, 1, 0],
+    h: 0.01,
+    settle: 3000,
+    steps: 26000,
+    up: 2,
+    colorBy: "height",
+    stops: ["#0c2f4a", "#13697f", "#1fa69a", "#7fd17a", "#f3d35b", "#ff8a3d"],
+    tracers: ["#ffffff", "#ff5d8f", "#ffd23f", "#7af0ff"],
+  },
+  // René Thomas, 1999: b = 0.208186, near the edge of chaos.
+  "thomas-attractor": {
+    f: ([x, y, z]) => {
+      const b = 0.208186;
+      return [Math.sin(y) - b * x, Math.sin(z) - b * y, Math.sin(x) - b * z];
+    },
+    p0: [0.1, 0, 0],
+    h: 0.05,
+    settle: 1500,
+    steps: 50000,
+    up: 1,
+    radius: 0.008,
+    colorBy: "angle",
+    stops: ["#ff6b6b", "#ffd166", "#06d6a0", "#118ab2", "#9b5de5", "#ff6b6b"],
+    tracers: ["#ffffff", "#ffe66d", "#ff4f9a", "#5ef2ff"],
+  },
+  // Yoji Aizawa's system (as given by Langford, 1984): a = 0.95, b = 0.7,
+  // c = 0.6, d = 3.5, e = 0.25, f = 0.1.
+  "aizawa-attractor": {
+    f: ([x, y, z]) => [
+      (z - 0.7) * x - 3.5 * y,
+      3.5 * x + (z - 0.7) * y,
+      0.6 + 0.95 * z - (z * z * z) / 3 - (x * x + y * y) * (1 + 0.25 * z) + 0.1 * z * x * x * x,
+    ],
+    p0: [0.1, 0, 0],
+    h: 0.005,
+    settle: 4000,
+    steps: 22000,
+    up: 2,
+    radius: 0.0065,
+    colorBy: "height",
+    stops: ["#140f3d", "#33238f", "#6a3fd1", "#c34fc9", "#ff8fb1", "#fff1d6"],
+    tracers: ["#fff7c2", "#4ef0c8", "#ff6b6b", "#7ab8ff"],
+  },
+};
+const TRACERS = 4;
+const TRAIL = 11; // trail segments behind each tracer's head
+const TRAIL_SECS = 1.5;
+const TRACER_TOKENS = TRAIL + 1;
+const HEAD_SPEED = 0.75; // the heads' mean speed, in toy units a second
+
+// The system's path, its frame (center and scale, so the toy is about 2
+// across) and how fast its time runs. show(p) maps a state to the toy;
+// back(q) maps a toy point to a state.
+const ATTR_CACHE = new Map();
+function attractorInfo(id) {
+  if (ATTR_CACHE.has(id)) return ATTR_CACHE.get(id);
+  const A = ATTRACTORS[id];
+  const perm = A.up === 2 ? [0, 2, 1] : A.up === 0 ? [1, 0, 2] : [0, 1, 2];
+  // Up as the toy's Y; the swap of two axes is undone by flipping the third.
+  const flip = A.up === 1 ? 1 : -1;
+  const turn = (p) => [p[perm[0]], p[perm[1]], flip * p[perm[2]]];
+  const unturn = (q) => {
+    const p = [0, 0, 0];
+    p[perm[0]] = q[0];
+    p[perm[1]] = q[1];
+    p[perm[2]] = flip * q[2];
+    return p;
+  };
+  let p = A.p0;
+  for (let i = 0; i < A.settle; i++) p = rk4(A.f, p, A.h);
+  const raw = [];
+  for (let i = 0; i < A.steps; i++) {
+    p = rk4(A.f, p, A.h);
+    raw.push(turn(p));
+  }
+  const lo = [Infinity, Infinity, Infinity];
+  const hi = [-Infinity, -Infinity, -Infinity];
+  for (const q of raw)
+    for (let j = 0; j < 3; j++) {
+      lo[j] = Math.min(lo[j], q[j]);
+      hi[j] = Math.max(hi[j], q[j]);
+    }
+  const center = mul(add(lo, hi), 0.5);
+  const scale = 2 / Math.max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]);
+  const show = (s) => mul(sub(turn(s), center), scale);
+  const back = (q) => unturn(add(mul(q, 1 / scale), center));
+  const pts = [];
+  let dist = 0;
+  for (let i = 0; i < raw.length; i++) {
+    if (i % 2 === 0) pts.push(mul(sub(raw[i], center), scale));
+    if (i) dist += len(sub(raw[i], raw[i - 1])) * scale;
+  }
+  const speed = dist / ((raw.length - 1) * A.h); // toy units per unit of system time
+  const info = { A, show, back, pts, rate: HEAD_SPEED / speed, half: mul(sub(hi, lo), scale / 2) };
+  ATTR_CACHE.set(id, info);
+  return info;
+}
+
+// The tracers' state for one build of the toy (kept between frames).
+const TRACER_STATE = new WeakMap();
+function tracerState(data, I, tap) {
+  let st = TRACER_STATE.get(data);
+  if (!st) {
+    const lag = Math.max(1, Math.round((TRAIL_SECS / TRAIL) * (I.rate / I.A.h)));
+    st = { t: null, tapN: tap?.n ?? 0, lag, slots: [], next: 0, sorted: -1, spawned: 0 };
+    TRACER_STATE.set(data, st);
+    spawnTracer(st, I, I.back(I.pts[0]));
+  }
+  return st;
+}
+function spawnTracer(st, I, s0) {
+  const n = TRAIL * st.lag + 1;
+  const hist = new Float64Array(n * 3);
+  for (let i = 0; i < n; i++) hist.set(s0, i * 3);
+  st.slots[st.next] = { s: s0.slice(), hist, head: 0, n, acc: 0, age: 0 };
+  st.next = (st.next + 1) % TRACERS;
+  st.spawned++;
+}
+// Where a tap drops a tracer: the tapped point, kept within the attractor's
+// box (a little beyond it), or, from the Play button, a point of the path.
+function dropPoint(I, st, point) {
+  if (point && point.every(Number.isFinite)) {
+    const q = point.map((v, j) => clamp(v, -I.half[j] * 1.1, I.half[j] * 1.1));
+    return I.back(q);
+  }
+  const i = Math.floor(I.pts.length * ((st.spawned * 0.618034) % 1));
+  return I.back(I.pts[i]);
+}
+function stepTracers(st, I, dt) {
+  const { f, h } = I.A;
+  for (const tr of st.slots) {
+    if (!tr) continue;
+    tr.age += dt;
+    tr.acc += dt * I.rate;
+    while (tr.acc >= h) {
+      tr.acc -= h;
+      let s = rk4(f, tr.s, h);
+      // A point thrown far off (or a broken number) starts again on the path.
+      const q = I.show(s);
+      if (!s.every(Number.isFinite) || q.some((v, j) => Math.abs(v) > I.half[j] * 3 + 1))
+        s = I.back(I.pts[0]);
+      tr.s = s;
+      tr.head = (tr.head + 1) % tr.n;
+      tr.hist.set(s, tr.head * 3);
+    }
+  }
+}
+
+function attractorRecipe(id) {
+  return {
+    alive: true,
+    controls: [
+      { key: "glow", label: "Glow", type: "slider", default: 0.6 },
+      { key: "drop", label: "Drop a tracer", type: "pulse", ease: 1.2 },
+    ],
+    action: { key: "drop", label: "Drop a tracer" },
+    drive(t, c, out, info) {
+      const I = attractorInfo(id);
+      const data = info?.data || attractorRecipe;
+      const tap = info?.tap;
+      const st = tracerState(data, I, tap);
+      if (tap && tap.n !== st.tapN) {
+        st.tapN = tap.n;
+        spawnTracer(st, I, dropPoint(I, st, tap.point));
+      }
+      const dt = st.t === null ? 0 : clamp(t - st.t, 0, 0.1);
+      st.t = t;
+      stepTracers(st, I, dt);
+      const tokens = [];
+      for (let i = 0; i < TRACERS; i++) {
+        const tr = st.slots[i];
+        out.parts[`tr${i}`] = { visible: tr ? 1 : 0 };
+        for (let k = 0; k <= TRAIL; k++) {
+          let off = [0, 0, 0];
+          if (tr) {
+            const j = (((tr.head - k * st.lag) % tr.n) + tr.n) % tr.n;
+            off = I.show([tr.hist[j * 3], tr.hist[j * 3 + 1], tr.hist[j * 3 + 2]]);
+          }
+          tokens[i * TRACER_TOKENS + k] = {
+            offset: off,
+            visible: k ? 1 : tr ? smoothstep(0, 0.25, tr.age) : 0,
+          };
+        }
+      }
+      out.tokens = tokens;
+      // The tracers sort again where they are, a few times a second.
+      const slot = Math.floor(t / 0.3);
+      if (slot !== st.sorted) {
+        st.sorted = slot;
+        out.resort = true;
+      }
+      const flash = c.drop > 0 ? Math.sin(Math.PI * Math.min(1, (1 - c.drop) * 2)) : 0;
+      out.glow = [1, 0.95, 0.85, 0.15 + 0.8 * c.glow + 0.9 * flash];
+    },
+    build(k) {
+      const I = attractorInfo(id);
+      const A = I.A;
+      k.data = { attractor: id };
+      const color = (c) => {
+        const u =
+          A.colorBy === "angle"
+            ? (Math.atan2(c.p[2], c.p[0]) / TAU + 0.5 + 0.15 * c.p[1]) % 1
+            : clamp((c.p[1] + I.half[1]) / (2 * I.half[1]), 0, 1);
+        return shade(ramp(A.stops, u), 0.92 + 0.12 * Math.max(0, dot(c.n, LIGHT)));
+      };
+      k.add(polyTube(I.pts, A.radius ?? 0.011), {
+        size: 0.7,
+        flat: 0.6,
+        stretch: 3,
+        kind: "pulse",
+        params: (c) => [(c.t * 6) % 1, 0],
+        color,
+      });
+      // The tracers: each a bright head (token 0 of its twelve) and a trail
+      // skinned between the head and eleven points behind it, all built at
+      // the middle and moved by their tokens.
+      for (let i = 0; i < TRACERS; i++) {
+        const part = k.part(`tr${i}`);
+        const col = A.tracers[i];
+        const base = i * TRACER_TOKENS;
+        k.cloud({ share: 0.006, size: 1.4, pattern: false, fit: false }, (rand, j, n) => {
+          const halo = j < n * 0.35;
+          return {
+            p: mul(unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]), (halo ? 0.05 : 0.024) * Math.cbrt(rand())), // prettier-ignore
+            color: halo ? col : mix(col, "#ffffff", 0.6),
+            opacity: halo ? 0.35 : 1,
+            size: halo ? 2.2 : 1,
+            kind: "token",
+            params: [base, 0],
+            part,
+          };
+        });
+        k.cloud({ share: 0.016, size: 1, pattern: false, fit: false }, (rand, j, n) => {
+          const s = (j + 0.5) / n; // 0 at the head, 1 at the tail
+          const seg = Math.min(TRAIL - 1, Math.floor(s * TRAIL));
+          const f = s * TRAIL - seg;
+          const fade = 1 - s;
+          return {
+            p: [0, 0, 0],
+            color: mix(mix(col, "#ffffff", 0.3 * fade), "#1a1030", 0.35 * s),
+            opacity: 0.5 + 0.5 * fade,
+            size: 1.1 + 1.3 * fade,
+            skin: [base + seg, base + seg + 1, f],
+            part,
+          };
+        });
+      }
+    },
+  };
+}
+Object.assign(RECIPES, Object.fromEntries(Object.keys(ATTRACTORS).map((id) => [id, attractorRecipe(id)]))); // prettier-ignore
+
+// ---- Lane Math r2: shapes in four dimensions -------------------------------------
+// The regular and uniform 4D shapes, each as corners (scaled to radius 1 in
+// 4D), edges (corner pairs) and a group per corner (for its color).
+const R5 = 1 / Math.sqrt(5);
+function polytope(id, o = {}) {
+  let verts = [];
+  let group = [];
+  if (id === "five-cell") {
+    // The 4-simplex: five corners, each joined to the other four.
+    verts = [
+      [1, 1, 1, -R5],
+      [1, -1, -1, -R5],
+      [-1, 1, -1, -R5],
+      [-1, -1, 1, -R5],
+      [0, 0, 0, 4 * R5],
+    ];
+    group = [0, 1, 2, 3, 4];
+  } else if (id === "sixteen-cell") {
+    // The cross-polytope: the eight points one step along each axis, both
+    // ways; every corner is joined to all but its opposite.
+    for (let a = 0; a < 4; a++)
+      for (const s of [1, -1]) {
+        const v = [0, 0, 0, 0];
+        v[a] = s;
+        verts.push(v);
+        group.push(a);
+      }
+  } else if (id === "twenty-four-cell") {
+    // All arrangements of (±1, ±1, 0, 0): 24 corners. They fall into three
+    // sets of eight (each a 16-cell) by which pairs of axes are zero.
+    const pairs = [
+      [0, 1],
+      [2, 3],
+      [0, 2],
+      [1, 3],
+      [0, 3],
+      [1, 2],
+    ];
+    pairs.forEach(([a, b], pi) => {
+      for (const sa of [1, -1])
+        for (const sb of [1, -1]) {
+          const v = [0, 0, 0, 0];
+          v[a] = sa;
+          v[b] = sb;
+          verts.push(v);
+          group.push(pi >> 1);
+        }
+    });
+  } else if (id === "duoprism") {
+    // The p,q-duoprism: every corner of a p-gon (in the plane of x and y)
+    // paired with every corner of a q-gon (in z and w), edges all one length.
+    const p = o.p ?? 3;
+    const q = o.q ?? 4;
+    const r1 = 1 / (2 * Math.sin(Math.PI / p));
+    const r2 = 1 / (2 * Math.sin(Math.PI / q));
+    for (let i = 0; i < p; i++)
+      for (let j = 0; j < q; j++) {
+        const a = (TAU * i) / p;
+        const b = (TAU * j) / q;
+        verts.push([r1 * Math.cos(a), r1 * Math.sin(a), r2 * Math.cos(b), r2 * Math.sin(b)]);
+        group.push(j / q); // each p-gon ring its own color round the q-gon
+      }
+  }
+  const r = Math.max(...verts.map((v) => Math.hypot(...v)));
+  verts = verts.map((v) => v.map((x) => x / r));
+  // Edges: the corner pairs at the shortest distance.
+  const d4 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2], a[3] - b[3]);
+  let best = Infinity;
+  for (let i = 0; i < verts.length; i++)
+    for (let j = i + 1; j < verts.length; j++) best = Math.min(best, d4(verts[i], verts[j]));
+  const edges = [];
+  for (let i = 0; i < verts.length; i++)
+    for (let j = i + 1; j < verts.length; j++)
+      if (d4(verts[i], verts[j]) < best * 1.001) edges.push([i, j]);
+  return { verts, edges, group };
+}
+// Seen in perspective from a point 2.4 out along w: a corner nearer the eye
+// in 4D (w toward +1) shows bigger.
+const FOUR_D_EYE = 2.4;
+const show4 = (v) => mul([v[0], v[1], v[2]], FOUR_D_EYE / (FOUR_D_EYE - v[3]));
+// A turn by a in the plane of axes i and j.
+const turn4 = (v, i, j, a) => {
+  const out = v.slice();
+  const c = Math.cos(a);
+  const s = Math.sin(a);
+  out[i] = v[i] * c - v[j] * s;
+  out[j] = v[i] * s + v[j] * c;
+  return out;
+};
+
+const FOUR_D = {
+  "five-cell": { theme: "sunset" },
+  "sixteen-cell": { theme: "ocean" },
+  "twenty-four-cell": { theme: "jewel" },
+  duoprism: { theme: "candy" },
+};
+function fourDRecipe(id) {
+  const options = [
+    {
+      key: "colors",
+      label: "Colors",
+      type: "select",
+      default: FOUR_D[id].theme,
+      choices: FOUR_D_THEME_CHOICES,
+    },
+  ];
+  if (id === "duoprism")
+    options.push(
+      { key: "p", label: "First polygon", type: "slider", min: 3, max: 6, step: 1, default: 3 },
+      { key: "q", label: "Second polygon", type: "slider", min: 3, max: 6, step: 1, default: 4 },
+    );
+  return {
+    alive: true,
+    options,
+    controls: [
+      { key: "turn", label: "4D turn", type: "slider", default: 0.85 },
+      { key: "roll", label: "Roll through 4D", type: "pulse", ease: 5 },
+    ],
+    action: { key: "roll", label: "Roll through 4D" },
+    // The corners are tokens placed each frame by true turns in 4D (in the
+    // planes of x and w and of y and w), then seen in perspective from 4D;
+    // every edge is skinned between its two corners, so it stays straight.
+    // At rest the shape rocks gently in 4D. A tap rolls it one whole turn
+    // through the fourth dimension, in the plane of x and w: the far side
+    // (small) swells to the near side (big) and back, home where it began.
+    drive(t, c, out, info) {
+      const P = info?.data?.poly;
+      if (!P) return;
+      const p = progress(c.roll);
+      const a = TAU * easeInOut(band(p, 0.03, 0.97)) + 0.35 * c.turn * Math.sin(t * 0.9);
+      const b = 0.3 * c.turn * Math.sin(t * 0.63 + 1);
+      out.tokens = P.verts.map((v) => ({
+        offset: sub(show4(turn4(turn4(v, 0, 3, a), 1, 3, b)), show4(v)),
+      }));
+      // While it rolls, sort again where the corners are, a few times a second.
+      const m = mem(c);
+      const slot = c.roll > 0 ? Math.floor(p * 20) : -1;
+      if (slot !== m.sortSlot) {
+        m.sortSlot = slot;
+        out.resort = true;
+      }
+      out.body = { quat: quatAxisAngle(unit([0.25, 1, 0.12]), t * 0.28) };
+    },
+    build(k, o) {
+      const P = polytope(id, { p: o.p, q: o.q });
+      const pal = FOUR_D_THEMES[o.colors] || FOUR_D_THEMES[FOUR_D[id].theme];
+      const colOf = (i) => {
+        const g = P.group[i];
+        if (id === "five-cell") return [pal[0], pal[1], pal[2], pal[3], "#ffffff"][g];
+        if (id === "duoprism") return ramp([pal[0], pal[1], pal[2], pal[3], pal[0]], g);
+        return pal[g % 4];
+      };
+      k.data = { poly: P };
+      const glow = (col, n) => shade(col, 0.85 + 0.35 * Math.max(0, dot(n, LIGHT)));
+      const radius = P.verts.length > 16 ? 0.019 : 0.024;
+      for (const [i, j] of P.edges)
+        k.add(polyTube([show4(P.verts[i]), show4(P.verts[j])], radius), {
+          flat: 0.9,
+          skin: (c) => [i, j, c.t],
+          color: (c) => glow(mix(colOf(i), colOf(j), c.t), c.n),
+        });
+      P.verts.forEach((v, i) => {
+        const col = colOf(i);
+        k.add(k.sphere(P.verts.length > 16 ? 0.045 : 0.055), {
+          pos: show4(v),
+          weight: 1.2,
+          flat: 0.5,
+          kind: "token",
+          params: [i, 0],
+          pattern: false,
+          color: (c) => keep(mix(col, "#ffffff", 0.45 + 0.4 * Math.max(0, dot(c.n, HALF)))),
+        });
+      });
+      // Room for the corners as they roll (at most about 1.1 from the middle).
+      for (let a = 0; a < 3; a++)
+        for (const sgn of [1, -1]) {
+          const r = [0, 0, 0];
+          r[a] = 1.15 * sgn;
+          k.reach(r);
+        }
+    },
+  };
+}
+Object.assign(RECIPES, Object.fromEntries(Object.keys(FOUR_D).map((id) => [id, fourDRecipe(id)])));

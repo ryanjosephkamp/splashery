@@ -1534,6 +1534,41 @@ export const TOY_HELP = {
     about:
       "Every splat has a place and a color. Here you program them with math: each splat gets two numbers, u and v, and your equations x, y and z turn them into its place, while hue (or r, g and b) gives its color. Time t runs from 0 to 2π, so the shape can move.\n\nTap it to play one cycle of t and watch the shape move. Pick a sphere, a torus, a Möbius strip, a seashell, a trefoil knot, a wave, a spiral galaxy or a Klein bottle in the Toy tab, or type your own, such as z = sin(u + t). Under Splats, Solid shows a clean surface, Fine a finer one, and Dots every splat on its own. The Tinkerer's Manual explains the whole language.",
   },
+  "rossler-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'In 1976 the chemist Otto Rössler looked for the simplest flow that could be chaotic. His three equations, dx/dt = −y − z, dy/dt = x + 0.2y and dz/dt = 0.2 + z(x − 5.7), have only one term that is not linear. A point spirals outward on a flat disc until it is flung up and folded back into the middle, again and again, never repeating.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and is pulled onto the attractor wherever it starts. Source: O. E. Rössler, "An equation for continuous chaos", Physics Letters A, 1976.',
+  },
+  "thomas-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'The biologist René Thomas wrote down this flow in 1999: dx/dt = sin y − bx, dy/dt = sin z − by and dz/dt = sin x − bz. Each of x, y and z pushes the next one round, so the shape looks the same after you swap them in turn. The number b is friction; here b = 0.208186, where the motion is chaotic.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and wanders through the loops. Source: R. Thomas, "Deterministic chaos seen in terms of feedback circuits", International Journal of Bifurcation and Chaos, 1999.',
+  },
+  "aizawa-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'This flow, known as the Aizawa attractor, spins a point round a ball shape: it circles near the top, slips down the outside and shoots back up a narrow tube through the middle. Its three equations, with six numbers (a = 0.95, b = 0.7, c = 0.6, d = 3.5, e = 0.25, f = 0.1), were studied by Yoji Aizawa and by William Langford.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and is pulled onto the ball wherever it starts. Source: W. F. Langford, "Numerical studies of torus bifurcations", 1984.',
+  },
+  "five-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 5-cell is the simplest shape in four dimensions, the 4D cousin of a triangle and a tetrahedron. It has five corners, each joined to all four others by ten equal edges, and its walls are five tetrahedra. We can only see its shadow: here it is drawn in perspective from a point out along the fourth axis, so corners nearer us in 4D look bigger.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  "sixteen-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 16-cell is the 4D cousin of the octahedron. Its eight corners sit one step out along each of the four axes, both ways, and each corner is joined to every other except the one opposite: 24 edges, and 16 tetrahedra for walls. Each pair of opposite corners has its own color. It is drawn in perspective from 4D, so corners nearer us in 4D look bigger.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  "twenty-four-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 24-cell has no cousin in three dimensions: it exists only in 4D. Its 24 corners are every way to put two ±1s and two zeros in four places, joined by 96 edges, with 24 octahedra for walls. The corners split into three sets of eight, each one a 16-cell, shown in three colors. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  duoprism: {
+    howTo: "Tap to roll it through the fourth dimension. Pick the two polygons in the Toy tab.",
+    about:
+      "A duoprism pairs two polygons at right angles in four dimensions: every corner of one is matched with every corner of the other. A 3,4-duoprism has 3 × 4 = 12 corners, and its walls are prisms. With two squares it is the hypercube. Each ring of the first polygon has its own color. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Pick each polygon, from a triangle to a hexagon, in the Toy tab. Source: J. H. Conway, H. Burgiel and C. Goodman-Strauss, The Symmetries of Things, 2008.",
+  },
   "pythagoras-proof": {
     howTo: "Tap it to slide the triangles and show that a² + b² = c².",
     about:

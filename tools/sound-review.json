@@ -2429,6 +2429,55 @@
       "plan": "",
       "candidates": []
     },
+    "rossler-attractor": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "candidates": []
+    },
+    "thomas-attractor": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "candidates": []
+    },
+    "aizawa-attractor": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "candidates": []
+    },
+    "five-cell": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
+    "sixteen-cell": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
+    "twenty-four-cell": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
+    "duoprism": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
     "screen": {
       "status": "site",
       "said": "(September 30, 2026, on the Sound Board) \"On\" sound doesn't need the hum; \"Off\" sound is good.",
