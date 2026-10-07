@@ -1266,6 +1266,17 @@ export const TOYS = [
     tags: "galaxy galaxies hubble eso telescope whirlpool m51 pinwheel m101 phantom m74 m83 spiral real picture",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: powers-of-ten (lane Powers of ten) ----
+  {
+    id: "powers-of-ten",
+    label: "Powers of ten",
+    category: "space",
+    kind: "kit",
+    pack: "powers-of-ten",
+    labs: true,
+    tags: "powers of ten zoom scale sizes universe galaxy stars sun planets earth city garden leaf cell microscope molecule real",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.9 },
+  },
   {
     id: "saturn-v",
     label: "Saturn V",
@@ -3661,6 +3672,39 @@ export const TOYS = [
     labs: true,
     tags: "qr code color rgb red green blue three codes multiplex channels",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  // ---- Pack: qr-craft (lane QR craft) ----
+  {
+    id: "qr-picture",
+    label: "Picture QR",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code picture photo halftone image art custom scan png",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-build",
+    label: "QR from real things",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code dominoes marbles tiles flip build physics chain reaction scan",
+    camera: { yaw: 0, pitch: 0.45, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "barcodes",
+    label: "Other barcodes",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "barcode code 128 ean-13 upc-a data matrix aztec check digit scanner laser",
+    // A little from above and the side, so the bars lifting as the scan line
+    // passes read as motion (the check reads it front on).
+    camera: { yaw: 0.25, pitch: 0.35, roll: 0, distance: 3.2 },
   },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {

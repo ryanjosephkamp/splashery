@@ -384,20 +384,18 @@ test.describe("the splat mirror, r3", () => {
     // flashed by over 40 levels here; resting at their depth, about 270.
     const n = await page.evaluate(async () => {
       const pl = window.__splashery.player;
-      const canvas = document.querySelector("canvas");
-      const grab = () =>
-        new Promise((r) =>
-          requestAnimationFrame(() =>
-            requestAnimationFrame(() => {
-              const t = document.createElement("canvas");
-              t.width = canvas.width;
-              t.height = canvas.height;
-              const g = t.getContext("2d");
-              g.drawImage(canvas, 0, 0);
-              r(g.getImageData(0, 0, t.width, t.height).data);
-            }),
-          ),
-        );
+      // Live r7 (October 7): each frame is read through the stage's
+      // captureFrame, which asks for a render and copies the canvas as that
+      // render ends. A raw read of the canvas a couple of animation frames
+      // later could land on a tick that drew nothing (the stage draws on
+      // demand, for a second after each request, and keeps no copy of its
+      // last frame), and read back an empty picture: on a slow, loaded
+      // machine two such reads in a row passed for "settled" and every pixel
+      // counted as changed (246,698).
+      const grab = async () => {
+        const c = await pl.stage.captureFrame();
+        return c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+      };
       let prev = await grab();
       const acc = new Float32Array(prev.length / 4);
       const changed = (a, b) => {

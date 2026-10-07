@@ -10,7 +10,7 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/arc-clip.mjs <out-dir> <name> \
 //     --toy=shardball --opt=style=dome --script=play:4,switch,play:5,switch,play:2
 //
-// Writes <out-dir>/<name>.mp4 (needs ffmpeg: pip install imageio-ffmpeg),
+// Writes <out-dir>/<name>.mp4 with the game's sound (needs ffmpeg: pip install imageio-ffmpeg),
 // <name>-strip.png (six frames) and prints the frame times and splat count.
 
 import { chromium } from "@playwright/test";
@@ -64,33 +64,67 @@ await run(
   },
   [TOY, OPTS],
 );
+// --file=<path>: a file of the person's own, opened as the game's own
+// button opens it (Note Rider's ♪ Your song), before the clip starts.
+const FILE = opt("file", "");
+if (FILE) {
+  for (let i = 0; i < 200; i++) {
+    if (await run(() => !!window.__splashery.player.arcade?.game)) break;
+    await page.waitForTimeout(200);
+  }
+  const chooser = page.waitForEvent("filechooser");
+  await page.click(".arc-file");
+  await (await chooser).setFiles(FILE);
+  // (a recording is first listened to, which takes a while)
+  await page.waitForFunction(() => window.__splashery.player.scene.toy.options?.tune === "own" && window.__splashery.player.arcade?.game?.own, null, { timeout: 300_000 }); // prettier-ignore
+}
 for (let i = 0; i < 200; i++) {
   if (await run(() => !!window.__splashery.player.arcade?.game)) break;
   await page.waitForTimeout(200);
 }
 // The stage's update handlers run only with the time this script gives.
 await run(
-  ([label, auto]) => {
+  ([label, auto, phone]) => {
     const { player } = window.__splashery;
     const stage = player.stage;
     const handlers = stage.updateHandlers.slice();
     window.__arcPending = 0;
+    // The game's sounds, on the clip's own clock (Arcade r2: clips with sound).
+    window.__arcClock = 0;
+    window.__arcCues = [];
+    player.on("cue", (specs) => window.__arcCues.push([window.__arcClock, specs]));
     stage.updateHandlers.length = 0;
     stage.updateHandlers.push(() => {
       const d = window.__arcPending;
       window.__arcPending = 0;
+      window.__arcClock += d;
       for (const h of handlers) h(d);
     });
     const a = player.arcade;
+    // A phone's controls (the pad, 2D/3D and play/pause at the thumbs).
+    if (phone) a.input.lastDevice = "touch";
     a.enterPlay();
     a.autopilot = auto;
+    // A finger's mark where the script taps or drags (clips only).
+    window.__arcFinger = (x, y, down = true) => {
+      let f = document.getElementById("arc-finger");
+      if (!f) {
+        f = document.createElement("div");
+        f.id = "arc-finger";
+        f.style.cssText = "position:fixed;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:rgba(255,255,255,.55);border:3px solid rgba(20,30,60,.75);z-index:2147483600;pointer-events:none"; // prettier-ignore
+        document.body.appendChild(f);
+      }
+      f.style.left = `${x * innerWidth}px`;
+      f.style.top = `${y * innerHeight}px`;
+      f.style.opacity = down ? "1" : "0";
+    };
     const tag = document.createElement("div");
     tag.textContent = `${a.def.title} · ${label}`;
     tag.style.cssText =
       "position:fixed;left:10px;bottom:10px;z-index:2147483600;font:600 12px system-ui;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:6px;pointer-events:none"; // prettier-ignore
     document.body.appendChild(tag);
   },
-  [LABEL, AUTO],
+  [LABEL, AUTO, SIZE[0] < 600],
 );
 let n = 0;
 const times = [];
@@ -107,6 +141,14 @@ const step = async (dt) => {
 const shot = async () => {
   await page.screenshot({ path: path.join(tmp, `f${String(n++).padStart(4, "0")}.png`), timeout: 180_000 }); // prettier-ignore
 };
+// A tap's mark shows for three frames, then lifts.
+const fingerUp = async () => {
+  for (let i = 0; i < 3; i++) {
+    await step(1 / FPS);
+    await shot();
+  }
+  await run(() => window.__arcFinger(0, 0, false));
+};
 const play = async (secs) => {
   for (let t = 0; t < secs - 1e-6; t += 1 / FPS) {
     await step(1 / FPS);
@@ -121,7 +163,99 @@ for (const s of SCRIPT) {
   else if (cmd === "fire")
     await run(() => window.__splashery.player.arcade.input.edges.push("fire"));
   else if (cmd === "key") await page.keyboard.press(arg);
+  // "auto:0" or "auto:1" turns the autopilot off or on; "tap:x;y" taps the
+  // stage there (0..1 across and down); "head:dx;dy" taps beside the
+  // head (Longtail); "drag:dx;dy" drags across the stage (in its widths),
+  // over --dragsecs (0.6) of play.
+  else if (cmd === "auto")
+    await run((on) => (window.__splashery.player.arcade.autopilot = on), arg === "1"); // prettier-ignore
+  else if (cmd === "tap") {
+    const [x, y] = arg.split(";").map(Number);
+    await run(
+      ([x, y]) => {
+        window.__splashery.player.arcade.input.tapAt.push({ x, y });
+        window.__arcFinger(x, y);
+      },
+      [x, y],
+    );
+    await fingerUp();
+  } else if (cmd === "head") {
+    const [dx, dy] = arg.split(";").map(Number);
+    await run(
+      async ([dx, dy]) => {
+        const { orbitPose, viewTangents } = await import("/src/arcade/runtime.js");
+        const a = window.__splashery.player.arcade;
+        const p = orbitPose(a.cam);
+        const [tx, ty] = viewTangents(a.aspect(), a.cam.fov);
+        const h = a.game.head.pos;
+        const d = [0, 1, 2].map((i) => h[i] - p.position[i]);
+        const dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
+        const z = dot(d, p.forward);
+        const x = (dot(d, p.right) / z / tx + 1) / 2;
+        const y = (1 - dot(d, p.up) / z / ty) / 2;
+        a.input.tapAt.push({ x: x + dx, y: y + dy });
+        window.__arcFinger(x + dx, y + dy);
+      },
+      [dx, dy],
+    );
+    await fingerUp();
+  } else if (cmd === "drag") {
+    const [dx, dy] = arg.split(";").map(Number);
+    const secs = Number(opt("dragsecs", 0.6));
+    const k = Math.max(1, Math.round(secs * FPS));
+    for (let i = 0; i < k; i++) {
+      await run(
+        ([dx, dy, k, f]) => {
+          const d = window.__splashery.player.arcade.input.drag;
+          d[0] += dx;
+          d[1] += dy;
+          window.__arcFinger(0.5 + dx * k * (f - 0.5), 0.55 + dy * k * (f - 0.5));
+        },
+        [dx / k, dy / k, k, (i + 1) / k],
+      );
+      await step(1 / FPS);
+      await shot();
+    }
+    await run(() => window.__arcFinger(0, 0, false));
+  }
 }
+// The sound: every cue the game played, rendered offline through the app's
+// own limiter, on the clip's clock.
+const clipSecs = n / FPS;
+const wav = await run(async (secs) => {
+  const { playSpec, loadSamples } = await import("/src/voices.js");
+  const { masterChain } = await import("/src/sound.js");
+  const rate = 44100;
+  const ctx = new OfflineAudioContext(1, Math.max(1, Math.floor(rate * secs)), rate);
+  const master = masterChain(ctx);
+  const cues = window.__arcCues;
+  await Promise.all(cues.map(([, specs]) => loadSamples(ctx, specs)));
+  // A frame's clock runs ahead of its picture by one step: the frame shot
+  // after a step shows that step's end.
+  for (const [at, specs] of cues) if (at < secs) playSpec(ctx, master, Math.max(0, at), specs);
+  const d = (await ctx.startRendering()).getChannelData(0);
+  const bytes = new Uint8Array(44 + d.length * 2);
+  const v = new DataView(bytes.buffer);
+  const str = (o, s) => [...s].forEach((ch, i) => v.setUint8(o + i, ch.charCodeAt(0)));
+  str(0, "RIFF");
+  v.setUint32(4, 36 + d.length * 2, true);
+  str(8, "WAVEfmt ");
+  v.setUint32(16, 16, true);
+  v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true);
+  v.setUint32(28, rate * 2, true);
+  v.setUint16(32, 2, true);
+  v.setUint16(34, 16, true);
+  str(36, "data");
+  v.setUint32(40, d.length * 2, true);
+  for (let i = 0; i < d.length; i++) v.setInt16(44 + i * 2, Math.max(-1, Math.min(1, d[i])) * 32767, true); // prettier-ignore
+  let s = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode(...bytes.subarray(i, i + 0x8000)); // prettier-ignore
+  return { b64: btoa(s), cues: cues.length };
+}, clipSecs);
+const wavFile = path.join(tmp, "sound.wav");
+fs.writeFileSync(wavFile, Buffer.from(wav.b64, "base64"));
 const stats = await run(() => {
   const a = window.__splashery.player.arcade;
   return {
@@ -135,9 +269,12 @@ await browser.close();
 
 const ffmpeg = execFileSync("python3", ["-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]).toString().trim(); // prettier-ignore
 const out = path.join(outDir, `${name}.mp4`);
-execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(tmp, "f%04d.png"), "-vf", `scale=${WIDTH}:-2:flags=area`, "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-c:v", "libx264", "-crf", "18", out]); // prettier-ignore
+execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(tmp, "f%04d.png"), "-i", wavFile, "-vf", `scale=${WIDTH}:-2:flags=area`, "-movflags", "+faststart", "-pix_fmt", "yuv420p", "-c:v", "libx264", "-crf", "18", "-c:a", "aac", "-b:a", "128k", "-shortest", out]); // prettier-ignore
 // A strip of six frames.
-const files = fs.readdirSync(tmp).sort();
+const files = fs
+  .readdirSync(tmp)
+  .filter((f) => f.endsWith(".png"))
+  .sort();
 const pick = [0, 1, 2, 3, 4, 5].map((i) => files[Math.round((i / 5) * (files.length - 1))]);
 const imgs = pick.map((f) => PNG.sync.read(fs.readFileSync(path.join(tmp, f))));
 const k = 4;

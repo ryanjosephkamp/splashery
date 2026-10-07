@@ -245,6 +245,19 @@ textarea {
   color: var(--muted);
 }
 
+/* Lane Powers of ten: a scale bar with end ticks. */
+.toy-legend li.ruler {
+  padding-left: 0;
+}
+
+.toy-legend-ruler {
+  display: block;
+  height: 7px;
+  margin: 3px 0 2px;
+  border: 2px solid currentColor;
+  border-top: 0;
+}
+
 .toy-legend li.on {
   background: var(--accent);
   color: var(--accent-ink);
@@ -2016,7 +2029,7 @@ body.embed #stage {
   border-radius: 999px;
 }
 
-.sound-toggle {
+.embed-sound {
   position: fixed;
   top: 8px;
   left: 8px;

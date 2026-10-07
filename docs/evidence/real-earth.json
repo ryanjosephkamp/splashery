@@ -1,6 +1,6 @@
 {
   "toy": "real-earth",
-  "checked": "2026-10-05",
+  "checked": "2026-10-07",
   "summary": "Earth drawn from real maps: every splat sits at its place's measured height and has its place's measured color, and each named feature is where the planetary gazetteer puts it. The relief, the turning speed and the lighting are simplified, and each simplification is labeled in the toy.",
   "claims": [
     {
@@ -114,6 +114,31 @@
       "verdict": "correct",
       "test": "tests/sp2.spec.mjs:164",
       "note": ""
+    },
+    {
+      "claim": "A tap names the place under it: the nearest city or peak, the state or province and the country (or the sea or lake), from Natural Earth.",
+      "how": "tools/sp3-places.mjs draws Natural Earth 1:10m polygons into maps of 2 arc-minutes (about 3.7 km) and keeps the cities and peaks as points; src/space/places.js reads them. tests/sp3.spec.mjs checks Paris, Mount Everest, Denver, Sydney, Tokyo and the Atlantic, and a tap on Paris and on Everest in the browser.",
+      "where": "src/space/places.js",
+      "sources": [
+        {
+          "title": "Natural Earth 1:10m vectors",
+          "publisher": "Natural Earth",
+          "url": "https://www.naturalearthdata.com/"
+        }
+      ]
+    },
+    {
+      "claim": "Zoomed in, the ground comes from close-up tiles of the same maps, finer than the global map (the scales are in src/space/zoom.js); a feature named as a circle is an approximation of its real outline.",
+      "how": "tools/sp3-tiles.mjs averages each source into 10° tiles; tests/sp3.spec.mjs checks each world's tiles against its global map at a named feature.",
+      "where": "src/space/zoom.js",
+      "sources": [
+        {
+          "title": "Blue Marble: Next Generation (July 2004)",
+          "publisher": "NASA Earth Observatory (Reto Stöckli)",
+          "url": "https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation",
+          "says": "Public domain (NASA)."
+        }
+      ]
     }
   ],
   "simplified": [

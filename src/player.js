@@ -40,6 +40,7 @@ import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
 import { createScene, THEMES, normalizeFigures } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
+import { ChunkHost } from "./chunks.js"; // lane Powers of ten
 import { HandsOn } from "./physics/hands-on.js"; // lane Physics
 
 export { NoGPUError };
@@ -171,8 +172,12 @@ export class Player {
     this.painter = new Painter(this.stage);
     this.camera.onShake = () => this.shake();
     this.stage.onUpdate((dt) => this.update(dt));
+    // Owned listeners leave with the player (destroy() aborts this).
+    this.lifetime = new AbortController();
     this.media = matchMedia("(prefers-color-scheme: dark)");
-    this.media.addEventListener("change", () => this.applyLook());
+    this.media.addEventListener("change", () => this.applyLook(), {
+      signal: this.lifetime.signal,
+    });
     this.applyLook();
     this.watchDeviceShake();
     return this;
@@ -541,7 +546,19 @@ export class Player {
     this.startPictures(ctx, toy, recipe, options); // Pictures
     this.startFluids(ctx, token); // Fluids
     this.startArcade(ctx, token, recipe, options); // Arcade
-    const b = ctx.buf.bounds();
+    // Lane Powers of ten: chunks the drive loads as it needs them, and the
+    // zoom gesture handed to the toy (src/chunks.js).
+    if (recipe.chunks) {
+      this.chunks = new ChunkHost(this, recipe, { id: def.id, options, transform: ctx.transform, count, profile: this.profile }); // prettier-ignore
+      this.motion.chunks = this.chunks.api;
+    }
+    if (recipe.zoom) this.camera.zoomTaker = (f) => this.motion.takeZoom(f);
+    // Lane Powers of ten: frameReaches frames the camera on the recipe's
+    // k.reach points alone (its own splats are a backdrop far behind them).
+    const b =
+      recipe.frameReaches && ctx.reaches?.length
+        ? { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] }
+        : ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
         b.min[k] = Math.min(b.min[k], r[k]);
@@ -742,6 +759,12 @@ export class Player {
 
   disposeProcedural() {
     this.proc = null;
+    // Lane Powers of ten: the toy's chunks go with its sheets; the zoom
+    // gesture moves the camera again.
+    this.chunks?.destroy();
+    this.chunks = null;
+    this.motion.chunks = null;
+    this.camera.zoomTaker = null;
     // Arcade: the old game stops with its toy.
     this.arcade?.destroy();
     this.arcade = null;
@@ -1159,25 +1182,30 @@ export class Player {
     if (typeof DeviceMotionEvent === "undefined") return;
     let last = 0;
     let hits = 0;
-    addEventListener("devicemotion", (e) => {
-      const a = e.accelerationIncludingGravity || e.acceleration;
-      if (!a) return;
-      const m = Math.hypot(a.x || 0, a.y || 0, a.z || 0);
-      const now = performance.now();
-      if (m > 24) {
-        hits = now - last < 700 ? hits + 1 : 1;
-        last = now;
-        if (hits >= 3) {
-          hits = 0;
-          this.shake();
+    addEventListener(
+      "devicemotion",
+      (e) => {
+        const a = e.accelerationIncludingGravity || e.acceleration;
+        if (!a) return;
+        const m = Math.hypot(a.x || 0, a.y || 0, a.z || 0);
+        const now = performance.now();
+        if (m > 24) {
+          hits = now - last < 700 ? hits + 1 : 1;
+          last = now;
+          if (hits >= 3) {
+            hits = 0;
+            this.shake();
+          }
         }
-      }
-    });
+      },
+      { signal: this.lifetime.signal },
+    );
   }
 
   resetCamera() {
     // Page focus: no glide, and a page in view lets go to here.
     this.glide = null;
+    this.motion.zoomIn.resets++; // lane Powers of ten: a toy that takes the zoom goes home too
     if (this.pageView) this.pageView.back = null;
     this.camera.reset(); // UI r2: Reset also centers a moved view (pictures too)
     this.stage.requestRender();
@@ -1491,6 +1519,7 @@ export class Player {
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);
+    this.chunks?.update(this.motion.out); // lane Powers of ten
     // Redraw a live screen when the recipe says its picture changed.
     const scr = this.screen;
     if (scr && scr.recipe === info.recipe) {
@@ -1847,6 +1876,7 @@ export class Player {
 
   destroy() {
     this.loadToken++;
+    this.lifetime?.abort();
     this.pictures?.destroy(); // Pictures
     this.closeMedia();
     this.painter?.detach();

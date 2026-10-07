@@ -138,7 +138,8 @@ test("the periodic table's atom ticks once for each proton and neutron as it pac
     app.setControl("up", 1);
   });
   await until(page, "up", 0.999);
-  const ticks = (await heard(page)).filter((c) => c.voice === "clack");
+  // (A pebble's click since lane Elements softened it, October 6, 2026.)
+  const ticks = (await heard(page)).filter((c) => c.voice === "pebble");
   expect(ticks).toHaveLength(n);
   // In order, and spread over the nucleus's build (about 2 s), not bunched.
   const at = ticks.map((c) => c.t + c.at);
