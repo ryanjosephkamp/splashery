@@ -1896,9 +1896,9 @@ export const TOY_HELP = {
 
   longtail: {
     howTo:
-      "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+      "Tap to play. Tap beside the head to turn it that way, or use the arrows. 3D folds it up; drag to turn it.",
     about:
-      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. Arrow keys, a swipe or the pad turn it toward that side of the screen.\n\nThe tiles are a world you can fold. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube you steer around. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
+      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. A tap beside the head, or the arrows, turn it toward that side.\n\nThe tiles fold into a world. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube; drag to turn it. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
   },
   "grain-garden": {
     howTo:

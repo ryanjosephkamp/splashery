@@ -291,9 +291,10 @@ export const RECIPES = {
       pad: ["left", "right", "up", "down"],
       controls: {
         keys: "Arrow keys (or W, A, S, D) turn toward that side of the screen.",
-        touch: "Swipe the way to go, or use the pad.",
+        mouse: "Click beside the head to turn that way; in 3D, drag to turn the world.",
+        touch: "Tap beside the head to turn that way (or swipe in 2D, or use the pad); in 3D, drag to turn the world.", // prettier-ignore
         pad: "Stick or D-pad to turn.",
-        short: "Arrows turn · V folds it into 3D",
+        short: "Arrows or a click turn · V folds it into 3D",
       },
       slots: { high: 90000, mid: 70000, low: 40000 }, // crisp tiles
       create: async (api) => (await import("./arcade-longtail.js")).createLongtail(api),

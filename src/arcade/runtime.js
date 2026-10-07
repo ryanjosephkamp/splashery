@@ -102,7 +102,11 @@ export class ArcadeRuntime {
       else if (a === "restart") this.restart();
       else if (a === "exit") this.exitPlay();
     };
-    this.hud.surface.addEventListener("pointerdown", () => this.wake());
+    this.hud.surface.addEventListener("pointerdown", () => {
+      // A press that starts or resumes the game isn't also an aimed tap.
+      if (this.mode !== "play") this.input.skipTap = true;
+      this.wake();
+    });
     player.canvas.classList.add("arc-canvas");
     // Leaving the page or the tab pauses the game.
     this.onVis = () => {
