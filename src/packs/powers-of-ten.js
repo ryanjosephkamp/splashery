@@ -678,16 +678,20 @@ async function buildRibosome(k, layer, profile) {
 // ---- The backdrop -------------------------------------------------------------------------
 
 // Black behind everything (space is black in either theme, and the edge of
-// a picture never shows the page).
+// a picture never shows the page): the toy's own splats, built when it opens
+// (left out of the fit: the view's frame sets it).
 function buildBackdrop(k) {
   const nx = 90;
   const ny = 60;
-  k.cloud({ count: (nx * ny * 160000) / k.count, jitter: 0, pattern: false }, (_r, i) => {
-    const x = ((i % nx) + 0.5) / nx - 0.5;
-    const y = ((i / nx) | 0) / ny + 0.5 / ny - 0.5;
-    const s = 0.45;
-    return { p: [x * 48, y * 32, -8], scales: [s, s, 0.02], quat: [0, 0, 0, 1], color: [0, 0, 0], opacity: 1 }; // prettier-ignore
-  });
+  k.cloud(
+    { count: (nx * ny * 160000) / k.count, jitter: 0, pattern: false, fit: false },
+    (_r, i) => {
+      const x = ((i % nx) + 0.5) / nx - 0.5;
+      const y = ((i / nx) | 0) / ny + 0.5 / ny - 0.5;
+      const s = 0.45;
+      return { p: [x * 48, y * 32, -8], scales: [s, s, 0.02], quat: [0, 0, 0, 1], color: [0, 0, 0], opacity: 1 }; // prettier-ignore
+    },
+  );
 }
 
 // ---- The layers ------------------------------------------------------------------------------
@@ -885,6 +889,8 @@ const RECIPE = {
   credits: CREDITS,
   tiltLock: true,
   zoom: true,
+  // The camera frames the view (the four reaches), not the backdrop.
+  frameReaches: true,
   kernel: "sharp",
   // Far scenes are made of splats under a pixel (the Earth as a dot): keep
   // the engine from skipping them, as the picture toys do.
@@ -894,7 +900,6 @@ const RECIPE = {
   action: { key: "play", label: "Play the journey" },
   chunks: {
     async build(k, id, help) {
-      if (id === "backdrop") return buildBackdrop(k);
       const layer = byId.get(id);
       if (!layer) throw new Error(`No layer ${id}.`);
       await layer.build(k, layer, help.profile);
@@ -937,20 +942,22 @@ const RECIPE = {
     } else m.z += (m.goal - m.z) * (1 - Math.exp(-dt / 0.18));
     if (CLIP.z !== null) m.goal = m.z = CLIP.z;
     const z = m.z;
-    // Which chunks: built near the view, freed far from it.
+    // Which chunks: built near the view, freed far from it. (Without a
+    // chunk loader, as in a test that plays the drive alone, only the
+    // zoom and the words move.)
     const lay = layout(z);
-    ch.want("backdrop");
-    for (const l of LAYERS) {
-      const d = l.e - z;
-      if (d > -2.2 && d < 1.8) ch.want(l.id);
-      else if ((d < -3.2 || d > 2.8) && ch.state(l.id) !== "none") ch.drop(l.id);
-    }
-    out.chunks = { backdrop: { scale: 1, fade: 1 } };
+    if (ch)
+      for (const l of LAYERS) {
+        const d = l.e - z;
+        if (d > -2.2 && d < 1.8) ch.want(l.id);
+        else if ((d < -3.2 || d > 2.8) && ch.state(l.id) !== "none") ch.drop(l.id);
+      }
+    out.chunks = {};
     let rank = 0;
     for (const l of LAYERS) {
       const p = lay[l.id];
       rank++;
-      if (!p || ch.state(l.id) !== "ready") continue;
+      if (!p || ch?.state(l.id) !== "ready") continue;
       // Finer layers a hair nearer, so each draws over the one it sits in.
       out.chunks[l.id] = { scale: p.scale, offset: [0, 0, 0.0004 * rank], fade: p.fade };
     }
@@ -971,8 +978,9 @@ const RECIPE = {
     if (!playing && Math.abs(m.goal - m.z) < 1e-4) m.z = m.goal;
   },
   build(k) {
-    // Nothing of its own but four clear splats that frame the view (every
-    // scene is a chunk).
+    // Its own splats: the black backdrop and four clear splats that frame
+    // the view (every scene is a chunk).
+    buildBackdrop(k);
     const h = U / 2;
     for (const p of [
       [h, 0, 0],

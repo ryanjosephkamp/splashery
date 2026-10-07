@@ -2301,7 +2301,7 @@ export const TOY_HELP = {
   },
   "powers-of-ten": {
     howTo:
-      "Pinch, scroll or drag up and down to zoom from a garden out to a galaxy and in to a molecule. Tap to play the whole journey.",
+      "Pinch, scroll or drag up or down to zoom from a garden to a galaxy or a molecule. Tap to play.",
     about:
       "One continuous zoom through real scales, each a real picture or real data at its true size, centered on a garden bed beside the Smithsonian Castle in Washington, D.C. Every step of the zoom is ten times the last: the label names the power of ten, what you see and its size, and where the picture or data comes from, and the bar shows a round length at that scale.\n\nEach scene sits inside the larger one, where it really is, and fades in as it fills the view; each is loaded only as the zoom comes near it. The garden bed is a 3D capture made elsewhere and set here.",
   },
