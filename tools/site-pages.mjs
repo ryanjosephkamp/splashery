@@ -484,7 +484,7 @@ export const PAGES = [
     styles: ["hubs.css"],
     // The owner's own list (October 7, 2026). No email.
     contact: [
-      { href: "https://ryanjosephkamp.github.io/", label: "His website", text: "ryanjosephkamp.github.io: projects and writing." }, // prettier-ignore
+      { href: "https://ryanjosephkamp.github.io/", label: "Website", text: "ryanjosephkamp.github.io: projects and writing." }, // prettier-ignore
       { href: "https://github.com/ryanjosephkamp", label: "GitHub", text: "ryanjosephkamp: the code for Splashery and his other projects." }, // prettier-ignore
       { href: "https://www.linkedin.com/in/ryanjosephkamp/", label: "LinkedIn", text: "ryanjosephkamp: his professional profile." }, // prettier-ignore
       { href: "https://www.youtube.com/@RyanJosephKamp", label: "YouTube", text: "@RyanJosephKamp" }, // prettier-ignore
