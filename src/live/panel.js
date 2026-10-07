@@ -123,7 +123,7 @@ export function renderLive(entries, { error }) {
       b.setAttribute("aria-pressed", String(on));
       cap.hidden = !(on && entry.capture);
       const recording = !!REC.take?.recording;
-      const said = recording ? `Recording the picture: ${Math.floor(REC.take.seconds)} s of ${MAX_SECONDS}. It stays on this device.` : REC.take?.blob ? "Your video is in this page's memory; it's saved only if you tap Save the video." : ""; // prettier-ignore
+      const said = recording ? `Recording the picture: ${Math.floor(REC.take.seconds)} s of ${MAX_SECONDS}. It stays on this device.` : REC.take?.blob ? "Your video is in this page's memory; it's saved only if you tap Save the video." : REC.take?.empty ? "The recording came out empty: this device was too busy to hand over any of the picture. Please try again." : ""; // prettier-ignore
       const s = [on && entry.status ? entry.status() : "", said].filter(Boolean).join(" ");
       status.textContent = s || "";
       status.hidden = !s;
