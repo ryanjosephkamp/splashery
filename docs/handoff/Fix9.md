@@ -38,6 +38,12 @@ then keep "## State
 - Main was merged in at 02:50 UTC and again at 04:15 UTC (both clean; the engine branch too).
 - 04:13 UTC: the owner marked `fx9-dog-plush-r2` "good". **All nine cards are good.** The lane waits
   for the Integrators' full run and the Operator's merges (#368 first, then #370).
+- 15:46 UTC, the Operator: Integrator 1's full run N28 passed 1478 of 1484. The one failure that was
+  #370's: `tests/unit.spec.mjs:213` (every rig needs an action and its control). The `dog-plush` rig
+  now has them: a "Hop" pulse that copies the hop every capture without a rig has (src/motion.js,
+  `hopAt`), so its tap is unchanged. Main (f1994db9) is merged into both branches. Unit, fx9,
+  fx9-engine, kit and taps' whole-shelf checks pass. `taps -g dog-plush` matches no test: taps
+  covers kit packs, and the dog plush is a capture.
 
 ## Notes
 
