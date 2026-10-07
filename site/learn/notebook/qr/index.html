@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane QR: a QR code generator made of splats (prefix qr) · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: QR."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/qr/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane QR: a QR code generator made of splats (prefix qr) · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: QR."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/qr/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane QR: a QR code generator made of splats (prefix qr)</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane QR: a QR code generator made of splats (prefix qr)">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: QR, &quot;A QR code generator made of
+            splats&quot; (prefix <code>qr</code>). Branches: <code>claude/lane-qr</code> (and
+            <code>claude/lane-qr-engine</code> only if the engine needs a change). PR title:
+            &quot;Phase QR: a QR code generator made of splats&quot;. Handoff file:
+            docs/handoff/QR.md. Model: Opus 5.5.
+          </p>
+          <h3
+            id="brief-written-by-the-operator-on-october-3-2026-from-the-owner-s-idea-of-october-1-and-his-go-hard-on-it-that-night"
+          >
+            Brief (written by the Operator on October 3, 2026, from the owner's idea of October 1
+            and his &quot;go hard on it&quot; that night)
+          </h3>
+          <p>
+            The owner's idea, in short: a free QR code generator whose codes are made of Gaussian
+            splats. People can style them in ways an ordinary generator can't (colors, depth,
+            materials, motion), and turn them into a GIF or something interactive, while the code
+            still scans to the same URL. He wants to review the work when he wakes up, so get
+            something real in front of him tonight: working codes, several styles, scan checks,
+            clips and cards. Function comes first:
+            <strong>a code that doesn't scan is a failure</strong>, however pretty.
+          </p>
+          <h4 id="what-to-build">What to build</h4>
+          <p>A new toy, <strong>QR code</strong>, on the Studio shelf, behind the labs switch.</p>
+          <ol>
+            <li>
+              <strong>Encoding.</strong> Text or a URL in the Toy tab; error correction L, M, Q or H
+              (default M, or Q for the fancier styles); version chosen automatically; a quiet zone
+              of 4 modules. Use a small, well-known encoder: vendor Project Nayuki's QR Code
+              generator library (MIT) in <code>vendor/qrcodegen/</code> with its license, or write
+              your own against the standard with test vectors. Say which in the PR. Loaded only when
+              the QR toy opens.
+            </li>
+            <li>
+              <p><strong>Splats.</strong></p>
+              <ul>
+                <li>
+                  Each dark module is a crisp, opaque cell of splats with hard edges: no blur, no
+                  speckle, no see-through (the effect rules).
+                </li>
+                <li>The three finder patterns and the alignment patterns are their own parts.</li>
+                <li>
+                  <p>Styles:</p>
+                  <ul>
+                    <li><strong>Classic</strong> (square cells);</li>
+                    <li><strong>Dots</strong> (round);</li>
+                    <li><strong>Rounded</strong> (cells that merge with their neighbors);</li>
+                    <li><strong>Bricks</strong> (raised 3D blocks with real depth);</li>
+                    <li><strong>Gems</strong> (faceted, with a glint);</li>
+                    <li><strong>Bubbles</strong> (glossy spheres);</li>
+                    <li><strong>Neon</strong> (glowing tubes, dark plate).</li>
+                  </ul>
+                </li>
+                <li>
+                  Colors: foreground and background pickers, linear or radial gradients, and a
+                  separate color for the finder &quot;eyes&quot;.
+                </li>
+                <li>A plate under the code: paper, wood, metal or none.</li>
+              </ul>
+              <p>
+                Keep a minimum contrast between dark and light modules (warn below it, and say why).
+                Dark on light is the safe default; warn that inverted codes don't scan in every
+                reader.
+              </p>
+            </li>
+          </ol>
+          <ol>
+            <li>
+              <p><strong>Scan view and a scan check.</strong></p>
+              <ul>
+                <li>
+                  A &quot;Scan view&quot; button snaps the camera flat and front-on with the whole
+                  quiet zone in view.
+                </li>
+                <li>
+                  &quot;Check that it scans&quot; renders that view and decodes it. Use the
+                  browser's <code>BarcodeDetector</code> where it supports <code>qr_code</code>;
+                  otherwise use a small vendored reader loaded on demand: jsQR, Apache-2.0, in
+                  <code>vendor/jsqr/</code> with its license.
+                </li>
+                <li>
+                  Show the decoded text beside the input, with a clear pass or fail. On a fail, say
+                  what to change (a higher error correction, more contrast, a flatter style).
+                </li>
+                <li>Run the check automatically after each change, with a short debounce.</li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                <strong>Motion.</strong> Taps follow the effect rules: separate modules move
+                separately, and they always come back to the exact grid.
+              </p>
+              <ul>
+                <li><strong>Assemble</strong>: modules fly in and lock into place.</li>
+                <li>
+                  <strong>Flip</strong>: modules turn like tiles in a wave, a different color on the
+                  back.
+                </li>
+                <li>
+                  <strong>Burst and return</strong>: on tap, the code breaks into its modules, which
+                  fall, scatter and fly back.
+                </li>
+              </ul>
+              <p>
+                An idle turntable is fine, but the code always ends flat and still in Scan view.
+              </p>
+            </li>
+          </ol>
+          <ol>
+            <li>
+              <p><strong>Sharing.</strong></p>
+              <ul>
+                <li>
+                  A <code>#s=</code> link holds the text and the style (old links and saved scenes
+                  must keep loading).
+                </li>
+                <li>PNG of the scan view at a printable size, with the quiet zone.</li>
+                <li>
+                  <strong>Animated GIF</strong> through the existing GIF encoder
+                  (<code>src/exports.js</code>, <code>vendor/gifenc/</code>), whose last frames hold
+                  the code still long enough to scan.
+                </li>
+                <li>Video through the existing Record export.</li>
+                <li>The splats themselves, through the existing splat export.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Privacy.</strong> The text never leaves the device: no shorteners, no network.
+            </li>
+          </ol>
+          <h4 id="proof">Proof</h4>
+          <ul>
+            <li>
+              <p><code>tests/qr.spec.mjs</code>:</p>
+              <ul>
+                <li>the encoder against known test vectors;</li>
+                <li>
+                  <strong>every style at its default settings decodes</strong> from screenshots at
+                  390×844 and 1440×900 (use jsQR as a pinned devDependency, or the vendored copy);
+                </li>
+                <li>the GIF's last frame decodes;</li>
+                <li>a link round-trips;</li>
+                <li>nothing QR-related loads until the toy opens.</li>
+              </ul>
+            </li>
+            <li>
+              Clips at phone size (<code>tools/effect-clip.mjs</code>) for each style and each
+              motion, posted as cards on the Effect review page, with
+              <strong>the final frame large enough to scan from the screen</strong>. The owner will
+              scan them with his phone in the morning.
+            </li>
+            <li>
+              How-to and About texts, a soft sound for assemble and burst, credits (the libraries in
+              <code>LICENSES.md</code>), screenshots <code>qr-*-390x844.png</code> and
+              <code>qr-*-1440x900.png</code>.
+            </li>
+          </ul>
+          <h4 id="a-second-lane-works-beside-you">A second lane works beside you</h4>
+          <p>
+            <strong>QR scan lab</strong> (Sonnet 5.5, <code>claude/lane-qr-lab</code>, prefix
+            <code>qrl</code>) builds <code>tools/qr-scan-lab.mjs</code>. It renders codes from many
+            angles, sizes, blurs and lighting conditions, decodes them with two readers, and writes
+            a scorecard that tells you which styles and settings are safe.
+          </p>
+          <ul>
+            <li>
+              <strong>Push a first working version early</strong> (encoding, Classic and Dots, Scan
+              view, the check), even before the rest, so the lab can run against it. It reads your
+              branch.
+            </li>
+            <li>
+              Give the toy a small test hook for the lab: set the text, style, error correction and
+              colors, and snap to Scan view, from <code>window.__splashery</code>. Document it in
+              your handoff file.
+            </li>
+            <li>Use the lab's findings to set your defaults and warnings.</li>
+            <li>Don't edit its files, and it won't edit yours.</li>
+          </ul>
+          <h4 id="you-own">You own</h4>
+          <ul>
+            <li><code>src/qr/</code> (new);</li>
+            <li><code>src/packs/qr.js</code> (new);</li>
+            <li><code>vendor/qrcodegen/</code> and <code>vendor/jsqr/</code> (new);</li>
+            <li><code>assets/toys/qr-code/</code>;</li>
+            <li>
+              your toy's entries in the shared lists (<code>src/toys.js</code>,
+              <code>src/toy-sounds.js</code>, <code>src/toy-help.js</code>,
+              <code>tools/toy-plan.json</code>, credits, <code>LICENSES.md</code>);
+            </li>
+            <li><code>tests/qr.spec.mjs</code>, your screenshots, and this handoff file.</li>
+          </ul>
+          <p>Engine changes go only through an engine PR.</p>
+          <h4 id="how-this-lane-runs">How this lane runs</h4>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator.
+              Don't ask him anything or wait for him. Put questions and blockers in your final
+              message (&quot;READY:&quot;, &quot;WORKING:&quot; or &quot;BLOCKED:&quot;), and the
+              Operator answers or relays them. Messages that arrive &quot;From the Operator&quot;
+              come from the coordinator on the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort. Any helper uses the same model, at most
+              one at a time. Usage is tight this week: work efficiently, and don't burn turns
+              waiting. Run long test runs in the background.
+            </li>
+            <li>
+              Merging: the toy is behind the labs switch, so the Operator merges it after a full
+              test run. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new text is in American English (color, center, gray, license, -ize
+              endings, dates like &quot;October 3, 2026&quot;).
+            </li>
+            <li>
+              <p>Read first:</p>
+              <ul>
+                <li>CLAUDE.md;</li>
+                <li>docs/OPERATING.md (&quot;Steps for a lane&quot;);</li>
+                <li>
+                  docs/PACKS.md (recipes, budgets, text and small details, &quot;Effect
+                  quality&quot;);
+                </li>
+                <li><code>src/exports.js</code>;</li>
+                <li>how another Studio toy is built (<code>src/packs/studio.js</code>).</li>
+              </ul>
+            </li>
+            <li>
+              Your handoff file: start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>
+            October 3, 2026 (Opus 5.5). First working version pushed on
+            <code>claude/lane-qr</code> (draft PR &quot;Phase QR: a QR code generator made of
+            splats&quot;). No engine change was needed.
+          </p>
+          <h3 id="what-is-built">What is built</h3>
+          <ul>
+            <li>
+              <p>
+                <strong>The toy</strong>: &quot;QR code&quot; (<code>qr-code</code>) on the Studio
+                shelf, labs only (<code>src/toys.js</code>), recipe in <code>src/packs/qr.js</code>,
+                the rest in <code>src/qr/</code>:
+              </p>
+              <ul>
+                <li>
+                  <code>encode.js</code>: the encoder. Project Nayuki's QR Code generator library
+                  (MIT), vendored in <code>vendor/qrcodegen/</code> (compiled from its TypeScript,
+                  commit <code>3c6d0b3</code>, with an ES module export added). It marks each
+                  module's role and the finder and alignment patterns as their own pieces.
+                </li>
+                <li>
+                  <code>build.js</code>: the splats. Seven styles (Classic, Dots, Rounded, Bricks,
+                  Gems, Bubbles, Neon), each with its own preset colors and plate
+                  (<code>PRESETS</code>); foreground, background, linear or radial gradient, eye
+                  color, plate (paper, wood, metal, none), the flip's back color.
+                </li>
+                <li>
+                  <code>field.js</code>: the motions, as a labs GPU program (the toy's
+                  <code>gpuField</code>, as in the Lab toy): every module, finder and alignment
+                  pattern moves as one solid piece and ends exactly on its grid.
+                </li>
+                <li>
+                  <code>scan.js</code>: the reader: <code>BarcodeDetector</code> where it reads
+                  <code>qr_code</code>, else jsQR 1.4.0 (Apache-2.0, <code>vendor/jsqr/</code>),
+                  loaded by a script tag on the first check.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>The panel</strong> (the Toy tab, through
+              <code>input.live: [{ render }]</code>, so no engine change): the text box, the style
+              row, what the code is (version, size, level), the contrast and inverted-code warnings,
+              Scan view, &quot;Check that it scans&quot; (also run by itself about 0.6 s after each
+              change), Save a PNG (1600 px, scan view with the quiet zone) and Save a GIF (the
+              burst, then 1.6 s held still). Record and Save splats are the site's own (Share tab).
+            </li>
+            <li>
+              <strong>Error correction</strong>: Auto is M for Classic and Q for the other styles;
+              L, M, Q and H can be picked. The library may raise the level for free when the text
+              fits the same version (the panel says so).
+            </li>
+            <li>
+              <strong>Motions</strong> (Toy tab buttons; a tap is Burst): Assemble (3.2 s), Flip
+              (3.4 s), Burst and return (3.6 s). Their sounds go out as cues from
+              <code>drive</code> (<code>SOUNDS</code> in the pack); the tap's own entry in
+              <code>src/toy-sounds.js</code> is the burst.
+            </li>
+          </ul>
+          <h3 id="how-the-codes-are-kept-scannable-what-the-checks-taught">
+            How the codes are kept scannable (what the checks taught)
+          </h3>
+          <ul>
+            <li>
+              <strong>No ripple inside dark areas.</strong> A patch of flat splats on one grid
+              leaves a faint lattice (about 20 gray levels); jsQR thresholds 8-pixel blocks against
+              their own range, so that ripple became speckle. Every patch is two staggered lattices
+              now (<code>flat()</code> in <code>build.js</code>).
+            </li>
+            <li>
+              <strong>No seams between modules.</strong> Each module's patch reaches into its dark
+              neighbors (<code>cell()</code>), so a run of modules is one dark area.
+            </li>
+            <li>
+              <strong>3D shading within limits.</strong> A face seen front on may stray at most 0.03
+              in gray from its module's color (<code>steady()</code>, <code>SHADE_TOL</code>): jsQR
+              takes an 8-pixel block whose range is under 24 gray levels as flat and thresholds
+              anything wider at its own mean, so a highlight inside a big dark area turned white.
+              Sides seen only at an angle keep full shading. Neon's tube cores too. Gems, bubbles
+              and bricks sit on a dark setting, so their gaps read dark.
+            </li>
+            <li>
+              <strong>Solid finders.</strong> In Bricks, Gems, Bubbles and Neon the finder and
+              alignment patterns are smooth solid pieces with a bevel only on their outer edges:
+              readers find a code by the 1:1:3:1:1 runs across them, and bevels or seams inside
+              broke those runs at desktop size.
+            </li>
+            <li>
+              <strong>The sheet has holes under the dark modules</strong>, in splats as fine as the
+              modules'. Seen at an angle, a big sheet splat behind a module sorted in front of it
+              and the code turned gray and hatched.
+            </li>
+            <li>
+              <strong>The check reads at two scales</strong>: the 720 px picture, then half size (as
+              phone readers try several scales). The result says which (<code
+                >reader: &quot;jsQR, at half size&quot;</code
+              >).
+            </li>
+            <li>
+              <strong>One check at a time</strong>: a check asked for cancels the pending automatic
+              one, and a second call waits for the running one (the automatic check's capture once
+              landed in a screenshot).
+            </li>
+            <li>
+              Neon is an inverted code (light on dark). It reads in jsQR and the panel warns that
+              not every reader takes inverted codes.
+            </li>
+          </ul>
+          <h3 id="the-test-hook-for-the-qr-scan-lab">The test hook (for the QR scan lab)</h3>
+          <p>
+            With the QR code toy open
+            (<code>window.__splashery.app.chooseToy(&quot;qr-code&quot;)</code>, labs on):
+          </p>
+          <pre><code>const qr = window.__splashery.qr;
+await qr.set({ text, style, ecc, fg, bg, gradient, fg2, eyes, eye, plate, back }); // any subset
+// A style alone brings its preset colors and plate; colors given with it win.
+// ecc: &quot;auto&quot; | &quot;L&quot; | &quot;M&quot; | &quot;Q&quot; | &quot;H&quot;; style: classic | dots | rounded | bricks | gems | bubbles | neon
+// gradient: none | linear | radial; eyes: same | own; plate: paper | wood | metal | none
+qr.scanView(); // the camera flat and square to the code, quiet zone in view
+qr.scanPose(margin); // that camera state ({ yaw, pitch, roll, distance }), margin in modules
+qr.screenRect(); // the code's square with its quiet zone on the page (CSS pixels)
+await qr.check(); // renders the scan view at 720 px and reads it back:
+// { ok, read, reader, inverted, text }
+await qr.png(size); // the scan view as a PNG blob (default 1024 px; not downloaded)
+await qr.gif({ motion, size }); // the GIF as a blob (&quot;burst&quot; | &quot;flip&quot; | &quot;assemble&quot; | &quot;alive&quot;)
+qr.info(); // { text, version, size, ecc, style, options, check, warnings, error }</code></pre>
+          <p>
+            <code>set</code> also takes <code>{ kind, fields: { … } }</code> for what the code holds
+            (kinds: link, text, wifi, contact, email, phone, sms, geo; field names in
+            <code>src/qr/content.js</code>), and <code>style: &quot;neon-light&quot;</code> for Neon
+            on a pale wall. <code>qr.autoCheck = false</code> stops the automatic check after each
+            change (for tools that step the stage's clock themselves; it can deadlock with them),
+            <code>qr.fullScreen()</code> opens Full screen.
+          </p>
+          <p>
+            <code>set</code> resolves once the toy is rebuilt and in scan view. The automatic check
+            runs after it; call <code>check()</code> yourself for a result you can wait on.
+          </p>
+          <h3 id="proof-2">Proof</h3>
+          <ul>
+            <li>
+              <code>tests/qr.spec.mjs</code>: the encoder against segno's codes
+              (<code>tests/fixtures/qr-vectors.json</code>, the ISO &quot;01234567&quot; 1-M and
+              &quot;HELLO WORLD&quot; 1-Q) and jsQR read-backs of codes from version 1 to 16;
+              nothing QR-related loads before the toy opens; every style at its defaults reads back
+              with jsQR from screenshots at 390×844 and 1440×900 (framed on the code, as a phone
+              frames it: the page's own title over the stage otherwise trips jsQR's finder search)
+              and in the toy's own check; the GIF's last frame (and the frame 1.2 s before it) reads
+              back, a frame mid-burst doesn't; the PNG is 1024 px and reads back; a
+              <code>#s=</code> link round-trips the text, style, level and eye color; the warnings.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              On screen, Scan view leaves 3 modules past the quiet zone; the toy opens in that view
+              (camera distance 3.1 radii, the same for any screen, since the field of view spans the
+              narrower side).
+            </li>
+          </ul>
+          <h3 id="round-2-october-3-2026-from-the-operator-s-notes-on-the-clips">
+            Round 2 (October 3, 2026, from the Operator's notes on the clips)
+          </h3>
+          <ul>
+            <li>
+              <strong>Gems</strong>: the glint passes only when the code is seen at an angle (the
+              GPU program reads the camera's position, <code>uSpCam</code>); front on, in Scan view,
+              in the PNG and in a GIF's still frames, no module ever goes pale. It is compiled into
+              the program only for Gems.
+            </li>
+            <li>
+              <strong>Neon</strong> is now connected tubes (each module draws half a tube to each
+              dark neighbor) with a bright core and a faint halo on the dark wall; the finder and
+              alignment patterns are solid glowing pieces. Measured at module centers in the check's
+              720 px render (default link): tubes 0.80 to 0.88 gray, gaps 0.03 (halo included), so a
+              margin of 0.76.
+            </li>
+            <li>
+              <strong>Neon on a pale wall</strong> (<code>style: &quot;neon-light&quot;</code> in
+              the hook; one button in the panel when Neon is picked): deep blue tubes and magenta
+              eyes on a pale wall, dark on light, so every reader takes it. Measured: tubes 0.26 to
+              0.37, wall 0.94 (margin 0.58).
+            </li>
+            <li>
+              <strong>Alive</strong> (a toggle in the Toy tab, and &quot;Save a looping GIF&quot;):
+              a color wave rolls across the code. Each splat's hue moves toward the style's wave
+              color (<code>wave</code>, set by each preset) while its gray, what a reader sees,
+              stays the same, so every frame scans. (Round 3 dropped a breath in depth, which made
+              Bubbles' loop miss a frame now and then.) The looping GIF is one whole period (44
+              frames). Every frame of every style's loop reads back with jsQR
+              (<code>tests/qr.spec.mjs</code>). The eyes don't turn: a finder turned partway is no
+              longer a finder, and jsQR lost the code on those frames.
+            </li>
+            <li>
+              The check could hand back an earlier check's result (one still running for the code
+              before a change); now a check counts only for the code built last.
+            </li>
+            <li>
+              The GIF's frame times grew with each frame (each <code>renderAt</code> read back the
+              time the last one set); they are fixed steps from the start now.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong>What it holds</strong> (<code>src/qr/content.js</code>): Link, Text, Wi-Fi
+              network, Contact card (MECARD), Email (<code>mailto:</code>), Phone
+              (<code>tel:</code>), Text message (<code>SMSTO:</code>) and Place (<code>geo:</code>),
+              each a small form in the panel that builds the standard text, with Wi-Fi and MECARD
+              escaping. The form is kept in the hidden options <code>kind</code> and
+              <code>fields</code> (JSON); the
+              <strong>Wi-Fi password is never in the options</strong>, so never in a
+              <code>#s=</code> link or a saved scene. It stays in the page's memory, and a Wi-Fi
+              code opened from a link warns that its password must be typed again. The panel says
+              plainly that a link and a saved scene carry what the code holds.
+            </li>
+            <li>
+              <strong>Full screen</strong> (a panel button; <code>qr.fullScreen()</code> in the
+              hook): the code alone in Scan view on its own background, filling the screen, so
+              another phone can scan it. Esc or a tap closes it.
+            </li>
+            <li>
+              <strong>Defaults from the scan lab's measured scorecard</strong> (<code
+                >docs/audits/qr-scan-lab-2026-10.md</code
+              >
+              on <code>claude/lane-qr-lab</code>, measured against this toy at <code>f86e088</code>;
+              3,768 captures read by jsQR and zxing): Auto error correction is
+              <strong>M for every style</strong> (on phone-like captures every style read 100% at L
+              and M; Q and H make denser codes, and dense depth codes failed first). Contrast: a
+              warning below 4:1 and a strong one below 3:1. Module size: a warning under 4 pixels
+              per module on the screen, 6 for Bricks, Gems and Neon. Density: a warning at version 8
+              or more in a depth style. Light on dark: &quot;most phone cameras read it, some
+              scanner apps don't&quot;, and Bricks or Gems light on dark is called out as
+              unreadable, and light-on-dark Dots (46–77% in the lab) gets its own warning. Bricks
+              and Gems show a &quot;hold the phone flat&quot; hint. The advice after a failed check
+              suggests a shorter text, not a higher level, for depth styles. (For a few hours before
+              the measured scorecard, the provisional one set H for shaped styles; that is gone.)
+            </li>
+          </ul>
+          <h3 id="round-3-october-3-2026-14-30-utc-the-owner-marked-all-20-cards-good">
+            Round 3 (October 3, 2026, 14:30 UTC: the owner marked all 20 cards good)
+          </h3>
+          <p>Two small follow-ups from the scan lab's round 2 sweep:</p>
+          <ul>
+            <li>
+              After a PNG, a GIF or a copied link (the Share tab's Copy link) of glowing, dark-wall
+              Neon, a tip in the panel (and a toast): &quot;For printing or sharing, Neon on a pale
+              wall scans in every reader&quot;, with a one-tap switch.
+            </li>
+            <li>
+              While Alive is on, the panel shows &quot;hold the phone flat&quot; (the lab's loops
+              read 12 of 12 frames front on and at 10°, but Bricks, Neon and pale-wall Neon fell to
+              2 or 3 of 12 at 20°).
+            </li>
+          </ul>
+          <h3 id="clips-and-cards">Clips and cards</h3>
+          <p>
+            Eleven cards on Effect review page 2 (lane id <code>QR</code>, ids
+            <code>qr-&lt;style&gt;-&lt;motion&gt;</code>), posted on October 3, 2026: Burst for all
+            seven styles, Flip for Classic and Gems, Assemble for Dots and Neon. Each is a 480 px
+            MP4 seen from a little above while it moves, then a glide into Scan view and 2.5 s held
+            still, so the last frame can be scanned from the screen. Every last frame (MP4 included)
+            reads back with jsQR. They were made with a lane script like
+            <code>tools/effect-clip.mjs</code> (same stepped clock) but with labs on (the motions
+            are a labs GPU program, and the shared tool opens the app without labs) and the
+            scan-view camera; it lives in the session's scratch space, not the repo. There is no
+            <code>lanes/QR</code> record on the page yet (the Operator makes it); the cards show
+            under the id &quot;QR&quot; until then.
+          </p>
+          <p>
+            Round 2 cards (October 3, 2026, about 10:50 UTC): <code>qr-neon-burst-r2</code> and
+            <code>qr-gems-burst-r2</code> (they replace <code>qr-neon-burst</code> and
+            <code>qr-gems-burst</code>), <code>qr-neon-light-burst</code>, and in the new group
+            <code>alive</code>: <code>qr-classic-alive</code>, <code>qr-dots-alive</code>,
+            <code>qr-rounded-alive</code>, <code>qr-bricks-alive</code>, <code>qr-gems-alive</code>,
+            <code>qr-bubbles-alive</code>, <code>qr-neon-alive</code>,
+            <code>qr-neon-light-alive</code> (filmed in Scan view throughout; 12 of 12 sampled
+            frames of every MP4 read back; in the Bubbles clip's GIF jsQR missed 4 of 84 frames,
+            said on its card). <code>qr-neon-assemble-r2</code> (about 11:00 UTC, at level M)
+            replaces <code>qr-neon-assemble</code>, which showed the first Neon.
+          </p>
+          <h3 id="next">Next</h3>
+          <ul>
+            <li>
+              The QR scan lab's scorecard: set the defaults and warnings from its measurements of
+              the toy.
+            </li>
+            <li>The owner's marks on the cards.</li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/QR.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/QR.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

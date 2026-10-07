@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Pianos: pianos and songs · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Pianos."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/pianos/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Pianos: pianos and songs · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Pianos."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/pianos/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Pianos: pianos and songs</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li>
+                <a
+                  href="#brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-own-pianos-ideas-on-the-toy-ideas-page-and-step-5-of-roadmap-md-pianos-and-songs"
+                  >Brief (written by the Operator on September 29, 2026, from the owner's own
+                  &quot;Pianos&quot; ideas on the Toy Ideas page and step 5 of ROADMAP.md,
+                  &quot;Pianos and songs&quot;)</a
+                >
+              </li>
+              <li><a href="#you-own">You own</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Pianos: pianos and songs">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Pianos, &quot;Pianos and songs&quot; (prefix
+            <code>pno</code>). Branches: claude/lane-pianos-engine (the engine PR, &quot;Engine:
+            songs, a song bar and a MIDI reader&quot;) and claude/lane-pianos (the toys, &quot;Phase
+            Pianos: pianos and songs&quot;). Handoff file: docs/handoff/Pianos.md.
+          </p>
+          <h2
+            id="brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-own-pianos-ideas-on-the-toy-ideas-page-and-step-5-of-roadmap-md-pianos-and-songs"
+          >
+            Brief (written by the Operator on September 29, 2026, from the owner's own
+            &quot;Pianos&quot; ideas on the Toy Ideas page and step 5 of ROADMAP.md, &quot;Pianos
+            and songs&quot;)
+          </h2>
+          <p>
+            The owner approved five pianos of his own on the Toy Ideas page. The toy piano is being
+            built separately (a blind A/B lane); leave it alone. You build the other four, and the
+            song engine they share. The owner's words for the set: &quot;Each piano works like the
+            xylophone: tap a key to play that note, tap anywhere else for its song. Each can also
+            play a song file of your own.&quot;
+          </p>
+          <h3 id="part-1-the-engine-pr-first-on-claude-lane-pianos-engine">
+            Part 1: the engine PR (first, on claude/lane-pianos-engine)
+          </h3>
+          <p>
+            The owner's note on the grand piano, word for word: &quot;Your own songs: MIDI (.mid) is
+            the natural match for the chess toy's PGN or the protein's PDB. It is the standard file
+            of notes and timings, and it maps key for key onto a piano, so the right keys go down.
+            The toy would read the file in the page (a small reader, no library), use its notes and
+            its sustain pedal, move any note outside the keyboard up or down by octaves, and show a
+            song bar like the chess game bar: a title you can edit, play and pause, back to the
+            start, speed and loop. It could also take ABC notation pasted as text (a plain-text tune
+            format; thousands of folk tunes are online). The built-in songs are public-domain
+            compositions we write out ourselves, so no recording rights are involved. It needs a
+            small engine change first (the chess game bar made general for songs, plus the file
+            reader), as its own &quot;Engine:&quot; PR.&quot;
+          </p>
+          <ul>
+            <li>
+              A MIDI reader in the page (our own code, no library): Standard MIDI Files, format 0
+              and 1, notes on and off, velocity, tempo changes and the sustain pedal (controller
+              64); the notes come out as a plain list a recipe can play. Notes outside a toy's
+              keyboard move by octaves into its range.
+            </li>
+            <li>
+              The song bar: the chess game bar (<code>src/ui.js</code>, &quot;The game bar&quot;)
+              made general, so a song toy shows it too: an editable title, play and pause, back to
+              the start, speed and loop, and where the song has got to. The chess bar keeps working
+              exactly as now.
+            </li>
+            <li>
+              Opening a song file through the Toy tab's input panel (<code>input.binary</code>
+              exists since #81); ABC notation pasted as text if it fits in the time, otherwise cut
+              it and say so.
+            </li>
+            <li>
+              A small recipe API for songs (you design it; the piano recipes use it), documented in
+              docs/PACKS.md, and tests in tests/pno-engine.spec.mjs (the reader on small MIDI files
+              you make, the bar, the chess bar unchanged).
+            </li>
+            <li>
+              Keep it additive and small, as every &quot;Engine: …&quot; PR. Say READY for it on its
+              own; the Operator runs the full suite through the Integrator and merges it before your
+              toy PR.
+            </li>
+          </ul>
+          <h3
+            id="part-2-the-four-pianos-on-claude-lane-pianos-a-new-pack-src-packs-pianos-js-on-the-music-shelf"
+          >
+            Part 2: the four pianos (on claude/lane-pianos, a new pack
+            <code>src/packs/pianos.js</code> on the Music shelf)
+          </h3>
+          <p>The owner's ideas, word for word:</p>
+          <ol>
+            <li>
+              <strong>Grand piano</strong> (<code>grand-piano</code>). Tap: &quot;Tap a key: it
+              dips, its hammer flies up under the open lid and strikes the strings, and the damper
+              lifts while the note rings. Tap anywhere else: it plays the opening of its song, every
+              key and hammer moving with the notes and the sustain pedal going down with the phrases
+              (about 5 s; the whole song plays from the song bar).&quot; Sound: &quot;A warm
+              concert-grand voice made in the page (felt thump, ringing partials, the damper's soft
+              stop). Built-in songs are public-domain pieces: Für Elise, Clair de lune, Gymnopédie
+              No. 1, Ode to Joy.&quot; Why: &quot;Instruments are played: you see the key, the
+              hammer and the damper move for every note.&quot;
+            </li>
+            <li>
+              <strong>Upright piano</strong> (<code>upright-piano</code>). Tap: &quot;Tap a key to
+              play it: the front panel is off, so you see the row of hammers swing forward onto the
+              upright strings. Tap elsewhere for its song, a ragtime (The Entertainer), the hammers
+              rippling along the row.&quot; Sound: &quot;A brighter, slightly honky-tonk upright
+              voice, so it sounds different from the grand.&quot; Why: &quot;A twin of the grand
+              that looks and sounds different: hammers in view, a bar-room tone.&quot;
+            </li>
+            <li>
+              <strong>Harpsichord</strong> (<code>harpsichord</code>). Tap: &quot;Tap a key: its
+              jack rises and the quill plucks the string, which you see quiver. Tap elsewhere: the
+              Minuet in G from Bach's notebook, the jacks bobbing like a row of dancers.&quot;
+              Sound: &quot;A bright, plucked harpsichord voice, made in the page.&quot; Why: &quot;A
+              keyboard that plucks instead of striking: a different motion and a different
+              sound.&quot;
+            </li>
+            <li>
+              <strong>Electronic keyboard</strong> (<code>electronic-keyboard</code>). Tap:
+              &quot;Tap a key to play it. Tap elsewhere and the keys light up just ahead of each
+              note, like a learning keyboard, while the little screen scrolls the song's title and a
+              beat starts on the drum pads. Panel buttons switch the voice: piano, organ, synth,
+              vibes.&quot; Sound: &quot;Four synth voices and a simple drum beat, all made in the
+              page.&quot; Why: &quot;Lit keys show the song before it plays: a toy you can learn a
+              tune from.&quot; (No brand names or logos on the panel.)
+            </li>
+          </ol>
+          <p>What good looks like:</p>
+          <ul>
+            <li>
+              Kit-built, public toys (not labs). Every key, hammer, damper, jack and string that
+              moves is its own solid part; a tap on a key plays that key (per-key taps, as the
+              xylophone does with <code>pick</code>; docs/handoff/history.md).
+            </li>
+            <li>
+              As many keys as the budgets allow, up to a full 88 on the grand and upright; measure
+              the splats and parts, and say what you chose and why.
+            </li>
+            <li>
+              Songs play from the song bar, and each piano opens a MIDI file of your own. Write the
+              built-in songs out yourself from the public-domain scores (compositions only, never
+              recordings); keep each built-in song short enough to load fast. If you ship sample
+              .mid files, make them yourself from those notes (CC0, ours).
+            </li>
+            <li>
+              New voices in src/voices.js (a concert grand, an upright, a harpsichord, organ, synth,
+              vibes and a small drum kit) where the existing voices can't make them; add them, don't
+              change existing voices. Each toy's entry in src/toy-sounds.js.
+            </li>
+            <li>
+              Follow the effect quality rules in CLAUDE.md (instruments are played: keys, hammers
+              and strings visibly move with each note; parts move as solid pieces; real materials:
+              black lacquer, ivory and ebony keys, felt, brass, bright strings; no speckle, no
+              see-through solids) and Fidelity A's method (even placement, full opacity, full
+              density, clean colors).
+            </li>
+            <li>
+              A how-to line and an About text per toy in src/toy-help.js, a toy-plan entry each, and
+              a thumbnail each.
+            </li>
+          </ul>
+          <p>
+            If time runs short, build in this order (engine, grand, upright, harpsichord, electronic
+            keyboard) and cut from the end; say what was cut.
+          </p>
+          <p>
+            Clips and cards (390×844), each labeled &quot;built by Opus 5.5&quot;, in the lane
+            record &quot;Pianos&quot; on the Effect review page (the Operator made it):
+          </p>
+          <ul>
+            <li><code>pno-song-bar</code>: the song bar on a phone, with a MIDI file opened;</li>
+            <li>
+              <code>pno-grand-keys</code> (three keys, close enough to see hammer and damper),
+              <code>pno-grand-song</code>;
+            </li>
+            <li>
+              <code>pno-upright</code>, <code>pno-harpsichord</code>,
+              <code>pno-keyboard</code> (each: a key, then the song);
+            </li>
+            <li><code>pno-stills</code>: a sharp still of each piano.</li>
+          </ul>
+          <p>
+            Tests: tests/pno-engine.spec.mjs (the engine PR) and tests/pno.spec.mjs (each piano
+            builds, a key tap moves only that key's parts as solid pieces, the song plays notes in
+            order, a MIDI file opens, screenshots at 390×844 and 1440×900).
+          </p>
+          <h2 id="you-own">You own</h2>
+          <ul>
+            <li>
+              The engine PR: a new <code>src/midi.js</code> (or <code>src/songs.js</code>), the game
+              bar's block in <code>src/ui.js</code> and its markup and styles in
+              <code>index.html</code> and <code>styles.css</code>, additive voices in
+              <code>src/voices.js</code>, your section in docs/PACKS.md, tests/pno-engine.spec.mjs.
+            </li>
+            <li>
+              The toy PR: <code>src/packs/pianos.js</code> (new),
+              <code>assets/toys/grand-piano/</code>, <code>assets/toys/upright-piano/</code>,
+              <code>assets/toys/harpsichord/</code>, <code>assets/toys/electronic-keyboard/</code>,
+              your toys' entries in the shared lists, tests/pno.spec.mjs, your
+              <code>pno-*</code> screenshots and docs/handoff/Pianos.md.
+            </li>
+            <li>
+              <code>src/packs/music.js</code> is frozen: don't edit it (read the xylophone there to
+              learn <code>pick</code>). Leave the toy piano to the A/B lane.
+            </li>
+          </ul>
+          <p>
+            Lanes Worlds, Fidelity A, Fidelity B, the two A/B makers, Anatomy and the Integrator run
+            at the same time; leave their files alone. Two sound lanes may start while you run (they
+            edit src/toy-sounds.js entries of existing toys); keep to your own entries. The laptop
+            is locked.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (default effort), for the whole lane. No helpers used.</p>
+          <ul>
+            <li>
+              Engine PR (claude/lane-pianos-engine): <code>src/songs.js</code> (MIDI and ABC
+              readers, the song player, <code>songControls</code>), the lever kind (22) in
+              <code>src/effects.js</code> (GLSL and WGSL), <code>src/kit.js</code> and
+              <code>src/motion.js</code>, the song bar in <code>src/ui.js</code>,
+              <code>index.html</code> and <code>styles.css</code>, six keyboard voices in
+              <code>src/voices.js</code> (grand, upright, harpsichord, organ, synth, vibes; the drum
+              pads reuse kick, snare, hat and tom), PACKS.md section 5d, tests/pno-engine.spec.mjs
+              (14 tests).
+            </li>
+            <li>
+              Toy PR (claude/lane-pianos): <code>src/packs/pianos.js</code> with the four toys,
+              their shared-list entries, thumbnails, tests/pno.spec.mjs,
+              <code>tools/pno-clip.mjs</code> (phone-sized clips with the song bar).
+            </li>
+            <li>
+              Keys: the grand and the upright have the full 88 (A0 to C8), the harpsichord 61 (F1 to
+              F6), the electronic keyboard 61 (C2 to C7). Every key, hammer, damper, jack and string
+              that moves is its own lever. Builds: density 2 for the pianos and 1.7 for the keyboard
+              (so the tier's most: 400,000 splats at max, 300,000 at high), 0.2 to 0.6 s in
+              <code>node tools/check-packs.mjs pianos</code>.
+            </li>
+            <li>
+              Built-in songs (written out from the public-domain scores, checked against the Mutopia
+              Project's public-domain editions): Für Elise (the A section twice with both endings,
+              the middle part and the theme again), Clair de lune (the first eight bars), Gymnopédie
+              No. 1 (the first 26 bars), Ode to Joy (the theme with a simple left hand, written by
+              hand), The Entertainer (the introduction and the first strain), the Minuet in G (both
+              halves, each twice), Twinkle, Twinkle, Little Star and Frère Jacques (by hand).
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              Why levers: a kit toy has at most 15 parts and 48 tokens, and a full grand needs 88
+              keys, 88 hammers and about 70 dampers moving one by one. The lever kind moves up to 96
+              pieces per group, in up to 6 groups, each by its own amount from three channels (key,
+              hammer, damper), with two new uniform arrays (42 vec4 in all).
+            </li>
+            <li>
+              Song audio is scheduled by the recipe a quarter second ahead on the audio clock (the
+              song player), not through <code>out.cues</code> (cues play on the frame, 60 ms apart
+              at best, which drops chord notes). <code>src/voices.js</code> is imported only once
+              the speaker is on, so embeds never load it.
+            </li>
+            <li>
+              A tapped key plays through the app with <code>pick</code> (the toy-sounds spec lists
+              every key); the electronic keyboard plays its keys from the recipe instead, in the
+              voice chosen on its panel.
+            </li>
+            <li>
+              The drum beat: a MIDI file's own drums (channel 10) when it has them, else kick,
+              snare, hi-hat and a tom fill every four bars.
+            </li>
+            <li>
+              Built-in songs start after a half-second lead-in, so the first key can light (and the
+              first hammer rise) before it sounds.
+            </li>
+            <li>
+              Build time: straight tubes need <code>{ samples: 4, grid: 12 }</code> and big curved
+              surfaces an explicit <code>normal</code>, or a toy with hundreds of pieces is slow to
+              build.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              Review (September 29, 2026): the owner marked pno-grand-keys, pno-grand-song and
+              pno-song-bar &quot;fix&quot;: mechanics perfect, needs more detail and sharpness.
+              Fixed in the same PR with lanes Fidelity A and B's method (PACKS.md 7c): even shapes
+              from <code>src/packs/even.js</code> for every box, cylinder, cone and rounded box,
+              color jitter at most 0.01, density 1.7 (1.5 for the keyboard), and the strings as
+              continuous thin lines. All seven clips redone as <code>-r2</code> cards (the old ones
+              marked replaced).
+            </li>
+            <li>
+              Review r2 (September 29, 2026): all seven &quot;fix&quot;, more sharpness, less grain.
+              r3: every box built from even strips (<code>stripBox</code>), smaller splats along
+              each edge (<code>sharpen</code>), twice the splats on the keys, density 2.
+            </li>
+            <li>
+              Review r3 (September 30, 2026): song bar, grand song and keyboard &quot;good&quot;;
+              grand keys (can't tell adjacent keys apart), upright (the parts above the keys
+              grainy), harpsichord (outline blurry) and stills &quot;fix&quot;. r4: faces nobody can
+              see (a key's bottom and back, the plate's back, the top's underside) take no splats;
+              keys (weight 8), hammers, dampers and rails get more and the big case panels less;
+              long box faces use narrow splats stretched along them (<code>STRETCH</code>), so key
+              sides and rails come out as straight lines; each white key's top has a fine dark edge;
+              felt heads are their own pieces; the tiny action parts drop the wood-grain noise; the
+              curved rims and the lids take small splats along their edges (<code>edged</code>) and
+              each lid gets a solid edge band (<code>lidRim</code>). Posted as
+              <code>-r4</code> cards. How to find where the splats go: build the recipe at 400,000
+              and list each item's <code>n</code>, <code>area</code> and weight (the biggest items
+              are the case and the lid).
+            </li>
+            <li>
+              Full suite (claude/lane-pianos with main 60b775d, in 12 shards): about 430 passed, 2
+              failed: this lane's MIDI test (fixed) and <code>tests/bk.spec.mjs</code> &quot;a
+              video's time, length and seek&quot;, which fails the same way on plain main 456e890.
+            </li>
+            <li>
+              All seven -r4/-r3 cards &quot;good&quot; (September 30, 2026). Main 4242b98 merged
+              into both branches (only TOY-PLAN.md conflicted; regenerated). Full suite on
+              claude/lane-pianos in three shards: 1/3 187 passed; 2/3 204 passed, 1 failed (smoke
+              &quot;the cat statue turns its head&quot;: the toy's clock reached 2.85 of 3 s in the
+              30 s wait; it passes when run again on its own, 18 s); 3/3 129 passed.
+            </li>
+            <li>
+              The container is reclaimed while the session is idle, which kills background runs: a
+              long run has to be watched from an active turn (or run in shards that can resume).
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              Clair de lune and Gymnopédie are openings, not the whole pieces, to keep the pack
+              small.
+            </li>
+            <li>
+              The strings are one wire per key (a real grand has about 230), laid straight rather
+              than cross-strung.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              The brief suggested opening songs through the Toy tab's input panel; the song panel
+              (like the chess game panel) does it instead, with the built-in songs, &quot;Open a
+              MIDI file…&quot; and &quot;Paste ABC&quot; (a multi-line box, which the input panel
+              doesn't have).
+            </li>
+            <li>PACKS.md section 5d is written in the engine PR (the brief listed it as mine).</li>
+            <li>
+              <code>tools/pno-clip.mjs</code> is new (phone-sized clips with the page's song bar).
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Pianos.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Pianos.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

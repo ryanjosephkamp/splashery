@@ -376,6 +376,7 @@
       "author": "Storm Geerling",
       "rotate": [180, 0, 0],
       "lod": 0,
+      "sphere": [0.078, 0.002, -0.003, 0.97],
       "splats": 82539,
       "lite": 82539,
       "sh": 1
@@ -507,6 +508,8 @@
       "license": "CC BY-NC 4.0",
       "author": "PrintedForFun",
       "nc": true,
+      "local": ".cache/fx9/dog-clean.ply",
+      "localNote": "Lane Fix9: the source without the capture's silvery fringe in the crease under the plush (1,800-odd splats), made by tools/fx9-dog-fill.mjs.",
       "rotate": [180, 0, 0],
       "splats": 478072,
       "lite": 300000,

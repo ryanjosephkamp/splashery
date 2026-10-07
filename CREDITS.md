@@ -69,7 +69,10 @@ no license shown on their page, and ones that show a brand name or a character f
 left out. Each file was changed by `tools/pr2-prepare.mjs`: rotated upright, recentred, scaled to a
 radius of about 0.9, cleaned of strays and decimated (at most 1,000,000 splats, 300,000 for the lite
 files). One band of spherical harmonics is kept on the full files (the lite files have none; the
-sources of the alum crystal and the monkey doll have none).
+sources of the alum crystal and the monkey doll have none). Lane Fix9 (October 7, 2026) cropped the
+photo orange's faint floaters with a sphere, and removed the dog plush's stray fringe under it
+(where the plush lay on the mat, unseen by the camera) and closed the gaps there with a hidden,
+kit-built core (`tools/fx9-dog-fill.mjs`); the dog plush stays CC BY-NC 4.0.
 
 | Toy                    | Scene                                                                                     | Author            | License                                                               |
 | ---------------------- | ----------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------- |

@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Physics: hands-on play and physics · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Physics."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/physics/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Physics: hands-on play and physics · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Physics."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/physics/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Physics: hands-on play and physics</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li>
+                <a href="#for-the-next-lanes-hands-on-categories-any-pose"
+                  >For the next lanes (hands-on categories, Any pose)</a
+                >
+              </li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Physics: hands-on play and physics">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>(Written by the Operator on October 2, 2026, word for word.)</p>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Physics, &quot;Hands-on play and
+            physics&quot; (prefix <code>phy</code>). Branches:
+            <code>claude/lane-physics-engine</code> (&quot;Engine: hands-on play and a small physics
+            engine&quot;), merged first, then <code>claude/lane-physics</code> (&quot;Phase Physics:
+            hands-on showcase toys&quot;). Handoff file: docs/handoff/Physics.md.
+          </p>
+          <p>
+            This is step 7 of docs/ROADMAP.md, &quot;Physics and hands-on play&quot;, which the
+            owner approved earlier. Read its &quot;Hands-on play&quot; and &quot;Physics&quot;
+            sections first: they are the design. In his review of October 2
+            (docs/reviews/2026-10-02-mega-review/review.md, on branch
+            <code>claude/operator-mega-review</code> until that Ops PR merges) he said this is what
+            he most wants finished in the next one to three days: &quot;I really do want to add all
+            the interactivity and maybe, like, a little physics stuff to all the toys so that
+            they're interactive.&quot; Speed matters, and so does quality: everything you ship must
+            pass the effect quality rules in CLAUDE.md (real motion, solid pieces, things move like
+            the real thing).
+          </p>
+          <h3 id="part-1-the-engine-claude-lane-physics-engine">
+            Part 1: the engine (claude/lane-physics-engine)
+          </h3>
+          <p>As ROADMAP.md describes:</p>
+          <ul>
+            <li>
+              <strong>A small physics engine of our own</strong> (position-based dynamics, XPBD; no
+              library): rigid pieces, soft bodies (stiff and loose constraints), simple collision
+              shapes, the floor, gravity, friction and sleep. CPU for a few dozen pieces and a few
+              hundred points; the GPU still moves every splat. It must run smoothly on a mid-range
+              phone.
+            </li>
+            <li>
+              <strong>Hands-on mode</strong>: ▶ Play runs today's tap; ✋ Hands-on is a switch (off:
+              everything works as today; on: a drag on the toy grabs what's under the finger, a drag
+              beside it or with two fingers turns the view, a tap on a piece does that piece's
+              action); ↺ Reset sends every piece home. Toys that are hands-on already (laptop,
+              xylophone, chess, puzzle cube, Newton's cradle, gummy bear, bricks, pianos) keep their
+              controls and start with the switch on. Keep the controls out of the way on a phone
+              (390×844) and consistent with the top bar and the Toy tab.
+            </li>
+            <li>
+              <strong>Level 1 for every toy</strong>: with Hands-on on, any toy, scans included, can
+              be picked up and tossed. It lands, bounces and settles; soft ones squish. This is the
+              &quot;interactive for all toys&quot; baseline.
+            </li>
+            <li>
+              Links and saved scenes are unchanged: a link opens the toy as built, and old
+              <code>#s=</code> links (schema v2 and v3) keep loading.
+            </li>
+          </ul>
+          <p>
+            Merge this part as soon as it's solid, with its own tests (tests/phy-engine.spec.mjs).
+            With the switch off by default, public toys don't change, so the Operator merges it
+            after the full test run.
+          </p>
+          <h3 id="part-2-the-showcase-toys-claude-lane-physics">
+            Part 2: the showcase toys (claude/lane-physics)
+          </h3>
+          <p>The owner asked for these in his review; do them in this order:</p>
+          <ol>
+            <li>
+              <strong>rocks (Pebbles)</strong>: pick up the pebbles one by one and stack them; a
+              careless stack topples. Same sounds as today.
+            </li>
+            <li>
+              <strong>jelly</strong> and <strong>amoeba</strong>: pull and stretch them like the
+              gummy bear; they wobble back. (Sound C is changing the amoeba's sound; leave sound
+              entries to them.)
+            </li>
+            <li>
+              <strong>cherries</strong>: pull one cherry on its stem and let go: it swings and
+              knocks the other, like Newton's cradle.
+            </li>
+            <li>
+              <strong>bricks</strong> and <strong>macarons</strong>: pick up and stack (the bricks
+              already snap; make free stacking work too).
+            </li>
+            <li>
+              <strong>spring-toy</strong>: pull and stretch it; it springs back and wobbles like a
+              real Slinky.
+            </li>
+            <li>
+              <strong>sushi</strong>: tap a piece and the chopsticks pick that one up and can put it
+              back.
+            </li>
+            <li>
+              <strong>bow-and-target</strong>: pull the arrow back on the string, let go, and it
+              flies (already in BACKLOG.md).
+            </li>
+          </ol>
+          <p>
+            Then write <strong>the hands-on plan for every toy</strong>, docs/HANDS-ON-PLAN.md: one
+            line per toy saying what Hands-on does beyond Level 1 (or &quot;Level 1 only&quot;),
+            grouped by shelf, so the owner can approve it and category lanes can build it. You may
+            start one helper (same model) for the plan's draft while you build.
+          </p>
+          <h3 id="clips-and-marks">Clips and marks</h3>
+          <p>
+            Post clips in your lane record &quot;Physics&quot; on Effect review page 2, at 390×844,
+            &quot;built by Opus 5.5&quot;: the Hands-on controls; a scan picked up and tossed; a
+            soft toy squished; and each showcase toy. Show a person's drag in the clip (a dot where
+            the finger is). Showcase toys are public, so part 2 merges after the owner marks the
+            cards good.
+          </p>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>
+              New files under src/physics/ (or similar; say where), the Hands-on controls (small,
+              additive changes to src/player.js, src/app.js, src/ui.js and styles.css; tell the
+              Operator the exact lines), and the showcase toys' recipes for their hands-on parts.
+            </li>
+            <li>
+              Those toys' entries in src/toy-help.js and tools/toy-plan.json (how-to lines change),
+              but not their sounds (Sound C owns them).
+            </li>
+            <li>
+              docs/HANDS-ON-PLAN.md, tests/phy*.spec.mjs, your <code>phy-*</code> screenshots and
+              docs/handoff/Physics.md.
+            </li>
+          </ul>
+          <p>
+            Lanes Sound C, Fix7 (taps and toy bugs; it will touch storm-cloud, shield, splat-field,
+            fireworks, paper-lantern, puzzle-cube and others), Fluids r4, Video 3D, Live input,
+            Science and the Integrators run at the same time; leave their files alone. If the
+            Hands-on switch needs a change in a file another lane is editing, keep yours small and
+            say so. The laptop is locked.
+          </p>
+          <h3 id="how-this-lane-runs">How this lane runs</h3>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and marks them. Don't ask him anything or wait for him. Put questions
+              and blockers in your final message, and the Operator answers or relays them. Messages
+              that arrive in this session &quot;From the Operator&quot; come from the coordinator on
+              the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29,
+              2026: Opus 5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the
+              Worlds content, the Studio converters, the docs and the Integrator). Any helper you
+              start uses the same model. Use at most one helper at a time.
+            </li>
+            <li>
+              Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs,
+              anything behind the labs switch, and additive engine PRs once the full test run
+              passes. Changes to toys the public already sees wait for the owner's &quot;good&quot;
+              marks. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English (color, center, gray,
+              math, license, toward, -ize endings, dates like &quot;September 29, 2026&quot;). Leave
+              code identifiers, file names and anything stored in links as they are.
+            </li>
+            <li>
+              Read first: CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are
+              binding), docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md, docs/ROADMAP.md
+              (steps 7 and 8) and docs/handoff/history.md (lessons from earlier lanes).
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>
+            Model: Opus 5.5 (claude-opus-5-5), default effort. One helper (same model) drafted
+            docs/HANDS-ON-PLAN.md.
+          </p>
+          <ul>
+            <li>
+              October 2, 2026: lane started. Part 1 (the engine) on
+              <code>claude/lane-physics-engine</code>, draft PR #176. Part 2 (the showcase toys and
+              the plan) on <code>claude/lane-physics</code>, built on top of it.
+            </li>
+            <li>
+              Part 1: <code>src/physics/world.js</code> (the XPBD engine),
+              <code>src/physics/hands-on.js</code> (Hands-on play: Level 1 for every toy and pieces
+              for kit recipes), the ▶ / ✋ / ↺ buttons, <code>tools/phy-clip.mjs</code> (phone-size
+              clips of the whole page with a finger dot) and <code>tests/phy-engine.spec.mjs</code>.
+            </li>
+            <li>
+              Part 2: all nine showcase toys have their hands-on parts: Pebbles (pick up and stack,
+              best in the Cairn style), jelly and amoeba (stretch), cherries (pull, swing and
+              knock), bricks (pick up, stack, snap onto the studs), macarons (pick up and stack),
+              spring toy (stretch and spring back), sushi (a tap on a piece picks that one) and the
+              bow (draw and shoot). Help lines, About texts and plan entries updated;
+              <code>tests/phy.spec.mjs</code>; docs/HANDS-ON-PLAN.md (every toy, by shelf).
+            </li>
+            <li>
+              October 2, 2026, 15:09 UTC: #176 (the engine) merged. Main merged into
+              <code>claude/lane-physics</code> (TOY-PLAN.md regenerated). #184 (the showcase toys)
+              waits for the owner's marks on the cards.
+            </li>
+            <li>
+              October 2, 2026, evening: the full suite on #184 ran file by file (76 files). Two
+              failures, both ours and both fixed: Pebbles' About text was over the nature shelf's
+              140 words, and the bricks test pressed before the camera had settled. Everything else
+              passed, the anatomy atlas included.
+            </li>
+            <li>
+              October 3, 2026: the owner found the ✋ grab flung toys on a touch. #203 (Engine: a
+              physical hands-on grab) rebuilt it over three rounds of clips, and the owner marked
+              phy-grab-nudge-r2, phy-grab-hold-r3 and phy-grab-flick-r3 good. #222 (a placed piece
+              follows closely and sets down clear of the one below) fixed a stacking knock it
+              exposed. #203, #222 and #184 are merged; the owner accepted every line of
+              docs/HANDS-ON-PLAN.md. The lane is done; the spring toy waits for the owner to try it
+              on the live site.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              Units: the whole toy (Level 1) lives in the world and moves the toy's entity
+              (<code>Stage.setToyPose</code>), so splats sort and taps land where it lies. Pieces
+              live in the recipe's own coordinates (a kit toy is centered and scaled to fit) and
+              move tokens (<code>motion.handsTokens</code>) or parts
+              (<code>motion.handsParts</code>).
+            </li>
+            <li>
+              What made stacking work: a pair's contact pushes are worked out from one state and
+              shared out (Jacobi), and friction acts on speeds only. Point-by-point pushes made
+              stacks shiver; undoing slides point by point made them creep; both are gone.
+            </li>
+            <li>
+              Rounded stones on rounded stones rock and fall in this engine, so stacked pieces
+              collide as flat pucks (a pebble) or boxes and cylinders; a pinned heap stone collides
+              in its full shape.
+            </li>
+            <li>
+              Pieces are picked and placed: held level by the middle, hovering just above whatever
+              is under them (a ray straight down), passing over other pieces while held; a recipe
+              can pull it toward the middle of the piece below (<code>hands.center</code>) or snap
+              it (<code>hands.snap</code>, the bricks' studs).
+            </li>
+            <li>
+              A heap built for looks has stones sunk into each other: a stone that comes loose
+              passes through the pinned ones it is sunk into until they part, and contacts push at
+              most so far per substep, so nothing flies off.
+            </li>
+            <li>
+              The spring toy is a chain of particles with one-way links (stretch, and &quot;rests
+              above&quot;), and a sideways spring for its bending stiffness. The bow's arrow is a
+              body under gravity.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              The grab (#203, #222; constants at the top of <code>src/physics/hands-on.js</code>):
+              the world steps in fixed 1/60 s steps (<code>STEP</code>). A drag under 24 px
+              (<code>NUDGE</code>) on a whole toy pushes it where the finger touched
+              (<code>pushTo</code>, <code>pushStep</code>). Past that it's picked up by that spot,
+              lifts <code>PICK_LIFT</code> and hangs from it: the held point follows on a critically
+              damped spring (<code>FOLLOW</code>, stepped exactly), a weak pull
+              (<code>HOLD_UPRIGHT</code>) and damping (<code>HOLD_SWING_DAMPING</code>) let it
+              swing. A let-go takes the finger's speed over its last 0.1 s, capped at 4 toy radii a
+              second; a still hold lets go still. A piece being placed follows closer
+              (<code>PLACE_FOLLOW</code>) and is set down from its hover height. The owner marked
+              this feel good: change it only with new clips for him.
+            </li>
+          </ul>
+          <h2 id="for-the-next-lanes-hands-on-categories-any-pose">
+            For the next lanes (hands-on categories, Any pose)
+          </h2>
+          <ul>
+            <li>
+              Where a toy's pose lives: Level 1 moves the whole toy with
+              <code>Stage.setToyPose({ pivot, q, t })</code> (the entity's transform, from
+              <code>HandsOn.apply</code>); <code>player.handsOn.body</code> has <code>pos</code>,
+              <code>q</code> and <code>home</code>; <code>player.handsOn.moved</code> is true while
+              it's off home. ↺ (<code>handsOn.reset()</code>) glides it home.
+            </li>
+            <li>
+              Taps on a moved toy: <code>player.toRecipe</code> and <code>fromRecipe</code> go
+              through the entity's transform, so a tap's point lands on the right part in any pose,
+              and the tap effect plays in the toy's own frame. So an effect that means
+              &quot;up&quot; (a hop, a fall, smoke, pouring) points the toy's up, sideways when it
+              lies on its side. That is the Any pose lane's work; pieces (not Level 1) go home
+              before a tap (<code>player.act</code>).
+            </li>
+            <li>
+              A new hands-on toy: a recipe's <code>hands</code> block (<code>pieces</code>,
+              <code>floor</code>, <code>area</code>, <code>lift</code>, <code>center</code>,
+              <code>snap</code>, <code>place</code>, <code>gravity</code>, <code>sound</code>) or
+              <code>drag</code> / <code>grab</code> for its own gestures; see the header of
+              <code>src/physics/hands-on.js</code> and the nine showcase toys (<code>rocks</code>,
+              <code>jelly</code>, <code>amoeba</code>, <code>cherries</code>, <code>bricks</code>,
+              <code>macarons</code>, <code>spring-toy</code>, <code>sushi</code>,
+              <code>bow-and-target</code>).
+            </li>
+            <li>
+              Tests: drive the clock by hand (<code>player.update(1 / 30)</code>), wait for the
+              camera to settle after opening a toy, and press at a known point
+              (<code>player.fromRecipe(...)</code>) rather than through the GPU pick, which can read
+              a frame drawn before the toy (see <code>tests/phy.spec.mjs</code>,
+              <code>__carry</code>).
+            </li>
+            <li>
+              Clips: <code>tools/phy-clip.mjs</code> (phone size, finger dot, a
+              <code>{&quot;toy&quot;: id}</code> step for several toys in one clip). In a clip, a
+              toy opened twice keeps its ✋ state, so don't press the switch again.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              Pebble pile (the default style): stones you pull from under others leave those hanging
+              where they were until something knocks them (they are pinned until touched hard). The
+              Cairn style is the clean showcase.
+            </li>
+            <li>
+              A brick or stone set down on an edge may slide off: that is the physics, but aim
+              matters.
+            </li>
+            <li>
+              Level 1 reads a sample of 6,000 splats on the first pick-up to find the toy's outside.
+            </li>
+            <li>
+              This container is reclaimed when the session sits idle, which kills a detached test
+              run; run the suite as a harness background task, or file by file.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              Engine lines (all additive): <code>src/player.js</code> (import;
+              <code>this.handsOn</code>; <code>attach</code> on load; <code>step</code> in
+              <code>update</code>; squish uniforms; busy flag; camera drift; pieces go home before a
+              tap), <code>src/app.js</code> (classify; the &quot;hands&quot; tool in
+              <code>toolStart/Move/End</code>; landing sounds; <code>showHands</code>,
+              <code>toggleHands</code>, <code>resetHands</code>; a stretchy recipe's
+              <code>grab.wobble</code>), <code>src/ui.js</code> (the three buttons,
+              <code>setHands</code>), <code>src/stage.js</code> (<code>setToyPose</code>),
+              <code>src/motion.js</code> (<code>handsTokens</code>, <code>handsParts</code>,
+              <code>handsResort</code>), <code>src/effects.js</code> (uniforms
+              <code>uSpBodyS</code>, <code>uSpBodyP</code> in GLSL and WGSL <code>spBody</code>),
+              <code>index.html</code> (the buttons), <code>styles.css</code> (a section at the end).
+            </li>
+            <li>
+              New tool: <code>tools/phy-clip.mjs</code>. Lesson for PACKS.md: a recipe's
+              <code>hands</code> block (pieces, floor, area, lift, center, snap, sound) and
+              <code>handsOn: true</code>; see <code>src/physics/hands-on.js</code>'s header.
+            </li>
+            <li>
+              Sound C: the landing and knock sounds are cues in the recipes'
+              <code>hands.sound</code> (stone clacks, the cherries' plink, brick clicks, macaron
+              taps, the bow's twang and thud) and a generic thud or squish in
+              <code>app.handsSounds</code>; none of the toys' entries in
+              <code>src/toy-sounds.js</code> changed.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Physics.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Physics.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
