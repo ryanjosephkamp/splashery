@@ -24,7 +24,10 @@ then keep "## State
   - **Orange (photo):** a sphere crop of its floaters.
   - **Dog plush:** a hidden kit-built core fills the gaps.
   - **Cell division, apoptosis and phagocytosis:** sharper.
-- Next: the full checks, the clips and cards on Effect review page 2, then READY.
+- Effect review page 2 (lane record `Fix9`) has nine cards, each before (left) and after (right):
+  `fx9-cherries`, `fx9-soda-can`, `fx9-data-in-3d`, `fx9-fluid-lab`, `fx9-orange-photo`,
+  `fx9-dog-plush`, `fx9-mitosis`, `fx9-apoptosis` and `fx9-phagocytosis`.
+- First READY on October 7, 2026, about 01:50 UTC. Next: polish rounds on the owner's marks.
 
 ## Notes
 
@@ -70,6 +73,9 @@ then keep "## State
     nuclear envelope.
   - Apoptosis: a fainter membrane.
   - Phagocytosis: a fainter membrane, and fewer, solid granules.
+- `tools/effect-clip.mjs` taps by calling `player.act` directly, which skips the pick. So the Data
+  in 3D card was recorded in the real app (Playwright's `recordVideo`), with a real click in the
+  empty box.
 - `tools/effect-clip.mjs` doesn't turn labs on. To see labs-only render settings in a clip, use
   `SPLASHERY_URL="http://127.0.0.1:4173/?labs=1&renderer=webgl2&x="`.
 
