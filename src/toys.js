@@ -1547,6 +1547,26 @@ export const TOYS = [
     pack: "atoms",
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
   },
+  // ---- Pack: lattices (lane Lattices and orbitals; labs) ----
+  {
+    id: "unit-cells",
+    label: "Unit cells",
+    category: "atoms",
+    kind: "kit",
+    pack: "lattices",
+    labs: true,
+    tags: "crystal lattice unit cell diamond graphite ice copper iron magnesium fcc bcc hcp face-centered body-centered hexagonal close-packed metal bonds thermal motion debye waller chemistry",
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "orbital-atlas",
+    label: "Orbital atlas",
+    category: "atoms",
+    kind: "kit",
+    pack: "lattices",
+    labs: true,
+    tags: "orbital atlas electron hydrogen wave function quantum s p d f g 4d 5f 5g 6d 7p node phase cut chemistry",
+  },
   // ---- Pack: molecule-viewer (lane Molecule viewer) ----
   {
     id: "molecule-viewer",

@@ -2819,6 +2819,18 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // Unit cells (lane Lattices and orbitals): a small, clear glass clink as
+  // the view steps, and a soft wooden tick as the atoms settle.
+  "unit-cells": [
+    { voice: "glass", f: 880, decay: 0.7, vol: 0.45 },
+    { voice: "wood", at: 0.55, f: 640, decay: 0.4, vol: 0.3 },
+  ],
+  // Orbital atlas: a soft, low whoosh as the orbital is cut and opens, and a
+  // quiet low ding as its faces turn to the viewer.
+  "orbital-atlas": [
+    { voice: "whoosh", f: 340, decay: 0.9, vol: 0.14 },
+    { voice: "ding", at: 0.5, f: 523, decay: 1.4, vol: 0.3 },
+  ],
   // A cryo-EM map cut open: a soft, low whoosh as the clipping plane sweeps
   // in, and a softer one as it closes (Science r3).
   "cryoem-map": {

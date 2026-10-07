@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 439 toys. 409 have a tap action today; the other 30 only hop.
+- 441 toys. 411 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 19.
+- **new** (needs its own effect): 21.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -39,41 +39,42 @@ Proposals below are suggestions; the owner may change them.
   of ten, Saturn V, Space Launch System, Space Shuttle, Virus, Bacteriophage, Bacterium, Red blood
   cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain,
   Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division,
-  Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Molecule
-  viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
-  cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
-  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
-  Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
-  Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
-  Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
-  bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
-  cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
-  and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music box, Fountain pen,
-  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
-  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider.
+  Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Unit cells,
+  Orbital atlas, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst
+  geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree,
+  Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
+  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
+  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
+  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
+  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
+  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
+  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
+  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
+  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
+  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
+  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
+  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
+  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
+  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
+  Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
+  code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
+  Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
+  box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand
+  Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city,
+  Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
-- **E2, new effects: space, atoms and gems.** Night sky
+- **E2, new effects: space, atoms and gems.** Unit cells, Orbital atlas, Night sky
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
@@ -1479,7 +1480,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
     as it is digested.
 
-## Atoms (8)
+## Atoms (10)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
@@ -1527,6 +1528,33 @@ Proposals below are suggestions; the owner may change them.
     slices), so atoms never leave their bonds.
   - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
     October 2, 2026).
+- **Unit cells** (`unit-cells`). Now: tap: Next view: cell, block, bonds. Plan: new effect (E2).
+  - Owner: The Operator's brief of October 7, 2026 (BACKLOG.md, "More crystal lattices and electron
+    orbitals"; ROADMAP.md, "Now", item 4; lane Lattices and orbitals; labs only).
+  - Effect: Six real crystals (diamond, graphite, ice Ih, fcc copper, bcc iron, hcp magnesium) from
+    their published cells (COD), atoms as opaque even spheres with true relative radii. The tap
+    steps through three views: the unit cell (zoomed to fill the view, with its outline); a block of
+    n × n × n cells (slider 1 to 4), its shells of cells growing out of the central cell as the view
+    zooms out; and the bonds, where every atom shrinks in place to a ball (a morph spreads the atoms
+    by 2.5 while their parts shrink by 1/2.5 about the same point) and sticks join nearest neighbors
+    (dotted hydrogen bonds in ice). Optional thermal motion: each atom as one Gaussian splat whose
+    spread is its published mean-square displacement (Debye–Waller B / 8π²).
+  - Improved: Lattices and orbitals: built from src/lattice/cells.js; ice's hydrogens by the ice
+    rules (an Euler circuit on a periodic block of oxygens). Evidence in
+    docs/evidence/unit-cells.json.
+  - Sound: A small, clear glass clink as the view steps, and a soft wooden tick as the atoms settle.
+- **Orbital atlas** (`orbital-atlas`). Now: tap: Cut it open. Plan: new effect (E2).
+  - Owner: The Operator's brief of October 7, 2026 (BACKLOG.md, "More crystal lattices and electron
+    orbitals"; ROADMAP.md, "Now", item 4; lane Lattices and orbitals; labs only).
+  - Effect: Every hydrogen orbital of n = 1 to 5 (s, p, d, f, g) and 6s, 6p, 6d, 7s, 7p (68),
+    grouped by shell, drawn like the Electron orbital toy's newer orbitals: a boundary surface
+    holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The tap cuts
+    it along its densest vertical plane and opens the halves like a book; each cut face shows |ψ|²
+    in that plane, dark at the nodes; then it closes.
+  - Improved: Lattices and orbitals: src/lattice/orbitals.js computes normalized R_nl and real Y_lm
+    for any n, l, m; tests check them against the analytic forms. Evidence in
+    docs/evidence/orbital-atlas.json.
+  - Sound: A soft, low whoosh as it is cut and opens, and a quiet low ding as the faces turn.
 - **Molecule viewer** (`molecule-viewer`). Now: tap: Measure an example. Plan: keep.
   - Owner: Push Plan S1, approved by the owner with "PDB fetch yes" (October 5, 2026; lane Molecule
     viewer, labs).

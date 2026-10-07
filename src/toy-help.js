@@ -1815,6 +1815,17 @@ export const TOY_HELP = {
     about:
       "Ordinary light microscopy struggles to separate nearby objects about 200 to 300 nanometers apart. Single-molecule localization microscopy finds the centers of isolated fluorescent blinks more precisely, then builds a picture from many positions. Localization precision is not the same as the final image's resolution, and several blinks may come from one molecule. Here each blink is drawn as a Gaussian whose width represents its reported uncertainty.\n\nChoose microtubules and clathrin in a 12 µm cell region, a whole nucleus in 3D, or open a .smlm file or a CSV with positions and uncertainties in nanometers. Color by depth, time frame or channel. Depth scale shows true coordinates or stretches depth fourfold. Precision keeps all localizations or only those better than 5 or 3 nm. Pinch or scroll to zoom; tap for a 200 nm slice at that depth, then tap to restore all depths. Files stay on your device. This is a viewer, not a measurement tool.",
   },
+  "unit-cells": {
+    howTo: "Tap to step from the unit cell to a block of cells, then to the bonds, and back.",
+    about:
+      "A crystal is one small box of atoms, its unit cell, repeated in every direction. This toy builds six real crystals from their measured cells (the Crystallography Open Database): diamond, graphite, ice, and three metals, copper (face-centered cubic), iron (body-centered cubic) and magnesium (hexagonal close-packed). The atoms are drawn to scale with each other: in the metals, diamond and graphite, neighbors touch; in ice, oxygen and hydrogen have their covalent sizes.\n\nTap to step from the unit cell to a block of cells, which grows out of it, and then to the bonds: each atom shrinks to a ball and sticks join its nearest neighbors (in the metals, the sticks mark atoms in contact). Choose the crystal, how many cells along each edge, and the view to start with. Thermal motion shows, with the bonds, how far each atom's center wanders at one instant, from published measurements, at true size or five times larger. Ice's hydrogens are one of the many arrangements real ice allows.",
+  },
+  "orbital-atlas": {
+    howTo:
+      "Tap to cut the orbital in half and open it, showing the density inside. Pick any orbital in the Toy tab.",
+    about:
+      "An orbital is a wave that tells where an electron in an atom is likely to be found. This atlas draws every orbital of hydrogen from the first shell to the fifth (s, p, d, f and g), plus 6s, 6p, 6d, 7s and 7p, from the exact solutions of the Schrödinger equation. The cloud is many points drawn where the electron is likely to be; the surface holds about 90% of it. Orange and blue mark the two signs of the wave, which matter when atoms bond.\n\nTap to cut the orbital in half and open it like a book: each cut face shows the likelihood in that slice, brightest where the electron is most often found and dark at the nodes, the shells and planes where it is never found. Each orbital is scaled to fill the view; real ones grow with the shell number squared. Heavier atoms have orbitals of these shapes but other sizes.",
+  },
   "cryoem-map": {
     howTo:
       "Tap to cut it open; tap again to close it. Pick a map, a level and the fitted model in the Toy tab.",

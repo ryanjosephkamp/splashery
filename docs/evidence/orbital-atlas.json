@@ -1,0 +1,64 @@
+{
+  "toy": "orbital-atlas",
+  "checked": "2026-10-07",
+  "summary": "The atlas draws every hydrogen orbital of n = 1 to 5 and 6s, 6p, 6d, 7s and 7p from the exact hydrogen wave functions: normalized radial functions (associated Laguerre polynomials) times real spherical harmonics. Points are sampled from |ψ|² the way the Electron orbital toy samples them, colored by the sign of ψ. Tests check the radial functions against the textbook formulas, their normalization, orthogonality and node counts, the harmonics against their Cartesian forms, and the samples against the analytic distributions.",
+  "claims": [
+    {
+      "claim": "The radial functions are the hydrogen atom's R_nl.",
+      "how": "R_nl(r) = N (2r/n)^l e^(−r/n) L_(n−l−1)^(2l+1)(2r/n), N² = (2/n)³ (n−l−1)! / (2n (n+l)!), in Bohr radii.",
+      "where": "src/lattice/orbitals.js:radial",
+      "sources": [
+        {
+          "title": "Hydrogen-like atom: the radial functions",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hydrogen-like_atom",
+          "says": "R_nl(r) = √((2Z/na)³ (n−l−1)! / (2n (n+l)!)) e^(−Zr/na) (2Zr/na)^l L_(n−l−1)^(2l+1)(2Zr/na)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: radial functions",
+      "note": ""
+    },
+    {
+      "claim": "The angular functions are the real spherical harmonics, named by their Cartesian forms (4d (xy), 5f (z³), 5g (x⁴−6x²y²+y⁴) …).",
+      "how": "Y_lm = √2 N_lm P_l^|m|(cos θ) cos(mφ) or sin(|m|φ), computed in Cartesian form as d^m P_l/dz^m times Re or Im of (x + iy)^|m|; without the Condon–Shortley sign, so each lobe's sign matches its name.",
+      "where": "src/lattice/orbitals.js:harmonic",
+      "sources": [
+        {
+          "title": "Table of spherical harmonics: real spherical harmonics",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Table_of_spherical_harmonics#Real_spherical_harmonics",
+          "says": "Y_3,−2 = ½ √(105/π) xyz/r³; Y_4,0 = (3/16) √(1/π) (35z⁴ − 30z²r² + 3r⁴)/r⁴; and so on."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: angular functions",
+      "note": ""
+    },
+    {
+      "claim": "The cloud is drawn from |ψ|²: the radius from r²R², the direction from Y².",
+      "how": "An inverse-CDF table of r²R² (cut at the 98.5% quantile, as the Electron orbital toy does) and rejection sampling against Y's largest value.",
+      "where": "src/lattice/orbitals.js:samplePoint",
+      "sources": [],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: samples follow |psi|²",
+      "note": ""
+    },
+    {
+      "claim": "The tap's cut faces show |ψ|² in the plane of the cut, with the nodes dark.",
+      "how": "An even grid on the cut plane, each point colored by the sign of ψ and brightened by |ψ| relative to the plane's peak.",
+      "where": "src/packs/lattices.js:buildOrbitalAtlas",
+      "sources": [],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The boundary surface is the level that holds about 90% of the electron, as in most textbooks; the cloud is cut at the radius that holds 98.5%.",
+    "Each orbital is scaled to fill the view; their real sizes grow as n² (7p is about 50 times wider than 1s).",
+    "Orange and blue mark the sign of ψ (its phase), which is a convention, not a color the electron has.",
+    "These are hydrogen's orbitals; in heavier atoms the shapes are similar but the sizes and energies differ."
+  ],
+  "fixes": []
+}

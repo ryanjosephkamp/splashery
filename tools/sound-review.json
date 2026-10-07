@@ -3622,6 +3622,22 @@
       "plan": "Now: the same lidar sweep with the airy wind at half its level and the twinkle a little quieter (Sound D).",
       "candidates": [],
       "round": "2026-10-06"
+    },
+    "unit-cells": {
+      "status": "ready",
+      "said": "",
+      "note": "A new toy's sound, for the owner to hear.",
+      "plan": "New (lane Lattices and orbitals): a small, clear glass clink as the view steps, and a soft wooden tick as the atoms settle.",
+      "candidates": [],
+      "round": "2026-10-07"
+    },
+    "orbital-atlas": {
+      "status": "ready",
+      "said": "",
+      "note": "A new toy's sound, for the owner to hear.",
+      "plan": "New (lane Lattices and orbitals): a soft, low whoosh as the orbital is cut open, and a quiet low ding as its faces turn to you.",
+      "candidates": [],
+      "round": "2026-10-07"
     }
   }
 }
