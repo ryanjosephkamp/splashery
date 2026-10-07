@@ -134,7 +134,7 @@
           "id": "galaxy-box",
           "toy": "galaxy-box",
           "card": "sci-galaxy-r4",
-          "what": "Gas from a published galaxy simulation, each particle one Gaussian. A tap peels away the hot gas.",
+          "what": "A published galaxy simulation's gas, one Gaussian per particle. A tap peels the hot gas away.",
           "why": "Simulation particles are already smooth blobs, so splats draw them directly. A simulation, not a photo.",
           "secs": 6.5,
           "steps": [
@@ -180,7 +180,7 @@
           "options": {
             "map": "aav"
           },
-          "what": "A virus shell from a real cryo-electron microscopy map. A tap cuts the front half away to show the inside.",
+          "what": "A virus shell from a real cryo-EM map. A tap cuts away the front half to show the inside.",
           "why": "One small flat splat wherever the measured density crosses the level the data bank recommends.",
           "secs": 5.5
         }
@@ -196,7 +196,7 @@
           "toy": "photo-3d",
           "card": "p3d-sample-r2",
           "what": "A flat photo rises into depth and sways, so you see around the trees.",
-          "why": "With your own photo, a depth model ({depthModelMB} MB, loaded only then) runs on your device. This sample's depth was made ahead of time with the same model.",
+          "why": "A {depthModelMB} MB depth model runs on your device for your own photo; this sample used it ahead of time.",
           "secs": 6,
           "steps": [
             {
@@ -271,7 +271,7 @@
           "toy": "chladni-plate",
           "card": "sts-chladni-r2",
           "what": "A bow makes a metal plate hum; the sand hops off the parts that move and gathers on the still lines.",
-          "why": "Every grain of sand is a splat of its own, so the figure forms grain by grain, as in Chladni's experiment of 1787.",
+          "why": "Each grain of sand is its own splat, as in Chladni's experiment of 1787.",
           "secs": 6
         },
         {
@@ -282,7 +282,7 @@
             "view": "prism"
           },
           "what": "White light fans into a rainbow through a prism, blue bent most. Each tap changes the lamp.",
-          "why": "Each color bends by Snell's law, with the glass's real index for that wavelength. The element lines are NIST's.",
+          "why": "Each color bends by Snell's law, using the glass's real index for its wavelength.",
           "steps": [
             {
               "at": 0.1,
