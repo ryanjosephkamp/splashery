@@ -75,7 +75,8 @@ if (FILE) {
   const chooser = page.waitForEvent("filechooser");
   await page.click(".arc-file");
   await (await chooser).setFiles(FILE);
-  await page.waitForTimeout(1500);
+  // (a recording is first listened to, which takes a while)
+  await page.waitForFunction(() => window.__splashery.player.scene.toy.options?.tune === "own" && window.__splashery.player.arcade?.game?.own, null, { timeout: 300_000 }); // prettier-ignore
 }
 for (let i = 0; i < 200; i++) {
   if (await run(() => !!window.__splashery.player.arcade?.game)) break;
@@ -104,6 +105,19 @@ await run(
     if (phone) a.input.lastDevice = "touch";
     a.enterPlay();
     a.autopilot = auto;
+    // A finger's mark where the script taps or drags (clips only).
+    window.__arcFinger = (x, y, down = true) => {
+      let f = document.getElementById("arc-finger");
+      if (!f) {
+        f = document.createElement("div");
+        f.id = "arc-finger";
+        f.style.cssText = "position:fixed;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:rgba(255,255,255,.55);border:3px solid rgba(20,30,60,.75);z-index:2147483600;pointer-events:none"; // prettier-ignore
+        document.body.appendChild(f);
+      }
+      f.style.left = `${x * innerWidth}px`;
+      f.style.top = `${y * innerHeight}px`;
+      f.style.opacity = down ? "1" : "0";
+    };
     const tag = document.createElement("div");
     tag.textContent = `${a.def.title} · ${label}`;
     tag.style.cssText =
@@ -127,6 +141,14 @@ const step = async (dt) => {
 const shot = async () => {
   await page.screenshot({ path: path.join(tmp, `f${String(n++).padStart(4, "0")}.png`), timeout: 180_000 }); // prettier-ignore
 };
+// A tap's mark shows for three frames, then lifts.
+const fingerUp = async () => {
+  for (let i = 0; i < 3; i++) {
+    await step(1 / FPS);
+    await shot();
+  }
+  await run(() => window.__arcFinger(0, 0, false));
+};
 const play = async (secs) => {
   for (let t = 0; t < secs - 1e-6; t += 1 / FPS) {
     await step(1 / FPS);
@@ -149,7 +171,14 @@ for (const s of SCRIPT) {
     await run((on) => (window.__splashery.player.arcade.autopilot = on), arg === "1"); // prettier-ignore
   else if (cmd === "tap") {
     const [x, y] = arg.split(";").map(Number);
-    await run(([x, y]) => window.__splashery.player.arcade.input.tapAt.push({ x, y }), [x, y]);
+    await run(
+      ([x, y]) => {
+        window.__splashery.player.arcade.input.tapAt.push({ x, y });
+        window.__arcFinger(x, y);
+      },
+      [x, y],
+    );
+    await fingerUp();
   } else if (cmd === "head") {
     const [dx, dy] = arg.split(";").map(Number);
     await run(
@@ -165,25 +194,29 @@ for (const s of SCRIPT) {
         const x = (dot(d, p.right) / z / tx + 1) / 2;
         const y = (1 - dot(d, p.up) / z / ty) / 2;
         a.input.tapAt.push({ x: x + dx, y: y + dy });
+        window.__arcFinger(x + dx, y + dy);
       },
       [dx, dy],
     );
+    await fingerUp();
   } else if (cmd === "drag") {
     const [dx, dy] = arg.split(";").map(Number);
     const secs = Number(opt("dragsecs", 0.6));
     const k = Math.max(1, Math.round(secs * FPS));
     for (let i = 0; i < k; i++) {
       await run(
-        ([dx, dy]) => {
+        ([dx, dy, k, f]) => {
           const d = window.__splashery.player.arcade.input.drag;
           d[0] += dx;
           d[1] += dy;
+          window.__arcFinger(0.5 + dx * k * (f - 0.5), 0.55 + dy * k * (f - 0.5));
         },
-        [dx / k, dy / k],
+        [dx / k, dy / k, k, (i + 1) / k],
       );
       await step(1 / FPS);
       await shot();
     }
+    await run(() => window.__arcFinger(0, 0, false));
   }
 }
 // The sound: every cue the game played, rendered offline through the app's
