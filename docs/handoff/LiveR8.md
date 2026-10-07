@@ -55,8 +55,8 @@ Operator is session_012GmKRUMZLir2nb27Bo8Cu2.
 
 ## State
 
-October 7, 2026, 06:30 UTC (Opus 5.5): first round built and posted; the specs of the files I touch
-are running.
+October 7, 2026, 06:30 UTC (Opus 5.5): first round READY. The specs of the files I touch and the
+toys the slider reaches pass (92 + 61, none failed); details in #384.
 
 Cards on Effect review page 2 (lane record `LiveR8`): `lv8-chladni-plate` (before and after, side by
 side, the camera sweeping down to the side), `lv8-depth-slider` (a still of the mirror with the
@@ -105,5 +105,7 @@ slider), `lv8-cell-cube`, `lv8-cell-cube-122`, `lv8-cell-flask-shells`, `lv8-cel
 
 ## For the Operator
 
+- PRs: Engine #383 (merge first), lane #384 (has #383 merged in). Labs: Sound in a box. Public once
+  out of labs: the plate's sharpening and the mirror's slider wait on the owner's marks.
 - Engine PR #383 changes `src/packs/photo-3d.js` and `src/packs/moving-photo.js` by one field each
   (`stage: true` on their depth option); those files belong to other lanes.
