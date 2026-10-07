@@ -183,9 +183,9 @@ const BUILT = { key: null };
 const FLY = 3.2; // seconds a fly takes
 // The shader's names are their built size at this camera distance (the
 // home view's, in the toy's fitted units).
-const NAME_DIST = 2.85;
+const NAME_DIST = 2.4;
 // How far a name's letters are stored toward the home camera (fitted units).
-const NAME_LIFT = [0.0042, 0.0085, 0.0089];
+const NAME_LIFT = [0.0033, 0.0102, 0.0067];
 
 const SCALE_CHOICES = [
   { id: "readable", label: "Readable scale (not to scale)" },
@@ -286,8 +286,8 @@ const recipe = {
       mu: MU,
       // (On the true scale the inner planets' and the short comets' names
       // would pile up round the Sun: they show only close up, as moons'.)
-      bodies: b.bodies.map((x) => ({ c: f(x.built), r: x.r * s, kind: x.kind === 1 || (b.scale === "true" && x.crowded) ? 1 : x.kind })), // prettier-ignore
-      tailLen: b.scale === "true" ? 0.6 : 0.5,
+      bodies: b.bodies.map((x) => ({ c: f(x.built), r: x.r * s * (LOOKS[x.id]?.rings ? 2.3 : 1), kind: x.kind === 1 || (b.scale === "true" && x.crowded) ? 1 : x.kind })), // prettier-ignore
+      tailLen: b.scale === "true" ? 0.6 : 0.9,
       nameDist: NAME_DIST,
       ringPole: `vec3(${pole.map((v) => v.toFixed(6)).join(", ")})`,
       nameLift: NAME_LIFT,
@@ -475,16 +475,16 @@ const recipe = {
         // Saturn's rings: 1.24 to 2.27 planet radii, the Cassini division
         // at about 1.95 to 2.03 (from the C ring to the A ring's edge).
         const rings = [];
-        const nr = 2600;
+        const nr = 7000;
         for (let i = 0; i < nr; i++) {
           const f = (i + 0.5) / nr;
           let rr = 1.24 + 1.03 * Math.sqrt(f * 0.5 + 0.5 * f * f);
           if (rr > 1.95 && rr < 2.03) rr = 2.03 + (rr - 1.95);
           if (rr > 2.27) rr = 2.27 - (rr - 2.27);
-          const a = i * g * 7;
+          const a = i * g;
           rings.push({ rr, a });
         }
-        const rsz = b.r * 0.05;
+        const rsz = b.r * 0.034;
         cloud(rings, {}, ({ rr, a }) => {
           const dir = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
           const tone = rr < 1.53 ? 0.55 : rr < 1.95 ? 0.95 : 0.8;
@@ -530,8 +530,8 @@ const recipe = {
         tail.push({ f, off: [Math.cos(a) * rr, Math.sin(a) * rr * 0.7, Math.sin(a * 1.7) * rr] });
       }
       cloud(tail, {}, (e) => {
-        const z = (isTrue ? 0.02 : 0.016) * (0.5 + e.f);
-        return { p: add(b.built, e.off), scales: [z, z, z], color: COMET_LOOK.tail, opacity: 0.22, kind: "token", params: [ti, 1 + Math.min(0.999, e.f)] }; // prettier-ignore
+        const z = (isTrue ? 0.03 : 0.026) * (0.5 + e.f);
+        return { p: add(b.built, e.off), scales: [z, z, z], color: COMET_LOOK.tail, opacity: 0.45, kind: "token", params: [ti, 1 + Math.min(0.999, e.f)] }; // prettier-ignore
       });
     });
 
@@ -594,7 +594,7 @@ const recipe = {
       .map(({ b, i }) => {
         const moons = bodies.filter((x) => x.kind === 1 && x.planet === b.id);
         const outer = Math.max(0, ...moons.map((x) => x.dist));
-        const region = isTrue ? Math.max(6 * b.r, 1.2 * outer) : Math.max(2.4 * b.r * (LOOKS[b.id].rings ? 2.3 : 1), 1.2 * outer); // prettier-ignore
+        const region = isTrue ? Math.max(6 * b.r, 1.2 * outer) : Math.max(2.4 * b.r * (LOOKS[b.id].rings ? 1.15 : 1), 1.15 * outer); // prettier-ignore
         return { token: i, region };
       });
     BUILT.data = { scale: scaleId, bodies, ringPole };

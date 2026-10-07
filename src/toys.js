@@ -1318,7 +1318,7 @@ export const TOYS = [
     pack: "space-r4",
     labs: true,
     tags: "solar system orbits orrery planets kepler jpl real date asteroid belt asteroids comets halley moons jupiter saturn true scale",
-    camera: { yaw: 0.35, pitch: 0.75, roll: 0, distance: 2.9 },
+    camera: { yaw: 0.35, pitch: 0.95, roll: 0, distance: 2.45 },
   },
   // ---- End of pack: space-r4 ----
 

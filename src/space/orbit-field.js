@@ -147,16 +147,16 @@ void modifySplatCenter(inout vec3 center) {
       oHide = 1.0 - smoothstep(-0.25, -0.05, facing);
     } else if (an.w < 2.0) {
       // A comet's tail points away from the Sun; it grows inside about
-      // 4 au (a picture of a tail, not a measured one).
+      // 5 au (a picture of a tail, not a measured one).
       oType = 2;
       float f = an.w - 1.0;
       vec3 away = normalize(head - sun + vec3(1e-9));
       float rau = oInv(length(head - sun) / FS);
-      float act = clamp((4.0 - rau) / 3.0, 0.0, 1.0);
+      float act = clamp((5.0 - rau) / 3.5, 0.0, 1.0);
       float len = ${num(o.tailLen)} * FS * act;
       vec3 lat = off - away * dot(off, away);
       center = oView(head + away * len * f + lat * (0.4 + 2.5 * f) * act);
-      oFade *= act * (1.0 - f) * (1.0 - f);
+      oFade *= act * (1.0 - f);
     } else if (an.w < 2.5) {
       oType = 3;
       float rau = oInv(length(head - sun) / FS);
@@ -177,13 +177,13 @@ void modifySplatCenter(inout vec3 center) {
       oZoom = k;
       float bk = BKIND[ti].x;
       float a = uSpGlowC.y;
-      if (bk > 0.5 && bk < 1.5) a *= smoothstep(3.0, 8.0, zoom);
+      if (bk > 0.5 && bk < 1.5) a *= smoothstep(1.5, 3.5, zoom);
       if (abs(float(ti) - uSpGlowC.z) < 0.5) a = max(a, 1.0);
       oFade *= a;
     } else if (an.w < 4.5) {
       oType = 5;
       vec3 l = normalize(sun - head);
-      oLit = 0.25 + 0.75 * abs(dot(normalize(${o.ringPole}), l));
+      oLit = 0.4 + 0.6 * sqrt(abs(dot(normalize(${o.ringPole}), l)));
       center = oView(center + to.xyz);
     } else {
       oType = 6;
@@ -325,11 +325,11 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
       let f = an.w - 1.0;
       let away = normalize(head - sun + vec3f(1e-9));
       let rau = oInv(length(head - sun) / FS);
-      let act = clamp((4.0 - rau) / 3.0, 0.0, 1.0);
+      let act = clamp((5.0 - rau) / 3.5, 0.0, 1.0);
       let len = ${num(o.tailLen)} * FS * act;
       let lat = off - away * dot(off, away);
       *center = oView(head + away * len * f + lat * (0.4 + 2.5 * f) * act);
-      oFade = oFade * act * (1.0 - f) * (1.0 - f);
+      oFade = oFade * act * (1.0 - f);
     } else if (an.w < 2.5) {
       oType = 3;
       let rau = oInv(length(head - sun) / FS);
@@ -349,13 +349,13 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
       oZoom = k;
       let bk = BKIND[ti].x;
       var a = uniform.uSpGlowC.y;
-      if (bk > 0.5 && bk < 1.5) { a = a * smoothstep(3.0, 8.0, zoom); }
+      if (bk > 0.5 && bk < 1.5) { a = a * smoothstep(1.5, 3.5, zoom); }
       if (abs(f32(ti) - uniform.uSpGlowC.z) < 0.5) { a = max(a, 1.0); }
       oFade = oFade * a;
     } else if (an.w < 4.5) {
       oType = 5;
       let l = normalize(sun - head);
-      oLit = 0.25 + 0.75 * abs(dot(normalize(${o.ringPole.replace("vec3", "vec3f")}), l));
+      oLit = 0.4 + 0.6 * sqrt(abs(dot(normalize(${o.ringPole.replace("vec3", "vec3f")}), l)));
       *center = oView(c0 + tk.xyz);
     } else {
       oType = 6;

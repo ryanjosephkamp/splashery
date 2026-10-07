@@ -129,7 +129,7 @@
     "The true scale draws distances and sizes on one scale; the planets are then far smaller than a pixel from the whole view (each shows as a speck), and a fly to one zooms in up to about a thousand times.",
     "The orbit lines are drawn for the snapshot's date; the planets' orbits turn slowly (Mercury's perihelion moves about half a degree in 250 years), so far from 2026 a planet sits a hair off its line.",
     "The planets' spins and their seasons' tilts are not shown; Jupiter's, Saturn's, Uranus's and Neptune's colors are bands by latitude, not maps, and Venus is drawn as its cloud tops in one color.",
-    "A comet's tail points away from the Sun, as real tails do, but its length (growing inside about 4 au) and look are a picture.",
+    "A comet's tail points away from the Sun, as real tails do, but its length (growing inside about 5 au) and look are a picture.",
     "The asteroids, comets and moons feel only their primary's pull (the two-body problem), so they drift from their real places over decades; the planets' Table 1 already folds in the planets' long-term changes."
   ],
   "fixes": []
