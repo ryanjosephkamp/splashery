@@ -2688,6 +2688,12 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "hiss", f: 3000, decay: 0.7, vol: 0.3 },
   },
+  // Lane Live r8: Sound in a box rings its mode eight octaves down (a cue from
+  // drive()); this is the default mode's (cube 0, 1, 2 mixed: 167 kHz, 654 Hz).
+  "chladni-cell": [
+    { voice: "tone", f: 654, decay: 7, kind: "sine", vol: 0.7 },
+    { voice: "tone", f: 1308, decay: 4.2, kind: "sine", vol: 0.08 },
+  ],
   // The song landscape plays the song itself; this is its tap's start chime.
   "song-landscape": [
     { voice: "pluck", notes: "C5 E5 G5", step: 0.09, decay: 0.5, bright: 0.4, vol: 0.6 },

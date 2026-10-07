@@ -1670,7 +1670,14 @@ export const TOY_HELP = {
       "Tap to bow the plate and watch the sand find its still lines. In the Toy tab, sing to it or play your audio.",
     about:
       "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the plate's nearest mode, and the sand sets off for that figure at once; a new note moves it on, and silence leaves it put. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+  }, // Lane Live r8: the Chladni plate in three dimensions.
+  "chladni-cell": {
+    howTo:
+      "Tap to switch on the sound and watch the beads gather on the still surfaces inside the cell. Tap again to swirl them and start over. Choose a mode in the Toy tab.",
+    about:
+      "Sand on a ringing plate gathers on the lines that stay still. The same thing happens in three dimensions, and labs use it every day to sort cells and tiny beads. Here a glass cell 1 cm across is filled with water and tiny plastic beads, and a transducer underneath fills it with ultrasound at one of the cell's resonances, so the sound stands still inside it. Each bead feels a gentle push from the sound, the acoustic radiation force, toward the places where the pressure hardly changes: the mode's nodal surfaces, the 3D cousins of a plate's nodal lines. Beads this small slide through water as fast as they are pushed, so they settle onto those surfaces in a few seconds.\n\nThe toy works out that push from the Gor'kov potential for polystyrene beads in water (H. Bruus, \"Acoustofluidics 7: The acoustic radiation force on small particles\", Lab Chip, 2012) and moves every bead down it. The modes here ring at about 100 to 370 kHz, far too high to hear, so you hear each mode eight octaves down. A mode marked \"mixed\" is a blend of modes that ring at the same pitch, as a real cell's small flaws blend them. Gravity is left out: beads this small sink only a few micrometers a second.",
   },
+
   // Lane Data and climate.
   "data-in-3d": {
     howTo:
