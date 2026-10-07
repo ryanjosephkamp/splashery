@@ -55,6 +55,10 @@ Operator is session_012GmKRUMZLir2nb27Bo8Cu2.
 
 ## State
 
+October 7, 2026, 15:35 UTC (Opus 5.5): the owner marked all six cards "good" (15:07 UTC): the plate
+before and after, the depth slider, and the four Sound in a box modes. Nothing left to fix; both PRs
+wait on the Integrators' full run and the Operator's merge (#383 first).
+
 October 7, 2026, 06:30 UTC (Opus 5.5): first round READY. The specs of the files I touch and the
 toys the slider reaches pass (92 + 61, none failed); details in #384.
 
