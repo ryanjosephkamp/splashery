@@ -2029,8 +2029,8 @@ export const RIGS = {
   // Lane Fix9: the dog plush's hidden core. The capture never saw the plush's underside or the
   // mat under it, so there were holes right through it where it meets the mat (dark gaps under
   // its head and paws). A solid core fills the plush from the mat up to its lowest fur, cell by
-  // cell (tools/fx9-dog-fill.mjs), each the color of the fur above it and darker toward the mat,
-  // as in a crease. The fur covers it everywhere else, so it shows only through those gaps.
+  // cell (tools/fx9-dog-fill.mjs), each the color of the fur above it, turning a warm shadow brown
+  // toward the mat, as in a crease. The fur covers it everywhere else, so it shows only through those gaps.
   "dog-plush": {
     addon: {
       count: 24000,
@@ -2062,7 +2062,7 @@ export const RIGS = {
             flat: 0,
             jitter: 0,
             opacity: 1,
-            color: shade(c.col, 0.34 + 0.4 * up),
+            color: shade(mix(c.col, "#5a3d26", 0.55 * (1 - up)), 0.72 + 0.28 * up),
           };
         });
       },

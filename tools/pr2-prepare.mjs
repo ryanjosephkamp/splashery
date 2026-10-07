@@ -78,7 +78,10 @@ for (const toy of manifest.toys) {
   const out = path.join(root, "assets/toys", toy.id);
   fs.mkdirSync(work, { recursive: true });
   fs.mkdirSync(out, { recursive: true });
-  const src = /^https?:/.test(toy.source) ? toy.source : path.join(root, toy.source);
+  // Lane Fix9: "local" names a cleaned copy of the source that a lane tool made (the dog plush:
+  // tools/fx9-dog-fill.mjs); it is used when present.
+  const local = toy.local && fs.existsSync(path.join(root, toy.local)) ? path.join(root, toy.local) : null; // prettier-ignore
+  const src = local || (/^https?:/.test(toy.source) ? toy.source : path.join(root, toy.source));
   if (!/^https?:/.test(src) && !fs.existsSync(src)) {
     console.error(`Missing source for ${toy.id}: ${src}\n  ${toy.sourceNote}`);
     process.exitCode = 1;
