@@ -1827,6 +1827,7 @@ export const RECIPES = {
 
   hypercube: {
     alive: true,
+    density: 1.6, // lane Math r2: finer splats along the thin edges ("Just sharper")
     // Lane Math r2: color themes (FOUR_D_THEMES); the first is the
     // tesseract's own blue and pink.
     options: [
@@ -1863,12 +1864,17 @@ export const RECIPES = {
       const outerCol = theme[0];
       const innerCol = theme[1];
       const colOf = (i) => (TESS[i][3] > 0 ? outerCol : innerCol);
-      const glow = (col, n) => shade(col, 0.85 + 0.35 * Math.max(0, dot(n, LIGHT)));
+      // Lane Math r2 ("Just sharper"): one even color round each thin edge,
+      // its splats placed evenly; light that changed splat by splat round a
+      // tube a few pixels wide read as grain.
+      const glow = (col) => shade(col, 1.05);
       // Round splats: skinned splats keep their built orientation.
       for (const [i, j] of TESS_EDGES) {
         const w = TESS[i][3] + TESS[j][3];
         k.add(polyTube([tessShow(TESS[i]), tessShow(TESS[j])], w > 0 ? 0.026 : 0.022), {
           flat: 0.9,
+          even: true,
+          weight: 1.4,
           skin: (c) => [i, j, c.t],
           color: (c) => glow(mix(colOf(i), colOf(j), c.t), c.n),
         });
@@ -5207,6 +5213,7 @@ function stepTracers(st, I, dt) {
 function attractorRecipe(id) {
   return {
     alive: true,
+    density: 1.6, // finer splats along the thin path ("Just sharper")
     controls: [
       { key: "glow", label: "Glow", type: "slider", default: 0.6 },
       { key: "drop", label: "Drop a tracer", type: "pulse", ease: 1.2 },
@@ -5259,10 +5266,13 @@ function attractorRecipe(id) {
           A.colorBy === "angle"
             ? (Math.atan2(c.p[2], c.p[0]) / TAU + 0.5 + 0.15 * c.p[1]) % 1
             : clamp((c.p[1] + I.half[1]) / (2 * I.half[1]), 0, 1);
-        return shade(ramp(A.stops, u), 0.92 + 0.12 * Math.max(0, dot(c.n, LIGHT)));
+        // Lane Math r2 ("Just sharper"): one color round the thin tube (light
+        // that changed splat by splat read as grain).
+        return ramp(A.stops, u);
       };
       k.add(polyTube(I.pts, A.radius ?? 0.011), {
-        size: 0.7,
+        size: 0.6,
+        even: true,
         flat: 0.6,
         stretch: 3,
         kind: "pulse",
@@ -5421,6 +5431,7 @@ function fourDRecipe(id) {
     );
   return {
     alive: true,
+    density: 1.6, // finer splats along the thin edges ("Just sharper")
     options,
     controls: [
       { key: "turn", label: "4D turn", type: "slider", default: 0.85 },
@@ -5461,11 +5472,15 @@ function fourDRecipe(id) {
         return pal[g % 4];
       };
       k.data = { poly: P };
-      const glow = (col, n) => shade(col, 0.85 + 0.35 * Math.max(0, dot(n, LIGHT)));
+      // Lane Math r2 ("Just sharper"): one even color round each thin edge,
+      // its splats placed evenly; light that changed splat by splat round a
+      // tube a few pixels wide read as grain.
+      const glow = (col) => shade(col, 1.05);
       const radius = P.verts.length > 16 ? 0.019 : 0.024;
       for (const [i, j] of P.edges)
         k.add(polyTube([show4(P.verts[i]), show4(P.verts[j])], radius), {
           flat: 0.9,
+          even: true,
           skin: (c) => [i, j, c.t],
           color: (c) => glow(mix(colOf(i), colOf(j), c.t), c.n),
         });
