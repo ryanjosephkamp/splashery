@@ -1139,7 +1139,7 @@ export const TOY_HELP = {
     howTo:
       "Pull a cherry out on its stem and let go; it swings back and knocks the other. Tap to swing them.",
     about:
-      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nPull a cherry out on its stem and let go: it swings back and knocks the other one, which swings out in turn, until they settle. Tap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
+      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nPull a cherry out on its stem and let go: it swings back and knocks the other one, which swings out in turn, until they settle. Tap it and they swing like a small Newton's cradle, at their real speed: one cherry is flicked out, swings back and knocks the other out, which swings back and knocks the first, with a plink each time, until the swing dies away. A cherry on a stem about 4.5 cm long swings to and fro in under half a second.",
   },
   grapes: {
     howTo: "Tap it: grapes drop off the bunch, bounce and hop back.",
@@ -1308,7 +1308,7 @@ export const TOY_HELP = {
   "soda-can": {
     howTo: "Tap it to shake the can and pop it open.",
     about:
-      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and a jet of foam sprays out while drops spatter around it, then the tab folds back and the foam fizzes away.",
+      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and a jet of foam sprays out while drops spatter around it, then the suds spill over the rim and run down the can before they fade, and the tab folds back.",
   },
   "running-shoe": {
     howTo: "Tap it to untie the laces and tie them again, then watch it tap its toe.",
@@ -1674,7 +1674,7 @@ export const TOY_HELP = {
   // Lane Data and climate.
   "data-in-3d": {
     howTo:
-      "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
+      "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap anywhere on the chart.",
     about:
       "A table becomes a 3D chart you can turn: each row a point in a scatter, or rows gathered into bars or a surface whose heights are the mean of the rows in each cell. The labels turn to face you as you go round.\n\nYour file is read in your browser and never uploaded. Headers, quoted fields, dates, categories and missing cells are understood; a very big table is shown as an even random sample, and the Toy tab says so. Save a picture or a turning video from the Toy tab. The samples are a month of earthquakes (USGS), Fisher's 150 iris flowers (UCI, CC BY 4.0) and the CO2 record at Mauna Loa (NOAA).",
   },
