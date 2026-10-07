@@ -11,6 +11,8 @@ brief, word for word, under "## Brief", then keep "## State
 
 Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #393.
 
+- October 7, 2026, about 21:00 UTC: first READY. Clips are posted; main is merged in.
+
 - October 7, 2026: both toys built in a new pack, `src/packs/lattices.js` (labs, Atoms shelf), with
   tests (`tests/lat.spec.mjs`, 13 passing), evidence (`docs/evidence/unit-cells.json`,
   `docs/evidence/orbital-atlas.json`), help, sounds (in `tools/sound-review.json` as "ready"), toy
@@ -50,6 +52,8 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #393.
   up axis so its densest vertical plane faces the viewer. Turning the halves to face the viewer was
   tried first and failed: splats sort in their built pose, so a half turned 90° drew its back over
   its cut face.
+- Hexagonal crystals (graphite, ice, magnesium) are turned about c so the block's long diagonal runs
+  across the default view (yaw 0.55); otherwise the block looked like a thin column.
 - atoms.js (the Electron orbital and Crystal lattice toys) is not changed; nobody edits it now.
 
 ## Known issues
@@ -64,3 +68,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #393.
 ## For the Operator
 
 - No engine change is needed. The lane PR (#393) is labs only.
+- Clips: 11 cards on Effect review page 2, in the lane record `Lattices`. The unit-cell cards are
+  `lat-cells-diamond`, `-graphite`, `-ice`, `-copper`, `-iron`, `-magnesium` and `-thermal`; the
+  orbital cards are `lat-orbital-5f`, `-5g`, `-6d` and `-4d`. All were posted October 7, 2026 and
+  wait for the owner's marks.
+- Tests: `tests/lat.spec.mjs` (13 passed); the shared-list specs (help, unit, snda to sndd,
+  evidence-computing, hl1) passed (89). The full suite is for the Integrator.
