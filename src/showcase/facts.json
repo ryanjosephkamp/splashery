@@ -66,8 +66,8 @@
     "real-moon": {
       "kind": "kit",
       "recipeFile": "src/packs/space-r2.js",
-      "recipeKB": 66,
-      "recipeGzipKB": 21.1,
+      "recipeKB": 83.1,
+      "recipeGzipKB": 26.7,
       "sharedBy": 13
     },
     "galaxy-box": {
