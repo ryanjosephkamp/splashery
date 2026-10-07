@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane UI r5: site fixes from the October 2 review · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: UIr5."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/uir5/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane UI r5: site fixes from the October 2 review · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: UIr5."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/uir5/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane UI r5: site fixes from the October 2 review</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li>
+                <a href="#model-sizes-what-people-will-open-and-what-we-take-october-2-2026"
+                  >Model sizes: what people will open, and what we take (October 2, 2026)</a
+                >
+              </li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane UI r5: site fixes from the October 2 review">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: UI r5, &quot;Site fixes from the October 2
+            review&quot; (prefix <code>ui5</code>). Branches:
+            <code>claude/lane-ui-r5-engine</code> (small, additive &quot;Engine: …&quot; PR for
+            anything in player.js, app.js, ui.js, exports.js or styles.css, merged first) and
+            <code>claude/lane-ui-r5</code> (toy-level changes). PR titles: &quot;Engine: a Record
+            button, bigger models, and the gallery button&quot; and &quot;Phase UI r5: rotation
+            defaults and the piano bar&quot;. Handoff file: docs/handoff/UIr5.md.
+          </p>
+          <h3
+            id="brief-written-by-the-operator-on-october-2-2026-from-the-owner-s-review-of-that-day-and-his-start-now"
+          >
+            Brief (written by the Operator on October 2, 2026, from the owner's review of that day
+            and his &quot;start now&quot;)
+          </h3>
+          <p>
+            The owner's review of October 2, word for word, is
+            docs/reviews/2026-10-02-mega-review/review.md. Read docs/handoff/UIr2.md, UIr3.md and
+            UIr4.md first (the last UI rounds). Your items, his words in quotes:
+          </p>
+          <ol>
+            <li>
+              <strong>The Gallery chip</strong> sits in the category row (&quot;gallery is not a
+              category … if I scroll past it, then I can't just click a gallery button&quot;). Move
+              Gallery out of the category row to a button that's always reachable, for example with
+              the top buttons (flag, full screen, reset, focus …). Leave the search where it is
+              unless a better place is obvious; say what you chose and why.
+            </li>
+            <li>
+              <strong>Rotation defaults</strong>: the storybook with no rotation lock by default
+              (&quot;we don't need to have any default locks on that&quot;); the umbrella with full
+              rotation; the xylophone unlocked by default or a slightly higher default angle
+              (&quot;so that people can kind of change the angle a little bit&quot;); the upright
+              piano unlockable so you can look from above. Don't change other toys' defaults.
+            </li>
+            <li>
+              <strong>The grand piano's song bar covers the piano on a phone</strong> (&quot;you
+              can't see all of the piano without zooming out … I shouldn't have to&quot;). The bar
+              is the shared <code>#game-bar</code> (song-bar class), fixed above the dock on phones
+              (styles.css:1765-1770, about the bottom 115 px of the stage), and the camera framing
+              doesn't account for it. Make the toy's framing leave room for the bar whenever the bar
+              shows (for every toy with a song bar, not just the grand piano), or move the bar;
+              check all the pianos and the chess bar at 390×844.
+            </li>
+            <li>
+              <strong>Model to splats takes big files</strong> (his note: &quot;I tried to find a
+              GLB file, but … it was apparently too big&quot;). Today the cap is 40 MB for all files
+              together (<code>input.maxBytes || 40e6</code>, ui.js:1539-1541) plus 4,000,000
+              triangles (studio-models-core.js:51, 160), with no simplification. Raise the caps as
+              far as phones and computers handle well (aim for files of a few hundred MB on a
+              computer), read big files without copying them more than needed, and simplify very
+              large meshes on the device before sampling (the toy already has vertex clustering for
+              its wireframe, core :1571-1577; reuse our own code; a new library would need the
+              owner's OK first). Show progress and a clear message if a file is still too big for
+              the device.
+            </li>
+            <li>
+              <strong>A Record button</strong> (his idea, approved: &quot;I'd like to have the
+              ability to somehow record a video of, like, how I'm using this&quot;). Record the
+              stage while you play (drags, taps, the effect, the turning view) with the toy's sound,
+              then save the video (MediaRecorder from the canvas's captureStream plus a
+              MediaStreamAudioDestinationNode from the site's audio). MP4 where the browser supports
+              it, otherwise WebM. Put it in the Share tab next to the existing exports, with a clear
+              stop and a time limit (say 60 s). It must work on a phone (iOS Safari and Android
+              Chrome) and a computer. The existing &quot;save video&quot; exports stay.
+            </li>
+          </ol>
+          <p>
+            Clips for every item in your lane record &quot;UIr5&quot; on Effect review page 2, at
+            390×844 (and 1440×900 where the layout matters), &quot;built by Opus 5.5&quot;. The
+            gallery button and rotation defaults change what the public sees, so those parts merge
+            after the owner's good marks; the engine PR merges after the full test run.
+          </p>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>
+              The Gallery control, the song bar's layout and framing, the share/export code for
+              Record (src/exports.js and the Share tab), the input size caps and mesh simplification
+              in the model loader (src/ui.js and src/packs/studio-models\*.js for these parts only),
+              and the rotation defaults of the four named toys (their entries in src/toys.js or
+              their recipes).
+            </li>
+            <li>
+              tests/ui5\*.spec.mjs, your <code>ui5-*</code> screenshots and docs/handoff/UIr5.md.
+            </li>
+          </ul>
+          <p>
+            Lanes Sound C (it changes src/sound.js and the pause hooks), Fix7, Physics (it adds
+            Hands-on controls to the stage: coordinate placement with it through the Operator),
+            Sharpness A, Photoreal (research), Fluids, Video 3D, Live input, Science and the
+            Integrators run at the same time; leave their files alone and keep your engine changes
+            small and additive. The laptop is locked.
+          </p>
+          <h3 id="how-this-lane-runs">How this lane runs</h3>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and marks them. Don't ask him anything or wait for him. Put questions
+              and blockers in your final message, and the Operator answers or relays them. Messages
+              that arrive in this session &quot;From the Operator&quot; come from the coordinator on
+              the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29,
+              2026: Opus 5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the
+              Worlds content, the Studio converters, the docs and the Integrator). Any helper you
+              start uses the same model. Use at most one helper at a time.
+            </li>
+            <li>
+              Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs,
+              anything behind the labs switch, and additive engine PRs once the full test run
+              passes. Changes to toys the public already sees wait for the owner's &quot;good&quot;
+              marks. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English (color, center, gray,
+              math, license, toward, -ize endings, dates like &quot;September 29, 2026&quot;). Leave
+              code identifiers, file names and anything stored in links as they are.
+            </li>
+            <li>
+              Read first: CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are
+              binding), docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and
+              docs/handoff/history.md (lessons from earlier lanes).
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State&quot;, &quot;## Notes&quot;, &quot;## Known
+              issues&quot; and &quot;## For the Operator&quot; current. Note your model at the top
+              of &quot;## State&quot; (the blog post compares the two models).
+            </li>
+            <li>
+              Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js,
+              src/toy-help.js (a how-to line and an About text per toy, following
+              docs/handoff/Help.md), tools/toy-plan.json, CREDITS.md and tools/assets.json.
+              Regenerate docs/TOY-PLAN.md with <code>node tools/toy-plan.mjs</code>; never merge it
+              by hand.
+            </li>
+            <li>
+              Never edit tests/taps.spec.mjs. Your own tests go in tests/&lt;prefix&gt;.spec.mjs. If
+              a finished lane's test breaks because of a count or a list your work changes, don't
+              edit it: say which test and why in your message, and the Operator fixes it.
+            </li>
+            <li>
+              Assets: CC0, CC BY or public domain, checked on the live source page and credited
+              (CREDITS.md, tools/assets.json and the toy's in-app credit). Since the owner's call of
+              October 2, 2026, CC BY-SA is allowed too, per asset, with its notice beside it;
+              anything made from a BY-SA asset (a splat converted from it) stays BY-SA (the
+              Operator's Ops PR updates CLAUDE.md; anatomy BY-SA sources still go to the owner
+              first). Never NC, and never unlicensed or &quot;personal use&quot; files in the
+              repository. No logos, brand names or insignia.
+            </li>
+            <li>
+              Review: post clips and cards to the Effect review page,
+              <a
+                href="https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK"
+                target="_blank"
+                rel="noopener"
+                >https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK</a
+              >
+              (Effect review page 2), as OPERATING.md's &quot;Steps for a lane&quot; says. Judge
+              every effect as motion at phone size against the effect quality rules before you post
+              it. The Operator has made your lane's record. Don't republish the page, and never
+              write to &quot;verdicts&quot;.
+            </li>
+            <li>
+              Push your work in progress to your branch about every hour, so it isn't only in your
+              container, and open your draft PR early. Many lanes run at once now, so main moves
+              often: merge it into your branch before each push (never rebase a pushed branch) and
+              keep both sides of any conflict.
+            </li>
+            <li>
+              Before every push, follow &quot;Before every push&quot; in CLAUDE.md: the full
+              Playwright suite (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test),
+              prettier, <code>node tools/us-english.mjs --diff</code>,
+              <code>node tools/check-packs.mjs &lt;pack&gt;</code> for new or changed toys, a
+              contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then
+              put back the standard screenshots (<code>node tools/upkeep.mjs --restore-shots</code>)
+              and any other lane's screenshots your branch didn't change.
+            </li>
+            <li>
+              PR: one draft PR per branch against main with the five sections (Summary,
+              Verification, Deviations, Known issues, What was cut), and the model that built it in
+              the Summary. When main moves, merge it into your branch.
+            </li>
+            <li>
+              After you post your cards, check the owner's marks (the &quot;verdicts&quot;
+              collection, ids starting with your prefix) about once an hour with a scheduled
+              check-in (send_later). Fix every &quot;fix&quot; in the same PR, post the new clip as
+              a &quot;-r2&quot; card, and set replacedBy on the old one. Stop the check-ins once
+              your PRs are merged or closed.
+            </li>
+            <li>
+              Finish every working turn with a short final message that starts with
+              &quot;READY:&quot; (PR link, card ids, test results, anything for the Operator),
+              &quot;WORKING:&quot; (what's left), or &quot;BLOCKED:&quot; (exactly what you need).
+            </li>
+          </ul>
+          <h2 id="state">State</h2>
+          <ul>
+            <li>Model: Opus 5.5 (claude-opus-5-5), default effort.</li>
+            <li>
+              <p>October 2, 2026: all five items built.</p>
+              <ul>
+                <li>
+                  Engine (<code>claude/lane-ui-r5-engine</code>): the gallery button in the top row
+                  (and the G key); the stage ends above the song or game bar on a phone
+                  (<code>body.bar-up</code>, <code>--bar-h</code>); a toy entry's
+                  <code>tilt: &quot;free&quot;</code>; Record (src/exports.js
+                  <code>startRecording</code>, the Share tab's Record row and the pill on the
+                  stage); a recipe input's own cap (<code>input.maxBytes</code>,
+                  <code>input.tooBig</code>) and a progress callback (input.read's fifth argument).
+                  <code>tests/ui5-engine.spec.mjs</code> (7 tests).
+                </li>
+                <li>
+                  Toys (<code>claude/lane-ui-r5</code>, on the engine):
+                  <code>tilt: &quot;free&quot;</code> on the storybook, umbrella, xylophone (pitch
+                  0.5 → 0.62) and upright piano; Model to splats with device caps, progress, fewer
+                  copies and on-device simplification (<code>simplifyMesh</code> in
+                  studio-models-core.js). <code>tools/ui5-big-model.mjs</code> (a big textured GLB
+                  for testing). <code>tests/ui5.spec.mjs</code> (3 tests).
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              October 2, 2026, evening: #177 (engine) merged. The owner's marks: &quot;good&quot; on
+              ui5-gallery, ui5-gallery-desktop-r2, ui5-songbar, ui5-rotation, ui5-record and
+              ui5-record-output; &quot;fix&quot; with no note on ui5-model-big. Posted
+              ui5-model-big-r2 (and -r2-desktop): a real CC0 scan (Poly Haven's Boulder 01, glTF +
+              .bin + 8K textures, 151 MB) opened on a phone and a computer at the high profile (the
+              first clip showed a test sphere at the lowest profile). The scan is not in the
+              repository;
+              <code
+                >UI5_MODEL_DIR=&lt;folder&gt; node tools/ui5-clip.mjs &lt;out&gt;
+                model-real-390</code
+              >
+              records it.
+            </li>
+          </ul>
+          <h2 id="model-sizes-what-people-will-open-and-what-we-take-october-2-2026">
+            Model sizes: what people will open, and what we take (October 2, 2026)
+          </h2>
+          <p>
+            The owner asked how big a relatively high-quality 3D model typically is, and whether our
+            limit is still too strict. Researched October 2, 2026; no code changed.
+          </p>
+          <h3 id="typical-sizes">Typical sizes</h3>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Source (what was measured)</th>
+                  <th scope="col">Median</th>
+                  <th scope="col">Middle half</th>
+                  <th scope="col">90% under</th>
+                  <th scope="col">Largest</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Sketchfab, 120 most liked downloadable models (GLB download)</th>
+                  <td>30 MB</td>
+                  <td>10–74 MB</td>
+                  <td>118 MB</td>
+                  <td>217 MB</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sketchfab, 120 recent staff picks (GLB)</th>
+                  <td>50 MB</td>
+                  <td>16–98 MB</td>
+                  <td>196 MB</td>
+                  <td>619 MB</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sketchfab, 120 most liked scans (cultural heritage, GLB)</th>
+                  <td>64 MB</td>
+                  <td>39–98 MB</td>
+                  <td>163 MB</td>
+                  <td>303 MB</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sketchfab, 120 most recent uploads (GLB)</th>
+                  <td>8 MB</td>
+                  <td>1–23 MB</td>
+                  <td>49 MB</td>
+                  <td>152 MB</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Smithsonian, its 172 CC0 models on Sketchfab (web versions, GLB)
+                  </th>
+                  <td>15 MB</td>
+                  <td>13–23 MB</td>
+                  <td>32 MB</td>
+                  <td>68 MB</td>
+                </tr>
+                <tr>
+                  <th scope="row">Poly Haven, all 520 models (glTF with 4K textures)</th>
+                  <td>25 MB</td>
+                  <td>n/a</td>
+                  <td>53 MB</td>
+                  <td>1,060 MB</td>
+                </tr>
+                <tr>
+                  <th scope="row">Poly Haven, 331 models with 8K textures</th>
+                  <td>92 MB</td>
+                  <td>n/a</td>
+                  <td>163 MB</td>
+                  <td>1,295 MB</td>
+                </tr>
+                <tr>
+                  <th scope="row">NASA 3D Resources (spacecraft, GLB)</th>
+                  <td>0.7–2.5 MB</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <th scope="row">STL (any source)</th>
+                  <td>50 bytes per triangle: 100k triangles = 5 MB, 1M = 50 MB</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul>
+            <li>
+              <strong>Textures are most of the file.</strong> In the Sketchfab sample a median 71%
+              of each GLB is textures (76% for files over 40 MB); half of the high-quality ones use
+              4K textures. The mesh alone is usually small: median 4.6 MB (90% under 45 MB). Poly
+              Haven's meshes have a median of 0.3 MB, and the files grow only with texture
+              resolution.
+            </li>
+            <li>
+              <strong
+                >So &quot;relatively high quality&quot; means about 20–100 MB with textures, and
+                1–45 MB without.</strong
+              >
+              Scans sit at the top: a median of 460,000 triangles and 64 MB. A few go past 200 MB,
+              almost all because of 8K textures.
+            </li>
+            <li>
+              <strong>Formats.</strong> Sketchfab offers GLB and glTF for every downloadable model,
+              plus the original (&quot;source&quot;; often FBX, which we don't read). Poly Haven
+              offers glTF (multi-file), and NASA offers GLB and STL. STL has no color, and OBJ is
+              text, so it is a few times bigger than the same mesh as a GLB. The Smithsonian's own
+              site (3d.si.edu) also has &quot;full resolution&quot; downloads that can run to
+              gigabytes, but it refused automated requests, so I could not measure them.
+            </li>
+          </ul>
+          <p>
+            Sources: the Sketchfab Data API (<code>api.sketchfab.com/v3/models</code>, each model's
+            <code>archives</code> sizes, triangle counts and texture resolution); the Poly Haven API
+            (<code>api.polyhaven.com/files/&lt;id&gt;</code>, every file in each glTF download);
+            NASA 3D Resources model pages (sizes listed per file; the old nasa3d.arc.nasa.gov pages
+            now redirect to science.nasa.gov/3d-resources, which lists formats but not sizes); the
+            Library of Congress format description of STL (80-byte header, 4-byte count, 50 bytes
+            per triangle); a 3D printing service caps uploads of STL and OBJ files at 100 MB
+            (3DPrint.com, &quot;How to reduce the size of your STL file&quot;).
+          </p>
+          <h3 id="our-limits-against-those-sizes">Our limits, against those sizes</h3>
+          <ul>
+            <li>
+              <p><strong>Today (after this lane):</strong></p>
+              <ul>
+                <li>
+                  A computer opens 600 MB of files and 40 million triangles (300 MB and 15 million
+                  where Chrome reports 4 GB of memory or less).
+                </li>
+                <li>
+                  A phone opens 250 MB and 12 million triangles (120 MB and 6 million at 3 GB or
+                  less).
+                </li>
+                <li>
+                  Meshes over 1.2 million triangles (400,000 on a phone) are simplified on the
+                  device.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Coverage:</strong> that takes every model sampled on a computer except one
+              Sketchfab staff pick (619 MB) and three Poly Haven 8K models. On a phone it takes all
+              but about 3% of the high-quality samples (8 staff picks, 1 scan and 15 Poly Haven 8K
+              models are over 250 MB).
+              <strong>The limit is not too strict for typical models.</strong>
+            </li>
+            <li>
+              <p><strong>What fails above it:</strong> memory, not time.</p>
+              <ul>
+                <li>
+                  In Node, a 440 MB, 20-million-triangle GLB peaked at about 1.2 GB and took about 6
+                  seconds to parse and simplify; time grows roughly with the triangle count.
+                </li>
+                <li>
+                  The bigger risk is textures. Each 8K texture decodes to 268 MB of pixels (8192 ×
+                  8192 × 4) before we shrink it to 2,048 px.
+                </li>
+                <li>
+                  We also read every file that was picked, even textures we never use (normal,
+                  roughness and metal maps). A Poly Haven 8K download is two-thirds such maps.
+                </li>
+                <li>
+                  A phone tab (iOS Safari especially) runs out of memory well before a laptop does.
+                  Until it's tested on a real phone, 250 MB stays the phone's limit.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h3 id="ways-to-take-bigger-files-in-order">Ways to take bigger files, in order</h3>
+          <ol>
+            <li>
+              <p>
+                <strong>Read only what the model uses, without a full copy.</strong> Read a GLB's
+                small JSON header first (<code>File.slice</code>), then only the parts it points at:
+                positions, indices, UVs and the base-color texture. Skip unused files a person
+                picked along with it (the normal and roughness maps), and count only the files used
+                against the limit.
+              </p>
+              <ul>
+                <li>Cost: none for the person.</li>
+                <li>Risk: low (unchanged parsing, just less read).</li>
+                <li>Work: about a day.</li>
+                <li>
+                  Effect: a Poly Haven 8K download drops from 151 MB read to about 50 MB, and memory
+                  falls about as much.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                <strong>Downscale textures as they load.</strong> Decode the base-color image
+                straight at 2,048 px (<code>createImageBitmap</code> with
+                <code>resizeWidth</code>/<code>resizeHeight</code>) instead of full size and then
+                shrinking.
+              </p>
+              <ul>
+                <li>Cost: none visible (we already use 2,048 px at most).</li>
+                <li>
+                  Risk: low. Browsers differ in how much memory the decode saves, so measure on a
+                  phone.
+                </li>
+                <li>Work: hours.</li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                <strong>Decimate the mesh on load.</strong> Already done this lane (vertex
+                clustering with baked colors). A higher-quality simplifier (quadric edge collapse,
+                for example meshoptimizer's, MIT, about 50 KB of WebAssembly) would keep shapes
+                truer at the same triangle count.
+              </p>
+              <ul>
+                <li>Cost: a new vendored library (needs the owner's OK).</li>
+                <li>Risk: low.</li>
+                <li>Work: about a day.</li>
+                <li>Worth it only if simplified models look wrong.</li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                <strong>Read Draco and meshopt compression.</strong> Today those files get a clear
+                message. Decoders are Draco (Google, Apache 2.0, about 300 KB of WebAssembly, loaded
+                only for such files) and the meshopt decoder (MIT, a few KB). This opens more files
+                rather than bigger ones.
+              </p>
+              <ul>
+                <li>Cost: new vendored libraries (the owner's OK).</li>
+                <li>Risk: medium (decoder memory on phones).</li>
+                <li>Work: one to two days.</li>
+              </ul>
+            </li>
+          </ol>
+          <p>
+            <strong>Recommendation:</strong> keep the limits. Do 1 and 2 next: small, no new
+            libraries, and they cut memory most for the files people actually have. Then test a 200
+            MB model on a real phone before raising the phone's limit. Leave 3 and 4 until a model
+            needs them.
+          </p>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <strong>Gallery</strong>: a round grid button in the top row, left of the flag (G on a
+              keyboard). On a computer it opens the gallery page (Escape, G or a pick closes it); on
+              a phone it opens the full grid and a second press puts the toy row back. Eight round
+              buttons fit beside &quot;Splashery&quot; at 390 px (32 px buttons, 35 px apart, the
+              name at 16 px); on screens narrower than 389 px the name hides (the toy's name still
+              shows on the line below). The search stays where it is: on a phone it is the first
+              chip (the magnifier) and on a computer the full-width field at the top of the panel,
+              both already one tap away, so moving it would only take room from the top row.
+            </li>
+            <li>
+              <strong>Song bar</strong>: rather than moving the bar, the stage (and so the canvas
+              and the camera's framing) ends 8 px above the bar whenever it shows on a phone. Every
+              bar toy (the four pianos, the chess set) gets it; nothing changes on a computer or
+              while the sheet is open.
+            </li>
+            <li>
+              <strong>Rotation</strong>: the four toys keep the turntable off (their shelves'
+              default) but start with the tilt free. The xylophone got both (free tilt and a
+              slightly higher view).
+            </li>
+            <li>
+              <strong>Big models</strong>: caps by device (<code>modelLimits()</code> in
+              studio-models.js): a computer 600 MB of files and 40 million triangles (300 MB and 15
+              million with 4 GB of memory or less, where Chrome reports it); a phone 250 MB and 12
+              million (120 MB and 6 million at 3 GB or less). A mesh over 1.25 times the target is
+              simplified first: vertex clustering on a grid sized from the surface area (one or two
+              passes), with each vertex's color baked first from the material, the texture at its
+              own UV and its vertex color, so UV seams never smear; duplicate triangles are dropped
+              with a hash. Target 1.2 million triangles on a computer (texture detail for scans) and
+              400,000 on a phone (under the 450,000 where crisp-edge analysis runs). In Node a 440
+              MB, 20-million-triangle GLB reads in about 2 s and simplifies in about 5 s; the stripe
+              colors of the test model match the unsimplified model to within 1/255.
+            </li>
+            <li>
+              Fewer copies: a single-mesh glTF keeps its own position, normal, UV and index arrays
+              (no merge copy), positions and normals are transformed in place, tight index lists are
+              read with one typed copy, and prepareModel's per-triangle lists are typed arrays (a
+              6-million-triangle model no longer builds JS arrays of 18 million numbers).
+            </li>
+            <li>
+              <strong>Record</strong>: <code>canvas.captureStream(0)</code> with a frame handed over
+              after each drawn frame (the stage's <code>frameend</code>) and at least four a second,
+              so a still toy still records; the sound comes from <code>sound.master</code> through a
+              copy of the site's limiter into a MediaStreamAudioDestinationNode (the audio context
+              is made in the tap, so sound switched on mid-take is in the video). MP4 only with
+              H.264 (phones' photo libraries take it), else WebM. 60 s at most, 8 Mb/s, at most 1920
+              px on the long side, no drop in resolution while dragging. The Share tab starts it and
+              closes the sheet on a phone; a pill on the stage shows the time and Stop, then Save
+              video (and Share, the phone's share sheet, where the browser can share files) and a
+              close button. It stays visible in focus mode, so a take can be only the toy.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              Record captures the canvas only (the stage), not the page's HTML (the song bar, the
+              help line).
+            </li>
+            <li>
+              If the stage changes size mid-take (the sheet opened, the phone turned), the video's
+              size changes too; Chrome copes, other browsers may scale.
+            </li>
+            <li>
+              Not tested on a real iPhone or Android phone here (headless Chromium only, which
+              records WebM; real Chrome and Safari pick MP4).
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              Tests (October 2, 2026, at c34acff): the full suite was stopped twice by container
+              restarts (130 passed, none failed, before that). The affected files (ui2, ui3, ui4,
+              ui5, vw, help, stm, pno, fb, chs, smoke, taps): 213 of 215 passed;
+              <code>help.spec.mjs:261</code> (1440x900) and <code>stm.spec.mjs:366</code> failed
+              only with three workers and pass alone. The rest of the suite (bk to wdr3, apart from
+              those) is for the Integrator's combined run.
+            </li>
+            <li>
+              Standard screenshots with the top row (ui2, ui3, vw, help) change: the gallery button
+              shows there now. Restored on the branch, not committed.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              Engine PR touches index.html (the gallery button moved, the Record row and pill),
+              src/app.js (<code>startRecord</code> and friends, the G key, the
+              <code>tilt: &quot;free&quot;</code> check), src/ui.js, src/exports.js and styles.css
+              (a UI r5 block at the end). No other lane's files.
+            </li>
+            <li>
+              tests/ui2.spec.mjs clicks <code>#gallery-open</code>; the id is kept, so it still
+              passes.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/UIr5.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/UIr5.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

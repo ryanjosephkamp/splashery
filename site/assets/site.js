@@ -19,6 +19,17 @@ menuButton?.addEventListener("click", () => {
   setMenu(open);
   if (open) menu.querySelector("a, input, button")?.focus();
 });
+// The menu is always closed when a page is shown, and closed when you leave it: coming Back to a
+// page (the browser may restore it whole from its back/forward cache) must not bring the open
+// menu with it (the owner's walkthrough, October 6, 2026).
+if (menuButton && menu) {
+  const close = () => setMenu(false);
+  menu.addEventListener("click", (e) => {
+    if (e.target.closest("a")) close();
+  });
+  addEventListener("pagehide", close);
+  addEventListener("pageshow", close);
+}
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true") {
     setMenu(false);

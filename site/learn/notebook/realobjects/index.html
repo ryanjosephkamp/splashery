@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Real objects: everyday things, for real · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: RealObjects."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/realobjects/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Real objects: everyday things, for real · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: RealObjects."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/realobjects/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Real objects: everyday things, for real</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Real objects: everyday things, for real">
+        <div class="prose">
+          <p>
+            Prefix <code>ro</code>. Branch <code>claude/lane-real-objects</code>. PR title
+            &quot;Phase Real objects: everyday things, for real&quot;. Built by Opus 5.5.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Real objects, &quot;Everyday things, for
+            real&quot; (prefix <code>ro</code>). Branch: claude/lane-real-objects. PR title:
+            &quot;Phase Real objects: everyday things, for real&quot;. Handoff file:
+            docs/handoff/RealObjects.md.
+          </p>
+          <h3
+            id="brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-approved-ideas-on-the-toy-ideas-page-and-the-real-objects-lane-in-roadmap-md"
+          >
+            Brief (written by the Operator on September 29, 2026, from the owner's approved ideas on
+            the Toy Ideas page and the &quot;Real objects&quot; lane in ROADMAP.md)
+          </h3>
+          <p>
+            The owner approved these everyday objects on the Toy Ideas page (<a
+              href="https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S"
+              target="_blank"
+              rel="noopener"
+              >https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S</a
+            >; read collection <code>ideas</code> and <code>marks</code> with ArtifactData for the
+            full text, and never write to them). His note on each of them, word for word: &quot;This
+            should be a real life splat if you can find it. I do not want this to be a cartoon or an
+            illustration. If we cannot find a suitable real life splat for this object, only then
+            can you make it a cartoon.&quot;
+          </p>
+          <p>The toys, with his approved taps (the ideas' ids are the toy ids):</p>
+          <ol>
+            <li>
+              <strong>Fountain pen</strong> (<code>fountain-pen</code>, Objects): &quot;The cap (cut
+              out of the scan as a solid piece) slides off and clicks onto the end, and the nib
+              writes a swirl in wet blue ink that glistens, then dries darker; the cap goes back on
+              (4 s).&quot;
+            </li>
+            <li>
+              <strong>Water bottle</strong> (<code>water-bottle</code>, Objects): &quot;Its cap (cut
+              out of the scan as a solid piece) spins off in two turns and hops up. The bottle tips
+              and water glugs out as a stream of drops into a glass beside it; then it all runs back
+              and the cap screws on (4.5 s).&quot;
+            </li>
+            <li>
+              <strong>Soda can</strong> (<code>soda-can</code>, Objects): &quot;It shakes in place,
+              then the ring pull (a kit-built piece matched to the scan) levers up with a crack, and
+              a jet of foam and bubbles sprays up and spatters down around it; the tab folds back
+              and the foam fades (3.5 s).&quot; A plain label, no brand.
+            </li>
+            <li>
+              <strong>Running shoe</strong> (<code>running-shoe</code>, Clothing): &quot;Its laces
+              (kit-built jointed cords over the scan's own laces) come undone, cross back through
+              the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4
+              s).&quot; No logos.
+            </li>
+            <li>
+              <strong>Hoodie</strong> (<code>hoodie</code>, Clothing): &quot;The hood (cut out of
+              the scan as a solid piece) flips up and its drawstrings swing, then the sleeves (cut
+              at the shoulders) swing in and cross, and it all settles back (4.5 s).&quot; No logos.
+            </li>
+            <li>
+              <strong>Sunglasses</strong> (<code>sunglasses</code>, Clothing): &quot;The arms fold
+              in on their hinges one after the other, the glasses flip to face you and the lenses
+              darken from clear to deep grey like light-changing lenses; then they unfold (3.5
+              s).&quot;
+            </li>
+            <li>
+              <strong>Baseball cap</strong> (<code>baseball-cap</code>, Clothing): &quot;It flips up
+              off its stand, spins flat like a flying disc and lands brim-backwards; then a second
+              flip turns it round the right way (3 s).&quot; No logos.
+            </li>
+          </ol>
+          <p>
+            Sounds are on each idea (read them there); add each toy's entry in src/toy-sounds.js.
+          </p>
+          <p>Where the real objects come from, in this order:</p>
+          <ol>
+            <li>
+              <strong>CC0 3D models made from photos</strong> (Poly Haven's models are CC0 and
+              photo-based; for example <code>round_spectacles</code> for the sunglasses, and look
+              for a bottle, a can, a cap or a shoe), converted with
+              <code>tools/model-to-splats.mjs</code> (docs/PACKS.md, section 9). Check each license
+              on the live page.
+            </li>
+            <li>
+              <strong>Lane G's image-to-3D tool</strong> (<code>tools/image-to-3d.mjs</code>, the
+              TRELLIS Space through <code>HF_TOKEN</code>; docs/handoff/G.md) on CC0 or
+              public-domain photos (Wikimedia Commons, checked on the live page; no brand, no
+              person, no watermark). The free GPU quota allows about four runs at a time: plan your
+              runs, and stop and say so if anything would cost money.
+            </li>
+            <li>
+              <strong>Kit-built</strong>, only when neither gives a clean, real-looking object; say
+              which and why under &quot;For the Operator&quot;.
+            </li>
+          </ol>
+          <p>
+            <code>HF_TOKEN</code> is a Hugging Face read token for build-time tools only. Never
+            print it, commit it, or put it in logs, PRs or files. To check it, test that it is set
+            (<code>[ -n &quot;$HF_TOKEN&quot; ]</code>), or call the whoami API and print only the
+            account name and token role.
+          </p>
+          <p>
+            The effect rules bind hard here: parts move as solid pieces cut from the scan with hard
+            edges or swapped for kit-built parts; never bend a scan with soft regions. Fidelity A's
+            method (even placement, full opacity, full density, clean colors) is the bar for
+            anything kit-built. Paint out any maker's mark. Record every source in CREDITS.md,
+            tools/models.json or tools/assets.json, and the toy's in-app credit.
+          </p>
+          <p>
+            If time runs short, build in the order above and cut from the end; say what was cut.
+          </p>
+          <p>
+            Clips and cards (390×844), each labeled &quot;built by Opus 5.5&quot;, in the lane
+            record <code>RealObjects</code> on the Effect review page (the Operator made it):
+            <code>ro-&lt;toy-id&gt;</code> for each toy (the tap, close enough to read the motion)
+            and <code>ro-stills</code> (a sharp still of each). These are new public toys: the
+            owner's &quot;good&quot; marks decide the merge.
+          </p>
+          <p>
+            Tests in tests/ro.spec.mjs: each toy builds within its tier budget, each tap moves its
+            parts as solid pieces (no part changes shape), and screenshots at 390×844 and 1440×900.
+            Each toy gets a how-to line and an About text in src/toy-help.js, a toy-plan entry and a
+            thumbnail.
+          </p>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>
+              a new pack <code>src/packs/real-objects.js</code>,
+              <code>assets/toys/&lt;id&gt;/</code> for your toys, your entries in the shared lists
+              (src/toys.js, src/toy-sounds.js, src/toy-help.js, tools/toy-plan.json,
+              tools/models.json, tools/assets.json, CREDITS.md), tests/ro.spec.mjs, your
+              <code>ro-*</code> screenshots and docs/handoff/RealObjects.md. Use the existing tools
+              (<code>tools/model-to-splats.mjs</code>, <code>tools/image-to-3d.mjs</code>) without
+              changing them; if one needs a change, say so.
+            </li>
+          </ul>
+          <p>
+            Lanes Worlds, Fidelity B, the toy piano (maker B), Anatomy, Pianos, Sharpness, Books,
+            Chemistry, Photo to 3D and the Integrator run at the same time; leave their files alone.
+            The laptop is locked.
+          </p>
+          <h3 id="how-this-lane-runs">How this lane runs</h3>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and marks them. Don't ask him anything or wait for him. Put questions
+              and blockers in your final message, and the Operator answers or relays them. Messages
+              that arrive in this session &quot;From the Operator&quot; come from the coordinator on
+              the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29,
+              2026: Opus 5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the
+              Worlds content, the Studio converters, the docs and the Integrator). Any helper you
+              start uses the same model. Use at most one helper at a time.
+            </li>
+            <li>
+              Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs,
+              anything behind the labs switch, and additive engine PRs once the full test run
+              passes. Changes to toys the public already sees wait for the owner's &quot;good&quot;
+              marks. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English (color, center, gray,
+              math, license, toward, -ize endings, dates like &quot;September 29, 2026&quot;). Leave
+              code identifiers, file names and anything stored in links as they are.
+            </li>
+            <li>
+              Read first: CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are
+              binding), docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and
+              docs/handoff/history.md (lessons from earlier lanes).
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>Model: Opus 5.5 (default effort), for the whole lane.</p>
+          <p>
+            Round 3 marks (September 30, 2026, 01:05 UTC, from the Operator): all five r3 cards are
+            &quot;good&quot;, and the running shoe was good at r2. The soda can and the water bottle
+            stay &quot;fix&quot; (deferred to the Fluids engine), so both are behind the labs switch
+            (<code>labs: true</code> in <code>src/toys.js</code>) until the round that moves their
+            pours onto Fluids; their effects are unchanged.
+          </p>
+          <p>
+            Round 3 (September 29, 2026, night): the owner marked the running shoe &quot;good&quot;;
+            the soda can and the water bottle wait for the Fluids lane (left as they are); five
+            cards were &quot;fix&quot;. What changed:
+          </p>
+          <ul>
+            <li>
+              <strong>Sunglasses:</strong> the arms fold on hinges moved back behind the rims (z
+              0.575), so each folded arm lies behind the lenses, the right one just behind the frame
+              and the left one behind it. They are no longer sorted again where they stand: in their
+              built order they already draw behind the lenses (re-sorted, they drew over them).
+            </li>
+            <li>
+              <strong>Sharpness (pen, hoodie, sunglasses, cap):</strong>
+              <code>tools/ro-bake.mjs</code> now samples each model at twice the count and keeps an
+              even (blue-noise) set in a coarse-to-fine order, so any first m splats cover the
+              surface evenly (the scan's share on a tier is a prefix). Before, the file was
+              shuffled, and a random subset left clumps and holes (docs/PACKS.md 7c, &quot;even
+              placement&quot;).
+            </li>
+            <li>
+              <strong>Baseball cap:</strong> the stand is one smooth turned walnut piece (an even
+              lathe) instead of joined kit shapes with grainy edges.
+            </li>
+            <li>
+              <strong>Fountain pen:</strong> the pen gets 75% of the splats (was 72%), the notepad
+              10%, and the notepad's rules and margin are fine unbroken lines instead of colored
+              dots in the sheet.
+            </li>
+            <li>
+              <strong>Hoodie:</strong> the shoulder balls are gone. Each armhole is closed with
+              fabric that follows the opening's own outline (the sleeve's splats that touch the
+              body, laid on the plane that fits them best), one patch on the body and one on the
+              sleeve's top, so a raised sleeve shows cloth at the shoulder and under the arm, not
+              the inside of the garment.
+            </li>
+            <li>
+              <strong>Clips</strong> are rendered at a phone's real density (1170 px, a 390 px wide
+              phone at 3x).
+            </li>
+          </ul>
+          <p>
+            Round 2 (September 29, 2026, evening): the owner marked all eight cards &quot;fix&quot;
+            (notes kept on the Effect review page; the Operator added that pours use what the engine
+            has until a Fluids lane exists, and that parts must stay attached). What changed:
+          </p>
+          <ul>
+            <li>
+              <strong>Sharpness, every toy:</strong> each model baked at about 276,000 splats (it
+              was 110,000 to 130,000) and each recipe given <code>density: 1.5</code>, like the
+              Model to splats toy the owner marked good, so the high tier shows about 300,000; the
+              model's splats at full opacity.
+            </li>
+            <li>
+              <strong>Water bottle:</strong> the cap is a stopper whose plug (and its seal) sat
+              inside the neck and swung out through it; the plug is now left out at bake time (a
+              hard cut at the cap's rim) and the cap's underside closed with a dark disc. The drops
+              became a continuous stream: 18 overlapping pieces of stretched splats that follow the
+              pour's arc, plus a splash of 26 streak droplets where it lands.
+            </li>
+            <li>
+              <strong>Soda can:</strong> the foam clumps became a continuous jet of cream foam
+              streaked with amber (22 pieces), with fine drops spattering onto the lid and the
+              coaster and soaking away.
+            </li>
+            <li>
+              <strong>Sunglasses:</strong> the arms were checked in the front's own frame and stay
+              behind the lenses; the second arm folds a little less so it lies behind the first.
+              (The first clips were rendered before the parts were sorted where they stand, so a
+              folded arm drew over a lens.)
+            </li>
+            <li>
+              <strong>Hoodie:</strong> the hood now flops forward on a hinge across the neck's sides
+              (its low front edge tucks into the chest) and flips back up, instead of swinging off
+              the head. The sleeves swing up and forward to cross in front of the chest on paths
+              checked to stay out of the body (about 3% of their splats, all at the shoulder joint,
+              pass inside), and small fabric caps fill the shoulders while the sleeves are raised.
+            </li>
+            <li><strong>Running shoe:</strong> the kit laces are thinner, rounder and braided.</li>
+          </ul>
+          <p>Round 1:</p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Toy</th>
+                  <th scope="col">Source (license checked on the live page)</th>
+                  <th scope="col">Kind of model</th>
+                  <th scope="col">Moving pieces</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Fountain pen</th>
+                  <td>
+                    Sketchfab &quot;Pelikan M205 … Translucent Green&quot;, chemicalX (CC BY 4.0)
+                  </td>
+                  <td>detailed photoreal model</td>
+                  <td>cap (its own pieces, moved onto the nib), pen; kit notepad and ink</td>
+                </tr>
+                <tr>
+                  <th scope="row">Water bottle</th>
+                  <td>Sketchfab &quot;Water bottle&quot;, danny_p3d (CC BY 4.0)</td>
+                  <td>detailed photoreal model</td>
+                  <td>
+                    cap (its own pieces, moved onto the neck), bottle; kit glass, water and 40 drops
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Soda can</th>
+                  <td>Sketchfab &quot;Soda Can&quot;, RoutineStudio (CC BY 4.0)</td>
+                  <td>detailed model, label painted by us</td>
+                  <td>
+                    its own ring pull (cut as a solid piece), can; kit coaster, opening and 48 foam
+                    clumps
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Running shoe</th>
+                  <td>Sketchfab &quot;PB158 Sneaker Low&quot;, SCANIMAT (CC BY 4.0)</td>
+                  <td>photogrammetry scan</td>
+                  <td>shoe (toe taps); its bow left out, two kit laces of 22 joints each</td>
+                </tr>
+                <tr>
+                  <th scope="row">Hoodie</th>
+                  <td>Sketchfab &quot;Hoodie&quot;, Virtual Pandora (CC BY 4.0)</td>
+                  <td>detailed garment model</td>
+                  <td>
+                    hood (its own panels), sleeves (hard plane at the shoulder); kit drawstrings
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Sunglasses</th>
+                  <td>Poly Haven <code>round_spectacles</code>, Sean Buckley (CC0)</td>
+                  <td>photoreal model</td>
+                  <td>front, two arms (its own pieces); kit lenses that darken</td>
+                </tr>
+                <tr>
+                  <th scope="row">Baseball cap</th>
+                  <td>Sketchfab &quot;Baseball Cap&quot;, Scott VanArsdale (CC BY 4.0)</td>
+                  <td>detailed photoreal model</td>
+                  <td>the whole cap; kit walnut stand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              Sources: Poly Haven had only the spectacles among these objects, and lane G's
+              image-to-3D had already failed on a fountain pen and found no usable photos of a can,
+              a shoe or a hoodie (docs/handoff/G.md). The Toy Ideas page names Sketchfab CC BY
+              models as a source, so the rest come from Sketchfab, downloaded through Allen AI's
+              Objaverse mirror on Hugging Face (Sketchfab's own downloads need an account). Each
+              license was read from Sketchfab's API for the model on September 29, 2026. The shoe is
+              the only true photo scan; the others are photoreal models with photo-like textures,
+              not cartoons. No image-to-3D runs were used (no GPU quota spent).
+            </li>
+            <li>
+              Why a new tool rather than <code>tools/model-to-splats.mjs</code>: a toy with moving
+              parts needs each splat tagged with its piece, and a kit recipe that loads it.
+              <code>tools/ro-bake.mjs</code> uses the same converter (<code>sampleSurface</code> in
+              <code>src/packs/studio-models-core.js</code>), then cuts parts by the mesh's own
+              separate pieces (islands), its texture charts (a garment's panels come apart along
+              their seams) or a hard plane, and writes a compact <code>.splats</code> file (14 bytes
+              a splat, about 1.2 to 2.1 MB a toy, in an even order so any first m splats spread
+              evenly over the surface for the lower tiers). A painted color keeps the model's baked
+              light (the tool samples twice, lit and flat, and uses the ratio).
+            </li>
+            <li>
+              Every model piece is a kit part: turned and moved, never scaled or bent. Parts turned
+              past a quarter turn are sorted again where they stand (<code>out.resortPose</code>,
+              every 0.04 to 0.1 s while they move); tokens (drops, foam, lace joints) set
+              <code>out.resort</code>.
+            </li>
+            <li>
+              The pen's ink: a wet layer fades in behind the nib on channel 0 and a darker dry layer
+              on channel 1; to end at rest, both run back into the nib after the cap is on.
+            </li>
+            <li>
+              The hoodie's sleeves are cut at the shoulder by a plane across the raglan sleeve
+              panels, so the shoulder stays whole and only the sleeve's end opens.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              The fountain pen and the water bottle are CG models of real products, not photo scans;
+              the pen's model is of a branded pen, with its marks painted out.
+            </li>
+            <li>
+              The fountain pen at rest sits low in its frame: the frame holds the writing pose (the
+              pen tilted up with its cap posted).
+            </li>
+            <li>
+              The hoodie's sleeves pass a little into the chest while crossed (rigid sleeves cannot
+              bend at the elbow), and a raised sleeve's cuff shows its inside.
+            </li>
+            <li>The running shoe is dark; its laces read best on a light background.</li>
+            <li>The brief above is quoted word for word, so its one British spelling stays.</li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              New tool files: <code>tools/ro-bake.mjs</code> and
+              <code>tools/ro-sources.mjs</code> (the lane's own build tool; no new devDependency).
+              The sources are recorded there and in CREDITS.md, not in
+              <code>tools/models.json</code> or <code>tools/assets.json</code>: those feed
+              <code>tools/mesh-to-splats.mjs</code> and <code>tools/prepare-assets.mjs</code>, which
+              these kit toys don't use.
+            </li>
+            <li>
+              New shelf: the brief puts four toys on a Clothing shelf, which didn't exist, so the
+              lane added <code>{ id: &quot;clothing&quot;, label: &quot;Clothing&quot; }</code> to
+              <code>CATEGORIES</code> in <code>src/toys.js</code> (after &quot;Open me&quot;).
+            </li>
+            <li>
+              Kit-built pieces the brief asked to be cut from the scan and vice versa: the soda
+              can's ring pull is the model's own (cut as a solid piece) rather than kit-built, since
+              the model has one.
+            </li>
+            <li>
+              PACKS.md lesson: a garment exported from a cloth tool keeps its panels as separate
+              texture charts, so parts can be cut along its real seams (connectivity without welding
+              by position).
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/RealObjects.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/RealObjects.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
