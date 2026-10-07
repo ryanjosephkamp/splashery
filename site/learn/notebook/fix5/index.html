@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>
+      Lane Fix5: the balloon dog's flag colors, the real alarm clock, and small fixes · Splashery
+    </title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fix5."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fix5/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Fix5: the balloon dog's flag colors, the real alarm clock, and small fixes · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fix5."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fix5/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Fix5: the balloon dog's flag colors, the real alarm clock, and small fixes</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section
+        class="md-file"
+        aria-label="Lane Fix5: the balloon dog's flag colors, the real alarm clock, and small fixes"
+      >
+        <div class="prose">
+          <p>
+            Prefix <code>fx5</code>. Owns, for these fixes only: the balloon dog's recipe (<code
+              >balloon-dog</code
+            >
+            in <code>src/packs/playthings.js</code>), the scanned alarm clock's rig (<code
+              >alarm-clock</code
+            >
+            in <code>src/rigs.js</code>), the Klein bottle's and the torus knot's recipes
+            (<code>src/packs/maths.js</code>), the kit clock (<code>clock</code> in
+            <code>src/packs/objects.js</code>, shared with lane Fix4), those toys' entries in the
+            shared lists, <code>tests/fx5.spec.mjs</code>, the <code>fx5-*</code> screenshots and
+            this file. How lanes work: <a href="../../../learn/operating/">OPERATING.md</a>.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>From the Operator, September 30, 2026, 6:47 p.m. UTC, word for word:</p>
+          <p>
+            More work for this session, after the rim engine PR (#136) and the marble. The owner's
+            notes of September 28 (filed today in docs/reviews/2026-09-28-sounds/review.md on branch
+            claude/operator-sound-review) have a few non-sound fixes. Do them as a second lane,
+            Fix5: branch claude/lane-fix5 from main, PR &quot;Phase Fix5: the balloon dog's flag
+            colors, the real alarm clock, and small fixes&quot;, handoff docs/handoff/Fix5.md,
+            prefix <code>fx5</code>.
+          </p>
+          <ol>
+            <li>
+              <strong>Balloon dog:</strong> with a flag theme on, the balloon takes the flag's
+              colors, but the popped pieces keep the &quot;Balloon color&quot; setting. His example:
+              Albania's flag on a green balloon pops into green pieces. The pieces should match what
+              you see.
+            </li>
+            <li>
+              <strong>The scanned alarm clock (<code>alarm-clock</code>):</strong> &quot;There's
+              something weird about that red or orange hand that's moving. It's like some of it is
+              stuck and some of it isn't.&quot; (He had a screenshot; we don't.) Reproduce it and
+              fix it within the effect quality rules: the whole hand moves as one solid piece, cut
+              with hard edges or rebuilt as a kit part.
+            </li>
+            <li>
+              <strong>Two toys named &quot;Alarm clock&quot;:</strong> he wants the same kind of
+              object on different shelves to have different names. Rename the scanned one's label to
+              &quot;Real alarm clock&quot;, like &quot;Real tin can&quot; and &quot;Real
+              pencil&quot;. Keep its id so links still work, and update its help and plan text if
+              they use the name.
+            </li>
+            <li>
+              <strong>Klein bottle:</strong> he tapped all over the bottle and couldn't set off its
+              effect; only the button worked. Check on main (Fidelity A changed it since), and fix
+              the tap target if it still fails.
+            </li>
+            <li>
+              <strong>Torus knot:</strong> its help says &quot;pull and let go&quot;, but dragging
+              only turns it. Make the help line match what it does, unless a pull exists that just
+              doesn't work, in which case fix the pull.
+            </li>
+            <li>
+              <strong>CNN:</strong> add one sentence to its About text in src/toy-help.js saying
+              what the gray squares on the drawing pad mean. Coordinate the wording with UI r2's pad
+              (PR #131); don't touch the pad's code.
+            </li>
+            <li>
+              <strong>A live clock (the kit <code>clock</code>, which you already own):</strong> a
+              &quot;Live time&quot; option that shows the real time in a chosen time zone. The
+              default is this device's own zone, read with
+              <code>Intl.DateTimeFormat().resolvedOptions().timeZone</code> (no permission needed);
+              offer UTC and a list of common zones. Keep the tap effect. It's off by default unless
+              it clearly looks right on.
+            </li>
+          </ol>
+          <p>
+            Cards (390×844, &quot;built by Opus 5.5&quot;, lane record <code>Fix5</code>; ask me if
+            it's missing): fx5-balloon-flag, fx5-real-alarm-clock, fx5-klein-tap, fx5-torus-knot,
+            fx5-live-clock. Tests in tests/fx5.spec.mjs. These are public toys: they merge after the
+            owner's good marks. You own, for Fix5 only: the balloon dog's, the scanned alarm
+            clock's, the Klein bottle's and the torus knot's recipes; the kit clock (already yours);
+            and those toys' entries in the shared lists.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (default effort).</p>
+          <p>
+            September 30, 2026: all seven fixes are built on <code>claude/lane-fix5</code>, which
+            stacks on <code>claude/lane-fix4</code> (both change the kit clock), so it merges after
+            #134. <code>tests/fx5.spec.mjs</code> passes (8 of 8). Clips and cards follow.
+          </p>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <strong>Balloon dog</strong> (<code>balloon-dog</code>): the popped scraps were a
+              cloud built with <code>pattern: false</code>, so a flag theme skipped them and they
+              kept <code>shade(o.color)</code>. They now take the pattern layer, and each scrap is
+              built on the skin of one of the balloon's own pieces (the pattern layer colors a splat
+              by its rest position), so it has the color the rubber had there: the balloon color, or
+              the flag's. They also burst from where that rubber was.
+            </li>
+            <li>
+              <p>
+                <strong>Real alarm clock</strong> (<code>alarm-clock</code>, rig in src/rigs.js):
+                the second hand was a rig region keyed to its red. The rig moves each splat by its
+                weight (<code>mix(p, moved, w)</code> in the rig shader), and the hand is so thin
+                that most of its splats are partly dial-colored, so they got weights between 0 and 1
+                and turned only part of the way: the &quot;stuck&quot; part. It also sat at z = 0.21
+                (behind the bezel), while its region was centered at 0.4, so its tip fell outside
+                the region. Now:
+              </p>
+              <ul>
+                <li>
+                  The region is centered on the dial (<code>at</code> z 0.21, radius 0.75, tolerance
+                  0.55; the dial's beige stays out) and is hidden (<code>visible: 0</code>). The
+                  dial is whole under it (checked: no gap).
+                </li>
+                <li>
+                  A kit-built hand (a rig add-on, parts turn with <code>out.addon.parts.hand</code>)
+                  turns in its place as one solid piece: a thin red needle with a short tail and a
+                  round boss, 3 cm off the dial so the dial's big splats never sort in front of it.
+                  It shares the toy's body, so it rattles with the clock on a tap. Where it lies at
+                  rest (<code>CLOCK_HAND</code>) was read from a face-on render and a sweep of
+                  depths from the side.
+                </li>
+                <li>
+                  Its label is now &quot;Real alarm clock&quot; (id unchanged). Its help and plan
+                  text don't use the name.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Klein bottle</strong>: still failed on main. Its glass is at opacity 0.28,
+              just under the pick pass's alpha clip (0.3), so a tap on it found nothing and nothing
+              fired. The recipe now sets <code>pickAlpha: 0.1</code> (the Lab's splat field does the
+              same). The test fails without it (0 of 3 taps hit) and passes with it.
+            </li>
+            <li>
+              <strong>Torus knot</strong>: it has no pull you can drag (the tap plays a scripted
+              pull). The help now says &quot;Tap it: the knot pulls loose and springs back. Drag to
+              turn it. …&quot;
+            </li>
+            <li>
+              <strong>CNN</strong>: About text gains &quot;Each square on the drawing pad is one
+              pixel of the small 8-by-8 picture the network reads: the lighter its gray, the more
+              ink it holds, and the pad starts with the sample 7.&quot; This matches UI r2's pad (PR
+              #131: a cell inks by how much of it the pen covers).
+            </li>
+            <li>
+              <strong>Kit clock</strong>: it already showed this device's real time, so &quot;Live
+              time&quot; is a <strong>Time zone</strong> option: &quot;This device&quot; (the
+              default, the old behavior), UTC and 14 cities (IANA names, read with
+              <code>Intl.DateTimeFormat</code> and <code>formatToParts</code>; an unknown zone falls
+              back to this device's time). The build hands the zone to <code>drive()</code> in
+              <code>k.data.zone</code>. Its color option's label is now &quot;Color&quot;.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>None known.</li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              Fix5 stacks on Fix4 (<code>claude/lane-fix4</code> merged into it): merge #134 first.
+            </li>
+            <li>
+              The live clock was already live; the new option is the time zone, on by default as
+              &quot;This device&quot; (unchanged behavior).
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Fix5.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Fix5.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -10,29 +10,29 @@
     "grapes": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 229.8,
-      "recipeGzipKB": 62.6,
+      "recipeKB": 231.2,
+      "recipeGzipKB": 63.2,
       "sharedBy": 27
     },
     "orange": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 229.8,
-      "recipeGzipKB": 62.6,
+      "recipeKB": 231.2,
+      "recipeGzipKB": 63.2,
       "sharedBy": 27
     },
     "watermelon": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 229.8,
-      "recipeGzipKB": 62.6,
+      "recipeKB": 231.2,
+      "recipeGzipKB": 63.2,
       "sharedBy": 27
     },
     "pizza": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 229.8,
-      "recipeGzipKB": 62.6,
+      "recipeKB": 231.2,
+      "recipeGzipKB": 63.2,
       "sharedBy": 27
     },
     "grand-piano": {

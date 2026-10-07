@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Fidelity: trained splats on our rigs (prefix fid) · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fidelity."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fidelity/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Fidelity: trained splats on our rigs (prefix fid) · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fidelity."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fidelity/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Fidelity: trained splats on our rigs (prefix fid)</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Fidelity: trained splats on our rigs (prefix fid)">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Fidelity, &quot;Trained splats on our
+            rigs&quot; (prefix <code>fid</code>). Branches: <code>claude/lane-fidelity</code> (and
+            <code>claude/lane-fidelity-engine</code> if the engine needs a change). PR title:
+            &quot;Phase Fidelity: trained splats on our rigs&quot;. Handoff file:
+            docs/handoff/Fidelity.md. Model: Opus 5.5.
+          </p>
+          <h3 id="brief-written-by-the-operator-on-october-3-2026-from-the-owner-s-go-that-day">
+            Brief (written by the Operator on October 3, 2026, from the owner's &quot;go&quot; that
+            day)
+          </h3>
+          <p>
+            The owner compared our toys with the scenes on superspl.at and found ours look like
+            cartoons beside them. The reason: most of our toys are <em>placed</em> (a recipe
+            scatters splats on simple shapes and colors them by rule), while those scenes are
+            <em>trained</em> (an optimizer fits splats to hundreds of path-traced or photographed
+            views, so light, shadow, texture and shine are baked in). Same renderer (PlayCanvas),
+            same phones. The owner approved the Operator's plan, the &quot;Splat Fidelity
+            Plan&quot;, on October 3, 2026:
+          </p>
+          <ul>
+            <li>
+              <strong>Stage 1, the boombox two ways.</strong> Our boombox toy comes from the CC0
+              Poly Haven model <code>boombox</code> (<code>tools/models.json</code>), sampled into
+              splats with painted-on light. Codex task 08
+              (<code>docs/codex/08-fidelity-stage1.md</code>) runs on the owner's Mac (Apple
+              Silicon; an M5 Pro with 64 GB or an M3 Pro): Blender renders the same model from about
+              200 angles with exact cameras, Brush (or msplat) trains a splat from those renders,
+              and splat-transform compresses it. Codex pushes the trained files, its scripts and a
+              report to <code>codex/fidelity-stage1</code>. Same source, two methods, so any
+              difference comes from the method.
+            </li>
+            <li>
+              <strong>Stage 2, a hero object trained part by part.</strong> A brass orrery: polished
+              brass arms and gears, planets of stone and enamel around a glowing sun. A tap sets it
+              turning with a soft ticking. Every moving piece turns on an axis as a solid part.
+              Built in Blender from scratch (ours, CC0), each part rendered on its own and trained
+              on its own, then put on a kit rig so taps, sound and physics work as on any toy. This
+              is what SuperSplat can't do: its splats never move, only its camera.
+            </li>
+            <li>
+              <strong>What we measure</strong>: the match against held-out renders (PSNR and SSIM),
+              splats, megabytes and frame rate on a phone, a clip beside a SuperSplat object of the
+              same kind, the owner's mark, and a log of which parts of Splashery's own work helped
+              (recipes, part names and rigs, the effect rules, clip tools, phone budgets,
+              compression) and what each did. Report honestly if nothing of ours helped.
+            </li>
+            <li>
+              No new Sharpness rounds start until Stage 1 reports (the owner's call of October 3,
+              2026).
+            </li>
+          </ul>
+          <h4 id="what-to-deliver">What to deliver</h4>
+          <ol>
+            <li>
+              <strong>Read Codex's Stage 1 work</strong> when it lands on
+              <code>codex/fidelity-stage1</code> (fetch with
+              <code>git fetch origin '+refs/heads/*:refs/remotes/origin/*'</code>; never push to a
+              <code>codex/</code> branch). Check its numbers. Until it lands, do steps 2 and 3.
+            </li>
+            <li>
+              <strong>The Splashery side.</strong> A labs toy, &quot;Boombox, trained&quot;, on the
+              Photoreal shelf, that loads the trained SOG (full and lite by device tier, like the
+              other captures) and keeps the boombox's tap effect working. Then the general piece: a
+              recipe can load <strong>several trained files as named parts</strong> and hand them to
+              the kit's rig, so each part moves as a solid piece. Read how
+              <code>src/packs/real-objects.js</code> (<code>addScan</code>),
+              <code>src/rigs.js</code> and <code>src/kit.js</code> handle scans and parts first. If
+              loading parts needs an engine change, make it a small additive &quot;Engine: …&quot;
+              PR on <code>claude/lane-fidelity-engine</code>, merged first. Check whether our
+              loaders and the SOG path keep the spherical-harmonic bands (the shine that changes as
+              you turn) and whether the streamed levels of detail in PlayCanvas 2.22.3 can be used;
+              say what you find.
+            </li>
+            <li>
+              <strong>Stage 2 scripts.</strong> In <code>tools/fidelity/</code>: a Blender Python
+              script that builds the orrery from scratch (procedural geometry; CC0 materials and an
+              HDRI from Poly Haven, each license checked on its live page), a camera rig that
+              renders each part on its own and the whole object together (NeRF-synthetic
+              <code>transforms_train.json</code> and <code>transforms_test.json</code>, RGBA PNGs,
+              held-out test views), and a runner the owner's Mac can use. Blender can run here on
+              the CPU at low resolution to test the scripts (<code>blender -b --python ...</code>);
+              the real renders and the training run on the Mac through Codex task 10, which the
+              Operator writes from your scripts. Put the steps a Mac needs in
+              <code>tools/fidelity/README.md</code>.
+            </li>
+            <li>
+              <strong>The orrery toy</strong> once task 10's trained parts land: a labs toy on the
+              Science shelf with its tap (the planets turn on their arms, each at its own speed),
+              its sound, its how-to and About texts, credits, clips at phone size, and a card on the
+              Effect review page.
+            </li>
+            <li>
+              <strong>The report</strong> in <code>docs/audits/fidelity-2026-10.md</code>: Stage 1
+              and Stage 2 numbers, clips, what helped and what didn't, and what you'd do next (more
+              toys this way, SH bands, streaming).
+            </li>
+          </ol>
+          <h4 id="you-own">You own</h4>
+          <ul>
+            <li>
+              <code>tools/fidelity/</code>, <code>src/packs/fidelity.js</code> (new),
+              <code>assets/toys/&lt;your toys&gt;/</code>, your toys' entries in the shared lists
+              (<code>src/toys.js</code>, <code>src/toy-sounds.js</code>,
+              <code>src/toy-help.js</code>, <code>tools/toy-plan.json</code>, credits),
+              <code>tests/fid*.spec.mjs</code>, <code>docs/audits/fidelity-2026-10.md</code> and
+              this handoff file. Engine changes only through the engine PR.
+            </li>
+            <li>
+              Blender, Brush and other programs that run outside npm are build tools, not shipped:
+              list each with its version, license and where it came from in
+              <code>LICENSES.md</code> under a heading for build tools outside npm. Their output
+              (our renders and splats) is ours; the boombox stays credited to its Poly Haven author.
+            </li>
+          </ul>
+          <p>
+            Many lanes run at the same time (Books r5, Photoreal r2, Sharpness A and B, Physics,
+            Live input, Fluids, UI r5, Fix7 and the Integrators); you don't touch their files.
+          </p>
+          <h4 id="how-this-lane-runs">How this lane runs</h4>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator.
+              Don't ask him anything or wait for him. Put questions and blockers in your final
+              message (&quot;READY:&quot;, &quot;WORKING:&quot; or &quot;BLOCKED:&quot;), and the
+              Operator answers or relays them. Messages that arrive &quot;From the Operator&quot;
+              come from the coordinator on the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort. Any helper you start uses the same model.
+              Use at most one helper at a time.
+            </li>
+            <li>
+              Merging: everything in this lane is behind the labs switch, so the Operator merges it
+              after a full test run. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new text is in American English (color, center, gray, license, toward,
+              -ize endings, dates like &quot;October 3, 2026&quot;).
+            </li>
+            <li>
+              Read first: CLAUDE.md, docs/OPERATING.md (&quot;Steps for a lane&quot;), docs/PACKS.md
+              (&quot;Effect quality&quot;), <code>tools/models.json</code>,
+              <code>tools/mesh-to-splats.mjs</code> and <code>tools/model-to-splats.mjs</code>.
+            </li>
+            <li>
+              Your handoff file: start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>
+            October 3, 2026 (Opus 5.5). Codex task 08 has not pushed
+            <code>codex/fidelity-stage1</code> yet, so the lane did steps 2 and 3 first.
+          </p>
+          <p>
+            Done (PR &quot;Phase Fidelity: trained splats on our rigs&quot;, branch
+            <code>claude/lane-fidelity</code>):
+          </p>
+          <ul>
+            <li>
+              <code>src/packs/fidelity.js</code>: <code>decodeSog</code> (SOG version 2, browser and
+              Node; exact against splat-transform's reader, also for faint splats, read back through
+              WebGL), <code>addTrained</code> (a trained file as a cloud on one kit part, sizes and
+              rotations kept, the most visible splats first when the budget is smaller), and the
+              orrery recipe (<code>RECIPES.orrery</code>, not on the shelf yet): a tap spins the
+              arms up for 7 s, each at its own speed, and they coast to a stop where they are; the
+              moon rides on Earth's arm; the gears and the sun turn too.
+            </li>
+            <li>
+              <code>tools/fidelity/</code>: <code>orrery.py</code> (Blender: the model, per-part and
+              whole datasets, parts.json), <code>run-orrery.sh</code> (render, train with Brush,
+              pack, measure), <code>measure.mjs</code> and <code>measure.html</code> (PSNR and SSIM
+              at the held-out cameras), <code>summary.mjs</code>, <code>stand-in.mjs</code> and the
+              README with the Mac steps. Tested here with Blender 4.5.14 LTS on the CPU and a
+              stand-in for Brush.
+            </li>
+            <li>
+              <code>tests/fid.spec.mjs</code> with stand-in parts in
+              <code>tests/fixtures/fid/orrery/</code> (272 KB).
+            </li>
+            <li>
+              <code>LICENSES.md</code>: &quot;Build tools outside npm&quot; (Blender, Brush,
+              msplat).
+            </li>
+            <li>
+              <code>docs/audits/fidelity-2026-10.md</code>: the draft report (SH bands, streamed
+              LOD, the frame checks).
+            </li>
+          </ul>
+          <p>
+            Engine PR (branch <code>claude/lane-fidelity-engine</code>): &quot;Engine: a recipe's
+            prepare learns the device profile&quot; (a third argument to <code>prepare</code>,
+            <code>{ profile }</code>, so the orrery loads its lite parts on a phone). Merge it
+            first.
+          </p>
+          <p>
+            Findings: the captured path keeps and shows SH bands (checked with a view-dependent test
+            splat); the kit path keeps only the base color. PlayCanvas 2.22.3 can stream
+            <code>lod-meta.json</code>, but our loader passes blob URLs, so it would need a loader
+            change; not useful for single objects.
+          </p>
+          <p>Next:</p>
+          <ol>
+            <li>
+              When <code>codex/fidelity-stage1</code> lands: check its numbers, add &quot;Boombox,
+              trained&quot; (a captured labs toy on the Photoreal shelf, the boombox's rig), clips
+              and cards.
+            </li>
+            <li>
+              The Operator writes Codex task 10 from <code>tools/fidelity/README.md</code> (&quot;On
+              the Mac&quot;).
+            </li>
+            <li>
+              When task 10's parts land: put the orrery on the Science shelf (labs) with its sound,
+              how-to, About text, credits, clips and a card; fill in the report.
+            </li>
+          </ol>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Fidelity.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Fidelity.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
