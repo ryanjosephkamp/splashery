@@ -1597,11 +1597,822 @@
       "candidates": []
     },
     "periodic-table": {
-      "status": "site",
+      "status": "ready",
       "said": "(October 2, 2026, review) the whooshing sound ... doesn't need to be so loud ... I'd like for there to be, like, a faint synchronized sound that plays for each element as each of those subatomic particles gets packed into the nucleus. (October 6, 2026, walkthrough) the sound that plays as the subatomic particles are being added to the nucleus ... It's kind of like nails on a chalkboard ... maybe a little bit more like the sorting sound for the splat simulator.",
-      "note": "The whoosh on tapping an element: keep it but much more subtle. Add a faint sound in sync with each proton and neutron packing into the nucleus (not bubbles, not plastic blocks).",
-      "plan": "Now: The atom's whoosh much quieter, and for each proton and neutron as it packs into the nucleus a soft pebble's click, in sync, like the splat simulator's sorting (Sound C; softened by lane Elements, October 6, 2026; the bright 2.7 to 3.3 kHz clacks before it were 'like nails on a chalkboard').",
-      "candidates": [],
+      "note": "The whoosh on tapping an element: keep it but much more subtle. Add a faint sound in sync with each proton and neutron packing into the nucleus (not bubbles, not plastic blocks). Then (October 6): the ticks grate like nails on a chalkboard; make them more like the splat simulator's sorting.",
+      "plan": "Now: in the site and new to hear (lane Elements, October 6, 2026): for each proton and neutron as it packs into the nucleus, a soft pebble's click like the splat simulator's sorting, instead of the bright 2.7 to 3.3 kHz clacks (Sound C). On the board, iron's nucleus (26 protons, 30 neutrons): A, the new clicks; B, the old clacks to compare.",
+      "candidates": [
+        {
+          "id": "a",
+          "label": "Soft pebble clicks (new)",
+          "sound": [
+            {
+              "voice": "whoosh",
+              "f": 300,
+              "to": 1.6,
+              "decay": 1.4,
+              "vol": 0.13
+            },
+            {
+              "voice": "pebble",
+              "at": 0.3,
+              "f": 1488,
+              "vol": 0.16
+            },
+            {
+              "voice": "pebble",
+              "at": 0.331,
+              "f": 1812,
+              "vol": 0.191
+            },
+            {
+              "voice": "pebble",
+              "at": 0.362,
+              "f": 1934,
+              "vol": 0.221
+            },
+            {
+              "voice": "pebble",
+              "at": 0.393,
+              "f": 1936,
+              "vol": 0.172
+            },
+            {
+              "voice": "pebble",
+              "at": 0.424,
+              "f": 2082,
+              "vol": 0.202
+            },
+            {
+              "voice": "pebble",
+              "at": 0.455,
+              "f": 1535,
+              "vol": 0.233
+            },
+            {
+              "voice": "pebble",
+              "at": 0.485,
+              "f": 2231,
+              "vol": 0.183
+            },
+            {
+              "voice": "pebble",
+              "at": 0.516,
+              "f": 1659,
+              "vol": 0.214
+            },
+            {
+              "voice": "pebble",
+              "at": 0.547,
+              "f": 2380,
+              "vol": 0.164
+            },
+            {
+              "voice": "pebble",
+              "at": 0.578,
+              "f": 1783,
+              "vol": 0.195
+            },
+            {
+              "voice": "pebble",
+              "at": 0.609,
+              "f": 1899,
+              "vol": 0.226
+            },
+            {
+              "voice": "pebble",
+              "at": 0.64,
+              "f": 1907,
+              "vol": 0.176
+            },
+            {
+              "voice": "pebble",
+              "at": 0.671,
+              "f": 2047,
+              "vol": 0.207
+            },
+            {
+              "voice": "pebble",
+              "at": 0.702,
+              "f": 1506,
+              "vol": 0.237
+            },
+            {
+              "voice": "pebble",
+              "at": 0.733,
+              "f": 1830,
+              "vol": 0.188
+            },
+            {
+              "voice": "pebble",
+              "at": 0.764,
+              "f": 1955,
+              "vol": 0.218
+            },
+            {
+              "voice": "pebble",
+              "at": 0.795,
+              "f": 1954,
+              "vol": 0.169
+            },
+            {
+              "voice": "pebble",
+              "at": 0.825,
+              "f": 2104,
+              "vol": 0.199
+            },
+            {
+              "voice": "pebble",
+              "at": 0.856,
+              "f": 1553,
+              "vol": 0.23
+            },
+            {
+              "voice": "pebble",
+              "at": 0.887,
+              "f": 2253,
+              "vol": 0.181
+            },
+            {
+              "voice": "pebble",
+              "at": 0.918,
+              "f": 1677,
+              "vol": 0.211
+            },
+            {
+              "voice": "pebble",
+              "at": 0.949,
+              "f": 2402,
+              "vol": 0.162
+            },
+            {
+              "voice": "pebble",
+              "at": 0.98,
+              "f": 1801,
+              "vol": 0.192
+            },
+            {
+              "voice": "pebble",
+              "at": 1.011,
+              "f": 1920,
+              "vol": 0.223
+            },
+            {
+              "voice": "pebble",
+              "at": 1.042,
+              "f": 1925,
+              "vol": 0.173
+            },
+            {
+              "voice": "pebble",
+              "at": 1.073,
+              "f": 2069,
+              "vol": 0.204
+            },
+            {
+              "voice": "pebble",
+              "at": 1.104,
+              "f": 1524,
+              "vol": 0.234
+            },
+            {
+              "voice": "pebble",
+              "at": 1.135,
+              "f": 2218,
+              "vol": 0.185
+            },
+            {
+              "voice": "pebble",
+              "at": 1.165,
+              "f": 1648,
+              "vol": 0.216
+            },
+            {
+              "voice": "pebble",
+              "at": 1.196,
+              "f": 1972,
+              "vol": 0.166
+            },
+            {
+              "voice": "pebble",
+              "at": 1.227,
+              "f": 2126,
+              "vol": 0.197
+            },
+            {
+              "voice": "pebble",
+              "at": 1.258,
+              "f": 1571,
+              "vol": 0.227
+            },
+            {
+              "voice": "pebble",
+              "at": 1.289,
+              "f": 2275,
+              "vol": 0.178
+            },
+            {
+              "voice": "pebble",
+              "at": 1.32,
+              "f": 1695,
+              "vol": 0.208
+            },
+            {
+              "voice": "pebble",
+              "at": 1.351,
+              "f": 1793,
+              "vol": 0.239
+            },
+            {
+              "voice": "pebble",
+              "at": 1.382,
+              "f": 1819,
+              "vol": 0.19
+            },
+            {
+              "voice": "pebble",
+              "at": 1.413,
+              "f": 1942,
+              "vol": 0.22
+            },
+            {
+              "voice": "pebble",
+              "at": 1.444,
+              "f": 1943,
+              "vol": 0.171
+            },
+            {
+              "voice": "pebble",
+              "at": 1.475,
+              "f": 2091,
+              "vol": 0.201
+            },
+            {
+              "voice": "pebble",
+              "at": 1.505,
+              "f": 1542,
+              "vol": 0.232
+            },
+            {
+              "voice": "pebble",
+              "at": 1.536,
+              "f": 2239,
+              "vol": 0.182
+            },
+            {
+              "voice": "pebble",
+              "at": 1.567,
+              "f": 1666,
+              "vol": 0.213
+            },
+            {
+              "voice": "pebble",
+              "at": 1.598,
+              "f": 1990,
+              "vol": 0.163
+            },
+            {
+              "voice": "pebble",
+              "at": 1.629,
+              "f": 2148,
+              "vol": 0.194
+            },
+            {
+              "voice": "pebble",
+              "at": 1.66,
+              "f": 1589,
+              "vol": 0.225
+            },
+            {
+              "voice": "pebble",
+              "at": 1.691,
+              "f": 2296,
+              "vol": 0.175
+            },
+            {
+              "voice": "pebble",
+              "at": 1.722,
+              "f": 1713,
+              "vol": 0.206
+            },
+            {
+              "voice": "pebble",
+              "at": 1.753,
+              "f": 1815,
+              "vol": 0.236
+            },
+            {
+              "voice": "pebble",
+              "at": 1.784,
+              "f": 1837,
+              "vol": 0.187
+            },
+            {
+              "voice": "pebble",
+              "at": 1.815,
+              "f": 1964,
+              "vol": 0.217
+            },
+            {
+              "voice": "pebble",
+              "at": 1.845,
+              "f": 1961,
+              "vol": 0.168
+            },
+            {
+              "voice": "pebble",
+              "at": 1.876,
+              "f": 2112,
+              "vol": 0.198
+            },
+            {
+              "voice": "pebble",
+              "at": 1.907,
+              "f": 1560,
+              "vol": 0.229
+            },
+            {
+              "voice": "pebble",
+              "at": 1.938,
+              "f": 2261,
+              "vol": 0.18
+            },
+            {
+              "voice": "pebble",
+              "at": 1.969,
+              "f": 1684,
+              "vol": 0.21
+            },
+            {
+              "voice": "pebble",
+              "at": 2.0,
+              "f": 2410,
+              "vol": 0.161
+            }
+          ]
+        },
+        {
+          "id": "b",
+          "label": "The old clacks (before)",
+          "sound": [
+            {
+              "voice": "whoosh",
+              "f": 300,
+              "to": 1.6,
+              "decay": 1.4,
+              "vol": 0.13
+            },
+            {
+              "voice": "clack",
+              "at": 0.3,
+              "f": 2538,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.331,
+              "f": 2738,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.362,
+              "f": 3195,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.393,
+              "f": 2815,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.424,
+              "f": 3289,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.455,
+              "f": 2567,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.485,
+              "f": 3382,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.516,
+              "f": 2644,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.547,
+              "f": 3476,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.578,
+              "f": 2720,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.609,
+              "f": 3173,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.64,
+              "f": 2797,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.671,
+              "f": 3267,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.702,
+              "f": 2549,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.733,
+              "f": 2749,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.764,
+              "f": 3209,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.795,
+              "f": 2826,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.825,
+              "f": 3302,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.856,
+              "f": 2578,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.887,
+              "f": 3396,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.918,
+              "f": 2655,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.949,
+              "f": 3489,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.98,
+              "f": 2731,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.011,
+              "f": 3187,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.042,
+              "f": 2808,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.073,
+              "f": 3280,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.104,
+              "f": 2560,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.135,
+              "f": 3374,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.165,
+              "f": 2636,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.196,
+              "f": 2837,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.227,
+              "f": 3316,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.258,
+              "f": 2589,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.289,
+              "f": 3409,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.32,
+              "f": 2666,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.351,
+              "f": 3107,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.382,
+              "f": 2742,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.413,
+              "f": 3200,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.444,
+              "f": 2819,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.475,
+              "f": 3294,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.505,
+              "f": 2571,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.536,
+              "f": 3387,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.567,
+              "f": 2648,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.598,
+              "f": 2848,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.629,
+              "f": 3329,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.66,
+              "f": 2600,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.691,
+              "f": 3423,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.722,
+              "f": 2677,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.753,
+              "f": 3120,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.784,
+              "f": 2753,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.815,
+              "f": 3214,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.845,
+              "f": 2830,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.876,
+              "f": 3307,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.907,
+              "f": 2582,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.938,
+              "f": 3401,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.969,
+              "f": 2659,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 2.0,
+              "f": 3494,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            }
+          ]
+        }
+      ],
       "round": "2026-10-06"
     },
     "picture-frame": {

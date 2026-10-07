@@ -76,7 +76,8 @@ polish: sharper samples and a smoother lift":
     pebble's click like the splat simulator's sorting (bright clacks at 2.7 to 3.3 kHz before): the
     share of the sound above 2 kHz goes from 68 to 8 percent. `tests/sndc.spec.mjs` counts the ticks
     by the new voice; `tools/sound-review.json` updated; `tools/rel-nucleus-sound.mjs` renders the
-    sound to a WAV. Cards: rel-nucleus-sound, rel-nucleus-sound-ab.
+    sound to a WAV. On the Sound Board (Effect review plays no sound): the entry is "ready" with A,
+    the new clicks, and B, the old clacks, for iron.
   - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
     Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
     coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
