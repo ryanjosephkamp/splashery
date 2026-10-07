@@ -39,10 +39,62 @@ session_012GmKRUMZLir2nb27Bo8Cu2.
 
 ## State
 
-Started October 7, 2026. Working on item 1 (the attractors).
+Started October 7, 2026. Branch `claude/lane-math-r2`; draft PR #392, "Phase Math r2: more
+attractors, 4D shapes and Fourier text". All five items are built; clips go on Effect review page 2
+(lane `MathR2`, cards `mt2-*`).
+
+1. **Attractors** (labs): `rossler-attractor`, `thomas-attractor`, `aizawa-attractor`. The path is
+   one long RK4 solution; a tap drops a live tracer (fixed RK4 steps, frame-rate independent) at the
+   tapped point (Play: on the path), each with a trail; four at once, a fifth replaces the oldest;
+   one runs from the start.
+2. **4D shapes** (labs): `five-cell`, `sixteen-cell`, `twenty-four-cell`, `duoprism` (p and q 3 to
+   6). Corners are tokens turned in the xw and yw planes and projected from 4D; a tap rolls a whole
+   turn through w (5 s). Seven color themes, also on the **hypercube** (default unchanged).
+3. **Möbius riders** (public toy): a toy train, a ladybug and a skateboard, each with its own ride
+   sound, and a Rider color option for every rider ("Its own" keeps the old colors).
+4. **Mandelbulb** (public toy): Power (5 to 12; the slices turn 1/(n − 1) of a turn) and a Julia
+   bulb (four points c off the axis; it has no turning symmetry, so the whole bulb turns a quarter
+   turn and back). Default (power 8, Mandelbulb) builds exactly as before.
+5. **Fourier circles** (public toy): words up to 40 letters, laid out in lines of up to 10, drawn
+   five letters at a time (the groups share the tokens and take turns, 2.6 s each); lighter, thinner
+   circles behind words in 2D. Up to six letters behave as before.
+
+Tests: `tests/mt2.spec.mjs` (12 Node-side checks plus 7 screenshot tests). Evidence:
+`docs/evidence/{rossler,thomas,aizawa}-attractor.json`, `five-cell`, `sixteen-cell`,
+`twenty-four-cell`, `duoprism`.
 
 ## Notes
 
+- **Live tracers with tokens and skin.** Each tracer is 12 tokens: the head and 11 points behind it,
+  read from a ring buffer of past states; the trail is round splats skinned between neighboring
+  tokens, all built at the middle. Each tracer is also a part, so an unused one hides (part
+  visibility hides token and skin splats too). `out.resort` every 0.3 s keeps them sorted where they
+  are.
+- **State kept between frames** is keyed on `info.data` (a fresh object per build), so a rebuild
+  starts clean; the first frame's tap count is taken as already seen.
+- **Turning symmetry of the Mandelbulb**: power n gives n − 1-fold symmetry about the axis. A Julia
+  point on the axis keeps it, but then (r, θ) evolve without φ and the set is a plain solid of
+  revolution, so the Julia points are off the axis.
+- **A control's ease can change per build**: motion.js reads `def.ease` each frame, so the Fourier
+  build sets the spin's length for long text.
+- `tools/effect-clip.mjs --opt` takes one option; for clips with two I patched it locally
+  (`key=value;key=value`) and did not commit that.
+
 ## Known issues
 
+- The 4D shapes and the hypercube sort their edges again only while they roll; at rest they rock
+  gently in their built order, as the hypercube always has.
+- Long Fourier text is wide (10 letters a line), so on a phone the letters are small.
+- The Fourier tap sound is 5 s long; long text spins longer than its sound.
+- The Möbius riders' new ride sounds are cues from the recipe, heard in the toy, not on the Sound
+  Board.
+
 ## For the Operator
+
+- PACKS.md lesson: a moving trail is tokens plus skinned splats between them (any number of tracers,
+  each a part to hide it).
+- PACKS.md lesson: a control's `ease` is read each frame, so a build can set an effect's length
+  (long Fourier text).
+- Engine idea: `tools/effect-clip.mjs` taking several `--opt` values would help lanes with
+  option-heavy toys.
+- No exceptions needed in `tests/taps.spec.mjs`.

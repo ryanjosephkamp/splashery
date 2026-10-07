@@ -760,10 +760,10 @@ export function mandelbulbShape(rays = 12000, { power = 8, julia = null, iters =
 
 // Lane Math r2: the Julia bulb's fixed points c (in the formula's axes).
 const JULIA_POINTS = {
-  a: { c: [-0.2, 0.6, 0.2], label: "c = (−0.2, 0.6, 0.2)" },
-  b: { c: [0.35, 0.35, -0.5], label: "c = (0.35, 0.35, −0.5)" },
-  c: { c: [-0.6, 0.2, 0], label: "c = (−0.6, 0.2, 0)" },
-  d: { c: [0.45, -0.3, 0.3], label: "c = (0.45, −0.3, 0.3)" },
+  a: { c: [-0.8, 0.4, 0.4], label: "c = (−0.8, 0.4, 0.4)" },
+  b: { c: [0.9, 0, 0.4], label: "c = (0.9, 0, 0.4)" },
+  c: { c: [0.7, -0.7, 0], label: "c = (0.7, −0.7, 0)" },
+  d: { c: [-1, 0.2, 0.1], label: "c = (−1, 0.2, 0.1)" },
 };
 // The Mandelbulb's discs: BULB_BANDS horizontal slices between -BULB_Y and
 // BULB_Y, each turning BULB_STEP (a seventh of a turn, the bulb's symmetry)
@@ -2109,7 +2109,8 @@ export const RECIPES = {
       for (let i = 0; i < BULB_BANDS; i++) bands.push(k.part("b" + i));
       const power = clamp(Math.round(o?.power ?? 8), 5, 12);
       const julia = o?.variant === "julia" ? (JULIA_POINTS[o.julia] || JULIA_POINTS.a).c : null;
-      k.data = { step: TAU / (power - 1), solid: !!(julia && (julia[0] || julia[1])) };
+      const solid = !!(julia && (julia[0] || julia[1]));
+      k.data = { step: TAU / (power - 1), solid };
       k.add(
         power === 8 && !julia
           ? mandelbulbShape()
@@ -2120,7 +2121,7 @@ export const RECIPES = {
           color: (c) => {
             const col = ramp(
               ["#2a1457", "#6d2e9e", "#d9587d", "#ffb36b", "#fff0c9"],
-              clamp((c.s.r - 0.55) / 0.6, 0, 1),
+              solid ? clamp((c.s.r - 0.8) / 0.3, 0, 1) : clamp((c.s.r - 0.55) / 0.6, 0, 1),
             );
             const ao = 1 - clamp((c.s.steps - 10) / 45, 0, 0.5);
             return shade(lit(col, c.n, { amb: 0.5, dif: 0.6, spec: 0.35 }), ao);
