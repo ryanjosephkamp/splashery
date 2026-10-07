@@ -30,7 +30,13 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first). Lane PR
   and the grain then turns into the colored map over about a second (a `solid: n` fade sets each
   splat's opacity so the grain's overlapping splats fade evenly). (Chloroplast ribosomes are 70S
   like the E. coli map's.) Main 37f9eefd merged into both branches; posted as `pot-zoom-in-r3` (40
-  s; its last 10 s rendered with `pot-clip.mjs --start=30` and joined to the first 30 s).
+  s; its last 10 s rendered with `pot-clip.mjs --start=30` and joined to the first 30 s). Marked
+  good (October 7, 2026), as are `pot-zoom-out` and `pot-zoom-out-r2`.
+- Integrator 4's run N25 found four failures, fixed: the how-to line is 94 characters (help and hta
+  limits); the toy's first build carries its black backdrop (about 5,400 splats, `fit: false`; kit
+  spec's "enough"), framed on its reaches by the engine's new `frameReaches` (#351), so the camera
+  and every scene keep their size; and the drive copes without a chunk loader (the taps test plays
+  it alone). Main 50af44bd merged into both branches.
 
 The stops (log10 of the view's height in meters): the Milky Way 21 (M83, ESO, at the Milky Way's
 size and real tilt), stars within 1,600 light-years 19.4 (HYG v4.4), within 65 light-years 18
@@ -106,9 +112,10 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first).
   down to the garden; Sentinel-2 cloudless 2016, CC BY 4.0, from 1,000 km to 10 km; the USGS NAIP
   mosaic, public domain, at 3 km. The USGS mosaic has holes over the Chesapeake at 30 to 300 km, and
   EOX's 2017 and later cloudless years are NC: not used.)
-- Every scene is a chunk (src/chunks.js), its own splat entity, scaled each frame; finer layers sit
-  a hair nearer the camera, so each draws over the one it sits in. The camera never moves: the
-  pinch, the wheel and a drag go to the toy (`zoom: true`).
+- Every scene but the black backdrop (the toy's own splats) is a chunk (src/chunks.js), its own
+  splat entity, scaled each frame; finer layers sit a hair nearer the camera, so each draws over the
+  one it sits in. The camera never moves: the pinch, the wheel and a drag go to the toy
+  (`zoom: true`).
 
 ## Known issues
 
@@ -124,7 +131,7 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first).
 
 ## For the Operator
 
-- Merge engine PR #351 first.
+- Merge engine PR #351 first. It gained `frameReaches` after run N25, so it needs a full run again.
 - Wikimedia answered 429 (too many requests) to this container on October 6 (a helper searched it
   too hard); the leaf came from Flickr instead.
 - The owner asked for "a virus to a galaxy": the smallest stop is a ribosome (it nests in the
