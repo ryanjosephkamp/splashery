@@ -1183,6 +1183,16 @@
     "l": 1
   },
   {
+    "t": "Powers of ten",
+    "u": "toys/powers-of-ten/",
+    "k": "toy",
+    "s": "Space",
+    "d": "Pinch, scroll or drag up or down to zoom from a garden to a galaxy or a molecule. Tap to play.",
+    "w": "powers of ten space space powers of ten zoom scale sizes universe galaxy stars sun planets earth city garden leaf cell microscope molecule real powers-of-ten",
+    "i": "../assets/toys/powers-of-ten/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Saturn V",
     "u": "toys/saturn-v/",
     "k": "toy",
