@@ -72,6 +72,8 @@ const gloss = (col, n, amt = 0.45, pow = 18) =>
 // Chemistry's axes (c along z) -> the toy's (c up, along +Y).
 const toToyAxes = (p) => [p[0], p[2], -p[1]];
 
+// The default view's right-hand direction (the camera's yaw is 0.55).
+const VIEW_RIGHT = [Math.cos(0.55), 0, Math.sin(0.55)];
 // How far the bonds stage spreads the atoms (and shrinks them).
 const SPREAD = 2.5;
 // The stages, in the order a tap steps through them.
@@ -129,11 +131,24 @@ function buildUnitCells(k, o) {
   if (crystal.hydrogens) atoms = addIceHydrogens(crystal, atoms, k.rand);
   const bonds = findBonds(crystal, atoms);
   const axes = cellAxes(crystal.cell);
+  // A hexagonal block (a rhombic prism) is turned about the up axis so its
+  // long diagonal runs across the default view, not toward the camera.
+  let th = 0;
+  if (crystal.cell.gamma !== 90) {
+    const diag = toToyAxes(toCart(axes, [1, 1, 0]));
+    th = Math.atan2(diag[2], diag[0]) - Math.atan2(VIEW_RIGHT[2], VIEW_RIGHT[0]);
+  }
+  const T = (p) => {
+    const q = toToyAxes(p);
+    const c = Math.cos(th);
+    const s = Math.sin(th);
+    return [q[0] * c + q[2] * s, q[1], -q[0] * s + q[2] * c];
+  };
   // The central cell (for an even count, the one just below the middle).
   const c0 = Math.floor((n - 1) / 2);
   const inCell = (f) => f.every((x) => x >= c0 - 1e-6 && x <= c0 + 1 + 1e-6);
-  const pivot = toToyAxes(toCart(axes, [c0 + 0.5, c0 + 0.5, c0 + 0.5]));
-  const center = toToyAxes(toCart(axes, [n / 2, n / 2, n / 2]));
+  const pivot = T(toCart(axes, [c0 + 0.5, c0 + 0.5, c0 + 0.5]));
+  const center = T(toCart(axes, [n / 2, n / 2, n / 2]));
   const radius = (el) => crystal.radius[el] ?? 0.5;
 
   // Parts: the central cell's atoms, three shells of cells around it, the
@@ -153,7 +168,7 @@ function buildUnitCells(k, o) {
   // Every atom: an evenly placed, opaque sphere. Its morph target is its
   // place spread out from the cell's center (or, with thermal motion on,
   // gathered to its center, so it shrinks away and its Gaussian shows).
-  const toyAtoms = atoms.map((a) => ({ ...a, q: toToyAxes(a.p), r: radius(a.el) }));
+  const toyAtoms = atoms.map((a) => ({ ...a, q: T(a.p), r: radius(a.el) }));
   for (const a of toyAtoms) {
     const target = add(pivot, mul(sub(a.q, pivot), SPREAD));
     const keep = thermal ? 0.03 : 1;
@@ -228,7 +243,7 @@ function buildUnitCells(k, o) {
     });
 
   // The central cell's outline: its twelve edges as fine dotted lines.
-  const corner = (i, j, l) => toToyAxes(toCart(axes, [c0 + i, c0 + j, c0 + l]));
+  const corner = (i, j, l) => T(toCart(axes, [c0 + i, c0 + j, c0 + l]));
   const edges = [];
   for (const [
     a,
@@ -505,7 +520,7 @@ function driveOrbitalAtlas(t, c, out, info) {
   const e = on * ease(band(p, 0, 0.2)) * (1 - ease(band(p, 0.78, 0.98)));
   // The front half lifts up and to the left, shrinking out of the way; the
   // back half and its cut face settle a little down and to the right.
-  out.parts.front = { offset: [-0.6 * e, 0.55 * e, 0.12 * e], scale: 1 - 0.5 * e };
+  out.parts.front = { offset: [-0.6 * e, 0.45 * e, 0.12 * e], scale: 1 - 0.5 * e };
   const back = { offset: [0.16 * e, -0.12 * e, 0], scale: 1 - 0.12 * e };
   out.parts.back = back;
   out.parts.cut = { ...back, visible: ease(band(e, 0.1, 0.5)) };
