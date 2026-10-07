@@ -179,7 +179,7 @@ export function renderLive(entries, { error }) {
     rec.addEventListener("click", () => {
       if (REC.take?.recording) REC.take.stop();
       else {
-        REC.take = new StageRecorder(appRef.player.canvas, { onStop: () => sync() });
+        REC.take = new StageRecorder(appRef.player.canvas, { onStop: () => sync(), stage: appRef.player.stage }); // prettier-ignore
         REC.toy = currentToy();
       }
       sync();
