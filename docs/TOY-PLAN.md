@@ -3649,22 +3649,28 @@ Proposals below are suggestions; the owner may change them.
     that tumble, bounce and fade. The 3D switch tips the Flat board back into a table, or takes the
     Dome style's paddle to the bottom of a sphere under a dome of bricks, where the ball bounces in
     3D.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
-  - Sound: Knocks off the paddle and the rails, a glassy break for glazed bricks, a crack and
-    clatter for stone, a thud for a lost ball, a rising chime for a new level.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
+    (October 7, 2026): a new brick-breaking sound, 2D/3D and play/pause at the thumbs on a phone,
+    and Launch for Go.
+  - Sound: Knocks off the paddle and the rails, a marimba note (one per row, on a pentatonic scale)
+    and a dry crumble for a glazed brick, a low knock and a gritty crumble for stone, a thud for a
+    lost ball, a rising chime for a new level.
 - **Longtail** (`longtail`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G2 (labs only).
   - Effect: A growing-trail game: tap to play; a string of glass beads crawls tile to tile and grows
     with each berry. The 3D switch folds the flat cross of tiles into a cube, rounds it into a
     Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
+    (October 7, 2026): sharper solid tiles; a tap beside the head steers it; in 3D a drag turns the
+    world.
   - Sound: A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone
     through a tunnel, a thud when it runs into itself.
 - **Grain Garden** (`grain-garden`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G6 (labs only).
   - Effect: A falling-sand box where every grain is a splat: pour sand, water, oil, fire, seeds or
     stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.
-  - Improved: Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade
+    r2 (October 7, 2026): the ✕ leaves the whole-page view on a phone (its materials covered it).
   - Sound: A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water
     puts it out, a pop when a seed sprouts.
 - **Page Breaker** (`page-breaker`). Now: tap: Play or pause. Plan: keep.
@@ -3673,8 +3679,8 @@ Proposals below are suggestions; the owner may change them.
     that piece of the page; a word that breaks falls apart into pieces of its letters. Each page of
     a PDF is a level.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the
-    picture engine's figure finder.
-  - Sound: Shardball's knocks and breaks.
+    picture engine's figure finder. Arcade r2 (October 7, 2026): a new sound for a block breaking.
+  - Sound: Shardball's knocks; a word's block tears off with a real paper flap over a light crumple.
 - **Strata** (`strata`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G3 (labs only).
   - Effect: Falling stones in a deep well you look down into: our own stone shapes (a tripod, two
@@ -3738,5 +3744,8 @@ Proposals below are suggestions; the owner may change them.
     steer the sled into each note's lane as it arrives and the note plays, so catching them all
     plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or
     your own MIDI file.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
+    (October 7, 2026): ♪ Your song opens a MIDI file from the game itself (the file opened in the
+    Toy tab used to be dropped for Ode to Joy), or a recording: a note finder (Basic Pitch) charts
+    its tune on the device, and each caught note plays its slice of the recording.
   - Sound: Each caught note plays on the grand piano at its own pitch; a missed note is silent.

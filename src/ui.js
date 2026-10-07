@@ -2616,12 +2616,24 @@ export function createUI(app) {
   // ---- UI r3: the action button pauses and resumes a long effect ---------------------
   // While a long tap effect (a tune, a long demo) runs, the Toy tab's action
   // button reads Pause; while it is paused, Resume.
+  // Arcade r2: a game reports its own state, and the ▶ over the stage shows
+  // pause while the game plays (one button plays and pauses).
+  const playPath = els.handsPlay.querySelector("path");
+  const playD = playPath?.getAttribute("d");
   app.player?.on("frame", () => {
     const base = app.player.toyInfo?.recipe?.action?.label;
     if (!base) return;
-    const st = app.player.motion?.effectState?.();
+    const arc = app.player.arcade;
+    const st = arc?.effectState ? arc.effectState() : app.player.motion?.effectState?.();
     const label = st === "running" ? "Pause" : st === "paused" ? "Resume" : base;
     if (els.toyAction.textContent !== label) els.toyAction.textContent = label;
+    const pause = !!arc && st === "running";
+    if (playPath && els.handsPlay.dataset.pause !== String(pause)) {
+      els.handsPlay.dataset.pause = String(pause);
+      playPath.setAttribute("d", pause ? "M7 5.5h3.5v13H7zM13.5 5.5H17v13h-3.5z" : playD);
+      els.handsPlay.setAttribute("aria-label", pause ? "Pause" : "Play");
+      els.handsPlay.title = pause ? "Pause the game" : "Play (the toy's tap)";
+    }
   });
 
   // ---- A toy's labels (lane Anatomy) ------------------------------------------------
