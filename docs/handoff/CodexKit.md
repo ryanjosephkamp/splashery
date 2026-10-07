@@ -25,7 +25,7 @@ first try at a Codex cloud environment for this repo's private copy failed durin
 - Script tested in a fresh `--depth 1` clone (2.0 GB on disk): `--skip-browser` run 10 s, second run
   1 s (skips `npm ci`), failure messages checked for low disk and a missing python3, and
   `tests/help.spec.mjs` passed (14 tests) in that clone.
-- Sandbox copy: see "For the Operator".
+- Sandbox copy (part 3): NOT done. `add_repo` for `ryanjosephkamp/splashery-sandbox` (push) was denied by the permission classifier.
 
 ## Notes
 
@@ -45,6 +45,7 @@ first try at a Codex cloud environment for this repo's private copy failed durin
 
 ## For the Operator
 
+- PR #398. Part 3 is blocked: allow `add_repo` for splashery-sandbox (push), or copy `tools/codex-setup.sh` and `docs/codex/SETUP.md` to branch `claude/codex-setup` there yourself. I will do it if the session is given access.
 - Merge order doesn't matter. The Codex environment's branch must be `main`, so the script has to be
   merged before the owner's first run.
 - Please check task 22 to 24's overlap with whatever the Space, Games and Arcade lanes have queued.
