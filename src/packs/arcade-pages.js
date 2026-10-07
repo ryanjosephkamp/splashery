@@ -28,6 +28,18 @@ class PageBreaker extends Shardball {
     this.pagesReady = new Map();
   }
 
+  // Arcade r2 (the owner: "the building blocks kind of sound we should
+  // change"): a word's block tears off the page with a real paper flap, a
+  // touch higher or lower block by block, over a light crumple. (Its other
+  // sounds, the paddle's and the walls', stay as they were.)
+  breakSound(br) {
+    this.tears = ((this.tears || 0) + 1) % 5;
+    return [
+      { voice: "sample", file: "your-book-magazine.mp3", len: 0.32, pitch: 0.92 + 0.06 * this.tears, vol: 0.75, fallback: { voice: "tear", decay: 0.3, vol: 0.4 } }, // prettier-ignore
+      { voice: "crunch", f: 2600, n: 6, bright: 0.7, decay: 0.45, at: 0.015, vol: 0.18 },
+    ];
+  }
+
   async load() {
     const { openMedia } = await import("../media.js");
     let src = this.api.options.source === "own" && PAGES.file ? PAGES.file : null;

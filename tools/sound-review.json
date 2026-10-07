@@ -2489,6 +2489,215 @@
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
+    },
+    "shardball": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The sound when the bricks break, let's hear something else. I don't like the sound.",
+      "note": "A new sound for a brick breaking.",
+      "plan": "Now in the game (lane Arcade r2): a glazed brick breaks with a wooden marimba note, one note of a pentatonic scale per row (higher rows ring higher, so clearing a column climbs), and a short dry crumble as it falls apart; a stone brick with a low knock and a longer, gritty crumble. No glass ring. The ball's knocks off the paddle and the walls stay as they were.",
+      "candidates": [
+        {
+          "id": "a",
+          "label": "Glazed brick (a middle row)",
+          "sound": [
+            {
+              "voice": "marimba",
+              "f": 783.99,
+              "vol": 0.5,
+              "decay": 0.7
+            },
+            {
+              "voice": "crunch",
+              "f": 1500,
+              "n": 9,
+              "bright": 0.4,
+              "decay": 0.6,
+              "at": 0.006,
+              "vol": 0.3
+            }
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Bricks up a column",
+          "sound": [
+            {
+              "voice": "marimba",
+              "f": 523.25,
+              "vol": 0.5,
+              "decay": 0.7
+            },
+            {
+              "voice": "crunch",
+              "f": 1500,
+              "n": 9,
+              "bright": 0.4,
+              "decay": 0.6,
+              "at": 0.006,
+              "vol": 0.3
+            },
+            {
+              "voice": "marimba",
+              "at": 0.25,
+              "f": 659.25,
+              "vol": 0.5,
+              "decay": 0.7
+            },
+            {
+              "voice": "crunch",
+              "f": 1500,
+              "n": 9,
+              "bright": 0.4,
+              "decay": 0.6,
+              "at": 0.256,
+              "vol": 0.3
+            },
+            {
+              "voice": "marimba",
+              "at": 0.5,
+              "f": 880.0,
+              "vol": 0.5,
+              "decay": 0.7
+            },
+            {
+              "voice": "crunch",
+              "f": 1500,
+              "n": 9,
+              "bright": 0.4,
+              "decay": 0.6,
+              "at": 0.506,
+              "vol": 0.3
+            }
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Stone brick",
+          "sound": [
+            {
+              "voice": "stone",
+              "f": 240,
+              "vol": 0.55
+            },
+            {
+              "voice": "crunch",
+              "f": 1000,
+              "n": 18,
+              "bright": 0.3,
+              "decay": 1.3,
+              "at": 0.01,
+              "vol": 0.45
+            }
+          ]
+        }
+      ],
+      "round": "2026-10-06"
+    },
+    "page-breaker": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) Like the sound is kind of weird. The building blocks kind of sound we should change, but the other sound when it hits stuff that's special to this game is okay.",
+      "note": "A new sound for a word's block breaking; the game's other sounds stay.",
+      "plan": "Now in the game (lane Arcade r2): a word's block tears off the page with a real paper flap (a recording, a touch higher or lower block by block) over a light crumple. The paddle's and the walls' knocks stay as they were.",
+      "candidates": [
+        {
+          "id": "a",
+          "label": "A word's block",
+          "sound": [
+            {
+              "voice": "sample",
+              "file": "your-book-magazine.mp3",
+              "len": 0.32,
+              "vol": 0.75,
+              "fallback": {
+                "voice": "tear",
+                "decay": 0.3,
+                "vol": 0.4
+              }
+            },
+            {
+              "voice": "crunch",
+              "f": 2600,
+              "n": 6,
+              "bright": 0.7,
+              "decay": 0.45,
+              "at": 0.015,
+              "vol": 0.18
+            }
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Three blocks in a row",
+          "sound": [
+            {
+              "voice": "sample",
+              "file": "your-book-magazine.mp3",
+              "len": 0.32,
+              "pitch": 0.98,
+              "vol": 0.75,
+              "fallback": {
+                "voice": "tear",
+                "decay": 0.3,
+                "vol": 0.4
+              }
+            },
+            {
+              "voice": "crunch",
+              "f": 2600,
+              "n": 6,
+              "bright": 0.7,
+              "decay": 0.45,
+              "at": 0.015,
+              "vol": 0.18
+            },
+            {
+              "voice": "sample",
+              "at": 0.3,
+              "file": "your-book-magazine.mp3",
+              "len": 0.32,
+              "pitch": 1.04,
+              "vol": 0.75,
+              "fallback": {
+                "voice": "tear",
+                "decay": 0.3,
+                "vol": 0.4
+              }
+            },
+            {
+              "voice": "crunch",
+              "f": 2600,
+              "n": 6,
+              "bright": 0.7,
+              "decay": 0.45,
+              "at": 0.315,
+              "vol": 0.18
+            },
+            {
+              "voice": "sample",
+              "at": 0.6,
+              "file": "your-book-magazine.mp3",
+              "len": 0.32,
+              "pitch": 1.1,
+              "vol": 0.75,
+              "fallback": {
+                "voice": "tear",
+                "decay": 0.3,
+                "vol": 0.4
+              }
+            },
+            {
+              "voice": "crunch",
+              "f": 2600,
+              "n": 6,
+              "bright": 0.7,
+              "decay": 0.45,
+              "at": 0.615,
+              "vol": 0.18
+            }
+          ]
+        }
+      ],
+      "round": "2026-10-06"
     }
   }
 }

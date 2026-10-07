@@ -2993,10 +2993,11 @@ export const TOY_SOUNDS = {
   ],
   // ---- Arcade (lane Arcade) --------------------------------------------------------------
   // Play: the ball's first knock off the paddle (the game plays its own
-  // sounds as it goes: knocks, glassy breaks, stone cracks).
+  // sounds as it goes: knocks, a marimba note and a crumble for each brick).
   shardball: [
     { voice: "pock", f: 520, vol: 0.6 },
-    { voice: "glass", at: 0.12, f: 960, decay: 0.5, vol: 0.35 },
+    { voice: "marimba", at: 0.12, f: 783.99, decay: 0.7, vol: 0.5 },
+    { voice: "crunch", at: 0.126, f: 1500, n: 9, bright: 0.4, decay: 0.6, vol: 0.3 },
   ],
   // A berry's pop and a bead's soft knock.
   longtail: [
@@ -3045,10 +3046,11 @@ export const TOY_SOUNDS = {
     { voice: "grand", f: 523.25, vol: 0.5, decay: 0.8 },
     { voice: "grand", at: 0.18, f: 783.99, vol: 0.4, decay: 0.9 },
   ],
-  // A word's brick breaking: a paper tear and a knock.
+  // A word's block breaking: a knock and a real paper flap over a light crumple.
   "page-breaker": [
     { voice: "pock", f: 480, vol: 0.55 },
-    { voice: "tear", at: 0.1, decay: 0.5, vol: 0.4 },
+    { voice: "sample", at: 0.1, file: "your-book-magazine.mp3", len: 0.32, vol: 0.75, fallback: { voice: "tear", decay: 0.3, vol: 0.4 } }, // prettier-ignore
+    { voice: "crunch", at: 0.115, f: 2600, n: 6, bright: 0.7, decay: 0.45, vol: 0.18 },
   ],
   // ---- Night sky (lane Night sky) ---------------------------------------------------
   // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
