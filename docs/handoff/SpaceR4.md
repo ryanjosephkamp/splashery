@@ -57,7 +57,10 @@ real orbits"), in a new pack `src/packs/space-r4.js`:
   hta, snda-engine, sky, e5 (all pass). Prettier and US English clean; thumbnail and
   `sp4-solar-orbits-*` screenshots done.
 - Clips: 6 on Effect review page 2 (lane record `SpaceR4`): overview at a year a second, flies to
-  Earth, Jupiter and Saturn, the true scale, Halley in 1986. Waiting on the owner's marks.
+  Earth, Jupiter and Saturn, the true scale, Halley in 1986. The owner marked all six "Just sharper"
+  (October 7, 2026, 21:18 UTC); round 2 (`-r2` cards): about 2.5 times the splats (35k to 103k),
+  finer splats on the Sun, planets, moons, rings and comet tails, letters of four small splats each,
+  less glow round the Sun, and a random (not patterned) granulation on it.
 
 ## Notes
 

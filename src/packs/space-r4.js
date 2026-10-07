@@ -396,7 +396,7 @@ const recipe = {
     // ---- The Sun ----
     const sunR = isTrue ? SUN_RADIUS_KM / AU_KM : READ_SUN;
     const sunPts = [];
-    const ns = 2600;
+    const ns = 9000;
     const g = Math.PI * (3 - Math.sqrt(5));
     for (let i = 0; i < ns; i++) {
       const y = 1 - ((i + 0.5) / ns) * 2;
@@ -404,12 +404,13 @@ const recipe = {
       sunPts.push([Math.cos(g * i) * r, y, Math.sin(g * i) * r]);
     }
     cloud(sunPts, {}, (u, i) => {
-      const f = 0.85 + 0.15 * Math.sin(i * 12.9898);
-      return { p: mul(u, sunR), scales: [sunR * 0.09, sunR * 0.09, sunR * 0.09], color: [1, 0.86 * f, 0.5 * f], opacity: 0.97, params: [0, 0] }; // prettier-ignore
+      const h = Math.sin(i * 12.9898) * 43758.5453;
+      const f = 0.86 + 0.14 * (h - Math.floor(h)); // (granulation, a random brightness)
+      return { p: mul(u, sunR), scales: [sunR * 0.05, sunR * 0.05, sunR * 0.05], color: [1, 0.86 * f, 0.5 * f], opacity: 0.97, params: [0, 0] }; // prettier-ignore
     });
-    const glow = sunPts.filter((_, i) => i % 8 === 0);
+    const glow = sunPts.filter((_, i) => i % 24 === 0);
     cloud(glow, {}, (u) => {
-      const s = sunR * (isTrue ? 4 : 0.3);
+      const s = sunR * (isTrue ? 4 : 0.2);
       return { p: mul(u, sunR * 1.02), scales: [s, s, s], color: [1, 0.72, 0.3], opacity: 0.035, params: [0, 2] }; // prettier-ignore
     });
 
@@ -455,12 +456,12 @@ const recipe = {
       const e1 = unit(cross(pole, Math.abs(pole[0]) < 0.9 ? [1, 0, 0] : [0, 0, 1]));
       const e2 = cross(pole, e1);
       const big = b.kind === 0 && b.km > 20000;
-      const n = b.kind === 0 ? (big ? 1400 : 800) : 260;
+      const n = b.kind === 0 ? (big ? 6000 : 3500) : 1200;
       const pts = ballPts(n);
       const mapId = b.kind === 0 ? look.map : b.moon.map;
       const img = mapId ? DATA.maps.get(mapId) : null;
       const flat = b.kind === 1 && !img ? hex(MOON_COLORS[b.id] || "#a8a29a") : null;
-      const sz = b.r * (3.4 / Math.sqrt(n));
+      const sz = b.r * (2.9 / Math.sqrt(n));
       cloud(pts, {}, (u) => {
         const s = dot(u, pole);
         const lat = Math.asin(Math.max(-1, Math.min(1, s)));
@@ -475,7 +476,7 @@ const recipe = {
         // Saturn's rings: 1.24 to 2.27 planet radii, the Cassini division
         // at about 1.95 to 2.03 (from the C ring to the A ring's edge).
         const rings = [];
-        const nr = 7000;
+        const nr = 20000;
         for (let i = 0; i < nr; i++) {
           const f = (i + 0.5) / nr;
           let rr = 1.24 + 1.03 * Math.sqrt(f * 0.5 + 0.5 * f * f);
@@ -484,7 +485,7 @@ const recipe = {
           const a = i * g;
           rings.push({ rr, a });
         }
-        const rsz = b.r * 0.034;
+        const rsz = b.r * 0.02;
         cloud(rings, {}, ({ rr, a }) => {
           const dir = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
           const tone = rr < 1.53 ? 0.55 : rr < 1.95 ? 0.95 : 0.8;
@@ -515,7 +516,7 @@ const recipe = {
     // Comets: a nucleus, a coma and a tail the program points away from the Sun.
     bodies.forEach((b, ti) => {
       if (b.kind !== 2) return;
-      const pts = ballPts(60);
+      const pts = ballPts(150);
       cloud(pts, {}, (u) => ({ p: add(b.built, mul(u, b.r)), scales: [b.r * 0.4, b.r * 0.4, b.r * 0.4], color: COMET_LOOK.head, opacity: 0.95, kind: "token", params: [ti, 0] })); // prettier-ignore
       const comaR = isTrue ? 0.02 : 0.03;
       cloud(ballPts(90), {}, (u, i) => {
@@ -523,15 +524,15 @@ const recipe = {
         return { p: add(b.built, mul(u, comaR * f)), scales: [comaR * 0.5, comaR * 0.5, comaR * 0.5], color: COMET_LOOK.coma, opacity: 0.12, kind: "token", params: [ti, 2] }; // prettier-ignore
       });
       const tail = [];
-      for (let i = 0; i < 420; i++) {
-        const f = Math.pow((i + 0.5) / 420, 0.8);
+      for (let i = 0; i < 1400; i++) {
+        const f = Math.pow((i + 0.5) / 1400, 0.8);
         const a = i * g;
         const rr = (isTrue ? 0.012 : 0.01) * Math.sqrt(((i * 0.381966) % 1) + 0.05);
         tail.push({ f, off: [Math.cos(a) * rr, Math.sin(a) * rr * 0.7, Math.sin(a * 1.7) * rr] });
       }
       cloud(tail, {}, (e) => {
-        const z = (isTrue ? 0.03 : 0.026) * (0.5 + e.f);
-        return { p: add(b.built, e.off), scales: [z, z, z], color: COMET_LOOK.tail, opacity: 0.45, kind: "token", params: [ti, 1 + Math.min(0.999, e.f)] }; // prettier-ignore
+        const z = (isTrue ? 0.018 : 0.016) * (0.5 + e.f);
+        return { p: add(b.built, e.off), scales: [z, z, z], color: COMET_LOOK.tail, opacity: 0.3, kind: "token", params: [ti, 1 + Math.min(0.999, e.f)] }; // prettier-ignore
       });
     });
 
@@ -584,7 +585,9 @@ const recipe = {
       // camera (NAME_LIFT), so the sort draws them over their shadow; the
       // program takes the lift off again.
       cloud(dots, { fit: false }, (dd) => ({ p: add(b.built, [dd[0] + px * 0.4, dd[1] - px * 0.4, 0]), scales: [px * 0.85, px * 0.85, px * 0.85], color: [0.05, 0.07, 0.12], opacity: 0.9, kind: "token", params: [ti, 3] })); // prettier-ignore
-      cloud(dots, { fit: false }, (dd) => ({ p: add(b.built, add([dd[0], dd[1], 0], mul(NAME_LIFT, 1 / S))), scales: [px * 0.58, px * 0.58, px * 0.58], color: shade, opacity: 0.97, kind: "token", params: [ti, 3.25] })); // prettier-ignore
+      // (Each letter dot is four small splats, so the letters' edges stay crisp.)
+      const sub = dots.flatMap((dd) => [-0.25, 0.25].flatMap((ox) => [-0.25, 0.25].map((oy) => [dd[0] + ox * px, dd[1] + oy * px]))); // prettier-ignore
+      cloud(sub, { fit: false }, (dd) => ({ p: add(b.built, add([dd[0], dd[1], 0], mul(NAME_LIFT, 1 / S))), scales: [px * 0.3, px * 0.3, px * 0.3], color: shade, opacity: 0.97, kind: "token", params: [ti, 3.25] })); // prettier-ignore
     });
 
     // The tour: the eight planets, each framed with its moons.

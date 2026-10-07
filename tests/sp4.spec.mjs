@@ -291,7 +291,7 @@ test.describe("sp4 the snapshot and the build", () => {
       const d = ctx.kit.data;
       expect(d.bodies.filter((b) => b.kind === 0).length).toBe(8);
       expect(d.asteroids).toBeGreaterThanOrEqual(4000);
-      expect(ctx.buf.count).toBeLessThan(60000);
+      expect(ctx.buf.count).toBeLessThan(150000);
       const when = jd("2031-05-01");
       const now = placesAt(d.bodies, scale, when);
       const sc = K.SCALES[scale];
