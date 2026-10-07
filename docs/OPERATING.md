@@ -266,8 +266,8 @@ clips and cards at the same time without republishing it. The collections (the s
   else "(No note; plan: …)" with the plan's effect), `now` what the tap does now in plain words with
   its length, `asset` the uploaded clip's id, `at` the date (YYYY-MM-DD). Older cards use `clip` (a
   file published with the page, such as `e4/oak.gif`) instead of `asset`.
-- `verdicts/<card id>`: the owner's marks, `{ verdict: "good" | "fix" | "", note, at }`. Only the
-  owner writes these.
+- `verdicts/<card id>`: the owner's marks, `{ verdict: "good" | "fix" | "", note, at, sharper }`
+  (`sharper: true` marks a "Just sharper" fix on page 2, below). Only the owner writes these.
 
 Card ids are `<prefix>-<toy id>`, with a variant after it (`e5-cherries-pair`). A clip redone after
 the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card's lane. A card's
@@ -479,7 +479,13 @@ differ. A local lane's brief says "Local lane" at the top. Its session:
    fix whatever the owner marks "Needs work" in the same PR. Since October 3, 2026 a "fix" mark on
    Effect review page 2 is stored only when the owner sends it with its note, so every "fix" a lane
    reads carries his note; act on the note, and if a "fix" ever comes without one, ask the Operator
-   instead of guessing.
+   instead of guessing. Since October 7, 2026 page 2 also has a **"Just sharper"** button: one tap
+   stores a "fix" with `sharper: true` and the note "Everything else looks right. Just make it
+   sharper and less grainy (finer, denser splats where it shows; no blur, no speckle)." Read it as
+   exactly that: keep the effect, its motion, colors and timing as they are, and only sharpen it
+   (finer, denser splats where it shows, solid opaque materials, no blur or speckle, still smooth on
+   a phone). Post the sharper clip as the card's replacement. If something else also needs work, the
+   owner uses "Needs work" with his own note instead.
 
 ## Upkeep after a merge (the Operator)
 
