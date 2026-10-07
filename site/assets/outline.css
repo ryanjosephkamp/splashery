@@ -108,7 +108,7 @@ html.has-outline {
   scroll-padding-top: calc(var(--outline-top, 0px) + var(--outline-h, 56px) + 12px);
 }
 html.has-outline [data-outline] :is(h2, h3, h4)[id] {
-  scroll-margin-top: calc(var(--outline-top, 0px) + var(--outline-h, 56px) + 12px);
+  scroll-margin-top: 0;
 }
 [data-outline] :is(h2, h3, h4)[id]:focus {
   outline: none;

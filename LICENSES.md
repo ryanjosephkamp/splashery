@@ -310,6 +310,10 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
 - msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
   Silicon, if Brush can't run.
+- GROOPH 0.4.0 (MIT, by the owner), https://www.npmjs.com/package/grooph: the command line
+  (`npx grooph@0.4.0`, run by `tools/site-loop.mjs`) draws the project's lane loop as an SVG for the
+  draft page "The loop a lane follows" (lane Site r2). Nothing of it is served; only the SVG it
+  wrote is, and the draft page links to the GROOPH app on the owner's own site.
 
 ## PDF motion audit build tools (Codex task 21; not shipped)
 

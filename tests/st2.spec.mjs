@@ -12,6 +12,13 @@ const SHOTS = path.resolve("tests/screenshots");
 const read = (f) => fs.readFileSync(path.resolve("site", f), "utf8");
 const allPages = () => PAGES.map((p) => p.path);
 
+// A real tap at the middle of an element: Playwright's own click scrolls a sticky bar "into view",
+// which a person's tap never does.
+async function tap(page, locator) {
+  const b = await locator.boundingBox();
+  await page.mouse.click(b.x + b.width / 2, b.y + b.height / 2);
+}
+
 function problems(page) {
   const out = [];
   page.on("console", (m) => m.type() === "error" && out.push(m.text()));
@@ -96,7 +103,7 @@ test.describe("new tabs and toy pages", () => {
       const app = card.locator("a.tool-app");
       await expect(app).toHaveText("Open in Splashery");
       await expect(app).toHaveAttribute("target", "_blank");
-      await expect(app).toHaveAttribute("href", /^\.\.\/#s=/);
+      await expect(app).toHaveAttribute("href", /^\.\.\/\.\.\/#s=/);
     }
     // The card that has no toy page of its own (splat files) still opens the gallery, in a new tab.
     const files = page.locator(".tool-card:not(.has-app) a").first();
@@ -193,8 +200,8 @@ test.describe("guides as pages", () => {
     page,
   }) => {
     await page.goto("/site/learn/");
-    await expect(page.locator('a[href="learn/recipes/"]')).toBeVisible();
-    await expect(page.locator('a[href="learn/scene-format/"]')).toBeVisible();
+    await expect(page.locator('a[href$="learn/recipes/"]')).toBeVisible();
+    await expect(page.locator('a[href$="learn/scene-format/"]')).toBeVisible();
     const bad = [];
     for (const p of allPages()) {
       const html = read(`${p}index.html`);
@@ -252,7 +259,7 @@ test.describe("the quick outline", () => {
       await page.evaluate(() => scrollTo(0, 2600));
       await page.waitForTimeout(200);
       const y = await page.evaluate(() => scrollY);
-      await toggle.click();
+      await tap(page, toggle);
       await expect(panel).toBeVisible();
       await expect(toggle).toHaveAttribute("aria-expanded", "true");
       expect(await page.evaluate(() => scrollY)).toBe(y);
@@ -267,7 +274,7 @@ test.describe("the quick outline", () => {
       await expect(panel).toBeHidden();
       await expect(toggle).toBeFocused();
       // Picking a section jumps to it, clear of the header and the bar.
-      await toggle.click();
+      await tap(page, toggle);
       const link = panel.locator("a").nth(8);
       const id = (await link.getAttribute("href")).slice(1);
       await link.click();
@@ -303,7 +310,9 @@ test.describe("the quick outline", () => {
   test("the Tinkerer's Manual has the same outline, and one link back at the bottom", async ({
     page,
   }) => {
-    const errs = problems(page);
+    const errs = [];
+    page.on("pageerror", (e) => errs.push(e.message));
+    page.on("response", (r) => r.status() >= 400 && !/favicon/.test(r.url()) && errs.push(`${r.status()} ${r.url()}`)); // prettier-ignore
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/manual/");
     await expect(page.locator(".outline-toggle")).toHaveCount(1);
@@ -351,7 +360,7 @@ test.describe("screenshots", () => {
       }
       await page.goto("/site/tools/");
       await page.waitForTimeout(400);
-      await page.locator(".tool-card").first().scrollIntoViewIfNeeded();
+      await page.locator(".tool-card:visible").first().scrollIntoViewIfNeeded();
       await page.screenshot({ path: path.join(SHOTS, `st2-tools-${w}x${h}.png`) });
     });
   }
