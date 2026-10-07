@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 438 toys. 408 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 419.
+- 439 toys. 409 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 19.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -35,41 +35,41 @@ Proposals below are suggestions; the owner may change them.
   system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora
   world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula,
   Spiral galaxy, The real Moon, The real Mars, The real Earth, The real Mercury, The real Venus,
-  Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real star systems, Real galaxies, Saturn
-  V, Space Launch System, Space Shuttle, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron,
-  Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
-  Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis,
-  Phagocytosis, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Molecule viewer,
-  Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster,
-  Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry
-  blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool,
-  Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud,
-  Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream,
-  Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel,
-  Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries,
-  Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy,
-  Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
-  knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
-  Fourier circles, Pythagoras proof, Splat equation, Storybook, Music box, Fountain pen, Water
-  bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic
-  shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish,
-  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern,
-  Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord,
-  Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle,
-  Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White
-  House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle,
-  Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network,
-  Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian
-  splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma
-  machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni plate,
-  Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to
-  3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat field, Light lab, Thermal
-  ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a
-  box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at
-  Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray
-  scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera,
-  Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft
-  Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider.
+  Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real star systems, Real galaxies, Powers
+  of ten, Saturn V, Space Launch System, Space Shuttle, Virus, Bacteriophage, Bacterium, Red blood
+  cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain,
+  Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division,
+  Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Molecule
+  viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
+  cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
+  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
+  Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
+  Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
+  Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
+  bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
+  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
+  cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
+  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
+  and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music box, Fountain pen,
+  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
+  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
+  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
+  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
+  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
+  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
+  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
+  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
+  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
+  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
+  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
+  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
+  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
+  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
+  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
+  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
+  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
+  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
+  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -919,7 +919,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (38)
+## Space (39)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -1200,6 +1200,18 @@ Proposals below are suggestions; the owner may change them.
     (7 s).
   - Improved: Space r2: new toy (labs); tools/sp2-galaxies.mjs crops each picture round its galaxy.
   - Sound: Space is silent: a long soft breath as it turns.
+- **Powers of ten** (`powers-of-ten`). Now: tap: Play the journey. Plan: keep.
+  - Owner: The owner's Push Plan pick S12 ("One continuous zoom from a virus to a galaxy ... with
+    real scale labels at each step"; "I don't want it to look like a cartoon"); lane Powers of ten;
+    labs only.
+  - Effect: One zoom through real scales: the Milky Way (M83 at its size and tilt), real stars (HYG,
+    Gaia), the planets and the Moon where they were at 12:54 p.m. EDT on October 7, 2026, the Earth,
+    aerial pictures every half decade down to a D.C. garden, a 3D garden-bed capture, plant cells, a
+    chloroplast and a ribosome's cryo-EM map. Pinch, scroll, drag or slide to zoom; a tap plays the
+    whole journey (70 s). A label and a scale bar at every stop.
+  - Improved: Powers of ten: new toy (labs); each scene a chunk loaded as the zoom nears it (engine
+    PR #351); tools/pot-maps.mjs, pot-stars.mjs and pot-micro.mjs make its files.
+  - Sound: A long soft breath as the journey starts.
 - **Saturn V** (`saturn-v`). Now: tap: Fire the stages in order. Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
     planets"; rockets; lane Space r2; labs only).
@@ -3624,22 +3636,28 @@ Proposals below are suggestions; the owner may change them.
     that tumble, bounce and fade. The 3D switch tips the Flat board back into a table, or takes the
     Dome style's paddle to the bottom of a sphere under a dome of bricks, where the ball bounces in
     3D.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
-  - Sound: Knocks off the paddle and the rails, a glassy break for glazed bricks, a crack and
-    clatter for stone, a thud for a lost ball, a rising chime for a new level.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
+    (October 7, 2026): a new brick-breaking sound, 2D/3D and play/pause at the thumbs on a phone,
+    and Launch for Go.
+  - Sound: Knocks off the paddle and the rails, a marimba note (one per row, on a pentatonic scale)
+    and a dry crumble for a glazed brick, a low knock and a gritty crumble for stone, a thud for a
+    lost ball, a rising chime for a new level.
 - **Longtail** (`longtail`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G2 (labs only).
   - Effect: A growing-trail game: tap to play; a string of glass beads crawls tile to tile and grows
     with each berry. The 3D switch folds the flat cross of tiles into a cube, rounds it into a
     Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
+    (October 7, 2026): sharper solid tiles; a tap beside the head steers it; in 3D a drag turns the
+    world.
   - Sound: A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone
     through a tunnel, a thud when it runs into itself.
 - **Grain Garden** (`grain-garden`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G6 (labs only).
   - Effect: A falling-sand box where every grain is a splat: pour sand, water, oil, fire, seeds or
     stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.
-  - Improved: Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade
+    r2 (October 7, 2026): the ✕ leaves the whole-page view on a phone (its materials covered it).
   - Sound: A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water
     puts it out, a pop when a seed sprouts.
 - **Page Breaker** (`page-breaker`). Now: tap: Play or pause. Plan: keep.
@@ -3648,8 +3666,8 @@ Proposals below are suggestions; the owner may change them.
     that piece of the page; a word that breaks falls apart into pieces of its letters. Each page of
     a PDF is a level.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/) and the
-    picture engine's figure finder.
-  - Sound: Shardball's knocks and breaks.
+    picture engine's figure finder. Arcade r2 (October 7, 2026): a new sound for a block breaking.
+  - Sound: Shardball's knocks; a word's block tears off with a real paper flap over a light crumple.
 - **Strata** (`strata`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G3 (labs only).
   - Effect: Falling stones in a deep well you look down into: our own stone shapes (a tripod, two
@@ -3713,5 +3731,8 @@ Proposals below are suggestions; the owner may change them.
     steer the sled into each note's lane as it arrives and the note plays, so catching them all
     plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or
     your own MIDI file.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
+    (October 7, 2026): ♪ Your song opens a MIDI file from the game itself (the file opened in the
+    Toy tab used to be dropped for Ode to Joy), or a recording: a note finder (Basic Pitch) charts
+    its tune on the device, and each caught note plays its slice of the recording.
   - Sound: Each caught note plays on the grand piano at its own pitch; a missed note is silent.
