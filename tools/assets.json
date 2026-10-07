@@ -376,6 +376,7 @@
       "author": "Storm Geerling",
       "rotate": [180, 0, 0],
       "lod": 0,
+      "sphere": [0.078, 0.002, -0.003, 0.97],
       "splats": 82539,
       "lite": 82539,
       "sh": 1

@@ -109,10 +109,14 @@ for (const toy of manifest.toys) {
   // other way from the PLY file, so the translation is (cx, cy, -cz).
   const t = [b.center[0], b.center[1], -b.center[2]].map((v) => v.toFixed(5)).join(",");
   const filters = (toy.filters || []).flatMap((f) => ["-V", f]);
+  // Lane Fix9: "sphere": [x, y, z, r] (in the scaled frame) drops the haze of faint splats around
+  // a round capture (the photo orange), with no change to its framing.
+  const sphere = toy.sphere ? [`--filter-sphere=${toy.sphere.join(",")}`] : [];
   const move = [
     `--translate=${t}`,
     `--scale=${scale.toFixed(5)}`,
     `--filter-box=${box}`,
+    ...sphere,
     ...filters,
   ];
   st([rot, ...move, "-d", String(toy.splats), full]);
