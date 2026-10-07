@@ -105,3 +105,18 @@ test("the Fluid lab warns a phone that can't keep up, and offers a lighter mode"
   await expect(page.locator("#fluid-slow")).toBeHidden();
   await expect.poll(() => page.evaluate(() => window.__splashery.player.profile)).toBe("low");
 });
+
+test("the dog plush's rig keeps its tap a hop, and its hidden core loads", async () => {
+  const { RIGS } = await import("../src/rigs.js");
+  const rig = RIGS["dog-plush"];
+  expect(rig.controls.some((c) => c.key === rig.action.key)).toBe(true);
+  // Mid-flight it is up and stretched a little; long after, at rest.
+  const at = (e) => {
+    const out = { parts: {}, body: null };
+    rig.drive(0, { hop: 1 - e / 1.45 }, out);
+    return out.body;
+  };
+  expect(at(0.31).offset[1]).toBeGreaterThan(0.4);
+  expect(at(1.44)).toBeNull();
+  expect(rig.addon.count).toBeGreaterThan(0);
+});

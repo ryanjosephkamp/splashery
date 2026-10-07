@@ -89,6 +89,28 @@ const FLY = (() => {
   };
 })();
 
+// Lane Fix9: the dog plush's hop, as src/motion.js hops a capture without a rig (its hopAt): a
+// bounce with a peak of 1 that falls by e^2 each landing, with a squash as it lands.
+const DOG_HOP_SECS = 1.45;
+function dogHop(t, e = 0.55, period = 0.62) {
+  let start = 0;
+  let dur = period;
+  let amp = 1;
+  for (let k = 0; k < 8; k++) {
+    if (t < start + dur) {
+      const f = (t - start) / dur;
+      const edge = Math.min(f, 1 - f) * dur;
+      const squash = amp * (0.22 * Math.exp(-((edge / 0.05) ** 2)) - 0.06 * Math.sin(Math.PI * f));
+      return { h: amp * 4 * f * (1 - f), squash };
+    }
+    start += dur;
+    dur *= e;
+    amp *= e * e;
+    if (amp < 0.01) break;
+  }
+  return null;
+}
+
 // ---- Closed bases (lane Sharpness B) ----------------------------------------------------
 // Some captures are thin or open underneath, so from below the far side or
 // the inside shows through. These add-on pieces close them with hard edges
@@ -2068,6 +2090,15 @@ export const RIGS = {
       },
     },
     parts: [],
+    // Its tap is the hop every capture without a rig has (src/motion.js, hopAt): the plush
+    // bounces and settles with a little squash at each landing.
+    controls: [pulse("hop", "Hop", DOG_HOP_SECS)],
+    action: { key: "hop", label: "Hop" },
+    drive(t, c, out) {
+      const e = since(c, "hop", DOG_HOP_SECS);
+      const hop = e < 0 ? null : dogHop(e);
+      if (hop) out.body = { offset: [0, hop.h * 0.5, 0], squash: hop.squash };
+    },
   },
 
   // ---- Shelf shapes (procedural) ------------------------------------------------------
