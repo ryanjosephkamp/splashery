@@ -78,6 +78,10 @@ fresh from main on the same branch names.
   `arc2-note-rider-own` and `arc2-note-rider-recording`. The new sounds are for the Sound Board (the
   Operator's note of October 7: the review page plays clips muted). Grain Garden's ✕ has no clip:
   the fix is a tap that now works (tests/arc2.spec.mjs checks it at phone size).
+- The owner's marks (October 7): Shardball, Page Breaker and both Note Rider clips "good"; the three
+  Longtail clips "fix: the apple never appears". Each reset clears the sprites, but the berry kept
+  its old sprite, so from the first game on it was never drawn (a bug from round 1). Fixed and
+  tested; the `-r2` clips are posted.
 - Longtail's layer: 90,000 slots on a phone (the planet's finer tiles and body take 64,000 before
   the beads).
 
