@@ -62,7 +62,9 @@ attractors, 4D shapes and Fourier text". All five items are built; clips go on E
 - Owner's marks (October 7, 2026): the riders, Mandelbulb variants and Fourier text "Looks right";
   the attractors, the 4D shapes and the hypercube theme "Just sharper". Done: even splats, one color
   round each thin tube (no per-splat light), `density: 1.6` on the attractors, the 4D shapes and the
-  hypercube; nine `-r2` cards posted.
+  hypercube; nine `-r2` cards posted, and the owner marked all nine "Looks right" the same evening.
+  Every current `mt2-*` card (18) is now "Looks right"; the PR waits for the Integrators' full run
+  and the Operator's merge.
 
 Tests: `tests/mt2.spec.mjs` (12 Node-side checks plus 7 screenshot tests). Evidence:
 `docs/evidence/{rossler,thomas,aizawa}-attractor.json`, `five-cell`, `sixteen-cell`,
