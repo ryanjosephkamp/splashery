@@ -62,7 +62,7 @@ function fill(grid, rings, v) {
       const jb = Math.floor((90 - Math.min(y1, y2)) * CELLS - 0.5);
       for (let j = Math.max(0, ja); j <= Math.min(H - 1, jb); j++) {
         const lat = 90 - (j + 0.5) / CELLS;
-        if ((y1 > lat) === (y2 > lat)) continue;
+        if (y1 > lat === y2 > lat) continue;
         const x = x1 + ((lat - y1) / (y2 - y1)) * (x2 - x1);
         if (!rows.has(j)) rows.set(j, []);
         rows.get(j).push(x);
@@ -169,7 +169,10 @@ async function earth() {
   const g2 = new Uint16Array(W * H);
   const regionList = [];
   const reg = regions.features
-    .filter((f) => f.properties.NAME && !/^(Island|Island group|Continent)$/i.test(f.properties.FEATURECLA)) // prettier-ignore
+    .filter(
+      (f) =>
+        f.properties.NAME && !/^(Island|Island group|Continent)$/i.test(f.properties.FEATURECLA),
+    ) // prettier-ignore
     .map((f) => ({ f, a: area(polysOf(f.geometry)) }))
     .sort((a, b) => b.a - a.a);
   for (const { f } of reg) {
@@ -323,8 +326,11 @@ async function gazetteer() {
     fs.writeFileSync(
       path.join(dir, `names-${world}.json`),
       JSON.stringify({
-        source: "Gazetteer of Planetary Nomenclature, IAU WGPSN and USGS Astrogeology (public domain)",
-        kinds: Object.fromEntries([...new Set(list.map((r) => r[1]))].map((c) => [c, KINDS[c] || ""])),
+        source:
+          "Gazetteer of Planetary Nomenclature, IAU WGPSN and USGS Astrogeology (public domain)",
+        kinds: Object.fromEntries(
+          [...new Set(list.map((r) => r[1]))].map((c) => [c, KINDS[c] || ""]),
+        ),
         features: list,
       }),
     );

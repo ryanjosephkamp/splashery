@@ -98,11 +98,23 @@ test.describe("Space r3: the real worlds zoom in and name the place", () => {
   });
 
   test("each world's recipe says what a tap does and credits its names", () => {
-    for (const id of ["real-earth", "real-moon", "real-mars", "real-mercury", "real-venus", "real-moons", "real-small-worlds"]) { // prettier-ignore
+    for (const id of [
+      "real-earth",
+      "real-moon",
+      "real-mars",
+      "real-mercury",
+      "real-venus",
+      "real-moons",
+      "real-small-worlds",
+    ]) {
+      // prettier-ignore
       const r = RECIPES[id];
       expect(r.action.at, id).toBeTruthy();
       expect(r.note, id).toMatch(/zooms in/);
-      expect(r.credits.some((c) => /Natural Earth|Gazetteer/.test(c.title)), id).toBe(true);
+      expect(
+        r.credits.some((c) => /Natural Earth|Gazetteer/.test(c.title)),
+        id,
+      ).toBe(true);
       expect(r.options.find((o) => o.key === "at")?.hidden, id).toBe(true);
     }
   });

@@ -4593,6 +4593,60 @@
       "license": "CC0 (NASA mission data; https://science.data.nasa.gov/about/license)",
       "checked": "October 5, 2026",
       "note": "Made by tools/sp2-systems.mjs through the archive's TAP service; the inner Solar System from NSSDC fact sheets."
+    },
+    {
+      "id": "earth-place-names",
+      "files": ["assets/toys/real-earth/places.bin", "assets/toys/real-earth/places.json"],
+      "toy": "real-earth",
+      "name": "Natural Earth 1:10m: admin-1 states and provinces, admin-0 countries, populated places, marine areas, lakes, geographic regions and elevation points",
+      "author": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+      "page": "https://www.naturalearthdata.com/",
+      "license": "Public domain",
+      "checked": "October 7, 2026",
+      "note": "Read from https://www.naturalearthdata.com/about/terms-of-use/ (\"All versions of Natural Earth raster + vector map data found on this website are in the public domain\"). Trimmed by tools/sp3-places.mjs into run-length maps at 2 arc-minutes and a list of names."
+    },
+    {
+      "id": "planetary-feature-names",
+      "files": [
+        "assets/toys/real-mars/names-mars.json",
+        "assets/toys/real-mercury/names-mercury.json",
+        "assets/toys/real-moon/names-moon.json",
+        "assets/toys/real-moons/names-callisto.json",
+        "assets/toys/real-moons/names-europa.json",
+        "assets/toys/real-moons/names-ganymede.json",
+        "assets/toys/real-moons/names-io.json",
+        "assets/toys/real-moons/names-titan.json",
+        "assets/toys/real-small-worlds/names-ceres.json",
+        "assets/toys/real-small-worlds/names-pluto.json",
+        "assets/toys/real-small-worlds/names-vesta.json",
+        "assets/toys/real-venus/names-venus.json"
+      ],
+      "toy": "real-moon",
+      "name": "Gazetteer of Planetary Nomenclature: center points of the named features (Moon, Mars, Mercury, Venus, Io, Europa, Ganymede, Callisto, Titan, Pluto, Ceres, Vesta)",
+      "author": "IAU Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center",
+      "page": "https://planetarynames.wr.usgs.gov/GIS_Downloads",
+      "license": "Public domain (USGS)",
+      "checked": "October 7, 2026",
+      "note": "The downloads' metadata says \"Public domain.\" Trimmed by tools/sp3-places.mjs to name, kind, center and size, leaving out the lettered satellite craters."
+    },
+    {
+      "id": "real-world-close-up-tiles",
+      "files": [
+        "assets/toys/real-earth/tiles/",
+        "assets/toys/real-mars/tiles/",
+        "assets/toys/real-mercury/tiles/",
+        "assets/toys/real-moon/tiles/",
+        "assets/toys/real-moons/tiles/",
+        "assets/toys/real-small-worlds/tiles/",
+        "assets/toys/real-venus/tiles/"
+      ],
+      "toy": "real-earth",
+      "name": "Close-up tiles of the real worlds' color and elevation maps (10° × 10°)",
+      "author": "The same NASA, USGS and NOAA sources as each world's global map (src/space/worlds.js); the Moon's heights from the CGI Moon Kit's ldem_16, Earth's from ETOPO 2022 at 60 arc-seconds",
+      "page": "https://svs.gsfc.nasa.gov/4720",
+      "license": "Public domain (NASA, USGS and NOAA)",
+      "checked": "October 7, 2026",
+      "note": "Cut by tools/sp3-tiles.mjs at the resolutions in src/space/zoom.js (TILES); a tap loads only the few round its spot."
     }
   ],
   "geoData": [

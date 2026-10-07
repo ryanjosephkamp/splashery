@@ -165,7 +165,13 @@ function fillGaps(data, w, h, ch) {
         if (!missing[k]) continue;
         const sum = new Float64Array(ch);
         let n = 0;
-        for (const [di, dj] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { // prettier-ignore
+        for (const [di, dj] of [
+          [1, 0],
+          [-1, 0],
+          [0, 1],
+          [0, -1],
+        ]) {
+          // prettier-ignore
           const ii = i + di;
           const jj = j + dj;
           if (ii < 0 || jj < 0 || ii >= w || jj >= h) continue;

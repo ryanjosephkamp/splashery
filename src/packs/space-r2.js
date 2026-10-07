@@ -207,7 +207,10 @@ function spotOf(point, q, eye) {
     }
   }
   const b = rotate([-q[0], -q[1], -q[2], q[3]], p);
-  return { lat: Math.asin(Math.max(-1, Math.min(1, b[1]))) / DEG, lon: Math.atan2(b[0], b[2]) / DEG };
+  return {
+    lat: Math.asin(Math.max(-1, Math.min(1, b[1]))) / DEG,
+    lon: Math.atan2(b[0], b[2]) / DEG,
+  };
 }
 
 const quatMul = (a, b) => [
@@ -222,7 +225,12 @@ function quatPart(q, f) {
   const a = Math.acos(w) * f;
   const s = Math.sqrt(Math.max(0, 1 - w * w));
   if (s < 1e-6) return [0, 0, 0, 1];
-  return [(q[0] / s) * Math.sin(a), (q[1] / s) * Math.sin(a), (q[2] / s) * Math.sin(a), Math.cos(a)];
+  return [
+    (q[0] / s) * Math.sin(a),
+    (q[1] / s) * Math.sin(a),
+    (q[2] / s) * Math.sin(a),
+    Math.cos(a),
+  ];
 }
 
 function worldRecipe(ids, extra = {}) {
@@ -410,7 +418,7 @@ function worldRecipe(ids, extra = {}) {
         }
         const into = ease(z.turn);
         spin = z.phase === "in" ? z.from + (goal - z.from) * into : goal;
-        tilt = (z.phase === "in" ? z.tilt0 + (z.lat * DEG - z.tilt0) * into : z.lat * DEG * into);
+        tilt = z.phase === "in" ? z.tilt0 + (z.lat * DEG - z.tilt0) * into : z.lat * DEG * into;
         qa = quatPart(z.qa, into);
         m.spin = spin;
         // How far: the inner patch fills the view's narrow side.
@@ -614,7 +622,13 @@ function* worldSplats(W, o, extra, N, at, plan, zoom) {
     // The color: the mean of the middle and four points a third of a step away.
     const o3 = (spacing * 0.36) / DEG;
     const col = colorAt(lat, lon, d);
-    for (const [a, b] of [[o3, 0], [-o3, 0], [0, o3 / cl], [0, -o3 / cl]]) { // prettier-ignore
+    for (const [a, b] of [
+      [o3, 0],
+      [-o3, 0],
+      [0, o3 / cl],
+      [0, -o3 / cl],
+    ]) {
+      // prettier-ignore
       const c = colorAt(Math.max(-90, Math.min(90, lat + a)), lon + b, d);
       col[0] += c[0];
       col[1] += c[1];

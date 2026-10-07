@@ -139,14 +139,18 @@ async function earthPlaces() {
         } else if (city) {
           const c = meta.cities[city.k];
           // Inside a city of its size, roughly; else near it.
-          const radius = Math.max(4, Math.min(30, 3 * Math.log10(Math.max(1000, c[3]) / 300) ** 1.6));
+          const radius = Math.max(
+            4,
+            Math.min(30, 3 * Math.log10(Math.max(1000, c[3]) / 300) ** 1.6),
+          );
           title = city.km <= radius ? c[0] : `Near ${c[0]}`;
           if (city.km > radius) lines.push(`${km(city.km)} km from ${c[0]}`);
         }
         const place = sName && sName !== country ? `${sName}${sType && !/unknown/i.test(sType) ? ` (${sType.toLowerCase()})` : ""}, ${country}` : country; // prettier-ignore
         if (!title) title = sName || country;
         lines.push(place);
-        if (region && !lines.some((l) => l.includes(region[0]))) lines.push(`in the ${region[0].replace(/^the /i, "")}`); // prettier-ignore
+        if (region && !lines.some((l) => l.includes(region[0])))
+          lines.push(`in the ${region[0].replace(/^the /i, "")}`); // prettier-ignore
         else if (island) lines.push(`on ${island[0]}`);
         return { title, lines, source: this.source, kind: "land", country, state: sName, city: title.replace(/^Near /, "") }; // prettier-ignore
       }
