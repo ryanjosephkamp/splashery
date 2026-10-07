@@ -167,6 +167,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRpZmZ1c2lvbi1tb2RlbCJ9LCJjYW1lcmEiOnsieWF3IjowLjE2LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -195,13 +197,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=diffusion-model&turntable=off"
+                src="../../play/?toy=diffusion-model&turntable=off&sound=on"
                 title="Diffusion model, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -403,7 +407,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/diffusion-model/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

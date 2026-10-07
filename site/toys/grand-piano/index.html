@@ -169,6 +169,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYW5kLXBpYW5vIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjM4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -197,13 +199,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=grand-piano&turntable=off"
+                src="../../play/?toy=grand-piano&turntable=off&sound=on"
                 title="Grand piano, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -219,6 +223,12 @@
             the opening of Für Elise, or pick Clair de lune, Gymnopédie No. 1 or Ode to Joy in the
             Toy tab. The song bar plays, pauses, loops and slows a song, and you can open a MIDI
             file of your own or paste a tune in ABC notation.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Piano" target="_blank" rel="noopener"
+              >Piano on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -483,7 +493,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/grand-piano/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

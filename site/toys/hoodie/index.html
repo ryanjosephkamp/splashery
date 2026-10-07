@@ -161,6 +161,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imhvb2RpZSJ9LCJjYW1lcmEiOnsieWF3IjowLjIyLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -187,13 +189,15 @@
                 style="background-image: url(&quot;../../../assets/toys/hoodie/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=hoodie"
+                src="../../play/?toy=hoodie&sound=on"
                 title="Hoodie, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -209,6 +213,12 @@
             and flips back up as the drawstrings swing, then the sleeves swing up, cross in front
             and settle back. Pick a flag in the top bar and the hoodie wears its colors. With ✋
             Hands-on on, pull the hood: it flops like cloth and springs back up.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Hoodie" target="_blank" rel="noopener"
+              >Hoodie on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -321,7 +331,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/hoodie/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

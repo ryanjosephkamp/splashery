@@ -164,6 +164,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNvbG9zc2V1bSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC42Miwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -190,13 +192,15 @@
                 style="background-image: url(&quot;../../../assets/toys/colosseum/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=colosseum"
+                src="../../play/?toy=colosseum&sound=on"
                 title="Colosseum, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,6 +216,12 @@
             teams' colors, red, white, blue and green, race around the arena, swapping the lead,
             while the crowd jumps and cheers. In ancient Rome, the big chariot races were really
             held at the Circus Maximus, a long racetrack nearby.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Colosseum" target="_blank" rel="noopener"
+              >Colosseum on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -325,7 +335,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/colosseum/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

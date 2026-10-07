@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhbmRlbGlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/dandelion/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=dandelion"
+                src="../../play/?toy=dandelion&sound=on"
                 title="Dandelion, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -203,6 +207,12 @@
             Tap it to blow: a gust bends the stalk, the seeds fly off and drift away, and then the
             seed head grows back. A single clock holds about 150 to 200 seeds. The name comes from
             the French for &quot;lion's tooth,&quot; after the jagged edges of its leaves.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Taraxacum" target="_blank" rel="noopener"
+              >Taraxacum on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -306,7 +316,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/dandelion/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

@@ -160,6 +160,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRvbWF0b2VzIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -186,13 +188,15 @@
                 style="background-image: url(&quot;../../../assets/toys/tomatoes/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=tomatoes"
+                src="../../play/?toy=tomatoes&sound=on"
                 title="Tomatoes, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -208,6 +212,12 @@
             of kinds of tomato, from tiny cherry tomatoes to ones bigger than a fist, in red,
             yellow, orange, green and purple. With ✋ Hands-on on, drag any tomato to lift it on its
             own and set it down on the plate or on another; reset puts them all back.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Tomato" target="_blank" rel="noopener"
+              >Tomato on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -317,7 +327,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/tomatoes/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

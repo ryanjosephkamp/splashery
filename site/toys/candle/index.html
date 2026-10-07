@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmRsZSJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/candle/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=candle"
+                src="../../play/?toy=candle&sound=on"
                 title="Candle, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -205,6 +209,12 @@
             wick; tap again to light it. A flame is shaped like a teardrop because its hot gases
             rise; in space, where nothing rises, a candle flame is a round, blue ball. You can pick
             the wax color in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Candle" target="_blank" rel="noopener"
+              >Candle on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -308,7 +318,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/candle/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

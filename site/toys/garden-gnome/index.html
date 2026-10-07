@@ -163,6 +163,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdhcmRlbi1nbm9tZSJ9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -191,13 +193,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=garden-gnome"
+                src="../../play/?toy=garden-gnome&sound=on"
                 title="Garden gnome, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,6 +216,12 @@
             Tap it and the gnome gives a little hop, and the lantern in its hand lights up with a
             warm glow, then goes out again. This one wears the classic outfit: a red cap, a white
             beard and a belt around a green shirt.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Garden_gnome" target="_blank" rel="noopener"
+              >Garden gnome on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -329,7 +339,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/garden-gnome/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

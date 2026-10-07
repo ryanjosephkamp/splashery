@@ -159,6 +159,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmVjb25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -185,13 +187,15 @@
                 style="background-image: url(&quot;../../../assets/toys/pinecone/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=pinecone"
+                src="../../play/?toy=pinecone&sound=on"
                 title="Pinecone, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -207,6 +211,12 @@
             little propellers. Then the scales facing you break off one after another from the
             bottom up and tumble into a pile, showing the core. Then they fly back up into place and
             the cone closes.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Cone_(botany)" target="_blank" rel="noopener"
+              >Cone (botany) on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -310,7 +320,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/pinecone/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

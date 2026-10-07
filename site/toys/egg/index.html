@@ -154,6 +154,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVnZyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4xfX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -180,13 +182,15 @@
                 style="background-image: url(&quot;../../../assets/toys/egg/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=egg"
+                src="../../play/?toy=egg&sound=on"
                 title="Boiled egg, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -201,6 +205,12 @@
             drips down the side. Tap again to put the top back. In the Toy tab, pick a brown or a
             white shell and the color of the egg cup. The color of a shell depends on the kind of
             hen that laid it; the egg inside is the same.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Boiled_egg" target="_blank" rel="noopener"
+              >Boiled egg on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -304,7 +314,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/egg/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

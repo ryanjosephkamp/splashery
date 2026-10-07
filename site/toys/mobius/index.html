@@ -160,6 +160,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vYml1cyJ9LCJjYW1lcmEiOnsieWF3IjowLjksInBpdGNoIjowLjIyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -186,13 +188,15 @@
                 style="background-image: url(&quot;../../../assets/toys/mobius/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=mobius"
+                src="../../play/?toy=mobius&sound=on"
                 title="Möbius strip, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -207,6 +211,12 @@
             Tap it and the rider goes along the middle of the band. After one lap it is underneath
             where it started, and after two it is back on top. Pick a race car, a beach ball, a duck
             on a bike or an ant in the Toy tab. Pick its colors and glow in the Toy tab too.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/M%C3%B6bius_strip" target="_blank" rel="noopener"
+              >Möbius strip on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -310,7 +320,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/mobius/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

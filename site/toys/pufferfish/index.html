@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1ZmZlcmZpc2gifX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -185,13 +187,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=pufferfish"
+                src="../../play/?toy=pufferfish&sound=on"
                 title="Pufferfish, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -206,6 +210,12 @@
             This one rests slim. Tap it to poke it: it puffs up into a big, spiky ball, holds it,
             then lets the water out with a sputter and shrinks back. Try the Puff slider in the Toy
             tab too.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Tetraodontidae" target="_blank" rel="noopener"
+              >Tetraodontidae on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -309,7 +319,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/pufferfish/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

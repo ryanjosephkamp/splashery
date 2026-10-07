@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndpbmRtaWxsIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4zfX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/windmill/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=windmill"
+                src="../../play/?toy=windmill&sound=on"
                 title="Windmill, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -203,6 +207,12 @@
           <p>
             Its sails always turn in the breeze. Tap it for a gust of wind that spins the sails up
             hard for three extra turns, then they slow back to their steady pace.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Windmill" target="_blank" rel="noopener"
+              >Windmill on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -306,7 +316,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/windmill/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

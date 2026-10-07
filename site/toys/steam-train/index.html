@@ -162,6 +162,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0ZWFtLXRyYWluIn0sImNhbWVyYSI6eyJ5YXciOjAuNiwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -190,13 +192,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=steam-train"
+                src="../../play/?toy=steam-train&sound=on"
                 title="Steam train, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -211,6 +215,12 @@
             The engine puffs smoke from its chimney. Tap it to blow the whistle: a jet of white
             steam shoots up from the whistle and a big cloud billows from the chimney. Pick the
             color of the engine in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Steam_locomotive" target="_blank" rel="noopener"
+              >Steam locomotive on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -321,7 +331,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/steam-train/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

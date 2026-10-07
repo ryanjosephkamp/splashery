@@ -159,6 +159,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNoaWVsZCJ9LCJjYW1lcmEiOnsieWF3IjowLjMsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjo1fX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -185,13 +187,15 @@
                 style="background-image: url(&quot;../../../assets/toys/shield/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=shield"
+                src="../../play/?toy=shield&sound=on"
                 title="Heraldic shield, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -207,6 +211,15 @@
             Tap it and it takes an unseen knock right where you tapped: it jolts and rocks away from
             the blow, sparks spray off the spot, and a gleam sweeps across the emblem. Pick one of
             seven designs and the colors of the field and the charge in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a
+              href="https://en.wikipedia.org/wiki/Escutcheon_(heraldry)"
+              target="_blank"
+              rel="noopener"
+              >Escutcheon (heraldry) on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -310,7 +323,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/shield/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

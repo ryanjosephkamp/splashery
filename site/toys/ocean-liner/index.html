@@ -160,6 +160,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jZWFuLWxpbmVyIn0sImNhbWVyYSI6eyJ5YXciOjAuNjIsInBpdGNoIjowLjMsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -188,13 +190,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=ocean-liner"
+                src="../../play/?toy=ocean-liner&sound=on"
                 title="Ocean liner, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +214,12 @@
             the horn: steam blasts from the horn and the funnels smoke harder. Pick the color of the
             funnels in the Toy tab. A ship's horn is deep and loud so that other ships can hear it
             from miles away, even in fog.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Ocean_liner" target="_blank" rel="noopener"
+              >Ocean liner on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -313,7 +323,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/ocean-liner/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

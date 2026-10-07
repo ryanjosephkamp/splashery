@@ -170,6 +170,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlcmlvZGljLXRhYmxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuMTIsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -198,13 +200,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=periodic-table&turntable=off"
+                src="../../play/?toy=periodic-table&turntable=off&sound=on"
                 title="Periodic table, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -222,6 +226,12 @@
             copper. Elements with no visible line measured flash white. Tap the board for a tour.
             Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST,
             PubChem and IUPAC.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Periodic_table" target="_blank" rel="noopener"
+              >Periodic table on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -345,7 +355,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/periodic-table/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

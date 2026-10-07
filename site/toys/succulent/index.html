@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN1Y2N1bGVudCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC41NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/succulent/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=succulent"
+                src="../../play/?toy=succulent&sound=on"
                 title="Succulent, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -204,6 +208,12 @@
             the middle and arches over with little coral-colored bells; then it draws back and the
             rosette closes. Pick the color of the leaf tips in the Toy tab. Many succulents grow new
             plants from a single fallen leaf.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Succulent_plant" target="_blank" rel="noopener"
+              >Succulent plant on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -307,7 +317,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/succulent/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

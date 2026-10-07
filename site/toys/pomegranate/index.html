@@ -160,6 +160,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvbWVncmFuYXRlIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -188,13 +190,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=pomegranate"
+                src="../../play/?toy=pomegranate&sound=on"
                 title="Pomegranate, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -209,6 +213,12 @@
             Tap it and it splits open like a book on a hinge at the bottom, showing faces packed
             with glowing red seeds, and a few tumble out. People eat the juicy seed coats and often
             leave out the white skin.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Pomegranate" target="_blank" rel="noopener"
+              >Pomegranate on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -319,7 +329,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/pomegranate/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

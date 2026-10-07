@@ -165,6 +165,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5ld3RvbnMtY3JhZGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjI1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC40fX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -193,13 +195,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=newtons-cradle"
+                src="../../play/?toy=newtons-cradle&sound=on"
                 title="Newton's cradle, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -214,6 +218,12 @@
             carry through the row, so the same number of balls leaves as arrived. Each clack turns a
             little energy into sound and heat, so the swings slowly die away. Drag any ball out (the
             balls beside it come too) and let go, or tap to lift the end ball.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Newton's_cradle" target="_blank" rel="noopener"
+              >Newton's cradle on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -317,7 +327,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/newtons-cradle/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

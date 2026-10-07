@@ -162,6 +162,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhdGVyLXBvbG8tYmFsbCJ9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -190,13 +192,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=water-polo-ball"
+                src="../../play/?toy=water-polo-ball&sound=on"
                 title="Water polo ball, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +214,12 @@
             Tap it and it is tossed up and plunges into the water with a splash. Because it is full
             of air it pops straight back up, then bobs on the surface, sending out rings of ripples
             that spread and fade.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Water_polo" target="_blank" rel="noopener"
+              >Water polo on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -313,7 +323,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/water-polo-ball/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

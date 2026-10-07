@@ -167,6 +167,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InB1enpsZS1jdWJlIn0sImNhbWVyYSI6eyJ5YXciOjAuNjIsInBpdGNoIjowLjUsInJvbGwiOjAsImRpc3RhbmNlIjo3LjR9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -195,13 +197,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=puzzle-cube&turntable=off"
+                src="../../play/?toy=puzzle-cube&turntable=off&sound=on"
                 title="Puzzle cube, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -219,6 +223,15 @@
             own move ends the automatic one, and the next tap starts again from there. Solving it by
             hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of
             them can be solved in 20 moves or fewer when a half-turn counts as one move.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a
+              href="https://en.wikipedia.org/wiki/Combination_puzzle"
+              target="_blank"
+              rel="noopener"
+              >Combination puzzle on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -327,7 +340,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/puzzle-cube/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

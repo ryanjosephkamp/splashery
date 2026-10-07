@@ -166,6 +166,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InJ1bm5pbmctc2hvZSJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -194,13 +196,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=running-shoe"
+                src="../../play/?toy=running-shoe&sound=on"
                 title="Running shoe, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -215,6 +219,12 @@
             This shoe is a photo scan of a real trail shoe. Tap it and its laces come undone, cross
             over and tie themselves into a bow again, and the shoe taps its toe twice. Pick a flag
             in the top bar and the shoe wears its colors.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Sneakers" target="_blank" rel="noopener"
+              >Sneakers on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -327,7 +337,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/running-shoe/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

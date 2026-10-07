@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNhcHBoaXJlIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/sapphire/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=sapphire"
+                src="../../play/?toy=sapphire&sound=on"
                 title="Sapphire, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -204,6 +208,12 @@
             reflect the light. The star is called an asterism, and it moves as the stone or the
             light moves. Tap it to catch the star: its rays spread out from a bright center, it
             glides across the top, and the rays draw back in at the far side.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Sapphire" target="_blank" rel="noopener"
+              >Sapphire on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -315,7 +325,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/sapphire/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

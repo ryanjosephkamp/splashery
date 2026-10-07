@@ -163,6 +163,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRlY29yYXRlZC10cmVlIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -191,13 +193,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=decorated-tree"
+                src="../../play/?toy=decorated-tree&sound=on"
                 title="Decorated tree, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,6 +216,12 @@
             The tree starts with its lights off. Tap to switch them on: they sweep up the tree, stay
             on and cycle through chasing, rippling and steady patterns, while the star glows. Tap
             again to switch them off. The first electric tree lights were made in 1882.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Christmas_tree" target="_blank" rel="noopener"
+              >Christmas tree on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -327,7 +337,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/decorated-tree/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

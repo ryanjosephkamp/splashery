@@ -154,6 +154,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImtlbHAifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -180,13 +182,15 @@
                 style="background-image: url(&quot;../../../assets/toys/kelp/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=kelp"
+                src="../../play/?toy=kelp&sound=on"
                 title="Kelp, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -201,6 +205,12 @@
             The kelp sways gently by itself. Tap it and three little fish swim in, each noses up to
             a blade for a few nibbles, and the kelp sways away from them, then swings back as they
             swim off. Giant kelp can grow more than half a meter in a day.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Kelp" target="_blank" rel="noopener"
+              >Kelp on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -304,7 +314,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/kelp/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

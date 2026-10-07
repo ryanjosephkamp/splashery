@@ -164,6 +164,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhhcnBzaWNob3JkIn0sImNhbWVyYSI6eyJ5YXciOjAuNiwicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -192,13 +194,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=harpsichord&turntable=off"
+                src="../../play/?toy=harpsichord&turntable=off&sound=on"
                 title="Harpsichord, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -214,6 +218,12 @@
             and its jack rises, plucks, and the string quivers until the jack's felt stops it. Tap
             anywhere else for the Minuet in G from the notebook Bach kept for his wife, Anna
             Magdalena. Open a MIDI file of your own in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Harpsichord" target="_blank" rel="noopener"
+              >Harpsichord on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -317,7 +327,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/harpsichord/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

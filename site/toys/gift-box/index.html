@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdpZnQtYm94In0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMzgsInJvbGwiOjAsImRpc3RhbmNlIjo0Ljh9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/gift-box/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=gift-box&turntable=off"
+                src="../../play/?toy=gift-box&turntable=off&sound=on"
                 title="Gift box, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -203,6 +207,12 @@
             Tap it to open the present: the lid with its bow pops up and tips back, a golden star
             rises out of the box, and a burst of confetti fills the air. Tap again to close it. Pick
             the colors of the paper and the ribbon in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Gift_wrapping" target="_blank" rel="noopener"
+              >Gift wrapping on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -306,7 +316,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/gift-box/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

@@ -162,6 +162,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLWxhbnRlcm4ifX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -190,13 +192,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=paper-lantern"
+                src="../../play/?toy=paper-lantern&sound=on"
                 title="Paper lantern, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -211,6 +215,12 @@
             Tap it and it swings on its string like a pendulum, back and forth, slowing a little on
             each swing until it hangs still again. Tap while it swings to give it another push. Pick
             a red, gold, teal or purple lantern in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Paper_lantern" target="_blank" rel="noopener"
+              >Paper lantern on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -314,7 +324,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/paper-lantern/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

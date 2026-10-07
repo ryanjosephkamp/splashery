@@ -161,6 +161,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1hcGxlIn0sImNhbWVyYSI6eyJ5YXciOjAuNSwicGl0Y2giOjAuMjIsInJvbGwiOjAsImRpc3RhbmNlIjo0LjJ9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -187,13 +189,15 @@
                 style="background-image: url(&quot;../../../assets/toys/maple/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=maple"
+                src="../../play/?toy=maple&sound=on"
                 title="Maple tree, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -209,6 +213,12 @@
             Tap it and a whirling gust tears leaves off and carries them around the tree in a
             widening spiral before they settle in a ring on the grass; then fresh leaves open. Maple
             syrup is made by boiling down maple sap: about 40 liters of sap make 1 liter of syrup.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Maple" target="_blank" rel="noopener"
+              >Maple on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -312,7 +322,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/maple/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

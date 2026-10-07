@@ -163,6 +163,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0YXItY29va2llIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -191,13 +193,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=star-cookie"
+                src="../../play/?toy=star-cookie&sound=on"
                 title="Cinnamon star cookie, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -211,6 +215,12 @@
           <p>
             Tap it and it crumbles into pieces and crumbs that fall away, then puts itself back
             together. The glaze goes on before baking, and a low oven keeps it snowy white.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Zimtstern" target="_blank" rel="noopener"
+              >Zimtstern on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -328,7 +338,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/star-cookie/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

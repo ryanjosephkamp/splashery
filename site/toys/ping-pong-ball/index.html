@@ -160,6 +160,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpbmctcG9uZy1iYWxsIn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -188,13 +190,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=ping-pong-ball"
+                src="../../play/?toy=ping-pong-ball&sound=on"
                 title="Ping-pong ball, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -208,6 +212,12 @@
             Tap it and it is flicked up, then bounces on and on, each bounce a little lower and
             quicker, with a tik for every one, until it buzzes to a stop. A light, springy ball
             keeps most of its speed at each bounce. Pick a white or an orange ball in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Table_tennis" target="_blank" rel="noopener"
+              >Table tennis on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -311,7 +321,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/ping-pong-ball/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

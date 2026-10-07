@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdvbGYtYmFsbCJ9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/golf-ball/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=golf-ball"
+                src="../../play/?toy=golf-ball&sound=on"
                 title="Golf ball, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -203,6 +207,12 @@
             Tap it for a chip, a short, high shot played close to the hole. It pops up with heavy
             backspin, lands, checks with a tiny hop, and then the spin grips the ground and pulls it
             back to where it started.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Golf_ball" target="_blank" rel="noopener"
+              >Golf ball on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -306,7 +316,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/golf-ball/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

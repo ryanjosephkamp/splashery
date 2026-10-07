@@ -157,6 +157,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByZXR6ZWwifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -183,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/pretzel/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=pretzel"
+                src="../../play/?toy=pretzel&sound=on"
                 title="Pretzel, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -204,6 +208,12 @@
             Tap it and it twists like a knot, all in one piece: its two sides wring opposite ways
             and its loops fold a little toward you. Then it springs a little past its shape into the
             opposite twist and wobbles to a stop.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Pretzel" target="_blank" rel="noopener"
+              >Pretzel on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -307,7 +317,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/pretzel/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>

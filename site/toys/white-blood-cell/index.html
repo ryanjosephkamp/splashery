@@ -163,6 +163,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndoaXRlLWJsb29kLWNlbGwifX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -191,13 +193,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=white-blood-cell"
+                src="../../play/?toy=white-blood-cell&sound=on"
                 title="White blood cell, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,6 +216,12 @@
             around it, draws it inside and closes over it; then tiny grains inside the cell gather
             on it and break it down until it is gone. Élie Metchnikoff first saw cells eating germs
             like this, and won a Nobel Prize in 1908.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/White_blood_cell" target="_blank" rel="noopener"
+              >White blood cell on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -315,7 +325,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/white-blood-cell/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
           </p>
         </section>
