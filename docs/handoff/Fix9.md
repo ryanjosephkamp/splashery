@@ -35,7 +35,9 @@ then keep "## State
     `.cache/fx9/dog-clean.ply` and the entry's new `"local"` field in `tools/pr2-prepare.mjs`).
   - It widened the core by one cell under the low rims of the paws and chin.
   - It colored the core a warm shadow brown toward the mat.
-- Main was merged in at 02:50 UTC (clean). Next: the owner's mark on `fx9-dog-plush-r2`.
+- Main was merged in at 02:50 UTC and again at 04:15 UTC (both clean; the engine branch too).
+- 04:13 UTC: the owner marked `fx9-dog-plush-r2` "good". **All nine cards are good.** The lane waits
+  for the Integrators' full run and the Operator's merges (#368 first, then #370).
 
 ## Notes
 
@@ -97,4 +99,4 @@ then keep "## State
 
 ## For the Operator
 
-- Merge #368 (Engine) first, then this lane's PR.
+- Every card is marked good. Merge #368 (Engine) first, then #370, after the full run.
