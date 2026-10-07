@@ -79,3 +79,29 @@ test("the soda can's suds show after the tap and are gone at its end", async ({ 
   const end = await at(3.8);
   expect(end.suds.visible).toBeLessThan(0.01);
 });
+
+test("the Fluid lab warns a phone that can't keep up, and offers a lighter mode", async ({
+  page,
+}) => {
+  // On a computer that keeps up: no warning.
+  await open(page, "fluid-lab");
+  await page.waitForTimeout(2500);
+  await expect(page.locator("#fluid-slow")).toHaveCount(0);
+  // A slow phone (?slow=1 plays one at 8 frames a second): the warning comes in its first
+  // seconds, and Lighter rebuilds it at the lowest tier.
+  await page.goto("/?renderer=webgl2&adapt=off&labs=1&slow=1");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  // (from the high tier, so Lighter has somewhere to go)
+  await page.evaluate(() => {
+    const { app, player } = window.__splashery;
+    player.setProfile("high");
+    return app.chooseToy("fluid-lab");
+  });
+  await expect(page.locator("#fluid-slow")).toBeVisible({ timeout: 60_000 });
+  await expect(page.locator("#fluid-slow .link-confirm-text")).toHaveText(
+    "This lab is running slowly on this phone.",
+  );
+  await page.click("#fluid-slow-lighter");
+  await expect(page.locator("#fluid-slow")).toBeHidden();
+  await expect.poll(() => page.evaluate(() => window.__splashery.player.profile)).toBe("low");
+});
