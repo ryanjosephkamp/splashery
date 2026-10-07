@@ -179,9 +179,12 @@ const fontText = (s) =>
 function zoomLabel(place) {
   if (!place) return null;
   const sub = place.kind === "land" && place.state ? (place.state === place.country ? place.country : `${place.state}, ${place.country}`) : place.lines[0] || ""; // prettier-ignore
+  // (And, for a named feature, the biggest it lies on or in: "on Olympus Mons".)
+  const where = place.kind === "land" ? "" : [...place.lines.slice(1)].reverse().find((l) => /^(on|in) /.test(l)) || ""; // prettier-ignore
   return {
     title: fontText(place.title).slice(0, 26),
     sub: fontText(sub).slice(0, 34),
+    where: fontText(where.replace(/\s*\(.*\)$/, "")).slice(0, 34),
     source: place.source.startsWith("Natural") ? "NATURAL EARTH" : "IAU GAZETTEER, USGS",
   };
 }
@@ -748,6 +751,7 @@ function* worldSplats(W, o, extra, N, at, plan, zoom) {
     const lines = [
       [lab.title, Math.min(0.0125, 1.2 / Math.max(1, lab.title.length * 6)), 1],
       [lab.sub, Math.min(0.0075, 1.2 / Math.max(1, lab.sub.length * 6)), 0.92],
+      [lab.where, Math.min(0.0075, 1.2 / Math.max(1, lab.where.length * 6)), 0.92],
       [lab.source, 0.005, 0.75],
     ];
     let y = 0.52;
