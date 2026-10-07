@@ -23,9 +23,9 @@ under "## Brief", then keep "## State
      Credit: a kit toy's footer is "<name>: Splashery, MIT" (as the lab shows kit toys now).
   4. **Evidence:** `sheet-<shelf>.png` in the audit folder (1.2 MB in all); six cards (`asc2-food`
      ... `asc2-music`, lane record `AsciiR2`) on Effect review page 2.
-- Checks run: `tests/asc2.spec.mjs`, `asc-unit`, `asc-core` and `asc-engine` pass; `asc.spec` and
-  `asc-repeat` were run last (see "For the Operator"). Prettier and the US English check are clean.
-  The full suite was not run here.
+- Checks run: `tests/asc2.spec.mjs`, `asc-unit`, `asc-core` and `asc-engine` pass; `asc.spec` (5)
+  and `asc-repeat` (1, 6.4 minutes) pass too. Prettier and the US English check are clean. The full
+  suite was not run here.
 
 ## Notes
 
