@@ -181,14 +181,16 @@ async function sheet(browser, items, file) {
     tiles.forEach((t, i) => {
       const x = (i % per) * tw;
       const y = Math.floor(i / per) * (th + 18);
-      const cw = (tw - 8) / t.columns;
+      const cw = (th - 4) / t.rows / 2; // a character cell is half as wide as it is tall
+      const x0 = x + (tw - cw * t.columns) / 2;
       const ch = (th - 4) / t.rows;
       for (let r = 0; r < t.rows; r++)
         for (let k = 0; k < t.columns; k++) {
           const v = t.cells[r * t.columns + k];
           if (v < 6) continue;
-          ctx.fillStyle = `rgb(${v + 17},${v + 17},${v + 17})`;
-          ctx.fillRect(x + 4 + k * cw, y + 2 + r * ch, Math.ceil(cw), Math.ceil(ch));
+          const g = Math.min(255, 17 + Math.round(v * 1.6));
+          ctx.fillStyle = `rgb(${g},${g},${g})`;
+          ctx.fillRect(x0 + k * cw, y + 2 + r * ch, Math.ceil(cw), Math.ceil(ch));
         }
       ctx.fillStyle = "#ddd";
       ctx.font = "12px sans-serif";
