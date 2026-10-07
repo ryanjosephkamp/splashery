@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Splashery ASCII capture</title>
+    <!-- Lane AsciiCapture: the capture document. One fresh player for one job, made and removed by
+         ascii-lab.html. No app UI. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "gifenc": "./vendor/gifenc/gifenc.esm.js"
+        }
+      }
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #111111;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script type="module" src="./src/ascii-capture/host.js"></script>
+  </head>
+  <body>
+    <canvas id="stage" aria-hidden="true"></canvas>
+  </body>
+</html>
