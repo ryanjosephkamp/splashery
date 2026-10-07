@@ -62,6 +62,14 @@ export function createSong(api) {
 }
 
 class NoteRider {
+  // The words under the title before a game: the song's name, or how to
+  // open one (Your own song chosen, no file opened yet).
+  attract() {
+    if (this.own === null) return ["Open a MIDI file with ♪ Your song. Until then, Ode to Joy."];
+    if (this.own) return [`♪ ${this.own}`, "Steer into each note's lane as it arrives."];
+    return null;
+  }
+
   constructor(api) {
     this.api = api;
     this.q = api.q;
@@ -73,6 +81,7 @@ class NoteRider {
       song = songFromText({ title: t.title, text: t.text, bpm: t.bpm });
     }
     this.song = song;
+    this.own = o.tune === "own" ? (RIDE.song ? RIDE.name || "Your song" : null) : undefined;
     // The melody: the highest note at each moment (the tune you'd sing).
     const byT = new Map();
     for (const n of song.notes) {

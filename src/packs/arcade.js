@@ -770,6 +770,8 @@ export const RECIPES = {
           { id: "ode", label: "Ode to Joy" },
           { id: "twinkle", label: "Twinkle, Twinkle" },
           { id: "jacques", label: "Frère Jacques" },
+          // the MIDI file opened with ♪ Your song (or the Toy tab's button)
+          { id: "own", label: "Your own song" },
         ],
       },
       VIEW,
@@ -801,6 +803,11 @@ export const RECIPES = {
     arcade: {
       title: "Note Rider",
       background: "#0b0d18",
+      // Your own song, from the game itself (the Toy tab has the same button).
+      file: {
+        label: "♪ Your song",
+        title: "Open a MIDI file of your own (it stays on this device)",
+      },
       goal: "Steer into each note's lane as it arrives: every note you catch plays. Catch them all to play the tune.",
       stats: [
         { key: "score", label: "Score" },

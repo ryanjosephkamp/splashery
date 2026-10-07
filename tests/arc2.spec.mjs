@@ -151,3 +151,28 @@ test("Longtail: in 3D a drag turns the world, and it eases back to following the
   await run(page, 7);
   expect(Math.abs(await read(page, () => window.__arc.game.userTurn.yaw))).toBeLessThan(0.1);
 });
+
+test("Note Rider: ♪ Your song opens a MIDI file from the game itself, and its melody comes down the track", async ({
+  page,
+}) => {
+  await open(page, "note-rider");
+  const midi = await page.evaluate(async () => {
+    const { writeMidi, songFromText } = await import("/src/songs.js");
+    return Array.from(writeMidi(songFromText({ title: "Mine", text: "C4/4 E4/4 G4/4 C5/4 G4/4 E4/4 C4/2", bpm: 100 }))); // prettier-ignore
+  });
+  const chooser = page.waitForEvent("filechooser");
+  await page.click(".arc-file");
+  await (await chooser).setFiles({ name: "mine.mid", mimeType: "audio/midi", buffer: Buffer.from(midi) }); // prettier-ignore
+  await page.waitForFunction(() => window.__splashery.player.arcade?.game?.melody?.length === 7, null, { timeout: 60_000 }); // prettier-ignore
+  const got = await read(page, () => {
+    const g = window.__splashery.player.arcade.game;
+    return { notes: g.melody.map((n) => n.n), tune: window.__splashery.player.scene.toy.options.tune }; // prettier-ignore
+  });
+  expect(got.tune).toBe("own");
+  expect(got.notes).toEqual([60, 64, 67, 72, 67, 64, 60]);
+  // Not a MIDI file: a plain message, and the game carries on as it was.
+  const chooser2 = page.waitForEvent("filechooser");
+  await page.click(".arc-file");
+  await (await chooser2).setFiles({ name: "x.mid", mimeType: "audio/midi", buffer: Buffer.from("MThd nonsense") }); // prettier-ignore
+  await expect(page.locator(".arc-msg h2")).toHaveText("Couldn't read that file");
+});

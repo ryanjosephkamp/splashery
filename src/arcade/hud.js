@@ -120,6 +120,7 @@ export class Hud {
           <button class="arc-btn arc-view" type="button" aria-pressed="false" title="Switch between 2D and 3D (V)">3D</button>
           <button class="arc-btn arc-pause" type="button"></button>
           <button class="arc-btn arc-restart" type="button" title="Start again (R)" aria-label="Start again">↺</button>
+          <button class="arc-btn arc-file" type="button" hidden></button>
           <button class="arc-btn arc-controls" type="button" title="Controls" aria-label="Controls">?</button>
           <button class="arc-btn arc-enter" type="button" title="Play on the whole page">⛶ Play</button>
           <button class="arc-btn arc-exit" type="button" title="Leave (Esc)" aria-label="Leave">✕</button>
@@ -151,6 +152,14 @@ export class Hud {
     click(".arc-enter", on.play);
     click(".arc-exit", on.exit);
     click(".arc-controls", () => this.toggleHelp());
+    // A game that opens a file of the person's own (Note Rider's song).
+    const fileBtn = el.querySelector(".arc-file");
+    if (game.file && on.file) {
+      fileBtn.hidden = false;
+      fileBtn.textContent = game.file.label;
+      fileBtn.title = game.file.title || game.file.label;
+      click(".arc-file", on.file);
+    }
     this.helpEl.addEventListener("click", () => this.toggleHelp(false));
     this.buildPad(game.pad || ["left", "right", "fire"], on.pad);
     this.buildHelp();

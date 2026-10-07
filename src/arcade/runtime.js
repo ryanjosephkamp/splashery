@@ -83,6 +83,7 @@ export class ArcadeRuntime {
       pause: () => this.togglePause(),
       restart: () => this.restart(),
       choose: (id) => this.choose(id),
+      file: recipe.input?.read ? () => this.openFile() : null,
       pad: (a, down) => {
         this.input.pad(a, down);
         if (down) this.wake();
@@ -246,6 +247,32 @@ export class ArcadeRuntime {
     this.sound({ voice: "switch", f: this.viewTo ? 3000 : 2400, vol: 0.6 });
   }
 
+  // A file of the person's own (def.file: Note Rider's song), read by the
+  // recipe's input.read on this device, and the game rebuilt with the
+  // options it returns. The file never leaves the device.
+  openFile() {
+    const input = this.recipe.input;
+    if (this.mode === "play") this.pause(true);
+    const pick = document.createElement("input");
+    pick.type = "file";
+    if (input.accept) pick.accept = input.accept;
+    pick.addEventListener("change", async () => {
+      const file = pick.files?.[0];
+      if (!file) return;
+      try {
+        const options = await input.read(input.binary ? "" : await file.text(), file.name, file, [file]); // prettier-ignore
+        if (this.dead) return;
+        if (this.playMode) this.exitPlay();
+        await this.player.rebuild?.(options);
+      } catch (e) {
+        if (this.dead) return;
+        this.fileError = { title: "Couldn't read that file", lines: [String(e?.message || e)] };
+        setTimeout(() => (this.fileError = null), 4000);
+      }
+    });
+    pick.click();
+  }
+
   // ---- Play mode ---------------------------------------------------------------
 
   enterPlay() {
@@ -407,8 +434,9 @@ export class ArcadeRuntime {
     this.hud.setStats(list);
     this.hud.setPaused(this.mode !== "play");
     const tap = this.input.lastDevice === "touch" ? "Tap" : "Click or press Space";
-    if (this.mode === "attract")
-      this.hud.setMessage({ title: this.def.title, lines: [this.def.goal || "", `${tap} to play`].filter(Boolean) }); // prettier-ignore
+    if (this.fileError) this.hud.setMessage(this.fileError);
+    else if (this.mode === "attract")
+      this.hud.setMessage({ title: this.def.title, lines: [...(this.game.attract?.() || [this.def.goal || ""]), `${tap} to play`].filter(Boolean) }); // prettier-ignore
     else if (this.mode === "paused")
       this.hud.setMessage({ title: "Paused", lines: [`${tap} to go on`] });
     else if (this.mode === "over") {
