@@ -1,8 +1,8 @@
 # The Operator's runbook
 
 How the Operator session does its job, step by step: the commands, the checks and the habits that
-grew during the October push. [OPERATING.md](OPERATING.md) has the rules every session follows
-("How the Operator runs a lane", "Merging and conflicts", "Upkeep after a merge");
+grew during the October push. [OPERATING.md](OPERATING.md) has the rules every session follows ("How
+the Operator runs a lane", "Merging and conflicts", "Upkeep after a merge");
 [HANDOFF.md](HANDOFF.md), "Now", has the current state; [WORKSTREAMS.md](WORKSTREAMS.md) has the
 lanes. Private things (page links, the owner's marks and notes, routines' full prompts) are on the
 Operator's private handover page, never in the repo.
@@ -45,12 +45,14 @@ a helper agent on Sonnet and keep only its summary.
 
    Never write to `verdicts` or `marks`. The owner's notes go to lanes and to his backup kit, never
    into the repo or a PR.
+
 6. **Act.** Answer lanes, merge what is ready, and start lanes when slots free.
 7. **Log.** One line per check-in in the Operator's session log, then a short reply to the owner.
 
 ## Talking to lanes
 
 Send a one-shot trigger with `create_trigger`:
+
 - `persistent_session_id` set to the lane;
 - `run_once_at` a few minutes out;
 - a prompt that starts "From the Operator:" and says exactly what to do and how to report.
@@ -62,6 +64,7 @@ Operator reads it.
 ## Merging (an Ops PR per merge)
 
 Who may merge what (CLAUDE.md, "Pull requests"):
+
 - **Labs, additive engine and Ops PRs:** once a full test run passes.
 - **Changes to toys the public sees:** a full test run and the owner's "good" marks.
 - Workers never merge.
@@ -75,9 +78,11 @@ The steps, in a scratch worktree:
    - JSON.parse on tools/toy-plan.json, tools/assets.json and tools/models.json.
 3. Regenerate:
    - `node tools/toy-plan.mjs`, then `npx prettier --write docs/TOY-PLAN.md tools/assets.json`;
-   - `node tools/site-build.mjs`, `npx prettier --write site`, then `node tools/site-build.mjs --check`.
+   - `node tools/site-build.mjs`, `npx prettier --write site`, then
+     `node tools/site-build.mjs --check`.
 
    Commit the rebuild as its own "Ops: rebuild site/ …" commit.
+
 4. Run the PR's own specs plus the shared ones it could touch (help, hta, unit, kit, smoke, taps
    with `-g <pack>`, site, tpg, spg) on this exact tree. The Integrator's full run covers the rest.
    When a lane's head moved after the Integrator run, rerun only what changed.
@@ -106,27 +111,29 @@ The steps, in a scratch worktree:
 
 ### Known flaky tests (they also fail on plain main)
 
-smoke:734, tpg:204, hl1:75, stm:366, fl7:49 and :95, qrs-toys:132, live4:149, phy:64, ui4:42,
-wd:187 and :210, wdr3:133, smd-moving:101. One failure that passes when rerun alone is a flake; two
+smoke:734, tpg:204, hl1:75, stm:366, fl7:49 and :95, qrs-toys:132, live4:149, phy:64, ui4:42, wd:187
+and :210, wdr3:133, smd-moving:101. One failure that passes when rerun alone is a flake; two
 failures in a row are real.
 
 ## Integrators
 
 Integrators are Sonnet 5.5 at medium effort, and their session IDs are in WORKSTREAMS.md. A job
 names:
+
 - the tree: main at a SHA, plus each PR at its full head SHA, merged `--no-ff` locally and never
   pushed;
 - the spec files (a full suite or a targeted list), run one file at a time;
 - the known flakes.
 
 They rerun each failure alone, on the tree and on plain main, and write
-`runs/<date>-<job>-int<N>.md` on `claude/integrator-results`. A targeted run (the specs of the
-packs a change touches, plus smoke, kit, taps, help, hta and unit) is enough for a small engine fix.
-A full suite takes about 4.5 hours on one worker.
+`runs/<date>-<job>-int<N>.md` on `claude/integrator-results`. A targeted run (the specs of the packs
+a change touches, plus smoke, kit, taps, help, hta and unit) is enough for a small engine fix. A
+full suite takes about 4.5 hours on one worker.
 
 ## Starting a lane
 
 Write the brief from the template the October lanes used:
+
 - the head: lane, id, prefix, branch, PR title, handoff file, model;
 - the brief itself: what the owner asked, in his words where possible; the order to build in; the
   files the lane owns;
@@ -134,6 +141,7 @@ Write the brief from the template the October lanes used:
   READY/WORKING/BLOCKED.
 
 Then call `create_session` with:
+
 - `model`: Opus 5.5 or Sonnet 5.5, per CLAUDE.md;
 - `source_url`: the repo;
 - `outcome_branch`: the lane branch;
@@ -146,9 +154,9 @@ owner's current limit (CLAUDE.md, "Working style").
 ## Sounds
 
 The owner can't play sound on the Effect review page. A lane that changes sounds puts each one in
-`tools/sound-review.json` ("new sound to hear") and posts no sound-only cards. At READY, the Operator
-builds a Sound Board preview from the lane's branch (`node tools/sound-board.mjs`), publishes it for
-him, and he marks the sounds there.
+`tools/sound-review.json` ("new sound to hear") and posts no sound-only cards. At READY, the
+Operator builds a Sound Board preview from the lane's branch (`node tools/sound-board.mjs`),
+publishes it for him, and he marks the sounds there.
 
 ## Upkeep after merges
 
@@ -161,10 +169,11 @@ him, and he marks the sounds there.
 ## Routines
 
 All are on the owner's account:
+
 - **Daily digest:** 7:54 a.m. ET, fresh Sonnet session, read only.
 - **Site patrol:** 7:21 a.m. ET, fresh Sonnet session, read only.
-- **Backup kit:** 8:07 a.m. and 8:07 p.m. ET, fires into the Operator session. It exports the
-  review pages and zips the private state for the owner.
+- **Backup kit:** 8:07 a.m. and 8:07 p.m. ET, fires into the Operator session. It exports the review
+  pages and zips the private state for the owner.
 - **Weekly toy ideas:** Mondays, 7:43 a.m. ET, fires into the Operator session.
 
 At a handover the two that fire into the Operator move to the new session. Their full prompts are on

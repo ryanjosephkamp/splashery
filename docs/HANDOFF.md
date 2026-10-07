@@ -10,6 +10,7 @@ A fresh Operator takes over today. This section is current. The sections below i
 runbook is [OPERATOR.md](OPERATOR.md).
 
 **Main** is at `20a22840` (Ops #375). Merged October 6–7:
+
 - #354: Toy pages, Computing r2, Studio media r2, Pages r6 polish
 - #355: upkeep
 - #359: Site pages
@@ -26,17 +27,18 @@ in flight, plus ASCII r2, Space r3 and Dot samples. Weekly usage was 69% at 04:0
 reset, about six workers (seven at most).
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
-- **Live r7** (#333, Opus): the sharper splat mirror. The r5 cards are good. The recording fix is
-  in (0c06f376), and the Operator's rerun with `--repeat-each 6` decides the merge. Then **Live r8**:
-  a sharper Chladni plate, a true 3D look only if the physics holds, and an on-screen depth slider
+
+- **Live r7** (#333, Opus): the sharper splat mirror. The r5 cards are good. The recording fix is in
+  (0c06f376), and the Operator's rerun with `--repeat-each 6` decides the merge. Then **Live r8**: a
+  sharper Chladni plate, a true 3D look only if the physics holds, and an on-screen depth slider
   (triage.md).
 - **Real elements** (#318, Opus): closed from every angle (engine #361 is merged), overall
   sharpness, and a softer nucleus sound for the Sound Board. Waits for its new cards and the owner's
   marks.
 - **Powers of ten** (#351 engine, #353, Opus): the four N25 fixes are in. Zoom-out is good; waits
   for the owner's mark on zoom-in r3. Labs.
-- **Showcase** (#350, Opus): green (captions and facts fixed). Waits for the owner's marks on two
-  r2 clips. Labs.
+- **Showcase** (#350, Opus): green (captions and facts fixed). Waits for the owner's marks on two r2
+  clips. Labs.
 - **Walkthrough lanes**, started October 6–7 from docs/reviews/2026-10-06-walkthrough/triage.md:
   - Site r2 (#367, Sonnet), with the owner's contact links;
   - Toy pages r2 (#371 + engine #365, Sonnet);
@@ -46,12 +48,14 @@ reset, about six workers (seven at most).
 
   Public pages and toys: they merge after a full run and the owner's marks. Sound changes are
   reviewed on a Sound Board preview, not on Effect review.
+
 - **Wave 6**, October 7: ASCII r2 (Sonnet: ASCII GIFs for many more toys), Space r3 (Opus: sharper
   real planets, and a tap that zooms to a named place), Dot samples (Sonnet: AI-made Studio samples
   from the owner's 40 Dot pictures). All labs.
 - **Integrators** 1, 3, 4, 5 and 6 (Sonnet) are free.
 
 **Open with the owner** (details on the Operator's private page):
+
 - the Codex drafts #335 and #352 (their code is merged through the ASCII lane; close them?);
 - the Recipes page calls ("how-built page go", "lit refresh go", "matterhorn = benchmark");
 - "sandbox go" (a private repo for a blind bake-off: Codex, Sonnet and Opus on the same tasks);
@@ -59,6 +63,7 @@ reset, about six workers (seven at most).
 - the status report's six decisions (help line, front door swap, blog, tiered tests).
 
 **Next for the Operator:**
+
 - merge what turns green;
 - run the upkeep Ops PR (WORKSTREAMS rows, #363 Space r2's handoff docs, boards republish);
 - start Live r8 when Live r7 stands down;
