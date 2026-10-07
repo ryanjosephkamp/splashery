@@ -1186,17 +1186,6 @@
       "note": "Cut 0.0-1.0 s of the source, trimmed, faded, normalized to the kit's level and saved as mono MP3 (8,402 bytes)."
     },
     {
-      "id": "lungs-breath",
-      "file": "assets/sounds/lungs-breath.mp3",
-      "toys": ["lungs"],
-      "name": "Male breathing",
-      "author": "zogmachine",
-      "page": "https://freesound.org/people/zogmachine/sounds/202606/",
-      "license": "CC0 1.0",
-      "checked": "September 30, 2026",
-      "note": "Cut 0.3-5.4 s of the source, trimmed, faded, normalized to the kit's level and saved as mono MP3 (31,102 bytes)."
-    },
-    {
       "id": "marble-roll",
       "file": "assets/sounds/marble-roll.mp3",
       "toys": ["marble"],
@@ -2041,18 +2030,7 @@
       "page": "https://freesound.org/people/rrehl/sounds/717167/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 0.091 s (3.32 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (13,761 bytes). Loaded when its toy opens with the speaker on."
-    },
-    {
-      "id": "lungs-breath-c",
-      "file": "assets/sounds/lungs-breath-c.mp3",
-      "toys": ["lungs"],
-      "name": "Sigh1.wav",
-      "author": "elle-trudgett",
-      "page": "https://freesound.org/people/elle-trudgett/sounds/146769/",
-      "license": "CC0 1.0",
-      "checked": "October 2, 2026",
-      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 0.822 s (3.88 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (15,921 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. The lungs' site sound since October 7, 2026 (the owner picked it on the Sound Board). Freesound's HQ preview, cut from 0.091 s (3.32 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (13,761 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "bicycle-bell",
