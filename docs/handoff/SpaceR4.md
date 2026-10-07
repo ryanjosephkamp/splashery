@@ -40,8 +40,8 @@ session_012GmKRUMZLir2nb27Bo8Cu2.
 
 ## State
 
-READY for review (October 7, 2026). PR #394. One new labs toy, `solar-orbits` ("The solar system on
-real orbits"), in a new pack `src/packs/space-r4.js`:
+READY, all clips approved (October 7, 2026). PR #394. One new labs toy, `solar-orbits` ("The solar
+system on real orbits"), in a new pack `src/packs/space-r4.js`:
 
 - The Sun, the eight planets (JPL Table 1, through `src/sky/astro.js`), the Moon, Io, Europa,
   Ganymede, Callisto and Titan (JPL satellite elements; Titan from Horizons), comets Halley, Encke,
@@ -61,6 +61,11 @@ real orbits"), in a new pack `src/packs/space-r4.js`:
   (October 7, 2026, 21:18 UTC); round 2 (`-r2` cards): about 2.5 times the splats (35k to 103k),
   finer splats on the Sun, planets, moons, rings and comet tails, letters of four small splats each,
   less glow round the Sun, and a random (not patterned) granulation on it.
+- Round 3: the owner marked the overview r2 good and asked "Make text sharper please" on the other
+  five. The `-r3` cards: names half again as large, each letter dot nine small splats, a tighter
+  shadow, and the clip's date caption bold on a dark band. He marked all five r3 good (October 7,
+  2026, 23:10 UTC): every current sp4 clip is approved. Ready for the Operator's merge after a full
+  test run.
 
 ## Notes
 
