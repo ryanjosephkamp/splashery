@@ -89,14 +89,16 @@ new `assets/sounds/water-bottle-pour.mp3` (CC0, ahamirikia, "Pouring water into 
 `tools/assets.json`, `CREDITS.md` and `src/sound-credits.js`. `knot-jelly.mp3` is deleted with its
 credits (nothing plays it now; the sample test requires every file to be used).
 
-Clips: 17 cards on Effect review page 2 (lane record `SoundD`, ids `sndd-<toy id>`), each an MP4
-with the toy's sound muxed in (the tap at 0.4 s), posted October 7, 2026. Owner's marks: none yet.
+Review: on the Sound Board (the Operator's change of October 7, 2026, 00:45 UTC: the owner can't
+play sound on the Effect review page). The Operator builds a preview from this branch
+(`node tools/sound-board.mjs`); all 17 toys show there as "ready" (round `2026-10-06`). The 17
+`sndd-…` cards already posted on Effect review page 2 stay for the Operator to retire; no new cards
+go there.
 
 ## Notes
 
 - Neon knot: the clip shows it contorting from about 0.3 s to 2.3 s and settling by 2.8 s, so the
   strain (creak) runs from 0.3 s and the let-go thump and swish come at 2.1 s.
-
 - Popcorn: the old cut started each kernel at one of two places in a 0.72 s file, and each 120 ms
   cut held two or three transients plus the pot's rumble; 14 of them in 0.6 s ran together into a
   hiss. The new file has ten isolated pops (picked by onset: quiet before and after), each 85 ms,
@@ -106,15 +108,16 @@ with the toy's sound muxed in (the tap at 0.4 s), posted October 7, 2026. Owner'
 
 ## Known issues
 
-- Effect review page 2 plays its videos `muted` with no controls, so the sound in the `sndd-…` clips
-  may not be heard there (the MP4s do carry it; downloading a clip plays it). The Sound Board is the
-  sure place to hear the new sounds.
 - The neon knot's and sunflower photo's new sounds are new designs, not removals; the owner's marks
   decide them.
 
 ## For the Operator
 
-- The sound board on main will play the new sounds once this merges (status `ready`, round
-  `2026-10-06`).
+- Sound Board preview: build it from this branch
+  (`node tools/sound-board.mjs --label=SoundD --out=…`); the 17 changed toys are the ones with round
+  `2026-10-06`: stollen, orange-photo, physalis, crystal-gem, monkey-doll, sunflower-photo,
+  white-roses, bonsai-photo, mushroom-photo, crochet-earth, maple-tree, peony, money-tree, knot,
+  popcorn, water-bottle, point-clouds.
+- The 17 `sndd-…` cards on Effect review page 2 are yours to retire (posted before your change).
 - `src/sound-credits.js` gained one entry (`water-bottle-pour.mp3`) and lost one (`knot-jelly.mp3`):
   credit lines only.
