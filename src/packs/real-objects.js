@@ -931,7 +931,7 @@ const FOUNTAIN_PEN = {
 // kit-built cork coaster, where the foam lands.
 
 const SC = {
-  T: 3.5,
+  T: 4.0,
   floor: -0.794,
   lid: 0.787,
   rivet: [0, 0.787, 0],
@@ -940,6 +940,11 @@ const SC = {
   drops: 26, // the spatter: tokens 22..47
   coaster: 0.95,
   spray: [1.0, 1.95], // the jet runs between these tap times
+  // Fix9 (the owner's walkthrough, October 6, 2026): the suds well up out of the opening from
+  // spill[0], cover the lid, spill over the rim and run down the can until spill[1], then
+  // shrink away between gone[0] and gone[1] (opaque all the while).
+  spill: [1.15, 2.65],
+  gone: [3.1, 3.55],
 };
 const hash = (i, k) => {
   const x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453;
@@ -953,6 +958,88 @@ function scJet(e) {
   return [0.25 * Math.sin(e * 9.1) + 0.12, up, 0.2 * Math.sin(e * 7.3 + 1) + 0.18];
 }
 const SC_G = 7.5;
+
+// The can's radius at height y (from the scan): straight sides up to y 0.6, the neck tapering
+// in to the rim (radius 0.37, its top at y 0.8).
+const scRadius = (y) => (y > 0.74 ? 0.37 : y > 0.6 ? mix(0.431, 0.364, smoothstep(0.6, 0.74, y)) : 0.431); // prettier-ignore
+// The suds' tongues down the side: [angle about y from +Z (the opening's side), how far down
+// they reach, half width (radians)]. The front runs longest.
+const SC_TONGUES = [
+  [0.1, 1.05, 0.2],
+  [-0.62, 0.72, 0.17],
+  [0.78, 0.85, 0.18],
+  [-1.35, 0.5, 0.16],
+  [1.5, 0.42, 0.15],
+  [2.2, 0.36, 0.15],
+  [-2.1, 0.3, 0.15],
+  [3.0, 0.25, 0.16],
+];
+// When the flow reaches a point (seconds after the spill starts): across the lid from the
+// opening, then down the side, slowing as it goes.
+const SC_SPREAD = 2.4; // units per second across the lid
+const SC_RUN = 1.0; // units per second down the side, at first
+function scArrive(a, d) {
+  const rim = [0.37 * Math.sin(a), 0.37 * Math.cos(a)];
+  const t0 = Math.hypot(rim[0] - SC.mouth[0], rim[1] - SC.mouth[2]) / SC_SPREAD;
+  return t0 + (d / SC_RUN) * (1 + 0.35 * d);
+}
+function addSuds(k) {
+  const suds = k.part("suds", { pivot: [0, SC.floor, 0] });
+  const len = SC.spill[1] - SC.spill[0];
+  const foam = (rand, n, shade) => {
+    // Cream foam with a faint amber; small bubbles a little darker or brighter.
+    const b = rand < 0.12 ? 0.8 : rand > 0.9 ? 1.04 : 0.93 + 0.08 * rand;
+    return lit([0.97 * b, 0.92 * b, 0.8 * b * shade], n, { soft: 0.35, sheen: 0.25, tight: 18 });
+  };
+  const at = (u) => clamp(u / len, 0, 0.985);
+  const N = Math.round(k.count * 0.055);
+  addCloud(k, N, (i) => {
+    const r1 = hash(i, 11);
+    const r2 = hash(i, 12);
+    const r3 = hash(i, 13);
+    if (hash(i, 10) < 0.3) {
+      // The cap of foam on the lid: thickest by the opening, a rounded edge at the rim.
+      const r = 0.37 * Math.sqrt(r1);
+      const a = 2 * Math.PI * r2;
+      const x = r * Math.sin(a);
+      const z = r * Math.cos(a);
+      const dm = Math.hypot(x - SC.mouth[0], z - SC.mouth[2]);
+      const h = 0.035 + 0.05 * Math.exp(-dm * dm * 12) - 0.02 * smoothstep(0.3, 0.37, r);
+      const y = 0.8 + h * Math.sqrt(r3);
+      const nn = [x * 0.6, 1, z * 0.6];
+      const l = Math.hypot(...nn);
+      return { p: [x, y, z], n: nn.map((v) => v / l), size: 0.016, color: foam(hash(i, 14), nn.map((v) => v / l), 1), part: suds, kind: "fade", params: [at(dm / SC_SPREAD), -0.03], channel: 1 }; // prettier-ignore
+    }
+    // The sheet over the rim and its tongues down the side: pick an angle, then a depth below
+    // the rim's top within how far the foam runs there.
+    const a = Math.PI * (2 * r1 - 1);
+    let reach = 0.1;
+    let tip = null;
+    for (const [ta, tl, tw] of SC_TONGUES) {
+      let da = Math.abs(a - ta);
+      if (da > Math.PI) da = 2 * Math.PI - da;
+      if (da > tw) continue;
+      // A tongue narrows toward its rounded head.
+      const w = Math.sqrt(1 - (da / tw) ** 2);
+      const l = 0.1 + (tl - 0.1) * w;
+      if (l > reach) {
+        reach = l;
+        tip = tl;
+      }
+    }
+    const d = reach * Math.sqrt(r2);
+    const y = 0.8 - d;
+    // A drip's head is fuller than its trail; the sheet is fullest over the rim.
+    const head = tip ? Math.exp(-(((reach - d) / 0.06) ** 2)) : 0;
+    const th = 0.018 + 0.016 * Math.exp(-d / 0.08) + 0.018 * head;
+    const R = scRadius(y) + th * r3 + 0.004;
+    const nn = [Math.sin(a), d < 0.03 ? 0.6 : 0.1, Math.cos(a)];
+    const l = Math.hypot(...nn);
+    const nrm = nn.map((v) => v / l);
+    // Where the foam thins on the side, the soda shows through it a little: more amber.
+    return { p: [R * Math.sin(a), y, R * Math.cos(a)], n: nrm, size: 0.015, color: foam(hash(i, 14), nrm, 1 - 0.18 * smoothstep(0.1, 0.6, d) * (1 - head)), part: suds, kind: "fade", params: [at(scArrive(a, d)), -0.03], channel: 1 }; // prettier-ignore
+  });
+}
 
 const SODA_CAN = {
   alive: false,
@@ -993,7 +1080,11 @@ const SODA_CAN = {
     void rr;
     out.parts.tab = { quat: qTab, offset: canOff };
     // The opening shows as the tab's nose pushes the panel in, and closes up again at the end.
-    out.morph = [ease(seg(s, 0.95, 1.08)) * (1 - ease(seg(s, 3.0, 3.4))), 0, 0, 0];
+    const spill = on ? seg(s, SC.spill[0], SC.spill[1]) : 0;
+    out.morph = [ease(seg(s, 0.95, 1.08)) * (1 - ease(seg(s, 3.5, 3.9))), spill, 0, 0];
+    // The suds: once they have run down, they shrink back into the foam and are gone.
+    const gone = on ? ease(seg(s, SC.gone[0], SC.gone[1])) : 0;
+    out.parts.suds = { visible: on && s > SC.spill[0] ? 1 - gone : 0, offset: [0, -0.04 * gone, 0] }; // prettier-ignore
     // The jet: foam leaves the opening from spray[0] to spray[1]; every bit flies on its own arc,
     // and the bits in the air are drawn as overlapping pieces along the flow.
     const tokens = [];
@@ -1077,6 +1168,11 @@ const SODA_CAN = {
       const g = 0.05 + 0.06 * r;
       return { p: [x, SC.lid + 0.003, z], n: [0, 1, 0], size: 0.012, color: [g, g * 0.9, g * 0.8], part: can, kind: "fade", params: [0, -0.4], channel: 0 }; // prettier-ignore
     });
+    // The suds (Fix9): foam that wells up out of the opening, covers the lid, spills over the
+    // rim and runs down the can in a sheet that breaks into tongues of different lengths, each
+    // with a rounded head. Each bit shows when the flow reaches it (channel 1, a sharp front),
+    // so the foam stays solid and opaque as it runs.
+    addSuds(k);
     // The coaster: pressed cork, round, just under the can.
     const R = SC.coaster;
     addCloud(k, Math.round(k.count * 0.1), (i, n) => {
