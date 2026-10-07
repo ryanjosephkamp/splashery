@@ -2644,6 +2644,16 @@ export function createUI(app) {
     for (const it of lg.items || []) {
       const li = document.createElement("li");
       li.textContent = it.text;
+      // Lane Powers of ten: a scale bar, `ruler: { size }` long in recipe
+      // units at the toy's center as the camera sees it now (at most the
+      // box's width), its text under it.
+      if (it.ruler) {
+        const bar = document.createElement("span");
+        bar.className = "toy-legend-ruler";
+        bar.style.width = `${Math.round(rulerPixels(it.ruler.size))}px`;
+        li.prepend(bar);
+        li.classList.add("ruler");
+      }
       if (it.head) li.classList.add("head");
       if (it.on) li.classList.add("on");
       if (it.dim) li.classList.add("dim");
@@ -2651,6 +2661,18 @@ export function createUI(app) {
     }
     legendBox.appendChild(list);
   });
+
+  // Lane Powers of ten: how many CSS pixels `size` recipe units span at the
+  // toy's center, across the screen.
+  function rulerPixels(size) {
+    const st = app.player.stage;
+    const s = app.player.proc?.ctx?.transform?.scale ?? 1;
+    const n = Number(size) * s;
+    if (!st?.toScreen || !(n > 0)) return 0;
+    const a = st.toScreen([0, 0, 0]);
+    const b = st.toScreen([n, 0, 0]);
+    return Math.min(140, Math.hypot(b[0] - a[0], b[1] - a[1]));
+  }
 
   // ---- The slider over the stage (lane Pages r6) ------------------------------------
   // A kit toy's drive() may set out.slider = { id, label, value } (value 0
