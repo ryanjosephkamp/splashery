@@ -230,7 +230,7 @@ export const RECIPES = {
       best: "score",
       views: true,
       pad: ["left", "right", "up", "down", "fire"],
-      padLabels: { fire: "Go" },
+      padLabels: { fire: "Launch" },
       controls: {
         keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. Space launches the ball.",
         mouse: "Move the mouse to steer the paddle; click to launch.",
@@ -291,11 +291,12 @@ export const RECIPES = {
       pad: ["left", "right", "up", "down"],
       controls: {
         keys: "Arrow keys (or W, A, S, D) turn toward that side of the screen.",
-        touch: "Swipe the way to go, or use the pad.",
+        mouse: "Click beside the head to turn that way; in 3D, drag to turn the world.",
+        touch: "Tap beside the head to turn that way (or swipe in 2D, or use the pad); in 3D, drag to turn the world.", // prettier-ignore
         pad: "Stick or D-pad to turn.",
-        short: "Arrows turn · V folds it into 3D",
+        short: "Arrows or a click turn · V folds it into 3D",
       },
-      slots: { high: 90000, mid: 70000, low: 40000 }, // crisp tiles
+      slots: { high: 110000, mid: 90000, low: 40000 }, // crisp tiles (a planet: 64,000 before the beads)
       create: async (api) => (await import("./arcade-longtail.js")).createLongtail(api),
     },
   },
@@ -412,7 +413,7 @@ export const RECIPES = {
       best: "score",
       views: true,
       pad: ["left", "right", "up", "down", "fire"],
-      padLabels: { fire: "Go" },
+      padLabels: { fire: "Launch" },
       controls: {
         keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. Space launches the ball.",
         mouse: "Move the mouse to steer the paddle; click to launch.",
@@ -769,6 +770,8 @@ export const RECIPES = {
           { id: "ode", label: "Ode to Joy" },
           { id: "twinkle", label: "Twinkle, Twinkle" },
           { id: "jacques", label: "Frère Jacques" },
+          // the MIDI file opened with ♪ Your song (or the Toy tab's button)
+          { id: "own", label: "Your own song" },
         ],
       },
       VIEW,
@@ -781,17 +784,22 @@ export const RECIPES = {
     },
     input: {
       title: "Your own song",
-      accept: ".mid,.midi,.rmi,audio/midi",
+      accept: ".mid,.midi,.rmi,audio/midi,audio/*,.mp3,.m4a,.aac,.wav,.ogg,.oga,.flac,.webm",
       binary: true,
-      fileButton: "Open a MIDI file…",
-      note: "Its melody (the highest note at each moment) comes down the track. The file is read on this device and never leaves it.",
-      async read(_text, fileName, file) {
-        if (!file) throw new Error("Open a MIDI file.");
-        const [{ readMidi }, { RIDE }] = await Promise.all([
-          import("../songs.js"),
-          import("./arcade-song.js"),
-        ]);
-        RIDE.song = readMidi(new Uint8Array(await file.arrayBuffer()), fileName);
+      fileButton: "Open a song…",
+      note: "A MIDI file: its melody (the highest note at each moment) comes down the track. A recording (MP3, M4A, WAV…): a note finder listens for its tune, and each note you catch plays its own slice of the recording. The file is read on this device and never leaves it.",
+      async read(_text, fileName, file, _files, progress) {
+        if (!file) throw new Error("Open a MIDI file or a recording.");
+        const head = new Uint8Array(await file.slice(0, 4).arrayBuffer());
+        const midi = /\.(mid|midi|rmi|kar)$/i.test(fileName || "") || String.fromCharCode(...head) === "MThd" || String.fromCharCode(...head) === "RIFF" && /\.rmi$/i.test(fileName || ""); // prettier-ignore
+        const { RIDE } = await import("./arcade-song.js");
+        if (midi) {
+          const { readMidi } = await import("../songs.js");
+          RIDE.song = readMidi(new Uint8Array(await file.arrayBuffer()), fileName);
+        } else {
+          const { songFromAudio } = await import("./arcade-listen.js");
+          RIDE.song = await songFromAudio(file, progress);
+        }
         RIDE.name = fileName;
         return { tune: "own" };
       },
@@ -800,6 +808,11 @@ export const RECIPES = {
     arcade: {
       title: "Note Rider",
       background: "#0b0d18",
+      // Your own song, from the game itself (the Toy tab has the same button).
+      file: {
+        label: "♪ Your song",
+        title: "Open a MIDI file of your own (it stays on this device)",
+      },
       goal: "Steer into each note's lane as it arrives: every note you catch plays. Catch them all to play the tune.",
       stats: [
         { key: "score", label: "Score" },
