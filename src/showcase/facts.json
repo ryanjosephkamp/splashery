@@ -108,8 +108,8 @@
     "moving-photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/live.js",
-      "recipeKB": 19.4,
-      "recipeGzipKB": 7.3,
+      "recipeKB": 19.6,
+      "recipeGzipKB": 7.4,
       "sharedBy": 3
     },
     "your-book": {
@@ -129,8 +129,8 @@
     "chladni-plate": {
       "kind": "kit",
       "recipeFile": "src/packs/studio.js",
-      "recipeKB": 64.6,
-      "recipeGzipKB": 21.6,
+      "recipeKB": 69.7,
+      "recipeGzipKB": 23.3,
       "sharedBy": 2
     },
     "light-lab": {
