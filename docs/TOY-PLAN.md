@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 435 toys. 405 have a tap action today; the other 30 only hop.
+- 438 toys. 408 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 419.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 16.
+- **new** (needs its own effect): 19.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -79,8 +79,9 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
-  a QR code works, QR damage lab, Three QR codes in one, Video to 3D, Splat toolkit, Point clouds,
-  Cryo-EM map, Contour lab, Terrain in a box, Data in 3D, Climate records
+  a QR code works, QR damage lab, Three QR codes in one, Picture QR, QR from real things, Other
+  barcodes, Video to 3D, Splat toolkit, Point clouds, Cryo-EM map, Contour lab, Terrain in a box,
+  Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -3047,7 +3048,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (17)
+## Studio (20)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -3158,6 +3159,33 @@ Proposals below are suggestions; the owner may change them.
     and come back together. Read all three splits the picture into its channels and reads each code;
     an ordinary reader's result is shown beside them.
   - Sound: A soft breath as the codes slide apart and a light knock as they meet again.
+- **Picture QR** (`qr-picture`). Now: tap: Turn the tiles over. Plan: new effect (E6).
+  - Owner: The owner's Push Plan pick Q5 ("a hard yes, or a strong yes"), lane QR craft, October
+    6, 2026.
+  - Effect: Picture QR: a photo woven into a QR code as a halftone (each module's center keeps its
+    bit, the rest carries the picture). A tap turns every module's tile over in a wave out from the
+    tap; its back is the plain code, and it comes round to the picture again (3.6 s). The toy
+    measures the contrast and reads its code with jsQR at phone size and smaller; Make it scan finds
+    the closest version that scans; Save a PNG.
+  - Sound: A soft breath with a run of light wooden clicks as the tiles turn.
+- **QR from real things** (`qr-build`). Now: tap: Build it. Plan: new effect (E6).
+  - Owner: The owner's Push Plan pick Q13 ("Absolutely. This is really, really cool"), lane QR
+    craft, October 6, 2026.
+  - Effect: QR from real things: a tap builds the code from the start (6.5 s). Dominoes: every
+    module is under a domino (ebony over dark modules, ivory over light; two modules long where it
+    can), all standing on end; every row topples left to right, each domino knocking the next, and
+    they lie flat as the code. Marbles: a dark glass marble rolls in along its row into each dark
+    module, turning as it rolls, rocks once and stops. Flip tiles: the dark modules' tiles turn over
+    in a wave from the tap. Each build ends on a code that reads with jsQR.
+  - Sound: A run of wooden clacks as the dominoes fall, settling to a soft thud.
+- **Other barcodes** (`barcodes`). Now: tap: Scan it. Plan: new effect (E6).
+  - Owner: The owner's Push Plan pick Q12 ("I like the other barcodes idea"), lane QR craft, October
+    6, 2026.
+  - Effect: Other barcodes: Code 128, EAN-13 and UPC-A (our own code, with check digits and quiet
+    zones) and Data Matrix and Aztec (zxing-js). A tap sweeps a scanner's red line across the
+    symbol; each bar (or column of modules) lifts toward you as it passes and settles back (2.6 s).
+    The toy reads its own picture back with zxing-js.
+  - Sound: A soft breath as the line sweeps, then a gentle low beep.
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).
