@@ -37,6 +37,31 @@ function handles() {
   });
 }
 
+// Starts a capture and taps Cancel from inside the page the moment the status
+// shows frame `from` or later (a MutationObserver sees every status change).
+function captureAndCancelAt(page, from) {
+  return page.evaluate(
+    (from) =>
+      new Promise((resolve) => {
+        const status = document.getElementById("status");
+        const observer = new MutationObserver(() => {
+          const m = /^Capturing frame (\d+) of 40/.exec(status.textContent);
+          if (m && +m[1] >= from) {
+            observer.disconnect();
+            document.getElementById("cancel").click();
+            resolve(+m[1]);
+          } else if (!m && !/^Starting/.test(status.textContent)) {
+            observer.disconnect();
+            resolve(null);
+          }
+        });
+        observer.observe(status, { childList: true, characterData: true, subtree: true });
+        document.getElementById("capture").click();
+      }),
+    from,
+  );
+}
+
 test("ten jobs in a row and repeated Cancel leave no growing documents or handles", async ({
   page,
 }) => {
@@ -76,11 +101,10 @@ test("ten jobs in a row and repeated Cancel leave no growing documents or handle
   }
   const cancels = [];
   for (let i = 0; i < 5; i++) {
-    await page.click("#capture");
-    // Cancel at a different point mid-capture each time.
-    await expect(page.locator("#status")).toContainText("Capturing frame", { timeout: JOB });
-    await page.waitForTimeout(400 * i);
-    await page.click("#cancel");
+    // Cancel at a different point mid-capture each time: frames 2, 9, 16, 23, 30.
+    const frame = await captureAndCancelAt(page, 2 + 7 * i);
+    expect(frame).toBeGreaterThanOrEqual(2 + 7 * i);
+    expect(frame).toBeLessThan(40);
     await expect(page.locator("body")).toHaveAttribute("data-state", "failed");
     cancels.push(await measure());
   }

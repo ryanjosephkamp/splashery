@@ -165,6 +165,44 @@ async function captureAndWait(page) {
   return page.locator("body").getAttribute("data-state");
 }
 
+// Starts a capture and, from inside the page, acts the moment the status
+// shows "Capturing frame N of 40" with N at least `from` (a MutationObserver
+// sees every status change; polling from the test can miss them all on a fast
+// machine). `act`: "cancel" (taps Cancel), "hide" (the page becomes hidden) or
+// "pagehide". Resolves to the frame it acted at, or null if the job ended first.
+function captureAndActAt(page, from, act) {
+  return page.evaluate(
+    ({ from, act }) =>
+      new Promise((resolve) => {
+        const status = document.getElementById("status");
+        let done = false;
+        const check = () => {
+          if (done) return;
+          const m = /^Capturing frame (\d+) of 40/.exec(status.textContent);
+          if (m && +m[1] >= from && +m[1] < 40) {
+            done = true;
+            observer.disconnect();
+            const job = new URL(document.querySelector("iframe").src).hash;
+            if (act === "cancel") document.getElementById("cancel").click();
+            else if (act === "hide") {
+              Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
+              document.dispatchEvent(new Event("visibilitychange"));
+            } else dispatchEvent(new PageTransitionEvent("pagehide"));
+            resolve({ frame: +m[1], job });
+          } else if (/^(Done|Capture canceled|The )/.test(status.textContent)) {
+            done = true;
+            observer.disconnect();
+            resolve({ frame: null, job: null });
+          }
+        };
+        const observer = new MutationObserver(check);
+        observer.observe(status, { childList: true, characterData: true, subtree: true });
+        document.getElementById("capture").click();
+      }),
+    { from, act },
+  );
+}
+
 async function storage(page) {
   return page.evaluate(async () => ({
     local: JSON.stringify(Object.entries(localStorage).sort()),
@@ -366,11 +404,10 @@ test("Cancel mid-capture stops the job and offers no file", async ({ page, baseU
   test.setTimeout(2 * JOB);
   const { errors } = await open(page, baseURL);
   await settings(page, { preset: "orange" });
-  await page.click("#capture");
-  await expect(page.locator("#status")).toContainText(/Capturing frame \d+ of 40/, {
-    timeout: JOB,
-  });
-  await page.click("#cancel");
+  const { frame } = await captureAndActAt(page, 3, "cancel");
+  // Canceled mid-job: after frame 3 had arrived and before the last one.
+  expect(frame).toBeGreaterThanOrEqual(3);
+  expect(frame).toBeLessThan(40);
   await expect(page.locator("body")).toHaveAttribute("data-state", "failed");
   await expect(page.locator("#status")).toHaveText("Capture canceled. Nothing was saved.");
   await page.waitForTimeout(1500);
@@ -391,15 +428,9 @@ test("hiding or leaving the page aborts the job, and a late message restarts not
   test.setTimeout(2 * JOB);
   const { errors } = await open(page, baseURL);
   await settings(page);
-  await page.click("#capture");
-  await expect(page.locator("#status")).toContainText(/Capturing frame \d+ of 40/, {
-    timeout: JOB,
-  });
-  const job = await page.evaluate(() => new URL(document.querySelector("iframe").src).hash);
-  await page.evaluate(() => {
-    Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
-    document.dispatchEvent(new Event("visibilitychange"));
-  });
+  const hidden = await captureAndActAt(page, 2, "hide");
+  expect(hidden.frame).toBeGreaterThanOrEqual(2);
+  const job = hidden.job;
   await expect(page.locator("body")).toHaveAttribute("data-state", "failed");
   await expect(page.locator("#status")).toContainText("the page was hidden");
   expect(await page.evaluate(() => window.__ascHandles().iframes)).toBe(0);
@@ -421,11 +452,7 @@ test("hiding or leaving the page aborts the job, and a late message restarts not
   ).toBe(300);
   await page.evaluate(() => document.getElementById("late").remove());
   // Leaving the page (pagehide) aborts a running job too.
-  await page.click("#capture");
-  await expect(page.locator("#status")).toContainText(/Capturing frame \d+ of 40/, {
-    timeout: JOB,
-  });
-  await page.evaluate(() => dispatchEvent(new PageTransitionEvent("pagehide")));
+  expect((await captureAndActAt(page, 2, "pagehide")).frame).toBeGreaterThanOrEqual(2);
   await expect(page.locator("#status")).toContainText("the page was left");
   expect(await page.evaluate(() => window.__ascHandles())).toMatchObject({
     iframes: 0,
