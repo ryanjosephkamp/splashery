@@ -10,7 +10,7 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 439 toys. 409 have a tap action today; the other 30 only hop.
+- 439 toys. 410 have a tap action today; the other 29 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 19.
@@ -269,7 +269,7 @@ Proposals below are suggestions; the owner may change them.
     good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
-- **Dog plush** (`dog-plush`). Now: hops. Plan: keep.
+- **Dog plush** (`dog-plush`). Now: tap: Hop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
