@@ -568,7 +568,7 @@ const recipe = {
     });
 
     // ---- Names (fit: false; the program keeps them a steady size) ----
-    const px = 0.0042 / S; // a dot's pitch, toy units, at the home view
+    const px = 0.0062 / S; // a dot's pitch, toy units, at the home view
     bodies.forEach((b, ti) => {
       const text = (b.label || b.name).toUpperCase().replace(/[^0-9A-Z.,'!?\- ]/g, "");
       const dots = [];
@@ -584,10 +584,10 @@ const recipe = {
       // background. The letters are stored a little toward the home view's
       // camera (NAME_LIFT), so the sort draws them over their shadow; the
       // program takes the lift off again.
-      cloud(dots, { fit: false }, (dd) => ({ p: add(b.built, [dd[0] + px * 0.4, dd[1] - px * 0.4, 0]), scales: [px * 0.85, px * 0.85, px * 0.85], color: [0.05, 0.07, 0.12], opacity: 0.9, kind: "token", params: [ti, 3] })); // prettier-ignore
-      // (Each letter dot is four small splats, so the letters' edges stay crisp.)
-      const sub = dots.flatMap((dd) => [-0.25, 0.25].flatMap((ox) => [-0.25, 0.25].map((oy) => [dd[0] + ox * px, dd[1] + oy * px]))); // prettier-ignore
-      cloud(sub, { fit: false }, (dd) => ({ p: add(b.built, add([dd[0], dd[1], 0], mul(NAME_LIFT, 1 / S))), scales: [px * 0.3, px * 0.3, px * 0.3], color: shade, opacity: 0.97, kind: "token", params: [ti, 3.25] })); // prettier-ignore
+      cloud(dots, { fit: false }, (dd) => ({ p: add(b.built, [dd[0] + px * 0.3, dd[1] - px * 0.3, 0]), scales: [px * 0.62, px * 0.62, px * 0.62], color: [0.05, 0.07, 0.12], opacity: 0.9, kind: "token", params: [ti, 3] })); // prettier-ignore
+      // (Each letter dot is nine small splats in a square, so the letters' edges stay crisp.)
+      const sub = dots.flatMap((dd) => [-0.33, 0, 0.33].flatMap((ox) => [-0.33, 0, 0.33].map((oy) => [dd[0] + ox * px, dd[1] + oy * px]))); // prettier-ignore
+      cloud(sub, { fit: false }, (dd) => ({ p: add(b.built, add([dd[0], dd[1], 0], mul(NAME_LIFT, 1 / S))), scales: [px * 0.22, px * 0.22, px * 0.22], color: shade, opacity: 0.97, kind: "token", params: [ti, 3.25] })); // prettier-ignore
     });
 
     // The tour: the eight planets, each framed with its moons.

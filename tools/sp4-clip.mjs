@@ -174,10 +174,15 @@ for (const spec of ids) {
         g2.drawImage(c0, 0, 0);
         const title = player.motion.out?.legend?.title || "";
         const sub = player.motion.out?.legend?.items?.find((x) => x.on)?.text || "";
-        g2.font = `${Math.round(size / 22)}px sans-serif`;
-        g2.fillStyle = "#e8eef8";
-        g2.fillText(title, 8, Math.round(size / 15));
-        if (sub) g2.fillText(sub, 8, Math.round(size / 15) * 2);
+        // (Bold, on a dark band, in whole pixels, so it stays crisp at phone size.)
+        const fs = Math.round(size / 17);
+        g2.font = `600 ${fs}px sans-serif`;
+        g2.textBaseline = "top";
+        g2.fillStyle = "rgba(0, 0, 0, 0.55)";
+        g2.fillRect(0, 0, c.width, Math.round(fs * (sub ? 2.9 : 1.6)));
+        g2.fillStyle = "#ffffff";
+        g2.fillText(title, 10, Math.round(fs * 0.3));
+        if (sub) g2.fillText(sub, 10, Math.round(fs * 1.6));
         if (pickAt.has(n)) shots.push({ bmp: await createImageBitmap(c), t: n * step - before });
         if (mp4) {
           await window.__sp2Frame(n++, c.toDataURL("image/png"));
