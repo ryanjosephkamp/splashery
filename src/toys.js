@@ -1266,6 +1266,17 @@ export const TOYS = [
     tags: "galaxy galaxies hubble eso telescope whirlpool m51 pinwheel m101 phantom m74 m83 spiral real picture",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: powers-of-ten (lane Powers of ten) ----
+  {
+    id: "powers-of-ten",
+    label: "Powers of ten",
+    category: "space",
+    kind: "kit",
+    pack: "powers-of-ten",
+    labs: true,
+    tags: "powers of ten zoom scale sizes universe galaxy stars sun planets earth city garden leaf cell microscope molecule real",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.9 },
+  },
   {
     id: "saturn-v",
     label: "Saturn V",
