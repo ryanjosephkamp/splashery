@@ -43,11 +43,15 @@ const CSS = `
 .arc-pad { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 12px; pointer-events: none; }
 .arc-pad-group { display: grid; gap: 8px; pointer-events: auto; }
 .arc-pad-side { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: none; }
-.arc-pad-util { display: flex; gap: 8px; pointer-events: auto; }
+.arc-pad-util { display: flex; gap: 6px; pointer-events: auto; }
+.arc-pad > .arc-pad-util { align-self: flex-end; margin: 0 6px 7px; }
 .arc-pad-util:empty { display: none; }
 .arc-pad-util .arc-btn { height: 40px; min-width: 44px; }
 .arc-pad-util .arc-btn.arc-view { min-width: 58px; }
 body.app .arc-root[data-playmode="false"] .arc-pad-side { margin-right: 48px; }
+/* In the app's own view on a phone, its ▶ beside the stage plays and pauses the game. */
+@media (max-width: 760px) { body.app .arc-root[data-playmode="false"] .arc-pad-util .arc-pause { display: none; } }
+@media (max-width: 420px) { .arc-pad > .arc-pad-util .arc-btn { min-width: 40px; padding: 0 8px; } .arc-pad > .arc-pad-util .arc-btn.arc-view { min-width: 48px; } }
 .arc-pad-dir { grid-template-columns: repeat(3, 54px); grid-template-rows: repeat(2, 54px); }
 .arc-pad-row { grid-auto-flow: column; }
 .arc-key { width: 54px; height: 54px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.28); background: rgba(12, 14, 20, 0.5);
@@ -233,17 +237,21 @@ export class Hud {
       const label = names[a] || (a === "fire" ? "●" : a);
       right.appendChild(make(a, label, label.length > 4 ? "arc-fire arc-long" : "arc-fire"));
     }
-    // On a touch screen the 2D/3D switch and pause sit here, over the
-    // right thumb's buttons, rather than at the top (setTouch moves them).
+    // On a touch screen the 2D/3D switch and play/pause sit down here by
+    // the thumbs rather than at the top (setTouch moves them): on the
+    // bottom row between the arrows and the action buttons, or, when a
+    // game's pad has many buttons, over the action buttons.
+    const many = dirs.length + acts.length > 5;
     const side = document.createElement("div");
     side.className = "arc-pad-side";
     this.utilEl = document.createElement("div");
     this.utilEl.className = "arc-pad-util";
-    side.append(this.utilEl);
+    if (many) side.append(this.utilEl);
     if (acts.length) side.append(right);
-    box.append(left, side);
+    if (many) box.append(left, side);
+    else box.append(left, this.utilEl, side);
     // Many buttons (a 3D puzzle's turns and tips): smaller, so they fit a phone.
-    if (dirs.length + acts.length > 5) box.classList.add("arc-pad-many");
+    if (many) box.classList.add("arc-pad-many");
   }
 
   // A game's own choices (a material to paint with): a row of buttons.

@@ -41,6 +41,9 @@ test.describe("on a phone", () => {
     page,
   }) => {
     await open(page, "shardball");
+    await page.tap(".arc-enter");
+    await expect.poll(() => read(page, () => window.__arc.playMode)).toBe(true);
+    await page.evaluate(() => window.__arc.pause(true));
     const at = await read(page, () => {
       const v = document.querySelector(".arc-view").getBoundingClientRect();
       const p = document.querySelector(".arc-pause").getBoundingClientRect();
@@ -52,8 +55,8 @@ test.describe("on a phone", () => {
     // Launch, not Go.
     expect(await page.textContent(".arc-key.arc-fire")).toBe("Launch");
     const label = () => page.getAttribute(".arc-pause", "aria-label");
-    expect(await label()).toBe("Play");
     await page.evaluate(() => (window.__arc.autopilot = true));
+    await expect.poll(label).toBe("Play");
     await page.tap(".arc-pause");
     await expect.poll(() => read(page, () => window.__arc.mode)).toBe("play");
     await expect.poll(label).toBe("Pause");
