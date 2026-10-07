@@ -4771,5 +4771,127 @@
       "checked": "October 5, 2026",
       "note": "Round 3 (the owner: \"I'm fine with the Helsinki open reality mesh\"): tools/geo-city.mjs reads the level-18 tiles of Helsinki3D_2017_OBJ_672496x2.zip by range requests, crops the block and samples it into splats with the Studio's converter. Anything made from it stays CC BY 4.0 with this credit."
     }
+  ],
+  "powersOfTenSamples": [
+    {
+      "id": "pot-aerial-s2",
+      "files": [
+        "assets/toys/powers-of-ten/aerial-6_0.jpg",
+        "assets/toys/powers-of-ten/aerial-5_5.jpg",
+        "assets/toys/powers-of-ten/aerial-5_0.jpg",
+        "assets/toys/powers-of-ten/aerial-4_5.jpg",
+        "assets/toys/powers-of-ten/aerial-4_0.jpg"
+      ],
+      "toy": "powers-of-ten",
+      "name": "EOxCloudless 2016 (Sentinel-2 cloudless), cut round the Haupt Garden",
+      "author": "EOX IT Services GmbH (contains modified Copernicus Sentinel data 2016)",
+      "page": "https://cloudless.eox.at",
+      "license": "CC BY 4.0",
+      "checked": "October 6, 2026",
+      "note": "Layer s2cloudless_3857 of EOX's WMTS (its capabilities give CC BY 4.0 for 2016; 2017 on is NC, not used). Cut by tools/pot-maps.mjs."
+    },
+    {
+      "id": "pot-aerial-naip",
+      "files": ["assets/toys/powers-of-ten/aerial-3_5.jpg"],
+      "toy": "powers-of-ten",
+      "name": "USGS Imagery Only (NAIP)",
+      "author": "USDA, USGS The National Map",
+      "page": "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer",
+      "license": "Public domain",
+      "checked": "October 6, 2026",
+      "note": "Exported by tools/pot-maps.mjs."
+    },
+    {
+      "id": "pot-earth",
+      "files": ["assets/toys/powers-of-ten/earth-hemisphere.jpg"],
+      "toy": "powers-of-ten",
+      "name": "Blue Marble: Next Generation (USGS Imagery Only at its smallest scales)",
+      "author": "NASA Earth Observatory (Reto Stöckli), via USGS The National Map",
+      "page": "https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation",
+      "license": "Public domain",
+      "checked": "October 6, 2026",
+      "note": "The half of the Earth round the garden, 180 by 180 degrees; tools/pot-maps.mjs."
+    },
+    {
+      "id": "pot-aerial-dc",
+      "files": [
+        "assets/toys/powers-of-ten/aerial-3_0.jpg",
+        "assets/toys/powers-of-ten/aerial-2_5.jpg",
+        "assets/toys/powers-of-ten/aerial-2_0.jpg",
+        "assets/toys/powers-of-ten/aerial-1_5.jpg"
+      ],
+      "toy": "powers-of-ten",
+      "name": "Aerial Photography (Orthophoto) 2023, 3 inch",
+      "author": "District of Columbia, Office of the Chief Technology Officer",
+      "page": "https://opendata.dc.gov/",
+      "license": "CC BY 4.0",
+      "checked": "October 6, 2026",
+      "note": "Its Open Data DC record's license (CC-BY-4.0). Exported from the Ortho_2023 image service by tools/pot-maps.mjs."
+    },
+    {
+      "id": "pot-stars",
+      "files": ["assets/toys/powers-of-ten/stars-500pc.bin"],
+      "toy": "powers-of-ten",
+      "name": "HYG database v4.4, stars within 500 pc",
+      "author": "David Nash (astronexus)",
+      "page": "https://codeberg.org/astronexus/hyg",
+      "license": "CC BY-SA 4.0",
+      "checked": "October 6, 2026",
+      "note": "tools/pot-stars.mjs; the file stays CC BY-SA 4.0."
+    },
+    {
+      "id": "pot-crown",
+      "files": ["assets/toys/powers-of-ten/micro-crown-m0_65.jpg"],
+      "toy": "powers-of-ten",
+      "name": "Acer shirasawanum 'Aureum'",
+      "author": "Megan Hansen (Flickr)",
+      "page": "https://www.flickr.com/photos/24495410@N03/4714538293",
+      "license": "CC BY-SA 2.0",
+      "checked": "October 6, 2026",
+      "note": "Its live Flickr page gives CC BY-SA 2.0; the cut stays CC BY-SA 2.0. No scale given: its middle leaf is taken as 9 cm. Cut by tools/pot-micro.mjs."
+    },
+    {
+      "id": "pot-leaf",
+      "files": [
+        "assets/toys/powers-of-ten/micro-leaf-m1_15.jpg",
+        "assets/toys/powers-of-ten/micro-leaf-m1_6.jpg"
+      ],
+      "toy": "powers-of-ten",
+      "name": "Golden Full Moon Maple",
+      "author": "susteph (Flickr)",
+      "page": "https://www.flickr.com/photos/28012136@N08/2649442904",
+      "license": "CC BY 2.0",
+      "checked": "October 6, 2026",
+      "note": "Its live Flickr page gives CC BY 2.0. No scale given: the leaf is taken as 9 cm across. Cut by tools/pot-micro.mjs."
+    },
+    {
+      "id": "pot-cells",
+      "files": [
+        "assets/toys/powers-of-ten/micro-cells-m3_8.jpg",
+        "assets/toys/powers-of-ten/micro-cells-m4_3.jpg",
+        "assets/toys/powers-of-ten/micro-cells-m4_8.jpg"
+      ],
+      "toy": "powers-of-ten",
+      "name": "Arabidopsis thaliana plant cells containing chloroplasts, LM",
+      "author": "Fernán Federici (Wellcome Collection)",
+      "page": "https://wellcomecollection.org/works/gwmfux6b",
+      "license": "CC BY 4.0",
+      "checked": "October 6, 2026",
+      "note": "Width of image 200 µm (its page). Cut by tools/pot-micro.mjs."
+    },
+    {
+      "id": "pot-chloroplast",
+      "files": [
+        "assets/toys/powers-of-ten/micro-chloroplast-m5_5.jpg",
+        "assets/toys/powers-of-ten/micro-chloroplast-m6.jpg"
+      ],
+      "toy": "powers-of-ten",
+      "name": "Chloroplast in a bean leaf, TEM",
+      "author": "Kevin Mackenzie, University of Aberdeen (Wellcome Collection)",
+      "page": "https://wellcomecollection.org/works/bx3dctp2",
+      "license": "CC BY 4.0",
+      "checked": "October 6, 2026",
+      "note": "Width of image 4.5 µm (its page). Cut by tools/pot-micro.mjs."
+    }
   ]
 }
