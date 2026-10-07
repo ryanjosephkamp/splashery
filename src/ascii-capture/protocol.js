@@ -6,12 +6,38 @@
 // lab -> host: start { toy, options, capture }, next { index } (one frame at a time)
 // host -> lab: ready, loaded { renderer, profile }, frame { index, width, height, pixels }, error { reason }
 
-// The three presets, each a fresh toy animation.
-export const PRESETS = Object.freeze({
+import LIST from "./toys.json" with { type: "json" };
+
+// The three original presets, each a fresh toy animation, exactly as they were.
+export const ORIGINAL = Object.freeze({
   grapes: Object.freeze({ toy: "grapes", options: null, label: "Grapes" }),
   orange: Object.freeze({ toy: "orange", options: Object.freeze({ style: "whole" }), label: "Whole orange" }), // prettier-ignore
   strawberry: Object.freeze({ toy: "strawberry", options: null, label: "Strawberry" }),
 });
+
+// Lane ASCII r2: every toy in toys.json is a candidate preset (the lab lists
+// only those that passed tools/asc2-check.mjs; the capture page accepts any
+// candidate, so the check can run them all). Its optional `camera` replaces
+// the toy's home camera; the shelf and `columns` are for the lab's picker.
+export const LISTED = Object.freeze(
+  Object.fromEntries(
+    LIST.toys.map((t) => [
+      t.id,
+      Object.freeze({
+        toy: t.id,
+        options: null,
+        label: t.label,
+        shelf: t.shelf,
+        columns: t.columns,
+        ...(t.camera ? { camera: Object.freeze({ ...t.camera }) } : {}),
+        check: t.check ?? null,
+      }),
+    ]),
+  ),
+);
+export const SHELVES = Object.freeze(LIST.shelves.map((s) => ({ ...s })));
+
+export const PRESETS = Object.freeze({ ...ORIGINAL, ...LISTED });
 
 // Fixed capture settings: 420 pixels square, 40 frames at 10 fps (four
 // seconds), one tap at frame 4, the home camera.
