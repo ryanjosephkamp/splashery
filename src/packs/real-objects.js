@@ -961,7 +961,7 @@ const SC_G = 7.5;
 
 // The can's radius at height y (from the scan): straight sides up to y 0.6, the neck tapering
 // in to the rim (radius 0.37, its top at y 0.8).
-const scRadius = (y) => (y > 0.74 ? 0.37 : y > 0.6 ? mix(0.431, 0.364, smoothstep(0.6, 0.74, y)) : 0.431); // prettier-ignore
+const scRadius = (y) => (y > 0.74 ? 0.37 : y > 0.6 ? 0.431 - 0.067 * smoothstep(0.6, 0.74, y) : 0.431); // prettier-ignore
 // The suds' tongues down the side: [angle about y from +Z (the opening's side), how far down
 // they reach, half width (radians)]. The front runs longest.
 const SC_TONGUES = [
@@ -992,7 +992,7 @@ function addSuds(k) {
     return lit([0.97 * b, 0.92 * b, 0.8 * b * shade], n, { soft: 0.35, sheen: 0.25, tight: 18 });
   };
   const at = (u) => clamp(u / len, 0, 0.985);
-  const N = Math.round(k.count * 0.055);
+  const N = Math.round(k.count * 0.045);
   addCloud(k, N, (i) => {
     const r1 = hash(i, 11);
     const r2 = hash(i, 12);
@@ -1080,11 +1080,13 @@ const SODA_CAN = {
     void rr;
     out.parts.tab = { quat: qTab, offset: canOff };
     // The opening shows as the tab's nose pushes the panel in, and closes up again at the end.
-    const spill = on ? seg(s, SC.spill[0], SC.spill[1]) : 0;
-    out.morph = [ease(seg(s, 0.95, 1.08)) * (1 - ease(seg(s, 3.5, 3.9))), spill, 0, 0];
-    // The suds: once they have run down, they shrink back into the foam and are gone.
+    // The suds: once they have run down, they shrink back into the foam and are gone; then
+    // their channel and place go back to rest (unseen), so the tap ends where it started.
     const gone = on ? ease(seg(s, SC.gone[0], SC.gone[1])) : 0;
-    out.parts.suds = { visible: on && s > SC.spill[0] ? 1 - gone : 0, offset: [0, -0.04 * gone, 0] }; // prettier-ignore
+    const left = on && gone < 1;
+    const spill = left ? seg(s, SC.spill[0], SC.spill[1]) : 0;
+    out.morph = [ease(seg(s, 0.95, 1.08)) * (1 - ease(seg(s, 3.5, 3.9))), spill, 0, 0];
+    out.parts.suds = { visible: left && s > SC.spill[0] ? 1 - gone : 0, offset: [0, left ? -0.04 * gone : 0, 0] }; // prettier-ignore
     // The jet: foam leaves the opening from spray[0] to spray[1]; every bit flies on its own arc,
     // and the bits in the air are drawn as overlapping pieces along the flow.
     const tokens = [];
@@ -1157,7 +1159,7 @@ const SODA_CAN = {
     const scan = SCANS.get("soda-can");
     const can = k.part("can", { pivot: [0, SC.floor, 0] });
     const tab = k.part("tab", { pivot: SC.rivet, axis: [1, 0, 0] });
-    addScan(k, scan, { share: 0.74, parts: [can, tab] });
+    addScan(k, scan, { share: 0.7, parts: [can, tab] }); // (0.74 before Fix9's suds)
     // The opening: a dark rounded slot in front of the rivet, fading in on channel 0 (the panel
     // pushed in), just above the lid.
     addCloud(k, Math.round(k.count * 0.008), (i, n) => {
