@@ -1,0 +1,136 @@
+{
+  "toy": "solar-orbits",
+  "checked": "2026-10-07",
+  "summary": "The Sun, the eight planets, six large moons, four comets and 4,000 real asteroids, each placed for the chosen date from published JPL orbital elements and moved by Kepler's laws. Against JPL Horizons the planets are within 0.2 degrees from 1850 to 2049, the moons within about 6 degrees, and the asteroids and comets within hundredths of a degree near the snapshot's date, drifting to a degree or two over decades because the planets' pulls on them are left out. The readable scale squeezes distances and enlarges the bodies, and says so; the comets' tails are a picture.",
+  "claims": [
+    {
+      "claim": "The planets are placed by JPL's Keplerian elements for 1800 to 2050.",
+      "how": "Table 1's elements and their rates per century give each orbit for the date; Kepler's equation gives the heliocentric position in the J2000 ecliptic (the night sky's code, src/sky/astro.js). The Earth is the Earth-Moon barycenter.",
+      "where": "src/space/kepler.js:47",
+      "sources": [
+        {
+          "title": "Approximate Positions of the Planets (E. M. Standish), Table 1",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "says": "Keplerian elements and their rates, with respect to the mean ecliptic and equinox of J2000, valid for the time-interval 1800 AD - 2050 AD."
+        },
+        {
+          "title": "Horizons System",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "says": "Heliocentric J2000 ecliptic positions of the eight planets on January 1, 1850, June 15, 1950, January 1, 2000, October 7, 2026 and December 31, 2049 (recorded in the test)."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sp4.spec.mjs:185",
+      "note": "On those five dates Mercury, Venus, the Earth and Mars are within 0.02 degrees of Horizons, Uranus and Neptune within 0.03, Jupiter within 0.09 and Saturn within 0.17; every distance within 0.13%."
+    },
+    {
+      "claim": "Asteroids and comets move on their own orbits by Kepler's laws, from the JPL Small-Body Database's elements.",
+      "how": "Each body's osculating elements (a, e, i, node, argument of perihelion, mean anomaly at an epoch) are carried to the date by the two-body problem: the mean anomaly grows at n = k / a^1.5 (k the Gaussian constant) and Kepler's equation gives the place.",
+      "where": "src/space/kepler.js:77",
+      "sources": [
+        {
+          "title": "SBDB Query API and SBDB API",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
+          "says": "Orbital elements of numbered asteroids (a, e, i, om, w, ma at the epoch), and each comet's orbit solution."
+        },
+        {
+          "title": "Horizons System",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "says": "Positions of Ceres, Vesta, Halley, Encke and 67P on several dates (recorded in the test)."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/sp4.spec.mjs:200",
+      "note": "Near the snapshot's epoch (2026) Ceres and Vesta are within 0.01 degrees of Horizons, and 67P at its 2015 perihelion within 0.01. Ceres is 2 degrees off in 2000 and 1.6 in 2045; Halley at its 1986 perihelion 3.2 degrees off (from its 1968 orbit solution, it arrives about a day early)."
+    },
+    {
+      "claim": "The asteroids are an honest sample of the real catalog.",
+      "how": "A seeded uniform random sample of 4,000 of the 894,648 numbered asteroids whose orbits' semi-major axes are under 5.6 au (99.9% of the 895,910 numbered ones), plus Ceres, Pallas, Vesta and Hygiea, the largest four. Nothing is placed by hand: the Kirkwood gaps, the Hildas and the Trojans 60 degrees ahead of and behind Jupiter show because they are in the catalog.",
+      "where": "tools/sp4-orbits.mjs:60",
+      "sources": [
+        {
+          "title": "SBDB Query API",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
+          "says": "All numbered asteroids with their orbit class (MBA, IMB, OMB, TJN, MCA, APO, ATE, AMO) and elements at the common epoch JD 2461200.5."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp4.spec.mjs:261",
+      "note": "The test checks that the main belt is 90 to 99% of the sample, that the 3:1 Kirkwood gap at 2.50 au is nearly empty, and that the Trojans sit in the two clouds round Jupiter's L4 and L5 points."
+    },
+    {
+      "claim": "The asteroids move along their orbits on the graphics chip, by the same Kepler step.",
+      "how": "Each asteroid splat stores its place at the snapshot's epoch, its semi-major axis and its velocity's direction (12-bit). Every frame the GPU program recovers its speed by the vis-viva law, the orbit's shape from its place and velocity, and solves Kepler's equation for the date.",
+      "where": "src/space/orbit-field.js:104",
+      "sources": [
+        {
+          "title": "Eccentricity vector",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eccentricity_vector",
+          "says": "The eccentricity vector e = (v × h) / mu - r / |r| points from apoapsis to periapsis and has the orbit's eccentricity as its length."
+        },
+        {
+          "title": "Vis-viva equation",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Vis-viva_equation",
+          "says": "v² = GM (2 / r - 1 / a)."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sp4.spec.mjs:236",
+      "note": "Its JavaScript twin (propagateStored), fed float32 places and the 12-bit directions, agrees with the full-precision orbit to well under a degree across 1800 to 2050."
+    },
+    {
+      "claim": "The Moon, Jupiter's four large moons and Titan are where JPL's satellite elements put them.",
+      "how": "Mean elements at J2000 with the apsis and node turning at their listed periods, in each planet's Laplace plane (the Moon's in the ecliptic). The Moon's period is sidereal; Io's and Europa's periapses regress (the Laplace resonance holds them), so their apsis periods run backward. Titan uses its Horizons osculating elements of October 7, 2026 at the table's mean period.",
+      "where": "src/space/kepler.js:154",
+      "sources": [
+        {
+          "title": "Planetary Satellite Mean Elements",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "says": "a, e, ω, M, i, node at epoch 2000-01-01.5, the period, the apsis and node precession periods, and the Laplace plane's pole."
+        },
+        {
+          "title": "Horizons System",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "says": "Planet-centered positions of the Moon, Io, Europa, Ganymede, Callisto and Titan from 1900 to 2049 (recorded in the test)."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/sp4.spec.mjs:222",
+      "note": "Ganymede and Callisto are within 0.2 degrees, Io within 2.6, Titan within 3.1, the Moon within 5.5 and Europa within 5.9 (the Sun's pull on the Moon and the moons' pulls on each other are left out). Triton is left out: neither the table nor a fixed orbit stays within a few degrees across the years."
+    },
+    {
+      "claim": "The date runs from 1800 to 2050, and the speed from paused to a year each second.",
+      "how": "The date slider over the stage spans January 1, 1800 to December 31, 2050, the years Table 1 is made for; the Speed slider runs from paused through an hour a second to 365.25 days a second.",
+      "where": "src/packs/space-r4.js:61",
+      "sources": [
+        {
+          "title": "Approximate Positions of the Planets (E. M. Standish)",
+          "publisher": "JPL Solar System Dynamics",
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "says": "Table 1 is valid for the time-interval 1800 AD - 2050 AD."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp4.spec.mjs:314",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The readable scale is not to scale: each distance from the Sun is drawn as ln(1 + r / 0.25 au), so the inner planets spread out (directions stay true); the planets and moons are drawn hundreds of times larger (their sizes go as the 0.4th power of the real ones), the Sun smaller in proportion, and the moons closer to their planets. The legend says which scale is on.",
+    "The true scale draws distances and sizes on one scale; the planets are then far smaller than a pixel from the whole view (each shows as a speck), and a fly to one zooms in up to about a thousand times.",
+    "The orbit lines are drawn for the snapshot's date; the planets' orbits turn slowly (Mercury's perihelion moves about half a degree in 250 years), so far from 2026 a planet sits a hair off its line.",
+    "The planets' spins and their seasons' tilts are not shown; Jupiter's, Saturn's, Uranus's and Neptune's colors are bands by latitude, not maps, and Venus is drawn as its cloud tops in one color.",
+    "A comet's tail points away from the Sun, as real tails do, but its length (growing inside about 4 au) and look are a picture.",
+    "The asteroids, comets and moons feel only their primary's pull (the two-body problem), so they drift from their real places over decades; the planets' Table 1 already folds in the planets' long-term changes."
+  ],
+  "fixes": []
+}

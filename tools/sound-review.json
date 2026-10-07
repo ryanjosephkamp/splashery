@@ -3622,6 +3622,14 @@
       "plan": "Now: the same lidar sweep with the airy wind at half its level and the twinkle a little quieter (Sound D).",
       "candidates": [],
       "round": "2026-10-06"
+    },
+    "solar-orbits": {
+      "status": "ready",
+      "said": "(New toy, lane Space r4, October 7, 2026.)",
+      "note": "A new labs toy: the solar system on real orbits.",
+      "plan": "Space is silent: a soft, low breath as the view flies to the next planet, like the other real-space toys.",
+      "candidates": [],
+      "round": "2026-10-07"
     }
   }
 }

@@ -4908,6 +4908,28 @@
       "note": "The Draco-compressed GLB (all gray, no texture) decoded, cut into its pieces and colored by tools/sp2-rockets.mjs; the cockpit windows' tiny frames left out."
     },
     {
+      "id": "solar-orbits",
+      "files": ["assets/toys/solar-orbits/orbits.json"],
+      "toy": "solar-orbits",
+      "name": "Orbital elements: 4,004 numbered asteroids (a seeded random sample with a < 5.6 au, plus Ceres, Pallas, Vesta and Hygiea), comets 1P/Halley, 2P/Encke, 9P/Tempel 1 and 67P/Churyumov-Gerasimenko, and planetary satellite mean elements",
+      "author": "JPL Solar System Dynamics (Small-Body Database, Planetary Satellite Mean Elements, Horizons)",
+      "page": "https://ssd.jpl.nasa.gov/tools/sbdb_query.html",
+      "license": "Public domain (NASA/JPL scientific data)",
+      "checked": "October 7, 2026",
+      "note": "A dated snapshot made by tools/sp4-orbits.mjs from the SBDB Query API and the SBDB API (https://ssd-api.jpl.nasa.gov/), and https://ssd.jpl.nasa.gov/sats/elem/; Titan's elements from Horizons. Nothing is fetched at run time."
+    },
+    {
+      "id": "solar-orbits-maps",
+      "files": ["assets/toys/solar-orbits/maps/"],
+      "toy": "solar-orbits",
+      "name": "128 x 64 copies of the Space r2 color maps of Mercury, Earth, Mars, the Moon, Io, Europa, Ganymede and Callisto",
+      "author": "NASA and USGS (as credited for the real worlds)",
+      "page": "https://astrogeology.usgs.gov/",
+      "license": "Public domain",
+      "checked": "October 7, 2026",
+      "note": "Averaged down from assets/toys/real-worlds/*-color.jpg by tools/sp4-orbits.mjs; the sources and their licenses are the real worlds' entries above."
+    },
+    {
       "id": "star-systems",
       "files": ["assets/toys/star-systems/systems.json"],
       "toy": "star-systems",

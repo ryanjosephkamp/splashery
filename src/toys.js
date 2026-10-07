@@ -1309,6 +1309,19 @@ export const TOYS = [
   },
   // ---- End of pack: space-r2 ----
 
+  // ---- Pack: space-r4 (lane Space r4) ----
+  {
+    id: "solar-orbits",
+    label: "The solar system on real orbits",
+    category: "space",
+    kind: "kit",
+    pack: "space-r4",
+    labs: true,
+    tags: "solar system orbits orrery planets kepler jpl real date asteroid belt asteroids comets halley moons jupiter saturn true scale",
+    camera: { yaw: 0.35, pitch: 0.75, roll: 0, distance: 2.9 },
+  },
+  // ---- End of pack: space-r4 ----
+
   // ---- Pack: tiny ----
   // (entries for src/packs/tiny.js go here)
   {

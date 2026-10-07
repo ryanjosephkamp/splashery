@@ -2739,6 +2739,13 @@
       "sound": "Space is silent: a soft breath as the view flies in.",
       "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
+    "solar-orbits": {
+      "v": "keep",
+      "owner": "The Operator's brief of October 7, 2026 (lane Space r4; labs only).",
+      "effect": "The Sun, the eight planets, six large moons, four comets and 4,000 sampled real asteroids on their real Keplerian orbits (JPL elements) for any date from 1800 to 2050: a date slider, a speed from paused to a year a second, a readable scale (labeled, not to scale) and a true scale. A tap flies to the next planet (the system grows about it, turned so its sunlit side shows), and after Neptune back out.",
+      "sound": "Space is silent: a soft breath as the view flies.",
+      "improved": "Space r4: new toy (labs). The asteroids move on the graphics chip by Kepler's equation (src/space/orbit-field.js); the data is a dated snapshot (tools/sp4-orbits.mjs)."
+    },
     "star-systems": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"more stellar systems, more planets\"; lane Space r2; labs only).",
