@@ -38,6 +38,7 @@
 // the splats sort the way they show (the mirror's flashing, fixed in r3).
 
 import { songTransport } from "./song-record.js";
+import { FILL } from "./photo-3d-core.js";
 
 export const MAX_SECONDS = 8;
 export const CLIP_FPS = { low: 12, mid: 15, high: 24, max: 24 };
@@ -1255,6 +1256,47 @@ export const movingTransport = {
   },
 };
 
+// Live r7: the splats' sizes for a cols by rows grid `width` wide whose
+// depth (0..1) at cell (i, j) is at(i, j), lifted by up to `full`, as Photo
+// to 3D sizes its splats (FILL, the 1.7-cell cap and 0.85 beside a cut).
+// Neighbors whose depth differs by more than CUT_MEAN are on different
+// surfaces. Returns the diameters (recipe units).
+const CUT_MEAN = 0.03;
+const shadeHex = (hex, f) => {
+  const n = parseInt(hex.slice(1), 16);
+  return [(((n >> 16) & 255) / 255) * f, (((n >> 8) & 255) / 255) * f, ((n & 255) / 255) * f];
+};
+
+export function splatSizes(cols, rows, width, full, at) {
+  const cell = width / cols;
+  const d = new Float32Array(cols * rows);
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) d[j * cols + i] = at(i, j);
+  const out = new Float32Array(cols * rows);
+  for (let j = 0; j < rows; j++)
+    for (let i = 0; i < cols; i++) {
+      const c = j * cols + i;
+      let sum = 0;
+      let k = 0;
+      for (const [di, dj] of [
+        [-1, 0],
+        [1, 0],
+        [0, -1],
+        [0, 1],
+      ]) {
+        const x = i + di;
+        const y = j + dj;
+        if (x < 0 || y < 0 || x >= cols || y >= rows) continue;
+        const dd = d[y * cols + x] - d[c];
+        if (Math.abs(dd) > CUT_MEAN) continue;
+        sum += Math.hypot(cell, dd * full);
+        k++;
+      }
+      const base = k ? sum / k : cell * 1.15;
+      out[c] = FILL * Math.min(base, 1.7 * cell) * (k < 4 ? 0.85 : 1);
+    }
+  return out;
+}
+
 // Studio media: "Show the original": the clip's own flat frames in a corner card (src/compare.js,
 // loaded only when it is switched on), the frame the 3D one shows.
 function showOriginal(clip) {
@@ -1281,7 +1323,12 @@ function showOriginal(clip) {
 
 export const MOVING_PHOTO = {
   alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip,
-  density: 1.25, // r6: a quarter more splats than most, for a finer picture (see the top)
+  // r6: a quarter more splats than most, for a finer picture (see the top).
+  // Live r7: half as many again, as Photo to 3D takes, so on a high device
+  // too the grid is as fine as the clip (640 by 360; it was 600 by 337).
+  density: 1.5,
+  // Live r7: the labs' sharp kernel (a flatter top and a crisper edge).
+  kernel: "sharp",
   turntable: false,
   options: [
     { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.6 },
@@ -1444,11 +1491,18 @@ export const MOVING_PHOTO = {
     // Each splat rests at its average depth over the clip (see the top).
     const mean = (u, v) => clip.mean[Math.min(clip.h - 1, Math.floor(v * clip.h)) * clip.w + Math.min(clip.w - 1, Math.floor(u * clip.w))]; // prettier-ignore
     const items = [];
+    // Live r7 (the owner's note of October 6, 2026: "much sharper … match
+    // the sharpness of the photo to 3d toy"): each splat is sized as Photo to
+    // 3D sizes its own (photo-3d-core.js): FILL times the mean distance to
+    // its neighbors on the same surface (here the clip's average depth),
+    // never more than 1.7 cells, and a little smaller beside a cut so the
+    // edge stays crisp (was 1.2 cells everywhere).
+    const sizes = splatSizes(cols, rows, width, full, (i, j) => mean((i + 0.5) / cols, (j + 0.5) / rows)); // prettier-ignore
     for (let j = 0; j < rows; j++)
       for (let i = 0; i < cols; i++) {
         const u = (i + 0.5) / cols;
         const v = (j + 0.5) / rows;
-        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * mean(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.2) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], pattern: false }); // prettier-ignore
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * mean(u, v)], n: [0, 0, 1], size: sizes[j * cols + i] / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], pattern: false }); // prettier-ignore
       }
     // A backing layer at the farthest depth near each place, in the frame's
     // own colors: where a near part stands forward, what it uncovers from
@@ -1464,15 +1518,26 @@ export const MOVING_PHOTO = {
       for (let i = 0; i < cols; i += 2) {
         const u = (i + 1) / cols;
         const v = (j + 1) / rows;
-        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, -0.02], n: [0, 0, 1], size: ((width / cols) * 2.8) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, 0.001], pattern: false }); // prettier-ignore
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, -0.02], n: [0, 0, 1], size: ((width / cols) * 2.2) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, 0.001], pattern: false }); // prettier-ignore
       }
     k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
-    // A thin dark frame, like a screen's.
+    // A thin dark frame, like a screen's. (Live r7: flat sheets of exact
+    // discs, front and back, so its edges are straight and clean, as the
+    // splat mirror's; a box's random splats gave it a fuzzy, beaded edge.)
     const f = 0.05;
     const w = 1 + f;
     const h = height / 2 + f;
-    const bar = (x, y, sx, sy) =>
-      k.add(k.box(sx, sy, 0.05), { pos: [x, y, -0.03], color: "#22262c", share: 0.008, even: true }); // prettier-ignore
+    const bar = (x, y, sx, sy) => {
+      const step = 0.009;
+      const nx = Math.max(2, Math.round(sx / step));
+      const ny = Math.max(2, Math.round(sy / step));
+      const list = [];
+      for (const [z, n, tone] of [[0.0, [0, 0, 1], 1], [-0.05, [0, 0, -1], 0.85]])
+        for (let jj = 0; jj < ny; jj++)
+          for (let ii = 0; ii < nx; ii++)
+            list.push({ p: [x + ((ii + 0.5) / nx - 0.5) * sx, y + ((jj + 0.5) / ny - 0.5) * sy, z - 0.03], n, flat: 0.03, size: (step * 0.75) / 0.01, color: shadeHex("#22262c", tone), opacity: 1, pattern: false }); // prettier-ignore
+      k.cloud({ share: list.length / k.count, pattern: false, jitter: 0 }, (rand, i) => list[i] || null); // prettier-ignore
+    };
     bar(0, h - f / 2, 2 * w, f);
     bar(0, -h + f / 2, 2 * w, f);
     bar(-w + f / 2, 0, f, 2 * h);
