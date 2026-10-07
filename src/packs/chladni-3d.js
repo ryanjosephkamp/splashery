@@ -316,7 +316,11 @@ export class Beads {
 
 const HALF = 0.8; // the cell's half-width in recipe units
 const LIFT = HALF + 0.04; // the beads' offsets reach this far
-const RING_SECS = 7; // a tap rings the transducer this long
+const RING_SECS = 7;
+// Dyed beads (labs often use colored or fluorescent ones), amber so they
+// read on the light stage and the dark one alike.
+const BEAD_A = "#c8701f";
+const BEAD_B = "#eba443"; // a tap rings the transducer this long
 const STIR_SECS = 1.0; // and first swirls a settled cell this long
 
 const CELL = { beads: null, cols: 1, rows: 1, home: null, tone: null, img: null, version: 0, last: null, taps: 0, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: false, p: 0, frames: 0 }; // prettier-ignore
@@ -345,7 +349,7 @@ const cellScreen = {
       CELL.img = g.createImageData(cols * 2, rows);
       const px = CELL.img.data;
       for (let i = 0; i < beads.n; i++) {
-        const c = mix("#f4ead8", "#ffffff", tone[i]).map((v) => Math.round(v * 255));
+        const c = mix(BEAD_A, BEAD_B, tone[i]).map((v) => Math.round(v * 255));
         const o = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
         px[o] = c[0];
         px[o + 1] = c[1];
@@ -506,7 +510,7 @@ export const CHLADNI_CELL = {
     for (let i = 0; i < n; i++) {
       for (let a = 0; a < 3; a++) home[i * 3 + a] = (k.rand() - 0.5) * 0.04;
       tone[i] = k.rand();
-      items.push({ p: [home[i * 3], home[i * 3 + 1], home[i * 3 + 2]], color: mix("#f4ead8", "#ffffff", tone[i]), size: 0.42 + 0.22 * tone[i], opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, LIFT], pattern: false }); // prettier-ignore
+      items.push({ p: [home[i * 3], home[i * 3 + 1], home[i * 3 + 2]], color: mix(BEAD_A, BEAD_B, tone[i]), size: 0.42 + 0.22 * tone[i], opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, LIFT], pattern: false }); // prettier-ignore
     }
     k.cloud({ share: n / k.count, size: 0.5, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
     Object.assign(CELL, { beads, cols, rows, home, tone, img: null, version: CELL.version + 1 });
