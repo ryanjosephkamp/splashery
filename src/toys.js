@@ -1566,6 +1566,8 @@ export const TOYS = [
     pack: "lattices",
     labs: true,
     tags: "orbital atlas electron hydrogen wave function quantum s p d f g 4d 5f 5g 6d 7p node phase cut chemistry",
+
+    camera: { yaw: 0, pitch: 0.12, roll: 0, distance: 3.2 },
   },
   // ---- Pack: molecule-viewer (lane Molecule viewer) ----
   {

@@ -155,12 +155,12 @@ test("the Unit cells toy builds every crystal at every size, and every view", as
     for (const cells of [1, 4]) {
       const r = await build("unit-cells", { crystal, cells });
       expect(r.buf.count, `${crystal} ${cells}`).toBeGreaterThan(20000);
-      for (const v of r.buf.pos) expect(Number.isFinite(v)).toBe(true);
-      expect(r.data.zoom).toBeGreaterThanOrEqual(1);
+      expect(r.buf.pos.every(Number.isFinite), `${crystal} ${cells}`).toBe(true);
+      expect(r.kit.data.zoom).toBeGreaterThanOrEqual(1);
     }
   for (const thermal of ["true", "magnified"]) {
     const r = await build("unit-cells", { crystal: "graphite", thermal });
-    expect(r.data.thermal).toBe(true);
+    expect(r.kit.data.thermal).toBe(true);
   }
 });
 
@@ -340,11 +340,11 @@ test("samples follow |psi|²: the radius from r²R², the direction from Y² (4d
   }
 });
 
-test("the Orbital atlas builds every orbital, with both phase colors where psi changes sign", async () => {
+test("the Orbital atlas builds every orbital, with finite positions", async () => {
   for (const id of orbitalList()) {
     const r = await build("orbital-atlas", { orbital: id }, 8000);
     expect(r.buf.count, id).toBeGreaterThan(6000);
-    for (const v of r.buf.pos) expect(Number.isFinite(v), id).toBe(true);
+    expect(r.buf.pos.every(Number.isFinite), id).toBe(true);
   }
 });
 

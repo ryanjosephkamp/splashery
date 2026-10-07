@@ -2917,8 +2917,8 @@
     "orbital-atlas": {
       "v": "new",
       "owner": "The Operator's brief of October 7, 2026 (BACKLOG.md, \"More crystal lattices and electron orbitals\"; ROADMAP.md, \"Now\", item 4; lane Lattices and orbitals; labs only).",
-      "effect": "Every hydrogen orbital of n = 1 to 5 (s, p, d, f, g) and 6s, 6p, 6d, 7s, 7p (68), grouped by shell, drawn like the Electron orbital toy's newer orbitals: a boundary surface holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The tap cuts it along its densest vertical plane and opens the halves like a book; each cut face shows |ψ|² in that plane, dark at the nodes; then it closes.",
-      "sound": "A soft, low whoosh as it is cut and opens, and a quiet low ding as the faces turn.",
+      "effect": "Every hydrogen orbital of n = 1 to 5 (s, p, d, f, g) and 6s, 6p, 6d, 7s, 7p (68), grouped by shell, drawn like the Electron orbital toy's newer orbitals: a boundary surface holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The orbital is turned so its densest vertical plane faces the viewer; the tap cuts it there, the front half lifts up and away, and the back half's cut face shows |ψ|² in that plane, dark at the nodes; then it closes.",
+      "sound": "A soft, low whoosh as it is cut and opens, and a quiet low ding as the cut face shows.",
       "improved": "Lattices and orbitals: src/lattice/orbitals.js computes normalized R_nl and real Y_lm for any n, l, m; tests check them against the analytic forms. Evidence in docs/evidence/orbital-atlas.json."
     }
   }

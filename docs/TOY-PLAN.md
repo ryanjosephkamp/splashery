@@ -1548,13 +1548,14 @@ Proposals below are suggestions; the owner may change them.
     orbitals"; ROADMAP.md, "Now", item 4; lane Lattices and orbitals; labs only).
   - Effect: Every hydrogen orbital of n = 1 to 5 (s, p, d, f, g) and 6s, 6p, 6d, 7s, 7p (68),
     grouped by shell, drawn like the Electron orbital toy's newer orbitals: a boundary surface
-    holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The tap cuts
-    it along its densest vertical plane and opens the halves like a book; each cut face shows |ψ|²
-    in that plane, dark at the nodes; then it closes.
+    holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The orbital
+    is turned so its densest vertical plane faces the viewer; the tap cuts it there, the front half
+    lifts up and away, and the back half's cut face shows |ψ|² in that plane, dark at the nodes;
+    then it closes.
   - Improved: Lattices and orbitals: src/lattice/orbitals.js computes normalized R_nl and real Y_lm
     for any n, l, m; tests check them against the analytic forms. Evidence in
     docs/evidence/orbital-atlas.json.
-  - Sound: A soft, low whoosh as it is cut and opens, and a quiet low ding as the faces turn.
+  - Sound: A soft, low whoosh as it is cut and opens, and a quiet low ding as the cut face shows.
 - **Molecule viewer** (`molecule-viewer`). Now: tap: Measure an example. Plan: keep.
   - Owner: Push Plan S1, approved by the owner with "PDB fetch yes" (October 5, 2026; lane Molecule
     viewer, labs).

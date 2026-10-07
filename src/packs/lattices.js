@@ -21,10 +21,10 @@
 // Orbital atlas: every hydrogen orbital of n = 1 to 5, and 6s, 6p, 6d, 7s and
 // 7p, drawn as the Electron orbital toy draws its newer orbitals (a boundary
 // surface holding 90% of the electron and a cloud sampled from |psi|², in
-// the two phase colors). A tap cuts it in half and opens it like a book, so
-// both cut faces show the density in the plane of the cut, nodes and all.
+// the two phase colors). A tap cuts it in half and lifts the front half away,
+// so the cut face shows the density in the plane of the cut, nodes and all.
 
-import { mix, shade, clamp, quatAxisAngle, quatRotate } from "../kit.js";
+import { mix, shade, clamp } from "../kit.js";
 import { evenCylinder } from "./even.js";
 import {
   CRYSTALS,
@@ -245,10 +245,10 @@ function buildUnitCells(k, o) {
     let s = ((i + 0.5) / count) * edgeLen;
     for (const [a, b] of edges) {
       const L = len(sub(b, a));
-      if (s <= L) return { p: lerp(a, b, s / L), color: "#f4f1e6", opacity: 1 };
+      if (s <= L) return { p: lerp(a, b, s / L), color: "#a99c84", opacity: 1 };
       s -= L;
     }
-    return { p: edges[0][0], color: "#f4f1e6", opacity: 1 };
+    return { p: edges[0][0], color: "#a99c84", opacity: 1 };
   });
 
   // Thermal motion: one Gaussian per atom, its spread along each axis the
@@ -336,8 +336,7 @@ const toToy = (orb, d) => (orb.face ? d : [d[0], d[2], -d[1]]);
 const toChem = (orb, d) => (orb.face ? d : [d[0], -d[2], d[1]]);
 
 // The plane the tap cuts along: it holds the toy's up axis and the
-// horizontal direction where the orbital is densest (left and right halves
-// when nothing wins, so the halves open like a book). Returns its normal.
+// horizontal direction where the orbital is densest. Returns its normal.
 function cutNormal(orb) {
   if (orb.face) return [0, 0, 1];
   let best = null;
@@ -357,11 +356,13 @@ function cutNormal(orb) {
   return best.nrm;
 }
 
-// The rotation about the up axis that turns a horizontal direction v to
-// face the viewer (+Z).
-function faceViewer(v) {
-  return quatAxisAngle([0, 1, 0], Math.atan2(-v[0], v[2]));
-}
+// Turns the orbital about the up axis so the plane to cut along faces the
+// viewer: (x, z) -> (x cos θ + z sin θ, −x sin θ + z cos θ).
+const turnY = (p, th) => {
+  const c = Math.cos(th);
+  const s = Math.sin(th);
+  return [p[0] * c + p[2] * s, p[1], -p[0] * s + p[2] * c];
+};
 
 function buildOrbitalAtlas(k, o) {
   const orb = orbitalOf(o.orbital) || orbitalOf("4d");
@@ -370,13 +371,19 @@ function buildOrbitalAtlas(k, o) {
   const minus = o.minus;
   const radial = radialSampler(orb.R, orb.rmax);
   const E = radial.extent;
+  // The cut is the plane facing the viewer (z = 0): the orbital is turned
+  // so its densest vertical plane lies there. (Turning the halves to face
+  // the viewer instead would draw them out of order: splats sort in the
+  // pose they were built in.)
   const nrm = cutNormal(orb);
-  // The halves: A on the side the normal points away from, B on its side.
-  const A = k.part("halfA", { pivot: [0, 0, 0] });
-  const B = k.part("halfB", { pivot: [0, 0, 0] });
-  const FA = k.part("faceA", { pivot: [0, 0, 0] });
-  const FB = k.part("faceB", { pivot: [0, 0, 0] });
-  const half = (p) => (dot(p, nrm) < 0 ? A : B);
+  const th = Math.atan2(-nrm[0], nrm[2]);
+  const place = (d) => turnY(toToy(orb, d), th);
+  const unplace = (p) => toChem(orb, turnY(p, -th));
+  // The front half lifts away; the back half stays, with the cut face.
+  const F = k.part("front", { pivot: [0, 0, 0] });
+  const B = k.part("back", { pivot: [0, 0, 0] });
+  const C = k.part("cut", { pivot: [0, 0, 0] });
+  const half = (p) => (p[2] > 0 ? F : B);
 
   // Densities of samples: the peak, and the level whose surface holds 90%
   // of the electron (as the Electron orbital toy finds them).
@@ -403,7 +410,7 @@ function buildOrbitalAtlas(k, o) {
     table[j] = (i / N) * orb.rmax;
   }
   const surfR = (dToy) => {
-    const d = toChem(orb, dToy);
+    const d = unplace(dToy);
     const y = Math.abs(orb.Y(d[0], d[1], d[2]));
     const x = Math.min(T, (y / orb.ymax) * T);
     const j = Math.floor(x);
@@ -419,7 +426,7 @@ function buildOrbitalAtlas(k, o) {
     opacity: lobes ? 0.95 : 0.28,
     pattern: false,
     color: (c) => {
-      const d = toChem(orb, unit(c.lp));
+      const d = unplace(unit(c.lp));
       const r = len(c.lp) * E;
       const sign = orb.R(r) * orb.Y(d[0], d[1], d[2]) >= 0;
       const base = sign ? plus : minus;
@@ -443,7 +450,7 @@ function buildOrbitalAtlas(k, o) {
     const tt = clamp((psi * psi) / peak, 0, 1);
     const base = psi >= 0 ? plus : minus;
     const col = mix(shade(base, 0.8), mix(base, "#fffbe8", 0.7), Math.pow(tt, 0.6));
-    const p = mul(toToy(orb, d), r / E);
+    const p = mul(place(d), r / E);
     return {
       p,
       color: col,
@@ -452,15 +459,13 @@ function buildOrbitalAtlas(k, o) {
       part: half(p),
     };
   });
-  // The nucleus: a tiny bright dot at the center (on half A).
-  k.add(k.sphere(0.022), { share: 0.004, part: A, pattern: false, color: (c) => gloss("#fff3c4", c.n, 0.6, 8) }); // prettier-ignore
+  // The nucleus: a tiny bright dot at the center, on the cut face.
+  k.add(k.sphere(0.022), { share: 0.004, part: B, pattern: false, color: (c) => gloss("#fff3c4", c.n, 0.6, 8) }); // prettier-ignore
 
-  // The cut faces: |psi|² in the plane of the cut, on a fine even grid, in
+  // The cut face: |psi|² in the plane of the cut, on a fine even grid, in
   // the phase colors, brighter where the electron is likelier; dark at the
-  // nodes. One copy for each half, just outside its own cut.
-  const h = unit([-nrm[2], 0, nrm[0]]);
-  const up = [0, 1, 0];
-  const G = 150;
+  // nodes. Just in front of the back half's cut.
+  const G = 170;
   const pts = [];
   let fpeak = 0;
   for (let i = 0; i < G; i++)
@@ -468,63 +473,42 @@ function buildOrbitalAtlas(k, o) {
       const u = ((i + 0.5) / G) * 2 - 1;
       const v = ((j + 0.5) / G) * 2 - 1;
       if (u * u + v * v > 1) continue;
-      const p = add(mul(h, u), mul(up, v));
+      const p = [u, v, 0];
       const rr = len(p) * E;
-      const dc = toChem(orb, unit(len(p) > 1e-9 ? p : [0, 1, 0]));
+      const dc = unplace(len(p) > 1e-9 ? unit(p) : [0, 1, 0]);
       const psi = orb.R(rr) * orb.Y(dc[0], dc[1], dc[2]);
       fpeak = Math.max(fpeak, psi * psi);
       pts.push([p, psi]);
     }
   const shown = pts.filter(([, psi]) => (psi * psi) / fpeak > 0.0015);
-  for (const [part, side] of [
-    [FA, -1],
-    [FB, 1],
-  ])
-    k.cloud({ share: 0.1, size: 1.1, pattern: false, part }, (rand, i) => {
-      const [p, psi] = shown[i % shown.length];
-      const t = Math.sqrt((psi * psi) / fpeak);
-      const base = psi >= 0 ? plus : minus;
-      return {
-        p: add(p, mul(nrm, side * 0.004)),
-        n: nrm,
-        color: mix(shade(base, 0.35 + 0.65 * Math.min(1, t * 1.4)), "#fffbe8", 0.45 * t * t),
-        opacity: clamp(0.25 + 1.2 * t, 0, 1),
-      };
-    });
-  k.data = { nrm, qA: faceViewer(nrm), qB: faceViewer(mul(nrm, -1)) };
+  k.cloud({ share: 0.12, size: 1.1, pattern: false, part: C }, (rand, i) => {
+    const [p, psi] = shown[i % shown.length];
+    const t = Math.sqrt((psi * psi) / fpeak);
+    const base = psi >= 0 ? plus : minus;
+    return {
+      p: [p[0], p[1], 0.004],
+      n: [0, 0, 1],
+      color: mix(shade(base, 0.35 + 0.65 * Math.min(1, t * 1.4)), "#fffbe8", 0.45 * t * t),
+      opacity: clamp(0.25 + 1.2 * t, 0, 1),
+    };
+  });
+  k.data = { cut: true };
 }
 
 const OPEN_SECS = 5.5;
 
 function driveOrbitalAtlas(t, c, out, info) {
-  const D = info.data;
-  if (!D?.nrm) return;
+  if (!info.data?.cut) return;
   const p = progress(c.open);
   const on = c.open > 0 ? 1 : 0;
   // Opens over the first fifth, holds, and closes over the last fifth.
   const e = on * ease(band(p, 0, 0.2)) * (1 - ease(band(p, 0.78, 0.98)));
-  const s = 1 - 0.45 * e;
-  // Half A goes left, half B right; each turns its cut face to the viewer.
-  for (const [part, face, q, x] of [
-    ["halfA", "faceA", D.qA, -0.52],
-    ["halfB", "faceB", D.qB, 0.52],
-  ]) {
-    const full = q;
-    const quat = slerpId(full, e);
-    const offset = [x * e, 0, 0];
-    out.parts[part] = { quat, offset, scale: s };
-    out.parts[face] = { quat, offset, scale: s, visible: ease(band(e, 0.15, 0.6)) };
-  }
-}
-
-// Interpolates from no rotation to q.
-function slerpId(q, t) {
-  const w = clamp(q[3], -1, 1);
-  const ang = 2 * Math.acos(w);
-  const sn = Math.sqrt(Math.max(0, 1 - w * w));
-  if (sn < 1e-6) return [0, 0, 0, 1];
-  const axis = [q[0] / sn, q[1] / sn, q[2] / sn];
-  return quatAxisAngle(axis, ang * t);
+  // The front half lifts up and to the left, shrinking out of the way; the
+  // back half and its cut face settle a little down and to the right.
+  out.parts.front = { offset: [-0.6 * e, 0.55 * e, 0.12 * e], scale: 1 - 0.5 * e };
+  const back = { offset: [0.16 * e, -0.12 * e, 0], scale: 1 - 0.12 * e };
+  out.parts.back = back;
+  out.parts.cut = { ...back, visible: ease(band(e, 0.1, 0.5)) };
 }
 
 // The atlas's choices, grouped by shell.
@@ -588,6 +572,8 @@ export const RECIPES = {
   // ---- Orbital atlas ---------------------------------------------------------------
   "orbital-atlas": {
     alive: false,
+    // It keeps still, facing you, so the opened halves' cut faces face you.
+    turntable: false,
     options: [
       { key: "orbital", label: "Orbital", type: "select", default: "5f", choices: ORBITAL_CHOICES },
       {

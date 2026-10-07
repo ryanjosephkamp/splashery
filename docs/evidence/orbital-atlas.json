@@ -45,8 +45,8 @@
       "note": ""
     },
     {
-      "claim": "The tap's cut faces show |ψ|² in the plane of the cut, with the nodes dark.",
-      "how": "An even grid on the cut plane, each point colored by the sign of ψ and brightened by |ψ| relative to the plane's peak.",
+      "claim": "The tap's cut face shows |ψ|² in the plane of the cut, with the nodes dark.",
+      "how": "The orbital is turned about its up axis so its densest vertical plane faces the viewer; the tap lifts the front half away, and the back half's face is an even grid on that plane, each point colored by the sign of ψ and brightened by |ψ| relative to the plane's peak.",
       "where": "src/packs/lattices.js:buildOrbitalAtlas",
       "sources": [],
       "verdict": "correct",

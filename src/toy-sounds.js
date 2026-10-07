@@ -2826,7 +2826,7 @@ export const TOY_SOUNDS = {
     { voice: "wood", at: 0.55, f: 640, decay: 0.4, vol: 0.3 },
   ],
   // Orbital atlas: a soft, low whoosh as the orbital is cut and opens, and a
-  // quiet low ding as its faces turn to the viewer.
+  // quiet low ding as its cut face shows.
   "orbital-atlas": [
     { voice: "whoosh", f: 340, decay: 0.9, vol: 0.14 },
     { voice: "ding", at: 0.5, f: 523, decay: 1.4, vol: 0.3 },
