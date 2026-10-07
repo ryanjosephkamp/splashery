@@ -103,12 +103,12 @@
       "round": "2026-10-02"
     },
     "knot": {
-      "status": "site",
-      "said": "(October 2, 2026, review) The neon knot has that buzzing sound that I hate. It should not make that noise. ... We can make it sound more like jelly or something wiggling a little bit.",
-      "note": "No buzz or horn. A soft jelly-like wiggle instead.",
-      "plan": "Now: A real jelly wobbling, then a softer wobble as it settles; no buzz, hum or horn (Sound C).",
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The neon knot sounds like somebody taking a shit. ... Seriously, please pick something else. You can use the same sound as we use for the other knots. I do not care. But not this. This sounds dirty.",
+      "note": "The jelly sounds dirty; pick something else (the other knots' sound is fine).",
+      "plan": "Now: the torus knot's sound, timed to this knot: it strains as the loops tie tighter, then lets go with a soft thump and swish as it relaxes; no jelly (Sound D).",
       "candidates": [],
-      "round": "2026-10-02"
+      "round": "2026-10-06"
     },
     "planet": {
       "status": "site",
@@ -779,12 +779,12 @@
       "candidates": []
     },
     "popcorn": {
-      "status": "site",
-      "said": "(October 2, 2026, review) It should actually be able to hear the pops ... you can hear the kernels popping. Like that's what you should kind of hear. It should be like a dry pop.",
-      "note": "Real, dry kernel pops (like microwave popcorn without the hum).",
-      "plan": "Now: A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum (Sound C).",
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The popcorn sizzle does not sound like real popcorn.",
+      "note": "It sounds like a sizzle, not real popcorn.",
+      "plan": "Now: a clean, single dry pop for each kernel (ten different real pops, the pot's rumble and the oil's hiss cut out), so each kernel is heard on its own (Sound D).",
       "candidates": [],
-      "round": "2026-10-02"
+      "round": "2026-10-06"
     },
     "jelly": {
       "status": "site",
@@ -1647,11 +1647,12 @@
       "candidates": []
     },
     "water-bottle": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
-      "note": "Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
-      "plan": "Now: the cap twisted off, a real pour (a splashing stream and the water sloshing in the glass) and the cap twisted back on (no clicks or bubbly glugs).",
-      "candidates": []
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The sound of the water sounds more like a waterfall than it does water actually being poured out of a bottle or a water bottle like that. Can you change that?",
+      "note": "It sounds like a waterfall; it should be water poured from a bottle.",
+      "plan": "Now: the cap twisted off, a real recording of water poured into a glass while the stream runs, and the cap twisted back on; no rushing waterfall (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
     },
     "cactus": {
       "status": "approved",
@@ -2489,6 +2490,118 @@
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
+    },
+    "stollen": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The Stollen ... has a weird clicky noise, kind of like a zipper. We can get rid of that, and the little note that plays is too loud.",
+      "note": "No zipper-like clicking; the note is too loud.",
+      "plan": "Now: just the two soft plucked notes, much quieter; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "orange-photo": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The orange photo kind of sounds like a bubble. We can make it really simple. It doesn't need to have two sounds, like two bubbles popping. You can remove one of them and then maybe make it a little bit more subtle.",
+      "note": "One bubble, not two, and subtler.",
+      "plan": "Now: one soft pop, quieter; the second bubble (the drips) is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "physalis": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The P-H-Y-S-A-L-I-S still has that clicking, or, like, zipper noise that I hate, and the twinkles don't need to be there.",
+      "note": "No zipper-like clicking and no twinkles.",
+      "plan": "Now: the berry's soft papery pop in its husk and a light landing; no clicking rustle, no twinkle (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "crystal-gem": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The crystal, the sound is too overwhelming. Make it more subtle.",
+      "note": "Too overwhelming; much subtler.",
+      "plan": "Now: one quiet glassy ring, shorter; the sparkle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "monkey-doll": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The monkey doll. The first sound that it makes, which is kind of like a rubber band sound, is fine, but the clicking sound that comes after that can be removed.",
+      "note": "Keep the rubber-band sound; remove the clicking after it.",
+      "plan": "Now: the rubber-band boing only; the clicking rustle after it is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "sunflower-photo": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The sunflower photo sound is terrible. It sounds like that clicking, stretching sound and wind. Neither of those things is really applicable here. Make it something subtle.",
+      "note": "A new, subtle sound: no clicking, stretching or wind.",
+      "plan": "Now: a soft, warm low chord as the flower lifts and a light landing; no clicking, flutter or wind (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "white-roses": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The white rose still has the clicking noise. Should be removed, but the little ding of the glass is fine.",
+      "note": "Remove the clicking; keep the glass ding.",
+      "plan": "Now: the vase's glass ding only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "bonsai-photo": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The bonsai tree photo still has the clicking noise. It should be removed.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the pot's wooden knock only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "mushroom-photo": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The mushroom photo still has the clicking noise. Remove it.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the soft pop only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "crochet-earth": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) For the crow, Shay, Earth, you can remove the twinkle. We don't need the twinkle.",
+      "note": "Remove the twinkle.",
+      "plan": "Now: the soft boing only; the twinkle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "maple-tree": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The golden maple has that clicking noise. I don't like it. The wind is all right, but make it more subtle.",
+      "note": "Remove the clicking; the wind is all right but subtler.",
+      "plan": "Now: a gentle gust of wind, about half as loud; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "peony": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The peonies in a vase has the clicking noise. We don't need it.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the vase's glass note only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "money-tree": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) The money tree has a clicking noise. We don't need it.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the pot's soft knock only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "point-clouds": {
+      "status": "ready",
+      "said": "(October 6, 2026, walkthrough) For the point clouds, the sound effect, there's a wind effect and there's a twinkle effect. The twinkle is okay. The wind's a little bit too loud and overwhelming. You can make the wind more subtle. I think you can even make the twinkle a little bit more subtle as well.",
+      "note": "The wind is too loud; make it subtler, and the twinkle a little subtler too.",
+      "plan": "Now: the same lidar sweep with the airy wind at half its level and the twinkle a little quieter (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
     }
   }
 }

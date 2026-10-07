@@ -486,8 +486,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The neon flows along the knot and it ties tighter, then relaxes.
   - Improved: E1b: the knot contorts: waves of swelling loops run round the tube, lifting and
     twisting it, then it settles back into its trefoil (3 s).
-  - Sound: A real jelly wobbling, then a softer wobble as it settles; no buzz, hum or horn (Sound C,
-    October 2, 2026).
+  - Sound: The torus knot's sound, timed to this knot: it strains as the loops tie tighter, then
+    lets go with a soft thump and swish as it relaxes; no jelly (Sound D, October 6, 2026).
 
 ## Balls (25)
 
@@ -901,8 +901,8 @@ Proposals below are suggestions; the owner may change them.
     the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises;
     then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model,
     cap plug left out, a stream instead of drops.
-  - Sound: The cap twisted off, a real pour (a splashing stream and the water sloshing in the glass)
-    and the cap twisted back on (no clicks or bubbly glugs).
+  - Sound: The cap twisted off, a real recording of water poured into a glass while the stream runs,
+    and the cap twisted back on; no rushing waterfall (Sound D, October 6, 2026).
 - **Soda can** (`soda-can`). Now: tap: Shake and open. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -1746,8 +1746,9 @@ Proposals below are suggestions; the owner may change them.
     its chords (no voices); relighting keeps the match.
 - **Popcorn** (`popcorn`). Now: tap: Pop!. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum
-    (Sound C, October 2, 2026).
+  - Sound: A clean, single dry pop for each kernel as it jumps (14 of them, at the toy's own times,
+    from ten different real pops with the pot's rumble and the oil's hiss cut out); no sizzle (Sound
+    D, October 6, 2026).
 - **Jelly** (`jelly`). Now: tap: Poke. Plan: keep.
   - Owner: Pretty much fine.
   - Improved: Physics (Hands-on): drag it to stretch it toward the finger; let go and it springs
@@ -3231,7 +3232,8 @@ Proposals below are suggestions; the owner may change them.
     be sharper", October 5, 2026): the samples remade with even thinning (one point per small cube,
     so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or
     cliff, so edges read crisply.
-  - Sound: An airy rising tone with faint ticks as the scan line crosses.
+  - Sound: An airy rising tone and faint ticks as the scan line crosses, both quiet (Sound D,
+    October 6, 2026: subtler wind and twinkle).
 - **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
   - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,
