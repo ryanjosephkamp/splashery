@@ -24,6 +24,7 @@ const CSS = `
 .arc-btn { min-width: 36px; height: 36px; padding: 0 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22);
   background: rgba(12, 14, 20, 0.66); color: #fff; font: inherit; cursor: pointer; touch-action: manipulation;
   backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.arc-btn svg { display: block; margin: auto; }
 .arc-btn:hover { background: rgba(40, 44, 56, 0.8); }
 .arc-btn:focus-visible { outline: 2px solid #8fb6ff; outline-offset: 2px; }
 .arc-btn.arc-view { min-width: 64px; font-weight: 800; letter-spacing: 0.02em; }
@@ -41,28 +42,39 @@ const CSS = `
 .arc-help dd { margin: 0; }
 .arc-pad { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 12px; pointer-events: none; }
 .arc-pad-group { display: grid; gap: 8px; pointer-events: auto; }
+.arc-pad-side { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: none; }
+.arc-pad-util { display: flex; gap: 6px; pointer-events: auto; }
+.arc-pad > .arc-pad-util { align-self: flex-end; margin: 0 6px 7px; }
+.arc-pad-util:empty { display: none; }
+.arc-pad-util .arc-btn { height: 40px; min-width: 44px; }
+.arc-pad-util .arc-btn.arc-view { min-width: 58px; }
+body.app .arc-root[data-playmode="false"] .arc-pad-side { margin-right: 48px; }
+/* In the app's own view on a phone, its ▶ beside the stage plays and pauses the game. */
+@media (max-width: 760px) { body.app .arc-root[data-playmode="false"] .arc-pad-util .arc-pause { display: none; } }
+@media (max-width: 420px) { .arc-pad > .arc-pad-util .arc-btn { min-width: 40px; padding: 0 8px; } .arc-pad > .arc-pad-util .arc-btn.arc-view { min-width: 48px; } }
 .arc-pad-dir { grid-template-columns: repeat(3, 54px); grid-template-rows: repeat(2, 54px); }
 .arc-pad-row { grid-auto-flow: column; }
 .arc-key { width: 54px; height: 54px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.28); background: rgba(12, 14, 20, 0.5);
   color: #fff; font: 800 20px/1 ui-sans-serif, system-ui, sans-serif; touch-action: none; }
 .arc-key.arc-down { background: rgba(90, 130, 240, 0.75); }
 .arc-key.arc-fire { width: 66px; height: 66px; border-radius: 50%; font-size: 15px; }
+.arc-key.arc-long { font-size: 12px; letter-spacing: -0.01em; }
 .arc-pad-many .arc-key { width: 46px; height: 46px; font-size: 17px; }
 .arc-pad-many .arc-key.arc-fire { width: 50px; height: 50px; font-size: 13px; }
 .arc-pad-many .arc-pad-dir { grid-template-columns: repeat(3, 46px); grid-template-rows: repeat(2, 46px); }
-.arc-choices { position: absolute; left: 8px; right: 8px; top: 92px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; pointer-events: auto; }
+.arc-choices { position: absolute; left: 8px; right: 8px; top: 92px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; pointer-events: none; }
 .arc-root[data-playmode="true"] .arc-choices { top: 52px; }
 body.app .arc-root[data-playmode="false"] .arc-choices { top: 148px; }
-.arc-choice { height: 30px; padding: 0 10px 0 6px; font-size: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(12, 14, 20, 0.66);
+.arc-choice { pointer-events: auto; height: 30px; padding: 0 10px 0 6px; font-size: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(12, 14, 20, 0.66);
   color: #fff; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; touch-action: manipulation; }
 .arc-choice i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,0.5); }
 .arc-choice[aria-pressed="true"] { background: rgba(70, 110, 220, 0.9); border-color: #cfe0ff; }
 .arc-hint { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); padding: 3px 10px; border-radius: 999px; font-weight: 500; font-size: 12px;
   background: rgba(12, 14, 20, 0.5); white-space: nowrap; pointer-events: none; opacity: 0.9; }
-.arc-root[data-touch="true"] .arc-choices { position: absolute; left: 8px; right: 8px; top: 92px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; pointer-events: auto; }
+.arc-root[data-touch="true"] .arc-choices { position: absolute; left: 8px; right: 8px; top: 92px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; pointer-events: none; }
 .arc-root[data-playmode="true"] .arc-choices { top: 52px; }
 body.app .arc-root[data-playmode="false"] .arc-choices { top: 148px; }
-.arc-choice { height: 30px; padding: 0 10px 0 6px; font-size: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(12, 14, 20, 0.66);
+.arc-choice { pointer-events: auto; height: 30px; padding: 0 10px 0 6px; font-size: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: rgba(12, 14, 20, 0.66);
   color: #fff; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; touch-action: manipulation; }
 .arc-choice i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,0.5); }
 .arc-choice[aria-pressed="true"] { background: rgba(70, 110, 220, 0.9); border-color: #cfe0ff; }
@@ -79,6 +91,9 @@ html.arc-play .arc-canvas { position: fixed !important; inset: 0 !important; lef
 html.arc-play .arc-root { z-index: 2147482001 !important; }
 @media (max-width: 420px) { .arc-btn { min-width: 34px; height: 34px; padding: 0 8px; } .arc-chip { padding: 3px 8px; font-size: 13px; } }
 `;
+
+const PLAY_ICON = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>`; // prettier-ignore
+const PAUSE_ICON = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5.5h3.5v13H7zM13.5 5.5H17v13h-3.5z" fill="currentColor"/></svg>`; // prettier-ignore
 
 const ARROWS = { left: "◀", right: "▶", up: "▲", down: "▼" };
 
@@ -107,8 +122,9 @@ export class Hud {
         <div class="arc-stats" aria-live="polite"></div>
         <div class="arc-buttons">
           <button class="arc-btn arc-view" type="button" aria-pressed="false" title="Switch between 2D and 3D (V)">3D</button>
-          <button class="arc-btn arc-pause" type="button" title="Pause (P)" aria-label="Pause">⏸</button>
+          <button class="arc-btn arc-pause" type="button"></button>
           <button class="arc-btn arc-restart" type="button" title="Start again (R)" aria-label="Start again">↺</button>
+          <button class="arc-btn arc-file" type="button" hidden></button>
           <button class="arc-btn arc-controls" type="button" title="Controls" aria-label="Controls">?</button>
           <button class="arc-btn arc-enter" type="button" title="Play on the whole page">⛶ Play</button>
           <button class="arc-btn arc-exit" type="button" title="Leave (Esc)" aria-label="Leave">✕</button>
@@ -140,6 +156,14 @@ export class Hud {
     click(".arc-enter", on.play);
     click(".arc-exit", on.exit);
     click(".arc-controls", () => this.toggleHelp());
+    // A game that opens a file of the person's own (Note Rider's song).
+    const fileBtn = el.querySelector(".arc-file");
+    if (game.file && on.file) {
+      fileBtn.hidden = false;
+      fileBtn.textContent = game.file.label;
+      fileBtn.title = game.file.title || game.file.label;
+      click(".arc-file", on.file);
+    }
     this.helpEl.addEventListener("click", () => this.toggleHelp(false));
     this.buildPad(game.pad || ["left", "right", "fire"], on.pad);
     this.buildHelp();
@@ -147,6 +171,7 @@ export class Hud {
     this.hintEl.textContent = game.controls?.short || "";
     this.chips = new Map();
     this.lastStats = "";
+    this.setTouch(el.dataset.touch === "true");
     this.place();
     this.ro = new ResizeObserver(() => this.place());
     this.ro.observe(canvas);
@@ -208,10 +233,25 @@ export class Hud {
     const right = document.createElement("div");
     right.className = "arc-pad-group arc-pad-row";
     const names = this.game.padLabels || {};
-    for (const a of acts) right.appendChild(make(a, names[a] || (a === "fire" ? "●" : a), "arc-fire")); // prettier-ignore
-    box.append(left, right);
+    for (const a of acts) {
+      const label = names[a] || (a === "fire" ? "●" : a);
+      right.appendChild(make(a, label, label.length > 4 ? "arc-fire arc-long" : "arc-fire"));
+    }
+    // On a touch screen the 2D/3D switch and play/pause sit down here by
+    // the thumbs rather than at the top (setTouch moves them): on the
+    // bottom row between the arrows and the action buttons, or, when a
+    // game's pad has many buttons, over the action buttons.
+    const many = dirs.length + acts.length > 5;
+    const side = document.createElement("div");
+    side.className = "arc-pad-side";
+    this.utilEl = document.createElement("div");
+    this.utilEl.className = "arc-pad-util";
+    if (many) side.append(this.utilEl);
+    if (acts.length) side.append(right);
+    if (many) box.append(left, side);
+    else box.append(left, this.utilEl, side);
     // Many buttons (a 3D puzzle's turns and tips): smaller, so they fit a phone.
-    if (dirs.length + acts.length > 5) box.classList.add("arc-pad-many");
+    if (many) box.classList.add("arc-pad-many");
   }
 
   // A game's own choices (a material to paint with): a row of buttons.
@@ -261,7 +301,12 @@ export class Hud {
 
   setTouch(on) {
     const v = String(!!on);
-    if (this.el.dataset.touch !== v) this.el.dataset.touch = v;
+    if (this.el.dataset.touch === v && this.placedTouch === v) return;
+    this.el.dataset.touch = v;
+    this.placedTouch = v;
+    // Where the hands are: at the bottom on a touch screen, at the top else.
+    if (on) this.utilEl.append(this.viewBtn, this.pauseBtn);
+    else this.el.querySelector(".arc-buttons").prepend(this.viewBtn, this.pauseBtn);
   }
 
   setPlayMode(on) {
@@ -275,9 +320,14 @@ export class Hud {
     this.viewBtn.title = is3d ? "Slide back to 2D (V)" : "Slide into 3D (V)";
   }
 
+  // One button plays and pauses: it shows ▶ while the game waits (before
+  // the first go, paused, over) and pause while it plays.
   setPaused(paused) {
-    this.pauseBtn.textContent = paused ? "▶" : "⏸";
-    this.pauseBtn.setAttribute("aria-label", paused ? "Go on" : "Pause");
+    if (this.shownPaused === paused) return;
+    this.shownPaused = paused;
+    this.pauseBtn.innerHTML = paused ? PLAY_ICON : PAUSE_ICON;
+    this.pauseBtn.setAttribute("aria-label", paused ? "Play" : "Pause");
+    this.pauseBtn.title = paused ? "Play (P)" : "Pause (P)";
   }
 
   // stats: [{ key, label, value, icon }]

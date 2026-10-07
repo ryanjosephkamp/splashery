@@ -33,6 +33,8 @@ function spherePoint(phi, th) {
 }
 
 // Brick materials: colors per row, and how many hits each kind takes.
+// A brick's note, by row from the bottom: C major pentatonic, C5 up to E6.
+const PENTATONIC = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5, 1174.66, 1318.51];
 const ROW_COLORS = ["#d8443a", "#e97a2c", "#e9b730", "#6dbb46", "#2fa6a0", "#3a7bd5", "#8a56c8"];
 const KINDS = {
   glaze: { hits: 1, points: 10 },
@@ -563,8 +565,26 @@ export class Shardball {
     this.api.sprites.shatter(s, br.kind === "stone" ? 9 : 7, { rand: this.rand, vel, from, kick: 0.55, spin: 9, life: 2.4 }); // prettier-ignore
     this.shards.push({ sprite: s, dome });
     br.sprite = null;
-    this.api.sound(br.kind === "stone" ? [{ voice: "crack", vol: 0.8 }, { voice: "clatter", at: 0.04, vol: 0.5 }] : [{ voice: "glass", f: 900 + 60 * br.r, vol: 0.45, decay: 0.5 }, { voice: "clatter", at: 0.02, vol: 0.6 }]); // prettier-ignore
+    this.api.sound(this.breakSound(br));
     if (!this.bricks.some((x) => x.alive)) this.nextLevel();
+  }
+
+  // Arcade r2 (the owner: "the sound when the bricks break, let's hear
+  // something else"): a glazed brick breaks with a wooden marimba note, one
+  // note of a pentatonic scale per row (higher rows ring higher, so a run
+  // up the wall climbs), and a short dry crumble as it falls apart; a stone
+  // brick with a low knock and a longer, gritty crumble. No glass ring.
+  breakSound(br) {
+    if (br.kind === "stone")
+      return [
+        { voice: "stone", f: 240, vol: 0.55 },
+        { voice: "crunch", f: 1000, n: 18, bright: 0.3, decay: 1.3, at: 0.01, vol: 0.45 },
+      ];
+    const f = PENTATONIC[Math.max(0, ROWS - 1 - (br.r || 0)) % PENTATONIC.length];
+    return [
+      { voice: "marimba", f, vol: 0.5, decay: 0.7 },
+      { voice: "crunch", f: 1500, n: 9, bright: 0.4, decay: 0.6, at: 0.006, vol: 0.3 },
+    ];
   }
 
   nextLevel() {
