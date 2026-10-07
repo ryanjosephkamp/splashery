@@ -6,48 +6,38 @@ You are a Splashery worker session, started by the Operator (session_012GmKRUMZL
 Repo: ryanjosephkamp/splashery. Lane: Ops merge tool (prefix `opm`). Branch:
 `claude/lane-ops-merge-tool`. PR title: "Phase Ops merge tool: one command for the Operator's
 merges". Handoff file: docs/handoff/OpsMergeTool.md (start it with this brief under "## Brief"; keep
-"## State", "## Notes", "## Known issues", "## For the Operator" current). Model: Opus 5.5, default
-effort.
+"## State
 
-### Brief (the owner's pick, October 7, 2026)
-
-Write `tools/op-merge.mjs`: one command that does the Operator's whole merge routine, so each merge
-costs a fraction of the tokens. Today the Operator does by hand:
-
-1. `git checkout -B claude/operator-merge-<topic> origin/main`, then for each PR head in order
-   `git merge --no-ff <full sha> -m "Merge #<n> (<PR title>)"` with the commit trailer lines passed
-   in.
-2. Conflicts only in generated files (site/, docs/TOY-PLAN.md, src/showcase/facts.json, the Sound
-   Board page file) are resolved by taking either side and regenerating; tools/sound-review.json
-   conflicts are merged per toy (3-way, per key under "toys"); anything else stops with a clear
-   report.
-3. Checks: `node --check` on src/toys.js, src/toy-help.js, src/toy-sounds.js; JSON.parse on
-   tools/toy-plan.json, tools/assets.json, tools/models.json, tools/sound-review.json.
-4. Regenerate: `node tools/toy-plan.mjs`, `node tools/site-build.mjs`, `node tools/shw-facts.mjs`,
-   `npx prettier --write site docs/TOY-PLAN.md src/showcase/facts.json tools/assets.json`, then
-   `site-build --check` and `shw-facts --check`; commit "Ops: rebuild site/ after #a, #b" if
-   anything changed.
-5. Find the specs the merged PRs touched (changed tests/\*.spec.mjs, plus specs whose prefix matches
-   changed files where that is cheap to know), run them with `SPLASHERY_CHROMIUM` and `--workers=1`,
-   restore tests/screenshots afterwards, and run `npx prettier --check .` and
-   `node tools/us-english.mjs --diff`.
-6. Print a ready PR body (Summary listing each PR with its sha and title, Verification with the
-   counts, Deviations, Known issues, What was cut) to a file the Operator can paste.
-
-Inputs: `--topic <name> --pr <n>:<sha> ... [--trailer-file f] [--no-tests] [--dry-run]`. It never
-pushes, never opens or merges PRs (the Operator does that through GitHub), and never touches a
-branch other than the merge branch it makes. PR titles can come from a `--title <n>="…"` flag (no
-network needed). Write `tests/opm.spec.mjs` (node-only tests on a temporary git repo built by the
-test: a clean merge, a site/-only conflict regenerated, a sound-review per-toy merge, a real
-conflict that stops) and a short section in docs/OPERATING.md. Finish every working turn with
-"READY:", "WORKING:" or "BLOCKED:". Your Operator is session_012GmKRUMZLir2nb27Bo8Cu2.
-
-## State
-
-- Started October 7, 2026. Writing `tools/op-merge.mjs` and `tests/opm.spec.mjs`.
+- Started October 7, 2026. Draft PR #397.
+- Done: `tools/op-merge.mjs` (all six steps, plus `--dry-run`, `--continue`, `--spec`, `--base`,
+  `--no-fetch`, `--repo`), `tests/opm.spec.mjs` (4 node-only tests on a temporary git repo: a clean
+  merge, a site/-only conflict rebuilt, a sound-review merge toy by toy, a real conflict that stops,
+  with `--dry-run` and `--continue` checked in the same test) and "The merge tool" section in
+  docs/OPERATING.md.
+- Replayed the real merge of #367, #368, #370, #389 and #391 (base `f1994db9`) in a scratch
+  worktree: the dry run predicted it (#367 settles a site/ conflict, the rest clean); the full run
+  merged all five, settled the site/ conflict, committed the rebuild, ran 8 touched specs (61
+  passed) and passed prettier and us-english. Its tree matches the hand merge (`3085258a`) except
+  site/new/ and site/sw.js, which are built from the git history and differ only because the
+  replay's history does.
 
 ## Notes
 
+- Console output is one line per step; everything else goes to `.cache/op-merge/<topic>.log` (and
+  `<topic>-tests.log`), so a merge costs the Operator a few lines.
+- site/assets/ is hand-written (tools/site-build.mjs says so), so a conflict there stops like any
+  other.
+- A PR without `--title` falls back to its head commit's subject and says so under Deviations.
+- Spec choice: changed tests/\*.spec.mjs, plus each spec whose prefix (its name without `-engine`)
+  starts a changed file's name in src/, tools/ or tests/screenshots/. taps and smoke are never
+  picked by prefix.
+
 ## Known issues
 
+- None known.
+
 ## For the Operator
+
+- Run `--dry-run` first: it costs under a second and says which merge stops and why.
+- The PR body has no footer: add your session's own.
+- Exit codes: 0 green, 1 stopped, 3 finished with a failing check.

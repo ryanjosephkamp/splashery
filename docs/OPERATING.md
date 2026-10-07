@@ -481,6 +481,41 @@ differ. A local lane's brief says "Local lane" at the top. Its session:
    reads carries his note; act on the note, and if a "fix" ever comes without one, ask the Operator
    instead of guessing.
 
+## The merge tool (the Operator)
+
+`tools/op-merge.mjs` (the owner's pick of October 7, 2026) does the Operator's merge routine in one
+command, so a merge costs a few lines of output instead of a long session:
+
+```sh
+node tools/op-merge.mjs --topic oct7c --trailer-file .cache/trailers.txt \
+  --pr 389:<full sha> --title 389="Phase Showcase: the galaxy-box caption fits again" \
+  --pr 391:<full sha> --title 391="Phase Space r3: handoff after merge"
+```
+
+1. It fetches main (and any PR head it lacks, as `pull/<n>/head`), makes
+   `claude/operator-merge-<topic>` from `origin/main` and merges each head in the order given with
+   `--no-ff` and the message "Merge #<n> (<title>)" plus the trailer lines.
+2. A conflict in a generated file (site/ apart from the hand-written site/assets/, docs/TOY-PLAN.md,
+   src/showcase/facts.json) takes one side and is rebuilt in step 4. A conflict in
+   `tools/sound-review.json` is merged toy by toy (3-way, per key under "toys"). Anything else stops
+   with the files named and the merge left in progress: resolve them, `git add` them and rerun the
+   same command with `--continue` (or `git merge --abort`).
+3. It checks that `src/toys.js`, `src/toy-help.js` and `src/toy-sounds.js` parse and that the four
+   JSON lists are valid.
+4. It runs `toy-plan.mjs`, `site-build.mjs` and `shw-facts.mjs`, formats their output, runs both
+   `--check`s and commits "Ops: rebuild site/ after #a, #b" when anything changed.
+5. It runs the specs the PRs touched (changed specs, and specs whose prefix starts a changed file's
+   name in src/, tools/ or tests/screenshots/) with `--workers=1`, restores the screenshots, and
+   runs `npx prettier --check .` and `node tools/us-english.mjs --diff`.
+6. It writes the PR body (the five sections) to `.cache/op-merge/<topic>-pr.md` and prints a title.
+   The full output is in `.cache/op-merge/<topic>.log` (and `<topic>-tests.log`).
+
+`--dry-run` predicts each merge (clean, settles itself, or stops on which files) and the specs it
+would run, without touching a branch. `--no-tests` skips the specs; `--spec <file>` adds one. Exit
+code 0 means all green, 1 a stop, 3 finished with a failing check (under Known issues). The tool
+never pushes, opens or merges a PR: push the branch, open the PR with the body (add your own
+footer), and merge it through GitHub as before.
+
 ## Upkeep after a merge (the Operator)
 
 1. Update your copy of main.
