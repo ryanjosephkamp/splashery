@@ -334,3 +334,13 @@
 {"v":1,"t":"2026-10-07T00:05:43.060Z","harness":"claude-code","event":"tool","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-07T00:05:43.482Z","harness":"claude-code","event":"tool","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
 {"v":1,"t":"2026-10-07T00:05:47.057Z","harness":"claude-code","event":"turn-end","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T00:05:49.337Z","harness":"claude-code","event":"subagent-stop","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","agent":"ae1a5ce5f79b29fd5"}
+{"v":1,"t":"2026-10-07T00:11:06.645Z","harness":"claude-code","event":"session-end","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:06:49.634Z","harness":"claude-code","event":"session-start","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:06:49.684Z","harness":"claude-code","event":"turn-start","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:06:57.045Z","harness":"claude-code","event":"tool","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:07:27.501Z","harness":"claude-code","event":"tool","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:07:28.577Z","harness":"claude-code","event":"tool","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:12:28.624Z","harness":"claude-code","event":"tool","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:12:33.304Z","harness":"claude-code","event":"tool","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-07T01:12:36.337Z","harness":"claude-code","event":"turn-end","session":"2eecd1a0-fab5-59b7-891b-8efe59705fbb","cwd":"splashery"}
