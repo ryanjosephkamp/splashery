@@ -936,6 +936,10 @@ function rotZ(p, a) {
 const mitosis = {
   alive: true,
   turntable: false,
+  // Fix9 (the owner's walkthrough): sharper. The sharper splat edge and the labs render levers
+  // (every faint splat drawn, the device's own pixel ratio), as the arcade's toys have.
+  kernel: "sharp",
+  render: { cull: "low", dpr: "native" },
   controls: [{ key: "go", label: "Divide", type: "pulse", ease: MI.T }],
   action: { key: "go", label: "Divide" },
   drive(time, c, out, info) {
@@ -1098,7 +1102,8 @@ const mitosis = {
     const right = k.part("right", { pivot: [MI.XD, 0, 0] });
     const shell = { even: true, flat: 0.45, opacity: 0.06, size: 1.4, jitter: 0, pattern: false };
     const memColor = "#f7c4cf";
-    k.add(evenEllipsoid(k, MI.R, MI.R, MI.R), { ...shell, weight: 0.5, part: membrane, color: (c) => faint(memColor, c.n) }); // prettier-ignore
+    // (Fix9: clear face on and solid at its edge, so the cell's inside reads crisp through it.)
+    k.add(evenEllipsoid(k, MI.R, MI.R, MI.R), { ...shell, opacity: 0.3, kind: "rim", params: [0.06, 2.5], weight: 0.5, part: membrane, color: (c) => faint(memColor, c.n) }); // prettier-ignore
     k.add(evenEllipsoid(k, MI.R, MI.R, MI.R), {
       ...shell,
       weight: 0.5,
@@ -1161,7 +1166,7 @@ const mitosis = {
       even: true,
       weight: 0.9,
       flat: 0.4,
-      opacity: 0.08,
+      opacity: 0.05, // (Fix9: from 0.08, so the threads inside read clearly)
       size: 1.4,
       jitter: 0,
       pattern: false,
@@ -1309,6 +1314,10 @@ function bodyOf(p) {
 const apoptosis = {
   alive: true,
   turntable: false,
+  // Fix9 (the owner's walkthrough): sharper. The sharper splat edge and the labs render levers
+  // (every faint splat drawn, the device's own pixel ratio), as the arcade's toys have.
+  kernel: "sharp",
+  render: { cull: "low", dpr: "native" },
   controls: [{ key: "go", label: "Apoptosis", type: "pulse", ease: AP.T }],
   action: { key: "go", label: "Start apoptosis" },
   drive(time, c, out, info) {
@@ -1379,7 +1388,8 @@ const apoptosis = {
   },
   build(k) {
     const rand = k.rand;
-    const shell = { even: true, flat: 0.45, opacity: 0.07, size: 1.4, jitter: 0, pattern: false };
+    // (Fix9: a fainter membrane, 0.05 from 0.07, so the cell's inside reads crisp through it.)
+    const shell = { even: true, flat: 0.45, opacity: 0.05, size: 1.4, jitter: 0, pattern: false };
     const memColor = "#f4d3b8";
     const cell = k.part("cell");
     const nucleus = k.part("nucleus");
@@ -1508,6 +1518,10 @@ function wrapPoint(p) {
 const phagocytosis = {
   alive: true,
   turntable: false,
+  // Fix9 (the owner's walkthrough): sharper. The sharper splat edge and the labs render levers
+  // (every faint splat drawn, the device's own pixel ratio), as the arcade's toys have.
+  kernel: "sharp",
+  render: { cull: "low", dpr: "native" },
   controls: [{ key: "go", label: "Eat", type: "pulse", ease: PH.T }],
   action: { key: "go", label: "Catch the bacterium" },
   drive(time, c, out, info) {
@@ -1597,7 +1611,8 @@ const phagocytosis = {
     void renew;
   },
   build(k) {
-    const shell = { even: true, flat: 0.45, opacity: 0.08, size: 1.4, jitter: 0, pattern: false };
+    // (Fix9: a fainter membrane, 0.055 from 0.08, so the cell's inside reads crisp through it.)
+    const shell = { even: true, flat: 0.45, opacity: 0.055, size: 1.4, jitter: 0, pattern: false };
     const memColor = "#dfe6f5";
     // The membrane; the part near the bacterium wraps round it (channel 1).
     k.add(evenEllipsoid(k, PH.R, PH.R, PH.R), {
@@ -1608,9 +1623,10 @@ const phagocytosis = {
       color: (c) => lit(memColor, c.n, 0.8, 0.35),
     });
     // Granules in the cytoplasm, and the Golgi.
-    k.cloud({ share: 0.004, size: 1.3, pattern: false }, (rnd) => {
+    // (Fix9: fewer, larger and solid, so they read as granules, not as grain.)
+    k.cloud({ share: 0.0015, size: 1.9, pattern: false }, (rnd) => {
       const p = mul(unit([rnd() - 0.5, rnd() - 0.5, rnd() - 0.5]), PH.R * 0.85 * Math.cbrt(rnd()));
-      return { p, color: mix("#b9b0e0", "#e8dcae", rnd()), opacity: 0.5 };
+      return { p, color: mix("#b9b0e0", "#e8dcae", rnd()), opacity: 0.9 };
     });
     for (let i = 0; i < 4; i++)
       k.add(evenEllipsoid(k, 0.5 - i * 0.06, 0.06, 0.28), { pos: add(GOLGI, [0, i * 0.15 - 0.22, 0]), even: true, weight: 3, jitter: 0, color: (c) => lit("#f2c46a", c.n) }); // prettier-ignore

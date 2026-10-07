@@ -71,7 +71,10 @@ export function buildPlot(
   if (title) ch.label(shorten(title, 30), [0, ch.h + ch.px * 40, -ch.d / 2], { scale: 1.15, color: "#101318", valign: "bottom" }); // prettier-ignore
   if (caption) ch.label(shorten(caption, 40), [0, ch.h + ch.px * 31, -ch.d / 2], { scale: 0.75, color: "#4a505a", valign: "bottom" }); // prettier-ignore
   ch.emit(k);
-  k.data = { labels: ch.labels, report, box: { w: ch.w, h: ch.h, d: ch.d } };
+  // Fix9: a tap anywhere in the plot's box (and its axes' labels just outside) plays the tap.
+  const pad = 0.25;
+  const tapBox = { min: [-ch.w / 2 - pad, -pad, -ch.d / 2 - pad], max: [ch.w / 2 + pad, ch.h + pad, ch.d / 2 + pad] }; // prettier-ignore
+  k.data = { labels: ch.labels, report, box: { w: ch.w, h: ch.h, d: ch.d }, tapBox };
   return report;
 }
 
