@@ -12,6 +12,10 @@ brief, word for word, under "## Brief", then keep "## State
 Model: Opus 5.5 (claude-opus-5-5), default effort. Engine PR #351 ("Engine: chunks a kit toy loads
 when it asks, the zoom gesture for a toy, a scale bar"; merge it first). Lane PR #353 (draft).
 
+- October 7, 2026, done: #351 and #353 merged into main through Ops #385 (main 9bb2e68f), at engine
+  ecf984a0 and lane 5363be5e, after Integrator 6's clean run N32. The owner marked `pot-zoom-out`,
+  `pot-zoom-out-r2` and `pot-zoom-in-r3` good. The lane stood down; nothing is open.
+
 - October 6, 2026, first READY: the toy works end to end with 17 stops from the Milky Way to a
   ribosome, each a chunk loaded as the zoom nears it, with its label, source and scale bar; Play,
   the slider, pinch, wheel and drag zoom. Evidence file and tests pass (`tests/pot.spec.mjs`, 9;
@@ -131,7 +135,7 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first).
 
 ## For the Operator
 
-- Merge engine PR #351 first. It gained `frameReaches` after run N25, so it needs a full run again.
+- Both PRs are merged (Ops #385); nothing is waiting on the Operator.
 - Wikimedia answered 429 (too many requests) to this container on October 6 (a helper searched it
   too hard); the leaf came from Flickr instead.
 - The owner asked for "a virus to a galaxy": the smallest stop is a ribosome (it nests in the
