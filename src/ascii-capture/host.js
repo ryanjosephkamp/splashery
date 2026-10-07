@@ -90,7 +90,7 @@ async function run({ toy, options }) {
     toy: { kind: "builtin", id: toy, ...(preset.options ? { options: { ...preset.options } } : {}) }, // prettier-ignore
     seed: 1,
   });
-  if (info.camera) scene.camera = { ...info.camera };
+  if (preset.camera || info.camera) scene.camera = { ...(preset.camera || info.camera) };
   scene.look = normalizeLook({ ...scene.look, background: "#111111" });
   scene.autoplay.turntable = false;
   player.scene = scene;

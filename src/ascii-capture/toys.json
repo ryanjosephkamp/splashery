@@ -1,0 +1,540 @@
+{
+  "shelves": [
+    {
+      "id": "food",
+      "label": "Food"
+    },
+    {
+      "id": "balls",
+      "label": "Balls"
+    },
+    {
+      "id": "shapes",
+      "label": "Shapes"
+    },
+    {
+      "id": "gems",
+      "label": "Gems"
+    },
+    {
+      "id": "toys",
+      "label": "Toys"
+    },
+    {
+      "id": "music",
+      "label": "Instruments"
+    }
+  ],
+  "toys": [
+    {
+      "id": "ice-cream",
+      "label": "Ice cream",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "watermelon",
+      "label": "Watermelon",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "birthday-cake",
+      "label": "Birthday cake",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "popcorn",
+      "label": "Popcorn",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "jelly",
+      "label": "Jelly",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "pancakes",
+      "label": "Pancakes",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "cupcake",
+      "label": "Cupcake",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "lollipop",
+      "label": "Lollipop",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "candy-cane",
+      "label": "Candy cane",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "macarons",
+      "label": "Macarons",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "donut",
+      "label": "Donut",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "gummy-bear",
+      "label": "Gummy bear",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "pretzel",
+      "label": "Pretzel",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "croissant",
+      "label": "Croissant",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "pizza",
+      "label": "Pizza",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "burger",
+      "label": "Burger",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "sushi",
+      "label": "Sushi",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "taco",
+      "label": "Taco",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "egg",
+      "label": "Boiled egg",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "coffee",
+      "label": "Coffee",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "apple",
+      "label": "Apple",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "banana",
+      "label": "Bananas",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "kiwi",
+      "label": "Kiwi",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "pineapple",
+      "label": "Pineapple",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "cherries",
+      "label": "Cherries",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "avocado",
+      "label": "Avocado",
+      "shelf": "food",
+      "columns": 96
+    },
+    {
+      "id": "basketball",
+      "label": "Basketball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "soccer-ball",
+      "label": "Soccer ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "american-football",
+      "label": "American football",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "tennis-ball",
+      "label": "Tennis ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "baseball",
+      "label": "Baseball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "softball",
+      "label": "Softball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "beach-ball",
+      "label": "Beach ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "golf-ball",
+      "label": "Golf ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "rugby-ball",
+      "label": "Rugby ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "volleyball",
+      "label": "Volleyball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "water-polo-ball",
+      "label": "Water polo ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "ping-pong-ball",
+      "label": "Ping-pong ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "cricket-ball",
+      "label": "Cricket ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "bowling-ball",
+      "label": "Bowling ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "pool-ball",
+      "label": "Pool ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "pickleball",
+      "label": "Pickleball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "dodgeball",
+      "label": "Dodgeball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "medicine-ball",
+      "label": "Medicine ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "lacrosse-ball",
+      "label": "Lacrosse ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "squash-ball",
+      "label": "Squash ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "bouncy-ball",
+      "label": "Bouncy ball",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "marble",
+      "label": "Marble",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "hockey-puck",
+      "label": "Hockey puck",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "shuttlecock",
+      "label": "Shuttlecock",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "flying-disc",
+      "label": "Flying disc",
+      "shelf": "balls",
+      "columns": 96
+    },
+    {
+      "id": "torus",
+      "label": "Torus",
+      "shelf": "shapes",
+      "columns": 96
+    },
+    {
+      "id": "blob",
+      "label": "Jelly blob",
+      "shelf": "shapes",
+      "columns": 96
+    },
+    {
+      "id": "knot",
+      "label": "Neon knot",
+      "shelf": "shapes",
+      "columns": 96
+    },
+    {
+      "id": "diamond",
+      "label": "Diamond",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "ruby",
+      "label": "Ruby",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "emerald",
+      "label": "Emerald",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "amethyst-geode",
+      "label": "Amethyst geode",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "sapphire",
+      "label": "Sapphire",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "quartz-cluster",
+      "label": "Quartz cluster",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "opal",
+      "label": "Opal",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "pearl",
+      "label": "Pearl",
+      "shelf": "gems",
+      "columns": 96
+    },
+    {
+      "id": "bricks",
+      "label": "Building bricks",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "rubber-duck",
+      "label": "Rubber duck",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "spinning-top",
+      "label": "Spinning top",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "dice",
+      "label": "Dice",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "newtons-cradle",
+      "label": "Newton's cradle",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "teddy-bear",
+      "label": "Teddy bear",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "yo-yo",
+      "label": "Yo-yo",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "puzzle-cube",
+      "label": "Puzzle cube",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "spring-toy",
+      "label": "Spring toy",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "kite",
+      "label": "Kite",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "paper-plane",
+      "label": "Paper plane",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "origami-crane",
+      "label": "Origami crane",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "balloon-dog",
+      "label": "Balloon dog",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "robot",
+      "label": "Wind-up robot",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "chess-set",
+      "label": "Chess set",
+      "shelf": "toys",
+      "columns": 96
+    },
+    {
+      "id": "guitar",
+      "label": "Acoustic guitar",
+      "shelf": "music",
+      "columns": 96
+    },
+    {
+      "id": "drum",
+      "label": "Snare drum",
+      "shelf": "music",
+      "columns": 96
+    },
+    {
+      "id": "xylophone",
+      "label": "Xylophone",
+      "shelf": "music",
+      "columns": 96
+    },
+    {
+      "id": "toy-piano",
+      "label": "Toy piano",
+      "shelf": "music",
+      "columns": 96
+    },
+    {
+      "id": "grand-piano",
+      "label": "Grand piano",
+      "shelf": "music",
+      "columns": 96
+    },
+    {
+      "id": "upright-piano",
+      "label": "Upright piano",
+      "shelf": "music",
+      "columns": 96
+    },
+    {
+      "id": "harpsichord",
+      "label": "Harpsichord",
+      "shelf": "music",
+      "columns": 96
+    },
+    {
+      "id": "electronic-keyboard",
+      "label": "Electronic keyboard",
+      "shelf": "music",
+      "columns": 96
+    }
+  ]
+}
