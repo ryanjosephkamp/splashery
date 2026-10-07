@@ -27,7 +27,15 @@ then keep "## State
 - Effect review page 2 (lane record `Fix9`) has nine cards, each before (left) and after (right):
   `fx9-cherries`, `fx9-soda-can`, `fx9-data-in-3d`, `fx9-fluid-lab`, `fx9-orange-photo`,
   `fx9-dog-plush`, `fx9-mitosis`, `fx9-apoptosis` and `fx9-phagocytosis`.
-- First READY on October 7, 2026, about 01:50 UTC. Next: polish rounds on the owner's marks.
+- First READY on October 7, 2026, about 01:50 UTC.
+- The owner's marks (02:48 UTC): eight cards are "good". `fx9-dog-plush` was "fix": "Looks better,
+  but still needs a bit more work." Round 2 (`fx9-dog-plush-r2`, posted at about 03:40 UTC) made
+  three changes:
+  - It removed the capture's silvery fringe in the crease (about 1,400 splats, through
+    `.cache/fx9/dog-clean.ply` and the entry's new `"local"` field in `tools/pr2-prepare.mjs`).
+  - It widened the core by one cell under the low rims of the paws and chin.
+  - It colored the core a warm shadow brown toward the mat.
+- Main was merged in at 02:50 UTC (clean). Next: the owner's mark on `fx9-dog-plush-r2`.
 
 ## Notes
 
