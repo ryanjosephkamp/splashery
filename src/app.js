@@ -200,6 +200,7 @@ class App {
       ui.setPictures?.(p);
       this.updateStatus();
     });
+    player.on("chunks", () => this.updateStatus()); // lane Powers of ten
     player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
@@ -512,8 +513,9 @@ class App {
     const player = this.player;
     const info = player.toyInfo;
     if (!info) return;
-    // Pictures: a picture toy's sheets count too.
-    const splats = info.splats + (player.pictures?.splats() || 0);
+    // Pictures: a picture toy's sheets count too (and lane Powers of ten: a
+    // toy's chunks on show).
+    const splats = info.splats + (player.pictures?.splats() || 0) + (player.chunks?.splats() || 0); // prettier-ignore
     const parts = [info.label, `${formatCount(splats)} splats`];
     if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
     const pat = player.scene.pattern;

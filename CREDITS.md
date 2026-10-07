@@ -1142,6 +1142,50 @@ feature (`assets/toys/real-worlds/`). Feature positions are from the
 - None of the three models has a texture, so none carries a logo or insignia (the Saturn V's
   lettering reads "UNITED STATES" and "USA", with small U.S. flags).
 
+## Powers of ten (lane Powers of ten)
+
+The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own files are
+in `assets/toys/powers-of-ten/`, made by `tools/pot-maps.mjs` and `tools/pot-stars.mjs`; it also
+reads the files of the Space r2, Science r3 and photoreal toys named below.
+
+- Aerial pictures, 1,000 km to 10 km across: EOxCloudless 2016
+  ([Sentinel-2 cloudless](https://cloudless.eox.at)) by EOX IT Services GmbH, contains modified
+  Copernicus Sentinel data 2016, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (the 2016
+  layer's license in EOX's WMTS capabilities, checked October 6, 2026; the later years are NC and
+  are not used).
+- 3 km:
+  [USGS Imagery Only](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
+  (USDA NAIP, USGS The National Map). Public domain. The half of the Earth for the globe is the same
+  service's Blue Marble: Next Generation (NASA Earth Observatory, Reto Stöckli). Public domain.
+- 1 km to 30 m: District of Columbia, Office of the Chief Technology Officer,
+  [Aerial Photography (Orthophoto) 2023](https://opendata.dc.gov/), 3 inch (8 cm),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (its live license, checked October 6,
+  2026).
+- Stars within 500 pc: the [HYG database](https://codeberg.org/astronexus/hyg) v4.4 by David Nash
+  (astronexus), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live README,
+  checked October 6, 2026). The stars file `stars-500pc.bin` is CC BY-SA 4.0 too.
+- Read from other toys: the nearby stars (Gaia and HYG, CC BY-SA; Space r2), M83 by
+  [ESO](https://www.eso.org/public/images/eso0825a/) (CC BY 4.0; Space r2), the Earth and Moon maps
+  (NASA, public domain; Space r2), the ribosome's cryo-EM map EMD-48329 and model PDB 9MKK (public
+  domain; Science r3) and the "Golden Fullmoon Maple" capture by Joshua Trapani
+  ([CC BY 4.0](https://superspl.at/scene/f233b115)).
+- The golden full-moon maple's leaves: "Acer shirasawanum 'Aureum'" by Megan Hansen
+  ([Flickr](https://www.flickr.com/photos/24495410@N03/4714538293)),
+  [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) (its cut, `micro-crown-*.jpg`,
+  stays CC BY-SA 2.0), and one leaf: "Golden Full Moon Maple" by susteph
+  ([Flickr](https://www.flickr.com/photos/28012136@N08/2649442904)),
+  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) (their live pages, checked October 6,
+  2026). Cut by `tools/pot-micro.mjs`.
+- Plant cells: "Arabidopsis thaliana plant cells containing chloroplasts, LM" by Fernán Federici,
+  and a chloroplast: "Chloroplast in a bean leaf, TEM" by Kevin Mackenzie, University of Aberdeen,
+  both from the [Wellcome Collection](https://wellcomecollection.org/works/gwmfux6b)
+  ([and](https://wellcomecollection.org/works/bx3dctp2)),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (their live pages, checked October 6,
+  2026). Cut by `tools/pot-micro.mjs`.
+- The planets' places: JPL's
+  [Approximate Positions of the Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html) (E. M.
+  Standish). Public domain.
+
 ## Data and climate (lane Data and climate)
 
 The Data in 3D toy (Studio) and the Climate records toy (Science) ship dated snapshots and never

@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 438 toys. 408 have a tap action today; the other 30 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 419.
+- 439 toys. 409 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 19.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -36,13 +36,13 @@ Proposals below are suggestions; the owner may change them.
   Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
   Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth,
   The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real
-  star systems, Real galaxies, Saturn V, Space Launch System, Space Shuttle, Virus, Bacteriophage,
-  Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia,
-  Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to protein,
-  Cell division, Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein, Crystal
-  lattice, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode,
-  Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
-  tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
+  star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, Virus,
+  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
+  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to
+  protein, Cell division, Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein,
+  Crystal lattice, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst
+  geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree,
+  Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
   Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
   Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
   Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
@@ -931,7 +931,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (38)
+## Space (39)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -1212,6 +1212,18 @@ Proposals below are suggestions; the owner may change them.
     (7 s).
   - Improved: Space r2: new toy (labs); tools/sp2-galaxies.mjs crops each picture round its galaxy.
   - Sound: Space is silent: a long soft breath as it turns.
+- **Powers of ten** (`powers-of-ten`). Now: tap: Play the journey. Plan: keep.
+  - Owner: The owner's Push Plan pick S12 ("One continuous zoom from a virus to a galaxy ... with
+    real scale labels at each step"; "I don't want it to look like a cartoon"); lane Powers of ten;
+    labs only.
+  - Effect: One zoom through real scales: the Milky Way (M83 at its size and tilt), real stars (HYG,
+    Gaia), the planets and the Moon where they were at 12:54 p.m. EDT on October 7, 2026, the Earth,
+    aerial pictures every half decade down to a D.C. garden, a 3D garden-bed capture, plant cells, a
+    chloroplast and a ribosome's cryo-EM map. Pinch, scroll, drag or slide to zoom; a tap plays the
+    whole journey (70 s). A label and a scale bar at every stop.
+  - Improved: Powers of ten: new toy (labs); each scene a chunk loaded as the zoom nears it (engine
+    PR #351); tools/pot-maps.mjs, pot-stars.mjs and pot-micro.mjs make its files.
+  - Sound: A long soft breath as the journey starts.
 - **Saturn V** (`saturn-v`). Now: tap: Fire the stages in order. Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
     planets"; rockets; lane Space r2; labs only).
