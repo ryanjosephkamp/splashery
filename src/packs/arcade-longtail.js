@@ -495,6 +495,8 @@ class Longtail {
     this.acc = 0;
     this.ticks = 0;
     this.berry = null;
+    // (the sprites were all cleared above: a new berry for this game)
+    this.berrySprite = null;
     this.placeBerry();
     this.banner = null;
   }

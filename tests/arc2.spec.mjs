@@ -248,3 +248,20 @@ test("Note Rider: a recording's tune is found on this device, and each caught no
   expect(slice.len).toBeGreaterThan(0.3);
   expect(cues.some((c) => c.voice === "grand")).toBe(false);
 });
+
+test("Longtail: the berry shows in every game, not only the first", async ({ page }) => {
+  await open(page, "longtail");
+  // A live berry sprite on the layer (the sprites are all cleared at each reset).
+  const berry = () =>
+    read(page, () => {
+      const a = window.__arc;
+      const s = a.game.berrySprite;
+      return !!s && s.alive && a.sprites.list.includes(s);
+    });
+  expect(await berry()).toBe(true);
+  // Starting a game resets it once more, and so does starting again.
+  await page.evaluate(() => window.__arc.wake());
+  expect(await berry()).toBe(true);
+  await page.evaluate(() => window.__arc.restart());
+  expect(await berry()).toBe(true);
+});
