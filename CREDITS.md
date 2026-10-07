@@ -1229,6 +1229,22 @@ feature (`assets/toys/real-worlds/`). Feature positions are from the
 - None of the three models has a texture, so none carries a logo or insignia (the Saturn V's
   lettering reads "UNITED STATES" and "USA", with small U.S. flags).
 
+### Zooming in and naming the place (lane Space r3)
+
+A tap on a real world zooms in on that spot with close-up tiles cut by `tools/sp3-tiles.mjs` from
+the same public-domain maps (the Moon's heights from the CGI Moon Kit's `ldem_16`, Earth's from
+ETOPO 2022 at 60 arc-seconds), and names what is there:
+
+- Earth: [Natural Earth](https://www.naturalearthdata.com/) 1:10m states and provinces, countries,
+  populated places, marine areas, lakes, geographic regions and elevation points (Tom Patterson,
+  Nathaniel Vaughn Kelso and contributors). Public domain
+  ([terms of use](https://www.naturalearthdata.com/about/terms-of-use/)). Trimmed by
+  `tools/sp3-places.mjs` into `assets/toys/real-earth/places.bin` and `places.json`.
+- The Moon, Mars, Mercury, Venus, the big moons, Pluto, Ceres and Vesta: the
+  [Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/GIS_Downloads) (IAU
+  Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center), center points
+  of every adopted feature but the lettered satellite craters. Public domain.
+
 ## Powers of ten (lane Powers of ten)
 
 The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own files are

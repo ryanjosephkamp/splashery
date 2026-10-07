@@ -2281,34 +2281,29 @@ export const TOY_HELP = {
   },
   // ---- Space r2 (lane Space r2): real worlds ---------------------------------------------
   "real-moon": {
-    howTo:
-      "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Tycho and more.",
     about:
-      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. Close up, the relief eases to at most twice its height. There are no shadows, and the colors are a little enhanced, as in NASA's map.",
+      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. There are no shadows, and the colors are a little enhanced, as in NASA's map. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-mars": {
-    howTo:
-      "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Olympus Mons.",
     about:
-      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air; there are no shadows.",
+      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-earth": {
-    howTo:
-      "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    howTo: "Tap a spot to zoom in and name the place; tap again to go out. Play flies to Everest.",
     about:
-      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. Close up, the relief eases to at most twice its height. There are no clouds or shadows.",
+      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. There are no clouds or shadows. A tap zooms in and names the place from Natural Earth's maps; tap again to go out.",
   },
   "real-mercury": {
-    howTo:
-      "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Caloris.",
     about:
-      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. There are no shadows.",
+      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-venus": {
-    howTo:
-      "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Maxwell Montes.",
     about:
-      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. There are no shadows.",
+      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons its tallest volcano; Artemis Corona a ring of ridges 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "nearby-stars": {
     howTo: "Tap to fly to Alpha Centauri, Sirius, Barnard's Star, Vega or Arcturus and back.",
@@ -2342,15 +2337,14 @@ export const TOY_HELP = {
       "The Space Shuttle at launch, as splats from NASA's 3D model: the winged orbiter, the big orange external tank that fed its three main engines with liquid hydrogen and oxygen, and the two white solid rocket boosters. The Shuttles flew 135 missions from 1981 to 2011, carrying astronauts, satellites and the pieces of the International Space Station.\n\nTap to stage it in a flight's order, much faster than real: the boosters fall away about two minutes after launch, to be fished from the sea and used again; the main engines stop at about eight and a half minutes and the empty tank drops away, the only part not reused; the orbiter flies on with its two small maneuvering engines. The model's black and white tiles are drawn simply.",
   },
   "real-moons": {
-    howTo:
-      "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    howTo: "Pick a moon in the Toy tab. Tap a spot to zoom in and name it; tap again to go out.",
     about:
-      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second.",
+      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-small-worlds": {
-    howTo: "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    howTo: "Pick Pluto, Ceres or Vesta. Tap a spot to zoom in and name it; tap again to go out.",
     about:
-      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them.",
+      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "star-systems": {
     howTo: "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",

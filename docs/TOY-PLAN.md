@@ -1092,82 +1092,140 @@ Proposals below are suggestions; the owner may change them.
     core flares (4.6 s). Sharpness A (October 2, 2026): pinpoint stars over a smooth disc and arm
     glow, and finer dust lanes.
   - Sound: Deep swirling hum.
-- **The real Moon** (`real-moon`). Now: tap: Fly to a feature and back. Plan: keep.
+- **The real Moon** (`real-moon`). Now: tap: Tap a spot to zoom in and name it (the play button
+  flies to a named feature). Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
     data from, you know, NASA"; lane Space r2; labs only).
   - Effect: The real Moon as splats on its real elevation and color maps, turning at its real rate
     (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
     exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's
     landing site) to face you, glides in close with its name lying on the ground, and glides back
-    (about 10 s).
+    (about 10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats
+    round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is
+    there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back
+    out. The play button still flies to the named features.
   - Improved: Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and
     the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper
-    patch round each feature; src/space/field.js turns, lifts and lights the splats.
+    patch round each feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the
+    owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names
+    the place): the globe takes nearly all the splats, each colored by the mean of its map over its
+    footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names
+    (tools/sp3-places.mjs) load only on a tap.
   - Sound: Space is silent: a soft breath as the view flies in.
-- **The real Mars** (`real-mars`). Now: tap: Fly to a feature and back. Plan: keep.
+- **The real Mars** (`real-mars`). Now: tap: Tap a spot to zoom in and name it (the play button
+  flies to a named feature). Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
     data from, you know, NASA"; lane Space r2; labs only).
   - Effect: The real Mars as splats on its real elevation and color maps, turning at its real rate
     (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
     exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and
     Gale crater) to face you, glides in close with its name lying on the ground, and glides back
-    (about 10 s).
+    (about 10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats
+    round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is
+    there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back
+    out. The play button still flies to the named features.
   - Improved: Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser
     altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch
-    round each feature; src/space/field.js turns, lifts and lights the splats.
+    round each feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's
+    walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the
+    place): the globe takes nearly all the splats, each colored by the mean of its map over its
+    footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names
+    (tools/sp3-places.mjs) load only on a tap.
   - Sound: Space is silent: a soft breath as the view flies in.
-- **The real Earth** (`real-earth`). Now: tap: Fly to a feature and back. Plan: keep.
+- **The real Earth** (`real-earth`). Now: tap: Tap a spot to zoom in and name it (the play button
+  flies to a named feature). Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
     data from, you know, NASA"; lane Space r2; labs only).
   - Effect: The real Earth as splats on its real elevation and color maps, turning at its real rate
     (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
     exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and
     Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about
-    10 s).
+    10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round
+    it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there
+    (Natural Earth's city or peak, state and country, with the source); a second tap or a pinch goes
+    back out. The play button still flies to the named features.
   - Improved: Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's
     Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each
-    feature; src/space/field.js turns, lifts and lights the splats.
+    feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's
+    walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the
+    place): the globe takes nearly all the splats, each colored by the mean of its map over its
+    footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names
+    (tools/sp3-places.mjs) load only on a tap.
   - Sound: Space is silent: a soft breath as the view flies in.
-- **The real Mercury** (`real-mercury`). Now: tap: Fly to a feature and back. Plan: keep.
+- **The real Mercury** (`real-mercury`). Now: tap: Tap a spot to zoom in and name it (the play
+  button flies to a named feature). Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
     data from, you know, NASA"; lane Space r2; labs only).
   - Effect: The real Mercury as splats on its real elevation and color maps, turning at its real
     rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
     exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and
     Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about
-    10 s).
+    10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round
+    it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there
+    (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The
+    play button still flies to the named features.
   - Improved: Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global
     elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each
-    feature; src/space/field.js turns, lifts and lights the splats.
+    feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's
+    walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the
+    place): the globe takes nearly all the splats, each colored by the mean of its map over its
+    footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names
+    (tools/sp3-places.mjs) load only on a tap.
   - Sound: Space is silent: a soft breath as the view flies in.
-- **The real Venus** (`real-venus`). Now: tap: Fly to a feature and back. Plan: keep.
+- **The real Venus** (`real-venus`). Now: tap: Tap a spot to zoom in and name it (the play button
+  flies to a named feature). Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("I'd love to see planets, like photoreal, or
     data from, you know, NASA"; lane Space r2; labs only).
   - Effect: The real Venus as splats on its real elevation and color maps, turning at its real rate
     (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be
     exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis
     Corona) to face you, glides in close with its name lying on the ground, and glides back (about
-    10 s).
+    10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round
+    it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there
+    (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The
+    play button still flies to the named features.
   - Improved: Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut
     by tools/sp2-maps.mjs into a global map and a sharper patch round each feature;
-    src/space/field.js turns, lifts and lights the splats.
+    src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's walkthrough of
+    October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe
+    takes nearly all the splats, each colored by the mean of its map over its footprint (no
+    speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load
+    only on a tap.
   - Sound: Space is silent: a soft breath as the view flies in.
-- **Real moons** (`real-moons`). Now: tap: Fly to a feature and back. Plan: keep.
+- **Real moons** (`real-moons`). Now: tap: Tap a spot to zoom in and name it (the play button flies
+  to a named feature). Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane
     Space r2; labs only).
   - Effect: Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and
     Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates
     (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki
-    Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back.
-  - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice.
+    Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back. Space r3: a tap on any spot
+    turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in
+    smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature,
+    with the source); a second tap or a pinch goes back out. The play button still flies to the
+    named features.
+  - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice. Space r3 (the
+    owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names
+    the place): the globe takes nearly all the splats, each colored by the mean of its map over its
+    footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names
+    (tools/sp3-places.mjs) load only on a tap.
   - Sound: Space is silent: a soft breath as the view flies in.
-- **Pluto, Ceres and Vesta** (`real-small-worlds`). Now: tap: Fly to a feature and back. Plan: keep.
+- **Pluto, Ceres and Vesta** (`real-small-worlds`). Now: tap: Tap a spot to zoom in and name it (the
+  play button flies to a named feature). Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("more planets", photoreal from NASA data; lane
     Space r2; labs only).
   - Effect: Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true
     shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik
-    Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.
-  - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice.
+    Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back. Space r3: a tap on any
+    spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms
+    in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named
+    feature, with the source); a second tap or a pinch goes back out. The play button still flies to
+    the named features.
+  - Improved: Space r2: new toy (labs), the real-worlds engine with a World choice. Space r3 (the
+    owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names
+    the place): the globe takes nearly all the splats, each colored by the mean of its map over its
+    footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names
+    (tools/sp3-places.mjs) load only on a tap.
   - Sound: Space is silent: a soft breath as the view flies in.
 - **Stars near the Sun** (`nearby-stars`). Now: tap: Fly to the next star and back. Plan: keep.
   - Owner: The owner's push notes of October 5, 2026 ("more galaxies, more stellar systems, more
