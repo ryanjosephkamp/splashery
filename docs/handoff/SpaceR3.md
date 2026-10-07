@@ -28,7 +28,8 @@ READY for review (October 7, 2026, about 07:30 UTC). PR #380, all labs. Built on
   Olympus Mons in the browser), `tests/sp2.spec.mjs` (26), help and hta: 52 passed. Prettier and the
   US English check are clean; thumbnails redone; screenshots `sp3-*`.
 - Clips: 14 on Effect review page 2 (lane record `SpaceR3`): an after clip of each world's tap zoom
-  and a before clip of main's fly, at phone size. Waiting on the owner's marks.
+  and a before clip of main's fly, at phone size. The owner marked all 14 "Looks right" (October 7,
+  2026, by 15:26 UTC). Ready for the Operator's merge after the full test run.
 
 ## Notes", "## Known
 
