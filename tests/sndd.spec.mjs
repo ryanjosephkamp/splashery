@@ -77,10 +77,12 @@ test("each fix in the walkthrough holds, and what he kept stays", () => {
   expect(pc.sparkle).toBeLessThanOrEqual(0.08);
 });
 
-test("every changed toy is in the sound review, ready to hear, and its spec is sound", () => {
+test("every changed toy is in the sound review, ready to hear or approved, and its spec is sound", () => {
   for (const id of CHANGED) {
     expect(specProblems(TOY_SOUNDS[id], id)).toEqual([]);
-    expect(REVIEW[id], id).toMatchObject({ status: "ready", round: "2026-10-06" });
+    // "ready" until the owner hears it, "site" once he approves it (October 7, 2026).
+    expect(["ready", "site"], id).toContain(REVIEW[id].status);
+    expect(REVIEW[id], id).toMatchObject({ round: "2026-10-06" });
     expect(REVIEW[id].plan, id).toMatch(/^Now: .*\(Sound D\)\.$/);
     expect(REVIEW[id].said, id).toMatch(/^\(October 6, 2026, walkthrough\) /);
   }
