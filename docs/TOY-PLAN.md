@@ -10,7 +10,7 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 439 toys. 409 have a tap action today; the other 30 only hop.
+- 439 toys. 410 have a tap action today; the other 29 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 19.
@@ -25,51 +25,52 @@ Proposals below are suggestions; the owner may change them.
   Decorated tree, Diya, Sports car, Tractor, Statue of Liberty, Your book, Photo album. Effects to
   make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie,
   Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee,
-  Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real
-  rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage
-  camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real
-  pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball,
-  Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball,
-  Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy
-  ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar
-  system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora
-  world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula,
-  Spiral galaxy, The real Moon, The real Mars, The real Earth, The real Mercury, The real Venus,
-  Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real star systems, Real galaxies, Powers
-  of ten, Saturn V, Space Launch System, Space Shuttle, Virus, Bacteriophage, Bacterium, Red blood
-  cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain,
-  Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division,
-  Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Molecule
-  viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
-  cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
-  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
-  Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
-  Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
-  Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
-  bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
-  cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
-  and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music box, Fountain pen,
-  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
-  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider.
+  Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket,
+  Orange (photo), Dog plush, Real rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele,
+  Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat
+  statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer ball, American football,
+  Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball,
+  Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball,
+  Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating
+  heart, Treasure chest, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn,
+  Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
+  Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth,
+  The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real
+  star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, Virus,
+  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
+  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to
+  protein, Cell division, Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein,
+  Crystal lattice, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst
+  geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree,
+  Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
+  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
+  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
+  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
+  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
+  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
+  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
+  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
+  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
+  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
+  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
+  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
+  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
+  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
+  Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
+  code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
+  Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
+  box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand
+  Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city,
+  Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -219,6 +220,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Improved: Fix9 (October 7, 2026, the owner's walkthrough): less grainy: the haze of faint
+    floaters round it and the smear under it cropped away (a sphere crop when it is prepared), the
+    orange itself untouched.
   - Sound: A short sound that suits the object.
 - **Physalis** (`physalis`). Now: hops. Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
@@ -265,10 +269,14 @@ Proposals below are suggestions; the owner may change them.
     good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
   - Sound: A short sound that suits the object.
-- **Dog plush** (`dog-plush`). Now: hops. Plan: keep.
+- **Dog plush** (`dog-plush`). Now: tap: Hop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
   - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Improved: Fix9 (October 7, 2026, the owner's walkthrough): the dark gaps under its head and paws
+    closed. They came from the capture (the plush's underside and the mat under it were never seen),
+    not from our cut; a hidden, kit-built core fills the plush from the mat up to its lowest fur,
+    the fur's color darkening toward the mat, and shows only through those gaps.
   - Sound: A short sound that suits the object.
 - **BMX bicycle** (`bmx-bike`). Now: hops. Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
@@ -915,7 +923,11 @@ Proposals below are suggestions; the owner may change them.
     brand) on a kit-built cork coaster. It shakes, its own ring pull (cut from the model as a solid
     piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots
     up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the
-    tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps.
+    tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps. Fix9: the suds
+    well up, spill over the rim and run down the can, then shrink away (4 s). Fix9 (October 7, 2026,
+    the owner's walkthrough): solid, opaque suds well up out of the opening, cover the lid, spill
+    over the rim and run down the can in a sheet that breaks into tongues of different lengths, then
+    shrink away (4 s).
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
@@ -1455,7 +1467,9 @@ Proposals below are suggestions; the owner may change them.
     kinetochore fibers grow out and the chromosomes line up at the plate; the sisters are pulled to
     the poles as the cell stretches, new nuclei fade in, the furrow pinches the cell in two, and one
     daughter drifts off while the other grows back into the first cell (18 s). Phase names show
-    above the cell.
+    above the cell. Fix9 (October 7, 2026, the owner's walkthrough): sharper: the sharp splat edge,
+    every faint splat drawn, a membrane clear face on and solid at its edge, and a fainter nuclear
+    envelope, so the chromosomes read clearly.
   - Sound: A soft breath as the chromatin condenses, a light tine as the sisters part and a hollow
     pop as the cells pinch apart.
 - **Apoptosis** (`apoptosis`). Now: tap: Start apoptosis. Plan: keep.
@@ -1465,7 +1479,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Tiny world r2: the cell shrinks as a whole and its nucleus condenses dark; two sets of
     blebs bulge in turn (morphs); the nucleus breaks into four pieces; the membrane pinches into
     seven membrane-bound bodies (a morph, then solid pieces) holding the organelles and nuclear
-    pieces, which drift away; a neighbor cell moves in (14 s).
+    pieces, which drift away; a neighbor cell moves in (14 s). Fix9 (October 7, 2026, the owner's
+    walkthrough): sharper: the sharp splat edge, every faint splat drawn and a fainter membrane, so
+    the inside reads clearly.
   - Sound: A low breath as it shrinks, soft boings as it blebs and quiet pops as the bodies part.
 - **Phagocytosis** (`phagocytosis`). Now: tap: Catch the bacterium. Plan: keep.
   - Owner: The owner's push notes (October 5, 2026): phagocytosis.
@@ -1475,7 +1491,9 @@ Proposals below are suggestions; the owner may change them.
     of the membrane, two layers deep) and close; the phagosome is drawn inside, five lysosomes fuse
     with it one by one, the bacterium falls apart into six solid pieces that shrink, and the waste
     is released out of the far side; new lysosomes bud from the Golgi and a new bacterium swims up
-    (16 s). Labels name each step.
+    (16 s). Labels name each step. Fix9 (October 7, 2026, the owner's walkthrough): sharper: the
+    sharp splat edge, every faint splat drawn, a fainter membrane and solid granules instead of
+    grain.
   - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
     as it is digested.
 
@@ -1985,7 +2003,11 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and
     knock together (a plink each time), bouncing apart again until they settle, while the joint bobs
     (about 3.6 s). Physics (Hands-on): pull a cherry out on its stem and let go; it swings back and
-    knocks the other, which swings out in turn.
+    knocks the other, which swings out in turn. Fix9 (October 7, 2026, the owner's walkthrough): a
+    small Newton's cradle at real speed, worked out with the physics engine: a tap flicks the left
+    cherry out, it swings back and knocks the right one out, which swings back and knocks it again,
+    each stem a pendulum with its real period (about 0.43 s for a 4.5 cm stem), until the swing dies
+    away.
   - Sound: No string note, only the stems' soft swish; the knocking is unchanged.
 - **Grapes** (`grapes`). Now: tap: Drop grapes. Plan: keep.
   - Owner: Could fall off the stem.
@@ -3351,6 +3373,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,
     ticks and labels that turn to face the camera. A tap drops every point, bar or the surface to
     the floor and lets it rise back into place with a small overshoot (2.4 s).
+  - Improved: Fix9 (October 7, 2026, the owner's walkthrough): a tap anywhere in the plot's box or
+    on its axes plays the drop and rise, not only a tap on a point.
   - Sound: A soft thud as the marks land, a light knock, and a breath as they rise.
 
 ## Lab (3)
@@ -3394,7 +3418,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a
     viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a
     curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the
-    glass and the bowl.
+    glass and the bowl. Fix9 (October 7, 2026, the owner's walkthrough): on a phone that can't keep
+    up (its frames timed for the first second), a short, plain warning offers a lighter mode (the
+    lowest tier), a way back to the first toy, or to keep going.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
 

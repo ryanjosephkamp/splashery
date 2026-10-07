@@ -307,7 +307,7 @@ export const PHOTOREAL_R2_TOYS = [
       license: "CC BY-NC 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by-nc/4.0/",
       changes:
-        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file.",
+        "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file. The capture's stray fringe under the plush removed and the gaps there closed with a hidden core.",
     },
   },
   {

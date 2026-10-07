@@ -258,7 +258,12 @@ main > article.prose > section {
   gap: 12px;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
 }
-.tool-card a {
+.tool-card {
+  position: relative;
+  transition:
+    transform 0.18s var(--ease);
+}
+.tool-card > a:first-child {
   display: flex;
   gap: 14px;
   align-items: flex-start;
@@ -271,13 +276,32 @@ main > article.prose > section {
   text-decoration: none;
   transition:
     border-color 0.18s var(--ease),
-    box-shadow 0.18s var(--ease),
-    transform 0.18s var(--ease);
+    box-shadow 0.18s var(--ease);
 }
-.tool-card a:hover {
+.tool-card:hover {
+  transform: translateY(-2px);
+}
+.tool-card > a:first-child:hover {
   border-color: var(--accent);
   box-shadow: var(--shadow);
-  transform: translateY(-2px);
+}
+/* A toy's card goes to its page; "Open in Splashery" is a second link under the words, in a new tab. */
+.tool-card.has-app > a:first-child {
+  padding-bottom: 46px;
+}
+.tool-app {
+  position: absolute;
+  left: 104px;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+.tool-app:hover {
+  text-decoration: underline;
 }
 .tool-art {
   flex: none;
@@ -320,10 +344,11 @@ main > article.prose > section {
   font-size: 0.9rem;
 }
 @media (prefers-reduced-motion: reduce) {
-  .tool-card a {
+  .tool-card,
+  .tool-card > a:first-child {
     transition: none;
   }
-  .tool-card a:hover {
+  .tool-card:hover {
     transform: none;
   }
 }
@@ -555,4 +580,19 @@ main > article.prose > section {
 code.code,
 pre.code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---- The draft loop-graph page ---- */
+
+.loop-figure {
+  margin: 20px 0;
+}
+.loop-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }

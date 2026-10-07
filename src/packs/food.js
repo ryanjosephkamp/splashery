@@ -30,6 +30,7 @@ import {
   evenTube,
 } from "./even.js";
 import { surfacePoints } from "../physics/world.js"; // lane Physics
+import { World, Body } from "../physics/world.js"; // Fix9 (the cherries' cradle)
 import { surfacePoints as hebPoints } from "../physics/world.js"; // lane Hands engine B
 import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 
@@ -444,9 +445,8 @@ function melonFlesh(rho, c) {
   return shade(mix(MELON.deep, MELON.flesh, smoothstep(0, 0.8, rho)), 1 + grain);
 }
 
-// The cherries' swing (E5): two pendulums hung from one joint that touch
-// at rest, played once at load. A tap flicks them apart; each swings on
-// its own stem, and when they meet they knock and bounce apart again.
+// The cherries' swing (E5; a cradle at real speed since Fix9): two
+// pendulums hung from one joint that touch at rest, played once at load.
 // Where the cherries' stems meet (their parts turn about it).
 const CHERRY_JOINT = [0.06, 1.0, 0];
 const CHERRY_SECS = 3.6;
@@ -529,28 +529,51 @@ const mix1 = (a, b, t) => a + (b - a) * t;
 // The grapes: when the fallen grapes start to hop home, and the effect's length.
 const GRAPE_BACK = 2.1;
 const GRAPE_SECS = 3.9;
+// Fix9 (the owner's walkthrough, October 6, 2026): a small Newton's cradle
+// at real speed, worked out once with the physics engine (src/physics/). A
+// cherry is about 2.2 cm across (0.37 units), so a unit is 3 cm and each
+// stem (1.5 units, 4.5 cm) swings with a pendulum's period, 2 pi sqrt(L / g):
+// about 0.43 s. Each cherry hangs from the joint on its stiff stem as if its
+// rest were straight down (so a cherry knocked out swings back to the other,
+// not into the gap), the two touch at rest, and a knock passes almost all of
+// one's speed to the other, as in a cradle, until the swing dies away.
+const CHERRY_G = 9.81 / 0.03; // units per second squared
+const CHERRY_HOMES = [
+  [-0.36, -0.42],
+  [0.34, -0.5],
+];
 const CHERRY_SIM = (() => {
   const dt = 1 / 240;
-  const w = TAU / 1.05;
-  const damp = 1.2;
-  let a = [0, 0];
-  let v = [-3.2, 1.6];
+  const J = CHERRY_JOINT;
+  const world = new World({ gravity: [0, 0, 0], substeps: 20, sleepSpeed: 0, minHit: 0.3 });
+  const turn = (b) => Math.atan2(b.pos[0] - J[0], J[1] - b.pos[1]);
+  const bodies = CHERRY_HOMES.map(([x, y]) => {
+    const L = Math.hypot(x - J[0], y - J[1]);
+    const b = new Body({ pos: [x, y, 0], mass: 1, solid: { type: "sphere", r: 0.35 }, restitution: 0.92, friction: 0, damping: 0.35, angDamping: 0 }); // prettier-ignore
+    b.data = { L, rest: turn(b) };
+    world.add(b);
+    world.joint(b, [0, 0, 0], null, J, { length: L });
+    return b;
+  });
+  // The stem's pull back toward its rest, a pendulum's (g sin of the swing).
+  world.force = (h) => {
+    for (const b of bodies) {
+      const a = turn(b);
+      const acc = -CHERRY_G * Math.sin(a - b.data.rest);
+      b.vel[0] += acc * Math.cos(a) * h;
+      b.vel[1] += acc * Math.sin(a) * h;
+    }
+  };
+  // The tap flicks the left one out, to about 28 degrees.
+  const [A] = bodies;
+  const v = 2 * Math.sin(0.245) * Math.sqrt(CHERRY_G * A.data.L);
+  A.vel = [-v * Math.cos(A.data.rest), -v * Math.sin(A.data.rest), 0];
   const frames = [];
   const hits = [];
   for (let i = 0; i * dt <= CHERRY_SECS + dt; i++) {
-    frames.push([a[0], a[1]]);
-    for (let j = 0; j < 2; j++) {
-      v[j] += (-w * w * Math.sin(a[j]) - damp * v[j]) * dt;
-      a[j] += v[j] * dt;
-    }
-    // The left one cannot swing right past the right one.
-    if (a[0] > a[1] && v[0] > v[1]) {
-      const m = (v[0] + v[1]) / 2;
-      const d = ((v[0] - v[1]) / 2) * 0.8;
-      if (d > 0.12) hits.push({ t: i * dt, v: d });
-      v = [m - d, m + d];
-      a = [(a[0] + a[1]) / 2, (a[0] + a[1]) / 2];
-    }
+    frames.push(bodies.map((b) => turn(b) - b.data.rest));
+    world.step(dt);
+    for (const h of world.takeHits()) if (h.speed > 0.6) hits.push({ t: i * dt, v: h.speed / 12 });
   }
   return { dt, frames, hits };
 })();
@@ -5805,26 +5828,27 @@ export const RECIPES = {
         })),
       sound: (hit, vol) => (hit.other ? { voice: "pop", f: Math.random() < 0.5 ? "C6" : "G5", decay: 1.1, vol: Math.min(1, 0.3 + vol) } : null), // prettier-ignore
     },
-    // A tap flicks the pair: each cherry swings out on its own stem from the
-    // joint, and they swing back and knock together (a plink each time),
-    // bouncing apart again until they settle. The joint bobs as they go.
+    // A tap flicks the left cherry out on its stem: it swings back and
+    // knocks the right one out, which swings back and knocks it out again,
+    // like a small Newton's cradle at real speed (a plink each knock),
+    // until the swing dies away (CHERRY_SIM, Fix9).
     drive(t, c, out) {
       const s = since(c.swing, CHERRY_SECS);
       let [a, b] = [0, 0];
-      let bob = 0;
       let side = [0, 0];
       if (s >= 0) {
         const f = CHERRY_SIM.frames[Math.min(CHERRY_SIM.frames.length - 1, Math.round(s / CHERRY_SIM.dt))]; // prettier-ignore
-        const end = 1 - smooth(band(s, CHERRY_SECS - 0.7, CHERRY_SECS - 0.05));
+        const end = 1 - smooth(band(s, CHERRY_SECS - 0.5, CHERRY_SECS - 0.05));
         [a, b] = [f[0] * end, f[1] * end];
-        bob = 0.05 * wobble(s, 1.4, 17) * end;
-        const fade = Math.exp(-1.1 * s) * end;
-        side = [0.1 * Math.sin(s * 6.3 + 0.4) * fade, -0.08 * Math.sin(s * 5.7 + 1.9) * fade];
+        // A little sway across, at the same pendulum's pace.
+        const w = Math.sqrt(CHERRY_G / 1.5);
+        const fade = Math.exp(-1.6 * s) * end;
+        side = [0.05 * Math.sin(s * w) * fade, -0.04 * Math.sin(s * w + 1.9) * fade];
       }
       const turn = (z, x) => quatMul(quatAxisAngle([0, 0, 1], z), quatAxisAngle([1, 0, 0], x));
-      out.parts.left = { quat: turn(a, side[0]), offset: [0, bob, 0] };
-      out.parts.right = { quat: turn(b, side[1]), offset: [0, bob, 0] };
-      out.parts.leaf = { quat: quatAxisAngle([0, 0, 1], 0.4 * (a + b) * 0.5), offset: [0, bob, 0] };
+      out.parts.left = { quat: turn(a, side[0]) };
+      out.parts.right = { quat: turn(b, side[1]) };
+      out.parts.leaf = { quat: quatAxisAngle([0, 0, 1], 0.4 * (a + b) * 0.5) };
       cuesAt(
         c,
         "cherries",

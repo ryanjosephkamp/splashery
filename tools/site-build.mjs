@@ -24,7 +24,7 @@ import * as prettier from "prettier";
 import { TOYS, CATEGORIES, holdsStill } from "../src/toys.js";
 import { TOY_HELP, defaultHowTo } from "../src/toy-help.js";
 import { RIGS } from "../src/rigs.js";
-import { SITE, MENU, PAGES, NOT_FOUND, HOME_TOY } from "./site-pages.mjs";
+import { SITE, MENU, PAGES, NOT_FOUND, HOME_TOY, DOC_PAGES, appLink, newTabLinks, mirrorDocLinks } from "./site-pages.mjs"; // prettier-ignore
 import { hubTypes } from "./site-hubs.mjs";
 import { toyPage, toyPath, toyPageDirs } from "./site-toy-pages.mjs";
 
@@ -111,7 +111,11 @@ function ogImage(page) {
 <meta name="twitter:card" content="${img.card}" />`;
 }
 
-function shell(page, main, { up, url, fixedBase = false }) {
+function shell(page, main, opts) {
+  return newTabLinks(mirrorDocLinks(shellHtml(page, main, opts), opts.up), opts.up);
+}
+
+function shellHtml(page, main, { up, url, fixedBase = false }) {
   const title = page.title.includes("Splashery") ? page.title : `${page.title} · Splashery`;
   const desc = plain(page.description);
   const nav = MENU.map((m) => {
@@ -146,9 +150,9 @@ ${ogImage(page)}
 <link rel="apple-touch-icon" href="${up}../assets/app/icon-180.png" />
 <script>${EARLY}</script>
 <link rel="stylesheet" href="${up}assets/site.css" />
-${(page.styles || []).map((f) => `<link rel="stylesheet" href="${up}assets/${f}" />`).join("\n")}
+${[...(page.styles || []), ...(page.outline ? ["outline.css"] : [])].map((f) => `<link rel="stylesheet" href="${up}assets/${f}" />`).join("\n")}
 <script type="module" src="${up}assets/site.js"></script>
-${(page.scripts || []).map((f) => `<script type="module" src="${up}assets/${f}"></script>`).join("\n")}
+${[...(page.scripts || []), ...(page.outline ? ["outline.js"] : [])].map((f) => `<script type="module" src="${up}assets/${f}"></script>`).join("\n")}
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to the page</a>
@@ -171,16 +175,16 @@ ${(page.scripts || []).map((f) => `<script type="module" src="${up}assets/${f}">
 </div>
 </div>
 </header>
-<main id="main" tabindex="-1">
+<main id="main" tabindex="-1"${page.outline ? " data-outline" : ""}>
 ${main}
 </main>
 <footer class="site-footer">
 <div class="footer-grid">
 <div class="footer-brand"><a class="brand" href="${up}">${LOGO}<span>Splashery</span></a><p>${esc(SITE.tagline)}. Free, in your browser, with nothing to install; files you open stay on your device.</p></div>
 <nav aria-label="Explore"><h2>Explore</h2><ul>${MENU.map((m) => `<li><a href="${up}${m.href}">${esc(m.label)}</a></li>`).join("")}</ul></nav>
-<nav aria-label="More"><h2>More</h2><ul><li><a href="${up}../">The gallery</a></li><li><a href="${up}search/">Search</a></li><li><a href="${up}../manual/">The Tinkerer's Manual</a></li><li><a href="${SITE.github}">Source on GitHub</a></li><li><a href="${up}share/">Embed and share</a></li><li><a href="${up}about/credits/">Credits</a></li><li><a href="${up}about/privacy/">Privacy</a></li><li><a href="${up}about/terms/">Terms</a></li></ul></nav>
+<nav aria-label="More"><h2>More</h2><ul><li><a href="${up}../">The gallery</a></li><li><a href="${up}search/">Search</a></li><li><a href="${up}../manual/">The Tinkerer's Manual</a></li><li><a href="${SITE.github}">Source on GitHub</a></li><li><a href="${up}share/">Embed and share</a></li><li><a href="${up}about/credits/">Credits</a></li><li><a href="${up}about/contact/">Contact</a></li><li><a href="${up}about/privacy/">Privacy</a></li><li><a href="${up}about/terms/">Terms</a></li></ul></nav>
 </div>
-<p class="fine">Code under the MIT license; each toy's assets keep their own licenses. Built on the PlayCanvas engine.${SITE.preview ? ` This is a preview of Splashery's new site; the toys live in <a href="${up}../">the gallery</a>.` : ""}</p>
+<p class="fine">Made by <a href="${up}about/contact/">${esc(SITE.maker)}</a>. Code under the MIT license; each toy's assets keep their own licenses. Built on the PlayCanvas engine.${SITE.preview ? ` This is a preview of Splashery's new site; the toys live in <a href="${up}../">the gallery</a>.` : ""}</p>
 </footer>
 </body>
 </html>
@@ -218,17 +222,19 @@ function shelfSections(ids, up, headingLevel = 2) {
     .join("\n");
 }
 
-function shelfIndex(ids) {
+// `extra` adds chips for other sections of the page: [[id, label], …] linking to #h-<id>.
+function shelfIndex(ids, extra = []) {
   const cats = (ids === "all" ? CATEGORIES.map((c) => c.id) : ids).filter((id) =>
     publicToys.some((t) => t.category === id),
   );
   if (cats.length < 4) return "";
+  const more = extra.map(([id, label]) => `<li><a href="#h-${id}">${esc(label)}</a></li>`).join("");
   return `<nav class="shelf-index" aria-label="Shelves"><ul>${cats
     .map((id) => {
       const labs = publicToys.filter((t) => t.category === id).every((t) => t.labs);
       return `<li${labs ? " data-labs" : ""}><a href="#shelf-${id}">${esc(shelfName(id))}</a></li>`;
     })
-    .join("")}</ul></nav>`;
+    .join("")}${more}</ul></nav>`;
 }
 
 const intro = (page, extra = "", eyebrow = "") =>
@@ -362,7 +368,10 @@ ${shelfSections(page.shelves, up)}`;
     longDate,
     LOGO,
     TOOL_KEYS,
-    TOOL_ICONS, // prettier-ignore
+    TOOL_ICONS,
+    appLink,
+    toyPath,
+    DOC_PAGES, // prettier-ignore
   }),
 
   search(page) {
@@ -446,7 +455,7 @@ async function searchEntries() {
     });
   }
   for (const p of PAGES) {
-    if (p.type === "search" || p.type === "toy") continue;
+    if (p.type === "search" || p.type === "toy" || p.search === false) continue;
     out.push({
       t: p.path ? p.title : "Home",
       u: p.path,

@@ -9,6 +9,10 @@ your own files, as an "Engine: …" PR merged first). PR title: "Phase Space r3:
 and a tap that zooms to a named place". Handoff file: docs/handoff/SpaceR3.md (create it; start it
 with this brief, word for word, under "## Brief", then keep "## State
 
+Merged (October 7, 2026, 16:20 UTC): #380 merged into main via Ops #390 (main f1994db9) at head
+4d2159a2, after Integrator 6's run N33 (no failure from #380; the embed transfer test still passes).
+The owner marked all 14 clips on Effect review page 2 good. The lane has stood down.
+
 READY for review (October 7, 2026, about 07:30 UTC). PR #380, all labs. Built on
 `claude/lane-space-r3`, all seven world toys:
 

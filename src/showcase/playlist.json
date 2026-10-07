@@ -134,8 +134,8 @@
           "id": "galaxy-box",
           "toy": "galaxy-box",
           "card": "sci-galaxy-r4",
-          "what": "A published galaxy simulation's gas, one Gaussian per particle. A tap peels the hot gas away.",
-          "why": "Simulation particles are already smooth blobs, so splats draw them directly. A simulation, not a photo.",
+          "what": "A published galaxy simulation, one Gaussian per gas particle. A tap peels off the hot gas.",
+          "why": "Simulated particles are already soft blobs, so splats draw them as they are.",
           "secs": 6.5,
           "steps": [
             {

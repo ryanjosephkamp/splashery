@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Books: your book, the photo album and the picture frame · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Books."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/books/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Books: your book, the photo album and the picture frame · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Books."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/books/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Books: your book, the photo album and the picture frame</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li>
+                <a href="#r2-a-sharper-book-body-september-29-2026"
+                  >r2: a sharper book body (September 29, 2026)</a
+                >
+              </li>
+              <li>
+                <a href="#r3-pages-you-tap-and-pull-september-29-2026"
+                  >r3: pages you tap and pull (September 29, 2026)</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#r4-the-turn-s-flash-the-stapled-paper-s-edge-and-page-focus-september-30-2026"
+                  >r4: the turn's flash, the stapled paper's edge, and page focus (September 30,
+                  2026)</a
+                >
+              </li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section
+        class="md-file"
+        aria-label="Lane Books: your book, the photo album and the picture frame"
+      >
+        <div class="prose">
+          <p>
+            Prefix <code>bk</code>. Branch <code>claude/lane-books</code>, PR &quot;Phase Books:
+            your book, the photo album and the picture frame&quot;. Owns
+            <code>src/packs/pictures.js</code> (taken over from lane Pictures, the Picture lab
+            included), <code>assets/toys/your-book/</code>, <code>assets/toys/photo-album/</code>,
+            <code>assets/toys/picture-frame/</code>, <code>tests/bk.spec.mjs</code>, its
+            <code>bk-*</code> screenshots, this file and its toys' lines in the shared lists. How
+            lanes work: <a href="../../../learn/operating/">OPERATING.md</a>. Earlier lessons:
+            <a href="../../../learn/notebook/history/">history.md</a> and
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Pictures.md"
+              target="_blank"
+              rel="noopener"
+              >Pictures.md</a
+            >.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>
+            (Written by the Operator on September 28, 2026, from the owner's notes and the Pages
+            into Splats plan he accepted the same day; step 3 of ROADMAP.md, &quot;Pictures and
+            pages&quot;)
+          </p>
+          <p>
+            The owner's words: &quot;Allowing people to put the pages of a PDF, such as their own
+            research article or their own book or something like that, into a virtual Gaussian splat
+            book, kind of like our storybook, but you can actually flip every page, and each page is
+            the proper corresponding page of the PDF that the person uploaded.&quot; &quot;You can
+            configure settings about, like, what else you want to be in the toy. Like maybe if you
+            want, like, there to be, like, a book cover, if you want it to be a book, or, like, a
+            magazine, or something like that. You can maybe choose how it looks, like if it's bound
+            or something.&quot; &quot;I honestly want to support, like, an arbitrary number of
+            pages.&quot; &quot;A scrapbook, like a photo album. Somebody could upload, you know, a
+            little folder or a set of their own photos, family photos or something, put them in
+            there, and then they have a virtual digital storybook.&quot; The accepted plan adds a
+            picture frame.
+          </p>
+          <p>
+            Build three toys on the &quot;Pictures and pages&quot; shelf, all
+            <code>labs: true</code>:
+          </p>
+          <ol>
+            <li>
+              <p><strong>Your book</strong> (<code>your-book</code>).</p>
+              <ul>
+                <li>
+                  Open any PDF, of any length, and flip through it: tap for the next page, Previous
+                  and Next in the Toy tab. Dragging a page corner to turn it by hand is welcome if
+                  the input path allows it without an engine change; say which you did.
+                </li>
+                <li>
+                  Every page turns like paper, with the <code>leaf</code> kind: it curls as it goes
+                  over and stays a solid sheet. The back of the turning page shows the next page.
+                  The first tap opens the cover.
+                </li>
+                <li>
+                  <p>A &quot;Style&quot; option:</p>
+                  <ul>
+                    <li>hardcover (cloth over boards, a square spine, head and tail bands);</li>
+                    <li>paperback (a soft cover that flexes as it opens);</li>
+                    <li>magazine (thin, glossy, saddle-stapled);</li>
+                    <li>
+                      stapled paper (a stack of loose sheets with a staple in the top left corner,
+                      the pages turning over the top edge);
+                    </li>
+                    <li>spiral notebook (a wire coil, the pages turning about it).</li>
+                  </ul>
+                </li>
+                <li>
+                  The cover shows the PDF's first page, or a plain cover with the file's name, as
+                  fits the style.
+                </li>
+                <li>The page shape follows the PDF's own page size.</li>
+                <li>
+                  The book opens with a sample: for now the Picture lab's article. Lane Manual
+                  (running beside you) writes the Tinkerer's Manual, which becomes the default
+                  later; that lane makes the one-line switch after you merge.
+                </li>
+                <li>
+                  Pages you have not reached are never built, so a 300-page PDF is as light as a
+                  3-page one. Test it.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>Photo album</strong> (<code>photo-album</code>).</p>
+              <ul>
+                <li>
+                  Open a set of photos (several files at once) and turn through them. Covers:
+                  leather, linen or scrapbook.
+                </li>
+                <li>
+                  Each photo sits in four photo corners on a thick page, one or two photos per page
+                  as fits their shapes. A switch shows each photo's file name as a small caption.
+                </li>
+                <li>The pages turn like thick card, with the <code>leaf</code> kind.</li>
+                <li>
+                  Samples: four to six CC0 photos (checked on the live source page and credited). No
+                  people's faces, no logos.
+                </li>
+                <li>
+                  The engine opens one file at a time today. If an album needs &quot;several
+                  pictures as one set of pages&quot;, that is a small additive &quot;Engine: …&quot;
+                  PR on claude/lane-books-engine. Ask the Operator first, as the brief below says.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>Picture frame</strong> (<code>picture-frame</code>).</p>
+              <ul>
+                <li>
+                  One photo in a frame hung on a nail by a wire. Frames: wood, gold (a molded
+                  frame), modern (thin black with a white mat) or a digital frame that steps through
+                  several photos with a soft fade.
+                </li>
+                <li>
+                  The tap: the frame swings on its wire about the nail, as one solid piece, and
+                  settles like a real pendulum (about 3 s).
+                </li>
+                <li>Sample: one CC0 photo (checked and credited).</li>
+              </ul>
+            </li>
+          </ol>
+          <p>
+            For each toy: a sound (paper turning, the cover's thud, the frame's knock on the wall),
+            a how-to line and an About text, a toy-plan entry (<code
+              >&quot;v&quot;: &quot;keep&quot;</code
+            >
+            with <code>improved</code> when it's done), a thumbnail, and clips on the Effect review
+            page:
+          </p>
+          <ul>
+            <li>
+              <code>bk-book</code> (opening, turning pages, one style change),
+              <code>bk-book-styles</code> (the five styles), <code>bk-book-long</code> (paging
+              through a long PDF);
+            </li>
+            <li><code>bk-album</code>;</li>
+            <li><code>bk-frame</code> (the swing), <code>bk-frame-digital</code>.</li>
+          </ul>
+          <p>Show every clip at 390×844.</p>
+          <p>You own:</p>
+          <ul>
+            <li>
+              src/packs/pictures.js, taking it over from lane Pictures (merged), including the
+              Picture lab: keep it working and labs-only;
+            </li>
+            <li>
+              assets/toys/your-book/, assets/toys/photo-album/ and assets/toys/picture-frame/;
+            </li>
+            <li>
+              tests/bk.spec.mjs, your <code>bk-*</code> screenshots and docs/handoff/Books.md;
+            </li>
+            <li>your lines in the shared lists.</li>
+          </ul>
+          <p>
+            Lane Screens (a screen toy and the Gaussian splat toy, in src/packs/screens.js and
+            src/packs/splatting.js) and lane Manual (the splat equation toy and the manual) run at
+            the same time. Leave their files alone.
+          </p>
+          <h3 id="the-engine-you-build-on-lane-pictures-pr-64-merged-before-you-start">
+            The engine you build on (lane Pictures, PR #64, merged before you start)
+          </h3>
+          <p>
+            Read docs/handoff/Pictures.md first, above all &quot;Design&quot; and &quot;For the
+            Operator: picture sheets&quot;. A recipe shows a PDF, a picture, a GIF or a video on
+            picture sheets:
+          </p>
+          <ul>
+            <li><code>pictures: { sample, accept }</code> names the media;</li>
+            <li>
+              <code
+                >k.sheet({ id, center, width, height, normal, up, part, method, fit, align, leaf,
+                lift, opacity })</code
+              >
+              places a sheet;
+            </li>
+            <li><code>out.sheets[id] = { page, visible }</code> picks its page;</li>
+            <li>
+              <code>k.spine(...)</code>, <code>leaf: slot</code> and
+              <code>out.leaves[slot] = { angle, curl }</code> turn and curl a page like paper (kind
+              <code>leaf</code>; a leaf's sheet stays on part 0);
+            </li>
+            <li>
+              <code>info.data.pictures</code> gives <code>page</code>, <code>count</code>,
+              <code>kind</code>, <code>name</code>, <code>playing</code>, <code>next()</code>,
+              <code>prev()</code>, <code>go(n)</code> and <code>togglePlay()</code>;
+            </li>
+            <li>
+              the Toy tab's panel comes from <code>input: { title, media: { accept }, note }</code>.
+            </li>
+          </ul>
+          <p>
+            The engine opens files and https addresses, builds each sheet in a worker, sharpens it
+            as you zoom, frees pages you leave, keeps video sound on the speaker button, and puts
+            <code>toy.media</code> in links. Budgets are per sheet and per device tier (<code
+              >PICTURE_BUDGETS</code
+            >
+            in src/pictures.js). A toy that shows three or four sheets at once shows three or four
+            times one page's splats, so check the splat count at each tier. The Picture lab
+            (<code>src/packs/pictures.js</code>, labs only) is the working example.
+          </p>
+          <p>
+            Every new toy is <code>labs: true</code> in src/toys.js on the new &quot;Pictures and
+            pages&quot; shelf (category as lane Pictures set it up), except where this brief names
+            another shelf. The owner turns labs on with <code>?labs=1</code> and tries the toys on
+            his phone. The labs switch comes off in a later small Ops change, when he says so.
+          </p>
+          <p>
+            The owner's words (docs/reviews/2026-09-28-pictures/review.md, word for word): &quot;It
+            should all still be Gaussian splats, like the rest of it is.&quot; &quot;There needs to
+            be enough resolution for it to still resemble the original article. It doesn't have to
+            be perfectly legible.&quot; &quot;It's okay if we allow the toys to be bigger than
+            usual, possibly even larger in file size than usual, in order for the resolution and
+            quality to be better.&quot; Samples only under CC0, CC BY or public domain, checked on
+            the live source page and credited (CREDITS.md and the toy's in-app credit); no logos,
+            brand names or insignia. The laptop stays exactly as it is.
+          </p>
+          <h3 id="how-this-lane-runs">How this lane runs</h3>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and merges. Don't ask him anything or wait for him. Put questions and
+              blockers in your final message, and the Operator answers or relays them. Messages that
+              arrive in this session &quot;From the Operator&quot; come from the coordinator on the
+              owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort. Any helper you start uses the same model
+              (don't pick another one). Use at most one helper at a time.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English: toy names and
+              descriptions, help texts, credits, docs, the handoff file, PR titles and bodies. So
+              color, center, gray, math, license, toward, catalog, -ize endings, and dates like
+              &quot;September 28, 2026&quot;. Leave code identifiers, file names and anything stored
+              in links as they are, and don't rewrite existing British text; a single sweep does
+              that later.
+            </li>
+            <li>
+              <p>Read first:</p>
+              <ul>
+                <li>
+                  CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are binding);
+                </li>
+                <li>
+                  docs/OPERATING.md (file ownership, shared lists, generated files, tests,
+                  screenshots, the Effect review page and &quot;Steps for a lane&quot;, the help
+                  review, merging);
+                </li>
+                <li>docs/PACKS.md (recipes, channels, draw order, effect quality);</li>
+                <li>docs/handoff/Pictures.md;</li>
+                <li>
+                  docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from earlier lanes).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>
+            September 29, 2026: all three toys are built, labs only, on the &quot;Pictures and
+            pages&quot; shelf, with their sounds, help texts, plan entries (<code
+              >&quot;v&quot;: &quot;keep&quot;</code
+            >), credits and tests. The engine changes they need are on
+            <code>claude/lane-books-engine</code> (its own draft PR, to merge first);
+            <code>claude/lane-books</code> carries them too until then.
+          </p>
+          <ul>
+            <li>
+              <strong>Your book</strong> (<code>your-book</code>): opens the Tinkerer's Manual
+              (<code>manual/tinkerers-manual.pdf</code>, 25 Letter pages; the switch from the
+              Picture lab's article was handed to this lane after Manual merged), or any PDF from a
+              file or an https address. A tap opens the cover, then turns one leaf at a time (about
+              1 s); at the end a tap closes the book. Previous and Next in the Toy tab step a
+              spread; a link's page (or any jump) opens the spread with that page. Five styles:
+              hardcover (cloth boards, a square spine, head and tail bands, the first page as a
+              panel on the cover), paperback (a card cover that flexes), magazine (thin, a flexing
+              cover, two staples in the fold), stapled paper (one page a sheet, a staple in the
+              corner, the sheets flip over the top) and spiral notebook (a wire coil). The page
+              shape follows the PDF's first page.
+            </li>
+            <li>
+              <strong>Photo album</strong> (<code>photo-album</code>): six CC0 sample photos; open
+              several of your own at once. Leather, linen or scrapbook covers; thick card pages;
+              each side holds one photo, or two wide ones stacked or two tall ones side by side;
+              photo corners and (a switch) the file name as a caption.
+            </li>
+            <li>
+              <strong>Picture frame</strong> (<code>picture-frame</code>): a CC0 photo on a wall,
+              hung from a nail by a wire; wood, gold, modern (with a mat) or digital (steps through
+              a set of photos with a fade to black). A tap swings the frame as a damped pendulum (3
+              s).
+            </li>
+            <li>
+              Turning pages by dragging a corner is not built (see &quot;What was cut&quot; in the
+              PR): the tap, Previous and Next turn the pages.
+            </li>
+          </ul>
+          <h2 id="r2-a-sharper-book-body-september-29-2026">
+            r2: a sharper book body (September 29, 2026)
+          </h2>
+          <p>
+            The owner's marks: the frame's two clips good; the book's three and the album's
+            &quot;fix&quot;, each with the note &quot;Looks nearly perfect; mechanics seem perfect,
+            basically. The book itself (not the pages) just seem a little bit blurry or grainy,
+            especially around the edges.&quot; Branch <code>claude/lane-books</code> restarted from
+            main; PR &quot;Phase Books r2: a sharper book body&quot;. Only the book's and the
+            album's own kit parts changed (pages, the page engine and the turns as they were):
+          </p>
+          <ul>
+            <li>
+              <code>rect()</code> (every cover, board, spine, band, page block and card face) lays a
+              staggered lattice of flat discs that stops two splat widths short of the face's edges,
+              a band of discs half the size round it, and a line of thin splats along each edge, a
+              little inside it, stopping short of the corners. The old lattice ran to the edges, so
+              its outer splats' soft glow spilled past them (the fuzz). Opacity 1. It counts its
+              layout before laying it out, and makes each splat as asked.
+            </li>
+            <li>
+              Full density (the recipes' <code>density</code> 1, was 0.35): about 140k kit splats at
+              &quot;mid&quot;, within the kit budget; the pages keep their own budgets.
+            </li>
+            <li>
+              Colors from smooth functions: no weave, grain or page lines at about the splats'
+              spacing (they read as speckle on a phone). The leather's stitches and pressed groove
+              are thin splats along their lines in front of the cover (<code>albumTrim</code>), and
+              the scrapbook's label its own rectangle.
+            </li>
+            <li>
+              The spiral's wire, the magazine's staples and the stapled paper's staple are thin
+              splats along the wire instead of round blobs.
+            </li>
+            <li>
+              The picture frame (marked good) keeps the old lattice (<code>plainRect</code>), so its
+              look is unchanged.
+            </li>
+            <li>
+              Before-and-after clips: <code>tools/bk-clip.mjs --intro=&lt;png&gt;</code> opens a
+              clip on a still.
+            </li>
+          </ul>
+          <h2 id="r3-pages-you-tap-and-pull-september-29-2026">
+            r3: pages you tap and pull (September 29, 2026)
+          </h2>
+          <p>
+            The owner reviewed the Pictures and pages shelf
+            (docs/reviews/2026-09-29-new-toys/review.md). The Operator's brief for r3, word for
+            word:
+          </p>
+          <blockquote>
+            <p>
+              a. Taps that know where they land (action.at(point, c), PACKS.md &quot;Action&quot;):
+            </p>
+            <ul>
+              <li>
+                Your book and the photo album, styles that turn sideways: a tap on the left page
+                goes back a page; a tap on the right page, or exactly in the middle, goes forward; a
+                tap anywhere on the closed front cover opens it (as now).
+              </li>
+              <li>
+                Stapled paper (turns upward): a tap in the top quarter of a page goes back; a tap
+                anywhere below it goes forward; the cover opens as now.
+              </li>
+              <li>
+                Picture lab: a tap on the left of the page goes back, on the right (or the middle)
+                goes forward. Its pages keep sliding without a flip: he likes that (&quot;I like
+                that the pages don't flip like a real book&quot;).
+              </li>
+              <li>On the last page, forward closes the book, as now.</li>
+            </ul>
+            <p>
+              b. Your book's page turn: &quot;it feels unnatural and awkward, like something
+              incorrect happens before the page actually turns.&quot; Find the glitch frame by frame
+              (tools/effect-strip.mjs): a jump, a re-sort, the content swapping or the page lifting
+              wrong before the turn. Make the turn one continuous motion, with no pop at the start
+              or the end. The album's turn is &quot;a bit better&quot; and needs little.
+            </p>
+            <p>
+              c. Pull a page to turn it (recipe.drag, PACKS.md; drag.at claims only presses that
+              land on a page, so a drag anywhere else still turns the view). &quot;A click without a
+              drag should be an automatic page turn, with the direction depending on where the user
+              has clicked; a drag/pull of the page should peel the page in a natural manner and
+              require the user to actually move the page sufficiently far for the page to turn, like
+              a real physical book would.&quot; So: the grabbed corner or edge follows the finger
+              and the paper curls from it. Let go past about halfway, or with a quick flick, and it
+              finishes the turn; otherwise it falls back. The album's pages are heavier (&quot;the
+              manual drag/pull page turning can feel slightly slower or otherwise subtly reflect
+              that additional weight&quot;): follow the finger with a little lag, fall back more
+              readily, and settle with less flutter. Stapled paper pulls upward.
+            </p>
+            <p>
+              d. The Picture lab's background rectangle &quot;is a bit grainy, especially around the
+              edges&quot;: Fidelity A's method, clean edges.
+            </p>
+            <p>e. Picture frame:</p>
+            <ul>
+              <li>
+                The gold frame &quot;is a little too basic and grainy and should look more
+                realistic&quot;: a real molded profile (a bead, a cove and a flat, like a gilded
+                frame), burnished highlights on the raised parts and darker recesses, sharp edges;
+                not a flat yellow band.
+              </li>
+              <li>
+                GIFs and videos in every frame style: &quot;I can upload GIFs, but they just don't
+                play.&quot; Add &quot;gif&quot; and &quot;video&quot; to the frame's accept list; a
+                GIF plays on a loop, a video plays muted on a loop (sound with the speaker button,
+                as on the Screen), and the tap still swings the frame on its nail.
+              </li>
+              <li>
+                The digital frame: &quot;allow users to see the uploaded images/GIFs/videos and
+                rearrange them to be in their desired order, or choose random.&quot; A list in the
+                Toy tab of what was opened (a small thumbnail and name each), to reorder (buttons to
+                move up or down, and dragging if it's easy), plus an Order choice: In order or
+                Random. If the list needs a change in src/ui.js, make that a small additive engine
+                PR on claude/lane-books-engine-2 (titled &quot;Engine: …&quot;), merged first, as
+                with #74.
+              </li>
+              <li>
+                The web-address box that says &quot;a PDF, picture, GIF or video&quot; on a frame:
+                I'm fixing that in the engine myself (the box will name only what the toy opens,
+                from its accept list), so leave it.
+              </li>
+            </ul>
+            <p>f. Your toys' toy-plan entries and how-to lines: say how to tap and pull.</p>
+          </blockquote>
+          <p>What r3 does:</p>
+          <ul>
+            <li>
+              Taps: <code>bookTapAt</code> (the book and the album) and the Picture lab's
+              <code>action.at</code> return the turn with <code>pick</code> 1 for back; drive queues
+              the direction (<code>BOOK.queue</code> holds +1 or -1).
+            </li>
+            <li>
+              Pulls: <code>bookDrag(BOOK_PULL)</code> and <code>bookDrag(ALBUM_PULL)</code>. A press
+              on the book claims the drag; once it moves the way a page turns, a turn starts whose
+              progress follows the finger (<code>a.pull</code>): the point grabbed stays under the
+              finger as the page swings about the spine (the closed cover and a closing cover follow
+              the finger's travel). Let go past halfway (the album 0.58) or with a flick and it
+              finishes; otherwise it falls back. The album lags the finger more (0.12 s against
+              0.035 s), settles slower and curls less. A press that doesn't move is a tap. Both
+              sides of the left leaf are now built ahead, so a pull back never shows a blank page.
+            </li>
+            <li>
+              The turn: the angle eased with a slow cubic start while the curl followed
+              <code>sin(πu)</code> at once, so the page bent where it lay before it lifted, then
+              snapped over. The curl now follows the page's own angle, on a sine ease
+              (<code>easeTurn</code>).
+            </li>
+            <li>The Picture lab's card is a <code>rect</code> (clean edges).</li>
+            <li>
+              The gold frame: <code>goldProfile</code> (a small bead at the sight edge, a flat, a
+              cove, a big bead, a rounded outer edge) built as 16 strips per side at their own
+              heights and slopes, mitered at the corners, lit by <code>goldAt</code> (burnished
+              highlights on the raised parts, darker in the cove).
+            </li>
+            <li>
+              Frames take GIFs and videos (the sheet's method follows the media); a video starts
+              playing by itself, muted. The digital frame has an Order option (In order, Random) and
+              lists its photos in the Toy tab (<code>media.list</code>, engine PR 2:
+              <code>claude/lane-books-engine-2</code>).
+            </li>
+          </ul>
+          <h2 id="r4-the-turn-s-flash-the-stapled-paper-s-edge-and-page-focus-september-30-2026">
+            r4: the turn's flash, the stapled paper's edge, and page focus (September 30, 2026)
+          </h2>
+          <p>
+            PR #126 (<code>claude/lane-books-r4</code>, from r3's head). The owner's two
+            &quot;fix&quot; marks on the r3 cards, and page focus (approved September 30, 2026).
+          </p>
+          <ul>
+            <li>
+              bk-book-taps: the page a leaf lands on showed its old figure for a moment as the leaf
+              came down. It now hides once the leaf is within about 17 degrees of it (<code
+                >landing</code
+              >
+              in <code>bookLayout</code>), as the page under a leaf shows only once the leaf has
+              lifted clear (<code>lifted</code>).
+            </li>
+            <li>
+              bk-stapled-taps: white paper on a white page had no outline. The stack has darker
+              edges, a soft shadow behind it, and a thin gray line round the top sheet.
+            </li>
+            <li>
+              Page focus: a double-tap on a page glides the view until the page fills the screen; a
+              double-tap again, or a zoom out, shows both pages. While a page is in view, taps go by
+              its halves, and forward goes from the left page to the right one, then turns the leaf
+              and lands on the next left page (back the other way). A new option, Reading (Both
+              pages, One page), keeps a page in view; its default follows the screen's shape (One
+              page on a phone held upright), so old links and scenes, which don't have it, load as
+              before and nothing new is stored unless it is chosen. The frame and the Picture lab
+              focus on the photo or page. On these toys a double-tap no longer resets the view (↺
+              and the R key still do; a double-tap off the toy still resets).
+            </li>
+            <li>
+              The engine hook (small, additive, marked &quot;Page focus&quot;):
+              <code>recipe.focus(point)</code> and <code>out.view</code> (PACKS.md,
+              &quot;Focus&quot;); <code>Player.focusAt</code>, <code>followView</code> and
+              <code>glideTo</code> in src/player.js; <code>App.tapOrFocus</code> in src/app.js (a
+              single tap on such a toy waits 0.3 s, to tell it from a double-tap).
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <h3 id="how-the-book-works">How the book works</h3>
+          <ul>
+            <li>
+              The book stands facing you, its spine up the middle (<code>k.spine</code> along -Y, so
+              a leaf turns toward the viewer), and slides to the middle while closed
+              (<code>out.body</code>).
+            </li>
+            <li>
+              Leaves cycle through four leaf slots. Leaf j (j &gt;= 1) carries pages 2j - 1 (front)
+              and 2j (back) in slot j % 4, each a picture sheet on that leaf; page 0 is the front
+              cover's. On spread K only the left page (leaf K - 1's back) and the right page (leaf
+              K's front) show; the pages the next turn and the turn back need are asked for hidden
+              with <code>ahead</code>, and a turn waits (up to 1.5 s) until
+              <code>pics.ready()</code> says its pages are built, so it never shows a blank or an
+              old page.
+            </li>
+            <li>
+              The cover is a board that turns as one piece (a part) for the hardcover, or a card on
+              leaf slot 8 that flexes (its kit splats use the <code>leaf</code> kind too, with their
+              distance from the spine in toy units: the recipe fixes the fit with a box of reach
+              points so it knows the fit's scale).
+            </li>
+            <li>
+              Draw order: splats sort in the pose they were built in, so everything that turns over
+              drew inside out (the cover over the left page, a leaf's front over its back, the page
+              under a turning leaf through it). The engine's <code>out.resortPose</code> sorts the
+              parts' and leaves' splats where they stand; the book asks for it every second frame
+              while something turns and for three frames after it lands.
+            </li>
+            <li>
+              Layers sit well apart (pages 0.003 off the leaf's middle, the cover 0.014 above, the
+              page blocks' tops 0.014 below): splats sort by their centers, so a page too close over
+              a surface with big splats mixes with it where the view is tilted (it showed as
+              diagonal stripes on the hardcover's panel).
+            </li>
+            <li>
+              The left page block appears under the first page as it lands and goes as that page
+              lifts off; in a close it swings over with the cover (riding the cover's free edge, so
+              a flexing cover stays outside it).
+            </li>
+            <li>
+              Splats on show: two pages at rest, four while a leaf turns, plus the kit (about 140k
+              at &quot;mid&quot; since r2). A whole spread on a 390-wide phone builds each page at
+              about 362 to 512 px wide (30k to 60k splats a page for the sample).
+            </li>
+          </ul>
+          <h3 id="the-album-and-the-frame">The album and the frame</h3>
+          <ul>
+            <li>
+              The album shares the book's leaves (<code>BOOK.sides</code>: the photos on each side
+              of each leaf) and its own sheets per side: five boxes (one, top, under, left, right)
+              on each side of each slot. The photo corners and captions are drawn on each photo
+              before it becomes splats (<code>pictures.decorate</code>), since a slot shows a
+              different photo each time it comes round; the mount is drawn in the card's own lit
+              color, so it doesn't show.
+            </li>
+            <li>
+              The frame is one part (frame, photo sheet, wire and shadow) turning about the nail in
+              the wall's plane, so no re-sort is needed. The digital frame's fade is a black layer
+              on channel 0 (<code>fade</code> kind with a negative width).
+            </li>
+          </ul>
+          <h3 id="tools">Tools</h3>
+          <ul>
+            <li>
+              <code>tools/bk-samples.mjs</code> makes the fixtures in
+              <code>tests/fixtures/bk/</code> (3 and 300 numbered pages, wide slides, a 12-page
+              booklet about books) from our own text.
+            </li>
+            <li>
+              <code>tools/bk-clip.mjs</code> records the review clips at 390x844 with the clock
+              stepped by hand (each step waits for the pages it shows).
+            </li>
+            <li>
+              With the clock frozen at the test's default viewport, the app may draw no frames at
+              all; the frame's test runs in real time on the player's clock instead.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              Early in a turn, a thin band of the page underneath can show through the turning page
+              next to the spine (both are close together there, and the ink sits in front of its
+              paper). The page underneath shows once the turning page has lifted about 17 degrees (a
+              pale strip of the page block shows at the fore-edge until then); showing it sooner
+              mixes the two pages' text.
+            </li>
+            <li>
+              A page with a much finer build than the screen (zoomed out after zooming in) is
+              rebuilt after a quarter second, as in the Picture lab.
+            </li>
+            <li>The left page block is a fixed thickness (it doesn't grow as you read).</li>
+            <li>
+              r2: a faint haze of a few pixels can still show beside an edge seen almost edge-on (a
+              face's own splats, seen from the side).
+            </li>
+            <li>
+              r3: a set on the digital frame takes photos only: a GIF in a set shows as a still and
+              a video is turned away (a set's items would need their own playing media in the
+              engine). One GIF or video plays in any frame.
+            </li>
+            <li>
+              The rig test in <code>tests/smoke.spec.mjs</code> (line 730) fails on main too (the
+              same numbers); not this lane's.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <h3 id="the-engine-pr-claude-lane-books-engine-engine">
+            The engine PR (<code>claude/lane-books-engine</code>, &quot;Engine: …&quot;)
+          </h3>
+          <p>
+            Started without an answer, because the book could not work without it (the draw order),
+            and told in the final message. It is additive, and every other toy behaves as before:
+          </p>
+          <ol>
+            <li>
+              <code>k.media</code>: a picture toy's media opens before its build
+              (<code>Player.pictureMediaFor</code>), so the build sees
+              <code>{ kind, count, name, aspect, aspects, names }</code> (null in the Node tools).
+              One open is shared with <code>startPictures</code>; a failed open is said once and
+              retried on the next build.
+            </li>
+            <li>
+              Sets of pictures: <code>input.media.multiple</code> (and <code>button</code>) in a
+              recipe's panel; <code>openMedia(list)</code> in <code>src/media.js</code> (<code
+                >kind: &quot;image&quot;</code
+              >, <code>count</code>, <code>names</code>, <code>aspect(i)</code>,
+              <code>size(i)</code>, <code>draw(i)</code>; decoded on demand, two at a time);
+              <code>toy.media.files</code> in scenes (settings only, like <code>file</code>;
+              docs/SCENE-SCHEMA.md); <code>pictures.sample</code> may return a list; Previous and
+              Next page through a set.
+            </li>
+            <li>
+              <code>out.sheets[id] = { page, visible: 0, ahead: 1 }</code> builds a hidden sheet's
+              page after the ones on show; <code>pics.ready(id)</code>,
+              <code>pics.aspect(n)</code> and <code>pics.nameOf(n)</code> in
+              <code>info.data.pictures</code>.
+            </li>
+            <li>
+              <code>out.resortPose</code> (src/pose.js): sorts the kit's splats on parts and leaves,
+              and the picture sheets on them, where they stand now; a page rebuilt on a leaf or a
+              part is re-sorted by itself.
+            </li>
+            <li>
+              <code>pictures.decorate(canvas, { page, name, sheet, kind, options })</code>: a recipe
+              draws on a page or picture before it becomes splats.
+            </li>
+            <li>
+              Two fixes: the Toy tab's picture panel refreshes once it is in the page (it could stay
+              blank); flat colored areas of a PDF page (a chart's bars) kept a NaN paper color and
+              drew black.
+            </li>
+          </ol>
+          <h3 id="for-packs-md-picture-sheets">For PACKS.md (picture sheets)</h3>
+          <ul>
+            <li>
+              A book's pages: use the leaf slots as a ring (four is enough) and
+              <code>ahead</code> for the pages the next turn needs; wait for
+              <code>pics.ready</code> before a turn starts.
+            </li>
+            <li>
+              Anything turned more than a quarter turn (a leaf, a cover on a part) needs
+              <code>out.resortPose</code> while it turns and once it lands (draw order rule 1
+              applies to picture sheets too).
+            </li>
+            <li>
+              Kit splats can ride a leaf (<code>kind: &quot;leaf&quot;</code>, params
+              <code>[distance from the spine in toy units, slot]</code>); fix the fit with reach
+              points to know the toy units at build time.
+            </li>
+            <li>
+              Keep layers at least about 0.01 of the toy apart where big splats lie under a picture
+              sheet.
+            </li>
+          </ul>
+          <h3 id="for-the-backlog">For the backlog</h3>
+          <ul>
+            <li>
+              Turning a page by dragging its corner (the input path would need a drag that feeds a
+              leaf's angle; <code>drag</code> in a recipe could do it without an engine change, but
+              it needs its own design with the ready-check and the re-sort).
+            </li>
+            <li>A left page block that grows as you read (a part per few leaves).</li>
+            <li>
+              A plain cover with the file's name for the hardcover and the spiral (the name is in
+              <code>k.media</code> now; it needs a small pixel font in the kit).
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Books.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Books.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
