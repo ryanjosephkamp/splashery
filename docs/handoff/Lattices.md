@@ -33,6 +33,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #393.
   posted as `-r2` cards at about 22:50 UTC, with `replacedBy` set on the old cards.
   `tests/lat.spec.mjs`: 13 passed. Thumbnails re-rendered.
 
+- October 7, 2026, 23:48 UTC: the owner marked all 11 `-r2` cards "good". The PR is ready for the
+  Integrator's full run and the Operator's merge (labs).
+
 ## Notes
 
 - `src/lattice/cells.js` covers:
