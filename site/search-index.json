@@ -1193,6 +1193,26 @@
     "l": 1
   },
   {
+    "t": "Space Launch System",
+    "u": "toys/sls/",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fire its stages in the order of a real flight.",
+    "w": "space launch system space space rocket sls space launch system artemis orion moon launch stages staging nasa model boosters core stage sls",
+    "i": "../assets/toys/sls/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Space Shuttle",
+    "u": "toys/space-shuttle/",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fire its stages in the order of a real flight.",
+    "w": "space shuttle space space rocket space shuttle orbiter external tank boosters launch stages staging nasa model space-shuttle",
+    "i": "../assets/toys/space-shuttle/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Virus",
     "u": "toys/virus/",
     "k": "toy",
