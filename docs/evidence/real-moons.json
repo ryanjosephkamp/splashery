@@ -1,6 +1,6 @@
 {
   "toy": "real-moons",
-  "checked": "2026-10-05",
+  "checked": "2026-10-07",
   "summary": "5 worlds drawn from real maps (Io, Europa, Ganymede, Callisto, Titan): every splat has its place's measured color, and each named feature is where the planetary gazetteer puts it. The turning speed and the lighting are simplified, and labeled.",
   "claims": [
     {
@@ -386,6 +386,31 @@
       "verdict": "correct",
       "test": "tests/sp2.spec.mjs:164",
       "note": ""
+    },
+    {
+      "claim": "A tap names the place under it: the smallest named feature it lies in, what that lies on, and the plain or highland round it, from the IAU Gazetteer.",
+      "how": "tools/sp3-places.mjs keeps each adopted feature center and size from the Gazetteer downloads; src/space/places.js finds the features a spot lies within (half their listed size from the center). tests/sp3.spec.mjs checks Tycho, Olympus Mons, Gale, Rachmaninoff, Maat Mons and Tranquility Base, and a tap on Tycho and on Olympus Mons in the browser.",
+      "where": "src/space/places.js",
+      "sources": [
+        {
+          "title": "Gazetteer of Planetary Nomenclature",
+          "publisher": "IAU WGPSN and USGS Astrogeology Science Center",
+          "url": "https://planetarynames.wr.usgs.gov/"
+        }
+      ]
+    },
+    {
+      "claim": "Zoomed in, the ground comes from close-up tiles of the same maps, finer than the global map (the scales are in src/space/zoom.js); a feature named as a circle is an approximation of its real outline.",
+      "how": "tools/sp3-tiles.mjs averages each source into 10° tiles; tests/sp3.spec.mjs checks each world's tiles against its global map at a named feature.",
+      "where": "src/space/zoom.js",
+      "sources": [
+        {
+          "title": "Io Galileo SSI / Voyager Global Mosaic, color merge, 1 km",
+          "publisher": "NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center",
+          "url": "https://astrogeology.usgs.gov/search/map/io_galileo_ssi_global_color_merge_mosaic_1km",
+          "says": "Public domain (USGS and NASA)."
+        }
+      ]
     }
   ],
   "simplified": [

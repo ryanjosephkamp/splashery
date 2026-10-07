@@ -9,19 +9,85 @@ to the app outside your own files, as an "Engine: …" PR merged first). PR titl
 elements: a periodic table of real samples". Handoff file: docs/handoff/Elements.md (create it;
 start it with this brief, word for word, under "## Brief", then keep "## State
 
-WORKING (October 5, 2026): the toy is built and pushed (labs, Atoms shelf): 91 real samples, 27
-honest placeholders, facts with cited uses, evidence file and tests (`tests/rel.spec.mjs`, 25 pass).
-Clips posted on Effect review page 2 (lane record `Elements`: bismuth, copper, neon, oganesson).
-Next: the owner's marks.
+#298 merged (October 5, 2026). WORKING: the polish round (the owner on Effect review page 2: "the
+toys could still be sharper"), on `claude/lane-real-elements-polish`, PR "Phase Real elements
+polish: sharper samples and a smoother lift":
 
-- Weight: the table loads `tiles.jpg` + `tiles.png` (about 0.26 MB) and the code; each lifted sample
-  adds its own `<z>.jpg` + `<z>.png` (about 30 KB). All of `assets/toys/real-elements/` is 2.85 MB
-  in the repo.
-- Rebuild: `node tools/rel-sources.mjs` (reads the source pages), `node tools/rel-facts.mjs` (facts
-  and the reference snapshot; then
-  `npx prettier --write tools/rel-reference.json src/elements-real/facts.js`),
-  `node tools/rel-samples.mjs [z ...]` (photos, depth, cutouts, atlas; the server must run),
-  `node tools/rel-credits.mjs` (CREDITS.md and tools/assets.json).
+- The Lab lane's sharp kernel (`kernel: "sharp"`) and the low cull (`render: { cull: "low" }`), both
+  labs only, and `closeUp` so a pinch comes close to one tile.
+- Cut-outs one pixel inside their rim and three fifths coverage per cell: no background fringe.
+- Lifted samples at 384 x 384 (up from 256), so a desktop's lift uses up to about 160,000 splats.
+- A clean board edge (a close row of small splats instead of a row of dots).
+- A smoother lift: a quintic ease, straight out of its tile first, then a glide; the swing and the
+  turn ease in and out.
+- Kept: tiles at every third atlas pixel and one splat per font pixel (finer splats vanish in the
+  256 px shelf picture, which draws without the labs' low cull).
+- The owner's marks (October 5, 2026), in the same PR:
+  - "Hollow ... a hole in it when it's turned to the side", then (October 6) "still appears hollow
+    from the sides": the lifted sample is now built like a pebble. Front and back both swell from
+    the outline inward (by the distance to the outline), the front also carries the photo's relief,
+    and they meet at the rim, so the photo's texture rolls over the edge. Light is baked on the
+    body's own shape where the photo has none (the rolled rim; the back with its own mirrored light,
+    so it reads as a dome). Fillers close steep steps, and the splats are nearly round. The earlier
+    wall round the outline read as stripes from the side and is gone. A tap's turn now shows the
+    sides: a quarter turn, a pause, on to the other side, a pause, and home (6 s).
+  - October 6, "still hollow from the sides ... a thin vertical strip": the side-on frames showed a
+    closed body (a projection of the splats and renders of each half confirmed it) that read as a
+    bowl. Fixed: the photo depth's ground slope (a best-fit plane) is taken off and the body is a
+    rounded dome over the outline; the rim, side wall and back take the sample's colors from further
+    in (the outline pixels are dark); the baked light comes from above, so it stays above at every
+    turn. `tools/rel-side.mjs` writes side-on stills (80 to 100 and 260 to 280 degrees, phone and
+    desktop), and a test in `tests/rel.spec.mjs` fails when background shows through the filled
+    silhouette (`src/elements-real/see-through.js`; it flags an open half shell at 25 to 32 percent,
+    the real body at 0.5 percent or less). Clips: rel-copper-polish-r4, rel-radon-r3, and side-on
+    stills rel-copper-side-r4 and rel-radon-side-r3.
+  - October 6, the owner's up-close screenshots ("the outer shell isn't solid", all elements): the
+    side wall was a band of filler columns between grid rows, and up close they showed as streaks
+    with gaps onto the inside. Rebuilt: front and back are one closed mesh over the grid that meets
+    at the outline, and the splats are spread evenly over its real area (the steep side as much as
+    the face), each a disc lying in the surface, colored from the photo's own pixels.
+    `src/elements-real/watertight.js` draws a lifted sample's splats from 120 directions in a small
+    software splatter and counts pixels where the nearest splat faces away (the inside showing). A
+    test runs it on all 118: the filler build fails on every one (1 to 10 percent), the new one
+    passes on every one (under 1 percent, at the outline). Clips rel-copper-polish-r5, rel-radon-r4;
+    up-close stills rel-copper-close-r5, rel-radon-close-r4.
+  - October 6, "still not closed from some angles": an engine bug. Player.resortPose sorted a turned
+    part's splats as if it had turned the other way (right only at 0 and 180 degrees), so while the
+    sample turned its far side drew over its near side. Shown on a test ellipsoid on the lift part
+    (45 degrees about x, about y, 90 about a slanted axis); the inverse matches a depth-correct
+    software render. Fix: Engine PR #361 (`claude/lane-real-elements-engine`, one line in
+    `src/pose.js` and `tests/rel-engine.spec.mjs`), to merge before #318. In the lane: the thickness
+    is one dome over the outline (an ellipsoid fitted to it, so lobed samples are not waisted) with
+    a rounded edge and walls joining front and back along the outline; one-cell spikes pruned; the
+    photo's bumps smoothed. `tools/rel-sweep.mjs` checks a whole turn in 5-degree steps at three
+    heights, close and far; `tools/rel-settle.mjs` draws a few frames after each change (the splats
+    sort where the previous frame's pose put them, so a single frame after a snap is sorted in the
+    old pose). Still open: at the exact side-on holds (90 and 270 degrees) copper can still read as
+    a shallow dish in color.
+  - October 6, "a little bit sharper overall": `render.dpr: "native"` (labs; the phone tier drew at
+    1.5 device pixels per point), density 2, the lifted sample takes what the table leaves (up to 42
+    percent), finer splats along each tile sample's outline. `tools/rel-sharp.mjs` measures it: at
+    390 x 844 at 3x the table 15,083 to 24,170 and the lifted copper 12,812 to 20,513 (+60 percent);
+    desktop +2 percent. `tools/rel-table-clip.mjs` records the phone-size table clip. Cards:
+    rel-copper-polish-r6, rel-radon-r5, rel-table-r2, rel-sharp-r1.
+  - October 6, the walkthrough: the periodic table toy's nucleus ticks were "like nails on a
+    chalkboard" (asked of this lane by the Operator; the toy is `periodic-table` in
+    `src/packs/chemistry.js`, which no lane owns now). Each proton and neutron now lands with a soft
+    pebble's click like the splat simulator's sorting (bright clacks at 2.7 to 3.3 kHz before): the
+    share of the sound above 2 kHz goes from 68 to 8 percent. `tests/sndc.spec.mjs` counts the ticks
+    by the new voice; `tools/sound-review.json` updated; `tools/rel-nucleus-sound.mjs` renders the
+    sound to a WAV. On the Sound Board (Effect review plays no sound): the entry is "ready" with A,
+    the new clicks, and B, the old clacks, for iron.
+  - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
+    Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
+    coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
+    says "Shown instead: …" with the credit.
+  - Deviations from his list: dubnium shows Dubna's coat of arms (dubnium is named for Dubna,
+    Russia, not Dublin); polonium shows Poland's flag (every polonium brush photo found shows a
+    brand); livermorium shows downtown Livermore (no logo); promethium's tile is a real sample now
+    (a public-domain photo of the first promethium-147 metal buttons).
+- Weight: the atlas is 640 x 768 now (0.3 MB); a lifted sample's pair is about 55 KB; the folder is
+  6.6 MB in the repo.
 
 ## Notes", "##
 
@@ -84,8 +150,8 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 ## Known issues
 
-- Depth is the model's estimate from one photo, and a lifted sample's back is an invented, darker
-  mirror of its front (said in the About text and the evidence file).
+- Depth is the model's estimate from one photo, and a lifted sample's back is made up from its own
+  colors (said in the About text and the evidence file).
 - A few photos can't be cut cleanly and show as cropped cards (fluorine, sodium, uranium) or an oval
   (neptunium); samples in glass tubes keep the whole tube.
 - The tiles are small on a phone (the whole 18-column table fits the width); a tap needs aim.
@@ -94,10 +160,10 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 
 ## For the Operator
 
-- Ready for the full test run and a labs merge. I ran `tests/rel.spec.mjs` (25 pass),
-  `tests/help.spec.mjs`, `tests/kit.spec.mjs` and the toy's row of `tests/taps.spec.mjs`; not the
-  full suite (the "embed transfer" test measures a captured toy's embed, which this lazy pack
-  doesn't touch).
+- Ready for the full test run and a labs merge. I ran `tests/rel.spec.mjs` (28 pass, with the
+  side-view and solid-surface tests), `tests/help.spec.mjs`, `tests/kit.spec.mjs` and the toy's row
+  of `tests/taps.spec.mjs`; not the full suite (the "embed transfer" test measures a captured toy's
+  embed, which this lazy pack doesn't touch).
 - Thorium, actinium and curium have no tile photo: the only photos found are FAL-only (thorium,
   Alchemist-hp), all rights reserved (actinium, Los Alamos) or EU copyright not confirmed open
   (curium, JRC). If the owner wants them, a CC BY or CC0 photo is the unblocker.

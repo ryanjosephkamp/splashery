@@ -6,7 +6,7 @@
     <title>The real Venus · Splashery</title>
     <meta
       name="description"
-      content="The real Venus, a Splashery toy made of 3D Gaussian splats: Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back."
+      content="The real Venus, a Splashery toy made of 3D Gaussian splats: Tap a spot to zoom in and name it; tap again to go out."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/real-venus/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="The real Venus · Splashery" />
     <meta
       property="og:description"
-      content="The real Venus, a Splashery toy made of 3D Gaussian splats: Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back."
+      content="The real Venus, a Splashery toy made of 3D Gaussian splats: Tap a spot to zoom in and name it; tap again to go out."
     />
     <meta
       property="og:url"
@@ -151,8 +151,7 @@
           <div class="toy-head">
             <h1>The real Venus <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to
-              relight it.
+              Tap a spot to zoom in and name it; tap again to go out. Play flies to Maxwell Montes.
             </p>
             <dl class="does">
               <div>
@@ -218,11 +217,11 @@
             clouds are left out.
           </p>
           <p>
-            Maxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its
-            tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is
+            Maxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons its
+            tallest volcano; Artemis Corona a ring of ridges 2,600 km across. The relief is
             exaggerated ten times by default; pick True height in the Toy tab to see it as it is.
-            Venus turns backward, once every 243 days; here a day passes each second. There are no
-            shadows.
+            Venus turns backward, once every 243 days; here a day passes each second. A tap zooms in
+            and names the spot from the IAU's list; tap again to go out.
           </p>
         </section>
         <section class="toy-section evidence" aria-labelledby="h-right">
@@ -231,7 +230,7 @@
             Venus drawn from real maps: every splat sits at its place's measured height and has its
             place's measured color, and each named feature is where the planetary gazetteer puts it.
             The relief, the turning speed and the lighting are simplified, and each simplification
-            is labeled in the toy. <span class="note">Checked October 5, 2026.</span>
+            is labeled in the toy. <span class="note">Checked October 7, 2026.</span>
           </p>
           <ol class="claims">
             <li class="claim">
@@ -353,6 +352,50 @@
                 </li>
               </ul>
             </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-unverified">Not yet checked</span> A tap names the
+                place under it: the smallest named feature it lies in, what that lies on, and the
+                plain or highland round it, from the IAU Gazetteer.
+              </p>
+              <p>
+                tools/sp3-places.mjs keeps each adopted feature center and size from the Gazetteer
+                downloads; src/space/places.js finds the features a spot lies within (half their
+                listed size from the center). tests/sp3.spec.mjs checks Tycho, Olympus Mons, Gale,
+                Rachmaninoff, Maat Mons and Tranquility Base, and a tap on Tycho and on Olympus Mons
+                in the browser.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://planetarynames.wr.usgs.gov/"
+                    >Gazetteer of Planetary Nomenclature</a
+                  >, IAU WGPSN and USGS Astrogeology Science Center
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-unverified">Not yet checked</span> Zoomed in, the
+                ground comes from close-up tiles of the same maps, finer than the global map (the
+                scales are in src/space/zoom.js); a feature named as a circle is an approximation of
+                its real outline.
+              </p>
+              <p>
+                tools/sp3-tiles.mjs averages each source into 10° tiles; tests/sp3.spec.mjs checks
+                each world's tiles against its global map at a named feature.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m"
+                    >Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m and Venus Magellan
+                    Global Topography 4641m</a
+                  >, NASA, JPL, Magellan mission; PDS Geosciences Node; topography by Peter Ford,
+                  Gordon Pettengill, Fang Liu and Joan Quigley; USGS Astrogeology Science Center:
+                  <q>Public domain (USGS and NASA).</q>
+                </li>
+              </ul>
+            </li>
           </ol>
           <h3>Where it simplifies</h3>
           <ul>
@@ -409,6 +452,18 @@
               <a
                 href="https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
                 >Public domain (USGS and NASA)</a
+              >.
+            </li>
+            <li>
+              <b>Feature names</b>:
+              <a href="https://planetarynames.wr.usgs.gov/"
+                >Gazetteer of Planetary Nomenclature (center points of the named features)</a
+              >
+              by International Astronomical Union (IAU) Working Group for Planetary System
+              Nomenclature; USGS Astrogeology Science Center,
+              <a
+                href="https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+                >Public domain (USGS)</a
               >.
             </li>
           </ul>

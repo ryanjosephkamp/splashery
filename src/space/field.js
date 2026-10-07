@@ -36,6 +36,14 @@
 // runs (a fly lowers it close up). A disc of ground lies along its ground
 // and stretches up the slope, so steep ground stays covered.
 //
+// Lane Space r3: a tap zooms in on a spot. The drive turns the spot to face
+// +z (spin and tilt), then uSpBodyQ (the drive's out.body.quat) turns +z to
+// face the camera, and the whole world grows by exp(uSpBodyT.w) (the drive's
+// out.body.squash) about the ground there, at a radius of 0.9 + 0.3 ×
+// uSpKitB.x (the drive's out.grow) before the fit: as if the camera came
+// that much closer, smoothly, however deep. A name's splats turn with the
+// camera's turn but do not grow.
+//
 // Uniforms (from the recipe's drive): uSpMorph = [spin, tilt, ambient,
 // night glow 0..1]; uSpGlowC = [sun x, y, z, brightness]; uSpKitB.z = the
 // relief's exaggeration, w = shown label + its fade (-1: none); uSpClock.y
@@ -118,8 +126,10 @@ const num = (x) => {
   return s.includes(".") ? s : `${s}.0`;
 };
 
-const GLSL = (air, night, hstep) => `
+const GLSL = (air, night, hstep, fitScale) => `
 uniform vec4 uSpClock;   // y splat scale, z exposure
+uniform vec4 uSpBodyQ;   // the turn from +z toward the camera (a zoom)
+uniform vec4 uSpBodyT;   // w: the zoom's log
 uniform vec4 uSpMorph;   // spin, tilt, ambient, night glow
 uniform vec4 uSpGlowC;   // toward the sun (xyz), brightness
 uniform vec4 uSpCam;     // camera position
@@ -127,7 +137,9 @@ uniform vec4 uSpKitB;    // z: the relief's exaggeration; w: the label shown + i
 const vec3 AIR = vec3(${num(air[0])}, ${num(air[1])}, ${num(air[2])});
 const vec3 NIGHT = vec3(${num(night[0])}, ${num(night[1])}, ${num(night[2])});
 const float HSTEP = ${num(hstep)};
+const float FIT = ${num(fitScale)};
 vec4 wAn = vec4(0.0);
+float wZoom = 1.0;
 int wType = 0;
 vec4 wQ = vec4(0.0, 0.0, 0.0, 1.0);
 float wHide = 0.0;
@@ -179,18 +191,24 @@ void modifySplatCenter(inout vec3 center) {
   // A feature's name is stored where it shows during its fly (the feature
   // turned to face +z), so it neither turns nor lifts, and the sort, which
   // ranks the stored places, draws it over the ground.
+  vec4 qa = uSpBodyQ;
+  wZoom = exp(uSpBodyT.w);
   if (wType == 2) {
-    wQ = vec4(0.0, 0.0, 0.0, 1.0);
-    wDir = r;
+    wQ = qa;
+    center = wRot(qa, center);
+    wDir = normalize(center + vec3(1e-6));
     wHide = 0.0;
     float shown = uSpKitB.w;
     if (shown < -0.5 || abs(floor(shown) - wExtra) > 0.5) wHide = 1.0;
+    wZoom = 1.0;
     return;
   }
+  wQ = wMul(qa, wQ);
   // Lifted by the exaggeration (built at true height).
   float ex = uSpKitB.z;
   vec3 c = center + r * (ex - 1.0) * h;
-  center = wRot(wQ, c);
+  vec3 pivot = wRot(qa, vec3(0.0, 0.0, (0.9 + 0.3 * uSpKitB.x) * FIT));
+  center = pivot + (wRot(wQ, c) - pivot) * wZoom;
   wDir = wRot(wQ, r);
   // The ground's normal, tipped as much more as the ground is lifted.
   vec3 n1 = wNormal(wAn.z);
@@ -214,6 +232,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
   } else rotation = wMul(wQ, rotation);
   // At least about a pixel across, wherever the camera is (the close-up
   // patches' small splats would vanish from afar).
+  scale *= wZoom;
   float fl = 0.0007 * length(uSpCam.xyz - modifiedCenter);
   scale = vec3(max(scale.xy, vec2(fl)), max(scale.z, 0.2 * fl));
   scale *= uSpClock.y * (1.0 - wHide);
@@ -242,8 +261,10 @@ void modifySplatColor(vec3 center, inout vec4 color) {
 }
 `;
 
-const WGSL = (air, night, hstep) => `
+const WGSL = (air, night, hstep, fitScale) => `
 uniform uSpClock: vec4f;
+uniform uSpBodyQ: vec4f;
+uniform uSpBodyT: vec4f;
 uniform uSpMorph: vec4f;
 uniform uSpGlowC: vec4f;
 uniform uSpCam: vec4f;
@@ -251,7 +272,9 @@ uniform uSpKitB: vec4f;
 const AIR: vec3f = vec3f(${num(air[0])}, ${num(air[1])}, ${num(air[2])});
 const NIGHT: vec3f = vec3f(${num(night[0])}, ${num(night[1])}, ${num(night[2])});
 const HSTEP: f32 = ${num(hstep)};
+const FIT: f32 = ${num(fitScale)};
 var<private> wAn: vec4f = vec4f(0.0);
+var<private> wZoom: f32 = 1.0;
 var<private> wType: i32 = 0;
 var<private> wQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> wHide: f32 = 0.0;
@@ -301,16 +324,22 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   let tl = uniform.uSpMorph.y;
   wQ = wMul(vec4f(sin(tl * 0.5), 0.0, 0.0, cos(tl * 0.5)), vec4f(0.0, sin(sp * 0.5), 0.0, cos(sp * 0.5)));
   let r = normalize(*center + vec3f(1e-6));
+  let qa = uniform.uSpBodyQ;
+  wZoom = exp(uniform.uSpBodyT.w);
   if (wType == 2) {
-    wQ = vec4f(0.0, 0.0, 0.0, 1.0);
-    wDir = r;
+    wQ = qa;
+    *center = wRot(qa, *center);
+    wDir = normalize(*center + vec3f(1e-6));
     wHide = 0.0;
     let shown = uniform.uSpKitB.w;
     if (shown < -0.5 || abs(floor(shown) - wExtra) > 0.5) { wHide = 1.0; }
+    wZoom = 1.0;
     return;
   }
+  wQ = wMul(qa, wQ);
   let ex = uniform.uSpKitB.z;
-  let c = wRot(wQ, *center + r * (ex - 1.0) * h);
+  let pivot = wRot(qa, vec3f(0.0, 0.0, (0.9 + 0.3 * uniform.uSpKitB.x) * FIT));
+  let c = pivot + (wRot(wQ, *center + r * (ex - 1.0) * h) - pivot) * wZoom;
   *center = c;
   wDir = wRot(wQ, r);
   let n1 = wNormal(wAn.z);
@@ -333,6 +362,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
     }
   }
   *rotation = rot;
+  sc = sc * wZoom;
   let fl = 0.0007 * length(uniform.uSpCam.xyz - modifiedCenter);
   *scale = vec3f(max(sc.xy, vec2f(fl)), max(sc.z, 0.2 * fl)) * (uniform.uSpClock.y * (1.0 - wHide));
 }
@@ -367,7 +397,7 @@ export function worldModifier({
   air = [0.6, 0.75, 1],
   night = [1, 0.75, 0.4],
   hstep = 1e-5,
-  labelUp = 0.04,
+  fitScale = 1,
 } = {}) {
-  return { glsl: GLSL(air, night, hstep, labelUp), wgsl: WGSL(air, night, hstep, labelUp) };
+  return { glsl: GLSL(air, night, hstep, fitScale), wgsl: WGSL(air, night, hstep, fitScale) };
 }

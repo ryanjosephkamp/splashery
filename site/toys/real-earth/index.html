@@ -6,7 +6,7 @@
     <title>The real Earth · Splashery</title>
     <meta
       name="description"
-      content="The real Earth, a Splashery toy made of 3D Gaussian splats: Tap to fly to Everest, the Grand Canyon or Hawaii and back."
+      content="The real Earth, a Splashery toy made of 3D Gaussian splats: Tap a spot to zoom in and name the place; tap again to go out."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/real-earth/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="The real Earth · Splashery" />
     <meta
       property="og:description"
-      content="The real Earth, a Splashery toy made of 3D Gaussian splats: Tap to fly to Everest, the Grand Canyon or Hawaii and back."
+      content="The real Earth, a Splashery toy made of 3D Gaussian splats: Tap a spot to zoom in and name the place; tap again to go out."
     />
     <meta
       property="og:url"
@@ -151,8 +151,7 @@
           <div class="toy-head">
             <h1>The real Earth <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city
-              lights.
+              Tap a spot to zoom in and name the place; tap again to go out. Play flies to Everest.
             </p>
             <dl class="does">
               <div>
@@ -219,8 +218,9 @@
           <p>
             The relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a
             thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth
-            turns once every 23 hours 56 minutes; here an hour passes each second. Close up, the
-            relief eases to at most twice its height. There are no clouds or shadows.
+            turns once every 23 hours 56 minutes; here an hour passes each second. There are no
+            clouds or shadows. A tap zooms in and names the place from Natural Earth's maps; tap
+            again to go out.
           </p>
         </section>
         <section class="toy-section evidence" aria-labelledby="h-right">
@@ -229,7 +229,7 @@
             Earth drawn from real maps: every splat sits at its place's measured height and has its
             place's measured color, and each named feature is where the planetary gazetteer puts it.
             The relief, the turning speed and the lighting are simplified, and each simplification
-            is labeled in the toy. <span class="note">Checked October 5, 2026.</span>
+            is labeled in the toy. <span class="note">Checked October 7, 2026.</span>
           </p>
           <ol class="claims">
             <li class="claim">
@@ -362,6 +362,45 @@
                 </li>
               </ul>
             </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-unverified">Not yet checked</span> A tap names the
+                place under it: the nearest city or peak, the state or province and the country (or
+                the sea or lake), from Natural Earth.
+              </p>
+              <p>
+                tools/sp3-places.mjs draws Natural Earth 1:10m polygons into maps of 2 arc-minutes
+                (about 3.7 km) and keeps the cities and peaks as points; src/space/places.js reads
+                them. tests/sp3.spec.mjs checks Paris, Mount Everest, Denver, Sydney, Tokyo and the
+                Atlantic, and a tap on Paris and on Everest in the browser.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://www.naturalearthdata.com/">Natural Earth 1:10m vectors</a>,
+                  Natural Earth
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-unverified">Not yet checked</span> Zoomed in, the
+                ground comes from close-up tiles of the same maps, finer than the global map (the
+                scales are in src/space/zoom.js); a feature named as a circle is an approximation of
+                its real outline.
+              </p>
+              <p>
+                tools/sp3-tiles.mjs averages each source into 10° tiles; tests/sp3.spec.mjs checks
+                each world's tiles against its global map at a named feature.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation"
+                    >Blue Marble: Next Generation (July 2004)</a
+                  >, NASA Earth Observatory (Reto Stöckli): <q>Public domain (NASA).</q>
+                </li>
+              </ul>
+            </li>
           </ol>
           <h3>Where it simplifies</h3>
           <ul>
@@ -428,6 +467,27 @@
               >
               by NASA Earth Observatory (Joshua Stevens, Miguel Román),
               <a href="https://earthobservatory.nasa.gov/image-use-policy">Public domain (NASA)</a>.
+            </li>
+            <li>
+              <b>Place names</b>:
+              <a href="https://www.naturalearthdata.com/"
+                >Natural Earth 1:10m cultural and physical vectors (states and provinces, populated
+                places, marine areas, lakes, regions, elevation points)</a
+              >
+              by Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors),
+              <a href="https://www.naturalearthdata.com/about/terms-of-use/">Public domain</a>.
+            </li>
+            <li>
+              <b>Sample</b>:
+              <a href="https://svs.gsfc.nasa.gov/4720"
+                >Close-up tiles of the real worlds' color and elevation maps (10° × 10°)</a
+              >
+              by The same NASA, USGS and NOAA sources as each world's global map
+              (src/space/worlds.js); the Moon's heights from the CGI Moon Kit's ldem_16, Earth's
+              from ETOPO 2022 at 60 arc-seconds,
+              <a href="https://creativecommons.org/publicdomain/mark/1.0/"
+                >Public domain (NASA, USGS and NOAA)</a
+              >.
             </li>
           </ul>
           <p class="note">

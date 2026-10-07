@@ -151,8 +151,7 @@
           <div class="toy-head">
             <h1>Real moons <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to
-              relight it.
+              Pick a moon in the Toy tab. Tap a spot to zoom in and name it; tap again to go out.
             </p>
             <dl class="does">
               <div>
@@ -221,7 +220,8 @@
             drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's
             map was taken through its orange haze in near-infrared light, and the haze is left out.
             Seams show where the maps' pictures were lit differently. Each moon keeps one face
-            toward its planet; here a day passes each second.
+            toward its planet; here a day passes each second. A tap zooms in and names the spot from
+            the IAU's list; tap again to go out.
           </p>
         </section>
         <section class="toy-section evidence" aria-labelledby="h-right">
@@ -230,7 +230,7 @@
             5 worlds drawn from real maps (Io, Europa, Ganymede, Callisto, Titan): every splat has
             its place's measured color, and each named feature is where the planetary gazetteer puts
             it. The turning speed and the lighting are simplified, and labeled.
-            <span class="note">Checked October 5, 2026.</span>
+            <span class="note">Checked October 7, 2026.</span>
           </p>
           <ol class="claims">
             <li class="claim">
@@ -727,6 +727,48 @@
                 </li>
               </ul>
             </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-unverified">Not yet checked</span> A tap names the
+                place under it: the smallest named feature it lies in, what that lies on, and the
+                plain or highland round it, from the IAU Gazetteer.
+              </p>
+              <p>
+                tools/sp3-places.mjs keeps each adopted feature center and size from the Gazetteer
+                downloads; src/space/places.js finds the features a spot lies within (half their
+                listed size from the center). tests/sp3.spec.mjs checks Tycho, Olympus Mons, Gale,
+                Rachmaninoff, Maat Mons and Tranquility Base, and a tap on Tycho and on Olympus Mons
+                in the browser.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://planetarynames.wr.usgs.gov/"
+                    >Gazetteer of Planetary Nomenclature</a
+                  >, IAU WGPSN and USGS Astrogeology Science Center
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-unverified">Not yet checked</span> Zoomed in, the
+                ground comes from close-up tiles of the same maps, finer than the global map (the
+                scales are in src/space/zoom.js); a feature named as a circle is an approximation of
+                its real outline.
+              </p>
+              <p>
+                tools/sp3-tiles.mjs averages each source into 10° tiles; tests/sp3.spec.mjs checks
+                each world's tiles against its global map at a named feature.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://astrogeology.usgs.gov/search/map/io_galileo_ssi_global_color_merge_mosaic_1km"
+                    >Io Galileo SSI / Voyager Global Mosaic, color merge, 1 km</a
+                  >, NASA, JPL, Galileo and Voyager missions; USGS Astrogeology Science Center:
+                  <q>Public domain (USGS and NASA).</q>
+                </li>
+              </ul>
+            </li>
           </ol>
           <h3>Where it simplifies</h3>
           <ul>
@@ -842,6 +884,18 @@
               <a
                 href="https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
                 >Public domain (USGS and NASA)</a
+              >.
+            </li>
+            <li>
+              <b>Feature names</b>:
+              <a href="https://planetarynames.wr.usgs.gov/"
+                >Gazetteer of Planetary Nomenclature (center points of the named features)</a
+              >
+              by International Astronomical Union (IAU) Working Group for Planetary System
+              Nomenclature; USGS Astrogeology Science Center,
+              <a
+                href="https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+                >Public domain (USGS)</a
               >.
             </li>
           </ul>

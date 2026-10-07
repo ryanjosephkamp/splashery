@@ -104,11 +104,11 @@
     },
     "knot": {
       "status": "site",
-      "said": "(October 2, 2026, review) The neon knot has that buzzing sound that I hate. It should not make that noise. ... We can make it sound more like jelly or something wiggling a little bit.",
-      "note": "No buzz or horn. A soft jelly-like wiggle instead.",
-      "plan": "Now: A real jelly wobbling, then a softer wobble as it settles; no buzz, hum or horn (Sound C).",
+      "said": "(October 6, 2026, walkthrough) The neon knot sounds like somebody taking a shit. ... Seriously, please pick something else. You can use the same sound as we use for the other knots. I do not care. But not this. This sounds dirty.",
+      "note": "The jelly sounds dirty; pick something else (the other knots' sound is fine).",
+      "plan": "Now: the torus knot's sound, timed to this knot: it strains as the loops tie tighter, then lets go with a soft thump and swish as it relaxes; no jelly (Sound D).",
       "candidates": [],
-      "round": "2026-10-02"
+      "round": "2026-10-06"
     },
     "planet": {
       "status": "site",
@@ -780,11 +780,11 @@
     },
     "popcorn": {
       "status": "site",
-      "said": "(October 2, 2026, review) It should actually be able to hear the pops ... you can hear the kernels popping. Like that's what you should kind of hear. It should be like a dry pop.",
-      "note": "Real, dry kernel pops (like microwave popcorn without the hum).",
-      "plan": "Now: A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum (Sound C).",
+      "said": "(October 6, 2026, walkthrough) The popcorn sizzle does not sound like real popcorn.",
+      "note": "It sounds like a sizzle, not real popcorn.",
+      "plan": "Now: a clean, single dry pop for each kernel (ten different real pops, the pot's rumble and the oil's hiss cut out), so each kernel is heard on its own (Sound D).",
       "candidates": [],
-      "round": "2026-10-02"
+      "round": "2026-10-06"
     },
     "jelly": {
       "status": "site",
@@ -1598,11 +1598,822 @@
     },
     "periodic-table": {
       "status": "site",
-      "said": "(October 2, 2026, review) the whooshing sound ... doesn't need to be so loud ... I'd like for there to be, like, a faint synchronized sound that plays for each element as each of those subatomic particles gets packed into the nucleus.",
-      "note": "The whoosh on tapping an element: keep it but much more subtle. Add a faint sound in sync with each proton and neutron packing into the nucleus (not bubbles, not plastic blocks).",
-      "plan": "Now: The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it packs into the nucleus, in sync (Sound C).",
-      "candidates": [],
-      "round": "2026-10-02"
+      "said": "(October 2, 2026, review) the whooshing sound ... doesn't need to be so loud ... I'd like for there to be, like, a faint synchronized sound that plays for each element as each of those subatomic particles gets packed into the nucleus. (October 6, 2026, walkthrough) the sound that plays as the subatomic particles are being added to the nucleus ... It's kind of like nails on a chalkboard ... maybe a little bit more like the sorting sound for the splat simulator.",
+      "note": "The whoosh on tapping an element: keep it but much more subtle. Add a faint sound in sync with each proton and neutron packing into the nucleus (not bubbles, not plastic blocks). Then (October 6): the ticks grate like nails on a chalkboard; make them more like the splat simulator's sorting.",
+      "plan": "Now: in the site and new to hear (lane Elements, October 6, 2026): for each proton and neutron as it packs into the nucleus, a soft pebble's click like the splat simulator's sorting, instead of the bright 2.7 to 3.3 kHz clacks (Sound C). On the board, iron's nucleus (26 protons, 30 neutrons): A, the new clicks; B, the old clacks to compare.",
+      "candidates": [
+        {
+          "id": "a",
+          "label": "Soft pebble clicks (new)",
+          "sound": [
+            {
+              "voice": "whoosh",
+              "f": 300,
+              "to": 1.6,
+              "decay": 1.4,
+              "vol": 0.13
+            },
+            {
+              "voice": "pebble",
+              "at": 0.3,
+              "f": 1488,
+              "vol": 0.16
+            },
+            {
+              "voice": "pebble",
+              "at": 0.331,
+              "f": 1812,
+              "vol": 0.191
+            },
+            {
+              "voice": "pebble",
+              "at": 0.362,
+              "f": 1934,
+              "vol": 0.221
+            },
+            {
+              "voice": "pebble",
+              "at": 0.393,
+              "f": 1936,
+              "vol": 0.172
+            },
+            {
+              "voice": "pebble",
+              "at": 0.424,
+              "f": 2082,
+              "vol": 0.202
+            },
+            {
+              "voice": "pebble",
+              "at": 0.455,
+              "f": 1535,
+              "vol": 0.233
+            },
+            {
+              "voice": "pebble",
+              "at": 0.485,
+              "f": 2231,
+              "vol": 0.183
+            },
+            {
+              "voice": "pebble",
+              "at": 0.516,
+              "f": 1659,
+              "vol": 0.214
+            },
+            {
+              "voice": "pebble",
+              "at": 0.547,
+              "f": 2380,
+              "vol": 0.164
+            },
+            {
+              "voice": "pebble",
+              "at": 0.578,
+              "f": 1783,
+              "vol": 0.195
+            },
+            {
+              "voice": "pebble",
+              "at": 0.609,
+              "f": 1899,
+              "vol": 0.226
+            },
+            {
+              "voice": "pebble",
+              "at": 0.64,
+              "f": 1907,
+              "vol": 0.176
+            },
+            {
+              "voice": "pebble",
+              "at": 0.671,
+              "f": 2047,
+              "vol": 0.207
+            },
+            {
+              "voice": "pebble",
+              "at": 0.702,
+              "f": 1506,
+              "vol": 0.237
+            },
+            {
+              "voice": "pebble",
+              "at": 0.733,
+              "f": 1830,
+              "vol": 0.188
+            },
+            {
+              "voice": "pebble",
+              "at": 0.764,
+              "f": 1955,
+              "vol": 0.218
+            },
+            {
+              "voice": "pebble",
+              "at": 0.795,
+              "f": 1954,
+              "vol": 0.169
+            },
+            {
+              "voice": "pebble",
+              "at": 0.825,
+              "f": 2104,
+              "vol": 0.199
+            },
+            {
+              "voice": "pebble",
+              "at": 0.856,
+              "f": 1553,
+              "vol": 0.23
+            },
+            {
+              "voice": "pebble",
+              "at": 0.887,
+              "f": 2253,
+              "vol": 0.181
+            },
+            {
+              "voice": "pebble",
+              "at": 0.918,
+              "f": 1677,
+              "vol": 0.211
+            },
+            {
+              "voice": "pebble",
+              "at": 0.949,
+              "f": 2402,
+              "vol": 0.162
+            },
+            {
+              "voice": "pebble",
+              "at": 0.98,
+              "f": 1801,
+              "vol": 0.192
+            },
+            {
+              "voice": "pebble",
+              "at": 1.011,
+              "f": 1920,
+              "vol": 0.223
+            },
+            {
+              "voice": "pebble",
+              "at": 1.042,
+              "f": 1925,
+              "vol": 0.173
+            },
+            {
+              "voice": "pebble",
+              "at": 1.073,
+              "f": 2069,
+              "vol": 0.204
+            },
+            {
+              "voice": "pebble",
+              "at": 1.104,
+              "f": 1524,
+              "vol": 0.234
+            },
+            {
+              "voice": "pebble",
+              "at": 1.135,
+              "f": 2218,
+              "vol": 0.185
+            },
+            {
+              "voice": "pebble",
+              "at": 1.165,
+              "f": 1648,
+              "vol": 0.216
+            },
+            {
+              "voice": "pebble",
+              "at": 1.196,
+              "f": 1972,
+              "vol": 0.166
+            },
+            {
+              "voice": "pebble",
+              "at": 1.227,
+              "f": 2126,
+              "vol": 0.197
+            },
+            {
+              "voice": "pebble",
+              "at": 1.258,
+              "f": 1571,
+              "vol": 0.227
+            },
+            {
+              "voice": "pebble",
+              "at": 1.289,
+              "f": 2275,
+              "vol": 0.178
+            },
+            {
+              "voice": "pebble",
+              "at": 1.32,
+              "f": 1695,
+              "vol": 0.208
+            },
+            {
+              "voice": "pebble",
+              "at": 1.351,
+              "f": 1793,
+              "vol": 0.239
+            },
+            {
+              "voice": "pebble",
+              "at": 1.382,
+              "f": 1819,
+              "vol": 0.19
+            },
+            {
+              "voice": "pebble",
+              "at": 1.413,
+              "f": 1942,
+              "vol": 0.22
+            },
+            {
+              "voice": "pebble",
+              "at": 1.444,
+              "f": 1943,
+              "vol": 0.171
+            },
+            {
+              "voice": "pebble",
+              "at": 1.475,
+              "f": 2091,
+              "vol": 0.201
+            },
+            {
+              "voice": "pebble",
+              "at": 1.505,
+              "f": 1542,
+              "vol": 0.232
+            },
+            {
+              "voice": "pebble",
+              "at": 1.536,
+              "f": 2239,
+              "vol": 0.182
+            },
+            {
+              "voice": "pebble",
+              "at": 1.567,
+              "f": 1666,
+              "vol": 0.213
+            },
+            {
+              "voice": "pebble",
+              "at": 1.598,
+              "f": 1990,
+              "vol": 0.163
+            },
+            {
+              "voice": "pebble",
+              "at": 1.629,
+              "f": 2148,
+              "vol": 0.194
+            },
+            {
+              "voice": "pebble",
+              "at": 1.66,
+              "f": 1589,
+              "vol": 0.225
+            },
+            {
+              "voice": "pebble",
+              "at": 1.691,
+              "f": 2296,
+              "vol": 0.175
+            },
+            {
+              "voice": "pebble",
+              "at": 1.722,
+              "f": 1713,
+              "vol": 0.206
+            },
+            {
+              "voice": "pebble",
+              "at": 1.753,
+              "f": 1815,
+              "vol": 0.236
+            },
+            {
+              "voice": "pebble",
+              "at": 1.784,
+              "f": 1837,
+              "vol": 0.187
+            },
+            {
+              "voice": "pebble",
+              "at": 1.815,
+              "f": 1964,
+              "vol": 0.217
+            },
+            {
+              "voice": "pebble",
+              "at": 1.845,
+              "f": 1961,
+              "vol": 0.168
+            },
+            {
+              "voice": "pebble",
+              "at": 1.876,
+              "f": 2112,
+              "vol": 0.198
+            },
+            {
+              "voice": "pebble",
+              "at": 1.907,
+              "f": 1560,
+              "vol": 0.229
+            },
+            {
+              "voice": "pebble",
+              "at": 1.938,
+              "f": 2261,
+              "vol": 0.18
+            },
+            {
+              "voice": "pebble",
+              "at": 1.969,
+              "f": 1684,
+              "vol": 0.21
+            },
+            {
+              "voice": "pebble",
+              "at": 2.0,
+              "f": 2410,
+              "vol": 0.161
+            }
+          ]
+        },
+        {
+          "id": "b",
+          "label": "The old clacks (before)",
+          "sound": [
+            {
+              "voice": "whoosh",
+              "f": 300,
+              "to": 1.6,
+              "decay": 1.4,
+              "vol": 0.13
+            },
+            {
+              "voice": "clack",
+              "at": 0.3,
+              "f": 2538,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.331,
+              "f": 2738,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.362,
+              "f": 3195,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.393,
+              "f": 2815,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.424,
+              "f": 3289,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.455,
+              "f": 2567,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.485,
+              "f": 3382,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.516,
+              "f": 2644,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.547,
+              "f": 3476,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.578,
+              "f": 2720,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.609,
+              "f": 3173,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.64,
+              "f": 2797,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.671,
+              "f": 3267,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.702,
+              "f": 2549,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.733,
+              "f": 2749,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.764,
+              "f": 3209,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.795,
+              "f": 2826,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.825,
+              "f": 3302,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.856,
+              "f": 2578,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.887,
+              "f": 3396,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.918,
+              "f": 2655,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.949,
+              "f": 3489,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 0.98,
+              "f": 2731,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.011,
+              "f": 3187,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.042,
+              "f": 2808,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.073,
+              "f": 3280,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.104,
+              "f": 2560,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.135,
+              "f": 3374,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.165,
+              "f": 2636,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.196,
+              "f": 2837,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.227,
+              "f": 3316,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.258,
+              "f": 2589,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.289,
+              "f": 3409,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.32,
+              "f": 2666,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.351,
+              "f": 3107,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.382,
+              "f": 2742,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.413,
+              "f": 3200,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.444,
+              "f": 2819,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.475,
+              "f": 3294,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.505,
+              "f": 2571,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.536,
+              "f": 3387,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.567,
+              "f": 2648,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.598,
+              "f": 2848,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.629,
+              "f": 3329,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.66,
+              "f": 2600,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.691,
+              "f": 3423,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.722,
+              "f": 2677,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.753,
+              "f": 3120,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.784,
+              "f": 2753,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.815,
+              "f": 3214,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.845,
+              "f": 2830,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.876,
+              "f": 3307,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.907,
+              "f": 2582,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.938,
+              "f": 3401,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 1.969,
+              "f": 2659,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            },
+            {
+              "voice": "clack",
+              "at": 2.0,
+              "f": 3494,
+              "decay": 0.6,
+              "bright": 0.25,
+              "vol": 0.2
+            }
+          ]
+        }
+      ],
+      "round": "2026-10-06"
     },
     "picture-frame": {
       "status": "approved",
@@ -1648,10 +2459,11 @@
     },
     "water-bottle": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
-      "note": "Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
-      "plan": "Now: the cap twisted off, a real pour (a splashing stream and the water sloshing in the glass) and the cap twisted back on (no clicks or bubbly glugs).",
-      "candidates": []
+      "said": "(October 6, 2026, walkthrough) The sound of the water sounds more like a waterfall than it does water actually being poured out of a bottle or a water bottle like that. Can you change that?",
+      "note": "It sounds like a waterfall; it should be water poured from a bottle.",
+      "plan": "Now: the cap twisted off, a real recording of water poured into a glass while the stream runs, and the cap twisted back on; no rushing waterfall (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
     },
     "cactus": {
       "status": "approved",
@@ -2555,7 +3367,7 @@
             {
               "voice": "marimba",
               "at": 0.5,
-              "f": 880.0,
+              "f": 880,
               "vol": 0.5,
               "decay": 0.7
             },
@@ -2697,6 +3509,118 @@
           ]
         }
       ],
+      "round": "2026-10-06"
+    },
+    "stollen": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The Stollen ... has a weird clicky noise, kind of like a zipper. We can get rid of that, and the little note that plays is too loud.",
+      "note": "No zipper-like clicking; the note is too loud.",
+      "plan": "Now: just the two soft plucked notes, much quieter; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "orange-photo": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The orange photo kind of sounds like a bubble. We can make it really simple. It doesn't need to have two sounds, like two bubbles popping. You can remove one of them and then maybe make it a little bit more subtle.",
+      "note": "One bubble, not two, and subtler.",
+      "plan": "Now: one soft pop, quieter; the second bubble (the drips) is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "physalis": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The P-H-Y-S-A-L-I-S still has that clicking, or, like, zipper noise that I hate, and the twinkles don't need to be there.",
+      "note": "No zipper-like clicking and no twinkles.",
+      "plan": "Now: the berry's soft papery pop in its husk and a light landing; no clicking rustle, no twinkle (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "crystal-gem": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The crystal, the sound is too overwhelming. Make it more subtle.",
+      "note": "Too overwhelming; much subtler.",
+      "plan": "Now: one quiet glassy ring, shorter; the sparkle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "monkey-doll": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The monkey doll. The first sound that it makes, which is kind of like a rubber band sound, is fine, but the clicking sound that comes after that can be removed.",
+      "note": "Keep the rubber-band sound; remove the clicking after it.",
+      "plan": "Now: the rubber-band boing only; the clicking rustle after it is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "sunflower-photo": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The sunflower photo sound is terrible. It sounds like that clicking, stretching sound and wind. Neither of those things is really applicable here. Make it something subtle.",
+      "note": "A new, subtle sound: no clicking, stretching or wind.",
+      "plan": "Now: a soft, warm low chord as the flower lifts and a light landing; no clicking, flutter or wind (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "white-roses": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The white rose still has the clicking noise. Should be removed, but the little ding of the glass is fine.",
+      "note": "Remove the clicking; keep the glass ding.",
+      "plan": "Now: the vase's glass ding only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "bonsai-photo": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The bonsai tree photo still has the clicking noise. It should be removed.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the pot's wooden knock only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "mushroom-photo": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The mushroom photo still has the clicking noise. Remove it.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the soft pop only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "crochet-earth": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) For the crow, Shay, Earth, you can remove the twinkle. We don't need the twinkle.",
+      "note": "Remove the twinkle.",
+      "plan": "Now: the soft boing only; the twinkle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "maple-tree": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The golden maple has that clicking noise. I don't like it. The wind is all right, but make it more subtle.",
+      "note": "Remove the clicking; the wind is all right but subtler.",
+      "plan": "Now: a gentle gust of wind, about half as loud; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "peony": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The peonies in a vase has the clicking noise. We don't need it.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the vase's glass note only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "money-tree": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) The money tree has a clicking noise. We don't need it.",
+      "note": "Remove the clicking.",
+      "plan": "Now: the pot's soft knock only; the clicking rustle is gone (Sound D).",
+      "candidates": [],
+      "round": "2026-10-06"
+    },
+    "point-clouds": {
+      "status": "site",
+      "said": "(October 6, 2026, walkthrough) For the point clouds, the sound effect, there's a wind effect and there's a twinkle effect. The twinkle is okay. The wind's a little bit too loud and overwhelming. You can make the wind more subtle. I think you can even make the twinkle a little bit more subtle as well.",
+      "note": "The wind is too loud; make it subtler, and the twinkle a little subtler too.",
+      "plan": "Now: the same lidar sweep with the airy wind at half its level and the twinkle a little quieter (Sound D).",
+      "candidates": [],
       "round": "2026-10-06"
     }
   }
