@@ -2491,7 +2491,7 @@
       "candidates": []
     },
     "shardball": {
-      "status": "ready",
+      "status": "site",
       "said": "(October 6, 2026, walkthrough) The sound when the bricks break, let's hear something else. I don't like the sound.",
       "note": "A new sound for a brick breaking.",
       "plan": "Now in the game (lane Arcade r2): a glazed brick breaks with a wooden marimba note, one note of a pentatonic scale per row (higher rows ring higher, so clearing a column climbs), and a short dry crumble as it falls apart; a stone brick with a low knock and a longer, gritty crumble. No glass ring. The ball's knocks off the paddle and the walls stay as they were.",
@@ -2594,7 +2594,7 @@
       "round": "2026-10-06"
     },
     "page-breaker": {
-      "status": "ready",
+      "status": "site",
       "said": "(October 6, 2026, walkthrough) Like the sound is kind of weird. The building blocks kind of sound we should change, but the other sound when it hits stuff that's special to this game is okay.",
       "note": "A new sound for a word's block breaking; the game's other sounds stay.",
       "plan": "Now in the game (lane Arcade r2): a word's block tears off the page with a real paper flap (a recording, a touch higher or lower block by block) over a light crumple. The paddle's and the walls' knocks stay as they were.",
