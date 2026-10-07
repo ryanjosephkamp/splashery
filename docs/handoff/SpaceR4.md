@@ -40,8 +40,8 @@ session_012GmKRUMZLir2nb27Bo8Cu2.
 
 ## State
 
-WORKING (October 7, 2026). One new labs toy, `solar-orbits` ("The solar system on real orbits"), in
-a new pack `src/packs/space-r4.js`:
+READY for review (October 7, 2026). PR #394. One new labs toy, `solar-orbits` ("The solar system on
+real orbits"), in a new pack `src/packs/space-r4.js`:
 
 - The Sun, the eight planets (JPL Table 1, through `src/sky/astro.js`), the Moon, Io, Europa,
   Ganymede, Callisto and Titan (JPL satellite elements; Titan from Horizons), comets Halley, Encke,
@@ -53,7 +53,11 @@ a new pack `src/packs/space-r4.js`:
 - A tap flies to the next planet: the system grows about it on the GPU (up to about ×1000 on the
   true scale) and turns so its sunlit side shows; after Neptune, back to the whole system.
 - Tests: `tests/sp4.spec.mjs` (9): planets, moons, asteroids and comets against recorded Horizons
-  values; the GPU Kepler step's twin; the sample; the build and drive; the browser.
+  values; the GPU Kepler step's twin; the sample; the build and drive; the browser. Also run: help,
+  hta, snda-engine, sky, e5 (all pass). Prettier and US English clean; thumbnail and
+  `sp4-solar-orbits-*` screenshots done.
+- Clips: 6 on Effect review page 2 (lane record `SpaceR4`): overview at a year a second, flies to
+  Earth, Jupiter and Saturn, the true scale, Halley in 1986. Waiting on the owner's marks.
 
 ## Notes
 
@@ -81,6 +85,9 @@ a new pack `src/packs/space-r4.js`:
 - WebGL2 sorts the splats in their built places, refreshed every half second for the tokens; the
   asteroids are sorted where they were built (small, nearly opaque specks; it doesn't show).
 - The giant planets are colored bands, not maps; Venus is one cloud color.
+- Names are sized for a phone; on a computer (wider view) they show about twice as large.
+- A comet's name sits on its tail near the Sun.
+- `tools/sp4-clip.mjs` writes the date over each clip (the page's legend isn't in the canvas).
 
 ## For the Operator
 
