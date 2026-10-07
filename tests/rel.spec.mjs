@@ -8,10 +8,14 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-import { RECIPES, ELEMENTS, elementOf, factsOf } from "../src/packs/real-elements.js";
+import { RECIPES, ELEMENTS, elementOf, factsOf, solidSample } from "../src/packs/real-elements.js";
 import { FACTS } from "../src/elements-real/facts.js";
-import { SAMPLES, WITH_PHOTO, LICENSE_URL } from "../src/elements-real/samples.js";
+import { SAMPLES, WITH_PHOTO, PICTURED, STANDINS, LICENSE_URL, pictureOf, reliefOf } from "../src/elements-real/samples.js"; // prettier-ignore
 import { cellOf, blockOf } from "../src/elements-real/layout.js";
+import { seeThrough, SIDE_VIEWS } from "../src/elements-real/see-through.js";
+import { insideShows } from "../src/elements-real/watertight.js";
+import jpeg from "jpeg-js";
+import { PNG } from "pngjs";
 import { PERIODIC } from "../src/chem/periodic.js";
 import { buildRecipe } from "../src/kit.js";
 import { applyClay } from "../src/generators.js";
@@ -144,11 +148,12 @@ test.describe("the facts", () => {
     expect(tc).toContain("Photo: Marco Cardin, CC BY-SA 4.0");
     const og = factsOf(elementOf("Og")).items;
     expect(og.find((i) => i.dim).text).toMatch(/few atoms/);
+    expect(og.map((i) => i.text)).toContain("Shown instead: Yuri Oganessian, for whom oganesson is named"); // prettier-ignore
   });
 });
 
 test.describe("the samples", () => {
-  const ALLOWED = ["CC BY 3.0", "CC BY 4.0", "CC BY-SA 3.0", "CC BY-SA 4.0", "Public domain"];
+  const ALLOWED = ["CC0", "CC BY 2.0", "CC BY 3.0", "CC BY 4.0", "CC BY-SA 3.0", "CC BY-SA 4.0", "Public domain"]; // prettier-ignore
 
   test("every element has a photo with an allowed license, or says why not", () => {
     for (let z = 1; z <= 118; z++) {
@@ -164,21 +169,43 @@ test.describe("the samples", () => {
       expect(s.author.length).toBeGreaterThan(2);
       expect(s.what.length).toBeGreaterThan(8);
     }
-    expect(WITH_PHOTO.length).toBe(91);
+    expect(WITH_PHOTO.length).toBe(92);
     // The heaviest have none.
     for (let z = 100; z <= 118; z++) expect(SAMPLES[z].none).toBeTruthy();
   });
 
+  test("every element without a sample photo has a stand-in picture, said to be one", () => {
+    expect(PICTURED.length).toBe(118);
+    for (let z = 1; z <= 118; z++) {
+      if (!SAMPLES[z].none) {
+        expect(STANDINS[z]).toBeUndefined();
+        continue;
+      }
+      const s = STANDINS[z];
+      expect(s, `${z}`).toBeTruthy();
+      expect(["portrait", "flag", "arms", "photo"]).toContain(s.kind);
+      expect(ALLOWED).toContain(s.license);
+      expect(s.page).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+      expect(s.what.length).toBeLessThanOrEqual(90);
+      const items = factsOf(ELEMENTS[z - 1]).items.map((i) => i.text);
+      expect(items).toContain(SAMPLES[z].none);
+      expect(items).toContain(`Shown instead: ${s.what}`);
+      expect(items).toContain(`Picture: ${s.author}, ${s.license}`);
+    }
+    // Dubnium is named for Dubna, Russia (not Dublin).
+    expect(STANDINS[105].what).toMatch(/Dubna/);
+  });
+
   test("the toy credits every Commons photo, BY-SA ones with their license", () => {
     const c = RECIPE.credits;
-    for (const z of WITH_PHOTO.filter((z) => SAMPLES[z].src === "commons"))
-      expect(c.find((x) => x.source === SAMPLES[z].page)?.license).toBe(SAMPLES[z].license);
+    for (const z of PICTURED.filter((z) => pictureOf(z).src === "commons"))
+      expect(c.find((x) => x.source === pictureOf(z).page)?.license).toBe(pictureOf(z).license);
     expect(c.find((x) => x.source === "https://images-of-elements.com/").license).toBe("CC BY 3.0");
   });
 
   test("the files are there and small", () => {
     let total = 0;
-    for (const z of WITH_PHOTO)
+    for (const z of PICTURED)
       for (const ext of ["jpg", "png"]) {
         const f = path.join(ASSETS, `${z}.${ext}`);
         expect(fs.existsSync(f), f).toBe(true);
@@ -187,7 +214,7 @@ test.describe("the samples", () => {
     const atlas = fs.statSync(path.join(ASSETS, "tiles.jpg")).size + fs.statSync(path.join(ASSETS, "tiles.png")).size; // prettier-ignore
     // The table opens with the atlas alone; each lifted sample adds its own pair.
     expect(atlas).toBeLessThan(600_000);
-    expect(total / WITH_PHOTO.length).toBeLessThan(80_000);
+    expect(total / PICTURED.length).toBeLessThan(80_000);
   });
 
   test("the table builds within its budget, the lifted sample in finer detail", async () => {
@@ -199,10 +226,31 @@ test.describe("the samples", () => {
     expect(d.legend.title).toBe("29 Cu · Copper");
     expect(d.splats.lift).toBeGreaterThan(0.12 * count);
     expect(d.splats.tiles).toBeGreaterThan(0.25 * count);
-    // A placeholder element lifts a plain slab with its symbol.
+    // An element with no sample photo lifts its stand-in picture (Oganessian's portrait, flat).
     const og = await build(count, { element: "Og" });
     expect(og.kit.data.legend.title).toBe("118 Og · Oganesson");
     expect(og.kit.data.splats.lift).toBeGreaterThan(1000);
+  });
+
+  // The owner's "the outer shell isn't solid" (October 6, 2026): up close, the side wall's
+  // filler columns showed gaps onto the inside of the far wall. Every lifted sample, drawn from
+  // 120 directions by a small software splatter, must show its inside on under 1% of its pixels
+  // (the filler build scored 2 to 5 percent).
+  test("every lifted sample is solid from every direction", () => {
+    test.setTimeout(300_000);
+    const bad = [];
+    for (const z of PICTURED) {
+      const d = PNG.sync.read(fs.readFileSync(path.join(ASSETS, `${z}.png`)));
+      const c = jpeg.decode(fs.readFileSync(path.join(ASSETS, `${z}.jpg`)), { useTArray: true });
+      const pair = {
+        depth: { w: d.width, h: d.height, data: d.data },
+        color: { w: c.width, h: c.height, data: c.data },
+      };
+      const S = solidSample(pair, 14_400, 1, (p, col, size, x = {}) => ({ p, size, ...x }), reliefOf(z)); // prettier-ignore
+      const r = insideShows(S);
+      if (r.ratio >= 0.01) bad.push(`${z}: ${(r.ratio * 100).toFixed(2)}%`);
+    }
+    expect(bad).toEqual([]);
   });
 
   test("a tap on a tile picks its element; on the lifted sample, turns it", () => {
@@ -249,7 +297,12 @@ test.describe("the toy in the app", () => {
         performance.now() - t0 < 120_000
       )
         await new Promise((ok) => setTimeout(ok, 100));
-      await new Promise((ok) => setTimeout(ok, 3000));
+      // The facts show once the sample is most of the way up (wait for them, however slow the
+      // machine draws).
+      const legend = document.getElementById("toy-legend");
+      const t1 = performance.now();
+      while (!legend.innerText.includes("Bismuth") && performance.now() - t1 < 30_000)
+        await new Promise((ok) => setTimeout(ok, 200));
       return {
         element: player.scene.toy.options.element,
         up: player.motion.targets.up,
@@ -260,6 +313,51 @@ test.describe("the toy in the app", () => {
     expect(r.up).toBe(1);
     expect(r.legend).toContain("83 Bi · Bismuth");
     expect(r.legend).toContain("Density 9.807 g/cm³");
+  });
+
+  // The owner's "hollow from the sides" (October 6, 2026): the lifted sample, held side-on and at
+  // 10 degrees either side, drawn with and without it; no background may show through its
+  // silhouette (tools/rel-side.mjs writes the same views as stills to look at).
+  test("the lifted sample is solid from the side", async ({ page }) => {
+    test.setTimeout(300_000);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await open(page);
+    for (const el of ["Cu", "Rn"]) {
+      await page.evaluate(async (el) => {
+        const { app, player } = window.__splashery;
+        await app.setToyOption("element", el);
+        player.motion.setControl("up", 1, { snap: true });
+      }, el);
+      await page.waitForFunction((el) => window.__splashery.player.motion?.ctx?.kit?.data?.element === el, el, { timeout: 120_000 }); // prettier-ignore
+      await page.waitForTimeout(1500);
+      for (const [name, spin] of SIDE_VIEWS) {
+        const shot = async (hide) => {
+          await page.evaluate(
+            ({ spin, hide }) => {
+              globalThis.__relHideLift = hide;
+              const { player } = window.__splashery;
+              player.motion.setControl("spin", spin, { snap: true });
+            },
+            { spin, hide },
+          );
+          // (A few frames: the splats sort where the previous frame's pose put them.)
+          await page.evaluate(async () => {
+            for (let i = 0; i < 6; i++) {
+              window.__splashery.player.stage.requestRender();
+              await new Promise((ok) => requestAnimationFrame(() => setTimeout(ok, 30)));
+            }
+          });
+          await page.waitForTimeout(150);
+          return PNG.sync.read(await page.screenshot());
+        };
+        const withS = await shot(false);
+        const without = await shot(true);
+        await page.evaluate(() => (globalThis.__relHideLift = false));
+        const r = seeThrough(withS, without);
+        expect(r.silhouette, `${el} at ${name} degrees`).toBeGreaterThan(1500);
+        expect(r.ratio, `${el} at ${name} degrees: ${r.holes} px show through`).toBeLessThan(0.01);
+      }
+    }
   });
 
   for (const [w, h] of [

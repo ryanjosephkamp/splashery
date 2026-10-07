@@ -57,8 +57,12 @@ function nucleonTicks(D, m, u, down, time, out) {
   for (let i = 0; i < A; i += every) {
     const ui = uOf(i);
     if (ui <= m.tickU || ui > reach) continue;
-    const f = (list[i] ? 3300 : 2700) * (0.94 + 0.12 * ((i * 0.618) % 1));
-    ticks.push({ voice: "clack", f, decay: 0.6, bright: 0.25, vol, at: Math.max(0, (ui - u) / rate) }); // prettier-ignore
+    // Lane Elements (the owner's walkthrough, October 6, 2026: the clacks at 2.7 to 3.3 kHz were
+    // "like nails on a chalkboard"): a soft pebble's click, like the splat simulator's sorting,
+    // each a little different, protons a touch higher than neutrons.
+    const h = (i * 0.618034) % 1;
+    const f = (list[i] ? 2100 : 1750) * (0.85 + 0.3 * h);
+    ticks.push({ voice: "pebble", f, vol: vol * (0.8 + 0.4 * ((i * 0.381966) % 1)), at: Math.max(0, (ui - u) / rate) }); // prettier-ignore
   }
   m.tickU = reach;
   if (ticks.length) out.cues.push(ticks);

@@ -262,7 +262,7 @@
     "knot": {
       "v": "keep",
       "effect": "The neon flows along the knot and it ties tighter, then relaxes.",
-      "sound": "A real jelly wobbling, then a softer wobble as it settles; no buzz, hum or horn (Sound C, October 2, 2026).",
+      "sound": "The torus knot's sound, timed to this knot: it strains as the loops tie tighter, then lets go with a soft thump and swish as it relaxes; no jelly (Sound D, October 6, 2026).",
       "improved": "E1b: the knot contorts: waves of swelling loops run round the tube, lifting and twisting it, then it settles back into its trefoil (3 s)."
     },
     "planet": {
@@ -1165,7 +1165,7 @@
     "popcorn": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum (Sound C, October 2, 2026)."
+      "sound": "A clean, single dry pop for each kernel as it jumps (14 of them, at the toy's own times, from ten different real pops with the pot's rumble and the oil's hiss cut out); no sizzle (Sound D, October 6, 2026)."
     },
     "jelly": {
       "v": "keep",
@@ -2230,7 +2230,7 @@
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "Its cap (cut out of the scan as a solid piece) spins off in two turns and hops up. The bottle tips and water glugs out as a stream of drops into a glass beside it; then it all runs back and the cap screws on (4.5 s).",
-      "sound": "The cap twisted off, a real pour (a splashing stream and the water sloshing in the glass) and the cap twisted back on (no clicks or bubbly glugs).",
+      "sound": "The cap twisted off, a real recording of water poured into a glass while the stream runs, and the cap twisted back on; no rushing waterfall (Sound D, October 6, 2026).",
       "improved": "Real objects: a detailed CC BY model of an orange steel bottle. The cap (cut from the model above its plug, its underside closed) unscrews in two turns and hops to the table, the bottle lifts and tips, and a continuous stream of water, drawn as overlapping pieces that follow the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises; then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model, cap plug left out, a stream instead of drops."
     },
     "soda-can": {
@@ -2596,9 +2596,9 @@
     "real-elements": {
       "v": "keep",
       "owner": "The owner's new-ideas pick N2 (yes) on the Push Plan (October 5, 2026; lane Elements; labs only).",
-      "effect": "The 118 elements as real samples on their tiles: open photos of the real elements cut out of their background and raised in 3D by the Photo to 3D depth model. A tap lifts the sample out of its tile toward the viewer (about 2 s), larger and in finer detail, with a back and rim so it turns as a solid piece, swings it slowly and shows its facts beside the stage; a tap on the sample turns it once around; a tap on its tile sets it back. Elements with no photo of a real sample have hatched tiles, and their facts say why. Tile colors by category or block on demand.",
+      "effect": "The 118 elements as real samples on their tiles: open photos of the real elements cut out of their background and raised in 3D by the Photo to 3D depth model. A tap lifts the sample out of its tile toward the viewer (about 2 s), larger and in finer detail, with a back and rim so it turns as a solid piece, swings it slowly and shows its facts beside the stage; a tap on the sample turns it once around; a tap on its tile sets it back. Elements with no photo of a real sample have hatched tiles with a stand-in picture (the person, place or flag the element is named for, or a mineral holding traces of it), and their facts say why and that it is a stand-in. Tile colors by category or block on demand.",
       "sound": "A soft whoosh and a tine as the sample lifts, a whoosh and a small click as it sets down, a rising blip as it turns.",
-      "improved": "Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons) cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table and a 256 x 256 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab and Los Alamos (tools/rel-facts.mjs), checked by tests against a saved snapshot of the references."
+      "improved": "Real elements: 91 sample photos (Images of Elements, CC BY 3.0, and Wikimedia Commons) cut out and given depth at build time (tools/rel-samples.mjs), a 640 x 640 atlas for the table and a 384 x 384 sample loaded on lift; facts from PubChem with uses quoted from Jefferson Lab and Los Alamos (tools/rel-facts.mjs), checked by tests against a saved snapshot of the references. Polish (October 5, 2026): the sharp kernel and the low cull (labs), finer tile samples, cut-outs one pixel inside their rim (no fringe), crisp four-splat lettering on big budgets, a clean board edge, and a smoother lift that comes straight out of its tile, then glides. Owner's marks (October 5, 2026): the lifted sample is a closed solid (a back, a wall round its outline and fillers at steep steps), so no turn shows a hole; 26 stand-in pictures from Wikimedia Commons (portraits flat in black and white, flags waving, coats of arms cut out, minerals as samples); promethium's tile is now a real sample photo."
     },
     "molecule-viewer": {
       "v": "keep",
@@ -2645,43 +2645,43 @@
       "v": "new",
       "owner": "The owner's Push Plan pick S2, \"Absolutely, yes ... maybe even a little bit more\" (October 4, 2026; lane Viewers; labs only).",
       "effect": "LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity, classification (with a legend) or the file's own colors; measure the distance between two tapped points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line across the points from west to east, like a scanner's pass over the ground (2.6 s).",
-      "sound": "An airy rising tone with faint ticks as the scan line crosses.",
+      "sound": "An airy rising tone and faint ticks as the scan line crosses, both quiet (Sound D, October 6, 2026: subtler wind and twinkle).",
       "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, Meteor Crater. Viewers r2 (the owner's \"Please make sharper\" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's sharper falloff, shaded relief baked into their colors (lit by the slope under each point, darker under canopies), the preview picks one point per small cube instead of a random share (no more holes), and up to the device's full budget. Viewers r3 (the owner's \"the toys could still be sharper\", October 5, 2026): the samples remade with even thinning (one point per small cube, so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or cliff, so edges read crisply."
     },
     "real-moon": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
-      "effect": "The real Moon as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's landing site) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "effect": "The real Moon as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Tycho, Copernicus and Apollo 11's landing site) to face you, glides in close with its name lying on the ground, and glides back (about 10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
-      "improved": "Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+      "improved": "Space r2: new toy (labs) from NASA's CGI Moon Kit (the LRO camera's color mosaic and the LOLA laser altimeter's heights), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
     "real-mars": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
-      "effect": "The real Mars as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and Gale crater) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "effect": "The real Mars as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Olympus Mons, Valles Marineris and Gale crater) to face you, glides in close with its name lying on the ground, and glides back (about 10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
-      "improved": "Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+      "improved": "Space r2: new toy (labs) from the Viking orbiters' color mosaic and the MOLA laser altimeter's heights (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
     "real-earth": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
-      "effect": "The real Earth as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "effect": "The real Earth as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Mount Everest, the Grand Canyon and Hawaii) to face you, glides in close with its name lying on the ground, and glides back (about 10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (Natural Earth's city or peak, state and country, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
-      "improved": "Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+      "improved": "Space r2: new toy (labs) from NASA's Blue Marble, NOAA's ETOPO 2022 relief and NASA's Black Marble lights, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
     "real-mercury": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
-      "effect": "The real Mercury as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "effect": "The real Mercury as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (the Caloris basin, Rachmaninoff and Hokusai) to face you, glides in close with its name lying on the ground, and glides back (about 10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
-      "improved": "Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+      "improved": "Space r2: new toy (labs) from MESSENGER's three-color basemap and the USGS global elevation model, cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
     "real-venus": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
-      "effect": "The real Venus as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis Corona) to face you, glides in close with its name lying on the ground, and glides back (about 10 s).",
+      "effect": "The real Venus as splats on its real elevation and color maps, turning at its real rate (scaled and labeled) and lit on the GPU by a sun the Sun slider moves; the relief can be exaggerated (labeled). A tap turns the next named feature (Maxwell Montes, Maat Mons and Artemis Corona) to face you, glides in close with its name lying on the ground, and glides back (about 10 s). Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
-      "improved": "Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats."
+      "improved": "Space r2: new toy (labs) from Magellan's radar mosaic and radar altimetry (USGS), cut by tools/sp2-maps.mjs into a global map and a sharper patch round each feature; src/space/field.js turns, lifts and lights the splats. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
     "nearby-stars": {
       "v": "keep",
@@ -2728,16 +2728,16 @@
     "real-moons": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"more planets\", photoreal from NASA data; lane Space r2; labs only).",
-      "effect": "Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back.",
+      "effect": "Io, Europa, Ganymede, Callisto and Titan from the USGS maps of Voyager, Galileo and Cassini pictures (no elevation maps exist, so the ground is smooth), turning at their real rates (scaled, labeled) and lit by a movable sun. A tap flies to the next named place (Pele, Loki Patera, Pwyll, Osiris, Valhalla, Kraken Mare, Xanadu ...) and back. Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
-      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice."
+      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
     "real-small-worlds": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"more planets\", photoreal from NASA data; lane Space r2; labs only).",
-      "effect": "Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back.",
+      "effect": "Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back. Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
-      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice."
+      "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
     },
     "star-systems": {
       "v": "keep",
