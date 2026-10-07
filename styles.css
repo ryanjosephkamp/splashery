@@ -2016,7 +2016,7 @@ body.embed #stage {
   border-radius: 999px;
 }
 
-.sound-toggle {
+.embed-sound {
   position: fixed;
   top: 8px;
   left: 8px;

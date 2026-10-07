@@ -59,7 +59,7 @@ function addSoundButton(sound) {
   const b = document.createElement("button");
   b.type = "button";
   b.id = "sound-toggle";
-  b.className = "sound-toggle";
+  b.className = "embed-sound";
   const show = () => {
     b.setAttribute("aria-pressed", String(sound.enabled));
     b.setAttribute("aria-label", sound.enabled ? "Mute the sound" : "Turn the sound on");
