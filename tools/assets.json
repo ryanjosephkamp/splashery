@@ -1887,17 +1887,6 @@
       "note": "Lane Sound C. Freesound's HQ preview, cut from 0.839 s (2.3 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (9,585 bytes). Loaded when its toy opens with the speaker on."
     },
     {
-      "id": "knot-jelly",
-      "file": "assets/sounds/knot-jelly.mp3",
-      "toys": ["knot"],
-      "name": "Jelly Wobbling in Egg Cup 2.wav",
-      "author": "lolamadeus",
-      "page": "https://freesound.org/people/lolamadeus/sounds/181915/",
-      "license": "CC0 1.0",
-      "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.629 s (1.8 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (7,569 bytes). Loaded when its toy opens with the speaker on."
-    },
-    {
       "id": "mitochondrion-furnace",
       "file": "assets/sounds/mitochondrion-furnace.mp3",
       "toys": ["mitochondrion"],
@@ -2026,8 +2015,19 @@
       "author": "elricadavis",
       "page": "https://freesound.org/people/elricadavis/sounds/764604/",
       "license": "CC0 1.0",
-      "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut (to its first 0.68 s here) from 5.489 s (2.0 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (3,105 bytes). Loaded when its toy opens with the speaker on."
+      "checked": "October 6, 2026",
+      "note": "Lane Sound D (October 6, 2026). Ten single pops from Freesound's HQ preview (at 1.402, 1.556, 2.154, 2.274, 2.716, 3.71, 5.05, 6.544, 6.95 and 8.134 s), each 85 ms, high-passed at 140 Hz (the pot's rumble out), faded, peak-normalized and laid 0.2 s apart (2.0 s), at -3 dBFS, 32 kbps at 32 kHz mono MP3 (8,433 bytes). Loaded when its toy opens with the speaker on."
+    },
+    {
+      "id": "water-bottle-pour",
+      "file": "assets/sounds/water-bottle-pour.mp3",
+      "toys": ["water-bottle"],
+      "name": "Pouring water into a glass",
+      "author": "ahamirikia",
+      "page": "https://freesound.org/people/ahamirikia/sounds/710550/",
+      "license": "CC0 1.0",
+      "checked": "October 6, 2026",
+      "note": "Lane Sound D. Freesound's HQ preview, cut from 0.45 s (1.6 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (6,849 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "lungs-breath-b",

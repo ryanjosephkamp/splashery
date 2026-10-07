@@ -262,7 +262,7 @@
     "knot": {
       "v": "keep",
       "effect": "The neon flows along the knot and it ties tighter, then relaxes.",
-      "sound": "A real jelly wobbling, then a softer wobble as it settles; no buzz, hum or horn (Sound C, October 2, 2026).",
+      "sound": "The torus knot's sound, timed to this knot: it strains as the loops tie tighter, then lets go with a soft thump and swish as it relaxes; no jelly (Sound D, October 6, 2026).",
       "improved": "E1b: the knot contorts: waves of swelling loops run round the tube, lifting and twisting it, then it settles back into its trefoil (3 s)."
     },
     "planet": {
@@ -1165,7 +1165,7 @@
     "popcorn": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum (Sound C, October 2, 2026)."
+      "sound": "A clean, single dry pop for each kernel as it jumps (14 of them, at the toy's own times, from ten different real pops with the pot's rumble and the oil's hiss cut out); no sizzle (Sound D, October 6, 2026)."
     },
     "jelly": {
       "v": "keep",
@@ -2230,7 +2230,7 @@
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "Its cap (cut out of the scan as a solid piece) spins off in two turns and hops up. The bottle tips and water glugs out as a stream of drops into a glass beside it; then it all runs back and the cap screws on (4.5 s).",
-      "sound": "The cap twisted off, a real pour (a splashing stream and the water sloshing in the glass) and the cap twisted back on (no clicks or bubbly glugs).",
+      "sound": "The cap twisted off, a real recording of water poured into a glass while the stream runs, and the cap twisted back on; no rushing waterfall (Sound D, October 6, 2026).",
       "improved": "Real objects: a detailed CC BY model of an orange steel bottle. The cap (cut from the model above its plug, its underside closed) unscrews in two turns and hops to the table, the bottle lifts and tips, and a continuous stream of water, drawn as overlapping pieces that follow the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises; then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model, cap plug left out, a stream instead of drops."
     },
     "soda-can": {
@@ -2645,7 +2645,7 @@
       "v": "new",
       "owner": "The owner's Push Plan pick S2, \"Absolutely, yes ... maybe even a little bit more\" (October 4, 2026; lane Viewers; labs only).",
       "effect": "LAS, LAZ, PLY, XYZ and PTS point clouds drawn as splats, colored by height, intensity, classification (with a legend) or the file's own colors; measure the distance between two tapped points (straight, along the ground and the rise); crop with a box; thin to an even spacing; save as PLY, LAS or XYZ. The tap sweeps a glowing lidar scan line across the points from west to east, like a scanner's pass over the ground (2.6 s).",
-      "sound": "An airy rising tone with faint ticks as the scan line crosses.",
+      "sound": "An airy rising tone and faint ticks as the scan line crosses, both quiet (Sound D, October 6, 2026: subtler wind and twinkle).",
       "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, Meteor Crater. Viewers r2 (the owner's \"Please make sharper\" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's sharper falloff, shaded relief baked into their colors (lit by the slope under each point, darker under canopies), the preview picks one point per small cube instead of a random share (no more holes), and up to the device's full budget. Viewers r3 (the owner's \"the toys could still be sharper\", October 5, 2026): the samples remade with even thinning (one point per small cube, so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or cliff, so edges read crisply."
     },
     "real-moon": {
