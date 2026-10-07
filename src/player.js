@@ -1581,6 +1581,33 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // Lane Fix9 (engine): a toy whose recipe leaves a `tapBox` in its data
+  // ({ min: [3], max: [3] }, recipe coordinates) takes a tap anywhere in that
+  // box, where the pick buffer finds no splat (an empty plot's box between
+  // its axes): the ray's entry into the box, as a world point, or null.
+  tapBoxAt(x, y) {
+    const box = this.motion.ctx?.kit?.data?.tapBox;
+    if (!box || !this.stage.toy) return null;
+    const ray = this.stage.ray(x, y);
+    const o = this.toRecipe(ray.origin);
+    const e = this.toRecipe(ray.origin.map((v, i) => v + ray.dir[i]));
+    const d = e.map((v, i) => v - o[i]);
+    let t0 = 0;
+    let t1 = Infinity;
+    for (let i = 0; i < 3; i++) {
+      if (Math.abs(d[i]) < 1e-12) {
+        if (o[i] < box.min[i] || o[i] > box.max[i]) return null;
+        continue;
+      }
+      const a = (box.min[i] - o[i]) / d[i];
+      const b = (box.max[i] - o[i]) / d[i];
+      t0 = Math.max(t0, Math.min(a, b));
+      t1 = Math.min(t1, Math.max(a, b));
+    }
+    if (t0 > t1) return null;
+    return this.fromRecipe(o.map((v, i) => v + d[i] * t0));
+  }
+
   // Pokes the toy at a canvas point. Resolves true when it hit the toy.
   async pokeAt(x, y) {
     const p = await this.pickAt(x, y);

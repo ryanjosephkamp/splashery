@@ -816,7 +816,8 @@ class App {
     const player = this.player;
     const [x, y] = player.canvasPoint(e);
     player.pickDirty = true;
-    const hit = await player.pickAt(x, y);
+    // Lane Fix9 (engine): a toy with a tap box takes a tap anywhere in it.
+    const hit = (await player.pickAt(x, y)) || player.tapBoxAt(x, y);
     if (hit) player.act(hit);
   }
 
