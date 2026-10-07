@@ -508,9 +508,9 @@ export const TOY_SOUNDS = {
   // is fine): the torus knot's sound, timed to this knot. It strains as the loops swell and tie
   // tighter, then lets go with a soft thump and swish as it relaxes into its trefoil.
   knot: [
-    { voice: "creak", at: 0.2, f: 400, rate: 30, to: 1.4, decay: 1, vol: 0.4 },
-    { voice: "bowstring", at: 1.5, f: 120, vol: 0.8 },
-    { voice: "whoom", at: 1.55, f: 380, decay: 0.9, vol: 0.35 },
+    { voice: "creak", at: 0.3, f: 400, rate: 30, to: 1.4, decay: 1.5, vol: 0.4 },
+    { voice: "bowstring", at: 2.1, f: 120, vol: 0.8 },
+    { voice: "whoom", at: 2.15, f: 380, decay: 0.9, vol: 0.35 },
   ],
   planet: [
     { voice: "wind", f: 300, rate: 0.4, decay: 1.6, vol: 0.45 },

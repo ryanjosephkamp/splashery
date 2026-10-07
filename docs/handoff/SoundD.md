@@ -89,7 +89,13 @@ new `assets/sounds/water-bottle-pour.mp3` (CC0, ahamirikia, "Pouring water into 
 `tools/assets.json`, `CREDITS.md` and `src/sound-credits.js`. `knot-jelly.mp3` is deleted with its
 credits (nothing plays it now; the sample test requires every file to be used).
 
+Clips: 17 cards on Effect review page 2 (lane record `SoundD`, ids `sndd-<toy id>`), each an MP4
+with the toy's sound muxed in (the tap at 0.4 s), posted October 7, 2026. Owner's marks: none yet.
+
 ## Notes
+
+- Neon knot: the clip shows it contorting from about 0.3 s to 2.3 s and settling by 2.8 s, so the
+  strain (creak) runs from 0.3 s and the let-go thump and swish come at 2.1 s.
 
 - Popcorn: the old cut started each kernel at one of two places in a 0.72 s file, and each 120 ms
   cut held two or three transients plus the pot's rumble; 14 of them in 0.6 s ran together into a
@@ -100,7 +106,11 @@ credits (nothing plays it now; the sample test requires every file to be used).
 
 ## Known issues
 
-- None known yet.
+- Effect review page 2 plays its videos `muted` with no controls, so the sound in the `sndd-…` clips
+  may not be heard there (the MP4s do carry it; downloading a clip plays it). The Sound Board is the
+  sure place to hear the new sounds.
+- The neon knot's and sunflower photo's new sounds are new designs, not removals; the owner's marks
+  decide them.
 
 ## For the Operator
 
