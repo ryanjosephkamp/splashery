@@ -1961,9 +1961,9 @@ export const TOY_HELP = {
 
   "note-rider": {
     howTo:
-      "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). ♪ Your song opens a MIDI file.",
+      "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     about:
-      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open a MIDI file of your own with ♪ Your song. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
+      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open your own with ♪ Your song: a MIDI file, or a recording, whose tune a note finder hears on this device, each caught note then playing its own slice of the recording. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------

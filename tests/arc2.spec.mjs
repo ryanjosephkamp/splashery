@@ -176,3 +176,72 @@ test("Note Rider: ♪ Your song opens a MIDI file from the game itself, and its 
   await (await chooser2).setFiles({ name: "x.mid", mimeType: "audio/midi", buffer: Buffer.from("MThd nonsense") }); // prettier-ignore
   await expect(page.locator(".arc-msg h2")).toHaveText("Couldn't read that file");
 });
+
+test("Note Rider: a recording's tune is found on this device, and each caught note plays its slice of it", async ({
+  page,
+}) => {
+  test.setTimeout(240_000);
+  await open(page, "note-rider");
+  // A recording: Ode to Joy's first line as plain tones (C major), as WAV.
+  const tune = [64, 64, 65, 67, 67, 65, 64, 62, 60, 60, 62, 64, 64, 62, 62];
+  const wav = await page.evaluate(async (tune) => {
+    const rate = 22050;
+    const beat = 0.5;
+    const ctx = new OfflineAudioContext(1, rate * (tune.length * beat + 1), rate);
+    tune.forEach((n, i) => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = "triangle";
+      o.frequency.value = 440 * 2 ** ((n - 69) / 12);
+      const t = 0.3 + i * beat;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.5, t + 0.01);
+      g.gain.setValueAtTime(0.5, t + beat * 0.8);
+      g.gain.linearRampToValueAtTime(0, t + beat * 0.9);
+      o.connect(g).connect(ctx.destination);
+      o.start(t);
+      o.stop(t + beat);
+    });
+    const d = (await ctx.startRendering()).getChannelData(0);
+    const v = new DataView(new ArrayBuffer(44 + d.length * 2));
+    const str = (o, s) => [...s].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+    str(0, "RIFF");
+    v.setUint32(4, 36 + d.length * 2, true);
+    str(8, "WAVEfmt ");
+    [16, 1, 1].forEach((x, i) => (i ? v.setUint16(18 + i * 2, x, true) : v.setUint32(16, x, true))); // prettier-ignore
+    v.setUint32(24, rate, true);
+    v.setUint32(28, rate * 2, true);
+    v.setUint16(32, 2, true);
+    v.setUint16(34, 16, true);
+    str(36, "data");
+    v.setUint32(40, d.length * 2, true);
+    d.forEach((x, i) => v.setInt16(44 + i * 2, Math.max(-1, Math.min(1, x)) * 32767, true));
+    return Array.from(new Uint8Array(v.buffer));
+  }, tune);
+  const chooser = page.waitForEvent("filechooser");
+  await page.click(".arc-file");
+  await (await chooser).setFiles({ name: "ode.wav", mimeType: "audio/wav", buffer: Buffer.from(wav) }); // prettier-ignore
+  await page.waitForFunction(() => window.__splashery.player.arcade?.game?.song?.audio, null, { timeout: 200_000 }); // prettier-ignore
+  const got = await read(page, () => window.__splashery.player.arcade.game.melody.map((n) => ({ t: n.t, n: n.n, slice: n.slice }))); // prettier-ignore
+  // The tune's notes, at their times (a note in the right place within 60 ms).
+  let hits = 0;
+  tune.forEach((n, i) => {
+    if (got.some((g) => g.n === n && Math.abs(g.t - (0.3 + i * 0.5)) < 0.06)) hits++;
+  });
+  expect(hits / tune.length).toBeGreaterThanOrEqual(0.8);
+  expect(got.length).toBeLessThanOrEqual(tune.length + 3);
+  // A caught note plays its slice of the recording, not a piano note.
+  const cues = await page.evaluate(() => {
+    const a = window.__splashery.player.arcade;
+    const seen = [];
+    window.__splashery.player.on("cue", (c) => seen.push(...c.flat()));
+    a.wake();
+    a.autopilot = true;
+    for (let i = 0; i < 240; i++) a.frame(1 / 60);
+    return seen.map((s) => ({ voice: s.voice, file: s.file, from: s.from, len: s.len }));
+  });
+  const slice = cues.find((c) => c.voice === "sample");
+  expect(slice?.file).toMatch(/^own-song-/);
+  expect(slice.len).toBeGreaterThan(0.3);
+  expect(cues.some((c) => c.voice === "grand")).toBe(false);
+});

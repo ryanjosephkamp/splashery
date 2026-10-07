@@ -784,17 +784,22 @@ export const RECIPES = {
     },
     input: {
       title: "Your own song",
-      accept: ".mid,.midi,.rmi,audio/midi",
+      accept: ".mid,.midi,.rmi,audio/midi,audio/*,.mp3,.m4a,.aac,.wav,.ogg,.oga,.flac,.webm",
       binary: true,
-      fileButton: "Open a MIDI file…",
-      note: "Its melody (the highest note at each moment) comes down the track. The file is read on this device and never leaves it.",
-      async read(_text, fileName, file) {
-        if (!file) throw new Error("Open a MIDI file.");
-        const [{ readMidi }, { RIDE }] = await Promise.all([
-          import("../songs.js"),
-          import("./arcade-song.js"),
-        ]);
-        RIDE.song = readMidi(new Uint8Array(await file.arrayBuffer()), fileName);
+      fileButton: "Open a song…",
+      note: "A MIDI file: its melody (the highest note at each moment) comes down the track. A recording (MP3, M4A, WAV…): a note finder listens for its tune, and each note you catch plays its own slice of the recording. The file is read on this device and never leaves it.",
+      async read(_text, fileName, file, _files, progress) {
+        if (!file) throw new Error("Open a MIDI file or a recording.");
+        const head = new Uint8Array(await file.slice(0, 4).arrayBuffer());
+        const midi = /\.(mid|midi|rmi|kar)$/i.test(fileName || "") || String.fromCharCode(...head) === "MThd" || String.fromCharCode(...head) === "RIFF" && /\.rmi$/i.test(fileName || ""); // prettier-ignore
+        const { RIDE } = await import("./arcade-song.js");
+        if (midi) {
+          const { readMidi } = await import("../songs.js");
+          RIDE.song = readMidi(new Uint8Array(await file.arrayBuffer()), fileName);
+        } else {
+          const { songFromAudio } = await import("./arcade-listen.js");
+          RIDE.song = await songFromAudio(file, progress);
+        }
         RIDE.name = fileName;
         return { tune: "own" };
       },

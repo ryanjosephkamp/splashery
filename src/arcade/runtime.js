@@ -260,14 +260,17 @@ export class ArcadeRuntime {
       const file = pick.files?.[0];
       if (!file) return;
       try {
-        const options = await input.read(input.binary ? "" : await file.text(), file.name, file, [file]); // prettier-ignore
+        const progress = (text) => (this.fileMsg = { title: file.name, lines: [text] });
+        progress("Opening…");
+        const options = await input.read(input.binary ? "" : await file.text(), file.name, file, [file], progress); // prettier-ignore
+        this.fileMsg = null;
         if (this.dead) return;
         if (this.playMode) this.exitPlay();
         await this.player.rebuild?.(options);
       } catch (e) {
         if (this.dead) return;
-        this.fileError = { title: "Couldn't read that file", lines: [String(e?.message || e)] };
-        setTimeout(() => (this.fileError = null), 4000);
+        this.fileMsg = { title: "Couldn't read that file", lines: [String(e?.message || e)] };
+        setTimeout(() => (this.fileMsg = null), 4000);
       }
     });
     pick.click();
@@ -434,7 +437,7 @@ export class ArcadeRuntime {
     this.hud.setStats(list);
     this.hud.setPaused(this.mode !== "play");
     const tap = this.input.lastDevice === "touch" ? "Tap" : "Click or press Space";
-    if (this.fileError) this.hud.setMessage(this.fileError);
+    if (this.fileMsg) this.hud.setMessage(this.fileMsg);
     else if (this.mode === "attract")
       this.hud.setMessage({ title: this.def.title, lines: [...(this.game.attract?.() || [this.def.goal || ""]), `${tap} to play`].filter(Boolean) }); // prettier-ignore
     else if (this.mode === "paused")

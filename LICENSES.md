@@ -84,10 +84,25 @@ OR OTHER DEALINGS IN THE SOFTWARE.
   `ort-wasm-simd-threaded.mjs` and `ort-wasm-simd-threaded.wasm` (the WebAssembly build, without
   WebGPU), all unmodified. The license is copied to `vendor/onnxruntime-web/LICENSE`.
 - Loaded only when someone opens a photo in the Photo to 3D toy (a dynamic import in
-  `src/packs/photo-3d-depth.js`); never on the shelf or in an embed.
+  `src/packs/photo-3d-depth.js`), or a recording as their own song in Note Rider
+  (`src/packs/arcade-listen.js`); never on the shelf or in an embed.
 - Source: https://github.com/microsoft/onnxruntime
 - License: MIT (Copyright (c) Microsoft Corporation; the full text is in
   `vendor/onnxruntime-web/LICENSE`).
+
+## Basic Pitch note transcription model, ONNX (lane Arcade r2)
+
+- File: `vendor/basic-pitch/nmp.onnx` (230,444 bytes; SHA-256
+  `2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec`), the ICASSP 2022 model from
+  the `basic-pitch` 0.4.0 Python package (`basic_pitch/saved_models/icassp_2022/nmp.onnx`),
+  unmodified. Its license and NOTICE are copied to `vendor/basic-pitch/LICENSE` and
+  `vendor/basic-pitch/NOTICE`.
+- Loaded only when someone opens a recording as their own song in Note Rider (a dynamic import in
+  `src/packs/arcade-listen.js`, which runs it on the ONNX Runtime Web above); never on the shelf or
+  in an embed. The recording stays on the device.
+- Source: https://github.com/spotify/basic-pitch (Spotify AB)
+- License: Apache License 2.0 (the full text is in `vendor/basic-pitch/LICENSE`). The note decoding
+  in `src/packs/arcade-listen.js` follows the package's `note_creation.py` (Apache 2.0).
 
 ## Depth Anything V2 Small, quantized ONNX (lane Photo to 3D)
 

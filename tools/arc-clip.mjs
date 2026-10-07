@@ -64,6 +64,19 @@ await run(
   },
   [TOY, OPTS],
 );
+// --file=<path>: a file of the person's own, opened as the game's own
+// button opens it (Note Rider's ♪ Your song), before the clip starts.
+const FILE = opt("file", "");
+if (FILE) {
+  for (let i = 0; i < 200; i++) {
+    if (await run(() => !!window.__splashery.player.arcade?.game)) break;
+    await page.waitForTimeout(200);
+  }
+  const chooser = page.waitForEvent("filechooser");
+  await page.click(".arc-file");
+  await (await chooser).setFiles(FILE);
+  await page.waitForTimeout(1500);
+}
 for (let i = 0; i < 200; i++) {
   if (await run(() => !!window.__splashery.player.arcade?.game)) break;
   await page.waitForTimeout(200);
