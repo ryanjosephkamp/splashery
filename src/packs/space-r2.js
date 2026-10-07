@@ -4,6 +4,10 @@
 // the sun on the graphics chip (src/space/field.js). A tap flies close to
 // one of its named features and back.
 //
+// Lane Space r3: a tap on a world zooms in on that spot, as far as the
+// close-up maps allow, and names what is there; most splats go to the globe
+// itself, each colored by the mean of the map over its footprint.
+//
 // The maps are cut by tools/sp2-maps.mjs; the worlds' data (sizes, days,
 // features, sources) are in src/space/worlds.js.
 
@@ -11,6 +15,9 @@ import { quatFromTo, fibonacciSphere } from "../kit.js";
 import { BITMAP } from "../font.js";
 import { WORLDS, worldById } from "../space/worlds.js";
 import { loadWorld, decodeJpeg } from "../space/maps.js";
+import { loadZoom, TILES } from "../space/zoom.js";
+import { loadPlaces } from "../space/places.js";
+import { PROFILES } from "../generators.js";
 import { GALAXIES } from "../space/galaxies.js";
 import { parseModel, prepareModel, sampleSurface, SPLAT_FLAT } from "./studio-models-core.js";
 import { decodeImage } from "./studio-models.js";
@@ -94,15 +101,140 @@ const labelText = (f) =>
 
 // ---- The recipe for a world ---------------------------------------------------------------
 
+// Lane Space r3: a tap on a world zooms in on that spot and names it. The
+// tap's spot (action.at) is turned to face the camera, the toy rebuilds with
+// a dense patch of splats round it from the close-up tiles (src/space/zoom.js),
+// and the world grows about it on the graphics chip (src/space/field.js) as
+// if the camera came closer. A second tap (or a pinch out) goes back out.
+// Each world's zoom lives here, by world id, so it carries on across the
+// rebuild.
+const ZOOM = new Map();
+const zoomOf = (id) => {
+  let z = ZOOM.get(id);
+  if (!z) ZOOM.set(id, (z = { phase: "idle", turn: 0, k: 0, n: 0, at: "" }));
+  return z;
+};
+// The light on a spot zoomed in on: low from the upper left and front.
+const MORNING = unit([-0.55, 0.45, 0.7]);
+// A world's zoom (for the tests and the clip tool): its phase, the spot,
+// the place named, and the turn shown (q).
+export const zoomState = (id) => zoomOf(id);
+// Seconds: the turn to the spot, the zoom in, the zoom out.
+const ZOOM_TURN = 1.4;
+const ZOOM_IN = 2.2;
+const ZOOM_OUT = 1.6;
+// How far out a zoom's name stands (toward the viewer), so it sorts in front
+// of the ground in the built pose: about the ground's radius and a sixth.
+const LABEL_Z = 1.16;
+// The splats' share for the zoom's patch.
+const ZOOM_SHARE = 0.45;
+// The tier's splat count before the build knows it (prepare), by profile.
+const countFor = (recipe, profile) => {
+  const p = PROFILES[profile] || PROFILES.high || Object.values(PROFILES)[0];
+  return Math.round(Math.min(p.maxCount, p.defaultCount * (recipe.density ?? 1)));
+};
+
+// The zoom's patch round a spot: its inner cap (radius rho1, radians) has
+// splats at the close-up tiles' step s1 (or as fine as its share allows),
+// growing to the globe's step sG at its edge (rho2).
+function zoomPlan(N, sG, texel) {
+  const n = N * ZOOM_SHARE;
+  const count = (rho1, s1) => {
+    const rho2 = 2.2 * rho1;
+    let c = 0;
+    const steps = 256;
+    for (let i = 0; i < steps; i++) {
+      const t = ((i + 0.5) / steps) * rho2;
+      const s = t <= rho1 ? s1 : s1 + (sG - s1) * ((t - rho1) / (rho2 - rho1));
+      c += ((TAU * Math.sin(t)) / (s * s)) * (rho2 / steps);
+    }
+    return c;
+  };
+  const s1 = Math.min(sG * 0.5, Math.max(texel, 1e-5));
+  let lo = s1 * 10;
+  let hi = 1.2;
+  for (let it = 0; it < 50; it++) {
+    const mid = Math.sqrt(lo * hi);
+    if (count(mid, s1) > n) hi = mid;
+    else lo = mid;
+  }
+  return { s1, rho1: lo, rho2: 2.2 * lo, sG };
+}
+
+// The step of the spiral at angle t from the patch's middle.
+const planStep = (P, t) => (t <= P.rho1 ? P.s1 : P.s1 + (P.sG - P.s1) * Math.min(1, (t - P.rho1) / (P.rho2 - P.rho1))); // prettier-ignore
+
+// Text for the 5 × 7 font (capitals, digits and . , ' ! ? -).
+const fontText = (s) =>
+  String(s)
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toUpperCase()
+    .replace(/[()]/g, "")
+    .replace(/[^A-Z0-9 .,'!?-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+// The label a zoom shows, in its three lines: the name, where it is, the source.
+function zoomLabel(place) {
+  if (!place) return null;
+  const sub = place.kind === "land" && place.state ? (place.state === place.country ? place.country : `${place.state}, ${place.country}`) : place.lines[0] || ""; // prettier-ignore
+  return {
+    title: fontText(place.title).slice(0, 26),
+    sub: fontText(sub).slice(0, 34),
+    source: place.source.startsWith("Natural") ? "NATURAL EARTH" : "IAU GAZETTEER, USGS",
+  };
+}
+
+// The message a zoom shows (the site's toast): the place in full, and its source.
+const zoomSay = (place) =>
+  place ? `${place.title}${place.lines.length ? ` (${place.lines.join("; ")})` : ""}. Names: ${place.source}.` : null; // prettier-ignore
+
+// Where on the world a point (recipe coordinates, as the tap landed) is:
+// undoes the turn shown when it landed. { lat, lon } in degrees. With the
+// camera's place, the ground is where the ray from it through the point
+// meets the world's mean sphere (the tap may land on the thin air above).
+function spotOf(point, q, eye) {
+  let p = unit(point);
+  if (eye) {
+    const d = unit([point[0] - eye[0], point[1] - eye[1], point[2] - eye[2]]);
+    const b = eye[0] * d[0] + eye[1] * d[1] + eye[2] * d[2];
+    const c = eye[0] * eye[0] + eye[1] * eye[1] + eye[2] * eye[2] - 1;
+    const disc = b * b - c;
+    if (disc > 0) {
+      const t = -b - Math.sqrt(disc);
+      if (t > 0) p = unit([eye[0] + d[0] * t, eye[1] + d[1] * t, eye[2] + d[2] * t]);
+    }
+  }
+  const b = rotate([-q[0], -q[1], -q[2], q[3]], p);
+  return { lat: Math.asin(Math.max(-1, Math.min(1, b[1]))) / DEG, lon: Math.atan2(b[0], b[2]) / DEG };
+}
+
+const quatMul = (a, b) => [
+  a[3] * b[0] + b[3] * a[0] + a[1] * b[2] - a[2] * b[1],
+  a[3] * b[1] + b[3] * a[1] + a[2] * b[0] - a[0] * b[2],
+  a[3] * b[2] + b[3] * a[2] + a[0] * b[1] - a[1] * b[0],
+  a[3] * b[3] - a[0] * b[0] - a[1] * b[1] - a[2] * b[2],
+];
+// Part of the way (0..1) along the turn q from no turn.
+function quatPart(q, f) {
+  const w = Math.max(-1, Math.min(1, q[3]));
+  const a = Math.acos(w) * f;
+  const s = Math.sqrt(Math.max(0, 1 - w * w));
+  if (s < 1e-6) return [0, 0, 0, 1];
+  return [(q[0] / s) * Math.sin(a), (q[1] / s) * Math.sin(a), (q[2] / s) * Math.sin(a), Math.cos(a)];
+}
+
 function worldRecipe(ids, extra = {}) {
   // One world, or a choice of several (the Toy tab's World).
   const list = [].concat(ids);
   const pick = (o) => (list.includes(o?.world) ? o.world : list[0]);
   const def = worldById(list[0]);
   const relief = list.some((id) => worldById(id).maps.height);
-  return {
+  const recipe = {
     // Polish round: the labs sharp kernel and twice the tier's splats (capped
-    // by the tier), most of the extra going to the feature close-ups.
+    // by the tier). Space r3: nearly all of them on the globe, until a tap
+    // zooms in (then nearly half round that spot).
     kernel: "sharp",
     density: 2,
     alive: true,
@@ -141,20 +273,81 @@ function worldRecipe(ids, extra = {}) {
         choices: Object.entries(TURNS).map(([k, v]) => ({ id: k, label: v.label })),
       },
       ...(extra.options || []),
+      // The spot a tap zoomed in on ("lat,lon"; empty when zoomed out).
+      { key: "at", label: "Zoomed in at", type: "text", default: "", hidden: true },
     ],
     controls: [
       { key: "sun", label: "Sun", type: "slider", default: 0.33 },
       { key: "fly", label: "Fly to a feature", type: "pulse", ease: FLY },
+      { key: "zoom", label: "Zoom in on a spot", type: "pulse", ease: 1 },
     ],
-    action: { key: "fly", label: "Fly to a feature and back" },
-    note: `${extra.note || ""} ${relief ? "Real elevation and color maps; the relief and the turning are scaled as chosen above" : "Real maps (no elevation map exists for these, so the ground is smooth); the turning is scaled as chosen above"}, and the sun can be moved.`.trim(), // prettier-ignore
-    credits: list.flatMap((id) => worldById(id).credits.map((c) => (list.length > 1 ? { ...c, label: `${worldById(id).name}: ${c.label.toLowerCase()}` } : c))), // prettier-ignore
+    action: {
+      key: "fly",
+      label: "Tap a spot to zoom in and name it (the play button flies to a named feature)",
+      // A tap on the world zooms in on that spot; a tap while zoomed in goes
+      // back out. (The play button, with no spot, flies to the next feature.)
+      at(point, c) {
+        const m = mem(c);
+        if (!m.id || !m.q) return null;
+        const z = zoomOf(m.id);
+        if (z.phase === "in") {
+          z.phase = "out";
+          return { key: "zoom", options: { at: "" } };
+        }
+        if (Math.hypot(point[0], point[1], point[2]) > 1.25) return null;
+        const { lat, lon } = spotOf(point, m.q, m.eye);
+        const place = PLACES.get(m.id)?.at(lat, lon) ?? null;
+        Object.assign(z, {
+          phase: "in",
+          n: z.n + 1,
+          lat,
+          lon,
+          at: `${lat.toFixed(4)},${lon.toFixed(4)}`,
+          from: m.spin,
+          tilt0: m.tilt ?? 0,
+          turn: 0,
+          k: 0,
+          // Toward the camera, as it stands now.
+          qa: quatFromTo([0, 0, 1], unit(m.eye || [0, 0, 1])),
+          eye0: Math.hypot(...(m.eye || [0, 0, 3])),
+          place,
+        });
+        return { options: { at: z.at }, key: "zoom", say: zoomSay(place) };
+      },
+    },
+    note: `${extra.note || ""} ${relief ? "Real elevation and color maps; the relief and the turning are scaled as chosen above" : "Real maps (no elevation map exists for these, so the ground is smooth); the turning is scaled as chosen above"}, and the sun can be moved. A tap zooms in on that spot as far as the maps allow and names what is there (${list.includes("earth") ? "Natural Earth's countries, states, cities and peaks" : "the IAU's named features"}); a second tap goes back out.`.trim(), // prettier-ignore
+    credits: [
+      ...list.flatMap((id) => worldById(id).credits.map((c) => (list.length > 1 ? { ...c, label: `${worldById(id).name}: ${c.label.toLowerCase()}` } : c))), // prettier-ignore
+      list.includes("earth") ? NAMES_EARTH : NAMES_GAZETTEER,
+    ],
     // A double-tap isn't taken (the view resets as on other toys); having
     // focus lets the drive glide the view to a feature (out.view).
     focus: () => false,
-    async prepare(o) {
+    async prepare(o, _help, env) {
       const id = pick(o);
-      if (!LOADED.has(id)) LOADED.set(id, await loadWorld(id));
+      if (!LOADED.has(id)) LOADED.set(id, await loadWorld(id, { patches: false }));
+      if (!PLACES.has(id)) PLACES.set(id, await loadPlaces(id, worldById(id).radiusKm).catch(() => null)); // prettier-ignore
+      // The splats, worked out here a little at a time (so a zoom's turn
+      // runs smoothly while the patch builds), for the build to hand over.
+      const N = countFor(recipe, env?.profile ?? "high");
+      const key = splatKey(id, o, N);
+      if (PREPARED.key === key) return;
+      const at = parseAt(o.at);
+      const W = LOADED.get(id);
+      const plan = at ? zoomPlan(N, globeStep(N, W.def), zoomTexel(id)) : null;
+      const zoom = at ? await loadZoom(id, at.lat, at.lon, (plan.rho2 / DEG) * 1.05) : null;
+      const gen = worldSplats(W, o, { ...extra, ...(extra.per?.[id] || {}) }, N, at, plan, zoom);
+      let r = gen.next();
+      let t0 = performance.now();
+      while (!r.done) {
+        if (performance.now() - t0 > 12) {
+          await new Promise((res) => setTimeout(res, 0));
+          t0 = performance.now();
+        }
+        r = gen.next();
+      }
+      PREPARED.key = key;
+      PREPARED.result = r.value;
     },
     gpuField(options, fit) {
       const id = pick(options);
@@ -163,6 +356,7 @@ function worldRecipe(ids, extra = {}) {
         hstep: (BUILT.get(id)?.hstep ?? 1e-5) * (fit?.scale ?? 1),
         air: d.atmosphere ? hex(d.atmosphere.color) : [0.6, 0.75, 1],
         night: hex(extra.nightColor || "#ffc070"),
+        fitScale: fit?.scale ?? 1,
       });
     },
     drive(t, c, out, info) {
@@ -170,16 +364,23 @@ function worldRecipe(ids, extra = {}) {
       const data = info?.data || {};
       const dt = m.t === undefined ? 0 : Math.max(0, Math.min(0.25, t - m.t));
       m.t = t;
-      // (It starts with its best-known face toward the viewer.)
-      m.spin ??= -(data.face ?? 0) * DEG;
+      const id = data.world || def.id;
+      m.id = id;
+      if (info?.eye) m.eye = info.eye;
+      const z = zoomOf(id);
+      // (It starts with its best-known face toward the viewer, or as it was
+      // before a rebuild.)
+      m.spin ??= z.spin ?? -(data.face ?? 0) * DEG;
       const turn = TURNS[data.turn] || TURNS.hour;
-      const flying = c.fly > 0;
+      const flying = c.fly > 0 && z.phase === "idle";
       // The world's own turn (prograde: east toward the viewer's right).
       const day = data.dayHours || def.dayHours;
-      if (!flying) m.spin += (dt * turn.rate * TAU) / (day * 3600);
+      if (!flying && z.phase === "idle") m.spin += (dt * turn.rate * TAU) / (day * 3600);
       let spin = m.spin;
       let tilt = 0;
       let label = -1;
+      let qa = [0, 0, 0, 1];
+      let zoomLog = 0;
       // The fly: a new tap picks the next feature in turn.
       const fire = c.fly > (m.lastFly ?? 0) + 0.02;
       m.lastFly = c.fly;
@@ -189,7 +390,47 @@ function worldRecipe(ids, extra = {}) {
         m.from = m.spin;
       }
       const f = data.features?.[m.pick];
-      if (flying && f) {
+      const E = data.relief ?? 1;
+      let amount = E;
+      if (z.phase !== "idle") {
+        // The zoom: turn the spot to face the camera, then grow the world
+        // about it once the patch round it is built.
+        let goal = -z.lon * DEG;
+        goal += TAU * Math.round((z.from - goal) / TAU);
+        const ready = data.at === z.at;
+        if (z.phase === "in") {
+          z.turn = Math.min(1, z.turn + dt / ZOOM_TURN);
+          if (ready && z.turn > 0.55) z.k = Math.min(1, z.k + dt / ZOOM_IN);
+          // A pinch out, zoomed in, goes back out.
+          const eye = Math.hypot(...(m.eye || [0, 0, z.eye0]));
+          if (z.k >= 1 && eye > z.eye0 * 1.3) z.phase = "out";
+        } else {
+          z.k = Math.max(0, z.k - dt / ZOOM_OUT);
+          if (z.k < 0.45) z.turn = Math.max(0, z.turn - dt / ZOOM_TURN);
+        }
+        const into = ease(z.turn);
+        spin = z.phase === "in" ? z.from + (goal - z.from) * into : goal;
+        tilt = (z.phase === "in" ? z.tilt0 + (z.lat * DEG - z.tilt0) * into : z.lat * DEG * into);
+        qa = quatPart(z.qa, into);
+        m.spin = spin;
+        // How far: the inner patch fills the view's narrow side.
+        const kz = ease(z.k);
+        amount = E + (Math.min(E, 2) - E) * kz;
+        const rp = 1 + (amount * (data.zoomH ?? 0)) / ((data.radiusKm || def.radiusKm) * 1000);
+        if (ready && data.zoomView) {
+          const tanH = Math.tan(19 * DEG);
+          z.zmax = Math.max(1, (2 * tanH * Math.max(0.3, z.eye0 - rp)) / data.zoomView);
+        }
+        zoomLog = Math.log(z.zmax ?? 1) * kz;
+        out.grow = clamp01((rp - 0.9) / 0.3);
+        if (ready && z.phase === "in" && z.k > 0.8 && data.zoomLabel >= 0)
+          label = data.zoomLabel + Math.min(0.99, band(z.k, 0.8, 1) * 0.5 + 0.001);
+        if (z.phase === "out" && z.k <= 0 && z.turn <= 0) {
+          z.phase = "idle";
+          z.at = "";
+        }
+        out.view = { key: "home" };
+      } else if (flying && f) {
         const s = progress(c.fly) * FLY;
         // Turn so the feature faces the viewer (+z), the shortest way round.
         let goal = -f.lon * DEG;
@@ -204,22 +445,31 @@ function worldRecipe(ids, extra = {}) {
           const fade = Math.min(band(s, 2.2, 2.8), 1 - band(s, FLY - 3.2, FLY - 2.6));
           if (fade > 0) label = m.pick + Math.min(0.99, fade * 0.5 + 0.001);
         } else out.view = { key: "home" };
+        // The relief's exaggeration: as chosen, eased down to at most ×2 close
+        // up (steep, tall ground hides what is round it there).
+        amount = E + (Math.min(E, 2) - E) * closeUp(s);
       } else out.view = { key: "home" };
+      z.spin = m.spin;
+      m.tilt = tilt;
+      // The turn shown (for a tap to find its spot).
+      m.q = quatMul(qa, worldQuat(spin, tilt));
+      z.q = m.q;
       // The sun: its bearing round the world from the slider, a little above
-      // the equator.
+      // the equator (turned with the camera's turn while zoomed).
       const az = (c.sun - 0.5) * TAU;
       const el = 12 * DEG;
-      out.glow = [
-        Math.sin(az) * Math.cos(el),
-        Math.sin(el),
-        Math.cos(az) * Math.cos(el),
-        data.bright ?? 1.1,
-      ];
+      let sun = [Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)];
+      // Zoomed in, a morning light from the upper left falls on the spot, so
+      // its ground shows (the sun comes back as the zoom goes out).
+      if (z.phase !== "idle") {
+        const w = 0.85 * ease(z.k);
+        sun = unit(sun.map((v, i) => v + w * (MORNING[i] - v)));
+      }
+      sun = rotate(qa, sun);
+      out.glow = [sun[0], sun[1], sun[2], data.bright ?? 1.1];
       out.morph = [spin, tilt, data.ambient ?? 0.03, data.night ?? 0];
-      // The relief's exaggeration: as chosen, eased down to at most ×2 close
-      // up (steep, tall ground hides what is round it there).
-      const E = data.relief ?? 1;
-      out.amount = E + (Math.min(E, 2) - E) * (flying && f ? closeUp(progress(c.fly) * FLY) : 0);
+      out.body = { quat: qa, squash: zoomLog };
+      out.amount = amount;
       out.press = label;
       // (No re-sort: the far side is hidden, so the near side of a ball sorts
       // well enough in its built pose; sorting it again where it is turned
@@ -229,59 +479,127 @@ function worldRecipe(ids, extra = {}) {
       const id = pick(o);
       const W = LOADED.get(id);
       if (!W) throw new Error(`The maps of ${worldById(id).name} haven't loaded.`);
-      buildWorld(k, W, o, { ...extra, ...(extra.per?.[id] || {}) });
+      const key = splatKey(id, o, k.count);
+      let res = PREPARED.key === key ? PREPARED.result : null;
+      if (!res) {
+        // (Built here when prepare didn't know the count: the tools and tests.)
+        const at = parseAt(o.at);
+        if (at) throw new Error("A zoom's patch is prepared before its build.");
+        const gen = worldSplats(W, o, { ...extra, ...(extra.per?.[id] || {}) }, k.count, null, null, null); // prettier-ignore
+        let r = gen.next();
+        while (!r.done) r = gen.next();
+        res = r.value;
+      }
+      emitWorld(k, W, o, res);
     },
   };
+  return recipe;
 }
+
+// Names for the label, by world id (src/space/places.js).
+const PLACES = new Map();
+// The last splats worked out (prepare), by their key.
+const PREPARED = { key: null, result: null };
+const splatKey = (id, o, N) => `${id}|${o.relief}|${o.at || ""}|${N}`;
+const parseAt = (s) => {
+  const m = /^(-?[\d.]+),(-?[\d.]+)$/.exec(String(s || ""));
+  return m ? { lat: Number(m[1]), lon: Number(m[2]) } : null;
+};
+// The globe's step between splats (radians) for N splats.
+const globeStep = (N, def) => Math.sqrt((4 * Math.PI) / (N * (1 - (def.atmosphere ? 0.07 : 0) - 0.04))); // prettier-ignore
+// The close-up tiles' step (radians), or the global map's.
+const zoomTexel = (id) => (TILES[id] ? (1 / TILES[id].color) * DEG : 0.25 * DEG);
+
+const NAMES_EARTH = {
+  label: "Place names",
+  title: "Natural Earth 1:10m cultural and physical vectors (states and provinces, populated places, marine areas, lakes, regions, elevation points)", // prettier-ignore
+  source: "https://www.naturalearthdata.com/",
+  author: "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+  license: "Public domain",
+  licenseUrl: "https://www.naturalearthdata.com/about/terms-of-use/",
+};
+const NAMES_GAZETTEER = {
+  label: "Feature names",
+  title: "Gazetteer of Planetary Nomenclature (center points of the named features)",
+  source: "https://planetarynames.wr.usgs.gov/",
+  author: "International Astronomical Union (IAU) Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center", // prettier-ignore
+  license: "Public domain (USGS)",
+  licenseUrl: "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+};
 
 // ---- Building a world ---------------------------------------------------------------------
 
-function buildWorld(k, W, o, extra) {
+// The splats of a world (a generator, so prepare can pause between pieces).
+function* worldSplats(W, o, extra, N, at, plan, zoom) {
   const def = W.def;
   // Built at true height; the GPU program lifts the ground by the relief's
   // exaggeration (the drive's amount), which the fit and the frame allow for.
   const E = Number(o.relief) || 1;
   const Rm = def.radiusKm * 1000;
-  const N = k.count;
-  const heightAt = extra.height
-    ? (lat, lon) => extra.height(W.height(lat, lon), lat, lon, o)
-    : (lat, lon) => W.height(lat, lon);
-  const radius = (lat, lon) => 1 + heightAt(lat, lon) / Rm;
-  const patches = W.patches;
+  const clampH = extra.height ? (h, lat, lon) => extra.height(h, lat, lon, o) : (h) => h;
+  // The zoom's patch: its middle, and how much of its close-up maps to use
+  // at an angle from it (all inside rho1, none at rho2).
+  const c0 = at ? dirOf(at.lat, at.lon) : null;
+  const zoomW = (d) => {
+    if (!c0) return 0;
+    const a = Math.acos(Math.max(-1, Math.min(1, d[0] * c0[0] + d[1] * c0[1] + d[2] * c0[2])));
+    return a <= plan.rho1 * 1.6 ? 1 : a >= plan.rho2 ? 0 : 1 - (a - plan.rho1 * 1.6) / (plan.rho2 - plan.rho1 * 1.6); // prettier-ignore
+  };
+  const heightAt = (lat, lon, d) => {
+    let h = W.height(lat, lon);
+    const w = d && zoom?.hasHeight ? zoomW(d) : 0;
+    if (w > 0) {
+      const zh = zoom.height(lat, lon);
+      if (zh !== null) h += w * (zh - h);
+    }
+    return clampH(h, lat, lon);
+  };
+  const radius = (lat, lon, d) => 1 + heightAt(lat, lon, d) / Rm;
+  const colorAt = (lat, lon, d) => {
+    const g = W.color(lat, lon);
+    const out = [g[0], g[1], g[2]];
+    const w = d && zoom ? zoomW(d) : 0;
+    if (w > 0) {
+      const zc = zoom.color(lat, lon);
+      if (zc) for (let k = 0; k < 3; k++) out[k] += w * (zc[k] - out[k]);
+    }
+    return out;
+  };
   const air = def.atmosphere;
+  const features = def.features || [];
   const shares = {
     air: air ? 0.07 : 0,
-    patches: patches.length ? 0.42 : 0,
-    labels: 0.012 * patches.length,
+    zoom: at ? ZOOM_SHARE : 0,
+    labels: 0.006 * features.length + (at ? 0.012 : 0),
   };
-  const nGround = Math.floor(N * (1 - shares.air - shares.patches - shares.labels));
-  // The caps that the patches cover (angular radius, radians), round each feature.
-  const caps = patches.map((p) => ({
-    dir: dirOf(p.feature.lat, p.feature.lon),
-    r: p.window.r * DEG * 0.98,
-    p,
-  }));
-  const capFrac = caps.reduce((s, c) => s + (1 - Math.cos(c.r)) / 2, 0);
+  const nGround = Math.floor(N * (1 - shares.air - shares.zoom - shares.labels));
+  const capR = at ? plan.rho2 * 0.985 : 0;
+  const capFrac = at ? (1 - Math.cos(capR)) / 2 : 0;
   const nGlobal = Math.round(nGround / Math.max(0.2, 1 - capFrac));
   const spacingG = Math.sqrt((4 * Math.PI) / nGlobal);
   const splats = [];
   let maxR = 1;
   const night = extra.nightLights ? (lat, lon) => 255 * Math.min(1, W.night(lat, lon) * 1.3) : null;
+  const near = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 
-  // One splat of ground at a direction, with the splats' spacing there.
+  // One splat of ground at a direction, with the splats' spacing there. Its
+  // color is the mean over its own footprint (five samples), so a map finer
+  // than the splats shows no speckle.
   const ground = (d, spacing) => {
     const sl = Math.max(-1, Math.min(1, d[1]));
     const la = Math.asin(sl);
     const lo = Math.atan2(d[0], d[2]);
     const lat = la / DEG;
     const lon = lo / DEG;
-    const r = radius(lat, lon);
+    const r = radius(lat, lon, d);
     // The ground's normal, from the heights a splat's spacing away: the
     // radius's slope east and north (per radian of arc) tips it.
-    const dl = Math.max(spacing * 1.1, 0.0004);
+    const dl = Math.max(spacing * 1.1, 0.00002);
     const cl = Math.max(0.05, Math.cos(la));
-    const dre = (radius(lat, lon + dl / cl / DEG) - radius(lat, lon - dl / cl / DEG)) / (2 * dl);
-    const drn = (radius(Math.min(90, lat + dl / DEG), lon) - radius(Math.max(-90, lat - dl / DEG), lon)) / (2 * dl); // prettier-ignore
+    const dE = dl / cl / DEG;
+    const dN = dl / DEG;
+    const dre = (radius(lat, lon + dE, d) - radius(lat, lon - dE, d)) / (2 * dl);
+    const drn = (radius(Math.min(90, lat + dN), lon, d) - radius(Math.max(-90, lat - dN), lon, d)) / (2 * dl); // prettier-ignore
     const so = Math.sin(lo);
     const co = Math.cos(lo);
     // east = (cos lon, 0, −sin lon); north = (−sin lat sin lon, cos lat, −sin lat cos lon)
@@ -293,46 +611,67 @@ function buildWorld(k, W, o, extra) {
     ny /= nl;
     nz /= nl;
     if (nx * d[0] + ny * d[1] + nz * d[2] < 0.2) ((nx = d[0]), (ny = d[1]), (nz = d[2]));
-    const col = W.color(lat, lon);
+    // The color: the mean of the middle and four points a third of a step away.
+    const o3 = (spacing * 0.36) / DEG;
+    const col = colorAt(lat, lon, d);
+    for (const [a, b] of [[o3, 0], [-o3, 0], [0, o3 / cl], [0, -o3 / cl]]) { // prettier-ignore
+      const c = colorAt(Math.max(-90, Math.min(90, lat + a)), lon + b, d);
+      col[0] += c[0];
+      col[1] += c[1];
+      col[2] += c[2];
+    }
     if (r > maxR) maxR = r;
     splats.push({
       p: [d[0] * r, d[1] * r, d[2] * r],
       h: r - 1,
       n: [nx, ny, nz],
-      color: [col[0], col[1], col[2]],
-      size: spacing * 0.68,
+      color: [col[0] / 5, col[1] / 5, col[2] / 5],
+      size: spacing * 0.7,
       type: WORLD_TYPE.ground,
       w: night ? night(lat, lon) : 0,
     });
   };
 
-  // The whole globe, evenly (a golden spiral), leaving out the caps.
+  // The whole globe, evenly (a golden spiral), leaving out the zoom's patch.
   const golden = Math.PI * (3 - Math.sqrt(5));
+  const cosCap = Math.cos(capR);
   for (let i = 0; i < nGlobal; i++) {
     const y = 1 - (2 * (i + 0.5)) / nGlobal;
     const rr = Math.sqrt(1 - y * y);
     const d = [rr * Math.cos(golden * i), y, rr * Math.sin(golden * i)];
-    let inCap = false;
-    for (const c of caps) if (d[0] * c.dir[0] + d[1] * c.dir[1] + d[2] * c.dir[2] > Math.cos(c.r)) inCap = true; // prettier-ignore
-    if (!inCap) ground(d, spacingG);
+    if (c0 && d[0] * c0[0] + d[1] * c0[1] + d[2] * c0[2] > cosCap) continue;
+    ground(d, spacingG);
+    if ((i & 4095) === 0) yield;
   }
-  // Each cap, denser, from its sharper patch maps.
-  const perPatch = patches.length ? Math.floor((N * shares.patches) / patches.length) : 0;
-  for (const c of caps) {
-    const area = TAU * (1 - Math.cos(c.r));
-    const sp = Math.sqrt(area / perPatch);
-    const q = quatFromTo([0, 1, 0], c.dir);
-    const lo = Math.cos(c.r);
-    for (let i = 0; i < perPatch; i++) {
-      const y = 1 - ((1 - lo) * (i + 0.5)) / perPatch;
-      const rr = Math.sqrt(Math.max(0, 1 - y * y));
-      const a = i * 2.399963229728653;
-      const v = rotate(q, [rr * Math.cos(a), y, rr * Math.sin(a)]);
-      // Splats near the cap's edge grow toward the globe's spacing, so the
-      // seam closes.
-      const edge = clamp01((Math.acos(Math.min(1, y)) / c.r - 0.85) / 0.15);
-      ground(v, sp + (spacingG - sp) * edge * 0.6);
+  // The zoom's patch: a sunflower whose step grows from the close-up maps'
+  // own (inside rho1) to the globe's (at rho2), so the seam closes.
+  let zoomView = 0;
+  let zoomH = 0;
+  if (at) {
+    const steps = 1024;
+    const cum = new Float64Array(steps + 1);
+    for (let i = 0; i < steps; i++) {
+      const t = ((i + 0.5) / steps) * capR;
+      const s = planStep(plan, t);
+      cum[i + 1] = cum[i] + ((TAU * Math.sin(t)) / (s * s)) * (capR / steps);
     }
+    const total = Math.floor(N * shares.zoom);
+    const scaleN = cum[steps] / total;
+    const q = quatFromTo([0, 1, 0], c0);
+    let j = 0;
+    for (let i = 0; i < total; i++) {
+      const want = (i + 0.5) * scaleN;
+      while (j < steps - 1 && cum[j + 1] < want) j++;
+      const f = (want - cum[j]) / Math.max(1e-12, cum[j + 1] - cum[j]);
+      const t = ((j + Math.min(1, Math.max(0, f))) / steps) * capR;
+      const a = i * golden;
+      const v = rotate(q, [Math.sin(t) * Math.cos(a), Math.cos(t), Math.sin(t) * Math.sin(a)]);
+      ground(v, planStep(plan, t) * Math.sqrt(scaleN));
+      if ((i & 4095) === 0) yield;
+    }
+    // The view, zoomed in: the inner cap across the narrow side.
+    zoomView = 1.6 * plan.rho1;
+    zoomH = heightAt(at.lat, at.lon, c0);
   }
   // The atmosphere's rim: a thin shell just above the ground.
   if (air) {
@@ -347,16 +686,16 @@ function buildWorld(k, W, o, extra) {
       splats.push({ p: [d[0] * r, d[1] * r, d[2] * r], h: 0, n: d, color: [1, 1, 1], size: sz, type: WORLD_TYPE.air, w: 0, opacity: air.strength, flat: 1 }); // prettier-ignore
     }
   }
+  yield;
   // Each feature's name, lying on the ground below it (shown during a fly).
   const flyTo = [];
-  patches.forEach((pt, idx) => {
-    const f = pt.feature;
+  features.forEach((f, idx) => {
     const d = dirOf(f.lat, f.lon);
-    const rf = radius(f.lat, f.lon);
-    // The view: a square round the feature, a little wider than the feature
-    // (or most of its patch, for a small one).
+    const rf = radius(f.lat, f.lon, d);
+    // The view: a square round the feature, a little wider than the feature,
+    // and wide enough for the globe's splats to show it whole (about 110 across).
     const featureView = (1.5 * (f.km || 0)) / def.radiusKm;
-    const view = Math.min(1.2, Math.max(2 * Math.sin(pt.window.r * DEG * 0.62), featureView)) * rf;
+    const view = Math.min(1.2, Math.max(110 * spacingG, featureView)) * rf;
     flyTo.push({ id: f.id, name: f.name, lat: f.lat, lon: f.lon, r: rf, size: view });
     const text = labelText(f);
     const east = unit(cross([0, 1, 0], d));
@@ -378,25 +717,53 @@ function buildWorld(k, W, o, extra) {
     let lift = rf;
     for (const [sx, sy] of dots) {
       const v = unit([d[0] + east[0] * sx + north[0] * sy, d[1] + east[1] * sx + north[1] * sy, d[2] + east[2] * sx + north[2] * sy]); // prettier-ignore
-      lift = Math.max(lift, 1 + Math.min(E, 2) * (radius(Math.asin(v[1]) / DEG, Math.atan2(v[0], v[2]) / DEG) - 1)); // prettier-ignore
+      lift = Math.max(lift, 1 + Math.min(E, 2) * (radius(Math.asin(v[1]) / DEG, Math.atan2(v[0], v[2]) / DEG, v) - 1)); // prettier-ignore
     }
     lift += 0.001 + view * 0.06;
     for (const [sx, sy] of dots)
-      splats.push({
-        p: [sx, sy, lift],
-        h: 0,
-        n: [0, 0, 1],
-        color: [1, 1, 1],
-        size: px * 0.62,
-        type: WORLD_TYPE.label,
-        w: idx,
-        opacity: 1,
-      });
+      splats.push({ p: [sx, sy, lift], h: 0, n: [0, 0, 1], color: [1, 1, 1], size: px * 0.62, type: WORLD_TYPE.label, w: idx, opacity: 1 }); // prettier-ignore
   });
+  // The zoom's label: the place's name, where it is, and the source, in
+  // three lines over the top of the view (the world grows behind it; the
+  // name does not).
+  let zoomLabelIndex = -1;
+  const place = at ? (PLACES.get(def.id)?.at(at.lat, at.lon) ?? null) : null;
+  const lab = zoomLabel(place);
+  if (lab) {
+    zoomLabelIndex = features.length;
+    const lines = [
+      [lab.title, Math.min(0.0125, 1.2 / Math.max(1, lab.title.length * 6)), 1],
+      [lab.sub, Math.min(0.0075, 1.2 / Math.max(1, lab.sub.length * 6)), 0.92],
+      [lab.source, 0.005, 0.75],
+    ];
+    let y = 0.52;
+    for (const [text, px, bright] of lines) {
+      if (!text) continue;
+      const across = text.length * 6 - 1;
+      for (let ci = 0; ci < text.length; ci++) {
+        const g = BITMAP[text[ci]];
+        if (!g) continue;
+        for (let gy = 0; gy < 7; gy++)
+          for (let gx = 0; gx < 5; gx++)
+            if ((g[gy] >> (4 - gx)) & 1)
+              splats.push({ p: [(ci * 6 + gx - across / 2) * px, y - gy * px, LABEL_Z], h: 0, n: [0, 0, 1], color: [bright, bright, bright], size: px * 0.62, type: WORLD_TYPE.label, w: zoomLabelIndex, opacity: 1 }); // prettier-ignore
+      }
+      y -= px * 10;
+    }
+  }
+  return { splats, maxR, flyTo, E, night: !!night, zoomView, zoomH, zoomLabelIndex, extra, N };
+}
 
-  // Hand the splats to the kit, exactly as built (no size jitter).
+// Hands the splats to the kit, exactly as built (no size jitter).
+function emitWorld(k, W, o, res) {
+  const def = W.def;
+  const { splats, maxR, flyTo, E, extra, N } = res;
+  const air = def.atmosphere;
   const R = Math.max(1 + E * (maxR - 1), air ? 1 + air.thickness + 0.003 : 0);
   for (const s of [[R, 0, 0], [-R, 0, 0], [0, R, 0], [0, -R, 0], [0, 0, R], [0, 0, -R]]) k.reach(s); // prettier-ignore
+  // (Space r3: and as far out as a zoom's name, built or not, so the world's
+  // size on screen stays the same whether it is zoomed in or not.)
+  k.reach([0, 0, LABEL_Z]);
   // Heights in steps the program reads back (16 bits either side of 0).
   let hmax = 1e-6;
   for (const s of splats) hmax = Math.max(hmax, Math.abs(s.h));
@@ -417,6 +784,8 @@ function buildWorld(k, W, o, extra) {
     };
   });
   k.data = {
+    world: def.id,
+    radiusKm: def.radiusKm,
     dayHours: def.dayHours,
     face: def.face ?? 0,
     relief: W.def.maps.height ? E : 1,
@@ -424,7 +793,12 @@ function buildWorld(k, W, o, extra) {
     turn: o.turn,
     ambient: extra.ambient ?? 0.03,
     bright: extra.bright ?? 1.1,
-    night: night ? 1 : 0,
+    night: res.night ? 1 : 0,
+    at: o.at || "",
+    zoomView: res.zoomView,
+    zoomH: res.zoomH,
+    zoomLabel: res.zoomLabelIndex,
+    count: N,
   };
 }
 
