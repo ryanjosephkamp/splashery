@@ -1,0 +1,427 @@
+/* Lane Showcase: the reel page (showcase/index.html). Phone first: the toy
+   fills the top, the caption and the controls sit under it; on a wide screen
+   the caption moves to a column on the right. */
+
+:root {
+  --bg: #0d0f14;
+  --panel: #161a22;
+  --line: #2a3140;
+  --text: #eef1f6;
+  --muted: #a9b2c3;
+  --accent: #7bdff2;
+  --warm: #ffd166;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    16px/1.4 system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  overflow: hidden;
+}
+
+.shw {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-areas: "top" "stage" "caption" "controls";
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+}
+
+.shw-top {
+  grid-area: top;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 10px 16px 6px;
+}
+
+.shw-brand {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.shw-labs {
+  font-size: 12px;
+  color: var(--bg);
+  background: var(--warm);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.shw-chapter {
+  color: var(--muted);
+  font-size: 14px;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shw-progress {
+  display: flex;
+  gap: 3px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.shw-progress li {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.shw-progress li.chapter-start {
+  margin-left: 5px;
+}
+
+.shw-progress li span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+}
+
+.shw-progress li.done span {
+  width: 100%;
+}
+
+.shw-stage {
+  grid-area: stage;
+  position: relative;
+  min-height: 0;
+}
+
+.shw-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+  transition: opacity 0.35s ease;
+}
+
+.shw-stage canvas.hidden {
+  opacity: 0;
+}
+
+.shw-loading {
+  position: absolute;
+  inset: auto 0 45% 0;
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.shw-caption {
+  grid-area: caption;
+  padding: 10px 16px 4px;
+  height: 12.5rem;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+
+/* On a phone the header already names the chapter. */
+.shw-caption .shw-kicker {
+  display: none;
+}
+
+.shw-kicker {
+  margin: 0 0 2px;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.shw-name {
+  margin: 0 0 4px;
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+.shw-what,
+.shw-why,
+.shw-fact {
+  margin: 0 0 5px;
+}
+
+.shw-what {
+  font-size: 15px;
+}
+
+.shw-why {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.shw-fact {
+  font-size: 12.5px;
+  color: var(--warm);
+  font-variant-numeric: tabular-nums;
+}
+
+.shw-controls {
+  grid-area: controls;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px 12px;
+  background: var(--panel);
+}
+
+.shw-controls button,
+.shw-open {
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: #222936;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  min-height: 42px;
+  min-width: 42px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.shw-controls .shw-main {
+  background: var(--accent);
+  color: #0d0f14;
+  border-color: var(--accent);
+}
+
+.shw-open {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.shw-controls button:focus-visible,
+.shw-open:focus-visible,
+.shw-start:focus-visible {
+  outline: 2px solid var(--warm);
+  outline-offset: 2px;
+}
+
+.shw-intro {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(13, 15, 20, 0.86);
+  z-index: 5;
+}
+
+.shw-intro-card {
+  max-width: 30rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.shw-intro-card h2 {
+  margin: 4px 0 8px;
+  font-size: 26px;
+}
+
+.shw-start {
+  font: inherit;
+  font-weight: 600;
+  font-size: 17px;
+  color: #0d0f14;
+  background: var(--accent);
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.shw-small {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+.shw-list {
+  width: min(28rem, calc(100vw - 32px));
+  max-height: 80vh;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0;
+}
+
+.shw-list::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.shw-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+}
+
+.shw-list-head h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.shw-list-head button {
+  font: inherit;
+  color: var(--text);
+  background: none;
+  border: 0;
+  font-size: 18px;
+  min-width: 42px;
+  min-height: 42px;
+  cursor: pointer;
+}
+
+.shw-list ol {
+  margin: 0;
+  padding: 8px 16px 16px 36px;
+}
+
+.shw-list li {
+  margin: 8px 0;
+}
+
+.shw-list li ul {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.shw-list li button {
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: #222936;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.shw-list li button[aria-current="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.shw-list .shw-chapter-title {
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  text-align: left;
+}
+
+.shw-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  background: var(--bg);
+  z-index: 6;
+}
+
+/* A wide screen: the toy on the left, the caption and controls on the right. */
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .shw {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas: "top top" "stage caption" "stage controls";
+  }
+
+  .shw-top {
+    padding: 14px 24px 8px;
+  }
+
+  .shw-caption {
+    height: auto;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    padding: 28px 24px;
+    align-self: stretch;
+  }
+
+  .shw-caption .shw-kicker {
+    display: block;
+  }
+
+  .shw-name {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .shw-what {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .shw-why {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .shw-fact {
+    font-size: 14px;
+  }
+
+  .shw-controls {
+    border-left: 1px solid var(--line);
+    flex-wrap: wrap;
+    padding: 16px 24px 24px;
+  }
+
+  .shw-open {
+    margin-left: 0;
+    flex-basis: 100%;
+    justify-content: center;
+  }
+}
