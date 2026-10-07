@@ -591,42 +591,11 @@
       "candidates": []
     },
     "lungs": {
-      "status": "ready",
+      "status": "site",
       "said": "(October 2, 2026, review) Could you try to find different inhalation and exhalation sounds, just so I have something to compare it to?",
       "note": "Acceptable; try other inhale and exhale recordings to compare.",
-      "plan": "Now: the site keeps its breath. Two other real inhale-and-exhale recordings to compare on the board: B, a deep breath, in and out at the same strength; C, a soft breath in and a long, sighing breath out (Sound C).",
-      "candidates": [
-        {
-          "id": "b",
-          "label": "Deep breath",
-          "sound": {
-            "voice": "sample",
-            "file": "lungs-breath-b.mp3",
-            "vol": 0.8,
-            "fallback": {
-              "voice": "breath",
-              "f": 700,
-              "to": 1.4,
-              "decay": 2.4
-            }
-          }
-        },
-        {
-          "id": "c",
-          "label": "Long breath out",
-          "sound": {
-            "voice": "sample",
-            "file": "lungs-breath-c.mp3",
-            "vol": 0.8,
-            "fallback": {
-              "voice": "breath",
-              "f": 700,
-              "to": 1.4,
-              "decay": 2.4
-            }
-          }
-        }
-      ],
+      "plan": "Done (October 7, 2026): the owner picked B, a deep breath, in and out at the same strength; it is now the site sound.",
+      "candidates": [],
       "round": "2026-10-02"
     },
     "tooth": {
@@ -1945,7 +1914,7 @@
             },
             {
               "voice": "pebble",
-              "at": 2.0,
+              "at": 2,
               "f": 2410,
               "vol": 0.161
             }
@@ -2404,7 +2373,7 @@
             },
             {
               "voice": "clack",
-              "at": 2.0,
+              "at": 2,
               "f": 3494,
               "decay": 0.6,
               "bright": 0.25,

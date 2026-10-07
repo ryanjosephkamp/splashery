@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Fluids: liquids, smoke and flames made of splats · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fluids."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fluids/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Fluids: liquids, smoke and flames made of splats · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fluids."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fluids/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Fluids: liquids, smoke and flames made of splats</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#state-on-main-october-3-2026">State on main (October 3, 2026)</a></li>
+              <li>
+                <a href="#r7-october-4-2026-the-fluid-lab-on-a-phone"
+                  >r7 (October 4, 2026): the Fluid lab on a phone</a
+                >
+              </li>
+              <li><a href="#brief">Brief</a></li>
+              <li>
+                <a href="#r4-september-30-2026-a-gpu-solver-a-liquid-surface-and-a-gas-grid"
+                  >r4 (September 30, 2026): a GPU solver, a liquid surface and a gas grid</a
+                >
+              </li>
+              <li>
+                <a href="#r6-october-2-2026-the-owner-s-marks-on-r4-and-r5"
+                  >r6 (October 2, 2026): the owner's marks on r4 and r5</a
+                >
+              </li>
+              <li>
+                <a href="#r5-october-2-2026-the-owner-s-phone-review"
+                  >r5 (October 2, 2026): the owner's phone review</a
+                >
+              </li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Fluids: liquids, smoke and flames made of splats">
+        <div class="prose">
+          <h2 id="state-on-main-october-3-2026">State on main (October 3, 2026)</h2>
+          <p>
+            Everything is merged: v1 (#121), r4 (#152, the GPU solver, the liquid surface, the gas
+            grid, the traced props), r5 (#180, the faucet's tap, the clear stream, the lava crust
+            and the phone tier) and r6 (#204, merged October 3, 2026: a flat liquid top that meets
+            the glass, a tap-thin stream, lava as one material, a flattened splash drop). The Fluid
+            lab is behind the labs switch. No branch of this lane is open. Latest cards on Effect
+            review page 2: fl-r6-pour-r2, fl-r6-soda-r2, fl-r6-lava-r2 and fl-r6-splash (marked
+            good).
+          </p>
+          <p>Waiting on the owner (the Operator passed the questions on October 2):</p>
+          <ul>
+            <li>
+              His phone's model and browser, or a screenshot of the gray pour (the r3 splat water is
+              light blue here, so what made it gray on his phone is not known).
+            </li>
+            <li>
+              Whether the Fluid lab, flame included, runs smoothly on his phone after r5. Only then
+              the Weather shelf's candle (<code>elements.js</code>) and the birthday cake's candles
+              (<code>food.js</code>) get the Fluid lab's flame (r5's item 5), with those packs'
+              lanes.
+            </li>
+          </ul>
+          <p>Later, as the owner said: a liquid vortex, a tornado and dripping syrup.</p>
+          <h2 id="r7-october-4-2026-the-fluid-lab-on-a-phone">
+            r7 (October 4, 2026): the Fluid lab on a phone
+          </h2>
+          <p>
+            <strong>State (October 4, 2026, Sonnet 5.5):</strong> PR #252 (draft). Items 1 to 6 are
+            built and measured (docs/FLUIDS.md, &quot;r7&quot;); item 7 (clips, lane record
+            <code>FluidsR7</code>) is below. The recovery and the envelope are in
+            <code>src/fluids/phone.js</code> and <code>FluidRuntime</code>; hooks in
+            <code>src/stage.js</code> (<code>setFluidPixelCap</code>, <code>hookProjector</code>)
+            and <code>src/player.js</code> (two arguments to <code>FluidRuntime</code>).
+          </p>
+          <p>
+            <strong>Start here.</strong> Model: <strong>Sonnet 5.5</strong>, by the owner's word of
+            October 4, 2026 (&quot;Fluids Sonnet&quot;), as a test of how far Sonnet goes on engine
+            work. The Operator (Opus 5.5) reviews the code and the measurements before merge, and
+            the owner judges the clips. Branch <code>claude/lane-fluids-r7</code>, one PR titled
+            &quot;Phase Fluids r7: the Fluid lab on a phone&quot;, prefix <code>fl7</code>, tests in
+            <code>tests/fl7.spec.mjs</code>.
+          </p>
+          <p>
+            Why: the Fluid lab locks up on phones. Codex measured why
+            (docs/audits/fluid-phone-2026-10.md, merged as #247; its data and scripts are in
+            docs/audits/fluid-phone-2026-10/). Read its summary, &quot;Proposed phone envelope&quot;
+            and &quot;Proposals, ranked by gain for effort&quot; first.
+          </p>
+          <p>Build, in this order:</p>
+          <ol>
+            <li>
+              <strong>The hint</strong> (the audit's proposal 1): &quot;This lab runs best on a
+              computer. On a phone, choose Auto detail.&quot; beside Scene and Liquid on a phone,
+              and after the first slow-down; the same sentence in the toy's About text.
+            </li>
+            <li>
+              <p>
+                <strong>A phone envelope for this lab only</strong> (proposal 2): on a phone, the
+                lab's own canvas cap (1.5), fewer prop splats (35,000), a smaller liquid budget
+                (WebGPU cap 6,000, cell 0.05; CPU Glass cap 270 with spacing × ∛2; CPU Splash keeps
+                its liquid and halves the vessel's budget) and smaller gas grids (flame 20×58×20,
+                smoke 20×65×20, hot cup 20×33×20).
+              </p>
+              <ul>
+                <li>Use the recipe's scoped render settings, not a global change to every toy.</li>
+                <li>
+                  Never overwrite the person's saved Detail choice; a deliberate High or Max still
+                  works, with the hint.
+                </li>
+                <li>
+                  Keep Splash's starting pool: the audit shows that removing it was a false gain.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Recovery that works</strong> (proposal 3): a phone check that doesn't depend
+              on the tier; when the frame time's average stays over 33 ms for 1.5 s (ignoring hidden
+              or loading time, and counting visible stalls), first lower the drawing cost, then
+              rebuild the current scene's fluids into the phone envelope with a clear restart; if
+              it's still slow two seconds later, offer a pause and the hint.
+            </li>
+            <li>
+              <strong>Less garbage per readback</strong> (proposal 5): reuse the liquid readback
+              arrays in <code>src/fluids/gpu/mpm.js</code> and drop the per-particle
+              <code>subarray()</code> views.
+            </li>
+            <li>
+              <strong>The WebGPU buffers</strong> (proposal 4): never edit <code>vendor/</code>. If
+              a small, marked hook at the app boundary (<code>src/stage.js</code>) can destroy the
+              cached projector Compute objects when their cache is cleared, do it and prove it with
+              the audit's four-scene cycle (buffers no longer grow). If it can't be done safely from
+              outside the vendored file, write down what you found and leave it.
+            </li>
+            <li>
+              <strong>Measure before and after</strong> with the audit's own scripts
+              (docs/audits/fluid-phone-2026-10/\*.mjs) on this sandbox: the p95 frame times for the
+              ten scenes at phone size (mid, mid at 6×), the tracked GPU allocations and the
+              four-scene buffer count. Put a short before-and-after table in docs/FLUIDS.md and the
+              PR. These are sandbox numbers, not a real phone; say so.
+            </li>
+            <li>
+              <strong>Clips:</strong> phone-size clips (390×844) of Glass water, Splash water and
+              the Candle before and after, on Effect review page 2 under a new lane record
+              <code>FluidsR7</code> (title &quot;Fluids r7 · The Fluid lab on a phone (Sonnet
+              5.5)&quot;). Each card says what the owner should try on his own phone.
+            </li>
+          </ol>
+          <p>Rules for this round:</p>
+          <ul>
+            <li>
+              You own what this lane always owned (below). <code>src/player.js</code> and
+              <code>src/stage.js</code> take only small, marked, additive hooks.
+            </li>
+            <li>
+              Run <code>tests/fl.spec.mjs</code> and every Fluids spec,
+              <code>tests/smoke.spec.mjs</code> (keep &quot;embed transfer ≤ 30 MB&quot; green) and
+              your new <code>tests/fl7.spec.mjs</code>. Then follow CLAUDE.md's checklist before
+              every push.
+            </li>
+            <li>The Fluid lab stays behind the labs switch.</li>
+            <li>
+              Usage on this account is tight this week: one careful pass, at most one helper at a
+              time.
+            </li>
+            <li>
+              End with READY:, WORKING: or BLOCKED:, and keep &quot;State on main&quot; above
+              current.
+            </li>
+          </ul>
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Fluids, &quot;Liquids, smoke and flames made
+            of splats&quot; (prefix <code>fl</code>). Branch: claude/lane-fluids. PR title:
+            &quot;Engine: Fluids, liquids, smoke and flames made of splats&quot;. Handoff file:
+            docs/handoff/Fluids.md.
+          </p>
+          <h3
+            id="brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-note-of-that-day"
+          >
+            Brief (written by the Operator on September 29, 2026, from the owner's note of that day)
+          </h3>
+          <p>
+            On the Real objects lane's water bottle card the owner wrote, word for word: &quot;The
+            water also pours out in circles, not like actual liquid would. Perhaps we should create
+            a realistic fluid splat simulator (liquid fluids, gases, flames, etc.; different
+            viscosities, etc.) and use that here?&quot; On the soda can: &quot;the soda bubbles
+            don't look realistic; they look like marshmallows or popcorn here, and the soda should
+            come out as a liquid splash or splat (no pun intended).&quot; Later that evening, on the
+            second round of both cards: &quot;We can defer completing this until after the
+            liquid/fluid engine is built and perfected.&quot; Today, liquids in Splashery are
+            hand-animated clouds and sheets (the ocean wave, the waterfall, the coffee, the lava
+            lamp), and the Lab lane's GPU splat fields (<code>gpuField</code>, docs/lab/FIELDS.md)
+            move splats by formula, with no state from frame to frame.
+          </p>
+          <p>Build a fluid engine for splats, labs first:</p>
+          <ol>
+            <li>
+              <strong>Liquids</strong> with a viscosity you can set, from water to syrup to honey to
+              lava. Particle-based (SPH or position-based fluids, or MPM if you can make it fast
+              enough), in a Web Worker or on the GPU (WebGL2 float textures, ping-pong), whichever
+              runs better on a phone. Drawn as splats that read as liquid, not beads: stretched
+              along their velocity, overlapping into a continuous surface, full opacity, clean
+              color, a bright rim where the surface faces the light, and a thin sheet or stream
+              where the flow thins. Pours, streams, splashes that break into droplets and fall back,
+              a surface that settles in a container, foam and fizz for soda.
+            </li>
+            <li>
+              <strong>Gases and smoke</strong>: soft, rising, spreading and fading plumes that swirl
+              (curl noise or a coarse grid), steam from a cup, smoke from a candle.
+            </li>
+            <li>
+              <strong>Flames</strong>: emissive, flickering tongues that rise and cool through a
+              real color ramp (blue base, yellow, orange, dull red), with sparks.
+            </li>
+            <li>
+              <strong>Colliders</strong>: simple shapes a recipe declares (boxes, cylinders,
+              spheres, a glass, a bowl, the floor), so liquid pours into a glass and stays in it.
+            </li>
+            <li>
+              <strong>A recipe API</strong> for kit toys: for example
+              <code
+                >k.fluid({ kind: &quot;liquid&quot;, viscosity, color, emitter, colliders, budget
+                })</code
+              >
+              at build and <code>out.fluid</code> in <code>drive()</code> to start, stop or aim an
+              emitter. It must work alongside the existing parts and tokens. Write it up in
+              docs/PACKS.md (a new section) and docs/FLUIDS.md.
+            </li>
+            <li>
+              <strong>A labs sandbox toy</strong>, &quot;Fluid lab&quot; (on the Lab shelf): pour
+              water, soda, honey or lava into a glass (a Liquid choice, with a tap to pour), a
+              candle with its flame and smoke, and a steaming cup. Give it sounds, a how-to line and
+              an About text. Its About text says honestly that this is graphics physics (plausible
+              motion), not a validated scientific solver.
+            </li>
+          </ol>
+          <p>
+            Budgets: phones first. Measure the particles and splats you can simulate and draw at 30
+            fps or better on the mid tier, and scale by tier (src/stage.js tiers). Nothing may run
+            on the shelf or in embeds until a fluid toy is opened. Keep the &quot;embed transfer ≤
+            30 MB&quot; test green. No new vendored library unless you ask the Operator first (it
+            would need the owner's approval); write it yourself if you can.
+          </p>
+          <p>
+            This is an engine lane. Keep changes to shared engine files (src/player.js,
+            src/stage.js, src/kit.js) small, additive and marked, and list each one in the PR. Every
+            other toy, old link and saved scene must behave exactly as before. The Real objects lane
+            moves the water bottle and soda can onto your engine in a later round; don't change
+            their toys.
+          </p>
+          <p>
+            Cards (390×844, rendered at the phone's real density, device scale 3, each labeled
+            &quot;built by Opus 5.5&quot;, in the lane record <code>Fluids</code> on the Effect
+            review page, which the Operator made):
+          </p>
+          <ul>
+            <li>
+              <code>fl-pour</code>: water, then honey, pouring into a glass (you should see the
+              difference in viscosity).
+            </li>
+            <li><code>fl-splash</code>: a splash that breaks into droplets and settles.</li>
+            <li><code>fl-soda</code>: soda with fizz and foam.</li>
+            <li><code>fl-smoke</code>: the candle's smoke and the cup's steam.</li>
+            <li><code>fl-flame</code>: the candle flame, close up.</li>
+            <li>
+              <code>fl-phone</code>: the measured frame times and budgets on each tier, as a card.
+            </li>
+          </ul>
+          <p>
+            Tests in tests/fl.spec.mjs: the simulation is stable (no particles escape a closed
+            glass, the volume stays within a few percent), viscosity changes how fast a pour
+            spreads, nothing fluid loads until a fluid toy opens, the sandbox builds within its tier
+            budget, and screenshots at 390×844 and 1440×900.
+          </p>
+          <h3 id="you-own">You own</h3>
+          <p>
+            <code>src/fluids/</code> (new), <code>src/packs/fluid-lab.js</code> (new),
+            <code>assets/toys/fluid-lab/</code>, docs/FLUIDS.md (new), your new section of
+            docs/PACKS.md, <code>tests/fl.spec.mjs</code>, your <code>fl-*</code> screenshots,
+            docs/handoff/Fluids.md, your toy's entries in the shared lists, and small, marked,
+            additive hooks in src/player.js, src/stage.js and src/kit.js.
+          </p>
+          <p>
+            Lanes Worlds (the hybrid round), Pianos, Chemistry, Real objects, Photo to 3D (and Song
+            live), Machines A, Books, Screens r2, Lab r2 and the Integrators run at the same time,
+            and a Science lane starts soon; leave their files alone. The Operator's PR #118 (not
+            merged yet) changes the renderer's pixel-ratio and adaptive blocks in src/stage.js,
+            src/player.js and src/sharpness.js (the cap 3 on mid and high tiers, adapt on drag):
+            don't touch those blocks. The laptop is locked.
+          </p>
+          <h3 id="how-this-lane-runs">HOW THIS LANE RUNS</h3>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and marks them. Don't ask him anything or wait for him. Put questions
+              and blockers in your final message, and the Operator answers or relays them. Messages
+              that arrive in this session &quot;From the Operator&quot; come from the coordinator on
+              the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29,
+              2026: Opus 5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the
+              Worlds content, the Studio converters, the docs and the Integrator). Any helper you
+              start uses the same model. Use at most one helper at a time.
+            </li>
+            <li>
+              Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs,
+              anything behind the labs switch, and additive engine PRs once the full test run
+              passes. Changes to toys the public already sees wait for the owner's &quot;good&quot;
+              marks. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English (color, center, gray,
+              math, license, toward, -ize endings, dates like &quot;September 29, 2026&quot;). Leave
+              code identifiers, file names and anything stored in links as they are.
+            </li>
+            <li>
+              Read first: CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are
+              binding), docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and
+              docs/handoff/history.md (lessons from earlier lanes).
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <ul>
+            <li>
+              September 30, 2026: the owner marked all seven r3 cards &quot;good&quot;
+              (<code>fl-pour-r3</code>, <code>fl-splash-r3</code>, <code>fl-soda-r3</code>,
+              <code>fl-flame-r2</code>, <code>fl-smoke-r2</code>, <code>fl-physics</code>,
+              <code>fl-phone-r3</code>). PR #121 waits for the Operator's merge (labs); main is
+              merged into the branch.
+            </li>
+            <li>
+              September 30, 2026 (r3, the evidence round): the owner asked for evidence that the
+              liquids, smoke and flame are realistic, and for the reasoning behind the phone
+              targets. <code>tools/fl-physics.mjs</code> now measures the solver against published
+              physics (docs/FLUIDS.md, &quot;Checked against physics&quot;), and
+              <code>tools/fl-evidence.mjs</code> puts each clip beside real reference photos from
+              Wikimedia Commons (CC0, CC BY or public domain, checked on each file's page, credited
+              on the card; the photos are not committed). Fixed from the checks: the flame now
+              flickers at 11 Hz (it swayed at 1.7), smoke and steam spread at 0.125 and 0.122 (they
+              were twice too wide), and a burning candle makes no smoke. Still off, and said so on
+              the cards: the dam-break front runs at about 63% of Martin and Moyce's, honey stops
+              instead of creeping, and a thin stream doesn't narrow as it falls. Phones get fewer,
+              stronger soda foam flecks (headroom for the soda pour). Cards:
+              <code>fl-pour-r3</code>, <code>fl-splash-r3</code>, <code>fl-soda-r3</code>,
+              <code>fl-flame-r2</code>, <code>fl-smoke-r2</code>, <code>fl-physics</code>,
+              <code>fl-phone-r3</code>.
+            </li>
+            <li>
+              September 30, 2026 (r2): from the Operator's pre-review notes (and the owner's
+              &quot;fix&quot; mark on <code>fl-pour</code>), the liquids were redrawn: four splats
+              per particle, glassy streams with a rim and a highlight, discs on smoothed normals, a
+              level sheet for a calm thin liquid in a glass, a soda head colored onto the sheet,
+              clean glass rims, and cola that keeps its color. Cards <code>fl-pour-r2</code>,
+              <code>fl-splash-r2</code> and <code>fl-soda-r2</code> replace the first three
+              (rendered at 3× density, the mid tier's cap once PR #118 lands), and
+              <code>fl-phone-r2</code> replaces <code>fl-phone</code> with the budgets measured
+              again after r2 (every scene still fits a 30 fps frame on mid; soda is tightest at 31
+              ms). <code>fl-flame</code> and <code>fl-smoke</code> stand.
+            </li>
+            <li>
+              September 30, 2026: the fluid engine and the Fluid lab are on the branch (draft PR
+              #121), the full suite passes, and six cards are on the Effect review page in the lane
+              record <code>Fluids</code>: <code>fl-pour</code>, <code>fl-splash</code>,
+              <code>fl-soda</code>, <code>fl-smoke</code>, <code>fl-flame</code>,
+              <code>fl-phone</code> (clips by <code>tools/fl-clip.mjs</code> at 390×844, device
+              scale 3, mid tier; the card by <code>tools/fl-measure.mjs</code>). Waiting on the
+              owner's marks; checking them hourly.
+            </li>
+            <li>
+              Engine (<code>src/fluids/</code>, docs/FLUIDS.md): position-based fluids with a wall
+              density term, cohesion and XSPH viscosity (water, soda, syrup, honey, lava), diffuse
+              spray, foam and bubbles (soda fizz and a foam head), curl-field smoke and steam,
+              flames with a real color ramp, sparks and a smoke hand-off, SDF colliders (floor, box,
+              sphere, cylinder, glass, bowl), and a glass drawn with the view (<code
+                >kind: &quot;vessel&quot;</code
+              >). Liquids are drawn as anisotropic splats (Yu and Turk 2013) in a fluid layer with
+              its own work-buffer program. The solver runs in a Web Worker on people's devices and
+              on the page for the tools and tests (automated browsers);
+              <code>?fluids=worker|sync</code> picks.
+            </li>
+            <li>
+              Recipe API: <code>k.fluid(spec)</code> in build, <code>out.fluid[name]</code> in
+              drive; docs/PACKS.md &quot;5e. Fluids&quot;.
+            </li>
+            <li>
+              Toy: Fluid lab (labs, Lab shelf) with a Scene choice (Glass, Splash, Candle, Hot cup)
+              and a Liquid choice (Water, Soda, Honey, Lava); sounds through cues, a how-to and an
+              About text, a plan entry, a thumbnail.
+            </li>
+            <li>Tests: <code>tests/fl.spec.mjs</code> (8 tests).</li>
+          </ul>
+          <h2 id="r4-september-30-2026-a-gpu-solver-a-liquid-surface-and-a-gas-grid">
+            r4 (September 30, 2026): a GPU solver, a liquid surface and a gas grid
+          </h2>
+          <p>
+            The Operator's brief of 15:05 UTC, from the owner's note (&quot;I marked the fluids as
+            looking right, but that might have been premature... They still don't seem realistic
+            enough for me&quot;; &quot;r4 yes&quot;): far more particles on the GPU (WebGPU compute,
+            PBF or MLS-MPM after a short measurement), a real liquid surface (screen-space fluid
+            rendering, splats kept for spray, foam and bubbles), real smoke and flames (a grid gas
+            solver with vorticity confinement and buoyancy, ray-marched, WebGL2 too), and evidence
+            Ryan can see (each scene beside real footage or a published measurement). Branch
+            <code>claude/lane-fluids-r4</code> from b328e58 (v1, PR #121); PR &quot;Engine: Fluids
+            r4, a GPU solver and a liquid surface&quot;. Cards: fl-r4-pour, fl-r4-splash,
+            fl-r4-soda, fl-r4-smoke, fl-r4-flame, fl-r4-phone.
+          </p>
+          <p>State (see docs/FLUIDS.md, &quot;r4&quot;):</p>
+          <ul>
+            <li>
+              <code>src/fluids/gpu/</code>: MLS-MPM liquid (<code>mpm.js</code>,
+              <code>liquid.js</code>), foam, bubbles and spray (<code>diffuse.js</code>), the liquid
+              surface and glass (<code>surface.js</code>), the gas grid (<code>gas.js</code>,
+              <code>gasscene.js</code>), <code>index.js</code>. Wired in
+              <code>src/fluids/runtime.js</code> and <code>src/fluids/world.js</code> (lane files,
+              not engine files).
+            </li>
+            <li>
+              WebGPU with compute: GPU liquid and surface. WebGL2: the r3 CPU liquid, unchanged,
+              plus the gas grid. <code>?fluids=cpu</code>: r3 everywhere.
+            </li>
+            <li>
+              Tools: <code>tools/fl-gpu-physics.mjs</code> (the dam break on the GPU solver),
+              <code>tools/fl-bench.html</code> (frame times on a real device, tier by tier; served
+              by Pages once merged).
+            </li>
+            <li>
+              Cards on Effect review page 2 (October 1, 2026): fl-r4-flame and fl-r4-smoke marked
+              &quot;good&quot;; fl-r4-pour and fl-r4-soda &quot;fix&quot; (the owner: the glass's
+              rim and outline were hard to make out; &quot;the liquid itself is definitely getting
+              better&quot;), redone as fl-r4-pour-r2 and fl-r4-soda-r2 with a crisp traced glass
+              (rim ring, edges, foot); fl-r4-splash (honest: no crown yet, clear water hard to see
+              on a dark background); fl-r4-phone (tools/fl-bench.html gives a phone's real numbers
+              once merged).
+            </li>
+            <li>
+              October 1, 2026: the owner marked fl-r4-flame, fl-r4-phone, fl-r4-pour-r2, fl-r4-smoke
+              and fl-r4-soda-r3 &quot;good&quot;; fl-r4-splash &quot;fix&quot;. fl-r4-splash-r2: the
+              ball now starts inside the GPU grid (it started above it and arrived flattened) and
+              drops onto a shallow film, so it throws up a crown that breaks into drops and falls
+              back (the recipe's <code>gpu</code> settings; the CPU splash is unchanged). The
+              owner's note for the record: a cup's rim and outer surface sharp and easy to read, and
+              with a dark liquid the far side of the cup's bottom must not show through.
+            </li>
+            <li>
+              October 1, 2026 (afternoon): fl-r4-splash-r2 marked &quot;fix&quot; (&quot;looking
+              really good so far&quot;; a taller crown, many more, smaller drops): fl-r4-splash-r3
+              sheds fine droplets from the crown's rim. Then the owner changed four marks to
+              &quot;fix&quot;: fl-r4-flame and fl-r4-smoke (&quot;can look more realistic&quot;; the
+              smoke's grid &quot;looks good&quot;), fl-r4-pour-r2 (the glass's foot behind the
+              liquid a bit too visible; the board, faucet, handle and spout grainy) and
+              fl-r4-soda-r3 (the liquid's top surface hard to see; the same grainy props). Redone
+              (evening): fl-r4-pour-r3 and fl-r4-soda-r4 (props traced crisply on WebGPU, the foot
+              behind the liquid at half strength, a meniscus), fl-r4-flame-r2 and fl-r4-smoke-r2 (a
+              traced candle lit by its flame, a taller yellow flame, paler smoke; a relit flame
+              grows back in still air; the hot cup traced too). All six r4 cards are redone on
+              Effect review page 2.
+            </li>
+            <li>
+              Sound: from the simulation (src/fluids/acoustic.js), after the owner's Sound Board
+              note (&quot;isn't in sync with fluid pour animation&quot;); real recordings wait for
+              Sound A's sample voice.
+            </li>
+            <li>
+              Lessons: a collider wall thinner than about three cells lets MPM particles through; a
+              sprite smaller than a texel breaks a far liquid into specks (the surface pass enlarges
+              it and keeps its volume); foam must spawn only where a stream plunges into the slow
+              pool, or it coats the stream; a plume in perfectly still air stands straight, and a
+              room's faint drafts make it meander. WebGPU in this container is SwiftShader
+              (software), so GPU frame times here are not a phone's.
+            </li>
+          </ul>
+          <h2 id="r6-october-2-2026-the-owner-s-marks-on-r4-and-r5">
+            r6 (October 2, 2026): the owner's marks on r4 and r5
+          </h2>
+          <p>
+            Brief (the Operator, from the owner's marks): a thin meniscus instead of a white ring
+            (the pours and the soda), a tap-thin stream at the spout, lava as one material from
+            spout to pool (the same colors, cooling on one curve), splash drops less round. Branch
+            <code>claude/lane-fluids-r6</code> from main 4e55c9f; PR &quot;Phase Fluids r6: …&quot;.
+            Cards fl-r6-\* on Effect review page 2, with <code>replacedBy</code> on the r4 and r5
+            ones. See docs/FLUIDS.md, &quot;r6&quot;.
+          </p>
+          <h2 id="r5-october-2-2026-the-owner-s-phone-review">
+            r5 (October 2, 2026): the owner's phone review
+          </h2>
+          <p>
+            Brief (the Operator, from the owner's review of October 2): 1) tap the faucet's handle
+            to pour; 2) the poured water looked dark gray on his phone; 3) lava &quot;does not look
+            right yet&quot;; 4) the Fluid lab made his phone lag badly; 5) then the Weather shelf's
+            candle and the birthday cake's candles with the Fluid lab's flame, if it runs well on a
+            phone. Branch <code>claude/lane-fluids-r5</code> from the r4 head; PR &quot;Phase Fluids
+            r5: …&quot;, merged after #152.
+          </p>
+          <p>
+            State (see docs/FLUIDS.md, &quot;r5&quot;): merged October 2, 2026 (#180). 1 to 4 are
+            done; cards fl-r5-pour and fl-r5-lava on Effect review page 2. The phone's gray water is
+            not reproduced (the r3 splats are light blue here; the GPU stream was gray and is
+            fixed). 5 waits for the owner's phone to show the flame runs well; the candle
+            (<code>elements.js</code>) and the cake (<code>food.js</code>) are other lanes' packs.
+          </p>
+          <p>
+            Lessons: explicit MPM viscosity needs <code>nu * dt</code> well under 0.1 cells² (honey
+            ran at 0.06, lava at 0.12 blew up). A toy whose splats are hidden can't be tapped:
+            shrink them inside a traced shape instead. When a shader change seems to break the
+            motion, check first whether the simulation itself is unstable (lava's was).
+          </p>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              Engine hooks (small, additive, marked &quot;Fluids&quot;):
+              <code>src/stage.js</code> (<code>addLayer</code>, <code>setLayerUniforms</code>,
+              <code>removeLayer</code>, <code>destroyLayer</code>, layers in
+              <code>setUniforms</code>, <code>clearToy</code> and <code>buryToys</code>),
+              <code>src/player.js</code> (<code>startFluids</code>, a line in the frame loop, two
+              lines in <code>disposeProcedural</code>),
+              <code>src/kit.js</code> (<code>k.fluid</code>). No change to any other toy's path:
+              without <code>k.fluid</code> nothing runs.
+            </li>
+            <li>
+              The solver costs about 4.4 µs per particle per 1/120 s step on this container's CPU.
+              Budgets are per tier (low 0.35, mid 0.45, high 1, max 1.35 of the recipe's budget); a
+              liquid on a lower tier gets fewer, larger particles so the same volume pours.
+              <code>tools/fl-measure.mjs</code> measures it with Chromium's CPU throttling as the
+              phone stand-in.
+            </li>
+            <li>
+              Lessons: a kit-built glass shows its wall as grain or moiré (kit splats can't depend
+              on the view), so the engine draws glass itself with a Fresnel falloff. Without a wall
+              density term, particles pack against a wall a third tighter and the level drops.
+              Emitting in flat layers draws a stream as a stack of pancakes; staggering along the
+              flow and drawing fast particles along their velocity fixes it. Soda foam must float
+              above the liquid's top layer or the opaque surface hides it. Smoke wants the Gaussian
+              kernel, liquids the sharp one (the toy picks per scene).
+            </li>
+            <li>
+              Lessons from r2: one big splat per particle leaves a feathered edge; four smaller ones
+              are crisp. Flat surface discs seen from a low camera leave gaps; discs along a
+              smoothed normal, plus a level sheet once calm, read as one surface. A fast-falling
+              ball must not be drawn as a stream (only thin flows with few neighbors are). The
+              Fresnel whitening that makes water glassy makes cola pink; scale it by the liquid's
+              brightness. Water's &quot;noise&quot; was velocity, not position: judge by the drawn
+              surface, not the speed metric.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              GPU path (r4, r5): the splash's crown reads as a ring of spray more than a clear wall;
+              a smoke ribbon rises as a soft plume a few cells wide; the lava's cracks follow a
+              fixed pattern in space; a thin stream or the honey and lava threads can look dashed;
+              the mug's handle is still splats.
+            </li>
+            <li>
+              Frame times on a real phone have not been measured (this lane's container has a
+              software GPU); <code>tools/fl-bench.html</code>, served by Pages, times each tier on a
+              real device.
+            </li>
+            <li>Colliders don't move with parts yet (no tipping jug, no stirring spoon).</li>
+            <li>
+              Every scene fits a 30 fps frame on the mid tier's stand-in (4× CPU throttling; the
+              soda pour is the tightest at 30 ms after r3, 40 ms on its slowest tenth of frames, and
+              33 ms on max at 1×, from its dense foam). The high tier's 2× stand-in is over for the
+              pours (31 to 59 ms), but it is pessimistic for the desktops it covers; at 1× the high
+              budget takes about 17 ms.
+            </li>
+            <li>
+              The level sheet is for thin liquids in a <code>glass</code> collider only; a pool in a
+              bowl, or on a floor, is drawn from its particles alone.
+            </li>
+            <li>
+              A soda's head thins into patches as it fades (as a real one does), and the very start
+              of a pour can look ragged for a frame or two.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              PACKS.md: I added my own section &quot;5e. Fluids&quot; (the brief assigns it to this
+              lane).
+            </li>
+            <li>
+              New tools: <code>tools/fl-clip.mjs</code> (the cards' clips; <code>--fps=30</code> for
+              the flame), <code>tools/fl-measure.mjs</code> (the phone budget card),
+              <code>tools/fl-physics.mjs</code> (the physics checks, Node only) and
+              <code>tools/fl-evidence.mjs</code> (clips beside reference photos, and static cards).
+              None needs a new dependency.
+            </li>
+            <li>
+              README line (for you to add): &quot;Fluids: liquids, smoke and flames simulated as
+              particles and drawn as splats (<code>src/fluids/</code>, docs/FLUIDS.md).&quot;
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Fluids.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Fluids.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

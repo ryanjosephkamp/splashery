@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Screens r2: sharp sets and a real off switch · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: ScreensR2."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/screensr2/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Screens r2: sharp sets and a real off switch · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: ScreensR2."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/screensr2/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Screens r2: sharp sets and a real off switch</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#design">Design</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Screens r2: sharp sets and a real off switch">
+        <div class="prose">
+          <p>
+            Prefix <code>scr2</code>. Branch <code>claude/lane-screens-r2</code>, PR &quot;Phase
+            Screens r2: sharp sets and a real off switch&quot;. Engine PR on
+            <code>claude/lane-screens-r2-engine</code>. How lanes work:
+            <a href="../../../learn/operating/">OPERATING.md</a>. The first Screens lane:
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Screens.md"
+              target="_blank"
+              rel="noopener"
+              >Screens.md</a
+            >.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Screens r2, &quot;Sharp sets and a real off
+            switch&quot; (prefix <code>scr2</code>). Branch: claude/lane-screens-r2. PR title:
+            &quot;Phase Screens r2: sharp sets and a real off switch&quot;. Handoff file:
+            docs/handoff/ScreensR2.md.
+          </p>
+          <h3
+            id="brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-review-of-that-day"
+          >
+            Brief (written by the Operator on September 29, 2026, from the owner's review of that
+            day)
+          </h3>
+          <p>
+            The Screen (<code>screen</code>, src/packs/screens.js, labs only) plays your own video
+            or GIF on an old TV, a flat TV, a cinema screen or a hologram. Lane Screens built it
+            (#72; read docs/handoff/Screens.md). The owner reviewed it on September 29, 2026
+            (docs/reviews/2026-09-29-new-toys/review.md). He said it is &quot;very close to
+            perfect&quot;. His notes, word for word:
+          </p>
+          <blockquote>
+            <ul>
+              <li>This is very close to perfect. Good job!</li>
+              <li>
+                The old TV, flat TV, and cinema should all be less grainy; the actual videos and
+                GIFs are perfect resolution, but the splat toys that we've constructed around them
+                need better resolution. You could also try to make the hologram base less grainy or
+                something, but it's already pretty sharp.
+              </li>
+              <li>
+                I noticed something that might be an inherent limitation of Gaussian splats, but
+                even if so, I'd like to see if we can improve it enough to no longer be noticeable.
+                I've attached some screenshots of this, and the effect is happening for both videos
+                and GIFs on all three of the first styles for this toy (old TV, flat TV, and
+                cinema). If you look closely at these screenshots, you'll notice that you can
+                actually see the GIF horse and the video frames when the screens are off and when
+                the cinema curtains are closed. For the video, only the current still frame is
+                present, but the GIF continues to move/play, so if you zoom in enough, you can
+                actually see the moving horse.
+              </li>
+              <li>
+                Oh, can we see if there's a way to allow the user to turn the screens off? Like if
+                they click a certain button or somewhere then the TV turns off, or if they click the
+                curtains in the cinema then the curtains close?
+              </li>
+            </ul>
+          </blockquote>
+          <p>
+            His screenshots (1440×900, at the desktop): the flat TV switched off with the GIF, and
+            again with the video at 0:00; the old TV switched off with the video, and again with the
+            GIF; the cinema with its curtains closed and the GIF. In each, faint streaks of the
+            picture show through the dark glass or the red curtains.
+          </p>
+          <p>Build, in this order:</p>
+          <ol>
+            <li>
+              <strong>Nothing of the picture while it's off.</strong> The cause is in the recipe,
+              not in splats as such: drive() always sets
+              <code>out.sheets = { screen: { page: 0, visible: 1 } }</code>, and the &quot;off&quot;
+              look is a separate layer drawn over the picture at opacity 0.99 (the flat TV's glossy
+              panel, the old TV's glass, the closed curtains). The picture's splats still draw
+              underneath and leak through the gaps and the soft edges. Hide the picture itself while
+              off or closed (its sheet's visibility follows the switch-on, so it's 0 when off and
+              when the curtains are closed), keep the off-look layers solid, and let the switch-on
+              effects reveal the picture as they do now. A GIF must not keep advancing behind a
+              switched-off screen, and a video pauses when you switch off (and remembers where it
+              was). If this needs a change in the picture engine (for example, a way to pause a
+              GIF), make it a small additive &quot;Engine: …&quot; PR on
+              claude/lane-screens-r2-engine, merged first (as #74, #93 and #99 did). Check it zoomed
+              in close at 1440×900 as well as at phone size: not a pixel of the picture shows when
+              off.
+            </li>
+            <li>
+              <p>
+                <strong>A real off switch.</strong> Taps know where they land (<code
+                  >action.at(point, c)</code
+                >, PACKS.md &quot;Action&quot;). Today a tap switches the set on, then only plays or
+                pauses, so it can never be switched off. Make it:
+              </p>
+              <ul>
+                <li>
+                  Old TV: tap the power knob (the <code>power</code> part; it turns with a click) to
+                  switch off or on. The picture shrinks to a bright dot and fades, as old sets did.
+                </li>
+                <li>
+                  Flat TV: tap the power button by the red light (the light goes red when off, white
+                  or off when on) to switch off or on. The panel fades to glossy black.
+                </li>
+                <li>
+                  Cinema: tap the curtains to close or open them. They close over the screen, and
+                  the picture pauses behind them.
+                </li>
+                <li>Hologram: tap the base's button to switch off or on.</li>
+                <li>
+                  A tap on the picture itself, while on, plays or pauses, as now. A tap anywhere
+                  while off switches it on, as now.
+                </li>
+                <li>
+                  The Toy tab gets a clear On/Off (or Open/Close curtains) button beside the play
+                  control, and the how-to line says where to tap.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Sharp sets.</strong> The old TV's wooden cabinet, knobs, speaker grille and
+              legs; the flat TV's bezel, neck and base; the cinema's curtains (velvet pleats with
+              real folds), gold trim, stage and seats; and a little on the hologram's base. Use
+              Fidelity A's method (docs/handoff/history.md and PACKS.md &quot;Effect quality&quot;):
+              even placement, full opacity, full density at each tier, flat splats on flat faces and
+              thin ones along the edges, and clean colors with low noise. Wood should look like wood
+              and velvet like velvet. The picture itself stays as it is (&quot;perfect
+              resolution&quot;). Stay within the tier budgets and say what you measured.
+            </li>
+          </ol>
+          <p>
+            Sounds: the old TV's off (a click and the fading whine), the flat TV's soft off tone,
+            and the curtains' swish closing. Add them in src/toy-sounds.js (your toy's entry).
+            Update the how-to line and About text in src/toy-help.js, the toy-plan entry, and the
+            thumbnail if the look changes.
+          </p>
+          <p>
+            Clips and cards (390×844, each labeled &quot;built by Opus 5.5&quot;, in the lane record
+            <code>ScreensR2</code> on the Effect review page, which the Operator made):
+          </p>
+          <ul>
+            <li>
+              <code>scr2-off</code>: each of the three styles switching off with the GIF sample
+              playing, then held close for two seconds. Nothing of the horse shows.
+            </li>
+            <li>
+              <code>scr2-power</code>: tapping the old TV's knob and the flat TV's button, off and
+              on.
+            </li>
+            <li><code>scr2-curtains</code>: tapping the cinema curtains closed and open.</li>
+            <li><code>scr2-sets</code>: a slow turn of each style, before and after.</li>
+            <li><code>scr2-stills</code>: a sharp still of each style, on.</li>
+          </ul>
+          <p>Tests in tests/scr2.spec.mjs:</p>
+          <ul>
+            <li>
+              With the set off (and with the curtains closed), the screen area's pixels are the same
+              whichever sample is loaded. Compare the GIF and the video samples.
+            </li>
+            <li>A GIF's frame doesn't advance while off.</li>
+            <li>A tap on the power part switches off, and a tap on the picture plays or pauses.</li>
+            <li>Each style builds within its tier budget.</li>
+            <li>Screenshots at 390×844 and 1440×900.</li>
+          </ul>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>
+              <code>src/packs/screens.js</code>, <code>assets/toys/screen/</code>, the
+              <code>screen</code> entries in the shared lists, <code>tests/scr2.spec.mjs</code>,
+              your <code>scr2-*</code> screenshots and <code>docs/handoff/ScreensR2.md</code>.
+            </li>
+            <li>
+              The Screens lane's <code>tests/scr.spec.mjs</code> is finished work. If your change
+              breaks one of its checks on purpose (for example, the tap now switches off), don't
+              edit it: tell the Operator which test and why.
+            </li>
+            <li>
+              The Gaussian splatting toys in <code>src/packs/splatting.js</code> aren't part of
+              this.
+            </li>
+          </ul>
+          <p>
+            Lanes Worlds, the toy piano, Anatomy, Pianos, Sharpness, Books, Chemistry, Real objects,
+            Photo to 3D, Machines A, Lab and the two Integrators run at the same time; leave their
+            files alone. Books is changing the other toys on the Pictures and pages shelf
+            (src/packs/pictures.js). The Operator is changing the web-address box in src/ui.js so it
+            names only what each toy opens. The laptop is locked.
+          </p>
+          <h3 id="how-this-lane-runs">How this lane runs</h3>
+          <p>
+            (The Operator's standing rules for every lane, as given in the brief: the Operator runs
+            the lanes and the owner talks only to the Operator; Opus 5.5 only, at the default
+            effort, one helper at most; the merge tiers, and workers never merge; American English
+            in new public text; read CLAUDE.md, OPERATING.md, PACKS.md, WORKSTREAMS.md and
+            history.md first; keep this file's sections current, the model at the top of
+            &quot;State&quot;; edit only this toy's entries in the shared lists and regenerate
+            TOY-PLAN.md; never edit tests/taps.spec.mjs; CC0, CC BY or public domain assets only;
+            post clips and cards to the Effect review page without republishing it or writing
+            verdicts; push about hourly and merge main before each push; follow &quot;Before every
+            push&quot;; one draft PR with the five sections; check the owner's marks about hourly
+            and fix every &quot;fix&quot; as a &quot;-r2&quot; card; end every turn with
+            &quot;READY:&quot;, &quot;WORKING:&quot; or &quot;BLOCKED:&quot;.)
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <p>
+            September 29, 2026: done. Engine PR #109 (&quot;Engine: hold a GIF on its frame&quot;)
+            merged. Lane PR #111 (labs only). The owner marked all five cards good
+            (<code>scr2-off</code>, <code>scr2-power</code>, <code>scr2-curtains</code>,
+            <code>scr2-sets</code>, <code>scr2-stills</code>). Full suite on the lane head with main
+            merged (#114): 440 passed, 2 failed, both in lane Screens'
+            <code>tests/scr.spec.mjs</code> for the reason under &quot;For the Operator&quot;.
+          </p>
+          <p>
+            Splats per style and tier (the set; the picture's own sheet budget is unchanged), all
+            within each tier's maximum: old TV 109k, 218k, 273k, 363k; flat TV 95k, 191k, 238k,
+            318k; cinema 120k, 232k, 288k, 382k; hologram 120k, 240k, 300k, 400k (low, mid, high,
+            max). Builds take 0.2 to 1.3 s.
+          </p>
+          <p>
+            September 30, 2026: at the Operator's request, <code>tests/scr.spec.mjs</code> now waits
+            for the Screen's hidden picture to be built
+            (<code>p.api.ready(&quot;screen&quot;)</code>) and switches the set on for its
+            screenshots. Main 80715a7 merged. Full suite in shards (the container is reclaimed when
+            the session idles, so long runs were split): shard 1/3 150 passed; shards 6/18 to 18/18
+            25, 27, 23, 31, 22, 22, 55, 0, 21, 50, 0, 35 and 14 passed (13 and 16 hold no tests).
+            Together they cover all 450 tests: none failed.
+          </p>
+          <h2 id="design">Design</h2>
+          <ul>
+            <li>
+              <strong>Off means off.</strong> The set's state (on or off, since when) lives in the
+              recipe (<code>SCR</code>), timed on the player's clock. <code>drive()</code> sets
+              <code>out.sheets.screen = { page: 0, visible, ahead: 1 }</code>: the picture shows
+              only while the set is on or switching (the old TV once its glass starts clearing, the
+              flat TV while its panel fades, the cinema while the curtains are not fully closed).
+              <code>ahead: 1</code> keeps the hidden sheet built, so it is there the moment the set
+              comes on. The off-look layers (the old TV's glass, the flat TV's panel) are fully
+              opaque now (they were 0.99).
+            </li>
+            <li>
+              <strong>A GIF stops, a video pauses.</strong> The engine PR adds
+              <code>pics.hold(on)</code>: the GIF's clock stops while held and goes on from the same
+              frame. The Screen holds its GIF while off (or paused by a tap on the picture). A video
+              pauses when switched off and plays on from there when switched back on (unless it was
+              paused before).
+            </li>
+            <li>
+              <p>
+                <strong>The switch.</strong> <code>action.at(point)</code> returns
+                <code>{ key: &quot;power&quot;, pick: 1 }</code> on the style's switch and
+                <code>pick: 2</code> anywhere else; <code>drive()</code> reads
+                <code>info.tap</code>. While off, any tap switches on. While on, the switch (or the
+                Toy tab's button, which has no point) switches off and anywhere else plays and
+                pauses. The Toy tab's button reads &quot;Switch on or off&quot; (&quot;Open or close
+                the curtains&quot; for the cinema: <code>action.label</code> is a getter on the
+                style).
+              </p>
+              <ul>
+                <li>
+                  Old TV: the power knob (within 0.18 of its center). Off: the knob turns back with
+                  a click, the picture (on a part now) shrinks to its middle while a white layer on
+                  the same part fades in (channel 2), leaving a bright dot (its own part, shrinking
+                  away), then the glass closes back over from the top and the bottom (channel 0
+                  falling).
+                </li>
+                <li>
+                  Flat TV: a small power button (with the power mark) beside the red standby light,
+                  in a deeper chin; the panel fades back to glossy black and the light comes back
+                  red.
+                </li>
+                <li>
+                  Cinema: the curtains (any pleat, where it is, and the valance). They close over
+                  the screen; the picture hides once they meet.
+                </li>
+                <li>
+                  Hologram: the projector's base; a small button on its rim glows cyan while on and
+                  red while off. The picture sinks into the beam (its part now pivots at its lower
+                  edge) and the beam falls back into the lens.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Sharp sets.</strong> The kit spreads even points over the unit square, so a
+              long thin surface gets them far apart one way and crowded the other: diagonal hatching
+              on the pleats, the valance, thin rims and the rounded edges of a rounded box (one
+              shape for all its faces and edges). <code>strip()</code> cuts a surface's long side
+              into near-square tiles, each with its own square of the even points;
+              <code>softBox()</code> builds a rounded box as 26 such pieces (its edges at twice the
+              density, so thinner splats, and its faces' splats thinner near their borders);
+              <code>band()</code> is a rim round a rounded rectangle;
+              <code>thinEdges()</code> shrinks splats near a surface's border so its edge is crisp.
+              Colors are functions with no per-splat noise: walnut with long soft stripes and a
+              lacquer sheen, velvet (deep where it faces you, a pale sheen where the pile turns
+              away), brass, gold, satin black. The old TV's bezel now slopes from the wood up to the
+              glass (it floated in front before, so the dark tube showed round it from the side).
+              Density 2 (was 0.8).
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <h2 id="known-issues">Known issues</h2>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              <strong
+                ><code>tests/scr.spec.mjs</code> (lane Screens' finished tests) fails twice, because
+                the Screen now starts with its picture hidden:</strong
+              >
+              &quot;the Screen switches on with a tap…&quot; (line 107) and &quot;lane Screens
+              screenshots…&quot; (line 146). Its <code>openToy()</code> waits for
+              <code>pictures.splats() &gt; 0</code>, and <code>splats()</code> counts only sheets on
+              show, so it waits forever while the set is off. Line 126 also expects
+              <code>splats() &gt; 5000</code> right after the style changes to the cinema (which
+              starts with the curtains closed). A fix that keeps what the tests mean: in
+              <code>openToy()</code>, wait for
+              <code>p.splats() &gt; 0 || p.api.ready(&quot;screen&quot;)</code>, and at line 126
+              wait for <code>p.api.ready(&quot;screen&quot;)</code> instead of counting splats. The
+              rest of that test (tap on, pause, play) passes as it is: the Toy tab's button now
+              switches off, which pauses the video, and on again, which plays it.
+            </li>
+            <li>
+              Engine PR #109 must be merged before #111. Its test now uses the Picture lab: the
+              Screen holds and lets go of its GIF by itself every frame, so a test can't drive
+              <code>hold</code> through it.
+            </li>
+            <li>
+              New tool (not in this lane's files): <code>tools/scr2-clip.mjs</code>, this lane's
+              clips.
+            </li>
+            <li>
+              PACKS.md lesson (section 7c): the kit spreads even points over the unit square, so a
+              long thin surface (a curtain pleat, a thin rim, a rounded box's edges as one shape)
+              gets them far apart one way and crowded the other, which shows as diagonal hatching.
+              Cut the long side into near-square tiles, each with its own square of the points
+              (<code>strip()</code> in <code>src/packs/screens.js</code>), and build a rounded box
+              as its 26 pieces (<code>softBox()</code>).
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/ScreensR2.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/ScreensR2.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

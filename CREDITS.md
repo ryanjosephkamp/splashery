@@ -69,7 +69,10 @@ no license shown on their page, and ones that show a brand name or a character f
 left out. Each file was changed by `tools/pr2-prepare.mjs`: rotated upright, recentred, scaled to a
 radius of about 0.9, cleaned of strays and decimated (at most 1,000,000 splats, 300,000 for the lite
 files). One band of spherical harmonics is kept on the full files (the lite files have none; the
-sources of the alum crystal and the monkey doll have none).
+sources of the alum crystal and the monkey doll have none). Lane Fix9 (October 7, 2026) cropped the
+photo orange's faint floaters with a sphere, and removed the dog plush's stray fringe under it
+(where the plush lay on the mat, unseen by the camera) and closed the gaps there with a hidden,
+kit-built core (`tools/fx9-dog-fill.mjs`); the dog plush stays CC BY-NC 4.0.
 
 | Toy                    | Scene                                                                                     | Author            | License                                                               |
 | ---------------------- | ----------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------- |
@@ -737,9 +740,9 @@ LAZ files are read with [laz-perf](https://github.com/hobuinc/laz-perf) (Hobu, I
 Recorded sound effects for the owner's sound notes of October 2, 2026, in `assets/sounds/`. Every
 one is CC0 1.0 (public domain), checked on its live Freesound page on October 2, 2026. Each was cut,
 faded, made mono, peak-normalized and saved as a small MP3; a toy's recordings load when it opens
-with the speaker on. `mitochondrion-fire.mp3`, `lungs-breath-b.mp3` and `lungs-breath-c.mp3` are
-Sound Board candidates only. The details are in [tools/assets.json](tools/assets.json)
-(`soundSamples`).
+with the speaker on. `mitochondrion-fire.mp3` is a Sound Board candidate only; `lungs-breath-b.mp3`
+became the lungs' sound on October 7, 2026. The details are in
+[tools/assets.json](tools/assets.json) (`soundSamples`).
 
 | File                        | Work                                                                                                        | Author          | License                                                       |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------- |
@@ -758,7 +761,6 @@ Sound Board candidates only. The details are in [tools/assets.json](tools/assets
 | `popcorn-pops.mp3`          | [Popcorn](https://freesound.org/people/elricadavis/sounds/764604/)                                          | elricadavis     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `water-bottle-pour.mp3`     | [Pouring water into a glass](https://freesound.org/people/ahamirikia/sounds/710550/)                        | ahamirikia      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `lungs-breath-b.mp3`        | [- Deep Breath](https://freesound.org/people/rrehl/sounds/717167/)                                          | rrehl           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `lungs-breath-c.mp3`        | [Sigh1.wav](https://freesound.org/people/elle-trudgett/sounds/146769/)                                      | elle-trudgett   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `bicycle-bell.mp3`          | [Bicycle Bell.wav](https://freesound.org/people/PanosA/sounds/546371/)                                      | PanosA          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `your-book-magazine.mp3`    | [Turn Page](https://freesound.org/people/KikeVilaplana/sounds/511402/)                                      | KikeVilaplana   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `your-book-paperback.mp3`   | [Turning pages in a book](https://freesound.org/people/Mateusz_Chenc/sounds/519102/)                        | Mateusz_Chenc   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -1508,7 +1510,6 @@ uses.
 | `horse-statue-whinny.mp3`                | horse-statue                                          | [Renill de cavall / Horse Neigh](https://freesound.org/people/Salsero_classic/sounds/826753/)              | Salsero_classic  |
 | `lantern-blow.mp3`                       | lantern                                               | [blowing out candle.wav](https://freesound.org/people/Reitanna/sounds/242867/)                             | Reitanna         |
 | `lantern-match.mp3`                      | garden-gnome, lantern                                 | [Match Lighting Candle](https://freesound.org/people/devilqube/sounds/370362/)                             | devilqube        |
-| `lungs-breath.mp3`                       | lungs                                                 | [Male breathing](https://freesound.org/people/zogmachine/sounds/202606/)                                   | zogmachine       |
 | `marble-roll.mp3`                        | marble                                                | [Marble (single) rolling on wooden floor.wav](https://freesound.org/people/LiezelDippenaar/sounds/707545/) | LiezelDippenaar  |
 | `meteor-boom.mp3`                        | asteroid, meteor, star, planetary-nebula, brain       | [Muffled Distant Explosion](https://freesound.org/people/NenadSimic/sounds/149966/)                        | NenadSimic       |
 | `meteor-fire.mp3`                        | meteor, nebula                                        | [Waving Torch.wav](https://freesound.org/people/spookymodem/sounds/249809/)                                | spookymodem      |

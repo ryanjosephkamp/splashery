@@ -120,13 +120,12 @@ export function hubTypes(h) {
     return t;
   };
   const evidenceFile = (id) => fs.existsSync(path.join(root, `docs/evidence/${id}.json`));
-  const evidenceHref = (id) => `${SITE.github}/blob/main/docs/evidence/${id}.json`;
   const ext = (href) => (/^https?:/.test(href) ? href : null);
   const label = (o) => (o.url ? `<a href="${esc(o.url)}">${esc(o.label)}</a>` : esc(o.label));
   const sectionHead = (id, title, text = "") =>
     `<h2 id="${id}">${esc(title)}</h2>${text ? `<p class="section-lead">${text}</p>` : ""}`;
   const allLabs = (ids) => ids.length > 0 && ids.every((id) => toyById(id).labs);
-  const docLinks = (up) => `<ul class="inline-links"><li><a href="${up}about/credits/">Credits and licenses</a></li><li><a href="${up}about/privacy/">Privacy</a></li><li><a href="${up}about/terms/">Terms of use</a></li></ul>`; // prettier-ignore
+  const docLinks = (up) => `<ul class="inline-links"><li><a href="${up}about/credits/">Credits and licenses</a></li><li><a href="${up}about/privacy/">Privacy</a></li><li><a href="${up}about/terms/">Terms of use</a></li><li><a href="${up}about/contact/">Contact</a></li></ul>`; // prettier-ignore
 
   // ---- Tools -------------------------------------------------------------------------------
 
@@ -137,10 +136,15 @@ export function hubTypes(h) {
         const cards = g.items
           .map((it) => {
             const t = it.toy ? toyById(it.toy) : null;
-            const href = t ? `${up}${galleryHref(t)}` : `${up}${it.href ?? "../"}`;
+            // A toy's card goes to its page; "Open in Splashery" is its own link, in a new tab.
+            const href = t ? `${up}${h.toyPath(t)}` : `${up}${it.href ?? "../"}`;
             const thumb = t && thumbHref(t) ? `<img src="${up}${thumbHref(t)}" alt="" width="88" height="88" loading="lazy" decoding="async" />` : hubIcon(it.icon || g.icon, 40); // prettier-ignore
             const labs = t?.labs ? " data-labs" : "";
-            return `<li class="tool-card"${labs}><a href="${href}"><span class="tool-art">${thumb}</span><span class="tool-body"><span class="tool-name">${esc(it.name || t.label)}${t?.labs ? ' <span class="badge">labs</span>' : ""}</span><span class="tool-text">${esc(it.text)}</span><span class="tool-open">${esc(it.open || "Open it")}${arrow}</span></span></a></li>`; // prettier-ignore
+            const open = t ? "About it" : it.open || "Open it";
+            const app = t
+              ? h.appLink(galleryHref(t), "Open in Splashery", { up, cls: "tool-app" })
+              : "";
+            return `<li class="tool-card${t ? " has-app" : ""}"${labs}><a href="${href}"><span class="tool-art">${thumb}</span><span class="tool-body"><span class="tool-name">${esc(it.name || t.label)}${t?.labs ? ' <span class="badge">labs</span>' : ""}</span><span class="tool-text">${esc(it.text)}</span><span class="tool-open">${esc(open)}${arrow}</span></span></a>${app}</li>`; // prettier-ignore
           })
           .join("");
         const hide = ids.length === g.items.length && allLabs(ids) ? " data-labs" : "";
@@ -179,26 +183,29 @@ ${hub}
     const rows = page.datasets
       .map((d) => {
         const first = toyById(d.toys[0]);
-        const name = `<a href="${up}${galleryHref(first)}">${esc(d.name)}</a>${d.toys.slice(1).map((id) => `, <a href="${up}${galleryHref(toyById(id))}">${esc(toyById(id).label)}</a>`).join("")}`; // prettier-ignore
+        const name = `<a href="${up}${h.toyPath(first)}">${esc(d.name)}</a>${d.toys.slice(1).map((id) => `, <a href="${up}${h.toyPath(toyById(id))}">${esc(toyById(id).label)}</a>`).join("")}`; // prettier-ignore
         const ev = d.toys.find(evidenceFile);
-        const evidence = ev ? `<a href="${evidenceHref(ev)}">Evidence</a>` : '<span class="muted">not written yet</span>'; // prettier-ignore
+        const evidence = ev ? `<a href="${up}${h.toyPath(toyById(ev))}#h-right">Evidence</a>` : '<span class="muted">not written yet</span>'; // prettier-ignore
         const hide = d.toys.every((id) => toyById(id).labs) ? " data-labs" : "";
         return `<tr${hide}><th scope="row">${name}</th><td>${d.shows}</td><td>${d.sources.map(label).join("<br />")}</td><td>${d.licenses.map(label).join("<br />")}</td><td>${evidence}</td></tr>`; // prettier-ignore
       })
       .join("");
     const n = countToys(page.shelves);
     const ev = TOYS.filter((t) => evidenceFile(t.id));
-    return `${intro(page, `<p><a class="button primary" href="${up}../">Open the gallery${arrow}</a></p>`, `${n} toys`)}
+    return `${intro(page, `<p>${h.appLink("../", `Open the gallery${arrow}`, { up, cls: "button primary" })}</p>`, `${n} toys`)}
+${shelfIndex(page.shelves, [
+  ["data", "The data"],
+  ["evidence", "Is it right?"],
+])}
+${shelfSections(page.shelves, up)}
 <section aria-labelledby="h-data">
 ${sectionHead("h-data", "The data behind the toys", page.dataLead)}
 <div class="table-wrap" tabindex="0" role="region" aria-label="Datasets, scrolls sideways"><table class="datasets"><thead><tr><th scope="col">Toy</th><th scope="col">What it shows</th><th scope="col">Source</th><th scope="col">License</th><th scope="col">Evidence</th></tr></thead><tbody>${rows}</tbody></table></div>
 <p class="note">${page.dataNote} Every credit and license, in full, is on the <a href="${up}about/credits/">credits page</a>.${ev.length ? ` Evidence is written for ${ev.length} toy${ev.length === 1 ? "" : "s"} so far.` : ""}</p>
 </section>
 <section aria-labelledby="h-evidence">
-${sectionHead("h-evidence", "Is it right?", page.evidenceLead.replace("@@", `<a href="${SITE.github}/blob/main/docs/evidence/README.md">docs/evidence/</a>`))}
-</section>
-${shelfIndex(page.shelves)}
-${shelfSections(page.shelves, up)}`;
+${sectionHead("h-evidence", "Is it right?", page.evidenceLead.replace("@@", `<a href="${up}learn/evidence/">the evidence guide</a>`))}
+</section>`;
   }
 
   // ---- Learn -------------------------------------------------------------------------------
@@ -260,7 +267,7 @@ build(k) {
 drive(t, c, out) {
   out.parts.sails = { angle: t * 1.5 };                  // the sails turn
 }</code></pre><figcaption>Real recipes are a little longer, but they read like this: shapes, colors, and what moves.</figcaption></figure>
-<p>Because a recipe is plain text, anyone can write one. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches it from the math of one splat up to your own toys, and <a href="${SITE.github}/blob/main/docs/PACKS.md">Writing toy recipes</a> is the reference.</p>
+<p>Because a recipe is plain text, anyone can write one. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches it from the math of one splat up to your own toys, and <a href="${up}learn/recipes/">Writing toy recipes</a> is the reference.</p>
 </section>
 <section aria-labelledby="h-why">
 <h2 id="h-why">Why make toys from splats?</h2>
@@ -303,6 +310,23 @@ drive(t, c, out) {
     },
   };
 
+  // The draft page that shows the project's lane loop (tools/site-loop.mjs makes its two files).
+  ARTICLES.loop = (page, { up }) => {
+    const svg = read(root, "site/assets/lane-loop.svg").trim();
+    const link = read(root, "site/assets/lane-loop-link.txt").trim();
+    return `${intro(page)}
+<article class="prose">
+<section aria-labelledby="h-loop">
+<h2 id="h-loop">One lane, from the queue to the public site</h2>
+<p>Every lane follows the same loop. The Operator writes the brief and starts a worker. The worker builds, the full test run and the Operator's review of the clips send the work back until it is right, and then it waits at a gate: nothing the public already sees changes without the owner's "good". Going public is the owner's decision alone, and it is the last gate.</p>
+<figure class="figure loop-figure" id="lane-loop">${svg}<figcaption>The lane loop, drawn with GROOPH from <a data-source href="${SITE.github}/blob/main/docs/lane-loop.grooph.json">docs/lane-loop.grooph.json</a>. Boxes are agents, the check and the gates; the arc on the right is the loop that sends work back.</figcaption></figure>
+<p class="actions"><a class="button primary" href="${esc(link)}">Open it in the GROOPH app${arrow}</a><a class="button" href="${up}learn/made/">Back to How Splashery is made</a></p>
+<p class="note">The GROOPH app shows the same graph interactively, and in 3D, in a new tab; the graph travels in the link, after the <code>#</code>, which no server sees.</p>
+</section>
+</article>
+<script type="module" src="${up}assets/loop.js"></script>`;
+  };
+
   function article(page, ctx) {
     return ARTICLES[page.article](page, ctx);
   }
@@ -319,6 +343,8 @@ drive(t, c, out) {
         baseDir,
         demote: f.demote ? 1 : 0,
         ids,
+        docPages: h.DOC_PAGES,
+        up,
       });
       const wrapId = `file-${mdSlug(f.title)}`;
       return { f, html, headings, wrapId, n };
@@ -335,11 +361,22 @@ drive(t, c, out) {
         return `<section class="md-file" aria-label="${esc(p.f.title || page.title)}">${wrap}<div class="prose">${p.html}</div></section>`;
       })
       .join("\n");
-    const source = page.files.map((f) => `<a href="${SITE.github}/blob/main/${f.file}">${esc(f.file)}</a>`).join(" and "); // prettier-ignore
+    const source = page.files.map((f) => `<a data-source href="${SITE.github}/blob/main/${f.file}">${esc(f.file)}</a>`).join(" and "); // prettier-ignore
+    const note = page.note ? `<p class="note">${page.note(up)}</p>` : "";
+    const back = page.handoff ? `<p class="note"><a href="${up}learn/notebook/">Back to the lab notebook</a></p>` : ""; // prettier-ignore
     return `${intro(page)}
+${note}${back}
 <nav class="toc" aria-label="On this page"><h2>On this page</h2><ul>${toc}</ul></nav>
 ${body}
 <p class="note">This page is built from ${source} each time the site is built, so it always matches them.</p>`;
+  }
+
+  // ---- Contact ---------------------------------------------------------------------------------
+
+  function contact(page, { up }) {
+    return `${intro(page)}
+<ul class="link-list">${page.contact.map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a><p>${esc(l.text)}</p></li>`).join("")}</ul>
+<p class="note">For a bug or an idea for a toy, <a href="${SITE.github}/issues">an issue on GitHub</a> is the best way to reach the project. See also the <a href="${up}about/">About page</a> and the <a href="${up}about/credits/">credits</a>.</p>`; // prettier-ignore
   }
 
   // ---- About, Terms, Privacy -----------------------------------------------------------------
@@ -351,7 +388,7 @@ ${body}
 <article class="prose">
 <section aria-labelledby="h-who">
 <h2 id="h-who">Who made it, and why</h2>
-<p>Splashery is made by <strong>Ryan Kamp</strong>, with Claude, Anthropic's AI model, as the builder. 3D Gaussian splats make stunning scans of real things, but they are usually something you only watch. Splashery asks what happens if you can <em>play</em> with them. Poke a strawberry, peel a grape, blow the seeds off a dandelion, drop a toy and watch it break into pieces that come back together.</p>
+<p>Splashery is made by <strong><a href="${SITE.makerSite}">${SITE.maker}</a></strong>, with Claude, Anthropic's AI model, as the builder. 3D Gaussian splats make stunning scans of real things, but they are usually something you only watch. Splashery asks what happens if you can <em>play</em> with them. Poke a strawberry, peel a grape, blow the seeds off a dandelion, drop a toy and watch it break into pieces that come back together.</p>
 <p>It has grown from there: ${toys} toys on ${shelves} shelves today, from photoreal scans to atoms, planets, math and games, plus tools to turn your own photos, pages and sounds into splats. <a href="${up}learn/made/">How Splashery is made</a> tells the story of the lanes, the reviews and the rules.</p>
 </section>
 <section aria-labelledby="h-what">
@@ -538,7 +575,7 @@ ${days}
 <li><strong>Long scenes.</strong> If a scene is too long for a link (about 12 KB), the paint and then the clay edits are left out, and the app says so.</li>
 <li><strong>Old links keep working.</strong> Version 2 and 3 scenes, from any time, still load.</li>
 <li><strong>In an embed.</strong> The same payload works in the embed player: <code>embed/#s=PAYLOAD</code>, or the element's <code>scene</code> attribute. That is how an embed can show a toy with its exact look and camera.</li>
-<li><strong>As a file.</strong> <strong>Save JSON</strong> in the Share tab saves the same scene as a file, and <strong>Load JSON</strong> (or dropping the file on the page) opens it. The format is written down in <a href="${SITE.github}/blob/main/docs/SCENE-SCHEMA.md">the scene format</a>.</li>
+<li><strong>As a file.</strong> <strong>Save JSON</strong> in the Share tab saves the same scene as a file, and <strong>Load JSON</strong> (or dropping the file on the page) opens it. The format is written down in <a href="${up}learn/scene-format/">the scene format</a>.</li>
 </ul>
 <h3 id="h-make-link">Make a link to any toy</h3>
 <p>Pick a toy to get its link, and the same toy as an embed address:</p>
@@ -558,5 +595,5 @@ ${days}
 </article>`;
   }
 
-  return { tools, science, learn, article, markdown, about, terms, privacy, news, embed };
+  return { tools, science, learn, article, markdown, about, contact, terms, privacy, news, embed };
 }

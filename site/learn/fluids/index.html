@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Fluids in toys · Splashery</title>
+    <meta
+      name="description"
+      content="How Splashery's fluid toys simulate water, smoke and other fluids with splats."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/learn/fluids/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Fluids in toys · Splashery" />
+    <meta
+      property="og:description"
+      content="How Splashery's fluid toys simulate water, smoke and other fluids with splats."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/fluids/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../assets/outline.css" />
+    <script type="module" src="../../assets/site.js"></script>
+    <script type="module" src="../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Fluids in toys</h1>
+        <p class="lead">How the fluid toys work.</p>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#what-it-is">What it is</a></li>
+              <li><a href="#the-solvers">The solvers</a></li>
+              <li><a href="#drawing">Drawing</a></li>
+              <li><a href="#budgets">Budgets</a></li>
+              <li><a href="#measured">Measured</a></li>
+              <li><a href="#checked-against-physics">Checked against physics</a></li>
+              <li>
+                <a href="#r4-a-gpu-solver-a-liquid-surface-and-a-gas-grid"
+                  >r4: a GPU solver, a liquid surface and a gas grid</a
+                >
+              </li>
+              <li>
+                <a href="#r5-october-2-2026-the-owner-s-phone-review"
+                  >r5 (October 2, 2026): the owner's phone review</a
+                >
+              </li>
+              <li>
+                <a href="#r6-october-2-2026-the-owner-s-marks-on-r4-and-r5"
+                  >r6 (October 2, 2026): the owner's marks on r4 and r5</a
+                >
+              </li>
+              <li>
+                <a href="#r7-october-4-2026-the-fluid-lab-on-a-phone"
+                  >r7 (October 4, 2026): the Fluid lab on a phone</a
+                >
+              </li>
+              <li><a href="#limits-and-next-steps">Limits and next steps</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Fluids in toys">
+        <div class="prose">
+          <p>
+            Lane Fluids, September 29, 2026 (Opus 5.5). The brief and the lane's state are in
+            <a href="../../learn/notebook/fluids/">handoff/Fluids.md</a>; the recipe API is also in
+            <a href="../../learn/recipes/">PACKS.md</a>, &quot;5e. Fluids&quot;.
+          </p>
+          <p>
+            This is graphics physics: it moves in a believable way at phone size. It is not a
+            validated scientific solver, and the Fluid lab's About text says so.
+          </p>
+          <h2 id="what-it-is">What it is</h2>
+          <p>
+            A kit toy declares fluids with <code>k.fluid({ ... })</code> in its <code>build</code>.
+            When the toy opens, the player loads <code>src/fluids/</code> (never before: the shelf
+            and embeds don't fetch it), simulates the fluids on the toy's own clock and draws them
+            as one extra splat layer, one splat per particle, sorted with the toy. The recipe's
+            <code>drive()</code> steers them through <code>out.fluid</code>.
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">File</th>
+                  <th scope="col">What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>src/fluids/sim.js</code></th>
+                  <td>
+                    The solvers: <code>Liquid</code> (position-based fluids),
+                    <code>Gas</code> (smoke, steam), <code>Flame</code>, the colliders (signed
+                    distances) and the splat-shape pass.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>src/fluids/world.js</code></th>
+                  <td>
+                    <code>FluidWorld</code>: builds a toy's systems at its tier's budget, applies
+                    <code>out.fluid</code>, steps them and packs every particle for the renderer.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>src/fluids/render.js</code></th>
+                  <td>
+                    <code>FluidLayer</code>: the splat layer and its work-buffer program (GLSL and
+                    WGSL) that shapes, turns, lights and colors each splat.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>src/fluids/runtime.js</code></th>
+                  <td>
+                    <code>FluidRuntime</code>: runs the world in a Web Worker (people's devices) or
+                    on the page (the tools and tests, which step the clock by hand) and uploads it.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>src/fluids/worker.js</code></th>
+                  <td>The worker.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>src/packs/fluid-lab.js</code></th>
+                  <td>
+                    The Fluid lab (labs, Lab shelf): a glass to pour into, a splash bowl, a candle
+                    and a hot cup.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>src/fluids/gpu/</code></th>
+                  <td>
+                    r4 (below): the GPU liquid (<code>mpm.js</code>, <code>liquid.js</code>), its
+                    foam and bubbles (<code>diffuse.js</code>), the liquid surface
+                    (<code>surface.js</code>) and the gas grid (<code>gas.js</code>,
+                    <code>gasscene.js</code>), tied together in <code>index.js</code>. Loaded only
+                    when a fluid toy opens.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="the-solvers">The solvers</h2>
+          <h3 id="liquids-position-based-fluids">Liquids: position-based fluids</h3>
+          <p>Macklin and Müller, &quot;Position Based Fluids&quot; (2013). Each step:</p>
+          <ol>
+            <li>
+              Gravity, then a predicted move (at most 2.5 particle sizes a step). A fast particle
+              marches along its move against the colliders, so it can't pass through a thin glass
+              wall in one step.
+            </li>
+            <li>
+              Neighbors within the kernel (1.8 particle sizes) from a dense grid over the particles'
+              bounds.
+            </li>
+            <li>
+              Three solver passes (two on the low tier): each particle's density from its neighbors
+              (the poly6 kernel), plus a <strong>wall term</strong> (the density a flat wall of rest
+              particles would add at that distance, tabulated once), then the paper's λ and position
+              corrections with its artificial pressure (s_corr) and relaxation. Without the wall
+              term, particles pack against a glass's wall about a third tighter than elsewhere and
+              the level drops; with it the settled level is within a few percent of the volume
+              poured.
+            </li>
+            <li>
+              <strong>Cohesion</strong>: the density constraint may pull a little (down to −0.06 for
+              water, −0.16 for honey), so a surface holds together instead of fraying into beads.
+            </li>
+            <li>
+              Velocities from the moves, then <strong>viscosity</strong> as XSPH: each velocity
+              moves toward its neighbors' weighted mean by <code>1 − exp(−dt (4 + 900 v²))</code>,
+              one to three passes. <code>v</code> runs from 0.02 (water) to 0.9 (lava): water
+              splashes, honey moves as one body, piles up and coils. Viscous liquids also hold back
+              their slide along a wall (friction).
+            </li>
+            <li>
+              The color-field gradient gives each particle an outward normal and how much of a
+              surface it is on.
+            </li>
+          </ol>
+          <p>
+            Steps are at most 1/120 s, up to 2 (low), 3 (mid) or 4 (high, max) per frame; a device
+            that can't keep up runs the liquid in slow motion rather than taking longer steps.
+          </p>
+          <p>
+            <strong>Diffuse particles</strong> (after Ihmsen et al. 2012, much simplified): where
+            fast liquid meets the surface it throws off spray (ballistic drops) and foam (flecks
+            carried by the liquid and held at its top); a soda also nucleates bubbles that rise
+            through the liquid, wobbling, and mostly pop at the top, a few gathering as a thin ring.
+            Each classifies itself every step by how deep in the liquid it is (a bubble that reaches
+            the top pops or turns to foam, spray that lands becomes foam).
+          </p>
+          <p>
+            Presets (<code>preset</code>): <code>water</code>, <code>soda</code> (fizz and a foam
+            head), <code>syrup</code>, <code>honey</code>, <code>lava</code> (glows by its heat, a
+            dark crust where its surface cools). Any field can be overridden.
+          </p>
+          <h3 id="smoke-and-steam">Smoke and steam</h3>
+          <p>
+            Particles that rise (buoyancy that fades with age), slow toward a swirl field and spread
+            and fade. The swirl is the curl of a sum of moving sine vortices (each
+            <code>e sin(k·p + ωt)</code>, whose curl is <code>cos(k·p + ωt) (k × e)</code>): exactly
+            divergence free and cheap. The swirl grows with height, so a plume is laminar near its
+            source and turbulent higher up (a candle's thin ribbon that breaks into curls).
+            <code>wind</code> pushes it, stronger higher up. <code>puff</code> sends a burst (a
+            candle blown out).
+          </p>
+          <h3 id="flames">Flames</h3>
+          <p>
+            Short-lived particles (about 0.4 s) that rise from a disc at the wick, accelerating so
+            they reach the flame's height over their life, drawn in toward the axis into a tongue,
+            swaying more near the tip with a whole-flame flicker. The renderer colors them by age
+            through the ramp of a real candle flame: a blue base, yellow-white, yellow, orange, a
+            dull red, fading out. Sparks now and then. A flame hands its dying particles to a smoke
+            system (<code>smoke: &quot;&lt;name&gt;&quot;</code>): barely a trace while it burns (a
+            clean candle flame makes almost no visible smoke), a thick curl when it is put out.
+          </p>
+          <h3 id="colliders">Colliders</h3>
+          <p>
+            Signed distance functions in recipe units: <code>floor</code>, <code>box</code>,
+            <code>sphere</code>, <code>cylinder</code>, <code>glass</code> (an open-top glass or
+            cup: <code>radius</code> inside, <code>wall</code>, <code>bottom</code>),
+            <code>bowl</code> (a half sphere open at the top). They don't move (yet).
+          </p>
+          <h2 id="drawing">Drawing</h2>
+          <p>
+            One splat per particle, in a layer with its own work-buffer program, reading four small
+            float textures a frame (place; velocity and kind; turn; radii and material) and the
+            toy's uniforms (the camera, the whole-toy move and turn, the splat scale and exposure).
+          </p>
+          <ul>
+            <li>
+              <p>
+                <strong>Liquid.</strong> Each particle draws four smaller splats
+                (<code>LIQUID_SUB</code>), which gives a crisper edge than one big one. Its place is
+                smoothed toward its neighbors' (75%), and its normal is its neighbors' average (no
+                mottling). Then, by where it is:
+              </p>
+              <ul>
+                <li>
+                  <strong>A thin, fast stream</strong> (few neighbors, fast): the four splats lie
+                  across the stream, each long along the flow by its speed (longer for honey and
+                  lava, whose threads thin as they fall), with the normal across the stream. A
+                  falling stream then reads as a glassy rod, with a rim and a highlight.
+                </li>
+                <li>
+                  <strong>The body and its surface:</strong> a disc along the smoothed normal,
+                  flatter the more it is on the surface.
+                </li>
+                <li>
+                  <strong>Thin sheets, necks and threads:</strong> the ellipsoid of its neighbors
+                  (Yu and Turk, &quot;Reconstructing Surfaces of Particle-Based Fluids Using
+                  Anisotropic Kernels&quot;, 2013), clamped to 4:1.
+                </li>
+                <li><strong>A lone drop:</strong> round, stretched by its speed.</li>
+              </ul>
+              <p>
+                Lit with an even body color, a bright rim where the surface turns away (Fresnel,
+                weaker for a dark liquid such as cola, so it keeps its color), a highlight, full
+                opacity. The toy uses the Lab lane's sharper splat edge (<code
+                  >kernel: &quot;sharp&quot;</code
+                >).
+              </p>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong>The level sheet.</strong> A thin liquid (viscosity up to 0.3) in a
+              <code>glass</code> collider also draws its top as one even sheet of small flat splats
+              at the calm liquid's level (the 96th percentile of the particles' heights in the
+              glass). It fades in as the top layer calms and out while a pour or a splash stirs it,
+              so a settled pool reads as one surface, not as the tops of particles. Honey and lava
+              keep their mounds. Where the liquid has foam, the sheet is its head: the foam flecks
+              near the level, counted on a coarse grid over the glass, color the sheet a fine, even
+              cream (shown even while the surface is stirred), and foam spreads out from where it
+              gathers, fading toward the wall.
+            </li>
+            <li>
+              <strong>Foam, bubbles, spray.</strong> Small flat pale flecks; tiny bright dots; small
+              drops of the liquid.
+            </li>
+            <li><strong>Smoke and steam.</strong> Soft splats that grow and fade with age.</li>
+            <li>
+              <strong>Flames.</strong> Emissive, colored by age through the ramp above, narrowing
+              toward the tip.
+            </li>
+            <li>
+              <strong>Glass</strong> (<code>kind: &quot;vessel&quot;</code>): the engine can draw a
+              <code>glass</code> collider itself, as even flat splats over its walls, lip and foot,
+              and its rims as clean lines (splats long along each rim), clear where you look
+              straight through and brighter toward the edges (Fresnel), with a highlight. Kit splats
+              can't depend on the view, which is what makes glass read as glass; a kit-built glass
+              showed its wall as a grain or a moiré.
+            </li>
+          </ul>
+          <p>
+            WebGPU sorts the moved splats on the GPU. WebGL2 sorts on the CPU from stored places, so
+            the layer gives it the particles' new places every other frame.
+          </p>
+          <h2 id="budgets">Budgets</h2>
+          <p>
+            The recipe's <code>budget</code> is the particle count on the high tier; the tiers scale
+            it (low 0.35, mid 0.45, high 1, max 1.35). A liquid on a lower tier gets fewer, larger
+            particles (its spacing grows with the cube root), so the same volume pours.
+            <code>tools/fl-measure.mjs</code> times the solver per tier with Chromium's CPU
+            throttling as the stand-in phone (low 6×, mid 4×, high 2×, max 1×):
+          </p>
+          <h2 id="measured">Measured</h2>
+          <p>
+            <code>node tools/fl-measure.mjs</code> on September 30, 2026 (after r3): the solver's
+            time per 30 fps frame (ms, median over 4 s after a tap; stepping, packing and the splat
+            shapes), in Chromium with its CPU slowed down as each tier's stand-in. A frame is 33 ms;
+            the solver runs in a worker, so it doesn't slow the drawing. The aim is about 22 ms on
+            the stand-in (two thirds of a frame), leaving headroom.
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Scene</th>
+                  <th scope="col">low (6×)</th>
+                  <th scope="col">mid (4×)</th>
+                  <th scope="col">high (2×)</th>
+                  <th scope="col">max (1×)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Pour water</th>
+                  <td>16</td>
+                  <td>20</td>
+                  <td>37</td>
+                  <td>21</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pour soda</th>
+                  <td>19</td>
+                  <td>30</td>
+                  <td>59</td>
+                  <td>33</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pour honey</th>
+                  <td>13</td>
+                  <td>20</td>
+                  <td>33</td>
+                  <td>19</td>
+                </tr>
+                <tr>
+                  <th scope="row">Splash</th>
+                  <td>14</td>
+                  <td>14</td>
+                  <td>31</td>
+                  <td>9</td>
+                </tr>
+                <tr>
+                  <th scope="row">Candle</th>
+                  <td>0.7</td>
+                  <td>0.3</td>
+                  <td>0.3</td>
+                  <td>0.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">Hot cup</th>
+                  <td>0.1</td>
+                  <td>0.1</td>
+                  <td>0.1</td>
+                  <td>0.1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The soda pour is the tightest (40 ms on its slowest tenth of frames on mid): its foam
+            head is about a third of its cost. Since r3, phones (low and mid) get 0.7 times the foam
+            flecks, each counting for more, so the head covers the same (<code>diffuse</code>);
+            halving them would save about 3 ms more on mid.
+          </p>
+          <p>
+            What the stand-ins mean: every phone gets the mid tier (touch and a small screen), and
+            so do machines with 4 cores or 4 GB. Mid's stand-in, this build machine's processor
+            slowed 4×, is roughly a budget Android phone from about 2019; most phones in use are
+            faster, so it is a cautious test.
+          </p>
+          <p>
+            Liquid particles at most (the glass, the splash): low 420 and 455, mid 540 and 585, high
+            1,200 and 1,300, max 1,620 and 1,755. The solver costs about 4.4 µs per particle per
+            1/120 s step on this machine's CPU unthrottled. The high tier's stand-in (2×) is
+            pessimistic for the desktops it covers; at 1× the high budget takes about 17 ms. Drawing
+            adds only the fluid's splats (at most a few thousand, plus the glass) to the toy's own,
+            and the toy asks for three quarters of its tier's splats (<code>density: 0.75</code>).
+          </p>
+          <h2 id="checked-against-physics">Checked against physics</h2>
+          <p>
+            <code>node tools/fl-physics.mjs</code> measures the solver in Node (real units: the
+            Fluid lab's unit is 0.33 m) and compares it with published values. Measured on September
+            30, 2026:
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Check</th>
+                  <th scope="col">Ours</th>
+                  <th scope="col">Published</th>
+                  <th scope="col">Source</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Candle flicker (the tip's height)</th>
+                  <td>11 Hz</td>
+                  <td>10 to 12 Hz</td>
+                  <td>Kitahata et al. 2009, J. Phys. Chem. A 113; Cetegen and Ahmed 1993</td>
+                </tr>
+                <tr>
+                  <th scope="row">Plume spread (half-width per height)</th>
+                  <td>smoke 0.125, steam 0.122</td>
+                  <td>0.10 to 0.14</td>
+                  <td>Morton, Taylor and Turner 1956, Proc. R. Soc. A 234</td>
+                </tr>
+                <tr>
+                  <th scope="row">Bubble rise in soda</th>
+                  <td>14.1 cm/s</td>
+                  <td>10 to 20 cm/s (1 mm bubbles)</td>
+                  <td>Clift, Grace and Weber 1978, Bubbles, Drops and Particles</td>
+                </tr>
+                <tr>
+                  <th scope="row">A water blob spreading on a floor</th>
+                  <td>radius ∝ t^0.54</td>
+                  <td>t^0.5 (inertial)</td>
+                  <td>Huppert and Simpson 1980, J. Fluid Mech. 99</td>
+                </tr>
+                <tr>
+                  <th scope="row">Honey spreading</th>
+                  <td>t^0.41, then stops at 22 cm</td>
+                  <td>keeps creeping as t^1/8 (viscous)</td>
+                  <td>Huppert 1982, J. Fluid Mech. 121</td>
+                </tr>
+                <tr>
+                  <th scope="row">Dam-break front (column 2:1, wide channel)</th>
+                  <td>about 63% as far by T = 5.3</td>
+                  <td>Table 2</td>
+                  <td>Martin and Moyce 1952, Phil. Trans. R. Soc. A 244</td>
+                </tr>
+                <tr>
+                  <th scope="row">A falling stream narrows</th>
+                  <td>keeps its width</td>
+                  <td>64% of its width 26 cm down</td>
+                  <td>mass conservation (Eggers and Villermaux 2008, Rep. Prog. Phys. 71)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul>
+            <li>
+              Fixed in this round: the flame's flicker was a 1.7 Hz sway; it now puffs at 11 Hz (the
+              upper flame stretches and its tip pinches off, <code>flicker</code> and
+              <code>pinch</code>). Smoke and steam spread twice too wide (0.26 and 0.29): the Fluid
+              lab's swirl is calmer. A burning candle trailed a gray wisp; a clean flame now makes
+              none (<code>smokeRate</code>, 0 by default).
+            </li>
+            <li>
+              The dam break follows the measured front early (T = 1.2: 1.37 against 1.44) and then
+              falls behind: position-based fluids lose a little energy each step for stability.
+              Eight solver passes instead of three close part of the gap, at over twice the cost. A
+              narrow channel (8 particles wide) drags the front further on its walls, so the test
+              uses a wide one.
+            </li>
+            <li>
+              Honey stops where real honey keeps creeping slowly: cohesion and wall friction hold it
+              like a paste. In a glass the difference is too small to see.
+            </li>
+            <li>
+              A stream only two or three particles wide can't thin as it falls; that needs more,
+              smaller particles than the phone budget allows.
+            </li>
+          </ul>
+          <h2 id="r4-a-gpu-solver-a-liquid-surface-and-a-gas-grid">
+            r4: a GPU solver, a liquid surface and a gas grid
+          </h2>
+          <p>
+            The owner's note of September 30, 2026, after r3: the fluids &quot;still don't seem
+            realistic enough&quot;. r4 changes three things. Browsers without WebGPU keep everything
+            above, unchanged.
+          </p>
+          <h3 id="many-more-particles-mls-mpm-on-the-gpu">
+            Many more particles: MLS-MPM on the GPU
+          </h3>
+          <p>
+            On a WebGPU device the liquid runs on the GPU with MLS-MPM (Hu et al., &quot;A Moving
+            Least Squares Material Point Method&quot;, SIGGRAPH 2018, as in its compact
+            &quot;MLS-MPM88&quot; form): particles carry mass, velocity and an affine matrix (APIC);
+            each substep scatters them to a grid (quadratic B-splines), solves forces on the grid
+            and gathers back. Fluid pressure is a Tait equation of state (power 7, clamped so a free
+            surface doesn't pull), viscosity a stress <code>μ(C + Cᵀ)</code> from each preset's real
+            kinematic viscosity (water and soda 1e-6 m²/s, syrup 1e-3, honey 4e-3, lava 1e-2).
+            Colliders are the same shapes as on the CPU, as signed distances on the grid (a glass's
+            wall is at least three cells thick for the solver, so nothing leaks through; the drawn
+            glass keeps its own wall).
+          </p>
+          <p>
+            Why MLS-MPM and not position-based fluids on the GPU: MPM needs no neighbor search (a
+            scatter with atomic adds and a gather over a 3×3×3 stencil), so it maps directly onto
+            compute shaders, and in a short measurement (the dam break below, on the same harness)
+            it followed Martin and Moyce more closely than the CPU solver did.
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Tier</th>
+                  <th scope="col">Cell (cm)</th>
+                  <th scope="col">Particles at most</th>
+                  <th scope="col">Substeps a frame</th>
+                  <th scope="col">Foam and bubble budget</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">low</th>
+                  <td>1.65</td>
+                  <td>6,000</td>
+                  <td>10</td>
+                  <td>0.3×</td>
+                </tr>
+                <tr>
+                  <th scope="row">mid</th>
+                  <td>1.3</td>
+                  <td>14,000</td>
+                  <td>12</td>
+                  <td>0.4×</td>
+                </tr>
+                <tr>
+                  <th scope="row">high</th>
+                  <td>0.73</td>
+                  <td>120,000</td>
+                  <td>36</td>
+                  <td>1×</td>
+                </tr>
+                <tr>
+                  <th scope="row">max</th>
+                  <td>0.59</td>
+                  <td>200,000</td>
+                  <td>44</td>
+                  <td>1.3×</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The CPU liquid has at most 1,755 particles (max) and 455 to 585 on phones, so the GPU
+            path has 25 to 110 times as many. The substep is sized by the fastest motion (the sound
+            speed of the equation of state plus the fastest fall); a frame that would need more than
+            its tier's substeps runs in slow motion, and the emitter and drain follow the simulated
+            time.
+          </p>
+          <p>
+            <strong>How it talks to PlayCanvas.</strong> The solver uses PlayCanvas's own WebGPU
+            device (<code>pc.StorageBuffer</code>, <code>pc.Compute</code>,
+            <code>device.computeDispatch</code>), so its buffers never leave the GPU. Each frame the
+            page encodes the substeps (five compute dispatches each: clear, particle-to-grid mass,
+            particle-to-grid stress, grid update, grid-to-particle) and one more that writes every
+            particle's place and speed into a float texture. The surface pass reads that texture
+            directly: no copy back to the CPU and no upload. The page's cost is encoding the
+            dispatches, about 1 ms a frame for 24 substeps (measured in Chromium on this machine);
+            the GPU's cost is the dispatches themselves (see &quot;Measured, r4&quot;). The only
+            read-back is for foam and bubbles (below), asynchronous and ten times a second, so a
+            frame never waits on it.
+          </p>
+          <p>
+            <strong>Foam, bubbles and spray</strong> stay particles (after Ihmsen et al. 2012, as on
+            the CPU). Ten times a second the liquid is read back into a coarse picture (how full
+            each cell is, its mean velocity and the top of the slow pool in each column). Foam forms
+            where fast liquid plunges into the pool (not along a falling stream), rides the pool's
+            top and spreads; a soda nucleates bubbles deep in the liquid that rise at their terminal
+            speed and mostly pop at the top; spray is ballistic. They move on the CPU every frame (a
+            few thousand at most) and are drawn by the surface pass: foam and spray over the liquid,
+            bubbles inside it, tinted by it.
+          </p>
+          <p>
+            <strong>The splash</strong> (fl-r4-splash-r2, October 1, 2026). A recipe's
+            <code>gpu</code> settings override the rest on the GPU solver only, so the CPU splash
+            the owner marked good stays as it was. The GPU splash drops a smaller ball (0.24 units
+            across, about 8 cm) from lower down onto a shallow film (about 2 cm deep), as a drop
+            lands on a wet plate: the impact throws up a crown, a thin sheet that leans outward and
+            breaks into drops at its rim, which fall back; the film rushes back over the dry crater
+            and meets in a small central mound, then settles flat in about a second and a half. The
+            walls have low friction and the water no cohesion, or the crater stays dry for seconds.
+            Before this, the ball started above the GPU grid's top and arrived flattened; the grid
+            now always contains the ball's start (<code>drop</code>). On the low tier the film is
+            two particles deep and the crater takes about a second to close. It is drawn barely
+            stretched along its motion and with larger sprites (the recipe's
+            <code>stretch</code> and <code>sprite</code>), so the ball and the drops stay round, and
+            thin liquid in flight shows the bright room above it as a real drop does
+            (<code>drops</code>). A second wooden layer under the basin fills gaps between the
+            board's splats that showed through the clear water.
+          </p>
+          <p>
+            Round 3 (fl-r4-splash-r3): the ball lands faster (a smaller ball, thrown down), and
+            where the crown's sheet thins to a particle or two a cell and moves fast above the pool,
+            it sheds fine droplets as spray (<code>breakup</code> in the recipe,
+            <code>shed</code> in <code>diffuse.js</code>), smaller than the grid can hold, as a real
+            rim breaks into drops. They fly on along ballistic paths and join the pool when they
+            fall back. The sheet itself stays coarse: it reads as a ring of spray more than a clear
+            wall.
+          </p>
+          <h3 id="a-real-liquid-surface">A real liquid surface</h3>
+          <p>
+            Screen-space fluid rendering (Green, &quot;Screen Space Fluid Rendering for Games&quot;,
+            GDC 2010; van der Laan, Green and Sainz, I3D 2009), after PlayCanvas has drawn the frame
+            (<code>postrender</code>):
+          </p>
+          <ol>
+            <li>
+              Each particle is drawn as a sphere into a depth texture and, added up, into a
+              thickness texture, at half or three fifths of the screen's resolution. A sphere is
+              never drawn smaller than 1.6 texels (a far or small liquid would break into specks),
+              keeping its volume in the thickness.
+            </li>
+            <li>
+              A bilateral filter (two passes) smooths the depth across particles but not across
+              edges, so they merge into one surface.
+            </li>
+            <li>
+              The last pass rebuilds normals from the smoothed depth and shades the liquid over a
+              copy of the frame: refraction of what is behind (offset by the normal), Beer–Lambert
+              absorption by the thickness (so a deep cola is dark and its thin edges amber, and
+              water tints only where it is deep), a Fresnel reflection of a soft studio sky, a
+              specular highlight, and glow for lava.
+            </li>
+            <li>
+              The glass is traced analytically in the same pass (a cylinder: the front wall's
+              Fresnel reflection and highlight, crisp silhouette edges, the far wall's faint
+              reflection, and its rim and foot as clean lines about a pixel wide), so the liquid is
+              seen through it and the glass reads at a glance.
+            </li>
+          </ol>
+          <h3 id="real-smoke-and-flames-a-grid-gas-solver">
+            Real smoke and flames: a grid gas solver
+          </h3>
+          <p>
+            Smoke, steam and flames run on a 3D grid on both WebGPU and WebGL2 (fragment shaders
+            over a 3D grid laid out as tiles in 2D half-float textures, so phones get it too):
+            stable fluids (Stam, &quot;Stable Fluids&quot;, SIGGRAPH 1999) with semi-Lagrangian
+            advection, buoyancy from temperature and smoke weight, vorticity confinement (Fedkiw,
+            Stam and Jensen, &quot;Visual Simulation of Smoke&quot;, SIGGRAPH 2001), Jacobi pressure
+            iterations and an open top. A flame is fuel that burns into heat; its light comes from
+            the heat, through the color ramp (blue base where fuel meets air, then yellow-white,
+            orange, dull red). The volume is ray-marched in the surface pass.
+          </p>
+          <ul>
+            <li>
+              A flame gets its own fine grid (a candle flame is about a centimeter wide) stepped at
+              120 Hz; smoke and steam share a coarser one.
+            </li>
+            <li>
+              A room's faint drafts (slow, smooth, stronger higher up) make a plume sway and meander
+              instead of standing straight; the grid's edges fade out, so its box never shows.
+            </li>
+            <li>
+              A candle's flame lights the scene (October 1, 2026, after the owner's &quot;can look
+              more realistic&quot;): the candle and its dish are traced props (below), lit warmly by
+              the flame, and the wax glows from within near its top, as wax does; the flame has a
+              soft halo and a faint, slow flicker of its light. Its fuel burns more slowly, so it
+              stands taller, and its body is yellow with a white core.
+            </li>
+            <li>
+              The smoke from a blown-out wick is paler (the room's light catches it) and comes from
+              a thinner source, so it rises as a thread.
+            </li>
+          </ul>
+          <h3 id="crisp-props">Crisp props</h3>
+          <p>
+            The owner found the objects around the glass grainy (the board, the stand, the faucet,
+            its handle and the spout). A recipe may list its props as simple shapes (<code
+              >kind: &quot;props&quot;</code
+            >: cylinders, boxes with a turning part, cones), and on WebGPU the surface pass traces
+            them exactly, as it does the glass, with a wood grain for the board and a soft highlight
+            on steel. The recipe hides their splats while the GPU draws them (the props spec's
+            <code>drawn</code>), so phones without WebGPU keep the splats. Refraction through the
+            liquid sees the traced props too. The glass's foot behind the liquid shows at half
+            strength, and a liquid's top gets the room's light and a thin bright meniscus at the
+            glass, so a dark liquid's top still reads.
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Tier</th>
+                  <th scope="col">Smoke grid (cells a side)</th>
+                  <th scope="col">Pressure iterations</th>
+                  <th scope="col">Steps a second</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">low</th>
+                  <td>20</td>
+                  <td>10</td>
+                  <td>30</td>
+                </tr>
+                <tr>
+                  <th scope="row">mid</th>
+                  <td>28</td>
+                  <td>12</td>
+                  <td>30</td>
+                </tr>
+                <tr>
+                  <th scope="row">high</th>
+                  <td>44</td>
+                  <td>20</td>
+                  <td>45</td>
+                </tr>
+                <tr>
+                  <th scope="row">max</th>
+                  <td>56</td>
+                  <td>24</td>
+                  <td>60</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 id="measured-r4">Measured, r4</h3>
+          <p>
+            <code>node tools/fl-gpu-physics.mjs --profile=mid</code> on September 30, 2026: the dam
+            break of &quot;Checked against physics&quot; (a 2:1 water column in the same channel,
+            real units) on the GPU solver, 32,000 particles, against Martin and Moyce's Table 2
+            (front Z = x/a at time T = t√(2g/a)):
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">T</th>
+                  <th scope="col">Measured (1952)</th>
+                  <th scope="col">GPU (r4)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1.19</th>
+                  <td>1.44</td>
+                  <td>1.32</td>
+                </tr>
+                <tr>
+                  <th scope="row">1.91</th>
+                  <td>2.33</td>
+                  <td>2.00</td>
+                </tr>
+                <tr>
+                  <th scope="row">2.58</th>
+                  <td>3.22</td>
+                  <td>2.83</td>
+                </tr>
+                <tr>
+                  <th scope="row">3.26</th>
+                  <td>4.11</td>
+                  <td>3.77</td>
+                </tr>
+                <tr>
+                  <th scope="row">3.92</th>
+                  <td>5.00</td>
+                  <td>4.75</td>
+                </tr>
+                <tr>
+                  <th scope="row">4.61</th>
+                  <td>5.89</td>
+                  <td>5.77</td>
+                </tr>
+                <tr>
+                  <th scope="row">5.32</th>
+                  <td>6.76</td>
+                  <td>6.80</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            RMS difference 0.27 over all 13 points (the CPU solver: 1.23, about 63% as far by T =
+            5.3). The GPU front starts a little behind (the column needs a moment to collapse, as
+            with a real gate's lift) and then runs slightly faster than measured, reaching the
+            measured distance by T = 5.3. With a softer liquid (sound speed 4 instead of 8 recipe
+            units a second) the rms was 0.46, and water compressed by a quarter at the bottom of a
+            glass; the test &quot;the GPU liquid keeps the CPU liquid's volume&quot; caught it.
+          </p>
+          <p>
+            <code>?fluids=cpu</code> keeps the r3 path everywhere (the tests use it for the splat
+            program on WebGPU).
+          </p>
+          <h2 id="r5-october-2-2026-the-owner-s-phone-review">
+            r5 (October 2, 2026): the owner's phone review
+          </h2>
+          <p>
+            From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review.md):
+          </p>
+          <ul>
+            <li>
+              <strong>A tap on the faucet's handle pours.</strong> On WebGPU the props are traced,
+              and r4 hid their splats, so a tap found nothing to hit (the app finds the toy by its
+              splats). They now shrink to 0.55 of their size inside the traced shapes, which cover
+              them, and stay there to be tapped; the clip tool taps the handle as a finger would
+              (<code>tapHandle</code> in <code>tools/fl-clip.mjs</code>).
+            </li>
+            <li>
+              <strong>Water that reads as water.</strong> A thin stream of clear liquid drew as a
+              gray cut-out of the dark room behind it. It is now light and silvery (the room's light
+              along its curved sides), and the room seen through thin liquid is dimmer. The owner
+              saw dark gray on his phone on the r3 splats as well; what makes that one gray on a
+              phone is not known yet (it is light blue here).
+            </li>
+            <li>
+              <strong>Lava.</strong> r4's GPU lava blew up: the solver let
+              <code>nu * dt</code> reach 0.12 cells² a substep, and lava (the stiffest preset) went
+              unstable. It is now held at 0.05 (<code>VISC_STEP</code>): a liquid too stiff for the
+              tier's substeps has its viscosity capped there. Each particle's age reaches the
+              surface pass (the depth pass's second channel, kept for the front particle and
+              smoothed with the depth), so lava glows orange-yellow fresh from the nozzle and its
+              skin cools within a second or two to a dark basalt crust, with glowing cracks where it
+              parted. The CPU lava's skin now crusts over too, with the same cracks.
+            </li>
+            <li>
+              <strong>A phone tier that stays smooth.</strong> The phone tiers (low and mid;
+              computers are high or max and unchanged) take about a third of r4's particles, a
+              coarser grid, half the substeps and a softer sound speed (6 recipe units a second), so
+              60 frames a second still run in real time; the surface is drawn at 0.4 of the screen
+              (0.35 on low), the smoke grid is smaller and there is less spray. A phone whose frames
+              keep running long (over 24 ms for a second and a half) steps the fluid down by itself,
+              up to three times: fewer substeps (a little slow motion instead of lag), a coarser
+              surface and a shorter ray march.
+            </li>
+          </ul>
+          <h2 id="r6-october-2-2026-the-owner-s-marks-on-r4-and-r5">
+            r6 (October 2, 2026): the owner's marks on r4 and r5
+          </h2>
+          <ul>
+            <li>
+              <strong>A liquid's top that meets the glass.</strong> r4 and r5 drew a bright ring on
+              the blurred particle surface, which shrinks away from the glass near its edge, so the
+              ring sat inside the glass as a separate, smaller circle from every angle. Water and
+              soda in a glass are now topped by a flat surface at the pool's level (from the
+              read-back, smoothed) that reaches the glass's inner wall, shaded as the liquid seen
+              from above (refraction to the glass's bottom, absorption, Fresnel), with a hairline
+              meniscus where it meets the wall. Thick liquids and the splash keep their particle
+              surface (<code>flatTop: false</code>).
+            </li>
+            <li>
+              <strong>A tap's stream.</strong> The GPU nozzle pours a stream about a centimeter
+              across (<code>gpuRadius</code> 0.04 for water and soda, 0.04 for honey and 0.045 for
+              lava); the CPU's coarser particles keep the wider one.
+            </li>
+            <li>
+              <strong>Lava, one material.</strong> Its color comes only from its heat, on one
+              incandescent ramp (<code>lavaRamp</code>: orange-yellow, orange, red, dull red,
+              black), and its heat falls on one curve wherever it is: the time since it left the
+              spout. So the stream and the pool where it lands are the same orange, and the pool
+              darkens and crusts as it cools; the crust's cracks show the hotter lava just under it,
+              on the same ramp. The glass's starting pool is already old (<code>fillAge</code>, 8
+              s), a dark, glossy gray crust like cooled pahoehoe. The CPU lava uses the same ramp.
+              Its skin crusts over in about three seconds (<code>heat</code> 2.4 s), so a clip of
+              ten seconds shows the whole cooling.
+            </li>
+            <li>
+              <strong>A drop that isn't a sphere.</strong> The splash's falling drop starts
+              flattened, flat underneath and rounder on top (<code>drop.shape</code>), as a large
+              raindrop falls, and fast liquid is drawn a little more stretched along its motion.
+            </li>
+          </ul>
+          <h2 id="r7-october-4-2026-the-fluid-lab-on-a-phone">
+            r7 (October 4, 2026): the Fluid lab on a phone
+          </h2>
+          <p>
+            Built by Sonnet 5.5 as a test of engine work, from the Fluid Lab phone audit (<a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/audits/fluid-phone-2026-10.md"
+              target="_blank"
+              rel="noopener"
+              >docs/audits/fluid-phone-2026-10.md</a
+            >). Code: <code>src/fluids/phone.js</code> (the envelope),
+            <code>FluidRuntime.watch()</code> and <code>restart()</code> (the recovery),
+            <code>mpm.js</code> (readback), and small, marked hooks in <code>src/stage.js</code> and
+            <code>src/player.js</code>.
+          </p>
+          <ul>
+            <li>
+              <strong>The hint.</strong> On a phone the Toy tab shows &quot;This lab runs best on a
+              computer. On a phone, choose Auto detail.&quot; under Scene and Liquid (the recipe's
+              <code>note</code>), a toast shows it after the first slow-down, and the toy's About
+              text ends with it.
+            </li>
+            <li>
+              <strong>A phone envelope for this lab only.</strong> A phone is a touch device with a
+              small screen, whatever tier it detected (<code>?phone=1</code> and
+              <code>?phone=0</code> force it). It applies unless the person chose High or Max Detail
+              (or <code>?profile=high|max</code>), and it never changes the saved Detail choice. It
+              sets the lab's own canvas cap of 1.5 (the recipe's <code>render.dpr</code>), 35,000
+              prop splats (density 0.25 instead of 0.75), the WebGPU liquid at cap 6,000 and cell
+              0.05, and gas grids 20 cells across (flame 20×58×20, smoke 20×65×20, hot cup
+              20×33×20). On the CPU, a spec may say <code>phone: { scale }</code>: the Glass liquid
+              asks for 0.5 (cap 270, spacing times the cube root of 2) and the Splash's vessel for
+              0.5; the Splash keeps its liquid and its starting pool.
+            </li>
+            <li>
+              <strong>Recovery.</strong> The runtime times every frame on a phone, whatever the
+              tier. When the average (an EMA) stays over 33 ms for 1.5 s it first lowers the drawing
+              cost (a pixel cap of 1, a coarser surface, fewer gas steps) and shows the hint; 1.5 s
+              later, if still slow, it rebuilds this scene's fluids into the phone envelope with a
+              clear restart (already in it: fewer substeps); 2 s after that, it offers a pause.
+              Hidden pages, the first 1.5 s after the toy opens and gaps over 2 s count for nothing,
+              and a lone stall adds at most 250 ms of slow time. The old watcher (low and mid tiers
+              only, ignoring frames over 250 ms) is gone.
+            </li>
+            <li>
+              <strong>Less garbage per readback.</strong> The diffuse pass reads the liquid back 10
+              to 30 times a second; <code>readPositions(true)</code> keeps its byte and float arrays
+              and fills six values per particle directly (no <code>subarray()</code> views). Tests
+              and tools keep the fresh-array call.
+            </li>
+            <li>
+              <strong>The WebGPU projector buffers.</strong> The engine's gsplat projector destroys
+              its cached Compute objects' shaders but not the Computes, so each scene or toy change
+              left two uniform buffers. <code>vendor/</code> is untouched:
+              <code>Stage.hookProjector()</code> finds the projector through the device's
+              <code>devicerestored</code> callbacks (private engine layout; nothing is wrapped if it
+              isn't there) and wraps that one instance's clearing method to destroy each Compute
+              first.
+            </li>
+          </ul>
+          <h3 id="measured-r7-a-sandbox-not-a-phone">Measured, r7 (a sandbox, not a phone)</h3>
+          <p>
+            The audit's own scripts (<code>collect.mjs</code>, a batch of the ten scenes at phone
+            size, <code>mid</code> at 4× and 6× page CPU throttling, WebGL2 and WebGPU;
+            <code>growth.mjs</code>), run on <code>main</code> (e63d286f) and on this branch, in
+            this container: Chromium on a CPU, with SwiftShader as WebGL2 and WebGPU. Frames here
+            take hundreds of milliseconds to seconds, so
+            <strong>the absolute times mean nothing for a phone</strong>. Read the ratios and the
+            counts. Every &quot;after&quot; cell ran the recovery, which dropped most of them to a
+            pixel ratio of 1 within seconds (canvas 390×645 instead of 585×967), so these are the
+            whole change (envelope plus recovery), not the envelope alone. Single runs, 6 s action
+            windows.
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col"><code>mid</code> at 6×, action window</th>
+                  <th scope="col">Frames in 6 s, before → after</th>
+                  <th scope="col">Render p95 (ms), before → after</th>
+                  <th scope="col">Tracked GPU MiB, before → after</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">WebGL2 Glass (four liquids)</th>
+                  <td>10–11 → 43–44</td>
+                  <td>642–686 → 157–160</td>
+                  <td>38.5–38.7 → 34.1–34.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">WebGL2 Splash (four liquids)</th>
+                  <td>7–8 → 33–35</td>
+                  <td>906–1,102 → 192–215</td>
+                  <td>38.7–38.9 → 34.1–34.3</td>
+                </tr>
+                <tr>
+                  <th scope="row">WebGL2 Candle / Hot cup</th>
+                  <td>3 / 4 → 14 / 21</td>
+                  <td>2,295 / 2,390 → 490 / 314</td>
+                  <td>61.0 / 54.6 → 37.9 / 35.8</td>
+                </tr>
+                <tr>
+                  <th scope="row">WebGPU Glass (four liquids)</th>
+                  <td>2–3 → 6–11</td>
+                  <td>3,401–4,091 → 964–1,296</td>
+                  <td>63.8–64.0 → 39.2–39.4</td>
+                </tr>
+                <tr>
+                  <th scope="row">WebGPU Splash (four liquids)</th>
+                  <td>2–3 → 5–6</td>
+                  <td>3,376–7,305 → 1,188–2,384</td>
+                  <td>65.4–65.6 → 40.3–42.9</td>
+                </tr>
+                <tr>
+                  <th scope="row">WebGPU Candle / Hot cup</th>
+                  <td>3 / 1 → 7 / 5</td>
+                  <td>4,390 / 4,465 → 1,137 / 1,110</td>
+                  <td>70.0 / 63.5 → 41.1 / 41.7</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The <code>mid</code> at 4× cells (in the same run) agree. Four-scene cycle on WebGPU
+            (Candle, Cup, Splash, Glass; six cycles, <code>growth.mjs</code>): buffers 64, 66, 68,
+            70, 72, 74 before, <strong>61 in every cycle</strong> after; uniform bytes 1,129,472 to
+            1,438,912 before, flat at 1,436,000 from the second cycle after. The page heap still
+            rises about 1.4 MB a cycle in both, so no heap fix is claimed. Not measured: a real
+            phone, volume and look of the smaller liquids (the audit asked for a review on a phone),
+            and the CPU solver's p95 (the audit's <code>solver.mjs</code>). Prop splats fell from
+            105,000 to 35,000, which can show holes where props are splats (WebGL2) and should be
+            looked at on a phone.
+          </p>
+          <h2 id="limits-and-next-steps">Limits and next steps</h2>
+          <ul>
+            <li>
+              Colliders don't move with a part yet (a tipping jug, a stirring spoon). The runtime
+              would need the part's transform per frame, which <code>out.parts</code> already has.
+            </li>
+            <li>No two-way coupling: liquid doesn't push kit parts, tokens or floating objects.</li>
+            <li>
+              One liquid per system; two liquids in one glass would be two systems that don't feel
+              each other.
+            </li>
+            <li>
+              Honey coils only as far as the particle size allows; a finer thread needs more
+              particles.
+            </li>
+            <li>
+              The GPU liquid needs WebGPU compute; on WebGL2 the liquid is the CPU solver's splats
+              (r3).
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/FLUIDS.md"
+          target="_blank"
+          rel="noopener"
+          >docs/FLUIDS.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

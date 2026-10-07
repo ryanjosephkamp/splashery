@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>
+      Lane Sharpness B: sharper food, toys, math and AI toys, and closed bases · Splashery
+    </title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: SharpB."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/sharpb/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Sharpness B: sharper food, toys, math and AI toys, and closed bases · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: SharpB."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/sharpb/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Sharpness B: sharper food, toys, math and AI toys, and closed bases</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section
+        class="md-file"
+        aria-label="Lane Sharpness B: sharper food, toys, math and AI toys, and closed bases"
+      >
+        <div class="prose">
+          <p>
+            Prefix <code>shb</code>. Branch <code>claude/lane-sharp-b</code>. PR &quot;Phase
+            Sharpness B: sharper food, toys, math and AI, and closed bases&quot;. How lanes work:
+            <a href="../../../learn/operating/">OPERATING.md</a>.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>(Written by the Operator on October 2, 2026, from the owner's review of that day)</p>
+          <p>
+            On October 2 the owner went through every toy on the preview build
+            (docs/reviews/2026-10-02-mega-review/review.md, word for word). He keeps saying the same
+            thing about many toys: &quot;a little grainy&quot;, &quot;could be sharper&quot;, and,
+            turning toys over, that some have hollow or see-through bottoms. He wants all of it
+            fixed before the team moves on, and he approved this second sharpness lane. Lane
+            Sharpness A (#172, docs/handoff/SharpA.md) is doing the landmarks, vehicles, Medieval,
+            Open me, gems, space and weather now: read its handoff and PR for what worked, plus
+            PACKS.md section 7c (&quot;Sharp kit toys&quot;), docs/handoff/Sharpness.md,
+            FidelityA.md and FidelityB.md. The materials rule applies: real-looking materials, no
+            see-through solids, no blur, no speckle. Keep every toy's shape, effect, sound and splat
+            budget per tier; only the look gets sharper (and the bases closed).
+          </p>
+          <h3 id="part-1-sharper-his-words-in-brackets-read-his-full-note-for-each-in-the-review">
+            Part 1: sharper (his words in brackets; read his full note for each in the review)
+          </h3>
+          <ul>
+            <li>
+              Food: birthday-cake (&quot;sharper overall: the icing on the sides, the plate,
+              everything&quot;), popcorn (the bucket &quot;a little sharper&quot;), pancakes (the
+              plate and the whole toy), croissant (&quot;especially the plate&quot;), coffee
+              (&quot;sharper, less grainy&quot;; its sound is perfect), orange, kiwi, pizza (the
+              cheese stretch &quot;slightly more subtle&quot;, less grainy).
+            </li>
+            <li>Toys: teddy-bear (&quot;really grainy&quot;), yo-yo.</li>
+            <li>Nature: coral (&quot;a tiny bit sharper&quot;).</li>
+            <li>
+              Math: menger-sponge (&quot;grainy&quot;), gyroid, platonic, surface-plotter
+              (&quot;especially the square and the controls under it, which are blurry&quot;),
+              lorenz (&quot;maybe a little sharper; fine as is&quot;: lowest priority).
+            </li>
+            <li>
+              AI: cnn (&quot;some parts are still not sharp enough&quot;), gaussian-splatting (the
+              Sorting view: &quot;the sorter above the splats is grainy&quot;).
+            </li>
+            <li>
+              Photo album: the leather, linen and scrapbook covers look like real textured material
+              (now blurry and grainy).
+            </li>
+          </ul>
+          <h3 id="part-2-closed-bases-the-audit">Part 2: closed bases (the audit)</h3>
+          <p>
+            Turn every toy over (all shelves, labs included) and close hollow or see-through
+            undersides, so a toy looks solid from below the way the real object would. His list:
+            cactus, strawberry, raspberry, blackberry, blueberry (slightly), tomatoes, basket, real
+            alarm clock (maybe), boombox (maybe), carrot cake (slightly), real tin can, quartz
+            cluster, bonsai, coral (from below you see stones that aren't there from above),
+            succulent (the pot has no bottom), pebbles (rocks), kelp, snow globe, tornado,
+            waterfall, birthday cake (slightly), popcorn tub. Keep as they are: lava lamp, volcano
+            and geyser. Bricks: hollow undersides are right for real bricks, but check they read as
+            bricks. Then check every other toy the same way and fix what you find; write the list
+            (toy, what was open, what you did, or &quot;fine&quot;) in docs/audits/bases-2026-10.md.
+            A scan's underside may need a kit-built base or a cap with hard edges rather than
+            smeared splats (effect quality rules: never bend or smear a scan).
+          </p>
+          <h3 id="who-else-is-in-these-toys">Who else is in these toys</h3>
+          <ul>
+            <li>
+              Physics (#176, #184) is building hands-on play for jelly, amoeba, pebbles (rocks),
+              bricks, macarons, cherries, spring toy, sushi and the bow. The owner also asked for
+              jelly, bricks and sushi to be sharper: do those three (and the pebbles' base) last,
+              after checking with the Operator that Physics part 2 (#184) has merged or that your
+              change only touches the look, so the two don't collide.
+            </li>
+            <li>
+              Fix7 part 2 (#179) is fixing the pancakes' syrup, burger, taco, apple, banana, candy
+              cane, hoodie and snowman. For the pancakes, change only the plate and the look; if you
+              need the same lines, say so.
+            </li>
+            <li>
+              Sharpness A (#172) owns quartz-cluster and tornado: do their bases only after #172
+              merges (merge main first), or leave them in the audit list for the Operator.
+            </li>
+            <li>
+              Fix7 part 1 (#174) changed the gaussian-splatting one-splat view; your change is the
+              Sorting view's sorter only.
+            </li>
+            <li>Sound C owns every sound: don't touch sound entries.</li>
+            <li>Live input r3 sharpens the Room echo meter's screen text; leave that toy alone.</li>
+          </ul>
+          <p>
+            Work in this order: food, toys and nature, math, AI and the photo album, then the bases
+            audit. For each sharpened toy, a before/after still pair and a short clip of its tap;
+            for bases, a before/after still from below. All at 390×844 in your lane record
+            &quot;SharpB&quot; on Effect review page 2 (&quot;built by Opus 5.5&quot;). Batch cards
+            by shelf so the owner can mark a shelf at once. These are public toys: the PR merges
+            after his good marks, so post cards as each shelf is done rather than all at the end.
+            Check <code>node tools/check-packs.mjs &lt;pack&gt;</code> stays within budget and frame
+            time on every pack you change.
+          </p>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>
+              The looks and bases of the toys above in their pack files (recipes' shapes, materials,
+              splat placement and sizes), their thumbnails, docs/audits/bases-2026-10.md,
+              tests/shb.spec.mjs, your <code>shb-*</code> screenshots and docs/handoff/SharpB.md.
+            </li>
+          </ul>
+          <p>
+            Lanes Sound C, Fix7, Physics, UI r5, Sharpness A, Fluids, Video 3D, Live input, Science
+            and the Integrators run at the same time; leave their files alone. The laptop is locked.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <ul>
+            <li>
+              October 2, 2026: draft PR #185. Sharper (only the look; shape, tap, sound and budget
+              kept, every changed pack within budget in <code>node tools/check-packs.mjs</code>):
+              the birthday cake, popcorn bucket, pancakes (plate and stack only), croissant, coffee,
+              orange, kiwi, pizza (and its cheese strings subtler), teddy bear, yo-yo, coral, Menger
+              sponge, gyroid, Platonic solids (a small change), surface plotter, Lorenz attractor,
+              CNN (all three views), the gaussian-splatting Sorting view's camera, and the photo
+              album's three covers.
+            </li>
+            <li>
+              Bases audit done: every toy (341, labs included) rendered from below;
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/audits/bases-2026-10.md"
+                target="_blank"
+                rel="noopener"
+                >docs/audits/bases-2026-10.md</a
+              >
+              lists each with what was open and what was done. Closed: the cactus's stand, the
+              scanned strawberry, raspberry, blackberry and blueberry (a solid core just inside),
+              the tomatoes' plate, the basket's floor, the tin can's lid (rig add-ons in
+              <code>src/rigs.js</code>), the coral, succulent, bonsai, kelp, waterfall, snow globe,
+              popcorn bucket and cake stand from his list, and, found in the audit, the cupcake's
+              liner, the robot's soles, Newton's cradle's base, the toy piano's plinth and gradient
+              descent's block.
+            </li>
+            <li>
+              Cards on Effect review page 2, lane SharpB, by shelf: Food (<code
+                >shb-&lt;toy&gt;</code
+              >
+              before/after and <code>shb-&lt;toy&gt;-tap</code>, 8 toys), Toys and nature (teddy
+              bear, yo-yo, coral), Math (Menger sponge, gyroid, Platonic solids, surface plotter,
+              Lorenz), AI and the photo album (CNN, gaussian-splatting Sorting, the album's leather,
+              leather close up, linen and scrapbook, and its tap) and Closed bases
+              (<code>shb-base-&lt;toy&gt;</code>, 20 toys, from below).
+            </li>
+            <li>
+              October 2, 2026, evening: the owner's marks came in: 51 good, 13 fix, with no notes.
+              Redone as &quot;-r2&quot; cards: the basket's floor (no spokes), the tin can's lid (no
+              ripples), the tomatoes' plate (fewer stains), the waterfall's underside, the surface
+              plotter (and its tap) and the Lorenz attractor (and its tap). Not redone yet, waiting
+              for a note: gradient descent's base and the pizza's tap (see &quot;For the
+              Operator&quot;).
+            </li>
+            <li>
+              October 3, 2026: the owner's notes on the open cards (via the Operator), fixed as
+              &quot;-r3&quot; cards (and &quot;-r2&quot; where none existed): the basket's,
+              tomatoes' and waterfall's undersides (still see-through: the floors are now two offset
+              layers, the tomatoes' needles under the plate are hidden, and the waterfall's ground
+              and boulders are even and solid), the tin can's lid (it was off center; now centered
+              on the can's rim), gradient descent (the base taken back out, by the owner's note),
+              the pizza's tap (the slice drew under the board: it is now sorted where it stands as
+              it moves), the Lorenz attractor (r2's opaque even splats broke the strands into
+              dashes; now small soft splats drawn out along the path) and the surface plotter (its
+              mesh lines are now thin tubes; the slider's track and knob are crisper). New: the
+              graph and surface plotters' a slider can be dragged on the toy, and the panel's slider
+              follows. That needs the small engine change in #200 (&quot;Engine: a toy's drag can
+              set one of its sliders&quot;, branch <code>claude/lane-sharp-b-engine</code>, merged
+              into this branch), which goes in first.
+            </li>
+            <li>
+              October 3, 2026, 04:14 UTC: the owner marked 12 of the 13 new cards good. The one fix
+              (the surface plotter's knob drew under the slider's track while dragged) is fixed by
+              sorting the knob where it stands as it moves (<code>sortKnob</code> in
+              <code>src/packs/maths.js</code>), card <code>shb-surface-plotter-drag-r2</code>.
+            </li>
+            <li>
+              October 3, 2026, 07:13 UTC: the knob card came back good. The Operator's combined run
+              found <code>tests/unit.spec.mjs:213</code> failing on #185 alone: the tomatoes' rig
+              had 13 regions (cap 12). The red-stain band and the needles band are now one region
+              (anything but the plate's white, inside the dark rim); card
+              <code>shb-base-tomatoes-r4</code> shows the small change from below.
+            </li>
+            <li>
+              On hold (the owner's call of October 3, 2026: no new Sharpness rounds until the
+              Fidelity lane's Stage 1 reports): jelly, bricks and sushi (sharper) and the pebbles'
+              base (they waited on Physics #184), and the quartz cluster's and the tornado's bases
+              (they waited on Sharpness A #172). This lane only finishes the owner's marks on its
+              current cards, #185 and #200.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <p>What made these toys grainy, beyond PACKS.md 7c and SharpA's notes:</p>
+              <ul>
+                <li>
+                  <strong>Random shapes left in.</strong> <code>k.box</code>, <code>k.cone</code>,
+                  <code>k.torus</code>, <code>k.ellipsoid</code>, <code>k.sphere</code> and
+                  <code>k.disc</code> place at random; swapping in the even shapes
+                  (<code>evenBox</code>, <code>evenCylinder</code>, <code>evenTorus</code>,
+                  <code>evenEllipsoid</code>, <code>evenDisc</code>, <code>evenTube</code>) with
+                  <code>even: true, opacity: 1</code> fixed most of them.
+                </li>
+                <li>
+                  <strong>A light core under a darker skin</strong> (the cake's cream layers, the
+                  coffee cup's dark core) shows as flecks: color the core near the skin like the
+                  skin, shaded like it.
+                </li>
+                <li>
+                  <strong>Per-splat random color</strong> (<code>c.rand()</code> in a color, the
+                  teddy bear's fur) is grain: use smooth noise a few splats across.
+                </li>
+                <li>
+                  <strong>Custom shapes</strong> can join even placement by declaring
+                  <code>dims</code> (the gyroid takes four even numbers for its start point and
+                  side; <code>polyTube</code> two) or a <code>sampleEven(a, b)</code> (the Menger
+                  sponge's faces).
+                </li>
+                <li>
+                  <strong
+                    >Smaller splats at edges help only where the surface is dense enough</strong
+                  >: on a thin rim (the cake plate, the surface plotter's plate) they open gaps; use
+                  them on interior lines (drips, stripes, the Menger sponge's hole edges, which
+                  <code>cellFaces</code> now marks as real edges).
+                </li>
+                <li>
+                  <strong>Soft value noise reads as blur</strong> (the album's leather): a cell
+                  pattern (Worley noise) with crisp creases reads as real pebbled grain.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>One layer of splats is never fully opaque</strong>: a floor seen from below
+              lets the toy above show through between its splats. Two layers a hair apart, the upper
+              one turned so its splats fall in the lower one's gaps, close it (<code
+                >underDisc</code
+              >
+              in <code>src/rigs.js</code>).
+            </li>
+            <li>
+              <strong>Splats sort where they were built</strong>: a part moved far (the pizza's
+              slice, lifted toward the viewer) draws under what it passes; set
+              <code>out.resortPose</code> a few times while it moves.
+            </li>
+            <li>
+              Closing a scan's base: a rig <code>addon</code> (kit-built, world coordinates, follows
+              the body) with hard edges: a fruit core just inside the skin, hidden while a tap
+              breaks or peels the fruit, or a kit-built underside. Placed with
+              <code>tools/rig-map.mjs --views=front,bottom</code>.
+            </li>
+            <li>
+              Tools (scratchpad, not committed): <code>shot.mjs</code> (phone stills at 390×844, 3x,
+              mid tier, from the home view, below, the side or close), <code>clip.mjs</code> (a tap
+              as an MP4 at 390×844, 2x), <code>speck.py</code> (a speck measure and the before/after
+              pair joiner).
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              The strawberry scan has two small dark spots underneath that are the capture's own
+              splats; the core can't cover them without poking through the skin elsewhere.
+            </li>
+            <li>
+              From the side, a few faint pale needles still hang just under the tomatoes' plate (the
+              capture's own, centered in the plate's glaze, so hiding them would open the plate).
+            </li>
+            <li>
+              The gyroid shows a few specks at the deepest breath, where the surface stretches thin
+              (as before).
+            </li>
+            <li>
+              The Platonic solids changed little: the faint rings in the faces come from the even
+              fan layout, and nudging it made the rims speckle, so that was left out.
+            </li>
+            <li>The pancakes' syrup is lane Fix7's (unchanged here).</li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              The engine PR #200 (a recipe's <code>drag</code> may return
+              <code>{ control, value }</code> to set a slider; the panel's slider follows) must
+              merge before #185. Its test is <code>tests/shb-engine.spec.mjs</code>. Without it the
+              plotters' sliders simply don't drag (nothing breaks).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              Jelly, bricks and sushi (and the pebbles' base) wait for Physics part 2 (#184), still
+              open.
+            </li>
+            <li>
+              Shared helpers changed additively (default off): <code>board()</code> in computing.js
+              (<code>even</code>), <code>grassMound()</code> in nature.js (<code>even</code>),
+              <code>buildSideBound()</code> in pictures.js (<code>coverShare</code>),
+              <code>polyTube</code> and <code>cellFaces</code> in
+              <code>src/packs/maths.js</code> (even placement, used only when a toy asks for
+              <code>even: true</code>). The old random <code>fuzz()</code> in playthings.js gave way
+              to <code>evenFuzz()</code> (only the teddy bear used it).
+            </li>
+            <li>
+              <code>src/rigs.js</code> now imports the even shapes from
+              <code>src/packs/even.js</code> for the bases' add-ons.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/SharpB.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/SharpB.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
