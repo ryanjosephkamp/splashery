@@ -519,6 +519,9 @@ time (the Powers of ten zoom), can load each one only when it comes near:
   sideways drag does nothing) to the toy instead of the camera: `info.zoom = { log, n, resets }`
   (the sum of the gestures' natural logs, above 0 zooming out; how many; how many times Reset view
   was pressed).
+- `frameReaches: true` frames the camera on the recipe's `k.reach` points alone, not on its own
+  splats: for a toy whose own splats are only a backdrop far behind its scenes (built with
+  `fit: false`).
 - A legend item (`out.legend`, lane Anatomy) may carry `ruler: { size }`: a scale bar that long in
   recipe units at the toy's center as the camera sees it (at most 140 px), its text under it.
 
