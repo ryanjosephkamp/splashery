@@ -788,7 +788,11 @@
             </li>
             <li>
               <code>verdicts/&lt;card id&gt;</code>: the owner's marks,
-              <code>{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at }</code>.
+              <code
+                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at, sharper
+                }</code
+              >
+              (<code>sharper: true</code> marks a &quot;Just sharper&quot; fix on page 2, below).
               Only the owner writes these.
             </li>
           </ul>
@@ -1211,7 +1215,15 @@
               PR. Since October 3, 2026 a &quot;fix&quot; mark on Effect review page 2 is stored
               only when the owner sends it with its note, so every &quot;fix&quot; a lane reads
               carries his note; act on the note, and if a &quot;fix&quot; ever comes without one,
-              ask the Operator instead of guessing.
+              ask the Operator instead of guessing. Since October 7, 2026 page 2 also has a
+              <strong>&quot;Just sharper&quot;</strong> button: one tap stores a &quot;fix&quot;
+              with <code>sharper: true</code> and the note &quot;Everything else looks right. Just
+              make it sharper and less grainy (finer, denser splats where it shows; no blur, no
+              speckle).&quot; Read it as exactly that: keep the effect, its motion, colors and
+              timing as they are, and only sharpen it (finer, denser splats where it shows, solid
+              opaque materials, no blur or speckle, still smooth on a phone). Post the sharper clip
+              as the card's replacement. If something else also needs work, the owner uses
+              &quot;Needs work&quot; with his own note instead.
             </li>
           </ol>
           <h2 id="upkeep-after-a-merge-the-operator">Upkeep after a merge (the Operator)</h2>
