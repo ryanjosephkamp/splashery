@@ -1,0 +1,2648 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Writing toy recipes · Splashery</title>
+    <meta
+      name="description"
+      content="How a Splashery toy's recipe says what it is built from, which parts move and how: the reference for writing your own."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/learn/recipes/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Writing toy recipes · Splashery" />
+    <meta
+      property="og:description"
+      content="How a Splashery toy's recipe says what it is built from, which parts move and how: the reference for writing your own."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/recipes/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../assets/outline.css" />
+    <script type="module" src="../../assets/site.js"></script>
+    <script type="module" src="../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Writing toy recipes</h1>
+        <p class="lead">
+          How a toy's recipe says what it is built from, which parts move, and how.
+        </p>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#1-the-two-places-a-toy-lives">1. The two places a toy lives</a></li>
+              <li><a href="#2-coordinates-and-size">2. Coordinates and size</a></li>
+              <li><a href="#3-shapes">3. Shapes</a></li>
+              <li><a href="#4-adding-a-shape">4. Adding a shape</a></li>
+              <li>
+                <a href="#5-parts-controls-actions-and-options"
+                  >5. Parts, controls, actions and options</a
+                >
+              </li>
+              <li><a href="#5b-picture-sheets">5b. Picture sheets</a></li>
+              <li><a href="#5c-the-tilt-lock">5c. The tilt lock</a></li>
+              <li><a href="#5d-songs-and-levers">5d. Songs and levers</a></li>
+              <li><a href="#5e-fluids">5e. Fluids</a></li>
+              <li><a href="#5f-hands-on-bodies-and-fields">5f. Hands-on: bodies and fields</a></li>
+              <li><a href="#5g-hands-on-joints">5g. Hands-on: joints</a></li>
+              <li><a href="#5h-hands-on-soft-parts">5h. Hands-on: soft parts</a></li>
+              <li><a href="#6-behaviours">6. Behaviours</a></li>
+              <li><a href="#7-house-rules">7. House rules</a></li>
+              <li><a href="#7b-effect-quality">7b. Effect quality</a></li>
+              <li><a href="#7c-sharp-kit-toys">7c. Sharp kit toys</a></li>
+              <li>
+                <a href="#7d-smooth-bodies-and-placed-recipes"
+                  >7d. Smooth bodies and placed recipes</a
+                >
+              </li>
+              <li><a href="#7e-sound-preferences">7e. Sound preferences</a></li>
+              <li><a href="#8-checking-your-work">8. Checking your work</a></li>
+              <li><a href="#9-models-to-splats">9. Models to splats</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Writing toy recipes">
+        <div class="prose">
+          <p>
+            Most Splashery toys are <strong>recipes</strong>: small functions in
+            <code>src/packs/&lt;pack&gt;.js</code> that describe a toy with the toy kit
+            (<code>src/kit.js</code>). The browser builds the toy from the recipe when someone picks
+            it, so a toy costs a few kilobytes of code instead of megabytes of splats, and every
+            choice comes from a seed, so it rebuilds exactly the same everywhere.
+          </p>
+          <h2 id="1-the-two-places-a-toy-lives">1. The two places a toy lives</h2>
+          <p>
+            <strong>The catalogue</strong> (<code>src/toys.js</code>, the <code>TOYS</code> array)
+            holds metadata only. Add entries under your pack's
+            <code>// ---- Pack: &lt;name&gt; ----</code> marker:
+          </p>
+          <pre><code>{
+  id: &quot;comet&quot;,                 // unique, lower-case words joined by hyphens
+  label: &quot;Comet&quot;,              // shelf name, short
+  category: &quot;space&quot;,           // one of CATEGORIES in src/toys.js
+  kind: &quot;kit&quot;,
+  pack: &quot;space&quot;,               // loads src/packs/space.js
+  tags: &quot;ice tail dust coma&quot;,  // extra search words
+  camera: { yaw: 0.5, pitch: 0.3, roll: 0, distance: 5 }, // optional; distance is in toy radii
+},</code></pre>
+          <p>
+            <strong>The recipe</strong> goes in <code>src/packs/&lt;pack&gt;.js</code>, which
+            exports <code>RECIPES</code> keyed by id:
+          </p>
+          <pre><code>import { mix, shade, smoothstep, spline } from &quot;../kit.js&quot;;
+
+export const RECIPES = {
+  comet: {
+    alive: true,                 // has behaviours that move by themselves
+    options: [...],              // rebuild the toy (style, colour); optional
+    controls: [...],             // change it live (sliders, switches, pulses); optional
+    action: { key, label, sound }, // what a tap on the toy does; optional
+    drive(t, c, out, info) {},   // per frame: parts, amounts; optional
+    build(k, o) {},              // required: describe the toy with the kit
+  },
+};</code></pre>
+          <h2 id="2-coordinates-and-size">2. Coordinates and size</h2>
+          <ul>
+            <li>
+              <strong>+Y is up.</strong> The default camera looks from the front-right, slightly
+              above: +Z faces the viewer, +X is to the right.
+            </li>
+            <li>
+              Model in any units around the origin. After <code>build</code>, the kit centres the
+              toy and scales it to fit a sphere of radius 0.95, and moves part pivots with it. Keep
+              proportions, not absolute sizes.
+            </li>
+            <li>
+              Things that travel outside the toy's resting shape (rising flames, an opened lid, an
+              orbit) should be declared with <code>k.reach([x, y, z])</code> so the camera frames
+              them.
+            </li>
+          </ul>
+          <h2 id="3-shapes">3. Shapes</h2>
+          <p>Each call returns a shape; nothing is drawn until you <code>k.add</code> it.</p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Call</th>
+                  <th scope="col">Shape</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>k.sphere(r)</code></th>
+                  <td>
+                    Sphere. Samples carry <code>u</code> (longitude 0..1) and <code>v</code> (0 at
+                    the top, 1 at the bottom).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.ellipsoid(a, b, c)</code></th>
+                  <td>Ellipsoid with half-axes along X, Y, Z.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.box(sx, sy, sz)</code></th>
+                  <td>
+                    Box with full sizes. Samples carry <code>face</code> (0..5 for +X, −X, +Y, −Y,
+                    +Z, −Z) and face <code>u</code>, <code>v</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.roundedBox(sx, sy, sz, power = 8)</code></th>
+                  <td>Rounded box (a superellipsoid: 2 is an ellipsoid, higher is boxier).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.cylinder(r, h, { caps })</code></th>
+                  <td>
+                    Cylinder along Y, centred. <code>caps</code>: <code>true</code>,
+                    <code>false</code>, <code>&quot;top&quot;</code> or
+                    <code>&quot;bottom&quot;</code>. Samples carry <code>side</code> or
+                    <code>cap</code> and <code>radial</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.cone(r0, r1, h, { caps })</code></th>
+                  <td>Cone frustum from radius r0 at the bottom to r1 at the top.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.torus(R, r)</code></th>
+                  <td>Torus in the XZ plane.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.disc(r1, r0 = 0)</code></th>
+                  <td>Flat disc (or ring) in the XZ plane, both sides.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.lathe([[r, y], ...], { grid })</code></th>
+                  <td>
+                    Surface of revolution around Y through a smooth profile (bottom to top). Vases,
+                    bottles, fruit, towers.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.tube(curve, radius, { closed, caps })</code></th>
+                  <td>
+                    Tube along <code>curve(t) -&gt; [x, y, z]</code>, t in 0..1;
+                    <code>radius</code> is a number or <code>(t) =&gt; r</code>. Stems, arms, knots.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>k.param((u, v) =&gt; [x, y, z], { grid, flip, normal, thick })</code>
+                  </th>
+                  <td>
+                    Any parametric surface on u, v in 0..1, sampled evenly by area.
+                    <code>flip</code> reverses normals.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>k.radial((dir) =&gt; r, { grid })</code></th>
+                  <td>
+                    A star-shaped surface: distance from the origin along each direction. With
+                    <code>implicitRadius(f)</code> it wraps an implicit surface
+                    <code>f(p) &lt; 0</code> inside.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Helpers exported by <code>src/kit.js</code>:
+            <code>spline(points, { closed })</code> (smooth curve for tubes),
+            <code>mix(a, b, t)</code>, <code>shade(c, f)</code>, <code>ramp(stops, t)</code>,
+            <code>rgb(c)</code>, <code>clamp</code>, <code>smoothstep</code>,
+            <code>fibonacciSphere(n)</code>, <code>quatEuler(x, y, z)</code>,
+            <code>quatAxisAngle(axis, angle)</code>, <code>quatFromTo(a, b)</code>,
+            <code>quatRotate(q, v)</code>, <code>implicitRadius(f, far)</code>, and
+            <code>vec</code> (add, sub, mul, dot, len, cross, unit).
+          </p>
+          <p>Shape notes from the lanes (2026-09-26):</p>
+          <ul>
+            <li>
+              <code>k.roundedBox</code> takes full sizes, like <code>k.box</code>. With a high power
+              (7 or more) it leaves a thin band with no splats across its middle, which shows as a
+              dark stripe (E5 moved the sushi board and the baking tray to <code>k.box</code>).
+            </li>
+            <li>
+              Even placement on a sphere leaves a small swirl at each pole. On a sphere that turns,
+              cover the poles with small caps (<code>poleCap()</code> in
+              <code>src/packs/balls.js</code>).
+            </li>
+            <li>
+              A shape added with a ball's options inherits its <code>interior</code>. Give small
+              covering pieces (pole caps) <code>interior: 0</code>, or their inside splats show as
+              dots when the part turns.
+            </li>
+          </ul>
+          <h2 id="4-adding-a-shape">4. Adding a shape</h2>
+          <details class="long-text">
+            <summary>Show the full text (19 lines)</summary>
+            <pre><code>k.add(shape, {
+  pos: [x, y, z], rot: [degX, degY, degZ], // or quat: [x, y, z, w]
+  scale: 1 | [sx, sy, sz],
+  color: &quot;#hex&quot; | [r, g, b] | (c) =&gt; colour,
+  weight: 1,        // density relative to the rest (2 = twice as many splats per area)
+  share: 0.1,       // or: exactly this fraction of the whole budget
+  size: 1,          // splat size multiplier
+  flat: 0.25,       // splat thickness (0 flat discs .. 1 round blobs)
+  stretch: 3,       // for tubes: splats elongated along the tube
+  opacity: 0.95,
+  jitter: 0.04,     // colour noise (keep it low, 0.01..0.02, on smooth materials)
+  even: true,       // place surface splats evenly (spheres, boxes, cylinders, cones, lathes, param)
+  interior: 0.12,   // share of this shape's splats that fill its inside (for Slice)
+  core: &quot;#hex&quot; | (c) =&gt; colour,   // colour of the inside
+  part: index,      // from k.part(...), or (c) =&gt; index to split a shape between parts
+  kind: &quot;flame&quot;, params: [a, b] | (c) =&gt; [a, b],  // a behaviour (section 6)
+  pattern: false,   // keep this shape's own colours under flags and patterns
+  fit: false,       // leave it out of the fit (see &quot;Hidden pieces count in the fit&quot;)
+});</code></pre>
+          </details>
+          <p>
+            The splat budget is shared between shapes by surface area times <code>weight</code>, so
+            the toy has an even density. Use <code>share</code> for small details that need a fixed
+            number of splats, and <code>weight</code> &gt; 1 for small shapes that would otherwise
+            look sparse (eyes, stitches, gems).
+          </p>
+          <p>
+            Splats are unlit, so a material reads from colour alone. Random placement leaves thin
+            spots where the far side of the toy shows through as dark speckle;
+            <code>even: true</code> closes them (it made the sports balls read as leather and rubber
+            instead of grain). For smooth materials also bake a little light into the colour (a key
+            light from above, and a sheen for gloss) instead of adding noise: see
+            <code>lit()</code> and <code>grip()</code> in <code>src/packs/balls.js</code>. Parts
+            that are hidden most of the time can have a low <code>weight</code> so the faces people
+            see get the splats (see the storybook's pages).
+          </p>
+          <p><strong>The colour function</strong> gets <code>c</code> with:</p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Field</th>
+                  <th scope="col">Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>c.p</code>, <code>c.n</code></th>
+                  <td>
+                    Position and normal after <code>pos</code>/<code>rot</code>/<code>scale</code>
+                    (in recipe coordinates).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>c.lp</code>, <code>c.ln</code></th>
+                  <td>Position and normal in the shape's own coordinates.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>c.u</code>, <code>c.v</code></th>
+                  <td>
+                    Surface coordinates from the shape (see the table above); <code>c.t</code> along
+                    tubes.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>c.s</code></th>
+                  <td>
+                    The raw sample (<code>face</code>, <code>side</code>, <code>cap</code>,
+                    <code>radial</code>, <code>tangent</code>...).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>c.rand()</code></th>
+                  <td>Seeded random number (use this, never <code>Math.random</code>).</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>c.noise(x, y, z)</code>, <code>c.fbm(x, y, z, octaves)</code>
+                  </th>
+                  <td>Seeded smooth noise, roughly −1..1.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>c.inside</code></th>
+                  <td>True for interior splats.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            It returns a colour, or <code>null</code> to leave a hole (openings, cut-outs, a missing
+            box face), or <code>{ c: colour, keep: true, size: 0.8 }</code> to keep one splat out of
+            the pattern layer (seams, stitches, eyes, labels) or resize it.
+          </p>
+          <p>
+            <strong>Clouds</strong> are for free-form splats (stars, sparks, fur, crumbs, galaxies):
+          </p>
+          <pre><code>k.cloud({ share: 0.2, size: 1 }, (rand, i, n) =&gt; ({
+  p: [x, y, z],
+  color: &quot;#hex&quot;,
+  size: 1,
+  opacity: 0.9,
+  n: [nx, ny, nz], // flat disc facing n; or dir: [..] and stretch: 3 for a streak; or neither for round
+  kind: &quot;twinkle&quot;,
+  params: [0.5, rand() * 6],
+  part: 0,
+  pattern: false,
+}));</code></pre>
+          <p>
+            A cloud splat's <code>size</code> multiplies the kit's base size, which the toy's
+            surfaces set. A recipe with only clouds has no surface, so its base size is 0.01: there
+            a <code>size</code> of 1 is 0.01 recipe units, and a splat reads about 2.5 sizes across
+            on screen (lane Manual).
+          </p>
+          <p>
+            A sample may instead give a trained splat's own shape (lane Video to 3D):
+            <code>scales: [sx, sy, sz]</code>, its sizes on its three axes in recipe units (not
+            multiplied by the base size or <code>size</code>), and <code>quat: [x, y, z, w]</code>,
+            its rotation. The Video to 3D toy uses it for the splats it trains from a video.
+          </p>
+          <p>
+            <code>k.rand()</code> gives recipe-level random numbers (where to put the stones, how
+            many petals).
+          </p>
+          <h2 id="5-parts-controls-actions-and-options">5. Parts, controls, actions and options</h2>
+          <p>
+            <strong>Parts</strong> are rigid groups:
+            <code
+              >const lid = k.part(&quot;lid&quot;, { pivot: [0, 0.3, -0.4], axis: [1, 0, 0] })</code
+            >, then <code>part: lid</code> on the shapes. At most 15 parts. Each frame,
+            <code>drive(t, c, out, info)</code> sets them:
+          </p>
+          <pre><code>drive(t, c, out, info) {
+  out.parts.lid = { angle: -1.9 * c.open };          // about the part's axis
+  out.parts.rotor = { angle: t * 12 };               // t is the toy's own clock (seconds, times Speed)
+  out.parts.arrow = { offset: [0, 0, 2 * c.fire], visible: c.fire &lt; 1 ? 1 : 0 };
+  out.parts.wing = { quat: quatAxisAngle([0, 0, 1], Math.sin(t * 8) * 0.6) };
+  out.amount = 0.5 + c.size;   // scales beat, breathe, flame, rise, twinkle, sway and wave
+  out.energy = c.melt;         // drives &quot;melt&quot; (0..1)
+  out.grow = c.bloom;          // drives &quot;grow&quot; (0..1)
+  out.glow = [r, g, b, strength]; // colour of the &quot;pulse&quot; glow
+  out.body = { offset: [0, 0.1, 0], quat, squash };  // move the whole toy (in toy radii)
+}</code></pre>
+          <p>
+            <code>t</code> only advances while the toy is alive (motion on); controls ease even when
+            it is not.
+          </p>
+          <p><strong>Controls</strong> (<code>c</code> in <code>drive</code>), values 0..1:</p>
+          <ul>
+            <li>
+              <code
+                >{ key: &quot;size&quot;, label: &quot;Fire size&quot;, type: &quot;slider&quot;,
+                default: 0.5 }</code
+              >
+            </li>
+            <li>
+              <code
+                >{ key: &quot;open&quot;, label: &quot;Open&quot;, type: &quot;toggle&quot;,
+                default: 0, ease: 1.1 }</code
+              >: eases between 0 and 1 over <code>ease</code> seconds.
+            </li>
+            <li>
+              <code
+                >{ key: &quot;stoke&quot;, label: &quot;Stoke&quot;, type: &quot;pulse&quot;, ease:
+                1.5 }</code
+              >: jumps to 1 and falls back to 0.
+            </li>
+          </ul>
+          <p>
+            <strong>Action</strong>:
+            <code>action: { key: &quot;open&quot;, label: &quot;Open or close&quot; }</code>. A tap
+            on the toy (and the button in the Toy tab) toggles a toggle or fires a pulse. Toys
+            without an action hop when tapped.
+          </p>
+          <p>
+            A tap also knows where it landed. <code>action.at(point, c)</code> gets the tapped point
+            in the recipe's own coordinates (never for the Play button) and may return another
+            control to fire, <code>{ key, pick }</code> to fire a control and pick an item, or
+            nothing for the usual action. <code>drive</code> sees the last tap as
+            <code>info.tap = { point, key, pick, time, n }</code>. The xylophone uses it: a tap on
+            bar <code>i</code> returns <code>{ key: &quot;strike&quot;, pick: i }</code> and its
+            drive moves the mallet to that bar. <code>at</code> may also return
+            <code>{ options, key, pick }</code> to switch the toy (lane Chemistry's engine PR): the
+            tap's sound plays, the toy is rebuilt with those options (its taps' controls back at
+            rest, as after a pick in the Toy tab) and then <code>key</code> fires on the new toy.
+            The periodic table's tiles pick the element this way.
+          </p>
+          <p>
+            <strong>Build data</strong>: <code>build(k, o)</code> may leave data in
+            <code>k.data</code> for <code>drive</code>, which sees it as <code>info.data</code> (the
+            molecule stores which atoms and bonds it built, so its vibration fits the molecule
+            chosen).
+          </p>
+          <p>
+            <strong>Playing its own audio</strong>: <code>info.sound</code> is the site's
+            <code>Sound</code> (<code>src/sound.js</code>). A toy that plays audio of its own (the
+            song landscape) plays only while <code>info.sound.enabled</code> is true (the speaker
+            button; embeds keep it off), through <code>info.sound.audio()</code> (the
+            <code>AudioContext</code>) and <code>info.sound.master</code> (the site's limiter), and
+            reads its playback time from the context's <code>currentTime</code>.
+          </p>
+          <p>
+            <strong>Labs only: kernels and GPU fields</strong> (lane Lab, #85 and #83):
+            <code>kernel: &quot;sharp&quot;</code> draws the toy with a sharper splat falloff while
+            labs is on (also <code>?kernel=sharp</code>; docs/lab/KERNELS.md has the measurements).
+            <code>gpuField(options, fit)</code> lets a recipe bring its own GPU program, returning
+            <code>{ glsl, wgsl }</code> work-buffer hooks, so hundreds of thousands of splats can
+            move every frame; <code>src/packs/lab.js</code> is the example (docs/lab/FIELDS.md).
+          </p>
+          <p>
+            <strong>Game pieces and loose pieces</strong>: a splat with
+            <code>kind: &quot;token&quot;</code> and <code>params: [i, 0]</code> belongs to token
+            <code>i</code> (up to 48), which
+            <code>out.tokens[i] = { base, offset, quat, visible }</code> moves and turns. A
+            <code>params</code> function can pick the token per splat, so one shape can break into
+            many pieces (the asteroid's 18 cells, the meteor's fragments, the molecule's atoms).
+          </p>
+          <p>
+            <strong>Sound</strong>: each shelf toy's tap sound is a spec in
+            <code>src/toy-sounds.js</code> (not in the recipe), built from the voice library in
+            <code>src/voices.js</code> (its header lists the parameters):
+          </p>
+          <pre><code>&quot;wooden-elephant&quot;: [
+  { voice: &quot;wood&quot;, f: 520, decay: 1.2 },               // a knock
+  { voice: &quot;brass&quot;, at: 0.15, f: &quot;A4&quot;, decay: 1.8 },   // then a toy trumpet
+],
+lamp: { on: { voice: &quot;switch&quot;, f: 3200 }, off: { voice: &quot;switch&quot;, f: 2500 } }, // a toggle
+xylophone: { voice: &quot;bar&quot;, notes: &quot;C5 D5 E5 F5 G5 A5 B5 C6&quot;, step: 0.32, at: 0.3 }, // a tune</code></pre>
+          <p>
+            A tap that picked item <code>i</code> plays only note <code>i</code> of the tune. Every
+            toy needs an entry and no two may be the same (the unit tests check). Old shared names
+            (&quot;chime&quot;, &quot;pop&quot; and so on) still work as specs. Check a new sound
+            with <code>node tools/sound-check.mjs &lt;id&gt; --sheet=out.png</code>. Voice names can
+            mislead: <code>chop</code> is a helicopter rotor, not a knife; E5's knife chops are
+            <code>slap</code> plus <code>crack</code>.
+          </p>
+          <p>
+            <strong>Recorded samples</strong> (since September 30, 2026): where synthesis can't
+            sound real (an animal's call, fire, an explosion, dice, bowling pins), a layer can be
+            the <code>sample</code> voice, a short recording in <code>assets/sounds/</code>:
+          </p>
+          <pre><code>&quot;cat-statue&quot;: { voice: &quot;sample&quot;, file: &quot;cat-statue-meow.mp3&quot;, fallback: { voice: &quot;mew&quot; } },
+dice: { voice: &quot;sample&quot;, file: [&quot;dice-roll-1.mp3&quot;, &quot;dice-roll-2.mp3&quot;], vol: 0.8 }, // one at random
+bat: [
+  { voice: &quot;sample&quot;, file: &quot;baseball-bat.mp3&quot;, pitch: 0.95, from: 0.02, len: 0.6, at: 0.4 },
+  { voice: &quot;thud&quot;, f: 80 },
+],</code></pre>
+          <ul>
+            <li>
+              <code>file</code> is one name or a list (one is picked at random on each play).
+              <code>pitch</code> is the playback rate (and pitch), <code>from</code> starts that far
+              into the file, <code>len</code> cuts it short with a fade,
+              <code>decay</code> multiplies the length; <code>vol</code> and <code>at</code> work as
+              for any voice. A sample takes no <code>f</code>.
+            </li>
+            <li>
+              <code>fallback</code> is a synth spec played instead if the file can't load (or
+              nothing without one).
+            </li>
+            <li>
+              A file is fetched on the first tap that plays it, never on page load or when the toy
+              opens, then decoded once and kept for the session. The app waits up to 0.6 s for a
+              sound's files on its first play, so the sample stays in time with its other layers.
+              The Sound Board carries the files inside the page.
+            </li>
+            <li>
+              The files: <code>assets/sounds/&lt;toy id&gt;-&lt;what&gt;.mp3</code> (or
+              <code>.m4a</code>), mono, trimmed, about 44.1 or 22.05 kHz, usually under 40 KB.
+              Normalize each one to the kit's levels (its loudest 50 ms near 0.25 RMS and its peak
+              near 0.85, so <code>vol: 1</code> sits with the synth voices). CC0 or public domain
+              first, CC BY only when nothing CC0 fits; record each file in
+              <code>tools/assets.json</code> (source page, author, license, date checked),
+              <code>CREDITS.md</code> and <code>src/sound-credits.js</code> (the About tab lists the
+              samples the current toy's sound uses).
+            </li>
+            <li>
+              Offline tools call <code>loadSamples(ctx, spec)</code> from
+              <code>src/voices.js</code> before rendering; <code>tools/sound-check.mjs</code> and
+              <code>tools/sound-lint.mjs</code> do.
+            </li>
+          </ul>
+          <p>
+            <strong>The sound lint</strong>: <code>node tools/sound-lint.mjs</code> renders sounds
+            offline and checks them against section 7e: sharp transients (clicks), a narrow tone
+            held above about 1.4 kHz (a whistle), a rising pitch sweep or a tonal voice gliding up
+            (the &quot;vroom&quot;), wind, wave or hiss louder than the main sound (or loud on its
+            own), tunes and chords from instrument voices on a toy off the music shelf, and the peak
+            and loudness. <code>--toy &lt;id&gt;</code>, <code>--shelf &lt;category&gt;</code>,
+            <code>--changed</code> (toys whose spec differs from <code>origin/main</code>, or
+            <code>--base=&lt;ref&gt;</code>), <code>--all</code>, and
+            <code>--spec '&lt;json&gt;'</code> for a spec not yet in a toy. Each toy gets a line:
+            <code>!</code> is a clear violation (the run exits 1), <code>~</code> a warning worth a
+            listen. The owner's exceptions (7e), the music shelf and toys marked
+            <code>keep</code> in <code>tools/sound-review.json</code> only warn. The thresholds
+            (<code>LINT</code> at the top) were set on September 30, 2026, so that the toys the
+            owner complained about fail and the ones he likes pass; they are a guide, and his ears
+            are the real test.
+          </p>
+          <p>
+            <strong>Flag colours</strong>: <code>patternProjection: &quot;top&quot;</code> makes a
+            toy lay flag colours on from above (a flat toy: the chess board) when a flag is picked;
+            <code>patternAmount: 0.3</code> lays them on gently and
+            <code>patternDetail: 1</code> keeps each splat's own light and dark under them (the
+            chess board's light and dark squares stay easy to tell apart). The app switches to the
+            toy's way when it comes out with a flag on, and back to the usual way for the next toy
+            unless the look was changed. Splats a colour function returns with
+            <code>keep: true</code>, or with <code>pattern: false</code> on their shape, never take
+            a pattern (the chess pieces keep their own ivory and ebony under any flag).
+          </p>
+          <p>
+            <strong>Games</strong>: a recipe's <code>game</code> (the chess set) gets a panel under
+            This toy and a bar under the stage: <code>title()</code>, <code>tags()</code> and
+            <code>setTags(partial)</code> for its details, <code>state()</code> (<code
+              >{ played, n, over }</code
+            >), <code>step(±1)</code> and <code>jump(&quot;start&quot; | &quot;end&quot;)</code> for
+            the buttons, <code>load(text)</code> and <code>reset()</code> for PGN.
+          </p>
+          <p>
+            <strong>Grab</strong>: <code>grab: { radius: 0.55, max: 0.9 }</code> (in toy radii)
+            makes a toy stretchy: with the Orbit tool, a drag that starts on it pulls the grabbed
+            part (up to <code>max</code>) and it springs back when let go.
+          </p>
+          <p>
+            <strong>Keeping still</strong>: <code>turntable: false</code> keeps any kit toy facing
+            the viewer while the turntable is on (the picture toys, and the periodic table, whose
+            tiles would turn away).
+          </p>
+          <p>
+            <strong>Drag</strong>: <code>drag: { at, start, move, end, plane }</code> gives a toy
+            its own touch play (the puzzle cube, Newton's cradle). <code>plane</code> is
+            <code>&quot;view&quot;</code>, a normal, or <code>(point) =&gt; normal</code>; without
+            it, a drag follows the horizontal plane it started on (the laptop). A drag that starts
+            beside the toy still turns the view. <code>tools/drag-clip.mjs</code> renders drags and
+            taps as clips for review.
+          </p>
+          <p>
+            <strong>Focus</strong> (lane Books, page focus): <code>focus(point, time)</code> lets a
+            double-tap look closely at part of the toy (a book's page). The app calls it with the
+            tapped point in recipe units (null off the toy, or when a zoom out lets go); it returns
+            true when it took the double-tap (false: the view resets, as on other toys). A toy with
+            <code>focus</code> waits about 0.3 s before a single tap, to tell it from a double-tap.
+            The drive says what to show in <code>out.view</code>:
+            <code>{ key, center, size }</code> (a rectangle facing the front, in recipe units) or
+            <code>{ key }</code> for the whole toy. Each new key glides the view there (0.7 s on the
+            toy's clock): face-on, centered, the rectangle filling the screen; the whole toy goes
+            back to the toy's home view. Zooming out past a focused view calls
+            <code>focus(null)</code>.
+          </p>
+          <p>
+            <strong>Image-to-3D scans</strong> (lane G): the side the photo can't see is a guess
+            (the pencil's underside came out dark), so pick taps that keep the photographed side
+            toward the camera.
+          </p>
+          <p>
+            <strong>Looks</strong> (engine PR #47): a captured toy in <code>src/toys.js</code> may
+            list <code>looks: [{ id, label, url?, urlWeak? }]</code>; the first is the default and
+            may use the toy's own files. The Toy tab shows them as a Look choice, and only the
+            look's id is saved. Each look is a finished pair of files, checked from several sides
+            before it ships (<code>tools/g-looks.mjs</code> paints them).
+          </p>
+          <p>
+            <strong>Scan rigs</strong> (<code>src/rigs.js</code>): a captured toy can have the same
+            <code>controls</code>, <code>action</code> and <code>drive</code> as a recipe, plus
+            <code>parts</code>, each made of soft ellipsoid regions in world coordinates:
+          </p>
+          <pre><code>&quot;cat-statue&quot;: {
+  parts: [{ name: &quot;head&quot;, pivot: [0.05, 0.35, 0.4], axis: [0, 1, 0],
+            regions: [{ at: [0.06, 0.74, 0.5], r: [0.48, 0.5, 0.4], soft: 0.3 }] }],
+  controls: [{ key: &quot;look&quot;, label: &quot;Look&quot;, type: &quot;pulse&quot;, ease: 2.4 }],
+  action: { key: &quot;look&quot;, label: &quot;Look around&quot; },
+  drive(t, c, out) { out.parts.head = { angle: 0.5 * Math.sin(Math.PI * (1 - c.look)) } },
+},</code></pre>
+          <p>
+            A GPU pass tags each splat with the region it falls in when the toy loads;
+            <code>soft</code> (a fraction of the radius) blends the edge so the part bends into the
+            rest of the toy. Up to 15 parts and 12 regions. Open the app with
+            <code>?rig=show</code> to tint each part (and the colour keys) while placing regions, or
+            render <code>tools/rig-map.mjs &lt;dir&gt; --rig &lt;id&gt;</code> for front, side and
+            top views on a world grid. <code>out.body</code> (squash, offset, rotation) moves the
+            whole scan, for squeezes and hops. Shelf shapes (blob, donut, knot, planet) use rigs
+            too.
+          </p>
+          <p>
+            More that a rig can do (Phase E1; the full reference is at the top of
+            <code>src/rigs.js</code> and <code>src/rig-fx.js</code>):
+          </p>
+          <ul>
+            <li>
+              A region can take only splats of one colour:
+              <code>{ at, r, color: &quot;#d84a34&quot;, tol: 0.4 }</code> (the alarm clock's red
+              second hand).
+            </li>
+            <li>
+              <code>keys: [{ color: &quot;#c9b25a&quot;, tol: 0.2 }]</code> marks up to two sets of
+              splats by colour (optionally only within <code>r</code> of <code>at</code>), or
+              <code>{ long: 0.42 }</code> for long thin splats (the donut's sprinkles).
+            </li>
+            <li>
+              A driven part takes
+              <code>{ tint: &quot;#ffb040&quot;, glow: 0.5, bright: 0.3 }</code> to light up and
+              <code>{ scale: 1.1 }</code> to grow about its pivot.
+            </li>
+            <li>
+              <code>fx</code> lists up to four whole-body effects for things too many or too small
+              for parts: each picks splats (<code>select</code>: all, a key or a part;
+              <code>mask</code>: half-space, strips, sphere or wedge), moves them (push, along,
+              scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colours
+              them (glow, recolour, brighten, sparkle, fade, darken), shaped by a pattern (a growing
+              shell, a band, a stagger per piece, a swirl wipe, a wave). <code>drive()</code> sets
+              <code>out.fx.&lt;name&gt; = { move, color, phase }</code> each frame.
+            </li>
+            <li>
+              <code>addon: { count, build(k) }</code> builds a small kit toy in world coordinates,
+              drawn with the scan and sorted with it (flames, flowers, a flash, a speech bubble, cut
+              faces). Its parts move through <code>out.addon = { parts, glow }</code>;
+              <code>visible: 0</code> or <code>scale: 0</code> hides them at rest.
+            </li>
+            <li>
+              <code>alive: (c) =&gt; c.lit &gt; 0</code> keeps frames coming only while the toy
+              moves by itself.
+            </li>
+          </ul>
+          <p>
+            <strong>Options</strong> rebuild the toy and are saved in the scene (<code>o</code> in
+            <code>build</code>):
+          </p>
+          <ul>
+            <li>
+              <code
+                >{ key: &quot;color&quot;, label: &quot;Colour&quot;, type: &quot;color&quot;,
+                default: &quot;#d9632b&quot; }</code
+              >
+            </li>
+            <li>
+              <code
+                >{ key: &quot;style&quot;, label: &quot;Style&quot;, type: &quot;select&quot;,
+                default: &quot;a&quot;, choices: [{ id: &quot;a&quot;, label: &quot;A&quot; }]
+                }</code
+              >
+            </li>
+            <li>
+              <code
+                >{ key: &quot;spots&quot;, label: &quot;Spots&quot;, type: &quot;switch&quot;,
+                default: true }</code
+              >
+            </li>
+            <li>
+              <code
+                >{ key: &quot;petals&quot;, label: &quot;Petals&quot;, type: &quot;slider&quot;,
+                min: 3, max: 12, step: 1, default: 5 }</code
+              >
+            </li>
+            <li>
+              <code
+                >{ key: &quot;flag&quot;, label: &quot;Flag&quot;, type: &quot;flag&quot;, default:
+                &quot;us&quot; }</code
+              >: a country picker from <code>assets/flags/flags.json</code> (the Moon landing's
+              flag).
+            </li>
+            <li>
+              <code
+                >{ key: &quot;source&quot;, label: &quot;Your molecule&quot;, type:
+                &quot;text&quot;, default: &quot;&quot;, hidden: true }</code
+              >: printable text of up to 24,000 characters, kept as typed.
+              <code>hidden: true</code> leaves an option out of the Toy tab; use it for data the
+              toy's own panel fills in.
+            </li>
+          </ul>
+          <p>
+            <strong>Your own input</strong>: <code>input</code> adds a panel to the Toy tab for
+            something the user types or opens (the molecule's name, formula or SMILES; the protein's
+            PDB file). <code>read(text, fileName)</code> turns it into option values (or throws an
+            <code>Error</code> whose message is shown), and <code>shown()</code> names what is
+            showing.
+          </p>
+          <pre><code>input: {
+  title: &quot;Your own molecule&quot;,
+  placeholder: &quot;aspirin, H2O, or SMILES like CC(=O)O&quot;, // leave out for a file-only panel
+  button: &quot;Show it&quot;,
+  fileButton: &quot;Open a molecule file…&quot;,
+  accept: &quot;.mol,.sdf,.xyz,.pdb&quot;,
+  note: &quot;What works, in a sentence or two.&quot;,
+  async read(text, fileName) { return { molecule: &quot;custom&quot;, source: text }; },
+  shown: () =&gt; &quot;Aspirin (C9H8O4)&quot;,
+},</code></pre>
+          <p>
+            Keep what goes into options small: it is saved in the scene and in
+            <code>#s=</code> links. A big file (a protein) can stay in the module instead, with only
+            its name in an option; a link to it then falls back to the toy's default.
+          </p>
+          <p>
+            A binary file (a sound file) sets <code>binary: true</code> in <code>input</code>:
+            <code>read(&quot;&quot;, fileName, file)</code> then gets the <code>File</code> itself
+            and decodes it (with <code>decodeAudioData</code>, say), keeping the decoded data in the
+            module like the protein. The 40 MB limit still applies. A recipe that also sets
+            <code>multiple: true</code> lets people pick several files at once (a glTF model with
+            its <code>.bin</code> and textures, an OBJ with its MTL):
+            <code>read(&quot;&quot;, fileName, file, files)</code> then gets them all in
+            <code>files</code> (the first is <code>file</code>), and the limit is for all of them
+            together.
+          </p>
+          <p>
+            <strong>Loading first</strong>: <code>async prepare(options)</code> runs before each
+            build (in the browser and in the Node tools), for toys that fetch a file (the protein
+            toy reads <code>assets/proteins/*.pdb</code>). Cache what it loads;
+            <code>build</code> itself stays synchronous. In the app a third argument,
+            <code>{ profile }</code>, gives the device's tier (<code>&quot;low&quot;</code> on a
+            phone), so a toy can fetch lighter files there; the Node tools leave it out.
+          </p>
+          <p>
+            <strong>Credits</strong>:
+            <code>credits: [{ label, title, source, author, license, licenseUrl }]</code> adds the
+            toy's own sources to the About tab (the protein toy's PDB entries).
+          </p>
+          <h2 id="5b-picture-sheets">5b. Picture sheets</h2>
+          <p>
+            From lane Pictures (PR #64, September 28, 2026; its design and measurements are in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Pictures.md"
+              target="_blank"
+              rel="noopener"
+              >handoff/Pictures.md</a
+            >).
+          </p>
+          <p>
+            A recipe shows a PDF, a picture, a GIF or a video on <strong>picture sheets</strong>.
+            The engine opens the media (the scene's web address, a file the visitor opened in the
+            Toy tab, or the recipe's sample), builds each sheet's splats in a worker from the page
+            or frame it shows, rebuilds it sharper or coarser as the view comes near or goes away,
+            and frees pages that are left. Splats in a sheet move with the toy like any other splat
+            (parts, the body, leaves).
+          </p>
+          <details class="long-text">
+            <summary>Show the full text (26 lines)</summary>
+            <pre><code>&quot;your-book&quot;: {
+  turntable: false,            // keep still, facing the viewer (a page viewer)
+  pictures: {
+    sample: (o) =&gt; &quot;assets/toys/your-book/sample.pdf&quot;, // shown until the visitor opens their own
+    accept: [&quot;pdf&quot;, &quot;image&quot;, &quot;gif&quot;, &quot;video&quot;],
+  },
+  input: { title: &quot;Your own book&quot;, media: { accept: [&quot;pdf&quot;] }, note: &quot;…&quot; }, // the Toy tab's panel
+  controls: [{ key: &quot;turn&quot;, label: &quot;Turn the page&quot;, type: &quot;pulse&quot;, ease: 1.2 }],
+  action: { key: &quot;turn&quot;, label: &quot;Turn the page&quot; },
+  drive(t, c, out, info) {
+    const pics = info.data.pictures; // { page, count, kind, name, playing, next(), prev(), go(n), togglePlay() }
+    out.sheets = {                    // which page each sheet shows (default: pics.page)
+      left: { page: pics.page - 1 },  // a page out of range shows nothing
+      right: { page: pics.page },
+      turning: { page: pics.page + 1, visible: c.turn &gt; 0 ? 1 : 0 },
+    };
+    out.leaves = [{ angle: Math.PI * ease(c.turn), curl: -1.2 * Math.sin(Math.PI * c.turn) }];
+  },
+  build(k, o) {
+    k.spine({ at: [0, 0, 0], axis: [0, 1, 0], dir: [1, 0, 0] });
+    k.sheet({ id: &quot;left&quot;, center: [-0.72, 0, 0.004], width: 1.4, height: 1.9, align: [1, 0] });
+    k.sheet({ id: &quot;right&quot;, center: [0.72, 0, 0.004], width: 1.4, height: 1.9, align: [-1, 0] });
+    k.sheet({ id: &quot;turning&quot;, center: [0.72, 0, 0.012], width: 1.4, height: 1.9, align: [-1, 0], leaf: 0 });
+    // …the cover, the binding and the other pages' edges as usual kit shapes
+  },
+},</code></pre>
+          </details>
+          <ul>
+            <li>
+              <code
+                >k.sheet({ id, center, width, height, normal = [0, 0, 1], up = [0, 1, 0], part,
+                method, fit, align, leaf, lift, opacity })</code
+              >, in recipe coordinates. The picture is fitted inside <code>width</code> ×
+              <code>height</code> keeping its shape (<code>fit: &quot;fill&quot;</code> stretches
+              it); <code>align</code> places a narrower picture ([-1, 0] against the left edge, for
+              a right-hand page). <code>method</code>: <code>&quot;auto&quot;</code> (a PDF uses
+              &quot;ink&quot;, a picture &quot;pixels&quot;, a GIF or video &quot;screen&quot;), or
+              one of them. <code>part</code> rides the sheet on a part (a TV screen on a tilting
+              stand, a frame that spins). <code>lift</code> floats it in front of
+              <code>center</code>. The corners count in the fit.
+            </li>
+            <li>
+              <code>out.sheets[id] = { page, visible }</code> from <code>drive</code> picks each
+              sheet's page (0-based) and hides it (<code>visible: 0</code>). A page below 0 or past
+              the end shows nothing, so a book's first spread can have an empty left page.
+            </li>
+            <li>
+              <strong>Bending a page</strong> (kind <code>leaf</code>, 21):
+              <code>k.spine({ at, axis, dir })</code> gives the book's spine (a point, its
+              direction, and the direction from it along the pages at rest). A sheet with
+              <code>leaf: slot</code> (0 to 9) turns about the spine by
+              <code>out.leaves[slot].angle</code> (radians, 0 at rest, π turned over) and curls
+              along a circular arc by <code>out.leaves[slot].curl</code> (radians per recipe unit of
+              page; negative lags the free edge behind, like paper). Every splat of the page turns
+              with the curve at its place, so the page stays a solid sheet at every angle (the
+              skinned sheet's splats are not turned, which is why a turning page needs its own
+              kind). A leaf's sheet should be on part 0 (a part's turn would replace the leaf's).
+              The back of a turning page is a second sheet with the same spine,
+              <code>normal</code> reversed and its own page:
+              <code>k.sheet({ id: &quot;back&quot;, …, normal: [0, 0, -1], leaf: 0 })</code>. Splats
+              are sorted in the pose they were built in, so anything turned more than a quarter turn
+              draws inside out (a back's paper over its ink, a cover over the page under it): set
+              <code>out.resortPose = true</code> from <code>drive</code> while it turns and for a
+              few frames after it lands, and the engine sorts the parts' and leaves' splats, and the
+              sheets on them, where they stand (lane Books). A sheet whose <code>visible</code> is 0
+              isn't built until it shows;
+              <code>out.sheets[id] = { page, visible: 0, ahead: 1 }</code> builds it hidden, after
+              the pages on show, and <code>pics.ready(id)</code> says when it's done. A book asks
+              for the pages its next turn and the turn back need with <code>ahead</code>, and a turn
+              waits for <code>pics.ready</code> so it never shows a blank page.
+            </li>
+            <li>
+              A book's pages (lane Books, <code>your-book</code> in
+              <code>src/packs/pictures.js</code>): the leaf slots used as a ring (four are enough),
+              kit splats riding a leaf (kind <code>leaf</code>, params
+              <code>[distance from the spine in toy units, slot]</code>; fix the fit with reach
+              points to know the toy units at build time), and layers kept at least about 0.01 of
+              the toy apart where big splats lie under a picture sheet (splats sort by their
+              centers, so closer layers mix in stripes).
+            </li>
+            <li>
+              <strong>Media before the build.</strong> <code>k.media</code> is
+              <code>{ kind, count, name, aspect, aspects, names }</code> for the media the toy shows
+              (null in the Node tools), so a build can shape itself to the pages (a book takes the
+              PDF's page shape). <code>pics.aspect(n)</code> and <code>pics.nameOf(n)</code> in
+              <code>info.data.pictures</code> give one page's shape and name.
+            </li>
+            <li>
+              <strong>A PDF page's words.</strong> <code>await pics.text(n)</code> gives page n's
+              words from the PDF's text layer (&quot;&quot; for a scanned page, a picture or a
+              video); the Toy tab shows them in its &quot;Words on this page&quot; box.
+            </li>
+            <li>
+              <strong>A set of pictures.</strong>
+              <code>input: { media: { accept: [&quot;image&quot;], multiple: true } }</code> lets
+              the visitor open several photos at once (the photo album); a recipe's
+              <code>pictures.sample</code> may return a list, and Previous and Next page through the
+              set. In a scene, <code>toy.media.files</code> keeps the settings (not the files;
+              docs/SCENE-SCHEMA.md). With <code>media.list: true</code> the Toy tab lists the set (a
+              small picture and the name of each) with buttons to move each up or down (the digital
+              frame). <code>pics.names</code>, <code>pics.reorder(order)</code> (order[j] is the
+              picture, by its place now, that goes to place j; the picture on show stays on show)
+              and <code>pics.thumb(n, size)</code> are the same from a recipe.
+            </li>
+            <li>
+              <strong>Drawing on a page.</strong>
+              <code>pictures.decorate(canvas, { page, name, sheet, kind, options })</code> draws on
+              a page or photo before it becomes splats (the album's photo corners and captions).
+            </li>
+            <li>
+              The video's sound follows the site's speaker button (embeds stay silent);
+              <code>pics.togglePlay()</code> plays and pauses it. A GIF plays by itself.
+            </li>
+            <li>
+              Budgets per sheet come from the device tier (<code>PICTURE_BUDGETS</code> in
+              <code>src/pictures.js</code>). A book shows three or four sheets at once, so the
+              splats on show are three or four times one page's.
+            </li>
+            <li>
+              <code>tools/pic-clip.mjs</code> records clips of picture toys (pages are built in real
+              time).
+            </li>
+            <li>
+              <code>tools/pic-samples.mjs</code> makes the samples and the test fixtures from our
+              own text.
+            </li>
+          </ul>
+          <h2 id="5c-the-tilt-lock">5c. The tilt lock</h2>
+          <p>
+            From lane Viewer (September 29, 2026). A flat toy (a page, a photo, a screen, a frame)
+            reads best face-on, so it can start with its <strong>tilt locked</strong>: a drag only
+            spins it left and right (yaw), while pitch and roll stay at the toy's starting pose.
+            Zoom, pan, pinch and Reset view work as usual.
+          </p>
+          <pre><code>&quot;your-book&quot;: {
+  turntable: false,
+  tiltLock: true, // a drag only spins it left and right
+  // …
+},</code></pre>
+          <ul>
+            <li>
+              Every toy on the Pictures and pages shelf sets <code>tiltLock: true</code>; every
+              other toy leaves it out (free, as before).
+            </li>
+            <li>
+              The top bar's lock button shows the lock for the toy on show and toggles it. A
+              visitor's choice stays with that toy for the visit.
+            </li>
+            <li>
+              A link's saved pose wins: a scene's camera still loads exactly, and the lock then
+              keeps that pitch and roll.
+            </li>
+            <li>
+              A normal two-finger pinch never turns a toy: two fingers zoom, roll only after a clear
+              twist (about 17 degrees) and turn only when they move together first (<code
+                >PINCH_*</code
+              >
+              in <code>src/camera.js</code>).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              Since October 5, 2026 (lane Pages r6), a drive can free the tilt for a while:
+              <code>out.tiltFree = true</code> on each frame it wants it (a book with figures
+              standing up, to see them from the side). A toy whose tilt is locked then turns any way
+              under a drag; when the drive stops asking, the view eases back level and square to the
+              toy and the lock comes back. A toy the visitor had unlocked stays unlocked.
+            </li>
+          </ul>
+          <h3 id="top-bar-switches-the-stage-slider-and-figure-depths-lane-pages-r6">
+            Top-bar switches, the stage slider and figure depths (lane Pages r6)
+          </h3>
+          <ul>
+            <li>
+              A control marked <code>global: &quot;pop&quot;</code> (a toggle) is set from the top
+              bar's Pop out button, not from the Toy tab: one setting for every toy that has such a
+              control, remembered on the device (<code>splashery.popout</code>), shown only while
+              one is open. The app sets the control to 1 or 0 when the toy opens and when the button
+              is pressed; a scene whose controls have it on turns the button on for the visit. The
+              first time such a toy opens on a device, a line says the button is there.
+            </li>
+            <li>
+              <code>out.slider = { id, label, value }</code> (value 0 to 1) shows a small slider
+              over the stage while it is set. The slider takes the value when
+              <code>id</code> changes; moving it hands
+              <code>info.slider = { id, value, n }</code> to the next drive (<code>n</code> counts
+              the changes, so a drive can tell a new move from an old one).
+            </li>
+            <li>
+              A sheet's relief (<code>out.sheets[id].relief</code>, 5b) may carry
+              <code>nearest: true</code>: its map is then sampled without blending, so a map of a
+              few flat values raises the picture in flat steps with clean edges (cutout layers, as
+              in a paper pop-up book), and <code>keep: [lo, hi]</code>: only the part of the picture
+              where the map lies in that range is built, a cutout with clean edges (its
+              <code>depth</code> may be 0). Several cutouts of one picture on parts of their own
+              make the layers of a paper pop-up book (lane Pages r6's P1).
+            </li>
+            <li>
+              <code>info.figures</code> is the scene's
+              <code>toy.figures</code> (docs/SCENE-SCHEMA.md): <code>[{ page, box, depth }]</code>.
+              A drive that hands back <code>out.figures</code> (a list) replaces it in the scene, so
+              links, saved files and embeds carry it; an empty list clears it.
+            </li>
+          </ul>
+          <h2 id="5d-songs-and-levers">5d. Songs and levers</h2>
+          <p>
+            From lane Pianos (September 29, 2026; its notes are in
+            <a href="../../learn/notebook/pianos/">handoff/Pianos.md</a>). A keyboard toy plays
+            songs: its own, a MIDI file of yours, or a tune in ABC notation pasted as text. Every
+            key, hammer, damper, jack and string moves as its own solid piece.
+          </p>
+          <p>
+            <strong>Levers</strong> (kind <code>lever</code>, 22) move many small pieces, each by
+            its own amount, beyond the 15 parts and 48 tokens: up to 96 levers in up to 6 groups.
+          </p>
+          <pre><code>build(k) {
+  const tip = k.lever({ pivot: [0, 0.7, -0.1], axis: [1, 0, 0], angle: -0.07 }); // keys tip about a rail
+  const lift = k.lever({ dir: [0, 1, 0], move: 0.02, channel: 2 });            // dampers lift
+  const hum = k.lever({ dir: [0, 1, 0], vibrate: 0.003, channel: 2 });         // strings quiver
+  const lit = k.lever({ pivot, axis, angle, glow: &quot;#6cf&quot;, glowChannel: 1 });    // keys that light up
+  k.add(k.box(0.022, 0.02, 0.15), { pos, kind: &quot;lever&quot;, params: [k.leverParam(tip, i), 0] });
+  k.add(string, { kind: &quot;lever&quot;, params: (c) =&gt; [k.leverParam(hum, i), c.t] }); // place along it
+},
+drive(t, c, out) {
+  out.levers = [keys, hammers, dampers]; // three lists of amounts 0..1, one per lever index
+},</code></pre>
+          <ul>
+            <li>
+              A group is one of <code>{ pivot, axis, angle }</code> (tips by up to
+              <code>angle</code> radians), <code>{ dir, move }</code> (slides) or
+              <code>{ dir, vibrate }</code> (quivers fast, most at the middle of its string: the
+              second param is the splat's place along the string, 0..1; it runs on the toy's own
+              clock, so only with motion on). <code>channel</code> (0..2) says which of the three
+              lists moves it; <code>glow</code> with <code>glowChannel</code> adds a light by
+              another list. Lever <code>i</code> of every group reads index <code>i</code> of the
+              lists, so key <code>i</code>'s key, hammer and damper share an index and each follows
+              its own list.
+            </li>
+            <li>
+              Amounts are kept to 8 bits. Levers turn their splats with them, so flat splats stay on
+              the face.
+            </li>
+            <li>A lever splat can't also be on a part or a token.</li>
+          </ul>
+          <p>
+            <strong>Songs</strong> (<code>src/songs.js</code>). A song is a plain list:
+            <code
+              >{ title, composer, notes: [{ t, d, n, v, ch, drum }], pedal: [[t0, t1]], length
+              }</code
+            >
+            (seconds, MIDI note numbers, velocity 0..1; <code>pedal</code> lists when the sustain
+            pedal is down).
+          </p>
+          <ul>
+            <li>
+              <code>readMidi(bytes, fileName)</code> reads a Standard MIDI File (format 0 or 1;
+              notes, velocity, tempo changes, the sustain pedal, channel 10 as drums).
+              <code>readAbc(text)</code> reads the first tune in ABC (header, notes, chords, rests,
+              ties, broken rhythm, triplets, repeats and endings; its first voice only; decorations
+              and grace notes are skipped). Both throw an <code>Error</code> with a message for
+              people.
+            </li>
+            <li>
+              <code>fitNotes(song, low, high)</code> moves notes outside the keyboard in by octaves.
+            </li>
+            <li>
+              <code>songFromText({ title, composer, bpm, text })</code> writes a built-in song
+              compactly:
+              <code>&quot;E5/16 D#5/16 | P A4/8 … p &amp;&amp; A2/16 E3/16 …&quot;</code> (a note or
+              a chord joined by <code>+</code>, then its length: <code>/8</code> an eighth,
+              <code>/16:3</code> three sixteenths; <code>r</code> a rest; <code>P</code> and
+              <code>p</code> put the pedal down and lift it; <code>v0.6</code> the loudness from
+              there; <code>&amp;&amp;</code> starts another voice at 0). Write built-in songs from
+              public-domain scores (compositions only); <code>writeMidi(song)</code> makes sample
+              <code>.mid</code> files from them.
+            </li>
+            <li>
+              <code>new SongPlayer({ low, high })</code> keeps the place, speed and loop. Call
+              <code
+                >player.update(info.time, info.sound, (note, when, ring) =&gt; playSpec(…))</code
+              >
+              in <code>drive</code> every frame: it moves the song on and schedules each note once,
+              a quarter second ahead on the audio clock (<code>ring</code> is how long it sounds, to
+              the key's release or the pedal's). <code>player.keys()</code> then gives, per key,
+              <code>down</code> (held now), <code>since</code> (seconds since struck),
+              <code>next</code> (seconds until struck next) and <code>vel</code>;
+              <code>player.pedal()</code> says whether the pedal is down.
+              <code>play({ until })</code> plays to a point and stops (a tap's opening).
+            </li>
+            <li>
+              A recipe's
+              <code>song: songControls(player, { songs: [{ id, title, make }] })</code> shows the
+              <strong>song bar</strong> under the stage (the chess game bar made general: a title
+              you can edit, back to the start, play and pause, loop, speed and a slider for where
+              the song is) and a song panel in the Toy tab (the built-in songs, &quot;Open a MIDI
+              file…&quot; and &quot;Paste ABC&quot;). A playing song keeps frames coming with motion
+              off. The chess set's bar is unchanged.
+            </li>
+            <li>
+              Keyboard voices in <code>src/voices.js</code>: <code>grand</code>,
+              <code>upright</code>, <code>harpsichord</code>, <code>organ</code>,
+              <code>synth</code> and <code>vibes</code>, each with <code>hold</code> (seconds the
+              key is down; then the damper stops the note).
+            </li>
+          </ul>
+          <h2 id="5e-fluids">5e. Fluids</h2>
+          <p>
+            From lane Fluids (September 29, 2026; the design, the solvers and the measurements are
+            in <a href="../../learn/fluids/">FLUIDS.md</a>). A kit toy can pour, splash, smoke and
+            burn: <code>k.fluid(spec)</code> in <code>build</code> declares a liquid, a gas or a
+            flame, simulated while the toy is open and drawn as its own splats (one per particle),
+            sorted with the toy. The engine loads only when such a toy opens. Everything is in
+            recipe coordinates, and a spec is plain data (it goes to a worker: no functions).
+          </p>
+          <details class="long-text">
+            <summary>Show the full text (16 lines)</summary>
+            <pre><code>build(k, o) {
+  const GLASS = { type: &quot;glass&quot;, at: [0, 0, 0], radius: 0.32, height: 1, wall: 0.03, bottom: 0.05 };
+  k.fluid({ name: &quot;glass&quot;, kind: &quot;vessel&quot;, shape: GLASS, budget: 9000 }); // the glass itself
+  k.fluid({
+    name: &quot;liquid&quot;, kind: &quot;liquid&quot;, preset: &quot;honey&quot;, // water, soda, syrup, honey, lava
+    unit: 0.33,              // meters per recipe unit (sets gravity), or gravity: 30
+    spacing: 0.048,          // particle size on the high tier
+    budget: 1800,            // particles on the high tier (the tiers scale it)
+    colliders: [GLASS, { type: &quot;floor&quot;, y: 0 }],
+    fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.3 } }, // or box, sphere; below, above
+    emitter: { at: [0, 1.7, 0], dir: [0, -1, 0], speed: 0.75, radius: 0.085 },
+  });
+  k.fluid({ name: &quot;smoke&quot;, kind: &quot;gas&quot;, look: &quot;smoke&quot;, size: 0.035, life: 3.2, rise: 0.75, turbulence: 0.55, budget: 800, source: { at: [0, 1.3, 0], radius: 0.015, rate: 0 } }); // prettier-ignore
+  k.fluid({ name: &quot;flame&quot;, kind: &quot;flame&quot;, at: [0, 0.965, 0], height: 0.36, radius: 0.05, budget: 520, sparks: 0.25, smoke: &quot;smoke&quot; }); // prettier-ignore
+  k.reach([0, 2, 0]); // frame where the fluid goes
+}</code></pre>
+          </details>
+          <ul>
+            <li>
+              <strong>Liquids</strong> override any preset field: <code>viscosity</code> (0 water ..
+              0.9 lava), <code>cohesion</code>, <code>friction</code>, <code>foam</code>,
+              <code>fizz</code>, <code>glow</code>, <code>color</code>, <code>stretch</code> (how
+              long a fast stream's splats are), <code>splat</code> (splat size in particle sizes,
+              0.72).
+            </li>
+            <li>
+              <strong>Gas</strong>: <code>look</code> (<code>&quot;smoke&quot;</code> or
+              <code>&quot;steam&quot;</code>), <code>color</code>, <code>opacity</code>,
+              <code>size</code>, <code>life</code>, <code>rise</code>, <code>turbulence</code>,
+              <code>height</code> (where it turns turbulent), <code>source</code> (<code>at</code>,
+              <code>radius</code>, <code>rate</code> per second, <code>speed</code>,
+              <code>on</code>).
+            </li>
+            <li>
+              <strong>Flame</strong>: <code>at</code> (the wick), <code>height</code>,
+              <code>radius</code>, <code>life</code>, <code>sparks</code>, and <code>smoke</code> (a
+              gas system's name that gets its heat).
+            </li>
+            <li>
+              <strong>Colliders</strong>: <code>floor</code> (y), <code>box</code> (at, size),
+              <code>sphere</code> (at, radius), <code>cylinder</code> (at, radius, height),
+              <code>glass</code> (an open-top glass or cup; <code>radius</code> inside),
+              <code>bowl</code> (a half sphere; <code>at</code> its rim's center). They don't move.
+            </li>
+            <li>
+              <strong>Vessel</strong>: <code>kind: &quot;vessel&quot;</code> with a
+              <code>glass</code> collider as <code>shape</code> draws that glass with the view
+              (clear face-on, bright at its edges), which kit splats can't do. Use it for any glass
+              the fluid is seen through.
+            </li>
+          </ul>
+          <p>
+            <code>drive()</code> steers each system by name through <code>out.fluid</code> (set it
+            every frame; leave a key out to leave it as it is):
+          </p>
+          <pre><code>out.fluid = {
+  liquid: { on: c.pour &gt; 0, flow: 1, at, dir, speed, drain: 0 }, // emitter; drain empties from the bottom
+  flame: { on: !blownOut, wind: [2.5, 0, 0] },
+  smoke: { once: { id: info.tap?.n ?? 0, do: &quot;puff&quot;, count: 260 } }, // fires once per new id
+};</code></pre>
+          <p>
+            <code>once.do</code> is <code>&quot;drop&quot;</code> (a ball of liquid:
+            <code>at</code>, <code>radius</code>, <code>vel</code>),
+            <code>&quot;puff&quot;</code> (gas: <code>count</code>, <code>at</code>,
+            <code>speed</code>), <code>&quot;fill&quot;</code> (<code>region</code>) or
+            <code>&quot;reset&quot;</code>. The first id a system sees is only remembered, so an
+            opened toy doesn't replay an old tap. Fluids work alongside parts and tokens (the Fluid
+            lab's valve is a part); they follow the whole toy's move and turn, not a part's. A
+            recipe with fluids should say <code>alive: true</code>. For crisp liquid, a labs toy can
+            use <code>kernel: &quot;sharp&quot;</code>; smoke and flames look better with the
+            Gaussian (the Fluid lab picks per scene with a getter).
+          </p>
+          <h2 id="5f-hands-on-bodies-and-fields">5f. Hands-on: bodies and fields</h2>
+          <p>
+            From lane Hands engine A (October 3, 2026; the code is
+            <code>src/physics/materials.js</code> and <code>src/physics/fields.js</code>, the tests
+            <code>tests/hea-engine.spec.mjs</code>). With the ✋ Hands-on switch on, a recipe's
+            <code>hands</code> block can ask for these pieces; a toy that asks for none plays
+            exactly as before (Level 1: pick it up and toss it). Nothing here loads or runs until
+            the switch is on. Every piece goes home on ↺ Reset. Recipe units are the recipe's own
+            (the toy fits in about one unit); &quot;toy radii&quot; are the toy's size on screen. A
+            recipe's <code>drive()</code> reads what the finger does as
+            <code>info.hands</code> (below); it is <code>undefined</code> for a toy without these
+            pieces, so always write <code>info.hands?.…</code>.
+          </p>
+          <p>
+            <strong>A material</strong> (<code>hands.material</code>): a thrown toy moves like the
+            real thing. Name a preset (every ball, <code>shuttlecock</code>,
+            <code>flying-disc</code>, <code>paper-plane</code>, <code>baseball-cap</code>; the list
+            and the real numbers are at the top of <code>materials.js</code>), or give your own
+            keys, or a preset with some keys changed.
+          </p>
+          <pre><code>hands: { material: &quot;basketball&quot; },
+hands: { material: { preset: &quot;baseball&quot;, magnus: 0.08 } },
+hands: { material: { mass: 0.3, r: 0.1, bounce: 0.6, cd: 0.47, roll: 0.05 } },</code></pre>
+          <p>
+            The keys: <code>mass</code> (kg) and <code>r</code> (m) with <code>cd</code> set the
+            air's drag (the real thing, scaled); <code>bounce</code> (restitution on a hard floor),
+            <code>friction</code>, <code>roll</code> (rolling resistance, times gravity),
+            <code>spin</code> (how much a throw spins it, from where the finger holds it: a low grab
+            gives backspin), <code>spinDecay</code>, <code>magnus</code> (the curve a spin gives),
+            <code>lift</code> with <code>up</code>, <code>gyro</code> and <code>fade</code> (a
+            disc's glide, tilt-hold and bank), <code>nose</code> with <code>vane</code> (flies nose
+            first: a shuttlecock's cork), <code>spiral</code> and <code>tumble</code> (a football's
+            spiral, a rugby ball's end over end), <code>hook</code> (a bowling ball),
+            <code>drift</code> (a light ball wanders sideways as it falls; the beach ball),
+            <code>fingertip: true</code> (an upward flick while holding it spins it on the
+            fingertip; the basketball) and <code>warm: [first, top]</code> (a squash ball livelier
+            each throw). Lift and the curve are set to show at Hands-on's slow throws, in the real
+            direction and order. Pieces take a material too: <code>material</code> in a piece's def.
+          </p>
+          <p>
+            <strong>A water line</strong> (<code>hands.water</code>): the toy floats on a round
+            pool, bobs and settles; a boat (any non-round toy) rocks and rights itself, since each
+            point under water lifts where it is. By default the line sits where the toy, at home,
+            floats as it stands (from its density), so nothing moves until touched.
+          </p>
+          <pre><code>hands: { material: &quot;water-polo-ball&quot;, water: true },
+hands: { water: { density: 0.89, depth: 3, color: &quot;#5aa9cf&quot; } }, // an iceberg: mostly under
+hands: { water: { density: 0.35, level: -0.2, drag: 8, size: 3.5 } },</code></pre>
+          <p>
+            <code>density</code> (relative to water; from the material, else 0.5),
+            <code>level</code> (toy radii from the home middle; else worked out),
+            <code>depth</code> (to the pool's floor, toy radii, 2.2), <code>drag</code> (6),
+            <code>size</code> (the pool's radius, toy radii, 3.2), <code>color</code>. With pieces,
+            <code>level</code> is in recipe units and every piece floats.
+          </p>
+          <p>
+            <strong>Buoyancy in air</strong> (<code>hands.air</code>): a hot-air balloon that
+            settles where it hovers, floats back up when pulled down and sinks back when pushed up,
+            its basket under it:
+            <code
+              >hands: { air: { hover: 0, spring: 0.3, drag: 3.2, floor: 1.5, upright: 6 } }</code
+            >
+            (or <code>air: true</code>). <code>hover</code> is toy radii from home;
+            <code>floor</code> lowers the floor so it can be pulled down.
+          </p>
+          <p>
+            <strong>A gravity well</strong> (<code>hands.well</code>): a pull toward a point instead
+            of the floor. The floor goes (<code>floor: true</code> keeps it) and the air with it, so
+            a piece thrown sideways orbits.
+          </p>
+          <pre><code>hands: { pieces: planets, well: { at: [0, 0, 0], pull: 1, soft: 0.3 } },
+hands: { pieces: star, well: { at: [0, 0, 0], pull: 2, capture: 0.12 } }, // a black hole</code></pre>
+          <p>
+            <code>at</code> (recipe units; the toy's home by default), <code>pull</code> (gravity's
+            strength one toy radius away, falling with distance squared), <code>soft</code> (toy
+            radii; no pull spike near the middle), <code>capture</code> (toy radii: inside it a
+            piece is swallowed and held there until ↺ Reset).
+          </p>
+          <p>
+            <strong>Wheels that roll</strong> (<code>hands.wheels</code>, the whole toy): a drag on
+            the toy pushes it (it is never lifted); it rolls on, gripping sideways and slowing only
+            by rolling resistance, and its wheel parts turn by the distance it rolled (they stop
+            their own idle spin while Hands-on is on).
+          </p>
+          <pre><code>hands: { wheels: { axle: [0, 0, 1], r: 0.17, parts: [&quot;front&quot;, &quot;rear&quot;] } },</code></pre>
+          <p>
+            <code>axle</code> (recipe axis), <code>r</code> (the wheels' radius, recipe units),
+            <code>parts</code> (the wheel parts, turned about their own axis), <code>sign</code> (-1
+            turns them the other way), <code>grip</code> (14), <code>roll</code> (0.015),
+            <code>yaw</code> (6) and <code>area</code> (how far it may roll, toy radii, 2.4).
+            <code>info.hands.rolled</code> is the angle rolled, for parts that turn with the wheels
+            (a steam train's rods).
+          </p>
+          <p>
+            <strong>Shake detection</strong> (<code>hands.shake</code>): a quick back-and-forth drag
+            on the toy (holding it, or on a tree's trunk) fires the toy's tap action (or
+            <code>key</code>), at most every <code>gap</code> seconds;
+            <code>info.hands.shake</code> (0 to 1) is how hard it is being shaken, to make the
+            effect grow. <code>hands.slosh: 0.05</code> makes contents lag behind the moving toy:
+            <code>info.hands.slosh</code> is a sideways offset (recipe units, at most that much) for
+            a part (the snow globe's snow; keep the part inside its glass by that margin).
+          </p>
+          <pre><code>hands: { shake: true },
+hands: { shake: { key: &quot;snow&quot;, gap: 0.6 } },
+drive(t, c, out, info) {
+  const s = Math.max(c.shake, info.hands?.shake ?? 0); // the harder the shake, the more snow</code></pre>
+          <p>
+            <strong>Follow or flee the finger</strong> (<code>hands.flee</code>,
+            <code>hands.follow</code>): a drag on the toy doesn't pick it up; the finger is a line
+            through the scene instead. <code>info.hands.finger</code> is that line (<code
+              >{ origin, dir }</code
+            >, recipe units, or null when no finger is down) and <code>info.hands.point</code> its
+            point nearest the toy's middle (an owl's head turns to it). With <code>flee</code>,
+            <code>info.hands.flee(key, pos)</code> gives each thing its own dart away from the line
+            and its spring back (<code>{ offset, vel }</code>, recipe units): add the offset to the
+            thing's place and turn it to face <code>vel</code>.
+          </p>
+          <pre><code>hands: { flee: { radius: 0.45, push: 1, back: 2.2, max: 0.6 } },
+drive(t, c, out, info) {
+  const f = info.hands?.flee(i, P) ?? NONE; // P: where fish i swims now
+  const at = vec.add(P, f.offset);</code></pre>
+          <p>
+            <strong>Projectiles and targets</strong> (pieces): a piece with
+            <code>projectile: { nose: [0, 0, 1], vane: 20 }</code> flies nose first, and one that
+            hits a piece with <code>target: true</code> sticks in it where it hit, until it is
+            picked up again or ↺ Reset (objects only, never people or animals).
+            <code>stick: false</code> lets it bounce.
+          </p>
+          <p>
+            <code>info.hands.on</code> is whether Hands-on is on. Check the toy's frame time with
+            the pieces running (the whole world's step is well under a millisecond for one body, a
+            few for 40 pieces).
+          </p>
+          <h2 id="5g-hands-on-joints">5g. Hands-on: joints</h2>
+          <p>
+            From lane Hands engine B (October 3, 2026; code in <code>src/physics/joints.js</code>,
+            proof in <code>tests/heb-engine.spec.mjs</code>). With the ✋ switch on, a recipe's
+            <code>hands.joints</code> makes its parts move the way the real thing's do: a lid swings
+            on its hinge, a sword slides out of its stone, a crank turns, a wedge clicks back into
+            its place, a petal snaps off. Everything is in recipe coordinates (a kit toy's build
+            space; a scan rig's world) and moves as a solid piece. ↺ sends every part home along its
+            own way (a lid swings shut) and mends whatever broke. A recipe with
+            <code>hands.joints</code> plays in pieces mode (the toy itself stays put);
+            <code>hands.pieces</code> may add loose pieces beside the joints.
+          </p>
+          <p>
+            <code>hands.joints</code> is a list, or a function
+            <code>(data, info) =&gt; list</code> (<code>data</code> is the build's
+            <code>k.data</code>). Each joint moves one part (<code>part</code>, a
+            <code>k.part</code> name, or a scan rig's part) or one token (<code>token</code>, an
+            index). A joint makes its own piece unless <code>hands.pieces</code> already has one
+            with that part or token. Keys every joint takes:
+          </p>
+          <ul>
+            <li>
+              <code>type</code>: <code>&quot;hinge&quot;</code>, <code>&quot;slider&quot;</code>,
+              <code>&quot;dial&quot;</code>, <code>&quot;socket&quot;</code> or
+              <code>&quot;break&quot;</code>.
+            </li>
+            <li>
+              <code>part</code> or <code>token</code>; <code>name</code> (defaults to the part's
+              name, used by <code>parent</code> and in sounds).
+            </li>
+            <li>
+              <code>pos</code>: the part's middle (where the finger finds it); <code>pick</code>:
+              the radii <code>[x, y, z]</code> of the ellipsoid about <code>pos</code> a press finds
+              it in (the part's rough size).
+            </li>
+            <li>
+              <code>pivot</code>: the part's pivot exactly as given to <code>k.part</code> (Hands-on
+              turns the part about it).
+            </li>
+            <li>
+              <code>start(c, info)</code>: for a hinge, slider or dial, its value as the recipe's
+              <code>drive</code> shows it now (<code>c</code> the eased controls), when that differs
+              from the part as built: a music box built shut but shown open says
+              <code>start: (c) =&gt; 1.95 * ease3(c.open)</code>. ↺ brings it back there.
+            </li>
+            <li>
+              <code>sound(ev, vol)</code>: the cue for an event (null for silence);
+              <code>ev.kind</code> is <code>&quot;stop&quot;</code> (a hinge or slider hit a stop),
+              <code>&quot;detent&quot;</code> (a dial passed a click),
+              <code>&quot;free&quot;</code> (a stuck slider came loose),
+              <code>&quot;socket&quot;</code> (clicked into place) or
+              <code>&quot;snap&quot;</code> (broke off); <code>ev.v</code> is the joint's value then
+              (which stop), <code>ev.n</code> the detent's number and <code>ev.speed</code> how hard
+              (toy radii per second). Without it a quiet default plays (thud, click, scrape, click,
+              crack).
+            </li>
+          </ul>
+          <p>
+            <strong>Hinge</strong>: swings about <code>axis</code> through <code>pivot</code>, from
+            <code>min</code> to <code>max</code> radians (from the part as built; the sign follows
+            the right-hand rule about <code>axis</code>). It falls by its own weight
+            (<code>gravity</code>: <code>false</code>, or a multiplier), <code>spring</code> (per
+            second squared) pulls it toward <code>rest</code> (radians, 0), and
+            <code>damping</code> (per second, 3) slows it. At a stop it bounces back by
+            <code>bounce</code> (0.2). <code>com</code> is the point its weight hangs from (defaults
+            to <code>pos</code>).
+          </p>
+          <pre><code>hands: {
+  joints: [{ type: &quot;hinge&quot;, part: &quot;lid&quot;, pivot: [0, 0.1, -0.37], axis: [-1, 0, 0], min: 0, max: 1.95,
+    pos: [0, 0.25, 0], pick: [0.62, 0.25, 0.4] }],
+},</code></pre>
+          <p>
+            <strong>Slider</strong>: moves along <code>axis</code> from <code>min</code> to
+            <code>max</code> (recipe units, from as built). <code>stick</code> (in toy radii) keeps
+            it stuck fast until the finger has pulled that far (with <code>wiggle</code>, an axis it
+            shakes about while stuck); <code>friction</code> (toy radii per second squared) holds it
+            where it is let go when it beats its weight; <code>spring</code>, <code>rest</code>,
+            <code>damping</code>, <code>bounce</code> and <code>gravity</code> as for a hinge.
+          </p>
+          <pre><code>{ type: &quot;slider&quot;, part: &quot;sword&quot;, pivot: [0, 0.9, 0], axis: [0, 1, 0], min: 0, max: 0.75,
+  stick: 0.1, wiggle: [0, 0, 1], friction: 40, pos: [0, 0.75, 0], pick: [0.12, 0.6, 0.12] }</code></pre>
+          <p>
+            <strong>Dial</strong>: turns about <code>axis</code> through <code>pivot</code>, around
+            and around (or between <code>min</code> and <code>max</code>); the finger turns it as it
+            goes round the axis, and a flick sets it coasting, slowed by <code>drag</code> (per
+            second, 0.8). <code>detents</code> (clicks per turn) click as it passes each one and
+            settle it on one. A dial has no weight unless <code>gravity</code> is set.
+            <code>turn(angle, delta, info)</code> is called on every move and may return cues (a
+            music box's notes); <code>also(angle, parts, info)</code> adds entries to the parts
+            Hands-on sends (a dancer that the crank turns; it works for every joint type, with its
+            value).
+          </p>
+          <pre><code>{ type: &quot;dial&quot;, part: &quot;crank&quot;, pivot: [0.58, 0.25, 0], axis: [1, 0, 0], detents: 12,
+  pos: [0.62, 0.25, 0.1], pick: [0.1, 0.18, 0.18],
+  turn: (a, da) =&gt; (da &gt; 0 &amp;&amp; step(a) ? { voice: &quot;tine&quot;, f: nextNote() } : null),
+  also: (a, parts) =&gt; (parts.dancer = { angle: 0.8 * a }) }</code></pre>
+          <p>
+            <strong>Socket</strong>: a loose piece (in <code>hands.pieces</code>, or made here with
+            <code>solid</code>) that clicks back into the place it was built in: once it has been
+            taken out, bringing it within <code>snap</code> toy radii (0.3) of its place, or
+            pointing the finger at its place, glides it home and locks it there.
+          </p>
+          <pre><code>pieces: (d) =&gt; d.wedges.map((w) =&gt; ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
+joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.token, snap: 0.35 })),</code></pre>
+          <p>
+            <strong>Break</strong>: a piece held fast at <code>at</code> to the ground, or to
+            another piece (<code>to</code>, a part, a token or a joint's name), until the finger
+            pulls it <code>pull</code> toy radii (0.35): it bends as a whole about <code>at</code>,
+            up to <code>give</code> radians (0.12), then snaps off into the hand. On a loose piece
+            it rides along with that piece (their pair lands as one), and a landing faster than
+            <code>knock</code> (toy radii per second) breaks it off. ↺ mends it.
+          </p>
+          <pre><code>joints: [{ type: &quot;break&quot;, part: &quot;top&quot;, to: &quot;low&quot;, at: [0.1, 0.4, 0], pull: 0.3, give: 0.15, knock: 4 }],</code></pre>
+          <p>
+            <strong>Parents</strong>: <code>parent</code> (a joint's name) puts a hinge, slider or
+            dial on another driven part: a desk lamp's head on its arm, a clock's hands on a turning
+            dial. Children pose after their parents.
+          </p>
+          <p>
+            <strong>Upright</strong> (Level 1, a whole toy):
+            <code>hands: { upright: { k: 40, damping: 3 } }</code> turns a tipped toy back upright
+            (its tilt only; its turn about the vertical stays), so it rocks and rights itself as a
+            sailboat or a roly-poly penguin does.
+          </p>
+          <p>
+            <strong>Scan rigs</strong>: <code>rigPieces(rig, names, opts)</code> (from
+            <code>src/physics/joints.js</code>) turns a scan rig's hard-edged parts (src/rigs.js)
+            into loose pieces, one body each, shaped as the part's first region (an ellipsoid, or
+            <code>opts.solid(region)</code>), turning about that region's center;
+            <code>opts</code> is copied onto each piece (<code>mass</code>, <code>friction</code>,
+            ...). A rig with <code>hands.pieces</code> can be picked up piece by piece. Give such a
+            rig <code>hard: true</code>: each splat then belongs wholly to one part (no soft edges),
+            so a part lifted right off leaves no trail of half-moved splats:
+          </p>
+          <pre><code>tomatoes: { hard: true, hands: { floor: -0.17, area: 0.9, pieces: () =&gt; rigPieces(RIGS.tomatoes, TOMATO_NAMES, { friction: 0.9 }) }, ... }</code></pre>
+          <p>
+            When a scan's piece can't move cleanly (a tomato whose sides the capture never saw),
+            swap it for a kit-built stand-in while it is off its place: build the stand-in (and,
+            optionally, a fill for the gap it leaves) as parts of the rig's <code>addon</code>,
+            hidden by <code>drive</code> (<code>out.addon.parts.kt0 = { visible: 0 }</code>), and
+            name them in <code>hands.swap</code>:
+            <code>{ t0: { kit: &quot;kt0&quot;, fill: &quot;kf0&quot; } }</code>. While the piece is
+            off its place, the scan's part hides, <code>kit</code> rides where the piece is (built
+            about the same pivot), and <code>fill</code> shows; ↺ brings the scan's own part back.
+          </p>
+          <p>
+            Check a joint with <code>player.handsOn.joints.state()</code> (each joint's value,
+            speed, <code>broken</code>, <code>stuck</code>) and
+            <code>player.handsOn.joints.events</code> (stops, clicks, snaps). Every joint follows
+            the effect quality rules: parts move whole about real axes, a part stops at real stops,
+            and nothing flies off.
+          </p>
+          <h2 id="5h-hands-on-soft-parts">5h. Hands-on: soft parts</h2>
+          <p>
+            Lane Hands engine C, October 3, 2026. With the ✋ Hands-on switch on, a recipe's
+            <code>hands</code> block can name ropes and chains, cloth, and soft stretch
+            (<code>src/physics/soft.js</code>). They are built on the first touch, so opening a toy
+            costs nothing, and toys without them play exactly as before. A rope or a cloth can live
+            beside <code>hands.pieces</code> (the octopus: the body is a piece, the arms ride it).
+            Everything is in recipe coordinates; speeds and forces are per toy radius. ↺ Reset
+            glides every node home and mends what snapped; once a strand is still at home, the
+            recipe's own <code>drive</code> takes over again (so its idle sway comes back).
+          </p>
+          <p>What moves on screen, so solid things stay solid:</p>
+          <ul>
+            <li>
+              <strong>Skin</strong> (thin, bendy things: a string, a tentacle, a tail, a sheet).
+              Give each node a token (<code>tokens: [i, …]</code>, up to 48 tokens per toy, shared
+              with pieces) and build the splats with
+              <code>skin: ropeSkin(points, tokens)</code> (each splat follows the two nodes it lies
+              between) or <code>skin: clothSkin({ rows, cols, points, tokens })</code> (each splat
+              follows the four corners of its cell, kind <code>skin4</code>). The splats move with
+              the nodes; nothing is warped by soft falloffs.
+            </li>
+            <li>
+              <strong>Rigid riders</strong> (a bead, a chime, an ornament, the yo-yo):
+              <code>pieces: [{ token | part, from, to, at, turnBy, spin, axis }]</code>. The piece
+              goes where node <code>from</code> goes and turns as the link <code>from</code> →
+              <code>to</code> turns (<code>to</code> defaults to the next node;
+              <code>node: i</code> with no <code>to</code> turns with the link before it;
+              <code>turn: false</code> keeps it upright; <code>turnBy: 0.4</code> turns it only that
+              share of the way, as a kite keeps facing the wind).
+              <code>spin: (strand) =&gt; angle</code> adds a turn about <code>axis</code> (the
+              yo-yo's spin). <code>at</code> is the built point that sits on the node when that
+              isn't the node's own place (the kite's bridle). A part's pivot is read from the kit.
+            </li>
+          </ul>
+          <h3 id="ropes-and-chains-hands-ropes">Ropes and chains: <code>hands.ropes</code></h3>
+          <p>
+            <code>ropes: (data, info) =&gt; [rope, …]</code>. A rope is a list of nodes held by
+            links: slack (it folds, it never pushes), with a little bending stiffness, under gravity
+            and air drag.
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Key</th>
+                  <th scope="col">Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>points</code></th>
+                  <td>The nodes' places as built, first to last (required).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>start</code></th>
+                  <td>
+                    Where the nodes start and go back to, when that isn't where they were built
+                    (cheese strings built stretched out start bunched at the cut).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>pin</code></th>
+                  <td>
+                    Nodes held where they are built (default <code>[0]</code>; <code>[]</code> with
+                    <code>attach</code>).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>attach</code></th>
+                  <td>
+                    <code>{ piece, nodes }</code>: these nodes (default <code>[0]</code>) ride
+                    <code>hands.pieces[piece]</code> (tied at their start, or at the points
+                    <code>at</code>); <code>{ rope, node, nodes }</code>: they ride node
+                    <code>node</code> of an earlier strand (by its place in the list, ropes then
+                    cloth) and turn with it (a kite's tail; <code>turnBy</code> as for riders).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>mass</code></th>
+                  <td>Per node (a number, or a list: a heavy end such as the yo-yo).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>stiff</code></th>
+                  <td>
+                    0..1 stretch stiffness (1, the default: it doesn't stretch; 0.6: a rubbery
+                    string).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>bend</code></th>
+                  <td>0..1 bending stiffness (default 0.2; 0: a limp thread).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>keep</code></th>
+                  <td>
+                    Per second: the pull back to the built shape, carried by the piece it rides
+                    (arms curl).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>drag</code></th>
+                  <td>Air drag per second (default 1.2).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>weight</code></th>
+                  <td>
+                    How much gravity pulls it (default 1; 0: it keeps its shape by
+                    <code>keep</code> alone, as muscles hold an arm).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>breakAt</code></th>
+                  <td>
+                    A link snaps when stretched past this many times its length (cheese strings).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>wind</code></th>
+                  <td>
+                    <code>{ vel: [x, y, z], gust, flap, k }</code>: moving air (toy radii per
+                    second) it streams in.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>lift</code></th>
+                  <td>
+                    <code>[[node, [ax, ay, az]], …]</code>: a steady push on a node (a kite's lift).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>avoid</code></th>
+                  <td>
+                    <code>[{ at, r, piece }]</code>: spheres the nodes stay out of (on a piece, if
+                    <code>piece</code> is given).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>radius</code></th>
+                  <td>The nodes' size against the floor and spheres (default 0.02 toy radii).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>grab</code></th>
+                  <td>
+                    <code>false</code> (not taken by the finger), or the list of nodes the finger
+                    can take.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>pick</code></th>
+                  <td>How near a press must be to take a node (default about 0.12 toy radii).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>reach</code></th>
+                  <td>How far past its length a held rope may be pulled (default 1.04).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>maxPull</code></th>
+                  <td>
+                    The furthest (recipe units) the finger can pull a node from where it rests (a
+                    hood keeps its shape).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>update</code></th>
+                  <td>
+                    <code>(strand, dt, soft) =&gt; {}</code> each step: set
+                    <code>strand.scale</code> to reel the rope in or out.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>reset</code></th>
+                  <td><code>(strand, soft) =&gt; {}</code> when ↺ Reset mends it.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>tokens</code></th>
+                  <td>One token per node (or <code>null</code>) for skin splats.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>frame</code></th>
+                  <td>
+                    A part name: the tokens are given in that part's moving frame, for skin splats
+                    that are also on the part (the kite's tail; the part must be one of the riders).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>visible</code></th>
+                  <td>
+                    <code>(strand, soft) =&gt; 0..1</code>: how visible its tokens are (cheese
+                    strings show only once pulled out).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>pieces</code></th>
+                  <td>Rigid riders (above).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>A hanging string of beads, each bead a part that turns with the string:</p>
+          <pre><code>hands: {
+  floor: 0,
+  ropes: () =&gt; [{
+    points: [[0, 1.2, 0], [0, 1.0, 0], [0, 0.8, 0], [0, 0.6, 0]],
+    pieces: [{ part: &quot;bead1&quot;, node: 1 }, { part: &quot;bead2&quot;, node: 2 }, { part: &quot;bead3&quot;, node: 3 }],
+  }],
+},</code></pre>
+          <p>
+            An arm that rides the body and curls back (the body is <code>hands.pieces[0]</code>):
+          </p>
+          <pre><code>ropes: () =&gt; ARMS.map((pts, a) =&gt; ({ points: pts, attach: { piece: 0 }, keep: 5, bend: 0.4, drag: 2, tokens: ARM_TOKENS[a] })), // prettier-ignore</code></pre>
+          <h3 id="cloth-hands-cloth">Cloth: <code>hands.cloth</code></h3>
+          <p>
+            <code>cloth: (data, info) =&gt; [sheet, …]</code>. A sheet is <code>rows</code> ×
+            <code>cols</code> nodes, <code>points</code> row by row, held by links along the rows
+            and columns, across the cells (<code>shear</code>, 0..1, default 0.6) and two apart
+            (<code>bend</code>). It takes the rope keys above (<code>pin</code>,
+            <code>attach</code>, <code>mass</code>, <code>stiff</code>, <code>bend</code>,
+            <code>drag</code>, <code>wind</code>, <code>avoid</code>, <code>radius</code>,
+            <code>tokens</code>, <code>breakAt</code>) except that nothing is pinned unless you say
+            so. Build the sheet's splats with
+            <code>skin: clothSkin({ rows, cols, points, tokens })</code>. A flag on its pole:
+          </p>
+          <pre><code>cloth: () =&gt; [{ rows: 5, cols: 7, points: FLAG_GRID, pin: [0, 7, 14, 21, 28], wind: { vel: [2.5, 0, 0], gust: 0.5 }, tokens: FLAG_TOKENS }], // prettier-ignore</code></pre>
+          <h3 id="soft-stretch-hands-stretch">Soft stretch: <code>hands.stretch</code></h3>
+          <p>
+            <code>stretch: { radius, max, hz, damping, at }</code> (or a function of
+            <code>(data, info)</code> returning it). A press on the toy that misses its pieces and
+            nodes takes the toy's grab, as the gummy bear's: the splats near the finger follow it,
+            fading over <code>radius</code> toy radii (default 0.5), up to <code>max</code> toy
+            radii (default 0.8, a soft cap). Let go and the pull swings back through rest on a
+            spring of <code>hz</code> wobbles a second (default 3) with <code>damping</code> (0..1,
+            default 0.2: a few wobbles; 0.5: one soft bounce).
+            <code>at: (p) =&gt; bool</code> limits where a press stretches. Keep
+            <code>radius</code> at 0.45 or more and <code>max</code> under about 0.9 so a stretched
+            toy stays solid (no gaps, no see-through). A jelly:
+          </p>
+          <pre><code>hands: { floor: 0, stretch: { radius: 0.5, max: 0.7, hz: 3.5, damping: 0.18 } },</code></pre>
+          <h3 id="sounds-and-tests">Sounds and tests</h3>
+          <p>
+            A link that snaps sends a hit with <code>snap: true</code> (and <code>strand</code>, the
+            rope's <code>name</code>) to <code>hands.sound(hit, vol)</code>. In tests,
+            <code>player.handsOn.state().soft</code> gives each strand's nodes, their homes and how
+            many links are broken. <code>tests/hec-engine.spec.mjs</code> measures each piece.
+          </p>
+          <h2 id="6-behaviours">6. Behaviours</h2>
+          <p>
+            A behaviour moves each splat on the GPU, every frame. Set <code>kind</code> and
+            <code>params: [a, b]</code> on a shape or a cloud splat:
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">kind</th>
+                  <th scope="col">What it does</th>
+                  <th scope="col">a</th>
+                  <th scope="col">b</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>orbit</code></th>
+                  <td>Turns around the toy's up axis.</td>
+                  <td>turns per second at the rim (radians)</td>
+                  <td>falloff: 0 rigid, 1.5 Keplerian</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>beat</code></th>
+                  <td>Heartbeat swell from the centre.</td>
+                  <td>amount (0.05)</td>
+                  <td>phase</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>breathe</code></th>
+                  <td>Slow swell.</td>
+                  <td>amount</td>
+                  <td>phase</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>flame</code></th>
+                  <td>Rises, shrinks and reddens in a loop.</td>
+                  <td>height in toy radii</td>
+                  <td>phase (random)</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>rise</code></th>
+                  <td>Drifts up and fades (embers, bubbles, smoke).</td>
+                  <td>height</td>
+                  <td>phase</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>fall</code></th>
+                  <td>Falls and fades (rain, snow, petals).</td>
+                  <td>distance</td>
+                  <td>phase</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>twinkle</code></th>
+                  <td>Brightness flicker.</td>
+                  <td>amount (0.3 to 1)</td>
+                  <td>phase</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>sway</code></th>
+                  <td>Bends with height above a base (plants, tentacles, hair).</td>
+                  <td>amount</td>
+                  <td>base height (recipe coordinates)</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>grow</code></th>
+                  <td>Appears as <code>out.grow</code> passes a.</td>
+                  <td>threshold 0..1</td>
+                  <td>unused</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>melt</code></th>
+                  <td>Slumps and spreads to the floor as <code>out.energy</code> rises.</td>
+                  <td>how easily (0..1)</td>
+                  <td>unused</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>pulse</code></th>
+                  <td>A glow (<code>out.glow</code>) runs along a path.</td>
+                  <td>position along the path 0..1</td>
+                  <td>unused</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>wave</code></th>
+                  <td>Ripples up and down.</td>
+                  <td>amount</td>
+                  <td>phase</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>glint</code></th>
+                  <td>Sparkles as the camera moves.</td>
+                  <td>amount</td>
+                  <td>unused</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>band</code></th>
+                  <td>Glows (<code>out.glow</code>) as its channel passes a.</td>
+                  <td>where along the channel (0..1)</td>
+                  <td>band width (0.08)</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>fade</code></th>
+                  <td>Fades out (alpha) as its channel passes a.</td>
+                  <td>where along the channel</td>
+                  <td>width; negative: fades in</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            <code>amount</code> from <code>drive</code> multiplies beat, breathe, flame, rise,
+            twinkle, sway and wave. Behaviours run in the toy's rest pose, before parts move it.
+          </p>
+          <p>
+            <strong>Rim (glass; lane Fix4, September 30, 2026).</strong>
+            <code>kind: &quot;rim&quot;, params: [face, sharpness]</code> sets a splat's opacity by
+            how squarely it faces the eye, seen from its part's center (the part's pivot plus its
+            offset; the toy's center for splats on no part):
+            <code>mix(face, 1, (1 − |f|)^sharpness)</code>, where <code>f</code> is the same facing
+            number the part cull uses. A thin, even shell of flat splats with this kind is nearly
+            clear face on (<code>face</code> about 0.02) and solid where it turns away, from any
+            side: clear glass with a crisp edge, with no grain. <code>sharpness</code> 2 gives a
+            soft edge, 4 to 8 a crisp one. It runs with motion on or off, and combines with a part
+            (the part moves the shell and its center). Build the shell round the part's pivot, so
+            the center is the sphere's. The opacity is the splat's own opacity times this factor.
+            Flat shells without it can't do this: a fine shell of splats is only 1 to 2 px on a
+            phone, so each splat draws as a dot however it is turned, and the edge and the face film
+            rise and fall together (docs/handoff/Fix4.md).
+          </p>
+          <p>
+            <strong>Channels (E3).</strong> <code>out.morph = [a, b, c, d]</code> sets four channels
+            (0 at rest) that drive three more kinds. They run with motion on or off (like parts),
+            and a shape or cloud splat picks its channel with <code>channel: 0..3</code> (or
+            <code>(c) =&gt; n</code>):
+          </p>
+          <ul>
+            <li>
+              <strong>Morph</strong>: <code>to: (c) =&gt; [x, y, z]</code> (a cloud splat:
+              <code>to: [x, y, z]</code>) gives each splat a target in recipe coordinates; it moves
+              there in a straight line as its channel goes 0 → 1 (and beyond, or back past its rest
+              place for negative values). Use it for soft things that really change shape: a red
+              cell curling into a sickle, a cell pinching in two, a knot contorting. Return
+              <code>null</code> to keep a splat still. Targets count in the fit. Splats keep the
+              orientation they were built with, so where the surface turns a lot use rounder splats
+              (<code>flat</code> 0.4 or more). Morph combines with a part (the part moves the
+              morphed splat), not with another behaviour.
+            </li>
+            <li>
+              <strong>Band</strong>: <code>kind: &quot;band&quot;, params: [at, width]</code> adds
+              the glow colour where the channel passes <code>at</code>: a wave of light that starts
+              at the tap (a calcium wave, a sheen wiping across). Give each splat its
+              <code>at</code> from its place (distance along an arm, height).
+            </li>
+            <li>
+              <strong>Fade</strong>: <code>kind: &quot;fade&quot;, params: [at, width]</code> clears
+              a splat by its alpha as the channel passes <code>at</code> (a negative width makes it
+              appear instead). Unlike <code>visible</code> and <code>grow</code>, it does not shrink
+              splats, so a fading layer never turns to speckle.
+            </li>
+          </ul>
+          <p>
+            <strong>Skin</strong>: <code>skin: (c) =&gt; [a, b, s]</code> makes a splat follow
+            tokens <code>a</code> and <code>b</code> (their <code>offset</code> only), blended by
+            <code>s</code>: an edge between two moving corners stays a straight edge (the
+            hypercube's edges follow its sixteen corners, which are tokens). Use round splats: they
+            are not turned.
+          </p>
+          <p>Channel tricks from the lanes (2026-09-26):</p>
+          <ul>
+            <li>
+              <strong>A whole surface bent through keyframes</strong> is a skinned sheet: each splat
+              follows two tokens, and the tokens move through the keyframes (E4-finish's ocean wave,
+              38 control tokens). Keep the bending in the plane the camera looks along, and use
+              rounder splats.
+            </li>
+            <li>
+              <strong>Bending one piece that touches itself</strong> (a pretzel): use one smooth
+              twist of space for every splat, so crossings stay joined. Moving each splat along a
+              new centre line lifts the rope off itself where it crosses (E5's pretzel r2; r3 fixed
+              it).
+            </li>
+            <li>
+              <strong>Growing out of a hidden spot</strong> (a tongue, sparks, sand): build the
+              morph bunched up at the spot (<code>p</code> at rest) and morph it out to its full
+              shape (<code>to</code> at full reach).
+            </li>
+            <li>
+              <strong>A travelling wave with morphs</strong>: split the moving pieces between three
+              channels driven a third of a cycle apart (E6b's sea urchin spines).
+            </li>
+            <li>
+              <strong>Negative glow darkens</strong>: <code>out.glow</code> with negative colours on
+              a <code>band</code> layer makes night fall (the Taj Mahal) or casts a moving shadow
+              (the Washington Monument's sundial shadow, a band on the ground at each splat's
+              bearing).
+            </li>
+            <li>
+              <strong>A sustained light from a band</strong>: give it
+              <code>params: [1, 0.5]</code> and hold its channel partway (0.5 to 0.7); the glow
+              follows the channel (the Eiffel Tower's gold lights, Stonehenge's stones).
+            </li>
+            <li>
+              <strong>A frayed edge</strong>: a colour function that returns <code>null</code> for
+              more splats towards an edge makes a surface fade into its surroundings instead of
+              stopping at a straight line (the ocean wave).
+            </li>
+          </ul>
+          <p>From lanes Math and Fix3 (September 27–28, 2026):</p>
+          <ul>
+            <li>
+              <strong>Real-time bending through keyframes of any shape</strong>: build a set of
+              copies, each morphing exactly into the next on one channel, and show the copy for the
+              slider's place (the graph and surface plotters; each copy is a part, so at most 15).
+            </li>
+            <li>
+              <strong>Drawing behind a pen</strong>: give the ink
+              <code>kind: &quot;fade&quot;</code> on a channel with <code>at = 1.002 − s</code> (s
+              is the arc fraction), so the line appears crisply right behind the moving pen (the
+              graph plotter).
+            </li>
+            <li>
+              <strong>Motion that flows through keyframes</strong>: easing each segment on its own
+              stops the motion at every key. Run one clock through all of them instead: a monotone
+              curve from time to key index, still only at the start and the end, then Catmull-Rom
+              between the keys (Fix3's ocean wave, <code>owFallIndex</code> in
+              <code>src/packs/elements.js</code>).
+            </li>
+            <li>
+              <strong>A sound that follows the effect</strong>: <code>out.cues</code> from
+              <code>drive()</code> can push short tones whose pitch follows what the toy is doing,
+              so the sound fits any typed input (the graph plotter's pen).
+            </li>
+          </ul>
+          <h2 id="7-house-rules">7. House rules</h2>
+          <ul>
+            <li>
+              <strong>Deterministic</strong>: only <code>k.rand()</code>, <code>c.rand()</code> and
+              the kit's noise. No <code>Math.random</code>, no dates.
+            </li>
+            <li>
+              <strong>Generic designs</strong>: no logos, brands, league marks or named products.
+              Landmarks may be modelled; modern named buildings become generic
+              (&quot;supertall&quot;). Weapons are medieval or fantasy only. Anatomy is stylised and
+              friendly, never gory.
+            </li>
+            <li>
+              <strong>Keep details</strong>: seams, stitches, eyes, flames, coins and labels use
+              <code>pattern: false</code> or <code>keep</code>.
+            </li>
+            <li>
+              <strong>Inside</strong>: solid things get <code>interior: 0.08..0.15</code> with a
+              sensible <code>core</code>, so Slice shows an inside (a cake has sponge, a planet has
+              a core).
+            </li>
+            <li>
+              <strong>Fast</strong>: <code>node tools/check-packs.mjs &lt;pack&gt;</code> must
+              report every toy under 1.5 s at 160,000 splats. Avoid per-splat loops over hundreds of
+              items; bucket or precompute.
+            </li>
+            <li>
+              <strong>Stable</strong>: at most 15 parts; behaviour names from the table; positions
+              finite.
+            </li>
+          </ul>
+          <h2 id="7b-effect-quality">7b. Effect quality</h2>
+          <p>
+            The owner's review of Phase E1 (<code>docs/reviews/2026-09-24-e1/review.md</code>) set
+            these rules. The short form is in CLAUDE.md.
+          </p>
+          <ul>
+            <li>
+              <p>
+                <strong>Real motion, not a warped picture.</strong> A part moves as a solid piece. A
+                scan rig's soft regions (<code>soft</code> above about 0.1) bend the picture where a
+                part meets the rest, and at any visible size that reads as a stretched photo (the E1
+                cat, horse, elephant trunk and tomatoes). Use soft edges only to hide a seam of a
+                few percent of the toy. When a scan cannot move a part cleanly:
+              </p>
+              <ol>
+                <li>
+                  cut the part out with hard edges (<code>soft: 0.02</code>, colour-keyed regions)
+                  and keep the move small enough that no gap shows;
+                </li>
+                <li>
+                  hide the scan's part (<code>visible: 0</code>) and show a kit-built stand-in from
+                  an <code>addon</code> that moves;
+                </li>
+                <li>
+                  rebuild the toy as a kit toy (a recipe) where every piece is its own part; or
+                </li>
+                <li>choose an effect that moves the whole scan, or its light, instead.</li>
+              </ol>
+            </li>
+            <li>
+              <strong>Separate things move separately.</strong> Tomatoes on a plate, drupelets on a
+              berry, shells in a basket and chess pieces each move as their own rigid piece, with
+              their own path. A wave or ripple pattern over one surface is not &quot;the tomatoes
+              moving&quot;.
+            </li>
+            <li>
+              <strong>Breaking is real.</strong> Pieces come off as whole pieces, fall under
+              gravity, bounce or roll, and come back (or the toy regrows them). Crumbs are small
+              solid bits, not a blur.
+            </li>
+            <li>
+              <strong>Instruments are played.</strong> Each note shows its cause: a string is
+              plucked and vibrates, a key goes down, a drum skin moves. Match the picture to the
+              sound's notes and timing.
+            </li>
+            <li>
+              <strong>Faces and bodies.</strong> Things that talk move their mouths in time with the
+              sound. Animals and statues move like the real thing (a horse rears from its hips, a
+              cat turns its head on its neck), not by bending the whole image.
+            </li>
+            <li>
+              <strong>Real rules.</strong> Games follow the real game (chess moves are legal, from a
+              real game). Thrown and hit things move like the real thing: a gridiron football
+              spirals about its long axis, a rugby ball tumbles end over end, a shuttlecock spins
+              nose first, a flying disc spins flat and glides.
+            </li>
+            <li>
+              <strong>Real materials.</strong> Solid things are opaque (no see-through pool balls),
+              gloss where the real thing is shiny, and have no blur or speckle at phone size.
+            </li>
+            <li>
+              <strong>The bar.</strong> The grape's peel (strips of skin curl back to show pale
+              flesh, then close) is the standard: one clear, physical idea that reads at a glance.
+            </li>
+            <li>
+              <strong>Judge motion, at phone size.</strong> Filmstrips at 220 px hide bending, smear
+              and speckle. Render a clip of every changed effect with
+              <code>tools/effect-clip.mjs</code> and look at it at full size before showing it; the
+              owner reviews the clips on the private &quot;Effect review&quot; page before merging.
+            </li>
+            <li>
+              <p>
+                <strong>Draw order (E2).</strong> Splats are depth-sorted in the pose they were
+                built in, so:
+              </p>
+              <ol>
+                <li>
+                  A solid body turned more than a quarter turn draws its far side over its near side
+                  (it looks hollow). For a full turn, build it twice, the second copy half a turn
+                  round and coloured as the first would be there, and show whichever copy is within
+                  a quarter turn of its built pose (<code>spinParts</code> in
+                  <code>src/packs/space.js</code>: Venus, Jupiter, Neptune).
+                </li>
+                <li>
+                  A layer of splats above a turning body (clouds) draws wrongly even then: paint it
+                  onto the body, or split the body into latitude bands that turn at their own
+                  speeds.
+                </li>
+                <li>
+                  A body split into bands that turn at different speeds: one band's far side can
+                  draw over the next band's near side at the edge (flaps). Set
+                  <code>cull: true</code> on the parts while they turn (it hides splats on the far
+                  side of the part's pivot; the Jupiter, Venus and Neptune bands) and show them a
+                  little bigger (<code>visible: 1.2</code>) to close the gaps the far side used to
+                  fill. Put the bands that stay still in a part too, so they can be culled.
+                </li>
+                <li>
+                  A fixed layer over part of a turning body (Earth's night, Mercury's heat) is
+                  covered wherever the body's shown copy was built nearer the camera. Build four
+                  copies a quarter turn apart and show one that was built on the far side of where
+                  it is shown (<code>spinQuarters</code>: side -1 when the layer is on the side the
+                  ground turns towards, +1 when it turns away). Things that ride over that layer
+                  (Earth's city lights) are built where they first come into it, so they are always
+                  shown at or past their built pose.
+                </li>
+                <li>
+                  Splats inside a turning body (<code>interior</code>) draw over its turned surface:
+                  keep a turning body hollow and put its inside in a separate part that hides while
+                  it turns (<code>coreBall</code>). Its outer layer shows through gaps in a thin
+                  shell, so keep it dark or a little smaller.
+                </li>
+                <li>
+                  Rings that turn for ever: make their marks repeat every eighth of a turn and turn
+                  them by the angle modulo that (<code>ringAngle</code>), so they never move far
+                  from their built pose.
+                </li>
+                <li>
+                  A piece that moves in front of something must be built where it will be seen in
+                  front (the black hole's star is built where it plunges, the solar system's Mercury
+                  in front of the Sun).
+                </li>
+                <li>Turning about the view direction keeps the order (Uranus rolls that way).</li>
+                <li>
+                  A single spinning body can use its part's <code>cull</code> flag instead of a
+                  second copy: cull while it turns, hide its inside, and show its splats about 1.15
+                  times bigger (E6a's balls). The cull flag suits round bodies only: it hides by
+                  direction from the center, so a long body (the American football) loses its ends.
+                  Build a long one twice instead (rule 1; lane Math).
+                </li>
+                <li>
+                  Don't bore holes into a body that turns: dark tubes inside it (a bowling ball's
+                  finger holes) draw through the shell once it turns. Paint them on the surface.
+                </li>
+                <li>
+                  Figures that walk towards the camera are built at the point of their path nearest
+                  the camera (the Parthenon's procession vanished under the rock when built where it
+                  started).
+                </li>
+                <li>
+                  Tokens that move far (a cube's cubies, a model's bricks) set
+                  <code>out.resort</code> on the frame they land, and the player sorts them again
+                  where they stand. Do it once per landing, not every frame (lane F).
+                </li>
+                <li>
+                  Pieces that glide just in front of a flat board (tokens along a diagram) fall
+                  behind the board between sorts. Set <code>out.resort</code> a few times during the
+                  glide, not only when it lands (lane AI).
+                </li>
+              </ol>
+            </li>
+            <li>
+              <strong>Glossy things that spin.</strong> Baked light turns with a spinning body, so a
+              rolling pool ball looks like glass. Spin an unlit copy built tiny at the centre (it
+              sorts behind everything, from any camera) under a fixed see-through layer of light
+              (<code>glossSpin()</code> in <code>src/packs/balls.js</code>).
+            </li>
+            <li>
+              <strong>Thin ribbons need bigger splats.</strong> A thin ribbon with a high weight
+              gets splats too small to see below about 300 px, and the curve vanishes. Use fewer,
+              bigger splats (weight 2 to 2.5, size 1.5; lane Math's plotters).
+            </li>
+            <li>
+              <strong>Text and small details.</strong> Letters vanish on a phone below about size /
+              sqrt(weight) = 0.5 (weight 10 did). Put text splats only on the ink, one square per
+              font pixel, rather than over the whole label with most thrown away, and stand the
+              letters clearly in front of their plate, not 0.002 in front, or the plate sorts over
+              them (lane AI's <code>text()</code> and <code>label3D()</code> in
+              <code>src/packs/computing.js</code>). Busy diagrams can raise the recipe's
+              <code>density</code>.
+            </li>
+            <li>
+              <strong>Long, thin models come out small.</strong> The kit fits a toy to a sphere
+              around its bounds, so a row of layers ends up small in the frame whatever its scale.
+              Lay it out as a compact block (lane AI's CNN in two rows).
+            </li>
+            <li>
+              <strong>Fading by size makes speckle.</strong> <code>visible</code> and
+              <code>kind: &quot;grow&quot;</code> both shrink splats, so a whole layer shrinking
+              away turns into dots. Clear a layer as a moving front instead (run
+              <code>out.grow</code> back down: the Mars dust storm), and give glow overlays bigger,
+              fainter splats than the surface under them (the quartz points, the opal).
+            </li>
+            <li>
+              <strong>Hidden pieces count in the fit.</strong> Every splat is used to fit the toy
+              into its frame, hidden or not, so build an effect's pieces small (inside the toy's
+              resting size) and grow them with their part's <code>scale</code> (the Sun's flare, the
+              star's red giant and shell, the meteor's fireball), or add them with
+              <code>fit: false</code> when they must be built off to one side and stay inside the
+              view (the Möbius strip's riders, built in front of and behind the band for the draw
+              order). They also count in the <strong>framing</strong>: the app frames a kit toy by
+              the bounds of all its splats (<code>buildKit</code> in <code>src/player.js</code>),
+              even with <code>fit: false</code>, so a hidden fly, moon or burst built outside the
+              toy shrinks it in its frame and on its thumbnail. Build such pieces inside the resting
+              bounds and move or grow them out with their part (E6b's frog, crown, Eiffel Tower and
+              Taj Mahal; E6a's basketball hand).
+            </li>
+            <li>
+              <strong>Loose pieces (E4).</strong> Leaves, petals, seeds, coconuts and stones that
+              come off are tokens, each on its own path, and they come back (they regrow, or hop
+              home). <code>flutterDown</code> and <code>swirlDown</code> in
+              <code>src/packs/nature.js</code> give a leaf a swinging or whirling fall that lands
+              flat; <code>moundTop</code> gives the ground's height so things land on it. A frond
+              that unrolls is a chain of tokens, each joint turning everything beyond it. Pieces
+              that travel are built where they are seen at their fullest and offset back at rest
+              (the bamboo's sections, the tornado's debris). Every effect must end exactly where the
+              toy rests: <code>tests/taps.spec.mjs</code> plays every kit toy's tap through and
+              compares its last moment with the rest pose.
+            </li>
+            <li>
+              <strong>Pieces that melt or wear away</strong> ride on the piece they grow from: scale
+              them about the parent's pivot too, or they are left hanging in the air (E4-finish's
+              ice swan, <code>iceAttached</code>).
+            </li>
+            <li>
+              <strong>Opening and swapping (E5).</strong> A thing that opens is built open and
+              hidden when closed, lit from its rest pose (the kiwi). A piece that must look right
+              both still and moving fast can be two copies that swap while it is fast (the avocado
+              stone). A toggle can tell a two-part story, with each tap remembering which way it
+              goes (the apple: a bite, then a worm and it heals).
+            </li>
+            <li>
+              <strong>Light that plays over a surface.</strong> A layer of splats coloured exactly
+              as the surface is there (invisible at rest) with
+              <code>kind: &quot;pulse&quot;</code> flashes as <code>out.glow</code> runs over it;
+              change the glow's colour each frame for rainbow fire (diamond, opal) or keep it one
+              colour for a running light (emerald, the aurora's folds). The glow runs at a fixed
+              speed (a pass every 2.9 s at normal speed), so it suits loops and repeats, not a front
+              that must start at the tap: for that, use <code>kind: &quot;grow&quot;</code> and
+              <code>out.grow</code> (the Moon's terminator, the Mars dust front, the ruby's glow).
+            </li>
+          </ul>
+          <h2 id="7c-sharp-kit-toys">7c. Sharp kit toys</h2>
+          <p>
+            From lanes Fidelity A and B (September 29, 2026), who made about a hundred grainy toys
+            sharp; the owner marked every before-and-after card good. The five causes of grain were
+            random placement, low density, mirror chrome on thin parts, see-through
+            <code>rim()</code> shells and faint clouds. The fixes:
+          </p>
+          <ul>
+            <li>
+              <strong>Even placement.</strong> <code>even: true</code> suits spheres, ellipsoids,
+              lathes and <code>k.param</code> surfaces. On <code>k.box</code>,
+              <code>k.cylinder</code>, <code>k.cone</code>, <code>k.torus</code>,
+              <code>k.disc</code> and <code>k.tube</code> it hatches, spirals or does nothing,
+              because those shapes take three random numbers per splat: use the even shapes in
+              <code>src/packs/even.js</code> instead (<code>evenBox</code>,
+              <code>evenCylinder</code>, <code>evenTorus</code>, <code>evenDisc</code>,
+              <code>evenEllipsoid</code>, <code>evenTube</code>, <code>evenRoundBox</code>, and
+              <code>capPoint</code> for highlights). They sample like the kit's shapes (the same
+              <code>face</code>, <code>side</code>, <code>cap</code>, <code>u</code> and
+              <code>v</code>), so color functions work unchanged:
+              <code>k.add(evenBox(1, 2, 3), { even: true, … })</code>. A custom shape declares
+              <code>dims: 2</code> or its own <code>sampleEven(a, b)</code>.
+            </li>
+            <li>
+              <strong>Solids at full opacity and full density</strong>, with clean colors from
+              functions and little noise. Softly lit metal instead of mirror chrome on thin parts;
+              solid shells instead of faint rims.
+            </li>
+            <li>
+              <strong>The two-pixel cull.</strong> The engine skips splats under about 2 screen
+              pixels, so raising a toy's density makes it sharper on a phone but thinner in 256 px
+              thumbnails and small embeds. Prefer even placement to more density, and check a 256 px
+              render (<code>profile=high</code>) as well as the phone view.
+            </li>
+            <li>
+              <strong>See-through surfaces</strong> placed exactly evenly show a moiré where layers
+              overlap: nudge each point by about half a cell (<code>nudgedEven()</code> in
+              <code>src/packs/maths.js</code>). Translucent bodies (the amoeba) read as smooth jelly
+              with fewer, larger, fainter splats (<code>size</code> 1.8 to 2.4,
+              <code>opacity</code> about 0.3).
+            </li>
+            <li>
+              <strong>Highlights</strong> of a few splats show as dots on an even body: use more,
+              larger and fainter splats so they merge into one gloss. A face built just inside a
+              solid (a clock's dial) has core splats in front of it: put it at or outside the
+              surface.
+            </li>
+            <li>
+              <strong>Faint clouds:</strong> splats under about 1/255 alpha are dropped, so very
+              faint big splats turn into blobs; water and rings drawn as clouds take
+              <code>even: true</code> (a sunflower spiral).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong>Lacquer, ivory and flat faces</strong> (lane A/B's toy piano): the kit's
+              default color jitter (0.04) reads as grain on smooth lacquer and ivory; 0.01 is clean.
+              Smaller splats along a flat face's edge (a color function returning
+              <code>{ c, size }</code>) keep box edges crisp instead of a fuzzy rim, and a long,
+              thin even rectangle spaces its splats unevenly (a hatch): fold the even square into
+              strips laid end to end (<code>crisp()</code> and <code>rect()</code> in
+              <code>src/packs/music.js</code>).
+            </li>
+          </ul>
+          <h2 id="7d-smooth-bodies-and-placed-recipes">7d. Smooth bodies and placed recipes</h2>
+          <p>
+            From lane Anatomy (September 29, 2026), whose atlas is a kit-built body with our own
+            organ toys inside it (<code>src/packs/anatomy-atlas.js</code>):
+          </p>
+          <ul>
+            <li>
+              <strong>A smooth body from primitives.</strong> Join ellipsoids and round cones with
+              an order-independent smooth union: the nearest primitive's distance, less the largest
+              fillet any neighbor makes with it. A chained smooth minimum depends on the order and
+              leaves steps that show as dark specks. Sample each primitive's surface evenly, push
+              the points onto the joined surface, and keep only the points where that primitive is
+              the nearest, so overlaps don't double up. Make all the points at once and size each
+              splat from its four nearest neighbors, so a primitive the join stretches still closes
+              without cracks (<code>bodyShape()</code>, <code>fieldAt()</code>).
+            </li>
+            <li>
+              <strong>Another toy's recipe inside a toy.</strong> Build it through a proxy kit
+              (<code>placed()</code>) that moves, turns and scales its shapes and gives its color
+              functions their own coordinates, so the colors stay right. Drop its moving effects and
+              lower its shapes' grids to fit the budget.
+            </li>
+          </ul>
+          <h2 id="7e-sound-preferences">7e. Sound preferences</h2>
+          <p>
+            Drawn from the owner's sound review of September 28, 2026
+            (<code>docs/reviews/2026-09-28-sounds/</code>, filed September 30) and his summary that
+            day. They are general guidance, not strict rules, but every new or changed sound follows
+            them unless the owner asks otherwise. <code>tools/sound-review.json</code> has his notes
+            per toy.
+          </p>
+          <ul>
+            <li>
+              <strong>Real things sound real.</strong> A real-world object makes the sound the real
+              thing makes, like a good sound effect or &quot;almost ASMR&quot;: a bite of an apple,
+              a hard taco shell cracking, dice on a table, bowling pins falling, a pool cue hitting
+              the ball, a book's pages turning, popcorn popping dry. Where synthesis can't get
+              there, use a short recorded CC0 sample (see below).
+            </li>
+            <li>
+              <strong>Animals make their own calls.</strong> An elephant trumpets, a horse whinnies,
+              a cat meows, an owl hoots, a frog croaks, a fly buzzes like a fly. That goes for
+              statues and toys of animals too.
+            </li>
+            <li>
+              <strong>Fire, explosions and weather.</strong> Fire crackles and roars like fire (the
+              volcano's flame is the reference). An explosion or a burst sounds like one: a
+              supernova, a meteor's burst, fireworks. Wind, waves and sand-like noise stay quiet and
+              in the background. They are the most common complaint: &quot;overwhelming&quot;,
+              &quot;almost hurts the ears&quot;.
+            </li>
+            <li>
+              <p><strong>Avoid, unless the thing really makes it:</strong></p>
+              <ul>
+                <li>
+                  clicks and ticking (the owner: &quot;I don't like the clicking on almost
+                  anything&quot;);
+                </li>
+                <li>whistles, chirps and &quot;a little bell&quot; at the start of a sound;</li>
+                <li>the rising &quot;vroom&quot; acceleration buzz used for spinning up;</li>
+                <li>
+                  robotic, electronic or &quot;digital&quot; tones and jingles on anything that
+                  isn't electronic;
+                </li>
+                <li>
+                  instrument tones (xylophone runs, string plucks, chimes, chords) on things that
+                  aren't instruments;
+                </li>
+                <li>
+                  bubbles for things that aren't liquid, and a zipper sound for anything that isn't
+                  a zipper.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Sync to what you see.</strong> Each visible event gets its sound at the moment
+              it happens: petals landing, a ball's bounces down a slope, a starfish's arms opening,
+              each candle going out. One sound for a sequence of separate events doesn't match.
+            </li>
+            <li>
+              <strong>Music only where music belongs</strong>, and then real music on a realistic
+              instrument, not a jingle: part of &quot;Happy Birthday to You&quot; on the birthday
+              cake, a carol such as &quot;Jingle Bells&quot; on the decorated tree. Choose
+              public-domain melodies, perform them ourselves or use CC0 recordings, and never add
+              voices. Keep it respectful where a culture is involved.
+            </li>
+            <li>
+              <strong>Subtle levels.</strong> Nothing loud or harsh. The tap's main sound leads, and
+              ambience stays under it.
+            </li>
+            <li>
+              <strong>Exceptions he likes</strong>, as references: the Mandelbulb (electronic, and
+              it fits), the sorting machine, the looped transformer, Newton's cradle, the ocean
+              liner, the Pyramids and the whole music shelf.
+            </li>
+            <li>
+              <strong>Recorded samples.</strong> Only CC0 or public domain first; CC BY only if
+              nothing CC0 fits, credited like any asset; CC BY-SA (since October 2, 2026) only if
+              nothing else fits, with its notice. CC BY-NC or BY-NC-SA (since October 3, 2026) last
+              of all, on CLAUDE.md's four conditions. Never ND or &quot;royalty-free&quot; custom
+              licenses (Pixabay, Mixkit, Zapsplat, Sonniss). Check the license on the live page of
+              each sound, and record it in CREDITS.md and <code>tools/assets.json</code>. Keep
+              samples short, mono and small, loaded only when the toy is tapped.
+            </li>
+          </ul>
+          <p>
+            Since September 30, 2026, a new sound may go live before the owner has heard it. He says
+            which ones to fix, and the sound patrol checks new toys against this section.
+          </p>
+          <h2 id="8-checking-your-work">8. Checking your work</h2>
+          <pre><code>node tools/check-packs.mjs &lt;pack&gt;                                   # builds, counts, times
+python3 -m http.server 4173 --bind 127.0.0.1 &amp;                      # serve the site
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/make-thumbs.mjs &lt;pack&gt;
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/contact-sheet.mjs sheet.png &lt;pack&gt;
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-strip.mjs strips &lt;id&gt; ...  # tap effect over time
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-clip.mjs clips &lt;id&gt; ...    # tap effect as a clip
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/kit.spec.mjs</code></pre>
+          <p>
+            Look at the contact sheet: every toy should be recognisable at 200 px, fill its square,
+            and face the viewer. <code>make-thumbs</code> renders with motion off, so behaviours
+            show their resting pose. Check a tap effect with <code>effect-strip</code>: it should
+            last at least 1.5 s, move at least about a tenth of the toy (or change its light
+            clearly), and be obvious within the first half second.
+          </p>
+          <h2 id="9-models-to-splats">9. Models to splats</h2>
+          <p>
+            From lane Studio Models (September 29, 2026). The converter behind the &quot;Model to
+            splats&quot; toy (<code>model-splats</code>, Studio shelf, labs) is one pure module,
+            <code>src/packs/studio-models-core.js</code>, that the toy
+            (<code>src/packs/studio-models.js</code>) and a Node tool share, so a model looks the
+            same in both.
+          </p>
+          <p>
+            <strong>What it does.</strong> <code>parseModel(bytes, fileName, { files })</code> reads
+            glTF 2.0 (<code>.glb</code>, <code>.gltf</code>), OBJ with its MTL and STL (binary and
+            ASCII). <code>prepareModel(raw, { decodeImage })</code> decodes and mip-maps the
+            base-color textures, welds vertices, finds every triangle's edge neighbors (folds
+            sharper than 32 degrees are hard edges) and makes crease-smoothed normals when the file
+            has none. <code>sampleSurface(prep, count, options)</code> then:
+          </p>
+          <ul>
+            <li>
+              places points by area, weighted up where the surface bends sharply or its triangles
+              are small (the detail), on an even low-discrepancy pattern per triangle;
+            </li>
+            <li>
+              sizes each splat from the mean distance to its nearest neighbors on the same surface,
+              so the surface closes (<code>FILL</code>), and shrinks it a little beside a hard edge
+              so the edge stays crisp;
+            </li>
+            <li>lays it flat on the surface, oriented by the face normal;</li>
+            <li>
+              colors it from the texture at its UV (at the mip level that matches the splat), the
+              vertex colors and the material color, with the soft key light of the other kit toys
+              baked in (<code>light: false</code> leaves it out); a cut-out (an alpha mask) leaves a
+              hole and glass is left out;
+            </li>
+            <li>
+              turns the model upright (<code>up: &quot;z&quot;</code> for STL and CAD), centers it
+              and scales it to a sphere of radius 1.
+            </li>
+          </ul>
+          <p>
+            The renderer draws a splat as exp(-r²/σ²), which is narrower than the usual Gaussian, so
+            a splat is sized about one neighbor distance (<code>FILL</code>, 1.05) to close.
+            <code>wireGeometry</code> and <code>wireSplats</code> draw the mesh's edges as thin
+            streaks (a mesh with more than 1,800 edges is first simplified by vertex clustering so
+            the net stays readable).
+          </p>
+          <p>
+            <strong>Not supported</strong> (the toy says so): Draco- or meshopt-compressed glTF,
+            morph targets, skinning (shown in its bind pose), animations, lights, emissive colors,
+            any texture but the base color.
+          </p>
+          <p>
+            <strong>Budgets.</strong> The toy sets <code>density: 1.5</code>, so the kit's count is
+            90k, 210k, 300k and 400k splats on the low, mid, high and max tiers
+            (<code>MODEL_BUDGETS</code>, capped by each tier's <code>maxCount</code>), and the panel
+            shows the count.
+          </p>
+          <p>
+            <strong>The tap</strong> uses the morph channels: every splat has its own place in a
+            loose cloud (out along its normal, a little to the side) and goes there and back in a
+            straight line in about 3 s. Its channel is set by its height, so the lift rises through
+            the model like a wave.
+          </p>
+          <p>
+            <strong>Files that come with a model.</strong> The input sets
+            <code>multiple: true</code>, so the Toy tab's file dialog takes several files at once
+            (engine PR #87): a <code>.gltf</code> with its <code>.bin</code> and textures, or an
+            <code>.obj</code> with its <code>.mtl</code> and pictures.
+            <code>read(text, fileName, file, files)</code> picks the model among them (a
+            <code>.glb</code>, <code>.gltf</code>, <code>.obj</code> or <code>.stl</code>) and hands
+            the rest to the parser by name. A <code>.gltf</code> opened alone says which files it
+            needs; a missing texture only leaves its color out, with a note.
+          </p>
+          <p><strong>The tool.</strong></p>
+          <pre><code>node tools/model-to-splats.mjs path/to/model.glb [--id name] [--splats 200000] [--up auto|y|z] [--no-light] [--out file.ply]</code></pre>
+          <p>
+            writes <code>.cache/models/&lt;id&gt;/&lt;id&gt;.ply</code>, the format
+            <code>tools/mesh-to-splats.mjs</code> writes (position, normal, SH color, opacity, log
+            scales, rotation). To make a toy from a CC0 model: check its license on the live page,
+            run this, add an entry for the PLY to <code>tools/assets.json</code> like the other
+            scans (and its credit to <code>CREDITS.md</code>), then
+            <code>node tools/prepare-assets.mjs</code>. <code>tools/stm-fixtures.mjs</code> makes
+            the test models and <code>tools/stm-samples.mjs</code> the two samples.
+          </p>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+          target="_blank"
+          rel="noopener"
+          >docs/PACKS.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

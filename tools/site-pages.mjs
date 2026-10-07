@@ -10,6 +10,7 @@
 // `nav` is the menu item it lights up; `type` is a key of PAGE_TYPES in
 // tools/site-build.mjs. Text fields are plain HTML (written here, never user input).
 
+import fs from "node:fs";
 import { toyPageEntries } from "./site-toy-pages.mjs";
 
 export const SITE = {
@@ -19,10 +20,40 @@ export const SITE = {
   origin: "https://ryanjosephkamp.github.io",
   base: "/splashery/site/",
   github: "https://github.com/ryanjosephkamp/splashery",
+  // Who made it, as the About page spells it, and his own site (the owner's walkthrough, October 6, 2026).
+  maker: "Ryan Kamp",
+  makerSite: "https://ryanjosephkamp.github.io/",
   // While the site is a preview: pages ask search engines not to list them.
   // Set to false when the owner makes the site the front door.
   preview: true,
 };
+
+// ---- Links that open in a new tab ------------------------------------------------------------
+// Every link that opens the Splashery app (the gallery, "Open in Splashery") or another site
+// opens in a new tab, so the visitor keeps their place on the site (the owner's walkthrough,
+// October 6, 2026). Write one with appLink(); the build also runs every finished page through
+// newTabLinks(), which catches the rest (the Markdown pages, the toy pages).
+
+export const NEW_TAB = 'target="_blank" rel="noopener"';
+
+// A link to the app, written relative to site/ ("../" is the gallery), as HTML for `up` deep.
+export const appLink = (href, html, { up = "", cls = "" } = {}) =>
+  `<a${cls ? ` class="${cls}"` : ""} href="${up}${href}" ${NEW_TAB}>${html}</a>`;
+
+// Adds target="_blank" rel="noopener" to every <a> in a page that leads out of site/'s own
+// pages: a web address, or a path that climbs out of site/ into the gallery or the app (not the
+// manual or the pictures). `up` is the prefix from the page back to site/.
+export function newTabLinks(html, up = "") {
+  return html.replace(/<a\s([^>]*)>/g, (tag, attrs) => {
+    if (/\btarget=|\bdownload\b/.test(attrs)) return tag;
+    const m = /\bhref="([^"]*)"/.exec(attrs);
+    if (!m) return tag;
+    const href = m[1];
+    const rest = href.startsWith(up) ? href.slice(up.length) : href;
+    const out = /^https?:\/\//.test(href) || /^\.\.\/(?:$|[#?]|worlds\/)/.test(rest);
+    return out ? `<a ${attrs} ${NEW_TAB}>` : tag;
+  });
+}
 
 // The one menu, in order. `href` is relative to site/.
 export const MENU = [
@@ -83,7 +114,7 @@ export const PAGES = [
     nav: "tools",
     title: "Tools",
     description: "Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light.", // prettier-ignore
-    lead: "Splashery is also a workshop. Each of these opens in the gallery and works on your own things, on your device; nothing is uploaded.", // prettier-ignore
+    lead: "Splashery is also a workshop. Each tool has its own page, and opens in the gallery, in a new tab, to work on your own things, on your device; nothing is uploaded.", // prettier-ignore
     styles: ["hubs.css"],
     // Each group lists toy ids from src/toys.js (the build stops on an unknown id): the
     // toy's own picture is the drawing, `text` is the line shown, and an item with an
@@ -238,7 +269,7 @@ export const PAGES = [
     ],
     dataLead: "Some toys show published data: each splat is a real measurement, or a real structure. This is where each comes from.", // prettier-ignore
     dataNote: "The other science toys are built from recipes written for Splashery; each toy's About tab, in the gallery, says what it simplifies.", // prettier-ignore
-    evidenceLead: "Every toy that claims to show something true about the world is meant to have an evidence file: what it claims, how the code does it, the sources, and where it simplifies. They live in @@, and each toy's own page will show its file.", // prettier-ignore
+    evidenceLead: "Every toy that claims to show something true about the world is meant to have an evidence file: what it claims, how the code does it, the sources, and where it simplifies. How they work is written up in @@, and each toy's own page shows its file.", // prettier-ignore
     // One row per dataset: the toys that show it, what it shows, and its sources and licenses.
     datasets: [
       {
@@ -336,8 +367,9 @@ export const PAGES = [
       { icon: "share", href: "share/", title: "Embed and share", text: "Put a toy on your own page, and how a scene link carries a toy and its settings." }, // prettier-ignore
     ],
     links: [
-      { href: "https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md", label: "Writing toy recipes", text: "How a toy's recipe says which parts move, and how." }, // prettier-ignore
-      { href: "https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md", label: "The scene format", text: "What a shared link or a saved scene holds." }, // prettier-ignore
+      { href: "learn/recipes/", label: "Writing toy recipes", text: "How a toy's recipe says which parts move, and how." }, // prettier-ignore
+      { href: "learn/scene-format/", label: "The scene format", text: "What a shared link or a saved scene holds." }, // prettier-ignore
+      { href: "learn/evidence/", label: "Is it right? The evidence files", text: "How each toy that claims to show something true is checked against its sources." }, // prettier-ignore
     ],
   },
   {
@@ -360,6 +392,24 @@ export const PAGES = [
       "The lanes, the Operator, the reviews and the rules behind Splashery, in plain words.",
     lead: "Many Claude sessions, one person with ideas, and a lot of watching clips.",
     styles: ["hubs.css"],
+    outline: true,
+  },
+  {
+    // A draft for the owner to look at first: linked from nowhere (not the menu, not How Splashery
+    // is made, not search, not the sitemap) until he says yes.
+    path: "learn/made/loop/",
+    type: "article",
+    article: "loop",
+    nav: "learn",
+    title: "The loop a lane follows",
+    description:
+      "The loop every Splashery lane follows, from the Operator's brief to the owner's gate, drawn with GROOPH.",
+    lead: "How a piece of work gets from an idea to the public site, drawn as a loop graph.",
+    styles: ["hubs.css"],
+    draft: true,
+    sitemap: false,
+    precache: false,
+    search: false,
   },
   {
     path: "learn/notebook/",
@@ -369,6 +419,7 @@ export const PAGES = [
     description: "What each lane of Splashery built, which model built it, how long it took and what the team learned.", // prettier-ignore
     lead: "A running record of how Splashery is built, one entry per lane.",
     styles: ["hubs.css"],
+    outline: true,
     files: [{ file: "docs/NOTEBOOK.md", title: "" }],
   },
   {
@@ -398,6 +449,8 @@ export const PAGES = [
     description: "Every scan, model, sound, dataset and library in Splashery, with its author and license, built from the project's CREDITS.md and LICENSES.md.", // prettier-ignore
     lead: "Everything in Splashery that someone else made, who made it, and the license it comes under.", // prettier-ignore
     styles: ["hubs.css"],
+    outline: true,
+    note: (up) => `Something missing, or a credit that isn't right? <a href="${up}about/contact/">Contact the maker</a>.`, // prettier-ignore
     files: [
       { file: "CREDITS.md", title: "Credits", note: "Scans, models, sounds, data and everything else that is not our own code." }, // prettier-ignore
       { file: "LICENSES.md", title: "Third-party licenses", note: "The code libraries and tools Splashery uses, with their license texts.", demote: true }, // prettier-ignore
@@ -422,6 +475,29 @@ export const PAGES = [
     styles: ["hubs.css"],
   },
   {
+    path: "about/contact/",
+    type: "contact",
+    nav: "about",
+    title: "Contact",
+    description: "Who makes Splashery and where to find the maker: his website, GitHub, LinkedIn, X, YouTube, Hugging Face and blog.", // prettier-ignore
+    lead: "Splashery is made by Ryan Kamp. Here is where to find him.",
+    styles: ["hubs.css"],
+    // Until the owner confirms his list, these are the links on his personal site. No email.
+    contact: [
+      { href: "https://ryanjosephkamp.github.io/", label: "His website", text: "ryanjosephkamp.github.io: projects and writing." }, // prettier-ignore
+      { href: "https://github.com/ryanjosephkamp", label: "GitHub", text: "ryanjosephkamp: the code for Splashery and his other projects." }, // prettier-ignore
+      { href: "https://www.linkedin.com/in/rjk1999", label: "LinkedIn", text: "rjk1999: his professional profile." }, // prettier-ignore
+      { href: "https://x.com/ryanjosephkamp", label: "X", text: "@ryanjosephkamp" },
+      {
+        href: "https://www.youtube.com/@RyanJosephKamp",
+        label: "YouTube",
+        text: "@RyanJosephKamp",
+      },
+      { href: "https://huggingface.co/ryanjosephkamp", label: "Hugging Face", text: "ryanjosephkamp: models and datasets." }, // prettier-ignore
+      { href: "https://ryanjosephkamp.github.io/blog/", label: "His blog", text: "Longer writing." }, // prettier-ignore
+    ],
+  },
+  {
     path: "search/",
     type: "search",
     nav: null,
@@ -435,6 +511,55 @@ export const PAGES = [
 // A page for every toy, at toys/<id>/ (lane Toy pages: tools/site-toy-pages.mjs).
 PAGES.push(...toyPageEntries());
 
+// ---- Guides: the repo's own documents, as pages -------------------------------------------------
+// A document meant to be read (a guide, the lane records the notebook names) gets a page built
+// from its Markdown each time the site is built, so it always matches the repo; the page links to
+// the source on GitHub. Code stays a GitHub link. (The owner's walkthrough, October 6, 2026.)
+
+const guide = (file, path, title, description, lead) => ({
+  path,
+  type: "markdown",
+  nav: "learn",
+  title,
+  description,
+  lead,
+  styles: ["hubs.css"],
+  outline: true,
+  files: [{ file, title: "" }],
+});
+PAGES.push(
+  guide("docs/PACKS.md", "learn/recipes/", "Writing toy recipes", "How a Splashery toy's recipe says what it is built from, which parts move and how: the reference for writing your own.", "How a toy's recipe says what it is built from, which parts move, and how."), // prettier-ignore
+  guide("docs/SCENE-SCHEMA.md", "learn/scene-format/", "The scene format", "What a Splashery share link or saved scene holds: the toy, its settings, its camera and its look.", "What a shared link or a saved scene holds."), // prettier-ignore
+  guide("docs/evidence/README.md", "learn/evidence/", "The evidence files", "How Splashery checks each toy that claims to show something true about the world: claims, sources and where it simplifies.", "How each toy that claims to show something true is checked."), // prettier-ignore
+  guide("docs/OPERATING.md", "learn/operating/", "How the parallel sessions work", "How Splashery's lanes, the Operator and the owner's reviews fit together: the rules the sessions that build Splashery follow.", "How the lanes, the Operator and the reviews fit together."), // prettier-ignore
+  guide("docs/FLUIDS.md", "learn/fluids/", "Fluids in toys", "How Splashery's fluid toys simulate water, smoke and other fluids with splats.", "How the fluid toys work."), // prettier-ignore
+);
+
+// The lane records the lab notebook links to (docs/handoff/<name>.md) get pages too, under the
+// notebook: they are documents, so they are read here, not on GitHub. They are not searched,
+// not in the sitemap and not cached ahead of time.
+const notebook = fs.readFileSync(new URL("../docs/NOTEBOOK.md", import.meta.url), "utf8");
+for (const name of new Set(
+  [...notebook.matchAll(/\]\(handoff\/([A-Za-z0-9._-]+)\.md\)/g)].map((m) => m[1]),
+)) {
+  // prettier-ignore
+  const file = `docs/handoff/${name}.md`;
+  if (!fs.existsSync(new URL(`../${file}`, import.meta.url))) continue;
+  const h1 = /^#\s+(.+)$/m.exec(fs.readFileSync(new URL(`../${file}`, import.meta.url), "utf8"));
+  PAGES.push({
+    ...guide(file, `learn/notebook/${name.toLowerCase()}/`, h1 ? h1[1].replace(/`/g, "") : name, `A lane's handoff file from the Splashery project, as it is in the repo: ${name}.`, "A lane's handoff file, exactly as the project keeps it."), // prettier-ignore
+    handoff: true,
+    sitemap: false,
+    precache: false,
+    search: false,
+  });
+}
+
+// Repo documents that have a page here: a link to one of them (in the Markdown pages) goes to
+// its page instead of GitHub. repo path -> path under site/.
+export const DOC_PAGES = {};
+for (const p of PAGES) if (p.type === "markdown") for (const f of p.files) DOC_PAGES[f.file] ??= p.path; // prettier-ignore
+
 // Pages built at a fixed file name instead of <path>index.html.
 export const NOT_FOUND = {
   file: "404.html",
@@ -443,3 +568,26 @@ export const NOT_FOUND = {
   title: "Page not found",
   description: "This page isn't here.",
 };
+
+// A link to a repo document that has a page here goes to the page, wherever it was written
+// (the toy pages link CREDITS.md and the embed guide on GitHub): the owner's rule that a document
+// meant to be read is read on the site, with a link to its source on GitHub. A link marked
+// data-source is that source link and stays. `up` is the way from the page back to site/.
+export function mirrorDocLinks(html, up = "") {
+  const gh = SITE.github.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return html
+    .replace(
+      new RegExp(`<a\\s([^>]*?)href="${gh}/blob/main/([^"#]+)(#[^"]*)?"([^>]*)>`, "g"),
+      (
+        tag,
+        a,
+        file,
+        hash,
+        b, // prettier-ignore
+      ) =>
+        DOC_PAGES[file] && !/data-source/.test(a + b)
+          ? `<a ${a}href="${up}${DOC_PAGES[file]}${hash || ""}"${b}>`
+          : tag,
+    ) // prettier-ignore
+    .replace(new RegExp(`href="${gh}#embedding"`, "g"), `href="${up}share/"`);
+}

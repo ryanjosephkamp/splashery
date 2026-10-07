@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Photo to 3D: your photo, in depth (prefix p3d) · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Photo3D."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/photo3d/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Photo to 3D: your photo, in depth (prefix p3d) · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Photo3D."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/photo3d/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Photo to 3D: your photo, in depth (prefix p3d)</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li>
+                <a
+                  href="#brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-splashery-universe-answers-and-his-photo-yes-that-morning"
+                  >Brief (written by the Operator on September 29, 2026, from the owner's Splashery
+                  Universe answers and his &quot;photo yes&quot; that morning)</a
+                >
+              </li>
+              <li><a href="#you-own">You own</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+              <li>
+                <a href="#sharper-the-owner-s-marks-september-29-2026"
+                  >Sharper (the owner's marks, September 29, 2026)</a
+                >
+              </li>
+              <li>
+                <a href="#song-live-the-song-landscape-s-live-view"
+                  >Song live (the song landscape's Live view)</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Photo to 3D: your photo, in depth (prefix p3d)">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Photo to 3D (prefix <code>p3d</code>).
+            Branch: claude/lane-photo-3d. PR title: &quot;Phase Photo to 3D: your photo, in
+            depth&quot;. Handoff file: docs/handoff/Photo3D.md.
+          </p>
+          <h2
+            id="brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-splashery-universe-answers-and-his-photo-yes-that-morning"
+          >
+            Brief (written by the Operator on September 29, 2026, from the owner's Splashery
+            Universe answers and his &quot;photo yes&quot; that morning)
+          </h2>
+          <p>
+            Studio turns anything into splats: a song (the song landscape), a 3D model (Model to
+            splats, lane Studio Models, #86). Next is a photo. The owner approved it on September
+            29, 2026, with the two new vendored files it needs: an on-device depth model and a
+            library to run it in the page. (The backlog said: &quot;Needs an on-device depth model
+            and a library to run it in the page (both new vendored files); the owner decides
+            first.&quot; He said yes.)
+          </p>
+          <p>
+            Build <strong>Photo to 3D</strong> (<code>photo-3d</code>), a labs toy (<code
+              >labs: true</code
+            >) on the Studio shelf:
+          </p>
+          <ul>
+            <li>
+              Open a photo (JPEG, PNG or WebP, through the Toy tab's input panel with
+              <code>input.binary</code>; docs/PACKS.md). On the device, a depth model estimates how
+              far away each part of the picture is, and the photo is rebuilt as splats in 3D: each
+              splat takes the photo's color at its place and sits at its depth, so turning the toy
+              shows real parallax (near things move across far ones). Nothing is uploaded; the photo
+              stays on the device.
+            </li>
+            <li>
+              Quality: sharp, solid and clean at phone size (Fidelity A's method: even placement,
+              full opacity, full density, clean colors), with no stretched &quot;rubber sheet&quot;
+              between a near object and the far background: cut the surface where the depth jumps,
+              so a near object stands as its own layer in front of the background. Keep the splat
+              count within the tier budgets that picture toys use; measure and say what you chose.
+            </li>
+            <li>
+              The tap: the picture starts flat, then its depth rises out of it layer by layer and
+              the toy sways slowly to show the parallax (about 3 s); a second tap lays it flat
+              again. A Depth option (how deep the relief is) and a Layers switch (show the separated
+              layers pulled apart a little).
+            </li>
+            <li>
+              Samples: two or three CC0 or public-domain photos with clear depth (a street, a forest
+              path, a still life on a table; no people's faces, no logos), checked on the live
+              source page and credited.
+            </li>
+          </ul>
+          <p>The depth model and the library:</p>
+          <ul>
+            <li>
+              Pick a small monocular depth model whose license is CC0, public domain, MIT, BSD or
+              Apache-2.0, checked on its live model card (for example Depth Anything V2 Small, which
+              is Apache-2.0; its larger sizes are CC BY-NC, which we never use), in a quantized ONNX
+              form small enough for a phone (aim for about 30 MB or less, and say its size and
+              speed).
+            </li>
+            <li>
+              Run it with a small, pinned library vendored in <code>vendor/</code> (for example ONNX
+              Runtime Web, MIT, or transformers.js, Apache-2.0), WebGPU where the browser has it and
+              WebAssembly otherwise. Load both only when someone opens a photo in this toy (like
+              PDF.js), never on the shelf or in embeds; keep the &quot;embed transfer ≤ 30 MB&quot;
+              test green.
+            </li>
+            <li>
+              Record both in LICENSES.md, CREDITS.md and tools/assets.json, and add a line to
+              CLAUDE.md's ground rules next to PDF.js and omggif (&quot;… approved September 29,
+              2026, loaded only when someone turns a photo into 3D&quot;).
+            </li>
+            <li>
+              You may download the model at build time with <code>HF_TOKEN</code> (a Hugging Face
+              read token for build-time tools only). Never print it, commit it, or put it in logs,
+              PRs or files. To check it, test that it is set (<code
+                >[ -n &quot;$HF_TOKEN&quot; ]</code
+              >), or call the whoami API and print only the account name and token role.
+            </li>
+            <li>
+              No server, no API key in the page, no CDN: everything the page loads comes from our
+              own files.
+            </li>
+          </ul>
+          <p>
+            If the toy needs a change in the engine (src/pictures.js, src/player.js, src/stage.js
+            and the like), don't make it: describe it in &quot;For the Operator&quot; and the
+            Operator (Opus 5.5) writes it as an &quot;Engine: …&quot; PR, as for Studio Sound (#81)
+            and Studio Models (#87). The Model to splats toy
+            (<code>src/packs/studio-models.js</code>, <code>src/packs/studio-models-core.js</code>)
+            shows how a Studio recipe builds splats from a file without engine changes.
+          </p>
+          <p>
+            A sound for the tap (a soft rising whoosh as the depth comes up), a how-to line and an
+            About text (what a depth model is, and that the photo never leaves the device), a
+            toy-plan entry and a thumbnail.
+          </p>
+          <p>
+            Clips and cards (390×844), each labeled &quot;built by Sonnet 5.5&quot;, in the lane
+            record <code>Photo3D</code> on the Effect review page (the Operator made it):
+            <code>p3d-sample</code> (each sample: the tap and a slow turn),
+            <code>p3d-open</code> (opening a photo of your own, as a phone would),
+            <code>p3d-layers</code> (the Layers switch).
+          </p>
+          <p>
+            Tests in tests/p3d.spec.mjs: the toy builds from each sample, a photo opened through the
+            panel builds (with a tiny fixture photo), splats sit at different depths where the
+            photo's depth differs, nothing loads the model or library until a photo is opened, and
+            screenshots at 390×844 and 1440×900.
+          </p>
+          <h2 id="you-own">You own</h2>
+          <ul>
+            <li>
+              a new <code>src/packs/photo-3d.js</code> (and a core module beside it if you want
+              one), the vendored library and model under <code>vendor/</code> (new folders only),
+              <code>assets/toys/photo-3d/</code>, your toy's entries in the shared lists, the new
+              lines in LICENSES.md, CREDITS.md and CLAUDE.md named above, tests/p3d.spec.mjs and its
+              fixtures, your <code>p3d-*</code> screenshots and docs/handoff/Photo3D.md.
+            </li>
+          </ul>
+          <h2 id="state">State</h2>
+          <p>Model: Sonnet 5.5 (default effort). Started September 29, 2026.</p>
+          <ul>
+            <li>
+              Built: the toy (<code>src/packs/photo-3d.js</code>), the pure converter
+              (<code>photo-3d-core.js</code>), the lazy depth runner
+              (<code>photo-3d-depth.js</code>), three CC0 samples with precomputed depth maps,
+              sound, help, plan entry, credits, licenses, <code>tests/p3d.spec.mjs</code>, tools
+              <code>p3d-depth.mjs</code>, <code>p3d-views.mjs</code>, <code>p3d-fixtures.mjs</code>.
+            </li>
+            <li>
+              Cards posted on the Effect review page (lane Photo3D, &quot;built by Sonnet
+              5.5&quot;): <code>p3d-sample</code> (forest), <code>p3d-sample-street</code>,
+              <code>p3d-sample-still-life</code>, <code>p3d-open</code> and <code>p3d-layers</code>.
+              Made with <code>tools/p3d-clip.mjs</code> and <code>tools/p3d-open-clip.mjs</code>.
+            </li>
+            <li>
+              Tests: <code>tests/p3d.spec.mjs</code> (10 tests) and
+              <code>tests/smoke.spec.mjs</code> (49, with the embed-size test) pass;
+              <code>taps</code>, <code>unit</code>, <code>help</code> and <code>kit</code> pass (73
+              and the one fixed failure). The full 416-test run stalled twice in this session's
+              container restarts and did not finish: the Integrator's combined run covers it.
+            </li>
+            <li>
+              Still to do: read the owner's marks (ids starting <code>p3d</code>) and fix any
+              &quot;fix&quot;.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <strong>Model:</strong> Depth Anything V2 Small,
+              <code>onnx-community/depth-anything-v2-small</code>,
+              <code>onnx/model_quantized.onnx</code> (int8, 27,258,801 bytes; the uint8, int8 and
+              quantized files are the same size). Apache-2.0 on both model cards.
+            </li>
+            <li>
+              <strong>Library:</strong> onnxruntime-web 1.30.0, the plain WASM build (<code
+                >ort.wasm.min.mjs</code
+              >
+              50 KB, the runtime <code>.mjs</code> 24 KB, <code>.wasm</code> 14 MB). One thread
+              (GitHub Pages is not cross-origin isolated). Whole first-open download: about 41 MB,
+              only when a photo is opened.
+            </li>
+            <li>
+              <strong>Speed</strong> (this container's CPU, single-thread WASM): 3.5 to 5 s for the
+              network at 518 px on the long side (518×350, 518×392 or 518×490), plus about 6 s to
+              fetch and start the model from a local server. A phone will be slower (an estimate,
+              not measured).
+            </li>
+            <li>
+              <strong>WebGPU not used</strong> (deviation): the WebGPU build of the runtime adds a
+              28 MB <code>.wasm</code>, and an int8 model runs mostly on the CPU there anyway. The
+              fp16 model is about 50 MB. One WASM path keeps the download at about 41 MB.
+            </li>
+            <li>
+              <strong>Method:</strong> a regular grid of splats over the photo (about the tier
+              budget, never finer than the photo). The model's depth is stretched between its 2nd
+              and 98th percentile, enlarged to the grid by a joint bilateral filter guided by the
+              photo (so its edges land on the photo's edges), then smoothed only along linked
+              neighbors. Neighbors are linked when their disparity differs by at most 0.015
+              (<code>CUT</code>; 0.03 left the street and still life in one piece); otherwise the
+              surface is cut there. Connected pieces give the four depth bands (layers). A tiny
+              piece (a flying pixel) takes the depth of the nearby large piece whose color is most
+              like it. A splat's size is 1.12 times the mean 3D distance to its linked neighbors (a
+              splat with none: 1.15 cells), capped at 1.7 cells, so nothing stretches across a jump.
+              All splats face the viewer (so the flat pose is exactly the photo), opacity 1, flat
+              0.14, colors are the photo's area average at the grid.
+            </li>
+            <li>
+              <strong>Budgets:</strong> the same as the Model to splats toy: density 1.5, so 90k,
+              210k, 300k and 400k splats on the low, mid, high and max tiers (the picture sheets'
+              <code>PICTURE_BUDGETS</code> are per page and larger, but a kit toy is capped by
+              <code>maxCount</code>).
+            </li>
+            <li>
+              <strong>The tap</strong> is a toggle (<code>flat</code>, on at first, ease 3.2 s; the
+              test in taps.spec.mjs needs the morph channels at 0 at rest, so the control is
+              &quot;flat&quot; and the splats are built with their depth). Splats are built in the
+              relief pose (so the draw order is right when it is risen) and morph to the flat plane;
+              the toy rests flat (rise 0 morphs everything to flat). The four layers are the four
+              morph channels, staggered far to near. The body yaws 0.3 rad and back as it rises or
+              falls.
+            </li>
+            <li>
+              <strong>Layers</strong> is a second toggle: each depth band is a kit part, moved along
+              z by its offset.
+            </li>
+            <li>
+              Sample photos are the 1,280 px versions Commons serves. Depth maps:
+              <code>&lt;id&gt;.depth</code>, u16 with a small header (<code>packDepth</code> in
+              <code>photo-3d.js</code>), made in Chromium with the same model and runtime by
+              <code>tools/p3d-depth.mjs</code>.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              The depth model runs on the page's main thread, so the page stops for a few seconds
+              while it works (3.5 to 5 s here, longer on a phone). A worker
+              (<code>ort.env.wasm.proxy</code>) would fix it; not tried.
+            </li>
+            <li>
+              Behind a near object the far surface is missing (no data), so a big turn shows a dark
+              gap there. That is the cost of cutting instead of stretching.
+            </li>
+            <li>
+              Thin near structures (leaves, twigs) come out ragged where the model's depth is
+              coarse.
+            </li>
+            <li>The depth is relative (a guess from one photo), not measured.</li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>Nothing needed from the engine.</li>
+            <li>
+              The forest sample's Commons page marks it CC0, but its credit line is a 2017 Pixabay
+              upload; I took the Commons license as written and said so in CREDITS.md. Swap it if
+              you would rather not rely on that.
+            </li>
+            <li>
+              The street sample has parked cars with tiny, unreadable badges and one small license
+              plate; no faces.
+            </li>
+          </ul>
+          <h2 id="sharper-the-owner-s-marks-september-29-2026">
+            Sharper (the owner's marks, September 29, 2026)
+          </h2>
+          <p>
+            The owner marked all five p3d cards &quot;fix&quot;: &quot;Almost perfect. Can we try to
+            make it sharper?&quot; Changes in <code>photo-3d-core.js</code>:
+          </p>
+          <ul>
+            <li>
+              <strong>Adaptive placement, same budget.</strong> The photo is put on a fine grid; a
+              block of 2 × 2 fine cells is drawn as one splat, or as four fine splats in the 28% of
+              blocks that need them most: those with a depth edge in them first, then by the photo's
+              own color range in the block and how near it is. Detail, near things and depth edges
+              get splats about 0.66 as far apart as the old even grid; flat far areas (sky, dark
+              walls) get 1.3 times as far. Counts are 98% of each tier's budget: 88,199, 205,800,
+              293,999 and 392,000 splats on the low, mid, high and max tiers (90k, 210k, 300k and
+              400k), the same on all three samples.
+            </li>
+            <li>
+              <strong>Smaller splats at depth edges</strong> (0.85 of their size beside a cut), full
+              opacity as before.
+            </li>
+            <li>
+              <strong>Colors straight from the photo:</strong> the area average on the fine grid,
+              then a light unsharp mask (<code>SHARPEN</code> 0.5) to put back what the splats'
+              overlap softens. <code>FILL</code> went from 1.12 to 1.05.
+            </li>
+            <li>
+              <strong>Measured:</strong> 3x renders (1170 px wide, the phone's real density) of the
+              forest and street, before and after: after, the street's license plate, the bricks,
+              window frames and cobbles read; before, they were soft. Flat areas look a little
+              smoother (larger splats), which is the trade.
+            </li>
+            <li>
+              Clips are rendered at 780 × 1040 (2x of 390 × 520) to keep the GIFs small enough to
+              post.
+            </li>
+          </ul>
+          <h2 id="song-live-the-song-landscape-s-live-view">
+            Song live (the song landscape's Live view)
+          </h2>
+          <p>
+            Model: Sonnet 5.5. Branch <code>claude/lane-song-live</code>, one draft PR &quot;Phase
+            Song live: the song landscape's Live view (Sonnet 5.5)&quot;.
+          </p>
+          <ul>
+            <li>
+              <strong>Brief</strong> (the Operator, September 29, 2026): the owner's note on the
+              song landscape was &quot;I was expecting the actual landscape to move with the music
+              or something&quot;. Build a View option, &quot;Whole song&quot; (the default, so old
+              links keep loading) and &quot;Live&quot;: a scrolling spectrogram (a waterfall) where
+              the part playing now sits on a fixed line near the front, the next seconds come toward
+              you from the back, what has played slides away and loud bands rise at the line. No
+              engine changes.
+            </li>
+            <li>
+              <strong>How it is built</strong> (<code>src/packs/studio.js</code>, no engine change):
+              the landscape is the same one, and while it plays the whole body slides toward you by
+              exactly as far as the song has gone (a rigid scroll keeps the draw order, so nothing
+              needs sorting again). Every cell, the floor and the waveform take the fade kind on
+              morph channel 0 (= how far through the song), so what has played fades away over about
+              1.5 s as it crosses the line. The old marker and 48 small &quot;caps&quot; (tokens,
+              one per group of bands) stay on the line: each cap is lifted to the loudness the song
+              has there, interpolated between slices, so the loud bands rise at the line. Paused
+              shows a still landscape; a tap still plays and pauses.
+            </li>
+            <li>
+              <strong>Costs:</strong> none in the Whole song view (no fade splats or caps; a test
+              checks it). Live adds 192 cap splats.
+            </li>
+            <li>
+              <strong>Known issues:</strong> the toy is framed for the whole song, so the front
+              strip is small on a long song; the caps are a bright bar, not a filled crest.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Photo3D.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Photo3D.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

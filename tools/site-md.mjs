@@ -36,15 +36,18 @@ export function mdPlain(s) {
 
 // opts: github (repo URL), baseDir (the file's folder in the repo, "" for the root),
 // demote (0 or 1: how many levels to push headings down), idPrefix, ids (a Set shared
-// by every file on one page so heading ids stay unique).
+// by every file on one page so heading ids stay unique), docPages (repo path -> page under
+// site/, for the documents that have a page here) and up (the way from this page back to site/):
+// a link to a document with a page goes to that page, the rest to GitHub.
 export function mdToHtml(text, opts = {}) {
-  const { github = "", baseDir = "", demote = 0, idPrefix = "", ids = new Set() } = opts;
+  const { github = "", baseDir = "", demote = 0, idPrefix = "", ids = new Set(), docPages = {}, up = "" } = opts; // prettier-ignore
   const headings = [];
 
   const repoLink = (url) => {
     if (/^(https?:|mailto:|#)/.test(url)) return url;
     const [file, hash] = url.split("#");
     const rel = path.posix.normalize(path.posix.join(baseDir, file.replace(/^\.\//, "")));
+    if (docPages[rel]) return `${up}${docPages[rel]}${hash ? `#${hash}` : ""}`;
     const kind = /\.[A-Za-z0-9]+$/.test(rel) ? "blob" : "tree";
     return `${github}/${kind}/main/${rel}${hash ? `#${hash}` : ""}`;
   };
