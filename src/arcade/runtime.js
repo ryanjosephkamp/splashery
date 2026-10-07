@@ -113,6 +113,8 @@ export class ArcadeRuntime {
       if (this.playMode || !this.input.active) return;
       const path = e.composedPath?.() || [];
       if (path.includes(this.hud.el)) return;
+      // The app's own play buttons play and pause the game themselves.
+      if (path.some((n) => n.id === "hands-play" || n.id === "toy-action")) return;
       this.input.active = false;
       if (this.mode === "play") this.pause(true);
     };
@@ -218,6 +220,12 @@ export class ArcadeRuntime {
     this.choice = id;
     this.hud.setChoice(id);
     this.input.active = true;
+  }
+
+  // For the app's own play button: "running" while the game plays (it
+  // shows pause), "paused" while it waits, the same states a long tap has.
+  effectState() {
+    return this.mode === "play" ? "running" : this.mode === "paused" ? "paused" : null;
   }
 
   togglePause() {
