@@ -1363,7 +1363,7 @@ export const TOY_SOUNDS = {
   // A deep breath in (1.7 s), held, then out (2.2 s).
   lungs: {
     voice: "sample",
-    file: "lungs-breath.mp3",
+    file: "lungs-breath-b.mp3",
     vol: 0.8,
     fallback: { voice: "breath", f: 700, to: 1.4, decay: 2.4 },
   },

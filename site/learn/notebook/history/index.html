@@ -1,0 +1,2516 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Phase history · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: history."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/history/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Phase history · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: history."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/history/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Phase history</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#lanes">Lanes</a></li>
+              <li>
+                <a href="#state-after-phase-e4-2026-09-26">State after Phase E4 (2026-09-26)</a>
+              </li>
+              <li><a href="#phases">Phases</a></li>
+              <li><a href="#phase-e5-in-detail-food">Phase E5 in detail: food</a></li>
+              <li><a href="#phases-c-h-outline">Phases C–H (outline)</a></li>
+              <li><a href="#decisions">Decisions</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Phase history">
+        <div class="prose">
+          <p>
+            The phase notes, lessons and known issues from Phase A to Phase E4, moved here from
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/HANDOFF.md"
+              target="_blank"
+              rel="noopener"
+              >HANDOFF.md</a
+            >
+            on 2026-09-26, when the work split into parallel lanes (<a
+              href="../../../learn/operating/"
+              >OPERATING.md</a
+            >). Nothing was dropped: the E5 brief moved to
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E5.md"
+              target="_blank"
+              rel="noopener"
+              >E5.md</a
+            >, and the F and G outlines were copied into
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/F.md"
+              target="_blank"
+              rel="noopener"
+              >F.md</a
+            >
+            and
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/G.md"
+              target="_blank"
+              rel="noopener"
+              >G.md</a
+            >. The Operator adds a summary of each finished lane at the top (&quot;Lanes&quot;),
+            newest first.
+          </p>
+          <h2 id="lanes">Lanes</h2>
+          <p>
+            The first four lanes ran in parallel on 2026-09-26 and all merged that day. Their
+            briefs, notes and known issues are in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E4-finish.md"
+              target="_blank"
+              rel="noopener"
+              >E4-finish.md</a
+            >,
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E5.md"
+              target="_blank"
+              rel="noopener"
+              >E5.md</a
+            >,
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E6a.md"
+              target="_blank"
+              rel="noopener"
+              >E6a.md</a
+            >
+            and
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E6b.md"
+              target="_blank"
+              rel="noopener"
+              >E6b.md</a
+            >; their lessons are in PACKS.md (sections 3, 6 and 7b). Two smoke tests each failed
+            once in a lane's full run and passed when run again: &quot;rigs pick splats by
+            colour…&quot; (the strawberry had not settled 3 s after its tap) and &quot;a scan rig
+            moves a part of a captured toy&quot; (a SwiftShader console warning, like the rare
+            engine warning in HANDOFF.md). Keep <code>test-results/</code> if either comes back.
+          </p>
+          <h3 id="a-b-the-toy-piano-a-blind-test-of-two-models-pr-91-merged-2026-09-29">
+            A/B: the toy piano, a blind test of two models (PR #91, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              The owner's blind A/B: one brief (his toy piano idea: tap a key and its hammer strikes
+              a ringing rod; tap elsewhere for Twinkle, Twinkle) built twice, on its own branch
+              each, by Sonnet 5.5 (maker A) and Opus 5.5 (maker B). The cards named only &quot;maker
+              A&quot; and &quot;maker B&quot;; the Operator kept which was which in a private note
+              until the owner had marked them.
+            </li>
+            <li>
+              He marked maker A's three cards &quot;fix&quot; (&quot;too grainy&quot;) and maker B's
+              three good. B was Opus 5.5, so its toy piano merged (#91) and A's PR #89 was closed.
+              This settled the owner's model split of September 29, 2026: Opus 5.5 for the toys and
+              engine, Sonnet 5.5 for Worlds content, converters, docs and the Integrator.
+            </li>
+            <li>
+              About 5 hours to READY; it then waited for the blind marks and two Integrator runs
+              (the first on an older main; the second, on main + #91 + #106, passed 412 of 412).
+            </li>
+            <li>
+              Lessons (PACKS.md, section 7c): the kit's default color jitter (0.04) reads as grain
+              on smooth lacquer and ivory, and 0.01 is clean; smaller splats along a flat face's
+              edge keep box edges crisp; a long, thin even rectangle hatches, so fold the even
+              square into strips laid end to end.
+            </li>
+          </ul>
+          <h3 id="anatomy-the-anatomy-atlas-prs-92-and-93-merged-2026-09-29">
+            Anatomy: the anatomy atlas (PRs #92 and #93, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Opus 5.5. A labs toy on the Body shelf: a clinical figure in four layers (a
+              smooth mannequin skin, muscles, skeleton, organs), each layer a set of solid pieces
+              that a tap peels off in turn, with a Layer choice and a Labels list. Its engine PR #93
+              adds <code>out.legend</code>, a list of names beside the stage that a toy's drive()
+              can set.
+            </li>
+            <li>
+              Kit-built: no layered body (skin, muscles, bones and organs registered together)
+              exists under CC0, CC BY or public domain, and the good anatomy sets are CC BY-SA, so
+              it builds the body from about 55 smooth-joined shapes and places our own brain, lungs,
+              heart and kidney toys inside.
+            </li>
+            <li>
+              The owner marked its three cards good the first time. About 6.5 hours from start to
+              merge (it waited on the Integrator); the Integrator's run on main + #93 + #92 passed
+              414 of 414.
+            </li>
+            <li>
+              Lessons (PACKS.md, section 7d): a smooth body from primitives with an
+              order-independent join, and placing another toy's recipe inside a toy through a proxy
+              kit.
+            </li>
+          </ul>
+          <h3 id="worlds-the-world-engine-and-a-sandbox-island-pr-78-merged-2026-09-29">
+            Worlds: the world engine and a sandbox island (PR #78, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Opus 5.5. Splashery Worlds (<code>worlds/?labs=1</code>, linked from the
+              About tab with labs on): a small world made of splats that you walk around as a
+              character, on a phone or a computer. Terrain, water and sky, props baked from toy
+              recipes, chunked level of detail with budgets per device tier, a kit-built character
+              on eleven rigid joints, a follow camera, collision, landmarks with cards, a list view
+              and a start screen, all from a documented world file (docs/WORLDS.md). The Test island
+              is its sandbox.
+            </li>
+            <li>
+              It needed no shared engine change: the world has its own small PlayCanvas setup
+              (<code>src/worlds/render.js</code>) and reuses the kit, the noise, the font and the
+              pack recipes as they are.
+            </li>
+            <li>
+              The owner liked the mechanics but not the look: &quot;still just a bit too grainy, and
+              the player/character looks way too low-poly and simplistic.&quot; So round 2 splits in
+              two: Worlds r2 takes the grain out of the island, and a new Character lane builds
+              &quot;a polished video game character&quot;.
+            </li>
+            <li>
+              About 14 hours from start to merge; the Integrator's run on main + #78 passed 413 of
+              413.
+            </li>
+            <li>
+              Lessons (WORLDS.md): PlayCanvas 2.22.3's level of detail and splat budget work only on
+              streamed octree files, so a world built on the device keeps its own levels and
+              budgets; limbs built as lathes, since even spreading draws a lattice on cones.
+            </li>
+          </ul>
+          <h3 id="fidelity-a-and-b-the-grainy-toys-made-sharp-prs-77-and-90-merged-2026-09-29">
+            Fidelity A and B: the grainy toys made sharp (PRs #77 and #90, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Opus 5.5, in two lanes from the owner's words: &quot;I almost want to make
+              things so incredible with this that people won't even realize that they're looking at
+              Gaussian splats.&quot; Fidelity A audited every toy at phone size (a ranked list with
+              five causes of grain: random placement, low density, mirror chrome on thin parts,
+              see-through <code>rim()</code> shells, faint clouds) and made the 24 worst sharp;
+              Fidelity B built on its branch and did the other 73 on the list, adding even versions
+              of the kit's shapes (<code>src/packs/even.js</code>).
+            </li>
+            <li>
+              The owner marked 23 of Fidelity A's 24 cards good the first time (the Klein bottle was
+              redone once) and all 73 of Fidelity B's. Fidelity A took about 12 hours from start to
+              merge (it waited on one mark), Fidelity B about 8.5.
+            </li>
+            <li>
+              Lessons (PACKS.md, section 7c): even placement over more density, the even shapes for
+              boxes and cylinders, the two-pixel cull (check a 256 px render too), a half-cell nudge
+              against moiré on see-through surfaces, and fewer, fainter splats for jelly and
+              highlights.
+            </li>
+            <li>
+              A merge after an outage: GitHub reported #90 as conflicting although it merged cleanly
+              with main; a main merge pushed to the branch cleared it.
+            </li>
+          </ul>
+          <h3
+            id="books-your-book-the-photo-album-and-the-picture-frame-prs-73-and-74-merged-2026-09-29"
+          >
+            Books: your book, the photo album and the picture frame (PRs #73 and #74, merged
+            2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Opus 5.5, on the picture engine. Your book opens the Tinkerer's Manual or any
+              PDF (a file or an https address) in five styles (hardcover, paperback, magazine,
+              stapled paper, spiral notebook); a tap opens the cover and turns one leaf at a time,
+              with pages that curl like paper. The photo album holds a set of your own photos in
+              photo corners, and the picture frame swings on its nail (or steps through photos as a
+              digital frame). All three are labs toys.
+            </li>
+            <li>
+              Its engine PR (#74) is additive: a picture toy's media opens before its build
+              (<code>k.media</code>), sets of pictures (<code>input.media.multiple</code>,
+              <code>openMedia(list)</code>), pages built ahead while hidden
+              (<code>out.sheets[id].ahead</code>, <code>pics.ready</code>),
+              <code>out.resortPose</code> for parts and leaves that turn over, and
+              <code>pictures.decorate</code> to draw on a page before it becomes splats. It also
+              fixed a Toy tab panel that could stay blank.
+            </li>
+            <li>
+              About 15 hours from start to merge. Merged behind the labs switch; its six cards wait
+              for the owner's marks.
+            </li>
+            <li>
+              Lessons (PACKS.md, section 5b): anything turned more than a quarter turn needs
+              <code>out.resortPose</code> while it turns and once it lands; a turn waits until its
+              pages are built, so it never shows a blank page; keep layers about 0.01 of the toy
+              apart where big splats lie under a picture.
+            </li>
+          </ul>
+          <h3 id="studio-models-3d-model-files-to-splats-prs-86-and-87-merged-2026-09-29">
+            Studio Models: 3D model files to splats (PRs #86 and #87, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Sonnet 5.5. A labs toy on the Studio shelf opens a glTF, OBJ or STL model
+              with its textures and rebuilds it as splats on the device, with two CC0 samples;
+              <code>tools/model-to-splats.mjs</code> makes toy assets from CC0 models (PACKS.md,
+              section 9). The core is one module with no DOM
+              (<code>src/packs/studio-models-core.js</code>), shared by the toy and the Node tool.
+            </li>
+            <li>
+              The Operator's engine PR #87 lets a recipe take several files at once (a glTF with its
+              .bin, an OBJ with its .mtl).
+            </li>
+            <li>
+              About 5 hours from start to merge. Merged behind the labs switch; its five cards wait
+              for the owner's marks.
+            </li>
+            <li>
+              Lessons: size a splat to about one neighbor distance (the renderer's falloff is
+              narrower than a standard Gaussian, and smaller splats left slits); don't shrink splats
+              near a fold below 0.8 of their size, or dark holes show.
+            </li>
+          </ul>
+          <h3 id="lab-sharper-kernels-and-splat-fields-prs-83-and-85-merged-2026-09-29">
+            Lab: sharper kernels and splat fields (PRs #83 and #85, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Opus 5.5, the first Lab lane. A literature check (docs/lab/LITERATURE.md),
+              then a sharper splat kernel as a labs option (#85): <code>src/kernels.js</code> swaps
+              the splat falloff in the engine's fragment hook without touching the vendored engine.
+              It is on only with labs and <code>?kernel=sharp</code> or a recipe's
+              <code>kernel: &quot;sharp&quot;</code>. Of four candidates (the Gaussian, a
+              generalized exponential, a steeper one and a flat disc), only the generalized
+              exponential was kept; each blends back to the Gaussian as a splat shrinks to a pixel
+              or two. Measurements are in docs/lab/KERNELS.md.
+            </li>
+            <li>
+              Splat fields on the GPU (#83): a recipe can bring its own work-buffer program
+              (<code>gpuField</code>), so hundreds of thousands of splats move every frame; the Lab
+              shelf's field toy shows a galaxy, a knot and an ocean (docs/lab/FIELDS.md).
+            </li>
+            <li>
+              The owner marked all six lab-\* cards good the first time. About 1.5 hours to READY.
+            </li>
+            <li>
+              Lessons: a kernel change can stay off by default and still be judged on real toys
+              through a URL switch; flat discs look like a pile of coins, and a too-steep falloff
+              shows each splat as a scale.
+            </li>
+          </ul>
+          <h3 id="learn-the-manual-audit-and-the-lab-notebook-pr-84-merged-2026-09-29">
+            Learn: the Manual audit and the lab notebook (PR #84, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Sonnet 5.5. The Tinkerer's Manual was checked claim by claim against the code
+              (the math, the recipe API, the controls, the scene format and every splat equation
+              program), fixed, and given a new Level 5: picture sheets and turning pages, input
+              panels, the Screen, Gaussian splatting, the top bar and the tilt lock, with three new
+              example recipes. The PDF is now 34 pages. <code>tests/ln.spec.mjs</code> (19 tests)
+              checks the page against the code.
+            </li>
+            <li>
+              The lab notebook (docs/NOTEBOOK.md) was backfilled with every lane from Phase A, plus
+              &quot;Lessons&quot; (grouped, each with its lane) and &quot;The two models&quot;.
+            </li>
+            <li>The owner marked both cards good the first time. About 1 hour to READY.</li>
+          </ul>
+          <h3
+            id="studio-sound-the-song-landscape-and-the-chladni-plate-prs-80-and-81-merged-2026-09-29"
+          >
+            Studio Sound: the song landscape and the Chladni plate (PRs #80 and #81, merged
+            2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Sonnet 5.5, the first Sonnet lane. A new Studio shelf (labs). The song
+              landscape turns a song you open (decoded on the device) into a real spectrogram of
+              splats (Hann-windowed FFT, twelve bands to the octave, 40 Hz to 16 kHz, loudness as
+              height) that plays through the speaker button while the marker and the view glide
+              along it. The Chladni plate is bowed at one of eight modes, and every sand grain hops
+              and settles on the mode's nodal lines, from the classic square-plate model.
+            </li>
+            <li>
+              The Operator's engine PR #81 added <code>input.binary</code> (the recipe gets the
+              File) and <code>info.sound</code> (the site's Sound for a toy's own audio).
+            </li>
+            <li>
+              The owner's first marks were &quot;fix: the toy seems grainy&quot;. It was the toys:
+              grids of dots for the plate and floor, and gaps in the landscape. Solid sheets of
+              overlapping flat discs, 2.5 times the sand and overlapping landscape splats fixed it,
+              and the r2 cards were marked good. About 2.5 hours to READY, one fix round included.
+            </li>
+            <li>
+              Lessons: when the owner says &quot;it could just be the GIF&quot;, check a
+              full-resolution still first; it was the toy. A pause test that reads the state after a
+              fixed wait flaked under load (fixed in #87 by polling).
+            </li>
+          </ul>
+          <h3 id="viewer-whole-pdf-figures-tilt-lock-and-top-bar-settings-pr-75-merged-2026-09-29">
+            Viewer: whole PDF figures, tilt lock and top-bar settings (PR #75, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Opus 5.5, from the owner's September 28 notes on the Picture lab. The black
+              boxes over PDF figures were a bug, not censorship: <code>paperBlocks</code> compared
+              each pixel in double precision with a median stored as a Float32, so in a flat-colored
+              block no pixel counted and the paper color became NaN, which the GPU draws black.
+              Lightness is now a whole number and an empty block falls back to the page's paper
+              color. A fixture PDF of our own fails on the old code and passes now.
+            </li>
+            <li>
+              Pinch zooms, twist rolls and drag turns, by whichever passes its threshold first, so a
+              normal pinch never turns a toy. A recipe's <code>tiltLock: true</code> keeps a flat
+              toy upright (drag only spins it); the Pictures and pages shelf starts locked. Reset
+              view, Tilt lock and Turntable sit in the top bar. Flag colors moved to a Look section
+              in the Toy tab and stay with the toy they were chosen on. The terms of use are in the
+              About tab and README.
+            </li>
+            <li>The owner marked all five clips good the first time. About 2 hours.</li>
+            <li>
+              Lessons: a shared smoke test (the chess flag carrying over to the next toy) had to
+              change with the owner's note; the 200-page test passed on main only because the bug
+              hid some ink, so whole pages needed a larger sheet container.
+            </li>
+          </ul>
+          <h3 id="screens-the-screen-and-the-gaussian-splat-toy-prs-72-and-71-merged-2026-09-29">
+            Screens: the screen and the Gaussian splat toy (PRs #72 and #71, merged 2026-09-29)
+          </h3>
+          <ul>
+            <li>
+              Built by Opus 5.5. The Screen (<code>screen</code>, labs): your video or GIF on one
+              picture sheet (method &quot;screen&quot;), with its sound on the speaker button, in
+              four styles that switch on as solid parts: an old TV (knobs turn, a bright line opens
+              into the picture), a flat TV (the standby light goes out and the picture fades up), a
+              cinema (sixteen curtain pleats part) and a hologram (a beam rises and the picture
+              flickers on). Samples: a Big Buck Bunny scene (CC BY 3.0, no title card or logo) and
+              Muybridge's galloping horse (public domain).
+            </li>
+            <li>
+              Gaussian splatting (<code>gaussian-splatting</code>, labs, AI and computing):
+              Training, a real fit of 2,400 flat Gaussians to a CC0 strawberry photo by gradient
+              descent (Adam, 140 steps) in a worker, drawn with the renderer's own kernel and played
+              as 13 keyframes; One splat, with sliders for its sizes, turn, color and opacity; Many
+              splats, a duck whose splats shrink to dots; and Sorting, 300 crisp splats that
+              reappear furthest first. Engine PR #71: a picture toy's
+              <code>prepare(options, help)</code> can open the media its build will show, so
+              &quot;Open your own photo&quot; trains on your photo.
+            </li>
+            <li>
+              The owner marked seven clips good; the blurry sorting clip was redone (the toy itself
+              was soft: big soft splats blurred together) and recorded at full phone resolution.
+            </li>
+            <li>
+              Lessons: #66 merged early with only the handoff, so the toys came in a new PR; a lane
+              test that counts a shelf's toys exactly breaks when another lane adds one (fixed in
+              #76 by counting lane AI's own pack); the kit gives each splat a random size, so an
+              exact fit divides it out.
+            </li>
+          </ul>
+          <h3 id="manual-the-splat-equation-toy-and-the-tinkerer-s-manual-pr-65-merged-2026-09-28">
+            Manual: the splat equation toy and the Tinkerer's Manual (PR #65, merged 2026-09-28)
+          </h3>
+          <ul>
+            <li>
+              The splat equation toy (<code>splat-equation</code>, math shelf, labs only): you type
+              where every splat goes and what color it is, as x, y and z in u, v and t, with ranges,
+              a hue or r, g and b, a size, a count (100 to 10,000) and a grid or random spread. It
+              uses lane Math's safe reader unchanged (no code runs, so a link with a program is safe
+              to share). Eight programs to start from: sphere, torus, Möbius strip, seashell,
+              trefoil knot, wave, spiral galaxy and Klein bottle. The tap plays t through one cycle
+              in 4 s with lane Math's method: 12 copies, each morphing into the next.
+            </li>
+            <li>
+              The Tinkerer's Manual (<code>manual/</code>, linked from the About tab) and its
+              25-page letter PDF, printed by <code>tools/manual-pdf.mjs</code>: what a splat is (the
+              Gaussian, Σ = R S Sᵀ Rᵀ, the projection and back-to-front blending), how a toy's
+              recipe is built (a tested example), the splat equation language with a grammar, and a
+              gallery of 15 programs whose links open in the toy. The owner marked all five cards
+              good.
+            </li>
+            <li>
+              Lessons: the reader knows only x, y, t, r, θ, a and b, so the toy hands it u and v as
+              θ and y (BACKLOG has the engine idea); a recipe with only clouds has base size 0.01
+              (PACKS.md, clouds). Two finished lanes' tests counted toys, so every new labs toy
+              failed them; #69 made them count only the toys they wrote. Your book's default (the
+              manual's PDF) moved to lane Books, which had not merged yet.
+            </li>
+          </ul>
+          <h3 id="pictures-pictures-and-pages-the-engine-pr-64-merged-2026-09-28">
+            Pictures: pictures and pages, the engine (PR #64, merged 2026-09-28)
+          </h3>
+          <ul>
+            <li>
+              PDFs (PDF.js 6.3.289, the legacy build, with <code>isEvalSupported: false</code>),
+              pictures, animated GIFs (ImageDecoder, or omggif where a browser lacks it) and videos
+              become flat splat sheets, built in a worker: &quot;ink&quot; for documents (a smooth
+              paper sheet and one splat per inked pixel), &quot;pixels&quot; for photos, and
+              &quot;screen&quot; for GIFs and video (splats recolored from the frame on the GPU each
+              frame). Files stay in the browser; a scene can carry a media web address
+              (<code>toy.media</code>).
+            </li>
+            <li>
+              A book of any length streams through a few sheets: 200 pages kept about 19k splats on
+              show and a steady heap. Each page is built at about one picture pixel per screen pixel
+              on a ladder of widths, within per-tier budgets, and PlayCanvas's small-splat culling
+              is lowered only while a picture toy shows (with the defaults, a page built three times
+              finer than the screen went blank).
+            </li>
+            <li>
+              The kit gained <code>k.sheet</code>, <code>k.spine</code> and the
+              <code>leaf</code> kind (a page that turns and curls as a solid sheet); the Toy tab
+              gained Open a file and a web address; toys can be <code>labs: true</code>, hidden
+              unless <code>?labs=1</code>. The Picture lab is the test toy. The owner marked all
+              eight clips good.
+            </li>
+            <li>
+              Lessons (in PACKS.md, 5b): a leaf's sheet belongs on part 0; a toy that shows three or
+              four sheets shows three or four times a page's splats; GIF clips for review need one
+              palette per clip, or flat colors split into blocks (it was the clip, not the toy).
+            </li>
+          </ul>
+          <h3 id="helptexta-and-helptextb-help-text-for-every-toy-prs-60-and-59-merged-2026-09-28">
+            HelpTextA and HelpTextB: help text for every toy (PRs #60 and #59, merged 2026-09-28)
+          </h3>
+          <ul>
+            <li>
+              Two lanes, split by shelf, wrote a how-to line and an About text for every toy in
+              <code>src/toy-help.js</code>: HelpTextA the 149 toys from Photoreal to Math, HelpTextB
+              the 154 from Balls to Landmarks. The 88 lines and 13 About texts lane Help wrote were
+              kept word for word.
+            </li>
+            <li>
+              Each line was checked against the recipe (<code>action</code>, <code>options</code>,
+              <code>controls</code>, each toggle's <code>default</code>), the toy's TOY-PLAN.md row
+              and its lane's handoff; where the tap was unclear the lanes read the drive code and
+              rendered a filmstrip (<code>tools/effect-clip.mjs --strip=8</code>). Facts come from
+              science agencies, museums and encyclopedias; ones they couldn't confirm were left out.
+              Where a toy does something the real thing doesn't, the text says &quot;the toy&quot;
+              does it.
+            </li>
+            <li>
+              The owner read every text on the Help Board and approved them all on September 28,
+              2026 (<a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/reviews/2026-09-28-help/review.md"
+                target="_blank"
+                rel="noopener"
+                >review</a
+              >).
+            </li>
+            <li>
+              <code>tests/hta.spec.mjs</code> and <code>tests/htb.spec.mjs</code> check that every
+              toy on their shelves has both texts of the right shape, and show a long About text
+              whole at both sizes. <code>tests/help.spec.mjs</code> now reads the current texts
+              (#61), since no toy is left without an entry.
+            </li>
+            <li>
+              Known issues (BACKLOG.md): the star's tap runs a Sun-like life for every Type, and the
+              pearl's tap shows nothing with its shell switched off; the texts are written so they
+              stay true. The effect clip tool renders an almost empty strip for the butterfly, which
+              looks fine in the app.
+            </li>
+          </ul>
+          <h3 id="ai-ai-and-computing-prs-56-and-52-merged-2026-09-28">
+            AI: AI and computing (PRs #56 and #52, merged 2026-09-28)
+          </h3>
+          <ul>
+            <li>
+              A new &quot;AI and computing&quot; shelf of twelve kit toys in
+              <code>src/packs/computing.js</code>, each a dark board where you watch the data move:
+              perceptron, multilayer perceptron (it solves XOR), neural network, CNN, RNN,
+              transformer, looped transformer, diffusion model, gradient descent, word vectors,
+              sorting machine and half adder.
+            </li>
+            <li>
+              Extras from the owner's review: a Poster (2D) or 3D model view on eight of them, the
+              3D ones floating and built like the molecules; a neural network you size yourself (up
+              to 14 neurons); the classic encoder-decoder transformer with icons on its boxes; a CNN
+              you draw on (engine PR #56, a drawing pad for a toy's input panel), trained by
+              <code>tools/cnn-train.mjs</code> on the UCI handwritten digits (CC BY 4.0) to 97% test
+              accuracy; real GloVe word vectors (public domain) with &quot;A - B + C&quot;; eight
+              sorting algorithms.
+            </li>
+            <li>
+              Review: four rounds. The last fixed the text at its root (text splats only on the ink,
+              twice as dense, the letters clear in front of their plates), doubled the density of
+              the busiest toys, and moved the classic transformer's key off the toy into the Toy tab
+              note.
+            </li>
+            <li>
+              Lessons (in PACKS.md): text needs size / sqrt(weight) of 0.5 or more and splats only
+              on the ink; pieces gliding just in front of a board need
+              <code>out.resort</code> during the glide; a long, thin model comes out small (the kit
+              fits a sphere), so lay it out as a compact block.
+            </li>
+          </ul>
+          <h3 id="help-toy-help-pr-57-merged-2026-09-28">
+            Help: toy help (PR #57, merged 2026-09-28)
+          </h3>
+          <ul>
+            <li>
+              When a toy opens (from the shelf, a link, a refresh or a scene file), a short
+              &quot;how to play&quot; line shows beside it (under the toy's name on a phone, at the
+              top left of the stage on a wide screen) and fades after 7 seconds; a &quot;?&quot;
+              button shows it again. Embeds show no line. &quot;About this toy&quot; heads the About
+              tab: the toy's About text, how to play, and what you can do, read from its recipe.
+            </li>
+            <li>
+              The texts are a shared list, <code>src/toy-help.js</code> (88 how-to lines and 13
+              About texts to start), loaded when the first toy opens. A toy without a line gets one
+              built from its recipe. The style guide for the text lanes is in
+              <code>docs/handoff/Help.md</code>.
+            </li>
+            <li>
+              In an automated browser the line shows by itself only with <code>?help=show</code>, so
+              the stage screenshots in the smoke tests stay steady.
+            </li>
+          </ul>
+          <h3 id="math-math-you-can-type-pr-50-merged-2026-09-28">
+            Math: math you can type (PR #50, merged 2026-09-28)
+          </h3>
+          <ul>
+            <li>
+              A safe equation reader (<code>src/equation.js</code>) with no <code>eval</code> or
+              <code>Function</code>: numbers, the letters each plotter uses, the parameters a and b,
+              the usual functions, implicit products, a 120-character cap, one friendly error
+              message, and breaks instead of spikes where a value is not finite. Its unit tests
+              include hostile input and 4,000 random strings.
+            </li>
+            <li>
+              Five toys on the math shelf: the graph plotter (42 famous curves, or type your own; a
+              pen draws the curve and the a slider bends it in real time), the surface plotter (16
+              surfaces, or type z = …), circle and waves (2D and a 3D helix, with its own paths),
+              Fourier circles (shapes, your own curve, words up to six letters or digits, hearts and
+              stars, and a 3D view) and the Pythagoras proof.
+            </li>
+            <li>
+              Two fixes: the snail pulls its whole body into its shell, eye stalks first, and comes
+              out foot first; the American football spirals six whole turns, built twice so the
+              laces never show through.
+            </li>
+            <li>
+              Review: the owner marked the first five good and asked for extras on circle and waves
+              and Fourier circles (3D versions, your own settings, words); the second round was
+              approved as it stood.
+            </li>
+            <li>
+              Lessons (in PACKS.md): copies that morph into each other bend a curve through any
+              keyframes; a <code>fade</code> channel draws ink behind a pen;
+              <code>out.cues</code> can make a sound follow the effect; thin ribbons need bigger
+              splats; the cull flag suits round bodies only.
+            </li>
+          </ul>
+          <h3 id="fix3-two-fixes-pr-54-merged-2026-09-28">
+            Fix3: two fixes (PR #54, merged 2026-09-28)
+          </h3>
+          <ul>
+            <li>
+              The bananas: the loose &quot;stem&quot; was the bunch's crown, left behind when the
+              bananas pulled apart. At the owner's word it is gone, so each banana ends in the same
+              neck and stalk tip.
+            </li>
+            <li>
+              The ocean wave's collapse: one smooth clock through the falling keys (no stop at each
+              key), a barrel that shrinks as it rolls forward, and white water as a foam wall that
+              fades in and sinks into lace. The white sheet that flashed at impact is gone. The
+              rebuild is unchanged.
+            </li>
+            <li>
+              Lesson (in PACKS.md): run one monotone clock through keyframes for motion that should
+              flow.
+            </li>
+          </ul>
+          <h3 id="g-ai-image-to-3d-trial-pr-43-merged-2026-09-27">
+            G AI image-to-3D trial (PR #43, merged 2026-09-27)
+          </h3>
+          <ul>
+            <li>
+              A free image-to-3D Space on Hugging Face (TRELLIS, MIT) turns one photo into Gaussian
+              splats in about 30 seconds. <code>tools/image-to-3d.mjs</code> drives it with plain
+              fetch, and <code>tools/splat-views.mjs</code> renders a result from several sides.
+            </li>
+            <li>
+              Shipped: the real pencil (a CC BY 2.0 photo; a flick spins it flat) and the real tin
+              can (a CC0 photo; it spins on its rim and drops flat).
+              <code>tools/g-looks.mjs</code> paints their default looks over the scan's own shading:
+              a classic yellow pencil, and an original, brand-free &quot;Peaches&quot; label.
+            </li>
+            <li>
+              Not shipped: the fountain pen (the thin nib broke into spikes); the soda can, running
+              shoe, hoodie and red water bottle (no usable CC0 photo without a brand, a person or a
+              watermark). The clear water bottle waits on the free GPU quota.
+            </li>
+            <li>
+              Review: the owner asked for real-looking defaults instead of the bare scans, then
+              approved them; Peaches stays the can's default. The first worker was replaced by a
+              fresh session for the fixes.
+            </li>
+            <li>
+              Looks (PRs #47 and #48): a captured toy may list <code>looks</code>, each a finished
+              pair of files, and the Toy tab shows a Look choice; only the look's id goes into
+              links. The pencil has seven looks and the can four, each with its bare scan as
+              &quot;Original&quot;. Only the chosen look downloads; the repository grew by about 24
+              MB.
+            </li>
+            <li>
+              Known issues: the can photo's glare still shows faintly; the pencil's guessed
+              underside is a darker yellow; the pencil is a stubby one, as in the photo.
+            </li>
+          </ul>
+          <h3 id="f-touch-and-drag-prs-45-and-42-merged-2026-09-27">
+            F Touch and drag (PRs #45 and #42, merged 2026-09-27)
+          </h3>
+          <ul>
+            <li>
+              Four toys you play with your finger: the puzzle cube (a real 3×3 whose layers follow a
+              swipe and snap to quarter turns; a tap scrambles or solves it), Newton's cradle (drag
+              any ball out and let go), the chess set (tap a piece, then a legal square, while the
+              game is paused; the game carries on from there) and the bricks (18 bricks that build a
+              new model on each tap).
+            </li>
+            <li>
+              The engine PR (#45) re-sorts tokens that land far from where they were built
+              (<code>out.resort</code>), and the game panel follows a game started from the board.
+            </li>
+            <li>
+              A recipe's <code>drag</code> can name its plane, and a drag beside a draggable toy
+              still turns the view. <code>tools/drag-clip.mjs</code> renders drags as clips.
+            </li>
+            <li>Review: all four looked right at once.</li>
+            <li>
+              Known issues: a half-turned cube layer can show a seam until it lands; the cube's
+              button reads &quot;Scramble or solve&quot;; brick colors are random per model.
+            </li>
+          </ul>
+          <h3 id="e6a-balls-pr-38-merged-2026-09-26">E6a Balls (PR #38, merged 2026-09-26)</h3>
+          <ul>
+            <li>
+              20 balls got their own tap and sound, with real arcs, spin and bounciness (a dead
+              squash ball, a lively bouncy ball, a heavy medicine ball). Glossy balls spin as an
+              unlit copy under a fixed layer of light; single spinning bodies use <code>cull</code>.
+            </li>
+            <li>
+              Review: 18 of 20 looked right at once. The basketball's fingertip became a kit-built
+              robot hand (the owner's note), and the bowling ball's black spots were fixed in the
+              app too: its finger holes were dark tubes that drew through the turning ball, and its
+              pole caps had dark inside dots.
+            </li>
+            <li>
+              Known issues: a thin dark line can show along a spinning ball's edge past a quarter
+              turn; flags show on the four glossy balls only at rest; the robot hand's forearm is
+              cut off in wide views; the American football (kept) ends its spiral half a turn round
+              and snaps back (BACKLOG.md).
+            </li>
+          </ul>
+          <h3 id="e5-food-pr-35-merged-2026-09-26">E5 Food (PR #35, merged 2026-09-26)</h3>
+          <ul>
+            <li>
+              17 food toys got their own tap and sound (TOY-PLAN.md has each one). Cut, peeled and
+              bitten food comes apart as real pieces with their insides showing, and comes back; the
+              croissant and the grapes act differently from their scan twins.
+            </li>
+            <li>
+              Review: 14 of 17 looked right at once. The bananas now pull apart and each one peels;
+              the croissant is sliced along its middle and opens like a lid with butter melting
+              inside; the pretzel twists like a knot in one piece (r3, after an r2 that looked
+              broken).
+            </li>
+            <li>
+              Known issues: non-default styles do less (a lone watermelon wedge, kiwi half or orange
+              half); small draw-order slips (a taco half's edge, the dipped sushi roll by the dish's
+              rim); the apple's bite is a little mottled close up; the cupcake's sprinkles jump as
+              fine dots; the watermelon knife can pass the top of the frame. Rest looks changed for
+              the watermelon, kiwi, croissant (a tray), sushi (a soy dish and a plain board) and
+              taco (a plate).
+            </li>
+          </ul>
+          <h3 id="e6b-landmarks-and-friends-pr-36-merged-2026-09-26">
+            E6b Landmarks and friends (PR #36, merged 2026-09-26)
+          </h3>
+          <ul>
+            <li>
+              18 toys: eleven landmarks, each with a respectful moment (a sundial day at the
+              Washington Monument, whose model has no reflecting pool; the White House flag stays at
+              the top of its pole; a chariot race at the Colosseum; Galileo's drop at Pisa), the
+              school of fish (48 separate fish), the nautilus, sea urchin, frog, shield, crown and
+              snowman (which melts as solid pieces and rebuilds).
+            </li>
+            <li>Review: all 18 looked right at once.</li>
+            <li>
+              Known issues: the chariots and fish turn full circles, so small draw-order slips are
+              possible (none seen); Pisa's small bronze ball hides behind the top ledge until it
+              drops; the Eiffel Tower's fireworks, Liberty's sparks and the pyramids' saucer reach
+              outside the resting frame at their fullest. The lane's last handoff note (the owner's
+              approval and a last merge of main) was pushed after the merge and is copied into
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E6b.md"
+                target="_blank"
+                rel="noopener"
+                >E6b.md</a
+              >.
+            </li>
+          </ul>
+          <h3 id="e4-finish-pr-37-merged-2026-09-26">E4-finish (PR #37, merged 2026-09-26)</h3>
+          <ul>
+            <li>
+              <p>The four fixes from the owner's E4 review, all approved at once:</p>
+              <ul>
+                <li>
+                  Ice swan: ten solid pieces wear away and break off, faster and faster, meltwater
+                  drips into a spreading puddle, then it refreezes (7.6 s). The Temperature slider
+                  melts it the same way.
+                </li>
+                <li>
+                  Ocean wave: one skinned sheet bent through keyframes by 38 control tokens, so the
+                  whole face curls over and crashes, then a new swell builds (5.8 s). It is seen
+                  from three quarters now.
+                </li>
+                <li>
+                  Pinecone: the 42 scales facing the camera break off from the bottom up, pile at
+                  the base and fly back (7.2 s); six seeds (was sixteen).
+                </li>
+                <li>
+                  Lava lamp: colour sets, a blob count (2 to 12), blob size and shape, and Flow and
+                  Glow sliders; the default lamp builds exactly as before.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Known issues: the wave's white water shows as a sheet for a tenth of a second at
+              impact and its near end shows the profile's edge; the swan's wing tips break along
+              straight lines and its pedestal does not melt; some lava colour sets read less clearly
+              at 320 px; a colour set other than &quot;Pick below&quot; ignores the Wax and Liquid
+              pickers (the Toy tab cannot hide an option by another's value).
+            </li>
+          </ul>
+          <h2 id="state-after-phase-e4-2026-09-26">State after Phase E4 (2026-09-26)</h2>
+          <ul>
+            <li>
+              Phase A is done: splashery PR #13 and homepage PR #33 in
+              <code>ryanjosephkamp/ryanjosephkamp.github.io</code>, both merged. Phases B (PR #17),
+              C1 (PR #18), C2 (PR #19), D (PR #20), E1 (PR #21), E1b (PRs #22–#24), E1c (PRs
+              #26–#28), E2 (PRs #29–#31) and E3 (PR #32) are merged. The owner approved everything
+              from E3 (&quot;everything from E3 looks good and is approved&quot;).
+            </li>
+            <li>
+              <strong>Phase E4</strong> is one PR from <code>claude/sweet-babbage-gw9z9r</code> (PR
+              #33): new tap effects for all 28 nature and weather toys (TOY-PLAN.md has each one's
+              <code>improved</code> entry), sounds re-timed to them, and clips of all 28 (30 clips:
+              the saguaro's second tap and the pebbles' Cairn style too) on the Effect review page
+              (the approved E3 clips were removed from the page; the owner's marks on them stay in
+              its database). It was merged on 2026-09-26. The owner's verdicts (<code
+                >e4-&lt;toy id&gt;</code
+              >) marked 26 clips good and asked for four fixes (the ice swan, the ocean wave, the
+              pinecone, the lava lamp): lane E4-finish (<a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E4-finish.md"
+                target="_blank"
+                rel="noopener"
+                >E4-finish.md</a
+              >).
+            </li>
+            <li>
+              <strong>Effects (E4).</strong> Trees, flowers and plants in
+              <code>src/packs/nature.js</code>, weather in <code>src/packs/elements.js</code>. In
+              short: the oak's leaves flutter down; the maple's whirl round the trunk in a gust; the
+              pine shakes off its snow (a snowless tree gets a quick shower first); the palm drops
+              its coconuts, which bounce and roll; the bonsai grows a branch that scissors snip; a
+              breeze runs through the willow; the sunflower turns to a sun and opens; the rose opens
+              and drops a petal; the tulips open wide; the daisy spins like a pinwheel and flings
+              petals; the lotus rises on its stalk and opens; the toadstool puffs glowing spores;
+              two fiddleheads unroll on the fern; the saguaro's spines shoot out, and its second tap
+              slides out a wedge to show the wet flesh (the cactus scan blooms instead); coral
+              polyps open and six fish dart out; the pinecone opens and its winged seeds spin down;
+              the acorns' caps pop off and sprouts come up; the succulent opens and flowers; bamboo
+              shoots grow a section at a time; the pebbles tumble and stack a cairn; fish come to
+              nibble the kelp; the lava lamp heats up; the ice swan melts and refreezes; the tornado
+              spins up and pulls debris; the rainbow redraws itself; the iceberg calves; the
+              waterfall surges; the wave breaks. The weather effects were built by a helper session
+              in a worktree and merged.
+            </li>
+            <li>
+              <strong>Loose pieces (E4).</strong> Leaves, petals, coconuts, seeds, fish, stones and
+              shoot sections are tokens, each on its own path. Helpers at the top of nature.js:
+              <code>flutterDown</code> (a leaf swinging down like a pendulum and landing flat),
+              <code>swirlDown</code> (carried round the trunk in a widening spiral),
+              <code>planFalls</code> and <code>leafFall</code> (when each leaf lets go, lands,
+              withers and regrows), <code>canopySpots</code> (where loose leaves hang on a
+              <code>domeClumps</code> canopy), <code>tokenLeaves</code> (oak and maple leaf shapes
+              as tokens), <code>moundTop</code> (the height of a <code>grassMound</code> at a
+              radius, so things land on it), <code>crossing</code> (a sound cue when the effect
+              passes a moment), <code>slerpQ</code>, <code>frameQuat</code>. A chain of tokens bends
+              at its joints (the fern's young fronds: each joint turns everything beyond it). A
+              tree's crown is one part (<code>crown</code>, about <code>SHAKE_AXIS</code>) that
+              rocks while its trunk's roots stay put.
+            </li>
+            <li>
+              <strong>Built where they end (E4).</strong> Pieces that travel are built where they
+              are seen at their fullest and offset back at rest, for the draw order and the fit: the
+              bamboo's sections are built grown and rest as tips on the ground, the tornado's debris
+              is built in front of the funnel, the fern's young fronds are built open and rest
+              rolled up. A hidden piece can rest folded away on a channel held at 1 (the lotus's
+              stalk, the coral's polyps). Recipes that need state between frames keep it with
+              <code>mem(c)</code> (the lava lamp's extra clock, so the blobs never jump when the
+              effect ends).
+            </li>
+            <li>
+              <strong>Tests (E4).</strong> <code>tests/unit.spec.mjs</code> plays every E4 tap
+              through frame by frame and checks that its last moment shows the same things in the
+              same places as the rest pose (so nothing jumps at the end), and that every channel
+              carrying morph splats is back at 0 at rest (the willow and kelp sway by a morph all
+              the time; the lotus and coral rest folded). Since the parallel setup (2026-09-26)
+              <code>tests/taps.spec.mjs</code> does this for every kit toy.
+            </li>
+            <li>
+              <strong>Sounds (E4).</strong> 28 specs re-timed in <code>src/toy-sounds.js</code> (all
+              pass <code>tools/sound-check.mjs</code>); later hits are cues from drive(): the palm's
+              coconut bonks, the daisy's plucks, the bamboo's knocks, the pebbles' clacks, the
+              pine's snow, the saguaro's squelch and drips, the lotus's drop, the iceberg's splash.
+              The Splashery Sound Board page was rebuilt (its builder was not in the repo then; it
+              is <code>tools/sound-board.mjs</code> now: it inlines <code>src/voices.js</code> with
+              <code>export</code> removed, <code>TOY_SOUNDS</code>, and <code>TOYS</code>/<code
+                >CATS</code
+              >
+              from <code>src/toys.js</code> with each toy's plan sound line, into the page's own
+              head and UI script).
+            </li>
+            <li>227 toys are keep, 2 more, 55 new (284 on the shelf, with the protein toy).</li>
+            <li>
+              <strong>E3 review (2026-09-26).</strong> The owner marked 23 of the 26 E3 clips good
+              (verdicts <code>e3-&lt;id&gt;</code> on the Effect review page). The three notes were
+              fixed in the same PR: the Möbius strip has a Rider option (a blue race car by default,
+              red on the Ocean colours; a rolling beach ball; a duck on a bicycle; the ant), whose
+              pieces are tokens listed in <code>RIDERS</code> in <code>src/packs/maths.js</code>;
+              the lungs' deep breath is about twice as big (<code>lungEmpty</code> in
+              <code>src/packs/anatomy.js</code>, larger splats so the stretched surface stays
+              closed); the Mandelbulb no longer twists: its seven horizontal discs click round in
+              opposite directions like a combination lock, each by a seventh of a turn (the bulb's
+              own symmetry, and its splats are laid down in sevens), then snap back to their built
+              pose unseen. Clips of the fixes (<code>e3f-…</code>) are at the top of the Effect
+              review page.
+            </li>
+            <li>
+              <strong><code>fit: false</code> (E3 review).</strong> A shape added with
+              <code>fit: false</code> is left out of the toy's fit (the Möbius riders, built in
+              front of and behind the band for the draw order); keep it inside the view. The kit
+              test's &quot;fits the unit ball&quot; check skips these shapes.
+            </li>
+            <li>
+              <p>
+                <strong>Channels (E3; docs/PACKS.md section 6).</strong>
+                <code>out.morph = [a, b, c, d]</code> drives four channels, with motion on or off,
+                and three new kinds follow them:
+              </p>
+              <ul>
+                <li>
+                  <code>morph</code> (kind 17): <code>to: (c) =&gt; [x, y, z]</code> gives each
+                  splat its own target (recipe coordinates); it moves there in a straight line as
+                  its <code>channel</code> goes 0 → 1 (values past 1 or below 0 extrapolate). The
+                  offset is packed into the splat's two behaviour values (12 bits per axis over
+                  ±<code>MORPH_RANGE</code> = 2 toy units, <code>Kit.encodeMorphs</code>), so no new
+                  stream was needed. Targets count in the fit unless the recipe sets
+                  <code>k.fitMorphs = false</code> (then keep the morphed shape within about 1.2 toy
+                  radii, the edge of the view). A non-finite target throws at build.
+                </li>
+                <li>
+                  <code>band</code> (18): glow (<code>out.glow</code>) where the channel passes
+                  <code>params[0]</code>, width <code>params[1]</code>: a light front that starts at
+                  the tap (the astrocyte's calcium wave, the mitochondrion's cristae).
+                </li>
+                <li>
+                  <code>fade</code> (19): alpha fade as the channel passes
+                  <code>params[0]</code> (negative width fades in), so a layer clears without
+                  speckle (the virus's copies).
+                </li>
+                <li>
+                  <code>skin</code> (20): <code>skin: (c) =&gt; [a, b, s]</code> follows tokens a
+                  and b's offsets blended by s (the hypercube's edges between its sixteen corner
+                  tokens).
+                </li>
+                <li>
+                  <code>part</code> may be a function <code>(c) =&gt; index</code>, to split one
+                  shape between parts (the bacterium's halves, the diatom's girdle).
+                </li>
+                <li>
+                  Tests: unit tests for the packing and for every E3 toy's tap; a smoke test that
+                  the red blood cell's morph changes the picture.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Morph lessons (E3).</strong> Splats keep the orientation they were built with,
+              so where a morph turns the surface a lot (a pinch closing into a new round end) use
+              rounder splats (<code>flat</code> 0.3–0.45). Where a morph stretches a surface its
+              splats spread apart and the far side shows through as speckle: use slightly larger
+              splats on the morphing copy (<code>size</code> 1.25–1.3: the torus knot, the gyroid)
+              or keep the stretch modest (the white cell's cup). A two-sided surface with a
+              different colour per side (the gyroid) speckles wherever one face has gaps. A morph
+              and another behaviour cannot share a splat: morphing toys lost their
+              <code>breathe</code>; several drive a gentle idle morph or a body squash instead. A
+              toy that turns its body (the virus, the pollen grain) and sends pieces off undoes the
+              body's turn in the pieces' part so they leave in a fixed place on screen.
+            </li>
+            <li>
+              <strong>Effects (E3).</strong> Tiny in <code>src/packs/tiny.js</code> (fission
+              <code>BAC</code>, division <code>CELL</code>, phagocytosis <code>WBC</code>,
+              <code>AMOEBA_DIR</code>, <code>PARAMECIUM</code>, <code>VIRUS</code>,
+              <code>DIATOM_AXIS</code> and <code>snowflake()</code> at the end), anatomy in
+              <code>src/packs/anatomy.js</code>, maths in <code>src/packs/maths.js</code>. Two E3
+              effects differ from the plan: the Menger sponge is carved level by level (a zoom into
+              itself blurred), and the Mandelbulb is wrung (a twist, as the owner's note asked)
+              instead of changing power. The paramecium swims its loop about the view direction
+              (turning about the view keeps the draw order). The hypercube is a true rotation in the
+              X–W plane with 4D perspective; a full turn brings it back exactly.
+            </li>
+            <li>
+              <strong>Sounds (E3).</strong> 26 specs re-timed in <code>src/toy-sounds.js</code> (all
+              pass <code>tools/sound-check.mjs</code>); the heart's lub-dubs follow its racing beat.
+              The Splashery Sound Board page was rebuilt.
+            </li>
+            <li>199 toys are keep, 2 more, 83 new.</li>
+            <li>
+              <strong>E2 review (2026-09-25).</strong> The owner's review is word for word in
+              <code>docs/reviews/2026-09-25-e2/review.md</code> (and its marks are in the Effect
+              review page's database). 24 of 32 were &quot;good&quot;; the fixes are in this PR: the
+              Moon's phases were replaced by a landing (a lunar module lands near the top of the
+              Moon, an astronaut climbs down, plants a chosen flag, unrolls it and waves; a second
+              tap packs up and lifts off; the flag is a <code>type: &quot;flag&quot;</code> toy
+              option drawn from its SVG through the screen texture, at the flag's real shape, which
+              <code>tools/flag-aspects.mjs</code> now writes into flags.json); the sapphire's star
+              lies on the stone and ends at its edge; the quartz glints point different ways; the
+              solar system's planets are spaced and sized so none touch, at rest or in the row. The
+              atom, orbital, molecule and crystal lattice were &quot;good, but more of them some
+              day&quot; (BACKLOG). The owner's other requests (a resizable, roomier settings panel
+              with a main tab and a reset button, sharper laptop keys, chess playback and flag
+              colours, molecules from formulas or files, a protein toy with PDB upload) are in the
+              stacked PRs <code>claude/quirky-pasteur-modo55-2</code> and <code>-3</code> (merge
+              them in that order, after this one).
+            </li>
+            <li>
+              <strong>Settings panel (after the E2 review, PR <code>-2</code>).</strong> Tabs:
+              <strong>Toy</strong> (the main tab: action, controls, options, Motion with the
+              turntable ON/OFF switch, Quick settings with flag colours, Detail and
+              <strong>Reset everything</strong>), <strong>Tools</strong> (the picked tool's
+              settings, opened by picking a tool, and the effects), Look, Make, Share and About (an
+              ⓘ icon). Reset everything (<code>app.resetAll</code>) makes a fresh scene for the same
+              toy and sets Detail to Auto. On wide screens <code>.grip-panel</code> (the panel's
+              left edge) and <code>.grip-shelf</code> (under the shelf) set
+              <code>--panel-w</code> and <code>--shelf-h</code>, kept in localStorage; the shelf
+              grid is <code>auto-fill</code> so it gains columns. Rows and groups are roomier.
+            </li>
+            <li>
+              <strong>Chess (PR <code>-2</code>).</strong> A game bar under the board shows the
+              title, details and move, with start, back, play/pause, on and end buttons
+              (<code>game.step</code>, <code>game.jump</code>); pausing keeps the position; a tap on
+              a finished game that is still playing starts it again (<code>action.at</code> fires a
+              <code>restart</code> pulse). The game's details (PGN tags) can be edited in the panel.
+              Flag colours lie over the board from above, gently (the new
+              <code>top</code> projection; <code>patternProjection</code>,
+              <code>patternAmount: 0.3</code> and <code>patternDetail: 1</code> in the recipe), so
+              the light and dark squares stay clear; the pieces keep their own ivory and ebony
+              (<code>pattern: false</code>), as the owner asked after seeing them in flag colours
+              (review page, 2026-09-25).
+            </li>
+            <li>
+              <strong>Chemistry (PR <code>-3</code>).</strong> <code>src/chem/</code> reads
+              molecules and proteins with no libraries: <code>elements.js</code> (69 elements up to
+              uranium, CPK colours, covalent radii, formulas), <code>smiles.js</code> (a SMILES
+              parser with rings, branches, charges, isotopes and aromatic kekulisation; implicit
+              hydrogens), <code>embed.js</code> (a seeded 3D layout: distance geometry then a small
+              force field with bond lengths, angles, planar rings and repulsion),
+              <code>molfile.js</code> (MOL/SDF V2000, XYZ and PDB small molecules; bonds guessed
+              from distances when a file has none; a table of 66 named molecules),
+              <code>condensed.js</code> (formulas written out, such as CH3COOH or (CH3)2CHOH, turned
+              into SMILES) and <code>protein.js</code> (PDB and mmCIF chains, HELIX/SHEET records or
+              a simple DSSP-style fallback, and a smooth backbone path). The molecule toy's
+              <strong>Your own</strong> panel takes a name, a formula (written out, or one that fits
+              a table molecule: C6H12O6 shows glucose and says that fructose fits too), a SMILES
+              string or a file; the result is kept in the hidden <code>source</code> option (SMILES
+              as typed, a file packed as <code>M1;name;atoms;bonds</code>, up to 24,000 characters),
+              so links keep it. The <strong>protein</strong> toy (Atoms) draws a cartoon (helix
+              coils, strand arrows, loop tubes, ligands as ball and stick) of 1UBQ, 4INS, 1EMA or
+              4HHB (<code>assets/proteins/</code>, CC0) or an opened PDB/mmCIF file; a tap pulls its
+              pieces apart and back (GFP's chromophore glows). An opened protein stays in the page
+              (<code>fileName</code> option only); a link to it shows ubiquitin. New engine hooks:
+              <code>recipe.prepare(options)</code> (async, before the build),
+              <code>recipe.input</code> (the panel), <code>recipe.credits</code>, option types
+              <code>text</code> and <code>flag</code>, and <code>hidden</code> options
+              (docs/PACKS.md section 5). Tests: <code>tests/chem.spec.mjs</code>.
+            </li>
+            <li>
+              <strong>A rare engine warning (2026-09-25).</strong> Once in seven full test runs, the
+              stretchy-toy smoke test caught
+              <code
+                >GL_INVALID_OPERATION: glDrawElementsInstanced: Mismatch between texture format and
+                sampler type</code
+              >
+              from ANGLE. Splashery's own shaders use no integer textures, so it comes from the
+              engine's splat draw (likely a draw while one of its integer data textures is being
+              swapped); the test passed in 4 re-runs straight after. If it comes back, catch the
+              trace (<code>test-results/</code>) before cleaning up, and look at when the engine
+              swaps its order or work-buffer textures. In E3 the same test failed once in three full
+              runs in another way: the drag on the gummy bear never became a grab (the GPU pick
+              found nothing under the pointer for a minute), so the drag orbited. It passed alone
+              three times and in the next full run; the trace was lost to a re-run, so keep
+              <code>test-results/</code> if it comes back. It came back on 2026-09-26, in the full
+              run of the parallel-setup PR (which changed no app code), in the phone test &quot;a
+              panel opened while a toy from the grid is still loading stays open&quot;: the same
+              warning about 0.9 s after the horse statue (a rigged scan, its download held back 3 s
+              by the test) had replaced the cactus, with no test action in between. The test passed
+              alone straight after. So far it has shown up just after a new toy's splats replace the
+              old ones (a kit toy with <code>grab</code> once, a rigged scan once).
+            </li>
+            <li>
+              <strong>Tiny splats vanish on small screens.</strong> The renderer drops splats that
+              come out under about two pixels, so a detail built from very fine splats (high
+              <code>weight</code> and small <code>size</code>) disappears on a phone or in a 360 px
+              clip. Keep <code>size / sqrt(weight)</code> near 0.5 or more for anything that must
+              show (the Moon's lander), and check a clip at 300–360 px.
+            </li>
+            <li>
+              <strong>Effects (E2).</strong> Space in <code>src/packs/space.js</code>, atoms in
+              <code>src/packs/atoms.js</code>, gems in <code>src/packs/gems.js</code>. Idle motion
+              added where the owner asked: the Sun churns, Saturn's and Uranus's rings turn, the
+              aurora's folds race round, the galaxy's arms turn.
+            </li>
+            <li>
+              <strong>Draw order lessons (E2; docs/PACKS.md 7b &quot;Draw order&quot;).</strong>
+              Splats sort in their built pose. A solid body turned past a quarter turn looks hollow,
+              so spinning bodies are built twice (<code>spinParts</code>, <code>TURNED</code>,
+              <code>turnedColor</code> in space.js) and show the copy nearer its built pose; cloud
+              layers over a turning body cannot be fixed that way, so Earth's clouds are painted on
+              and Venus and Neptune turn in latitude bands; <code>interior</code> splats draw over a
+              turned surface, so turning bodies are hollow with a separate
+              <code>coreBall</code> that hides while they turn; forever-turning rings use marks that
+              repeat every eighth of a turn (<code>ringAngle</code>). Pieces that must draw in front
+              are built where they will be (the black hole's star, the orrery's Mercury). Bands that
+              turn at different speeds (Jupiter, Venus, Neptune) set the new part
+              <code>cull</code> flag while they turn, so one band's far side cannot show through the
+              next as a flap. Earth and Mercury, whose night and heat layers stay put, have four
+              copies a quarter turn apart (<code>spinQuarters</code>) and show one built on the far
+              side of where it is shown, so the layer stays on top.
+            </li>
+            <li>
+              <strong>Hidden pieces count in the fit (E2).</strong> Build effect pieces inside the
+              toy's resting size and grow them by part <code>scale</code> (the Sun's flare, the
+              star's red giant, the meteor's fireball).
+            </li>
+            <li>
+              <strong>Engine (E2).</strong> <code>build(k)</code> can leave <code>k.data</code> for
+              <code>drive</code>, which gets it as
+              <code>info.data</code> (<code>src/motion.js</code>; the molecule and the crystal
+              lattice use it). A driven part can set <code>cull: true</code>: the kit shader (GLSL
+              and WGSL, <code>src/effects.js</code>) then hides its splats on the far side of the
+              part's pivot from the camera (<code>packParts</code> sends it as a visibility of -1 -
+              v). Tokens (<code>kind: &quot;token&quot;</code>, up to 48) now also break shapes into
+              pieces: the asteroid (18 cells with fresh broken faces), the meteor's fragments, the
+              molecule's atoms (the buckyball by pentagons). A new hidden <code>5g</code> orbital is
+              the excited state for the 4f orbitals.
+            </li>
+            <li>
+              <strong>Sounds (E2).</strong> 32 specs re-timed in <code>src/toy-sounds.js</code> (all
+              pass <code>tools/sound-check.mjs</code>). The pulsar ticks on each flash and the star
+              rings a bell as it is reborn through <code>out.cues</code> (beyond the sound check's
+              five seconds). The Splashery Sound Board page was rebuilt.
+            </li>
+            <li>172 toys are keep, 2 more, 109 new.</li>
+            <li>
+              <strong>Phone panel (E1c).</strong> Picking a toy folded the phone sheet only after
+              the toy had loaded, so a panel opened meanwhile (a scan takes seconds on a phone) shut
+              itself. <code>chooseToy</code> now folds it at the pick. From the shelf grid, More
+              opens the settings in one tap (the handle, a swipe down, a pick or a tap on the toy
+              closes the grid).
+            </li>
+            <li>
+              <strong>Chess from PGN (E1c).</strong> <code>src/chess.js</code> holds the rules:
+              legal moves (checked against published perft counts in a unit test), SAN, and
+              <code>readPgn</code> (the first game of a file; comments, variations and NAGs skipped;
+              FEN set-ups; messages that name the failing move). The chess set has 48 tokens now
+              (<code>MAX_TOKENS</code> in <code>src/motion.js</code>, <code>uSpTokens[96]</code>):
+              16 hidden spares rise for promotions. A recipe can offer a game panel with
+              <code>recipe.game</code> ({ title, isDefault, load(text), reset }), which
+              <code>ui.js</code> draws (open a file, paste, back to the default).
+              <code>tools/effect-clip.mjs</code> and <code>tools/effect-strip.mjs</code> take
+              <code>--pgn=file</code>.
+            </li>
+            <li>
+              <strong>Kit parts for scans (E1c).</strong> When a scan's part cannot move without
+              tearing (the elephant's trunk is fused to its forehead), hide it (a rig part with
+              <code>visible: 0</code>) and build a replacement in the rig's add-on, traced from the
+              scan's splats and coloured from them: the elephant's trunk is five tube segments on
+              ball joints, driven as a chain. To read a scan's colours, unzip its
+              <code>.sog</code> and decode <code>sh0.webp</code> with <code>meta.json</code>'s
+              codebook (pixel i is splat i). A cut can also follow a measured plane: the cat's head
+              is everything above its neck's slanted plane (a huge sphere region) and its collar
+              follows the neck's measured radius.
+            </li>
+            <li>
+              <strong>Sounds (E1c).</strong> Cues play mid-effect sounds (Newton's cradle clacks on
+              each strike). A sound spec's <code>pickAt</code> times a picked note (a xylophone bar
+              sounds as the mallet lands, at 0.12 s).
+            </li>
+            <li>
+              <strong>Locked toys (owner approved, do not change their look or behaviour):</strong>
+              the laptop (&quot;basically perfect … please lock that in&quot;). Engine changes must
+              keep it working exactly as now; the laptop smoke test guards it. The one change since,
+              at the owner's request after E2: sharper key letters (every font pixel filled by a 3 x
+              3 grid of dots just above the cap) and digits on the top row.
+            </li>
+            <li>
+              <strong>Phase E1b</strong> (the owner's review of E1, verbatim in
+              <code>docs/reviews/2026-09-24-e1/review.md</code>) is in three stacked PRs, merged in
+              order: <code>claude/phase-e1-45lgvf-1</code> (rules, clip tool, scan and shape fixes),
+              <code>-2</code> (thrown balls, eight-ball, storybook) and <code>-3</code> (chess and
+              laptop). Check that all three are merged before starting E2.
+            </li>
+            <li>
+              <strong>Effect quality rules (E1b).</strong> CLAUDE.md now has &quot;Effect quality
+              rules&quot; and docs/PACKS.md section 7b the details: real motion of solid pieces
+              (never bend a scan with soft regions), separate things move separately, real breaking,
+              instruments visibly played, mouths move, real rules and real throws, real materials,
+              the grape as the bar, and judging effects as clips at phone size.
+            </li>
+            <li>
+              <strong>Effect clips (E1b).</strong> <code>tools/effect-clip.mjs</code> renders a tap
+              effect as a looping GIF with the clock stepped by hand (about 90 s per toy under
+              SwiftShader). The owner reviews clips of every changed effect on the private
+              &quot;Effect review&quot; page (<a
+                href="https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi"
+                target="_blank"
+                rel="noopener"
+                >https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi</a
+              >) before merging. Its <code>verdicts</code> collection holds one doc per toy:
+              <code>{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at }</code>.
+              Read it with ArtifactData, and republish the page (same URL) with new clips each
+              phase.
+            </li>
+            <li>
+              <strong>Scan fixes (E1b).</strong> Rig regions now default to hard edges (<code
+                >soft: 0.03</code
+              >), overlapping regions split by the nearest centre, <code>over: true</code> makes a
+              region win (a jaw inside a head), and <code>notColor</code> keeps a colour out (the
+              tomatoes' plate). New effect movers: <code>fall</code> (Voronoi pieces break off, fall
+              to the floor and come back), <code>vibrate</code> (a string's standing wave) and
+              <code>writhe</code> (a travelling wave that contorts a shape). The cat, horse,
+              elephant, bust, fly, tomatoes, basket, ukulele, raspberry, blackberry, blueberry,
+              donut and knot were redone (see TOY-PLAN.md). <code>tools/rig-map.mjs</code> has
+              <code>--center</code>/<code>--half</code> zoom and left and bottom views. To place
+              regions on a scan, read its splat centres in the page
+              (<code>player.stage.toy.resource.centers</code>) and slice them numerically; that
+              found the fly's legs, which the renders hid.
+            </li>
+            <li>
+              <strong>Chess (E1b).</strong> The chess set is now a kit toy
+              (<code>src/packs/games.js</code>, category Toys) with 32 pieces as &quot;token&quot;
+              splats (<code>uSpTokens</code>, 2 vec4 each). A tap plays Morphy's Opera Game (Paris,
+              1858); a unit test checks the final position. Recipes can now ask for sounds
+              mid-effect with <code>out.cues</code> (each move clacks as it lands). The old chess
+              scan (CC0, Poly Haven) is off the shelf; its files are still in
+              <code>assets/toys/chess-set/</code> and <code>tools/assets.json</code>.
+            </li>
+            <li>
+              <strong>Laptop (E1b).</strong> Keycaps with letters (behaviour &quot;key&quot;: the
+              pressed key goes down), a live screen (behaviour &quot;screen&quot;: splats read the
+              <code>uSpScreen</code> texture, drawn by the recipe's <code>screen.draw</code> when
+              <code>screen.version</code> changes), <code>typeKey</code> for a real keyboard (it
+              gets first pick of the keys before the app's shortcuts), and <code>drag</code> for the
+              trackpad (a drag that starts on the pad moves the pointer; elsewhere it orbits).
+            </li>
+            <li>
+              <strong>Thrown balls (E1b).</strong> The American football spirals, the rugby ball
+              tumbles end over end, the shuttlecock flips and floats down spinning, and the flying
+              disc spins and loops. The eight-ball is opaque and glossy; the storybook's outside is
+              crisp.
+            </li>
+            <li>140 toys are keep, 2 more, 141 new.</li>
+            <li>
+              <strong>New effects for the scans and shapes (E1).</strong> All 33 E1 toys have their
+              own tap effect (E1b redid 13 of them after the owner's review).
+            </li>
+            <li>
+              <p>
+                <strong>Rigs grew (E1).</strong> Everything is in
+                <code>src/rigs.js</code> (reference at its top), <code>src/rig.js</code> (tagging
+                pass), <code>src/rig-fx.js</code> (effects) and the rig variant of the modifier in
+                <code>src/effects.js</code>:
+              </p>
+              <ul>
+                <li>
+                  Colour keys: a region can take only splats of one colour, and
+                  <code>keys</code> marks up to two sets of splats by colour (or long thin splats)
+                  in the <code>splatPart</code> stream's spare channels. Used for the strawberry's
+                  seeds, the cookie's jam, the millipede's legs, the basket's shells, the clock's
+                  red second hand, the ukulele's strings, the planet's clouds and the donut's
+                  sprinkles.
+                </li>
+                <li>
+                  Part glow and scale: a driven part takes <code>tint</code>, <code>glow</code>,
+                  <code>bright</code> and <code>scale</code> (<code>uSpRigTint</code>, and the
+                  pivot's w in <code>uSpParts</code>, which kit toys now read too).
+                </li>
+                <li>
+                  Whole-body effects (<code>fx</code>, up to four per rig, <code>uSpFx</code>):
+                  select, mask (half-space, strips, sphere, wedge), move (push, along, scatter, hop,
+                  shiver, turn, bands, bend, peel, split), colour (glow, recolour, brighten,
+                  sparkle, fade, darken) and pattern (front, band, stagger, ramp, swirl, wave).
+                </li>
+                <li>
+                  Add-ons (option b): <code>addon.build(k)</code> builds a small kit toy in world
+                  coordinates as a second splat entity (<code>stage.setAddon</code>), sorted with
+                  the scan in the work buffer and driven through <code>out.addon</code>. Used for
+                  the cactus flowers, the flames of the lantern and the gnome's lamp, the camera
+                  flash, the bust's speech bubble (&quot;SALVE, AMICE!&quot;, in the storybook font,
+                  now in <code>src/font.js</code>), the croissant's and pomegranate's insides, and
+                  the carrot cake's cut faces.
+                </li>
+                <li>
+                  The four shelf shapes (blob, donut, knot, planet) are rigs too: a rigged
+                  procedural toy gets its own container format with the
+                  <code>splatPart</code> stream, and clay edits re-tag it.
+                </li>
+                <li>
+                  <code>alive</code> may be a function of the controls (the lantern flickers only
+                  while lit). The alarm clock's second hand ticks all the time (<code
+                    >alive: true</code
+                  >).
+                </li>
+                <li>The lantern's tap is now a toggle, with <code>{ on, off }</code> sounds.</li>
+              </ul>
+            </li>
+            <li>
+              <code>tools/rig-map.mjs</code> renders a scan from four sides with an orthographic
+              camera and a world grid; <code>--rig</code> tints parts and keys,
+              <code>--at=0.9</code> shows the pose after a tap. Strips of every E1 effect are in
+              <code>tests/screenshots/e1-*.png</code>.
+            </li>
+            <li>
+              Sounds were re-timed to the new effects (23 specs changed; all pass
+              <code>tools/sound-check.mjs</code>). The Splashery Sound Board page was rebuilt from
+              the new specs.
+            </li>
+            <li>
+              Fixed on the way: uniforms that a toy does not set keep the previous toy's values in
+              the shared shader scope, so the rig effects' uniforms are now set for every rig (zeros
+              when unused).
+            </li>
+            <li>
+              <p><strong>Sound engine (D).</strong></p>
+              <ul>
+                <li>
+                  <code>src/voices.js</code> is a voice library of about 80 synthesised voices
+                  (plucked strings with Karplus-Strong, modal bells, bars, glass and wood, drums,
+                  buzz, quack, squawk, mew, hoot, ribbit and cheer formant voices, crunch, rattle,
+                  patter, crackle, splash, wind, roar, engines, horns, theremin, pads) and a note
+                  sequencer (<code>notes: &quot;C5 E5+G5 -&quot;</code>, <code>step</code>,
+                  <code>strum</code>). Its header documents the spec format. The old shared names
+                  (&quot;chime&quot;, &quot;pop&quot; and so on) still play exactly as before, and
+                  the effect switches and tools still use them.
+                </li>
+                <li>
+                  <code>src/toy-sounds.js</code> gives all 283 shelf toys their own spec, built from
+                  the Sound lines in TOY-PLAN.md, with <code>{ on, off }</code> halves for the 32
+                  toggles. Recipes no longer carry <code>sound</code> (every recipe
+                  <code>sound:</code> field was removed). Hop-only toys play their own sound too.
+                </li>
+                <li>
+                  Each voice has a measured <code>LEVEL</code> (<code
+                    >node tools/sound-check.mjs --voices</code
+                  >), and the output goes through a limiter, so toys are about equally loud and
+                  layers never clip.
+                </li>
+                <li>
+                  <code>tools/sound-check.mjs</code> renders every sound offline in headless
+                  Chromium and checks level, clipping and length; <code>--sheet=</code> draws
+                  spectrogram pages (in <code>tests/screenshots/d-sounds*.png</code>),
+                  <code>--wav=</code> writes WAV files. <code>tools/sound-audit.mjs</code> lists
+                  toys without their own action or sound (none lack a sound; 179 still only hop) and
+                  voice usage.
+                </li>
+                <li>
+                  No samples were used: the quack, the crowd cheer and the alarm bells are
+                  synthesised. Nothing was added to CREDITS.md.
+                </li>
+                <li>
+                  The owner can audition every sound on a private page, the &quot;Splashery Sound
+                  Board&quot;:
+                  <a
+                    href="https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj"
+                    target="_blank"
+                    rel="noopener"
+                    >https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj</a
+                  >
+                  (built from the same voices.js and toy-sounds.js; rebuild and republish it if the
+                  sounds change).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Taps that know where they landed (D).</strong> A tap on the toy passes the
+              picked point, in the recipe's coordinates, to <code>action.at(point, c)</code>, which
+              may fire another control and pick an item; drive() sees
+              <code>info.tap = { point, key, pick, time, n }</code>. A sound spec's tune plays only
+              note <code>pick</code> for such a tap. The xylophone uses it: tap a bar and the mallet
+              strikes that bar and plays its note. Embeds pass the point too.
+              <code>tools/effect-strip.mjs --at=x,y,z</code> taps a point.
+            </li>
+            <li>
+              <strong>Scan rigs (D).</strong> <code>src/rigs.js</code> gives captured toys
+              <code>parts</code> made of soft ellipsoid regions (world coordinates) plus
+              <code>controls</code>, <code>action</code> and <code>drive()</code> like a recipe. At
+              load a GSplatProcessor (<code>src/rig.js</code>) writes each splat's part and weight
+              into a <code>splatPart</code> instance stream, and the modifier's rig variant (<code
+                >MODIFIER_RIG</code
+              >
+              in <code>src/effects.js</code>) moves splats with their part, blended by the weight.
+              <code>out.body</code> (squash, offset, rotation) works for scans too.
+              <code>?rig=show</code> tints the parts, for placing regions. Two rigs: the cat statue
+              (head turn, tail flick) and the real rubber duck (squeeze and spring back, body only).
+              Option (b) from the old outline, a kit-built add-on drawn as a second splat entity (a
+              lantern flame, a camera flash), was not built.
+            </li>
+            <li>
+              <strong>Drag-to-stretch (D).</strong> A recipe (or rig) with
+              <code>grab: { radius, max }</code> is stretchy: with the Orbit tool, a drag that
+              starts on the toy pulls the grabbed part (a Gaussian falloff in the modifier,
+              <code>uSpGrab</code>) and it springs back with a few wobbles when let go (EffectDriver
+              <code>grabStart</code>, <code>grabTo</code>, <code>grabEnd</code>); a drag that starts
+              beside the toy still orbits. Only the gummy bear has it. Letting go of a real stretch
+              plays the toy's sound.
+            </li>
+            <li>
+              Plan updates: the cat statue, the real rubber duck and the gummy bear are now
+              <code>keep</code> with <code>improved</code> entries, and the xylophone has an
+              <code>improved</code> entry. 101 toys are keep, 3 more, 179 new.
+            </li>
+            <li>
+              <p>
+                <strong>Clearer effects (C2).</strong> All 33 toys are now
+                <code>&quot;v&quot;: &quot;keep&quot;</code> in <code>tools/toy-plan.json</code>,
+                and each has an <code>improved</code> entry saying what changed (TOY-PLAN.md shows
+                it as &quot;Improved&quot;). The only toys still marked &quot;more&quot; are the
+                four touch and drag toys for Phase F.
+              </p>
+              <ul>
+                <li>
+                  Several taps changed type or key. DNA's <code>unzip</code>, the submarine's
+                  <code>dive</code> (was the <code>scope</code> toggle), the ice cream's
+                  <code>thaw</code>, the Lorenz attractor's <code>race</code>, the Klein bottle's
+                  <code>surge</code> and the cherry blossom's <code>shake</code> are pulses. The
+                  diya's tap is a new <code>ring</code> toggle (Blow is still a control).
+                </li>
+                <li>
+                  <p>Some defaults changed, so resting looks changed:</p>
+                  <ul>
+                    <li>The pufferfish's Puff default is 0.1, so it rests slim.</li>
+                    <li>The tree's Lights default is off.</li>
+                    <li>The castle's drawbridge starts up.</li>
+                  </ul>
+                </li>
+                <li>Old scenes that saved other values still load with those values.</li>
+                <li>
+                  Per-tap variety uses a counter in the recipe's closure, hashed to pick a variant.
+                  Examples: the fireworks' tube and shell type, and the crystal ball's sign. The
+                  drum keeps its last tap times there too.
+                </li>
+                <li>
+                  <p>New visible pieces:</p>
+                  <ul>
+                    <li>the bus's stop sign, doors and lights</li>
+                    <li>Big Ben's open belfry and bell</li>
+                    <li>the pagoda's wind chimes and stone lanterns</li>
+                    <li>the diya's ring of eight small diyas</li>
+                    <li>the eye's lids, which are hidden at rest</li>
+                  </ul>
+                </li>
+                <li>
+                  Thumbnails were re-rendered for the toys whose resting look changed: pufferfish,
+                  decorated tree, diya, bus, Big Ben, castle, pagoda, DNA, Lorenz and Klein bottle.
+                </li>
+                <li>
+                  <code>tools/effect-strip.mjs</code> renders a tap effect as a filmstrip (a frame
+                  before the tap, then frames at set times after it). It steps the clock by hand, so
+                  frames are repeatable. <code>--taps=3 --gap=0.2</code> taps several times;
+                  <code>--opt=style=double</code> sets a toy option. Composites of every C2 toy are
+                  in <code>tests/screenshots/c2-*.png</code>.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <code>HF_TOKEN</code> was checked on 2026-09-24 (whoami: account
+              <code>ryanjosephkamp</code>, role <code>read</code>). It works.
+            </li>
+            <li>
+              <p>
+                <strong>Visual fixes (C1).</strong> All 26 Fix lines are done; each toy's
+                <code>fixed</code> entry in <code>tools/toy-plan.json</code> says what changed
+                (TOY-PLAN.md shows them as &quot;Fixed&quot;).
+              </p>
+              <ul>
+                <li>
+                  Grain had one main cause: random splat placement leaves about a quarter of a
+                  surface thinly covered, and the far side and the core show through as dark
+                  speckle. <code>k.add(shape, { even: true })</code> in
+                  <code>src/kit.js</code> places surface splats with a low-discrepancy sequence
+                  (warped by area for lathes and param surfaces; <code>sampleEven</code>,
+                  <code>evenRand</code>). It is opt-in, so other toys are unchanged. It is used on
+                  the balls, the storybook's pages and cover, the lava lamp, the diya, the tree's
+                  star and the tractor's glass. Making it the default would likely sharpen many
+                  toys, but every thumbnail would change; see BACKLOG.md.
+                </li>
+                <li>
+                  The balls have baked soft light and gloss (<code>lit()</code>), embossed pebble
+                  bumps (<code>grip()</code>), low jitter, felt fuzz on the tennis ball, and a faint
+                  see-through shell (<code>rim()</code>) that shows as a rim of light at the
+                  silhouette of the squash ball, hockey puck and medicine ball on a dark page and
+                  barely shows on a light one.
+                </li>
+                <li>
+                  <code>tools/mesh-to-splats.mjs</code> filters textures to each splat's footprint
+                  (a mip chain) and has per-model options in <code>tools/models.json</code>:
+                  <code>light</code> (baked studio light), <code>normalMap</code>,
+                  <code>armAO</code>, <code>exposure</code>, <code>gamma</code>,
+                  <code>darkGlass</code>, <code>paintOut</code>. The camera, boombox, elephant and
+                  horse were rebuilt with them; the other 11 converted models were not (rebuilding
+                  them would change their look). The camera's lens and the boombox's printed maker
+                  names are painted out (brand rule).
+                </li>
+                <li>
+                  Storybook: a 5x7 bitmap font and a short original story in
+                  <code>src/packs/objects.js</code>. Because splats sort in the closed book's pose,
+                  leaves hide once the next leaf lands on them, the cover's inside is its own part,
+                  and a <code>pile</code> part stands in for the hidden leaves. It now uses 15
+                  parts, the limit.
+                </li>
+                <li>
+                  The star cookie is turned round in <code>tools/assets.json</code> (<code
+                    >rotate: [180, 180, 0]</code
+                  >).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <code>tools/toy-shots.mjs</code> renders toys at their home view to PNG files
+              (<code>--size</code>, <code>--bg</code>, <code>--theme</code>,
+              <code>--set=open=0</code>) for before and after reviews. Before/after crops for C1 are
+              in <code>tests/screenshots/c1-*.png</code>.
+            </li>
+            <li>
+              <p><strong>Phone shelf (B).</strong></p>
+              <ul>
+                <li>
+                  The phone sheet has three states in <code>src/ui.js</code> (&quot;Bottom
+                  sheet&quot;): <code>row</code> (the dock only), <code>grid</code> (body class
+                  <code>shelf-grid</code>: the shelf fills the sheet as a grid of about 4 columns)
+                  and <code>panel</code> (body class <code>sheet-open</code>: the tabs).
+                  <code>setMode()</code> switches them.
+                </li>
+                <li>
+                  Dragging the handle or the shelf row up opens the grid. Tapping a card folds it
+                  back at once and loads the toy. Swiping down (handle, or the top of the grid),
+                  Done, Escape or a tap on the toy goes back to the row. More still opens the panel.
+                </li>
+                <li>
+                  <code>SHELF_GRID = false</code> in <code>src/ui.js</code> switches the grid off;
+                  the handle then opens the panel as before. The owner may want this if the grid
+                  feels less friendly than the row.
+                </li>
+                <li>
+                  Phone card labels wrap onto two lines (10.5 px, clamped). All 283 names fit; only
+                  &quot;Bacteriophage&quot; and &quot;Mitochondrion&quot; hyphenate. No marquee.
+                </li>
+                <li>The grid's first screen loads about 55 lazy thumbnails (about 58 KB).</li>
+              </ul>
+            </li>
+            <li>
+              &quot;Find your own splat&quot; is a
+              <code>&lt;details id=&quot;byo-help&quot;&gt;</code> in Make → Your own splat.
+            </li>
+            <li>
+              The shelf still has <strong>283 toys</strong>. Scene schema is v3 (v2 still loads).
+            </li>
+            <li>
+              <p><strong>Sharpness (A1).</strong></p>
+              <ul>
+                <li>
+                  Device tiers low / mid / high / max replace weak / strong (<code>TIERS</code>,
+                  <code>PIXEL_RATIO</code> and <code>detectProfile()</code> in
+                  <code>src/player.js</code>; splat counts in <code>PROFILES</code> in
+                  <code>src/generators.js</code>).
+                </li>
+                <li>
+                  Phones are mid: 140k splats, pixel ratio 2, and full scan files. Desktops are
+                  high: 200k, ratio 2.
+                </li>
+                <li>
+                  Detail: Auto / High / Max in the Look pane (<code>localStorage</code> key
+                  <code>splashery.detail</code>, never in links).
+                </li>
+                <li>
+                  Adaptive resolution lives in <code>Stage.timeFrame()</code> /
+                  <code>setBusy()</code> in <code>src/stage.js</code>.
+                </li>
+                <li>
+                  <code>?profile=low|mid|high|max</code> (weak and strong still work).
+                  <code>?adapt=off</code> is for tools and tests.
+                </li>
+                <li>
+                  Kit splats: overlap factor 1.2 and default flatness 0.2 (<code>src/kit.js</code>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>Embeds (A1).</strong></p>
+              <ul>
+                <li>
+                  Transparent embeds use <code>color-scheme: light</code> on both sides.
+                  <code>normal</code> is not enough on hosts that declare <code>light dark</code>.
+                </li>
+                <li>
+                  The toy is framed at 80% of the shorter side. <code>?zoom=</code> or the
+                  <code>zoom</code> attribute scales it.
+                </li>
+                <li>
+                  The plain wheel zooms after a click. There are + and − buttons (<code
+                    >?controls=0</code
+                  >
+                  or <code>controls=&quot;0&quot;</code> hides them).
+                </li>
+                <li>The snippet is responsive, with a size picker in Share.</li>
+              </ul>
+            </li>
+            <li>The honeybee is upright. Shelf thumbnails retry once, then show a plain tile.</li>
+            <li>
+              <p>Tools:</p>
+              <ul>
+                <li>
+                  <code>tools/check-packs.mjs</code>: builds and timing, at the high tier's count by
+                  default; <code>--count=</code> changes it.
+                </li>
+                <li><code>tools/contact-sheet.mjs</code>: review sheet.</li>
+                <li>
+                  <code>tools/make-thumbs.mjs</code>: thumbnails, by pack or id. Allow about 18 s
+                  per toy under SwiftShader. Run one process at a time: parallel runs are slower.
+                </li>
+                <li>
+                  <code>tools/sharpness-crops.mjs</code> and <code>tools/sharpness-pairs.mjs</code>:
+                  before/after crops.
+                </li>
+                <li><code>tools/prepare-assets.mjs</code>: SOG packing.</li>
+                <li><code>tools/mesh-to-splats.mjs</code>: glTF to PLY.</li>
+                <li><code>tools/fetch-flags.mjs</code>: flags.</li>
+              </ul>
+            </li>
+            <li>
+              All 49 Playwright tests pass, including the dark-mode transparent embed test and the
+              new phone grid and help panel tests.
+            </li>
+            <li>
+              If <code>HF_TOKEN</code> is ever missing or rejected, tell the owner exactly what to
+              change: the cloud environment menu in the session's title bar, then Edit, then an
+              environment variable named <code>HF_TOKEN</code>.
+            </li>
+            <li>
+              <p>This helper is not in the repo. Rewrite it if needed:</p>
+              <ul>
+                <li>
+                  A pack screenshot script: a Playwright page opens the app, clicks
+                  <code>.chip[data-category=…]</code> then <code>.toy-card[data-toy=…]</code>, waits
+                  until <code>#toy-status</code> starts with the toy's label, and takes the
+                  screenshot.
+                </li>
+              </ul>
+            </li>
+            <li>
+              In the cloud sandbox, headless Chromium cannot reach github.io. To screenshot a host
+              page that embeds the live site, route
+              <code>https://ryanjosephkamp.github.io/splashery/**</code> to the local server (<code
+                >context.route</code
+              >
+              plus <code>route.fetch</code>).
+            </li>
+          </ul>
+          <p>Known issues carried forward:</p>
+          <ul>
+            <li>
+              Splats are depth-sorted in their built pose, so large moving parts can draw out of
+              order.
+            </li>
+            <li>Only 3 music toys exist.</li>
+            <li>
+              <p>New in A1:</p>
+              <ul>
+                <li>
+                  The tier thresholds and the 24 ms and 40 ms adaptive limits are guesses, not tuned
+                  on real phones.
+                </li>
+                <li>
+                  Phones now build 140k-splat toys and download full scans, so they load more
+                  slowly.
+                </li>
+                <li>
+                  Old transparent snippets with <code>color-scheme:normal</code> still show a white
+                  box on hosts that support dark mode. Re-copying the snippet fixes it.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in B:</p>
+              <ul>
+                <li>
+                  The phone grid is tried only in headless Chromium with emulated touch, not on a
+                  real phone.
+                </li>
+                <li>
+                  Swiping the handle up now opens the grid, not the panel (the older phone test was
+                  updated to match).
+                </li>
+                <li>
+                  The help panel's app list (Scaniverse, Polycam, Luma, KIRI Engine) was checked
+                  against the app stores on 2026-09-24. Luma's site now leads with other products;
+                  its capture app is still listed.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in C1:</p>
+              <ul>
+                <li>
+                  While the storybook opens, the last leaf's upper face is left out (it would draw
+                  over its turned-up side), so for a moment mid-turn you see the next page's words
+                  through it, mirrored.
+                </li>
+                <li>
+                  The elephant is still a low-poly model (2,752 triangles) with its carving in the
+                  normal map. It reads much better with baked light, but no better CC0 elephant was
+                  looked for.
+                </li>
+                <li>
+                  The rim on dark balls is baked into the toy, so it also shows faintly on a light
+                  page and under effects such as Dissolve.
+                </li>
+                <li>
+                  Several vehicles' windows used random colour per splat, like the tractor's did
+                  (static). Only the tractor's were fixed.
+                </li>
+                <li>
+                  Flags on vehicles were checked (all 14 in the French flag): windows, lights, tyres
+                  and now wheel rims, hubs and spokes stay unpainted. Launch pads, helipads and the
+                  flying saucer's pad do take the flag.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in C2:</p>
+              <ul>
+                <li>The eye's blink lids look a little rough and bulky mid-blink.</li>
+                <li>
+                  When the kite loops (about 1 s in), its tail sticks out of the top of the frame. A
+                  <code>k.reach</code> would fix that but would shrink the kite at rest.
+                </li>
+                <li>
+                  The Klein bottle's water surge only just meets the rule of thumb, because the old
+                  glow that moves by itself competes with it. The Lorenz trace reads as a
+                  brightening of the path, not a crisp new line.
+                </li>
+                <li>
+                  Big Ben's bell and the pagoda's chimes swing only a little at the default zoom;
+                  the dial glow and the lanterns carry those effects.
+                </li>
+                <li>
+                  The bus's stop arm is on the door side (+Z) so the camera sees it; real buses have
+                  it on the driver's side.
+                </li>
+                <li>
+                  The bicycle's wheel spin-up reads in motion but not in stills; the bell's ring
+                  lines carry it.
+                </li>
+                <li>
+                  The pufferfish's belly patches show as small pale flaps when it is slim (a shape
+                  that already existed at low Puff).
+                </li>
+                <li>
+                  Scenes saved with the submarine's old <code>scope=0</code> load with the periscope
+                  up.
+                </li>
+                <li>
+                  The rubber duck and the guitar still need their own sounds (Phase D): a quack and
+                  real music. (Done in D.)
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in E4:</p>
+              <ul>
+                <li>
+                  The owner has not yet seen the E4 effects; the clips on the Effect review page are
+                  the check. They were checked as clips and larger stills in headless Chromium
+                  (SwiftShader, WebGL2 only), not on a phone, and the sounds by level and length
+                  only.
+                </li>
+                <li>
+                  The oak's and maple's loose leaves are a little paler than the crown, so they show
+                  as sunlit leaves at rest. Fallen leaves wither and fresh ones open by size (small
+                  pieces, no speckle).
+                </li>
+                <li>
+                  The pine's snow falls straight down in patches (a morph), without tumbling. A
+                  snowless pine shows a quick shower first, so its shake starts about 1.6 s after
+                  the tap.
+                </li>
+                <li>
+                  Only the daisy's big head spins (it faces the camera, so it turns about the view
+                  and keeps the draw order); the small heads bob. The sunflower turns about two
+                  thirds of the way to its sun.
+                </li>
+                <li>
+                  The saguaro's taps take turns by the tap count, so after a reload the first tap is
+                  the spines.
+                </li>
+                <li>
+                  The pebbles' scattered stones lie a little flatter than in the heap; in the Cairn
+                  style the fallen stones may touch the ones that stay.
+                </li>
+                <li>
+                  The fern's young leaflets appear as each piece of the frond opens (they grow by
+                  size).
+                </li>
+                <li>
+                  Weather (from the helper's notes): the tornado's funnel top can show a lighter,
+                  boxy patch against the cloud (already so at rest); the wave's thrown lip thins a
+                  little near its tip and goes by shrinking for about 0.1 s under the white water,
+                  and the sea's ripple and the foam twinkle pause for about 4 s while it breaks; the
+                  iceberg's effect is modest at 320 px and its splash drops show through the sea for
+                  a moment as they fall back; the lava lamp is tall and narrow, so its effect is
+                  small at 320 px; the waterfall's front glow is subtle on the already white
+                  curtain; the rainbow's sparkle burst is dots.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in E3:</p>
+              <ul>
+                <li>
+                  The owner has not yet seen the E3 effects; the clips on the Effect review page are
+                  the check. They were checked as clips and larger stills in headless Chromium
+                  (SwiftShader), not on a phone.
+                </li>
+                <li>
+                  The channel kinds are new shader code in GLSL and WGSL; only WebGL2 was run (no
+                  WebGPU adapter in the sandbox).
+                </li>
+                <li>
+                  Morphing toys lost their <code>breathe</code> idle swell (a splat has one
+                  behaviour); several now idle with a gentle morph instead. The animal cell's
+                  daughters are drawn a little small (so they stay in view), and its cutaway wedge
+                  ends up stretched over the right-hand daughter.
+                </li>
+                <li>
+                  Some effects that send pieces past the resting shape leave them out of the fit
+                  (<code>k.fitMorphs = false</code>): the white cell's cup, the pollen puff, the ATP
+                  sparks and the amoeba's pods reach towards the edge of the view.
+                </li>
+                <li>
+                  The snowflake holds three flakes (one shown at a time), so each has a third of the
+                  splats; the glint behaviour on its arms was replaced by the growth front (the
+                  centre still glints).
+                </li>
+                <li>The paramecium's loop is small, so it reads partly as a spin in place.</li>
+                <li>
+                  The gyroid and the stretched torus knot still show a few specks of the far side at
+                  the extremes of their morphs; the brain's sparks are thin at phone size; the
+                  kidney's ureter drops are mostly behind the kidney from the default view; the
+                  Möbius ant's copy (in front of or behind the band) is chosen for the default
+                  camera.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in E2:</p>
+              <ul>
+                <li>
+                  The owner has not yet seen the E2 effects; the clips on the Effect review page are
+                  the check. They were checked by me as clips and strips in headless Chromium
+                  (SwiftShader), not on a phone.
+                </li>
+                <li>
+                  Earth's clouds are painted on the globe now (a layer over a turning globe draws in
+                  the wrong order), so they turn with the ground instead of drifting over it.
+                </li>
+                <li>
+                  Venus and Neptune turn in latitude bands: during the effect the cloud pattern
+                  shears where bands meet (a seam line), then locks together again.
+                </li>
+                <li>
+                  The turning planets carry hidden, sparser copies (Venus, Jupiter and Neptune one
+                  for the half turn; Earth and Mercury three, a quarter turn apart), so their
+                  resting detail is a little lower (Earth's most), and Slice shows them hollow while
+                  they turn. Earth's globe looks a little softer than at rest for the first three
+                  quarters of its turn.
+                </li>
+                <li>
+                  Running glows (emerald, diamond, opal, the aurora's folds) move at a fixed speed,
+                  so where the light starts depends on when you tap.
+                </li>
+                <li>
+                  Solar system: the planets swell while lined up (not to scale), Mercury's transit
+                  is still a small dot, and Saturn keeps its fixed lighting. The tip changes the
+                  view only during the effect.
+                </li>
+                <li>
+                  Effects that face the viewer (the pulsar's flashes, the Moon's phases, Earth's
+                  night, the Mars dust front, the sapphire's star) are set for the default camera;
+                  after orbiting the view they no longer line up.
+                </li>
+                <li>
+                  Saturn's spokes and Uranus's arcs repeat every eighth of a turn, so they look
+                  regular.
+                </li>
+                <li>
+                  The galaxy's arms now turn as one pattern; before, they slowly wound up over
+                  minutes.
+                </li>
+                <li>
+                  The part <code>cull</code> flag is new shader code in both GLSL and WGSL. The
+                  WebGPU smoke test (a kit toy with parts) passes, so the WGSL compiles, but the
+                  cull itself was only watched on WebGL2. Worth a look at Jupiter's Winds on a
+                  WebGPU browser (Chrome on a laptop).
+                </li>
+                <li>
+                  The cat statue's head-turn smoke test failed in two full runs (the head not quite
+                  back 3 s of wall time after the tap; alone it passed). Like the stretchy-toy test
+                  before it, it now waits on the toy's own clock (2.6 s of look, stepped a clamped
+                  amount per frame), and the full run passes.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in E1c:</p>
+              <ul>
+                <li>The owner approved the E1c effects (2026-09-25).</li>
+                <li>
+                  The elephant's trunk is kit-built: a little smoother than the carving round it. A
+                  small kit patch covers the forehead where the scan's trunk tip rested; at very
+                  close zoom a few specks of the scan's torn edge show beside it.
+                </li>
+                <li>
+                  The horse moves only as a whole (no leg motion): a scan's legs cannot move without
+                  tearing.
+                </li>
+                <li>
+                  The cat's tail no longer swishes (it lies on unscanned ground), and its collar is
+                  a little loose at the sides, widened so it still hides the cut when the head
+                  turns.
+                </li>
+                <li>
+                  A loaded chess game is not saved in share links or scene JSON (a link opens the
+                  Opera Game). Only the first game of a multi-game file plays; Chess960 is refused.
+                  Past five extra queens (or one extra rook, bishop or knight) per side a captured
+                  piece of that kind comes back from the tray, and with none there the pawn stays a
+                  pawn. Long games take a while (Move speed goes up to 2.5×).
+                </li>
+                <li>
+                  A second tap on Newton's cradle mid-swing starts again from the lift (the ball
+                  jumps back). Dragging a ball is still Phase F.
+                </li>
+                <li>
+                  The 48-token WGSL path was written but not run (no WebGPU adapter in the sandbox).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in E1b:</p>
+              <ul>
+                <li>
+                  The owner has not yet seen the E1b effects; the clips on the Effect review page
+                  are the check.
+                </li>
+                <li>
+                  Hard cuts can leave a thin gap where a part turns away from the rest (the cat's
+                  neck is hidden by its collar; the bust's neck and the horse's knees are not).
+                </li>
+                <li>
+                  The laptop's screen text uses the browser's sans-serif font, so it looks a little
+                  different on each device. Typing only works while the laptop is on screen and
+                  open.
+                </li>
+                <li>
+                  Keys the laptop does not have (such as Tab) still reach the app's shortcuts.
+                </li>
+                <li>
+                  The chess game always plays from the start; there is no pause or step. Tap-to-move
+                  is still Phase F work.
+                </li>
+                <li>Part 3 holds both the chess set and the laptop (they share engine changes).</li>
+              </ul>
+            </li>
+            <li>
+              <p>New in E1:</p>
+              <ul>
+                <li>
+                  No person has seen or heard the E1 effects yet; they were checked with filmstrips
+                  (<code>tools/effect-strip.mjs</code>) in headless Chromium, at 220 px.
+                </li>
+                <li>
+                  Scans are surfaces, so cut and split toys show add-on faces over the hollow
+                  inside; from some angles the edge of a cut still shows the empty shell (croissant,
+                  pomegranate, cake).
+                </li>
+                <li>
+                  The grape's peeled strips curl out as flat flaps; the star cookie's crumbs are
+                  soft blurs rather than crisp pieces (moving splats of a scan keep their size).
+                </li>
+                <li>
+                  The fly's leg rub, the ukulele's string shimmer and the boombox's tape reels are
+                  small and read in motion more than in stills.
+                </li>
+                <li>
+                  The carrot cake's slice always comes out on the side facing the home camera.
+                </li>
+                <li>
+                  The lantern and alarm clock keep rendering while lit or ticking (like kit toys
+                  that move by themselves).
+                </li>
+                <li>
+                  Add-ons were tested in WebGL2 only; the WGSL rig effects were written but not run
+                  (no WebGPU adapter in the sandbox).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>New in D:</p>
+              <ul>
+                <li>
+                  No person has listened to the sounds yet. They were checked by level, length and
+                  spectrogram only; the owner's review on the sound board may change many of them.
+                </li>
+                <li>
+                  Sounds for toys that only hop were designed for their planned effect
+                  (TOY-PLAN.md), so their timing will need matching when E1–E6 build those effects.
+                </li>
+                <li>
+                  Rigs and grab were tested in WebGL2 only; the WGSL versions compile paths were not
+                  run (no WebGPU adapter in the sandbox).
+                </li>
+                <li>
+                  On the gummy bear a one-finger drag on the bear stretches it instead of turning
+                  the view, and a double tap on the bear does not reset the camera (a double tap
+                  beside it does).
+                </li>
+                <li>
+                  A rig part turns rigidly inside its region and bends at the soft edge, so a large
+                  turn smears the neck a little. The cat's regions were placed by eye with
+                  <code>?rig=show</code>.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="phases">Phases</h2>
+          <p>
+            Each phase is one session and one PR, or a small stack of PRs. The owner reviewed every
+            toy on 2026-09-23 (raw notes and screenshots in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/reviews/2026-09-23/review.md"
+              target="_blank"
+              rel="noopener"
+              >reviews/2026-09-23/</a
+            >). The per-toy plan that came out of it is
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/TOY-PLAN.md"
+              target="_blank"
+              rel="noopener"
+              >TOY-PLAN.md</a
+            >, generated from <code>tools/toy-plan.json</code> by
+            <code>node tools/toy-plan.mjs</code>. Keep that JSON current: when a phase finishes a
+            toy, update its entry (for example <code>&quot;v&quot;: &quot;keep&quot;</code>) and
+            regenerate.
+          </p>
+          <p>
+            <strong>On 2026-09-24 the owner approved every proposal in the plan as written</strong>,
+            including the sports-ball texture fixes added that day, and all toys are marked approved
+            on the page below. Build them as proposed; use judgement on details.
+          </p>
+          <p>
+            The owner can still mark a proposal Approve, Change or Skip (with notes) on a private
+            page:
+            <a
+              href="https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8"
+              target="_blank"
+              rel="noopener"
+              >https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8</a
+            >
+            (&quot;Splashery Toy Plan&quot;). Before starting a phase, check the marks for its toys
+            for any later change: with the <code>ArtifactData</code> tool, <code>list</code> the
+            collection <code>marks</code> (one document per toy id:
+            <code
+              >{mark: &quot;yes&quot; | &quot;change&quot; | &quot;skip&quot; | &quot;&quot;, note,
+              at}</code
+            >). If that tool is not available, ask the owner to press &quot;Copy my marks and
+            notes&quot; on the page and paste the text. A &quot;change&quot; note overrides the
+            proposal in <code>tools/toy-plan.json</code>; update the JSON to match. If the plan JSON
+            changes, the page can be republished from it (<code>node tools/toy-plan.mjs --json</code
+            >).
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Phase</th>
+                  <th scope="col">What</th>
+                  <th scope="col">Repo(s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">A</th>
+                  <td>
+                    Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage
+                    embed.
+                  </td>
+                  <td>both</td>
+                </tr>
+                <tr>
+                  <th scope="row">B</th>
+                  <td>
+                    Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail
+                    labels that don't cut off, and a &quot;Find your own splat&quot; help panel.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">C1</th>
+                  <td>
+                    Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook,
+                    comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …).
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">C2</th>
+                  <td>
+                    Done: clearer or more dramatic effects for 33 toys the owner found subtle
+                    (bacteriophage, Big Ben, bus, octopus, fireworks, …).
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">D</th>
+                  <td>
+                    Done: a voice library and a sound per toy, scan rigs, taps that know where they
+                    landed, drag-to-stretch, sound check and audit tools.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E1</th>
+                  <td>
+                    Done: new tap effects for the scans and shapes (33 toys), with colour keys,
+                    whole-body effects and kit-built add-ons for rigs.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E1b</th>
+                  <td>
+                    Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can
+                    type on), effect quality rules, effect clips.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E1c</th>
+                  <td>
+                    Done: fixes from the owner's E1b review (a phone panel bug, chess from PGN
+                    files, elephant, horse, cat, hockey puck, Newton's cradle, xylophone, tomatoes).
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E2</th>
+                  <td>
+                    Done: new tap effects for space, atoms and gems (32 toys), idle motion for the
+                    Sun, rings, aurora and galaxy, the draw-order lessons.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E3</th>
+                  <td>
+                    Done: new tap effects for tiny things, anatomy and maths (26 toys), and channel
+                    kinds (morph, band, fade, skin) for soft shapes and light fronts.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E4</th>
+                  <td>
+                    Done: new tap effects for nature and weather (28 toys): falling leaves, petals
+                    and coconuts as loose pieces, jointed fronds, a breaking wave.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E5</th>
+                  <td>Done (lane E5, PR #35): new tap effects for food (17 toys).</td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">E6</th>
+                  <td>
+                    Done (lanes E6a, PR #38, and E6b, PR #36): new tap effects for 20 balls, 11
+                    landmarks, 4 animals, the shield, the crown and the snowman.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">F</th>
+                  <td>
+                    Touch and drag interaction: a solvable puzzle cube, a chess set that plays a
+                    real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.
+                  </td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">G</th>
+                  <td>AI image-to-3D trial with <code>HF_TOKEN</code>.</td>
+                  <td>splashery</td>
+                </tr>
+                <tr>
+                  <th scope="row">H</th>
+                  <td>
+                    Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more
+                    scans, more instruments, and the final homepage embed(s).
+                  </td>
+                  <td>both</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>What the owner asked for across the board (2026-09-23):</p>
+          <ul>
+            <li>
+              <strong>Every toy gets its own tap effect and its own sound.</strong> Sounds can be
+              similar within a category but should differ slightly. Toys with a twin (the two rubber
+              ducks, the two croissants, the two alarm clocks, the cactus and the saguaro, the grape
+              and the grapes) must act and sound different.
+            </li>
+            <li>
+              Where the effect is already good, keep it (65 toys are marked keep in TOY-PLAN.md).
+            </li>
+            <li>
+              Some effects should depend on where you touch or drag (puzzle cube, gummy bear, chess,
+              Newton's cradle). Say so if something is not feasible; a good fallback is fine.
+            </li>
+            <li>
+              Sharpness after A1 is &quot;basically perfect&quot;; the homepage embed works in light
+              and dark mode.
+            </li>
+            <li>
+              Later the homepage embed will change to a favourite maths toy (the Menger sponge or
+              the hypercube; the voice transcript is ambiguous, ask) at the highest detail, maybe
+              several embeds. That needs an owner-set embed option such as
+              <code>?detail=high</code> (Detail is deliberately not in share links; an embed the
+              site owner chooses is a different case). See BACKLOG.md.
+            </li>
+            <li>
+              Stay respectful: nothing destructive or disrespectful on the White House or the
+              Washington Monument, and no fighting or gore (the Colosseum gets a chariot race, not
+              gladiators).
+            </li>
+          </ul>
+          <h2 id="phase-e5-in-detail-food">Phase E5 in detail: food</h2>
+          <p>
+            Moved to
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/E5.md"
+              target="_blank"
+              rel="noopener"
+              >E5.md</a
+            >
+            on 2026-09-26, when E5 became a lane.
+          </p>
+          <h2 id="phases-c-h-outline">Phases C–H (outline)</h2>
+          <ul>
+            <li><strong>C1, visual fixes.</strong> Done (see Current state).</li>
+            <li>
+              <strong>C2, clearer effects.</strong> Done (see Current state).
+              <code>tools/effect-strip.mjs</code> is the tool for checking any new tap effect by
+              eye.
+            </li>
+            <li><strong>D, effects and sound engine.</strong> Done (see Current state).</li>
+            <li>
+              <strong>E1–E6, new effects.</strong> E1, E2, E3 and E4 are done. One wave per session
+              (about 30–45 toys each), following TOY-PLAN.md. Run <code>check-packs</code>, a
+              contact sheet and <code>make-thumbs</code> for touched packs as usual. Thumbnails take
+              about 18 s per toy under SwiftShader; render only the toys you changed.
+            </li>
+            <li>
+              <strong>F, touch and drag interaction.</strong> Puzzle cube: 26 cubies as parts (the
+              part limit is 48), cube state in JavaScript, swipe on a face to turn a layer, plus
+              scramble and a solved check. Chess set: it is a scan, so either region parts per
+              square or a kit-built set; first a scripted famous public-domain game, then maybe
+              tap-to-move. Gummy bear: drag to stretch. Newton's cradle: drag a ball back and let
+              go. Bricks: build a random model each tap.
+            </li>
+            <li>
+              <p><strong>G, AI image-to-3D.</strong></p>
+              <ul>
+                <li>Check <code>HF_TOKEN</code> (whoami, printing only name and role).</li>
+                <li>
+                  Try a public Space through its API from a tool script in <code>tools/</code>.
+                  TRELLIS outputs Gaussians directly; Hunyuan3D is an alternative.
+                </li>
+                <li>
+                  Inputs are our own CC0 images, such as renders. Check the model and output
+                  licences.
+                </li>
+                <li>
+                  Set a quality bar against the procedural toys, and only ship results that beat
+                  them.
+                </li>
+                <li>
+                  The free GPU quota is limited. If anything would cost money, stop and ask the
+                  owner.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>H, later.</strong> The gallery (plan in ROADMAP), multi-toy scenes, a scripted
+              liquid pour, the draw-order fix for moving parts, more scans, more instruments (piano,
+              trumpet, violin, maracas, harp), and the final homepage embed(s) in
+              ryanjosephkamp.github.io.
+            </li>
+          </ul>
+          <h2 id="decisions">Decisions</h2>
+          <p>Settled on 2026-09-24, when the owner approved every recommendation:</p>
+          <ul>
+            <li>
+              Sounds: synthesize by default; CC0 audio samples are fine for the few that synthesis
+              does badly (a real quack, an alarm bell, a crowd). Record each sample in CREDITS.md.
+            </li>
+            <li>
+              Pine tree: it shakes off a dusting of snow (the decorated tree keeps the lights).
+            </li>
+            <li>
+              An owner-set <code>?detail=high</code> embed option for the homepage is approved for
+              Phase H, capped by device tier.
+            </li>
+          </ul>
+          <p>Still open (ask when it comes up, in Phase H):</p>
+          <ul>
+            <li>
+              The favourite maths toy for the homepage: Menger sponge or hypercube? One embed or
+              several?
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/history.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/history.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

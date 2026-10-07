@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Live input (prefix live) · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: LiveInput."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/liveinput/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Live input (prefix live) · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: LiveInput."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/liveinput/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Live input (prefix live)</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li>
+                <a
+                  href="#brief-written-by-the-operator-on-september-30-2026-from-the-owner-s-approval-that-day"
+                  >Brief (written by the Operator on September 30, 2026, from the owner's approval
+                  that day)</a
+                >
+              </li>
+              <li><a href="#you-own">You own</a></li>
+              <li>
+                <a href="#round-2-from-the-operator-october-1-2026-a-summary-of-the-brief"
+                  >Round 2 (from the Operator, October 1, 2026; a summary of the brief)</a
+                >
+              </li>
+              <li>
+                <a href="#brief-r3-from-the-operator-october-2-2026-09-36-utc"
+                  >Brief r3 (from the Operator, October 2, 2026, 09:36 UTC)</a
+                >
+              </li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Live input (prefix live)">
+        <div class="prose">
+          <p>
+            The microphone, the camera and the screen, live, as splats. Branches
+            <code>claude/lane-live-input-engine</code> (the engine PR, #144) and
+            <code>claude/lane-live-input</code> (the lane PR, #150). Round 2 (prefix
+            <code>live2</code>): <code>claude/lane-live-input-r2-engine</code> (its engine PR) and
+            <code>claude/lane-live-input-r2</code> (its lane PR), stacked on #144 and #150.
+            Everything is behind the labs switch.
+          </p>
+          <h2
+            id="brief-written-by-the-operator-on-september-30-2026-from-the-owner-s-approval-that-day"
+          >
+            Brief (written by the Operator on September 30, 2026, from the owner's approval that
+            day)
+          </h2>
+          <p>
+            The owner asked whether the microphone, the camera and screen sharing could feed the
+            splats. He approved this lane (alignment call 20, September 30, 2026) and wrote
+            &quot;live input go&quot; at 3:25 p.m. ET. His rule, now in CLAUDE.md: &quot;a toy asks
+            for the microphone, the camera or screen capture only when the person taps to start it.
+            Nothing is requested or loaded before that, and nothing is recorded, stored or sent
+            anywhere.&quot;
+          </p>
+          <p>The plan he approved, in order:</p>
+          <ol>
+            <li>
+              <p>
+                <strong>Engine PR (small, additive, merged first):</strong> <code>src/live/</code>,
+                a live-input module.
+              </p>
+              <ul>
+                <li>
+                  A person taps a clear button (&quot;Use my microphone&quot;, &quot;Use my
+                  camera&quot;, &quot;Share a screen&quot;) and only then does the page call
+                  <code>getUserMedia</code> or <code>getDisplayMedia</code>. Nothing is requested,
+                  and no model or file is loaded, before that tap.
+                </li>
+                <li>
+                  While a source is on, a small visible &quot;live&quot; indicator shows, with a
+                  Stop button. Stopping ends every track.
+                </li>
+                <li>Denied permission or missing hardware shows a plain message, never a crash.</li>
+                <li>
+                  Microphone: an AnalyserNode with level, spectrum, pitch (a robust detector, for
+                  singing) and onset detection (for claps), about 60 times a second.
+                </li>
+                <li>Camera: frames to a canvas at a modest size.</li>
+                <li>
+                  Screen capture: computers only; hide the button where
+                  <code>getDisplayMedia</code> is missing (phones).
+                </li>
+                <li>
+                  One short line beside each button: &quot;Stays on this device. Nothing is recorded
+                  or sent.&quot;
+                </li>
+                <li>
+                  UI r2 (PR #131) is finishing the input panel and asked that its API stay as it is.
+                  Merge main after #131 lands, and add your buttons through that panel's existing
+                  API, not by rewriting it.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>The microphone toys:</strong></p>
+              <ul>
+                <li>
+                  <strong>Song landscape, live:</strong> the Studio toy's Live view, fed by the
+                  microphone instead of a file.
+                </li>
+                <li>
+                  <strong>Sing to the Chladni plate:</strong> the note you sing sets the plate's
+                  frequency, and the sand settles into that mode's real figure.
+                </li>
+                <li>
+                  <strong>Room echo meter (a new toy):</strong> clap once and the page measures the
+                  reverberation time (RT60, from the decay of the clap's energy; say plainly when
+                  the room is too noisy to measure), drawn as rings spreading through a splat room.
+                  Show the number.
+                </li>
+                <li>
+                  <strong>Voice tuner on the pianos (labs-only option):</strong> sing or play a
+                  note, and the matching key lights and moves.
+                </li>
+                <li>
+                  <strong>Clap to tap (a labs-only setting):</strong> a sharp sound taps whatever
+                  toy is open.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>The camera toys:</strong></p>
+              <ul>
+                <li>
+                  <strong>Splat mirror (a new toy):</strong> your live camera as splats. With live
+                  depth from the Depth Anything V2 Small model already vendored for Photo to 3D
+                  (loaded only after the camera tap), it becomes a 3D &quot;hologram&quot; you can
+                  turn. Smooth on a computer, lighter on a phone by tier.
+                </li>
+                <li>
+                  <strong>Photo to 3D, live:</strong> point the camera at something and see it in
+                  depth before taking the picture.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Screen capture (computers):</strong> the shared tab, window or screen plays
+              live on the Screen toy's TV or cinema, as splats. It's view only: clicks on the splat
+              screen don't reach the real window.
+            </li>
+          </ol>
+          <p>Not in this lane:</p>
+          <ul>
+            <li>the MIDI keyboard (the Pianos lane's next round);</li>
+            <li>tilt to steer and the live earthquake globe (backlog);</li>
+            <li>hand tracking (a later experiment);</li>
+            <li>the web screen and the Wikipedia book (a later small lane).</li>
+          </ul>
+          <p>
+            The effect quality rules apply to everything you show, and PACKS.md section 7e
+            (&quot;Sound preferences&quot;) to any sound you add.
+          </p>
+          <p>
+            Testing without a real microphone or camera: launch Chromium with
+            <code>--use-fake-ui-for-media-stream --use-fake-device-for-media-stream</code>, and feed
+            known files with <code>--use-file-for-fake-audio-capture=&lt;wav&gt;</code> and
+            <code>--use-file-for-fake-video-capture=&lt;y4m or mjpeg&gt;</code>. Make your own test
+            signals (sine notes, a synthetic clap with a known decay) or use CC0 recordings,
+            credited.
+          </p>
+          <p>
+            Cards (clips at 390×844 unless noted, each labeled &quot;built by Opus 5.5&quot;, in the
+            lane record <code>LiveInput</code> on the Effect review page; ask the Operator in your
+            message if the record is missing), one per toy, as each is done:
+          </p>
+          <ul>
+            <li>
+              <code>live-landscape</code>, <code>live-chladni</code>, <code>live-echo</code>,
+              <code>live-tuner</code>, <code>live-clap</code>, <code>live-mirror</code>,
+              <code>live-photo3d</code>;
+            </li>
+            <li><code>live-screen</code> (1440×900);</li>
+            <li>
+              <code>live-permission</code>: the tap, the browser's prompt (as far as it can be
+              shown), the indicator and Stop.
+            </li>
+          </ul>
+          <p>Tests in tests/live.spec.mjs:</p>
+          <ul>
+            <li>
+              nothing is requested or fetched before a tap: no getUserMedia or getDisplayMedia call,
+              and no model download, on page load or on opening any toy;
+            </li>
+            <li>Stop ends every track;</li>
+            <li>a denied permission shows the message;</li>
+            <li>the pitch detector names a known sine note;</li>
+            <li>the echo meter measures a synthetic decay within 10%;</li>
+            <li>clap to tap fires on a synthetic clap and not on steady noise;</li>
+            <li>the screen button is hidden where <code>getDisplayMedia</code> is missing;</li>
+            <li>the &quot;embed transfer ≤ 30 MB&quot; test stays green;</li>
+            <li>screenshots at 390×844 and 1440×900 (<code>live-*</code>).</li>
+          </ul>
+          <h2 id="you-own">You own</h2>
+          <ul>
+            <li>
+              <code>src/live/</code> (new) and your new toys' pack file
+              <code>src/packs/live.js</code>;
+            </li>
+            <li>
+              the live options you add to the Song landscape, Chladni plate, Photo to 3D, Screen and
+              piano toys (marked blocks; their lanes have finished);
+            </li>
+            <li>
+              your buttons through the input panel's API (UI r2's src/ui.js changes merge first; if
+              you need more than the API gives, say so in your message);
+            </li>
+            <li>
+              <code>tests/live.spec.mjs</code>, your <code>live-*</code> screenshots,
+              docs/handoff/LiveInput.md, your toys' entries in the shared lists, and CREDITS.md and
+              tools/assets.json lines for anything you add.
+            </li>
+          </ul>
+          <p>If you need another engine change, put it in the engine PR.</p>
+          <p>
+            Lanes Fluids r4, Science, Video 3D, Worlds r3, Sound A and B, Fix5, Shelves and the
+            Integrators run at the same time; leave their files alone. The laptop is locked.
+          </p>
+          <h2 id="round-2-from-the-operator-october-1-2026-a-summary-of-the-brief">
+            Round 2 (from the Operator, October 1, 2026; a summary of the brief)
+          </h2>
+          <p>
+            Opus 5.5. The lane owns <code>src/packs/studio.js</code>,
+            <code>src/packs/studio-audio.js</code> and new files; it stays labs. One PR, &quot;Phase
+            Live input r2: …&quot;, tests in <code>tests/live2.spec.mjs</code>, cards
+            <code>live2-*</code> in the LiveInput record on page 2.
+          </p>
+          <ol>
+            <li>
+              <strong>Start fast.</strong> Measure 3-, 6- and 10-minute MP3s and a 50 MB file at 4×
+              and 6× CPU throttle. Play as soon as the audio can play, with no resampling or
+              re-encoding; analyze in a module worker in chunks, with a progress line; the landscape
+              fills in and the page never freezes. Target: a 10-minute song plays within about 3 s
+              at 4×.
+            </li>
+            <li>
+              <strong>The looks</strong> (the owner's reference images, for the idea only; none of
+              their art, names or logo): Ribbons (six bands, teal to orange, fine strands, out of a
+              &quot;now&quot; gate), Tube (loudness is the radius, pitch tilts the ring, colored by
+              brightness), Lines (a spectrum waterfall, a thin line per 40 ms frame), Mesh (a
+              wireframe landscape); Coil only if beat tracking is reliable. Every shape a measured
+              feature, in sync on the audio clock (a click-track test: each peak at the now mark
+              within 50 ms). Pitch and Loudness stay; Whole and Live both work; thin, crisp,
+              elongated splats; a light paper background with a still of each; a &quot;What you're
+              seeing&quot; text per look.
+            </li>
+            <li>
+              <strong>Clips:</strong> music (CC0) and speech (CC0 or synthesized), 10 to 15 s at
+              phone size, MP4, the audio clock on screen; a before-and-after start-time clip with a
+              timer.
+            </li>
+          </ol>
+          <h2 id="brief-r3-from-the-operator-october-2-2026-09-36-utc">
+            Brief r3 (from the Operator, October 2, 2026, 09:36 UTC)
+          </h2>
+          <p>
+            Live input r3 (Opus 5.5, prefix <code>live3</code>). Branches:
+            <code>claude/lane-live-input-r3-engine</code> (only if you need player/ui/app/kit
+            changes: small, additive &quot;Engine: …&quot; PR, merged first) and
+            <code>claude/lane-live-input-r3</code> (&quot;Phase Live input r3: …&quot;), both from
+            main once #163 has merged. Keep your handoff file current (add an &quot;## Brief
+            r3&quot; section with this text). These toys are behind the labs switch, so the Operator
+            merges after the full test run; still post clips for the owner.
+          </p>
+          <p>
+            The owner reviewed your toys on October 2
+            (docs/reviews/2026-10-02-mega-review/review.md, lines 686 to 770 and 870 to 892: read
+            his words first). He loved them (&quot;might also be one of the coolest things that
+            we've made so far&quot;). He accepted this round:
+          </p>
+          <p><strong>Song landscape</strong></p>
+          <ol>
+            <li>
+              Tilt: let the view tilt up and down (vertical rotation, within sensible limits) so you
+              can see the notes better.
+            </li>
+            <li>
+              Keep the microphone's audio: when someone records live, keep the audio (in memory
+              only, never uploaded or stored without their action) so they can play it back with the
+              landscape and export a clip. The live-input rule still holds: the mic is asked for
+              only on the tap that starts it.
+            </li>
+            <li>
+              Restart, pause and scrub: a way to restart the song, pause it and scrub back and
+              forth, without a hover play bar that gets in the way of the toy (he doesn't want a bar
+              like the other music toys' that covers the stage; a small, out-of-the-way control or a
+              drag along the landscape itself are both fine; your call, say why).
+            </li>
+            <li>
+              Mesh lines slightly thicker (the &quot;lines&quot;/&quot;mesh&quot; looks; the ribbons
+              are fine).
+            </li>
+            <li>
+              Live (scrolling) view as the default instead of the whole song (he's on the fence;
+              make it the default and keep the whole-song view one tap away).
+            </li>
+            <li>
+              Explain what each look and color mode shows (loudness, pitch, brightness; tube, lines,
+              ribbons, mesh) in the toy's About text and how-to line (src/toy-help.js), plainly.
+            </li>
+          </ol>
+          <p><strong>Chladni plate</strong></p>
+          <ol>
+            <li>Tilt to see the plate more from the side.</li>
+            <li>
+              Bug: with the live microphone the sand doesn't move in real time; it moves only after
+              he stops the mic. Find the cause and fix it, with a test.
+            </li>
+          </ol>
+          <p><strong>Room echo meter</strong></p>
+          <ol>
+            <li>The text on its screen is blurry: make it crisp at phone size.</li>
+            <li>
+              A clap or snap shows the loading animation and then &quot;Too noisy&quot;. Today any
+              failure shows &quot;Too noisy&quot; (it needs about a 25 dB range). Show the real
+              reason (too quiet, too noisy, no clear decay, clipped, and so on) with a hint of what
+              to do, and check whether a clap in an ordinary room can work (a lower threshold, a fit
+              over a shorter range, or T20/T30 from what's measurable). Say what you found.
+            </li>
+          </ol>
+          <p><strong>Splat mirror</strong></p>
+          <ol>
+            <li>
+              Bug: with the default paintings it jitters and flashes in the default view (turning it
+              a little stops it; the camera mode doesn't do it). Fix it; don't make the camera mode
+              worse (&quot;It works really, really well with my actual camera&quot;).
+            </li>
+            <li>
+              Make the camera the main feature: a big &quot;Start camera&quot; button (the camera is
+              still asked for only on that tap).
+            </li>
+            <li>A switch to the rear camera (facingMode), where the device has one.</li>
+            <li>
+              Save the footage as a video (and a GIF if it's simple). Lane UI r5's engine PR #177
+              adds a Record button (src/exports.js) that records the stage and its sound; if it
+              merges first, use it rather than a second recorder; if not, keep yours small and tell
+              me.
+            </li>
+            <li>
+              Optional, if time allows: a more hologram-like look as an option (scanlines or a soft
+              edge glow), never replacing the plain look.
+            </li>
+          </ol>
+          <p><strong>Everywhere</strong></p>
+          <ol>
+            <li>
+              On a phone, the Live camera / Live microphone / Stop pill covers the buttons. Move it
+              so it never covers a control at 390×844 (screenshots before and after).
+            </li>
+          </ol>
+          <p><strong>New toy (his idea, N1): Moving photo to 3D</strong></p>
+          <ol>
+            <li>
+              Like the live camera to 3D, but for a GIF or video the person opens (or a sample we
+              ship): run the depth model on every frame (or every few frames), at the depth they
+              choose, and play it back in 3D like the live camera. Use the vendored Depth Anything
+              V2 Small and omggif already in vendor/; loaded only when someone opens a file for it;
+              nothing leaves the device. Keep frame count and resolution modest so it runs on a
+              phone (say what you chose). Behind labs, in the same shelf as Photo to 3D and the live
+              camera toy. A small sample clip must be CC0/CC BY/public domain (BY-SA is now allowed
+              with its notice beside it); credit it as usual.
+            </li>
+          </ol>
+          <p>
+            Clips: post cards in a lane record &quot;Live input r3&quot; on Effect review page 2
+            (I'll make the record; if it isn't there when you post, add your cards under &quot;Live
+            input&quot; and tell me), 390×844, &quot;built by Opus 5.5&quot;, with a dot where the
+            finger is. You don't have the mic or camera in the container: use the fake media streams
+            Chromium offers (--use-fake-device-for-media-stream, --use-file-for-fake-audio-capture /
+            video) as in r2.
+          </p>
+          <p>
+            Other lanes running: Sound C (sounds; your toys' sounds are yours unless the owner named
+            one; he didn't this round), Physics, Fix7, UI r5, Fluids, Video 3D, Science, Sharpness
+            A, Photoreal, Integrators. Leave their files alone. The laptop is locked.
+          </p>
+          <p>Finish each working turn with READY:/WORKING:/BLOCKED: as before.</p>
+          <h2 id="state">State</h2>
+          <p>
+            October 3, 2026 (UTC): <strong>round 4</strong> (<code>claude/lane-live-input-r4</code>,
+            &quot;Phase Live input r4: the Chladni plate plays your audio&quot;), from the owner's
+            marks on r3 (5 good; <code>live3-chladni</code> &quot;fix&quot; with a question and a
+            request). The plate already re-sorted its sand when the sung note changed (another mode
+            clearly nearer, held a second, at most every two seconds, fresh sand);
+            <code>live4-chladni-voice</code> shows it. New: open your own audio on the plate. It
+            plays through the Song landscape's <code>Track</code> and is measured by its
+            <code>SongAnalysis</code> worker. Each moment's strongest pitch (YIN where voiced, else
+            the loudest band), folded by octaves into 60 to 400 Hz, rings the modes. The modes keep
+            a running score that fades over about 1.2 s; the leader takes over with fresh sand when
+            it leads 1.5 to 1 after 2.5 s. The transport is the landscape's
+            (<code>songTransport</code>, now with a prefix, &quot;Close the audio&quot; and a hidden
+            state). Tests: <code>tests/live4.spec.mjs</code> (at the low profile: the plate's clock
+            moves at most 0.1 s a frame). Cards <code>live4-chladni-voice</code> and
+            <code>live4-chladni-file</code> are in the LiveR3 record (there is no r4 record);
+            <code>live3-chladni</code> has <code>replacedBy</code>.
+          </p>
+          <p>Model: <strong>Opus 5.5</strong> (default effort), no helpers.</p>
+          <p>
+            October 2, 2026 (UTC): <strong>round 3 built and tested</strong> (prefix
+            <code>live3</code>). #144, #150, #162 and #163 are all merged. Engine PR #187
+            (<code>claude/lane-live-input-r3-engine</code>): a toy's own tilt range
+            (<code>recipe.pitchRange</code>), a recipe's <code>tiltLock: false</code> winning over
+            holding still, and the Live pill moved below the header. Lane PR:
+            <code>claude/lane-live-input-r3</code>, &quot;Phase Live input r3&quot;, stacked on
+            #187.
+          </p>
+          <ul>
+            <li>
+              <strong>Song landscape.</strong> It tilts between a level look and one from above
+              (<code>pitchRange [0.05, 1.35]</code>, unlocked; the turntable stays off). Live is the
+              default view. While the microphone is on, what it hears is kept in memory
+              (<code>src/packs/song-record.js</code>, up to ten minutes, copied from the analyser's
+              ring); when it stops, the recording becomes the song on show, to play back, scrub and
+              save as a WAV (only on a tap). The transport (Start over, Play/Pause, Whole song/Live
+              view, a scrub slider with the time) sits in the Toy tab's panel, not over the picture:
+              a drag on the picture already turns and tilts it, and a tap plays or pauses. A view
+              switch keeps the song's place. Lines are 0.0068 thick (were 0.0046), the mesh 0.005
+              (was 0.0034). The help text explains each view, look and color in plain words.
+            </li>
+            <li>
+              <strong>Chladni plate.</strong> It tilts (same range). The sand didn't move with the
+              voice: the resonance was only 60 cents wide, so an ordinary voice between modes rang
+              nothing, and stopping the microphone dropped the sand back to the bow's state. Now the
+              plate on show rings by its own response (150 cents wide); it switches mode only when
+              another is clearly nearer, held a second, at most once every two seconds; the sand
+              stays where the voice left it. Two tests fail on the old code.
+            </li>
+            <li>
+              <strong>Echo meter.</strong> The panel is one splat per canvas pixel (416 by 130), so
+              its letters are sharp. <code>measureDecay</code> gives real reasons
+              (<code>quiet</code>, <code>noisy</code>, <code>clipped</code>,
+              <code>interrupted</code>, <code>short</code>, <code>uneven</code>), each with a hint
+              (<code>DECAY_HINTS</code>), and fits T30 at 45 dB above the background, T20 at 35 and
+              T10 from 20 (was 25). Simulated claps (RT60 0.25 to 1 s) measure within 7% from about
+              20 dB above the background. An ordinary clap in a quiet room stands 40 dB or more
+              above it, so the old &quot;too noisy&quot; most likely came from the phone's own
+              processing or a clap the onset detector caught late; the new reasons will say which.
+            </li>
+            <li>
+              <strong>Splat mirror.</strong> The still picture's flashing face on was its sort:
+              every splat rested at z = 0 and was lifted only on the GPU, so they sorted as ties.
+              The still picture's splats now rest at their depth and a signed offset brings them
+              back as it flattens. Hair-width nudges of the view: 15,635 pixels flashed by over 40
+              levels before, 262 after (390 by 844). Camera mode is unchanged. A big &quot;Start
+              camera&quot; shows over the picture until the camera is on; &quot;Use the back
+              camera&quot; appears on a device with two cameras (<code>switchCamera</code>, not
+              mirrored); &quot;Record a video&quot; records the stage (MediaRecorder, MP4 or WebM,
+              30 s at most) and &quot;Save the video&quot; saves it. #177 (UI r5's recorder) hadn't
+              merged, so this is a small one of the mirror's own (<code>src/live/record.js</code>).
+              Look: Hologram (cyan, drifting scanlines, glowing depth edges) beside Plain.
+            </li>
+            <li>
+              <strong>The Live pill</strong> sat over the header's buttons at 390 by 844; it now
+              sits below them (<code>live3-pill-before-*</code> and
+              <code>live3-pill-*</code> screenshots).
+            </li>
+            <li>
+              October 2, 17:00 UTC: main (<code>ced2a55</code>: Sound C, Physics, UI r5) merged into
+              both branches. In <code>src/app.js</code> UI r5's
+              <code>tilt: &quot;free&quot;</code> and the r3 recipe <code>tiltLock</code> both stay.
+              At 390 by 844 the Live pill (top), UI r5's Record pill (bottom left) and the Physics
+              hands bar (bottom right) don't meet; on a computer the Record pill sits at the top of
+              the stage too, so the Live pill drops below it while it shows (#187's pill test checks
+              all three at both sizes). The Operator's list (<code>live</code>, <code>live2</code>,
+              <code>live3</code> and their engine specs, <code>phy-engine</code>,
+              <code>ui5-engine</code>, <code>sndc-engine</code>, <code>help</code>,
+              <code>smoke</code>): 137 passed.
+            </li>
+            <li>
+              <strong>Moving photo to 3D</strong> (new, labs, Studio shelf beside Photo to 3D): a
+              GIF or video, its first 8 s, up to 48 frames, 256 px on the long side; each frame's
+              depth from the vendored model in its worker (196 px long side). Each splat rests at
+              its average depth over the clip, so it sorts right. The sample is the Screen toy's Big
+              Buck Bunny scene (CC BY 3.0), 48 frames tiled in a JPEG with precomputed depth
+              (<code>tools/live3-depth.mjs</code>), so it needs no model.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              The Operator's overnight notes (07:22 and 08:35 UTC: hold r2 until the morning's go,
+              no self check-ins; merge main with UI r2 into #144 and #150) reached this session only
+              at 10:10 UTC, after r2 was built and posted. The self check-in is deleted. #144 and
+              #150 now have main through #142 (UI r2's conflicts in <code>src/ui.js</code> and
+              <code>styles.css</code> kept both sides).
+            </li>
+            <li>
+              Round 1: engine PR #144 and lane PR #150, drafts. Cards marked good:
+              <code>live-permission</code>, <code>live-echo</code>, <code>live-landscape</code>,
+              <code>live-chladni</code>, <code>live-tuner</code>, <code>live-clap</code>,
+              <code>live-screen</code>. The mirror and Photo to 3D live got a second &quot;fix&quot;
+              (still moving): <code>live-mirror-r3</code> and <code>live-photo3d-r3</code> hold the
+              view still (no turn, a still test camera, no tap at the end).
+            </li>
+            <li>
+              Round 2 is built, tested and posted: cards <code>live2-*</code> on page 2, engine PR
+              #162 and lane PR #163 open as drafts (stacked on #144 and #150).
+            </li>
+            <li>
+              The owner's marks of October 1 (via the Operator): the r3 mirror and Photo to 3D live,
+              and <code>live2-tube-whole</code>, good; every other <code>live2</code> card
+              &quot;Good, but could look even better. Keep going.&quot; So the looks got a second
+              pass (finer strands, smoother curves, deeper color), posted as
+              <code>live2-*-r2</code> cards.
+            </li>
+            <li>
+              October 1, 15:30 UTC: the owner marked all 13 <code>live2-*-r2</code> cards and
+              <code>live2-start</code> good, so round 2 is done pending tests. Merge order: #144,
+              #150, #162, #163. #144 is in Integrator 1's run with #138; once both merge, the
+              Operator asks for main in #150 (CREDITS, TOY-PLAN and toy-sounds conflict with #138),
+              then #162 and #163 follow.
+            </li>
+            <li>
+              Evening of October 1: the owner marked <code>live-echo</code> and
+              <code>live-permission</code> &quot;fix&quot; (&quot;a bit blurry/grainy&quot;) and
+              <code>live-landscape</code> good but &quot;a bit grainy&quot;. Most of it was the
+              clips (drawn at 0.75 scale and squeezed into a 256-color GIF); the rest was the toys'
+              own random splat size and color. <code>tools/live-clip.mjs</code> now takes
+              <code>--dpr=2</code> and <code>--frames=&lt;dir&gt;</code> (PNG frames straight into
+              the MP4), the room, the relief grids and the Studio floor use exact splats (<code
+                >jitter: 0</code
+              >), the floorboards have seams, and the live landscape has 128 bands and three layers.
+              Posted as <code>live-echo-r2</code>, <code>live-permission-r2</code>,
+              <code>live-landscape-r2</code> and a before-and-after still.
+            </li>
+            <li>
+              <p>
+                Start time (Chromium, SwiftShader, this container; the software renderer itself
+                takes about two of the four cores, so runs vary). Before: file chosen to the
+                landscape built (it could play only after that, on a tap). After: file chosen to
+                playing (a long song plays as it opens).
+              </p>
+              <div
+                class="table-wrap"
+                tabindex="0"
+                role="region"
+                aria-label="Table, scrolls sideways"
+              >
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Song</th>
+                      <th scope="col">Before, 4×</th>
+                      <th scope="col">After, 4×</th>
+                      <th scope="col">Before, 6×</th>
+                      <th scope="col">After, 6×</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">3 min MP3 (4.3 MB)</th>
+                      <td>6.1 s</td>
+                      <td>2.3 s</td>
+                      <td>8.3 s</td>
+                      <td>1.4 s</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">6 min MP3 (8.6 MB)</th>
+                      <td>6.2 s</td>
+                      <td>3.1 s</td>
+                      <td>10.3 s</td>
+                      <td>1.8 s</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">10 min MP3 (14 MB)</th>
+                      <td>8.9 s</td>
+                      <td>1.2 s (1.2 to 1.8 over runs)</td>
+                      <td>12.2 s</td>
+                      <td>3.6 s</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">50 MB MP3 (21.5 min)</th>
+                      <td>refused (40 MB cap)</td>
+                      <td>1.1 s</td>
+                      <td>refused</td>
+                      <td>1.5 s</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                Before, the page froze for the whole load. After, the longest frame gap is 0.5 to
+                1.7 s (the renderer's own frame here is 0.2 to 0.4 s at 4×). The whole song is
+                measured 7 s (3 min) to 29 s (50 MB) after it opens, at 4×. An MP3 is decoded for
+                measuring in pieces cut between its frames (<code>src/packs/song-mp3.js</code>), so
+                the page never waits on one long decode.
+              </p>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              The click track (tests/live2.spec.mjs): all 12 clicks cross the now mark 3 to 36 ms
+              from when an analyser on the output hears them (the output latency reported is 42 ms).
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <strong>How live toys work.</strong> <code>src/live/live.js</code> is the only place
+              that calls <code>getUserMedia</code> or <code>getDisplayMedia</code>, and only the
+              input panel's live buttons call it (<code>input.live</code>, rendered by
+              <code>src/live/panel.js</code>). A toy reads <code>live.on(kind)</code>,
+              <code>live.mic</code> (the analyser) and <code>live.camera</code> from its drive or
+              build. After a source starts or stops the toy is rebuilt (unless the entry says
+              <code>rebuild: false</code>), so a build can switch to its live view.
+            </li>
+            <li>
+              <strong>Relief splats</strong> (kind 24; lane Fix4 took 23 first) are how a live
+              picture moves without a rebuild: the recipe builds a grid once (<code
+                >reliefGrid</code
+              >
+              in <code>src/live/relief.js</code>) and draws its screen canvas every frame, colors on
+              the left half and heights on the right. The live song landscape, the mirror and Photo
+              to 3D's live view use it.
+            </li>
+            <li>
+              <strong>The depth model in a worker</strong> (<code>src/live/depth-worker.js</code>):
+              one frame at a time, at 140 to 308 pixels on the long side by tier. Here (one CPU
+              thread, SwiftShader) it takes about 0.5 s a frame; a laptop should do several a
+              second. Heights ease toward each answer and the depth range is eased too, so the
+              picture doesn't flicker.
+            </li>
+            <li>
+              <strong>The Chladni plate, sung to.</strong> A plate a quarter as thick (a plate's
+              frequencies go with its thickness) has its modes at 75, 150, 195, 255 and 375 Hz,
+              where voices are. The nearest mode rings, with a resonance curve (half strength about
+              150 cents off since r3) times loudness; another mode clearly nearer, held a second,
+              rebuilds the plate with scattered sand (at most every 2 s).
+            </li>
+            <li>
+              <strong>The echo meter</strong> measures from every 5 ms hop of samples (an
+              AudioWorklet), not the analyser's frames: RT60 by Schroeder's backward integral with
+              the background taken away, T20 when the clap stands 35 dB above the background, T30
+              from 45 dB and T10 from 20 dB (r3), and a reason with a hint below that.
+            </li>
+            <li>
+              <strong>The tuner's glow</strong> is added to a key's color, so it takes blue away
+              (<code>[0.25, 0, -0.65]</code>): ivory turns gold. A positive glow can't show on a
+              white key.
+            </li>
+            <li>
+              <strong>Clips.</strong> <code>tools/effect-clip.mjs</code> steps the clock by hand; a
+              live source runs in real time. <code>tools/live-clip.mjs</code> feeds a WAV into the
+              page's own analyser in step with the clip's clock (<code>--audio</code>), plays a Y4M
+              through Chromium's fake camera (<code>--video</code>, and <code>--depth</code> waits
+              for the depth model each frame), or draws a plain window for &quot;Share a
+              screen&quot; (<code>--screen-demo</code>).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong>Round 2's song player</strong> (<code>src/packs/song-stream.js</code>):
+              <code>Track</code> plays the file through an <code>&lt;audio&gt;</code> element routed
+              to the site's sound; its clock is the element's time, smoothed between its steps, less
+              the output latency. <code>SongAnalysis</code> decodes a copy (32 kHz past 12 minutes;
+              an MP3 in 30-second pieces placed by their frame offsets, the first piece giving the
+              decoder's start trim) and hands the mono samples to <code>song-worker.js</code> as
+              they come; it measures the 2-second chunks whose samples are in, nearest the playhead
+              first (<code>song-analysis.js</code>: bands, six bands, loudness, centroid, YIN pitch,
+              flux, every 40 ms). Songs of 30 s or less keep the old decode-and-build path.
+            </li>
+            <li>
+              <strong>The looks</strong> (<code>src/packs/song-looks.js</code>) are relief splats
+              with axis 3 (a 3D offset per splat from the screen canvas, from the r2 engine PR). Two
+              needles per slot along time (<code>SUB</code>) and per band across pitch
+              (<code>SUBF</code>), the in-between ones taking the values between measured neighbors;
+              colors come from tables built once. A needle's sigmas are a third of its thickness and
+              a 2.6th of its length, with no jitter: longer ones smear into their neighbors. In
+              Live, slot 0 sits on the gate and a frame's line crosses it as the frame's middle is
+              heard (<code>liveFrame</code>).
+            </li>
+            <li>
+              <strong>Song clips:</strong>
+              <code>tools/live-clip.mjs --song=&lt;file&gt; --clock</code> opens a song, waits until
+              it is measured, steps its audio clock with the clip's and shows it;
+              <code>&lt;out&gt;.json</code> gives the second of the song at the first frame, for
+              adding the sound to the MP4.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              The Screen toy's picture panel shows its seek bar for a shared screen (a live stream
+              has no length); it does nothing.
+            </li>
+            <li>
+              The depth is relative (a guess from one camera), so a relief's depth scale changes as
+              the scene changes; it is eased, not fixed.
+            </li>
+            <li>
+              Safari without AudioWorklet hears claps from the analyser's frames only (less
+              precise).
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              <code>tools/live-clip.mjs</code> is new (a lane tool for live clips); it could be
+              listed in PACKS.md section 8 and README's tools.
+            </li>
+            <li>
+              A PACKS.md section on live input (<code>input.live</code>, <code>live.on</code>,
+              relief splats) is drafted in this file's Notes, for you to move after the merge.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/LiveInput.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/LiveInput.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

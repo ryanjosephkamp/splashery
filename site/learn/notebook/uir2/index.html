@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane UI r2: focus mode, panel sizes, drawing pad and pan · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: UIr2."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/uir2/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane UI r2: focus mode, panel sizes, drawing pad and pan · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: UIr2."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/uir2/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane UI r2: focus mode, panel sizes, drawing pad and pan</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li>
+                <a
+                  href="#brief-written-by-the-operator-on-september-30-2026-from-the-owner-s-requests-and-his-answers-that-morning"
+                  >Brief (written by the Operator on September 30, 2026, from the owner's requests
+                  and his answers that morning)</a
+                >
+              </li>
+              <li><a href="#you-own">You own</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section
+        class="md-file"
+        aria-label="Lane UI r2: focus mode, panel sizes, drawing pad and pan"
+      >
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: UI r2, &quot;Focus, sizes, a better pad and
+            pan&quot; (prefix <code>ui2</code>). Branch: claude/lane-ui-r2. PR title: &quot;Phase UI
+            r2: focus mode, panel sizes, drawing pad and pan&quot;. Handoff file:
+            docs/handoff/UIr2.md. This is an engine lane: it changes the site's layout and gestures
+            for every toy.
+          </p>
+          <h2
+            id="brief-written-by-the-operator-on-september-30-2026-from-the-owner-s-requests-and-his-answers-that-morning"
+          >
+            Brief (written by the Operator on September 30, 2026, from the owner's requests and his
+            answers that morning)
+          </h2>
+          <p>
+            The owner wrote, word for word: &quot;On desktop, the toy gallery and models are
+            reasonably easy to navigate. But on mobile, the settings panel and gallery are difficult
+            to use. I oftentimes want to be able to hide the settings entirely, and other times, I
+            want the gallery to be full-screen or for the full setting panel to be maximized. It
+            would be nice to be able to view the toy in a focused full-screen mode, without the
+            settings panel getting in the way. We should improve that on mobile, and I'd like to
+            improve it on desktop as well. For some toys, like the convolutional network, settings
+            are almost impossible to use well on mobile. For the convolutional network specifically,
+            the number drawing box (which is super cool and perfect otherwise, although I suppose it
+            would be nice if the drawn lines were a bit less thick, i.e., if it weren't so easy to
+            accidentally activate so many pixels when drawing, especially by hand on mobile) doesn't
+            fit on my mobile screen entirely right now; allowing me to maximize the settings would
+            fix that, I presume.&quot; And: &quot;Is it possible to allow the user to hold a key
+            like option or shift or alt or something and then drag to move a toy around (actual
+            translation, not just rotation) on desktop, and maybe enable the same feature if the
+            user does a 2-finger drag on mobile? And it would be nice to allow them to easily reset
+            to the default view/orientation, if we aren't already enabling that.&quot;
+          </p>
+          <p>
+            He approved this plan on September 30, 2026 (calls 15 and 16). Build it behind the labs
+            switch first (<code>?labs=1</code>); he tries it on his phone, and it becomes the
+            default for everyone after his &quot;good&quot; marks (then a small follow-up commit in
+            this PR flips the default). The laptop toy is locked: don't change its look or behavior.
+          </p>
+          <p>
+            What the site does today (check the code; this is the Operator's reading): on a phone
+            the bottom sheet (src/ui.js, modes &quot;row&quot;, &quot;grid&quot; and
+            &quot;panel&quot;; <code>SHELF_GRID</code>; the 760px breakpoint) has three stops, the
+            toy row, the gallery (<code>body.shelf-grid .panel</code>, at most 80dvh) and the
+            settings (<code>body.sheet-open .panel</code>, at most 62dvh), and the toy row never
+            hides. On a computer the panel is fixed on the right. In
+            <code>bindGestures</code> (src/app.js, and again in src/viewer.js), a one-finger drag
+            turns the toy, a pinch zooms, two fingers moving together turn it (the pinch's
+            &quot;drag&quot; mode), and only picture toys pan (<code>player.panBy</code>,
+            <code>player.pansHere</code> in src/player.js). A double-tap, the ↺ button and the R key
+            reset the view. <code>camera.getState</code> saves yaw, pitch, roll and distance, not
+            the target.
+          </p>
+          <p>Build, in this order, posting each part's cards as soon as it's done:</p>
+          <ol>
+            <li>
+              <strong>Focus mode.</strong> A button in the top bar and the F key hide everything but
+              the toy (the top bar collapses to one small &quot;show&quot; button in a corner).
+              Escape, that button, or a swipe up from the bottom edge on a phone bring everything
+              back. Use the browser's Fullscreen API too where it exists (computers and Android),
+              never required.
+            </li>
+            <li>
+              <strong>Sheet stops on a phone.</strong> Two more stops:
+              <strong>hidden</strong> (swipe the toy row down; a small handle stays to pull it back)
+              and <strong>full</strong> (drag the handle to the top, or a maximize button): the
+              settings or the gallery fill the screen, with a strip of the toy still showing at the
+              top so you see what a setting changes. Toys with big inputs (the CNN's drawing pad,
+              the plotters, anything whose input panel doesn't fit) open their settings at the full
+              stop on a phone, so the pad fits whole.
+            </li>
+            <li>
+              <strong>Desktop panel.</strong> Collapse the panel to a thin edge (a button and a key,
+              say <code>[</code>), widen or narrow it by dragging its edge (remembered in
+              localStorage, wrapped in try/catch), and open the gallery as a full page (a grid of
+              every shelf that covers the stage; Escape closes it).
+            </li>
+            <li>
+              <strong>The drawing pad</strong> (renderInputPad in src/ui.js; the CNN toy uses it).
+              Today every pointermove adds ink to the cell under the finger and all its neighbors
+              within distance 1.1 at 0.3 of the maximum, so lines get thick fast. Instead: a
+              smaller, harder pen that inks by the distance drawn (interpolate along the stroke; ink
+              per unit length, not per event), a <strong>Pen size</strong> choice (fine, medium,
+              bold; fine by default on phones, medium on computers) and an <strong>eraser</strong>.
+              The CNN must still read a hand-drawn digit correctly: check with a test that draws a
+              &quot;3&quot; and a &quot;7&quot; as strokes and gets the right class.
+            </li>
+            <li>
+              <strong>Home Screen app.</strong> A web-app manifest
+              (<code>manifest.webmanifest</code>, name &quot;Splashery&quot;,
+              <code>display: &quot;standalone&quot;</code>, the site's own icon at 192 and 512 px
+              made from an existing thumbnail or a kit render, no logos), the Apple meta tags, and
+              <code>theme-color</code>, so Splashery opens full screen from an iPhone's Home Screen.
+              No service worker.
+            </li>
+            <li>
+              <strong>Pan (moving the toy).</strong> On a computer, Shift or Option/Alt plus a drag
+              moves the toy across the screen instead of turning it. On a phone, a two-finger drag
+              moves it (instead of turning it); a pinch still zooms and a twist still tilts; one
+              finger still turns. The move stays within reach of the toy (clamp the target near its
+              bounds, as <code>panBy</code> does now), and Reset (↺, R, and a double-tap where the
+              toy doesn't use it) puts it back in the middle. Shared links and saved scenes store
+              the move in a new optional field (for example <code>camera.pan: [x, y, z]</code>,
+              documented in docs/SCENE-SCHEMA.md): old <code>#s=</code> links and saved scenes of
+              schema v2 and v3 load exactly as before, and a link without the field shows the toy
+              centered. Check every toy whose own drag or two-finger gesture might clash (the puzzle
+              cube, the bricks, stretchy toys with <code>grab</code>, chess, Newton's cradle, the
+              picture and book toys): each still has a way to turn and to use its own drag. Books r4
+              (PR #126, lane Books) is changing the double-tap on book and picture toys to focus a
+              page; if #126 hasn't merged when you reach the gestures, read its diff, keep your
+              change compatible with it, and merge main as soon as it lands.
+            </li>
+          </ol>
+          <p>
+            Every change works at 390×844 and at 1440×900, with a mouse, a trackpad, a keyboard and
+            touch. Help: add the new gestures and keys to the site's help (the About tab's &quot;How
+            to use&quot; text or wherever the controls are listed) and to the Tinkerer's Manual only
+            if it lists controls (a line or two).
+          </p>
+          <p>
+            Cards (clips at 390×844 unless noted, each labeled &quot;built by Opus 5.5&quot;, in the
+            lane record <code>UIr2</code> on the Effect review page; ask the Operator in your
+            message if the record is missing):
+          </p>
+          <ul>
+            <li><code>ui2-focus</code>: focus mode on and off on a phone, and at 1440×900.</li>
+            <li><code>ui2-sheet</code>: the hidden and full stops, the gallery full.</li>
+            <li>
+              <code>ui2-cnn-pad</code>: the CNN's pad at the full stop, drawing a digit with the
+              fine pen, erasing, and the network's answer.
+            </li>
+            <li>
+              <code>ui2-desktop</code>: the panel collapsed, widened, and the gallery page
+              (1440×900).
+            </li>
+            <li>
+              <code>ui2-pan</code>: moving a toy with two fingers, then Reset; and Shift-drag at
+              1440×900.
+            </li>
+            <li>
+              <code>ui2-homescreen</code>: a still of the manifest's icon and the standalone launch
+              if you can emulate it; otherwise say so.
+            </li>
+          </ul>
+          <p>
+            Tests in tests/ui2.spec.mjs: focus mode hides the panel and top bar and Escape restores
+            them; the sheet's five stops; the pad inks by distance (a slow and a fast stroke of the
+            same length ink about the same number of cells) and the eraser clears; the CNN
+            classifies the drawn digits; the pan clamps near the toy, Reset clears it, and a link
+            with the pan field restores it; an old <code>#s=</code> link from before the change
+            loads unchanged (take one from the existing tests); the manifest is valid JSON with the
+            icons present; the laptop's smoke test stays green. Screenshots at 390×844 and 1440×900
+            (<code>ui2-*</code>).
+          </p>
+          <h2 id="you-own">You own</h2>
+          <p>
+            For this lane's duration (engine code; keep every change marked and as small as it can
+            be): <code>src/ui.js</code>, <code>styles.css</code>, <code>index.html</code>, the
+            gesture and key handling in <code>src/app.js</code> and <code>src/viewer.js</code>,
+            <code>src/camera.js</code>, <code>panBy</code>/<code>pansHere</code> and camera reset in
+            <code>src/player.js</code>, the scene read and write for the new field (wherever
+            <code>#s=</code> links are built and read) and docs/SCENE-SCHEMA.md,
+            <code>manifest.webmanifest</code> and its icons (new), <code>tests/ui2.spec.mjs</code>,
+            your <code>ui2-*</code> screenshots and docs/handoff/UIr2.md. Other lanes' toys and
+            packs are theirs. If a finished lane's test breaks because the layout changed (a
+            selector, a panel height), don't edit it: name the test and why in your message, and the
+            Operator fixes it.
+          </p>
+          <p>
+            Lanes Books r4, Fluids, Worlds, Science, Sound A and B, Fix4, Video to 3D, Live input
+            and the Integrators may run at the same time; leave their files alone. Lane Live input
+            will add a &quot;Use my microphone&quot; control to the input panel after you; keep the
+            input panel's API as it is.
+          </p>
+          <p>HOW THIS LANE RUNS</p>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and marks them. Don't ask him anything or wait for him. Put questions
+              and blockers in your final message, and the Operator answers or relays them. Messages
+              that arrive in this session &quot;From the Operator&quot; come from the coordinator on
+              the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29,
+              2026: Opus 5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the
+              Worlds content, the Studio converters, the docs and the Integrator). Any helper you
+              start uses the same model. Use at most one helper at a time.
+            </li>
+            <li>
+              Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs,
+              anything behind the labs switch, and additive engine PRs once the full test run
+              passes. Changes to toys the public already sees wait for the owner's &quot;good&quot;
+              marks. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English (color, center, gray,
+              math, license, toward, -ize endings, dates like &quot;September 29, 2026&quot;). Leave
+              code identifiers, file names and anything stored in links as they are.
+            </li>
+            <li>
+              Read first: CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are
+              binding), docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and
+              docs/handoff/history.md (lessons from earlier lanes).
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <ul>
+            <li>Model: Opus 5.5 (claude-opus-5-5), default effort.</li>
+            <li>
+              Merged: PR #131 on October 1, 2026 (main 5ef0bbf). The Operator's Ops PR #160 then
+              made <code>ui2On()</code> return true, so all of UI r2 is on for everyone.
+            </li>
+            <li>
+              <p>
+                September 30, 2026: all six parts built behind the labs switch, with tests
+                (<code>tests/ui2.spec.mjs</code>, 12 tests, passing) and clips. Draft PR #131. Full
+                suite: 564 of 568 passed; the four failures were fixed (the Picture lab's pan test,
+                commit 2cf0745) or pass alone (three timing tests run while clips rendered). Ready
+                for the owner's marks.
+              </p>
+              <ol>
+                <li>
+                  Focus mode: the top bar's focus button or F; Escape, the corner button or a swipe
+                  up from the bottom edge on a phone bring everything back; the Fullscreen API where
+                  there is one.
+                </li>
+                <li>
+                  The phone sheet's five stops: hidden (swipe the handle or the toy row down), row,
+                  grid, panel and full (swipe up from the grid or the panel, or the square button in
+                  the toolbar). A toy with a drawing pad (or an input panel taller than the sheet)
+                  opens its settings at the full stop.
+                </li>
+                <li>
+                  The desktop panel: a tab on its edge (or <code>[</code>) folds it to a thin edge
+                  (remembered); its edge still sets its width (that was already there, remembered);
+                  Gallery opens every toy as a page over the stage (Escape, Close or a pick closes
+                  it).
+                </li>
+                <li>
+                  The drawing pad: a pen that inks by distance (4×4 coverage of a disk, walked in
+                  0.1-cell steps, ink per unit length); Fine, Medium and Bold (fine on phones,
+                  medium on computers) and an Eraser; the pen stays as chosen when the panel is
+                  drawn again after a read.
+                </li>
+                <li>
+                  <code>manifest.webmanifest</code>, icons at 180, 192 and 512 px (the site's
+                  favicon splats on white), the Apple meta tags. No service worker.
+                </li>
+                <li>
+                  Pan: Shift or Option/Alt and a drag on a computer, two fingers moving together on
+                  a phone; the view's aim stays within the toy's bounds (a box of its radius); ↺, R
+                  and a double-tap center it; <code>camera.pan</code> in links and saved scenes,
+                  left out when centered.
+                </li>
+              </ol>
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              One flag, <code>ui2On()</code> in <code>src/player.js</code>, gates everything; it
+              returns true since #160 (October 1, 2026), so all of it is the default.
+              <code>body.ui2</code> gates the CSS, and <code>.ui2-only</code> /
+              <code>.ui2-hide</code> the markup.
+            </li>
+            <li>
+              The camera now has <code>aim</code> (where the view is going) and
+              <code>center</code> (the toy's), and <code>target</code> eases to
+              <code>aim</code> like the rest of the pose. <code>panBy</code>, <code>getPan</code>,
+              <code>setPan</code> live in <code>src/camera.js</code>; the player's
+              <code>panBy</code> (the picture toys' pan) now calls it.
+            </li>
+            <li>
+              Two fingers: the browser sends each finger's move on its own, so after one finger's
+              step the pair looked pinched and a two-finger drag along the fingers' line read as a
+              zoom. With <code>pairPinch</code> (labs) the gesture is read every second move.
+            </li>
+            <li>
+              The CNN reads a drawn 3 and 7 with all three pens (tested with the fine pen at
+              390×844).
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              On a phone the tagline &quot;splats you can play with&quot; hides (labs only) to make
+              room for the sixth round button.
+            </li>
+            <li>
+              The picture toys' pan now also goes into links (outside labs too): before, a link to a
+              page seen close up opened centered. Old links still open centered.
+            </li>
+            <li>
+              Toys whose own drag covers the whole toy (the puzzle cube, the bricks, stretchy toys)
+              turn with a one-finger drag beside the toy, as before; two fingers now move them
+              instead of turning them. Right-drag and Space-drag still turn on a computer.
+            </li>
+            <li>
+              The standalone launch (Home Screen) can't be emulated here: checked the manifest and
+              icons only.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              Cards posted in lane UIr2 (groups &quot;On a phone&quot; and &quot;On a
+              computer&quot;): ui2-focus, ui2-sheet, ui2-cnn-pad, ui2-pan, ui2-homescreen,
+              ui2-focus-desktop, ui2-desktop, ui2-pan-desktop.
+            </li>
+            <li>
+              To make it the default after the owner's marks: <code>ui2On()</code> in
+              <code>src/player.js</code> returns true (one line), and
+              <code>tests/ui2.spec.mjs</code>'s last test (&quot;without the labs switch …&quot;)
+              goes.
+            </li>
+            <li>
+              For PACKS.md: a toy's drawing canvas in the settings no longer counts as a swipe on
+              the phone sheet.
+            </li>
+            <li>
+              A clip lesson: a background test run and clip rendering at the same time made two
+              timing tests fail (<code>chr.spec.mjs</code> &quot;on the Test island&quot;,
+              <code>chs-engine.spec.mjs</code>); both pass alone.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/UIr2.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/UIr2.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
