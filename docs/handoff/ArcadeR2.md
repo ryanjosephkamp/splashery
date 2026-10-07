@@ -81,7 +81,8 @@ fresh from main on the same branch names.
 - The owner's marks (October 7): Shardball, Page Breaker and both Note Rider clips "good"; the three
   Longtail clips "fix: the apple never appears". Each reset clears the sprites, but the berry kept
   its old sprite, so from the first game on it was never drawn (a bug from round 1). Fixed and
-  tested; the `-r2` clips are posted.
+  tested; the `-r2` clips are posted, and the owner marked all three "good". Every Arcade r2 clip is
+  now marked good.
 - Longtail's layer: 90,000 slots on a phone (the planet's finer tiles and body take 64,000 before
   the beads).
 
