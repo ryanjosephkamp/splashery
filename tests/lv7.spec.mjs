@@ -16,7 +16,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import config from "../playwright.config.mjs";
-import { fakeCamera, openMirror, measure, overFace } from "../tools/lv7-mirror-measure.mjs";
+import { fakeCamera, openMirror, measure, overFace, stillness } from "../tools/lv7-mirror-measure.mjs"; // prettier-ignore
 
 const DIR = fs.mkdtempSync(path.join(os.tmpdir(), "splashery-lv7-"));
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
@@ -103,7 +103,10 @@ test.describe("the mirror on a camera (a generated mannequin)", () => {
   const launch = (playwright) =>
     playwright.chromium.launch({ ...config.use.launchOptions, args: fakeCamera(y4m, config.use.launchOptions.args) }); // prettier-ignore
 
-  test("plain: steadier than before, frame to frame", async ({ playwright, baseURL }) => {
+  test("plain: steadier than before, frame to frame, and sharper", async ({
+    playwright,
+    baseURL,
+  }) => {
     const browser = await launch(playwright);
     try {
       const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); // prettier-ignore
@@ -125,6 +128,19 @@ test.describe("the mirror on a camera (a generated mannequin)", () => {
       // code (the face-on, color and height jitters above carry the claim);
       // this catches a turned view gone wrong.
       expect(m.shownJitterTurned).toBeLessThan(6); // main: 2.31 to 3.23 (unloaded)
+      // The polish round: sharper (how much of the camera's own edges reach
+      // the face; 0.51 to 0.52 before it, 0.56 to 0.57 after).
+      expect(m.sharpness).toBeGreaterThan(0.54);
+      // Stability (the owner's "Please improve stability" of October 6): held
+      // still, the whole picture holds still, splats and colors, face on and
+      // turned. r4 measured here: heights 0.69 (thousandths of the relief a
+      // frame), 5.9 per thousand splats moving a frame, 5.3 per thousand
+      // pixels flickering turned; r5: 0.14, 0.12 and 1.1.
+      const st = await stillness(page);
+      console.log("lv7 mirror, plain, held still:", JSON.stringify(st));
+      expect(st.height).toBeLessThan(0.4);
+      expect(st.moved).toBeLessThan(1.5);
+      expect(st.flickerTurned).toBeLessThan(3);
       expect(errors).toEqual([]);
     } finally {
       await browser.close();
@@ -143,6 +159,14 @@ test.describe("the mirror on a camera (a generated mannequin)", () => {
       console.log("lv7 mirror, hologram:", JSON.stringify({ ...m, overFace: over }));
       expect(over).toBeLessThan(10); // main: 36 (scanlines and edge glow over the face)
       expect(m.shownJitter).toBeLessThan(3); // main: 11.4 (the scanlines drifted over the face)
+      // Stability: the scanlines stand still too (r4: the room's colors moved
+      // 10.3 levels a frame here, 5.0 per thousand pixels flickering turned;
+      // r5: 0.16 and 0.2).
+      const st = await stillness(page);
+      console.log("lv7 mirror, hologram, held still:", JSON.stringify(st));
+      expect(st.color).toBeLessThan(1.5);
+      expect(st.moved).toBeLessThan(1.5);
+      expect(st.flickerTurned).toBeLessThan(2);
       // Still the cool cyan look (r3).
       const tint = await page.evaluate(async () => {
         const { MIRROR, mirrorScreen } = await import("/src/live/relief.js");
@@ -464,6 +488,34 @@ test.describe("the Chladni plate", () => {
 });
 
 // ---- Screenshots (lv7-*.png) ---------------------------------------------------------
+
+// ---- The polish round (the owner's "the toys could still be sharper", October 5) -------
+
+test.describe("the polish round (no browser)", () => {
+  test("the Chladni plate and the Song landscape draw with the sharp kernel, the landscape on half as many splats again", async () => {
+    const { RECIPES } = await import("../src/packs/studio.js");
+    expect(RECIPES["chladni-plate"].kernel).toBe("sharp");
+    expect(RECIPES["song-landscape"].kernel).toBe("sharp");
+    expect(RECIPES["song-landscape"].density).toBe(1.5);
+  });
+
+  test("the landscape's waveform is a smooth envelope that keeps its loud parts, not a scatter", async () => {
+    const { waveEnvelope } = await import("../src/packs/song-looks.js");
+    // A jagged swing, as a song's slot by slot loudness is.
+    const nt = 400;
+    const wave = new Float32Array(nt);
+    for (let i = 0; i < nt; i++) wave[i] = (i % 2 ? 1 : 0.1) * (0.5 + 0.5 * Math.sin(i / 40));
+    const e = waveEnvelope({ nt, wave, hVersion: 1 });
+    let jumps = 0;
+    let raw = 0;
+    for (let i = 1; i < nt; i++) {
+      jumps += Math.abs(e[i] - e[i - 1]);
+      raw += Math.abs(wave[i] - wave[i - 1]);
+    }
+    expect(jumps).toBeLessThan(raw * 0.05);
+    expect(Math.max(...e)).toBeGreaterThan(0.9 * Math.max(...wave));
+  });
+});
 
 test("screenshots at phone and desktop size: the landscape growing", async ({ browser }) => {
   test.setTimeout(300_000);
