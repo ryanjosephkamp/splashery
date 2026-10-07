@@ -1087,7 +1087,7 @@
     "u": "toys/real-moon/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Tycho and more.",
     "w": "the real moon space space moon lunar lro lola nasa real map elevation relief craters tycho copernicus apollo real-moon",
     "i": "../assets/toys/real-moon/thumb.webp",
     "l": 1
@@ -1097,7 +1097,7 @@
     "u": "toys/real-mars/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Olympus Mons.",
     "w": "the real mars space space mars red planet viking mola nasa usgs real map elevation relief olympus mons valles marineris gale curiosity real-mars",
     "i": "../assets/toys/real-mars/thumb.webp",
     "l": 1
@@ -1107,7 +1107,7 @@
     "u": "toys/real-earth/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    "d": "Tap a spot to zoom in and name the place; tap again to go out. Play flies to Everest.",
     "w": "the real earth space space earth world globe blue marble etopo nasa noaa real map elevation relief night lights everest himalaya grand canyon hawaii real-earth",
     "i": "../assets/toys/real-earth/thumb.webp",
     "l": 1
@@ -1117,7 +1117,7 @@
     "u": "toys/real-mercury/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Caloris.",
     "w": "the real mercury space space mercury planet messenger nasa usgs real map elevation relief caloris rachmaninoff hokusai craters real-mercury",
     "i": "../assets/toys/real-mercury/thumb.webp",
     "l": 1
@@ -1127,7 +1127,7 @@
     "u": "toys/real-venus/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Maxwell Montes.",
     "w": "the real venus space space venus planet magellan radar nasa usgs real map elevation relief maxwell montes maat mons artemis corona real-venus",
     "i": "../assets/toys/real-venus/thumb.webp",
     "l": 1
@@ -1137,7 +1137,7 @@
     "u": "toys/real-moons/",
     "k": "toy",
     "s": "Space",
-    "d": "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    "d": "Pick a moon in the Toy tab. Tap a spot to zoom in and name it; tap again to go out.",
     "w": "real moons space space moons io europa ganymede callisto titan jupiter saturn galileo voyager cassini nasa usgs real map volcano ice real-moons",
     "i": "../assets/toys/real-moons/thumb.webp",
     "l": 1
@@ -1147,7 +1147,7 @@
     "u": "toys/real-small-worlds/",
     "k": "toy",
     "s": "Space",
-    "d": "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    "d": "Pick Pluto, Ceres or Vesta. Tap a spot to zoom in and name it; tap again to go out.",
     "w": "pluto, ceres and vesta space space dwarf planet pluto ceres vesta asteroid new horizons dawn nasa usgs real map elevation relief sputnik heart occator real-small-worlds",
     "i": "../assets/toys/real-small-worlds/thumb.webp",
     "l": 1
