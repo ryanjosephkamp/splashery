@@ -70,6 +70,13 @@ polish: sharper samples and a smoother lift":
     390 x 844 at 3x the table 15,083 to 24,170 and the lifted copper 12,812 to 20,513 (+60 percent);
     desktop +2 percent. `tools/rel-table-clip.mjs` records the phone-size table clip. Cards:
     rel-copper-polish-r6, rel-radon-r5, rel-table-r2, rel-sharp-r1.
+  - October 6, the walkthrough: the periodic table toy's nucleus ticks were "like nails on a
+    chalkboard" (asked of this lane by the Operator; the toy is `periodic-table` in
+    `src/packs/chemistry.js`, which no lane owns now). Each proton and neutron now lands with a soft
+    pebble's click like the splat simulator's sorting (bright clacks at 2.7 to 3.3 kHz before): the
+    share of the sound above 2 kHz goes from 68 to 8 percent. `tests/sndc.spec.mjs` counts the ticks
+    by the new voice; `tools/sound-review.json` updated; `tools/rel-nucleus-sound.mjs` renders the
+    sound to a WAV. Cards: rel-nucleus-sound, rel-nucleus-sound-ab.
   - Stand-in pictures for the 26 elements with no sample photo (his list), all from Wikimedia
     Commons with their licenses checked: 13 portraits (flat, black and white), 5 flags (waving), 3
     coats of arms (cut out), 5 minerals and places. Their tiles stay hatched, and the facts list
