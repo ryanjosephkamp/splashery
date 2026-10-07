@@ -3935,7 +3935,7 @@
     "u": "toys/longtail/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+    "d": "Tap to play. Tap beside the head to turn it that way, or use the arrows. 3D folds it up; drag to turn it.",
     "w": "longtail arcade arcade game arcade grow trail beads berries grid cube net fold planet mars moon earth torus ring tunnels 3d play longtail",
     "i": "../assets/toys/longtail/thumb.webp",
     "l": 1
@@ -4035,7 +4035,7 @@
     "u": "toys/note-rider/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+    "d": "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     "w": "note rider arcade arcade game arcade music song notes rhythm catch lanes melody midi your own song ode to joy 3d note-rider",
     "i": "../assets/toys/note-rider/thumb.webp",
     "l": 1

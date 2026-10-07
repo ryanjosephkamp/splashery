@@ -371,13 +371,16 @@ class Longtail {
     const tileOf = (w, h) => {
       const key = `${w.toFixed(3)}:${h.toFixed(3)}`;
       if (!tiles.has(key)) {
-        const step = Math.min(w, h) / (low ? 4 : 6);
+        // Arcade r2 ("sharper"): a tile fills its whole cell, its rim row
+        // a solid dark grout line, so nothing shows through between tiles
+        // (the far faces did, as streaks); and finer splats.
+        const step = Math.min(w, h) / (low ? 5 : 8);
         const t = crispModel(
           (c) =>
             c.rect(w, h, {
               color: (p) => {
                 const edge = Math.max(Math.abs(p[0]) / (w / 2), Math.abs(p[1]) / (h / 2));
-                const f = edge > 0.82 ? 0.9 : 1.0;
+                const f = edge > 0.88 ? 0.66 : edge > 0.7 ? 0.93 : 1.0;
                 return [f, f, f];
               },
             }),
@@ -412,7 +415,7 @@ class Longtail {
         col = mixc(palette[(c.face * 2) % 6], palette[(c.face * 2 + 1) % 6], (ii + jj) % 2);
       }
       const [mu, mv] = this.tileMax[i];
-      return recolor(tileOf(mu * 0.9, mv * 0.9), (v) => [v[0] * col[0], v[1] * col[1], v[2] * col[2], 1]); // prettier-ignore
+      return recolor(tileOf(mu, mv), (v) => [v[0] * col[0], v[1] * col[1], v[2] * col[2], 1]); // prettier-ignore
     });
     // A bead: glass, lit from above.
     const glass = (c0, n) => {
@@ -492,6 +495,8 @@ class Longtail {
     this.acc = 0;
     this.ticks = 0;
     this.berry = null;
+    // (the sprites were all cleared above: a new berry for this game)
+    this.berrySprite = null;
     this.placeBerry();
     this.banner = null;
   }
@@ -569,6 +574,63 @@ class Longtail {
     return best;
   }
 
+  // A tap at (x, y) on the stage (0..1 across and down): the move from the
+  // head's tile that points most toward the tap, as the camera sees it now
+  // (never straight back: then the side the tap is on).
+  tapMove(t) {
+    const pose = this.api.pose?.();
+    const ray = this.api.ray?.(t.x, t.y);
+    if (!pose || !ray || !this.head) return null;
+    const onScreen = (p) => {
+      const d = sub(p, pose.position);
+      const z = dot(d, pose.forward);
+      return z > 1e-4 ? [dot(d, pose.right) / z, dot(d, pose.up) / z] : null;
+    };
+    const h = onScreen(this.head.pos);
+    const zt = dot(ray.dir, pose.forward);
+    if (!h || zt <= 1e-4) return null;
+    const v = [dot(ray.dir, pose.right) / zt - h[0], dot(ray.dir, pose.up) / zt - h[1]];
+    const vl = Math.hypot(v[0], v[1]);
+    if (vl < 1e-3) return null;
+    const fr = cellFrame(this.world, this.world.cells[this.body[0]], this.view);
+    const axes = [fr.ex, mul(fr.ex, -1), fr.ey, mul(fr.ey, -1)];
+    const heading = this.queue.length ? this.queue[this.queue.length - 1] : this.dir;
+    let best = null;
+    let bd = -Infinity;
+    axes.forEach((ax, k) => {
+      if (k === (heading ^ 1)) return;
+      const e = onScreen(add(this.head.pos, mul(ax, this.cellSize)));
+      if (!e) return;
+      const sx = e[0] - h[0];
+      const sy = e[1] - h[1];
+      const d = (sx * v[0] + sy * v[1]) / ((Math.hypot(sx, sy) || 1) * vl);
+      if (d > bd) {
+        bd = d;
+        best = k;
+      }
+    });
+    return best === heading ? null : best;
+  }
+
+  // The view the person turned by dragging (3D), on top of the camera that
+  // follows the head; a few seconds after the last drag it eases back.
+  turnView(drag, dt) {
+    if (!this.userTurn) this.userTurn = { yaw: 0, pitch: 0, idle: 0 };
+    const u = this.userTurn;
+    if (drag[0] || drag[1]) {
+      u.yaw -= drag[0] * Math.PI * 1.2;
+      u.pitch = clamp(u.pitch + drag[1] * Math.PI, -1.5, 1.5);
+      u.idle = 0;
+      return;
+    }
+    u.idle += dt;
+    if (u.idle > 4) {
+      const k = 1 - Math.exp(-dt / 0.9);
+      u.yaw *= 1 - k;
+      u.pitch *= 1 - k;
+    }
+  }
+
   onView() {}
 
   step(dt, ctl) {
@@ -581,9 +643,20 @@ class Longtail {
         if (m !== null && this.queue.length < 3) this.queue.push(m);
       }
     }
+    // Arcade r2: in 3D a drag turns the world (as the puzzle cube's does)
+    // and a swipe no longer steers; in 2D a swipe steers as before. A tap
+    // on either steers toward it, from the head: a tap above the head turns
+    // up, beside it turns that way (the arrows stay, as another way).
     const sw = ctl.input.takeSwipe?.();
-    if (sw) {
+    const drag = ctl.input.takeDrag?.() || [0, 0];
+    const in3d = ctl.viewTo > 0.5;
+    if (sw && !in3d) {
       const m = this.screenMove(sw);
+      if (m !== null && this.queue.length < 3) this.queue.push(m);
+    }
+    this.turnView(in3d ? drag : [0, 0], dt);
+    for (const t of ctl.input.takeTapPoints?.() || []) {
+      const m = this.tapMove(t);
       if (m !== null && this.queue.length < 3) this.queue.push(m);
     }
     if (ctl.demo) this.autopilot();
@@ -763,7 +836,7 @@ class Longtail {
     }
     for (const m of this.mouthSprites) {
       const fr = cellFrame(W, W.cells[m.cell], view);
-      m.sprite.pos = add(fr.p, mul(fr.n, 0.003));
+      m.sprite.pos = add(fr.p, mul(fr.n, 0.006));
       // the disc lies in its XZ plane: turn its Y onto the tile's normal
       m.sprite.quat = quatFromAxes(fr.ex, fr.n, mul(fr.ey, -1));
     }
@@ -818,9 +891,10 @@ class Longtail {
     // 3D: from above the head, the whole world in view; it turns as the
     // head goes round.
     if (!this.camFollow) this.followHead(0);
-    let yaw = this.camFollow.yaw;
+    const u = this.userTurn || { yaw: 0, pitch: 0 };
+    let yaw = this.camFollow.yaw + u.yaw;
     // a little above and to the side of the head, so three faces show
-    const pitch = clamp(this.camFollow.pitch + 0.42, -1.25, 1.25);
+    const pitch = clamp(this.camFollow.pitch + 0.42 + u.pitch, -1.35, 1.35);
     yaw += 0.45;
     // (each world fitted to its own size, the beads riding on it included)
     const fit3 = W.kind === "torus" ? 2.3 : W.kind === "planet" ? 2.15 : 1.95;
@@ -830,7 +904,7 @@ class Longtail {
       yaw: yaw * smooth(clamp(view * 1.3, 0, 1)),
       pitch: pitch * smooth(clamp(view * 1.3, 0, 1)),
       distance: lerp(d2, d3, view),
-      ease: 0.12,
+      ease: (u.idle ?? 9) < 0.3 ? 0.05 : 0.12, // close behind a drag
     };
   }
 

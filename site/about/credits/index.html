@@ -197,6 +197,11 @@
                 >
               </li>
               <li>
+                <a href="#basic-pitch-note-transcription-model-onnx-lane-arcade-r2"
+                  >Basic Pitch note transcription model, ONNX (lane Arcade r2)</a
+                >
+              </li>
+              <li>
                 <a href="#depth-anything-v2-small-quantized-onnx-lane-photo-to-3d"
                   >Depth Anything V2 Small, quantized ONNX (lane Photo to 3D)</a
                 >
@@ -3931,7 +3936,8 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
             </li>
             <li>
               Loaded only when someone opens a photo in the Photo to 3D toy (a dynamic import in
-              <code>src/packs/photo-3d-depth.js</code>); never on the shelf or in an embed.
+              <code>src/packs/photo-3d-depth.js</code>), or a recording as their own song in Note
+              Rider (<code>src/packs/arcade-listen.js</code>); never on the shelf or in an embed.
             </li>
             <li>
               Source:
@@ -3942,6 +3948,37 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
             <li>
               License: MIT (Copyright (c) Microsoft Corporation; the full text is in
               <code>vendor/onnxruntime-web/LICENSE</code>).
+            </li>
+          </ul>
+          <h3 id="basic-pitch-note-transcription-model-onnx-lane-arcade-r2">
+            Basic Pitch note transcription model, ONNX (lane Arcade r2)
+          </h3>
+          <ul>
+            <li>
+              File: <code>vendor/basic-pitch/nmp.onnx</code> (230,444 bytes; SHA-256
+              <code>2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec</code>), the
+              ICASSP 2022 model from the <code>basic-pitch</code> 0.4.0 Python package
+              (<code>basic_pitch/saved_models/icassp_2022/nmp.onnx</code>), unmodified. Its license
+              and NOTICE are copied to <code>vendor/basic-pitch/LICENSE</code> and
+              <code>vendor/basic-pitch/NOTICE</code>.
+            </li>
+            <li>
+              Loaded only when someone opens a recording as their own song in Note Rider (a dynamic
+              import in <code>src/packs/arcade-listen.js</code>, which runs it on the ONNX Runtime
+              Web above); never on the shelf or in an embed. The recording stays on the device.
+            </li>
+            <li>
+              Source:
+              <a href="https://github.com/spotify/basic-pitch"
+                >https://github.com/spotify/basic-pitch</a
+              >
+              (Spotify AB)
+            </li>
+            <li>
+              License: Apache License 2.0 (the full text is in
+              <code>vendor/basic-pitch/LICENSE</code>). The note decoding in
+              <code>src/packs/arcade-listen.js</code> follows the package's
+              <code>note_creation.py</code> (Apache 2.0).
             </li>
           </ul>
           <h3 id="depth-anything-v2-small-quantized-onnx-lane-photo-to-3d">

@@ -54,6 +54,8 @@ export class Input {
     this.pointer = null; // { x, y, down, kind }
     this.swipe = null;
     this.taps = 0; // taps on the play area since the last read
+    this.tapAt = []; // where they landed ({ x, y }, 0..1), for games that aim by tapping
+    this.drag = [0, 0]; // one finger's (or the mouse's) drag since the last read, in widths
     this.active = false; // takes the keyboard (the game is in play or chosen)
     // A touch screen shows the pad from the start (until keys are used).
     this.lastDevice = globalThis.matchMedia?.("(pointer: coarse)").matches ? "touch" : "keys";
@@ -102,6 +104,7 @@ export class Input {
       surface.setPointerCapture?.(e.pointerId);
       const p = where(e);
       pts.set(e.pointerId, { ...p, x0: p.x, y0: p.y, t0: e.timeStamp, moved: 0 });
+      this.skipTap = false; // the runtime sets it when this press starts or resumes the game
       this.pointer = { ...p, down: true, kind: e.pointerType };
       this.lastDevice = e.pointerType === "touch" ? "touch" : "mouse";
       e.preventDefault();
@@ -111,6 +114,10 @@ export class Input {
       const s = pts.get(e.pointerId);
       if (s) {
         s.moved = Math.max(s.moved, Math.hypot(p.x - s.x0, (p.y - s.y0) * (surface.clientHeight / Math.max(1, surface.clientWidth)))); // prettier-ignore
+        if (pts.size === 1) {
+          this.drag[0] += p.x - s.x;
+          this.drag[1] += (p.y - s.y) * (surface.clientHeight / Math.max(1, surface.clientWidth));
+        }
         s.x = p.x;
         s.y = p.y;
         this.pointer = { ...p, down: true, kind: e.pointerType };
@@ -131,7 +138,11 @@ export class Input {
       const s = pts.get(e.pointerId);
       if (!s) return;
       pts.delete(e.pointerId);
-      if (s.moved < 0.025 && e.timeStamp - s.t0 < 400) this.taps++;
+      if (s.moved < 0.025 && e.timeStamp - s.t0 < 400) {
+        this.taps++;
+        if (this.skipTap) this.skipTap = false;
+        else if (this.tapAt.length < 4) this.tapAt.push(where(e));
+      }
       if (!pts.size) this.pointer = e.pointerType === "mouse" ? { ...where(e), down: false, kind: "mouse" } : null; // prettier-ignore
     };
     on(surface, "pointerup", up);
@@ -209,6 +220,20 @@ export class Input {
     return s;
   }
 
+  // Where the taps since the last call landed (each is seen once).
+  takeTapPoints() {
+    const t = this.tapAt;
+    this.tapAt = [];
+    return t;
+  }
+
+  // The drag since the last call: [across, down], in the surface's widths.
+  takeDrag() {
+    const d = this.drag;
+    this.drag = [0, 0];
+    return d;
+  }
+
   takeTaps() {
     const t = this.taps;
     this.taps = 0;
@@ -221,6 +246,8 @@ export class Input {
     this.edges = [];
     this.swipe = null;
     this.taps = 0;
+    this.tapAt = [];
+    this.drag = [0, 0];
   }
 
   destroy() {
