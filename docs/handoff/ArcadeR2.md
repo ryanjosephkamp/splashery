@@ -73,7 +73,13 @@ fresh from main on the same branch names.
     paper flap (`your-book-magazine.mp3`, already on the site) over a light crumple; its paddle and
     wall knocks stay. Both are in `tools/sound-review.json` (status "ready", with candidates).
   - Clips with sound: `tools/arc-clip.mjs` records the game's cues and renders them into the MP4.
-- Clips on Effect review page 2: see "For the Operator".
+- Clips on Effect review page 2 (lane record `ArcadeR2`, made by this lane): `arc2-shardball`,
+  `arc2-page-breaker`, `arc2-longtail-cube`, `arc2-longtail-planet`, `arc2-longtail-ring`,
+  `arc2-note-rider-own` and `arc2-note-rider-recording`. The new sounds are for the Sound Board (the
+  Operator's note of October 7: the review page plays clips muted). Grain Garden's ✕ has no clip:
+  the fix is a tap that now works (tests/arc2.spec.mjs checks it at phone size).
+- Longtail's layer: 90,000 slots on a phone (the planet's finer tiles and body take 64,000 before
+  the beads).
 
 ## Notes
 
@@ -126,4 +132,5 @@ fresh from main on the same branch names.
   itself needed (src/ui.js) and the two runtime lines its test uses.
 - Effect review page 2: please give its videos `controls` (or an unmute) so the owner can hear the
   clips' sound.
-- Lane record `ArcadeR2` on page 2 (title "Arcade r2", built by Opus 5.5).
+- Changed sounds for the Sound Board preview: Shardball (bricks) and Page Breaker (blocks), both
+  `ready` in `tools/sound-review.json`.
