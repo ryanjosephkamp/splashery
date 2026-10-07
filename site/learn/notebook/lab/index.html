@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Lab: sharper kernels and splat fields · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Lab."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/lab/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Lab: sharper kernels and splat fields · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Lab."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/lab/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Lab: sharper kernels and splat fields</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li>
+                <a
+                  href="#brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-note-big-new-splashery-ideas-and-his-answers-on-the-splashery-universe-page-the-same-night"
+                  >Brief (written by the Operator on September 29, 2026, from the owner's note
+                  &quot;big new Splashery ideas&quot; and his answers on the Splashery Universe page
+                  the same night)</a
+                >
+              </li>
+              <li><a href="#you-own">You own</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+              <li><a href="#r2">r2</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Lab: sharper kernels and splat fields">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Lab, &quot;Sharper kernels and splat
+            fields&quot; (prefix <code>lab</code>). Branch: claude/lane-lab (and
+            claude/lane-lab-engine for its engine PR). PR titles: &quot;Engine: Lab, sharper splat
+            kernels (off by default)&quot; and, if you get to it, &quot;Phase Lab: splat fields on
+            the GPU&quot;. Handoff file: docs/handoff/Lab.md.
+          </p>
+          <h2
+            id="brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-note-big-new-splashery-ideas-and-his-answers-on-the-splashery-universe-page-the-same-night"
+          >
+            Brief (written by the Operator on September 29, 2026, from the owner's note &quot;big
+            new Splashery ideas&quot; and his answers on the Splashery Universe page the same night)
+          </h2>
+          <p>
+            The owner's words: &quot;What if we found something that's, like, totally unique that
+            nobody's ever done that's actually valuable … Could we use a different kernel for some
+            parts of this? Could we use splats that are not Gaussian? … could we use 4D
+            Gaussians?&quot; And: &quot;I almost want to make things so incredible with this that
+            people won't even realize that they're looking at Gaussian splats.&quot; His answer:
+            &quot;The Lab? One Opus lane: a short literature check, then the sharper-kernel test on
+            pages and grainy toys, then splat fields on the GPU. Keep only what beats today's
+            clips.&quot;
+          </p>
+          <p>
+            Work in this order, and stop a step early rather than ship something that doesn't
+            clearly win.
+          </p>
+          <ol>
+            <li>
+              <strong>A short literature check</strong> (about an hour): kernels other than the
+              Gaussian for splatting (for example compact or higher-order kernels,
+              &quot;sharper&quot; falloffs, generalized exponential or Student-t splats, beta
+              kernels, 2D surfels), anti-aliasing for splats (Mip-Splatting and similar), and 4D or
+              time-varying Gaussians. For each: what it changes in the renderer, what it costs, and
+              whether it fits our engine (PlayCanvas 2.22.3's unified gsplat renderer, vendored,
+              with our work-buffer modifiers in src/stage.js) and our kit-built toys (splats we
+              place ourselves, not trained). Write it as docs/lab/LITERATURE.md with links to the
+              papers (read their abstracts on arXiv or the project pages; cite, don't copy).
+            </li>
+            <li>
+              <p>
+                <strong>Sharper kernels, measured.</strong> Build the best one or two candidates as
+                an option that is off by default: a per-recipe flag (for example
+                <code>kernel: &quot;sharp&quot;</code>) and a URL switch for testing (for example
+                <code>?kernel=sharp</code>), both behind the labs switch. Don't change how any toy
+                looks by default.
+              </p>
+              <ul>
+                <li>
+                  Test on what the owner called grainy or blurry: PDF pages in the Picture lab (text
+                  and figures at phone size) and the grainy toys on lane Fidelity A's audit list
+                  (docs/handoff/FidelityA.md, &quot;## Audit&quot;; the desk lamp, the American
+                  football and the hockey puck first). Fidelity A may also list kernel requests
+                  under &quot;For the Operator&quot;.
+                </li>
+                <li>
+                  For each, make a before-and-after pair at 390×844 (stills, and a clip where motion
+                  matters) and measure: sharpness (edge width in pixels on a text line or a seam),
+                  speckle, frame time (as relative numbers in our software renderer; say plainly
+                  that the owner's phone is the real test), and splat counts.
+                </li>
+                <li>
+                  Keep only what clearly beats today's clips. Put the kernel in a small, additive
+                  engine PR (&quot;Engine: Lab, sharper splat kernels (off by default)&quot;, with
+                  tests in tests/lab-engine.spec.mjs) that merges first. Turning it on for a public
+                  toy is a later step for the owner to approve from your cards.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Splat fields on the GPU</strong>, if time allows: splats whose positions and
+              colors come from a field computed on the GPU every frame (for example the splat
+              equation toy's u, v, t programs, or a flow field), so a toy can move hundreds of
+              thousands of splats smoothly. Prototype it behind labs as one test toy on a new
+              &quot;Lab&quot; shelf (category id <code>lab</code>, label &quot;Lab&quot;, after
+              &quot;Studio&quot;), measure it, and write up what it would take to use it in Worlds
+              and the Studio.
+            </li>
+          </ol>
+          <p>
+            Engine files are shared: lane Worlds may make small additive changes in src/kit.js,
+            src/stage.js and src/pc.js at the same time, and lane Studio Sound's engine PR #81
+            touches src/motion.js and src/ui.js. Keep your changes small, additive and off by
+            default, and merge main into your branches often.
+          </p>
+          <p>
+            Clips and cards (390×844), ids <code>lab-&lt;topic&gt;</code> (for example
+            <code>lab-kernel-pdf</code>, <code>lab-kernel-lamp</code>, <code>lab-field</code>): each
+            a before-and-after pair with the numbers in the card's note. Everything stays behind
+            labs, so the Operator merges once the full suite passes; the owner decides from the
+            cards whether any kernel goes onto public toys.
+          </p>
+          <h2 id="you-own">You own</h2>
+          <ul>
+            <li>
+              docs/lab/ (new), the kernel code in the engine PR (the gsplat shader hooks in
+              src/stage.js or a new src/kernels.js, with the flag read in src/player.js or
+              src/kit.js), src/packs/lab.js (new) and its toys' entries in the shared lists, the Lab
+              category in src/toys.js, tests/lab.spec.mjs and tests/lab-engine.spec.mjs, your
+              <code>lab-*</code> screenshots and docs/handoff/Lab.md.
+            </li>
+          </ul>
+          <p>
+            Lanes Books, Worlds, Fidelity A, Studio Sound, Learn and the Integrator run at the same
+            time; leave their files alone. The laptop is locked.
+          </p>
+          <p>HOW THIS LANE RUNS</p>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and marks them. Don't ask him anything or wait for him. Put questions
+              and blockers in your final message, and the Operator answers or relays them. Messages
+              that arrive in this session &quot;From the Operator&quot; come from the coordinator on
+              the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29,
+              2026: Opus 5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the
+              Worlds content, the Studio converters, the docs and the Integrator). Any helper you
+              start uses the same model. Use at most one helper at a time.
+            </li>
+            <li>
+              Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs,
+              anything behind the labs switch, and additive engine PRs once the full test run
+              passes. Changes to toys the public already sees wait for the owner's &quot;good&quot;
+              marks. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English (color, center, gray,
+              math, license, toward, -ize endings, dates like &quot;September 29, 2026&quot;). Leave
+              code identifiers, file names and anything stored in links as they are.
+            </li>
+            <li>
+              Read first: CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are
+              binding), docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and
+              docs/handoff/history.md (lessons from earlier lanes).
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <ul>
+            <li>
+              September 29, 2026: lane started. Draft PR #83 (this lane) and the engine PR #85
+              (branch <code>claude/lane-lab-engine</code>, &quot;Engine: Lab, sharper splat kernels
+              (off by default)&quot;) opened.
+            </li>
+            <li>
+              Step 1 done:
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/lab/LITERATURE.md"
+                target="_blank"
+                rel="noopener"
+                >docs/lab/LITERATURE.md</a
+              >, the literature check (other kernels, anti-aliasing, 4D splats; what each changes in
+              our engine and whether it fits).
+            </li>
+            <li>
+              Step 2 done:
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/lab/KERNELS.md"
+                target="_blank"
+                rel="noopener"
+                >docs/lab/KERNELS.md</a
+              >. Three sharper kernels built in the engine's fragment hook and measured on the PDF
+              page, the desk lamp, the American football, the hockey puck and the splat equation
+              toy. Only <code>sharp</code> (a generalized exponential, exp(−14.7·A²)) is kept, as a
+              labs option (<code>?kernel=sharp</code> or a recipe's
+              <code>kernel: &quot;sharp&quot;</code>), off by default. It gives no clear win on
+              pages and grainy toys (their splats are a pixel or two on screen; their grain is in
+              the colors) and a real one on big, smooth splats (the splat equation torus: edges 3.70
+              → 2.70 px). The disc and the steeper A³ kernel were dropped (they show each splat as a
+              coin or a scale).
+            </li>
+            <li>
+              Step 3 done:
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/lab/FIELDS.md"
+                target="_blank"
+                rel="noopener"
+                >docs/lab/FIELDS.md</a
+              >. The &quot;Splat field&quot; test toy on a new labs-only Lab shelf: about 297,000
+              splats placed and colored by a GPU program every frame (a galaxy, an ocean, a knot),
+              through a small engine hook (<code>gpuField</code>, labs only), measured.
+            </li>
+            <li>
+              Cards: <code>lab-kernel-equation</code>, <code>lab-kernel-pdf</code>,
+              <code>lab-kernel-puck</code>, <code>lab-field-galaxy</code>,
+              <code>lab-field-ocean</code>, <code>lab-field-knot</code>.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              The kernel lives in PlayCanvas's <code>gsplatModifyPS</code> chunk (<code
+                >modifySplatColor(uv, color)</code
+              >, called after the Gaussian falloff), set on <code>scene.gsplat.material</code>; the
+              engine copies it into its unified material. No vendored code changes. It applies to
+              the whole scene, so the player sets it per toy, and never touches the chunk while
+              every toy is Gaussian.
+            </li>
+            <li>
+              A sharper kernel blends back to the Gaussian below about 3 pixels of half-width
+              (<code>fwidth</code>), or it aliases. That is also why it can't sharpen what is
+              already a pixel wide: PDF text at phone size.
+            </li>
+            <li>
+              The field hook replaces a kit toy's work-buffer program; that pass already runs for
+              every splat every frame, so a field costs no extra pass. On WebGL2 the CPU sort uses
+              the stored t = 0 places (see FIELDS.md, &quot;Sorting&quot;).
+            </li>
+            <li>
+              Measuring tools: <code>tools/lab-kernels.mjs</code> (edge width, speckle, shimmer,
+              frame time per kernel), <code>tools/lab-fields.mjs</code> (field frame time against
+              the frozen toy and the CPU cost) and <code>tools/lab-clip.mjs</code> (before-and-after
+              clips at 390×844, clock stepped by hand).
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              Frame times come from Chromium's software renderer and are relative only; the owner's
+              phone is the real test.
+            </li>
+            <li>
+              Changing the Field option rebuilds the toy and resets the view to the app's default
+              distance, not the toy's own (true of every toy with options).
+            </li>
+            <li>
+              On WebGL2 a field's splats are sorted from their t = 0 places; fine for these three
+              fields at phone size, not for a field whose splats cross in depth.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              Merge order: the engine PR first (the kernel and the <code>gpuField</code> hook), then
+              this lane's PR.
+            </li>
+            <li>
+              <code>src/toys.js</code>: the Lab category sits right after &quot;pictures&quot;; lane
+              Studio Sound adds &quot;studio&quot; at the same place, so a merge of both keeps both
+              lines (Studio first, then Lab, as the brief says).
+            </li>
+            <li>
+              For PACKS.md: a recipe can bring its own GPU program with
+              <code>gpuField(options, fit)</code> (labs only), returning
+              <code>{ glsl, wgsl }</code> work-buffer hooks; <code>src/packs/lab.js</code> is the
+              example.
+            </li>
+            <li>
+              For the backlog: the splat equation toy's typed programs could compile to a GPU field
+              (FIELDS.md, &quot;Typed programs&quot;), which needs <code>src/equation.js</code> to
+              hand back its parse tree.
+            </li>
+          </ul>
+          <h2 id="r2">r2</h2>
+          <h3 id="brief-the-operator-s-message-of-september-29-2026-word-for-word">
+            Brief (the Operator's message of September 29, 2026, word for word)
+          </h3>
+          <p>
+            From the Operator: a follow-up for this lane from the owner's review of September 29,
+            2026 (docs/reviews/2026-09-29-new-toys/review.md; Ops PR coming). Two small fixes, labs
+            only, as &quot;Lab r2&quot;. Your model stays Opus 5.5.
+          </p>
+          <p>His notes, word for word:</p>
+          <p>
+            &quot;For the Lab category: The galaxy toy doesn't seem to show it's effect when I click
+            on it... The &quot;Send a pulse&quot; button works, but clicking on the toy
+            doesn't.&quot;
+          </p>
+          <p>
+            &quot;For the &quot;Splat equation&quot;... These splats seem really, really grainy. Is
+            that on purpose? If not, or if it makes sense to also improve the sharpness, let's
+            please improve the sharpness.&quot;
+          </p>
+          <ol>
+            <li>
+              The Splat field (<code>splat-field</code>, src/packs/lab.js): a tap on the toy must
+              send the same pulse as the Toy tab's &quot;Send a pulse&quot; button, for every field
+              (galaxy, ocean, knot), at phone size and on the desktop. Find why the tap misses (my
+              guess: the tap's hit test looks for the toy's splats where the CPU copy has them, not
+              where the GPU program draws them, or a GPU field toy never registers as hit). Fix it
+              in your pack if you can. If the fix belongs in the player's tap code, make it a small
+              additive &quot;Engine: …&quot; PR on claude/lane-lab-r2-engine, merged first; the
+              input path in src/player.js is engine code (WORKSTREAMS.md, &quot;Frozen packs&quot;).
+            </li>
+            <li>
+              The Splat equation (<code>splat-equation</code>, src/packs/splat-equation.js; lane
+              Manual built it, and it's yours for this fix). Answer his question in your handoff and
+              in the card note: how much of the grain is on purpose (each dot is one splat you
+              program, up to 10,000) and how much isn't. Then make it sharp by default. Every
+              built-in program should read as a clean, solid surface at phone size: full opacity,
+              splat sizes that overlap at the program's count, flat splats that lie along the
+              surface where the equation gives a surface, and clean colors (Fidelity A's method,
+              PACKS.md &quot;Effect quality&quot;). If seeing separate splats is worth keeping for
+              learning, keep it as a &quot;Dots&quot; look beside a new default &quot;Solid&quot;
+              look. Old links and typed programs must keep working, and a program that sets size = …
+              keeps its size. Update the Manual's words only if they now say something untrue; the
+              Tinkerer's Manual PDF stays as it is, and if it's out of date, say so for the
+              Operator.
+            </li>
+          </ol>
+          <p>
+            Restart your branch from main (git fetch origin main &amp;&amp; git checkout -B
+            claude/lane-lab-r2 origin/main), one draft PR &quot;Phase Lab r2: the galaxy tap and a
+            sharp Splat equation&quot; with the five sections, and add an &quot;r2&quot; part to
+            docs/handoff/Lab.md with these notes word for word. Tests in tests/lab.spec.mjs (your
+            file; add to it): a canvas tap on the Splat field fires its pulse for each field, and
+            each Splat equation program builds with every splat at full opacity. Cards (390×844,
+            &quot;built by Opus 5.5&quot;, lane record LabR2 on the Effect review page):
+            lab-field-tap (a tap on each field) and lab-equation-sharp (each program before and
+            after, turning slowly). Full suite, prettier and us-english before you push. Push about
+            hourly and keep a check-in scheduled while long runs go. End with READY:, WORKING: or
+            BLOCKED:. When it's merged, stand down.
+          </p>
+          <h3 id="state">State</h3>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <ul>
+            <li>
+              <strong>The galaxy tap: fixed.</strong> A tap on the toy finds it with the engine's
+              GPU picking, whose pick pass drops any splat fragment under 0.3 opacity. The galaxy
+              draws its stars faint on purpose (0.3 × an arm factor of 0.25 to 1), so no star was
+              ever hit: 0 of 25 taps around the middle, at 390×844 and 1440×900; the ocean got 25 of
+              25. The work buffer is shared by the pick and draw passes, so the pack can't make
+              stars pickable without drawing them opaque (which turns the galaxy back into a solid
+              disc). The engine PR adds <code>pickAlpha</code>: a recipe may lower
+              <code>scene.gsplat.alphaClip</code> (used only by the pick, shadow and depth passes)
+              while it shows; the next toy puts back 0.3. The splat field sets 0.04. Now 25 of 25 on
+              the galaxy at both sizes. (The knot's misses are the empty space between its tubes, as
+              for any toy.)
+            </li>
+            <li>
+              <strong>The Splat equation's grain: his question answered.</strong> Only a little of
+              it was on purpose. Each splat is one (u, v) you program (up to 10,000), and the spiral
+              galaxy program scatters tiny splats at random on purpose, so it is a field of stars,
+              not a surface. The rest was not: every splat was 95% opaque, round-ish (flat 0.45) and
+              25% bigger or smaller at random (the kit's size jitter), drawn with the soft Gaussian.
+              Big half-clear blobs of uneven size overlap into a soft, blotchy haze with ridges,
+              which reads as grain at phone size.
+            </li>
+            <li>
+              <p>
+                <strong>Sharp by default.</strong> A new &quot;Splats&quot; choice:
+                <strong>Solid</strong> (default) and <strong>Dots</strong>.
+              </p>
+              <ul>
+                <li>
+                  Solid: every splat at full opacity and its exact size (a new
+                  <code>jitter: 0</code> for kit clouds, in the engine PR); a surface's splats lie
+                  flat along it (flat 0.12); a curve's are drawn out along it (the trefoil); the
+                  sharp kernel (<code>kernel: &quot;sharp&quot;</code>, which the owner marked good
+                  on this toy in round 1).
+                </li>
+                <li>
+                  Dots: each programmed splat shows as its own round dot (a grid program's at 45% of
+                  its size), for seeing what a splat is.
+                </li>
+                <li>
+                  Every program keeps its own count and size, so old links, typed programs and the
+                  Manual's gallery build the same program; a program that sets size = … keeps it.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <p>
+                <strong
+                  >The owner's marks (September 29, 2026), on both r2 cards, word for word:</strong
+                >
+                &quot;Looks basically perfect right now. If we can safely increase sharpness even
+                further, then I'd like to see what that looks like. But if not, then the resolution
+                seems fine as-is. For the ocean, I wonder if we can make this interactive (perhaps
+                in the upcoming interactivity work that we already have planned, or now; I'm
+                comfortable either way) such that clicking/tapping different parts of the liquid
+                surface sends the ripples from those locations?&quot;
+              </p>
+              <ul>
+                <li>
+                  <strong>The ocean:</strong> a tap now drops the stone where it lands (the tap's
+                  point, in field units, rides on the pulse's channels 1 and 2; all 0 again at
+                  rest); the button still drops it in the middle. Card
+                  <code>lab-field-tap-r2</code>.
+                </li>
+                <li>
+                  <strong>Sharper still:</strong> a third Splats choice, <strong>Fine</strong>: the
+                  same shape from up to four times the splats (as far as the device's budget
+                  allows), each smaller in step. Smoother surfaces, the torus's and the seashell's
+                  faint ridges gone; the trefoil and the spiral galaxy stay as they are. Solid stays
+                  the default until he says otherwise. Card
+                  <code>lab-equation-sharp-r2</code> (Solid and Fine side by side).
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h3 id="notes-2">Notes</h3>
+          <ul>
+            <li>
+              Tests added: <code>tests/lab.spec.mjs</code> (a real canvas tap fires the pulse on
+              every field at both sizes; every program at full opacity in both looks) and
+              <code>tests/lab-engine.spec.mjs</code> (pickAlpha lowers and restores the clip; jitter
+              0 gives exact sizes and the default is unchanged).
+            </li>
+          </ul>
+          <h3 id="known-issues-2">Known issues</h3>
+          <ul>
+            <li>
+              The trefoil (a curve, one splat per step along it) is much smoother but its tube still
+              has a slightly soft edge: its thickness is the splat itself.
+            </li>
+            <li>
+              The spiral galaxy program stays a field of dots in Solid too (it is scattered at
+              random on purpose).
+            </li>
+          </ul>
+          <h3 id="for-the-operator-2">For the Operator</h3>
+          <ul>
+            <li>
+              Merge the r2 engine PR first (pickAlpha and the cloud's jitter option; both change
+              nothing for other toys).
+            </li>
+            <li>
+              Lane Manual's screenshots <code>man-splat-equation-390x844.png</code> and
+              <code>-1440x900.png</code> now show the old look (I left them as they are, per the
+              rules); refresh them on main.
+            </li>
+            <li>
+              The Tinkerer's Manual: its words are still true (size and count keep their meaning),
+              but its pictures of the toy (the gallery and &quot;the same sphere with more and more
+              splats&quot;) show the old, softer look. The PDF is left as it is.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Lab.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Lab.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

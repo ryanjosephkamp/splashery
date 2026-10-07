@@ -4089,7 +4089,7 @@
     "u": "tools/",
     "k": "page",
     "d": "Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light.",
-    "w": "tools every splashery tool in one place: make and convert, open your own files, scan and measure, qr codes, sound and light. splashery is also a workshop. each of these opens in the gallery and works on your own things, on your device; nothing is uploaded."
+    "w": "tools every splashery tool in one place: make and convert, open your own files, scan and measure, qr codes, sound and light. splashery is also a workshop. each tool has its own page, and opens in the gallery, in a new tab, to work on your own things, on your device; nothing is uploaded."
   },
   {
     "t": "Orbit",
@@ -4226,17 +4226,24 @@
   },
   {
     "t": "Writing toy recipes",
-    "u": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md",
+    "u": "learn/recipes/",
     "k": "page",
     "d": "How a toy's recipe says which parts move, and how.",
     "w": "writing toy recipes how a toy's recipe says which parts move, and how. learn"
   },
   {
     "t": "The scene format",
-    "u": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md",
+    "u": "learn/scene-format/",
     "k": "page",
     "d": "What a shared link or a saved scene holds.",
     "w": "the scene format what a shared link or a saved scene holds. learn"
+  },
+  {
+    "t": "Is it right? The evidence files",
+    "u": "learn/evidence/",
+    "k": "page",
+    "d": "How each toy that claims to show something true is checked against its sources.",
+    "w": "is it right? the evidence files how each toy that claims to show something true is checked against its sources. learn"
   },
   {
     "t": "How 3D Gaussian splats work",
@@ -4293,5 +4300,47 @@
     "k": "page",
     "d": "Nothing you open leaves your device. What the live feeds and the protein fetch read, and when; no tracking, no cookies.",
     "w": "privacy nothing you open leaves your device. what the live feeds and the protein fetch read, and when; no tracking, no cookies. nothing you open leaves your device. no accounts, no tracking."
+  },
+  {
+    "t": "Contact",
+    "u": "about/contact/",
+    "k": "page",
+    "d": "Who makes Splashery and where to find the maker: his website, GitHub, LinkedIn, YouTube and GitHub Sponsors.",
+    "w": "contact who makes splashery and where to find the maker: his website, github, linkedin, youtube and github sponsors. splashery is made by ryan kamp. here is where to find him."
+  },
+  {
+    "t": "Writing toy recipes",
+    "u": "learn/recipes/",
+    "k": "page",
+    "d": "How a Splashery toy's recipe says what it is built from, which parts move and how: the reference for writing your own.",
+    "w": "writing toy recipes how a splashery toy's recipe says what it is built from, which parts move and how: the reference for writing your own. how a toy's recipe says what it is built from, which parts move, and how."
+  },
+  {
+    "t": "The scene format",
+    "u": "learn/scene-format/",
+    "k": "page",
+    "d": "What a Splashery share link or saved scene holds: the toy, its settings, its camera and its look.",
+    "w": "the scene format what a splashery share link or saved scene holds: the toy, its settings, its camera and its look. what a shared link or a saved scene holds."
+  },
+  {
+    "t": "The evidence files",
+    "u": "learn/evidence/",
+    "k": "page",
+    "d": "How Splashery checks each toy that claims to show something true about the world: claims, sources and where it simplifies.",
+    "w": "the evidence files how splashery checks each toy that claims to show something true about the world: claims, sources and where it simplifies. how each toy that claims to show something true is checked."
+  },
+  {
+    "t": "How the parallel sessions work",
+    "u": "learn/operating/",
+    "k": "page",
+    "d": "How Splashery's lanes, the Operator and the owner's reviews fit together: the rules the sessions that build Splashery follow.",
+    "w": "how the parallel sessions work how splashery's lanes, the operator and the owner's reviews fit together: the rules the sessions that build splashery follow. how the lanes, the operator and the reviews fit together."
+  },
+  {
+    "t": "Fluids in toys",
+    "u": "learn/fluids/",
+    "k": "page",
+    "d": "How Splashery's fluid toys simulate water, smoke and other fluids with splats.",
+    "w": "fluids in toys how splashery's fluid toys simulate water, smoke and other fluids with splats. how the fluid toys work."
   }
 ]

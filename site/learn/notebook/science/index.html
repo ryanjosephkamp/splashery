@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Science: real science data as splats (prefix sci) · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Science."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/science/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Science: real science data as splats (prefix sci) · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Science."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/science/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Science: real science data as splats (prefix sci)</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li>
+                <a
+                  href="#brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-question-and-answer-that-day"
+                  >Brief (written by the Operator on September 29, 2026, from the owner's question
+                  and answer that day)</a
+                >
+              </li>
+              <li><a href="#you-own">You own</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Science: real science data as splats (prefix sci)">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            You are a Splashery worker session, started by the Operator (the coordinating session).
+            Repo: ryanjosephkamp/splashery. Your lane: Science, &quot;Real science data as
+            splats&quot; (prefix <code>sci</code>). Branch: claude/lane-science. PR title:
+            &quot;Phase Science: real science data as splats&quot;. Handoff file:
+            docs/handoff/Science.md.
+          </p>
+          <h2
+            id="brief-written-by-the-operator-on-september-29-2026-from-the-owner-s-question-and-answer-that-day"
+          >
+            Brief (written by the Operator on September 29, 2026, from the owner's question and
+            answer that day)
+          </h2>
+          <p>
+            The owner asked, word for word: &quot;can we actually enable realistic scientific
+            simulations using splats, potentially offering scientists a useful tool that does
+            something valuable that's hard to achieve without splats?&quot; The Operator's research
+            page (<a
+              href="https://claude.ai/artifact/V3rJhrgPuntHLPTUR16tev"
+              target="_blank"
+              rel="noopener"
+              >https://claude.ai/artifact/V3rJhrgPuntHLPTUR16tev</a
+            >, section 3) answered honestly: splats won't replace validated simulators, and the
+            Gaussian research that compresses big simulations (Volume Encoding Gaussians,
+            ParticleGS) needs GPU training. But some science data already are Gaussians, so they
+            become splats exactly, with no training and no GPU: each splat is the published
+            measurement, and its shape shows the measurement's uncertainty. Existing desktop tools
+            (ORTEP and Mercury for ellipsoids, ThunderSTORM and napari for microscopy, SPLASH and yt
+            for SPH) already draw these; what Splashery adds is access (any phone, no install, a
+            shared link, millions of points) and uncertainty drawn as a soft shape. The owner's
+            answer: &quot;Science yes.&quot;
+          </p>
+          <p>
+            Build three labs toys on a new &quot;Science&quot; shelf behind the labs switch, in this
+            order, posting each toy's cards as soon as it is done:
+          </p>
+          <ol>
+            <li>
+              <strong>Thermal ellipsoids.</strong> Open a small-molecule CIF (<code>_cell_*</code>,
+              <code>_atom_site_*</code>, <code>_atom_site_aniso_U_11</code> … <code>_U_23</code>,
+              and <code>_atom_site_U_iso_or_equiv</code> for isotropic atoms) or an mmCIF/PDB file
+              with anisotropic records (<code>_atom_site_anisotrop</code> or <code>ANISOU</code>).
+              Each atom becomes one Gaussian whose covariance is its displacement tensor U in
+              Cartesian axes. A CIF's U is given against the reciprocal cell, so convert it: U_cart
+              = A·N·U·Nᵀ·Aᵀ, with A the orthogonalization matrix and N = diag(a*, b*, c\*); an
+              mmCIF/PDB U is already Cartesian (ANISOU is in units of 10⁻⁴ Å²). Color by element.
+              Options: the probability level (50% is the crystallographers' default: scale by
+              1.5382σ; also 30% and 90%), bonds on or off, and a &quot;Jiggle&quot; tap that samples
+              each atom's displacement from its own Gaussian every frame, so you see how atoms
+              actually vibrate. Samples: one small-molecule structure from the Crystallography Open
+              Database (CC0) and one small, high-resolution protein entry with ANISOU from the PDB
+              (CC0). Check each license on the live page and credit the depositors. Reuse the
+              parsing in <code>src/chem/</code> by importing it; put the new code in your own files
+              (<code>src/science/</code>). If <code>src/chem/</code> itself needs a change, keep it
+              small and additive, mark it, and tell me (lane Chemistry has finished, so
+              <code>src/chem/</code> is frozen: only small, marked, additive changes).
+            </li>
+            <li>
+              <strong>Super-resolution microscope.</strong> Open a ThunderSTORM CSV (x, y and
+              optionally z in nm, the localization uncertainty, intensity, frame) or a
+              <code>.smlm</code> file (a zip with a JSON manifest and a binary table;
+              <code>DecompressionStream(&quot;deflate-raw&quot;)</code> can inflate its entries).
+              Each localization becomes a Gaussian whose width is its localization precision (wider
+              in z for 3D data), colored by depth, or by frame as a choice. Zoom from the whole cell
+              down to single molecules; budgets by tier. Sample: a subset (a few MB at most) of a
+              ShareLoc.XYZ record on Zenodo that is CC BY 4.0 on its live record page (for example
+              10.5281/zenodo.5507427, microtubules and clathrin), credited to its authors. A subset
+              of CC BY data is allowed; say in the credit that it is a subset.
+            </li>
+            <li>
+              <strong>Galaxy in a box.</strong> A build tool (<code>tools/sci-galaxy.mjs</code>,
+              pinned devDependencies listed in LICENSES.md) cuts a gas subset from a FIRE-2 snapshot
+              (CC BY 4.0 on FlatHUB, with the citation it asks for) into a small splat file: each
+              particle a Gaussian of about half its smoothing length, colored by temperature. Its
+              About text says it is approximate (the simulation's kernel isn't a Gaussian, and
+              blending isn't a column-density integral). If the data are too big for the container's
+              disk or too slow to fetch, cut this toy and say so in &quot;What was cut&quot;; don't
+              substitute data under another license without asking me.
+            </li>
+          </ol>
+          <p>Every toy:</p>
+          <ul>
+            <li>
+              Opens your own file from the Toy tab (the input panel; files stay on the device),
+              shows its sample by default, and says plainly when a file has no data it can use (a
+              CIF without anisotropic U: isotropic spheres, with a note).
+            </li>
+            <li>
+              About text: what each splat means, where the sample comes from (with credit), the
+              standard tools scientists use for this, and the limits (for looking and sharing, not
+              for measurement).
+            </li>
+            <li>
+              A sound, a how-to line, an entry in tools/toy-plan.json, a thumbnail, and credits.
+            </li>
+            <li>
+              Effect quality rules apply: sharp at phone size, no speckle, solid-looking atoms when
+              the probability level is high.
+            </li>
+          </ul>
+          <p>
+            Performance: phones first. Measure how many splats each toy draws at 30 fps or better on
+            the mid tier and set budgets by tier. Nothing loads until a Science toy opens. Keep the
+            &quot;embed transfer ≤ 30 MB&quot; test green; keep samples small.
+          </p>
+          <p>
+            No engine changes are expected. If you need one, put it in a small, additive
+            &quot;Engine: …&quot; PR first and tell me.
+          </p>
+          <p>
+            Cards (390×844, each labeled &quot;built by Opus 5.5&quot;, in the lane record
+            <code>Science</code> on the Effect review page, which the Operator made):
+          </p>
+          <ul>
+            <li><code>sci-ellipsoids</code>: the small molecule at 50%, turning slowly.</li>
+            <li><code>sci-jiggle</code>: the Jiggle tap on the same molecule.</li>
+            <li>
+              <code>sci-protein</code>: the protein's ellipsoids, zooming in to a few residues.
+            </li>
+            <li><code>sci-microscope</code>: the whole cell, then zooming to single molecules.</li>
+            <li><code>sci-galaxy</code>: the galaxy turning (if not cut).</li>
+            <li><code>sci-open</code>: opening a file of your own (a second CIF, say).</li>
+          </ul>
+          <p>
+            Tests in tests/sci.spec.mjs: the CIF reader and the U conversion (check one atom's
+            Cartesian U against a hand-worked value), ellipsoid axes equal the square roots of U's
+            eigenvalues times the probability scale, the CSV and .smlm readers, budgets per tier,
+            nothing loads before a Science toy opens, and screenshots at 390×844 and 1440×900.
+          </p>
+          <h2 id="you-own">You own</h2>
+          <p>
+            <code>src/science/</code> (new), <code>src/packs/science.js</code> (new),
+            <code>assets/toys/&lt;your toys&gt;/</code>, <code>tools/sci-*.mjs</code>,
+            <code>tests/sci.spec.mjs</code>, your <code>sci-*</code> screenshots,
+            docs/handoff/Science.md, the &quot;Science&quot; shelf entry in src/toys.js, your toys'
+            entries in the shared lists, and small, marked, additive changes in
+            <code>src/chem/</code> if truly needed.
+          </p>
+          <p>
+            Lanes Worlds (hybrid), Fluids, Books r4, UI r2, Video 3D, Fix4 and the Integrators run
+            at the same time; leave their files alone. The laptop is locked.
+          </p>
+          <p>HOW THIS LANE RUNS</p>
+          <ul>
+            <li>
+              The Operator session runs the lanes. The owner, Ryan, talks only to the Operator; he
+              reviews clips and marks them. Don't ask him anything or wait for him. Put questions
+              and blockers in your final message, and the Operator answers or relays them. Messages
+              that arrive in this session &quot;From the Operator&quot; come from the coordinator on
+              the owner's behalf.
+            </li>
+            <li>
+              Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29,
+              2026: Opus 5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the
+              Worlds content, the Studio converters, the docs and the Integrator). Any helper you
+              start uses the same model. Use at most one helper at a time.
+            </li>
+            <li>
+              Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs,
+              anything behind the labs switch, and additive engine PRs once the full test run
+              passes. Changes to toys the public already sees wait for the owner's &quot;good&quot;
+              marks. Never merge anything yourself.
+            </li>
+            <li>
+              Language: every new public-facing text is in American English (color, center, gray,
+              math, license, toward, -ize endings, dates like &quot;September 29, 2026&quot;). Leave
+              code identifiers, file names and anything stored in links as they are.
+            </li>
+            <li>
+              Read first: CLAUDE.md (the ground rules and &quot;Effect quality rules&quot; are
+              binding), docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and
+              docs/handoff/history.md (lessons from earlier lanes).
+            </li>
+            <li>
+              Your handoff file: create it. Start it with this brief, word for word, under &quot;##
+              Brief&quot;, then keep &quot;## State
+            </li>
+          </ul>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <ul>
+            <li>
+              September 30, 2026: all three toys built on the new Science shelf (labs only), with
+              their samples, sounds, how-to and About texts, plan entries, credits, thumbnails and
+              tests. Cards <code>sci-ellipsoids</code>, <code>sci-jiggle</code>,
+              <code>sci-protein</code>, <code>sci-open</code>, <code>sci-microscope</code> and
+              <code>sci-galaxy</code> are on the Effect review page (lane record
+              <code>Science</code>, three groups). Draft PR #132.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              September 30, 2026 (evening): the owner marked <code>sci-ellipsoids</code>,
+              <code>sci-jiggle</code>, <code>sci-open</code> and <code>sci-protein</code> good, and
+              asked for more sharpness on the microscope and the galaxy, whether there are more
+              microscope images, the file format, and to see the inputs. Done:
+              <code>sci-microscope-r2</code>, <code>sci-galaxy-r2</code>, a second microscope sample
+              (a whole nucleus in 3D), a precision filter, and source cards
+              (<code>sci-source-microscope</code>, <code>sci-source-nucleus</code>,
+              <code>sci-source-galaxy</code>). Sounds redone to PACKS.md 7e (quiet, no clicks,
+              whooshes, pads or notes). Main merged twice (Fluids, the sound review).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <p>
+                October 2, 2026: #132 merged. Round 2 (the owner's review of October 2, after trying
+                the toys on his phone; the Operator's brief of 07:05 UTC): PR #181
+                (<code>claude/lane-science-r2</code>) and the engine part, &quot;Engine: …&quot; PR
+                #182 (<code>claude/lane-science-engine</code>), both merged on October 2, 2026
+                (12:31 UTC) after the Operator's split full run on main:
+              </p>
+              <ul>
+                <li>
+                  Thermal ellipsoids: the atoms' and bonds' colors returned <code>{ keep }</code>,
+                  and the kit adds 16 to the part field for it, which is where the packed type
+                  lives: every atom splat became a whole-atom Gaussian (his big overlapping discs,
+                  the bonds hidden, and about 23 times slower on the low tier). Fixed, with a test
+                  that decodes every splat's type; density 0.6 (36k splats on a phone). The 50%
+                  scale (1.5382) was right all along. Only with labs on, which is why r1's clips
+                  missed it.
+                </li>
+                <li>
+                  Microscope and galaxy: the normal pinch and wheel zoom the camera itself, all the
+                  way in and out (<code>closeUp</code>: 0.02 and 0.05 radii, about 150 and 60 times
+                  closer than home); the tap-to-zoom magnifier is gone. The shader's free mode keeps
+                  every splat at least a pixel wide at its own distance from the camera and fades
+                  what is much nearer than the point the camera looks at. The microscope's tap shows
+                  a slice 200 nm thick at the tapped depth; the galaxy's peels the hot gas.
+                </li>
+                <li>
+                  Cards on page 2: <code>sci-microscope-r3</code>,
+                  <code>sci-microscope-nucleus-r2</code>, <code>sci-galaxy-r4</code>,
+                  <code>sci-ellipsoids-phone</code>, <code>sci-protein-phone</code> (MP4s); the
+                  cards they replace are marked (<code>sci-galaxy-r3</code>,
+                  <code>sci-microscope-nucleus</code>, and on page 1
+                  <code>sci-microscope-r2</code> and <code>sci-ellipsoids</code>).
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              State at hand-off (October 2, 2026, 12:55 UTC): everything is merged; nothing of the
+              lane is open. The five r2 cards wait for the owner's marks (none yet). No check-ins
+              are scheduled; the Operator comes back if the owner asks for more. The PACKS.md notes
+              below (gpuField's per-splat data, the part field's +16, the camera's home after a
+              rebuild) go into the Operator's next Ops PR.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <strong>Main merge of October 1, 2026 (Books r4, engine fix 4).</strong>
+              <code>sci</code>, <code>kit</code>, <code>help</code>, <code>smoke</code> and
+              <code>fx4-engine</code> specs: 97 passed, 1 failed. The failure is the smoke rigs test
+              (line 749, the back-to-rest pixel check). It fails the same way on plain
+              <code>origin/main</code> (8a2e05ed) in a separate worktree, so it is not this
+              branch's.
+            </li>
+            <li>
+              <strong>Owner's marks (23:07 UTC, September 30, 2026).</strong> Every current card is
+              marked good, including <code>sci-galaxy-r3</code> on page 2. Nothing is left to fix.
+            </li>
+            <li>
+              <strong>Latest main merge (September 30, 2026, evening).</strong> Main's Worlds hybrid
+              mode merged in; the CREDITS.md conflict kept both sections, and the nucleus sample
+              (Zenodo 7233696, CC BY 4.0, checked on the live record) now has its own entry in
+              CREDITS.md and <code>tools/assets.json</code>. After the merge, <code>sci</code>,
+              <code>kit</code>, <code>help</code> and <code>smoke</code> specs: 94 passed, 0 failed.
+            </li>
+            <li>
+              <strong>Files.</strong> <code>src/science/crystal.js</code> (CIF, mmCIF and PDB
+              readers; the cell, U_cart = A·N·U·Nᵀ·Aᵀ, eigenvalues, the probability scale),
+              <code>src/science/smlm.js</code> (zip entries inflated with
+              <code>DecompressionStream(&quot;deflate-raw&quot;)</code>, .smlm tables, ThunderSTORM
+              CSV), <code>src/science/field.js</code> (the toys' GPU program),
+              <code>src/packs/science.js</code> (the three recipes),
+              <code>tools/sci-clip.mjs</code> (the cards, labs on),
+              <code>tools/sci-samples.mjs</code> (the microscope's sample),
+              <code>tools/sci-galaxy.mjs</code> (the galaxy's sample),
+              <code>tests/sci.spec.mjs</code>.
+            </li>
+            <li>
+              <strong>No engine change.</strong> The toys use the labs GPU-field hook
+              (<code>gpuField</code>, lane Lab). Their program replaces the kit's for these toys, so
+              each splat's four splatAnim values are its own: an atom's principal frame (a
+              quaternion in bytes), its three σ and a seed, so every splat of an atom jiggles by the
+              same <code>R·diag(σ)·z(t)</code> (z: three cosines per axis, unit variance); a
+              localization's true size; a gas particle's temperature. Uniforms come through
+              <code>out.morph</code> (jiggle, magnification, a size floor, a near clip),
+              <code>out.glow</code> (the magnifier's focus) and <code>out.grow</code> (the hot-gas
+              peel). Without labs the toys still draw (the kit ignores the unknown kinds), only
+              without the jiggle, the zoom and the true localization sizes; the thumbnails are drawn
+              that way.
+            </li>
+            <li>
+              <strong>One marked change in <code>src/chem/</code></strong
+              >: <code>eachCifToken</code> in <code>src/chem/protein.js</code> is now exported (one
+              word and a comment). <code>readCif</code> there groups tags by the dotted mmCIF style
+              only, so small-molecule CIF tags (<code>_cell_length_a</code>) need a reader by full
+              tag names (<code>readCifBlocks</code>).
+            </li>
+            <li>
+              <strong>Zoom.</strong> The camera can't come nearer than 1.25 toy radii and can't pan,
+              so the zoom is a magnifier inside the toy (everything scales about a focus point,
+              which moves to the middle); a scaling keeps the depth order, so the CPU sort stays
+              right. Zoomed in, a clipping slab fades whatever is in front of the focus.
+            </li>
+            <li>
+              <strong>Choices.</strong> Hydrogens that ride on their atoms are drawn as small
+              spheres by default (as ORTEP plots do; &quot;As refined&quot; shows their refined
+              Uiso). Each structure is turned to face the camera (its flattest direction toward
+              you). The aspirin sample is form II (the CIF's block is &quot;aspirin-form2&quot;).
+              Crambin's PDB file has 6 atoms whose U is not positive definite (real, in the
+              deposit); the toy says so.
+            </li>
+            <li>
+              <strong>Galaxy.</strong> m11i (a dwarf, 0.9 GB) read as an irregular blob, so the
+              sample is m12i (Milky Way–mass, four files, 7.2 GB, read one at a time): 300,000 of
+              the 2.37 million gas particles in a 40 × 12 × 40 kpc box, each drawn wider by the cube
+              root of the thinning; the gas is cut round inside the box. Temperatures use a hydrogen
+              fraction of 0.76 (jsfive can't hold the 11-column metallicity array of a
+              14-million-particle file).
+            </li>
+            <li>
+              <strong>Budgets and speed.</strong> Microscope density 1.4 (84k, 196k, 280k, 392k
+              localizations by tier; the sample's 170,401 all show from mid up), galaxy density 1
+              (60k to 280k; its big see-through splats overlap), ellipsoids the kit's count (atoms
+              are few). Frame times in the container's SwiftShader at 390×844, device pixel ratio 2,
+              mid tier (a CPU renderer, so only the ratios mean anything): ellipsoids 219 ms,
+              microscope 528 ms, galaxy 807 ms, Lab's splat field 341 ms for comparison. Real-phone
+              frame rates are not measured.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong>Sharper microscope (r2).</strong> Measured at 390×844 CSS, device pixel ratio
+              2, with a Tenengrad score (mean squared gradient; <code>.cache/sci/sharp.mjs</code>,
+              not committed): overview 2797 → 2965, zoomed on the clathrin pit 10.0 → 22.8. What did
+              it: each localization carries the same total light (ThunderSTORM's normalized
+              Gaussians: opacity ∝ (median σ / σ)²), a slice about the tapped depth when zoomed (the
+              clip value's sign asks for both sides), the most crowded depth near the tap, a
+              Precision filter (better than 5 or 3 nm), and clips rendered at 2× (the old 390-pixel
+              GIFs were enlarged on the phone). A smaller minimum splat size changed nothing
+              measurable.
+            </li>
+            <li>
+              <strong>Sharper galaxy (r2).</strong> Overview 100 → 226. The file now keeps all of
+              the dense gas (the 195,000 smallest smoothing lengths in the box, drawn at their own
+              size) and a random 4.8% of the diffuse gas (drawn 2.75 times wider); before, every
+              particle was thinned 1 in 8 and drawn 2 times wider. Keeping the thinned gas's column
+              (opacity × widening) brought back a haze over the disk, so it stays faint. Lower tiers
+              keep 65% dense and 35% diffuse and thin each evenly.
+            </li>
+            <li>
+              <strong>Microscope samples and formats.</strong> Two samples (microtubules and
+              clathrin; a whole nucleus in 3D), both CC BY 4.0 from ShareLoc.XYZ, cut by
+              <code>tools/sci-samples.mjs</code>; people can open their own .smlm (ShareLoc's zip of
+              a JSON manifest and binary tables) or a ThunderSTORM CSV, read on the device. The
+              reader also takes Cramér–Rao bounds (crlbX, crlbY, crlbZ) as the precision. A
+              nuclear-pore record (gp210) was tried and dropped: it has no precision column, and the
+              20 nm default width smears each pore's ring.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong>Galaxy r3</strong> (the owner's note on <code>sci-galaxy-r2</code>: sharper
+              box edges, and the spiral sharper if possible): the edges are lines of splats
+              stretched along them, and each particle is now the Gaussian with the same spread as
+              FIRE's cubic-spline kernel (σ = 0.274 h per axis, h being the kernel's support radius;
+              before, 0.5 h). Overview 226 → 672, zoomed 12 → 42. <code>sci-galaxy-r3</code> is on
+              page 2 and replaces <code>sci-galaxy-r2</code>.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              Frame rates on a real phone are unmeasured (no GPU here); the galaxy is the heaviest
+              (overdraw).
+            </li>
+            <li>
+              On WebGL2 the sort is the CPU's from the built places; the jiggle moves atoms by
+              fractions of an ångström, so it doesn't show.
+            </li>
+            <li>
+              The jiggle moves each atom independently (the data are per-atom Gaussians), so a
+              hydrogen can move against its carbon.
+            </li>
+            <li>
+              A tap that re-aims the zoomed-in ellipsoids goes through the pick pass; it lands where
+              the magnified splats are drawn, and the recipe maps it back.
+            </li>
+            <li>
+              r2: close up, each localization (or gas particle) is drawn at its true size, so
+              uncertain ones are big, soft spots; that is the data, not a blur. The microscope stops
+              at 0.02 radii because, closer, the camera sits inside a 3D cloud of molecules.
+            </li>
+            <li>
+              r2: WebGPU couldn't be checked here (the page crashes in this sandbox's headless
+              Chromium); the phone bug was in the packing, so the fix holds on both renderers.
+            </li>
+          </ul>
+          <ul>
+            <li>
+              Page 1 of the Effect review filled its 1 GB of clip storage during the r2 round.
+              <code>sci-microscope-r2</code> and the source cards are on page 1;
+              <code>sci-galaxy-r2</code> and <code>sci-microscope-nucleus</code> are on page 2 (<a
+                href="https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK"
+                target="_blank"
+                rel="noopener"
+                >https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK</a
+              >) as MP4s, and page 1's <code>sci-galaxy</code> has
+              <code>replacedBy: &quot;page2:sci-galaxy-r2&quot;</code>.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              <strong>package.json</strong>: <code>jsfive</code> 0.4.2 (public domain, based on
+              BSD-3 pyfive; depends on <code>pako</code> 2.2.0, MIT AND Zlib) added as a pinned
+              devDependency for <code>tools/sci-galaxy.mjs</code>, as the brief asked; listed in
+              LICENSES.md. package.json and package-lock.json are yours to accept.
+            </li>
+            <li>
+              <strong><code>src/chem/protein.js</code></strong
+              >: one additive, marked change (<code>export</code> on <code>eachCifToken</code>).
+            </li>
+            <li>
+              <strong>A new category</strong> <code>science</code> (&quot;Science&quot;) in
+              <code>CATEGORIES</code> in <code>src/toys.js</code>, after Lab.
+            </li>
+            <li>
+              For PACKS.md: a lesson: <code>gpuField</code> can carry per-splat data for any purpose
+              in the four splatAnim floats (kind numbers of 1000 and up are safe in the kit's
+              program), and uniforms can ride on <code>out.morph</code>, <code>out.glow</code> and
+              <code>out.grow</code> (<code>src/science/field.js</code> is an example).
+            </li>
+            <li>
+              For PACKS.md: a kit color function's <code>{ keep: true }</code> (or
+              <code>pattern: false</code>) adds 16 to the part field (anim x). A recipe that packs
+              its own data in the part field must not use them.
+            </li>
+            <li>
+              For PACKS.md: rebuilding a toy with new options resets the camera's home to the app's
+              default distance, not the toy's own <code>camera.distance</code> (a clip tool that
+              snaps to home sees it jump).
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Science.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Science.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
