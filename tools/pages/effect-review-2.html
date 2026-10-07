@@ -221,7 +221,8 @@
     border-color: var(--good);
     color: var(--good);
   }
-  .marks button[data-v="fix"][aria-pressed="true"] {
+  .marks button[data-v="fix"][aria-pressed="true"],
+  .marks button[data-v="sharper"][aria-pressed="true"] {
     background: var(--fix-soft);
     border-color: var(--fix);
     color: var(--fix);
@@ -333,8 +334,9 @@
     <p>
       Clips of new and changed tap effects from every lane. Each clip starts a moment before the
       tap. Mark each one "Looks right", or tap "Needs work", write your note and tap "Send to the
-      lane". A "Needs work" mark reaches the lane only when you send it with its note; until then
-      the clip stays under "Not marked yet".
+      lane". "Just sharper" sends it straight to the lane as needing work, with the note that
+      everything else looks right and only the sharpness needs work. A "Needs work" mark reaches the
+      lane only when you send it with its note; until then the clip stays under "Not marked yet".
     </p>
     <p>
       Page 1 filled its storage on September 30, 2026, so new clips come here. Clips from before
@@ -370,7 +372,11 @@
   //   lanes/<lane id>   { title, note, order, finished, groups: [{ id, title, note }] }
   //   cards/<card id>   { lane, group, order, name, said, now, asset | clip, video,
   //                       replacedBy, at }
-  //   verdicts/<card id> { verdict: "good" | "fix" | "", note, at }   (your marks)
+  //   verdicts/<card id> { verdict: "good" | "fix" | "", note, at, sharper }   (your marks)
+  // "Just sharper" (the owner's request of October 7, 2026) stores verdict "fix" with
+  // sharper: true and the SHARPER note below in one tap, so lanes read it like any other fix.
+  const SHARPER =
+    "Everything else looks right. Just make it sharper and less grainy (finer, denser splats where it shows; no blur, no speckle).";
   const els = {
     list: document.getElementById("list"),
     count: document.getElementById("count"),
@@ -466,7 +472,7 @@
       : m.verdict === "good"
         ? '<span class="state good">Looks right</span>'
         : m.verdict === "fix"
-          ? '<span class="state fix">Needs work</span>'
+          ? `<span class="state fix">${m.sharper ? "Just sharper" : "Needs work"}</span>`
           : "";
     const src = clipSrc(t);
     const alt = `${esc(t.name)}: ${esc(t.now)}`;
@@ -488,9 +494,10 @@
         </dl>
         <div class="marks" role="group" aria-label="Your verdict on ${esc(t.name)}">
           <button type="button" data-v="good" aria-pressed="${m.verdict === "good"}">Looks right</button>
-          <button type="button" data-v="fix" aria-pressed="${m.verdict === "fix" || newFix}">Needs work</button>
+          <button type="button" data-v="fix" aria-pressed="${(m.verdict === "fix" && !m.sharper) || newFix}">Needs work</button>
+          <button type="button" data-v="sharper" aria-pressed="${m.verdict === "fix" && !!m.sharper && !isDraft}">Just sharper</button>
         </div>
-        <textarea id="note-${esc(t.id)}" data-note placeholder="What should change? The lane sees this when you send it." aria-label="Note on ${esc(t.name)}" ${isDraft || m.verdict === "fix" || m.note ? "" : "hidden"}>${esc(isDraft ? draft.note : m.note || "")}</textarea>
+        <textarea id="note-${esc(t.id)}" data-note placeholder="What should change? The lane sees this when you send it." aria-label="Note on ${esc(t.name)}" ${isDraft || ((m.verdict === "fix" || m.note) && !m.sharper) ? "" : "hidden"}>${esc(isDraft ? draft.note : m.note || "")}</textarea>
         <div class="send" ${isDraft ? "" : "hidden"}>
           <button type="button" data-send ${String(draft?.note ?? "").trim() || !newFix ? "" : "disabled"}>${newFix ? "Send to the lane" : "Save note"}</button>
           <button type="button" data-cancel>${newFix ? "Cancel" : "Undo changes"}</button>
@@ -629,7 +636,7 @@
     }
     delete pending[id];
     keepDrafts();
-    save(id, { verdict, note: text }, el);
+    save(id, { verdict, note: text, sharper: false }, el);
     render();
   }
 
@@ -645,9 +652,21 @@
     }
     const b = e.target.closest(".marks button");
     if (!b) return;
-    if (b.dataset.v === "fix" && marks[id]?.verdict !== "fix") {
+    if (b.dataset.v === "sharper") {
+      // One tap: stored and sent at once. Tapping it again clears the mark.
+      delete pending[id];
+      keepDrafts();
+      if (marks[id]?.verdict === "fix" && marks[id]?.sharper)
+        save(id, { verdict: "", note: "", sharper: false }, el);
+      else save(id, { verdict: "fix", note: SHARPER, sharper: true }, el);
+      return render();
+    }
+    if (b.dataset.v === "fix" && (marks[id]?.verdict !== "fix" || marks[id]?.sharper)) {
       // Open the note first; nothing is stored until "Send to the lane".
-      pending[id] = { note: pending[id]?.note ?? marks[id]?.note ?? "", fix: true };
+      pending[id] = {
+        note: pending[id]?.note ?? (marks[id]?.sharper ? "" : marks[id]?.note) ?? "",
+        fix: true,
+      };
       keepDrafts();
       render();
       document.getElementById(`note-${id}`)?.focus();
@@ -656,7 +675,7 @@
     const v = marks[id]?.verdict === b.dataset.v ? "" : b.dataset.v;
     delete pending[id];
     keepDrafts();
-    save(id, { verdict: v }, el);
+    save(id, marks[id]?.sharper ? { verdict: v, sharper: false, note: "" } : { verdict: v }, el);
     render();
   });
 
