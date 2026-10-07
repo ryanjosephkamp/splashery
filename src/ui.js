@@ -63,6 +63,11 @@ export function createUI(app) {
     toySlider: $("toy-slider"), // lane Pages r6
     toySliderLabel: $("toy-slider-label"),
     toySliderInput: $("toy-slider-input"),
+    stageDial: $("stage-dial"), // Live r8
+    stageDialInput: $("stage-dial-input"),
+    stageDialLabel: $("stage-dial-label"),
+    stageDialHide: $("stage-dial-hide"),
+    stageDialShow: $("stage-dial-show"),
     tabs: $("tabs"),
     panes: $("panes"),
     shelf: $("shelf"),
@@ -644,6 +649,7 @@ export function createUI(app) {
       row.appendChild(input);
       els.toyOptions.appendChild(row);
     }
+    renderStageDial(info, recipe); // Live r8
     inputDrop = null;
     inputShown = null;
     if (recipe?.input) renderInputPanel(recipe.input);
@@ -2672,6 +2678,65 @@ export function createUI(app) {
   els.toySliderInput.addEventListener("input", () => {
     if (sliderId !== null)
       app.player.sliderInput(sliderId, Number(els.toySliderInput.value) / 1000);
+  });
+
+  // ---- The depth slider over the stage (lane Live r8) ------------------------------
+  // A kit toy's slider option marked `stage: true` (the Splat mirror's depth)
+  // also shows as a small vertical slider over the stage's right edge, page
+  // controls rather than splats. It sets the same option as the Toy tab's
+  // slider (on release, so the toy rebuilds once), and follows it. The ×
+  // hides it and a small button with its name brings it back; that choice is
+  // remembered on this device (one choice for every toy).
+  const DIAL_KEY = "splashery.stageDialHidden";
+  let dialOption = null;
+  let dialHide = false;
+  try {
+    dialHide = localStorage.getItem(DIAL_KEY) === "1";
+  } catch {
+    // No storage: shown, and a hide lasts this visit.
+  }
+  function setDialHidden(on) {
+    dialHide = on;
+    try {
+      if (on) localStorage.setItem(DIAL_KEY, "1");
+      else localStorage.removeItem(DIAL_KEY);
+    } catch {
+      // No storage: it still hides now.
+    }
+    showDial();
+  }
+  function showDial() {
+    els.stageDial.hidden = !dialOption || dialHide;
+    els.stageDialShow.hidden = !dialOption || !dialHide;
+    document.body.classList.toggle("has-stage-dial", !!dialOption);
+  }
+  function renderStageDial(info, recipe) {
+    const o = (recipe?.options || []).find((x) => x.stage && (x.type === "slider" || !x.type));
+    dialOption = o || null;
+    if (o) {
+      const input = els.stageDialInput;
+      input.min = String(o.min ?? 0);
+      input.max = String(o.max ?? 1);
+      input.step = String(o.step ?? 0.01);
+      input.value = String(info.options?.[o.key] ?? o.default);
+      input.setAttribute("aria-label", o.label);
+      els.stageDialLabel.textContent = o.label;
+      els.stageDialShow.textContent = o.label;
+      els.stageDialShow.setAttribute("aria-label", `Show the ${o.label.toLowerCase()} slider`);
+      els.stageDialHide.setAttribute("aria-label", `Hide the ${o.label.toLowerCase()} slider`);
+    }
+    showDial();
+  }
+  els.stageDialInput.addEventListener("change", () => {
+    if (dialOption) app.setToyOption(dialOption.key, Number(els.stageDialInput.value));
+  });
+  els.stageDialHide.addEventListener("click", () => {
+    setDialHidden(true);
+    els.stageDialShow.focus();
+  });
+  els.stageDialShow.addEventListener("click", () => {
+    setDialHidden(false);
+    els.stageDialInput.focus();
   });
 
   // ---- Toy help (lane Help) ---------------------------------------------------------

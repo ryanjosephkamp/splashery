@@ -338,7 +338,17 @@ const PHOTO_3D = {
         { id: "custom", label: "Your photo (open one below)" },
       ],
     },
-    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
+    // Live r8: also a slider over the stage.
+    {
+      key: "depth",
+      label: "Depth",
+      type: "slider",
+      min: 0,
+      max: 1,
+      step: 0.05,
+      default: 0.5,
+      stage: true,
+    },
     {
       key: "original",
       label: "Show the original",
