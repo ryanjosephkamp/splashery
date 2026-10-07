@@ -2797,6 +2797,28 @@ export const TOY_SOUNDS = {
     { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.12 },
     { voice: "wood", at: 2.6, f: 660, decay: 0.15, vol: 0.12 },
   ],
+  // Lane QR craft: soft and wooden, not electronic. Tiles turning over: a
+  // run of light wooden clicks under a soft breath.
+  "qr-picture": [
+    { voice: "breath", f: 760, to: 0.9, decay: 0.9, vol: 0.03 },
+    { voice: "wood", at: 0.5, f: 940, decay: 0.08, vol: 0.2 },
+    { voice: "wood", at: 1.4, f: 880, decay: 0.08, vol: 0.18 },
+    { voice: "wood", at: 2.3, f: 980, decay: 0.08, vol: 0.16 },
+  ],
+  // A run of wooden clacks for the toppling dominoes, settling to a rest.
+  "qr-build": [
+    { voice: "wood", f: 1250, decay: 0.05, vol: 0.12 },
+    { voice: "wood", at: 0.35, f: 1180, decay: 0.05, vol: 0.11 },
+    { voice: "wood", at: 0.7, f: 1300, decay: 0.05, vol: 0.1 },
+    { voice: "wood", at: 1.05, f: 1220, decay: 0.05, vol: 0.09 },
+    { voice: "thud", at: 1.4, f: 150, decay: 0.2, vol: 0.12 },
+  ],
+  // A soft breath as the scanner's line sweeps, then a gentle low beep of a
+  // read (a sine, not a whistle).
+  barcodes: [
+    { voice: "breath", f: 900, to: 1.05, decay: 1.2, vol: 0.025 },
+    { voice: "bell", at: 1.9, f: 660, decay: 0.25, vol: 0.16 },
+  ],
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint

@@ -3541,6 +3541,36 @@
     "l": 1
   },
   {
+    "t": "Picture QR",
+    "u": "toys/qr-picture/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick a picture or open your own, then tap to turn the tiles over.",
+    "w": "picture qr studio studio qr code picture photo halftone image art custom scan png qr-picture",
+    "i": "../assets/toys/qr-picture/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "QR from real things",
+    "u": "toys/qr-build/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
+    "w": "qr from real things studio studio qr code dominoes marbles tiles flip build physics chain reaction scan qr-build",
+    "i": "../assets/toys/qr-build/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Other barcodes",
+    "u": "toys/barcodes/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick a kind of barcode in the Toy tab and type what it holds. Tap to scan it.",
+    "w": "other barcodes studio studio barcode code 128 ean-13 upc-a data matrix aztec check digit scanner laser barcodes",
+    "i": "../assets/toys/barcodes/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Photo to 3D",
     "u": "toys/photo-3d/",
     "k": "toy",
