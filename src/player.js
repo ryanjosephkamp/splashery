@@ -171,8 +171,12 @@ export class Player {
     this.painter = new Painter(this.stage);
     this.camera.onShake = () => this.shake();
     this.stage.onUpdate((dt) => this.update(dt));
+    // Owned listeners leave with the player (destroy() aborts this).
+    this.lifetime = new AbortController();
     this.media = matchMedia("(prefers-color-scheme: dark)");
-    this.media.addEventListener("change", () => this.applyLook());
+    this.media.addEventListener("change", () => this.applyLook(), {
+      signal: this.lifetime.signal,
+    });
     this.applyLook();
     this.watchDeviceShake();
     return this;
@@ -1159,20 +1163,24 @@ export class Player {
     if (typeof DeviceMotionEvent === "undefined") return;
     let last = 0;
     let hits = 0;
-    addEventListener("devicemotion", (e) => {
-      const a = e.accelerationIncludingGravity || e.acceleration;
-      if (!a) return;
-      const m = Math.hypot(a.x || 0, a.y || 0, a.z || 0);
-      const now = performance.now();
-      if (m > 24) {
-        hits = now - last < 700 ? hits + 1 : 1;
-        last = now;
-        if (hits >= 3) {
-          hits = 0;
-          this.shake();
+    addEventListener(
+      "devicemotion",
+      (e) => {
+        const a = e.accelerationIncludingGravity || e.acceleration;
+        if (!a) return;
+        const m = Math.hypot(a.x || 0, a.y || 0, a.z || 0);
+        const now = performance.now();
+        if (m > 24) {
+          hits = now - last < 700 ? hits + 1 : 1;
+          last = now;
+          if (hits >= 3) {
+            hits = 0;
+            this.shake();
+          }
         }
-      }
-    });
+      },
+      { signal: this.lifetime.signal },
+    );
   }
 
   resetCamera() {
@@ -1847,6 +1855,7 @@ export class Player {
 
   destroy() {
     this.loadToken++;
+    this.lifetime?.abort();
     this.pictures?.destroy(); // Pictures
     this.closeMedia();
     this.painter?.detach();
