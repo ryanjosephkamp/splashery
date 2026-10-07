@@ -2315,6 +2315,12 @@ export const TOY_HELP = {
     about:
       "Every star within about 65 light-years (20 parsecs) of the Sun, where it really is: about 2,200 stars measured by ESA's Gaia spacecraft, from the tiny shift of each star's position as Earth goes round the Sun. About 35 of the brightest, which Gaia cannot measure, like Sirius and Vega, come from the older Hipparcos survey (via the HYG database).\n\nThe Sun is in the middle; the faint rings lie in our Galaxy's plane, and the line points to its center. Each star's color comes from its temperature: red dwarfs, the most common stars, are orange-red; hot stars are blue-white. The sizes show brightness, not size. Tap to fly to a named star and see its distance; the first is Alpha Centauri, with Proxima Centauri, the nearest star of all, beside it.",
   },
+  "powers-of-ten": {
+    howTo:
+      "Pinch, scroll or drag up or down to zoom from a garden to a galaxy or a molecule. Tap to play.",
+    about:
+      "One continuous zoom through real scales, each a real picture or real data at its true size, centered on a garden bed beside the Smithsonian Castle in Washington, D.C. Every step of the zoom is ten times the last: the label names the power of ten, what you see and its size, and where the picture or data comes from, and the bar shows a round length at that scale.\n\nEach scene sits inside the larger one, where it really is, and fades in as it fills the view; each is loaded only as the zoom comes near it. The garden bed is a 3D capture made elsewhere and set here.",
+  },
   "real-galaxies": {
     howTo: "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
     about:
