@@ -89,6 +89,7 @@ export class ArcadeRuntime {
       },
     });
     this.hud.setView(this.viewTo > 0.5);
+    this.hud.setPaused(true);
     this.choice = this.def.choices?.[0]?.id ?? null;
     this.hud.setChoice(this.choice);
     this.input = new Input(this.hud.surface);
@@ -400,7 +401,7 @@ export class ArcadeRuntime {
     const bk = this.def.best || "score";
     if (this.def.best !== false) list.push({ key: "best", label: "Best", value: Math.max(this.best, this.mode === "play" ? s[bk] || 0 : 0) }); // prettier-ignore
     this.hud.setStats(list);
-    this.hud.setPaused(this.mode === "paused");
+    this.hud.setPaused(this.mode !== "play");
     const tap = this.input.lastDevice === "touch" ? "Tap" : "Click or press Space";
     if (this.mode === "attract")
       this.hud.setMessage({ title: this.def.title, lines: [this.def.goal || "", `${tap} to play`].filter(Boolean) }); // prettier-ignore

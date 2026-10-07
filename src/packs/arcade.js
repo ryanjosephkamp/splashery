@@ -230,7 +230,7 @@ export const RECIPES = {
       best: "score",
       views: true,
       pad: ["left", "right", "up", "down", "fire"],
-      padLabels: { fire: "Go" },
+      padLabels: { fire: "Launch" },
       controls: {
         keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. Space launches the ball.",
         mouse: "Move the mouse to steer the paddle; click to launch.",
@@ -412,7 +412,7 @@ export const RECIPES = {
       best: "score",
       views: true,
       pad: ["left", "right", "up", "down", "fire"],
-      padLabels: { fire: "Go" },
+      padLabels: { fire: "Launch" },
       controls: {
         keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. Space launches the ball.",
         mouse: "Move the mouse to steer the paddle; click to launch.",
