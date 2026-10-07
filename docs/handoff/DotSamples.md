@@ -57,7 +57,7 @@ BLOCKED in your final message).
 
 ## State
 
-WORKING (October 7, 2026). Model: Sonnet 5.5.
+READY (October 7, 2026). Model: Sonnet 5.5. PR #378.
 
 - Screened all 40: none breaks a rule (see Notes). 30 picked and shipped as Photo to 3D samples; 10
   left out for weak depth (not for the rules) and never committed.
@@ -71,7 +71,14 @@ WORKING (October 7, 2026). Model: Sonnet 5.5.
 - Records: CREDITS.md section "AI-made Studio samples", `tools/assets.json` `photoSamples`
   (`"ai": true`, `"prompt"`).
 - Tests: `tests/dsm-samples.spec.mjs` (5 pass).
-- Still to do: clips on Effect review page 2, then the checks before the push.
+- Clips: 30 phone-size clips (320 px, MP4) are on Effect review page 2 as `dsm-D01` … `dsm-D40`
+  (lane `DotSamples`, four groups). Each starts on the flat picture; the tap raises the depth and
+  the view sways. I watched all 30 as 8-frame strips: near parts move over far ones as solid layers,
+  no tearing or speckle.
+- Screenshots: `tests/screenshots/dsm-ai-samples-390x844.png` and `…-1440x900.png` (no standard
+  screenshot changed, so nothing to restore).
+- Ran: `dsm-samples` (5), `smd-photo` (4), `help` (all) pass; `node tools/check-packs.mjs photo-3d`
+  ok. The full suite is the Integrators'.
 
 ## Notes
 
@@ -93,6 +100,9 @@ WORKING (October 7, 2026). Model: Sonnet 5.5.
 - Never used for science, math or engineering toys, the photoreal shelves or real landmarks.
 
 ## Known issues
+
+- The container restarted twice while the clips rendered (background jobs die with it), so a render
+  can need a re-run in the foreground (`tools/effect-clip.mjs`, `--opt=source=dot-<id>`).
 
 - Depth is from Depth Anything V2 Small, so thin things (the dragonfly's wings, chair rungs) can
   show a soft edge when turned.
