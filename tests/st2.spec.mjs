@@ -46,11 +46,9 @@ test.describe("contact and the footer", () => {
     expect(hrefs).toEqual([
       "https://ryanjosephkamp.github.io/",
       "https://github.com/ryanjosephkamp",
-      "https://www.linkedin.com/in/rjk1999",
-      "https://x.com/ryanjosephkamp",
+      "https://www.linkedin.com/in/ryanjosephkamp/",
       "https://www.youtube.com/@RyanJosephKamp",
-      "https://huggingface.co/ryanjosephkamp",
-      "https://ryanjosephkamp.github.io/blog/",
+      "https://github.com/sponsors/ryanjosephkamp",
     ]);
     expect(await page.locator("main a[href^=mailto]").count()).toBe(0);
     for (const a of await page.locator("main ul.link-list a").all()) {

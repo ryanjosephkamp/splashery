@@ -479,22 +479,16 @@ export const PAGES = [
     type: "contact",
     nav: "about",
     title: "Contact",
-    description: "Who makes Splashery and where to find the maker: his website, GitHub, LinkedIn, X, YouTube, Hugging Face and blog.", // prettier-ignore
+    description: "Who makes Splashery and where to find the maker: his website, GitHub, LinkedIn, YouTube and GitHub Sponsors.", // prettier-ignore
     lead: "Splashery is made by Ryan Kamp. Here is where to find him.",
     styles: ["hubs.css"],
-    // Until the owner confirms his list, these are the links on his personal site. No email.
+    // The owner's own list (October 7, 2026). No email.
     contact: [
       { href: "https://ryanjosephkamp.github.io/", label: "His website", text: "ryanjosephkamp.github.io: projects and writing." }, // prettier-ignore
       { href: "https://github.com/ryanjosephkamp", label: "GitHub", text: "ryanjosephkamp: the code for Splashery and his other projects." }, // prettier-ignore
-      { href: "https://www.linkedin.com/in/rjk1999", label: "LinkedIn", text: "rjk1999: his professional profile." }, // prettier-ignore
-      { href: "https://x.com/ryanjosephkamp", label: "X", text: "@ryanjosephkamp" },
-      {
-        href: "https://www.youtube.com/@RyanJosephKamp",
-        label: "YouTube",
-        text: "@RyanJosephKamp",
-      },
-      { href: "https://huggingface.co/ryanjosephkamp", label: "Hugging Face", text: "ryanjosephkamp: models and datasets." }, // prettier-ignore
-      { href: "https://ryanjosephkamp.github.io/blog/", label: "His blog", text: "Longer writing." }, // prettier-ignore
+      { href: "https://www.linkedin.com/in/ryanjosephkamp/", label: "LinkedIn", text: "ryanjosephkamp: his professional profile." }, // prettier-ignore
+      { href: "https://www.youtube.com/@RyanJosephKamp", label: "YouTube", text: "@RyanJosephKamp" }, // prettier-ignore
+      { href: "https://github.com/sponsors/ryanjosephkamp", label: "Sponsor", text: "Support his work through GitHub Sponsors." }, // prettier-ignore
     ],
   },
   {
