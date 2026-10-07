@@ -8,7 +8,15 @@ October push. Repo: ryanjosephkamp/splashery. Your lane: Toy pages r2 (id `ToyPa
 the app outside your own files, as an "Engine: …" PR merged first). PR title: "Phase Toy pages r2:
 sound in the embed, Learn more links and the catalog PDF round 2". Handoff file:
 docs/handoff/ToyPagesR2.md (create it; start it with this brief, word for word, under "## Brief",
-then keep "## State", "## Notes", "## Known issues" and "## For the Operator" current). Model:
+then keep "## State", "- **Cards**: six on Effect review page 2 (lane `ToyPagesR2`, ids `tp2-…`):
+the toy page before and after at 390×844, the Learn more line, the catalog cover, contents and a toy
+page. No marks yet.
+
+- **Tests run**: `tp2*.spec.mjs` and `tpg*.spec.mjs` pass (12 of 12 for tpg); the full suite is for
+  the Integrators.
+
+## Notes", "## Known issues" and "## For the Operator" current). Model:
+
 Sonnet 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 7, 2026, from the owner's walkthrough review)
