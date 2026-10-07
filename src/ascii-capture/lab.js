@@ -3,7 +3,7 @@
 // device check the owner screenshots on a phone. Labs only; nothing links here.
 
 import { startCapture, isRunning, COLUMNS, JOB_MS, JOB_MS_RANGE } from "./job.js";
-import { CAPTURE, profileParam } from "./protocol.js";
+import { CAPTURE, LISTED, SHELVES, profileParam } from "./protocol.js";
 
 const $ = (id) => document.getElementById(id);
 const ui = {
@@ -25,6 +25,18 @@ const asked = Number(new URLSearchParams(location.search).get("deadline")) * 100
 const jobMs = asked >= JOB_MS_RANGE[0] && asked <= JOB_MS_RANGE[1] ? asked : JOB_MS;
 // A forced detail profile (?profile=), for tests and diagnosis only.
 const profile = profileParam(location.search);
+// The toy picker: the first three as they were, then each shelf's toys that
+// passed the legibility check (tools/asc2-check.mjs). ?all=1 lists every
+// candidate, for that check.
+const everyToy = new URLSearchParams(location.search).get("all") === "1";
+for (const shelf of SHELVES) {
+  const toys = Object.values(LISTED).filter((t) => t.shelf === shelf.id && (everyToy || t.check?.pass)); // prettier-ignore
+  if (!toys.length) continue;
+  const group = document.createElement("optgroup");
+  group.label = shelf.label;
+  for (const t of toys) group.append(new Option(t.label, t.toy));
+  ui.preset.append(group);
+}
 let current = null; // { cancel, done } while a job runs
 let outputURL = null; // the one finished GIF
 
