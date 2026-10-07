@@ -258,7 +258,7 @@ toy's About tab. `tools/chs-data.mjs` and `tools/chs-molecules.mjs` fetch them a
 
 ## Real elements (lane Elements)
 
-The Real elements toy (a labs toy) shows 91 elements as photos of real samples, each cut out of its
+The Real elements toy (a labs toy) shows 92 elements as photos of real samples, each cut out of its
 background and given depth by Depth Anything V2 Small (Apache 2.0) at build time
 (`tools/rel-samples.mjs`), in `assets/toys/real-elements/`. Each license was checked on the live
 page on October 5, 2026.
@@ -355,6 +355,9 @@ page on October 5, 2026.
   [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Technetium-sample.jpg). The cut-out sample made
   from it is shared under the same license, shown beside the sample in the toy.
+- Promethium: "Promethium Metal Buttons.png" by E. J. Wheelwright, U.S. Atomic Energy Commission,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Promethium_Metal_Buttons.png).
 - Radium: "Radium226.jpg" by grenadier, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/),
   on [Commons](https://commons.wikimedia.org/wiki/File:Radium226.jpg).
 - Protactinium: "Protactinium-233.jpg" by U.S. Department of Energy,
@@ -381,6 +384,93 @@ page on October 5, 2026.
 - Einsteinium: "EinsteiniumGlow.JPG" by R. G. Haire, U.S. Department of Energy,
   [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:EinsteiniumGlow.JPG).
+
+For the 26 elements with no photo of a real sample, the toy shows a stand-in picture, said plainly
+to be one: the person, place or flag the element is named for, or a mineral that holds traces of it.
+Each from Wikimedia Commons, its license checked on the file page on October 5, 2026:
+
+- Polonium: "Flag of Poland.svg" by Wikimedia Commons contributors,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Poland.svg).
+- Astatine: "Autunite-20885.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Autunite-20885.jpg). The picture made from it is
+  shared under the same license, shown beside it in the toy.
+- Radon: "Granite 5 (48674315157).jpg" by James St. John,
+  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Granite_5_%2848674315157%29.jpg).
+- Francium: "Thorite-288916.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Thorite-288916.jpg). The picture made from it is
+  shared under the same license, shown beside it in the toy.
+- Actinium: "Uraninite-225146.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Uraninite-225146.jpg). The picture made from it
+  is shared under the same license, shown beside it in the toy.
+- Thorium: "Thorianite-729924.jpg" by Kelly Nash,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Thorianite-729924.jpg).
+- Curium: "Marie Curie c1920.jpg" by Henri Manuel,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg).
+- Fermium: "Enrico Fermi 1943-49.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Enrico_Fermi_1943-49.jpg).
+- Mendelevium: "DIMendeleevCab.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:DIMendeleevCab.jpg).
+- Nobelium: "AlfredNobel2.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:AlfredNobel2.jpg).
+- Lawrencium: "Ernest Lawrence.jpg" by Nobel Foundation,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Ernest_Lawrence.jpg).
+- Rutherfordium: "Ernest Rutherford LOC.jpg" by George Grantham Bain Collection (Library of
+  Congress), [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Ernest_Rutherford_LOC.jpg).
+- Dubnium: "Coat of arms of Dubna.svg" by City of Dubna,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Dubna.svg).
+- Seaborgium: "Glenn Seaborg - 1964.jpg" by U.S. Atomic Energy Commission,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Glenn_Seaborg_-_1964.jpg).
+- Bohrium: "Niels Bohr.jpg" by AB Lagrelius & Westphal,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Niels_Bohr.jpg).
+- Hassium: "Coat of arms of Hesse.svg" by State of Hesse,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Hesse.svg).
+- Meitnerium: "Lise Meitner NatGeo.jpg" by Harris & Ewing,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Lise_Meitner_NatGeo.jpg).
+- Darmstadtium: "Wappen Darmstadt.svg" by City of Darmstadt (Hessisches Staatsarchiv),
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Wappen_Darmstadt.svg).
+- Roentgenium: "Roentgen2.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Roentgen2.jpg).
+- Copernicium: "Nikolaus Kopernikus.jpg" by Unknown painter (Toruń Town Hall portrait, c. 1580),
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Nikolaus_Kopernikus.jpg).
+- Nihonium: "Flag of Japan.svg" by Government of Japan,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Japan.svg).
+- Flerovium: "RUSMARKA-1660 (cropped).jpg" by Russian Post (Marka); designer A. Povarikhin,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:RUSMARKA-1660_%28cropped%29.jpg).
+- Moscovium: "Flag of Moscow, Russia.svg" by City of Moscow,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Moscow%2C_Russia.svg).
+- Livermorium: "Downtown Livermore California.jpg" by LPS.1,
+  [CC0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Downtown_Livermore_California.jpg).
+- Tennessine: "Flag of Tennessee.svg" by State of Tennessee; drawn by -xfi-,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Tennessee.svg).
+- Oganesson: "Yuri Oganessian (cropped).jpg" by VPRO,
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Yuri_Oganessian_%28cropped%29.jpg). The picture
+  made from it is shared under the same license, shown beside it in the toy.
 
 The facts come from PubChem's periodic table and element pages (NCBI; public domain U.S. government
 data); the uses are our own short sentences, each backed by words PubChem quotes from Jefferson Lab
@@ -654,7 +744,6 @@ Sound Board candidates only. The details are in [tools/assets.json](tools/assets
 | File                        | Work                                                                                                        | Author          | License                                                       |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------- |
 | `tin-can-real-roll.mp3`     | [Rolling Can Sound 2](https://freesound.org/people/cower/sounds/185370/)                                    | cower           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `knot-jelly.mp3`            | [Jelly Wobbling in Egg Cup 2.wav](https://freesound.org/people/lolamadeus/sounds/181915/)                   | lolamadeus      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `mitochondrion-furnace.mp3` | [Gas furnace - Ignition happy](https://freesound.org/people/ldezem/sounds/386166/)                          | ldezem          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `mitochondrion-fire.mp3`    | [Gas burner 01.wav](https://freesound.org/people/PegasusCZ/sounds/569332/)                                  | PegasusCZ       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `paramecium-swim.mp3`       | [Water, Gentle Movement.wav](https://freesound.org/people/Daen23/sounds/431627/)                            | Daen23          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -667,6 +756,7 @@ Sound Board candidates only. The details are in [tools/assets.json](tools/assets
 | `helicopter-chop.mp3`       | [Helicopter Flyby / Pass](https://freesound.org/people/mil0001/sounds/241190/)                              | mil0001         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `steam-train-chuff.mp3`     | [d_s478_underbridge.wav](https://freesound.org/people/relwin/sounds/686061/)                                | relwin          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `popcorn-pops.mp3`          | [Popcorn](https://freesound.org/people/elricadavis/sounds/764604/)                                          | elricadavis     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `water-bottle-pour.mp3`     | [Pouring water into a glass](https://freesound.org/people/ahamirikia/sounds/710550/)                        | ahamirikia      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `lungs-breath-b.mp3`        | [- Deep Breath](https://freesound.org/people/rrehl/sounds/717167/)                                          | rrehl           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `lungs-breath-c.mp3`        | [Sigh1.wav](https://freesound.org/people/elle-trudgett/sounds/146769/)                                      | elle-trudgett   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `bicycle-bell.mp3`          | [Bicycle Bell.wav](https://freesound.org/people/PanosA/sounds/546371/)                                      | PanosA          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -1138,6 +1228,66 @@ feature (`assets/toys/real-worlds/`). Feature positions are from the
   are left out).
 - None of the three models has a texture, so none carries a logo or insignia (the Saturn V's
   lettering reads "UNITED STATES" and "USA", with small U.S. flags).
+
+### Zooming in and naming the place (lane Space r3)
+
+A tap on a real world zooms in on that spot with close-up tiles cut by `tools/sp3-tiles.mjs` from
+the same public-domain maps (the Moon's heights from the CGI Moon Kit's `ldem_16`, Earth's from
+ETOPO 2022 at 60 arc-seconds), and names what is there:
+
+- Earth: [Natural Earth](https://www.naturalearthdata.com/) 1:10m states and provinces, countries,
+  populated places, marine areas, lakes, geographic regions and elevation points (Tom Patterson,
+  Nathaniel Vaughn Kelso and contributors). Public domain
+  ([terms of use](https://www.naturalearthdata.com/about/terms-of-use/)). Trimmed by
+  `tools/sp3-places.mjs` into `assets/toys/real-earth/places.bin` and `places.json`.
+- The Moon, Mars, Mercury, Venus, the big moons, Pluto, Ceres and Vesta: the
+  [Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/GIS_Downloads) (IAU
+  Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center), center points
+  of every adopted feature but the lettered satellite craters. Public domain.
+
+## Powers of ten (lane Powers of ten)
+
+The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own files are
+in `assets/toys/powers-of-ten/`, made by `tools/pot-maps.mjs` and `tools/pot-stars.mjs`; it also
+reads the files of the Space r2, Science r3 and photoreal toys named below.
+
+- Aerial pictures, 1,000 km to 10 km across: EOxCloudless 2016
+  ([Sentinel-2 cloudless](https://cloudless.eox.at)) by EOX IT Services GmbH, contains modified
+  Copernicus Sentinel data 2016, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (the 2016
+  layer's license in EOX's WMTS capabilities, checked October 6, 2026; the later years are NC and
+  are not used).
+- 3 km:
+  [USGS Imagery Only](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
+  (USDA NAIP, USGS The National Map). Public domain. The half of the Earth for the globe is the same
+  service's Blue Marble: Next Generation (NASA Earth Observatory, Reto Stöckli). Public domain.
+- 1 km to 30 m: District of Columbia, Office of the Chief Technology Officer,
+  [Aerial Photography (Orthophoto) 2023](https://opendata.dc.gov/), 3 inch (8 cm),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (its live license, checked October 6,
+  2026).
+- Stars within 500 pc: the [HYG database](https://codeberg.org/astronexus/hyg) v4.4 by David Nash
+  (astronexus), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live README,
+  checked October 6, 2026). The stars file `stars-500pc.bin` is CC BY-SA 4.0 too.
+- Read from other toys: the nearby stars (Gaia and HYG, CC BY-SA; Space r2), M83 by
+  [ESO](https://www.eso.org/public/images/eso0825a/) (CC BY 4.0; Space r2), the Earth and Moon maps
+  (NASA, public domain; Space r2), the ribosome's cryo-EM map EMD-48329 and model PDB 9MKK (public
+  domain; Science r3) and the "Golden Fullmoon Maple" capture by Joshua Trapani
+  ([CC BY 4.0](https://superspl.at/scene/f233b115)).
+- The golden full-moon maple's leaves: "Acer shirasawanum 'Aureum'" by Megan Hansen
+  ([Flickr](https://www.flickr.com/photos/24495410@N03/4714538293)),
+  [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) (its cut, `micro-crown-*.jpg`,
+  stays CC BY-SA 2.0), and one leaf: "Golden Full Moon Maple" by susteph
+  ([Flickr](https://www.flickr.com/photos/28012136@N08/2649442904)),
+  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) (their live pages, checked October 6,
+  2026). Cut by `tools/pot-micro.mjs`.
+- Plant cells: "Arabidopsis thaliana plant cells containing chloroplasts, LM" by Fernán Federici,
+  and a chloroplast: "Chloroplast in a bean leaf, TEM" by Kevin Mackenzie, University of Aberdeen,
+  both from the [Wellcome Collection](https://wellcomecollection.org/works/gwmfux6b)
+  ([and](https://wellcomecollection.org/works/bx3dctp2)),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (their live pages, checked October 6,
+  2026). Cut by `tools/pot-micro.mjs`.
+- The planets' places: JPL's
+  [Approximate Positions of the Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html) (E. M.
+  Standish). Public domain.
 
 ## Data and climate (lane Data and climate)
 

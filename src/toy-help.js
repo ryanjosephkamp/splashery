@@ -727,7 +727,7 @@ export const TOY_HELP = {
     howTo:
       "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
     about:
-      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. About 27 elements have no photo of a real sample, because the heaviest exist only a few atoms at a time; their tiles are hatched. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is made up from its own colors.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. 26 elements have no photo of a real sample, as the heaviest exist only a few atoms at a time; their hatched tiles show a stand-in. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
   },
 
   "crystal-lattice": {
@@ -1705,6 +1705,22 @@ export const TOY_HELP = {
     about:
       "One square holds three QR codes here: the first sets each module's red, the second its green and the third its blue. So each module is one of eight colors, from white to black.\n\nSplashery's reader splits the picture into its red, green and blue and reads each one as an ordinary code, for three times the data in the same square. An ordinary phone reader sees only gray, which comes mostly from green, so it usually reads the green code or nothing. Tap the square to pull its three codes apart and back. Type your own three texts in the Toy tab.",
   },
+  // Lane QR craft.
+  "qr-picture": {
+    howTo: "Pick a picture or open your own, then tap to turn the tiles over.",
+    about:
+      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the picture fills the rest, darkened in dark modules and lightened in light ones. The eyes, the timing lines and the format information stay plain, so a reader still finds the code.\n\nThe toy measures the contrast and reads its own code at phone size and smaller. If it won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot or a higher error correction level. Your picture never leaves your device.",
+  },
+  "qr-build": {
+    howTo: "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
+    about:
+      "A QR code is only dark and light squares, so it can be built from real things. Here dominoes stand on end, and a push sends every row toppling, each domino knocking the next, until they lie flat as the code: ebony over dark modules, ivory over light ones. Or marbles roll in along their rows and settle into the dark modules, or two-sided tiles flip over in a wave.\n\nEvery piece is solid and moves as the real thing would. Each build ends on a code that scans, and the toy reads its own last frame to check. Type your own text in the Toy tab.",
+  },
+  barcodes: {
+    howTo: "Pick a kind of barcode in the Toy tab and type what it holds. Tap to scan it.",
+    about:
+      "Barcodes came before QR codes. Code 128 packs any plain text into bars and spaces one to four modules wide, with a check symbol worked out modulo 103. EAN-13 and UPC-A hold the numbers on things in shops, with a check digit from weights of 3 and 1, and quiet zones of blank space either side.\n\nHere those three are drawn by Splashery's own code, and Data Matrix and Aztec, two square codes of their own, come from the open-source ZXing library. Tap to sweep a scanner's red line across. The toy reads its own picture back to check that it scans.",
+  },
   // Lane Live input.
   "room-echo": {
     howTo:
@@ -1896,9 +1912,9 @@ export const TOY_HELP = {
 
   longtail: {
     howTo:
-      "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+      "Tap to play. Tap beside the head to turn it that way, or use the arrows. 3D folds it up; drag to turn it.",
     about:
-      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. Arrow keys, a swipe or the pad turn it toward that side of the screen.\n\nThe tiles are a world you can fold. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube you steer around. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
+      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. A tap beside the head, or the arrows, turn it toward that side.\n\nThe tiles fold into a world. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube; drag to turn it. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
   },
   "grain-garden": {
     howTo:
@@ -1961,9 +1977,9 @@ export const TOY_HELP = {
 
   "note-rider": {
     howTo:
-      "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+      "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     about:
-      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open a MIDI file of your own. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
+      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open your own with ♪ Your song: a MIDI file, or a recording, whose tune a note finder hears on this device, each caught note then playing its own slice of the recording. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------
@@ -2265,39 +2281,40 @@ export const TOY_HELP = {
   },
   // ---- Space r2 (lane Space r2): real worlds ---------------------------------------------
   "real-moon": {
-    howTo:
-      "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Tycho and more.",
     about:
-      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. Close up, the relief eases to at most twice its height. There are no shadows, and the colors are a little enhanced, as in NASA's map.",
+      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. There are no shadows, and the colors are a little enhanced, as in NASA's map. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-mars": {
-    howTo:
-      "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Olympus Mons.",
     about:
-      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air; there are no shadows.",
+      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-earth": {
-    howTo:
-      "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    howTo: "Tap a spot to zoom in and name the place; tap again to go out. Play flies to Everest.",
     about:
-      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. Close up, the relief eases to at most twice its height. There are no clouds or shadows.",
+      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. There are no clouds or shadows. A tap zooms in and names the place from Natural Earth's maps; tap again to go out.",
   },
   "real-mercury": {
-    howTo:
-      "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Caloris.",
     about:
-      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. There are no shadows.",
+      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-venus": {
-    howTo:
-      "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Maxwell Montes.",
     about:
-      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. There are no shadows.",
+      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons its tallest volcano; Artemis Corona a ring of ridges 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "nearby-stars": {
     howTo: "Tap to fly to Alpha Centauri, Sirius, Barnard's Star, Vega or Arcturus and back.",
     about:
       "Every star within about 65 light-years (20 parsecs) of the Sun, where it really is: about 2,200 stars measured by ESA's Gaia spacecraft, from the tiny shift of each star's position as Earth goes round the Sun. About 35 of the brightest, which Gaia cannot measure, like Sirius and Vega, come from the older Hipparcos survey (via the HYG database).\n\nThe Sun is in the middle; the faint rings lie in our Galaxy's plane, and the line points to its center. Each star's color comes from its temperature: red dwarfs, the most common stars, are orange-red; hot stars are blue-white. The sizes show brightness, not size. Tap to fly to a named star and see its distance; the first is Alpha Centauri, with Proxima Centauri, the nearest star of all, beside it.",
+  },
+  "powers-of-ten": {
+    howTo:
+      "Pinch, scroll or drag up or down to zoom from a garden to a galaxy or a molecule. Tap to play.",
+    about:
+      "One continuous zoom through real scales, each a real picture or real data at its true size, centered on a garden bed beside the Smithsonian Castle in Washington, D.C. Every step of the zoom is ten times the last: the label names the power of ten, what you see and its size, and where the picture or data comes from, and the bar shows a round length at that scale.\n\nEach scene sits inside the larger one, where it really is, and fades in as it fills the view; each is loaded only as the zoom comes near it. The garden bed is a 3D capture made elsewhere and set here.",
   },
   "real-galaxies": {
     howTo: "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
@@ -2320,15 +2337,14 @@ export const TOY_HELP = {
       "The Space Shuttle at launch, as splats from NASA's 3D model: the winged orbiter, the big orange external tank that fed its three main engines with liquid hydrogen and oxygen, and the two white solid rocket boosters. The Shuttles flew 135 missions from 1981 to 2011, carrying astronauts, satellites and the pieces of the International Space Station.\n\nTap to stage it in a flight's order, much faster than real: the boosters fall away about two minutes after launch, to be fished from the sea and used again; the main engines stop at about eight and a half minutes and the empty tank drops away, the only part not reused; the orbiter flies on with its two small maneuvering engines. The model's black and white tiles are drawn simply.",
   },
   "real-moons": {
-    howTo:
-      "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    howTo: "Pick a moon in the Toy tab. Tap a spot to zoom in and name it; tap again to go out.",
     about:
-      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second.",
+      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-small-worlds": {
-    howTo: "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    howTo: "Pick Pluto, Ceres or Vesta. Tap a spot to zoom in and name it; tap again to go out.",
     about:
-      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them.",
+      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "star-systems": {
     howTo: "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",

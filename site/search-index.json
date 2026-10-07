@@ -1087,7 +1087,7 @@
     "u": "toys/real-moon/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Tycho and more.",
     "w": "the real moon space space moon lunar lro lola nasa real map elevation relief craters tycho copernicus apollo real-moon",
     "i": "../assets/toys/real-moon/thumb.webp",
     "l": 1
@@ -1097,7 +1097,7 @@
     "u": "toys/real-mars/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Olympus Mons.",
     "w": "the real mars space space mars red planet viking mola nasa usgs real map elevation relief olympus mons valles marineris gale curiosity real-mars",
     "i": "../assets/toys/real-mars/thumb.webp",
     "l": 1
@@ -1107,7 +1107,7 @@
     "u": "toys/real-earth/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    "d": "Tap a spot to zoom in and name the place; tap again to go out. Play flies to Everest.",
     "w": "the real earth space space earth world globe blue marble etopo nasa noaa real map elevation relief night lights everest himalaya grand canyon hawaii real-earth",
     "i": "../assets/toys/real-earth/thumb.webp",
     "l": 1
@@ -1117,7 +1117,7 @@
     "u": "toys/real-mercury/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Caloris.",
     "w": "the real mercury space space mercury planet messenger nasa usgs real map elevation relief caloris rachmaninoff hokusai craters real-mercury",
     "i": "../assets/toys/real-mercury/thumb.webp",
     "l": 1
@@ -1127,7 +1127,7 @@
     "u": "toys/real-venus/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Maxwell Montes.",
     "w": "the real venus space space venus planet magellan radar nasa usgs real map elevation relief maxwell montes maat mons artemis corona real-venus",
     "i": "../assets/toys/real-venus/thumb.webp",
     "l": 1
@@ -1137,7 +1137,7 @@
     "u": "toys/real-moons/",
     "k": "toy",
     "s": "Space",
-    "d": "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    "d": "Pick a moon in the Toy tab. Tap a spot to zoom in and name it; tap again to go out.",
     "w": "real moons space space moons io europa ganymede callisto titan jupiter saturn galileo voyager cassini nasa usgs real map volcano ice real-moons",
     "i": "../assets/toys/real-moons/thumb.webp",
     "l": 1
@@ -1147,7 +1147,7 @@
     "u": "toys/real-small-worlds/",
     "k": "toy",
     "s": "Space",
-    "d": "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    "d": "Pick Pluto, Ceres or Vesta. Tap a spot to zoom in and name it; tap again to go out.",
     "w": "pluto, ceres and vesta space space dwarf planet pluto ceres vesta asteroid new horizons dawn nasa usgs real map elevation relief sputnik heart occator real-small-worlds",
     "i": "../assets/toys/real-small-worlds/thumb.webp",
     "l": 1
@@ -1180,6 +1180,16 @@
     "d": "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
     "w": "real galaxies space space galaxy galaxies hubble eso telescope whirlpool m51 pinwheel m101 phantom m74 m83 spiral real picture real-galaxies",
     "i": "../assets/toys/real-galaxies/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Powers of ten",
+    "u": "toys/powers-of-ten/",
+    "k": "toy",
+    "s": "Space",
+    "d": "Pinch, scroll or drag up or down to zoom from a garden to a galaxy or a molecule. Tap to play.",
+    "w": "powers of ten space space powers of ten zoom scale sizes universe galaxy stars sun planets earth city garden leaf cell microscope molecule real powers-of-ten",
+    "i": "../assets/toys/powers-of-ten/thumb.webp",
     "l": 1
   },
   {
@@ -3541,6 +3551,36 @@
     "l": 1
   },
   {
+    "t": "Picture QR",
+    "u": "toys/qr-picture/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick a picture or open your own, then tap to turn the tiles over.",
+    "w": "picture qr studio studio qr code picture photo halftone image art custom scan png qr-picture",
+    "i": "../assets/toys/qr-picture/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "QR from real things",
+    "u": "toys/qr-build/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
+    "w": "qr from real things studio studio qr code dominoes marbles tiles flip build physics chain reaction scan qr-build",
+    "i": "../assets/toys/qr-build/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Other barcodes",
+    "u": "toys/barcodes/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick a kind of barcode in the Toy tab and type what it holds. Tap to scan it.",
+    "w": "other barcodes studio studio barcode code 128 ean-13 upc-a data matrix aztec check digit scanner laser barcodes",
+    "i": "../assets/toys/barcodes/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Photo to 3D",
     "u": "toys/photo-3d/",
     "k": "toy",
@@ -3895,7 +3935,7 @@
     "u": "toys/longtail/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+    "d": "Tap to play. Tap beside the head to turn it that way, or use the arrows. 3D folds it up; drag to turn it.",
     "w": "longtail arcade arcade game arcade grow trail beads berries grid cube net fold planet mars moon earth torus ring tunnels 3d play longtail",
     "i": "../assets/toys/longtail/thumb.webp",
     "l": 1
@@ -3995,7 +4035,7 @@
     "u": "toys/note-rider/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+    "d": "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     "w": "note rider arcade arcade game arcade music song notes rhythm catch lanes melody midi your own song ode to joy 3d note-rider",
     "i": "../assets/toys/note-rider/thumb.webp",
     "l": 1

@@ -4,7 +4,48 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## State of main (2026-10-02)
+## Now (October 7, 2026, about 13:15 UTC): after the Operator handover
+
+A fresh Operator (`session_012GmKRUMZLir2nb27Bo8Cu2`, Opus 5.5) took over at 04:29 UTC; the outgoing
+one stands by. This section is current. The sections below it are history. The runbook is
+[OPERATOR.md](OPERATOR.md).
+
+**Main** is at `9101fa2f` (Ops #387). Merged October 7:
+
+- #379: Live r7's polish (#333, the steadier splat mirror)
+- #381: Showcase (#350), labs; #382 its handoff
+- #385: Powers of ten (#351 engine, #353), labs; #386 its handoff
+- #387: Arcade r2 (#366 engine, #372), the walkthrough's game fixes and the new brick and block
+  sounds
+
+**The push** ends October 7, 2026, 20:00 UTC (4 p.m. ET), the weekly reset. After it, about six
+workers (seven at most).
+
+**Lanes running** (rows, sessions and files in WORKSTREAMS.md); every one waits on a full test run,
+the owner's marks, or both:
+
+- **Fix9** (#370 + engine #368, Opus): cards all good; full run under way.
+- **Toy pages r2** (#371 + engine #365, Sonnet) and **Site r2** (#367, Sonnet): run together (both
+  rebuild the site). Toy pages cards good; Site r2 waits for the owner's mark on its new contact
+  card.
+- **Real elements** (#318, Opus) and **Sound D** (#369, Opus): run together. Sound D's new sounds
+  are approved; Real elements waits for marks on new bismuth, neon and sulfur cards.
+- **ASCII r2** (#377, Sonnet, labs): cards good; full run under way.
+- **Space r3** (#380, Opus) and **Dot samples** (#378, Sonnet): run together. Space r3 changes toys
+  the public sees (the real planets), so it needs the owner's marks.
+- **Live r8** (#384 + engine #383, Opus): started October 7; a sharper Chladni plate, an on-screen
+  depth slider, a 3D look only if the physics holds.
+- **Integrators** 1, 3, 4, 5 and 6 (Sonnet) are all busy.
+
+**Open with the owner** (details on the Operator's private page): the Codex drafts #335 and #352;
+the Recipes page calls; "sandbox go"; what the Dot's cloud computer can run; the status report's six
+decisions.
+
+**Next for the Operator:** merge what turns green; Live r8's full run when an Integrator frees;
+after the reset, cut to about six workers; fold lessons from the owner's marks into CLAUDE.md's
+quality rules as general rules, without quoting his notes.
+
+## State of main (2026-10-02, history)
 
 - Phases A to E4 are merged: A (splashery PR #13, homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
