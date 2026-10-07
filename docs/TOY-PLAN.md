@@ -2127,7 +2127,11 @@ Proposals below are suggestions; the owner may change them.
     underneath (the band has one side), after two it is back on top where it started, while the band
     twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the
     Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck
-    riding a bicycle (wheels and pedals turning) or the ant.
+    riding a bicycle (wheels and pedals turning) or the ant. Math r2 (labs work on the public toy,
+    waiting for the owner's marks): three more riders, a toy train (chuffing steam, spoked wheels
+    turning), a ladybug (light feet and a flutter of wings, her six legs walking) and a skateboard
+    (wheels rolling, a clack on and off), and a Rider color choice for every rider (Its own keeps
+    each rider's colors).
   - Sound: No step tune; each rider has its own sound on the ride: a race car's engine, a rolling
     beach ball, a bicycle with one soft quack, the ant's tiny feet.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
@@ -2152,7 +2156,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Rotates through the fourth dimension, turning inside out.
   - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
     cube swells out to become the outer one while the blue one folds inside, holds a moment, then
-    turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
+    turns on back to where it started (about 5 s); at rest it rocks gently in 4D. Math r2: seven
+    color themes (Colors; Blue and pink is the default and unchanged).
   - Sound: No "vroom"; a great slow rush as it turns inside out and again as it turns home, over a
     low chord.
 - **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: keep.
@@ -2176,7 +2181,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination
     lock: neighbours click round in opposite directions, top to bottom, then back the other way,
     bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same
-    picture (about 4 s). This replaced a twist after the owner's review.
+    picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5
+    to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb
+    (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn
+    and back).
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
@@ -2234,7 +2242,9 @@ Proposals below are suggestions; the owner may change them.
     parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words
     gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★,
     and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r
-    = …) can be typed too.
+    = …) can be typed too. Math r2: longer text, up to 40 letters on up to four lines, drawn five
+    letters at a time (2.6 s for each group of five; the circles of the group drawing show, the
+    writing stays), and lighter, thinner circles behind words in 2D so the writing reads.
   - Sound: Each circle hums its own frequency, building into a chord.
 - **Pythagoras proof** (`pythagoras-proof`). Now: tap: Rearrange. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).

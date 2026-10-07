@@ -1460,7 +1460,7 @@ export const TOY_HELP = {
   mobius: {
     howTo: "Tap to send the rider round. Pick a rider in the Toy tab.",
     about:
-      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike or an ant in the Toy tab. Pick its colors and glow in the Toy tab too.",
+      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike, an ant, a toy train, a ladybug or a skateboard in the Toy tab, each with its own sound, and a rider color. Pick the band's colors and glow there too.",
   },
   "klein-bottle": {
     howTo: "Tap to send water through. Set the glow in the Toy tab.",
@@ -1475,7 +1475,7 @@ export const TOY_HELP = {
   hypercube: {
     howTo: "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
     about:
-      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation.",
+      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation, and Colors picks a theme.",
   },
   "torus-knot": {
     howTo:
@@ -1491,7 +1491,7 @@ export const TOY_HELP = {
   mandelbulb: {
     howTo: "Tap it to turn its discs like the dials of a lock.",
     about:
-      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture.",
+      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture. Pick the power (power n has n − 1 lobes) or a Julia bulb, which turns whole, in the Toy tab.",
   },
   sierpinski: {
     howTo: "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
@@ -1527,7 +1527,7 @@ export const TOY_HELP = {
   "fourier-circles": {
     howTo: "Tap to spin the circles. Type a word or a curve in the Toy tab.",
     about:
-      "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type a word and each letter gets its own chain of circles.",
+      "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type words (up to 40 letters) and each letter gets its own chain of circles, five letters at a time.",
   },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
@@ -1562,7 +1562,7 @@ export const TOY_HELP = {
   "twenty-four-cell": {
     howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
     about:
-      "The 24-cell has no cousin in three dimensions: it exists only in 4D. Its 24 corners are every way to put two ±1s and two zeros in four places, joined by 96 edges, with 24 octahedra for walls. The corners split into three sets of eight, each one a 16-cell, shown in three colors. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+      "The 24-cell is a regular shape with no cousin among the regular solids of three dimensions: it exists only in 4D. Its 24 corners are every way to put two ±1s and two zeros in four places, joined by 96 edges, with 24 octahedra for walls. The corners split into three sets of eight, each one a 16-cell, shown in three colors. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
   },
   duoprism: {
     howTo: "Tap to roll it through the fourth dimension. Pick the two polygons in the Toy tab.",
