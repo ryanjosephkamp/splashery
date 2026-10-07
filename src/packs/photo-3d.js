@@ -93,7 +93,7 @@ export const SAMPLES = [
 ];
 
 // Every sample the picker offers: the CC0 photos above, then the AI-made pictures (lane Dot samples;
-// WebP, so only the browser reads them: tools and Node tests keep to SAMPLES).
+// SAMPLES stays the CC0 six, which p3d.spec builds on every tier).
 export const ALL_SAMPLES = [...SAMPLES, ...DOT_SAMPLES];
 
 // Smd r2: the backing layer of a built photo: a coarse grid of splats, each at the deepest depth of

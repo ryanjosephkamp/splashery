@@ -2,7 +2,7 @@
 // The owner made them with his own AI image tool (the "Dot" prompt pack, D01 to D40; 30 of the 40
 // are here) and they are labeled AI-made beside them: in the picker's group name, in each label
 // and in the credit. They are never real captures or real places (CLAUDE.md, "AI-made samples").
-// Each is assets/toys/photo-3d/ai/<id>.webp with its depth map <id>.depth (tools/dsm-depth.mjs).
+// Each is assets/toys/photo-3d/ai/<id>.jpg with its depth map <id>.depth (tools/dsm-depth.mjs).
 
 const CREDITS = "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md";
 
@@ -46,7 +46,7 @@ export const DOT_SAMPLES = DOTS.map(([prompt, id, name, group]) => ({
   id: `dot-${id}`,
   dir: "ai",
   file: id,
-  ext: "webp",
+  ext: "jpg",
   prompt,
   ai: true,
   group: AI_GROUP + group.toLowerCase(),

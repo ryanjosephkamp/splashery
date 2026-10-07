@@ -1,5 +1,5 @@
 // Dot samples (lane Dot samples): the same as p3d-depth.mjs, for the AI-made pictures in
-// assets/toys/photo-3d/ai/ (<id>.webp -> <id>.depth). Photo to 3D (lane Photo to 3D) makes depth maps with the same depth
+// assets/toys/photo-3d/ai/ (<id>.jpg -> <id>.depth). Photo to 3D (lane Photo to 3D) makes depth maps with the same depth
 // model and runtime the toy uses in the page (Depth Anything V2 Small, ONNX Runtime Web), in the
 // browser, and writes assets/toys/photo-3d/<id>.depth (a small binary: see packDepth() in
 // src/packs/photo-3d.js). The samples then need no model when someone opens the toy.
@@ -55,7 +55,7 @@ for (const id of IDS) {
   const r = await page.evaluate(async (id) => {
     const dep = await import("/src/packs/photo-3d-depth.js");
     const pack = await import("/src/packs/photo-3d.js");
-    const blob = await (await fetch(`/assets/toys/photo-3d/ai/${id}.webp`)).blob();
+    const blob = await (await fetch(`/assets/toys/photo-3d/ai/${id}.jpg`)).blob();
     const photo = await pack.decodePhoto(blob);
     const d = await dep.estimateDepth(photo);
     return { ms: d.ms, w: d.w, h: d.h, d: Array.from(pack.packDepth(d)) };

@@ -5,7 +5,7 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { DOT_SAMPLES, AI_GROUP } from "../src/packs/dot-samples.js";
-import { ALL_SAMPLES, SAMPLES, RECIPES, unpackDepth } from "../src/packs/photo-3d.js";
+import { ALL_SAMPLES, SAMPLES, RECIPES, unpackDepth, decodePhoto } from "../src/packs/photo-3d.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 const assets = JSON.parse(fs.readFileSync("tools/assets.json", "utf8"));
@@ -38,12 +38,11 @@ test.describe("the AI-made samples' records", () => {
 
   test("each has a picture and a depth map, a CREDITS.md line and a tools/assets.json entry", () => {
     for (const s of DOT_SAMPLES) {
-      const img = `assets/toys/photo-3d/ai/${s.file}.webp`;
+      const img = `assets/toys/photo-3d/ai/${s.file}.jpg`;
       const dep = `assets/toys/photo-3d/ai/${s.file}.depth`;
       expect(fs.existsSync(img), img).toBe(true);
-      const head = fs.readFileSync(img).subarray(0, 12);
-      expect(head.subarray(0, 4).toString()).toBe("RIFF");
-      expect(head.subarray(8, 12).toString()).toBe("WEBP");
+      const bytes = fs.readFileSync(img);
+      expect([bytes[0], bytes[1]]).toEqual([0xff, 0xd8]); // a JPEG (Node's decoder reads only these)
       expect(fs.statSync(img).size).toBeLessThan(500_000);
       const d = unpackDepth(new Uint8Array(fs.readFileSync(dep)));
       expect(d.w * d.h).toBeGreaterThan(10_000);
@@ -55,8 +54,18 @@ test.describe("the AI-made samples' records", () => {
     }
   });
 
+  test("each decodes the way Node's kit test reads it, to its own size", async () => {
+    for (const s of DOT_SAMPLES) {
+      const p = await decodePhoto(
+        new Uint8Array(fs.readFileSync(`assets/toys/photo-3d/ai/${s.file}.jpg`)),
+      );
+      expect([p.w, p.h], s.id).toEqual([1280, expect.any(Number)]);
+      expect(p.data.length).toBe(p.w * p.h * 4);
+    }
+  });
+
   test("only whole files that are samples are in ai/ (a rejected picture is never committed)", () => {
-    const known = new Set(DOT_SAMPLES.flatMap((s) => [`${s.file}.webp`, `${s.file}.depth`]));
+    const known = new Set(DOT_SAMPLES.flatMap((s) => [`${s.file}.jpg`, `${s.file}.depth`]));
     for (const f of fs.readdirSync("assets/toys/photo-3d/ai")) expect(known.has(f), f).toBe(true);
   });
 });

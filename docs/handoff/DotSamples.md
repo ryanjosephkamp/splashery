@@ -61,8 +61,8 @@ READY (October 7, 2026). Model: Sonnet 5.5. PR #378.
 
 - Screened all 40: none breaks a rule (see Notes). 30 picked and shipped as Photo to 3D samples; 10
   left out for weak depth (not for the rules) and never committed.
-- Files: `assets/toys/photo-3d/ai/<id>.webp` (1,280 px wide, WebP q80, about 200 KB) and
-  `<id>.depth` (made by `tools/dsm-depth.mjs`, 354 KB each).
+- Files: `assets/toys/photo-3d/ai/<id>.jpg` (1,280 px wide, JPEG q80, about 250 KB) and `<id>.depth`
+  (made by `tools/dsm-depth.mjs`, 354 KB each).
 - Code: `src/packs/dot-samples.js` (the list, in my own file) joined to Photo to 3D as
   `ALL_SAMPLES`; `SAMPLES` (the CC0 six) is untouched, so no other test changes. The picker groups
   them under "AI-made by the owner: …" (four groups) and each label ends "(AI-made)"; the in-app
@@ -94,8 +94,10 @@ READY (October 7, 2026). Model: Sonnet 5.5. PR #378.
   assets.json lines) are the only places to fix.
 - Left out (weak for Photo to 3D: flat, top-down or too close to a sample already there): D09, D12,
   D15 (a spiral staircase, like the CC0 one), D18, D23, D24, D25, D33, D35, D39.
-- WebP, not JPEG: the browser decodes it; Node (the tools and old tests) can't, so the AI samples
-  are in `ALL_SAMPLES` and the old `SAMPLES` stays JPEG-only.
+- JPEG, not WebP (changed October 7, 2026): the first version was WebP, which the browser decodes
+  but Node can't, so `tests/kit.spec.mjs:87` (it builds every photo-3d option in Node) failed with
+  "SOI not found". JPEG goes through the existing decode path. The AI samples stay in `ALL_SAMPLES`
+  (the old `SAMPLES` is the CC0 six that `p3d.spec` builds on every tier).
 - Samples load only when picked; nothing joins the opening download.
 - Never used for science, math or engineering toys, the photoreal shelves or real landmarks.
 

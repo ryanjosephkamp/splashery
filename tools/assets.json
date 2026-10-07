@@ -1006,7 +1006,7 @@
     },
     {
       "id": "dot-train",
-      "file": "assets/toys/photo-3d/ai/train.webp",
+      "file": "assets/toys/photo-3d/ai/train.jpg",
       "depth": "assets/toys/photo-3d/ai/train.depth",
       "toy": "photo-3d",
       "name": "Train on a viaduct, an AI-made picture",
@@ -1016,11 +1016,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D01",
-      "note": "Dot prompt pack, D01. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D01. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-oasis",
-      "file": "assets/toys/photo-3d/ai/oasis.webp",
+      "file": "assets/toys/photo-3d/ai/oasis.jpg",
       "depth": "assets/toys/photo-3d/ai/oasis.depth",
       "toy": "photo-3d",
       "name": "Desert oasis, an AI-made picture",
@@ -1030,11 +1030,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D03",
-      "note": "Dot prompt pack, D03. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D03. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-castle",
-      "file": "assets/toys/photo-3d/ai/castle.webp",
+      "file": "assets/toys/photo-3d/ai/castle.jpg",
       "depth": "assets/toys/photo-3d/ai/castle.depth",
       "toy": "photo-3d",
       "name": "Castle on a lake, an AI-made picture",
@@ -1044,11 +1044,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D04",
-      "note": "Dot prompt pack, D04. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D04. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-cove",
-      "file": "assets/toys/photo-3d/ai/cove.webp",
+      "file": "assets/toys/photo-3d/ai/cove.jpg",
       "depth": "assets/toys/photo-3d/ai/cove.depth",
       "toy": "photo-3d",
       "name": "Fishing cove, an AI-made picture",
@@ -1058,11 +1058,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D05",
-      "note": "Dot prompt pack, D05. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D05. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-harbor",
-      "file": "assets/toys/photo-3d/ai/harbor.webp",
+      "file": "assets/toys/photo-3d/ai/harbor.jpg",
       "depth": "assets/toys/photo-3d/ai/harbor.depth",
       "toy": "photo-3d",
       "name": "Toy harbor, an AI-made picture",
@@ -1072,11 +1072,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D34",
-      "note": "Dot prompt pack, D34. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D34. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-paper-valley",
-      "file": "assets/toys/photo-3d/ai/paper-valley.webp",
+      "file": "assets/toys/photo-3d/ai/paper-valley.jpg",
       "depth": "assets/toys/photo-3d/ai/paper-valley.depth",
       "toy": "photo-3d",
       "name": "Paper valley, an AI-made picture",
@@ -1086,11 +1086,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D36",
-      "note": "Dot prompt pack, D36. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D36. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-farm",
-      "file": "assets/toys/photo-3d/ai/farm.webp",
+      "file": "assets/toys/photo-3d/ai/farm.jpg",
       "depth": "assets/toys/photo-3d/ai/farm.depth",
       "toy": "photo-3d",
       "name": "Felt farm, an AI-made picture",
@@ -1100,11 +1100,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D37",
-      "note": "Dot prompt pack, D37. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D37. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-treehouses",
-      "file": "assets/toys/photo-3d/ai/treehouses.webp",
+      "file": "assets/toys/photo-3d/ai/treehouses.jpg",
       "depth": "assets/toys/photo-3d/ai/treehouses.depth",
       "toy": "photo-3d",
       "name": "Treehouse village, an AI-made picture",
@@ -1114,11 +1114,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D02",
-      "note": "Dot prompt pack, D02. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D02. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-library",
-      "file": "assets/toys/photo-3d/ai/library.webp",
+      "file": "assets/toys/photo-3d/ai/library.jpg",
       "depth": "assets/toys/photo-3d/ai/library.depth",
       "toy": "photo-3d",
       "name": "Long library, an AI-made picture",
@@ -1128,11 +1128,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D06",
-      "note": "Dot prompt pack, D06. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D06. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-workshop",
-      "file": "assets/toys/photo-3d/ai/workshop.webp",
+      "file": "assets/toys/photo-3d/ai/workshop.jpg",
       "depth": "assets/toys/photo-3d/ai/workshop.depth",
       "toy": "photo-3d",
       "name": "Woodworking shop, an AI-made picture",
@@ -1142,11 +1142,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D07",
-      "note": "Dot prompt pack, D07. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D07. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-cloister",
-      "file": "assets/toys/photo-3d/ai/cloister.webp",
+      "file": "assets/toys/photo-3d/ai/cloister.jpg",
       "depth": "assets/toys/photo-3d/ai/cloister.depth",
       "toy": "photo-3d",
       "name": "Stone cloister, an AI-made picture",
@@ -1156,11 +1156,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D08",
-      "note": "Dot prompt pack, D08. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D08. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-greenhouse",
-      "file": "assets/toys/photo-3d/ai/greenhouse.webp",
+      "file": "assets/toys/photo-3d/ai/greenhouse.jpg",
       "depth": "assets/toys/photo-3d/ai/greenhouse.depth",
       "toy": "photo-3d",
       "name": "Greenhouse, an AI-made picture",
@@ -1170,11 +1170,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D10",
-      "note": "Dot prompt pack, D10. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D10. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-attic",
-      "file": "assets/toys/photo-3d/ai/attic.webp",
+      "file": "assets/toys/photo-3d/ai/attic.jpg",
       "depth": "assets/toys/photo-3d/ai/attic.depth",
       "toy": "photo-3d",
       "name": "Attic, an AI-made picture",
@@ -1184,11 +1184,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D14",
-      "note": "Dot prompt pack, D14. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D14. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-bamboo",
-      "file": "assets/toys/photo-3d/ai/bamboo.webp",
+      "file": "assets/toys/photo-3d/ai/bamboo.jpg",
       "depth": "assets/toys/photo-3d/ai/bamboo.depth",
       "toy": "photo-3d",
       "name": "Bamboo path, an AI-made picture",
@@ -1198,11 +1198,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D16",
-      "note": "Dot prompt pack, D16. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D16. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-terraces",
-      "file": "assets/toys/photo-3d/ai/terraces.webp",
+      "file": "assets/toys/photo-3d/ai/terraces.jpg",
       "depth": "assets/toys/photo-3d/ai/terraces.depth",
       "toy": "photo-3d",
       "name": "Rice terraces, an AI-made picture",
@@ -1212,11 +1212,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D11",
-      "note": "Dot prompt pack, D11. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D11. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-canyon",
-      "file": "assets/toys/photo-3d/ai/canyon.webp",
+      "file": "assets/toys/photo-3d/ai/canyon.jpg",
       "depth": "assets/toys/photo-3d/ai/canyon.depth",
       "toy": "photo-3d",
       "name": "Canyon at sunset, an AI-made picture",
@@ -1226,11 +1226,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D13",
-      "note": "Dot prompt pack, D13. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D13. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-arch",
-      "file": "assets/toys/photo-3d/ai/arch.webp",
+      "file": "assets/toys/photo-3d/ai/arch.jpg",
       "depth": "assets/toys/photo-3d/ai/arch.depth",
       "toy": "photo-3d",
       "name": "Stone arch, an AI-made picture",
@@ -1240,11 +1240,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D17",
-      "note": "Dot prompt pack, D17. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D17. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-fallen-log",
-      "file": "assets/toys/photo-3d/ai/fallen-log.webp",
+      "file": "assets/toys/photo-3d/ai/fallen-log.jpg",
       "depth": "assets/toys/photo-3d/ai/fallen-log.depth",
       "toy": "photo-3d",
       "name": "Forest and fallen log, an AI-made picture",
@@ -1254,11 +1254,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D19",
-      "note": "Dot prompt pack, D19. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D19. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-alpine-lake",
-      "file": "assets/toys/photo-3d/ai/alpine-lake.webp",
+      "file": "assets/toys/photo-3d/ai/alpine-lake.jpg",
       "depth": "assets/toys/photo-3d/ai/alpine-lake.depth",
       "toy": "photo-3d",
       "name": "Alpine lake, an AI-made picture",
@@ -1268,11 +1268,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D20",
-      "note": "Dot prompt pack, D20. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D20. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-ice-falls",
-      "file": "assets/toys/photo-3d/ai/ice-falls.webp",
+      "file": "assets/toys/photo-3d/ai/ice-falls.jpg",
       "depth": "assets/toys/photo-3d/ai/ice-falls.depth",
       "toy": "photo-3d",
       "name": "Frozen waterfall, an AI-made picture",
@@ -1282,11 +1282,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D30",
-      "note": "Dot prompt pack, D30. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D30. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-floating-isles",
-      "file": "assets/toys/photo-3d/ai/floating-isles.webp",
+      "file": "assets/toys/photo-3d/ai/floating-isles.jpg",
       "depth": "assets/toys/photo-3d/ai/floating-isles.depth",
       "toy": "photo-3d",
       "name": "Floating islands, an AI-made picture",
@@ -1296,11 +1296,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D32",
-      "note": "Dot prompt pack, D32. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D32. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-wave",
-      "file": "assets/toys/photo-3d/ai/wave.webp",
+      "file": "assets/toys/photo-3d/ai/wave.jpg",
       "depth": "assets/toys/photo-3d/ai/wave.depth",
       "toy": "photo-3d",
       "name": "Glass wave, an AI-made picture",
@@ -1310,11 +1310,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D38",
-      "note": "Dot prompt pack, D38. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D38. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-explorer-desk",
-      "file": "assets/toys/photo-3d/ai/explorer-desk.webp",
+      "file": "assets/toys/photo-3d/ai/explorer-desk.jpg",
       "depth": "assets/toys/photo-3d/ai/explorer-desk.depth",
       "toy": "photo-3d",
       "name": "Explorer's desk, an AI-made picture",
@@ -1324,11 +1324,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D21",
-      "note": "Dot prompt pack, D21. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D21. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-watchmaker",
-      "file": "assets/toys/photo-3d/ai/watchmaker.webp",
+      "file": "assets/toys/photo-3d/ai/watchmaker.jpg",
       "depth": "assets/toys/photo-3d/ai/watchmaker.depth",
       "toy": "photo-3d",
       "name": "Watchmaker's bench, an AI-made picture",
@@ -1338,11 +1338,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D22",
-      "note": "Dot prompt pack, D22. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D22. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-dragonfly",
-      "file": "assets/toys/photo-3d/ai/dragonfly.webp",
+      "file": "assets/toys/photo-3d/ai/dragonfly.jpg",
       "depth": "assets/toys/photo-3d/ai/dragonfly.depth",
       "toy": "photo-3d",
       "name": "Dragonfly, an AI-made picture",
@@ -1352,11 +1352,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D26",
-      "note": "Dot prompt pack, D26. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D26. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-mushrooms",
-      "file": "assets/toys/photo-3d/ai/mushrooms.webp",
+      "file": "assets/toys/photo-3d/ai/mushrooms.jpg",
       "depth": "assets/toys/photo-3d/ai/mushrooms.depth",
       "toy": "photo-3d",
       "name": "Mushrooms, an AI-made picture",
@@ -1366,11 +1366,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D27",
-      "note": "Dot prompt pack, D27. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D27. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-market",
-      "file": "assets/toys/photo-3d/ai/market.webp",
+      "file": "assets/toys/photo-3d/ai/market.jpg",
       "depth": "assets/toys/photo-3d/ai/market.depth",
       "toy": "photo-3d",
       "name": "Fruit market, an AI-made picture",
@@ -1380,11 +1380,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D28",
-      "note": "Dot prompt pack, D28. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D28. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-gears",
-      "file": "assets/toys/photo-3d/ai/gears.webp",
+      "file": "assets/toys/photo-3d/ai/gears.jpg",
       "depth": "assets/toys/photo-3d/ai/gears.depth",
       "toy": "photo-3d",
       "name": "Giant gears, an AI-made picture",
@@ -1394,11 +1394,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D31",
-      "note": "Dot prompt pack, D31. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D31. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-chess",
-      "file": "assets/toys/photo-3d/ai/chess.webp",
+      "file": "assets/toys/photo-3d/ai/chess.jpg",
       "depth": "assets/toys/photo-3d/ai/chess.depth",
       "toy": "photo-3d",
       "name": "Chess board, an AI-made picture",
@@ -1408,11 +1408,11 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D40",
-      "note": "Dot prompt pack, D40. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D40. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     },
     {
       "id": "dot-book-city",
-      "file": "assets/toys/photo-3d/ai/book-city.webp",
+      "file": "assets/toys/photo-3d/ai/book-city.jpg",
       "depth": "assets/toys/photo-3d/ai/book-city.depth",
       "toy": "photo-3d",
       "name": "City of books, an AI-made picture",
@@ -1422,7 +1422,7 @@
       "checked": "October 7, 2026",
       "ai": true,
       "prompt": "D29",
-      "note": "Dot prompt pack, D29. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (WebP). Its depth map is made by tools/dsm-depth.mjs."
+      "note": "Dot prompt pack, D29. Made by the owner with his own AI image plan and shipped under the AI-made sample rules (CLAUDE.md, October 5, 2026): no people, logos or text; never a real capture or a real place. Resized to 1,280 px wide (JPEG). Its depth map is made by tools/dsm-depth.mjs."
     }
   ],
   "soundSamples": [
