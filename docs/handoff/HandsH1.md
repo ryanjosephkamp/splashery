@@ -70,6 +70,12 @@ cards, grouped Balls, Shapes, Toys and Clothing).
   bricks, Newton's cradle, puzzle cube and chess set are the engine and Physics lanes'.)
 - Clothing #434: the sunglasses, baseball cap, running shoe and hoodie's sleeves, 4 cards;
   hh1-clothing, 5 passed. (The hood is engine C's.)
+- Owner's marks (read October 8, 2026, 22:54): every `hh1-` card "good" but two "fix" notes, both
+  fixed and re-posted as `-r2` cards: the running shoe's loose laces now drape over the shoe and
+  down its outside instead of falling through it (a shell of spheres under the scan's measured top
+  and inside its sides; the test checks the laces against the scan itself), and the robot's clip is
+  re-rendered from behind, wound by circling its key, so the key's turn shows. Main merged into all
+  five branches the same evening; each lane spec passes.
 - Not done: the garden gnome (the L1 sweep's finding) is a scan outside these shelves, its cause in
   the engine's resting contact (see "For the Operator").
 
@@ -112,8 +118,12 @@ cards, grouped Balls, Shapes, Toys and Clothing).
 ## Known issues
 
 - Toys and Clothing: the teddy bear is picked up by its tummy (held by an arm, the arm swung away
-  from the finger); the robot's key is wound by circling its tummy (the key is on its back).
+  from the finger); the robot's key is wound by a finger circling its tummy or, from behind, its
+  key.
 
+- Running shoe: the laces' shell checks them against about 260 spheres while they move (sleeps when
+  still), about 1.5 ms a frame more in the test browser; the laces sit up to about 1 cm off the
+  shoe's sides.
 - With the camera looking down at the floor from the side, a throw to the right also goes away from
   the camera, so on a phone a ball's roll shows partly as getting smaller.
 - The walls are invisible: a ball that rolls 3 toy radii stops against one.
