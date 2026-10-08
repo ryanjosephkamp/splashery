@@ -267,7 +267,7 @@ export function buildVolume(
 
 // The maximum-intensity projection along a recipe axis (0 right, 1 up, 2 toward the viewer), drawn
 // as a flat picture facing the viewer: each pixel is the highest value on its line through the
-// volume. Pixels at or below the window's bottom are left out (the background shows through).
+// volume. Pixels at or below the window's bottom are black.
 export function buildMIP(k, V, { lo, hi, axis = 2, colors = "gray", budget }) {
   const map = (COLORMAPS[colors] || COLORMAPS.gray).map;
   const j = V.view.findIndex((a) => a.axis === axis);
@@ -298,9 +298,9 @@ export function buildMIP(k, V, { lo, hi, axis = 2, colors = "gray", budget }) {
   const vIdx = pu ? q : p;
   const W = n[uIdx] * V.spacing[uIdx];
   const H = n[vIdx] * V.spacing[vIdx];
-  let lit = 0;
-  for (let i = 0; i < img.length; i++) if (img[i] > lo) lit++;
-  const area = (Math.max(1, lit) / img.length) * W * H;
+  // The whole picture is drawn, on black like a radiograph: values at or below the window's
+  // bottom are black.
+  const area = W * H;
   let h = Math.sqrt(area / Math.max(1000, budget * 0.92));
   h = Math.max(h, Math.min(V.spacing[uIdx], V.spacing[vIdx]) * 0.5);
   const cu = W / 2;
@@ -323,17 +323,17 @@ export function buildMIP(k, V, { lo, hi, axis = 2, colors = "gray", budget }) {
       const fb = clamp(ib - b0, 0, 1);
       const g = (aa, bb) => img[bb * np + aa];
       const v = lerp(lerp(g(a0, b0), g(a1, b0), fa), lerp(g(a0, b1), g(a1, b1), fa), fb);
-      if (!(v > lo)) continue;
       pts.push(x - cu, y - cv, v);
     }
   const count = pts.length / 3;
   const s = h * 0.62;
   k.cloud({ count: count * (160000 / k.count), jitter: 0 }, (r, i) => {
     if (i >= count) return null;
-    const t = clamp((pts[i * 3 + 2] - lo) / span, 0, 1);
+    const v = pts[i * 3 + 2];
+    const t = clamp((v - lo) / span, 0, 1);
     return {
       p: [pts[i * 3], pts[i * 3 + 1], 0],
-      color: map(t),
+      color: v > lo ? map(t) : [0.015, 0.015, 0.02],
       scales: [s, s, s * 0.08],
       opacity: 1,
       pattern: false,

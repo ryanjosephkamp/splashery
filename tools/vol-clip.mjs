@@ -35,11 +35,11 @@ const CLIPS = {
     sweep: 0.5,
     yaw: 0.04,
   },
-  // A thin slice moves through the gar from top to bottom, then the bone (dense) preset.
+  // A thin slice moves through the gar from front to back.
   "vol-gar-slice": {
-    opts: { source: "gar", preset: "full", colors: "gray", cut: "top", slice: true },
+    opts: { source: "gar", preset: "full", colors: "gray", cut: "front", slice: true },
     secs: 6,
-    cut: (t) => 0.85 - (t / 6) * 0.6,
+    cut: (t) => 0.8 - (t / 6) * 0.6,
   },
   // The maximum-intensity picture, then a tap to the next preset.
   "vol-gar-mip": {
@@ -67,26 +67,29 @@ await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
 for (const name of names.length ? names : Object.keys(CLIPS)) {
   const c = CLIPS[name];
   const tmp = fs.mkdtempSync(path.join(outDir, `.${name}-`));
-  await page.evaluate(async ({ opts }) => {
-    const { app, player } = window.__splashery;
-    if (player.scene.toy?.id !== "volume-viewer") await app.chooseToy("volume-viewer");
-    const { RECIPES, VOLUME_STATE } = await import("/src/packs/volume-viewer.js");
-    const defaults = Object.fromEntries(RECIPES["volume-viewer"].options.filter((x) => !x.hidden).map((x) => [x.key, x.default])); // prettier-ignore
-    await app.setToyOptions({ ...defaults, ...opts });
-    VOLUME_STATE.cut.at = 1;
-    player.opts.idleDelay = 1e9;
-    player.idle.weight = 0;
-    await new Promise((r) => setTimeout(r, 1500));
-    const stage = player.stage;
-    window.__volClip = { handlers: stage.updateHandlers.slice(), pending: 0 };
-    stage.updateHandlers.length = 0;
-    stage.updateHandlers.push(() => {
-      const d = window.__volClip.pending;
-      window.__volClip.pending = 0;
-      for (const h of window.__volClip.handlers) h(d);
-    });
-    window.__volClip.home = { ...player.camera.home };
-  }, c);
+  await page.evaluate(
+    async ({ opts }) => {
+      const { app, player } = window.__splashery;
+      if (player.scene.toy?.id !== "volume-viewer") await app.chooseToy("volume-viewer");
+      const { RECIPES, VOLUME_STATE } = await import("/src/packs/volume-viewer.js");
+      const defaults = Object.fromEntries(RECIPES["volume-viewer"].options.filter((x) => !x.hidden).map((x) => [x.key, x.default])); // prettier-ignore
+      await app.setToyOptions({ ...defaults, ...opts });
+      VOLUME_STATE.cut.at = 1;
+      player.opts.idleDelay = 1e9;
+      player.idle.weight = 0;
+      await new Promise((r) => setTimeout(r, 1500));
+      const stage = player.stage;
+      window.__volClip = { handlers: stage.updateHandlers.slice(), pending: 0 };
+      stage.updateHandlers.length = 0;
+      stage.updateHandlers.push(() => {
+        const d = window.__volClip.pending;
+        window.__volClip.pending = 0;
+        for (const h of window.__volClip.handlers) h(d);
+      });
+      window.__volClip.home = { ...player.camera.home };
+    },
+    { opts: c.opts },
+  );
   const total = Math.round(c.secs * fps);
   const taps = new Set((c.taps || []).map((t) => Math.round(t * fps)));
   for (let i = 0; i < total; i++) {
@@ -96,7 +99,7 @@ for (const name of names.length ? names : Object.keys(CLIPS)) {
         const { app, player } = window.__splashery;
         const { VOLUME_STATE } = await import("/src/packs/volume-viewer.js");
         if (cut != null) VOLUME_STATE.cut.at = cut;
-        if (sweep) app.setControl("sweep", 1);
+        if (sweep) player.act(null); // the Play button: the sweep
         if (tap) {
           // A tap on the volume: its action picks the next preset and the toy rebuilds with it.
           const before = player.proc?.ctx;
@@ -116,7 +119,7 @@ for (const name of names.length ? names : Object.keys(CLIPS)) {
         t,
         cut: c.cut ? c.cut(t) : null,
         tap: taps.has(i),
-        sweep: c.sweep != null && Math.abs(t - c.sweep) < 0.5 / fps,
+        sweep: c.sweep != null && i === Math.round(c.sweep * fps),
         yaw: c.yaw,
         step: 1 / fps,
       },

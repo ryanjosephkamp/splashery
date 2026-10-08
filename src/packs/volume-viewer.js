@@ -230,7 +230,7 @@ function driveVolume(t, c, out, info) {
   }
   let at = VV.cut.at;
   // The sweep: the cut runs down through the volume and back.
-  if (c.sweep > 0.001) at = Math.min(at, 1 - Math.sin(Math.PI * (1 - c.sweep)) * 0.98);
+  if (c.sweep > 0.001) at = Math.min(at, 1 - Math.sin(Math.PI * (1 - c.sweep)) * 0.85);
   const dir = CUT_DIRS[d.cut] || CUT_DIRS.front;
   const ext = Math.abs(d.half[dir.axis]) + d.pitch;
   const vol = { window: [0, 1] };
@@ -487,9 +487,10 @@ const VIEWER = {
     { key: "sweep", label: "Sweep the cut through", type: "pulse", ease: 5 },
     { key: "step", label: "Next preset", type: "pulse", ease: 0.4 },
   ],
+  // The Play button sweeps the cut through; a tap on the volume steps to the next preset.
   action: {
-    key: "step",
-    label: "Tap the volume to step through the presets (bone, soft tissue, full range)",
+    key: "sweep",
+    label: "Sweep the cut through (tap the volume for the next preset: bone, soft tissue, full range)", // prettier-ignore
     at(point, c) {
       void point;
       void c;
@@ -499,7 +500,7 @@ const VIEWER = {
       return { options: { preset: PRESET_ORDER[(i + 1) % PRESET_ORDER.length] }, key: "step" };
     },
   },
-  note: "Drag up or down on the volume to move the cut; tap it for the next preset.",
+  note: "Drag up or down on the volume to move the cut; tap it for the next preset. Play sweeps the cut through.",
   drag: cutDrag(),
   input: {
     title: "Your own volume",

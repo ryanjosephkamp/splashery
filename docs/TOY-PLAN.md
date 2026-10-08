@@ -3502,8 +3502,8 @@ Proposals below are suggestions; the owner may change them.
     cliff, so edges read crisply.
   - Sound: An airy rising tone and faint ticks as the scan line crosses, both quiet (Sound D,
     October 6, 2026: subtler wind and twinkle).
-- **Volume viewer** (`volume-viewer`). Now: tap: Tap the volume to step through the presets (bone,
-  soft tissue, full range). Plan: keep.
+- **Volume viewer** (`volume-viewer`). Now: tap: Sweep the cut through (tap the volume for the next
+  preset: bone, soft tissue, full range). Plan: keep.
   - Owner: The owner's Push Plan pick S4, "For the volume viewer, absolutely" (October 4, 2026), and
     his yes to a DICOM reader the same day (lane Volume viewer, October 8, 2026; labs only).
   - Effect: A person's own CT, MRI or microscope volume (DICOM series, folder, zip or multi-frame
@@ -3511,7 +3511,8 @@ Proposals below are suggestions; the owner may change them.
     spaced to the device's budget, each voxel at its true size. Window and level with presets (bone,
     soft tissue, full range) or sliders, five color maps and two opacity curves, a cut plane on each
     axis that a drag moves (with a glowing cut face), a thin-slice view, and the maximum-intensity
-    picture. A tap steps to the next preset (the toy rebuilds with the new window).
+    picture. A tap on the volume steps to the next preset (the toy rebuilds with the new window);
+    the Play button sweeps the cut down through the volume and back (5 s).
   - Improved: Volume viewer: new toy (labs). Readers in src/volume/read.js (dicom-parser 1.8.21,
     MIT, vendored and loaded only for a DICOM file; NIfTI, TIFF and zip read in the page), the view
     in src/volume/view.js on the Imaging lane's volume kind. Samples: the CWI walnut (CC BY 4.0) and
