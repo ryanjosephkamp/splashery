@@ -1107,7 +1107,8 @@ export class Kit {
       const kind = s.to ? KINDS.morph : s.skin ? (s.skin.length >= 6 ? KINDS.skin4 : KINDS.skin) : kindOf(s.kind ?? o.kind); // prettier-ignore
       const pr = s.params ?? o.params ?? [0, 0];
       const partIdx = s.part ?? o.part ?? 0;
-      const flags = (s.pattern ?? o.pattern) === false ? 16 : 0;
+      // (lane Photo fidelity: 32 marks a splat that takes its colors from the toy's photo)
+      const flags = ((s.pattern ?? o.pattern) === false ? 16 : 0) + ((s.photo ?? o.photo) ? 32 : 0);
       const [a, b] = this.animParams(kind, s.p, pr, s.to, s.channel ?? o.channel, s.skin);
       buf.push(
         s.p,
