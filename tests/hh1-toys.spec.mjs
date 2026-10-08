@@ -167,7 +167,8 @@ test("spinning top: flicked round, it spins, wobbles wider as it slows and toppl
       player.update(1 / 60);
       spin = Math.max(spin, Math.abs(j.w));
       const q = player.motion.handsParts?.top?.quat;
-      if (q && Math.round(t * 60) % 60 === 0) tilt.push(Math.acos(Math.min(1, rot(q, [0, 1, 0])[1])));
+      if (q && Math.round(t * 60) % 60 === 0)
+        tilt.push(Math.acos(Math.min(1, rot(q, [0, 1, 0])[1])));
     }
     return { spin, tilt };
   }, ROT);
@@ -231,7 +232,12 @@ test("wind-up robot: wound by its key, it walks off as the key unwinds, arms swi
       const q = player.motion.handsParts?.armR?.quat;
       if (q) swing = Math.max(swing, 2 * Math.acos(Math.min(1, Math.abs(q[3]))));
     }
-    return { wound, walked: player.motion.handsParts.walker.offset[2], swing, left: h.joints.state()[0].v };
+    return {
+      wound,
+      walked: player.motion.handsParts.walker.offset[2],
+      swing,
+      left: h.joints.state()[0].v,
+    };
   });
   console.log(`robot: ${JSON.stringify(s)}`);
   expect(s.wound).toBeGreaterThan(10); // nearly three turns
