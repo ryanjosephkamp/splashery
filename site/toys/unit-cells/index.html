@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Unit cells · Splashery</title>
+    <meta
+      name="description"
+      content="Unit cells, a Splashery toy made of 3D Gaussian splats: Tap to step from the unit cell to a block of cells, then to the bonds, and back."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/unit-cells/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Unit cells · Splashery" />
+    <meta
+      property="og:description"
+      content="Unit cells, a Splashery toy made of 3D Gaussian splats: Tap to step from the unit cell to a block of cells, then to the bonds, and back."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/unit-cells/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/unit-cells/thumb.webp"
+    />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="Unit cells, made of soft 3D splats" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+
+    <script type="module" src="../../assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/" aria-current="page">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <link rel="stylesheet" href="../../assets/toy-page.css" />
+      <div class="labs-off" data-labs-off>
+        <p class="eyebrow">In the labs</p>
+        <h1>Unit cells</h1>
+        <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
+        <p class="actions">
+          <a class="button primary" href="./?labs=1">Turn the labs on</a
+          ><a class="button" href="../../toys/">Every toy</a>
+        </p>
+      </div>
+      <article class="toy-page" data-labs>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
+          <a href="../../toys/#shelf-atoms">Atoms</a>
+        </nav>
+        <div class="toy-hero">
+          <div class="toy-head">
+            <h1>Unit cells <span class="badge">labs</span></h1>
+            <p class="lead how-to">
+              Tap to step from the unit cell to a block of cells, then to the bonds, and back.
+            </p>
+            <dl class="does">
+              <div>
+                <dt>Tap</dt>
+                <dd>
+                  Six real crystals (diamond, graphite, ice Ih, fcc copper, bcc iron, hcp magnesium)
+                  from their published cells (COD), atoms as opaque even spheres with true relative
+                  radii.
+                </dd>
+              </div>
+              <div>
+                <dt>Sound</dt>
+                <dd>
+                  A small, clear glass clink as the view steps, and a soft wooden tick as the atoms
+                  settle.
+                </dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a
+                class="button primary"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InVuaXQtY2VsbHMifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjN9fQ"
+                target="_blank"
+                rel="noopener"
+                >Open in the gallery<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a class="button" href="#h-share">Share or embed</a>
+            </p>
+          </div>
+          <figure class="hero-toy toy-stage">
+            <div class="stage">
+              <span
+                class="poster"
+                aria-hidden="true"
+                style="
+                  background-image: url(&quot;../../../assets/toys/unit-cells/thumb.webp&quot;);
+                "
+              ></span>
+              <iframe
+                data-src="../../play/?toy=unit-cells&sound=on"
+                title="Unit cells, live: drag to turn it"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
+          </figure>
+        </div>
+        <section class="toy-section" aria-labelledby="h-about">
+          <h2 id="h-about">About this toy</h2>
+          <p>
+            A crystal is one small box of atoms, its unit cell, repeated in every direction. This
+            toy builds six real crystals from their measured cells: diamond, graphite, ice, and the
+            metals copper (face-centered cubic), iron (body-centered cubic) and magnesium (hexagonal
+            close-packed). The atoms are drawn to scale: in the metals, diamond and graphite,
+            neighbors touch.
+          </p>
+          <p>
+            Tap to step from the unit cell to a block of cells, which grows out of it, and then to
+            the bonds: each atom shrinks to a ball and sticks join its nearest neighbors (in the
+            metals, atoms in contact). Choose the crystal, the cells along each edge and the first
+            view. Thermal motion shows how far each atom's center wanders, from published
+            measurements. Ice's hydrogens are one of the many arrangements real ice allows.
+          </p>
+        </section>
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            The toy builds six crystals from their published cells and atom positions
+            (Crystallography Open Database, public domain): diamond, graphite, ice Ih, copper (fcc),
+            iron (bcc) and magnesium (hcp). Atoms are spheres with true relative radii, bonds join
+            nearest neighbors at their real distances, ice's hydrogens obey the ice rules, and the
+            optional thermal motion draws each atom as one Gaussian whose spread is its published
+            mean-square displacement. Tests check the cells, the distances, the coordination
+            numbers, the ice rules and the U values.
+            <span class="note">Checked October 7, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Each crystal's cell and atom
+                positions are the published ones.
+              </p>
+              <p>
+                src/lattice/cells.js holds each cell (a, c, γ) and its basis in fractional
+                coordinates as the COD entry gives them; blocks repeat the cell along its three
+                axes.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/9008564.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 9008564: diamond, a = 3.56679 Å (Wyckoff, Crystal Structures, 1963)</a
+                  >, Crystallography Open Database: <q>Fd-3m, a = 3.56679 Å, C at (0, 0, 0).</q>
+                </li>
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/9011577.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 9011577: graphite (Trucano and Chen, Nature 258, 136, 1975)</a
+                  >, Crystallography Open Database:
+                  <q
+                    >P6₃/mmc, a = 2.464 Å, c = 6.711 Å; C1 (0, 0, ¼), C2 (⅓, ⅔, ¼); U11 = 0.0031,
+                    U33 = 0.016 and 0.017 Å².</q
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/1538173.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 1538173: ice Ih (Goto, Hondoh and Mae, J. Chem. Phys. 93, 1412, 1990)</a
+                  >, Crystallography Open Database:
+                  <q
+                    >P6₃/mmc, a = 4.506 Å, c = 7.346 Å; O1 (⅓, ⅔, 0.0618); H1 (⅓, ⅔, 0.198) and H2
+                    (0.437, 0.874, 0.028) at half occupancy.</q
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/9008468.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 9008468: copper, a = 3.61496 Å (Wyckoff 1963)</a
+                  >, Crystallography Open Database: <q>Fm-3m, a = 3.61496 Å, Cu at (0, 0, 0).</q>
+                </li>
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/9008536.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 9008536: α-iron at 298 K, a = 2.8665 Å (Wyckoff 1963)</a
+                  >, Crystallography Open Database: <q>Im-3m, a = 2.8665 Å, Fe at (0, 0, 0).</q>
+                </li>
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/9008506.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 9008506: magnesium, a = 3.20927 Å, c = 5.21033 Å (Wyckoff 1963)</a
+                  >, Crystallography Open Database: <q>P6₃/mmc, Mg at (⅓, ⅔, ¼).</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Bonds join nearest neighbors at
+                their real lengths: diamond 1.544 Å (4 each), graphite 1.423 Å in the layers (3
+                each), copper 2.556 Å (12), iron 2.482 Å (8), magnesium 3.21 and 3.20 Å (12).
+              </p>
+              <p>
+                findBonds joins atoms of the listed kinds whose distance is within a few hundredths
+                of an ångström of the bond length computed from the cell.
+              </p>
+              <p class="note">
+                For the metals, the sticks are contacts between neighbors (metallic bonding is not
+                directional).
+              </p>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Atoms have true relative radii:
+                in the metals, diamond and graphite, neighbors touch (half the neighbor distance);
+                in ice, the covalent radii of O (0.66 Å) and H (0.31 Å).
+              </p>
+              <p>
+                Each crystal's radius table; the bonds view shrinks every atom by the same factor
+                (2.5) about its own center.
+              </p>
+              <p class="note">
+                Graphite's spheres use half the in-plane bond, so the layers show the real 3.36 Å
+                gap between them.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://doi.org/10.1039/B801115J" target="_blank" rel="noopener"
+                    >Covalent radii revisited (B. Cordero et al., Dalton Trans., 2832–2838, 2008)</a
+                  >, Royal Society of Chemistry:
+                  <q>Covalent radii: H 0.31 Å, C(sp3) 0.76 Å, O 0.66 Å.</q>
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Ice's hydrogens follow the ice
+                rules: two on each oxygen, one on each O–O line, 1.00 Å from their oxygen.
+              </p>
+              <p>
+                An Euler circuit on the periodic 6 × 6 × 6 network of oxygens (every oxygen has four
+                neighbors) gives each O–O line's hydrogen to the oxygen the walk leaves from: each
+                oxygen is left twice. Random turns give one of the many disordered arrangements of
+                real ice. 1.00 Å is the distance from O1 to the file's H1 site.
+              </p>
+              <p class="note">
+                The cell's file shows each hydrogen site half full (the average); the toy shows one
+                real arrangement.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/1538173.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 1538173</a
+                  >, Crystallography Open Database:
+                  <q
+                    >O1 z = 0.0618 and H1 z = 0.198 on the same c-axis line: (0.198 − 0.0618) ×
+                    7.346 Å = 1.00 Å.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> Thermal motion: each atom's
+                Gaussian has the published mean-square displacement, U = B / 8π², at 293 K for
+                diamond and the metals, Trucano and Chen's anisotropic U for graphite, and the 81 K
+                values for ice.
+              </p>
+              <p>
+                One splat per atom whose sizes along x, y and z are √U (or 5√U when magnified): the
+                Debye–Waller distribution of the atom's center, which is a Gaussian.
+              </p>
+              <p class="note">
+                Graphite's U is from room temperature; ice's from 81 K (the only anisotropic set
+                found in COD); said in the About text.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://rengroup.lbl.gov/page5/assets/1996-ACTA-A2.pdf"
+                    target="_blank"
+                    rel="noopener"
+                    >Debye–Waller factors and absorptive scattering factors of elemental crystals
+                    (L.-M. Peng, G. Ren, S. L. Dudarev and M. J. Whelan, Acta Cryst. A52, 456–470,
+                    1996)</a
+                  >, International Union of Crystallography:
+                  <q
+                    >Tables 6, 8, 19 and 22, at 293.0 K: B = 0.1435 Å² for C (diamond), 1.8122 for
+                    Mg, 0.3250 for Fe (b.c.c.), 0.5505 for Cu.</q
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.crystallography.net/cod/1572227.html"
+                    target="_blank"
+                    rel="noopener"
+                    >COD 1572227: ice Ih at 81.15 K (IUCrJ 11, 2024)</a
+                  >, Crystallography Open Database:
+                  <q
+                    >O1 Uani (U11 0.010, U22 0.0065, U33 0.0058; Ueq 0.008 Å²); H Uiso 0.026 and
+                    0.025 Å².</q
+                  >
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>The atoms are hard spheres; real electron clouds have no edge.</li>
+            <li>
+              The bonds view shrinks every atom by the same factor so the sticks show; the sticks
+              between metal atoms mark neighbors in contact, not covalent bonds.
+            </li>
+            <li>
+              Ice's hydrogens are one random arrangement allowed by the ice rules, repeating every
+              six cells.
+            </li>
+            <li>
+              In the thermal view, each Gaussian stands for where the atom's center is likely to be
+              at an instant; the toy does not animate the vibration.
+            </li>
+            <li>The colors are chosen for each material, not measured.</li>
+          </ul>
+        </section>
+        <section class="toy-section" aria-labelledby="h-credits">
+          <h2 id="h-credits">Sources and credits</h2>
+          <p>
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/lattices.js"
+              target="_blank"
+              rel="noopener"
+              ><code>src/packs/lattices.js</code></a
+            >.
+          </p>
+          <ul class="toy-credits">
+            <li>
+              <b>Lattice constants and atom positions</b>:
+              <a href="https://www.crystallography.net/cod/" target="_blank" rel="noopener"
+                >Crystallography Open Database entries 9008564, 9011577, 1538173, 9008468, 9008536
+                and 9008506</a
+              >
+              by the COD and the structures' authors (Wyckoff 1963; Trucano and Chen 1975; Goto,
+              Hondoh and Mae 1990),
+              <a
+                href="https://creativecommons.org/publicdomain/zero/1.0/"
+                target="_blank"
+                rel="noopener"
+                >Public domain (CC0)</a
+              >.
+            </li>
+          </ul>
+          <p class="note">
+            Splashery's code is under the MIT license; each asset above keeps its own license. Every
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-share">
+          <h2 id="h-share">Share and embed</h2>
+          <div class="snippet">
+            <label for="snip-link">A link to this page</label
+            ><textarea id="snip-link" readonly rows="1" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/unit-cells/</textarea
+            ><button type="button" class="copy" data-copy="snip-link">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
+            ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=unit-cells&quot; title=&quot;Splashery: Unit cells&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-iframe">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <div class="snippet">
+            <label for="snip-element"
+              >Or with one script tag (the &lt;splashery-toy&gt; element)</label
+            ><textarea id="snip-element" readonly rows="3" spellcheck="false">
+&lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
+&lt;splashery-toy toy=&quot;unit-cells&quot;&gt;&lt;/splashery-toy&gt;</textarea
+            ><button type="button" class="copy" data-copy="snip-element">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="11"
+                  height="11"
+                  rx="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                /></svg
+              ><span>Copy</span>
+            </button>
+          </div>
+          <p class="note">
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
+          </p>
+        </section>
+        <section class="toy-section" aria-labelledby="h-related">
+          <div class="band-head">
+            <h2 id="h-related">Related toys</h2>
+            <a href="../../toys/#shelf-atoms"
+              >The Atoms shelf<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></a>
+          </div>
+          <ul class="toy-grid">
+            <li class="toy-card">
+              <a href="../../toys/crystal-lattice/"
+                ><img
+                  src="../../../assets/toys/crystal-lattice/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Crystal lattice</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/atom/"
+                ><img
+                  src="../../../assets/toys/atom/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Atom</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/orbital/"
+                ><img
+                  src="../../../assets/toys/orbital/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Electron orbital</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/molecule/"
+                ><img
+                  src="../../../assets/toys/molecule/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Molecule</span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/molecule-viewer/"
+                ><img
+                  src="../../../assets/toys/molecule-viewer/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Molecule viewer <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/orbital-atlas/"
+                ><img
+                  src="../../../assets/toys/orbital-atlas/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Orbital atlas <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/periodic-table/"
+                ><img
+                  src="../../../assets/toys/periodic-table/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Periodic table</span></a
+              >
+            </li>
+            <li class="toy-card">
+              <a href="../../toys/protein/"
+                ><img
+                  src="../../../assets/toys/protein/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Protein</span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+      <script type="module" src="../../assets/toy-page.js"></script>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
