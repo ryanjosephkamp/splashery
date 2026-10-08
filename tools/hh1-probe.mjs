@@ -13,7 +13,7 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
 page.on("console", (m) => console.log(m.text()));
-await page.goto(`http://127.0.0.1:4173/?renderer=webgl2&profile=mid&adapt=off`);
+await page.goto(`${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}?renderer=webgl2&profile=mid&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
 await page.evaluate(async (id) => {
   const { app, player } = window.__splashery;

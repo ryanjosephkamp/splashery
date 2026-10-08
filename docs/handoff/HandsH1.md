@@ -62,18 +62,22 @@ first); the Balls PR is stacked on it. Clips next.
 
 ## Notes
 
-- Engine PR #421 (`claude/lane-hands-h1-engine`), four fixes found while wiring the balls:
+- Engine PR #421 (`claude/lane-hands-h1-engine`), the pieces found while wiring the balls:
   - A material's `nose` acted on the ground too, so the shuttlecock flipped over and over as it slid
     and never rested (8 toy radii per second for 2 s after landing). Now it acts only in the air,
     its pull grows with the speed squared, and its swing is damped near critically.
   - A Level 1 toy's walls sit just past it (a ball's middle could move only 0.45 toy radii), so no
     ball could roll, slide or skid: `hands.area` moves them out, as wheels already did.
   - `hands.view` (0.8 by default): the view drifted 0.8 of the way after a tossed toy, so a kicked
-    ball barely moved on screen; the balls use 0.4.
+    ball barely moved on screen; the balls use 0.55.
   - `hands.friction`: `applyMaterial` keeps the floor at least as grippy as 0.7, so a puck (0.04)
     stopped within a quarter of a toy radius; the puck's floor is ice now.
-- Balls: 22 balls get `hands: { area: 4, view: 0.4, material, sound }` (the basketball, beach ball
-  and water polo ball are the engine lane's demo toys and stay as they are). Real numbers from
+  - `hands.soft`: a whole toy's landing squish over the SOFT list (the bouncy ball's 0.15).
+  - A shelf shape (procedural, no recipe) takes the gummy bear's stretch from its shelf entry's
+    `grab` (the jelly blob).
+- Balls: 22 balls get `hands: { area: 4, view: 0.55, material, sound }` (and `soft: 0.15` on the
+  bouncy ball, which squashed flat like jelly) (the basketball, beach ball and water polo ball are
+  the engine lane's demo toys and stay as they are). Real numbers from
   `tools/hands-on-materials.json`: its confirmed values override the presets (masses and sizes for
   most; the pickleball's 0.62 bounce; the shuttlecock's drag coefficient 0.7); its estimates do not.
   Two presets changed for the effect: the football's grab spin is 0.08 (a grab at one end tumbled it
