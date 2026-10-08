@@ -1247,6 +1247,25 @@ ETOPO 2022 at 60 arc-seconds), and names what is there:
   Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center), center points
   of every adopted feature but the lettered satellite craters. Public domain.
 
+## The solar system on real orbits (lane Space r4)
+
+All from JPL's Solar System Dynamics group (NASA/JPL; public domain scientific data), checked on the
+live pages on October 7, 2026, shipped as a dated snapshot (`tools/sp4-orbits.mjs`); nothing is
+fetched at run time.
+
+- The planets: E. M. Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (Table 1, 1800 to 2050), through the night sky's code.
+- The moons: JPL's [Planetary Satellite Mean Elements](https://ssd.jpl.nasa.gov/sats/elem/), and
+  Titan's osculating elements from [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/).
+- The asteroids and comets: the
+  [JPL Small-Body Database](https://ssd.jpl.nasa.gov/tools/sbdb_query.html) through its
+  [APIs](https://ssd-api.jpl.nasa.gov/): a seeded random sample of 4,000 numbered asteroids (plus
+  Ceres, Pallas, Vesta and Hygiea), and 1P/Halley, 2P/Encke, 9P/Tempel 1 and
+  67P/Churyumov-Gerasimenko.
+- The planets' and moons' colors: small copies of the real worlds' NASA and USGS maps (above).
+- The tests compare positions with values recorded from JPL Horizons.
+
 ## Powers of ten (lane Powers of ten)
 
 The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own files are
@@ -1507,6 +1526,26 @@ uses.
 | `tennis-ball-slam.mp3`                   | tennis-ball, softball                                 | [ball_hit_ground.wav](https://freesound.org/people/Kyanite_/sounds/432912/)                                | Kyanite\_        |
 | `vintage-camera-flash.mp3`               | vintage-camera                                        | [Vintage Camera Flash Powder and Shutter](https://freesound.org/people/Werra/sounds/232130/)               | Werra            |
 | `wooden-elephant-trumpet.mp3`            | wooden-elephant                                       | [Elephant Trumpets Growls.flac](https://freesound.org/people/D.jones/sounds/527845/)                       | D.jones          |
+
+## Lattices and orbitals (lane Lattices and orbitals)
+
+The Unit cells toy (labs) is computed from published numbers; no files are shipped. The cells and
+atom positions come from the [Crystallography Open Database](https://www.crystallography.net/cod/),
+whose data are in the public domain ("All data on this site have been placed in the public domain by
+the contributors"), checked October 7, 2026:
+[COD 9008564](https://www.crystallography.net/cod/9008564.html) (diamond),
+[COD 9008468](https://www.crystallography.net/cod/9008468.html) (copper),
+[COD 9008536](https://www.crystallography.net/cod/9008536.html) (α-iron) and
+[COD 9008506](https://www.crystallography.net/cod/9008506.html) (magnesium), all from R. W. G.
+Wyckoff, Crystal Structures (1963); [COD 9011577](https://www.crystallography.net/cod/9011577.html)
+(graphite, P. Trucano and R. Chen, Nature 258, 136–137, 1975);
+[COD 1538173](https://www.crystallography.net/cod/1538173.html) (ice Ih, A. Goto, T. Hondoh and S.
+Mae, J. Chem. Phys. 93, 1412, 1990) and
+[COD 1572227](https://www.crystallography.net/cod/1572227.html) (ice Ih's displacements at 81 K,
+IUCrJ 11, 2024). The Debye–Waller factors of diamond, copper, iron and magnesium at 293 K are from
+L.-M. Peng, G. Ren, S. L. Dudarev and M. J. Whelan, Acta Crystallographica A 52, 456–470 (1996), and
+the covalent radii of O and H from B. Cordero et al., Dalton Transactions, 2832–2838 (2008); numbers
+are facts, quoted with their source. The Orbital atlas computes the hydrogen wave functions itself.
 
 ## Software
 
