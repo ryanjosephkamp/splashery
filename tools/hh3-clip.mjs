@@ -55,7 +55,9 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: scale, isMobile: true, hasTouch: true }); // prettier-ignore
 page.on("pageerror", (e) => console.error("page error:", e.message));
-await page.goto(`${base}?renderer=webgl2&profile=mid&adapt=off${args.includes("--labs") ? "&labs=1" : ""}`); // (--labs: labs toys too)
+await page.goto(
+  `${base}?renderer=webgl2&profile=mid&adapt=off${args.includes("--labs") ? "&labs=1" : ""}`,
+); // (--labs: labs toys too)
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(
   async ({ id, fps, cam, zoom, toyOpt }) => {
