@@ -3094,6 +3094,8 @@ export const TOY_SOUNDS = {
   "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
   "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },
   "star-systems": { voice: "breath", f: 450, to: 0.7, decay: 2.5, vol: 0.27 },
+  // Lane Space r4: a soft breath as the view flies to the next planet.
+  "solar-orbits": { voice: "breath", f: 480, to: 0.64, decay: 2.9, vol: 0.26 },
   // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
   "data-in-3d": [
     { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },

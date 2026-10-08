@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 447 toys. 418 have a tap action today; the other 29 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 427.
+- 448 toys. 419 have a tap action today; the other 29 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 428.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 20.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -36,42 +36,42 @@ Proposals below are suggestions; the owner may change them.
   Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
   Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth,
   The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real
-  star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, Virus,
-  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
-  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to
-  protein, Cell division, Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein,
-  Crystal lattice, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst
-  geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree,
-  Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
-  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
-  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
-  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
-  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
-  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
-  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor,
-  Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box,
-  Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the
-  stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of
-  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
-  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
-  piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
-  Data in 3D.
+  star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, The
+  solar system on real orbits, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte,
+  Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome,
+  Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis,
+  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Molecule viewer, Periodic table, Real
+  elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye,
+  Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree,
+  Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus,
+  Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow
+  globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly,
+  Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza,
+  Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado,
+  Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set,
+  Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid,
+  Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles,
+  Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa attractor, 5-cell, 16-cell, 24-cell,
+  Duoprism, Splat equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running
+  shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target,
+  Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
+  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic
+  guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic
+  keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel
+  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
+  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda,
+  Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent
+  network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting,
+  Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine,
+  Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni plate, Room
+  echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D,
+  Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat field, Light lab, Thermal
+  ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a
+  box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at
+  Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray
+  scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera,
+  Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft
+  Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -932,7 +932,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (39)
+## Space (40)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -1314,6 +1314,17 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Space r2: new toy (labs) from NASA 3D Resources; tools/sp2-rockets.mjs decodes the
     Draco-compressed model, cuts it into its pieces and colors them.
   - Sound: A rumble as the engines light, and a thud at each separation.
+- **The solar system on real orbits** (`solar-orbits`). Now: tap: Fly to the next planet. Plan:
+  keep.
+  - Owner: The Operator's brief of October 7, 2026 (lane Space r4; labs only).
+  - Effect: The Sun, the eight planets, six large moons, four comets and 4,000 sampled real
+    asteroids on their real Keplerian orbits (JPL elements) for any date from 1800 to 2050: a date
+    slider, a speed from paused to a year a second, a readable scale (labeled, not to scale) and a
+    true scale. A tap flies to the next planet (the system grows about it, turned so its sunlit side
+    shows), and after Neptune back out.
+  - Improved: Space r4: new toy (labs). The asteroids move on the graphics chip by Kepler's equation
+    (src/space/orbit-field.js); the data is a dated snapshot (tools/sp4-orbits.mjs).
+  - Sound: Space is silent: a soft breath as the view flies.
 - **Night sky** (`night-sky`). Now: tap: Name a star. Plan: new effect (E2).
   - Owner: Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.
   - Effect: The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6

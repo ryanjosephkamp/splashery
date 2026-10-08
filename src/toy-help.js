@@ -2393,6 +2393,13 @@ export const TOY_HELP = {
     about:
       "Real planets round other stars, from the NASA Exoplanet Archive: TRAPPIST-1, a cool red dwarf 40 light-years away with seven rocky planets, all closer to it than Mercury is to the Sun; TOI-178, whose six planets go round in a chain of near-simple ratios; and 55 Cancri, with a planet whose year is shorter than a day. The inner Solar System is there to compare.\n\nThe orbits' sizes and periods are measured, and the planets move at those rates, sped up. Star and planets are drawn far larger than to scale. Nobody knows these planets' colors, so they show their size: gray-brown for rocky, blue for mid-sized, tan for giants. Tap to see the system edge on, as we see TRAPPIST-1 and TOI-178: their planets were found as they passed in front of their stars.",
   },
+  // ---- Space r4 (lane Space r4) ----
+  "solar-orbits": {
+    howTo:
+      "Tap to fly to the next planet. Drag the date; set the speed and the scale in the Toy tab.",
+    about:
+      "The Sun, the eight planets, six big moons, four famous comets and 4,000 real asteroids, each where its real orbit puts it on the date you pick, from 1800 to 2050. The orbits come from JPL's published elements, and every body moves by Kepler's laws, faster near the Sun. The asteroids are a random sample of the cataloged ones: the main belt between Mars and Jupiter, and the Trojans that share Jupiter's orbit, 60 degrees ahead and behind.\n\nThe readable scale is not to scale: distances from the Sun are squeezed and the planets drawn hundreds of times larger, so everything fits. Pick the true scale to see how empty space is: the planets shrink to specks. A comet's tail always points away from the Sun; its length is a picture.",
+  },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {
     howTo: "Tap to make the protein. Pick a gene, add a mutation, or type your own DNA.",
