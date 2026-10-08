@@ -101,8 +101,8 @@
     "photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/photo-3d.js",
-      "recipeKB": 20.4,
-      "recipeGzipKB": 7.4,
+      "recipeKB": 21.6,
+      "recipeGzipKB": 7.7,
       "sharedBy": 1
     },
     "moving-photo-3d": {

@@ -329,8 +329,29 @@ export function layerMorph(r, layer) {
   return 1 - smoothstep(0, 1, (r - start) / 0.64);
 }
 
+// Lane Photo fidelity: the photo itself, for the photo-textured splats (src/photo-splats.js).
+function photoCanvas(sh) {
+  if (P3D.canvasFor === sh.uid) return P3D.canvas;
+  const c = document.createElement("canvas");
+  c.width = sh.photo.w;
+  c.height = sh.photo.h;
+  c.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(sh.photo.data.buffer, sh.photo.data.byteOffset, sh.photo.data.byteLength), sh.photo.w, sh.photo.h), 0, 0); // prettier-ignore
+  P3D.canvas = c;
+  P3D.canvasFor = sh.uid;
+  return c;
+}
+
 const PHOTO_3D = {
   density: PHOTO_DENSITY,
+  photo: {
+    on: (o) => o.detail !== "splats",
+    rect: () => {
+      const a = P3D.shown?.aspect ?? 1;
+      return [-a / 2, -0.5, a / 2, 0.5];
+    },
+    version: () => P3D.shown?.uid ?? 0,
+    source: () => (P3D.shown && typeof document !== "undefined" ? photoCanvas(P3D.shown) : null),
+  },
   // Smd r2: the Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): edges 13 to 19% crisper
   // on the relief at phone size (2.72 to 2.36 px, 3.45 to 2.78 px zoomed in).
   kernel: "sharp",
@@ -369,6 +390,16 @@ const PHOTO_3D = {
       choices: [
         { id: "off", label: "Off" },
         { id: "on", label: "On: the flat photo in a corner" },
+      ],
+    },
+    {
+      key: "detail",
+      label: "Detail",
+      type: "select",
+      default: "photo",
+      choices: [
+        { id: "photo", label: "Fine: each splat shows the photo's own pixels" },
+        { id: "splats", label: "One color per splat" },
       ],
     },
     { key: "photoName", label: "Photo name", type: "text", default: "", hidden: true },
@@ -456,7 +487,7 @@ const PHOTO_3D = {
     const key = `${src.uid}/${budget}/${o.depth}`;
     let s = P3D.cache.get(key);
     if (!s) {
-      s = buildPhotoSplats(src.photo, src.depth, { count: budget, depth: o.depth ?? 0.5 });
+      s = buildPhotoSplats(src.photo, src.depth, { count: budget, depth: o.depth ?? 0.5, keepFlat: src === P3D.custom }); // prettier-ignore
       P3D.cache.clear();
       P3D.cache.set(key, s);
     }
@@ -479,8 +510,10 @@ const PHOTO_3D = {
         color: [s.rgb[i * 3], s.rgb[i * 3 + 1], s.rgb[i * 3 + 2]],
         opacity: SPLAT_OPACITY,
         pattern: false,
+        photo: true,
       };
     });
+    P3D.shown = { photo: src.photo, aspect: s.aspect, uid: src.uid };
     // Smd r2: a backing layer (see backingOf): where a near part pulls away from what is behind it
     // as the view turns, the gap shows that part of the picture, stretched, instead of empty space.
     const back = backingOf(
