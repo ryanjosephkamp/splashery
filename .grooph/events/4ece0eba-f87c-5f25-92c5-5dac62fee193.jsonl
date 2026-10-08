@@ -509,3 +509,7 @@
 {"v":1,"t":"2026-10-08T10:12:58.943Z","harness":"claude-code","event":"tool","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-08T10:13:02.172Z","harness":"claude-code","event":"turn-end","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
 {"v":1,"t":"2026-10-08T10:13:03.678Z","harness":"claude-code","event":"subagent-stop","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","agent":"ae7468774ea3a40e5"}
+{"v":1,"t":"2026-10-08T10:17:58.274Z","harness":"claude-code","event":"session-end","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
+{"v":1,"t":"2026-10-08T10:32:31.814Z","harness":"claude-code","event":"turn-start","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
+{"v":1,"t":"2026-10-08T10:32:31.815Z","harness":"claude-code","event":"session-start","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
+{"v":1,"t":"2026-10-08T10:32:33.653Z","harness":"claude-code","event":"tool","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","tool":"ReadNotifications","cwd":"splashery"}
