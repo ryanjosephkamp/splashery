@@ -18,14 +18,14 @@ to change. `tools/us-english.mjs` already lists British spellings (it never chan
    - **Safe:** visible words on the site or in a doc (color, center, gray, license, -ize).
    - **Stored:** an identifier, a file name, an option key or something saved in a link or a scene
      (`colour` in a saved option, a `#s=` key). Changing it breaks old links; say which keys.
-   - **Quoted:** a source's title, an author, a proper name or a quotation (Centre Pompidou, a
+   - **Quoted:** a source's title, an author, a proper name or a quotation (`Centre Pompidou`, a
      paper's title), which stays as written.
    - **Owner's words:** `docs/reviews/` and anything quoting the owner verbatim.
    - **False positive.**
 3. **Find what the script misses.** Search the same text for British forms it doesn't list:
-   -ise/-isation words, -our words, "programme", "whilst", "towards", "learnt", "tyre", "kerb",
-   "grey" in strings, British date forms ("7 October 2026"), "metre" for the unit (the unit is
-   "meter" in American English text; "metre" for poetry stays), and units spelled the British way.
+   -ise/-isation words, -our words, `programme`, `whilst`, `towards`, `learnt`, `tyre`, `kerb`,
+   `grey` in strings, British date forms (`7 October 2026`), `metre` for the unit (the unit is
+   "meter" in American English text; `metre` for poetry stays), and units spelled the British way.
    Propose additions to the script's word lists, as a patch in the report (don't edit the script).
 4. **List the files** with the most safe hits, then give a plan: which files to change in what
    order, which a Claude lane owns (check `docs/WORKSTREAMS.md`; a lane's files change in its PR),

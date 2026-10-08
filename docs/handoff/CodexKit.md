@@ -21,7 +21,8 @@ first try at a Codex cloud environment for this repo's private copy failed durin
 
 ## State
 
-- Done: the script, SETUP.md, tasks 22 to 31, the README table.
+- Done: the script, SETUP.md, tasks 22 to 31, the README table. October 8: merged main (Codex runs
+  at High effort, owner's call); SETUP.md now says High effort and internet access on for setup.
 - Script tested in a fresh `--depth 1` clone (2.0 GB on disk): `--skip-browser` run 10 s, second run
   1 s (skips `npm ci`), failure messages checked for low disk and a missing python3, and
   `tests/help.spec.mjs` passed (14 tests) in that clone.

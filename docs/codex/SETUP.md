@@ -3,15 +3,16 @@
 This is for Ryan, on a phone. It creates the Codex cloud environment where Codex tasks
 (`docs/codex/NN-*.md`) run. The setup script is `tools/codex-setup.sh`.
 
-**What was and wasn't verified (October 7, 2026).** The script was run in a clean fresh clone of
-this repository in a Linux container (Node 22, Python 3.13): about 10 seconds with a browser already
-present, and about 1 second when run again. Its failure messages were triggered on purpose (not
-enough disk, no python3) and read correctly. A test file then passed in that clone. **Not verified,
-because nobody here can run Codex itself:** the Codex settings screens below (names and positions
-may differ from what you see), the ChatGPT GitHub app's access to your private repository, the
-`playwright install --with-deps chromium` step (it needs `apt` and root, which Codex's container is
-said to have; the script never ran it here, since Chromium is preinstalled here), the setup time
-limit, and how much disk Codex's container has. Treat the first real run as the test.
+**What was and wasn't verified (updated October 8, 2026).** The script was run in a clean fresh
+clone of this repository in a Linux container (Node 22, Python 3.13): about 10 seconds with a
+browser already present, and about 1 second when run again. Its failure messages were triggered on
+purpose (not enough disk, no python3) and read correctly. A test file then passed in that clone. The
+Operator reports that Ryan has since run Codex in the cloud on `splashery-sandbox` with this script,
+and it worked; nobody on the Claude side saw that run. **Still not verified:** the setup on the full
+`splashery` repository (1.1 GB, so the setup time limit and the container's disk are untested
+there), and the `playwright install --with-deps chromium` step here (it was never run in our
+container, where Chromium is preinstalled). The Codex screens below may also differ from what you
+see. Treat the first run on `splashery` as the test.
 
 ## Create the environment
 
@@ -30,16 +31,15 @@ limit, and how much disk Codex's container has. Treat the first real run as the 
 
    Don't use "Automatic" setup: it doesn't know about the browser libraries.
 
-6. **Internet access.** Leave it **off for the agent** and **on for setup only** (the default for
-   most plans). The script downloads packages and a browser, so it needs internet during setup. The
-   tasks that need the web (the briefs say "Needs the web: yes" in `docs/codex/README.md`) need
-   internet access on while they run: for those, switch the environment's agent internet access to
-   **On** (limited to "Common dependencies" isn't enough for source pages), or set it for that task
-   only.
-7. **Save**, then wait for the first setup run to finish. A good run ends with a list that starts
+6. **Internet access.** Turn it **on**, so the setup script can download the npm packages and the
+   browser. Without it, setup fails at "Install npm packages". The tasks that need the web (the
+   README table says "Needs the web: yes") also need it on while they run; leave it on for all of
+   them.
+7. **Effort.** Set it to **High** for every task (your call of October 8, 2026).
+8. **Save**, then wait for the first setup run to finish. A good run ends with a list that starts
    "Setup finished in …s. What works:" and has these lines: repository, disk, node, python3, npm
    packages, browser, browser launch.
-8. **Start a task.** Open a new Codex task in this environment and paste one line:
+9. **Start a task.** Open a new Codex task in this environment and paste one line:
 
    > Read docs/codex/NN-name.md in this repository and do it.
 
