@@ -4,7 +4,8 @@
 // docs/ROADMAP.md, rendered as plain HTML: our own words, no third-party content), scrolled at a
 // normal reading pace and written as an H.264 MP4 at 30 frames a second, plus a few still PNGs of
 // the page. Like the owner's phone screen recording of a feed, but made here, so it can go in a
-// test run. Everything goes under .cache/ (git-ignored), never in the repo.
+// test run. Everything goes under .cache/ (git-ignored), never in the repo. A VP9 WebM of the same
+// frames comes too, for the headless tools (Playwright's Chromium can't decode H.264).
 //
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/text-scroll-video.mjs
 //     [--out=.cache/text-scroll] [--secs=20] [--fps=30] [--speed=60] [--w=360] [--h=780]
@@ -13,12 +14,12 @@
 // The page is --w by --h CSS pixels at device scale --scale (1080 by 2340 by default, a phone's
 // screen), body text 16 px. It scrolls --speed CSS pixels a second (60: about a line every
 // 0.4 s, a calm read of a feed). Each frame is a screenshot after setting the scroll position for
-// its time, so the motion is exact however slow the machine. Writes <out>/text-scroll.mp4 and
+// its time, so the motion is exact however slow the machine. Writes <out>/text-scroll.mp4 (and .webm) and
 // <out>/still-<k>.png (the first frame, then evenly through the clip), and <out>/info.json.
 // ffmpeg is a build tool (installed in the container; listed in LICENSES.md); not shipped.
 
 import { chromium } from "@playwright/test";
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -149,6 +150,10 @@ for (let i = 0; i < n; i++) {
 ff.stdin.end();
 await done;
 await browser.close();
+// The same frames as VP9 WebM: Playwright's Chromium has no H.264 decoder, so the headless tools
+// open this one (a phone opens the MP4).
+const vp9 = spawnSync("ffmpeg", ["-y", "-loglevel", "error", "-i", path.join(OUT, "text-scroll.mp4"), "-c:v", "libvpx-vp9", "-crf", "18", "-b:v", "0", "-row-mt", "1", "-cpu-used", "4", path.join(OUT, "text-scroll.webm")]); // prettier-ignore
+if (vp9.status) throw new Error(String(vp9.stderr));
 const info = { width: W * SCALE, height: H * SCALE, fps: FPS, secs: SECS, speed: SPEED, scale: SCALE, pageHeight: total, stills }; // prettier-ignore
 fs.writeFileSync(path.join(OUT, "info.json"), JSON.stringify(info, null, 2));
 console.log(`\n${path.join(OUT, "text-scroll.mp4")}: ${info.width} by ${info.height}, ${n} frames`);

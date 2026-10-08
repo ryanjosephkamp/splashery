@@ -7,7 +7,104 @@ ryanjosephkamp/splashery. Your lane: Photo fidelity (prefix `phf`). Branch:
 `claude/lane-photo-fidelity` (engine changes on `claude/lane-photo-fidelity-engine`). PR title:
 "Phase Photo fidelity: sharper Photo to 3D and Moving photo to 3D". Handoff file:
 docs/handoff/PhotoFidelity.md (create it; start it with this brief, word for word, under "## Brief",
-then keep "## State", "## Notes", "## Known issues" and "## For the Operator" current). Model: Opus
+then keep "## State
+
+Model: Opus 5.5 (default effort). Started October 8, 2026, about 00:00 UTC.
+
+- **Engine PR #405** (`claude/lane-photo-fidelity-engine`): photo-textured splats
+  (`src/photo-splats.js`). Its spec, `tests/phf-engine.spec.mjs`, passes on that branch alone,
+  WebGPU included. The broader specs touching its files (smoke, unit, kit, lab-engine, live3-engine,
+  p3d, smd-photo) still need a full run; this container was too loaded for it.
+- **Lane PR #406** (`claude/lane-photo-fidelity`, the engine branch merged in): both toys' Detail
+  option (Sharp by default), Moving photo's video copy, `LONG_AREAS`, the About text,
+  `tests/phf.spec.mjs`, and the tools below.
+- **Test material:** `tools/text-scroll-video.mjs`. This lane started it, so it owns it; the Sharp
+  view lane reuses it. It writes `.cache/text-scroll/text-scroll.mp4` (1080 by 2340, 30 fps, 20 s,
+  600 frames, 1.3 MB), a VP9 `.webm` of the same frames (Playwright's Chromium can't decode H.264)
+  and four stills.
+- **Measuring tool:** `tools/phf-measure.mjs`; its header defines SSIM on the text and the
+  letter-gap measure. **Clip tool:** `tools/phf-clip.mjs`.
+- **Still to do this round:** Moving photo's numbers, the clips and cards, the full test run.
+
+## Notes
+
+### What limited the sharpness (checked in the code)
+
+The Operator's list was right. The deeper limit is that a splat is one color: 2.3 megapixels of text
+at a phone's 210,000 splats is one splat per 11 pixels. No grid, adaptive or not, makes small
+letters out of that. Measured at reading size before any change, the letters were blotchy, not just
+soft: the 2 by 2 blocks merged into big splats, and the sharpening pass darkened them.
+
+### Photo-textured splats (the engine change)
+
+Each marked splat keeps its place, depth, size and Gaussian falloff, and its fragments read the
+photo at the point under them. Face on, that is the photo at full resolution, and the overlap no
+longer softens anything, because overlapping splats read the same place. Turned, each splat carries
+its own patch, so the parallax is still the splats'.
+
+- **Path:** the per-splat (u, v) reaches the render pass through a 32-bit work-buffer stream. The
+  screen-to-picture mapping reaches the fragments through two PlayCanvas user varyings, and the
+  photo is sampled with explicit gradients from a mipmapped texture.
+- **Engine findings:**
+  - an extra work-buffer stream must be written by every effects program, or WebGL drops the draw
+    (so `writeSplat` is wrapped);
+  - WebGPU allows 32 bytes of color attachments per splat, and the work buffer takes 24 (so the
+    stream is one packed 32-bit value);
+  - the renderer copies the splat material's parameters only when the material is updated (so the
+    per-frame mapping goes to the device's uniform scope);
+  - the compute renderer has no varyings hook (so the raster renderer is used while a photo toy
+    shows).
+
+### Measurements (Photo to 3D)
+
+Setup: the text page's still `still-1.png`, the picture zoomed to fill the 390 px phone width (the
+reading size), 390 by 844 at device scale 3, SwiftShader. "Before" is `main`; "after" is this branch
+with Detail on Sharp. "Lines" are the 12 to 16 px lines whose letters stay separate (80% of their
+gaps kept).
+
+| tier | splats  | SSIM before | SSIM after | lines before | lines after | gaps kept before | gaps kept after |
+| ---- | ------- | ----------- | ---------- | ------------ | ----------- | ---------------- | --------------- |
+| low  | 85,500  | 0.111       | 0.834      | 0 of 12      | 11 of 11    | 14%              | 99.7%           |
+| mid  | 199,500 | 0.155       | 0.976      | 0 of 12      | 11 of 11    | 53%              | 100%            |
+| high | 285,000 | 0.182       | 0.976      | 1 of 12      | 11 of 11    | 63%              | 100%            |
+| max  | 380,000 | 0.202       | 0.976      | 1 of 12      | 11 of 11    | 68%              | 100%            |
+
+After the change, the splat count no longer sets the sharpness face on. The low tier stays at 0.834
+because it renders at a pixel ratio of 1.5 (`PIXEL_RATIO` in src/player.js), so its canvas has half
+the pixels of the others: the screen limits it there, not the splats. (The registration differs by a
+line at the picture's edge, so "after" counts 11 lines and "before" 12.)
+
+### What makes a good input (also in each toy's About text)
+
+**Photo to 3D.**
+
+- A photo with near and far things in it.
+- Up to 2,048 px on the long side is kept (a larger photo is scaled down).
+- With Detail on Sharp, every pixel kept is shown face on, so a phone screenshot's text reads when
+  zoomed in.
+- The depth model sees 518 px across, so thin things take the depth behind them, and a page of text
+  stays nearly flat.
+- Splats per tier (One color per splat): 90,000, 210,000, 300,000 and 400,000.
+
+**Moving photo to 3D.**
+
+- A steady video with near and far things, scrolled or panned slowly: a fast scroll is blurred in
+  the video itself.
+- With Detail on Sharp, the video shows at its own full size (the owner's 1056 by 2178 recording
+  keeps all 2.3 megapixels), paused or playing.
+- A clip up to 8 s keeps 12, 15, 24 or 24 frames a second (low to max) and holds its frames at 60k,
+  140k, 200k or 230k pixels for the depth and the plain look.
+- A longer video plays at its own frame rate and is streamed. Its depth is worked out 1, 2, 3 or 4
+  times a second, and its grid is 72k, 168k, 240k or 320k pixels.
+- The depth model sees 196 px across (low and mid) or 294 px (high and max).
+
+### Depth model speed (why Moving photo keeps 196 and 294 px)
+
+A portrait frame, single-thread WebAssembly, this container under load: 196 px 1.1 s, 294 px 2.0 s,
+392 px 4.4 s, 518 px 10.4 s. Photo to 3D already runs at 518 (one picture).
+
+## Known issues" and "## For the Operator" current). Model: Opus
+
 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 8, 2026, from the owner's note)

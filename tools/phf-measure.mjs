@@ -21,7 +21,7 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/phf-measure.mjs
 //     --toy=photo-3d|moving-photo-3d [--tiers=low,mid,high,max] [--still=.cache/text-scroll/still-1.png]
-//     [--video=.cache/text-scroll/text-scroll.mp4] [--rise=0] [--out=.cache/phf-measure] [--label=before]
+//     [--video=.cache/text-scroll/text-scroll.webm] [--rise=0] [--out=.cache/phf-measure] [--label=before]
 //     [--url-extra=&x=1] [--view=fit|home]
 // Writes <out>/<label>-<toy>-<tier>.png (the render) and -crop.png (the picture and the source side
 // by side), and prints a JSON line per tier.
@@ -41,7 +41,7 @@ const TIERS = opt("tiers", "low,mid,high,max").split(",");
 const OUT = opt("out", ".cache/phf-measure");
 const LABEL = opt("label", "now");
 const STILL = opt("still", ".cache/text-scroll/still-1.png");
-const VIDEO = opt("video", ".cache/text-scroll/text-scroll.mp4");
+const VIDEO = opt("video", ".cache/text-scroll/text-scroll.webm");
 const RISE = Number(opt("rise", 0));
 const EXTRA = opt("url-extra", "");
 const VIEW = opt("view", "fit"); // home: as the toy opens; fit: zoomed so the picture fills the width
@@ -358,6 +358,7 @@ for (const tier of TIERS) {
     });
     await page.waitForTimeout(1500);
     await page.setInputFiles("#toy-input-file", VIDEO);
+    if (process.env.PHF_VERBOSE) console.error("opened the video");
     corners = await page.evaluate(
       async ({ t, view }) => {
         const { player } = window.__splashery;
@@ -369,7 +370,7 @@ for (const tier of TIERS) {
             await new Promise((r) => setTimeout(r, 250));
           }
         };
-        await until(() => m.MOVING.clip?.name === "text-scroll" && m.MOVING.grid);
+        await until(() => m.MOVING.clip?.name === "text-scroll" && m.MOVING.grid, 900000);
         player.idle.weight = 0;
         window.__splashery.app.setControl("play", 0);
         await new Promise((r) => setTimeout(r, 500));
