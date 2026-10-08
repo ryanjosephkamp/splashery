@@ -189,13 +189,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=sierpinski"
+                src="../../play/?toy=sierpinski&sound=on"
                 title="Sierpinski tetrahedron, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +212,15 @@
             Tap it to explode it into its pieces; tap again to put it back together. Pick the level
             in the Toy tab: each level has four times as many little pyramids, so levels 3, 4 and 5
             have 64, 256 and 1,024 respectively.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a
+              href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle"
+              target="_blank"
+              rel="noopener"
+              >Sierpiński triangle on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -314,7 +325,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/sierpinski/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

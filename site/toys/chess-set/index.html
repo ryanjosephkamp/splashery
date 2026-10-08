@@ -194,13 +194,15 @@
                 style="background-image: url(&quot;../../../assets/toys/chess-set/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=chess-set&turntable=off"
+                src="../../play/?toy=chess-set&turntable=off&sound=on"
                 title="Chess set, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -216,6 +218,12 @@
             in the bar under the board to watch it, or tap a piece and then a square to play your
             own moves. In the Toy tab you can open or paste any game written in PGN, the usual way
             of writing down chess games.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Chess" target="_blank" rel="noopener"
+              >Chess on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -346,7 +354,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chess-set/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

@@ -187,13 +187,15 @@
                 style="background-image: url(&quot;../../../assets/toys/atom/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=atom"
+                src="../../play/?toy=atom&sound=on"
                 title="Atom, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +212,12 @@
             and neutrons. Tap it and the electrons whirl faster until each shell blurs into a
             glowing ring, then slow down. The nucleus is tens of thousands of times smaller than the
             whole atom, which is mostly empty space.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Atom" target="_blank" rel="noopener"
+              >Atom on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -330,7 +338,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/atom/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
