@@ -818,10 +818,12 @@ such a press turns the view as before.
 `strike: true` (a drum's stick): then it hits them, so a held stick knocks the drum's head. Each hit
 that reaches `hands.sound(hit, vol)` names both pieces (`hit.name`, `hit.against`: each piece's
 `name`, else its part or token; null for the floor) and where they met (`hit.point`), so the stick
-on the head can sound the drum and the stick on the rim a click.
+on the head can sound the drum and the stick on the rim a click. A piece with `fixed: true` (the
+drum under its sticks, given a tiny `pick` so it's never picked up) is never knocked loose: it stays
+ground for the others.
 
 ```js
-pieces: () => [{ name: "stick", strike: true, pos, solid, pick }, { name: "head", pinned: true, ... }],
+pieces: () => [{ name: "stick", strike: true, pos, solid, pick }, { name: "drum", fixed: true, ... }],
 sound: (hit, vol) => (hit.name === "stick" && hit.against === "head" ? { voice: "snare", vol } : undefined), // prettier-ignore
 ```
 
