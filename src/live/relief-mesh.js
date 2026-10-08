@@ -413,7 +413,13 @@ export class ReliefMesh {
     const w = media ? src.videoWidth || src.width : src.w;
     const h = media ? src.videoHeight || src.height : src.h;
     if (!w || !h) return false;
-    if (!this.color || this.color.width !== w || this.color.height !== h) {
+    // (a texture fed by a video or canvas is made again for bytes: it can't be locked)
+    if (
+      !this.color ||
+      this.color.width !== w ||
+      this.color.height !== h ||
+      (!media && this.colorSrc)
+    ) {
       this.color?.destroy();
       this.color = new pc.Texture(this.device, {
         name: "psv-color",

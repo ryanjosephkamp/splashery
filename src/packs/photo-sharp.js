@@ -295,11 +295,13 @@ function fillClip(m, src) {
   if (usable && (newFrame(video) || m.colorSrc !== video)) m.setColor(video);
   const f = mv.frame;
   const depth = clip.long ? clip.scratch?.bytes : clip.near[f];
-  const key = `c${clip.name}|${f}|${clip.long ? clip.depth?.ready : ""}|${usable ? "v" : "f"}`;
+  const key = `c${clip.name}|${f}|${clip.long ? clip.depth?.ready : ""}|${video ? "v" : "f"}`;
   if (S.key !== key) {
     S.key = key;
     if (depth) m.setDepth({ w: clip.w, h: clip.h, data: depth });
-    if (!usable && !clip.long && clip.colors[f])
+    // (the clip's own frames only when there is no video; while the video copy seeks, the last
+    // picture it gave stays)
+    if (!video && !clip.long && clip.colors[f])
       m.setColor({ w: clip.w, h: clip.h, data: clip.colors[f] });
   }
 }
