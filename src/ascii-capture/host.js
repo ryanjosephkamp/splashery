@@ -51,6 +51,14 @@ function taken(index) {
   });
 }
 
+// Whether a frame shows anything but the #111111 background.
+function lit(rgba) {
+  let n = 0;
+  for (let i = 0; i < rgba.length; i += 4)
+    if (rgba[i] + rgba[i + 1] + rgba[i + 2] > 90 && ++n > 200) return true;
+  return false;
+}
+
 function failure(reason, err) {
   const e = new Error(err?.message || reason);
   e.reason = reason;
@@ -90,7 +98,7 @@ async function run({ toy, options }) {
     toy: { kind: "builtin", id: toy, ...(preset.options ? { options: { ...preset.options } } : {}) }, // prettier-ignore
     seed: 1,
   });
-  if (info.camera) scene.camera = { ...info.camera };
+  if (preset.camera || info.camera) scene.camera = { ...(preset.camera || info.camera) };
   scene.look = normalizeLook({ ...scene.look, background: "#111111" });
   scene.autoplay.turntable = false;
   player.scene = scene;
@@ -132,8 +140,17 @@ async function run({ toy, options }) {
   await render(0);
   for (let i = 0; i < frames; i++) {
     if (i === tapFrame) player.act(null);
-    const shot = await render(i === 0 ? 0 : 1 / fps);
-    const pixels = shot.getContext("2d").getImageData(0, 0, size, size).data.buffer;
+    let shot = await render(i === 0 ? 0 : 1 / fps);
+    let data = shot.getContext("2d").getImageData(0, 0, size, size).data;
+    // Splats sort off the main thread, and some toys showed nothing on their
+    // first frame until a sort had landed (lane ASCII r2). Retake it, with no
+    // time passing, until something shows (at most four times).
+    for (let k = 0; i === 0 && k < 4 && !lit(data); k++) {
+      await new Promise((resolve) => setTimeout(resolve, 60));
+      shot = await render(0);
+      data = shot.getContext("2d").getImageData(0, 0, size, size).data;
+    }
+    const pixels = data.buffer;
     shot.width = shot.height = 0;
     send({ type: "frame", index: i, width: size, height: size, pixels }, [pixels]);
     await taken(i);
