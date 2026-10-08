@@ -78,6 +78,11 @@ with measurements within about six hours. Your Operator is session_012GmKRUMZLir
 
 ## State
 
+- October 8, 2026, 10:30 UTC: the Detail choice Sharp is now Fine (the Operator's naming call). The
+  "What makes a good photo/clip" paragraphs came out of the About texts: with the Sharp view lane's
+  wording each About is at 171 and 176 of its 180 words (tests/help.spec.mjs). The guide stays in
+  this file, under Notes. phf, phf-engine, p3d, psv, smd-moving, live3, help and hta pass.
+
 - October 8, 2026, 09:20 UTC: main (#414, Photo sharp view) merged in, their hook calls kept as they
   are. Sharp picture is the default view now, so the phf test, measure and clip tools pick Splats
   explicitly. p3d, psv, live3, smd-moving, phf and phf-engine pass (57 of 57 after the fix).
@@ -181,7 +186,7 @@ more (every real scene measured: 0.51 to 1) keeps all of it (`reliefScale`). Thi
 photos and clips people open; the samples stay as approved. The rest of the SSIM gap is that bend:
 the letters themselves match.
 
-### What makes a good input (also in each toy's About text)
+### What makes a good input (here only: each About text is capped at 180 words, tests/help.spec.mjs, and the Sharp view lane's text fills it)
 
 **Photo to 3D.**
 
