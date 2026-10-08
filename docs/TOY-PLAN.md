@@ -3228,7 +3228,8 @@ Proposals below are suggestions; the owner may change them.
     (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF
     or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps
     through them in order or at random. Books r4: a double-tap fills the screen with the photo, and
-    again steps back.
+    again steps back. Hands-on H3 (October 8, 2026; Hands-on): Push the frame: it swings on its nail
+    and settles.
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
 - **Screen** (`screen`). Now: tap: Switch on or off. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of
