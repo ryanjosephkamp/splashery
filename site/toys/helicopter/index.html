@@ -187,13 +187,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=helicopter"
+                src="../../play/?toy=helicopter&sound=on"
                 title="Helicopter, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -209,6 +211,12 @@
             down a little and hovers, bobbing gently. Tap again to land. Pick its color in the Toy
             tab. Helicopters can land in places planes cannot, so they are used for rescues at sea
             and in the mountains.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Helicopter" target="_blank" rel="noopener"
+              >Helicopter on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -329,7 +337,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/helicopter/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

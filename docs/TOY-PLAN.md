@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 439 toys. 410 have a tap action today; the other 29 only hop.
+- 440 toys. 411 have a tap action today; the other 29 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 19.
+- **new** (needs its own effect): 20.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -78,10 +78,10 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
-  a QR code works, QR damage lab, Three QR codes in one, Picture QR, QR from real things, Other
-  barcodes, Video to 3D, Splat toolkit, Point clouds, Cryo-EM map, Contour lab, Terrain in a box,
-  Data in 3D, Climate records
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Sound in a
+  box, QR code, How a QR code works, QR damage lab, Three QR codes in one, Picture QR, QR from real
+  things, Other barcodes, Video to 3D, Splat toolkit, Point clouds, Cryo-EM map, Contour lab,
+  Terrain in a box, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -3126,7 +3126,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (20)
+## Studio (21)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -3154,8 +3154,21 @@ Proposals below are suggestions; the owner may change them.
     plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio
     open. Live r7 polish: the sharp kernel (each grain a crisp speck), a clean straight rim and a
     smooth top on the plate, and a bow drawn like a real one (a round stick, a ribbon of hair, a
-    frog and a tip).
+    frog and a tip). Live r8 (the owner's walkthrough of October 6, 2026: "It still looks kind of
+    grainy"): the stand's base and post in fine discs in rows (they were a random fuzz of specks
+    from the side), the rim's discs smaller and set inside the edges (no soft fringe past the edge,
+    no spike at the corners), a finer top, and each sand grain a little smaller and fully opaque.
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
+- **Sound in a box** (`chladni-cell`). Now: tap: Switch on the sound. Plan: new effect (E6).
+  - Owner: The owner's walkthrough of October 6, 2026 ("Could there be a 3D version? ... I don't
+    want it to be BS"), lane Live r8, October 7, 2026.
+  - Effect: Sound in a box (labs): a 1 cm glass cell of water and tiny plastic beads over an
+    ultrasound transducer. A tap rings one of the cell's resonant modes and every bead slides down
+    the Gor'kov potential of the acoustic radiation force (polystyrene in water) onto the mode's
+    pressure-nodal surfaces, a 3D Chladni figure, in a few seconds; tap again on a formed figure to
+    swirl the water and start over. Modes of a cube (single and mixed) and of a round flask (shells
+    and cones).
+  - Sound: The mode's tone, eight octaves down (the real cell rings at about 100 to 370 kHz).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
   - Effect: A splat room with a wooden floor and three walls. Tap “Use my microphone” and clap once:

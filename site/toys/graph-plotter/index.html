@@ -195,13 +195,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=graph-plotter&turntable=off"
+                src="../../play/?toy=graph-plotter&turntable=off&sound=on"
                 title="Graph plotter, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -217,6 +219,15 @@
             height; then the a slider sweeps and the curve bends with it. Pick one of 42 famous
             curves in the Toy tab, or type your own: y = … with x, r = … with θ, or x = …, y = …
             with t. Put a in it to see it bend.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a
+              href="https://en.wikipedia.org/wiki/Graph_of_a_function"
+              target="_blank"
+              rel="noopener"
+              >Graph of a function on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -321,7 +332,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/graph-plotter/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

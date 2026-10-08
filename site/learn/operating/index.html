@@ -516,10 +516,10 @@
               <strong>Model and effort.</strong> Each worker runs its lane's assigned model (Opus
               5.5 or Sonnet 5.5); any other model needs the owner's permission first. At every
               check-in the Operator reads the worker's session record, and if it has run on another
-              model (a fallback), the Operator stops it and tells the owner. Effort is the default
-              for now, a trial the owner chose. If either of them thinks it isn't enough, the owner
-              adds <code>CLAUDE_CODE_EFFORT_LEVEL=xhigh</code> to the environment's variables, and
-              every new session runs at Extra High. Helpers use the worker's own model.
+              model (a fallback), the Operator stops it and tells the owner. Effort is high for
+              every worker, lanes and Integrators alike (the owner's call of October 8, 2026). The
+              Operator checks it in the session record too and tells the owner if a worker runs at
+              another level. Helpers use the worker's own model.
             </li>
             <li>
               <strong>Messages.</strong> A worker never asks the owner. It ends each working turn
