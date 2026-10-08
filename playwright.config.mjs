@@ -15,7 +15,10 @@ const port = Number(process.env.SPLASHERY_PORT) || 4173;
 // the cloud container. Chromium reaches desktop GL only with a window, so the browser runs headed
 // on a virtual display (Xvfb; tools/suite.mjs starts one). WebGPU stays on SwiftShader.
 const llvmpipe = process.env.SPLASHERY_GL === "llvmpipe";
-const gl = llvmpipe ? ["--use-gl=angle", "--use-angle=gl"] : ["--use-angle=swiftshader"];
+// Headed, Chromium would draw scrollbars that headless hides, so they stay hidden here too.
+const gl = llvmpipe
+  ? ["--use-gl=angle", "--use-angle=gl", "--hide-scrollbars"]
+  : ["--use-angle=swiftshader"];
 
 export default defineConfig({
   testDir: "./tests",

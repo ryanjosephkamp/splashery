@@ -18,6 +18,8 @@
 //   node tools/suite.mjs --out=DIR        # keep this run's reports in DIR (default .cache/suite)
 //   node tools/suite.mjs --save-times     # also write each file's time to tools/suite.json
 //   node tools/suite.mjs --report         # print the summary of the run in --out, run nothing
+//   node tools/suite.mjs --recheck        # then run each file that failed again, alone, and list
+//                                         # what passed alone (the failures still count)
 //   node tools/suite.mjs --gl=llvmpipe    # WebGL2 on Mesa's llvmpipe in a virtual display
 //                                         # (playwright.config.mjs, SPLASHERY_GL)
 //   node tools/suite.mjs -- --trace=on    # anything after "--" goes to Playwright as it is
@@ -106,7 +108,7 @@ files = [...files].sort((a, b) => timeOf(b) - timeOf(a) || a.localeCompare(b));
 
 // ---- One file's run ----------------------------------------------------------------------------
 
-const reportOf = (f) => path.join(OUT, `${f}.json`);
+const reportOf = (f, dir = OUT) => path.join(dir, `${f}.json`);
 
 function collect(report) {
   const tests = [];
@@ -128,17 +130,17 @@ function collect(report) {
   return tests;
 }
 
-function runFile(f) {
+function runFile(f, dir = OUT) {
   return new Promise((done) => {
-    const tmp = path.join(OUT, `${f}.json.part`);
+    const tmp = path.join(dir, `${f}.json.part`);
     const started = Date.now();
     const pattern = `[\\\\/]${f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\.spec\\.mjs$`;
     const child = spawn(
       "npx",
-      ["playwright", "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(OUT, "results", f)}`, ...PASS], // prettier-ignore
+      ["playwright", "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(dir, "results", f)}`, ...PASS], // prettier-ignore
       { cwd: root, env: { ...env, PLAYWRIGHT_JSON_OUTPUT_NAME: tmp, ...(ON_SWIFTSHADER.has(f) ? { SPLASHERY_GL: "swiftshader" } : {}) }, stdio: ["ignore", "pipe", "pipe"] }, // prettier-ignore
     );
-    const log = fs.createWriteStream(path.join(OUT, `${f}.log`));
+    const log = fs.createWriteStream(path.join(dir, `${f}.log`));
     child.stdout.pipe(log);
     child.stderr.pipe(log);
     child.on("close", (code) => {
@@ -149,7 +151,7 @@ function runFile(f) {
       } catch {}
       if (report) {
         report.suiteRun = { wall, code };
-        fs.writeFileSync(reportOf(f), JSON.stringify(report));
+        fs.writeFileSync(reportOf(f, dir), JSON.stringify(report));
         fs.rmSync(tmp, { force: true });
       }
       done({ f, wall, code, ok: !!report });
@@ -264,12 +266,31 @@ const shared = JOBS > 1 ? todo.filter((f) => !SOLO.has(f)) : [...todo];
 const alone = JOBS > 1 ? todo.filter((f) => SOLO.has(f)) : [];
 await Promise.all(Array.from({ length: Math.min(JOBS, shared.length) }, () => lane(shared)));
 await lane(alone);
+const elapsed = (Date.now() - t0) / 1000;
+const s = summary(files, elapsed);
+let text = s.text;
+// --recheck: a test that fails only beside another file checks the wall clock (docs/OPERATING.md,
+// "Running the suite fast"). Its failure still counts; this only says which ones pass alone, so
+// they can join the solo list.
+if (arg("recheck") && s.failed.length) {
+  const dir = path.join(OUT, "recheck");
+  fs.mkdirSync(dir, { recursive: true });
+  const again = [...new Set(s.failed.map((t) => t.file))];
+  console.log(`\nRechecking ${again.length} files alone: ${again.join(", ")}`);
+  const lines = ["", "## Rechecked alone", "", "The failures above still count. Each failed file ran once more, alone:", ""]; // prettier-ignore
+  for (const f of again) {
+    const r = await runFile(f, dir);
+    const failedAgain = r.ok ? collect(JSON.parse(fs.readFileSync(reportOf(f, dir), "utf8"))).filter((t) => !["passed", "skipped"].includes(t.status)) : null; // prettier-ignore
+    const note = !failedAgain ? "no report" : failedAgain.length ? `failed again: ${failedAgain.map((t) => `${t.line}`).join(", ")}` : "passed alone (a wall-clock check: a candidate for the solo list)"; // prettier-ignore
+    lines.push(`- \`${f}\`: ${note}.`);
+    console.log(`  ${f}: ${note}`);
+  }
+  text += lines.join("\n") + "\n";
+}
 server?.kill();
 xvfb?.kill();
-
-const s = summary(files, (Date.now() - t0) / 1000);
-fs.writeFileSync(path.join(OUT, "summary.md"), s.text);
-console.log("\n" + s.text);
+fs.writeFileSync(path.join(OUT, "summary.md"), text);
+console.log("\n" + text);
 if (arg("save-times") && !s.missing.length) {
   const seconds = { ...times };
   for (const r of s.rows) seconds[r.f] = Math.round(r.wall);
