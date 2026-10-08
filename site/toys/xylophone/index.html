@@ -188,13 +188,15 @@
                 style="background-image: url(&quot;../../../assets/toys/xylophone/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=xylophone&turntable=off"
+                src="../../play/?toy=xylophone&turntable=off&sound=on"
                 title="Xylophone, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -209,6 +211,12 @@
             mallet swings over and strikes it, and the bar jumps and plays its note, so you can play
             a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole
             scale. Drag along the bars for a run of notes, called a glissando.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Xylophone" target="_blank" rel="noopener"
+              >Xylophone on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -313,7 +321,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/xylophone/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

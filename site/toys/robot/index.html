@@ -186,13 +186,15 @@
                 style="background-image: url(&quot;../../../assets/toys/robot/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=robot"
+                src="../../play/?toy=robot&sound=on"
                 title="Wind-up robot, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -207,6 +209,12 @@
             This robot always swings its arms a little, and its antenna light glows. Tap it to wind
             it up: the key spins fast, the arms swing wide and it rocks and bobs from side to side,
             then it slowly runs down again. Pick its color in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Wind-up_toy" target="_blank" rel="noopener"
+              >Wind-up toy on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -324,7 +332,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/robot/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

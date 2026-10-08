@@ -184,13 +184,15 @@
                 style="background-image: url(&quot;../../../assets/toys/mars/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=mars"
+                src="../../play/?toy=mars&sound=on"
                 title="Mars, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -205,6 +207,12 @@
             Tap it to raise a dust storm: billowing orange dust sweeps across, hides the dark
             markings, then settles and clears. Real dust storms on Mars can grow until they cover
             the whole planet for weeks.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Mars" target="_blank" rel="noopener"
+              >Mars on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -309,7 +317,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/mars/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

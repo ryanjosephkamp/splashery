@@ -193,13 +193,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=solar-system"
+                src="../../play/?toy=solar-system&sound=on"
                 title="Solar system, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -216,6 +218,12 @@
             plane, and Mercury passes in front of the Sun as a small dark dot, which is called a
             transit. Then the planets spread out again. Real transits of Mercury happen about 13
             times a century.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Solar_System" target="_blank" rel="noopener"
+              >Solar System on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -320,7 +328,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/solar-system/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
