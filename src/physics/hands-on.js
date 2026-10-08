@@ -612,7 +612,7 @@ export class HandsOn {
       const dd = v3.dot(d, d) || 1;
       const t = -((ray.origin[0] - c[0]) * d[0] + (ray.origin[2] - c[2]) * d[2]) / dd;
       p = v3.add(ray.origin, v3.scale(ray.dir, t));
-      h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+      h.target = [Math.max(x0, Math.min(x1, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
       return;
     }
     const def = this.pieces.find((pc) => pc.body === b)?.def;
@@ -663,7 +663,7 @@ export class HandsOn {
     }
     top = u.y;
     const y = top + below + (this.info.recipe.hands.lift ?? 0.06 * R);
-    h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.min(fl + 5 * R, y), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+    h.target = [Math.max(x0, Math.min(x1, p[0])), Math.min(fl + 5 * R, y), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
   }
 
   // The piece under a point: the one whose shape (the piece's `pick`
