@@ -877,6 +877,30 @@ export const RECIPES = {
     ],
     controls: [{ key: "chop", label: "Chop into slices", type: "pulse", ease: WM_SECS }],
     action: { key: "chop", label: "Chop into slices" },
+    // Hands-on (lane Hands-on H2): pick up the slices one by one and fit
+    // them back together (brought close to its place, each clicks in); the
+    // wedge picks up too.
+    hands: {
+      floor: -0.92,
+      area: 1.6,
+      pieces: (d) => {
+        if (!d) return [];
+        // Each round slice: a short cylinder along the melon's length.
+        const out = d.slices.map((sl, i) => {
+          const solid = { type: "cylinder", r: sl.r, h: sl.half };
+          return { token: i, pos: sl.mid, quat: quatMul(sl.q, quatAxisAngle([0, 0, 1], Math.PI / 2)), solid, points: surfacePoints(solid, 1), pick: [sl.r, sl.half + 0.04, sl.r], mass: 1, friction: 0.9, restitution: 0.05 }; // prettier-ignore
+        });
+        const w = d.wedge;
+        if (w) {
+          const half = [w.R * Math.sin(w.span / 2), w.R / 2, w.T / 2];
+          const solid = { type: "box", half };
+          out.push({ part: "wedge", pivot: add(w.pos, [0, -w.R, 0]), pos: add(w.pos, [0, -w.R / 2, 0]), quat: w.q, solid, points: surfacePoints(solid, 1), pick: half.map((v) => v + 0.05), mass: 0.6, friction: 0.9, restitution: 0.05 }); // prettier-ignore
+        }
+        return out;
+      },
+      joints: (d) => (d?.slices || []).map((_, i) => ({ type: "socket", token: i, snap: 0.3 })),
+      sound: (hit, vol) => ({ voice: "squish", pitch: 1.1, decay: 0.3, vol: vol * 0.6 }),
+    },
     // A tap brings down a big knife: it chops the whole melon five times,
     // right to left. Then the six slices fan open on their bottoms like an
     // accordion, showing the red flesh, the pale rind and the black seeds on
@@ -940,6 +964,7 @@ export const RECIPES = {
       const knives = [];
       let hinge = [0, 0, 1];
       let axis = [1, 0, 0];
+      let wedgeAt = null;
       const whole = (pos, yaw) => {
         const A = 1.2;
         const B = 0.92;
@@ -963,7 +988,9 @@ export const RECIPES = {
           const token = slices.length;
           const piece = { kind: "token", params: [token, 0] };
           const [x0, x1] = [xs[i], xs[i + 1]];
-          slices.push({ foot: add(pos, quatRotate(q, [(x0 + x1) / 2, -B * 0.98, 0])) });
+          // (Lane Hands-on H2: where it is, and its size, for its piece.)
+          const r = Math.max(rAt(x0), rAt(x1));
+          slices.push({ foot: add(pos, quatRotate(q, [(x0 + x1) / 2, -B * 0.98, 0])), mid: add(pos, quatRotate(q, [(x0 + x1) / 2, 0, 0])), q, half: (x1 - x0) / 2, r }); // prettier-ignore
           k.add(
             k.param(
               (u, v) => {
@@ -1082,6 +1109,7 @@ export const RECIPES = {
         const a0 = -span / 2;
         const q = quatEuler(0, yaw, 0);
         const place = { pos, quat: q, part: k.part("wedge", { pivot: add(pos, [0, -R, 0]) }) };
+        wedgeAt = { pos, q, R, T, span }; // lane Hands-on H2
         const rows = [
           [0.5, 4, 0.1],
           [0.66, 5, 0.0],
@@ -1174,7 +1202,7 @@ export const RECIPES = {
         whole([-0.45, 0, -0.6], WM_YAW);
         wedge([0.72, -0.92 + 0.78, 0.6], 30, 0.78, 0.26);
       }
-      k.data = { slices, knives, hinge, axis };
+      k.data = { slices, knives, hinge, axis, wedge: wedgeAt };
     },
   },
 
@@ -5183,6 +5211,49 @@ export const RECIPES = {
     controls: [{ key: "peel", label: "Peel them", type: "pulse", ease: BANANA_SECS }],
     action: { key: "peel", label: "Peel them" },
     sounds: [{ voice: "sample", file: "banana-peel.mp3" }], // Sound C: its peels' cues
+    // Hands-on (lane Hands-on H2): pull a banana and it bends a little at
+    // its neck, then breaks off the bunch into your hand, whole, its skin
+    // with it. ↺ puts it back.
+    hands: {
+      floor: -0.2,
+      area: 1.4,
+      pieces: (d) =>
+        (d?.bananas || []).map((bn) => {
+          const mid = bn.line[2];
+          const points = bn.line.map((p) => sub(p, mid));
+          const lo = [0, 1, 2].map((k) => Math.min(...points.map((p) => p[k])) - 0.12);
+          const hi = [0, 1, 2].map((k) => Math.max(...points.map((p) => p[k])) + 0.12);
+          const half = lo.map((v, k) => (hi[k] - v) / 2);
+          const c = lo.map((v, k) => v + half[k]);
+          return {
+            token: bn.body,
+            // Its peel strips ride with it; its pale insides stay hidden.
+            ride: [
+              ...bn.strips.flatMap((st) => [st.a, st.b]),
+              ...[bn.fruit, ...bn.strips.flatMap((st) => [st.ia, st.ib])].map((t) => ({ token: t, visible: 0 })), // prettier-ignore
+            ],
+            pos: mid,
+            solid: { type: "box", half: [half[0], 0.12, half[2]] },
+            points,
+            radius: 0.12,
+            pick: half.map((v, k) => v + (k === 1 ? 0.05 : 0.02)),
+            mass: 1,
+            friction: 0.7,
+            restitution: 0.15,
+            angDamping: 2,
+          };
+        }),
+      joints: (d) =>
+        (d?.bananas || []).map((bn) => ({
+          type: "break",
+          token: bn.body,
+          at: bn.neck,
+          pull: 0.3,
+          give: 0.15,
+          sound: (ev, vol) => (ev.kind === "snap" ? { voice: "crack", f: 900, decay: 0.3, vol: Math.max(0.5, vol) } : null), // prettier-ignore
+        })),
+      sound: (hit, vol) => ({ voice: "thud", f: 220, bright: 0.3, decay: 0.3, vol: vol * 0.6 }),
+    },
     // A tap pulls the three bananas apart off their crown, then peels each
     // one from its tip, front first: its skin splits into three strips that
     // curl back one after another (each bending at two places), showing the
@@ -5384,7 +5455,9 @@ export const RECIPES = {
             { ...piece(tb), flat: 0.3, weight: 2, color: (c) => lit(c, "#3a2716") },
           );
         }
-        list.push({ body, fruit: inside, neck: toW(arc(0)), strips, ...moves[i] });
+        // (Lane Hands-on H2: points along its middle, for its piece.)
+        const line = [0.08, 0.3, 0.5, 0.7, 0.92].map((t) => toW(arc(t)));
+        list.push({ body, fruit: inside, neck: toW(arc(0)), strips, line, ...moves[i] });
         k.reach(add(toW(arc(1)), [0, 0.3, 0]));
         k.reach(add(toW(arc(0.9)), [0, -0.45, moves[i].away[2]]));
       });
@@ -6259,6 +6332,26 @@ export const RECIPES = {
     ],
     controls: [{ key: "drop", label: "Drop grapes", type: "pulse", ease: GRAPE_SECS }],
     action: { key: "drop", label: "Drop grapes" },
+    // Hands-on (lane Hands-on H2): pull a grape on the front and it snaps
+    // off its stalk into your hand; let go and it drops, bounces and rolls.
+    // ↺ puts them all back.
+    hands: {
+      floor: -0.96,
+      area: 1.3,
+      place: false,
+      pieces: (d) =>
+        (d?.drops || []).map((g, i) => ({ token: i, pos: g.home, solid: { type: "sphere", r: 0.15 }, pick: [0.17, 0.17, 0.17], mass: 0.4, friction: 0.5, restitution: 0.45, damping: 0.2, angDamping: 0.3 })), // prettier-ignore
+      joints: (d) =>
+        (d?.drops || []).map((g, i) => ({
+          type: "break",
+          token: i,
+          at: add(g.home, [0, 0.15, 0]),
+          pull: 0.2,
+          give: 0.2,
+          sound: (ev, vol) => (ev.kind === "snap" ? { voice: "pop", f: 900, decay: 0.3, vol: Math.max(0.4, vol) } : null), // prettier-ignore
+        })),
+      sound: (hit, vol) => ({ voice: "pop", f: 260 + 200 * Math.random(), decay: 0.6, vol: Math.min(0.9, 0.2 + vol) }), // prettier-ignore
+    },
     // A tap shakes the bunch: one after another, a dozen grapes on the
     // front come off, drop and bounce on the table and roll a little, each
     // on its own path. Then they hop back up to their places, one by one.
