@@ -892,6 +892,32 @@ const ICO_CORNERS = (() => {
 })();
 const D20_IN = ICO[0].g ? len(ICO[0].g) : 0.795;
 const D6_SOLID = { type: "box", half: [0.5, 0.5, 0.5] };
+// Hands-on: the spinning top's tilt as its spin dies (lane Hands-on H1). While
+// the finger has it, it stands straight; let go, it keeps upright while fast,
+// wobbles wider (precessing as it turns) below about 9 radians a second, and
+// below about 2 it leans over to rest on its side: tip and rim on the floor,
+// 0.7 radians over (its rim is 0.63 out and 0.53 up from its tip).
+const TOP_FALL = Math.atan2(0.53, 0.63);
+const SPIN = { peak: 0, held: false, a: 0 };
+function topTilt(a, parts, info, j) {
+  const w = Math.abs(j?.w ?? 0);
+  // ↺ turns it home with no speed of its own: it stands back up.
+  if (w < 1e-6 && Math.abs(a - SPIN.a) > 1e-5) SPIN.peak = 0;
+  SPIN.a = a;
+  if (j?.held) {
+    if (!SPIN.held) SPIN.peak = 0;
+    SPIN.peak = Math.max(SPIN.peak, w);
+  } else SPIN.peak = Math.max(SPIN.peak, w);
+  SPIN.held = !!j?.held;
+  const spun = SPIN.peak > 3 && !SPIN.held;
+  const wobble = spun ? 0.03 + 0.2 * smoothstep(9, 2.5, w) : 0;
+  const fall = spun ? smoothstep(2.4, 0.4, w) : 0;
+  const tilt = Math.min(TOP_FALL, wobble + (TOP_FALL - wobble) * fall);
+  const prec = 0.35 * a; // the lean circles as it turns
+  const axis = [Math.cos(prec), 0, Math.sin(prec)];
+  parts.top = { quat: quatMul(quatAxisAngle(axis, tilt), quatAxisAngle([0, 1, 0], a)) };
+}
+
 const D20_REST = quatMul(
   quatAxisAngle([0, 1, 0], 0.5),
   quatFromTo(ICO.find((f) => f.num === 20).n, [0, 1, 0]),
@@ -1679,6 +1705,15 @@ export const RECIPES = {
     controls: [{ key: "whip", label: "Spin", type: "pulse", ease: 3 }],
     action: { key: "whip", label: "Spin it" },
     sounds: [{ voice: "sample", file: TOP_LOOP }], // Sound C: the hum (topHum)
+    // Hands-on (lane Hands-on H1): flick it round to spin it. It stands up
+    // straight while it spins fast, wobbles wider as it slows, and topples
+    // onto its side (tip and rim on the floor) when it stops.
+    hands: {
+      floor: 0,
+      joints: [
+        { type: "dial", part: "top", pivot: [0, 0, 0], axis: [0, 1, 0], pos: [0, 0.4, 0], pick: [0.7, 0.45, 0.7], drag: 0.45, also: topTilt, sound: () => null }, // prettier-ignore
+      ],
+    },
     drive(t, c, out, info) {
       const m = mem(c);
       topHum(m, info, 9 + 26 * c.whip);
