@@ -803,6 +803,12 @@ drive(t, c, out, info) {
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
 
+**A forgiving press** (lane Hands-on H3; every toy, nothing to ask for): with the ✋ switch on, a
+press where the pick buffer finds no splat (between a desk lamp's arm and its beam, beside a thin
+pen) still takes the toy when the finger's ray crosses it: a piece's `pick` ellipsoid in pieces
+mode, else the toy's box (trimmed to 0.85 of its half sizes, as it stands now). With the switch off,
+such a press turns the view as before.
+
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 
@@ -889,6 +895,18 @@ off. ↺ mends it.
 
 ```js
 joints: [{ type: "break", part: "top", to: "low", at: [0.1, 0.4, 0], pull: 0.3, give: 0.15, knock: 4 }],
+```
+
+**Reseat** (lane Hands-on H3): `reseat: true` on a break lets the piece go back. Once it has been
+taken away, bringing it within `snap` toy radii (0.3) of its place, or pointing the finger at its
+place, glides it in, and it holds fast there again (another pull snaps it off again, with its `snap`
+cue). `reseat: { snap, seats: [{ pos, quat }] }` adds other places it clicks into (its middle and
+turn there, recipe units; `quat` defaults to its own): a pen's cap posted on its end. The click is
+the `"socket"` cue. ↺ brings it home from wherever it sits.
+
+```js
+{ type: "break", part: "cork", at: [0, 0.8, 0], pull: 0.18, give: 0.03, reseat: true },
+{ type: "break", part: "cap", at: CAP_MOUTH, pull: 0.2, give: 0.02, reseat: { seats: [{ pos: POSTED, quat: HALF_TURN }] } }, // prettier-ignore
 ```
 
 **Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk

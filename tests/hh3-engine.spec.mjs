@@ -1,0 +1,215 @@
+// Lane Hands-on H3's engine pieces (docs/PACKS.md, 5g, "Reseat", and 5f,
+// "A forgiving press"): a broken-off piece with `reseat` clicks back into
+// its place (or another seat) and holds fast there again; a press just off
+// a thin toy's splats still takes it with the ✋ switch on.
+
+import { test, expect } from "@playwright/test";
+
+const APP = "/?renderer=webgl2&adapt=off&profile=mid";
+
+async function ready(page, id, side = null) {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  return page.evaluate(
+    async ({ id, side }) => {
+      const { app, player } = window.__splashery;
+      await app.chooseToy(id);
+      player.opts.idleDelay = 1e9;
+      // Each joint gets `reseat` (before Hands-on builds its world on the
+      // first touch): home only, or with a second seat to the cane's side.
+      const hands = player.toyInfo.recipe.hands;
+      const orig = hands.joints;
+      const d = player.proc.ctx.kit.data;
+      const pos = side ? d.canes[1].pivot.map((v, i) => v + (i === 0 ? side : 0)) : null;
+      hands.joints = (dd, info) =>
+        orig(dd, info).map((j) => ({ ...j, reseat: pos ? { snap: 0.3, seats: [{ pos }] } : true })); // prettier-ignore
+      hands.joints.orig = orig;
+      return pos;
+    },
+    { id, side },
+  );
+}
+
+async function handsOn(page) {
+  await page.waitForTimeout(800);
+  if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
+    await page.click("#hands-toggle");
+}
+
+// Puts the candy cane's joints back as they were (the recipe is shared).
+const unpatch = (page) =>
+  page.evaluate(() => {
+    const hands = window.__splashery.player.toyInfo?.recipe?.hands;
+    if (hands?.joints?.orig) hands.joints = hands.joints.orig;
+  });
+
+const tick = (page, secs) =>
+  page.evaluate(
+    (n) => {
+      const { player } = window.__splashery;
+      for (let i = 0; i < n; i++) player.update(1 / 60);
+    },
+    Math.round(secs * 60),
+  );
+
+const screen = (page, pts) =>
+  page.evaluate((pts) => {
+    const { player } = window.__splashery;
+    const r = player.stage.canvas.getBoundingClientRect();
+    return pts.map((p) => {
+      const s = player.screenPoint(p);
+      return [r.left + s[0], r.top + s[1]];
+    });
+  }, pts);
+
+async function drag(page, points, { steps = 20, hold = false, held = false } = {}) {
+  const px = await screen(page, points);
+  if (!held) {
+    await page.mouse.move(...px[0]);
+    await page.mouse.down();
+  }
+  for (let k = 1; k < px.length; k++)
+    for (let i = 1; i <= steps; i++) {
+      const f = i / steps;
+      const [a, b] = [px[k - 1], px[k]];
+      await page.mouse.move(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
+      await tick(page, 1 / 30);
+    }
+  if (!hold) await page.mouse.up();
+}
+
+const joints = (page) => page.evaluate(() => window.__splashery.player.handsOn.joints?.state());
+const events = (page) =>
+  page.evaluate(() => window.__splashery.player.handsOn.joints.events.map((e) => e.kind));
+
+// The front cane's top: a point on its shaft above the break, and the
+// joint's own place.
+const caneTop = (page) =>
+  page.evaluate(() => {
+    const cn = window.__splashery.player.proc.ctx.kit.data.canes[1];
+    return cn.pivot.map((v, i) => v + cn.axis[i] * 0.45);
+  });
+
+// Snaps the front cane's top off and keeps holding it, out at `far`.
+async function snapOff(page, a, far) {
+  await drag(page, [a, [a[0] + 0.9, a[1] + 0.2, a[2] + 0.3], far], { hold: true });
+  const js = await joints(page);
+  const j = js.find((x) => x.broken);
+  expect(j).toBeTruthy();
+  return j;
+}
+
+test.afterEach(async ({ page }) => unpatch(page));
+
+test("reseat: a snapped-off piece brought back clicks home and holds fast again", async ({
+  page,
+}) => {
+  await ready(page, "candy-cane");
+  await handsOn(page);
+  const a = await caneTop(page);
+  const far = [a[0] + 0.9, a[1] + 0.7, a[2] + 0.3];
+  const j = await snapOff(page, a, far);
+  // Brought back to where it broke off: it glides in and locks.
+  await drag(page, [far, a], { held: true, steps: 30 });
+  await page.mouse.up();
+  await tick(page, 1);
+  let now = (await joints(page)).find((x) => x.name === j.name);
+  expect(now.broken).toBe(false);
+  expect(now.pinned).toBe(true);
+  for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(now.home[i], 4);
+  expect(await events(page)).toContain("socket");
+  // Held fast again: a small pull bends it and it springs back.
+  await drag(page, [a, [a[0] + 0.1, a[1], a[2]]]);
+  await tick(page, 1);
+  now = (await joints(page)).find((x) => x.name === j.name);
+  expect(now.broken).toBe(false);
+  for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(now.home[i], 4);
+  // A hard pull snaps it off again.
+  await snapOff(page, a, far);
+  await page.mouse.up();
+});
+
+test("reseat: a second seat takes it, and ↺ brings it home from there", async ({ page }) => {
+  const seatPos = await ready(page, "candy-cane", -0.55);
+  await handsOn(page);
+  const seat = { pos: seatPos };
+  const a = await caneTop(page);
+  const far = [a[0] + 0.9, a[1] + 0.9, a[2] + 0.3];
+  const j = await snapOff(page, a, far);
+  // (Low, so the finger's ray never points at its home on the way.)
+  const over = [far[0], seat.pos[1], seat.pos[2] + 0.3];
+  await drag(page, [far, over, seat.pos], { held: true, steps: 30 });
+  await page.mouse.up();
+  await tick(page, 1);
+  let now = (await joints(page)).find((x) => x.name === j.name);
+  expect(now.broken).toBe(false);
+  for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(seat.pos[i], 4);
+  // It stays there (held fast, not falling).
+  await tick(page, 1.5);
+  now = (await joints(page)).find((x) => x.name === j.name);
+  for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(seat.pos[i], 4);
+  // ↺: home from the seat, along the way.
+  await page.click("#hands-reset");
+  await tick(page, 0.2);
+  now = (await joints(page)).find((x) => x.name === j.name);
+  const d0 = Math.hypot(...now.pos.map((v, i) => v - now.home[i]));
+  expect(d0).toBeGreaterThan(0.01);
+  expect(d0).toBeLessThan(Math.hypot(...seat.pos.map((v, i) => v - now.home[i])));
+  await tick(page, 1);
+  now = (await joints(page)).find((x) => x.name === j.name);
+  for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(now.home[i], 4);
+  expect(now.broken).toBe(false);
+});
+
+test("a forgiving press: off the desk lamp's splats, Hands-on still lifts it", async ({ page }) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.chooseToy("lamp");
+    player.opts.idleDelay = 1e9;
+  });
+  await page.waitForTimeout(800);
+  // A point inside the toy's box where the pick buffer finds nothing.
+  const at = await page.evaluate(async () => {
+    const { player } = window.__splashery;
+    const r = player.stage.canvas.getBoundingClientRect();
+    const info = player.toyInfo;
+    const c = player.screenPoint(player.toRecipe(info.center));
+    for (const [dx, dy] of [
+      [0, 0],
+      [10, 0],
+      [-10, 0],
+      [0, 10],
+      [0, -10],
+      [20, 20],
+      [-20, 20],
+      [20, -20],
+      [-20, -20],
+    ]) {
+      // prettier-ignore
+      player.pickDirty = true;
+      if (!(await player.pickAt(c[0] + dx, c[1] + dy))) return { x: c[0] + dx, y: c[1] + dy, left: r.left, top: r.top }; // prettier-ignore
+    }
+    return null;
+  });
+  expect(at).toBeTruthy();
+  // Off: nothing to take there.
+  expect(await page.evaluate(({ x, y }) => window.__splashery.player.handsOn.nearPress(x, y), at)).toBe(null); // prettier-ignore
+  await page.click("#hands-toggle");
+  const p = await page.evaluate(({ x, y }) => window.__splashery.player.handsOn.nearPress(x, y), at); // prettier-ignore
+  expect(p).toBeTruthy();
+  // A drag from there picks the lamp up.
+  await page.mouse.move(at.left + at.x, at.top + at.y);
+  await page.mouse.down();
+  for (let i = 1; i <= 20; i++) {
+    await page.mouse.move(at.left + at.x, at.top + at.y - 6 * i);
+    await tick(page, 1 / 30);
+  }
+  const lifted = await page.evaluate(() => {
+    const b = window.__splashery.player.handsOn.body;
+    return b ? b.pos[1] - b.home.pos[1] : 0;
+  });
+  await page.mouse.up();
+  expect(lifted).toBeGreaterThan(0.1);
+});
