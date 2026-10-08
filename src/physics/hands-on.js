@@ -376,7 +376,7 @@ export class HandsOn {
   pressAt(hit, x, y) {
     if (!this.canGrab() || !hit) return false;
     if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
-    this.press = { hit: hit.slice(), x, y };
+    this.press = { hit: hit.slice(), x, y, t: this.time };
     return true;
   }
 
@@ -480,6 +480,7 @@ export class HandsOn {
 
   pickUp(hit, x, y) {
     const w = this.ensure();
+    this.unsqueeze(); // lane Hands-on H1
     this.homing = null;
     let body = this.body;
     if (this.mode === "pieces") {
@@ -656,9 +657,36 @@ export class HandsOn {
     return bd < 1.6 ? best : null;
   }
 
+  // Lane Hands-on H1: `hands.press` ({ amount, after }): a press held
+  // still on a whole toy for `after` seconds (0.15) squeezes it down by
+  // `amount` (0.25) and plays its sound (a hit with `press: true`); let go,
+  // it springs back with the landing squish's wobble. A drag still picks it
+  // up as before.
+  pressStep() {
+    const pd = this.info?.recipe?.hands?.press;
+    const pr = this.press;
+    if (!pd || !pr || this.hold || pr.push || pr.local || pr.squeezed) return;
+    if (this.time - pr.t < (pd.after ?? 0.15)) return;
+    this.ensure();
+    if (this.mode !== "toy") return;
+    pr.squeezed = true;
+    const b = this.body;
+    this.squish = { amp: pd.amount ?? 0.25, t0: this.time, axis: [0, 1, 0], point: [b.pos[0], this.world.planes[0].d, b.pos[2]], held: true }; // prettier-ignore
+    this.moved = true;
+    this.sounds.push({ speed: 3, soft: this.soft ?? 0, piece: false, press: true });
+  }
+
+  // The squeeze let go: it springs back.
+  unsqueeze() {
+    if (!this.squish?.held) return;
+    this.squish.held = false;
+    this.squish.t0 = this.time;
+  }
+
   // Lets go: whatever it was holding flies on with the finger's speed.
   release() {
     if (this.extras?.release()) return true; // lane Hands engine A
+    this.unsqueeze(); // lane Hands-on H1
     const h = this.hold;
     this.press = null;
     if (!h) return false;
@@ -751,6 +779,7 @@ export class HandsOn {
   step(dt) {
     this.time += dt;
     const extra = this.extras?.step(dt) || false; // lane Hands engine A
+    this.pressStep(); // lane Hands-on H1: a held press squeezes the toy
     const w = this.world;
     if (!w) return extra;
     let busy = extra;
@@ -817,7 +846,8 @@ export class HandsOn {
     if (this.squish) {
       const s = this.squish;
       const t = this.time - s.t0;
-      if (t > 1.2) this.squish = null;
+      if (s.held) busy = true;
+      else if (t > 1.2) this.squish = null;
       else busy = true;
     }
     this.apply();
@@ -869,6 +899,7 @@ export class HandsOn {
     const s = this.squish;
     if (!s) return 0;
     const t = this.time - s.t0;
+    if (s.held) return s.amp * Math.min(1, t / 0.08); // squeezed, while the finger stays
     return s.amp * Math.exp(-4.5 * t) * Math.cos(12 * t);
   }
 

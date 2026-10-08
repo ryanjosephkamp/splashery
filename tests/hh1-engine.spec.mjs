@@ -207,3 +207,33 @@ test("hands.floor may be a function of the build", async ({ page }) => {
   });
   expect(d).toBeCloseTo(-0.5, 5);
 });
+
+test("hands.press: a press held still squeezes a whole toy, and it springs back when let go", async ({
+  page,
+}) => {
+  await open(page, "rubber-duck", { press: { amount: 0.3 } });
+  const s = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const h = player.handsOn;
+    const c = player.stage.toScreen(player.toyInfo.center);
+    h.pressAt(player.toyInfo.center.slice(), c[0], c[1]);
+    const amp = [];
+    for (let i = 0; i < 30; i++) {
+      player.update(1 / 60);
+      amp.push(h.squishAmp());
+    }
+    h.release();
+    let min = Infinity;
+    for (let i = 0; i < 90; i++) {
+      player.update(1 / 60);
+      min = Math.min(min, h.squishAmp());
+      amp.push(h.squishAmp());
+    }
+    return { early: amp[5], held: amp[29], min, end: amp.at(-1), lifted: !!h.hold };
+  });
+  expect(s.early).toBeLessThan(0.01); // a tap's worth of time: nothing yet
+  expect(s.held).toBeCloseTo(0.3, 2); // squeezed while held
+  expect(s.min).toBeLessThan(-0.02); // springs back through rest (a wobble)
+  expect(Math.abs(s.end)).toBeLessThan(0.01);
+  expect(s.lifted).toBe(false);
+});
