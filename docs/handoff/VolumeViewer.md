@@ -7,58 +7,50 @@ ryanjosephkamp/splashery. Your lane: Volume viewer (Push Plan S4, prefix `vol`).
 `claude/lane-volume-viewer` (engine changes on `claude/lane-volume-viewer-engine`, as a small
 additive "Engine: …" PR merged first). PR title: "Phase Volume viewer: open a CT, MRI or microscope
 volume in 3D". Handoff file: docs/handoff/VolumeViewer.md (create it; start it with this brief, word
-for word, under "## Brief", then keep "## State", "## Notes", "## Known issues" and "## For the
-Operator" current). Model: Opus 5.5, at high effort (CLAUDE.md).
+for word, under "## Brief", then keep "## State
 
-### Brief (written by the Operator on October 8, 2026)
+WORKING (October 8, 2026, Opus 5.5, high effort): the tool, readers, samples and tests are done on
+`claude/lane-volume-viewer`; clips next. No engine changes were needed (no `-engine` branch).
 
-The owner approved the volume viewer (Push Plan S4) and a DICOM reader on October 4, 2026
-(docs/reviews/2026-10-04-push-alignment/notes.md, "For the volume viewer, absolutely"). Build a labs
-Studio tool, next to the Molecule viewer and the Point cloud viewer, that opens a person's own
-volume file and shows it as splats:
-
-1. Formats: a DICOM series (a folder or a .zip of .dcm slices, or a single multi-frame file), NIfTI
-   (.nii and .nii.gz), a TIFF stack, and raw volumes with a small header form (size, type, spacing).
-   Spacing is honored (anisotropic scans look right). Files stay on the device; nothing is sent
-   anywhere. Bad or unsupported files say plainly what went wrong.
-2. Libraries: vendor a DICOM reader (the owner approved one) and a NIfTI reader if you need one,
-   open-source, in `vendor/`, loaded only when the tool opens, listed in LICENSES.md and named in
-   the PR. A copyleft license, a library that calls a server, or one over 2 MB goes to the Operator
-   first.
-3. The view: splats sampled from the volume to the device's budget (the tiers the Imaging lane
-   uses), with window and level (presets: bone, soft tissue, full range), a transfer function from
-   value to color and opacity, a moving cut plane on each axis (reuse the `volume` kit kind and
-   `out.volume` from the Imaging lane, #274: read docs/handoff/Imaging.md first), a
-   maximum-intensity view, and a tap that steps through the presets. Materials look real: no
-   speckle, no see-through solids.
-4. Samples: only real, non-human scans under CLAUDE.md's licenses (the walnut CT already on main,
-   and one or two more such as the gar fish or the ant from Imaging's sources report). Nothing human
-   ships as a sample without the owner's yes (a person may open their own scans; Splashery doesn't
-   inspect what people open).
-5. Tests in `tests/vol*.spec.mjs`: each format loads from small test files you make by script (in
-   `tools/`), spacing is honored, a truncated or wrong file gives a clear message, and the sample
-   loads within the phone budget. Big data loads only when the tool opens.
-
-How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
-replace the prefix and lane record with yours). New toys and views go behind the labs switch
-(`labs: true`); the Operator merges labs work after the tests pass (with tools/op-merge.mjs) and
-after the owner marks your cards; changes to toys the public already sees wait for his "good" marks.
-Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
-for a long job, schedule a check-in with send_later instead of going idle. Clips at phone size
-(390x844, device scale 3) go on Effect review page 2
-(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
-(no republish). New sounds go in tools/sound-review.json as "ready" (the owner hears them on the
-Sound Board), not as cards. Before READY, re-read CLAUDE.md's "Effect quality rules" and check each
-clip against them at phone size. About six workers run at once; keep an even pace. Your Operator is
-session_012GmKRUMZLir2nb27Bo8Cu2. Card ids vol-…. Aim for a first READY with DICOM and NIfTI working
-and clips within about six hours.
-
-## State
-
-WORKING (October 8, 2026, Opus 5.5): readers and the viewer under construction.
+- [x] 1. Formats: DICOM (a series picked together, a folder with "Open a folder of slices…", a .zip,
+     or one multi-frame file; uncompressed and RLE Lossless; implicit, explicit and big-endian VR),
+     NIfTI-1 and NIfTI-2 (.nii, .nii.gz), TIFF stacks (one multi-page file or many files; 8, 16, 32
+     bits; none, LZW, Deflate, PackBits; ImageJ spacing) and raw volumes with a form (size, type,
+     byte order, voxel size, header). Spacing from the files (DICOM: the slices' places), or typed
+     in. Clear messages for cut-short, wrong and unsupported files (JPEG DICOM is named and
+     refused).
+- [x] 2. dicom-parser 1.8.21 (MIT, 32 KB), vendored in `vendor/dicom-parser/`, loaded only when a
+     DICOM file is opened. NIfTI, TIFF and zip are read by `src/volume/read.js` (no library).
+- [x] 3. The view: volume splats to the device's budget (`density: 2`, as Imaging), baked shading
+     from the volume's gradient, window presets (bone, soft tissue, full range; Hounsfield units for
+     CT, the histogram otherwise) and sliders, five color maps, two opacity curves, a cut plane on
+     each axis (a drag, or the Sweep control), a thin-slice view, the maximum-intensity picture, and
+     a tap that steps the presets.
+- [x] 4. Samples: the CWI walnut (Imaging's file) and a 12.8 mm gar larva (Metscher, Zenodo
+     19021581, CC BY 4.0), 1.36 MB as NIfTI.
+- [x] 5. Tests: `tests/vol.spec.mjs` (24), fixtures from `tools/vol-fixtures.mjs`.
+- [ ] Clips on Effect review page 2 (lane record `VolumeViewer`), screenshots.
 
 ## Notes
 
+- Files: `src/volume/read.js` (readers), `src/volume/view.js` (window, colors, sampling, MIP),
+  `src/packs/volume-viewer.js` (the toy, its panel: the folder button and the raw form),
+  `tools/vol-fixtures.mjs`, `tools/vol-gar.mjs`, `tools/vol-shot.mjs` (screenshots with options),
+  `tools/vol-clip.mjs` (phone-size clips).
+- Orientation: DICOM (LPS) and NIfTI (RAS) are turned so the patient's left is on the right,
+  superior up and anterior toward the viewer; files without orientation stack their slices upward.
+- A volume is averaged down while it is read (at most 8 million voxels, 4 million on a phone), so a
+  big series fits in memory; its true size and spacing are kept.
+- The tap rebuilds the toy with the next preset (the colors are baked per window); the cut place is
+  kept across presets of the same volume.
+
 ## Known issues
 
+- Compressed DICOM (JPEG, JPEG-LS, JPEG 2000, HTJ2K, Deflate) is refused with a message saying how
+  to convert it; decoding them would need more libraries.
+- The shading is baked (lit from above and in front), so it turns with the volume.
+- The ant scan from the sources report (3.5 GB) is not a sample yet.
+
 ## For the Operator
+
+- No engine PR: the Imaging lane's `volume` kind and `out.volume` did everything.
