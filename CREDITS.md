@@ -1527,6 +1527,26 @@ uses.
 | `vintage-camera-flash.mp3`               | vintage-camera                                        | [Vintage Camera Flash Powder and Shutter](https://freesound.org/people/Werra/sounds/232130/)               | Werra            |
 | `wooden-elephant-trumpet.mp3`            | wooden-elephant                                       | [Elephant Trumpets Growls.flac](https://freesound.org/people/D.jones/sounds/527845/)                       | D.jones          |
 
+## Lattices and orbitals (lane Lattices and orbitals)
+
+The Unit cells toy (labs) is computed from published numbers; no files are shipped. The cells and
+atom positions come from the [Crystallography Open Database](https://www.crystallography.net/cod/),
+whose data are in the public domain ("All data on this site have been placed in the public domain by
+the contributors"), checked October 7, 2026:
+[COD 9008564](https://www.crystallography.net/cod/9008564.html) (diamond),
+[COD 9008468](https://www.crystallography.net/cod/9008468.html) (copper),
+[COD 9008536](https://www.crystallography.net/cod/9008536.html) (α-iron) and
+[COD 9008506](https://www.crystallography.net/cod/9008506.html) (magnesium), all from R. W. G.
+Wyckoff, Crystal Structures (1963); [COD 9011577](https://www.crystallography.net/cod/9011577.html)
+(graphite, P. Trucano and R. Chen, Nature 258, 136–137, 1975);
+[COD 1538173](https://www.crystallography.net/cod/1538173.html) (ice Ih, A. Goto, T. Hondoh and S.
+Mae, J. Chem. Phys. 93, 1412, 1990) and
+[COD 1572227](https://www.crystallography.net/cod/1572227.html) (ice Ih's displacements at 81 K,
+IUCrJ 11, 2024). The Debye–Waller factors of diamond, copper, iron and magnesium at 293 K are from
+L.-M. Peng, G. Ren, S. L. Dudarev and M. J. Whelan, Acta Crystallographica A 52, 456–470 (1996), and
+the covalent radii of O and H from B. Cordero et al., Dalton Transactions, 2832–2838 (2008); numbers
+are facts, quoted with their source. The Orbital atlas computes the hydrogen wave functions itself.
+
 ## Software
 
 Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engine) (MIT) and uses
