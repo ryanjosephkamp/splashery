@@ -51,6 +51,18 @@ less color sharpening was worse, 0.612 to 0.677; more, 0.699):
 | high | 0.391 → 0.779    | 4/7 → 7/7      | 79% → 99.6%      |
 | max  | 0.440 → 0.862    | 7/7 → 7/7      | 89% → 100%       |
 
+After the owner's third review (the same note, October 8, 2026, 19:35 UTC): from `DETAIL_MIN`
+(150,000) splats up, a block with detail is drawn in single cells only (`DETAIL_CELLS`: no 2 by 2
+splats over letters; the grid then follows `fineCells`' detail-cells budget). Below it, the low tier
+keeps r3's mix (single cells only measured 0.496 and 2/7 lines there):
+
+| tier | SSIM (main → r3 → r4) | 12–16 px lines (r4) | letter gaps kept (r4) |
+| ---- | --------------------- | ------------------- | --------------------- |
+| low  | 0.221 → 0.537 → 0.537 | 4/7                 | 84%                   |
+| mid  | 0.362 → 0.723 → 0.759 | 7/7                 | 99.6%                 |
+| high | 0.391 → 0.779 → 0.815 | 7/7                 | 100%                  |
+| max  | 0.440 → 0.862 → 0.853 | 7/7                 | 100%                  |
+
 Building the splats (Node, this machine): the samples take 0.5 to 0.7 s at low (r1: 0.2 to 0.45 s)
 and 1.4 to 1.8 s at max (r1: 0.9 to 1.1 s). The street, forest and still life use 2.9 to 3.8 cells
 per splat (the still life, with its plain wall, 6).
@@ -176,6 +188,12 @@ with measurements within about six hours. Your Operator is session_012GmKRUMZLir
 > Reply with your usual READY/WORKING/BLOCKED line.
 
 ## State
+
+- October 8, 2026, 21:30 UTC: the owner marked the r3 text cards "fix" again. r4 (single-cell detail
+  from mid up) posted as `phf2-text-after-r4` and `phf2-text-still-after-r4`. Main merged in (#422,
+  #427, #428). Since #422 the Splats view is saved in the scene, so the phf tools and tests pick it
+  with the toy options and before any rebuild; a bug on main found on the way is in "For the
+  Operator".
 
 - October 8, 2026, 18:30 UTC: the owner marked the r2 text cards "fix" again (the same note).
   Smaller small splats again (Notes); new cards `phf2-text-after-r3` and `phf2-text-still-after-r3`.
@@ -366,6 +384,19 @@ A portrait frame, single-thread WebAssembly, this container under load: 196 px 1
   are paused frames of the same video).
 
 ## For the Operator
+
+- **A bug on main since #422 (lane Photo sharp view r2, not this lane's files).** When Photo to 3D
+  rebuilds while Sharp picture shows (for example `setToyOptions({ view: "splats", detail: … })`
+  right after the toy opens in Sharp picture), the next splat draws fail with a WebGL error:
+  "glDrawElementsInstanced: Mismatch between texture format and sampler type". The failing program
+  is PlayCanvas's work-buffer pass: its `uSubDrawData` (an unsigned-integer sampler) finds an RGBA8
+  texture on its unit. Reproduced 3 of 3 on main `7af5f5fd0`; clean on `d8163de92` (just before
+  #422) with the same Sharp picture to Splats switch. A likely part: `splats()` in
+  `src/packs/photo-sharp.js` turns the previous build's entity (`S.splatsOff`, no longer the toy)
+  back on; turning only the current toy's entity back on halved it (2 of 4) but didn't end it, so
+  the rest is in how a gsplat entity disabled before its first draw comes back. Also:
+  `tests/phf-engine.spec.mjs` failed every run on main since #422 (the toy opened in Sharp picture,
+  so it measured the wrong view); fixed on this branch by picking Splats first.
 
 - Round 2: a bigger depth for short clips is a trade the owner should make (Notes, "Round 2:
   edge-aware depth"). 392 px on 8 depth pictures instead of 196 on 32, at the same wait: the horse

@@ -110,7 +110,11 @@ async function textMatch(page, detail, fixed = true) {
         R.photo.on = (o) => !window.__phfPage?.plain && (on ? on(o) : true);
       }
       await app.chooseToy("photo-3d");
-      await app.setToyOptions({ source: "custom", detail });
+      // The Splats view, picked before the rebuild below (a scene saves it since lane Photo sharp
+      // view r2). (A rebuild while Sharp picture shows, then Splats, draws the splats with a WebGL
+      // error on main since #422: reported to the Operator, docs/handoff/PhotoFidelity.md.)
+      (await import("/src/packs/photo-sharp.js")).setSharpView("photo-3d", "splats");
+      await app.setToyOptions({ source: "custom", detail, view: "splats" });
       player.idle.weight = 0;
       player.motion.setControl("flat", 1, { snap: true });
       const st = player.stage;

@@ -50,6 +50,13 @@ export const SMALL_FILL = 0.45;
 export const PAIR_FILL = 0.6;
 export const BLOCK_BACK = 0.002; // how far behind (picture heights) each level of bigger splat sits
 export const FLAT_VAR = 0.002; // a block's mean squared color difference (r, g, b summed, 0..1) that still counts as plain
+// Detail drawn in single cells only (no 2 by 2 splats where the picture has detail; the owner's
+// third "sharper, less grainy"): from DETAIL_MIN splats up. Below it (the low tier) the budget
+// can't cover every detail cell, and 2 by 2 splats read better (measured: low 0.54 with them, 0.50
+// without; mid 0.72 → 0.76, high 0.78 → 0.81, max 0.86 → 0.85).
+export const DETAIL_CELLS = true;
+export const DETAIL_MIN = 150000;
+const detailCells = (count) => DETAIL_CELLS && count >= DETAIL_MIN;
 export const LEVELS = 3;
 export const SPLIT_SHARE = 0.28; // (r1's grid; kept for the tools that compare)
 export const SHARPEN = 0.5; // unsharp amount on the grid colors, to make up for the splats' overlap
@@ -555,7 +562,7 @@ export function fineCells(photo, count) {
     }
   const p = blocks ? plain / blocks : 0;
   const b2 = 1 << (2 * LEVELS);
-  return clamp(0.75 / ((1 - p) / 4 + p / b2), 2.2, FINE_CELLS);
+  return clamp(detailCells(count) ? 0.85 / (1 - p + p / b2) : 0.75 / ((1 - p) / 4 + p / b2), 2.2, FINE_CELLS); // prettier-ignore
 }
 
 // Lane Photo fidelity r2: the adaptive grid's choice. The fine grid (gx by gy, both multiples of
@@ -566,6 +573,7 @@ export function fineCells(photo, count) {
 // cells that have none, so no splat bridges a cut. Returns the splats as blocks: { n, x, y, size
 // (in cells), split (blocks split, per level), levels (splats per size) }.
 export function adaptiveGrid({ gx, gy, levels, count, rgb, d, m }) {
+  const cellsOnly = detailCells(count);
   // per level k (1..levels): each block's sums of r, g, b, squares and nearness (level 0: the cells)
   const nx = [gx];
   const ny = [gy];
@@ -637,7 +645,8 @@ export function adaptiveGrid({ gx, gy, levels, count, rgb, d, m }) {
     const near = S[k][(j * nx[k] + i) * 5 + 4] / q;
     const gain = (sse(k, i, j) - kids) * (1 + 0.5 * near);
     // a block bigger than 2 by 2 with detail in it splits before any 2 by 2 block does
-    return k >= 2 && sse(k, i, j) / q > FLAT_VAR ? 1e9 + gain : gain;
+    if (sse(k, i, j) / q <= FLAT_VAR) return gain;
+    return k >= 2 ? 2e9 + gain : cellsOnly ? 1e9 + gain : gain;
   };
   // a max-heap of the blocks that could split (level >= 1), keyed by priority
   const off = [0];

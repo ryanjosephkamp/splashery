@@ -7,6 +7,7 @@ import {
   buildPhotoSplats,
   fineCells,
   FINE_CELLS,
+  DETAIL_MIN,
   LEVELS,
 } from "../src/packs/photo-3d-core.js";
 import { guidedDepth } from "../src/packs/moving-photo.js";
@@ -146,7 +147,8 @@ test("screenshots: Photo to 3D in Splats, One color per splat, at phone and desk
       const { app, player } = window.__splashery;
       (await import("/src/packs/photo-sharp.js")).setSharpView("photo-3d", "splats");
       await app.chooseToy("photo-3d");
-      await app.setToyOptions({ detail: "splats" });
+      (await import("/src/packs/photo-sharp.js")).setSharpView("photo-3d", "splats"); // (before the rebuild)
+      await app.setToyOptions({ detail: "splats", view: "splats" });
       player.motion.setControl("flat", 0, { snap: true });
     });
     await page.waitForFunction(() => document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
@@ -154,4 +156,13 @@ test("screenshots: Photo to 3D in Splats, One color per splat, at phone and desk
     await page.screenshot({ path: `tests/screenshots/phf2-photo-3d-${w}x${h}.png` });
     await page.close();
   }
+});
+
+test("from DETAIL_MIN splats up, a page's letters are drawn in single cells only", () => {
+  const photo = page(1200, 1600);
+  const big = buildPhotoSplats(photo, flatDepth, { count: DETAIL_MIN });
+  const small = buildPhotoSplats(photo, flatDepth, { count: DETAIL_MIN - 1 });
+  // (2 by 2 splats are only on plain ground then; below it they also cover letters)
+  expect(big.stats.levels[1]).toBeLessThan(0.15 * big.stats.levels[0]);
+  expect(small.stats.levels[1]).toBeGreaterThan(big.stats.levels[1]);
 });

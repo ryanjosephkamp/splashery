@@ -304,7 +304,12 @@ for (const tier of TIERS) {
           .then((s) => s.setSharpView("photo-3d", "splats"))
           .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
         await app.chooseToy("photo-3d");
-        await app.setToyOptions({ source: "custom", ...(detail ? { detail } : {}) });
+        (await import("/src/packs/photo-sharp.js")).setSharpView("photo-3d", "splats"); // (before the rebuild)
+        await app.setToyOptions({
+          source: "custom",
+          view: "splats",
+          ...(detail ? { detail } : {}),
+        }); // (the Splats view: a scene saves it, lane Photo sharp view r2)
         player.idle.weight = 0;
         await new Promise((r) => setTimeout(r, 1500));
         player.motion.setControl("flat", 1 - rise, { snap: true });
@@ -364,7 +369,8 @@ for (const tier of TIERS) {
         .then((s) => s.setSharpView("moving-photo-3d", "splats"))
         .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
       await app.chooseToy("moving-photo-3d");
-      if (detail) await app.setToyOptions({ detail });
+      (await import("/src/packs/photo-sharp.js")).setSharpView("moving-photo-3d", "splats"); // (before the rebuild)
+      await app.setToyOptions({ view: "splats", ...(detail ? { detail } : {}) });
     }, DETAIL);
     await page.waitForTimeout(1500);
     await page.setInputFiles("#toy-input-file", VIDEO);
