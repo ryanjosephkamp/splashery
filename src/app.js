@@ -516,7 +516,9 @@ class App {
     // Pictures: a picture toy's sheets count too (and lane Powers of ten: a
     // toy's chunks on show).
     const splats = info.splats + (player.pictures?.splats() || 0) + (player.chunks?.splats() || 0); // prettier-ignore
-    const parts = [info.label, `${formatCount(splats)} splats`];
+    // Lane Photo sharp view: a toy drawn another way names what is on screen instead of its splats.
+    const shown = player.statusLabel?.(info);
+    const parts = [info.label, shown || `${formatCount(splats)} splats`];
     if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
     const pat = player.scene.pattern;
     this.flagCredit = null;
