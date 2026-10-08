@@ -2971,6 +2971,20 @@
       "effect": "A song's melody comes down a three-lane track as glowing notes, low to high by pitch; steer the sled into each note's lane as it arrives and the note plays, so catching them all plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or your own MIDI file.",
       "sound": "Each caught note plays on the grand piano at its own pitch; a missed note is silent.",
       "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): ♪ Your song opens a MIDI file from the game itself (the file opened in the Toy tab used to be dropped for Ode to Joy), or a recording: a note finder (Basic Pitch) charts its tune on the device, and each caught note plays its slice of the recording."
+    },
+    "unit-cells": {
+      "v": "new",
+      "owner": "The Operator's brief of October 7, 2026 (BACKLOG.md, \"More crystal lattices and electron orbitals\"; ROADMAP.md, \"Now\", item 4; lane Lattices and orbitals; labs only).",
+      "effect": "Six real crystals (diamond, graphite, ice Ih, fcc copper, bcc iron, hcp magnesium) from their published cells (COD), atoms as opaque even spheres with true relative radii. The tap steps through three views: the unit cell (zoomed to fill the view, with its outline); a block of n × n × n cells (slider 1 to 4), its shells of cells growing out of the central cell as the view zooms out; and the bonds, where every atom shrinks in place to a ball (a morph spreads the atoms by 2.5 while their parts shrink by 1/2.5 about the same point) and sticks join nearest neighbors (dotted hydrogen bonds in ice). Optional thermal motion: each atom as one Gaussian splat whose spread is its published mean-square displacement (Debye–Waller B / 8π²).",
+      "sound": "A small, clear glass clink as the view steps, and a soft wooden tick as the atoms settle.",
+      "improved": "Lattices and orbitals: built from src/lattice/cells.js; ice's hydrogens by the ice rules (an Euler circuit on a periodic block of oxygens). Evidence in docs/evidence/unit-cells.json."
+    },
+    "orbital-atlas": {
+      "v": "new",
+      "owner": "The Operator's brief of October 7, 2026 (BACKLOG.md, \"More crystal lattices and electron orbitals\"; ROADMAP.md, \"Now\", item 4; lane Lattices and orbitals; labs only).",
+      "effect": "Every hydrogen orbital of n = 1 to 5 (s, p, d, f, g) and 6s, 6p, 6d, 7s, 7p (68), grouped by shell, drawn like the Electron orbital toy's newer orbitals: a boundary surface holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The orbital is turned so its densest vertical plane faces the viewer; the tap cuts it there, the front half lifts up and away, and the back half's cut face shows |ψ|² in that plane, dark at the nodes; then it closes.",
+      "sound": "A soft, low whoosh as it is cut and opens, and a quiet low ding as the cut face shows.",
+      "improved": "Lattices and orbitals: src/lattice/orbitals.js computes normalized R_nl and real Y_lm for any n, l, m; tests check them against the analytic forms. Evidence in docs/evidence/orbital-atlas.json."
     }
   }
 }
