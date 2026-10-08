@@ -223,3 +223,8 @@ html.labs [data-labs-off] {
 .toy-section .band-head h2 {
   margin-bottom: 14px;
 }
+
+.learn-more {
+  margin-top: 0.75rem;
+  font-weight: 600;
+}

@@ -97,7 +97,8 @@ Clay works on pack toys too.
   creature voices, crunch, splash, wind, engines, horns) with a small note sequencer for tunes: the
   guitar strums a chord progression, Big Ben plays the Westminster quarters, the music box plays a
   melody. Pokes, paint, clay and the effect switches have their own soft sounds. Off until you turn
-  it on; embeds are always silent.
+  it on; embeds are silent unless the link has `sound=on`, which plays the toy's tap sound and adds
+  a mute button.
 - **Taps know where they land.** A toy can react to the spot you tap: tap one xylophone bar and the
   mallet strikes that bar and plays its note; tap elsewhere and it plays the scale.
 - **Scan rigs.** Captured toys can have moving parts: the cat statue turns its head and flicks its

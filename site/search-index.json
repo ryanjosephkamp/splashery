@@ -3481,6 +3481,16 @@
     "l": 1
   },
   {
+    "t": "Sound in a box",
+    "u": "toys/chladni-cell/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to switch on the sound: the beads gather on the cell's still surfaces. Tap again to swirl them.",
+    "w": "sound in a box studio studio chladni 3d sound ultrasound standing wave acoustic radiation force beads nodal surface cube flask acoustophoresis physics chladni-cell",
+    "i": "../assets/toys/chladni-cell/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Room echo meter",
     "u": "toys/room-echo/",
     "k": "toy",

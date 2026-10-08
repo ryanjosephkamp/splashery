@@ -187,13 +187,15 @@
                 style="background-image: url(&quot;../../../assets/toys/trebuchet/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=trebuchet"
+                src="../../play/?toy=trebuchet&sound=on"
                 title="Trebuchet, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -209,6 +211,12 @@
             Tap it to launch: the weight drops, the arm swings up and the stone sails off, then the
             arm comes back down, ready for the next one. Today people build trebuchets for fun, to
             throw pumpkins in contests.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Trebuchet" target="_blank" rel="noopener"
+              >Trebuchet on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -313,7 +321,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/trebuchet/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

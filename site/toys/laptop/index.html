@@ -191,13 +191,15 @@
                 style="background-image: url(&quot;../../../assets/toys/laptop/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=laptop&turntable=off"
+                src="../../play/?toy=laptop&turntable=off&sound=on"
                 title="Laptop, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -213,6 +215,12 @@
             on the screen. Tap or drag on the trackpad to move the pointer and click. Tap anywhere
             else on the laptop to close the lid, and again to open it. Pick the color of the case in
             the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Laptop" target="_blank" rel="noopener"
+              >Laptop on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -317,7 +325,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/laptop/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

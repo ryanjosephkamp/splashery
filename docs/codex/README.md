@@ -5,6 +5,9 @@ prompt:
 
 > Read docs/codex/NN-name.md in this repository and do it.
 
+Ryan runs every Codex task at **High** effort (his call of October 8, 2026, the same level as the
+Claude workers).
+
 Each task works on its own `codex/<name>` branch and opens one draft pull request against `main`
 (`AGENTS.md` has the rules). The Operator and the Claude lanes check every point before anything
 merges.
