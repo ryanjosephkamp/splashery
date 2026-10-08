@@ -40,6 +40,17 @@ light and dark neighbors at the same depth overlap less (they draw in no set ord
 | high | 0.391 → 0.435 → 0.699     | 4/7 → 6/7 → 7/7 | 79% → 83% → 98%  |
 | max  | 0.440 → 0.520 → 0.809     | 7/7 → 7/7 → 7/7 | 89% → 93% → 100% |
 
+After the owner's second review (the same note, October 8, 2026, 16:18 UTC): smaller still,
+`SMALL_FILL` 0.45 and `PAIR_FILL` 0.6 (tried on mid: 0.45/0.7 0.688, 0.35/0.6 0.712, 0.45/0.6 0.723;
+less color sharpening was worse, 0.612 to 0.677; more, 0.699):
+
+| tier | SSIM (main → r3) | 12–16 px lines | letter gaps kept |
+| ---- | ---------------- | -------------- | ---------------- |
+| low  | 0.221 → 0.537    | 0/7 → 4/7      | 19% → 84%        |
+| mid  | 0.362 → 0.723    | 0/7 → 7/7      | 64% → 99.6%      |
+| high | 0.391 → 0.779    | 4/7 → 7/7      | 79% → 99.6%      |
+| max  | 0.440 → 0.862    | 7/7 → 7/7      | 89% → 100%       |
+
 Building the splats (Node, this machine): the samples take 0.5 to 0.7 s at low (r1: 0.2 to 0.45 s)
 and 1.4 to 1.8 s at max (r1: 0.9 to 1.1 s). The street, forest and still life use 2.9 to 3.8 cells
 per splat (the still life, with its plain wall, 6).
@@ -165,6 +176,9 @@ with measurements within about six hours. Your Operator is session_012GmKRUMZLir
 > Reply with your usual READY/WORKING/BLOCKED line.
 
 ## State
+
+- October 8, 2026, 18:30 UTC: the owner marked the r2 text cards "fix" again (the same note).
+  Smaller small splats again (Notes); new cards `phf2-text-after-r3` and `phf2-text-still-after-r3`.
 
 - October 8, 2026, 16:00 UTC: the owner's marks on round 2: the street "good"; the text clip and
   close-up "fix" ("sharper and less grainy"). Fixed (smaller small splats, Notes), measured, new
