@@ -799,6 +799,10 @@ drive(t, c, out, info) {
   const at = vec.add(P, f.offset);
 ```
 
+`at: (p) => bool` (lane Hands-on H5) limits where a press is followed or fled (`p` the press, in
+recipe units): a press elsewhere picks the toy up as usual (an owl follows a press on its head and
+is tossed by its body).
+
 **The finger, for a drive** (`hands.touch`; lane Hands-on H5, October 8, 2026): `touch: true` tells
 the recipe's `drive()` what the finger does, as `info.hands.pressed` (a finger is down on the toy: a
 press, a push or a hold), `info.hands.held` (the toy, or a piece, is up in the hand) and

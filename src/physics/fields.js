@@ -537,6 +537,10 @@ export class Extras {
     this.spin = null;
     if (this.hands.touch) this.touched(); // lane Hands-on H5
     if (!this.flee) return false;
+    // Lane Hands-on H5: `at(p)` (recipe units) limits where a press is
+    // followed (an owl's head); a press elsewhere picks the toy up as usual.
+    const fo = this.hands.flee || this.hands.follow;
+    if (typeof fo === "object" && fo.at && !fo.at(this.player.toRecipe(hit))) return false;
     this.fingerDown = true;
     this.fingerAt(x, y);
     return true;
