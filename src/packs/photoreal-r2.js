@@ -1,8 +1,9 @@
 // Photoreal r2 (lane Photoreal r2): a second round of photoreal captures, one SOG pair each
 // (assets/toys/<id>/<id>.sog and -lite.sog, made by tools/pr2-prepare.mjs from the sources in
 // tools/assets.json). Metadata only: the toys are captured scans, so there is no toy code. All of
-// them are behind the labs switch until the owner marks them good. A tap hops them (no part of a
-// capture moves cleanly), and each has its own sound in src/toy-sounds.js.
+// them are behind the labs switch until the owner marks them good. Each has its own sound in
+// src/toy-sounds.js. Lane Photoreal r3 gave them their rigs (src/packs/photoreal-r3-rigs.js): closed
+// bases and their tap effects.
 //
 // Three captures are NonCommercial (CC BY-NC or CC BY-NC-SA, the owner's call of October 3, 2026):
 // they carry `"nc": true` in tools/assets.json, and `node tools/nc-assets.mjs` lists them.

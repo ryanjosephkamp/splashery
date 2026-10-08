@@ -90,8 +90,8 @@ export const TOY_SOUNDS = {
   },
   // Sound D (the walkthrough of October 6, 2026): the soft boing, no twinkle.
   "crochet-earth": { voice: "boing", f: 300, decay: 0.7, vol: 0.6 },
-  // Photoreal r3: no wind or suction: a soft wooden knock as its log slice lands.
-  "desk-globe": { voice: "wood", at: 0.55, f: 300, decay: 0.3, vol: 0.5 },
+  // Photoreal r3: no wind or suction: one soft, hollow knock as the globe is flicked round.
+  "desk-globe": { voice: "hollow", f: 260, decay: 0.5, vol: 0.4 },
   // Photoreal r3: the bounce, with no twinkle.
   "cherry-blossom-photo": { voice: "flutter", f: 800, decay: 0.7, vol: 0.6 },
   // Sound D (the walkthrough of October 6, 2026): no clicking, and a subtler gust of wind.

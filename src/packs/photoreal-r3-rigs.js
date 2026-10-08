@@ -869,9 +869,14 @@ const EFFECTS = {
   "maple-tree": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.8, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
   "bonsai-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.9, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
   "cherry-blossom-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.28, 0], axis: ACROSS, height: 0.15, amp: 0.03 }) }, // prettier-ignore
-  "desk-globe": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.74, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
 };
+// The desk globe's ball (fitted to its splats), and its axis toward the top pivot.
+const GLOBE = [-0.138, 0.281, 0.051];
+const GLOBE_AXIS = [0.198, 0.979, 0.039];
 const PART_EFFECTS = {
+  // The desk globe spins in its stand: the ball's splats (not the dark meridian ring or stand)
+  // turn about the globe's axis, fast at first and slowing.
+  "desk-globe": { label: "Spin", secs: 3.4, pivot: GLOBE, regions: [{ at: GLOBE, r: [0.5, 0.5, 0.5], soft: 0.01, notColor: "#151515", tol: 0.22 }], motion: (e, info, origin) => turnAbout(qa(GLOBE_AXIS, (vary(info?.tap, 29) < 0.5 ? 1 : -1) * TAU * 1.6 * (1 - (1 - band(e, 0, 3.2)) ** 2)), GLOBE, origin) }, // prettier-ignore
   // The toy T. rex rocks on its feet on its disc; the monkey doll on its cloth; the alum crystal
   // lifts off its block, turns and sets back down.
   "toy-trex": { label: "Stomp", secs: 2.6, pivot: [0, -0.85, -0.1], regions: [{ at: [0.05, 0.05, -0.13], r: [0.95, 0.89, 0.62], soft: 0.01 }], motion: M.wobble({ base: [0, -0.85, -0.1], r: 0.18, lean: 0.12 }) }, // prettier-ignore
@@ -879,13 +884,58 @@ const PART_EFFECTS = {
   "alum-crystal": { label: "Lift", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.26, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.22 * bump(e, 0, 2.0)) }, // prettier-ignore
 };
 
+// The BMX bicycle rolls forward and back on its rug, its wheels turning as far as it travels.
+// Each wheel is the dark splats (tire and black mag spokes) within a ball round its hub; the
+// chrome frame and the wheel's gold rim stripe (the same at every turn) stay with the frame.
+const BIKE_DIR = unit([-0.359, 0, 0.933]);
+const BIKE_AXLE = cross([0, 1, 0], BIKE_DIR);
+const BIKE_R = 0.27;
+const WHEELS = { wf: [-0.27, -0.157, 0.293], wr: [0.08, -0.157, -0.617] };
+function bikeRig(rig) {
+  const secs = 3.2;
+  const frame = [-0.1, 0.13, -0.16];
+  const wheel = (at) => ({
+    at,
+    r: [0.3, 0.3, 0.3],
+    soft: 0.01,
+    color: "#141414",
+    tol: 0.32,
+    over: true,
+  });
+  return {
+    ...rig,
+    hard: true,
+    parts: [
+      ...rig.parts,
+      { name: "frame", pivot: frame, regions: [{ at: frame, r: [0.75, 0.57, 0.95], soft: 0.01 }] },
+      { name: "wf", pivot: WHEELS.wf, regions: [wheel(WHEELS.wf)] },
+      { name: "wr", pivot: WHEELS.wr, regions: [wheel(WHEELS.wr)] },
+    ],
+    controls: [pulse("hop", "Roll", secs)],
+    action: { key: "hop", label: "Roll" },
+    drive(t, c, out, info) {
+      out.parts.under = { visible: 0 };
+      const e = since(c, "hop", secs);
+      if (e < 0) return;
+      const sgn = vary(info?.tap, 31) < 0.5 ? 1 : -1;
+      const s = sgn * 0.3 * Math.sin(Math.PI * ease(band(e, 0, 3)));
+      const move = BIKE_DIR.map((v) => v * s);
+      out.parts.frame = { quat: [0, 0, 0, 1], offset: move };
+      const q = qa(BIKE_AXLE, -s / BIKE_R);
+      for (const k of ["wf", "wr"]) out.parts[k] = { quat: q, offset: move };
+    },
+  };
+}
+
 export const PR3_RIGS = Object.fromEntries(
   Object.entries(BASES).map(([id, rig]) => [
     id,
-    PART_EFFECTS[id]
-      ? movePart(rig, PART_EFFECTS[id])
-      : EFFECTS[id]
-        ? moveBody(rig, EFFECTS[id])
-        : rig,
+    id === "bmx-bike"
+      ? bikeRig(rig)
+      : PART_EFFECTS[id]
+        ? movePart(rig, PART_EFFECTS[id])
+        : EFFECTS[id]
+          ? moveBody(rig, EFFECTS[id])
+          : rig,
   ]),
 );
