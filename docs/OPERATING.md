@@ -510,9 +510,16 @@ node tools/op-merge.mjs --topic oct7c --trailer-file .cache/trailers.txt \
    JSON lists are valid.
 4. It runs `toy-plan.mjs`, `site-build.mjs` and `shw-facts.mjs`, formats their output, runs both
    `--check`s and commits "Ops: rebuild site/ after #a, #b" when anything changed.
-5. It runs the specs the PRs touched (changed specs, and specs whose prefix starts a changed file's
-   name in src/, tools/ or tests/screenshots/) with `--workers=1`, restores the screenshots, and
-   runs `npx prettier --check .` and `node tools/us-english.mjs --diff`.
+5. It runs the specs the PRs touched with `--workers=1`, restores the screenshots, and runs
+   `npx prettier --check .` and `node tools/us-english.mjs --diff`. The specs (the PR body says why
+   each one ran):
+   - changed specs, and specs whose prefix starts a changed file's name in src/, tools/ or
+     tests/screenshots/;
+   - taps, hta, help, unit and kit when `src/toys.js`, `src/toy-help.js` or `src/toy-sounds.js`
+     changes or a PR adds a kit toy;
+   - for a changed `src/packs/<pack>.js`, every spec that names one of that pack's toy ids;
+   - smoke (the embed transfer ≤ 30 MB test) when anything under assets/ changes;
+   - site, spg and tpg when a PR changes site/.
 6. It writes the PR body (the five sections) to `.cache/op-merge/<topic>-pr.md` and prints a title.
    The full output is in `.cache/op-merge/<topic>.log` (and `<topic>-tests.log`).
 

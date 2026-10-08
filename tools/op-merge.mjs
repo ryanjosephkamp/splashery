@@ -32,6 +32,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
 
 const toolRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 
@@ -124,6 +125,7 @@ const prettier = (...args) => sh(prettierBin[0], [...prettierBin.slice(1), ...ar
 // ---- What a conflict is --------------------------------------------------------------------
 
 const SOUND_REVIEW = "tools/sound-review.json";
+const SHARED_LISTS = ["src/toys.js", "src/toy-help.js", "src/toy-sounds.js"];
 // Generated: rebuilt from the sources below, so either side will do. site/assets/ is hand-written.
 function isGenerated(f) {
   if (f.startsWith("site/")) return !f.startsWith("site/assets/");
@@ -293,6 +295,7 @@ const prList = opts.prs.map((p) => `#${p.n}`).join(", ");
 for (const pr of opts.prs) {
   const mb = sh("git", ["merge-base", baseSha, pr.sha]).stdout.trim() || baseSha;
   pr.files = git("diff", "--name-only", mb, pr.sha).split("\n").filter(Boolean);
+  pr.newKit = /^\+.*kind: "kit"/m.test(sh("git", ["diff", "-U0", mb, pr.sha, "--", "src/"]).stdout);
 }
 
 if (opts.dryRun) dryRun();
@@ -355,7 +358,7 @@ for (const pr of opts.prs) {
 
 // ---- 3. The shared lists ---------------------------------------------------------------------
 
-for (const f of ["src/toys.js", "src/toy-help.js", "src/toy-sounds.js"]) {
+for (const f of SHARED_LISTS) {
   if (!exists(f)) continue;
   const r = sh("node", ["--check", f]);
   if (r.status !== 0) stop(`${f} doesn't parse after the merges:\n${tail(r.out)}`);
@@ -407,9 +410,10 @@ if (stray)
 // ---- 5. Specs, format and spelling -----------------------------------------------------------
 
 const allFiles = [...new Set(opts.prs.flatMap((p) => p.files))];
-const specs = pickSpecs(allFiles);
+const specMap = pickSpecs(allFiles);
+const specs = [...specMap.keys()];
 if (!opts.tests) report.cut.push("The specs (run with --no-tests).");
-else if (!specs.length) report.specs = { list: [], counts: {}, failed: [] };
+else if (!specs.length) report.specs = { list: [], why: specMap, counts: {}, failed: [] };
 else {
   say(
     `specs: running ${specs.length} (${specs.map((s) => path.basename(s, ".spec.mjs")).join(", ")})`,
@@ -420,7 +424,7 @@ else {
   const shotsBefore = untrackedShots();
   const r = sh("npx", ["playwright", "test", ...specs, "--workers=1", "--reporter=list"], { env });
   fs.writeFileSync(path.join(outDir, `${opts.topic}-tests.log`), r.out);
-  report.specs = { list: specs, ...countResults(r.out) };
+  report.specs = { list: specs, why: specMap, ...countResults(r.out) };
   if (r.status !== 0 && !report.specs.counts.failed) report.specs.counts.failed = "?";
   // Put the screenshots back as the merge left them.
   if (exists("tests/screenshots")) {
@@ -477,28 +481,83 @@ process.exit(report.issues.length ? 3 : 0);
 
 // ---- Helpers ---------------------------------------------------------------------------------
 
+// The specs to run, each with why: a Map of "tests/x.spec.mjs" → [reasons].
 function pickSpecs(files, ref = "HEAD") {
   // The specs in the merged tree (for --dry-run, the simulated merge).
   const specFiles = sh("git", ["ls-tree", "--name-only", ref, "tests/"])
     .stdout.split("\n")
     .map((f) => f.replace(/^tests\//, ""))
     .filter((f) => f.endsWith(".spec.mjs"));
-  const picked = new Set(opts.specs.map((s) => (s.startsWith("tests/") ? s : `tests/${s}`)));
-  for (const f of files)
-    if (/^tests\/[^/]+\.spec\.mjs$/.test(f) && specFiles.includes(f.slice(6))) picked.add(f);
+  const picked = new Map();
+  const add = (spec, why) => {
+    const f = spec.startsWith("tests/") ? spec : `tests/${spec}`;
+    if (!specFiles.includes(f.slice(6)) && why !== "--spec") return;
+    if (!picked.has(f)) picked.set(f, []);
+    if (!picked.get(f).includes(why)) picked.get(f).push(why);
+  };
+  for (const s of opts.specs) add(s, "--spec");
+  for (const f of files) if (/^tests\/[^/]+\.spec\.mjs$/.test(f)) add(f, "changed");
   // A spec's prefix (its name without "-engine") at the start of a changed file's name in src/,
   // tools/ or tests/screenshots/, as in tools/geo-lib.mjs → geo.spec.mjs.
   for (const s of specFiles) {
     const prefix = s.replace(/\.spec\.mjs$/, "").replace(/-engine$/, "");
     if (prefix === "taps" || prefix === "smoke") continue;
-    const hit = files.some(
+    const hit = files.find(
       (f) =>
         /^(src|tools|tests\/screenshots)\//.test(f) &&
         new RegExp(`^${prefix}[-.]`).test(path.basename(f)),
     );
-    if (hit) picked.add(`tests/${s}`);
+    if (hit) add(s, `prefix of ${hit}`);
   }
-  return [...picked].sort();
+  // The shared lists, or a new kit toy: every toy's tap, help text and catalog.
+  const lists = files.filter((f) => SHARED_LISTS.includes(f));
+  const newKit = opts.prs.filter((p) => p.newKit);
+  if (lists.length || newKit.length) {
+    const why = [
+      ...(lists.length ? [`${lists.join(", ")} changed`] : []),
+      ...(newKit.length ? [`a new kit toy (${newKit.map((p) => `#${p.n}`).join(", ")})`] : []),
+    ].join("; ");
+    for (const s of ["taps", "hta", "help", "unit", "kit"]) add(`${s}.spec.mjs`, why);
+  }
+  // A pack's recipes: every spec that names one of that pack's toys.
+  const packs = files
+    .filter((f) => /^src\/packs\/[^/]+\.js$/.test(f))
+    .map((f) => path.basename(f, ".js"));
+  if (packs.length) {
+    const ids = toyIdsByPack();
+    const texts = specFiles.map((s) => [s, sh("git", ["show", `${ref}:tests/${s}`]).stdout]);
+    for (const pack of packs)
+      for (const id of ids.get(pack) || []) {
+        const q = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const named = new RegExp(`["'\`]${q}["'\`]|toy=${q}\\b`);
+        for (const [s, text] of texts)
+          if (named.test(text)) add(s, `names ${id} (src/packs/${pack}.js)`);
+      }
+  }
+  // Assets: the embed transfer limit and the first load.
+  const asset = files.find((f) => f.startsWith("assets/"));
+  if (asset) add("smoke.spec.mjs", `assets changed (${asset})`);
+  // The preview site's own pages.
+  const site = files.find((f) => f.startsWith("site/"));
+  if (site) for (const s of ["site", "spg", "tpg"]) add(`${s}.spec.mjs`, `site/ changed (${site})`);
+  return new Map([...picked].sort(([a], [b]) => a.localeCompare(b)));
+}
+
+// Toy ids by pack, from the checkout's src/toys.js (for --dry-run, the base's).
+function toyIdsByPack() {
+  const ids = new Map();
+  const r = sh("node", [
+    "--input-type=module",
+    "-e",
+    `const { TOYS } = await import(${JSON.stringify(pathToFileURL(path.join(repo, "src/toys.js")).href)});
+console.log(JSON.stringify(TOYS.filter((t) => t.pack).map((t) => [t.pack, t.id])));`,
+  ]);
+  try {
+    for (const [pack, id] of JSON.parse(r.stdout)) ids.set(pack, [...(ids.get(pack) || []), id]);
+  } catch {
+    report.warnings.push("Couldn't read the toy list, so no spec was picked by a pack's toy ids.");
+  }
+  return ids;
 }
 
 function untrackedShots() {
@@ -557,13 +616,15 @@ function prBody() {
   if (report.specs) {
     const c = report.specs.counts;
     if (!report.specs.list.length) L.push("- Specs: none matched the changed files.");
-    else
+    else {
       L.push(
         `- Specs the PRs touched (${report.specs.list.length}, \`--workers=1\`): ${c.passed || 0} passed, ` +
           `${c.failed || 0} failed, ${c.skipped || 0} skipped${c.flaky ? `, ${c.flaky} flaky` : ""}. ` +
-          report.specs.list.map((s) => `\`${path.basename(s)}\``).join(", ") +
-          ". Screenshots restored afterwards.",
+          "Screenshots restored afterward. Chosen because:",
       );
+      for (const [s, why] of report.specs.why)
+        L.push(`  - \`${path.basename(s)}\`: ${why.join("; ")}`);
+    }
   }
   if (report.format) L.push(`- \`npx prettier --check .\`: ${report.format}.`);
   if (report.spelling) L.push(`- \`node tools/us-english.mjs --diff\`: ${report.spelling}.`);
@@ -645,8 +706,7 @@ function dryRun() {
     cur = git("commit-tree", lines[0], "-p", cur, "-p", pr.sha, "-m", `op-merge dry run #${pr.n}`);
   }
   const specs = pickSpecs([...new Set(opts.prs.flatMap((p) => p.files))], cur);
-  say(
-    `specs it would run: ${specs.length ? specs.map((s) => path.basename(s)).join(", ") : "none"}`,
-  );
+  say(`specs it would run:${specs.size ? "" : " none"}`);
+  for (const [s, why] of specs) say(`  ${path.basename(s)}: ${why.join("; ")}`);
   process.exit(blocked ? 1 : 0);
 }

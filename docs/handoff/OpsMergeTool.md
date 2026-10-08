@@ -8,7 +8,8 @@ Repo: ryanjosephkamp/splashery. Lane: Ops merge tool (prefix `opm`). Branch:
 merges". Handoff file: docs/handoff/OpsMergeTool.md (start it with this brief under "## Brief"; keep
 "## State
 
-- Started October 7, 2026. Draft PR #397.
+- Started October 7, 2026. Draft PR #397. October 8: the wider spec choice (the Operator's review)
+  and main merged (`523ae242`).
 - Done: `tools/op-merge.mjs` (all six steps, plus `--dry-run`, `--continue`, `--spec`, `--base`,
   `--no-fetch`, `--repo`), `tests/opm.spec.mjs` (4 node-only tests on a temporary git repo: a clean
   merge, a site/-only conflict rebuilt, a sound-review merge toy by toy, a real conflict that stops,
@@ -29,8 +30,12 @@ merges". Handoff file: docs/handoff/OpsMergeTool.md (start it with this brief un
   other.
 - A PR without `--title` falls back to its head commit's subject and says so under Deviations.
 - Spec choice: changed tests/\*.spec.mjs, plus each spec whose prefix (its name without `-engine`)
-  starts a changed file's name in src/, tools/ or tests/screenshots/. taps and smoke are never
-  picked by prefix.
+  starts a changed file's name in src/, tools/ or tests/screenshots/ (taps and smoke are never
+  picked by prefix). Since the Operator's review of October 8, 2026, also: taps, hta, help, unit and
+  kit for a change to the three shared lists or a new kit toy (a `kind: "kit"` line added under
+  src/); every spec naming one of a changed pack's toy ids (read from `src/toys.js`); smoke for
+  assets/; site, spg and tpg for site/. The PR body lists each spec with why. On #393 (Lattices) the
+  dry run now picks help, hta, kit, lat, smoke, taps and unit.
 
 ## Known issues
 

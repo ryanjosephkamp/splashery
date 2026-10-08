@@ -19,7 +19,8 @@ const ENV = {
 const SITE_BUILD = `import fs from "node:fs";
 import { TOYS } from "../src/toys.js";
 
-const html = \`<p>\${TOYS.join(", ")}</p>\\n<ul>\\n\${TOYS.map((t) => \`  <li>\${t}</li>\`).join("\\n")}\\n</ul>\\n\`;
+const ids = TOYS.map((t) => t.id);
+const html = \`<p>\${ids.join(", ")}</p>\\n<ul>\\n\${ids.map((t) => \`  <li>\${t}</li>\`).join("\\n")}\\n</ul>\\n\`;
 if (process.argv.includes("--check")) {
   process.exit(fs.readFileSync("site/index.html", "utf8") === html ? 0 : 1);
 }
@@ -28,7 +29,7 @@ fs.writeFileSync("site/index.html", html);
 `;
 
 const toysJs = (toys) =>
-  `// prettier-ignore\nexport const TOYS = [\n${toys.map((t) => `  "${t}",\n`).join("\n")}];\n`;
+  `// prettier-ignore\nexport const TOYS = [\n${toys.map((t) => `  { id: "${t}", pack: "fruit" },\n`).join("\n")}];\n`;
 const review = (toys) => JSON.stringify({ round: "test", toys }, null, 2) + "\n";
 
 const made = [];
@@ -182,6 +183,38 @@ test.describe("op-merge", () => {
     expect(r.read(".cache/op-merge/t3-pr.md")).toContain(
       "#2: tools/sound-review.json: merged toy by toy",
     );
+  });
+
+  test("the spec choice follows the shared lists, packs, assets and site/", () => {
+    const r = makeRepo();
+    const stub = 'import { test } from "@playwright/test";\n\ntest("x", () => {});\n';
+    const specs = ["taps", "hta", "help", "unit", "kit", "smoke", "site", "spg", "tpg", "other"];
+    r.write(Object.fromEntries(specs.map((s) => [`tests/${s}.spec.mjs`, stub])));
+    r.write({ "tests/fr.spec.mjs": stub.replace('"x"', '"pear"') });
+    r.git("add", "-A");
+    r.git("commit", "-q", "-m", "specs");
+    const a = r.pr("a", {
+      "src/packs/fruit.js": "export const RECIPES = {};\n",
+      "assets/pear.txt": "x\n",
+    });
+    const b = r.pr("b", { "site/assets/site.css": "p {\n}\n" });
+    const res = r.run("--topic", "t5", "--pr", `1:${a}`, "--pr", `2:${b}`, "--dry-run");
+    expect(res.code, res.out).toBe(0);
+    expect(res.out).toContain("fr.spec.mjs: names pear (src/packs/fruit.js)");
+    expect(res.out).toContain("smoke.spec.mjs: assets changed (assets/pear.txt)");
+    for (const s of ["site", "spg", "tpg"])
+      expect(res.out).toContain(`${s}.spec.mjs: site/ changed (site/assets/site.css)`);
+    expect(res.out).not.toContain("taps.spec.mjs");
+
+    const c = r.pr("c", {
+      "src/toys.js": r
+        .read("src/toys.js")
+        .replace('pack: "fruit" }', 'pack: "fruit", kind: "kit" }'),
+    });
+    const res2 = r.run("--topic", "t6", "--pr", `3:${c}`, "--dry-run");
+    for (const s of ["taps", "hta", "help", "unit", "kit"])
+      expect(res2.out).toContain(`${s}.spec.mjs: src/toys.js changed; a new kit toy (#3)`);
+    expect(res2.out).not.toContain("other.spec.mjs");
   });
 
   test("a real conflict stops with the files named, and --continue finishes it", () => {
