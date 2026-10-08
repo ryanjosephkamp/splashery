@@ -739,9 +739,11 @@ stretch from its shelf entry: `grab: { radius, max }` (the jelly blob). In piece
 may be a function `(data, info) => height`, for a floor that depends on the build (a d20 sits lower
 than two d6s). `hands.press: { amount, after }` (a whole toy): a press held still for `after`
 seconds (0.15) squeezes it down by `amount` (0.25) and sends `hands.sound` a hit with `press: true`;
-let go, it springs back with a wobble (the rubber duck). A drag still picks it up. A material's
-`nose` turns it only while it flies, near critically damped, so a shuttlecock flips cork first once
-and lies still where it lands.
+let go, it springs back with a wobble (the rubber duck). A drag still picks it up. A piece with
+`fixed: true` (no part of its own) never moves, is never picked up and is never knocked loose: a
+stand or a wall for the others to land on (the baseball cap's walnut stand). A material's `nose`
+turns it only while it flies, near critically damped, so a shuttlecock flips cork first once and
+lies still where it lands.
 
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
