@@ -1542,3 +1542,43 @@ domain), a build tool only. The QR code toy (lane QR) uses Project Nayuki's
 its codes and [jsQR](https://github.com/cozmo/jsQR) (Apache 2.0) to check that they scan, both
 loaded only when that toy opens (jsQR only when a check runs in a browser without its own QR
 reader). "QR Code" is a registered trademark of DENSO WAVE INCORPORATED.
+
+## AI-made Studio samples (Dot samples)
+
+The owner made 40 pictures with his own AI image tool (the "Dot" prompt pack, D01 to D40). Thirty of
+them ship as Photo to 3D samples in `assets/toys/photo-3d/ai/` (a JPEG, 1,280 px wide, and a depth
+map made by `tools/dsm-depth.mjs`), under the AI-made sample rules of October 5, 2026: no people,
+logos or text; labeled AI-made beside them (in the picker, the label and the credit); never real
+captures or real places, and never used for science, math or engineering toys. The pictures belong
+to the owner, who made them; no third-party work is in them. Checked October 7, 2026:
+
+- Train on a viaduct (D01): `assets/toys/photo-3d/ai/train.jpg`.
+- Desert oasis (D03): `assets/toys/photo-3d/ai/oasis.jpg`.
+- Castle on a lake (D04): `assets/toys/photo-3d/ai/castle.jpg`.
+- Fishing cove (D05): `assets/toys/photo-3d/ai/cove.jpg`.
+- Toy harbor (D34): `assets/toys/photo-3d/ai/harbor.jpg`.
+- Paper valley (D36): `assets/toys/photo-3d/ai/paper-valley.jpg`.
+- Felt farm (D37): `assets/toys/photo-3d/ai/farm.jpg`.
+- Treehouse village (D02): `assets/toys/photo-3d/ai/treehouses.jpg`.
+- Long library (D06): `assets/toys/photo-3d/ai/library.jpg`.
+- Woodworking shop (D07): `assets/toys/photo-3d/ai/workshop.jpg`.
+- Stone cloister (D08): `assets/toys/photo-3d/ai/cloister.jpg`.
+- Greenhouse (D10): `assets/toys/photo-3d/ai/greenhouse.jpg`.
+- Attic (D14): `assets/toys/photo-3d/ai/attic.jpg`.
+- Bamboo path (D16): `assets/toys/photo-3d/ai/bamboo.jpg`.
+- Rice terraces (D11): `assets/toys/photo-3d/ai/terraces.jpg`.
+- Canyon at sunset (D13): `assets/toys/photo-3d/ai/canyon.jpg`.
+- Stone arch (D17): `assets/toys/photo-3d/ai/arch.jpg`.
+- Forest and fallen log (D19): `assets/toys/photo-3d/ai/fallen-log.jpg`.
+- Alpine lake (D20): `assets/toys/photo-3d/ai/alpine-lake.jpg`.
+- Frozen waterfall (D30): `assets/toys/photo-3d/ai/ice-falls.jpg`.
+- Floating islands (D32): `assets/toys/photo-3d/ai/floating-isles.jpg`.
+- Glass wave (D38): `assets/toys/photo-3d/ai/wave.jpg`.
+- Explorer's desk (D21): `assets/toys/photo-3d/ai/explorer-desk.jpg`.
+- Watchmaker's bench (D22): `assets/toys/photo-3d/ai/watchmaker.jpg`.
+- Dragonfly (D26): `assets/toys/photo-3d/ai/dragonfly.jpg`.
+- Mushrooms (D27): `assets/toys/photo-3d/ai/mushrooms.jpg`.
+- Fruit market (D28): `assets/toys/photo-3d/ai/market.jpg`.
+- Giant gears (D31): `assets/toys/photo-3d/ai/gears.jpg`.
+- Chess board (D40): `assets/toys/photo-3d/ai/chess.jpg`.
+- City of books (D29): `assets/toys/photo-3d/ai/book-city.jpg`.
