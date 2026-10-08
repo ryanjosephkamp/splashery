@@ -138,24 +138,30 @@ ND; NC per asset with `"nc": true`). CLAUDE.md's "Shelves" rule applies: no new 
 photoreal capture, nothing human without the owner's yes. Main has moved a lot since October 3 (read
 docs/HANDOFF.md "Now" and the Photoreal r2 files on main first). Update the handoff's "## State
 
-WORKING (October 8, 2026, about 19:10 UTC; cloud session, Opus 5.5 at high effort). PR #419 (draft).
+WORKING (October 8, 2026, about 20:40 UTC; cloud session, Opus 5.5 at high effort). PR #419 (draft).
+Effect review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards, 22 effect cards and 7
+new-toy cards are up; the last 9 clips (the BMX, orange, heart donut, physalis, sunflower, turtle,
+Triceratops skull, cone shell and fluorite, re-rendered after fixes from the first clips) are
+rendering and go up next.
 
-- Item 1, bases: done. 19 of the 30 r2 toys are visibly closed and have before-and-after cards from
-  below on Effect review page 2 (lane record `PhotorealR3`, "Closed bases", cards `pr3-base-…`).
-  Five more got a core inside that makes no visible change at phone size (no card); the crystal and
-  the lioness's neck are not closed (see "Known issues"); the other five were fine. The "Photoreal
-  r2 toys" section of docs/audits/bases-2026-10.md has every verdict.
+- Item 1, bases: done. 19 of the 30 r2 toys are visibly closed (cards `pr3-base-…`). Five more got a
+  core inside that makes no visible change at phone size (no card); the crystal and the lioness's
+  neck are not closed (see "Known issues"); the other five were fine. The "Photoreal r2 toys"
+  section of docs/audits/bases-2026-10.md has every verdict.
 - Item 2, effects: every r2 toy but the dog plush (its hop is Fix9's, approved) has a new effect
-  (table in "Notes"). Clips are rendering (`tools/pr3-clip.mjs`); they go on page 2 next.
+  (table in "Notes"; cards `pr3-fx-…`). Watching the first clips led to six fixes: the BMX's wheels
+  no longer leave a ghost behind, the heart donut twirls instead of flipping (its underside was
+  never captured), the orange rolls less far, and the physalis swing, sunflower nod and turtle crawl
+  are clearer.
 - Item 3, sounds: the 14 the owner's table names that Sound D had not done are changed, checked with
   `node tools/sound-check.mjs`, and marked "ready" in tools/sound-review.json.
 - Item 4, framing: home views for the sushi boat, cherry blossom and murex shell (closer), the
   elephant (it faces you) and the cave lioness (whole in frame).
-- Item 5, new toys: ten scientific toys are in (labs), with credits, help, sounds and plan entries:
-  a Triceratops skull and a cone shell (real splat captures), and eight museum scans baked by
-  `tools/pr3-bake.mjs` (a celestial globe whose ball turns, an armillary sphere whose inner rings
-  turn, five Stannern meteorite stones that fall one by one, fluorite under an ultraviolet lamp, an
-  ammonite, the Morasko iron, pyrite and a megalodon tooth). Thumbnails and their clips are next.
+- Item 5, new toys: ten scientific toys (labs), with credits, help, sounds, plan entries and
+  thumbnails (cards `pr3-new-…`): a Triceratops skull and a cone shell (real splat captures), and
+  eight museum scans baked by `tools/pr3-bake.mjs` (a celestial globe whose ball turns, an armillary
+  sphere whose inner rings turn, five Stannern meteorite stones that fall one by one, fluorite under
+  an ultraviolet lamp, an ammonite, the Morasko iron, pyrite and a megalodon tooth).
 
 What main already did for these toys since October 3 (so this lane does not redo it):
 
@@ -221,6 +227,13 @@ What main already did for these toys since October 3 (so this lane does not redo
 - The puffin's real call (a CC0 or CC BY recording) is still to come; soft landings for now.
 - The BMX bicycle's frame and handlebar pad show decal lettering that looks like a brand name (from
   Photoreal r2): see "For the Operator".
+- The Triceratops skull's museum mounting rod is mostly hidden; a short stub stays under the jaw (it
+  can't be told from the jaw's dark shadows by position or color).
+- The cone shell's far side was captured poorly (a white smear), so it rocks one way and the other
+  rather than turning all the way round.
+- The celestial globe's painted sky is soft: the museum scan's texture is low-resolution.
+- Five toys' cores (stollen, physalis, puffin, elephant, sunflower) change nothing visible at phone
+  size; they stay, as they cost little and fill the thin places at other angles.
 
 ## For the Operator
 
