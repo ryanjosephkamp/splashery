@@ -364,7 +364,18 @@ const SPLAT_MIRROR = {
   options: [
     // r5: a gentler default depth (was 0.6), so a person stands out from the
     // wall without looking cut out.
-    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
+    // Live r8: also a slider over the stage (the owner's walkthrough of
+    // October 6, 2026; Engine PR #383 draws it).
+    {
+      key: "depth",
+      label: "Depth",
+      type: "slider",
+      min: 0,
+      max: 1,
+      step: 0.05,
+      default: 0.5,
+      stage: true,
+    },
     {
       // r3: a hologram look beside the plain one.
       key: "look",
