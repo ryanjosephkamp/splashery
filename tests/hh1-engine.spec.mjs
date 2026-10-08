@@ -164,3 +164,29 @@ test("a shelf shape with a grab in its shelf entry stretches like the gummy bear
   expect(s.back).toBeLessThan(0.02); // it springs back
   expect(s.plain).toBe(false); // a shelf shape without one stays as it was
 });
+
+test("hands.soft: a toy squishes on landing as much as its hands block says", async ({ page }) => {
+  const squish = async (hands) => {
+    await open(page, "bouncy-ball", hands);
+    return page.evaluate(() => {
+      const { player } = window.__splashery;
+      const h = player.handsOn;
+      h.ensure();
+      const b = h.body;
+      b.pos[1] += 3 * h.R();
+      h.moved = true;
+      h.world.wake();
+      let peak = 0;
+      for (let t = 0; t < 1; t += 1 / 60) {
+        player.update(1 / 60);
+        peak = Math.max(peak, h.squish?.amp ?? 0);
+      }
+      return { soft: h.soft, peak };
+    });
+  };
+  const firm = await squish({ material: "bouncy-ball", soft: 0.15 });
+  const usual = await squish({ material: "bouncy-ball" });
+  expect(firm.soft).toBeCloseTo(0.15, 3);
+  expect(usual.soft).toBeCloseTo(0.55, 3); // the list's
+  expect(firm.peak).toBeLessThan(usual.peak * 0.5);
+});
