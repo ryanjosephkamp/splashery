@@ -74,9 +74,9 @@ export const TOY_HELP = {
   },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": {
-    howTo: "Tap it to toss it: it flips over once and lands; drag to turn it.",
+    howTo: "Tap it to toss it: it twirls round once and lands; drag to turn it.",
     about:
-      "A real heart-shaped donut with a white glaze, captured from 411 photos on a turntable and drawn with about a quarter of a million soft splats. A donut is a ring or heart of dough fried in oil, so its crust browns and its crumb puffs.\n\nTap it and it is tossed up, turns over once in the air and lands. Drag to turn it and see the glossy glaze, the golden fried sides and the pale ring where the dough rose in the fryer.",
+      "A real heart-shaped donut with a white glaze, captured from 411 photos on a turntable and drawn with about a quarter of a million soft splats. A donut is a ring or heart of dough fried in oil, so its crust browns and its crumb puffs.\n\nTap it and it is tossed up, twirls round once in the air and lands. Drag to turn it and see the glossy glaze, the golden fried sides and the pale ring where the dough rose in the fryer.",
   },
   "sushi-boat": {
     howTo: "Tap it to rock the boat; drag to turn it.",

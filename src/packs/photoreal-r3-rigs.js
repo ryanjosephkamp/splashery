@@ -90,8 +90,8 @@ const lift = (t, dy) => ({
 const still = { quat: [0, 0, 0, 1], offset: [0, 0, 0] };
 
 const MOTIONS = {
-  // Tossed up, it turns over once about a level axis through its middle and lands, with a small
-  // bounce (the heart donut).
+  // Tossed up, it turns once round about an axis through its middle and lands, with a small
+  // bounce (the heart donut twirls about the upright: its underside was never captured).
   toss:
     ({ center, axis, height = 0.55, secs = 1.0 }) =>
     (e) => {
@@ -819,7 +819,7 @@ const EFFECTS = {
   "heart-donut": {
     label: "Toss",
     secs: 1.6,
-    motion: M.toss({ center: [0, 0.05, 0], axis: ACROSS }),
+    motion: M.toss({ center: [0, 0.05, 0], axis: [0, 1, 0] }),
   },
   "sushi-boat": { label: "Rock", secs: 3.5, motion: M.rock({ pivot: [0.012, -0.1, -0.03], axis: [BOAT_U[0], 0, BOAT_U[1]], amp: 0.13, k: 0.9, w: 5 }) }, // prettier-ignore
   "seeded-loaf": {
@@ -833,7 +833,7 @@ const EFFECTS = {
     secs: 2.2,
     motion: M.drop({ pivot: [0, -0.5, 0], axis: [1, 0, 0], amp: 0.04 }),
   },
-  "orange-photo": { label: "Roll", secs: 2.8, motion: M.roll({ center: [-0.057, 0.01, -0.01], R: 0.865, dir: ACROSS, dist: 0.6 }) }, // prettier-ignore
+  "orange-photo": { label: "Roll", secs: 2.8, motion: M.roll({ center: [-0.057, 0.01, -0.01], R: 0.865, dir: ACROSS, dist: 0.32 }) }, // prettier-ignore
   "crystal-gem": {
     label: "Turn",
     secs: 3,
@@ -845,14 +845,18 @@ const EFFECTS = {
     motion: M.hopTurn({ center: [0, 0, 0], turn: 0.7, height: 0.16 }),
   },
   "elephant-souvenir": { label: "Turn", secs: 2.2, motion: M.hopTurn({ center: [0, 0, 0], turn: 0.8, height: 0.05 }) }, // prettier-ignore
-  "turtle-souvenir": { label: "Crawl", secs: 3, motion: M.crawl({ heading: [1, 0, 0] }) },
+  "turtle-souvenir": {
+    label: "Crawl",
+    secs: 3,
+    motion: M.crawl({ heading: [1, 0, 0], dist: 0.38, sway: 0.08 }),
+  },
   "cave-lioness": { label: "Look", secs: 2.7, motion: M.look({ pivot: [0.6, -0.9, -0.5] }) },
   "murex-shell": {
     label: "Turn",
     secs: 3,
     motion: M.spin({ center: [0, 0, 0], turns: 1, secs: 2.8 }),
   },
-  "sunflower-photo": { label: "Nod", secs: 3, motion: M.rock({ pivot: [0, -1.15, 0.3], axis: [1, 0, 0], amp: 0.07, k: 1.1, w: 5 }) }, // prettier-ignore
+  "sunflower-photo": { label: "Nod", secs: 3, motion: M.rock({ pivot: [0, -1.15, 0.3], axis: [1, 0, 0], amp: 0.13, k: 1.1, w: 5 }) }, // prettier-ignore
   "white-roses": { label: "Knock", secs: 2.6, motion: M.wobble({ base: [0.065, -0.955, -0.035], r: 0.2, lean: 0.12 }) }, // prettier-ignore
   peony: { label: "Knock", secs: 2.6, motion: M.wobble({ base: [-0.081, -1.335, -0.112], r: 0.21, lean: 0.1 }) }, // prettier-ignore
   "money-tree": { label: "Knock", secs: 2.6, motion: M.wobble({ base: [-0.168, -1.1, -0.161], r: 0.33, lean: 0.1 }) }, // prettier-ignore
@@ -918,7 +922,9 @@ function bikeRig(rig) {
     hard: true,
     parts: [
       ...rig.parts,
-      { name: "frame", pivot: frame, regions: [{ at: frame, r: [0.75, 0.57, 0.95], soft: 0.01 }] },
+      // The frame, and every splat in a wheel's ball that isn't the wheel's dark tire or spokes
+      // (its highlights, hub and gold stripe), so nothing is left behind as the bike rolls.
+      { name: "frame", pivot: frame, regions: [{ at: frame, r: [0.75, 0.57, 0.95], soft: 0.01 }, ...Object.values(WHEELS).map((at) => ({ at, r: [0.285, 0.285, 0.285], soft: 0.01 }))] }, // prettier-ignore
       { name: "wf", pivot: WHEELS.wf, regions: [wheel(WHEELS.wf)] },
       { name: "wr", pivot: WHEELS.wr, regions: [wheel(WHEELS.wr)] },
     ],
@@ -954,7 +960,7 @@ function physalisRig(rig) {
       const sgn = vary(info?.tap, 37) < 0.5 ? 1 : -1;
       const parts = {};
       PHYSALIS.forEach((l, i) => {
-        const ang = sgn * 0.42 * Math.exp(-e * (1.1 + 0.2 * i)) * Math.sin(e * (8.5 - 0.9 * i) + 0.2 * i) * band(e, 0, 0.06 + 0.05 * i); // prettier-ignore
+        const ang = sgn * 0.6 * Math.exp(-e * (1.1 + 0.2 * i)) * Math.sin(e * (8.5 - 0.9 * i) + 0.2 * i) * band(e, 0, 0.06 + 0.05 * i); // prettier-ignore
         const q = qa([0.9, 0, 0.44], ang);
         out.parts["l" + i] = { quat: q, offset: [0, 0, 0] };
         parts["b" + i] = { quat: q, offset: [0, 0, 0] };

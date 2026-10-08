@@ -201,8 +201,8 @@ Proposals below are suggestions; the owner may change them.
 - **Heart donut** (`heart-donut`). Now: tap: Toss (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: Tossed up, it turns over once and lands.
-  - Improved: Photoreal r3 (October 8, 2026): Tossed up, it turns over once and lands.
+  - Effect: Tossed up, it twirls round once and lands.
+  - Improved: Photoreal r3 (October 8, 2026): Tossed up, it twirls round once and lands.
   - Sound: A short sound that suits the object.
 - **Sushi boat** (`sushi-boat`). Now: tap: Rock (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it

@@ -189,7 +189,7 @@ What main already did for these toys since October 3 (so this lane does not redo
 
   | Toy                         | Tap                                                                                      |
   | --------------------------- | ---------------------------------------------------------------------------------------- |
-  | Heart donut                 | Tossed: turns over once and lands.                                                       |
+  | Heart donut                 | Tossed: twirls round once and lands (its underside was never captured).                  |
   | Sushi boat                  | Rocks side to side, as on water.                                                         |
   | Seeded loaf, stollen        | Lifted and dropped; lands and rocks to rest.                                             |
   | Cowboy steak                | Flipped over onto its (new) seared underside and back.                                   |
