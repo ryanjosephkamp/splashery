@@ -21,6 +21,11 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "incompressible-shuffle": {
+    howTo: "Press Swap, scrub the sequence, or tap a sheet to pin a particle and see its path.",
+    about:
+      "Two colored material sheets trade places through seven moves: lift, four shears, translate, and lower. Each rises to its own height so the two instructions stay apart. The bright central patch keeps area 0.04 in construction coordinates, even when its shape changes. Stretch 1 still takes a real shear detour.\n\nThese are exact material paths from a prescribed incompressible shear construction, from section 3 of OpenAI’s Finite Instructions and Solenoidal Shear Flows. The surrounding velocity and forcing fields are not simulated. Particle size and opacity are visual styling, not fluid density. Replay resets the original labels; scrubbing backward retraces the stored path. This pilot does not establish the manuscript’s broader claims or a Lean verification.",
+  },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": {
     howTo: "Tap it to make it hop; drag to turn it.",

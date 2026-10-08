@@ -12,6 +12,7 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
+  "incompressible-shuffle": { voice: "whoosh", f: 270, to: 2.1, decay: 0.65, vol: 0.18 },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
   "sushi-boat": [

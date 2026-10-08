@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 440 toys. 411 have a tap action today; the other 29 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
+- 441 toys. 412 have a tap action today; the other 29 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 421.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 20.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -48,15 +48,15 @@ Proposals below are suggestions; the owner may change them.
   Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
   Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
   Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
-  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
-  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
-  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
-  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
-  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
-  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
-  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Puzzle cube, Spring toy, Kite, Chess set, Incompressible Shuffle, Lorenz attractor, Möbius strip,
+  Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph
+  plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation,
+  Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses,
+  Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal
+  ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
+  Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano,
+  Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus,
+  Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
   Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
@@ -2133,8 +2133,13 @@ Proposals below are suggestions; the owner may change them.
     like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
     synthesized sound as a fallback.
 
-## Maths (17)
+## Maths (18)
 
+- **Incompressible Shuffle** (`incompressible-shuffle`). Now: tap: Swap / replay. Plan: keep.
+  - Effect: Two material sheets swap through lift, four exact shears, translation, and lower.
+  - Improved: Native pilot: exact analytic paths, reciprocal stretch presets, pause, scrub, reset,
+    replay, and actual material-particle pinning. Labs only.
+  - Sound: A short, quiet air sweep, a gesture cue rather than simulated fluid audio.
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
   - Effect: A glowing point races along the trail, drawing a new path.
