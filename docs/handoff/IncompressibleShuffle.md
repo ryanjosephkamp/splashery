@@ -122,3 +122,27 @@ Run the real browser test, inspect the exact native image and screen-pointer pic
 centers if supported, audition the quiet sound, and complete the aggregate suite in a fully
 populated checkout. Assess real phone performance separately. Do not remove labs or claim visual
 approval until that work is complete.
+
+## Reconciliation verification
+
+October 8, 2026. Separate worktree: `splashery-pilot-reconcile-20261008`, local branch
+`dot/incompressible-shuffle-reconcile-20261008`. Both exact parent commits were fetched read-only.
+The only content conflict was `docs/TOY-PLAN.md`; it was regenerated from combined metadata and
+formatted, producing 449 toys. No preservation decision required choosing one side's shared lists.
+All upstream catalog, help, sound, plan, and credit additions remain intact.
+
+Against main `92edec0f3e01a11c59bd7197c94fca522d2d620f`, the resolved patch still changes only the
+original 12 pilot files. Five shared source/credit lists have additions only. The core, recipe, both
+pilot test files, and evidence JSON are byte-identical to the published pilot head. Only this
+handoff's integration bookkeeping and the regenerated plan differ from the original pilot.
+
+Fresh checks after reconciliation:
+
+- Pilot/core/unit command above: **34 passed**, 27.1 s.
+- Help and native-tap command above: **6 passed**, 14.2 s.
+- Same eight browser-independent regression files: **51 passed**, 12.6 s.
+- Pack build: 34,812 splats, 64 ms.
+- Full-repository Prettier check passed; diff against the new main passed whitespace checks.
+- Browser, visual, sound-audition, GPU, and full-suite acceptance limits above remain unchanged.
+
+The merge commit is local only; remote publication and any expected-head update are separate.

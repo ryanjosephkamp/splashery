@@ -1844,6 +1844,43 @@ export const TOY_SOUNDS = {
   // Each circle's hum joins in, building into a chord.
   "fourier-circles": { voice: "pad", notes: "C3 G3 C4 E4 G4 C5", step: 0.35, at: 0.3, decay: 1.6 },
   // A wooden slide; drive() adds a slide and a click for each piece.
+  // Lane Math r2: a tracer drops into the flow, a soft drip over a low,
+  // wide chord; each attractor in its own key.
+  "rossler-attractor": [
+    { voice: "drip", f: 620, vol: 0.4 },
+    { voice: "glow", at: 0.05, notes: "C2+G2+C3", decay: 1.4, bright: 0.4, vol: 0.5 },
+  ],
+  "thomas-attractor": [
+    { voice: "drip", f: 780, vol: 0.4 },
+    { voice: "glow", at: 0.05, notes: "E2+B2+E3", decay: 1.4, bright: 0.45, vol: 0.5 },
+  ],
+  "aizawa-attractor": [
+    { voice: "drip", f: 520, vol: 0.4 },
+    { voice: "glow", at: 0.05, notes: "F2+C3+F3", decay: 1.4, bright: 0.35, vol: 0.5 },
+  ],
+  // Lane Math r2: like the hypercube, a slow rush as each 4D shape rolls
+  // through the fourth dimension and again as it rolls home, over a low
+  // chord in its own key.
+  "five-cell": [
+    { voice: "whoom", f: 280, decay: 1.4, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "D3+A3", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 240, decay: 1.2, vol: 0.5 },
+  ],
+  "sixteen-cell": [
+    { voice: "whoom", f: 320, decay: 1.4, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "G2+D3+G3", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 260, decay: 1.2, vol: 0.5 },
+  ],
+  "twenty-four-cell": [
+    { voice: "whoom", f: 260, decay: 1.5, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "C3+G3+E4", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 230, decay: 1.2, vol: 0.5 },
+  ],
+  duoprism: [
+    { voice: "whoom", f: 300, decay: 1.4, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "F2+C3+A3", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 250, decay: 1.2, vol: 0.5 },
+  ],
   "pythagoras-proof": { voice: "scrape", at: 0.3, f: 700, rate: 9, decay: 0.35, vol: 0.35 },
   // Lane Manual, Sound B (his note: too robotic and loud, change entirely):
   // the quiet scratch of chalk as t plays (4 s).
@@ -3058,6 +3095,8 @@ export const TOY_SOUNDS = {
   "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
   "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },
   "star-systems": { voice: "breath", f: 450, to: 0.7, decay: 2.5, vol: 0.27 },
+  // Lane Space r4: a soft breath as the view flies to the next planet.
+  "solar-orbits": { voice: "breath", f: 480, to: 0.64, decay: 2.9, vol: 0.26 },
   // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
   "data-in-3d": [
     { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },

@@ -287,7 +287,9 @@ test("the circle's path and the Fourier words read what people type", async () =
   expect(await fc.read("x = cos t, y = sin(3t)")).toEqual({ shape: "custom", eq: "x = cos t, y = sin(3t)" }); // prettier-ignore
   await expect(fc.read("Ryan!")).rejects.toThrow(/can't be drawn/);
   await expect(fc.read("😀")).rejects.toThrow(/can't be drawn/);
-  await expect(fc.read("toolongword")).rejects.toThrow(/more than 6/);
+  // Lane Math r2: longer text (up to 40 letters, drawn five at a time).
+  expect(await fc.read("toolongword")).toEqual({ shape: "words", words: "TOOLONGWORD" });
+  await expect(fc.read("A".repeat(41))).rejects.toThrow(/more than 40/);
   await expect(fc.read("   ")).rejects.toThrow(/Type a word/);
   await expect(fc.read("y = x^2")).rejects.toThrow(/closed curve/);
 });

@@ -1247,6 +1247,25 @@ ETOPO 2022 at 60 arc-seconds), and names what is there:
   Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center), center points
   of every adopted feature but the lettered satellite craters. Public domain.
 
+## The solar system on real orbits (lane Space r4)
+
+All from JPL's Solar System Dynamics group (NASA/JPL; public domain scientific data), checked on the
+live pages on October 7, 2026, shipped as a dated snapshot (`tools/sp4-orbits.mjs`); nothing is
+fetched at run time.
+
+- The planets: E. M. Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (Table 1, 1800 to 2050), through the night sky's code.
+- The moons: JPL's [Planetary Satellite Mean Elements](https://ssd.jpl.nasa.gov/sats/elem/), and
+  Titan's osculating elements from [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/).
+- The asteroids and comets: the
+  [JPL Small-Body Database](https://ssd.jpl.nasa.gov/tools/sbdb_query.html) through its
+  [APIs](https://ssd-api.jpl.nasa.gov/): a seeded random sample of 4,000 numbered asteroids (plus
+  Ceres, Pallas, Vesta and Hygiea), and 1P/Halley, 2P/Encke, 9P/Tempel 1 and
+  67P/Churyumov-Gerasimenko.
+- The planets' and moons' colors: small copies of the real worlds' NASA and USGS maps (above).
+- The tests compare positions with values recorded from JPL Horizons.
+
 ## Powers of ten (lane Powers of ten)
 
 The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own files are
