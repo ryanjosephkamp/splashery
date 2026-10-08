@@ -62,8 +62,12 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 0.6, f: 120, bright: 0.1, decay: 0.35, vol: 0.45 },
     { voice: "thud", at: 0.95, f: 125, bright: 0.1, decay: 0.3, vol: 0.25 },
   ],
-  // Photoreal r3: no bell; a softer freewheel ticking.
-  "bmx-bike": { voice: "click", f: 1600, n: 6, decay: 0.4, vol: 0.3 },
+  // Photoreal r3: no bell: a soft, dull knock of the frame as it leans on its kickstand, and a
+  // lighter one as it rocks back.
+  "bmx-bike": [
+    { voice: "metal", at: 0.05, f: 320, bright: 0.2, decay: 0.3, vol: 0.3 },
+    { voice: "thud", at: 0.55, f: 140, bright: 0.15, decay: 0.25, vol: 0.2 },
+  ],
   // Photoreal r3: no clicking; the ding, more subtle.
   "murex-shell": { voice: "glass", f: 2100, decay: 0.4, vol: 0.4 },
   // Sound D (the walkthrough of October 6, 2026): something subtle, no clicking, stretch or
