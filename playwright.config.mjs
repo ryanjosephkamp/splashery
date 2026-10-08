@@ -10,6 +10,12 @@ const executablePath = process.env.SPLASHERY_CHROMIUM || undefined;
 // SPLASHERY_PORT gives each local lane on one computer its own server (OPERATING.md, "Local
 // lanes"); everyone else keeps 4173.
 const port = Number(process.env.SPLASHERY_PORT) || 4173;
+// SPLASHERY_GL=llvmpipe (docs/OPERATING.md, "Running the suite fast"): WebGL2 through ANGLE on
+// Mesa's llvmpipe instead of SwiftShader, which draws the same frames two to three times faster on
+// the cloud container. Chromium reaches desktop GL only with a window, so the browser runs headed
+// on a virtual display (Xvfb; tools/suite.mjs starts one). WebGPU stays on SwiftShader.
+const llvmpipe = process.env.SPLASHERY_GL === "llvmpipe";
+const gl = llvmpipe ? ["--use-gl=angle", "--use-angle=gl"] : ["--use-angle=swiftshader"];
 
 export default defineConfig({
   testDir: "./tests",
@@ -25,8 +31,9 @@ export default defineConfig({
     trace: "retain-on-failure",
     launchOptions: {
       executablePath,
+      ...(llvmpipe ? { headless: false } : {}),
       args: [
-        "--use-angle=swiftshader",
+        ...gl,
         "--enable-unsafe-swiftshader",
         "--ignore-gpu-blocklist",
         "--enable-webgl",

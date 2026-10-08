@@ -18,6 +18,8 @@
 //   node tools/suite.mjs --out=DIR        # keep this run's reports in DIR (default .cache/suite)
 //   node tools/suite.mjs --save-times     # also write each file's time to tools/suite-times.json
 //   node tools/suite.mjs --report         # print the summary of the run in --out, run nothing
+//   node tools/suite.mjs --gl=llvmpipe    # WebGL2 on Mesa's llvmpipe in a virtual display
+//                                         # (playwright.config.mjs, SPLASHERY_GL)
 //   node tools/suite.mjs -- --trace=on    # anything after "--" goes to Playwright as it is
 //
 // SPLASHERY_CHROMIUM defaults to /opt/pw-browsers/chromium when that exists (the cloud
@@ -48,6 +50,12 @@ const TIMES = path.join(root, "tools/suite-times.json");
 const env = { ...process.env };
 if (!env.SPLASHERY_CHROMIUM && fs.existsSync("/opt/pw-browsers/chromium"))
   env.SPLASHERY_CHROMIUM = "/opt/pw-browsers/chromium";
+const GL = arg("gl", env.SPLASHERY_GL || "swiftshader");
+if (!["swiftshader", "llvmpipe"].includes(GL)) {
+  console.error("--gl is swiftshader (the default) or llvmpipe");
+  process.exit(2);
+}
+env.SPLASHERY_GL = GL;
 
 // ---- Which files, in which order ---------------------------------------------------------------
 
@@ -162,6 +170,22 @@ async function serve() {
   return server;
 }
 
+// The virtual display a headed browser needs for llvmpipe: one Xvfb for the whole run.
+async function display() {
+  if (GL !== "llvmpipe" || env.DISPLAY) return null;
+  for (let n = 90; n < 110; n++) {
+    if (fs.existsSync(`/tmp/.X${n}-lock`)) continue;
+    const x = spawn("Xvfb", [`:${n}`, "-screen", "0", "1920x1080x24", "-nolisten", "tcp"], { stdio: "ignore" }); // prettier-ignore
+    await new Promise((ok) => setTimeout(ok, 1000));
+    if (x.exitCode === null) {
+      env.DISPLAY = `:${n}`;
+      return x;
+    }
+  }
+  console.error("Could not start Xvfb for --gl=llvmpipe.");
+  process.exit(2);
+}
+
 // ---- The summary -------------------------------------------------------------------------------
 
 const fmt = (s) => (s >= 3600 ? `${Math.floor(s / 3600)} h ${Math.round((s % 3600) / 60)} min` : s >= 60 ? `${Math.round(s / 60)} min` : `${Math.round(s)} s`); // prettier-ignore
@@ -209,9 +233,10 @@ if (arg("report")) {
 if (arg("fresh")) fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 const todo = files.filter((f) => !fs.existsSync(reportOf(f)));
-console.log(`${files.length - todo.length} of ${files.length} files already done in ${path.relative(root, OUT) || "."}; running ${todo.length}, ${JOBS} at once.`); // prettier-ignore
+console.log(`${files.length - todo.length} of ${files.length} files already done in ${path.relative(root, OUT) || "."}; running ${todo.length}, ${JOBS} at once, WebGL2 on ${GL}.`); // prettier-ignore
 
 const server = await serve();
+const xvfb = await display();
 const t0 = Date.now();
 const queue = [...todo];
 let finished = 0;
@@ -231,6 +256,7 @@ async function lane() {
 }
 await Promise.all(Array.from({ length: Math.min(JOBS, todo.length) }, lane));
 server?.kill();
+xvfb?.kill();
 
 const s = summary(files, (Date.now() - t0) / 1000);
 fs.writeFileSync(path.join(OUT, "summary.md"), s.text);
