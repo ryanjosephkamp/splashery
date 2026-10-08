@@ -14,6 +14,7 @@
 // - well: { at: [x, y, z], pull, soft, capture, floor }
 // - wheels: { axle: [x, y, z], r, parts: [names], sign, grip, roll }
 // - shake: { key, gap } | true
+// - strings: { list: [{ a, b, name }], reach, normal } (lane Hands-on H3)
 // - flee: { radius, push, back, max } | true; follow: true
 // - pieces' own `material`, `projectile: { nose, vane, fr }` and `target`
 //
@@ -21,7 +22,7 @@
 // points: attach, the world built, a press, a move, a let-go, each frame
 // and each hit; the world calls its force once per substep (World.force).
 // What a recipe's drive() reads comes as info.hands (src/motion.js):
-// { on, shake, finger, point, rolled, flee(key, pos) }.
+// { on, shake, finger, point, rolled, flee(key, pos), plucked }.
 
 import { quat, v3, surfacePoints } from "./world.js";
 import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "./materials.js"; // prettier-ignore
@@ -328,7 +329,7 @@ export class FleeField {
 
 // ---- The glue to Hands-on -------------------------------------------------
 
-const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow"];
+const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "strings"];
 
 // An Extras for a toy whose hands block asks for any of these pieces (or
 // whose pieces are projectiles, targets or have materials); null else.
@@ -360,6 +361,10 @@ export class Extras {
     this.water = null;
     this.view = null; // the water's surface (./water-view.js)
     this.throws = 0;
+    // Strings plucked by a drag across them (lane Hands-on H3).
+    this.strings = hands.strings ? stringsOf(hands.strings) : null;
+    this.strum = null; // a drag across the strings: { last } (the finger's point on them)
+    this.pluckT = this.strings ? this.strings.list.map(() => -Infinity) : null;
     // What a recipe's drive() reads, as info.hands.
     const self = this;
     this.about = {
@@ -369,6 +374,7 @@ export class Extras {
       point: null,
       rolled: 0,
       slosh: [0, 0, 0],
+      plucked: this.strings ? this.strings.list.map(() => Infinity) : [], // seconds since each string was plucked
       flee(key, pos) {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
         const it = self.flee.get(key, pos);
@@ -511,6 +517,7 @@ export class Extras {
   pressAt(hit, x, y) {
     this.samples = [{ t: this.ho.time, x, y }];
     this.spin = null;
+    if (this.strings && this.strumAt(x, y)) return true;
     if (!this.flee) return false;
     this.fingerDown = true;
     this.fingerAt(x, y);
@@ -519,6 +526,10 @@ export class Extras {
 
   moveTo(x, y) {
     const t = this.ho.time;
+    if (this.strum) {
+      this.strumTo(x, y);
+      return true;
+    }
     this.samples.push({ t, x, y });
     while (this.samples.length > 2 && this.samples[0].t < t - 0.2) this.samples.shift();
     if (this.shake && this.shake.add(t, x, y)) this.fireShake();
@@ -537,6 +548,10 @@ export class Extras {
 
   // Lets go; true when the drag was ours.
   release() {
+    if (this.strum) {
+      this.strum = null;
+      return true;
+    }
     this.shake?.end();
     if (this.flee && this.fingerDown) {
       this.fingerDown = false;
@@ -546,6 +561,75 @@ export class Extras {
       return true;
     }
     return false;
+  }
+
+  // ---- Strings (lane Hands-on H3) ----
+
+  // The finger's line in the recipe's frame, where the toy stood at home
+  // (a guitar picked up and set down elsewhere still plucks where it lies).
+  strumRay(x, y) {
+    const ho = this.ho;
+    const player = this.player;
+    if (ho.mode === "pieces" || !ho.body) return player.recipeRay(x, y);
+    const ray = player.stage.ray(x, y);
+    const b = ho.body;
+    const back = (p) => player.toRecipe(v3.add(b.home.pos, quat.rotate(b.home.q, b.toLocal(p))));
+    const o = back(ray.origin);
+    const d = v3.sub(back(v3.add(ray.origin, ray.dir)), o);
+    return { origin: o, dir: v3.scale(d, 1 / (v3.len(d) || 1)) };
+  }
+
+  // Where the finger's line meets the strings' plane, or null.
+  strumPoint(x, y) {
+    const S = this.strings;
+    const ray = this.strumRay(x, y);
+    const den = v3.dot(ray.dir, S.n);
+    if (Math.abs(den) < 1e-4) return null;
+    const t = v3.dot(v3.sub(S.list[0].a, ray.origin), S.n) / den;
+    return t < 0 ? null : v3.add(ray.origin, v3.scale(ray.dir, t));
+  }
+
+  // A press within reach of a string starts a strum (the toy isn't picked
+  // up); anywhere else on the toy picks it up as before.
+  strumAt(x, y) {
+    if (this.ho.mode === "toy") this.ho.ensure();
+    const p = this.strumPoint(x, y);
+    if (!p) return false;
+    const S = this.strings;
+    const near = S.list.some((s) => {
+      const q = v3.sub(p, s.a);
+      const al = v3.dot(q, s.u) / s.L;
+      return al > -0.02 && al < 1.02 && Math.abs(v3.dot(q, s.m)) < S.reach;
+    });
+    if (!near) return false;
+    this.strum = { last: p, t: this.ho.time };
+    return true;
+  }
+
+  // The finger moves on: each string it crossed (within its length) is
+  // plucked, sounding by the recipe's hands.sound(hit) with hit.pluck its
+  // index, and info.hands.plucked[i] starts again from 0.
+  strumTo(x, y) {
+    const p = this.strumPoint(x, y);
+    if (!p) return;
+    const st = this.strum;
+    const t = this.ho.time;
+    const p0 = st.last;
+    const speed = v3.len(v3.sub(p, p0)) / Math.max(1 / 120, t - st.t) / this.ho.R();
+    this.strings.list.forEach((s, i) => {
+      const s0 = v3.dot(v3.sub(p0, s.a), s.m);
+      const s1 = v3.dot(v3.sub(p, s.a), s.m);
+      if (s0 === s1 || Math.sign(s0) === Math.sign(s1)) return;
+      const q = v3.add(p0, v3.scale(v3.sub(p, p0), s0 / (s0 - s1)));
+      const al = v3.dot(v3.sub(q, s.a), s.u) / s.L;
+      if (al < -0.02 || al > 1.02) return;
+      this.pluckT[i] = t;
+      this.about.plucked[i] = 0;
+      this.ho.sounds.push({ speed, soft: 0, piece: false, pluck: i, name: s.name ?? null, point: q }); // prettier-ignore
+    });
+    st.last = p;
+    st.t = t;
+    this.player.stage?.requestRender();
   }
 
   fingerAt(x, y) {
@@ -628,6 +712,14 @@ export class Extras {
     if (this.shake) {
       ab.shake = this.shake.decay(ho.time);
       if (ab.shake > 0.01) busy = true;
+    }
+    if (this.strings) {
+      this.pluckT.forEach((t0, i) => {
+        const age = ho.time - t0;
+        ab.plucked[i] = age;
+        if (age < 4) busy = true;
+      });
+      if (this.strum) busy = true;
     }
     if (this.flee) {
       if (this.flee.step(dt)) busy = true;
@@ -841,4 +933,22 @@ function longAxis(b) {
     }
   }
   return quat.rotate(b.q, ax);
+}
+
+// A hands block's strings, ready to pluck (lane Hands-on H3): each string's
+// way along (u, its length L) and across it in their plane (m).
+function stringsOf(spec) {
+  const list0 = Array.isArray(spec) ? spec : spec.list;
+  const a0 = list0[0];
+  const z = list0[list0.length - 1];
+  let n = spec.normal || v3.cross(v3.sub(a0.b, a0.a), v3.sub(z.a, a0.a));
+  n = v3.scale(n, 1 / (v3.len(n) || 1));
+  const list = list0.map((s) => {
+    const d = v3.sub(s.b, s.a);
+    const L = v3.len(d) || 1;
+    const u = v3.scale(d, 1 / L);
+    const m = v3.cross(n, u);
+    return { ...s, u, L, m: v3.scale(m, 1 / (v3.len(m) || 1)) };
+  });
+  return { list, n, reach: spec.reach ?? 0.05 };
 }
