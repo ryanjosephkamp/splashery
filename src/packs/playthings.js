@@ -923,6 +923,14 @@ function robotWalk(a, parts, info, j) {
 }
 // The origami crane's tail turns about where it meets the body (lane Hands-on H1).
 const CRANE_TAIL = [-0.2, -0.12, 0];
+// Hands-on: the teddy bear's body as one piece (lane Hands-on H1): the floor
+// under its feet, and points on its outside (feet, seat, back, head, ears).
+const TEDDY_FLOOR = -0.53;
+const TEDDY_POINTS = [
+  [0.22, -0.5, 0.2], [-0.22, -0.5, 0.2], [0.22, -0.4, 0.44], [-0.22, -0.4, 0.44],
+  [0, -0.44, 0], [0, -0.3, -0.34], [0.4, 0, 0], [-0.4, 0, 0], [0, 0.2, 0.36],
+  [0, 1.05, 0.02], [0.3, 0.97, -0.02], [-0.3, 0.97, -0.02], [0, 0.7, 0.36], [0, 0.7, -0.33],
+]; // prettier-ignore
 // Hands-on: the spinning top's tilt as its spin dies (lane Hands-on H1). While
 // the finger has it, it stands straight; let go, it keeps upright while fast,
 // wobbles wider (precessing as it turns) below about 9 radians a second, and
@@ -2193,6 +2201,22 @@ export const RECIPES = {
   "teddy-bear": {
     alive: true,
     options: [{ key: "color", label: "Fur", type: "color", default: "#b5793f" }],
+    // Hands-on (lane Hands-on H1): pick it up by its tummy and swing or toss
+    // it: the body moves as one piece and the arms and head swing loosely on
+    // it, each from its own joint, and settle back once it lands.
+    hands: {
+      floor: TEDDY_FLOOR,
+      area: 1.6,
+      place: false,
+      pieces: () => [
+        { part: "torso", pos: [0, 0, 0], pivot: [0, 0, 0], solid: { type: "ellipsoid", r: [0.42, 0.47, 0.37] }, points: TEDDY_POINTS, radius: 0.03, pick: [0.45, 0.5, 0.4], mass: 1, friction: 0.9, restitution: 0.08, damping: 0.4, angDamping: 2 }, // prettier-ignore
+      ],
+      ropes: () => [
+        ...[1, -1].map((s) => ({ points: [[s * 0.33, 0.3, 0.04], [s * 0.55, -0.14, 0.12]], attach: { piece: 0, nodes: [0] }, keep: 3, bend: 0.1, drag: 3.5, grab: false, pieces: [{ part: s > 0 ? "armR" : "armL", from: 0, to: 1 }] })), // prettier-ignore
+        { points: [[0, 0.42, 0], [0, 0.98, 0.02]], attach: { piece: 0, nodes: [0] }, keep: 8, weight: 0.3, bend: 0.1, drag: 4, grab: false, pieces: [{ part: "head", from: 0, to: 1 }] }, // prettier-ignore
+      ],
+      sound: (hit, vol) => ({ voice: "thud", f: 140, bright: 0.1, decay: 0.6, vol: vol * 0.6 }),
+    },
     controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 2.2 }],
     action: { key: "wave", label: "Wave hello" },
     drive(t, c, out) {
@@ -2223,11 +2247,14 @@ export const RECIPES = {
         core: shade(fur, 0.8),
       };
       const plush = (a, b, c, amt, grid = 64) => evenFuzz(evenEllipsoid(k, a, b, c, grid), amt);
+      // The body and legs as one part (Hands-on moves it; lane Hands-on H1).
+      const torso = k.part("torso", { pivot: [0, 0, 0] });
       const head = k.part("head", { pivot: [0, 0.42, 0], axis: [0, 0, 1] });
       const armR = k.part("armR", { pivot: [0.33, 0.3, 0.04], axis: [0, 0, 1] });
       const armL = k.part("armL", { pivot: [-0.33, 0.3, 0.04], axis: [0, 0, 1] });
       // Body with a lighter tummy.
       k.add(plush(0.42, 0.47, 0.37, 0.014), {
+        part: torso,
         ...soft,
         pos: [0, 0, 0],
         color: (c) => {
@@ -2303,6 +2330,7 @@ export const RECIPES = {
       // A ribbon bow.
       for (const s of [-1, 1])
         k.add(evenEllipsoid(k, 0.1, 0.065, 0.03, 32), {
+          part: torso,
           even: true,
           opacity: 1,
           jitter: 0.01,
@@ -2314,6 +2342,7 @@ export const RECIPES = {
           color: (c) => lit("#d62839", c.n, { spec: 0.4 }),
         });
       k.add(evenEllipsoid(k, 0.04, 0.04, 0.04, 24), {
+        part: torso,
         even: true,
         opacity: 1,
         jitter: 0.01,
@@ -2338,6 +2367,7 @@ export const RECIPES = {
       // Legs with foot pads.
       for (const s of [-1, 1])
         k.add(plush(0.15, 0.15, 0.27, 0.012, 48), {
+          part: torso,
           ...soft,
           pos: [s * 0.22, -0.38, 0.2],
           rot: [0, s * 10, 0],
