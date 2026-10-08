@@ -353,7 +353,7 @@ export class Joints {
     const strength = (j.d.pull ?? 0.35) * R;
     j.pull = v3.len(pull) / strength;
     if (j.pull >= 1) {
-      this.snap(j, h, f, ray.dir);
+      this.snap(j, h, f, ray.dir, ray);
       return;
     }
     // Bend: about `at`, turning the grab toward the finger, up to `give`.
@@ -371,7 +371,7 @@ export class Joints {
   }
 
   // It snaps off: a loose body now, held by the finger the usual way.
-  snap(j, h, f, dir) {
+  snap(j, h, f, dir, ray) {
     const hands = this.hands;
     j.broken = true;
     const T = this.full(j);
@@ -397,6 +397,19 @@ export class Joints {
     b.angDampingFree ??= b.angDamping;
     b.angDamping = 1.2;
     hands.hold = { body: b, joint, place: false, plane: { point: at.slice(), normal: dir.slice() }, target: f.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: h.x0, y0: h.y0, travel: h.travel, minY: -Infinity, raise: 0 }; // prettier-ignore
+    // Lane Hands-on H2: `place: true` holds it as a picked piece is held
+    // instead: by its middle, level, hovering over whatever is under the
+    // finger (a stone dropped into the half under the finger).
+    if (j.d.place && ray) {
+      joint.la = [0, 0, 0];
+      joint.lb = b.pos.slice();
+      const fw = quat.rotate(b.q, [1, 0, 0]);
+      b.holdQ = quat.axisAngle([0, 1, 0], Math.atan2(-fw[2], fw[0]));
+      b.holdK = 10;
+      b.angDamping = 7;
+      Object.assign(hands.hold, { place: true, target: b.pos.slice(), follow: b.pos.slice(), lift: hands.time }); // prettier-ignore
+      hands.placeAt(hands.hold, ray);
+    }
     w.wake();
   }
 

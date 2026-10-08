@@ -38,12 +38,41 @@ const screen = (page, pts) =>
     });
   }, pts);
 
-async function drag(page, points, { steps = 20, dt = 1 / 30, flick = null } = {}) {
+// A lift and a flick, both fed straight to Hands-on after a real press (the
+// browser hands a page its moves once a frame, and SwiftShader's frames are
+// slow and uneven under load, so real moves would arrive in bunches): along
+// the points, a 30th of a second a step, then a quick move up to `flick`.
+async function flickDrag(page, points, flick, steps = 12) {
+  const px = await screen(page, points);
+  await page.mouse.move(...px[0]);
+  await page.mouse.down();
+  // (The press's pick is async: wait for Hands-on to have it.)
+  await page.waitForFunction(() => !!window.__splashery.player.handsOn.press, null, { timeout: 5000 }); // prettier-ignore
+  await page.evaluate(
+    ([pts, flick, steps]) => {
+      const { player } = window.__splashery;
+      const go = (a, b, n, dt) => {
+        for (let i = 1; i <= n; i++) {
+          const p = a.map((v, k) => v + ((b[k] - v) * i) / n);
+          player.handsOn.moveTo(...player.screenPoint(p));
+          player.update(dt);
+        }
+      };
+      for (let k = 1; k < pts.length; k++) go(pts[k - 1], pts[k], steps, 1 / 30);
+      go(pts[pts.length - 1], flick, 6, 1 / 60);
+    },
+    [points, flick, steps],
+  );
+  await page.mouse.move(...(await screen(page, [flick]))[0]);
+  await page.mouse.up();
+}
+
+async function drag(page, points, { steps = 20, dt = 1 / 30 } = {}) {
   const px = await screen(page, points);
   await page.mouse.move(...px[0]);
   await page.mouse.down();
   for (let k = 1; k < px.length; k++) {
-    // A list gives each leg its own number of steps (a slow lift, a quick flick).
+    // A list gives each leg its own number of steps.
     const n = Array.isArray(steps) ? steps[k - 1] : steps;
     for (let i = 1; i <= n; i++) {
       const f = i / n;
@@ -52,23 +81,6 @@ async function drag(page, points, { steps = 20, dt = 1 / 30, flick = null } = {}
       await tick(page, dt);
     }
   }
-  // A flick: moves straight to Hands-on, one each 60th of a second (the
-  // browser hands a page its moves once a frame, and SwiftShader's frames
-  // are slow).
-  if (flick)
-    await page.evaluate(
-      ([a, b, n]) => {
-        const { player } = window.__splashery;
-        for (let i = 1; i <= n; i++) {
-          const p = a.map((v, k) => v + ((b[k] - v) * i) / n);
-          player.handsOn.moveTo(...player.screenPoint(p));
-          player.update(1 / 60);
-        }
-      },
-      [points[points.length - 1], flick, 6],
-    );
-  // (The page's own pointer goes there too, so letting go happens there.)
-  if (flick) await page.mouse.move(...(await screen(page, [flick]))[0]);
   await page.mouse.up();
 }
 
@@ -94,7 +106,7 @@ test("a flip piece flicked up turns over and lands upside down; set down, it sta
   });
   const lifted = [home[0], home[1] + 0.5, home[2]];
   // Lifted, then flicked up fast: it turns over and lands upside down.
-  await drag(page, [home, lifted], { steps: 30, flick: [home[0], home[1] + 2, home[2]] });
+  await flickDrag(page, [home, lifted], [home[0], home[1] + 2, home[2]], 30);
   await tick(page, 0.1);
   let p = await pose(page, 3);
   expect(p.up).toBeLessThan(0.98); // turning in the air

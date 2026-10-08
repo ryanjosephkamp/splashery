@@ -369,6 +369,11 @@ export class Extras {
       point: null,
       rolled: 0,
       slosh: [0, 0, 0],
+      // Lane Hands-on H2: whether anything is off home (or on its way back),
+      // so a drive can show what Hands-on uncovered (a kiwi half's face).
+      get moved() {
+        return !!(self.ho.moved || self.ho.homing);
+      },
       flee(key, pos) {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
         const it = self.flee.get(key, pos);
